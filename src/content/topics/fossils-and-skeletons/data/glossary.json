@@ -7,8 +7,8 @@
         "zh": "化石"
       },
       "definition": {
-        "en": "Evidence of past life preserved in a geological setting. The Chinese term is editorial wording for this topic.",
-        "zh": "在地质环境中保存的过去生命证据。 中文为本课编辑用词。"
+        "en": "Evidence of past life preserved in rocks or sediment.",
+        "zh": "保存在岩石或沉积物中的过去生命证据。"
       },
       "see": [
         "body-fossil",
@@ -22,8 +22,8 @@
         "zh": "复原"
       },
       "definition": {
-        "en": "A model assembled from preserved evidence and stated comparisons or inferences. The Chinese term is editorial wording for this topic.",
-        "zh": "根据保存的证据、说明过的比较或推定，重建的模型。 中文为本课编辑用词。"
+        "en": "A model rebuilt from preserved evidence, comparisons and inferences about missing parts.",
+        "zh": "根据保存的证据、比较和推定，重建形体的模型。"
       },
       "see": [
         "comparison-evidence"
@@ -36,8 +36,8 @@
         "zh": "实体化石"
       },
       "definition": {
-        "en": "Evidence of an organism's body or a body part, including plants. The Chinese term is editorial wording for this topic.",
-        "zh": "生物身体或身体部分留下的证据，也包括植物。 中文为本课编辑用词。"
+        "en": "Evidence of an organism's body or a body part, including plant parts.",
+        "zh": "生物身体或身体部分留下的证据，也包括植物部分。"
       },
       "see": [
         "fossil"
@@ -50,8 +50,8 @@
         "zh": "遗迹化石"
       },
       "definition": {
-        "en": "A preserved record of biological activity, such as a footprint. The Chinese term is editorial wording for this topic.",
-        "zh": "活动留下的地质记录，例如足迹。 中文为本课编辑用词。"
+        "en": "A preserved record of an organism's activity, such as a footprint.",
+        "zh": "保存下来的生物活动记录，例如足迹。"
       },
       "see": [
         "body-fossil"
@@ -64,8 +64,8 @@
         "zh": "印痕"
       },
       "definition": {
-        "en": "A shallow imprint without retained organic material. The Chinese term is editorial wording for this topic.",
-        "zh": "没有保留有机物质的浅表形体印记。 中文为本课编辑用词。"
+        "en": "A shallow imprint with no original organic material left.",
+        "zh": "没有原来有机物质留下的浅印记。"
       },
       "see": [
         "body-fossil"
@@ -78,8 +78,8 @@
         "zh": "沉积物"
       },
       "definition": {
-        "en": "Material deposited in layers around the evidence in this model. The Chinese term is editorial wording for this topic.",
-        "zh": "在本模型中围着遗存逐层沉积的物质。 中文为本课编辑用词。"
+        "en": "Material deposited in layers, such as the material surrounding the bone in the model.",
+        "zh": "逐层沉积下来的物质，例如模型中围着骨的物质。"
       },
       "see": [
         "stratum"
@@ -92,8 +92,8 @@
         "zh": "矿物充填作用"
       },
       "definition": {
-        "en": "Minerals deposited in natural pores within remains. The Chinese term is editorial wording for this topic.",
-        "zh": "矿物沉积到遗存内部原有的孔隙中。 中文为本课编辑用词。"
+        "en": "The filling of natural spaces in remains with minerals.",
+        "zh": "矿物填入遗存内部原有空隙的过程。"
       },
       "see": [
         "replacement"
@@ -106,8 +106,8 @@
         "zh": "矿物置换作用"
       },
       "definition": {
-        "en": "Minerals substitute for dissolved original material. The Chinese term is editorial wording for this topic.",
-        "zh": "原来的物质溶解后，由矿物替代。 中文为本课编辑用词。"
+        "en": "The replacement of dissolved original material with minerals.",
+        "zh": "原来的物质溶解后，由矿物取代的过程。"
       },
       "see": [
         "permineralisation"
@@ -120,8 +120,8 @@
         "zh": "地层"
       },
       "definition": {
-        "en": "One layer in the sequence being examined. The Chinese term is editorial wording for this topic.",
-        "zh": "所观察层序中的一层。 中文为本课编辑用词。"
+        "en": "One rock layer in a sequence.",
+        "zh": "一组岩层中的一层。"
       },
       "see": [
         "relative-age"
@@ -134,8 +134,8 @@
         "zh": "相对年龄"
       },
       "definition": {
-        "en": "Whether a layer or fossil is older or younger than another, with geological conditions checked. The Chinese term is editorial wording for this topic.",
-        "zh": "在核对地质条件后，判断一层或化石比另一层或化石较老还是较新。 中文为本课编辑用词。"
+        "en": "How old a layer or fossil is compared with another. Scientists check the geological conditions before using the order of layers.",
+        "zh": "一层岩石或化石比另一层较老还是较新。利用层序判断前，须先检查地质条件。"
       },
       "see": [
         "age-bracket"
@@ -148,8 +148,8 @@
         "zh": "放射性测年年龄"
       },
       "definition": {
-        "en": "A numerical estimate from a suitable isotope clock, with assumptions and uncertainty. The Chinese term is editorial wording for this topic.",
-        "zh": "利用合适同位素时钟得到、带有假设与误差的数值年龄。 中文为本课编辑用词。"
+        "en": "An age estimated from radioactive changes in suitable material. The method has conditions and measurement uncertainty.",
+        "zh": "利用合适材料的放射性变化估计的年龄。测年方法有适用条件，测量也有误差。"
       },
       "see": [
         "age-bracket"
@@ -162,8 +162,8 @@
         "zh": "年龄夹定范围"
       },
       "definition": {
-        "en": "Older and younger limits supplied by dated evidence around a fossil. The Chinese term is editorial wording for this topic.",
-        "zh": "化石周围的测年证据给出的较古老和较年轻界限。 中文为本课编辑用词。"
+        "en": "A range between younger and older limits set by dated evidence around a fossil.",
+        "zh": "用化石周围的测年证据，限定较新与较老界限之间的范围。"
       },
       "see": [
         "relative-age"
@@ -176,8 +176,8 @@
         "zh": "博物馆复制件"
       },
       "definition": {
-        "en": "A made replica of a recorded fossil shape; distinguish it from a natural fossil cast. The Chinese term is editorial wording for this topic.",
-        "zh": "人工复制的化石形体；须与自然形成的铸型化石区别。 中文为本课编辑用词。"
+        "en": "An artificial copy of a recorded fossil shape. It differs from a fossil cast formed naturally.",
+        "zh": "人工复制的化石形体，与自然形成的铸型化石不同。"
       },
       "see": [
         "reconstruction"
@@ -190,8 +190,8 @@
         "zh": "比较依据"
       },
       "definition": {
-        "en": "Other documented anatomy used to constrain the shape of missing parts. The Chinese term is editorial wording for this topic.",
-        "zh": "用其他已记录的解剖结构，约束缺失部分的形状。 中文为本课编辑用词。"
+        "en": "Recorded body structures used to work out the shape of missing parts.",
+        "zh": "用来推想缺失部分形状的其他已记录身体结构。"
       },
       "see": [
         "reconstruction"
@@ -204,8 +204,8 @@
         "zh": "兽脚类"
       },
       "definition": {
-        "en": "The dinosaur group within which living birds are classified. The Chinese term is editorial wording for this topic.",
-        "zh": "现生鸟类在演化分类中所属的恐龙分支。 中文为本课编辑用词。"
+        "en": "A dinosaur group that includes living birds.",
+        "zh": "包括现生鸟类的恐龙分支。"
       },
       "see": [
         "fossil"
@@ -218,8 +218,8 @@
         "zh": "梁龙科恐龙"
       },
       "definition": {
-        "en": "The family-level sauropod grouping used for the Singapore trio in the adopted museum information. The Chinese term is editorial wording for this topic.",
-        "zh": "本课采用的馆方资料对新加坡三具蜥脚类标本所用的科级分类。 中文为本课编辑用词。"
+        "en": "A family of sauropod dinosaurs. The museum places the three Singapore exhibits in this family.",
+        "zh": "蜥脚类恐龙的一个科。馆方把新加坡展出的三具化石归入这一科。"
       },
       "see": [
         "reconstruction"

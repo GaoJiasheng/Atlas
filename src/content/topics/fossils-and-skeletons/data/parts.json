@@ -12,8 +12,8 @@
         "zh": "记录身体部分的形体。"
       },
       "detail": {
-        "en": "A fossil bone is body evidence. Shape alone cannot give an exact numerical age. This generic bone is an original schematic, without a species or specimen identity. [S2, S58, S90]",
-        "zh": "骨化石属于身体证据。单凭外形不能给出精确的数值年龄。这根通用示意骨不指定物种或标本身份。[S2, S58, S90]"
+        "en": "A fossil bone preserves evidence of a body part. Its shape alone cannot give an exact age. This general model does not represent a named species or specimen. [S2, S58, S90]",
+        "zh": "骨化石保存身体部分的证据。单凭形状不能确定精确年龄。这个通用模型不代表具名物种或标本。[S2, S58, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -98,8 +98,8 @@
         "zh": "记录活动时与沉积物的接触。"
       },
       "detail": {
-        "en": "The recessed outline is a trace of activity, not a foot bone resting on a rock. Its three main toe impressions are a generic teaching design; this outline does not identify the maker to a species. [S2, S7, S48, S90]",
-        "zh": "凹入的轮廓记录活动，不是放在岩石上的脚骨。三个主要趾印只是通用教学设计，不能据此鉴定制造者的物种。[S2, S7, S48, S90]"
+        "en": "A foot pressed into sediment and left this hollow mark. The slab records activity, rather than preserving a foot bone. Its three main toe marks show a general teaching shape, without identifying a species. [S2, S7, S48, S90]",
+        "zh": "脚压进沉积物，留下这个凹痕。石板记录活动，没有保存脚骨。三个主要趾印是通用教学形状，不能据此确定物种。[S2, S7, S48, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -258,8 +258,8 @@
         "zh": "用浅印痕记录叶的形状。"
       },
       "detail": {
-        "en": "This example retains a shallow leaf impression without organic material or a carbon film. A leaf is a body part, so preservation as an impression does not make it activity evidence. The generic shape is not a species identification. [S54, S2, S90]",
-        "zh": "这个例子保留浅叶印痕，没有有机物或碳膜。叶属于身体部分，保存成印痕并不会使它变成活动证据。通用叶形不用于鉴定物种。[S54, S2, S90]"
+        "en": "The shallow leaf shape remains without organic material or a carbon film. Since a leaf is a plant body part, this impression is body evidence. Its general outline does not identify a species. [S54, S2, S90]",
+        "zh": "这里只留下浅浅叶形，没有有机物质或碳膜。叶是植物身体的一部分，所以叶印痕也是身体证据。通用轮廓不能确定物种。[S54, S2, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -386,8 +386,8 @@
         "zh": "移开后才露出下面的印痕。"
       },
       "detail": {
-        "en": "Moving this upper piece exposes the negative relief below. These two schematic pieces are not claimed to be an actual matching fossil and counterpart. [S54, S90]",
-        "zh": "移开覆盖片，才露出下方的凹印。这两片是教学示意，不称为真实配对的化石正负片。[S54, S90]"
+        "en": "Move this upper piece aside to see the hollow leaf impression below. The pieces illustrate the process; they are not a real matching fossil pair. [S54, S90]",
+        "zh": "移开覆盖片，可见下方凹入的叶印痕。两片用来说明过程，不是真实配对的化石。[S54, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -430,8 +430,8 @@
         "zh": "承托上方较新的沉积层。"
       },
       "detail": {
-        "en": "In this upright, undisturbed example, the lower bed was deposited first. Layer thickness is not a clock. The section is invented and has no real time scale. [S59, S90]",
-        "zh": "在这个正立、未扰动的例子里，下层较早沉积。厚度不是时钟；该剖面为虚构示意，没有真实时间尺度。[S59, S90]"
+        "en": "The lower bed formed first in this upright, undisturbed example. Its thickness does not tell us how much time passed. The invented section has no real-time scale. [S59, S90]",
+        "zh": "在这个没有倒转或受扰动的例子中，下层先形成。厚度不能告诉我们经过多久；虚构剖面没有真实时间比例。[S59, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -473,8 +473,8 @@
         "zh": "围住埋藏的遗存。"
       },
       "detail": {
-        "en": "The middle shell stands for sediment surrounding the bone. X-ray makes its wall transparent so the single body part inside can be examined. Rapid burial may help preservation but does not guarantee a fossil. [S2, S90]",
-        "zh": "中层薄壳表示围着骨的沉积物。X光视图让外壁透明，以便观察里面的单个身体部分。快速埋藏有利于保存，但不保证形成化石。[S2, S90]"
+        "en": "This layer surrounds the bone. X-ray view makes it transparent so we can look inside. Rapid burial helps protect remains, but does not guarantee a fossil. [S2, S90]",
+        "zh": "这一层围住骨。X 光视图让它透明，方便看见里面。快速埋藏有助保护遗存，却不能保证形成化石。[S2, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -583,8 +583,8 @@
         "zh": "覆盖含骨层。"
       },
       "detail": {
-        "en": "Removing this covering layer represents an exposed state after covering rock has been removed by weathering and erosion. The model does not make the bone float upward. [S3, S90]",
-        "zh": "移开覆盖层表示风化与侵蚀去掉上覆岩层后的出露状态，模型不表示骨自己向上浮起。[S3, S90]"
+        "en": "Weathering and erosion can remove rock above a fossil. Moving this cover aside shows the exposed stage; the bone itself stays in place. [S3, S90]",
+        "zh": "风化和侵蚀能移走化石上方的岩石。移开覆盖层，显示出露后的情况，骨本身仍在原处。[S3, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -627,8 +627,8 @@
         "zh": "在中层内保存身体部分。"
       },
       "detail": {
-        "en": "This single bone lies inside the middle bed. The pore study is an alternative magnified view of the same teaching object, not another bone. Minerals can be deposited in natural pores during burial. [S2, S4, S90]",
-        "zh": "这一根骨完整位于中层。孔隙研究是同一教学对象的替代放大视图，不是另一根骨。埋藏过程中，矿物可沉积在原有孔隙内。[S2, S4, S90]"
+        "en": "One bone lies inside the middle bed. Switch to the enlarged pore view to look inside the same bone. During burial, minerals can settle in its natural spaces. [S2, S4, S90]",
+        "zh": "一根骨位于中层内。放大孔隙视图显示同一根骨的内部。埋藏过程中，矿物可以沉积到天然空隙里。[S2, S4, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -713,8 +713,8 @@
         "zh": "显示骨壁内原有的空隙。"
       },
       "detail": {
-        "en": "This enlarged, open schematic section shows irregular pores and the retained wall around them. It alternates with the whole bone, without a microscopic scale or an identified bone type. [S4, S90]",
-        "zh": "这个放大、开放的示意剖面显示不规则孔隙及其周围保留的骨壁。它与整骨交替显示，不标显微尺度，也不鉴定骨件类型。[S4, S90]"
+        "en": "The enlarged section shows irregular spaces inside the bone wall. The wall around them remains. Switch between this view and the whole bone. The shapes have no microscopic scale or named bone type. [S4, S90]",
+        "zh": "放大剖面显示骨壁内不规则的空隙，周围骨壁仍在。可以切换整骨与剖面视图。形状没有显微比例，也不指定骨件类型。[S4, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -1121,8 +1121,8 @@
         "zh": "充填部分原有孔隙。"
       },
       "detail": {
-        "en": "The small mineral masses sit within pores; the surrounding original wall remains. Filling a pore differs from replacement of dissolved original material, though the processes can occur together. No mineral species is assigned. [S4, S90]",
-        "zh": "小块矿物位于孔隙内，周围原有骨壁仍在。填孔不同于替代已溶解的原有物质，二者也可以共同发生。本模型不指定矿物种类。[S4, S90]"
+        "en": "Minerals fill some pores while the original wall remains. Replacement is different: minerals take the place of dissolved original material. Both processes can happen together. The blocks show minerals in general. [S4, S90]",
+        "zh": "矿物填入部分孔隙，原有骨壁仍在。置换则是矿物取代已溶解的原来物质。两种过程可以同时发生。小块代表一般矿物。[S4, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -1386,8 +1386,8 @@
         "zh": "提供较古老的边界地层。"
       },
       "detail": {
-        "en": "Suitable minerals in the lower primary ash layer provide an age constraint. All ages and set errors used by this teaching section are invented SIM values. Colour does not identify the rock. [S5, S58, S90]",
-        "zh": "下方原生灰层中的合适矿物提供年龄约束。本教学剖面的全部年龄及设定误差都是虚构SIM值；颜色不用于鉴定岩性。[S5, S58, S90]"
+        "en": "Suitable minerals in this lower ash layer help set the older age limit. The ash was deposited here directly. All ages and errors in this example are invented SIM values. Colour does not identify the rock type. [S5, S58, S90]",
+        "zh": "下灰层的合适矿物帮助确定较老的年龄界限。灰直接沉积在原地。这里的年龄和误差都是虚构 SIM 数值，颜色不能鉴定岩石种类。[S5, S58, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1429,8 +1429,8 @@
         "zh": "把化石置于可测年的灰层之间。"
       },
       "detail": {
-        "en": "The enclosed bone is between the two ash layers in an upright, undisturbed section with primary ash and no reworking of the fossil. The dates constrain an interval, not an exact birthday or an average age. [S58, S59, S90]",
-        "zh": "正立、未扰动的剖面中，骨位于两灰层之间；灰层为原生，化石未再搬运。上下年龄限定范围，不给出精确生日或平均年龄。[S58, S59, S90]"
+        "en": "The fossil lies between ash layers that were deposited here directly. The layers are upright and undisturbed, and the fossil was not moved from an older deposit. The dates give a range, rather than an exact age or an average. [S58, S59, S90]",
+        "zh": "化石夹在直接沉积于原地的灰层之间。地层没有倒转或受扰动，化石未从老沉积搬来。测年结果给出范围，不是精确年龄或平均数。[S58, S59, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1582,8 +1582,8 @@
         "zh": "提供较年轻的边界地层。"
       },
       "detail": {
-        "en": "In this checked upright section the upper primary ash layer is younger. Its thickness does not directly reveal elapsed time. These invented dates do not date the Singapore museum specimens. [S5, S58, S59, S90]",
-        "zh": "在这个已核对正立条件的剖面中，上方原生灰层较年轻。厚度不能直接显示经过的时间；虚构年龄不能用于新加坡馆藏标本。[S5, S58, S59, S90]"
+        "en": "The upper ash is younger in this upright sequence. It was deposited here directly. Thickness alone cannot measure elapsed time. These invented ages do not date the Singapore museum fossils. [S5, S58, S59, S90]",
+        "zh": "这里的地层没有倒转，上灰层较新，灰直接沉积于原地。单凭厚度不能计算经过的时间。这些虚构年龄不用于给新加坡馆藏化石定年。[S5, S58, S59, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1625,8 +1625,8 @@
         "zh": "代表测量同位素时钟的材料。"
       },
       "detail": {
-        "en": "The clock concerns a specified event in suitable minerals from ash, with assumptions and uncertainty. It is not a carbon-fourteen date of a Mesozoic dinosaur bone. This enlarged generic crystal has no assigned mineral species. [S5, S6, S58, S90]",
-        "zh": "时钟针对灰中合适矿物历史的特定事件，带有假设与误差；不是用碳十四给中生代恐龙骨测年。这颗放大的通用晶体不指定矿种。[S5, S6, S58, S90]"
+        "en": "Radioactive changes in suitable ash minerals can date an event such as crystallisation. The estimate depends on the method's conditions and has uncertainty. Carbon fourteen cannot date Mesozoic dinosaur bones. This enlarged crystal has no named mineral type. [S5, S6, S58, S90]",
+        "zh": "火山灰中合适矿物的放射性变化，可测定结晶等事件的年龄。估计值受测年条件限制，也有误差。碳十四不能给中生代恐龙骨定年。这颗放大晶体不指定矿种。[S5, S6, S58, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -1696,8 +1696,8 @@
         "zh": "与下颌对应，呈现中空的骨性框架。"
       },
       "detail": {
-        "en": "Supports the jaw and encloses the open skull framework.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: cast of the documented original. A cast can preserve direct shape evidence. Openings are schematic; no tooth count or specimen identity is claimed. [S7, S55, S56, S90]",
-        "zh": "与下颌对应，呈现中空的骨性框架。\n\n虚构教学例。形状依据：直接记录。\n展示材料：已记录原件的复制件。复制件也可以保留直接形状依据；孔洞为示意，不指定牙数或标本身份。[S7, S55, S56, S90]"
+        "en": "Supports the jaw and encloses the open skull framework.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: cast (a copy made in a mould) of a recorded original. A cast can preserve direct shape evidence. The openings are schematic; no tooth count or named specimen is shown. [S7, S55, S56, S90]",
+        "zh": "与下颌对应，呈现中空的骨性框架。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：有记录原件的复制件。复制件也能保留直接形状证据。孔洞为示意，不表示牙数或具名标本。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -2708,8 +2708,8 @@
         "zh": "在头骨下方构成下颌轮廓。"
       },
       "detail": {
-        "en": "Forms the lower outline beneath the skull.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossil in this example. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "在头骨下方构成下颌轮廓。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Forms the lower outline beneath the skull.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossil. [S7, S55, S56, S90]",
+        "zh": "在头骨下方构成下颌轮廓。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3188,8 +3188,8 @@
         "zh": "以弯曲的轴连接头骨与躯干。"
       },
       "detail": {
-        "en": "Joins the skull to the trunk in a curved axis.\n\nInvented teaching example. Shape evidence: Comparison.\nDisplay material: cast based on another specimen. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "以弯曲的轴连接头骨与躯干。\n\n虚构教学例。形状依据：比较依据。\n展示材料：参考其他标本的复制件。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Joins the skull to the trunk in a curved axis.\n\nIn this invented reconstruction:\nShape evidence: Comparison.\nDisplay material: cast of another specimen. [S7, S55, S56, S90]",
+        "zh": "以弯曲的轴连接头骨与躯干。\n\n在这个虚构复原中：\n形状依据：比较依据。\n展示材料：另一标本的复制件。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3274,8 +3274,8 @@
         "zh": "沿背部连接颈、肋部与骨盆。"
       },
       "detail": {
-        "en": "Links the neck, ribs and pelvis along the back.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossils in this example. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "沿背部连接颈、肋部与骨盆。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Links the neck, ribs and pelvis along the back.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossils. [S7, S55, S56, S90]",
+        "zh": "沿背部连接颈、肋部与骨盆。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3608,8 +3608,8 @@
         "zh": "在躯干下方形成开放胸廓。"
       },
       "detail": {
-        "en": "Outlines the open rib cage beneath the trunk.\n\nInvented teaching example. Shape evidence: Comparison.\nDisplay material: sculpted restoration constrained by comparisons. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "在躯干下方形成开放胸廓。\n\n虚构教学例。形状依据：比较依据。\n展示材料：有比较依据的补塑。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Outlines the open rib cage beneath the trunk.\n\nIn this invented reconstruction:\nShape evidence: Comparison.\nDisplay material: sculpted part based on comparisons. [S7, S55, S56, S90]",
+        "zh": "在躯干下方形成开放胸廓。\n\n在这个虚构复原中：\n形状依据：比较依据。\n展示材料：依据比较的补塑。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -4189,8 +4189,8 @@
         "zh": "连接躯干、后肢与尾。"
       },
       "detail": {
-        "en": "Connects the trunk with the hindlimbs and tail.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossils in this example. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "连接躯干、后肢与尾。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Connects the trunk with the hindlimbs and tail.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossils. [S7, S55, S56, S90]",
+        "zh": "连接躯干、后肢与尾。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -4594,12 +4594,12 @@
         "zh": "左前肢"
       },
       "summary": {
-        "en": "Forms a short forelimb with two functional fingers.",
-        "zh": "构成带两个功能指的短前肢。"
+        "en": "Forms a short arm with two functional fingers.",
+        "zh": "构成带两个功能性手指的短前肢。"
       },
       "detail": {
-        "en": "Forms a short forelimb with two functional fingers.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossils in this example. Each T. rex hand has two functional fingers [S9]. The count does not apply to every dinosaur. [S7, S55, S56, S90]",
-        "zh": "构成带两个功能指的短前肢。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。霸王龙每手有两个功能指[S9]，不能推广到所有恐龙。[S7, S55, S56, S90]"
+        "en": "Forms a short forelimb with two functional fingers.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossils. Each T. rex hand has two functional fingers; other dinosaurs can differ. [S9] [S7, S55, S56, S90]",
+        "zh": "构成带两个功能指的短前肢。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。霸王龙每手有两个功能性手指，其他恐龙可以不同。[S9][S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -4742,12 +4742,12 @@
         "zh": "右前肢"
       },
       "summary": {
-        "en": "Forms a short forelimb with two functional fingers.",
-        "zh": "构成带两个功能指的短前肢。"
+        "en": "Forms a short arm with two functional fingers.",
+        "zh": "构成带两个功能性手指的短前肢。"
       },
       "detail": {
-        "en": "Forms a short forelimb with two functional fingers.\n\nInvented teaching example. Shape evidence: Comparison.\nDisplay material: sculpted counterpart constrained by comparison. Each T. rex hand has two functional fingers [S9]. The count does not apply to every dinosaur. [S7, S55, S56, S90]",
-        "zh": "构成带两个功能指的短前肢。\n\n虚构教学例。形状依据：比较依据。\n展示材料：有对侧比较依据的补塑。霸王龙每手有两个功能指[S9]，不能推广到所有恐龙。[S7, S55, S56, S90]"
+        "en": "Forms a short forelimb with two functional fingers.\n\nIn this invented reconstruction:\nShape evidence: Comparison.\nDisplay material: sculpted part based on the matching side. Each T. rex hand has two functional fingers; other dinosaurs can differ. [S9] [S7, S55, S56, S90]",
+        "zh": "构成带两个功能指的短前肢。\n\n在这个虚构复原中：\n形状依据：比较依据。\n展示材料：参照对应侧的补塑。霸王龙每手有两个功能性手指，其他恐龙可以不同。[S9][S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -4894,8 +4894,8 @@
         "zh": "通过三个主要承重趾支撑后部身体。"
       },
       "detail": {
-        "en": "Supports the hindquarters through three main load-bearing toes.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossils in this example. Three main support toes follow the theropod constraint [S48]. A small raised toe is not a fourth main support toe. [S7, S55, S56, S90]",
-        "zh": "通过三个主要承重趾支撑后部身体。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。三个主要承重趾依兽脚类约束[S48]；小抬趾不是第四个主要承重趾。[S7, S55, S56, S90]"
+        "en": "Supports the hindquarters through three main load-bearing toes.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossils. Three main support toes bear weight, as in theropod feet. The smaller raised toe is outside this count. [S48] [S7, S55, S56, S90]",
+        "zh": "通过三个主要承重趾支撑后部身体。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。兽脚类足部的三个主要承重趾支撑身体，较小的抬起脚趾不算在内。[S48][S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5174,8 +5174,8 @@
         "zh": "通过三个主要承重趾支撑后部身体。"
       },
       "detail": {
-        "en": "Supports the hindquarters through three main load-bearing toes.\n\nInvented teaching example. Shape evidence: Direct record.\nDisplay material: original fossils in this example. Three main support toes follow the theropod constraint [S48]. A small raised toe is not a fourth main support toe. [S7, S55, S56, S90]",
-        "zh": "通过三个主要承重趾支撑后部身体。\n\n虚构教学例。形状依据：直接记录。\n展示材料：本例中的原化石。三个主要承重趾依兽脚类约束[S48]；小抬趾不是第四个主要承重趾。[S7, S55, S56, S90]"
+        "en": "Supports the hindquarters through three main load-bearing toes.\n\nIn this invented reconstruction:\nShape evidence: Direct record.\nDisplay material: original fossils. Three main support toes bear weight, as in theropod feet. The smaller raised toe is outside this count. [S48] [S7, S55, S56, S90]",
+        "zh": "通过三个主要承重趾支撑后部身体。\n\n在这个虚构复原中：\n形状依据：直接记录。\n展示材料：原化石。兽脚类足部的三个主要承重趾支撑身体，较小的抬起脚趾不算在内。[S48][S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5454,8 +5454,8 @@
         "zh": "在骨盆后延续身体轴。"
       },
       "detail": {
-        "en": "Continues the backbone behind the pelvis.\n\nInvented teaching example. Shape evidence: Inference.\nDisplay material: sculpted restoration. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "在骨盆后延续身体轴。\n\n虚构教学例。形状依据：推定。\n展示材料：示意补塑。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Continues the backbone behind the pelvis.\n\nIn this invented reconstruction:\nShape evidence: Inference.\nDisplay material: sculpted part. [S7, S55, S56, S90]",
+        "zh": "在骨盆后延续身体轴。\n\n在这个虚构复原中：\n形状依据：推定。\n展示材料：补塑。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5534,8 +5534,8 @@
         "zh": "逐渐收细为抬离台面的长尾。"
       },
       "detail": {
-        "en": "Tapers into a long tail raised clear of the platform.\n\nInvented teaching example. Shape evidence: Inference.\nDisplay material: sculpted restoration. The module is not a single bone or a count of discovered material. [S7, S55, S56, S90]",
-        "zh": "逐渐收细为抬离台面的长尾。\n\n虚构教学例。形状依据：推定。\n展示材料：示意补塑。模块不等于一块骨，也不是出土材料数量。[S7, S55, S56, S90]"
+        "en": "Tapers into a long tail raised clear of the platform.\n\nIn this invented reconstruction:\nShape evidence: Inference.\nDisplay material: sculpted part. [S7, S55, S56, S90]",
+        "zh": "逐渐收细为抬离台面的长尾。\n\n在这个虚构复原中：\n形状依据：推定。\n展示材料：补塑。[S7, S55, S56, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5612,8 +5612,8 @@
         "zh": "显示本地活鸟的大部位轮廓。"
       },
       "detail": {
-        "en": "This original teaching bird represents a Javan myna found in Singapore. Birds are nested within theropod dinosaurs; combining that classification with the local occurrence makes this a local living-dinosaur example. It is not a Tyrannosaurus transforming into a myna. [S8, S23, S90]",
-        "zh": "这只原创教学鸟代表新加坡能见到的爪哇八哥。鸟类嵌套于兽脚类恐龙内；把这项分类与本地出现资料合起来，它就是本地活恐龙的例子，不是霸王龙变成八哥。[S8, S23, S90]"
+        "en": "This model represents a Javan myna found in Singapore. Birds belong to theropod dinosaurs, so the myna is a local living dinosaur. It is not a Tyrannosaurus changing into a myna. [S8, S23, S90]",
+        "zh": "模型代表新加坡能见到的爪哇八哥。鸟属于兽脚类恐龙，因此八哥是本地活恐龙。它不是由霸王龙变成的。[S8, S23, S90]"
       },
       "primitive": {
         "kind": "sphere",
@@ -5765,8 +5765,8 @@
         "zh": "代表鸟的前肢。"
       },
       "detail": {
-        "en": "The folded wing marks a broad anatomical region, not a measured myna bone reconstruction. Similar outlines alone do not establish ancestry; classification uses wider fossil and anatomical evidence. [S8, S10, S90]",
-        "zh": "折翼标出解剖大部位，不是八哥骨骼的测量复原。相似外形本身不能确立祖先关系，分类结合更广泛的化石与解剖证据。[S8, S10, S90]"
+        "en": "A wing is a bird's forelimb. The folded shape marks this body region without copying measured myna bones. Scientists use wider fossil and body evidence to establish ancestry; similar outlines alone are not enough. [S8, S10, S90]",
+        "zh": "翼是鸟的前肢。折翼标出这个身体部位，没有复制实测八哥骨骼。科学家结合更多化石和身体证据判断祖先关系，相似轮廓还不够。[S8, S10, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -5953,8 +5953,8 @@
         "zh": "支撑活鸟的外形。"
       },
       "detail": {
-        "en": "Both hindlimbs belong to the local-bird teaching model. Their appearance does not identify the maker of the separate footprint slab. No exact body measurements or fine myna osteology are claimed. [S8, S23, S90]",
-        "zh": "两条后肢属于本地鸟教学模型，外形不能用于鉴定另一工位足迹的制造者。不宣称精确身体尺寸或细致的八哥骨学数据。[S8, S23, S90]"
+        "en": "Both hindlimbs support the teaching bird. Their shape cannot identify the maker of the separate footprint. The model shows broad body regions, without exact measurements or detailed myna bone structure. [S8, S23, S90]",
+        "zh": "两条后肢支撑教学鸟模型。它们的形状不能确定另一块足迹是谁留下的。模型显示主要部位，没有精确尺寸或细致的八哥骨骼结构。[S8, S23, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -6192,8 +6192,8 @@
         "zh": "放大现生鸟羽以便比较。"
       },
       "detail": {
-        "en": "This is a modern-bird comparison model, not a fossil and not drawn to the bird body scale. Archaeopteryx fossils preserve a combination of features useful in studying early birds; this does not label it the proven direct ancestor of all birds. [S10, S90]",
-        "zh": "这是现生鸟类比较模型，不是化石，也不与鸟身体采用同一尺度。始祖鸟化石保存的特征组合有助研究早期鸟类，但不表示它已被证实是所有鸟的直接祖先。[S10, S90]"
+        "en": "This modern-bird feather model is enlarged beyond the bird's scale. It is not a fossil. Archaeopteryx fossils preserve features useful for studying early birds, without proving it was the direct ancestor of every living bird. [S10, S90]",
+        "zh": "现生鸟羽模型已放大，不与鸟身同一比例，也不是化石。始祖鸟化石的特征有助研究早期鸟类，却不能证明它是所有现生鸟的直接祖先。[S10, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -6641,12 +6641,12 @@
         "zh": "Prince 示意"
       },
       "summary": {
-        "en": "Introduces Prince through a generic long-necked quadruped study.",
-        "zh": "以通用长颈四足示意介绍Prince。"
+        "en": "Introduces Prince, a long-necked sauropod displayed in Singapore.",
+        "zh": "介绍在新加坡展出的长颈蜥脚类 Prince。"
       },
       "detail": {
-        "en": "Prince is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]",
-        "zh": "Prince是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]"
+        "en": "Prince is a diplodocid sauropod fossil at the Lee Kong Chian Natural History Museum. It was found at Dana Quarry in Wyoming's Jurassic Morrison Formation.\n\nThis general model does not copy its exact size or display pose. It does not identify its species, sex or original and restored bones. Finding the fossils together does not prove they were parents and a child. [S17, S57, S90]",
+        "zh": "Prince 是李光前自然历史博物馆内的梁龙科蜥脚类化石，发现于怀俄明州 Dana 采石场的侏罗纪莫里森组。\n\n通用模型没有复制它的准确大小或展示姿态，也不标物种、性别或原骨与修复部分。一起发现不能证明这些动物是父母与孩子。[S17, S57, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7291,12 +7291,12 @@
         "zh": "Apollonia 示意"
       },
       "summary": {
-        "en": "Introduces Apollonia through a generic long-necked quadruped study.",
-        "zh": "以通用长颈四足示意介绍Apollonia。"
+        "en": "Introduces Apollonia, a long-necked sauropod displayed in Singapore.",
+        "zh": "介绍在新加坡展出的长颈蜥脚类 Apollonia。"
       },
       "detail": {
-        "en": "Apollonia is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]",
-        "zh": "Apollonia是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]"
+        "en": "Apollonia is a diplodocid sauropod fossil at the Lee Kong Chian Natural History Museum. It was found at Dana Quarry in Wyoming's Jurassic Morrison Formation.\n\nThis general model does not copy its exact size or display pose. It does not identify its species, sex or original and restored bones. Finding the fossils together does not prove they were parents and a child. [S17, S57, S90]",
+        "zh": "Apollonia 是李光前自然历史博物馆内的梁龙科蜥脚类化石，发现于怀俄明州 Dana 采石场的侏罗纪莫里森组。\n\n通用模型没有复制它的准确大小或展示姿态，也不标物种、性别或原骨与修复部分。一起发现不能证明这些动物是父母与孩子。[S17, S57, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7941,12 +7941,12 @@
         "zh": "Twinky 示意"
       },
       "summary": {
-        "en": "Introduces Twinky through a generic long-necked quadruped study.",
-        "zh": "以通用长颈四足示意介绍Twinky。"
+        "en": "Introduces Twinky, a long-necked sauropod displayed in Singapore.",
+        "zh": "介绍在新加坡展出的长颈蜥脚类 Twinky。"
       },
       "detail": {
-        "en": "Twinky is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]",
-        "zh": "Twinky是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]"
+        "en": "Twinky is a diplodocid sauropod fossil at the Lee Kong Chian Natural History Museum. It was found at Dana Quarry in Wyoming's Jurassic Morrison Formation.\n\nThis general model does not copy its exact size or display pose. It does not identify its species, sex or original and restored bones. Finding the fossils together does not prove they were parents and a child. [S17, S57, S90]",
+        "zh": "Twinky 是李光前自然历史博物馆内的梁龙科蜥脚类化石，发现于怀俄明州 Dana 采石场的侏罗纪莫里森组。\n\n通用模型没有复制它的准确大小或展示姿态，也不标物种、性别或原骨与修复部分。一起发现不能证明这些动物是父母与孩子。[S17, S57, S90]"
       },
       "primitive": {
         "kind": "sweep",
@@ -8590,12 +8590,12 @@
         "zh": "示意底台"
       },
       "summary": {
-        "en": "Supports the schematic studies.",
-        "zh": "承托示意研究。"
+        "en": "Supports the teaching models.",
+        "zh": "承托教学模型。"
       },
       "detail": {
-        "en": "A schematic layout platform, not a museum mount.",
-        "zh": "示意布局底台，不是馆藏展台。"
+        "en": "A base for arranging the teaching models. It does not copy a museum mount.",
+        "zh": "用来摆放教学模型的底台，没有复制博物馆展架。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -8866,8 +8866,8 @@
         "kind": "choice",
         "default": "wide",
         "label": {
-          "en": "Ash pair",
-          "zh": "灰层对"
+          "en": "Ash layer pair",
+          "zh": "灰层组合"
         },
         "options": [
           {
@@ -8880,7 +8880,7 @@
           {
             "id": "close",
             "label": {
-              "en": "Closer beds",
+              "en": "Closer ages",
               "zh": "年龄更近"
             }
           },
@@ -8996,8 +8996,8 @@
       {
         "id": "bracket-width",
         "label": {
-          "en": "Central bracket width",
-          "zh": "中心夹定宽度"
+          "en": "Range between central ages",
+          "zh": "中心年龄间隔"
         },
         "unit": "Ma",
         "decimals": 2,
@@ -9261,8 +9261,8 @@
         "zh": "模型"
       },
       "value": {
-        "en": "Schematic",
-        "zh": "示意"
+        "en": "Teaching models",
+        "zh": "教学示意"
       },
       "tag": "design"
     },
@@ -9283,7 +9283,7 @@
         "zh": "年代"
       },
       "value": {
-        "en": "Bracket, not one date",
+        "en": "Age ranges",
         "zh": "年龄范围"
       },
       "tag": "design"

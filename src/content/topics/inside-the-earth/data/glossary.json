@@ -7,7 +7,7 @@
         "zh": "地壳"
       },
       "definition": {
-        "en": "The rocky outer layer of Earth, whose thickness varies between places.",
+        "en": "Earth's rocky outer layer. Its thickness varies from place to place.",
         "zh": "地球最外面的岩石层，各处厚度不同。"
       },
       "see": [
@@ -22,8 +22,8 @@
         "zh": "地幔"
       },
       "definition": {
-        "en": "The region of mostly solid rock between the crust and the core; its rock can deform over geological time.",
-        "zh": "地壳与地核之间、大部分为固态岩石的区域；岩石能在地质时间尺度上变形。"
+        "en": "The mostly solid rock between the crust and core. It can slowly change shape over very long times.",
+        "zh": "地壳与地核之间的岩石，大部分是固态，能在漫长时间内缓慢变形。"
       },
       "see": [
         "crust",
@@ -37,7 +37,7 @@
         "zh": "岩石圈"
       },
       "definition": {
-        "en": "The crust and rigid uppermost mantle together, divided into moving plates.",
+        "en": "The crust and rigid uppermost mantle together. This shell is divided into moving plates.",
         "zh": "地壳和刚性的最上部地幔合成的整体，分成移动的板块。"
       },
       "see": [
@@ -51,8 +51,8 @@
         "zh": "板块"
       },
       "definition": {
-        "en": "A moving block of lithosphere that may include both continental and oceanic parts.",
-        "zh": "移动的岩石圈块体，可以同时包括大陆与海洋部分。"
+        "en": "A moving block of lithosphere. One plate can include both continental and oceanic parts.",
+        "zh": "移动的岩石圈块体，可同时包括大陆和海洋部分。"
       },
       "see": [
         "lithosphere",
@@ -95,8 +95,8 @@
         "zh": "岩浆"
       },
       "definition": {
-        "en": "Molten rock material below the surface, which can contain crystals and dissolved gas.",
-        "zh": "位于地表下的熔融岩石物质，可以含晶体和溶解气体。"
+        "en": "Molten rock material below ground. It can also contain crystals and dissolved gas.",
+        "zh": "地下的熔融岩石物质，也可以含晶体和溶解气体。"
       },
       "see": [
         "lava",
@@ -124,8 +124,8 @@
         "zh": "俯冲"
       },
       "definition": {
-        "en": "The descent of one lithospheric plate beneath another plate.",
-        "zh": "一块岩石圈板块向另一板块下方下降的过程。"
+        "en": "The sinking of one tectonic plate beneath another.",
+        "zh": "一块板块向另一块板块下方下降的过程。"
       },
       "see": [
         "tectonic-plate"
@@ -138,8 +138,8 @@
         "zh": "喷发口"
       },
       "definition": {
-        "en": "An opening through which volcanic gas, fragments and/or lava reach the surface or atmosphere.",
-        "zh": "火山气体、碎屑和／或熔岩到达地表或大气的开口。"
+        "en": "An opening where volcanic gas, fragments or lava reach the surface or atmosphere.",
+        "zh": "火山气体、碎屑或熔岩到达地表或大气的开口。"
       },
       "see": [
         "magma",
@@ -153,8 +153,8 @@
         "zh": "断层"
       },
       "definition": {
-        "en": "A fracture surface along which rocks can move relative to each other.",
-        "zh": "岩体可以沿着相对移动的破裂面。"
+        "en": "A fracture surface along which rocks can move past each other.",
+        "zh": "岩体能沿着相对移动的破裂面。"
       },
       "see": [
         "focus",
@@ -168,7 +168,7 @@
         "zh": "震源"
       },
       "definition": {
-        "en": "The place inside Earth where an earthquake rupture begins.",
+        "en": "The place inside Earth where an earthquake rupture starts.",
         "zh": "地球内部一次地震破裂开始的位置。"
       },
       "see": [
@@ -196,8 +196,8 @@
         "zh": "P波（纵波）"
       },
       "definition": {
-        "en": "A seismic wave in which particles vibrate parallel to the direction the wave travels.",
-        "zh": "质点振动方向与传播方向平行的地震波。"
+        "en": "A seismic wave in which material vibrates back and forth along the direction the wave travels.",
+        "zh": "物质沿波传播方向来回振动的地震波。"
       },
       "see": [
         "s-wave"
@@ -210,8 +210,8 @@
         "zh": "S波（横波）"
       },
       "definition": {
-        "en": "A seismic wave in which particles vibrate perpendicular to the travel direction; it does not travel directly through the liquid outer core.",
-        "zh": "质点振动方向垂直于传播方向的地震波，不能直接穿过液态外核。"
+        "en": "A seismic wave in which material vibrates at right angles to the travel direction. It cannot pass directly through the liquid outer core.",
+        "zh": "物质振动方向与波传播方向成直角的地震波，不能直接穿过液态外核。"
       },
       "see": [
         "p-wave",
@@ -225,8 +225,8 @@
         "zh": "海啸"
       },
       "definition": {
-        "en": "A series of long waves caused by a large, sudden displacement of water, unrelated to tides.",
-        "zh": "大量水体突然位移产生的长波列，与潮汐不同。"
+        "en": "A series of long waves caused by a large, sudden movement of water. It is unrelated to tides.",
+        "zh": "大量水体突然移动产生的一系列长波，与潮汐无关。"
       },
       "see": [
         "fault"

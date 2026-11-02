@@ -87,3 +87,9 @@ S90 是 design:true；三组年龄输入与全部外包公式在来源文本和�
 数据层：47 项主题单元测试通过；全量 156 个文件、4,226 项测试通过。另一个原有地图 schema 测试在并发负载下曾超时，单独 41/41 及全量重跑均通过。validate 为 56 topics、零错误/警告；check 零错误/警告（既有三条 hints）。构建通过 115 静态页面。
 
 240 个标签锚点在三个尺寸的静态投影均在屏内；骨架镜头后拉 8%，CUTAWAY offset 1.07。两轮离线结构图已实看，详见 model-audit.md。静态网格最大单工位 103,920 triangles；pieces 不是实际 draw calls。浏览器启动受沙箱权限阻塞，未把离线投影当作实际标签、遮挡、点击、灯光、手机或性能验收。主题维持 draft；9 个 e2e 已编写并通过发现，实际执行待浏览器可用。全部门槛命令、错误与待核项目记录在 docs/46 §9 和 REVIEW.md。
+
+## Readability pass 2026-10-29
+
+Rewrote English and simplified Chinese for Singapore P4–P6 readers: shorter chapter paragraphs, captions, part cards, glossary definitions, figure text, try-it instructions and PLATE/notes labels. Removed repeated disclaimers and reviewer/provenance language from the reading text. Retained the scientific limits needed to interpret the examples. Facts, numerical values, source references, links and all model/interaction data are unchanged.
+
+Translation provenance stays in this audit: glossary Chinese is project editorial wording, not a claim of MOE terminology. The teaching shapes have no measured specimen identity; museum models are not a bone inventory. Quiet bird observation is an activity suggestion, not a legal rule or scored test. The 7/3/2 evidence counts remain an invented module inventory.
