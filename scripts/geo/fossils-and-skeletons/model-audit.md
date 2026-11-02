@@ -1,5 +1,9 @@
 # 化石研究几何核验 / Fossil geometry audit
 
+Historical pre-rebuild audit (2026-10-27). Current geometry, counts, references
+and verification supersede the notes below: see
+`src/content/topics/fossils-and-skeletons/REBUILD-3D.md` (2026-11-02).
+
 本模型为原创程序化教学示意，不是标本扫描或测量复原。六套原始坐标分别只做一次正比例仿射变换，采用现行引擎 `partBounds` 求 AABB，统一中心 `[0,2,0]` 与半包络 `[4,2,1.4]`。生成器同时变换局部路径、形状、孔洞、尺寸、厚度、半径、环节间隔、爆炸距离和镜头；方位与 FOV 保持不变。具体原始包络、中心、比例与最终镜头见 `model-layout.json`。每次从原始作者几何重建，保留既有配置并读取 `sim.json`，不会反复归一化成品。
 
 Original procedural teaching studies, without scanned or measured specimen geometry. Six original studies receive one uniform positive affine transform, using the existing engine's actual AABB implementation. Geometry and camera transformations are recorded in `model-layout.json`. Every rebuild starts from author coordinates and retains the native simulation configuration.
