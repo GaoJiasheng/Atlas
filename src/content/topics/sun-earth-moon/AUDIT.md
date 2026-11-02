@@ -132,3 +132,12 @@
 | 07.3 | F011 F031 | S11, S36, S38 |
 | 07.4 | F017 F032 | S8, S36, S39 |
 | 07.5 | F011 F019 F030–F032；教学设计 | S5, S11, S18, S36, S38, S39 |
+
+
+## Readability pass 2026-10-29
+
+Rewrote all eight chapter bodies in EN/ZH, 39 beat captions, chapter summaries, 13 object cards, glossary definitions, figure text, control/try-it labels and PLATE notes for P4–P6 readers. Shortened sentences, explained terms and removed repeated audit language. Facts, physical values, source references, data, model settings, cameras, ids and links are unchanged. Model-scale limits, calculated estimates and solar-viewing safety remain where readers need them.
+
+Provenance kept here rather than repeated in the reading text: the 2026 table uses the NOAA/Meeus approximation [S26,S33]; NOAA reports atmospheric accuracy limits and that its calculator is no longer maintained. Reproducing the 365 rows checks the calculation, not independent observations. S37 establishes the 2019-12-26 Singapore event's date, place and annular type; no local duration or contact-time evidence is inferred. Guides are drawn aids, not rods, rails, sheets or travelling light particles. The spherical Sun is not a photograph or interior view. All calculations and lighting use the same physical snapshot [S36].
+
+Verification: topic tests 64/64 (Sun–Earth–Moon 14, Saturn V 50); `pnpm check` passed (0 errors, 4 existing hints); `pnpm validate` passed (85 topics, 0 errors/warnings); `pnpm test` passed (5,448 tests, 219 files); `pnpm build` passed (173 pages). Structured non-text values, source-tagged numbers and links were compared with the pre-edit files. All ZH beat captions are at most 45 characters. Browser gates `pnpm shoot` / `pnpm e2e` skipped as instructed; no browser or desktop opened.

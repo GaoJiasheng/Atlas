@@ -38,3 +38,12 @@
 详见最终规格 §9 与 `REVIEW.md`。浏览器门槛按本轮 BRIEF 明确跳过，不能写成通过。由主 session 在端口5449运行 e2e 和 shoot，检查全部构型/中英/双色主题及390×844手机；真实draw calls、标签可见性、材质与干涉的视觉结论留给这些截图，不用静态计数冒充实测。
 
 PLATE发动机数标为“参考级发动机”，不表示当前燃烧数量；02章的分级拍把所选参考级同步为5/5/1/1/1，理想实验计算不受这个选择影响。
+
+
+## Readability pass 2026-10-29
+
+Rewrote all seven chapter bodies in EN/ZH, 35 beat captions, chapter summaries, 33 part cards, 15 glossary definitions, figure text, try-it labels and PLATE notes. Replaced repeated construction/audit language with each part's function and the mission sequence. Facts, source references, historical and simulation values, data, geometry, cameras, ids and links are unchanged. The imaginary rocket's assumptions and simplified layouts remain explicit.
+
+Construction accounting moved from reader cards to this audit (all S90 DESIGN, with S25/S26 references unchanged): S-II's single shared bulkhead is at y=53.5 m; the S-IVB boundary is at y=75 m, with the lower oxygen profile ending 0.04 m below the fuel geometry's bulkhead. The probe contact is [0,104.8,0] m in the launch frame and the LM port centre is [0,92.5,0] m. Docked, extracted and rendezvous poses align them exactly. The deployed footpads share y=85.6 m before the landed offset moves them to y=0; the X/Z-compressed terminal envelope represents stowage, not hinge kinematics. Layouts are illustrative rather than pressure-vessel designs, manufacturing drawings or routed plumbing CAD. Static panel removal does not assert a hinge trajectory. Fuel/oxidiser colours identify substances, not countries. Geometry follows the nominal Apollo 11 arrangement; wall thickness, reinforcing rings and internal layout are simplified. Stage selection changes reference readings independently of the ideal experiment and does not ignite all engines.
+
+Verification: topic tests 64/64 (Sun–Earth–Moon 14, Saturn V 50); `pnpm check` passed (0 errors, 4 existing hints); `pnpm validate` passed (85 topics, 0 errors/warnings); `pnpm test` passed (5,448 tests, 219 files); `pnpm build` passed (173 pages). Structured non-text values, source-tagged numbers and links were compared with the pre-edit files. All ZH beat captions are at most 45 characters. Browser gates `pnpm shoot` / `pnpm e2e` skipped as instructed; no browser or desktop opened.
