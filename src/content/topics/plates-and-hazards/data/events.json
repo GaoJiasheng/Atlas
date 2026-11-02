@@ -13,8 +13,8 @@
       "zh": "坦博拉（Tambora），1815 年"
     },
     "summary": {
-      "en": "The eruption affected communities around Sumbawa; later food shortages were part of the loss of life.",
-      "zh": "喷发影响松巴哇周边居民；灾后的粮食短缺也是死亡原因的一部分。"
+      "en": "The eruption affected communities around Sumbawa. Food shortages also caused deaths.",
+      "zh": "喷发波及松巴哇周边居民，灾后缺粮也造成人员死亡。"
     },
     "sources": [
       "S19",
@@ -25,8 +25,8 @@
     ],
     "sensitive": true,
     "detail": {
-      "en": "The map uses GVP volcano 264040 as its location. VEI 7 belongs to episode 16231 (1812–1815), not an earthquake magnitude. The selected historical day comes from NCEI event 613; it does not date the whole eruption episode.",
-      "zh": "位置采用 GVP 火山 264040。VEI 7 属于 16231 号喷发记录（1812—1815 年），不是地震震级。选用的历史日期来自 NCEI 613 号事件，不表示整段喷发活动只持续一天。"
+      "en": "GVP volcano 264040 locates Tambora. Eruption record 16231 covers 1812–1815 and has VEI 7. VEI measures volcanic explosiveness, not earthquake size. NCEI event 613 gives the 10 April disaster date within this longer episode.",
+      "zh": "GVP 火山 264040 标出坦博拉。喷发记录 16231 跨越 1812—1815 年，VEI 为 7。VEI 描述火山爆发程度，与地震震级不同。NCEI 事件 613 给出这段活动中的 4 月 10 日灾害日期。"
     },
     "impacts": [
       {
@@ -62,8 +62,8 @@
           "zh": "死亡人数"
         },
         "scope": {
-          "en": "Separate historical estimate; starvation identified as the main cause. These estimates are not a statistical range.",
-          "zh": "另一项历史估计，主要死因为饥饿。两项估计不是统计置信区间。"
+          "en": "A separate historical estimate, with starvation as the main cause. The two estimates are not limits of one calculation.",
+          "zh": "另一项历史估计，主要死因为饥饿。两项估计不是同一次计算的上下限。"
         },
         "sourceAsOf": "2026-10-27",
         "sourceDateKind": "accessed",
@@ -87,8 +87,8 @@
       "zh": "喀拉喀托（Krakatau），1883 年"
     },
     "summary": {
-      "en": "The disaster caused about 36,000 deaths, mainly from tsunamis: an undated USGS historical table, accessed 27 October 2026.",
-      "zh": "这次灾害造成约 36,000 人死亡，主要由于海啸；数据为无发布日期的 USGS 历史表估计，读取于 2026 年 10 月 27 日。"
+      "en": "The disaster caused about 36,000 deaths, mainly from tsunamis, according to a USGS historical table.",
+      "zh": "USGS 历史表记载，灾害造成约 36,000 人死亡，主要由于海啸。"
     },
     "sources": [
       "S21",
@@ -97,8 +97,8 @@
     ],
     "sensitive": true,
     "detail": {
-      "en": "The same undated USGS table, accessed 27 October 2026, lists a historical estimate of 36,417 deaths, mainly from tsunamis. The reference volcano centre does not reconstruct the island in 1883. The major disaster day differs from the start of the longer eruption episode.",
-      "zh": "同一张未注明发布日期、于 2026 年 10 月 27 日读取的 USGS 表列出 36,417 人死亡的历史估计，主要由于海啸。火山中心参考点不是 1883 年岛形的复原；主要灾难日期也不同于较长喷发记录的起日。"
+      "en": "The undated USGS table lists 36,417 deaths, mainly from tsunamis; it was read on 27 October 2026. The modern volcano point locates Krakatau without reconstructing its 1883 coast. The eruption episode began before the major disaster day.",
+      "zh": "未注明发布日期的 USGS 表列出 36,417 人死亡，主要由于海啸；读取日为 2026 年 10 月 27 日。现代火山点用来定位，没有复原 1883 年海岸。整段喷发活动早于主要灾害日开始。"
     },
     "impacts": [
       {
@@ -150,8 +150,8 @@
     ],
     "sensitive": true,
     "detail": {
-      "en": "USGS solution: Mw 9.1, depth 30 km, 2004-12-26 00:58:53.450 UTC. MSS uses 9.2 in its account; each value keeps its own source. The epicentre is a point above the rupture’s starting location, not the full rupture. USGS tsunami=0 is not interpreted as no tsunami: the explicit NCEI association is event 2439.",
-      "zh": "USGS 解：Mw 9.1，深度 30 公里，UTC 时间 2004-12-26 00:58:53.450。新加坡气象署说明采用 9.2，各自保留出处。震中只是破裂开始位置上方的地表点，不代表整段破裂。USGS 的 tsunami=0 不解释为没有海啸；明确关联的 NCEI 海啸事件为 2439。"
+      "en": "USGS gives Mw 9.1, depth 30 km and origin time 2004-12-26 00:58:53.450 UTC. MSS gives magnitude 9.2. The epicentre lies above the rupture’s start; the underground break extends farther. The USGS tsunami flag is 0, but NCEI event 2439 documents the tsunami.",
+      "zh": "USGS 给出 Mw 9.1、深度 30 公里，发震时刻为 UTC 2004-12-26 00:58:53.450。MSS 给出震级 9.2。震中在地下破裂起点上方，破裂还延伸到更远。USGS 海啸标记为 0，但 NCEI 事件 2439 记录了海啸。"
     },
     "impacts": [
       {
@@ -238,8 +238,8 @@
       "zh": "喀拉喀托之子（Anak Krakatau）崩塌，2018 年"
     },
     "summary": {
-      "en": "A volcanic collapse triggered a tsunami in the Sunda Strait. Its observations are kept separate from the 1883 records.",
-      "zh": "火山体崩塌引发巽他海峡海啸；观测与 1883 年记录分开。"
+      "en": "Volcanic collapse triggered a tsunami in the Sunda Strait. These observations belong to 2018, a separate event from 1883.",
+      "zh": "火山体崩塌引发巽他海峡海啸。这组观测属于 2018 年，与 1883 年是两次事件。"
     },
     "sources": [
       "S12",
@@ -249,8 +249,8 @@
     ],
     "sensitive": false,
     "detail": {
-      "en": "This marker uses the GVP Krakatau reference centre, not a measured collapse initiation point. The GVP 2018–2020 episode began on 18 June 2018, before the collapse; NCEI event 5699 gives the tsunami source date. No unverified death figure is shown.",
-      "zh": "标记采用 GVP 喀拉喀托参考中心，不是实测崩塌起点。GVP 的 2018—2020 年喷发记录始于 2018 年 6 月 18 日，早于崩塌；NCEI 5699 号事件给出海啸源事件日。本题不列未经所选来源核验的死亡数字。"
+      "en": "The point locates GVP’s Krakatau reference centre, rather than the measured start of collapse. GVP’s 2018–2020 eruption episode began on 18 June 2018. NCEI event 5699 gives the later tsunami’s date.",
+      "zh": "点标出 GVP 喀拉喀托参考中心，并非实测崩塌起点。GVP 的 2018—2020 年喷发活动始于 2018 年 6 月 18 日。NCEI 事件 5699 给出后来海啸的日期。"
     }
   },
   {
@@ -267,8 +267,8 @@
       "zh": "西苏门答腊地震，2022 年"
     },
     "summary": {
-      "en": "People in Singapore reported feeling this distant earthquake. The map separates the source parameters from local shaking reports.",
-      "zh": "新加坡有人报告感到这次远处地震；地图区分震源参数与本地震感记录。"
+      "en": "People in Singapore felt this distant earthquake. Their reports describe local shaking; catalogue values describe the source.",
+      "zh": "新加坡有人感到这次远处地震。本地报告描述震感，目录数值描述震源。"
     },
     "sources": [
       "S601",
@@ -278,8 +278,8 @@
     ],
     "sensitive": false,
     "detail": {
-      "en": "The selected USGS solution us6000gzyg is magnitude 6.1, type mww, depth 4 km; the EOS public-lecture account uses 6.2. These are source-specific estimates, not Singapore intensity values. BCA guidance is linked in the chapter with its reading date, not as a real-time warning.",
-      "zh": "选用的 USGS 解 us6000gzyg 为震级 6.1、类型 mww、深度 4 公里；地球观测研究所公开讲座说明采用 6.2。这些是各来源的估计，不是新加坡烈度。章节注明建设局指引的读取日期并链接原页，不作为实时警示。"
+      "en": "USGS record us6000gzyg gives magnitude 6.1, type mww, and depth 4 km. EOS’s public-lecture page gives 6.2. These estimate earthquake size, not shaking intensity in Singapore. The chapter links BCA’s guidance and gives the date it was read.",
+      "zh": "USGS 记录 us6000gzyg 给出震级 6.1、类型 mww、深度 4 公里。EOS 公开讲座页面给出 6.2。这些数值估计地震规模，并非新加坡烈度。章节附有建设局指引及读取日期。"
     }
   },
   {
@@ -296,8 +296,8 @@
       "zh": "坦博拉（Tambora）"
     },
     "summary": {
-      "en": "A fixed GVP reference location, not a record of eruption on the date shown.",
-      "zh": "GVP 固定参考位置，不表示所示日期正在喷发。"
+      "en": "Tambora’s location in the GVP catalogue. A location point does not mean an eruption on the date shown.",
+      "zh": "GVP 目录中的坦博拉位置。地点标记不表示所示日期正在喷发。"
     },
     "sources": [
       "S19",
@@ -305,8 +305,8 @@
     ],
     "sensitive": false,
     "detail": {
-      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
-      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+      "en": "This marker stays in place as the timeline changes. Its date does not mark a founding or an eruption.",
+      "zh": "年代改变时，这个地点标记仍留在原位。标记日期不表示地点建立或发生喷发。"
     }
   },
   {
@@ -323,16 +323,16 @@
       "zh": "喀拉喀托（Krakatau）"
     },
     "summary": {
-      "en": "The modern GVP reference centre; historical coastlines are not reconstructed.",
-      "zh": "现代 GVP 参考中心；本题不复原历史海岸。"
+      "en": "Krakatau’s modern GVP reference centre. The coast shows modern geography.",
+      "zh": "GVP 的喀拉喀托现代参考中心，海岸也采用现代地图。"
     },
     "sources": [
       "S604"
     ],
     "sensitive": false,
     "detail": {
-      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
-      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+      "en": "This marker stays in place as the timeline changes. Its date does not mark a founding or an eruption.",
+      "zh": "年代改变时，这个地点标记仍留在原位。标记日期不表示地点建立或发生喷发。"
     }
   },
   {
@@ -349,8 +349,8 @@
       "zh": "基拉韦厄（Kilauea）"
     },
     "summary": {
-      "en": "A volcano within an oceanic plate, illustrating a boundary-only explanation’s limits.",
-      "zh": "位于大洋板块内部的火山，说明仅凭边界解释位置的局限。"
+      "en": "A volcano inside an oceanic plate. Volcanoes also occur away from boundaries.",
+      "zh": "大洋板块内部的火山。火山也会出现在边界以外。"
     },
     "sources": [
       "S45",
@@ -358,8 +358,8 @@
     ],
     "sensitive": false,
     "detail": {
-      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
-      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+      "en": "This marker stays in place as the timeline changes. Its date does not mark a founding or an eruption.",
+      "zh": "年代改变时，这个地点标记仍留在原位。标记日期不表示地点建立或发生喷发。"
     }
   },
   {
@@ -376,8 +376,8 @@
       "zh": "新加坡（方位点）"
     },
     "summary": {
-      "en": "An editorial orientation anchor, not an instrument station or a measurement of one building’s shaking.",
-      "zh": "编辑取景的方位锚点，不是仪器站，也不代表某幢楼的摇晃测量。"
+      "en": "A point to help locate Singapore. It is not an instrument station or a shaking measurement for any building.",
+      "zh": "用来找到新加坡的方位点，不是仪器站，也不表示某幢楼的摇晃测量。"
     },
     "sources": [
       "S608",
@@ -387,8 +387,8 @@
     ],
     "sensitive": false,
     "detail": {
-      "en": "This is a static location. Its required timeline date is a display convention, not a founding or activity date.",
-      "zh": "这是固定地点；必填年代日期只是显示约定，不是地点建立或活动日期。"
+      "en": "This marker stays in place as the timeline changes. Its date does not mark a founding or an eruption.",
+      "zh": "年代改变时，这个地点标记仍留在原位。标记日期不表示地点建立或发生喷发。"
     }
   }
 ]

@@ -1,3 +1,4 @@
+import { catalogueQaLayers } from './lib/catalogue-qa';
 import { microscopeFieldReading } from '../src/engines/space-scene/lib/sim/microscope';
 /**
  * `pnpm shoot <topic> [options] [shot names...]` — Playwright QA driver for the
@@ -1073,10 +1074,13 @@ async function runCatalogues(s: Session, out: string, report: RunReport): Promis
   let selected = 0;
   for (const chapter of chapters) {
     await s.apply({ chapter, wait: 400 });
-    await s.page.waitForFunction(() => {
+    const required = catalogueQaLayers(s.topic, await s.ev(() => window.__atlas!.state()));
+    await s.page.waitForFunction(({ geometry, indexed }) => {
       const e = window.__atlas!.engine as { catalogueState(): CatalogueReading };
-      return Object.values(e.catalogueState().layers).every((layer) => layer.status !== 'loading');
-    }, null, { timeout: 30_000 });
+      const drawn = (window.__atlas!.stats() as { features?: number; datedLayers?: Record<string, unknown> }).datedLayers ?? {};
+      const layers = e.catalogueState().layers;
+      return geometry.every((id) => id in drawn || layers[id]?.status === 'error') && indexed.every((id) => layers[id] && layers[id]!.status !== 'loading');
+    }, required, { timeout: 30_000 });
     const read = () => s.page.evaluate(() => (window.__atlas!.engine as { catalogueState(): CatalogueReading }).catalogueState());
     const state = await read();
     if (state.renderedRows > 50) report.beatFailures.push(`${chapter}: catalogue renders ${state.renderedRows} rows (maximum 50)`);

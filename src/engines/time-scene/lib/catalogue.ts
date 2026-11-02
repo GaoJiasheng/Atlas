@@ -5,6 +5,7 @@ import type { CatalogueEntry, CatalogueIndex } from '../catalogueSchema';
 export interface CatalogueLayer {
   id: string;
   status: 'loading' | 'ready' | 'error';
+  geometryStatus?: 'loading' | 'ready' | 'error';
   def: DatedLayerDef;
   entries: CatalogueEntry[];
   features: FeatureCollection;
@@ -40,9 +41,9 @@ export function resolveCataloguePick(requested: string, currentPick: string | nu
     const entry = layer && visibleCatalogue(layer, t).find((entry) => entry.id === requested);
     if (entry) return { layer, entry };
   }
-  const known = loaded.find((layer) => layer.entries.some((entry) => entry.id === requested));
-  if (known && !enabled.includes(known.id)) return 'invalid';
-  return active.some((def) => !loaded.some((layer) => layer.id === def.id && layer.status !== 'loading')) ? 'waiting' : 'invalid';
+  const known = loaded.find((layer) => layer.features.features.some((feature) => feature.properties?.id === requested) || layer.entries.some((entry) => entry.id === requested));
+  if (known) return !enabled.includes(known.id) || known.status === 'error' || known.status === 'ready' ? 'invalid' : 'waiting';
+  return active.some((def) => !loaded.some((layer) => layer.id === def.id && (layer.status !== 'loading' || layer.geometryStatus === 'ready' || layer.features.features.length > 0))) ? 'waiting' : 'invalid';
 }
 
 /** Exact screen distance after the 44px query box, including polygon holes/corners. */

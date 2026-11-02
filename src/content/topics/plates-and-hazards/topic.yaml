@@ -39,8 +39,8 @@ datedLayers:
   temporal:
     mode: reference
     note:
-      en: Fixed modern model; not historical reconstruction.
-      zh: 固定现代模型，不是历史复原。
+      en: Modern plate boundaries, kept fixed across the dates.
+      zh: 现代板块边界，各年代采用同一套线。
     release: PB2002 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -59,8 +59,8 @@ datedLayers:
   temporal:
     mode: reference
     note:
-      en: Fixed modern model; not historical reconstruction.
-      zh: 固定现代模型，不是历史复原。
+      en: Modern plate boundaries, kept fixed across the dates.
+      zh: 现代板块边界，各年代采用同一套线。
     release: PB2002 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -79,8 +79,8 @@ datedLayers:
   temporal:
     mode: reference
     note:
-      en: Fixed modern model; not historical reconstruction.
-      zh: 固定现代模型，不是历史复原。
+      en: Modern plate boundaries, kept fixed across the dates.
+      zh: 现代板块边界，各年代采用同一套线。
     release: PB2002 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -99,8 +99,8 @@ datedLayers:
   temporal:
     mode: reference
     note:
-      en: Fixed modern model; not historical reconstruction.
-      zh: 固定现代模型，不是历史复原。
+      en: Modern plate boundaries, kept fixed across the dates.
+      zh: 现代板块边界，各年代采用同一套线。
     release: PB2002 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -110,17 +110,17 @@ datedLayers:
   kind: area
   color: token:neutral
   label:
-    en: Broad boundary regions in the model
-    zh: 模型中的宽边界区
+    en: Broad plate-boundary regions
+    zh: 宽广的板块边界区
   count: true
   countLabel:
-    en: Model boundary regions
-    zh: 模型宽边界区
+    en: Broad boundary regions
+    zh: 宽边界区
   temporal:
     mode: reference
     note:
-      en: Broad boundary zones in the model, not hazard zones.
-      zh: 模型中的宽边界区，不是危险区。
+      en: Broad regions of plate motion, not danger zones.
+      zh: 板块运动的宽边界区，不表示危险范围。
     release: PB2002 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -139,8 +139,8 @@ datedLayers:
   temporal:
     mode: reference
     note:
-      en: Modern catalogue locations; not eruption status on this date.
-      zh: 现代目录位置，不表示所示日期正在喷发。
+      en: Volcano locations; a point does not mean an eruption.
+      zh: 火山位置；一个点不表示正在喷发。
     release: GVP VOTW v5.4.0 · snapshot 2026-10-26
   recent: false
   catalogue:
@@ -154,8 +154,8 @@ datedLayers:
     en: Sample earthquakes
     zh: 样本地震
   label:
-    en: USGS reviewed sample · 2000–2024 · catalogue M ≥ 6 · mixed magType · snapshot 2026-10-26
-    zh: USGS 已审样本 · 2000—2024 年 · 目录 M ≥ 6 · 保留不同震级类型 · 快照 2026-10-26
+    en: USGS earthquakes · 2000–2024 · reviewed M ≥ 6 · mixed magnitude types · snapshot 2026-10-26
+    zh: USGS 地震 · 2000—2024 年 · 已审目录 M ≥ 6 · 震级类型不同 · 快照 2026-10-26
   recent: false
   catalogue:
     file: ph-catalogue-quake-sample
@@ -173,11 +173,11 @@ datedLayers:
   color: token:loop
   count: true
   countLabel:
-    en: 1883 associated observations
-    zh: 1883 年关联观测
+    en: 1883 tsunami observations
+    zh: 1883 年海啸观测
   label:
-    en: NCEI 1883 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
-    zh: NCEI 1883 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+    en: NCEI 1883 tsunami records · shown together on the event date, not wave arrival · snapshot 2026-10-26
+    zh: NCEI 1883 年海啸记录 · 事件当天整组出现，并非海浪到达时间 · 快照 2026-10-26
   recent: false
   catalogue:
     file: ph-catalogue-observations-1883
@@ -187,11 +187,11 @@ datedLayers:
   color: token:loop
   count: true
   countLabel:
-    en: 2004 associated observations
-    zh: 2004 年关联观测
+    en: 2004 tsunami observations
+    zh: 2004 年海啸观测
   label:
-    en: NCEI 2004 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
-    zh: NCEI 2004 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+    en: NCEI 2004 tsunami records · shown together on the event date, not wave arrival · snapshot 2026-10-26
+    zh: NCEI 2004 年海啸记录 · 事件当天整组出现，并非海浪到达时间 · 快照 2026-10-26
   recent: false
   catalogue:
     file: ph-catalogue-observations-2004
@@ -201,11 +201,11 @@ datedLayers:
   color: token:loop
   count: true
   countLabel:
-    en: 2018 associated observations
-    zh: 2018 年关联观测
+    en: 2018 tsunami observations
+    zh: 2018 年海啸观测
   label:
-    en: NCEI 2018 associated locations · whole group on source date, not arrival playback · snapshot 2026-10-26
-    zh: NCEI 2018 年关联位置 · 按源事件日整组显示，不按到达时刻回放 · 快照 2026-10-26
+    en: NCEI 2018 tsunami records · shown together on the event date, not wave arrival · snapshot 2026-10-26
+    zh: NCEI 2018 年海啸记录 · 事件当天整组出现，并非海浪到达时间 · 快照 2026-10-26
   recent: false
   catalogue:
     file: ph-catalogue-observations-2018
