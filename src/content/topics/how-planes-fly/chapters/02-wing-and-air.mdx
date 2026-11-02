@@ -98,8 +98,8 @@
           "angle-deg",
           "altitude-m",
           {
-            "en": "Same section and reference area",
-            "zh": "翼型和参考面积不变"
+            "en": "Same wing section and reference area",
+            "zh": "翼型和参考面积保持不变"
           }
         ],
         "observe": [
@@ -109,8 +109,8 @@
         "record": true,
         "predict": {
           "prompt": {
-            "en": "In this model, the airspeed goes from 20 to 40 metres per second. What happens to the lift?",
-            "zh": "在这个模型里，空气速度从每秒 20 米增加到每秒 40 米。升力会怎样？"
+            "en": "Double the simulated airspeed from 20 to 40 metres per second. What happens to lift?",
+            "zh": "把模拟空气速度从每秒 20 米加倍到每秒 40 米，升力会怎样？"
           },
           "start": {
             "airspeed-mps": 20
@@ -236,8 +236,8 @@
           }
         },
         "caption": {
-          "en": "Spars run along the wing, while ribs hold its cross-sectional shape. This cutaway shows one chosen structural example.",
-          "zh": "翼梁沿翼展延伸，翼肋维持机翼的剖面形状。这幅剖面画的是选定的一种结构样件。"
+          "en": "Spars run along the span and carry bending loads. Ribs hold the wing’s cross-sectional shape beneath the faint skin.",
+          "zh": "翼梁沿翼展承受弯曲的力。\n淡化的蒙皮下，翼肋保持剖面形状。"
         }
       },
       {
@@ -309,8 +309,8 @@
           }
         },
         "caption": {
-          "en": "In this ideal flow model, air changes direction around both sides of the wing. The lines show direction, not packets that must stay together.",
-          "zh": "在这个理想流模型里，空气沿机翼上下两侧改变方向。线表示气流方向，不表示必须结伴的空气包。"
+          "en": "Air bends around both sides of the wing. These streamlines follow its direction in the ideal model.",
+          "zh": "空气沿机翼上下两侧转向。\n理想模型中的流线顺着气流方向。"
         }
       },
       {
@@ -381,8 +381,8 @@
           }
         },
         "caption": {
-          "en": "The marked air follows local speeds. Air passing above and below has no requirement to meet again at the trailing edge.",
-          "zh": "标出的空气按各处的速度前进。经过上下两侧的空气，不需要在后缘重新碰头。"
+          "en": "Marked dots follow the local air speed. Air passing above and below the wing does not have to meet at the back edge.",
+          "zh": "标记点按各处气流速度前进。\n上下两路空气不必在后缘同时会合。"
         }
       },
       {
@@ -453,8 +453,8 @@
           }
         },
         "caption": {
-          "en": "This pressure view uses the same ideal flow. Pressure differences and the turning of air describe one aerodynamic force.",
-          "zh": "气压图使用同一个理想流。气压差与气流转向，是对同一个空气动力的两种描述。"
+          "en": "Switch to pressure to see the same airflow another way. Surface pressure differences and turning air describe one aerodynamic force.",
+          "zh": "切到气压图，从另一个角度看同一股气流。\n气压差和空气转向描述同一个力。"
         }
       },
       {
@@ -525,8 +525,8 @@
           }
         },
         "caption": {
-          "en": "In this simulation, doubling speed gives four times the lift while density, area and lift coefficient stay fixed.",
-          "zh": "在这个模拟里，密度、面积和升力系数不变时，速度加倍，升力变成四倍。"
+          "en": "In this simulation, doubling speed gives four times the lift. Density, area and lift coefficient stay fixed.",
+          "zh": "在这个模拟里，保持密度、面积和升力系数不变，速度加倍，升力变成四倍。"
         }
       }
     ]
@@ -536,33 +536,33 @@
 
 <Lang en>
 
-Start inside a wing. Under its skin, <Term id="wing-structure">spars and ribs</Term> make a frame. The spars run along the span and carry the bending loads; the ribs run from front to back and keep the wing’s cross-section in shape. Two spars, the skin and the ribs together form a closed box. Real wings vary; this cutaway is one chosen example with three ribs. <FlyTo preset="wing-structure-view">Open the wing box</FlyTo>
+Open the wing box. Beneath the skin, <Term id="wing-structure">spars and ribs</Term> form a frame. Spars run along the span and carry bending loads. Ribs run from front to back and hold the wing’s cross-sectional shape. Two spars, the skin and the ribs form a closed box. This example has three ribs; other wings have different structures. <FlyTo preset="wing-structure-view">Open the wing box</FlyTo>
 
-<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "A generic wing cutaway showing spars, ribs and skin.", zh: "通用机翼剖面，可见翼梁、翼肋与蒙皮。" }} caption={{ en: "Inside a generic wing: two spars along the span, ribs across it and the skin around them. An illustration made for this topic; not to scale, and not the shape of the wing experiment.", zh: "通用机翼的内部：两根翼梁沿翼展延伸，翼肋横在其间，外面包着蒙皮。为本主题绘制的示意图，不按比例，也不是机翼实验的形状。" }} />
+<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "Two spars and crosswise ribs beneath a wing’s outer skin.", zh: "机翼蒙皮下面的两根翼梁和横向翼肋。" }} caption={{ en: "Spars, ribs and skin form a wing box. This drawing is not to scale; its curved section differs from the symmetric experiment.", zh: "翼梁、翼肋和蒙皮组成翼盒。图不按比例；弯曲剖面与对称实验翼型不同。" }} />
 
-The experiment beside the aircraft is a symmetric section, the same shape above and below. The lines around it are <Term id="streamline">streamlines</Term>: in this ideal flow model they follow the direction of the air at every point. The air curves around both the upper and the lower surface. Both sides turn the flow, so a wing is not simply being hit by air from below. <FlyTo preset="section-view">Look at the airflow</FlyTo>
+The wing experiment has a symmetric section: the top and bottom have the same shape. <Term id="streamline">Streamlines</Term> follow the direction of the air around it. Watch how air bends around both surfaces. Both sides turn the flow and contribute to lift. <FlyTo preset="section-view">Look at the airflow</FlyTo>
 
-A common story says that air going over the longer top must hurry to meet the air from underneath at the back edge. That is wrong. In the model, marked air released at the same moment upstream does not arrive together, and nothing waits at the back edge for its partner.
+Air passing over a wing does not have to meet the air passing underneath at the back edge. Release marked dots together and watch: the upper dots arrive first. The familiar story that air must hurry over the longer top to meet air from below is wrong.
 
-Switch the card to the pressure view and the same flow is shown as <Term id="pressure">pressure</Term> along the surface. The pressure differences over the surface and the turning of the air are two descriptions of one aerodynamic force, not two forces to be added together.
+Switch to the <Term id="pressure">pressure</Term> view. It shows how hard the air pushes on different parts of the same surface. Pressure differences and the turning of the air describe the same aerodynamic force. They do not supply two separate amounts of lift.
 
-Speed matters a great deal. In this simulation the section is set at <Num s="S58">4°</Num> in air at sea level. At <Num s="S58">20 m/s</Num> it gives about <Num s="S58">231 N</Num> of lift; at <Num s="S58">40 m/s</Num>, twice as fast, it gives about <Num s="S58">924 N</Num>, four times as much.
+Speed has a large effect. In this simulation, the section is tilted at <Num s="S58">4°</Num> in sea-level air. At <Num s="S58">20 m/s</Num>, lift is about <Num s="S58">231 N</Num>. Double the speed to <Num s="S58">40 m/s</Num> and lift reaches about <Num s="S58">924 N</Num>: four times as much.
 
 <More title={{ en: "The lift equation", zh: "升力方程" }}>
 
-Lift can be written as <Num s="S4">L = ½ ρ V² S Cl</Num>. Here ρ is how much mass of air is packed into each cubic metre, V is the speed relative to the air, S is a reference area and Cl is the lift coefficient, which gathers the effects of the shape, its tilt and the flow conditions. If ρ, S and Cl stay the same, doubling V makes V² four times as big, so lift is <Num s="S4">four times</Num> as big. The experiment uses a reference area of <Num s="S58">2 m²</Num>; the slice you see on the stage is only a short piece of it.
+Lift is <Num s="S4">L = ½ ρ V² S Cl</Num>. Air density, ρ, is the mass of air in each cubic metre. V is speed relative to the air. S is a reference area. Cl, the lift coefficient, includes the effects of shape, tilt and flow conditions. Hold ρ, S and Cl fixed: doubling V makes V², and therefore lift, <Num s="S4">four times</Num> as large. The experiment uses a reference area of <Num s="S58">2 m²</Num>. The visible slice is only a short piece of it.
 
 </More>
 
-<More title={{ en: "What the ideal model leaves out", zh: "理想模型省略了什么" }}>
+<More title={{ en: "Real air and ideal flow", zh: "真实空气与理想流" }}>
 
-Real air is slightly sticky, and near a real surface it forms a thin slow layer that this model does not have. The model also treats the section as part of a wing with no ends. Adding up the model’s pressure all round the surface gives back exactly its lift and almost no force along the stream. That only shows that the model is consistent with itself; it does not mean that a real wing has no drag.
+Real air has some stickiness. A thin layer near the wing surface moves more slowly. The ideal model leaves this layer out and treats the wing as having no ends. Adding its surface pressures gives the calculated lift, with almost no force along the airflow. A real wing also has drag, which this ideal calculation cannot show.
 
 </More>
 
-<More title={{ en: "Air does not need to meet again", zh: "空气不必重新会合" }}>
+<More title={{ en: "Follow the marked air", zh: "跟着标记点看气流" }}>
 
-Watch the ringed dots in beat 3. They leave the upstream edge of the picture at the same moment, one on each line. The ones passing above the section move faster and reach the back first; the ones below arrive later, and no dot is held back or moved to make them meet. The dots are slowed down <Num s="S58">80 times</Num> in the picture so that you can follow them.
+In beat 3, ringed dots leave the upstream edge together, one on each line. Dots passing above the section travel faster and reach the back first. Dots below arrive later. Each follows the local air speed. The dots move <Num s="S58">80 times</Num> more slowly on screen so you can follow them.
 
 </More>
 
@@ -570,33 +570,33 @@ Watch the ringed dots in beat 3. They leave the upstream edge of the picture at 
 
 <Lang zh>
 
-先看机翼的里面。蒙皮下面，<Term id="wing-structure">翼梁与翼肋</Term>搭成骨架：翼梁沿翼展延伸，承担弯曲载荷；翼肋从前到后排列，保持机翼的剖面形状。两根翼梁、蒙皮和翼肋合在一起，形成一个封闭的盒子。真实机翼的结构各不相同，这个剖面画的是选定的一种，带三道翼肋。<FlyTo preset="wing-structure-view">打开翼盒</FlyTo>
+打开翼盒，蒙皮下面就是<Term id="wing-structure">翼梁与翼肋</Term>搭成的骨架。翼梁沿翼展延伸，承受使机翼弯曲的力。翼肋从前缘伸向后缘，保持机翼的剖面形状。两根翼梁、蒙皮和翼肋围成一个封闭的盒子。这个例子有三道翼肋，其他机翼的结构会有所不同。<FlyTo preset="wing-structure-view">打开翼盒</FlyTo>
 
-<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "A generic wing cutaway showing spars, ribs and skin.", zh: "通用机翼剖面，可见翼梁、翼肋与蒙皮。" }} caption={{ en: "Inside a generic wing: two spars along the span, ribs across it and the skin around them. An illustration made for this topic; not to scale, and not the shape of the wing experiment.", zh: "通用机翼的内部：两根翼梁沿翼展延伸，翼肋横在其间，外面包着蒙皮。为本主题绘制的示意图，不按比例，也不是机翼实验的形状。" }} />
+<Figure src="figures/how-planes-fly-wing-cutaway" alt={{ en: "Two spars and crosswise ribs beneath a wing’s outer skin.", zh: "机翼蒙皮下面的两根翼梁和横向翼肋。" }} caption={{ en: "Spars, ribs and skin form a wing box. This drawing is not to scale; its curved section differs from the symmetric experiment.", zh: "翼梁、翼肋和蒙皮组成翼盒。图不按比例；弯曲剖面与对称实验翼型不同。" }} />
 
-飞机旁边的实验件是一个对称翼型，上下形状相同。它周围的线叫<Term id="streamline">流线</Term>：在这个理想流模型里，流线处处顺着空气流动的方向。空气同时绕着上表面和下表面弯曲。上下两面都在让气流转向，所以不能简单地说机翼只是被下面的空气撞着。<FlyTo preset="section-view">看看气流</FlyTo>
+旁边的实验件采用对称翼型，上下形状相同。周围的<Term id="streamline">流线</Term>顺着各处空气流动的方向。仔细看，空气绕着上下两个表面弯曲。两面都让气流转向，都影响升力。空气并非只撞在下表面，两侧的流动都要一起考虑。<FlyTo preset="section-view">看看气流</FlyTo>
 
-有一种常见的说法：上表面路程更长，上面的空气必须赶快走，才能在后缘和下面的空气碰头。这个说法是错的。在模型里，同一时刻从上游放出的标记空气并不同时到达后面，后缘也没有谁在等谁。
+从上面和下面经过的空气，不必在机翼后缘同时会合。让标记点一起出发，上方的点先到后面。有种常见说法认为，上方路程较长，所以空气必须赶快走，才能和下方空气碰头。这种解释是错的。
 
-把卡片切到气压视图，同一个气流就变成沿表面分布的<Term id="pressure">气压</Term>。表面上的气压差和空气的转向，是对同一个空气动力的两种描述，不是两个可以相加的力。
+切到<Term id="pressure">气压</Term>视图，看看空气在翼面各处推得多大力。表面气压差和空气转向，描述的是同一个空气动力，不能把它们算成两份升力。
 
-速度的影响很大。在这个模拟里，翼段倾斜 <Num s="S58">4°</Num>，放在海平面的空气中。速度 <Num s="S58">20 m/s</Num> 时升力约 <Num s="S58">231 N</Num>；速度加倍到 <Num s="S58">40 m/s</Num>，升力约 <Num s="S58">924 N</Num>，变成四倍。
+速度的影响很大。在这个模拟里，翼段在海平面空气中倾斜 <Num s="S58">4°</Num>。速度 <Num s="S58">20 m/s</Num> 时，升力约 <Num s="S58">231 N</Num>。速度加倍到 <Num s="S58">40 m/s</Num>，升力约 <Num s="S58">924 N</Num>，变成原来的四倍。
 
 <More title={{ en: "The lift equation", zh: "升力方程" }}>
 
-升力可以写成 <Num s="S4">L = ½ ρ V² S Cl</Num>。ρ 表示每立方米里有多少质量的空气，V 是相对空气的速度，S 是参考面积，Cl 是升力系数，包含形状、倾斜程度和流动条件的影响。ρ、S、Cl 都不变时，速度加倍，V² 变成四倍，升力也就变成 <Num s="S4">四倍</Num>。实验用的参考面积是 <Num s="S58">2 m²</Num>；舞台上看到的只是其中短短一段。
+升力是 <Num s="S4">L = ½ ρ V² S Cl</Num>。ρ 是空气密度，表示每立方米空气的质量。V 是相对空气的速度，S 是参考面积。Cl 叫升力系数，包含形状、倾斜程度和流动条件的影响。保持 ρ、S、Cl 不变，V 加倍，V² 和升力都变成 <Num s="S4">四倍</Num>。实验采用的参考面积是 <Num s="S58">2 m²</Num>，眼前的翼段只是其中一小段。
 
 </More>
 
-<More title={{ en: "What the ideal model leaves out", zh: "理想模型省略了什么" }}>
+<More title={{ en: "Real air and ideal flow", zh: "真实空气与理想流" }}>
 
-真实的空气有一点黏性，在真实表面附近会形成一层很薄、流得较慢的空气，这个模型里没有。模型还把翼段当作一块没有两端的机翼的一部分。把模型表面一圈的气压加起来，正好还原它的升力，沿来流方向的力几乎为零。这只说明模型自己前后一致，并不表示真实机翼没有阻力。
+真实空气有一些黏性，贴近机翼表面的一薄层空气流得较慢。理想模型省略了这一层，还把机翼看成没有两端。把模型中各处表面的气压作用合起来，就得到计算出的升力，沿来流方向的力几乎为零。真实机翼还有阻力，这个理想计算显示不出来。
 
 </More>
 
-<More title={{ en: "Air does not need to meet again", zh: "空气不必重新会合" }}>
+<More title={{ en: "Follow the marked air", zh: "跟着标记点看气流" }}>
 
-看第 3 拍里带圈的点。它们在同一时刻从画面上游出发，每条线上一个。从上方经过的点走得快，先到后面；下方的点后到，没有哪个点被拦住或挪动来凑齐。画面里这些点放慢了 <Num s="S58">80 倍</Num>，好让你看清。
+第 3 拍中，带圈的点从画面上游一起出发，每条线上一个。上方的点流得快，先到后面；下方的点后到。每个点都按当地气流的速度前进。画面把点的移动放慢 <Num s="S58">80 倍</Num>，方便跟着看。
 
 </More>
 

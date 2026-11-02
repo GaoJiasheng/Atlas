@@ -7,8 +7,8 @@
         "zh": "蒸汽机"
       },
       "definition": {
-        "en": "A machine that uses steam to perform mechanical work.",
-        "zh": "利用蒸汽做机械功的机器。"
+        "en": "A machine that uses steam to move parts and do mechanical work.",
+        "zh": "利用蒸汽带动零件运动、做机械功的机器。"
       },
       "see": [
         "cylinder"
@@ -21,8 +21,8 @@
         "zh": "汽缸"
       },
       "definition": {
-        "en": "The chamber in which a piston moves.",
-        "zh": "活塞在其中运动的腔体。"
+        "en": "The chamber that holds steam while a piston moves inside it.",
+        "zh": "容纳蒸汽、让活塞在里面运动的腔体。"
       },
       "see": [
         "piston"
@@ -35,8 +35,8 @@
         "zh": "活塞"
       },
       "definition": {
-        "en": "A close-fitting moving part acted on by pressure on its faces.",
-        "zh": "在缸内运动、两面受到压力作用的零件。"
+        "en": "A close-fitting part that moves inside a cylinder when pressure pushes on its faces.",
+        "zh": "贴近汽缸内壁、能在缸内运动的零件。压力会推它的两面。"
       },
       "see": [
         "pressure-difference"
@@ -49,8 +49,8 @@
         "zh": "压强差"
       },
       "definition": {
-        "en": "The difference between pressures on two sides.",
-        "zh": "两侧压强的差别。"
+        "en": "The difference in pressure between two sides of an object or space.",
+        "zh": "物体或空间两侧压强的差别。"
       },
       "see": [
         "piston"
@@ -63,8 +63,8 @@
         "zh": "凝结"
       },
       "definition": {
-        "en": "The change from vapour to liquid.",
-        "zh": "物质从气态变成液态的变化。"
+        "en": "The change from a gas, such as water vapour, into a liquid.",
+        "zh": "水蒸气等气体变成液体的过程。"
       },
       "see": [
         "separate-condenser"
@@ -77,8 +77,8 @@
         "zh": "分离冷凝器"
       },
       "definition": {
-        "en": "A vessel separate from the working cylinder where exhaust steam condenses.",
-        "zh": "独立于工作汽缸、让排出蒸汽凝结的容器。"
+        "en": "A vessel outside the working cylinder where used steam cools and turns into water.",
+        "zh": "独立于工作汽缸的容器，让排出的蒸汽冷却并凝结成水。"
       },
       "see": [
         "air-pump"
@@ -91,8 +91,8 @@
         "zh": "抽气泵"
       },
       "definition": {
-        "en": "A pump that removes air and water from this condensing system.",
-        "zh": "在这套冷凝系统中把空气和水移走的泵。"
+        "en": "A pump that removes air and mixed water from the condensing system.",
+        "zh": "从冷凝系统中抽走空气和混合水的泵。"
       },
       "see": [
         "separate-condenser"
@@ -105,8 +105,8 @@
         "zh": "双作用"
       },
       "definition": {
-        "en": "Working strokes occur in both directions of piston travel.",
-        "zh": "活塞两个方向的行程都能做功。"
+        "en": "Describes an engine whose piston does work while moving in either direction.",
+        "zh": "指活塞朝两个方向运动时都能做功。"
       },
       "see": [
         "piston"
@@ -119,8 +119,8 @@
         "zh": "平行运动机构"
       },
       "definition": {
-        "en": "Watt’s linked-bar arrangement giving an approximately straight piston-rod path.",
-        "zh": "瓦特用连杆组合得到近似直线活塞杆路径的机构。"
+        "en": "Watt’s arrangement of linked bars that guides the piston rod along a nearly straight path.",
+        "zh": "瓦特设计的连杆组合，引导活塞杆沿近似直线运动。"
       },
       "see": [
         "pivot"
@@ -133,8 +133,8 @@
         "zh": "支点或枢轴"
       },
       "definition": {
-        "en": "A joint about which a member turns; it may be fixed or moving.",
-        "zh": "杆件绕它转动的连接点；可以固定，也可以随机构移动。"
+        "en": "A joint around which a bar or other part turns. The joint can stay fixed or move with the mechanism.",
+        "zh": "杆或其他零件绕着转动的连接点。它可以固定，也可以随机构移动。"
       },
       "see": [
         "parallel-motion"
@@ -147,8 +147,8 @@
         "zh": "太阳与行星齿轮机构"
       },
       "definition": {
-        "en": "A rod-carried planet gear travels around a sun gear on the output shaft.",
-        "zh": "传动杆带着行星轮，绕输出轴上的太阳轮运动。"
+        "en": "A gear system in which a rod carries a planet gear around a sun gear fixed to the output shaft.",
+        "zh": "传动杆带着行星轮，绕固定在输出轴上的太阳轮运动的齿轮机构。"
       },
       "see": [
         "flywheel"
@@ -161,8 +161,8 @@
         "zh": "飞轮"
       },
       "definition": {
-        "en": "A wheel that stores and returns rotational kinetic energy.",
-        "zh": "储存并交还转动动能的轮。"
+        "en": "A wheel that stores energy as it spins and releases that energy to help keep motion steady.",
+        "zh": "转动时储存能量，再释放能量、让运动较平稳的轮。"
       },
       "see": [
         "work"
@@ -175,8 +175,8 @@
         "zh": "离心调速器"
       },
       "definition": {
-        "en": "A speed-sensitive mechanism that adjusts steam admission through a linkage.",
-        "zh": "随转速变化、通过连杆调整进汽的机构。"
+        "en": "A mechanism that responds to changes in speed and uses links to adjust the steam supply.",
+        "zh": "随转速变化，通过连杆调节供汽量的机构。"
       },
       "see": [
         "throttle",
@@ -190,8 +190,8 @@
         "zh": "节流阀"
       },
       "definition": {
-        "en": "A valve that restricts the steam supply passage.",
-        "zh": "限制供汽通道开度的阀。"
+        "en": "A valve that changes the size of the opening through which steam flows.",
+        "zh": "改变蒸汽通道开口大小的阀。"
       },
       "see": [
         "centrifugal-governor"
@@ -204,8 +204,8 @@
         "zh": "反馈"
       },
       "definition": {
-        "en": "A path by which an output affects the input that drives it.",
-        "zh": "输出反过来影响驱动它的输入的路径。"
+        "en": "When a machine’s output changes the input that drives it, such as speed changing the steam supply.",
+        "zh": "机器的输出反过来改变输入，例如转速变化带动供汽量改变。"
       },
       "see": [
         "throttle"
@@ -218,8 +218,8 @@
         "zh": "机械功"
       },
       "definition": {
-        "en": "Energy transferred by the component of a force along a displacement.",
-        "zh": "力沿位移方向的分量所传递的能量。"
+        "en": "Energy transferred when a force moves an object. Only the force acting along the movement counts.",
+        "zh": "力使物体移动时传递的能量。只计算沿移动方向作用的力。"
       },
       "see": [
         "flywheel"

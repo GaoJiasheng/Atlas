@@ -148,8 +148,8 @@
           }
         },
         "caption": {
-          "en": "This generic airliner has wings, engines and a tail. The wings provide most of its lift; the engines supply thrust.",
-          "zh": "这架通用客机有机翼、发动机和尾翼。大部分升力来自机翼，发动机提供推力。"
+          "en": "This airliner has wings, engines and a tail. The wings provide most of its lift; the engines push it forwards.",
+          "zh": "客机有机翼、发动机和尾翼。\n机翼提供大部分升力，发动机提供推力。"
         }
       },
       {
@@ -220,8 +220,8 @@
           }
         },
         "caption": {
-          "en": "This separate wing section is an experiment. It uses a simple mathematical shape, not the wing of a named aircraft.",
-          "zh": "旁边这块翼型是实验教具。它用一个简单的数学形状，不是哪一型号飞机的机翼。"
+          "en": "The separate wing section is an experiment. Its simple mathematical shape lets us explore airflow.",
+          "zh": "旁边的翼段用来做实验。\n它采用简单的数学形状，让我们观察气流。"
         }
       },
       {
@@ -286,8 +286,8 @@
           }
         },
         "caption": {
-          "en": "The cutaway shows a fan, a core and the machinery joining them. Some air passes around the core.",
-          "zh": "剖面能看见风扇、核心和连接它们的机构。有一部分空气绕过核心流动。"
+          "en": "The cutaway reveals the fan, core and connecting machinery. Some air flows around the core.",
+          "zh": "剖面露出风扇、核心和连接它们的机械。\n有些空气绕过核心。"
         }
       },
       {
@@ -358,8 +358,8 @@
           }
         },
         "caption": {
-          "en": "Dashed lines mark an illustrative stall region. They explain a limit of this teaching model; they are not a wind-tunnel measurement.",
-          "zh": "虚线标出失速示意区。它说明教学模型的范围，不是风洞测量。"
+          "en": "Dashed lines show air breaking away from the wing. This part is a teaching diagram; the ideal calculation cannot show separation.",
+          "zh": "虚线示意空气离开翼面。\n理想计算无法算出分离气流。"
         }
       }
     ]
@@ -369,31 +369,31 @@
 
 <Lang en>
 
-This topic uses three teaching models, each drawn at its own scale. The first is a generic airliner with two engines under its wings and a conventional tail. It is not any particular make or type. Its wings give most of its <Term id="lift">lift</Term>, the force from the air that holds it up in level flight, and its engines supply the <Term id="thrust">thrust</Term> that pushes it forwards. <FlyTo preset="aircraft-overview">Start with the whole aircraft</FlyTo>
+Look at the airliner. It has two engines under its wings and a tail at the back. The wings provide most of its <Term id="lift">lift</Term>, the force from the air that holds it up in level flight. The engines provide <Term id="thrust">thrust</Term>, which pushes it forwards. This is a general example of an airliner, with no particular maker or model. <FlyTo preset="aircraft-overview">Start with the whole aircraft</FlyTo>
 
-The second model is a short slice of wing, set up as an experiment beside the aircraft. Its cross-section, the <Term id="airfoil">airfoil</Term>, is a simple mathematical shape chosen for this topic, not the wing of a real aircraft. A computer model works out how air flows around it, and the readings it gives are marked SIM: they belong to the model, not to measurements. <FlyTo preset="section-view">Look at the experiment</FlyTo>
+Beside the aircraft is a short slice of wing. Its cross-section is called an <Term id="airfoil">airfoil</Term>. Here, it has a simple mathematical shape. Air flows past it while it stays in place. Change the speed or tilt the wing to see how its lift changes. The readings marked SIM are calculated by the computer. <FlyTo preset="section-view">Look at the experiment</FlyTo>
 
-The third model is an engine cut open along its length. You can see the fan at the front, the core behind it and the machinery that joins them. Some of the air goes around the core instead of through it. <FlyTo preset="engine-section-view">Open the engine</FlyTo>
+The third model is an engine cut open along its length. A large fan sits at the front, with a core behind it. Shafts connect the machinery inside. Some air passes through the core, and some flows around it. Follow the two routes to see how the engine produces thrust. <FlyTo preset="engine-section-view">Open the engine</FlyTo>
 
-Two kinds of statement appear in this topic. Facts about aircraft, engines and airports come from published sources and carry a small source number. Values from the models, such as the angles, speeds and forces of the experiment, are design choices or simulation results and are labelled that way. Solid lines show what the model calculates. Dashed lines mark a region beyond the model’s limits; chapter 03 explains it.
+Each model has its own scale. The whole aircraft shows where the wings, engines and tail sit. The wing experiment shows airflow close up. The engine cutaway shows parts hidden inside its casing. Solid lines show calculated airflow; dashed lines show a simple picture of air breaking away from the wing. Chapter 03 explains this change.
 
-Pushes, pulls and the pull of gravity are introduced in <TopicLink slug="forces">Forces</TopicLink>. This topic uses the same ideas for an aircraft in the air.
+Explore pushes, pulls and gravity in <TopicLink slug="forces">Forces</TopicLink>. The same ideas explain how an aircraft moves through the air.
 
 <More title={{ en: "Three scales", zh: "三种尺度" }}>
 
-The airliner is designed as <Num s="S58">40 m</Num> long with a span of <Num s="S58">36 m</Num> and a height of <Num s="S58">12 m</Num>, and it is drawn ten times smaller. The wing experiment is drawn at full size: its section measures <Num s="S58">1 m</Num> from front edge to back edge. The engine cutaway and the wing structure in chapter 02 are separate models drawn to show how the parts fit together; they do not share a scale with the airliner.
+The airliner represents an aircraft about <Num s="S58">40 m</Num> long, with a span of <Num s="S58">36 m</Num> and a height of <Num s="S58">12 m</Num>. It is drawn ten times smaller. The wing experiment is drawn at full size, with <Num s="S58">1 m</Num> from front edge to back edge. The engine cutaway and the wing structure in chapter 02 use separate scales to show how their parts fit together.
 
 </More>
 
-<More title={{ en: "What the models leave out", zh: "模型省略了什么" }}>
+<More title={{ en: "A simplified view of air", zh: "把气流简化来看" }}>
 
-The wing experiment uses ideal two-dimensional flow: air without any stickiness, flowing past a section that has no ends. That is enough to show how a wing turns the air, but it cannot predict what happens when the air breaks away from the surface. So when the section is tilted by more than <Num s="S58">12°</Num>, the model switches to a simple teaching rule and draws dashed lines. The fans and shafts turn at <Num s="S58">30 rpm</Num> and <Num s="S58">45 rpm</Num> on screen, slowed down so that you can follow them; these are not real engine speeds.
+The experiment treats air as having no stickiness and the wing as having no ends. This is called ideal two-dimensional flow. It shows how a wing turns the air, but cannot calculate air breaking away from its surface. Beyond <Num s="S58">12°</Num> of tilt, a simple rule supplies the dashed part of the curve. The fans and shafts turn at <Num s="S58">30 rpm</Num> and <Num s="S58">45 rpm</Num> on screen, slowed down so you can follow them.
 
 </More>
 
-<More title={{ en: "Where the numbers come from", zh: "数字从哪里来" }}>
+<More title={{ en: "Read the airflow picture", zh: "怎样看气流图" }}>
 
-The source list for this topic names each page and what was read on it. The model’s design values, its equations and its results are collected in one entry of that list, the Atlas design study, so that every number on the experiment’s card can be traced back to its inputs.
+The wing experiment offers two views of the same flow. Streamlines follow the air’s direction. The pressure view shows how the air pushes on the wing’s surface. Switch between them while keeping the inputs fixed.
 
 </More>
 
@@ -401,31 +401,31 @@ The source list for this topic names each page and what was read on it. The mode
 
 <Lang zh>
 
-本主题用三个教学模型，各有各的尺度。第一个是一架通用客机：两台发动机装在机翼下面，尾翼是常规布局，不代表任何厂家或型号。大部分<Term id="lift">升力</Term>来自它的机翼；水平飞行时，正是空气给的这个力把飞机托住。发动机提供<Term id="thrust">推力</Term>，推着飞机向前。<FlyTo preset="aircraft-overview">先看整架飞机</FlyTo>
+先看这架客机。两台发动机装在机翼下方，尾翼位于机身后部。机翼提供大部分<Term id="lift">升力</Term>。水平飞行时，空气给机翼的这个力托住飞机。发动机提供<Term id="thrust">推力</Term>，推动飞机向前。这是客机的一种常见外形，不代表某个厂家或型号。<FlyTo preset="aircraft-overview">先看整架飞机</FlyTo>
 
-第二个模型是放在飞机旁边的一小段机翼，作为实验教具。它的剖面形状叫<Term id="airfoil">翼型</Term>，是为本主题选的一个简单数学形状，不是哪一架真飞机的机翼。计算机模型算出空气怎样绕着它流动，卡片上的读数都标着“模拟”：它们属于模型，不是测量结果。<FlyTo preset="section-view">看看这个实验</FlyTo>
+客机旁边放着一小段机翼。机翼剖面的形状叫<Term id="airfoil">翼型</Term>，这里选用的是一种简单的数学形状。翼段固定不动，空气从它旁边流过。改变速度，或把翼段转动一些，就能观察升力怎样变化。标着“模拟”的读数由计算机算出。<FlyTo preset="section-view">看看这个实验</FlyTo>
 
-第三个模型是一台沿长度方向剖开的发动机。可以看到前面的风扇、后面的核心，以及把两者连起来的机构。有一部分空气不穿过核心，而是从核心外面绕过去。<FlyTo preset="engine-section-view">打开发动机</FlyTo>
+第三个模型是一台沿长度方向剖开的发动机。前面是大风扇，后面是核心，里面的轴连接着不同的机械部件。有些空气穿过核心，有些从核心外面绕过。沿着这两条路线看，就能了解发动机怎样产生推力。<FlyTo preset="engine-section-view">打开发动机</FlyTo>
 
-本主题里有两类说法。关于飞机、发动机和机场的事实来自公开资料，旁边标着来源编号。模型给出的数值，比如实验里的角度、速度和力，是设计选择或模拟结果，也都标明了。实线画的是模型算出来的东西；虚线标出模型管不到的范围，第 03 章会解释。
+几个模型各有各的比例。整架客机让你看清机翼、发动机和尾翼的位置。机翼实验让你近看气流，发动机剖面则展示外壳里面的零件。实线表示计算出的气流，虚线示意空气离开翼面的情形。第 03 章会说明这个变化。
 
-推、拉和重力这些概念，在<TopicLink slug="forces">“力”</TopicLink>里已经讲过。本主题把同样的道理用到天上的飞机。
+<TopicLink slug="forces">“力”</TopicLink>介绍了推、拉和重力。同样的道理也能解释飞机怎样在空气中运动。
 
 <More title={{ en: "Three scales", zh: "三种尺度" }}>
 
-这架客机按长 <Num s="S58">40 m</Num>、翼展 <Num s="S58">36 m</Num>、高 <Num s="S58">12 m</Num> 设计，画的时候缩小了十倍。机翼实验按原大画：剖面从前缘到后缘长 <Num s="S58">1 m</Num>。发动机剖面和第 02 章的机翼结构是另外两个模型，只用来说明零件怎样装在一起，和客机不共用比例尺。
+这架客机代表一架约长 <Num s="S58">40 m</Num>、翼展 <Num s="S58">36 m</Num>、高 <Num s="S58">12 m</Num> 的飞机，画面缩小了十倍。机翼实验按原大画，从前缘到后缘长 <Num s="S58">1 m</Num>。发动机剖面和第 02 章的机翼结构另按各自的比例展示，方便看清零件怎样装在一起。
 
 </More>
 
-<More title={{ en: "What the models leave out", zh: "模型省略了什么" }}>
+<More title={{ en: "A simplified view of air", zh: "把气流简化来看" }}>
 
-机翼实验用的是理想二维流：空气完全没有黏性，翼段也没有两端。这足以说明机翼怎样让空气转向，却无法预测空气从表面分离以后的情形。所以翼段倾斜超过 <Num s="S58">12°</Num> 时，模型改用一条简单的教学规则，并画成虚线。画面里风扇和轴的转速是 <Num s="S58">30 rpm</Num> 和 <Num s="S58">45 rpm</Num>，是为了看得清而放慢的，不是真实发动机的转速。
+实验把空气看成完全没有黏性，把机翼看成没有两端。这叫理想二维流。它能说明机翼怎样让空气转向，却算不出空气离开翼面后的情形。翼段倾斜超过 <Num s="S58">12°</Num> 时，曲线的虚线部分改用简单规则算出。画面中风扇和轴的转速是 <Num s="S58">30 rpm</Num> 和 <Num s="S58">45 rpm</Num>，已放慢，方便观察。
 
 </More>
 
-<More title={{ en: "Where the numbers come from", zh: "数字从哪里来" }}>
+<More title={{ en: "Read the airflow picture", zh: "怎样看气流图" }}>
 
-本主题的来源清单写明每一页资料读了哪些内容。模型的设计值、方程和结果都集中写在清单里的一条来源，即 Atlas 设计研究，实验卡片上的每个数都能追到它的输入。
+机翼实验可以从两个角度看同一股气流。流线顺着空气的方向，气压视图显示空气怎样推机翼表面。保持输入值不变，切换两种视图来比较。
 
 </More>
 
