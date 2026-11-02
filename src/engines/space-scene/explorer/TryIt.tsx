@@ -27,7 +27,7 @@ import type { SpaceUiStore } from '../ui';
 import { numberOf, type SimOutputValue } from '../lib/sim';
 import { evaluateSimOnStage } from '../lib/sim/carrier';
 import { resolveSimValues, stepValue } from '../lib/sim/controls';
-import { outcomeOf, predictionIsCurrent, recordRow, tableContextKey } from '../lib/sim/trial';
+import { displayOnlyControls, outcomeOf, predictionIsCurrent, recordRow, tableContextKey } from '../lib/sim/trial';
 import { outputText, outputWords, valueText, valueWords } from '../lib/sim/text';
 import { cardTimelines } from '../lib/sim/replay';
 import { isTimeline } from '../lib/sim/timeline';
@@ -208,7 +208,7 @@ function Table({ file, sim, card, ui, chapter }: { file: PartsFile; sim: SimData
     if(sim.airfoil) values[sim.airfoil.plot.y] = view.outputs[sim.airfoil.plot.y]!;
     if (judge) values[judge.output] = view.outputs[judge.output]!;
     const tables = ui.getState().simTables;
-    const context = tableContextKey(chapter, view.values, card.vary);
+    const context = tableContextKey(chapter, view.values, card.vary, displayOnlyControls(sim));
     const previous = ui.getState().simTableContexts[chapter] === context ? tables[chapter] ?? [] : [];
     ui.setState({ simTables: { ...tables, [chapter]: recordRow(previous, { vary: view.values[card.vary]!, values, controls: { ...view.values } }) },
       simTableContexts: { ...ui.getState().simTableContexts, [chapter]: context },

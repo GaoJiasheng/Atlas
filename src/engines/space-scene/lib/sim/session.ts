@@ -15,10 +15,11 @@ export function trialContextPatch(
   values: SimValues,
   vary: string | undefined,
   resetPrediction = false,
+  ignore: readonly string[] = [],
 ): Partial<TrialState> {
   const patch: Partial<TrialState> = {};
   if (vary !== undefined) {
-    const key = tableContextKey(chapter, values, vary);
+    const key = tableContextKey(chapter, values, vary, ignore);
     const previous = state.simTableContexts[chapter];
     if (previous !== undefined && previous !== key) {
       patch.simTables = { ...state.simTables, [chapter]: [] };

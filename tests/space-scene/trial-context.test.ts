@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { predictionContextKey, predictionHidden, predictionIsCurrent, recordRow, tableContextKey } from '../../src/engines/space-scene/lib/sim/trial';
+import { displayOnlyControls, predictionContextKey, predictionHidden, predictionIsCurrent, recordRow, tableContextKey } from '../../src/engines/space-scene/lib/sim/trial';
 import { trialContextPatch } from '../../src/engines/space-scene/lib/sim/session';
 import { createSpaceUi } from '../../src/engines/space-scene/ui';
 
@@ -34,6 +34,21 @@ describe('temporary fair-test conditions', () => {
     expect(rows[0]!.values.temperature).toBe(32.1);
     for (let n = 0; n < 20; n++) rows = recordRow(rows, { vary: n, values: {} });
     expect(rows).toHaveLength(12);
+  });
+});
+
+describe('display-only controls', () => {
+  it('switching the airfoil flow view keeps recorded rows; a held condition still clears them', () => {
+    const ignore = displayOnlyControls({ airfoil: {} });
+    expect(ignore).toEqual(['flow-view']);
+    expect(displayOnlyControls({})).toEqual([]);
+    const base = { 'angle-deg': 4, 'airspeed-mps': 40, 'flow-view': 'pressure' };
+    const key = tableContextKey('lift', base, 'angle-deg', ignore);
+    expect(tableContextKey('lift', { ...base, 'flow-view': 'streamlines' }, 'angle-deg', ignore)).toBe(key);
+    const ui = createSpaceUi();
+    ui.setState({ simTables: { lift: [] }, simTableContexts: { lift: key } });
+    expect(trialContextPatch(ui.getState(), 'lift', { ...base, 'flow-view': 'streamlines' }, 'angle-deg', false, ignore).simTables).toBeUndefined();
+    expect(trialContextPatch(ui.getState(), 'lift', { ...base, 'airspeed-mps': 20 }, 'angle-deg', false, ignore).simTables).toEqual({ lift: [] });
   });
 });
 
