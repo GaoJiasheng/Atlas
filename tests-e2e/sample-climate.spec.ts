@@ -268,19 +268,23 @@ test.describe('sample-climate monthly TimeScene', () => {
     expect(external).toEqual([]);
     await context.setOffline(false);
   });
-  test('one failed resource leaves reading and other layers usable; explicit retry refetches', async ({ page }) => {
-    let requests = 0;
-    await page.route('**/geo/sample-climate-wind-850-1991-2020.json', (route) => {
-      requests++;
-      return requests === 1 ? route.abort('failed') : route.continue();
+  test.describe('failed resource (no service worker)', () => {
+    // page.route cannot see responses the service worker serves from its cache: block it here.
+    test.use({ serviceWorkers: 'block' });
+    test('one failed resource leaves reading and other layers usable; explicit retry refetches', async ({ page }) => {
+      let requests = 0;
+      await page.route('**/geo/sample-climate-wind-850-1991-2020.json', (route) => {
+        requests++;
+        return requests === 1 ? route.abort('failed') : route.continue();
+      });
+      await open(page, 'ch=northeast-monsoon');
+      expect((await sample(page, [105, 0])).wind.status).toBe('error');
+      expect((await sample(page, [105, 0])).rain.status).toBe('valid');
+      await setMonth(page, 7);
+      expect(requests).toBe(1);
+      await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).retryClimateLayer('clim-wind'));
+      await expect.poll(async () => (await sample(page, [105, 0])).wind.status).toBe('valid');
+      expect(requests).toBe(2);
     });
-    await open(page, 'ch=northeast-monsoon');
-    expect((await sample(page, [105, 0])).wind.status).toBe('error');
-    expect((await sample(page, [105, 0])).rain.status).toBe('valid');
-    await setMonth(page, 7);
-    expect(requests).toBe(1);
-    await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).retryClimateLayer('clim-wind'));
-    await expect.poll(async () => (await sample(page, [105, 0])).wind.status).toBe('valid');
-    expect(requests).toBe(2);
   });
 });

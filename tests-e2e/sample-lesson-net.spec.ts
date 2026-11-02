@@ -161,12 +161,19 @@ test.describe('nets engine fixture', () => {
     await task(page, 'cubes-and-hexominoes', 1);
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'cinema');
     await expect(page.locator('.ms-tray-dock [data-hud-panel="task"]')).toBeVisible();
+    // The net tools, opened by open(), are finger-sized; a phone then shows them behind their title again
+    // (its default fold), which leaves the drawing the stage.
+    for (const b of await page.locator('.ms-net-tools button:visible').all()) {
+      const box = (await b.boundingBox())!;
+      expect(Math.min(box.width, box.height)).toBeGreaterThanOrEqual(43.5);
+    }
+    await page.evaluate(() => window.__atlas!.setLegends(false));
     await page.waitForTimeout(400);
     for (const c of await page.locator('.ms-net__cand .ms-net__hit').all()) {
       const box = (await c.boundingBox())!;
       expect(Math.min(box.width, box.height)).toBeGreaterThanOrEqual(43.5);
     }
-    for (const b of await page.locator('.ms-net-tools button, [data-hud-panel="task"] button:visible').all()) {
+    for (const b of await page.locator('.ms-net-tools button:visible, [data-hud-panel="task"] button:visible').all()) {
       const box = (await b.boundingBox())!;
       expect(Math.min(box.width, box.height)).toBeGreaterThanOrEqual(43.5);
     }

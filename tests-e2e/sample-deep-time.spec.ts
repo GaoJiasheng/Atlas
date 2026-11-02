@@ -84,20 +84,24 @@ test('independent occurrence windows, layer visibility and inset restoration', a
   expect((await geology(page)).inset).toMatchObject({ fossilsVisible: 0, fossilsTotal: 4, referencePointsTotal: 2, referenceCardsTotal: 4 });
 });
 
-test('missing younger sample stays blank and late older work cannot overwrite it', async ({ page }) => {
-  await page.route('**/geo/sample-de-land-65.json', (route) => route.fulfill({ status: 404, body: 'TEST missing sample' }));
-  let release!: () => void;
-  const held = new Promise<void>((resolve) => { release = resolve; });
-  await page.route('**/geo/sample-de-land-70.json', async (route) => {
-    await held;
-    await route.continue().catch(() => {}); // A correctly aborted request may already be gone.
+test.describe('missing sample (no service worker)', () => {
+  // page.route cannot see responses the service worker serves from its cache: block it here.
+  test.use({ serviceWorkers: 'block' });
+  test('missing younger sample stays blank and late older work cannot overwrite it', async ({ page }) => {
+    await page.route('**/geo/sample-de-land-65.json', (route) => route.fulfill({ status: 404, body: 'TEST missing sample' }));
+    let release!: () => void;
+    const held = new Promise<void>((resolve) => { release = resolve; });
+    await page.route('**/geo/sample-de-land-70.json', async (route) => {
+      await held;
+      await route.continue().catch(() => {}); // A correctly aborted request may already be gone.
+    });
+    await open(page, 'ch=fossil-windows&t=100ma');
+    await beat(page, 'impact-samples', 1);
+    await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('loading');
+    expect((await geology(page)).reconstruction.frameMa).toBeNull();
+    await beat(page, 'impact-samples', 2);
+    await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('unavailable');
+    release();
+    expect((await geology(page)).reconstruction).toMatchObject({ selectedMa: 65, frameId: null, frameMa: null, deltaMa: null, status: 'unavailable' });
   });
-  await open(page, 'ch=fossil-windows&t=100ma');
-  await beat(page, 'impact-samples', 1);
-  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('loading');
-  expect((await geology(page)).reconstruction.frameMa).toBeNull();
-  await beat(page, 'impact-samples', 2);
-  await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('unavailable');
-  release();
-  expect((await geology(page)).reconstruction).toMatchObject({ selectedMa: 65, frameId: null, frameMa: null, deltaMa: null, status: 'unavailable' });
 });

@@ -21,6 +21,9 @@ async function open(page: Page, query: string, locale = 'en') {
 }
 async function fixedFront(page: Page) {
   await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).apply({ camera: { position: [0, 0, 6.5], target: [0, 0, 0], fov: 34 } }));
+  // The applied camera (with its HUD-framing offset) is drawn on a later frame: a slow frame must not let the
+  // stillness check below read the anchors of the camera before it.
+  await page.evaluate(() => new Promise<void>((r) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => r())))));
 }
 /** Anchors once they are shown, on screen and no longer moving (the camera and poses ease in). */
 async function anchors(page: Page, ids: string[]) {

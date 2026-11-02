@@ -3305,7 +3305,12 @@
      the header is never auto-folded; Z still folds it to its tab. */
   .atlas-left-controls { display: none; }
   .atlas-card__tab { display: flex; top: 10px; }
-  .atlas-scene[data-card="collapsed"] .atlas-hud__right { margin-right: 44px; }
+  /* With the tools / layers folded to their one-row button (TimeScene, MathScene), the folded card's tab hangs
+     under it at the right edge instead of beside it, so the title + chip-row header keeps its width (a narrower
+     header wraps and costs the stage its height). Opened, the panel is tall, and SpaceScene's folded LAYERS /
+     TOOLS / KEY stack is three rows: there the tab stays at the top edge beside it. */
+  .atlas-scene:not([data-engine="space-scene"])[data-legends="collapsed"] .atlas-card__tab { top: 76px; }
+  .atlas-scene:not([data-engine="space-scene"])[data-legends="collapsed"][data-card="collapsed"] .atlas-hud__right { margin-right: 0; }
   .atlas-left-tab { max-height: 180px; }
 }
 
