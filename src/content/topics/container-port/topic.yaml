@@ -12,4 +12,4 @@ sensitivity: open
 status: published
 illustration: container-port
 shortTitle: { en: "Container Port", zh: "集装箱港口" }
-note: { en: "Generic port study · schematic layout · simulated times and capacities · not a terminal plan", zh: "通用港口研究 · 布局示意 · 时间和处理能力为模拟 · 非码头平面图" }
+note: { en: "Simplified port model · layout is schematic · times and handling rates are simulated", zh: "简化港口模型 · 布局示意 · 时间和处理速度为模拟值" }
