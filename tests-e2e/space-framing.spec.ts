@@ -17,7 +17,8 @@ const distance = (c: Cam | null) => (c ? Math.hypot(...c.position.map((v, i) => 
 async function open(page: Page, width: number, height: number, query = '') {
   await page.setViewportSize({ width, height });
   await page.goto(`/en/topics/aircon/${query}`);
-  await page.waitForFunction(() => window.__atlas?.ready === true, null, { timeout: 30_000 });
+  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
   await expect.poll(() => framing(page), { timeout: 20_000 }).not.toBeNull();
 }
 
@@ -63,8 +64,7 @@ test('1180 × 820: the view sits in a free rectangle between the HUD blocks and 
   await page.locator('.atlas-reader__handle').click();
   // The stage widens: more room, so the view grows (the camera comes closer) and stays inside the new free area.
   await expect.poll(async () => (await framing(page))!.scale, { timeout: 20_000 }).toBeGreaterThan(f.scale * 1.2);
-  await settled(page);
-  expect(distance(await camera(page))).toBeLessThan(before * 0.9);
+  await expect.poll(async () => distance(await camera(page)), { timeout: 20_000 }).toBeLessThan(before * 0.9);
 });
 
 test('a camera the reader moved is left alone when the HUD changes, until the next chapter', async ({ page }) => {
@@ -80,9 +80,11 @@ test('a camera the reader moved is left alone when the HUD changes, until the ne
   await page.locator('.atlas-reader__handle').click();
   await page.waitForTimeout(1500);
   await settled(page);
-  expect(distance(await camera(page))).toBeCloseTo(moved, 3);
+  // No re-fit: the distance stays where the drag left it (a re-fit for the wider stage would bring it ~half as close).
+  expect(Math.abs(distance(await camera(page)) / moved - 1)).toBeLessThan(0.01);
   // The next chapter is an authored view again: framed for the wider stage.
+  const chapter = await page.evaluate(() => window.__atlas!.state().chapter);
   await page.keyboard.press('ArrowRight');
-  await settled(page);
-  expect(distance(await camera(page))).toBeLessThan(moved * 0.9);
+  await expect.poll(() => page.evaluate(() => window.__atlas!.state().chapter)).not.toBe(chapter);
+  await expect.poll(async () => distance(await camera(page)), { timeout: 20_000 }).toBeLessThan(moved * 0.9);
 });
