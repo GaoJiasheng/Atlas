@@ -10,7 +10,7 @@ engine: time-scene
 stage: geo
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: warring-states
 basemap:
   region:

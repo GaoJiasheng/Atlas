@@ -1,0 +1,312 @@
+---
+{
+  "id": "02-a-medium-to-travel",
+  "order": 2,
+  "title": {
+    "zh": "传播需要介质",
+    "en": "A medium to travel through"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "transmission",
+      "air-wave"
+    ],
+    "labels": [
+      "source-driver",
+      "receiver"
+    ],
+    "camera": {
+      "position": [
+        0,
+        2.5,
+        5.9
+      ],
+      "target": [
+        -0.1,
+        0.95,
+        0.8
+      ],
+      "fov": 33
+    },
+    "summary": {
+      "en": "Compare media while holding source and distance fixed.",
+      "zh": "固定声源和距离，比较不同介质。"
+    },
+    "index": {
+      "parts": [
+        "source-driver",
+        "air-cell",
+        "water-cell",
+        "solid-bar",
+        "receiver"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "medium",
+        "also": [
+          "sound-active"
+        ],
+        "keep": [
+          "distance-m",
+          "frequency-hz",
+          "amplitude"
+        ],
+        "observe": [
+          "propagation-state",
+          "speed-mps",
+          "one-way-ms"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "Can the chosen solid provide a transmission path?",
+            "zh": "选定固体能提供传播路径吗？"
+          },
+          "start": {
+            "medium": "air"
+          },
+          "change": {
+            "medium": "solid-example"
+          },
+          "observe": "propagation-state",
+          "options": [
+            {
+              "id": "transmitted",
+              "label": {
+                "en": "A path remains",
+                "zh": "仍有传播路径"
+              },
+              "means": "transmitted"
+            },
+            {
+              "id": "no-medium",
+              "label": {
+                "en": "No medium path",
+                "zh": "没有介质路径"
+              },
+              "means": "no-medium"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": false,
+        "labels": [
+          "source-driver",
+          "receiver"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Predict whether the same disturbance can pass through air, water or a solid.",
+          "zh": "先预测：同样的扰动能否经过空气、水和固体传到接收处。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "water-cell",
+          "receiver"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "water",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The water station has a transmission path. Its time reading uses a stated teaching speed.",
+          "zh": "水槽工位有传播路径。时间读数使用已注明的课堂声速约值。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "solid-bar",
+          "receiver"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "solid-example",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The solid bar also provides a path. This example has one chosen material speed, not a rule for all solids.",
+          "zh": "固体横杆也能提供传播路径。本例采用一个设计声速，不能代表所有固体。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "source-driver",
+          "receiver"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "vacuum",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "In this ideal vacuum gap the source stays active, but there is no medium to carry its sound wave.",
+          "zh": "在这个理想真空间隙里，声源仍启用，但没有介质传播声波。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The driver and receiver stay in place while the material between them changes. First select air, then water, then the chosen solid. Each provides matter through which a mechanical sound disturbance can travel. A solid does not have to flow like water to transmit sound: local movement can be passed through a connected material. [S3]
+
+The last choice is an ideal <Term id="vacuum">vacuum</Term>, a region with no matter. The model keeps the source active but removes the medium across the gap. There is then no sound-wave path to the receiver. “No transmission” is the result of missing matter, not an exceptionally long travel time or an instantaneous arrival. [S1, S3]
+
+Use the card to compare the media while keeping the distance fixed. The travel-time reading comes from the stated distance divided by the selected teaching speed. The model uses a different speed for each material example. These choices illustrate that sound speed depends on the medium and its conditions; they do not establish a universal ranking of every gas, liquid and solid. [S1, S5, S16]
+
+Only the air setting shows the row of oscillating markers. The water surface and solid bar identify alternative paths; their plain appearance does not mean there is no transmission. The same air-particle diagram would not explain every kind of sound motion in those materials. [S1, S3]
+
+For a separate observation, leave air selected and use the source switch: its speed remains a material value, but there is no travel event. Record the medium alongside its result, including the vacuum case. That preserves the distinction between a numerical travel time and no propagation. Compare the materials themselves in <TopicLink slug="states-of-matter" ch="air-is-matter">States of Matter</TopicLink> and <TopicLink slug="materials" ch="before-you-start">Materials Around Us</TopicLink>.
+
+<More title={{"en": "A stated speed table", "zh": "注明条件的速度表"}}>
+
+For the model distance of <Num s="S1">34 m</Num>, air at the approximate teaching value <Num s="S16">340 m/s</Num> gives <Num s="S1">100 ms</Num>; water at <Num s="S16">1,500 m/s</Num> gives about <Num s="S1">22.667 ms</Num>. The chosen uniform solid has a DESIGN speed of <Num s="S1">5,000 m/s</Num> and gives <Num s="S1">6.8 ms</Num>. These are calculated one-way times, not measurements.
+
+</More>
+
+<More title={{"en": "An ideal gap", "zh": "理想间隙与实际装置"}}>
+
+An actual evacuated apparatus may retain gas or transmit vibration through its supports. This model removes those alternative paths. Light has different propagation requirements; compare <TopicLink slug="light-and-shadows" ch="before-you-start">Light and Shadows</TopicLink>. Conditions also matter for sound speed; <TopicLink slug="heat" ch="before-you-start">Heat</TopicLink> introduces temperature. [S1, S3, S5]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+驱动面与接收处保持原位，中间的材料依次改变。先选空气，再选水和本例的固体。它们都能为机械声音扰动提供传播路径。固体不必像水一样流动，也能把局部运动传开；不能因为材料看起来不流动，就断定它不能传声。[S3]
+
+最后的选项是理想<Term id="vacuum">真空</Term>，也就是没有物质的区域。模型仍启用声源，却移除了间隙中的介质，因此没有声波到达接收处的路径。“无传播”不是等待特别久，也不是瞬间到达，而是缺少传递扰动的物质。[S1, S3]
+
+在实验卡上保持距离相同，只换介质。时间读数由距离除以注明的教学声速得到。本例为不同材料选用不同声速，用来说明速度与介质及其条件有关；不能把这些选定值推广为所有气体、液体、固体的统一排名，更不能只凭密度判断。[S1, S5, S16]
+
+只有空气选项显示一排往复运动的点。水面和固体横杆只标明另外的传播路径，外观静止不等于没有传播。这里没有把空气点列直接换个颜色，当成水或固体的完整运动模型。[S1, S3]
+
+另作一次观察时，先保持空气不变，再关闭声源：速度仍是材料常数，却没有传播事件。记录时把介质与结果一起保留，也记录真空的“无传播”。这样才能分清有数值的传播时间和没有传播事件。材料本身的性质可接着看<TopicLink slug="states-of-matter" ch="air-is-matter">物质的三态</TopicLink>与<TopicLink slug="materials" ch="before-you-start">身边的材料</TopicLink>。
+
+<More title={{"en": "A stated speed table", "zh": "注明条件的速度表"}}>
+
+本例距离为 <Num s="S1">34 米</Num>。空气采用约 <Num s="S16">340 米每秒</Num> 的教学值，单程为 <Num s="S1">100 毫秒</Num>；水采用 <Num s="S16">1,500 米每秒</Num>，约为 <Num s="S1">22.667 毫秒</Num>。虚拟均匀固体的设计声速为 <Num s="S1">5,000 米每秒</Num>，得到 <Num s="S1">6.8 毫秒</Num>。都是计算值，不是测量值。
+
+</More>
+
+<More title={{"en": "An ideal gap", "zh": "理想间隙与实际装置"}}>
+
+实际抽气装置可能仍有残余气体，支架也可能传递振动；本模型把这些替代路径排除。光的传播条件不同，可比较<TopicLink slug="light-and-shadows" ch="before-you-start">光与影</TopicLink>。声速还与条件有关；温度的含义见<TopicLink slug="heat" ch="before-you-start">热</TopicLink>。[S1, S3, S5]
+
+</More>
+
+</Lang>
+

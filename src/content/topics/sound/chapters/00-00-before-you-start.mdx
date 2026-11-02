@@ -1,0 +1,268 @@
+---
+{
+  "id": "00-before-you-start",
+  "order": 0,
+  "title": {
+    "zh": "从声源到接收处",
+    "en": "From source to receiver"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "sources",
+      "transmission",
+      "air-wave"
+    ],
+    "labels": [
+      "fork",
+      "receiver"
+    ],
+    "camera": {
+      "position": [
+        7,
+        6,
+        12
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 35
+    },
+    "summary": {
+      "en": "Follow a vibrating source through a medium to a receiver.",
+      "zh": "沿着振动声源、介质与接收处，观察声音的路径。"
+    },
+    "index": {
+      "parts": [
+        "fork",
+        "fork-marker",
+        "receiver",
+        "wave-reference"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            7,
+            6,
+            12
+          ],
+          "target": [
+            0,
+            0.8,
+            0
+          ],
+          "fov": 35
+        },
+        "run": false,
+        "labels": [
+          "fork",
+          "receiver"
+        ],
+        "layers": [
+          "sources",
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The bench follows a vibrating source, a medium and a receiver. No sound is played.",
+          "zh": "实验台把声源、介质和接收处连起来。本课不播放声音。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            -2.7,
+            2.9,
+            5.5
+          ],
+          "target": [
+            -2.2,
+            1.15,
+            0.8
+          ],
+          "fov": 34
+        },
+        "run": true,
+        "labels": [
+          "fork",
+          "fork-marker"
+        ],
+        "layers": [
+          "sources",
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The small marker moves beside one fork arm. Its exaggerated motion represents local vibration.",
+          "zh": "叉臂旁的小点来回移动。这是放大的局部振动示意。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference",
+          "receiver"
+        ],
+        "layers": [
+          "sources",
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The air markers move around rest positions as the pattern travels along the strip.",
+          "zh": "空气示意点在静止位置附近往复，疏密图样沿条带传开。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            7,
+            6,
+            12
+          ],
+          "target": [
+            0,
+            0.8,
+            0
+          ],
+          "fov": 35
+        },
+        "run": false,
+        "labels": [
+          "receiver"
+        ],
+        "layers": [
+          "sources",
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The receiver marks the end of this model. Follow the Eyes and Ears link to explore hearing.",
+          "zh": "接收处是本模型的终点。听觉怎样形成，可接着看《眼睛与耳朵》。"
+        }
+      }
+    ]
+  },
+  "kind": "background"
+}
+---
+
+<Lang en>
+
+Start at the fork on the left of the bench. A <Term id="source">sound source</Term> is an object whose motion starts a sound disturbance. Its repeated movement near a rest position is <Term id="vibration">vibration</Term>. The small marker makes that local motion visible; the fork itself stays still as a reference shape. Real movement can be much smaller and faster than this display. [S1, S3]
+
+Next follow the route towards the receiver. A <Term id="medium">medium</Term> is the matter through which sound travels. Air, water and a solid can provide such a path. The travelling disturbance is a <Term id="sound-wave">sound wave</Term>. It carries energy through the medium, while the material does not have to travel all the way from the source to the receiver. [S3, S5]
+
+This topic is silent. Use the moving marks, fixed ticks and written readings to compare sources and paths. Pausing holds a visible instant; the chapter beats let you return to a particular comparison. You can make a prediction on an experiment card, or skip it and continue reading. No listening test is needed. [S1]
+
+Begin with what moves, then compare the medium, the repetition of motion and its extent. Finally follow a reflected disturbance back to its starting place. Each experiment changes a stated factor while holding the others fixed. The diagrams are classroom models, with chosen scales and speeds; their readings are calculated rather than measured. [S1, S2]
+
+The receiver ends this route. Continue inside the receiving system in <TopicLink slug="eyes-and-ears" ch="before-you-start">Eyes and Ears</TopicLink>. The energy connection starts in <TopicLink slug="energy-conversion" ch="before-you-start">Energy Conversion</TopicLink>.
+
+<More title={{"en": "A syllabus connection", "zh": "与课纲的连接"}}>
+
+The Singapore primary science syllabus names sound energy in Primary <Num s="S2">6</Num> Standard Energy Conversion. This topic extends that connection into sound propagation and fair comparisons; it is not a claim that all these equations form a separate examination unit. [S2]
+
+</More>
+
+<More title={{"en": "Two display clocks", "zh": "两种显示时钟"}}>
+
+The continuous air strip is slowed <Num s="S1">250 times</Num>. The separate echo demonstration is slowed <Num s="S1">10 times</Num>. Read the explanation for the current station; these are different visual clocks. Neither diagram produces audio.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+从实验台左侧的音叉看起。发声的物体叫<Term id="source">声源</Term>，它的运动能在周围物质中引起声音扰动。物体在静止位置附近反复运动，就是<Term id="vibration">振动</Term>。叉臂旁的小点把局部运动放大，音叉本体则保持静止，便于认清结构。真实运动可能比画面更小、更快。[S1, S3]
+
+沿着实验台看向接收处。传播声音的物质叫<Term id="medium">介质</Term>，空气、水和固体都能提供传播路径。在介质中传开的扰动叫<Term id="sound-wave">声波</Term>。它能传递能量，并不要求同一团物质从声源一路走到接收端。后面的静止刻度会帮助我们分清这两种运动。[S3, S5]
+
+本课始终静音。只看运动标记、刻度与文字读数，就能比较声源和传播路径。暂停可以保留一个瞬间，章节节拍则能带你回到指定的比较状态。实验卡可以先作预测，也可以跳过预测继续阅读，不需要听音或调高设备音量。[S1]
+
+接下来先认清哪里在动，再分别改变传播介质、运动节律与往复范围，最后观察反射后返回的扰动。每次比较都要留意哪些条件保持不变。这是课堂模型：尺度和速度有明确的设计选择，读数由方程计算，不是现场测量。[S1, S2]
+
+接收处是这里的终点。想接着了解听觉，可看<TopicLink slug="eyes-and-ears" ch="before-you-start">眼睛与耳朵</TopicLink>；能量关系见<TopicLink slug="energy-conversion" ch="before-you-start">能量的转化</TopicLink>。
+
+<More title={{"en": "A syllabus connection", "zh": "与课纲的连接"}}>
+
+新加坡小学科学大纲在标准课程小 <Num s="S2">6</Num> 的能量转化部分列出声能。本课从这里延伸到声音传播与公平比较，不把全部声学方程说成独立的考试单元。[S2]
+
+</More>
+
+<More title={{"en": "Two display clocks", "zh": "两种显示时钟"}}>
+
+空气纵波条带慢放 <Num s="S1">250 倍</Num>，独立的回声演示慢放 <Num s="S1">10 倍</Num>。两者使用不同的显示时钟，要看当前工位的说明。两种图都不播放声音。
+
+</More>
+
+</Lang>
+

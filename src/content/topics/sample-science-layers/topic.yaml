@@ -1,0 +1,15 @@
+# Synthetic engine fixture: docs/49 §4.2–4.3; never presented as scientific evidence.
+id: sample-science-layers
+title: { en: "Science layer fixture", zh: "科学图层夹具" }
+subtitle: { en: "Synthetic reference and dated records", zh: "合成的参考与日期记录" }
+subject: geography
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+datePrecision: day
+basemap: { maxZoom: 8 }
+
+datedLayers: [{"id":"sample-reference","kind":"point","temporal":{"mode":"reference","note":{"en":"Synthetic fixed positions; no event date.","zh":"合成固定位置；没有事件日期。"},"release":"fixture-v1"},"recent":false,"catalogue":{"file":"sample-reference-catalogue"},"color":"token:neutral","label":{"en":"Reference positions","zh":"参考位置"},"count":true,"file":"sample-reference"},{"id":"sample-quakes","kind":"point","recent":false,"catalogue":{"file":"sample-quakes-catalogue"},"encoding":{"radius":{"property":"mag","min":6,"max":9.5,"px":[2,8]}},"color":"token:cold","label":{"en":"Synthetic dated sample","zh":"合成日期样本"},"count":true,"file":"sample-quakes"},{"id":"sample-observations","kind":"point","recent":false,"catalogue":{"file":"sample-observations-catalogue"},"color":"token:loop","label":{"en":"Associated observations, shown together; not arrivals","zh":"关联观测整体显示，并非到达过程"},"count":true,"file":"sample-observations"},{"id":"sample-legacy","kind":"point","color":"token:hot","label":{"en":"Legacy dated window","zh":"旧日期窗口"},"count":true,"file":"sample-legacy"}]

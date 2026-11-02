@@ -1,0 +1,3163 @@
+{
+  "parts": [
+    {
+      "id": "laboratory-bench",
+      "name": {
+        "en": "Laboratory Bench",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          6.4,
+          0.12,
+          3.6
+        ],
+        "bevel": 0.035,
+        "at": [
+          0,
+          0.59,
+          0
+        ],
+        "color": "wood"
+      },
+      "context": true,
+      "clip": false,
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.11,
+            0.5,
+            0.11
+          ],
+          "bevel": 0.012,
+          "at": [
+            -2.8,
+            0.28,
+            -1.4
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.11,
+            0.5,
+            0.11
+          ],
+          "bevel": 0.012,
+          "at": [
+            -2.8,
+            0.28,
+            1.4
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.11,
+            0.5,
+            0.11
+          ],
+          "bevel": 0.012,
+          "at": [
+            2.8,
+            0.28,
+            -1.4
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.11,
+            0.5,
+            0.11
+          ],
+          "bevel": 0.012,
+          "at": [
+            2.8,
+            0.28,
+            1.4
+          ],
+          "color": "powder"
+        }
+      ],
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "fork",
+      "name": {
+        "en": "Tuning fork",
+        "zh": "音叉"
+      },
+      "group": "sources",
+      "summary": {
+        "en": "Two arms share a U-shaped root and handle.",
+        "zh": "两臂共用一个U形叉底和柄。"
+      },
+      "detail": {
+        "en": "A single U joins the two equal arms to one handle. Its small marker illustrates local vibration while the metal reference stays still. This is a silent DESIGN specimen, not a measured tuning fork. [S1, S5]",
+        "zh": "两条等长叉臂通过一个U形底部与单柄连在一起。小点示意局部振动，金属本体保留静止外形。它是静音设计模型，非实测音叉。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.2,
+            0.62
+          ],
+          [
+            -0.2,
+            -0.12
+          ],
+          [
+            -0.193185,
+            -0.171764
+          ],
+          [
+            -0.173205,
+            -0.22
+          ],
+          [
+            -0.141421,
+            -0.261421
+          ],
+          [
+            -0.1,
+            -0.293205
+          ],
+          [
+            -0.051764,
+            -0.313185
+          ],
+          [
+            -0.0,
+            -0.32
+          ],
+          [
+            0.051764,
+            -0.313185
+          ],
+          [
+            0.1,
+            -0.293205
+          ],
+          [
+            0.141421,
+            -0.261421
+          ],
+          [
+            0.173205,
+            -0.22
+          ],
+          [
+            0.193185,
+            -0.171764
+          ],
+          [
+            0.2,
+            -0.12
+          ],
+          [
+            0.2,
+            0.62
+          ],
+          [
+            0.12,
+            0.62
+          ],
+          [
+            0.12,
+            -0.12
+          ],
+          [
+            0.115911,
+            -0.151058
+          ],
+          [
+            0.103923,
+            -0.18
+          ],
+          [
+            0.084853,
+            -0.204853
+          ],
+          [
+            0.06,
+            -0.223923
+          ],
+          [
+            0.031058,
+            -0.235911
+          ],
+          [
+            0.0,
+            -0.24
+          ],
+          [
+            -0.031058,
+            -0.235911
+          ],
+          [
+            -0.06,
+            -0.223923
+          ],
+          [
+            -0.084853,
+            -0.204853
+          ],
+          [
+            -0.103923,
+            -0.18
+          ],
+          [
+            -0.115911,
+            -0.151058
+          ],
+          [
+            -0.12,
+            -0.12
+          ],
+          [
+            -0.12,
+            0.62
+          ]
+        ],
+        "depth": 0.075,
+        "bevel": 0.008,
+        "at": [
+          -2.65,
+          1.35,
+          0.8
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.045,
+            0.045,
+            0.35
+          ],
+          "at": [
+            -2.65,
+            0.89,
+            0.8
+          ],
+          "color": "stainless"
+        }
+      ],
+      "connects": [
+        "fork-marker"
+      ]
+    },
+    {
+      "id": "fork-marker",
+      "name": {
+        "en": "Fork motion marker",
+        "zh": "音叉运动示意点"
+      },
+      "group": "sources",
+      "summary": {
+        "en": "A small point traces enlarged local motion.",
+        "zh": "小点示意放大的局部运动。"
+      },
+      "detail": {
+        "en": "This point sits beside one fork arm. Two fixed angular marker motions illustrate relative amplitude; they share the slowed wave phase. The 0.035/0.07 u values describe the wave strip only, not these marker arcs. [S1]",
+        "zh": "小点放在一条叉臂旁。两种固定角摆示意相对振幅，与慢放纵波共用相位。0.035/0.07u仅描述波条位移，不是这些圆弧标记的测量值。[S1]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.027
+        ],
+        "at": [
+          -2.45,
+          1.8,
+          0.86
+        ],
+        "color": "token:en-sound"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "fork"
+      ]
+    },
+    {
+      "id": "fork-socket",
+      "name": {
+        "en": "Fork Socket",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.12,
+          0.12,
+          0.07
+        ],
+        "at": [
+          -2.65,
+          0.685,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "context": true,
+      "clip": false,
+      "group": "sources",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "drum-shell",
+      "name": {
+        "en": "Open drum frame",
+        "zh": "开底鼓框"
+      },
+      "group": "sources",
+      "summary": {
+        "en": "A hollow frame supports one stretched membrane.",
+        "zh": "空心鼓框支撑一层绷紧的膜。"
+      },
+      "detail": {
+        "en": "A thin annular shell has an open bottom and a cut-open front that exposes its cavity. It supports one membrane, with no lower membrane. The structure is a DESIGN reference, not a solved resonator. [S1, S5]",
+        "zh": "薄环形鼓框开底，前部切口露出空腔；它只支撑上面一层膜，没有下鼓面。结构是设计参考，不是求解过的共鸣器。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.34,
+            -0.2
+          ],
+          [
+            0.34,
+            0.2
+          ],
+          [
+            0.31,
+            0.2
+          ],
+          [
+            0.31,
+            -0.2
+          ],
+          [
+            0.34,
+            -0.2
+          ]
+        ],
+        "segments": 48,
+        "arc": 280,
+        "at": [
+          -1.95,
+          0.85,
+          1.04
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "drumhead"
+      ]
+    },
+    {
+      "id": "drumhead",
+      "name": {
+        "en": "Single drumhead",
+        "zh": "单层鼓面"
+      },
+      "group": "sources",
+      "summary": {
+        "en": "One membrane spans the top of the drum frame.",
+        "zh": "一层薄膜覆盖鼓框顶端。"
+      },
+      "detail": {
+        "en": "One thin circular membrane rests on the upper rim. A separate point indicates motion near its centre. The membrane stays as a structural reference: no membrane mode or exact pitch is calculated. [S1, S5]",
+        "zh": "一层薄圆膜靠在鼓框上沿。独立小点示意中央附近的运动。膜本体保留结构参考，不计算真实振型或精确音调。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.337,
+          0.337,
+          0.018
+        ],
+        "at": [
+          -1.95,
+          1.059,
+          1.04
+        ],
+        "color": "membrane"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "torus",
+          "size": [
+            0.338,
+            0.012
+          ],
+          "rotation": [
+            90,
+            0,
+            0
+          ],
+          "at": [
+            -1.95,
+            1.06,
+            1.04
+          ],
+          "color": "steel"
+        }
+      ],
+      "connects": [
+        "drum-shell",
+        "drum-marker"
+      ]
+    },
+    {
+      "id": "drum-marker",
+      "name": {
+        "en": "Membrane motion marker",
+        "zh": "鼓面运动示意点"
+      },
+      "group": "sources",
+      "summary": {
+        "en": "A separate point marks local membrane motion.",
+        "zh": "独立小点示意鼓面的局部运动。"
+      },
+      "detail": {
+        "en": "The point at the membrane centre follows a short illustrative arc. It does not translate the whole drumhead or claim to reproduce a membrane vibration mode. Its amplitude is schematic. [S1]",
+        "zh": "鼓面中央小点沿短弧示意运动，不把整张膜平移，也不声称重现真实鼓面振型。它的运动幅度是示意值。[S1]"
+      },
+      "primitive": {
+        "kind": "sphere",
+        "size": [
+          0.026
+        ],
+        "at": [
+          -1.95,
+          1.1,
+          1.04
+        ],
+        "color": "token:en-sound"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "drumhead"
+      ]
+    },
+    {
+      "id": "source-driver",
+      "name": {
+        "en": "Vibrating driver",
+        "zh": "振动驱动面"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "The same driver acts on each medium specimen.",
+        "zh": "同一驱动面作用于每种介质。"
+      },
+      "detail": {
+        "en": "A small diaphragm faces the medium at x = −1.15 u. Its local angular wobble is an enlarged vibration symbol. The driver remains enabled in vacuum, while the transmission outputs say there is no medium. This is not a measured diaphragm mode. [S1, S3, S5]",
+        "zh": "小驱动膜面向x=−1.15u处的介质。局部角摆是放大的振动符号；真空时驱动仍可启用，而传播读数显示无介质。这不是实测的膜振型。[S1, S3, S5]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.095,
+          0.095,
+          0.05
+        ],
+        "at": [
+          -1.175,
+          0.95,
+          0.8
+        ],
+        "color": "enamel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "air-cell",
+        "water-cell",
+        "solid-bar",
+        "receiver"
+      ]
+    },
+    {
+      "id": "driver-support",
+      "name": {
+        "en": "Driver Support",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.14,
+          0.26,
+          0.22
+        ],
+        "bevel": 0.012,
+        "at": [
+          -1.28,
+          0.78,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "context": true,
+      "clip": false,
+      "group": "transmission",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "air-cell",
+      "name": {
+        "en": "Air specimen",
+        "zh": "空气示意槽"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "Air is matter through which sound can travel.",
+        "zh": "空气是可传播声音的物质。"
+      },
+      "detail": {
+        "en": "The open schematic channel marks the air-filled gap between source and receiver. The 41 dots represent local equilibrium positions in air. They oscillate locally: no parcel of air travels to the receiver. [S1, S3, S5]",
+        "zh": "敞开的示意槽标出声源和接收处之间的空气区。41个点代表空气中的局部平衡位置；它们在附近往复，不代表一团空气旅行到接收处。[S1, S3, S5]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          2.1,
+          0.04,
+          0.46
+        ],
+        "bevel": 0.008,
+        "at": [
+          -0.1,
+          0.75,
+          0.8
+        ],
+        "color": "glass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.1,
+            0.22,
+            0.025
+          ],
+          "bevel": 0.006,
+          "at": [
+            -0.1,
+            0.88,
+            0.58
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.1,
+            0.22,
+            0.025
+          ],
+          "bevel": 0.006,
+          "at": [
+            -0.1,
+            0.88,
+            1.02
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.08,
+            0.36
+          ],
+          "bevel": 0.005,
+          "at": [
+            -1.05,
+            0.69,
+            0.8
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.08,
+            0.36
+          ],
+          "bevel": 0.005,
+          "at": [
+            0.85,
+            0.69,
+            0.8
+          ],
+          "color": "glass"
+        }
+      ],
+      "connects": [
+        "source-driver",
+        "receiver",
+        "wave-reference"
+      ]
+    },
+    {
+      "id": "water-cell",
+      "name": {
+        "en": "Water specimen",
+        "zh": "水示意槽"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "Water can transmit sound through matter.",
+        "zh": "水能通过物质传播声音。"
+      },
+      "detail": {
+        "en": "A matching channel contains a static thin water layer touching the same end faces. The model uses 1500 m/s as a teaching comparison. No water-particle wave or surface-water motion is simulated. [S1, S3, S16]",
+        "zh": "相同的槽内有一层静止水，接触同样的两端面。模型以1500m/s作教学比较，不模拟水粒子纵波或水面运动。[S1, S3, S16]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          2.1,
+          0.04,
+          0.46
+        ],
+        "bevel": 0.008,
+        "at": [
+          -0.1,
+          0.75,
+          0.8
+        ],
+        "color": "glass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.1,
+            0.22,
+            0.025
+          ],
+          "bevel": 0.006,
+          "at": [
+            -0.1,
+            0.88,
+            0.58
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.1,
+            0.22,
+            0.025
+          ],
+          "bevel": 0.006,
+          "at": [
+            -0.1,
+            0.88,
+            1.02
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.1,
+            0.12,
+            0.4
+          ],
+          "bevel": 0.005,
+          "at": [
+            -0.1,
+            0.875,
+            0.8
+          ],
+          "color": "token:water"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.08,
+            0.36
+          ],
+          "bevel": 0.005,
+          "at": [
+            -1.05,
+            0.69,
+            0.8
+          ],
+          "color": "glass"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.08,
+            0.36
+          ],
+          "bevel": 0.005,
+          "at": [
+            0.85,
+            0.69,
+            0.8
+          ],
+          "color": "glass"
+        }
+      ],
+      "connects": [
+        "source-driver",
+        "receiver"
+      ]
+    },
+    {
+      "id": "solid-bar",
+      "name": {
+        "en": "Chosen uniform solid",
+        "zh": "选定均匀固体"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "A continuous solid connects driver and receiver.",
+        "zh": "连续固体连接驱动面与接收面。"
+      },
+      "detail": {
+        "en": "This bar joins the driver contact at −1.15 u to the receiver contact at 0.95 u. Its DESIGN speed is 5000 m/s for one chosen uniform solid. This is not the speed of every solid or a rule based on density alone. [S1, S3]",
+        "zh": "固体杆从−1.15u的驱动接触面连续连接到0.95u的接收接触面。5000m/s是选定均匀固体的设计声速，不代表所有固体，也不是只按密度排序的规律。[S1, S3]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          2.1,
+          0.14,
+          0.14
+        ],
+        "bevel": 0.008,
+        "at": [
+          -0.1,
+          0.95,
+          0.8
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "source-driver",
+        "receiver"
+      ],
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.08,
+            0.23,
+            0.22
+          ],
+          "bevel": 0.005,
+          "at": [
+            -1.07,
+            0.765,
+            0.8
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.08,
+            0.23,
+            0.22
+          ],
+          "bevel": 0.005,
+          "at": [
+            0.87,
+            0.765,
+            0.8
+          ],
+          "color": "powder"
+        }
+      ]
+    },
+    {
+      "id": "receiver",
+      "name": {
+        "en": "Generic receiver",
+        "zh": "通用接收面"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "This surface marks where transmission is checked.",
+        "zh": "这个表面标示观察传播的位置。"
+      },
+      "detail": {
+        "en": "The disc marks a generic receiving surface, not an ear. Three tilted poses are qualitative symbols for transmitted, source off and no medium; they are not timed sensor detections. The readout gives the model state explicitly. [S1, S3]",
+        "zh": "圆盘代表通用接收面，不画成耳朵。三种倾斜姿态定性标示可传播、声源关闭和无介质，不代表精确计时的传感器检测；读数明确给出模型状态。[S1, S3]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.12,
+          0.12,
+          0.05
+        ],
+        "at": [
+          0.975,
+          0.95,
+          0.8
+        ],
+        "color": "powder",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.025,
+            0.035,
+            0.09
+          ],
+          "bevel": 0.004,
+          "at": [
+            0.975,
+            0.95,
+            0.95
+          ],
+          "color": "token:en-sound"
+        }
+      ],
+      "connects": [
+        "air-cell",
+        "water-cell",
+        "solid-bar"
+      ]
+    },
+    {
+      "id": "receiver-support",
+      "name": {
+        "en": "Receiver Support",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.1,
+          0.24,
+          0.2
+        ],
+        "bevel": 0.012,
+        "at": [
+          1.015,
+          0.77,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "context": true,
+      "clip": false,
+      "group": "transmission",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "wave-reference",
+      "name": {
+        "en": "Local rest reference",
+        "zh": "局部静止位置参考"
+      },
+      "group": "transmission",
+      "summary": {
+        "en": "A fixed tick locates the fifth highlighted point.",
+        "zh": "固定刻度标出第5号高亮点的静止位置。"
+      },
+      "detail": {
+        "en": "This fixed tick sits at x = −0.85 u: particle index 5 rests a quarter unit from the strip origin. The moving highlighted particle stays near this tick rather than travelling across the strip. Scene units are schematic. [S1, S3]",
+        "zh": "固定刻度在x=−0.85u；第5号点的静止位置距波条原点0.25u。高亮点只在刻度附近往复，不横穿整条波条。场景单位仅作示意。[S1, S3]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.012,
+          0.036,
+          0.05
+        ],
+        "bevel": 0.003,
+        "at": [
+          -0.85,
+          0.887,
+          0.8
+        ],
+        "color": "token:en-sound"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "air-cell"
+      ]
+    },
+    {
+      "id": "pulse-emitter",
+      "name": {
+        "en": "Pulse emitter",
+        "zh": "脉冲发射处"
+      },
+      "group": "reflection",
+      "summary": {
+        "en": "The outward pulse starts at this marked position.",
+        "zh": "向外脉冲从这个标记位置开始。"
+      },
+      "detail": {
+        "en": "This small disc marks the common physical position of the source and receiver. The pulse sphere is an envelope-position symbol, not a medium particle. Visual separation in z prevents overlapping faces and changes no calculated distance. [S1, S17]",
+        "zh": "小圆盘标示声源与接收处共用的物理位置。脉冲球是包络位置符号，不是介质粒子；z方向的微小错开仅避免表面重叠，不改变计算距离。[S1, S17]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.038,
+          0.038,
+          0.016
+        ],
+        "at": [
+          0.7,
+          1,
+          0.8
+        ],
+        "color": "brass",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "echo-receiver",
+        "reflector-mid"
+      ]
+    },
+    {
+      "id": "echo-receiver",
+      "name": {
+        "en": "Echo receiver",
+        "zh": "回声接收处"
+      },
+      "group": "reflection",
+      "summary": {
+        "en": "The returning pulse reaches the source position.",
+        "zh": "返回脉冲到达声源所在的位置。"
+      },
+      "detail": {
+        "en": "The receiver shares the emitter position in the calculation. Its disc is drawn slightly aside in z. A return covers the distance to the reflector twice; the model does not calculate absorption or room reverberation. [S1, S17]",
+        "zh": "计算中接收处与发射处共址；图中圆盘仅在z方向略微错开。返回过程要走两次到反射面的距离；模型不计算吸收或房间混响。[S1, S17]"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.032,
+          0.032,
+          0.014
+        ],
+        "at": [
+          0.7,
+          1,
+          0.86
+        ],
+        "color": "steel",
+        "rotation": [
+          0,
+          0,
+          90
+        ]
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "pulse-emitter"
+      ]
+    },
+    {
+      "id": "echo-source-stand",
+      "name": {
+        "en": "Echo Source Stand",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.055,
+          0.34,
+          0.08
+        ],
+        "bevel": 0.012,
+        "at": [
+          0.7,
+          0.82,
+          0.83
+        ],
+        "color": "powder"
+      },
+      "context": true,
+      "clip": false,
+      "group": "reflection",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "reflector-near",
+      "name": {
+        "en": "17 m reflector",
+        "zh": "17米反射面"
+      },
+      "group": "reflection",
+      "summary": {
+        "en": "A preset wall represents 17 m one-way distance.",
+        "zh": "预设墙代表17米单程距离。"
+      },
+      "detail": {
+        "en": "This flat reflector represents a source-to-wall distance of 17 m. Its scene position is a schematic preset, not a uniform map scale. Only one wall is visible at once. The pulse uses the same distance control as the return-time calculation. [S1, S17]",
+        "zh": "平面反射墙代表声源到墙17米。场景位置是示意预设，不是统一比例尺；每次只显示一面墙。脉冲与返回时间计算使用同一个距离控制。[S1, S17]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.035,
+          0.7,
+          0.55
+        ],
+        "bevel": 0.008,
+        "at": [
+          1.7,
+          1,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.22,
+            0.05,
+            0.64
+          ],
+          "bevel": 0.008,
+          "at": [
+            1.7,
+            0.675,
+            0.8
+          ],
+          "color": "steel"
+        }
+      ],
+      "connects": [
+        "pulse-emitter",
+        "echo-receiver"
+      ]
+    },
+    {
+      "id": "reflector-mid",
+      "name": {
+        "en": "34 m reflector",
+        "zh": "34米反射面"
+      },
+      "group": "reflection",
+      "summary": {
+        "en": "A preset wall represents 34 m one-way distance.",
+        "zh": "预设墙代表34米单程距离。"
+      },
+      "detail": {
+        "en": "This flat reflector represents a source-to-wall distance of 34 m. Its scene position is a schematic preset, not a uniform map scale. Only one wall is visible at once. The pulse uses the same distance control as the return-time calculation. [S1, S17]",
+        "zh": "平面反射墙代表声源到墙34米。场景位置是示意预设，不是统一比例尺；每次只显示一面墙。脉冲与返回时间计算使用同一个距离控制。[S1, S17]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.035,
+          0.7,
+          0.55
+        ],
+        "bevel": 0.008,
+        "at": [
+          2.1,
+          1,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.22,
+            0.05,
+            0.64
+          ],
+          "bevel": 0.008,
+          "at": [
+            2.1,
+            0.675,
+            0.8
+          ],
+          "color": "steel"
+        }
+      ],
+      "connects": [
+        "pulse-emitter",
+        "echo-receiver"
+      ]
+    },
+    {
+      "id": "reflector-far",
+      "name": {
+        "en": "68 m reflector",
+        "zh": "68米反射面"
+      },
+      "group": "reflection",
+      "summary": {
+        "en": "A preset wall represents 68 m one-way distance.",
+        "zh": "预设墙代表68米单程距离。"
+      },
+      "detail": {
+        "en": "This flat reflector represents a source-to-wall distance of 68 m. Its scene position is a schematic preset, not a uniform map scale. Only one wall is visible at once. The pulse uses the same distance control as the return-time calculation. [S1, S17]",
+        "zh": "平面反射墙代表声源到墙68米。场景位置是示意预设，不是统一比例尺；每次只显示一面墙。脉冲与返回时间计算使用同一个距离控制。[S1, S17]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.035,
+          0.7,
+          0.55
+        ],
+        "bevel": 0.008,
+        "at": [
+          2.9,
+          1,
+          0.8
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.22,
+            0.05,
+            0.64
+          ],
+          "bevel": 0.008,
+          "at": [
+            2.9,
+            0.675,
+            0.8
+          ],
+          "color": "steel"
+        }
+      ],
+      "connects": [
+        "pulse-emitter",
+        "echo-receiver"
+      ]
+    },
+    {
+      "id": "monochord-box",
+      "name": {
+        "en": "Monochord soundbox",
+        "zh": "单弦实验器共鸣箱"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "A hollow box helps couple string motion to air.",
+        "zh": "空心箱体帮助弦的振动传给空气。"
+      },
+      "detail": {
+        "en": "A hollow wooden box has one round sound hole in its upper board. Two end posts anchor one string; a fixed bridge and one selected movable bridge support its active length. The model shows structure and coupling, not a measured resonance spectrum. [S1, S5]",
+        "zh": "木制空心箱顶板只有一个圆形音孔。两端柱固定一根弦；固定桥与当前选中的可移动桥支撑有效弦段。模型展示结构与耦合，不是实测的共振频谱。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "panelHole",
+        "size": [
+          2.04,
+          0.5,
+          0.045
+        ],
+        "hole": {
+          "r": 0.09,
+          "at": [
+            0.2,
+            0
+          ]
+        },
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "at": [
+          -1.4,
+          1.015,
+          -0.9
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.04,
+            0.335,
+            0.035
+          ],
+          "bevel": 0.008,
+          "at": [
+            -1.4,
+            0.825,
+            -1.15
+          ],
+          "color": "wood"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.04,
+            0.335,
+            0.035
+          ],
+          "bevel": 0.008,
+          "at": [
+            -1.4,
+            0.825,
+            -0.65
+          ],
+          "color": "wood"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.335,
+            0.5
+          ],
+          "bevel": 0.008,
+          "at": [
+            -2.42,
+            0.825,
+            -0.9
+          ],
+          "color": "wood"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.035,
+            0.335,
+            0.5
+          ],
+          "bevel": 0.008,
+          "at": [
+            -0.38,
+            0.825,
+            -0.9
+          ],
+          "color": "wood"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            2.04,
+            0.04,
+            0.5
+          ],
+          "bevel": 0.008,
+          "at": [
+            -1.4,
+            0.67,
+            -0.9
+          ],
+          "color": "wood"
+        }
+      ],
+      "connects": [
+        "monochord-string",
+        "bridge-long",
+        "bridge-short"
+      ]
+    },
+    {
+      "id": "monochord-string",
+      "name": {
+        "en": "One continuous string",
+        "zh": "一根连续的弦"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "A single taut string spans two anchored ends.",
+        "zh": "一根绷紧的弦连着两个固定端。"
+      },
+      "detail": {
+        "en": "One continuous thin string runs between the two anchors and across its supports. The long and short bridge presets halve the active length in this DESIGN. At fixed other conditions a shorter vibrating string has a higher pitch; no tension is measured here. [S1, S5]",
+        "zh": "一根细弦连续连接两端锚点，并经过支撑桥。长短预设把有效弦长减半，这是设计值。其他相关条件不变时，较短振动弦段的音调较高；这里没有实测张力。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.92,
+            0,
+            0
+          ],
+          [
+            0.92,
+            0,
+            0
+          ]
+        ],
+        "radius": 0.006,
+        "bendRadius": 0.018,
+        "at": [
+          -1.4,
+          1.1,
+          -0.9
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "bridge-long",
+        "bridge-short",
+        "monochord-box"
+      ]
+    },
+    {
+      "id": "bridge-long",
+      "name": {
+        "en": "Long-string bridge",
+        "zh": "长弦支撑桥"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "A movable support selects the vibrating length.",
+        "zh": "可移动支撑选择有效振动弦长。"
+      },
+      "detail": {
+        "en": "Only one movable bridge is present in each preset. Its tip meets the same taut string; the fixed bridge stays at the other end. The short preset has half the active length and selects the 500 Hz teaching setting. This is a structural preset, not a tension solver. [S1, S5]",
+        "zh": "每个预设只显示一个可移动桥，桥尖接触同一根绷紧的弦，另一端的固定桥保留。短预设的有效弦长减半，对应500Hz教学设置。这是结构预设，不是张力求解器。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.05,
+            -0.04
+          ],
+          [
+            0.05,
+            -0.04
+          ],
+          [
+            0,
+            0.04
+          ]
+        ],
+        "depth": 0.32,
+        "bevel": 0.003,
+        "at": [
+          -0.65,
+          1.06,
+          -0.9
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "monochord-string"
+      ]
+    },
+    {
+      "id": "bridge-short",
+      "name": {
+        "en": "Short-string bridge",
+        "zh": "短弦支撑桥"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "A movable support selects the vibrating length.",
+        "zh": "可移动支撑选择有效振动弦长。"
+      },
+      "detail": {
+        "en": "Only one movable bridge is present in each preset. Its tip meets the same taut string; the fixed bridge stays at the other end. The short preset has half the active length and selects the 500 Hz teaching setting. This is a structural preset, not a tension solver. [S1, S5]",
+        "zh": "每个预设只显示一个可移动桥，桥尖接触同一根绷紧的弦，另一端的固定桥保留。短预设的有效弦长减半，对应500Hz教学设置。这是结构预设，不是张力求解器。[S1, S5]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.05,
+            -0.04
+          ],
+          [
+            0.05,
+            -0.04
+          ],
+          [
+            0,
+            0.04
+          ]
+        ],
+        "depth": 0.32,
+        "bevel": 0.003,
+        "at": [
+          -1.4,
+          1.06,
+          -0.9
+        ],
+        "color": "wood"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "monochord-string"
+      ]
+    },
+    {
+      "id": "monochord-fixed-bridge",
+      "name": {
+        "en": "Monochord Fixed Bridge",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            -0.05,
+            -0.04
+          ],
+          [
+            0.05,
+            -0.04
+          ],
+          [
+            0,
+            0.04
+          ]
+        ],
+        "depth": 0.32,
+        "bevel": 0.003,
+        "at": [
+          -2.15,
+          1.06,
+          -0.9
+        ],
+        "color": "wood"
+      },
+      "context": true,
+      "clip": false,
+      "group": "instruments",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "monochord-anchors",
+      "name": {
+        "en": "Monochord Anchors",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.017,
+          0.017,
+          0.15
+        ],
+        "at": [
+          -2.32,
+          1.045,
+          -0.9
+        ],
+        "color": "brass"
+      },
+      "context": true,
+      "clip": false,
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.017,
+            0.017,
+            0.15
+          ],
+          "at": [
+            -0.48,
+            1.045,
+            -0.9
+          ],
+          "color": "brass"
+        }
+      ],
+      "group": "instruments",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "pipe",
+      "name": {
+        "en": "Open air-column pipe",
+        "zh": "开口空气柱管"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "An open tube contains a resonating air column.",
+        "zh": "开口管容纳可共鸣的空气柱。"
+      },
+      "detail": {
+        "en": "This pipe is open at both ends; a thin wall surrounds an empty air column. Wind-instrument pitch can change with the effective resonating length. This model does not calculate nodes, antinodes or an instrument fingering. [S1, S7]",
+        "zh": "管的两端都开口，薄管壁围着中空空气柱。管乐器音调可随有效共鸣长度改变。这里不计算节点、腹部或实际指法。[S1, S7]"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0.11,
+            -0.8
+          ],
+          [
+            0.11,
+            0.8
+          ],
+          [
+            0.085,
+            0.8
+          ],
+          [
+            0.085,
+            -0.8
+          ],
+          [
+            0.11,
+            -0.8
+          ]
+        ],
+        "segments": 40,
+        "rotation": [
+          0,
+          0,
+          90
+        ],
+        "at": [
+          -1.4,
+          1.1,
+          -1.5
+        ],
+        "color": "brass"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "pipe-open-end"
+      ]
+    },
+    {
+      "id": "pipe-open-end",
+      "name": {
+        "en": "Open end",
+        "zh": "开口端"
+      },
+      "group": "instruments",
+      "summary": {
+        "en": "The rim leaves the air column open to its surroundings.",
+        "zh": "管口边缘让空气柱与外界相通。"
+      },
+      "detail": {
+        "en": "The ring marks the pipe opening, without a cap or membrane. The visible hollow centre is a structural cue only; no air flow or exact standing-wave pattern is animated. [S1, S7]",
+        "zh": "圆环标示没有盖或膜的管口。可见的中空中心只作结构提示，不动画展示气流或精确驻波图样。[S1, S7]"
+      },
+      "primitive": {
+        "kind": "torus",
+        "size": [
+          0.0975,
+          0.014
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "at": [
+          -0.6,
+          1.1,
+          -1.5
+        ],
+        "color": "steel"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "connects": [
+        "pipe"
+      ]
+    },
+    {
+      "id": "pipe-cradles",
+      "name": {
+        "en": "Pipe Cradles",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.16,
+          0.34,
+          0.2
+        ],
+        "bevel": 0.012,
+        "at": [
+          -1.95,
+          0.82,
+          -1.5
+        ],
+        "color": "powder"
+      },
+      "context": true,
+      "clip": false,
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.16,
+            0.34,
+            0.2
+          ],
+          "bevel": 0.012,
+          "at": [
+            -0.85,
+            0.82,
+            -1.5
+          ],
+          "color": "powder"
+        }
+      ],
+      "group": "instruments",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    },
+    {
+      "id": "speaker-case",
+      "name": {
+        "en": "Generic speaker",
+        "zh": "通用扬声器"
+      },
+      "group": "care",
+      "summary": {
+        "en": "A speaker is a familiar sound source.",
+        "zh": "扬声器是熟悉的声源。"
+      },
+      "detail": {
+        "en": "A plain enclosure and front diaphragm identify a speaker without brand or measured level. The near and far poses illustrate moving away as one protective action. They do not calculate decibels or a safe listening duration. [S1, S10, S13]",
+        "zh": "普通箱体和前方振膜标示无品牌扬声器，不显示实测声级。远近姿态示意“远离”这一保护行动，不计算分贝或安全聆听时长。[S1, S10, S13]"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.5,
+          0.62,
+          0.36
+        ],
+        "bevel": 0.035,
+        "at": [
+          1.45,
+          0.96,
+          -0.95
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "cylinder",
+          "size": [
+            0.16,
+            0.16,
+            0.025
+          ],
+          "at": [
+            1.45,
+            0.98,
+            -0.757
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "torus",
+          "size": [
+            0.16,
+            0.018
+          ],
+          "at": [
+            1.45,
+            0.98,
+            -0.74
+          ],
+          "color": "steel"
+        }
+      ],
+      "connects": [
+        "hearing-protector"
+      ]
+    },
+    {
+      "id": "hearing-protector",
+      "name": {
+        "en": "Hearing protector",
+        "zh": "听力防护耳罩"
+      },
+      "group": "care",
+      "summary": {
+        "en": "Protection can reduce exposure in noisy places.",
+        "zh": "防护可减少嘈杂环境中的暴露。"
+      },
+      "detail": {
+        "en": "Two padded cups hang from a curved band on a display stand. Appropriate protection is one action alongside reducing volume, limiting time and moving away. This generic object has no certified attenuation rating and is not an ear anatomy model. [S1, S10, S13]",
+        "zh": "两只软垫耳杯连着弯头带，放在展示架上。适当防护应结合降低音量、减少时间和远离声源。这个通用模型没有认证衰减等级，也不是耳部解剖模型。[S1, S10, S13]"
+      },
+      "primitive": {
+        "kind": "tube",
+        "path": [
+          [
+            -0.25,
+            0.0,
+            0
+          ],
+          [
+            -0.245196,
+            0.048773,
+            0
+          ],
+          [
+            -0.23097,
+            0.095671,
+            0
+          ],
+          [
+            -0.207867,
+            0.138893,
+            0
+          ],
+          [
+            -0.176777,
+            0.176777,
+            0
+          ],
+          [
+            -0.138893,
+            0.207867,
+            0
+          ],
+          [
+            -0.095671,
+            0.23097,
+            0
+          ],
+          [
+            -0.048773,
+            0.245196,
+            0
+          ],
+          [
+            0.0,
+            0.25,
+            0
+          ],
+          [
+            0.048773,
+            0.245196,
+            0
+          ],
+          [
+            0.095671,
+            0.23097,
+            0
+          ],
+          [
+            0.138893,
+            0.207867,
+            0
+          ],
+          [
+            0.176777,
+            0.176777,
+            0
+          ],
+          [
+            0.207867,
+            0.138893,
+            0
+          ],
+          [
+            0.23097,
+            0.095671,
+            0
+          ],
+          [
+            0.245196,
+            0.048773,
+            0
+          ],
+          [
+            0.25,
+            0.0,
+            0
+          ]
+        ],
+        "radius": 0.025,
+        "bendRadius": 0.045,
+        "at": [
+          2.25,
+          1.13,
+          -0.9
+        ],
+        "color": "powder"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.18
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.3,
+            0.22
+          ],
+          "bevel": 0.045,
+          "at": [
+            2.01,
+            1.02,
+            -0.9
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.12,
+            0.3,
+            0.22
+          ],
+          "bevel": 0.045,
+          "at": [
+            2.49,
+            1.02,
+            -0.9
+          ],
+          "color": "rubber"
+        }
+      ],
+      "connects": [
+        "speaker-case"
+      ]
+    },
+    {
+      "id": "protector-display-stand",
+      "name": {
+        "en": "Protector Display Stand",
+        "zh": "实验台结构参考"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.035,
+          0.75,
+          0.035
+        ],
+        "bevel": 0.005,
+        "at": [
+          2.25,
+          1.025,
+          -0.9
+        ],
+        "color": "steel"
+      },
+      "context": true,
+      "clip": false,
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.2,
+            0.035,
+            0.06
+          ],
+          "bevel": 0.006,
+          "at": [
+            2.25,
+            1.375,
+            -0.9
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.36,
+            0.05,
+            0.3
+          ],
+          "bevel": 0.012,
+          "at": [
+            2.25,
+            0.675,
+            -0.9
+          ],
+          "color": "powder"
+        }
+      ],
+      "group": "care",
+      "summary": {
+        "en": "Static support for the schematic classroom model.",
+        "zh": "示意课堂模型的静态支撑。"
+      },
+      "detail": {
+        "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
+        "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "sources",
+      "name": {
+        "en": "Sources",
+        "zh": "声源"
+      },
+      "color": "token:en-sound"
+    },
+    {
+      "id": "transmission",
+      "name": {
+        "en": "Medium",
+        "zh": "介质"
+      },
+      "color": "token:air"
+    },
+    {
+      "id": "reflection",
+      "name": {
+        "en": "Echo",
+        "zh": "回声"
+      },
+      "color": "token:en-sound"
+    },
+    {
+      "id": "instruments",
+      "name": {
+        "en": "Instruments",
+        "zh": "乐器"
+      },
+      "color": "token:ink-2"
+    },
+    {
+      "id": "care",
+      "name": {
+        "en": "Hearing care",
+        "zh": "听力保护"
+      },
+      "color": "token:ink-2",
+      "card": false
+    },
+    {
+      "id": "air-wave",
+      "name": {
+        "en": "Air-wave strip",
+        "zh": "空气纵波条"
+      },
+      "color": "token:en-sound",
+      "card": false
+    }
+  ],
+  "flows": [],
+  "animations": [
+    {
+      "id": "fork-point-one",
+      "target": "fork-marker",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 8,
+      "hz": 1,
+      "pivot": [
+        -2.45,
+        1.55,
+        0.86
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "fork-point-two",
+      "target": "fork-marker",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 16,
+      "hz": 1,
+      "pivot": [
+        -2.45,
+        1.55,
+        0.86
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "drum-point-one",
+      "target": "drum-marker",
+      "kind": "oscillate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amplitude": 8,
+      "hz": 1,
+      "pivot": [
+        -1.95,
+        1.1,
+        0.79
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "drum-point-two",
+      "target": "drum-marker",
+      "kind": "oscillate",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amplitude": 16,
+      "hz": 1,
+      "pivot": [
+        -1.95,
+        1.1,
+        0.79
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "source-point-one",
+      "target": "source-driver",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 8,
+      "hz": 1,
+      "pivot": [
+        -1.175,
+        0.7,
+        0.8
+      ],
+      "whenRun": true
+    },
+    {
+      "id": "source-point-two",
+      "target": "source-driver",
+      "kind": "oscillate",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "amplitude": 16,
+      "hz": 1,
+      "pivot": [
+        -1.175,
+        0.7,
+        0.8
+      ],
+      "whenRun": true
+    }
+  ],
+  "views": {
+    "assembled": {
+      "camera": {
+        "position": [
+          7,
+          6,
+          12
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 35
+      }
+    },
+    "exploded": {
+      "camera": {
+        "position": [
+          7,
+          7,
+          12
+        ],
+        "target": [
+          0,
+          1,
+          0
+        ],
+        "fov": 35
+      }
+    },
+    "cover": {
+      "position": [
+        7,
+        6,
+        12
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 35
+    },
+    "section": {
+      "plane": "xy"
+    },
+    "reference": {
+      "fit": "layers"
+    },
+    "cutaway": {
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0
+    },
+    "hudFrame": {
+      "parts": [
+        "fork",
+        "drum-shell",
+        "source-driver",
+        "air-cell",
+        "water-cell",
+        "solid-bar",
+        "receiver",
+        "wave-reference",
+        "pulse-emitter",
+        "echo-receiver",
+        "reflector-far",
+        "monochord-box",
+        "pipe",
+        "speaker-case",
+        "hearing-protector"
+      ]
+    }
+  },
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Bench",
+        "zh": "实验台"
+      },
+      "camera": {
+        "position": [
+          7,
+          6,
+          12
+        ],
+        "target": [
+          0,
+          0.8,
+          0
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "id": "source",
+      "label": {
+        "en": "Sources",
+        "zh": "声源"
+      },
+      "camera": {
+        "position": [
+          -2.7,
+          2.9,
+          5.5
+        ],
+        "target": [
+          -2.2,
+          1.15,
+          0.8
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "wave",
+      "label": {
+        "en": "Medium",
+        "zh": "介质"
+      },
+      "camera": {
+        "position": [
+          0,
+          2.5,
+          5.9
+        ],
+        "target": [
+          -0.1,
+          0.95,
+          0.8
+        ],
+        "fov": 33
+      }
+    },
+    {
+      "id": "echo",
+      "label": {
+        "en": "Echo",
+        "zh": "回声"
+      },
+      "camera": {
+        "position": [
+          2,
+          2.4,
+          5.7
+        ],
+        "target": [
+          1.8,
+          1,
+          0.8
+        ],
+        "fov": 34
+      }
+    },
+    {
+      "id": "instruments-view",
+      "label": {
+        "en": "Instruments",
+        "zh": "乐器"
+      },
+      "camera": {
+        "position": [
+          -2.1,
+          4.2,
+          6
+        ],
+        "target": [
+          -1.4,
+          1,
+          0
+        ],
+        "fov": 35
+      }
+    },
+    {
+      "id": "care-view",
+      "label": {
+        "en": "Hearing care",
+        "zh": "听力保护"
+      },
+      "camera": {
+        "position": [
+          3.8,
+          3,
+          4
+        ],
+        "target": [
+          1.7,
+          1,
+          -0.8
+        ],
+        "fov": 35
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "MODEL",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Silent classroom study",
+        "zh": "静音课堂研究"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "SCALE",
+        "zh": "尺度"
+      },
+      "value": {
+        "en": "Schematic scene units",
+        "zh": "示意场景单位"
+      },
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "WAVE / ECHO",
+        "zh": "纵波／回声"
+      },
+      "value": {
+        "en": "250× / 10× slower",
+        "zh": "慢放250倍／10倍"
+      },
+      "tag": "sim"
+    }
+  ],
+  "telemetry": [
+    {
+      "key": {
+        "en": "Displayed frequency",
+        "zh": "显示频率"
+      },
+      "unit": "Hz",
+      "follow": "visual-hz",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Model wavelength",
+        "zh": "模型波长"
+      },
+      "unit": "u",
+      "follow": "wavelength-scene",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Maximum displacement",
+        "zh": "最大位移"
+      },
+      "unit": "u",
+      "follow": "displacement-max",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Teaching speed",
+        "zh": "教学速度"
+      },
+      "unit": "m/s",
+      "follow": "speed-mps",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "One-way time",
+        "zh": "单程时间"
+      },
+      "unit": "ms",
+      "follow": "one-way-ms",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    },
+    {
+      "key": {
+        "en": "Return time",
+        "zh": "返回时间"
+      },
+      "unit": "ms",
+      "follow": "echo-ms",
+      "scope": "observe",
+      "decimals": 3,
+      "lag": 0
+    }
+  ],
+  "poses": {
+    "transmission-ready": {
+      "duration": 0,
+      "receiver": {
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "source-off": {
+      "duration": 0,
+      "receiver": {
+        "rotation": [
+          0,
+          0,
+          20
+        ]
+      }
+    },
+    "no-medium": {
+      "duration": 0,
+      "receiver": {
+        "rotation": [
+          0,
+          0,
+          40
+        ]
+      }
+    },
+    "care-near": {
+      "speaker-case": {
+        "offset": [
+          -0.2,
+          0,
+          0.2
+        ]
+      }
+    },
+    "care-far": {
+      "speaker-case": {
+        "offset": [
+          0.5,
+          0,
+          -0.1
+        ]
+      }
+    }
+  },
+  "sim": {
+    "kind": "senses",
+    "controls": [
+      {
+        "id": "sound-active",
+        "kind": "toggle",
+        "label": {
+          "en": "Sound active",
+          "zh": "声音启用"
+        },
+        "default": true
+      },
+      {
+        "id": "frequency-hz",
+        "kind": "step",
+        "label": {
+          "en": "Frequency",
+          "zh": "频率"
+        },
+        "default": 250,
+        "values": [
+          250,
+          500
+        ],
+        "unit": "Hz"
+      },
+      {
+        "id": "amplitude",
+        "kind": "step",
+        "label": {
+          "en": "Relative displacement",
+          "zh": "相对位移"
+        },
+        "default": 1,
+        "values": [
+          1,
+          2
+        ],
+        "unit": "×"
+      },
+      {
+        "id": "medium",
+        "kind": "choice",
+        "label": {
+          "en": "Medium",
+          "zh": "介质"
+        },
+        "default": "air",
+        "options": [
+          {
+            "id": "air",
+            "label": {
+              "en": "Air",
+              "zh": "空气"
+            }
+          },
+          {
+            "id": "water",
+            "label": {
+              "en": "Water",
+              "zh": "水"
+            }
+          },
+          {
+            "id": "solid-example",
+            "label": {
+              "en": "Chosen solid",
+              "zh": "选定固体"
+            }
+          },
+          {
+            "id": "vacuum",
+            "label": {
+              "en": "Vacuum",
+              "zh": "真空"
+            }
+          }
+        ]
+      },
+      {
+        "id": "distance-m",
+        "kind": "step",
+        "label": {
+          "en": "Reflector distance",
+          "zh": "反射面距离"
+        },
+        "values": [
+          17,
+          34,
+          68
+        ],
+        "default": 34,
+        "unit": "m"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "visual-hz",
+        "from": "visual-hz",
+        "kind": "number",
+        "label": {
+          "en": "Displayed frequency",
+          "zh": "显示频率"
+        },
+        "decimals": 3,
+        "unit": "Hz"
+      },
+      {
+        "id": "wavelength-scene",
+        "from": "wavelength-scene",
+        "kind": "number",
+        "label": {
+          "en": "Model wavelength",
+          "zh": "模型波长"
+        },
+        "decimals": 3,
+        "unit": "u"
+      },
+      {
+        "id": "displacement-max",
+        "from": "displacement-max",
+        "kind": "number",
+        "label": {
+          "en": "Maximum displacement",
+          "zh": "最大位移"
+        },
+        "decimals": 3,
+        "unit": "u"
+      },
+      {
+        "id": "amplitude-level",
+        "from": "amplitude-level",
+        "kind": "number",
+        "label": {
+          "en": "Relative displacement amplitude",
+          "zh": "相对位移振幅"
+        },
+        "decimals": 3,
+        "unit": "×"
+      },
+      {
+        "id": "sound-state",
+        "from": "sound-state",
+        "kind": "state",
+        "label": {
+          "en": "Driver state",
+          "zh": "驱动状态"
+        },
+        "states": {
+          "still": {
+            "en": "Still",
+            "zh": "静止"
+          },
+          "vibrating": {
+            "en": "Vibrating",
+            "zh": "振动"
+          }
+        }
+      },
+      {
+        "id": "source-drive",
+        "from": "source-drive",
+        "kind": "state",
+        "label": {
+          "en": "Source drive",
+          "zh": "声源驱动"
+        },
+        "states": {
+          "off": {
+            "en": "Driver off",
+            "zh": "驱动关闭"
+          },
+          "amplitude-one": {
+            "en": "Relative amplitude 1",
+            "zh": "相对振幅1"
+          },
+          "amplitude-two": {
+            "en": "Relative amplitude 2",
+            "zh": "相对振幅2"
+          }
+        }
+      },
+      {
+        "id": "speed-mps",
+        "from": "speed-mps",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "Teaching speed",
+          "zh": "教学速度"
+        },
+        "unit": "m/s",
+        "decimals": 3
+      },
+      {
+        "id": "one-way-ms",
+        "from": "one-way-ms",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "One-way time",
+          "zh": "单程时间"
+        },
+        "unit": "ms",
+        "decimals": 3
+      },
+      {
+        "id": "echo-ms",
+        "from": "echo-ms",
+        "kind": "number",
+        "nullable": true,
+        "label": {
+          "en": "Return time",
+          "zh": "返回时间"
+        },
+        "unit": "ms",
+        "decimals": 3
+      },
+      {
+        "id": "propagation-state",
+        "from": "propagation-state",
+        "kind": "state",
+        "label": {
+          "en": "Transmission",
+          "zh": "传播"
+        },
+        "states": {
+          "no-medium": {
+            "en": "No medium",
+            "zh": "无介质"
+          },
+          "source-off": {
+            "en": "Source off",
+            "zh": "声源关闭"
+          },
+          "transmitted": {
+            "en": "Transmitted",
+            "zh": "可传播"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "source-drive",
+        "animation": "fork-point-one",
+        "enabled": {
+          "eq": "amplitude-one"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "fork-point-one",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "fork-point-two",
+        "enabled": {
+          "eq": "amplitude-two"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "fork-point-two",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "drum-point-one",
+        "enabled": {
+          "eq": "amplitude-one"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "drum-point-one",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "drum-point-two",
+        "enabled": {
+          "eq": "amplitude-two"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "drum-point-two",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "source-point-one",
+        "enabled": {
+          "eq": "amplitude-one"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "source-point-one",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "output": "source-drive",
+        "animation": "source-point-two",
+        "enabled": {
+          "eq": "amplitude-two"
+        }
+      },
+      {
+        "output": "visual-hz",
+        "animation": "source-point-two",
+        "hz": {
+          "per": 1
+        }
+      },
+      {
+        "control": "medium",
+        "part": "air-cell",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "medium",
+        "part": "water-cell",
+        "visible": {
+          "eq": "water"
+        }
+      },
+      {
+        "control": "medium",
+        "part": "solid-bar",
+        "visible": {
+          "eq": "solid-example"
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-near",
+        "visible": {
+          "eq": 17
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-mid",
+        "visible": {
+          "eq": 34
+        }
+      },
+      {
+        "control": "distance-m",
+        "part": "reflector-far",
+        "visible": {
+          "eq": 68
+        }
+      },
+      {
+        "control": "frequency-hz",
+        "part": "bridge-long",
+        "visible": {
+          "eq": 250
+        }
+      },
+      {
+        "control": "frequency-hz",
+        "part": "bridge-short",
+        "visible": {
+          "eq": 500
+        }
+      },
+      {
+        "output": "propagation-state",
+        "part": "receiver",
+        "pose": {
+          "transmitted": "transmission-ready",
+          "source-off": "source-off",
+          "no-medium": "no-medium"
+        }
+      }
+    ],
+    "senses": {
+      "profile": "sound-only",
+      "sound": {
+        "active": "sound-active",
+        "frequencyHz": "frequency-hz",
+        "amplitude": "amplitude",
+        "slowFactor": 250,
+        "baseFrequencyHz": 250,
+        "baseWavelengthScene": 1,
+        "baseDisplacementScene": 0.035,
+        "sources": [
+          "S3",
+          "S5",
+          "S1"
+        ]
+      },
+      "soundLab": {
+        "medium": "medium",
+        "distanceM": "distance-m",
+        "speedMps": {
+          "air": 340,
+          "water": 1500,
+          "solid-example": 5000
+        },
+        "sources": [
+          "S3",
+          "S16",
+          "S17",
+          "S1"
+        ]
+      }
+    },
+    "overlays": [
+      {
+        "kind": "longitudinal-wave",
+        "model": "sound",
+        "origin": [
+          -1.1,
+          0.95,
+          0.8
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "count": 41,
+        "spacing": 0.05,
+        "referenceIndex": 5,
+        "group": "air-wave",
+        "when": {
+          "control": "medium",
+          "is": "air"
+        }
+      },
+      {
+        "kind": "sound-echo-pulse",
+        "model": "echo",
+        "group": "reflection",
+        "origin": [
+          0.7,
+          1,
+          0.8
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "visualDistancesScene": {
+          "near": 1,
+          "mid": 1.4,
+          "far": 2.2
+        },
+        "slowFactor": 10,
+        "reference": "distance-m",
+        "sources": [
+          "S1",
+          "S17"
+        ]
+      }
+    ]
+  }
+}

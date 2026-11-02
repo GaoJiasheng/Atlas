@@ -9,7 +9,7 @@ engine: time-scene
 stage: geo
 theme: paper
 sensitivity: open
-status: draft
+status: published
 illustration: space-race
 blocLabels:
   axis: { en: "USSR", zh: "苏联项目" }

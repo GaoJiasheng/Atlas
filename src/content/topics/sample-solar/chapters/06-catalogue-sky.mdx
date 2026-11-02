@@ -1,0 +1,306 @@
+---
+{
+  "id": "catalogue-sky",
+  "order": 6,
+  "title": {
+    "en": "Catalogue sky",
+    "zh": "星表天空"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "local-sky"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0,
+        8,
+        19
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "Draft engine fixture: compare explicit model inputs and outputs.",
+      "zh": "引擎草稿测试：对照显式模型输入与输出。"
+    },
+    "index": {
+      "parts": [
+        "observer",
+        "horizon",
+        "sky-stars",
+        "orion-pattern",
+        "crux-pattern",
+        "scorpius-pattern",
+        "depth-stars"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "sky",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "sky-hour",
+        "observe": [
+          "scale-state"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Singapore horizon, fixed J2000 directions and an example date.",
+          "zh": "模拟 · 新加坡地平线、固定J2000方向与示例日期。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 22,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Advancing two clock hours changes local directions.",
+          "zh": "模拟 · 钟点推进两小时，本地方向改变。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-04-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "crux",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Compare Crux on another example date.",
+          "zh": "模拟 · 在另一个示例日期比较南十字座。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-07-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "scorpius",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Compare Scorpius on the same local horizon.",
+          "zh": "模拟 · 在相同本地地平线上比较天蝎座。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": false,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Turning links off does not move stars.",
+          "zh": "模拟 · 关闭连线不移动星点。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": true,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Catalogue distances supply depth; these are historical estimates.",
+          "zh": "模拟 · 星表距离提供深度，属于历史估计。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "equator",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · An equatorial observer uses a different horizon frame.",
+          "zh": "模拟 · 赤道观察者使用不同地平坐标。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "sky",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-10-15",
+            "sky-hour": 0,
+            "observer": "north45",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · A northern observer uses another horizon frame.",
+          "zh": "模拟 · 北纬观察者使用另一地平坐标。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft software fixture. Compare the calculated SIM readings with the rendered geometry. The model uses teaching alignment, schematic overview sizes and fixed J2000 star directions; it is not a sky forecast.
+
+</Lang>
+
+<Lang zh>
+
+软件草稿测试。对照计算的模拟读数与舞台几何。模型采用教学排列、示意总览大小和固定J2000恒星方向；不预测真实天空。
+
+</Lang>

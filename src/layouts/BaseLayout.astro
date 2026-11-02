@@ -76,6 +76,16 @@ const pwa = import.meta.env.PROD;
         window.addEventListener('load', function () {
           navigator.serviceWorker.register(swUrl, { scope: swScope });
         });
+        // A new deploy took over (skipWaiting + clientsClaim) and dropped the old precache:
+        // reload once so this page stops pointing at chunks that no longer exist.
+        if (navigator.serviceWorker.controller) {
+          var reloaded = false;
+          navigator.serviceWorker.addEventListener('controllerchange', function () {
+            if (reloaded) return;
+            reloaded = true;
+            location.reload();
+          });
+        }
       }
     </script>}
   </body>

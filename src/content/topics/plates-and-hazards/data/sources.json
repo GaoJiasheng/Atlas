@@ -1,0 +1,400 @@
+{
+  "sources": [
+    {
+      "id": "S6",
+      "text": {
+        "en": "British Geological Survey, What causes earthquakes?",
+        "zh": "英国地质调查局：《地震由什么引起？》"
+      },
+      "note": {
+        "en": "Earth structure, plate movement and sudden fault slip; F02, F03, F25. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "地球结构、板块运动与断层突然滑动；F02、F03、F25。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.bgs.ac.uk/discovering-geology/earth-hazards/earthquakes/what-causes-earthquakes/"
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "NOAA, JetStream Max: Plate tectonics and earthquakes",
+        "zh": "美国国家海洋和大气管理局（NOAA）：JetStream Max《板块构造与地震》"
+      },
+      "note": {
+        "en": "Earth layers and plate boundaries; F01, F04, F10–F12. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "地球层次与板块边界；F01、F04、F10—F12。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/tsunamis/tsunami-generation-earthquakes/jetstream-max-plate-tectonics-and-earthquakes"
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "US National Park Service, Volcanic Eruptions",
+        "zh": "美国国家公园管理局：《火山喷发》"
+      },
+      "note": {
+        "en": "Introduction and terminology; magma, lava and the schematic cover, F19. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "导言与术语；岩浆、熔岩和封面示意，F19。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.nps.gov/subjects/volcanoes/volcanic-eruptions.htm"
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Smithsonian Global Volcanism Program, What volcanoes and volcanic regions form the Pacific Ring of Fire?, v5.4.0",
+        "zh": "史密森学会全球火山计划（GVP）：《哪些火山与火山区组成环太平洋火山带？》，v5.4.0"
+      },
+      "note": {
+        "en": "Definition, exclusions and statistical table; F15–F17 and F24. Counts belong to this release, not a timeless universal percentage. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "定义、排除范围与统计表；F15—F17、F24。数量只属于该版本，不是永恒通用的比例。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://volcano.si.edu/faq/Pacific_Ring_of_Fire.cfm"
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Meteorological Service Singapore, Earthquakes and Volcanoes",
+        "zh": "新加坡气象署（MSS）：《地震与火山》"
+      },
+      "note": {
+        "en": "Plate tectonics, earthquakes and tsunami sections; F16, F26, F29–F30, F38, F42–F43, F47. Magnitude and geographical definitions retain attribution. No MSS illustrations are bundled. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "板块构造、地震与海啸各节；F16、F26、F29—F30、F38、F42—F43、F47。震级与地理定义各留归属；不打包 MSS 插图。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.weather.gov.sg/learn_earthquakes/"
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "NOAA, JetStream: Tsunamis",
+        "zh": "NOAA：JetStream《海啸》"
+      },
+      "note": {
+        "en": "Definition and background, F30; specific generation and propagation claims are also supported by S12, S14 and S15. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "定义与背景，F30；形成和传播的具体叙述另由 S12、S14、S15 支持。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/tsunamis"
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "NOAA, JetStream: Tsunami generation — earthquakes",
+        "zh": "NOAA：JetStream《海啸形成——地震》"
+      },
+      "note": {
+        "en": "Vertical seabed and water displacement; not every earthquake produces a tsunami, F31. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "海床与海水的垂直位移；不是每次地震都会引发海啸，F31。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/tsunamis/tsunami-generation-earthquakes"
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "NOAA, JetStream: Tsunami propagation",
+        "zh": "NOAA：JetStream《海啸传播》"
+      },
+      "note": {
+        "en": "Whole-water-column motion, long deep-ocean waves and shoaling; F30, F32. Numerical speed and depth examples are excluded. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "整层水体运动、深海长波与浅化；F30、F32。不采用其中的波速、水深数值例题。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/tsunamis/tsunami-propagation"
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "NOAA, JetStream: Tsunami inundation",
+        "zh": "NOAA：JetStream《海啸淹没》"
+      },
+      "note": {
+        "en": "Run-up, trough-first arrival and successive waves; F61. Neither first withdrawal nor a largest first wave is guaranteed. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "爬高、波谷先到与后续波；F61。不保证先退水，也不保证第一波最大。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/tsunamis/tsunami-inundation"
+    },
+    {
+      "id": "S54",
+      "text": {
+        "en": "USGS ComCat, 26 December 2004 Sumatra event, official20041226005853450_30",
+        "zh": "美国地质调查局（USGS）ComCat：2004 年 12 月 26 日苏门答腊地震，official20041226005853450_30"
+      },
+      "note": {
+        "en": "Frozen 26 October 2026 query and event-id recheck in the final specification: Mw 9.1, depth 30 km, origin 00:58:53.450 UTC, tsunami flag 0. The flag is not a historical tsunami classification; F34, F59. Original snapshot SHA-256: 9637d1db3e2725d205402872d539c39005f560d14b0d6d683e9fbf64c1d44907. Additional source URLs: https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=official20041226005853450_30&format=geojson. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "2026 年 10 月 26 日冻结查询，定稿规格另按事件 id 重核：Mw 9.1、深度 30 公里、起始时刻 00:58:53.450 UTC、海啸标记 0。标记不能代替历史海啸分类；F34、F59。原快照 SHA-256：9637d1db3e2725d205402872d539c39005f560d14b0d6d683e9fbf64c1d44907。 其他来源链接：https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=official20041226005853450_30&format=geojson。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2004-12-26&endtime=2004-12-27&minmagnitude=9&limit=1"
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NOAA NCEI / UNESCO-IOC ITIC / WDS, Historical Tsunami Effects from the 2004 Indian Ocean Tsunami, October 2024",
+        "zh": "NOAA NCEI／联合国教科文组织政府间海洋学委员会国际海啸信息中心（ITIC）／WDS：《2004 年印度洋海啸的历史影响》，2024 年 10 月"
+      },
+      "note": {
+        "en": "Single-page poster, Table 1 and total definition: 227,899 dead or missing and presumed dead in 15 countries; selected four-country values use the same column and date. Earthquake and tsunami deaths cannot be fully separated. Freshly reopened in this build session on 27 October 2026. Only facts are paraphrased; the mixed-rights poster image and layout are not reused. F35, F36.",
+        "zh": "单页海报表 1 与总数定义：15 国共 227,899 人死亡或失踪并推定死亡；选列国家采用同列、同日期。地震与海啸死亡不能完全拆分。本施工会话于 2026 年 10 月 27 日重新打开核对。仅转述事实，不复用混合权利海报图像或版式。F35、F36。"
+      },
+      "url": "https://www.ncei.noaa.gov/sites/default/files/2024-11/IO_Poster_20241030_final_lowres.pdf"
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "NOAA Science On a Sphere, Tsunami Historical Series: Sumatra 2004",
+        "zh": "NOAA Science On a Sphere：《历史海啸系列：2004 年苏门答腊》"
+      },
+      "note": {
+        "en": "Description: more than 230,000 deaths in 14 countries. A different summary from the October 2024 poster; do not merge or average the accounting. Read date, not an asserted publication date: 27 October 2026. F37.",
+        "zh": "说明写 14 国超过 230,000 人死亡；这是不同于 2024 年 10 月海报的摘要，不合并口径、不平均。2026 年 10 月 27 日为读取日，不冒称发布日期。F37。"
+      },
+      "url": "https://sos.noaa.gov/catalog/datasets/tsunami-historical-series-sumatra-2004/"
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Smithsonian GVP, Tambora volcano profile, volcano 264040",
+        "zh": "史密森学会 GVP：《坦博拉火山档案》，火山编号 264040"
+      },
+      "note": {
+        "en": "Basic Data and Eruptive History: Sumbawa, episode 16231 (1812–1815), VEI 7. Episode uncertainty is retained; the disaster day is not an invented episode boundary. F39. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "基本资料与喷发历史：松巴哇、喷发记录 16231（1812—1815 年）、VEI 7。保留日期不确定性，不把灾害日编成整段活动的边界。F39。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://volcano.si.edu/volcano.cfm?vn=264040"
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "USGS Hawaiian Volcano Observatory, Volcano Watch: Infamous Mount Tambora is rumbling again, published 29 September 2011",
+        "zh": "USGS 夏威夷火山观测站：Volcano Watch《坦博拉再次发出声响》，2011 年 9 月 29 日发表"
+      },
+      "note": {
+        "en": "1815 account: more than 70,000 deaths in surrounding areas. A separate historical estimate from the USGS table in S21, not the lower bound of a statistical confidence interval. Freshly reopened in this build session on 27 October 2026. F40.",
+        "zh": "1815 年叙述：周边地区超过 70,000 人死亡。它和 S21 表中的历史估计分开归属，不当成统计置信区间的下限。本施工会话于 2026 年 10 月 27 日重新打开核对。F40。"
+      },
+      "url": "https://www.usgs.gov/observatories/hvo/news/volcano-watch-infamous-mount-tambora-rumbling-again"
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "USGS, Which volcanic eruptions were the deadliest?",
+        "zh": "USGS：《哪些火山喷发造成最多死亡？》"
+      },
+      "note": {
+        "en": "Tambora and Krakatau rows and footnotes: Tambora 92,000 deaths, principally starvation; Krakatau about 36,000, detailed historical estimate 36,417, principally tsunamis. The undated table was freshly reopened in this build session on 27 October 2026; this is an access date, not a publication date. Estimates are not averaged. F40, F41.",
+        "zh": "坦博拉、喀拉喀托各行与脚注：坦博拉 92,000 人死亡、主要由于饥饿；喀拉喀托约 36,000 人，细列历史估计 36,417 人、主要由于海啸。未注明发布日期的表于本施工会话 2026 年 10 月 27 日重新打开核对，这是读取日，不是发布日期；估计不平均。F40、F41。"
+      },
+      "url": "https://www.usgs.gov/faqs/which-volcanic-eruptions-were-deadliest"
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Building and Construction Authority, Precautions to take during earth tremors",
+        "zh": "新加坡建设局（BCA）：《地震震动时应采取的注意事项》"
+      },
+      "note": {
+        "en": "Opening statement and indoor guidance: design against distant tremors, cover under a table, no lifts. Freshly reopened in this build session on 27 October 2026. This is dated paraphrase of official guidance, not a claim that every structure is invulnerable. F44, F60.",
+        "zh": "导语与室内指引：按抵御远处地震震动设计、到桌下掩护、不使用电梯。本施工会话于 2026 年 10 月 27 日重新打开核对。只作注明日期的官方指引转述，不保证每幢建筑绝对安全。F44、F60。"
+      },
+      "url": "https://www1.bca.gov.sg/guidelines-and-requirements/precautions-to-take-during-earth-tremors/"
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "British Geological Survey, How do earthquakes affect people?",
+        "zh": "英国地质调查局：《地震怎样影响人？》"
+      },
+      "note": {
+        "en": "Ground conditions and resonant frequency sections; qualitative building response, F45. No safety rating for individual buildings. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "地面条件与共振频率各节；定性说明建筑响应，F45。不给个别建筑安全等级。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.bgs.ac.uk/discovering-geology/earth-hazards/earthquakes/how-do-earthquakes-affect-people/"
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "Hong Kong Observatory, 如何解读地震参数？, published May 2023",
+        "zh": "香港天文台：《如何解读地震参数？》，2023 年 5 月发表"
+      },
+      "note": {
+        "en": "Epicentre, magnitude versus intensity and different magnitude types; F26, F27. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "震中、震级与烈度、不同震级类别；F26、F27。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.hko.gov.hk/sc/education/earth-science/earthquake/00694-How-to-interpret-seismic-parameters.html"
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "Hong Kong Civil Engineering and Development Department, Hong Kong Geology, Chapter 2: Plate movement",
+        "zh": "香港土木工程拓展署：《香港地质》第二章“板块运动”"
+      },
+      "note": {
+        "en": "Selected sections on boundaries, hotspots and calderas; F12–F14, F18, F23. Only scoped statements are used, not every simplified explanation on the page. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "采用边界、热点与破火山口的选定段落；F12—F14、F18、F23。只用已核定范围，不照搬全部简化解释。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://ginfo.cedd.gov.hk/hkss/sc/publications-and-resources/educational-materials/hong-kong-geology/chapter-2/index.html"
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Smithsonian GVP, Terms of use: content types and Volcanoes of the World database",
+        "zh": "史密森学会 GVP：《使用条款》之内容类型与世界火山数据库"
+      },
+      "note": {
+        "en": "The database-specific US government employee compilation statement applies to selected tables. Photographs have separate rights; no photo links, captions or geological prose are bundled. F53. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "选定表采用数据库作为美国政府雇员编纂产品的专门条款。照片另有权利；不打包照片链接、图说或长篇地质文字。F53。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://volcano.si.edu/gvp_termsofuse.cfm"
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Peter Bird (2003), An updated digital model of plate boundaries, DOI 10.1029/2001GC000252; PB2002 conversion by Hugo Ahlenius/Nordpil and fraxen contributors",
+        "zh": "Peter Bird（2003）：《更新的数字板块边界模型》，DOI 10.1029/2001GC000252；Hugo Ahlenius／Nordpil 与 fraxen 贡献者转换的 PB2002"
+      },
+      "note": {
+        "en": "Conversion, ODC Attribution 1.0 licence, original README and STEPCLASS descriptions. Classified geometry retains original sequence identity and antimeridian parts. Frozen plate geometry: 54 features, 52 unique codes; these are file counts. F10–F13, F43, F54, PH04. Additional source URLs: https://raw.githubusercontent.com/fraxen/tectonicplates/master/LICENSE.md ; https://raw.githubusercontent.com/fraxen/tectonicplates/master/original/README.md ; https://raw.githubusercontent.com/fraxen/tectonicplates/master/original/PB2002_steps_desc.txt. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "转换仓库、ODC Attribution 1.0 许可、原 README 与 STEPCLASS 说明。分类几何保留原序号及日界线拆段。冻结板块几何有 54 要素、52 个唯一代码，属于文件计数。F10—F13、F43、F54、PH04。 其他来源链接：https://raw.githubusercontent.com/fraxen/tectonicplates/master/LICENSE.md；https://raw.githubusercontent.com/fraxen/tectonicplates/master/original/README.md；https://raw.githubusercontent.com/fraxen/tectonicplates/master/original/PB2002_steps_desc.txt。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://github.com/fraxen/tectonicplates"
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Natural Earth, Terms of use",
+        "zh": "Natural Earth：《使用条款》"
+      },
+      "note": {
+        "en": "Public-domain source geometry. The existing local basemap is modern reference coast, not historical reconstruction. F56. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "源几何为公有领域。复用的本地底图是现代参考海岸，不是历史复原。F56。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    },
+    {
+      "id": "S601",
+      "text": {
+        "en": "Earth Observatory of Singapore / NTU, Public lecture: What we have learnt from seismology for seismic hazard and underground imaging, with a focus on Singapore, 17 March 2023",
+        "zh": "南洋理工大学新加坡地球观测研究所（EOS）：《从地震学了解地震危险性与地下成像，聚焦新加坡》公开讲座，2023 年 3 月 17 日"
+      },
+      "note": {
+        "en": "About the Event: 25 February 2022 west Sumatra earthquake felt in Singapore, described as magnitude 6.2. This retrospective account is not an intensity map or the current USGS solution. PH01. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "活动说明：2022 年 2 月 25 日西苏门答腊地震在新加坡可感，页面写 6.2 级。这是回顾记载，不是烈度图，也不是 USGS 当前解。PH01。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://earthobservatory.sg/news/events/public-lecture-what-we-have-learnt-from-seismology-for-seismic-hazard-and-underground-imaging-with-a-focus-on-singapore"
+    },
+    {
+      "id": "S602",
+      "text": {
+        "en": "USGS ComCat, reviewed west Sumatra event us6000gzyg, 25 February 2022",
+        "zh": "USGS ComCat：2022 年 2 月 25 日西苏门答腊已审事件 us6000gzyg"
+      },
+      "note": {
+        "en": "Frozen query 26 October 2026 and event-id recheck for the final specification: magnitude 6.1, magType mww, depth 4 km; UTC epoch 1645753166554. Source-specific estimate differs from EOS 6.2. Frozen SHA-256: 292f2447629c344eeaddfa855ee83aa8b4db739bb8b35d6965df930bb4b74c74. PH02. Additional source URLs: https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000gzyg&format=geojson. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "2026 年 10 月 26 日冻结查询，定稿规格另按 id 重核：震级 6.1、magType mww、深度 4 公里、UTC epoch 1645753166554。来源估计不同于 EOS 的 6.2。冻结 SHA-256：292f2447629c344eeaddfa855ee83aa8b4db739bb8b35d6965df930bb4b74c74。PH02。 其他来源链接：https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us6000gzyg&format=geojson。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-02-25&endtime=2022-02-26&minlatitude=-1&maxlatitude=1&minlongitude=99&maxlongitude=101&minmagnitude=5.8"
+    },
+    {
+      "id": "S603",
+      "text": {
+        "en": "NOAA NCEI / WDS Global Historical Tsunami Database, HaZEL source-event API, selected calendar years",
+        "zh": "NOAA NCEI／WDS 全球历史海啸数据库：HaZEL 源事件 API，选定公历年份"
+      },
+      "note": {
+        "en": "Complete 1815, 1883, 2004 and 2018 queries select event IDs 613, 1142, 2439 and 5699. Dates identify source events rather than whole GVP eruption episodes. Distinct deaths fields are not added. Frozen 26 October 2026; selected records rechecked for the final specification 27 October. PH03. Additional source URLs: https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=2004&maxYear=2004&itemsPerPage=100 ; https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=1815&maxYear=1815&itemsPerPage=100 ; https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=2018&maxYear=2018&itemsPerPage=100. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "完整查询 1815、1883、2004、2018 年，选用事件 613、1142、2439、5699。日期属于源事件，不代表整段 GVP 喷发活动；不同死亡字段不相加。2026 年 10 月 26 日冻结，27 日定稿规格重核选定行。PH03。 其他来源链接：https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=2004&maxYear=2004&itemsPerPage=100；https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=1815&maxYear=1815&itemsPerPage=100；https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=2018&maxYear=2018&itemsPerPage=100。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/events?minYear=1883&maxYear=1883&itemsPerPage=100"
+    },
+    {
+      "id": "S604",
+      "text": {
+        "en": "PB2002 / Smithsonian GVP / USGS, frozen datasets and Atlas coverage audit, 26 October 2026",
+        "zh": "PB2002／史密森学会 GVP／USGS：2026 年 10 月 26 日冻结数据与 Atlas 覆盖核查"
+      },
+      "note": {
+        "en": "GVP compiler Venzke, Volcanoes of the World v5.4.0, DOI 10.5479/si.GVP.VOTW5-2026.5.4. Frozen files: 1,214 volcanoes, 11,089 eruption rows, 3,729 reviewed USGS M≥6 events in 2000–2024. Modern PB2002 has 5,824 step parts for 5,819 sequence identities. Final specification rechecked volcano WFS and selected three eruption episodes after full-eruption refetch failed. Counts describe snapshots. PH04. Additional source URLs: https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=1.0.0&request=GetFeature&outputFormat=application/json&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes ; https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=1.0.0&request=GetFeature&outputFormat=application/json&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Eruptions ; https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2000-01-01&endtime=2025-01-01&minmagnitude=6&eventtype=earthquake&orderby=time-asc. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "GVP 编纂者 Venzke，《世界火山》v5.4.0，DOI 10.5479/si.GVP.VOTW5-2026.5.4。冻结文件含 1,214 火山、11,089 喷发行、2000—2024 年目录 M≥6 的 3,729 条 USGS 已审事件。PB2002 有 5,819 原序号的 5,824 几何分段。定稿规格重取火山 WFS；全喷发表重取失败后重核选定喷发记录，不冒称全量重取成功。数量属于快照。PH04。 其他来源链接：https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=1.0.0&request=GetFeature&outputFormat=application/json&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes；https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=1.0.0&request=GetFeature&outputFormat=application/json&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Eruptions；https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2000-01-01&endtime=2025-01-01&minmagnitude=6&eventtype=earthquake&orderby=time-asc。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://volcano.si.edu/database/webservices.cfm"
+    },
+    {
+      "id": "S605",
+      "text": {
+        "en": "NOAA NCEI / WDS, Global Historical Tsunami Database metadata and NCEI Open Data Policy",
+        "zh": "NOAA NCEI／WDS：《全球历史海啸数据库元数据》与 NCEI《开放数据政策》"
+      },
+      "note": {
+        "en": "Dataset DOI 10.7289/V5PN93H7; Use/Access Constraints and policy printed p.3 §4a–c. Clearance covers NOAA-compiled numerical/location facts, not third-party reports, photos or the mixed-rights poster. PH05. Additional source URLs: https://www.ncei.noaa.gov/sites/default/files/2023-12/NCEI%20PD-10-2-02%20-%20Open%20Data%20Policy%20Signed.pdf. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "数据 DOI 10.7289/V5PN93H7；使用／访问限制与政策印本第 3 页 §4a—c。采用范围限 NOAA 编纂的数值、位置事实，不含第三方报告、照片或混合权利海报。PH05。 其他来源链接：https://www.ncei.noaa.gov/sites/default/files/2023-12/NCEI%20PD-10-2-02%20-%20Open%20Data%20Policy%20Signed.pdf。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02151"
+    },
+    {
+      "id": "S606",
+      "text": {
+        "en": "NOAA NCEI / WDS, HaZEL observations associated with tsunami events 1142, 2439 and 5699",
+        "zh": "NOAA NCEI／WDS：HaZEL 海啸事件 1142、2439、5699 的相关观测"
+      },
+      "note": {
+        "en": "Complete frozen observations: raw 102/2,177/410; mappable 99/2,155/410. All pages, unique IDs and source-event associations checked in the preparation coverage record; 25 missing-coordinate rows retained there. Type codes only: no height or arrival values are published. Event-day display is not arrival replay. PH06. Additional source URLs: https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?tsunamiEventId=2439&itemsPerPage=100&page=1 ; https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?tsunamiEventId=5699&itemsPerPage=100&page=1. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "完整冻结观测：原表 102／2,177／410 行，可绘 99／2,155／410 行。准备覆盖记录核对完整分页、唯一 id 与事件关联，保留 25 个缺坐标行。只发布类型码，不发布高度、到达数值；源事件日显示不是到达回放。PH06。 其他来源链接：https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?tsunamiEventId=2439&itemsPerPage=100&page=1；https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?tsunamiEventId=5699&itemsPerPage=100&page=1。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/tsunamis/runups?tsunamiEventId=1142&itemsPerPage=100&page=1"
+    },
+    {
+      "id": "S607",
+      "text": {
+        "en": "Atlas, internal consistency check of the selected NOAA/ITIC country entries",
+        "zh": "Atlas：NOAA／ITIC 选列国家分项的内部一致性核查"
+      },
+      "note": {
+        "en": "Inputs are Table 1 of the October 2024 poster. The partial-table arithmetic is an internal check only, not a new observation, total estimate or inferred allocation to unlisted countries. PH07. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "输入为 2024 年 10 月海报表 1。部分分项的算术仅供内部验收，不是新观测、总数估计，也不推定未列国家的人数。PH07。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.ncei.noaa.gov/sites/default/files/2024-11/IO_Poster_20241030_final_lowres.pdf"
+    },
+    {
+      "id": "S608",
+      "text": {
+        "en": "Atlas, Plates and hazards content specification, editorial display parameters",
+        "zh": "Atlas：《板块与灾害地图》内容规格中的编辑显示参数"
+      },
+      "note": {
+        "en": "Camera choices, symbol radii, hit targets, schematic proportions, tolerances and budgets are editorial or engineering values. They are not scientific measurements. Specification §§2–4 and 7, 27 October 2026.",
+        "zh": "镜头、符号半径、命中范围、示意比例、容差与预算属于编辑或工程取值，不作科学测量。2026 年 10 月 27 日规格 §2—4、§7。"
+      },
+      "design": true
+    },
+    {
+      "id": "S609",
+      "text": {
+        "en": "NOAA, JetStream: 2004 Indian Ocean tsunami",
+        "zh": "NOAA：JetStream《2004 年印度洋海啸》"
+      },
+      "note": {
+        "en": "The Impacts: 17 countries refers to the affected extent, distinct from the October 2024 poster death accounting. F37. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "影响一节：17 国指受影响范围，不同于 2024 年 10 月海报的死亡统计范围。F37。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.noaa.gov/jetstream/2004tsu_max"
+    },
+    {
+      "id": "S610",
+      "text": {
+        "en": "USGS, Are USGS reports/publications copyrighted?",
+        "zh": "USGS：《USGS 报告与出版物受版权保护吗？》"
+      },
+      "note": {
+        "en": "USGS-produced data public domain, with third-party exceptions. This does not clear every linked ComCat attachment. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "USGS 自有数据属公有领域，第三方作品另有例外；不据此认定所有 ComCat 链接附件都可复用。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.usgs.gov/faqs/are-usgs-reportspublications-copyrighted?qt-news_science_products=0"
+    },
+    {
+      "id": "S611",
+      "text": {
+        "en": "BCA, official Chinese translations, BCA Awards 2018, archived by the National Archives of Singapore",
+        "zh": "建设局：《BCA Awards 2018 官方中文名称表》，新加坡国家档案馆存档"
+      },
+      "note": {
+        "en": "Agency-name table confirms 建设局. Only the official agency name is used; no award table is copied. F44. Approved specification reading record: 27 October 2026; frozen data collection, where applicable: 26 October 2026.",
+        "zh": "机构名表确认中文为“建设局”；只取官方机构名，不复制奖项表。F44。 定稿规格读取记录：2026 年 10 月 27 日；适用的冻结数据采集日：2026 年 10 月 26 日。"
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/20180522010/BCA%20Awards%202018%20chinese%20translations.pdf"
+    }
+  ]
+}

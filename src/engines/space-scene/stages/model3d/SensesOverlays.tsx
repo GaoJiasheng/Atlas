@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { BufferAttribute, BufferGeometry, Color, DoubleSide, InstancedMesh, LineBasicMaterial, Matrix4, MeshBasicMaterial, SphereGeometry, Vector3, type Group } from 'three';
+import type { SensesFrame } from '../../schema';
 import type { SimData, SimOverlay, SimValues } from '../../sim-schema';
 import { benchLabelPoint, benchSpotScale, benchVertex, effectiveEyeRays, solveSenses, WAVE_PARTICLE_RADIUS } from '../../lib/sim/senses';
 import type { StageBridge } from '../../bridge';
@@ -11,15 +12,15 @@ import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runti
 import { numberOf, type SimOutputs } from '../../lib/sim';
 
 type Overlay = Extract<SimOverlay, { kind: 'paraxial-eye' | 'longitudinal-wave' }>;
-export function SensesOverlay({ overlay: o, sim, values, outputs, exploded, layers, run, snapKey, phaseKey, look, bridge }: {
-  overlay: Overlay; sim: SimData; values: SimValues; outputs: SimOutputs; exploded: boolean; layers: readonly string[]; run: boolean; snapKey: number; phaseKey: number; look: StageLook; bridge: StageBridge;
+export function SensesOverlay({ overlay: o, sim, values, outputs, exploded, layers, run, snapKey, phaseKey, sensesFrame, look, bridge }: {
+  overlay: Overlay; sim: SimData; values: SimValues; outputs: SimOutputs; exploded: boolean; layers: readonly string[]; run: boolean; snapKey: number; phaseKey: number; sensesFrame?: SensesFrame | null; look: StageLook; bridge: StageBridge;
 }) {
   const particles = useRef<InstancedMesh>(null);
   const group = useRef<Group>(null);
   const runtime = useRuntime();
   const phase = useRef(0), hold = useRef(false);
   const q = useMemo(() => sim.senses ? solveSenses(sim.senses, values) : {}, [sim, values]);
-  const eye = useMemo(() => sim.senses ? effectiveEyeRays(sim.senses, values) : null, [sim, values]);
+  const eye = useMemo(() => o.kind === 'paraxial-eye' && sim.senses?.eye ? effectiveEyeRays(sim.senses, values) : null, [sim, values]);
   const w = o.when;
   const when = !w || (w.control ? values[w.control] : outputs[w.output!]) === w.is;
   const reason = exploded ? 'exploded' : o.group && !layers.includes(o.group) ? 'layer' : !when ? 'condition' : o.kind === 'paraxial-eye' && q['eye-state'] === 'dark' ? 'dark' : null;
@@ -71,15 +72,18 @@ export function SensesOverlay({ overlay: o, sim, values, outputs, exploded, laye
   useEffect(() => () => spotMaterial.dispose(), [spotMaterial]);
   useEffect(() => {
     if (o.kind !== 'longitudinal-wave') return;
+    if (sim.senses?.profile === 'sound-only') return;
+    bridge.senses.profile = 'eye-and-sound';
     bridge.sensesSeek = (cycles) => { if (!Number.isFinite(cycles)) return false; phase.current = cycles; hold.current = true; bridge.invalidate(); return true; };
     return () => { bridge.sensesSeek = () => false; bridge.senses.wave = undefined; };
-  }, [bridge, o.kind]);
-  useEffect(() => { phase.current = 0; hold.current = false; bridge.invalidate(); }, [snapKey, phaseKey, bridge]);
+  }, [bridge, o.kind, sim]);
+  useEffect(() => { phase.current = sensesFrame?.waveCycles ?? 0; hold.current = false; bridge.invalidate(); }, [snapKey, phaseKey, sensesFrame, bridge]);
   useEffect(() => { hold.current = false; bridge.invalidate(); }, [run, values, bridge]);
   useFrame((state, dt) => {
     if (!sim.senses || !particles.current) return;
     const mesh = particles.current, m = matrix;
-    const frameReason = exploded || runtime.explode > 0 ? 'exploded' : reason;
+    const acoustic = sim.senses.profile === 'sound-only';
+    const frameReason = exploded || runtime.explode > 0 ? 'exploded' : o.kind === 'longitudinal-wave' && acoustic && runtime.sound.echoContext && run ? 'echo-clock' : o.kind === 'longitudinal-wave' && acoustic && q['sound-state'] === 'still' ? 'source-off' : reason;
     const frameVisible = frameReason === null;
     if (group.current) group.current.visible = frameVisible;
     if (o.kind === 'paraxial-eye' && eye) {
@@ -103,8 +107,9 @@ export function SensesOverlay({ overlay: o, sim, values, outputs, exploded, laye
       bridge.senses.eye = eyeDebug;
     } else if (o.kind === 'longitudinal-wave') {
       const hz = numberOf(q['visual-hz']), A = numberOf(q['displacement-max']), lambda = numberOf(q['wavelength-scene']);
-      const playing = frameVisible && run && hz > 0 && !hold.current && !prefersReducedMotion();
-      if (playing) phase.current += Math.min(dt, MAX_DT) * hz;
+      const playing = acoustic ? frameVisible && runtime.sound.wavePlaying : frameVisible && run && hz > 0 && !hold.current && !prefersReducedMotion();
+      if (acoustic) phase.current = runtime.sound.phaseCycles;
+      else if (playing) phase.current += Math.min(dt, MAX_DT) * hz;
       for (let i = 0; i < o.count; i++) { const x = wave.rests[i]! + A * Math.sin(2*Math.PI*(wave.rests[i]!/lambda-phase.current)); wave.positions[i] = x; m.makeTranslation(o.origin[0] + o.axis[0]*x, o.origin[1] + o.axis[1]*x, o.origin[2]+o.axis[2]*x); mesh.setMatrixAt(i,m); mesh.setColorAt(i,i===o.referenceIndex?color:muted); }
       if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
       wave.phaseCycles = phase.current; wave.visualHz = hz; wave.lambda = lambda; wave.A = A; wave.playing = playing; wave.slowFactor = sim.senses.sound.slowFactor; wave.active = frameVisible; wave.hiddenReason = frameReason;

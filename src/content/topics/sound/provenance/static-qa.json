@@ -1,0 +1,17 @@
+{
+  "method": "Node geometry construction and static 16:9 label-anchor projection; no browser/GPU rendering",
+  "parts": 33,
+  "selectableParts": 24,
+  "contextParts": 9,
+  "physicalStations": 5,
+  "groupsIncludingOverlay": 6,
+  "geometryPieces": 46,
+  "structuralTriangles": 64356,
+  "nonFiniteAttributes": 0,
+  "labelAnchorsChecked": 54,
+  "projectionAspect": "16:9",
+  "maxAbsNdcX": 0.39988357053715884,
+  "maxAbsNdcY": 0.40053431010897195,
+  "outOfFrustumAnchors": 0,
+  "browserGates": "Not run per BRIEF; main session port5452"
+}
