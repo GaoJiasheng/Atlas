@@ -51,8 +51,8 @@ state:
     - 0
     fov: 34
   summary:
-    en: Distant earthquakes can shake Singapore; ground and structures respond together.
-    zh: 远震能使新加坡感到震动；地面与结构会共同响应。
+    en: "Distant earthquakes can shake Singapore. Explore how the ground and a connected building move."
+    zh: "远震能使新加坡感到震动。观察地面和相连建筑怎样运动。"
   sim:
     set:
       wave-kind: p
@@ -73,8 +73,8 @@ state:
         sea-uplift: true
         flow-mode: none
     caption:
-      en: Singapore can feel distant Sumatra earthquakes. Feeling shaking here does not put the fault beneath this model building.
-      zh: 新加坡能感到苏门答腊远震；这里感到晃动，并不表示断层就在模型建筑下面。
+      en: "Waves from distant Sumatra earthquakes can reach Singapore. The fault can be far from the building that shakes."
+      zh: "苏门答腊远震的波能传到新加坡。晃动建筑与断层可以相距很远。"
   - pose: building-positive
     labels:
     - building-ground
@@ -89,8 +89,8 @@ state:
         sea-uplift: true
         flow-mode: none
     caption:
-      en: The ground moves and the structure responds. This enlarged pose is an illustration, not a measured Singapore building.
-      zh: 地面移动，结构随之响应；这个放大姿态是示意，不是新加坡某栋楼的实测反应。
+      en: "The ground moves and the building responds. Its movement is enlarged so we can see it."
+      zh: "地面移动，建筑随之运动。位移已放大，方便观察。"
   - pose: building-negative
     labels:
     - building-floors
@@ -105,8 +105,8 @@ state:
         sea-uplift: true
         flow-mode: none
     caption:
-      en: Floors, frame and structural walls are connected in this example. Correct connections and suitable bracing matter.
-      zh: 这个示例的楼板、框架和结构墙相连；正确连接与合适支撑很重要。
+      en: "Floors, frame and structural walls stay connected. Good connections and suitable bracing matter in buildings."
+      zh: "楼板、框架和结构墙保持相连。正确连接和合适支撑很重要。"
   - pose: null
     labels:
     - building-ground
@@ -120,8 +120,8 @@ state:
         sea-uplift: true
         flow-mode: none
     caption:
-      en: Ground conditions and the structure's vibration characteristics affect its response. Height alone is not a safety rating.
-      zh: 地面条件与结构振动特性会影响响应；不能只凭高矮判断安全。
+      en: "Ground conditions and how a building vibrates affect its response. Height alone cannot tell us its safety."
+      zh: "地面条件和建筑振动方式都会影响反应，单凭高矮不能判断安全。"
   - part: building-frame
     labels:
     - building-frame
@@ -134,8 +134,8 @@ state:
         sea-uplift: true
         flow-mode: none
     caption:
-      en: BCA says Singapore buildings are designed for distant tremors. Its indoor advice includes taking cover under a table and not using lifts.
-      zh: BCA说明新加坡建筑按抵御远震震动设计；其室内建议包括到桌下躲避、不用电梯。
+      en: "BCA says Singapore buildings are designed to withstand distant tremors. Its indoor advice includes taking cover under a table and not using lifts."
+      zh: "BCA 说明，新加坡建筑按抵御远震震动设计；室内建议包括到桌下躲避、不用电梯。"
   index:
     parts:
     - building-ground
@@ -147,29 +147,29 @@ state:
 
 <Lang en>
 
-The structure stands on a local patch of ground. Singapore is far from major active plate boundaries, yet distant earthquakes in Sumatra can produce felt tremors here. Shaking at this building does not place the earthquake's fault directly below it. The source can be far away while seismic disturbances travel to the ground beneath a structure.
+Singapore lies far from major active plate boundaries. Even so, distant earthquakes in Sumatra can send seismic waves that cause felt tremors here. The fault can be far away while waves reach the ground beneath a building.
 
-Compare the opposite poses. The ground moves and the structure responds. A foundation is the part supporting the structure at the ground; a frame is the connected set of structural members above it. In this example, floors, frame and structural walls remain connected as the pose changes. Correct connections and suitable bracing matter in real construction. The enlarged lean makes the relationship visible without predicting the size of a real movement.
+Compare the building leaning in opposite directions. The ground moves and the structure responds. Its foundation supports it at ground level. Beams and columns form the frame above. Floors, frame and structural walls stay connected as the model moves. Good connections and suitable bracing matter in real buildings. The lean is enlarged to make these connections visible.
 
-Ground conditions and a structure's vibration characteristics both affect its response. Height alone cannot rank buildings for safety. A material's flexibility or strength is only part of a structural explanation; the connections and arrangement matter too. <TopicLink slug="materials">Materials Around Us</TopicLink> compares material properties, while this model shows a connected example without calculating engineering performance.
+Ground conditions and the way a structure vibrates both affect its response. Height alone cannot tell us how safe a building is. Material strength and flexibility matter, along with the arrangement and connections. <TopicLink slug="materials">Materials Around Us</TopicLink> explores these properties. Here we compare a connected structure without calculating its engineering performance.
 
-The Building and Construction Authority, BCA, says Singapore buildings are designed to withstand distant tremors. Its indoor advice includes taking cover under a table and not using lifts. Read the complete linked guidance for its context. This generic structure is not an HDB drawing, a test of a particular building or a guarantee for every earthquake. Its poses illustrate response; they do not diagnose a home or supply a safety score.
+The Building and Construction Authority, BCA, says Singapore buildings are designed to withstand distant tremors. Its indoor advice includes taking cover under a table and not using lifts. Read the full guidance below. The model illustrates movement; it cannot assess a real building or guarantee safety in every earthquake.
 
 <More title={{"en": "Resonance", "zh": "共振"}}>
 
-Resonance is a stronger response when the frequency of shaking is close to a structure's natural vibration frequency. BGS discusses it together with ground conditions and construction. A building's height alone does not describe all of those factors.
+Every structure has a natural vibration frequency: a rate at which it tends to vibrate. Shaking near that frequency can cause a stronger response, called resonance. BGS explains how this works alongside ground conditions and construction.
 
 </More>
 
-<More title={{"en": "A generic specimen", "zh": "通用标本"}}>
+<More title={{"en": "The building model", "zh": "建筑模型"}}>
 
-The floor arrangement and enlarged lean are design choices. The example has no assumed isolation system and no site-specific measurements, structural calculation or real-building diagnosis.
+This is a general building model, rather than an HDB drawing. Its floors and enlarged lean help explain connections. It has no assumed isolation system, site measurements or structural safety calculation.
 
 </More>
 
 <More title={{"en": "BCA public guidance", "zh": "BCA 公众指南"}}>
 
-The indoor actions above are a short paraphrase from BCA, not the complete guidance. [Read BCA's precautions to take during earth tremors](https://www1.bca.gov.sg/guidelines-and-requirements/precautions-to-take-during-earth-tremors/). The live page was rechecked on <Num s="S23">27 October 2026</Num>.
+The actions above summarise <Num s="S23">BCA's indoor advice</Num>. [Read BCA's precautions to take during earth tremors](https://www1.bca.gov.sg/guidelines-and-requirements/precautions-to-take-during-earth-tremors/) for the full guidance.
 
 </More>
 
@@ -177,29 +177,29 @@ The indoor actions above are a short paraphrase from BCA, not the complete guida
 
 <Lang zh>
 
-这件结构标本立在一小块地面上。新加坡远离主要活动板块边界，但仍能感到苏门答腊远震。此处建筑晃动，不表示地震断层就在它下面；震源可以很远，地震扰动仍会传播到建筑下方的地面。
+新加坡远离主要活动板块边界。即使如此，苏门答腊远震仍能传来地震波，让本地感到震动。断层可以很远，地震波仍会到达建筑下方的地面。
 
-比较相反方向的姿态：地面移动，结构随之响应。基础是在地面处支撑结构的部分，框架是上方相连的结构构件。在这个示例里，楼板、框架和结构墙始终保持连接。真实建造中，正确连接与合适支撑很重要；放大的倾斜只是帮助看清关系，不预测真实位移有多大。
+比较建筑向两边倾斜的画面。地面移动，结构随之运动。基础在地面处支撑建筑，上方梁柱组成框架。模型移动时，楼板、框架和结构墙保持连接。真实建筑也需要正确连接和合适支撑。图中倾斜已放大，方便看清连接关系。
 
-地面条件与结构振动特性都会影响响应，不能只按楼高排列安全程度。材料的柔韧或强度只是部分原因，连接和排列同样重要。<TopicLink slug="materials">身边的材料</TopicLink>比较材料性质；这里则展示相连的结构，但不计算工程性能，也不对实际楼房评分。
+地面条件和结构的振动方式都会影响反应。单凭高矮，不能判断建筑是否安全。材料强度、柔韧性、构件排列和连接都很重要。<TopicLink slug="materials">身边的材料</TopicLink>介绍这些性质。这里观察相连结构，没有计算工程性能。
 
-新加坡建设局 BCA 说明，新加坡建筑按抵御远震震动设计。其室内建议包括到桌下躲避、不用电梯；完整背景请读链接的官方指南。台上的通用结构并非组屋图纸，也不是某栋楼的测试，更不能保证每栋建筑在任何地震中都安全。它只示意响应，不能据此诊断住家。
+新加坡建设局 BCA 说明，新加坡建筑按抵御远震震动设计。其室内建议包括到桌下躲避、不用电梯。完整建议见下方链接。模型用来说明运动，不能评估真实建筑，也不能保证任何地震中的安全。
 
 <More title={{"en": "Resonance", "zh": "共振"}}>
 
-当地面振动频率接近结构自身的振动频率时，响应可能增强，这称为共振。英国地质调查局把它与地面条件、建造方式一起讨论；楼高本身不能概括这些因素。
+结构有自身的振动频率，也就是它倾向采用的振动节奏。地面振动频率接近这个频率时，结构的反应可能增强，这叫共振。英国地质调查局把共振、地面条件和建造方式结合起来解释。
 
 </More>
 
-<More title={{"en": "A generic specimen", "zh": "通用标本"}}>
+<More title={{"en": "The building model", "zh": "建筑模型"}}>
 
-楼板排列与放大倾斜都是设计选择。这个示例没有预设隔震装置，也没有场地实测、结构计算或实楼诊断。
+这是通用建筑模型，不是组屋图纸。楼板排列和放大的倾斜帮助说明连接关系。模型没有预设隔震系统，也没有场地实测或结构安全计算。
 
 </More>
 
 <More title={{"en": "BCA public guidance", "zh": "BCA 公众指南"}}>
 
-上述室内行动只是对 BCA 建议的简短转述，并非完整指南。[阅读 BCA 远震注意事项](https://www1.bca.gov.sg/guidelines-and-requirements/precautions-to-take-during-earth-tremors/)。本轮于 <Num s="S23">2026 年 10 月 27 日</Num>重查了在线页面。
+上述行动概括了<Num s="S23">BCA 的室内建议</Num>。完整说明请[阅读 BCA 远震注意事项](https://www1.bca.gov.sg/guidelines-and-requirements/precautions-to-take-during-earth-tremors/)。
 
 </More>
 
