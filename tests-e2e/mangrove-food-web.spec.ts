@@ -20,9 +20,9 @@ test('background has a directed web, 6 nodes and selected-link boundary', async 
   await open(page, 'ch=before-you-start');
   await expect(card(page).locator('[data-food-node]')).toHaveCount(6);
   await expect(card(page).locator('[data-food-edge]')).toHaveCount(6);
-  await expect(card(page)).toContainText('Missing pathways do not predict extinction');
+  await expect(card(page)).toContainText(/missing path.*does not mean an animal will die/i);
   expect((await sim(page)).outputs['active-links']).toBe(6);
-  await expect(page.locator('.atlas-title__note')).toContainText(/no population forecast/i);
+  await expect(page.locator('.atlas-title__note')).toContainText(/food from mangrove leaves and algae/i);
 });
 
 test('remove fiddlers leaves one food; picking a node changes selection only', async ({ page }) => {
