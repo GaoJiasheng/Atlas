@@ -139,8 +139,9 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       const dx = host.left - box.left, dy = host.top - box.top;
       const rects = hud.getState().hudObstacles.map((r) => ({ x0: r.x0 + dx, y0: r.y0 + dy, x1: r.x1 + dx, y1: r.y1 + dy }));
       resize.observe(stage);
-      // The phone / portrait layouts stack the HUD over the stage (no side columns to frame between).
-      const stacked = view.width < 1024 || view.height > view.width;
+      // Phones stack the HUD over the stage as a header (no side columns to frame between); a portrait tablet keeps its
+      // left column beside the stage and the reader as a drawer below it, so it frames between them like a landscape one.
+      const stacked = view.width < 760;
       const same = (a: readonly FrameRect[] | undefined) => a?.length === rects.length &&
         a.every((r, i) => Math.abs(r.x0 - rects[i]!.x0) + Math.abs(r.y0 - rects[i]!.y0) + Math.abs(r.x1 - rects[i]!.x1) + Math.abs(r.y1 - rects[i]!.y1) < 1);
       if (same(bridge.hudPanels) && stacked === bridge.hudStacked && box.width === bridge.hudStage?.[0] && box.height === bridge.hudStage?.[1]) {

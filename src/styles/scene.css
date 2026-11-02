@@ -3333,3 +3333,9 @@
 @media (max-width: 759px) {
   .atlas-stage-only i, .atlas-guide-toggle i { display: none; }
 }
+/* 1180–1439 px laptops: the centre shares the row with the chips and Stage / Help / LOOK / language. The preset
+   digits and the Stage / Help key letters give way (titles and the status-row hint keep the keys), so a long
+   VIEW group (ww2: ten presets) wraps to at most one more row. */
+@media (min-width: 1180px) and (max-width: 1439px) and (pointer: fine) {
+  .hud-group--view .hud-btn small, .atlas-stage-only i, .atlas-guide-toggle i { display: none; }
+}
