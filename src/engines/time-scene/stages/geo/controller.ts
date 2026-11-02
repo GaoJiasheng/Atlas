@@ -73,8 +73,6 @@ export interface GeoControllerOptions {
   blocLabels?: BlocLabels;
   /** The topic's island-scale land or regional plate (`topic.basemap`), and its `maxZoom`. */
   basemap?: BasemapOptions;
-  /** Opt-in target framing in the measured free HUD rectangle. */
-  hudFrame?: boolean;
   /** The topic's wording for entity dates (`topic.strings`); the UI strings when absent. */
   strings?: EntityStrings;
   /** Optional static point, line or area sources with numeric year windows. */
@@ -236,7 +234,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.touchZoomRotate.disableRotation();
 
   const disposers: (() => void)[] = [];
-  const hudFraming = createMapHudFraming(map, container, options.hudFrame);
+  const hudFraming = createMapHudFraming(map, container, { reducedMotion });
   disposers.push(() => hudFraming.destroy());
   let loaded = false;
   let destroyed = false;
@@ -1238,7 +1236,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /* ---------- camera ---------- */
   const applyCamera = (camera: GeoCamera, instant: boolean) => {
-    const target = { center: camera.center, zoom: camera.zoom, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0, padding: hudFraming.padding() };
+    // Framed in the free stage rect (lib/hud-framing.ts): centred between the HUD blocks, zoomed out when that room is small.
+    const target = hudFraming.target(camera);
     if (instant || reducedMotion) map.jumpTo(target);
     else map.flyTo({ ...target, duration: FLY_MS, essential: true });
   };
@@ -1273,7 +1272,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     camTimer = setTimeout(() => {
       const c = map.getCenter();
       const r = (n: number, d: number) => Math.round(n * 10 ** d) / 10 ** d;
-      const next: GeoCamera = { center: [r(c.lng, 4), r(c.lat, 4)], zoom: r(map.getZoom(), 2) };
+      const next: GeoCamera = { center: [r(c.lng, 4), r(c.lat, 4)], zoom: hudFraming.storedZoom(map.getZoom()) };
       const pitch = r(map.getPitch(), 1);
       const bearing = r(map.getBearing(), 1);
       if (pitch) next.pitch = pitch;
@@ -1398,12 +1397,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           [w, s],
           [e, n],
         ],
-        { padding: Math.round(Math.min(container.clientWidth, container.clientHeight) * 0.18) },
+        // All the data inside the free stage rect (with a margin), not under the HUD blocks.
+        { padding: hudFraming.fitPadding() },
       );
       if (!fit?.center) return null;
       const c = fit.center as { lng: number; lat: number };
       const r = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
-      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: r(fit.zoom ?? map.getZoom(), 2) };
+      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: hudFraming.storedZoom(Math.max(map.getMinZoom(), fit.zoom ?? map.getZoom())) };
     },
     plateCamera() {
       if (!region) return null;
@@ -1413,12 +1413,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           [w, s],
           [e, n],
         ],
-        { padding: 0 },
+        // The whole sheet in the free stage rect; `maxBounds` still floors the zoom at the plate filling the stage.
+        { padding: hudFraming.fitPadding(0) },
       );
       if (!fit?.center) return null;
       const c = fit.center as { lng: number; lat: number };
       const r = (v: number, d: number) => Math.round(v * 10 ** d) / 10 ** d;
-      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: r(fit.zoom ?? map.getZoom(), 2) };
+      return { center: [r(c.lng, 3), r(c.lat, 3)], zoom: hudFraming.storedZoom(Math.max(map.getMinZoom(), fit.zoom ?? map.getZoom())) };
     },
     stats() {
       const on = layersOn();

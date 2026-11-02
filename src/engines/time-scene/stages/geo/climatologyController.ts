@@ -59,7 +59,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     attributionControl: false,
     renderWorldCopies: false,
   });
-  const hudFraming = createMapHudFraming(map, container, topic.hudFrame);
+  const hudFraming = createMapHudFraming(map, container, { reducedMotion });
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('aria-hidden', 'true');
   Object.assign(svg.style, {
@@ -352,26 +352,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     if (state.transition.id !== appliedTransition && isGeoCamera(state.camera)) {
       appliedTransition = state.transition.id;
       userGesture = false;
-      const c = state.camera;
-      const padding = hudFraming.padding();
+      // Framed in the free stage rect (lib/hud-framing.ts).
+      const target = hudFraming.target(state.camera);
       map.stop();
-      if (state.transition.instant || reducedMotion)
-        map.jumpTo({
-          center: c.center,
-          zoom: c.zoom,
-          bearing: c.bearing ?? 0,
-          pitch: c.pitch ?? 0,
-          padding,
-        });
-      else
-        map.flyTo({
-          center: c.center,
-          zoom: c.zoom,
-          bearing: c.bearing ?? 0,
-          pitch: c.pitch ?? 0,
-          padding,
-          duration: 1600,
-        });
+      if (state.transition.instant || reducedMotion) map.jumpTo(target);
+      else map.flyTo({ ...target, duration: 1600 });
     }
     requestRender();
   }
@@ -443,7 +428,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     const c = map.getCenter();
     store.getState().setCamera({
       center: [c.lng, c.lat],
-      zoom: map.getZoom(),
+      zoom: hudFraming.storedZoom(map.getZoom()),
       bearing: map.getBearing(),
       pitch: map.getPitch(),
     });
@@ -580,10 +565,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           [Math.min(...xs), Math.min(...ys)],
           [Math.max(...xs), Math.max(...ys)],
         ],
-        { padding: 70 },
+        // All the data inside the free stage rect (with a margin), not under the HUD blocks.
+        { padding: hudFraming.fitPadding() },
       );
       if (!c?.center || Array.isArray(c.center) || !('lng' in c.center)) return null;
-      return { center: [c.center.lng, c.center.lat], zoom: c.zoom ?? 3.35 };
+      return { center: [c.center.lng, c.center.lat], zoom: hudFraming.storedZoom(Math.max(map.getMinZoom(), c.zoom ?? map.getZoom())) };
     },
     plateCamera: () => null,
     stats: () => ({

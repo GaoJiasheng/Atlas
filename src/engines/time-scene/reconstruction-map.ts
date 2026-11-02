@@ -55,7 +55,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     fadeDuration: 0,
   });
   map.touchZoomRotate.disableRotation();
-  const hudFraming = createMapHudFraming(map, options.container, options.hudFrame);
+  const hudFraming = createMapHudFraming(map, options.container, { reducedMotion, clampZoom: (z) => Math.min(RECONSTRUCTION_MAX_ZOOM, z) });
   map.on('error', (e) => console.warn('[atlas] map:', e.error?.message ?? e));
   // As the historical map: clicking the map must not steal keyboard focus (the stage is `data-keys="own"`).
   const canvas = map.getCanvas();
@@ -104,7 +104,8 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
   });
   const selectedMa = () => -playhead.get() / 1e6;
   const applyCamera = (next: GeoCamera, instant: boolean) => {
-    const target = { center: next.center, zoom: Math.min(RECONSTRUCTION_MAX_ZOOM, next.zoom), bearing: next.bearing ?? 0, pitch: next.pitch ?? 0, padding: hudFraming.padding() };
+    // Framed in the free stage rect (lib/hud-framing.ts).
+    const target = hudFraming.target(next);
     if (instant || reducedMotion) map.jumpTo(target);
     else map.flyTo({ ...target, duration: 2200, essential: true });
   };
@@ -136,7 +137,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
     applyTheme();
     map.setLayoutProperty(RECONSTRUCTION_GRATICULE, 'visibility', graticuleOn ? 'visible' : 'none');
     const state = store.getState();
-    if (options.hudFrame && isGeoCamera(state.camera)) applyCamera(state.camera, true);
+    if (isGeoCamera(state.camera)) applyCamera(state.camera, true);
     void frames.select(selectedMa());
   });
   map.on('wheel', () => { gesture = true; });
@@ -150,7 +151,7 @@ export function createReconstructionMap(options: GeoControllerOptions, manifest:
       if (destroyed) return;
       const center = map.getCenter();
       const round = (value: number, digits: number) => Math.round(value * 10 ** digits) / 10 ** digits;
-      const next: GeoCamera = { center: [round(center.lng, 4), round(center.lat, 4)], zoom: round(map.getZoom(), 2) };
+      const next: GeoCamera = { center: [round(center.lng, 4), round(center.lat, 4)], zoom: hudFraming.storedZoom(map.getZoom()) };
       if (map.getPitch()) next.pitch = round(map.getPitch(), 1);
       if (map.getBearing()) next.bearing = round(map.getBearing(), 1);
       store.getState().setCamera(next);

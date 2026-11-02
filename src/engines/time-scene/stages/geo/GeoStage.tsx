@@ -86,7 +86,6 @@ export function GeoStage({ store, playhead, model, locale, reconstruction, onRec
           store,
           playhead,
           model,
-          hudFrame: topic.hudFrame,
           reconstruction,
           onReconstruction: (info) => reconstructionCb.current?.(info),
           locale: localeRef.current,

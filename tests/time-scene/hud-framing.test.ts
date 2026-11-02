@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Map as MlMap } from 'maplibre-gl';
 import { freeStageRect, type FrameRect } from '../../src/engines/time-scene/lib/free-rect';
-import { createMapHudFraming, mapHudPadding } from '../../src/engines/time-scene/lib/hud-framing';
+import { createMapHudFraming, FIT_MARGIN, fitHudPadding, frameZoomShift, mapHudPadding, MAX_ZOOM_OUT, paddedCentre, REF_FREE, REFIT_MS } from '../../src/engines/time-scene/lib/hud-framing';
 
 const zero = { left: 0, right: 0, top: 0, bottom: 0 };
 
@@ -62,18 +62,53 @@ describe('TimeScene HUD padding', () => {
   });
 });
 
-describe('TimeScene HUD layout lifecycle', () => {
-  afterEach(() => vi.unstubAllGlobals());
+describe('TimeScene HUD zoom and fit', () => {
+  const ref = (x0: number, y0: number, w: number, h: number): FrameRect => ({ x0, y0, x1: x0 + w, y1: y0 + h });
 
-  it('leaves unopted topics without observers or layout reads', () => {
-    const framing = createMapHudFraming({} as MlMap, {} as HTMLElement);
-    expect(framing.padding()).toEqual(zero);
-    framing.setPresentation(true);
-    framing.destroy();
+  it('keeps the authored zoom at the 1920 × 1080 reference free rect and anything larger', () => {
+    // ww2 at 1920 × 1080: map canvas 1520 × 1023, free rect 340..1150 × 12..931.
+    expect(frameZoomShift(1520, 1023, ref(340, 12, REF_FREE.w, REF_FREE.h))).toBe(0);
+    expect(frameZoomShift(3000, 2000, ref(100, 100, 2400, 1700))).toBe(0);
   });
 
+  it('zooms out by log2 of the tighter axis, at most MAX_ZOOM_OUT', () => {
+    expect(frameZoomShift(1200, 1000, ref(0, 0, REF_FREE.w / 2, REF_FREE.h))).toBe(-1);
+    expect(frameZoomShift(1200, 1000, ref(0, 0, REF_FREE.w, REF_FREE.h / 2))).toBe(-1);
+    // 1180 × 820 iPad with today's LAYERS column: a 208 px gap would want −1.96.
+    expect(frameZoomShift(780, 737, ref(274, 12, 208, 623))).toBe(-MAX_ZOOM_OUT);
+    // Reader folded at 1180 × 820: 580 × 636.
+    expect(frameZoomShift(1166, 737, ref(274, 12, 580, 636))).toBeCloseTo(Math.log2(Math.min(580 / REF_FREE.w, 636 / REF_FREE.h)), 2);
+    expect(frameZoomShift(1000, 700, { x0: 600, x1: 400, y0: 12, y1: 688 })).toBe(0);
+  });
+
+  it('fits bounds into the free rect less a margin, centred on the bounds midpoint', () => {
+    const width = 1520, height = 1023, rect = ref(340, 12, 810, 919);
+    for (const current of [zero, mapHudPadding(width, height, rect)]) {
+      const p = fitHudPadding(width, height, rect, FIT_MARGIN, current);
+      // MapLibre subtracts both the map's padding and these from the canvas.
+      const room = width - current.left! - current.right! - p.left! - p.right!;
+      const roomY = height - current.top! - current.bottom! - p.top! - p.bottom!;
+      const m = Math.round(810 * FIT_MARGIN);
+      expect(room).toBeCloseTo(810 - 2 * m);
+      expect(roomY).toBeCloseTo(919 - 2 * m);
+      expect(p.left).toBe(p.right);
+      expect(p.top).toBe(p.bottom);
+    }
+    const p = fitHudPadding(1000, 700, ref(100, 50, 600, 500), 0);
+    expect(p).toEqual({ left: 200, right: 200, top: 100, bottom: 100 });
+  });
+
+  it('puts the padded centre at the free rect centre', () => {
+    const rect = ref(274, 12, 580, 636);
+    expect(paddedCentre(1166, 737, mapHudPadding(1166, 737, rect))).toEqual([(rect.x0 + rect.x1) / 2, (rect.y0 + rect.y1) / 2]);
+  });
+});
+
+describe('TimeScene HUD framing lifecycle', () => {
+  afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
+
   function setup() {
-    const frames: FrameRequestCallback[] = [];
+    vi.useFakeTimers();
     const resizes: (() => void)[] = [];
     const mutations: (() => void)[] = [];
     class Panel {
@@ -86,7 +121,7 @@ describe('TimeScene HUD layout lifecycle', () => {
         return { left: r.x0, right: r.x1, top: r.y0, bottom: r.y1, width: r.x1 - r.x0, height: r.y1 - r.y0 };
       }
     }
-    let hud = 'on', moving = false, current = { ...zero };
+    let hud = 'on', current = { ...zero };
     const panels = [
       new Panel('plate', { x0: 0, x1: 250, y0: 0, y1: 700 }),
       new Panel('overlay', { x0: 600, x1: 1000, y0: 0, y1: 700 }),
@@ -100,7 +135,7 @@ describe('TimeScene HUD layout lifecycle', () => {
       getAttribute: () => hud, querySelectorAll: () => panels,
       addEventListener: vi.fn(), removeEventListener: vi.fn(),
     };
-    const container = { closest: () => scene, getBoundingClientRect: () => ({ left: 0, top: 0, width: 1000, height: 700 }) };
+    const container = { dataset: {} as Record<string, string>, closest: () => scene, getBoundingClientRect: () => ({ left: 0, top: 0, width: 1000, height: 700 }) };
     const disconnect = vi.fn();
     vi.stubGlobal('ResizeObserver', class {
       constructor(cb: () => void) { resizes.push(cb); }
@@ -112,44 +147,70 @@ describe('TimeScene HUD layout lifecycle', () => {
     });
     vi.stubGlobal('document', {});
     vi.stubGlobal('getComputedStyle', (el: Panel) => ({ visibility: el.visibility }));
-    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => { frames.push(cb); return frames.length; });
-    vi.stubGlobal('cancelAnimationFrame', vi.fn());
+    const handlers = new Map<string, (e: object) => void>();
     const map = {
-      on: vi.fn(), off: vi.fn(), isMoving: () => moving, getPadding: () => current,
-      setPadding: vi.fn((p: typeof zero) => { current = p; }),
+      on: vi.fn((event: string, fn: (e: object) => void) => handlers.set(event, fn)), off: vi.fn(),
+      isMoving: () => false, getPadding: () => current,
+      easeTo: vi.fn((o: { padding: typeof zero }) => { current = o.padding; }),
+      jumpTo: vi.fn((o: { padding: typeof zero }) => { current = o.padding; }),
+      unproject: vi.fn(([x, y]: [number, number]) => ({ lng: x / 10, lat: y / 10 })),
     };
-    const framing = createMapHudFraming(map as unknown as MlMap, container as unknown as HTMLElement, true);
-    const flush = () => { while (frames.length) frames.shift()!(0); };
-    return { framing, map, panels, resizes, mutations, disconnect, flush,
-      hideHud: () => { hud = 'off'; }, moving: (on: boolean) => { moving = on; } };
+    const framing = createMapHudFraming(map as unknown as MlMap, container as unknown as HTMLElement);
+    const settle = () => vi.advanceTimersByTime(200);
+    return { framing, map, panels, resizes, mutations, disconnect, settle, handlers, container,
+      hideHud: () => { hud = 'off'; } };
   }
+  const authored = { center: [10, 20] as [number, number], zoom: 5 };
 
-  it('uses actual overlay children, excludes reader/perf/hidden panels, resets for H and measures presentation', () => {
+  it('frames an authored camera: overlay children, no reader / perf / hidden panels; H and presentation re-measure', () => {
     const s = setup();
-    expect(s.framing.padding()).toEqual({ ...zero, left: 100 });
-    s.hideHud(); s.mutations[1]!(); s.flush();
-    expect(s.map.setPadding).toHaveBeenLastCalledWith(zero);
+    // Free rect 262..838 (plate column, the overlay's real card): centred → no padding; 576 px wide → zoom out.
+    const t = s.framing.target(authored);
+    expect(t.padding).toEqual({ ...zero, left: 100 });
+    expect(t.zoom).toBeCloseTo(5 + Math.max(-MAX_ZOOM_OUT, Math.log2(Math.min(576 / REF_FREE.w, 676 / REF_FREE.h))), 1);
+    expect(s.container.dataset.hudFrame).toBe('262,12,838,688');
+    s.hideHud(); s.mutations[1]!(); s.settle();
+    expect(s.map.easeTo).toHaveBeenLastCalledWith(expect.objectContaining({ padding: zero, center: [10, 20], duration: REFIT_MS }));
     s.panels[5]!.visibility = 'visible';
-    s.framing.setPresentation(true); s.flush();
-    expect(s.framing.padding()).toEqual({ ...zero, bottom: 100 });
+    s.framing.setPresentation(true); s.settle();
+    expect(s.map.easeTo).toHaveBeenLastCalledWith(expect.objectContaining({ padding: { ...zero, bottom: 100 } }));
     s.framing.destroy();
     expect(s.disconnect).toHaveBeenCalledTimes(3);
     expect(s.map.off).toHaveBeenCalledWith('moveend', expect.any(Function));
   });
 
-  it('defers padding updates during a flight/gesture and changes no geographic camera on resize', () => {
+  it('eases the authored view into a changed free rect once per settle, and not again when nothing changed', () => {
     const s = setup();
-    s.map.setPadding.mockClear();
-    s.moving(true);
-    s.panels[0]!.rect.x1 = 300;
-    s.resizes[0]!(); s.flush();
-    expect(s.map.setPadding).not.toHaveBeenCalled();
-    expect(s.framing.padding()).toEqual({ ...zero, left: 150 });
-    s.moving(false);
-    s.map.on.mock.calls.find(([event]) => event === 'moveend')![1](); s.flush();
-    expect(s.map.setPadding).toHaveBeenCalledExactlyOnceWith({ ...zero, left: 150 });
-    s.resizes[0]!(); s.flush();
-    expect(s.map.setPadding).toHaveBeenCalledTimes(1);
-    s.framing.destroy();
+    s.framing.target(authored);
+    s.panels[0]!.rect.x1 = 350;
+    s.resizes[0]!(); s.resizes[0]!(); s.settle();
+    expect(s.map.easeTo).toHaveBeenCalledTimes(1);
+    expect(s.map.easeTo.mock.calls[0]![0]).toMatchObject({ center: [10, 20], padding: { ...zero, left: 200 } });
+    s.handlers.get('moveend')!({}); s.settle();
+    expect(s.map.easeTo).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves the reader\'s own view still after a pan or wheel zoom, moving only the padding', () => {
+    const s = setup();
+    s.framing.target(authored);
+    s.handlers.get('movestart')!({ originalEvent: {} });
+    s.panels[0]!.rect.x1 = 350;
+    s.resizes[0]!(); s.settle();
+    expect(s.map.easeTo).not.toHaveBeenCalled();
+    // Free rect 362..838: new padding left 200 → its centre (600, 350) keeps the geography on screen there.
+    expect(s.map.unproject).toHaveBeenCalledWith([600, 350]);
+    expect(s.map.jumpTo).toHaveBeenLastCalledWith({ center: { lng: 60, lat: 35 }, padding: { ...zero, left: 200 } });
+    // The next chapter / beat / preset is framed again.
+    s.framing.target(authored);
+    s.handlers.get('wheel')!({});
+    s.panels[0]!.rect.x1 = 250;
+    s.resizes[0]!(); s.settle();
+    expect(s.map.easeTo).not.toHaveBeenCalled();
+  });
+
+  it('writes back zoom in authored units', () => {
+    const s = setup();
+    const t = s.framing.target(authored);
+    expect(s.framing.storedZoom(t.zoom)).toBeCloseTo(5, 2);
   });
 });
