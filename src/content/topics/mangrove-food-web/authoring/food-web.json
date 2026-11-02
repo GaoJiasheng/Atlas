@@ -8,8 +8,8 @@
       "id": "remove",
       "kind": "choice",
       "label": {
-        "en": "Remove from this web",
-        "zh": "从这个网移走"
+        "en": "Remove from the web",
+        "zh": "从食物网移走"
       },
       "default": "none",
       "options": [
@@ -68,8 +68,8 @@
       "id": "inspect",
       "kind": "choice",
       "label": {
-        "en": "Inspect food pathways",
-        "zh": "查看食物路径"
+        "en": "Choose an animal to inspect",
+        "zh": "选择要查看的动物"
       },
       "default": "n-mudskipper",
       "options": [
@@ -107,8 +107,8 @@
       "id": "tide",
       "kind": "choice",
       "label": {
-        "en": "Diagrammatic tide pose",
-        "zh": "示意潮位姿态"
+        "en": "Tide",
+        "zh": "潮位"
       },
       "default": "low",
       "options": [
@@ -286,8 +286,8 @@
       ],
       "evidence": "local-observation",
       "note": {
-        "en": "Fallen leaf material, not a living producer node for detritus.",
-        "zh": "这条边表示叶片输入，不把死叶当活生产者。"
+        "en": "Fallen leaves pass from the living tree to leaf-eating crabs.",
+        "zh": "活树的落叶供吃叶的蟹取食。"
       },
       "from": "n-mangrove"
     },
@@ -307,8 +307,8 @@
       ],
       "evidence": "indexed-only",
       "note": {
-        "en": "Indexed climbing-crab account. This selected group-level possibility is not a verified local Episesarma diet link. Different climbing-crab kinds are grouped here.",
-        "zh": "只读到攀爬蟹类资料的索引。此线是功能组层面的可能关系，不是本地某种 Episesarma 的已核食谱；这里合并了不同蟹类。"
+        "en": "Some climbing-crab kinds graze on algae. This group includes several kinds, with different diets.",
+        "zh": "一些攀爬蟹类会刮食藻类。这一组包含不同蟹类，食物也不同。"
       },
       "from": "n-algae"
     },
@@ -328,8 +328,8 @@
       ],
       "evidence": "general",
       "note": {
-        "en": "Observed elsewhere; possible food-group link, not a Singapore measurement.",
-        "zh": "外地观察支持可能关系；不是本地食性实测。"
+        "en": "Algae feeding has been observed in fiddler crabs outside Singapore.",
+        "zh": "新加坡以外曾观察到招潮蟹吃藻类。"
       },
       "from": "n-algae"
     },
@@ -353,8 +353,8 @@
       ],
       "evidence": "indexed-only",
       "note": {
-        "en": "General guide differs from the Lim Chu Kang sample; not a measured local pair.",
-        "zh": "一般指南与林厝港样本不同；不是本地实测配对。"
+        "en": "General guides list crabs as food, though the Lim Chu Kang sample contained no fiddlers.",
+        "zh": "一般指南把蟹列为食物，但林厝港样本中没有检出招潮蟹。"
       },
       "from": "n-fiddlers"
     },
@@ -374,8 +374,8 @@
       ],
       "evidence": "reported-observation",
       "note": {
-        "en": "The indexed paper reports opportunistic feeding on an Episesarma crab, without a feeding frequency. This functional group includes other climbing crabs.",
-        "zh": "论文索引报告了对 Episesarma 蟹的机会取食观察，没有取食频率。这个功能组也包含其他攀爬蟹类。"
+        "en": "A mudskipper was reported taking an Episesarma crab when the opportunity arose. The report gives no feeding frequency.",
+        "zh": "有报告记录弹涂鱼趁机会取食 Episesarma 蟹，但未给出取食频率。"
       },
       "from": "n-tree-crabs"
     },
@@ -395,8 +395,8 @@
       ],
       "evidence": "general",
       "note": {
-        "en": "NParks identifies herons as predators of giant mudskippers.",
-        "zh": "NParks 明述鹭会捕食这种弹涂鱼。"
+        "en": "Herons can catch and eat giant mudskippers.",
+        "zh": "鹭会捕食弹涂鱼。"
       },
       "from": "n-mudskipper"
     }

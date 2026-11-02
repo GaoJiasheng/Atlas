@@ -42,3 +42,17 @@
 S30 是原创、自描述的设计研究；图内计数与场景位移都不是实测生态数据。没有地图、数据集或关键帧，因此无地图派生文件需要登记。S19–S23 只保留准备参考，不发布其数据或第三方照片／插图。科学事实概括与原创程序化几何不复制来源图解；三个图像复用 Atlas 原创 environment 图，由主施工会话按 manifest 处理，不新增第三方许可例外。
 
 Scope: all scientific claims are paraphrased. This teaching graph selects possible functional relationships; it does not measure abundance, feeding frequency or energy-transfer percentages. Indexed access and disagreements are preserved in the source notes and AUDIT.md. No third-party geographic data, photograph, traced geometry or texture is shipped.
+
+## 2026-11-02 geometry reference pass
+
+Read-only morphology references; the photographs were downloaded into the ignored
+`scripts/geo/mangrove-food-web/refs/` directory and visually inspected. No pixels,
+traced outlines, textures or third-party meshes are shipped. New geometry is original
+procedural work; its dimensions and repeat counts remain DESIGN, not survey data.
+
+- [Avicennia alba](https://commons.wikimedia.org/wiki/File:Avicennia_alba.jpg), Abu Hamas, CC BY-SA 4.0: opposite elliptic leaves and branching attachment.
+- [Rhizophora mangle (prop roots)](https://commons.wikimedia.org/wiki/File:Rhizophora_mangle_(prop_roots).jpg), Hans Hillewaert, CC BY-SA 3.0: genus-level arching/branching root morphology, not a claim that this specimen depicts Singapore's named Bakau species.
+- [Grey heron, watching](https://commons.wikimedia.org/wiki/File:Grey_heron,_watching_(9435750343).jpg), Jacob Spinks, CC BY 2.0: neck proportions, dagger bill, folded-wing layering and slender legs. The teaching specimen remains a generic heron.
+- [Ring-legged fiddler crab](https://commons.wikimedia.org/wiki/File:Ring-legged_Fiddler_Crab_(Uca_annulipes)_(15748699382).jpg), Bernard Dupont, CC BY-SA 2.0: front-wide carapace, long eye stalks, large male palm and opposing fingers. Climbing crabs remain the existing functional group, not a species-level reconstruction.
+- [Periophthalmodon schlosseri](https://commons.wikimedia.org/wiki/File:Periophthalmodon_schlosseri.jpg), Bernhard Luth, CC BY-SA 2.0 DE (existing S22): raised dorsal eyes, broad head and fleshy pectoral base.
+- [Smithsonian Ocean: Mangroves](https://ocean.si.edu/ocean-life/plants-algae/mangroves), Ocean Portal Team, reviewed by Candy Feller: root aeration, branching prop roots and lenticels; factual consultation only.
