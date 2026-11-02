@@ -5,8 +5,10 @@
  * Other lengths, snapshots and motion amplitudes are diagram design (S63).
  */
 import assert from 'node:assert/strict';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { feature } from 'topojson-client';
+import type { FeatureCollection } from 'geojson';
 import type { z } from 'zod';
 import { partsFile, partSchema, primitiveSchema, poseSchema } from '../../../src/engines/space-scene/schema';
 import { simSchema } from '../../../src/engines/space-scene/sim-schema';
@@ -28,7 +30,7 @@ const accent = 'token:accent-1';
 const box = (size: V3, at: V3, tint = ink): Primitive => ({ kind: 'box', size, at, color: 'plastic', tint });
 const sphere = (r: number, at: V3, tint = ink): Primitive => ({ kind: 'sphere', size: [r], at, color: 'plastic', tint });
 const extrude = (shape: V2[], depth: number, at: V3 = [0, 0, 0], tint = ink): Primitive => ({ kind: 'extrude', shape, depth, at, color: 'plastic', tint });
-const sweep = (path: V3[], radius: number | number[], tint = hot): Extract<Primitive, { kind: 'sweep' }> => ({ kind: 'sweep', path, radius, at: [0, 0, 0], color: 'plastic', tint, caps: 'flat' });
+const sweep = (path: V3[], radius: number | number[], tint = hot): Extract<Primitive, { kind: 'sweep' }> => ({ kind: 'sweep', path, radius, radial: 48, segments: 64, at: [0, 0, 0], color: 'plastic', tint, caps: 'flat' });
 function add(id: string, en: string, zh: string, group: string, primitive: Primitive, summary: ReturnType<typeof bi>, detail: ReturnType<typeof bi>, options: Partial<Part> = {}) {
   const part: Part = { id, name: bi(en, zh), group, primitive, summary, detail, explode: { dir: [0, 1, 0], dist: 0 }, connects: [], castShadow: false, ...options };
   parts.push(part);
@@ -49,14 +51,44 @@ function hemisphere(outer: number, inner: number): V2[] {
 }
 const radii = [1, 6341 / 6371, 3485 / 6371, 1221 / 6371, 0];
 const earth = [
-  ['crust', 'Crust', '地壳', accent, 'The crust is Earth’s thin rocky outer layer.', '地壳是地球外面很薄的岩石层。', 'This shell uses a uniform land-crust example of about 30 km; real crust varies in thickness. Oceanic crust can be much thinner. [S59, S63]', '这个薄壳采用约30千米的均匀陆壳示例；真实地壳厚薄不同，海洋地壳可以薄得多。[S59, S63]'],
-  ['mantle', 'Mantle', '地幔', muted, 'The mantle is mostly solid rock beneath the crust.', '地幔在地壳下方，大部分是固态岩石。', 'Rock here can deform over geological time. The thick rocky shell is not a global sea of magma. Its radial extent is a teaching synthesis of the cited Earth measurements. [S6, S58, S59, S63]', '这里的岩石能在地质时间尺度上变形。这个厚岩石壳不是全球岩浆海；其半径范围由所引地球数值拼合成教学几何。[S6, S58, S59, S63]'],
-  ['outer-core', 'Outer core', '外核', light, 'Liquid metal surrounds the solid inner core.', '液态金属包围着固态内核。', 'The outer core is liquid metal, represented by a closed shell rather than flowing light. Its outer boundary is about 3,485 km from Earth’s centre. It does not supply a volcano’s magma. [S58, S59, S10, S63]', '外核是液态金属；模型用闭合壳表示，不用流光表示液态。其外边界离地心约3485千米。它不为火山供给岩浆。[S58, S59, S10, S63]'],
-  ['inner-core', 'Inner core', '内核', ink, 'The inner core is solid metal at Earth’s centre.', '内核是地心的固态金属。', 'The inner-core boundary has a radius of about 1,221 km. A solid half-sphere exposes the centre. Radius means centre to boundary, not the distance across the whole core. [S59, S63]', '内核边界半径约1221千米。实心半球露出中心；半径是中心到边界的距离，不是穿过整个内核的距离。[S59, S63]'],
+  ['crust', 'Crust', '地壳', accent, 'The crust is Earth’s thin rocky outer layer.', '地壳是地球外面很薄的岩石层。', "The shell uses a uniform land-crust example of about 30 km. Real crust varies in thickness, and oceanic crust can be much thinner. [S59, S63]", "薄壳统一采用约 30 千米的陆壳示例。真实地壳厚薄不同，海洋地壳可以薄得多。[S59, S63]"],
+  ['mantle', 'Mantle', '地幔', muted, 'The mantle is mostly solid rock beneath the crust.', '地幔在地壳下方，大部分是固态岩石。', "Most mantle rock is solid, but it can slowly change shape over geological time. Its thickness here combines the cited Earth measurements to make a teaching model. It is not a global magma ocean. [S6, S58, S59, S63]", "地幔岩石大部分是固态，却能在漫长地质时间内缓慢变形。模型根据所引地球尺寸画出厚度；地幔不是全球岩浆海。[S6, S58, S59, S63]"],
+  ['outer-core', 'Outer core', '外核', light, 'Liquid metal surrounds the solid inner core.', '液态金属包围着固态内核。', "The outer core is liquid metal. Its outer boundary is about 3,485 km from Earth's centre. The shell shows its position; volcanic magma does not come from it. [S58, S59, S10, S63]", "外核是液态金属，外边界离地心约 3485 千米。壳层显示它的位置，火山岩浆不来自这里。[S58, S59, S10, S63]"],
+  ['inner-core', 'Inner core', '内核', ink, 'The inner core is solid metal at Earth’s centre.', '内核是地心的固态金属。', "The inner core is solid metal with a radius of about 1,221 km. The sphere with a quarter wedge removed reveals the centre. A radius runs from the centre to the boundary, rather than all the way across. [S59, S63]", "内核是固态金属，半径约 1221 千米。球体切去四分之一楔形后露出中心。半径从中心量到边界，不是横跨整个内核的距离。[S59, S63]"],
 ];
 earth.forEach(([id, en, zh, tint, sen, szh, den, dzh], i) => add(`earth-${id}`, en!, zh!, 'planet-shells', {
-  kind: 'lathe', profile: hemisphere(radii[i]!, radii[i + 1]!), segments: 96, arc: 180, at: [0, 0, 0], color: 'plastic', tint,
+  kind: 'lathe', profile: hemisphere(radii[i]!, radii[i + 1]!), segments: 96, arc: 270, rotation: [0, -25, 0], at: [0, 0, 0], color: 'plastic', tint,
 }, bi(sen!, szh!), bi(den!, dzh!), { shell: i < 3, explode: { dir: [1, 0, 0], dist: [0.2, 0.15, 0.1, 0][i]! }, connects: i < 3 ? [`earth-${earth[i + 1]![0]}`] : [] }));
+
+// Geographic exterior engraved on the curved crust, never freehand land.
+// Natural Earth 1:110m (public domain), redistributed by world-atlas 2.0.2.
+// The fixed longitude offset presents Africa/Europe on the retained side.
+const world = JSON.parse(readFileSync(new URL('../../../node_modules/world-atlas/land-110m.json', import.meta.url), 'utf8')) as Parameters<typeof feature>[0];
+const land = feature(world, world.objects.land!) as unknown as FeatureCollection;
+const coasts: V3[][] = [];
+for (const f of land.features) {
+  if (f.geometry?.type !== 'MultiPolygon') continue;
+  for (const polygon of f.geometry.coordinates) {
+    const ring = polygon[0]!;
+    if (ring.length < 18) continue;
+    let path: V3[] = [];
+    const flush = () => { if (path.length > 5) coasts.push(path); path = []; };
+    for (const coord of ring) {
+      const phi = (coord[0]! + 70) * Math.PI / 180;
+      const lat = coord[1]! * Math.PI / 180;
+      if (Math.cos(phi) > Math.SQRT1_2 - 0.006) { flush(); continue; }
+      const angle = phi - 25 * Math.PI / 180;
+      path.push([1.002 * Math.cos(lat) * Math.sin(angle), 1.002 * Math.sin(lat), 1.002 * Math.cos(lat) * Math.cos(angle)]);
+    }
+    flush();
+  }
+}
+parts[0]!.extra = coasts.sort((a, b) => b.length - a.length).slice(0, 12).map(path => {
+  const step = Math.max(1, Math.ceil((path.length - 1) / 63));
+  const reduced = path.filter((_, k) => k % step === 0);
+  if (reduced.at(-1) !== path.at(-1)) reduced.push(path.at(-1)!);
+  return { ...sweep(reduced, 0.0022, light), radial: 8, segments: 64 };
+});
 
 // The local plate is independently enlarged; it carries no Earth scale bar.
 const plateScale = 0.45;
@@ -67,7 +99,7 @@ const plateLayers = [
 ] as const;
 plateLayers.forEach(([id, en, zh, h, y, tint], i) => add(`plate-${id}`, en, zh, 'planet-shells', box([3 * plateScale, h * plateScale, plateScale], [0, y, 0], tint),
   bi(i < 2 ? 'This layer moves with the rest of the lithospheric plate.' : 'The mantle below the plate remains mostly solid.', i < 2 ? '这一层与岩石圈板块的其余部分一起移动。' : '板块下方的地幔仍大部分是固态。'),
-  bi('A plate includes crust and rigid uppermost mantle. This separate sample enlarges thin layers; its drawn thicknesses are design values, not Earth-scale measurements. [S6, S7, S63]', '板块包括地壳和刚性的最上部地幔。这个独立小样放大薄层；所画厚度是设计值，不按地球比例量取。[S6, S7, S63]'),
+  bi("Crust and rigid uppermost mantle form a plate together. This enlarged sample shows the thin layers clearly. Its thicknesses are chosen for the diagram, at a different scale from the globe. [S6, S7, S63]", "地壳和刚性的最上部地幔合成板块。放大小样让薄层更清楚；厚度供图解使用，与球体比例不同。[S6, S7, S63]"),
   { connects: i < 2 ? [`plate-${plateLayers[i + 1]![0]}`] : [] }));
 
 // Four independent samples, all visible together. A main block and its
@@ -76,25 +108,28 @@ function plateBlock(id: string, en: string, zh: string, x: number, y: number, wi
   return add(id, en, zh, 'boundary-blocks', box([width, 0.44, 0.7], [x, y, 0], ink), summary, detail,
     { extra: [box([width, 0.08, 0.7], [x, y + 0.26, 0], accent)] });
 }
-const boundaryDetail = bi('Each complete block includes crust and rigid uppermost mantle. The local shape and accelerated movement are schematic, without geographical coordinates. [S7, S45, S63]', '每块完整板块包括地壳和刚性的最上部地幔。局部形状与加速运动均为示意，没有地理坐标。[S7, S45, S63]');
+const boundaryDetail = bi("Crust and rigid uppermost mantle move together in this block. The model speeds up motion and simplifies the local shape. It does not mark a real map location. [S7, S45, S63]", "块体中的地壳与刚性的最上部地幔一起运动。模型加快运动，并简化局部形状，没有标出真实地图位置。[S7, S45, S63]");
 for (const [side, x] of [['left', -1.35], ['right', -0.55]] as const) plateBlock(`edge-div-${side}`, `Spreading plate, ${side}`, `扩张板块${side === 'left' ? '左' : '右'}侧`, x, 0.78, 0.72,
   bi('Separating plates allow magma to rise and make new oceanic crust.', '板块分开时，岩浆可上升形成新海洋地壳。'), boundaryDetail);
 // Shared join at x=.55, y=.78 (bottom) / 1.00 (top).
 add('edge-sub-left', 'Incoming oceanic plate', '进入俯冲区的海洋板块', 'boundary-blocks', box([0.6, 0.14, 0.7], [0.25, 0.85, 0], ink),
   bi('The incoming plate continues into the descending slab.', '进入俯冲区的板块与下降板片连续相接。'), boundaryDetail,
   { extra: [box([0.6, 0.08, 0.7], [0.25, 0.96, 0], accent)], connects: ['edge-slab'] });
-const slabTop: V2[] = Array.from({ length: 17 }, (_, k) => { const t = k / 16; return [0.55 + 1.05 * t, 1 - 0.91 * t * t]; });
+// Dense analytic meridian: horizontal at the incoming plate, with a
+// continuous tangent all the way down. Keep the full rectangular join.
+const slabTop: V2[] = Array.from({ length: 73 }, (_, k) => { const t = k / 72; return [0.55 + 1.05 * t, 1 - 0.91 * t * t]; });
+const slabCrustBase: V2[] = slabTop.map(([x, y]) => [x, y - 0.08]);
 const slabBottom: V2[] = slabTop.map(([x, y]) => [x, y - 0.22]);
-add('edge-slab', 'Descending slab', '俯冲板片', 'boundary-blocks', extrude([...slabTop, ...slabBottom.slice().reverse()], 0.7),
+add('edge-slab', 'Descending slab', '俯冲板片', 'boundary-blocks', extrude([...slabCrustBase, ...slabBottom.slice().reverse()], 0.7),
   bi('This continuous slab descends into the mantle.', '这块连续的板片向地幔下降。'),
-  bi('The slab meets the incoming plate along the same full cross-section. Water carried by subducting rock helps rock above it melt partly; the slab is not drawn as a pipe from the core. [S7, S9, S63]', '板片沿相同完整截面接上进入区的板块。俯冲岩石所带的水有助于上方岩石部分熔融；板片不是来自地核的管道。[S7, S9, S63]'),
-  { extra: [extrude([...slabTop, ...slabTop.map(([x, y]): V2 => [x, y - 0.08]).reverse()], 0.702, [0, 0, 0], accent)], connects: ['edge-sub-left'] });
+  bi("The incoming plate continues into this descending slab across its full thickness. Water carried down by the rock helps some rock above it melt. The slab descends into the mantle; it is not a pipe from the core. [S7, S9, S63]", "进入俯冲区的板块与下降板片完整相接。岩石带下去的水帮助上方部分岩石熔融。板片向地幔下降，不是地核通出的管道。[S7, S9, S63]"),
+  { extra: [extrude([...slabTop, ...slabCrustBase.slice().reverse()], 0.7, [0, 0, 0], accent)], connects: ['edge-sub-left'] });
 add('edge-sub-right', 'Overriding plate', '上覆板块', 'boundary-blocks', extrude([[0.78, 1.12], [1.78, 1.12], [1.78, 0.72], [1.34, 0.72], [1.02, 0.91]], 0.7),
   bi('The overriding plate sits above the descending slab.', '上覆板块位于下降板片上方。'), boundaryDetail,
   { extra: [extrude([[0.78, 1.12], [1.78, 1.12], [1.78, 1.2], [1.25, 1.2], [1.18, 1.34], [1.04, 1.2], [0.78, 1.2]], 0.7, [0, 0, 0], accent)] });
 add('edge-melt', 'Partial melting above the slab', '板片上方的部分熔融', 'boundary-blocks', { ...sphere(0.13, [1.22, 0.71, 0.42], hot), scale: [1.3, 0.65, 0.7] },
   bi('Water from the slab helps some rock above it melt.', '板片释放的水有助于上方部分岩石熔融。'),
-  bi('This small highlighted region represents local partial melting, not a mantle-wide molten layer. Its size is enlarged for reading. [S9, S63]', '这块小区域表示局部部分熔融，不是遍布地幔的熔融层。大小为便于阅读而放大。[S9, S63]'));
+  bi("Some rock melts in this small region above the slab. The region is enlarged so we can see it; most mantle rock stays solid. [S9, S63]", "板片上方这片小区域有部分岩石熔融。区域已放大，方便观察；地幔大部分岩石仍是固态。[S9, S63]"));
 for (const [side, x] of [['left', -1.35], ['right', -0.55]] as const) {
   const p = plateBlock(`edge-trans-${side}`, `Transform plate, ${side}`, `转换板块${side === 'left' ? '左' : '右'}侧`, x, -0.8, 0.76,
     bi('This plate slides horizontally past its neighbour.', '这块板块沿水平方向错过相邻板块。'), boundaryDetail);
@@ -102,61 +137,98 @@ for (const [side, x] of [['left', -1.35], ['right', -0.55]] as const) {
 }
 add('collision-fold', 'Continental collision', '大陆碰撞', 'boundary-blocks', extrude([[0.08, -1.02], [1.78, -1.02], [1.78, -0.55], [1.47, -0.55], [1.31, -0.43], [1.1, -0.22], [0.94, -0.42], [0.76, -0.3], [0.55, -0.51], [0.08, -0.55]], 0.7),
   bi('Converging continents can build mountains.', '大陆靠近碰撞可以形成山脉。'),
-  bi('This separate convergence sample compares continental collision with oceanic subduction. It does not assume the same volcanic arrangement. The folds and thickness are schematic. [S7, S63]', '这个独立汇聚小样把大陆碰撞与海洋板块俯冲并列比较，不假定两者具有相同的火山排列。褶皱与厚度为示意。[S7, S63]'),
+  bi("Colliding continents can form mountains. Compare this example with oceanic subduction: the volcanic arrangement can differ. Folds and layer thicknesses are simplified in the model. [S7, S63]", "大陆碰撞可形成山脉。与海洋板块俯冲相比，火山分布可以不同。模型简化了褶皱和岩层厚度。[S7, S63]"),
   { extra: [extrude([[0.08, -0.55], [0.55, -0.51], [0.76, -0.3], [0.94, -0.42], [1.1, -0.22], [1.31, -0.43], [1.47, -0.55], [1.78, -0.55], [1.78, -0.47], [1.47, -0.47], [1.31, -0.35], [1.1, -0.14], [0.94, -0.34], [0.76, -0.22], [0.55, -0.43], [0.08, -0.47]], 0.7, [0, 0, 0], accent)] });
 
 // A single volcanic opening and a local, crystal-bearing storage body.
-const coneProfile: V2[] = [[1.2, 0], [0.95, 0.17], [0.72, 0.47], [0.5, 0.81], [0.29, 1.16], [0.19, 1.32], [0.12, 1.32], [0.095, 1.12], [0.095, 0], [1.2, 0]];
-add('volcano-cone', 'Cone', '火山锥', 'volcano-system', { kind: 'lathe', profile: coneProfile, segments: 72, arc: 180, at: [0, 0, 0], color: 'plastic', tint: muted },
+// Stratovolcano: shallow foot, progressively steeper upper flanks, a
+// rounded lip and recessed crater. The cut face carries nested strata.
+const flankRadius = (y: number) => 0.19 + 1.01 * (1 - y / 1.32) ** 1.65;
+const flank: V2[] = Array.from({ length: 41 }, (_, k) => { const y = 1.32 * k / 40; return [flankRadius(y), y]; });
+const coneProfile: V2[] = [...flank, [0.17, 1.325], [0.145, 1.315], [0.12, 1.27], [0.085, 1.13], [0.08, 0], [1.2, 0]];
+const strata: Primitive[] = Array.from({ length: 8 }, (_, k) => {
+  const f = 0.23 + k * 0.095;
+  const outer = flank.map(([r, y]): V2 => [r * f, y * f]);
+  const inner = outer.slice().reverse().map(([r, y]): V2 => [r * 0.973, y - 0.012]);
+  return { kind: 'lathe', profile: [...outer, ...inner, outer[0]!], segments: 96, arc: 180, at: [0, 0, 0.004], color: 'plastic', tint: k % 2 ? light : ink };
+});
+add('volcano-cone', 'Cone', '火山锥', 'volcano-system', { kind: 'lathe', profile: coneProfile, segments: 96, arc: 180, at: [0, 0, 0], color: 'plastic', tint: muted },
   bi('Rock builds the cone around a surface opening.', '岩石围着地表开口形成火山锥。'),
-  bi('This cone is a teaching cutaway with one top opening. Its slopes and layers are schematic, not the dimensions of a named volcano. [S10, S63]','这是一个顶部只有一个开口的教学剖面。坡度和岩层均为示意，不是某座火山的尺寸。[S10, S63]'),
-  { shell: true, explode: { dir: [1, 0, 0], dist: 0.3 }, chainName: bi('Cone', '火山锥'), connects: ['volcano-host'] });
-const storageHole: V2[] = Array.from({ length: 40 }, (_, k) => { const a = 2 * Math.PI * k / 40; return [0.45 * Math.cos(a), -0.43 + 0.23 * Math.sin(a)]; });
+  bi("Rock forms this cone around one top opening. The cutaway simplifies the slopes and layers; it does not copy a named volcano's dimensions. [S10, S63]","岩石围着顶部开口形成火山锥。剖面简化了坡度和岩层，没有复制具名火山的尺寸。[S10, S63]"),
+  { extra: strata, shell: true, explode: { dir: [1, 0, 0], dist: 0.3 }, chainName: bi('Cone', '火山锥'), connects: ['volcano-host'] });
+// A shared irregular roof/floor contour guarantees the storage body and
+// the rock aperture meet exactly; no detached oval or empty cave.
+const storageHole: V2[] = Array.from({ length: 64 }, (_, k) => {
+  const a = 2 * Math.PI * k / 64;
+  const lobe = 1 + 0.10 * Math.sin(3 * a + 0.4) + 0.055 * Math.cos(5 * a);
+  return [0.45 * Math.cos(a) * lobe, -0.43 + 0.23 * Math.sin(a) * lobe];
+});
 add('volcano-host', 'Host rock', '围岩', 'volcano-system', { ...extrude([[-1.35, -0.82], [1.35, -0.82], [1.35, 0], [-1.35, 0]], 0.62, [0, 0, -0.31], ink), holes: [storageHole] } as Primitive,
   bi('Solid rock surrounds the local magma system.', '固态围岩包围着局部岩浆系统。'),
-  bi('The cut rock surrounds a shaped storage region. The teaching section ends locally below it; no conduit leads down to the core. [S10, S63]', '切开的围岩围绕着储存区。教学剖面在其下方的局部范围结束，没有通向地核的通道。[S10, S63]'),
+  bi("Solid rock surrounds the magma storage region. The cutaway ends just below it. No conduit connects the storage region to Earth's core. [S10, S63]", "固态岩石包围岩浆储存区，剖面在其下方结束。储存区没有通往地核的通道。[S10, S63]"),
   { shell: true, explode: { dir: [-1, 0, 0], dist: 0.3 }, chainName: bi('Rock', '围岩'), connects: ['volcano-storage'] });
-const storageProfile: V2[] = Array.from({ length: 25 }, (_, k) => { const a = Math.PI * k / 24; return [k === 0 || k === 24 ? 0 : 0.45 * Math.sin(a), -0.23 * Math.cos(a)]; });
-storageProfile.push(storageProfile[0]!);
-add('volcano-storage', 'Magma storage', '岩浆储存区', 'volcano-system', { kind: 'lathe', profile: storageProfile, segments: 48, arc: 180, at: [0, -0.43, 0], color: 'plastic', tint: hot },
+add('volcano-storage', 'Magma storage', '岩浆储存区', 'volcano-system', extrude(storageHole, 0.3, [0, 0, -0.15], hot),
   bi('Magma collects locally with crystals in the storage region.', '岩浆与晶体在局部储存区共存。'),
-  bi('Storage can contain melt and crystals together. The small pale crystals and the cut surface are enlarged symbols; the region is not an empty cave or the core. [S10, S63]', '储存区可以同时含熔体与晶体。浅色小晶体和切面是放大的示意；这里不是空洞，也不是地核。[S10, S63]'),
+  bi("Melt and crystals can share a magma storage region. The pale crystals are enlarged to make them visible. This region contains material; it is not an empty cave or the core. [S10, S63]", "岩浆储存区可以同时有熔体和晶体。浅色晶体已放大，方便看清。这里装着物质，不是空洞或地核。[S10, S63]"),
   { extra: Array.from({ length: 11 }, (_, k) => ({ ...box([0.035, 0.055, 0.035], [0.31 * Math.cos(k * 2.4), -0.43 + 0.12 * Math.sin(k * 2.4), 0.007], light), rotation: [0, 0, k * 37] } as Primitive)), chainName: bi('Storage', '储存区'), connects: ['volcano-conduit'] });
-const conduitPath: V3[] = [[0, -0.23, 0.018], [0, 0.1, 0.018], [-0.015, 0.61, 0.018], [0, 1.1, 0.018], [0, 1.33, 0.018]];
-add('volcano-conduit', 'Conduit', '岩浆通道', 'volcano-system', sweep(conduitPath, [0.072, 0.067, 0.06, 0.065, 0.09]),
+const conduitPath: V3[] = [[-0.02, -0.25, 0.018], [-0.045, 0.1, 0.018], [0.035, 0.49, 0.018], [-0.025, 0.9, 0.018], [0, 1.1, 0.018], [0, 1.18, 0.018]];
+add('volcano-conduit', 'Conduit', '岩浆通道', 'volcano-system', sweep(conduitPath, [0.072, 0.067, 0.06, 0.065, 0.065, 0.09]),
   bi('This passage connects local magma storage to the opening.', '这条通道把局部岩浆储存区接到喷发口。'),
-  bi('The solid filled passage joins the storage body and the top vent. Real volcanic plumbing can be more complex; this path is local and does not connect to the core. [S10, S63]', '填满物质的通道接上储存区与顶部喷发口。真实火山管道可能更复杂；本通道限于局部，不连接地核。[S10, S63]'),
-  { chainName: bi('Conduit', '通道'), connects: ['volcano-storage', 'volcano-vent'] });
-add('volcano-vent', 'Vent', '喷发口', 'volcano-system', { kind: 'lathe', profile: [[0.19, 1.3], [0.2, 1.34], [0.12, 1.34], [0.12, 1.3], [0.19, 1.3]], segments: 64, at: [0, 0, 0], color: 'plastic', tint: accent },
+  bi("Magma fills this passage from the storage region to the vent. Real volcanic passages can be more complicated. This local route does not connect to the core. [S10, S63]", "岩浆填满从储存区到喷发口的通道。真实火山通道可以更复杂。这条局部路线不通往地核。[S10, S63]"),
+  { extra: [
+    sweep([conduitPath[1]!, [-0.21, 0.25, 0.018], [-0.4, 0.48, 0.018], [-0.47, 0.68, 0.018]], [0.045, 0.034, 0.025, 0.006]),
+    sweep([conduitPath[2]!, [0.19, 0.58, 0.018], [0.32, 0.77, 0.018]], [0.035, 0.024, 0.006]),
+    { ...sweep([conduitPath[1]!, [0.2, 0.13, 0.018], [0.54, 0.14, 0.018], [0.72, 0.18, 0.018]], [0.033, 0.038, 0.028, 0.006]), section: { flat: 0.45 }, up: [0, 1, 0] },
+  ], chainName: bi('Conduit', '通道'), connects: ['volcano-storage', 'volcano-vent'] });
+add('volcano-vent', 'Vent', '喷发口', 'volcano-system', { kind: 'lathe', profile: [[0.19, 1.3], [0.195, 1.32], [0.18, 1.34], [0.15, 1.33], [0.12, 1.28], [0.115, 1.25], [0.125, 1.25], [0.16, 1.3], [0.19, 1.3]], segments: 96, at: [0, 0, 0], color: 'plastic', tint: accent },
   bi('Gas, fragments or lava can reach the surface at this opening.', '气体、碎屑或熔岩可从这个开口到达地表。'),
-  bi('The annular rim marks the same single top opening as the cone and conduit. It is an opening, not an extra underground chamber. [S10, S63]', '环形边缘标出火山锥与通道的同一个顶部开口；它是开口，不是额外的地下空腔。[S10, S63]'),
+  bi("The ring marks the cone's top opening, where the conduit reaches the surface. The vent is an opening, rather than another underground chamber. [S10, S63]", "圆环标出火山锥顶部的开口，通道在这里到达地表。喷发口是开口，不是另一个地下空腔。[S10, S63]"),
   { chainName: bi('Vent', '喷发口'), connects: ['volcano-conduit', 'volcano-lava'] });
 add('volcano-bubbles', 'Bubbles', '气泡', 'volcano-system', sphere(0.024, [0, 0.62, 0.092], light),
   bi('Gas can form expanding bubbles as magma rises and pressure falls.', '岩浆上升、压力降低时，气体可析出并形成膨胀气泡。'),
-  bi('The pale bubbles are enlarged and repeated only for visibility. Their number and pose do not calculate gas pressure or an eruption threshold. [S10, S63]', '浅色气泡只为看清而放大重复。数量与姿态不计算气体压力，也不计算喷发门槛。[S10, S63]'),
+  bi("Gas bubbles can grow as magma rises. The pale bubbles are enlarged and repeated for visibility. Their positions and number do not measure pressure or determine when an eruption starts. [S10, S63]", "岩浆上升时，气泡可以膨胀。浅色气泡经过放大并重复显示，方便看清。位置和数量不表示压力，也不能确定喷发何时开始。[S10, S63]"),
   { repeat: { count: 6, axis: [0, 1, 0], spacing: 0.14 }, chainName: bi('Bubbles', '气泡') });
-const lavaPath: V3[] = [[0.12, 1.33, 0.09], [0.31, 1.16, 0.11], [0.53, 0.82, 0.13], [0.75, 0.48, 0.16], [0.98, 0.19, 0.2], [1.25, 0.04, 0.22]];
-add('volcano-lava', 'Lava', '熔岩', 'volcano-system', { ...sweep(lavaPath, [0.045, 0.055, 0.06, 0.07, 0.08, 0.06]), section: { flat: 0.45 }, up: [0, 0, 1] },
+// The half cone fills z ≤ 0 (lathe arc 180 from +X through −Z to −X), so the
+// flow lies on its exterior a little behind the cut edge, not in front of the
+// cut plane; `up` +Y keeps the flattened ribbon tangent to the flank.
+const lavaAz = 9 * Math.PI / 180;
+const onFlank = (r: number, y: number, da = 0): V3 => [r * Math.cos(lavaAz + da), y, -r * Math.sin(lavaAz + da)];
+const lavaPath: V3[] = [conduitPath.at(-1)!, onFlank(0.12, 1.33), ...[1.16, 0.82, 0.48, 0.19, 0.025].map((y, k): V3 => onFlank(flankRadius(y) + 0.012, y, 0.02 * Math.sin(k * 1.7)))];
+add('volcano-lava', 'Lava', '熔岩', 'volcano-system', { ...sweep(lavaPath, [0.04, 0.035, 0.045, 0.07, 0.1, 0.13, 0.1]), section: { flat: 0.16 }, up: [0, 1, 0] },
   bi('Magma that reaches the surface is called lava.', '岩浆喷到地表后叫熔岩。'),
-  bi('This small slope sample is kept beside the ash sample for comparison. It shows a path, not a forecast of how far a real lava flow would travel. [S10, S45, S63]', '这件小型坡面样本与火山灰并列供比较。它表示路径，不预测真实熔岩流能走多远。[S10, S45, S63]'),
-  { chainName: bi('Lava', '熔岩'), connects: ['volcano-vent'] });
-add('volcano-ash', 'Ash', '火山灰', 'volcano-system', { ...box([0.033, 0.04, 0.025], [0, 1.67, -0.04], ink), rotation: [21, 12, 30] },
+  bi("Compare this lava sample on the slope with the ash beside it. The model shows a flow path, without predicting how far real lava would travel. [S10, S45, S63]", "把坡面熔岩与旁边的火山灰比较。模型显示流动路径，不预测真实熔岩能流多远。[S10, S45, S63]"),
+  { extra: [
+    { ...sweep([lavaPath[4]!, onFlank(1.2, 0.03, -0.06), onFlank(1.3, 0.018, -0.1)], [0.06, 0.09, 0.065]), section: { flat: 0.14 }, up: [0, 1, 0] },
+    { ...sweep([lavaPath[5]!, onFlank(1.22, 0.02, 0.07), onFlank(1.31, 0.016, 0.1)], [0.065, 0.1, 0.08]), section: { flat: 0.14 }, up: [0, 1, 0] },
+  ], chainName: bi('Lava', '熔岩'), connects: ['volcano-vent'] });
+// One reusable uneven grain, arbitrary orientations, a narrowing jet and
+// widening billows. eachPieces groups these into one InstancedMesh.
+const grainProfile: V2[] = [[0, -0.016], [0.017, -0.008], [0.013, 0.006], [0.007, 0.017], [0, 0.021]];
+const grains: Primitive[] = Array.from({ length: 33 }, (_, k) => {
+  const t = k / 32;
+  const angle = k * 2.399963;
+  const width = t < 0.35 ? 0.02 + t * 0.13 : 0.15 + 0.15 * Math.sin((t - 0.35) / 0.65 * Math.PI / 2);
+  const r = width * Math.sqrt(((k * 17) % 33 + 0.5) / 33);
+  return { kind: 'lathe', profile: grainProfile, segments: 12, scale: [1, 0.85, 0.65], at: [r * Math.cos(angle) + 0.09 * t * t, 1.4 + t * 0.78, r * Math.sin(angle) - 0.035], rotation: [k * 47, k * 83, k * 29], color: 'plastic', tint: ink };
+});
+add('volcano-ash', 'Ash', '火山灰', 'volcano-system', grains[0]!,
   bi('Volcanic ash consists of small rock, mineral and glass fragments.', '火山灰由细小岩石、矿物与玻璃碎屑组成。'),
-  bi('The fragments here are greatly enlarged. Under the definition used by this topic, ash is less than 2 mm in diameter. This comparison sample remains visible alongside lava and is not a simulated eruption cloud. [S65, S63]', '这里的碎屑大大放大。本题采用的定义为直径小于2毫米。这个比较样本与熔岩同时可见，不是模拟喷发云。[S65, S63]'),
-  { extra: [{ ...sphere(0.022, [0.035, 1.81, 0.02], muted), scale: [1.2, 0.7, 1] }, { ...box([0.02, 0.045, 0.024], [-0.02, 1.96, -0.02], ink), rotation: [0, 10, 38] }], repeat: { count: 5, axis: [1, 0, 0], spacing: 0.15 }, chainName: bi('Ash', '火山灰') });
+  bi("Volcanic ash fragments are less than 2 mm in diameter under the definition used here. The enlarged pieces stay beside the lava for comparison. They remain a material sample; their plume arrangement does not simulate an eruption cloud. [S65, S63]", "按这里采用的定义，火山灰碎屑直径小于 2 毫米。放大的碎屑与熔岩并列供比较，仍表示材料样本；羽流排列不是模拟喷发云。[S65, S63]"),
+  { extra: grains.slice(1), repeat: { count: 7, axis: [0, 1, 0], radius: 0.025 }, chainName: bi('Ash', '火山灰') });
 
 // Fault and two distinct marker rows. Surface markers are segmented at
 // the locked contact, so bending can be shown without a sliding contact.
 for (const [side, x] of [['left', -0.765], ['right', 0.765]] as const) add(`fault-${side}`, `Fault block, ${side}`, `断层${side === 'left' ? '左' : '右'}侧岩块`, 'ground-and-waves', box([1.47, 0.7, 1], [x, 0.9, 0], muted),
   bi('Rock stores elastic strain before sudden fault slip.', '断层突然滑动前，岩石储存弹性应变能。'),
-  bi('The sample shows horizontal offset and has no magma. The enlarged poses illustrate deformation followed by slip; they cannot predict an earthquake’s place or time. [S6, S12, S63]', '小样表示水平错距，不含岩浆。放大姿态表示先变形再滑动，不能预测地震的地点或时刻。[S6, S12, S63]'));
+  bi("The rocks deform before suddenly slipping sideways, without magma. The movement is enlarged for viewing. It cannot predict an earthquake's time or place. [S6, S12, S63]", "岩石先变形，再突然水平滑动，过程中没有岩浆。位移已放大，方便观察，不能预测地震的时间或地点。[S6, S12, S63]"),
+  { extra: [0.68, 0.91, 1.12].flatMap((y, k) => [-0.502, 0.502].map(z => box([1.47, k === 1 ? 0.045 : 0.022, 0.004], [x, y, z], k === 1 ? ink : light))) });
 for (const [side, a, b] of [['left', -1.4, -0.18], ['lock', -0.18, 0.18], ['right', 0.18, 1.4]] as const) add(`fault-marker-${side}`, side === 'lock' ? 'Locked marker segment' : `Marker band, ${side}`, side === 'lock' ? '锁定段标记' : `${side === 'left' ? '左' : '右'}侧标记带`, 'ground-and-waves', extrude([[a, 1.256], [b, 1.256], [b, 1.272], [a, 1.272]], 0.065, [0, 0, 0.17], accent),
   bi(side === 'lock' ? 'The contact stays locked while the outer marker arms turn.' : 'This surface marker makes bending and offset visible.', side === 'lock' ? '外侧标记臂偏转时，接触段保持锁定。' : '地表标记让变形与错距可见。'),
-  bi('This coloured marker is a diagram device, not a separate geological layer. In the loaded pose each arm pivots about its contact end; slip then leaves a visible sideways mismatch. [S12, S63]', '这条有色标记是图解工具，不是独立地层。受力姿态中，两臂各绕接触端转动；滑动后保留可见的水平错距。[S12, S63]'));
+  bi("The coloured band helps us see deformation; it is not another rock layer. Each outer arm turns around its contact end while the middle stays locked. After slip, the two sides are offset. [S12, S63]", "有色带帮助我们看清变形，不是另一层岩石。中间锁定时，两侧标记臂绕接触端转动。滑动后，两边留下错距。[S12, S63]"));
 add('fault-focus', 'Focus', '震源', 'ground-and-waves', sphere(0.06, [0, 0.83, 0.04], hot),
-  bi('The earthquake rupture starts at the focus.', '地震破裂从震源开始。'), bi('The small sphere marks one starting location inside the fault, not the whole fault plane. Its size is enlarged. [S12, S63]', '小球标出断层内部的一个破裂起点，不代表整个断层面；大小经过放大。[S12, S63]'));
+  bi('The earthquake rupture starts at the focus.', '地震破裂从震源开始。'), bi("The enlarged sphere marks where rupture starts inside the fault. It shows one starting place, rather than the whole fault surface. [S12, S63]", "放大小球标出断层内部破裂的起点。它表示一个起始位置，不是整个断层面。[S12, S63]"));
 add('fault-epicentre', 'Epicentre', '震中', 'ground-and-waves', { kind: 'cylinder', size: [0.085, 0.085, 0.012], at: [0, 1.285, 0.04], color: 'plastic', tint: hot },
-  bi('The epicentre is on the surface directly above the focus.', '震中位于震源正上方的地表。'), bi('This disc is vertically above the focus sphere. It does not mark the place that must shake most strongly. [S12, S63]', '这个圆盘在震源小球垂直上方，不表示那里一定震得最强。[S12, S63]'));
+  bi('The epicentre is on the surface directly above the focus.', '震中位于震源正上方的地表。'), bi("The disc sits directly above the focus on the surface. This point need not be the place that shakes most strongly. [S12, S63]", "圆盘位于震源正上方的地表。这个点未必是震得最强的地方。[S12, S63]"));
 const letters = 'abcdefghijklmnopq'.split('');
 const waveIds: string[] = [];
 for (const [kind, y] of [['p', -0.35], ['s', -0.9]] as const) letters.forEach((letter, i) => {
@@ -164,14 +236,14 @@ for (const [kind, y] of [['p', -0.35], ['s', -0.9]] as const) letters.forEach((l
   waveIds.push(id);
   add(id, `${kind.toUpperCase()}-wave marker ${letter.toUpperCase()}`, `${kind.toUpperCase()}波标记${letter.toUpperCase()}`, 'ground-and-waves', sphere(0.047, [-1.6 + 0.4 * (0.5 * i), y, 0.06], kind === 'p' ? accent : cold),
     bi(kind === 'p' ? 'This rock marker moves parallel to the wave’s travel direction.' : 'This rock marker moves across the wave’s travel direction.', kind === 'p' ? '这枚岩石标记沿波传播的方向振动。' : '这枚岩石标记垂直于波传播方向振动。'),
-    bi(`The marker oscillates near its resting place instead of travelling with the wavefront. This ${kind.toUpperCase()} row is a separate comparison model. Position, amplitude, frequency and drawing speed are design values; du means diagram units, not metres. [S60, S63]`, `标记在原位附近往返，不随波前一路前进。${kind.toUpperCase()}波这一排是独立的比较模型。位置、振幅、频率与绘图速度都是设计值；du表示图解单位，不是米。[S60, S63]`));
+    bi(`The marker moves back and forth near its starting place while the wavefront travels on. Compare this ${kind.toUpperCase()} row with the other row. Positions, vibration size, cycle rate and speed are chosen for the diagram. The unit du means diagram units, rather than metres. [S60, S63]`, `波前向远处传播，标记只在原位附近往返。把这排 ${kind.toUpperCase()} 波与另一排比较。位置、振动幅度、频率和速度均供图解使用；du 表示图解单位，不是米。[S60, S63]`));
 });
 
 // Water markers encode signed displacement; they are not moving parcels
 // tracked by a hydrodynamic solver. All three source blocks remain joined.
 for (const [id, x, w] of [['sea-bed', 0, 0.4], ['sea-bed-left', -0.9, 1.4], ['sea-bed-right', 0.9, 1.4]] as const) add(id, id === 'sea-bed' ? 'Central seafloor source' : `Seafloor source, ${x < 0 ? 'left' : 'right'}`, id === 'sea-bed' ? '中心海床源区' : `${x < 0 ? '左' : '右'}侧海床源区`, 'water-and-structures', box([w, 0.15, 0.65], [x, -0.075, 0], ink),
   bi('Sudden vertical seafloor movement can displace the water above.', '海床突然垂直移动，可以移开上方海水。'),
-  bi('In this example the central block rises and neighbouring blocks settle. The source switch turns off this example only; it does not exclude landslides or volcanic tsunami sources. [S13, S14, S63]', '本例中心块上升，相邻块下移。关闭源开关只表示本例无源，不排除滑坡或火山过程产生海啸。[S13, S14, S63]'));
+  bi("The central seabed rises while its neighbours move down, displacing water above. The switch controls this source only. Landslides and volcanic processes can also cause tsunamis. [S13, S14, S63]", "中央海床上升，相邻部分下降，带动上方海水。开关只控制这个位移源；滑坡和火山过程也能引发海啸。[S13, S14, S63]"));
 const waterIds = ['sea-bed', 'sea-bed-left', 'sea-bed-right'];
 letters.forEach((letter, i) => {
   const id = `sea-column-${letter}`;
@@ -179,7 +251,7 @@ letters.forEach((letter, i) => {
   const x = 0.2 * (i - 8);
   add(id, `Water-depth marker ${letter.toUpperCase()}`, `水深标记${letter.toUpperCase()}`, 'water-and-structures', box([0.008, 0.26, 0.008], [x, 0.25, 0.08], cold),
     bi('This depth marker represents disturbance through the water depth.', '这枚水深标记表示扰动涉及整个水深。'),
-    bi('The line and its two dots are one selectable symbol, not a to-scale water column. Vertical offsets are balanced diagram snapshots, not a calculation of currents, energy, flooding or real arrival time. [S15, S63]', '细线与上下两点合为一枚可选符号，不是按实尺画的水柱。上下位移是保持正负平衡的图解快照，不计算洋流、能量、淹没或真实到时。[S15, S63]'),
+    bi("The line and two dots form one selectable marker for the whole water depth. The symbol is enlarged. The snapshots balance upward and downward movements; they do not calculate currents, energy, flooding or real arrival times. [S15, S63]", "细线和两点组成一个可选标记，表示整个水深，符号已放大。快照中的向上与向下位移保持平衡，不计算洋流、能量、淹没或真实到达时间。[S15, S63]"),
     { extra: [sphere(0.023, [x, 0.12, 0.08], cold), sphere(0.023, [x, 0.38, 0.08], cold)] });
 });
 // A separate nearshore section and two low long-wave profiles. No breaker.
@@ -189,7 +261,7 @@ const coastWave = (x0: number, length: number, amp: number): Primitive => {
 };
 add('sea-coast', 'Shore sample', '近岸小样', 'water-and-structures', extrude([[-1.6, -1.18], [1.6, -1.18], [1.6, -0.64], [1.05, -0.74], [0.4, -0.94], [-1.6, -1.06]], 0.6, [0, 0, -0.04], muted),
   bi('A long wave slows in shallower water and its height may grow.', '长波进入浅水后减速，波高可能增加。'),
-  bi('This independent shore sample contrasts a longer, lower profile with a shorter, taller one. The shallow pose enlarges the drawn vertical shape only. The speed formula does not calculate wave height, inundation or a breaking wave. [S15, S63]', '这个独立近岸小样比较较长较低与较短较高的波形。浅水姿态只放大所画的竖向形状。速度公式不计算波高、淹没或卷浪。[S15, S63]'),
+  bi("Compare a longer, lower wave with a shorter, higher one in this separate shore sample. The shallow-water view stretches the drawn height. The speed formula does not calculate wave height, flooding or breaking waves. [S15, S63]", "在独立近岸小样中，比较较长较低与较短较高的波。浅水视图放大了图中的高度。速度公式不计算波高、淹没或波浪破碎。[S15, S63]"),
   { extra: [coastWave(-1.5, 1.8, 0.045), coastWave(0.55, 0.75, 0.1)] });
 
 // A generic four-floor structure. All upper parts share one foundation-top
@@ -197,9 +269,9 @@ add('sea-coast', 'Shore sample', '近岸小样', 'water-and-structures', extrude
 // The main primitive is the front strip beyond the foundation, so the leader
 // lands on ground that shows; the rest is the same slab.
 add('building-ground', 'Ground', '地面', 'water-and-structures', box([1.65, 0.22, 0.14], [0, -0.26, 0.53], muted),
-  bi('Moving ground supplies the motion at the foundation.', '移动的地面把运动传到基础。'), bi('This is a generic ground sample with no fault beneath it. Ground conditions help determine how shaking affects a structure. It is not a Singapore soil survey. [S25, S63]', '这是通用地面小样，下方不画断层。地面条件会影响结构对震动的响应；它不是新加坡土层勘测。[S25, S63]'), { extra: [box([1.65, 0.22, 1.06], [0, -0.26, -0.07], muted)], connects: ['building-foundation'] });
+  bi('Moving ground supplies the motion at the foundation.', '移动的地面把运动传到基础。'), bi("Ground motion reaches the building through its foundation. Ground conditions affect how the structure responds. This general sample has no fault below it and does not copy surveyed Singapore soil. [S25, S63]", "地面运动通过基础传到建筑。地面条件会影响结构反应。通用小样下方没有断层，也没有复制新加坡实测土层。[S25, S63]"), { extra: [box([1.65, 0.22, 1.06], [0, -0.26, -0.07], muted)], connects: ['building-foundation'] });
 add('building-foundation', 'Foundation', '基础', 'water-and-structures', box([1.2, 0.3, 0.92], [0, -0.15, 0], ink),
-  bi('The foundation connects the structure to the ground.', '基础把结构连接到地面。'), bi('The foundation depth and width are design choices. This sample has no default isolation device, specified piles or building-code parameters. It does not assess an actual building. [S25, S63]', '基础深度和宽度是设计选择。本样本没有默认隔震装置、指定桩基或建筑规范参数，不评估真实建筑。[S25, S63]'), { connects: ['building-ground', 'building-frame', 'building-core'] });
+  bi('The foundation connects the structure to the ground.', '基础把结构连接到地面。'), bi("The foundation supports the building at the ground. Its width and depth help make the diagram clear. The sample specifies no isolation device, piles or building-code values and cannot assess a real building. [S25, S63]", "基础在地面处支撑建筑。宽度和深度方便图解说明。小样没有指定隔震装置、桩基或规范数值，不能评估真实建筑。[S25, S63]"), { connects: ['building-ground', 'building-frame', 'building-core'] });
 const frame: Primitive[] = [];
 // The first piece is the front column between two floor slabs, so the leader anchor is not buried in a slab.
 frame.push(box([0.075, 0.55, 0.075], [0.45, 0.975, 0.35], ink), box([0.075, 0.7, 0.075], [0.45, 0.35, 0.35], ink), box([0.075, 1.35, 0.075], [0.45, 1.925, 0.35], ink));
@@ -210,16 +282,16 @@ for (const y of [0.65, 1.3, 1.95, 2.6]) {
 }
 add('building-frame', 'Frame', '框架', 'water-and-structures', frame[0]!,
   bi('Connected beams and columns support this generic structure.', '相连的梁柱支撑这件通用结构。'),
-  bi('This open frame lets the connections be seen. Its dimensions and exaggerated movement are diagram design, not an HDB drawing or measured Singapore building. Correct connections and suitable bracing matter. [S25, S63]', '开放框架让连接位置可见。尺寸与放大运动均为图解设计，不是HDB图纸或新加坡某栋楼的实测。正确连接与合适支撑很重要。[S25, S63]'),
+  bi("The open frame reveals connections between beams and columns. Good connections and suitable bracing matter. The model enlarges movement and uses general dimensions, without copying an HDB plan or a measured Singapore building. [S25, S63]", "开放框架露出梁柱之间的连接。正确连接和合适支撑很重要。模型放大运动并采用通用尺寸，没有复制组屋图纸或实测新加坡建筑。[S25, S63]"),
   { extra: frame.slice(1), connects: ['building-foundation', 'building-floors', 'building-core'] });
 add('building-floors', 'Floors', '楼板', 'water-and-structures', box([1, 0.065, 0.8], [0, 1.625, 0], light),
   bi('Floor slabs connect to the frame and structural wall in this sample.', '本样本的楼板与框架和结构墙相连。'),
-  bi('The repeated floors are design geometry, not a claim about a real building’s storey count. The floor, frame and wall share the same pose pivot so the connections stay together. [S25, S63]', '重复楼板是设计几何，不表示真实建筑的楼层数。楼板、框架和结构墙共用姿态枢轴，使连接保持相接。[S25, S63]'),
+  bi("The floors, frame and wall turn together so their connections stay joined. The repeated floors are chosen for the diagram; their count does not describe a real building. [S25, S63]", "楼板、框架和墙一起转动，连接处保持相接。重复楼板供图解使用，层数不代表真实建筑。[S25, S63]"),
   { repeat: { count: 4, axis: [0, 1, 0], spacing: 0.65 }, connects: ['building-frame', 'building-core'] });
 // Same wall in two pieces; the main one ends between floor slabs so its leader anchor is not buried in one.
 add('building-core', 'Structural wall', '结构墙', 'water-and-structures', box([0.36, 1.9, 0.09], [0, 0.95, -0.2], accent),
   bi('This wall is connected to the frame, floors and foundation.', '这面墙与框架、楼板和基础相连。'),
-  bi('The wall is one generic example of structural support, not a claim about every Singapore building. Response depends on ground conditions and vibration characteristics; height alone cannot rank safety. [S25, S63]', '这面墙只是结构支撑的通用例子，不代表每栋新加坡建筑。响应受地面条件和振动特性影响，不能只按高矮排列安全程度。[S25, S63]'),
+  bi("This wall shows one way to support a structure, without representing every Singapore building. Ground conditions and vibration characteristics affect the response. Height alone cannot tell us safety. [S25, S63]", "这面墙显示一种结构支撑方式，不代表所有新加坡建筑。地面条件和振动特性会影响反应，单凭高矮不能判断安全。[S25, S63]"),
   { extra: [box([0.36, 0.7, 0.09], [0, 2.25, -0.2], accent)], connects: ['building-foundation', 'building-frame', 'building-floors'] });
 
 // Non-simulation poses never take ownership of the wave or source glyphs.
@@ -316,12 +388,12 @@ const file = {
     { id: 'magma-path', group: 'volcano-system', path: conduitPath, count: 120, speed: 0.15, color: hot, whenRun: true, ends: 'fade', spread: 0.018, parts: ['volcano-storage', 'volcano-conduit', 'volcano-vent'], flat: true },
     { id: 'lava-path', group: 'volcano-system', path: lavaPath, count: 80, speed: 0.08, color: hot, whenRun: true, ends: 'fade', spread: 0.015, parts: ['volcano-vent', 'volcano-lava'], flat: true },
   ],
-  animations: [], poses, sim,
+  animations: [{ id: 'ash-tumble', target: 'volcano-ash', kind: 'rotate', axis: [0.3, 1, 0.2], rpm: 0.8, each: true }], poses, sim,
   views: { assembled: { camera: camera([0.4, 0.35, 4.8], [0, -0.25, 0], 32) }, cover: camera([0.35, 0.15, 3.8], [0, 0, 0], 32), section: { plane: 'xy' }, reference: { fit: 'layers' }, cutaway: { normal: [1, 0, 0], offset: 0 }, shadows: 'contact' },
   presets: [
     { id: 'earth-view', label: bi('Earth', '地球'), camera: camera([0.4, 0.35, 4.8], [0, -0.25, 0], 32) },
     { id: 'edge-view', label: bi('Boundaries', '板块边界'), camera: camera([3.8, 3, 5.8], [0, 0, 0]) },
-    { id: 'volcano-view', label: bi('Volcano', '火山'), camera: camera([3, 2.1, 4.8], [0, 0.4, 0]) },
+    { id: 'volcano-view', label: bi('Volcano', '火山'), camera: camera([3, 2.2, 5.6], [0, 0.65, 0]) },
     { id: 'fault-view', label: bi('Slip and waves', '滑动与波'), camera: camera([0, 2.2, 6.5], [0, 0, 0]) },
     { id: 'sea-view', label: bi('Sea', '海水'), camera: camera([0, 1.5, 5.8], [0, 0, 0]) },
     { id: 'building-view', label: bi('Structure', '结构'), camera: camera([3.3, 2.3, 5.8], [0, 1.05, 0]) },
@@ -330,7 +402,7 @@ const file = {
     { key: bi('Earth radius', '地球半径'), value: '≈ 6371 km [S58]', tag: 'typical' },
     { key: bi('Crust example', '地壳示例'), value: '30 km · DESIGN [S59, S63]', tag: 'design' },
     { key: bi('Scale', '比例'), value: bi('Local sections enlarged', '局部剖面放大'), tag: 'design' },
-    { key: bi('Models', '模型'), value: bi('Independent teaching samples', '独立教学标本'), tag: 'design' },
+    { key: bi('Models', '模型'), value: bi("Each has its own scale", "各用独立比例"), tag: 'design' },
   ],
   telemetry: [
     { key: bi('Wavefront · diagram units', '波前·图解单位'), follow: 'wave-front', unit: 'du', decimals: 1, scope: 'observe' },

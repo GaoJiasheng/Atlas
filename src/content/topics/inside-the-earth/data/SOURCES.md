@@ -40,8 +40,10 @@ Numbers in chapter prose use `<Num s="S#">`; part details use `[S#]`. All lesson
 | `figures/inside-the-earth-magma-cutaway` | Approved original parent drawing reused as `inside-the-earth-magma-cutaway.png`; existing illustrate pipeline. Local storage/conduit/vent, not a measured volcano. | Atlas CC BY-NC-SA 4.0 original project illustration; retain preparation manifest's reuse record. |
 | Generator and tests | Original code implementing spec formulas and independent numerical assertions. | Repository software licence; distinct from content licence. |
 | Local modelling references | S9/S10/S45 and approved images are read for structure/proportion comparison. | Original rights remain with publishers. No reference-page images bundled. |
+| Curved crust coastline engravings in `parts.json` | Natural Earth land 1:110m, v4.1.0, from the installed `world-atlas@2.0.2/land-110m.json`. Major outer coast contours projected onto the unit sphere, clipped at the quarter-wedge cut and reduced to at most 64 stations. Twelve retained coastline runs; no administrative borders. Build time only. | Public domain: [Natural Earth terms](https://www.naturalearthdata.com/about/terms-of-use/), [world-atlas source](https://github.com/topojson/world-atlas). Attribution: Made with Natural Earth. |
+| Volcano and Earth realism rebuild | [USGS composite-volcano section, fig. 10](https://pubs.usgs.gov/gip/volc/types.html) for concave flanks, layered cut face and radiating dykes; [USGS Earth section](https://pubs.usgs.gov/gip/dynamic/inside.html) for the globe/local-section distinction. Reference GIFs inspected during development; none shipped. Local contours and plume arrangement remain Atlas design geometry, not a named volcano, eruption prediction or seismic model. | USGS federal diagrams are public domain. Original procedural reconstruction; no reference image texture or GLB. |
 
-本题无地图、地理关键帧或地理数据导入；边界方块是原创机制图，不是地理地图。不导入父资料的 PB2002、GVP、GEM、ComCat、Natural Earth 或 GEBCO，也不复制父单事件样本。当前没有 CC BY-SA、ODbL 或 ODC-BY 派生文件，无需增加此类内容许可例外；不将 BY-SA 与 BY-NC-SA 混入同一派生文件。
+本题无地图或地理关键帧；边界方块是原创机制图，不是地理地图。地球外表面海岸线采用 Natural Earth 公有领域陆地数据（加工方法见上表），不表示板块边界。不导入父资料的 PB2002、GVP、GEM、ComCat 或 GEBCO，也不复制父单事件样本。当前没有 CC BY-SA、ODbL 或 ODC-BY 派生文件，无需增加此类内容许可例外；不将 BY-SA 与 BY-NC-SA 混入同一派生文件。
 
 ## Access, narrowing and omissions / 访问限制与删减
 
