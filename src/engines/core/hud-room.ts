@@ -24,6 +24,9 @@ export interface HudMeasurements {
   /** Space between the viewport edge and the column's outer edge. */
   edge: number;
   tab: number;
+  /** Height of the bottom reader drawer when one is shown (included in `bottom`). In drawer
+   * layouts the stage is the page above the drawer, so its height share is taken against that. */
+  sheet?: number;
 }
 export const OPEN_FOLDS: HudFolds = {
   reader: true,
@@ -33,10 +36,14 @@ export const OPEN_FOLDS: HudFolds = {
   legendsOpen: true,
   leftColumn: 'open',
 };
+/** Phones (< 760 CSS px): the left column is a short header (title + the rail's chip row), not a column. */
+export const PHONE_MAX_WIDTH = 759;
 export function usesReaderDrawer(width: number, height: number): boolean {
   return width < 1024 || (height > width && width < 1100);
 }
 export interface HudRoom {
+  /** The CSS viewport this room was solved for (tests wait for it to match after a resize). */
+  viewport: { width: number; height: number };
   folds: HudFolds;
   readerWidth: number;
   drawer: boolean;
@@ -48,11 +55,14 @@ export interface HudRoom {
 export function solveHudRoom(viewport: { width: number; height: number }, sizes: HudMeasurements, manual: HudOverrides = {}): HudRoom {
   const { width: w, height: h } = viewport;
   const drawer = usesReaderDrawer(w, h);
+  // On a phone the left block sits above the stage instead of beside it: it never narrows the
+  // stage and is never folded automatically (the rail's chip row is the phone's chapter list).
+  const phone = w <= PHONE_MAX_WIDTH;
   const folds: HudFolds = { ...OPEN_FOLDS, ...manual };
   let readerWidth = Math.max(340, sizes.reader);
   const steps: HudRoom['steps'] = [];
   const rect = (): FreeStage => {
-    const left = folds.leftColumn === 'collapsed' ? sizes.tab : sizes.left.width;
+    const left = phone ? 0 : folds.leftColumn === 'collapsed' ? sizes.tab : sizes.left.width;
     const leftHeight =
       folds.leftColumn === 'collapsed' ? 0 : sizes.left.height - (folds.leftColumn === 'compact' ? sizes.left.metadata : 0);
     const rightHeight = sizes.right.height - (folds.cardOpen ? 0 : sizes.right.card) - (folds.legendsOpen ? 0 : sizes.right.legends);
@@ -60,16 +70,20 @@ export function solveHudRoom(viewport: { width: number; height: number }, sizes:
     // Corner stacks must fit above the dock. Folding legends/card and metadata
     // releases the vertical pressure before the whole column is folded.
     const pressure = Math.max(0, leftHeight - available, rightHeight - available);
+    // With the reader in a bottom drawer, the right column (card, LAYERS / KEY)
+    // is what bounds the stage on the right; folded, only its tabs remain.
+    const right = drawer ? (folds.cardOpen || folds.legendsOpen ? sizes.right.width : sizes.tab) : folds.reader ? readerWidth : sizes.tab;
     return {
       x0: sizes.edge + left,
-      x1: Math.max(sizes.edge + left, w - sizes.edge - (drawer ? 0 : folds.reader ? readerWidth : sizes.tab)),
+      x1: Math.max(sizes.edge + left, w - sizes.edge - right),
       y0: sizes.top,
       y1: Math.max(sizes.top, h - sizes.bottom - pressure),
     };
   };
+  const stageHeight = drawer ? h - (sizes.sheet ?? 0) : h;
   const fits = () => {
     const r = rect();
-    return r.x1 - r.x0 >= w * 0.5 && r.y1 - r.y0 >= h * 0.6;
+    return r.x1 - r.x0 >= w * 0.5 && r.y1 - r.y0 >= stageHeight * 0.6;
   };
   const attempt = (step: HudRoom['steps'][number], field: keyof HudFolds, apply: () => void) => {
     if (!fits() && manual[field] === undefined) {
@@ -83,17 +97,19 @@ export function solveHudRoom(viewport: { width: number; height: number }, sizes:
   attempt('card', 'cardOpen', () => {
     folds.cardOpen = false;
   });
-  attempt('metadata', 'leftColumn', () => {
-    folds.leftColumn = 'compact';
-  });
-  attempt('left', 'leftColumn', () => {
-    folds.leftColumn = 'collapsed';
-  });
+  if (!phone) {
+    attempt('metadata', 'leftColumn', () => {
+      folds.leftColumn = 'compact';
+    });
+    attempt('left', 'leftColumn', () => {
+      folds.leftColumn = 'collapsed';
+    });
+  }
   if (!fits() && !drawer && folds.reader && readerWidth > 340) {
     readerWidth = 340;
     steps.push('reader-width');
   }
-  return { folds, readerWidth, drawer, stage: rect(), meetsShare: fits(), steps };
+  return { viewport: { width: w, height: h }, folds, readerWidth, drawer, stage: rect(), meetsShare: fits(), steps };
 }
 
 /** Largest unobstructed rectangle within a stage.

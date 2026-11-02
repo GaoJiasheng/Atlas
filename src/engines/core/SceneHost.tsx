@@ -541,8 +541,14 @@ export default function SceneHost(props: SceneHostProps) {
             <FoldHeader title={tx(topic.title, locale)} open={leftColumn !== 'collapsed'} vertical controls="atlas-left-body" panel="left-tab" className="atlas-left-tab" onToggle={() => actions.setLeftColumn(leftColumn === 'collapsed' ? 'open' : 'collapsed')} />
             <div className="atlas-left-body" id="atlas-left-body">
             <div className="atlas-left-controls">
-              <button className="atlas-fold" type="button" aria-expanded={leftColumn === 'open'} aria-label={t(locale, 'hud.left.metadata')} onClick={() => actions.setLeftColumn(leftColumn === 'open' ? 'compact' : 'open')}>⋯</button>
-              <button className="atlas-fold" type="button" aria-expanded={true} aria-label={t(locale, 'hud.left.fold')} onClick={() => actions.setLeftColumn('collapsed')}>‹</button>
+              <button className="atlas-fold" type="button" aria-expanded={leftColumn === 'open'} aria-label={t(locale, 'hud.left.metadata')} title={t(locale, 'hud.left.metadata')} onClick={() => actions.setLeftColumn(leftColumn === 'open' ? 'compact' : 'open')}>
+                <span>{t(locale, 'hud.left.details')}</span>
+                <i aria-hidden="true">{leftColumn === 'open' ? '⌃' : '⌄'}</i>
+              </button>
+              <button className="atlas-fold" type="button" aria-expanded={true} aria-label={t(locale, 'hud.left.fold')} title={t(locale, 'hud.left.fold')} onClick={() => actions.setLeftColumn('collapsed')}>
+                <i aria-hidden="true">‹</i>
+                <span>{t(locale, 'hud.left.foldShort')}</span>
+              </button>
             </div>
             <TitleBlock
               topic={topic}

@@ -202,8 +202,12 @@ export function setHudPreferences(value: HudPreferences): void {
   try { window.sessionStorage.setItem(HUD_ROOM_KEY, JSON.stringify(value)); } catch { /* page-local state still works */ }
 }
 /** A successful write is required before auto-opening; private/blocked storage stays quiet. */
+/** Automated browsers (`navigator.webdriver`: e2e, `pnpm shoot`) never get the first-visit popover over the
+ * stage unless the page opts in with this localStorage flag (the one first-run e2e case). */
+export const GUIDE_FIRST_RUN_TEST_KEY = 'atlas:guide-first-run-test';
 export function claimFirstGuide(): boolean {
   try {
+    if (navigator.webdriver && !window.localStorage.getItem(GUIDE_FIRST_RUN_TEST_KEY)) return false;
     if (window.localStorage.getItem(GUIDE_SEEN_KEY)) return false;
     window.localStorage.setItem(GUIDE_SEEN_KEY, '1');
     return true;

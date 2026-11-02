@@ -1139,5 +1139,7 @@
   "guide.key.beat.next": "下一拍",
   "hud.stageOnly": "只看舞台",
   "hud.left.fold": "收起主题栏",
-  "hud.left.metadata": "显示／隐藏主题资料"
+  "hud.left.metadata": "显示／隐藏主题资料",
+  "hud.left.details": "资料",
+  "hud.left.foldShort": "收起"
 }

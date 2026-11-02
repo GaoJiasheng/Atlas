@@ -8,6 +8,7 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
     const scene = root.current;
     if (!scene) return;
     let frame = 0,
+      timer = 0,
       disposed = false;
     const sizes: HudMeasurements = {
       top: 100,
@@ -27,6 +28,26 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       return r.width > 0 && r.height > 0;
     };
     const box = (selector: string) => scene.querySelector<HTMLElement>(selector)?.getBoundingClientRect();
+    /** Height a block wants: its box, or its content when a max-height made it scroll. */
+    const natural = (e: HTMLElement) => Math.max(e.getBoundingClientRect().height, e.scrollHeight);
+    /** Outermost visible HUD blocks inside a column (nested blocks are part of their parent). */
+    const panelsIn = (column: string) =>
+      Array.from(scene.querySelectorAll<HTMLElement>(`${column} [data-hud-panel]`)).filter(
+        (e) => visible(e) && !e.parentElement?.closest(`${column} [data-hud-panel]`),
+      );
+    /** A folded block keeps its title rows (its fold controls / summary); without one, a 44 px row. */
+    const headRow = (e: HTMLElement) =>
+      Array.from(e.querySelectorAll<HTMLElement>(':scope > summary, [data-fold-control]'))
+        .filter(visible)
+        .reduce((n, h) => n + h.getBoundingClientRect().height, 0) || 44;
+    /** A column's stacked height: its laid-out children plus what its HUD blocks would need unclipped. */
+    const stackHeight = (column: string, counts: (e: HTMLElement) => boolean) =>
+      Array.from(scene.querySelectorAll<HTMLElement>(`${column} > *`))
+        .filter(visible)
+        .reduce((n, e) => n + e.getBoundingClientRect().height, 0) +
+      panelsIn(column)
+        .filter(counts)
+        .reduce((n, e) => n + Math.max(0, e.scrollHeight - e.getBoundingClientRect().height), 0);
     const observed = new Set<Element>();
     const resize = new ResizeObserver(() => schedule());
     let syncingPlate = false;
@@ -56,7 +77,10 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       }
     };
     const measure = () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       frame = 0;
+      timer = 0;
       if (disposed) return;
       plateSync();
       const state = hud.getState(),
@@ -69,16 +93,16 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       if (top) sizes.top = top.bottom - bounds.top;
       const drawer = scene.querySelector('.atlas-panel__toggle');
       const drawerVisible = drawer && visible(drawer);
-      sizes.bottom = (bottom?.height ?? 0) + (drawerVisible ? (reader?.height ?? 0) : 0) + 24;
+      sizes.sheet = drawerVisible ? (reader?.height ?? 0) : 0;
+      sizes.bottom = (bottom?.height ?? 0) + sizes.sheet + 24;
       if (bounds.width >= 760)
         sizes.left.width =
           Number(getComputedStyle(scene).getPropertyValue('--hud-left-units')) * (Number(scene.style.getPropertyValue('--kt')) || 1);
       if (left && state.leftColumn !== 'collapsed') {
         if (bounds.width < 760) sizes.left.width = left.width;
-        sizes.left.height =
-          Array.from(scene.querySelectorAll<HTMLElement>('.atlas-left-body > *'))
-            .filter(visible)
-            .reduce((n, e) => n + e.getBoundingClientRect().height, 0) + 32;
+        // Engine blocks (PLATE, dated layers, geology …) count at their natural height, so a block
+        // squeezed into a scroll box still presses on the column; the rail is meant to scroll.
+        sizes.left.height = stackHeight('.atlas-left-body', (e) => e.dataset.hudPanel !== 'rail') + 32;
         if (state.leftColumn === 'open')
           sizes.left.metadata = Array.from(scene.querySelectorAll<HTMLElement>('.atlas-title__sub,.atlas-spec,.atlas-title__note')).reduce(
             (n, e) => n + e.getBoundingClientRect().height,
@@ -87,17 +111,21 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
         else sizes.left.height += sizes.left.metadata;
       }
       if (right) {
-        sizes.right.width = right.width;
-        if (state.cardOpen && state.legendsOpen)
-          sizes.right.height = Array.from(scene.querySelectorAll<HTMLElement>('.atlas-hud__right > *'))
-            .filter(visible)
-            .reduce((n, e) => n + e.getBoundingClientRect().height, 0);
+        // Measured open only: a folded card shifts the column by its tab, which must not flip the solver back.
+        if (state.cardOpen) sizes.right.width = right.width;
+        // Every visible [data-hud-panel] of the right column counts, shared or engine-private (keys,
+        // readouts, overlays): the card is what the card fold frees; every other block folds to its
+        // title row with the legends, so it frees its natural height less that row.
+        if (state.cardOpen && state.legendsOpen) {
+          const blocks = panelsIn('.atlas-hud__right');
+          const isCard = (e: HTMLElement) => e.dataset.hudPanel === 'card' || !!e.closest('.atlas-card');
+          sizes.right.height = stackHeight('.atlas-hud__right', () => true);
+          sizes.right.card = blocks.filter(isCard).reduce((n, e) => n + natural(e), 0);
+          sizes.right.legends = blocks
+            .filter((e) => !isCard(e) && e.dataset.hudPanel !== 'card-tab')
+            .reduce((n, e) => n + Math.max(0, natural(e) - headRow(e)), 0);
+        }
       }
-      if (state.cardOpen) sizes.right.card = box('.atlas-card')?.height ?? 0;
-      if (state.legendsOpen)
-        sizes.right.legends = Array.from(
-          scene.querySelectorAll<HTMLElement>('.atlas-stage__overlay .atlas-legend ul,.atlas-stage__overlay .atlas-ctl__rows'),
-        ).reduce((n, e) => n + e.getBoundingClientRect().height, 0);
       // Keep the natural reader width independently of the solver's narrowed width.
       sizes.reader = Math.min(640, Math.max(340, 400 * Math.max(1, Number(scene.style.getPropertyValue('--k')) || 1)));
       const room = solveHudRoom({ width: bounds.width, height: bounds.height }, sizes, state.manual);
@@ -140,7 +168,10 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
         }
     };
     function schedule() {
-      if (!disposed && !frame) frame = requestAnimationFrame(measure);
+      if (disposed || frame) return;
+      // Next frame, or sooner when frames are slow (a busy WebGL stage): rotation and resize must not wait on the renderer.
+      frame = requestAnimationFrame(measure);
+      timer = window.setTimeout(measure, 100);
     }
     const mutations = new MutationObserver(schedule);
     mutations.observe(scene, {
@@ -188,6 +219,7 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
     return () => {
       disposed = true;
       cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       resize.disconnect();
       mutations.disconnect();
       off();
