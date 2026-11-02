@@ -8,7 +8,7 @@ const zh = locale === 'zh';
 const title = zh ? (view === 'straits' ? '海峡近景' : '区域位置') : (view === 'straits' ? 'The two straits' : 'Regional position');
 ---
 <figure class="port-map">
-  <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img" aria-label={zh ? 'Natural Earth 真实海岸图，标出两条海峡与新加坡；不作导航用途。' : 'Natural Earth coastline map locating the two straits and Singapore; not for navigation.'}>
+  <svg viewBox={`0 0 ${map.width} ${map.height}`} role="img" aria-label={zh ? '海岸图，标出马六甲海峡、新加坡海峡和新加坡。' : 'Coastline map showing the Malacca and Singapore straits and Singapore.'}>
     <defs><clipPath id={`port-clip-${view}-${locale}`}><rect x="1" y="1" width="638" height="568" /></clipPath></defs>
     <rect class="port-map__water" x="1" y="1" width="638" height="568" />
     <g clip-path={`url(#port-clip-${view}-${locale})`}>
@@ -23,7 +23,7 @@ const title = zh ? (view === 'straits' ? '海峡近景' : '区域位置') : (vie
     <path class="port-map__north" d="M612,45V19M606,27L612,19L618,27" />
     <text class="port-map__label" x="612" y="63">{zh ? '北' : 'N'}</text>
   </svg>
-  <figcaption><strong>{title}</strong> · {zh ? 'Natural Earth 公有领域陆地与水体名称；无日期制图快照。点是水体标签或国家标签位置，不是航线、泊位或实时船位。' : 'Public-domain Natural Earth land and waterbody names; an undated cartographic snapshot. Points locate labels, not routes, berths or live vessels.'}</figcaption>
+  <figcaption><strong>{title}</strong> · {zh ? '海岸与地名来自 Natural Earth 公有领域数据。点标示名称位置。' : 'Coastline and names from public-domain Natural Earth data. Dots mark label positions.'}</figcaption>
 </figure>
 <style>
 .port-map { margin: 1.25rem 0; color: var(--ink); }
