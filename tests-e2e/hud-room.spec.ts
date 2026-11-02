@@ -60,6 +60,8 @@ for (const topic of ['aircon', 'ww2', 'fractions']) {
       await plateHeader.click();
       await expect(plateHeader).toHaveAttribute('aria-expanded', 'true');
     }
+    // A column that cannot hold its content starts compact (aircon at 1920×1080): start this round trip from open.
+    await page.evaluate(() => window.__atlas!.setLeftColumn('open'));
     await page.getByRole('button', { name: 'Show / hide topic details', exact: true }).click();
     await expect(page.locator('.atlas-scene')).toHaveAttribute('data-left', 'compact');
     await expect(page.locator('.atlas-spec')).toBeHidden();
@@ -135,7 +137,8 @@ for (const topic of ['aircon', 'ww2', 'fractions']) {
       }
       if (width === 1920) {
         const state = await page.evaluate(() => window.__atlas!.state());
-        expect(state.leftColumn).toBe('open');
+        // 1920 keeps every panel open; only the metadata may hide, when the column cannot hold it (docs/67 §9.4).
+        expect(state.leftColumn).not.toBe('collapsed');
         expect(state.card).toBe(true);
         expect(state.legends).toBe(true);
       }
