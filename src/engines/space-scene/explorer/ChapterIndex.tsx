@@ -19,7 +19,7 @@
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { tx, withBase, type UiKey } from '../../../i18n';
 import { SourceRefs } from '../../widgets/SourcePopover';
-import { EXERCISE_EQUIPMENT, type ExerciseSheet, type FitnessBundle, type TrainingFile } from '../../../content/schema/fitness';
+import type { EXERCISE_EQUIPMENT, ExerciseSheet, FitnessBundle, TrainingFile } from '../../../content/schema/fitness';
 import { clip, partNumber } from '../hud/common';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, SpaceChapterIndex } from '../schema';

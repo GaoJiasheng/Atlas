@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
 import AstroPWA from '@vite-pwa/astro';
 import { rehypeFracGlue } from './src/lib/frac-glue.ts';
+import { topicJsBuild } from './scripts/lib/js-budget-build.ts';
 
 /**
  * `ATLAS_BASE` lets the same build be served from a sub-path (e.g. GitHub Pages)
@@ -133,7 +134,7 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), topicJsBuild()],
   },
   devToolbar: { enabled: false },
 });

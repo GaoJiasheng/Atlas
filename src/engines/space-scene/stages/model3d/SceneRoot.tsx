@@ -22,23 +22,18 @@ import { bendAxisIndex } from '../../lib/bend';
 import { jointOf, musclePartIds } from '../../lib/rig';
 import { activeSites } from '../../lib/sites';
 import { sensesMotionBlocked, stepRunTime } from '../../lib/run-clock';
-import { SoundClock } from './SoundClock';
 import { animationsByPart } from '../../lib/animation';
 import { resolveDataColor, resolveMaterialLook } from '../../lib/color';
 import { easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { POSE_DURATION, restTransform, toTransform, type PartTransform } from '../../lib/pose';
 import { createRuntime, keepAnimating, MAX_DT, RuntimeContext, useRuntime, type StageRuntime } from './runtime';
 import { PartNode, type PartHandle, type PartShape, type ShiftMove, type SimMove } from './PartNode';
-import { Flows } from './Flows';
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, type GroupMembers } from './probes';
-import { MotionDriver } from './MotionDriver';
-import { Equipment } from './Equipment';
-import { Mannequin } from './Mannequin';
-import { WireBody, WIRE_FILL_OPACITY } from './WireBody';
-import { Hands, type HandColors } from './Hands';
+import { WIRE_FILL_OPACITY } from './bodyStyle';
+import type { HandColors } from './Hands';
 import { handPlan, RELAXED } from '../../lib/hands';
 import type { ExerciseBody } from '../../../../lib/anatomy';
 import type { GltfRig } from './GltfSource';
@@ -61,16 +56,25 @@ import { simEffects, type SimEffects } from '../../lib/sim/bind';
 import { shiftDelays } from '../../lib/sim/shift';
 import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
 import { filingMatrices, filingsCard } from './geometry';
-import { SimOverlays } from './SimOverlays';
-import { TimelineClock } from './TimelineClock';
-import { AnimClocks } from './AnimClocks';
-import { MechanismDriver } from './MechanismDriver';
-import { SpanDriver } from './SpanDriver';
 import type { Matrix4 } from 'three';
-import { getOrbitSession } from '../../lib/sim/orbit-session';
-import { OrbitClockDriver, OrbitDriver } from './OrbitDriver';
+import type { OrbitSession } from '../../lib/sim/orbit-session';
 
 const GltfSource = lazy(() => import('./GltfSource'));
+const OrbitSceneRoot = lazy(() => import('./OrbitSceneRoot'));
+const SoundClock = lazy(() => import('./SoundClock').then(m => ({ default: m.SoundClock })));
+const Flows = lazy(() => import('./Flows').then(m => ({ default: m.Flows })));
+const MotionDriver = lazy(() => import('./MotionDriver').then(m => ({ default: m.MotionDriver })));
+const Equipment = lazy(() => import('./Equipment').then(m => ({ default: m.Equipment })));
+const Mannequin = lazy(() => import('./Mannequin').then(m => ({ default: m.Mannequin })));
+const WireBody = lazy(() => import('./WireBody').then(m => ({ default: m.WireBody })));
+const Hands = lazy(() => import('./Hands').then(m => ({ default: m.Hands })));
+const SimOverlays = lazy(() => import('./SimOverlays').then(m => ({ default: m.SimOverlays })));
+const TimelineClock = lazy(() => import('./TimelineClock').then(m => ({ default: m.TimelineClock })));
+const AnimClocks = lazy(() => import('./AnimClocks').then(m => ({ default: m.AnimClocks })));
+const MechanismDriver = lazy(() => import('./MechanismDriver').then(m => ({ default: m.MechanismDriver })));
+const SpanDriver = lazy(() => import('./SpanDriver').then(m => ({ default: m.SpanDriver })));
+const OrbitClockDriver = lazy(() => import('./OrbitDriver').then(m => ({ default: m.OrbitClockDriver })));
+const OrbitDriver = lazy(() => import('./OrbitDriver').then(m => ({ default: m.OrbitDriver })));
 
 export interface SceneRootProps {
   store: SceneStore<SpaceSceneExt>;
@@ -170,7 +174,14 @@ class GltfBoundary extends Component<{ children: ReactNode; ui: SpaceUiStore }, 
   }
 }
 
-export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters, look }: SceneRootProps) {
+/** Only orbital topics load the snapshot solver and clock session. */
+export function SceneRoot(props: SceneRootProps) {
+  return props.data.sim?.orbitRotation
+    ? <Suspense fallback={null}><OrbitSceneRoot {...props} /></Suspense>
+    : <SceneGraph {...props} orbitSession={null} />;
+}
+
+export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapters, look, orbitSession }: SceneRootProps & { orbitSession: OrbitSession | null }) {
   const s = useStore(
     store,
     useShallow((st) => ({
@@ -196,7 +207,6 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       instant: st.transition.instant,
     })),
   );
-  const orbitSession = data.sim?.orbitRotation ? getOrbitSession(store, data.sim) : null;
   const invalidate = useThree((st) => st.invalidate);
   const gl = useThree((st) => st.gl);
   const dpr = useThree((st) => st.viewport.dpr);
@@ -603,6 +613,8 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
 
   return (
     <RuntimeContext.Provider value={runtime}>
+      {/* Keep clocks and parts in one initial commit: their frame subscription order is significant. */}
+      <Suspense fallback={null}>
       {data.mechanisms.length > 0 && <MechanismDriver data={data} store={store} ui={ui} bridge={bridge} />}
       {orbitSession && <OrbitClockDriver orbit={orbitSession} />}
       {!orbitSession && <RunClock run={s.run} alwaysOn={alwaysOn} simKind={data.sim?.kind} view={s.view} acoustic={data.sim?.senses?.profile === 'sound-only'} />}
@@ -612,7 +624,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           snapKey={s.transitionId} run={s.run} exploded={s.view === 'exploded'} layers={s.layers}
           echoContext={echoContext} markerVisible={soundMarkersVisible} bridge={bridge} />
       )}
-      <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />
+      {data.animations.length > 0 && <AnimClocks animations={data.animations} effects={sim?.animations} bridge={bridge} snapKey={snap.current.key} />}
       <Lighting look={look} center={bounds.center} radius={bounds.modelRadius} runtime={runtime} shadows={data.views.shadows} />
       <GroundShadow floor={bounds.floor} radius={bounds.radius} look={look} runtime={runtime} shadows={data.views.shadows} />
       {needsMotion && (
@@ -699,9 +711,9 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           />
         );
       })}
-      {data.sim && <SpanDriver data={data} bridge={bridge} handles={handles} />}
+      {data.sim?.bind.some(b => 'part' in b && b.span) && <SpanDriver data={data} bridge={bridge} handles={handles} />}
       {data.sim && data.sim.overlays.length > 0 && simRun && (
-        <SimOverlays
+        <Suspense fallback={null}><SimOverlays
           overlays={data.sim.overlays}
           sim={data.sim}
           values={s.sim}
@@ -716,12 +728,12 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
           look={look}
           snapKey={snap.current.key}
           bridge={bridge}
-        />
+        /></Suspense>
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} />}
-      <Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} />
+      {data.flows.length > 0 && <Suspense fallback={null}><Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} /></Suspense>}
       <CameraRig
         handles={handles}
         orbitSession={orbitSession}
@@ -747,6 +759,7 @@ export function SceneRoot({ store, ui, bridge, data, fitness, playable, chapters
       <StatsProbe bridge={bridge} />
       <ShadowUpdater runtime={runtime} enabled={!data.views.shadows || data.views.shadows === 'auto'} bridge={bridge} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />
+      </Suspense>
     </RuntimeContext.Provider>
   );
 }

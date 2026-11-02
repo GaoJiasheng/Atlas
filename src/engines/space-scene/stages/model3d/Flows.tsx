@@ -19,7 +19,8 @@
  * phase of the animation it follows (or its own `hz`) and stops with it;
  * with reduced motion its particles stay put.
  */
-import { AirfoilFlow } from './AirfoilFlow';
+import { lazy, Suspense } from 'react';
+const AirfoilFlow = lazy(() => import('./AirfoilFlow').then(m => ({ default: m.AirfoilFlow })));
 import type { PartsFile } from '../../schema';
 import type { SpaceUiStore } from '../../ui';
 import type { SimValues } from '../../sim-schema';
@@ -337,7 +338,7 @@ export function Flows({
 }) {
   return (
     <>
-      {flows.map((flow, i) => airfoil && bridge && airfoil.file.sim?.bind.some(b => 'flow' in b && b.flow === flow.id && b.airfoilFlow) ? <AirfoilFlow key={flow.id} {...airfoil} flow={flow} bridge={bridge} look={look} on={airfoil.on && layers.includes(flow.group)} linesOn={effects?.get(flow.id)?.visible !== false} /> : (
+      {flows.map((flow, i) => airfoil && bridge && airfoil.file.sim?.bind.some(b => 'flow' in b && b.flow === flow.id && b.airfoilFlow) ? <Suspense key={flow.id} fallback={null}><AirfoilFlow {...airfoil} flow={flow} bridge={bridge} look={look} on={airfoil.on && layers.includes(flow.group)} linesOn={effects?.get(flow.id)?.visible !== false} /></Suspense> : (
         <FlowParticles
           key={flow.id}
           flow={flow}

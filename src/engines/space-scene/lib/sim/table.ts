@@ -41,16 +41,7 @@ export function tableCombinations(controls: readonly SimControl[]): SimValues[] 
 }
 
 /** Every output's value for these control values: a number, a state id, NaN where no row (or no experiment) gives one. */
-export function solveTable(table: TableData, values: SimValues, outputs: readonly { id: string }[]): Record<string, number | string> {
-  const out: Record<string, number | string> = {};
-  for (const o of outputs) out[o.id] = NaN;
-  for (const exp of Object.values(table.experiments)) {
-    const row = tableRow(exp, values);
-    if (!row) continue;
-    for (const [id, cell] of Object.entries(row.set)) out[id] = typeof cell === 'string' ? cell : cellValue(cell);
-  }
-  return out;
-}
+export { solveTable } from './table-solver';
 
 /** The sources of the row each output's value comes from now (outputs no row sets are left out). */
 export function tableSources(table: TableData, values: SimValues): Record<string, readonly string[]> {

@@ -12,7 +12,7 @@
  * mode the exercise card comes first. Nothing selected: nothing (the chapter
  * text below is enough).
  */
-import { useId, useState } from 'react';
+import { lazy, Suspense, useId, useState } from 'react';
 import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
@@ -23,8 +23,8 @@ import { partNumber } from '../hud/common';
 import type { SpaceSceneExt } from '../index';
 import type { Part, PartsFile } from '../schema';
 import type { FitnessBundle, TrainingFile } from '../../../content/schema/fitness';
-import { MuscleSheet } from './MuscleSheet';
-import { ExerciseCard } from './ExerciseCard';
+const MuscleSheet = lazy(() => import('./MuscleSheet').then(m => ({ default: m.MuscleSheet })));
+const ExerciseCard = lazy(() => import('./ExerciseCard').then(m => ({ default: m.ExerciseCard })));
 
 function PartDetails({ part, file, fitness, training }: { part: Part; file: PartsFile; fitness: FitnessBundle | undefined; training: TrainingFile | undefined }) {
   const { locale } = useSceneContext();
@@ -78,7 +78,7 @@ function PartDetails({ part, file, fitness, training }: { part: Part; file: Part
       </div>
       )}
 
-      {sheet && fitness && <MuscleSheet part={part} sheet={sheet} file={file} fitness={fitness} training={training} />}
+      {sheet && fitness && <Suspense fallback={null}><MuscleSheet part={part} sheet={sheet} file={file} fitness={fitness} training={training} /></Suspense>}
 
       {!sheet && detail.length > 0 && (
         <>
@@ -160,7 +160,7 @@ export function Inspector({ file, fitness, training }: { file: PartsFile; fitnes
   return (
     <>
       {exercise && fitness && (
-        <ExerciseCard key={exercise.id} exercise={exercise} file={file} fitness={fitness} playable={training?.exercises.includes(exercise.id) ?? false} />
+        <Suspense fallback={null}><ExerciseCard key={exercise.id} exercise={exercise} file={file} fitness={fitness} playable={training?.exercises.includes(exercise.id) ?? false} /></Suspense>
       )}
       {/* Keyed so "more" collapses again when the selection changes. */}
       {part && <PartDetails key={part.id} part={part} file={file} fitness={fitness} training={training} />}

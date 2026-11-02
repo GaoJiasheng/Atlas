@@ -7,6 +7,7 @@
  * on the chart lined up on the point, or both on one number line. "Show me"
  * draws the right answer dashed.
  */
+import { DecimalGrid, PlaceValueChart, DecimalLine, MoneyModel } from './lazy-models';
 import type { Locale } from '../../core/types';
 import type { Task } from '../schema';
 import type { Action, TaskState } from '../lib/state';
@@ -14,10 +15,6 @@ import type { TaskRun } from '../ui';
 import { solvedState } from '../lib/solve';
 import type { Decimal } from '../lib/decimal';
 import { decimalOrder, decOf, type DecimalModelSpec } from '../lib/decimal-tasks';
-import { DecimalGrid } from './DecimalGrid';
-import { PlaceValueChart } from './PlaceValueChart';
-import { DecimalLine } from './DecimalLine';
-import { MoneyModel } from './MoneyModel';
 import type { Rect } from './layout';
 
 export function DecimalTask({ task, state, run, model, box, defs, locale, label, editable, act }: { task: Task; state: TaskState; run: TaskRun | null; model: DecimalModelSpec; box: Rect; defs: string; locale: Locale; label: string; editable: boolean; act(a: Action): void }) {

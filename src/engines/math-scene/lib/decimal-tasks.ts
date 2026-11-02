@@ -14,7 +14,7 @@
  * `decimal` form.
  */
 import type { DecimalGridModelSpec, DecimalLineSpec, DecimalWork, DPlace, DTrade, InputSpec, MisconceptionCode, Model, MoneySpec, PlaceValueSpec, Task, TaskOf } from '../schema';
-import { DPLACES } from '../schema';
+import { DPLACES } from '../constants';
 import { cmp, divWhole, eq, formatDecimal, parseDecimal, same, withPlaces, type Decimal } from './decimal';
 import { decimalOf, isQty, qtyText, qtyToken, type AnswerValue, type DecValue, type QtyValue } from './value';
 import { decimalWorkOf, isMeasureTask } from './measure-kind';

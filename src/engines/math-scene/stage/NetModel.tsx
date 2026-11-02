@@ -384,15 +384,4 @@ function SingleNet(p: NetModelProps & { spec: SolidNet }) {
   );
 }
 
-/** The scale a row of net pictures shares (each fitted to its box, the smallest kept): they keep their true sizes. */
-export function sharedUnit(models: NetModelSpec[], box: Rect): number {
-  let s = Infinity;
-  for (const m of models)
-    for (const spec of netItems(m)) {
-      const shape = shapeOf(spec);
-      const pose = specPose(shape, spec);
-      const b = poseBounds(shape, pose, spec.footprint ? flatOutline(shape) : []);
-      if (b) s = Math.min(s, fitIn(b, box, 0.02).s);
-    }
-  return Number.isFinite(s) ? s : 1;
-}
+export { sharedUnit } from './net-unit';

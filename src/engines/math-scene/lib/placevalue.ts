@@ -7,7 +7,8 @@
  * the column method lined up on the point. Values are counted in
  * thousandths (whole numbers). Pure.
  */
-import { DPLACES, type DCountsSpec, type DPlace, type DTrade, type PlaceValueSpec } from '../schema';
+import { DPLACES } from '../constants';
+import type { DCountsSpec, DPlace, DTrade, PlaceValueSpec } from '../schema';
 import { digitAt, fromThousandths, minPlaces, thousandths, wholePart, type Decimal } from './decimal';
 
 export type DCounts = Record<DPlace, number>;

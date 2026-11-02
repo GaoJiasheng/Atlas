@@ -12,7 +12,7 @@ import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import type { BeatMove, MoneyPiece, MoneySpec } from '../schema';
-import { columnOf, isNote, moneyText, pieceCents, piecesOf, totalCents } from '../lib/money';
+import { columnOf, isNote, pieceCents, piecesOf, totalCents } from '../lib/money';
 import type { Rect } from './layout';
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -169,8 +169,4 @@ export function MoneyModel({ box, model: m, locale, label, move, mini }: { box: 
   );
 }
 
-/** A money model in words (an option, the plate): "6 coins and notes: $2.35". */
-export function describeMoney(m: MoneySpec, locale: Locale): string {
-  const pieces = m.pair ? m.pair.flatMap((g) => piecesOf({ amount: g.amount })) : piecesOf(m);
-  return t(locale, 'math.money.describe', { n: pieces.length, total: moneyText(totalCents(pieces)) });
-}
+export { describeMoney } from './money-description';
