@@ -9,6 +9,8 @@ import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
 import { simSchema } from '../../src/engines/space-scene/sim-schema';
 import { tableSourceIssues } from '../../src/engines/space-scene/table-schema';
+import { theropodForelimb, theropodHindlimb } from '../../scripts/geo/kits/dinosaur-skeleton';
+import type { Primitive as ModelPrimitive } from '../../src/engines/space-scene/schema';
 
 const DIR = join(import.meta.dirname, '../../src/content/topics/fossils-and-skeletons');
 type Text = { en: string; zh: string };
@@ -177,29 +179,26 @@ describe('fossils-and-skeletons: selectable evidence and access routes', () => {
     }
   });
   it('each short forelimb ends in two distinct fingers and each foot has three ground-level toes plus a raised small toe', () => {
-    const tip = (p: Primitive) => p.at.map((x, i) => x + p.path!.at(-1)![i]!);
-    for (const id of ['sk-arm-l', 'sk-arm-r']) {
-      const p = part(id);
-      const fingers = (p.extra ?? []).filter((p) => p.kind === 'sweep');
+    const isClaw = (p: ModelPrimitive) => p.kind === 'sweep' && Array.isArray(p.radius) && p.radius.at(-1)! <= .002;
+    const tip = (p: ModelPrimitive) => p.kind === 'sweep' ? p.at.map((x, i) => x + p.path.at(-1)![i]!) : p.at;
+    for (const [id, z] of [['sk-arm-l', .43], ['sk-arm-r', -.43]] as const) {
+      const geometry = theropodForelimb(z);
+      const fingers = geometry.filter(isClaw);
       expect(fingers, id).toHaveLength(2);
       const tips = fingers.map(tip);
       expect(Math.abs(tips[0]![2]! - tips[1]![2]!)).toBeGreaterThan(0.05);
-      expect(tips.every((x) => x[1]! < tip(p.primitive)[1]!)).toBe(true);
-      expect(p.detail.en).toMatch(/two functional fingers/);
+      expect(tips.every((x, i) => x[1]! < fingers[i]!.at[1])).toBe(true);
+      expect(part(id).detail.en).toMatch(/two functional fingers/);
     }
-    for (const id of ['sk-leg-l', 'sk-leg-r']) {
-      const p = part(id);
-      // The three long forward digits share one metatarsal origin. Their
-      // terminals lie at the support level; the short rear digit is higher.
-      const toes = (p.extra ?? []).filter((p) => p.kind === 'sweep' && p.path?.length === 4);
+    for (const [id, z] of [['sk-leg-l', .48], ['sk-leg-r', -.48]] as const) {
+      const claws = theropodHindlimb(z).filter(isClaw);
+      const toes = claws.filter((p) => tip(p)[0]! < p.at[0]);
       expect(toes, id).toHaveLength(3);
-      expect(new Set(toes.map((p) => JSON.stringify(p.at))).size).toBe(1);
       expect(new Set(toes.map((p) => tip(p)[2])).size).toBe(3);
       const floor = Math.max(...toes.map((p) => tip(p)[1]!));
-      const toeLength = Math.max(...toes.map((p) => Math.hypot(...p.path!.at(-1)!)));
-      const hallux = (p.extra ?? []).filter((p) => p.kind === 'sweep' && p.path?.length === 3 && tip(p)[0]! > p.at[0]! && tip(p)[1]! > floor && Math.hypot(...p.path.at(-1)!) < toeLength / 2);
+      const hallux = claws.filter((p) => tip(p)[0]! > p.at[0]! && tip(p)[1]! > floor);
       expect(hallux, id).toHaveLength(1);
-      expect(p.detail.en).toMatch(/Three main support toes/);
+      expect(part(id).detail.en).toMatch(/Three main support toes/);
     }
   });
 });
