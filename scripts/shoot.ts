@@ -1,3 +1,4 @@
+import { microscopeFieldReading } from '../src/engines/space-scene/lib/sim/microscope';
 /**
  * `pnpm shoot <topic> [options] [shot names...]` — Playwright QA driver for the
  * technical-plate scenes (docs/08 §7). Port of the industrial-3d-showcase
@@ -482,6 +483,7 @@ async function beatSceneOf(page: Page): Promise<BeatScene | null> {
                 : v;
         return { orbit: normalize(orbit), orbitOutputs: normalize(e.sim?.()) };
       })(),
+      microscope: (window.__atlas!.engine as unknown as {microscopeField?():unknown}).microscopeField?.() ?? null,
       airfoil: (()=>{const a=(window.__atlas!.engine as unknown as {airfoil?():{inputKey:string;mode:string;cl:number;lift:number;plot:unknown}}).airfoil?.();return a?{inputKey:a.inputKey,mode:a.mode,cl:a.cl,lift:a.lift,plot:a.plot}:null;})(),
       unfinished: Object.entries(sim?.timeline ?? {})
         .filter(([, r]) => r.playing || r.t !== r.duration)
@@ -731,10 +733,11 @@ async function shiftIssues(s: Session): Promise<string[]> {
         if (drawn.shown) issues.push(`${id}: the model hides it, but it is drawn`);
         continue;
       }
-      const off = Math.max(...want.offset.map((x, i) => Math.abs(x - drawn.offset[i]!)));
-      if (off > 0.001) issues.push(`${id}: drawn at offset ${drawn.offset.join(', ')}, the model says ${want.offset.map((x) => x.toFixed(4)).join(', ')}`);
       const group = groupOf.get(id);
       const visible = (group === undefined || state.layers.includes(group)) && !state.hidden.includes(id);
+      // A part in a layer that is off is not mounted, so its offset is not applied (and not worth comparing).
+      const off = visible ? Math.max(...want.offset.map((x, i) => Math.abs(x - drawn.offset[i]!))) : 0;
+      if (off > 0.001) issues.push(`${id}: drawn at offset ${drawn.offset.join(', ')}, the model says ${want.offset.map((x) => x.toFixed(4)).join(', ')}`);
       if (visible && !drawn.shown) issues.push(`${id}: the model shows it, but it is not drawn`);
     }
   }
@@ -748,19 +751,20 @@ async function sensesDrawIssues(s: Session): Promise<string[]> {
   const file = JSON.parse(readFileSync(path, 'utf8')) as PartsFile;
   if (file.sim?.kind !== 'senses') return [];
   const optical = file.sim.overlays.find(o => o.kind === 'paraxial-eye');
-  return s.page.evaluate((optical) => {
+  const soundOnly = file.sim.senses?.profile === 'sound-only';
+  return s.page.evaluate(({ optical, soundOnly }) => {
     const engine = window.__atlas!.engine as unknown as {
       senses(): { eye?: { r:number; points:{rays:{object:number[];lens:number[];retina:number[]}[]}[]; rendered:{object:number[];lens:number[];retina:number[]}[][] }; wave?: { positions:number[]; rests:number[]; A:number; lambda:number; phaseCycles:number } };
       sensesSeek(cycles:number):boolean;
     };
     const read = engine.senses(), issues:string[] = [];
-    if (!read.eye) issues.push('missing eye geometry');
+    if (!read.eye) { if (!soundOnly) issues.push('missing eye geometry'); }
     else for (const point of read.eye.points) for (const ray of point.rays) if (Math.abs(ray.retina[0]!-read.eye.r)>1e-9) issues.push('eye ray passes the receiver');
     if (read.eye && optical) for(let pi=0;pi<read.eye.points.length;pi++) for(let ri=0;ri<3;ri++) for(const endpoint of ['object','lens','retina'] as const) { const want=read.eye.points[pi]!.rays[ri]![endpoint], actual=read.eye.rendered[pi]![ri]![endpoint]; for(let axis=0;axis<3;axis++) if(Math.abs(actual[axis]!-(optical.origin[axis]!+want[axis]!*optical.cmToScene*(axis===1?optical.yScale:1)))>1e-4) issues.push(`eye ${pi}/${ri}/${endpoint} geometry differs from solver`); }
     if (!read.wave || read.wave.positions.length !== 41) issues.push('missing 41-particle longitudinal wave');
     else for(let i=0;i<41;i++) { const w=read.wave; const want=w.rests[i]!+w.A*Math.sin(2*Math.PI*(w.rests[i]!/w.lambda-w.phaseCycles)); if(Math.abs(w.positions[i]!-want)>1e-4) issues.push(`wave particle ${i} disagrees with solver`); }
     return issues;
-  }, optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene, yScale:optical.yScale ?? 1 } : null);
+  }, { optical: optical?.kind === 'paraxial-eye' ? { origin:optical.origin, cmToScene:optical.cmToScene, yScale:optical.yScale ?? 1 } : null, soundOnly });
 }
 
 /** Rigid drawn endpoints, valve states and closed-path visibility share one frame. */
@@ -834,6 +838,24 @@ async function airfoilIssues(s:Session):Promise<string[]> {
   return out;
 }
 
+/** Compare finite microscope telemetry and the actual single field buffer to its pure model. */
+async function microscopeDrawIssues(s:Session):Promise<string[]> {
+  const path=join(ROOT,'src/content/topics',s.topic,'data/parts.json');if(!existsSync(path))return [];
+  const file=JSON.parse(readFileSync(path,'utf8')) as PartsFile;if(!file.sim?.microscope)return [];
+  const read=await s.page.evaluate(()=>{
+    const e=window.__atlas!.engine as unknown as {sim():{values:Record<string,number|string|boolean>};microscopeField():ReturnType<typeof microscopeFieldReading>};
+    return {field:e.microscopeField(),values:e.sim().values,canvases:Array.from(document.querySelectorAll<HTMLCanvasElement>('[data-microscope-field] canvas')).map(c=>[c.width,c.height]),state:window.__atlas!.state() as unknown as {view:string;cutaway:string}};
+  });
+  const want=microscopeFieldReading(file.sim.microscope,read.values),out:string[]=[];
+  if(JSON.stringify(read.field)!==JSON.stringify(want))out.push('microscope field differs from resolved pure model');
+  if(![read.field.totalPower,read.field.fieldDiameterUm,...read.field.targetUV].every(Number.isFinite))out.push('microscope field has non-finite telemetry');
+  if(read.field.visibleFeatureIds.length>2048)out.push('microscope exceeds finite feature budget');
+  const on=read.values[file.sim.microscope.controls.enabled]===true;
+  if(read.canvases.length!==(on?1:0)||read.canvases.some(c=>c[0]!==512||c[1]!==512))out.push('microscope must mount exactly one512px field when enabled');
+  if(on&&(read.state.view!=='assembled'||read.state.cutaway!=='none'))out.push('microscope observation must use assembled view');
+  return out;
+}
+
 /**
  * Every beat opened from its link (`?ch=<chapter>&b=<n>`) in a fresh document of its own, against the scene the presentation
  * showed: a field that differs, or a run not at its end (links jump to the end), is a beat failure.
@@ -871,6 +893,7 @@ async function runBeatLinks(s: Session, beats: { chapter: string; index: number 
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
+    for (const issue of await microscopeDrawIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: link: ${issue}`);
     if (diffs.length) report.beatFailures.push(`${name}: opened from ${link}: ${diffs.join('; ')}`);
     else same++;
@@ -938,6 +961,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
     for (const issue of await orbitIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await mechanismDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await sensesDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
+    for (const issue of await microscopeDrawIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     for (const issue of await airfoilIssues(s)) report.beatFailures.push(`${name}: ${issue}`);
     if (!(await s.drawn())) report.beatFailures.push(`${name}: the stage drew no frame after its canvas was resized`);
     await s.page.screenshot({ path: join(out, `${name}${o.suffix}.png`) });
@@ -1031,6 +1055,68 @@ async function runClimateStates(s: Session, o: Options, out: string, report: Run
   await s.page.screenshot({ path: join(out, `climate-phone-months${o.suffix}.png`) });
   await s.page.setViewportSize({ width: o.size[0], height: o.size[1] });
   await s.reopen();
+}
+
+/** Catalogue QA uses the same UI/action as readers and leaves other engines untouched (docs/49 E-PH1). */
+async function runCatalogues(s: Session, out: string, report: RunReport): Promise<void> {
+  const supported = await s.ev(() => typeof window.__atlas!.engine.catalogueState === 'function');
+  if (!supported) return;
+  type CatalogueReading = {
+    pick: string | null;
+    layers: Record<string, { status: 'loading' | 'ready' | 'error'; visible: number }>;
+    indexCount: number;
+    renderedRows: number;
+    selectedScreen?: [number, number] | null;
+  };
+  const chapters = await s.ev(() => window.__atlas!.chapters());
+  const before = report.beatFailures.length;
+  let selected = 0;
+  for (const chapter of chapters) {
+    await s.apply({ chapter, wait: 400 });
+    await s.page.waitForFunction(() => {
+      const e = window.__atlas!.engine as { catalogueState(): CatalogueReading };
+      return Object.values(e.catalogueState().layers).every((layer) => layer.status !== 'loading');
+    }, null, { timeout: 30_000 });
+    const read = () => s.page.evaluate(() => (window.__atlas!.engine as { catalogueState(): CatalogueReading }).catalogueState());
+    const state = await read();
+    if (state.renderedRows > 50) report.beatFailures.push(`${chapter}: catalogue renders ${state.renderedRows} rows (maximum 50)`);
+    for (const [id, layer] of Object.entries(state.layers)) {
+      if (layer.status === 'error') report.beatFailures.push(`${chapter}: catalogue ${id} failed to load`);
+    }
+    const id = await s.page.locator('[data-catalogue-row]').first().getAttribute('data-catalogue-row').catch(() => null);
+    if (!id) continue;
+    const ok = await s.page.evaluate((pick) => (window.__atlas!.engine as { selectCatalogue(id: string | null): boolean }).selectCatalogue(pick), id);
+    if (!ok) {
+      report.beatFailures.push(`${chapter}: visible catalogue row ${id} could not be selected`);
+      continue;
+    }
+    await s.page.waitForTimeout(2400);
+    const chosen = await read();
+    if (chosen.pick !== id) report.beatFailures.push(`${chapter}: catalogue selected ${chosen.pick}, expected ${id}`);
+    const structure = await s.page.evaluate(() => {
+      const detail = document.querySelector('[data-catalogue-inspector]');
+      const prose = document.querySelector('.atlas-panel .atlas-prose');
+      const header = document.querySelector('.atlas-panel__header');
+      return {
+        exists: !!detail,
+        beforeProse: !!detail && !!prose && !!(detail.compareDocumentPosition(prose) & Node.DOCUMENT_POSITION_FOLLOWING),
+        afterHeader: !!detail && !!header && !!(header.compareDocumentPosition(detail) & Node.DOCUMENT_POSITION_FOLLOWING),
+      };
+    });
+    if (!structure.exists || !structure.beforeProse || !structure.afterHeader)
+      report.beatFailures.push(`${chapter}: catalogue inspector must follow the chapter header and precede prose`);
+    const point = chosen.selectedScreen;
+    const view = s.page.viewportSize();
+    if (!point || !view || point[0] < 0 || point[1] < 0 || point[0] > view.width || point[1] > view.height)
+      report.beatFailures.push(`${chapter}: selected catalogue anchor is not on screen`);
+    await s.page.screenshot({ path: join(out, `catalogue-${chapter}.png`) });
+    selected++;
+    await s.page.evaluate(() => (window.__atlas!.engine as { selectCatalogue(id: string | null): boolean }).selectCatalogue(null));
+    if ((await read()).pick !== null) report.beatFailures.push(`${chapter}: catalogue clear did not clear selection`);
+  }
+  await s.apply({ wait: 300 });
+  console.log(`  catalogue selections: ${selected} chapters checked (50-row cap, inspector order, anchor)`);
+  for (const failure of report.beatFailures.slice(before)) console.log(`    FAIL ${failure}`);
 }
 
 /** Ids each chapter's own state asks to label (TimeScene `highlight`, SpaceScene `labels`) with no label on screen at the chapter camera: listed, never a failure. */
@@ -1331,6 +1417,12 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
         if (!ok) note = 'U did not undo the last move';
       }
     } else if (k.type === 'pause') {
+      // A solar-system snapshot topic never runs: its clock steps are discrete and SPACE leaves the scene paused.
+      const parts = join(ROOT, 'src/content/topics', s.topic, 'data/parts.json');
+      if (existsSync(parts) && (JSON.parse(readFileSync(parts, 'utf8')) as PartsFile).sim?.kind === 'solar-system') {
+        record({ ...base, ok: (await s.state()).paused === true, note: 'snapshot topic stays paused (skipped)' });
+        continue;
+      }
       const before = (await s.state()).paused;
       await press(k.key);
       ok = await until(async () => (await s.state()).paused === !before);
@@ -1632,6 +1724,7 @@ async function main(): Promise<number> {
             await runBeats(s, o, out, report);
             console.log('  -- chapter highlights');
             await runChapterHighlights(s, report);
+            await runCatalogues(s, out, report);
           }
           if (o.tasks) {
             console.log('  -- tasks');

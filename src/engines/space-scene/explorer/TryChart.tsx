@@ -102,11 +102,11 @@ export function TryChart({ rows, vary, ys, current }: { rows: readonly TableRow[
         {m.kind === 'line'
           ? m.series.map((s, k) => (
               <g key={s.output.id} data-series={s.output.id}>
-                <polyline
+                {s.segments.map((segment, i) => <polyline key={i}
                   className="space-chart__line"
                   strokeDasharray={DASH[k] || undefined}
-                  points={s.points.map((p) => `${f1(sx(p.x))},${f1(sy(p.y))}`).join(' ')}
-                />
+                  points={segment.map((p) => `${f1(sx(p.x))},${f1(sy(p.y))}`).join(' ')}
+                />)}
                 {s.points.map((p) => (
                   <Marker key={String(p.key)} k={k} x={sx(p.x)} y={sy(p.y)} current={p.current} />
                 ))}

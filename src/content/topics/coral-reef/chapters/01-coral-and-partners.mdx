@@ -1,0 +1,146 @@
+---
+id: coral-and-partners
+order: 1
+title:
+  en: Coral animals and their partners
+  zh: 珊瑚动物与伙伴
+level: P6
+state:
+  camera:
+    position:
+      - 5.9
+      - 1.4
+      - 1.8
+    target:
+      - 5
+      - 0.4
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - polyp-tissue
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Separate the coral animal from its algal partners.
+    zh: 动物与藻伙伴分开看。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+  beats:
+    - part: polyp-tissue
+      labels:
+        - polyp-tissue
+      ghost:
+        - polyp-skeleton
+      caption:
+        en: The soft polyp is an animal. Many polyps can form one colony.
+        zh: 柔软的珊瑚虫是动物，许多珊瑚虫可组成一个群体。
+    - part: polyp-mouth
+      labels:
+        - polyp-mouth
+        - polyp-tentacles
+      caption:
+        en: A mouth lies inside the ring of tentacles.
+        zh: 一圈触手围着中央的口。
+    - part: polyp-skeleton
+      cutaway: half
+      labels:
+        - polyp-skeleton
+        - polyp-tissue
+      caption:
+        en: The hard skeleton lies around and beneath the living tissue.
+        zh: 坚硬的骨骼位于活组织周围和下方。
+    - part: polyp-symbionts
+      view: xray
+      labels:
+        - polyp-symbionts
+        - polyp-tissue
+      sim:
+        set:
+          evidence-state: partnered
+      caption:
+        en: Tiny algal partners live within the tissue and make food using light.
+        zh: 微小共生藻住在组织内，利用光制造食物。
+    - part: polyp-tentacles
+      run: true
+      labels:
+        - polyp-tentacles
+      caption:
+        en: The animal also catches tiny prey. Food from algae is a second pathway.
+        zh: 珊瑚动物也捕捉微小猎物；藻类提供食物是另一条路径。
+  index:
+    parts:
+      - polyp-tissue
+      - polyp-mouth
+      - polyp-tentacles
+      - polyp-skeleton
+      - polyp-symbionts
+---
+
+<Lang en>
+
+The enlarged <Term id="polyp">coral polyp</Term> is an animal with a soft body. Its central mouth is surrounded by tentacles. Food enters through this opening; undigested material also leaves through it. The model separates these structures so that their positions can be examined. It represents a general hard coral rather than an identified species or collected specimen.
+
+Many connected polyps form a <Term id="colony">colony</Term>. A thin layer of living tissue links neighbouring polyps over a shared <Term id="skeleton">skeleton</Term>. Hard corals build this support from calcium carbonate. The support is around and beneath the tissue: the hard structure alone is not the complete living animal. Not all corals live in colonies.
+
+Inside the tissue are microscopic <Term id="algal-partner">algal partners</Term>. Most shallow reef-building corals have these photosynthetic partners. They use light to make food and supply products of that process to the animal. The coral provides a protected place and materials used by the algae. This close relationship is a <Term id="symbiosis">symbiosis</Term>; in this example both partners benefit.
+
+The coral remains an animal even though its partners photosynthesise. Its tentacles can also catch small prey. Receiving food products from algae and capturing prey are different food pathways, and neither turns the algae into an organ of the animal. Select tissue, partners and skeleton in turn. Their different positions help explain how separate living organisms can cooperate within one small space.
+
+<Figure src="figures/coral-reef-polyp" alt={{ en: "Graphite cutaway of a general hard-coral polyp, with a central mouth, smooth tentacles, soft tissue and the supporting skeletal cup.", zh: "一般硬珊瑚虫的石墨剖面图，显示中央的口、光滑触手、软组织与支撑骨骼杯。" }} caption={{ en: "Enlarged teaching drawing; the tentacle count is an example, not a species identification.", zh: "放大的教学图；触手数量是示例，不用于鉴定物种。" }} />
+
+<More title={{"en": "Tentacles and scale", "zh": "触手与比例"}}>
+
+This model draws <Num s="S50">12</Num> smooth tentacles as an example of sixfold organisation. Hard-coral tentacle counts are multiples of six, not always twelve. The close-up has no verified magnification or shared scale with the reef. [S5]
+
+</More>
+
+<More title={{"en": "Food made using light", "zh": "利用光制造食物"}}>
+
+For the photosynthesis process, see <TopicLink slug="plant" ch="leaves-make-food">leaves making food</TopicLink>. The coral’s partners are algae, not leaves hidden in an animal.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+放大的<Term id="polyp">珊瑚虫</Term>是柔软的动物。一圈触手围着中央的口，食物由这里进入，未消化的物质也由同一个开口排出。模型把这些结构分开显示，便于检查相互位置；它代表一般硬珊瑚，没有冒称某个物种或采集标本。
+
+许多相连的珊瑚虫组成一个<Term id="colony">珊瑚群体</Term>。薄薄的活组织连接邻近个体，铺在共有的<Term id="skeleton">骨骼</Term>上。硬珊瑚制造碳酸钙支撑，位于组织周围及下方；坚硬结构本身并不等于完整的活珊瑚。也有独居的珊瑚，并非全部都成群生活。
+
+组织内还有微小的<Term id="algal-partner">共生藻</Term>，多数浅水造礁珊瑚都有这样的光合伙伴。藻类利用光制造食物，向动物提供产物；珊瑚提供受保护的住处和所需物质。这是<Term id="symbiosis">共生</Term>，本例中双方都获益。
+
+伙伴能光合作用，不会改变珊瑚的动物身份。珊瑚虫也能用触手捕捉微小猎物。接收藻类食物产物与捕食是不同路径，共生藻也不是动物的器官。依次点选组织、伙伴和骨骼，再用它们的位置解释这段关系。
+
+<Figure src="figures/coral-reef-polyp" alt={{ en: "Graphite cutaway of a general hard-coral polyp, with a central mouth, smooth tentacles, soft tissue and the supporting skeletal cup.", zh: "一般硬珊瑚虫的石墨剖面图，显示中央的口、光滑触手、软组织与支撑骨骼杯。" }} caption={{ en: "Enlarged teaching drawing; the tentacle count is an example, not a species identification.", zh: "放大的教学图；触手数量是示例，不用于鉴定物种。" }} />
+
+<More title={{"en": "Tentacles and scale", "zh": "触手与比例"}}>
+
+本模型用 <Num s="S50">12</Num> 根光滑触手示意六倍数排列；硬珊瑚的触手并非一律十二根。近景没有经过核定的放大倍数，也不与礁区共用实物比例。[S5]
+
+</More>
+
+<More title={{"en": "Food made using light", "zh": "利用光制造食物"}}>
+
+光合作用过程可看<TopicLink slug="plant" ch="leaves-make-food">叶怎样制造食物</TopicLink>。珊瑚的伙伴是藻类，不是藏在动物里的叶。
+
+</More>
+
+</Lang>

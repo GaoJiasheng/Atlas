@@ -1,0 +1,202 @@
+[
+  {
+    "id": "sample-estimates",
+    "t": "2004-12-26",
+    "at": [
+      103.3,
+      1.2
+    ],
+    "kind": "disaster",
+    "importance": 2,
+    "title": {
+      "en": "Synthetic distinct estimates",
+      "zh": "合成影响记录"
+    },
+    "summary": {
+      "en": "Synthetic test data only; not a historical event.",
+      "zh": "仅为合成测试数据；不是历史事件。"
+    },
+    "sources": [
+      "S1"
+    ],
+    "impacts": [
+      {
+        "id": "sample-impact-lower",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "more-than",
+          "value": 70000
+        },
+        "label": {
+          "en": "Synthetic deaths estimate",
+          "zh": "合成死亡估计"
+        },
+        "scope": {
+          "en": "Synthetic surrounding areas",
+          "zh": "合成测试范围；不是历史记录"
+        },
+        "sourceAsOf": "2011-09-29",
+        "sourceDateKind": "publication",
+        "sources": [
+          "S1"
+        ]
+      },
+      {
+        "id": "sample-impact-higher",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "reported",
+          "value": 92000
+        },
+        "label": {
+          "en": "Synthetic deaths estimate",
+          "zh": "合成死亡估计"
+        },
+        "scope": {
+          "en": "Independent synthetic historical estimate",
+          "zh": "合成测试范围；不是历史记录"
+        },
+        "sourceAsOf": "2026-10-27",
+        "sourceDateKind": "accessed",
+        "sources": [
+          "S1"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-total",
+    "t": "2004-12-26",
+    "at": [
+      104.1,
+      1.2
+    ],
+    "kind": "disaster",
+    "importance": 2,
+    "title": {
+      "en": "Synthetic incomplete total",
+      "zh": "合成影响记录"
+    },
+    "summary": {
+      "en": "Synthetic test data only; not a historical event.",
+      "zh": "仅为合成测试数据；不是历史事件。"
+    },
+    "sources": [
+      "S1"
+    ],
+    "impacts": [
+      {
+        "id": "sample-impact-total",
+        "measure": "dead-or-missing-presumed-dead",
+        "estimate": {
+          "kind": "reported",
+          "value": 227899
+        },
+        "label": {
+          "en": "Dead or missing and presumed dead (synthetic)",
+          "zh": "死亡或失踪并推定死亡（合成）"
+        },
+        "scope": {
+          "en": "15 synthetic areas; four shown, not a complete breakdown.",
+          "zh": "合成测试范围；不是历史记录"
+        },
+        "sourceAsOf": "2024-10",
+        "sourceDateKind": "publication",
+        "sources": [
+          "S1"
+        ],
+        "components": [
+          {
+            "id": "sample-impact-part-1",
+            "label": {
+              "en": "Synthetic area 1",
+              "zh": "合成地区1"
+            },
+            "value": 167540,
+            "sources": [
+              "S1"
+            ]
+          },
+          {
+            "id": "sample-impact-part-2",
+            "label": {
+              "en": "Synthetic area 2",
+              "zh": "合成地区2"
+            },
+            "value": 35322,
+            "sources": [
+              "S1"
+            ]
+          },
+          {
+            "id": "sample-impact-part-3",
+            "label": {
+              "en": "Synthetic area 3",
+              "zh": "合成地区3"
+            },
+            "value": 16269,
+            "sources": [
+              "S1"
+            ]
+          },
+          {
+            "id": "sample-impact-part-4",
+            "label": {
+              "en": "Synthetic area 4",
+              "zh": "合成地区4"
+            },
+            "value": 8212,
+            "sources": [
+              "S1"
+            ]
+          }
+        ],
+        "componentsComplete": false
+      }
+    ]
+  },
+  {
+    "id": "sample-approximate",
+    "t": "2004-12-26",
+    "at": [
+      103.7,
+      1.8
+    ],
+    "kind": "disaster",
+    "importance": 2,
+    "title": {
+      "en": "Synthetic approximate estimate",
+      "zh": "合成影响记录"
+    },
+    "summary": {
+      "en": "Synthetic test data only; not a historical event.",
+      "zh": "仅为合成测试数据；不是历史事件。"
+    },
+    "sources": [
+      "S1"
+    ],
+    "impacts": [
+      {
+        "id": "sample-impact-about",
+        "measure": "deaths",
+        "estimate": {
+          "kind": "about",
+          "value": 36000
+        },
+        "label": {
+          "en": "Synthetic deaths estimate",
+          "zh": "合成死亡估计"
+        },
+        "scope": {
+          "en": "Synthetic tsunami deaths",
+          "zh": "合成测试范围；不是历史记录"
+        },
+        "sourceAsOf": "2026-10-27",
+        "sourceDateKind": "accessed",
+        "sources": [
+          "S1"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,193 @@
+---
+{
+  "id": "light-distances",
+  "order": 7,
+  "title": {
+    "en": "Light distances",
+    "zh": "光行距离"
+  },
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "part": null,
+    "cutaway": "none",
+    "ghost": [],
+    "layers": [
+      "galaxy-context"
+    ],
+    "labels": [],
+    "camera": {
+      "position": [
+        0,
+        2,
+        10
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 38
+    },
+    "summary": {
+      "en": "Draft engine fixture: compare explicit model inputs and outputs.",
+      "zh": "引擎草稿测试：对照显式模型输入与输出。"
+    },
+    "index": {
+      "parts": [
+        "light-ruler"
+      ]
+    },
+    "sim": {
+      "set": {
+        "lab": "galaxy",
+        "elapsed-years": 0,
+        "planet": "earth",
+        "scale-mode": "overview",
+        "sky-date": "2026-01-15",
+        "sky-hour": 20,
+        "observer": "singapore",
+        "sky-target": "orion",
+        "pattern-links": true,
+        "depth": false,
+        "atmosphere": true,
+        "source-kind": "point",
+        "altitude-mode": "high",
+        "twinkle-seconds": 0,
+        "comet-step": 0,
+        "distance-target": "sun-earth"
+      },
+      "try": {
+        "vary": "distance-target",
+        "observe": [
+          "light-distance-km",
+          "light-time-seconds"
+        ]
+      }
+    },
+    "beats": [
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "galaxy",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "sun-earth"
+          }
+        },
+        "caption": {
+          "en": "SIM · Light time and distance describe the same selected reference.",
+          "zh": "模拟 · 光行时间与距离描述同一个参考对象。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "galaxy",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "neptune"
+          }
+        },
+        "caption": {
+          "en": "SIM · Light time and distance describe the same selected reference.",
+          "zh": "模拟 · 光行时间与距离描述同一个参考对象。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "galaxy",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "proxima"
+          }
+        },
+        "caption": {
+          "en": "SIM · Light time and distance describe the same selected reference.",
+          "zh": "模拟 · 光行时间与距离描述同一个参考对象。"
+        }
+      },
+      {
+        "run": false,
+        "sim": {
+          "set": {
+            "lab": "galaxy",
+            "elapsed-years": 0,
+            "planet": "earth",
+            "scale-mode": "overview",
+            "sky-date": "2026-01-15",
+            "sky-hour": 20,
+            "observer": "singapore",
+            "sky-target": "orion",
+            "pattern-links": true,
+            "depth": false,
+            "atmosphere": true,
+            "source-kind": "point",
+            "altitude-mode": "high",
+            "twinkle-seconds": 0,
+            "comet-step": 0,
+            "distance-target": "milky-way"
+          }
+        },
+        "caption": {
+          "en": "SIM · Light time and distance describe the same selected reference.",
+          "zh": "模拟 · 光行时间与距离描述同一个参考对象。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft software fixture. Compare the calculated SIM readings with the rendered geometry. The model uses teaching alignment, schematic overview sizes and fixed J2000 star directions; it is not a sky forecast.
+
+</Lang>
+
+<Lang zh>
+
+软件草稿测试。对照计算的模拟读数与舞台几何。模型采用教学排列、示意总览大小和固定J2000恒星方向；不预测真实天空。
+
+</Lang>

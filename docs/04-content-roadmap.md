@@ -16,6 +16,8 @@
 | 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
 | 一株植物（盆栽辣椒：根茎叶花果种子，P3–P6 五个课题） | biology | space | SpaceScene/Model3D | Sci P3 生命周期；P4 植物部位与功能；P5 运输系统与繁殖；P6 光合作用与传播；详见 docs/26 | 2026 提前 | published（2026-10-14）：7 章 37 拍 |
 | 青蛙与鸡的生活史（卵、幼体、成体与下一代） | biology | space + sim | SpaceScene/Model3D + 既有 `table`、pose、visible | Sci P3 Cycles in Plants and Animals (Life Cycles)；详见 docs/56 | 2026（提前） | published（2026-10-27）：背景 + 5 章、30 拍；浏览器验收交主会话 |
+| 珊瑚礁（珊瑚动物、礁区、食物路径、白化与保护） | biology | space + sim | SpaceScene/Model3D + 既有 table / sim.foodWeb | P6 Interactions within the Environment 应用，详见 docs/66；复用红树林食物网卡、不重复其生境 | 2026（提前） | published（2026-10-29）：背景 + 7章、39拍；浏览器门槛交主会话 |
+| 细胞（植物与动物细胞、结构与作用、安全显微观察） | biology | space + sim | SpaceScene/Model3D + microscope + simulated field | MOE 2023 P5：生命基本单位；细胞细部与显微镜为用户指定深化；详见 docs/63 | 2026（提前） | published（2026-10-29）：背景 + 7 章、40 拍；浏览器验收交主会话 |
 | 生物的分类（标本台：生物与非生物、四大类、开花与不开花植物、动物六类、分错了的动物、自己做流程图） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind sort） | Sci P3 Diversity of Living and Non-Living Things；详见 docs/38 | 2026（提前） | published（2026-10-22）：背景 + 6 章 39 拍 |
 | 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
 | 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
@@ -23,6 +25,7 @@
 | 新加坡的四大水喉（1867 年至今，蓄水池、厂址、柔佛河输水管） | geography | time | TimeScene/Geo（岛尺度底图，docs/17 C1） | SS P3 资源；详见 docs/24 §15 | 2026（提前） | published（2026-10-14），背景 + 5 章 23 拍 |
 | 光与影（光学实验台 + 暗箱 + 户外杆影；看见、直线传播、影子的形状与大小、太阳下的影子） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind light） | Sci P4 Energy Forms and Uses（Light）；详见 docs/35 | 2026（提前） | published（2026-10-20）：背景 + 7 章 41 拍 |
 | 眼睛与耳朵（分设解剖工位：光、成像、调焦、听骨、耳蜗与保护） | biology | space + sim | SpaceScene/Model3D + senses 试一试 | P4 Light 与感官观察接口；解剖机制为课外拓展，详见 docs/58 | 2026（提前） | published（2026-10-27）：8 章 40 拍、3 张试一试；浏览器门槛留主会话 |
+| 声音（振动、介质、音高与振幅、回声、乐器与护耳） | science | space + sim | SpaceScene/Model3D + 复用 senses 纵波与 sound-only 扩展 | P6 Sound energy 与公平比较接口；声学为课外拓展，详见 docs/64 | 2026（提前） | published（2026-10-29）：8 章 32 拍、4 张试一试、24 个可选零件；浏览器门槛留主会话端口 5452 |
 | 热与温度（测温、勺柄传热、隔热、加热/冷却曲线、热胀冷缩） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind heat） | Sci P4 Energy Forms and Uses（Heat）；详见 docs/55 | 2026（提前） | published（2026-10-27）：背景 + 7章、37拍、34件；浏览器验收由主会话补跑 |
 | 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
 | 地球内部与火山剖面 | geography | space + sim | SpaceScene/Model3D + 既有table试一试 | 地理拓展（非新增PSLE必考单元）；详见 docs/48 | 2026（提前） | published（2026-10-27）：背景 + 7章、36拍、91件 |
@@ -33,6 +36,7 @@
 | 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
 | 分数（P2–P4：平均分、等值分数、同分母与相关分母加减、带分数；比例留待后续） | math | lesson | MathScene/SVG | MOE 2021 数学课纲 Fractions（P2、P3，P4 桥）；详见 docs/15 | 2026 P2 起用，P3 接着做 | 已完成 12 步 + 练习（待审） |
 | 拆开一台 AI 服务器（NVIDIA DGX B200） | computer | space | SpaceScene/Model3D | 课外（MOE 小学无计算机课纲）；能量转换与热的传递接 Sci P4 热；详见 docs/18 | 2026（computer 类第一个） | published（2026-10-13） |
+| 太阳系与恒星（比例、八行星、较小天体、闪烁与新加坡星空、光年与银河系） | science | space + sim | SpaceScene/Model3D + solar-system 快照 | P4 光、P6太阳与能量接口；天文为拓展，详见 docs/65 | 2026（提前） | published（2026-10-29）：背景 + 7章、40拍；浏览器门槛交主会话 |
 | 土星五号与阿波罗飞船 | science | space + sim | SpaceScene/Model3D + 既有 table 试一试 | 课外拓展（非新增 PSLE 必考单元）；详见 docs/61 | 2026（提前） | published（2026-10-27）：背景 + 6 章、35 拍、33 个零件定义；浏览器验收交主 session |
 | 二进制与像素 | computer | 待定 | 待定 | 待定 | 待定 |
 
