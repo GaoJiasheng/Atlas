@@ -532,10 +532,13 @@ export function CameraRig({
     // The HUD moved (measured by Model3DStage) or the stage resized: re-fit; the first measurement places the view at once.
     const layout = bridge.hudLayout ? `${bridge.hudLayout}:${live().size.width}x${live().size.height}` : '';
     if (layout !== seenLayout.current) {
-      const first = seenLayout.current === '';
+      // Until the HUD has settled after loading, the view is placed at once, not flown.
+      const first = seenLayout.current === '' || !bridge.hudSettled;
       seenLayout.current = layout;
       refit(first);
     }
+    // Settled: the measured HUD is current and the view is placed for it (`__atlas.ready` waits for this).
+    if (!bridge.hudSettled && layout !== '' && !bridge.hudPending) bridge.hudSettled = true;
     // Part writers have now applied this snapshot, including the first frame of a direct link.
     if (hudCamera.current && !ui.getState().cover && !user.current.active && !free.current && !orbit) {
       const fitted = fitHud(hudCamera.current);

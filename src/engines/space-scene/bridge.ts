@@ -157,6 +157,10 @@ export interface StageBridge {
   hudStage?: [number, number];
   /** Bumped when the measured HUD layout changes (CameraRig re-fits the view). */
   hudLayout: number;
+  /** A HUD change is waiting for its measurement (the next animation frame). */
+  hudPending?: boolean;
+  /** The view has been placed for the HUD as first measured after loading (test readiness; later re-fits fly). */
+  hudSettled?: boolean;
   /** The default framing on show (QA `framing()`): the free rectangle used, image scale vs the design camera, view-offset shift (shares, + right / up). */
   framing?: { rect: import('./lib/hud-framing').FrameRect; scale: number; shift: [number, number] } | null;
   /** The live camera mapped back to stage-independent terms (aspect pull-back and HUD framing undone): REFERENCE and the presentation save it. */

@@ -523,6 +523,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       ...(exploded && !inReference && file.flows.length > 0 ? [t('space.status.flowLocked').toLocaleUpperCase()] : []),
     ];
     return {
+      // Ready once the camera stands where the measured HUD puts it (docs/67 §9): a late HUD change on a busy first load would otherwise move it after.
+      ready: () => bridge.hudSettled === true,
       presets: {
         items: presets,
         set: (id, { instant }) => {

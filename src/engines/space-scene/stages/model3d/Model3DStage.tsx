@@ -123,6 +123,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
     const resize = new ResizeObserver(() => schedule());
     const measure = () => {
       frame = 0;
+      bridge.hudPending = false;
       const box = stage.getBoundingClientRect(), view = scene.getBoundingClientRect();
       const presenting = ui.getState().presenting;
       const panels = [...scene.querySelectorAll('[data-hud-panel]')]
@@ -139,7 +140,11 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       const stacked = view.width < 1024 || view.height > view.width;
       const same = (a: readonly FrameRect[] | undefined) => a?.length === rects.length &&
         a.every((r, i) => Math.abs(r.x0 - rects[i]!.x0) + Math.abs(r.y0 - rects[i]!.y0) + Math.abs(r.x1 - rects[i]!.x1) + Math.abs(r.y1 - rects[i]!.y1) < 1);
-      if (same(bridge.hudPanels) && stacked === bridge.hudStacked && box.width === bridge.hudStage?.[0] && box.height === bridge.hudStage?.[1]) return;
+      if (same(bridge.hudPanels) && stacked === bridge.hudStacked && box.width === bridge.hudStage?.[0] && box.height === bridge.hudStage?.[1]) {
+        // Nothing moved; a frame still lets CameraRig mark the first layout settled.
+        if (!bridge.hudSettled) rootStore.current?.getState().invalidate();
+        return;
+      }
       bridge.freeStage = freeStageRect(box.width, box.height, rects, 12, stacked);
       bridge.hudPanels = rects;
       bridge.hudStacked = stacked;
@@ -149,7 +154,12 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       bridge.invalidate();
       rootStore.current?.getState().invalidate();
     };
-    const schedule = () => { if (alive && !frame) frame = requestAnimationFrame(measure); };
+    const schedule = () => {
+      if (!alive || frame) return;
+      // A HUD change waits for the next frame to be measured: not ready until then (a busy first load can hold it for seconds).
+      bridge.hudPending = true;
+      frame = requestAnimationFrame(measure);
+    };
     const mutations = new MutationObserver(schedule);
     mutations.observe(scene, { childList: true, subtree: true });
     const attributes = new MutationObserver(schedule);
@@ -167,6 +177,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       delete bridge.hudPanels;
       delete bridge.hudStacked;
       delete bridge.hudStage;
+      bridge.hudPending = false;
     };
   }, [bridge, ui]);
 
