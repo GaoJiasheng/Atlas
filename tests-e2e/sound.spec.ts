@@ -80,7 +80,8 @@ test('source and wave share one phase; changing frequency preserves displacement
   await axis(page,3,1);await set(page,{'frequency-hz':500});
   await expect.poll(async()=>(await senses(page)).wave.phaseCycles).toBe(0);
   expect((await sim(page)).outputs).toMatchObject({'visual-hz':2,'displacement-max':.035,'wavelength-scene':.5,'speed-mps':340});
-  await seekWave(page,.25);await expect.poll(async()=>(await senses(page)).wave.positions[0]).toBeCloseTo(-.035,9);
+  // As above: after the axis change the lazily mounted wave syncs its clock on a later frame; seek until the seek holds.
+  await expect.poll(async()=>{await seekWave(page,.25);return (await senses(page)).wave.positions[0];}).toBeCloseTo(-.035,9);
   await axis(page,4,2);expect((await sim(page)).outputs).toMatchObject({'visual-hz':1,'displacement-max':.07,'amplitude-level':2});
   await set(page,{'sound-active':false});
   await expect.poll(async()=>(await senses(page)).wave.positions[5]).toBe(.25);
