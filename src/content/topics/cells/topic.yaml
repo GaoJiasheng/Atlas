@@ -1,0 +1,19 @@
+id: cells
+title: { en: "Cells", zh: "细胞" }
+subtitle: { en: "Plant and animal cells, their parts, and observing with a light microscope", zh: "植物与动物细胞、部位作用和光学显微观察" }
+shortTitle: { en: "Cells", zh: "细胞" }
+subject: biology
+tags: [biology, p5, cells, space]
+levels: [P5]
+moe:
+  - "MOE 2023 Science P5 Standard: recognise that a cell is a basic unit of life (printed p.43)."
+  - "MOE 2023 Science P4: identify plant parts and their functions (printed p.56); links to human systems (pp.53–54)."
+  - "Cell structures and microscope operation are enrichment requested for this topic, not detailed Cell System requirements in the 2023 syllabus."
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: cells
+note: { en: "Model study · cells enlarged separately · microscope field simulated", zh: "模型研究 · 细胞另行放大 · 显微视野为模拟" }

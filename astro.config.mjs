@@ -73,7 +73,17 @@ export default defineConfig({
         ignoreURLParametersMatching: [/.*/],
         navigateFallback: null,
         cleanupOutdatedCaches: true,
+        // BaseLayout registers the worker itself and never posts SKIP_WAITING, so without these
+        // a new deploy waits behind any open tab forever and keeps serving the old precache.
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
+          {
+            // Independently licensed same-origin stellar catalogues stay available after a visit.
+            urlPattern: /\/catalogues\/solar-system\/[a-z0-9-]+\.json$/,
+            handler: 'CacheFirst',
+            options: { cacheName: 'atlas-catalogues', expiration: { maxEntries: 8, maxAgeSeconds: 60 * 60 * 24 * 30 }, cacheableResponse: { statuses: [200] } },
+          },
           {
             // A deep-time topic has ten lazy frames plus independent modern evidence files.
             // Keep its visited local assets together, apart from the eight-entry historical map cache.

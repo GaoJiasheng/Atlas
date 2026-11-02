@@ -42,6 +42,7 @@ export function valueText(c: SimControl, v: SimValue | undefined, locale: 'en' |
 
 /** An output's value as text: a number with its decimals (`—` where it does not apply), a state's label. */
 export function outputText(o: SimOutput, v: SimOutputValue | undefined, locale: 'en' | 'zh'): string {
+  if (v === null && o.nullable) return locale === 'zh' ? '无传播' : 'No transmission';
   if (o.kind === 'state') return tx(o.states?.[String(v)] ?? { en: String(v ?? ''), zh: String(v ?? '') }, locale);
   if (o.kind === 'vector' || o.kind === 'timeline') return '';
   const n = numberOf(v);

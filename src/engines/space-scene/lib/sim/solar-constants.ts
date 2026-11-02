@@ -1,0 +1,7 @@
+/** Shared astronomy vocabulary; no build-time schema in the client. */
+export const PLANETS = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'] as const;
+export const SOLAR_BODIES = ['sun', ...PLANETS] as const;
+export const SOLAR_INPUTS = ['lab', 'elapsedYears', 'planet', 'scaleMode', 'skyDate', 'skyHour', 'observer', 'skyTarget', 'patternLinks', 'depth', 'atmosphere', 'sourceKind', 'altitudeMode', 'twinkleSeconds', 'cometStep', 'distanceTarget'] as const;
+export const SOLAR_CHOICES: Readonly<Record<string, readonly string[]>> = { lab: ['orbits', 'sizes', 'distances', 'small-bodies', 'twinkle', 'sky', 'galaxy'], planet: PLANETS, scaleMode: ['overview', 'true-scale'], skyDate: ['2026-01-15', '2026-04-15', '2026-07-15', '2026-10-15'], observer: ['singapore', 'equator', 'north45'], skyTarget: ['orion', 'crux', 'scorpius'], sourceKind: ['point', 'disc'], altitudeMode: ['high', 'low'], distanceTarget: ['sun-earth', 'neptune', 'proxima', 'milky-way'] };
+export const SOLAR_STEPS: Readonly<Record<string, readonly number[]>> = { elapsedYears: [0, .25, 1, 12, 30, 84, 165], skyHour: [0, 2, 4, 18, 20, 22], twinkleSeconds: [0, 1, 2, 3, 4], cometStep: [0, 90, 180, 270] };
+export const SOLAR_STATES: Readonly<Record<string, readonly string[]>> = { 'scale-state': ['overview', 'true-scale', 'size-row', 'distance-ruler', 'schematic', 'sky'], 'twinkle-state': ['steady', 'point-fluctuation', 'disc-averaged'] };

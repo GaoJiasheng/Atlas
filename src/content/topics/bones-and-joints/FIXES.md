@@ -4,16 +4,16 @@ Browser acceptance found four items that need rework rather than a small fix. Sc
 
 ## Rework completed for main-session browser re-verification
 
-F1–F5 are implemented below. Non-browser checks are recorded in docs/57 §9.5. Browser gates were skipped as instructed; implementation completion is not a new browser acceptance claim.
+F2–F5 were implemented in the earlier pass below. F1 remains reopened and withdrawn; see the final section. Earlier non-browser checks are recorded in docs/57 §9.5. Browser gates were skipped as instructed; implementation completion is not a new browser acceptance claim.
 
-### F1 · DONE · Protected-organs figure has 14 rib pairs, not 12
+### F1 · REOPENED · Protected-organs figure count and floating-rib attachment
 
 `public/illustrations/figures/bones-and-joints-protected-organs.webp` (chapter 02, both locales). Counting the costochondral seams and free tips on each side from the top: 7 ribs reach the sternum, 4 join the costal margin and 3 end in free tips, so 14 ribs per side. FIGURES.md records "12 per side", which is wrong. The caption on 01-02 and the chapter text say twelve pairs.
 
 Expected: exactly 12 per side (7 true ribs to the sternum, ribs 8–10 to the costal margin, 2 floating ribs 11–12 with free tips), heart and lungs inside, sternum in front, thoracic spine behind. Count the result seam by seam and mark it up before accepting. Do not rely on the prompt. Update FIGURES.md with the real count and method.
 
 
-**Done:** Replaced the figure using three built-in image-generation calls. Counted the final PNG and processed WebP as 7 true + 3 false + 2 floating ribs on each side; saved a 24-marker review overlay in `scripts/geo/bones-and-joints/rib-count.svg`. Reprocessed with `scripts/illustrate.ts figure`; corrected the false old count, prompts, hashes and inspection method in FIGURES.md.
+**Earlier pass, acceptance withdrawn:** Replaced the figure using three built-in image-generation calls and counted twelve ribs per side, but missed detached posterior ends on ribs 11–12. The 24-marker overlay in `scripts/geo/bones-and-joints/rib-count.svg` belongs to that withdrawn image. It does not establish correct posterior attachment. See the reopened item and current review in FIGURES.md.
 
 ### F2 · DONE · Part details are reviewer notes, not student text
 
@@ -63,3 +63,13 @@ Original reproduction: bones 04-02 and 05-02/03, and muscles-arms ch04 b1 (`ulna
 ## F1 reopened (2026-10-27, main session)
 
 The redrawn protected-organs figure counts 12 ribs per side, but ribs 11–12 are drawn as loose pieces beside the spine, not joined to the vertebrae. Floating ribs are free at the front only; at the back they join the thoracic vertebrae. The figure is withdrawn from chapter 02 (both locales) and its webp removed until it is redrawn with ribs 11–12 attached to the spine. Redraw is queued for Codex.
+
+### Redraw outcome (2026-10-29) — still open after four attempts
+
+Used all four permitted built-in `image_gen` calls in graphite-plate style. Rejected attempts 1–2 for extra ribs; rejected attempt 3 for the lower costal-margin/attachment geometry. Attempt 4 has ten long outer arcs per side and one clearly spine-attached pair with free anterior tips; the higher posterior branch disappears under the costal margin, so both floating pairs cannot be traced to free front tips. Independent second-agent inspection agrees that neither attempt 3 nor 4 passes. Heart/lungs, sternum and posterior spine alone are insufficient for acceptance.
+
+The last candidate was processed with `scripts/illustrate.ts figure`, inspected, and moved out of `public/` into the local review directory. Its 129,548 B / 1200×900 WebP also exceeds the existing 120 KiB target at q58. No accepted image exists, so the two `<Figure>` uses and dependent e2e image assertion remain withdrawn. No fifth generation call or anatomy edits by script were made.
+
+All four source PNGs, exact prompts and a processed review WebP are staged under this worktree's gitignored `art/planned/bones-and-joints/`; the main-checkout art directory is outside writable roots and was not overwritten. Counts, failure locations, hashes and verbatim prompts are in FIGURES.md. A further redraw remains necessary before restoring the chapter and e2e check.
+
+Current non-browser gates: `pnpm check` (0 errors/warnings), `pnpm validate` (85 topics, 0 errors/warnings), `pnpm test` (219 files; 5,448 tests passed) and `pnpm build` (173 pages) pass. `pnpm shoot` and `pnpm e2e` were skipped as requested; no browser/desktop was opened. No engine, package/lockfile or git writes.

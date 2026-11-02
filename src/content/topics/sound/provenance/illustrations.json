@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-29",
+  "visualReview": "Inspected all three approved PNGs and processed WebP compositions: fork with two arms and one handle; one drum membrane over an open-bottom cutaway shell and separate beater; single taut string supported by two bridges above a hollow one-hole soundbox. Transparency and margins retained. Browser theme/layout QA remains for main session.",
+  "entries": [
+    {
+      "input": "sound.png",
+      "originalSha256": "2a61c085aef722a18f25eefbbab6a648c11e0b69f1070d59ef152fc9facd1fa3",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; generated artwork with no third-party reference image input",
+      "method": "scripts/illustrate.ts process",
+      "outputs": [
+        {
+          "file": "public/illustrations/sound.webp",
+          "bytes": 37374,
+          "width": 800,
+          "height": 800,
+          "alpha": true,
+          "sha256": "bd3bc66793696e555dbe95f0ccd59d33e8805516d87432b029347ca44dd4e1f7"
+        },
+        {
+          "file": "public/illustrations/sound@2x.webp",
+          "bytes": 101696,
+          "width": 1600,
+          "height": 1600,
+          "alpha": true,
+          "sha256": "680acc50cbe2740d82fe0e9ff57a09b9ca0d5b0177c55083f0b2eeeb796a776a"
+        }
+      ]
+    },
+    {
+      "input": "sound-drum-membrane.png",
+      "originalSha256": "fcc263d410d0d1c197ebba9cbfcbf53e21a4db2e0a991be78cf5a6d7e63d55af",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; generated artwork with no third-party reference image input",
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/sound-drum-membrane.webp",
+          "bytes": 112986,
+          "width": 1200,
+          "height": 900,
+          "alpha": true,
+          "sha256": "94a6f0a58359a14119d96b95b0b555fb5910cd6ed3d7dd662e94e0adaa902764"
+        }
+      ]
+    },
+    {
+      "input": "sound-monochord.png",
+      "originalSha256": "e2509086846ea965d410dea23abe04ab2e7e0a1bedd8ef780942b0f0fd2b0bb4",
+      "licence": "Original Atlas CC BY-NC-SA 4.0; generated artwork with no third-party reference image input",
+      "method": "scripts/illustrate.ts figure",
+      "outputs": [
+        {
+          "file": "public/illustrations/figures/sound-monochord.webp",
+          "bytes": 87064,
+          "width": 1200,
+          "height": 900,
+          "alpha": true,
+          "sha256": "d59954b40de017478d17877895e8f8d6adb5f044502b5b47af0bb2d660ea3428"
+        }
+      ]
+    }
+  ]
+}
