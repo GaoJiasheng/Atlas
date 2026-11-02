@@ -4,6 +4,8 @@ import { solveHudRoom, measureFreeStage, type HudMeasurements, type FreeStage } 
 
 /** Rows of the chapter rail the left column keeps before it hides its metadata (the rest scrolls). */
 const RAIL_MIN_ROWS = 3;
+/** CSS px a compact column must have to spare before it shows its metadata again. */
+const OVERFLOW_HYSTERESIS = 12;
 
 /** Measure shared HUD once per layout change; expose stage-local framing to every engine. */
 export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, actions: HudActions) {
@@ -75,6 +77,8 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       }
       return need - body.clientHeight;
     };
+    /** The title block's height when last measured open (metadata shown). */
+    let titleOpen = 0;
     const observed = new Set<Element>();
     const resize = new ResizeObserver(() => schedule());
     let syncingPlate = false;
@@ -136,7 +140,12 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
             0,
           );
         else sizes.left.height += sizes.left.metadata;
-        sizes.left.overflow = leftOverflow() + (state.leftColumn === 'compact' ? sizes.left.metadata : 0);
+        // Compact, the column needs back what the title block lost (its open height, margins included); a
+        // small margin keeps a column that only just fits from flipping between open and compact.
+        const title = box('.atlas-hud__left [data-hud-panel="title"]')?.height ?? 0;
+        if (state.leftColumn === 'open') titleOpen = title;
+        sizes.left.overflow =
+          state.leftColumn === 'compact' ? leftOverflow() + Math.max(sizes.left.metadata, titleOpen - title) + OVERFLOW_HYSTERESIS : leftOverflow();
       } else sizes.left.overflow = 0;
       if (right) {
         // Measured open only: a folded card shifts the column by its tab, which must not flip the solver back.
