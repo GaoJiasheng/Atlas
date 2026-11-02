@@ -3,6 +3,7 @@ import type { FeatureCollection } from 'geojson';
 import type { DatedLayerDef } from '../../../content/schema/topic';
 import type { CatalogueEntry, CatalogueIndex } from '../catalogueSchema';
 import type { CatalogueLayer } from './catalogue';
+import { readablePlateBoundary } from './plateBoundary';
 
 export function createCatalogueLoader(
   definitions: readonly DatedLayerDef[],
@@ -35,7 +36,7 @@ export function createCatalogueLoader(
     publish();
     void fetchEntries(layer.def).then((entries) => {
       if (disposed) return;
-      layer.entries = entries;
+      layer.entries = layer.def.catalogue!.file.startsWith('ph-catalogue-plate-') ? entries.map(readablePlateBoundary) : entries;
       textReady.add(id);
       update(layer);
     }).catch(() => {

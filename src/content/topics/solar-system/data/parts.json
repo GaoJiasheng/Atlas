@@ -1921,8 +1921,8 @@
         "zh": "标出星表方向与人画出的图案。"
       },
       "detail": {
-        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
-        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+        "en": "These 28 star positions come from the HYG v4.1 star catalogue (CC BY-SA 4.0). The model gives an approximate view of the sky using recorded star directions. The small marker shows where the name label points; it does not represent another star. [S28,S30,S31,S34,S37]\n\nThe lines help you recognise patterns. They do not mark official constellation borders or join stars in space, and you can switch them off. The distance view uses earlier catalogue estimates and leaves out stars whose distances are unknown. [S14,S32,S37]",
+        "zh": "这28颗恒星的位置来自 HYG v4.1 星表（CC BY-SA 4.0许可）。模型根据记录的恒星方向，大致呈现天空的样子。小标记表示名称指向的位置，不代表另一颗恒星。[S28,S30,S31,S34,S37]\n\n连线帮助你辨认图案，可以关闭。它们不是星座的正式边界，也不表示恒星在太空中连在一起。距离对照使用早期星表的估计值，不显示距离未知的恒星。[S14,S32,S37]"
       },
       "clip": false,
       "castShadow": false,
@@ -1952,8 +1952,8 @@
         "zh": "标出星表方向与人画出的图案。"
       },
       "detail": {
-        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
-        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+        "en": "These 28 star positions come from the HYG v4.1 star catalogue (CC BY-SA 4.0). The model gives an approximate view of the sky using recorded star directions. The small marker shows where the name label points; it does not represent another star. [S28,S30,S31,S34,S37]\n\nThe lines help you recognise patterns. They do not mark official constellation borders or join stars in space, and you can switch them off. The distance view uses earlier catalogue estimates and leaves out stars whose distances are unknown. [S14,S32,S37]",
+        "zh": "这28颗恒星的位置来自 HYG v4.1 星表（CC BY-SA 4.0许可）。模型根据记录的恒星方向，大致呈现天空的样子。小标记表示名称指向的位置，不代表另一颗恒星。[S28,S30,S31,S34,S37]\n\n连线帮助你辨认图案，可以关闭。它们不是星座的正式边界，也不表示恒星在太空中连在一起。距离对照使用早期星表的估计值，不显示距离未知的恒星。[S14,S32,S37]"
       },
       "clip": false,
       "castShadow": false,
@@ -1983,8 +1983,8 @@
         "zh": "标出星表方向与人画出的图案。"
       },
       "detail": {
-        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
-        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+        "en": "These 28 star positions come from the HYG v4.1 star catalogue (CC BY-SA 4.0). The model gives an approximate view of the sky using recorded star directions. The small marker shows where the name label points; it does not represent another star. [S28,S30,S31,S34,S37]\n\nThe lines help you recognise patterns. They do not mark official constellation borders or join stars in space, and you can switch them off. The distance view uses earlier catalogue estimates and leaves out stars whose distances are unknown. [S14,S32,S37]",
+        "zh": "这28颗恒星的位置来自 HYG v4.1 星表（CC BY-SA 4.0许可）。模型根据记录的恒星方向，大致呈现天空的样子。小标记表示名称指向的位置，不代表另一颗恒星。[S28,S30,S31,S34,S37]\n\n连线帮助你辨认图案，可以关闭。它们不是星座的正式边界，也不表示恒星在太空中连在一起。距离对照使用早期星表的估计值，不显示距离未知的恒星。[S14,S32,S37]"
       },
       "clip": false,
       "castShadow": false,
@@ -2014,8 +2014,8 @@
         "zh": "标出星表方向与人画出的图案。"
       },
       "detail": {
-        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
-        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+        "en": "These 28 star positions come from the HYG v4.1 star catalogue (CC BY-SA 4.0). The model gives an approximate view of the sky using recorded star directions. The small marker shows where the name label points; it does not represent another star. [S28,S30,S31,S34,S37]\n\nThe lines help you recognise patterns. They do not mark official constellation borders or join stars in space, and you can switch them off. The distance view uses earlier catalogue estimates and leaves out stars whose distances are unknown. [S14,S32,S37]",
+        "zh": "这28颗恒星的位置来自 HYG v4.1 星表（CC BY-SA 4.0许可）。模型根据记录的恒星方向，大致呈现天空的样子。小标记表示名称指向的位置，不代表另一颗恒星。[S28,S30,S31,S34,S37]\n\n连线帮助你辨认图案，可以关闭。它们不是星座的正式边界，也不表示恒星在太空中连在一起。距离对照使用早期星表的估计值，不显示距离未知的恒星。[S14,S32,S37]"
       },
       "clip": false,
       "castShadow": false,
@@ -2045,8 +2045,8 @@
         "zh": "标出星表方向与人画出的图案。"
       },
       "detail": {
-        "en": "The points come from 28 selected HYG v4.1 catalogue records, kept separately under CC BY-SA 4.0. Fixed J2000 directions are projected through an approximate sidereal-time model. The small aggregate marker is a label anchor, not an extra star. [S28,S30,S31,S34,S37]\n\nRecognition lines are original teaching links, not IAU boundaries or physical connections. They can be switched off. Depth uses historical catalogue distance estimates; missing distances are omitted. [S14,S32,S37]",
-        "zh": "星点来自28条HYG v4.1星表记录，单独保留CC BY-SA 4.0许可。固定J2000方向经近似恒星时模型投影。微小的集合标记只承载引线，不是多出来的一颗恒星。[S28,S30,S31,S34,S37]\n\n识别线是原创教学辅助线，不是IAU边界或物理连接，可以关闭。深度对照使用历史星表距离估计，缺值不会当作零距离。[S14,S32,S37]"
+        "en": "These 28 star positions come from the HYG v4.1 star catalogue (CC BY-SA 4.0). The model gives an approximate view of the sky using recorded star directions. The small marker shows where the name label points; it does not represent another star. [S28,S30,S31,S34,S37]\n\nThe lines help you recognise patterns. They do not mark official constellation borders or join stars in space, and you can switch them off. The distance view uses earlier catalogue estimates and leaves out stars whose distances are unknown. [S14,S32,S37]",
+        "zh": "这28颗恒星的位置来自 HYG v4.1 星表（CC BY-SA 4.0许可）。模型根据记录的恒星方向，大致呈现天空的样子。小标记表示名称指向的位置，不代表另一颗恒星。[S28,S30,S31,S34,S37]\n\n连线帮助你辨认图案，可以关闭。它们不是星座的正式边界，也不表示恒星在太空中连在一起。距离对照使用早期星表的估计值，不显示距离未知的恒星。[S14,S32,S37]"
       },
       "clip": false,
       "castShadow": false,

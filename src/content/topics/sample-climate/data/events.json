@@ -12,12 +12,12 @@
       "zh": "新加坡"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151627. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151627。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Singapore. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到新加坡。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"
@@ -36,12 +36,12 @@
       "zh": "吉隆坡"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151317. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151317。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Kuala Lumpur. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到吉隆坡。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"
@@ -60,12 +60,12 @@
       "zh": "雅加达"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151599. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151599。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Jakarta. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到雅加达。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"
@@ -84,12 +84,12 @@
       "zh": "河内"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151251. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151251。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Hanoi. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到河内。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"
@@ -108,12 +108,12 @@
       "zh": "曼谷"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151509. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151509。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Bangkok. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到曼谷。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"
@@ -132,12 +132,12 @@
       "zh": "马尼拉"
     },
     "summary": {
-      "en": "City reading anchor for the engine fixture; not a weather station or fire location.",
-      "zh": "引擎测试用城市阅读锚点，不是气象站或火点。"
+      "en": "City on the weather map; this dot is not a weather station or a fire.",
+      "zh": "天气地图上的城市；这个点不代表气象站或火灾。"
     },
     "detail": {
-      "en": "Natural Earth 1:110m populated places; NE_ID 1159151525. Original representative city coordinates retained. This is fixture/test data.",
-      "zh": "Natural Earth 1:110m 城市点；NE_ID 1159151525。保留原城市代表坐标，用于引擎测试。"
+      "en": "This dot helps you find Manila. The city location comes from Natural Earth. The weather shown here is a sample for trying the map.",
+      "zh": "这个点帮助你找到马尼拉。城市位置资料来自 Natural Earth。这里的天气是供你试用地图的示例。"
     },
     "sources": [
       "S103"

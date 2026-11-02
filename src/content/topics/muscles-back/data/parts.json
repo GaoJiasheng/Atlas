@@ -781,8 +781,8 @@
         "zh": "连接肋骨，是斜方肌、菱形肌和竖脊肌的附着处。"
       },
       "detail": {
-        "en": "Twelve thoracic vertebrae, each with a rib on either side. Their spinous processes, the bumps you can feel down the middle of the back, anchor trapezius, the rhomboids, latissimus dorsi and spinalis; their transverse processes anchor longissimus [M47]. In this model they are one mesh, so the spine does not bend segment by segment.",
-        "zh": "十二节胸椎，每一节两侧各连一根肋骨。它们的棘突，就是背中线上摸得到的那排骨性突起，是斜方肌、菱形肌、背阔肌和棘肌的附着处；横突则供最长肌附着 [M47]。模型里它们是一整块网格，所以脊柱不能一节一节地弯。"
+        "en": "Twelve thoracic vertebrae, each with a rib on either side. Their spinous processes, the bumps you can feel down the middle of the back, anchor trapezius, the rhomboids, latissimus dorsi and spinalis; their transverse processes anchor longissimus [M47]. In this model they are joined into one piece, so the spine does not bend segment by segment.",
+        "zh": "十二节胸椎，每一节两侧各连一根肋骨。它们的棘突，就是背中线上摸得到的那排骨性突起，是斜方肌、菱形肌、背阔肌和棘肌的附着处；横突则供最长肌附着 [M47]。模型里它们连成一整块，所以脊柱不能一节一节地弯。"
       }
     },
     {
@@ -831,8 +831,8 @@
         "zh": "肋角是竖脊肌和下后锯肌的附着处。"
       },
       "detail": {
-        "en": "The sternum, twelve pairs of ribs and their cartilages, drawn as one mesh. On the back, the angles of the ribs anchor iliocostalis and longissimus, the lowest four ribs take serratus posterior inferior, and the lowest three or four ribs give slips to latissimus dorsi [M47].",
-        "zh": "胸骨、十二对肋骨和肋软骨，在模型里合成一个网格。背面的肋角供髂肋肌和最长肌附着，最下面四根肋骨连着下后锯肌，最下面三四根肋骨还给背阔肌发出肌齿 [M47]。"
+        "en": "The sternum, twelve pairs of ribs and their cartilages, drawn as one piece. On the back, the angles of the ribs anchor iliocostalis and longissimus, the lowest four ribs take serratus posterior inferior, and the lowest three or four ribs give slips to latissimus dorsi [M47].",
+        "zh": "胸骨、十二对肋骨和肋软骨，在模型里合成一整块。背面的肋角供髂肋肌和最长肌附着，最下面四根肋骨连着下后锯肌，最下面三四根肋骨还给背阔肌发出肌齿 [M47]。"
       }
     },
     {
@@ -943,8 +943,8 @@
         "zh": "背阔肌和竖脊肌共同腱的附着处。"
       },
       "detail": {
-        "en": "The hip bones, sacrum and coccyx, drawn as one mesh. The back of the iliac crest and the sacrum anchor the common tendon of the erector spinae; latissimus dorsi reaches the crest through the thoracolumbar fascia [M47].",
-        "zh": "髋骨、骶骨和尾骨合成一个网格。髂嵴后部和骶骨是竖脊肌共同腱的附着处；背阔肌借胸腰筋膜连到髂嵴 [M47]。"
+        "en": "The hip bones, sacrum and coccyx, drawn as one piece. The back of the iliac crest and the sacrum anchor the common tendon of the erector spinae; latissimus dorsi reaches the crest through the thoracolumbar fascia [M47].",
+        "zh": "髋骨、骶骨和尾骨合成一整块。髂嵴后部和骶骨是竖脊肌共同腱的附着处；背阔肌借胸腰筋膜连到髂嵴 [M47]。"
       }
     },
     {

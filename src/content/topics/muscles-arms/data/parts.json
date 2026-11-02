@@ -926,8 +926,8 @@
         "zh": "显示腕与手指的附着标志。"
       },
       "detail": {
-        "en": "Carpals, metacarpals and phalanges are merged per side. Wrist tendons reach particular carpals or metacarpal bases; finger tendons reach phalanges or tendon expansions. Palmaris longus reaches soft tissue, so its insertion marker is anchored to its own distal soft-tissue mesh rather than a bone [M2]. No individual finger joint is animated.",
-        "zh": "每侧腕骨、掌骨与指骨合为一个网格。腕肌腱止于特定腕骨或掌骨底，指肌腱止于指骨或指背腱膜。掌长肌止于软组织，因此它的止点标记锚定在自身远端软组织网格，而不是骨面 [M2]。模型不驱动单独的指关节。"
+        "en": "Carpals, metacarpals and phalanges are joined into one part on each side. Wrist tendons reach particular carpals or metacarpal bases; finger tendons reach phalanges or tendon expansions. Palmaris longus reaches soft tissue, so its attachment marker points to the soft tissue near its lower end, rather than to a bone [M2]. No individual finger joint is animated.",
+        "zh": "每侧腕骨、掌骨与指骨合为一个零件。腕肌腱止于特定腕骨或掌骨底，指肌腱止于指骨或指背腱膜。掌长肌止于软组织，因此它的附着点标记指向下端附近的软组织，而不是骨面 [M2]。模型不驱动单独的指关节。"
       },
       "connects": []
     },
@@ -956,8 +956,8 @@
         "zh": "承接跨肩关节的肌头。"
       },
       "detail": {
-        "en": "Biceps long head starts above the glenoid, triceps long head below it. Biceps short head and coracobrachialis start at the coracoid process [M2]. The mesh shows these landmarks; the simplified clavicle–scapula chain does not model a full gliding shoulder girdle.",
-        "zh": "肱二头肌长头起于关节盂上方，肱三头肌长头起于下方。肱二头肌短头和喙肱肌起于喙突 [M2]。网格保留这些标志；简化的锁骨—肩胛骨链不模拟完整的肩带滑动。"
+        "en": "Biceps long head starts above the glenoid, triceps long head below it. Biceps short head and coracobrachialis start at the coracoid process [M2]. The model shows these landmarks; the simplified clavicle–scapula chain does not model a full gliding shoulder girdle.",
+        "zh": "肱二头肌长头起于关节盂上方，肱三头肌长头起于下方。肱二头肌短头和喙肱肌起于喙突 [M2]。模型显示这些位置；简化的锁骨—肩胛骨链不模拟完整的肩带滑动。"
       },
       "connects": []
     },

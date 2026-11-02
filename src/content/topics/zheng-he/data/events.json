@@ -115,7 +115,7 @@
     "kind": "site",
     "importance": 2,
     "title": {
-      "en": "Singapore (regional anchor)",
+      "en": "Temasek / Singapore island region",
       "zh": "淡马锡／新加坡岛区域"
     },
     "summary": {
@@ -167,8 +167,8 @@
     "kind": "site",
     "importance": 2,
     "title": {
-      "en": "Surabaya (regional anchor)",
-      "zh": "爪哇（泗水区域参照点）"
+      "en": "Java near present-day Surabaya",
+      "zh": "爪哇（今泗水附近）"
     },
     "summary": {
       "en": "Surabaya helps locate Java for the 1407 report of Ming troops being killed. The exact conflict site is unknown.",
@@ -350,8 +350,8 @@
     "kind": "site",
     "importance": 2,
     "title": {
-      "en": "Lhokseumawe (regional anchor)",
-      "zh": "苏门答剌附近区域（今司马威参照）"
+      "en": "Samudera region near present-day Lhokseumawe",
+      "zh": "苏门答剌附近区域（今司马威附近）"
     },
     "summary": {
       "en": "Lhokseumawe helps locate the region near Samudera. The palace and capture site are unknown. Samudera was not the whole island of Sumatra.",
@@ -376,8 +376,8 @@
     "kind": "site",
     "importance": 2,
     "title": {
-      "en": "Dhaka (regional anchor)",
-      "zh": "孟加拉区域（今达卡参照）"
+      "en": "Bengal near present-day Dhaka",
+      "zh": "孟加拉区域（今达卡附近）"
     },
     "summary": {
       "en": "Dhaka helps locate Bengal, whose king sent the giraffe in 1414. Where the animal boarded a ship is unknown.",

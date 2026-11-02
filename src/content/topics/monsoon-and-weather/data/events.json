@@ -16,8 +16,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Singapore using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到新加坡。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Singapore on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出新加坡。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -40,8 +40,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Kuala Lumpur using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到吉隆坡。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Kuala Lumpur on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出吉隆坡。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -64,8 +64,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Jakarta using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到雅加达。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Jakarta on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出雅加达。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -88,8 +88,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Hanoi using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到河内。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Hanoi on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出河内。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -112,8 +112,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Bangkok using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到曼谷。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Bangkok on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出曼谷。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -136,8 +136,8 @@
       "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Find Manila using this Natural Earth city point. Wind and rain readings come from the surrounding regional grids, rather than a city weather station.",
-      "zh": "这个 Natural Earth 城市点帮助找到马尼拉。风和雨的读数来自周围的区域格网，并非市内气象站。"
+      "en": "This dot marks Manila on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出马尼拉。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"

@@ -24,8 +24,8 @@
     "zh": "空气从这里进来，被加温、加湿、清洁。"
    },
    "detail": {
-    "en": "Air comes in through the two nostrils into the nasal cavity, the space behind the nose. Its lining warms and moistens the air and removes dust and germs [S2]; hairs and mucus in the nose trap small particles such as dust [S40].\n\nThis mesh is the lining of the nasal cavity of the adult reference body; the outside of the nose belongs to the body outline. In this model the dots of air follow a drawn path through it, not a measured airflow [S37].",
-    "zh": "空气从两个鼻孔进入鼻腔，也就是鼻子后面的空间。鼻腔的内壁把空气加温、加湿，并清除灰尘和病菌 [S2]；鼻子里的毛和黏液能粘住灰尘这类小颗粒 [S40]。\n\n这个网格是成年参考身体鼻腔的内壁；鼻子的外形属于身体轮廓。在这个模型里，空气的点沿着一条画出来的路线穿过鼻腔，不是测量出来的气流 [S37]。"
+    "en": "Air comes in through the two nostrils into the nasal cavity, the space behind the nose. Its lining warms and moistens the air and removes dust and germs [S2]; hairs and mucus in the nose trap small particles such as dust [S40].\n\nThis part shows the lining of an adult nasal cavity; the outside of the nose belongs to the body outline. In this model the dots of air follow a drawn path through it, not a measured airflow [S37].",
+    "zh": "空气从两个鼻孔进入鼻腔，也就是鼻子后面的空间。鼻腔的内壁把空气加温、加湿，并清除灰尘和病菌 [S2]；鼻子里的毛和黏液能粘住灰尘这类小颗粒 [S40]。\n\n这个零件表示成人鼻腔的内壁；鼻子的外形属于身体轮廓。在这个模型里，空气的点沿着一条画出来的路线穿过鼻腔，不是测量出来的气流 [S37]。"
    },
    "group": "airway",
    "mesh": "nasal-cavity",
@@ -173,8 +173,8 @@
     "zh": "把空气送到肺；软骨环让它保持张开。"
    },
    "detail": {
-    "en": "A tube in the neck and upper chest that lies in front of the gullet [S40]. Sixteen to twenty C-shaped pieces of cartilage, stacked one above another, keep it open [S2]. At its lower end it divides into two tubes, one to each lung [S2].\n\nIn an adult it is about 10 to 12 cm long [S40]; this mesh measures about 10.5 cm [S37].",
-    "zh": "气管是脖子和胸腔上部的一条管子，在食道前面 [S40]。十六到二十块 C 形的软骨一块叠一块，让它一直张开 [S2]。气管下端分成两条管，分别通到两个肺 [S2]。\n\n成年人的气管长约 10 到 12 厘米 [S40]；这个网格量得约 10.5 厘米 [S37]。"
+    "en": "A tube in the neck and upper chest that lies in front of the gullet [S40]. Sixteen to twenty C-shaped pieces of cartilage, stacked one above another, keep it open [S2]. At its lower end it divides into two tubes, one to each lung [S2].\n\nIn an adult it is about 10 to 12 cm long [S40]; this model part measures about 10.5 cm [S37].",
+    "zh": "气管是脖子和胸腔上部的一条管子，在食道前面 [S40]。十六到二十块 C 形的软骨一块叠一块，让它一直张开 [S2]。气管下端分成两条管，分别通到两个肺 [S2]。\n\n成年人的气管长约 10 到 12 厘米 [S40]；这个模型零件量得约 10.5 厘米 [S37]。"
    },
    "group": "airway",
    "mesh": "trachea",
@@ -238,8 +238,8 @@
     "zh": "比右肺小，给心脏留出位置。"
    },
    "detail": {
-    "en": "The left lung has two lobes and is smaller than the right; a notch in its inner side leaves space for the heart [S2]. Like the right lung, it takes oxygen into the blood and lets carbon dioxide out [S2].\n\nTogether the two lungs of this adult mesh are about 26 cm across and 26 cm tall [S37].",
-    "zh": "左肺分成两叶，比右肺小；它的内侧有一个凹口，给心脏留出空间 [S2]。和右肺一样，它让氧气进入血液，让二氧化碳离开 [S2]。\n\n这个成人网格的两个肺合起来约 26 厘米宽、26 厘米高 [S37]。"
+    "en": "The left lung has two lobes and is smaller than the right; a notch in its inner side leaves space for the heart [S2]. Like the right lung, it takes oxygen into the blood and lets carbon dioxide out [S2].\n\nTogether the two lungs of this adult body model are about 26 cm across and 26 cm tall [S37].",
+    "zh": "左肺分成两叶，比右肺小；它的内侧有一个凹口，给心脏留出空间 [S2]。和右肺一样，它让氧气进入血液，让二氧化碳离开 [S2]。\n\n这个成人身体模型的两个肺合起来约 26 厘米宽、26 厘米高 [S37]。"
    },
    "group": "lung-pair",
    "mesh": "lung-left",

@@ -569,8 +569,8 @@
         "mesh": "triceps-brachii.r"
       },
       "name": {
-        "en": "Triceps brachii (grouped reference mesh)",
-        "zh": "肱三头肌（合并参考网格）"
+        "en": "Triceps brachii (three heads shown together)",
+        "zh": "肱三头肌（三个头一起显示）"
       },
       "short": {
         "en": "Triceps",
@@ -600,8 +600,8 @@
         "zh": "只有长头跨肩关节；各头都能伸肘。"
       },
       "detail": {
-        "en": "All three heads of triceps are drawn as one mesh here. Only the long head starts on the shoulder blade and crosses the shoulder, where it helps pull the arm back; all three straighten the elbow [M48].",
-        "zh": "这里把肱三头肌三个头画成一个网格。只有长头起于肩胛骨、跨过肩关节，在那里帮着把手臂往后拉；三个头都能伸肘 [M48]。"
+        "en": "All three heads of triceps are drawn as one piece here. Only the long head starts on the shoulder blade and crosses the shoulder, where it helps pull the arm back; all three straighten the elbow [M48].",
+        "zh": "这里把肱三头肌三个头画成一整块。只有长头起于肩胛骨、跨过肩关节，在那里帮着把手臂往后拉；三个头都能伸肘 [M48]。"
       }
     },
     {
@@ -715,8 +715,8 @@
         "zh": "补全推举和划船时用到的肘部。"
       },
       "detail": {
-        "en": "The radius and ulna, drawn as one mesh on each side. Biceps ends on the radius and triceps on the ulna; bending the elbow changes where the hand sits in rotations and rows. The forearm does not twist in this model [M2] [M48].",
-        "zh": "每侧把桡骨和尺骨合成一个网格。肱二头肌止于桡骨，肱三头肌止于尺骨；屈肘会改变旋转和划船时手的位置。模型里前臂不能单独旋转 [M2] [M48]。"
+        "en": "The radius and ulna, drawn as one piece on each side. Biceps ends on the radius and triceps on the ulna; bending the elbow changes where the hand sits in rotations and rows. The forearm does not twist in this model [M2] [M48].",
+        "zh": "每侧把桡骨和尺骨合成一整块。肱二头肌止于桡骨，肱三头肌止于尺骨；屈肘会改变旋转和划船时手的位置。模型里前臂不能单独旋转 [M2] [M48]。"
       },
       "material": {
         "color": "tissue",
@@ -741,8 +741,8 @@
         "zh": "胸壁承托肩胛骨与前锯肌。"
       },
       "detail": {
-        "en": "The sternum, ribs and costal cartilages, drawn as one mesh. Serratus anterior wraps round the ribs to the rib-facing side of the shoulder blade [M1] [M2].",
-        "zh": "胸骨、肋骨和肋软骨合成一个网格。前锯肌从肋骨绕到肩胛骨贴着肋骨的那一面 [M1] [M2]。"
+        "en": "The sternum, ribs and costal cartilages, drawn as one piece. Serratus anterior wraps round the ribs to the rib-facing side of the shoulder blade [M1] [M2].",
+        "zh": "胸骨、肋骨和肋软骨合成一整块。前锯肌从肋骨绕到肩胛骨贴着肋骨的那一面 [M1] [M2]。"
       },
       "material": {
         "color": "tissue",
