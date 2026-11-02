@@ -9,12 +9,12 @@ const bi = (en: string, zh: string) => ({ en, zh });
 const layers = ['vessel','quay-crane','transfer','yard','trace'];
 const defaults = { n20:2,n40:1,'lock-confirmed':true,above:2,'yard-state':'original',cranes:1,carriers:1,yards:1,arrivals:24,hours:2,'lift-live':false };
 const cameras = {
-  hero:{position:[105,85,115],target:[0,15,5],fov:34},
+  hero:{position:[165,120,175],target:[0,23,-4],fov:34},
   box:{position:[30,19,28],target:[0,2,0],fov:32},
   lift:{position:[35,38,45],target:[0,23,-3],fov:32},
   yard:{position:[68,32,72],target:[25,5,43],fov:34},
-  network:{position:[105,95,115],target:[0,12,8],fov:36},
-  tuas:{position:[105,85,115],target:[0,15,5],fov:34},
+  network:{position:[165,120,175],target:[0,23,-4],fov:34},
+  tuas:{position:[165,120,175],target:[0,23,-4],fov:34},
 };
 // Use the model generator’s authored camera coordinates when available.
 const partsPath = join(ROOT,'src/content/topics/container-port/data/parts.json');

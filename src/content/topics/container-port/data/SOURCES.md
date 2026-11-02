@@ -49,3 +49,14 @@ S10 的 UNECE wiki 返回 403；改读 FAO/IPPC 官方全文副本，附件 2 �
 S13/S14 仅准备阶段摘要，不能作新加坡儿童发生率证据；正文只设置浮沉预测，不引样本数字。C01–C03 课纲资料保留在 spec／研究账本，本产品不声称港口为指定考试内容。没有采用 F09 的增长率、F13–F15 的工程规模、F24 的旧年吞吐量或 F25 的全球排放比例；不补下载 SGODL 年度 CSV，不猜航线。
 
 来源编号一对一映射：准备 S01–S09 → 产品 S1–S9，S10–S31 原号。产品只保留实际引用的 20 项来源。逐数正文用 Num；零件详情用 [S#]；节拍 fact id 对照在 `scripts/geo/container-port/captions.json`，原账本编号清单在 `fact-audit.json`。
+
+## 2026-11-02 procedural realism rebuild
+
+The new build-time kit is `scripts/geo/kits/port.ts`; all shipped geometry is independently authored Atlas geometry. No photographs, manufacturer artwork, third-party mesh or remote texture is redistributed. These visual references establish structure and silhouette, not a particular equipment model or new lesson specifications:
+
+- [Liebherr Container Cranes brochure (2024)](https://www.liebherr.com/shared/media/maritime-cranes/downloads-und-brosch%C3%BCren-neu/brosch%C3%BCren/container-cranes-%28lcc%29/liebherr-container-cranes-brochure-2024.pdf), photographed ship-to-shore cranes and container ships: deep lattice boom, twin mast/stays, machinery house, portal, curved hull shoulders, aft accommodation and cargo bays. Reference only; manufacturer imagery is not an open asset licence.
+- [Konecranes RTG brochure](https://www.konecranes.com/sites/default/files/download/konecranes_brochure_rubber_tyred_gantry_crane_english_201003.pdf): four legs, paired rubber tyres, side sills/bracing, twin girders, trolley and suspended spreader. Reference only; no brochure artwork is shipped.
+- [Konecranes operator training brochure (2019)](https://www.konecranes.com/sites/default/files/2019-08/_Kursprogramm_KC_Operator_Customer_EN.pdf), AGV photograph on PDF page 17: low load deck, rubber wheels, chamfered ends and no driver cab. Copyright Konecranes; reference only.
+- Existing S9/S10/S30 remain the references for container envelope, corner fittings and four-corner top lifting. The standard samples still use the published dimensions and the existing declared width selection. Corrugation pitch, fitting detail, ship form, crane members and background stack arrangement are reconstruction/design choices under S1.
+
+新增模型全部为 Atlas 原创程序化几何；厂商图片只用于核对轮廓和连接关系，不随产品发布，也不作为具体设备规格。教学事实、数字、标签、吊运求解器及独立堆场实验保持不变。背景箱堆不参与 TEU 样箱计数。
