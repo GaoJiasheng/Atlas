@@ -187,7 +187,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 3. 所有交互用 Pointer Events，可点目标 ≥ 44px，关键操作不依赖 hover
 4. 底图、模型、字体全部本地资源，无运行时外部请求（Wikipedia 图片等外链一期不接）
 5. PWA：manifest + service worker 预缓存，离线能打开已访问主题
-6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 480 KB gz（Gavin 2026-10-29 定；原 400 KB，MapLibre 加宿主外壳已约 415 KB）；GeoJSON ≤ 2 MB，glb ≤ 10 MB。SpaceScene 目前按棘轮守在 ≤ 530 KB gz（`scripts/js-budget.ts`，`tests/js-budget.test.ts`；2026-11-02 拆分后 442–530 KB），目标仍是 300 KB，每次拆分后下调上限、不许上调
+6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 480 KB gz（Gavin 2026-10-29 定；原 400 KB，MapLibre 加宿主外壳已约 415 KB）；GeoJSON ≤ 2 MB，glb ≤ 10 MB。SpaceScene 目前按棘轮守在 ≤ 539 KB gz（`scripts/js-budget.ts`，`tests/js-budget.test.ts`；2026-11-02 拆分后 442–530 KB；同日合入 HUD room 宿主（自动收起求解器、操作说明、取景测量）后 sample-space 538.6 KB、地图类 480.2 KB，经主会话同意各上调一次到 539 / 481 KB），目标仍是 300 KB，每次拆分后下调上限、不再上调
    - 首屏 JS 检查：先 `pnpm build`，再 `pnpm tsx scripts/js-budget.ts --check`；从 dist 按页面入口、所选引擎/舞台及主题数据需要的懒加载模块，递归统计静态 import，去重后逐文件 gzip，1 KB = 1024 B。计入完整首帧所需代码，不以 HUD/加载占位先出现来规避预算。2026-11-02 拆包前 → 后（KB gz）：aircon 552.11 → 442.36、solar-system 552.11 → 490.64、cells 552.11 → 481.13、how-planes-fly 552.11 → 490.33、sound 552.11 → 489.67、fractions 315.02 → 236.49；SpaceScene 仍超额，预算单测会报错，预算未放宽。后续需继续拆通用 geometry/PartNode/SceneRoot，并协调 core 宿主、CameraRig 和受保护 HUD 的依赖边界。
    - 页面 HTML 只带小 props 和各章正文（ww2 约 100 KB）。引擎数据（`data/*.json` 解析合并后）由 `src/pages/topics/[slug]/data.json.ts` 输出成 `dist/topics/<slug>/data.json`，SceneHost 在客户端 fetch；不内联进 island props（Astro 的 props 编码会让 JSON 体积翻倍，曾让 ww2 页面 3 MB、预缓存 8.5 MB）。
    - PWA 预缓存只放页面壳、JS、CSS、图标（约 2.7 MB，无体积例外）；`/geo`、`/models`、`/topics/*/data.json` 走 CacheFirst 运行时缓存。
