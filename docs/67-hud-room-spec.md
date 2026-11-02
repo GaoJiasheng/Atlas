@@ -66,7 +66,7 @@ Safari 的地址栏和标签栏会吃掉 70–100 px 高度，比 App 更挤；�
   - 操作说明：按钮、键和 ESC 都能开关；列出的是这个引擎的手势；首次自动弹出，第二次不弹。
   - 左列、右上卡、图例各自能收起和打开，换章后保持；只看舞台来回切一次，状态恢复。
   - 在 §1 每个尺寸上：舞台可用区域满足 §2-1；每个收起的面板都有可见的页签，命中区 ≥ 44 px，一次点击能打开；没有重叠（用现有的重叠检查工具）。
-  - 1920×1080 默认布局和现在一样；820×1180、1024×1366 竖屏是抽屉；390×844 和现在一样。
+  - 1920×1080 默认布局和现在一样（卡片、图例、左列都展开）；唯一例外：左列装不下自己的内容（标题 + 元数据 + PLATE）时只藏元数据，PLATE 在列内滚动，不压到章节轴下（主会话 2026-11-03 认可；aircon、monsoon 因此默认 compact）。820×1180、1024×1366 竖屏是抽屉；390×844 和现在一样。
   - 不放松任何已有的重叠或计数断言。
 - 门槛：`pnpm check`、`pnpm validate`、`pnpm test`、`pnpm build`、`pnpm e2e`；`pnpm shoot <topic> --layout --keys` 在 §1 的尺寸各看一遍截图（两套主题，两种语言）。
 - 上线后重新打 iPad TestFlight 包。
@@ -179,4 +179,6 @@ Codex 的阶段 1（352b25e）没有跑过任何浏览器门槛。这一轮在�
 
 **门槛**：`pnpm check` 0 错 0 警告（4 个既有 hints）；`pnpm validate` 94 题 0 / 0；`pnpm test` 245 文件 / 6,309 条；`pnpm build` 通过。全量 e2e（716 条，CI=1，3 workers，机器负载 100–210）：合入 space-js 后第一轮 545 过 / 171 败（几乎都是 `__atlas.ready` 超时一类的负载失败）；`--last-failed`（2 workers）157 过 / 14 败；剩下 14 条单独再跑 11 过。仍失败：inside-the-earth:81（固定镜头下读数卡变宽触发 0.6 s 重新取景，P 标记纵向移了 4 px；main 没有 HUD 取景，所以不失败）、sample-lesson-measure:170（手机量杯 198.6 px，要 ≥ 199.5）、sample-lesson-net:157（手机展开图候选块 43.1 px，要 ≥ 43.5）—— 后两条是 phase 1 让手机右上卡留竖页签后模型少了约 1 %。steam-engine:171、sample-mechanism:169、space-label-drag、heart-and-lungs:80、ancient-civilisations 两条在 main 同负载下也失败，单独跑通过。how-planes-fly:87、sample-airfoil:96、sound:72、container-port:128、fossils-and-skeletons:167 在本分支都通过（单独或重跑）。
 
-**留下的**：ww2 英文 1280×720 顶栏三行（VIEW 预设多，Z / ? 加了标签后中段更窄；main 是两行）；SpaceScene 竖屏叠放（820×1180）仍用原镜头，模型会落到左列章节轨后面；dinosaur-earth 1280×800 重建图在小自由区下缩到 zoom 0.8 附近，构图待看。
+**第二轮（2026-11-03）**：合入 main 1158de5（3D 写实第一批）后 JS 预算不变（sample-space 538.62 / 539，地图 480.16 / 481）。手机上收起的卡片页签挂在单行工具 / 图层按钮下面（TimeScene、MathScene），不再把按钮推左、把标题挤成两行（MathScene 量杯、秤盘回到 main 的大小，测试阈值未放宽；SpaceScene 的三行 LAYERS / TOOLS / KEY 和打开的面板时页签仍在顶边）。SpaceScene 竖屏平板（820×1180、1024×1366）不再当作叠放：按左列与抽屉之间的空区取景，模型不再落到章节轨后面；只有手机（< 760）是叠放。1180–1439 px 笔记本上 VIEW 预设的数字和 Stage / Help 的键位字母让位（标题和状态行仍写键位），ww2 英文 1280×720 顶栏回到两行、中文一行，和 main 一样。dinosaur-earth 1280×800 的 zoom 0.8 是取景按设计缩小：自由区约 600×620，小于 1920 参考自由区，作者的世界镜头缩小约 0.6 级才能整幅放进去（盘古大陆本身占满大半幅）。inside-the-earth 固定镜头用例改为等三帧再量锚点（`apply` 的镜头下一帧才画出；实测读数变化不会触发重新取景）；sample-climate 失败资源、sample-deep-time 缺样用例按 ww1 的做法屏蔽 service worker。
+
+**留下的**：第一轮留下的三项已在第二轮处理（见上）。
