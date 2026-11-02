@@ -2198,6 +2198,13 @@
   position: absolute;
   inset: -16px -12px;
 }
+/* Side by side, neighbouring chips split the gap between them instead of overlapping (one click, one source). */
+.atlas-src + .atlas-src::after {
+  left: -2px;
+}
+.atlas-src:has(+ .atlas-src)::after {
+  right: -2px;
+}
 .atlas-src:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
