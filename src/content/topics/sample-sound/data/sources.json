@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Atlas original classroom DESIGN fixture. Fixed wave and speed constants; schematic echo path; marker swings use degrees, not measured displacement.",
+        "zh": "Atlas原创课堂设计测试件：固定纵波与速度常数、回声路径示意；标记摆角以度为单位，非实测位移。"
+      }
+    }
+  ]
+}

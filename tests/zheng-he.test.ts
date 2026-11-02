@@ -55,9 +55,9 @@ const DATED_ANCHORS: Record<string, string> = {
   'evt-final-return': 'nanjing',
 };
 
-describe('zheng-he draft history topic', () => {
+describe('zheng-he history topic', () => {
   it('uses the existing year-based TimeScene with eight bilingual chapters and forty manual beats', () => {
-    expect(topic).toMatchObject({ status: 'draft', engine: 'time-scene', stage: 'geo', datePrecision: 'year' });
+    expect(topic).toMatchObject({ status: 'published', engine: 'time-scene', stage: 'geo', datePrecision: 'year' });
     expect(topic.basemap.region).toEqual({ bounds: [35, -15, 125, 37], land: 'zheng-he-land' });
     expect(chapters).toHaveLength(8);
     expect(chapters.filter((chapter) => chapter.kind === 'background').map((chapter) => chapter.order)).toEqual([0]);

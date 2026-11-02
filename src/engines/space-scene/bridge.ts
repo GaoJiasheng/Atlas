@@ -134,12 +134,17 @@ export interface MechanismReading {
 export type MechanismSave = Record<string, { thetaRad: number; qaHold: boolean }>;
 
 export interface SensesReading {
-  eye?: ReturnType<typeof import('./lib/sim/senses').effectiveEyeRays> & { yScale: number; active: boolean; hiddenReason: string | null; readings: Record<string, number | string>; rendered: { object: number[]; lens: number[]; retina: number[] }[][]; label: { x: number; y: number; shown: boolean } };
+  profile?: 'eye-and-sound' | 'sound-only';
+  sourceMarkers?: Record<string, { phaseCycles: number; visualHz: number; on: number }>;
+  soundLab?: { echo?: { elapsedVisual: number; u: number; pathPosition: number; atReturn: boolean; playing: boolean; hiddenReason: string | null; physicalEchoMs: number | null; slowFactor: number } };
+  eye?: ReturnType<typeof import('./lib/sim/senses').effectiveEyeRays> & { yScale: number; active: boolean; hiddenReason: string | null; readings: Record<string, number | string | null>; rendered: { object: number[]; lens: number[]; retina: number[] }[][]; label: { x: number; y: number; shown: boolean } };
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {
+  solarSky?: {status:string;utc?:string;latitude?:number;depth?:boolean;rows?:unknown[]};
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
+  sensesEchoSeek(u: number): boolean;
   /** Actual rig rotations and world origins after skinning motion (QA only). */
   joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   /** Measured free stage band for opt-in camera framing. */
@@ -163,6 +168,7 @@ export interface StageBridge {
   animations: Map<string, AnimationReading>;
   bends: Map<string, BendReading>;
   shifts: Map<string, ShiftReading>;
+  scales: Map<string, {target:number; actual:[number,number,number]}>;
   fillBenchmarks: Map<string, () => number>;
   flowPaths: Map<string, Record<string, { visible: boolean }>>;
   /** Flows a number `intensity` paces (docs/40 §4.3): the factor every path runs at (QA `flow(id).pace`). */
@@ -226,6 +232,7 @@ export function createBridge(): StageBridge {
   return {
     senses: {},
     sensesSeek: () => false,
+    sensesEchoSeek: () => false,
     spans: new Map(),
     mechanisms: new Map(),
     seekMechanism: () => false,
@@ -247,6 +254,7 @@ export function createBridge(): StageBridge {
     tints: new Map(),
     bends: new Map(),
     shifts: new Map(),
+    scales: new Map(),
     fillBenchmarks: new Map(),
     flowPaths: new Map(),
     flowPace: new Map(),

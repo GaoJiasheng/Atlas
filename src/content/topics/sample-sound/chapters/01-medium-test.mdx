@@ -1,0 +1,138 @@
+---
+{
+  "id": "medium-test",
+  "order": 1,
+  "title": {
+    "en": "Medium fixture",
+    "zh": "介质测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "bench",
+      "wave-study"
+    ],
+    "hide": [],
+    "labels": [
+      "source-driver",
+      "receiver",
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        0.8,
+        6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 40
+    },
+    "summary": {
+      "en": "DRAFT schematic engine test.",
+      "zh": "草稿引擎示意测试。"
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "medium",
+        "also": [
+          "sound-active"
+        ],
+        "keep": [
+          "frequency-hz",
+          "amplitude",
+          "distance-m"
+        ],
+        "observe": [
+          "propagation-state",
+          "speed-mps",
+          "one-way-ms"
+        ],
+        "record": {
+          "chart": {
+            "y": "one-way-ms"
+          }
+        }
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Air has a travel time.",
+          "zh": "空气有传播时间。"
+        }
+      },
+      {
+        "caption": {
+          "en": "Water uses the same distance.",
+          "zh": "水采用相同距离。"
+        },
+        "sim": {
+          "set": {
+            "medium": "water"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "This chosen solid transmits.",
+          "zh": "选定固体可传播。"
+        },
+        "sim": {
+          "set": {
+            "medium": "solid-example"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Vacuum has no transmission.",
+          "zh": "真空无传播。"
+        },
+        "sim": {
+          "set": {
+            "medium": "vacuum"
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "A disabled source has no travel event.",
+          "zh": "关闭声源没有传播事件。"
+        },
+        "sim": {
+          "set": {
+            "sound-active": false
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Draft fixture for deterministic, silent wave and echo engine checks. [S1]
+
+</Lang>
+
+<Lang zh>
+
+用于确定性静音纵波与回声引擎检查的草稿示例。[S1]
+
+</Lang>

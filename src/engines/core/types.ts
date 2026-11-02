@@ -30,6 +30,8 @@ export interface SceneState {
 
 /** Keys every engine may add on top of `SceneState`, with their URL keys. */
 export interface UrlEngineFields {
+  /** TimeScene: selected catalogue feature. URL `pick`. */
+  pick?: string | null;
   /** TimeScene modern reference inset (only for reconstruction topics). */
   inset?: 'world' | 'southeast-asia' | 'mexico';
   insetVisible?: boolean;

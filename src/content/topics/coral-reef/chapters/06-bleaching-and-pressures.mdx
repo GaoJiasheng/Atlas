@@ -1,0 +1,172 @@
+---
+id: bleaching-and-pressures
+order: 6
+title:
+  en: Bleaching and environmental pressures
+  zh: 白化与环境压力
+level: P6
+state:
+  camera:
+    position:
+      - 5.9
+      - 1.4
+      - 1.8
+    target:
+      - 5
+      - 0.4
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - polyp-tissue
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Examine tissue evidence as well as surface colour.
+    zh: 看组织证据，不只看表面颜色。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+    try:
+      vary: evidence-state
+      keep:
+        - en: Same enlarged polyp model
+          zh: 同一个放大的珊瑚虫模型
+      observe:
+        - tissue-evidence
+  beats:
+    - labels:
+        - polyp-tissue
+        - polyp-symbionts
+      sim:
+        set:
+          evidence-state: partnered
+      caption:
+        en: With algal partners present, living tissue covers the skeleton.
+        zh: 有共生藻时，活组织覆盖在骨骼上。
+    - labels:
+        - polyp-tissue
+        - polyp-skeleton
+      sim:
+        set:
+          evidence-state: bleached-alive
+      caption:
+        en: In bleaching, algae or their pigments are lost. Living tissue can remain.
+        zh: 白化时会失去共生藻或其色素，但仍可能保留活组织。
+    - part: polyp-skeleton
+      labels:
+        - polyp-skeleton
+      sim:
+        set:
+          evidence-state: dead-skeleton
+      caption:
+        en: A bare dead skeleton has no living polyp tissue. Whiteness alone is not enough evidence.
+        zh: 裸露的死骨骼没有珊瑚虫活组织；单看白色不能判定死亡。
+    - camera: evidence
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - water-haze
+        - sediment-deposit
+      part: sediment-deposit
+      sim:
+        set:
+          water-case: more-turbid
+      caption:
+        en: Suspended particles reduce light; deposited particles can cover corals. Heat stress is
+          another pressure.
+        zh: 悬浮颗粒减少透光；沉积颗粒可覆盖珊瑚；热胁迫是另一种压力。
+    - camera: polyp
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - polyp-tissue
+        - polyp-skeleton
+      part: null
+      sim:
+        set:
+          evidence-state: bleached-alive
+      caption:
+        en: Some bleached corals recover if stress eases; severe or prolonged stress can lead to death.
+        zh: 一些白化珊瑚在压力缓解后可恢复；严重或持续的压力则可能导致死亡。
+  index:
+    parts:
+      - polyp-tissue
+      - polyp-skeleton
+      - polyp-symbionts
+      - water-haze
+      - sediment-deposit
+---
+
+<Lang en>
+
+Start with the partnered polyp. Living tissue covers the skeleton and contains algal partners. Now choose the bleached-alive evidence state. In <Term id="bleaching">coral bleaching</Term>, partners and/or their pigments are lost. Pale tissue can make the underlying white skeleton more visible. The animal may still be alive, so surface colour alone cannot establish that it has died.
+
+Compare that display with the dead-skeleton state. Here the model shows no living polyp tissue, mouth or tentacles. The hard support remains. The choice control compares evidence states; it does not run a sequence in which every coral must pass through them. Returning to the partnered choice is a manual comparison, not proof of an automatic recovery process.
+
+Warmer water is a leading cause of bleaching, while changes in light, runoff and extreme low tides can also stress corals. If stress eases, some bleached corals recover. Severe or prolonged stress can lead to death. The display has no temperature dial, countdown or survival threshold because it cannot calculate those outcomes for a real colony.
+
+Other pressures act through different mechanisms. Suspended particles reduce underwater light; deposited particles can cover coral surfaces. Reclamation can remove reef habitat, and oil pollution can also harm reefs. Distinguish these local pressures from the wider challenge of ocean warming. Keeping the mechanisms separate helps explain why improving one condition does not guarantee recovery from every other pressure.
+
+<More title={{"en": "Evidence, not an automatic timeline", "zh": "证据不是自动时间线"}}>
+
+The model simplifies three independent cases into tissue present or absent and partner symbols present or absent. It does not show every degree of pigment loss, partial mortality or later colonisation of a skeleton. A field diagnosis requires closer observation than this binary display. [S8, S27, S50]
+
+</More>
+
+<More title={{"en": "Singapore’s past bleaching", "zh": "新加坡过去的白化事件"}}>
+
+NUS describes mass bleaching in 1998, 2010 and 2016, with differences among sites and coral communities. These are historical examples, not a complete event list or a statement of today’s condition. [S9]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看有伙伴的珊瑚虫：活组织覆盖骨骼，内含共生藻。再选“白化仍活”的证据状态。<Term id="bleaching">珊瑚白化</Term>涉及失去伙伴或其色素，颜色变浅的组织让下方白色骨骼更显眼。但动物可能仍活着，单看表面颜色不能判定死亡。
+
+与“死骨骼”比较，模型不再显示活组织、口或触手，只留下坚硬支撑。选择控件用于并排理解证据，不是运行每个珊瑚必经的时间顺序。手动选回有伙伴的状态，也不能证明动物会自动恢复。
+
+海水升温是白化的主要诱因之一；光照、径流及极端低潮也可造成压力。一些白化珊瑚可在压力缓解后恢复，严重或持续的压力则可能导致死亡。展示没有温度旋钮、倒计时或存活阈值，因为它算不出真实群体会怎样。
+
+其他压力作用不同：悬浮颗粒减少水下光照，沉积颗粒可覆盖珊瑚表面；填海可直接移除生境，油污也能伤害礁区。解释时应区分这些本地压力与更大范围的海洋升温。改善一种条件，并不保证能消除所有压力，也不能仅凭看见白色就断定保护失败或恢复成功。
+
+<More title={{"en": "Evidence, not an automatic timeline", "zh": "证据不是自动时间线"}}>
+
+模型把三个独立情况简化成组织有无、伙伴符号有无，不显示色素减少的所有程度、部分死亡或骨骼之后被其他生物覆盖。实地判断需要比这组二分显示更仔细的观察。[S8, S27, S50]
+
+</More>
+
+<More title={{"en": "Singapore’s past bleaching", "zh": "新加坡过去的白化事件"}}>
+
+国大资料记载 1998、2010、2016 年大规模白化，各地点和珊瑚群落的结果有差别。这些是历史例子，并非完整事件清单，也不说明今天的状况。[S9]
+
+</More>
+
+</Lang>

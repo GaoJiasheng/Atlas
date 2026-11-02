@@ -1,0 +1,292 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Singapore MOE. Science Teaching & Learning Syllabus, Primary Three to Six, 2023 (updated Jan 2026).",
+        "zh": "新加坡教育部，2023 小学科学教学与学习课纲（2026 年 1 月更新）。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf",
+      "note": {
+        "en": "Printed pp.43,53–57; PDF page = printed + 1; cached original verified locally. Accessed 2026-10-29. Reference only; no open asset permission established. Cached original SHA-256 0556023ceb55fe80de75ae044011b8c77ea7ea494a1873d2b224a9b2b8083ab0. PDF pp.44/57 = printed pp.43/56. Two exact outcomes quoted, 20 unique words total. Detailed Cell System and microscope terms are absent in the cached 2023 syllabus. Live human-verification page was not bypassed.",
+        "zh": "定位：Printed pp.43,53–57; PDF page = printed + 1; cached original verified locally。核查日期：2026-10-29。本地缓存原件经逐字核对；PDF 第 44/57 页对应印刷第 43/56 页。仅引用两条目标，英文共 20 词。未把旧纲 Cell System 当作 2023 年详细要求；没有绕过验证页面。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Singapore MOE. Primary Science Syllabus, implementation from 2014.",
+        "zh": "新加坡教育部，2014 年起实施的小学科学课纲。仅用于历史对照。"
+      },
+      "url": "https://www.moe.gov.sg/-/media/files/primary/science-primary-2014",
+      "note": {
+        "en": "Printed p.38, Cell System (P5 and P6 Standard); search-index text only, historical comparison. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Printed p.38, Cell System (P5 and P6 Standard); search-index text only, historical comparison。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "OpenStax / Rice University. Biology 2e §4.1 Studying Cells.",
+        "zh": "OpenStax / 莱斯大学，《生物学》第 2 版，第 4.1 节：研究细胞。"
+      },
+      "url": "https://openstax.org/books/biology-2e/pages/4-1-studying-cells",
+      "note": {
+        "en": "Introduction, Microscopy, Light Microscopes, Cell Theory. Accessed 2026-10-29. CC BY-NC-SA 4.0 (current preface; individual figure credits may differ). Cached HTML reread during content build. No OpenStax illustration imported; scientific explanations paraphrased, current attribution retained.",
+        "zh": "定位：Introduction, Microscopy, Light Microscopes, Cell Theory。核查日期：2026-10-29。施工时重新读取本地 HTML。科学解释用自写释义，保留当前 CC BY-NC-SA 4.0 归属；未导入原书插图。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "OpenStax / Rice University. Biology 2e §4.3 Eukaryotic Cells.",
+        "zh": "OpenStax / 莱斯大学，《生物学》第 2 版，第 4.3 节：真核细胞。"
+      },
+      "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells",
+      "note": {
+        "en": "Plasma Membrane, Cytoplasm, Nucleus, Vacuoles and Vesicles, Chloroplasts, Cell Wall. Accessed 2026-10-29. CC BY-NC-SA 4.0 (current preface; individual figure credits may differ). Cached HTML reread during content build. No OpenStax illustration imported; scientific explanations paraphrased, current attribution retained.",
+        "zh": "定位：Plasma Membrane, Cytoplasm, Nucleus, Vacuoles and Vesicles, Chloroplasts, Cell Wall。核查日期：2026-10-29。施工时重新读取本地 HTML。科学解释用自写释义，保留当前 CC BY-NC-SA 4.0 归属；未导入原书插图。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "OpenStax / Rice University. Biology 2e Preface: About OpenStax resources.",
+        "zh": "OpenStax / 莱斯大学，《生物学》第 2 版前言：资源许可。"
+      },
+      "url": "https://openstax.org/books/biology-2e/pages/preface",
+      "note": {
+        "en": "Customization; current book-level licence. Accessed 2026-10-29. CC BY-NC-SA 4.0. Cached HTML reread during content build. No OpenStax illustration imported; scientific explanations paraphrased, current attribution retained.",
+        "zh": "定位：Customization; current book-level licence。核查日期：2026-10-29。施工时重新读取本地 HTML。科学解释用自写释义，保留当前 CC BY-NC-SA 4.0 归属；未导入原书插图。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "SUNY teaching laboratory manual / Lumen Learning. Microscope, Biology I Laboratory Manual.",
+        "zh": "SUNY / Lumen，《生物学实验手册》：显微镜。"
+      },
+      "url": "https://courses.lumenlearning.com/suny-biolabs1/chapter/microscope/",
+      "note": {
+        "en": "Rules and Instructions for using Compound Light Microscopes; page attribution. Accessed 2026-10-29. Reference only; page-level open licence not independently verified; no asset download.",
+        "zh": "定位：Rules and Instructions for using Compound Light Microscopes; page attribution。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Columbia University Histology Laboratory. Microscope.",
+        "zh": "哥伦比亚大学组织学实验室：显微镜结构与使用。"
+      },
+      "url": "https://histologylab.ctl.columbia.edu/microscope/",
+      "note": {
+        "en": "Stand, optical system and method of use. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Stand, optical system and method of use。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Science & Plants for Schools / University of Cambridge. Teaching Microscopy Using Plants.",
+        "zh": "剑桥大学 Science & Plants for Schools：利用植物教授显微观察。"
+      },
+      "url": "https://www.saps.org.uk/growth-hub/teaching-microscopy-using-plants/",
+      "note": {
+        "en": "Article 1 and pondweed video description; Article 2 specimen preparation; text read, cookie-gated videos skipped. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Article 1 and pondweed video description; Article 2 specimen preparation; text read, cookie-gated videos skipped。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Harvard-Smithsonian Center for Astrophysics, MOSART. Misconceptions: life science.",
+        "zh": "哈佛－史密松天体物理中心 MOSART：生命科学常见误解。"
+      },
+      "url": "https://waps.cfa.harvard.edu/mosart/misconceptions.php",
+      "note": {
+        "en": "Elementary life science list; organism size and cell size; public page only. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Elementary life science list; organism size and cell size; public page only。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Mustafa Ürey & Muammer Çalık, APFSLT 9(2), article 12, 2008. Combining different conceptual change methods within 5E model: a sample teaching design of cell concept and its organelles.",
+        "zh": "Ürey 与 Çalık，2008 年细胞概念教学设计研究，附录 2。"
+      },
+      "url": "https://www.eduhk.hk/apfslt/v9_issue2/muammer/muammer8.htm",
+      "note": {
+        "en": "Appendix 2: misconception list; use for reported ideas, not all its corrective explanations. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Appendix 2: misconception list; use for reported ideas, not all its corrective explanations。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Journal of Biological Education / original research authors. Contribution of 3D modelling and printing to learning in primary schools: a case study with visually impaired students from an inclusive Biology classroom.",
+        "zh": "《生物教育杂志》：融合课堂中利用三维模型学习细胞的个案研究。"
+      },
+      "url": "https://www.tandfonline.com/doi/full/10.1080/00219266.2022.2118352",
+      "note": {
+        "en": "Results: student knowledge before 3D modelling; public indexed results, not a Singapore prevalence study. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Results: student knowledge before 3D modelling; public indexed results, not a Singapore prevalence study。核查日期：2026-10-29。仅用公开索引结果支持写作关注点，不推断新加坡发生比例或教学因果效果。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Science Centre Singapore. DNA Learning Lab booklet 2018.",
+        "zh": "新加坡科学馆，2018 年 DNA Learning Lab 手册。仅作历史教学背景。"
+      },
+      "url": "https://www.science.edu.sg/docs/default-source/scs-documents/for-schools/dnabooklet_2018.pdf",
+      "note": {
+        "en": "Printed pp.3–4 / PDF pp.3–4, Diversity of Cells; historical programme, not current booking advice. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Printed pp.3–4 / PDF pp.3–4, Diversity of Cells; historical programme, not current booking advice。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "NParks Flora & Fauna Web. Allium cepa L..",
+        "zh": "新加坡国家公园局 Flora & Fauna Web：洋葱。"
+      },
+      "url": "https://www.nparks.gov.sg/florafaunaweb/flora/5/9/5931",
+      "note": {
+        "en": "Common names, Local Conservation Status, Ethnobotanical Uses. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Common names, Local Conservation Status, Ethnobotanical Uses。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Hong Kong Education Bureau. An English-Chinese Glossary of Terms Commonly Used in Teaching Science (S1–3), 2017.",
+        "zh": "香港教育局，2017 年初中科学英汉词汇表。繁体词形明确转换为简体。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/SciGlossary_2017.pdf",
+      "note": {
+        "en": "Alphabetical entries; cached PDF read locally; printed Arabic page = PDF page − 5; traditional forms converted explicitly. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Alphabetical entries; cached PDF read locally; printed Arabic page = PDF page − 5; traditional forms converted explicitly。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "厦门大学生命科学学院. 崔勇教授团队揭示植物细胞中液泡生物发生的机制.",
+        "zh": "厦门大学生命科学学院，植物细胞液泡发生研究报告。仅作简体术语凭据。"
+      },
+      "url": "https://life.xmu.edu.cn/info/1045/30692.htm",
+      "note": {
+        "en": "2025-03-25 research report; simplified 液泡、细胞器、细胞内、细胞; terminology only. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：2025-03-25 research report; simplified 液泡、细胞器、细胞内、细胞; terminology only。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "KEYENCE China, manufacturer terminology resource. 光学显微镜.",
+        "zh": "基恩士中国：光学显微镜词汇。仅作术语凭据，不推荐产品。"
+      },
+      "url": "https://www.keyence.com.cn/ss/products/microscope/microscope_glossary/optical_microscopes/",
+      "note": {
+        "en": "Structure and limitations; lexical evidence only, no product recommendations. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Structure and limitations; lexical evidence only, no product recommendations。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Mariana Ruiz / LadyofHats, Wikimedia Commons. Plant cell structure-en.svg.",
+        "zh": "Mariana Ruiz / LadyofHats，植物细胞结构 SVG，维基共享资源。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure-en.svg",
+      "note": {
+        "en": "File description and licensing; reference only. Accessed 2026-10-29. Public domain (author dedication); Commons page text CC BY-SA is separate.",
+        "zh": "定位：File description and licensing; reference only。核查日期：2026-10-29。只作公有领域结构参考；未复制维基页面的 CC BY-SA 说明文字或导入图像。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Mariana Ruiz / LadyofHats, Wikimedia Commons. Animal cell structure en.svg.",
+        "zh": "Mariana Ruiz / LadyofHats，动物细胞结构 SVG，维基共享资源。"
+      },
+      "url": "https://commons.wikimedia.org/wiki/File:Animal_cell_structure_en.svg",
+      "note": {
+        "en": "File description and licensing; reference only. Accessed 2026-10-29. Public domain (author dedication); Commons page text CC BY-SA is separate.",
+        "zh": "定位：File description and licensing; reference only。核查日期：2026-10-29。只作公有领域结构参考；未复制维基页面的 CC BY-SA 说明文字或导入图像。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Science & Plants for Schools. Microscopy of a pondweed leaf: exploring depth of field and focal plane.",
+        "zh": "Science & Plants for Schools：水草叶的景深与焦平面。"
+      },
+      "url": "https://www.saps.org.uk/teaching-resources/resources/6294/microscopy-of-a-pondweed-leaf-exploring-depth-of-field-and-focal-plane/",
+      "note": {
+        "en": "Resource page; linked through S08. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Resource page; linked through S08。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Atlas cells original design study. Eyepiece 10×; objectives 4×, 10×, 40×; field number 18 mm. Total power = 10 × objective = 40×, 100×, 400×. Object-field diameter = 1000 × 18 / objective = 4500, 1800, 450 µm. Focus tolerance widths = 20, 8, 2 µm; clarity proxy = max(0, 1 − abs(focus − layer depth)/width). Cell models enlarged separately 2000×: plant envelope 80×40×25 µm; animal 60×45×8 µm. Wall/membrane thickness exaggerated. Six plant chloroplast shapes, one large plant vacuole and one nucleus per cell are illustration choices. All specimen positions, layers, blur mappings and instrument dimensions are authored teaching geometry.",
+        "zh": "Atlas 原创设计研究：目镜 10 倍；物镜 4、10、40 倍；视场数 18 毫米。总倍数＝10×物镜倍数＝40、100、400 倍；物方视野直径＝1000×18÷物镜倍数＝4500、1800、450 微米。调焦容差＝20、8、2 微米；清晰度代理量＝max(0,1−焦差绝对值÷容差)。细胞另行放大 2000 倍：植物细胞包络 80×40×25 微米，动物 60×45×8 微米；壁膜厚度额外夸张。植物叶绿体形状 6 个、大液泡 1 个，各细胞核 1 个，均为绘图选择。标本位置、深度、模糊映射及仪器尺寸均为教学设计。"
+      },
+      "design": true,
+      "note": {
+        "en": "Original Atlas design, not measured biology or a calibrated optical image. Field formula supported by S22; total power and inversion by S7/S3. With a 100 µm target, the span occupies 2.222…%, 5.555…%, 22.222…% of diameter. Onion target centre x=200 µm; slide-x=−200 µm centres it; at slide-x=−100 µm and objective40, u=−100/225=−0.444444…. At objective40, focus error1 µm gives clarity0.5 and error2 gives0; this is not resolution. No large coarse-focus actuation. All material paraphrases and original geometry remain in the project CC BY-NC-SA family.",
+        "zh": "原创设计，不是生物实测或经校准光学影像。视野公式见 S22，总倍数与倒像见 S7、S3。100 微米目标横跨直径的 2.222…%、5.555…%、22.222…%。洋葱目标中心 x=200 微米，slide-x=−200 时居中；−100 时在 40 倍物镜下 u=−100/225=−0.444444…。该物镜焦差 1 微米时代理量 0.5，2 微米时为 0；这不是分辨率。只开放微调。原创几何及释义保持项目 CC BY-NC-SA 许可家族。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Nikon Corporation Healthcare. Microscope carrying guide, Eclipse E100.",
+        "zh": "尼康 Eclipse E100 显微镜搬运说明。"
+      },
+      "url": "https://www.microscope.healthcare.nikon.com/guides/e100/en/page/carrying.html",
+      "note": {
+        "en": "Carrying the microscope; model-specific two-hand arm grip differs from arm/base laboratory guidance. Accessed 2026-10-29. Reference only; no open asset permission established.",
+        "zh": "定位：Carrying the microscope; model-specific two-hand arm grip differs from arm/base laboratory guidance。核查日期：2026-10-29。该型号要求双手握镜臂；与实验指导的扶镜臂、托底座不同，正文明确具体仪器听从教师。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Nikon Corporation Healthcare. field of view (FOV), Glossary of Microscopy Terms.",
+        "zh": "尼康显微术语表：视野，视场数除以物镜倍数。"
+      },
+      "url": "https://www.microscope.healthcare.nikon.com/en_AOM/resources/glossary/field-of-view",
+      "note": {
+        "en": "Definition: field number divided by objective magnification; circular field diameter. Accessed 2026-10-29. Reference only; no open asset grant established.",
+        "zh": "定位：Definition: field number divided by objective magnification; circular field diameter。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Austin Community College, 2006. BIO 1406 Laboratory Manual, 12th ed., Exercise 4 laboratory procedures.",
+        "zh": "奥斯汀社区学院，2006 年 BIO 1406 实验手册，第 4 课：洋葱鳞茎细胞。"
+      },
+      "url": "https://accmultimedia.austincc.edu/biocr/1406/labm/lab_procedure_files/lab_procedure_4.pdf",
+      "note": {
+        "en": "Printed 4-8 / PDF page4: Onion Bulb Cells, subsection c; non-photosynthetic tissue and membrane visibility limits. Accessed 2026-10-29. Reference only; no open asset grant established.",
+        "zh": "定位：Printed 4-8 / PDF page4: Onion Bulb Cells, subsection c; non-photosynthetic tissue and membrane visibility limits。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Brad Basehore and Rae Dennis, Harrisburg Area Community College / LibreTexts. BIOL 212 Botany Laboratory Manual §1.5 Cell Structures and Organelles.",
+        "zh": "Basehore 与 Dennis，哈里斯堡地区社区学院 / LibreTexts，《植物学实验手册》第 1.5 节：细胞结构。"
+      },
+      "url": "https://bio.libretexts.org/Courses/Harrisburg_Area_Community_College/BIOL_212%3A_Botany_-_Laboratory_Manual/01%3A_Lab_1-_From_Prokaryotes_to_Eukaryotes/1.05%3A_Cell_Structures_and_Organelles",
+      "note": {
+        "en": "Onion Cells; paragraph immediately following onion drawing task and chloroplast question. Accessed 2026-10-29. CC BY-NC 4.0 indicated by page metadata, outside the brief’s asset-licence list; factual reference only.",
+        "zh": "定位：Onion Cells; paragraph immediately following onion drawing task and chloroplast question。核查日期：2026-10-29。仅作事实或术语参考；不据此复制未核开放许可的资产。"
+      }
+    }
+  ]
+}

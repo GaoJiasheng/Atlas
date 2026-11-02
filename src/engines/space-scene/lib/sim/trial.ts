@@ -14,6 +14,8 @@ export interface TableRow {
   vary: SimValue;
   /** Observed outputs at that value. */
   values: Readonly<Record<string, SimOutputValue>>;
+  /** Inputs copied when the reading was recorded; absent on legacy records. */
+  controls?: Readonly<Record<string, SimValue>>;
 }
 
 /** Add a row: the same varied value replaces its row in place; past 12 rows the oldest goes. */
@@ -72,7 +74,7 @@ export interface PredictionSnapshot {
   after: Record<string, SimValue>;
   /** Values on show before the prediction applied its authored starting point. */
   restore?: Record<string, SimValue>;
-  value: number | string;
+  value: number | string | null;
 }
 
 export function predictionIsCurrent(

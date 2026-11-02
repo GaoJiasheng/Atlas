@@ -200,6 +200,7 @@ export interface SimEffects {
   /** Copies of a `repeat` part on show. */
   count: Map<string, number>;
   fill: Map<string, SimFill>;
+  scale: Map<string, number>;
   /** Scene-unit offset per part. */
   offset: Map<string, Vec3>;
   place: Map<string, SimPlace>;
@@ -233,7 +234,7 @@ function truthy(v: SimValue | SimOutputValue | undefined, firstState: string | u
   if (isTimeline(v)) return v.duration > 0;
   if (typeof v === 'number') return Math.abs(v) > 1e-9;
   if (typeof v === 'string') return v !== '' && v !== firstState;
-  return v !== undefined && Object.values(v).some((x) => Math.abs(x) > 1e-9);
+  return v !== undefined && v !== null && Object.values(v).some((x) => Math.abs(x) > 1e-9);
 }
 
 export function holds(cond: SimCondition, v: SimValue | SimOutputValue | undefined, firstState?: string): boolean {
@@ -273,6 +274,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
     tint: new Map(),
     count: new Map(),
     fill: new Map(),
+    scale: new Map(),
     offset: new Map(),
     place: new Map(),
     offsetSettle: new Map(),
@@ -316,6 +318,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
           if (name !== undefined && name !== null) out.poses.set(id, name);
           else if (name === null && !out.poses.has(id)) out.poses.set(id, null);
         }
+        if(b.scale){if(typeof v!=='number'||!Number.isFinite(v)||v<0)throw new RangeError(`scale ${id} requires a finite nonnegative number`);out.scale.set(id,v*b.scale.per);}
         if (b.glow) {
           const x = Math.min(MAX_GLOW, Math.max(0, num(v) / b.glow.full));
           out.glow.set(id, { color: b.glow.color, level: b.glow.curve === 'sqrt' ? Math.sqrt(x) : x });
@@ -393,7 +396,7 @@ export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs)
             for (const path of b.paths) f.visibility[path] = (f.visibility[path] ?? true) && holds(b.visible, v, first);
           } else if (!holds(b.visible, v, first)) f.visible = false;
         }
-        if (b.intensity && v !== undefined && typeof v === 'object' && !isTimeline(v)) {
+        if (b.intensity && v !== undefined && v !== null && typeof v === 'object' && !isTimeline(v)) {
           const { full, mode } = b.intensity;
           const cap = mode === 'density' ? 1 : 2;
           // A vector keyed `<flow>:<path>` (the energy model's `paths`) gives this flow the entries that start with its id.

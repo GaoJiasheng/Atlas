@@ -1,0 +1,196 @@
+---
+{
+  "id": "field",
+  "order": 1,
+  "title": {
+    "en": "Microscope fixture",
+    "zh": "显微镜测试"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "run": false,
+    "cutaway": "none",
+    "layers": [
+      "microscope-bench"
+    ],
+    "hide": [],
+    "labels": [
+      "slide-glass",
+      "coverslip-glass",
+      "scope-fine-focus"
+    ],
+    "camera": {
+      "position": [
+        0.4,
+        0.4,
+        0.8
+      ],
+      "target": [
+        0,
+        0.1,
+        0
+      ],
+      "fov": 30
+    },
+    "summary": {
+      "en": "Draft engine fixture.",
+      "zh": "引擎草稿测试。"
+    },
+    "sim": {
+      "set": {
+        "specimen": "onion-bulb",
+        "objective": 4,
+        "slide-x": 0,
+        "slide-y": 0,
+        "focus-z": 0,
+        "illumination": 0.5,
+        "field-on": true
+      },
+      "try": {
+        "vary": "objective",
+        "also": [
+          "slide-x",
+          "slide-y",
+          "focus-z",
+          "field-on"
+        ],
+        "observe": [
+          "total-power",
+          "field-diameter-um",
+          "focus-status"
+        ],
+        "record": true
+      }
+    },
+    "beats": [
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -100,
+            "slide-y": 0,
+            "focus-z": 1,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "pondweed-leaf",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 3,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "pondweed-leaf",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 3,
+            "illumination": 0,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "prepared-cheek",
+            "objective": 40,
+            "slide-x": 0,
+            "slide-y": 100,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        }
+      },
+      {
+        "caption": {
+          "en": "Synthetic field model test state.",
+          "zh": "合成视野模型测试状态。"
+        },
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": 0,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": false
+          }
+        }
+      }
+    ]
+  }
+}
+---
+
+
+
+<Lang en>Draft fixture for finite specimens, inversion, focus, illumination and responsive field rendering.</Lang>
+
+<Lang zh>草稿测试用于验证有限标本、双轴倒像、调焦、照明及响应式视野。</Lang>
