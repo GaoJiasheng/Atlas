@@ -6,7 +6,7 @@
  *   - catalogueLayout    one grid, or one section per subject once the catalogue is long
  */
 import type { UiKey } from '../i18n';
-import { SUBJECTS, type EngineId, type Subject } from '../content/schema/topic';
+import { SUBJECTS, type EngineId, type Subject, type TopicMeta } from '../content/schema/topic';
 import manifest from './illustrations.json';
 
 /* ------------------------------------------------------------------ */
@@ -24,10 +24,11 @@ const field = (v: unknown, k: string): unknown => (v && typeof v === 'object' ? 
 
 /**
  * Counts for a plate card, from the topic's raw `data/*.json` (keyed by file base name):
- * history maps (TimeScene) chapters · events · keyframes; object anatomy (SpaceScene)
+ * history maps (TimeScene) chapters · events · keyframes; climatology maps count places
+ * instead of events; object anatomy (SpaceScene)
  * chapters · parts; lessons (MathScene) steps · explanation beats · practice questions. Zero counts are dropped.
  */
-export function topicStats(engine: EngineId, raw: Record<string, unknown>, chapters: number): StatItem[] {
+export function topicStats(engine: EngineId, raw: Record<string, unknown>, chapters: number, temporalMode: TopicMeta['temporalMode'] = 'chronological'): StatItem[] {
   const out: StatItem[] = [];
   const add = (n: number, key: StatItem['key']) => {
     if (n > 0) out.push({ n, key });
@@ -35,7 +36,11 @@ export function topicStats(engine: EngineId, raw: Record<string, unknown>, chapt
   switch (engine) {
     case 'time-scene':
       add(chapters, 'index.stats.chapters');
-      add(len(raw.events), 'index.stats.events');
+      if (temporalMode === 'climatology') {
+        add(Array.isArray(raw.events) ? raw.events.filter((event) => field(event, 'kind') === 'site').length : 0, 'index.stats.places');
+      } else {
+        add(len(raw.events), 'index.stats.events');
+      }
       add(len(field(raw.control, 'keyframes')), 'index.stats.keyframes');
       break;
     case 'space-scene':

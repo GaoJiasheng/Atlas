@@ -45,6 +45,7 @@ import {
 import { ClimateCellControls } from "./ClimateCellControls";
 import { ClimateKey } from "./ClimateKey";
 import { ClimateCellDetail } from "./ClimateCellDetail";
+import { MapOverlay } from "./MapOverlay";
 import "./climatology.css";
 import "./time-scene.css";
 import "./geography.css";
@@ -69,9 +70,6 @@ export default function GeographyView({
     highlight: s.highlight,
     theme: s.theme,
   }));
-  const [overlayOpen, setOverlayOpen] = useState(
-    () => window.matchMedia("(min-width: 760px)").matches,
-  );
   const [controller, setController] = useState<ClimateGeoController | null>(
       null,
     ),
@@ -656,12 +654,7 @@ export default function GeographyView({
         </section>
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <details
-          className="atlas-overlay-card ts-overlay"
-          open={overlayOpen}
-          onToggle={(e) => setOverlayOpen(e.currentTarget.open)}
-        >
-          <summary>{zh ? "图层与图例" : "Layers and key"}</summary>
+        <MapOverlay label={zh ? "图层与图例" : "Layers and key"}>
           <ControlPanel
             layers={layerRows}
             tools={[
@@ -699,7 +692,7 @@ export default function GeographyView({
               />
             </>
           )}
-        </details>
+        </MapOverlay>
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ChapterAxis

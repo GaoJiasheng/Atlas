@@ -16,7 +16,7 @@ import { ClimatologyStage, type ClimateGeoController, type ClimateSnapshot } fro
 import { ClimateCellControls } from './ClimateCellControls';
 import { ClimateKey } from './ClimateKey';
 import { ClimateCellDetail } from './ClimateCellDetail';
-import { Icon } from '../widgets/icons';
+import { MapOverlay } from './MapOverlay';
 import './climatology.css';
 import './time-scene.css';
 
@@ -35,8 +35,6 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
     theme: s.theme,
   }));
   const open = useHud((h) => h.panelsOpen);
-  // The rain key is needed to read the map: open on wider screens, a chip on phones (it would cover half the map).
-  const [overlayOpen, setOverlayOpen] = useState(() => window.matchMedia('(min-width: 760px)').matches);
   const [controller, setController] = useState<ClimateGeoController | null>(null);
   const controllerRef = useRef(controller);
   controllerRef.current = controller;
@@ -440,17 +438,10 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         />
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
-          <summary className="ts-overlay__summary" aria-label={tl(locale, 'time.layersAndKey')}>
-            <span className="ts-overlay__closed">
-              <Icon name="layers" size={18} />
-              <span>{tl(locale, 'time.layersAndKey')}</span>
-            </span>
-            <Icon name="close" size={18} className="ts-overlay__open" />
-          </summary>
+        <MapOverlay label={tl(locale, 'time.layersAndKey')}>
           <ControlPanel layers={layers} tools={tools} />
           <ClimateKey topic={topic} locale={locale} layers={state.layers} snapshot={snapshot} controller={controller} />
-        </details>
+        </MapOverlay>
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ChapterAxis

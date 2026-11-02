@@ -3,6 +3,8 @@
 .ts-modern__header strong { letter-spacing: .04em; font-size: .68rem; }
 .ts-modern button, .ts-modern-index button, .ts-modern-inspector button { color: inherit; font: inherit; cursor: pointer; }
 .ts-modern__views, .ts-modern__modes { display: flex; gap: 4px; margin: 4px 0; }
+.ts-modern__header .ts-modern__views { flex: 1; min-width: 0; }
+.ts-modern__views button { min-width: 0; overflow-wrap: anywhere; }
 .ts-modern__views button, .ts-modern__modes button, .ts-modern__pages button, .ts-modern-index button, .ts-modern__outside button { min-height: 44px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 3px; background: transparent; flex: 1; }
 .ts-modern [aria-pressed="true"], .ts-modern-index button:hover { border-color: var(--accent-1); background: color-mix(in srgb, var(--accent-1) 10%, transparent); }
 .ts-modern button:focus-visible, .ts-modern-index button:focus-visible, .ts-modern-inspector button:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
@@ -18,7 +20,11 @@
 .ts-modern__point.is-highlighted .ts-modern__dot { fill: var(--accent-1); opacity: 1; stroke: var(--paper); stroke-width: 1.4; }
 .ts-modern__hit { fill: transparent; cursor: pointer; }
 .ts-modern__leader { fill: none; stroke: var(--accent-1); stroke-width: 1; pointer-events: none; }
-.ts-modern__label { fill: var(--ink); stroke: var(--paper); stroke-width: 3px; paint-order: stroke; font-size: 10px; font-weight: 600; cursor: pointer; }
+.ts-modern__callout { pointer-events: none; fill: var(--ink); font-weight: 600; }
+.ts-modern__badge { fill: var(--paper); stroke: var(--accent-1); stroke-width: 1; }
+.ts-modern__labels { list-style: none; padding: 0; margin: 4px 0; }
+.ts-modern-label { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px; padding: 5px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: start; font-size: max(12px, .75rem) !important; overflow-wrap: anywhere; }
+.ts-modern-label > span:first-child { flex: none; min-width: 22px; text-align: center; border: 1px solid var(--accent-1); }
 .ts-modern__counts, .ts-modern__precision, .ts-modern__note { margin: 6px 0; color: var(--ink-muted); font-size: .7rem; }
 .ts-modern__list { margin-top: 8px; border-top: 1px solid var(--line); }
 .ts-modern__list summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }

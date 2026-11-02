@@ -36,7 +36,7 @@ const typeKeys = (mode: 'time' | 'space' | 'both' | 'lesson'): UiKey[] =>
 const plates = topics.map((topic, i) => {
   const d = topic.data;
   const meta = illustrationMeta(d.illustration);
-  const stats = topicStats(d.engine, rawTopicData(topic.id), counts.get(topic.id) ?? 0)
+  const stats = topicStats(d.engine, rawTopicData(topic.id), counts.get(topic.id) ?? 0, d.temporalMode)
     .map((s) => t(locale, (s.n === 1 ? `${s.key}.one` : s.key) as UiKey, { n: s.n }))
     .join(' · ');
   return {
