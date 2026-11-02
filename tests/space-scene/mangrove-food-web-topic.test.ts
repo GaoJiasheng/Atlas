@@ -91,7 +91,16 @@ describe('mangrove-food-web: sourced finite table', () => {
     for (const id of ['fiddler-crabs', 'tree-crabs']) {
       const extras = by(id).extra!;
       expect(extras.slice(0, 8).every((p) => p.kind === 'sweep')).toBe(true);
-      expect(extras.filter((p) => p.kind === 'extrude')).toHaveLength(2);
+      // Smooth lofted pincers replace the old faceted plates. Each claw has
+      // two tapered tips and a broad palm, after its separate cheliped arm.
+      for (const index of [9, 13]) {
+        const claw = extras[index]!;
+        expect(claw.kind).toBe('sweep');
+        if (claw.kind === 'sweep') {
+          expect(claw.path).toHaveLength(9);
+          expect(claw.radial).toBeGreaterThanOrEqual(16);
+        }
+      }
     }
     expect(by('giant-mudskipper').extra!.filter((p) => p.color === 'eye')).toHaveLength(2);
     const legs = by('heron').extra!.filter((p) => p.kind === 'sweep' && p.path.some((point) => p.at[1] + point[1] < .01) && p.path.some((point) => p.at[1] + point[1] > .2));

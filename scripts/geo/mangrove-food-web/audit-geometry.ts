@@ -2,7 +2,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { PerspectiveCamera, Vector3 } from 'three';
-import { partsFileBase } from '../../../src/engines/space-scene/schema';
+import { MAX_EXTRA_PRIMITIVES, partsFileBase } from '../../../src/engines/space-scene/schema';
 import { partBounds, partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { buildParts } from './build-parts';
@@ -34,12 +34,12 @@ for(const preset of [...data.presets!,{id:'gill-view',camera:{position:[1.9,.9,2
   }
  }
 }
-const rows=[];let totalTriangles=0,totalCalls=0;
+const rows=[];let totalTriangles=0,totalCalls=0,totalPieces=0,totalLines=0;
 for(const p of data.parts) {
- const b=partBounds(p)!;let triangles=0,piecesCount=0;
- for(const piece of partPieces(p)) {const g=piece.geometry; triangles+=(g.index?.count ?? g.getAttribute('position').count)/3*(piece.matrices?.length??1);piecesCount++;g.dispose();}
- totalTriangles+=triangles;totalCalls+=partMaterialSlots(p).length;
- rows.push({id:p.id,context:!!p.context,extras:p.extra?.length??0,slots:partMaterialSlots(p).length,pieces:piecesCount,triangles,bounds:b});
+ const b=partBounds(p)!;let triangles=0,piecesCount=0,lineSegments=0,instanceCopies=0;
+ for(const piece of partPieces(p)) {const g=piece.geometry; const count=(g.index?.count ?? g.getAttribute('position').count)*(piece.matrices?.length??1);if(piece.lines)lineSegments+=count/2;else triangles+=count/3;instanceCopies+=piece.matrices?.length??0;piecesCount++;g.dispose();}
+ totalTriangles+=triangles;totalCalls+=partMaterialSlots(p).length;totalPieces+=piecesCount;totalLines+=lineSegments;
+ rows.push({id:p.id,context:!!p.context,extras:p.extra?.length??0,slots:partMaterialSlots(p).length,pieces:piecesCount,instanceCopies,lineSegments,triangles,bounds:b});
 }
 const overlaps=[];
 for(const [i,a] of data.parts.entries()) for(const b of data.parts.slice(i+1)) {
@@ -54,8 +54,8 @@ for(const [i,a] of data.parts.entries()) for(const b of data.parts.slice(i+1)) {
  const extent=[0,1,2].map(k=>Math.min(aa.max[k]!,bb.max[k]!)-Math.max(aa.min[k]!,bb.min[k]!));
  if(extent.every(x=>x>0)) explodedOverlaps.push({a:a.id,b:b.id,extent:extent.map(x=>+x.toFixed(5))});
 }
-const output={method:'CPU primitive geometry, conservative boxes and numerical camera projection. No browser, screenshots, GPU calls, shadows or occlusion validation.',referenceReadOnly:[{url:'https://commons.wikimedia.org/wiki/File:Ring-legged_Fiddler_Crab_(Uca_annulipes)_(15748699382).jpg',author:'Bernard Dupont',licence:'CC BY-SA 2.0',use:'Read-only verification of anatomical facts. No traced shape, texture, image or mesh is incorporated.'}],selectable:rows.filter(r=>!r.context).length,context:rows.filter(r=>r.context).length,baseMaterialSlotCalls:totalCalls,geometryTriangles:totalTriangles,parts:rows,projections,conservativeOverlaps:overlaps,explodedConservativeOverlaps:explodedOverlaps,anatomy:{crabs:{walkingLegsPerSpecimen:8,chelipedArms:2,pincers:2,eyeStalks:2,eyes:2,extras:16},mudskipper:{eyes:2,pectoralFins:2,tailFins:1,dorsalFins:1},heron:{legs:2,neck:1,bill:1}},checks:{finiteBounds:rows.every(r=>[...r.bounds.min,...r.bounds.max].every(Number.isFinite)),extraCap:rows.every(r=>r.extras<=16),allRelevantAnchorsInFrustum:projections.every(p=>p.inside)}};
+const output={method:'CPU primitive geometry, conservative boxes and numerical camera projection. No browser, screenshots, GPU calls, shadows or occlusion validation.',referenceReadOnly:[{url:'https://commons.wikimedia.org/wiki/File:Ring-legged_Fiddler_Crab_(Uca_annulipes)_(15748699382).jpg',author:'Bernard Dupont',licence:'CC BY-SA 2.0',use:'Read-only verification of anatomical facts. No traced shape, texture, image or mesh is incorporated.'}],selectable:rows.filter(r=>!r.context).length,context:rows.filter(r=>r.context).length,baseMaterialSlotCalls:totalCalls,geometryTriangles:totalTriangles,geometryPieceCalls:totalPieces,lineSegments:totalLines,parts:rows,projections,conservativeOverlaps:overlaps,explodedConservativeOverlaps:explodedOverlaps,anatomy:{crabs:{walkingLegsPerSpecimen:8,chelipedArms:2,pincers:2,eyeStalks:2,eyes:2,extras:16},mudskipper:{eyes:2,pectoralFins:2,tailFins:1,dorsalFins:2},heron:{legs:2,toesPerFoot:4,forwardToesPerFoot:3,halluxPerFoot:1,neck:1,bill:1},trees:{leavesPerTree:336,apiPneumatophores:72,bakauPrimaryArches:12,bakauRootForks:6}},checks:{finiteBounds:rows.every(r=>[...r.bounds.min,...r.bounds.max].every(Number.isFinite)),extraCap:rows.every(r=>r.extras<=MAX_EXTRA_PRIMITIVES),triangleBudget:totalTriangles<=350_000,geometryCallBudget:totalPieces<100,allRelevantAnchorsInFrustum:projections.every(p=>p.inside)}};
 const out=join(import.meta.dirname,'../../../src/content/topics/mangrove-food-web/authoring/geometry-audit.json');
 mkdirSync(join(out,'..'),{recursive:true});
 writeFileSync(out,JSON.stringify(output,null,2)+'\n');
-console.log(JSON.stringify({selectable:output.selectable,context:output.context,baseCalls:totalCalls,triangles:totalTriangles,projections:projections.length,offscreen:projections.filter(p=>!p.inside),conservativeOverlaps:overlaps.length,explodedConservativeOverlaps:explodedOverlaps.length,checks:output.checks},null,2));
+console.log(JSON.stringify({selectable:output.selectable,context:output.context,baseCalls:totalCalls,geometryPieceCalls:totalPieces,lineSegments:totalLines,triangles:totalTriangles,projections:projections.length,offscreen:projections.filter(p=>!p.inside),conservativeOverlaps:overlaps.length,explodedConservativeOverlaps:explodedOverlaps.length,checks:output.checks},null,2));

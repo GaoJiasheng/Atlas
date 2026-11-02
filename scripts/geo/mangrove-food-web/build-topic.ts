@@ -13,10 +13,10 @@ const target = resolve(dir, '../../../src/content/topics/mangrove-food-web/data'
 const graph: Graph = JSON.parse(readFileSync(resolve(target, '../authoring/food-web.json'), 'utf8'));
 const text = (en: string, zh: string): Text => ({ en, zh });
 const states = {
-  unchanged: text('Same shown foods', '图内食物未减少'),
-  'fewer-foods': text('Fewer shown foods', '图内食物减少'),
-  'no-shown-food': text('No food path shown', '图内未留食物路径'),
-  removed: text('Removed from this web', '已从这个网移走'),
+  unchanged: text("Same foods in the diagram", '图内食物未减少'),
+  'fewer-foods': text("Fewer foods in the diagram", '图内食物减少'),
+  'no-shown-food': text('No food path shown', "图内无食物路径"),
+  removed: text("Removed from the web", "已从食物网移走"),
 };
 const removals = ['none', ...graph.nodes.map((n) => n.id)];
 const consumers = graph.nodes.filter((n) => n.role === 'consumer');
@@ -35,15 +35,15 @@ function scenario(remove: string) {
 const number = (id: string, label: Text, decimals = 0) => ({ id, kind: 'number', label, decimals, tag: 'sim' });
 const state = (id: string, label: Text) => ({ id, kind: 'state', label, states });
 const outputs = [
-  number('present-count', text('Present nodes', '未移走节点')),
-  number('supported-count', text('Nodes with food paths', '有食物路径节点')),
-  number('active-links', text('Active links', '有效连线')),
+  number('present-count', text("Nodes remaining", "剩余节点")),
+  number('supported-count', text("Nodes reached from producers", "生产者可到达的节点")),
+  number('active-links', text("Food link remaining", "剩余取食连线")),
   ...graph.nodes.map((n) => state(`status-${n.id}`, n.label)),
-  ...graph.edges.map((e) => number(`active-${e.id}`, text('Active feeding link', '有效取食连线'))),
-  number('foods', text('Shown food types', '图内食物种类')),
-  state('food-status', text('Food pathway status', '食物路径状态')),
-  number('water-rise', text('Diagram water displacement', '示意水面位移'), 2),
-  number('crab-rise', text('Diagram crab displacement', '示意蟹位移'), 2),
+  ...graph.edges.map((e) => number(`active-${e.id}`, text("Food link remaining", "剩余取食连线"))),
+  number('foods', text("Foods in the diagram", '图内食物种类')),
+  state('food-status', text("Food paths", "食物路径")),
+  number('water-rise', text("Water rise in the model", "模型中水面升高量"), 2),
+  number('crab-rise', text("Crab rise in the model", "模型中蟹升高量"), 2),
   number('show-fiddlers', text('Fiddlers visible', '招潮蟹可见')),
 ];
 const webRows = removals.map((remove) => {
@@ -99,7 +99,7 @@ const sim = {
     inspect: 'inspect',
     nodes: graph.nodes.map(({ id, label, role, parts, d, sources }) => ({ id, label, role, parts, d, sources, output: `status-${id}` })),
     edges: graph.edges.map(({ id, from, to, evidence, sources, note }) => ({ id, from, to, evidence, sources, note, output: `active-${id}` })),
-    note: text('Selected possible feeding links. Missing pathways do not predict extinction.', '这里只选入一些可能的取食关系。路径中断不等于预测灭绝。'),
+    note: text("Arrows show possible food paths. A missing path here does not mean an animal will die.", "箭头表示可能的食物路径。图中路径中断，不表示动物一定会死亡。"),
   },
 };
 writeFileSync(resolve(target, 'parts.json'), JSON.stringify({ ...file, flows, sim }, null, 2) + '\n');
