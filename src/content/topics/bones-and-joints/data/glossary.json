@@ -7,8 +7,8 @@
         "zh": "骨骼"
       },
       "definition": {
-        "en": "The connected framework formed by the bones of the body.",
-        "zh": "由身体各骨组成的相连框架。"
+        "en": "The connected frame made by all the bones in the body.",
+        "zh": "身体各处的骨连成的支架。"
       },
       "see": [
         "joint"
@@ -21,8 +21,8 @@
         "zh": "关节"
       },
       "definition": {
-        "en": "A connection where bones meet; joints allow different amounts of movement, including very little.",
-        "zh": "骨相接的地方；不同关节的活动程度不同，有的几乎不动。"
+        "en": "A place where bones meet. Some joints move freely, while others hardly move.",
+        "zh": "骨与骨相接的地方。有的关节活动灵活，有的几乎不动。"
       },
       "see": [
         "cartilage",
@@ -36,8 +36,8 @@
         "zh": "软骨"
       },
       "definition": {
-        "en": "A resilient connective tissue; articular cartilage covers facing bone surfaces in a synovial joint.",
-        "zh": "一种有弹性的结缔组织；关节软骨覆盖滑膜关节相对的骨面。"
+        "en": "Tough, springy connective tissue. Connective tissues support or link body parts. In a synovial joint, cartilage covers the facing bone surfaces.",
+        "zh": "坚韧而有弹性的结缔组织。结缔组织能支持或连接身体各部位。在滑膜关节中，软骨覆盖相对的骨面。"
       },
       "see": [
         "synovial-fluid"
@@ -50,8 +50,8 @@
         "zh": "骨密质"
       },
       "definition": {
-        "en": "Dense bone tissue, including the hard wall of a long-bone shaft.",
-        "zh": "密实的骨组织，包括长骨骨干的坚硬外壁。"
+        "en": "Dense, hard bone tissue. It forms the wall around the shaft, or middle part, of a long bone.",
+        "zh": "密实、坚硬的骨组织。它构成长骨中段，也就是骨干的外壁。"
       },
       "see": [
         "spongy-bone"
@@ -64,8 +64,8 @@
         "zh": "骨松质"
       },
       "definition": {
-        "en": "Hard bone tissue arranged as a lattice with spaces between the struts.",
-        "zh": "形成网架的坚硬骨组织，骨小梁之间有空隙。"
+        "en": "Hard bone tissue that forms a network of thin struts. There are spaces between the struts.",
+        "zh": "由坚硬的骨小梁连成的网架，小梁之间有空隙。"
       },
       "see": [
         "marrow",
@@ -79,8 +79,8 @@
         "zh": "骨髓"
       },
       "definition": {
-        "en": "Soft tissue inside bones; red marrow produces blood cells, while yellow marrow contains much fat.",
-        "zh": "骨内的软组织；红骨髓制造血细胞，黄骨髓含较多脂肪。"
+        "en": "Soft tissue inside bones. Red marrow makes blood cells. Yellow marrow contains much fat.",
+        "zh": "骨内的软组织。红骨髓制造血细胞，黄骨髓含有较多脂肪。"
       },
       "see": [
         "spongy-bone"
@@ -93,8 +93,8 @@
         "zh": "骨膜"
       },
       "definition": {
-        "en": "The tissue covering most of a bone’s outside, carrying vessels and nerves.",
-        "zh": "覆盖多数骨外表面的组织膜，内有血管与神经。"
+        "en": "A layer of tissue covering most of a bone’s outer surface. It contains blood vessels and nerves.",
+        "zh": "覆盖骨大部分外表面的一层组织，内有血管和神经。"
       },
       "see": [
         "compact-bone"
@@ -107,8 +107,8 @@
         "zh": "韧带"
       },
       "definition": {
-        "en": "Strong tissue that supports a connection between bones and helps limit excess movement.",
-        "zh": "支持骨之间连接的坚韧组织，有助限制过度活动。"
+        "en": "Strong tissue that supports the connection between bones and helps stop a joint moving too far.",
+        "zh": "支持骨与骨之间连接的坚韧组织，帮助限制关节的过度活动。"
       },
       "see": [
         "tendon",
@@ -122,8 +122,8 @@
         "zh": "肌腱"
       },
       "definition": {
-        "en": "Strong tissue that transmits a muscle’s pull to bone.",
-        "zh": "把肌肉拉力传到骨的坚韧组织。"
+        "en": "Strong tissue that carries a muscle’s pull to a bone.",
+        "zh": "把肌肉的拉力传到骨的坚韧组织。"
       },
       "see": [
         "ligament",
@@ -137,8 +137,8 @@
         "zh": "滑液"
       },
       "definition": {
-        "en": "Fluid in a synovial-joint cavity that helps lubricate the facing surfaces.",
-        "zh": "滑膜关节腔里的液体，有助润滑相对表面。"
+        "en": "Fluid in the space inside a synovial joint. It lubricates the facing surfaces so they move smoothly.",
+        "zh": "滑膜关节腔内的液体。它润滑相对的表面，让关节活动顺畅。"
       },
       "see": [
         "cartilage",
@@ -152,8 +152,8 @@
         "zh": "铰链关节"
       },
       "definition": {
-        "en": "A synovial type allowing mainly bending and straightening around one main axis.",
-        "zh": "主要绕一条轴屈伸的滑膜关节类型。"
+        "en": "A type of synovial joint that mainly bends and straightens around one axis, or line of rotation.",
+        "zh": "主要能弯曲和伸直的一类滑膜关节，活动绕着一条转轴进行。"
       },
       "see": [
         "pivot"
@@ -166,8 +166,8 @@
         "zh": "车轴关节"
       },
       "definition": {
-        "en": "A synovial type allowing rotation around a main axis.",
-        "zh": "主要绕一条轴旋转的滑膜关节类型。"
+        "en": "A type of synovial joint that turns around one main axis, or line of rotation.",
+        "zh": "主要绕一条转轴旋转的一类滑膜关节。"
       },
       "see": [
         "hinge"
@@ -180,8 +180,8 @@
         "zh": "球窝关节"
       },
       "definition": {
-        "en": "A rounded head meets a socket and allows movement around several axes.",
-        "zh": "圆头与窝相接，可绕多个轴活动。"
+        "en": "A joint where a rounded bone head fits into a socket. It can move around several axes, or lines of rotation.",
+        "zh": "圆形骨头嵌在关节窝内的关节，可绕多条转轴活动。"
       },
       "see": [
         "condyloid",
@@ -195,8 +195,8 @@
         "zh": "椭圆关节"
       },
       "definition": {
-        "en": "A synovial type with movement around two main axes, as at a finger knuckle.",
-        "zh": "可沿两个主要轴活动的滑膜关节类型，指根关节是例子。"
+        "en": "A type of synovial joint that moves around two main axes, or lines of rotation. A finger knuckle is an example.",
+        "zh": "可绕两条主要转轴活动的一类滑膜关节，指根关节就是例子。"
       },
       "see": [
         "saddle"
@@ -209,8 +209,8 @@
         "zh": "鞍状关节"
       },
       "definition": {
-        "en": "The facing surfaces are each curved inward in one direction and outward in the other; the thumb base is an example.",
-        "zh": "每个相对表面沿一个方向凹、另一方向凸，拇指根部是例子。"
+        "en": "A joint with two matching, saddle-shaped surfaces. Each surface curves inwards in one direction and outwards in the other. The thumb base is an example.",
+        "zh": "相对的两个关节面像相配的马鞍。每个面沿一个方向凹、另一个方向凸。拇指根部的关节就是例子。"
       },
       "see": [
         "condyloid"
@@ -223,8 +223,8 @@
         "zh": "平面关节"
       },
       "definition": {
-        "en": "A synovial type with relatively flat surfaces and usually small constrained glides.",
-        "zh": "表面较平，通常只有受限制的小幅滑动。"
+        "en": "A type of synovial joint with fairly flat surfaces. These usually allow only small gliding movements.",
+        "zh": "关节面较平的一类滑膜关节，通常只能作小幅滑动。"
       },
       "see": [
         "joint"
@@ -237,8 +237,8 @@
         "zh": "杠杆"
       },
       "definition": {
-        "en": "A rigid structure that can turn about a pivot under applied forces.",
-        "zh": "可受力绕支点转动的刚性构件。"
+        "en": "A stiff structure that turns around a fixed point, called a pivot, when forces act on it.",
+        "zh": "受力时能绕支点转动的硬杆或其他坚硬结构。"
       },
       "see": [
         "moment-arm"
@@ -251,8 +251,8 @@
         "zh": "力臂"
       },
       "definition": {
-        "en": "The perpendicular distance from the pivot to the line along which a force acts.",
-        "zh": "支点至力作用线的垂直距离。"
+        "en": "The shortest distance from a pivot to a force’s line of action. Measure it at right angles to that line.",
+        "zh": "支点到力的作用线的最短距离，测量方向与作用线垂直。"
       },
       "see": [
         "lever"
@@ -265,8 +265,8 @@
         "zh": "生长板"
       },
       "definition": {
-        "en": "A region of cartilage near a young long bone’s end where length growth occurs.",
-        "zh": "幼年长骨靠近端部、参与纵向增长的软骨区域。"
+        "en": "A region of cartilage near the end of a young long bone. The bone grows longer here.",
+        "zh": "幼年长骨靠近骨端的一片软骨区域，骨在这里增长。"
       },
       "see": [
         "remodelling",
@@ -280,8 +280,8 @@
         "zh": "重塑"
       },
       "definition": {
-        "en": "Removal of old bone tissue and formation of new bone tissue, continuing beyond height growth.",
-        "zh": "去除旧骨组织并形成新骨组织；身高停止增长后仍会继续。"
+        "en": "The removal of old bone tissue and growth of new bone tissue. This continues after a person stops growing taller.",
+        "zh": "去除旧骨组织、形成新骨组织的过程。身高停止增长后，骨的重塑仍会继续。"
       },
       "see": [
         "growth-plate"
