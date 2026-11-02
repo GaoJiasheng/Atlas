@@ -174,6 +174,9 @@ test.describe('steam-engine shared rigid frame', () => {
     const sample = await page.evaluate(async () => {
       const e = window.__atlas!.engine as unknown as Engine;
       const raf = () => new Promise<void>(r => requestAnimationFrame(() => r()));
+      // Two frames are the measure below: first let the slow frames after loading (lazily mounted stage content can
+      // take most of a second under software WebGL) pass, so they are ordinary frames.
+      for (let i = 0; i < 20; i++) { const t = performance.now(); await raf(); if (performance.now() - t < 250) break; }
       const before = e.mechanism('main-engine')!.thetaRad;
       e.setSim({ 'cycle-rate': 12, 'cold-pressure': 50, 'work-share': 30, 'governor-rpm': 120 });
       const immediate = e.mechanism('main-engine')!.thetaRad;

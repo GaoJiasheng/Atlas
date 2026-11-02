@@ -24,7 +24,15 @@ async function open(page: Page, theme: 'paper' | 'cinema') {
   await expect.poll(async () => (await state(page)).preset).toBe('hero');
   const label = page.locator('.space-co[data-id="thorax"] .space-co__hit');
   await expect.poll(() => label.evaluate((el) => getComputedStyle(el).pointerEvents)).toBe('all');
-  // Allow the label's layout glide and its opacity to finish before taking coordinates.
+  // Software WebGL: the first frames after `ready` (lazily mounted stage content) can take most of a second;
+  // wait until frames come at a normal pace, then allow the label's layout glide and its opacity to finish.
+  await page.evaluate(async () => {
+    for (let i = 0; i < 20; i++) {
+      const t = performance.now();
+      await new Promise((r) => requestAnimationFrame(r));
+      if (performance.now() - t < 250) break;
+    }
+  });
   await page.waitForTimeout(500);
   return label;
 }
@@ -72,7 +80,8 @@ for (const theme of ['paper', 'cinema'] as const) {
     // placard, following its glide rather than using a stale screen position.
     let overLabel = false;
     let pointer = to;
-    for (let attempt = 0; attempt < 12 && !overLabel; attempt++) {
+    // The damped orbit keeps the placards gliding for a while (the framed hero view sits them near the HUD): chase longer.
+    for (let attempt = 0; attempt < 30 && !overLabel; attempt++) {
       const end = await page.evaluate((near) => {
         return [...document.querySelectorAll<SVGRectElement>('.space-co:not([data-group]) .space-co__hit')]
           .filter((el) => getComputedStyle(el).pointerEvents === 'all')
@@ -80,13 +89,16 @@ for (const theme of ['paper', 'cinema'] as const) {
             const b = el.getBoundingClientRect();
             return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
           })
+          // Only placards the pointer can reach there (one gliding under a HUD column is not interactive at that point).
+          .filter((p) => document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])'))
           .sort((a, b) => Math.hypot(a.x - near.x, a.y - near.y) - Math.hypot(b.x - near.x, b.y - near.y))[0] ?? null;
       }, pointer);
       if (end) {
         pointer = end;
         await page.mouse.move(end.x, end.y);
-        await page.waitForTimeout(100);
+        // Checked at once and released at once below: a placard still gliding after the drag would leave a waiting pointer behind.
         overLabel = await page.evaluate((p) => Boolean(document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])')), end);
+        if (!overLabel) await page.waitForTimeout(100);
       } else await page.waitForTimeout(100);
     }
     expect(overLabel).toBe(true);
