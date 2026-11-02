@@ -17,6 +17,7 @@ import { useStore } from 'zustand';
 import { createRoot, events as createPointerEvents, type ReconcilerRoot, type RootState } from '@react-three/fiber';
 import type { StoreApi, UseBoundStore } from 'zustand';
 import type { SceneStore } from '../../../core/store';
+import { useSceneContext } from '../../../core/context';
 import type { Chapter } from '../../../core/types';
 import type { SpaceSceneExt } from '../../index';
 import type { PartsFile } from '../../schema';
@@ -24,7 +25,7 @@ import type { FitnessBundle } from '../../../../content/schema/fitness';
 import { t, type Locale } from '../../../../i18n';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
-import { freeStageRect } from '../../lib/hud-framing';
+import { freeStageRect, type FrameRect } from '../../lib/hud-framing';
 import { DEFAULT_CAMERA } from '../../lib/camera';
 import { extendThree } from './extend';
 import { useStageLook } from './look';
@@ -48,9 +49,13 @@ export interface Model3DStageProps {
 
 type RootStore = UseBoundStore<StoreApi<RootState>>;
 
+/** How long after a HUD change its blocks are measured (ms): after the browser has laid the change out and painted it. */
+const MEASURE_DELAY_MS = 120;
+
 const NO_TRAINING: readonly string[] = [];
 
 export default function Model3DStage({ store, data, ui, bridge, chapters, label, fitness, training = NO_TRAINING, locale }: Model3DStageProps) {
+  const { hud } = useSceneContext();
   const playable = useMemo(() => new Set(training), [training]);
   const model = useStore(ui, (u) => u.model);
   const mechanismError = useStore(ui, (u) => u.mechanismError);
@@ -114,46 +119,76 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
     };
   }, [store, bridge]);
 
-  // The DOM HUD lives outside R3F. Measure only on layout changes, not per rendered frame.
+  // The DOM HUD lives outside R3F: measure its visible blocks on layout changes (not per rendered frame, and a
+  // beat after the change rather than in the next animation frame: reading boxes while the DOM is still dirty
+  // forces a layout inside the frame that answers an interaction, which slows exactly that frame);
+  // CameraRig frames the view in the area they leave free and re-fits when they move (docs/67 §9).
   useEffect(() => {
     const stage = wrapRef.current, scene = stage?.closest('.atlas-scene');
-    if (!data.views.hudFrame || !stage || !scene) return;
-    let frame = 0, alive = true;
+    if (!stage || !scene) return;
+    let timer = 0, alive = true;
     const resize = new ResizeObserver(() => schedule());
     const measure = () => {
-      frame = 0;
-      const box = stage.getBoundingClientRect();
-      const presenting = ui.getState().presenting;
-      const panels = [...scene.querySelectorAll('[data-hud-panel]')]
-        .filter(el => el.getAttribute('data-hud-panel') !== 'perf' && (!presenting || el.getAttribute('data-hud-panel')!.startsWith('present')))
-        .flatMap(el => el.getAttribute('data-hud-panel') === 'overlay' ? [...el.children] : [el]);
+      timer = 0;
+      // Until the host has measured the HUD once, the view is not placed (ready waits); its first measurement schedules this again.
+      bridge.hudPending = hud.getState().room === null;
+      if (bridge.hudPending) return;
+      // One measurement of the HUD for every engine: the host's (core/useHudRoom), moved from `.atlas-stage` into this stage.
+      const box = stage.getBoundingClientRect(), view = scene.getBoundingClientRect();
+      const host = stage.closest('.atlas-stage')?.getBoundingClientRect() ?? box;
+      const dx = host.left - box.left, dy = host.top - box.top;
+      const rects = hud.getState().hudObstacles.map((r) => ({ x0: r.x0 + dx, y0: r.y0 + dy, x1: r.x1 + dx, y1: r.y1 + dy }));
       resize.observe(stage);
-      const rects = panels.flatMap(el => {
-        resize.observe(el);
-        const r = el.getBoundingClientRect();
-        if (r.width < 1 || r.height < 1 || getComputedStyle(el).visibility === 'hidden') return [];
-        return [{ x0: r.left-box.left, y0: r.top-box.top, x1: r.right-box.left, y1: r.bottom-box.top }];
-      });
-      bridge.freeStage = freeStageRect(box.width, box.height, rects);
+      // The phone / portrait layouts stack the HUD over the stage (no side columns to frame between).
+      const stacked = view.width < 1024 || view.height > view.width;
+      const same = (a: readonly FrameRect[] | undefined) => a?.length === rects.length &&
+        a.every((r, i) => Math.abs(r.x0 - rects[i]!.x0) + Math.abs(r.y0 - rects[i]!.y0) + Math.abs(r.x1 - rects[i]!.x1) + Math.abs(r.y1 - rects[i]!.y1) < 1);
+      if (same(bridge.hudPanels) && stacked === bridge.hudStacked && box.width === bridge.hudStage?.[0] && box.height === bridge.hudStage?.[1]) {
+        // Nothing moved; a frame still lets CameraRig mark the first layout settled.
+        if (!bridge.hudSettled) rootStore.current?.getState().invalidate();
+        return;
+      }
+      // Side by side: the host's largest free rectangle (12 px gutter); stacked, the documented full-width band.
+      const free = hud.getState().freeStage;
+      bridge.freeStage = stacked || !free
+        ? freeStageRect(box.width, box.height, rects, 12, stacked)
+        : { x0: Math.max(0, free.x0 + dx) + 12, y0: Math.max(0, free.y0 + dy) + 12, x1: Math.min(box.width, free.x1 + dx) - 12, y1: Math.min(box.height, free.y1 + dy) - 12 };
+      bridge.hudPanels = rects;
+      bridge.hudStacked = stacked;
+      bridge.hudStage = [box.width, box.height];
+      bridge.hudLayout += 1;
+      // A frame for CameraRig to re-fit in (the bridge's invalidate is wired once the R3F tree has mounted).
       bridge.invalidate();
+      rootStore.current?.getState().invalidate();
     };
-    const schedule = () => { if (alive && !frame) frame = requestAnimationFrame(measure); };
+    const schedule = () => {
+      if (!alive || timer) return;
+      // A HUD change waits to be measured (throttled, not debounced: a stream of readout updates still gets measured);
+      // not ready until then (a busy first load can hold it for seconds).
+      bridge.hudPending = true;
+      timer = window.setTimeout(measure, MEASURE_DELAY_MS);
+    };
     const mutations = new MutationObserver(schedule);
     mutations.observe(scene, { childList: true, subtree: true });
     const attributes = new MutationObserver(schedule);
     attributes.observe(scene, { attributes: true });
     const off = ui.subscribe((s, prev) => { if (s.presenting !== prev.presenting || s.cover !== prev.cover) schedule(); });
+    const offHud = hud.subscribe((s, prev) => { if (s.hudObstacles !== prev.hudObstacles || s.freeStage !== prev.freeStage || s.room !== prev.room) schedule(); });
     scene.addEventListener('transitionend', schedule);
     document.fonts?.ready.then(schedule);
     measure();
     return () => {
       alive = false;
-      resize.disconnect(); mutations.disconnect(); attributes.disconnect(); off();
+      resize.disconnect(); mutations.disconnect(); attributes.disconnect(); off(); offHud();
       scene.removeEventListener('transitionend', schedule);
-      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
       delete bridge.freeStage;
+      delete bridge.hudPanels;
+      delete bridge.hudStacked;
+      delete bridge.hudStage;
+      bridge.hudPending = false;
     };
-  }, [data.views.hudFrame, bridge, ui]);
+  }, [bridge, ui, hud]);
 
   // Re-render the R3F tree whenever the inputs change (data / theme).
   useLayoutEffect(() => {

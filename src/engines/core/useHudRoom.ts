@@ -173,6 +173,7 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       if (scene.dataset.drawer !== drawerValue) scene.dataset.drawer = drawerValue;
       const stage = box('.atlas-stage');
       let freeStage: FreeStage | null = null;
+      let hudObstacles: FreeStage[] = [];
       if (stage) {
         // H / presentation: the faded HUD stops counting at once, not when its fade ends.
         const hudOff = scene.dataset.hud === 'off';
@@ -196,13 +197,15 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
             .filter((b) => b.x1 > b.x0 && b.y1 > b.y0);
         });
         freeStage = measureFreeStage(stage.width, stage.height, rects);
+        hudObstacles = rects;
       }
       if (
         JSON.stringify(state.freeStage) !== JSON.stringify(freeStage) ||
+        JSON.stringify(state.hudObstacles) !== JSON.stringify(hudObstacles) ||
         JSON.stringify(state.room) !== JSON.stringify(room) ||
         Object.entries(patch).some(([k, v]) => state[k as keyof typeof state] !== v)
       )
-        hud.setState({ ...patch, room, freeStage });
+        hud.setState({ ...patch, room, freeStage, hudObstacles });
       const current = new Set<Element>([
         scene,
         ...scene.querySelectorAll('[data-hud-panel],.atlas-hud__left,.atlas-hud__right,.atlas-hud__dock,.atlas-stage,.atlas-stage__overlay > *'),

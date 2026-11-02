@@ -56,7 +56,7 @@ import { isOrbitCamera, normalizeCamera } from '../core/camera';
 import { usePresentation, type Beat, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../i18n';
 import { EXERCISE_BODIES, type ExerciseBody } from '../../lib/anatomy';
-import { DEFAULT_CAMERA, fitCameraToAspect, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
+import { DEFAULT_CAMERA, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
 import { modelBounds } from './lib/parts';
 import { POSE_DURATION } from './lib/pose';
 import { targetExplodeAmount } from './lib/explode';
@@ -194,7 +194,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       if (ui.getState().reference) return;
       const st = store.getState();
       const h = hud.getState();
-      const live = bridge.liveCamera();
+      // The camera as authored (this stage's aspect pull-back and HUD framing undone): exiting re-applies them.
+      const live = bridge.viewCamera();
       const stored = normalizeCamera(st.camera);
       ui.setState({
         orbit: false,
@@ -285,12 +286,11 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       const u = ui.getState();
       const h = hud.getState();
       const ref = u.reference;
-      const live = bridge.liveCamera();
-      const aspect = bridge.width > 0 && bridge.height > 0 ? bridge.width / bridge.height : 1.5;
+      const live = bridge.viewCamera();
       entered.current = {
         chapter: snap.chapter,
         layers: [...snap.layers],
-        camera: ref ? ref.camera : live ? { ...roundCamera(fitCameraToAspect(live, aspect, true)), fov: live.fov } : asOrbit(snap.camera),
+        camera: ref ? ref.camera : live ? { ...roundCamera(live), fov: live.fov } : asOrbit(snap.camera),
         view: ref ? ref.view : snap.view,
         part: snap.part,
         explode: ref ? ref.explode : snap.explode,
@@ -524,6 +524,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       ...(exploded && !inReference && file.flows.length > 0 ? [t('space.status.flowLocked').toLocaleUpperCase()] : []),
     ];
     return {
+      // Ready once the camera stands where the measured HUD puts it (docs/67 §9): a late HUD change on a busy first load would otherwise move it after.
+      ready: () => bridge.hudSettled === true,
       presets: {
         items: presets,
         set: (id, { instant }) => {
@@ -670,6 +672,8 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
         senses: () => bridge.senses,
         /** The measured free HUD band the hudFrame camera fits into (stage CSS px), or null. */
         freeStage: () => (bridge.freeStage ? { ...bridge.freeStage } : null),
+        /** The default HUD framing on show (docs/67 §9): the free rectangle used, image scale vs the design camera, view-offset shift; null when off. */
+        framing: () => (bridge.framing ? { rect: { ...bridge.framing.rect }, scale: bridge.framing.scale, shift: [...bridge.framing.shift] } : null),
         sensesSeek: (cycles: number) => bridge.sensesSeek(cycles),
         sensesEchoSeek: (u: number) => bridge.sensesEchoSeek(u),
         joint: (id: string) => { const j = bridge.joints.get(id); return j ? structuredClone(j) : null; },

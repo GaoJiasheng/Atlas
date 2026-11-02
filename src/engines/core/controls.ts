@@ -234,6 +234,8 @@ export interface HudState extends HudFolds {
   beforeStage: HudFolds | null;
   guide: boolean;
   freeStage: FreeStage | null;
+  /** The visible HUD blocks `freeStage` was measured between (`.atlas-stage`-local CSS px; the overlay slot as its cards). */
+  hudObstacles: readonly FreeStage[];
   room: HudRoom | null;
   controls: SceneControls;
   /** HUD visible (`H`). */
@@ -276,7 +278,7 @@ export type HudStore = StoreApi<HudState>;
 export function createHudStore(): HudStore {
   return createStore<HudState>()(() => ({
     ...OPEN_FOLDS,
-    manual: {}, stageOnly: false, beforeStage: null, guide: false, freeStage: null, room: null,
+    manual: {}, stageOnly: false, beforeStage: null, guide: false, freeStage: null, hudObstacles: [], room: null,
     controls: {},
     hud: true,
     labels: true,

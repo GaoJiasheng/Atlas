@@ -959,7 +959,11 @@ export const viewsSchema = z
      */
     cover: orbitCamera.optional(),
     /** Opt-in HUD-aware framing; only these subjects that intersect the authored view are fitted. */
-    hudFrame: z.object({ parts: z.array(kebabId).min(1).max(32) }).strict().optional(),
+    hudFrame: z.object({
+      parts: z.array(kebabId).min(1).max(32),
+      /** Explicit primary; the inscribed sphere stays at least this many CSS pixels in radius when feasible. */
+      primary: z.object({ part: kebabId, minRadiusPx: z.number().positive().max(256) }).strict().optional(),
+    }).strict().refine(h => !h.primary || h.parts.includes(h.primary.part), { message: 'primary must be a framing part' }).optional(),
     /**
      * Enlarged-window borders (docs/58 F4, `hud/InsetFrames.tsx`): a hairline frame drawn
      * around the on-screen boxes of these parts while any of them is on show, with its label

@@ -503,7 +503,8 @@
         "sun-body",
         "earth-body",
         "moon-body"
-      ]
+      ],
+      "primary": { "part": "earth-body", "minRadiusPx": 24 }
     }
   },
   "sim": {
