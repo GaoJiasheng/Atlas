@@ -456,3 +456,10 @@ Sentence ids identify the independent EN/ZH drafts. Evidence is the bundle for t
 2026-10-27：pnpm check退出0（789文件、0错误0警告、4提示），validate为60主题0错误0警告，完整单元168文件4,369项通过，production build为123页通过。静态EN/ZH首页各35已发布卡，本题运行数据1,112,854字节。新增引擎22项与内容21项包含真实原格网精度、13个成员日期检查、固定国形hash/一次source安装、成对高亮与上下文/URL清理；详见两个time-scene测试文件。浏览器shoot/e2e依brief禁令未运行，不能据此声称视觉/手机/离线浏览器门槛通过。给Gavin清单在REVIEW。
 
 事实限定不变：2025-10-26东帝汶正式加入S5；11成员截至2026-10-27；今界始终固定。图片级数是设计，四级不代表真实Ifugao田区测量；新图替代圆桌。最终图均在原体积预算内，alpha边缘和处理后目检通过。全部地图输入属于公有领域派生，未复制UNESCO/NHB/FAO的第三方图片或文字段落。
+
+
+## Readability pass 2026-10-29
+
+Rewrote all eight EN/ZH chapter bodies and shortened 33 beat captions, case/object cards, glossary definitions, figure captions/alt text and notes. Replaced audit-style instructions with concrete explanations of places, farming, work and cooperation. Kept the necessary map-scale limits, independent climate grids, schematic drawings, both terrace-age accounts and all ASEAN dates/counts. Facts, numbers, sources, source references, geometry and scene states are unchanged. Translation-verification and production notes remain audit/provenance matters; songket keeps its original name with a plain hand-weaving explanation. Maps still locate local cases at country scale; the plant, terrace and house drawings are teaching illustrations, not measured or identified sites. The songket heritage record is not a workforce census or a classification of all production as cottage industry; that evidence-scope note stays here.
+
+Validation: topic unit tests 34/34 passed (monsoon 13, Southeast Asia 21); full suite 219 files / 5,448 tests passed. `pnpm check` passed (0 errors, 0 warnings; 4 existing hints), `pnpm validate` passed (85 topics, 0 errors/warnings), and `pnpm build` passed (173 pages). Verified all sourced Num occurrences, term/link/figure targets, non-prose scene/data fields, source files and presets unchanged; all ZH beat-caption lines are at most 45 characters. `git diff --check` passed. Browser `shoot` and `e2e` skipped as required by BRIEF-READ; no browser or desktop opened.
