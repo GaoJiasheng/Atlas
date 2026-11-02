@@ -139,8 +139,8 @@ const DESIGN: RibDesign[] = [
   { reach: 308, bendDrop: 74, end: [212, 624] },
   { reach: 304, bendDrop: 76, end: [244, 662] },
   { reach: 294, bendDrop: 76, end: [270, 694] },
-  { reach: 0, bendDrop: 0, end: [208, 724] },
-  { reach: 0, bendDrop: 0, end: [146, 744] },
+  { reach: 280, bendDrop: 96, end: [270, 744] },
+  { reach: 244, bendDrop: 84, end: [232, 770] },
 ];
 /** Where a false rib's cartilage meets the cartilage above, as a fraction from that cartilage's junction. */
 const JOIN_AT = 0.42;
@@ -166,42 +166,35 @@ function ribsFor(side: Side, spine: Vertebra[]): Rib[] {
     const d = DESIGN[i]!;
     const v = spine[i]!;
     const head: Point = [v.halfWidth - 3, v.centre[1] - v.height * 0.12];
-    let bone: Point[];
-    let frontFrom: number;
+    // Every rib: a back half from its vertebra out to the lateral bend (behind the organs), then
+    // the part seen from the front. Floating ribs turn at the flank and stop in a free tip there.
+    const end = d.end;
+    const bend: Point = [d.reach, head[1] + d.bendDrop];
+    const back = cubic(head, [head[0] + (d.reach - head[0]) * 0.62, head[1] + d.bendDrop * 0.02], [d.reach, head[1] + d.bendDrop * 0.3], bend, 18);
+    const front = cubic(
+      bend,
+      [d.reach + 1, bend[1] + (end[1] - bend[1]) * 0.4],
+      [end[0] + (d.reach - end[0]) * 0.5, end[1] - (end[1] - bend[1]) * 0.22],
+      end,
+      n <= 10 ? 22 : 10,
+    );
+    const bone = [...back, ...front.slice(1)];
+    const frontFrom = back.length - 4;
     let cartilage: Point[] = [];
     let joins: Rib['joins'];
-    if (n <= 10) {
-      const bend: Point = [d.reach, head[1] + d.bendDrop];
-      const back = cubic(head, [head[0] + (d.reach - head[0]) * 0.62, head[1] + d.bendDrop * 0.02], [d.reach, head[1] + d.bendDrop * 0.3], bend, 18);
-      const end = d.end;
-      const front = cubic(
-        bend,
-        [d.reach + 1, bend[1] + (end[1] - bend[1]) * 0.4],
-        [end[0] + (d.reach - end[0]) * 0.5, end[1] - (end[1] - bend[1]) * 0.22],
-        end,
-        22,
-      );
-      bone = [...back, ...front.slice(1)];
-      frontFrom = back.length - 4;
-      if (n <= 7) {
-        const sy = d.sternalY!;
-        const sx = sternumHalfWidth(sy) - 8;
-        const dx = end[0] - sx;
-        cartilage = cubic(end, [end[0] - dx * 0.4, end[1] + d.sag!], [sx + dx * 0.3, sy + (end[1] - sy) * 0.35], [sx, sy], 16);
-        joins = { to: 'sternum' };
-      } else {
-        const above = cartilageOf[i - 1]!;
-        const meet = along(above, JOIN_AT + 0.08 * (n - 8));
-        const dx = end[0] - meet[0];
-        cartilage = cubic(end, [end[0] - dx * 0.45, end[1] + 6], [meet[0] + dx * 0.25, meet[1] + 10], meet, 14);
-        joins = { to: 'cartilage', rib: n - 1 };
-      }
+    if (n <= 7) {
+      const sy = d.sternalY!;
+      const sx = sternumHalfWidth(sy) - 8;
+      const dx = end[0] - sx;
+      cartilage = cubic(end, [end[0] - dx * 0.4, end[1] + d.sag!], [sx + dx * 0.3, sy + (end[1] - sy) * 0.35], [sx, sy], 16);
+      joins = { to: 'sternum' };
+    } else if (n <= 10) {
+      const above = cartilageOf[i - 1]!;
+      const meet = along(above, JOIN_AT + 0.08 * (n - 8));
+      const dx = end[0] - meet[0];
+      cartilage = cubic(end, [end[0] - dx * 0.45, end[1] + 6], [meet[0] + dx * 0.25, meet[1] + 10], meet, 14);
+      joins = { to: 'cartilage', rib: n - 1 };
     } else {
-      const tip = d.end;
-      const dx = tip[0] - head[0];
-      const dy = tip[1] - head[1];
-      bone = cubic(head, [head[0] + dx * 0.38, head[1] + dy * 0.16], [tip[0] - dx * 0.24, tip[1] - dy * 0.42], tip, 26);
-      frontFrom = bone.length - 1;
       joins = { to: 'free' };
     }
     cartilageOf.push(cartilage);
@@ -239,15 +232,17 @@ export function thorax(): Thorax {
   // Organs: the subject's right lung is on the viewer's left; the heart leans to the subject's left.
   const rightLung: Point[] = [
     [-70, 70], [-108, 96], [-160, 160], [-212, 240], [-246, 330], [-266, 420], [-276, 510], [-270, 580],
-    [-232, 566], [-176, 532], [-118, 512], [-60, 516], [-38, 470], [-34, 380], [-36, 280], [-40, 180], [-50, 110],
+    [-232, 566], [-176, 532], [-118, 512], [-70, 516], [-62, 470], [-60, 400], [-52, 330], [-44, 260], [-42, 180], [-50, 110],
   ];
+  // The left lung's medial border follows the heart (cardiac notch).
   const leftLung: Point[] = [
     [66, 72], [104, 98], [158, 162], [210, 242], [244, 332], [266, 424], [278, 516], [276, 598],
-    [240, 588], [190, 566], [142, 562], [150, 520], [128, 470], [86, 418], [52, 360], [40, 280], [40, 180], [48, 110],
+    [240, 588], [196, 572], [168, 570], [164, 522], [158, 474], [130, 414], [88, 364], [58, 300], [44, 180], [48, 110],
   ];
+  // Heart, anterior view: right atrium on the viewer's left, apex down towards the viewer's right.
   const heart: Point[] = [
-    [-30, 300], [-52, 340], [-62, 400], [-58, 460], [-36, 514], [10, 548], [80, 566], [150, 572], [166, 548],
-    [154, 494], [126, 430], [96, 382], [62, 330], [30, 300],
+    [-20, 334], [-38, 358], [-46, 398], [-42, 438], [-24, 474], [4, 502], [42, 524], [84, 542], [124, 554],
+    [140, 544], [146, 514], [140, 476], [124, 436], [102, 400], [78, 372], [54, 352], [22, 338],
   ];
   return {
     vertebrae: spine,
@@ -360,14 +355,11 @@ export function svg(t: Thorax = thorax(), size: Point = [1200, 900]): string {
 
   const parts: string[] = [];
   // Spine (behind everything except the posterior rib shafts that tuck under the bodies).
-  // Floating ribs lie behind the lung bases and the costal margin, so they are drawn here, in full ink.
+  // The back half of every rib, in a light contour: it runs behind the organs to its vertebra.
   const posterior = t.ribs.map((r) => {
     const w = ribWidth(r);
-    if (r.kind === 'floating') {
-      return `<g data-rib="${r.side}-${r.number}" data-kind="${r.kind}" data-vertebra="${r.vertebra}">${band(r.bone, w, BONE, INK, 2.6)}${cap(r.bone, w, 'end', INK, 2.6)}</g>`;
-    }
     const back = r.bone.slice(0, r.frontFrom + 1);
-    return `<g data-rib-back="${r.side}-${r.number}">${band(back, (u) => w((u * r.frontFrom) / (r.bone.length - 1)), 'none', INK_BACK, 1.6)}</g>`;
+    return `<g data-rib-back="${r.side}-${r.number}">${band(back, (u) => w((u * r.frontFrom) / (r.bone.length - 1)), 'none', INK_BACK, 1.7)}</g>`;
   });
   parts.push(`<g id="posterior-ribs">${posterior.join('')}</g>`);
 
@@ -391,40 +383,49 @@ export function svg(t: Thorax = thorax(), size: Point = [1200, 900]): string {
     `<path d="${closedSpline(t.lungs[side])}" fill="#bdbdbd" fill-opacity="0.32" stroke="${INK_SOFT}" stroke-width="2.4"/>` +
     `<path d="${closedSpline(t.lungs[side])}" fill="url(#hatch-lung)"/>`;
   const fissures =
-    `<path d="M-246,330 C-200,340 -120,350 -40,346" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>` +
+    `<path d="M-246,330 C-200,340 -120,350 -56,352" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>` +
     `<path d="M-212,240 C-200,320 -170,420 -118,512" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>` +
-    `<path d="M210,242 C206,330 188,440 170,564" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>`;
+    `<path d="M210,242 C208,330 200,440 190,570" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>`;
+  // Heart in a light tone like the lungs, but solid (it hides the back of the ribs), with a darker edge: superior vena cava,
+  // ascending aorta and arch, pulmonary trunk, and the groove between the ventricles.
+  const vessel = 'fill="#e4e4e4" stroke="#555555" stroke-width="2.2" stroke-linejoin="round"';
   const heart =
-    `<path d="M-30,300 C-36,250 -32,226 -24,190" fill="none" stroke="${INK_SOFT}" stroke-width="10" stroke-opacity="0.18"/>` +
-    `<path d="M-6,300 C-14,232 40,206 62,240 C72,256 66,276 58,296" fill="#a8a8a8" fill-opacity="0.32" stroke="${INK_SOFT}" stroke-width="2.2"/>` +
-    `<path d="M16,318 C22,286 52,270 78,284 L88,318" fill="#a8a8a8" fill-opacity="0.3" stroke="${INK_SOFT}" stroke-width="2"/>` +
-    `<path d="${closedSpline(t.heart)}" fill="#8c8c8c" fill-opacity="0.36" stroke="#4d4d4d" stroke-width="2.8"/>` +
-    `<path d="${closedSpline(t.heart)}" fill="url(#hatch-heart)"/>` +
-    `<path d="M62,330 C70,400 98,480 142,566" fill="none" stroke="${INK_BACK}" stroke-width="1.8"/>`;
+    `<path d="M-38,344 L-40,236 L-18,236 L-14,336 Z" ${vessel}/>` +
+    `<path d="M-8,338 C-14,286 -6,232 34,226 C66,222 82,246 80,276 L60,280 C60,262 50,252 36,254 C14,258 14,296 16,334 Z" ${vessel}/>` +
+    `<path d="M30,344 C32,316 44,296 62,290 L76,306 C62,314 56,332 56,352 Z" ${vessel}/>` +
+    `<path d="${closedSpline(t.heart)}" fill="#dedede" stroke="#4a4a4a" stroke-width="3"/>` +
+    `<path d="${closedSpline(t.heart)}" fill="url(#hatch-lung)"/>` +
+    `<path d="M58,354 C72,412 94,482 120,550" fill="none" stroke="${INK_SOFT}" stroke-width="1.8"/>` +
+    `<path d="M-22,468 C-2,432 8,394 2,354" fill="none" stroke="${INK_BACK}" stroke-width="1.5"/>`;
   parts.push(`<g id="organs">${lung('right')}${lung('left')}${fissures}${heart}</g>`);
 
   // Front of the cage: cartilages (lighter, dashed contour) under the anterior shafts, then the sternum.
-  // Lower ribs first, so each cartilage of the costal margin is overlapped by the one it joins.
   const front: string[] = [];
   for (const side of ['right', 'left'] as const) {
-    const attached = t.ribs.filter((r) => r.side === side && r.kind !== 'floating').sort((a, b) => b.number - a.number);
-    for (const r of attached) {
+    // Lowest first: floating ribs sit behind rib 10 at the flank, and each cartilage of the
+    // costal margin is overlapped by the one it joins.
+    const ribs = t.ribs.filter((r) => r.side === side).sort((a, b) => b.number - a.number);
+    for (const r of ribs) {
       const w = ribWidth(r);
-      const cartilage = band(r.cartilage, () => (r.number === 1 ? 15 : 12), CARTILAGE, INK_SOFT, 1.8, ' stroke-dasharray="7 5"');
       const fr = r.bone.slice(r.frontFrom);
       const off = r.frontFrom / (r.bone.length - 1);
       const fw = (u: number) => w(off + u * (1 - off));
       // Graphite shading: one fine line running inside one edge of the shaft.
       const [, shade] = edges(fr, (u) => fw(u) * 0.52);
-      // Costochondral junction: a solid line across the band where bone becomes cartilage.
-      const [a, b] = edges(fr, fw);
-      const pa = a[a.length - 1]!;
-      const pb = b[b.length - 1]!;
-      front.push(
-        `<g data-rib="${r.side}-${r.number}" data-kind="${r.kind}" data-vertebra="${r.vertebra}">${cartilage}${band(fr, fw, BONE, INK, 2.6)}` +
-          `<polyline points="${pts(shade.slice(2, -2))}" fill="none" stroke="${INK_BACK}" stroke-width="1.3" stroke-linecap="round"/>` +
-          `<line x1="${f(pa[0])}" y1="${f(pa[1])}" x2="${f(pb[0])}" y2="${f(pb[1])}" stroke="${INK}" stroke-width="2.6" stroke-linecap="round"/></g>`,
-      );
+      const shading = `<polyline points="${pts(shade.slice(2, -2))}" fill="none" stroke="${INK_BACK}" stroke-width="1.3" stroke-linecap="round"/>`;
+      let ends: string;
+      if (r.kind === 'floating') {
+        // Free, rounded tip at the flank.
+        ends = cap(fr, fw, 'end', INK, 2.6);
+      } else {
+        // Costochondral junction: a solid line across the band where bone becomes cartilage.
+        const [a, b] = edges(fr, fw);
+        const pa = a[a.length - 1]!;
+        const pb = b[b.length - 1]!;
+        ends = `<line x1="${f(pa[0])}" y1="${f(pa[1])}" x2="${f(pb[0])}" y2="${f(pb[1])}" stroke="${INK}" stroke-width="2.6" stroke-linecap="round"/>`;
+      }
+      const cartilage = r.cartilage.length ? band(r.cartilage, () => (r.number === 1 ? 15 : 12), CARTILAGE, INK_SOFT, 1.8, ' stroke-dasharray="7 5"') : '';
+      front.push(`<g data-rib="${r.side}-${r.number}" data-kind="${r.kind}" data-vertebra="${r.vertebra}">${cartilage}${band(fr, fw, BONE, INK, 2.6)}${shading}${ends}</g>`);
     }
   }
   parts.push(`<g id="anterior-ribs">${front.join('')}</g>`);
@@ -435,7 +436,7 @@ export function svg(t: Thorax = thorax(), size: Point = [1200, 900]): string {
     `<path d="M-14,${STERNUM_TOP + 30} C-10,${STERNUM_TOP + 60} -12,${STERNAL_ANGLE - 20} -16,${STERNAL_ANGLE - 6} M14,${STERNAL_ANGLE + 30} C12,380 13,440 12,${XIPHISTERNAL - 16}" fill="none" stroke="${INK_BACK}" stroke-width="1.4"/>`;
   parts.push(`<g id="sternum">${sternum}</g>`);
 
-  const defs = `<defs>${hatch('hatch-lung', 9, 35, INK_SOFT, 1, 0.22)}${hatch('hatch-heart', 7, -40, INK_SOFT, 1.1, 0.3)}</defs>`;
+  const defs = `<defs>${hatch('hatch-lung', 9, 35, INK_SOFT, 1, 0.22)}</defs>`;
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${size[0]}" height="${size[1]}" viewBox="0 0 ${size[0]} ${size[1]}">` +
     defs +

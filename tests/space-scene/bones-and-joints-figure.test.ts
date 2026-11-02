@@ -32,6 +32,13 @@ function distance(p: Point, line: readonly Point[]): number {
   return best;
 }
 
+const length = (line: readonly Point[]) => line.slice(1).reduce((sum, p, i) => sum + Math.hypot(p[0] - line[i]![0], p[1] - line[i]![1]), 0);
+const box = (poly: readonly Point[]) => {
+  const xs = poly.map((p) => p[0]);
+  const ys = poly.map((p) => p[1]);
+  return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
+};
+
 const inBody = (p: Point, id: string) => {
   const v = t.vertebrae.find((x) => x.id === id)!;
   return Math.abs(p[0] - v.centre[0]) <= v.halfWidth && Math.abs(p[1] - v.centre[1]) <= v.height / 2;
@@ -90,15 +97,55 @@ describe('bones and joints: protected-organs figure geometry', () => {
     }
   });
 
-  it('draws one group per rib in the SVG, and the heart sits left of the midline', () => {
+  it.each(SIDES)('%s side: every rib shows its back half to the lateral bend, then its front part', (side) => {
+    for (const r of ribsOf(side)) {
+      const reach = Math.max(...r.bone.map((p) => Math.abs(p[0])));
+      expect(r.frontFrom).toBeGreaterThan(0);
+      expect(Math.abs(r.bone[r.frontFrom]![0])).toBeGreaterThanOrEqual(0.95 * reach);
+    }
+  });
+
+  it.each(SIDES)('%s side: floating ribs are short and end at the flank, not at the front', (side) => {
+    const rib = (n: number) => ribsOf(side).find((r) => r.number === n)!;
+    expect(length(rib(12).bone)).toBeLessThan(length(rib(11).bone));
+    expect(length(rib(11).bone)).toBeLessThan(length(rib(10).bone));
+    const junction8 = Math.abs(rib(8).cartilage[0]![0]);
+    for (const n of [11, 12]) {
+      const r = rib(n);
+      const reach = Math.max(...r.bone.map((p) => Math.abs(p[0])));
+      const tip = last(r.bone);
+      // Seen from the front, only a short piece past the lateral bend shows, ending in a free tip at the side.
+      expect(length(r.bone.slice(r.frontFrom))).toBeLessThan(0.4 * length(r.bone));
+      expect(Math.abs(tip[0])).toBeGreaterThan(0.85 * reach);
+      expect(Math.abs(tip[0])).toBeGreaterThan(junction8);
+    }
+  });
+
+  it('places a heart smaller than a lung, to the body\'s left of the sternum and partly behind it, apex down and out', () => {
+    const heart = box(t.heart);
+    const centre = (heart.x0 + heart.x1) / 2;
+    // The subject's left is the viewer's right in an anterior view.
+    expect(centre).toBeGreaterThan(30);
+    expect(heart.x0).toBeLessThan(0);
+    const apex = t.heart.reduce((a, b) => (b[1] > a[1] ? b : a));
+    expect(apex[0]).toBeGreaterThan(centre);
+    for (const side of SIDES) {
+      const lung = box(t.lungs[side]);
+      expect(heart.x1 - heart.x0).toBeLessThan(lung.x1 - lung.x0);
+      expect(heart.y1 - heart.y0).toBeLessThan(lung.y1 - lung.y0);
+    }
+    // Lungs on either side of it.
+    expect(box(t.lungs.right).x0).toBeLessThan(heart.x0);
+    expect(box(t.lungs.left).x1).toBeGreaterThan(heart.x1);
+  });
+
+  it('draws one group per rib in the SVG, each with its back half', () => {
     const text = svg(t);
     expect(text.match(/data-rib="/g)).toHaveLength(24);
+    expect(text.match(/data-rib-back="/g)).toHaveLength(24);
     expect(text.match(/data-kind="true"/g)).toHaveLength(14);
     expect(text.match(/data-kind="false"/g)).toHaveLength(6);
     expect(text.match(/data-kind="floating"/g)).toHaveLength(4);
-    // The subject's left is the viewer's right in an anterior view.
-    const xs = t.heart.map((p) => p[0]);
-    expect((Math.min(...xs) + Math.max(...xs)) / 2).toBeGreaterThan(0);
   });
 
   it('ships a 1200×900 neutral-grey WebP within the figure budget, used in both locales of chapter 02', async () => {
