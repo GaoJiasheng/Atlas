@@ -42,7 +42,6 @@ import type { SceneControls, SpecRow } from '../core/controls';
 import { usePresentation, type Beat, type PresentationAdapter } from '../core/presentation';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import type { LegendItem } from '../widgets/Legend';
-import { Icon } from '../widgets/icons';
 import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
 import { isGeoTime, formatTimeParam } from '../../lib/time';
 import type { TimeSceneExt } from './index';
@@ -75,6 +74,7 @@ import { catalogueItems, resolveCataloguePick, visibleCatalogue, type CatalogueL
 import { eventImpacts } from './lib/impacts';
 import { datedLayerState } from './lib/datedLayers';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
+import { HudFold } from './hud/HudFold';
 import type { DatedLayerIndex } from './lib/datedLayers';
 import { BLOC_CSS, entityCssColor } from './colors';
 import { blocsOf, changesBloc } from './lib/bloc';
@@ -88,7 +88,6 @@ const TRIANGLE_KINDS = new Set<string>(['disaster']);
 const LEGEND_ENTITY_LIMIT = 6;
 /** Status line: BCE dates read as the readout (`350 BCE`), not the raw `-0350`. */
 const isBce = (iso: string) => iso.startsWith('-');
-const OVERLAY_OPEN_MIN_WIDTH = 720;
 const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
 const WORLD_CAMERA: GeoCamera = { center: [20, 10], zoom: 1.4 };
 
@@ -646,13 +645,6 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     [locale, hasGlossary, reconstructed], // `t` is bound to `locale`
   );
 
-  /* ---------- overlay: open by default only when the stage is roomy ---------- */
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  useEffect(() => {
-    setOverlayOpen((stageRef.current?.clientWidth ?? 0) >= OVERLAY_OPEN_MIN_WIDTH);
-  }, []);
-
   /* ---------- perf ---------- */
   const fps = useFps(!reconstructed);
   const controllerRef = useRef<GeoController | null>(null);
@@ -874,7 +866,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   } : null;
 
   return (
-    <div className="ts-stage" ref={stageRef} data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined} data-reconstruction={reconstructed ? '' : undefined}>
+    <div className="ts-stage" data-reference={reference || undefined} data-presenting={presenting || undefined} data-region-plate={region ? '' : undefined} data-reconstruction={reconstructed ? '' : undefined}>
       <GeoStage
         reconstruction={deepTime?.reconstruction}
         onReconstruction={setReconstructionStats}
@@ -907,16 +899,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       {presentation.element}
 
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay" data-legend={byEntity ? 'entities' : undefined} open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
-          <summary className="ts-overlay__summary" aria-label={t('time.layersAndKey')}>
-            <span className="ts-overlay__closed">
-              <Icon name="layers" size={18} />
-              <span>{t('time.layersAndKey')}</span>
-            </span>
-            <Icon name="close" size={18} className="ts-overlay__open" />
-          </summary>
-          <ControlPanel layers={panelLayers} tools={panelTools} legend={legend} />
-        </details>
+        <HudFold className="atlas-overlay-card ts-overlay" title={t('time.layersAndKey')} closeLabel={locale === 'zh' ? '关闭图层与图例' : 'Close layers and key'}>
+          <div data-legend={byEntity ? 'entities' : undefined}><ControlPanel layers={panelLayers} tools={panelTools} legend={legend} /></div>
+        </HudFold>
       </SceneSlot>
 
       {geo.entities.length > 0 && (

@@ -137,6 +137,10 @@ test.describe('sample-climate monthly TimeScene', () => {
       kind: 'cell',
       at: [105, 0],
     });
+    await page.evaluate(() => {
+      window.__atlas!.setLeftColumn('open');
+      window.__atlas!.setPlate(true);
+    });
     const range = page.locator('[data-climatology-month]:visible').first();
     await range.focus();
     await page.keyboard.press('Home');

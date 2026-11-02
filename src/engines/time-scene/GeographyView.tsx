@@ -48,6 +48,7 @@ import { ClimateCellDetail } from "./ClimateCellDetail";
 import "./climatology.css";
 import "./time-scene.css";
 import "./geography.css";
+import { HudFold } from "./hud/HudFold";
 export default function GeographyView({
   topic,
   data,
@@ -69,9 +70,6 @@ export default function GeographyView({
     highlight: s.highlight,
     theme: s.theme,
   }));
-  const [overlayOpen, setOverlayOpen] = useState(
-    () => window.matchMedia("(min-width: 760px)").matches,
-  );
   const [controller, setController] = useState<ClimateGeoController | null>(
       null,
     ),
@@ -629,8 +627,7 @@ export default function GeographyView({
       />
       {presentation.element}
       <SceneSlot name="plate">
-        <section className="geo-readout">
-          <h3>GEOGRAPHY · {zh ? "地理" : "Present-day shapes"}</h3>
+        <HudFold className="geo-readout" panel="geography-plate" kind="plate" title={zh ? "地理" : "Geography · Present-day shapes"}>
           <p>{contextText(ctx)}</p>
           {ctx.kind === "climatology" && (
             <p>
@@ -653,15 +650,10 @@ export default function GeographyView({
                   : "Membership layer off"}
             </p>
           )}
-        </section>
+        </HudFold>
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <details
-          className="atlas-overlay-card ts-overlay"
-          open={overlayOpen}
-          onToggle={(e) => setOverlayOpen(e.currentTarget.open)}
-        >
-          <summary>{zh ? "图层与图例" : "Layers and key"}</summary>
+        <HudFold className="atlas-overlay-card ts-overlay" title={zh ? "图层与图例" : "Layers and key"}>
           <ControlPanel
             layers={layerRows}
             tools={[
@@ -699,7 +691,7 @@ export default function GeographyView({
               />
             </>
           )}
-        </details>
+        </HudFold>
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ChapterAxis

@@ -1,6 +1,6 @@
 .ts-modern { padding: 10px 12px; color: var(--ink); font-size: .76rem; line-height: 1.45; }
 .ts-modern__header, .ts-modern__pages { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-.ts-modern__header strong { letter-spacing: .04em; font-size: .68rem; }
+.ts-modern__header strong, .ts-modern > .ts-fold__header .atlas-fold { letter-spacing: .04em; font-size: .68rem; }
 .ts-modern button, .ts-modern-index button, .ts-modern-inspector button { color: inherit; font: inherit; cursor: pointer; }
 .ts-modern__views, .ts-modern__modes { display: flex; gap: 4px; margin: 4px 0; }
 .ts-modern__views button, .ts-modern__modes button, .ts-modern__pages button, .ts-modern-index button, .ts-modern__outside button { min-height: 44px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 3px; background: transparent; flex: 1; }

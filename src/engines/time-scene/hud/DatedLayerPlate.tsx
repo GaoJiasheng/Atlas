@@ -1,9 +1,9 @@
 /** Map counts belong in the left PLATE block (docs/08 §2). */
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
 import type { DatedLayerDef } from '../../../content/schema/topic';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
-import { getPlateExpanded, setPlateExpanded } from '../../../lib/prefs';
+import { HudFold } from './HudFold';
 import { datedLayerState, type DatedLayerIndex } from '../lib/datedLayers';
 import type { Playhead } from '../lib/playhead';
 
@@ -16,8 +16,6 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
   playhead: Playhead;
   locale: Locale;
 }) {
-  const [open, setOpen] = useState(true);
-  useEffect(() => setOpen(getPlateExpanded()), []);
   const counted = definitions.filter((layer) => layer.count);
   // Only re-render on a count boundary, rather than every frame of an eased playhead.
   const snapshot = () => counted.map((layer) => {
@@ -27,26 +25,17 @@ export function DatedLayerPlate({ definitions, indexes, layers, playhead, locale
     return !loaded ? '—' : String(layers.includes(layer.id) ? datedLayerState(loaded.index, playhead.get()).visible : 0);
   }).join('|');
   const values = useSyncExternalStore(playhead.subscribe, snapshot, snapshot).split('|');
-  const fold = t(locale, open ? 'time.plate.fold' : 'time.plate.unfold');
   // A run of reference layers with the same release and note (PB2002's four classes) states them once.
   const refKey = (layer: DatedLayerDef | undefined) => layer?.temporal?.mode === 'reference' ? `${layer.temporal.release}|${layer.temporal.note.en}` : null;
   return (
-    <section className="ts-plate" data-hud-panel="plate" data-folded={!open || undefined}>
-      <button type="button" className="ts-plate__head" aria-expanded={open} aria-label={fold} title={fold} onClick={(event) => {
-        setOpen(!open);
-        setPlateExpanded(!open);
-        if (event.detail > 0) event.currentTarget.blur();
-      }}>
-        <span>{t('en', 'hud.plate').toLocaleUpperCase('en')} <small lang="zh-Hans">{t('zh', 'hud.plate')}</small></span>
-        <span aria-hidden="true">{open ? '⌄' : '⌃'}</span>
-      </button>
-      {open && <dl className="ts-plate__rows">
+    <HudFold className="ts-plate" panel="plate" kind="plate" headClassName="ts-plate__head" title={<>{t('en', 'hud.plate').toLocaleUpperCase('en')} <small lang="zh-Hans">{t('zh', 'hud.plate')}</small></>}>
+      <dl className="ts-plate__rows">
         {counted.map((layer, i) => <div key={layer.id} className="ts-plate__row" data-dated-count={layer.id} data-enabled={layers.includes(layer.id)}>
           <dt>{tx(layer.countLabel ?? layer.label, locale)}{layer.temporal?.mode === 'reference' && refKey(layer) !== refKey(counted[i - 1]) && <small className="ts-plate__ref">REF. · {layer.temporal.release} · {tx(layer.temporal.note, locale)}</small>}</dt>
           <dd>{values[i] === 'error' ? (locale === 'en' ? 'Layer could not be loaded' : '图层未能载入') : values[i] === '—' ? '—' : Number(values[i]).toLocaleString(locale === 'zh' ? 'zh-SG' : 'en-SG')}</dd>
         </div>)}
         {selectedSummary && <div className="ts-plate__row"><dt>{locale === 'en' ? 'Selected' : '已选'}</dt><dd>{tx(selectedSummary, locale)}</dd></div>}
-      </dl>}
-    </section>
+      </dl>
+    </HudFold>
   );
 }

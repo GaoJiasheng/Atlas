@@ -104,69 +104,33 @@
   overflow-y: auto;
   align-self: flex-end;
 }
-.ts-overlay:not([open]) {
-  padding: 0;
-  gap: 0;
-}
-.ts-overlay__summary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: var(--hit);
-  padding: 0 0.75rem;
-  cursor: pointer;
-  list-style: none;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-.ts-overlay__summary::-webkit-details-marker {
-  display: none;
-}
-.ts-overlay__closed {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.ts-overlay__open {
-  display: none;
-}
-.ts-overlay[open] .ts-overlay__summary {
-  position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
-  justify-content: center;
-  width: var(--hit);
-  padding: 0;
-}
-.ts-overlay[open] .ts-overlay__closed {
-  display: none;
-}
-.ts-overlay[open] .ts-overlay__open {
-  display: block;
-}
-.ts-overlay[open] {
-  position: relative;
-}
+/* Shared state comes from HudFold; closed bodies occupy no label-avoidance area. */
+.ts-fold { min-width: 0; }
+.ts-fold__header { display: flex; align-items: center; }
+.ts-fold__header > .atlas-fold { flex: 1; min-width: 44px; width: 100%; }
+.ts-fold__header > .atlas-fold > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ts-fold__close { min-width: 44px; min-height: 44px; border: 0; background: transparent; color: var(--ink-2); font: inherit; cursor: pointer; }
+.ts-fold__close:focus-visible { outline: 2px solid var(--signal); outline-offset: -2px; }
+.ts-overlay[data-folded] { padding: 0; gap: 0; }
+.ts-overlay > .ts-fold__body { display: flex; flex-direction: column; gap: .625rem; }
+.ts-fold__body[hidden] { display: none; }
 @media (max-width: 639px) {
   .ts-overlay .atlas-ctl__row {
     font-size: 0.875rem;
   }
   /* `colorBy: entity`: one row per state, two columns on a phone. */
-  .ts-overlay[data-legend="entities"] .atlas-legend ul {
+  .ts-overlay [data-legend="entities"] .atlas-legend ul {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 0.75rem;
   }
-  .ts-overlay[data-legend="entities"] .atlas-legend__item:has(.atlas-legend__fill) span {
+  .ts-overlay [data-legend="entities"] .atlas-legend__item:has(.atlas-legend__fill) span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   /* The marks (borders, rivers, events) keep a full row: only the state swatches pair up. */
-  .ts-overlay[data-legend="entities"] .atlas-legend__item:has(svg) {
+  .ts-overlay [data-legend="entities"] .atlas-legend__item:has(svg) {
     grid-column: 1 / -1;
   }
 }

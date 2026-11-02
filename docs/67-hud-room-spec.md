@@ -94,4 +94,4 @@ Safari 的地址栏和标签栏会吃掉 70–100 px 高度，比 App 更挤；�
 
 ## 9. 施工与验收记录
 
-（待填）
+- 2026-11-02 · Codex / TimeScene phase 2（仅折叠）：三个 View 的 `overlay`、`plate`（DatedLayerPlate）、`geography-plate`、`climatology-plate`、`geology-plate`、`reconstruction-age`、`modern-inset`、`present-evidence` 接宿主 `legendsOpen` / `plateOpen` 和 `FoldHeader`；保留关闭钮，收起正文 `display:none`，读者内嵌现代小图仍是正文。新增 11 个接线单测及键盘 / 持久化 / stage-only e2e 用例，旧内容测试显式打开所测控件。CSS 仅在 TimeScene 自有文件；未改 core 或地图取景。`pnpm check`、`pnpm validate`、`pnpm test`（236 files / 6,139 tests）、`pnpm build` 全绿；按 brief 不运行浏览器验收。core 后续需将私有图例 / context 控件的完整正文高度纳入 `useHudRoom` 的 legends 测量（当前只量共享 rows / ul）。

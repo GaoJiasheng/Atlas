@@ -12,6 +12,12 @@ async function open(page: Page, query: string, locale = 'en') {
     return window.__atlas?.ready;
   })).toBe(true);
   await expect.poll(async () => Object.keys(await dated(page))).toHaveLength(3);
+  // These tests exercise visible layer controls and count rows, independent of automatic room folds.
+  await page.evaluate(() => {
+    window.__atlas!.setLeftColumn('open');
+    window.__atlas!.setPlate(true);
+    window.__atlas!.setLegends(true);
+  });
 }
 
 for (const locale of ['en', 'zh']) {

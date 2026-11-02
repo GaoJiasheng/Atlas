@@ -16,6 +16,11 @@ async function open(page: Page, locale: string, query = '') {
   await page.goto(`/${locale}/topics/dinosaur-earth/?${query}`);
   await page.waitForFunction(() => !!window.__atlas);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  // Evidence browsing exercises the expanded inset; room defaults are tested separately.
+  await page.evaluate(() => {
+    window.__atlas!.setCard(true);
+    window.__atlas!.setLegends(true);
+  });
   await expect.poll(async () => (await geology(page)).reconstruction?.status, { timeout: 30_000 }).toBe('ready');
 }
 async function pickBeat(page: Page, chapter: string, index: number) {

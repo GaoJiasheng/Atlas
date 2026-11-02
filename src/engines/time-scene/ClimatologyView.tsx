@@ -16,7 +16,7 @@ import { ClimatologyStage, type ClimateGeoController, type ClimateSnapshot } fro
 import { ClimateCellControls } from './ClimateCellControls';
 import { ClimateKey } from './ClimateKey';
 import { ClimateCellDetail } from './ClimateCellDetail';
-import { Icon } from '../widgets/icons';
+import { HudFold } from './hud/HudFold';
 import './climatology.css';
 import './time-scene.css';
 
@@ -35,8 +35,6 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
     theme: s.theme,
   }));
   const open = useHud((h) => h.panelsOpen);
-  // The rain key is needed to read the map: open on wider screens, a chip on phones (it would cover half the map).
-  const [overlayOpen, setOverlayOpen] = useState(() => window.matchMedia('(min-width: 760px)').matches);
   const [controller, setController] = useState<ClimateGeoController | null>(null);
   const controllerRef = useRef(controller);
   controllerRef.current = controller;
@@ -429,28 +427,23 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
       />
       {presentation.element}
       <SceneSlot name="plate">
-        {monthControl}
-        <ClimateCellControls
-          windLayerId={activeWindId}
-          controller={controller}
-          selected={selectedCell}
-          locale={locale}
-          onInspect={selectCell}
-          compact
-        />
+        <HudFold panel="climatology-plate" kind="plate" title={locale === 'zh' ? '月气候平均' : 'Climatology'}>
+          {monthControl}
+          <ClimateCellControls
+            windLayerId={activeWindId}
+            controller={controller}
+            selected={selectedCell}
+            locale={locale}
+            onInspect={selectCell}
+            compact
+          />
+        </HudFold>
       </SceneSlot>
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay" open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
-          <summary className="ts-overlay__summary" aria-label={tl(locale, 'time.layersAndKey')}>
-            <span className="ts-overlay__closed">
-              <Icon name="layers" size={18} />
-              <span>{tl(locale, 'time.layersAndKey')}</span>
-            </span>
-            <Icon name="close" size={18} className="ts-overlay__open" />
-          </summary>
+        <HudFold className="atlas-overlay-card ts-overlay" title={tl(locale, 'time.layersAndKey')} closeLabel={locale === 'zh' ? '关闭图层与图例' : 'Close layers and key'}>
           <ControlPanel layers={layers} tools={tools} />
           <ClimateKey topic={topic} locale={locale} layers={state.layers} snapshot={snapshot} controller={controller} />
-        </details>
+        </HudFold>
       </SceneSlot>
       <SceneSlot name="bottomBar">
         <ChapterAxis
