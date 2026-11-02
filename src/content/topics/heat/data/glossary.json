@@ -29,8 +29,8 @@
         "zh": "温度计"
       },
       "definition": {
-        "en": "An instrument that measures temperature rather than an amount of heat.",
-        "zh": "测量温度的仪器，不是测量物体含有多少热。"
+        "en": "An instrument that measures how hot or cold something is. It measures temperature, rather than heat.",
+        "zh": "测量物体冷热程度的仪器，测的是温度，不是热量。"
       }
     },
     {
@@ -40,8 +40,8 @@
         "zh": "热传递"
       },
       "definition": {
-        "en": "Net transfer of energy from a hotter region toward a colder region because of their temperature difference.",
-        "zh": "因温差而使能量从较热处向较冷处净传递。"
+        "en": "Energy passing from a hotter place towards a colder place because of a temperature difference.",
+        "zh": "因温差而使能量从较热处传向较冷处。"
       }
     },
     {
@@ -51,8 +51,8 @@
         "zh": "热的良导体"
       },
       "definition": {
-        "en": "A material through which heat transfers comparatively easily under comparable conditions. Metals are generally good conductors.",
-        "zh": "在可比条件下，较容易传热的材料。金属通常是热的良导体。"
+        "en": "A material that transfers heat easily compared with other materials under the same conditions. Metals are usually good conductors.",
+        "zh": "相同条件下，比其他材料容易传热的材料。金属通常是热的良导体。"
       }
     },
     {
@@ -62,8 +62,8 @@
         "zh": "热的不良导体"
       },
       "definition": {
-        "en": "A material through which heat transfers comparatively slowly under comparable conditions. It still transfers heat.",
-        "zh": "在可比条件下，传热较慢的材料。它仍然会传热。"
+        "en": "A material that transfers heat slowly compared with other materials under the same conditions. Heat still passes through it.",
+        "zh": "相同条件下，比其他材料传热慢的材料。热仍能通过它。"
       }
     },
     {
@@ -84,8 +84,8 @@
         "zh": "隔热"
       },
       "definition": {
-        "en": "Reducing heat transfer into or out of an object. Insulation supplies no energy and does not make cold.",
-        "zh": "减慢能量以热的形式进出物体。隔热不供能，也不制造冷。"
+        "en": "Slowing heat transfer into or out of an object. It supplies no energy and can help keep things warm or cold.",
+        "zh": "减慢能量传入物体或从物体传出。隔热不供能，可以帮助保温或保冷。"
       }
     },
     {
@@ -95,8 +95,8 @@
         "zh": "加热曲线"
       },
       "definition": {
-        "en": "In this lesson, a model graph of water temperature against elapsed heating time. Its points are predictions, not measurements.",
-        "zh": "本课中表示水温随加热时间变化的模型图。图上各点是模型预计值，不是实测。"
+        "en": "A graph showing how temperature changes with heating time. Here the points are calculated water temperatures.",
+        "zh": "显示温度随加热时间变化的图。这里的各点是计算出的水温。"
       }
     },
     {
@@ -106,8 +106,8 @@
         "zh": "冷却曲线"
       },
       "definition": {
-        "en": "In this lesson, a model graph of temperature against elapsed cooling time with the surroundings held constant.",
-        "zh": "本课中，周围环境保持不变时，表示温度随冷却时间变化的模型图。"
+        "en": "A graph showing how temperature changes with cooling time. Here the surroundings stay at a fixed temperature.",
+        "zh": "显示温度随冷却时间变化的图。这里的环境温度保持固定。"
       }
     },
     {
@@ -117,8 +117,8 @@
         "zh": "质量"
       },
       "definition": {
-        "en": "A quantity describing how much matter is in an object. This model controls the water mass in grams.",
-        "zh": "表示物体含有多少物质的量。模型用克控制水的质量。"
+        "en": "How much matter an object contains. Use grams to set the water mass in this model.",
+        "zh": "物体含有多少物质。这个模型用克设定水的质量。"
       }
     },
     {
@@ -139,8 +139,8 @@
         "zh": "膨胀"
       },
       "definition": {
-        "en": "An increase in size. Most substances expand when warmed under ordinary conditions if free to change size.",
-        "zh": "尺寸增加。在通常条件下，大多数物质温度升高且可自由变形时会膨胀。"
+        "en": "An increase in size. Under ordinary conditions, most substances expand when warmed if they have room to change size.",
+        "zh": "尺寸增加。普通条件下，多数物质有空间自由伸缩时，受热会膨胀。"
       }
     },
     {
@@ -150,8 +150,8 @@
         "zh": "收缩"
       },
       "definition": {
-        "en": "A decrease in size. Most substances contract when cooled under ordinary conditions if free to change size.",
-        "zh": "尺寸减小。在通常条件下，大多数物质温度降低且可自由变形时会收缩。"
+        "en": "A decrease in size. Under ordinary conditions, most substances contract when cooled if free to change size.",
+        "zh": "尺寸减小。普通条件下，多数物质能够自由伸缩时，冷却会收缩。"
       }
     },
     {
@@ -161,8 +161,8 @@
         "zh": "公平测试"
       },
       "definition": {
-        "en": "A comparison that changes one relevant condition while holding the other relevant conditions the same.",
-        "zh": "只改变一个相关条件，其余相关条件保持相同的比较。"
+        "en": "A comparison that changes one condition and keeps other relevant conditions the same.",
+        "zh": "只改变一个条件，把其他相关条件保持相同的比较。"
       }
     },
     {
@@ -172,8 +172,8 @@
         "zh": "温差"
       },
       "definition": {
-        "en": "The difference between two temperatures. A smaller difference from the surroundings gives slower temperature change in this cooling model.",
-        "zh": "两个温度之间的差。在这个冷却模型中，与环境的温差较小时，温度变化较慢。"
+        "en": "The difference between two temperatures. In this cooling model, water changes temperature more slowly as it gets closer to the surrounding temperature.",
+        "zh": "两个温度的差。在这个冷却模型中，水温越接近环境温度，变化越慢。"
       }
     }
   ]

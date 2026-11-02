@@ -53,3 +53,9 @@ S31 是 `design: true` 的自描述来源，无无效的 `local:` URL。所有�
 
 
 最终非浏览器记录：validate 59 主题、0 错误／0 警告；全仓 163 测试文件、4,328 测试通过（执行命令 `pnpm run test --testTimeout=20000`，20 秒仅用于机器并发负载下的用例时间上限，未改测试或算法）；build 121 页成功。完整 check 最终复跑通过（774 文件、0 错误／0 警告、3 个既有提示），TypeScript 独立复核亦通过；详见 spec §9.3。EN／ZH 静态首页均 35 主题、13 个 biology、70 徽章、35 张图，已同步 smoke 预期。Vite 保留全站大 chunk 提示，首屏 JS 与 GPU 未量测。17 个新 e2e 用例已写但未运行；shoot／e2e 按 BRIEF 留端口 5446 主会话。没有部署或 git 写入。
+
+## Readability pass 2026-10-29
+
+Rewrote EN/ZH text across eight chapters, reviewed all 40 beat captions, and simplified anatomy cards, the three try-it prompts, glossary definitions, figure text and PLATE/notes labels. Used short explanations of light, vibration and nerve signals, with natural Chinese and matching facts. Kept separate scales, the combined-lens approximation, slow motion and care advice, including the differing sourced break intervals and WHO–ITU reference limits. Scientific facts, numerical values, source references, links and all non-text model data are unchanged. Original schematic authorship, omitted anatomy and curriculum scope remain documented here and in data/SOURCES.md; this pass does not add a syllabus claim or medical assessment.
+
+Verification: topic/model tests 96/96; `pnpm check` passed (0 errors, 0 warnings, 4 existing hints); `pnpm validate` passed (85 topics); `pnpm test` passed (219 files, 5,448 tests); `pnpm build` passed (173 pages). Source files, sourced-number tags and non-text model/chapter data were compared with the originals. Chinese beat captions are all ≤45 characters. `pnpm shoot` and `pnpm e2e` were skipped as required by the brief; no browser or desktop was opened.
