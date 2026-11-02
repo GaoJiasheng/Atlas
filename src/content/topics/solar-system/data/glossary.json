@@ -1,0 +1,233 @@
+{
+  "terms": [
+    {
+      "id": "star",
+      "term": {
+        "en": "star",
+        "zh": "恒星"
+      },
+      "definition": {
+        "en": "A body that produces energy in its interior and shines by its own light; the Sun is one.",
+        "zh": "内部产生能量并自己发光的天体，太阳就是一颗恒星。"
+      },
+      "see": [
+        "solar-system"
+      ]
+    },
+    {
+      "id": "planet",
+      "term": {
+        "en": "planet",
+        "zh": "行星"
+      },
+      "definition": {
+        "en": "Here, one of the eight major bodies orbiting the Sun; unlike a star, it is seen mainly by reflected light.",
+        "zh": "本主题指绕太阳运行的八颗主要行星之一，主要靠反射光被看见。"
+      },
+      "see": [
+        "orbit",
+        "dwarf-planet"
+      ]
+    },
+    {
+      "id": "solar-system",
+      "term": {
+        "en": "solar system",
+        "zh": "太阳系"
+      },
+      "definition": {
+        "en": "The Sun and the bodies bound to it by gravity.",
+        "zh": "太阳和受它引力束缚的天体组成的系统。"
+      },
+      "see": [
+        "star",
+        "planet"
+      ]
+    },
+    {
+      "id": "orbit",
+      "term": {
+        "en": "orbit",
+        "zh": "轨道"
+      },
+      "definition": {
+        "en": "The path of one body moving around another.",
+        "zh": "天体绕另一天体运动的路径。"
+      },
+      "see": [
+        "orbital-motion"
+      ]
+    },
+    {
+      "id": "orbital-motion",
+      "term": {
+        "en": "orbital motion",
+        "zh": "公转"
+      },
+      "definition": {
+        "en": "The movement of a body around another body.",
+        "zh": "天体围绕另一天体的运动。"
+      },
+      "see": [
+        "orbit",
+        "moon"
+      ]
+    },
+    {
+      "id": "moon",
+      "term": {
+        "en": "natural satellite",
+        "zh": "自然卫星"
+      },
+      "definition": {
+        "en": "A natural body orbiting a planet or another larger body.",
+        "zh": "绕行星或其他较大天体运动的天然天体。"
+      },
+      "see": [
+        "orbit"
+      ]
+    },
+    {
+      "id": "asteroid",
+      "term": {
+        "en": "asteroid",
+        "zh": "小行星"
+      },
+      "definition": {
+        "en": "A relatively small rocky body in the solar system.",
+        "zh": "太阳系里较小的岩质天体。"
+      },
+      "see": [
+        "solar-system",
+        "comet"
+      ]
+    },
+    {
+      "id": "comet",
+      "term": {
+        "en": "comet",
+        "zh": "彗星"
+      },
+      "definition": {
+        "en": "An icy dusty body that can release a coma and tails when heated near the Sun.",
+        "zh": "含冰与尘埃、靠近太阳受热时可能形成彗发与彗尾的天体。"
+      },
+      "see": [
+        "asteroid"
+      ]
+    },
+    {
+      "id": "dwarf-planet",
+      "term": {
+        "en": "dwarf planet",
+        "zh": "矮行星"
+      },
+      "definition": {
+        "en": "A class including Pluto: a nearly round solar-system body orbiting the Sun that has not cleared its orbital neighbourhood and is not a moon.",
+        "zh": "包括冥王星的一类天体：绕太阳运行、形状近圆、没有清除轨道附近其他天体，也不是卫星。"
+      },
+      "see": [
+        "planet",
+        "moon"
+      ]
+    },
+    {
+      "id": "au",
+      "term": {
+        "en": "astronomical unit",
+        "zh": "天文单位"
+      },
+      "definition": {
+        "en": "A defined length of exactly 149,597,870,700 metres, useful for planetary distances.",
+        "zh": "精确定为 149,597,870,700 米的长度单位，适合描述行星距离。"
+      },
+      "see": [
+        "light-year"
+      ]
+    },
+    {
+      "id": "refraction",
+      "term": {
+        "en": "refraction",
+        "zh": "折射"
+      },
+      "definition": {
+        "en": "A change of light direction as optical conditions change along its path.",
+        "zh": "光经过不同光学条件时，传播方向发生改变。"
+      }
+    },
+    {
+      "id": "constellation",
+      "term": {
+        "en": "constellation",
+        "zh": "星座"
+      },
+      "definition": {
+        "en": "A named, bounded area of the sky; the familiar drawn figure is a related imagined pattern.",
+        "zh": "有名称与边界的天区；其中熟悉的连线图形是想象出来的相关图案。"
+      },
+      "see": [
+        "horizon"
+      ]
+    },
+    {
+      "id": "horizon",
+      "term": {
+        "en": "horizon",
+        "zh": "地平线"
+      },
+      "definition": {
+        "en": "The local dividing direction between the sky above and directions below.",
+        "zh": "本地天空上方与下方方向的分界。"
+      },
+      "see": [
+        "constellation"
+      ]
+    },
+    {
+      "id": "light-year",
+      "term": {
+        "en": "light-year",
+        "zh": "光年"
+      },
+      "definition": {
+        "en": "The distance light travels through vacuum in one year, approximately 9.46 trillion kilometres.",
+        "zh": "光在真空中一年走过的距离，约 9.46 万亿千米。"
+      },
+      "see": [
+        "au",
+        "galaxy"
+      ]
+    },
+    {
+      "id": "milky-way",
+      "term": {
+        "en": "Milky Way",
+        "zh": "银河系"
+      },
+      "definition": {
+        "en": "The barred spiral galaxy containing the Sun and solar system.",
+        "zh": "包含太阳与太阳系的棒旋星系。"
+      },
+      "see": [
+        "galaxy",
+        "solar-system"
+      ]
+    },
+    {
+      "id": "galaxy",
+      "term": {
+        "en": "galaxy",
+        "zh": "星系"
+      },
+      "definition": {
+        "en": "A large system of stars and other matter held together by gravity.",
+        "zh": "由引力维系、含大量恒星及其他物质的大型系统。"
+      },
+      "see": [
+        "milky-way",
+        "star"
+      ]
+    }
+  ]
+}

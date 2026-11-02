@@ -1,0 +1,12 @@
+id: sample-microscope
+title: { en: 'Sample: Microscope', zh: '示例：显微镜' }
+subtitle: { en: 'Finite field engine fixture', zh: '有限视野引擎测试' }
+subject: biology
+moe: []
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: draft
+note: { en: 'Draft engine fixture · synthetic specimens', zh: '引擎草稿测试 · 合成标本' }

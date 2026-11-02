@@ -1,0 +1,310 @@
+---
+{
+  "id": "03-pitch-and-frequency",
+  "order": 3,
+  "title": {
+    "zh": "音调与频率",
+    "en": "Pitch and frequency"
+  },
+  "sensitive": false,
+  "state": {
+    "view": "assembled",
+    "explode": 0,
+    "cutaway": "none",
+    "hide": [],
+    "run": false,
+    "layers": [
+      "transmission",
+      "air-wave"
+    ],
+    "labels": [
+      "wave-reference"
+    ],
+    "camera": {
+      "position": [
+        0,
+        2.5,
+        5.9
+      ],
+      "target": [
+        -0.1,
+        0.95,
+        0.8
+      ],
+      "fov": 33
+    },
+    "summary": {
+      "en": "Change repetition rate while keeping relative amplitude fixed.",
+      "zh": "固定相对振幅，只改变重复节律。"
+    },
+    "index": {
+      "parts": [
+        "wave-reference",
+        "receiver"
+      ]
+    },
+    "sim": {
+      "set": {
+        "sound-active": true,
+        "frequency-hz": 250,
+        "amplitude": 1,
+        "medium": "air",
+        "distance-m": 34
+      },
+      "try": {
+        "vary": "frequency-hz",
+        "keep": [
+          "amplitude",
+          "medium",
+          "sound-active",
+          "distance-m"
+        ],
+        "observe": [
+          "visual-hz",
+          "wavelength-scene",
+          "sound-state"
+        ],
+        "record": {
+          "chart": {
+            "y": "visual-hz"
+          }
+        },
+        "predict": {
+          "prompt": {
+            "en": "Raise frequency while keeping amplitude fixed.",
+            "zh": "固定振幅，提高频率。"
+          },
+          "start": {
+            "frequency-hz": 250
+          },
+          "change": {
+            "frequency-hz": 500
+          },
+          "observe": "visual-hz",
+          "options": [
+            {
+              "id": "more",
+              "label": {
+                "en": "Faster repetition",
+                "zh": "重复更快"
+              },
+              "means": "more"
+            },
+            {
+              "id": "same",
+              "label": {
+                "en": "Same repetition",
+                "zh": "重复节律相同"
+              },
+              "means": "same"
+            }
+          ]
+        }
+      }
+    },
+    "beats": [
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 250,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "At the lower frequency setting, the silent strip displays one cycle per second after slowing the motion.",
+          "zh": "频率较低的设定下，静音条带慢放后每秒显示一次循环。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 500,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "Changing only frequency gives two displayed cycles per second. The relative amplitude stays the same.",
+          "zh": "只改变频率，画面每秒显示两次循环。相对振幅保持相同。"
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference",
+          "receiver"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 500,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The highlighted marker stays near its own rest tick. It does not travel to the receiver.",
+          "zh": "被标记的点始终在自己的刻度附近往复，没有走到接收处。"
+        },
+        "sensesFrame": {
+          "waveCycles": 0.25
+        }
+      },
+      {
+        "camera": {
+          "position": [
+            0,
+            2.5,
+            5.9
+          ],
+          "target": [
+            -0.1,
+            0.95,
+            0.8
+          ],
+          "fov": 33
+        },
+        "run": true,
+        "labels": [
+          "wave-reference"
+        ],
+        "layers": [
+          "transmission",
+          "air-wave"
+        ],
+        "sim": {
+          "set": {
+            "sound-active": true,
+            "frequency-hz": 500,
+            "amplitude": 1,
+            "medium": "air",
+            "distance-m": 34
+          }
+        },
+        "caption": {
+          "en": "The pattern has a shorter wavelength at the higher frequency. This does not make sound faster in unchanged air.",
+          "zh": "较高频率对应较短波长。这不表示声音在相同空气条件下传播得更快。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+Watch the highlighted air marker beside its fixed tick. Count how often it repeats the same motion, rather than how far it moves. <Term id="frequency">Frequency</Term> is the number of cycles in a second. Its unit is the <Term id="hertz">hertz</Term>: a frequency of <Num s="S4">one hertz</Num> means <Num s="S4">one cycle each second</Num>. [S4]
+
+For a simple tone, a higher frequency corresponds to a higher <Term id="pitch">pitch</Term>, the highness or lowness we hear. The card changes the input from <Num s="S1">250 Hz</Num> to <Num s="S1">500 Hz</Num> while keeping the extent of motion fixed. This is a silent comparison of the model, so you follow its pace visually rather than judging a played note. [S6]
+
+Both settings use the same slowdown. After slowing by <Num s="S1">250 times</Num>, they display <Num s="S1">1</Num> and <Num s="S1">2 cycles per second</Num>. Raising the frequency makes the marker repeat more often; it does not make the chosen excursion wider. Keep watching the same tick so that speed of repetition is easy to separate from distance moved. [S1]
+
+This air-sound study is a <Term id="longitudinal">longitudinal wave</Term>: the local back-and-forth motion lies along the direction of propagation. The highlighted marker stays near its own tick while the compressed and spread-out regions move along the strip. The pattern travels without carrying that marker to the receiver. [S3]
+
+The <Term id="wavelength">wavelength</Term> is the spacing between neighbouring positions at the same stage of the pattern. At the higher frequency it becomes shorter in unchanged air. More cycles fit into a given length; the sound does not therefore travel faster. Record each setting before comparing the readings. [S5]
+
+<More title={{"en": "Scene length is schematic", "zh": "场景长度是示意"}}>
+
+The strip uses <Num s="S1">41</Num> local markers. Its model wavelength changes from <Num s="S1">1</Num> to <Num s="S1">0.5 scene units</Num>. Scene units are drawing distances, not metres of measured air. The fixed relation between the settings preserves the intended comparison.
+
+</More>
+
+<More title={{"en": "The fixed-medium relation", "zh": "介质不变时的关系"}}>
+
+Wave speed equals frequency multiplied by wavelength. When speed stays fixed, doubling frequency halves wavelength. The card compares that relation; it does not calculate temperature changes or a new material. [S5]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+观察静止刻度旁被标出的空气点。先数它重复相同运动有多快，不要先看它离刻度多远。<Term id="frequency">频率</Term>是每秒重复振动的次数，单位是<Term id="hertz">赫兹</Term>；<Num s="S4">每秒完成一次循环</Num>，就相当于 <Num s="S4">一赫兹</Num>。[S4]
+
+对于简单音，频率较高通常对应较高的<Term id="pitch">音高</Term>，也称音调，即听起来高或低的感觉。卡片把输入从 <Num s="S1">250 赫兹</Num> 改为 <Num s="S1">500 赫兹</Num>，同时保持往复范围不变。本课静音，我们用显示节律比较模型，不要求听辨实际音符。[S6]
+
+两档采用相同慢放比例。都慢放 <Num s="S1">250 倍</Num> 后，画面分别每秒显示 <Num s="S1">1 次</Num> 与 <Num s="S1">2 次</Num> 循环。提高频率会使重复更快，并不扩大设定的往复范围。一直盯着同一个刻度，便容易把重复次数与运动距离分开。[S1]
+
+空气中的这种声音模型是<Term id="longitudinal">纵波</Term>：局部来回运动与扰动传播方向相同。被标出的点留在自己的刻度附近，疏密区域却沿条带传开。传到接收端的是图样，不是这个点一路迁移过去。[S3]
+
+相邻且处于相同振动阶段的位置之间的距离叫<Term id="wavelength">波长</Term>。空气条件不变时，提高频率会缩短波长，同一段距离容下更多循环，不表示声音传播得更快。先记录各档设置，再比较读数。[S5]
+
+<More title={{"en": "Scene length is schematic", "zh": "场景长度是示意"}}>
+
+条带采用 <Num s="S1">41 个</Num> 局部标记，模型波长从 <Num s="S1">1</Num> 变为 <Num s="S1">0.5 个场景单位</Num>。场景单位表示图中的距离，不是实测空气中的米。设定之间的比例用于保留比较关系。
+
+</More>
+
+<More title={{"en": "The fixed-medium relation", "zh": "介质不变时的关系"}}>
+
+波速等于频率乘以波长。波速固定时，频率加倍，波长减半。卡片比较这项关系，没有同时计算温度改变或换用另一种材料。[S5]
+
+</More>
+
+</Lang>
+

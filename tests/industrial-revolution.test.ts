@@ -1,4 +1,4 @@
-/** Documentary dates, caption denominators and real geometry for the draft history topic. */
+/** Documentary dates, caption denominators and real geometry for the history topic. */
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
@@ -22,8 +22,8 @@ const chapters = readdirSync(join(topicDir, 'chapters')).filter((f) => f.endsWit
 const layer = (name: string) => decodeDatedLayer(JSON.parse(readFileSync(join(root, 'public/geo', name + '.json'), 'utf8')), name)!;
 
 describe('industrial-revolution documentary content', () => {
-  it('remains a draft with eight readers, 37 beats, seven axis segments and 33 formal ticks', () => {
-    expect(topic.status).toBe('draft');
+  it('is published with eight readers, 37 beats, seven axis segments and 33 formal ticks', () => {
+    expect(topic.status).toBe('published');
     expect(topic.engine).toBe('time-scene');
     expect(chapters.map((c) => c.state.beats.length)).toEqual([4, 5, 5, 5, 5, 5, 4, 4]);
     expect(chapters.filter((c) => c.kind === 'background')).toHaveLength(1);

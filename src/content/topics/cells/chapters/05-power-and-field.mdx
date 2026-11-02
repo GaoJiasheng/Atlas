@@ -1,0 +1,440 @@
+---
+{
+  "id": "power-and-field",
+  "order": 5,
+  "title": {
+    "en": "Magnification and field of view",
+    "zh": "放大与视野"
+  },
+  "kind": "chapter",
+  "sensitive": false,
+  "state": {
+    "camera": {
+      "position": [
+        0.62,
+        0.4,
+        0.65
+      ],
+      "target": [
+        0.2,
+        0.18,
+        0
+      ],
+      "fov": 30
+    },
+    "view": "assembled",
+    "cutaway": "none",
+    "explode": 0,
+    "run": false,
+    "pose": null,
+    "part": "scope-eyepiece",
+    "labels": [
+      "scope-eyepiece",
+      "scope-objective-four",
+      "scope-objective-ten",
+      "scope-objective-forty"
+    ],
+    "hide": [
+      "animal-membrane",
+      "animal-cytoplasm",
+      "animal-nucleus",
+      "plant-cell-wall",
+      "plant-membrane",
+      "plant-cytoplasm",
+      "plant-nucleus",
+      "plant-chloroplasts",
+      "plant-vacuole",
+      "onion-patch",
+      "leaf-context",
+      "tissue-patch",
+      "intestine-context",
+      "body-context"
+    ],
+    "sim": {
+      "set": {
+        "specimen": "onion-bulb",
+        "objective": 4,
+        "slide-x": -200,
+        "slide-y": 0,
+        "focus-z": 0,
+        "illumination": 0.5,
+        "field-on": true
+      },
+      "try": {
+        "vary": "objective",
+        "observe": [
+          "total-power",
+          "field-diameter-um"
+        ],
+        "record": true,
+        "predict": {
+          "prompt": {
+            "en": "What happens to field diameter at higher power?",
+            "zh": "提高倍数后，视野直径怎样变化？"
+          },
+          "start": {
+            "objective": 4,
+            "slide-x": -200,
+            "focus-z": 0,
+            "field-on": true
+          },
+          "change": {
+            "objective": 40
+          },
+          "observe": "field-diameter-um",
+          "options": [
+            {
+              "id": "larger",
+              "label": {
+                "en": "Larger",
+                "zh": "变大"
+              },
+              "means": "more"
+            },
+            {
+              "id": "smaller",
+              "label": {
+                "en": "Smaller",
+                "zh": "变小"
+              },
+              "means": "less"
+            },
+            {
+              "id": "unchanged",
+              "label": {
+                "en": "The same",
+                "zh": "不变"
+              },
+              "means": "same"
+            }
+          ]
+        },
+        "keep": [
+          {
+            "en": "The same prepared specimen",
+            "zh": "同一预制标本"
+          },
+          {
+            "en": "Horizontal slide position",
+            "zh": "玻片横向位置"
+          },
+          {
+            "en": "Vertical slide position",
+            "zh": "玻片纵向位置"
+          },
+          {
+            "en": "The same fine-focus setting",
+            "zh": "同一微调设置"
+          },
+          {
+            "en": "The same illumination",
+            "zh": "同一照明"
+          }
+        ],
+        "also": [
+          "field-on",
+          "slide-x",
+          "slide-y",
+          "focus-z"
+        ]
+      }
+    },
+    "summary": {
+      "en": "Higher power shows a smaller area of the specimen.",
+      "zh": "放大后只看到标本更小的一片范围。"
+    },
+    "index": {
+      "parts": [
+        "scope-eyepiece",
+        "scope-objective-four",
+        "scope-objective-ten",
+        "scope-objective-forty",
+        "scope-turret",
+        "slide-glass",
+        "scope-fine-focus"
+      ]
+    },
+    "layers": [
+      "animal-cell",
+      "plant-cell",
+      "microscope-bench",
+      "tissue-context"
+    ],
+    "beats": [
+      {
+        "camera": "scope-whole",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-eyepiece",
+        "labels": [
+          "scope-eyepiece",
+          "scope-objective-four",
+          "scope-objective-ten",
+          "scope-objective-forty"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Total magnification is the eyepiece power multiplied by the objective power. These powers are chosen for this model.",
+          "zh": "总放大倍数来自目镜与物镜相乘；这是这台模型的设计设定。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-turret",
+        "labels": [
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 4,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "In this model a ten-power eyepiece and four-power objective give forty times magnification.",
+          "zh": "在这个模型里，十倍目镜配四倍物镜，总共放大四十倍。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-turret",
+        "labels": [
+          "scope-turret"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -200,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "With the forty-power objective, total magnification becomes four hundred. The field diameter becomes one tenth of its previous size.",
+          "zh": "换成四十倍物镜，总共放大四百倍；视野直径缩为原来的十分之一。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "slide-glass",
+        "labels": [
+          "slide-glass"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -100,
+            "slide-y": 0,
+            "focus-z": 0,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "Move the slide right and the image moves left, as in this type of compound microscope.",
+          "zh": "把载玻片向右移动，视野里的图像却向左移动；这是这类复式显微镜的成像特点。"
+        }
+      },
+      {
+        "camera": "scope-stage-close",
+        "view": "assembled",
+        "cutaway": "none",
+        "explode": 0,
+        "run": false,
+        "pose": null,
+        "part": "scope-fine-focus",
+        "labels": [
+          "scope-fine-focus"
+        ],
+        "hide": [
+          "animal-membrane",
+          "animal-cytoplasm",
+          "animal-nucleus",
+          "plant-cell-wall",
+          "plant-membrane",
+          "plant-cytoplasm",
+          "plant-nucleus",
+          "plant-chloroplasts",
+          "plant-vacuole",
+          "onion-patch",
+          "leaf-context",
+          "tissue-patch",
+          "intestine-context",
+          "body-context"
+        ],
+        "sim": {
+          "set": {
+            "specimen": "onion-bulb",
+            "objective": 40,
+            "slide-x": -100,
+            "slide-y": 0,
+            "focus-z": 2,
+            "illumination": 0.5,
+            "field-on": true
+          }
+        },
+        "caption": {
+          "en": "The cell has not grown; its image has enlarged. More magnification does not automatically bring an unfocused structure into focus.",
+          "zh": "细胞没有变大；变的是图像。没有调好焦时，放大也不能让模糊的结构自动变清楚。"
+        }
+      }
+    ]
+  }
+}
+---
+
+<Lang en>
+
+The eyepiece and objectives now explain <Term id="magnification">magnification</Term>: how much larger an image appears than the object. In a compound light microscope, total power is the eyepiece power multiplied by the objective power. This instrument model uses a <Num s="S20">10×</Num> eyepiece. Its lowest objective is <Num s="S20">4×</Num>, giving a simulated total of <Num s="S20">40×</Num>. These values describe this design, not every microscope.
+
+Keep the onion specimen and selected target in place, then select the <Num s="S20">40×</Num> objective. Total power becomes <Num s="S20">400×</Num>. The target’s image becomes larger, while the circular field contains less of its surroundings. In this simulation the object-field diameter falls from <Num s="S20">4,500 micrometres</Num> to <Num s="S20">450 micrometres</Num>. The specimen itself has not grown.
+
+Move the slide gently to the right. In a conventional compound view, the image moves left. The simulation reverses both horizontal and vertical directions. This is why centring a target at low power helps before increasing power: a target near the edge may fall outside the smaller field. Changing power does not move its nucleus to another position within the cell.
+
+Finally, compare an enlarged but unfocused image with a clear one. Magnification and resolution are different: a larger blur does not automatically reveal close details. Use the Try it card to predict the field change, hold the other conditions steady, and record the resulting power and diameter.
+
+<Figure src="figures/cells-microscope" alt={{"en": "A generic light microscope with stage, lenses and focus knobs.", "zh": "通用光学显微镜，展示载物台、镜头与调焦旋钮。"}} caption={{"en": "An explanatory instrument drawing. The microscope field is shown separately as a teaching simulation.", "zh": "仪器说明图；显微视野另外以教学模拟呈现。"}} />
+
+<More title={{"en": "Field calculation in this model", "zh": "本模型的视野计算"}}>
+
+The chosen field number is <Num s="S20">18 mm</Num>. Object-field diameter is field number divided by objective power. Thus <Num s="S20">18 ÷ 40 = 0.45 mm</Num>, or <Num s="S20">450 micrometres</Num>. This geometric result is a SIM value, not a measurement from a classroom slide.
+
+</More>
+
+<More title={{"en": "Focus is a teaching model", "zh": "焦点是教学模型"}}>
+
+The simulation assigns different focus tolerances to the objectives and changes the drawn blur. It does not calculate a calibrated optical resolution or provide a measured image-quality score. Illumination changes visibility without changing the geometric magnification.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+现在从目镜与物镜解释<Term id="magnification">放大率</Term>，也就是图像相对物体放大多少。复式光学显微镜的总倍数，等于目镜倍数乘以物镜倍数。本模型的目镜为 <Num s="S20">10 倍</Num>，最低物镜为 <Num s="S20">4 倍</Num>，模拟总倍数就是 <Num s="S20">40 倍</Num>。这些数值属于这台设计模型。
+
+保持洋葱标本和目标不动，换成 <Num s="S20">40 倍</Num>物镜，总倍数升到 <Num s="S20">400 倍</Num>。目标的图像变大，圆形视野里的周围范围却缩小。本模拟的物方视野直径从 <Num s="S20">4,500 微米</Num>降到 <Num s="S20">450 微米</Num>；细胞本身没有长大。
+
+把玻片向右移，常规复式显微图像会向左移；上下方向也会相反。因此要先低倍居中，再提高倍数，否则边缘目标可能离开缩小的视野。图像位置改变，不表示核移到了细胞的另一处。
+
+最后比较放大但模糊的图像与调清楚的图像。放大率和分辨细节的能力不同，较大的模糊影像不会自动增加细节。用“试一试”先预测视野怎样变，再保持其他条件相同，记录总倍数和直径。
+
+移动玻片、改变倍数和调焦是不同操作。先说明正在改变哪个条件，再解释画面上的变化。保持同一个目标，才能把视野缩小与目标离开视野区分开来。
+
+<Figure src="figures/cells-microscope" alt={{"en": "A generic light microscope with stage, lenses and focus knobs.", "zh": "通用光学显微镜，展示载物台、镜头与调焦旋钮。"}} caption={{"en": "An explanatory instrument drawing. The microscope field is shown separately as a teaching simulation.", "zh": "仪器说明图；显微视野另外以教学模拟呈现。"}} />
+
+<More title={{"en": "Field calculation in this model", "zh": "本模型的视野计算"}}>
+
+选定的视场数为 <Num s="S20">18 毫米</Num>。物方视野直径等于视场数除以物镜倍数，因此 <Num s="S20">18 ÷ 40 = 0.45 毫米</Num>，也就是 <Num s="S20">450 微米</Num>。这是模拟的几何结果，不是课堂玻片测量值。
+
+</More>
+
+<More title={{"en": "Focus is a teaching model", "zh": "焦点是教学模型"}}>
+
+模拟给不同物镜设定不同调焦容差，再改变绘制的模糊程度。它没有计算校准过的光学分辨率，也不提供实测图像质量分数。照明改变可见程度，不改变几何放大率。
+
+</More>
+
+</Lang>
+

@@ -1,0 +1,1 @@
+{"type":"Topology","objects":{"sample-observations":{"type":"GeometryCollection","geometries":[{"type":"Point","coordinates":[103.5,1],"properties":{"id":"sample-observation-a","f":2004.983606557377}},{"type":"Point","coordinates":[104,1],"properties":{"id":"sample-observation-b","f":2004.983606557377}}]}},"arcs":[]}

@@ -14,6 +14,7 @@
 import { createContext, useContext } from 'react';
 import { Matrix4, Vector3 } from 'three';
 import type { Playback } from '../../lib/sim/timeline';
+import { createSoundMotion, type SoundMotion } from '../../lib/sim/sound-motion';
 import type { AnimClock } from '../../lib/sim/hz';
 
 export interface MechanismPartRuntime {
@@ -45,6 +46,7 @@ export interface ExercisePlacement {
 }
 
 export interface StageRuntime {
+  sound: SoundMotion & { markerIds: Set<string>; visualHz: number; wavePlaying: boolean; echoContext: boolean };
   mechanismParts: Map<string, MechanismPartRuntime>;
   mechanismGates: Map<string, boolean>;
   energy: number;
@@ -68,7 +70,7 @@ export interface StageRuntime {
 }
 
 export function createRuntime(run: boolean, explode: number): StageRuntime {
-  return { mechanismParts: new Map(), mechanismGates: new Map(), energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map(), clocks: new Map() };
+  return { sound: { ...createSoundMotion(), markerIds: new Set(), visualHz: 0, wavePlaying: false, echoContext: false }, mechanismParts: new Map(), mechanismGates: new Map(), energy: run ? 1 : 0, phase: 0, elapsed: 0, explode, shadowDirty: true, moved: 0, contract: new Map(), root: new Matrix4(), bonesMoved: 0, exercise: null, play: new Map(), clocks: new Map() };
 }
 
 export const RuntimeContext = createContext<StageRuntime | null>(null);

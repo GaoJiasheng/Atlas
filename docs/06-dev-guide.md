@@ -564,6 +564,27 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 | `sources.json`（可选） | 见上文"加一个主题"第 4 步。 |
 | `glossary.json`（可选） | 名词表，见「名词表」。 |
 
+#### 事件影响估计 `impacts`（E-PH2）
+
+事件可选 `impacts: ImpactRecord[]`，定义在 `time-scene/impactSchema.ts`，不另建文件或 loader：
+
+```json
+{
+  "id": "impact-example",
+  "measure": "deaths",
+  "estimate": { "kind": "more-than", "value": 70000 },
+  "label": { "en": "Deaths", "zh": "死亡人数" },
+  "scope": { "en": "Surrounding areas", "zh": "周边地区" },
+  "sourceAsOf": "2011-09-29",
+  "sourceDateKind": "publication",
+  "sources": ["S22"]
+}
+```
+
+`measure` 还可为 `dead-or-missing-presumed-dead`；`kind` 为 `reported/about/more-than`。value 与可选 `components[].value` 都须为有限非负整数；组件形状 `{ id, label: { en, zh }, value, sources }`。label/scope/组件标签两语必填，sources 至少一条且须存在；impact/组件 id 全题唯一。`sourceAsOf` 只接受真实公历 `YYYY/ YYYY-MM/ YYYY-MM-DD`，保留原精度；`sourceDateKind` 为 `publication`（来源发布日期）或 `accessed`（读取日期），不能把读取日写成修订日期。
+
+可选 `componentsComplete` 必须伴随 components；分项和不得超过总数，`true` 只用于 `reported` 且和必须相等。不完整分项不推导“其余”记录，约数与下界估计不合成新总量。同一事件不能兼具 impacts 与旧 casualties。EventInspector 在摘要后常显每条定义、静态中性 Counter、scope、来源日期与 SourceRefs，独立估计逐条画，不进 CounterVersus。Counter 的可选 `valueLabel` 只替换数字文案（如 `More than 70,000 / 超过70,000`），不改图标刻度或算法；无此属性时旧显示逐字不变。分项保持作者顺序，非完整表有双语提示；具体“四国”范围由内容写在 scope。`__atlas.engine.impacts(eventId)` 返回已校验记录，未知事件返回 `[]`。没有新增选择或 URL 状态。合成 fixture 与 E-PH1 共用 `sample-science-layers`，其测试估计不作历史事实。
+
 **同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
 ### 任务地点与非战争呈现（missions）
 
@@ -678,7 +699,7 @@ datedLayers:
 
 - 文件必须是 **TopoJSON，且只有一个与 `file` 同名的对象**。`point` 对应 Point / MultiPoint，`line` 对应 LineString / MultiLineString，`area` 对应 Polygon / MultiPolygon。可以量化（带 `transform`，管线 `quantization=100000` 的输出照用）。每个几何的 `properties` 至少 `{ f: 1960 }`；可选 `u: 1980`、`certainty: approximate`（缺省 `certain`）、`h: 12`（楼层元数据，本轮不按高度改点大小）。`f` / `u` 是**有限的十进制年数字**，预先转换 ISO 日期；`f < u`，无 `u` 表示一直保留。语义复用 `lib/dated.ts` 的 `[from, to)`：开始年出现、结束年消失。数组宜按 `f` 排序；引擎载入时只把日期索引排序一次，几何顺序不影响结果。
 - 章节及拍的 `layers` 直接写图层 `id`，比如 `[base, control, housing-blocks, dated-rail, battles]`；没列出即关闭。图层文件的年份不另行扩展时间轴范围，章节日期或控制区关键帧（不是拍的日期）应覆盖要展示的年代。控制面板 LAYERS 每层一行，开关和章节共用 store（URL 状态同其它图层）。KEY 每个开启图层一行；点图层另有“过去一年新增”图例。
-- 每层一个 GeoJSON source，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径随缩放为 1.2–3 px。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线宽从 zoom 10 的 1 px 线性增至 zoom 13 的 2.5 px，不透明度 .9；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
+- 每层一个 GeoJSON source，地图载入时就 fetch；带 `catalogue` 的层（E-PH1）改为**第一次开启该层时**才 fetch，关闭后保留，载入后只 `setData` 一次。MapLibre GPU 过滤数字属性：`f <= T && (u ?? +∞) > T`；点半径在区域 / 全球视图（zoom ≤ 8）为 2.2 px，城市尺度随缩放为 1.2–3 px（zoom 9–14）。过去一年新增点（`T-1 < f <= T`，且尚未消失）大一号、signal 色描边。线宽从 zoom 10 的 1 px 线性增至 zoom 13 的 2.5 px，不透明度 .9；面淡底 .35、同色 .6 px 边，近似面淡底再 ×.7、边虚线。放在控制区之上、事件之下；颜色随 paper / cinema token 更新。
 - `lib/datedLayers.ts` 对开始、结束和新增窗口的结束边界各建有序索引，二分求当前计数。只在**可见集合变化**时重设过滤器（不是只比较计数：同年拆一栋又建一栋也要更新）；播放头在两次边界之间缓动不会逐帧 `setFilter`。新增窗口同样单独缓存。
 - `count: true` 的当前可见要素数出现在左列可收起的 PLATE 块，关闭图层读数为 0，尚未载入为 `—`；手机随 PLATE 隐藏。MultiPoint 按一个要素计数，要按楼栋计数请每栋写一个 Point。`stats().datedLayers[id]` 给出 `total / visible / recent / filterUpdates`，用于性能与边界回归检查；关闭时 `visible` 为 0。
 - `pnpm validate` 检查文件、对象、几何、日期区间、holder、token、双语以及章节 / 拍的图层引用；图层 id 与其它主题对象共用唯一命名空间，不能占用内置图层名。
@@ -2435,6 +2456,18 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **分框细度**（docs/28 P3，`simplify.ts`）：`pipeline.focus` 的一项可以写成 `{ "box": [w, s, e, n], "fineKm": 0.005 }`，这个框用自己的固定间隔（岛尺度要几米，区域框照旧 1 km 上下）：先从普通焦点框里挖出来，单独简化，用自己那份陆地沿海岸（与 inside / outside 两半同一做法）；排在前面的框在重叠处优先。自动预算搜索只调普通焦点框的间隔。没有这种项、没有 `excludeBox` 时产物与以前逐字节相同（ww1、ww2、warring-states、four-taps 的 simplify 改前改后各跑一次比对过）。
 - 东南亚近景底图：`scripts/build-geo.ts` 另出 `public/geo/land-10m-sea.json`（Natural Earth 1:10m 陆地，裁到 95°E–125°E、9°S–22°N，TopoJSON，约 234 KB）。GeoStage 在镜头 zoom ≥ 6.5 且视野与该框相交时才 fetch；zoom 7 起绘制、到 8 完全显现：框内先铺一层水色遮住 50m 陆地（不透明度 7→8 渐入），10m 陆地和海岸线叠在上面，颜色同为 `--land` / `--land-edge` / `--water` token。其他主题不加载它。
 
+### TimeScene · 科学参考图层与目录（E-PH1，docs/49）
+
+`datedLayers` 增量复用同一 GPU source、KEY、LAYERS、PLATE 与日历 playhead；旧定义省略新字段时保留 f/u 与 recent 样式。`temporal: {mode: reference, note: {en,zh}, release: "PB2002"}` 的 geometry 禁止 f/u，跨全部年代保持可见，PLATE 常显 REF.、说明与版本；`recent:false` 关闭新增点 draw layer、KEY 与计数。普通 dated 仍是有限十进制年 `f`、可选排他 `u`。`basemap:{maxZoom:8}` 可仅限制全球底图缩放。
+
+每层可加 `catalogue:{file:"my-catalogue"}`，与几何在第一次开启该层时一起读取本地 `public/geo/*.json`，关闭后缓存，不逐帧 setData；几何解码/日期建索引按250条一批让出主线程（原生JSON解析仍同步，需按完整数据实测解析时延）。文件形状：`{ entries: [{ id, title: {en,zh}, summary: {en,zh}, at: [lon,lat], sources: ["S1"], rows: [{key:"depth",label:{en:"Depth",zh:"深度"},value:null,unit:{en:"km",zh:"千米"}}] }] }`。`value` 为有限数值、非空双语或 null；null 显示 Not recorded / 未记录。entry id 直接 join 同层唯一 properties.id，全题对象命名唯一，不能复制成 event；Point 锚点与坐标相等，线在250m量化容差内，面在面内。编译校验来源、双语、rows.key 唯一、几何和目录不重不漏。观测层只接受 identity/source/type/doubtful/position/version 字段，不接受高度或到达值。
+
+章与拍的 `catalogueIndex:[{layerId:"my-layer",ids:["some-id"]}]` 可列指定 id；省 ids 列本层当前可见项。拍覆盖同组，省略则用章值。只交当前开启层的可见条目到 readerEnd 索引，按 id 排序，标题两语/id搜索150ms防抖，每页50行，未来记录不能点选。索引、GPU点线面命中、测试 hook 共用选择动作；事件优先，其后22px范围精算距离/id排序。详情沿现有 inspector 插槽出现在章头与拍之后、正文之前。选择以 entry.at 为镜头锚点，GPU signal overlay高亮；不为目录创建 HTML marker。
+
+`encoding:{radius:{property:"mag",min:6,max:9.5,px:[2,8]}}` 只用于Point，要求每个mag有限且≥6。显示半径 `2+6*clamp((mag-6)/3.5,0,1)` px；这是展示编码，不改变源震级。`pick=<catalogue-id>` 是最长128字符kebab-id，引擎字段只在 core typed URL passthrough 注册；合法可见pick优先于hl，未知则回退旧hl，取消选择恢复当前拍/章highlight。隐藏层、回退日期、换章会清pick；深链等本层几何与元数据完成才解析，失败写双语错误并清pick。显式URL cam保留，其他有效pick深链飞到at。换主题/语言沿URL保留id。
+
+测试使用 `__atlas.engine.selectCatalogue(id|null):boolean`（隐藏对象或演示中返回false）、`catalogueState():{pick,layers:{[id]:{status,visible}},indexCount,renderedRows,selectedScreen}`；layers只报告已请求或当前开启的目录层，status为loading/ready/error，selectedScreen为选中锚点的视口CSS坐标或null。既有stats().datedLayers增加可选mode/sourceUpdates，sourceUpdates初次提交为1；跨时间边界才setFilter。`sample-science-layers`保持draft，合成数据不能作为科学来源；专用unit/e2e与shoot目录选中截图用于验收。
+
 #### orbit-rotation 内容补记（2026-10-27）
 
 正式 `sun-earth-moon` 复用夹具的13控件/23输出/9绑定/2 overlays，加入正文、出处与逐拍验收。`orbital-plane` 的既有 guide 几何补上法线及地轴倾角弧（`orbitalTiltGuide`），弧与法线从同一物理 axis 生成，零倾角时弧退化到法线；不另建可选对象。无普通 orbit 输出显隐绑定，因此保留 §9.2 运行中普通绑定的已知边界。浏览器验收由主会话执行，见主题 REVIEW.md。
@@ -2640,3 +2673,74 @@ curve.x只允许heat.time，y为1–3个温度number输出（°C），samples整
 曲线只读诊断精确形状为 `sim().curve = { x, domain: [min,max], series: [{ id, points: [{ x,y }] }], cursor: { x, values: { "heated-c": 39.285714285714285 } } }`。`points` 是采样数值，`cursor.values` 是当前时刻同solver直接求值，测试接口不返回SVG。未揭示预测同时隐藏手动记录表；before/after快照用于当前条件解释与恢复。`sim.reveal:true`仅在当前resolved controls等于该章/拍的原始输入时生效，手动改条件会使这次教材揭示失效。
 
 热实验卡隐藏当前读数时，提供显式操作 **Show current result / 显示当前结果**（`data-sim-reveal`）。该操作仅在临时UI里记录当前章与全部resolved controls的context，不改时间、质量、功率等输入，也不应用预测的固定start/change情景；可直接查看并手动记录任意合法时刻。之后改任意条件或时间、换章或拍，显式揭示失效，旧预测before/after说明也不沿用；再次点击才能显示新条件。此遮蔽机制只对heat开启，已有其他sim主题保留其读数/PLATE默认可见行为；通用记录条件隔离与预测失效仍共享。只读诊断`sim().reveal`给出当前显式揭示context或null。
+
+### SpaceScene · microscope (cells §4 E-C1/E-C2)
+
+`sim.kind: "microscope"` uses `microscope-schema.ts` and the pure `lib/sim/microscope.ts`. `makeMicroscopeSim('S20')` in `lib/sim/microscope-fixture.ts` provides a complete reusable author config and controls; instrument parts/poses/bindings remain topic data. Inputs are object-side µm, field number mm; geometry bindings convert µm to scene metres via `per: 1e-6`.
+
+The strict `microscope` object contains `controls: {specimen,objective,slideX,slideY,focusZ,illumination,enabled}`, positive finite `ocularPower`, `fieldNumberMm`, ascending `objectives: [{power:4,focusWidthUm:20},{power:10,focusWidthUm:8},{power:40,focusWidthUm:2}]`, `specimens: [{id,label:{en,zh},target:{id,atUm:[x,y,z]},pattern}]`, and `sources: ['S20']` (at least one existing `design:true`). The optional `patterns` array defaults to the complete original recipes in `microscope-patterns.json`; generated fixture JSON includes it explicitly. Accepted ids are `onion-grid`, `leaf-grid`, `cheek-grid`. Each finite template has `periodUm`, `originUm`, bounded integer `tileRange:{x:[min,max],y:[min,max]}`, and ≤32 `features`. Features use `id`, `kind: ellipse|polygon`, `role`, `atUm`, `contrast`, `parentCell`, and either `axesUm` (full widths) or local `pointsUm`. Polygons cannot self-intersect. Full finite patches must contain ≤2048 feature instances and ≤3 distinct depth layers. Shared wall segments are drawn once.
+
+Exactly seven controls use the contract defaults: `specimen` choice onion-bulb/pondweed-leaf/prepared-cheek (default onion-bulb); `objective` step4/10/40 (default4); `slide-x`/`slide-y` step−1000..1000 by100 (default0); `focus-z` step−20..20 by1 (default0, microscope-only41-value cap exception); `illumination` step0/.25/.5/.75/1 (default.5); `field-on` toggle (defaultfalse). Existing TryIt `also` cap remains4: spread controls across chapters. Buttons, keys, URL normalization, recording and setSim use existing store semantics. Opening observation restores assembled, zero explode and no cut; cutaway/explode cannot change the synthetic field.
+
+`solveMicroscope(config,values)` returns numeric quantities `total-power`, `field-diameter-um`, `target-u`, `target-v`, `clarity`, `blur-px`; state quantities `target-location` (inside/outside), `focus-status` (sharp/soft/blurred), `view-status` (inactive/dark/outside/sharp/soft/blurred). Numeric quantities are finite; invalid runtime inputs throw `MicroscopeInputError` with `code: 'microscope-input'` and a field. `M = ocular × objective`, `D = 1000 × fieldNumberMm / objective`, `u = −(targetX + slideX)/(D/2)`, `v = −(targetY + slideY)/(D/2)`. Screen Y is `cy − v × radiusPx`. Focus clarity is `max(0,1−abs(focusZ−featureZ)/focusWidthUm)` per feature; blur is `8×(1−clarity)` at512px. Illumination affects brightness, never magnification or focus. The clarity proxy is not optical resolution and has no percentage UI. Declare at most6 outputs; default readings are total power/field diameter plus a focus state.
+
+Add one strict overlay: `{kind:'microscope-field',model:'microscope',group:'microscope-bench',when:{control:'field-on',is:true},diameterPx:300,maxBufferPx:512,title:{en:'Simulated light-microscope field',zh:'模拟光学显微视野'}}`. Diameter is an integer180..360; buffer512. It replaces the chain card at ≥1024px; on narrower screens a single renderer mounts inside TryIt. The Canvas is a clipped circle with token colours, one reused offscreen buffer, per-feature blur, and a structure list/status for assistive technology. The finite patch is generated deterministically, culled to field candidates, intersected with the actual disk, then clipped. Illumination0 has no visible features; inactive API retains mathematical readings.
+
+`__atlas.engine.microscopeField()` returns `{specimen,totalPower,fieldDiameterUm,targetUV:[u,v],targetLocation,focusStatus,viewStatus,visibleFeatureIds,bufferSize:[512,512]}`, or null on other topics. Stable feature ids are `tileX:tileY:templateId`. Topic index clicks for microscope topics replay an authored beat selecting/labelling that part before selection, so explanation models can be restored from an observation chapter. Other topics retain their current index behavior.
+
+The draft `sample-microscope` exercises inversion, finite patches, three specimens, near/far depth, focus, darkness and responsive field layout. `tests/space-scene/microscope.test.ts` checks cells T1–T14 and domain errors; `tests-e2e/sample-microscope.spec.ts` covers T14/T15 browser state, themes/locales, phone and reopening. Shoot checks compare every beat/link field against the same pure model and inspect one512px Canvas and assembled state. Browser gates remain owned by the main session; run with `ATLAS_E2E_PORT=5451`.
+### Solar-system snapshots（docs/65 E-SS1–2）
+
+`sim.kind: "solar-system"` 是离散教学快照，纯函数 `lib/sim/solar-system.ts`；不另建时钟或 session，不播放真实星历。沿用 `orbit-rotation.ts` 的向量数学，旧 Sun–Earth–Moon 的三体 schema、输出及会话不变。`solar-system-schema.ts` 要求 Sun + 八行星恰九体（按顺序），Sun 只有 `radiusKm`，行星另有 `aAu`、`periodYears`，均为有限正数。`version:1`；`controls` 恰为 `lab,elapsedYears,planet,scaleMode,skyDate,skyHour,observer,skyTarget,patternLinks,depth,atmosphere,sourceKind,altitudeMode,twinkleSeconds,cometStep,distanceTarget` 十六个一对一控件映射。值表见 `solar-constants.ts` 和可复制模板 `sample-solar/data/parts.json`。`patterns` 是项目原创的 `orion/crux/scorpius` HIP 字符串边列表；`sources` 必须存在于主题来源表。
+
+`planet-frame` vector 键是 `<body>.xKm/yKm/zKm/radiusKm/turns`；物理位置与累计圈数不受显示尺度影响。`display-positions` vector 用既有 `<part>:x/y/z/shown` shift 协议，包含九天体及 `saturn-rings`；显示半径为 `radius-<body>`。`planet-diameter-km/reference-au/period-years/completed-turns` 读当前选择。`scale-state` 为 `overview/true-scale/size-row/distance-ruler/schematic/sky`；`twinkle-flux/twinkle-state` 为确定性的定性闪烁快照；`comet-positions` 对 `comet-nucleus/comet-coma/ion-tail/dust-tail` 给同一中心，`comet-angle` 是从 +X 朝反太阳方向的 +Y 轴角度（度）。光尺读 `light-distance-km/light-time-seconds`。
+
+新增通用数字绑定 `{output:'radius-earth',part:'earth',scale:{per:1}}`：有限非负 scalar × 正 `per`，均匀缩放以原点为中心的单位几何，然后由已有 `shift` 定位。零合法，负/非有限值拒绝；非数字源、重复 scale、与 place/bodyTransform/stretch/bend/pose 竞争同一几何 writer 均报路径错误。球的 primitive `at` 应为 `[0,0,0]`，球半径为1。土星环的基准大小按单位土星半径创作，复用 `radius-saturn`。sizes 的 Sun 同尺独立 inset 在 x=−32，默认行星行镜头应隐藏 Sun 或留在镜头外；它不是被缩小过的太阳。
+
+`{kind:'catalogue-sky',group:'local-sky',catalogue:'stars-hyg-v41-cc-by-sa.json',radius:5}` 仅在 lab=sky、group 开启且未爆炸时画 Points/LineSegments。星表从同源 `${BASE_URL}catalogues/solar-system/<filename>` 独立读取，保留 CC BY-SA 4.0、署名与源 SHA256；不进 topic data 合并，不保存与原创边的混合派生文件。构建验证器及加载器都核对 RA/Dec、id 和边端点；失败显示双语重试按钮。目录被 PWA CacheFirst 缓存，原始文件随静态/Capacitor 包携带。`sky-stars`、各 `<target>-pattern` 与 `depth-stars` 聚合选择点每帧随其可见星均值移动，避免标签在更换钟点后留在旧处。天空是固定 J2000 的近似地平图，不输出升落预报；深度缺值及 ≥100000pc 哨兵屏蔽。Singapore/equator/north45 比较点的经度统一为103.7357°E，纬度分别1.3342/0/45°，同一 SGT 钟点可比较纬度效应。
+
+调试 API：`engine.solarSystem()` 返回 `outputs`、`sky:{status,utc,latitude,depth,rows}` 及 `scales`；`engine.scale(id)` 给 `target` 与实际矩阵的三轴尺度 `actual`；已有 `engine.shift(id)` 仍读实际位移。所有快照保持 paused，FLOW 与运行快捷键不可用，URL/API 也不能让全局 run 变成天文时间。单测 `tests/space-scene/solar-system.test.ts`，浏览器契约 `tests-e2e/sample-solar.spec.ts`；本施工环境按 brief 跳过浏览器执行，主会话补跑。
+
+### SpaceScene · senses：sound-only、传播与单次回声（docs/64 §4 E-SO1–3）
+
+`sim.kind:"senses"` 继续复用同一纵波方程、try-it、记录、URL 和 RUN。`senses.profile` 缺省 `eye-and-sound`，既有七控件眼耳主题无须改数据。新增 `sound-only` 只收声音三控件，禁止 `eye` 配置、眼部控件/输出及 `paraxial-eye`。需要传播实验时再加 `soundLab`：
+
+```json
+{"profile":"sound-only","sound":{"active":"sound-active","frequencyHz":"frequency-hz","amplitude":"amplitude","slowFactor":250,"baseFrequencyHz":250,"baseWavelengthScene":1,"baseDisplacementScene":0.035,"sources":["S1"]},"soundLab":{"medium":"medium","distanceM":"distance-m","speedMps":{"air":340,"water":1500,"solid-example":5000},"sources":["S1"]}}
+```
+
+固定控件：`sound-active` toggle 默认 true；`frequency-hz` step `[250,500]` 默认250、Hz；`amplitude` step `[1,2]` 默认1、相对位移。soundLab 增加 `medium` choice，选项恰为 `air|water|solid-example|vacuum`、默认 air；`distance-m` step `[17,34,68]` 默认34、m。声速表固定为空气340、水1500、选定虚拟均匀固体5000 m/s；后者是 DESIGN，不能称为所有固体的速度。所有 source id 必须存在于本题 sources。
+
+新 `source-drive` 是 state 输出，标签必须完整列出 `off|amplitude-one|amplitude-two`。用两套现有 oscillate marker 表现不同幅度，分别绑定 enabled 与同源 Hz：
+
+```json
+[{"output":"source-drive","animation":"source-one","enabled":{"eq":"amplitude-one"}},{"output":"visual-hz","animation":"source-one","hz":{"per":1}}]
+```
+
+`oscillate.amplitude` 是**角度**，不是场景位移；marker 只是局部振动示意，不能把主体整块摆动称为真实振型。sound-only 的 `visual-hz` 动画直接共用 wave 的 `phaseCycles`，免除通用 Hz 绑定原有0.5秒缓动；频率、幅度、active、章/拍变化归零，seek 同步。sound-active=false 是停源且归静止点；run=false 是冻结当前画面，保留非零模型读数。其它模型的 Hz 缓动和 legacy senses 不变。
+
+`solveSoundLab(config,values)` 解析计算：speed-mps 在真空是 null，其它介质是固定教学速度；one-way-ms 为 `1000*d/c`、echo-ms 为 `2000*d/c`，仅启用源且有介质时有值。propagation-state 优先 `no-medium`，再 `source-off`，否则 `transmitted`。空值表示没有传播事件，不能写零毫秒或无穷大。三种输出都必须显式声明 nullable：
+
+```json
+{"id":"one-way-ms","from":"one-way-ms","kind":"number","nullable":true,"label":{"en":"One-way time","zh":"单程时间"},"unit":"ms","decimals":3}
+```
+
+只有 speed-mps、one-way-ms、echo-ms 可 nullable；读数和记录把 null 写成 “No transmission / 无传播”，不附单位；图跳过 null，不跨缺失值连线；预测不把 null 当0。nullable 不可连接 pose/hz/rpm/intensity 等数值绑定，URL 只存输入。观察这些输出必须同时 observe propagation-state；speed-mps 还需通过 vary/also/keep 纳入 medium。senses 的实验族另分 transmission（speed-mps、one-way-ms、propagation-state）和 echo（echo-ms）：前者 vary medium/distance-m/sound-active；后者只 vary distance-m、固定 air 与启用源。echo 的 observe 允许一并放 propagation-state；frequency/amplitude 卡保持 sound 族，不能串用眼部或传播控制。
+
+介质外观沿用普通 control visible：air-cell/water-cell/solid-bar 各只在对应 medium 显示，真空时全部隐藏但驱动源仍存在；longitudinal-wave 加 `when:{"control":"medium","is":"air"}`，不把空气粒子复制成水或固体粒子模型。
+
+```json
+{"kind":"sound-echo-pulse","model":"echo","group":"echo-study","origin":[-1.1,1.05,0],"axis":[1,0,0],"visualDistancesScene":{"near":1,"mid":1.4,"far":2.2},"slowFactor":10,"reference":"distance-m","sources":["S1"]}
+```
+
+回声 overlay 只允许 sound-only+soundLab，origin 有限、axis 为单位向量；17/34/68 m 固定映射 near/mid/far 示意距离，时间读取同一 echo-ms。颜色复用两套主题的 token:en-sound。它是包络位置，不是空气粒子；wave 慢放250倍，echo 单独慢放10倍。只有 echo 卡、组可见、air、源启用、assembled 且实际 explode=0 和 RUN 时推进；完成一次往返后 hold。暂停继续，完成后再次 RUN 从0重演；隐藏/拆解冻结且不继续调度，echo 播放时连续 wave 隐藏。以34 m 为例，physicalEchoMs=200，完整画面2秒，elapsedVisual 0/.5/1/1.5/2 秒对应沿轴 pathPosition 0/.7/1.4/.7/0 场景单位；路径示意不代表同一实长比例尺。
+
+作者章/拍 state 可写严格快照，至少有一项、每项有限且0..1：
+
+```json
+{"sensesFrame":{"waveCycles":0.25,"echoProgress":0.5},"run":false}
+```
+
+waveCycles 仅 senses 可用；echoProgress 还要求 sound-only、soundLab 和 echo overlay。每次切拍从章基线重新构造，先应用 inputs/可见性，再归零和读作者快照；不继承上一拍。URL 恢复和 presentation 读同一数据；减少动态固定作者帧，RUN 不推进，未写则0。此字段不是测试 seek 命令。
+
+QA：`engine.senses()` 返回 profile，sound-only 的 eye 明确 undefined；wave 使用既有 positions/rests/phaseCycles。sourceMarkers 按 animation id 返回 `{phaseCycles,visualHz,on}`；soundLab.echo 返回 `{elapsedVisual,u,pathPosition,atReturn,playing,hiddenReason,physicalEchoMs,slowFactor}`，其中 pathPosition 是沿 axis 的标量场景距离。`sensesEchoSeek(u)` 仅收有限0..1；sound-only 的 `sensesSeek(cycles)` 同域，legacy 保留原有行为。草稿 `sample-sound` 展示四张卡、全部介质、nullable 记录、marker enabled/Hz、波与回声作者帧；`tests-e2e/sample-sound.spec.ts` 覆盖中英/paper/cinema、深链接、相位、空值、往返及手机减少动态，专用端口 `ATLAS_E2E_PORT=5452`。浏览器门槛留给主会话，文件存在不代表已运行。

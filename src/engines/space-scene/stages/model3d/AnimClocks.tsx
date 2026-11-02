@@ -32,7 +32,17 @@ export function AnimClocks({ animations, effects, bridge, snapKey }: { animation
       const onTarget = e?.enabled === false ? 0 : 1;
       const run = a.whenRun ? runtime.energy : 1;
       let c: AnimClock | undefined = runtime.clocks.get(a.id);
-      if (e?.hz !== undefined) {
+      if (runtime.sound.markerIds.has(a.id)) {
+        c = c ?? createClock(runtime.sound.visualHz, onTarget, true);
+        const before = c.cycles;
+        c.cycles = runtime.sound.phaseCycles; c.hz = runtime.sound.visualHz;
+        c.on = onTarget; c.paced = true; c.advance = c.cycles - before;
+        c.seconds = c.hz > 0 ? c.advance / c.hz : 0;
+        runtime.clocks.set(a.id, c);
+        const markers = bridge.senses.sourceMarkers ?? (bridge.senses.sourceMarkers = {});
+        const reading = markers[a.id] ?? (markers[a.id] = { phaseCycles: 0, visualHz: 0, on: 0 });
+        reading.phaseCycles = c.cycles; reading.visualHz = c.hz; reading.on = c.on;
+      } else if (e?.hz !== undefined) {
         // Paced: its own phase at the eased bound frequency.
         if (!c || !c.paced) {
           c = createClock(e.hz, onTarget, true);

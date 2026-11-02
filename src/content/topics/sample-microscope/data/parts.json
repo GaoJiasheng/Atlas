@@ -1,0 +1,983 @@
+{
+  "parts": [
+    {
+      "id": "slide-glass",
+      "name": {
+        "en": "slide-glass",
+        "zh": "slide-glass"
+      },
+      "group": "microscope-bench",
+      "summary": {
+        "en": "Engine test instrument.",
+        "zh": "引擎测试仪器。"
+      },
+      "detail": {
+        "en": "Original design geometry. [S1]",
+        "zh": "原创设计几何。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.1,
+          0.04,
+          0.08
+        ],
+        "at": [
+          0,
+          0.12,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.02
+      }
+    },
+    {
+      "id": "coverslip-glass",
+      "name": {
+        "en": "coverslip-glass",
+        "zh": "coverslip-glass"
+      },
+      "group": "microscope-bench",
+      "summary": {
+        "en": "Engine test instrument.",
+        "zh": "引擎测试仪器。"
+      },
+      "detail": {
+        "en": "Original design geometry. [S1]",
+        "zh": "原创设计几何。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.1,
+          0.04,
+          0.08
+        ],
+        "at": [
+          0,
+          0.15,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.02
+      }
+    },
+    {
+      "id": "scope-fine-focus",
+      "name": {
+        "en": "scope-fine-focus",
+        "zh": "scope-fine-focus"
+      },
+      "group": "microscope-bench",
+      "summary": {
+        "en": "Engine test instrument.",
+        "zh": "引擎测试仪器。"
+      },
+      "detail": {
+        "en": "Original design geometry. [S1]",
+        "zh": "原创设计几何。[S1]"
+      },
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.1,
+          0.04,
+          0.08
+        ],
+        "at": [
+          0.15,
+          0.12,
+          0
+        ],
+        "color": "token:ink-2"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.02
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "microscope-bench",
+      "name": {
+        "en": "Microscope",
+        "zh": "显微镜"
+      },
+      "color": "token:ink-2"
+    }
+  ],
+  "flows": [],
+  "animations": [],
+  "poses": {},
+  "presets": [
+    {
+      "id": "hero",
+      "label": {
+        "en": "Bench",
+        "zh": "仪器台"
+      },
+      "camera": {
+        "position": [
+          0.4,
+          0.4,
+          0.8
+        ],
+        "target": [
+          0,
+          0.1,
+          0
+        ],
+        "fov": 30
+      }
+    }
+  ],
+  "sim": {
+    "kind": "microscope",
+    "controls": [
+      {
+        "id": "specimen",
+        "kind": "choice",
+        "label": {
+          "en": "Specimen",
+          "zh": "标本"
+        },
+        "default": "onion-bulb",
+        "options": [
+          {
+            "id": "onion-bulb",
+            "label": {
+              "en": "Prepared onion-bulb epidermis",
+              "zh": "预制洋葱鳞茎表皮"
+            }
+          },
+          {
+            "id": "pondweed-leaf",
+            "label": {
+              "en": "Green pondweed leaf",
+              "zh": "绿色水草叶"
+            }
+          },
+          {
+            "id": "prepared-cheek",
+            "label": {
+              "en": "Prepared cheek epithelium",
+              "zh": "预制口腔上皮"
+            }
+          }
+        ]
+      },
+      {
+        "id": "objective",
+        "kind": "step",
+        "label": {
+          "en": "Objective power",
+          "zh": "物镜倍数"
+        },
+        "unit": "×",
+        "values": [
+          4,
+          10,
+          40
+        ],
+        "default": 4
+      },
+      {
+        "id": "slide-x",
+        "kind": "step",
+        "label": {
+          "en": "Slide right",
+          "zh": "玻片左右"
+        },
+        "unit": "µm",
+        "values": [
+          -1000,
+          -900,
+          -800,
+          -700,
+          -600,
+          -500,
+          -400,
+          -300,
+          -200,
+          -100,
+          0,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000
+        ],
+        "default": 0
+      },
+      {
+        "id": "slide-y",
+        "kind": "step",
+        "label": {
+          "en": "Slide away",
+          "zh": "玻片前后"
+        },
+        "unit": "µm",
+        "values": [
+          -1000,
+          -900,
+          -800,
+          -700,
+          -600,
+          -500,
+          -400,
+          -300,
+          -200,
+          -100,
+          0,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000
+        ],
+        "default": 0
+      },
+      {
+        "id": "focus-z",
+        "kind": "step",
+        "label": {
+          "en": "Fine focus plane",
+          "zh": "微调焦平面"
+        },
+        "unit": "µm",
+        "values": [
+          -20,
+          -19,
+          -18,
+          -17,
+          -16,
+          -15,
+          -14,
+          -13,
+          -12,
+          -11,
+          -10,
+          -9,
+          -8,
+          -7,
+          -6,
+          -5,
+          -4,
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ],
+        "default": 0
+      },
+      {
+        "id": "illumination",
+        "kind": "step",
+        "label": {
+          "en": "Illumination",
+          "zh": "照明"
+        },
+        "unit": "",
+        "values": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1
+        ],
+        "default": 0.5
+      },
+      {
+        "id": "field-on",
+        "kind": "toggle",
+        "label": {
+          "en": "Observe field",
+          "zh": "观察视野"
+        },
+        "default": false
+      }
+    ],
+    "outputs": [
+      {
+        "id": "total-power",
+        "kind": "number",
+        "label": {
+          "en": "Total power",
+          "zh": "总倍率"
+        },
+        "unit": "×",
+        "decimals": 0
+      },
+      {
+        "id": "field-diameter-um",
+        "kind": "number",
+        "label": {
+          "en": "Field diameter",
+          "zh": "视野直径"
+        },
+        "unit": "µm",
+        "decimals": 0
+      },
+      {
+        "id": "focus-status",
+        "kind": "state",
+        "label": {
+          "en": "Focus",
+          "zh": "焦点"
+        },
+        "states": {
+          "sharp": {
+            "en": "Sharp",
+            "zh": "清晰"
+          },
+          "soft": {
+            "en": "Soft",
+            "zh": "稍模糊"
+          },
+          "blurred": {
+            "en": "Blurred",
+            "zh": "模糊"
+          }
+        }
+      },
+      {
+        "id": "view-status",
+        "kind": "state",
+        "label": {
+          "en": "Observation",
+          "zh": "观察"
+        },
+        "states": {
+          "inactive": {
+            "en": "Observation off",
+            "zh": "观察关闭"
+          },
+          "dark": {
+            "en": "Illumination off",
+            "zh": "照明关闭"
+          },
+          "outside": {
+            "en": "Target outside field",
+            "zh": "目标在视野外"
+          },
+          "sharp": {
+            "en": "In focus",
+            "zh": "对焦清晰"
+          },
+          "soft": {
+            "en": "Slightly out of focus",
+            "zh": "焦点稍偏"
+          },
+          "blurred": {
+            "en": "Out of focus",
+            "zh": "焦点模糊"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "control": "slide-x",
+        "part": [
+          "slide-glass",
+          "coverslip-glass"
+        ],
+        "offset": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 0.000001,
+          "origin": 0
+        }
+      },
+      {
+        "control": "slide-y",
+        "part": [
+          "slide-glass",
+          "coverslip-glass"
+        ],
+        "offset": {
+          "axis": [
+            0,
+            0,
+            -1
+          ],
+          "per": 0.000001,
+          "origin": 0
+        }
+      },
+      {
+        "control": "focus-z",
+        "part": "scope-fine-focus",
+        "rotate": {
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "per": 9,
+          "origin": 0
+        }
+      }
+    ],
+    "overlays": [
+      {
+        "kind": "microscope-field",
+        "model": "microscope",
+        "group": "microscope-bench",
+        "when": {
+          "control": "field-on",
+          "is": true
+        },
+        "diameterPx": 300,
+        "maxBufferPx": 512,
+        "title": {
+          "en": "Simulated light-microscope field",
+          "zh": "模拟光学显微视野"
+        }
+      }
+    ],
+    "microscope": {
+      "controls": {
+        "specimen": "specimen",
+        "objective": "objective",
+        "slideX": "slide-x",
+        "slideY": "slide-y",
+        "focusZ": "focus-z",
+        "illumination": "illumination",
+        "enabled": "field-on"
+      },
+      "ocularPower": 10,
+      "fieldNumberMm": 18,
+      "objectives": [
+        {
+          "power": 4,
+          "focusWidthUm": 20
+        },
+        {
+          "power": 10,
+          "focusWidthUm": 8
+        },
+        {
+          "power": 40,
+          "focusWidthUm": 2
+        }
+      ],
+      "specimens": [
+        {
+          "id": "onion-bulb",
+          "label": {
+            "en": "Prepared onion-bulb epidermis",
+            "zh": "预制洋葱鳞茎表皮"
+          },
+          "target": {
+            "id": "onion-nucleus",
+            "atUm": [
+              200,
+              0,
+              0
+            ]
+          },
+          "pattern": "onion-grid"
+        },
+        {
+          "id": "pondweed-leaf",
+          "label": {
+            "en": "Green pondweed leaf",
+            "zh": "绿色水草叶"
+          },
+          "target": {
+            "id": "pondweed-near-chloroplast",
+            "atUm": [
+              0,
+              0,
+              3
+            ]
+          },
+          "pattern": "leaf-grid"
+        },
+        {
+          "id": "prepared-cheek",
+          "label": {
+            "en": "Prepared cheek epithelium",
+            "zh": "预制口腔上皮"
+          },
+          "target": {
+            "id": "cheek-nucleus",
+            "atUm": [
+              0,
+              0,
+              0
+            ]
+          },
+          "pattern": "cheek-grid"
+        }
+      ],
+      "patterns": [
+        {
+          "id": "onion-grid",
+          "periodUm": [
+            300,
+            120
+          ],
+          "originUm": [
+            0,
+            0
+          ],
+          "tileRange": {
+            "x": [
+              -2,
+              2
+            ],
+            "y": [
+              -2,
+              2
+            ]
+          },
+          "features": [
+            {
+              "id": "onion-cell",
+              "kind": "polygon",
+              "role": "wall",
+              "atUm": [
+                150,
+                0,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -150,
+                  -60
+                ],
+                [
+                  150,
+                  -60
+                ],
+                [
+                  150,
+                  60
+                ],
+                [
+                  -150,
+                  60
+                ]
+              ],
+              "contrast": 0.7,
+              "parentCell": "onion-cell"
+            },
+            {
+              "id": "onion-content",
+              "kind": "polygon",
+              "role": "cytoplasm-area",
+              "atUm": [
+                150,
+                0,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -148,
+                  -58
+                ],
+                [
+                  148,
+                  -58
+                ],
+                [
+                  148,
+                  58
+                ],
+                [
+                  -148,
+                  58
+                ]
+              ],
+              "contrast": 0.08,
+              "parentCell": "onion-cell"
+            },
+            {
+              "id": "onion-nucleus",
+              "kind": "ellipse",
+              "role": "nucleus",
+              "atUm": [
+                200,
+                0,
+                0
+              ],
+              "axesUm": [
+                18,
+                12
+              ],
+              "contrast": 0.7,
+              "parentCell": "onion-cell"
+            }
+          ]
+        },
+        {
+          "id": "leaf-grid",
+          "periodUm": [
+            80,
+            40
+          ],
+          "originUm": [
+            0,
+            0
+          ],
+          "tileRange": {
+            "x": [
+              -5,
+              5
+            ],
+            "y": [
+              -5,
+              5
+            ]
+          },
+          "features": [
+            {
+              "id": "leaf-cell",
+              "kind": "polygon",
+              "role": "wall",
+              "atUm": [
+                30,
+                10,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -40,
+                  -20
+                ],
+                [
+                  40,
+                  -20
+                ],
+                [
+                  40,
+                  20
+                ],
+                [
+                  -40,
+                  20
+                ]
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-content",
+              "kind": "polygon",
+              "role": "cytoplasm-area",
+              "atUm": [
+                30,
+                10,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -39,
+                  -19
+                ],
+                [
+                  39,
+                  -19
+                ],
+                [
+                  39,
+                  19
+                ],
+                [
+                  -39,
+                  19
+                ]
+              ],
+              "contrast": 0.04,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "pondweed-near-chloroplast",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                0,
+                0,
+                3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-chloroplast-2",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                30,
+                -3,
+                -3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-chloroplast-3",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                60,
+                0,
+                3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-chloroplast-4",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                0,
+                20,
+                -3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-chloroplast-5",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                30,
+                23,
+                3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            },
+            {
+              "id": "leaf-chloroplast-6",
+              "kind": "ellipse",
+              "role": "chloroplast",
+              "atUm": [
+                60,
+                20,
+                -3
+              ],
+              "axesUm": [
+                8,
+                5
+              ],
+              "contrast": 0.7,
+              "parentCell": "leaf-cell"
+            }
+          ]
+        },
+        {
+          "id": "cheek-grid",
+          "periodUm": [
+            110,
+            90
+          ],
+          "originUm": [
+            0,
+            0
+          ],
+          "tileRange": {
+            "x": [
+              -4,
+              4
+            ],
+            "y": [
+              -4,
+              4
+            ]
+          },
+          "features": [
+            {
+              "id": "cheek-cell",
+              "kind": "polygon",
+              "role": "membrane-boundary",
+              "atUm": [
+                0,
+                0,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -30,
+                  -8
+                ],
+                [
+                  -23,
+                  -20
+                ],
+                [
+                  -4,
+                  -22.5
+                ],
+                [
+                  22,
+                  -15
+                ],
+                [
+                  30,
+                  3
+                ],
+                [
+                  20,
+                  20
+                ],
+                [
+                  -5,
+                  22.5
+                ],
+                [
+                  -25,
+                  12
+                ]
+              ],
+              "contrast": 0.7,
+              "parentCell": "cheek-cell"
+            },
+            {
+              "id": "cheek-content",
+              "kind": "polygon",
+              "role": "cytoplasm-area",
+              "atUm": [
+                0,
+                0,
+                0
+              ],
+              "pointsUm": [
+                [
+                  -29,
+                  -7
+                ],
+                [
+                  -22,
+                  -19
+                ],
+                [
+                  -4,
+                  -21.5
+                ],
+                [
+                  21,
+                  -14
+                ],
+                [
+                  29,
+                  3
+                ],
+                [
+                  19,
+                  19
+                ],
+                [
+                  -5,
+                  21.5
+                ],
+                [
+                  -24,
+                  11
+                ]
+              ],
+              "contrast": 0.05,
+              "parentCell": "cheek-cell"
+            },
+            {
+              "id": "cheek-nucleus",
+              "kind": "ellipse",
+              "role": "nucleus",
+              "atUm": [
+                0,
+                0,
+                0
+              ],
+              "axesUm": [
+                12,
+                9
+              ],
+              "contrast": 0.7,
+              "parentCell": "cheek-cell"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "S1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Atlas original classroom sound design study, docs/64. A schematic five-station bench with no audio. Sound controls250/500Hz and relative amplitude1/2; fixed250-fold wave slowdown, scene wavelength250/f, maximum displacement0.035×amplitude. Propagation teaching speeds340/1500/5000m/s for air/water/chosen uniform solid. Reflector distances17/34/68m; one-way milliseconds1000d/c and echo milliseconds2000d/c when transmission exists. Echo display slowed10-fold; default34m gives100ms one-way and200ms return, displayed over2s. Source-off times and all vacuum propagation quantities are null, not zero. Static instrument forms and moving markers are schematic.",
+        "zh": "Atlas原创课堂声音设计研究，见docs/64。无声音播放的五工位示意台架。频率250/500赫兹、相对振幅1/2；纵波固定慢放250倍，场景波长250/f，最大位移0.035×相对振幅。空气/水/选定虚拟均匀固体的教学声速为340/1500/5000米每秒。反射面距离17/34/68米；有传播时，单程毫秒数1000d/c，回声毫秒数2000d/c。回声显示慢放10倍；默认34米得到单程100毫秒、往返200毫秒，画面显示2秒。停源时间与真空传播量为null，不是零。乐器静态结构与局部运动标记均为示意。"
+      },
+      "design": true,
+      "note": {
+        "en": "Original DESIGN/SIM, not measurements. Equations independently implemented; no branded instrument, physical loudness calibration or hearing test. Air/water approximate speeds follow S16; uniform solid5000m/s is deliberately chosen, not a universal property.",
+        "zh": "原创设计与模拟值，非实测。不对应品牌乐器，不校准真实响度，也不作听力测试。空气与水速度约值来自S16；均匀固体5000米每秒是设计选择，不是普遍物性。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Singapore MOE Science Primary Syllabus2023, cached January2026 edition: printed page80 names sound energy within P6 Standard Energy Conversion; pages15–16 describe fair comparisons and observation skills. These connections do not make all sound propagation equations a separate examinable primary unit.",
+        "zh": "新加坡教育部小学科学大纲2023，缓存的2026年1月版：印刷页80在小六标准课程能量转化中列出声能；页15–16涉及公平比较与观察技能。不据此把全部声音传播方程归为小学独立应考单元。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023_May24.pdf",
+      "note": {
+        "en": "Page evidence inherited from the cached official PDF in the preparation dossier; live endpoint returned robot verification. Not represented as a newly downloaded PDF. No source PDF redistributed.",
+        "zh": "页级证据继承准备dossier缓存的官方PDF；直播链接曾出现机器人验证。不宣称本轮重新下载成功，不分发源PDF。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "OpenStax Physics13.1, Types of Waves: mechanical waves require matter; sound can propagate through gases, liquids and solids. In longitudinal sound, local medium motion lies along propagation; a travelling wave is distinct from matter moving from source to receiver.",
+        "zh": "OpenStax Physics13.1《波的类型》：机械波需要物质，声音可经气体、液体和固体传播。纵向声音的介质局部运动沿传播方向；传播的波不同于物质从声源迁移到接收处。"
+      },
+      "url": "https://openstax.org/books/physics/pages/13-1-types-of-waves",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "OpenStax Physics13.2, Wave Properties: frequency is cycles per second, hertz is its unit, amplitude is maximum displacement from equilibrium, and wavelength is spacing between adjacent equivalent phases.",
+        "zh": "OpenStax Physics13.2《波的性质》：频率为每秒循环次数，以赫兹为单位；振幅为离开平衡位置的最大位移，波长为相邻同相位置之间的距离。"
+      },
+      "url": "https://openstax.org/books/physics/pages/13-2-wave-properties-speed-amplitude-frequency-and-period",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "OpenStax Physics14.1, Speed of Sound, Frequency and Wavelength: sound speed depends on medium and conditions; speed equals frequency multiplied by wavelength. At fixed wave speed increased frequency shortens wavelength. The string example holds other conditions fixed when comparing vibrating lengths.",
+        "zh": "OpenStax Physics14.1《声速、频率与波长》：声速取决于介质及条件，波速等于频率乘以波长；波速固定时，提高频率会缩短波长。弦长比较例子保持其他相关条件相同。"
+      },
+      "url": "https://openstax.org/books/physics/pages/14-1-speed-of-sound-frequency-and-wavelength",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "OpenStax Physics14.2, Sound Intensity and Sound Level: for comparable conditions greater amplitude corresponds to greater intensity; perceived loudness is a hearing response and is not identical to displacement amplitude. Frequency relates to pitch; the bench does not calibrate decibels or loudness ratios.",
+        "zh": "OpenStax Physics14.2《声强与声级》：条件相近时，振幅较大对应声强较大；主观响度是听觉感受，不等于位移振幅。频率与音高有关；实验台不校准分贝或主观响度倍数。"
+      },
+      "url": "https://openstax.org/books/physics/pages/14-2-sound-intensity-and-sound-level",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "OpenStax Physics14.4, Sound Interference and Resonance: resonance gives a stronger response near a natural frequency; air-column length affects wind-instrument pitch; a sounding body helps couple string vibration to air.",
+        "zh": "OpenStax Physics14.4《声音干涉与共振》：驱动频率接近固有频率时响应较强；空气柱有效长度影响管乐器音高；共鸣体帮助把弦的振动传给空气。"
+      },
+      "url": "https://openstax.org/books/physics/pages/14-4-sound-interference-and-resonance",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "WHO, Deafness and hearing loss: Safe listening,6March2026. Reduce sound level, limit loud exposure, move away from loud sources, use suitable hearing protection and take quiet breaks. Persistent ringing or difficulty following conversations warrants professional attention. Enjoying music does not remove exposure risk.",
+        "zh": "世界卫生组织《耳聋与听力损失：安全聆听》，2026年3月6日：调低声音、限制高声暴露、远离巨大声源、适当护耳并到安静处休息。持续耳鸣或难以跟上对话，应寻求专业意见。喜欢音乐不能消除暴露风险。"
+      },
+      "url": "https://www.who.int/news-room/questions-and-answers/item/deafness-and-hearing-loss-safe-listening",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "WHO–ITU, Safe listening devices and systems,2019: adult reference mode80dB for40hours per week and child mode75dB for40hours per week. These are device reference exposure modes, not personalised guarantees or a general headphone timer.",
+        "zh": "WHO–ITU《安全聆听设备与系统》，2019：成人参考模式80分贝、每周40小时；儿童参考模式75分贝、每周40小时。这是设备参考暴露模式，不是个人安全保证或通用耳机倒计时。"
+      },
+      "url": "https://www.who.int/publications/i/item/9789241515276",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "US NIH NIDCD, Noise-Induced Hearing Loss: an intense brief impulse or long/repeated loud exposure can damage hearing. Changes can be temporary or permanent and can become apparent gradually. Favourite music can be harmful when exposure is excessive.",
+        "zh": "美国国立卫生研究院NIDCD《噪音性听力损失》：强烈短暂脉冲，或长时间、反复接触高声，都可能损害听力；变化可能暂时或永久存在，也可能逐渐才被察觉。喜欢的音乐在过度暴露时同样可能有害。"
+      },
+      "url": "https://www.nidcd.nih.gov/health/noise-induced-hearing-loss",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Singapore NEA, Construction Noise Control: permissible construction-noise levels depend on specified averaging intervals, affected-building categories and time periods. These environmental measures are distinct from personal listening reference exposures.",
+        "zh": "新加坡国家环境局《施工噪音管理》：施工噪音限值按指定平均时段、受影响建筑类别与时段区分。这些环境管理指标不同于个人聆听参考暴露。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/pollution-control/noise-pollution/construction-noise-control",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Singapore NEA, Construction Noise frequently asked questions: explains monitoring near noise-sensitive premises, working-time restrictions and specified exceptions. No individual child listening allowance is derived here.",
+        "zh": "新加坡国家环境局《施工噪音常见问题》：说明噪音敏感场所附近的监测、施工时段限制及列明例外。本课不从中推导儿童个人聆听允许量。"
+      },
+      "url": "https://www.nea.gov.sg/our-services/pollution-control/noise-pollution/construction-noise-control/frequently-asked-questions-%28faqs%29",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "NOAA National Ocean Service, How far does sound travel in the ocean: approximate comparison speeds340m/s in air and1500m/s in water; conditions including temperature and pressure affect speed. Values are adopted as teaching approximations.",
+        "zh": "美国NOAA国家海洋局《声音在海洋中能传播多远》：比较约值为空气340米每秒、水1500米每秒；温度、压力等条件影响速度。本课把这组约值选为教学常数。"
+      },
+      "url": "https://oceanservice.noaa.gov/facts/sound.html",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "NOAA National Ocean Service, What is sonar: active sonar emits a sound pulse and detects its reflection. Timing the complete outward and return path can indicate reflector distance when sound speed is known.",
+        "zh": "美国NOAA国家海洋局《什么是声呐》：主动声呐发出声脉冲并探测反射返回；已知声速时，可用完整来回路径的时间推知反射面距离。"
+      },
+      "url": "https://oceanservice.noaa.gov/facts/sonar.html",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Singapore Symphony Orchestra, The Orchestra: lists instrumental sections including strings, winds, timpani and percussion. Used only as an instrument-family example, without claims about current personnel.",
+        "zh": "新加坡交响乐团《乐团》：列出弦乐、管乐、定音鼓与打击乐等分部。这里只作为乐器类别例子，不作现任人员声称。"
+      },
+      "url": "https://www.sso.org.sg/about/singapore-symphony-orchestra/the-orchestra",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Lianhe Zaobao health article title,9April2024, attests Singapore Chinese use of 噪音 and 听力损失. Only title and search-index excerpt were available in preparation; no medical mechanism or numeric advice is derived from it.",
+        "zh": "《联合早报》2024年4月9日健康文章标题，佐证新加坡中文使用“噪音”“听力损失”。准备阶段只取得标题与搜索索引摘录，不从中引申医学机制或数量建议。"
+      },
+      "url": "https://www.zaobao.com.sg/lifestyle/health/story20240409-3270185?ai-allowed=1",
+      "note": {
+        "en": "Preparation evidence only: title/search-index text, direct page unavailable. Terminology attestation only; not a core health source. All rights reserved; no copied article or image.",
+        "zh": "仅继承准备证据：标题与搜索索引文本，直接网页不可读。只作词形佐证，不支撑核心健康结论。保留版权，不复制文章或图片。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Atlas published Eyes and Ears topic and docs/58: provides the hearing-system route and original longitudinal-wave teaching overlay. Sound reuses that model and links back rather than repeating ear anatomy.",
+        "zh": "Atlas已发布《眼睛与耳朵》及docs/58：提供听觉系统路线与原有纵波教学叠图。本主题复用模型并链接，不重复耳部解剖。"
+      },
+      "note": {
+        "en": "Local published content and code read; the internal TopicLinks lead to the hearing explanation. No ear anatomy is reproduced here.",
+        "zh": "已读本地发布内容与代码；正文内部链接指向听觉说明。本主题不复制耳部解剖。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "China Manned Space Agency, Can sound propagate in space,19December2014: Chinese explanatory text attests 声源、介质、真空 and 振动. Used for word forms; core physics also cites OpenStax.",
+        "zh": "中国载人航天工程办公室《在宇宙中声音会传播吗》，2014年12月19日：中文说明中使用声源、介质、真空、振动等词。用于词形参考，核心物理另引OpenStax。"
+      },
+      "url": "https://www.cmse.gov.cn/kpjy/tkkt/tstk/201412/t20141219_37245.html",
+      "note": {
+        "en": "Official/publisher web text rechecked in the build session on29October2026; independently paraphrased. Reference only; no external figures or PDFs redistributed.",
+        "zh": "2026年10月29日施工会话复核官方或出版者网页文本，独立转述。仅作参考，不分发外部插图或PDF。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Hong Kong Education Bureau, English-Chinese Glossary of Terms Commonly Used in the Teaching of Physics in Secondary Schools,2020: word-form reference for amplitude,frequency,hertz,longitudinal wave,loudness,pitch,resonance,wavelength. Simplified Chinese spellings are Atlas editorial choices; pitch follows the existing Atlas 音高, with 音调 given as a synonym.",
+        "zh": "香港教育局《中学物理科常用英汉辞汇》，2020：参考amplitude、frequency、hertz、longitudinal wave、loudness、pitch、resonance、wavelength等词形。简体字形由Atlas编辑采用；pitch沿本站既有用词“音高”，并说明“音调”为同义说法。"
+      },
+      "url": "https://www.edb.gov.hk/attachment/en/curriculum-development/kla/science-edu/ref-and-resources/PhyGlossary_2020.pdf",
+      "note": {
+        "en": "Web text read during build. Screenshot service returned cache miss; local download was incomplete. No claim of visual page inspection, no PDF redistributed. This is neither a MOE Chinese glossary nor evidence of Singapore curricular status.",
+        "zh": "施工时读取网页文本。截图服务cache miss，本地下载不完整；没有声称目视核验原页，也不分发PDF。这不是新加坡教育部中文词表，不用于课程归属。"
+      }
+    }
+  ]
+}
