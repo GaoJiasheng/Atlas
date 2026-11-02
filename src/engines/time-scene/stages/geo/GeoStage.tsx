@@ -35,7 +35,7 @@ export interface GeoStageProps {
 
 export function GeoStage({ store, playhead, model, locale, reconstruction, onReconstruction, onSelectEvent, onSelectCatalogue, onCatalogueLayers, onController, onLocalLand, onDatedLayers }: GeoStageProps) {
   const t = useT();
-  const { slots, topic } = useSceneContext();
+  const { slots, topic, hud } = useSceneContext();
   const leadersSvg = slots.leaders;
   const blocLabelsRef = useRef(topic.blocLabels);
   const basemapRef = useRef(topic.basemap);
@@ -80,6 +80,7 @@ export function GeoStage({ store, playhead, model, locale, reconstruction, onRec
         if (cancelled) return;
         const controller = createGeoController({
           container,
+          hud,
           labelRoot,
           scaleRoot,
           territoryRoot,

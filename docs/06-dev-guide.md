@@ -497,6 +497,16 @@ lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯�
 colors.ts  time-scene.css
 ```
 
+### HUD 自由区取景（TimeScene，2026-11-02，docs/67 §2.4）
+
+所有 TimeScene 地图（历史地图、区域图版、深时重建、月气候 / 现今地理）默认按**自由舞台矩形**取景，没有主题开关。自由矩形只有一个来源：宿主的 `hud.freeStage`（`core/useHudRoom`：所有可见 `data-hud-panel` 之间的最大空矩形，`.atlas-stage` 坐标；overlay 槽量它里面的卡片（按槽裁剪），忽略 perf、隐藏内容；H / 演示时 `.hud-fade` 里的块立即不算，演示块照算）。`lib/hud-framing.ts` 订阅它、换成地图容器坐标并内缩 12 px（`containerFreeRect`），控制器经 `GeoControllerOptions.hud` 拿到宿主 store。结果写在地图容器的 `data-hud-frame="x0,y0,x1,y1"`（测试 / 截图用）。
+
+- **中心**：MapLibre `padding` 只取不对称部分 `{left:max(0,L−R), right:max(0,R−L), top:max(0,T−B), bottom:max(0,B−T)}`，作者镜头的 `center` 落在自由矩形中心；自由矩形居中时 padding 为 0、镜头不变。padding 留在 MapLibre 里，`getCenter()` 仍是"自由区中心的经纬度"，写回语义不变。
+- **zoom**：作者 zoom 以 1920×1080 默认布局的自由矩形 `REF_FREE`（810×919，ww2）为准；自由矩形更小时加 `shift = max(−1.5, log2(min(w/810, h/919)))`，只缩小不放大。**store / URL 里的 `camera.zoom` 是作者单位**：读者拖动 / 滚轮后写回 `zoom = 地图 zoom − shift`，`__atlas.stats().zoom` 是地图实际 zoom，两者在小屏上不相等。
+- **WHOLE AREA / 全图**：`fitCamera()` / `plateCamera()` 用 `fitPadding()`（扣掉地图已有 padding 后两侧对称，剩下自由矩形减 8% 边距 / 0 边距），返回作者单位的 zoom（不低于 `minZoom`）。区域图版的 `maxBounds` 不变，仍把 zoom 夹在整张图版刚好铺满舞台。
+- **重新取景**：宿主每次重新测量（块增删 / 改尺寸、折叠、`.atlas-scene` 属性、`transitionend`、字体就绪、窗口缩放 / 旋转）后 `freeStage` 变了，或地图容器改尺寸、`moveend`，都排一次重新取景（120 ms 合并，等 CSS 过渡走完）。读者自上一次章 / 拍 / 预设 / 深链镜头以来**没动过**地图：把那个镜头按新自由矩形 `easeTo`（0.6 s，`prefers-reduced-motion` 时直接跳），正在飞的镜头被改目标；**动过**（带 `originalEvent` 的 `movestart` 或滚轮）：画面不动，只换 padding（`unproject` 新中心），直到下一个章 / 拍 / 预设。H 隐藏 HUD 时自由区 = 整个画布；演示中只避让演示块。
+- 单测 `tests/time-scene/hud-framing.test.ts`（padding、zoom shift、fit padding、宿主矩形换算、生命周期：跟随宿主矩形、H、演示、合并、读者动过后不抢镜头、写回单位）。
+
 ### 月气候模式（E-MW1–3，docs/50 §4）
 
 `temporalMode: climatology` 是 TimeScene/geo 的显式分支。历史主题缺省 `chronological`，继续使用日期、控制区、playhead 与 Timeline。月份不转换成年份，不经过日期模型。作者最小配置（这些是实际可用 JSON 字段）：

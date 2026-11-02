@@ -1,6 +1,7 @@
 import { installGeographyLayers } from './geographyLayers';
 import { geographyHighlightIds, type GeographyExt } from '../../lib/geography';
 import type { SceneStore } from '../../../core/store';
+import type { HudStore } from '../../../core/controls';
 import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { feature as topoFeature } from 'topojson-client';
@@ -8,6 +9,7 @@ import { withBase, tx } from '../../../../i18n';
 import { readThemeTokens } from '../../../../theme/theme';
 import { sourceIds } from '../../../../content/schema/sources';
 import { isGeoCamera } from '../../../core/camera';
+import { createMapHudFraming } from '../../lib/hud-framing';
 import { metresPerPixel, scaleBar } from '../../lib/geo';
 import { sampleClimate, windGlyphs } from '../../lib/climate';
 import { ClimateLoader } from '../../lib/climateLoader';
@@ -16,7 +18,7 @@ import { coastOverClimate, COAST_OVER_CLIMATE, rainGeometry, rainPaint } from '.
 import { buildGeoStyle, graticule, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, REGION } from './style';
 import type { ClimatologyStageProps, ClimateGeoController, ClimateSnapshot } from './ClimatologyStage';
 
-export function createClimatologyController(options: ClimatologyStageProps & { container: HTMLElement }): ClimateGeoController {
+export function createClimatologyController(options: ClimatologyStageProps & { container: HTMLElement; hud?: HudStore }): ClimateGeoController {
   const { store, topic, data, container } = options,
     definitions = topic.monthlyLayers ?? [],
     period = topic.climatology ?? {periodId:'none',startYear:0,endYear:0,initialMonth:1};
@@ -58,6 +60,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     attributionControl: false,
     renderWorldCopies: false,
   });
+  const hudFraming = createMapHudFraming(map, container, { reducedMotion, hud: options.hud });
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('aria-hidden', 'true');
   Object.assign(svg.style, {
@@ -350,23 +353,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     if (state.transition.id !== appliedTransition && isGeoCamera(state.camera)) {
       appliedTransition = state.transition.id;
       userGesture = false;
-      const c = state.camera;
+      // Framed in the free stage rect (lib/hud-framing.ts).
+      const target = hudFraming.target(state.camera);
       map.stop();
-      if (state.transition.instant || reducedMotion)
-        map.jumpTo({
-          center: c.center,
-          zoom: c.zoom,
-          bearing: c.bearing ?? 0,
-          pitch: c.pitch ?? 0,
-        });
-      else
-        map.flyTo({
-          center: c.center,
-          zoom: c.zoom,
-          bearing: c.bearing ?? 0,
-          pitch: c.pitch ?? 0,
-          duration: 1600,
-        });
+      if (state.transition.instant || reducedMotion) map.jumpTo(target);
+      else map.flyTo({ ...target, duration: 1600 });
     }
     requestRender();
   }
@@ -438,7 +429,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     const c = map.getCenter();
     store.getState().setCamera({
       center: [c.lng, c.lat],
-      zoom: map.getZoom(),
+      zoom: hudFraming.storedZoom(map.getZoom()),
       bearing: map.getBearing(),
       pitch: map.getPitch(),
     });
@@ -556,6 +547,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     setReference() {},
     setPresentation(on) {
       presentation = on;
+      hudFraming.setPresentation(on);
     },
     refreshLabels: requestRender,
     fitCamera() {
@@ -574,10 +566,11 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
           [Math.min(...xs), Math.min(...ys)],
           [Math.max(...xs), Math.max(...ys)],
         ],
-        { padding: 70 },
+        // All the data inside the free stage rect (with a margin), not under the HUD blocks.
+        { padding: hudFraming.fitPadding() },
       );
       if (!c?.center || Array.isArray(c.center) || !('lng' in c.center)) return null;
-      return { center: [c.center.lng, c.center.lat], zoom: c.zoom ?? 3.35 };
+      return { center: [c.center.lng, c.center.lat], zoom: hudFraming.storedZoom(Math.max(map.getMinZoom(), c.zoom ?? map.getZoom())) };
     },
     plateCamera: () => null,
     stats: () => ({
@@ -591,6 +584,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
       unsubscribe();
       observer.disconnect();
       resizeObserver.disconnect();
+      hudFraming.destroy();
       container.removeEventListener('pointerdown', onPointerDown, true);
       canvas.removeEventListener('focus', onCanvasFocus);
       leaders.destroy();

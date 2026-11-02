@@ -52,7 +52,7 @@ export interface ClimatologyStageProps {
   onSnapshot?(snapshot: ClimateSnapshot): void;
 }
 export function ClimatologyStage(props: ClimatologyStageProps) {
-  const { slots } = useSceneContext();
+  const { slots, hud } = useSceneContext();
   const leadersRef = useRef(slots.leaders);
   leadersRef.current = slots.leaders;
   const root = useRef<HTMLDivElement>(null),
@@ -66,6 +66,7 @@ export function ClimatologyStage(props: ClimatologyStageProps) {
       controller.current = createClimatologyController({
         ...latest.current,
         container: root.current,
+        hud,
         onSelectSite: (id) => latest.current.onSelectSite(id),
         onSelectCell: (x, y) => latest.current.onSelectCell(x, y),
         onSnapshot: (s) => latest.current.onSnapshot?.(s),

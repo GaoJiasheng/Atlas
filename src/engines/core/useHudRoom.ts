@@ -137,12 +137,26 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       const stage = box('.atlas-stage');
       let freeStage: FreeStage | null = null;
       if (stage) {
+        // H / presentation: the faded HUD stops counting at once, not when its fade ends.
+        const hudOff = scene.dataset.hud === 'off';
         const blocks = Array.from(scene.querySelectorAll<HTMLElement>('[data-hud-panel]')).filter(
-          (e) => e.dataset.hudPanel !== 'perf' && visible(e),
+          (e) => e.dataset.hudPanel !== 'perf' && !(hudOff && e.closest('.hud-fade')) && visible(e),
         );
-        const rects = blocks.map((e) => {
+        const local = (r: DOMRect | FreeStage): FreeStage =>
+          'x0' in r
+            ? { x0: r.x0 - stage.left, y0: r.y0 - stage.top, x1: r.x1 - stage.left, y1: r.y1 - stage.top }
+            : { x0: r.left - stage.left, y0: r.top - stage.top, x1: r.right - stage.left, y1: r.bottom - stage.top };
+        const rects = blocks.flatMap((e) => {
           const r = e.getBoundingClientRect();
-          return { x0: r.left - stage.left, y0: r.top - stage.top, x1: r.right - stage.left, y1: r.bottom - stage.top };
+          if (e.dataset.hudPanel !== 'overlay') return [local(r)];
+          // The overlay slot is a scrolling column: its cards (clipped to the column) are the obstacles, not its full height.
+          return Array.from(e.children)
+            .filter(visible)
+            .map((c) => {
+              const b = c.getBoundingClientRect();
+              return local({ x0: Math.max(b.left, r.left), y0: Math.max(b.top, r.top), x1: Math.min(b.right, r.right), y1: Math.min(b.bottom, r.bottom) });
+            })
+            .filter((b) => b.x1 > b.x0 && b.y1 > b.y0);
         });
         freeStage = measureFreeStage(stage.width, stage.height, rects);
       }
@@ -154,7 +168,7 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
         hud.setState({ ...patch, room, freeStage });
       const current = new Set<Element>([
         scene,
-        ...scene.querySelectorAll('[data-hud-panel],.atlas-hud__left,.atlas-hud__right,.atlas-hud__dock'),
+        ...scene.querySelectorAll('[data-hud-panel],.atlas-hud__left,.atlas-hud__right,.atlas-hud__dock,.atlas-stage,.atlas-stage__overlay > *'),
       ]);
       for (const el of observed)
         if (!current.has(el)) {
