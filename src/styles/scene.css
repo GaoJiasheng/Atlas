@@ -3316,3 +3316,8 @@
 }
 
 .atlas-panels__bar { flex-wrap: wrap; height: auto; white-space: normal; }
+.atlas-stage-only[aria-pressed="true"] i, .atlas-guide-toggle[aria-expanded="true"] i { color: color-mix(in srgb, var(--ink-on) 72%, transparent); }
+/* Phones have no keyboard: Stage / Help keep their words, not the key hints. */
+@media (max-width: 759px) {
+  .atlas-stage-only i, .atlas-guide-toggle i { display: none; }
+}

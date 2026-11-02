@@ -223,8 +223,14 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           </div>
         )}
         <GlobalToggles locale={locale} path={path} variant="hud">
-          <button type="button" className="hud-btn atlas-stage-only" data-stage-only-toggle="" aria-pressed={stageOnly} aria-label={tr('hud.stageOnly')} title={`${tr('hud.stageOnly')} (Z)`} onClick={() => actions.setStageOnly(!stageOnly)}>Z</button>
-          <button type="button" className="hud-btn atlas-guide-toggle" aria-label={tr('guide.title')} title={`${tr('guide.title')} (?)`} aria-expanded={guide} aria-controls="atlas-controls-guide" onClick={() => actions.setGuide(!guide)}>?</button>
+          <button type="button" className="hud-btn atlas-stage-only" data-stage-only-toggle="" aria-pressed={stageOnly} aria-label={tr('hud.stageOnly')} title={`${tr('hud.stageOnly')} (Z)`} onClick={() => actions.setStageOnly(!stageOnly)}>
+            {tr('hud.stageShort')}
+            <i aria-hidden="true">Z</i>
+          </button>
+          <button type="button" className="hud-btn atlas-guide-toggle" aria-label={tr('guide.title')} title={`${tr('guide.title')} (?)`} aria-expanded={guide} aria-controls="atlas-controls-guide" onClick={() => actions.setGuide(!guide)}>
+            {tr('guide.short')}
+            <i aria-hidden="true">?</i>
+          </button>
         </GlobalToggles>
       </div>
       <div className="atlas-topbar__sub">
