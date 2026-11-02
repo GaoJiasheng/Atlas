@@ -124,8 +124,8 @@
 
 背景`state.note`：
 
-- EN: “The large map shows reconstructed ancient land. Its sample age stays visible separately from the selected time. The inset shows modern find locations. Fossil dots belong to selected published collections, not a dinosaur census. Regional cards may describe finds of different ages.” [F004,F036,F039,F031–F034]
-- ZH：“大图显示复原的远古陆地，地图样本年龄与所选年代分别标出。小图显示今天的发现地点。化石点来自所选文献采集记录，不是恐龙普查。区域卡中的发现可能来自不同年代。”[同上]
+- EN: “Compare the ages beside the large map. Open a dot or card in the small map to read about the evidence.” [F004,F036,F039,F031–F034]
+- ZH：“对照大图旁的年代。打开小图中的点或卡片，阅读相关证据。”[同上]
 
 ### 2.2 每章提纲、索引与逐拍字幕
 
@@ -133,118 +133,118 @@
 
 #### 00 `background` · 读懂深时
 
-- **summary EN / ZH**：An ancient map and a modern find map answer different questions. / 古地图和今天的发现地点图，回答不同的问题。
+- **summary EN / ZH**：Use the ancient map for past land, and the small map for today’s find locations. / 用古地图看过去的陆地，用小图看今天的发现位置。
 - **正文**：Ma表示百万年前，较大值更老；中生代含不同时期[F001]。古地理与现代发现图坐标不可混贴[F036,F039]。复原不是照片，点不代表全部动物[F004]。
 - **细看**：地图年龄与事件年龄分开读[F001,DE003]；身体证据与活动痕迹[F003,F014]。
 - **index**：`site-singapore-modern`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b00-1` | 250 / world / none | — | 250 million years ago: this land pattern is a reconstruction, not the outline of today’s continents. | 2.5 亿年前：这片陆地来自古地理复原，不是今天大陆的轮廓。 | F039 |
-| `b00-2` | 250 / world / modern-world | — | 250 million years ago: this map sample is in the Triassic. The Mesozoic began earlier, about 252 million years ago. | 2.5 亿年前：这张地图样本位于三叠纪。中生代开始得更早，约在 2.52 亿年前。 | F001,F039 |
-| `b00-3` | 250 / world / modern-world | site-singapore-modern | 250 million years ago: The small map uses today’s land. Singapore is a modern reference point, not a dinosaur fossil find. | 2.5 亿年前：小图使用今天的陆地。新加坡是现代参照地点，不是这里标出的恐龙化石发现地。 | F041,DE004 |
+| `b00-1` | 250 / world / none | — | 250 million years ago: scientists have reconstructed this ancient land. Its shapes differ from today’s continents. | 2.5 亿年前：科学家复原了这片远古陆地，轮廓与今天的大陆不同。 | F039 |
+| `b00-2` | 250 / world / modern-world | — | 250 million years ago: this map shows a time within the Triassic. The Mesozoic began earlier, about 252 million years ago. | 2.5 亿年前：地图显示三叠纪之内的一个年代。中生代开始得更早，约在 2.52 亿年前。 | F001,F039 |
+| `b00-3` | 250 / world / modern-world | site-singapore-modern | 250 million years ago: the small map uses today’s land. Singapore helps you locate the region; its marker is not a dinosaur find. | 2.5 亿年前：小图显示今天的陆地。新加坡帮助你找到这个地区，标记并不表示恐龙发现地。 | F041,DE004 |
 
 #### 01 `triassic-world` · 三叠纪：相连的陆地
 
-- **summary EN / ZH**：Read the land before adding dinosaur evidence. / 先读陆地，再加入恐龙证据。
+- **summary EN / ZH**：Explore connected land and the earliest well-established dinosaur records. / 看看相连的陆地，以及最早确立的恐龙记录。
 - **正文**：250Ma不是三叠纪起点[F001]；约230Ma已有确立恐龙记录[F051]。盘古大陆的概括来自USGS，具体轮廓来自模型[DE002,F039]。相连陆地与所选点分布不能替代完整栖息地[F004,F036]。
 - **细看**：未扰动、未倒转沉积序列下老上新[F009]，用地层图连姊妹layers-in-order；复原与概括的差别[F039]。
 - **index**：`site-singapore-modern`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b01-1` | 250 / world / none | — | 250 million years ago: the map is in the Triassic. Do not fill the whole period with dinosaur symbols. | 2.5 亿年前：地图位于三叠纪。不能把整个时期都填上恐龙符号。 | F001,F051 |
-| `b01-2` | 250 / pangaea-context / none | — | 250 million years ago: The connected land pattern belongs to Pangaea. Coastlines here are reconstructed from a palaeoelevation model. | 2.5 亿年前：相连的陆地属于盘古大陆；这里的海岸线从古地形模型推导。 | DE002,F039 |
-| `b01-3` | 230 / world / modern-world | — | 230 million years ago: well-established dinosaurs appear in the Late Triassic record. The inset marks where records were found on today’s Earth. | 2.3 亿年前：晚三叠世已有确立的恐龙记录。小图标的是今天地球上的发现地点。 | F051,F036 |
-| `b01-4` | 230 / world / modern-sea | — | 230 million years ago: A fossil point is evidence of a find. Empty areas on this map do not prove that dinosaurs were absent. | 2.3 亿年前：一个化石点表示一条发现记录。地图上的空白，不能证明那里没有恐龙。 | F004,F036 |
+| `b01-1` | 250 / world / none | — | 250 million years ago: this map shows the Triassic, before the dinosaur records introduced later in this chapter. | 2.5 亿年前：地图显示三叠纪，比本章稍后介绍的恐龙记录更早。 | F001,F051 |
+| `b01-2` | 250 / pangaea-context / none | — | 250 million years ago: these connected lands belonged to Pangaea. The coastlines are drawn from a model of ancient ground heights. | 2.5 亿年前：这些相连的陆地属于盘古大陆。海岸线根据古地面高度模型绘出。 | DE002,F039 |
+| `b01-3` | 230 / world / modern-world | — | 230 million years ago: well-established dinosaur fossils come from the Late Triassic. The small map shows where they were found on today’s Earth. | 2.3 亿年前：晚三叠世已有确立的恐龙化石记录。小图显示它们在今天地球上的发现位置。 | F051,F036 |
+| `b01-4` | 230 / world / modern-sea | — | 230 million years ago: each fossil dot records a find. A blank area does not prove that dinosaurs were absent. | 2.3 亿年前：每个化石点表示发现记录。空白不能证明那里没有恐龙。 | F004,F036 |
 
 #### 02 `jurassic-world` · 侏罗纪：逐渐分开的世界
 
-- **summary EN / ZH**：Compare reconstructed frames as land separates. / 对照复原样本，看陆地逐渐分开。
+- **summary EN / ZH**：Compare the land as Pangaea breaks apart. / 对照盘古大陆分裂过程中的陆地。
 - **正文**：侏罗纪界线201.4–143.1Ma，200Ma只是样本[F001]。比较200/170/150Ma的长期变化[DE002,F039,DE003]。新加坡展示的蜥脚类材料来自怀俄明州侏罗纪莫里森组，不能从150Ma地图为单具标本指定精确年龄[F026–F028]。
 - **细看**：模型地形不等于现代海岸[F039]；展出地与发现地[F027]，连singapore-skeletons。
 - **index**：`card-museum-origin`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b02-1` | 200 / world / none | — | 200 million years ago: this is a Jurassic map sample. The period boundary is older, at 201.4 million years ago in the cited chart. | 2 亿年前：这是侏罗纪内的一张地图。所引年代表的时期界线更早，为 2.014 亿年前。 | F001,DE003 |
-| `b02-2` | 170 / world / none | — | 170 million years ago: compare this reconstruction with the earlier frame. Pangaea’s breakup took place over millions of years. | 1.7 亿年前：对照前一张复原图。盘古大陆的分裂经历了漫长的地质时间。 | DE002,F039 |
-| `b02-3` | 150 / world / modern-world | — | 150 million years ago: the large map shows reconstructed land, while the inset keeps fossil finds in modern coordinates. | 1.5 亿年前：大图显示复原陆地，小图仍按现代经纬度显示化石发现地。 | F036,F039 |
-| `b02-4` | 150 / world / modern-sea | card-museum-origin | 150 million years ago: The museum in Singapore displays Jurassic sauropods found in Wyoming. Their display location is different from their place of discovery. | 1.5 亿年前：新加坡博物馆展示的侏罗纪蜥脚类化石发现于怀俄明州。展出地点与发现地点不同。 | F026,F027 |
+| `b02-1` | 200 / world / none | — | 200 million years ago: this map shows a time within the Jurassic. The chart puts the period’s beginning earlier, at 201.4 million years ago. | 2 亿年前：地图显示侏罗纪之内的一个年代。年代表把侏罗纪起点放在更早的 2.014 亿年前。 | F001,DE003 |
+| `b02-2` | 170 / world / none | — | 170 million years ago: compare this land with the earlier map. Pangaea broke apart over millions of years. | 1.7 亿年前：对照前一张地图中的陆地。盘古大陆经历数百万年的分裂过程。 | DE002,F039 |
+| `b02-3` | 150 / world / modern-world | — | 150 million years ago: the large map shows reconstructed ancient land. The small map keeps fossil dots at today’s find locations. | 1.5 亿年前：大图显示复原的古陆地，小图的化石点仍在今天的发现位置。 | F036,F039 |
+| `b02-4` | 150 / world / modern-sea | card-museum-origin | 150 million years ago: Singapore’s museum displays Jurassic sauropod fossils found in Wyoming. The museum and discovery site are different places. | 1.5 亿年前：新加坡博物馆展示的侏罗纪蜥脚类化石发现于怀俄明州。博物馆与发现地是两个地点。 | F026,F027 |
 
 #### 03 `cretaceous-world` · 白垩纪：变化的水陆
 
-- **summary EN / ZH**：Compare map samples and the independent ages of finds. / 对照地图样本与发现材料各自的年代。
+- **summary EN / ZH**：Compare changing land and the ages of fossil finds. / 比较陆地变化与化石发现的年代。
 - **正文**：白垩纪143.1–66Ma[F001]；130/100Ma是两个复原样本[DE003]。泰、老材料来自早白垩世，区域卡保留原论文学段，不把130Ma地图当泰国标本测年[F031,F032]。PBDB年龄界限保留，不以中点作死亡日期[F036,DE005]。
 - **细看**：地质界线数值会修订[F002]；1°网格不等于古岸线准确度[F039]。
 - **index**：`card-thailand-find`, `card-laos-find`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b03-1` | 130 / world / none | — | 130 million years ago: this sample lies in the Cretaceous. The period began earlier, around 143 million years ago on the cited chart. | 1.3 亿年前：这张样本图位于白垩纪。所引年代表中，白垩纪约始于 1.43 亿年前。 | F001,DE003 |
-| `b03-2` | 130 / world / modern-sea | card-thailand-find | 130 million years ago: the inset’s Thailand card describes an Early Cretaceous find. Its age comes from the paper, independently of this map sample. | 1.3 亿年前：小图的泰国卡说明早白垩世的发现。材料年代来自论文，与这张地图的样本年龄分别读取。 | F031,DE003 |
-| `b03-3` | 100 / world / none | — | 100 million years ago: compare reconstructed land and water with the 130-million-year sample. These are separate model frames. | 1 亿年前：把复原的水陆分布与 1.3 亿年前样本对照。它们是不同的模型帧。 | F039,DE003 |
-| `b03-4` | 100 / world / modern-world | — | 100 million years ago: A record with a broad age range may overlap several map samples. That does not show one animal living through them all. | 1 亿年前：年代范围较宽的记录，可能与几张地图样本重叠。这不表示一只动物活过了这些时段。 | F036,DE005 |
+| `b03-1` | 130 / world / none | — | 130 million years ago: this map falls within the Cretaceous. The chart places its beginning earlier, about 143 million years ago. | 1.3 亿年前：地图显示白垩纪之内的一个年代。年代表把起点放在更早的约 1.43 亿年前。 | F001,DE003 |
+| `b03-2` | 130 / world / modern-sea | card-thailand-find | 130 million years ago: open the Thailand card in the small map. Its Early Cretaceous age comes from the research paper, rather than the background map. | 1.3 亿年前：打开小图的泰国卡。材料的早白垩世年代来自研究论文，不是背景地图。 | F031,DE003 |
+| `b03-3` | 100 / world / none | — | 100 million years ago: compare this land and water with the map at 130 million years ago. Each map is a separate model result. | 1 亿年前：与 1.3 亿年前地图对照水陆格局。每张图都是模型分别算出的结果。 | F039,DE003 |
+| `b03-4` | 100 / world / modern-world | — | 100 million years ago: a fossil’s wide age range can overlap several map samples. It does not mean one animal lived through all those ages. | 1 亿年前：化石较宽的年龄范围可能与几张地图相交，不表示一只动物活过了所有这些年代。 | F036,DE005 |
 
 #### 04 `fossil-atlas` · 发现记录不是动物普查
 
-- **summary EN / ZH**：A dot opens collections, occurrences and sources. / 一个点打开采集、记录与来源。
+- **summary EN / ZH**：Open a dot to read its fossil records and sources. / 打开一个点，阅读化石记录和来源。
 - **正文**：本题从PBDB取非鸟恐龙中生代有界快照[DE005,DE006]。一个collection可含多条occurrence，地图聚合而详情逐条保留[F036]。时间窗交集不提供精确死亡日期[DE005,DS02]。保存与研究及选择限制使密度、空白不能作数量比较[F004,F036]。
 - **细看**：记录例collection24178的三条年龄区间[DE005]；快照的选择方式与CC0声明[DE005,DE006]。
 - **index**：`pbdb-col-24178`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b04-1` | 100 / world / modern-world | — | 100 million years ago: the inset filters records whose published age ranges overlap the selected window. The dots use modern find coordinates. | 1 亿年前：小图筛出发表年龄范围与所选时间窗重叠的记录，点位采用现代发现坐标。 | F036,DE005 |
-| `b04-2` | 100 / world / modern-world | pbdb-col-24178 | 100 million years ago: Several fossil records can share one collection location. Open a marker to see the records and their references. | 1 亿年前：多条化石记录可能共用一个采集地点。打开标记，可以查看记录和文献。 | DE005 |
-| `b04-3` | 70 / world / modern-world | — | 70 million years ago: the filter changes with age. A dot appears because its age range overlaps the window, not because a death date is known. | 7000 万年前：筛选随年代改变。点出现是因为年龄范围重叠，不是因为知道了死亡日期。 | DE005 |
-| `b04-4` | 70 / world / modern-sea | — | 70 million years ago: Dense clusters show recorded finds. Preservation and research affect where fossils enter the database. | 7000 万年前：密集的点群表示已记录的发现。保存条件和研究工作，都会影响哪些化石进入数据库。 | F004,F036 |
-| `b04-5` | 70 / world / modern-mexico | — | 70 million years ago: A blank patch is a gap in this selected record. It is not a measured boundary of dinosaur habitat. | 7000 万年前：一片空白只是所选记录中的空缺，不是测量得到的恐龙栖息地边界。 | F004,F036 |
+| `b04-1` | 100 / world / modern-world | — | 100 million years ago: the small map shows records whose published ages overlap the browsing window. Dots mark today’s find locations. | 1 亿年前：小图显示发表年龄范围与浏览窗相交的记录，点标出今天的发现位置。 | F036,DE005 |
+| `b04-2` | 100 / world / modern-world | pbdb-col-24178 | 100 million years ago: several fossil records can share a collection location. Open a dot to read the separate records and their sources. | 1 亿年前：多条化石记录可以共用一个采集地点。打开点，逐条阅读记录和来源。 | DE005 |
+| `b04-3` | 70 / world / modern-world | — | 70 million years ago: changing the age changes the visible records. A dot appears when its age range overlaps the window; its exact death date may be unknown. | 7000 万年前：改变年代，显示的记录也会改变。年龄范围与窗口相交时，点便出现，但准确死亡日期可能仍未知。 | DE005 |
+| `b04-4` | 70 / world / modern-sea | — | 70 million years ago: clusters show recorded finds. Preservation and research affect which fossils reach the database. | 7000 万年前：点群显示已记录的发现。保存条件和研究工作影响哪些化石能进入数据库。 | F004,F036 |
+| `b04-5` | 70 / world / modern-mexico | — | 70 million years ago: a blank patch has no records in this selection. It does not mark a measured edge of dinosaur habitat. | 7000 万年前：空白表示这里没有本题选取的记录，并不是测量得到的恐龙栖息地边界。 | F004,F036 |
 
 #### 05 `southeast-asian-finds` · 东南亚的证据
 
-- **summary EN / ZH**：Regional finds preserve different pieces of evidence. / 区域发现留下不同的证据片段。
+- **summary EN / ZH**：Explore what scientists found in different parts of the region. / 看看科学家在这个地区的不同地方找到了什么。
 - **正文**：主图70Ma仅为叙事背景，小图切all-mesozoic，始终标不同年代[F031–F034]。泰国是Sirindhorna材料，老挝是Ichthyovenator部分头后骨骼；彭亨牙齿只用地区卡[F031–F034]。新加坡定位与美国来源馆藏分开[F027,DE004]。
 - **细看**：区域卡不冒充某个PBDB记录；彭亨位置保护[F034]；局部骨、牙证据连rebuilding-evidence[F014]。
 - **index**：`site-singapore-modern`, `card-thailand-find`, `card-laos-find`, `card-pahang-find`, `card-museum-origin`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b05-1` | 70 / world / modern-sea-all | site-singapore-modern | Background map: 70 million years ago; modern inset: The inset switches to regional evidence from across the Mesozoic. Singapore is today’s reference point; these finds are not all the same age. | 背景地图为7000 万年前；现代小图：小图切换为跨中生代的区域证据。新加坡是今天的参照地点；这些发现并非都属于同一年代。 | F031,F032,F033,DE004 |
-| `b05-2` | 70 / world / modern-sea-all | card-thailand-find | Background map: 70 million years ago; modern inset: In northeastern Thailand, Sirindhorna was described from the Early Cretaceous Khok Kruat Formation in Nakhon Ratchasima Province. | 背景地图为7000 万年前；现代小图：在泰国东北部，诗琳通龙的描述材料来自呵叻府早白垩世的 Khok Kruat 组。 | F031 |
-| `b05-3` | 70 / world / modern-sea-all | card-laos-find | Background map: 70 million years ago; modern inset: Laos preserves Early Cretaceous Ichthyovenator remains. The original description was based on parts of the body, not a complete skeleton. | 背景地图为7000 万年前；现代小图：老挝保存了早白垩世鱼猎龙的遗骸。最初描述依据身体的一部分，并非完整骨架。 | F032 |
-| `b05-4` | 70 / world / modern-sea-all | card-pahang-find | Background map: 70 million years ago; modern inset: Pahang, Malaysia, yielded dinosaur teeth. The site was kept confidential for protection, so this card identifies only the region. | 背景地图为7000 万年前；现代小图：马来西亚彭亨发现了恐龙牙齿。发现地点曾为保护而保密，因此卡片只说明区域。 | F033,F034 |
-| `b05-5` | 70 / world / modern-sea-all | card-museum-origin | Background map: 70 million years ago; modern inset: Singapore’s museum displays sauropod fossils found in the United States. A museum location is not a fossil excavation site. | 背景地图为7000 万年前；现代小图：新加坡博物馆展示的蜥脚类化石发现于美国。博物馆的位置，不等于化石挖掘地点。 | F026,F027 |
+| `b05-1` | 70 / world / modern-sea-all | site-singapore-modern | Main map: 70 million years ago. Today’s small map shows Mesozoic finds of different ages. Singapore helps you locate the region. | 大图：7000 万年前。今天的小图显示中生代不同年代的发现，新加坡帮助你找到这个地区。 | F031,F032,F033,DE004 |
+| `b05-2` | 70 / world / modern-sea-all | card-thailand-find | Main map: 70 million years ago. Today’s small map: Sirindhorna came from the Early Cretaceous Khok Kruat Formation in Nakhon Ratchasima Province, northeastern Thailand. | 大图：7000 万年前。今天的小图：泰国东北部的诗琳通龙，来自呵叻府早白垩世 Khok Kruat 组。 | F031 |
+| `b05-3` | 70 / world / modern-sea-all | card-laos-find | Main map: 70 million years ago. Today’s small map: Early Cretaceous Ichthyovenator from Laos was described from part of its body, rather than a complete skeleton. | 大图：7000 万年前。今天的小图：老挝早白垩世的鱼猎龙，根据部分身体材料描述，并没有完整骨架。 | F032 |
+| `b05-4` | 70 / world / modern-sea-all | card-pahang-find | Main map: 70 million years ago. Today’s small map: dinosaur teeth were found in Pahang, Malaysia. The protected site is confidential, so the card names only the region. | 大图：7000 万年前。今天的小图：马来西亚彭亨发现了恐龙牙齿。地点为保护而保密，卡片只说明地区。 | F033,F034 |
+| `b05-5` | 70 / world / modern-sea-all | card-museum-origin | Main map: 70 million years ago. Today’s small map: Singapore’s museum displays sauropod fossils found in the United States. The museum is not their dig site. | 大图：7000 万年前。今天的小图：新加坡博物馆展示的蜥脚类化石发现于美国。博物馆不是它们的挖掘地点。 | F026,F027 |
 
 #### 06 `impact-boundary` · 6600万年前：撞击
 
-- **summary EN / ZH**：Separate event age, map age and evidence. / 分开事件年代、地图年代与证据。
+- **summary EN / ZH**：Use the crater, rock layers and fossils to explore the extinction. / 用陨石坑、岩层和化石探索这次灭绝。
 - **正文**：66Ma事件配70Ma样本[F019,DE003]；现代坑址取LPI坐标，坑径与撞击体尺寸取S13而非旧LPI数值[F021,DE001]。全球喷出物与年代证据支持撞击触发[F020]。非鸟恐龙灭绝，鸟类支系存活[F017,F019]。
 - **细看**：模型显示撞击冬天可破坏栖息地[F022]，不同于实测历史气候；德干年代、气体与喷发岩量的关系仍要分别研究[F023,F050]。
 - **index**：`site-chicxulub-modern`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b06-1` | 70 / world / none | — | 70 million years ago: this is the last older land sample before the impact in our selected map sequence. | 7000 万年前：在所选地图序列中，这是撞击之前最后一张较老的陆地图。 | DE003 |
-| `b06-2` | 66 / world / modern-mexico | site-chicxulub-modern | 66 million years ago: the impact age is shown separately. The large map remains the 70-million-year reconstruction; the inset locates the crater in modern Mexico. | 6600 万年前：事件年代单独显示。大图仍是 7000 万年前复原；小图标出今天墨西哥的坑址。 | F019,F021,DE001,DE003 |
-| `b06-3` | 66 / world / modern-world | site-chicxulub-modern | 66 million years ago: The asteroid was roughly 10 kilometres across. The crater is roughly 180 to 200 kilometres across; this locator dot is not its outline. | 6600 万年前：小行星直径约 10 公里，陨石坑直径约 180 至 200 公里。这个定位点不是坑的轮廓。 | F021 |
-| `b06-4` | 66 / world / modern-mexico | site-chicxulub-modern | 66 million years ago: A global ejecta layer and its timing support the impact as the extinction trigger. Deccan volcanism also overlapped this interval. | 6600 万年前：全球喷出物层及其年代，支持撞击是灭绝的触发因素。德干火山活动也与这段时期重叠。 | F020,F023 |
-| `b06-5` | 66 / world / modern-world | — | 66 million years ago: All non-avian dinosaurs disappeared in the end-Cretaceous extinction. Some bird lineages survived, so not all dinosaurs became extinct. | 6600 万年前：白垩纪末灭绝中，所有非鸟类恐龙消失；部分鸟类谱系存活，因此并非所有恐龙都灭绝了。 | F017,F019 |
+| `b06-1` | 70 / world / none | — | 70 million years ago: this is our last map sample before the impact. | 7000 万年前：这是本题撞击之前最后一张地图样本。 | DE003 |
+| `b06-2` | 66 / world / modern-mexico | site-chicxulub-modern | 66 million years ago: this is the impact age. The large map still shows 70 million years ago; the small map locates the crater in today’s Mexico. | 6600 万年前：这是撞击年代。大图仍显示 7000 万年前，小图在今天墨西哥的位置标出陨石坑。 | F019,F021,DE001,DE003 |
+| `b06-3` | 66 / world / modern-world | site-chicxulub-modern | 66 million years ago: the asteroid was about 10 kilometres across. The crater was about 180 to 200 kilometres across. The dot marks its location, not its outline. | 6600 万年前：小行星直径约 10 公里，陨石坑直径约 180 至 200 公里。点只标位置，并不画出坑的轮廓。 | F021 |
+| `b06-4` | 66 / world / modern-mexico | site-chicxulub-modern | 66 million years ago: material thrown out by the impact forms a worldwide layer. Its age supports the impact as the extinction trigger. Deccan volcanoes were also active around this time. | 6600 万年前：撞击抛出的材料形成全球相关地层。它的年代支持撞击触发灭绝。德干火山也在这一时段活动。 | F020,F023 |
+| `b06-5` | 66 / world / modern-world | — | 66 million years ago: all dinosaurs other than birds died out at the end of the Cretaceous. Some bird lineages survived. | 6600 万年前：白垩纪结束时，鸟类以外的恐龙全部灭绝，部分鸟类谱系存活下来。 | F017,F019 |
 
 #### 07 `earth-today` · 今天的地球：从新加坡回望
 
-- **summary EN / ZH**：Distinguish today, model samples and museum locations. / 分清今天、模型样本与展出地点。
+- **summary EN / ZH**：Connect today’s maps, museum fossils and living birds. / 把今天的地图、馆藏化石与活鸟联系起来。
 - **正文**：65Ma在事件之后1Ma，不能改称66Ma[DE003,DS02]。0Ma主图仍为PALEOMAP，小图另用Natural Earth[F039,F041]。新加坡参照是cartographic label anchor，非馆址或挖掘点[DE004]。馆藏与活鸟提供不同的证据入口[F017,F027]。
 - **细看**：为何65到0之间不冒充连续运动[DE003]；连singapore-skeletons与birds-are-dinosaurs。
 - **index**：`site-singapore-modern`, `card-museum-origin`。
 
 | 拍 id | Ma / 主镜头 / 小图 | 高亮 | Caption EN | 字幕 ZH | 事实 |
 |---|---|---|---|---|---|
-| `b07-1` | 65 / world / none | — | 65 million years ago: this map sample is one million years younger than the 66-million-year event. It is not an exact impact map. | 6500 万年前：这张地图比 6600 万年前事件晚 100 万年，并不是撞击瞬间的地图。 | F019,DE003 |
-| `b07-2` | 65 / world / modern-world | — | 65 million years ago: The fossil dots remain on today’s inset. None have been moved into this ancient land pattern. | 6500 万年前：化石点仍在现代小图上；没有把它们直接移到这片远古陆地。 | F036,F039 |
-| `b07-3` | 0 / world / modern-sea | site-singapore-modern | Today: the large map shows the model’s zero-million-year sample. The modern inset uses Natural Earth land and its Singapore locator. | 今天：大图显示模型的零百万年样本。现代小图使用 Natural Earth 陆地及其新加坡定位点。 | F039,F041,DE003,DE004 |
-| `b07-4` | 0 / singapore / modern-sea | card-museum-origin | Today: In Singapore, a museum visit connects us to Jurassic fossils discovered in Wyoming. A display and a discovery tell different location stories. | 今天：在新加坡参观博物馆，可以认识发现于怀俄明州的侏罗纪化石。展出地点与发现地点，讲的是不同的位置故事。 | F026,F027 |
-| `b07-5` | 0 / singapore / modern-sea | site-singapore-modern | Today: Living birds belong within dinosaurs. Continue to the skeleton topic to see the anatomical evidence behind that relationship. | 今天：现生鸟类属于恐龙。前往骨骼主题，继续看这种亲缘关系的解剖证据。 | F017 |
+| `b07-1` | 65 / world / none | — | 65 million years ago: this map is one million years younger than the 66-million-year event. It shows a later time, rather than the moment of impact. | 6500 万年前：地图比 6600 万年前的事件年轻 100 万年，显示之后的年代，并非撞击瞬间。 | F019,DE003 |
+| `b07-2` | 65 / world / modern-world | — | 65 million years ago: fossil dots stay at today’s find locations in the small map. They have not been moved onto this ancient land. | 6500 万年前：化石点仍留在小图中今天的发现位置，没有移到这片古陆地上。 | F036,F039 |
+| `b07-3` | 0 / world / modern-sea | site-singapore-modern | Today: the large map shows the model’s zero-million-year sample. The small map uses Natural Earth land and its Singapore marker. | 今天：大图显示模型的零百万年样本，小图使用 Natural Earth 陆地和新加坡标记。 | F039,F041,DE003,DE004 |
+| `b07-4` | 0 / singapore / modern-sea | card-museum-origin | Today: Singapore’s museum displays Jurassic fossils found in Wyoming. The museum and discovery site tell different parts of their story. | 今天：新加坡博物馆展示发现于怀俄明州的侏罗纪化石。馆址与发现地说明标本故事的不同部分。 | F026,F027 |
+| `b07-5` | 0 / singapore / modern-sea | site-singapore-modern | Today: living birds belong within dinosaurs. Visit the skeleton topic to explore the evidence from their bodies. | 今天：活鸟属于恐龙。到骨骼主题看看它们的身体结构提供了什么证据。 | F017 |
 
 ### 2.3 姊妹主题接口
 
@@ -616,3 +616,16 @@ E-DE2 / E-DE3 构建 schema、实际文件读取 / source-ID / 坐标空间校�
 **看过的画面**：古地图只有重建陆地（0 Ma 也是 PaleoDEM 帧，没有 Natural Earth 海岸混入）；66 Ma 拍显示「所选 66 Ma · 地图样本 70 Ma · Δ 4 Ma」及「此区间未提供中间样本」；小图三视图与年龄窗 / 全部记录切换正常；Ma 标签 EN「251.902 Ma」/ ZH「… Ma / …百万年前」；1024×768、900×1200、390×844 无重叠。未修的设计 / 内容问题写在 `src/content/topics/dinosaur-earth/FIXES.md`。
 
 **e2e**（合并 main ad476ce 后，`pnpm build` 通过）：deep-time 两份 spec 12 条在硬件 GL（`ATLAS_E2E_GPU=1`，workers 1）全过；软件 GL 在负载 ~190 下 sample-deep-time 4 条全过，dinosaur-earth 6 条超时（首帧 ready 单页就要约 27 s，35 拍循环超出 240 s），属负载。spec 只改了等待：`geology()` 等深时 HUD 注册后再读（每次重载后都要等），刷新前等 URL 写入 inset 状态。改过引擎的 TimeScene spec（ancient-civilisations、dated-layers、singapore-after-1965、singapore-land-use、time-label-dates、time-label-drag）19/19、hud.spec 全过；smoke 用 main 版本，只差已发布题计数（37 对 36），由主会话合并时对齐。合并前那次全量（重负载、软件 GL）265 过 / 93 失败，单跑复查后无残留引擎失败；按协调要求不再全量重跑。合并后 `shoot dinosaur-earth --beats --keys --layout --gpu`（en/paper）：35/35、0 失败。
+
+### 9.5 浏览器验收后打磨 · 2026-10-29（Codex）
+
+- `FIXES.md` 五项已处理：名字改为地图下方独立换行的 HTML 按钮（≥12 CSS px、≥44 px 命中），用分列编号/引线连接地图点；世界视图只标高亮/所选名字，参照点在本区域视图也标名。保留 `.ts-modern-label[data-id]` 供逐拍检查，编号按实际渲染宽度补偿字号，数量增加时小图高度扩展以免编号挤叠。
+- 宿主标题缩为“Modern finds · today / 现代发现 · 今天”，`hosted` 小图不再重复标题，× 仍走 `inset-visible`。视图仅在小图提供互斥按钮；LAYERS 移除三个视图和重复的全中生代筛选行，保留可见性开关、原 mode 注册/store/test API。
+- §2 的35拍字幕及章概述/背景读图说明同步成稿（保留原事实编号与状态表）。八章 EN/ZH 正文、概述与字幕改成适合10–12岁学生的短句，保留事实、来源、必要限定、名词和姊妹主题链接；26条来源说明改为一两句资料用途。原说明中的日期、查询/哈希、许可、别名及不采用的旧数字完整归档到 `src/content/topics/dinosaur-earth/AUDIT.md`，地理溯源文件保留。`data/SOURCES.md` 的来源块同步再生成。
+- 手机延续共享的默认收起阅读抽屉；READ 后可读证据图，底栏保留所选年代/地图样本/Δ，演示仍显示证据。没有增加可选的舞台证据芯片。底部只有章节轴、次级读数在 PLATE、详情和索引仍走原阅读插槽。
+- 所有地图主题（日期/深时、月气候、现今地理）的 LAYERS/TOOLS/KEY 共用 `MapOverlay`：视口≤1024 px 默认收起，从宽屏缩入该范围也收起；可以手动展开，换章不重置。SpaceScene/MathScene 不使用此组件。
+- 单测新增小图的双语标题/隐藏/视图语义、世界与区域参照标签、过滤后的化石及逐个高亮 ID；地图折叠阈值与双语原生 disclosure 有单测。类型/内容/构建门槛见本节后续结果。
+
+**本轮验证边界。** 按用户明确要求未运行 `pnpm shoot`、`pnpm e2e`，没有打开或驱动用户浏览器/桌面。此前 §9.4 的浏览器结果不是本轮布局通过证明；主会话须复核两语言/两主题、35拍、三视图、1024×768与390×844。未写 git、包清单/锁文件、review-queue 或 next-batch。
+
+**本轮非浏览器门槛。** `pnpm check`：0 errors、0 warnings、4条既有 hints；`pnpm validate`：85题、0 errors、0 warnings；`pnpm test`：221文件、5466项全过；`pnpm build`：173页通过（Vite 仍提示部分 chunk >500 kB）。`git diff --check` 通过。没有将静态/单测结果当作浏览器布局或真机性能验收。

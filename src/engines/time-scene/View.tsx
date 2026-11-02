@@ -42,7 +42,7 @@ import type { SceneControls, SpecRow } from '../core/controls';
 import { usePresentation, type Beat, type PresentationAdapter } from '../core/presentation';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import type { LegendItem } from '../widgets/Legend';
-import { Icon } from '../widgets/icons';
+import { MapOverlay } from './MapOverlay';
 import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
 import { isGeoTime, formatTimeParam } from '../../lib/time';
 import type { TimeSceneExt } from './index';
@@ -88,7 +88,6 @@ const TRIANGLE_KINDS = new Set<string>(['disaster']);
 const LEGEND_ENTITY_LIMIT = 6;
 /** Status line: BCE dates read as the readout (`350 BCE`), not the raw `-0350`. */
 const isBce = (iso: string) => iso.startsWith('-');
-const OVERLAY_OPEN_MIN_WIDTH = 720;
 const TEXT_INPUTS = 'input, select, textarea, [contenteditable="true"], [data-keys="own"], [role="slider"]';
 const WORLD_CAMERA: GeoCamera = { center: [20, 10], zoom: 1.4 };
 
@@ -625,7 +624,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const panelLayers = useMemo<ControlRow[]>(
     () => reconstructed ? [
       { kind: 'layer', id: 'fossils-modern', label: { en: 'Selected fossil collections', zh: '所选化石采集记录' } },
-      ...['inset-world', 'inset-southeast-asia', 'inset-mexico', 'inset-visible', 'fossil-all'].map((id) => ({ kind: 'mode' as const, id })),
+      { kind: 'mode', id: 'inset-visible' },
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
     ] : timeLayerRows(available, locale, {
       borders: !region,
@@ -648,10 +647,6 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
 
   /* ---------- overlay: open by default only when the stage is roomy ---------- */
   const stageRef = useRef<HTMLDivElement>(null);
-  const [overlayOpen, setOverlayOpen] = useState(false);
-  useEffect(() => {
-    setOverlayOpen((stageRef.current?.clientWidth ?? 0) >= OVERLAY_OPEN_MIN_WIDTH);
-  }, []);
 
   /* ---------- perf ---------- */
   const fps = useFps(!reconstructed);
@@ -897,7 +892,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       {beatReader && <SceneSlot name="readerTop"><TimeBeatLine chapter={chapters.find((c) => c.id === currentChapter)} beat={activeBeat} locale={locale} onStep={(dir) => controls.beatStep?.(dir)} /></SceneSlot>}
       {deepTime && topic.modernInset && geologyProps && <Suspense fallback={null}>
         <ReconstructionReadout {...geologyProps} />
-        {!presenting && !narrowInset && <SceneSlot name="card"><ModernInset bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></SceneSlot>}
+        {!presenting && !narrowInset && <SceneSlot name="card"><ModernInset hosted bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></SceneSlot>}
         {!presenting && narrowInset && <SceneSlot name="readerTop"><div className="ts-modern-mobile"><ModernInset embedded bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></div></SceneSlot>}
         <SceneSlot name="readerEnd"><ModernIndex ids={(chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState)?.index ?? []} bundle={deepTime} locale={locale} onSelect={selectModern} /></SceneSlot>
         {selectedObjectId && modernObjects.has(selectedObjectId) && <SceneSlot name="readerTop"><ModernInspector references={deepTime.references} object={modernObjects.get(selectedObjectId)!} locale={locale} outsideWindow={modernObjects.get(selectedObjectId)?.kind === 'fossil-collection' && !modernCounts?.visiblePoints.some((p) => p.id === selectedObjectId)} showAll={() => modernPatch({ fossilMode: 'all-mesozoic' })} onClose={() => { setSelectedObjectId(null); store.getState().patch({ highlight: [] }); }} /></SceneSlot>}
@@ -907,16 +902,9 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       {presentation.element}
 
       <SceneSlot name="stageOverlay">
-        <details className="atlas-overlay-card ts-overlay" data-legend={byEntity ? 'entities' : undefined} open={overlayOpen} onToggle={(e) => setOverlayOpen(e.currentTarget.open)}>
-          <summary className="ts-overlay__summary" aria-label={t('time.layersAndKey')}>
-            <span className="ts-overlay__closed">
-              <Icon name="layers" size={18} />
-              <span>{t('time.layersAndKey')}</span>
-            </span>
-            <Icon name="close" size={18} className="ts-overlay__open" />
-          </summary>
+        <MapOverlay label={t('time.layersAndKey')} stageRef={stageRef} legend={byEntity ? 'entities' : undefined}>
           <ControlPanel layers={panelLayers} tools={panelTools} legend={legend} />
-        </details>
+        </MapOverlay>
       </SceneSlot>
 
       {geo.entities.length > 0 && (

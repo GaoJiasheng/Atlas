@@ -6,7 +6,7 @@ import { t, tx } from '../../i18n';
 import { getPlateExpanded, setPlateExpanded } from '../../lib/prefs';
 import { SourceRefs } from '../widgets/SourcePopover';
 import {
-  filterModernPoints, snapshotReferenceId, type DeepTimeBundle, type ModernInsetConfig, type InsetView,
+  filterModernPoints, modernInsetLabels, snapshotReferenceId, type DeepTimeBundle, type ModernInsetConfig, type InsetView,
   type FossilMode, type ModernPoint, type ReferenceCard,
 } from './lib/deepTime';
 import { mercY } from './lib/territory';
@@ -28,6 +28,8 @@ export interface ModernInsetProps {
   onPatch(patch: { inset?: InsetView; insetVisible?: boolean; fossilMode?: FossilMode }): void;
   /** Inside the scrolling reader (phones): reader content, not a HUD panel of its own. */
   embedded?: boolean;
+  /** The host already supplies this map's title. */
+  hosted?: boolean;
 }
 const words = (locale: Locale, en: string, zh: string) => locale === 'zh' ? zh : en;
 const ma = (n: number) => String(Number(n.toFixed(3)));
@@ -53,12 +55,12 @@ function EvidenceCard({ card, locale, onSelect }: { card: ReferenceCard; locale:
 }
 
 export function ModernInset(props: ModernInsetProps) {
-  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch, embedded } = props;
+  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch, embedded, hosted } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hitRadius, setHitRadius] = useState(22);
   useEffect(() => {
     const svg = svgRef.current; if (!svg) return;
-    const measure = () => setHitRadius(Math.max(22, 22 * 360 / Math.max(1, svg.clientWidth)));
+    const measure = () => setHitRadius(Math.max(22, 22 * 360 / Math.max(1, svg.getBoundingClientRect().width)));
     measure(); const observer = new ResizeObserver(measure); observer.observe(svg); return () => observer.disconnect();
   }, [insetVisible]);
   const uid = useId().replace(/:/g, '');
@@ -70,12 +72,16 @@ export function ModernInset(props: ModernInsetProps) {
   const countryHighlights = new Set(evidenceCards.map((c) => c.linkedCountryFeatureId).filter(Boolean));
   const within = (p: ModernPoint) => p.at[0] >= bounds[0] && p.at[0] <= bounds[2] && p.at[1] >= bounds[1] && p.at[1] <= bounds[3];
   const visible = result.visiblePoints.filter(within);
+  const labels = modernInsetLabels(visible, view, highlight, selectedObjectId);
+  // Numbered callouts get their own column; names wrap in CSS-pixel rows below
+  // the map rather than shrinking with the SVG or colliding over nearby dots.
+  const mapHeight = Math.max(206, (labels.length * 2 + 1) * hitRadius);
   const selectedIndex = visible.findIndex((p) => p.id === selectedObjectId);
   useEffect(() => { if (selectedIndex >= 0) setPage(Math.floor(selectedIndex / 20)); }, [selectedIndex, selectedObjectId]);
   const pageCount = Math.ceil(visible.length / 20);
   const actualPage = Math.min(page, Math.max(0, pageCount - 1));
   const projection = useMemo(() => {
-    const w = 360; const h = 206; const [west, south, east, north] = bounds;
+    const w = 360; const h = mapHeight; const [west, south, east, north] = bounds;
     const sy = mercY(south); const ny = mercY(north);
     const scale = Math.min(w / (east - west), h / (ny - sy));
     const ox = (w - (east - west) * scale) / 2; const oy = (h - (ny - sy) * scale) / 2;
@@ -83,39 +89,51 @@ export function ModernInset(props: ModernInsetProps) {
     const land = (bundle.land?.features ?? []).map((f) => ({ id: featureId(f), d: polygonPath(f.geometry, project) }));
     const countries = (bundle.countries?.features ?? []).map((f) => ({ id: featureId(f), d: polygonPath(f.geometry, project) }));
     return { project, land, countries };
-  }, [bundle.land, bundle.countries, bounds]);
+  }, [bundle.land, bundle.countries, bounds, mapHeight]);
   if (!insetVisible) return null;
+  const views = <div className="ts-modern__views" role="group" aria-label={words(locale, 'Modern map view', '现代小图视图')}>
+    {config.views.map((v) => <button key={v.id} type="button" aria-pressed={view === v.id} onClick={() => onPatch({ inset: v.id })}>{tx(v.label, locale)}</button>)}
+  </div>;
   return <section className="ts-modern" data-hud-panel={embedded ? undefined : 'modern-inset'} aria-label={tx(config.label, locale)}>
-    <header className="ts-modern__header"><strong>{words(locale, 'TODAY · Modern find locations', '今天 · 现代发现地点')}</strong>
+    <header className="ts-modern__header">{hosted ? views : <strong>{tx(config.label, locale)}</strong>}
       <button className="ts-modern__icon-button" type="button" onClick={() => onPatch({ insetVisible: false })} aria-label={words(locale, 'Hide modern map', '隐藏现代小图')}>×</button>
     </header>
-    <div className="ts-modern__views" role="group" aria-label={words(locale, 'Modern map view', '现代小图视图')}>
-      {config.views.map((v) => <button key={v.id} type="button" aria-pressed={view === v.id} onClick={() => onPatch({ inset: v.id })}>{tx(v.label, locale)}</button>)}
-    </div>
+    {!hosted && views}
     <p className="ts-modern__mode">{fossilMode === 'all-mesozoic'
       ? words(locale, 'Finds across the Mesozoic; these did not all live together.', '跨中生代的发现地；并非同时生存。')
       : words(locale, `Age ranges overlap ${ma(result.queryWindowMa![0])}–${ma(result.queryWindowMa![1])} Ma (±5 Ma browsing choice).`, `年龄范围与 ${ma(result.queryWindowMa![0])}–${ma(result.queryWindowMa![1])} 百万年前有交集（±5 Ma 浏览设置）。`)}</p>
-    <svg ref={svgRef} className="ts-modern__map" viewBox="0 0 360 206" role="img" aria-label={words(locale, 'Modern land and published collection positions', '现代陆地与已发表的采集记录组位置')}>
-      <defs><clipPath id={`modern-clip-${uid}`}><rect x="0" y="0" width="360" height="206" /></clipPath></defs>
+    <svg ref={svgRef} className="ts-modern__map" viewBox={`0 0 360 ${mapHeight}`} role="img" aria-label={words(locale, 'Modern land and published collection positions', '现代陆地与已发表的采集记录组位置')}>
+      <defs><clipPath id={`modern-clip-${uid}`}><rect x="0" y="0" width="360" height={mapHeight} /></clipPath></defs>
       <g clipPath={`url(#modern-clip-${uid})`}>
-        <rect width="360" height="206" className="ts-modern__water" />
+        <rect width="360" height={mapHeight} className="ts-modern__water" />
         {projection.land.map((p, i) => <path key={`${p.id}-${i}`} d={p.d} className="ts-modern__land" fillRule="evenodd" />)}
         {projection.countries.map((p, i) => <path key={`${p.id}-${i}`} d={p.d} className={`ts-modern__country${countryHighlights.has(p.id) ? ' is-highlighted' : ''}`} fillRule="evenodd" />)}
         {visible.map((point) => {
           const [x, y] = projection.project(point.at); const active = highlight.includes(point.id) || point.id === selectedObjectId;
           const isReference = point.kind === 'reference';
-          const labelX = Math.max(5, Math.min(220, x + 17)); const labelY = Math.max(15, Math.min(195, y - 15));
           return <g key={point.id} className={`ts-modern__point${active ? ' is-highlighted' : ''}${isReference ? ' is-reference' : ''}`}>
             <circle cx={x} cy={y} r={active ? 4.5 : isReference ? 3.5 : 2} className="ts-modern__dot" />
             <circle cx={x} cy={y} r={hitRadius} className="ts-modern__hit" onClick={() => onSelect(point.id)}><title>{tx(point.title, locale)}</title></circle>
-            {(active || isReference) && <g className="ts-modern-label" data-id={point.id}>
-              <path d={`M${x},${y}L${labelX},${labelY + 4}`} className="ts-modern__leader" />
-              <text x={labelX} y={labelY} className="ts-modern__label" onClick={() => onSelect(point.id)}>{tx(point.title, locale)}</text>
-            </g>}
+          </g>;
+        })}
+        {labels.map((point, i) => {
+          const [x, y] = projection.project(point.at);
+          const cx = hitRadius; const cy = (2 * i + 1) * hitRadius;
+          return <g key={point.id} className="ts-modern__callout" aria-hidden="true">
+            <path d={`M${cx},${cy}L${x},${y}`} className="ts-modern__leader" />
+            <circle cx={cx} cy={cy} r={hitRadius * .6} className="ts-modern__badge" />
+            <text x={cx} y={cy} dominantBaseline="central" textAnchor="middle" style={{ fontSize: hitRadius * 12 / 22 }}>{i + 1}</text>
           </g>;
         })}
       </g>
     </svg>
+    {labels.length > 0 && <ol className="ts-modern__labels">
+      {labels.map((point, i) => <li key={point.id}>
+        <button type="button" className="ts-modern-label" data-id={point.id} onClick={() => onSelect(point.id)}>
+          <span aria-hidden="true">{i + 1}</span><span>{tx(point.title, locale)}</span>
+        </button>
+      </li>)}
+    </ol>}
     <p className="ts-modern__counts">{words(locale, `${result.fossilsInView} collections in this view · ${result.fossilsVisible} selected`, `本视图 ${result.fossilsInView} 个采集记录组 · 已选 ${result.fossilsVisible} 个`)}
       <SourceRefs ids={[...new Set(bundle.points.filter((p) => p.kind === 'fossil-collection').flatMap((p) => p.sources))]} locale={locale} /></p>
     {!fossilsEnabled && <p className="ts-modern__note">{words(locale, 'Fossil symbols are off. Reference points and evidence cards remain available.', '化石符号已关闭。参照点与证据卡仍可查看。')}</p>}

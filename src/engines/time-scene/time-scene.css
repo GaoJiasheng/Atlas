@@ -150,6 +150,10 @@
 .ts-overlay[open] {
   position: relative;
 }
+/* The first control row sits beside the absolute close button: keep its label clear of it. */
+.ts-overlay[open] .atlas-ctl > .atlas-ctl__section:first-child .atlas-ctl__rows > :first-child {
+  padding-inline-end: calc(var(--hit) - 0.5rem);
+}
 @media (max-width: 639px) {
   .ts-overlay .atlas-ctl__row {
     font-size: 0.875rem;
