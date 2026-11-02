@@ -86,7 +86,7 @@ test.describe('bones and joints', () => {
     await page.locator('[data-chapter="growth-and-repair"]').first().click();
     await expect(page.locator('.space-try')).toHaveCount(0);
     await page.locator('.atlas-axis__tick[data-beat="growth-and-repair.3"]').click();
-    await expect(page.locator('body')).toContainText('愈合期限');
+    await expect(page.locator('body')).toContainText('愈合时间各不相同');
   });
 
   test('phone: the reading drawer and lever controls fit with touch-sized targets', async ({ page }) => {
