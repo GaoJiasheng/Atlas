@@ -166,7 +166,10 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       // Keep the natural reader width independently of the solver's narrowed width.
       sizes.reader = Math.min(640, Math.max(340, 400 * Math.max(1, Number(scene.style.getPropertyValue('--k')) || 1)));
       const room = solveHudRoom({ width: bounds.width, height: bounds.height }, sizes, state.manual);
-      const patch = state.stageOnly ? {} : room.folds;
+      // In a drawer layout the reader is the drawer: opened for a selection without becoming a kept choice,
+      // so the solver leaves it alone there.
+      const { reader: readerFold, ...rest } = room.folds;
+      const patch = state.stageOnly ? {} : room.drawer ? rest : { ...rest, reader: readerFold };
       const styleWidth = `${room.readerWidth}px`;
       if (scene.style.getPropertyValue('--room-reader-width') !== styleWidth) scene.style.setProperty('--room-reader-width', styleWidth);
       const drawerValue = room.drawer ? 'true' : 'false';

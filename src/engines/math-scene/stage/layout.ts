@@ -63,13 +63,14 @@ function measure(root: HTMLElement, mode: LayoutMode, tray: HTMLElement | null):
   if (tray && mode !== 'present' && visible(tray)) floor = Math.min(floor, tray.getBoundingClientRect().top - S.top - PAD);
 
   // Obstacles: the HUD columns (title, rail, card, control panel), or the presentation's title and caption card.
-  const obstacles: { r: DOMRect; side: 'left' | 'right' }[] = [];
+  const obstacles: { r: DOMRect; side: 'left' | 'right'; tab?: boolean }[] = [];
   if (scene && mode === 'hud') {
     for (const el of scene.querySelectorAll('.atlas-hud__left [data-hud-panel], .atlas-hud__right [data-hud-panel], [data-hud-panel="card-tab"]')) {
       if (!visible(el)) continue;
       const r = el.getBoundingClientRect();
       if (r.bottom <= S.top || r.top >= S.bottom) continue;
-      obstacles.push({ r, side: r.left + r.width / 2 < S.left + W / 2 ? 'left' : 'right' });
+      const tab = ['card-tab', 'left-tab'].includes(el.getAttribute('data-hud-panel') ?? '');
+      obstacles.push({ r, side: r.left + r.width / 2 < S.left + W / 2 ? 'left' : 'right', tab });
     }
   }
   if (scene && mode === 'present') {
@@ -79,13 +80,15 @@ function measure(root: HTMLElement, mode: LayoutMode, tray: HTMLElement | null):
     if (title && visible(title)) obstacles.push({ r: title.getBoundingClientRect(), side: 'left' });
   }
   // In stage coordinates from here on.
-  const panels: Panel[] = obstacles.map(({ r, side }) => ({ x: r.left - S.left, y: r.top - S.top, w: r.width, h: r.height, side }));
+  const panels: Panel[] = obstacles.map(({ r, side, tab }) => ({ x: r.left - S.left, y: r.top - S.top, w: r.width, h: r.height, side, ...(tab ? { tab } : {}) }));
   return { w: W, h: H, free: freeRect(W, floor, panels, mode), dock: dockGap, obstacles: panels.map((o) => ({ x: o.x - PAD, y: o.y - PAD, w: o.w + 2 * PAD, h: o.h + 2 * PAD })), floor };
 }
 
 /** A HUD panel on the stage (stage coordinates) and the column it belongs to. */
 export interface Panel extends Rect {
   side: 'left' | 'right';
+  /** A folded panel's edge tab (44 px wide): the model may sit beside it rather than below it. */
+  tab?: boolean;
 }
 
 /**
@@ -114,6 +117,14 @@ export function freeRect(W: number, floor: number, panels: readonly Panel[], mod
     // reader open): under the short one, beside the long one.
     if (rights.length) candidates.push(rect(leftEdge, bottomOf(rights), W - PAD));
     if (lefts.length) candidates.push(rect(PAD, bottomOf(lefts), rightEdge));
+    // A tall edge tab (the folded card on a phone): under every other panel, beside the tab.
+    const tabs = panels.filter((o) => o.tab);
+    if (tabs.length) {
+      const others = panels.filter((o) => !o.tab);
+      const lo = Math.max(PAD, ...tabs.filter((o) => o.side === 'left').map((o) => o.x + o.w + PAD));
+      const hi = Math.min(W - PAD, ...tabs.filter((o) => o.side === 'right').map((o) => o.x - PAD));
+      candidates.push(rect(lo, bottomOf(others), hi));
+    }
   }
   const usable = (r: Rect) => Math.min(r.w, 2.2 * r.h) * r.h;
   return candidates.reduce((best, r) => (usable(r) > usable(best) ? r : best));

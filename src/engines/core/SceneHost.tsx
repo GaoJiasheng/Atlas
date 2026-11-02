@@ -66,6 +66,7 @@ import { t, tx, type BilingualText } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
 import { getHudPreferences, setHudPreferences, setReaderExpanded, setPanelsExpanded, setCardExpanded, setPlateExpanded, claimFirstGuide, setThemeOverride, useThemeOverride } from '../../lib/prefs';
 import { useHudRoom } from './useHudRoom';
+import { usesReaderDrawer } from './hud-room';
 import { FoldHeader } from '../widgets/FoldHeader';
 import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
@@ -445,11 +446,13 @@ export default function SceneHost(props: SceneHostProps) {
   }, []);
 
   const revealReader = useCallback(() => {
-    // Selecting an object explicitly reopens its details, including a drawer.
-    actions.setReader(true);
+    // Selecting an object explicitly reopens its details, including a drawer. The drawer is temporary:
+    // opening it must not overwrite the docked reader's kept collapse choice (sessionStorage 'atlas:reader').
+    if (usesReaderDrawer(window.innerWidth, window.innerHeight)) hud.setState({ reader: true });
+    else actions.setReader(true);
     setSheetOpen(true);
     setReaderReveal((revision) => revision + 1);
-  }, [actions]);
+  }, [actions, hud]);
   // Wait for the existing drawer/reader to render open. Re-selecting the same
   // event must also return to the top, even if its inspector did not remount.
   useLayoutEffect(() => {

@@ -135,3 +135,18 @@ describe('labels and pairs', () => {
     expect(Math.min(...radii) * 2).toBeGreaterThanOrEqual(28);
   });
 });
+
+describe('freeRect beside a folded edge tab (phone)', () => {
+  it('puts the model under the header and beside the tall card tab, not below the tab', () => {
+    // 390 × 715 stage: title + chip row top-left, folded tools button, the card's 44 px tab down the right edge.
+    const panels = [
+      { x: 12, y: 10, w: 182, h: 100, side: 'left' as const },
+      { x: 204, y: 10, w: 130, h: 44, side: 'right' as const },
+      { x: 346, y: 10, w: 44, h: 300, side: 'right' as const, tab: true },
+    ];
+    const r = freeRect(390, 600, panels, 'hud');
+    expect(r.y).toBe(124);
+    expect(r.x + r.w).toBe(332);
+    expect(r.h).toBe(476);
+  });
+});
