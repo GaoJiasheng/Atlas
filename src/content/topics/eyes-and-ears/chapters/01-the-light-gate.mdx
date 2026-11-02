@@ -67,8 +67,8 @@
         },
         "predict": {
           "prompt": {
-            "en": "Keep the light and focus unchanged. If the opening diameter doubles in this model, what happens to relative admitted light?",
-            "zh": "光和调焦不变。在这个模型里，开口直径加倍，进光相对量会怎样？"
+            "en": "Keep light and focus the same. If the model opening’s diameter doubles, how does the relative light reading change?",
+            "zh": "保持光和调焦相同。模型开口直径加倍，相对进光量会怎样？"
           },
           "start": {
             "pupil-mm": 2,
@@ -155,8 +155,8 @@
           }
         },
         "caption": {
-          "en": "This model begins with the smaller opening.",
-          "zh": "这个模型先用较小的开口。"
+          "en": "Start with the smaller pupil opening.",
+          "zh": "先看较小的瞳孔开口。"
         }
       },
       {
@@ -170,8 +170,8 @@
           }
         },
         "caption": {
-          "en": "Doubling the diameter gives four times the opening area in this model.",
-          "zh": "在这个模型里，直径变成两倍，开口面积变成四倍。"
+          "en": "In this model, doubling the opening diameter makes its area four times as large.",
+          "zh": "模型中，开口直径加倍，面积变成四倍。"
         }
       },
       {
@@ -196,14 +196,14 @@
           }
         },
         "caption": {
-          "en": "The admitted-light proxy changes; the image position stays the same here. The effective lens combines cornea and lens.",
-          "zh": "进光相对量改变了，这里的成像位置不变。有效透镜合并角膜与晶状体的作用。"
+          "en": "The relative light reading changes, but the image stays in place. One model lens represents the combined action of cornea and lens.",
+          "zh": "相对进光量改变，成像位置不变。一个模型透镜代表角膜与晶状体的共同作用。"
         }
       }
     ],
     "summary": {
-      "en": "The pupil is an opening in the iris. Change its diameter in this model while keeping illumination, object distance and focus unchanged.",
-      "zh": "瞳孔是虹膜中的开口。在这个模型里只改孔径，照明、物距和调焦保持不变。"
+      "en": "The pupil is an opening in the iris. Change its size while light, object distance and focus stay the same.",
+      "zh": "瞳孔是虹膜的开口。只改变开口大小，保持光、物距和调焦不变。"
     }
   }
 }
@@ -211,29 +211,29 @@
 
 <Lang en>
 
-The eye station is open along a cut surface so that the entrance can be seen. At the front is the <Term id="cornea">cornea</Term>, a clear curved layer. Incoming light passes through it, and its curvature helps bend the light. The coloured ring just behind it is the <Term id="iris">iris</Term>. The <Term id="pupil">pupil</Term> is the opening in that ring, not a black solid object filling the centre.
+Look through the cut surface at the front of the eye. The <Term id="cornea">cornea</Term> is a clear curved layer. Light passes through it and bends. Behind it sits the coloured ring called the <Term id="iris">iris</Term>. The <Term id="pupil">pupil</Term> is the opening in that ring.
 
-The iris controls how much light enters through the pupil. In bright light it makes the pupil smaller; in dim light the pupil becomes larger, letting more light in [S2, S24]. Behind the opening sits the clear <Term id="lens">lens</Term>. Light continues through the lens towards the retina. A larger opening can admit more light when the illumination and other conditions stay the same. That does not mean the lens has moved or changed its focusing setting.
+The iris controls how much light enters. In bright light, the pupil becomes smaller. In dim light, it becomes larger and lets more light in. [S2, S24] Behind the opening is the clear <Term id="lens">lens</Term>. Light passes through it towards the retina. A larger opening admits more light when other conditions stay the same; focus can stay unchanged.
 
-Use the card to compare the model's openings. Keep incoming light, object position and focus unchanged. First predict whether the relative admitted-light reading will rise, fall or stay the same. Reveal the change, then record the reading for each setting. Look at the opening itself as well as the number: the outer edge of the iris stays in place.
+Compare the openings on the card. Keep the incoming light, object position and focus the same. Predict whether the relative light reading will rise, fall or stay the same. Then reveal and record each reading. Watch the opening too: the iris’s inner edge changes while its outer edge stays fixed.
 
-At the last beat, the separate optical study makes the comparison visible. In this ideal model, changing the aperture changes the admitted-light proxy without moving the geometrical image position. Real eyes have automatic responses and more complicated optics. This hand-operated model separates opening size from focus so that their different effects can be compared. <FlyTo preset="eye">Look through the opening</FlyTo>
+In the last beat, compare the light paths on the optical bench. A wider opening admits more light, but the image stays in the same place. You control opening size and focus separately here to see their different effects. Real eyes adjust automatically and have more complex optics. <FlyTo preset="eye">Look through the opening</FlyTo>
 
 <More title={{"en": "Opening area in this model", "zh": "模型里的开口面积"}}>
 
-The diameter changes from <Num s="S31">2 mm</Num> to <Num s="S31">4 mm</Num>. A circular area depends on the square of its diameter, so the area and relative admitted-light proxy become <Num s="S31">4 times</Num> the starting values. This assumes uniform illumination and unchanged transmission. It does not predict perceived brightness.
+The opening’s diameter changes from <Num s="S31">2 mm</Num> to <Num s="S31">4 mm</Num>. Doubling a circle’s diameter makes its area <Num s="S31">4 times</Num> as large. The relative light reading rises by the same factor, with even illumination and unchanged light transmission. This reading measures the model’s admitted light, rather than how bright something feels.
 
 </More>
 
-<More title={{"en": "Geometry is not brightness", "zh": "几何位置不等于明暗"}}>
+<More title={{"en": "Light and image position", "zh": "进光与成像位置"}}>
 
-The separate study uses a single effective lens representing the combined focusing action of cornea and lens. Its image distance depends on object distance and effective focal length. Aperture size is not in that ideal image-distance equation. It can affect the size of an out-of-focus spot. [S11, S31]
+One lens on the optical bench stands for the combined focusing action of cornea and lens. Image distance is the distance from lens to image. It depends on the distance from lens to object and on focal length, which describes how strongly the lens bends light. In this ideal calculation, opening size does not change image distance. It can change the width of a blurred spot. [S11, S31]
 
 </More>
 
 <More title={{"en": "Use the screen model", "zh": "只操作屏幕模型"}}>
 
-Change the controls on the screen. Do not shine a torch into an eye or look at the Sun to test a pupil. The manual switch is not a measurement of anyone’s pupil reflex. [S19, S31]
+Use the screen controls to compare openings. Do not shine a torch into an eye or look at the Sun to test a pupil. The switch controls the model; it does not measure a person’s pupil response. [S19, S31]
 
 </More>
 
@@ -241,29 +241,29 @@ Change the controls on the screen. Do not shine a torch into an eye or look at t
 
 <Lang zh>
 
-眼睛工位沿剖面打开，可以看见光进入的地方。前端透明、弯曲的一层是<Term id="cornea">角膜</Term>，光穿过它时会改变方向，帮助聚焦。后面带颜色的环是<Term id="iris">虹膜</Term>；环中央的开口叫<Term id="pupil">瞳孔</Term>。瞳孔不是一块黑色实体，不能用实心圆片把它堵住。
+从剖面看眼睛前端。透明、弯曲的一层是<Term id="cornea">角膜</Term>，光穿过它时改变方向。后面的有色环叫<Term id="iris">虹膜</Term>。环中央的开口叫<Term id="pupil">瞳孔</Term>。
 
-虹膜控制通过瞳孔进入眼内的光量：光线强时瞳孔变小，光线暗时瞳孔变大，让更多光进入 [S2, S24]。开口后方有透明的<Term id="lens">晶状体</Term>，光经过这里继续朝视网膜前进。照明和其他条件相同时，较大的开口能够放进更多光；这不表示晶状体同时移动了，也不表示聚焦设置已经改变。
+虹膜控制进光量。光线强时，瞳孔变小；光线暗时，瞳孔变大，让更多光进入。[S2, S24] 开口后方有透明的<Term id="lens">晶状体</Term>，光经过它朝视网膜前进。其他条件相同时，开口变大，进光增多，调焦却可以保持不变。
 
-在卡片上比较模型的不同开口。入射光、物体位置和调焦保持不变，先猜进光相对量会增加、减少还是不变，再揭示变化，分别记录读数。除了看数字，也看看开口本身：这里变化的是内缘，虹膜的外缘留在原位，方便认出改变了什么。
+在卡片上比较不同开口。保持入射光、物体位置和调焦相同，先猜相对进光量会增加、减少还是不变，再揭示并记录各个读数。也看看开口：虹膜内缘改变，外缘保持固定。
 
-最后一拍打开旁边的光学示意，比较光路。在这个理想模型里，孔径改变进光相对量，却不移动几何成像位置。真实眼睛有自动反应，光学过程也更复杂；这里把开口大小和调焦分开控制，用来比较它们的不同影响。<FlyTo preset="eye">看看进光的开口</FlyTo>
+最后一拍，比较光学实验台上的光路。开口变大，进光增多，成像位置却不变。这里把开口和调焦分开控制，方便看清各自的影响。真实眼睛会自动调节，光学过程也更复杂。<FlyTo preset="eye">看看进光的开口</FlyTo>
 
 <More title={{"en": "Opening area in this model", "zh": "模型里的开口面积"}}>
 
-直径由 <Num s="S31">2 毫米</Num> 变成 <Num s="S31">4 毫米</Num>。圆面积与直径的平方成正比，所以面积和进光相对量都变为原来的 <Num s="S31">4 倍</Num>。这里假设照明均匀、透光条件不变，并不预测人感觉到的明暗。
+开口直径由 <Num s="S31">2 毫米</Num> 变成 <Num s="S31">4 毫米</Num>。圆的直径加倍，面积就变成 <Num s="S31">4 倍</Num>。照明均匀、透光条件不变时，相对进光量也增加到同样倍数。这个读数描述模型的进光量，不表示人感觉到的明暗。
 
 </More>
 
-<More title={{"en": "Geometry is not brightness", "zh": "几何位置不等于明暗"}}>
+<More title={{"en": "Light and image position", "zh": "进光与成像位置"}}>
 
-旁边的示意用一个有效透镜代表角膜与晶状体共同的聚焦作用。理想公式中的像距取决于物距和有效焦距，不由孔径决定；偏焦光斑的大小则可以受孔径影响。[S11, S31]
+光学实验台上的一个透镜代表角膜与晶状体共同的聚焦作用。像距是透镜到像的距离，物距是透镜到物体的距离。像距由物距和焦距决定，焦距描述透镜使光弯曲的能力。在这个理想计算中，开口大小不改变像距，却可以改变偏焦光斑的宽度。[S11, S31]
 
 </More>
 
 <More title={{"en": "Use the screen model", "zh": "只操作屏幕模型"}}>
 
-只改变屏幕上的控件，不用手电照眼睛，也不直视太阳来测试瞳孔。手动开关不是任何人的瞳孔反射测量。[S19, S31]
+用屏幕控件比较开口，不用手电照眼睛，也不直视太阳来测试瞳孔。开关控制模型，不测量人的瞳孔反应。[S19, S31]
 
 </More>
 

@@ -13,4 +13,4 @@ theme: paper
 sensitivity: open
 status: published
 illustration: heat
-note: { en: "Generic heat bench · model results, not measurements · externally maintained bath · liquid levels schematic · separate endpoint indicator enlarged 500 times", zh: "通用热实验台 · 数值为模型非实测 · 温浴由外部维持恒温 · 液位示意 · 独立端点指示位移放大 500 倍" }
+note: { en: "Simulated heat experiments · fixed bath temperature · liquid levels schematic · separate endpoint pointer enlarged 500 times", zh: "传热模拟实验 · 温浴恒温 · 液位示意 · 独立端点指示片放大 500 倍" }

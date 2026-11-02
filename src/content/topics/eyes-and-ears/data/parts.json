@@ -8,12 +8,12 @@
         "zh": "角膜"
       },
       "summary": {
-        "en": "The transparent cornea admits and bends incoming light.",
+        "en": "Admits and bends incoming light.",
         "zh": "透明的角膜让光进入，并使光折射。"
       },
       "detail": {
-        "en": "The cornea is the curved transparent surface at the front of the eye, ahead of the iris and lens. It works with the lens to focus incoming light. [S2]\n\nThis clear shell is an original cutaway schematic. Its thickness and curvature are design choices; the separate optical bench combines the cornea and lens into one effective lens. [S31]",
-        "zh": "角膜是眼睛前端弯曲、透明的表面，位于虹膜和晶状体之前。它与晶状体一起使入眼的光聚焦。[S2]\n\n这里的透明薄壳是原创剖面示意，厚度与曲率是设计值。另一个光学工位把角膜与晶状体合成一个有效透镜。[S31]"
+        "en": "The clear, curved cornea lies at the front of the eye, ahead of the iris and lens. It works with the lens to focus incoming light. [S2]\n\nThe cutaway opens this layer to show the inside. Its thickness and curve are simplified. On the optical bench, one lens represents the focusing action of both cornea and lens. [S31]",
+        "zh": "透明、弯曲的角膜位于眼睛前端，在虹膜与晶状体之前。它与晶状体共同聚焦入眼的光。[S2]\n\n剖面打开这一层，让内部显露出来，厚度与弯曲程度都经过简化。光学实验台用一个透镜代表角膜与晶状体共同的聚焦作用。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -80,12 +80,12 @@
         "zh": "虹膜"
       },
       "summary": {
-        "en": "The iris controls the size of the opening called the pupil.",
-        "zh": "虹膜调节称为瞳孔的开口大小。"
+        "en": "Controls the size of the pupil opening.",
+        "zh": "调节瞳孔开口大小。"
       },
       "detail": {
-        "en": "The iris lies behind the cornea and in front of the lens. The pupil is its opening, not a solid black part. Changing that opening changes how much light can enter. [S2]\n\nSelect this fixed outer rim to inspect the iris. Two non-selectable annular inserts show the two model apertures with the same outer diameter and a twofold change of inner diameter. They are discrete schematic states, not a muscle simulation or a measurement of a child’s pupil. [S31]",
-        "zh": "虹膜位于角膜后、晶状体前。瞳孔是虹膜中的开口，不是一块黑色实物。开口大小改变，能进入的光量也随之改变。[S2]\n\n可选中的这一圈是虹膜的固定外缘。两张不可选中的环形薄片表示两档模型孔径；外径相同，内径相差两倍。这是离散示意状态，不是肌肉模拟，也不是儿童瞳孔测量。[S31]"
+        "en": "The iris lies behind the cornea and in front of the lens. The pupil is its opening. Changing the opening changes how much light enters. [S2]\n\nSelect the outer rim to inspect the iris. The model switches between two ring shapes: their outer diameters match, while one inner diameter is twice the other. The inserts cannot be selected separately. They show opening size without simulating muscles or measuring a child’s pupil. [S31]",
+        "zh": "虹膜位于角膜后、晶状体前。瞳孔是虹膜的开口，开口大小改变，进光量也改变。[S2]\n\n点选外缘观察虹膜。模型切换两种环形：外径相同，一种内径是另一种的两倍。内部薄片不能单独点选，只显示开口大小，不模拟肌肉或测量儿童瞳孔。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -138,12 +138,12 @@
         "zh": "晶状体"
       },
       "summary": {
-        "en": "The lens changes shape to help focus at different distances.",
+        "en": "Changes shape to help focus at different distances.",
         "zh": "晶状体改变形状，帮助眼睛看清不同距离。"
       },
       "detail": {
-        "en": "The lens sits behind the iris, held around its edge by fibres connected to the ciliary body. The cornea and lens together focus light toward the retina. [S2, S3]\n\nDuring near viewing the lens becomes rounder; during far viewing it is flatter. These two biconvex shapes illustrate that change without claiming a measured focal length or quantitative tissue deformation. [S3, S31]",
-        "zh": "晶状体位于虹膜之后，周缘由连接睫状体的纤维悬持。角膜与晶状体共同把光聚向视网膜。[S2, S3]\n\n看近处时晶状体更圆鼓，看远处时较扁。这里的两种双凸形状只说明这一变化，不表示真实焦距或组织变形量。[S3, S31]"
+        "en": "The lens sits behind the iris. Fibres around its edge connect it to the ciliary body. Together, cornea and lens focus light towards the retina. [S2, S3]\n\nThe lens becomes rounder for near viewing and flatter for far viewing. Both shapes curve outwards on both sides. They illustrate the change without measuring focal length or tissue deformation. [S3, S31]",
+        "zh": "晶状体位于虹膜之后，周缘的纤维连接睫状体。角膜与晶状体共同把光聚向视网膜。[S2, S3]\n\n看近时晶状体较圆鼓，看远时较扁。两种形状的两面都向外凸，只用来说明变化，不测量焦距或组织变形量。[S3, S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -205,12 +205,12 @@
         "zh": "睫状环"
       },
       "summary": {
-        "en": "The ciliary apparatus changes the tension holding the lens.",
-        "zh": "睫状装置改变悬持晶状体的张力。"
+        "en": "Changes the pull of the fibres holding the lens.",
+        "zh": "改变悬持晶状体的纤维张力。"
       },
       "detail": {
-        "en": "The ciliary body surrounds the lens and connects to it through suspensory fibres. Changes in muscle action and fibre tension allow the lens to change shape. [S3]\n\nThe ring and a few radial fibres are enlarged schematic landmarks. The number of fibres drawn is not an anatomical count, and their movement is not calculated here. [S31]",
-        "zh": "睫状体环绕晶状体，通过悬韧带与它相连。肌肉活动和纤维张力的变化，使晶状体能改变形状。[S3]\n\n环与少量放射纤维是便于辨认的放大示意。画出的纤维数不代表解剖总数，这里也不计算纤维运动。[S31]"
+        "en": "The ciliary body surrounds the lens. Muscles change the pull of its supporting fibres, allowing the lens to change shape. [S3]\n\nThe ring and a few spreading fibres are enlarged to show their positions. The drawing does not count all the fibres or calculate their movement. [S31]",
+        "zh": "睫状体环绕晶状体。肌肉改变悬持纤维的张力，让晶状体改变形状。[S3]\n\n环和向外伸展的少量纤维经过放大，方便辨认位置。画面没有显示全部纤维，也不计算纤维运动。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -566,12 +566,12 @@
         "zh": "巩膜"
       },
       "summary": {
-        "en": "The sclera forms the tough outer wall of the eyeball.",
+        "en": "Forms the tough outer wall of the eyeball.",
         "zh": "巩膜构成眼球坚韧的外壁。"
       },
       "detail": {
-        "en": "The sclera is the outer coat surrounding most of the eyeball. At the front, the transparent cornea takes its place. The retina lines the inside of the back region. [S24]\n\nThis hollow shell is opened toward the viewer to expose the inside. It is not an empty solid sphere. X-ray changes this outer shell while leaving internal structures readable; dimensions are schematic. [S31]",
-        "zh": "巩膜包围眼球的大部分，形成外层壁；眼球前端则是透明的角膜。后部内壁的里面衬着视网膜。[S24]\n\n这是一层中空外壳，朝观察者的一面打开，以露出内部。它不是一颗实心球。透视时主要降低外壳的不透明度，使内层仍可辨认；尺寸均为示意。[S31]"
+        "en": "The tough sclera surrounds most of the eyeball. The clear cornea forms the front surface, and the retina lines the inside of the back region. [S24]\n\nThe model opens the hollow shell towards you to reveal the inside. X-ray makes the outer wall more transparent while keeping the inner parts visible. Sizes are simplified. [S31]",
+        "zh": "坚韧的巩膜包围眼球大部分。前端表面是透明角膜，后部内壁衬着视网膜。[S24]\n\n模型把中空外壳朝你的一面打开，露出内部。透视让外壁更透明，同时保留清楚的内层。尺寸经过简化。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -863,8 +863,8 @@
         "zh": "玻璃体是填充晶状体后方空间的透明胶状物。"
       },
       "detail": {
-        "en": "The vitreous occupies the large space between the lens and retina. It is a transparent gel rather than air. [S24]\n\nA translucent volume distinguishes the filling from the surrounding thin layers. Its open front and low opacity make the retina visible; the shape and displayed transparency are design choices. [S31]",
-        "zh": "玻璃体位于晶状体与视网膜之间的大部分空间内，是透明胶状物，不是空气。[S24]\n\n这里用半透明的体积把填充物与周围薄层区分开。前方打开并降低不透明度，让视网膜可以看见；形状和透明程度是显示设计。[S31]"
+        "en": "The vitreous is a clear gel filling the large space between lens and retina. [S24]\n\nThe model uses a partly transparent shape to distinguish this filling from the thin layers around it. Its front is opened so the retina stays visible. The shape and transparency are simplified for viewing. [S31]",
+        "zh": "玻璃体是透明胶状物，填充晶状体与视网膜之间的大部分空间。[S24]\n\n模型用半透明形体区分填充物和周围薄层，并打开前方，让视网膜显露出来。形状和透明程度都按观察需要简化。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -926,12 +926,12 @@
         "zh": "视网膜"
       },
       "summary": {
-        "en": "The retina receives light and starts electrical signalling.",
+        "en": "Receives light and starts electrical signalling.",
         "zh": "视网膜接收光，并启动电信号传递。"
       },
       "detail": {
-        "en": "The retina is a thin light-sensitive layer at the back inside the eye. Rod and cone cells help convert incoming light into electrical activity. [S2, S24]\n\nThis thin lining follows the inside wall; it is not a second eyeball. Individual receptor distributions and the later processing of vision in the brain are omitted. Light rays stop at the receiver in the separate bench; nerve paths show signals. [S31]",
-        "zh": "视网膜是眼球内部后方的一层薄薄的感光组织，其中的视杆细胞和视锥细胞帮助把入射光转成电活动。[S2, S24]\n\n这里的薄层贴着内壁，不是另一个眼球。模型没有画感光细胞分布，也没有模拟脑内的视觉处理。另一个工位的光线止于接收面，神经路径表示信号。[S31]"
+        "en": "The retina is a thin, light-sensitive layer at the back inside the eye. Rod and cone cells help turn light into electrical signals. [S2, S24]\n\nThe lining follows the inner wall. Cell arrangements and the brain’s later processing are left out. On the optical bench, light ends at the receiver. Along the nerve, moving marks show signals. [S31]",
+        "zh": "视网膜是眼内后部薄薄的感光组织。视杆细胞与视锥细胞帮助把光转成电信号。[S2, S24]\n\n这一层贴着内壁。模型省略了细胞排列和后续脑内处理。实验台上的光到接收面为止，沿神经移动的标记则表示信号。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1201,12 +1201,12 @@
         "zh": "视神经"
       },
       "summary": {
-        "en": "The optic nerve carries visual signals toward the brain.",
+        "en": "Carries visual signals toward the brain.",
         "zh": "视神经把视觉信号传向大脑。"
       },
       "detail": {
-        "en": "The optic nerve leaves the back of the eye and carries electrical signals from the retina toward the brain. Light does not continue along the nerve. [S2]\n\nThe bundled tube and moving markers are schematic. The displayed speed is for reading the route, not a measured nerve conduction speed, and the brain lies outside this model. [S31]",
-        "zh": "视神经从眼球后部离开，把来自视网膜的电信号传向大脑。光不会沿视神经继续前进。[S2]\n\n束状管与移动标记都是示意。显示速度只为看清路径，不表示神经传导速度；大脑位于模型之外。[S31]"
+        "en": "The optic nerve leaves the back of the eye. It carries electrical signals from the retina towards the brain, rather than light. [S2]\n\nThe tube represents a nerve bundle. Moving marks show the signal route at a speed chosen for viewing. They do not measure nerve speed, and the brain is outside the model. [S31]",
+        "zh": "视神经从眼球后部伸出，把视网膜的电信号传向大脑，传递的不是光。[S2]\n\n管状形体表示神经束。移动标记以便于观察的速度显示信号路线，不测量神经速度。大脑在模型之外。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -1254,12 +1254,12 @@
         "zh": "耳廓"
       },
       "summary": {
-        "en": "The pinna helps collect sound toward the ear canal.",
+        "en": "Helps collect sound toward the ear canal.",
         "zh": "耳廓帮助把声音汇入外耳道。"
       },
       "detail": {
-        "en": "The pinna is the visible outer flap of the ear. Its folds lead toward the entrance of the ear canal; it is only one part of the ear. [S7]\n\nThis single-ear schematic uses an original outer rim and inner fold. Fine skin anatomy and personal differences are omitted, and this station is enlarged independently from the eye. [S31]",
-        "zh": "耳廓是从外面看得见的耳部，褶皱通向外耳道入口。它只是耳朵的一部分。[S7]\n\n这一只耳的示意由原创外缘与内侧褶皱组成，省略皮肤细节和个体差异。它与眼睛工位分别放大，不共用真实比例。[S31]"
+        "en": "The pinna is the visible outer part of the ear. Its folds lead towards the ear canal. [S7]\n\nThe model shows one ear with a simplified rim and inner fold. Skin details and differences between people are left out. The eye and ear are enlarged by different amounts. [S31]",
+        "zh": "耳廓是外面看得见的耳部，褶皱通向外耳道。[S7]\n\n模型展示一只耳，外缘与内侧褶皱经过简化，省略皮肤细节和个体差异。眼睛与耳朵的放大程度不同。[S31]"
       },
       "primitive": {
         "kind": "extrude",
@@ -1781,12 +1781,12 @@
         "zh": "外耳道"
       },
       "summary": {
-        "en": "The ear canal guides sound vibration to the eardrum.",
+        "en": "Guides sound vibration to the eardrum.",
         "zh": "外耳道把声音振动传到鼓膜。"
       },
       "detail": {
-        "en": "The ear canal runs inward from the pinna and ends at the eardrum. It does not continue through the middle ear into the cochlea. [S7]\n\nThe open U-shaped wall exposes the air passage in this longitudinal cut. Its shortened path is a display choice; do not put objects into the ear canal. [S18, S31]",
-        "zh": "外耳道从耳廓向内延伸，止于鼓膜，并不会穿过中耳一直通到耳蜗。[S7]\n\n纵切示意用打开的U形壁露出通道，路径为展示而缩短。不要把物品伸入外耳道。[S18, S31]"
+        "en": "The ear canal runs inwards from the pinna and ends at the eardrum. It does not extend through the middle ear into the cochlea. [S7]\n\nA lengthwise cut opens the wall into a U shape so you can see the air passage. The path is shortened for display. Keep objects out of the ear canal. [S18, S31]",
+        "zh": "外耳道从耳廓向内延伸，止于鼓膜，不会穿过中耳通入耳蜗。[S7]\n\n纵向剖面把管壁打开成 U 形，让通道显露出来。路径为展示而缩短。不要把物品伸进耳道。[S18, S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -1852,12 +1852,12 @@
         "zh": "鼓膜"
       },
       "summary": {
-        "en": "The eardrum vibrates when sound reaches the end of the canal.",
+        "en": "Vibrates when sound reaches the end of the canal.",
         "zh": "声音到达外耳道末端，使鼓膜振动。"
       },
       "detail": {
-        "en": "The eardrum is a thin membrane at the inner end of the ear canal. Its movement passes to the malleus, the first of the three middle-ear bones. [S7, S8]\n\nThe sloping, shallow membrane vibrates slowly here so its motion can be seen. The shown displacement and timing are illustrative, not measured eardrum movement. [S31]",
-        "zh": "鼓膜位于外耳道内端，是一层薄膜。它的运动传给锤骨，即中耳三块听小骨中的第一块。[S7, S8]\n\n这里把浅凹、倾斜的薄膜慢放振动，便于观察。显示的位移与节律只是示意，不是鼓膜运动测量。[S31]"
+        "en": "The eardrum is a thin membrane at the inner end of the ear canal. It passes movement to the malleus, the first of three middle-ear bones. [S7, S8]\n\nThe shallow, sloping membrane vibrates slowly here. Its movement is sized and slowed for viewing, rather than measured from an ear. [S31]",
+        "zh": "鼓膜是外耳道内端的薄膜，把运动传给锤骨，也就是三块中耳听骨中的第一块。[S7, S8]\n\n浅凹、倾斜的膜在画面中缓慢振动。运动大小与速度以看得清为准，并非耳内实测。[S31]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1907,12 +1907,12 @@
         "zh": "锤骨"
       },
       "summary": {
-        "en": "The malleus transfers movement from the eardrum to the incus.",
+        "en": "Transfers movement from the eardrum to the incus.",
         "zh": "锤骨把鼓膜运动传给砧骨。"
       },
       "detail": {
-        "en": "The handle of the malleus contacts the eardrum, while its rounded head articulates with the incus. It is one of the three ossicles. [S7, S8]\n\nThe head and curved handle are an original simplified outline. The slow rocking motion shows transfer through the connected chain without claiming a real lever gain or biological delay. [S31]",
-        "zh": "锤骨的柄与鼓膜接触，圆头与砧骨相接。它是三块听小骨之一。[S7, S8]\n\n圆头与弯柄是原创简化外形。慢速摆动用来说明相连骨链传递运动，不表示真实杠杆增益或生理延迟。[S31]"
+        "en": "The malleus has a handle touching the eardrum and a rounded head joined to the incus. It is one of the three ossicles. [S7, S8]\n\nIts simplified head and curved handle rock slowly to show movement along the chain. This does not measure how much the bones amplify movement or the delay between them. [S31]",
+        "zh": "锤骨的柄接触鼓膜，圆头连接砧骨，是三块听小骨之一。[S7, S8]\n\n简化的圆头与弯柄缓慢摆动，显示骨链怎样传递运动，不测量听骨放大运动的倍数或彼此间的延迟。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -2022,12 +2022,12 @@
         "zh": "砧骨"
       },
       "summary": {
-        "en": "The incus links the malleus to the stapes.",
+        "en": "Links the malleus to the stapes.",
         "zh": "砧骨连接锤骨与镫骨。"
       },
       "detail": {
-        "en": "The incus is the middle bone of the ossicle chain. Its body meets the malleus, and its long process reaches the stapes. [S7, S8]\n\nThe two processes are kept distinct in this original schematic. The contact at each end is enlarged enough to read; small joints and ligaments are omitted. [S31]",
-        "zh": "砧骨位于听小骨链中间，体部与锤骨相接，长突伸向镫骨。[S7, S8]\n\n原创示意保留了可分辨的两个突起。两端接触处放大以便观察，省略细小关节与韧带。[S31]"
+        "en": "The incus is the middle bone in the chain. Its body joins the malleus, and its long projection reaches the stapes. [S7, S8]\n\nThe drawing keeps its two projections distinct. Enlarged contacts make the connections visible. Small joints and ligaments are left out. [S31]",
+        "zh": "砧骨位于骨链中间，体部连接锤骨，长突伸向镫骨。[S7, S8]\n\n图中保留两个不同的突起，放大两端接触处，方便看清连接。细小关节与韧带被省略。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -2143,12 +2143,12 @@
         "zh": "镫骨"
       },
       "summary": {
-        "en": "The stapes footplate transfers movement at the oval window.",
+        "en": "Transfers movement at the oval window.",
         "zh": "镫骨底板在卵圆窗处传递运动。"
       },
       "detail": {
-        "en": "The stapes receives movement from the incus. Its two limbs join a footplate that rests at the oval window, transferring movement into the inner ear. [S8]\n\nThe two crura and single footplate are explicit in this original schematic. The small piston-like movement is illustrative and stays at the window; it is not a spinning bone. [S31]",
-        "zh": "镫骨接收砧骨的运动，两条脚连接一块底板，底板位于卵圆窗处，把运动传入内耳。[S8]\n\n原创示意明确画出两脚和一块底板。小幅活塞式运动只作说明，底板保持在窗处；镫骨不会自转。[S31]"
+        "en": "The stapes receives movement from the incus. Its two limbs join one footplate at the oval window, passing movement into the inner ear. [S8]\n\nThe drawing shows both limbs and the single footplate. The footplate stays at the window and moves back and forth like a small piston, without spinning. Its movement is illustrative. [S31]",
+        "zh": "镫骨接收砧骨的运动。两条脚连接一块底板，底板在卵圆窗处把运动传入内耳。[S8]\n\n图中画出两脚和一块底板。底板留在窗处，像小活塞一样来回活动，不会自转。运动只作示意。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -2276,12 +2276,12 @@
         "zh": "卵圆窗"
       },
       "summary": {
-        "en": "The oval window is the interface where stapes movement enters the inner ear.",
-        "zh": "卵圆窗是镫骨运动传入内耳的界面。"
+        "en": "Passes movement from the stapes into the inner ear.",
+        "zh": "把镫骨运动传入内耳。"
       },
       "detail": {
-        "en": "The stapes footplate sits at the oval window. Its movement passes to the fluid-filled inner ear rather than carrying a stream of outside air into the cochlea. [S8]\n\nThe thin oval interface and footplate touch in this schematic. Surrounding bone is omitted to expose that relationship; the displayed size is not a measurement. [S31]",
-        "zh": "镫骨底板位于卵圆窗处，其运动传到充满液体的内耳，并不是把外界空气不断送进耳蜗。[S8]\n\n薄薄的椭圆界面与底板在示意中相接。为了露出这层关系，周围骨壁被省略；显示尺寸不是测量值。[S31]"
+        "en": "The stapes footplate sits at the oval window. Its movement pushes the fluid inside the inner ear; outside air does not flow into the cochlea. [S8]\n\nThe oval surface touches the footplate in the model. Surrounding bone is left out to show this connection, and the sizes are simplified. [S31]",
+        "zh": "镫骨底板位于卵圆窗处，运动推动内耳液体，并非让外界空气流进耳蜗。[S8]\n\n模型中，椭圆表面与底板相接。周围骨壁被省略，让连接显露出来，尺寸也经过简化。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -2315,12 +2315,12 @@
         "zh": "咽鼓管"
       },
       "summary": {
-        "en": "The Eustachian tube helps equalise pressure across the eardrum.",
+        "en": "Helps equalise pressure across the eardrum.",
         "zh": "咽鼓管帮助平衡鼓膜两侧的气压。"
       },
       "detail": {
-        "en": "The Eustachian tube connects the middle ear toward the throat and helps equalise pressure. It is not the main route carrying hearing signals to the brain. [S8]\n\nThe downward tube is shown only as context. This lesson does not simulate opening, swallowing or pressure changes. [S31]",
-        "zh": "咽鼓管连接中耳与咽部方向，帮助平衡气压。它不是把听觉信号传向大脑的主要路径。[S8]\n\n向下的管道只用来定位。本课不模拟管道开放、吞咽或压力变化。[S31]"
+        "en": "The Eustachian tube connects the middle ear to the throat and helps balance pressure across the eardrum. Hearing signals reach the brain through the auditory nerve. [S8]\n\nThe downward tube shows its position. The model does not simulate opening, swallowing or pressure changes. [S31]",
+        "zh": "咽鼓管连接中耳与咽部，帮助平衡鼓膜两侧气压。听觉信号经听神经传向大脑。[S8]\n\n向下的管道显示它的位置，不模拟开放、吞咽或气压变化。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -2375,8 +2375,8 @@
         "zh": "充满液体的耳蜗含有把振动转成信号的结构。"
       },
       "detail": {
-        "en": "The cochlea is the coiled hearing structure of the inner ear. Movement at the oval window produces motion in its fluid and a travelling wave along the basilar membrane. [S7]\n\nThis original open spiral shows a cavity, not a pipe draining water out of the ear. Its turns are schematic, not an exact anatomical turn count. A separate enlarged strip makes the membrane and sensory cells readable. [S31]",
-        "zh": "耳蜗是内耳中卷曲的听觉结构。卵圆窗处的运动使内部液体运动，并在基底膜上形成行波。[S7]\n\n原创的开口螺旋显示腔体，不表示水不断排出耳外。圈数是示意，不是精确解剖计数。另一个放大条带用来展示膜与感受细胞。[S31]"
+        "en": "The cochlea is the curled hearing structure in the inner ear. Movement at the oval window disturbs its fluid and sends a wave along the basilar membrane. [S7]\n\nThe open spiral reveals a cavity, rather than a pipe draining water. Its turns are simplified, so do not use them as an exact anatomical count. The separate enlarged strip shows the membrane and sensory cells. [S31]",
+        "zh": "耳蜗是内耳中卷曲的听觉结构。卵圆窗处的运动扰动液体，使波沿基底膜传播。[S7]\n\n打开的螺旋露出腔体，并非排水管。圈数经过简化，不能当作精确解剖计数。独立放大条带显示膜与感受细胞。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3350,12 +3350,12 @@
         "zh": "基底膜"
       },
       "summary": {
-        "en": "A travelling wave along the basilar membrane moves nearby sensory structures.",
-        "zh": "沿基底膜传播的行波使附近的感受结构运动。"
+        "en": "Supports sensory structures moved by a travelling wave.",
+        "zh": "支撑随行波而运动的感受结构。"
       },
       "detail": {
-        "en": "The basilar membrane lies within the cochlea. Cochlear fluid movement sets up a travelling wave along it; different regions respond most strongly to different frequencies. [S7]\n\nThis unfolded strip is an enlarged schematic, at a different scale and outside its anatomical position. A single local patch rises and falls as one sample; this is not a simulation of a spatial travelling wave, biological timing or cochlear tuning. [S31]",
-        "zh": "基底膜位于耳蜗内部，耳蜗液体的运动在它上面形成行波。不同区域对不同频率的响应较强。[S7]\n\n展开的条带是独立放大示意，比例与原位不同。单个局部膜片作为一个示意样本整体起伏，不模拟空间行波、生理时延或具体的耳蜗调谐曲线。[S31]"
+        "en": "The basilar membrane lies inside the cochlea. Fluid movement sends a wave along it. Different regions respond most strongly to different frequencies. [S7]\n\nThis enlarged strip unfolds part of the membrane outside its usual position, at a separate scale. A local patch rises and falls together. It illustrates movement without calculating a travelling wave, biological timing or an exact frequency response. [S31]",
+        "zh": "基底膜位于耳蜗内。液体运动使波沿膜传播，不同区域对不同频率响应最强。[S7]\n\n放大条带把部分膜展开，另用比例，摆在原位之外。局部膜片一起起伏，只说明运动，不计算行波、生理时延或精确的频率响应。[S31]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3461,12 +3461,12 @@
         "zh": "毛细胞局部"
       },
       "summary": {
-        "en": "Bending the tiny bundles helps sensory hair cells start electrical signalling.",
-        "zh": "微小纤毛束的弯曲帮助毛细胞启动电信号传递。"
+        "en": "Starts electrical signalling when tiny bundles bend.",
+        "zh": "微小纤毛束弯曲，帮助启动电信号。"
       },
       "detail": {
-        "en": "Sensory hair cells lie on the cochlear sensory structure. Their tiny hair-like bundles bend during movement and help initiate electrical signalling. These bundles are not ordinary hair. [S7]\n\nThe three cells and a few bundle strokes form an enlarged schematic at a different scale. The number drawn is not a total cell count, and the bundles tilt together as a stylised sample rather than deforming each stereocilium. No ion channels or biological delays are calculated. [S31]",
-        "zh": "感受毛细胞位于耳蜗的感受结构上，微小的纤毛束在运动中弯曲，帮助启动电信号。纤毛束不是普通毛发。[S7]\n\n这里的三个细胞和少量纤毛笔画是独立比例的放大示意，画出数量不代表细胞总数。纤毛束整体倾斜是风格化样本，不是逐根纤毛的变形模拟，也不计算离子通道或生理时延。[S31]"
+        "en": "Hair cells have tiny bundles of hair-like projections. Movement bends the bundles and helps start electrical signals. These are different from ordinary hairs. [S7]\n\nThe three enlarged cells are examples at a separate scale, rather than a total count. Their bundles tilt together. The model does not calculate each projection’s bending, ion channels or biological delays. [S31]",
+        "zh": "毛细胞顶部有微小的毛发状突起束。运动使小束弯曲，帮助启动电信号。它们与普通毛发不同。[S7]\n\n三个放大细胞另用比例，只举例说明，不表示总数。小束一起倾斜，没有逐根计算弯曲，也没有模拟离子通道或生理时延。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3714,12 +3714,12 @@
         "zh": "听神经"
       },
       "summary": {
-        "en": "The auditory nerve carries hearing signals toward the brain.",
+        "en": "Carries hearing signals toward the brain.",
         "zh": "听神经把听觉信号传向大脑。"
       },
       "detail": {
-        "en": "The auditory nerve carries electrical signals from the cochlea toward the brain. Outside air particles do not travel along this nerve. [S7]\n\nThe tube is a schematic nerve bundle. The signal route connects the enlarged sensory-cell window to this route for teaching; its length and the speed of markers are not biological measurements. [S31]",
-        "zh": "听神经把来自耳蜗的电信号传向大脑。外界空气粒子不会沿这条神经传到脑里。[S7]\n\n管状形体表示神经束。为了教学，信号路径把放大的感受细胞窗接向这一通路；路径长度和标记速度都不是生理测量。[S31]"
+        "en": "The auditory nerve carries electrical signals from the cochlea towards the brain. Outside air particles do not travel along it. [S7]\n\nThe tube represents a nerve bundle. The signal route links the enlarged cell view to this nerve. Its length and marker speed help show the pathway, rather than measure a body. [S31]",
+        "zh": "听神经把耳蜗的电信号传向大脑，外界空气粒子不会沿神经前进。[S7]\n\n管状形体表示神经束。信号路线把放大细胞区接向这条神经。路径长度和标记速度用于展示路线，并非人体测量。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3781,8 +3781,8 @@
         "zh": "附近的前庭结构帮助感知头部运动与平衡。"
       },
       "detail": {
-        "en": "The vestibular structures, including the semicircular canals, lie beside the cochlea. They help with balance and are distinct from the hearing pathway taught here. [S8]\n\nThree simplified loops locate this neighbouring system. No balance experiment, fluid response or individual vestibular function is simulated. [S31]",
-        "zh": "前庭结构包括半规管，位于耳蜗附近，帮助维持平衡，与这里讲述的听觉通路功能不同。[S8]\n\n三个简化环只用来定位邻近系统，不模拟平衡实验、液体响应或个人前庭功能。[S31]"
+        "en": "The vestibular structures, including semicircular canals, lie beside the cochlea. They help with balance and have a different role from hearing. [S8]\n\nThree simplified loops show where these structures lie. The model does not simulate balance, fluid responses or a person’s balance function. [S31]",
+        "zh": "前庭结构包括半规管，位于耳蜗附近。它们帮助维持平衡，作用与听觉不同。[S8]\n\n三个简化环显示这些结构的位置，不模拟平衡、液体响应或个人平衡功能。[S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3954,8 +3954,8 @@
         "zh": "这一点表示模型物体的上部。"
       },
       "detail": {
-        "en": "The upper point supplies one set of rays to the effective lens. At the receiver its beam centre lies below the optical axis. [S11]\n\nThe model height is one model centimetre. The bench draws heights twenty times taller than distances so the inverted image and any blur can be seen; this vertical exaggeration is schematic. This larger amber point and the smaller teal lower point, with their matching rays, make the inversion readable without drawing a photographic image; these are design values, not eye measurements. [S31]",
-        "zh": "物体上部的一点向有效透镜提供一组光线；在接收面上，这束光的中心位于光轴下方。[S11]\n\n模型高度为一模型厘米。为了看清倒像和光斑，实验台把高度画成距离的二十倍，这是示意性的竖向放大。较大的琥珀色上点、较小的青色下点及各自同色的光线帮助辨认倒立关系，不表示完整照片；这些是设计值，不是眼球测量。[S31]"
+        "en": "Rays from the upper point pass through the model lens. Their centre lands below the optical axis, the central line through the lens and receiver. [S11]\n\nThis point is one model centimetre high. Heights are drawn twenty times larger relative to horizontal distances so you can see the inverted image and blur. The upper point is larger and amber; the lower point is smaller and teal. Matching ray colours help you follow each point. These are model settings, rather than eye measurements. [S31]",
+        "zh": "上点的光线穿过模型透镜，光束中心落到光轴下方。光轴是穿过透镜与接收面的中心线。[S11]\n\n上点高一模型厘米。高度相对水平距离放大二十倍，方便看清倒像与光斑。上点较大、呈琥珀色，下点较小、呈青色，同色光线帮助跟随各点。这些是模型设定，不是眼球测量。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -3987,8 +3987,8 @@
         "zh": "这一点表示模型物体的下部。"
       },
       "detail": {
-        "en": "The lower point supplies the other three rays in the optical model. Its beam centre reaches the upper part of the receiver. [S11]\n\nIts height is minus half a model centimetre, drawn with the same twentyfold vertical exaggeration as the rest of the bench. The two unequal marker sizes and colours belong to the teaching object and do not represent a living structure. [S31]",
-        "zh": "模型下部的一点提供另一组三条光线，它的光束中心到达接收面的上部。[S11]\n\n高度为负半模型厘米，与整个实验台一样按二十倍竖向放大绘制。两个大小、颜色不同的标记只属于教学物体，不表示生物结构。[S31]"
+        "en": "The lower point provides the other three rays. Their centre lands on the upper part of the receiver. [S11]\n\nIt is minus half a model centimetre high, with the same twentyfold vertical enlargement as the rest of the bench. Marker sizes and colours distinguish points on a teaching object. [S31]",
+        "zh": "下点提供另一组三条光线，光束中心落到接收面上部。[S11]\n\n高度为负半模型厘米，与实验台其余部分一样竖向放大二十倍。标记的大小和颜色用来区分教学物体上的两点。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -4020,8 +4020,8 @@
         "zh": "固定接收面显示模型光束落在哪里。"
       },
       "detail": {
-        "en": "This receiver represents the retina in the separate effective-lens model. Light rays terminate at the receiver; a focused point or blur is derived from the same thin-lens geometry as the readouts. [S11]\n\nIt stays four model centimetres behind the effective lens. Heights on the bench, including the spot, are drawn twenty times taller than distances (a schematic vertical exaggeration). This frame is not a second anatomical retina, and its dimensions are design values rather than human measurements. [S31]",
-        "zh": "这一接收面在独立有效透镜模型中代表视网膜。光线到这里为止；清晰点或散开的光斑与读数使用同一套薄透镜几何计算。[S11]\n\n它固定在有效透镜后四模型厘米。实验台上的高度（包括光斑）都画成距离的二十倍，这是示意性的竖向放大。线框不是另一层解剖视网膜，尺寸是设计值，不是人体测量。[S31]"
+        "en": "The receiver stands for the retina on the optical bench. Light paths end here. The same lens calculation gives both the readings and the focused point or blurred spot. [S11]\n\nIt stays four model centimetres behind the lens. All heights, including the spot, are drawn twenty times larger relative to horizontal distances. The receiver is a diagram at a chosen scale, rather than another retinal layer in the eye. [S31]",
+        "zh": "接收面在光学实验台上代表视网膜。光路到这里为止，读数与清晰点或模糊光斑来自同一套透镜计算。[S11]\n\n它固定在透镜后四模型厘米。所有高度，包括光斑，都相对水平距离放大二十倍。这是按设定比例画出的示意面，不是眼内另一层视网膜。[S31]"
       },
       "primitive": {
         "kind": "box",
@@ -4129,8 +4129,8 @@
         "zh": "这一标记指出听觉信号通路的起点。"
       },
       "detail": {
-        "en": "Electrical signalling begins after sensory transduction, rather than being a continuation of incoming light or a stream of outside air. [S2, S7]\n\nThe small marker sits beside the enlarged hair-cell window. Moving route markers represent signals only, and their size and speed are chosen for visibility. [S31]",
-        "zh": "感受结构转导之后才开始电信号传递；它不是入射光的延续，也不是外界空气流。[S2, S7]\n\n小标记位于放大毛细胞窗旁。路径中的移动标记只表示信号，大小与速度按可见性设计。[S31]"
+        "en": "Sensory structures turn light or movement into electrical signals. A nerve carries these signals, rather than incoming light or outside air. [S2, S7]\n\nThis marker sits beside the enlarged hair cells. Moving marks show the signal route, with sizes and speeds chosen so you can follow them. [S31]",
+        "zh": "感受结构把光或运动转成电信号。神经传递这些信号，而非入射光或外界空气。[S2, S7]\n\n标记位于放大的毛细胞旁。移动标记显示信号路线，大小和速度以容易跟随为准。[S31]"
       },
       "primitive": {
         "kind": "sphere",
@@ -4169,8 +4169,8 @@
         "zh": "静止位置标记显示介质粒子只在附近来回运动。"
       },
       "detail": {
-        "en": "In a longitudinal sound wave, medium particles move back and forth about their rest positions while the wave pattern travels. A particle does not make the journey from a source to the ear. [S9]\n\nThis fixed tick marks the highlighted particle’s rest position. The silent model uses a fixed slowdown factor and relative displacement; it is not a sound-level meter or a hearing test. [S31]",
-        "zh": "纵向声波中的介质粒子在静止位置附近往复，而波的形态向前传播。粒子不会从声源一路走到耳朵。[S9]\n\n固定短刻度标出高亮粒子的静止位置。无声模型使用固定慢放倍率与相对位移，不是声级计或听力测试。[S31]"
+        "en": "In a longitudinal sound wave, particles move back and forth around their rest positions while the wave travels. A particle does not travel from the source to the ear. [S9]\n\nThe fixed tick marks the highlighted particle’s rest position. The silent model uses a fixed slowdown and relative movement size. It does not measure sound level or test hearing. [S31]",
+        "zh": "纵向声波传播时，粒子在静止位置附近往复，不会从声源一路走到耳朵。[S9]\n\n固定刻度标出高亮粒子的静止位置。静音模型采用固定慢放倍率与相对运动幅度，不测量声级或测试听力。[S31]"
       },
       "primitive": {
         "kind": "box",
@@ -4275,8 +4275,8 @@
         "zh": "这张薄片显示一档模型瞳孔开口。"
       },
       "detail": {
-        "en": "Original schematic annulus with a fixed outer diameter and a control-selected inner aperture. It is non-selectable context belonging to the iris. [S31]",
-        "zh": "原创环形示意保持外径不变，由控件选择内孔。这是属于虹膜的不可选中背景件。[S31]"
+        "en": "This ring shows the selected pupil opening. Its outer edge stays fixed. It belongs to the iris and cannot be selected separately. [S31]",
+        "zh": "环形薄片显示选定的瞳孔开口，外缘保持固定。它属于虹膜，不能单独点选。[S31]"
       }
     },
     {
@@ -4331,8 +4331,8 @@
         "zh": "这张薄片显示一档模型瞳孔开口。"
       },
       "detail": {
-        "en": "Original schematic annulus with a fixed outer diameter and a control-selected inner aperture. It is non-selectable context belonging to the iris. [S31]",
-        "zh": "原创环形示意保持外径不变，由控件选择内孔。这是属于虹膜的不可选中背景件。[S31]"
+        "en": "This ring shows the selected pupil opening. Its outer edge stays fixed. It belongs to the iris and cannot be selected separately. [S31]",
+        "zh": "环形薄片显示选定的瞳孔开口，外缘保持固定。它属于虹膜，不能单独点选。[S31]"
       }
     }
   ],
@@ -5051,8 +5051,8 @@
         "zh": "模型"
       },
       "value": {
-        "en": "Original schematic · separate scales",
-        "zh": "原创示意·各工位比例不同"
+        "en": "Simplified organs · separate scales",
+        "zh": "简化器官·各部分比例不同"
       },
       "tag": "design"
     },
@@ -5062,15 +5062,15 @@
         "zh": "光学"
       },
       "value": {
-        "en": "Cornea + lens → one effective lens",
-        "zh": "角膜与晶状体合成一个有效透镜"
+        "en": "One lens represents cornea + lens",
+        "zh": "一个透镜代表角膜与晶状体"
       },
       "tag": "sim"
     },
     {
       "key": {
-        "en": "Bench heights",
-        "zh": "实验台高度"
+        "en": "Bench height scale",
+        "zh": "实验台竖向比例"
       },
       "value": {
         "en": "Vertical ×20 · schematic",
@@ -5304,8 +5304,8 @@
         },
         "states": {
           "dark": {
-            "en": "Dark · geometry prediction",
-            "zh": "暗处·几何预测"
+            "en": "Dark · calculated paths only",
+            "zh": "无光·仅显示计算光路"
           },
           "lit": {
             "en": "Lit",

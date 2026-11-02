@@ -94,8 +94,8 @@ state:
         heater-w: 100
         elapsed-s: 0
     caption:
-      en: The horizontal axis is elapsed time in seconds. The vertical axis is water temperature in degrees Celsius.
-      zh: 横轴是经过时间，单位秒；纵轴是水温，单位摄氏度。
+      en: "The horizontal axis shows time in seconds. The vertical axis shows water temperature in degrees Celsius."
+      zh: "横轴显示时间，单位秒；纵轴显示水温，单位摄氏度。"
   - camera: view-heater
     layers:
     - curves
@@ -109,8 +109,8 @@ state:
         elapsed-s: 120
       reveal: true
     caption:
-      en: At 120 seconds, cursor and probe agree at about 39.3 degrees Celsius in this model.
-      zh: 一百二十秒时，游标和探头在这个模型里都读约三十九点三摄氏度。
+      en: "At 120 seconds, both the cursor and probe show about 39.3 degrees Celsius in this simulation."
+      zh: "模拟到一百二十秒，游标和探头都显示约三十九点三摄氏度。"
   - camera: view-heater
     layers:
     - curves
@@ -124,8 +124,8 @@ state:
         elapsed-s: 120
       reveal: true
     caption:
-      en: With twice the water mass, equal input gives half the temperature rise in this ideal model.
-      zh: 理想模型中，水量加倍、供能相同，升温幅度变为一半。
+      en: "Double the water mass with the same energy input. In this ideal model, the temperature rise halves."
+      zh: "水量加倍、供能相同。在这个理想模型中，升温幅度减半。"
   - camera: view-heater
     layers:
     - curves
@@ -139,8 +139,8 @@ state:
         elapsed-s: 120
       reveal: true
     caption:
-      en: At fixed water mass, lower power makes the model heating line less steep.
-      zh: 水量不变时，功率较低使模拟加热线较平缓。
+      en: "Keep the water mass fixed and lower the power. The heating line rises more gently."
+      zh: "保持水量不变、降低功率，加热线上升较缓。"
   - camera: view-heater
     layers:
     - curves
@@ -154,8 +154,8 @@ state:
         elapsed-s: 300
       reveal: true
     caption:
-      en: With no input and no heat loss in this ideal heating model, temperature stays unchanged.
-      zh: 理想加热模型没有输入、也没有散热时，温度不变。
+      en: "With the input off, this ideal model has no energy input or heat loss. The temperature stays unchanged."
+      zh: "关闭输入后，理想模型既无供能也无散热，水温不变。"
   index:
     parts:
     - heater
@@ -169,23 +169,23 @@ state:
 
 <Lang en>
 
-The probe and the graph describe the same model water. A <Term id="heating-curve">heating curve</Term> shows how its temperature changes with elapsed time. Read time along the horizontal axis and temperature along the vertical axis. Moving the time control places the cursor at another instant and updates the probe reading to match.
+The probe and graph show the same water temperature. A <Term id="heating-curve">heating curve</Term> shows how temperature changes with time. Time runs along the horizontal axis. Temperature runs up the vertical axis. Move the time control: the graph cursor and probe show the same instant.
 
-The water's <Term id="mass">mass</Term> is the amount controlled in grams. <Term id="power">Power</Term> is energy supplied per unit time. At this simulated operating point, <Num s="S27">100 W</Num> heats <Num s="S27">200 g</Num> of water from <Num s="S27">25 °C</Num>. After <Num s="S27">120 s</Num>, its temperature is about <Num s="S27">39.3 °C</Num>. The rising straight line belongs to an ideal model with constant input and no heat loss.
+Use grams to set the water’s <Term id="mass">mass</Term>, or how much matter it contains. <Term id="power">Power</Term> tells you how much energy is supplied each second. In this simulation, a <Num s="S27">100 W</Num> heater warms <Num s="S27">200 g</Num> of water from <Num s="S27">25 °C</Num>. After <Num s="S27">120 s</Num>, the water reaches about <Num s="S27">39.3 °C</Num>. Constant power gives a straight rising line here because the model leaves out heat loss.
 
-Hold power and time the same, then double the water mass. The same energy is spread through more water, and the temperature rise is halved in this model. Next restore the original water mass and reduce power. Less energy arrives in each equal time interval, so the line rises more gently. These comparisons change different conditions; record them as separate experiments.
+Keep power and time the same, then double the water mass. The same energy heats more water, so the temperature rise is halved. Next, restore the original mass and reduce power. Less energy arrives each second, so the line rises more gently. Record these as separate comparisons. To find the temperature rise, subtract the starting temperature from the final temperature.
 
-Turning input off makes this ideal heating line horizontal. There is no input and no loss, so the temperature stays unchanged. A real cup can still exchange energy with its surroundings after a heater is switched off. Use the card to predict, reveal and record a chosen instant. The complete model line shows calculated values between instants; those values are not automatically added to your observation table.
+Switch off the input. The line becomes horizontal because this model has neither energy input nor heat loss. Real water can still exchange energy with its surroundings after a heater is switched off. Use the card to predict, reveal and record a chosen time. The graph shows calculated temperatures between your recorded observations; it does not add them to your table.
 
 <More title={{"en":"The calculation behind the line","zh":"直线背后的计算"}}>
 
-For approximately constant specific heat without a phase change, energy change equals mass × specific heat × temperature change. Atlas uses a rounded design value of <Num s="S27">4.2 J/(g·K)</Num> for water and omits the container's heat capacity. The equation is a model explanation, not a required primary calculation.
+When there is no change of state and specific heat stays nearly constant, energy change equals mass × specific heat × temperature change. Specific heat is the energy needed to warm a unit mass by one degree. The model uses <Num s="S27">4.2 J/(g·K)</Num> for water and leaves out energy absorbed by the container. The formula explains the graph; you can compare the lines without calculating it.
 
 </More>
 
 <More title={{"en":"Water level is illustrative","zh":"液位只是示意"}}>
 
-Read mass from the control. The water level is fixed and illustrative, not a volume measurement. This heating model also excludes boiling and other phase changes; it does not manufacture a flat boiling segment by clipping high temperatures.
+Read water mass from the control. The drawn water level stays fixed. This model covers heating without changes of state, so it does not show a boiling plateau.
 
 </More>
 
@@ -193,23 +193,23 @@ Read mass from the control. The water level is fixed and illustrative, not a vol
 
 <Lang zh>
 
-探头和图线描述同一份模拟水。<Term id="heating-curve">加热曲线</Term>显示温度随经过时间怎样改变：横轴读时间，纵轴读温度。调节时间，游标移到相应时刻，探头也显示同一时刻的水温。
+探头和图线显示同一份水的温度。<Term id="heating-curve">加热曲线</Term>显示温度随时间怎样改变。横轴读时间，纵轴读温度。调节时间，图上的游标和探头便显示同一时刻的水温。
 
-这里用克控制水的<Term id="mass">质量</Term>。<Term id="power">功率</Term>表示单位时间供给多少能量。这个模拟运行点中，以 <Num s="S27">100 W</Num> 加热 <Num s="S27">200 g</Num> 水，初温 <Num s="S27">25 °C</Num>；经过 <Num s="S27">120 s</Num>，水温约为 <Num s="S27">39.3 °C</Num>。图线是直线，因为理想模型保持供能不变，并忽略散热。
+用克设定水的<Term id="mass">质量</Term>，也就是它含有多少物质。<Term id="power">功率</Term>表示每秒供给多少能量。在这个模拟中，<Num s="S27">100 W</Num> 的加热器把 <Num s="S27">200 g</Num> 水从 <Num s="S27">25 °C</Num> 加热。经过 <Num s="S27">120 s</Num>，水温约为 <Num s="S27">39.3 °C</Num>。功率不变，模型又忽略散热，所以图线是上升的直线。
 
-保持功率与时间相同，把水量加倍，相同能量分给更多水，模型升温幅度便减半。再恢复原水量、降低功率，每段相同时间输入的能量减少，加热线也较平缓。这些比较改变的条件不同，应分别记录，不能把不同条件的行混成同一实验。
+保持功率和时间相同，把水量加倍。相同能量加热更多水，升温幅度便减半。再恢复原水量、降低功率，每秒输入的能量减少，图线就较平缓。把这些比较分别记录。要算升温多少，用末温减去初温。
 
-关闭输入，理想加热线便水平：既无输入，也无损失，所以温度不变。真实杯水在关掉加热器后，仍可能与环境交换能量。用卡片预测、揭示，再主动记录选定时刻。整条图线来自计算，不会自动变成你记录的观察行。读图时先沿横轴找到所选时刻，再向上看曲线的温度；同一个点对应同一个探头读数。比较升温多少时，还要从末温扣除初温，避免把温度值与温度变化混为一谈。
+关闭输入，图线便水平，因为这个模型既没有供能，也没有散热。真实杯水在关掉加热器后，仍会与环境交换能量。用卡片预测、揭示，再记录所选时刻。图线也显示各次记录之间算出的温度，但不会自动把它们加进观察表。
 
 <More title={{"en":"The calculation behind the line","zh":"直线背后的计算"}}>
 
-没有相变、比热近似不变时，能量变化等于质量、比热与温度变化的乘积。本设计把水的比热取整为 <Num s="S27">4.2 J/(g·K)</Num>，忽略容器热容量。公式用于解释模型，不是小学必须掌握的计算要求。
+没有物态变化、比热近似不变时，能量变化等于质量、比热与温度变化的乘积。比热表示单位质量升高一度需要多少能量。模型把水的比热取为 <Num s="S27">4.2 J/(g·K)</Num>，忽略容器吸收的能量。公式用来解释图线；不计算公式，也能比较图线。
 
 </More>
 
 <More title={{"en":"Water level is illustrative","zh":"液位只是示意"}}>
 
-水量应从质量控件读取。画面液位固定，只作示意，不是体积测量。加热模型也没有求解沸腾等物态变化，不会把高温数值硬夹住，制造假的沸腾平台。
+从控件读取水的质量，画面的水位保持不变。模型只显示没有物态变化的加热过程，所以没有沸腾时的水平段。
 
 </More>
 

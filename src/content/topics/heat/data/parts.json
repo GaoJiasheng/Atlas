@@ -12,8 +12,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
-        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+        "en": "This open glass beaker has a thin wall, a base and a small pouring lip. Its water surface is shown separately. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、杯底和小杯嘴。水面单独显示。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -124,12 +124,12 @@
         "zh": "恒温温浴"
       },
       "summary": {
-        "en": "Provides the liquid whose temperature is modelled.",
-        "zh": "表示模型求温度的液体。"
+        "en": "Keeps the bath at the selected temperature.",
+        "zh": "表示保持选定温度的水。"
       },
       "detail": {
-        "en": "An external reservoir maintains the selected bath temperature. The model does not solve the finite bath’s energy change. [S27]",
-        "zh": "外部热库维持选定的温浴温度。模型不求这杯有限水量的能量变化。 [S27]"
+        "en": "An external source keeps the bath at the selected temperature as it exchanges energy with the spoons. The bath’s temperature stays fixed in the calculation. [S27]",
+        "zh": "外部来源维持选定浴温，让水与勺子交换能量时仍保持恒温。计算中，浴温不变。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -169,8 +169,8 @@
         "zh": "在温浴与勺柄远端之间传热。"
       },
       "detail": {
-        "en": "The shallow hollow bowl joins the continuous handle. Both spoons have the same outline, immersion depth, initial temperature and effective tip heat capacity in this teaching model. These are effective paths, not measured real-spoon properties. [S27]",
-        "zh": "浅凹勺碗与连续手柄相连。教学模型让两勺外形、浸入深度、初温和远端有效热容量相同。这是有效导热通路，并非两把真实勺子的实测性质。 [S27]"
+        "en": "A shallow bowl joins a continuous handle. The two model spoons have the same shape, immersion depth, starting temperature and tip heat capacity: the energy needed for each degree of warming. Their heat-transfer rates were chosen for comparison, rather than measured from real spoons. [S27]",
+        "zh": "浅勺碗与完整勺柄相连。两把模型勺子的形状、浸入深度、初温和远端热容量相同。热容量表示升高一度需要多少能量。传热快慢是比较用的设定，不是实测值。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -312,8 +312,8 @@
         "zh": "在温浴与勺柄远端之间传热。"
       },
       "detail": {
-        "en": "The shallow hollow bowl joins the continuous handle. Both spoons have the same outline, immersion depth, initial temperature and effective tip heat capacity in this teaching model. These are effective paths, not measured real-spoon properties. [S27]",
-        "zh": "浅凹勺碗与连续手柄相连。教学模型让两勺外形、浸入深度、初温和远端有效热容量相同。这是有效导热通路，并非两把真实勺子的实测性质。 [S27]"
+        "en": "A shallow bowl joins a continuous handle. The two model spoons have the same shape, immersion depth, starting temperature and tip heat capacity: the energy needed for each degree of warming. Their heat-transfer rates were chosen for comparison, rather than measured from real spoons. [S27]",
+        "zh": "浅勺碗与完整勺柄相连。两把模型勺子的形状、浸入深度、初温和远端热容量相同。热容量表示升高一度需要多少能量。传热快慢是比较用的设定，不是实测值。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -455,8 +455,8 @@
         "zh": "指示模型中勺柄远端的温度。"
       },
       "detail": {
-        "en": "This separate pointer is a temperature diagram. The uniform tip node is not the temperature at every location along the spoon, and the material does not glow when warm. [S27]",
-        "zh": "独立指示片是温度示意。远端单节点温度并非整把勺子各处的温度；材料受热时不发光。 [S27]"
+        "en": "This separate pointer shows the temperature at the far end of the handle. Other places along a real spoon can have different temperatures. The colours show temperature; a warm spoon does not glow. [S27]",
+        "zh": "独立指示片显示勺柄远端的温度。真实勺子其他位置的温度可能不同。颜色用来表示温度，温热勺子本身不会发光。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -498,8 +498,8 @@
         "zh": "指示模型中勺柄远端的温度。"
       },
       "detail": {
-        "en": "This separate pointer is a temperature diagram. The uniform tip node is not the temperature at every location along the spoon, and the material does not glow when warm. [S27]",
-        "zh": "独立指示片是温度示意。远端单节点温度并非整把勺子各处的温度；材料受热时不发光。 [S27]"
+        "en": "This separate pointer shows the temperature at the far end of the handle. Other places along a real spoon can have different temperatures. The colours show temperature; a warm spoon does not glow. [S27]",
+        "zh": "独立指示片显示勺柄远端的温度。真实勺子其他位置的温度可能不同。颜色用来表示温度，温热勺子本身不会发光。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -541,8 +541,8 @@
         "zh": "感温端浸入水中以测量温度。"
       },
       "detail": {
-        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
-        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+        "en": "The sensing bulb sits in the water, clear of the bottom and wall. A support holds the stem. The separate indicator moves evenly with temperature as a diagram; it does not calculate an expanding liquid’s volume. [S27]",
+        "zh": "感温端浸在水中，不碰杯底或杯壁。支架固定测温杆。旁边的指示片随温度均匀移动，只作图示，不计算液体膨胀的体积。[S27]"
       },
       "primitive": {
         "kind": "tube",
@@ -607,8 +607,8 @@
         "zh": "标示探头对应的模型温度。"
       },
       "detail": {
-        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
-        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+        "en": "The pointer and card use the same temperature value before rounding. The pointer moves along the stem to show that temperature, without calculating a liquid volume. [S27]",
+        "zh": "指示片和卡片使用同一个取整前的温度值。指示片沿杆移动来显示温度，不计算液柱体积。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -771,12 +771,12 @@
         "zh": "电热台"
       },
       "summary": {
-        "en": "Supplies the selected power to the heating model.",
-        "zh": "向加热模型提供选定功率。"
+        "en": "Supplies energy at the selected power.",
+        "zh": "按选定功率供给能量。"
       },
       "detail": {
-        "en": "The generic electric heater supports an open beaker. The ideal model ignores container heat capacity and heat loss; switching decorative RUN does not advance time. [S27]",
-        "zh": "通用电热台支承敞口烧杯。理想模型忽略容器热容量与散热；装饰性运转开关不会推进实验时间。 [S27]"
+        "en": "The electric heater supports an open beaker. In this ideal model, all supplied energy heats the water; the container absorbs none and no heat escapes. Use the time control to advance the experiment. RUN only switches the moving symbols on or off. [S27]",
+        "zh": "电热台支承敞口烧杯。理想模型中，供给的能量全部用于加热水，容器不吸热，也没有散热。用时间控件推进实验；RUN 只开关移动符号。[S27]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -835,8 +835,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
-        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+        "en": "This open glass beaker has a thin wall, a base and a small pouring lip. Its water surface is shown separately. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、杯底和小杯嘴。水面单独显示。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -947,12 +947,12 @@
         "zh": "加热的水"
       },
       "summary": {
-        "en": "Provides the liquid whose temperature is modelled.",
-        "zh": "表示模型求温度的液体。"
+        "en": "Warms as the heater supplies energy.",
+        "zh": "获得加热器供给的能量而升温。"
       },
       "detail": {
-        "en": "Water mass is an independent numerical input to the heat-capacity model. The displayed level is a fixed schematic level, not a volume or mass scale. [S27]",
-        "zh": "水的质量是热容量模型的独立数值输入。画面水位固定为示意水位，不是体积或质量刻度。 [S27]"
+        "en": "Set the water’s mass with the control. Its drawn level stays fixed, so read the control rather than estimating mass or volume from the picture. [S27]",
+        "zh": "用控件设定水的质量。画面的水位不变，要读控件数值，不要从图中估计质量或体积。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -992,8 +992,8 @@
         "zh": "感温端浸入水中以测量温度。"
       },
       "detail": {
-        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
-        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+        "en": "The sensing bulb sits in the water, clear of the bottom and wall. A support holds the stem. The separate indicator moves evenly with temperature as a diagram; it does not calculate an expanding liquid’s volume. [S27]",
+        "zh": "感温端浸在水中，不碰杯底或杯壁。支架固定测温杆。旁边的指示片随温度均匀移动，只作图示，不计算液体膨胀的体积。[S27]"
       },
       "primitive": {
         "kind": "tube",
@@ -1058,8 +1058,8 @@
         "zh": "标示探头对应的模型温度。"
       },
       "detail": {
-        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
-        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+        "en": "The pointer and card use the same temperature value before rounding. The pointer moves along the stem to show that temperature, without calculating a liquid volume. [S27]",
+        "zh": "指示片和卡片使用同一个取整前的温度值。指示片沿杆移动来显示温度，不计算液柱体积。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -1101,8 +1101,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "The thin glass wall, base and small pouring lip are original apparatus geometry. The water surface is separate; this is not a sealed pressure vessel. [S27]",
-        "zh": "薄玻璃杯壁、杯底和小杯嘴是原创器材几何。水面为独立零件；这不是密封压力容器。 [S27]"
+        "en": "This open glass beaker has a thin wall, a base and a small pouring lip. Its water surface is shown separately. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、杯底和小杯嘴。水面单独显示。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1213,12 +1213,12 @@
         "zh": "冷却的水"
       },
       "summary": {
-        "en": "Provides the liquid whose temperature is modelled.",
-        "zh": "表示模型求温度的液体。"
+        "en": "Exchanges heat with the surroundings.",
+        "zh": "与周围环境交换热量。"
       },
       "detail": {
-        "en": "This body exchanges heat with a fixed 25 °C reservoir. The effective conductance includes the whole heat-transfer path and is not a material’s thermal conductivity. [S27]",
-        "zh": "这份水与固定为25 °C的热库交换热量。有效传热系数代表整条传热通路，不是某种材料的导热率。 [S27]"
+        "en": "The water exchanges heat with surroundings held at 25 °C. The transfer setting describes the whole route between them, rather than the conductivity of one material. [S27]",
+        "zh": "水与保持 25 °C 的环境交换热量。传热参数描述两者之间的整条通路，并非某一种材料的导热率。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -1258,8 +1258,8 @@
         "zh": "感温端浸入水中以测量温度。"
       },
       "detail": {
-        "en": "The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation. [S27]",
-        "zh": "感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。 [S27]"
+        "en": "The sensing bulb sits in the water, clear of the bottom and wall. A support holds the stem. The separate indicator moves evenly with temperature as a diagram; it does not calculate an expanding liquid’s volume. [S27]",
+        "zh": "感温端浸在水中，不碰杯底或杯壁。支架固定测温杆。旁边的指示片随温度均匀移动，只作图示，不计算液体膨胀的体积。[S27]"
       },
       "primitive": {
         "kind": "tube",
@@ -1324,8 +1324,8 @@
         "zh": "标示探头对应的模型温度。"
       },
       "detail": {
-        "en": "The indicator moves along the stem with the same full-precision control or model reading shown in the card. Position is a calibrated diagram, not a claimed liquid volume. [S27]",
-        "zh": "指示片与卡片中的控件值或模型温度使用同一个全精度数值。位置是校准示意，不代表计算过的液柱体积。 [S27]"
+        "en": "The pointer and card use the same temperature value before rounding. The pointer moves along the stem to show that temperature, without calculating a liquid volume. [S27]",
+        "zh": "指示片和卡片使用同一个取整前的温度值。指示片沿杆移动来显示温度，不计算液柱体积。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -1363,12 +1363,12 @@
         "zh": "隔热包覆层"
       },
       "summary": {
-        "en": "Reduces the model’s heat-transfer rate.",
-        "zh": "减小模型中的传热速率。"
+        "en": "Slows heat transfer into or out of the water.",
+        "zh": "减慢能量传入水中或从水中传出。"
       },
       "detail": {
-        "en": "An annular sleeve surrounds the cooling cup without sealing its open mouth. The wrapped setting uses lower effective conductance; it supplies no energy and can also slow warming from cold. [S27]",
-        "zh": "环形包覆层围住冷却杯，不封住杯口。包覆条件采用较低的有效传热系数；它不供能，也能减慢冷物体升温。 [S27]"
+        "en": "The sleeve surrounds the cup and leaves its mouth open. It slows heat transfer without supplying energy. It can slow both the cooling of hot water and the warming of cold water. [S27]",
+        "zh": "包覆层围住杯身，杯口保持敞开。它不供能，只减慢传热，既能减慢热水冷却，也能减慢冷水变暖。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1431,8 +1431,8 @@
         "zh": "标示烧杯与包覆层之间的间隙。"
       },
       "detail": {
-        "en": "This hollow annular space is a schematic part of the insulation path. It is not a fluid pipe or a separate solved air-temperature field. [S27]",
-        "zh": "中空环形间隙示意隔热通路的一部分，不是流体管线，也没有独立求解空气温度场。 [S27]"
+        "en": "This ring-shaped gap lies between the cup and its wrap. It is part of the insulation. The model does not calculate a separate temperature for the air in the gap. [S27]",
+        "zh": "杯身与包覆层之间留有环形空隙，是隔热结构的一部分。模型不单独计算空隙中的空气温度。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1493,8 +1493,8 @@
         "zh": "表示右端能够自由伸缩的固体杆。"
       },
       "detail": {
-        "en": "The rod is 100 mm long at the 25 °C reference in the linear model. Its drawn mesh stays at its reference length; only the separate pointer displays the calculated endpoint displacement enlarged 500 times. [S27]",
-        "zh": "线性模型中，钢杆在25 °C参考温度下长100 mm。杆网格保留参考长度；只有独立指示片显示放大500倍的计算端点位移。 [S27]"
+        "en": "In the model, the rod is 100 mm long at 25 °C. The drawn rod stays at this length. A separate pointer shows its calculated length change enlarged 500 times. [S27]",
+        "zh": "模型中，杆在 25 °C 时长 100 mm。画出的杆保持这个长度，独立指示片显示放大 500 倍的计算伸缩量。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -1543,8 +1543,8 @@
         "zh": "显示放大500倍的杆端位移。"
       },
       "detail": {
-        "en": "The thin pointer is separate from the rod. A 0.072 mm model extension moves it 0.036 m on this diagram; negative extension moves it left. It is not the physical rod end. [S27]",
-        "zh": "薄指示片与钢杆分开。模型伸长0.072 mm时，图中指示片移动0.036 m；负伸长使它向左移动。它不是钢杆的实际端头。 [S27]"
+        "en": "The pointer is separate from the rod. When the calculated extension is 0.072 mm, the pointer moves 0.036 m in the diagram. It moves left when the rod contracts. Read the actual calculated extension from the number. [S27]",
+        "zh": "指示片与杆分开。计算伸长 0.072 mm 时，图中指示片移动 0.036 m；杆收缩时，指示片向左移动。计算的实际伸缩量要看数字。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -1586,8 +1586,8 @@
         "zh": "托住钢杆，不把两端同时锁死。"
       },
       "detail": {
-        "en": "An open shallow saddle supports the rod. The rod can move along its axis as temperature changes; the pair is not a pair of fixed end clamps. [S27]",
-        "zh": "开放浅鞍座托住钢杆，允许它随温度变化沿轴向移动；两个支承不是两只锁死端点的夹具。 [S27]"
+        "en": "The shallow, open support lets the rod slide along its length as temperature changes. The two supports hold it up without clamping both ends in place. [S27]",
+        "zh": "开放的浅槽托住杆，让杆随温度变化沿长度方向滑动。两个支座承托杆身，不把两端锁死。[S27]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1685,8 +1685,8 @@
         "zh": "托住钢杆，不把两端同时锁死。"
       },
       "detail": {
-        "en": "An open shallow saddle supports the rod. The rod can move along its axis as temperature changes; the pair is not a pair of fixed end clamps. [S27]",
-        "zh": "开放浅鞍座托住钢杆，允许它随温度变化沿轴向移动；两个支承不是两只锁死端点的夹具。 [S27]"
+        "en": "The shallow, open support lets the rod slide along its length as temperature changes. The two supports hold it up without clamping both ends in place. [S27]",
+        "zh": "开放的浅槽托住杆，让杆随温度变化沿长度方向滑动。两个支座承托杆身，不把两端锁死。[S27]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1784,8 +1784,8 @@
         "zh": "比较小球原状与受热后的示意状态。"
       },
       "detail": {
-        "en": "This independent qualitative ball-and-ring scene enlarges the visual size change. It does not use the steel rod’s dimensions or coefficient, and it gives no numerical ball temperature or expansion. [S27]",
-        "zh": "球环是独立的定性场景，尺寸变化为了观察而放大。不使用钢杆尺寸或系数，也不给小球温度或膨胀量数字。 [S27]"
+        "en": "The ball-and-ring picture enlarges the size change to make it visible. It is a separate comparison from the rod and uses neither the rod’s dimensions nor its expansion coefficient. It gives no numerical ball temperature or expansion. [S27]",
+        "zh": "球环图放大尺寸变化，方便观察。它与杆是不同的比较，不采用杆的尺寸或膨胀系数，也没有给出球的温度或膨胀量数值。[S27]"
       },
       "primitive": {
         "kind": "sphere",
@@ -1855,8 +1855,8 @@
         "zh": "在小球对照中保持原来的孔。"
       },
       "detail": {
-        "en": "The annular ring has a real 44 mm design opening rather than a solid painted disc. In this ball-only warming scene the ring stays in its original state; a separately heated ring would expand too. [S27]",
-        "zh": "圆环有真实的设计孔洞，并非把孔画在实心圆盘上。在只加热小球的情景中，环保持原状；若另外加热圆环，环也会膨胀。 [S27]"
+        "en": "The ring has an open hole, 44 mm wide in this model. It stays unchanged while the ball warms. If the ring were heated too, it would expand. [S27]",
+        "zh": "圆环中间有通孔，模型孔宽 44 mm。球受热时，环保持原状。如果环也受热，它也会膨胀。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1970,8 +1970,8 @@
         "zh": "在固定玻璃套管中显示变长的液柱。"
       },
       "detail": {
-        "en": "Only the coloured liquid column changes length in these qualitative poses. Its fixed glass sleeve, bulb and support belong to the bench context geometry so the glass does not grow. This is a diagram of liquid expansion, without a volume or temperature solver. [S27]",
-        "zh": "定性姿态只改变有色液柱长度。固定玻璃套管、球泡和支座并入台面背景几何，因此玻璃不会跟着变长。这是液体膨胀示意，没有体积或温度求解器。 [S27]"
+        "en": "The coloured liquid column lengthens while the glass tube, bulb and support stay fixed. This picture shows liquid expansion without calculating a volume or temperature. [S27]",
+        "zh": "有色液柱变长，玻璃管、球泡和支架保持固定。画面说明液体膨胀，不计算体积或温度。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -2010,8 +2010,8 @@
         "zh": "围住可动活塞下方的气体。"
       },
       "detail": {
-        "en": "The transparent cylinder has a fixed bottom and an open top. The piston moves upward in the qualitative warm pose; no pressure, gas volume or gas law is calculated. [S27]",
-        "zh": "透明筒有固定底部和敞开上端。受热定性姿态使活塞上移；模型不计算压强、气体体积或气体方程。 [S27]"
+        "en": "The clear cylinder has a fixed bottom and an open top. In the warm view, the piston moves up to give the gas more space. The picture does not calculate pressure or volume using a gas law. [S27]",
+        "zh": "透明筒底部固定，上端敞开。受热视图中，活塞上移，给气体更多空间。画面不使用气体定律计算压强或体积。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2080,8 +2080,8 @@
         "zh": "移动以给受热气体留出更大空间。"
       },
       "detail": {
-        "en": "The piston is a separate solid disc with a slender handle. Its two positions show a qualitative change in gas space under a movable boundary, not a sealed rigid container being heated. [S27]",
-        "zh": "活塞是带细柄的独立圆盘。两个位置只定性表示可动边界下的气体空间变化，不表示加热密封刚性容器。 [S27]"
+        "en": "This disc has a slender handle. Its two positions show gas taking up more space beneath a movable piston. A rigid sealed container would hold the volume fixed. [S27]",
+        "zh": "圆盘带有细柄。两个位置显示气体在可动活塞下占据更多空间。刚性密闭容器则会限制体积。[S27]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -2153,8 +2153,8 @@
         "zh": "把两勺固定在相同浸入深度。"
       },
       "detail": {
-        "en": "A rear upright carries a crossbar behind both handles. Two short front tabs meet the handles without covering their bowls. Equal immersion is a design condition, not an inferred property of their colours. [S27]",
-        "zh": "后方立柱支承两勺柄后面的横梁；短托片接触手柄，不遮住勺碗。相同浸入深度是设计条件，不由颜色推断。 [S27]"
+        "en": "An upright and crossbar support both spoon handles. Short tabs touch the handles without covering the bowls. The holder keeps both bowls immersed to the same depth. [S27]",
+        "zh": "立柱与横梁支承两根勺柄。短托片接触勺柄，不遮住勺碗，让两个勺碗保持相同浸入深度。[S27]"
       },
       "primitive": {
         "kind": "box",
@@ -2429,8 +2429,8 @@
         "zh": "标示冷却模型采用的固定环境温度。"
       },
       "detail": {
-        "en": "The model reservoir stays at the design reference of 25 °C. This is not a live thermometer or a reading of Singapore weather. [S27]",
-        "zh": "模型热库固定为设计参考值25 °C。这不是实时温度计，也不是新加坡天气读数。 [S27]"
+        "en": "The surroundings stay at 25 °C in this simulation. This chosen temperature is not a live reading of your room or Singapore weather. [S27]",
+        "zh": "模拟环境保持 25 °C。这个设定温度不是你的房间或新加坡天气的实时读数。[S27]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2490,8 +2490,8 @@
         "zh": "支承各个独立模型的器材。"
       },
       "detail": {
-        "en": "Original 1.8 × 0.7 m design bench, top at 0.75 m. Adjacent apparatus are separate experiments, not thermally connected. The fixed glass envelope and bulb of the qualitative liquid-column diagram are static context; only its selected liquid column lengthens. [S27]",
-        "zh": "原创设计台面为1.8 × 0.7 m，台面高0.75 m。并排器材属于独立实验，不表示互相热接触。定性液柱图的固定玻璃外壳和球泡是静态背景；只有可选液柱变长。[S27]"
+        "en": "The model bench is 1.8 × 0.7 m, with its top at 0.75 m. It holds separate experiments whose energy transfers are not connected. In the liquid-column picture, the glass tube and bulb stay fixed while only the coloured column lengthens. [S27]",
+        "zh": "模型台面为 1.8 × 0.7 m，高 0.75 m。它承托独立实验，各自的能量传递互不相连。液柱图中的玻璃管和球泡保持固定，只有有色液柱变长。[S27]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -3139,7 +3139,7 @@
     },
     {
       "key": {
-        "en": "Net energy",
+        "en": "Net energy received",
         "zh": "净传入能量"
       },
       "follow": [
@@ -3164,7 +3164,7 @@
     },
     {
       "key": {
-        "en": "Net rate",
+        "en": "Net power received",
         "zh": "净传入功率"
       },
       "follow": [
@@ -3506,7 +3506,7 @@
         "from": "direction:metal-tip",
         "label": {
           "en": "Metal temperature change",
-          "zh": "金属方向"
+          "zh": "金属温度变化"
         },
         "kind": "state",
         "states": {
@@ -3529,7 +3529,7 @@
         "from": "direction:plastic-tip",
         "label": {
           "en": "Plastic temperature change",
-          "zh": "塑料方向"
+          "zh": "塑料温度变化"
         },
         "kind": "state",
         "states": {
@@ -3582,7 +3582,7 @@
         "from": "change:heater",
         "label": {
           "en": "Heating temperature change",
-          "zh": "加热温差"
+          "zh": "加热温度变化"
         },
         "unit": "K",
         "decimals": 1
@@ -3592,7 +3592,7 @@
         "from": "change:cooler",
         "label": {
           "en": "Cooling temperature change",
-          "zh": "冷却温差"
+          "zh": "冷却温度变化"
         },
         "unit": "K",
         "decimals": 1
@@ -3695,7 +3695,7 @@
           },
           "reference": 25,
           "length": 0.1,
-          "alpha": 0.000012
+          "alpha": 1.2e-05
         }
       },
       "compare": {

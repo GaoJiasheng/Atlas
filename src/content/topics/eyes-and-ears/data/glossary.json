@@ -7,8 +7,8 @@
         "zh": "角膜"
       },
       "definition": {
-        "en": "The clear curved front surface of the eye, which admits and bends light.",
-        "zh": "眼前透明、弯曲的表面，让光进入并折光。"
+        "en": "The clear, curved front surface of the eye. It lets light in and bends it.",
+        "zh": "眼睛前端透明、弯曲的表面，让光进入并改变方向。"
       },
       "see": [
         "lens",
@@ -51,8 +51,8 @@
         "zh": "晶状体"
       },
       "definition": {
-        "en": "A clear inner structure that works with the cornea to focus light and changes shape during accommodation.",
-        "zh": "与角膜共同聚焦光线的眼内透明结构，调节时会改变形状。"
+        "en": "A clear structure inside the eye. It works with the cornea to focus light and changes shape to focus at different distances.",
+        "zh": "眼内的透明结构，与角膜共同聚焦光线。它改变形状，帮助看清不同距离的物体。"
       },
       "see": [
         "cornea",
@@ -66,8 +66,8 @@
         "zh": "视网膜"
       },
       "definition": {
-        "en": "The light-sensitive tissue lining the back of the eye; its cells begin conversion from light to electrical signalling.",
-        "zh": "眼内后部能感光的薄层组织，其中细胞开始把光转成电信号。"
+        "en": "The thin, light-sensitive layer at the back inside the eye. Its cells begin turning light into electrical signals.",
+        "zh": "眼内后部薄薄的感光组织，其中细胞开始把光转成电信号。"
       },
       "see": [
         "optic-nerve"
@@ -94,8 +94,8 @@
         "zh": "近视"
       },
       "definition": {
-        "en": "A refractive condition in which distant light focuses in front of the retina and distant objects can look blurred.",
-        "zh": "远处光聚在视网膜前、远物可能模糊的屈光状况。"
+        "en": "Short-sightedness: light from distant objects focuses in front of the retina, so distant things can look blurred.",
+        "zh": "远处来的光聚在视网膜前，使远物可能看起来模糊的情况。"
       },
       "see": [
         "retina",
@@ -154,8 +154,8 @@
         "zh": "砧骨"
       },
       "definition": {
-        "en": "The middle member of the ossicle chain, linking malleus and stapes.",
-        "zh": "听骨链中间连接锤骨与镫骨的骨。"
+        "en": "The middle bone in the ossicle chain. It links the malleus to the stapes.",
+        "zh": "听骨链中间的一块骨，连接锤骨与镫骨。"
       },
       "see": [
         "malleus",
@@ -184,8 +184,8 @@
         "zh": "耳蜗"
       },
       "definition": {
-        "en": "The curled, fluid-filled hearing structure of the inner ear, containing sensory structures that convert movement into signals.",
-        "zh": "内耳里卷曲、充满液体的听觉结构，感受结构把运动连接到信号传递。"
+        "en": "The curled, fluid-filled hearing structure in the inner ear. Its sensory structures help turn movement into signals.",
+        "zh": "内耳中卷曲、充满液体的听觉结构，其中感受结构帮助把运动转成信号。"
       },
       "see": [
         "hair-cell",
@@ -199,8 +199,8 @@
         "zh": "毛细胞"
       },
       "definition": {
-        "en": "A sensory cell with a microscopic hair-like bundle whose bending helps initiate electrical signalling; not an ordinary hair.",
-        "zh": "带微小毛发状束的感受细胞，小束弯曲帮助启动电信号传递，不是普通毛发。"
+        "en": "A sensory cell with a bundle of tiny hair-like projections. Bending the bundle helps start electrical signals. These projections differ from ordinary hairs.",
+        "zh": "顶部带微小毛发状突起束的感受细胞。小束弯曲帮助启动电信号，突起与普通毛发不同。"
       },
       "see": [
         "cochlea",
@@ -228,8 +228,8 @@
         "zh": "频率"
       },
       "definition": {
-        "en": "The number of repeating cycles per unit time; hertz expresses cycles per second.",
-        "zh": "单位时间内重复振动的次数；赫兹表示每秒次数。"
+        "en": "How many times a motion repeats in a given time. Hertz counts cycles per second.",
+        "zh": "一定时间内运动重复的次数。赫兹表示每秒重复多少次。"
       },
       "see": [
         "pitch",
@@ -243,8 +243,8 @@
         "zh": "振幅"
       },
       "definition": {
-        "en": "The maximum displacement from a rest position in an oscillation. Here it is a chosen relative particle displacement, not a decibel reading.",
-        "zh": "往复运动中离开静止位置的最大偏移；这里是选定的相对粒子位移，不是分贝读数。"
+        "en": "The greatest distance from the rest position during a back-and-forth movement. Here it measures relative particle movement, rather than decibels.",
+        "zh": "来回运动时离开静止位置的最大距离。这里表示粒子的相对运动幅度，不是分贝。"
       },
       "see": [
         "frequency",

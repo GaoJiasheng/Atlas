@@ -44,8 +44,8 @@ state:
       record: true
       predict:
         prompt:
-          en: Warm the model rod above its reference temperature. How will its calculated length compare?
-          zh: 把模拟杆温度调到参考温度以上，计算长度会怎样？
+          en: "Warm the rod above its reference temperature. Will its calculated length increase, decrease or stay the same?"
+          zh: "把杆加热到参考温度以上，计算长度会增加、减少，还是不变？"
         start:
           rod-c: 25
         change:
@@ -54,13 +54,13 @@ state:
         options:
         - id: more
           label:
-            en: Higher
-            zh: 较高
+            en: "Longer"
+            zh: "较长"
           means: more
         - id: less
           label:
-            en: Lower
-            zh: 较低
+            en: "Shorter"
+            zh: "较短"
           means: less
         - id: same
           label:
@@ -79,9 +79,8 @@ state:
       set:
         rod-c: 85
     caption:
-      en: The calculated rod length increases as it warms. A separate marker magnifies the tiny endpoint displacement
-        five hundred times.
-      zh: 模拟杆受热后的计算长度增加，独立标记把微小端点位移放大五百倍。
+      en: "The rod’s calculated length increases as it warms. The separate pointer shows its tiny end movement enlarged five hundred times."
+      zh: "杆受热后，计算长度增加。独立指示片把微小端点位移放大五百倍。"
     pose: null
   - camera: view-expansion
     layers:
@@ -94,9 +93,8 @@ state:
         rod-c: 85
       reveal: true
     caption:
-      en: The enlarged ball is above a ring kept at its original temperature. The size change is exaggerated; a
-        heated ring hole would also expand.
-      zh: 放大的球在保持原温的环上方。尺寸变化已夸大；环受热时孔也会变大。
+      en: "The warmed ball is too wide for the unchanged ring hole. The size change is exaggerated. Heating the ring would enlarge its hole too."
+      zh: "热球不能通过原来的环孔，尺寸变化已夸大。圆环受热时孔也会变大。"
     pose: ball-ring-warm
   - camera: view-expansion
     layers:
@@ -108,9 +106,8 @@ state:
         rod-c: 65
       reveal: true
     caption:
-      en: Expansion moves liquid along a narrow thermometer tube. This qualitative view gives no calculated liquid
-        volume.
-      zh: 膨胀使液体沿温度计窄管移动。定性画面不给液体体积计算值。
+      en: "Expanding liquid rises along the narrow tube. This picture shows the change without calculating liquid volume."
+      zh: "液体膨胀，沿窄管上升。画面只显示变化，不计算液体体积。"
     pose: liquid-column-warm
   - camera: view-expansion
     layers:
@@ -123,8 +120,8 @@ state:
         rod-c: 65
       reveal: true
     caption:
-      en: A movable piston allows warmed gas to occupy more space. A rigid sealed vessel is a different condition.
-      zh: 可动活塞让受热气体占更多空间，刚性密闭容器是另一种条件。
+      en: "The movable piston lets warmed gas take up more space. A rigid sealed vessel holds its volume fixed."
+      zh: "可动活塞让受热气体占更多空间。刚性密闭容器则限制体积。"
     pose: gas-warm
   - camera: view-expansion
     layers:
@@ -137,9 +134,8 @@ state:
         rod-c: 25
       reveal: true
     caption:
-      en: Cooling the rod to its starting temperature restores its original model length. Expansion did not add
-        material.
-      zh: 冷却回初温，杆恢复模型原长。膨胀没有添加材料。
+      en: "Cool the rod to its starting temperature and its calculated length returns to the starting value. No material was added during expansion."
+      zh: "杆冷却回初温，计算长度恢复原值。膨胀过程中没有添加材料。"
     pose: null
   index:
     parts:
@@ -156,25 +152,25 @@ state:
 
 <Lang en>
 
-The rod rests on supports that let it change length. Most substances become larger when warmed under ordinary conditions, if they are free to change size. This is <Term id="expansion">expansion</Term>. The decrease in size on cooling is <Term id="contraction">contraction</Term>. These are usual patterns, with exceptions and conditions; they are not rules that every substance must follow at every temperature.
+The rod rests on supports that let it change length. Under ordinary conditions, most substances grow larger when warmed if they have room to expand. This is <Term id="expansion">expansion</Term>. Becoming smaller on cooling is <Term id="contraction">contraction</Term>. Some substances behave differently, as the water example below shows.
 
-The model rod has a reference length of <Num s="S27">100 mm</Num> at <Num s="S27">25 °C</Num>. At <Num s="S27">85 °C</Num>, its calculated extension is only <Num s="S27">0.072 mm</Num>. The separate endpoint indicator magnifies the displacement <Num s="S27">500 times</Num> so you can see it. The number reports the calculated extension. The reference rod geometry stays fixed while the separate indicator moves.
+In this model, the rod is <Num s="S27">100 mm</Num> long at <Num s="S27">25 °C</Num>. At <Num s="S27">85 °C</Num>, it lengthens by just <Num s="S27">0.072 mm</Num>. A separate pointer shows this movement enlarged <Num s="S27">500 times</Num>. The drawn rod stays fixed; read its calculated extension from the number.
 
-<Figure src="figures/heat-expansion" alt={{"en":"An enlarged ball above a ring with an open hole; the ball is wider than the hole and each object has a handle.","zh":"一个放大的球位于有真实孔洞的环上方，球宽于孔，球和环各有手柄。"}} caption={{"en":"Expanded ball above a ring kept at its original temperature; size change exaggerated.","zh":"膨胀球在保持原温的环上方；尺寸变化已夸大。"}} />
+<Figure src="figures/heat-expansion" alt={{"en":"A ball, wider than the ring hole below it. Both ball and ring have handles; the size change is exaggerated.","zh":"球位于环孔上方，比孔更宽。球和环各有手柄，尺寸变化已夸大。"}} caption={{"en":"The warmed ball is too wide for the unchanged hole. Size change exaggerated.","zh":"热球比原来的孔更宽。尺寸变化已夸大。"}} />
 
-The ball and ring show a separate, exaggerated comparison. The ball becomes too wide for the unchanged hole. If the ring itself were heated uniformly and freely, its hole would grow too. Expansion does not mean material fills the hole. Cooling the rod back to its reference temperature restores its model length without adding or removing material.
+The ball-and-ring picture exaggerates another small size change. The warmed ball is too wide for the unchanged hole. Heating the ring evenly, with room to expand, would make its hole larger too. Material does not expand into the hole. Cool the rod to its starting temperature and its length returns to the starting value. No material was added or removed.
 
-The liquid column and gas piston show other conditions. Liquid expansion relative to the glass moves a thermometer column along its narrow tube. Warmed gas can occupy more space when a piston is free to move. A rigid sealed container constrains its volume. These qualitative views have no calculated liquid or gas volumes, and are screen demonstrations rather than activities to perform with hot apparatus.
+The liquid column shows how a thermometer works. Liquid expands more than the glass, so the column rises along the narrow tube. In the gas demonstration, warming lets gas push a movable piston upwards and occupy more space. A rigid sealed container holds the volume fixed. These pictures show the direction of change, without calculating liquid or gas volumes. The rod reading applies only to the rod. Explore these demonstrations on screen.
 
 <More title={{"en":"Particles and the water exception","zh":"粒子与水的例外"}}>
 
-An ordinary expanding solid has greater average particle separation; its particles do not balloon. Liquid water expands when cooled from about <Num s="S20">4 °C</Num> toward <Num s="S20">0 °C</Num>. Continue with <TopicLink slug="states-of-matter" ch="solids">States of matter</TopicLink>.
+When an ordinary solid expands, its particles become farther apart on average. The particles themselves do not grow. Liquid water is an exception to usual cooling behaviour: it expands as it cools from about <Num s="S20">4 °C</Num> towards <Num s="S20">0 °C</Num>. Explore more in <TopicLink slug="states-of-matter" ch="solids">States of matter</TopicLink>.
 
 </More>
 
 <More title={{"en":"A movable boundary matters","zh":"边界能否移动很重要"}}>
 
-A fixed amount of ideal gas expands with increasing absolute temperature at fixed pressure. If its volume is constrained, pressure can rise instead. The piston view indicates a movable boundary; it does not solve a gas equation or instruct heating a sealed vessel.
+For a fixed amount of ideal gas at constant pressure, volume increases as absolute temperature rises. Absolute temperature is measured from absolute zero. If volume cannot increase, pressure can rise instead. The piston illustrates a movable boundary. It does not calculate a gas equation. Do not heat a sealed vessel.
 
 </More>
 
@@ -182,25 +178,25 @@ A fixed amount of ideal gas expands with increasing absolute temperature at fixe
 
 <Lang zh>
 
-杆放在支座上，可以自由改变长度。普通条件下，多数物质受热时尺寸增加，称为<Term id="expansion">膨胀</Term>；冷却时尺寸减小，称为<Term id="contraction">收缩</Term>。这些是有条件的一般规律，不能说所有物质在任何温度下都一样。
+杆放在支座上，能够自由伸缩。普通条件下，多数物质受热会变大，前提是有空间膨胀。这叫<Term id="expansion">膨胀</Term>。冷却时变小叫<Term id="contraction">收缩</Term>。也有物质不遵循这个通常规律，例如下面提到的水。
 
-模型杆在 <Num s="S27">25 °C</Num> 时原长 <Num s="S27">100 mm</Num>。升到 <Num s="S27">85 °C</Num>，计算伸长只有 <Num s="S27">0.072 mm</Num>。独立端点标记把位移放大 <Num s="S27">500 倍</Num>，让微小变化可见；读数仍表示计算伸长。参考杆的几何形状保持不变，独立标记显示放大位移。
+模型杆在 <Num s="S27">25 °C</Num> 时长 <Num s="S27">100 mm</Num>。升到 <Num s="S27">85 °C</Num>，只伸长 <Num s="S27">0.072 mm</Num>。独立指示片把位移放大 <Num s="S27">500 倍</Num>。画出的杆保持不动，计算的伸长量要看数字。
 
-<Figure src="figures/heat-expansion" alt={{"en":"An enlarged ball above a ring with an open hole; the ball is wider than the hole and each object has a handle.","zh":"一个放大的球位于有真实孔洞的环上方，球宽于孔，球和环各有手柄。"}} caption={{"en":"Expanded ball above a ring kept at its original temperature; size change exaggerated.","zh":"膨胀球在保持原温的环上方；尺寸变化已夸大。"}} />
+<Figure src="figures/heat-expansion" alt={{"en":"A ball, wider than the ring hole below it. Both ball and ring have handles; the size change is exaggerated.","zh":"球位于环孔上方，比孔更宽。球和环各有手柄，尺寸变化已夸大。"}} caption={{"en":"The warmed ball is too wide for the unchanged hole. Size change exaggerated.","zh":"热球比原来的孔更宽。尺寸变化已夸大。"}} />
 
-球环是另一个夸大尺寸变化的示意：球膨胀后，不能通过保持原温的孔。如果环本身均匀受热、能自由膨胀，孔也会变大。冷却杆到参考温度，模型恢复原长，过程中没有添加或移走材料。
+球环图把另一个微小的尺寸变化夸大。受热的球变宽，不能通过原来的孔。如果圆环均匀受热，又能自由膨胀，孔也会变大，材料不会向孔内膨胀。把杆冷却回起始温度，它便恢复原长。过程中没有添加或移走材料。
 
-液柱与活塞显示另一些条件。液体相对玻璃膨胀，使温度计液柱沿窄管移动；气体受热时，能推动可动活塞，占更大空间。刚性密闭容器则限制体积。这些画面只作定性说明，没有计算液体或气体体积，也不是热器材实物活动。观察时要区分各个示意：杆的毫米读数只属于杆，不能拿来估计球、液柱或气体改变了多少。球环的夸大图帮助看清能否通过的关系，不表示真实金属会产生同样大的尺寸变化。
+液柱显示温度计的原理。液体比玻璃膨胀得多，所以液柱沿窄管上升。气体示意中，受热气体推动可动活塞向上，占据更大空间。刚性密闭容器则限制体积。这些画面显示变化方向，不计算液体或气体体积。杆的读数只适用于杆。请在屏幕上探索这些演示。
 
 <More title={{"en":"Particles and the water exception","zh":"粒子与水的例外"}}>
 
-普通固体膨胀时，粒子平均间距增大，不是粒子本身胀大。液态水从约 <Num s="S20">4 °C</Num> 冷却到 <Num s="S20">0 °C</Num> 时反而膨胀。可到<TopicLink slug="states-of-matter" ch="solids">“物质三态”</TopicLink>继续看。
+普通固体膨胀时，粒子的平均间距增大，不是粒子本身变大。液态水是冷却规律的一个例外：从约 <Num s="S20">4 °C</Num> 冷却到 <Num s="S20">0 °C</Num> 时，它反而膨胀。到<TopicLink slug="states-of-matter" ch="solids">“物质三态”</TopicLink>继续看。
 
 </More>
 
 <More title={{"en":"A movable boundary matters","zh":"边界能否移动很重要"}}>
 
-定量理想气体在压强固定时，绝对温度增加，体积增大。体积受限制时，压强可能上升。活塞画面说明边界可以移动，没有求解气体方程，也不指导加热密闭器皿。
+一定量的理想气体在压强固定时，绝对温度升高，体积就增大。绝对温度从绝对零度算起。如果体积不能增大，压强可能上升。活塞用来说明边界可以移动，没有计算气体方程。不要加热密闭器皿。
 
 </More>
 
