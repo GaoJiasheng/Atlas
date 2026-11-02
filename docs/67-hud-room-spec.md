@@ -94,4 +94,10 @@ Safari 的地址栏和标签栏会吃掉 70–100 px 高度，比 App 更挤；�
 
 ## 9. 施工与验收记录
 
-（待填）
+### 9.1 TimeScene 取景（claude/frame-ts，2026-11-02）
+
+- **改了什么**：Codex 10-29 的 opt-in 草稿（只移中心、只开 sample-time）移植后改成所有 TimeScene 地图默认按自由舞台矩形取景（`time-scene/lib/hud-framing.ts`，细则 docs/06「HUD 自由区取景（TimeScene）」）：MapLibre 不对称 padding 把作者中心放到自由区中心；自由区小于 1920×1080 默认布局的 810×919 时 zoom 减 `log2(自由区/810×919)`（最多 −1.5，只缩不放）；WHOLE AREA / 全图按自由区拟合（8% 边距），不再是画布 18% 均匀留白。store / URL 里的 zoom 仍是作者单位。
+- **怎么触发重新取景**：舞台 ResizeObserver、每个 `data-hud-panel` 的 ResizeObserver、HUD 块增删（MutationObserver）、`.atlas-scene` 属性、`transitionend`、字体就绪、`moveend`，120 ms 合并后量一次；没动过地图就 0.6 s `easeTo` 到新自由区（飞行中改目标），读者拖 / 滚过就画面不动只换 padding，直到下一章 / 拍 / 预设。
+- **实测**（ww2，今天的默认布局）：1920×1080 自由区 340..1150 × 12..931，zoom 不变，主体比原来上移约 40 px、左移约 15 px（底部章节轴比顶边高）；ww1 自由区矮一点（873 高），zoom −0.07。1180×820 自由区只有 274..482（**208 px 宽**：右侧参与卡 + LAYERS 面板占 264 px），1133×744 只有 161 px，1366×1024 394 px，三者都碰到 −1.5 的上限或接近（1366：−1.04）。1180×820 收起阅读面板后自由区 274..854，zoom −0.53，0.6 s 重新取景到位；读者拖过地图再收起，画面原地不动。区域图版（sample-region）的 `maxBounds` 仍把 zoom 夹在整张图版铺满舞台（5.0），不缩小。
+- **留给第二期**：iPad 横屏的自由区太窄是布局问题（§2.1 自动收起图例 / 右上卡后自由区才会 ≥ 50%），取景已按实时测量响应，Codex 的收起逻辑落地后无需再改；届时可以复看 −1.5 上限是否还需要。SpaceScene 的 `water` 不是 TimeScene 主题，不在本项回归里。
+
