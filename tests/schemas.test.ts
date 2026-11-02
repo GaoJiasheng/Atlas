@@ -321,11 +321,11 @@ describe('topic schema: regional plate, holder colours, BCE precision, wording (
     expect(topic.strings?.left).toEqual({ en: 'ends', zh: '灭亡' });
   });
 
-  it('basemap: exactly one of local / region; bounds ordered; maxBounds contains bounds', () => {
+  it('basemap: local and region mutually exclusive; maxZoom alone valid; bounds ordered; maxBounds contains bounds', () => {
     expect(topicSchema.safeParse({ ...raw(), basemap: { region } }).success).toBe(true);
     expect(topicSchema.safeParse({ ...raw(), basemap: { local: 'land-sg', maxZoom: 13 } }).success).toBe(true);
     expect(topicSchema.safeParse({ ...raw(), basemap: { local: 'land-sg', region } }).success).toBe(false);
-    expect(topicSchema.safeParse({ ...raw(), basemap: { maxZoom: 12 } }).success).toBe(false);
+    expect(topicSchema.safeParse({ ...raw(), basemap: { maxZoom: 12 } }).success).toBe(true);
     expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, bounds: [125, 20, 100, 44] } } }).success).toBe(false);
     expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, maxBounds: [101, 18, 127, 45.5] } } }).success).toBe(false);
     expect(topicSchema.safeParse({ ...raw(), basemap: { region: { ...region, land: 'China Plate' } } }).success).toBe(false);

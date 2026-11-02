@@ -12,7 +12,7 @@ engine: time-scene
 stage: geo
 theme: paper
 sensitivity: open
-status: draft
+status: published
 basemap: { local: land-sg-history, maxZoom: 14 }
 colorBy: entity
 blocLabels:

@@ -1,0 +1,18 @@
+id: sound
+title: { en: "Sound", zh: "声音" }
+subtitle: { en: "Vibrations, travelling disturbances and echoes", zh: "振动、传播与回声" }
+shortTitle: { en: "Sound", zh: "声音" }
+subject: science
+tags: [beyond-syllabus, singapore]
+levels: [P2, P3, P4, P5, P6]
+moe:
+  - "MOE Primary Science P6 Standard Energy Conversion: sound energy; acoustics is enrichment"
+  - "MOE Primary Science investigation practices: fair comparisons and observation"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: sound
+note: { en: "Silent classroom model · schematic vibration and distance · air-wave strip slowed 250 times; echo pulse slowed 10 times · not a sound meter or hearing test", zh: "静音课堂模型 · 振动与距离示意 · 空气纵波慢放 250 倍；回声脉冲慢放 10 倍 · 不是声级计或听力测试" }

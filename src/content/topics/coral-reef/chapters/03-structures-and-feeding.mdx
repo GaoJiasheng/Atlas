@@ -1,0 +1,163 @@
+---
+id: structures-and-feeding
+order: 3
+title:
+  en: Structures and feeding
+  zh: 结构与摄食
+level: P6
+state:
+  camera:
+    position:
+      - 5.9
+      - 1.4
+      - 1.8
+    target:
+      - 5
+      - 0.4
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - polyp-tentacles
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Structures and behaviour influence survival.
+    zh: 结构和行为共同影响生存。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+  beats:
+    - part: polyp-tentacles
+      run: true
+      labels:
+        - polyp-tentacles
+      caption:
+        en: Tentacles with stinging cells help capture small prey.
+        zh: 带有刺细胞的触手有助捕捉微小猎物。
+    - part: polyp-mouth
+      run: false
+      labels:
+        - polyp-mouth
+        - polyp-tentacles
+      caption:
+        en: Tentacles are structures; extending and using them to feed is behaviour.
+        zh: 触手是结构；伸展触手并用它摄食，是行为。
+    - camera: reef
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - colony-boulder
+        - colony-sheet
+        - colony-encrusting
+      part: colony-sheet
+      caption:
+        en: Coral colonies can form boulders or sheets. They are not leaves or branches of a plant.
+        zh: 珊瑚群体可呈块状或片状，并非植物的叶或枝。
+    - camera: reef
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - refuge-cavity
+      part: refuge-cavity
+      caption:
+        en: Spaces within the reef provide shelter for other organisms.
+        zh: 礁体里的空隙为其他生物提供庇护。
+    - camera: polyp
+      layers:
+        - reef-habitat
+        - polyp-closeup
+        - web-specimens
+        - evidence-tools
+        - feeding-flows
+      hide: []
+      labels:
+        - larva-inset
+      part: larva-inset
+      caption:
+        en: An attached colony stays in place, while larvae can disperse before settling.
+        zh: 附着的群体留在原处，幼体则可在定居前扩散。
+  index:
+    parts:
+      - polyp-tentacles
+      - polyp-mouth
+      - colony-boulder
+      - colony-sheet
+      - colony-encrusting
+      - colony-tissue
+      - refuge-cavity
+      - larva-inset
+---
+
+<Lang en>
+
+Look at the ring of tentacles around the mouth. Stinging cells help the animal capture small prey, including zooplankton. Food then passes through the mouth. The enlarged display helps locate the structures, but its gentle movement is a visual explanation. It does not reproduce the speed of a feeding event observed on a Singapore reef.
+
+A structure and a behaviour describe different things. Tentacles are body structures; extending and using them during feeding is behaviour. An <Term id="adaptation">adaptation</Term> is a feature or behaviour that helps an organism survive in its environment. Explain the connection between structure and function. Do not explain it by saying the animal decided to design a different body.
+
+Return to the reef view. The model shows a rounded boulder form, a thin sheet form and an encrusting form that follows the supporting surface. These are colony growth forms, not plant leaves. Living colony tissue lies over the hard structure. Select the tissue layer to distinguish it from the support rather than identifying the whole colony only by its outline.
+
+The reef also creates spaces in which other organisms can shelter. These spaces are part of its value as habitat, alongside food relationships. An attached adult colony remains in place, but coral larvae can move before settling. The separate larval inset represents that life stage. Movement during the life cycle therefore does not mean that an established colony travels across the reef.
+
+<More title={{"en": "Life stages and the model", "zh": "生命阶段与模型"}}>
+
+The larva is a general schematic shape. It has no species-specific appendages or measured size. Its separate placement makes a life-stage comparison possible without implying that it is a miniature adult colony. [S26, S50]
+
+</More>
+
+<More title={{"en": "Forms are not species names", "zh": "形态不是物种名称"}}>
+
+The NUS gallery documents several colony forms. This teaching model does not identify a species from shape alone, or rank every form by a single survival advantage. [S21]
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+先看口周围的一圈触手。刺细胞有助珊瑚虫捕捉微小猎物，包括浮游动物；食物再经过口进入体内。放大展示便于确定结构位置，轻微摆动只是讲解效果，不代表新加坡礁上某次摄食的实测速率。
+
+结构与行为说的是不同方面：触手是身体结构，伸展触手并用它摄食则是行为。<Term id="adaptation">适应</Term>可以是有助生物在环境中生存的特征或行为。解释时应把结构与作用连起来，不说动物决定把身体设计成某种样子。
+
+回到礁区，比较圆丘状、薄片状，以及贴着基底表面生长的群体。这些是珊瑚群体形态，不是植物的叶。活组织铺在坚硬结构上，可以点选群体组织层，分清活的部分和支撑；仅凭轮廓像石头或叶片，不能判断生物身份。
+
+礁体里的空隙也让其他生物获得庇护，生境的作用不限于食物。附着的成体群体留在原处，珊瑚幼体却可在定居前移动和扩散。独立幼体近景表示生命周期中的另一个阶段，并不表示已经建立的群体会在礁上游走。
+
+<More title={{"en": "Life stages and the model", "zh": "生命阶段与模型"}}>
+
+幼体采用一般示意形体，没有虚构物种特有附肢或实测尺寸。独立摆放用于比较生命阶段，不表示幼体就是缩小的成体群体。[S26, S50]
+
+</More>
+
+<More title={{"en": "Forms are not species names", "zh": "形态不是物种名称"}}>
+
+国大图库展示不同群体形态。本模型不单凭形态鉴定物种，也不把每种形态排列成单一的生存优劣榜。[S21]
+
+</More>
+
+</Lang>
