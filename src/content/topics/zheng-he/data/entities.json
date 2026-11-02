@@ -12,8 +12,8 @@
   {
     "id": "actor-old-port-force",
     "name": {
-      "en": "Chen Zuyi’s force, as described in Ming records",
-      "zh": "明方所记陈祖义的势力"
+      "en": "Chen Zuyi’s force in Ming accounts",
+      "zh": "明方记载中的陈祖义势力"
     },
     "bloc": "neutral",
     "joined": "1407",
@@ -22,8 +22,8 @@
   {
     "id": "actor-melaka",
     "name": {
-      "en": "Melaka polity",
-      "zh": "马六甲政权"
+      "en": "Melaka’s rulers and port",
+      "zh": "马六甲统治者与港口"
     },
     "bloc": "neutral",
     "joined": "1405",
@@ -32,8 +32,8 @@
   {
     "id": "actor-indian-ocean-ports",
     "name": {
-      "en": "Indian Ocean ports (narrative group)",
-      "zh": "印度洋港口（叙事分组）"
+      "en": "Indian Ocean ports",
+      "zh": "印度洋港口"
     },
     "bloc": "neutral",
     "joined": "1405",
@@ -42,8 +42,8 @@
   {
     "id": "actor-swahili-ports",
     "name": {
-      "en": "Swahili trading ports (narrative group)",
-      "zh": "斯瓦希里贸易港口（叙事分组）"
+      "en": "Swahili trading ports",
+      "zh": "斯瓦希里贸易港口"
     },
     "bloc": "neutral",
     "joined": "1405",

@@ -19,8 +19,8 @@
       "S47"
     ],
     "detail": {
-      "en": "The three reference facilities are static sites. Their visibility is not a claim about their foundation dates. Modern coastlines locate the story; no modern national border is shown.",
-      "zh": "三个设施点是静态参照；它们可见，并不表示在本章日期成立。现代海岸只用来定位，不显示今天的国界。"
+      "en": "The three launch-centre points stay visible for reference. Their dates do not tell us when the centres opened. Modern coastlines help locate places; no national borders are shown.",
+      "zh": "三座发射中心始终显示，方便定位，日期并非它们开始运作的时间。现代海岸帮助辨认地点，图中没有国界。"
     }
   },
   {
@@ -53,15 +53,15 @@
       "zh": "V-2 生产与强迫劳动"
     },
     "summary": {
-      "en": "The V-2 story includes forced labour at Mittelwerk, alongside its engineers.",
-      "zh": "V-2 的历史包括工程师，也包括米特尔工厂的强迫劳动。"
+      "en": "Mittelwerk used forced labour to produce the V-2 rockets that von Braun helped develop.",
+      "zh": "米特尔工厂使用强迫劳动，生产冯·布劳恩参与研制的 V-2 火箭。"
     },
     "sources": [
       "S28"
     ],
     "detail": {
-      "en": "Von Braun’s V-2 work must be read alongside Mittelwerk production using forced labour. This is a background record, not an event at a launch-centre map point.",
-      "zh": "冯·布劳恩的 V-2 工作，须与米特尔工厂使用强迫劳动的生产史一起读。这是背景证据，不是发生在发射中心地图点的事件。"
+      "en": "During the Second World War, von Braun worked on Germany’s V-2 rocket. Its production at Mittelwerk used forced labour.",
+      "zh": "第二次世界大战期间，冯·布劳恩参与德国 V-2 火箭工作，米特尔工厂的生产使用强迫劳动。"
     }
   },
   {
@@ -75,15 +75,15 @@
       "zh": "科罗廖夫与监禁"
     },
     "summary": {
-      "en": "Korolev’s earlier imprisonment belongs in the history of Soviet engineering.",
-      "zh": "科罗廖夫早年被囚的经历，也是苏联工程史的一部分。"
+      "en": "Korolev was imprisoned before he later led Soviet space development.",
+      "zh": "科罗廖夫早年被囚，后来才领导航天发展。"
     },
     "sources": [
       "S29"
     ],
     "detail": {
-      "en": "Korolev was imprisoned during Stalin’s purges and worked within the Soviet prison system before his later space leadership. Engineering achievement does not erase persecution.",
-      "zh": "科罗廖夫在斯大林时期的清洗中被囚，曾在苏联监狱体系工作，后来才领导航天发展。工程成果不能抹去迫害。"
+      "en": "During Stalin’s purges, Korolev was imprisoned and worked in the Soviet prison system. He later led Soviet space development.",
+      "zh": "科罗廖夫在斯大林清洗中被囚，曾在苏联监狱体系内工作，后来领导航天发展。"
     }
   },
   {
@@ -97,8 +97,8 @@
       "zh": "辨读不同的证据"
     },
     "summary": {
-      "en": "A plan, a flight record and a later memory answer different questions.",
-      "zh": "计划书、飞行记录与后来回忆，回答的是不同问题。"
+      "en": "Plans describe intentions, flight records describe results, and memoirs preserve memories.",
+      "zh": "计划书说明打算，飞行记录说明结果，回忆录留下记忆。"
     },
     "sources": [
       "S24",
@@ -189,8 +189,8 @@
       "anchorSite": "site-cape"
     },
     "detail": {
-      "en": "The launch was 31 January 1958 in Florida and 1 February in UTC. Its detector contributed to discovering Earth’s radiation belts. This centre marker is not an orbital position.",
-      "zh": "佛罗里达当地发射日为1958年1月31日，UTC 已是2月1日。探测器的观测帮助发现地球辐射带。中心点不是卫星的轨道位置。"
+      "en": "Explorer 1 launched on 31 January 1958 in Florida; in UTC it was already 1 February. Its detector helped discover Earth’s radiation belts.",
+      "zh": "探险者1号在佛罗里达发射时是 1958 年 1 月 31 日，UTC 已是 2 月 1 日。探测仪帮助发现地球辐射带。"
     }
   },
   {
@@ -222,15 +222,15 @@
       "zh": "早期月球号的三种成果"
     },
     "summary": {
-      "en": "The 1959 Luna probes fly past, impact, and photograph the Moon. These are different results.",
-      "zh": "1959年的月球号探测器分别飞越、撞击与拍摄月球，成果各不相同。"
+      "en": "In 1959, Luna 1 flies past the Moon, Luna 2 hits it and Luna 3 photographs its far side.",
+      "zh": "1959 年，月球1号飞越月球，2号撞击月面，3号拍摄背面。"
     },
     "sources": [
       "S13"
     ],
     "detail": {
-      "en": "This 7 October 1959 record looks back over the year: Luna 1 flew past, Luna 2 impacted and Luna 3 photographed the far side. The three results did not occur on one day.",
-      "zh": "本条以1959年10月7日回顾当年任务：月球1号飞越、2号撞击、3号拍摄背面。三个成果不是同一天发生。"
+      "en": "By 7 October 1959, Luna 1 had flown past the Moon, Luna 2 had struck the surface and Luna 3 had photographed the far side. These happened on different days.",
+      "zh": "到 1959 年 10 月 7 日，月球1号已飞越月球，2号已撞击月面，3号已拍摄背面。这些成果发生在不同日期。"
     }
   },
   {
@@ -324,8 +324,8 @@
       "S8"
     ],
     "detail": {
-      "en": "John Glenn first orbited Earth for the United States on 20 February 1962. Valentina Tereshkova flew Vostok 6 on 16 June 1963 as the first woman in space. This is a retrospective comparison.",
-      "zh": "约翰·格伦在1962年2月20日完成美国首次载人轨道飞行。瓦莲京娜·捷列什科娃于1963年6月16日乘东方6号飞行，成为首位进入太空的女性。本条是回顾比较。"
+      "en": "John Glenn made the first US human orbital flight on 20 February 1962. Valentina Tereshkova became the first woman in space aboard Vostok 6 on 16 June 1963.",
+      "zh": "约翰·格伦于 1962 年 2 月 20 日完成美国首次载人轨道飞行。瓦莲京娜·捷列什科娃于 1963 年 6 月 16 日乘东方6号，成为首位进入太空的女性。"
     }
   },
   {
@@ -492,8 +492,8 @@
       "zh": "阿波罗1号地面测试火灾"
     },
     "summary": {
-      "en": "Grissom, White and Chaffee die in the Apollo 1 ground-test fire. Three people are lost.",
-      "zh": "格里森、怀特与查菲在阿波罗1号地面测试火灾中遇难，共3人。"
+      "en": "Three crew members—Grissom, White and Chaffee—die in the Apollo 1 ground-test fire.",
+      "zh": "格里森、怀特与查菲在阿波罗1号地面测试火灾中遇难，共 3 人。"
     },
     "sources": [
       "S15"
@@ -509,8 +509,8 @@
       "anchorSite": "site-cape"
     },
     "detail": {
-      "en": "Gus Grissom, Ed White and Roger Chaffee died on 27 January 1967 during a ground test. The cabin fire was not a launch accident.",
-      "zh": "格斯·格里森、埃德·怀特和罗杰·查菲于1967年1月27日在地面测试中遇难。舱内火灾不是发射事故。"
+      "en": "Gus Grissom, Ed White and Roger Chaffee died on 27 January 1967. A fire broke out inside their cabin during a ground test, before launch.",
+      "zh": "1967 年 1 月 27 日，阿波罗1号在发射前的地面测试中发生座舱火灾。格斯·格里森、埃德·怀特与罗杰·查菲遇难。"
     },
     "casualties": {
       "us": 3
@@ -526,8 +526,8 @@
       "zh": "联盟1号返回事故"
     },
     "summary": {
-      "en": "Komarov dies when Soyuz 1’s return parachute system fails. One person is lost.",
-      "zh": "联盟1号返回伞系统失效，科马罗夫遇难，共1人。"
+      "en": "Soyuz 1’s parachute system fails during return, killing its one crew member, Komarov.",
+      "zh": "联盟1号返回时降落伞系统失效，唯一乘员科马罗夫遇难，共 1 人。"
     },
     "sources": [
       "S16"
@@ -543,8 +543,8 @@
       "anchorSite": "site-baikonur"
     },
     "detail": {
-      "en": "Vladimir Komarov died during the Soyuz 1 return on 24 April 1967 after parachute-system failure. The associated Baikonur point is not the accident location.",
-      "zh": "弗拉基米尔·科马罗夫于1967年4月24日在联盟1号返回时，因降落伞系统失效遇难。关联的拜科努尔点不是事故地点。"
+      "en": "Vladimir Komarov died on 24 April 1967 when Soyuz 1’s parachute system failed during return to Earth.",
+      "zh": "1967 年 4 月 24 日，联盟1号返回地球时降落伞系统失效，弗拉基米尔·科马罗夫遇难。"
     },
     "casualties": {
       "ussr": 1
@@ -560,8 +560,8 @@
       "zh": "探测器5号返回"
     },
     "summary": {
-      "en": "Uncrewed Zond 5 returns from a journey around the Moon; it has not entered lunar orbit.",
-      "zh": "无人驾驶的探测器5号绕月后返回；它并未进入月球环绕轨道。"
+      "en": "Uncrewed Zond 5 returns after passing around the Moon, without entering lunar orbit.",
+      "zh": "无人驾驶的探测器5号绕过月球后返回，没有进入月球轨道。"
     },
     "sources": [
       "S18"
@@ -577,8 +577,8 @@
       "anchorSite": "site-baikonur"
     },
     "detail": {
-      "en": "Zond 5 circled the Moon and returned biological specimens without a human crew. Circling around the Moon on a return trajectory is not the same as entering lunar orbit.",
-      "zh": "探测器5号没有载人，绕过月球后把生物标本带回地球。绕过月球并返回的轨迹，不等于进入月球轨道。"
+      "en": "Zond 5 carried biological specimens around the Moon and back to Earth without a human crew. It followed a return path rather than staying in lunar orbit.",
+      "zh": "探测器5号没有载人，它把生物标本带到月球附近，再绕过月球返回地球，没有留在月球轨道。"
     }
   },
   {
@@ -736,8 +736,8 @@
       "S41"
     ],
     "detail": {
-      "en": "Armstrong’s first step was about 02:56 UTC on 21 July, about 10:26 in Singapore at UTC+07:30. Luna 15 crashed that day while attempting robotic sample return. Flight-path information had been exchanged. Read each separate mission record for its own setting.",
-      "zh": "阿姆斯特朗首次踏足月面的时间约为7月21日02:56 UTC，按新加坡当时 UTC+07:30，约为10:26。同日月球15号在尝试无人采样返回时坠毁。双方曾交换飞行路线资料。各任务的实际环境见独立记录。"
+      "en": "Armstrong stepped onto the Moon at about 02:56 UTC on 21 July: about 10:26 in Singapore at UTC+07:30. Luna 15 crashed that day while attempting robotic sample return. The programmes had exchanged flight-path information to avoid interference.",
+      "zh": "阿姆斯特朗首次踏足月面约为 7 月 21 日 02:56 UTC。按新加坡当时的 UTC+07:30，约为 10:26。月球15号当天在无人采样返回尝试中坠毁。双方曾交换飞行路径资料，以避免干扰。"
     }
   },
   {
@@ -768,8 +768,8 @@
       "anchorSite": "site-kennedy"
     },
     "detail": {
-      "en": "Apollo 11 returned 21.55 kg of lunar material, rounded here to about 22 kg. The surface stay was about 21 hours 36 minutes; that is not the duration of the moonwalk. Only the command module re-entered with the crew. A coarser rounding would be 20 kg; this topic uses 21.55 kg from the mission summary and about 22 kg in the main text.",
-      "zh": "阿波罗11号带回21.55千克月球物质，正文取整为约22千克。月面停留约21小时36分钟，并不是太空行走时长。只有指令舱载着乘员重返大气层。更粗略取整可得20千克；本题采用任务汇总的21.55千克，正文写约22千克。"
+      "en": "Apollo 11 brought back 21.55 kg of lunar material: about 22 kg, or 20 kg with coarser rounding. Eagle stayed on the surface for about 21 hours 36 minutes, including time inside the lander as well as the moonwalk. Only the command module carried the crew back through Earth’s atmosphere.",
+      "zh": "阿波罗11号带回 21.55 千克月球材料，约为 22 千克；更粗略取整则为 20 千克。鹰号在月面停留约 21 小时 36 分钟，包括舱内停留和太空行走。只有指令舱载着乘员重返地球大气层。"
     }
   },
   {
@@ -881,8 +881,8 @@
       "anchorSite": "site-baikonur"
     },
     "detail": {
-      "en": "Georgi Dobrovolski, Vladislav Volkov and Viktor Patsayev died following Soyuz 11 cabin depressurisation on 30 June 1971, after living on Salyut 1. The depressurisation occurred in space during return, not at the launch centre.",
-      "zh": "格奥尔基·多布罗沃尔斯基、弗拉季斯拉夫·沃尔科夫和维克托·帕察耶夫在礼炮1号生活后，于1971年6月30日因联盟11号座舱失压遇难。失压发生于返回途中的太空，不是在发射中心。"
+      "en": "Georgi Dobrovolski, Vladislav Volkov and Viktor Patsayev lived and worked on Salyut 1. They died on 30 June 1971 when Soyuz 11 lost cabin pressure in space during their return.",
+      "zh": "格奥尔基·多布罗沃尔斯基、弗拉季斯拉夫·沃尔科夫与维克托·帕察耶夫曾在礼炮1号生活和工作。1971 年 6 月 30 日，联盟11号在返回途中的太空失压，三人遇难。"
     },
     "casualties": {
       "ussr": 3
@@ -918,15 +918,15 @@
       "zh": "N1-L3 支出账目"
     },
     "summary": {
-      "en": "The N1-L3 account reaches 3.6 billion rubles by this date; it is not all Soviet space spending.",
-      "zh": "截至这一天，N1-L3账目为36亿卢布；它不是苏联全部航天支出。"
+      "en": "By this date, N1-L3 spending reaches 3.6 billion rubles for the lunar-landing project.",
+      "zh": "截至这一天，N1-L3 载人登月项目支出为 36 亿卢布。"
     },
     "sources": [
       "S18"
     ],
     "detail": {
-      "en": "Siddiqi reports 3.6 billion rubles for N1-L3 by 1 January 1973, with later rough totals of 4.0–4.5 billion rubles. This is not all Soviet space spending. No exchange-rate or purchasing-power comparison with Apollo is drawn.",
-      "zh": "西迪基记载，截至1973年1月1日，N1-L3支出为36亿卢布，后来粗略总计为40亿至45亿卢布。这不是苏联全部太空支出。本题不据汇率或购买力与阿波罗直接比较。"
+      "en": "Siddiqi reports N1-L3 spending of 3.6 billion rubles by 1 January 1973. Later rough totals were 4.0–4.5 billion rubles. These accounts cover the lunar-landing project, rather than all Soviet space activity. Different currencies and accounting scopes prevent a direct cost comparison with Apollo.",
+      "zh": "西迪基记载，截至 1973 年 1 月 1 日，N1-L3 支出为 36 亿卢布，后来的粗略总额为 40 亿至 45 亿卢布。这些账目只包括载人登月项目。币种和费用范围不同，无法与阿波罗直接比较。"
     }
   },
   {
@@ -940,16 +940,16 @@
       "zh": "阿波罗支出账目"
     },
     "summary": {
-      "en": "The historical Apollo account is about US$25.4 billion. Currency, years and scope stay beside the number.",
-      "zh": "阿波罗的历史项目账约为254亿美元。币种、年代和范围始终伴随数字。"
+      "en": "In 1973, NASA reports Apollo’s cost as about US$25.4 billion.",
+      "zh": "1973 年，NASA 报告阿波罗项目支出约为 254 亿美元。"
     },
     "sources": [
       "S42",
       "S45"
     ],
     "detail": {
-      "en": "NASA’s historical account reports US$25.4 billion in 1973. A later reconstructed account is near US$25.8 billion because its accounting scope differs; these are historical dollars, not an inflation range. Only year precision is supported by this account.",
-      "zh": "NASA历史记述在1973年报告254亿美元。后来的重建账目接近258亿美元，原因是会计范围不同；这些都是历史美元，不是通胀区间。本账目只支持年份精度。"
+      "en": "NASA reported US$25.4 billion in 1973. A later reconstruction gives about US$25.8 billion because it includes different costs. Both use historical dollars; the difference is not an inflation range. The report’s exact month and day are unknown.",
+      "zh": "NASA 在 1973 年报告支出为 254 亿美元。后来重建的账目约为 258 亿美元，所含费用范围不同。两者都使用当时美元，差额并非通胀区间。报告的确切月日不详。"
     }
   },
   {
@@ -978,12 +978,12 @@
     "mapVisibility": "timeline-only",
     "importance": 2,
     "title": {
-      "en": "Seven deaths in three named accidents",
-      "zh": "三起指定事故中的七名死者"
+      "en": "Seven deaths in three accidents",
+      "zh": "三起事故中的七名死者"
     },
     "summary": {
-      "en": "The three named crew accidents killed seven people altogether; this is a specified subtotal, not a space-age total.",
-      "zh": "上述三起乘组事故合计造成7人死亡；这只是指定小计，不是太空时代总数。"
+      "en": "The Apollo 1, Soyuz 1 and Soyuz 11 accidents killed seven crew members in all.",
+      "zh": "阿波罗1号、联盟1号与联盟11号事故，合计造成 7 名乘员死亡。"
     },
     "sources": [
       "S15",
@@ -991,8 +991,8 @@
       "S17"
     ],
     "detail": {
-      "en": "Apollo 1: 3; Soyuz 1: 1; Soyuz 11: 3. The subtotal is seven people in those three named accidents. It is not a count of every death connected with spaceflight, nor a new accident on this review date.",
-      "zh": "阿波罗1号3人，联盟1号1人，联盟11号3人。合计7人，仅限这三起指定事故；不是所有航天相关死亡总数，也不是回顾日期又发生事故。"
+      "en": "Apollo 1: 3; Soyuz 1: 1; Soyuz 11: 3. The subtotal is seven deaths in these three accidents, rather than every death connected with spaceflight. These deaths happened earlier, not on this review date.",
+      "zh": "阿波罗1号 3 人，联盟1号 1 人，联盟11号 3 人，小计 7 人。这只包括上述三起事故，未涵盖所有航天相关死亡。这些事故都发生在回顾日期之前。"
     }
   },
   {
@@ -1025,8 +1025,8 @@
       ]
     },
     "detail": {
-      "en": "Apollo and Soyuz docked on 17 July 1975 in Earth orbit through a connecting docking module. The Apollo vehicle launched on Saturn IB, not Saturn V. Cape Canaveral and Baikonur are associated centres, not the docking location.",
-      "zh": "阿波罗与联盟号于1975年7月17日在地球轨道通过对接舱连接。阿波罗的运载火箭是土星IB，不是土星V。卡纳维拉尔角与拜科努尔是关联中心，并非对接地点。"
+      "en": "Apollo and Soyuz docked in Earth orbit on 17 July 1975 through a connecting module. Apollo launched on Saturn IB, rather than Saturn V. The spacecraft had launched from Cape Canaveral and Baikonur.",
+      "zh": "1975 年 7 月 17 日，阿波罗与联盟号在地球轨道通过连接舱对接。阿波罗由土星 IB 发射，并非土星五号。两艘飞船此前分别从卡纳维拉尔角与拜科努尔发射。"
     }
   },
   {
@@ -1072,8 +1072,8 @@
       "zh": "月球15号坠毁"
     },
     "summary": {
-      "en": "21 July 1969: Luna 15 crashes during a robotic lunar sample-return attempt. The Baikonur map point is its associated launch centre.",
-      "zh": "1969年7月21日：月球15号在无人月球采样返回尝试中坠毁。地图上的拜科努尔是其关联发射中心。"
+      "en": "21 July 1969: Luna 15 crashes while trying to collect lunar samples and return them to Earth without a crew.",
+      "zh": "1969 年 7 月 21 日：月球15号在无人采样返回尝试中坠毁。"
     },
     "missionContext": {
       "programme": "ussr",
@@ -1099,8 +1099,8 @@
       "zh": "拜科努尔航天发射场"
     },
     "summary": {
-      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
-      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+      "en": "Baikonur is the launch centre associated with Soviet missions such as Sputnik, Vostok and Luna.",
+      "zh": "拜科努尔是斯普特尼克、东方号与月球号等苏联任务的关联发射中心。"
     },
     "sources": [
       "S37",
@@ -1121,8 +1121,8 @@
       "zh": "肯尼迪航天中心"
     },
     "summary": {
-      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
-      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+      "en": "Kennedy Space Center is the launch centre associated with Apollo 11’s journey to the Moon.",
+      "zh": "肯尼迪航天中心是阿波罗11号登月旅程的关联发射中心。"
     },
     "sources": [
       "S37",
@@ -1143,8 +1143,8 @@
       "zh": "卡纳维拉尔角发射区"
     },
     "summary": {
-      "en": "Facility reference point from Wikidata P625. This is a centre, not an individual pad or an orbital position; static visibility does not give a founding date.",
-      "zh": "取自维基数据P625的设施参照点，代表中心，不代表某个发射台或轨道位置；静态可见不表示成立日期。"
+      "en": "The Cape Canaveral launch area is associated with Explorer 1, Mercury and Gemini flights, and the Apollo 1 ground test.",
+      "zh": "卡纳维拉尔角发射区关联探险者1号、水星与双子座飞行，以及阿波罗1号地面测试。"
     },
     "sources": [
       "S37",
