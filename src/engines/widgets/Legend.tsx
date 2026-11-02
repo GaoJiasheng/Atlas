@@ -1,3 +1,5 @@
+import { useHud, useSceneContext } from '../core/context';
+import { FoldHeader } from './FoldHeader';
 import type { Locale } from '../core/types';
 import { t, tx, type BilingualText } from '../../i18n';
 import { resolveColorRef } from '../../theme/theme';
@@ -63,11 +65,13 @@ function Swatch({ color, kind = 'fill' }: { color: string; kind?: LegendItem['ki
 
 /** Key for what the colours and marks on the stage mean. */
 export function Legend({ items, locale, title }: LegendProps) {
+  const open = useHud(s => s.legendsOpen);
+  const { actions } = useSceneContext();
   if (items.length === 0) return null;
   return (
     <section className="atlas-legend" aria-label={title ? tx(title, locale) : t(locale, 'legend.heading')}>
-      <h3 className="atlas-overlay__heading">{title ? tx(title, locale) : t(locale, 'legend.heading')}</h3>
-      <ul>
+      <FoldHeader title={title ? tx(title, locale) : t(locale, 'legend.heading')} open={open} onToggle={() => actions.setLegends(!open)} />
+      <ul hidden={!open}>
         {items.map((item) => (
           <li key={item.id} className="atlas-legend__item">
             <Swatch color={item.color} kind={item.kind} />

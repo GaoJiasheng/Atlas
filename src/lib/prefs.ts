@@ -164,3 +164,48 @@ export function setPlateExpanded(expanded: boolean): void {
     /* storage unavailable: the state lasts for this page view */
   }
 }
+
+/** Manual HUD choices belong to this tab. Solver defaults are never persisted. */
+export const HUD_ROOM_KEY = 'atlas:hud-room';
+export const GUIDE_SEEN_KEY = 'atlas:guide-seen';
+import { OPEN_FOLDS, type HudOverrides, type HudFolds } from '../engines/core/hud-room';
+export interface HudPreferences { manual: HudOverrides; stageOnly: boolean; beforeStage: HudFolds | null }
+function validFolds(value: unknown): HudOverrides {
+  const out: HudOverrides = {};
+  if (!value || typeof value !== 'object') return out;
+  for (const key of Object.keys(OPEN_FOLDS) as (keyof HudFolds)[]) {
+    const v = (value as Record<string, unknown>)[key];
+    if (key === 'leftColumn') {
+      if (v === 'open' || v === 'compact' || v === 'collapsed') out.leftColumn = v;
+    } else if (typeof v === 'boolean') out[key] = v;
+  }
+  return out;
+}
+export function getHudPreferences(): HudPreferences {
+  const fallback: HudPreferences = { manual: {}, stageOnly: false, beforeStage: null };
+  try {
+    const raw = window.sessionStorage.getItem(HUD_ROOM_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return { manual: validFolds(parsed.manual), stageOnly: parsed.stageOnly === true,
+        beforeStage: parsed.beforeStage ? { ...OPEN_FOLDS, ...validFolds(parsed.beforeStage) } : null };
+    }
+    // Honour choices made before HUD room, without treating absent keys as overrides.
+    for (const [key, field] of [[READER_KEY, 'reader'], [PANELS_KEY, 'panelsOpen'], [CARD_KEY, 'cardOpen'], [PLATE_KEY, 'plateOpen']] as const) {
+      const v = window.sessionStorage.getItem(key);
+      if (v === 'open' || v === 'collapsed') fallback.manual[field] = v === 'open';
+    }
+  } catch { /* storage unavailable or malformed */ }
+  return fallback;
+}
+export function setHudPreferences(value: HudPreferences): void {
+  try { window.sessionStorage.setItem(HUD_ROOM_KEY, JSON.stringify(value)); } catch { /* page-local state still works */ }
+}
+/** A successful write is required before auto-opening; private/blocked storage stays quiet. */
+export function claimFirstGuide(): boolean {
+  try {
+    if (window.localStorage.getItem(GUIDE_SEEN_KEY)) return false;
+    window.localStorage.setItem(GUIDE_SEEN_KEY, '1');
+    return true;
+  } catch { return false; }
+}

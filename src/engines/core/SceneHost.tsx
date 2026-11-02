@@ -8,14 +8,14 @@
  * - renders the technical-plate layout (docs/08 §2): the stage fills the
  *   page, the HUD floats over it (top bar, title block + chapter rail, card +
  *   overlay column, bottom dock with panels and the engine bar), the reading
- *   InfoPanel is a docked column >= 1024px (collapsible to a 28 px strip,
+ *   InfoPanel is a docked column >= 1024px (collapsible to a 44 px strip,
  *   kept per tab in sessionStorage) and a bottom sheet below
  * - the left column ends in the engine's `plate` block; the reading panel has
  *   engine slots above the chapter body (`readerTop`) and after it (`readerEnd`)
- * - the bottom panel strip (panel01-03, MathScene) folds as one group into a 28 px bar,
+ * - the bottom panel strip (panel01-03, MathScene) folds as one group into a 44 px bar,
  *   per tab in sessionStorage (`atlas:panels`); BottomPanels tells the stage
  *   where the strip starts (`--stage-inset`) so the canvas reflows
- * - the top-right card folds into a 28 px vertical tab at the stage's right
+ * - the top-right card folds into a 44 px vertical tab at the stage's right
  *   edge (`atlas:card`, same rule); the overlay column below moves up
  * - the reading panel's collapse is the user's choice and sticky: a chapter
  *   change never re-expands it, it only flashes the handle / strip (`data-flash`);
@@ -64,7 +64,9 @@ import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
 import { getEngine, getEngineView } from '../registry';
 import { t, tx, type BilingualText } from '../../i18n';
 import { applyTheme, resolveTheme } from '../../theme/theme';
-import { getCardExpanded, getPanelsExpanded, getReaderExpanded, setCardExpanded, setPanelsExpanded, setReaderExpanded, setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { getHudPreferences, setHudPreferences, setReaderExpanded, setPanelsExpanded, setCardExpanded, setPlateExpanded, claimFirstGuide, setThemeOverride, useThemeOverride } from '../../lib/prefs';
+import { useHudRoom } from './useHudRoom';
+import { FoldHeader } from '../widgets/FoldHeader';
 import { ChapterRail } from '../widgets/ChapterRail';
 import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
@@ -94,9 +96,9 @@ const HUD_TYPE_FLOOR = 0.8;
 const READER_FLASH_MS = 900;
 
 /** `--k = clamp(min(W/1920, H/1080), .6, 1.6)`; 1 on phones. */
-export function hudScale(width: number, height: number): number {
+export function hudScale(width: number, height: number, coarse = false): number {
   if (width <= PHONE_MAX) return 1;
-  return Math.min(1.6, Math.max(0.6, Math.min(width / 1920, height / 1080)));
+  return Math.min(1.6, Math.max(coarse ? 1 : 0.6, Math.min(width / 1920, height / 1080)));
 }
 
 class StageErrorBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
@@ -296,12 +298,15 @@ export default function SceneHost(props: SceneHostProps) {
   const readerOpen = useStore(hud, (s) => s.reader);
   const panelsOpen = useStore(hud, (s) => s.panelsOpen);
   const cardOpen = useStore(hud, (s) => s.cardOpen);
+  const leftColumn = useStore(hud, (s) => s.leftColumn);
+  const legendsOpen = useStore(hud, (s) => s.legendsOpen);
+  const stageOnly = useStore(hud, (s) => s.stageOnly);
   // Docked reading panel: expanded unless this tab collapsed it (sessionStorage, not the URL).
   // The background chapter overrides that once, on its first entry: its reader opens.
   const backgroundShown = useRef(false);
   const openBackground = useCallback(
     (id: string | null) => {
-      if (backgroundShown.current || !isBackground(chapters.find((c) => c.id === id))) return false;
+      if (hud.getState().manual.reader !== undefined || hud.getState().stageOnly || backgroundShown.current || !isBackground(chapters.find((c) => c.id === id))) return false;
       backgroundShown.current = true;
       hud.setState({ reader: true });
       return true;
@@ -309,26 +314,24 @@ export default function SceneHost(props: SceneHostProps) {
     [chapters, hud],
   );
   useEffect(() => {
-    hud.setState({ reader: getReaderExpanded() });
-    openBackground(store.getState().chapter);
+    const prefs = getHudPreferences();
+    hud.setState({ ...prefs.manual, manual: prefs.manual });
+    // The background opens once unless this reader already has a manual choice.
+    if (prefs.manual.reader === undefined) openBackground(store.getState().chapter);
+    else backgroundShown.current = true;
+    if (prefs.stageOnly) { if (prefs.beforeStage) hud.setState(prefs.beforeStage); actions.setStageOnly(true); }
+    if (!hud.getState().controls.beats?.current() && hud.getState().hud && claimFirstGuide()) actions.setGuide(true);
     return hud.subscribe((s, prev) => {
-      if (s.reader !== prev.reader) setReaderExpanded(s.reader);
+      if (s.manual !== prev.manual) {
+        for (const [field, write] of [['reader', setReaderExpanded], ['panelsOpen', setPanelsExpanded], ['cardOpen', setCardExpanded], ['plateOpen', setPlateExpanded]] as const) {
+          const value = s.manual[field];
+          if (value !== undefined && value !== prev.manual[field]) write(value);
+        }
+      }
+      if (s.manual !== prev.manual || s.stageOnly !== prev.stageOnly || s.beforeStage !== prev.beforeStage)
+        setHudPreferences({ manual: s.manual, stageOnly: s.stageOnly, beforeStage: s.beforeStage });
     });
-  }, [hud, store, openBackground]);
-  // The bottom panel strip folds as one group; the choice is per tab (sessionStorage), never in the URL.
-  useEffect(() => {
-    hud.setState({ panelsOpen: getPanelsExpanded() });
-    return hud.subscribe((s, prev) => {
-      if (s.panelsOpen !== prev.panelsOpen) setPanelsExpanded(s.panelsOpen);
-    });
-  }, [hud]);
-  // The top-right card folds into a side tab; same rule: per tab, never in the URL.
-  useEffect(() => {
-    hud.setState({ cardOpen: getCardExpanded() });
-    return hud.subscribe((s, prev) => {
-      if (s.cardOpen !== prev.cardOpen) setCardExpanded(s.cardOpen);
-    });
-  }, [hud]);
+  }, [hud, store, actions, openBackground]);
   // A collapsed reader stays collapsed when the chapter changes; its handle flashes to say new text is there.
   const readerRef = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -353,10 +356,12 @@ export default function SceneHost(props: SceneHostProps) {
   }, [store, hud, openBackground]);
   const [k, setK] = useState(1);
   useLayoutEffect(() => {
-    const update = () => setK(hudScale(window.innerWidth, window.innerHeight));
+    const pointer = window.matchMedia('(pointer: coarse)');
+    const update = () => setK(hudScale(window.innerWidth, window.innerHeight, pointer.matches));
     update();
     window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
+    pointer.addEventListener('change', update);
+    return () => { window.removeEventListener('resize', update); pointer.removeEventListener('change', update); };
   }, []);
   const scaleStyle = {
     '--k': String(k),
@@ -369,6 +374,7 @@ export default function SceneHost(props: SceneHostProps) {
 
   /* ---------------- chapter-body controls (static HTML, delegated) ---------------- */
   const sceneRef = useRef<HTMLDivElement>(null);
+  useHudRoom(sceneRef, hud, actions);
   const sources = useMemo(() => topicSources(data), [data]);
   const glossary = useMemo(() => topicGlossary(data), [data]);
   const glossaryOpen = useStore(hud, (s) => s.glossary);
@@ -418,10 +424,10 @@ export default function SceneHost(props: SceneHostProps) {
     () =>
       hud.subscribe((s, prev) => {
         if (s.glossary === null || s.glossary === prev.glossary) return;
-        if (!s.reader) hud.setState({ reader: true });
+        actions.setReader(true);
         setSheetOpen(true);
       }),
-    [hud],
+    [hud, actions],
   );
 
   /* ---------------- slots ---------------- */
@@ -439,12 +445,11 @@ export default function SceneHost(props: SceneHostProps) {
   }, []);
 
   const revealReader = useCallback(() => {
-    // The phone sheet is temporary; opening it must not overwrite the dock's
-    // persisted collapse preference (scene.css switches at 1024 CSS px).
-    if (window.matchMedia('(min-width: 1024px)').matches) hud.setState({ reader: true });
+    // Selecting an object explicitly reopens its details, including a drawer.
+    actions.setReader(true);
     setSheetOpen(true);
     setReaderReveal((revision) => revision + 1);
-  }, [hud]);
+  }, [actions]);
   // Wait for the existing drawer/reader to render open. Re-selecting the same
   // event must also return to the top, even if its inspector did not remount.
   useLayoutEffect(() => {
@@ -490,14 +495,17 @@ export default function SceneHost(props: SceneHostProps) {
         data-stage={topic.stage}
         data-hud={hudOn ? 'on' : 'off'}
         data-labels={labelsOn ? 'on' : 'off'}
-        data-sheet={sheetOpen ? 'open' : 'closed'}
+        data-sheet={sheetOpen && readerOpen ? 'open' : 'closed'}
         data-reader={readerOpen ? 'open' : 'collapsed'}
         data-panels={panelsOpen ? 'open' : 'collapsed'}
+        data-left={leftColumn}
+        data-legends={legendsOpen ? 'open' : 'collapsed'}
+        data-stage-only={stageOnly ? 'on' : 'off'}
         data-card={cardOpen ? 'open' : 'collapsed'}
         style={scaleStyle}
       >
         <main id="atlas-main" className="atlas-stage-area">
-          <div ref={stageRef} className="atlas-stage" aria-label={t(locale, 'scene.stage')} role="region">
+          <div ref={stageRef} onPointerDownCapture={() => actions.setGuide(false)} onWheelCapture={() => actions.setGuide(false)} className="atlas-stage" aria-label={t(locale, 'scene.stage')} role="region">
             {dataState.status === 'error' ? (
               <StagePlaceholder label={t(locale, 'scene.error')} />
             ) : mounted && dataReady ? (
@@ -530,6 +538,12 @@ export default function SceneHost(props: SceneHostProps) {
 
         <div className="atlas-hud hud-fade">
           <div className="atlas-hud__left">
+            <FoldHeader title={tx(topic.title, locale)} open={leftColumn !== 'collapsed'} vertical controls="atlas-left-body" panel="left-tab" className="atlas-left-tab" onToggle={() => actions.setLeftColumn(leftColumn === 'collapsed' ? 'open' : 'collapsed')} />
+            <div className="atlas-left-body" id="atlas-left-body">
+            <div className="atlas-left-controls">
+              <button className="atlas-fold" type="button" aria-expanded={leftColumn === 'open'} aria-label={t(locale, 'hud.left.metadata')} onClick={() => actions.setLeftColumn(leftColumn === 'open' ? 'compact' : 'open')}>⋯</button>
+              <button className="atlas-fold" type="button" aria-expanded={true} aria-label={t(locale, 'hud.left.fold')} onClick={() => actions.setLeftColumn('collapsed')}>‹</button>
+            </div>
             <TitleBlock
               topic={topic}
               chapter={chapter}
@@ -545,6 +559,7 @@ export default function SceneHost(props: SceneHostProps) {
               onSelect={(id) => store.getState().goToChapter(id)}
             />
             <div ref={slotRef('plate')} className="atlas-plate" />
+            </div>
           </div>
           <div className="atlas-hud__right">
             <CardFrame hud={hud} slotRef={slotRef} locale={locale} actions={actions} />
@@ -580,7 +595,8 @@ export default function SceneHost(props: SceneHostProps) {
           </button>
           <button
             type="button"
-            className="atlas-reader__strip"
+            className="atlas-reader__strip atlas-fold atlas-fold--vertical"
+            data-fold-tab=""
             aria-expanded={false}
             aria-label={t(locale, 'hud.reader.expand')}
             title={t(locale, 'hud.reader.expand')}
@@ -606,8 +622,8 @@ export default function SceneHost(props: SceneHostProps) {
             hasNext={hasNext}
             onPrev={() => step(-1)}
             onNext={() => step(1)}
-            expanded={sheetOpen}
-            onToggleExpanded={() => setSheetOpen((v) => !v)}
+            expanded={sheetOpen && readerOpen}
+            onToggleExpanded={() => { const open = !(sheetOpen && readerOpen); actions.setReader(open); setSheetOpen(open); }}
           >
             {glossaryOpen !== null && glossary.length > 0 && (
               <GlossaryCard terms={glossary} open={glossaryOpen} locale={locale} onOpen={actions.setGlossary} />

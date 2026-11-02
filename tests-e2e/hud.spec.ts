@@ -1,5 +1,5 @@
-import { expect, test, type Locator, type Page } from '@playwright/test';
-import { hudLayoutIssues, LAYOUT_SIZES } from './hud-layout';
+import { expect, type Locator, type Page } from '@playwright/test';
+import { hudLayoutIssues, LAYOUT_SIZES, hudTest as test } from './hud-layout';
 
 const TOPICS = ['sample-time', 'sample-space'] as const;
 
@@ -123,7 +123,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   const api = () => page.evaluate(() => window.__atlas!.state());
   const stageWide = await width(stage);
   await page.locator('.atlas-reader__handle').click();
-  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(45);
   await expect.poll(() => width(stage)).toBeGreaterThan(stageWide + 300);
   await expect.poll(async () => (await api()).reader).toBe(false);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:reader'))).toBe('collapsed');
@@ -133,7 +133,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   await page.reload();
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(45);
 
   // A rail row, a timeline node and ← → each change the chapter, never the fold; the strip flashes (two pulses, ~900 ms).
   // Counted by a MutationObserver (a 900 ms window is easy to miss when polling under software GL).
@@ -159,7 +159,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   });
   if (animation) expect(animation).toEqual({ iterations: 2, duration: 450 });
   await expect(flashing).toHaveCount(0, { timeout: 3000 });
-  expect(await width(reader)).toBeLessThanOrEqual(29);
+  expect(await width(reader)).toBeLessThanOrEqual(45);
   expect((await api()).reader).toBe(false);
 
   await page.locator('.ts-seg__btn').nth(2).click();
@@ -169,7 +169,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   await page.keyboard.press('ArrowLeft');
   await expect.poll(async () => (await api()).chapter).toBe('second-look');
   await expect.poll(flashes).toBe(3);
-  expect(await width(reader)).toBeLessThanOrEqual(29);
+  expect(await width(reader)).toBeLessThanOrEqual(45);
   expect((await api()).reader).toBe(false);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:reader'))).toBe('collapsed');
   await expect(flashing).toHaveCount(0, { timeout: 3000 });
@@ -179,7 +179,7 @@ test('reading panel: collapse is sticky (survives a reload and chapter changes, 
   await expect.poll(() => width(reader)).toBeGreaterThan(300);
   expect(await flashes()).toBe(3);
   await page.locator('.atlas-reader__handle').click();
-  await expect.poll(() => width(reader)).toBeLessThanOrEqual(29);
+  await expect.poll(() => width(reader)).toBeLessThanOrEqual(45);
   await page.locator('.atlas-reader__strip').click();
   await expect.poll(() => width(reader)).toBeGreaterThan(300);
   // An open reader does not flash on a chapter change.
@@ -1296,9 +1296,9 @@ test('chapter axis (SpaceScene): a segment per chapter and a tick per beat; segm
   await fold.click();
   await expect(axis).toHaveAttribute('data-folded', '');
   await expect(fold).toHaveAttribute('aria-expanded', 'false');
-  await expect(fold).toHaveText('04');
+  await expect(fold).toHaveText('Chapters and beats04');
   await expect(page.locator('.atlas-axis__seg')).toHaveCount(0);
-  expect((await axis.boundingBox())!.height).toBeLessThanOrEqual(23);
+  expect((await axis.boundingBox())!.height).toBe(44);
   expect((await api()).panels).toBe(false);
   expect(await page.evaluate(() => sessionStorage.getItem('atlas:panels'))).toBe('collapsed');
   await page.reload();
@@ -1351,7 +1351,7 @@ test('reading panel (SpaceScene): header, beat line, inspector, body, chapter in
 /** The folded tab slides in; let it land before measuring. */
 const settled = (tab: Locator) => tab.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)).then(() => undefined));
 
-test('card fold (SpaceScene): a right chevron folds the part chain into a 28 px tab on the stage edge, the Layers panel moves up, per tab', async ({ page }) => {
+test('card fold (SpaceScene): a right chevron folds the part chain into a 44 px tab on the stage edge, the Layers panel moves up, per tab', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
   await openScene(page, '/en/topics/sample-space/');
   const api = () => page.evaluate(() => window.__atlas!.state());
@@ -1374,7 +1374,7 @@ test('card fold (SpaceScene): a right chevron folds the part chain into a 28 px 
   await expect(card).toBeHidden();
   await expect(tab).toBeVisible();
   await expect(tab).toHaveAttribute('aria-expanded', 'false');
-  await expect.poll(async () => Math.round((await tab.boundingBox())!.width)).toBe(28);
+  await expect.poll(async () => Math.round((await tab.boundingBox())!.width)).toBe(44);
   // On the stage's right edge: the HUD layer ends where the docked reader begins.
   const hudBox = (await page.locator('.atlas-hud').boundingBox())!;
   await expect

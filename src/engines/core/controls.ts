@@ -15,6 +15,7 @@
  * re-registered whenever its identity changes.
  */
 import { createStore, type StoreApi } from 'zustand/vanilla';
+import { OPEN_FOLDS, type HudFolds, type HudOverrides, type LeftColumn, type FreeStage, type HudRoom } from './hud-room';
 import type { BilingualText } from '../../i18n';
 import type { CameraState, SceneSnapshot, SceneTransition } from './types';
 
@@ -226,7 +227,14 @@ export interface SceneControls {
   escape?(): boolean;
 }
 
-export interface HudState {
+export interface HudState extends HudFolds {
+  /** Manual choices only; automatic defaults never become preferences. */
+  manual: HudOverrides;
+  stageOnly: boolean;
+  beforeStage: HudFolds | null;
+  guide: boolean;
+  freeStage: FreeStage | null;
+  room: HudRoom | null;
   controls: SceneControls;
   /** HUD visible (`H`). */
   hud: boolean;
@@ -237,19 +245,19 @@ export interface HudState {
   /** The user moved the camera since the last preset / chapter change. */
   cameraFree: boolean;
   /**
-   * Reading panel expanded (docked column >= 1024 px; collapsed = a 28 px
+   * Reading panel expanded (docked column >= 1024 px; collapsed = a 44 px
    * strip). Kept in sessionStorage by the host, never in the URL.
    */
   reader: boolean;
   /**
-   * Bottom strip expanded: MathScene's panel01–03 (collapsed = one 28 px bar
+   * Bottom strip expanded: MathScene's panel01–03 (collapsed = one 44 px bar
    * with the three titles) and SpaceScene's chapter axis (collapsed = a
-   * hairline with the chapter number). Kept in sessionStorage by the host,
+   * labelled strip with the chapter number). Kept in sessionStorage by the host,
    * never in the URL.
    */
   panelsOpen: boolean;
   /**
-   * Top-right card expanded; collapsed = a 28 px vertical tab at the stage's
+   * Top-right card expanded; collapsed = a 44 px vertical tab at the stage's
    * right edge. Kept in sessionStorage by the host, never in the URL.
    */
   cardOpen: boolean;
@@ -267,14 +275,13 @@ export type HudStore = StoreApi<HudState>;
 
 export function createHudStore(): HudStore {
   return createStore<HudState>()(() => ({
+    ...OPEN_FOLDS,
+    manual: {}, stageOnly: false, beforeStage: null, guide: false, freeStage: null, room: null,
     controls: {},
     hud: true,
     labels: true,
     presetId: null,
     cameraFree: false,
-    reader: true,
-    panelsOpen: true,
-    cardOpen: true,
     glossary: null,
   }));
 }
@@ -296,7 +303,7 @@ export function registerSceneControls(hud: HudStore, controls: SceneControls): (
 
 export const LABELS_MODE_ID = 'labels';
 export const LABELS_KEY = 'l';
-const RESERVED_KEYS = new Set([' ', 'h', 'escape', ',', '.']);
+const RESERVED_KEYS = new Set([' ', 'h', 'z', '?', 'escape', ',', '.']);
 /** Previous / next beat outside the presentation (`SceneControls.beatStep`). */
 export const BEAT_KEYS = { prev: ',', next: '.' } as const;
 /** SpaceScene's try-it card (docs/22 §4.3 S3, docs/30 F2): `[` `]` step the varied control, `T` flips the card's first switch, `G` runs the card's timelines again; registered as commands. */
@@ -322,7 +329,7 @@ export function activePreset(state: Pick<HudState, 'controls' | 'presetId' | 'ca
 export interface KeyBinding {
   /** `KeyboardEvent.key` (lower-case letters, `' '` for space). */
   key: string;
-  type: 'preset' | 'mode' | 'command' | 'pause' | 'hud' | 'escape' | 'chapter' | 'beat';
+  type: 'preset' | 'mode' | 'command' | 'pause' | 'hud' | 'escape' | 'chapter' | 'beat' | 'guide' | 'stageOnly';
   name: string;
 }
 
@@ -363,6 +370,8 @@ export function buildKeymap(controls: SceneControls): KeyBinding[] {
   }
   if (controls.pause) out.push({ key: ' ', type: 'pause', name: 'pause' });
   out.push({ key: 'h', type: 'hud', name: 'hud' });
+  out.push({ key: '?', type: 'guide', name: 'guide' });
+  out.push({ key: 'z', type: 'stageOnly', name: 'stageOnly' });
   out.push({ key: 'Escape', type: 'escape', name: 'escape' });
   out.push({ key: 'ArrowLeft', type: 'chapter', name: 'prev' });
   out.push({ key: 'ArrowRight', type: 'chapter', name: 'next' });
@@ -396,6 +405,11 @@ export interface HudActions {
   setPanels(expanded: boolean): void;
   /** Expand / fold the top-right card (a vertical tab at the stage edge when folded). */
   setCard(expanded: boolean): void;
+  setPlate(expanded: boolean): void;
+  setLegends(expanded: boolean): void;
+  setLeftColumn(state: LeftColumn): void;
+  setGuide(open: boolean): void;
+  setStageOnly(on: boolean): void;
   /** Open a glossary term (`GLOSSARY_ALL` = the list) in the reader's inspector; `null` closes it. */
   setGlossary(id: string | null): void;
   /** Run a registered command (`false` when unknown or disabled). */
@@ -405,7 +419,20 @@ export interface HudActions {
 
 export function createHudActions(hud: HudStore, camera: { suppress(fn: () => void): void }): HudActions {
   const controls = () => hud.getState().controls;
+  const fold = (patch: HudOverrides) => hud.setState(s => ({ ...patch, manual: s.stageOnly ? s.manual : { ...s.manual, ...patch } }));
   return {
+    setPlate: (open) => fold({ plateOpen: open }),
+    setLegends: (open) => fold({ legendsOpen: open }),
+    setLeftColumn: (state) => fold({ leftColumn: state }),
+    setGuide: (open) => hud.setState({ guide: open }),
+    setStageOnly(on) {
+      const s = hud.getState();
+      if (on === s.stageOnly) return;
+      if (on) {
+        const beforeStage: HudFolds = { reader: s.reader, panelsOpen: s.panelsOpen, cardOpen: s.cardOpen, plateOpen: s.plateOpen, legendsOpen: s.legendsOpen, leftColumn: s.leftColumn };
+        hud.setState({ stageOnly: true, beforeStage, guide: false, reader: false, panelsOpen: false, cardOpen: false, plateOpen: false, legendsOpen: false, leftColumn: 'collapsed' });
+      } else hud.setState({ ...(s.beforeStage ?? OPEN_FOLDS), stageOnly: false, beforeStage: null });
+    },
     setPreset(id, options) {
       const presets = controls().presets;
       if (!presets?.items.some((p) => p.id === id)) return false;
@@ -421,6 +448,7 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
       const modes = controls().modes;
       const mode = modes?.items.find((m) => m.id === id);
       if (!modes || !mode || (mode.disabled && on)) return false;
+      if (id === 'presentation' && on) hud.setState({ guide: false });
       modes.set(id, on, { instant: options?.instant ?? false });
       return true;
     },
@@ -432,19 +460,19 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
       controls().pause?.set(paused);
     },
     setHud(on) {
-      hud.setState({ hud: on });
+      hud.setState({ hud: on, ...(!on ? { guide: false } : {}) });
     },
     setLabels(on) {
       hud.setState({ labels: on });
     },
     setReader(expanded) {
-      hud.setState({ reader: expanded });
+      fold({ reader: expanded });
     },
     setPanels(expanded) {
-      hud.setState({ panelsOpen: expanded });
+      fold({ panelsOpen: expanded });
     },
     setCard(expanded) {
-      hud.setState({ cardOpen: expanded });
+      fold({ cardOpen: expanded });
     },
     setGlossary(id) {
       hud.setState({ glossary: id });
@@ -456,6 +484,7 @@ export function createHudActions(hud: HudStore, camera: { suppress(fn: () => voi
       return true;
     },
     escape() {
+      if (hud.getState().guide) { hud.setState({ guide: false }); return; }
       if (!hud.getState().hud) {
         hud.setState({ hud: true });
         return;

@@ -8,8 +8,8 @@
  * (the chapter's first beat), a tick is a button (that beat); nothing runs by
  * itself. The right end carries a short readout (SpaceScene: `05 · 2/8`).
  *
- * The chevron at the left folds the axis into a hairline with the chapter
- * number only (the engine keeps the state; SpaceScene uses the HUD store's
+ * The chevron at the left folds the axis into a labelled 44px strip with the chapter
+ * number (the engine keeps the state; SpaceScene uses the HUD store's
  * `panelsOpen`, per tab). Phones (< 760 px): numbers only, no ticks; beats are
  * stepped from the reading panel's beat line.
  *
@@ -40,7 +40,7 @@ export interface ChapterAxisProps {
   chapter: string | null;
   /** Its beat on show (filled tick), `null` = none (the chapter's own state). */
   beat: number | null;
-  /** Expanded (`false`: a hairline with the chapter number only). */
+  /** Expanded (`false`: a labelled strip with the chapter number). */
   open: boolean;
   onOpen(open: boolean): void;
   /** A segment: the chapter's first beat. */
@@ -64,7 +64,8 @@ export function ChapterAxis({ chapters, chapter, beat, open, onOpen, onChapter, 
     <div className="atlas-axis" role="group" aria-label={t(locale, 'axis.label')} data-folded={open ? undefined : ''}>
       <button
         type="button"
-        className="atlas-axis__fold"
+        className="atlas-axis__fold atlas-fold"
+        data-fold-tab={open ? undefined : ''}
         aria-expanded={open}
         aria-label={fold}
         title={fold}
@@ -74,6 +75,7 @@ export function ChapterAxis({ chapters, chapter, beat, open, onOpen, onChapter, 
         }}
       >
         <i aria-hidden="true" />
+        {!open && <span>{t(locale, 'axis.label')}</span>}
         {!open && here && <b>{here.number}</b>}
       </button>
       {open ? (

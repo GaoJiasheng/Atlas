@@ -18,11 +18,12 @@
  */
 import type { ReactNode } from 'react';
 import { useStore } from 'zustand';
-import { useScene, useSceneContext } from '../core/context';
+import { useHud, useScene, useSceneContext } from '../core/context';
 import { allModes, GLOSSARY_ALL, type HudText, type ModeTone } from '../core/controls';
 import { t, tx } from '../../i18n';
 import { resolveColorRef } from '../../theme/theme';
 import { Legend, type LegendItem } from './Legend';
+import { FoldHeader } from './FoldHeader';
 import { Icon } from './icons';
 
 /** A layer row's solo switch: on / off, its accessible name, and the toggle. */
@@ -102,10 +103,12 @@ function Row({
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
+  const open = useHud(s => s.legendsOpen);
+  const { actions } = useSceneContext();
   return (
     <section className="atlas-ctl__section" aria-label={title}>
-      <h3 className="atlas-overlay__heading">{title}</h3>
-      <div className="atlas-ctl__rows">{children}</div>
+      <FoldHeader title={title} open={open} onToggle={() => actions.setLegends(!open)} />
+      <div className="atlas-ctl__rows" hidden={!open}>{children}</div>
     </section>
   );
 }

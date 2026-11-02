@@ -28,6 +28,7 @@ import {
 } from './controls';
 import type { SlotName } from './context';
 import { t, tx, type BilingualText, type UiKey } from '../../i18n';
+import { ControlsGuide } from './ControlsGuide';
 import { GlobalToggles } from '../widgets/GlobalToggles';
 
 const upper = (s: string) => s.toLocaleUpperCase('en');
@@ -108,6 +109,8 @@ export interface TopBarProps {
 export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, indexHref, hud, actions, onChapter }: TopBarProps) {
   const tr = (key: UiKey, vars?: Record<string, string | number>) => t(locale, key, vars);
   const controls = useStore(hud, (s) => s.controls);
+  const guide = useStore(hud, (s) => s.guide);
+  const stageOnly = useStore(hud, (s) => s.stageOnly);
   const labels = useStore(hud, (s) => s.labels);
   const free = useStore(hud, (s) => s.cameraFree);
   const active = useStore(hud, (s) => activePreset(s, chapter));
@@ -219,7 +222,10 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
             )}
           </div>
         )}
-        <GlobalToggles locale={locale} path={path} variant="hud" />
+        <GlobalToggles locale={locale} path={path} variant="hud">
+          <button type="button" className="hud-btn atlas-stage-only" data-stage-only-toggle="" aria-pressed={stageOnly} aria-label={tr('hud.stageOnly')} title={`${tr('hud.stageOnly')} (Z)`} onClick={() => actions.setStageOnly(!stageOnly)}>Z</button>
+          <button type="button" className="hud-btn atlas-guide-toggle" aria-label={tr('guide.title')} title={`${tr('guide.title')} (?)`} aria-expanded={guide} aria-controls="atlas-controls-guide" onClick={() => actions.setGuide(!guide)}>?</button>
+        </GlobalToggles>
       </div>
       <div className="atlas-topbar__sub">
         <p className="atlas-status" role="status">
@@ -260,6 +266,7 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           )}
         </p>
       </div>
+      <ControlsGuide hud={hud} actions={actions} engine={topic.engine} locale={locale} />
     </header>
   );
 }
@@ -428,7 +435,8 @@ export function CardFrame({ hud, slotRef, locale, actions }: { hud: HudStore; sl
       {!open && (
         <button
           type="button"
-          className="atlas-card__tab"
+          className="atlas-card__tab atlas-fold atlas-fold--vertical"
+          data-fold-tab=""
           data-hud-panel="card-tab"
           aria-expanded={false}
           aria-controls="atlas-card"
@@ -514,7 +522,8 @@ export function BottomPanels({
         type="button"
         className="atlas-panels__bar"
         data-hud-panel="panels-bar"
-        tabIndex={-1}
+        tabIndex={expanded ? -1 : 0}
+        data-fold-tab=""
         aria-expanded={false}
         aria-controls="atlas-panels-body"
         aria-label={t(locale, 'hud.panels.expand')}

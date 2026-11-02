@@ -89,6 +89,8 @@ describe('registration, modes and keymap', () => {
       'l:mode:labels',
       ' :pause:pause',
       'h:hud:hud',
+      '?:guide:guide',
+      'z:stageOnly:stageOnly',
       'Escape:escape:escape',
       'ArrowLeft:chapter:prev',
       'ArrowRight:chapter:next',

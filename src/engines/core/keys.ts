@@ -35,6 +35,7 @@ export function useSceneKeys(hud: HudStore, actions: HudActions, step: (delta: 1
         step(key === 'ArrowRight' ? 1 : -1);
         return;
       }
+      if (key === '?') { e.preventDefault(); actions.setGuide(!hud.getState().guide); return; }
       if (e.shiftKey) return;
 
       const { controls, labels } = hud.getState();
@@ -61,6 +62,7 @@ export function useSceneKeys(hud: HudStore, actions: HudActions, step: (delta: 1
         return;
       }
       const k = key.toLowerCase();
+      if (k === 'z') { e.preventDefault(); actions.setStageOnly(!hud.getState().stageOnly); return; }
       if (k === 'h') {
         actions.setHud(!hud.getState().hud);
         return;

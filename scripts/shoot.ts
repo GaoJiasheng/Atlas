@@ -125,7 +125,7 @@ interface RunReport {
 function usage(): never {
   console.error(
     'usage: pnpm shoot <topic> [--locale en|zh|all] [--theme paper|cinema|all] [--size WxH] [--suffix _4k]\n' +
-      '                          [--shots file.json] [--keys] [--layout] [--beats] [--tasks] [--perf] [--gpu] [--json out.json] [names...]',
+      '                          [--shots file.json] [--keys] [--layout] [--beats] [--tasks] [--perf] [--gpu] [--touch] [--json out.json] [names...]',
   );
   process.exit(2);
 }
@@ -209,10 +209,12 @@ class Session {
     locale: string,
     theme: string,
     size: [number, number],
+    touch = false,
   ): Promise<Session> {
-    const context = await browser.newContext({ viewport: { width: size[0], height: size[1] }, deviceScaleFactor: 1, serviceWorkers: 'block' });
+    const context = await browser.newContext({ viewport: { width: size[0], height: size[1] }, deviceScaleFactor: 1, hasTouch: touch, isMobile: touch, serviceWorkers: 'block' });
     // tsx compiles with keepNames: page.evaluate callbacks reference a helper that only exists in Node.
     await context.addInitScript(() => {
+      try { localStorage.setItem('atlas:guide-seen', '1'); } catch { /* blocked storage */ }
       (window as unknown as { __name: <T>(fn: T) => T }).__name = (fn) => fn;
       // Setting a canvas's width / height clears its drawing buffer: note when, so a shot can wait for the next drawn frame.
       new MutationObserver((list) => {
@@ -1429,6 +1431,13 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       if (!ok) note = 'SPACE did not toggle paused';
       await press(k.key);
       await until(async () => (await s.state()).paused === before);
+    } else if (k.type === 'guide' || k.type === 'stageOnly') {
+      const field = k.type;
+      const before = await s.page.evaluate((f) => window.__atlas!.state()[f], field);
+      await s.page.keyboard.press(k.key);
+      await s.page.waitForFunction(({ f, before }) => window.__atlas!.state()[f] !== before, { f: field, before });
+      await s.page.keyboard.press(k.key);
+      await s.page.waitForFunction(({ f, before }) => window.__atlas!.state()[f] === before, { f: field, before });
     } else if (k.type === 'hud') {
       await press(k.key);
       await page.waitForTimeout(900);
@@ -1652,6 +1661,7 @@ interface Options {
   tasks: boolean;
   perf: boolean;
   gpu: boolean;
+  touch: boolean;
   json?: string;
   names: string[];
 }
@@ -1671,6 +1681,7 @@ function parse(): Options {
       tasks: { type: 'boolean', default: false },
       perf: { type: 'boolean', default: false },
       gpu: { type: 'boolean', default: false },
+      touch: { type: 'boolean', default: false },
       json: { type: 'string' },
       help: { type: 'boolean', short: 'h', default: false },
     },
@@ -1690,6 +1701,7 @@ function parse(): Options {
     tasks: values.tasks,
     perf: values.perf,
     gpu: values.gpu,
+    touch: values.touch,
     json: values.json,
     names,
   };
@@ -1715,7 +1727,7 @@ async function main(): Promise<number> {
       for (const theme of o.themes) {
         const out = join(ROOT, 'shots', o.topic, `${locale}-${theme}`);
         console.log(`\n== ${o.topic} · ${locale} · ${theme} · ${o.size.join('x')}`);
-        const s = await Session.open(browser, origin, o.topic, locale, theme, o.size);
+        const s = await Session.open(browser, origin, o.topic, locale, theme, o.size, o.touch);
         const report: RunReport = { topic: o.topic, locale, theme, size: o.size.join('x'), shots: {}, keys: [], layout: [], beatFailures: [], beatNotes: [], chapterNotes: [], taskFailures: [], js: { files: 0, gzKB: 0 }, logs: [] };
         try {
           if (!checksOnly) await runShots(s, o, out, report);

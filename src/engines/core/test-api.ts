@@ -1,3 +1,4 @@
+import type { LeftColumn, FreeStage, HudRoom, HudOverrides } from './hud-room';
 /**
  * `window.__atlas`: the test / screenshot API (docs/08 §7), mirroring the
  * industrial-3d-showcase `__showcase` contract. Installed by SceneHost on the
@@ -27,6 +28,14 @@ export type AtlasState = SceneSnapshot & {
   panels: boolean;
   /** Top-right card expanded (folded = a vertical tab at the stage's right edge). */
   card: boolean;
+  plate: boolean;
+  legends: boolean;
+  leftColumn: LeftColumn;
+  stageOnly: boolean;
+  guide: boolean;
+  manual: HudOverrides;
+  freeStage: FreeStage | null;
+  room: HudRoom | null;
   /** The continuous time on show (TimeScene: the playhead as a number); `null` when the engine has none. */
   playhead: number | null;
   /** Active camera preset, `null` = free camera. */
@@ -67,6 +76,12 @@ export interface AtlasTestApi {
   /** Debug: the last 10 narrated utterances `{ text, lang, voice, started, ended, reason }`. */
   voiceLog(): VoiceLogEntry[];
   setHud(on: boolean): void;
+  setReader(on: boolean): void;
+  setPlate(on: boolean): void;
+  setLegends(on: boolean): void;
+  setLeftColumn(state: LeftColumn): void;
+  setGuide(on: boolean): void;
+  setStageOnly(on: boolean): void;
   /** Expand / collapse the bottom panel strip. */
   setPanels(on: boolean): void;
   /** Expand / fold the top-right card. */
@@ -181,6 +196,12 @@ export function installTestApi(deps: TestApiDeps): () => void {
     setVoice: (on) => hud.getState().controls.beats?.setVoice?.(on) ?? false,
     voiceLog: () => hud.getState().controls.beats?.voiceLog?.() ?? [],
     setHud: (on) => actions.setHud(on),
+    setReader: actions.setReader,
+    setPlate: actions.setPlate,
+    setLegends: actions.setLegends,
+    setLeftColumn: actions.setLeftColumn,
+    setGuide: actions.setGuide,
+    setStageOnly: actions.setStageOnly,
     setPanels: (on) => actions.setPanels(on),
     setCard: (on) => actions.setCard(on),
     setTheme: (theme) => deps.setTheme(theme),
@@ -195,6 +216,8 @@ export function installTestApi(deps: TestApiDeps): () => void {
         reader: h.reader,
         panels: h.panelsOpen,
         card: h.cardOpen,
+        plate: h.plateOpen, legends: h.legendsOpen, leftColumn: h.leftColumn,
+        stageOnly: h.stageOnly, guide: h.guide, manual: h.manual, freeStage: h.freeStage, room: h.room,
         playhead: h.controls.time?.now() ?? null,
         preset: activePreset(h, snapshot.chapter),
         modes: Object.fromEntries(allModes(h.controls, h.labels, '').map((m) => [m.id, m.on])),
