@@ -44,3 +44,15 @@ English audit summary: this is an original, conditional, six-node teaching graph
 ## 最终命令记录
 
 check通过（773文件、0error/0warning）；validate通过（59主题、0error/0warning）；全量test以2workers/20秒timeout通过（162文件、4,376测试），首轮既有energy用例受机器负载超默认5秒，未修改其测试实现。build通过（121静态页面、130.34秒），Vite大chunk提示保留。新增37引擎+62主题测试覆盖56组合、字幕数值、预测、潮位和显隐、索引与可见标签。截图/e2e仍按brief待主session，不把CPU投影或静态构建当视觉/性能通过。
+
+## Readability pass 2026-10-29
+
+Rewrote all 8 chapter bodies in EN and ZH, 36 beat-caption pairs, chapter summaries and try-it instructions, topic introduction, 20 object summary/detail pairs, food-web notes, control/output and PLATE labels, glossary explanations, and both figures’ captions/alt text for primary pupils. Kept facts, numbers, source references, ids, links, geometry, camera states and simulation rules unchanged. The underlying sources file is unchanged.
+
+Reader-facing explanations retain the limits needed to interpret the model: teaching arrangement and scale; possible rather than simultaneous local links; different climbing-crab kinds; differing diet observations; schematic tide offsets; diagram counts rather than population forecasts; existing litter and unmodelled biological changes. Repeated limitations and publication/access-status language were removed from reading text.
+
+Provenance retained here: the mudbank is an independent learning layout, not a surveyed Sungei Buloh map. Symbol counts, dimensions, root spacing/thickness/heights, microbe shapes and the gill cavity are schematic. The generic heron and small fish do not identify a particular local feeding event; the bird figure’s fish is not identified as a giant mudskipper. The gill inset does not reconstruct detailed anatomy; the burrow opening does not reconstruct depth, shape or air supply. Algae marks a group rather than a single giant cell or measured cover. The display base and boardwalk have no geographic meaning. No abundance, death rate, pollution response, tide hydraulics, decay rate or population forecast is calculated.
+
+S7 and S31 remain indexed-only sources; S13 retains its report/personal-communication scope. The full Su and Lim paper and the NParks illustrated panel were not read during the original build. The scientific differences remain explicit: no fiddlers or fish in the Lim Chu Kang sample, general guides listing crabs/fish, and the separate opportunistic Episesarma feeding report without a feeding frequency. Selatium algae grazing and sesarmid leaf feeding refer to different climbing-crab kinds. The reused Atlas figures retain their original asset/source provenance; reuse bookkeeping now stays here instead of in their captions. All source URLs, ids and evidence tags are unchanged.
+
+Validation: topic tests 62/62 passed; full repository tests passed (219 files, 5,448 tests); validate passed (85 topics); check passed (0 errors, 0 warnings, 4 existing hints); build passed (173 pages). Independent comparison confirmed unchanged non-prose model/chapter settings, links, source files and cited quantities. Browser gates were skipped as required by the brief.

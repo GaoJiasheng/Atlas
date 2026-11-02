@@ -8,12 +8,12 @@
         "zh": "胶质包被的卵"
       },
       "summary": {
-        "en": "Enclose developing young",
-        "zh": "包围发育中的幼体"
+        "en": "Enclose developing embryos",
+        "zh": "包围发育中的胚胎"
       },
       "detail": {
-        "en": "Each jelly capsule surrounds an embryo. Only a small part of a clutch is represented here. [S2]\n\nThis independently enlarged observation is not a count of eggs laid by a particular frog. [S22]",
-        "zh": "每个胶质包被围着一个胚胎。这里仅画卵团的一小部分。[S2]\n\n这个观察标本独立放大，不表示某种青蛙一次产卵的数量。[S22]"
+        "en": "Each jelly coat surrounds an embryo, a young animal developing inside the egg. Only a small part of the egg group is shown. [S2]\n\nThe eggs are enlarged for a clear view. Their number here does not tell us how many eggs a frog lays. [S22]",
+        "zh": "每个胶质包被围着一个胚胎，也就是在卵内发育的幼体。这里仅画了卵团的一小部分。[S2]\n\n蛙卵放大后更容易看清。图里的数量不表示青蛙一次产卵的数量。[S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -715,12 +715,12 @@
         "zh": "游泳的蝌蚪"
       },
       "summary": {
-        "en": "Swims with its tail",
-        "zh": "靠尾巴游动"
+        "en": "Swims by moving its tail",
+        "zh": "摆动尾巴，在水中游动"
       },
       "detail": {
-        "en": "The rounded body joins a tapering tail and thin tail membrane. This selected free-swimming view has no visible legs and no feathery external gills. [S2, S3]\n\nIt is a young frog, not a fish. Some other frogs develop differently; this is a general pond-frog example. [S3, S5, S22]",
-        "zh": "圆胖的身体连着逐渐变细的尾巴和薄尾膜。所选的自由游泳视图不画可见的腿或羽状外鳃。[S2, S3]\n\n它是青蛙的幼体，不是鱼。有些蛙的发育方式不同；这里画的是通用池塘型青蛙的例子。[S3, S5, S22]"
+        "en": "A rounded body joins a tapering tail with a thin membrane. This swimming tadpole has no visible legs or feathery outer gills. [S2, S3]\n\nA tadpole is a young frog. Some frogs instead develop inside their eggs and hatch as froglets. The tray shows a common pond-frog pathway. [S3, S5, S22]",
+        "zh": "圆圆的身体连着逐渐变细的尾巴，尾巴上有薄膜。这只游泳的蝌蚪还看不到腿，也没有羽毛状的外鳃。[S2, S3]\n\n蝌蚪是青蛙的幼体。有些蛙在卵内发育，孵出时已是幼蛙。展台上展示的是常见的池塘型发育路线。[S3, S5, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1079,12 +1079,12 @@
         "zh": "长出后腿的蝌蚪"
       },
       "summary": {
-        "en": "Shows the emerging hind legs",
-        "zh": "显示逐渐显现的后腿"
+        "en": "Grows hind legs beside the tail",
+        "zh": "尾巴两旁长出后腿"
       },
       "detail": {
-        "en": "Two hind legs are visible beside the tail. The front legs are not yet visible in this chosen observation. [S2, S3]\n\nEach model hind foot has five toes. The stage is a snapshot of continuous change, not a fixed number of days. [S20, S22]",
-        "zh": "尾巴两旁各能看到一条后腿。这个观察视图还没有可见的前腿。[S2, S3]\n\n模型每只后足有五趾。它是连续变化中的一个观察画面，不代表固定的发育天数。[S20, S22]"
+        "en": "Two hind legs are visible beside the tail. The front legs have not yet appeared. [S2, S3]\n\nEach hind foot has five toes. This view shows a point in the tadpole's growth, rather than an exact age. [S20, S22]",
+        "zh": "尾巴两旁各有一条后腿，前肢还没有显现。[S2, S3]\n\n每只后足有五趾。这个视图展示蝌蚪成长中的一个样子，没有表示确切的年龄。[S20, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1920,15 +1920,15 @@
       "group": "frog-cycle",
       "name": {
         "en": "Froglet with tail",
-        "zh": "尾巴尚未吸收完的幼蛙"
+        "zh": "带尾幼蛙"
       },
       "summary": {
-        "en": "Shows a shrinking attached tail",
-        "zh": "显示仍连着身体的短尾"
+        "en": "Moves with limbs as its tail shrinks",
+        "zh": "四肢出现，尾巴逐渐缩短"
       },
       "detail": {
-        "en": "Four limbs support a frog-shaped body while the tail remains attached. During metamorphosis the tail tissues are remodelled and absorbed; the tail does not break off. [S2, S4]\n\nThe model keeps four fingers on each forefoot and five toes on each hind foot. Its tail length is an observation choice, not an age measurement. [S20, S22]",
-        "zh": "身体已经呈蛙形，四肢出现，短尾仍与身体相连。变态发育时尾部组织重塑并吸收，不是尾巴断掉。[S2, S4]\n\n模型每只前足保留四指，每只后足五趾。所画尾长只是观察选择，不是日龄测量。[S20, S22]"
+        "en": "The froglet has a frog-shaped body and four limbs. A short tail is still attached. During metamorphosis, the body remodels and absorbs the tail tissues. The tail does not break off. [S2, S4]\n\nEach front foot has four fingers and each hind foot has five toes. The tail length helps show the change in shape; it does not give the froglet's exact age. [S20, S22]",
+        "zh": "幼蛙已有蛙形的身体和四肢，身后仍连着一段短尾。变态发育时，身体改变并吸收尾部组织，尾巴不会断掉。[S2, S4]\n\n每只前足有四指，每只后足有五趾。尾巴的长度帮助我们观察形态变化，不能用来判断幼蛙的确切年龄。[S20, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -3230,12 +3230,12 @@
         "zh": "成蛙"
       },
       "summary": {
-        "en": "Shows the adult frog form",
-        "zh": "显示成蛙的形态"
+        "en": "Has four limbs and no tadpole tail",
+        "zh": "有四肢，已没有蝌蚪的尾巴"
       },
       "detail": {
-        "en": "The broad head, short forelimbs and folded hind limbs show a tailless adult form. It has four fingers on each forefoot and five toes on each hind foot. [S2, S20]\n\nThis original generic specimen is not an identification of a Singapore species. The next-generation link means reproduction; this adult never turns into an egg. [S12, S15, S22]",
-        "zh": "宽扁的头、短前肢和屈曲后肢呈现无尾的成体形态。每只前足四指，每只后足五趾。[S2, S20]\n\n这个原创通用标本不用于鉴定新加坡蛙种。通向下一代的连接表示繁殖；成蛙不会变回卵。[S12, S15, S22]"
+        "en": "The adult frog has a broad head, short front limbs and folded hind limbs. It has no tadpole tail. Each front foot has four fingers and each hind foot has five toes. [S2, S20]\n\nThis is a general frog model. Singapore has several frog species. The link to eggs shows reproduction and a new generation. [S12, S15, S22]",
+        "zh": "成蛙的头宽，前肢短，后肢屈曲，已经没有蝌蚪的尾巴。每只前足有四指，每只后足有五趾。[S2, S20]\n\n这是通用的青蛙模型。新加坡有多个蛙种。通向卵的连接表示繁殖，开始新一代。[S12, S15, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4498,12 +4498,12 @@
         "zh": "鸡卵"
       },
       "summary": {
-        "en": "Encloses the egg contents",
-        "zh": "包围卵内结构"
+        "en": "Encloses the yolk and egg white",
+        "zh": "包住卵黄和卵白"
       },
       "detail": {
-        "en": "A hard shell encloses the albumen, yolk and other structures. The model leaves most of the shell in place when its separate window opens. [S6, S7]\n\nThe shell is hollow geometry, not a solid egg hidden with X-ray. Its thickness, size and cut are teaching choices. [S22]",
-        "zh": "坚硬的蛋壳包住卵白、卵黄等结构。独立壳窗打开时，其余蛋壳仍留在原位。[S6, S7]\n\n模型蛋壳是有壁厚的空壳，不靠 X 光模式隐藏一个实心卵。壁厚、显示大小和切口都是教学设计。[S22]"
+        "en": "The hard shell encloses the egg white, yolk and other structures. Most of the shell stays in place when you open the model window. [S6, S7]\n\nThe cutaway shell lets you see inside. Its thickness and size have been chosen for a clear view. [S22]",
+        "zh": "坚硬的蛋壳包住卵白、卵黄等结构。打开模型壳窗后，其余蛋壳仍留在原位。[S6, S7]\n\n切开的蛋壳让我们看见内部。壳的厚度和大小经过调整，方便观察。[S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4609,12 +4609,12 @@
         "zh": "模型壳窗"
       },
       "summary": {
-        "en": "Opens a teaching window",
-        "zh": "打开讲解用的示意窗"
+        "en": "Moves aside to reveal the egg contents",
+        "zh": "移开后露出卵的内部"
       },
       "detail": {
-        "en": "This complementary shell sector fits the remaining shell when closed. The reveal control lifts it away, exposing a genuine opening toward the egg close-up camera. [S22]\n\nThis is a teaching cut. Natural hatching is a chick opening and leaving the shell, not this neat removable sector. [S6, S22]",
-        "zh": "闭合时，这片壳与其余蛋壳合成完整外壳。打开控件把它移开，形成朝向近看镜头的真实开口。[S22]\n\n这是讲解用的切口。自然孵出是雏鸡打开蛋壳并离开卵，不会切下这样整齐的壳片。[S6, S22]"
+        "en": "Open the window to move this shell piece aside and see inside the egg. Close it to make the shell whole again. [S22]\n\nThe neat cut is made for the model. A hatching chick opens the shell and comes out through the broken shell. [S6, S22]",
+        "zh": "打开壳窗，这片壳会移到一旁，露出卵的内部。关窗后，蛋壳又合成完整形状。[S22]\n\n整齐的切口是为模型设置的。真实的雏鸡孵出时会破壳，再从破开的蛋壳出来。[S6, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4725,12 +4725,12 @@
         "zh": "卵黄"
       },
       "summary": {
-        "en": "Supplies nourishment",
-        "zh": "提供营养"
+        "en": "Feeds the developing embryo",
+        "zh": "给发育中的胚胎提供营养"
       },
       "detail": {
-        "en": "The yolk supplies nourishment to a developing embryo. It is represented by a separate rounded body inside the egg. [S6, S7]\n\nThe embryo lies beside its surface in this schematic example; it is not a miniature chick hidden at the centre of the yolk. [S6, S22]",
-        "zh": "卵黄为发育中的胚胎提供营养。模型把它画成卵内独立的圆形结构。[S6, S7]\n\n这个示意例子的胚胎位于卵黄表面旁，不是藏在卵黄中心的缩小雏鸡。[S6, S22]"
+        "en": "The yolk supplies food for the developing embryo. Look for the rounded yolk inside the egg. [S6, S7]\n\nThe embryo is drawn beside the yolk's surface. The yolk itself is not a small chick hidden at its centre. [S6, S22]",
+        "zh": "卵黄给发育中的胚胎提供营养。找一找卵内圆圆的卵黄。[S6, S7]\n\n模型把胚胎画在卵黄表面旁。卵黄本身不是小鸡，中心也没有藏着一只缩小的雏鸡。[S6, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4840,12 +4840,12 @@
         "zh": "卵白"
       },
       "summary": {
-        "en": "Surrounds the yolk",
-        "zh": "围着卵黄"
+        "en": "Surrounds the yolk with water and protein",
+        "zh": "围着卵黄，含水分和蛋白质"
       },
       "detail": {
-        "en": "The albumen surrounds the yolk. It contains water and protein and is separate from the yolk and embryo. [S7]\n\nThe pale translucent envelope is schematic; the model omits the shell membranes, air cell and chalazae rather than inventing their positions. [S7, S22]",
-        "zh": "卵白围着卵黄，含水分和蛋白质，与卵黄及胚胎是不同结构。[S7]\n\n浅色透明包络仅作示意。模型省略壳膜、气室和卵黄系带，不虚构它们的位置。[S7, S22]"
+        "en": "Egg white, also called albumen, surrounds the yolk. It contains water and protein. It is separate from both the yolk and the embryo. [S7]\n\nThe pale, see-through shape shows where egg white lies. The model leaves out the shell membranes, air cell and the strands that hold the yolk in place. [S7, S22]",
+        "zh": "卵白围在卵黄外面，含有水分和蛋白质。它与卵黄、胚胎是不同的结构。[S7]\n\n浅色透明部分表示卵白的位置。模型没有画出壳膜、气室，以及固定卵黄的系带。[S7, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4952,16 +4952,16 @@
       "id": "egg-embryo",
       "group": "chicken-cycle",
       "name": {
-        "en": "Schematic embryo",
-        "zh": "示意胚胎"
+        "en": "Embryo model",
+        "zh": "胚胎模型"
       },
       "summary": {
-        "en": "Shows a developing embryo example",
-        "zh": "显示发育中胚胎的例子"
+        "en": "Develops into the chick inside the egg",
+        "zh": "在卵内发育成雏鸡"
       },
       "detail": {
-        "en": "A curved small body sits beside the yolk in this developing fertilised-egg example. No exact incubation age is assigned to this schematic outline. [S6, S22]\n\nThe embryo is shown only when the window is open and the fertilised example is chosen. A closed view merely conceals it; warmth does not fertilise an unfertilised egg. [S6, S9, S22]",
-        "zh": "小而弯曲的身体位于卵黄旁，表示一个正在发育的受精卵例子。此轮廓不对应精确的孵化日龄。[S6, S22]\n\n只有打开壳窗并选择受精例子时才显示胚胎。闭合只是遮住内部；温暖不会使未受精卵受精。[S6, S9, S22]"
+        "en": "The small, curved shape beside the yolk represents a developing chick in a fertilised egg. The simple outline does not show an exact incubation age. [S6, S22]\n\nOpen the shell window and choose the fertilised example to see it. Closing the window covers it. In the unfertilised example, no chick develops; warmth cannot fertilise an egg. [S6, S9, S22]",
+        "zh": "卵黄旁弯曲的小轮廓，表示受精卵内发育中的小鸡。这个简化形状没有表示确切的孵化日龄。[S6, S22]\n\n打开壳窗、选择受精的例子，就能看见胚胎；关窗会把它遮住。未受精的卵无法发育出雏鸡，保温也不能使卵受精。[S6, S9, S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5112,12 +5112,12 @@
         "zh": "雏鸡"
       },
       "summary": {
-        "en": "Shows the young chicken",
-        "zh": "显示幼小的鸡"
+        "en": "Grows from a young bird into an adult",
+        "zh": "从幼鸟逐渐长成成鸡"
       },
       "detail": {
-        "en": "A short beak, rounded down-covered body, two wings and two feet identify a young bird. It grows into an adult chicken without a pupa stage. [S6, S9]\n\nThe independently enlarged specimen has simplified down and proportionally short tail feathers. It is not the adult model scaled down. [S22]",
-        "zh": "短喙、圆胖的绒羽身体、两翅和两足呈现幼鸟的形态。它逐渐长成成鸡，不经过蛹期。[S6, S9]\n\n标本独立放大，简化绒羽并保留较短尾羽。它不是把成鸡等比例缩小。[S22]"
+        "en": "The chick has a short beak, a round body covered in down, two wings and two feet. It grows into an adult chicken without a pupa stage. [S6, S9]\n\nCompare its proportions with the hen. The chick has short tail feathers and simplified down. Its shape differs from a smaller copy of the adult. [S22]",
+        "zh": "雏鸡有短喙、覆盖绒羽的圆身体、两只翅和两只足。它逐渐长成成鸡，不经过蛹期。[S6, S9]\n\n和母鸡比较一下身体比例。雏鸡的尾羽短，模型简化了绒羽。它的形态并不是成鸡的缩小版。[S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -6108,12 +6108,12 @@
         "zh": "成年母鸡"
       },
       "summary": {
-        "en": "Shows an adult domestic hen",
-        "zh": "显示成年家鸡母鸡"
+        "en": "Shows a mature female chicken",
+        "zh": "呈现已经成熟的雌鸡"
       },
       "detail": {
-        "en": "The broad breast, feathered wings, small comb and short tail show a domestic hen. A cock is also an adult chicken, but this model uses a hen as its example. [S9, S22]\n\nThe chick and hen share the bird body form but differ in proportions and feathers. This is not a field guide to Singapore domestic fowl or Red Junglefowl. [S11, S22]",
-        "zh": "丰满的胸部、带羽毛的翅、小鸡冠和短尾呈现家鸡母鸡。公鸡也属于成鸡；这个模型选择母鸡作为例子。[S9, S22]\n\n雏鸡和母鸡都具有鸟类身体形态，比例与羽毛却不同。本图不用于野外区分新加坡家鸡与红原鸡。[S11, S22]"
+        "en": "This domestic hen has a broad breast, feathered wings, a small comb and a short tail. A hen is a female chicken; a cock can also be an adult. [S9, S22]\n\nThe hen and chick share a bird's body shape, with different proportions and feathers. Singapore's roaming flocks include domestic fowl and Red Junglefowl. Use a field guide to distinguish them outdoors. [S11, S22]",
+        "zh": "这只家鸡母鸡有丰满的胸部、带羽毛的翅、小鸡冠和短尾。母鸡是雌性的鸡，公鸡也可以是成鸡。[S9, S22]\n\n母鸡和雏鸡都有鸟类的身体形态，但比例与羽毛不同。新加坡自由活动的鸡群中有家鸡和红原鸡，要在户外区分它们，可以查阅野外图鉴。[S11, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -7236,12 +7236,12 @@
         "zh": "青蛙观察标记"
       },
       "summary": {
-        "en": "Marks the chosen observation",
-        "zh": "标出当前选定的观察"
+        "en": "Marks the stage you choose",
+        "zh": "标出你选择的阶段"
       },
       "detail": {
-        "en": "The small bead and thin ring are display marks, not organisms or a clock. The control moves the marker between fixed observations; the specimens remain in place. [S22]\n\nMoving back to an earlier observation means inspecting it again, not reversing biological development. [S15, S22]",
-        "zh": "小珠和细环是展台标记，不是生物或时钟。控件让标记移到预定观察位置，标本本身留在原位。[S22]\n\n切回较早的观察表示重新查看，不表示生物发育可以倒转。[S15, S22]"
+        "en": "The small bead and thin ring mark the stage you choose. The control moves the marker while the animals stay in place. [S22]\n\nMove back to look at an earlier stage again. Real animals do not grow backwards. [S15, S22]",
+        "zh": "小珠和细环标出你选中的阶段。控件移动标记，动物仍留在原处。[S22]\n\n把标记往回移，可以重新细看较早的阶段。真实动物不会倒着生长。[S15, S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7298,12 +7298,12 @@
         "zh": "鸡的观察标记"
       },
       "summary": {
-        "en": "Marks the chosen observation",
-        "zh": "标出当前选定的观察"
+        "en": "Marks the stage you choose",
+        "zh": "标出你选择的阶段"
       },
       "detail": {
-        "en": "The small bead and thin ring are display marks, not organisms or a clock. The control moves the marker between fixed observations; the specimens remain in place. [S22]\n\nMoving back to an earlier observation means inspecting it again, not reversing biological development. [S15, S22]",
-        "zh": "小珠和细环是展台标记，不是生物或时钟。控件让标记移到预定观察位置，标本本身留在原位。[S22]\n\n切回较早的观察表示重新查看，不表示生物发育可以倒转。[S15, S22]"
+        "en": "The small bead and thin ring mark the stage you choose. The control moves the marker while the animals stay in place. [S22]\n\nMove back to look at an earlier stage again. Real animals do not grow backwards. [S15, S22]",
+        "zh": "小珠和细环标出你选中的阶段。控件移动标记，动物仍留在原处。[S22]\n\n把标记往回移，可以重新细看较早的阶段。真实动物不会倒着生长。[S15, S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7360,12 +7360,12 @@
         "zh": "青蛙对照"
       },
       "summary": {
-        "en": "Compares selected frog forms",
-        "zh": "对照青蛙的不同形态"
+        "en": "Compares the frog's changing body shapes",
+        "zh": "比较青蛙身体形态的变化"
       },
       "detail": {
-        "en": "Read the jelly-coated egg, tadpole, hind-leg tadpole, froglet with tail and adult. The tail is still attached in the froglet; there is no pupa. [S2, S3]\n\nThese tiny silhouettes omit digits. The main frog tray shows four fingers and five toes on the corresponding feet. Every stage is enlarged independently; spaces do not measure time. [S20, S22]",
-        "zh": "依次观察胶质包被的卵、蝌蚪、长出后腿的蝌蚪、带尾幼蛙和成蛙。幼蛙尾巴仍相连，没有蛹期。[S2, S3]\n\n微型轮廓省略指趾细节；主青蛙展台呈现前足四指、后足五趾。各阶段分别放大，间距不代表时间。[S20, S22]"
+        "en": "Follow egg, tadpole, tadpole with hind legs, tailed froglet and adult. The froglet's tail stays attached as it shrinks. There is no pupa. [S2, S3]\n\nThese small shapes leave out fingers and toes. Look at the main frog tray to see four fingers on each front foot and five toes on each hind foot. The stages are enlarged separately. [S20, S22]",
+        "zh": "依次看卵、蝌蚪、长出后腿的蝌蚪、带尾幼蛙和成蛙。幼蛙的尾巴逐渐缩短，但仍连着身体。青蛙没有蛹期。[S2, S3]\n\n这些小轮廓没有画指趾。要看前足四指、后足五趾的细节，可以转到主青蛙展台。各阶段分别放大。[S20, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -8337,12 +8337,12 @@
         "zh": "鸡的对照"
       },
       "summary": {
-        "en": "Compares egg, chick and adult",
-        "zh": "对照卵、雏鸡与成鸡"
+        "en": "Compares egg, chick and adult hen",
+        "zh": "比较卵、雏鸡和成年母鸡"
       },
       "detail": {
-        "en": "The chicken comparison shows an egg, a small downy chick and an adult hen. The chick is a young bird, with no intervening pupa. [S6, S9]\n\nEach model is independently enlarged. This row shows order only; it does not compare how long stages take or how large they really are. [S22]",
-        "zh": "鸡的对照展示卵、绒羽雏鸡和成年母鸡。雏鸡是幼鸟，中间没有蛹期。[S6, S9]\n\n各模型分别放大。这一排只显示顺序，不比较各阶段持续时间或实际大小。[S22]"
+        "en": "The row shows an egg, a downy chick and an adult hen. The chick grows as a young bird, with no pupa stage. [S6, S9]\n\nRead from egg to adult to follow the order. Each stage is enlarged separately, so its size and spacing do not show real size or time. [S22]",
+        "zh": "这一排有卵、绒羽雏鸡和成年母鸡。雏鸡作为幼鸟继续生长，没有蛹期。[S6, S9]\n\n从卵读到成鸡，可以看出先后顺序。各阶段分别放大，模型大小和间距不表示实际大小或发育时间。[S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -9366,12 +9366,12 @@
         "zh": "蚊子的对照"
       },
       "summary": {
-        "en": "Includes the mosquito pupa",
-        "zh": "包括蚊子的蛹期"
+        "en": "Shows the pupa between larva and adult",
+        "zh": "显示幼虫与成虫之间的蛹"
       },
       "detail": {
-        "en": "The four silhouettes represent egg, larva, comma-shaped pupa and six-legged adult. Mosquito larvae and pupae develop in water; the pupa precedes the emerging adult. [S14]\n\nThese are independently enlarged silhouettes, not a frog sequence. The main mosquito topic explains its water stages in detail. [S13, S14, S22]",
-        "zh": "四个轮廓分别表示卵、幼虫、逗号形的蛹和六足成虫。蚊子的幼虫与蛹在水中发育，之后成虫羽化。[S14]\n\n这些是分别放大的蚊子轮廓，不是青蛙的阶段。蚊子主题详细讲述水中阶段。[S13, S14, S22]"
+        "en": "The four shapes show egg, larva, comma-shaped pupa and six-legged adult. Larvae and pupae develop in water. The adult emerges after the pupa. [S14]\n\nEach stage is enlarged separately. The mosquito lesson explains these water stages in more detail. [S13, S14, S22]",
+        "zh": "四个轮廓依次是卵、幼虫、逗号形的蛹和六足成虫。幼虫和蛹在水中发育，成虫在蛹之后羽化。[S14]\n\n各阶段分别放大。蚊子课文会详细介绍这些水中阶段。[S13, S14, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -10162,11 +10162,11 @@
       },
       "summary": {
         "en": "Compares seed, young and adult plant",
-        "zh": "对照种子、幼株与成株"
+        "zh": "比较种子、幼株和成株"
       },
       "detail": {
-        "en": "The plant row uses a seed, a young plant and an adult flowering plant. The seed is not called an egg. [S1]\n\nThis is an abbreviated comparison, with independent sizes and no common timescale. Pollination, fruit and seed dispersal belong to the linked plant topic. [S21, S22]",
-        "zh": "植物一排用种子、幼株和开花成株进行比较。种子不称为卵。[S1]\n\n这是简化对照，大小分别设定，也没有共同时间尺度。传粉、果实和种子传播由链接的植物主题展开。[S21, S22]"
+        "en": "The row shows a seed, a young plant and an adult flowering plant. A seed is different from an animal egg. [S1]\n\nThese models show broad stages, with each size set separately. The linked plant lesson explains pollination, fruit and seed dispersal. [S21, S22]",
+        "zh": "这一排展示种子、幼株和开花的成株。种子与动物的卵不同。[S1]\n\n模型把过程分成几个大阶段，大小分别设定。链接的植物课文会介绍传粉、果实和种子传播。[S21, S22]"
       },
       "primitive": {
         "kind": "lathe",
@@ -11186,12 +11186,12 @@
         "zh": "比较标记"
       },
       "summary": {
-        "en": "Marks the chosen observation",
-        "zh": "标出当前选定的观察"
+        "en": "Marks the life cycle you choose",
+        "zh": "标出你选择的生活史"
       },
       "detail": {
-        "en": "The small bead and thin ring are display marks, not organisms or a clock. The control moves the marker between fixed observations; the specimens remain in place. [S22]\n\nMoving back to an earlier observation means inspecting it again, not reversing biological development. [S15, S22]",
-        "zh": "小珠和细环是展台标记，不是生物或时钟。控件让标记移到预定观察位置，标本本身留在原位。[S22]\n\n切回较早的观察表示重新查看，不表示生物发育可以倒转。[S15, S22]"
+        "en": "The small bead marks the life cycle you choose. The control moves it between the four groups while the specimens stay in place. [S22]\n\nChoose another group to compare its sequence of growth and reproduction. [S15, S22]",
+        "zh": "小珠标出你选中的生活史。控件让它在四组标本之间移动，标本仍留在原处。[S22]\n\n选另一组，比较它的生长顺序和繁殖过程。[S15, S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -11248,12 +11248,12 @@
         "zh": "繁殖 · 下一代"
       },
       "summary": {
-        "en": "Links adults to new offspring",
-        "zh": "从成体连接到下一代"
+        "en": "Connects adults with their offspring",
+        "zh": "把成体与它们的后代相连"
       },
       "detail": {
-        "en": "The final link connects an adult with eggs of a new generation. It does not show the same adult shrinking back into an egg. [S15]\n\nThe arrow is a static diagram mark. Equal spacing and reversing an observation control do not mean equal durations or reversible development. [S22]",
-        "zh": "最后的连接把成体与下一代的卵联系起来，不表示同一个成体缩回卵中。[S15]\n\n箭头是静态图示。等距摆放或反向拨动观察控件，都不表示时间相等或发育可以倒转。[S22]"
+        "en": "The last link shows reproduction. It connects the adult with eggs of a new generation. [S15]\n\nThe arrow stays in place to mark this connection. It shows the reading order, rather than the time reproduction takes. [S22]",
+        "zh": "最后一段连接表示繁殖，把成体与下一代的卵连起来。[S15]\n\n箭头留在原处标出这段联系，表示阅读顺序，不表示繁殖所需的时间。[S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -11365,12 +11365,12 @@
         "zh": "繁殖 · 下一代"
       },
       "summary": {
-        "en": "Links adults to new offspring",
-        "zh": "从成体连接到下一代"
+        "en": "Connects adults with their offspring",
+        "zh": "把成体与它们的后代相连"
       },
       "detail": {
-        "en": "The final link connects an adult with eggs of a new generation. It does not show the same adult shrinking back into an egg. [S15]\n\nThe arrow is a static diagram mark. Equal spacing and reversing an observation control do not mean equal durations or reversible development. [S22]",
-        "zh": "最后的连接把成体与下一代的卵联系起来，不表示同一个成体缩回卵中。[S15]\n\n箭头是静态图示。等距摆放或反向拨动观察控件，都不表示时间相等或发育可以倒转。[S22]"
+        "en": "The last link shows reproduction. It connects the adult with eggs of a new generation. [S15]\n\nThe arrow stays in place to mark this connection. It shows the reading order, rather than the time reproduction takes. [S22]",
+        "zh": "最后一段连接表示繁殖，把成体与下一代的卵连起来。[S15]\n\n箭头留在原处标出这段联系，表示阅读顺序，不表示繁殖所需的时间。[S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -11482,12 +11482,12 @@
         "zh": "观察展台"
       },
       "summary": {
-        "en": "Supports separate observation specimens",
-        "zh": "承托各自独立的观察标本"
+        "en": "Holds the stages for comparison",
+        "zh": "摆放各阶段，方便比较"
       },
       "detail": {
-        "en": "This low display tray is a diagram support, not a simulated habitat. Static arrows show reading order only. Sizes are independently enlarged and spacing is not time. [S22]",
-        "zh": "低矮展台只是图示支撑，不是生境仿真。静态箭头只表示阅读顺序。标本分别放大，间距不代表时间。[S22]"
+        "en": "The low tray holds the stages side by side. Follow the arrows to read their order. Each animal is enlarged separately, and the gaps do not show time. [S22]",
+        "zh": "低矮展台把各阶段摆在一起，方便比较。沿箭头可以看出先后顺序。各阶段分别放大，间距不表示时间。[S22]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -11910,12 +11910,12 @@
         "zh": "观察展台"
       },
       "summary": {
-        "en": "Supports separate observation specimens",
-        "zh": "承托各自独立的观察标本"
+        "en": "Holds the stages for comparison",
+        "zh": "摆放各阶段，方便比较"
       },
       "detail": {
-        "en": "This low display tray is a diagram support, not a simulated habitat. Static arrows show reading order only. Sizes are independently enlarged and spacing is not time. [S22]",
-        "zh": "低矮展台只是图示支撑，不是生境仿真。静态箭头只表示阅读顺序。标本分别放大，间距不代表时间。[S22]"
+        "en": "The low tray holds the stages side by side. Follow the arrows to read their order. Each animal is enlarged separately, and the gaps do not show time. [S22]",
+        "zh": "低矮展台把各阶段摆在一起，方便比较。沿箭头可以看出先后顺序。各阶段分别放大，间距不表示时间。[S22]"
       },
       "primitive": {
         "kind": "cylinder",
@@ -12142,12 +12142,12 @@
         "zh": "比较展台"
       },
       "summary": {
-        "en": "Supports independently sized comparisons",
-        "zh": "承托各自设定大小的对照"
+        "en": "Holds four life cycles side by side",
+        "zh": "并排展示四种生活史"
       },
       "detail": {
-        "en": "Four separate specimen groups sit on a low tray. No common physical scale or developmental timescale is implied. [S22]",
-        "zh": "四组独立标本摆在低矮展台上，不表示共同的实际比例或发育时间尺度。[S22]"
+        "en": "Four groups show the life cycles of a frog, chicken, mosquito and flowering plant. Each has its own display sizes. Compare the order and shapes, rather than real size or development time. [S22]",
+        "zh": "四组标本展示青蛙、鸡、蚊子和开花植物的生活史，大小分别设定。可以比较顺序和形态，不能用它们比较实际大小或发育时间。[S22]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -12339,8 +12339,8 @@
     {
       "id": "overview",
       "label": {
-        "en": "Whole study",
-        "zh": "全图"
+        "en": "Whole display",
+        "zh": "全景"
       },
       "camera": {
         "position": [
@@ -12474,16 +12474,16 @@
   "spec": [
     {
       "key": {
-        "en": "Frog views",
-        "zh": "青蛙视图"
+        "en": "Frog stages shown",
+        "zh": "青蛙观察阶段"
       },
       "value": "5",
       "tag": "design"
     },
     {
       "key": {
-        "en": "Chicken views",
-        "zh": "鸡的视图"
+        "en": "Chicken stages shown",
+        "zh": "鸡的观察阶段"
       },
       "value": "3",
       "tag": "design"
@@ -12494,8 +12494,8 @@
         "zh": "模型"
       },
       "value": {
-        "en": "Observation, not a forecast",
-        "zh": "观察模型，不是发育预测"
+        "en": "Compare stages",
+        "zh": "比较发育阶段"
       },
       "tag": "design"
     }
@@ -12508,8 +12508,8 @@
         "kind": "choice",
         "default": "egg",
         "label": {
-          "en": "Frog observation",
-          "zh": "观察青蛙的阶段"
+          "en": "Frog stage",
+          "zh": "青蛙阶段"
         },
         "options": [
           {
@@ -12537,7 +12537,7 @@
             "id": "froglet",
             "label": {
               "en": "Froglet with tail",
-              "zh": "尾巴尚未吸收完的幼蛙"
+              "zh": "带尾幼蛙"
             }
           },
           {
@@ -12554,8 +12554,8 @@
         "kind": "choice",
         "default": "egg",
         "label": {
-          "en": "Chicken observation",
-          "zh": "观察鸡的阶段"
+          "en": "Chicken stage",
+          "zh": "鸡的阶段"
         },
         "options": [
           {
@@ -12586,8 +12586,8 @@
         "kind": "toggle",
         "default": false,
         "label": {
-          "en": "Reveal the egg model",
-          "zh": "打开卵的示意模型"
+          "en": "Open the shell window",
+          "zh": "打开壳窗"
         }
       },
       {
@@ -12595,8 +12595,8 @@
         "kind": "toggle",
         "default": true,
         "label": {
-          "en": "Fertilised egg example",
-          "zh": "受精卵的例子"
+          "en": "Choose a fertilised egg",
+          "zh": "选择受精卵"
         }
       },
       {
@@ -12604,8 +12604,8 @@
         "kind": "choice",
         "default": "frog",
         "label": {
-          "en": "Cycle to compare",
-          "zh": "比较哪一种生活史"
+          "en": "Choose a life cycle",
+          "zh": "选择生活史"
         },
         "options": [
           {
@@ -12644,8 +12644,8 @@
         "id": "frog-form",
         "kind": "state",
         "label": {
-          "en": "Frog form",
-          "zh": "青蛙的形态"
+          "en": "Frog stage",
+          "zh": "青蛙阶段"
         },
         "states": {
           "egg": {
@@ -12662,7 +12662,7 @@
           },
           "froglet": {
             "en": "Froglet with tail",
-            "zh": "尾巴尚未吸收完的幼蛙"
+            "zh": "带尾幼蛙"
           },
           "adult": {
             "en": "Adult frog",
@@ -12674,8 +12674,8 @@
         "id": "chicken-form",
         "kind": "state",
         "label": {
-          "en": "Chicken form",
-          "zh": "鸡的形态"
+          "en": "Chicken stage",
+          "zh": "鸡的阶段"
         },
         "states": {
           "egg": {
@@ -12696,17 +12696,17 @@
         "id": "egg-view",
         "kind": "state",
         "label": {
-          "en": "Egg model",
-          "zh": "卵的模型"
+          "en": "Shell window",
+          "zh": "壳窗"
         },
         "states": {
           "closed": {
-            "en": "Shell closed",
-            "zh": "蛋壳闭合"
+            "en": "Window closed",
+            "zh": "壳窗关闭"
           },
           "open": {
-            "en": "Model opened",
-            "zh": "模型已打开"
+            "en": "Window open",
+            "zh": "壳窗打开"
           }
         }
       },
@@ -12714,17 +12714,17 @@
         "id": "embryo-view",
         "kind": "state",
         "label": {
-          "en": "Developing embryo shown",
-          "zh": "是否显示发育中的胚胎"
+          "en": "Embryo in view",
+          "zh": "可见的胚胎"
         },
         "states": {
           "shown": {
-            "en": "Schematic embryo revealed",
-            "zh": "显示示意胚胎"
+            "en": "Embryo visible",
+            "zh": "看见胚胎"
           },
           "hidden": {
-            "en": "No embryo shown in this view",
-            "zh": "此视图不显示胚胎"
+            "en": "No embryo visible",
+            "zh": "看不到胚胎"
           }
         }
       },
@@ -12732,17 +12732,17 @@
         "id": "egg-condition",
         "kind": "state",
         "label": {
-          "en": "Development condition",
-          "zh": "发育条件"
+          "en": "Egg condition",
+          "zh": "卵的状态"
         },
         "states": {
           "fertilised": {
-            "en": "Fertilised; suitable incubation is also needed",
-            "zh": "已经受精；还需要适宜的孵化条件"
+            "en": "Fertilised; needs suitable incubation",
+            "zh": "已受精；需要适宜的孵化条件"
           },
           "unfertilised": {
-            "en": "Unfertilised; warmth does not fertilise it",
-            "zh": "没有受精；温暖不会使它受精"
+            "en": "Unfertilised; cannot develop into a chick",
+            "zh": "未受精；无法发育成雏鸡"
           }
         }
       },

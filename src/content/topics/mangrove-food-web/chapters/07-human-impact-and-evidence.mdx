@@ -37,8 +37,8 @@ state:
     - 0
     fov: 32
   summary:
-    en: Explain a change by identifying the condition, the pathway and the limits of the evidence.
-    zh: 解释变化时，要指出条件、关系路径和证据的限度。
+    en: Use observations and food paths to explain how a habitat changes.
+    zh: 用观察和食物路径，解释生境中的变化。
   sim:
     set:
       remove: none
@@ -50,8 +50,8 @@ state:
       - inspect
       keep:
       - tide
-      - en: Same selected links
-        zh: 同一组选入关系
+      - en: Same food links
+        zh: 相同的食物关系
       observe:
       - foods
       - food-status
@@ -59,8 +59,8 @@ state:
       record: true
       predict:
         prompt:
-          en: With the mudskipper selected, what happens to its shown food count when fiddlers are removed?
-          zh: 查看弹涂鱼时，移走招潮蟹后，它的图内食物种类会怎样？
+          en: Remove fiddler crabs. What will happen to the mudskipper’s food count in the diagram?
+          zh: 移走招潮蟹后，弹涂鱼在图中的食物种类会怎样？
         start:
           remove: none
           inspect: n-mudskipper
@@ -81,8 +81,8 @@ state:
           means: same
         - id: zero
           label:
-            en: No shown food
-            zh: 图内无食物
+            en: No food left in the diagram
+            zh: 图内没有食物
           means: zero
   beats:
   - hide:
@@ -97,9 +97,8 @@ state:
     - small-fish
     - fallen-leaves
     caption:
-      en: Clearing trees can change leaf supply and shelter. This food-path model shows only part of that effect;
-        old leaves do not vanish at once.
-      zh: 清除树木可能同时改变叶片供应和躲藏处；食物路径模型只显示部分影响，旧落叶不会立刻消失。
+      en: Clearing trees changes new leaf supply and can remove shelter. Old fallen leaves remain.
+      zh: 清除树木会改变新叶供应，也可能减少藏身处。旧落叶仍会保留。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -111,9 +110,9 @@ state:
     - tidal-water
     - mud-bank
     caption:
-      en: If conditions become unfavourable, organisms may survive with suitable adaptations, move elsewhere or
-        die. A particular pollution effect needs evidence.
-      zh: 当条件变得不利，生物可能凭适合的适应特征生存、迁到别处或死亡；某种污染物的具体影响还需要证据。
+      en: In unfavourable conditions, organisms may survive with suitable adaptations, move elsewhere or die.
+        A pollutant’s effects need evidence about exposure.
+      zh: 条件不利时，生物可能凭适应特征生存、迁移或死亡。污染影响还需接触情况的证据。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -125,9 +124,9 @@ state:
     - bakau-tree
     - bakau-prop
     caption:
-      en: Conservation and reforestation are positive human impacts in the syllabus. Mangrove roots also contribute
-        to shelter and coastal protection.
-      zh: 保育和重新造林是课纲中的正面人类影响；红树根也能提供庇护，并帮助保护海岸。
+      en: Conservation and reforestation help protect and restore habitats. Mangrove roots provide shelter
+        and help protect the coast.
+      zh: 保育和重新造林有助于保护、修复生境。红树根提供庇护，也帮助保护海岸。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -138,9 +137,9 @@ state:
         inspect: n-mudskipper
         tide: low
     caption:
-      en: Compare two rows with the same tide pose and selected links. Explain what changed, cite the remaining
-        pathway, and state what the model cannot tell you.
-      zh: 比较同一潮位姿态、同一组关系下的两行记录：说明改变了什么、指出剩余路径，并说清模型不能回答什么。
+      en: Compare two records with the same tide and food links. Use the food count and remaining path to explain
+        the change.
+      zh: 比较潮位、食物关系相同的两行记录。用食物计数和剩余路径解释变化。
   index:
     parts:
     - bakau-tree
@@ -154,23 +153,23 @@ state:
 
 <Lang en>
 
-Select the living tree, fallen leaves and prop roots. Clearing a tree can change more than one relationship: future leaf supply changes, and shelter can change too. The removal control represents the continuing food input only. It does not make old leaves disappear or calculate the loss of hiding places. Use the model to trace one mechanism, then name the other mechanisms it leaves out.
+Select the tree, fallen leaves and prop roots. Clearing trees changes the supply of new leaves and can remove shelter. The food web helps us trace the leaf-supply change. Old leaves remain, and the loss of hiding places is another effect to consider.
 
-Changes to conditions can also affect survival. Organisms in an unfavourable environment may survive with suitable adaptations, move elsewhere or die. Those are possible responses, not automatic results for every organism. To explain a particular pollutant’s effect, you would need evidence about the substance, exposure and organisms involved. The model has no pollution slider because those data are not supplied.
+Changes in conditions also affect survival. In an unfavourable environment, organisms may survive with suitable adaptations, move elsewhere or die. A pollutant’s effect depends on the substance, how much reaches the organisms and which organisms are exposed. Evidence about these conditions helps explain the outcome.
 
-Human impacts can be positive as well as negative. Conservation and reforestation are syllabus examples of positive actions. Mangrove roots provide shelter and contribute to coastal protection. Protecting or restoring habitat therefore concerns more than a single food arrow. A claim about how successful a particular project was would still require its own observations and comparison.
+People can also protect and restore habitats through conservation and reforestation. Mangrove roots provide shelter and help protect the coast. Protecting the habitat supports more relationships than a single food arrow can show. Observations before and after a restoration can help us judge its success.
 
-Finish by recording a baseline row and a row with fiddlers removed, inspecting the mudskipper at the same low-water pose. State what you changed and kept the same. Cite the count and remaining route, then give a limit: in this selected model the fish has fewer shown foods, but its future population is unknown. That explanation joins the evidence, the causal path and the boundary of the conclusion.
+Finish by recording two rows: one with the whole web, and one with fiddlers removed. Inspect the mudskipper at the same low tide in both. Explain what you changed and kept the same. Use the food count and the remaining climbing-crab path as evidence. The fish has fewer foods in this model; we need more evidence to predict its future population.
 
-<More title={{"en": "Habitat loss and evidence", "zh": "生境损失与证据"}}>
+<More title={{"en": "Threats to mangroves", "zh": "红树林面临的威胁"}}>
 
-NParks identifies urbanisation and habitat loss as threats to Singapore mangroves. This topic uses no area-loss percentage or simulated death count. The food-path diagram cannot balance ecological effects against the other uses of land, or measure a specific development’s impact.
+NParks identifies urbanisation and habitat loss as threats to Singapore mangroves. Measuring a particular development’s effects needs observations of that habitat. A food-path diagram alone cannot compare land uses or measure habitat loss and deaths.
 
 </More>
 
-<More title={{"en": "A responsible observation", "zh": "负责任的观察"}}>
+<More title={{"en": "Observing a real habitat", "zh": "观察真实生境"}}>
 
-The comparison here changes a diagram. It does not ask you to remove living things from a habitat. For a real observation, record the visible conditions and behaviour from the visitor route, and keep the uncertainty when an animal is hidden.
+Use the controls to change the diagram. When visiting a mangrove, leave living things in place. Observe from the visitor route and record the conditions and behaviour you can see. Note when animals are hidden.
 
 </More>
 
@@ -178,23 +177,23 @@ The comparison here changes a diagram. It does not ask you to remove living thin
 
 <Lang zh>
 
-选中活树、落叶和支柱根。清除一棵树，可能同时改变几种关系：后续叶片供应改变，藏身条件也可能改变。移走控件只代表持续的食物输入，不让旧落叶立刻消失，也不计算躲藏处的损失。可以借模型追踪一种机制，再指出它没有表现的其他机制。
+选中树、落叶和支柱根。清除树木会改变新叶的供应，也可能失去藏身处。食物网帮助我们追踪叶片供应的变化。旧落叶仍会保留，躲藏处减少则是另一种需要考虑的影响。
 
-条件改变也会影响生存。环境变得不利时，生物可能凭适合的适应特征生存、迁到别处或死亡。这些是可能反应，不是对每个生物都自动发生的结果。要解释某种污染物的影响，还需要知道物质、接触情况和涉及的生物；这里没有这些数据，因此不设污染滑块。
+环境条件改变也会影响生存。条件不利时，生物可能凭适合的适应特征继续生存、迁到别处或死亡。污染物的影响取决于物质种类、到达生物的量，以及哪些生物接触了它。了解这些条件，才能解释结果。
 
-人的影响既可能是负面的，也可能是正面的。保育和重新造林是课纲中的正面行动例子。红树根提供庇护，也帮助保护海岸。因此保护或修复生境，涉及的不只是一条食物箭头；但要判断某项工程是否成功，仍需它本身的观察与比较证据。
+人们也能通过保育和重新造林来保护、修复生境。红树根提供庇护，也帮助保护海岸。保护生境所维系的关系，远多于一条食物箭头。比较修复前后的观察，有助于判断成效。
 
-最后记录一行完整模型，再记录移走招潮蟹的一行；都在同一低水位姿态查看弹涂鱼。说清改变什么、保持什么，再引用计数与剩余路线，并加上限度：在这个选入模型中，鱼的图内食物减少；它未来的种群数量仍未知。这样的解释同时交代证据、因果路径和结论范围。
+最后记录两行：一行保留完整食物网，另一行移走招潮蟹。两次都在相同低水位查看弹涂鱼。说清改变什么、保持什么。用食物计数和剩余的攀爬蟹类路径支持解释。在这个模型里，鱼的食物减少了；要预测它未来的种群数量，还需要更多证据。
 
-<More title={{"en": "Habitat loss and evidence", "zh": "生境损失与证据"}}>
+<More title={{"en": "Threats to mangroves", "zh": "红树林面临的威胁"}}>
 
-NParks 把城市化与生境损失列为新加坡红树林面临的威胁。本主题不用面积损失百分比，也不编模拟死亡数。食物路径图不能权衡土地的其他用途，也不能测量某项开发的具体影响。
+NParks 把城市化和生境损失列为新加坡红树林面临的威胁。要衡量某项开发的影响，需要观察当地生境。单靠食物路径图，不能比较土地用途，也不能测量生境损失和死亡数量。
 
 </More>
 
-<More title={{"en": "A responsible observation", "zh": "负责任的观察"}}>
+<More title={{"en": "Observing a real habitat", "zh": "观察真实生境"}}>
 
-这里改变的是图，不要求你从生境取走生物。真实观察时，从参观路径记录可见条件与行为；动物藏着看不见时，保留这种不确定性。
+用控件改变图就可以了。到红树林参观时，把生物留在原处。从参观路径观察，记录看得见的环境条件和行为。动物藏起来时，也把这一点记下。
 
 </More>
 
