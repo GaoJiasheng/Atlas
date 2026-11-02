@@ -87,7 +87,7 @@ test('Chinese preserves historical Singapore time, source mass and timeline-only
   await expect(reader(page)).toContainText('21.55');
   expect(await mission(page, 'ev-armstrong-step')).toMatchObject({ setting: 'moon-surface', occurredAt: '1969-07-21T02:56:15Z' });
   await page.evaluate(() => window.__atlas!.goToChapter('costs-and-connections', { instant: true }));
-  await expect(reader(page)).toContainText(/账目范围|口径/);
+  await expect(reader(page)).toContainText(/费用范围|包括哪些费用/);
   await expect(page.locator('.ts-co[data-id="ev-n-one-costs"]')).toHaveCount(0);
   await expect(page.locator('.ts-co[data-id="ev-costs-human"]')).toHaveCount(0);
   await reader(page).locator('[data-time-target="ev-n-one-costs"]').click();
