@@ -97,6 +97,8 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
   let rect: FrameRect | null = null;
   let padding: PaddingOptions = { ...ZERO };
   let shift = 0;
+  /** What the camera was last framed for (a running flight animates padding, so the map's own padding is not a reference). */
+  let framed: { padding: PaddingOptions; shift: number } | null = null;
   /** The last authored camera applied (chapter / beat / preset / deep link). */
   let authored: GeoCamera | null = null;
   /** The reader has panned / zoomed since `authored`. */
@@ -143,10 +145,9 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
   const refit = () => {
     timer = null;
     if (!alive) return;
-    const prevShift = shift;
     const { width, height } = measure();
-    const current = map.getPadding();
-    if (samePadding(current, padding) && Math.abs(prevShift - shift) < 0.01) return;
+    if (framed && samePadding(framed.padding, padding) && Math.abs(framed.shift - shift) < 0.01) return;
+    framed = { padding: { ...padding }, shift };
     if (authored && !userMoved) {
       // Ease the authored view into the new free rect (a running flight is retargeted, not stacked).
       const next = goal(authored);
@@ -154,7 +155,7 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
       else map.easeTo({ ...next, duration: REFIT_MS, essential: true });
       return;
     }
-    if (map.isMoving()) { schedule(); return; }
+    if (map.isMoving()) { framed = null; schedule(); return; }
     // The reader's own view: keep what is on screen still, move only the padding.
     const [cx, cy] = paddedCentre(width, height, padding);
     map.jumpTo({ center: map.unproject([cx, cy]), padding });
@@ -192,6 +193,7 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
       measure();
       authored = camera;
       userMoved = false;
+      framed = { padding: { ...padding }, shift };
       return goal(camera);
     },
     storedZoom: (zoom) => Math.round((zoom - shift) * 100) / 100,

@@ -182,6 +182,9 @@ describe('TimeScene HUD framing lifecycle', () => {
   it('eases the authored view into a changed free rect once per settle, and not again when nothing changed', () => {
     const s = setup();
     s.framing.target(authored);
+    // HUD content changing mid-flight without moving the free rect leaves the flight alone.
+    s.mutations[1]!(); s.settle();
+    expect(s.map.easeTo).not.toHaveBeenCalled();
     s.panels[0]!.rect.x1 = 350;
     s.resizes[0]!(); s.resizes[0]!(); s.settle();
     expect(s.map.easeTo).toHaveBeenCalledTimes(1);
