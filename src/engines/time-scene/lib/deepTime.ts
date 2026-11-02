@@ -1,5 +1,5 @@
 /** Client-safe deep-time selection: no schema, filesystem or data-source imports. */
-import type { ModernPoint, ReferenceCard, ReconstructionManifest, FossilCollection, FossilMode } from '../deep-time';
+import type { ModernPoint, ReferenceCard, ReconstructionManifest, FossilCollection, FossilMode, InsetView } from '../deep-time';
 export type { DeepTimeBundle, ModernPoint, ReferenceCard, ReconstructionManifest, ReconstructionFrame, FossilCollection, FossilMode, InsetView, ModernInsetConfig, ModernInsetManifest } from '../deep-time';
 
 function finiteMa(n: number): number {
@@ -48,6 +48,13 @@ export function filterModernPoints(points: readonly ModernPoint[], options: {
     visiblePoints: options.insetVisible === false ? [] : [...visibleFossils, ...references],
     visibleFossils,
   };
+}
+
+/** Name highlighted finds and local references; world-view references stay quiet until requested. */
+export function modernInsetLabels(points: readonly ModernPoint[], view: InsetView, highlight: readonly string[], selected: string | null): ModernPoint[] {
+  return points.filter((point) => highlight.includes(point.id) || selected === point.id || (
+    point.kind === 'reference' && ((view === 'mexico' && point.role === 'impact-site') || (view === 'southeast-asia' && point.role === 'singapore'))
+  ));
 }
 
 /** Normalized rows from fixed PBDB CSV snapshots; precision policy is applied before publication. */

@@ -620,3 +620,13 @@ PRESENT 的字幕自足；图只在普通阅读出现。退出演示沿用恢复
 **引擎小修。** 雨层装上后 1:50m 海岸被移到 1:10m 遮罩之上，新加坡近景出现两条海岸线；改为在雨格上另画一层随 zoom 7→8 淡出的 1:50m 海岸（`climateStyle.ts` `coastOverClimate`），原海岸留在遮罩下；单测 `tests/time-scene/climate-coast.test.ts`。另外 `scripts/shoot.ts` 的 `Session.load` 在页面 20 秒内未 ready 时重新加载，最多三次（负载很高时软件 WebGL 首帧可超过 20 秒）；每拍等月份提交沿用 §9.2 的 `settleClimate`。
 
 **门槛（合并 f5c34bb 之后，机器负载 140–210）。** `pnpm check` 0 错；`pnpm validate` 57 题 0/0；`pnpm test` 163 文件 4243 项全过（`schemas.test.ts` 一次超时，单跑通过）；`pnpm build` 117 页。`shoot --beats --keys` 四种语言×主题：每种 36 拍、36/36 链接一致、章节高亮全在、0 拍失败；zh·cinema 的 `drag` 键一次超时，重跑 0 失败。`--layout` 在 1920×1080 及以下六种尺寸四种组合均 0 问题；2560×1440 与 3840×2160 的“打开链接”在这种负载下 3×20 秒都未 ready（4K 实测约 56 秒才首次提交月份），未能跑完。`--perf --gpu` 通过（MapLibre 舞台无渲染计数，月页 JS 447.8 KB gzip）。e2e 只跑本题、smoke、sample-climate（`--workers=2`）：本题 9 项与 smoke 首页计数全过；sample-climate 与 sample-space/sample-time 的 smoke 有超时（ready 20 秒、5 秒轮询），单跑仍受负载影响，留给主会话合并时全量复跑。
+
+### 9.4 浏览器验收后打磨 · 2026-10-29（Codex）
+
+- 首页 `topicStats` 接受既有 `temporalMode`：仅 climatology 题把 `kind: site` 的静态点计为 places / 地点，`monsoon-and-weather` 显示6个地点。其余日期、geography、SpaceScene、MathScene 统计保持原口径；不加主题数据字段。实际 monsoon/sample-climate 数据、双语单复数、缺失数据及其余主题原统计均有回归单测。
+- `THIRD-PARTY-NOTICES.md` 的 NCEP/NCAR、GPCP、Natural Earth 三行同时列出 `monsoon-and-weather` 和 `sample-climate`：风雨 derived JSON 的完整路径、城市点各自 `data/events.json` 路径，以及原格网/排序/计数与来源编号处理说明。原许可与署名保留。
+- 1024 px 地图覆盖问题通过共享 `MapOverlay` 解决：所有地图分支的 LAYERS/TOOLS/KEY 在≤1024 px 默认折叠为图标入口，缩入此范围也折叠；原生 details/summary、≥44 px 命中、双语标签，手动展开后换章保留选择。宽屏维持原展开逻辑（有舞台宽度时须≥720 px）。KEY 内容、雨色阶/风标尺及来源入口不变，其他引擎不受影响。阈值与双语 disclosure 有8项单测。
+
+**本轮验证边界。** 按用户要求跳过 `pnpm shoot` 与 `pnpm e2e`；没有打开或操作用户浏览器/桌面。主会话补验1024 px展开/收起及两语言/两主题地图，旧 §9.2/9.3 浏览器结果不代表本轮已验收。没有 git 写入、package.json/锁文件或 review-queue/next-batch 改动。
+
+**本轮非浏览器门槛。** `pnpm check`：0 errors、0 warnings、4条既有 hints；`pnpm validate`：85题、0 errors、0 warnings；`pnpm test`：221文件、5466项全过；`pnpm build`：173页通过（Vite 仍提示部分 chunk >500 kB）。`git diff --check` 通过。没有将静态/单测结果当作浏览器布局或真机性能验收。

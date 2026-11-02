@@ -140,8 +140,8 @@ describe('zheng-he history topic', () => {
       expect(Math.max(Math.abs(offsets[i]![0]! - offsets[j]![0]!), Math.abs(offsets[i]![1]! - offsets[j]![1]!))).toBeGreaterThan(44);
     }
     expect(eventById.get('site-nanjing')!.displayOffset).toBeUndefined();
-    expect(chapters[0]!.state.note!.en).toContain('not separate historical sites');
-    expect(chapters[0]!.state.note!.zh).toContain('不表示不同的历史地点');
+    expect(chapters[0]!.state.note!.en).toMatch(/Nanjing.*(?:share one city point|not separate historical sites)/);
+    expect(chapters[0]!.state.note!.zh).toMatch(/南京.*(?:共用一个城市点|不表示不同的历史地点)/);
   });
 
   it('makes every authored index row select its named object and retains its framing preset', () => {
@@ -184,8 +184,8 @@ describe('zheng-he history topic', () => {
     }
     // Positions, vessel dimensions and speeds are not reconstructed from camera changes.
     for (const event of events) for (const key of ['path', 'speed', 'length', 'dimensions']) expect(event).not.toHaveProperty(key);
-    expect(chapters[0]!.state.note!.en).toMatch(/not show measured ship tracks/);
-    expect(chapters[0]!.state.note!.zh).toContain('不是测得的航迹');
+    expect(chapters[0]!.state.note!.en).toMatch(/(?:not show measured ship tracks|locate regions, not ships)/);
+    expect(chapters[0]!.state.note!.zh).toMatch(/(?:不是测得的航迹|并非船只位置)/);
   });
 
   it('keeps both death reports attributed and does not invent missing zero casualties', () => {
@@ -206,32 +206,32 @@ describe('zheng-he history topic', () => {
       expect(event.summary.zh).toContain('报告');
       expect(event.summary.zh).toContain('被杀');
     }
-    expect(oldPort.summary.en).toContain('not an independently verified count');
-    expect(oldPort.detail!.en).toContain('does not establish a civilian/combatant breakdown');
-    expect(java.summary.en).toContain('No total for local deaths');
+    expect(oldPort.summary.en).toMatch(/(?:not an independently verified count|No independent count confirms)/);
+    expect(oldPort.detail!.en).toMatch(/(?:does not establish a civilian\/combatant breakdown|does not separate civilians from fighters)/);
+    expect(java.summary.en).toMatch(/(?:No total for local deaths|local people killed is unknown)/);
     const counted = events.filter((event) => event.casualties !== undefined);
     expect(counted.map((event) => event.id).sort()).toEqual(['evt-java-report-1407', 'evt-old-port-1407']);
     for (const event of counted) for (const count of Object.values(event.casualties!)) expect(count).toBeGreaterThan(0);
     const beats = chapters[2]!.state.beats;
     expect(beats[2]!.caption.en.replaceAll(',', '')).toContain('5000');
     expect(beats[2]!.caption.zh.replaceAll(',', '')).toContain('5000');
-    expect(beats[2]!.caption.en).toMatch(/not independently verified/);
+    expect(beats[2]!.caption.en).toMatch(/Ming records.*report/i);
     expect(beats[3]!.caption.en).toContain('170');
     expect(beats[3]!.caption.zh).toContain('170');
     expect(beats[3]!.caption.en).toContain('Ming records');
   });
 
   it('preserves evidence limits for context ports, regional anchors and the stele', () => {
-    expect(eventById.get('site-kilwa')!.summary.en).toMatch(/does not claim a confirmed fleet stop/);
-    expect(eventById.get('site-temasek-region')!.summary.en).toMatch(/not proof of Zheng He landing/);
-    expect(eventById.get('site-galle')!.summary.en).toMatch(/findspot.*1409/);
+    expect(eventById.get('site-kilwa')!.summary.en).toMatch(/fleet stop.*unconfirmed|does not claim a confirmed fleet stop/);
+    expect(eventById.get('site-temasek-region')!.summary.en).toMatch(/not (?:proof of Zheng He landing|prove that Zheng He landed)/);
+    expect(eventById.get('site-galle')!.summary.en).toMatch(/(?:findspot.*1409|stele dated 1409.*found)/);
     expect(eventById.get('site-galle')!.summary.en).toMatch(/not.*battle site/);
-    expect(eventById.get('site-bengal-region')!.summary.en).toMatch(/not.*where the animal boarded/);
-    expect(eventById.get('evt-java-report-1407')!.detail!.en).toContain('conflict site has not been established');
-    expect(eventById.get('evt-samudera-1415')!.detail!.en).toContain('not a located palace');
-    expect(eventById.get('evt-final-return')!.summary.en).toContain('did not end maritime trade');
-    expect(chapters[3]!.state.beats[2]!.caption.en).toMatch(/dated 1409.*findspot/);
-    expect(chapters[5]!.state.beats[3]!.caption.en).toMatch(/not a confirmed fleet stop/);
+    expect(eventById.get('site-bengal-region')!.summary.en).toMatch(/(?:not.*where the animal boarded|Where the animal boarded.*unknown)/);
+    expect(eventById.get('evt-java-report-1407')!.detail!.en).toMatch(/conflict site (?:has not been established|is unknown)/);
+    expect(eventById.get('evt-samudera-1415')!.detail!.en).toMatch(/(?:not a located palace|palace and capture site are unknown)/);
+    expect(eventById.get('evt-final-return')!.summary.en).toMatch(/(?:did not end maritime trade|Maritime trade continued)/);
+    expect(chapters[3]!.state.beats[2]!.caption.en).toMatch(/dated 1409.*(?:findspot|found at Galle)/);
+    expect(chapters[5]!.state.beats[3]!.caption.en).toMatch(/(?:not a confirmed fleet stop|fleet stop is unconfirmed)/);
   });
 
   it('defines fifteen terms and links each exactly once in each language', () => {

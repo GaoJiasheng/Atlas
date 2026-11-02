@@ -108,11 +108,16 @@ describe('monsoon-and-weather derivation', () => {
 });
 
 describe('monsoon-and-weather chapters and beats', () => {
-  it('has a background and eight chapters of four beats, 36 in all, generated from the table', () => {
+  it('has a background and eight chapters of four beats, 36 in all, with the table’s scene states', () => {
     expect(chapters.map((c) => c.fm.id)).toEqual(CHAPTERS.map((c) => c.id));
     expect(chapters.map((c) => c.fm.state.beats.length)).toEqual([4, 4, 4, 4, 4, 4, 4, 4, 4]);
     expect(allBeats).toHaveLength(36);
-    for (const [i, c] of chapters.entries()) expect(c.fm).toEqual(frontmatter(CHAPTERS[i]!));
+    // Compare scene facts independently of reader-facing wording.
+    const sceneFields = (chapter: unknown) => JSON.parse(JSON.stringify(chapter, (key, value) =>
+      ['title', 'summary', 'note', 'caption'].includes(key) ? undefined : value));
+    for (const [i, c] of chapters.entries()) {
+      expect(sceneFields(c.fm)).toEqual(sceneFields(frontmatter(CHAPTERS[i]!)));
+    }
     expect(chapters[0]!.fm).toMatchObject({ kind: 'background', order: 0 });
   });
 

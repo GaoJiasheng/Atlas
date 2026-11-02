@@ -41,3 +41,166 @@ Content integration check at the completed-chapter stage: `pnpm validate` read58
 
 
 Final integration gates: `pnpm check` 0 errors/0 warnings (3 pre-existing hints); `pnpm test`164 files/4312 tests passed. `pnpm validate`58topics/14errors/0warnings, exclusively the prescribed absent-sibling links. `pnpm build` stops on those validation errors. Direct `pnpm exec astro build` generated119pages successfully; it does not waive link validation. Static compressed dependency auditing identifies the map-ready JS path at458,408gzip bytes, above400,000; exact bytes/method and the combined public-map/topic-payload budget are in bundle-report.json. Shoot/e2e/visual regressions and actual-device p95 remain unexecuted as required by the briefs.
+
+
+## 2026-10-29 · Reader-copy polish: retained source audit detail
+
+All eight chapters now use shorter EN/ZH sentences in summaries, 35 beat captions, reading guidance, main text and More sections. Repeated caveats are consolidated within each explanation; standalone beat captions retain the cautions needed to read that beat. All original source buttons, glossary Term IDs and TopicLink targets remain. Scientific dates, source tables, numeric examples, camera/layer/index/highlight state, privacy handling and reference metadata are unchanged. The figure wording still identifies the strata and asteroid as illustrations rather than measured specimens. No source was newly fetched or re-reviewed for this copy edit.
+
+The student-facing notes were shortened to explain what each source contributes. The original notes below preserve review dates, access limits, excluded claims, source aliases, query counts, coordinate conversions, licensing and pipeline decisions. They are an archive of the previous notes, not a claim of a new source review.
+
+### S1 · International Chronostratigraphic Chart 2026/06 · International Commission on Stratigraphy
+
+EN: Mesozoic columns and footnotes: 251.902±0.024, 201.4±0.2, 143.1±0.6 and 66.00 Ma. Numerical ages can be revised; only facts transcribed. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 中生代栏及图下注；采用251.902±0.024、201.4±0.2、143.1±0.6及66.00Ma。数值年龄可以修订，只转录事实。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S2 · How Fossils Form · US National Park Service
+
+EN: Introduction / Odds of Becoming a Fossil: body remains, activity traces and preservation bias. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: Introduction / Odds of Becoming a Fossil：身体遗存、活动痕迹和保存偏差。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S5 · How do we know how long ago dinosaurs lived? · American Museum of Natural History
+
+EN: Relative stratigraphic ages; the full isotope-method explanation belongs to the sibling topic. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 采用相对地层年龄部分；完整同位素方法交由姊妹主题。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S58 · Rock Dating · Utah Geological Survey
+
+EN: Superposition; undisturbed, unreversed sedimentary sequence. Layer thickness does not establish elapsed years. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 叠覆律；限定未扰动、未倒转的沉积序列。不以层厚推算年数。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S7 · Dinosaur evidence and reconstruction · Natural History Museum, London
+
+EN: Bone, footprint and soft-tissue evidence answer different questions; reconstruction has limits. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 骨骼、足迹和软组织证据回答不同问题；重建存在限制。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S8 · Ask a Scientist About Dinosaurs · American Museum of Natural History
+
+EN: Question 9: birds belong within theropod dinosaurs. Other old numbers on this page are not adopted. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 问题9：鸟属于兽脚类恐龙。不采用该页其他旧数字。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S11 · How an asteroid ended the age of the dinosaurs · Natural History Museum, London
+
+EN: Opening / What survived: about 66 Ma, extinction of non-avian dinosaurs and surviving bird lineages. Crater size here is not adopted. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 开篇 / What survived：约66Ma、非鸟类恐龙灭绝与鸟类支系存活。不采用该页坑径。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S12 · Schulte et al. (2010), Science · The Chicxulub asteroid impact and mass extinction at the Cretaceous-Paleogene boundary
+
+EN: Original abstract obtained through Europe PMC REST core: global ejecta and extinction patterns. Abstract only, not a claim to reading the whole paper; old 65.5 Ma not adopted. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 经Europe PMC REST core取得原摘要：全球喷出物与灭绝对应。只读原摘要，不声称取得全文；旧65.5Ma不采用。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S13 · Chiarenza et al. (2020), PNAS · Asteroid impact, not volcanism, caused the end-Cretaceous dinosaur extinction
+
+EN: Original full-text XML obtained from Europe PMC PMC7382232. Introduction: impactor about 10 km, crater about 180–200 km. Significance/model results are conditional findings attributed to the authors, not direct ancient-temperature observations. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 经Europe PMC PMC7382232取得原始全文XML。引言：撞击体约10km、坑约180–200km。Significance及模型结果归作者，属于条件性结论，不作直接古温度观测。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S15 · Schoene et al. (2019), Science · U-Pb constraints on pulsed eruption of the Deccan Traps across the end-Cretaceous mass extinction
+
+EN: Author-institution public PDF, abstract/discussion: Deccan eruptions cross the boundary; temporal association and volatile causation are distinct. No precise eruption-pulse numbers reproduced. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 作者机构公开PDF，摘要及讨论：德干喷发跨越界线；时间关联与挥发物因果应分开。不搬精确喷发脉冲数值。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S51 · Sprain et al. (2019), Science · The eruptive tempo of Deccan volcanism in relation to the Cretaceous-Paleogene boundary
+
+EN: Original abstract, final sentence: climate-active gas release need not coincide directly with erupted rock volume. Distinct dating results are not fused into one exact pulse. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 原摘要末句：影响气候的气体释放与喷发岩量未必直接同步。不把不同测年结果拼成一个精确脉冲。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S17 · Biodiversity Gallery · Lee Kong Chian Natural History Museum, NUS
+
+EN: Highlights: Dinosaurs; displayed diplodocid sauropods. Facts rewritten; no museum photograph copied, no completeness percentages or family narrative. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: Highlights: Dinosaurs；展出的梁龙科蜥脚类化石。事实改写，不复制馆方照片，不采用完整率或家庭关系支线。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S57 · Interview with evolutionary palaeobiologist Emanuel Tschopp · Lee Kong Chian Natural History Museum, NUS
+
+EN: Research work in LKCNHM: Dana Quarry near Ten Sleep, Wyoming; Jurassic Morrison Formation. Readable HTML replaces the oversized annual report. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: Research work in LKCNHM：怀俄明州Ten Sleep附近Dana Quarry、侏罗纪莫里森组。可读HTML替代过大年报。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S20 · Shibata et al. (2015), PLOS ONE · Sirindhorna khoratensis original description
+
+EN: Abstract / Geological setting / Locality and horizon: Nakhon Ratchasima, Khok Kruat Formation, Early Cretaceous/Aptian. Not assigned the 130 Ma map sample as an exact fossil age. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 摘要 / Geological setting / Locality and horizon：呵叻府、Khok Kruat组、早白垩世阿普特期。不把130Ma地图样本当作化石精确年龄。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S21 · Allain et al. (2012) · Ichthyovenator original abstract
+
+EN: Early Cretaceous Laos; partially associated postcranial skeleton. No complete skull reconstructed. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 早白垩世老挝；部分相连的头后骨骼。不补画完整头骨。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S22 · Dinosaur Di Malaysia? · Masatoshi Sone / Department of Museums Malaysia
+
+EN: Researcher lecture abstract: dinosaur teeth in Pahang; locality withheld for protection. Event date is not fossil age. No coordinates or invented radius published. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 研究者讲座摘要：彭亨的恐龙牙齿，地点为保护而保密。网页活动日期不当作化石年龄；不发布坐标或虚构半径。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S24 · Peters & McClennen (2016), Paleobiology · The Paleobiology Database application programming interface
+
+EN: Abstract / PBDB Data Model. DOI 10.1017/pab.2015.39. Collection/occurrence distinction; snapshot licences come from S65/S66 metadata. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 摘要 / PBDB Data Model；DOI10.1017/pab.2015.39。区分collection与occurrence；本题快照许可另据S65/S66元数据。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S29 · Scotese & Wright (2018) · PALEOMAP PaleoDEMs v2 · Zenodo record 5460860
+
+EN: Publisher description and official metadata: model elevation/bathymetry in metres, 1° grid, 540–0 Ma, nominal 5 Myr spacing, CC BY 4.0. Actual ten numeric CSV ages/CRC/SHA are in SOURCES-GEO; no 66 Ma frame. Source says 117 models; downloaded nc archive contains 109 members. Adaptations: z>0 nearest-sample cells, explicit dateline/polar cuts, no modern coast substitution. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 发布说明及官方元数据：米制模型高程/水深、1°网格、540–0Ma、名义5Myr间隔、CC BY4.0。实际十份CSV年龄/CRC/SHA见SOURCES-GEO；没有66Ma帧。说明称117模型，所获nc归档实为109成员。改编为z>0最近样本格元，显式日界线/极区裁切，不以现代海岸替换。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S31 · Terms of Use · Natural Earth
+
+EN: Public-domain declaration. Modern reference geometry only; no Natural Earth land is used in ancient main-map frames. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 公有领域声明。仅用于现代参照；古代主图帧不使用Natural Earth陆地。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S52 · 150 Million Years of Dinosaur Evolution · American Museum of Natural History
+
+EN: Original video transcript: established dinosaur record by about 230 Ma in the Late Triassic. Does not rule out every older candidate. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 原视频文字稿：晚三叠世约230Ma已有确立恐龙记录。不宣称所有更早候选均被排除。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S61 · Chicxulub locator · Lunar and Planetary Institute / USRA
+
+EN: Spec alias DE-S01. Latitude/Longitude only: 21°20′N/89°30′W → [-89.5,21.333333]. Approximate modern locator, not crater outline. Old 64.98 Ma and 170 km not adopted. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 规格别名DE-S01。仅用Latitude/Longitude：21°20′N/89°30′W换算[-89.5,21.333333]。现代近似定位，不是坑轮廓。不采用旧64.98Ma和170km。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S62 · What was Pangea? · US Geological Survey
+
+EN: Spec alias DE-S02. Opening explanation of connected continents and later separation; concrete land boundaries derive solely from S29. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 规格别名DE-S02。开篇解释大陆相连与后来分离；具体陆地边界只来自S29。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S64 · Natural Earth 110m land v4.1.0 / 50m countries v5.1.1 · Natural Earth contributors
+
+EN: Spec alias DE-S04. Fixed public-domain ZIP DBF LABEL_X/LABEL_Y for SGP gives [103.816925,1.366587], a modern label anchor, not museum/find coordinates. Land fixed ZIP: https://naturalearth.s3.amazonaws.com/110m_physical/ne_110m_land.zip. Modern inset only; six-decimal rounding. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 规格别名DE-S04。固定公有领域ZIP的SGP DBF LABEL_X/LABEL_Y为[103.816925,1.366587]，是现代制图标注点，不是馆址或化石位置。陆地固定ZIP：https://naturalearth.s3.amazonaws.com/110m_physical/ne_110m_land.zip。仅现代小图使用；坐标取六位小数。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S65 · PBDB contributors · API 1.2 bounded global snapshot, 26 October 2026
+
+EN: Spec alias DE-S05. Original CSV metadata explicitly CC0; 2000 of 21720 matching occurrences, 1224 collections, sorted by agespan; bounded, non-random and not a census. Coordinates modern. Full query and source hash in data/SOURCES.md; retained publication references in pipeline bibliography. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 规格别名DE-S05。原CSV元数据明示CC0；匹配21720条中取2000条、1224组，按agespan排序；有界、非随机，不是普查。坐标为现代位置。完整查询、源哈希见data/SOURCES.md；保留文献详见管线书目。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S66 · PBDB contributors · API 1.2 TH/LA/MY regional snapshot, 26 October 2026
+
+EN: Spec alias DE-S06. Original CSV explicitly CC0; 167 occurrences/90 collections. Union 2106 occurrences; suppress 3 MY occurrences/3 collections before grouping; publish 2103 occurrences/1274 collections/61 countries. Collection 24178 has 3 occurrences, each 121.4–100.5 Ma. No raw MY locations published. Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated.
+
+ZH: 规格别名DE-S06。原CSV明示CC0；167条出现记录/90组。并集2106条；先抑制MY的3条/3组，再公开2103条/1274组/61国。24178组有3条记录，各为121.4–100.5Ma。不发布马来西亚原始位置。 规格记录的来源访问/复核日为2026年10月27日；注明的数据快照日期为2026年10月26日。
+
+### S67 · Atlas editorial and illustration design choices
+
+EN: DS01–DS03: z>0 threshold, view/camera bounds, zoom 3.6, ±5 Ma browse window, categorical-cell choice and diagram counts. These are design values, not scientific measurements. Original approved generated illustrations reused without changing composition.
+
+ZH: DS01–DS03：z>0阈值、视图/镜头范围、zoom3.6、±5Ma浏览窗、分类格元选择和画面计数。这些是设计值，不是科学测量。复用已审生成插画，不改变构图。

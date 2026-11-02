@@ -68,3 +68,12 @@ Spec cuts kept out: Changi annual total, temperature trends (F29), the 1.1 °C g
 | Basemap | reused | `land-50m.json`, `land-10m-sea.json` hashes equal the inventory |
 | Storm tracks, smoke plumes, fire points | none drawn | no licensed observed data (S31) |
 | Display rules (rain steps, arrow scale, calm circle) | design source S199 | shown as the KEY's source |
+
+
+## Readability pass 2026-10-29
+
+Shortened EN/ZH explanations, all 36 beat captions, city cards, glossary definitions and figure text. Removed repeated map/forecast caveats and production language; retained grid/station differences, schematic/enlarged cloud explanations, weather uncertainty and the complete lightning-shelter advice. Facts, numerical values, sources, source references and scene states are unchanged.
+
+Provenance moved out of city cards: S103, Natural Earth 1:110m populated places, original coordinates unchanged; Singapore NE_ID 1159151627, Kuala Lumpur 1159151317, Jakarta 1159151599, Hanoi 1159151251, Bangkok 1159151509, Manila 1159151525. These are city anchors, not station/instrument/fire locations. Map and radar production/licensing notes belong here and in data/SOURCES.md: only the open climate files are drawn, and no weather-service map or radar image is redistributed. The chapter generator retains the original specification prose; the unit test now compares its non-prose scene fields and independently checks the shipped captions and numerical facts.
+
+Validation: topic unit tests 34/34 passed (monsoon 13, Southeast Asia 21); full suite 219 files / 5,448 tests passed. `pnpm check` passed (0 errors, 0 warnings; 4 existing hints), `pnpm validate` passed (85 topics, 0 errors/warnings), and `pnpm build` passed (173 pages). Verified all sourced Num occurrences, term/link/figure targets, non-prose scene/data fields, source files and presets unchanged; all ZH beat-caption lines are at most 45 characters. `git diff --check` passed. Browser `shoot` and `e2e` skipped as required by BRIEF-READ; no browser or desktop opened.

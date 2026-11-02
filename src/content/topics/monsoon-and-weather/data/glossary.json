@@ -21,8 +21,8 @@
         "zh": "气候"
       },
       "definition": {
-        "en": "The pattern of weather in a place over many years, described with averages and other statistics.",
-        "zh": "一个地方许多年的天气规律，用平均值和其他统计来描述。"
+        "en": "The weather patterns of a place over many years, described using averages and other statistics.",
+        "zh": "一个地方多年的天气规律，用平均值等统计资料描述。"
       },
       "see": [
         "term-weather",
@@ -36,8 +36,8 @@
         "zh": "月气候平均"
       },
       "definition": {
-        "en": "An average for each calendar month over a long period: every January from 1991 to 2020 averaged together, every February, and so on.",
-        "zh": "把一段长时期里同一个月份的资料分别求平均：1991–2020 年的所有 1 月一起平均，所有 2 月一起平均，依此类推。"
+        "en": "An average for the same month over many years. For example, all Januaries from 1991–2020 are averaged together.",
+        "zh": "把多年中同一个月份的资料求平均，例如把 1991–2020 年所有 1 月的资料平均。"
       },
       "see": [
         "term-climate"
@@ -50,7 +50,7 @@
         "zh": "季风"
       },
       "definition": {
-        "en": "A large-scale circulation of the air whose winds change with the seasons.",
+        "en": "A large-scale movement of air whose winds change with the seasons.",
         "zh": "随季节转变风向的大范围空气环流。"
       },
       "see": [
@@ -107,8 +107,8 @@
         "zh": "再分析"
       },
       "definition": {
-        "en": "A reconstruction of past weather made by putting many observations into a computer weather model. The winds here are a coarse regional field from one.",
-        "zh": "把大量观测资料放进电脑天气模式，重建过去的大气状况。这里的风是由它得到的较粗的区域风场。"
+        "en": "A way to reconstruct past weather by combining many observations with a computer weather model. It gives the regional winds shown here.",
+        "zh": "把大量观测与电脑天气模式结合，重建过去天气的方法。图中的区域风就来自这类资料。"
       },
       "see": [
         "term-wind-vector"
@@ -149,8 +149,8 @@
         "zh": "积雨云"
       },
       "definition": {
-        "en": "A very deep cloud that can grow an icy, flat-topped anvil and bring heavy showers, thunder and lightning.",
-        "zh": "很深厚的云，顶部可展开成冰质的砧状，带来大阵雨、雷电。"
+        "en": "A tall storm cloud that can bring heavy showers, thunder and lightning. Its icy top can spread into a flat anvil shape.",
+        "zh": "高大的雷雨云，可带来大阵雨和雷电。冰质云顶可以展开成平平的铁砧形。"
       },
       "see": [
         "term-updraft",

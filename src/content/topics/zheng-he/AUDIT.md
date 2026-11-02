@@ -62,3 +62,12 @@
 - 重读 [S1 Columbia · The Seven Voyages](https://afe.easia.columbia.edu/special/china_1000ce_mingvoyages.htm) 第二航次段：目的地古里、参加新王即位典礼；郑和组织但未亲自率队。故 evt-second-voyage 保持原古里坐标，详情与章索引补清证据关联，没有添加船数、精确典礼位置或船只轨迹。
 - 章索引所有双语 FlyTo 行增加事件 id，接入引擎的选中路径并保留原预设取景；详情在章头下。原先“只取景、不选中”的限制由本轮修复，以上旧记录是先前状态。
 - 本轮仍为 draft。浏览器／桌面完全不使用；shoot/e2e 按用户要求跳过，留主会话。本轮命令结果见 REVIEW 与 docs/59 §9.4。
+
+
+### Readability pass 2026-10-29
+
+Rewrote EN/ZH chapter prose, disclosures, index rows, beat captions, place/event cards and glossary explanations for P4–P6 readers. Shortened repeated map caveats and kept reported deaths, disputed figures and illustration limits explicit. Historical facts, quantities, source references, dates, geographic data, ids, links and cameras are unchanged.
+
+Provenance removed from reading prose remains here and in data/SOURCES.md: preparation could not download the proposed route-map file, so no route geometry is supplied. Site dates are display conventions. Coordinates remain D02 for city/regional anchors, D03 for Hormuz (GeoNames 131231), and D04 for Kilwa. The illustration’s navigation instruments are not recovered expedition artefacts. Galle discussion uses the checked Chinese inscription; the other scripts are not assumed to duplicate it. Speculative coastal extensions and reconstructed daily tracks remain excluded.
+
+Verification: topic tests 22/22; `pnpm check` passed (0 errors, 0 warnings, 4 existing hints); `pnpm validate` passed (85 topics); `pnpm test` passed (219 files, 5,448 tests); `pnpm build` passed (173 pages). Compared original and revised quantity tags, source references, links, glossary ids and all non-text scene/data fields: unchanged. Chinese beat captions are at most 45 characters. Browser gates (`pnpm shoot`, `pnpm e2e`) skipped as instructed; no browser or desktop was opened. No git writes or package/lock/review-queue edits.

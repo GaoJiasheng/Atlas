@@ -64,8 +64,8 @@
         "highlight": [],
         "selection": null,
         "caption": {
-          "en": "January, 1991–2020 mean: rain is shown on its native regional cells.",
-          "zh": "1991–2020 年一月平均：降水按原生区域格显示。"
+          "en": "January, 1991–2020 mean: compare rainfall across the coloured grid cells.",
+          "zh": "1991–2020 年一月平均：比较各个色格的雨量。"
         }
       },
       {
@@ -93,8 +93,8 @@
         ],
         "selection": "cell-105-0",
         "caption": {
-          "en": "January mean: inspect one wind node and the rain cell containing the same coordinates.",
-          "zh": "一月平均：查看一个风节点，以及包含同一坐标的降水格。"
+          "en": "January mean: read a wind point and the rain cell covering the same coordinates.",
+          "zh": "一月平均：读出同一坐标的风格点与雨格读数。"
         }
       },
       {
@@ -122,8 +122,8 @@
         ],
         "selection": "cell-105-0",
         "caption": {
-          "en": "July mean: the data change, while the rain legend and native grids stay the same.",
-          "zh": "七月平均：数据改变，降水图例和原生格网保持相同。"
+          "en": "July mean: compare the new values using the same grids and rain legend.",
+          "zh": "七月平均：用相同的格网和降水图例比较新读数。"
         }
       },
       {
@@ -149,8 +149,8 @@
         ],
         "selection": "city-singapore",
         "caption": {
-          "en": "Present-day reference: return to Singapore to distinguish local surface-wind descriptions from the regional pressure-level map.",
-          "zh": "今天的地理参考：回到新加坡，分清本地地面风说明与区域气压层地图。"
+          "en": "Return to Singapore. Its surface winds can differ from the regional pressure-level winds.",
+          "zh": "回到新加坡。地面风可以与区域气压层的风不同。"
         }
       }
     ]
@@ -160,23 +160,23 @@
 
 <Lang en>
 
-Start with January and look across the region. The colours show a <Term id="term-climatology">monthly climate mean</Term>, calculated for the same calendar month over 1991–2020. They do not show a storm travelling across the map today. Different places can have different rainfall in the same month. Change to July and compare them using the unchanged rain legend, so that the colours keep the same meaning.
+Choose January and look across Southeast Asia. The colours show a <Term id="term-climatology">monthly climate mean</Term>: an average for the same calendar month over 1991–2020. Rainfall differs from place to place. Change to July and compare the colours. The rain legend stays the same, so each colour keeps the same meaning.
 
-The rain product is GPCP precipitation, displayed in millimetres per day. The wind product uses NCEP reanalysis at a pressure level of <Num s="S203">850</Num> hPa. These are different kinds of information. Rain is shown in cells, while wind is sampled at nodes on its own grid. Inspect the shared example near the equator: the location connects the readings, but it does not make the wind node and rain cell the same object.
+The rain estimates come from GPCP and use millimetres per day. The wind comes from NCEP reanalysis, which combines observations with a computer weather model. It describes the <Num s="S203">850</Num> hPa pressure level above the ground. The unit hPa measures air pressure. Rain fills grid cells; wind is shown at its own grid points. Inspect the example near the equator to read both values for the same location.
 
-A <Term id="term-monsoon">monsoon</Term> is a large-scale circulation that changes with the seasons. Singapore's Meteorological Service describes a Northeast Monsoon from December to early March and a Southwest Monsoon from June to September. Singapore has rain throughout the year, and the later Northeast Monsoon is relatively dry. The word monsoon therefore does not mean constant heavy rain. The topic <TopicLink slug="monsoon-and-weather">Monsoons and weather</TopicLink> follows the winds and rain month by month.
+A <Term id="term-monsoon">monsoon</Term> is a large-scale movement of air that changes with the seasons. Singapore's Meteorological Service places the Northeast Monsoon from December to early March and the Southwest Monsoon from June to September. Singapore has rain all year, but the later Northeast Monsoon is relatively dry. <TopicLink slug="monsoon-and-weather">Monsoons and weather</TopicLink> follows these changes month by month.
 
-Return to the Singapore location view. Its typical Southwest Monsoon surface winds come from the southeast to south, according to the Meteorological Service. The regional pressure-level arrows are a different field from those surface descriptions. Keep the source, level, period and location in view before making a comparison; a regional average cannot forecast the weather at your school tomorrow.
+Return to Singapore. During the Southwest Monsoon, its surface winds commonly come from the southeast to south. These near-ground winds can differ from the pressure-level arrows on the regional map. Use the map to compare climate patterns. For tomorrow's weather at school, check a weather forecast.
 
-<More title={{"en": "A grid cell is not a weather station", "zh": "格子不是学校气象站"}}>
+<More title={{ en: "Two grids at one location", zh: "同一个地点，两套格网" }}>
 
-The wind and rain grids each use <Num s="S203,S204">2.5</Num> degrees of spacing, but they have different origins and spatial support. A sample therefore looks up a wind node and the rain cell containing the same coordinates separately. Missing coverage is shown as unavailable, not as no rain or no wind.
+Both grids have <Num s="S203,S204">2.5</Num> degrees of spacing, but they start in different places. The inspector finds a wind point and a rain cell separately for the coordinates you choose. Beyond the data coverage, it shows unavailable. That means there is no reading, rather than no rain or no wind.
 
 </More>
 
-<More title={{"en": "Read arrow direction and wind names separately", "zh": "箭头方向与风名分开读"}}>
+<More title={{ en: "Which way is the wind blowing?", zh: "风往哪边吹" }}>
 
-An arrow on this map points in the direction the average wind vector goes. A meteorological wind name describes where wind comes from. Neither convention requires the January and July arrows to be exact opposites at every place. The climate view averages many years; individual days vary.
+An arrow points where the average wind goes. A wind's name tells you where it comes from. January and July arrows need not point in exactly opposite directions at every place. They average many years; the wind on individual days varies.
 
 </More>
 
@@ -184,23 +184,23 @@ An arrow on this map points in the direction the average wind vector goes. A met
 
 <Lang zh>
 
-先选一月，看看整个区域的颜色。图上是<Term id="term-climatology">月气候平均</Term>：把 1991–2020 年中同一个月份的资料合起来统计，不是今天正在移动的暴雨。各地同在一月，降水仍可不同。切到七月时，用不变的图例比较，才能保证同一种颜色仍代表同一种读数。
+选一月，看看整个东南亚的颜色。图上显示<Term id="term-climatology">月气候平均</Term>，也就是把 1991–2020 年中同一个月份的资料求平均。各地雨量并不一样。再换成七月，比较颜色。降水图例保持相同，所以每种颜色仍代表相同的读数。
 
-雨采用 GPCP 降水资料，单位是毫米每天；风采用 NCEP 再分析的 <Num s="S203">850</Num> hPa 气压层资料。雨按格子显示，风则在自己的格点上取值。查看赤道附近的共同示例时，坐标把读数联系起来，却没有把风节点和雨格变成同一个对象。
+雨量估计来自 GPCP，单位是毫米／日。风来自 NCEP 再分析，也就是结合观测和电脑天气模式得到的资料，表示地面以上 <Num s="S203">850</Num> hPa 气压层的风。hPa 是气压单位。雨按格子显示，风则用自己的一套格点。查看赤道附近的例子，可以读到同一位置的风和雨。
 
-<Term id="term-monsoon">季风</Term>是随季节改变的大范围环流。新加坡气象署把东北季风期列为十二月至三月初，西南季风期为六月至九月。新加坡全年有雨，东北季风后期却较干，所以“季风”不能简单理解为不停下大雨。主题<TopicLink slug="monsoon-and-weather">《季风与天气》</TopicLink>按月份讲风和雨的变化。
+<Term id="term-monsoon">季风</Term>是随季节改变的大范围空气环流。新加坡气象署把东北季风期列为十二月至三月初，西南季风期为六月至九月。新加坡全年有雨，但东北季风后期较干。<TopicLink slug="monsoon-and-weather">《季风与天气》</TopicLink>按月份介绍这些变化。
 
-回到新加坡的位置图，再分清地面和高空。气象署说，本地西南季风期常见的地面风来自东南至南方；区域气压层的箭头是另一种资料。比较前先读来源、层次、时期和地点，不能把区域多年平均当成学校明天的天气预报；如果要知道某一天是否下雨，还需要另外的天气资料。
+回到新加坡。西南季风期，本地地面风常从东南至南方吹来。地面附近的风，可以与区域地图上气压层的风不同。地图帮助比较气候规律；要知道学校明天的天气，则要看天气预报。
 
-<More title={{"en": "A grid cell is not a weather station", "zh": "格子不是学校气象站"}}>
+<More title={{ en: "Two grids at one location", zh: "同一个地点，两套格网" }}>
 
-风与雨的格距各为 <Num s="S203,S204">2.5</Num> 度，但起点和代表的空间范围不同。取样会分别寻找风节点与包含同一坐标的雨格。没有覆盖的地方显示无资料，不能补成无雨或无风。
+两套格网的间距都是 <Num s="S203,S204">2.5</Num> 度，但起点不同。查看读数时，会按所选坐标分别寻找风的格点和雨的格子。超出资料范围，便显示无资料。这表示没有读数，并非无雨或无风。
 
 </More>
 
-<More title={{"en": "Read arrow direction and wind names separately", "zh": "箭头方向与风名分开读"}}>
+<More title={{ en: "Which way is the wind blowing?", zh: "风往哪边吹" }}>
 
-图上箭头指向平均风矢量前往的方向，气象风名则说明来向。这两种读法都没有要求各地一月与七月的箭头必须完全相反。气候图把多年资料平均，个别日子的天气仍会变化。
+箭头指向平均风前往的方向，风名则说明风从哪里来。各地一月和七月的箭头不一定完全相反。图上是多年的平均，个别日子的风仍会变化。
 
 </More>
 

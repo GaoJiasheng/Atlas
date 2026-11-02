@@ -156,14 +156,19 @@ for (const locale of LOCALES) {
   });
 }
 
-test('index: a plate whose drawing fails to load falls back to the dotted placeholder', async ({ page }) => {
-  await page.route('**/illustrations/ww1*.webp', (route) => route.abort());
-  await page.goto('/en/');
-  const ww1 = page.locator('[data-topic]', { has: page.locator('a[href$="/en/topics/ww1/"]') });
-  await ww1.scrollIntoViewIfNeeded();
-  await expect(ww1.locator('[data-figure="placeholder"] [data-placeholder]')).toBeVisible();
-  await expect(ww1.locator('[data-placeholder] svg[data-icon="history"]')).toBeVisible();
-  await expect(page.locator('[data-figure="placeholder"]')).toHaveCount(1);
+test.describe('drawing fallback', () => {
+  // page.route cannot see requests a controlling service worker answers from its cache.
+  test.use({ serviceWorkers: 'block' });
+
+  test('index: a plate whose drawing fails to load falls back to the dotted placeholder', async ({ page }) => {
+    await page.route('**/illustrations/ww1*.webp', (route) => route.abort());
+    await page.goto('/en/');
+    const ww1 = page.locator('[data-topic]', { has: page.locator('a[href$="/en/topics/ww1/"]') });
+    await ww1.scrollIntoViewIfNeeded();
+    await expect(ww1.locator('[data-figure="placeholder"] [data-placeholder]')).toBeVisible();
+    await expect(ww1.locator('[data-placeholder] svg[data-icon="history"]')).toBeVisible();
+    await expect(page.locator('[data-figure="placeholder"]')).toHaveCount(1);
+  });
 });
 
 test('index on a phone: two-drawing frontispiece, plates stacked, category row scrolls', async ({ page }) => {

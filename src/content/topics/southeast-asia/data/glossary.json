@@ -7,8 +7,8 @@
         "zh": "区域"
       },
       "definition": {
-        "en": "A grouping used to study places together.",
-        "zh": "为一起研究地方而使用的分组。"
+        "en": "A group of places studied together.",
+        "zh": "放在一起研究的一组地方。"
       }
     },
     {
@@ -29,8 +29,8 @@
         "zh": "群岛"
       },
       "definition": {
-        "en": "A group of islands, not an organisation’s member list.",
-        "zh": "一组岛屿，不是组织成员名单。"
+        "en": "A group of islands.",
+        "zh": "一组岛屿。"
       }
     },
     {
@@ -51,8 +51,8 @@
         "zh": "水系"
       },
       "definition": {
-        "en": "Connected river reaches considered together.",
-        "zh": "一起阅读的相连河段。"
+        "en": "River reaches connected to one another.",
+        "zh": "彼此相连的河段。"
       }
     },
     {
@@ -62,8 +62,8 @@
         "zh": "月气候平均"
       },
       "definition": {
-        "en": "Calendar-month statistics over a stated multi-year period.",
-        "zh": "指定多年时期中按月份统计的资料。"
+        "en": "An average for the same calendar month over many years.",
+        "zh": "把多年中同一个月份的资料求平均。"
       }
     },
     {
@@ -73,8 +73,8 @@
         "zh": "季风"
       },
       "definition": {
-        "en": "A seasonally changing large-scale atmospheric circulation.",
-        "zh": "随季节改变的大范围大气环流。"
+        "en": "A large-scale movement of air whose winds change with the seasons.",
+        "zh": "随季节转变风向的大范围空气环流。"
       }
     },
     {
@@ -84,8 +84,8 @@
         "zh": "红树林"
       },
       "definition": {
-        "en": "Coastal plant communities such as those at Sungei Buloh.",
-        "zh": "如双溪布洛所见的海岸植物群落。"
+        "en": "A coastal plant community, such as the mangroves at Sungei Buloh.",
+        "zh": "海岸上的植物群落，例如双溪布洛的红树林。"
       }
     },
     {
@@ -95,8 +95,8 @@
         "zh": "水稻梯田"
       },
       "definition": {
-        "en": "A retained field made along a slope.",
-        "zh": "沿坡修成、有挡护的田面。"
+        "en": "A field built along a slope and held in place by a wall.",
+        "zh": "沿山坡修建、用墙挡护的田地。"
       }
     },
     {
@@ -117,8 +117,8 @@
         "zh": "亚细安"
       },
       "definition": {
-        "en": "An organisation of neighbouring states whose members joined on different dates.",
-        "zh": "成员按不同日期加入的区域国家组织。"
+        "en": "An organisation of neighbouring countries that joined at different times.",
+        "zh": "邻近国家组成的组织，各国在不同时候加入。"
       }
     },
     {
