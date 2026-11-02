@@ -7,8 +7,8 @@
         "zh": "自转"
       },
       "definition": {
-        "en": "Turning about a body's own axis.",
-        "zh": "天体绕自身轴线转动。"
+        "en": "A body turning about its own axis, an imaginary line through it.",
+        "zh": "天体绕自身的假想轴线转动。"
       },
       "see": [
         "orbit"
@@ -21,8 +21,8 @@
         "zh": "公转"
       },
       "definition": {
-        "en": "Moving around another body.",
-        "zh": "围绕另一天体运动。"
+        "en": "A body travelling around another body.",
+        "zh": "一个天体围绕另一个天体运行。"
       },
       "see": [
         "rotation"
@@ -35,8 +35,8 @@
         "zh": "地轴倾角"
       },
       "definition": {
-        "en": "The angle between the spin axis and the orbital normal.",
-        "zh": "自转轴与轨道法线的夹角。"
+        "en": "The angle between Earth’s spin axis and a line perpendicular to its orbital plane.",
+        "zh": "地球自转轴与轨道平面垂线的夹角。"
       },
       "see": [
         "hemisphere"
@@ -49,8 +49,8 @@
         "zh": "半球"
       },
       "definition": {
-        "en": "Half a globe; here north or south of the equator.",
-        "zh": "球体的一半；这里指赤道以北或以南。"
+        "en": "Half of a sphere. Earth’s equator divides its northern and southern hemispheres.",
+        "zh": "球体的一半。赤道把地球分成南北半球。"
       },
       "see": [
         "obliquity"
@@ -63,8 +63,8 @@
         "zh": "昼长"
       },
       "definition": {
-        "en": "Daylight length under a stated horizon convention.",
-        "zh": "在指定地平线定义下的白昼时长。"
+        "en": "How long the Sun is above the horizon, using the chosen rule for sunrise and sunset.",
+        "zh": "按选定的日出日落规则，太阳在地平线上方的时长。"
       },
       "see": [
         "solar-day"
@@ -77,8 +77,8 @@
         "zh": "太阳日"
       },
       "definition": {
-        "en": "A cycle measured relative to the Sun.",
-        "zh": "按相对太阳的位置回归计量的周期。"
+        "en": "The time from one return of the Sun to the same daily position to the next.",
+        "zh": "太阳从一个日常位置回到同一位置所需的时间。"
       },
       "see": [
         "rotation",
@@ -92,8 +92,8 @@
         "zh": "太阳正午"
       },
       "definition": {
-        "en": "The Sun's daily crossing of the local meridian.",
-        "zh": "太阳每天经过当地子午线的时刻。"
+        "en": "When the Sun crosses the local north–south line in the sky and reaches its highest daily position.",
+        "zh": "太阳经过当地天空的南北子午线、到达当天最高位置的时刻。"
       },
       "see": [
         "solar-day"
@@ -106,7 +106,7 @@
         "zh": "月相"
       },
       "definition": {
-        "en": "The shape of the sunlit portion seen from Earth.",
+        "en": "The shape of the Moon’s sunlit part that we see from Earth.",
         "zh": "从地球看见的月球受光部分的形状。"
       },
       "see": [
@@ -120,8 +120,8 @@
         "zh": "同步自转"
       },
       "definition": {
-        "en": "One spin during one orbit.",
-        "zh": "公转一周时自转一周。"
+        "en": "Turning once while completing one orbit. This keeps nearly the same side of the Moon facing Earth.",
+        "zh": "公转一周时自转一周，让月球近似同一面朝向地球。"
       },
       "see": [
         "rotation",
@@ -135,8 +135,8 @@
         "zh": "朔望月"
       },
       "definition": {
-        "en": "The new-Moon-to-new-Moon cycle.",
-        "zh": "从一次新月到下次新月的周期。"
+        "en": "The time from one new Moon to the next.",
+        "zh": "从一次新月到下一次新月的时间。"
       },
       "see": [
         "phase"
@@ -149,7 +149,7 @@
         "zh": "轨道交点"
       },
       "definition": {
-        "en": "A crossing of the lunar orbit and Earth's orbital plane.",
+        "en": "A place where the Moon’s orbit crosses Earth’s orbital plane.",
         "zh": "月球轨道穿过地球轨道平面的位置。"
       },
       "see": [
@@ -164,8 +164,8 @@
         "zh": "日食"
       },
       "definition": {
-        "en": "The Moon covers the Sun for an observer.",
-        "zh": "对某个观察者而言，月球遮住太阳。"
+        "en": "When the Moon blocks some or all of the Sun for an observer.",
+        "zh": "月球为观察者遮住部分或全部太阳的现象。"
       },
       "see": [
         "apparent-diameter",
@@ -179,8 +179,8 @@
         "zh": "月食"
       },
       "definition": {
-        "en": "The Moon enters Earth's shadow.",
-        "zh": "月球进入地球影子。"
+        "en": "When the Moon moves into Earth’s shadow.",
+        "zh": "月球进入地影的现象。"
       },
       "see": [
         "node"
@@ -193,8 +193,8 @@
         "zh": "日环食"
       },
       "definition": {
-        "en": "A central solar eclipse leaving a bright ring.",
-        "zh": "太阳周围仍留下明亮光环的中心日食。"
+        "en": "A solar eclipse in which the Moon looks smaller than the Sun and leaves a bright ring around it.",
+        "zh": "月球看起来比太阳小，遮住中央后仍露出太阳亮环的日食。"
       },
       "see": [
         "apparent-diameter",
@@ -208,8 +208,8 @@
         "zh": "视直径"
       },
       "definition": {
-        "en": "A body's angular width from a chosen place.",
-        "zh": "从指定地点看到的天体角宽度。"
+        "en": "How wide a body looks from a chosen place, measured as an angle.",
+        "zh": "从指定地点看，天体所占的角宽度。"
       },
       "see": [
         "annular-eclipse"
@@ -222,8 +222,8 @@
         "zh": "阴阳历"
       },
       "definition": {
-        "en": "A calendar combining lunar months and solar-year information.",
-        "zh": "结合月相月份与太阳年信息的历法。"
+        "en": "A calendar that uses both lunar months and solar-year information.",
+        "zh": "结合月相月份和太阳年信息的历法。"
       },
       "see": [
         "synodic-month"

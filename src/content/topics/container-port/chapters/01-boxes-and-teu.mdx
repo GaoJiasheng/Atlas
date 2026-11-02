@@ -42,8 +42,8 @@
       "zh": "三只箱子怎么能算成四？"
     },
     "summary": {
-      "en": "Box count counts objects; TEU uses a common unit for different container lengths.",
-      "zh": "箱数数物体，TEU用共同单位比较不同长度的箱子。"
+      "en": "Count the boxes, then compare their sizes in TEU. The unit changes the answer.",
+      "zh": "先数箱子的只数，再用 TEU 比较大小。单位不同，答案也不同。"
     },
     "index": {
       "parts": [
@@ -106,8 +106,8 @@
           }
         },
         "caption": {
-          "en": "This 40-foot box is one object, but it counts as 2 TEU.",
-          "zh": "这一只40英尺箱仍是一只物体，却记为2 TEU。"
+          "en": "This 40-foot container counts as 2 TEU. It is still one box.",
+          "zh": "这只40英尺集装箱记为2 TEU，但仍是一只箱子。"
         }
       },
       {
@@ -118,8 +118,8 @@
           }
         },
         "caption": {
-          "en": "There are now three boxes, totalling 4 TEU.",
-          "zh": "现在是三只箱子，合计4 TEU。"
+          "en": "These three boxes total 4 TEU.",
+          "zh": "这三只箱子合计4 TEU。"
         }
       },
       {
@@ -130,8 +130,8 @@
           }
         },
         "caption": {
-          "en": "Two 20-foot boxes are slightly shorter in total than one 40-foot box; the names are nominal lengths.",
-          "zh": "两只20英尺箱的实际总长略短于一只40英尺箱；名称不是外长的精确米数。"
+          "en": "Two 20-foot boxes together are slightly shorter than one 40-foot box. The names describe size groups.",
+          "zh": "两只20英尺箱的总长略短于一只40英尺箱。名称表示尺寸类别。"
         }
       },
       {
@@ -142,8 +142,8 @@
           }
         },
         "caption": {
-          "en": "TEU does not tell us how heavy the cargo inside is.",
-          "zh": "TEU不告诉我们箱里装了多重的货物。"
+          "en": "TEU tells us the container size, rather than how heavy the cargo is.",
+          "zh": "TEU 表示箱子大小，不表示货物有多重。"
         }
       }
     ]
@@ -152,19 +152,19 @@
 ---
 <Lang en>
 
-Look at the separate sample boxes. Counting objects and comparing container capacity use different units. A <Num s="S8">20-foot</Num> container counts as <Num s="S8">1 TEU</Num>, a <Term id="teu">twenty-foot equivalent unit</Term>. A <Num s="S8">40-foot</Num> container counts as <Num s="S8">2 TEU</Num>, while remaining a single physical box.
+Look at the separate sample boxes. We can count the boxes themselves or compare their sizes using a common unit. A <Num s="S8">20-foot</Num> container counts as <Num s="S8">1 TEU</Num>, a <Term id="teu">twenty-foot equivalent unit</Term>. A <Num s="S8">40-foot</Num> container counts as <Num s="S8">2 TEU</Num>, while remaining a single physical box.
 
-Set the sample controls to <Num s="S1">two short boxes and one long box</Num>. Count the objects first: <Num s="S1">3 boxes</Num>. Now count the equivalent units: <Num s="S1">1 + 1 + 2 = 4 TEU</Num>. The answer changes because the unit changes; no extra box has appeared. Try adding or removing one length at a time and record both readings.
+Set the sample controls to <Num s="S1">two short boxes and one long box</Num>. Count the objects first: <Num s="S1">3 boxes</Num>. Now count the equivalent units: <Num s="S1">1 + 1 + 2 = 4 TEU</Num>. The answer changes because the unit changes. Try adding or removing one length at a time and record both readings.
 
-The names describe size classes. The selected external lengths are <Num s="S9">6.058 m</Num> and <Num s="S9">12.192 m</Num>. Two short boxes placed end to end are therefore slightly shorter than a long one. This is why the drawing compares nominal lengths rather than pretending that the short pair is exactly the same length as the long box.
+The names describe size groups. The actual outside lengths used here are <Num s="S9">6.058 m</Num> and <Num s="S9">12.192 m</Num>. Two short boxes placed end to end are therefore slightly shorter than a long one. The foot names are size labels, rather than exact outside lengths.
 
-TEU tells us nothing about how heavy the contents are. An empty box and a loaded box of the same size still have the same TEU count. To find mass, we need information about the particular container and its cargo. The model deliberately gives no mass reading from these counting controls.
+TEU tells us nothing about how heavy the contents are. An empty box and a loaded box of the same size still have the same TEU count. To find mass, we need information about the particular container and its cargo. The counting controls therefore give no mass reading.
 
-<Figure src="figures/container-port-teu-comparison" alt={{ en: "Two separate short containers above one long container of the same width and height.", zh: "两只分开的短集装箱，下方是一只同宽同高的长集装箱。" }} caption={{ en: "Three physical boxes, four TEU in this selected set. Nominal length comparison; illustration, not a measuring drawing.", zh: "这组共三只箱子、四 TEU。比较的是名义长度；插图不是测量图。" }} />
+<Figure src="figures/container-port-teu-comparison" alt={{ en: "Two short containers above a single long container. All have the same width and height.", zh: "两只短集装箱，下方是一只长集装箱。它们同宽、同高。" }} caption={{ en: "Three boxes, four TEU. The picture compares size groups; use the stated lengths for exact measurements.", zh: "三只箱子，四 TEU。图中比较尺寸类别，精确长度请看数值。" }} />
 
 <More title={{ en: "Exact length and height", zh: "实际外长与高度" }}>
 
-The model’s arithmetic gives <Num s="S1">6.058 + 6.058 = 12.116 m</Num>, leaving <Num s="S1">0.076 m</Num> compared with the selected long box. Standard-height examples are <Num s="S9">2.591 m</Num> high; a high-cube class is <Num s="S9">2.896 m</Num> high. These examples do not cover every container type.
+Adding the short boxes’ lengths gives <Num s="S1">6.058 + 6.058 = 12.116 m</Num>, a difference of <Num s="S1">0.076 m</Num> from the long box. Standard-height examples are <Num s="S9">2.591 m</Num> high; a high-cube class is <Num s="S9">2.896 m</Num> high. Other container types also exist.
 
 </More>
 
@@ -178,19 +178,19 @@ The same group can have a box count and a TEU count. Neither is cargo mass, and 
 
 <Lang zh>
 
-看这些分开放的样箱。数物体的只数，和用共同单位比较集装箱，得到的数字不一定相同。<Num s="S8">20 英尺</Num>集装箱记为 <Num s="S8">1 TEU</Num>，TEU 是<Term id="teu">二十英尺当量单位</Term>。<Num s="S8">40 英尺</Num>箱记为 <Num s="S8">2 TEU</Num>，但它仍然是一只箱子。
+看这些分开放的样箱。可以数箱子的只数，也可以用共同单位比较箱子的大小。<Num s="S8">20 英尺</Num>集装箱记为 <Num s="S8">1 TEU</Num>，TEU 是<Term id="teu">二十英尺当量单位</Term>。<Num s="S8">40 英尺</Num>箱记为 <Num s="S8">2 TEU</Num>，但它仍然是一只箱子。
 
-把控件设成<Num s="S1">两只短箱、一只长箱</Num>。先数物体：共有 <Num s="S1">3 只箱</Num>。再按共同单位数：<Num s="S1">1＋1＋2＝4 TEU</Num>。不是凭空多出了一只箱子，而是计数用的单位变了。试着每次只增减一种箱，并把两项读数记下来。
+把控件设成<Num s="S1">两只短箱、一只长箱</Num>。先数物体：共有 <Num s="S1">3 只箱</Num>。再按共同单位数：<Num s="S1">1＋1＋2＝4 TEU</Num>。单位变了，所以答案也变了。试着每次只增减一种箱，并把两项读数记下来。
 
-箱子的名称说的是尺寸类别。本例采用的实际外长是 <Num s="S9">6.058 米</Num>和 <Num s="S9">12.192 米</Num>。因此，两只短箱首尾相接，仍比一只长箱略短。图里比较的是名义长度，不能把名称当作以米表示的精确外长，也不能拿插图当尺来量。
+箱子的名称说的是尺寸类别。本例采用的实际外长是 <Num s="S9">6.058 米</Num>和 <Num s="S9">12.192 米</Num>。因此，两只短箱首尾相接，仍比一只长箱略短。英尺名称是尺寸类别，不是精确外长。
 
-TEU 不说明箱里的货物有多重。同样尺寸的空箱和装货箱，TEU 数仍相同。要知道质量，必须另查这只箱子和它装的货物。这里的计数控件不会推算质量；长箱记两份，也不代表里面一定有短箱两倍重的货。
+TEU 不说明箱里的货物有多重。同样尺寸的空箱和装货箱，TEU 数仍相同。要知道质量，必须另查这只箱子和它装的货物。所以，计数控件不显示质量；长箱记两份，也不代表货物一定重两倍。
 
-<Figure src="figures/container-port-teu-comparison" alt={{ en: "Two separate short containers above one long container of the same width and height.", zh: "两只分开的短集装箱，下方是一只同宽同高的长集装箱。" }} caption={{ en: "Three physical boxes, four TEU in this selected set. Nominal length comparison; illustration, not a measuring drawing.", zh: "这组共三只箱子、四 TEU。比较的是名义长度；插图不是测量图。" }} />
+<Figure src="figures/container-port-teu-comparison" alt={{ en: "Two short containers above a single long container. All have the same width and height.", zh: "两只短集装箱，下方是一只长集装箱。它们同宽、同高。" }} caption={{ en: "Three boxes, four TEU. The picture compares size groups; use the stated lengths for exact measurements.", zh: "三只箱子，四 TEU。图中比较尺寸类别，精确长度请看数值。" }} />
 
 <More title={{ en: "Exact length and height", zh: "实际外长与高度" }}>
 
-模型算式为 <Num s="S1">6.058＋6.058＝12.116 米</Num>，与本例长箱相差 <Num s="S1">0.076 米</Num>。标准高样箱高 <Num s="S9">2.591 米</Num>；高箱类别可高 <Num s="S9">2.896 米</Num>。这些例子没有覆盖所有箱型。
+两只短箱的总长为 <Num s="S1">6.058＋6.058＝12.116 米</Num>，与本例长箱相差 <Num s="S1">0.076 米</Num>。标准高样箱高 <Num s="S9">2.591 米</Num>；高箱类别可高 <Num s="S9">2.896 米</Num>。集装箱还有其它箱型。
 
 </More>
 

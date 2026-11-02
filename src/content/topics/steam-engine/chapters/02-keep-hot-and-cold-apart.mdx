@@ -53,8 +53,8 @@
       "fov": 30
     },
     "summary": {
-      "en": "Watt moved condensation into a separate cold vessel. The working cylinder could stay hot, while a pump removed water and air from the condenser.",
-      "zh": "瓦特把冷凝过程移到一个独立的冷容器里。工作汽缸可以保持热，泵则把冷凝器中的水和空气移走。"
+      "en": "Watt put the condenser in a separate cold vessel. The cylinder stays hot, and a pump removes water and air from the condenser.",
+      "zh": "瓦特把冷凝器放在独立的冷容器里。汽缸保持热，泵把冷凝器中的水和空气移走。"
     },
     "sim": {
       "set": {
@@ -73,15 +73,15 @@
         ],
         "keep": [
           {
-            "en": "Same piston and hot-side pressure",
-            "zh": "同一活塞，相同热侧压力"
+            "en": "Keep the piston and hot-side pressure the same",
+            "zh": "活塞和热侧压力保持不变"
           }
         ],
         "record": true,
         "predict": {
           "prompt": {
-            "en": "How will the downward force change in this model?",
-            "zh": "模型中的向下合力会怎样变化？"
+            "en": "Will the downward force grow, shrink or stay the same?",
+            "zh": "向下合力会变大、变小，还是不变？"
           },
           "start": {
             "cold-pressure": 20
@@ -192,8 +192,8 @@
           }
         },
         "caption": {
-          "en": "The working cylinder and the cold condenser are separate. Cooling the exhaust no longer requires spraying cold water into the working cylinder.",
-          "zh": "工作汽缸和冷凝器分开了。冷却排出的蒸汽，不再需要把冷水喷进工作汽缸。"
+          "en": "The cylinder and condenser are separate. Exhaust steam can cool without a cold spray inside the working cylinder.",
+          "zh": "汽缸和冷凝器分开了。排汽可以冷却，不必再向工作汽缸喷冷水。"
         },
         "highlight": {
           "signal": [],
@@ -249,8 +249,8 @@
           }
         },
         "caption": {
-          "en": "In this jet-condenser model, cold water meets the exhaust steam inside the separate vessel. The vapour becomes liquid water.",
-          "zh": "在这个喷射式冷凝器模型里，冷水在独立容器中接触排出的蒸汽。水蒸气变成液态水。"
+          "en": "Cold water meets exhaust steam inside the jet condenser. The steam turns into liquid water.",
+          "zh": "冷水在喷射式冷凝器里接触排汽，让蒸汽变成液态水。"
         }
       },
       {
@@ -298,8 +298,8 @@
           }
         },
         "caption": {
-          "en": "The air pump removes water and air from the condenser. Its non-return valves let the mixture move towards the hot well.",
-          "zh": "抽气泵把冷凝器中的水和空气移走。止回阀让混合物朝热井方向流动。"
+          "en": "The air pump removes water and air. One-way valves let them move towards the hot well.",
+          "zh": "抽气泵移走水和空气，止回阀让它们流向热井。"
         }
       },
       {
@@ -359,8 +359,8 @@
           }
         },
         "caption": {
-          "en": "Some warm water returns to the boiler through a feed pump. Excess mixed water leaves, and fresh cooling water must enter.",
-          "zh": "一部分温水经过给水泵回到锅炉。多余的混合水排出，新的冷却水还要补进来。"
+          "en": "The feed pump returns some warm water to the boiler. Extra mixed water leaves, and fresh cooling water enters.",
+          "zh": "给水泵把部分温水送回锅炉。多余的混合水排出，新的冷却水补进来。"
         }
       },
       {
@@ -407,8 +407,8 @@
           }
         },
         "caption": {
-          "en": "Keep the hot-side pressure fixed. Raising the cold-side pressure makes the downward force smaller in this model.",
-          "zh": "保持热侧压力不变。在这个模型中，提高冷侧的压力，会让向下的推力变小。"
+          "en": "Keep the hot-side pressure fixed. Raising the cold-side pressure reduces the downward force in this model.",
+          "zh": "保持热侧压力不变。提高冷侧压力，模型中的向下合力就会减小。"
         }
       }
     ]
@@ -418,27 +418,27 @@
 
 <Lang en>
 
-The working cylinder and the cold vessel now stand apart. Exhaust steam travels to a <Term id="separate-condenser">separate condenser</Term>, where it becomes liquid. Cold water no longer has to be sprayed into the cylinder that receives the working steam. Keeping these roles separate avoids repeatedly cooling that cylinder directly during condensation. [S12] <FlyTo preset="condenser-view">Follow the exhaust to the condenser</FlyTo>
+The working cylinder and cold vessel now stand apart. Exhaust steam, or steam leaving the cylinder, travels to a <Term id="separate-condenser">separate condenser</Term> and becomes liquid. The cylinder can stay hot because cold water is no longer sprayed into it each time steam condenses. [S12] <FlyTo preset="condenser-view">Follow the exhaust to the condenser</FlyTo>
 
-This model uses a jet condenser. The injection pipe carries cooling water into the vessel, where it meets exhaust steam. Condensation releases heat to the cooling water. The water leaving is a mixture of condensed steam and injected water; the arrangement is not a sealed loop carrying only pure boiler water. The outside cistern and its pipes are part of the cooling-water route. [S7, S9]
+This is a jet condenser. A pipe brings in cold water from the outside cistern. Inside the vessel, the water meets the exhaust steam. As the steam condenses, it gives heat to the cooling water. The water leaving contains both condensed steam and injected cooling water. [S7, S9]
 
-The <Term id="air-pump">air pump</Term> removes water and air from the condenser. Its non-return valves allow the mixture to move towards the hot well, a collecting tank for warm water. A feed pump sends some water from there back to the boiler. Excess water leaves through an overflow, while fresh cooling water enters the system. These connections matter as much as the cold vessel itself. [S7]
+The <Term id="air-pump">air pump</Term> removes water and air from the condenser. Non-return valves let them travel one way towards the hot well, a tank that collects warm water. A feed pump returns some water to the boiler. Extra water leaves through an overflow, and fresh cooling water enters. [S7]
 
-In the try-it card, keep the piston and hot-side pressure unchanged, then raise the cold-side pressure. The calculated downward force becomes smaller. This compares pressure forces; it does not calculate water temperature, the rate of condensation or fuel savings. The dots in the static pumping views mark connected routes while the mechanism stays at its selected phase. [S1, S8]
+Use the try-it card to keep the piston and hot-side pressure the same, then raise the cold-side pressure. The downward force becomes smaller. This card compares pressure forces only. While the engine is still, moving dots let you trace the connected pipes. [S1, S8]
 
-<Figure src="figures/steam-engine-separate-condenser" alt={{ en: "A cutaway piston cylinder connected to a separate vessel standing in cooling water.", zh: "剖开的活塞汽缸通过管道接到一个置于冷却水中的独立容器。" }} caption={{ en: "Separate-condenser principle module; boiler, air pump, full valve cycle and injection jet are omitted.", zh: "分离冷凝器原理模块；省略锅炉、抽气泵、完整配汽循环与内部喷射口。" }} />
+<Figure src="figures/steam-engine-separate-condenser" alt={{ en: "A cutaway cylinder and piston joined by a pipe to a separate vessel in cooling water.", zh: "剖开的汽缸和活塞，通过管道接到冷却水中的独立容器。" }} caption={{ en: "A separate condenser keeps hot and cold apart. This drawing leaves out the boiler, air pump, full valve cycle and injection jet.", zh: "独立冷凝器把热与冷分开。图中省略锅炉、抽气泵、完整配汽过程和喷射口。" }} />
 
 Read about Watt’s model, patent and commercial engines in <TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">Threads, coal and power</TopicLink>.
 
-<More title={{ en: "Different milestones", zh: "不同的技术节点" }}>
+<More title={{ en: "Steps in Watt’s work", zh: "瓦特的改良过程" }}>
 
-Watt had a working model in <Num s="S13">1765</Num>. The condenser patent was dated <Num s="S12">5 January 1769</Num>; commercial engines were installed and working by <Num s="S13">1776</Num>. These are different milestones. The partial illustration explains hot and cold separation, but omits the injection jet and air pump: it cannot establish the internal construction of this model. [S14]
+Watt had a working model in <Num s="S13">1765</Num>. His condenser patent was dated <Num s="S12">5 January 1769</Num>. Commercial engines were installed and working by <Num s="S13">1776</Num>. Each date marks a different step. The drawing above shows the separation of hot and cold; look at the 3D model for the injection jet and air pump. [S14]
 
 </More>
 
-<More title={{ en: "Pressure and pumping work", zh: "压力与泵所需的功" }}>
+<More title={{ en: "Pressure and the pump", zh: "压力与抽气泵" }}>
 
-With the hot side held at <Num s="S1">110 kPa abs</Num>, changing the cold side from <Num s="S1">20</Num> to <Num s="S1">50 kPa abs</Num> changes the model downward force from about <Num s="S1">16.022</Num> to <Num s="S1">10.677 kN</Num>. The beam-connected pump rod supplies the pump’s motion. The air pump itself requires mechanical work from the engine. The simplified pressure account does not subtract that work, and gives no universal coal-saving percentage. [S1, S7]
+In this example, the hot side stays at <Num s="S1">110 kPa abs</Num>. Raising the cold side from <Num s="S1">20</Num> to <Num s="S1">50 kPa abs</Num> reduces the downward force from about <Num s="S1">16.022</Num> to <Num s="S1">10.677 kN</Num>. The beam moves the pump rod, so the engine also supplies work to the air pump. That pump work is left out of this simple calculation. Water temperature, condensation rate and coal savings are not calculated here. [S1, S7]
 
 </More>
 
@@ -446,27 +446,27 @@ With the hot side held at <Num s="S1">110 kPa abs</Num>, changing the cold side 
 
 <Lang zh>
 
-现在，工作汽缸与冷容器分开了。排出的蒸汽沿管道进入<Term id="separate-condenser">分离冷凝器</Term>，在那里变成水。冷凝时不必再把冷水直接喷进接收工作蒸汽的汽缸，从而避免一次次直接冷却它。[S12]<FlyTo preset="condenser-view">沿排汽管找到冷凝器</FlyTo>
+工作汽缸与冷容器现在分开了。排汽就是离开汽缸的蒸汽，它沿管道进入<Term id="separate-condenser">分离冷凝器</Term>，在那里变成水。冷凝时不必再把冷水喷进工作汽缸，汽缸就能保持热。[S12]<FlyTo preset="condenser-view">沿排汽管找到冷凝器</FlyTo>
 
-主模型采用喷射式示意：注水管把冷水送进冷凝器，在里面接触排汽。蒸汽凝结时，把热量传给冷却水。离开的水混合了凝结水与喷入的冷水，并不是只有纯净锅炉水的密闭循环。外面的冷水箱和管路也属于冷却水系统。[S7, S9]
+这是喷射式冷凝器。冷水从外面的水箱经过管道，进入容器，与排出的蒸汽接触。蒸汽凝结时，把热量传给冷却水。排出的水既有凝结成的水，也有喷入的冷却水。[S7, S9]
 
-<Term id="air-pump">抽气泵</Term>把水和空气移出冷凝器。止回阀让混合物朝热井前进；热井就是收集温水的水槽。给水泵把其中一部分送回锅炉，多余的水从溢流口离开，新的冷却水则不断补进来。解释冷凝系统时，这些接头和流向都不能省略。找到注水口之后，还要沿着混合排水管继续看到热井。[S7]
+<Term id="air-pump">抽气泵</Term>把水和空气移出冷凝器。止回阀只让它们朝一个方向流向热井；热井是收集温水的水槽。给水泵把一部分水送回锅炉，多余的水从溢流口排出，新的冷却水则继续补进来。[S7]
 
-在试一试卡片中，保持活塞与热侧压力不变，再提高冷侧压力，计算出的向下合力会减小。这是压力的比较，没有根据水温计算凝结速率，也没有推算节煤比例。静帧里的机构保持选定相位，小点只用来显示管道路径。[S1, S8]
+在试一试卡片中，保持活塞与热侧压力不变，再提高冷侧压力，向下合力就会减小。卡片只比较压力产生的力。机构静止时，移动的小点帮助你追踪相连的管路。[S1, S8]
 
-<Figure src="figures/steam-engine-separate-condenser" alt={{ en: "A cutaway piston cylinder connected to a separate vessel standing in cooling water.", zh: "剖开的活塞汽缸通过管道接到一个置于冷却水中的独立容器。" }} caption={{ en: "Separate-condenser principle module; boiler, air pump, full valve cycle and injection jet are omitted.", zh: "分离冷凝器原理模块；省略锅炉、抽气泵、完整配汽循环与内部喷射口。" }} />
+<Figure src="figures/steam-engine-separate-condenser" alt={{ en: "A cutaway cylinder and piston joined by a pipe to a separate vessel in cooling water.", zh: "剖开的汽缸和活塞，通过管道接到冷却水中的独立容器。" }} caption={{ en: "A separate condenser keeps hot and cold apart. This drawing leaves out the boiler, air pump, full valve cycle and injection jet.", zh: "独立冷凝器把热与冷分开。图中省略锅炉、抽气泵、完整配汽过程和喷射口。" }} />
 
-在<TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">纱线、煤与动力</TopicLink>中，阅读瓦特的模型、专利与商业用机器的历史。
+在<TopicLink slug="industrial-revolution" ch="ir-thread-coal-power">纱线、煤与动力</TopicLink>中，阅读瓦特的模型、专利与商用蒸汽机的历史。
 
-<More title={{ en: "Different milestones", zh: "不同的技术节点" }}>
+<More title={{ en: "Steps in Watt’s work", zh: "瓦特的改良过程" }}>
 
-瓦特在 <Num s="S13">1765</Num> 年已有工作模型，冷凝器专利日期为 <Num s="S12">1769 年 1 月 5 日</Num>，到 <Num s="S13">1776</Num> 年已有商用机器安装运转。这些节点各有含义。配图只解释冷热分开，省略内部喷射口与抽气泵，不能用来证明主模型的内部喷射构造。[S14]
+瓦特在 <Num s="S13">1765</Num> 年已有工作模型，冷凝器专利日期为 <Num s="S12">1769 年 1 月 5 日</Num>，到 <Num s="S13">1776</Num> 年已有商用机器安装运转。这些日期各代表一个不同阶段。上图展示冷热分开；喷射口和抽气泵则可以在 3D 模型中找到。[S14]
 
 </More>
 
-<More title={{ en: "Pressure and pumping work", zh: "压力与泵所需的功" }}>
+<More title={{ en: "Pressure and the pump", zh: "压力与抽气泵" }}>
 
-热侧固定为 <Num s="S1">110 千帕绝压</Num>，冷侧从 <Num s="S1">20</Num> 升至 <Num s="S1">50 千帕绝压</Num> 时，模型向下合力由约 <Num s="S1">16.022</Num> 降至 <Num s="S1">10.677 千牛</Num>。泵杆连接横梁，把运动传给抽气泵。抽气泵本身也要从机器取得机械功；本页简化的压力账本没有扣除泵功，也不给一个通用的节煤百分数。[S1, S7]
+在这个示例中，热侧固定为 <Num s="S1">110 千帕绝压</Num>。冷侧从 <Num s="S1">20</Num> 升至 <Num s="S1">50 千帕绝压</Num> 时，向下合力由约 <Num s="S1">16.022</Num> 降至 <Num s="S1">10.677 千牛</Num>。横梁带动泵杆，因此机器也要给抽气泵提供机械功。这个简单计算没有扣除泵功，也没有计算水温、凝结速率或节煤量。[S1, S7]
 
 </More>
 

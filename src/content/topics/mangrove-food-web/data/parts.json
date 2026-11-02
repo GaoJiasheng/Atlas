@@ -8,12 +8,12 @@
       },
       "group": "habitat",
       "summary": {
-        "en": "Supports roots and marks the exposed habitat.",
-        "zh": "承托树根，标出露泥的生境。"
+        "en": "Supports roots beside the tidal channel.",
+        "zh": "承托潮沟旁的树根。"
       },
       "detail": {
-        "en": "The mud bank gives this teaching scene a surface, with a lower channel along the front. Tide poses change which surfaces appear covered. [S27, S30]\n\nThis is an independent habitat model. Its outline, dimensions and drawn numbers are design choices, not a survey of Sungei Buloh. [S30]",
-        "zh": "泥岸承托这幅教学场景，前缘有较低的潮沟；潮位姿态改变画面上被水覆盖的区域。[S27, S30]\n\n这是独立的生境模型；轮廓、尺寸和画出的数量都属于设计，不是双溪布洛测量结果。[S30]"
+        "en": "The mudbank supports the roots, with a lower channel along its front. Rising tide covers more of its surface. [S27, S30]",
+        "zh": "泥岸承托树根，前缘有较低的潮沟。潮水升高时，会盖住更多泥面。[S27, S30]"
       },
       "primitive": {
         "kind": "extrude",
@@ -110,12 +110,12 @@
       },
       "group": "habitat",
       "summary": {
-        "en": "Shows low and high water as two schematic poses.",
-        "zh": "以两种示意姿态显示低潮和高潮。"
+        "en": "Covers and exposes mud as the tide changes.",
+        "zh": "随潮水涨退，覆盖或露出泥面。"
       },
       "detail": {
-        "en": "Incoming tide changes the physical conditions around the mud bank. The water surface moves between two illustrative positions. [S27, S30]\n\nThese are not tide heights, a tide prediction or a water-volume calculation. The food graph uses the same links in both poses. [S30]",
-        "zh": "潮水涨落改变泥岸周围的条件；这里的水面只在两个示意位置间移动。[S27, S30]\n\n这些位置不是实测潮高或潮汐预报，也不计算水量；两种姿态使用相同的食物关系。[S30]"
+        "en": "Tides change conditions around the mudbank. Switch between low and high water to compare the exposed mud. Both views keep the same food links. [S27, S30]",
+        "zh": "潮水涨退会改变泥岸周围的条件。切换低水位和高水位，比较露出的泥面。两种画面保留相同的食物关系。[S27, S30]"
       },
       "primitive": {
         "kind": "box",
@@ -151,12 +151,12 @@
       },
       "group": "habitat",
       "summary": {
-        "en": "Marks a refuge used by fiddler crabs.",
-        "zh": "标示招潮蟹可躲藏的洞口。"
+        "en": "Provides a hiding place for fiddler crabs.",
+        "zh": "为招潮蟹提供藏身处。"
       },
       "detail": {
-        "en": "Fiddler crabs retreat into burrows during high tide. The opening remains visible as a separate habitat feature. [S5]\n\nThis short opening does not reconstruct the shape, depth or air supply of a real burrow. [S30]",
-        "zh": "招潮蟹在高潮时会退入洞中；洞口是独立的生境结构，即使蟹隐藏也仍然保留。[S5]\n\n这里只显示一个短洞口，没有重建真实洞穴的形状、深度或供气情况。[S30]"
+        "en": "Fiddler crabs retreat into burrows at high tide. The crab can be hidden while its burrow opening remains visible. [S5]\n\nOnly the opening is shown here. [S30]",
+        "zh": "高潮时，招潮蟹会退入洞中。蟹藏起来时，画面仍保留洞口。[S5]\n\n这里只显示洞口。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -203,12 +203,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Leaves make food and can excrete salt.",
-        "zh": "叶片制造食物，并能排出盐分。"
+        "en": "Makes food and releases salt through its leaves.",
+        "zh": "制造食物，并通过叶片排盐。"
       },
       "detail": {
-        "en": "Api-api Putih (Avicennia alba) has leaves with salt glands. This salt-handling feature belongs to this named plant, not every mangrove. [S3]\n\nIts shallow lateral roots connect to upright pencil-shaped breathing roots. The neighbouring Bakau is a separate tree. [S2, S3]",
-        "zh": "Api-api Putih（Avicennia alba）的叶片有盐腺；这种排盐方式属于这株具名植物，不能推广到所有红树。[S3]\n\n它的浅侧根与直立的铅笔状呼吸根相连；旁边的 Bakau 是另一株独立的树。[S2, S3]"
+        "en": "Api-api Putih (Avicennia alba) has salt glands in its leaves. These help it excrete salt. Different mangrove kinds handle salt in different ways. [S3]\n\nShallow side roots join its upright, pencil-shaped breathing roots. [S2, S3]",
+        "zh": "Api-api Putih（Avicennia alba）的叶片有盐腺，帮助它排出盐分。不同红树处理盐的方式不同。[S3]\n\n浅层侧根与直立的铅笔状呼吸根相连。[S2, S3]"
       },
       "primitive": {
         "kind": "sweep",
@@ -1399,12 +1399,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Connects the tree to its breathing roots.",
-        "zh": "把树体与呼吸根连接起来。"
+        "en": "Joins the tree to its breathing roots.",
+        "zh": "连接树体与呼吸根。"
       },
       "detail": {
-        "en": "Avicennia alba develops shallow lateral roots below the muddy surface. Upright breathing roots arise from this connected system. [S3]\n\nThe cutaway exposes the connection; the spacing and thickness here are schematic. [S30]",
-        "zh": "Avicennia alba 的浅侧根在泥面下延伸；直立的呼吸根从这套相连的根系长出。[S3]\n\n剖切让连接关系显露出来；这里的间距和粗细都是示意。[S30]"
+        "en": "Avicennia alba has shallow side roots beneath the mud. Upright breathing roots grow from them. [S3]\n\nThe cutaway shows how these roots join. [S30]",
+        "zh": "Avicennia alba 的浅层侧根在泥下延伸，直立的呼吸根从侧根长出。[S3]\n\n剖面显示这些根怎样连接。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -1536,12 +1536,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Protrudes above mud to help gas exchange.",
-        "zh": "伸出泥面，帮助气体交换。"
+        "en": "Takes in oxygen above the mud.",
+        "zh": "在泥面上方吸收氧气。"
       },
       "detail": {
-        "en": "Pencil-shaped breathing roots protrude vertically from the shallow lateral root system and take in oxygen. [S2, S3]\n\nEvery upright root in this model joins a lateral branch below the mud. The drawn heights are design values. [S30]",
-        "zh": "铅笔状呼吸根从浅侧根系统直立伸出泥面，吸收氧气。[S2, S3]\n\n模型中的每根直立根都在泥下接上侧根；画出的高度属于设计值。[S30]"
+        "en": "Pencil-shaped breathing roots grow upright from shallow side roots. They reach above the mud and take in oxygen. [S2, S3]\n\nFollow each root down to see its connection beneath the mud. [S30]",
+        "zh": "铅笔状呼吸根从浅层侧根向上长出，伸出泥面吸收氧气。[S2, S3]\n\n沿着每根呼吸根往下看，可以找到它在泥下的连接。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -1777,12 +1777,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Makes food and supplies leaf material.",
-        "zh": "制造食物，并提供叶片物质。"
+        "en": "Makes food and supplies leaves.",
+        "zh": "制造食物并供应叶片。"
       },
       "detail": {
-        "en": "This separate Bakau Minyak tree has prop roots descending from its trunk. Mangrove trees provide shelter and a supply of leaf material. [S2, S6, S8]\n\nThe food-web node represents continuing leaf supply. Removing that node does not make old fallen leaves disappear. [S30]",
-        "zh": "这株独立的 Bakau Minyak 有从树干向下延伸的支柱根；红树提供庇护和叶片物质。[S2, S6, S8]\n\n食物网节点表示持续的叶片供应；移走这个节点不会使已有落叶马上消失。[S30]"
+        "en": "Bakau Minyak has prop roots reaching down from its trunk. Mangrove trees provide shelter and leaves that can become food. [S2, S6, S8]\n\nIts food-web node supplies new leaf material. Removing it leaves old fallen leaves in the scene. [S30]",
+        "zh": "Bakau Minyak 的支柱根从树干向下伸出。红树提供庇护，叶片也能成为食物。[S2, S6, S8]\n\n它的食物网节点供应新的叶片物质。移走节点后，画面仍保留旧落叶。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -2973,12 +2973,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Anchors the tree and offers shelter.",
-        "zh": "支撑树体，并提供庇护。"
+        "en": "Anchors the tree and shelters young animals.",
+        "zh": "固定树体，并庇护幼小动物。"
       },
       "detail": {
-        "en": "Bakau prop roots extend from the trunk towards the mud and anchor the tree. Root spaces also shelter young animals. [S2]\n\nThese roots belong to the Bakau, separate from the neighbouring Api-api pencil roots. [S30]",
-        "zh": "Bakau 的支柱根从树干向泥地延伸，支撑树体；根之间的空间也能为幼小动物提供庇护。[S2]\n\n这套根属于 Bakau，与邻株 Api-api 的铅笔状根分开。[S30]"
+        "en": "Bakau prop roots reach from the trunk towards the mud and anchor the tree. Spaces between the roots shelter young animals. [S2]\n\nCompare them with the pencil-shaped roots of the neighbouring Api-api. [S30]",
+        "zh": "Bakau 的支柱根从树干伸向泥地，固定树体。根之间的空隙能庇护幼小动物。[S2]\n\n可以与旁边 Api-api 的铅笔状根比较。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -3179,12 +3179,12 @@
       },
       "group": "mangroves",
       "summary": {
-        "en": "Supplies organic material to feeding pathways.",
-        "zh": "给取食路径提供有机物质。"
+        "en": "Provides food after leaves fall.",
+        "zh": "叶片掉落后仍能提供食物。"
       },
       "detail": {
-        "en": "Some mangrove crabs eat fallen leaves and fragment them into smaller pieces. Dead leaf material still contains food energy. [S6, S24]\n\nExisting leaves stay visible when continuing tree supply is removed. Their disappearance and decomposition rate are not simulated. [S30]",
-        "zh": "有些红树林蟹取食落叶，把叶片弄成较小的碎片；死去的叶片仍含食物中的能量。[S6, S24]\n\n关闭树木持续供应时，已有落叶仍保留在画面里；这里没有模拟它们消失或分解的速率。[S30]"
+        "en": "Some mangrove crabs eat fallen leaves and break them into smaller pieces. Dead leaves still contain food energy. [S6, S24]\n\nOld leaves remain when you remove the continuing leaf supply. The calculation leaves out their decay rate. [S30]",
+        "zh": "有些红树林蟹吃落叶，把叶弄成较小的碎片。死叶仍含有食物中的能量。[S6, S24]\n\n移走持续的叶片供应后，旧落叶仍会保留。计算没有包括它们的分解速率。[S30]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3457,8 +3457,8 @@
         "zh": "利用阳光制造食物。"
       },
       "detail": {
-        "en": "Algae are producers in these selected pathways. Some fiddlers and tree-climbing crabs consume algae, with evidence from different observations. [S7, S18, S24]\n\nThis patch marks a functional group on the surface; it is not a giant visible single cell or a measured local algal cover. [S30]",
-        "zh": "藻类是这些选入路径中的生产者；一些招潮蟹和树蟹会取食藻类，证据来自不同的观察。[S7, S18, S24]\n\n这个斑块标示泥面的功能组，不是一颗肉眼可见的巨大细胞，也不是当地藻类覆盖率测量。[S30]"
+        "en": "Algae use sunlight to make food. Some fiddler crabs and climbing crabs eat algae, as recorded in different observations. [S7, S18, S24]\n\nThe patch represents algae on the mud surface. [S30]",
+        "zh": "藻类利用阳光制造食物。不同观察记录到，一些招潮蟹和攀爬蟹类会吃藻类。[S7, S18, S24]\n\n这个斑块代表泥面上的藻类。[S30]"
       },
       "primitive": {
         "kind": "lathe",
@@ -3537,12 +3537,12 @@
       },
       "group": "animals",
       "summary": {
-        "en": "Small claw feeds; the enlarged male claw displays.",
-        "zh": "小螯取食，雄蟹的大螯用于展示。"
+        "en": "Feeds with a small claw; the male displays a large claw.",
+        "zh": "用小螯取食；雄蟹用大螯展示。"
       },
       "detail": {
-        "en": "A male fiddler has one enlarged claw and a smaller feeding claw, with eye stalks and four pairs of walking legs. [S5, S32]\n\nThe group node is represented by one specimen symbol. High tide hides it in the burrow; drawing one does not report abundance. [S5, S30]",
-        "zh": "雄招潮蟹有一只大螯和一只取食小螯，还有眼柄及四对步足。[S5, S32]\n\n群组节点用一个标本符号表示；高潮时它藏进洞中。画一只不代表野外数量。[S5, S30]"
+        "en": "A male fiddler crab has one enlarged claw and a smaller feeding claw. It also has eye stalks and four pairs of walking legs. [S5, S32]\n\nAt high tide, it hides in its burrow. The single crab shape represents the group. [S5, S30]",
+        "zh": "雄招潮蟹有一只大螯和一只取食小螯，还有眼柄和四对步足。[S5, S32]\n\n高潮时，它藏进洞里。图中用一只蟹代表这一组生物。[S5, S30]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4304,12 +4304,12 @@
       },
       "group": "animals",
       "summary": {
-        "en": "Eats leaf material and can climb above water.",
-        "zh": "取食叶片物质，也能爬到水面之上。"
+        "en": "Eats leaf material and climbs above rising water.",
+        "zh": "吃叶片，也会爬到涨水水面上方。"
       },
       "detail": {
-        "en": "This teaching node groups several climbing crab kinds. Leaf material is supported by the Sungei Buloh report, while the separate algae input comes from an indexed account; these do not establish one Episesarma species diet. [S6, S7]\n\nThis specimen has four pairs of walking legs and two claws. The higher pose is schematic, with the feet against the Bakau trunk. [S32, S30]",
-        "zh": "这个教学节点合并几类会攀爬的蟹。双溪布洛报道支持叶片取食，另一个索引资料支持藻类输入；这些资料没有证实同一种 Episesarma 同时具有这份食谱。[S6, S7]\n\n这只示意标本有四对步足和一对螯；较高的姿态是示意，步足贴着 Bakau 树干。[S32, S30]"
+        "en": "This group brings together several climbing-crab kinds. Some eat leaves; others graze on algae. The leaf-feeding record comes from Sungei Buloh. These records do not give one Episesarma species a fixed diet of both foods. [S6, S7]\n\nThe crab has four pairs of walking legs and two claws. At high water, it moves up the Bakau trunk. [S32, S30]",
+        "zh": "这一组包含几类攀爬蟹。有些吃叶片，有些刮食藻类。叶片取食的记录来自双溪布洛。这些记录不表示同一种 Episesarma 固定吃这两种食物。[S6, S7]\n\n蟹有四对步足和一对螯。高水位时，它沿 Bakau 树干向上移。[S32, S30]"
       },
       "primitive": {
         "kind": "lathe",
@@ -5071,12 +5071,12 @@
       },
       "group": "animals",
       "summary": {
-        "en": "Pectoral fins move this fish over exposed mud.",
-        "zh": "胸鳍帮助这条鱼在露泥上移动。"
+        "en": "Moves across mud with fleshy pectoral fins.",
+        "zh": "用肉质胸鳍在泥面移动。"
       },
       "detail": {
-        "en": "Giant mudskippers are fish. Modified gill chambers and skin help gas exchange out of water; fleshy pectoral fins help movement. [S4]\n\nGeneral guides include crabs as food, while local diet samples differ. The selected links are possibilities, not a measured menu. [S4, S13, S31]",
-        "zh": "弹涂鱼是鱼；特化的鳃腔和皮肤帮助它离水时进行气体交换，肉质胸鳍帮助移动。[S4]\n\n一般指南把蟹列为其食物，但不同当地样本有差异；这些线表示可能关系，不是实测食谱。[S4, S13, S31]"
+        "en": "Giant mudskippers are fish. Their modified gill chambers and skin help them breathe out of water. Fleshy pectoral fins help them move over mud. [S4]\n\nGeneral guides list crabs as food. Local diet samples differ, so the crab-to-fish arrows show possible feeding relationships. [S4, S13, S31]",
+        "zh": "弹涂鱼是鱼。特化的鳃腔和皮肤帮助它离水呼吸，肉质胸鳍帮助它在泥面移动。[S4]\n\n一般指南把蟹列为食物，当地食物样本却有差异。因此，蟹到鱼的箭头表示可能的取食关系。[S4, S13, S31]"
       },
       "primitive": {
         "kind": "sweep",
@@ -5658,12 +5658,12 @@
       },
       "group": "animals",
       "summary": {
-        "en": "Long legs, neck and bill support feeding.",
-        "zh": "长腿、长颈与长喙帮助取食。"
+        "en": "Catches food with a long neck and bill.",
+        "zh": "借助长颈和长喙捕食。"
       },
       "detail": {
-        "en": "Herons have long necks and bills and eat fish and crustaceans. NParks lists herons among predators of giant mudskippers. [S4, S29]\n\nThis two-legged specimen represents herons generally, not a verified local feeding event by one named heron species. [S30]",
-        "zh": "鹭有长颈和长喙，会吃鱼和甲壳类；NParks 把鹭列为弹涂鱼的捕食者。[S4, S29]\n\n这只两腿的标本泛指鹭类，不声称已核实某种鹭在当地发生了一次具体捕食事件。[S30]"
+        "en": "Herons have long necks and bills. They eat fish and crustaceans. NParks lists herons among the giant mudskipper’s predators. [S4, S29]\n\nThe two-legged bird represents herons as a group. [S30]",
+        "zh": "鹭有长颈和长喙，吃鱼和甲壳类。NParks 把鹭列为弹涂鱼的捕食者。[S4, S29]\n\n图中这只两腿的鸟代表鹭类。[S30]"
       },
       "primitive": {
         "kind": "lathe",
@@ -6238,12 +6238,12 @@
       },
       "group": "animals",
       "summary": {
-        "en": "Shows prey outside the selected food graph.",
-        "zh": "表示选入食物网之外的其他猎物。"
+        "en": "Provides another possible food for larger animals.",
+        "zh": "为较大的动物提供另一种可能的食物。"
       },
       "detail": {
-        "en": "Herons and giant mudskippers can eat small fish. Real organisms may have food options outside a short teaching graph. [S4, S29]\n\nThis generic fish has no solver link. Its presence reminds us that no shown path is not the same as no possible food in nature. [S30]",
-        "zh": "鹭和弹涂鱼都可能吃小鱼；真实生物的食物选择可能超出简短教学图的范围。[S4, S29]\n\n这条普通小鱼没有求解连线；它提醒我们，图内没有路径，不等于自然界没有可能的食物。[S30]"
+        "en": "Herons and giant mudskippers can eat small fish. Real animals may have more food choices than a short food web shows. [S4, S29]\n\nThis small fish lies outside the food-web calculation. [S30]",
+        "zh": "鹭和弹涂鱼都可能吃小鱼。真实动物的食物选择可能比简短食物网上显示的更多。[S4, S29]\n\n这条小鱼没有加入食物网计算。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -6801,12 +6801,12 @@
       },
       "group": "closeups",
       "summary": {
-        "en": "Helps explain decomposition of leaf material.",
-        "zh": "帮助说明叶片物质的分解。"
+        "en": "Breaks down leaf material and obtains energy.",
+        "zh": "分解叶片物质并获得能量。"
       },
       "detail": {
-        "en": "Bacteria help break down mangrove leaf litter. They obtain energy from organic material in decomposition. [S10]\n\nThese separate enlarged shapes are schematic and not to scale. They are not giant bacteria living above the mud surface. [S30]",
-        "zh": "细菌参与红树林落叶的分解；它们在分解过程中从有机物质获得能量。[S10]\n\n旁置的放大形状是示意，不按比例；这不是生活在泥面上的巨大细菌。[S30]"
+        "en": "Bacteria help break down mangrove leaf litter. They obtain energy from the organic material as it decomposes. [S10]\n\nThis close-up uses enlarged shapes to make them visible. [S30]",
+        "zh": "细菌参与红树林落叶的分解，从分解中的有机物获得能量。[S10]\n\n近景把它们放大，方便观察。[S30]"
       },
       "primitive": {
         "kind": "lathe",
@@ -7007,8 +7007,8 @@
         "zh": "分解死亡的有机物质。"
       },
       "detail": {
-        "en": "Fungi are among the organisms that break down mangrove leaf litter. They obtain energy from organic material, not from photosynthesis. [S10]\n\nThe branching threads are an enlarged schematic, not a species identification or a measured microscopic view. [S30]",
-        "zh": "真菌是参与红树林落叶分解的生物之一；它们从有机物质获得能量，不进行光合作用来制造食物。[S10]\n\n分枝丝体是放大示意，不是物种鉴定，也不是实测显微图像。[S30]"
+        "en": "Fungi help break down mangrove leaf litter. They obtain energy from organic material, without using photosynthesis to make food. [S10]\n\nThe branching threads are an enlarged diagram. [S30]",
+        "zh": "真菌参与红树林落叶的分解。它们从有机物获得能量，不通过光合作用制造食物。[S10]\n\n分枝的丝体是放大示意图。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7150,12 +7150,12 @@
       },
       "group": "closeups",
       "summary": {
-        "en": "Marks a water-retaining gill chamber.",
-        "zh": "标示能保水的鳃腔。"
+        "en": "Retains water to help the fish breathe out of water.",
+        "zh": "保留水分，帮助鱼离水呼吸。"
       },
       "detail": {
-        "en": "The giant mudskipper has modified gill chambers that support breathing out of water, alongside skin gas exchange. It remains a fish. [S4]\n\nThis open cavity is an explanatory schematic, not a verified anatomical section or a lung. No detailed gill anatomy is claimed. [S30]",
-        "zh": "弹涂鱼的特化鳃腔与皮肤气体交换，帮助它离水时呼吸；它仍然是鱼。[S4]\n\n这个开放空腔只是解释示意，不是经核实的解剖断面，也不是肺；这里没有声称显示详细鳃部结构。[S30]"
+        "en": "The giant mudskipper’s modified gill chambers and gas exchange through its skin help it breathe out of water. It is a fish. [S4]\n\nThis enlarged diagram shows a cavity, without the detailed gill anatomy. [S30]",
+        "zh": "弹涂鱼特化的鳃腔和皮肤气体交换，帮助它离水呼吸。它是鱼。[S4]\n\n这个放大的空腔是示意，没有显示详细鳃部结构。[S30]"
       },
       "primitive": {
         "kind": "sweep",
@@ -7276,12 +7276,12 @@
         "zh": "观察边界"
       },
       "summary": {
-        "en": "Marks the far observation edge.",
-        "zh": "标示远侧的观察边界。"
+        "en": "Marks a place to observe the habitat.",
+        "zh": "标示观察生境的位置。"
       },
       "detail": {
-        "en": "A simple boardwalk edge suggests observing the habitat without collecting animals. It is scenery with no geographic claim. [S30]",
-        "zh": "简洁的步道边缘提示在栖地外观察；这是场景件，没有地理含义。[S30]"
+        "en": "The boardwalk edge suggests observing without collecting animals. It is part of the display setting. [S30]",
+        "zh": "步道边缘提示观察时把动物留在原处。它是展示场景的一部分。[S30]"
       },
       "primitive": {
         "kind": "box",
@@ -7317,12 +7317,12 @@
         "zh": "教学标本底座"
       },
       "summary": {
-        "en": "Supports the habitat and separate schematic insets.",
-        "zh": "承托生境和旁置的示意近景。"
+        "en": "Supports the habitat and enlarged close-ups.",
+        "zh": "承托生境和放大近景。"
       },
       "detail": {
-        "en": "This base holds the habitat and the separate enlarged schematics. It is a display stand with no geographic meaning. [S30]",
-        "zh": "底座承托生境与旁置的放大示意，是没有地理含义的展示台。[S30]"
+        "en": "This display stand supports the habitat and the separate enlarged diagrams. [S30]",
+        "zh": "展示台承托生境和旁边独立的放大示意图。[S30]"
       },
       "primitive": {
         "kind": "box",
@@ -7397,16 +7397,16 @@
     {
       "id": "closeups",
       "name": {
-        "en": "Schematic closeups · not to scale",
-        "zh": "示意近景 · 不按比例"
+        "en": "Enlarged close-ups",
+        "zh": "放大近景"
       },
       "color": "token:ink-3"
     },
     {
       "id": "food-paths",
       "name": {
-        "en": "Selected food pathways",
-        "zh": "选入食物路径"
+        "en": "Food pathways",
+        "zh": "食物路径"
       },
       "color": "token:en-light"
     }
@@ -7486,8 +7486,8 @@
     {
       "id": "hero",
       "label": {
-        "en": "Complete habitat",
-        "zh": "完整生境"
+        "en": "Whole habitat",
+        "zh": "生境全景"
       },
       "camera": {
         "position": [
@@ -7546,8 +7546,8 @@
     {
       "id": "tide-view",
       "label": {
-        "en": "Tide poses",
-        "zh": "潮位姿态"
+        "en": "Low and high tide",
+        "zh": "低潮与高潮"
       },
       "camera": {
         "position": [
@@ -7611,8 +7611,8 @@
         "zh": "模型"
       },
       "value": {
-        "en": "Habitat study",
-        "zh": "生境研究"
+        "en": "Mangrove habitat",
+        "zh": "红树林生境"
       },
       "tag": "design"
     },
@@ -7644,8 +7644,8 @@
         "zh": "来源"
       },
       "value": {
-        "en": "Selected observations",
-        "zh": "选入的观察"
+        "en": "Feeding observations",
+        "zh": "取食观察"
       },
       "tag": "design"
     }
@@ -7834,8 +7834,8 @@
         "id": "remove",
         "kind": "choice",
         "label": {
-          "en": "Remove from this web",
-          "zh": "从这个网移走"
+          "en": "Remove from the web",
+          "zh": "从食物网移走"
         },
         "default": "none",
         "options": [
@@ -7894,8 +7894,8 @@
         "id": "inspect",
         "kind": "choice",
         "label": {
-          "en": "Inspect food pathways",
-          "zh": "查看食物路径"
+          "en": "Choose an animal to inspect",
+          "zh": "选择要查看的动物"
         },
         "default": "n-mudskipper",
         "options": [
@@ -7933,8 +7933,8 @@
         "id": "tide",
         "kind": "choice",
         "label": {
-          "en": "Diagrammatic tide pose",
-          "zh": "示意潮位姿态"
+          "en": "Tide",
+          "zh": "潮位"
         },
         "default": "low",
         "options": [
@@ -7960,8 +7960,8 @@
         "id": "present-count",
         "kind": "number",
         "label": {
-          "en": "Present nodes",
-          "zh": "未移走节点"
+          "en": "Nodes remaining",
+          "zh": "剩余节点"
         },
         "decimals": 0,
         "tag": "sim"
@@ -7970,8 +7970,8 @@
         "id": "supported-count",
         "kind": "number",
         "label": {
-          "en": "Nodes with food paths",
-          "zh": "有食物路径节点"
+          "en": "Nodes reached from producers",
+          "zh": "生产者可到达的节点"
         },
         "decimals": 0,
         "tag": "sim"
@@ -7980,8 +7980,8 @@
         "id": "active-links",
         "kind": "number",
         "label": {
-          "en": "Active links",
-          "zh": "有效连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -7995,20 +7995,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8021,20 +8021,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8047,20 +8047,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8073,20 +8073,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8099,20 +8099,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8125,20 +8125,20 @@
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8146,8 +8146,8 @@
         "id": "active-e-leaves-tree",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8156,8 +8156,8 @@
         "id": "active-e-algae-tree",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8166,8 +8166,8 @@
         "id": "active-e-algae-fiddlers",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8176,8 +8176,8 @@
         "id": "active-e-fiddlers-fish",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8186,8 +8186,8 @@
         "id": "active-e-tree-fish",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8196,8 +8196,8 @@
         "id": "active-e-fish-heron",
         "kind": "number",
         "label": {
-          "en": "Active feeding link",
-          "zh": "有效取食连线"
+          "en": "Food link remaining",
+          "zh": "剩余取食连线"
         },
         "decimals": 0,
         "tag": "sim"
@@ -8206,7 +8206,7 @@
         "id": "foods",
         "kind": "number",
         "label": {
-          "en": "Shown food types",
+          "en": "Foods in the diagram",
           "zh": "图内食物种类"
         },
         "decimals": 0,
@@ -8216,25 +8216,25 @@
         "id": "food-status",
         "kind": "state",
         "label": {
-          "en": "Food pathway status",
-          "zh": "食物路径状态"
+          "en": "Food paths",
+          "zh": "食物路径"
         },
         "states": {
           "unchanged": {
-            "en": "Same shown foods",
+            "en": "Same foods in the diagram",
             "zh": "图内食物未减少"
           },
           "fewer-foods": {
-            "en": "Fewer shown foods",
+            "en": "Fewer foods in the diagram",
             "zh": "图内食物减少"
           },
           "no-shown-food": {
             "en": "No food path shown",
-            "zh": "图内未留食物路径"
+            "zh": "图内无食物路径"
           },
           "removed": {
-            "en": "Removed from this web",
-            "zh": "已从这个网移走"
+            "en": "Removed from the web",
+            "zh": "已从食物网移走"
           }
         }
       },
@@ -8242,8 +8242,8 @@
         "id": "water-rise",
         "kind": "number",
         "label": {
-          "en": "Diagram water displacement",
-          "zh": "示意水面位移"
+          "en": "Water rise in the model",
+          "zh": "模型中水面升高量"
         },
         "decimals": 2,
         "tag": "sim"
@@ -8252,8 +8252,8 @@
         "id": "crab-rise",
         "kind": "number",
         "label": {
-          "en": "Diagram crab displacement",
-          "zh": "示意蟹位移"
+          "en": "Crab rise in the model",
+          "zh": "模型中蟹升高量"
         },
         "decimals": 2,
         "tag": "sim"
@@ -9336,8 +9336,8 @@
             "S6"
           ],
           "note": {
-            "en": "Fallen leaf material, not a living producer node for detritus.",
-            "zh": "这条边表示叶片输入，不把死叶当活生产者。"
+            "en": "Fallen leaves pass from the living tree to leaf-eating crabs.",
+            "zh": "活树的落叶供吃叶的蟹取食。"
           },
           "output": "active-e-leaves-tree"
         },
@@ -9350,8 +9350,8 @@
             "S7"
           ],
           "note": {
-            "en": "Indexed climbing-crab account. This selected group-level possibility is not a verified local Episesarma diet link. Different climbing-crab kinds are grouped here.",
-            "zh": "只读到攀爬蟹类资料的索引。此线是功能组层面的可能关系，不是本地某种 Episesarma 的已核食谱；这里合并了不同蟹类。"
+            "en": "Some climbing-crab kinds graze on algae. This group includes several kinds, with different diets.",
+            "zh": "一些攀爬蟹类会刮食藻类。这一组包含不同蟹类，食物也不同。"
           },
           "output": "active-e-algae-tree"
         },
@@ -9364,8 +9364,8 @@
             "S18"
           ],
           "note": {
-            "en": "Observed elsewhere; possible food-group link, not a Singapore measurement.",
-            "zh": "外地观察支持可能关系；不是本地食性实测。"
+            "en": "Algae feeding has been observed in fiddler crabs outside Singapore.",
+            "zh": "新加坡以外曾观察到招潮蟹吃藻类。"
           },
           "output": "active-e-algae-fiddlers"
         },
@@ -9380,8 +9380,8 @@
             "S31"
           ],
           "note": {
-            "en": "General guide differs from the Lim Chu Kang sample; not a measured local pair.",
-            "zh": "一般指南与林厝港样本不同；不是本地实测配对。"
+            "en": "General guides list crabs as food, though the Lim Chu Kang sample contained no fiddlers.",
+            "zh": "一般指南把蟹列为食物，但林厝港样本中没有检出招潮蟹。"
           },
           "output": "active-e-fiddlers-fish"
         },
@@ -9394,8 +9394,8 @@
             "S13"
           ],
           "note": {
-            "en": "The indexed paper reports opportunistic feeding on an Episesarma crab, without a feeding frequency. This functional group includes other climbing crabs.",
-            "zh": "论文索引报告了对 Episesarma 蟹的机会取食观察，没有取食频率。这个功能组也包含其他攀爬蟹类。"
+            "en": "A mudskipper was reported taking an Episesarma crab when the opportunity arose. The report gives no feeding frequency.",
+            "zh": "有报告记录弹涂鱼趁机会取食 Episesarma 蟹，但未给出取食频率。"
           },
           "output": "active-e-tree-fish"
         },
@@ -9408,15 +9408,15 @@
             "S4"
           ],
           "note": {
-            "en": "NParks identifies herons as predators of giant mudskippers.",
-            "zh": "NParks 明述鹭会捕食这种弹涂鱼。"
+            "en": "Herons can catch and eat giant mudskippers.",
+            "zh": "鹭会捕食弹涂鱼。"
           },
           "output": "active-e-fish-heron"
         }
       ],
       "note": {
-        "en": "Selected possible feeding links. Missing pathways do not predict extinction.",
-        "zh": "这里只选入一些可能的取食关系。路径中断不等于预测灭绝。"
+        "en": "Arrows show possible food paths. A missing path here does not mean an animal will die.",
+        "zh": "箭头表示可能的食物路径。图中路径中断，不表示动物一定会死亡。"
       }
     }
   }

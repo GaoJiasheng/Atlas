@@ -49,14 +49,20 @@ export function tableContextKey(
   chapter: string,
   values: Readonly<Record<string, SimValue>>,
   vary: string,
+  ignore: readonly string[] = [],
 ): string {
   return JSON.stringify([
     chapter,
     Object.keys(values)
-      .filter((id) => id !== vary)
+      .filter((id) => id !== vary && !ignore.includes(id))
       .sort()
       .map((id) => [id, values[id]]),
   ]);
+}
+
+/** Controls that only change how the stage is drawn (the airfoil's flow view): switching them keeps the recorded rows. */
+export function displayOnlyControls(sim: { readonly airfoil?: unknown }): readonly string[] {
+  return sim.airfoil ? ['flow-view'] : [];
 }
 
 /** A prediction belongs to the exact before/after conditions, including time. */

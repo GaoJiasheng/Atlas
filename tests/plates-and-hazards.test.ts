@@ -9,6 +9,7 @@ import { decodeTopologyObject } from '../src/engines/time-scene/lib/control';
 import { toNumber } from '../src/engines/time-scene/lib/time';
 import { timeSceneGeoData, timeSceneTopicIssues } from '../src/engines/time-scene/schema';
 import { topicSchema } from '../src/content/schema/topic';
+import { catalogueQaLayers } from '../scripts/lib/catalogue-qa';
 import { catalogueFile } from '../src/engines/time-scene/catalogueSchema';
 
 const root = join(import.meta.dirname, '..');
@@ -43,6 +44,7 @@ describe('plates-and-hazards authoring contract', () => {
       expect(beat.layers).not.toContain('borders'); expect(Array.isArray(beat.highlight)).toBe(true);
       expect(beat.caption.en.trim().split(/\s+/).length).toBeLessThanOrEqual(45);
       expect(beat.caption.zh.trim().length).toBeGreaterThan(0);
+      for (const line of beat.caption.zh.split('\n')) expect(line.length, `${c.id}: ${line}`).toBeLessThanOrEqual(45);
       for (const id of beat.highlight) {
         const event = engine.events.find((e) => e.id === id);
         expect(event, id).toBeDefined();
@@ -113,20 +115,79 @@ describe('plates-and-hazards frozen map output', () => {
       if(f.geometry.type==='LineString') for(let i=1;i<f.geometry.coordinates.length;i++) expect(Math.abs(f.geometry.coordinates[i]![0]!-f.geometry.coordinates[i-1]![0]!)).toBeLessThanOrEqual(180);
     }
   });
-  it('derives earthquake visibility from UTC event day and retains numerical magnitude type/depth/update metadata', () => {
+  it('derives earthquake visibility from UTC event day, shows readable UTC times and keeps exact times in provenance', () => {
     const rows = catalogueFile.parse(geo('ph-catalogue-quake-sample')).entries;
     const byId = new Map(rows.map((r)=>[r.id,r]));
+    const exact = new Map((json(join(dir, 'provenance/quake-times.json')).records as Array<[string, number, number]>).map(([id, time, updated]) => [id, { time, updated }]));
+    expect(exact.size).toBe(3729);
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     for(const f of features('ph-quake-sample')) {
       const record = byId.get(f.properties!.id)!;
       const values = Object.fromEntries(record.rows.map((r)=>[r.key,r.value]));
-      const epoch = values.epoch as number;
-      expect(Number.isFinite(epoch)).toBe(true);
-      const day = new Date(epoch).toISOString().slice(0,10);
+      const origin = values.epoch as { en: string; zh: string };
+      const updated = values.updated as { en: string; zh: string };
+      const times = exact.get(record.id)!;
+      const at = new Date(times.time), up = new Date(times.updated);
+      const clock = at.toISOString().slice(11,16);
+      expect(origin).toEqual({ en: `${at.getUTCDate()} ${months[at.getUTCMonth()]} ${at.getUTCFullYear()}, ${clock} UTC`, zh: `${at.getUTCFullYear()}年${at.getUTCMonth()+1}月${at.getUTCDate()}日 ${clock}（UTC）` });
+      expect(updated).toEqual({ en: `${up.getUTCDate()} ${months[up.getUTCMonth()]} ${up.getUTCFullYear()}`, zh: `${up.getUTCFullYear()}年${up.getUTCMonth()+1}月${up.getUTCDate()}日` });
+      expect(JSON.stringify(record.rows)).not.toMatch(/T\d{2}:\d{2}|\d{4}-\d{2}-\d{2}|\.\d{3}Z/);
+      const day = at.toISOString().slice(0,10);
       expect(day>='2000-01-01' && day<'2025-01-01').toBe(true);
       expect(f.properties!.f).toBe(toNumber(day));
       expect(f.properties!.mag).toBeGreaterThanOrEqual(6);
-      expect(record.summary.en).toMatch(/reviewed M[0-9.]+ \([a-zA-Z]+\)/); expect(values.depth).not.toBeUndefined(); expect(values.updated).not.toBeUndefined();
+      expect(record.title).toEqual({ en: `M${f.properties!.mag} earthquake`, zh: `${f.properties!.mag} 级地震` });
+      expect(record.summary.en).toMatch(/^Reviewed record \([a-zA-Z]+\), [0-9.]+ km deep$/);
+      expect(record.rows.find((r) => r.key === 'epoch')?.label).toEqual({ en: 'Time of the earthquake', zh: '发震时间' });
+      expect(record.rows.find((r) => r.key === 'updated')?.label).toEqual({ en: 'Record last updated', zh: '记录最后更新' });
     }
+    for (const [id, time, updated, depth, shown] of [['ph-q-us6000gzyg', 1645753166554, 1791299707456, 4, '25 Feb 2022, 01:39 UTC'], ['ph-q-official20041226005853450-30', 1104022733450, 1780672574192, 30, '26 Dec 2004, 00:58 UTC']] as const) {
+      const record = byId.get(id)!;
+      expect(exact.get(id)).toEqual({ time, updated });
+      expect(record.rows.find((row) => row.key === 'epoch')!.value).toMatchObject({ en: shown });
+      expect(record.summary.en).toContain(`${depth} km deep`);
+    }
+  });
+  it('shows readable eruption dates and plain record numbers while preserving complete source records', () => {
+    const catalogue = catalogueFile.parse(geo('ph-catalogue-volcano-catalogue'));
+    const raw = json(join(dir, 'provenance/selected-eruptions.json'));
+    expect(raw.records.map((r: { properties: { Eruption_Number: number } }) => r.properties.Eruption_Number).sort()).toEqual([15589,16231,22275]);
+    for (const record of raw.records) {
+      const ep = record.properties;
+      const volcano = catalogue.entries.find((e) => e.id === `gvp-${ep.Volcano_Number}`)!;
+      const prefix = `episode-${ep.Eruption_Number}`;
+      const rows = volcano.rows.filter((row) => row.key.startsWith(prefix));
+      expect(rows).toHaveLength(4);
+      expect(rows[0]!.value).toEqual({ en: String(ep.Eruption_Number), zh: String(ep.Eruption_Number) });
+      expect(rows[1]!.value).toBe(ep.ExplosivityIndexMax);
+      expect(rows.slice(2).every((row) => typeof row.value === 'object')).toBe(true);
+      expect(JSON.stringify(rows)).not.toMatch(/StartDate|EndDate|ExplosivityIndexMax|Not recorded|1,8[18][235]/);
+    }
+    const tambora = catalogue.entries.find((e) => e.id === 'gvp-264040')!;
+    expect(tambora.rows.find((r) => r.key === 'episode-16231-start')!.value).toEqual({ en: '2 July 1812, give or take 182 days', zh: '1812 年 7 月 2 日（前后可差 182 天）' });
+    expect(tambora.rows.find((r) => r.key === 'episode-16231-end')!.value).toEqual({ en: '15 July 1815 (the exact day is uncertain)', zh: '1815 年 7 月 15 日（具体日期不确定）' });
+    expect(tambora.rows.find((r) => r.key === 'episode-16231-start')!.label).toEqual({ en: 'Eruption 1812–1815: began', zh: '1812–1815 年喷发：开始' });
+    const krakatau = catalogue.entries.find((e) => e.id === 'gvp-262000')!;
+    expect(krakatau.rows.find((r) => r.key === 'episode-15589-end')!.value).toEqual({ en: '21 October 1883 (the exact day is uncertain)', zh: '1883 年 10 月 21 日（具体日期不确定）' });
+    expect(krakatau.rows.filter((r) => r.key.endsWith('-number')).map((r) => r.value)).toEqual([{ en: '15589', zh: '15589' }, { en: '22275', zh: '22275' }]);
+    expect(JSON.stringify(catalogue.entries)).not.toContain('目录原分类');
+    for (const [suffix, value] of [['start', '18 June 2018'], ['end', '17 April 2020']]) {
+      expect(krakatau.rows.find((r) => r.key === `episode-22275-${suffix}`)!.value).toMatchObject({ en: value });
+    }
+    for (const id of Object.keys(counts).filter((id) => id.startsWith('ph-plate-'))) {
+      for (const e of catalogueFile.parse(geo(`ph-catalogue-${id.slice(3)}`)).entries) {
+        const sequence = e.rows.find((row) => row.key === 'sequence')!.value;
+        expect(sequence).toEqual({ en: /^ph-step-(\d+)-/.exec(e.id)![1], zh: /^ph-step-(\d+)-/.exec(e.id)![1] });
+      }
+    }
+  });
+  it('indexes only Tambora on the background screen, leaving plate text for later demand', () => {
+    expect(chapters[0].state.catalogueIndex).toEqual([{ layerId: 'ph-volcano-catalogue', ids: ['gvp-264040'] }]);
+    expect(chapters[0].state.layers.filter((id: string) => id.startsWith('ph-plate-'))).toHaveLength(4);
+    const required = catalogueQaLayers('plates-and-hazards', { chapter: 'background', layers: chapters[0].state.layers });
+    expect(required.indexed).toEqual(['ph-volcano-catalogue']);
+    expect(required.geometry).toHaveLength(5);
+    expect(required.geometry.filter((id) => id.startsWith('ph-plate-'))).toHaveLength(4);
   });
   it('never ships observation heights or arrival values and reveals each whole group on its source day', () => {
     for(const [year,day] of [[1883,'1883-08-27'],[2004,'2004-12-26'],[2018,'2018-12-22']] as const) {
@@ -156,7 +217,7 @@ describe('plates-and-hazards audit artefacts', () => {
   it('matches all frozen-conversion output hashes and records missing-coordinate rows', () => {
     const audit=json(join(dir,'provenance/provenance.json'));
     expect(audit.inputs).toHaveLength(26);
-    expect(audit.outputs).toHaveLength(21);
+    expect(audit.outputs).toHaveLength(23);
     for(const record of audit.outputs) {
       const bytes=readFileSync(join(root,record.file));
       expect(bytes.length,record.file).toBe(record.bytes);

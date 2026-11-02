@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { catalogueQaLayers } from '../scripts/lib/catalogue-qa';
 import type { ImpactRecord } from '../src/engines/time-scene/impactSchema';
 
 type CatalogueState = { pick: string | null; layers: Record<string, { status: string; visible: number }>; indexCount: number; renderedRows: number };
@@ -7,8 +8,13 @@ async function open(page: Page, query = '', locale = 'en') {
   await page.goto(`/${locale}/topics/plates-and-hazards/?${query}`);
   await page.waitForFunction(() => window.__atlas !== undefined);
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  // Up to ~3 MB of reference geometry and catalogue text per chapter: seconds on a loaded machine.
-  await expect.poll(async () => Object.values((await catalogue(page)).layers).every((layer) => layer.status === 'ready'), { timeout: 30_000 }).toBe(true);
+  const required = catalogueQaLayers('plates-and-hazards', await page.evaluate(() => window.__atlas!.state()));
+  // Geometry is ready independently; only the current index needs reader text.
+  await expect.poll(async () => {
+    const layers = (await catalogue(page)).layers;
+    const drawn = await page.evaluate(() => Object.keys((window.__atlas!.stats() as { features?: number; datedLayers?: Record<string, unknown> }).datedLayers ?? {}));
+    return required.geometry.every((id) => drawn.includes(id)) && required.indexed.every((id) => layers[id]?.status === 'ready');
+  }, { timeout: 30_000 }).toBe(true);
 }
 
 for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {

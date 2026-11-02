@@ -123,3 +123,76 @@ console/network, late/error request, real-device performance or browser regressi
 result is claimed here. The automated checks and tests exist; execution and visual
 acceptance remain with the main session. Gavin's Chinese sensitive-content review
 and sibling-link restoration remain listed in REVIEW.md; status stays draft.
+
+
+## Readability pass 2026-10-29
+
+Applied on 2 November 2026 under BRIEF-READ to the already published topic.
+Rewrote EN and simplified ZH across eight chapter bodies and More blocks,
+38 beat captions, nine event/place cards, 15 glossary definitions, both figure
+captions/alt texts, and topic layer/PLATE notes. Shortened sentences, explained
+terms directly, and removed repeated disclaimers and construction/reviewer
+language. Both locales retain the same facts. Facts, numerical values, source
+references, links, model data, cameras and event identities are unchanged.
+
+## Catalogue follow-up and checks (2026-11-02)
+
+The only index change implements F1: background lists Tambora without the four
+unused PB catalogue groups; their geometries remain on and their records remain
+available through later indices and map picks.
+
+Necessary qualifications remain: modern reference geography, schematic and
+exaggerated figures, eruption-date uncertainty, historical death estimates,
+2004's dead-or-missing-presumed-dead definition and incomplete country table,
+mixed earthquake magnitude types, missing observation records, and attributed
+BCA guidance without individual building ratings. Source access/recheck dates
+removed from repeated narrative sentences remain in the source notes and the
+27 October audit above; no sources were added or reverified on the web. No
+unverified 2018 death figure is introduced. The raw selected GVP episode fields
+now live in provenance/selected-eruptions.json rather than reader cards.
+
+F1's loader separates geometry readiness from selection readiness and caches
+text on index, GPU hit or geometry-resolved pick demand. Tests exercise late
+metadata, reverse load order, errors, cancellation and disposal. F2 first
+presented all 3,729 origin/update pairs as exact ISO UTC milliseconds; the
+acceptance pass (below) replaced that with readable UTC minutes. Original depth
+is kept in each bilingual summary. F3 keeps original dates including Tambora's
+2 July 1812 ±182 days and uncertain 15 July 1815, Krakatau's uncertain
+21 October 1883, and 18 June 2018–17 April 2020. PB sequence and eruption
+numbers are text. All 26 frozen inputs rehashed; 22 output hashes include the
+new raw-episode provenance file. Geometry is unchanged (1,449,977 B); catalogues
+are 4,998,800 B. First-screen artifact measurements are in docs/49 §9.5;
+no browser network performance is claimed.
+
+Validation: `pnpm check` passes with 0 errors / 0 warnings and four existing
+hints in unrelated files. `pnpm validate`: 94 topics, 0 errors / 0 warnings.
+`pnpm test`: 234 files / 6,094 tests pass, including all topic and catalogue
+ordering/error tests. A repeat alongside build/check hit the existing math
+projection test’s five-second timeout and a worker RPC timeout; the full rerun
+with two workers passes without changing test limits. Browser QA waiters now
+require enabled geometry and current indexed text, rather than every catalogue;
+they remain unexecuted, with the background demand covered by a unit oracle. `pnpm build`: 191 pages built successfully (existing Vite
+large-chunk advisory). `git diff --check` passes. A baseline comparison confirms
+chapter non-text state, numeric/source pairs, TopicLinks, event identity/numeric
+fields, source data and model inputs are preserved. Browser gates
+(shoot/e2e) are intentionally skipped under BRIEF-READ. No browser or desktop
+was opened or driven. No git writes or package/lockfile/review-queue edits.
+
+### Acceptance follow-up 2026-11-02 (catalogue readability)
+
+- Quake cards: origin time now reads "26 Dec 2004, 00:58 UTC" /
+  "2004年12月26日 00:58（UTC）" (minutes truncated, never rounded); the record
+  update reads as a UTC day. Exact millisecond values for all 3,729 records are
+  kept in provenance/quake-times.json (hashed in provenance.json, 23 outputs).
+  Card titles read "M6.1 earthquake" / "6.1 级地震"; the USGS id stays in the
+  record-id line and in search. Event 2004 detail gives 00:58 UTC; the exact
+  00:58:53.450 stays in the S54 source note.
+- Eruption rows name their eruption ("Eruption 1812–1815: began"), oldest first,
+  and say uncertainty in words ("give or take 182 days", "the exact day is
+  uncertain"). GVP evidence categories now all have Chinese text ("Eruption
+  Observed" 有人观测到喷发; "Unrest / Holocene" 全新世有活动迹象).
+- Facts check vs main: every `<Num>` value/source pair identical in all eight
+  chapters; events/glossary/topic.yaml identical apart from en/zh text. Two
+  sentences Codex added without a source were removed: that both Tambora
+  estimates include post-eruption deaths, and that Krakatau's dead died "from the
+  waves rather than lava". Catalogues total 4,941,194 B.

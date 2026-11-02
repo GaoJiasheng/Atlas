@@ -456,7 +456,7 @@ pnpm shoot sample-time --shots mine.json hero    # 自定义截图表（{name: {
 ### 年级、索引页与偏好
 
 - 站点不展示年级：没有年级选择器、章节轨没有年级芯片、规格表没有年级行；所有章节始终可进入，←→ 和上下章按钮逐章走。`level` / `levels` 只是 `topic.yaml` / 章节 / 零件上可选的规划元数据（schema 接受缺省，不渲染）。
-- 索引页（首页，视觉语法见 docs/08 §9）**只列 `status: published` 的主题**，自上而下：扉页（标题 + 最多五幅精选插图的构图）→ 六类学科行（固定 science / math / history / geography / biology / computer，每格一个 hairline 图标 + 计数，兼作筛选；没有已发布主题的类别用点线框画“即将推出”并禁用；手机上横向滚动、吸附）→ 图版目录（每个主题一张“图版”卡）→ 页脚声明 + 藏书票。卡片标签只有学科和类型（`mode`：`time` → 时间 / Time，`space` → 空间 / Space，`both` 两个都有，`lesson` → 课 / Lesson）；`PLATE NN` 按目录顺序编号；统计行由数据算出（`src/lib/home.ts topicStats`，不需要新字段）：TimeScene = 章 · 事件 · 地图（`control.json` 关键帧数），SpaceScene = 章 · 部件，MathScene = 步 · 小题 · 练习题。主题超过 9 个（`SECTION_THRESHOLD`）时目录自动按学科分节（`catalogueLayout`），学科格同时是筛选和锚点（点了滚到那一节）；单栅格里主题数为奇数时末尾补一张点线的“更多图版正在绘制”卡（列出即将推出的学科，筛选时隐藏）。
+- 索引页（首页，视觉语法见 docs/08 §9）**只列 `status: published` 的主题**，自上而下：扉页（标题 + 最多五幅精选插图的构图）→ 六类学科行（固定 science / math / history / geography / biology / computer，每格一个 hairline 图标 + 计数，兼作筛选；没有已发布主题的类别用点线框画“即将推出”并禁用；手机上横向滚动、吸附）→ 图版目录（每个主题一张“图版”卡）→ 页脚声明 + 藏书票。卡片标签只有学科和类型（`mode`：`time` → 时间 / Time，`space` → 空间 / Space，`both` 两个都有，`lesson` → 课 / Lesson）；`PLATE NN` 按目录顺序编号；统计行由数据算出（`src/lib/home.ts topicStats`，不需要新字段）：TimeScene = 章 · 事件 · 地图（`control.json` 关键帧数）；`temporalMode: climatology` 时仅把 site 点计为 places / 地点，其余模式统计不变，SpaceScene = 章 · 部件，MathScene = 步 · 小题 · 练习题。主题超过 9 个（`SECTION_THRESHOLD`）时目录自动按学科分节（`catalogueLayout`），学科格同时是筛选和锚点（点了滚到那一节）；单栅格里主题数为奇数时末尾补一张点线的“更多图版正在绘制”卡（列出即将推出的学科，筛选时隐藏）。
 - `topic.yaml` 的首页字段（都可选）：`illustration: <stem>`（`public/illustrations/<stem>.webp` + `@2x`，见下条；还没做出来时卡片画点线占位框 + 学科图标，扉页跳过它；运行时图片加载失败也退回占位框，`src/lib/drawing-fallback.ts`）、`shortTitle: { en, zh }`（扉页引线标签用的短名，缺省用标题）、`featured: true | <名次>`（上扉页；`1` 占最大位，然后 2、3…，`true` 排在有名次的后面、按目录顺序；最多五幅，只取有插图的；一个都没标就取目录里前五个有插图的）。
 - **首页插图**（`scripts/illustrate.ts`，只用 sharp）：透明底石墨铅笔素描，科学图版风格，无彩色。
   - `pnpm tsx scripts/illustrate.ts process <src.png> <stem>`：按 alpha 裁掉透明边、补成正方形（四周留 6 %）、去色，导出 `public/illustrations/<stem>.webp`（800 px，目标 ≤ 90 KB）和 `<stem>@2x.webp`（1600 px，≤ 260 KB），质量从 82 起每次降 6 直到进预算；同时把 16×16 的覆盖掩码写进 `src/lib/illustrations.json`（扉页用它把引线锚点吸到有墨的地方；清单里有这个 stem = 插图存在）。
@@ -785,7 +785,7 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 |---|---|
 | 预设 | `world`（center [20, 10]，zoom 1.4）+ `theatre`（整片区域：地图 `cameraForBounds` 套住全部数据；地图未就绪时按包围盒估算）+ `presets.json` 里的预设（按钮文字 = `label`，旁边小字写数字键）。数字键 1–9，第 10 个是 0，再往后只有按钮、不写数字。没有章节预设 |
 | 模式 | `flow`（F，= movements 图层，状态 `FLOW`）· `borders`（B，= borders 图层）· `graticule`（G，引擎本地状态）· `territory`（N，领土名称，引擎本地状态，默认开）· `reference`（R）· `presentation`（P，状态 `PRESENTATION 08/17`；底部条也有 PRESENT 按钮）· 宿主 `labels`（L） |
-| 控制面板 | `stageOverlay` 里的「图层和图例」卡（舞台 ≥ 720 px 宽时默认展开）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 名词（有 `glossary.json` 才出）/ 隐藏界面（H）；**KEY** 图例 |
+| 控制面板 | `stageOverlay` 里的「图层和图例」卡（宿主 `legendsOpen` 折叠，默认由 HUD room 求解器按舞台保底决定，docs/67 §2）：**LAYERS** 控制区 / 领土名称（N）/ 国界（B）/ 经纬网（G）/ 行动路线（F）/ 事件 / 何时加入 / 地点（有 `site` 事件才出）/ 标注（L）；**TOOLS** 与上一关键帧对照（R）/ 演示（P）/ 名词（有 `glossary.json` 才出）/ 隐藏界面（H）；**KEY** 图例 |
 | `time` | `now()`：播放头，供 `__atlas.state().playhead` |
 | `pause` | 不注册（没有自由播放）：状态行没有 PAUSED，键位表没有 SPACE，`__atlas.setPaused` 返回 false |
 | `status` | `2000-03-11`（与 `FLOW`、`REFERENCE` 等模式段一起出现在状态行） |
@@ -794,6 +794,8 @@ end_i   = start_{i+1}；本章最后一拍更晚就取最后一拍（最后一�
 | `cardToggle` | 参与卡展开 / 收起 |
 | `beats` | `usePresentation` 的 `controls`（节拍列表与跳转、自动播放、语音、voiceLog） |
 | `escape` | 依次：退出 PRESENTATION → 退出 REFERENCE → 收起展开的参与卡（连同选中的实体）→ 取消选中实体 → 关闭事件详情 → 清空 highlight（来源弹层开着时 ESC 先关弹层，由弹层自己处理） |
+
+地图分支（日期/深时、climatology、geography）的「图层和图例」卡都用 `hud/HudFold`（`FoldHeader` 一行标题 + × 关闭，≥ 44 px）：开合是宿主 `legendsOpen`，默认由求解器按实际舞台空间决定（1024×768 等窄横屏先收起图例），读者手动开合按标签页粘住、换章保留；不改变图层或 KEY 内容。
 
 LAYERS 按全题是否有数据省略空行：控制区须有非空几何；何时加入须有实体及可着色的控制区几何（仅叙事实体时不出空图层，参与方读数与卡片仍保留）；路线（连同 F 模式）须有 movements；事件须有非 site 事件；地点须有 sites。领土名称（连同 N 键）在有控制区、区域河名或今日岸线时保留，三者都没有就不出行也不注册 N。datedLayers 的作者图层原样保留；不能因为题目没有战斗就隐藏 milestones、政治事件、输水管或铁路。
 
@@ -2474,7 +2476,7 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 
 `datedLayers` 增量复用同一 GPU source、KEY、LAYERS、PLATE 与日历 playhead；旧定义省略新字段时保留 f/u 与 recent 样式。`temporal: {mode: reference, note: {en,zh}, release: "PB2002"}` 的 geometry 禁止 f/u，跨全部年代保持可见，PLATE 常显 REF.、说明与版本；`recent:false` 关闭新增点 draw layer、KEY 与计数。普通 dated 仍是有限十进制年 `f`、可选排他 `u`。`basemap:{maxZoom:8}` 可仅限制全球底图缩放。
 
-每层可加 `catalogue:{file:"my-catalogue"}`，与几何在第一次开启该层时一起读取本地 `public/geo/*.json`，关闭后缓存，不逐帧 setData；几何解码/日期建索引按250条一批让出主线程（原生JSON解析仍同步，需按完整数据实测解析时延）。文件形状：`{ entries: [{ id, title: {en,zh}, summary: {en,zh}, at: [lon,lat], sources: ["S1"], rows: [{key:"depth",label:{en:"Depth",zh:"深度"},value:null,unit:{en:"km",zh:"千米"}}] }] }`。`value` 为有限数值、非空双语或 null；null 显示 Not recorded / 未记录。entry id 直接 join 同层唯一 properties.id，全题对象命名唯一，不能复制成 event；Point 锚点与坐标相等，线在250m量化容差内，面在面内。编译校验来源、双语、rows.key 唯一、几何和目录不重不漏。观测层只接受 identity/source/type/doubtful/position/version 字段，不接受高度或到达值。
+每层可加 `catalogue:{file:"my-catalogue"}`，几何在第一次开启该层时读取本地 `public/geo/*.json`；目录文字只在当前章/拍的 `catalogueIndex` 引用该层、GPU 命中该层或 `pick` 通过几何 id 找到该层时读取一次。几何与文字独立载入；选择状态等两者完成才为 ready，文字失败不阻止几何与计数显示。关闭后缓存，不逐帧 setData；几何解码/日期建索引按250条一批让出主线程（原生JSON解析仍同步，需按完整数据实测解析时延）。文件形状：`{ entries: [{ id, title: {en,zh}, summary: {en,zh}, at: [lon,lat], sources: ["S1"], rows: [{key:"depth",label:{en:"Depth",zh:"深度"},value:null,unit:{en:"km",zh:"千米"}}] }] }`。`value` 为有限数值、非空双语或 null；null 显示 Not recorded / 未记录。entry id 直接 join 同层唯一 properties.id，全题对象命名唯一，不能复制成 event；Point 锚点与坐标相等，线在250m量化容差内，面在面内。编译校验来源、双语、rows.key 唯一、几何和目录不重不漏。观测层只接受 identity/source/type/doubtful/position/version 字段，不接受高度或到达值。
 
 章与拍的 `catalogueIndex:[{layerId:"my-layer",ids:["some-id"]}]` 可列指定 id；省 ids 列本层当前可见项。拍覆盖同组，省略则用章值。只交当前开启层的可见条目到 readerEnd 索引，按 id 排序，标题两语/id搜索150ms防抖，每页50行，未来记录不能点选。索引、GPU点线面命中、测试 hook 共用选择动作；事件优先，其后22px范围精算距离/id排序。详情沿现有 inspector 插槽出现在章头与拍之后、正文之前。选择以 entry.at 为镜头锚点，GPU signal overlay高亮；不为目录创建 HTML marker。
 
@@ -2535,6 +2537,8 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 宿主 context 的 `revealReader()`，选中现代证据时在桌面打开阅读列，在窄屏展开同一个阅读抽屉；不另加详情HUD。手机（≤759 px，宿主在此隐藏卡片）现代小图移入阅读面板顶部，阅读抽屉与其他 TimeScene 题一样默认收起，不在载入 / 点拍时自动展开；底栏状态行换成「所选 / 地图样本 / Δ」读数（`Timeline` 的可选 `state`），左列 PLATE 用标准可折叠 `ts-plate` 行；悬浮读数只在演示中显示。深时专用 UI（`ModernInset.tsx`、`deep-time-transport.ts`）由 View 懒加载，不进其他 TimeScene 题的 View chunk；`,` / `.` 拍键只为重建题注册。重建主题的年代立即切换离散样本，镜头仍可缓动，避免缓动年代时下载路过的所有样本、或让化石筛选/所选读数与主图暂时不一致。普通日期主题保留原时间缓动与底图行为。
 
 现代清单的可选 `referenceFile` 指向本地原始书目表，例如 `{"version":1,"references":{"6837":"Original PBDB primary_reference string"}}`。构建要求每条occurrence的PBDB文献号可解析，inspector按号显示完整原文书目，双语解释不改写原始题名；书目同样由本地缓存支持离线，不重复进入topic payload。
+
+现代发现小图的名字使用地图下方逐行换行的 HTML 按钮（`.ts-modern-label[data-id]`，字号至少12 CSS px、命中≥44 px），地图上分列编号与引线对应，避免 SVG 缩小时缩小长名称或互相覆盖；编号的大小按实际 SVG 屏幕宽度补偿。世界视图只写高亮/选中的名字，参照点在自己的区域视图也显示名字。`hosted` 表示在宿主右上卡里：卡片标题就是唯一标题、卡片的竖页签就是它的折叠，小图标题行只有视图按钮与隐藏 ×；阅读小图自行显示同一配置标题，演示小图用同一标题的 `HudFold`（`present-evidence`）。三个视图与年代筛选只在小图提供按钮，控制面板仅保留小图可见性、化石符号和经纬网开关；mode 注册及 store/test API 保留原路径。
 
 ### SpaceScene · 试一试 · 翼型（airfoil）
 

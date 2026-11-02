@@ -67,3 +67,12 @@ D01 原准备输入 SHA-256 `e874b27a51d146452be360cafb3cc50c86001074a67d534113e
 - `pnpm validate`：59主题，0错误、0警告。
 - 全库`pnpm run test --maxWorkers=1 --testTimeout=20000`：162文件、4331项全部通过，含本题11项及mission43项。先前energy默认5秒超时、fill5毫秒性能预算的负载波动分别独跑64/17项通过；最终全库单worker也全部通过，未改仓库预算或依赖配置。
 - 最终`pnpm build`通过：59主题校验0错误/0警告，121静态页面，80.93秒；生成PWA缓存。shoot/e2e仍未运行，不把静态构建成功写成视觉通过。
+
+
+### Readability pass 2026-10-29
+
+Rewrote EN/ZH chapter prose and disclosures; simplified summaries, captions, event/site cards, glossary definitions, figure captions and alt text. Replaced reviewer instructions with direct explanations. Kept accident names and death counts, UTC/Singapore timing, mass rounding, mission distinctions and cost scopes. Facts, quantities, source references, dates, coordinates, ids, links, cameras and engine behaviour are unchanged.
+
+Map provenance remains in data/SOURCES.md: Natural Earth modern coastlines and Wikidata P625 facility coordinates; no inferred orbital/lunar locations or flight paths. Static facility visibility does not establish opening dates. Historical review dates summarise earlier missions or accidents, rather than dating every result to the review day. No purchasing-power conversion or modern-value cost estimate was added.
+
+Verification: topic tests 22/22; `pnpm check` passed (0 errors, 0 warnings, 4 existing hints); `pnpm validate` passed (85 topics); `pnpm test` passed (219 files, 5,448 tests); `pnpm build` passed (173 pages). Compared original and revised quantity tags, source references, links, glossary ids and all non-text scene/data fields: unchanged. Chinese beat captions are at most 45 characters. Browser gates (`pnpm shoot`, `pnpm e2e`) skipped as instructed; no browser or desktop was opened. No git writes or package/lock/review-queue edits.

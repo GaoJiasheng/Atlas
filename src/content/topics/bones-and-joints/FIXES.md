@@ -4,16 +4,17 @@ Browser acceptance found four items that need rework rather than a small fix. Sc
 
 ## Rework completed for main-session browser re-verification
 
-F2–F5 were implemented in the earlier pass below. F1 remains reopened and withdrawn; see the final section. Earlier non-browser checks are recorded in docs/57 §9.5. Browser gates were skipped as instructed; implementation completion is not a new browser acceptance claim.
+F2–F5 were implemented in the earlier pass below. F1 was reopened twice and is now done: the figure is drawn from explicit geometry (2026-11-02); see F1 and the final section. Earlier non-browser checks are recorded in docs/57 §9.5. Browser gates were skipped as instructed; implementation completion is not a new browser acceptance claim.
 
-### F1 · REOPENED · Protected-organs figure count and floating-rib attachment
+### F1 · DONE · Protected-organs figure count and floating-rib attachment
 
 `public/illustrations/figures/bones-and-joints-protected-organs.webp` (chapter 02, both locales). Counting the costochondral seams and free tips on each side from the top: 7 ribs reach the sternum, 4 join the costal margin and 3 end in free tips, so 14 ribs per side. FIGURES.md records "12 per side", which is wrong. The caption on 01-02 and the chapter text say twelve pairs.
 
 Expected: exactly 12 per side (7 true ribs to the sternum, ribs 8–10 to the costal margin, 2 floating ribs 11–12 with free tips), heart and lungs inside, sternum in front, thoracic spine behind. Count the result seam by seam and mark it up before accepting. Do not rely on the prompt. Update FIGURES.md with the real count and method.
 
+**Done (2026-11-02):** No more image generation. `scripts/figures/bones-protected-organs.ts` draws the anterior thorax from explicit geometry (T1–T12; 12 ribs per side, 7 true to the sternum, 8–10 to the cartilage above, 11–12 floating with free tips; every rib starts at its own vertebra) and writes the 1200×900 WebP. `tests/space-scene/bones-and-joints-figure.test.ts` proves the count and attachments on the geometry and checks the shipped file. Restored in chapter 02 (EN + ZH) with a caption that states the count, and the e2e image check is back. Method and hashes in FIGURES.md; the stale `rib-count.svg` overlay is removed.
 
-**Earlier pass, acceptance withdrawn:** Replaced the figure using three built-in image-generation calls and counted twelve ribs per side, but missed detached posterior ends on ribs 11–12. The 24-marker overlay in `scripts/geo/bones-and-joints/rib-count.svg` belongs to that withdrawn image. It does not establish correct posterior attachment. See the reopened item and current review in FIGURES.md.
+**Earlier pass, acceptance withdrawn:** Replaced the figure using three built-in image-generation calls and counted twelve ribs per side, but missed detached posterior ends on ribs 11–12. The 24-marker overlay `rib-count.svg` (since removed) belonged to that withdrawn image. It does not establish correct posterior attachment. See the reopened item and current review in FIGURES.md.
 
 ### F2 · DONE · Part details are reviewer notes, not student text
 
@@ -70,6 +71,10 @@ Used all four permitted built-in `image_gen` calls in graphite-plate style. Reje
 
 The last candidate was processed with `scripts/illustrate.ts figure`, inspected, and moved out of `public/` into the local review directory. Its 129,548 B / 1200×900 WebP also exceeds the existing 120 KiB target at q58. No accepted image exists, so the two `<Figure>` uses and dependent e2e image assertion remain withdrawn. No fifth generation call or anatomy edits by script were made.
 
-All four source PNGs, exact prompts and a processed review WebP are staged under this worktree's gitignored `art/planned/bones-and-joints/`; the main-checkout art directory is outside writable roots and was not overwritten. Counts, failure locations, hashes and verbatim prompts are in FIGURES.md. A further redraw remains necessary before restoring the chapter and e2e check.
+All four source PNGs, exact prompts and a processed review WebP are staged under this worktree's gitignored `art/planned/bones-and-joints/`; the main-checkout art directory is outside writable roots and was not overwritten. Counts, failure locations, hashes and verbatim prompts were recorded in FIGURES.md (condensed to a history note on 2026-11-02; the full record is in commit `b3a2696`). A further redraw remains necessary before restoring the chapter and e2e check.
 
 Current non-browser gates: `pnpm check` (0 errors/warnings), `pnpm validate` (85 topics, 0 errors/warnings), `pnpm test` (219 files; 5,448 tests passed) and `pnpm build` (173 pages) pass. `pnpm shoot` and `pnpm e2e` were skipped as requested; no browser/desktop was opened. No engine, package/lockfile or git writes.
+
+### Redrawn from geometry (2026-11-02) — DONE
+
+The figure is now generated from explicit geometry rather than an image model, so the rib count and attachments hold by construction and are unit-tested; see F1 above and FIGURES.md. Both `<Figure>` uses in chapter 02 and the e2e image assertion are restored.

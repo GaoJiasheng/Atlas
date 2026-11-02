@@ -41,3 +41,9 @@ heat.test固定0/60/120/300秒五组温度、正反热流与能量恒等式、�
 - 按brief未运行shoot/e2e；因此视觉、引线、手机布局、实际renderer性能及浏览器离线均留主会话验收，端口5443。
 
 联调中补充了“显示当前结果”操作，不修改当前输入；相应遮蔽只作用热课，已有主题保持原读数展示。章入口镜头与已校正预设同步，背景章显式标记background；水位文字统一为固定示意。
+
+## Readability pass 2026-10-29
+
+Rewrote EN/ZH text across eight chapters, 37 beat captions, apparatus cards, try-it prompts, glossary definitions, figure text and PLATE/notes labels. Shortened sentences, replaced audit language with concrete explanations, and aligned the facts in both languages. Kept the fixed-bath assumption, ideal heating limits, schematic liquid levels and 500× endpoint indicator where readers need them. Scientific facts, numerical values, source references, links and all non-text model data are unchanged. The evidence sentence is a teaching prompt, not an examination marking rule; apparatus authorship and calculation provenance remain in this audit and data/SOURCES.md.
+
+Verification: topic/model tests 96/96; `pnpm check` passed (0 errors, 0 warnings, 4 existing hints); `pnpm validate` passed (85 topics); `pnpm test` passed (219 files, 5,448 tests); `pnpm build` passed (173 pages). Source files, sourced-number tags and non-text model/chapter data were compared with the originals. Chinese beat captions are all ≤45 characters. `pnpm shoot` and `pnpm e2e` were skipped as required by the brief; no browser or desktop was opened.

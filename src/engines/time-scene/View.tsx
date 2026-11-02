@@ -70,7 +70,7 @@ import { timeHudAvailability, timeLayerRows } from './lib/hud';
 import { BandCard, PerfReadout, useFps } from './hud/HudPanels';
 import { CatalogueInspector } from './CatalogueInspector';
 import { CatalogueIndex } from './CatalogueIndex';
-import { catalogueItems, resolveCataloguePick, visibleCatalogue, type CatalogueLayer } from './lib/catalogue';
+import { catalogueItems, catalogueVisible, resolveCataloguePick, visibleCatalogue, type CatalogueLayer } from './lib/catalogue';
 import { eventImpacts } from './lib/impacts';
 import { datedLayerState } from './lib/datedLayers';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
@@ -382,6 +382,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
 
 
   const [catalogueLayers, setCatalogueLayers] = useState<CatalogueLayer[]>([]);
+  const pendingCatalogueSelection = useRef<string | null>(null);
   const renderedRows = useRef(0);
   const countRows = useCallback((count: number) => { renderedRows.current = count; }, []);
   // Only catalogue layers re-render the view at a count boundary; plain dated layers (HDB blocks) keep scrubbing cheap.
@@ -389,27 +390,30 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const boundary = useSyncExternalStore(playhead.subscribe, () => catalogueIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
   const chapterState = chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined;
   const indexSpec = anchor?.tick !== null && anchor?.tick !== undefined ? chapterState?.beats?.[anchor.tick]?.catalogueIndex ?? chapterState?.catalogueIndex : chapterState?.catalogueIndex;
+  useEffect(() => controller?.setCatalogueIndex?.(indexSpec), [controller, indexSpec]);
   const catalogueEntries = useMemo(() => catalogueItems(catalogueLayers, layers, playhead.get(), indexSpec), [catalogueLayers, layers, playhead, indexSpec, boundary]);
   const selectedLayer = pick ? catalogueLayers.find((layer) => layer.entries.some((entry) => entry.id === pick)) : undefined;
-  const pickedCatalogue = selectedLayer?.entries.find((entry) => entry.id === pick);
+  const pickedCatalogue = selectedLayer?.status === 'ready' ? selectedLayer.entries.find((entry) => entry.id === pick) : undefined;
   const selectCatalogue = useCallback((id: string | null): boolean => {
     if (presentation.isPresenting()) return false;
-    if (id === null) { store.getState().patch({ pick: null }); restoreHighlight(); return true; }
+    if (id === null) { pendingCatalogueSelection.current = null; store.getState().patch({ pick: null }); restoreHighlight(); return true; }
     const current = store.getState();
-    const layer = catalogueLayers.find((layer) => current.layers.includes(layer.id) && visibleCatalogue(layer, playhead.get()).some((entry) => entry.id === id));
+    const layer = catalogueLayers.find((layer) => current.layers.includes(layer.id) && layer.status !== 'error' && layer.features.features.some((feature) => feature.properties?.id === id && catalogueVisible(layer.def, feature, playhead.get())));
     const entry = layer?.entries.find((entry) => entry.id === id);
-    if (!entry) return false;
+    if (!layer) return false;
     setSelected(null);
     setSelectedEntity(null);
-    resolvedPick.current = id;
+    pendingCatalogueSelection.current = entry ? null : id;
+    resolvedPick.current = entry ? id : null;
     current.patch({ pick: id, highlight: [] });
     const camera = current.camera;
-    current.applyCameraPreset({ center: entry.at, zoom: camera && 'zoom' in camera ? camera.zoom : 5 }, { instant: false });
+    if (entry) current.applyCameraPreset({ center: entry.at, zoom: camera && 'zoom' in camera ? camera.zoom : 5 }, { instant: false });
     revealReader();
     return true;
   }, [catalogueLayers, playhead, store, restoreHighlight, revealReader]);
   useEffect(() => {
     if (!pick) {
+      pendingCatalogueSelection.current = null;
       resolvedPick.current = null;
       if (new URLSearchParams(window.location.search).has('pick')) store.getState().patch({ pick: null });
       return;
@@ -418,13 +422,17 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     const resolution = resolveCataloguePick(pick, state.pick ?? null, topic.datedLayers ?? [], state.layers, catalogueLayers, playhead.get());
     if (resolution === 'cancelled' || resolution === 'waiting') return;
     if (resolution === 'invalid') {
+      const restore = resolvedPick.current === pick || pendingCatalogueSelection.current === pick;
+      pendingCatalogueSelection.current = null;
       state.patch({ pick: null });
-      if (resolvedPick.current === pick) restoreHighlight();
+      if (restore) restoreHighlight();
     } else {
       if (state.highlight.length) state.patch({ highlight: [] });
       if (resolvedPick.current !== pick) {
         resolvedPick.current = pick;
-        if (!new URLSearchParams(window.location.search).has('cam')) state.applyCameraPreset({ center: resolution.entry.at, zoom: state.camera && 'zoom' in state.camera ? state.camera.zoom : 5 }, { instant: true });
+        const clicked = pendingCatalogueSelection.current === pick;
+        pendingCatalogueSelection.current = null;
+        if (clicked || !new URLSearchParams(window.location.search).has('cam')) state.applyCameraPreset({ center: resolution.entry.at, zoom: state.camera && 'zoom' in state.camera ? state.camera.zoom : 5 }, { instant: !clicked });
       }
     }
   }, [pick, catalogueLayers, layers, boundary, topic.datedLayers, store, playhead, restoreHighlight]);
@@ -624,7 +632,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const panelLayers = useMemo<ControlRow[]>(
     () => reconstructed ? [
       { kind: 'layer', id: 'fossils-modern', label: { en: 'Selected fossil collections', zh: '所选化石采集记录' } },
-      ...['inset-world', 'inset-southeast-asia', 'inset-mexico', 'inset-visible', 'fossil-all'].map((id) => ({ kind: 'mode' as const, id })),
+      { kind: 'mode', id: 'inset-visible' },
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
     ] : timeLayerRows(available, locale, {
       borders: !region,
@@ -889,7 +897,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       {beatReader && <SceneSlot name="readerTop"><TimeBeatLine chapter={chapters.find((c) => c.id === currentChapter)} beat={activeBeat} locale={locale} onStep={(dir) => controls.beatStep?.(dir)} /></SceneSlot>}
       {deepTime && topic.modernInset && geologyProps && <Suspense fallback={null}>
         <ReconstructionReadout {...geologyProps} />
-        {!presenting && !narrowInset && <SceneSlot name="card"><ModernInset bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></SceneSlot>}
+        {!presenting && !narrowInset && <SceneSlot name="card"><ModernInset hosted bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></SceneSlot>}
         {!presenting && narrowInset && <SceneSlot name="readerTop"><div className="ts-modern-mobile"><ModernInset embedded bundle={deepTime} config={topic.modernInset} locale={locale} selectedMa={selectedMa} view={inset} insetVisible={insetVisible} fossilMode={fossilMode} fossilsEnabled={layers.includes('fossils-modern')} highlight={highlight} selectedObjectId={selectedObjectId} onSelect={selectModern} onPatch={modernPatch} /></div></SceneSlot>}
         <SceneSlot name="readerEnd"><ModernIndex ids={(chapters.find((c) => c.id === currentChapter)?.state as TimeChapterState)?.index ?? []} bundle={deepTime} locale={locale} onSelect={selectModern} /></SceneSlot>
         {selectedObjectId && modernObjects.has(selectedObjectId) && <SceneSlot name="readerTop"><ModernInspector references={deepTime.references} object={modernObjects.get(selectedObjectId)!} locale={locale} outsideWindow={modernObjects.get(selectedObjectId)?.kind === 'fossil-collection' && !modernCounts?.visiblePoints.some((p) => p.id === selectedObjectId)} showAll={() => modernPatch({ fossilMode: 'all-mesozoic' })} onClose={() => { setSelectedObjectId(null); store.getState().patch({ highlight: [] }); }} /></SceneSlot>}

@@ -97,8 +97,8 @@
         "zh": "加热水，产生蒸汽。"
       },
       "detail": {
-        "en": "Heat crosses the boiler wall into the water; the furnace space stays separate. This is a generic low-pressure boiler study, not the preserved original boiler. [S7]\n\nThe shell radius and length are display design dimensions, not instructions for building or operating a boiler. [S1]",
-        "zh": "热量穿过锅炉壁传给水，炉膛与水的空间分开。这里采用通用低压锅炉的示意外形，不称为保存下来的原锅炉。[S7]\n\n外壳半径和长度属于展示设计，不是制造或操作锅炉的指导。[S1]"
+        "en": "Heat passes through the boiler wall into the water. The furnace and water occupy separate spaces. This model shows a simplified low-pressure boiler. [S7]\n\nThe shell radius and length were chosen for this display. [S1]",
+        "zh": "热量穿过锅炉壁，传给里面的水。炉膛与盛水的空间分开。模型展示的是简化的低压锅炉。[S7]\n\n外壳半径和长度是为展示选定的。[S1]"
       },
       "chainName": {
         "en": "Boiler",
@@ -244,12 +244,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Receives heat and supplies water vapour.",
-        "zh": "吸收热量，产生水蒸气。"
+        "en": "Absorbs heat and changes into water vapour.",
+        "zh": "吸收热量，变成水蒸气。"
       },
       "detail": {
-        "en": "Water can change from liquid to vapour. The fixed water level is a visual aid, not a calculated inventory or a temperature reading. [S9][S1]",
-        "zh": "水可从液态变成气态。固定的液面帮助读图，不是计算出的水量，也不表示温度。[S9][S1]"
+        "en": "Heating can change liquid water into water vapour. The fixed water level marks the water space in this model. [S9][S1]",
+        "zh": "水受热后可以从液态变成水蒸气。模型用固定液面标出盛水的空间。[S9][S1]"
       },
       "chainName": {
         "en": "Boiler water",
@@ -325,12 +325,12 @@
         }
       ],
       "summary": {
-        "en": "Transfers heat towards the boiler water.",
-        "zh": "把热量传向锅炉里的水。"
+        "en": "Supplies heat to the boiler water.",
+        "zh": "向锅炉里的水供热。"
       },
       "detail": {
-        "en": "The furnace is outside the water space. Fuel supplies energy; the model does not calculate combustion, coal use or real engine efficiency. [S7][S1]",
-        "zh": "炉膛位于水的空间之外。燃料提供能量；模型没有计算燃烧、耗煤或实机效率。[S7][S1]"
+        "en": "Fuel burns in the furnace, outside the water space. It supplies energy that heats the boiler water and produces steam. [S7][S1]",
+        "zh": "燃料在炉膛中燃烧，为加热锅炉里的水提供能量，产生蒸汽。炉膛与盛水的空间分开。[S7][S1]"
       },
       "chainName": {
         "en": "Furnace",
@@ -435,8 +435,8 @@
         "zh": "让蒸汽经过节流阀，流向配汽阀。"
       },
       "detail": {
-        "en": "The two pipe sections join at the throttle. Their layout is reconstructed to separate the supply from the exhaust and moving rods. [S7][S1]",
-        "zh": "两段供汽管在节流阀处连接。管路经过重建，把供汽、排汽和运动杆件分开。[S7][S1]"
+        "en": "Two pipe sections meet at the throttle valve. This display places them apart from the exhaust pipes and moving rods, so you can follow each route. The layout is a reconstruction. [S7][S1]",
+        "zh": "两段供汽管在节流阀处相接。图中把供汽管、排汽管和运动杆件分开，方便你沿着管路看。这里的布局是重建的。[S7][S1]"
       },
       "chainName": {
         "en": "Steam main",
@@ -496,12 +496,12 @@
       },
       "shell": true,
       "summary": {
-        "en": "Houses the steam-control disc.",
-        "zh": "容纳控制供汽的阀片。"
+        "en": "Holds the disc that controls the steam opening.",
+        "zh": "容纳调节供汽开口的阀片。"
       },
       "detail": {
-        "en": "The fixed hollow body stays joined to the supply pipe. The selectable disc inside changes angle in the independent static governor comparison. [S7][S1]",
-        "zh": "固定的中空阀体连接供汽管。里面可单独选择的阀片，在独立的调速器静态比较中改变角度。[S7][S1]"
+        "en": "The hollow valve body stays fixed to the supply pipe. Inside it, a disc turns to change the opening. Select the disc to inspect it, or compare its angles at the three steady governor speeds. [S7][S1]",
+        "zh": "中空的阀体固定在供汽管上，里面的阀片转动时会改变开口。点选阀片可以细看，也可以比较调速器在三档稳定转速下的阀片角度。[S7][S1]"
       },
       "chainName": {
         "en": "Throttle body",
@@ -548,12 +548,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Changes the opening available to steam.",
-        "zh": "改变供蒸汽通过的开口。"
+        "en": "Changes the opening that steam passes through.",
+        "zh": "改变蒸汽通过的开口大小。"
       },
       "detail": {
-        "en": "The three static angles come from the model linkage. Opening is normalized by angle; it is not the same fraction of steam mass flow. [S1]\n\nThis disc is separate from the four distribution valves, which switch the cylinder connections. [S7]",
-        "zh": "三档静态角度由模型连杆位置求得。开度按角度归一化，不代表相同百分比的蒸汽质量流量。[S1]\n\n节流阀片与四个切换汽缸通路的配汽阀分开。[S7]"
+        "en": "The model’s links set the disc at three angles. The opening percentage is calculated from the angle. A given opening percentage does not mean the same percentage of steam flow. [S1]\n\nThis disc controls the supply. Four other valves switch the steam routes at the cylinder. [S7]",
+        "zh": "模型中的连杆让阀片停在三个不同角度。开度百分数按角度计算；开度是多少，并不表示蒸汽流量也占相同百分比。[S1]\n\n这块阀片控制供汽。另有四个配汽阀，负责切换汽缸的蒸汽通路。[S7]"
       },
       "chainName": {
         "en": "Throttle disc",
@@ -758,11 +758,11 @@
       "shell": true,
       "summary": {
         "en": "Connects each cylinder end to supply or exhaust.",
-        "zh": "把汽缸两端分别接到供汽或排汽通路。"
+        "zh": "把汽缸两端接到供汽或排汽通路。"
       },
       "detail": {
-        "en": "The fixed passages expose four independently selectable valve pieces. Port timing is an ideal switch from the calculated piston direction, not a measurement of Lap timing. [S7][S1]",
-        "zh": "固定通道露出四个可单独选择的阀芯。正时按计算出的活塞方向作理想切换，不是 Lap 蒸汽机的实测正时。[S7][S1]"
+        "en": "The fixed passages connect to four valve pieces. You can select each piece separately. In this model, the valves switch when the piston changes direction. This simple rule is not a measurement of the Lap engine’s valve timing. [S7][S1]",
+        "zh": "固定通道连着四个阀芯，每个都可以单独点选。模型按活塞的运动方向切换阀门。这是一条简化规则，并非 Lap 蒸汽机实测的开关时刻。[S7][S1]"
       },
       "chainName": {
         "en": "Valve chest",
@@ -810,8 +810,8 @@
         "zh": "让蒸汽进入活塞上方。"
       },
       "detail": {
-        "en": "The upper inlet is a separate lifted valve piece. It shares the calculated direction and gate with the fixed steam route. The 0.015 m lift is display design, not historical timing. [S7][S1]",
-        "zh": "这个上进汽阀是独立抬起的阀芯，与固定蒸汽路径共用计算出的方向和门控。0.015 米升程为展示设计，不是历史实测正时。[S7][S1]"
+        "en": "This separate valve piece lifts to open and admits steam above the piston. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的上进汽阀芯抬起时，让蒸汽进入活塞上方。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
       },
       "chainName": {
         "en": "Upper inlet",
@@ -853,8 +853,8 @@
         "zh": "让蒸汽进入活塞下方。"
       },
       "detail": {
-        "en": "The lower inlet is a separate lifted valve piece. It shares the calculated direction and gate with the fixed steam route. The 0.015 m lift is display design, not historical timing. [S7][S1]",
-        "zh": "这个下进汽阀是独立抬起的阀芯，与固定蒸汽路径共用计算出的方向和门控。0.015 米升程为展示设计，不是历史实测正时。[S7][S1]"
+        "en": "This separate valve piece lifts to open and admits steam below the piston. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的下进汽阀芯抬起时，让蒸汽进入活塞下方。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
       },
       "chainName": {
         "en": "Lower inlet",
@@ -896,8 +896,8 @@
         "zh": "把上部空间接到冷凝器。"
       },
       "detail": {
-        "en": "The upper exhaust is a separate lifted valve piece. It shares the calculated direction and gate with the fixed steam route. The 0.015 m lift is display design, not historical timing. [S7][S1]",
-        "zh": "这个上排汽阀是独立抬起的阀芯，与固定蒸汽路径共用计算出的方向和门控。0.015 米升程为展示设计，不是历史实测正时。[S7][S1]"
+        "en": "This separate valve piece lifts to open and lets steam above the piston leave for the condenser. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的上排汽阀芯抬起时，让活塞上方的蒸汽排向冷凝器。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
       },
       "chainName": {
         "en": "Upper exhaust",
@@ -939,8 +939,8 @@
         "zh": "把下部空间接到冷凝器。"
       },
       "detail": {
-        "en": "The lower exhaust is a separate lifted valve piece. It shares the calculated direction and gate with the fixed steam route. The 0.015 m lift is display design, not historical timing. [S7][S1]",
-        "zh": "这个下排汽阀是独立抬起的阀芯，与固定蒸汽路径共用计算出的方向和门控。0.015 米升程为展示设计，不是历史实测正时。[S7][S1]"
+        "en": "This separate valve piece lifts to open and lets steam below the piston leave for the condenser. Its opening follows the piston’s direction, matching the steam route shown. The model uses a lift of 0.015 m to make the opening visible. [S7][S1]",
+        "zh": "这个独立的下排汽阀芯抬起时，让活塞下方的蒸汽排向冷凝器。它按活塞的运动方向开关，与图中的蒸汽路径一致。模型用 0.015 米的升程显示开口。[S7][S1]"
       },
       "chainName": {
         "en": "Lower exhaust",
@@ -1038,12 +1038,12 @@
         }
       ],
       "summary": {
-        "en": "Holds steam on either side of the piston.",
-        "zh": "让蒸汽分别作用在活塞两面。"
+        "en": "Holds steam on both sides of the piston.",
+        "zh": "容纳活塞两侧的蒸汽。"
       },
       "detail": {
-        "en": "ASME records a Lap bore of 18.75 in, about 0.476 m; the Birmingham catalogue records 18 in, or 0.4572 m. Both record a 4 ft stroke, about 1.219 m. The disagreement is retained without guessing its cause. [S3][S4][S16]\n\nThe closed top has a rod opening. The display clearance is enlarged; this is not a manufacturing drawing. [S1]",
-        "zh": "ASME 记录 Lap 内径为 18.75 英寸，约 0.476 米；伯明翰目录另记 18 英寸，即 0.4572 米。两者均记行程 4 英尺，约 1.219 米。这里保留差异，不猜测原因。[S3][S4][S16]\n\n密封上盖留有活塞杆孔。显示间隙已经放大，这不是制造图。[S1]"
+        "en": "The cylinder’s bore is its inside diameter. ASME gives the Lap engine’s bore as 18.75 in, about 0.476 m. The Birmingham catalogue gives 18 in, or 0.4572 m. Both give a stroke of 4 ft, about 1.219 m. The records give different bore sizes. [S3][S4][S16]\n\nThe closed top has a hole for the piston rod. The model widens the gap around the moving parts to make them easier to see. [S1]",
+        "zh": "内径就是汽缸内部的直径。ASME 记录的 Lap 内径为 18.75 英寸，约 0.476 米。伯明翰目录记为 18 英寸，即 0.4572 米。两者都记载行程为 4 英尺，约 1.219 米。两份记录的内径不同。[S3][S4][S16]\n\n封闭的上盖留有活塞杆孔。模型放宽了运动零件周围的间隙，方便看清。[S1]"
       },
       "chainName": {
         "en": "Cylinder",
@@ -1085,12 +1085,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Receives the net pressure force.",
+        "en": "Receives the combined push from both sides.",
         "zh": "承受两侧压力产生的合力。"
       },
       "detail": {
-        "en": "Steam alternately acts on either face. The rod occupies part of the upper face, and outside air acts on the exposed rod end; the pressure table includes these areas. [S8][S1]\n\nThe radial display clearance is 3 mm. Its slight sideways motion is retained rather than hidden. [S1]",
-        "zh": "蒸汽轮流作用在活塞两面。上表面有一部分被杆占据，外界空气也作用在外露杆端；压强数表把这些面积一并计算。[S8][S1]\n\n显示径向间隙为 3 毫米。机构造成的微小横移保留在画面中，没有被隐藏。[S1]"
+        "en": "Steam acts first on one face, then on the other. The rod takes up part of the upper face. Outside air also pushes on the exposed rod end. The pressure calculations include all these areas. [S8][S1]\n\nThe model leaves a 3 mm gap around the piston. You can also see the small sideways movement caused by the linkage. [S1]",
+        "zh": "蒸汽轮流作用在活塞的两面。活塞杆占去了上表面的一部分，外界空气也推着露在外面的杆端。压强计算把这些面积都算在内。[S8][S1]\n\n模型在活塞周围留出 3 毫米的径向间隙。你还能看到连杆机构带来的微小横移。[S1]"
       },
       "chainName": {
         "en": "Piston",
@@ -1136,12 +1136,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Transfers push and pull to the linkage.",
+        "en": "Passes pushing and pulling forces to the links.",
         "zh": "把推力和拉力传给连杆机构。"
       },
       "detail": {
-        "en": "A rigid rod connects the piston to point D of the parallel motion and passes through the upper cover. Unlike a chain, it can transmit force in either direction. [S6][S7]\n\nIts model diameter is 0.040 m, a design input rather than a Lap measurement. [S1]",
-        "zh": "刚性活塞杆把活塞接到平行运动机构的 D 点，并穿过上盖。它与链条不同，可以传递两个方向的力。[S6][S7]\n\n模型杆径为 0.040 米，属于设计输入，不是 Lap 实测尺寸。[S1]"
+        "en": "This rigid rod joins the piston to point D of the parallel motion. It passes through the upper cover. A chain can only pull, but this rod can pass on both pushing and pulling forces. [S6][S7]\n\nThe rod diameter chosen for this model is 0.040 m. [S1]",
+        "zh": "这根刚性杆穿过上盖，把活塞接到平行运动机构的 D 点。链条只能拉，活塞杆却能同时传递推力和拉力。[S6][S7]\n\n为这个模型选定的杆径为 0.040 米。[S1]"
       },
       "chainName": {
         "en": "Piston rod",
@@ -1246,12 +1246,12 @@
         }
       ],
       "summary": {
-        "en": "Transfers motion between the two ends.",
-        "zh": "在两端之间传递运动。"
+        "en": "Passes motion from one end to the other.",
+        "zh": "把一端的运动传到另一端。"
       },
       "detail": {
-        "en": "A fixed central pivot supports the rigid beam. Its two sides rock together; the parallel links and connecting rod share this same calculated angle. [S6][S1]",
-        "zh": "横梁由固定的中央支点支承。两端随同一个刚体摆动；平行机构与传动杆共用这一计算角度。[S6][S1]"
+        "en": "The rigid beam rocks around a fixed central pivot. Both ends move together. The parallel links and drive rod follow the same beam angle in the model. [S6][S1]",
+        "zh": "刚性横梁绕固定的中央支点摆动，两端一起运动。模型中的平行连杆和传动杆都随横梁的同一个摆角运动。[S6][S1]"
       },
       "chainName": {
         "en": "Beam",
@@ -1300,12 +1300,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Joins C to E with one rigid link.",
+        "en": "Joins C to E with one rigid bar.",
         "zh": "用一根刚杆连接 C 点与 E 点。"
       },
       "detail": {
-        "en": "C–E is one side of the hinged parallelogram. There is no extra hinge halfway along it. All lengths are reconstructed design geometry. [S6][S1]",
-        "zh": "C–E 是铰接平行四边形的一边，中间没有额外铰链。杆长均为重建的设计尺寸。[S6][S1]"
+        "en": "The C–E bar forms one side of a parallelogram with hinged corners. It has no hinge in the middle. The bar lengths were chosen to reconstruct this mechanism. [S6][S1]",
+        "zh": "C–E 杆是平行四边形的一边，四个角由铰链连接，杆的中间没有铰链。这里的杆长是重建机构时选定的尺寸。[S6][S1]"
       },
       "chainName": {
         "en": "Inner link",
@@ -1352,12 +1352,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Joins B to D opposite the inner link.",
+        "en": "Joins B to D, opposite the inner bar.",
         "zh": "连接 B 点与 D 点，与内侧杆相对。"
       },
       "detail": {
-        "en": "B–D remains parallel to C–E. The radius rod crosses it at a different depth without forming a joint. [S6][S1]",
-        "zh": "B–D 与 C–E 保持平行。摇杆在另一深度越过它，交叉处没有连接。[S6][S1]"
+        "en": "The B–D bar stays parallel to C–E. The radius rod crosses it farther forward or back. The bars do not join at the crossing. [S6][S1]",
+        "zh": "B–D 杆始终与 C–E 杆平行。摇杆从前后错开的位置越过它，交叉处没有连接。[S6][S1]"
       },
       "chainName": {
         "en": "Outer link",
@@ -1400,12 +1400,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Closes the moving parallelogram.",
-        "zh": "闭合运动中的平行四边形。"
+        "en": "Forms the bottom of the moving parallelogram.",
+        "zh": "组成活动平行四边形的底边。"
       },
       "detail": {
-        "en": "E–D remains parallel to the beam segment C–B. Its endpoints are solved with the same frame, never moved by a separate sine wave. [S6][S1]",
-        "zh": "E–D 与横梁上的 C–B 段保持平行。两端由同一机构帧求解，不用独立的正弦动画代替。[S6][S1]"
+        "en": "The E–D bar stays parallel to the C–B section of the beam. The model calculates its two ends together with the other links, so they move as one connected mechanism. [S6][S1]",
+        "zh": "E–D 杆始终与横梁的 C–B 段平行。模型把它的两端和其他连杆一起计算，让整套相连的机构共同运动。[S6][S1]"
       },
       "chainName": {
         "en": "Bottom link",
@@ -1451,12 +1451,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Constrains E from a separate fixed pivot.",
-        "zh": "从独立固定支点约束 E 点。"
+        "en": "Guides E around a separate fixed pivot.",
+        "zh": "让 E 点绕独立的固定支点运动。"
       },
       "detail": {
-        "en": "F is fixed and E moves on a circular arc. Together with the parallelogram this guides the piston rod along a nearly straight path. The crossing with B–D is not a hinge. [S6]",
-        "zh": "F 点固定，E 点沿圆弧运动。它与平行四边形共同引导活塞杆沿近似直线运动；与 B–D 的交叉处不是铰链。[S6]"
+        "en": "Point F stays fixed while point E follows a circular arc. This rod and the parallelogram guide the piston rod along a nearly straight path. There is no hinge where this rod crosses B–D. [S6]",
+        "zh": "F 点固定不动，E 点沿圆弧运动。摇杆与平行四边形一起，引导活塞杆沿近似直线运动。它与 B–D 杆的交叉处没有铰链。[S6]"
       },
       "chainName": {
         "en": "Radius rod",
@@ -1499,12 +1499,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Carries beam motion to the planet.",
-        "zh": "把横梁运动传给行星轮。"
+        "en": "Passes the beam’s motion to the planet gear.",
+        "zh": "把横梁的运动传给行星轮。"
       },
       "detail": {
-        "en": "The planet is fixed to this rod at its lower end. It changes orientation with the rod instead of freely spinning about its own centre. [S6][S7]",
-        "zh": "行星轮固定在传动杆下端，朝向随传动杆改变，并非绕自身中心自由转动。[S6][S7]"
+        "en": "The planet gear is fixed to the lower end of this rod. As the rod tilts, the gear tilts with it. The planet gear cannot spin freely around its own centre. [S6][S7]",
+        "zh": "行星轮固定在传动杆下端。传动杆倾斜时，行星轮的朝向也随之改变。行星轮不能绕自身中心自由转动。[S6][S7]"
       },
       "chainName": {
         "en": "Connecting rod",
@@ -3937,12 +3937,12 @@
         }
       ],
       "summary": {
-        "en": "Orbits the sun while fixed to the rod.",
-        "zh": "随传动杆绕太阳轮运行。"
+        "en": "Travels around the sun gear with the drive rod.",
+        "zh": "随传动杆绕太阳轮运动。"
       },
       "detail": {
-        "en": "Equal model gears mesh without slip. A full piston cycle produces two net sun turns, while the planet returns to its initial orientation. Instantaneous speed ratio is not constant. [S6][S7][S1]",
-        "zh": "两只相等的模型齿轮无滑动啮合。活塞完成一个周期时，太阳轮净转两圈，行星轮回到原朝向；瞬时速度比并不恒定。[S6][S7][S1]"
+        "en": "The two model gears are equal in size, and their teeth mesh without slipping. During one complete piston cycle, the sun gear makes two net turns and the planet gear returns to its starting orientation. The speed ratio changes during the cycle. [S6][S7][S1]",
+        "zh": "模型中的两只齿轮大小相等，轮齿啮合时不打滑。活塞完成一个周期，太阳轮累计净转两圈，行星轮则回到起初的朝向。两者的瞬时速度比会随周期改变。[S6][S7][S1]"
       },
       "chainName": {
         "en": "Planet",
@@ -6376,12 +6376,12 @@
         }
       ],
       "summary": {
-        "en": "Turns the output shaft through gear contact.",
-        "zh": "通过齿轮啮合带动输出轴。"
+        "en": "Drives the output shaft as its teeth mesh.",
+        "zh": "通过轮齿啮合带动输出轴。"
       },
       "detail": {
-        "en": "The sun is fixed to the shaft. Its phase follows the orbit and the rod-fixed planet together; it does not use a separate rotation animation. [S6][S1]",
-        "zh": "太阳轮与输出轴固定。它的相位由轨道运动和固定在传动杆上的行星轮共同决定，不使用独立旋转动画。[S6][S1]"
+        "en": "The sun gear is fixed to the output shaft. Its turning follows both the planet’s travel around it and the tilt of the rod holding the planet. The model calculates these movements together. [S6][S1]",
+        "zh": "太阳轮固定在输出轴上。它的转动同时取决于行星轮的绕行，以及固定行星轮的传动杆怎样倾斜。模型把这些运动一起计算。[S6][S1]"
       },
       "chainName": {
         "en": "Sun",
@@ -6427,12 +6427,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Keeps the two gear centres apart.",
-        "zh": "保持两齿轮的中心距。"
+        "en": "Keeps the gear centres a fixed distance apart.",
+        "zh": "让两齿轮中心保持固定距离。"
       },
       "detail": {
-        "en": "The link pivots at the sun and planet centres. It fixes their spacing while the gear teeth transmit rotation; it is not a substitute for meshing teeth. [S6][S1]",
-        "zh": "定距连杆在太阳轮与行星轮中心转动，保持中心距；转动仍由齿轮啮合传递，连杆不能取代轮齿。[S6][S1]"
+        "en": "The link turns at the centres of the sun and planet gears. It keeps the centres the right distance apart. The meshing teeth still pass the rotation from one gear to the other. [S6][S1]",
+        "zh": "定距连杆的两端分别绕太阳轮和行星轮的中心转动，保持中心距不变。两齿轮之间的转动仍靠轮齿啮合来传递。[S6][S1]"
       },
       "chainName": {
         "en": "Centre link",
@@ -6475,12 +6475,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Carries rotation from sun to flywheel.",
+        "en": "Passes rotation from the sun gear to the flywheel.",
         "zh": "把太阳轮的转动传给飞轮。"
       },
       "detail": {
-        "en": "The sun and flywheel share the shaft angle. Bearings support its axis. This model prescribes its phase rather than calculating shaft acceleration or load power. [S6][S1]",
-        "zh": "太阳轮与飞轮共用输出轴角度，轴承支承轴线。模型按给定相位运动，没有计算轴的加速度或负载功率。[S6][S1]"
+        "en": "The sun gear and flywheel turn through the same angle on this shaft. Bearings hold the shaft in place. The model sets the shaft’s position at each stage of the cycle. [S6][S1]",
+        "zh": "太阳轮和飞轮装在同一根轴上，转过的角度相同。轴承支承着轴。模型按周期的不同阶段设定轴的转动位置。[S6][S1]"
       },
       "chainName": {
         "en": "Shaft",
@@ -6657,12 +6657,12 @@
         }
       ],
       "summary": {
-        "en": "Stores and returns rotational energy.",
-        "zh": "储存并交还转动的能量。"
+        "en": "Stores energy as it spins, then releases it.",
+        "zh": "转动时储存能量，再把能量释放出来。"
       },
       "detail": {
-        "en": "A flywheel can smooth changing motion by storing and releasing energy. The prescribed model speed is not a calculated demonstration of this effect. [S7][S1]\n\nThe reference diameter is 16 ft, about 4.88 m, reported by David K. Hulse. Sources disagree on outer drive-tooth count, so no countable outer tooth ring is drawn; the spokes are reconstruction. [S5][S3][S16]",
-        "zh": "飞轮通过储存和释放能量，使运动较为平稳。模型速度由相位给定，并非算出了这种平滑效果。[S7][S1]\n\n参考直径采用 David K. Hulse 报道的 16 英尺，约 4.88 米。来源所记外缘取力齿数不同，因此模型不画可数的外缘齿圈；辐条为重建。[S5][S3][S16]"
+        "en": "A flywheel stores and releases energy as it turns. This helps smooth out changes in motion. The model sets the speed instead of calculating this smoothing effect. [S7][S1]\n\nDavid K. Hulse reports a diameter of 16 ft, about 4.88 m. Records disagree on the number of drive teeth around the rim, so the model leaves out that tooth ring. The spokes are a reconstruction. [S5][S3][S16]",
+        "zh": "飞轮转动时储存和释放能量，让运动较为平稳。模型的速度是设定的，没有计算这种平稳效果。[S7][S1]\n\nDavid K. Hulse 报道的飞轮直径为 16 英尺，约 4.88 米。不同记录的外缘传动齿数不一致，所以模型省略了这圈轮齿。辐条也是重建的。[S5][S3][S16]"
       },
       "chainName": {
         "en": "Flywheel",
@@ -6806,12 +6806,12 @@
         }
       ],
       "summary": {
-        "en": "Supports the independent flyball comparison.",
-        "zh": "支承独立的飞球比较模型。"
+        "en": "Supports the governor balls and their arms.",
+        "zh": "支承调速器的飞球和连杆。"
       },
       "detail": {
-        "en": "Real rotating governors respond through force and linkage. This spindle remains still in the three static comparisons; the schematic belt and right-angle take-off only mark a drive connection. No belt ratio or transient response is calculated. [S7][S1]",
-        "zh": "实际旋转调速器通过受力和连杆产生反馈。本模型的调速器轴在三档静态比较中不转动，示意皮带与直角取力只标明传动连接，没有计算传动比或瞬态响应。[S7][S1]"
+        "en": "In a real governor, rotation changes the forces on the balls, and links adjust the steam supply. Here, the spindle stays still while you compare three steady positions. The display switches directly between them, keeping the rods rigid. These comparisons are separate from acceleration, engine position and cold-side pressure. [S7][S1]\n\nThe schematic belt and right-angle drive mark the power connection, without setting a drive-speed ratio.",
+        "zh": "真实调速器旋转时，飞球的受力改变，连杆随之调节供汽。这里让轴保持静止，方便比较三个稳定位置。画面直接切换位置，让杆长保持不变。这项比较与加速过程、主机位置和冷端压强分开。[S7][S1]\n\n示意皮带和直角传动标出动力连接，不设定传动比。"
       },
       "chainName": {
         "en": "Spindle",
@@ -6851,12 +6851,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Marks the radius in a static speed comparison.",
-        "zh": "标出静态转速比较中的球半径。"
+        "en": "Shows how far the left ball sits from the shaft.",
+        "zh": "显示左飞球离调速器轴有多远。"
       },
       "detail": {
-        "en": "The left ball is one of two symmetric point-mass model balls. Compare 60, 90 and 120 rpm as independent equilibria, not frames of acceleration. [S1]\n\nThe main engine phase and cold-side pressure do not drive this comparison. [S1]",
-        "zh": "左球是对称点质量模型中的一球。60、90、120 转每分是独立平衡态，不是加速过程的连续画面。[S1]\n\n主机相位和冷端压强不驱动这个比较。[S1]"
+        "en": "The two balls sit symmetrically on either side of the shaft. The calculation treats each ball’s mass as concentrated at one point. [S1]\n\nCompare the left ball’s balanced positions at 60, 90 and 120 rpm. [S1]",
+        "zh": "两只飞球对称地分布在轴的两侧。计算时，把每只球的质量看作集中在一个点上。[S1]\n\n可以比较左飞球在每分钟 60、90 和 120 转时的平衡位置。[S1]"
       },
       "chainName": {
         "en": "Left ball",
@@ -6895,12 +6895,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Marks the radius in a static speed comparison.",
-        "zh": "标出静态转速比较中的球半径。"
+        "en": "Shows how far the right ball sits from the shaft.",
+        "zh": "显示右飞球离调速器轴有多远。"
       },
       "detail": {
-        "en": "The right ball is one of two symmetric point-mass model balls. Compare 60, 90 and 120 rpm as independent equilibria, not frames of acceleration. [S1]\n\nThe main engine phase and cold-side pressure do not drive this comparison. [S1]",
-        "zh": "右球是对称点质量模型中的一球。60、90、120 转每分是独立平衡态，不是加速过程的连续画面。[S1]\n\n主机相位和冷端压强不驱动这个比较。[S1]"
+        "en": "The right ball mirrors the left ball in this symmetric model. Both balls use the same point-mass calculation. [S1]\n\nCompare the right ball’s balanced positions at 60, 90 and 120 rpm. [S1]",
+        "zh": "在这个对称模型中，右飞球与左飞球对称。两只球都按质量集中在一点来计算。[S1]\n\n可以比较右飞球在每分钟 60、90 和 120 转时的平衡位置。[S1]"
       },
       "chainName": {
         "en": "Right ball",
@@ -6950,8 +6950,8 @@
         "zh": "连接固定上支点与飞球。"
       },
       "detail": {
-        "en": "This rigid arm keeps its 0.5 m design length in every static position. The complete linkage changes instantly between solved equilibria, avoiding stretched intermediate rods. [S1]",
-        "zh": "刚性杆在各静态姿态均保持 0.5 米设计长度。完整机构在求得的平衡态之间瞬切，避免中间状态拉长杆件。[S1]"
+        "en": "This arm joins the fixed upper pivot to the left ball. It is 0.5 m long in the model and keeps that length in every steady position. [S1]",
+        "zh": "这根杆连接固定上支点与左飞球。模型中的杆长为 0.5 米，在各个稳定位置都保持不变。[S1]"
       },
       "chainName": {
         "en": "Left upper arm",
@@ -7001,8 +7001,8 @@
         "zh": "连接固定上支点与飞球。"
       },
       "detail": {
-        "en": "This rigid arm keeps its 0.5 m design length in every static position. The complete linkage changes instantly between solved equilibria, avoiding stretched intermediate rods. [S1]",
-        "zh": "刚性杆在各静态姿态均保持 0.5 米设计长度。完整机构在求得的平衡态之间瞬切，避免中间状态拉长杆件。[S1]"
+        "en": "This arm joins the fixed upper pivot to the right ball. It is 0.5 m long in the model and keeps that length as the ball moves outwards. [S1]",
+        "zh": "这根杆连接固定上支点与右飞球。模型中的杆长为 0.5 米，飞球向外移时仍保持定长。[S1]"
       },
       "chainName": {
         "en": "R upper arm",
@@ -7052,8 +7052,8 @@
         "zh": "连接飞球与滑套。"
       },
       "detail": {
-        "en": "This rigid arm keeps its 0.5 m design length in every static position. The complete linkage changes instantly between solved equilibria, avoiding stretched intermediate rods. [S1]",
-        "zh": "刚性杆在各静态姿态均保持 0.5 米设计长度。完整机构在求得的平衡态之间瞬切，避免中间状态拉长杆件。[S1]"
+        "en": "This arm joins the left ball to the sliding collar. Its model length stays at 0.5 m as the collar changes height. [S1]",
+        "zh": "这根杆连接左飞球与滑套。滑套高度改变时，模型中的杆长仍保持 0.5 米。[S1]"
       },
       "chainName": {
         "en": "lower link",
@@ -7103,8 +7103,8 @@
         "zh": "连接飞球与滑套。"
       },
       "detail": {
-        "en": "This rigid arm keeps its 0.5 m design length in every static position. The complete linkage changes instantly between solved equilibria, avoiding stretched intermediate rods. [S1]",
-        "zh": "刚性杆在各静态姿态均保持 0.5 米设计长度。完整机构在求得的平衡态之间瞬切，避免中间状态拉长杆件。[S1]"
+        "en": "This arm joins the right ball to the sliding collar. Its model length stays at 0.5 m in all three steady positions. [S1]",
+        "zh": "这根杆连接右飞球与滑套。模型中的杆长为 0.5 米，在三个稳定位置都相同。[S1]"
       },
       "chainName": {
         "en": "R lower link",
@@ -7149,12 +7149,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Moves along the governor spindle.",
-        "zh": "沿调速器轴升降。"
+        "en": "Slides up and down the governor spindle.",
+        "zh": "沿调速器轴上下滑动。"
       },
       "detail": {
-        "en": "In this symmetric model the collar rises as the prescribed static speed increases. This direction follows the chosen geometry; historical lever arrangements can differ. [S7][S1]",
-        "zh": "在这个对称模型中，指定静态转速升高时滑套上升。方向取决于本设计几何，历史机器的杠杆配置可能不同。[S7][S1]"
+        "en": "In this symmetric model, the collar sits higher at a higher steady speed. The links’ arrangement determines this direction. Historical engines could use different lever arrangements. [S7][S1]",
+        "zh": "在这个对称模型中，稳定转速越高，滑套的位置越高。这个方向由连杆的排列方式决定。历史上的蒸汽机也有不同的杠杆配置。[S7][S1]"
       },
       "chainName": {
         "en": "Collar",
@@ -7199,12 +7199,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Follows the collar without orbiting the shaft.",
-        "zh": "随滑套升降，不绕轴公转。"
+        "en": "Follows the collar up and down without orbiting.",
+        "zh": "随滑套升降，不绕轴转动。"
       },
       "detail": {
-        "en": "The fork sits in the collar groove and passes its vertical position to the throttle rod. It does not rotate around the spindle with the balls. [S7][S1]",
-        "zh": "叉环进入滑套槽，把升降位置传给节流连杆。它不随飞球绕调速器轴公转。[S7][S1]"
+        "en": "The fork fits into the collar’s groove. As the collar rises or falls, the fork passes this movement to the throttle rod. It does not travel around the spindle with the balls. [S7][S1]",
+        "zh": "叉环嵌在滑套槽里。滑套升降时，叉环把运动传给节流连杆。它不会随飞球绕调速器轴转动。[S7][S1]"
       },
       "chainName": {
         "en": "Collar fork",
@@ -7254,8 +7254,8 @@
         "zh": "连接滑套叉环与节流曲柄。"
       },
       "detail": {
-        "en": "The model selects a circle intersection for each static position. The rod keeps its design length instead of stretching between interpolated points. [S1]",
-        "zh": "模型为每个静态姿态选择圆交点，使连杆保持设计长度，不在插值过程中拉长。[S1]"
+        "en": "This fixed-length rod connects the collar fork to the throttle crank. The model uses the crossing points of two circles to find its joint positions at each steady speed. [S1]",
+        "zh": "这根定长杆把滑套叉环接到节流曲柄。模型用两个圆的交点，确定各个稳定转速下接头的位置。[S1]"
       },
       "chainName": {
         "en": "Throttle rod",
@@ -7301,12 +7301,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Turns the throttle about its fixed axis.",
-        "zh": "绕固定阀轴带动节流阀片。"
+        "en": "Turns the throttle disc around its fixed axis.",
+        "zh": "带动节流阀片绕固定轴转动。"
       },
       "detail": {
-        "en": "The crank joins the throttle rod to the disc axis. It turns with the independent disc while the surrounding body stays fixed. [S7][S1]",
-        "zh": "曲柄把节流连杆连接到阀片轴，与独立阀片一起转动，周围的阀体保持固定。[S7][S1]"
+        "en": "The crank joins the throttle rod to the disc’s axis. The crank and disc turn together while the valve body around them stays fixed. You can select the disc separately. [S7][S1]",
+        "zh": "曲柄把节流连杆接到阀片轴上。曲柄与阀片一起转动，周围的阀体保持不动。阀片可以单独点选。[S7][S1]"
       },
       "chainName": {
         "en": "Throttle crank",
@@ -7362,12 +7362,12 @@
       },
       "shell": true,
       "summary": {
-        "en": "Condenses exhaust steam away from the cylinder.",
-        "zh": "在汽缸之外让排汽凝结。"
+        "en": "Turns exhaust steam into water outside the cylinder.",
+        "zh": "在汽缸之外，把排出的蒸汽变成水。"
       },
       "detail": {
-        "en": "Exhaust meets injected cold water here. Condensation releases heat and lowers the steam pressure; the air pump removes air and the water mixture. [S7][S9]\n\nThe module is a reconstructed injection condenser. The older illustration shows only the separation principle and cannot establish its internal jet. [S1][S14]",
-        "zh": "排汽在这里接触喷入的冷水。凝结释放热量，并使蒸汽压强降低；抽气泵移走空气和混合水。[S7][S9]\n\n这里重建喷射式冷凝器。旧插图只说明冷热分离，不能用来证明内部喷口构造。[S1][S14]"
+        "en": "Exhaust steam meets a spray of cold water here. As the steam condenses, it releases heat and its pressure falls. The air pump removes air and the mixed water. [S7][S9]\n\nThe model reconstructs the injection nozzle inside the condenser. The older illustration shows the main idea: keeping the hot cylinder and cold vessel apart. [S1][S14]",
+        "zh": "排出的蒸汽在这里接触喷入的冷水。蒸汽凝结时放出热量，压强随之降低。抽气泵把空气和混合水移走。[S7][S9]\n\n冷凝器内的喷口是模型重建的。旧插图展示了主要原理：把热汽缸和冷容器分开。[S1][S14]"
       },
       "chainName": {
         "en": "Condenser",
@@ -7427,12 +7427,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Brings cold water into the condenser.",
-        "zh": "把冷水喷入冷凝器内部。"
+        "en": "Sprays cold water into the condenser.",
+        "zh": "把冷水喷入冷凝器。"
       },
       "detail": {
-        "en": "The water route ends at the mixing point inside the condenser. It does not spray into the working cylinder as in the atmospheric comparison. [S7][S1]",
-        "zh": "冷水路径在冷凝器内部的混合处结束，不像大气式比较模块那样直接喷入工作汽缸。[S7][S1]"
+        "en": "The cold-water pipe ends where water and steam mix inside the condenser. In the earlier atmospheric engine, cold water went directly into the working cylinder instead. [S7][S1]",
+        "zh": "冷水管伸到冷凝器内部，让冷水在这里与蒸汽混合。较早的大气式蒸汽机则把冷水直接喷入工作汽缸。[S7][S1]"
       },
       "chainName": {
         "en": "Injection jet",
@@ -7548,12 +7548,12 @@
       ],
       "shell": true,
       "summary": {
-        "en": "Supplies cold water around the condenser station.",
-        "zh": "为冷凝工位提供冷水。"
+        "en": "Supplies cold water to the condenser.",
+        "zh": "向冷凝器提供冷水。"
       },
       "detail": {
-        "en": "The cistern has an external cold-water connection. Water and heat leave the system; the model is not a sealed loop that needs no outside supply. [S7][S1]",
-        "zh": "冷水箱设有外来冷水接口。水和热量会离开系统；这不是无需外来供水的密闭循环。[S7][S1]"
+        "en": "This tank receives cold water from outside the system. Water and heat also leave the system, so it needs a continuing supply of fresh cooling water. [S7][S1]",
+        "zh": "冷水箱从外面接收冷水。水和热量也会排到系统之外，因此需要不断补充新的冷却水。[S7][S1]"
       },
       "chainName": {
         "en": "Cooling cistern",
@@ -7655,11 +7655,11 @@
       ],
       "summary": {
         "en": "Removes air and mixed water from the condenser.",
-        "zh": "从冷凝器移走空气和混合水。"
+        "zh": "从冷凝器抽走空气和混合水。"
       },
       "detail": {
-        "en": "The beam drives the pump rod. The upstroke draws mixture in and delivers water above the piston; on descent the mixture transfers through a check passage. Valve details are schematic. [S7][S1]",
-        "zh": "横梁带动泵杆。上行时抽入混合物，并排出活塞上方的水；下降时，混合物经止回通道转移。阀门细节为示意。[S7][S1]"
+        "en": "The beam drives the pump rod. As the pump piston rises, it draws in the mixture and sends out water from above the piston. As it descends, the mixture passes through a one-way passage. The valves are shown in a simplified form. [S7][S1]",
+        "zh": "横梁带动泵杆。泵活塞上升时，抽入混合物，并排出活塞上方的水。下降时，混合物经过只能单向流动的止回通道转移。阀门采用简化画法。[S7][S1]"
       },
       "chainName": {
         "en": "Air pump",
@@ -7717,12 +7717,12 @@
         }
       ],
       "summary": {
-        "en": "Displaces mixture through the air pump.",
-        "zh": "在抽气泵中推动混合物。"
+        "en": "Pushes the mixture through the air pump.",
+        "zh": "推动混合物通过抽气泵。"
       },
       "detail": {
-        "en": "This piston shares the main mechanism frame. Its movement is not a separate animation or a claim of constant pumping rate. [S7][S1]",
-        "zh": "泵活塞与主机共用机构帧；它不是独立动画，也不表示恒定抽送量。[S7][S1]"
+        "en": "The pump piston moves with the main engine. The model calculates their movements together, so the pump follows the beam through each stroke. The picture shows movement rather than a constant pumping rate. [S7][S1]",
+        "zh": "泵活塞随主机一起运动。模型把两者一起计算，让泵在每次行程中都随横梁运动。画面展示运动过程，不表示抽送量恒定。[S7][S1]"
       },
       "chainName": {
         "en": "Pump piston",
@@ -7765,12 +7765,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Transfers beam motion to the air-pump piston.",
-        "zh": "把横梁运动传给抽气泵活塞。"
+        "en": "Passes beam motion to the air-pump piston.",
+        "zh": "把横梁的运动传给抽气泵活塞。"
       },
       "detail": {
-        "en": "A point inside the beam end drives a fixed-length rod and vertical pump slider. Both endpoints are solved with the same phase as the main piston. [S1][S7]",
-        "zh": "横梁内侧取点通过定长杆驱动竖直泵滑块。两端与主活塞按同一相位求解。[S1][S7]"
+        "en": "A point inward from the beam’s end drives this rod. The rod keeps a fixed length and moves the pump slider vertically. Both rod ends follow the same stage of the cycle as the main piston. [S1][S7]",
+        "zh": "横梁端部以内的一个连接点带动这根杆。杆长固定，带着泵的滑块上下运动。杆的两端与主活塞按同一个周期位置运动。[S1][S7]"
       },
       "chainName": {
         "en": "Pump rod",
@@ -7844,12 +7844,12 @@
         }
       ],
       "summary": {
-        "en": "Collects the discharged warm mixture.",
-        "zh": "收集排出的温水。"
+        "en": "Collects warm water discharged by the air pump.",
+        "zh": "收集抽气泵排出的温水。"
       },
       "detail": {
-        "en": "The hot well receives water from the air pump. Only part returns as boiler feed; an overflow makes the open water balance visible. [S7][S1]",
-        "zh": "热井接收抽气泵排出的水。只有部分水返回锅炉，溢流口让开放的水量关系可见。[S7][S1]"
+        "en": "The air pump sends water into the hot well. A feed pump returns part of this water to the boiler. The rest can leave through the overflow, so water does not all circulate in a closed loop. [S7][S1]",
+        "zh": "抽气泵把水送入热井。给水泵把其中一部分送回锅炉，其余的水可以从溢流口排出。水并非全部在密闭回路中循环。[S7][S1]"
       },
       "chainName": {
         "en": "Hot well",
@@ -7924,12 +7924,12 @@
         }
       ],
       "summary": {
-        "en": "Returns part of the hot-well water to the boiler.",
+        "en": "Returns some hot-well water to the boiler.",
         "zh": "把热井中的部分水送回锅炉。"
       },
       "detail": {
-        "en": "The fixed small pump marks the feed route; this study does not solve its displacement or water flow rate. Outside water replaces what leaves the system. [S7][S1]",
-        "zh": "小型固定泵标出给水路线；本研究没有求出它的排量或水流量。外来水补充离开系统的水。[S7][S1]"
+        "en": "This small pump marks the route back to the boiler. It stays fixed in this display. Fresh water replaces water that leaves the system. [S7][S1]",
+        "zh": "这台小泵标出回到锅炉的水路，图中保持固定。新的水补进来，替代离开系统的水。[S7][S1]"
       },
       "chainName": {
         "en": "Feed pump",
@@ -8103,12 +8103,12 @@
         }
       ],
       "summary": {
-        "en": "Join injection, discharge, return and overflow.",
-        "zh": "连接注水、排水、回水与溢流。"
+        "en": "Carry water to the jet, pumps, boiler and overflow.",
+        "zh": "输送注水、排水、回水和溢流的水。"
       },
       "detail": {
-        "en": "Separate pipe sections connect the condenser, air pump, hot well and boiler. Particle dots indicate routes, not molecules, temperature or mass flow. Pipe sizes and layout are reconstructed. [S7][S1]",
-        "zh": "分开的管段连接冷凝器、抽气泵、热井和锅炉。小点表示路径，不表示分子、温度或质量流量；管径与布局经过重建。[S7][S1]"
+        "en": "Separate pipes connect the condenser, air pump, hot well and boiler. The dots help you follow each route. They do not represent molecules, temperature or the amount of water flowing. The pipe sizes and layout are reconstructed. [S7][S1]",
+        "zh": "各段水管连接冷凝器、抽气泵、热井和锅炉。小点帮助你沿水路看，不表示分子、温度或水流量。管径和布局都是重建的。[S7][S1]"
       },
       "chainName": {
         "en": "Water pipes",
@@ -8166,12 +8166,12 @@
         }
       ],
       "summary": {
-        "en": "Marks where rotation drives another machine.",
-        "zh": "标出转动向其他机器传递的位置。"
+        "en": "Passes rotation on to another machine.",
+        "zh": "把转动传给其他机器。"
       },
       "detail": {
-        "en": "The preserved Lap engine was used for metal polishing. This small take-off wheel represents mechanical drive, not an electricity generator or a measured load. [S2][S1]",
-        "zh": "保存的 Lap 蒸汽机曾用于金属磨光。这个小取力轮只表示机械传动，不是发电机，也不代表实测负载。[S2][S1]"
+        "en": "The preserved Lap engine once drove metal-polishing machinery. This small wheel shows where rotation can be passed to another machine as mechanical work. [S2][S1]",
+        "zh": "保存下来的 Lap 蒸汽机曾带动金属磨光机械。这个小轮展示转动从哪里传给另一台机器，输出机械功。[S2][S1]"
       },
       "chainName": {
         "en": "Mill drive",
@@ -8243,12 +8243,12 @@
         }
       ],
       "summary": {
-        "en": "Leaves the piston top open to the atmosphere.",
-        "zh": "让活塞上方直接接触大气。"
+        "en": "Leaves the piston’s upper face open to the air.",
+        "zh": "让活塞上表面直接接触空气。"
       },
       "detail": {
-        "en": "Steam fills the lower chamber. Cold water condenses steam inside this cylinder, unlike Watt’s separate condenser. This is an independent principle module, not a replica of the museum’s later engine. [S11][S12][S1]",
-        "zh": "蒸汽进入下部空间，冷水直接在缸内使蒸汽凝结，与瓦特的分离冷凝器不同。这是独立原理模块，不是博物馆晚期机器的复制品。[S11][S12][S1]"
+        "en": "Steam enters the space below the piston. Cold water then condenses that steam inside the cylinder. This separate model shows the earlier atmospheric-engine principle. Watt’s engine uses a separate condenser instead. [S11][S12][S1]",
+        "zh": "蒸汽进入活塞下方，冷水随后在汽缸内使它凝结。这个独立模型展示较早的大气式蒸汽机原理。瓦特的蒸汽机则使用分离冷凝器。[S11][S12][S1]"
       },
       "chainName": {
         "en": "Open cylinder",
@@ -8306,12 +8306,12 @@
         }
       ],
       "summary": {
-        "en": "Receives the atmospheric downward push.",
-        "zh": "承受大气向下的推力。"
+        "en": "Receives the downward push of the air above.",
+        "zh": "承受上方空气向下的推力。"
       },
       "detail": {
-        "en": "The lower pressure falls after condensation; air above pushes harder. A vacuum does not pull. This piston has no rod passing through a sealed upper cover, so the main-engine rod-area formula is not used. [S11][S8][S1]",
-        "zh": "凝结后下方压强降低，上方空气推得更强；并非真空在拉。这个活塞没有穿过密封上盖的杆，因此不用主机的杆面积公式。[S11][S8][S1]"
+        "en": "Condensation lowers the pressure below the piston. The air above pushes harder and drives it down; a vacuum does not pull. No rod passes through a sealed upper cover here. The calculation therefore differs from the main engine’s calculation, which includes the rod’s area. [S11][S8][S1]",
+        "zh": "凝结让活塞下方的压强降低。上方空气推得更强，便把活塞压下去，并非真空在拉。这里没有穿过密封上盖的杆，所以计算方法与要计入杆面积的主机不同。[S11][S8][S1]"
       },
       "chainName": {
         "en": "Pump piston",
@@ -8651,12 +8651,12 @@
         }
       ],
       "summary": {
-        "en": "Lifts the mine-pump rod as the piston descends.",
+        "en": "Lifts the mine-pump rod as the piston goes down.",
         "zh": "在活塞下降时提起矿井泵杆。"
       },
       "detail": {
-        "en": "Its curved end guides carry flexible chains. The poses show end states rather than measured timing, and omit the chain wrapped around the end arcs. [S11][S1]",
-        "zh": "弧端引导柔性链条。姿态显示的是端态，不是实测时序；绕过弧端的一段链条省略不画。[S11][S1]"
+        "en": "Flexible chains run over the beam’s curved ends. The model shows the positions at the ends of the strokes. The chain sections wrapped around the curves are left out of the picture. [S11][S1]",
+        "zh": "柔性链条绕过横梁的弧形端部。模型展示行程两端的位置。绕在弧端上的那段链条省略不画。[S11][S1]"
       },
       "chainName": {
         "en": "Pumping beam",
@@ -8713,12 +8713,12 @@
         }
       ],
       "summary": {
-        "en": "Provides a weighted side for the return stroke.",
-        "zh": "以沉重的泵侧帮助回程。"
+        "en": "Helps raise the engine piston on its return stroke.",
+        "zh": "在回程中帮助蒸汽机活塞升起。"
       },
       "detail": {
-        "en": "When steam enters again, the weighted pump side helps raise the engine piston. Different mine-pump arrangements need not deliver water on the same stroke. [S11][S1]",
-        "zh": "蒸汽再次进入时，沉重的泵侧帮助机缸活塞升起。不同矿井泵配置不一定在同一方向的行程排水。[S11][S1]"
+        "en": "When steam enters again, the heavy pump side helps lift the engine piston. Mine pumps had different arrangements, so they did not all deliver water on the same direction of stroke. [S11][S1]",
+        "zh": "蒸汽再次进入时，沉重的泵侧帮助蒸汽机活塞升起。矿井泵的配置有多种，不一定都在相同方向的行程排水。[S11][S1]"
       },
       "chainName": {
         "en": "Mine pump",
@@ -8756,12 +8756,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Transfers tension at the cylinder-side arc.",
+        "en": "Passes pulling force at the cylinder-side curve.",
         "zh": "在汽缸侧弧端传递拉力。"
       },
       "detail": {
-        "en": "The exposed flexible segment changes length between poses, while the piston and its rod stay rigid. A chain can pull but cannot push upwards like a rigid link. [S11][S6][S1]",
-        "zh": "姿态切换时，外露柔性链段改变长度，活塞与活塞杆保持刚性。链条能拉，不能像刚杆那样向上推。[S11][S6][S1]"
+        "en": "The exposed chain section changes length between the displayed positions. The piston and its rod remain rigid. A flexible chain can pull, but cannot push upwards like a rigid rod. [S11][S6][S1]",
+        "zh": "切换展示位置时，外露的链段长度会改变，活塞和活塞杆则保持刚性。柔性链条能拉，却不能像刚杆那样向上推。[S11][S6][S1]"
       },
       "chainName": {
         "en": "Piston chain",
@@ -8802,12 +8802,12 @@
         "dist": 0.35
       },
       "summary": {
-        "en": "Transfers tension at the pump-side arc.",
+        "en": "Passes pulling force at the pump-side curve.",
         "zh": "在泵侧弧端传递拉力。"
       },
       "detail": {
-        "en": "This chain stays between the fixed vertical tangent and the pump rod top. Its exposed length follows the same beam angle as the opposite side. [S11][S1]",
-        "zh": "链段始终连接固定竖直切点与泵杆顶端，外露长度与另一侧按同一横梁角度计算。[S11][S1]"
+        "en": "This chain runs vertically from a fixed tangent point on the beam’s curve to the pump rod’s top. As the beam rocks, its exposed length changes with the same beam angle as the chain on the other side. [S11][S1]",
+        "zh": "这根链条从横梁弧端的固定切点竖直垂下，接到泵杆顶端。横梁摆动时，两侧外露链段的长度都随同一个摆角改变。[S11][S1]"
       },
       "chainName": {
         "en": "Pump chain",
@@ -8885,12 +8885,12 @@
         }
       ],
       "summary": {
-        "en": "Sprays cold water directly into the open cylinder.",
+        "en": "Sprays cold water straight into the open cylinder.",
         "zh": "把冷水直接喷入开口汽缸。"
       },
       "detail": {
-        "en": "The jet highlights the repeated cooling of the cylinder. Steam must then warm that cylinder again. The separate supply stub and jet are fixed, not carried by the piston. [S11][S12][S1]",
-        "zh": "喷口说明汽缸被反复冷却，之后蒸汽又要把汽缸加热。独立供汽短管与喷口固定，不随活塞移动。[S11][S12][S1]"
+        "en": "The cold-water spray cools the cylinder as it condenses the steam. Incoming steam must warm the cylinder again on the next stroke. The nozzle and separate steam-supply stub stay fixed while the piston moves. [S11][S12][S1]",
+        "zh": "冷水喷入后，蒸汽凝结，汽缸也被冷却。下一次进汽时，蒸汽又要把汽缸加热。喷口和独立的供汽短管固定不动，不随活塞移动。[S11][S12][S1]"
       },
       "chainName": {
         "en": "Cylinder jet",
@@ -8929,12 +8929,12 @@
         "spacing": 0.046
       },
       "summary": {
-        "en": "Shows heat delivered to the working fluid.",
-        "zh": "显示传给工作流体的热量。"
+        "en": "Shows heat transferred to the water and steam.",
+        "zh": "显示传给水和蒸汽的热量。"
       },
       "detail": {
-        "en": "The separate input row has 100 normalized units. It represents working-fluid heat input, not all chemical energy in the fuel. [S1][S10]",
-        "zh": "独立输入排为 100 份归一化单位，表示传给工作流体的热量，不是燃料中的全部化学能。[S1][S10]"
+        "en": "The separate input row divides the heat supply into 100 equal units. These units count heat that reaches the working water and steam. They do not count all the chemical energy in the fuel. [S1][S10]",
+        "zh": "独立的输入一排把热量分成 100 等份。它只计算传给工作中的水和蒸汽的热量，不包括燃料里的全部化学能。[S1][S10]"
       },
       "chainName": {
         "en": "Heat input",
@@ -8981,12 +8981,12 @@
         "spacing": 0.046
       },
       "summary": {
-        "en": "Shows the model share leaving as work.",
-        "zh": "显示模型中以功输出的份数。"
+        "en": "Shows the share of energy that leaves as work.",
+        "zh": "显示以功的形式输出的能量份数。"
       },
       "detail": {
-        "en": "The work row shows 10, 20 or 30 normalized units. These are teaching accounts rather than efficiency measurements of the Lap engine. [S1][S10]",
-        "zh": "输出功一排显示 10、20 或 30 份归一化单位，属于教学账本，不是 Lap 蒸汽机的效率测量。[S1][S10]"
+        "en": "The work row shows 10, 20 or 30 of the equal units. These examples help you follow the energy. They are not measurements of the Lap engine’s efficiency. [S1][S10]",
+        "zh": "输出功一排显示 10、20 或 30 等份。这些例子帮助你追踪能量，并非 Lap 蒸汽机的效率测量。[S1][S10]"
       },
       "chainName": {
         "en": "Useful work",
@@ -9033,12 +9033,12 @@
         "spacing": 0.046
       },
       "summary": {
-        "en": "Completes the output account as rejected heat.",
-        "zh": "以排出热量补全输出账本。"
+        "en": "Shows the remaining energy leaving as heat.",
+        "zh": "显示其余以热量形式排出的能量。"
       },
       "detail": {
-        "en": "Rejected heat is 90, 80 or 70 units. Work plus rejection equals the separate input of 100 for a complete cycle with no net stored-energy change. [S1][S10]",
-        "zh": "排出热量为 90、80 或 70 份。完整循环的储能净变化为零，功加排热等于独立的 100 份输入。[S1][S10]"
+        "en": "The heat leaving is 90, 80 or 70 units. Add it to the work output and you get the input of 100 units. This balance describes a complete cycle, with no net change in stored energy. [S1][S10]",
+        "zh": "排出的热量为 90、80 或 70 份。把它与输出功相加，就得到输入的 100 份。这个关系适用于完整循环：循环结束时，储存的能量没有净变化。[S1][S10]"
       },
       "chainName": {
         "en": "Rejected heat",
@@ -9224,12 +9224,12 @@
       ],
       "castShadow": true,
       "summary": {
-        "en": "Supports the beam pivot and output bearings.",
-        "zh": "支承横梁支点与输出轴承。"
+        "en": "Supports the beam pivot and shaft bearings.",
+        "zh": "支承横梁支点和输出轴承。"
       },
       "detail": {
-        "en": "The timber and metal frame makes fixed pivots visible. Its members and bearing layout are reconstruction, not a digital twin of the museum object. [S2][S1]",
-        "zh": "木架与金属支架使固定支点可见。构件和轴承布局经过重建，不是馆藏机器的数字孪生。[S2][S1]"
+        "en": "The timber and metal frame holds the fixed pivots in place. The model reconstructs the frame members and bearing positions to show their roles. [S2][S1]",
+        "zh": "木架与金属支架固定各个支点。模型重建了构件和轴承的位置，展示它们的作用。[S2][S1]"
       }
     },
     {
@@ -9255,12 +9255,12 @@
       },
       "context": true,
       "summary": {
-        "en": "Supports the main demonstration station.",
-        "zh": "支承主机展示工位。"
+        "en": "Supports the main engine display.",
+        "zh": "支承主机模型。"
       },
       "detail": {
-        "en": "This display base separates the engine from the ground plane. Its dimensions are reconstructed and not a historical engine-house footprint. [S1]",
-        "zh": "展示底座把主机与地面分开。尺寸为重建，并非历史厂房的占地范围。[S1]"
+        "en": "The base lifts the engine clear of the ground in this display. Its dimensions were chosen for the model. [S1]",
+        "zh": "底座把主机托离展示地面。尺寸是为模型选定的。[S1]"
       }
     },
     {
@@ -9303,12 +9303,12 @@
       ],
       "context": true,
       "summary": {
-        "en": "Supports the boiler clear of the furnace.",
-        "zh": "使锅炉由支座承托。"
+        "en": "Supports the boiler above the furnace.",
+        "zh": "在炉膛上方承托锅炉。"
       },
       "detail": {
-        "en": "The schematic masonry seats carry the boiler. Their spacing and appearance are display design. [S1]",
-        "zh": "示意砌体支座承托锅炉，间距与外形属于展示设计。[S1]"
+        "en": "The masonry seats support the boiler. Their shape and spacing are simplified choices for this display. [S1]",
+        "zh": "砌体支座承托着锅炉。图中简化了支座的外形和间距，方便展示。[S1]"
       }
     },
     {
@@ -9367,12 +9367,12 @@
       ],
       "context": true,
       "summary": {
-        "en": "Supports the independent atmospheric comparison.",
-        "zh": "支承独立的大气式比较模型。"
+        "en": "Supports the separate atmospheric-engine model.",
+        "zh": "支承独立的大气式蒸汽机模型。"
       },
       "detail": {
-        "en": "The comparison is placed on its own stand. Its position and scale do not imply that it was part of the Lap installation. [S1]",
-        "zh": "比较模型放在独立支架上。位置与比例不表示它原本属于 Lap 装置。[S1]"
+        "en": "The atmospheric-engine model has its own stand. Its placement and size help you compare it with the Lap engine. [S1]",
+        "zh": "大气式蒸汽机模型放在独立支架上。它的位置和大小方便你与 Lap 蒸汽机作比较。[S1]"
       }
     }
   ],
@@ -11123,8 +11123,8 @@
     },
     {
       "key": {
-        "en": "Indicated work",
-        "zh": "指示功"
+        "en": "Work on the piston",
+        "zh": "作用在活塞上的功"
       },
       "unit": "kJ",
       "follow": "work-cycle",
@@ -11132,8 +11132,8 @@
     },
     {
       "key": {
-        "en": "Collar rise",
-        "zh": "滑套升程"
+        "en": "Collar height gained",
+        "zh": "滑套上升高度"
       },
       "unit": "m",
       "follow": "collar-rise",
@@ -11174,8 +11174,8 @@
         "id": "experiment",
         "kind": "choice",
         "label": {
-          "en": "Study",
-          "zh": "研究"
+          "en": "Explore",
+          "zh": "探索内容"
         },
         "options": [
           {
@@ -11213,7 +11213,7 @@
         "id": "cold-pressure",
         "kind": "step",
         "label": {
-          "en": "Cold pressure · kPa abs",
+          "en": "Cold-side pressure · kPa absolute",
           "zh": "冷端压强 · 千帕绝压"
         },
         "values": [
@@ -11241,8 +11241,8 @@
         "id": "governor-rpm",
         "kind": "step",
         "label": {
-          "en": "Steady governor rpm",
-          "zh": "调速器静态转速"
+          "en": "Steady governor speed · rpm",
+          "zh": "调速器稳定转速 · 转/分"
         },
         "values": [
           60,
@@ -11255,8 +11255,8 @@
         "id": "work-share",
         "kind": "step",
         "label": {
-          "en": "Work per hundred units",
-          "zh": "每百份中的功"
+          "en": "Work out of 100 energy units",
+          "zh": "每 100 份能量中输出的功"
         },
         "values": [
           10,
@@ -11294,8 +11294,8 @@
         "id": "phase-deg",
         "kind": "step",
         "label": {
-          "en": "Orbit phase · degrees",
-          "zh": "轨道相位 · 度"
+          "en": "Position in the orbit · degrees",
+          "zh": "绕行位置 · 度"
         },
         "values": [
           0,
@@ -11368,8 +11368,8 @@
         "kind": "number",
         "tag": "sim",
         "label": {
-          "en": "Indicated work per cycle",
-          "zh": "每周期指示功"
+          "en": "Work on the piston per cycle",
+          "zh": "每周期作用在活塞上的功"
         },
         "unit": "kJ",
         "decimals": 2
@@ -11391,7 +11391,7 @@
         "tag": "sim",
         "label": {
           "en": "Steady speed",
-          "zh": "静态转速"
+          "zh": "稳定转速"
         },
         "unit": "rpm",
         "decimals": 3
@@ -11412,8 +11412,8 @@
         "kind": "number",
         "tag": "sim",
         "label": {
-          "en": "Ball radius",
-          "zh": "球半径"
+          "en": "Ball distance from shaft",
+          "zh": "飞球离轴距离"
         },
         "unit": "m",
         "decimals": 3
@@ -11423,8 +11423,8 @@
         "kind": "number",
         "tag": "sim",
         "label": {
-          "en": "Collar rise",
-          "zh": "滑套升程"
+          "en": "Collar height gained",
+          "zh": "滑套上升高度"
         },
         "unit": "m",
         "decimals": 3
@@ -11435,7 +11435,7 @@
         "tag": "sim",
         "label": {
           "en": "Throttle opening",
-          "zh": "节流开度"
+          "zh": "节流阀开度"
         },
         "unit": "%",
         "decimals": 1
@@ -11829,16 +11829,16 @@
     },
     {
       "key": {
-        "en": "Reference flywheel",
-        "zh": "参考飞轮"
+        "en": "Reference flywheel diameter",
+        "zh": "参考飞轮直径"
       },
       "value": "≈ 4.88 m · S5",
       "tag": "design"
     },
     {
       "key": {
-        "en": "Operating study",
-        "zh": "运行研究"
+        "en": "Engine type shown",
+        "zh": "展示的蒸汽机类型"
       },
       "value": {
         "en": "Double-acting condensing",

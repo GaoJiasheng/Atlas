@@ -95,8 +95,8 @@
           "angle-deg",
           "airspeed-mps",
           {
-            "en": "Same section and reference area",
-            "zh": "翼型和参考面积不变"
+            "en": "Same wing section and reference area",
+            "zh": "翼型和参考面积保持不变"
           }
         ],
         "observe": [
@@ -106,8 +106,8 @@
         "record": true,
         "predict": {
           "prompt": {
-            "en": "In this model, the speed and the angle stay the same while the altitude goes from 0 to 10,000 metres. What happens to the lift?",
-            "zh": "在这个模型里，速度和迎角不变，高度从 0 米升到 10,000 米。升力会怎样？"
+            "en": "Keep speed and angle fixed. Raise the simulated altitude from 0 to 10,000 metres. What happens to lift?",
+            "zh": "保持速度和迎角不变，把模拟高度从 0 米升到 10,000 米，升力会怎样？"
           },
           "start": {
             "altitude-m": 0
@@ -229,8 +229,8 @@
           }
         },
         "caption": {
-          "en": "This average-atmosphere model starts near sea level. It is a reference model, not today’s Singapore weather.",
-          "zh": "这个平均大气模型从接近海平面开始。它是参考模型，不是新加坡今天的天气。"
+          "en": "Begin near sea level in the average-atmosphere model. Air density falls as height increases.",
+          "zh": "从平均大气模型中的海平面附近开始。\n高度增加，空气密度减小。"
         }
       },
       {
@@ -301,8 +301,8 @@
           }
         },
         "caption": {
-          "en": "At the same speed, angle and reference area, the thinner air gives less lift in this simulation.",
-          "zh": "在这个模拟里，速度、迎角和参考面积不变时，较稀薄的空气产生较小的升力。"
+          "en": "In this simulation, thinner air gives less lift at the same speed, angle and reference area.",
+          "zh": "这个模拟中，速度、迎角和参考面积不变，空气越稀薄，升力越小。"
         }
       },
       {
@@ -373,8 +373,8 @@
           }
         },
         "caption": {
-          "en": "Density changes the force here, while the ideal streamline shape stays the same. A real aircraft still needs to support its weight.",
-          "zh": "这里密度改变了力，理想流线的形状仍相同。真实飞机仍然需要支撑自身重量。"
+          "en": "The force falls as density falls, while the ideal streamlines keep their shape. A real aircraft still needs lift to balance its weight.",
+          "zh": "密度减小，力也减小，理想流线形状不变。\n真实飞机仍需升力支撑重量。"
         }
       },
       {
@@ -431,8 +431,8 @@
           }
         },
         "caption": {
-          "en": "Flying higher is a compromise. Aircraft performance, available thrust, weather and traffic all limit the choice; higher is not always better.",
-          "zh": "飞得更高是一种取舍。飞机性能、可用推力、天气和空中交通都会限制选择；并非越高越好。"
+          "en": "The airliner still needs enough lift and thrust. Performance, weather and air traffic help determine its cruising height. Higher is not always better.",
+          "zh": "客机仍需足够升力和推力。\n性能、天气和空中交通影响巡航高度，并非越高越好。"
         }
       }
     ]
@@ -442,29 +442,29 @@
 
 <Lang en>
 
-Air gets thinner with height. In NASA’s average-atmosphere model, both the pressure and the <Term id="air-density">air density</Term> fall as you go up. In this simulation the density is about <Num s="S58">1.23 kg/m³</Num> near sea level, about <Num s="S58">0.74 kg/m³</Num> at <Num s="S58">5,000 m</Num> and about <Num s="S58">0.41 kg/m³</Num> at <Num s="S58">10,000 m</Num>. The model is an average reference, not today’s weather over Singapore. <FlyTo preset="section-view">Go back to the experiment</FlyTo>
+Air gets thinner as height increases. In NASA’s average-atmosphere model, pressure and <Term id="air-density">air density</Term> both fall with height. Density is the mass of air in a given volume. In this simulation, it is about <Num s="S58">1.23 kg/m³</Num> near sea level, <Num s="S58">0.74 kg/m³</Num> at <Num s="S58">5,000 m</Num> and <Num s="S58">0.41 kg/m³</Num> at <Num s="S58">10,000 m</Num>. <FlyTo preset="section-view">Go back to the experiment</FlyTo>
 
-The experiment keeps the same speed, the same angle of attack and the same reference area, and only the height changes. In this simulation, at <Num s="S58">40 m/s</Num> and <Num s="S58">4°</Num>, lift falls from about <Num s="S58">924 N</Num> at sea level to about <Num s="S58">556 N</Num> at <Num s="S58">5,000 m</Num> and about <Num s="S58">312 N</Num> at <Num s="S58">10,000 m</Num>, in step with the density. The streamlines keep exactly the same shape: in the ideal model, density changes the size of the force, not the pattern of the flow.
+Keep the speed, angle of attack and reference area fixed. Change only the height. At <Num s="S58">40 m/s</Num> and <Num s="S58">4°</Num>, simulated lift falls from about <Num s="S58">924 N</Num> at sea level to <Num s="S58">556 N</Num> at <Num s="S58">5,000 m</Num> and <Num s="S58">312 N</Num> at <Num s="S58">10,000 m</Num>. Lift falls in the same proportion as density. The streamlines keep their shape: in ideal flow, density changes the force without changing the airflow pattern.
 
-This is a comparison under fixed conditions, not a picture of how a real aircraft cruises. A real aircraft still has to support its weight. Higher up it flies faster through the air or changes its angle of attack, so that its wings still give enough lift, and its engines still need enough air to work. The last beat returns to the airliner, with its weight, for that reason.
+A real aircraft still needs enough lift to support its weight. In thinner air, it can fly faster relative to the air or change its angle of attack to maintain lift. Its engines also need enough air to work. The final beat returns to the whole airliner and its weight arrow.
 
-Choosing a cruising height is a compromise. The aircraft’s performance, the thrust available, the weather and other air traffic all limit the choice, so flying higher is not always better.
+Choosing a cruising height means balancing several needs. Thinner air can reduce drag under fixed conditions, but the aircraft must still fly within its limits. Performance, available thrust, fuel, weather and air traffic all affect the choice. Flying higher is not always better.
 
 <More title={{ en: "The average-atmosphere formula", zh: "平均大气公式" }}>
 
-For the lowest layer of the atmosphere, up to the heights used here, NASA’s model gives the temperature as <Num s="S11">T = 15.04 − 0.00649 h</Num> (in °C, with h in metres), the pressure as <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num> (in kilopascals) and the density as <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>. These are curve fits to average measurements. The real air on any day can differ from this average.
+For the lowest atmospheric layer, NASA’s model gives temperature as <Num s="S11">T = 15.04 − 0.00649 h</Num>, in °C with h in metres. Pressure is <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num>, in kilopascals. Density is <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>. These formulas fit average measurements. Actual weather, including today’s weather over Singapore, can differ.
 
 </More>
 
-<More title={{ en: "What about drag", zh: "阻力会怎样" }}>
+<More title={{ en: "Drag in thinner air", zh: "稀薄空气中的阻力" }}>
 
-Drag can be written in the same form as lift, <Num s="S14">D = ½ ρ V² S Cd</Num>. With Cd, V and S kept the same, thinner air gives less drag. But a real aircraft does not keep them the same when it climbs, so this does not say how much drag an airliner has at cruise. The experiment in this topic does not calculate drag at all.
+The drag equation is <Num s="S14">D = ½ ρ V² S Cd</Num>. Cd is the drag coefficient. Keep Cd, V and S fixed, and lower density gives less drag. A real aircraft can change these quantities as it climbs, so this comparison alone cannot give its cruising drag. The wing experiment calculates lift only.
 
 </More>
 
-<More title={{ en: "Why the experiment is not a cruise", zh: "为什么这个实验不是巡航" }}>
+<More title={{ en: "From experiment to flight", zh: "从实验到飞行" }}>
 
-The card changes one thing at a time so that you can see the effect of density on its own. A flight crew must consider speed, height and angle of attack together, within limits set by the aircraft and by the air traffic around it. This topic gives no speeds or heights for real flights.
+Changing one input at a time reveals the effect of density. A flight crew considers speed, height and angle of attack together, within the aircraft’s limits and air traffic requirements. The experiment’s speeds and heights are chosen for comparison, rather than for flying a real aircraft.
 
 </More>
 
@@ -472,29 +472,29 @@ The card changes one thing at a time so that you can see the effect of density o
 
 <Lang zh>
 
-越往高处，空气越稀薄。在 NASA 的平均大气模型里，气压和<Term id="air-density">空气密度</Term>都随高度减小。在这个模拟里，接近海平面时密度约 <Num s="S58">1.23 kg/m³</Num>，<Num s="S58">5,000 m</Num> 高处约 <Num s="S58">0.74 kg/m³</Num>，<Num s="S58">10,000 m</Num> 高处约 <Num s="S58">0.41 kg/m³</Num>。这个模型给的是多年测量的平均参考值，描述的是一般情况，不是新加坡今天的天气，也不是哪一天的实测。<FlyTo preset="section-view">回到实验</FlyTo>
+越往高处，空气越稀薄。在 NASA 的平均大气模型中，气压和<Term id="air-density">空气密度</Term>都随高度减小。密度表示一定体积内空气的质量。在这个模拟里，接近海平面时约为 <Num s="S58">1.23 kg/m³</Num>；在 <Num s="S58">5,000 m</Num> 高处约为 <Num s="S58">0.74 kg/m³</Num>；在 <Num s="S58">10,000 m</Num> 高处约为 <Num s="S58">0.41 kg/m³</Num>。<FlyTo preset="section-view">回到实验</FlyTo>
 
-实验保持速度、迎角和参考面积都不变，只改变高度。在这个模拟里，速度 <Num s="S58">40 m/s</Num>、迎角 <Num s="S58">4°</Num> 时，升力从海平面的约 <Num s="S58">924 N</Num>，降到 <Num s="S58">5,000 m</Num> 高处的约 <Num s="S58">556 N</Num>，再降到 <Num s="S58">10,000 m</Num> 高处的约 <Num s="S58">312 N</Num>，和密度同比例减小。流线的形状完全没变：在理想模型里，密度改变的是力的大小，不是气流的样子。
+保持速度、迎角和参考面积不变，只改变高度。在速度 <Num s="S58">40 m/s</Num>、迎角 <Num s="S58">4°</Num> 的模拟中，升力从海平面的约 <Num s="S58">924 N</Num>，降到 <Num s="S58">5,000 m</Num> 高处的约 <Num s="S58">556 N</Num>，再降到 <Num s="S58">10,000 m</Num> 高处的约 <Num s="S58">312 N</Num>。升力和密度按同样的比例减小。流线形状保持不变：在理想流中，密度改变力的大小，却不改变气流的路线。
 
-这只是在固定条件下所做的比较，只改了高度这一个量，其他输入都固定，不代表真实飞机怎样巡航。真实飞机仍然要支撑自身的重量。飞得更高时，它相对空气飞得更快，或者改变迎角，让机翼仍有足够的升力；发动机也仍然需要足够的空气才能工作。所以最后一拍回到客机，画出它的重力。
+真实飞机仍然需要足够的升力来支撑重量。在稀薄空气中，它可以提高相对空气的速度，或改变迎角来维持升力。发动机也需要足够的空气。最后一拍回到整架客机，并画出重力箭头。真实飞机爬高时，不会把所有条件都固定。机组需要同时考虑高度、速度和迎角，让这些量互相配合。
 
-选择巡航高度是一种取舍。飞机的性能、可用的推力、天气和其他空中交通都会限制这个选择，所以并非飞得越高越好。
+选择巡航高度，要兼顾几种需要。固定条件下，稀薄空气可以减小阻力，但飞机仍要在性能限制内飞行。飞机性能、可用推力、燃油、天气和空中交通都影响这个选择，所以并非飞得越高越好。
 
 <More title={{ en: "The average-atmosphere formula", zh: "平均大气公式" }}>
 
-在大气的最低一层，也就是本主题用到的高度范围内，NASA 的模型给出：温度 <Num s="S11">T = 15.04 − 0.00649 h</Num>（单位 ℃，h 以米计），气压 <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num>（单位千帕），密度 <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>。这些公式是对平均测量值的拟合；某一天的真实空气可能与这个平均值不同。
+在大气最低的一层，NASA 模型给出的温度是 <Num s="S11">T = 15.04 − 0.00649 h</Num>，单位是 ℃，h 以米计。气压是 <Num s="S11">p = 101.29 × [(T + 273.1) / 288.08]^5.256</Num>，单位是千帕。密度是 <Num s="S11">ρ = p / [0.2869 × (T + 273.1)]</Num>。这些公式根据平均测量值拟合而成。真实天气，包括新加坡今天的天气，都可能与平均值不同。
 
 </More>
 
-<More title={{ en: "What about drag", zh: "阻力会怎样" }}>
+<More title={{ en: "Drag in thinner air", zh: "稀薄空气中的阻力" }}>
 
-阻力可以写成和升力相似的形式：<Num s="S14">D = ½ ρ V² S Cd</Num>。Cd、V、S 都不变时，空气越稀薄，阻力越小。可是真实飞机爬高时并不保持这些量不变，所以这不能说明客机巡航时阻力有多大。本主题的实验根本不计算阻力。
+阻力方程是 <Num s="S14">D = ½ ρ V² S Cd</Num>，Cd 是阻力系数。保持 Cd、V、S 不变，密度越小，阻力越小。真实飞机爬高时，这些量也可能改变，所以单靠这个比较得不出巡航时的总阻力。机翼实验只计算升力。
 
 </More>
 
-<More title={{ en: "Why the experiment is not a cruise", zh: "为什么这个实验不是巡航" }}>
+<More title={{ en: "From experiment to flight", zh: "从实验到飞行" }}>
 
-卡片一次只改一个量，好让你单独看到密度的影响。机组需要把速度、高度和迎角一起考虑，而且要遵守飞机和周围空中交通设定的限制。本主题不给出真实航班的任何速度或高度。
+一次只改一个输入值，方便看清密度的影响。机组需要把速度、高度和迎角一起考虑，同时遵守飞机的限制和空中交通要求。实验中的速度和高度用于比较，不能直接用来驾驶真实飞机。
 
 </More>
 

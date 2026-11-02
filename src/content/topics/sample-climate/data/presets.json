@@ -3,8 +3,8 @@
     {
       "id": "view-region",
       "label": {
-        "en": "Regional fixture view",
-        "zh": "区域测试视图"
+        "en": "Region",
+        "zh": "区域"
       },
       "camera": {
         "center": [
@@ -19,8 +19,8 @@
     {
       "id": "view-java",
       "label": {
-        "en": "Java fixture view",
-        "zh": "爪哇测试视图"
+        "en": "Java",
+        "zh": "爪哇"
       },
       "camera": {
         "center": [

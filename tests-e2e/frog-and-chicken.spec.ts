@@ -42,7 +42,8 @@ test.describe('frog-and-chicken', () => {
 
   test('background explains independent sizes and next generations, with thirty static beats', async ({ page }) => {
     await open(page, 'ch=before-you-start');
-    await expect(page.locator('.atlas-note')).toContainText(/observation model|development forecast/i);
+    await expect(page.locator('.atlas-note')).toContainText(/compare its shape with the others/i);
+    await expect(page.locator('.atlas-title__note')).toContainText(/enlarged separately.*not time/i);
     await expect(page.locator('.atlas-axis__tick')).toHaveCount(30);
     expect(await page.evaluate(() => window.__atlas!.chapters())).toHaveLength(6);
     await expect(card(page)).toHaveCount(0);
@@ -76,7 +77,7 @@ test.describe('frog-and-chicken', () => {
       await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(openEgg && fertilised);
       await expect(card(page).locator('[data-sim-control="egg-open"] [role="switch"]')).toHaveAttribute('aria-checked', String(openEgg));
       await expect(readout(page, 'egg-condition')).toHaveAttribute('data-state', fertilised ? 'fertilised' : 'unfertilised');
-      if (!fertilised) await expect(readout(page, 'egg-condition')).toContainText('warmth does not fertilise');
+      if (!fertilised) await expect(readout(page, 'egg-condition')).toContainText(/cannot develop into a chick/i);
     });
   }
 
@@ -165,7 +166,7 @@ test.describe('frog-and-chicken', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await open(page, 'ch=inside-the-egg&b=4&theme=cinema', 'zh');
     await expect(card(page)).toContainText('试一试');
-    await expect(readout(page, 'egg-condition')).toContainText('温暖不会使它受精');
+    await expect(readout(page, 'egg-condition')).toContainText('无法发育成雏鸡');
     await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(false);
     await page.locator('.atlas-axis__tick[data-beat="inside-the-egg.4"]').click();
     await expect.poll(async () => (await anchor(page, 'egg-embryo'))?.shown, { timeout: 20_000 }).toBe(true);

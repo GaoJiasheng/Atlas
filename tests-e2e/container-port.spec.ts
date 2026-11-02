@@ -132,7 +132,8 @@ test.describe('container-port', () => {
     expect((await sim(page)).outputs).toMatchObject({ queued: 12, bottleneck: 'yard' });
     await expect(page.locator('.space-try__sim[data-tag="sim"]')).toContainText('SIM');
     await page.locator('.space-try [data-sim-record]').click();
-    await expect(page.locator('.space-try__table tbody tr')).toHaveCount(1);
+    // The recorded-runs table (captioned), not the prediction's before/after conditions table.
+    await expect(page.locator('.space-try__table', { has: page.locator('caption') }).locator('tbody tr')).toHaveCount(1);
     await set(page, { cranes: 1, carriers: 1, yards: 2 });
     expect((await sim(page)).outputs).toMatchObject({ 'capacity-rate': 24, queued: 0, completed: 48, bottleneck: 'carrier' });
     await set(page, { carriers: 2 });

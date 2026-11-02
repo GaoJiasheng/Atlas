@@ -65,8 +65,8 @@
         "zh": "承载货物，构成连续的船体。"
       },
       "detail": {
-        "en": "Supports the cargo and forms the vessel’s continuous body. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "承载货物，构成连续的船体。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Supports the cargo and forms the vessel’s continuous body. [S1,S11]",
+        "zh": "承载货物，构成连续的船体。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -104,12 +104,12 @@
         "color": "steel"
       },
       "summary": {
-        "en": "Provides the working surface above the hull.",
-        "zh": "在船体上方提供甲板工作面。"
+        "en": "Provides a working surface above the hull.",
+        "zh": "在船体上方提供工作面。"
       },
       "detail": {
-        "en": "Provides the working surface above the hull. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在船体上方提供甲板工作面。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Provides a working surface above the hull. [S1]",
+        "zh": "在船体上方提供工作面。[S1]"
       },
       "explode": {
         "dir": [
@@ -178,12 +178,12 @@
         "color": "enamel"
       },
       "summary": {
-        "en": "Houses the ship’s navigation space.",
-        "zh": "容纳船舶的驾驶空间。"
+        "en": "Houses the space used to navigate the ship.",
+        "zh": "提供船舶驾驶空间。"
       },
       "detail": {
-        "en": "Houses the ship’s navigation space. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "容纳船舶的驾驶空间。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Houses the space used to navigate the ship. [S1]",
+        "zh": "提供船舶驾驶空间。[S1]"
       },
       "explode": {
         "dir": [
@@ -753,12 +753,12 @@
         "color": "powder"
       },
       "summary": {
-        "en": "Deck cargo forms one part of the handling chain.",
-        "zh": "甲板箱是搬运链中的一个部分。"
+        "en": "Waits on deck for the next handling step.",
+        "zh": "放在甲板上，等待下一段搬运。"
       },
       "detail": {
-        "en": "Deck cargo forms part of the handling chain. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "甲板箱是搬运链中的一个部分。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Waits on deck for the next handling step. [S1]",
+        "zh": "放在甲板上，等待下一段搬运。[S1]"
       },
       "explode": {
         "dir": [
@@ -2319,8 +2319,8 @@
         "zh": "在码头上方支撑臂架。"
       },
       "detail": {
-        "en": "Supports the boom above the quay. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在码头上方支撑臂架。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Supports the boom above the quay. [S1,S11]",
+        "zh": "在码头上方支撑臂架。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -2612,8 +2612,8 @@
         "zh": "让岸桥沿码头轨道移动。"
       },
       "detail": {
-        "en": "Carry the crane along its quay rails. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "让岸桥沿码头轨道移动。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Carry the crane along its quay rails. [S1,S11]",
+        "zh": "让岸桥沿码头轨道移动。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3004,8 +3004,8 @@
         "zh": "引导整台岸桥沿码头移动。"
       },
       "detail": {
-        "en": "Guide the whole crane along the quay. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "引导整台岸桥沿码头移动。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Guide the whole crane along the quay. [S1,S11]",
+        "zh": "引导整台岸桥沿码头移动。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3059,12 +3059,12 @@
         "color": "steel"
       },
       "summary": {
-        "en": "Carries the trolley above the ship and quay.",
-        "zh": "承载在船舶和码头上方行走的小车。"
+        "en": "Supports the trolley as it moves above ship and quay.",
+        "zh": "支撑在船舶和岸边上方行走的小车。"
       },
       "detail": {
-        "en": "Carries the trolley above the ship and quay. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "承载在船舶和码头上方行走的小车。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Supports the trolley as it moves above ship and quay. [S1,S11]",
+        "zh": "支撑在船舶和岸边上方行走的小车。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3436,8 +3436,8 @@
         "zh": "沿臂架移动悬吊的货物。"
       },
       "detail": {
-        "en": "Moves the suspended load along the boom. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "沿臂架移动悬吊的货物。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Moves the suspended load along the boom. [S1,S11]",
+        "zh": "沿臂架移动悬吊的货物。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3566,8 +3566,8 @@
         "zh": "把小车上的起升机构连接到吊具。"
       },
       "detail": {
-        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把小车上的起升机构连接到吊具。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3615,8 +3615,8 @@
         "zh": "把小车上的起升机构连接到吊具。"
       },
       "detail": {
-        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把小车上的起升机构连接到吊具。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3664,8 +3664,8 @@
         "zh": "把小车上的起升机构连接到吊具。"
       },
       "detail": {
-        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把小车上的起升机构连接到吊具。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3713,8 +3713,8 @@
         "zh": "把小车上的起升机构连接到吊具。"
       },
       "detail": {
-        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把小车上的起升机构连接到吊具。[S1,S11]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Connects the trolley’s hoist to the spreader. [S1,S11]",
+        "zh": "把小车上的起升机构连接到吊具。[S1,S11]"
       },
       "explode": {
         "dir": [
@@ -3796,8 +3796,8 @@
         "zh": "把起升机构连接到集装箱的上角件。"
       },
       "detail": {
-        "en": "Connects the hoist to the container’s upper corners. [S1,S10]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把起升机构连接到集装箱的上角件。[S1,S10]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Connects the hoist to the container’s upper corners. [S1,S10]",
+        "zh": "把起升机构连接到集装箱的上角件。[S1,S10]"
       },
       "explode": {
         "dir": [
@@ -3848,8 +3848,8 @@
         "zh": "在上角件中转动，形成连接。"
       },
       "detail": {
-        "en": "The four simplified lock heads are enlarged to be visible. They indicate a corner connection, not an engineering drawing or operating procedure. [S1,S10]",
-        "zh": "四个简化锁头经过放大，便于识别；它们只表示角件连接，不是工程详图或操作步骤。[S1,S10]"
+        "en": "The four lock heads turn inside the upper corner fittings. They are enlarged here so you can see the connection. [S1,S10]",
+        "zh": "四个锁头在上角件内转动。这里把锁头放大，方便看清连接。[S1,S10]"
       },
       "explode": {
         "dir": [
@@ -4233,12 +4233,12 @@
         ]
       },
       "summary": {
-        "en": "Keeps the same identity through this transfer.",
-        "zh": "在这次转运中保持同一只箱子的身份。"
+        "en": "Travels from ship to carrier, yard and onward ship.",
+        "zh": "从船上到运输车、堆场，再到接续船。"
       },
       "detail": {
-        "en": "Keeps the same identity through this transfer. [S1,S10]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在这次转运中保持同一只箱子的身份。[S1,S10]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Travels from ship to carrier, yard and onward ship. [S1,S10]",
+        "zh": "从船上到运输车、堆场，再到接续船。[S1,S10]"
       },
       "explode": {
         "dir": [
@@ -4354,8 +4354,8 @@
         "zh": "在箱体上角提供吊具连接点。"
       },
       "detail": {
-        "en": "Provide the upper corner connection points for the spreader. [S1,S10]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在箱体上角提供吊具连接点。[S1,S10]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Provide the upper corner connection points for the spreader. [S1,S10]",
+        "zh": "在箱体上角提供吊具连接点。[S1,S10]"
       },
       "explode": {
         "dir": [
@@ -4765,8 +4765,8 @@
         "zh": "以相同比例显示集装箱，用于TEU计数。"
       },
       "detail": {
-        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]",
+        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]"
       },
       "explode": {
         "dir": [
@@ -5305,8 +5305,8 @@
         "zh": "以相同比例显示集装箱，用于TEU计数。"
       },
       "detail": {
-        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Show boxes at one common scale for TEU counting. [S1,S8,S9]",
+        "zh": "以相同比例显示集装箱，用于TEU计数。[S1,S8,S9]"
       },
       "explode": {
         "dir": [
@@ -5354,8 +5354,8 @@
         "zh": "在搬运位置之间水平运送集装箱。"
       },
       "detail": {
-        "en": "Carries a container horizontally between handling points. [S1,S5]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在搬运位置之间水平运送集装箱。[S1,S5]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Carries a container horizontally between handling points. [S1,S5]",
+        "zh": "在搬运位置之间水平运送集装箱。[S1,S5]"
       },
       "explode": {
         "dir": [
@@ -5447,8 +5447,8 @@
         "zh": "支撑运输车在陆地上行走。"
       },
       "detail": {
-        "en": "Support the carrier’s travel on land. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "支撑运输车在陆地上行走。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Support the carrier’s travel on land. [S1]",
+        "zh": "支撑运输车在陆地上行走。[S1]"
       },
       "explode": {
         "dir": [
@@ -5587,8 +5587,8 @@
         "zh": "在堆场内起吊集装箱。"
       },
       "detail": {
-        "en": "Lifts containers within the yard. [S1,S5]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在堆场内起吊集装箱。[S1,S5]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Lifts containers within the yard. [S1,S5]",
+        "zh": "在堆场内起吊集装箱。[S1,S5]"
       },
       "explode": {
         "dir": [
@@ -5745,8 +5745,8 @@
         "zh": "把堆场吊具移到箱子上方。"
       },
       "detail": {
-        "en": "Positions a yard lifting attachment above a box. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把堆场吊具移到箱子上方。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Positions a yard lifting attachment above a box. [S1]",
+        "zh": "把堆场吊具移到箱子上方。[S1]"
       },
       "explode": {
         "dir": [
@@ -6119,12 +6119,12 @@
         "color": "powder"
       },
       "summary": {
-        "en": "Occupies one tier in the separate yard rehandling experiment.",
-        "zh": "在独立的堆场移箱实验中占据一层。"
+        "en": "Sits below the boxes that must be moved first.",
+        "zh": "放在底层，上方的箱子要先移开。"
       },
       "detail": {
-        "en": "Occupies one tier in the separate yard rehandling experiment. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在独立的堆场移箱实验中占据一层。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "This target starts in the bottom tier of the yard experiment. Move the boxes above it aside, then lift it out. It is a different box from the one followed from the ship. [S1]",
+        "zh": "这个实验的目标箱位于底层。先移开上方的箱子，再把它吊出。它与从船上一路追踪的工作箱不同。[S1]"
       },
       "explode": {
         "dir": [
@@ -6429,12 +6429,12 @@
         "color": "powder"
       },
       "summary": {
-        "en": "Occupies one tier in the separate yard rehandling experiment.",
-        "zh": "在独立的堆场移箱实验中占据一层。"
+        "en": "Blocks access to the target box below.",
+        "zh": "挡住下方的目标箱。"
       },
       "detail": {
-        "en": "Occupies one tier in the separate yard rehandling experiment. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在独立的堆场移箱实验中占据一层。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Blocks access to the target box below. [S1]",
+        "zh": "挡住下方的目标箱。[S1]"
       },
       "explode": {
         "dir": [
@@ -6739,12 +6739,12 @@
         "color": "powder"
       },
       "summary": {
-        "en": "Occupies one tier in the separate yard rehandling experiment.",
-        "zh": "在独立的堆场移箱实验中占据一层。"
+        "en": "Blocks access to the target box below.",
+        "zh": "挡住下方的目标箱。"
       },
       "detail": {
-        "en": "Occupies one tier in the separate yard rehandling experiment. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "在独立的堆场移箱实验中占据一层。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Blocks access to the target box below. [S1]",
+        "zh": "挡住下方的目标箱。[S1]"
       },
       "explode": {
         "dir": [
@@ -6782,12 +6782,12 @@
         "color": "steel"
       },
       "summary": {
-        "en": "Marks the model’s temporary parking positions for upper boxes.",
-        "zh": "标出模型中暂放上层箱的位置。"
+        "en": "Marks where the upper boxes wait after being moved.",
+        "zh": "标出上层箱移开后暂放的位置。"
       },
       "detail": {
-        "en": "Marks the model’s temporary parking positions for upper boxes. [S1]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "标出模型中暂放上层箱的位置。[S1]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Marks where the upper boxes wait after being moved. [S1]",
+        "zh": "标出上层箱移开后暂放的位置。[S1]"
       },
       "explode": {
         "dir": [
@@ -6965,8 +6965,8 @@
         "zh": "把转运箱继续运往另一个目的地。"
       },
       "detail": {
-        "en": "Carries a transhipment box onwards to another destination. [S1,S12]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "把转运箱继续运往另一个目的地。[S1,S12]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Carries a transhipment box onwards to another destination. [S1,S12]",
+        "zh": "把转运箱继续运往另一个目的地。[S1,S12]"
       },
       "explode": {
         "dir": [
@@ -7291,8 +7291,8 @@
         "zh": "表示下一步为本地交付的箱子。"
       },
       "detail": {
-        "en": "Represents a box whose onward step is local delivery. [S1,S12]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "表示下一步为本地交付的箱子。[S1,S12]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Represents a box whose onward step is local delivery. [S1,S12]",
+        "zh": "表示下一步为本地交付的箱子。[S1,S12]"
       },
       "explode": {
         "dir": [
@@ -7327,12 +7327,12 @@
         "color": "enamel"
       },
       "summary": {
-        "en": "Represents people overseeing automated port operations.",
-        "zh": "表示人员监控自动化港口作业的工作场所。"
+        "en": "Provides a place to oversee automated port work.",
+        "zh": "供人员监控自动化港口作业。"
       },
       "detail": {
-        "en": "Represents people overseeing automated port operations. [S1,S5]\n\nThis part is drawn in a compressed teaching layout. Its geometry and placement are design choices, not a surveyed terminal or equipment specification. [S1]",
-        "zh": "表示人员监控自动化港口作业的工作场所。[S1,S5]\n\n本零件采用压缩教学布局。几何和位置是设计值，不是码头测绘或设备规格。[S1]"
+        "en": "Provides a place to oversee automated port work. [S1,S5]",
+        "zh": "供人员监控自动化港口作业。[S1,S5]"
       },
       "explode": {
         "dir": [
@@ -7382,12 +7382,12 @@
         "zh": "码头"
       },
       "summary": {
-        "en": "Provides schematic scene context.",
-        "zh": "提供场景示意背景。"
+        "en": "Provides the land beside the moored ship.",
+        "zh": "提供靠泊船只旁的岸上空间。"
       },
       "detail": {
-        "en": "Schematic context, not measured geometry. [S1]",
-        "zh": "示意背景，不是测量几何。[S1]"
+        "en": "Provides the land beside the moored ship. [S1]",
+        "zh": "提供靠泊船只旁的岸上空间。[S1]"
       },
       "primitive": {
         "kind": "box",
@@ -7414,12 +7414,12 @@
         "zh": "水面"
       },
       "summary": {
-        "en": "Provides schematic scene context.",
-        "zh": "提供场景示意背景。"
+        "en": "Marks the water beside the quay.",
+        "zh": "表示码头岸边的水面。"
       },
       "detail": {
-        "en": "Schematic context, not measured geometry. [S1]",
-        "zh": "示意背景，不是测量几何。[S1]"
+        "en": "Marks the water beside the quay. [S1]",
+        "zh": "表示码头岸边的水面。[S1]"
       },
       "primitive": {
         "kind": "box",
@@ -8337,40 +8337,40 @@
       {
         "id": "retrieval-lifts",
         "label": {
-          "en": "Lifts including target",
-          "zh": "连目标箱的搬运数"
+          "en": "Total lifts",
+          "zh": "总起吊次数"
         },
         "unit": "moves"
       },
       {
         "id": "crane-rate",
         "label": {
-          "en": "Quay capability",
-          "zh": "岸桥能力"
+          "en": "Quay capacity",
+          "zh": "岸桥处理能力"
         },
         "unit": "boxes/h"
       },
       {
         "id": "carrier-rate",
         "label": {
-          "en": "Carrier capability",
-          "zh": "运输车能力"
+          "en": "Carrier capacity",
+          "zh": "运输车处理能力"
         },
         "unit": "boxes/h"
       },
       {
         "id": "yard-rate",
         "label": {
-          "en": "Yard capability",
-          "zh": "场桥能力"
+          "en": "Yard capacity",
+          "zh": "场桥处理能力"
         },
         "unit": "boxes/h"
       },
       {
         "id": "capacity-rate",
         "label": {
-          "en": "Chain capability",
-          "zh": "链条能力"
+          "en": "Chain capacity",
+          "zh": "全链处理能力"
         },
         "unit": "boxes/h"
       },
@@ -8386,7 +8386,7 @@
         "id": "queue-growth",
         "label": {
           "en": "Queue growth",
-          "zh": "队列增长"
+          "zh": "排队数增长"
         },
         "unit": "boxes/h"
       },
@@ -8437,7 +8437,7 @@
             "zh": "场桥"
           },
           "tied": {
-            "en": "Equal limits",
+            "en": "Joint limits",
             "zh": "共同瓶颈"
           }
         }

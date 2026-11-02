@@ -225,7 +225,7 @@ describe('how-planes-fly production content and model', () => {
   it('keeps sourced history units and dates, 16 bilingual glossary entries and the original design source', () => {
     const history = chapter('flight-and-singapore');
     expect(at(history.id, 5).caption.en).toMatch(/1975.*558 buildings.*4,096 graves.*not people/);
-    expect(at(history.id, 5).caption.zh).toMatch(/558 座建筑.*4,096 座坟墓.*不是人数/);
+    for (const fact of ['558 座建筑', '4,096 座坟墓', '不是人数']) expect(at(history.id, 5).caption.zh).toContain(fact);
     expect(at(history.id, 4).caption.en).toMatch(/1 July 1981.*29 December/);
     const terms = JSON.parse(readFileSync(new URL('data/glossary.json', DIR), 'utf8')).terms as { id: string; term: Text; definition: Text }[];
     expect(terms).toHaveLength(16);

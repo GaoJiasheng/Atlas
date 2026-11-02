@@ -268,8 +268,8 @@ for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
     page.on('pageerror', e => errors.push(e.message));
     page.on('request', r => { if (!new URL(r.url()).hostname.match(/^(localhost|127\.0\.0\.1)$/)) external.push(r.url()); });
     await open(page, `?ch=a-ring-over-singapore&theme=${theme}`, locale);
-    await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'Historical event' : '历史事件');
-    await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'Model explanation · no date' : '模型解释 · 没有日期');
+    await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? '26 December 2019' : '2019 年 12 月 26 日');
+    await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'not a reconstruction of Singapore' : '没有重现当天的新加坡天空');
     await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'Face away from the Sun' : '背向太阳');
     for (const mode of ['xray','cutaway','exploded']) await expect(page.locator(`[data-mode="${mode}"]`)).toBeDisabled();
     await open(page, `?ch=a-tilted-year&b=3&theme=${theme}`, locale);

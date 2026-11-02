@@ -7,8 +7,8 @@
         "zh": "太空竞赛"
       },
       "definition": {
-        "en": "Cold War competition in space technology between the Soviet Union and United States; different programmes pursued different goals.",
-        "zh": "冷战中苏联与美国之间的太空技术竞争；不同项目追求的目标并不相同。"
+        "en": "A Cold War competition in space technology between the United States and Soviet Union. Their programmes pursued different goals.",
+        "zh": "冷战时期美国与苏联之间的太空技术竞争，两国项目追求不同目标。"
       },
       "see": [
         "term-programme-cost"
@@ -92,8 +92,8 @@
         "zh": "软着陆"
       },
       "definition": {
-        "en": "A controlled arrival at a surface with speed low enough for the intended equipment to keep working.",
-        "zh": "控制速度到达表面，使预定设备仍能工作的着陆方式。"
+        "en": "A landing slow enough for the spacecraft’s intended equipment to keep working on the surface.",
+        "zh": "控制速度着陆，让航天器的设备能够在表面继续工作。"
       },
       "see": [
         "term-probe"
@@ -106,8 +106,8 @@
         "zh": "交会"
       },
       "definition": {
-        "en": "Spacecraft approach each other and match their motion in orbit; they need not connect.",
-        "zh": "航天器在轨道上靠近并匹配运动，不一定连接。"
+        "en": "Spacecraft approach each other in orbit and match their motion. They can do this without connecting.",
+        "zh": "航天器在轨道上靠近，保持相匹配的运动，可以不连接。"
       },
       "see": [
         "term-docking"
@@ -204,8 +204,8 @@
         "zh": "项目支出"
       },
       "definition": {
-        "en": "An account of spending that must specify currency, time period and what is included; unlike currencies cannot be compared as a simple bar chart.",
-        "zh": "必须交代币种、年代和所含范围的支出账目；不能把不同币种直接画成可比较的条形图。"
+        "en": "The money spent on a project. To compare costs, check the currency, period and which work is included. Different currencies cannot be compared directly.",
+        "zh": "一个项目花费的金钱。比较费用要看币种、年代和所含工作，不同币种不能直接比较。"
       },
       "see": [
         "term-space-race"

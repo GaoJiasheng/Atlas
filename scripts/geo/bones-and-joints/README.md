@@ -33,7 +33,6 @@ They check shape and framing, **not** WebGL materials, transparency, labels,
 interaction, clinical accuracy or runtime performance. Browser gates remain
 for the main session, as requested.
 
-`rib-count.svg` is a manual count overlay on the final processed figure, with
-12 separately marked ribs per side. It is review evidence, not a product asset.
-The generation prompts, rejected attempt and final file hashes are recorded in
-`src/content/topics/bones-and-joints/FIGURES.md`.
+The chapter-02 protected-organs figure is not built here: it is drawn from
+explicit geometry by `scripts/figures/bones-protected-organs.ts` (record in
+`src/content/topics/bones-and-joints/FIGURES.md`).

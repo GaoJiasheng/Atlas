@@ -70,7 +70,14 @@ test('deep-time inset, geology plate and presentation evidence share host folds'
   await open(page, 'sample-deep-time');
   await page.evaluate(() => window.__atlas!.setCard(true));
   await keyboardFold(page.locator('[data-hud-panel="geology-plate"]'));
-  await keyboardFold(page.locator('[data-hud-panel="modern-inset"]'));
+  // The find map lives in the right-hand card: one title (the card's), folded by the card's own tab.
+  const inset = page.locator('[data-hud-panel="modern-inset"]');
+  await expect(inset).toBeVisible();
+  await expect(inset.locator('.ts-fold__header')).toHaveCount(0);
+  await page.locator('.atlas-card__fold').click();
+  await expect(inset).toBeHidden();
+  await page.locator('[data-hud-panel="card-tab"]').click();
+  await expect(inset).toBeVisible();
   await page.evaluate(() => window.__atlas!.setMode('presentation', true, { instant: true }));
   await keyboardFold(page.locator('[data-hud-panel="present-evidence"]'));
   await keyboardFold(page.locator('[data-hud-panel="reconstruction-age"]'));

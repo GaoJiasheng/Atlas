@@ -48,7 +48,8 @@ import { aspectBounds, regionGraticule, regionMaxBounds } from '../../lib/region
 import { parseRivers, riverCollection, riversAt, type RiverN } from '../../lib/rivers';
 import { decodeLocalLand, localEraAt, localLandFilter, parseLocalLand, type LocalEra } from '../../lib/localLand';
 import { catalogueHitDistance, catalogueVisible, nearestCatalogue, type CatalogueLayer } from '../../lib/catalogue';
-import type { CatalogueEntry } from '../../catalogueSchema';
+import type { CatalogueEntry, CatalogueIndex } from '../../catalogueSchema';
+import { createCatalogueLoader } from '../../lib/catalogueLoader';
 import { prepareDatedLayer, type DatedLayerLoaded } from '../../lib/datedLayers';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
 import { createTerritoryLabels } from './territory';
@@ -109,6 +110,8 @@ export interface GeoController {
   plateCamera(): GeoCamera | null;
   stats(): { features: number; eventMarkers?: number; zoom: number; datedLayers: Record<string, DatedLayerStats>; reconstruction?: ReconstructionStats };
   reconstructionStats?(): ReconstructionStats;
+  /** Request reader text for the current chapter/beat index, independently of geometry. */
+  setCatalogueIndex?(index?: CatalogueIndex): void;
   /** Viewport CSS position of a catalogue anchor (dated geo stage only). */
   catalogueScreen?(at: [number, number]): [number, number];
   destroy(): void;
@@ -1084,14 +1087,17 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (drawIds.length) for (const hit of map.queryRenderedFeatures([[x - 22, y - 22], [x + 22, y + 22]], { layers: drawIds })) {
       const id = hit.properties?.id as string | undefined;
       if (!id) continue;
-      const sourceLayer = catalogueLayers.find((layer) => layer.entries.some((entry) => entry.id === id));
+      const sourceLayer = catalogueLayers.find((layer) => layer.features.features.some((feature) => feature.properties?.id === id));
       if (!sourceLayer || !catalogueVisible(sourceLayer.def, hit, playhead.get())) continue;
       const project = (p: number[]) => projectNearCentre((q) => map.project(q), p as LngLat, x);
       const distance = catalogueHitDistance(hit.geometry, e.point, project);
       candidates.push({ id, distance });
     }
     const id = nearestCatalogue(candidates);
-    if (id) options.onSelectCatalogue?.(id);
+    if (id) {
+      catalogueLoader.requestPick(id, store.getState().layers);
+      options.onSelectCatalogue?.(id);
+    }
   });
 
   /* ---------- regional 1:10m land (lazy: zoomed in over Southeast Asia) ---------- */
@@ -1154,49 +1160,45 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- optional dated data layers (one static GPU source per definition) ---------- */
   const datedColor = (def: DatedLayerDef, t: number) =>
     def.color ? resolveColorRef(def.color, tokens) : def.holder ? entityColor(def.holder, t) : tokens.ink;
-  const catalogueLayers: CatalogueLayer[] = [];
+  let catalogueLayers: CatalogueLayer[] = [];
   const loadingLayers = new Set<string>();
-  const notifyCatalogue = () => options.onCatalogueLayers?.([...catalogueLayers]);
+  const catalogueLoader = createCatalogueLoader(options.datedLayers ?? [], async (def) => {
+    const metadata = await fetchJson<{ entries: CatalogueEntry[] }>(withBase(`/geo/${def.catalogue!.file}.json`));
+    return metadata.entries;
+  }, (layers) => { catalogueLayers = layers; options.onCatalogueLayers?.(layers); });
+  disposers.push(() => catalogueLoader.dispose());
   const loadDatedLayers = async () => {
-    // Catalogue layers (docs/49, megabytes of metadata) load when first switched on; plain dated layers keep
+    // Catalogue geometry loads when first switched on; reader text loads on demand. Plain dated layers keep
     // the eager load existing topics rely on (every PLATE count and legend row ready at the map's load).
     const definitions = (options.datedLayers ?? []).filter((def) => (layersOn().has(def.id) || !def.catalogue) && !loadingLayers.has(def.id));
     definitions.forEach((def) => loadingLayers.add(def.id));
     // Fetch and prepare every newly enabled layer at once (the old eager loader was parallel too),
     // then commit them in definition order so their map stacking stays fixed.
     const jobs = definitions.map((def) => {
-      const info: CatalogueLayer = { id: def.id, def, status: 'loading', entries: [], features: { type: 'FeatureCollection', features: [] } };
-      catalogueLayers.push(info);
+      catalogueLoader.startGeometry(def.id);
       const work = (async () => {
-        const [topo, metadata] = await Promise.all([
-          fetchJson<Parameters<typeof topoFeature>[0]>(withBase(`/geo/${def.file}.json`)),
-          def.catalogue ? fetchJson<{ entries: CatalogueEntry[] }>(withBase(`/geo/${def.catalogue.file}.json`)) : Promise.resolve({ entries: [] }),
-        ]);
+        const topo = await fetchJson<Parameters<typeof topoFeature>[0]>(withBase(`/geo/${def.file}.json`));
         if (destroyed) return null;
-        return { metadata, prepared: await prepareDatedLayer(topo, def.file, def) };
+        return await prepareDatedLayer(topo, def.file, def);
       })().then((value) => ({ ok: true as const, value }), () => ({ ok: false as const, value: null }));
-      return { def, info, work };
+      return { def, work };
     });
-    if (jobs.length) notifyCatalogue();
-    for (const { def, info, work } of jobs) {
+    for (const { def, work } of jobs) {
       const result = await work;
       if (destroyed) return;
-      if (!result.ok || !result.value?.prepared) {
-        info.status = 'error';
-        notifyCatalogue();
+      if (!result.ok || !result.value) {
+        catalogueLoader.geometryError(def.id);
         continue;
       }
-      const { metadata, prepared: { collection, index } } = result.value;
+      const { collection, index } = result.value;
       const t = playhead.get();
       const drawn = createDatedMapLayer(map, def, collection, tokens, datedColor(def, t), t, index);
       drawn.setSelected(store.getState().pick ?? null);
       datedLayers.push(drawn);
-      info.entries = metadata.entries;
-      info.features = collection;
-      info.status = 'ready';
+      catalogueLoader.geometryReady(def.id, collection);
+      catalogueLoader.requestPick(store.getState().pick, store.getState().layers);
       applyVisibility();
       options.onDatedLayers?.(datedLayers.map(({ id, index }) => ({ id, index })));
-      notifyCatalogue();
       requestRender();
     }
   };
@@ -1294,6 +1296,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         applyVisibility();
         requestRender();
       }
+      if (s.pick !== prev.pick || s.layers !== prev.layers) catalogueLoader.requestPick(s.pick, s.layers);
       if (s.pick !== prev.pick) for (const layer of datedLayers) layer.setSelected(s.pick ?? null);
       if (s.highlight !== prev.highlight || s.pick !== prev.pick) requestRender();
     }),
@@ -1340,6 +1343,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   });
 
   return {
+    setCatalogueIndex(index) { catalogueLoader.requestIndex(index); },
     catalogueScreen(at) { const p = map.project(at); const rect = container.getBoundingClientRect(); return [p.x + rect.left, p.y + rect.top]; },
     setLocale(next) {
       if (next === locale) return;

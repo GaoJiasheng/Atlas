@@ -7,8 +7,8 @@
         "zh": "集装箱"
       },
       "definition": {
-        "en": "A freight box that can pass between transport stages.",
-        "zh": "可在不同运输环节之间搬运的货物箱。"
+        "en": "A box that holds cargo as it moves between stages of transport.",
+        "zh": "装着货物，在不同运输环节之间搬运的箱子。"
       },
       "see": [
         "teu"
@@ -35,8 +35,8 @@
         "zh": "码头岸壁"
       },
       "definition": {
-        "en": "The built edge where a moored vessel meets landside handling.",
-        "zh": "船靠泊、岸上装卸相接的岸边设施。"
+        "en": "A built edge beside the water where ships moor to load or unload cargo.",
+        "zh": "船只靠泊、装卸货物的岸边设施。"
       },
       "see": [
         "quay-crane"
@@ -79,8 +79,8 @@
         "zh": "角件"
       },
       "definition": {
-        "en": "A connection structure at a container corner, used in handling, stacking and securing.",
-        "zh": "箱角的连接结构，用于搬运、堆放与固定。"
+        "en": "A fitting at a container’s corner that connects to lifting, stacking or securing equipment.",
+        "zh": "箱角上用来连接搬运、堆放或固定设备的部件。"
       },
       "see": [
         "twistlock"
@@ -93,8 +93,8 @@
         "zh": "旋锁"
       },
       "definition": {
-        "en": "A rotating lock that connects this spreader to the upper corner fittings.",
-        "zh": "本例中把吊具接入上角件的旋转锁具。"
+        "en": "A lock that turns to connect the spreader to a container’s upper corner fittings.",
+        "zh": "转动后把吊具与箱子上角件接牢的锁具。"
       },
       "see": [
         "spreader"
@@ -121,8 +121,8 @@
         "zh": "起升机构"
       },
       "definition": {
-        "en": "The mechanism that changes the height of a suspended load.",
-        "zh": "改变悬吊物高度的机构。"
+        "en": "The mechanism that raises or lowers a hanging load.",
+        "zh": "把悬吊的货物升高或降低的机构。"
       },
       "see": [
         "trolley"
@@ -135,8 +135,8 @@
         "zh": "自动导引车"
       },
       "definition": {
-        "en": "A vehicle guided automatically to move loads horizontally.",
-        "zh": "在自动导引下水平运送货物的车辆。"
+        "en": "A vehicle that follows automatic guidance to carry loads across the ground.",
+        "zh": "按自动导引在地面上运送货物的车辆。"
       },
       "see": [
         "yard"
@@ -163,8 +163,8 @@
         "zh": "翻箱"
       },
       "definition": {
-        "en": "In this model, moving a blocking box before retrieving the target; replacement moves are excluded.",
-        "zh": "本模型中取目标箱前先移开阻挡箱；不计移回的次数。"
+        "en": "Moving a box aside to reach another box. This model counts moves before retrieval, but leaves out moves to put boxes back.",
+        "zh": "为取出另一只箱子，先把挡路的箱子移开。本模型只数取出目标前的动作，不计放回。"
       },
       "see": [
         "yard"
@@ -191,8 +191,8 @@
         "zh": "枢纽"
       },
       "definition": {
-        "en": "A place where transport connections and supporting services meet.",
-        "zh": "多条运输联系与配套服务接合的节点。"
+        "en": "A place where transport links meet, supported by services that keep goods moving.",
+        "zh": "多条运输联系交会，并有配套服务支持货物流动的地方。"
       },
       "see": [
         "transhipment"
@@ -205,8 +205,8 @@
         "zh": "吞吐量"
       },
       "definition": {
-        "en": "The amount actually handled within a stated period and scope.",
-        "zh": "在说明的时段与口径内实际处理的数量。"
+        "en": "The amount of cargo actually handled in a given place and period.",
+        "zh": "某个地方在一段时间内实际处理的货物数量。"
       },
       "see": [
         "capacity"
@@ -219,8 +219,8 @@
         "zh": "处理能力"
       },
       "definition": {
-        "en": "The amount that could be handled under stated conditions; a plan is different from an observed result.",
-        "zh": "在说明的条件下可处理的数量；规划能力与实际结果口径不同。"
+        "en": "The amount that can be handled under given conditions. Planned capacity describes what a port is being built to handle.",
+        "zh": "在一定条件下可处理的数量。规划能力说明港口计划建成后可处理多少货物。"
       },
       "see": [
         "throughput"

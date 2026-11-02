@@ -1,6 +1,6 @@
 id: bones-and-joints
 title: { en: "Bones and Joints", zh: "骨骼与关节" }
-subtitle: { en: "A connected living frame: support, protection and movement", zh: "连起来的活支架：支持、保护与运动" }
+subtitle: { en: "A living frame that supports, protects and moves the body", zh: "有生命的支架：支撑、保护和带动身体" }
 shortTitle: { en: "Bones & joints", zh: "骨骼与关节" }
 subject: biology
 tags: [beyond-syllabus, health, space]
@@ -14,4 +14,4 @@ theme: paper
 sensitivity: open
 status: published
 illustration: bones-and-joints
-note: { en: "Adult male reference anatomy · Z-Anatomy / BodyParts3D meshes, CC BY-SA 4.0 · Teaching sections and lever model are schematic.", zh: "成人男性参考解剖 · Z-Anatomy / BodyParts3D 网格，CC BY-SA 4.0 · 教学截面与杠杆为示意。" }
+note: { en: "Adult male model · Anatomy from Z-Anatomy / BodyParts3D, CC BY-SA 4.0 · Cutaway specimens and lever are simplified teaching models.", zh: "成人男性模型 · 解剖模型来自 Z-Anatomy / BodyParts3D，CC BY-SA 4.0 · 剖面标本与杠杆是简化的教学模型。" }

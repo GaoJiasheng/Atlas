@@ -7,8 +7,8 @@
         "zh": "生活史（生命周期）"
       },
       "definition": {
-        "en": "The sequence of development and reproduction linking living things with their next generation. A cycle diagram includes more than one individual.",
-        "zh": "生物发育并繁殖、连接到下一代的过程。生活史环图包含的不只是同一个体。"
+        "en": "How living things develop and reproduce across generations. A life-cycle ring connects parents with their offspring.",
+        "zh": "生物发育、繁殖，并一代接一代的过程。生活史的环形图把亲代和后代连起来。"
       },
       "see": [
         "adult",
@@ -22,8 +22,8 @@
         "zh": "卵"
       },
       "definition": {
-        "en": "A reproductive structure from which a young animal can develop after fertilisation under suitable conditions. A chicken egg has a shell; the frog eggs here have jelly coats.",
-        "zh": "动物的繁殖结构，受精并处在适宜条件下，幼体可以在其中发育。鸡卵外有壳；这里的蛙卵外有胶质包被。"
+        "en": "A structure in which a young animal can develop after fertilisation, under suitable conditions. Chicken eggs have shells; the frog eggs shown here have jelly coats.",
+        "zh": "动物幼体可以在其中发育的结构，需要先受精并有适宜条件。鸡卵有壳；这里的蛙卵有胶质包被。"
       },
       "see": [
         "embryo",
@@ -37,8 +37,8 @@
         "zh": "蝌蚪"
       },
       "definition": {
-        "en": "The free-swimming young frog in this example, with a tail and a body form very different from an adult frog. It is a frog larva, not a fish.",
-        "zh": "这个例子里能自由游泳的青蛙幼体，有尾巴，形态与成蛙很不相同。它是青蛙的幼体，不是鱼。"
+        "en": "A frog larva that swims with a tail. Its body looks very different from an adult frog. It is not a fish.",
+        "zh": "靠尾巴游泳的青蛙幼体，外形与成蛙差别很大。它不是鱼。"
       },
       "see": [
         "froglet",
@@ -52,8 +52,8 @@
         "zh": "幼蛙"
       },
       "definition": {
-        "en": "A young frog with the frog body form and limbs. Part of its tail may remain while the tail is being absorbed.",
-        "zh": "身体已呈蛙形、长出四肢的幼小青蛙。尾巴在被吸收的过程中，可能还有一段留在身体上。"
+        "en": "A young frog with a frog-shaped body and limbs. A short tail may remain while the body absorbs it.",
+        "zh": "已经有蛙形身体和四肢的幼小青蛙。身体吸收尾巴时，还可能留着一段短尾。"
       },
       "see": [
         "tadpole",
@@ -67,8 +67,8 @@
         "zh": "成体"
       },
       "definition": {
-        "en": "A mature individual that has reached the reproductive stage of its life cycle. The adult chicken shown here is a hen.",
-        "zh": "已经成熟、进入能够繁殖的生命阶段的个体。这里画的成鸡是一只母鸡。"
+        "en": "A mature animal that has reached the stage when it can reproduce. The adult chicken shown here is a hen.",
+        "zh": "已经成熟、能够繁殖的动物。这里展示的成鸡是一只母鸡。"
       },
       "see": [
         "reproduction",
@@ -82,8 +82,8 @@
         "zh": "雏鸡"
       },
       "definition": {
-        "en": "A young chicken. It grows into an adult chicken; it does not pass through a pupa.",
-        "zh": "幼小的鸡。它生长成为成鸡，不经过蛹期。"
+        "en": "A young chicken that grows into an adult. Its life cycle has no pupa stage.",
+        "zh": "幼小的鸡，会继续长成成鸡，发育过程没有蛹期。"
       },
       "see": [
         "adult",
@@ -97,8 +97,8 @@
         "zh": "胚胎"
       },
       "definition": {
-        "en": "A developing young animal before it hatches. In the chicken egg model it is drawn separately from the yolk.",
-        "zh": "孵出前正在发育的动物幼体。鸡卵模型把它与卵黄分开画。"
+        "en": "A young animal developing before it hatches. In a chicken egg, it is separate from the yolk.",
+        "zh": "孵出前正在发育的动物幼体。在鸡卵内，胚胎与卵黄是不同结构。"
       },
       "see": [
         "egg",
@@ -112,8 +112,8 @@
         "zh": "卵黄"
       },
       "definition": {
-        "en": "The part of the egg that supplies nourishment for the developing embryo. It is not itself a miniature chick.",
-        "zh": "卵内为发育中的胚胎提供营养的部分。它本身不是一只缩小的雏鸡。"
+        "en": "The part of an egg that supplies food for the developing embryo. The yolk itself is not a chick.",
+        "zh": "卵内给发育中的胚胎提供营养的部分。卵黄本身不是雏鸡。"
       },
       "see": [
         "embryo",
@@ -127,8 +127,8 @@
         "zh": "孵出"
       },
       "definition": {
-        "en": "The young animal coming out of its egg. Development has already begun inside the egg before hatching.",
-        "zh": "动物幼体从卵中出来。孵出以前，幼体已经在卵内开始发育。"
+        "en": "A young animal coming out of its egg. It has already begun developing inside the egg.",
+        "zh": "动物幼体从卵中出来。在这以前，它已经在卵内开始发育。"
       },
       "see": [
         "egg",
@@ -142,8 +142,8 @@
         "zh": "受精"
       },
       "definition": {
-        "en": "The joining of male and female reproductive cells. A chicken egg must be fertilised before a chick can develop; suitable incubation is also needed.",
-        "zh": "雄性与雌性生殖细胞结合。鸡卵必须先受精，才可能发育出雏鸡；还需要适宜的孵化条件。"
+        "en": "The joining of male and female reproductive cells. A chicken egg must be fertilised and have suitable incubation conditions for a chick to develop.",
+        "zh": "雄性与雌性生殖细胞结合。鸡卵先受精，再有适宜的孵化条件，才可能发育出雏鸡。"
       },
       "see": [
         "embryo",
@@ -157,8 +157,8 @@
         "zh": "繁殖"
       },
       "definition": {
-        "en": "Producing offspring, the next generation. An adult-to-egg arrow means reproduction, not an adult becoming an egg again.",
-        "zh": "产生后代，也就是下一代。成体通向卵的箭头表示繁殖，不是成体变回卵。"
+        "en": "Producing offspring: the next generation. The arrow from an adult to eggs shows this process.",
+        "zh": "产生后代，也就是下一代。成体通向卵的箭头表示这个过程。"
       },
       "see": [
         "life-cycle",
@@ -172,8 +172,8 @@
         "zh": "变态发育"
       },
       "definition": {
-        "en": "Development involving a marked change between the body forms of a young animal and its adult. A frog can undergo metamorphosis without a pupa.",
-        "zh": "幼体与成体的身体形态发生明显变化的发育过程。青蛙的变态发育不经过蛹期。"
+        "en": "A large change in body form as a young animal develops towards adulthood. A frog undergoes metamorphosis without a pupa stage.",
+        "zh": "幼体发育、逐渐成为成体时，身体形态发生明显变化的过程。青蛙的变态发育没有蛹期。"
       },
       "see": [
         "tadpole",
@@ -188,8 +188,8 @@
         "zh": "蛹"
       },
       "definition": {
-        "en": "The stage between larva and adult in the mosquito life cycle. There is no pupa in the frog or chicken sequences shown here.",
-        "zh": "蚊子的生活史中，位于幼虫和成虫之间的阶段。这里的青蛙与鸡都没有蛹期。"
+        "en": "The stage between larva and adult in a mosquito's life cycle. Frogs and chickens have no pupa stage.",
+        "zh": "蚊子的生活史中，幼虫与成虫之间的阶段。青蛙和鸡没有蛹期。"
       },
       "see": [
         "metamorphosis",
@@ -203,8 +203,8 @@
         "zh": "幼苗"
       },
       "definition": {
-        "en": "A young plant that has developed from a seed. It can grow into an adult plant; it is not an animal larva.",
-        "zh": "由种子发育出来的幼小植物，可以继续长成成株。它不是动物的幼虫。"
+        "en": "A young plant that has grown from a seed. It can continue growing into an adult plant.",
+        "zh": "由种子长出的幼小植物，可以继续长成成株。"
       },
       "see": [
         "life-cycle"

@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 import { topicSchema } from '../src/content/schema/topic';
+import { t } from '../src/i18n';
 import manifest from '../src/lib/illustrations.json';
 import {
   FRONT_LAYOUTS,
@@ -104,6 +105,33 @@ describe('topicStats', () => {
   it('drops zero counts and tolerates missing files', () => {
     expect(topicStats('time-scene', {}, 0)).toEqual([]);
     expect(topicStats('space-scene', { parts: { parts: [] } }, 2)).toEqual([{ n: 2, key: 'index.stats.chapters' }]);
+  });
+
+  it.each(['monsoon-and-weather', 'sample-climate'])('counts %s climatology site anchors as places', (slug) => {
+    const meta = topics.find((topic) => topic.slug === slug)!.data;
+    expect(meta.temporalMode).toBe('climatology');
+    expect(topicStats(meta.engine, loadData(slug), 9, meta.temporalMode)).toEqual([
+      { n: 9, key: 'index.stats.chapters' },
+      { n: 6, key: 'index.stats.places' },
+    ]);
+  });
+
+  it('counts only site points as climatology places and translates singular and plural labels', () => {
+    expect(topicStats('time-scene', { events: [{ kind: 'site' }, { kind: 'battle' }] }, 0, 'climatology')).toEqual([
+      { n: 1, key: 'index.stats.places' },
+    ]);
+    expect(topicStats('time-scene', {}, 0, 'climatology')).toEqual([]);
+    expect(t('en', 'index.stats.places', { n: 6 })).toBe('6 places');
+    expect(t('en', 'index.stats.places.one', { n: 1 })).toBe('1 place');
+    expect(t('zh', 'index.stats.places', { n: 6 })).toBe('6 个地点');
+    expect(t('zh', 'index.stats.places.one', { n: 1 })).toBe('1 个地点');
+  });
+
+  it('preserves stats for every topic outside climatology when given its temporal mode', () => {
+    for (const { slug, data } of topics.filter(({ data }) => data.temporalMode !== 'climatology')) {
+      const raw = loadData(slug);
+      expect(topicStats(data.engine, raw, 3, data.temporalMode), slug).toEqual(topicStats(data.engine, raw, 3));
+    }
   });
 });
 

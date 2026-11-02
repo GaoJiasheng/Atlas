@@ -920,8 +920,8 @@
         "zh": "支撑肌肉附着的骨骼链。"
       },
       "detail": {
-        "en": "Supports the trunk and provides the hip sockets. The merged mesh includes both hip bones, sacrum and coccyx; attachment markers distinguish the relevant surfaces [M1].",
-        "zh": "支撑躯干，提供髋臼。合并网格包含两侧髋骨、骶骨及尾骨；附着点分别落在相应骨面 [M1]。"
+        "en": "Supports the trunk and provides the hip sockets. This model part includes both hip bones, sacrum and coccyx; attachment markers distinguish the relevant surfaces [M1].",
+        "zh": "支撑躯干，提供髋臼。这个模型零件包含两侧髋骨、骶骨及尾骨；附着点分别落在相应骨面 [M1]。"
       }
     },
     {

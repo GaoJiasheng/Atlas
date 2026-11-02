@@ -41,7 +41,7 @@ test.describe('fossils-and-skeletons', () => {
 
   test('background has the reading caveat and 36 beats, with no unrelated age card', async ({ page }) => {
     await open(page, 'ch=before-you-start');
-    await expect(page.locator('.atlas-note')).toContainText('Not a museum specimen inventory');
+    await expect(page.locator('.atlas-note')).toContainText(/teaching models.*different scales/i);
     await expect(page.locator('.atlas-axis')).toContainText('BG');
     await expect(card(page)).toHaveCount(0);
     expect(await page.evaluate(() => window.__atlas!.beats())).toHaveLength(36);
@@ -56,7 +56,7 @@ test.describe('fossils-and-skeletons', () => {
     };
     expect(await bracket()).toEqual([148, 150, 2, 147.8, 150.2]);
     await expect(card(page)).toContainText('SIM');
-    await expect(card(page)).toContainText('not a confidence interval');
+    await expect(card(page)).toContainText(/errors with fixed limits.*no probabilities/i);
     await expect(card(page).locator('[data-sim-output]')).toHaveCount(5);
     await card(page).locator('[data-sim-record]').click();
     await choose(page, 'ash-case', 'precise');

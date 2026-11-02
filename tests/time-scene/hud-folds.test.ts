@@ -111,7 +111,6 @@ describe('TimeScene HUD folds', () => {
   const insetProps: ModernInsetProps = { bundle, config, locale: 'en', selectedMa: 66, view: 'world', insetVisible: true, fossilMode: 'age-window', fossilsEnabled: true, highlight: [], selectedObjectId: null, onSelect() {}, onPatch() {} };
   const geologyProps: GeologyReadoutProps = { bundle, locale: 'en', selectedMa: 66, stats: null, fossilMode: 'age-window', counts: null, recordSources: [] };
   for (const [panel, node, field] of [
-    ['modern-inset', createElement(ModernInset, insetProps), 'legendsOpen'],
     ['present-evidence', createElement(ModernEvidence, insetProps), 'legendsOpen'],
     ['reconstruction-age', createElement(ReconstructionReadout, geologyProps), 'legendsOpen'],
     ['geology-plate', createElement(GeologyPlate, geologyProps), 'plateOpen'],
@@ -131,6 +130,16 @@ describe('TimeScene HUD folds', () => {
       expectFold(h.render(node), true, panel);
     });
   }
+  it('hosted find map: the host card supplies the one title and the fold, the header row is the view buttons and ×', () => {
+    const h = harness();
+    const html = h.render(createElement(ModernInset, { ...insetProps, hosted: true }));
+    expect(html).toContain('data-hud-panel="modern-inset"');
+    expect(html).not.toContain('ts-fold__header');
+    expect(html).not.toContain('<strong>');
+    expect(html).toContain('aria-label="Modern map view"');
+    expect(html).toContain('aria-label="Hide modern map"');
+    expect(headers).toHaveLength(0);
+  });
   it('keeps reader evidence outside HUD folding and removes explicitly hidden presentation evidence', () => {
     const h = harness();
     h.actions.setLegends(false);

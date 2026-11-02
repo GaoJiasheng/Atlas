@@ -33,6 +33,8 @@
   "index.stats.chapters.one": "{n} 章",
   "index.stats.events": "{n} 个事件",
   "index.stats.events.one": "{n} 个事件",
+  "index.stats.places": "{n} 个地点",
+  "index.stats.places.one": "{n} 个地点",
   "index.stats.keyframes": "{n} 幅地图",
   "index.stats.keyframes.one": "{n} 幅地图",
   "index.stats.parts": "{n} 个部件",

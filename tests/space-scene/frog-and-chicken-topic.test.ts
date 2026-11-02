@@ -225,7 +225,7 @@ describe('frog-and-chicken: drawings agree with the selected observations', () =
     const change = chapter('the-changing-frog').state.beats!;
     expect(change[0]!.caption.en).toMatch(/hind legs.*visible|visible.*hind legs/i);
     expect(change[1]!.caption.en).toMatch(/four limbs/i);
-    expect(change[2]!.caption.en).toMatch(/absorbed/i);
+    expect(change[2]!.caption.en).toMatch(/absorb(?:s|ed)?.*tail|tail.*absorb/i);
     expect(change[4]!.caption.en).toMatch(/five selected views/i);
     expect(chapter('cycles-compared').state.beats![1]!.caption.en).toMatch(/pupa/);
     expect(chapter('cycles-compared').state.beats![2]!.caption.en).toMatch(/seed, young plant and adult plant/);

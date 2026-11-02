@@ -37,8 +37,8 @@ state:
     - 0.05
     fov: 32
   summary:
-    en: Leaf material and algae connect several feeding pathways. Decomposers also obtain energy from dead material.
-    zh: 叶片和藻类连起几条食物路径；分解者也从死亡物质中获得能量。
+    en: Fallen leaves feed other organisms, while shared foods join food chains.
+    zh: 落叶供其他生物取食，共同的食物把食物链连在一起。
   sim:
     set:
       remove: none
@@ -53,8 +53,8 @@ state:
     - fallen-leaves
     - tree-crabs
     caption:
-      en: Some mangrove crabs eat fallen leaves. Dead leaf material still contains food energy.
-      zh: 有些红树林蟹吃落叶；死去的叶片仍含有食物中的能量。
+      en: Some mangrove crabs eat fallen leaves. The dead leaves still contain food energy.
+      zh: 有些红树林蟹吃落叶。死叶仍含有食物中的能量。
   - hide:
     - gill-inset
     camera:
@@ -71,8 +71,8 @@ state:
     - bacteria-inset
     - fungi-inset
     caption:
-      en: Crabs break leaves into smaller pieces. Bacteria and fungi also break down leaf material.
-      zh: 蟹把叶片弄碎；细菌和真菌也会分解叶片物质。
+      en: Crabs break leaves into smaller pieces. Bacteria and fungi also break down the leaves.
+      zh: 蟹把叶弄成小碎片，细菌和真菌也会分解叶片。
   - hide:
     - gill-inset
     camera:
@@ -88,17 +88,17 @@ state:
     labels:
     - fungi-inset
     caption:
-      en: Decomposers obtain energy from organic material too. They are not plants making food from sunlight.
-      zh: 分解者也从有机物质中获得能量；它们不是利用阳光制造食物的植物。
+      en: Decomposers get energy as they break down dead material. They do not make food from sunlight.
+      zh: 分解者分解死亡物质，从中获得能量。它们不用阳光制造食物。
   - hide:
     - bacteria-inset
     - fungi-inset
     - gill-inset
     camera: web-view
     caption:
-      en: Materials can return to the environment through decay. Energy does not return to the Sun in a recycling
-        loop.
-      zh: 分解使物质回到环境中；能量不会绕一圈回到太阳再循环使用。
+      en: Decay returns materials to the environment. Energy passes along food paths and does not circle back
+        to the Sun.
+      zh: 分解使物质回到环境中。能量沿食物路径传递，不会绕回太阳。
   - hide:
     - bacteria-inset
     - fungi-inset
@@ -108,9 +108,9 @@ state:
     - algae-patch
     - fallen-leaves
     caption:
-      en: In this model, the climbing-crab group has two selected food inputs. The group combines different crab
-        kinds, not a single species diet. Equal lines do not mean equal meals.
-      zh: 在这个模型里，攀爬蟹类有两种选入食物；这个功能组合并不同蟹类，不是单一物种的食谱。相同的线不表示相同食量。
+      en: 'In this model, the climbing-crab group has two foods: leaves and algae. The group includes several
+        crab kinds.'
+      zh: 在这个模型里，攀爬蟹类有两种食物：叶片和藻类。这一组包含几类蟹。
   index:
     parts:
     - fallen-leaves
@@ -123,23 +123,23 @@ state:
 
 <Lang en>
 
-Look below the trees at the fallen leaves. Some sesarmid crabs at Sungei Buloh eat leaf material and begin breaking it into smaller pieces. The leaves are dead, but their material still contains food energy. This is a way that material produced by a living tree can enter feeding pathways after a leaf falls.
+Look at the fallen leaves below the trees. Some sesarmid crabs at Sungei Buloh eat leaf material and break it into smaller pieces. A leaf is dead, but it still contains food energy. Material made by a living tree can therefore feed other organisms after the leaf falls.
 
-The microbe close-up shows another part of the process. Bacteria and fungi break down leaf litter. A <Term id="decomposer">decomposer</Term> obtains energy from organic material while breaking it down; it does not make food from sunlight as a plant does. The enlarged shapes stand for organisms involved in decay. They are diagrams beside the habitat, rather than huge microbes on the mudbank.
+Bacteria and fungi also break down leaf litter. A <Term id="decomposer">decomposer</Term> gets energy as it breaks down organic material, such as dead leaves and animal remains. Unlike plants, these decomposers do not use sunlight to make food. The enlarged close-ups show some of the organisms involved.
 
-Fragments of dead organic material are called <Term id="detritus">detritus</Term>. Decomposition can return materials to the environment, where they can enter other processes. Keep material movement separate from energy transfer. Energy moves through the feeding pathways and is dissipated as heat; it does not travel back to the Sun in a recycling loop. A return of mineral nutrients would need a different kind of arrow.
+Fragments of dead organic material are called <Term id="detritus">detritus</Term>. Decay returns materials to the environment, where they can be used again. Energy follows a different path: it passes along food chains and is dissipated as heat. It does not circle back to the Sun. An arrow for returning mineral nutrients would mean something different from a food arrow.
 
-Several chains joined by shared nodes form a <Term id="food-web">food web</Term>. In this model, the climbing-crab functional group receives <Num s="S30">2</Num> selected inputs, leaf material and algae. The group combines different crab kinds and accounts; it does not say one Episesarma species has both diets at this place. Shared nodes give routes to compare, while equal line widths say nothing about equal meals or equal importance.
+Food chains that share organisms join to form a <Term id="food-web">food web</Term>. In this model, the climbing-crab group has <Num s="S30">2</Num> foods: leaves and algae. It brings together several crab kinds. Compare how these shared food sources link the chains.
 
 <More title={{"en": "Different climbing-crab kinds", "zh": "不同的攀爬蟹类"}}>
 
-The NParks illustrated newsletter has indexed text about algae-grazing climbing crabs, including Selatium, and leaf feeding is reported for sesarmids. Only the indexed panel text was available here. The broad functional node preserves those distinctions rather than presenting a single-species diet. Its food links are selected possibilities for a conditional teaching graph.
+Some climbing crabs, including Selatium, graze on algae. Leaf feeding is reported for sesarmid crabs. The group joins these different kinds; it does not mean one Episesarma species eats both foods at the same place. Equal lines do not mean equal meals or equal importance.
 
 </More>
 
-<More title={{"en": "Decay is outside the removal calculation", "zh": "分解不在移走计算中"}}>
+<More title={{"en": "Leaves remain after they fall", "zh": "落叶仍会留在原地"}}>
 
-The model shows bacteria and fungi to explain decay, but does not calculate their rates. They are not extra nodes in the selected food graph. A fallen-leaf shape can remain after the living leaf supply is closed, because the control does not erase old material.
+Removing the continuing leaf supply leaves old fallen leaves in the scene. The food-web calculation does not include the rate of decay or extra nodes for bacteria and fungi.
 
 </More>
 
@@ -147,23 +147,23 @@ The model shows bacteria and fungi to explain decay, but does not calculate thei
 
 <Lang zh>
 
-看树下的落叶。双溪布洛有些相手蟹会取食叶片，先把叶弄成较小的碎片。叶已经死亡，其中仍含有食物的能量。这说明活树产生的物质，在叶片掉落后仍能进入取食路径。
+看看树下的落叶。双溪布洛有些相手蟹会吃叶片，把叶弄成较小的碎片。叶已经死亡，却仍含有食物中的能量。因此，活树产生的物质在叶片掉落后，还能供其他生物取食。
 
-微生物近景显示过程的另一部分。细菌和真菌会分解落叶。<Term id="decomposer">分解者</Term>分解有机物时，也从中取得能量；它们不像植物那样利用阳光制造食物。旁边放大的形状表示参与分解的生物，是独立示意图，不是泥岸上巨大的微生物。
+细菌和真菌也会分解落叶。<Term id="decomposer">分解者</Term>分解有机物时，从中获得能量。有机物包括死叶和动物遗体。这些分解者不像植物那样利用阳光制造食物。放大的近景显示了参与分解的一些生物。
 
-死亡有机物的碎片称为<Term id="detritus">碎屑</Term>。分解可使物质回到环境，进入别的过程。要把物质的移动与能量传递分开：能量沿食物路径传递，并以热的形式散失，不会绕一圈回到太阳。若要画矿物质养分的回流，就需要另一类箭头，不能混进取食图。
+死亡有机物的碎片称为<Term id="detritus">碎屑</Term>。分解使物质回到环境中，再被利用。能量的去向不同：它沿食物链传递，并以热的形式散失，不会绕回太阳。表示矿物质养分回流的箭头，与食物箭头含义不同。
 
-几条食物链共用节点，连起来形成<Term id="food-web">食物网</Term>。在这个模型里，攀爬蟹类功能组有 <Num s="S30">2</Num> 种选入的食物：叶片与藻类。这个组综合不同蟹类和资料，不表示某一种 Episesarma 在此地同时有这两种食性。共享节点让我们比较路径；线画得一样粗，不表示食量或重要性相同。
+几条食物链共享生物，连起来形成<Term id="food-web">食物网</Term>。在这个模型里，攀爬蟹类有 <Num s="S30">2</Num> 种食物：叶片和藻类。这一组包含几类不同的蟹。看看共同的食物来源怎样把食物链连在一起。
 
 <More title={{"en": "Different climbing-crab kinds", "zh": "不同的攀爬蟹类"}}>
 
-NParks 图版通讯的索引文字提到包括 Selatium 在内的攀爬蟹类刮食藻类；相手蟹取食叶片则另有记录。本轮只能读到该图版的索引文字。宽泛的功能节点保留这些区别，不把它们说成单一物种的食谱。选入的食物线，是条件性教学图中的可能关系。
+一些攀爬蟹类，包括 Selatium，会刮食藻类；相手蟹则有吃叶片的记录。这一组综合不同蟹类，不表示同一种 Episesarma 在同一地方吃这两种食物。线画得一样粗，也不表示食量或重要性相同。
 
 </More>
 
-<More title={{"en": "Decay is outside the removal calculation", "zh": "分解不在移走计算中"}}>
+<More title={{"en": "Leaves remain after they fall", "zh": "落叶仍会留在原地"}}>
 
-模型显示细菌和真菌来解释分解，但不计算分解速率；它们不是所选食物图中的额外节点。关闭活树的持续叶片供应后，落叶造型仍可保留，因为控件没有让原有物质消失。
+移走持续的叶片供应后，画面仍保留旧落叶。食物网的计算不包括分解速率，也没有把细菌和真菌另列为节点。
 
 </More>
 

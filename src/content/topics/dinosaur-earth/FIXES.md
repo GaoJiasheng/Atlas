@@ -1,42 +1,9 @@
-# dinosaur-earth · fixes for Codex (browser acceptance, 2026-10-27)
+# dinosaur-earth · browser-acceptance fixes
 
-Found in the browser acceptance (docs/47 §9.4). The small engine and layout fixes are already in place (see §9.4). The items below are the design and content rework that is left. Screenshots are local (`shots/` is not in git). To reproduce them, run `pnpm build`, then `pnpm shoot dinosaur-earth --beats --layout --locale en,zh --theme paper,cinema --gpu`, and open the named files under `shots/dinosaur-earth/<locale>-<theme>/`.
+Completed in the worktree on 2026-10-29. Original browser findings: docs/47 §9.4 (2026-10-27); implementation record: §9.5. Browser-verified 2026-11-02 after merging main (`pnpm shoot dinosaur-earth --beats --keys --layout --locale en,zh --theme paper,cinema`: 35/35 beat links, 0 key failures, 0 layout issues at eight sizes, console clean in all four runs).
 
-## 1. Inset labels collide and are too small to read
-
-- **Seen:** `beat-fossil-atlas-2.png` (World view). The labels for "Collection 24178", "Chicxulub: modern locator" and "Singapore: modern reference" sit on top of one another. Inset labels are 10 SVG units, which is about 9 px on screen at 1920 × 1080 and smaller in the reader on phones.
-- **Expected:**
-  - Labels never overlap. Either resolve collisions, or show the reference labels only in their own regional view (or when they are highlighted).
-  - Labels are at least 11 px on screen at every size.
-  - `shoot --beats` still finds every highlighted id through `.ts-modern-label[data-id]`.
-
-## 2. Inset card: two titles, and the host title is truncated
-
-- **Seen:** at 1024 × 768 and 1920 × 1080 (any chapter):
-  - The host card title "MODERN FIND LOCATIONS · TODAY 现代发现地点…" is truncated.
-  - The inset then repeats its own title, "TODAY · Modern find locations", above the × button.
-- **Expected:**
-  - One title only.
-  - Keep the × (hide inset) control, which `inset-visible` needs.
-  - The host card title should fit or be shorter (for example "Modern finds · today").
-
-## 3. Layers panel: the three inset views show as independent checkboxes
-
-- **Seen:** at 900 × 1200 with the layers panel open, World, Southeast Asia and Mexico appear as three separate checkboxes, although they are mutually exclusive. "Across the Mesozoic" also repeats a button that is already in the inset.
-- **Expected:** one view selector with radio semantics, or the views left in the inset only. The keys and the store stay shared, as now.
-
-## 4. Source notes read as an audit log
-
-- **Seen:** `data/sources.json`, for example S29, S64, S65, S66 and S67.
-  - Every note ends with "Source-review date recorded in the spec: 27 October 2026; fixed data snapshots 26 October 2026 where stated".
-  - Some notes carry pipeline jargon, such as "z>0 nearest-sample cells", "CRC/SHA", "DS01–DS03" and "nc archive contains 109 members".
-  - I only fixed the run-together spacing (for example "spec:27October2026" and "about10km").
-- **Expected:**
-  - One or two plain sentences per source, saying what was taken from it.
-  - The audit detail stays in `data/SOURCES.md` and `scripts/geo/dinosaur-earth/SOURCES-GEO.md`.
-  - Readers are primary-school students.
-
-## 5. Phones: where the evidence lives
-
-- **Seen:** at 390 × 844 the reader now starts collapsed, as on every other TimeScene topic. Before, it opened by itself on load and on every beat, which squeezed the HUD into overlaps. The find map and the beat line show after READ. The bar's state line shows "SELECTED · MAP SAMPLE · Δ".
-- **Expected:** if evidence should be visible on phones without opening the reader, design a compact on-stage evidence chip that passes `shoot --layout` at 390 × 844. The presentation already shows the evidence aside.
+- [x] **DONE 2026-11-02 · 1 · Legible, non-overlapping inset labels.** Long names now occupy separate wrapping HTML button rows below the map, at least 12 CSS px and 44 px tall. Numbered callouts and leaders link them to the map. World references remain unnamed unless highlighted/selected; Singapore and Chicxulub are named in their own regional views. Every displayed highlighted point retains `.ts-modern-label[data-id]` for `shoot --beats`. Seen: world view at 1920×1080 and 1024×768 shows one numbered callout with a leader and the row “1 Singapore: modern reference”; Mexico and Southeast Asia beats (`beat-impact-boundary-2`, `beat-southeast-asian-finds-2`) show their own reference rows, no overlapping text.
+- [x] **DONE 2026-11-02 · 2 · One inset title.** Shortened the host title to “Modern finds · today / 现代发现 · 今天”. Hosted insets omit their internal title; reader/presentation insets display the configured title once. The × control still hides the inset through `inset-visible`. Seen: `layout-1920x1080` / `layout-1024x768` card header reads “MODERN FINDS · TODAY 现代发现 · 今天” once; no second title inside the inset. At 1024 “Southeast Asia” was breaking mid-word (“Southea st”); fixed with hyphenation and narrower button padding in the hosted header.
+- [x] **DONE 2026-11-02 · 3 · Views are buttons.** World, Southeast Asia and Mexico remain one exclusive button group inside the inset. Removed their checkbox-style LAYERS rows and the repeated “Across the Mesozoic” row. Visibility remains a layer-panel toggle; the existing modes and store actions remain available. Seen: LAYERS lists only Selected fossil collections / Modern find map / Grid; the three views are the World / Southeast Asia / Mexico buttons in the card. The overlay close × sat on the first row's label; the first row now keeps clear of it.
+- [x] **DONE 2026-11-02 · 4 · Student source notes and prose.** All source notes explain what the source supplies in plain EN/ZH. Review dates and original technical/process detail are archived in `AUDIT.md`; geographic provenance remains in `data/SOURCES.md` and `scripts/geo/dinosaur-earth/SOURCES-GEO.md`. All eight chapter bodies are rewritten for ages 10–12, preserving facts, sources and needed caveats without repeated audit wording. Seen: reader panel prose in EN and ZH (background, Southeast Asia). Fact diff against the pre-rewrite text: every number tag, source button, Term id and TopicLink kept; one lost statement restored in chapter 00 (“there is no map for exactly 66 Ma”). Old source notes are archived word for word in AUDIT.md.
+- [x] **DONE 2026-11-02 · 5 · Phone evidence decision.** Kept the compact shared phone HUD: READ opens the evidence map and beat line; the bottom status keeps selected age / map sample / Δ. No extra on-stage evidence chip was added. Presentation evidence remains available. This optional design choice avoids adding another HUD block before browser layout verification. Seen: `zh-paper/layout-390x844` and `-linked`: map, chapter chips, layers chip, chapter axis with “所选 / 地图样本 / Δ”, READ button; no overlap.

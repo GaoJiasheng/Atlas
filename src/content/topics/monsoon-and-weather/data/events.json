@@ -12,12 +12,12 @@
       "zh": "新加坡"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151627), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151627）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Singapore on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出新加坡。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -36,12 +36,12 @@
       "zh": "吉隆坡"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151317), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151317）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Kuala Lumpur on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出吉隆坡。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -60,12 +60,12 @@
       "zh": "雅加达"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151599), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151599）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Jakarta on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出雅加达。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -84,12 +84,12 @@
       "zh": "河内"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151251), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151251）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Hanoi on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出河内。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -108,12 +108,12 @@
       "zh": "曼谷"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151509), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151509）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Bangkok on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出曼谷。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"
@@ -132,12 +132,12 @@
       "zh": "马尼拉"
     },
     "summary": {
-      "en": "Reading anchor, not a weather station",
-      "zh": "认位置用的城市点，不是气象站"
+      "en": "City on the regional weather map",
+      "zh": "区域天气地图上的城市"
     },
     "detail": {
-      "en": "Representative city point from Natural Earth 1:110m populated places (NE_ID 1159151525), coordinates unchanged. It marks the city only: not a weather station, a monitoring instrument or a fire location. The monthly wind and rain values come from regional grid cells, not from measurements in this city.",
-      "zh": "取自 Natural Earth 1:110m 城市点（NE_ID 1159151525）的城市代表点，坐标未改。它只标出城市，不是气象站、监测仪器，也不是火点。月平均风和雨的数值来自区域格点，不是在这座城市测得的。"
+      "en": "This dot marks Manila on the map. The wind and rain readings describe the surrounding area; they are not measurements taken at a city weather station. City location: Natural Earth.",
+      "zh": "这个点在地图上标出马尼拉。风和雨的读数说明周围地区的情况，并非市内气象站的实测值。城市位置资料：Natural Earth。"
     },
     "sources": [
       "S103"

@@ -69,3 +69,9 @@
 静态几何核对发现原05镜头的震源被右侧岩块遮挡，改为X=0的正面镜头，震源仍在岩块内部。另修复既有renderer的环形局部lathe引线落在中心孔内的问题，改为指向实际切面材料；九例使用真实三角面的射线回归通过。这是最小标签bug修复，不增加求解器或schema。实际标签排布、细薄地壳可读性、两主题材质仍需要浏览器截图确认。
 
 给Gavin：请先在允许Chromium启动的环境完成brief全部浏览器门槛，再审本页逐章中文和D1–D10默认项；确认BCA语气、图解单位、记录表限制与两幅超建议大小的图。通过后改published并更新首页smoke计数；姊妹路由落地后再补本页列出的双向主题链接。
+
+## Readability pass 2026-10-29
+
+Rewrote English and simplified Chinese for Singapore P4–P6 readers: shorter chapter paragraphs, captions, part cards, glossary definitions, figure text, try-it instructions and PLATE/notes labels. Removed repeated disclaimers and reviewer/provenance language from the reading text. Retained the scientific limits needed to interpret the examples. Facts, numerical values, source references, links and all model/interaction data are unchanged.
+
+BCA S23 was checked on 27 October 2026 (2026 年 10 月 27 日); this source-check date was moved out of the reading text. The linked guidance, its source reference and the two attributed indoor actions are unchanged. The formula illustrates theoretical speed only; the building model supplies no site-specific safety assessment.

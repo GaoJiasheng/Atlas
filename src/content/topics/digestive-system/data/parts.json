@@ -18,8 +18,8 @@
         "zh": "和下牙一起切断、撕碎、磨碎食物。"
       },
       "detail": {
-        "en": "The sharp front teeth cut, the pointed canines tear and the broad back teeth grind. Each tooth has a very hard outer layer of enamel over dentine, with soft pulp inside [S4].\n\nAn adult has 32 permanent teeth, which replace 20 baby teeth [S4]. The model has 28: its source leaves out the wisdom teeth (third molars) [S11].\n\nChewing is the physical part of digestion. It breaks food into small pieces, so digestive juices reach more of it. Missing or painful teeth make chewing slower and less thorough.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "尖薄的门牙切断食物，尖尖的犬齿撕开，宽大的后牙磨碎。每颗牙外层是很硬的牙釉质，下面是牙本质，中间是柔软的牙髓 [S4]。\n\n成人有 32 颗恒牙，替换了 20 颗乳牙 [S4]。模型只有 28 颗：源文件没有智齿（第三磨牙）[S11]。\n\n咀嚼是消化里物理的一步：把食物弄成小块，消化液就能接触到更多食物。缺牙或牙痛时，咀嚼就慢，也嚼不细。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The sharp front teeth cut, the pointed canines tear and the broad back teeth grind. Each tooth has a very hard outer layer of enamel over dentine, with soft pulp inside [S4].\n\nAn adult has 32 permanent teeth, which replace 20 baby teeth [S4]. The model has 28 teeth because the wisdom teeth (third molars) are not shown [S11].\n\nChewing is the physical part of digestion. It breaks food into small pieces, so digestive juices reach more of it. Missing or painful teeth make chewing slower and less thorough.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "尖薄的门牙切断食物，尖尖的犬齿撕开，宽大的后牙磨碎。每颗牙外层是很硬的牙釉质，下面是牙本质，中间是柔软的牙髓 [S4]。\n\n成人有 32 颗恒牙，替换了 20 颗乳牙 [S4]。模型只有 28 颗，因为没有画出智齿（第三磨牙）[S11]。\n\n咀嚼是消化里物理的一步：把食物弄成小块，消化液就能接触到更多食物。缺牙或牙痛时，咀嚼就慢，也嚼不细。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "tongue"
@@ -50,8 +50,8 @@
         "zh": "随下颌移动，和上牙对咬咀嚼。"
       },
       "detail": {
-        "en": "The lower teeth sit in the lower jaw, the one bone of the skull that moves. Jaw muscles lift it and slide it from side to side, so the back teeth grind food between them [S4].\n\nChewing mixes the pieces with saliva into a soft lump that is easy to swallow [S4]. On the stage the lower teeth rock slowly up and down while the scene runs; real chewing is faster and also moves sideways.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "下牙长在下颌骨上，下颌骨是头骨里唯一能动的骨。咀嚼肌把它抬起，并左右移动，后牙就把食物夹在中间磨碎 [S4]。\n\n咀嚼把碎块和唾液拌成容易吞咽的软团 [S4]。场景运转时，舞台上的下牙会慢慢上下摆动；真实的咀嚼更快，也会左右移动。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The lower teeth sit in the lower jaw, the one bone of the skull that moves. Jaw muscles lift it and slide it from side to side, so the back teeth grind food between them [S4].\n\nChewing mixes the pieces with saliva into a soft lump that is easy to swallow [S4]. On the stage the lower teeth rock slowly up and down while the scene runs; real chewing is faster and also moves sideways.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "下牙长在下颌骨上，下颌骨是头骨里唯一能动的骨。咀嚼肌把它抬起，并左右移动，后牙就把食物夹在中间磨碎 [S4]。\n\n咀嚼把碎块和唾液拌成容易吞咽的软团 [S4]。场景运转时，舞台上的下牙会慢慢上下摆动；真实的咀嚼更快，也会左右移动。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "tongue"
@@ -82,8 +82,8 @@
         "zh": "把食物和唾液拌匀，推向咽。"
       },
       "detail": {
-        "en": "The tongue is a mass of muscle covered with a moist lining. It turns the food over between the teeth, mixes it with saliva and shapes it into a soft lump. To swallow, it presses up and back against the roof of the mouth and pushes the lump into the throat [S4].\n\nThe tongue also carries the taste buds. In the model it is one simplified surface [S11].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "舌是一团肌肉，表面覆盖着湿润的黏膜。它在牙齿之间翻动食物，把食物和唾液拌匀，捏成一个软团。吞咽时，舌向上、向后顶住口腔顶部，把食团推进咽 [S4]。\n\n舌上还有味蕾。模型里的舌是一个简化的表面 [S11]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The tongue is a mass of muscle covered with a moist lining. It turns the food over between the teeth, mixes it with saliva and shapes it into a soft lump. To swallow, it presses up and back against the roof of the mouth and pushes the lump into the throat [S4].\n\nThe tongue also carries the taste buds. In the model it is one simplified surface [S11].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "舌是一团肌肉，表面覆盖着湿润的黏膜。它在牙齿之间翻动食物，把食物和唾液拌匀，捏成一个软团。吞咽时，舌向上、向后顶住口腔顶部，把食团推进咽 [S4]。\n\n舌上还有味蕾。模型里的舌是一个简化的表面 [S11]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "pharynx"
@@ -114,8 +114,8 @@
         "zh": "分泌唾液，润湿食物，开始消化。"
       },
       "detail": {
-        "en": "Three pairs of glands, in front of the ears, under the jaw and under the tongue, pour saliva into the mouth through small ducts [S4]. Saliva wets and softens food so it can be swallowed, and a digestive juice in it starts to break starch down [S4].\n\nAn adult makes about 1 to 1.5 litres of saliva a day [S4]. The model joins the three glands on each side into one part. While the scene runs, blue-grey dots carry saliva into the mouth.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "三对唾液腺分别在耳朵前方、下颌下方和舌下面，经细小的导管把唾液送进口腔 [S4]。唾液润湿、软化食物，方便吞咽；唾液里的消化液还开始分解淀粉 [S4]。\n\n成人每天分泌约 1–1.5 升唾液 [S4]。模型把每一侧的三个腺体合成一个零件。场景运转时，青灰色的点把唾液送进口腔。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Three pairs of glands, in front of the ears, under the jaw and under the tongue, pour saliva into the mouth through small ducts [S4]. Saliva wets and softens food so it can be swallowed, and a digestive juice in it starts to break starch down [S4].\n\nAn adult makes about 1 to 1.5 litres of saliva a day [S4]. The model joins the three glands on each side into one part. While the scene runs, blue-grey dots carry saliva into the mouth.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "三对唾液腺分别在耳朵前方、下颌下方和舌下面，经细小的导管把唾液送进口腔 [S4]。唾液润湿、软化食物，方便吞咽；唾液里的消化液还开始分解淀粉 [S4]。\n\n成人每天分泌约 1–1.5 升唾液 [S4]。模型把每一侧的三个腺体合成一个零件。场景运转时，青灰色的点把唾液送进口腔。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "tongue"
@@ -154,8 +154,8 @@
         "zh": "让吞下的食物从口进入食道。"
       },
       "detail": {
-        "en": "The throat is a muscular passage that food and air share. When you swallow, the soft palate rises to close off the nose, and a flap called the epiglottis folds down over the opening of the windpipe, so the food goes into the gullet behind it [S4].\n\nThe model shows the parts of the throat behind the mouth and behind the voice box; the part behind the nose is left out [S11].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "咽是食物和空气共用的肌肉通道。吞咽时，软腭上抬挡住鼻腔，会厌向下盖住气管的入口，食物就进入气管后面的食道 [S4]。\n\n模型显示口腔后面和喉后面的咽；鼻腔后面的一段没有画出 [S11]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The throat is a muscular passage that food and air share. When you swallow, the soft palate rises to close off the nose, and a flap called the epiglottis folds down over the opening of the windpipe, so the food goes into the gullet behind it [S4].\n\nThe model shows the parts of the throat behind the mouth and behind the voice box; the part behind the nose is left out [S11].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "咽是食物和空气共用的肌肉通道。吞咽时，软腭上抬挡住鼻腔，会厌向下盖住气管的入口，食物就进入气管后面的食道 [S4]。\n\n模型显示口腔后面和喉后面的咽；鼻腔后面的一段没有画出 [S11]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "oesophagus"
@@ -187,8 +187,8 @@
         "zh": "肌肉收缩，把吞下的食物送到胃。"
       },
       "detail": {
-        "en": "The gullet is a muscular tube about 25 cm long in an adult. It runs down behind the windpipe and the heart, passes through the diaphragm and opens into the stomach [S4]. Waves of muscle contraction, called peristalsis, push each swallowed lump along; solid food takes about 4 to 8 seconds to reach the stomach [S4].\n\nThe gullet adds no digestive juice. It only moves food. Its other name is the oesophagus.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "食道是一条肌肉管，成人约长 25 厘米。它从气管和心脏后面向下，穿过膈，通入胃 [S4]。管壁肌肉一波一波地收缩（蠕动），把每个食团向下推；固体食物大约 4–8 秒到达胃 [S4]。\n\n食道不分泌消化液，只负责输送食物。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The gullet is a muscular tube about 25 cm long in an adult. It runs down behind the windpipe and the heart, passes through the diaphragm and opens into the stomach [S4]. Waves of muscle contraction, called peristalsis, push each swallowed lump along; solid food takes about 4 to 8 seconds to reach the stomach [S4].\n\nThe gullet adds no digestive juice. It only moves food. Its other name is the oesophagus.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "食道是一条肌肉管，成人约长 25 厘米。它从气管和心脏后面向下，穿过膈，通入胃 [S4]。管壁肌肉一波一波地收缩（蠕动），把每个食团向下推；固体食物大约 4–8 秒到达胃 [S4]。\n\n食道不分泌消化液，只负责输送食物。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "stomach"
@@ -220,8 +220,8 @@
         "zh": "搅拌食物，与酸性的胃液混合。"
       },
       "detail": {
-        "en": "The stomach is a J-shaped bag of muscle under the left ribs. Its wall has three layers of muscle running in different directions, which squeeze and churn the food. Its lining makes gastric juice, which is strongly acidic, at about pH 1.5 to 3.5. A thick layer of mucus keeps the acid off the lining [S5].\n\nEmpty, the stomach is about the size of a fist; it can stretch to hold about 4 litres [S5]. A meal leaves it as a thick, soupy mixture a little at a time, and the stomach is usually empty within 2 to 4 hours [S5].\n\nThe source stomach had a round display window cut in its front wall. Atlas closed it with a smooth patch, so the model reads as a whole organ [S1].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "胃是左侧肋骨下面一个 J 形的肌肉囊。胃壁有三层走向不同的肌肉，能挤压、搅拌食物。胃的内壁分泌胃液，胃液酸性很强，pH 约 1.5–3.5；一层厚厚的黏液把胃酸和内壁隔开 [S5]。\n\n空的时候，胃只有拳头大小，撑开后能容纳约 4 升 [S5]。食物在胃里变成浓稠的糊，一点一点离开；一顿饭通常 2–4 小时内全部离开胃 [S5]。\n\n源文件的胃在前壁上开了一个圆形的展示窗。Atlas 用平滑的曲面把它补上，让模型看起来是完整的器官 [S1]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The stomach is a J-shaped bag of muscle under the left ribs. Its wall has three layers of muscle running in different directions, which squeeze and churn the food. Its lining makes gastric juice, which is strongly acidic, at about pH 1.5 to 3.5. A thick layer of mucus keeps the acid off the lining [S5].\n\nEmpty, the stomach is about the size of a fist; it can stretch to hold about 4 litres [S5]. A meal leaves it as a thick, soupy mixture a little at a time, and the stomach is usually empty within 2 to 4 hours [S5].\n\nThe model shows the stomach with a closed outer wall [S1].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "胃是左侧肋骨下面一个 J 形的肌肉囊。胃壁有三层走向不同的肌肉，能挤压、搅拌食物。胃的内壁分泌胃液，胃液酸性很强，pH 约 1.5–3.5；一层厚厚的黏液把胃酸和内壁隔开 [S5]。\n\n空的时候，胃只有拳头大小，撑开后能容纳约 4 升 [S5]。食物在胃里变成浓稠的糊，一点一点离开；一顿饭通常 2–4 小时内全部离开胃 [S5]。\n\n模型显示的是外壁完整的胃 [S1]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "duodenum"
@@ -253,8 +253,8 @@
         "zh": "接收胃送来的食物，以及胆汁和胰液。"
       },
       "detail": {
-        "en": "The duodenum is the first and shortest part of the small intestine, about 25 cm long. It makes a C-shaped curve round the head of the pancreas [S6]. The bile duct and the main duct of the pancreas open into it through one shared opening, so bile and pancreatic juice meet the food here [S7].\n\nOn the stage, the blue-grey dots of bile and pancreatic juice arrive at that opening in the second, downward part of the curve.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "十二指肠是小肠最前、最短的一段，长约 25 厘米，绕着胰头弯成 C 形 [S6]。胆管和胰管经同一个开口通入十二指肠，所以胆汁和胰液在这里和食物相遇 [S7]。\n\n舞台上，胆汁和胰液的青灰色点到达 C 形弯第二段（向下的一段）上的这个开口。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The duodenum is the first and shortest part of the small intestine, about 25 cm long. It makes a C-shaped curve round the head of the pancreas [S6]. The bile duct and the main duct of the pancreas open into it through one shared opening, so bile and pancreatic juice meet the food here [S7].\n\nOn the stage, the blue-grey dots of bile and pancreatic juice arrive at that opening in the second, downward part of the curve.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "十二指肠是小肠最前、最短的一段，长约 25 厘米，绕着胰头弯成 C 形 [S6]。胆管和胰管经同一个开口通入十二指肠，所以胆汁和胰液在这里和食物相遇 [S7]。\n\n舞台上，胆汁和胰液的青灰色点到达 C 形弯第二段（向下的一段）上的这个开口。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "jejunum"
@@ -286,8 +286,8 @@
         "zh": "完成消化，把消化后的食物吸收进血液。"
       },
       "detail": {
-        "en": "Most of the small intestine lies in loose coils in the middle of the abdomen. Here digestive juices finish breaking food down into simpler substances, which pass through the lining into the blood. The lining is covered in tiny finger-like villi [S6, S8]. In a living adult the whole small intestine is about 3 m long and 2.5 cm wide, and food takes about 3 to 5 hours to pass along it [S6].\n\nThe source labels this coiled mesh \"jejunum\". It runs from the duodenum all the way to the start of the large intestine, so it also stands for the ileum, the last part, which opens into the caecum [S6, S10]. Measured along its middle, the mesh is about 2 m long, shorter than a living small intestine [S1]. At a few tight bends, neighbouring coils of the source overlap slightly.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "小肠的大部分松松地盘绕在腹部中间。消化液在这里把食物最后分解成更简单的物质，这些物质穿过布满细小指状绒毛的内壁，进入血液 [S6, S8]。成人活体的小肠长约 3 米、直径约 2.5 厘米，食物通过约需 3–5 小时 [S6]。\n\n源文件把这段盘绕的网格标为“空肠”。它从十二指肠一直连到大肠的起点，所以也代表了小肠的最后一段——通入盲肠的回肠 [S6, S10]。沿中线量，网格长约 2 米，比活体小肠短 [S1]。在几处急弯，源网格相邻的肠圈略有重叠。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Most of the small intestine lies in loose coils in the middle of the abdomen. Here digestive juices finish breaking food down into simpler substances, which pass through the lining into the blood. The lining is covered in tiny finger-like villi [S6, S8]. In a living adult the whole small intestine is about 3 m long and 2.5 cm wide, and food takes about 3 to 5 hours to pass along it [S6].\n\nThis coiled part shows both the jejunum and the ileum. The ileum is the last part of the small intestine and opens into the caecum [S6, S10]. The model tube is about 2 m long, shorter than a living small intestine [S1]. A few bends overlap slightly in the model.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "小肠的大部分松松地盘绕在腹部中间。消化液在这里把食物最后分解成更简单的物质，这些物质穿过布满细小指状绒毛的内壁，进入血液 [S6, S8]。成人活体的小肠长约 3 米、直径约 2.5 厘米，食物通过约需 3–5 小时 [S6]。\n\n这段盘绕的模型同时表示空肠和回肠。回肠是小肠的最后一段，通入盲肠 [S6, S10]。模型里的肠管约长 2 米，比活体小肠短 [S1]。几处急弯在模型里略有重叠。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "ascending-colon"
@@ -319,8 +319,8 @@
         "zh": "从盲肠开始，把剩余物向上运送。"
       },
       "detail": {
-        "en": "The large intestine begins low on the right side of the abdomen with a pouch, the caecum. The end of the small intestine opens into it through a valve [S6, S10]. From there the ascending colon climbs to the underside of the liver [S10].\n\nThe source does not separate the caecum: it is the rounded lower end of this mesh, where the appendix hangs [S11]. All along the colon, the wall takes back water and salts from the remains [S6].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "大肠从腹部右下方的一个囊——盲肠开始，小肠末端经一个瓣膜通入盲肠 [S6, S10]。升结肠从这里向上，到达肝的下面 [S10]。\n\n源文件没有单独的盲肠：它就是这段网格圆圆的下端，阑尾挂在那里 [S11]。整条结肠的肠壁都从剩余物里吸收水和盐 [S6]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The large intestine begins low on the right side of the abdomen with a pouch, the caecum. The end of the small intestine opens into it through a valve [S6, S10]. From there the ascending colon climbs to the underside of the liver [S10].\n\nIn this model, the caecum is the rounded lower end of this part, where the appendix hangs [S11]. All along the colon, the wall takes back water and salts from the remains [S6].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "大肠从腹部右下方的一个囊——盲肠开始，小肠末端经一个瓣膜通入盲肠 [S6, S10]。升结肠从这里向上，到达肝的下面 [S10]。\n\n在这个模型里，盲肠就是这段肠管圆圆的下端，阑尾挂在那里 [S11]。整条结肠的肠壁都从剩余物里吸收水和盐 [S6]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "transverse-colon"
@@ -352,8 +352,8 @@
         "zh": "盲肠上一条一端封闭的细管。"
       },
       "detail": {
-        "en": "The appendix is a narrow, winding tube about 7.6 cm long, closed at its far end and attached to the caecum [S6]. It contains lymphoid tissue, part of the body's defences [S6]. Food does not travel through it.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "阑尾是一条弯曲的细管，长约 7.6 厘米，末端封闭，连在盲肠上 [S6]。阑尾含有淋巴组织，是身体防御系统的一部分 [S6]。食物不经过阑尾。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The appendix is a narrow, winding tube about 7.6 cm long, closed at its far end and attached to the caecum [S6]. It contains lymphoid tissue, part of the body's defences [S6]. Food does not travel through it.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "阑尾是一条弯曲的细管，长约 7.6 厘米，末端封闭，连在盲肠上 [S6]。阑尾含有淋巴组织，是身体防御系统的一部分 [S6]。食物不经过阑尾。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "ascending-colon"
@@ -384,8 +384,8 @@
         "zh": "横过腹部，在肝和胃的下方。"
       },
       "detail": {
-        "en": "The transverse colon hangs across the abdomen from right to left, below the liver and stomach [S10]. Like the rest of the colon, its wall is bunched into a row of pouches [S6].\n\nThe large intestine is wider than the small intestine, about 7.6 cm across, but only about half as long [S6]. Its contents move slowly: the remains usually stay in the large intestine for 12 to 24 hours [S6].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "横结肠从右到左横挂在腹部，在肝和胃的下方 [S10]。和整条结肠一样，它的肠壁收拢成一串小袋 [S6]。\n\n大肠比小肠粗，直径约 7.6 厘米，长度却只有小肠的一半左右 [S6]。里面的东西走得很慢：剩余物通常在大肠里停留 12–24 小时 [S6]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The transverse colon hangs across the abdomen from right to left, below the liver and stomach [S10]. Like the rest of the colon, its wall is bunched into a row of pouches [S6].\n\nThe large intestine is wider than the small intestine, about 7.6 cm across, but only about half as long [S6]. Its contents move slowly: the remains usually stay in the large intestine for 12 to 24 hours [S6].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "横结肠从右到左横挂在腹部，在肝和胃的下方 [S10]。和整条结肠一样，它的肠壁收拢成一串小袋 [S6]。\n\n大肠比小肠粗，直径约 7.6 厘米，长度却只有小肠的一半左右 [S6]。里面的东西走得很慢：剩余物通常在大肠里停留 12–24 小时 [S6]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "descending-colon"
@@ -417,8 +417,8 @@
         "zh": "沿身体左侧向下，把剩余物送进骨盆。"
       },
       "detail": {
-        "en": "The descending colon runs down the left side of the abdomen. In the pelvis it turns into the S-shaped sigmoid colon, which crosses towards the middle and joins the rectum in front of the sacrum [S10].\n\nThe source names this whole mesh \"descending colon\"; its lower loop is the sigmoid colon [S10, S11]. By the time the remains reach here, most of their water has been taken back, and they are becoming faeces [S6].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "降结肠沿腹部左侧向下。进入骨盆后，它成为 S 形的乙状结肠，弯向中线，在骶骨前方接上直肠 [S10]。\n\n源文件把整段网格叫作“降结肠”，它下面的弯就是乙状结肠 [S10, S11]。剩余物到这里时，大部分水已被吸收，正在形成粪便 [S6]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The descending colon runs down the left side of the abdomen. In the pelvis it turns into the S-shaped sigmoid colon, which crosses towards the middle and joins the rectum in front of the sacrum [S10].\n\nThis model part includes the descending colon and the lower, S-shaped loop called the sigmoid colon [S10, S11]. By the time the remains reach here, most of their water has been taken back, and they are becoming faeces [S6].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "降结肠沿腹部左侧向下。进入骨盆后，它成为 S 形的乙状结肠，弯向中线，在骶骨前方接上直肠 [S10]。\n\n这段模型包括降结肠，下面 S 形的弯就是乙状结肠 [S10, S11]。剩余物到这里时，大部分水已被吸收，正在形成粪便 [S6]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "rectum"
@@ -454,8 +454,8 @@
         "zh": "暂存粪便，粪便最后从肛门排出。"
       },
       "detail": {
-        "en": "The rectum is the last part of the large intestine. It runs down in front of the sacrum and tailbone, widens into a store, and ends in the short anal canal, which opens to the outside at the anus [S6, S10]. Two rings of muscle keep the anus closed except when faeces are passed [S6].\n\nThe source file labels this mesh \"sigmoid colon\". Its place, in the midline against the sacrum, its length of about 12 cm and its widened lower end match the rectum and anal canal as Gray describes them, so Atlas names it the rectum [S10, S1].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "直肠是大肠的最后一段。它沿骶骨和尾骨前方向下，膨大成暂存粪便的地方，末端是短短的肛管，在肛门通向体外 [S6, S10]。两圈括约肌让肛门平时保持关闭，排便时才打开 [S6]。\n\n源文件把这段网格标为“乙状结肠”。但它贴着骶骨、位于正中，长约 12 厘米，下端膨大，与格雷《解剖学》描述的直肠和肛管一致，所以 Atlas 把它称为直肠 [S10, S1]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The rectum is the last part of the large intestine. It runs down in front of the sacrum and tailbone, widens into a store, and ends in the short anal canal, which opens to the outside at the anus [S6, S10]. Two rings of muscle keep the anus closed except when faeces are passed [S6].\n\nThe model shows the rectum and anal canal against the sacrum, in the middle of the body. This part is about 12 cm long and widens near its lower end [S10, S1].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "直肠是大肠的最后一段。它沿骶骨和尾骨前方向下，膨大成暂存粪便的地方，末端是短短的肛管，在肛门通向体外 [S6, S10]。两圈括约肌让肛门平时保持关闭，排便时才打开 [S6]。\n\n模型中的直肠和肛管贴着骶骨，位于身体正中。这段约长 12 厘米，下端较宽 [S10, S1]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [],
       "explode": {
@@ -485,8 +485,8 @@
         "zh": "制造胆汁，帮助消化脂肪。"
       },
       "detail": {
-        "en": "Further. The liver is the largest gland in the body, under the right ribs [S7]. Among its many jobs, it makes about one litre of bile a day. Bile flows through ducts to the duodenum, and between meals it is stored in the gallbladder [S7]. Bile breaks fat into tiny droplets, so that digestive juices can work on them faster [S7].\n\nFood does not pass through the liver. Digested food taken into the blood in the small intestine travels to the liver first, before going round the body [S8].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "再进一步。肝是身体里最大的腺体，在右侧肋骨下面 [S7]。肝有很多工作，其中一项是每天制造约 1 升胆汁。胆汁经导管流到十二指肠，两餐之间先储存在胆囊里 [S7]。胆汁把脂肪分散成小油滴，让消化液更快地分解它们 [S7]。\n\n食物不经过肝。小肠吸收进血液的养分，先被送到肝，再运往全身 [S8]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Further. The liver is the largest gland in the body, under the right ribs [S7]. Among its many jobs, it makes about one litre of bile a day. Bile flows through ducts to the duodenum, and between meals it is stored in the gallbladder [S7]. Bile breaks fat into tiny droplets, so that digestive juices can work on them faster [S7].\n\nFood does not pass through the liver. Digested food taken into the blood in the small intestine travels to the liver first, before going round the body [S8].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "再进一步。肝是身体里最大的腺体，在右侧肋骨下面 [S7]。肝有很多工作，其中一项是每天制造约 1 升胆汁。胆汁经导管流到十二指肠，两餐之间先储存在胆囊里 [S7]。胆汁把脂肪分散成小油滴，让消化液更快地分解它们 [S7]。\n\n食物不经过肝。小肠吸收进血液的养分，先被送到肝，再运往全身 [S8]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "gallbladder",
@@ -519,8 +519,8 @@
         "zh": "储存胆汁，饭后把胆汁挤出。"
       },
       "detail": {
-        "en": "Further. The gallbladder is a small muscular sac under the liver. It stores bile and makes it more concentrated, then squeezes it into the bile duct when food reaches the duodenum [S7].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "再进一步。胆囊是肝下面的一个小肌肉囊。它储存胆汁，并使胆汁变浓；食物到达十二指肠时，胆囊把胆汁挤进胆管 [S7]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Further. The gallbladder is a small muscular sac under the liver. It stores bile and makes it more concentrated, then squeezes it into the bile duct when food reaches the duodenum [S7].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "再进一步。胆囊是肝下面的一个小肌肉囊。它储存胆汁，并使胆汁变浓；食物到达十二指肠时，胆囊把胆汁挤进胆管 [S7]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "bile-duct"
@@ -552,8 +552,8 @@
         "zh": "把胰液送进十二指肠。"
       },
       "detail": {
-        "en": "Further. The pancreas lies behind the stomach, with its head inside the curve of the duodenum and its tail towards the left [S7]. It makes over a litre of pancreatic juice a day. The juice carries digestive enzymes, and it is slightly alkaline, so it neutralises the acid that arrives from the stomach [S7]. It reaches the duodenum through the same opening as the bile [S7].\n\nThe pancreas also makes hormones, such as insulin, which go straight into the blood [S7].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "再进一步。胰在胃的后面，胰头在十二指肠的弯里，胰尾伸向左侧 [S7]。胰每天分泌 1 升多的胰液。胰液含有消化酶，并且略带碱性，能中和从胃来的酸 [S7]。胰液和胆汁从同一个开口进入十二指肠 [S7]。\n\n胰还制造胰岛素等激素，这些激素直接进入血液 [S7]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Further. The pancreas lies behind the stomach, with its head inside the curve of the duodenum and its tail towards the left [S7]. It makes over a litre of pancreatic juice a day. The juice carries digestive enzymes, and it is slightly alkaline, so it neutralises the acid that arrives from the stomach [S7]. It reaches the duodenum through the same opening as the bile [S7].\n\nThe pancreas also makes hormones, such as insulin, which go straight into the blood [S7].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "再进一步。胰在胃的后面，胰头在十二指肠的弯里，胰尾伸向左侧 [S7]。胰每天分泌 1 升多的胰液。胰液含有消化酶，并且略带碱性，能中和从胃来的酸 [S7]。胰液和胆汁从同一个开口进入十二指肠 [S7]。\n\n胰还制造胰岛素等激素，这些激素直接进入血液 [S7]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "duodenum"
@@ -585,8 +585,8 @@
         "zh": "把肝和胆囊的胆汁送进肠。"
       },
       "detail": {
-        "en": "Further. The bile duct runs down behind the duodenum and joins the main duct of the pancreas; the two open into the duodenum together [S7]. On the stage, the blue-grey dots of bile and of pancreatic juice meet at that opening.\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "再进一步。胆管在十二指肠后方向下，和胰管会合，一起通入十二指肠 [S7]。舞台上，胆汁和胰液的青灰色点在这个开口会合。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Further. The bile duct runs down behind the duodenum and joins the main duct of the pancreas; the two open into the duodenum together [S7]. On the stage, the blue-grey dots of bile and of pancreatic juice meet at that opening.\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "再进一步。胆管在十二指肠后方向下，和胰管会合，一起通入十二指肠 [S7]。舞台上，胆汁和胰液的青灰色点在这个开口会合。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "duodenum"
@@ -618,8 +618,8 @@
         "zh": "支撑身体，保护柔软的器官。"
       },
       "detail": {
-        "en": "The bones hold the body up and give it its shape; they protect soft organs, as the skull protects the brain and the ribs protect the heart and lungs; and muscles pull on them to move the body [S2]. The P4 syllabus does not ask for the names of bones [S2].\n\nThe model joins the skull, ribs, backbone, pelvis and limb bones into one simplified part [S11].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "骨骼撑起身体、形成身体的形状；保护柔软的器官，例如头骨保护脑，肋骨保护心和肺；肌肉拉动骨骼，让身体活动 [S2]。小四课纲不要求记住骨的名称 [S2]。\n\n模型把头骨、肋骨、脊柱、骨盆和四肢的骨合成一个简化的零件 [S11]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The bones hold the body up and give it its shape; they protect soft organs, as the skull protects the brain and the ribs protect the heart and lungs; and muscles pull on them to move the body [S2]. The P4 syllabus does not ask for the names of bones [S2].\n\nThe model joins the skull, ribs, backbone, pelvis and limb bones into one simplified part [S11].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "骨骼撑起身体、形成身体的形状；保护柔软的器官，例如头骨保护脑，肋骨保护心和肺；肌肉拉动骨骼，让身体活动 [S2]。小四课纲不要求记住骨的名称 [S2]。\n\n模型把头骨、肋骨、脊柱、骨盆和四肢的骨合成一个简化的零件 [S11]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [],
       "castShadow": false,
@@ -642,8 +642,8 @@
         "zh": "拉动骨骼，让身体活动。"
       },
       "detail": {
-        "en": "Muscles work by shortening and pulling. Most of the muscles in this part are attached to bones and move them [S2]. The model shows a selection of the large muscles near the surface, joined into one part [S11].\n\nThe digestive tube has muscle too: the layers in the walls of the gullet, stomach and intestines that squeeze food along [S4].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "肌肉靠收缩来拉动。这个零件里的肌肉大多连在骨上，拉动骨骼 [S2]。模型只选了靠近体表的一些大肌肉，合成一个零件 [S11]。\n\n消化道也有肌肉：食道、胃和肠壁里的肌肉层，挤压着推动食物前进 [S4]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Muscles work by shortening and pulling. Most of the muscles in this part are attached to bones and move them [S2]. The model shows a selection of the large muscles near the surface, joined into one part [S11].\n\nThe digestive tube has muscle too: the layers in the walls of the gullet, stomach and intestines that squeeze food along [S4].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "肌肉靠收缩来拉动。这个零件里的肌肉大多连在骨上，拉动骨骼 [S2]。模型只选了靠近体表的一些大肌肉，合成一个零件 [S11]。\n\n消化道也有肌肉：食道、胃和肠壁里的肌肉层，挤压着推动食物前进 [S4]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [],
       "castShadow": false,
@@ -666,8 +666,8 @@
         "zh": "分隔胸腔和腹腔的一层肌肉。"
       },
       "detail": {
-        "en": "The diaphragm is a dome-shaped sheet of muscle that separates the chest from the abdomen and moves as you breathe. The gullet passes through it to reach the stomach, which lies just below it [S10].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "膈是一层穹顶形的肌肉，把胸腔和腹腔分开，呼吸时会上下移动。食道穿过膈，通到紧贴在它下面的胃 [S10]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The diaphragm is a dome-shaped sheet of muscle that separates the chest from the abdomen and moves as you breathe. The gullet passes through it to reach the stomach, which lies just below it [S10].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "膈是一层穹顶形的肌肉，把胸腔和腹腔分开，呼吸时会上下移动。食道穿过膈，通到紧贴在它下面的胃 [S10]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [],
       "explode": {
@@ -697,8 +697,8 @@
         "zh": "吸进氧，排出二氧化碳。"
       },
       "detail": {
-        "en": "Respiratory system. Air reaches the lungs through the windpipe; in the lungs oxygen passes into the blood, and carbon dioxide passes out to be breathed away [S2]. The model joins the lobes of each lung, three on the right and two on the left [S11].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "呼吸系统。空气经气管进入肺；在肺里，氧进入血液，二氧化碳离开血液被呼出 [S2]。模型合并了每侧肺的肺叶：右肺三叶、左肺两叶 [S11]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Respiratory system. Air reaches the lungs through the windpipe; in the lungs oxygen passes into the blood, and carbon dioxide passes out to be breathed away [S2]. The model joins the lobes of each lung, three on the right and two on the left [S11].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "呼吸系统。空气经气管进入肺；在肺里，氧进入血液，二氧化碳离开血液被呼出 [S2]。模型合并了每侧肺的肺叶：右肺三叶、左肺两叶 [S11]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "trachea"
@@ -729,8 +729,8 @@
         "zh": "在咽和肺之间输送空气。"
       },
       "detail": {
-        "en": "The windpipe lies in front of the gullet. When you swallow, the epiglottis covers its opening, so food goes into the gullet and not into the lungs [S4].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "气管在食道的前面。吞咽时，会厌盖住气管的入口，食物就进入食道，而不会进入肺 [S4]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The windpipe lies in front of the gullet. When you swallow, the epiglottis covers its opening, so food goes into the gullet and not into the lungs [S4].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "气管在食道的前面。吞咽时，会厌盖住气管的入口，食物就进入食道，而不会进入肺 [S4]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "lungs"
@@ -761,8 +761,8 @@
         "zh": "推动血液，经血管流遍全身。"
       },
       "detail": {
-        "en": "Circulatory system. The heart pumps blood through the blood vessels to every part of the body. The blood carries oxygen from the lungs and digested food from the small intestine [S2, S8]. The model joins the four chambers of the heart [S11].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "循环系统。心脏推动血液，经血管流到身体各处。血液运送从肺来的氧，以及从小肠吸收的养分 [S2, S8]。模型把心脏的四个腔合成一个零件 [S11]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "Circulatory system. The heart pumps blood through the blood vessels to every part of the body. The blood carries oxygen from the lungs and digested food from the small intestine [S2, S8]. The model joins the four chambers of the heart [S11].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "循环系统。心脏推动血液，经血管流到身体各处。血液运送从肺来的氧，以及从小肠吸收的养分 [S2, S8]。模型把心脏的四个腔合成一个零件 [S11]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "great-vessels"
@@ -793,8 +793,8 @@
         "zh": "把血液送出心脏，再送回心脏。"
       },
       "detail": {
-        "en": "The largest artery, the aorta, carries blood from the heart down through the chest and abdomen; the largest veins bring it back [S11]. Smaller vessels, not shown in this model, branch from them to the gut, where digested food enters the blood [S8].\n\nMesh: Z-Anatomy / BodyParts3D, selected and simplified for Atlas; one male reference body, and bodies differ [S11, S12].",
-        "zh": "最大的动脉（主动脉）把血液从心脏送下胸腔和腹腔，最大的静脉把血液送回心脏 [S11]。更细的血管（模型里没有画）从这里分支到肠，消化后的食物就在那里进入血液 [S8]。\n\n网格：Z-Anatomy / BodyParts3D，为 Atlas 选取并简化；这是一个男性参考身体，人与人之间有差别 [S11, S12]。"
+        "en": "The largest artery, the aorta, carries blood from the heart down through the chest and abdomen; the largest veins bring it back [S11]. Smaller vessels, not shown in this model, branch from them to the gut, where digested food enters the blood [S8].\n\nThis simplified model is based on one adult male body from Z-Anatomy / BodyParts3D. Bodies differ from person to person [S11, S12].",
+        "zh": "最大的动脉（主动脉）把血液从心脏送下胸腔和腹腔，最大的静脉把血液送回心脏 [S11]。更细的血管（模型里没有画）从这里分支到肠，消化后的食物就在那里进入血液 [S8]。\n\n这个简化模型根据 Z-Anatomy / BodyParts3D 的一名成年男性身体制作。每个人的身体都略有不同 [S11, S12]。"
       },
       "connects": [
         "heart"

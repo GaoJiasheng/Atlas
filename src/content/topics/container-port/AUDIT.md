@@ -47,3 +47,11 @@
 `pnpm check / validate / test / build`实跑结果记spec §9.3。浏览器shoot/e2e按BRIEF明确禁止，未运行，也未用用户浏览器／桌面替代。真实WebGL材质、标注遮挡、模式组合、触控布局和drawcalls仍待主session；不得声称视觉R2–R6或FPS实测通过。两幅地图SVG离线栅格检查仅验证路径和标签排版。
 
 最终非浏览器门槛：check exit0（777文件，0errors／0warnings，3existing hints）；validate59主题0错误／0警告；全量164files／4343tests通过（2workers、30秒timeout），最终模型／正文11项复测通过；build121pages完成。构建产物静态检查确认EN/ZH首页各35主题、港口各2幅地图，payload剖切目标仅working-box。浏览器门槛仍未运行。
+
+## Readability pass 2026-10-29
+
+Simplified EN/ZH prose across 8 chapters, 36 beat captions, 32 object/context cards, 10 glossary definitions, summaries, the prediction prompt, figure/map captions and alt text, result labels and the topic note. Removed reviewer language, repeated identity checks and per-card layout disclaimers. The shared note and relevant explanations retain schematic layout, simulated rates/timing, enlarged locks, simplified ropes, yard counting limits, map scale, and observed versus planned figures.
+
+Facts, numbers, source references, source files, links, ids, model parameters, geometry, cameras and scene states are unchanged. Research motivation, source-access details and exclusions (no live traffic, surveyed Tuas layout, future reclamation, full operating/customs procedure or engineering calculation) remain documented here and in data/SOURCES.md.
+
+Verification: topic tests 11/11; `pnpm check` exit 0 (960 files, 0 errors/warnings, 4 existing hints); `pnpm validate` 85 topics, 0 errors/warnings; `pnpm test` 219 files / 5,448 tests passed; final `pnpm build` exit 0, 173 pages. Final topic tests and structural comparison confirm unchanged scene states, non-text data, every Num tag, content link and card source-id set. `git diff --check` passed. Browser shoot/e2e were skipped as required by the brief; no browser or desktop was opened.

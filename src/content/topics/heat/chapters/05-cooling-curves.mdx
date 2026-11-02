@@ -56,9 +56,8 @@ state:
       record: true
       predict:
         prompt:
-          en: As this hot cup cools toward its surroundings, will energy leave more slowly, faster, or at the same
-            rate at the later time?
-          zh: 热杯逐渐冷却、接近环境温度时，较晚时刻能量离开的速率会较慢、较快，还是相同？
+          en: "As hot water cools towards room temperature, does it lose energy more slowly, faster or at the same rate?"
+          zh: "热水逐渐接近室温时，失去能量会较慢、较快，还是一样快？"
         start:
           elapsed-s: 60
           cool-start-c: 85
@@ -95,8 +94,8 @@ state:
         cover: bare
         elapsed-s: 0
     caption:
-      en: Water starts hotter than the model surroundings, held at 25 degrees Celsius.
-      zh: 水从比环境更热的温度开始，模拟环境维持二十五摄氏度。
+      en: "The water starts hotter than the surroundings, which stay at 25 degrees Celsius in this model."
+      zh: "水的初温比环境高，模型环境保持二十五摄氏度。"
   - camera: view-cooler
     layers:
     - curves
@@ -109,8 +108,8 @@ state:
         elapsed-s: 60
       reveal: true
     caption:
-      en: The early curve falls more steeply. The temperature difference is larger.
-      zh: 曲线前段下降较陡，这时与环境的温差较大。
+      en: "The curve falls steeply at first, when the temperature difference is larger."
+      zh: "起初温差较大，曲线下降较陡。"
   - camera: view-cooler
     layers:
     - curves
@@ -124,8 +123,8 @@ state:
         elapsed-s: 300
       reveal: true
     caption:
-      en: Later, cooling is slower. The model approaches room temperature rather than continuing to zero.
-      zh: 后来冷却较慢。模型向环境温度靠近，不会一直降到零度。
+      en: "Later, cooling slows. The water approaches room temperature, rather than continuing down to zero."
+      zh: "后来冷却减慢。水温接近室温，不会一直降到零度。"
   - camera: view-cooler
     layers:
     - curves
@@ -139,8 +138,8 @@ state:
         elapsed-s: 300
       reveal: true
     caption:
-      en: The wrapped model remains warmer at the same time. Use equal starting conditions for comparison.
-      zh: 相同时刻，包覆模型仍较暖。比较须使用相同起始条件。
+      en: "At the same time, the wrapped cup stays warmer. Compare from the same starting conditions."
+      zh: "相同时刻，包覆杯较暖。比较时要保持起始条件相同。"
   - camera: view-cooler
     layers:
     - curves
@@ -153,8 +152,8 @@ state:
         elapsed-s: 300
       reveal: true
     caption:
-      en: Flattening near room temperature differs from a phase-change plateau. This model contains no phase change.
-      zh: 靠近环境温度而变平与相变平台不同。这里的模型没有物态变化。
+      en: "This curve flattens as water nears room temperature. A phase-change plateau has a different cause; no change of state occurs here."
+      zh: "水温接近室温，曲线变平。相变平台有不同原因；这里没有物态变化。"
   index:
     parts:
     - cooling-beaker
@@ -168,23 +167,23 @@ state:
 
 <Lang en>
 
-The cooling water starts hotter than the surroundings. Its <Term id="cooling-curve">cooling curve</Term> slopes downward, showing temperature against elapsed time. At the start, the difference from the surroundings is large and the fall is steeper. Later, the difference is smaller and the curve becomes less steep. Compare temperature changes over equal time intervals to see the slowing.
+The water starts hotter than its surroundings. Its <Term id="cooling-curve">cooling curve</Term> slopes down as time passes. At first, the temperature difference is large and the curve falls steeply. Later, the difference shrinks and the curve becomes flatter. Compare the temperature drop over equal time intervals to see cooling slow down.
 
-A temperature difference is the difference between two temperature readings. In this model, that difference controls the rate of energy transfer. As the water approaches the fixed surrounding temperature, energy leaves more slowly. Cooling does not carry it endlessly downward just because more time passes. The surrounding temperature is the condition it approaches.
+A temperature difference is the difference between two readings. In this model, a smaller difference from the surroundings means slower energy loss. The water approaches the surrounding temperature. It does not keep cooling towards zero or the freezing point simply because time passes.
 
-For this simulated cup, the starting water temperature is <Num s="S27">85 °C</Num> and the surroundings stay at <Num s="S27">25 °C</Num>. After <Num s="S27">300 s</Num>, the bare-cup calculation gives about <Num s="S27">54.4 °C</Num>. Switching to the wrapped condition with the same start and time gives about <Num s="S27">75.2 °C</Num>. The warmer result supports slower energy loss under these model conditions.
+In this simulation, the water starts at <Num s="S27">85 °C</Num> and the surroundings stay at <Num s="S27">25 °C</Num>. After <Num s="S27">300 s</Num>, the bare cup reaches about <Num s="S27">54.4 °C</Num>. With the same start and time, the wrapped cup reaches about <Num s="S27">75.2 °C</Num>. The wrap slows energy loss, leaving the water warmer.
 
-Use the time control to inspect early and late portions of the same curve. Changing the starting temperature or cover starts a different comparison; keep the water mass and surroundings fixed. The flattening here comes from a smaller temperature difference. During a phase change, energy may transfer while temperature stays constant for another reason. This model contains no phase change. Follow <TopicLink slug="water" ch="the-water-cycle">the water cycle</TopicLink> for evaporation and condensation in a wider setting.
+Compare early and late sections of one curve. If you change the starting temperature or cover, make a new comparison and keep water mass and surroundings the same. This curve flattens as the temperature difference shrinks. A change of state can also give a flat section, but for a different reason. No change of state occurs here. Explore evaporation and condensation in <TopicLink slug="water" ch="the-water-cycle">the water cycle</TopicLink>.
 
 <More title={{"en":"Approaching and rounding","zh":"靠近与取整"}}>
 
-The exponential model approaches the surroundings as a limit. Rounded readings can look equal while an unrounded difference remains. Equal displayed digits alone do not prove that every transfer has stopped.
+The calculation brings the water ever closer to the surrounding temperature. Rounding may make the readings look equal while a small difference remains. Matching displayed digits alone do not show that heat transfer has stopped.
 
 </More>
 
 <More title={{"en":"Real cooling has more influences","zh":"真实冷却还有其他因素"}}>
 
-Newton cooling approximates a body with a uniform temperature in fixed surroundings. Container heat capacity, evaporation and changing air movement can alter real results. The effective settings here are educational design values, not measurements fitted to these cups.
+This model uses Newton’s cooling rule: the water has one uniform temperature and the surroundings stay at a fixed temperature. Real cooling also depends on energy absorbed by the container, evaporation and air movement. The transfer settings were chosen for teaching comparisons.
 
 </More>
 
@@ -192,23 +191,23 @@ Newton cooling approximates a body with a uniform temperature in fixed surroundi
 
 <Lang zh>
 
-冷却水从比环境更热的温度开始。<Term id="cooling-curve">冷却曲线</Term>向下倾斜，显示温度随时间下降。初段与环境相差较大，下降较陡；后来差距缩小，曲线便较平缓。要看出冷却减慢，应比较相同长短时间内的温度变化。
+水从比环境更高的温度开始。<Term id="cooling-curve">冷却曲线</Term>随时间向下。起初温差大，曲线下降较陡；后来温差缩小，曲线便较平缓。比较相同长短的时间内降温多少，就能看出冷却减慢。
 
-温差就是两个温度读数的差。在这个模型里，温差决定传能速率。水温越接近固定的环境温度，能量离开得越慢；并不会因为时间继续经过，就一直降到更低。环境温度是它逐渐靠近的条件。
+温差就是两个温度读数的差。在这个模型中，与环境温差越小，水失去能量越慢。水温逐渐接近环境温度，并不会因为时间继续经过，就一直降到零度或冰点。
 
-这个模拟杯中，水从 <Num s="S27">85 °C</Num> 开始，环境维持 <Num s="S27">25 °C</Num>。经过 <Num s="S27">300 s</Num>，裸杯计算水温约为 <Num s="S27">54.4 °C</Num>；相同初温和时间下，包覆杯约为 <Num s="S27">75.2 °C</Num>。较暖的结果支持这些模拟条件下能量损失较慢。
+在这个模拟中，水从 <Num s="S27">85 °C</Num> 开始，环境维持 <Num s="S27">25 °C</Num>。经过 <Num s="S27">300 s</Num>，裸杯水温约为 <Num s="S27">54.4 °C</Num>。相同初温和时间下，包覆杯约为 <Num s="S27">75.2 °C</Num>。包覆层减慢能量损失，使水保持较暖。
 
-用时间控件查看同一曲线的前后段。改变初温或包覆条件，就要另作比较，同时保持水量与环境相同。这里变平是因为温差缩小；相变时温度不变，则有另一种原因。本模型没有物态变化，可到<TopicLink slug="water" ch="the-water-cycle">“水循环”</TopicLink>继续看蒸发与凝结。曲线越平缓，表示相同时间里温度改变较少，不是图上没有变化就能断言能量完全不再传递。读数还应连同环境条件一起解释，不能把冷却的终点一律当成冰点。
+先比较同一曲线的前后段。改变初温或包覆条件时，要另作比较，并保持水量和环境相同。这里曲线变平，是因为温差缩小。物态变化也可能出现水平段，但原因不同；这里没有物态变化。到<TopicLink slug="water" ch="the-water-cycle">“水循环”</TopicLink>继续了解蒸发与凝结。
 
 <More title={{"en":"Approaching and rounding","zh":"靠近与取整"}}>
 
-指数模型以环境温度为逐渐靠近的极限。取整后的读数可能看起来相同，未取整的数值却仍有差距。因此，显示数字相同，并不能单独证明所有传热都已停止。
+计算出的水温越来越接近环境温度。取整后，两个读数可能看起来相同，实际仍有微小差距。只看显示的数字相同，不能判断传热已经停止。
 
 </More>
 
 <More title={{"en":"Real cooling has more influences","zh":"真实冷却还有其他因素"}}>
 
-牛顿冷却把物体近似看成温度均匀，环境温度固定。真实器材还受容器热容量、蒸发和空气流动变化影响。这里的有效参数是教学设计值，不是对这些杯子实测后拟合的结果。
+模型采用牛顿冷却规律，假设水温处处均匀，环境温度固定。真实冷却还受容器吸热、蒸发和空气流动影响。这里的传热参数是为教学比较选定的。
 
 </More>
 

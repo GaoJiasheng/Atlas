@@ -96,6 +96,7 @@ import { evaluateSimOnStage } from './lib/sim/carrier';
 import { tableSources } from './lib/sim/table';
 import { curveDiagnostics } from './lib/sim/curve';
 import { trialContextPatch } from './lib/sim/session';
+import { displayOnlyControls } from './lib/sim/trial';
 import type { SimTry } from './sim-schema';
 import { SIM_KEYS } from '../core/controls';
 import { getOrbitSession, orbitIsStill, type OrbitSession } from './lib/sim/orbit-session';
@@ -436,7 +437,7 @@ export default function SpaceSceneView({ data, chapters, locale }: EngineViewPro
       const state = chapters.find((c) => c.id === st.chapter)?.state as SpaceChapterState | undefined;
       const transition = prev !== undefined && st.transition.id !== prev.transition.id;
       const reset = transition && ['chapter', 'state', 'url'].includes(st.transition.reason);
-      const patch = trialContextPatch(ui.getState(), st.chapter, resolveSimValues(sim, st.sim), state?.sim?.try?.vary, reset);
+      const patch = trialContextPatch(ui.getState(), st.chapter, resolveSimValues(sim, st.sim), state?.sim?.try?.vary, reset, displayOnlyControls(sim));
       if (Object.keys(patch).length > 0) ui.setState(patch);
     };
     reconcile(store.getState());
