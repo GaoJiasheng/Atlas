@@ -177,4 +177,6 @@ Codex 的阶段 1（352b25e）没有跑过任何浏览器门槛。这一轮在�
 
 **看过的截图**：`pnpm shoot <topic> --layout --keys --layout-sizes 1280x800,1920x1080` 与 `--touch --layout-sizes 1180x820,820x1180,390x844`，ww2、dinosaur-earth、monsoon-and-weather、aircon、solar-system、fractions、measuring 共 14 轮，0 个 layout 问题、0 个键位失败；缩图看了约 15 张。1180×820 的 SpaceScene 求解器收起后自由带约 506 px 宽，引线标签照常显示（> 480 px 门槛）。
 
+**门槛**：`pnpm check` 0 错 0 警告（4 个既有 hints）；`pnpm validate` 94 题 0 / 0；`pnpm test` 245 文件 / 6,309 条；`pnpm build` 通过。全量 e2e（716 条，CI=1，3 workers，机器负载 100–210）：合入 space-js 后第一轮 545 过 / 171 败（几乎都是 `__atlas.ready` 超时一类的负载失败）；`--last-failed`（2 workers）157 过 / 14 败；剩下 14 条单独再跑 11 过。仍失败：inside-the-earth:81（固定镜头下读数卡变宽触发 0.6 s 重新取景，P 标记纵向移了 4 px；main 没有 HUD 取景，所以不失败）、sample-lesson-measure:170（手机量杯 198.6 px，要 ≥ 199.5）、sample-lesson-net:157（手机展开图候选块 43.1 px，要 ≥ 43.5）—— 后两条是 phase 1 让手机右上卡留竖页签后模型少了约 1 %。steam-engine:171、sample-mechanism:169、space-label-drag、heart-and-lungs:80、ancient-civilisations 两条在 main 同负载下也失败，单独跑通过。how-planes-fly:87、sample-airfoil:96、sound:72、container-port:128、fossils-and-skeletons:167 在本分支都通过（单独或重跑）。
+
 **留下的**：ww2 英文 1280×720 顶栏三行（VIEW 预设多，Z / ? 加了标签后中段更窄；main 是两行）；SpaceScene 竖屏叠放（820×1180）仍用原镜头，模型会落到左列章节轨后面；dinosaur-earth 1280×800 重建图在小自由区下缩到 zoom 0.8 附近，构图待看。
