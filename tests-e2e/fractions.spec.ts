@@ -20,10 +20,12 @@ type Engine = {
   practice(): { score: number; summary: boolean; results: { id: string; ok: boolean | null; code: string | null }[] };
 };
 
-async function open(page: Page, url: string) {
+async function open(page: Page, url: string, expandLegends = true) {
   await page.goto(url);
   await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
   expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  // Task/equation behavior tests explicitly open the shared HUD fold.
+  if (expandLegends) await page.evaluate(() => window.__atlas!.setLegends(true));
 }
 const info = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).task());
 const force = (page: Page, step: string, i: number) => page.evaluate(([s, k]) => (window.__atlas!.engine as unknown as Engine).goToTask(s as string, k as number, { instant: true }), [step, i] as const);
@@ -301,13 +303,21 @@ test.describe('fractions (MathScene)', () => {
       expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(43.5);
     }
     await expect(page.locator('.ms-overlay__toggle')).toBeVisible();
+    await page.evaluate(() => window.__atlas!.setLegends(false));
+    await expect(page.locator('.ms-overlay__toggle')).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.ms-overlay')).toBeHidden();
+    await page.locator('.ms-overlay__toggle').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.ms-overlay__toggle')).toHaveAttribute('aria-expanded', 'true');
+    expect(await page.evaluate(() => window.__atlas!.state().manual.legendsOpen)).toBe(true);
+    await expect(page.locator('.ms-overlay')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 
   for (const locale of ['en', 'zh'] as const) {
     test(`HUD layout (${locale}): no overlap or overflow at 7 sizes`, async ({ page }) => {
       test.setTimeout(180_000);
-      await open(page, `/${locale}/topics/fractions/`);
+      await open(page, `/${locale}/topics/fractions/`, false);
       const problems: string[] = [];
       for (const [width, height] of LAYOUT_SIZES) {
         await page.setViewportSize({ width, height });

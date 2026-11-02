@@ -8,7 +8,7 @@
  * of force the try-it arrows draw in the scene on show (docs/30 F3), and of
  * stored potential energy in an energy topic (docs/31 E-EN2).
  */
-import { useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
+import { useHud, useScene, useSceneContext, useSceneStore, useT } from '../../core/context';
 import { t as tl, tx, type BilingualText } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
 import { ControlPanel, type ControlRow } from '../../widgets/ControlPanel';
@@ -34,6 +34,7 @@ const TOOLS_GLOSSARY: ControlRow[] = [...MODES, { kind: 'glossary' }, { kind: 'h
 
 export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; glossary?: boolean }) {
   const t = useT();
+  const open = useHud((h) => h.legendsOpen);
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const solo = useScene<SpaceSceneExt, string | null>((s) => s.solo);
@@ -84,9 +85,11 @@ export function ExplorerOverlay({ file, glossary = false }: { file: PartsFile; g
   // Potential energy is stored, never a stream: the energy model keys its colour (bars, the energy-chain card).
   if (file.sim?.energy) add({ id: 'energy-potential', label: { en: tl('en', 'space.energy.key'), zh: tl('zh', 'space.energy.key') }, color: 'token:en-potential', kind: 'fill' });
   return (
-    <div className="atlas-overlay-card space-overlay">
+    <div className="atlas-overlay-card space-overlay" data-hud-panel="space-overlay" data-folded={open ? undefined : ''}>
       <ControlPanel layers={layers} tools={glossary ? TOOLS_GLOSSARY : TOOLS} legend={legend} />
-      <ExplorerBar label={file.views.explodeLabel} />
+      <div hidden={!open}>
+        <ExplorerBar label={file.views.explodeLabel} />
+      </div>
     </div>
   );
 }

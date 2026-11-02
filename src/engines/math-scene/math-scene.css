@@ -1605,9 +1605,11 @@
 }
 
 /* The number sentence under the model (the "A" of concrete–pictorial–abstract). */
-.ms-equation {
+.ms-equation-panel {
   position: absolute;
   z-index: 3;
+}
+.ms-equation {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1914,22 +1916,6 @@
   letter-spacing: 0.06em;
   color: var(--ink-3);
 }
-.ms-plate__head i {
-  width: 5px;
-  height: 5px;
-  margin-right: 4px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: translateY(-1px) rotate(45deg);
-}
-.ms-plate[data-folded] .ms-plate__head i {
-  transform: translateY(1px) rotate(-135deg);
-}
-.ms-plate__head::after {
-  content: "";
-  position: absolute;
-  inset: calc(50% - 22px) 0;
-}
 @media (hover: hover) {
   .ms-plate__head:hover {
     color: var(--signal);
@@ -1971,6 +1957,25 @@
   width: 8px;
   height: 8px;
   border-radius: 0;
+}
+
+/* Labelled fold rows stay in the layout while their bodies are display:none. */
+.ms-task-panel,
+.ms-overlay-panel {
+  min-width: 0;
+}
+.ms-task-panel > .atlas-fold,
+.ms-net-tools-panel > .atlas-fold,
+.ms-equation-panel > .atlas-fold {
+  width: 100%;
+  text-transform: uppercase;
+}
+.ms-equation-panel > .atlas-fold {
+  padding-block: 4px;
+}
+.ms-tray-dock > .ms-task-panel {
+  width: 100%;
+  max-width: 760px;
 }
 
 /* Below 1024 px (the reader is a sheet): the check tray docks on the stage, above the chapter axis. */
@@ -3964,8 +3969,10 @@ path.ms-glyph--cord {
 }
 
 /* The fold-it tool at the stage's bottom right: FOLD slider, quarter turns. */
-.ms-net-tools {
+.ms-net-tools-panel {
   position: absolute;
+}
+.ms-net-tools {
   display: flex;
   align-items: center;
   gap: 6px;

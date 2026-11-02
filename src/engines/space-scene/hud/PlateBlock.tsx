@@ -19,8 +19,7 @@
  *    inspector in the reading panel (opening a folded reader)
  *  - the quiet perf readout
  *
- * The header folds the block (sessionStorage `atlas:plate`, never in the
- * URL). Hidden on phones with the rest of the left column's extras.
+ * The header uses the shared HUD store (`plateOpen`, never in the URL). Hidden on phones with the rest of the left column's extras.
  */
 import { useEffect, useId, useMemo, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import { useStore } from 'zustand';
@@ -28,7 +27,7 @@ import { useHud, useScene, useSceneContext, useT } from '../../core/context';
 import { activePreset } from '../../core/controls';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../../i18n';
 import { resolveColorRef } from '../../../theme/theme';
-import { getPlateExpanded, setPlateExpanded } from '../../../lib/prefs';
+import { FoldHeader } from '../../widgets/FoldHeader';
 import { elevation, numberedParts } from '../lib/schematic';
 import { realLength, scaleBar } from '../lib/units';
 import { FOLLOW_LAG, formatReading, lagValue, readingDecimals, readingTarget } from '../lib/telemetry';
@@ -279,8 +278,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
 export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore; bridge: StageBridge }) {
   const t = useT();
   const { locale, actions, chapters } = useSceneContext();
-  const [open, setOpen] = useState(true);
-  useEffect(() => setOpen(getPlateExpanded()), []);
+  const open = useHud((h) => h.plateOpen);
   const s = useScene<
     SpaceSceneExt,
     { run: boolean; view: string; explode: number; layers: string[]; chapter: string | null; part: string | null }
@@ -300,11 +298,6 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
   const explode = s.view === 'exploded' ? Math.round(s.explode * 100) : 0;
   const picked = s.part ? file.parts.find((p) => p.id === s.part && !p.context) : undefined;
   const side = picked?.side ? ` · ${picked.side === 'left' ? 'L' : 'R'}` : '';
-  const fold = (e: MouseEvent<HTMLButtonElement>) => {
-    setOpen(!open);
-    setPlateExpanded(!open);
-    if (e.detail > 0) e.currentTarget.blur();
-  };
   const showInspector = (e: MouseEvent<HTMLButtonElement>) => {
     actions.setReader(true);
     const scene = e.currentTarget.closest('.atlas-scene');
@@ -316,13 +309,18 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
 
   return (
     <section className="space-plate" data-hud-panel="plate" data-folded={open ? undefined : ''} aria-label={t('space.plate')}>
-      <button type="button" className="space-plate__head" aria-expanded={open} aria-controls={bodyId} title={t(open ? 'space.plate.fold' : 'space.plate.unfold')} onClick={fold}>
-        <span>
-          {up(tl('en', 'space.plate'))}
-          <small lang="zh-Hans">{tl('zh', 'space.plate')}</small>
-        </span>
-        <i aria-hidden="true" />
-      </button>
+      <FoldHeader
+        className="space-plate__head"
+        open={open}
+        controls={bodyId}
+        onToggle={() => actions.setPlate(!open)}
+        title={
+          <>
+            {up(tl('en', 'space.plate'))}
+            <small lang="zh-Hans">{tl('zh', 'space.plate')}</small>
+          </>
+        }
+      />
       <div id={bodyId} className="space-plate__body" hidden={!open}>
         <div className="space-plate__grid">
           <figure className="space-plate__fig">

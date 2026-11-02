@@ -215,14 +215,6 @@ div.space-inspector__detail:not([hidden]) {
   font-size: 0.875rem;
 }
 
-/* Narrow stages: the layer toggles already carry the colour swatches. */
-@media (max-width: 639px) {
-  .space-overlay .atlas-legend {
-    display: none;
-  }
-}
-
-
 /* ------------------------------------------------------------------ */
 /* Leader labels (slot `leaders`, SVG over the stage)                  */
 /* ------------------------------------------------------------------ */
@@ -431,23 +423,6 @@ div.space-inspector__detail:not([hidden]) {
   font-weight: 400;
   letter-spacing: 0.06em;
   color: var(--ink-3);
-}
-.space-plate__head i {
-  width: 5px;
-  height: 5px;
-  margin-right: 4px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: translateY(-1px) rotate(45deg);
-}
-.space-plate[data-folded] .space-plate__head i {
-  transform: translateY(1px) rotate(-135deg);
-}
-/* 44 px hit area. */
-.space-plate__head::after {
-  content: "";
-  position: absolute;
-  inset: calc(50% - 22px) 0;
 }
 @media (hover: hover) {
   .space-plate__head:hover {

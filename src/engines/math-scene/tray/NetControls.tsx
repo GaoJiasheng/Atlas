@@ -15,6 +15,7 @@ import { t } from '../../../i18n';
 import type { Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskState } from '../lib/state';
+import { FoldPanel } from '../hud/FoldPanel';
 
 const tr = (locale: Locale) => (key: Parameters<typeof t>[1], vars?: Record<string, string | number>) => t(locale, key, vars);
 
@@ -52,37 +53,39 @@ export function NetTools({ fold, onFold, foldable, onTurn, compact, style, local
     e.preventDefault();
   };
   return (
-    <div className="ms-net-tools" data-hud-panel="net-tools" data-compact={compact || undefined} role="group" aria-label={T('math.net.tools')} style={style}>
-      {foldable && (
-        <label className="ms-net-tools__fold" data-locked={onFold ? undefined : ''} title={onFold ? undefined : T('math.net.foldLocked')}>
-          <span className="ms-net-tools__name">
-            {t('en', 'math.net.foldLabel').toLocaleUpperCase('en')}
-            <small lang="zh-Hans">{t('zh', 'math.net.foldLabel')}</small>
-          </span>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            value={fold}
-            disabled={!onFold}
-            aria-label={T('math.net.foldLabel')}
-            aria-valuetext={foldWords(fold, locale)}
-            onChange={(e) => set(Number(e.currentTarget.value))}
-            onKeyDown={keys}
-          />
-          <span className="ms-net-tools__pct" aria-hidden="true">
-            {fold} %
-          </span>
-        </label>
-      )}
-      <button type="button" className="ms-btn ms-btn--icon" data-turn="-1" aria-label={T('math.net.turnLeft')} title={T('math.net.turnLeft')} onClick={() => onTurn(-1)}>
-        ↺
-      </button>
-      <button type="button" className="ms-btn ms-btn--icon" data-turn="1" aria-label={T('math.net.turnRight')} title={T('math.net.turnRight')} onClick={() => onTurn(1)}>
-        ↻
-      </button>
-    </div>
+    <FoldPanel panel="net-tools" title={T('math.net.tools')} className="ms-net-tools-panel" style={style}>
+      <div className="ms-net-tools" data-compact={compact || undefined} role="group" aria-label={T('math.net.tools')}>
+        {foldable && (
+          <label className="ms-net-tools__fold" data-locked={onFold ? undefined : ''} title={onFold ? undefined : T('math.net.foldLocked')}>
+            <span className="ms-net-tools__name">
+              {t('en', 'math.net.foldLabel').toLocaleUpperCase('en')}
+              <small lang="zh-Hans">{t('zh', 'math.net.foldLabel')}</small>
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={1}
+              value={fold}
+              disabled={!onFold}
+              aria-label={T('math.net.foldLabel')}
+              aria-valuetext={foldWords(fold, locale)}
+              onChange={(e) => set(Number(e.currentTarget.value))}
+              onKeyDown={keys}
+            />
+            <span className="ms-net-tools__pct" aria-hidden="true">
+              {fold} %
+            </span>
+          </label>
+        )}
+        <button type="button" className="ms-btn ms-btn--icon" data-turn="-1" aria-label={T('math.net.turnLeft')} title={T('math.net.turnLeft')} onClick={() => onTurn(-1)}>
+          ↺
+        </button>
+        <button type="button" className="ms-btn ms-btn--icon" data-turn="1" aria-label={T('math.net.turnRight')} title={T('math.net.turnRight')} onClick={() => onTurn(1)}>
+          ↻
+        </button>
+      </div>
+    </FoldPanel>
   );
 }
 

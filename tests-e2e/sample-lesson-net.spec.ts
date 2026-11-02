@@ -17,6 +17,8 @@ const slider = (page: Page) => page.getByRole('slider', { name: 'Fold' });
 async function open(page: Page, locale = 'en', chapter = 'cubes-and-hexominoes', beat?: number) {
   await page.goto(`/${locale}/topics/sample-lesson-net/?ch=${chapter}${beat ? `&b=${beat}` : ''}`);
   await page.waitForFunction(() => window.__atlas?.ready);
+  // Task/equation behavior tests explicitly open the shared HUD fold.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
 }
 async function task(page: Page, step: string, index: number) {
   await page.evaluate(([s, i]) => (window.__atlas!.engine as unknown as Engine).goToTask(s, i, { instant: true }), [step, index] as const);

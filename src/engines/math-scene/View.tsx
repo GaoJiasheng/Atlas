@@ -22,6 +22,7 @@ import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useSta
 import { useStore } from 'zustand';
 import type { EngineViewProps } from '../core/types';
 import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useSceneStore } from '../core/context';
+import { FoldPanel } from './hud/FoldPanel';
 import type { SceneCommand, SceneControls, SceneMode, ScenePreset, SpecRow } from '../core/controls';
 import { usePresentation, type PresentationAdapter } from '../core/presentation';
 import { chapterNumbers } from '../core/chapters';
@@ -173,6 +174,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const hudOn = useHud((h) => h.hud);
   const labelsOn = useHud((h) => h.labels);
   const axisOpen = useHud((h) => h.panelsOpen);
+  const legendsOpen = useHud((h) => h.legendsOpen);
+  const folds = useHud((h) => `${h.leftColumn}|${h.plateOpen}|${h.legendsOpen}|${h.cardOpen}|${h.stageOnly}`);
   const coarse = useMedia('(pointer: coarse)');
   // Reduced motion: a beat that moves things in place (the array, the blocks) is redrawn and faded in instead.
   const reduced = useMedia('(prefers-reduced-motion: reduce)');
@@ -277,7 +280,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const rootRef = useRef<HTMLDivElement>(null);
   const trayRef = useRef<HTMLDivElement>(null);
   const mode: LayoutMode = presenting ? 'present' : hudOn ? 'hud' : 'bare';
-  const L = useStageLayout(rootRef, trayRef, mode, `${s.chapter}|${cur.beat}|${u.summary}|${run?.state.phase}|${run?.feedback?.tone}|${sheet}|${locale}`);
+  const L = useStageLayout(rootRef, trayRef, mode, `${s.chapter}|${cur.beat}|${u.summary}|${run?.state.phase}|${run?.feedback?.tone}|${sheet}|${locale}|${folds}`);
   // A stage too narrow for the model between the HUD columns (the reader open beside it on a 1024–1279 px screen): the control
   // panel folds behind its button, as on a phone, so the card's column ends high and the model takes the stage under it.
   const narrowStage = L.w > 0 && L.w < NARROW_STAGE;
@@ -336,8 +339,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       netShown.current = info;
     },
   };
-  const toolsH = netTools ? NET_TOOLS_H : 0;
-  const modelBox: Rect = { ...L.free, h: Math.max(0, L.free.h - (equation ? EQUATION_H : 0) - toolsH) };
+  const toolsH = netTools ? 44 + (legendsOpen ? NET_TOOLS_H : 0) : 0;
+  const equationH = equation ? (presenting ? 0 : 44) + (presenting || legendsOpen ? EQUATION_H : 0) : 0;
+  const modelBox: Rect = { ...L.free, h: Math.max(0, L.free.h - equationH - toolsH) };
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);
   const [equationTop, setEquationTop] = useState(0);
@@ -368,7 +372,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   // A net's sentence sits at the foot of its box: the drawing folds, turns and settles, the sentence stays put.
   const eqTop = netModel?.kind === 'net' ? modelBox.y + modelBox.h : equationTop || modelBox.y + modelBox.h;
   const eqCentre = L.free.x + L.free.w / 2;
-  const eqSpan = spanAt(L, eqTop, EQUATION_H, eqCentre);
+  const eqSpan = spanAt(L, eqTop, equationH, eqCentre);
   const eqNeed = equationW + 2 * EQUATION_PAD;
   const eqRoom = eqSpan.w >= L.free.w ? eqSpan : { x: L.free.x, w: L.free.w };
   const eqBoxW = Math.min(eqRoom.w, Math.max(L.free.w, eqNeed));
@@ -567,15 +571,22 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}
       </svg>
       {equation && !showSummary && L.free.w > 0 && (
-        <p
-          key={`${s.chapter}|${cur.beat}|${equation}`}
-          className="ms-equation"
-          data-hud-panel="equation"
-          data-wrap={eqWrap || undefined}
-          style={{ left: eqBoxX, width: eqBoxW, top: eqTop, height: EQUATION_H, ['--eq-scale' as string]: eqScale }}
+        <FoldPanel
+          panel="equation"
+          title={tx({ en: 'Equation', zh: '算式' }, locale)}
+          className="ms-equation-panel"
+          compact={presenting}
+          style={{ left: eqBoxX, width: eqBoxW, top: eqTop }}
         >
-          <span>{renderRich(equation, locale, { line: true })}</span>
-        </p>
+          <p
+            key={`${s.chapter}|${cur.beat}|${equation}`}
+            className="ms-equation"
+            data-wrap={eqWrap || undefined}
+            style={{ height: EQUATION_H, ['--eq-scale' as string]: eqScale }}
+          >
+            <span>{renderRich(equation, locale, { line: true })}</span>
+          </p>
+        </FoldPanel>
       )}
       {equation && !showSummary && (
         <div className="ms-equation-measure" aria-hidden="true">
@@ -589,7 +600,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           foldable={netFoldable}
           onTurn={(by) => ui.setState({ net: { at: netAt, fold: netHeld?.fold ?? null, turn: (netTurn ?? netSpec.turn) + by } })}
           compact={L.free.w < 400}
-          style={{ right: Math.max(8, L.w - (L.free.x + L.free.w)), top: L.free.y + L.free.h - NET_TOOLS_H + 6, maxWidth: L.free.w }}
+          style={{ right: Math.max(8, L.w - (L.free.x + L.free.w)), top: L.free.y + L.free.h - toolsH + 6, maxWidth: L.free.w }}
           locale={locale}
         />
       )}
