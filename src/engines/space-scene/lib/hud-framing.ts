@@ -1,4 +1,10 @@
-/** Opt-in camera framing in the actual free HUD band (stage CSS pixels). */
+/**
+ * Camera framing in the stage area the HUD leaves free (stage CSS pixels).
+ *  - every topic (`stageFraming`): the authored view, composed for the 1920 × 1080
+ *    HUD layout, is moved into the largest free rectangle between the HUD blocks
+ *    as they are now (a pull-back plus a view-offset shift, docs/67 §9)
+ *  - opt-in `views.hudFrame` (`fitCameraToHud`): named subjects fitted into the free band
+ */
 import type { OrbitCamera } from '../../core/types';
 import { DEFAULT_FOV } from './camera';
 import type { Vec3 } from './math';
@@ -11,7 +17,13 @@ export interface FrameBox {
   minRadiusPx?: number;
 }
 
-export function freeStageRect(width: number, height: number, panels: readonly FrameRect[], gap = 12): FrameRect {
+/**
+ * The free band between the HUD blocks. `stacked`: the HUD overlays the stage
+ * (portrait phone / drawer layout), so only blocks across the middle narrow it;
+ * the caller decides from the viewport (a landscape tablet's stage can be
+ * narrower than 0.8 and still has side columns). Default: the stage aspect.
+ */
+export function freeStageRect(width: number, height: number, panels: readonly FrameRect[], gap = 12, stacked = width / height < STACKED_ASPECT): FrameRect {
   const out = { x0: gap, y0: gap, x1: width - gap, y1: height - gap };
   for (const r of panels) {
     if (r.x1 <= 0 || r.x0 >= width || r.y1 <= 0 || r.y0 >= height) continue;
@@ -20,9 +32,9 @@ export function freeStageRect(width: number, height: number, panels: readonly Fr
       else if (r.y1 < height / 2) out.y0 = Math.max(out.y0, r.y1 + gap);
     }
   }
-  // Stacked phone layout (portrait, aspect < 0.8): the HUD overlays and the model takes the full width
+  // Stacked phone layout: the HUD overlays and the model takes the full width
   // (docs/06 camera rules), so a corner block such as the title does not squeeze it into a side column.
-  if (width / height < STACKED_ASPECT) return out;
+  if (stacked) return out;
   for (const r of panels) {
     if (r.y1 <= out.y0 || r.y0 >= out.y1) continue;
     if (r.x1 <= width / 2) out.x0 = Math.max(out.x0, r.x1 + gap);
@@ -32,7 +44,7 @@ export function freeStageRect(width: number, height: number, panels: readonly Fr
 }
 
 /** Maximal empty rectangles between the actual HUD blocks, with the same 12px gutter. */
-function freeRects(width: number, height: number, panels: readonly FrameRect[], gap = 12): FrameRect[] {
+export function freeRects(width: number, height: number, panels: readonly FrameRect[], gap = 12): FrameRect[] {
   const xs = [...new Set([gap, width-gap, ...panels.flatMap(p => [p.x0-gap, p.x1+gap])])]
     .filter(x => x >= gap && x <= width-gap).sort((a,b) => a-b);
   const out: FrameRect[] = [];
@@ -49,6 +61,56 @@ function freeRects(width: number, height: number, panels: readonly FrameRect[], 
     for (const [y0,y1] of gaps) out.push({x0,x1,y0:y0!,y1:y1!});
   }
   return out.filter((r,i) => !out.some((s,j) => j !== i && s.x0 <= r.x0 && s.x1 >= r.x1 && s.y0 <= r.y0 && s.y1 >= r.y1));
+}
+
+/** The stage the authored cameras are composed for: 1920 × 1080 with the HUD (the reader docked beside it). */
+export const DESIGN_STAGE = { width: 1520, height: 1023 } as const;
+export const DESIGN_ASPECT = DESIGN_STAGE.width / DESIGN_STAGE.height;
+/**
+ * The free area of that layout as shares of the stage (measured 2026-11-02, the
+ * same in every SpaceScene topic): right of the left column (28–328 px), left of
+ * the top-right card (from 1162 px), above the chapter axis (from 963 px), 12 px gutters.
+ */
+export const DESIGN_FREE: FrameRect = { x0: 340 / 1520, y0: 12 / 1023, x1: 1150 / 1520, y1: 951 / 1023 };
+
+/**
+ * Where the authored view goes on the stage as it is now. The camera composed
+ * for the design layout (`fitCameraToAspect(cam, DESIGN_ASPECT)`) sees the
+ * design free area `DESIGN_FREE`; this maps that area onto the free rectangle
+ * that holds it largest (`freeRects` between the measured HUD blocks):
+ *  - `scale`: image scale relative to the design camera (pull the camera back
+ *    by 1 / scale), never above `cap` (no closer than the plain aspect-fitted
+ *    camera: a large free area does not zoom into the authored framing)
+ *  - `shift`: then move the image by this share of the stage width (+ right)
+ *    and height (+ up): the projection's view offset, so the orbit target stays
+ *    on the subject and ORBIT / drags turn about the middle of the free area
+ * Exactly the design layout gives `{ scale: cap at the design aspect, shift: 0 }`.
+ * Near ties (within `FRAMING_TIE`) go to the rectangle that needs the smallest
+ * shift, so the view does not hop between two similar spaces as a panel's
+ * height changes by a few pixels. Null
+ * when the stage has no size or no free rectangle.
+ */
+/** Free rectangles whose subject scales differ by less than this share count as equal (`stageFraming`). */
+export const FRAMING_TIE = 0.06;
+export function stageFraming(width: number, height: number, panels: readonly FrameRect[], cap: number, gap = 12):
+  { scale: number; shift: [number, number]; rect: FrameRect } | null {
+  if (!(width > 2 * gap) || !(height > 2 * gap)) return null;
+  const a = width / height, d = DESIGN_FREE;
+  // Tangent-plane units of half the stage height (fov-free: everything scales with tan(fov / 2)).
+  const sw = (d.x1 - d.x0) * 2 * DESIGN_ASPECT, sh = (d.y1 - d.y0) * 2;
+  const scx = (d.x0 + d.x1 - 1) * DESIGN_ASPECT, scy = 1 - (d.y0 + d.y1);
+  const inside = panels.filter(p => p.x1 > 0 && p.x0 < width && p.y1 > 0 && p.y0 < height);
+  let best: { scale: number; shift: [number, number]; rect: FrameRect; move: number } | null = null;
+  for (const r of freeRects(width, height, inside, gap)) {
+    const rw = (r.x1 - r.x0) / width * 2 * a, rh = (r.y1 - r.y0) / height * 2;
+    if (rw <= 0 || rh <= 0) continue;
+    const scale = Math.min(rw / sw, rh / sh, cap);
+    const tx = ((r.x0 + r.x1) / width - 1) * a - scale * scx, ty = 1 - (r.y0 + r.y1) / height - scale * scy;
+    const shift: [number, number] = [tx / (2 * a), ty / 2];
+    const move = Math.hypot(...shift);
+    if (!best || scale > best.scale * (1 + FRAMING_TIE) || (scale >= best.scale * (1 - FRAMING_TIE) && move < best.move)) best = { scale, shift, rect: r, move };
+  }
+  return best && { scale: best.scale, shift: best.shift, rect: best.rect };
 }
 
 /** Subtract an open forbidden pan rectangle; touching its edge preserves the gutter. */

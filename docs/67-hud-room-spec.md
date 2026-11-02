@@ -94,4 +94,14 @@ Safari 的地址栏和标签栏会吃掉 70–100 px 高度，比 App 更挤；�
 
 ## 9. 施工与验收记录
 
-（待填）
+### 9.1 SpaceScene 舞台按 HUD 自由区取景（Claude，2026-11-02，分支 claude/frame-space）
+
+先于阶段 1 做的取景部分（§2-4、§7「取景」），只动 `src/engines/space-scene/**`，不碰 core；阶段 1 的面板开合、自动收起落地后，这里按实测的可见块自动跟随。
+
+- **做法**：作者镜头本来就是按 1920×1080 带 HUD 的舞台构图的（舞台 1520×1023，自由区 340–1150 × 12–951 px，34 个 SpaceScene 主题实测一致，`DESIGN_FREE`）。现在所有主题默认把这块「设计自由区」映射进当前 HUD 块之间**最大的空矩形**（`lib/hud-framing.ts stageFraming`，用 `freeRects` 枚举，卡片下方等空位也算；差 6 % 以内取平移最小的，面板高度变几个像素不会跳位）：先沿视线后拉（不比原来只按宽高比后拉的镜头更近），再用投影 view offset 平移，所以轨道中心仍在主体上，ORBIT 和拖拽绕自由区中间转。章、拍、预设、REFERENCE、动作模式镜头都走这里；演示、封面、HUD 叠放（视口宽 < 1024 或竖屏）不变。`views.hudFrame` 主题（cells、eyes-and-ears、sun-earth-moon、sound、coral-reef）仍按点名主体取景，不叠加；它对这几个主题并不多余（点名主体比整块设计自由区更准），对其余主题不需要。
+- **重取景**：Model3DStage 量所有可见 `data-hud-panel`（ResizeObserver、MutationObserver、`transitionend`、字体、演示/封面，rAF 合并，实测 heart-and-lungs 运行中约 9 次/秒，只有块真的变了才递增 `bridge.hudLayout`），CameraRig 见到块或舞台尺寸变化就 0.6 s easeInOut 重取景；读者拖过镜头后不动，直到下一章 / 拍 / 预设；ORBIT 中只改平移。写回 URL 与 REFERENCE / 演示保存的镜头先撤掉取景后拉（顺带修了 REFERENCE 退出时窄舞台上再后拉一次的旧问题）。侧栏不再按舞台宽高比 0.8 判断叠放，改看视口。
+- **数字**：1920×1080 默认布局是恒等变换（8 个回归主题实测 scale 1.000、shift 0，单测）。1180×820（舞台 780×774，左列到 262、右列从 494）：设计自由区缩到 0.34–0.50，heart-and-lungs 放在左列与右列之间 208 px 宽的竖带，aircon / steam-engine / how-planes-fly / bones-and-joints / solar-system 放在观察卡下方、LAYERS 左侧的空位；1133×744 0.30–0.46；1366×1024 0.55–0.62。收起阅读面板（aircon 1180）scale 0.48 → 0.94。
+- **看过的截图**（≤ 40 张，缩到 800 px）：8 个回归主题 1180×820 与 1920×1080（en/paper）、aircon / heart / steam 在 1133×744 与 1366×1024、aircon 1180 与 steam 1920 的 zh/cinema、aircon 1180 收起阅读面板与观察卡前后。主体都在自由区中间，1920 无变化；steam-engine 的飞轮、heart 的小腿在 1920 本来就伸到右列 / 章节轴后，窄屏上同样伸出（相对构图不变，没有新的裁切）。
+- **sun-earth-moon**：Codex 的 1024 返工（`hudFrame.primary` 最小半径、最大空矩形、次体避让）原样并入并在浏览器复验：1024×768 满月四拍地球约 35 px、月球入画、太阳不压左栏；收起观察卡后地球约 66 px。F1 / F2 记录见该主题 FIXES.md。
+- **留给阶段 1 / 2**：窄屏上主体仍偏小（1180 的 HUD 只给舞台留约 27–37 % 宽），要靠阶段 1 的自动收起腾出空间，取景已会跟着放大；按主体实际包围盒（而不是整块设计自由区）取景能让高瘦主体（骨架、人体）在竖带里更大，但要处理爆炸 / 动画中包围盒变化，这次没做；竖屏抽屉布局仍用原镜头，等阶段 1 定了抽屉高度再接。
+

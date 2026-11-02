@@ -24,7 +24,7 @@ import type { FitnessBundle } from '../../../../content/schema/fitness';
 import { t, type Locale } from '../../../../i18n';
 import type { SpaceUiStore } from '../../ui';
 import type { StageBridge } from '../../bridge';
-import { freeStageRect } from '../../lib/hud-framing';
+import { freeStageRect, type FrameRect } from '../../lib/hud-framing';
 import { DEFAULT_CAMERA } from '../../lib/camera';
 import { extendThree } from './extend';
 import { useStageLook } from './look';
@@ -114,15 +114,16 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
     };
   }, [store, bridge]);
 
-  // The DOM HUD lives outside R3F. Measure only on layout changes, not per rendered frame.
+  // The DOM HUD lives outside R3F: measure its visible blocks on layout changes (not per rendered frame);
+  // CameraRig frames the view in the area they leave free and re-fits when they move (docs/67 §9).
   useEffect(() => {
     const stage = wrapRef.current, scene = stage?.closest('.atlas-scene');
-    if (!data.views.hudFrame || !stage || !scene) return;
+    if (!stage || !scene) return;
     let frame = 0, alive = true;
     const resize = new ResizeObserver(() => schedule());
     const measure = () => {
       frame = 0;
-      const box = stage.getBoundingClientRect();
+      const box = stage.getBoundingClientRect(), view = scene.getBoundingClientRect();
       const presenting = ui.getState().presenting;
       const panels = [...scene.querySelectorAll('[data-hud-panel]')]
         .filter(el => el.getAttribute('data-hud-panel') !== 'perf' && (!presenting || el.getAttribute('data-hud-panel')!.startsWith('present')))
@@ -134,9 +135,19 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
         if (r.width < 1 || r.height < 1 || getComputedStyle(el).visibility === 'hidden') return [];
         return [{ x0: r.left-box.left, y0: r.top-box.top, x1: r.right-box.left, y1: r.bottom-box.top }];
       });
-      bridge.freeStage = freeStageRect(box.width, box.height, rects);
+      // The phone / portrait layouts stack the HUD over the stage (no side columns to frame between).
+      const stacked = view.width < 1024 || view.height > view.width;
+      const same = (a: readonly FrameRect[] | undefined) => a?.length === rects.length &&
+        a.every((r, i) => Math.abs(r.x0 - rects[i]!.x0) + Math.abs(r.y0 - rects[i]!.y0) + Math.abs(r.x1 - rects[i]!.x1) + Math.abs(r.y1 - rects[i]!.y1) < 1);
+      if (same(bridge.hudPanels) && stacked === bridge.hudStacked && box.width === bridge.hudStage?.[0] && box.height === bridge.hudStage?.[1]) return;
+      bridge.freeStage = freeStageRect(box.width, box.height, rects, 12, stacked);
       bridge.hudPanels = rects;
+      bridge.hudStacked = stacked;
+      bridge.hudStage = [box.width, box.height];
+      bridge.hudLayout += 1;
+      // A frame for CameraRig to re-fit in (the bridge's invalidate is wired once the R3F tree has mounted).
       bridge.invalidate();
+      rootStore.current?.getState().invalidate();
     };
     const schedule = () => { if (alive && !frame) frame = requestAnimationFrame(measure); };
     const mutations = new MutationObserver(schedule);
@@ -154,8 +165,10 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       cancelAnimationFrame(frame);
       delete bridge.freeStage;
       delete bridge.hudPanels;
+      delete bridge.hudStacked;
+      delete bridge.hudStage;
     };
-  }, [data.views.hudFrame, bridge, ui]);
+  }, [bridge, ui]);
 
   // Re-render the R3F tree whenever the inputs change (data / theme).
   useLayoutEffect(() => {

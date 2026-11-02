@@ -149,8 +149,18 @@ export interface StageBridge {
   joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   /** Measured free stage band for opt-in camera framing. */
   freeStage?: import('./lib/hud-framing').FrameRect;
-  /** Actual reserved HUD blocks, for secondary-body avoidance. */
+  /** Actual reserved HUD blocks (stage CSS px): the default framing and hudFrame's secondary-body avoidance. */
   hudPanels?: readonly import('./lib/hud-framing').FrameRect[];
+  /** The HUD stacks over the stage (phone / portrait): no side columns, the default framing stays off. */
+  hudStacked?: boolean;
+  /** Stage size at the last HUD measurement. */
+  hudStage?: [number, number];
+  /** Bumped when the measured HUD layout changes (CameraRig re-fits the view). */
+  hudLayout: number;
+  /** The default framing on show (QA `framing()`): the free rectangle used, image scale vs the design camera, view-offset shift (shares, + right / up). */
+  framing?: { rect: import('./lib/hud-framing').FrameRect; scale: number; shift: [number, number] } | null;
+  /** The live camera mapped back to stage-independent terms (aspect pull-back and HUD framing undone): REFERENCE and the presentation save it. */
+  viewCamera(): OrbitCamera | null;
   /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
   orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   spans: Map<string, SpanReading>;
@@ -266,6 +276,8 @@ export function createBridge(): StageBridge {
     listeners: new Set(),
     invalidate: () => {},
     liveCamera: () => null,
+    viewCamera: () => null,
+    hudLayout: 0,
     settledTransition: -1,
     settleListeners: new Set(),
     footSlip: null,

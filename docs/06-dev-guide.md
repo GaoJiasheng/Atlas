@@ -2083,6 +2083,8 @@ state:
 
 尺寸、卡片折叠、HUD/演示、快照与尺度变化均从作者镜头重算；拖拽交还自由相机。拟合读 R3F 实时舞台尺寸；HUD → 演示改尺寸后的首帧不能用旧 React 尺寸。竖屏（宽高比 < 0.8）的旧自由带仍按叠放布局取满宽，新候选仍避开实际标题等矩形。纯数学与 Three.js 透视回算见 `tests/space-scene/hud-framing.test.ts`；本题四个满月拍另见 `sun-earth-moon-content.test.ts`。浏览器验收单独执行（2026-10-29，docs/44 §9.7）。
 
+**默认的 HUD 自由区取景**（2026-11-02，docs/67 §9；所有 SpaceScene 主题，不需要数据字段）：作者镜头按 1920×1080 带 HUD 的舞台构图（舞台 1520×1023，左列 28–328 px、右上卡从 1162 px、章节轴从 963 px，自由区 `DESIGN_FREE` = 340–1150 × 12–951 px，各主题实测一致）。Model3DStage 在布局变化时（ResizeObserver、MutationObserver、`transitionend`、字体、演示/封面）量所有可见 `data-hud-panel`（overlay 按卡片），写 `bridge.hudPanels / hudStage / hudStacked` 并递增 `bridge.hudLayout`；CameraRig 把设计自由区映射进 HUD 块之间**最大的空矩形**（`lib/hud-framing.ts stageFraming`：按 `freeRects` 枚举，取设计自由区放得最大的那块，差 6 % 以内取平移最小的，防止面板高度变几个像素就跳位）：先沿视线后拉（不比只按宽高比后拉的镜头更近，所以大屏、面板收起时只平移不放大），再用投影的 view offset 平移，轨道中心仍在主体上，ORBIT 和拖拽都绕自由区中间转。1920×1080 默认布局下是恒等变换（单测）。适用：章、拍、预设、REFERENCE、动作模式镜头（`fitExerciseCamera` / `fitSpan` 另按设计宽高比算一份）；演示、封面、HUD 叠放（视口宽 < 1024 或竖屏）时用原来只按宽高比的镜头。面板开合、阅读面板收起、尺寸变化时 0.6 s 平滑重取景（`REFIT_MS`）；读者拖过镜头后不再自动重取景，直到下一章 / 拍 / 预设；ORBIT 中只改平移。写回 URL 与 REFERENCE / 演示保存的镜头（`bridge.viewCamera()`）都先撤掉宽高比后拉和取景后拉，链接与设备无关（顺带修了 REFERENCE 退出时在窄舞台上重复后拉一次）。测试 API：`engine.framing()` → `{ rect, scale, shift }`（关时 null）。写了 `views.hudFrame` 的主题仍走上面的按主体取景（更精确，逐帧重算），不叠加默认取景；两者共用测量与 0.6 s 平滑。`freeStageRect` 是否按叠放处理由视口决定（横屏一律计入左右列），不再按舞台宽高比 0.8。
+
 ### HUD 控件与内容（docs/08 §2、§3）
 
 | 控件 | 行为 |

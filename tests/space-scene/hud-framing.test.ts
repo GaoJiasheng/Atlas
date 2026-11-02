@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { PerspectiveCamera, Vector3 } from 'three';
-import { fitCameraToHud, freeStageRect, type FrameBox, type FrameRect } from '../../src/engines/space-scene/lib/hud-framing';
+import { DESIGN_ASPECT, DESIGN_FREE, DESIGN_STAGE, fitCameraToHud, freeStageRect, stageFraming, type FrameBox, type FrameRect } from '../../src/engines/space-scene/lib/hud-framing';
 import { fitCameraToAspect } from '../../src/engines/space-scene/lib/camera';
 import type { OrbitCamera } from '../../src/engines/core/types';
 import { viewsSchema } from '../../src/engines/space-scene/schema';
@@ -156,5 +156,78 @@ describe('primary radius and actual reserved HUD rectangles', () => {
     expect([...fitted.position,...fitted.target].every(Number.isFinite)).toBe(true);
     expect(fitted.position[2]-fitted.target[2]).toBeGreaterThan(0);
     checkProjection(fitted,[tiny],800,600,{x0:12,y0:12,x1:788,y1:588});
+  });
+});
+
+describe('default framing in the free HUD area (docs/67 §9)', () => {
+  // Measured 2026-11-02 (stage CSS px): left column, top-right card, overlay legend, chapter axis.
+  const design: FrameRect[] = [{x0:28,y0:20,x1:328,y1:949},{x0:1162,y0:20,x1:1492,y1:384},{x0:1315,y0:396,x1:1492,y1:1060},{x0:28,y0:963,x1:1492,y1:1009}];
+  const ipad: FrameRect[] = [{x0:22,y0:16,x1:262,y1:706},{x0:494,y0:16,x1:758,y1:307},{x0:650,y0:317,x1:758,y1:706},{x0:22,y0:717,x1:758,y1:763}];
+  const authored: OrbitCamera = { position: [1.8,1.76,4.41], target: [0,.4,0], fov: 30 };
+  /** World points on the plane through the target, square to the view, that the design camera shows at these stage shares. */
+  function pointsAt(camera: OrbitCamera, shares: [number,number][], aspect: number) {
+    const c = new PerspectiveCamera(camera.fov, aspect, .01, 100);
+    c.position.fromArray(camera.position); c.lookAt(...camera.target); c.updateMatrixWorld();
+    const d = new Vector3(...camera.position).distanceTo(new Vector3(...camera.target));
+    return shares.map(([u,v]) => {
+      const p = new Vector3(u*2-1, 1-v*2, .5).unproject(c).sub(c.position).normalize();
+      const along = p.dot(new Vector3(...camera.target).sub(c.position).normalize());
+      return c.position.clone().add(p.multiplyScalar(d/along));
+    });
+  }
+  /** Project with the framing applied the way CameraRig applies it: pull back about the target, then the view offset. */
+  function project(camera: OrbitCamera, f: { scale: number; shift: [number,number] }, w: number, h: number, pts: Vector3[]) {
+    const k = 1/f.scale, t = new Vector3(...camera.target);
+    const c = new PerspectiveCamera(camera.fov, w/h, .01, 100);
+    c.position.copy(new Vector3(...camera.position).sub(t).multiplyScalar(k).add(t)); c.lookAt(t);
+    c.setViewOffset(w, h, -f.shift[0]*w, f.shift[1]*h, w, h); c.updateMatrixWorld();
+    return pts.map(p => { const q = p.clone().project(c); return [(q.x+1)*w/2, (1-q.y)*h/2] as const; });
+  }
+  const corners: [number,number][] = [[DESIGN_FREE.x0,DESIGN_FREE.y0],[DESIGN_FREE.x1,DESIGN_FREE.y0],[DESIGN_FREE.x0,DESIGN_FREE.y1],[DESIGN_FREE.x1,DESIGN_FREE.y1],[(DESIGN_FREE.x0+DESIGN_FREE.x1)/2,(DESIGN_FREE.y0+DESIGN_FREE.y1)/2]];
+
+  it('leaves the 1920 × 1080 layout exactly as authored', () => {
+    const f = stageFraming(DESIGN_STAGE.width, DESIGN_STAGE.height, design, 1)!;
+    expect(f.rect).toEqual({x0:340,y0:12,x1:1150,y1:951});
+    expect(f.scale).toBe(1);
+    f.shift.forEach(v => expect(Math.abs(v)).toBeLessThan(1e-12));
+  });
+  it.each([[780,774,ipad],[733,679,ipad.map(r => ({...r, x0:r.x0-47*(r.x0>300?1:0), x1:r.x1-47*(r.x0>300?1:0), y1:Math.min(r.y1,668)}))],[966,978,ipad.map(r => ({...r, x0:r.x0+186*(r.x0>300?1:0), x1:r.x1+186*(r.x0>300?1:0)}))]])
+  ('maps the design free area into the free rectangle it is largest in at %i × %i', (w, h, panels) => {
+    const d = fitCameraToAspect(authored, DESIGN_ASPECT), plain = fitCameraToAspect(authored, w/h);
+    const cap = Math.hypot(...d.position.map((v,i)=>v-d.target[i]!)) / Math.hypot(...plain.position.map((v,i)=>v-plain.target[i]!));
+    const f = stageFraming(w, h, panels, cap)!;
+    expect(f.scale).toBeGreaterThan(0); expect(f.scale).toBeLessThanOrEqual(cap + 1e-12);
+    for (const p of panels) expect(f.rect.x1 <= p.x0-12+1e-6 || f.rect.x0 >= p.x1+12-1e-6 || f.rect.y1 <= p.y0-12+1e-6 || f.rect.y0 >= p.y1+12-1e-6).toBe(true);
+    const out = project(d, f, w, h, pointsAt(d, corners, DESIGN_ASPECT));
+    for (const [x,y] of out.slice(0,4)) {
+      expect(x).toBeGreaterThanOrEqual(f.rect.x0-1e-6); expect(x).toBeLessThanOrEqual(f.rect.x1+1e-6);
+      expect(y).toBeGreaterThanOrEqual(f.rect.y0-1e-6); expect(y).toBeLessThanOrEqual(f.rect.y1+1e-6);
+    }
+    // Centred in the free rectangle along the axis it does not fill.
+    const [cx, cy] = out[4]!;
+    expect(Math.abs(cx-(f.rect.x0+f.rect.x1)/2)).toBeLessThan(1e-6); expect(Math.abs(cy-(f.rect.y0+f.rect.y1)/2)).toBeLessThan(1e-6);
+  });
+  it('never comes closer than the plain camera: a wide free stage only shifts', () => {
+    const f = stageFraming(1180, 774, [{x0:22,y0:16,x1:262,y1:706}], .63)!;
+    expect(f.scale).toBe(.63);
+    expect(f.shift[0]).toBeGreaterThan(0);
+  });
+  it('takes the space below a short card when it holds the view larger than the band beside it', () => {
+    const f = stageFraming(780, 774, [{x0:22,y0:16,x1:262,y1:706},{x0:494,y0:16,x1:758,y1:307},{x0:700,y0:317,x1:758,y1:706}], 2)!;
+    expect(f.rect).toEqual({x0:274,y0:319,x1:688,y1:762});
+  });
+  it('prefers the smaller move between two near-equal spaces (no hopping as a panel grows a few px)', () => {
+    const a = stageFraming(780, 774, ipad, 2)!;
+    const b = stageFraming(780, 774, ipad.map((r,i) => i === 1 ? {...r, y1: r.y1+6} : r), 2)!;
+    expect(b.rect.x0).toBe(a.rect.x0); expect(b.rect.y0 === a.rect.y0 || Math.abs(b.rect.y0-a.rect.y0) === 6).toBe(true);
+  });
+  it('has nothing to offer on an empty or tiny stage', () => {
+    expect(stageFraming(0, 0, [], 1)).toBeNull();
+    expect(stageFraming(20, 20, [], 1)).toBeNull();
+  });
+  it('counts side columns on a landscape tablet stage narrower than 0.8 when told it is not stacked', () => {
+    const panels = [{x0:12,y0:12,x1:200,y1:700},{x0:420,y0:12,x1:540,y1:300}];
+    expect(freeStageRect(550,760,panels).x0).toBe(12);
+    expect(freeStageRect(550,760,panels,12,false)).toEqual({x0:212,y0:12,x1:408,y1:748});
   });
 });
