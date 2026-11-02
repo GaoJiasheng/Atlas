@@ -16,6 +16,8 @@ for (const locale of ['en', 'zh']) {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await open(page, 'ch=dated-evidence&b=1', locale);
+    // The participants card is folded by the room solver at the default 1280×800: open it to read its rows.
+    await page.evaluate(() => window.__atlas!.setCard(true));
     await expect.poll(() => stats(page)).toMatchObject({ recordedEvents: 0, activeEvents: 0, eventMarkers: 0 });
     await expect(page.locator('.ts-card__row[data-entity]')).toHaveCount(2);
     expect(await page.locator('.ts-card__row[data-entity]').evaluateAll((rows) => rows.map((row) => row.getAttribute('data-entity')))).toEqual(['programme-a', 'programme-b']);

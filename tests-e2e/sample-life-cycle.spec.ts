@@ -137,6 +137,8 @@ test.describe('sample-life-cycle (SpaceScene life-cycle model)', () => {
   test('cinema: node keyboard selection and comparison targets at 1280 px', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await open(page, '/en/topics/sample-life-cycle/?ch=two-cycles&theme=cinema');
+    // The cycle card is folded by the room solver at 1280×720: open it to reach its nodes.
+    await page.evaluate(() => window.__atlas!.setCard(true));
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'cinema');
     for (const target of await ring(page).locator('.space-cy__target').all()) {
       const box = await target.boundingBox();

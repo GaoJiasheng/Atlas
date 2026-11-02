@@ -158,6 +158,8 @@ test.describe('nets engine fixture', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.addInitScript(() => localStorage.setItem('atlas:theme', 'cinema'));
     await open(page, 'zh');
+    // As a phone opens: the tools and key stay behind their button (open() unfolds them for the sentence tests).
+    await page.evaluate(() => window.__atlas!.setLegends(false));
     await task(page, 'cubes-and-hexominoes', 1);
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'cinema');
     await expect(page.locator('.ms-tray-dock [data-hud-panel="task"]')).toBeVisible();

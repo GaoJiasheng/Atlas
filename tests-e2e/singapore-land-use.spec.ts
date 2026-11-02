@@ -36,6 +36,8 @@ test('HDB dots and estates follow the year; the PLATE count and legend row track
   await expect(plate).toContainText('244');
 
   // The legend row and LAYERS switch share the store; switching off clears dots, legend row and count.
+  // The layers card is folded by the room solver at the default 1280×800: open it first.
+  await page.evaluate(() => window.__atlas!.setLegends(true));
   const legend = page.locator('.atlas-legend').first();
   const label = 'HDB blocks standing today, by year completed';
   await expect(legend).toContainText(label);
