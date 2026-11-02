@@ -15,11 +15,11 @@
       },
       "summary": {
         "en": "Surrounds and protects the brain.",
-        "zh": "围护脑。"
+        "zh": "包围并保护脑。"
       },
       "detail": {
-        "en": "The skull forms a hard case around the brain. Many of its bones meet at seams called sutures, which allow little movement. Here the skull bones are selected together [S30].",
-        "zh": "颅骨围成坚硬的骨性外壳，保护脑。许多颅骨以骨缝相接，活动很小。模型把这些骨合为一组，方便点选 [S30]。"
+        "en": "The skull forms a hard case around the brain. Many of its bones meet at seams called sutures. These seams allow little movement. You can select the skull bones as one group [S30].",
+        "zh": "颅骨围成坚硬的外壳，保护脑。许多颅骨相接的地方叫骨缝，只能轻微活动。点选时，整组颅骨会一起选中 [S30]。"
       },
       "connects": [
         "mandible",
@@ -65,8 +65,8 @@
         "zh": "在躯干上方支撑头部。"
       },
       "detail": {
-        "en": "The neck bones support the head and surround the upper part of the spinal cord. Small movements between neighbouring bones add up when you turn or nod your head. The neck bones form one selectable group here [S30].",
-        "zh": "颈椎支撑头部，并围护颈部的脊髓。相邻椎骨之间的小幅活动合起来，让头能转动和点动。模型把颈椎合为一组 [S30]。"
+        "en": "The neck bones support the head and surround the upper part of the spinal cord. When you turn or nod your head, small movements between neighbouring bones add up. You can select the neck bones as one group [S30].",
+        "zh": "颈椎支撑头部，围护脊髓的上段。相邻椎骨之间的小幅活动合起来，让头能转动和点头。点选时，整组颈椎会一起选中 [S30]。"
       },
       "connects": [
         "thoracic-spine"
@@ -89,8 +89,8 @@
         "zh": "在背部承托肋骨。"
       },
       "detail": {
-        "en": "These back bones support the chest and meet the ribs. Together with the ribs and sternum, they form the rib cage around the heart and lungs. The chest vertebrae are one selectable group here [S30].",
-        "zh": "胸椎位于背部，与肋骨相接。它们和肋骨、胸骨共同构成胸廓，围护心肺。模型把胸椎合为一个可选组 [S30]。"
+        "en": "These back bones support the chest and meet the ribs. Together with the ribs and the breastbone, called the sternum, they form the rib cage around the heart and lungs. You can select these back bones as one group [S30].",
+        "zh": "胸椎支撑胸部，并与肋骨相接。它们和肋骨、胸前的胸骨共同构成胸廓，围护心肺。点选时，整组胸椎会一起选中 [S30]。"
       },
       "connects": [
         "lumbar-spine",
@@ -111,12 +111,12 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Transfers trunk load towards the pelvis.",
-        "zh": "把躯干负重传向骨盆。"
+        "en": "Passes weight from the upper body to the pelvis.",
+        "zh": "把上半身的重量传向骨盆。"
       },
       "detail": {
-        "en": "The lower-back bones carry weight from the upper body towards the pelvis. Their thick bodies help support this load, while their connections allow some bending. These vertebrae are grouped for selection [S30].",
-        "zh": "腰椎把上半身的重量传向骨盆。它们粗厚的椎体帮助承重，椎骨之间的连接也允许一定程度的弯曲。模型把腰椎合为一组 [S30]。"
+        "en": "The lower-back bones pass weight from the upper body towards the pelvis. The thick main part of each bone helps support this weight. The connections between these bones allow some bending. You can select them as one group [S30].",
+        "zh": "腰椎把上半身的重量传向骨盆。每块腰椎粗厚的主体叫椎体，帮助承重。椎骨之间的连接让腰部能作一定程度的弯曲。点选时，整组腰椎会一起选中 [S30]。"
       },
       "connects": [
         "sacrum"
@@ -139,8 +139,8 @@
         "zh": "连接脊柱与骨盆环。"
       },
       "detail": {
-        "en": "The sacrum is the broad bone at the back of the pelvis. It links the spine to the two hip bones and passes body weight into the pelvic ring. In an adult, it is formed from fused vertebrae [S30].",
-        "zh": "骶骨是骨盆后方较宽的骨。它把脊柱与两侧髋骨连接起来，把身体重量传入骨盆环。成人的骶骨由几块椎骨融合而成 [S30]。"
+        "en": "The sacrum is the broad bone at the back of the pelvis. It links the spine to the two hip bones and passes body weight into the ring formed by the pelvis. In an adult, several spine bones have joined together to form the sacrum [S30].",
+        "zh": "骶骨是骨盆后方较宽的骨。它连接脊柱与两侧髋骨，把身体重量传入环状的骨盆。成人的骶骨由几块椎骨融合而成，也就是连成了一块骨 [S30]。"
       },
       "connects": [
         "coccyx",
@@ -165,8 +165,8 @@
         "zh": "构成脊柱下端的小骨段。"
       },
       "detail": {
-        "en": "The coccyx is the small tail end of the spine below the sacrum. Muscles and ligaments attach around it. Its small size does not mean it is separate from the rest of the skeleton [S30].",
-        "zh": "尾骨位于骶骨下方，是脊柱最下端的小骨段。周围有肌肉和韧带附着。虽然体积小，它仍是骨架的一部分 [S30]。"
+        "en": "The coccyx is the small tail end of the spine below the sacrum. Muscles and ligaments attach around it. This small bone is part of the skeleton [S30].",
+        "zh": "尾骨位于骶骨下方，是脊柱最下端的小骨段。周围有肌肉和韧带附着。这段小骨也是骨架的一部分 [S30]。"
       },
       "connects": []
     },
@@ -187,8 +187,8 @@
         "zh": "支撑胸廓前方。"
       },
       "detail": {
-        "en": "The sternum is the flat bone down the front of the chest. Ribs connect towards it through flexible costal cartilage, helping form the protective rib cage. Its upper, middle and small lower sections are selected together here [S30].",
-        "zh": "胸骨位于胸前正中，是一块扁骨。肋骨经有弹性的肋软骨与它相连，共同形成保护心肺的胸廓。模型把胸骨的上、中、下三部分合为一件 [S30]。"
+        "en": "The sternum is the flat bone down the front of the chest. Flexible tissue called costal cartilage links ribs towards it, helping form the protective rib cage. You can select its upper, middle and small lower sections together [S30].",
+        "zh": "胸骨位于胸前正中，是一块扁骨。肋骨经有弹性的肋软骨向它连接，共同形成保护心肺的胸廓。点选时，胸骨的上、中、下三部分会一起选中 [S30]。"
       },
       "connects": [
         "clavicle-l",
@@ -212,8 +212,8 @@
         "zh": "弯绕在心脏和肺的外侧。"
       },
       "detail": {
-        "en": "The ribs curve from the back towards the front of the chest, enclosing the heart and lungs. A usual rib cage has twelve pairs: seven pairs connect directly to the sternum through cartilage, three join indirectly, and two have free front ends. Each side is one selectable group here [S30].",
-        "zh": "肋骨从背部向胸前弯曲，围护心肺。通常有十二对：七对经各自的软骨连向胸骨，三对间接相连，最下两对的前端游离。模型把每侧肋骨与肋软骨合为一组 [S30]。"
+        "en": "The ribs curve from the back towards the front of the chest, enclosing the heart and lungs. A usual rib cage has twelve pairs. Seven pairs connect directly to the sternum through cartilage, and three join indirectly. The lowest two pairs have free front ends. You can select the ribs and their cartilage on each side as one group [S30].",
+        "zh": "肋骨从背部向胸前弯曲，围护心肺。通常有十二对。七对经各自的软骨连向胸骨，三对间接相连。最下两对的前端游离，不与其他骨相连。点选时，每侧的肋骨和肋软骨会一起选中 [S30]。"
       },
       "connects": [
         "sternum"
@@ -236,8 +236,8 @@
         "zh": "弯绕在心脏和肺的外侧。"
       },
       "detail": {
-        "en": "The ribs curve from the back towards the front of the chest, enclosing the heart and lungs. A usual rib cage has twelve pairs: seven pairs connect directly to the sternum through cartilage, three join indirectly, and two have free front ends. Each side is one selectable group here [S30].",
-        "zh": "肋骨从背部向胸前弯曲，围护心肺。通常有十二对：七对经各自的软骨连向胸骨，三对间接相连，最下两对的前端游离。模型把每侧肋骨与肋软骨合为一组 [S30]。"
+        "en": "The ribs curve from the back towards the front of the chest, enclosing the heart and lungs. A usual rib cage has twelve pairs. Seven pairs connect directly to the sternum through cartilage, and three join indirectly. The lowest two pairs have free front ends. You can select the ribs and their cartilage on each side as one group [S30].",
+        "zh": "肋骨从背部向胸前弯曲，围护心肺。通常有十二对。七对经各自的软骨连向胸骨，三对间接相连。最下两对的前端游离，不与其他骨相连。点选时，每侧的肋骨和肋软骨会一起选中 [S30]。"
       },
       "connects": [
         "sternum"
@@ -352,8 +352,8 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Acts as the upper arm’s bony lever.",
-        "zh": "构成上臂的骨性杠杆。"
+        "en": "Acts as a lever when muscles move the upper arm.",
+        "zh": "在肌肉拉动上臂时充当杠杆。"
       },
       "detail": {
         "en": "The humerus is the long bone of the upper arm. Its rounded head meets the shoulder blade, while its lower end helps form the elbow. Muscles pull on it to move the arm [S30].",
@@ -377,8 +377,8 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Acts as the upper arm’s bony lever.",
-        "zh": "构成上臂的骨性杠杆。"
+        "en": "Acts as a lever when muscles move the upper arm.",
+        "zh": "在肌肉拉动上臂时充当杠杆。"
       },
       "detail": {
         "en": "The humerus is the long bone of the upper arm. Its rounded head meets the shoulder blade, while its lower end helps form the elbow. Muscles pull on it to move the arm [S30].",
@@ -455,7 +455,7 @@
       },
       "detail": {
         "en": "The ulna is the forearm bone on the little-finger side when the palm faces forwards. Its upper end fits around the humerus to form the main elbow hinge. The triceps pulls on the bony point at its upper end to straighten the elbow [S30, S33].",
-        "zh": "手掌朝前时，尺骨位于前臂靠小指的一侧。它的上端与肱骨相接，构成肘部主要的铰链。肱三头肌拉动尺骨上端的鹰嘴，使肘伸直 [S30, S33]。"
+        "zh": "手掌朝前时，尺骨位于前臂靠小指的一侧。它的上端与肱骨相接，构成肘部主要的铰链，帮助前臂屈伸。肱三头肌拉动尺骨上端的骨性突起，使肘伸直。这个突起叫鹰嘴 [S30, S33]。"
       },
       "connects": [
         "hand-l"
@@ -479,7 +479,7 @@
       },
       "detail": {
         "en": "The ulna is the forearm bone on the little-finger side when the palm faces forwards. Its upper end fits around the humerus to form the main elbow hinge. The triceps pulls on the bony point at its upper end to straighten the elbow [S30, S33].",
-        "zh": "手掌朝前时，尺骨位于前臂靠小指的一侧。它的上端与肱骨相接，构成肘部主要的铰链。肱三头肌拉动尺骨上端的鹰嘴，使肘伸直 [S30, S33]。"
+        "zh": "手掌朝前时，尺骨位于前臂靠小指的一侧。它的上端与肱骨相接，构成肘部主要的铰链，帮助前臂屈伸。肱三头肌拉动尺骨上端的骨性突起，使肘伸直。这个突起叫鹰嘴 [S30, S33]。"
       },
       "connects": [
         "hand-r"
@@ -502,8 +502,8 @@
         "zh": "共同支撑手掌与手指。"
       },
       "detail": {
-        "en": "The wrist, palm and fingers contain many small bones linked by joints. These connections let the hand change shape for holding and gripping. One hand has 27 bones, although its bones are selected as one group in this whole-body view [S30].",
-        "zh": "腕部、手掌和手指由许多小骨经关节连接而成。这些连接让手改变形状，完成握持等动作。一只手有27块骨，全身视图把它们合为一个可选组 [S30]。"
+        "en": "The wrist, palm and fingers contain many small bones linked by joints. These connections let the hand change shape for holding and gripping. One hand has 27 bones. In this whole-body view, you can select them as one group [S30].",
+        "zh": "腕部、手掌和手指由许多小骨经关节连接而成。这些连接让手改变形状，完成握持等动作。一只手有27块骨。在全身视图中，点选时这些骨会一起选中 [S30]。"
       },
       "connects": []
     },
@@ -524,8 +524,8 @@
         "zh": "共同支撑手掌与手指。"
       },
       "detail": {
-        "en": "The wrist, palm and fingers contain many small bones linked by joints. These connections let the hand change shape for holding and gripping. One hand has 27 bones, although its bones are selected as one group in this whole-body view [S30].",
-        "zh": "腕部、手掌和手指由许多小骨经关节连接而成。这些连接让手改变形状，完成握持等动作。一只手有27块骨，全身视图把它们合为一个可选组 [S30]。"
+        "en": "The wrist, palm and fingers contain many small bones linked by joints. These connections let the hand change shape for holding and gripping. One hand has 27 bones. In this whole-body view, you can select them as one group [S30].",
+        "zh": "腕部、手掌和手指由许多小骨经关节连接而成。这些连接让手改变形状，完成握持等动作。一只手有27块骨。在全身视图中，点选时这些骨会一起选中 [S30]。"
       },
       "connects": []
     },
@@ -546,8 +546,8 @@
         "zh": "传递负重，并构成髋关节窝。"
       },
       "detail": {
-        "en": "Each hip bone forms one side of the pelvis and contains the hip socket. The socket receives the rounded head of the femur and helps pass weight into the leg. In an adult, three growing bones have fused into this one hip bone [S30].",
-        "zh": "每块髋骨构成骨盆的一侧，并带有髋臼。髋臼容纳圆形的股骨头，把重量传入下肢。成人的一块髋骨由生长时的三部分融合而成 [S30]。"
+        "en": "Each hip bone forms one side of the pelvis and contains a hollow called the hip socket. The rounded head of the femur fits into it, helping pass weight into the leg. In an adult, three bones have joined together to form each hip bone [S30].",
+        "zh": "每块髋骨构成骨盆的一侧。骨上的凹窝叫髋臼，容纳圆形的股骨头，帮助把重量传入下肢。生长过程中，三块骨逐渐融合，形成成人的一块髋骨 [S30]。"
       },
       "connects": [
         "femur-l"
@@ -570,8 +570,8 @@
         "zh": "传递负重，并构成髋关节窝。"
       },
       "detail": {
-        "en": "Each hip bone forms one side of the pelvis and contains the hip socket. The socket receives the rounded head of the femur and helps pass weight into the leg. In an adult, three growing bones have fused into this one hip bone [S30].",
-        "zh": "每块髋骨构成骨盆的一侧，并带有髋臼。髋臼容纳圆形的股骨头，把重量传入下肢。成人的一块髋骨由生长时的三部分融合而成 [S30]。"
+        "en": "Each hip bone forms one side of the pelvis and contains a hollow called the hip socket. The rounded head of the femur fits into it, helping pass weight into the leg. In an adult, three bones have joined together to form each hip bone [S30].",
+        "zh": "每块髋骨构成骨盆的一侧。骨上的凹窝叫髋臼，容纳圆形的股骨头，帮助把重量传入下肢。生长过程中，三块骨逐渐融合，形成成人的一块髋骨 [S30]。"
       },
       "connects": [
         "femur-r"
@@ -590,8 +590,8 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Carries load along the thigh.",
-        "zh": "沿大腿传递负重。"
+        "en": "Carries body weight through the thigh.",
+        "zh": "沿大腿传递身体的重量。"
       },
       "detail": {
         "en": "The femur is the long bone in the thigh. Its rounded upper end fits into the hip socket, while its lower end meets the shin bone at the knee. It carries weight and acts as a lever when leg muscles pull [S30].",
@@ -615,8 +615,8 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Carries load along the thigh.",
-        "zh": "沿大腿传递负重。"
+        "en": "Carries body weight through the thigh.",
+        "zh": "沿大腿传递身体的重量。"
       },
       "detail": {
         "en": "The femur is the long bone in the thigh. Its rounded upper end fits into the hip socket, while its lower end meets the shin bone at the knee. It carries weight and acts as a lever when leg muscles pull [S30].",
@@ -736,8 +736,8 @@
         "zh": "支撑踝关节外侧。"
       },
       "detail": {
-        "en": "The fibula is the slender bone on the outer side of the lower leg. Its lower end helps form the outer ankle and supports that joint. It does not carry the same large share of body weight as the tibia [S30].",
-        "zh": "腓骨是小腿外侧较细的骨。它的下端构成外踝，帮助稳定踝关节。它承担的体重不像胫骨那样多 [S30]。"
+        "en": "The fibula is the slender bone on the outer side of the lower leg. Its lower end helps form the outer ankle and supports that joint. It carries less body weight than the tibia [S30].",
+        "zh": "腓骨是小腿外侧较细的骨。它的下端构成外踝，帮助稳定踝关节。它承担的体重比胫骨少 [S30]。"
       },
       "connects": [
         "tibia-l",
@@ -761,8 +761,8 @@
         "zh": "支撑踝关节外侧。"
       },
       "detail": {
-        "en": "The fibula is the slender bone on the outer side of the lower leg. Its lower end helps form the outer ankle and supports that joint. It does not carry the same large share of body weight as the tibia [S30].",
-        "zh": "腓骨是小腿外侧较细的骨。它的下端构成外踝，帮助稳定踝关节。它承担的体重不像胫骨那样多 [S30]。"
+        "en": "The fibula is the slender bone on the outer side of the lower leg. Its lower end helps form the outer ankle and supports that joint. It carries less body weight than the tibia [S30].",
+        "zh": "腓骨是小腿外侧较细的骨。它的下端构成外踝，帮助稳定踝关节。它承担的体重比胫骨少 [S30]。"
       },
       "connects": [
         "tibia-r",
@@ -786,8 +786,8 @@
         "zh": "经足跟、足弓和足趾分担负重。"
       },
       "detail": {
-        "en": "The foot bones spread load through the heel, arches and toes. Their joints also allow the foot to adjust as you stand and walk. A foot usually has 26 bones, with small extra sesamoid bones counted separately; this view groups them for selection [S30].",
-        "zh": "足骨经足跟、足弓和足趾分担负重。骨之间的关节让脚在站立和行走时作出调整。一只脚通常有26块骨，小的籽骨另计；这里把足骨合为一组 [S30]。"
+        "en": "The foot bones spread weight through the heel, arches and toes. Their joints let the foot adjust as you stand and walk. A foot usually has 26 bones. Small extra bones within tendons, called sesamoid bones, are counted separately. You can select the foot bones as one group [S30].",
+        "zh": "足骨经足跟、足弓和足趾分担重量。骨之间的关节让脚在站立和行走时作出调整。一只脚通常有26块骨。肌腱内还有一些叫籽骨的小骨，另行计算。点选时，整组足骨会一起选中 [S30]。"
       },
       "connects": []
     },
@@ -808,8 +808,8 @@
         "zh": "经足跟、足弓和足趾分担负重。"
       },
       "detail": {
-        "en": "The foot bones spread load through the heel, arches and toes. Their joints also allow the foot to adjust as you stand and walk. A foot usually has 26 bones, with small extra sesamoid bones counted separately; this view groups them for selection [S30].",
-        "zh": "足骨经足跟、足弓和足趾分担负重。骨之间的关节让脚在站立和行走时作出调整。一只脚通常有26块骨，小的籽骨另计；这里把足骨合为一组 [S30]。"
+        "en": "The foot bones spread weight through the heel, arches and toes. Their joints let the foot adjust as you stand and walk. A foot usually has 26 bones. Small extra bones within tendons, called sesamoid bones, are counted separately. You can select the foot bones as one group [S30].",
+        "zh": "足骨经足跟、足弓和足趾分担重量。骨之间的关节让脚在站立和行走时作出调整。一只脚通常有26块骨。肌腱内还有一些叫籽骨的小骨，另行计算。点选时，整组足骨会一起选中 [S30]。"
       },
       "connects": []
     },
@@ -851,8 +851,8 @@
         "tint": "token:bone"
       },
       "summary": {
-        "en": "Shares the curved wrist contact region.",
-        "zh": "参与腕部弧形接触区。"
+        "en": "Meets other wrist bones along curved surfaces.",
+        "zh": "以弯曲的关节面与其他腕骨相接。"
       },
       "detail": {
         "en": "The lunate is a small wrist bone beside the scaphoid. Their neighbouring surfaces can glide by small amounts as the wrist moves. The name describes its curved, moon-like shape [S30].",
@@ -901,8 +901,8 @@
         "zh": "构成食指指根靠手掌的一侧。"
       },
       "detail": {
-        "en": "This metacarpal lies in the palm below the index finger. Its rounded head meets the first finger bone at the knuckle. Their joint allows bending and straightening as well as some sideways movement [S30].",
-        "zh": "第二掌骨位于手掌内，接在食指下方。它的圆形骨头与食指近节指骨在指根相接。这个关节既能屈伸，也能作一定程度的侧向活动 [S30]。"
+        "en": "This metacarpal is a palm bone below the index finger. Its rounded head meets the first finger bone at the knuckle. Their joint allows bending and straightening as well as some sideways movement [S30].",
+        "zh": "第二掌骨是手掌内接在食指下方的骨。它的圆头与食指的第一块指骨在指根相接。这块指骨叫近节指骨。这个关节能屈伸，也能作一定程度的侧向活动 [S30]。"
       },
       "connects": [
         "mcp-phalanx"
@@ -925,8 +925,8 @@
         "zh": "在第二掌骨头上活动。"
       },
       "detail": {
-        "en": "This is the first finger bone beyond the index knuckle. Its base rests against the rounded head of the index metacarpal. It moves there when you bend the finger or spread it sideways [S30].",
-        "zh": "食指近节指骨是食指越过指根后的第一块骨。它的基部与第二掌骨圆形的骨头相接。弯曲食指或向侧面张开时，它就在这个关节处活动 [S30]。"
+        "en": "This is the first finger bone beyond the index knuckle. Its base rests against the rounded head of the palm bone below it, the index metacarpal. It moves there when you bend the finger or spread it sideways [S30].",
+        "zh": "食指近节指骨是从指根往指尖数的第一块指骨。它靠近手掌的一端与第二掌骨的圆头相接。弯曲食指或向侧面张开时，它就在这个关节处活动 [S30]。"
       },
       "connects": []
     },
@@ -983,12 +983,12 @@
         "zh": "上方软骨面"
       },
       "summary": {
-        "en": "Covers one side of the joint contact.",
-        "zh": "覆盖关节接触的一侧。"
+        "en": "Covers the upper bone end at the joint.",
+        "zh": "覆盖关节内上方的骨端。"
       },
       "detail": {
-        "en": "Articular cartilage is the smooth covering on this upper bone end. It helps the facing surfaces move with little friction. The blue-grey cap follows the bone’s curve; the opening is enlarged to show the layers [S30, S34].",
-        "zh": "关节软骨覆盖在这块上方骨的末端，表面光滑。它帮助相对的骨面顺畅活动。蓝灰色软骨帽贴着骨端的曲面，模型放宽了开口以显示层次 [S30, S34]。"
+        "en": "Articular cartilage is the smooth covering on this upper bone end. It helps the facing surfaces move with little friction, or rubbing. The blue-grey cap follows the bone’s curve. The opening is enlarged to show the layers [S30, S34].",
+        "zh": "关节软骨覆盖在这块上方骨的末端，表面光滑。它减小相对骨面之间的摩擦，让活动更顺畅。蓝灰色软骨帽贴着骨端的曲面。模型放宽了开口，方便看清各层 [S30, S34]。"
       },
       "group": "joint-detail",
       "primitive": {
@@ -1111,12 +1111,12 @@
         "zh": "下方软骨面"
       },
       "summary": {
-        "en": "Covers the opposing joint contact.",
-        "zh": "覆盖相对的关节接触面。"
+        "en": "Covers the lower bone end at the joint.",
+        "zh": "覆盖关节内下方的骨端。"
       },
       "detail": {
-        "en": "This cartilage covers the lower bone’s facing surface. It meets the opposite cartilage across a thin fluid-filled space, rather than joining the bones into one solid piece. The cap is made easier to see in this teaching model [S30, S34].",
-        "zh": "这层软骨覆盖下方骨相对的关节面。两侧软骨之间留有含滑液的薄隙，并没有把两块骨连成一个实心整体。教学模型把软骨帽画得较明显 [S30, S34]。"
+        "en": "This cartilage covers the lower bone’s facing surface. A thin space filled with fluid separates it from the opposite cartilage, keeping the two bones separate. The cartilage cap is made easier to see here [S30, S34].",
+        "zh": "这层软骨覆盖下方骨相对的关节面。两侧软骨之间留有含滑液的薄隙，让两块骨保持分开。模型把软骨帽画得较明显，方便观察 [S30, S34]。"
       },
       "group": "joint-detail",
       "primitive": {
@@ -1243,8 +1243,8 @@
         "zh": "围住关节腔，滑液润滑相对表面。"
       },
       "detail": {
-        "en": "The joint capsule forms a sleeve around the space between the bone ends. Its inner lining makes synovial fluid, which helps the cartilage surfaces move smoothly. A cut-open wall and blue-green fluid show what is normally hidden inside [S30, S34].",
-        "zh": "关节囊像套筒一样围住骨端之间的空间。内层滑膜产生滑液，帮助软骨面顺畅活动。模型切开囊壁，用蓝绿色表示滑液，让内部结构可见 [S30, S34]。"
+        "en": "The joint capsule forms a sleeve around the space between the bone ends. Its inner lining makes a liquid called synovial fluid. This fluid helps the cartilage surfaces move smoothly. The wall is cut open to show the inside, with the fluid coloured blue-green [S30, S34].",
+        "zh": "关节囊像套筒一样围住骨端之间的空间。它的内层叫滑膜，产生一种叫滑液的液体。滑液帮助软骨面顺畅活动。模型切开囊壁，用蓝绿色表示滑液，让内部结构可见 [S30, S34]。"
       },
       "group": "joint-detail",
       "primitive": {
@@ -1471,8 +1471,8 @@
         "zh": "跨过关节连接骨与骨。"
       },
       "detail": {
-        "en": "Ligaments are strong bands that connect bone to bone. These bands cross the outside of the joint capsule and help limit excess movement. Unlike muscles, they do not shorten to pull the joint into motion [S30, S34].",
-        "zh": "韧带是连接骨与骨的坚韧带状组织。图中的带子跨过关节囊外侧，帮助限制过度活动。韧带不像肌肉那样主动缩短、拉动关节 [S30, S34]。"
+        "en": "Ligaments are strong bands that connect bone to bone. These bands cross the outside of the joint capsule and help limit excess movement. They support the joint without actively shortening like muscles to pull it into motion [S30, S34].",
+        "zh": "韧带是连接骨与骨的坚韧带状组织。图中的带子跨过关节囊外侧，帮助限制过度活动。它们支撑关节，不会像肌肉那样主动缩短来拉动关节 [S30, S34]。"
       },
       "group": "joint-detail",
       "primitive": {
@@ -1583,12 +1583,12 @@
         "zh": "骨密质壁与骨膜"
       },
       "summary": {
-        "en": "Forms the dense outer wall of the specimen.",
-        "zh": "构成标本致密的外壁。"
+        "en": "Forms the bone’s dense outer wall.",
+        "zh": "构成骨致密的外壁。"
       },
       "detail": {
-        "en": "Compact bone makes the dense, hard wall around a long bone’s shaft. The cut face shows that this wall has thickness, with marrow space inside it. A thin outer covering, the periosteum, is shown peeled back beside the opening [S30, S34].",
-        "zh": "骨密质构成长骨骨干致密而坚硬的外壁。切面显示骨壁有一定厚度，内侧是容纳骨髓的空间。开口旁翻起的薄层表示骨膜 [S30, S34]。"
+        "en": "Compact bone makes the dense, hard wall around the middle of a long bone, called the shaft. The cut face shows the wall’s thickness and the space for marrow inside. A thin outer covering called the periosteum is peeled back beside the opening [S30, S34].",
+        "zh": "长骨中间的部分叫骨干，外壁由致密而坚硬的骨密质构成。切面显示骨壁的厚度，内侧是容纳骨髓的空间。开口旁翻起的薄层是骨的外膜，叫骨膜 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -1840,12 +1840,12 @@
         "zh": "骨松质网架"
       },
       "summary": {
-        "en": "Supports the ends with a hard branching framework.",
-        "zh": "以坚硬分支网架支撑骨端。"
+        "en": "Supports the bone ends with a hard network of struts.",
+        "zh": "以坚硬的骨小梁网架支撑骨端。"
       },
       "detail": {
-        "en": "Spongy bone is a network of hard struts with spaces between them. The connected struts help support the wide ends of this long bone. They are enlarged here so you can distinguish the bone from the soft marrow in its spaces [S30, S34].",
-        "zh": "骨松质由坚硬的骨小梁连成网架，网架之间留有空隙。相连的小梁帮助支撑长骨较宽的两端。模型放大了网架，方便分清硬骨与空隙内柔软的骨髓 [S30, S34]。"
+        "en": "Spongy bone is a network of hard struts with spaces between them. The connected struts help support the wide ends of this long bone. They are enlarged here so you can see the hard bone and the soft marrow in its spaces [S30, S34].",
+        "zh": "骨松质由许多坚硬的小支柱连成网架。这些小支柱叫骨小梁，彼此之间留有空隙。相连的小梁帮助支撑长骨较宽的两端。模型放大了网架，方便看清硬骨与空隙内柔软的骨髓 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -11930,12 +11930,12 @@
         "zh": "红骨髓与黄骨髓"
       },
       "summary": {
-        "en": "Occupies spaces inside the bone.",
+        "en": "Fills spaces inside the bone.",
         "zh": "位于骨内的间隙。"
       },
       "detail": {
-        "en": "Marrow is soft tissue inside bones. Red marrow makes blood cells, while yellow marrow contains much fat. This section shows red marrow among the end struts and yellow marrow in the shaft; the pattern varies with age and with the bone [S30, S34].",
-        "zh": "骨髓是骨内部的软组织。红骨髓制造血细胞，黄骨髓含有较多脂肪。这个截面在骨端网架之间显示红骨髓，在骨干髓腔显示黄骨髓；分布随年龄和骨而不同 [S30, S34]。"
+        "en": "Marrow is soft tissue inside bones. Red marrow makes blood cells. Yellow marrow contains much fat. This cutaway shows red marrow among the struts at the bone’s ends and yellow marrow in its shaft. The pattern varies with age and from bone to bone [S30, S34].",
+        "zh": "骨髓是骨内部的软组织。红骨髓制造血细胞，黄骨髓含有较多脂肪。这个截面显示骨端网架之间的红骨髓，以及骨干内部的黄骨髓。骨髓的分布随年龄和骨而不同 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -12506,8 +12506,8 @@
         "zh": "把血液输送进活骨。"
       },
       "detail": {
-        "en": "Bone contains living cells that need a blood supply. A nutrient artery enters through the hard wall and branches towards the tissues inside. The enlarged red branches show a route for blood, rather than an empty hole through the bone [S30, S34].",
-        "zh": "骨含有活细胞，需要血液供应。滋养动脉穿过坚硬的骨壁，向内部组织分支。放大的红色分支表示血液通路，并不是贯穿骨的空洞 [S30, S34]。"
+        "en": "Bone contains living cells that need a blood supply. A blood vessel called the nutrient artery enters through the hard wall. It branches towards the tissues inside. The red branches are enlarged to show the route taken by blood [S30, S34].",
+        "zh": "骨含有活细胞，需要血液供应。一条叫滋养动脉的血管穿过坚硬的骨壁，向内部组织分支。红色分支表示血液流经的通路，模型将它们放大，方便观察 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -12646,8 +12646,8 @@
         "zh": "显示早期断隙与血肿。"
       },
       "detail": {
-        "en": "A fracture breaks the hard bone and can tear nearby blood vessels. Blood collects and clots around the break, shown here in dark red. This is the first specimen in the repair row, with a gap still visible between the broken ends [S30, S34].",
-        "zh": "骨折会破坏硬骨，也可能撕裂附近的血管。血液在断处聚集并凝固，图中用暗红色表示。这是修复列的第一个标本，断端之间仍可见裂隙 [S30, S34]。"
+        "en": "A fracture is a break in the hard bone. It can also tear nearby blood vessels. Blood collects and clots around the break, shown here in dark red. This first specimen in the repair row still has a visible gap between the broken ends [S30, S34].",
+        "zh": "骨折就是硬骨断裂，也可能撕裂附近的血管。血液在断处聚集并凝固，图中用暗红色表示。修复过程的第一个标本中，断端之间仍可见裂隙 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -12818,8 +12818,8 @@
         "zh": "显示断处周围的软性桥接。"
       },
       "detail": {
-        "en": "A soft callus can form a bridge around the broken ends. It contains tissues that are softer than mature bone, helping join the damaged region. The blue-grey bridge marks this stage, rather than a second blood clot [S30, S34].",
-        "zh": "较软的骨痂可在断端周围形成桥接。其中的组织比成熟骨软，帮助连接损伤区域。蓝灰色桥接表示软骨痂阶段，与前一标本的血肿不同 [S30, S34]。"
+        "en": "New tissue can form a bridge around the broken ends, called a soft callus. It is softer than mature bone and helps join the damaged region. The blue-grey bridge shows this tissue, which forms after the blood clot [S30, S34].",
+        "zh": "断端周围可形成一座由新组织连成的桥，叫软骨痂。它比成熟骨软，帮助连接损伤区域。蓝灰色的桥表示血液凝块形成之后长出的软骨痂 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -13002,8 +13002,8 @@
         "zh": "显示硬的骨性桥接。"
       },
       "detail": {
-        "en": "New bony tissue replaces the softer bridge, forming a hard callus. The enlarged, rough bridge around the break is now bone. This specimen shows a stage of repair, without setting a number of days for healing [S30, S34].",
-        "zh": "新的骨组织替代较软的桥接，形成硬骨痂。断处周围较粗大的桥接此时已是骨。标本表示修复的一个阶段，没有规定愈合天数 [S30, S34]。"
+        "en": "New bone replaces the softer bridge to form a hard callus. The thick, rough bridge around the break is now bone. This specimen shows a stage of repair; no healing time in days is set here [S30, S34].",
+        "zh": "新的骨组织替代较软的桥，形成硬骨痂。断处周围粗大而粗糙的桥此时已是骨。标本表示修复的一个阶段，没有设定愈合天数 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -13494,8 +13494,8 @@
         "zh": "显示重新塑形的骨外形。"
       },
       "detail": {
-        "en": "The repaired bone can gradually reshape through remodelling. Extra callus is reduced and the shaft becomes smoother, though a slight bulge may remain. Read the four specimens from left to right as a process, not as equal lengths of time [S30, S34].",
-        "zh": "修复后的骨可继续通过重塑调整外形。多余骨痂减少，骨干逐渐平滑，但仍可能留有轻微隆起。从左到右观察四个标本，表示的是过程顺序，不是相等的时间段 [S30, S34]。"
+        "en": "The repaired bone can gradually reshape through remodelling. Extra callus is reduced and the shaft becomes smoother. A slight bulge may remain. The four specimens show the steps from left to right; each step can take a different length of time [S30, S34].",
+        "zh": "修复后的骨可继续通过重塑调整外形。多余骨痂减少，骨干逐渐平滑，但仍可能留有轻微隆起。四个标本从左到右展示修复步骤，各阶段所需的时间可以不同 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -13579,8 +13579,8 @@
         "zh": "标示生长中骨的软骨区域。"
       },
       "detail": {
-        "en": "A growth plate is a region of cartilage near the end of a young long bone. New bone replaces cartilage as the bone lengthens. This band belongs to the growing-bone model, not the adult skeleton beside it [S30, S34].",
-        "zh": "生长板位于幼年长骨靠近骨端的区域，由软骨构成。骨增长时，新骨逐步替代软骨。这条带只属于生长标本，不属于旁边的成人骨架 [S30, S34]。"
+        "en": "A growth plate is a region of cartilage near the end of a young long bone. New bone replaces cartilage as the bone lengthens. This band appears in the growing-bone model. The adult skeleton beside it has no growth plate [S30, S34].",
+        "zh": "生长板位于幼年长骨靠近骨端的区域，由软骨构成。骨增长时，新骨逐步替代软骨。这条带出现在生长中的骨模型上。旁边的成人骨架没有生长板 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -13610,8 +13610,8 @@
         "zh": "标示正在更新的骨表面。"
       },
       "detail": {
-        "en": "Bone tissue continues to change after height growth stops. During remodelling, old tissue is removed and new tissue forms. The marked patch shows the idea of local renewal, not the speed of a person’s bone growth [S30, S34].",
-        "zh": "身高停止增长后，骨组织仍会更新。重塑时，旧组织被去除，新组织形成。标出的区域只说明局部更新的概念，不表示某个人骨生长的速度 [S30, S34]。"
+        "en": "Bone tissue continues to renew itself after height growth stops. Old tissue is removed and new tissue forms. This process is called remodelling. The marked patch is a simple example of renewal in one area, rather than a measure of how fast a person’s bones grow [S30, S34].",
+        "zh": "身高停止增长后，骨组织仍会更新。旧组织被去除，新组织形成，这个过程叫重塑。标出的区域示意一处骨组织的更新，不表示某个人骨生长的速度 [S30, S34]。"
       },
       "group": "bone-section",
       "primitive": {
@@ -13695,8 +13695,8 @@
         "zh": "向桡骨传递拉力。"
       },
       "detail": {
-        "en": "This tendon carries the biceps muscle’s pull to the radius. Because the pull crosses the elbow, it can help turn the forearm at that joint. Only a short, enlarged tendon segment is drawn here [S30, S32, S34].",
-        "zh": "这段肌腱把肱二头肌的拉力传到桡骨。拉力跨过肘部，因此能帮助前臂在肘关节处转动。模型只画出一小段放大的肌腱 [S30, S32, S34]。"
+        "en": "This tendon carries the biceps muscle’s pull to the radius. The pull crosses the elbow and helps turn the forearm at that joint. The short tendon segment is enlarged so you can see it clearly [S30, S32, S34].",
+        "zh": "这段肌腱把肱二头肌的拉力传到桡骨。拉力跨过肘部，帮助前臂在肘关节处转动。模型放大了一小段肌腱，方便看清 [S30, S32, S34]。"
       },
       "group": "pull-and-lever",
       "primitive": {
@@ -13735,7 +13735,7 @@
       },
       "detail": {
         "en": "This tendon carries the triceps muscle’s pull to the ulna at the point of the elbow. The pull helps straighten the elbow. The short tendon segment is enlarged so its connection is easier to see [S30, S33, S34].",
-        "zh": "这段肌腱把肱三头肌的拉力传到肘尖处的尺骨鹰嘴。这个拉力帮助肘伸直。模型把一小段肌腱放大，方便观察连接位置 [S30, S33, S34]。"
+        "zh": "这段肌腱把肱三头肌的拉力传到肘尖处的尺骨突起，也就是鹰嘴。这个拉力帮助肘伸直。模型把一小段肌腱放大，方便观察连接位置 [S30, S33, S34]。"
       },
       "group": "pull-and-lever",
       "primitive": {
@@ -13773,8 +13773,8 @@
         "zh": "绕固定支点承托负载。"
       },
       "detail": {
-        "en": "The beam turns around the fixed hinge, which marks the pivot. In this ideal model, the beam is 0.30 m long and the dot marks a pull point 0.04 m from the pivot. Place the same load at 0.15 m or 0.30 m and compare the pull needed to balance it. The model leaves out the beam’s weight and uses a pull at right angles to the beam, so it does not show the real biceps’ direction of pull [S34].",
-        "zh": "这根梁绕固定铰链转动，铰链就是支点。理想模型中的梁长0.30 m，小圆点标出距支点0.04 m的拉力作用处。把同样的负载放在距支点0.15 m或0.30 m处，比较平衡它所需的拉力。模型忽略梁自身的重量，拉力与梁垂直，不表示真实肱二头肌的拉力方向 [S34]。"
+        "en": "The beam turns around a fixed hinge called the pivot. In this simple model, the beam is 0.30 m long. The dot marks a pull point 0.04 m from the pivot. Place the same load at 0.15 m or 0.30 m and compare the pull needed to balance it. The model leaves out the beam’s weight. Its pull acts at right angles to the beam; it does not trace the real biceps’ pull [S34].",
+        "zh": "这根梁绕固定铰链转动，铰链就是支点。这个简化模型中的梁长0.30 m。小圆点标出距支点0.04 m的拉力作用处。把同样的负载放在距支点0.15 m或0.30 m处，比较平衡它所需的拉力。模型忽略梁自身的重量。模型中的拉力与梁垂直，不表示真实肱二头肌的拉力方向 [S34]。"
       },
       "group": "pull-and-lever",
       "primitive": {
@@ -13836,8 +13836,8 @@
         "zh": "施加竖直向下的力。"
       },
       "detail": {
-        "en": "The block marks where an outside force pulls vertically down on the beam. Choose its force in newtons and compare two distances from the pivot. Zero removes the external load, while a real arm would still have other forces acting on it. The block’s size does not measure its force or your muscle strength [S34].",
-        "zh": "方块标出外加力竖直向下作用在梁上的位置。可以选择以牛顿表示的力，并比较两种支点距离。零表示没有外加负载，真实手臂上仍会有其他力。方块大小不表示力的大小，也不测量你的肌力 [S34]。"
+        "en": "The block marks where an outside force pulls vertically down on the beam. Force is measured in newtons. Choose a force and compare the two distances from the pivot. Setting the force to zero removes this outside load. A real arm would still have other forces acting on it. The block marks the load’s position; its size tells you neither the force nor your muscle strength [S34].",
+        "zh": "方块标出外加力竖直向下作用在梁上的位置。力的单位是牛顿。选择一个力，再比较负载与支点之间的两种距离。设为零会移除这项外加负载，真实手臂上仍会有其他力。方块标示负载的位置，大小不代表力的大小或你的肌力 [S34]。"
       },
       "group": "pull-and-lever",
       "primitive": {
@@ -13864,12 +13864,12 @@
         "zh": "体表轮廓"
       },
       "summary": {
-        "en": "Locates the skeleton within the adult reference body.",
-        "zh": "在成人参考身体中定位骨架。"
+        "en": "Shows where the bones lie inside an adult body.",
+        "zh": "显示骨在成人身体内的位置。"
       },
       "detail": {
-        "en": "The faint body surface helps locate the bones inside an adult body. It can be hidden to make the skeleton easier to inspect. This reference body is not a prediction of a child’s body shape [S30].",
-        "zh": "淡显的体表帮助定位成人身体内的骨。隐藏体表后，骨架更容易看清。这个参考身体不用于预测儿童的体形 [S30]。"
+        "en": "The faint body surface helps locate bones inside an adult body. Hide it to see the skeleton more clearly. It shows an adult outline and cannot predict a child’s body shape [S30].",
+        "zh": "淡显的体表帮助看清骨在成人身体内的位置。隐藏体表后，骨架更容易看清。这是成人的轮廓，不能用来预测儿童的体形 [S30]。"
       },
       "mesh": "skin-outline",
       "material": {
@@ -14698,8 +14698,8 @@
         "zh": "杠杆模型"
       },
       "value": {
-        "en": "Ideal static balance",
-        "zh": "理想静力平衡"
+        "en": "Ideal balance at rest",
+        "zh": "理想静止平衡"
       },
       "tag": "sim"
     }
@@ -14767,8 +14767,8 @@
         "id": "load-distance",
         "kind": "step",
         "label": {
-          "en": "Load distance",
-          "zh": "负载距离"
+          "en": "Distance from pivot",
+          "zh": "负载距支点的距离"
         },
         "values": [
           0.15,
@@ -14805,8 +14805,8 @@
         "id": "distance",
         "kind": "number",
         "label": {
-          "en": "Load distance",
-          "zh": "负载距离"
+          "en": "Distance from pivot",
+          "zh": "负载距支点的距离"
         },
         "unit": "m",
         "decimals": 2,
@@ -14849,8 +14849,8 @@
         "id": "residual",
         "kind": "number",
         "label": {
-          "en": "Balance residual",
-          "zh": "平衡残差"
+          "en": "Unbalanced turning effect",
+          "zh": "未抵消的转动作用"
         },
         "unit": "N·m",
         "decimals": 3,
