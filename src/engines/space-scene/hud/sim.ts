@@ -36,7 +36,7 @@ export interface SimView {
 /** Set one control (the store keeps only what was set; lib/sim/controls.ts). */
 export function setSim(store: SceneStore<SpaceSceneExt>, sim: SimData, id: string, value: SimValue): void {
   const st = store.getState();
-  st.patch({ sim: setSimControl(sim, st.sim, id, value) });
+  st.patch({ sim: setSimControl(sim, st.sim, id, value), ...(sim.microscope && id === sim.microscope.controls.enabled && value === true ? { view: 'assembled' as const, explode: 0, cutaway: 'none' } : {}) });
 }
 
 export function useSimView(file: Pick<PartsFile, 'sim' | 'parts' | 'poses'>): SimView | null {

@@ -1250,6 +1250,12 @@ export const partsFileBase = z
       }))
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sim', ...x.path], message: x.message });
     }
+    if(file.sim){
+      const scaled=new Set(file.sim.bind.flatMap(b=>'part' in b&&b.scale?(Array.isArray(b.part)?b.part:[b.part]):[]));
+      file.animations.forEach((a,i)=>{if(scaled.has(a.target))ctx.addIssue({code:'custom',path:['animations',i,'target'],message:'scale binding forbids a competing animation writer'});});
+      file.parts.forEach((p,i)=>{if(scaled.has(p.id)&&p.explode.dist!==0)ctx.addIssue({code:'custom',path:['parts',i,'explode'],message:'scale binding forbids a competing explode writer'});});
+      for(const [name,pose] of Object.entries(file.poses??{}))for(const id of Object.keys(pose.parts))if(scaled.has(id))ctx.addIssue({code:'custom',path:['poses',name,'parts',id],message:'scale binding forbids a competing pose writer'});
+    }
     if (file.sim?.orbitRotation) {
       if (file.rig) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['rig'], message: 'orbit body frames cannot inherit rig or exercise root motion' });
       const writers = new Set(file.sim.bind.flatMap((b) => ('part' in b && b.bodyTransform ? (Array.isArray(b.part) ? b.part : [b.part]) : [])));
@@ -1537,6 +1543,7 @@ const spaceSceneDataBase = z
       });
       if (!src.get('S36')?.design) issue(['parts', 'sim', 'orbitRotation', 'sources'], 'S36 must be a design study');
     }
+    if(data.parts.sim?.solarSystem){const sources=new Set((data.sources?.sources??[]).map(s=>s.id));data.parts.sim.solarSystem.sources.forEach((id,i)=>{if(!sources.has(id))issue(['parts','sim','solarSystem','sources',i],`unknown source ${id}`);});}
     const known = new Set((data.sources?.sources ?? []).map((s) => s.id));
     const shared = new Set((data.fitness?.sources ?? []).map((s) => s.id));
     const muscles = new Map((data.fitness?.muscles ?? []).map((m) => [m.id, m]));
@@ -1669,6 +1676,13 @@ const muscleStateFields = {
   sites: z.array(kebabId).optional(),
 };
 
+/** Author snapshots use the same phase clock as the acoustic source markers. */
+export const sensesFrameSchema = z.object({
+  waveCycles: z.number().finite().min(0).max(1).optional(),
+  echoProgress: z.number().finite().min(0).max(1).optional(),
+}).strict().refine(x => x.waveCycles !== undefined || x.echoProgress !== undefined, 'sensesFrame needs at least one phase');
+export type SensesFrame = z.output<typeof sensesFrameSchema>;
+
 export const spaceBeat = z
   .object({
     view: z.enum(SPACE_VIEWS).optional(),
@@ -1685,6 +1699,7 @@ export const spaceBeat = z
     /** Groups (or parts) drawn faint for this beat (not cumulative); default the chapter's. */
     ghost: z.array(kebabId).optional(),
     ...muscleStateFields,
+    sensesFrame: sensesFrameSchema.optional(),
     /** Try-it control values for this beat, on top of the chapter's `sim.set`. */
     sim: beatSimSchema.optional(),
     caption: bilingual,
@@ -1753,6 +1768,7 @@ export const spaceChapterState = z
     /** The background chapter's reading note ("How this topic is written"; docs/06 背景章; only on `kind: background`). */
     note: bilingual.optional(),
     ...muscleStateFields,
+    sensesFrame: sensesFrameSchema.optional(),
     /** PRESENTATION beats for this chapter; default = one beat (the chapter's state, `summary` as caption). */
     beats: z.array(spaceBeat).min(1).optional(),
     /** The chapter index after the body in the reading panel (exercises or parts). */
@@ -1805,8 +1821,12 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
   const sited = new Set((f.sites ?? []).map((x) => x.muscle));
   const check = (
     where: string,
-    s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway' | 'exercise' | 'highlight' | 'sites'> & { camera?: unknown },
+    s: Pick<SpaceBeat, 'part' | 'hide' | 'labels' | 'layers' | 'pose' | 'ghost' | 'cutaway' | 'exercise' | 'highlight' | 'sites' | 'sensesFrame'> & { camera?: unknown },
   ) => {
+    if (s.sensesFrame) {
+      if (f.sim?.kind !== 'senses') out.push(`${where}sensesFrame: requires a senses sim`);
+      if (s.sensesFrame.echoProgress !== undefined && (f.sim?.senses?.profile !== 'sound-only' || !f.sim.senses.soundLab || !f.sim.overlays.some(o => o.kind === 'sound-echo-pulse'))) out.push(`${where}sensesFrame.echoProgress: requires sound-only, soundLab and sound-echo-pulse`);
+    }
     const part = (field: string, id: string, selectable: boolean) => {
       const p = parts.get(id);
       if (!p) out.push(`${where}${field}: unknown part "${id}"`);

@@ -1,0 +1,161 @@
+---
+id: sunlight-and-food
+order: 4
+title:
+  en: Food pathways from the Sun
+  zh: 来自太阳的食物路径
+level: P6
+state:
+  camera:
+    position:
+      - 10
+      - 1.8
+      - 3.4
+    target:
+      - 10
+      - 0.3
+      - 0
+    fov: 30
+  layers:
+    - reef-habitat
+    - polyp-closeup
+    - web-specimens
+    - evidence-tools
+    - feeding-flows
+  hide: []
+  labels:
+    - web-symbionts
+  part: null
+  view: assembled
+  explode: 0
+  run: false
+  cutaway: none
+  pose: null
+  ghost: []
+  summary:
+    en: Follow the arrows to trace food sources.
+    zh: 沿箭头观察食物的来源。
+  sim:
+    set:
+      remove: none
+      inspect: n-coral
+      depth-m: 3
+      water-case: more-turbid
+      evidence-state: partnered
+    try:
+      vary: inspect
+      keep:
+        - en: Same selected food pathways
+          zh: 同一组选入食物路径
+        - remove
+      observe:
+        - foods
+        - food-status
+        - active-links
+  beats:
+    - labels:
+        - web-symbionts
+        - web-phytoplankton
+        - web-turf-algae
+      sim:
+        set:
+          remove: none
+      caption:
+        en: Phytoplankton, algal partners and reef-surface algae make food using light.
+        zh: 浮游植物、共生藻和礁面藻类利用光制造食物。
+    - labels:
+        - web-phytoplankton
+        - web-zooplankton
+        - web-coral
+      run: true
+      sim:
+        set:
+          inspect: n-zooplankton
+      caption:
+        en: A selected zooplankton group eats phytoplankton; coral animals can eat zooplankton.
+        zh: 这里选取的浮游动物吃浮游植物；珊瑚动物可吃浮游动物。
+    - labels:
+        - web-symbionts
+        - web-coral
+      sim:
+        set:
+          inspect: n-coral
+      caption:
+        en: This arrow transfers food made by partners. It does not show the coral swallowing them.
+        zh: 这条箭头表示伙伴制成的食物转移，不表示珊瑚吞下伙伴。
+    - part: web-turf-algae
+      labels:
+        - web-turf-algae
+        - web-parrotfish
+      sim:
+        set:
+          inspect: n-parrotfish
+      caption:
+        en: Parrotfishes graze reef-surface food with strong beak-like jaws.
+        zh: 鹦嘴鱼用强壮的喙状颌在礁面摄食。
+    - labels:
+        - web-coral
+        - web-zooplankton
+      sim:
+        set:
+          inspect: n-coral
+      caption:
+        en: Arrows point from food to consumer. This selected web leaves many links unshown.
+        zh: 箭头由食物指向消费者；这个选取的网省略了许多关系。
+  index:
+    parts:
+      - web-symbionts
+      - web-phytoplankton
+      - web-zooplankton
+      - web-coral
+      - web-turf-algae
+      - web-parrotfish
+---
+
+<Lang en>
+
+The specimen display separates organisms that are difficult to compare at their real sizes. <Term id="phytoplankton">Phytoplankton</Term> drift in water and make food using light. Algal partners inside coral tissue also photosynthesise. The reef-surface algae shown separately have another location. These are <Term id="producer">producers</Term>: they make organic food, using light in these examples.
+
+Follow the plankton pathway. The selected <Term id="zooplankton">zooplankton</Term> group obtains food from phytoplankton, and coral animals can capture zooplankton. Such animals are <Term id="consumer">consumers</Term>, obtaining food from other organisms. This is a selected general pathway. It does not state that every zooplankton species eats the same food or that these meals were observed at one island.
+
+The arrow from algal partners to the coral has a special meaning. It shows transfer of food products made by the partners, not the animal swallowing them. On another part of the card, parrotfishes graze reef-surface food with strong, beak-like jaws. Those algae are separate from the partners living inside coral tissue. The model keeps them as different nodes.
+
+Read the <Term id="food-web">food web</Term> from food towards consumer. Its lines trace selected pathways by which food and energy reach organisms. Diagram positions and specimen sizes do not give body length or population size. Some pathways are unconnected in this excerpt because many real relationships are left out. No extra feeding link is needed just to make the drawing look connected.
+
+<More title={{"en": "Comparing the same diagram convention", "zh": "比较同一种箭头读法"}}>
+
+The <TopicLink slug="mangrove-food-web" ch="leaves-and-food-webs">mangrove food-web chapter</TopicLink> uses the same directed card and arrow convention. Here the partner-to-coral arrow adds a food-product transfer mechanism; read its note as well as its direction.
+
+</More>
+
+<More title={{"en": "Energy and omitted relationships", "zh": "能量与省略的关系"}}>
+
+For energy forms, see <TopicLink slug="energy-conversion">energy conversion</TopicLink>. Decomposers and many other foods affect real habitats but are omitted from this selected graph. The <TopicLink slug="mangrove-food-web" ch="leaves-and-food-webs">linked food-web discussion</TopicLink> considers decomposition; no extra decomposer node is calculated here.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+标本台把实际大小难以直接比较的生物分开。<Term id="phytoplankton">浮游植物</Term>漂在水中，利用光制造食物；珊瑚组织内的共生藻也能光合作用。另一处礁面藻则长在礁的表面。这些都是<Term id="producer">生产者</Term>，本例利用光制造有机食物，但所在位置与关系不同。
+
+沿浮游生物路径看，这里选取的<Term id="zooplankton">浮游动物</Term>从浮游植物取得食物，珊瑚动物又可捕捉浮游动物。它们是从其他生物取得食物的<Term id="consumer">消费者</Term>。这是一条一般路径，不表示每种浮游动物吃的相同，也不是某座岛上实际观察到的一组餐食。
+
+共生藻到珊瑚的箭头含义特别：转移的是伙伴制造的食物产物，并非珊瑚吞食共生藻。卡片另一处，鹦嘴鱼用强壮的喙状颌在礁面摄食。礁面藻与组织内的伙伴不是同一个节点，不能因为都叫藻类就合在一起。
+
+读<Term id="food-web">食物网</Term>，从食物沿箭头走向消费者。线条表示选入的食物与能量路径，节点位置和标本大小不表示体长或种群数量。本节选中有些路径没有相连，是因为省略了许多真实关系，不能为了画面连通而添一条没有依据的摄食线。
+
+<More title={{"en": "Comparing the same diagram convention", "zh": "比较同一种箭头读法"}}>
+
+<TopicLink slug="mangrove-food-web" ch="leaves-and-food-webs">红树林食物网章节</TopicLink>使用同一种有向卡和箭头读法。本题伙伴到珊瑚的线还需说明食物产物转移，要连同注释一起看。
+
+</More>
+
+<More title={{"en": "Energy and omitted relationships", "zh": "能量与省略的关系"}}>
+
+能量形式可看<TopicLink slug="energy-conversion">能量转换</TopicLink>。分解者与许多其他食物也影响真实生境，只是没有列入本图。<TopicLink slug="mangrove-food-web" ch="leaves-and-food-webs">相关食物网讨论</TopicLink>提到分解，本题不额外计算分解者节点。
+
+</More>
+
+</Lang>

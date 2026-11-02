@@ -1,0 +1,202 @@
+{
+  "terms": [
+    {
+      "id": "polyp",
+      "term": {
+        "en": "Coral polyp",
+        "zh": "珊瑚虫"
+      },
+      "definition": {
+        "en": "An individual coral animal with a mouth and tentacles.",
+        "zh": "有口和触手的单个珊瑚动物。"
+      }
+    },
+    {
+      "id": "colony",
+      "term": {
+        "en": "Coral colony",
+        "zh": "珊瑚群体"
+      },
+      "definition": {
+        "en": "Connected polyps living over a shared skeleton; not the whole reef community.",
+        "zh": "连接在共有骨骼上的多个珊瑚虫；不等于整片礁的群落。"
+      }
+    },
+    {
+      "id": "skeleton",
+      "term": {
+        "en": "Skeleton",
+        "zh": "骨骼"
+      },
+      "definition": {
+        "en": "The hard calcium-carbonate support made by a hard coral.",
+        "zh": "硬珊瑚制造的坚硬碳酸钙支撑。"
+      }
+    },
+    {
+      "id": "symbiosis",
+      "term": {
+        "en": "Symbiosis",
+        "zh": "共生"
+      },
+      "definition": {
+        "en": "A close relationship between different organisms. In this coral example both partners benefit.",
+        "zh": "不同生物之间紧密的共同生活关系；本题珊瑚与藻伙伴双方获益。"
+      }
+    },
+    {
+      "id": "algal-partner",
+      "term": {
+        "en": "Algal partner",
+        "zh": "共生藻"
+      },
+      "definition": {
+        "en": "Photosynthetic algae living within coral tissue.",
+        "zh": "住在珊瑚组织内、能进行光合作用的藻类。"
+      }
+    },
+    {
+      "id": "reef-flat",
+      "term": {
+        "en": "Reef flat",
+        "zh": "礁坪"
+      },
+      "definition": {
+        "en": "The shallow reef zone nearest the shore; some parts may be exposed at low tide.",
+        "zh": "靠岸的浅平礁区，部分地方可在低潮露出水面。"
+      }
+    },
+    {
+      "id": "reef-crest",
+      "term": {
+        "en": "Reef crest",
+        "zh": "礁脊"
+      },
+      "definition": {
+        "en": "The reef’s seaward ridge, exposed to incoming waves.",
+        "zh": "迎向传来海浪的礁区外缘。"
+      }
+    },
+    {
+      "id": "reef-slope",
+      "term": {
+        "en": "Reef slope",
+        "zh": "礁坡"
+      },
+      "definition": {
+        "en": "The reef zone descending seaward from the crest.",
+        "zh": "由礁脊向海中下降的礁区。"
+      }
+    },
+    {
+      "id": "habitat",
+      "term": {
+        "en": "Habitat",
+        "zh": "生境"
+      },
+      "definition": {
+        "en": "The environment in which an organism lives.",
+        "zh": "生物生活的环境。"
+      }
+    },
+    {
+      "id": "community",
+      "term": {
+        "en": "Community",
+        "zh": "群落"
+      },
+      "definition": {
+        "en": "Populations of different organisms living together in a place.",
+        "zh": "在同一地方共同生活的不同生物种群。"
+      }
+    },
+    {
+      "id": "producer",
+      "term": {
+        "en": "Producer",
+        "zh": "生产者"
+      },
+      "definition": {
+        "en": "An organism making organic food; these examples use light.",
+        "zh": "能制造有机食物的生物；本题例子利用光。"
+      }
+    },
+    {
+      "id": "consumer",
+      "term": {
+        "en": "Consumer",
+        "zh": "消费者"
+      },
+      "definition": {
+        "en": "An organism obtaining food from other organisms.",
+        "zh": "从其他生物取得食物的生物。"
+      }
+    },
+    {
+      "id": "phytoplankton",
+      "term": {
+        "en": "Phytoplankton",
+        "zh": "浮游植物"
+      },
+      "definition": {
+        "en": "Drifting photosynthetic organisms in water.",
+        "zh": "在水中漂浮、能光合作用的生物。"
+      }
+    },
+    {
+      "id": "zooplankton",
+      "term": {
+        "en": "Zooplankton",
+        "zh": "浮游动物"
+      },
+      "definition": {
+        "en": "Animal plankton drifting in water; this model selects a phytoplankton-feeding group.",
+        "zh": "漂浮在水中的动物类浮游生物；本图选取吃浮游植物的一组。"
+      }
+    },
+    {
+      "id": "food-web",
+      "term": {
+        "en": "Food web",
+        "zh": "食物网"
+      },
+      "definition": {
+        "en": "Connected food pathways; this teaching graph selects only some relationships.",
+        "zh": "相互连接的食物路径；本教学图只选部分关系。"
+      }
+    },
+    {
+      "id": "adaptation",
+      "term": {
+        "en": "Adaptation",
+        "zh": "适应"
+      },
+      "definition": {
+        "en": "A structure or behaviour helping an organism survive in its environment.",
+        "zh": "有助生物在环境中生存的结构或行为。"
+      }
+    },
+    {
+      "id": "bleaching",
+      "term": {
+        "en": "Coral bleaching",
+        "zh": "珊瑚白化"
+      },
+      "definition": {
+        "en": "Loss of algal partners and/or their pigments; living tissue can remain.",
+        "zh": "失去共生藻或其色素；仍可能保留活组织。"
+      }
+    },
+    {
+      "id": "restoration",
+      "term": {
+        "en": "Restoration",
+        "zh": "生态修复"
+      },
+      "definition": {
+        "en": "Work assisting damaged habitat to recover, with outcomes needing monitoring.",
+        "zh": "协助受损生境恢复的工作，结果仍需监测。"
+      }
+    }
+  ]
+}

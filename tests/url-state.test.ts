@@ -136,3 +136,15 @@ describe('camera codec', () => {
     expect(decodeCamera('1,,3')).toBeNull();
   });
 });
+
+describe('TimeScene catalogue URL passthrough', () => {
+ it('round trips pick independently of date precision and leaves hl for engine precedence', () => {
+  const state=decodeSceneState('?ch=catalogue&t=2004-12-26&pick=ph-q-b&hl=old-event');
+  expect(state).toMatchObject({chapter:'catalogue',t:'2004-12-26',pick:'ph-q-b',highlight:['old-event']});
+  expect(encodeSceneState(state)).toContainEqual(['pick','ph-q-b']);
+ });
+ it('drops empty, malformed and excessive ids and removes stale query keys', () => {
+  for(const pick of ['', 'Bad_ID', 'a'.repeat(129)]) expect(decodeSceneState(new URLSearchParams({pick})).pick).toBeUndefined();
+  expect(mergeSearch('?pick=bad&tracking=kept',[])).toBe('?tracking=kept');
+ });
+});

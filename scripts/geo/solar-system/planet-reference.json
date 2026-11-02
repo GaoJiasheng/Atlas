@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "kind": "reference-facts-not-ephemeris",
+    "licence": "CC0-1.0 for Atlas transcription; underlying numerical facts public",
+    "sources": [
+      "S5",
+      "S6"
+    ],
+    "radius": "mean radius km, not equatorial",
+    "a": "JPL Table 1 J2000 fitted semimajor axis au; Earth value is Earth–Moon barycentre proxy",
+    "period": "JPL physical parameters sidereal orbital years; do not recompute precise positions from this rounded table"
+  },
+  "planets": [
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "meanRadiusKm": 2439.4,
+      "aAu": 0.38709927,
+      "siderealPeriodYears": 0.2408467
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "meanRadiusKm": 6051.8,
+      "aAu": 0.72333566,
+      "siderealPeriodYears": 0.61519726
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "meanRadiusKm": 6371.0084,
+      "aAu": 1.00000261,
+      "siderealPeriodYears": 1.0000174
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "meanRadiusKm": 3389.5,
+      "aAu": 1.52371034,
+      "siderealPeriodYears": 1.8808476
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "meanRadiusKm": 69911,
+      "aAu": 5.202887,
+      "siderealPeriodYears": 11.862615
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "meanRadiusKm": 58232,
+      "aAu": 9.53667594,
+      "siderealPeriodYears": 29.447498
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "meanRadiusKm": 25362,
+      "aAu": 19.18916464,
+      "siderealPeriodYears": 84.016846
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "meanRadiusKm": 24622,
+      "aAu": 30.06992276,
+      "siderealPeriodYears": 164.79132
+    }
+  ]
+}

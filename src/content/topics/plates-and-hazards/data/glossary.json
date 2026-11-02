@@ -1,0 +1,221 @@
+{
+  "terms": [
+    {
+      "id": "term-lithosphere",
+      "term": {
+        "en": "Lithosphere",
+        "zh": "岩石圈"
+      },
+      "definition": {
+        "en": "The crust and rigid uppermost mantle.",
+        "zh": "地壳与上地幔最上部的刚性部分。"
+      },
+      "see": [
+        "term-tectonic-plate"
+      ]
+    },
+    {
+      "id": "term-tectonic-plate",
+      "term": {
+        "en": "Tectonic plate",
+        "zh": "构造板块"
+      },
+      "definition": {
+        "en": "A moving part of the lithosphere that may carry land and ocean floor.",
+        "zh": "岩石圈中相对运动的一块，可以同时承载陆地与海底。"
+      },
+      "see": [
+        "term-lithosphere",
+        "term-boundary"
+      ]
+    },
+    {
+      "id": "term-boundary",
+      "term": {
+        "en": "Plate boundary",
+        "zh": "板块边界"
+      },
+      "definition": {
+        "en": "A region where neighbouring plates move relative to one another.",
+        "zh": "相邻板块发生相对运动的地区。"
+      },
+      "see": [
+        "term-tectonic-plate",
+        "term-divergent",
+        "term-subduction",
+        "term-transform"
+      ]
+    },
+    {
+      "id": "term-divergent",
+      "term": {
+        "en": "Divergent boundary",
+        "zh": "张裂型边界"
+      },
+      "definition": {
+        "en": "Plates move apart.",
+        "zh": "板块彼此分离的边界。"
+      },
+      "see": [
+        "term-boundary"
+      ]
+    },
+    {
+      "id": "term-subduction",
+      "term": {
+        "en": "Subduction",
+        "zh": "俯冲"
+      },
+      "definition": {
+        "en": "Oceanic lithosphere descends beneath another plate.",
+        "zh": "大洋岩石圈沉入另一板块下方的过程。"
+      },
+      "see": [
+        "term-boundary"
+      ]
+    },
+    {
+      "id": "term-transform",
+      "term": {
+        "en": "Transform boundary",
+        "zh": "转换型边界"
+      },
+      "definition": {
+        "en": "Plates mainly slide horizontally past each other.",
+        "zh": "板块主要沿水平方向彼此错动的边界。"
+      },
+      "see": [
+        "term-boundary",
+        "term-fault"
+      ]
+    },
+    {
+      "id": "term-fault",
+      "term": {
+        "en": "Fault",
+        "zh": "断层"
+      },
+      "definition": {
+        "en": "A fracture along which rock moves; sudden slip can generate an earthquake.",
+        "zh": "岩石沿其发生位移的破裂面；突然滑动可引发地震。"
+      },
+      "see": [
+        "term-epicentre"
+      ]
+    },
+    {
+      "id": "term-epicentre",
+      "term": {
+        "en": "Epicentre",
+        "zh": "震中"
+      },
+      "definition": {
+        "en": "The surface point above where earthquake rupture begins.",
+        "zh": "地震破裂开始位置正上方的地表点。"
+      },
+      "see": [
+        "term-fault",
+        "term-magnitude"
+      ]
+    },
+    {
+      "id": "term-magnitude",
+      "term": {
+        "en": "Magnitude",
+        "zh": "震级"
+      },
+      "definition": {
+        "en": "A measure of earthquake size, distinct from local shaking.",
+        "zh": "衡量地震规模的量，与某地摇晃强弱不同。"
+      },
+      "see": [
+        "term-intensity"
+      ]
+    },
+    {
+      "id": "term-intensity",
+      "term": {
+        "en": "Intensity",
+        "zh": "烈度"
+      },
+      "definition": {
+        "en": "Shaking or effects at a particular place.",
+        "zh": "某一地点受到的摇晃或影响程度。"
+      },
+      "see": [
+        "term-magnitude"
+      ]
+    },
+    {
+      "id": "term-tsunami",
+      "term": {
+        "en": "Tsunami",
+        "zh": "海啸"
+      },
+      "definition": {
+        "en": "A series of long waves caused by sudden water displacement.",
+        "zh": "海水突然位移引起的一系列长波。"
+      },
+      "see": [
+        "term-runup"
+      ]
+    },
+    {
+      "id": "term-runup",
+      "term": {
+        "en": "Run-up",
+        "zh": "爬高"
+      },
+      "definition": {
+        "en": "The maximum height reached onshore above sea level.",
+        "zh": "海水到达岸上、相对海平面的最大高度。"
+      },
+      "see": [
+        "term-tsunami"
+      ]
+    },
+    {
+      "id": "term-caldera",
+      "term": {
+        "en": "Caldera",
+        "zh": "破火山口"
+      },
+      "definition": {
+        "en": "A large volcanic collapse depression, distinct from an ordinary summit crater.",
+        "zh": "火山塌陷形成的较大洼地，不同于普通山顶火山口。"
+      },
+      "see": [
+        "term-holocene-catalogue"
+      ]
+    },
+    {
+      "id": "term-holocene-catalogue",
+      "term": {
+        "en": "Holocene volcano catalogue",
+        "zh": "全新世火山目录"
+      },
+      "definition": {
+        "en": "A catalogue of volcanoes in the Holocene scope, not a list of volcanoes erupting today.",
+        "zh": "按全新世范围收录的火山资料，不是今天正在喷发的名单。"
+      },
+      "see": [
+        "term-ring-of-fire"
+      ]
+    },
+    {
+      "id": "term-ring-of-fire",
+      "term": {
+        "en": "Ring of Fire",
+        "zh": "环太平洋火山带"
+      },
+      "definition": {
+        "en": "A popular name whose geographical scope varies between sources.",
+        "zh": "一个通俗地区名称，不同资料对它的地理范围定义不同。"
+      },
+      "see": [
+        "term-boundary",
+        "term-holocene-catalogue"
+      ]
+    }
+  ]
+}
