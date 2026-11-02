@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { PerspectiveCamera, Vector3 } from 'three';
+import { fitCameraToHud, freeStageRect } from '../../src/engines/space-scene/lib/hud-framing';
+import { fitCameraToAspect } from '../../src/engines/space-scene/lib/camera';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'yaml';
@@ -126,6 +129,7 @@ describe('sun-earth-moon · published content and scientific captions', () => {
     if (oldGuide?.kind !== 'orbit-guides') throw new Error('fixture guide missing');
     expect(oldGuide.radius).toBeUndefined(); expect(oldGuide.labelAnchors).toBeUndefined();
     expect(raw.views.hudFrame.parts).toEqual(['sun-body','earth-body','moon-body']);
+    expect(raw.views.hudFrame.primary).toEqual({part:'earth-body',minRadiusPx:24});
     const guide=sim.overlays.find(o => o.kind === 'orbit-guides');
     if (guide?.kind !== 'orbit-guides') throw new Error('guide missing');
     expect(guide.radius).toBe(.006); expect(guide.labelAnchors).toBe('strokes');
@@ -177,5 +181,37 @@ describe('sun-earth-moon · published content and scientific captions', () => {
     expect(q(7,3)['moon-lit-percent']).toBeLessThan(100);
     expect(q(7,4)['moon-lit-percent']).toBeLessThan(100);
     expect(chapters[7]!.text).not.toMatch(/"day-index":\s*15\b/);
+  });
+});
+
+
+describe('full-Moon authored HUD framing regression', () => {
+  it.each([[4,2],[5,2],[7,2],[7,4]])('keeps Earth readable and Moon visible for %i.%i in the narrow tablet stage', (chapter,beat) => {
+    const camera = chapters[chapter]!.state.beats![beat]!.camera;
+    if (!isOrbitCamera(camera)) throw new Error('full-Moon beat needs an explicit camera');
+    const d = orbitDisplay(cfg,snapshot(chapter,beat),'schematic');
+    const boxes = (['earth','moon','sun'] as const).map(body => ({
+      center:d.centres[body], half:[d.radii[body],d.radii[body],d.radii[body]] as V3,
+      minRadiusPx:body === 'earth' ? raw.views.hudFrame.primary.minRadiusPx : undefined,
+    }));
+    // 1024px viewport minus the docked reader; the remaining legacy band is only 76px.
+    const w=624,h=670,panels=[{x0:12,y0:20,x1:250,y1:350},{x0:350,y0:20,x1:612,y1:400},
+      {x0:12,y0:430,x1:250,y1:580},{x0:0,y0:610,x1:624,y1:670}];
+    const fitted = fitCameraToHud(fitCameraToAspect(camera,w/h),boxes,w,h,freeStageRect(w,h,panels),{panels});
+    const c = new PerspectiveCamera(fitted.fov,w/h,.001,1000);
+    c.position.fromArray(fitted.position); c.lookAt(...fitted.target); c.updateMatrixWorld();
+    boxes.forEach((box,i) => {
+      const corners = Array.from({length:8}, (_,k) => new Vector3(...box.center.map((v,j) => v+(k & 1<<j ? 1 : -1)*box.half[j]!) as V3).project(c));
+      const x0=Math.min(...corners.map(p => (p.x+1)*w/2)),x1=Math.max(...corners.map(p => (p.x+1)*w/2));
+      const y0=Math.min(...corners.map(p => (1-p.y)*h/2)),y1=Math.max(...corners.map(p => (1-p.y)*h/2));
+      if (i<2) {
+        expect(x0).toBeGreaterThanOrEqual(12-1e-6); expect(x1).toBeLessThanOrEqual(w-12+1e-6);
+        expect(y0).toBeGreaterThanOrEqual(12-1e-6); expect(y1).toBeLessThanOrEqual(h-12+1e-6);
+      }
+      for (const p of panels) expect(x1 <= p.x0-12+1e-6 || x0 >= p.x1+12-1e-6 || y1 <= p.y0-12+1e-6 || y0 >= p.y1+12-1e-6).toBe(true);
+    });
+    const forward = new Vector3(...fitted.position).sub(new Vector3(...fitted.target)).normalize();
+    const depth = new Vector3(...fitted.position).sub(new Vector3(...d.centres.earth)).dot(forward);
+    expect(d.radii.earth*h/(2*Math.tan(fitted.fov!*Math.PI/360)*depth)).toBeGreaterThanOrEqual(24-1e-6);
   });
 });

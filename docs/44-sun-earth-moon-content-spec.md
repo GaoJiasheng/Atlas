@@ -825,3 +825,24 @@ Chromium 本机可跑（机器负载 90–140，多代理同时跑浏览器）�
 - **引擎是否真的可选**：`hudFrame` 缺省时 `CameraRig.fitHud` 直接返回原相机，`Model3DStage` 的测量 effect 也直接返回；1600×900 的 aircon、heart-and-lungs 与未改前外观一致（目视）。
 - **shoot**：sun-earth-moon en/zh × paper/cinema `--beats --keys --layout`：console clean，layout 8 个尺寸 0 问题，keys 与 beat links 在无负载抖动时 39/39。负载 150–250 下每轮会出现 1–2 个随机项：`beat-… (link)` 的 orbit 不同（400 ms 内页面还没出第一帧，`engine.orbit()` 为空；5 s 后与演示逐位相同，`sample-orbit` 同样出现）、`key "h"` 的恢复按钮 5 s 内没淡入（未改动的 aircon 同样失败；单独打开三个主题均 <0.6 s 出现）。回归：aircon beat links 24/24、keys 除 `h`；sample-orbit 同。heart-and-lungs、sample-heart 的 shoot 在 30 s screenshot 超时中止（机器负载，未得结果）。
 - **e2e**（`--workers=2`，`test.setTimeout` 与 `--timeout` 临时抬高，已还原）：sun-earth-moon、sample-orbit、smoke 三个 spec 36/36 通过，用时 45 min。
+
+
+### 9.7 F2 · 1024×768 主体大小与太阳避让（Codex，2026-10-29）
+
+针对 §9.6 尚未通过的 04.3 / 05.3 / 07.3 / 07.5。此次只改默认关闭的 `views.hudFrame` 路径，本题新增 `primary: { part: "earth-body", minRadiusPx: 24 }`；没有逐拍或按分辨率调相机，也不改变天体大小、比例、光照、字幕、HUD 铁律与既有交互。
+
+- **主体下限**：用内切球半径与每个主体的相机深度计算 CSS 像素半径，给后拉设上限；不足时允许沿原视线拉近。fov 与方向保持不变，地球目标半径至少 24 px（直径至少 48 px），不是把包围盒对角线当半径。
+- **真实空位**：继续量取 HUD 的实际矩形，保留原自由带快路。75 px 左右的通长自由带不能兼顾月地两体与大小时，枚举 HUD 边缘之间的最大空矩形，利用观察卡下方等空位，仍保留 12 px 间隔。
+- **次体安全**：作者镜头排除的太阳不加入必保入画主体，但仍参与每块 HUD 的禁用平移区间；避免后拉使太阳重新入画而压住左栏文字。所有列出的可见天体均检查，不依赖 `parts` 排序。完全在眼后方的次体忽略，跨过眼平面的候选保守拒绝。若没有候选同时满足大小与入画，取最少后拉的安全候选；完全无解时保留原镜头，不伪造尺度或硬搬天体。
+- **作用域**：`hudFrame` 缺省的测量与 CameraRig 早退保持不变。既有 opt-in 的 eyes-and-ears 也使用实际矩形避让，但没有配置大小下限；其内容文件未改。sample-orbit 等未启用主题继续原路径。每次 resize / 卡片折叠 / HUD 或演示切换 / 快照和尺度变化从作者镜头计算，自由相机继续接管。
+- **单测**：保留原 9 项取景测试，新增 9 项覆盖 76 px 自由带的下方空位、太阳从画外重新入画且压字的回归、已过小的作者镜头、主角缺席/排除、不变桌面与卡片折叠、空的旧自由带、眼平面、schema 校验和无解大小下限的有限回退。另对 04.3 / 05.3 / 07.3 / 07.5 使用真实作者镜头与轨道显示快照，在代表性 624×670 舞台/保留矩形上用 Three.js 投影回算：月地两体在舞台内、地球半径 ≥24 px、含太阳的三体投影不碰任一保留块。这里的 HUD 矩形是数学测试夹具，不是本轮浏览器测量或截图证据。
+
+静态 gates 结果见下表；本轮按用户明确要求跳过 `pnpm shoot`、`pnpm e2e`，没有打开或驱动用户浏览器/桌面；没有 git 写入、依赖清单/锁文件或 review-queue / next-batch 改动。主会话仍需复验 1024×768 四个满月拍（EN/ZH × paper/cinema）、1280×720 / 1600×900、resize/卡片折叠与尺度切换；本节不把 F2 标为已通过浏览器验收。
+
+| Gate | 本轮结果 |
+|---|---|
+| `pnpm check` | 0 errors / 0 warnings，4 个既有 hints。 |
+| `pnpm validate` | 85 topics，0 errors / 0 warnings。 |
+| `pnpm test` | 219 files / **5461 tests passed**。 |
+| `pnpm build` | 173 pages，静态构建成功。 |
+| shoot / e2e | 按用户要求跳过，交主会话验证。 |

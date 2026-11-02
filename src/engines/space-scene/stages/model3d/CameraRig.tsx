@@ -154,9 +154,9 @@ export function CameraRig({
     cam = fitCameraToAspect(cam, width / height);
     const boxes: FrameBox[] = views.hudFrame.parts.flatMap(id => {
       const h = handles.get(id);
-      return h?.visible ? [{ center: [h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]] as [number,number,number], half: h.half }] : [];
+      return h?.visible ? [{ center: [h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]] as [number,number,number], half: h.half, minRadiusPx: views.hudFrame?.primary?.part === id ? views.hudFrame.primary.minRadiusPx : undefined }] : [];
     });
-    return fitCameraToHud(cam, boxes, width, height, bridge.freeStage);
+    return fitCameraToHud(cam, boxes, width, height, bridge.freeStage, { panels: bridge.hudPanels ?? [] });
   };
 
   const current = (): OrbitCamera => {

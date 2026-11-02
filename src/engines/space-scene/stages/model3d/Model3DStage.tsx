@@ -135,6 +135,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
         return [{ x0: r.left-box.left, y0: r.top-box.top, x1: r.right-box.left, y1: r.bottom-box.top }];
       });
       bridge.freeStage = freeStageRect(box.width, box.height, rects);
+      bridge.hudPanels = rects;
       bridge.invalidate();
     };
     const schedule = () => { if (alive && !frame) frame = requestAnimationFrame(measure); };
@@ -152,6 +153,7 @@ export default function Model3DStage({ store, data, ui, bridge, chapters, label,
       scene.removeEventListener('transitionend', schedule);
       cancelAnimationFrame(frame);
       delete bridge.freeStage;
+      delete bridge.hudPanels;
     };
   }, [data.views.hudFrame, bridge, ui]);
 

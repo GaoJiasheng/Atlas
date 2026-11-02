@@ -149,6 +149,8 @@ export interface StageBridge {
   joints: Map<string, { angles: Record<string, number>; position: number[]; quaternion: number[] }>;
   /** Measured free stage band for opt-in camera framing. */
   freeStage?: import('./lib/hud-framing').FrameRect;
+  /** Actual reserved HUD blocks, for secondary-body avoidance. */
+  hudPanels?: readonly import('./lib/hud-framing').FrameRect[];
   /** Orbit sims (docs/44 §4.10): what OrbitDriver really drew for the snapshot `snapshotId` (world position / quaternion / scale, Sun uniforms). */
   orbitRendered?: { snapshotId: number; parts: Record<string, { position: number[]; quaternion: number[]; scale: number[]; visible: boolean }>; solarDirections: Record<string, number[]> };
   spans: Map<string, SpanReading>;
