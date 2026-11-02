@@ -58,3 +58,5 @@ The inspector also formats every number with grouping, so the inspector shows th
 Non-browser checks pass: `pnpm check` (0 errors / 0 warnings, four existing hints), `pnpm validate` (94 topics), `pnpm test` (234 files / 6,094 tests) and `pnpm build` (191 pages).
 
 Browser follow-up only: `pnpm shoot plates-and-hazards --beats --perf` and EN/ZH shots of chapters 01/02/05 are intentionally **not run** under BRIEF-READ's no-browser instruction. No e2e, user-browser/desktop automation or git writes.
+
+**Acceptance follow-up (2026-11-02).** Exact ISO milliseconds are not readable for P4–P6 readers. Quake rows now read "26 Dec 2004, 00:58 UTC" / "2004年12月26日 00:58（UTC）" and "Record last updated: 5 Jun 2026"; exact millisecond values moved to `provenance/quake-times.json`. Eruption rows carry their eruption years and plain-word uncertainty. See AUDIT.md.

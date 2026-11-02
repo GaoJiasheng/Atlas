@@ -153,10 +153,10 @@ now live in provenance/selected-eruptions.json rather than reader cards.
 
 F1's loader separates geometry readiness from selection readiness and caches
 text on index, GPU hit or geometry-resolved pick demand. Tests exercise late
-metadata, reverse load order, errors, cancellation and disposal. F2 presents
-all 3,729 origin/update pairs as exact ISO UTC milliseconds; the converter
-asserts every timestamp round-trips to the original integer. Original depth is
-kept in each bilingual summary. F3 keeps original dates including Tambora's
+metadata, reverse load order, errors, cancellation and disposal. F2 first
+presented all 3,729 origin/update pairs as exact ISO UTC milliseconds; the
+acceptance pass (below) replaced that with readable UTC minutes. Original depth
+is kept in each bilingual summary. F3 keeps original dates including Tambora's
 2 July 1812 ±182 days and uncertain 15 July 1815, Krakatau's uncertain
 21 October 1883, and 18 June 2018–17 April 2020. PB sequence and eruption
 numbers are text. All 26 frozen inputs rehashed; 22 output hashes include the
@@ -177,3 +177,22 @@ chapter non-text state, numeric/source pairs, TopicLinks, event identity/numeric
 fields, source data and model inputs are preserved. Browser gates
 (shoot/e2e) are intentionally skipped under BRIEF-READ. No browser or desktop
 was opened or driven. No git writes or package/lockfile/review-queue edits.
+
+### Acceptance follow-up 2026-11-02 (catalogue readability)
+
+- Quake cards: origin time now reads "26 Dec 2004, 00:58 UTC" /
+  "2004年12月26日 00:58（UTC）" (minutes truncated, never rounded); the record
+  update reads as a UTC day. Exact millisecond values for all 3,729 records are
+  kept in provenance/quake-times.json (hashed in provenance.json, 23 outputs).
+  Card titles read "M6.1 earthquake" / "6.1 级地震"; the USGS id stays in the
+  record-id line and in search. Event 2004 detail gives 00:58 UTC; the exact
+  00:58:53.450 stays in the S54 source note.
+- Eruption rows name their eruption ("Eruption 1812–1815: began"), oldest first,
+  and say uncertainty in words ("give or take 182 days", "the exact day is
+  uncertain"). GVP evidence categories now all have Chinese text ("Eruption
+  Observed" 有人观测到喷发; "Unrest / Holocene" 全新世有活动迹象).
+- Facts check vs main: every `<Num>` value/source pair identical in all eight
+  chapters; events/glossary/topic.yaml identical apart from en/zh text. Two
+  sentences Codex added without a source were removed: that both Tambora
+  estimates include post-eruption deaths, and that Krakatau's dead died "from the
+  waves rather than lava". Catalogues total 4,941,194 B.

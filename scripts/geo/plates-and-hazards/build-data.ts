@@ -141,8 +141,9 @@ const settingTranslation = (setting: string | null): string => setting === null 
   .replace('Subduction zone', '俯冲带').replace('Rift zone', '裂谷带').replace('Intraplate', '板内')
   .replace('Continental crust (> 25 km)', '大陆地壳（>25 km）').replace('Oceanic crust (< 15 km)', '大洋地壳（<15 km）')
   .replace('Intermediate crust (15-25 km)', '中等厚度地壳（15–25 km）').replace('Crustal thickness unknown', '地壳厚度未知');
-const evidenceTranslation: Record<string, string> = { 'Eruption Dated': '喷发有年代记录', 'Evidence Credible': '证据可信', 'Evidence Uncertain': '证据不确定' };
-/** The selected records only use the '?' modifier; fail on unfamiliar codes. */
+const evidenceTranslation: Record<string, string> = { 'Eruption Observed': '有人观测到喷发', 'Eruption Dated': '喷发有年代记录', 'Evidence Credible': '证据可信', 'Evidence Uncertain': '证据不确定', 'Unrest / Holocene': '全新世有活动迹象' };
+/** The selected records only use the '?' modifier; fail on unfamiliar codes.
+ * Uncertainty and doubt are said in words next to the exact source date. */
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 function episodeDate(ep: Raw, side: 'Start' | 'End') {
   const year = ep[`${side}DateYear`], month = ep[`${side}DateMonth`], day = ep[`${side}DateDay`];
@@ -151,13 +152,13 @@ function episodeDate(ep: Raw, side: 'Start' | 'End') {
     const modifier = ep[`${side}Date${unit}Modifier`];
     assert.ok(modifier === null || modifier === '?', `unknown date modifier: ${modifier}`);
     if (modifier) {
-      date.en += ` (${unit.toLowerCase()} uncertain)`;
-      date.zh += unit === 'Year' ? '（年份存疑）' : '（日期存疑）';
+      date.en += unit === 'Year' ? ' (the year is uncertain)' : ' (the exact day is uncertain)';
+      date.zh += unit === 'Year' ? '（年份不确定）' : '（具体日期不确定）';
     }
     const uncertainty = ep[`${side}Date${unit}Uncertainty`];
     if (uncertainty !== null) {
-      date.en += ` (± ${uncertainty} ${unit === 'Year' ? 'years' : 'days'})`;
-      date.zh += `（误差 ± ${uncertainty} ${unit === 'Year' ? '年' : '天'}）`;
+      date.en += `, give or take ${uncertainty} ${unit === 'Year' ? 'years' : 'days'}`;
+      date.zh += `（前后可差 ${uncertainty} ${unit === 'Year' ? '年' : '天'}）`;
     }
   }
   return date;
@@ -167,16 +168,18 @@ for (const f of volcanoes.features) {
   const p = f.properties, number = Number(p.Volcano_Number), id = `gvp-${number}`, at = f.geometry.coordinates;
   volcanoLayer.features.push(point(id, at));
   const rows = [row('setting', 'Tectonic setting', '构造环境', p.Tectonic_Setting === null ? null : bi(p.Tectonic_Setting, settingTranslation(p.Tectonic_Setting))), row('evidence', 'Evidence category', '证据分类', p.Evidence_Category === null ? null : bi(p.Evidence_Category, evidenceTranslation[p.Evidence_Category] ?? `目录原分类：${p.Evidence_Category}`))];
-  for (const episode of selectedEpisodes.filter((e: Raw) => e.properties.Volcano_Number === number)) {
+  // Oldest eruption first; each row names its eruption so two episodes never read as one.
+  for (const episode of selectedEpisodes.filter((e: Raw) => e.properties.Volcano_Number === number).sort((a: Raw, b: Raw) => a.properties.StartDateYear - b.properties.StartDateYear)) {
     const ep = episode.properties;
     assert.equal(ep.Activity_Type, 'Confirmed Eruption');
     assert.equal(ep.ExplosivityIndexModifier, null);
     const prefix = `episode-${ep.Eruption_Number}`;
+    const years = ep.EndDateYear === ep.StartDateYear ? String(ep.StartDateYear) : `${ep.StartDateYear}–${ep.EndDateYear}`;
     rows.push(
-      row(`${prefix}-number`, 'Confirmed eruption record', '已确认喷发编号', bi(String(ep.Eruption_Number))),
-      row(`${prefix}-vei`, 'Volcanic Explosivity Index (VEI)', '火山爆发指数（VEI）', ep.ExplosivityIndexMax),
-      row(`${prefix}-start`, 'Eruption began', '喷发开始', episodeDate(ep, 'Start')),
-      row(`${prefix}-end`, 'Eruption ended', '喷发结束', episodeDate(ep, 'End')),
+      row(`${prefix}-number`, `Eruption ${years}: record number`, `${years} 年喷发：记录编号`, bi(String(ep.Eruption_Number))),
+      row(`${prefix}-vei`, `Eruption ${years}: explosivity (VEI)`, `${years} 年喷发：爆发指数（VEI）`, ep.ExplosivityIndexMax),
+      row(`${prefix}-start`, `Eruption ${years}: began`, `${years} 年喷发：开始`, episodeDate(ep, 'Start')),
+      row(`${prefix}-end`, `Eruption ${years}: ended`, `${years} 年喷发：结束`, episodeDate(ep, 'End')),
     );
   }
   volcanoLayer.entries.push(entry(id, bi(p.Volcano_Name, commonNames[number] ? `${commonNames[number]} / ${p.Volcano_Name}` : p.Volcano_Name), bi('Holocene catalogue', '全新世目录'), at, ['S604'], rows));
@@ -186,18 +189,28 @@ layers.push(volcanoLayer);
 const quakes = read('usgs-2000-2024-m6.geojson');
 assert.equal(quakes.features.length, 3729);
 const start = Date.parse('2000-01-01T00:00:00Z'), end = Date.parse('2025-01-01T00:00:00Z');
-const quakeLayer: Layer = { id: 'ph-quake-sample', features: [], entries: [], inputs: ['usgs-2000-2024-m6.geojson', 'usgs-2004-parent-snapshot.geojson', 'usgs-2022-sumatra.geojson'], licence: pd, modifications: 'Frozen reviewed M>=6 sample [2000-01-01,2025-01-01) UTC; exact coordinates, magnitude and magType retained; f from UTC day using shared toNumber; Exact epoch/updated presented as ISO UTC with milliseconds; status retained.' };
+const quakeLayer: Layer = { id: 'ph-quake-sample', features: [], entries: [], inputs: ['usgs-2000-2024-m6.geojson', 'usgs-2004-parent-snapshot.geojson', 'usgs-2022-sumatra.geojson'], licence: pd, modifications: 'Frozen reviewed M>=6 sample [2000-01-01,2025-01-01) UTC; exact coordinates, magnitude and magType retained; f from UTC day using shared toNumber; origin time shown to the UTC minute and record update to the UTC day; exact millisecond epoch/updated values kept in provenance/quake-times.json; status retained.' };
+/** Reader-facing UTC times: minutes are truncated (a clock reading), never rounded,
+ * so the shown minute always matches the source timestamp. */
+const shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const utcDay = (ms: number) => { const d = new Date(ms); return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate() }; };
+const utcClock = (ms: number) => new Date(ms).toISOString().slice(11, 16);
+const utcMinute = (ms: number) => { const { y, m, d } = utcDay(ms); return bi(`${d} ${shortMonths[m - 1]} ${y}, ${utcClock(ms)} UTC`, `${y}年${m}月${d}日 ${utcClock(ms)}（UTC）`); };
+const utcDate = (ms: number) => { const { y, m, d } = utcDay(ms); return bi(`${d} ${shortMonths[m - 1]} ${y}`, `${y}年${m}月${d}日`); };
+assert.deepEqual(utcMinute(1104022733450), bi('26 Dec 2004, 00:58 UTC', '2004年12月26日 00:58（UTC）'));
+const quakeTimes: Array<[string, number, number]> = [];
 for (const f of quakes.features) {
   const p = f.properties, rawId = f.id, id = `ph-q-${slug(rawId)}`;
   assert.ok(p.time >= start && p.time < end); assert.ok(Number.isFinite(p.mag) && p.mag >= 6); assert.equal(p.status, 'reviewed');
-  for (const timestamp of [p.time, p.updated]) assert.equal(Date.parse(new Date(timestamp).toISOString()), timestamp);
+  for (const timestamp of [p.time, p.updated]) assert.ok(Number.isInteger(timestamp));
   const day = new Date(p.time).toISOString().slice(0, 10), at = f.geometry.coordinates.slice(0, 2);
   assert.ok(isIsoDate(day)); const fTime = toNumber(day); assert.ok(Number.isFinite(fTime));
   quakeLayer.features.push(point(id, at, { f: fTime, mag: p.mag }));
+  quakeTimes.push([id, p.time, p.updated]);
   const sources = rawId === 'us6000gzyg' ? ['S604', 'S602'] : rawId === 'official20041226005853450_30' ? ['S604', 'S54'] : ['S604'];
-  quakeLayer.entries.push(entry(id, bi(rawId), bi(`Reviewed M${p.mag} (${p.magType}), ${f.geometry.coordinates[2]} km deep`, `已审M${p.mag}（${p.magType}）；深度${f.geometry.coordinates[2]}km`), at, sources, [
-    row('epoch', 'UTC origin time', 'UTC 发震时刻', bi(new Date(p.time).toISOString())),
-    row('updated', 'Catalogue updated (UTC)', '目录更新时间（UTC）', bi(new Date(p.updated).toISOString())),
+  quakeLayer.entries.push(entry(id, bi(`M${p.mag} earthquake`, `${p.mag} 级地震`), bi(`Reviewed record (${p.magType}), ${f.geometry.coordinates[2]} km deep`, `已审核记录（${p.magType}），深 ${f.geometry.coordinates[2]} km`), at, sources, [
+    row('epoch', 'Time of the earthquake', '发震时间', utcMinute(p.time)),
+    row('updated', 'Record last updated', '记录最后更新', utcDate(p.updated)),
   ]));
 }
 assert.ok(quakeLayer.entries.some((item) => item.id === 'ph-q-us6000gzyg'));
@@ -312,6 +325,10 @@ for (const layer of layers) {
 const residuals = { method: 'Each original vertex to nearest candidate on decoded straight lon/lat segment, measured by haversine (R=6371008.8m); conservative upper bound. Includes quantization error.', seaBounds: [95, -9, 125, 22], global: percentile(globalResiduals), southeastAsia: percentile(seaResiduals) };
 assert.ok(residuals.global.maxM <= 10000); assert.ok(residuals.southeastAsia.maxM <= 2000);
 assert.ok(pbBytes <= 600000, 'four PB layer budget'); assert.ok(geometryBytes <= 2_000_000, 'geometry total budget'); assert.ok(catalogueBytes <= 5_000_000, `catalogue total budget ${catalogueBytes}`);
+quakeTimes.sort((a, b) => a[0].localeCompare(b[0]));
+const quakeTimeFile = 'src/content/topics/plates-and-hazards/provenance/quake-times.json';
+const quakeTimeStats = write(resolve(ROOT, quakeTimeFile), { snapshot: SNAPSHOT, fields: ['id', 'time (UTC epoch ms)', 'updated (UTC epoch ms)'], records: quakeTimes });
+outputRecords.push({ file: quakeTimeFile, ...quakeTimeStats, count: quakeTimes.length, licence: 'Public domain source facts', inputs: ['usgs-2000-2024-m6.geojson'] });
 const episodeFile = 'src/content/topics/plates-and-hazards/provenance/selected-eruptions.json';
 const episodeStats = write(resolve(ROOT, episodeFile), { snapshot: SNAPSHOT, records: selectedEpisodes });
 outputRecords.push({ file: episodeFile, ...episodeStats, licence: 'Public domain source facts', inputs: ['gvp-holocene-eruptions.geojson'] });
@@ -322,7 +339,7 @@ outputRecords.push({ file: crosswalkFile, ...crosswalkStats, licence: 'Public do
 const report = { snapshot: SNAPSHOT, inputHashChecks: { checked: inputRecords.length, mismatches: 0 }, pb: { parts: 5824, sequenceNumbers: 5819, plateFeatures: 54, plateCodes: 52, boundaries: 241, orogens: 13, splitSequences: [1152, 1465, 2795, 4924, 4946], classCounts, residuals }, gvp: { volcanoes: 1214, eruptionRecords: 11089, selectedEpisodes: [16231, 15589, 22275] }, usgs: { rows: 3729, window: ['2000-01-01T00:00:00Z', '2025-01-01T00:00:00Z'], upperExclusive: true, allReviewed: true, exactPointCoordinates: true }, observations: observationReports, bytes: { geometry: geometryBytes, catalogues: catalogueBytes, fourPbLayers: pbBytes }, outputs: outputRecords };
 write(resolve(AUDIT, 'conversion-report.json'), report);
 write(resolve(AUDIT, 'provenance.json'), { inputs: inputRecords, outputs: outputRecords, modernReference: 'PB2002 / Bird2003; GVP v5.4.0; Natural Earth 50m/SEA10m; fixed reference at every K1–K7, never historical islands or annual drift.', inputBytes: inventory.dataset_bytes, prefetchedBytes: inventory.prefetched_bytes_including_support_and_diagnostic, auditHashes: 'This file and conversion-report intentionally omit self-referential hashes; all shipping geometry, catalogues and crosswalk are hashed.', attribution: ['Peter Bird (2003), DOI 10.1029/2001GC000252; Hugo Ahlenius/Nordpil and fraxen conversion contributors, ODC-BY 1.0.', 'Venzke/compiler, Smithsonian GVP v5.4.0, DOI 10.5479/si.GVP.VOTW5-2026.5.4; database compilation only, no photographs.', 'NOAA/NGDC/WDS Global Historical Tsunami Database, DOI 10.7289/V5PN93H7; compiled facts only, no third-party attachments.', 'USGS ComCat factual records; no third-party linked products.'] });
-const sourceText = `# Map provenance · plates-and-hazards\n\nRebuild: \`pnpm tsx scripts/geo/plates-and-hazards/build-data.ts\`. Input override: \`ATLAS_PH_RESEARCH_DIR\` (frozen data directory). No network, no research input writes. Snapshot ${SNAPSHOT}; factual recheck/access date 2026-10-27 is separate.\n\nK1–K7 are seven empty control frames: no control polygons, registration, self-intersections or control-area residuals. Modern PB2002/Natural Earth/GVP references do not change with the calendar; no reconstruction of 1815/1883 island coasts. Native WGS84; no map registration. Existing land-50m/land-10m-sea files reused once, including existing unwrapped coast longitudes. PB oceanic boundaries are never land-clipped.\n\nAll 26 INVENTORY-listed input/support SHA-256 checks pass. Frozen dataset inputs ${inventory.dataset_bytes} bytes; including support/diagnostics ${inventory.prefetched_bytes_including_support_and_diagnostic} bytes. Published geometry ${geometryBytes} bytes; catalogues ${catalogueBytes} bytes; four PB subsets ${pbBytes} bytes. Details, exact input/output hashes, source URLs, modifications, licences and excluded coordinate IDs: [provenance](../provenance/provenance.json), [conversion report](../provenance/conversion-report.json), [explicit crosswalk](../provenance/ph-crosswalk.json). Audits stay outside runtime data/*.json.\n\nPB original 5819 sequence numbers produce 5824 geometry parts; split IDs 1152/1465/2795/4924/4946 retain both pieces. Four subsets 2349/1604/1129/742; 13 original orogens. DP tolerance 900m with 1e6 grid; original-vertex residuals including quantization: global p50 ${residuals.global.p50M.toFixed(3)}m, p95 ${residuals.global.p95M.toFixed(3)}m, max ${residuals.global.maxM.toFixed(3)}m; SEA [95,-9,125,22] p50 ${residuals.southeastAsia.p50M.toFixed(3)}m, p95 ${residuals.southeastAsia.p95M.toFixed(3)}m, max ${residuals.southeastAsia.maxM.toFixed(3)}m. Method: conservative haversine distance to straight lon/lat segment; every source vertex measured. Lines use source endpoint anchors within 250 m; polygon anchors are checked inside the original unsimplified polygon, never accepted by bbox alone. No antimeridian segment spans over 180°.\n\nGVP 1214 exact positions, 11089 episode rows audited, three selected episodes with exact dates, uncertainty and modifiers in reader text; complete selected source records in provenance/selected-eruptions.json. No geological summaries, photo links, captions or credits ship. USGS 3729 reviewed catalogue M≥6 rows: strict UTC end-exclusive window; exact magnitude, magType, depth, UTC origin/update timestamps with milliseconds and status remain visible in catalogue. Magnitude is catalogue scale, not uniform Mw, a rate or prediction.\n\nNCEI observations raw 102/2177/410; mapped 99/2155/410; 25 excluded rows logged without guessed coordinates. Type codes and source doubtful flags kept. No height/arrival numbers are emitted; source-event f makes the group appear together and is not arrival playback. Page URL/hash/bytes preserved from frozen wrapper; original page responses are not separately available for rehashing. Exact point coordinates round-trip through unquantized TopoJSON.\n\nLicence families: PB geometry ODC-BY 1.0 (Bird 2003; Hugo Ahlenius/Nordpil/fraxen contributors); PB catalogue source database ODC-BY 1.0 with original Atlas text CC BY-NC-SA 4.0. GVP/USGS/NCEI factual geometry public domain; original catalogue text/selection CC BY-NC-SA 4.0. Natural Earth existing basemap public domain. No BY-SA/NC-SA source mixing, no GVP images, third-party ComCat products or NOAA poster reproduction. Exact per-file mapping is in provenance.\n`;
+const sourceText = `# Map provenance · plates-and-hazards\n\nRebuild: \`pnpm tsx scripts/geo/plates-and-hazards/build-data.ts\`. Input override: \`ATLAS_PH_RESEARCH_DIR\` (frozen data directory). No network, no research input writes. Snapshot ${SNAPSHOT}; factual recheck/access date 2026-10-27 is separate.\n\nK1–K7 are seven empty control frames: no control polygons, registration, self-intersections or control-area residuals. Modern PB2002/Natural Earth/GVP references do not change with the calendar; no reconstruction of 1815/1883 island coasts. Native WGS84; no map registration. Existing land-50m/land-10m-sea files reused once, including existing unwrapped coast longitudes. PB oceanic boundaries are never land-clipped.\n\nAll 26 INVENTORY-listed input/support SHA-256 checks pass. Frozen dataset inputs ${inventory.dataset_bytes} bytes; including support/diagnostics ${inventory.prefetched_bytes_including_support_and_diagnostic} bytes. Published geometry ${geometryBytes} bytes; catalogues ${catalogueBytes} bytes; four PB subsets ${pbBytes} bytes. Details, exact input/output hashes, source URLs, modifications, licences and excluded coordinate IDs: [provenance](../provenance/provenance.json), [conversion report](../provenance/conversion-report.json), [explicit crosswalk](../provenance/ph-crosswalk.json). Audits stay outside runtime data/*.json.\n\nPB original 5819 sequence numbers produce 5824 geometry parts; split IDs 1152/1465/2795/4924/4946 retain both pieces. Four subsets 2349/1604/1129/742; 13 original orogens. DP tolerance 900m with 1e6 grid; original-vertex residuals including quantization: global p50 ${residuals.global.p50M.toFixed(3)}m, p95 ${residuals.global.p95M.toFixed(3)}m, max ${residuals.global.maxM.toFixed(3)}m; SEA [95,-9,125,22] p50 ${residuals.southeastAsia.p50M.toFixed(3)}m, p95 ${residuals.southeastAsia.p95M.toFixed(3)}m, max ${residuals.southeastAsia.maxM.toFixed(3)}m. Method: conservative haversine distance to straight lon/lat segment; every source vertex measured. Lines use source endpoint anchors within 250 m; polygon anchors are checked inside the original unsimplified polygon, never accepted by bbox alone. No antimeridian segment spans over 180°.\n\nGVP 1214 exact positions, 11089 episode rows audited, three selected episodes with exact dates, uncertainty and modifiers in reader text; complete selected source records in provenance/selected-eruptions.json. No geological summaries, photo links, captions or credits ship. USGS 3729 reviewed catalogue M≥6 rows: strict UTC end-exclusive window; exact magnitude, magType, depth and status remain visible in catalogue; origin time is shown to the UTC minute and the record update to the UTC day, with exact millisecond values in provenance/quake-times.json. Magnitude is catalogue scale, not uniform Mw, a rate or prediction.\n\nNCEI observations raw 102/2177/410; mapped 99/2155/410; 25 excluded rows logged without guessed coordinates. Type codes and source doubtful flags kept. No height/arrival numbers are emitted; source-event f makes the group appear together and is not arrival playback. Page URL/hash/bytes preserved from frozen wrapper; original page responses are not separately available for rehashing. Exact point coordinates round-trip through unquantized TopoJSON.\n\nLicence families: PB geometry ODC-BY 1.0 (Bird 2003; Hugo Ahlenius/Nordpil/fraxen contributors); PB catalogue source database ODC-BY 1.0 with original Atlas text CC BY-NC-SA 4.0. GVP/USGS/NCEI factual geometry public domain; original catalogue text/selection CC BY-NC-SA 4.0. Natural Earth existing basemap public domain. No BY-SA/NC-SA source mixing, no GVP images, third-party ComCat products or NOAA poster reproduction. Exact per-file mapping is in provenance.\n`;
 const numberedSources = sourcesFile.parse(JSON.parse(readFileSync(resolve(ROOT, 'src/content/topics/plates-and-hazards/data/sources.json'), 'utf8')));
 writeFileSync(resolve(ROOT, 'src/content/topics/plates-and-hazards/data/SOURCES.md'), mergeSourcesMd(sourceText, sourcesBlock(numberedSources.sources), 'plates-and-hazards'));
 writeFileSync(resolve(ROOT, 'scripts/geo/plates-and-hazards/SOURCES-GEO.md'), sourceText.replaceAll('(../provenance/', '(../../../src/content/topics/plates-and-hazards/provenance/'));

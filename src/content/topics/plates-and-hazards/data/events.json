@@ -150,8 +150,8 @@
     ],
     "sensitive": true,
     "detail": {
-      "en": "USGS gives Mw 9.1, depth 30 km and origin time 2004-12-26 00:58:53.450 UTC. MSS gives magnitude 9.2. The epicentre lies above the rupture’s start; the underground break extends farther. The USGS tsunami flag is 0, but NCEI event 2439 documents the tsunami.",
-      "zh": "USGS 给出 Mw 9.1、深度 30 公里，发震时刻为 UTC 2004-12-26 00:58:53.450。MSS 给出震级 9.2。震中在地下破裂起点上方，破裂还延伸到更远。USGS 海啸标记为 0，但 NCEI 事件 2439 记录了海啸。"
+      "en": "USGS gives magnitude Mw 9.1, a depth of 30 km and a start time of 00:58 UTC on 26 December 2004. MSS gives magnitude 9.2. The epicentre lies above the rupture’s start; the underground break extends farther. The USGS tsunami flag is 0, but NCEI event 2439 documents the tsunami.",
+      "zh": "USGS 给出震级 Mw 9.1、深度 30 公里，发震时间是 2004 年 12 月 26 日 00:58（UTC）。MSS 给出震级 9.2。震中在地下破裂起点上方，破裂还延伸到更远。USGS 海啸标记为 0，但 NCEI 事件 2439 记录了海啸。"
     },
     "impacts": [
       {
