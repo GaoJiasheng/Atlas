@@ -12,8 +12,8 @@
         "zh": "支撑储箱，把推力传向上方。"
       },
       "detail": {
-        "en": "The first-stage structure joins the tanks and engines to the rocket above. To inspect it after separation, return to a beat that shows this stage. [S25, S90]",
-        "zh": "第一级结构把储箱、发动机和上方箭体连起来。分离后若想查看它，先回到显示第一级的节拍。[S25, S90]"
+        "en": "The first-stage structure joins the tanks and engines to the rocket above. It follows the nominal Apollo 11 arrangement, simplified. To inspect it after separation, return to a beat that shows this stage. [S25, S90]",
+        "zh": "第一级结构把储箱、发动机和上方箭体连起来，形状依据阿波罗11号的名义构型并经过简化。分离后若想查看它，先回到显示第一级的节拍。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -594,8 +594,8 @@
         "zh": "帮助火箭在大气中保持稳定。"
       },
       "detail": {
-        "en": "Four fins extend from the first stage. They help stabilise the rocket as it travels through the atmosphere. Return to a first-stage beat to inspect them after separation. [S25, S90]",
-        "zh": "四片尾翼伸出第一级，帮助火箭穿过大气层时保持稳定。分离后，先回到第一级仍在的节拍，再查看尾翼。[S25, S90]"
+        "en": "Four fins extend from the first stage. They help stabilise the rocket as it travels through the atmosphere. Their shape follows the nominal Apollo 11 arrangement, simplified. Return to a first-stage beat to inspect them after separation. [S25, S90]",
+        "zh": "四片尾翼伸出第一级，帮助火箭穿过大气层时保持稳定，形状依据阿波罗11号的名义构型并经过简化。分离后，先回到第一级仍在的节拍，再查看尾翼。[S25, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -666,8 +666,8 @@
         "zh": "连接第二级发动机与储箱。"
       },
       "detail": {
-        "en": "The second-stage structure connects five hydrogen–oxygen engines, their tanks and the upper rocket. It separates with the stage after its work is done. [S25, S90]",
-        "zh": "第二级结构连接五台氢氧发动机、储箱和上方箭体，完成工作后随这一级分离。[S25, S90]"
+        "en": "The second-stage structure connects five hydrogen–oxygen engines, their tanks and the upper rocket. It follows the nominal Apollo 11 arrangement, simplified. It separates with the stage after its work is done. [S25, S90]",
+        "zh": "第二级结构连接五台氢氧发动机、储箱和上方箭体，依据阿波罗11号的名义构型并经过简化。完成工作后随这一级分离。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -797,8 +797,8 @@
         "zh": "为第二级储存液氢。"
       },
       "detail": {
-        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, with no overlapping tank ends. [S25, S90]",
-        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，两箱封头不重叠。[S25, S90]"
+        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, at y = 53.5 m in the launch model, with no overlapping tank ends. [S25, S90]",
+        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，位于发射模型中y=53.5米处，两箱封头不重叠。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1174,8 +1174,8 @@
         "zh": "支撑第三级发动机和飞船。"
       },
       "detail": {
-        "en": "The third-stage structure carries one restartable engine, its tanks and the spacecraft above. Return to a third-stage beat to inspect it after separation. [S25, S90]",
-        "zh": "第三级结构支撑一台可重启发动机、储箱和上方飞船。分离后先回到第三级仍在的节拍，再查看它。[S25, S90]"
+        "en": "The third-stage structure carries one restartable engine, its tanks and the spacecraft above. It follows the nominal Apollo 11 arrangement, simplified. Return to a third-stage beat to inspect it after separation. [S25, S90]",
+        "zh": "第三级结构支撑一台可重启发动机、储箱和上方飞船，依据阿波罗11号的名义构型并经过简化。分离后先回到第三级仍在的节拍，再查看它。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1304,8 +1304,8 @@
         "zh": "储存入轨和出发所用的液氢。"
       },
       "detail": {
-        "en": "A shared divider separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
-        "zh": "共用底板把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
+        "en": "A shared divider, at y = 75 m in the model, separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
+        "zh": "共用底板位于模型中y=75米处，把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1366,8 +1366,8 @@
         "zh": "向第三级J-2供应液氧。"
       },
       "detail": {
-        "en": "The lower tank supplies liquid oxygen. The cutaway keeps it separate from the hydrogen above and shows the feed layout. It simplifies the tank walls and pipework. [S25, S90]",
-        "zh": "下方储箱供应液氧。剖面把它与上方液氢分开，显示供料布局，并简化储箱壁和管路。[S25, S90]"
+        "en": "The lower tank supplies liquid oxygen. The cutaway keeps it separate from the hydrogen above, stopping its top face 0.04 m below the shared divider so the shapes do not overlap, and shows the feed layout. It simplifies the tank walls and pipework. [S25, S90]",
+        "zh": "下方储箱供应液氧。剖面把它与上方液氢分开，上表面止于共用底板下方0.04米，轮廓不会相互穿入，并显示供料布局，并简化储箱壁和管路。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2188,8 +2188,8 @@
         "zh": "引导两舱进入对接位置。"
       },
       "detail": {
-        "en": "The command-module probe meets the lunar module’s docking port. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
-        "zh": "指令舱探杆接上登月舱对接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
+        "en": "The command-module probe meets the lunar module’s docking port. In the launch model its tip is at y = 104.8 m, and docking poses bring it to the port at y = 92.5 m. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
+        "zh": "指令舱探杆接上登月舱对接口。在发射模型中，探杆尖端位于y=104.8米；对接姿态把它送到y=92.5米处的接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3112,8 +3112,8 @@
         "zh": "把载荷分散到四个足垫上。"
       },
       "detail": {
-        "en": "Each of the four legs has a main strut, two braces and a footpad. The deployed pads meet the same flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
-        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。展开后，足垫落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
+        "en": "Each of the four legs has a main strut, two braces and a footpad. In the launch model the deployed pad bottoms sit at y = 85.6 m; the landed offset brings them to y = 0, one flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
+        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。在发射模型中，展开后的足垫底部在y=85.6米处；着陆偏移把它们移到y=0，落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3845,8 +3845,8 @@
         "zh": "接纳探杆，连接两舱。"
       },
       "detail": {
-        "en": "The port on top of the lunar module meets the command-module probe during docking, extraction and rendezvous. An open ring shows the passage between cabins. Seals and moving latches are left out. [S25, S26, S90]",
-        "zh": "登月舱顶部接口在对接、抽取和交会时接上指令舱探杆。开环显示两舱之间的通道，省去密封件和活动锁扣。[S25, S26, S90]"
+        "en": "The port on top of the lunar module, centred at y = 92.5 m in the launch model, meets the command-module probe during docking, extraction and rendezvous. An open ring shows the passage between cabins. Seals and moving latches are left out. [S25, S26, S90]",
+        "zh": "登月舱顶部接口（发射模型中心y=92.5米）在对接、抽取和交会时接上指令舱探杆。开环显示两舱之间的通道，省去密封件和活动锁扣。[S25, S26, S90]"
       },
       "primitive": {
         "kind": "torus",
