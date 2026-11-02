@@ -2,6 +2,9 @@ import { useLayoutEffect, type RefObject } from 'react';
 import type { HudActions, HudStore } from './controls';
 import { solveHudRoom, measureFreeStage, type HudMeasurements, type FreeStage } from './hud-room';
 
+/** Rows of the chapter rail the left column keeps before it hides its metadata (the rest scrolls). */
+const RAIL_MIN_ROWS = 3;
+
 /** Measure shared HUD once per layout change; expose stage-local framing to every engine. */
 export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, actions: HudActions) {
   useLayoutEffect(() => {
@@ -48,6 +51,30 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       panelsIn(column)
         .filter(counts)
         .reduce((n, e) => n + Math.max(0, e.scrollHeight - e.getBoundingClientRect().height), 0);
+    /** How far the left column's content runs past its box: the rail counted at a few rows (it is
+     * meant to scroll), every other block at its natural height (a squeezed PLATE included). */
+    const leftOverflow = () => {
+      const body = scene.querySelector<HTMLElement>('.atlas-left-body');
+      if (!body || !visible(body)) return 0;
+      let need = 0;
+      for (const c of Array.from(body.children) as HTMLElement[]) {
+        if (!visible(c)) continue;
+        if (c.dataset.hudPanel !== 'rail') {
+          // Its box, plus whatever a squeezed block hides in its own scroll boxes (a PLATE body, an overflowing panel).
+          need += [c, ...c.querySelectorAll<HTMLElement>('*')]
+            .filter((e) => e.scrollHeight > e.clientHeight + 1 && (e === c || /auto|scroll/.test(getComputedStyle(e).overflowY)))
+            .reduce((n, e) => n + e.scrollHeight - e.clientHeight, c.getBoundingClientRect().height);
+          continue;
+        }
+        const list = c.querySelector<HTMLElement>('.atlas-rail__list');
+        const height = c.getBoundingClientRect().height;
+        const row = list?.firstElementChild?.getBoundingClientRect().height ?? 0;
+        const chrome = height - (list?.clientHeight ?? 0);
+        const natural = chrome + (list?.scrollHeight ?? 0);
+        need += Math.min(natural, chrome + RAIL_MIN_ROWS * row) + (Number.parseFloat(getComputedStyle(c).marginTop) || 0);
+      }
+      return need - body.clientHeight;
+    };
     const observed = new Set<Element>();
     const resize = new ResizeObserver(() => schedule());
     let syncingPlate = false;
@@ -109,7 +136,8 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
             0,
           );
         else sizes.left.height += sizes.left.metadata;
-      }
+        sizes.left.overflow = leftOverflow() + (state.leftColumn === 'compact' ? sizes.left.metadata : 0);
+      } else sizes.left.overflow = 0;
       if (right) {
         // Measured open only: a folded card shifts the column by its tab, which must not flip the solver back.
         if (state.cardOpen) sizes.right.width = right.width;

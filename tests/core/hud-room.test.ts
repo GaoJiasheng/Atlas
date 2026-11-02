@@ -69,6 +69,17 @@ describe('HUD room policy', () => {
       'metadata',
     ]);
   });
+  it('hides the metadata when the left column cannot hold its content, even with the stage share met', () => {
+    const view = { width: 1920, height: 1080 };
+    const spill = solveHudRoom(view, { ...sizes, left: { ...sizes.left, overflow: 90 } });
+    expect(spill.steps).toEqual(['metadata']);
+    expect(spill.folds.leftColumn).toBe('compact');
+    expect(spill.folds.cardOpen && spill.folds.legendsOpen).toBe(true);
+    expect(solveHudRoom(view, { ...sizes, left: { ...sizes.left, overflow: 0 } }).folds.leftColumn).toBe('open');
+    // A manual choice wins; a phone header never folds for this.
+    expect(solveHudRoom(view, { ...sizes, left: { ...sizes.left, overflow: 90 } }, { leftColumn: 'open' }).folds.leftColumn).toBe('open');
+    expect(solveHudRoom({ width: 390, height: 844 }, { ...sizes, left: { width: 366, height: 140, metadata: 0, overflow: 90 } }).folds.leftColumn).toBe('open');
+  });
   it('narrows the reader only after the left column, never below 340', () => {
     const room = solveHudRoom({ width: 1024, height: 768 }, { ...sizes, reader: 480 });
     expect(room.steps).toEqual(['legends', 'card', 'metadata', 'left', 'reader-width']);

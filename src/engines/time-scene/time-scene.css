@@ -114,6 +114,10 @@
 .ts-overlay[data-folded] { padding: 0; gap: 0; }
 .ts-overlay > .ts-fold__body { display: flex; flex-direction: column; gap: .625rem; }
 .ts-fold__body[hidden] { display: none; }
+/* Left-column plates (dated layers, geography, climatology, geology): squeezed by a short column they scroll
+   inside it, never spilling under the chapter axis. */
+.atlas-plate > .ts-fold { display: flex; flex-direction: column; min-height: 0; }
+.atlas-plate > .ts-fold > .ts-fold__body { min-height: 0; overflow-y: auto; }
 /* Inside the card the outer header is the one fold (one tab when closed); the LAYERS / TOOLS / KEY folds of the
    shared ControlPanel would repeat it, so they read as plain section titles and leave the pointer to the header. */
 .ts-overlay > .ts-fold__body :is(.atlas-ctl__section, .atlas-legend) > .atlas-fold {

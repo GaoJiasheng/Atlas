@@ -18,7 +18,9 @@ export interface FreeStage {
 export interface HudMeasurements {
   top: number;
   bottom: number;
-  left: { width: number; height: number; metadata: number };
+  /** `overflow`: how far the column's content (the rail at a few rows, every other block at its natural
+   * height, metadata shown) runs past the column's own box; > 0 means it would spill under the dock. */
+  left: { width: number; height: number; metadata: number; overflow?: number };
   right: { width: number; height: number; legends: number; card: number };
   reader: number;
   /** Space between the viewport edge and the column's outer edge. */
@@ -104,6 +106,13 @@ export function solveHudRoom(viewport: { width: number; height: number }, sizes:
     attempt('left', 'leftColumn', () => {
       folds.leftColumn = 'collapsed';
     });
+  }
+  // A column that cannot hold its own content (a tall title + metadata above a PLATE) spills under the
+  // chapter axis even when the stage share is met: hide the metadata first, at any size. The rail
+  // and the blocks then share what is left, each scrolling.
+  if (!phone && folds.leftColumn === 'open' && manual.leftColumn === undefined && (sizes.left.overflow ?? 0) > 0) {
+    folds.leftColumn = 'compact';
+    steps.push('metadata');
   }
   if (!fits() && !drawer && folds.reader && readerWidth > 340) {
     readerWidth = 340;

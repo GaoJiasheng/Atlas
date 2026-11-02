@@ -71,6 +71,17 @@ const CLICK_SLOP = 3;
 const TICK_HIT = 22;
 /** Below this segment width (px) the label is the chapter number alone. */
 const DATE_LABEL_MIN = 44;
+/** Advance of the 9.5 px mono segment date (CSS px): Latin glyphs, CJK glyphs. */
+const DATE_GLYPH = { latin: 5.8, cjk: 9.5 } as const;
+
+/** The segment's date as it fits its width: the full label, else its first form ('250 Ma' of
+ * '250 Ma / 250百万年前'), else nothing (the button's title and aria-label keep the full date). */
+export function fittedSegmentDate(date: string, width: number): string | null {
+  const advance = (s: string) => [...s].reduce((n, c) => n + (/[\u2E80-\u9FFF\uFF00-\uFFEF]/.test(c) ? DATE_GLYPH.cjk : DATE_GLYPH.latin), 0);
+  if (width < DATE_LABEL_MIN) return null;
+  for (const form of [date, date.split(' / ')[0]!]) if (advance(form) <= width - 4) return form;
+  return null;
+}
 /** Swimlanes: keyframes, movements, events (px). */
 const LANES = { k: [0, 12], m: [14, 34], e: [36, 48] } as const;
 const LANES_H = 48;
@@ -275,7 +286,7 @@ export function Timeline(props: TimelineProps) {
                   const date = segmentDate(seg.start, model, locale);
                   const state = seg.index < current ? 'done' : seg.index === current ? 'current' : 'todo';
                   const label = tr('time.segment', { n: seg.index + 1, title: tx(chapter.title, locale), time: date });
-                  const wide = seg.x1 - seg.x0 >= DATE_LABEL_MIN;
+                  const shownDate = fittedSegmentDate(date, seg.x1 - seg.x0);
                   return (
                     <li key={seg.id} className="ts-seg" data-state={state} style={{ left: `${seg.x0}px`, width: `${seg.x1 - seg.x0}px` }}>
                       <button
@@ -292,7 +303,7 @@ export function Timeline(props: TimelineProps) {
                         }}
                       >
                         <span className="ts-seg__no">{n}</span>
-                        {wide && <span className="ts-seg__date">{date}</span>}
+                        {shownDate && <span className="ts-seg__date">{shownDate}</span>}
                       </button>
                       {seg.ticks.map((k, j) => {
                         const { caption, date: time } = props.beatLabel(seg.id, k.index);
