@@ -8,12 +8,12 @@
       },
       "group": "solar-body",
       "summary": {
-        "en": "Provides the light.",
+        "en": "Provides light.",
         "zh": "提供光照。"
       },
       "detail": {
-        "en": "The Sun is a star and the light source for this study. Earth and the Moon are shown with their sunward sides illuminated. [S34,S4,S7]\n\nThe model uses a spherical Sun with mean radius 695700 km. Its warm tint identifies the light source; it is not a photograph or a view of the Sun’s interior. Never look directly at the Sun. [S9,S35,S36]",
-        "zh": "太阳是恒星，也是本研究的光源。地球和月球朝向太阳的一侧受光。[S34,S4,S7]\n\n模型把太阳画成球体，平均半径取 695700 km。暖色只用于辨认光源，不是太阳照片或内部剖面。不要直视太阳。[S9,S35,S36]"
+        "en": "The Sun is a star. It lights the sides of Earth and Moon that face it. [S34,S4,S7]\n\nThe model uses a sphere with a mean radius of 695700 km. A warm colour marks it as the light source. Never look directly at the Sun. [S9,S35,S36]",
+        "zh": "太阳是恒星，照亮地球和月球朝向它的一侧。[S34,S4,S7]\n\n模型用球体表示太阳，平均半径为695700 km，暖色帮助辨认光源。不要直视太阳。[S9,S35,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -39,12 +39,12 @@
       },
       "group": "earth-system",
       "summary": {
-        "en": "Carries the observing place.",
-        "zh": "承载观察地点。"
+        "en": "Carries the marked observing place.",
+        "zh": "让标记地点随地球转动。"
       },
       "detail": {
-        "en": "Earth is a planet. Rotation carries a place into and out of sunlight, producing day and night. Its tilted axis helps explain opposite seasonal daylight changes in the hemispheres. [S4,S3]\n\nThe spherical model uses mean radius 6371 km, circular motion and a fixed axis direction. It has no continent texture or weather model. Faint dark-side fill is a teaching convention. [S9,S36]",
-        "zh": "地球是行星。地点随自转进入和离开阳光，形成昼夜；倾斜的地轴帮助解释南北半球季节性的日长变化为何相反。[S4,S3]\n\n球形模型取平均半径 6371 km、圆形轨道和近似固定的轴向。它没有大陆纹理，也不模拟天气。暗侧微弱填光是教学画法。[S9,S36]"
+        "en": "Earth is a planet. As it turns, places enter and leave sunlight, bringing day and night. Its tilted axis helps explain opposite seasonal daylight changes in the two hemispheres. [S4,S3]\n\nThe model Earth has a mean radius of 6371 km. It follows a circular path with a fixed axis direction. It leaves out continents and weather. Faint light helps show the dark side. [S9,S36]",
+        "zh": "地球是行星。各地随自转进入和离开阳光，形成昼夜。倾斜的地轴有助于解释南北半球相反的季节性日长变化。[S4,S3]\n\n模型平均半径为6371 km，沿圆轨道运行，地轴方向固定。画面省去大陆和天气，用微弱填光显示暗侧。[S9,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -70,12 +70,12 @@
       },
       "group": "earth-system",
       "summary": {
-        "en": "Shows the spin direction.",
-        "zh": "表示自转轴的方向。"
+        "en": "Shows the axis Earth turns about.",
+        "zh": "标出地球自转所绕的轴。"
       },
       "detail": {
-        "en": "The axis is the imaginary line about which Earth turns. Axial tilt is measured from the perpendicular to the orbital plane, about 23.4 degrees. Its direction stays nearly parallel through a year. [S3,S9]\n\nThis line through the sphere is a teaching guide, not a rod in space. It follows the same Earth orientation as the physical snapshot; the zero-tilt experiment deliberately changes that model parameter. [S36]",
-        "zh": "地轴是地球自转所绕的假想轴线。倾角从轨道平面的垂线量起，约 23.4 度；一年中轴向近似保持平行。[S3,S9]\n\n穿过球心的线是教学辅助线，不是太空里的杆。它与物理快照共用地球朝向；零倾角实验会刻意改变这个模型参数。[S36]"
+        "en": "Earth turns about an imaginary line through its poles. This axis tilts about 23.4 degrees from the perpendicular to its orbital plane. It points in nearly the same direction through a year. [S3,S9]\n\nThe line through the model follows Earth’s orientation. Set the tilt to zero to compare a year without axial tilt. [S36]",
+        "zh": "地球绕穿过两极的假想线自转。地轴与轨道平面垂线的夹角约23.4度，一年内方向近似不变。[S3,S9]\n\n模型中的线随地球朝向变化。把倾角设为零，可以比较没有地轴倾角的一年。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -103,12 +103,12 @@
       },
       "group": "earth-system",
       "summary": {
-        "en": "Divides the hemispheres.",
-        "zh": "标出南北半球的分界。"
+        "en": "Divides Earth into north and south.",
+        "zh": "把地球分成南北半球。"
       },
       "detail": {
-        "en": "The equator separates the northern and southern hemispheres. Opposite latitudes can have opposite daylight changes at the same orbital position. [S3]\n\nThis ring is a guide attached to the model Earth, not a physical belt. The yearly comparison keeps the circular Sun–Earth distance fixed; it does not predict temperature. [S36]",
-        "zh": "赤道把地球分成南北半球。在同一公转位置，相反纬度的日长变化可以相反。[S3]\n\n这条圆环是附在模型地球上的辅助线，不是实物带子。全年对照固定圆轨道的日地距离，不据此预测气温。[S36]"
+        "en": "The equator divides Earth into northern and southern hemispheres. At opposite latitudes, seasonal daylight changes can be opposite. [S3]\n\nThe ring marks this imaginary line. In the yearly comparison, the distance to the Sun stays fixed while daylight changes. The model does not calculate temperature. [S36]",
+        "zh": "赤道把地球分成南北半球。相反纬度的季节性日长变化可以相反。[S3]\n\n圆环标出这条假想线。全年比较中，日地距离固定，白昼长短仍会变化。模型不计算气温。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -140,12 +140,12 @@
       },
       "group": "earth-system",
       "summary": {
-        "en": "Marks the model observer.",
-        "zh": "标出模型观察点。"
+        "en": "Marks the observer’s place on Earth.",
+        "zh": "标出地表观察者的位置。"
       },
       "detail": {
-        "en": "The marker follows a place on Earth’s surface. The eclipse window calculates apparent discs from this explicitly chosen model surface point, while the phase window looks from Earth’s centre. [S6,S36]\n\nThe local-year chapter instead reads a 2026 calculation table for the Atlas teaching reference point at 1.3342° N, 103.7357° E, UTC+8. The globe there is a latitude reference, not that date’s sky orientation or an official observatory coordinate. [S33,S36]",
-        "zh": "标记跟随地球表面的一个地点。日食窗从这个明确指定的模型地表点计算视盘；月相窗则从地心看。[S6,S36]\n\n本地全年章另读 2026 年计算表：Atlas 教学参考点为北纬 1.3342°、东经 103.7357°，UTC+8。那里的球体只示意纬度，不代表当天姿态，也不声称是官方天文台坐标。[S33,S36]"
+        "en": "The marker follows a place on Earth’s surface. The eclipse window shows the Sun and Moon as seen from this point. The phase window looks from Earth’s centre. [S6,S36]\n\nThe Singapore chapter uses a separate 2026 calculation table for 1.3342° N, 103.7357° E, in UTC+8. This chosen reference point is not an official observatory coordinate. The globe marks latitude; its lighting does not follow the table’s dates. [S33,S36]",
+        "zh": "标记跟着地球表面的一个地点转动。日食窗从这里看太阳和月球，月相窗则从地心看。[S6,S36]\n\n新加坡一章采用2026年计算表，地点为北纬1.3342°、东经103.7357°，时区UTC+8。这是选定的参考点，不是官方天文台坐标。球体标示纬度，受光画面不随表格日期改变。[S33,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -175,8 +175,8 @@
         "zh": "反射太阳光。"
       },
       "detail": {
-        "en": "The Moon is Earth’s natural satellite. Its changing phase is the changing view of its sunlit portion; ordinary phases are not caused by Earth’s shadow. [S7,S5]\n\nMean radius is 1737.4 km in this spherical model. The phase window is geocentric and Earth-north-up, not a Singapore horizon view. Eclipse dimming is reported separately from the geometric lit fraction. [S8,S6,S36]",
-        "zh": "月球是地球的天然卫星。月相变化是从地球看见的受光部分改变；普通月相并非地影造成。[S7,S5]\n\n球形模型取平均半径 1737.4 km。月相窗从地心看、地球北朝上，不是新加坡地平视图。月食遮暗与几何亮部比例分别显示。[S8,S6,S36]"
+        "en": "The Moon is Earth’s natural satellite. As it moves, we see different amounts of its sunlit side. That produces ordinary Moon phases. Earth’s shadow causes lunar eclipses instead. [S7,S5]\n\nThe model uses a mean radius of 1737.4 km. The phase window looks from Earth’s centre with north up. It shows the lit fraction separately from eclipse dimming. [S8,S6,S36]",
+        "zh": "月球是地球的天然卫星。月球移动时，我们看见的受光部分多少改变，形成普通月相。地影造成的则是月食。[S7,S5]\n\n模型平均半径为1737.4 km。月相窗从地心看，北方朝上。亮部比例与月食遮暗分别显示。[S8,S6,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -202,12 +202,12 @@
       },
       "group": "moon-system",
       "summary": {
-        "en": "Makes turning visible.",
-        "zh": "让自转朝向看得见。"
+        "en": "Helps us follow the Moon’s turning.",
+        "zh": "帮助追踪月球自转。"
       },
       "detail": {
-        "en": "The mark helps compare the Moon’s rotation with its motion around Earth. Nearly the same face points towards Earth because the Moon turns once during an orbit. The far side also receives sunlight. [S21,S5]\n\nThis small surface mark is an orientation aid, not a real crater. Switching synchronous rotation off fixes inertial orientation for comparison; it does not describe the actual Moon. Real libration is omitted. [S21,S36]",
-        "zh": "标记用来比较月球自转和绕地公转。月球公转一周时也自转一周，因此近似同一面朝地；背面也会受阳光照射。[S21,S5]\n\n这个表面小标记用于辨认朝向，并非真实陨坑。关闭同步自转会固定惯性朝向以作比较，不代表真实月球；模型省略天平动。[S21,S36]"
+        "en": "The Moon turns once as it orbits Earth once. This keeps nearly the same face towards Earth. The far side also receives sunlight. [S21,S5]\n\nThe mark helps you follow the turning; it is not a real crater. Switch synchrony off to hold its direction fixed relative to space. The model leaves out libration, the small real change in how much of the Moon we see. [S21,S36]",
+        "zh": "月球公转一周时也自转一周，让近似同一面朝向地球。背面也会受到阳光照射。[S21,S5]\n\n标记帮助追踪转动，不是真实陨坑。关掉同步，月球相对太空的朝向就固定了。模型省略天平动，也就是实际可见月面范围的细小变化。[S21,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -240,12 +240,12 @@
       },
       "group": "moon-system",
       "summary": {
-        "en": "Marks the Moon’s orbital plane.",
-        "zh": "标出月球轨道平面。"
+        "en": "Traces the Moon’s path around Earth.",
+        "zh": "标出月球绕地球的路线。"
       },
       "detail": {
-        "en": "The Moon’s orbital plane is tilted by about 5.1 degrees relative to Earth’s orbital plane. Most new and full Moons miss eclipse alignment. [S8,S40]\n\nThe line is sampled from this circular model, not an ephemeris or a solid rail. Zero tilt is a deliberately flat comparison. It is hidden in chapters that do not use the orbital guide. [S36]",
-        "zh": "月球轨道平面相对地球轨道平面倾斜约 5.1 度，多数新月、满月没有排成日月食所需的直线。[S8,S40]\n\n曲线取自这个圆轨道模型，不是星历或实体轨道。零倾角是刻意共面的对照；不使用这条辅助线的章节会将它隐藏。[S36]"
+        "en": "The Moon’s orbital plane tilts about 5.1 degrees from Earth’s orbital plane. Most new and full Moons therefore miss eclipse alignment. [S8,S40]\n\nThis circular guide shows the model path. At zero tilt, the two orbital planes coincide. Chapters hide the guide when it is not needed. [S36]",
+        "zh": "月轨道平面与地球轨道平面相差约5.1度，因此多数新月、满月没有达到日月食所需的排列。[S8,S40]\n\n圆形辅助线标出模型路线。倾角为零时，两轨道平面重合。不需要这条线的章节会把它隐藏。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -273,12 +273,12 @@
       },
       "group": "orbital-guides",
       "summary": {
-        "en": "Marks the yearly path.",
-        "zh": "标出一年轨道。"
+        "en": "Traces Earth’s path around the Sun.",
+        "zh": "标出地球绕太阳的路线。"
       },
       "detail": {
-        "en": "Earth moves around the Sun. Earth’s nearly parallel tilted axis gives the hemispheres different relations to sunlight at different positions. [S3,S4]\n\nThis guide is a circle with a fixed nominal radius of 149597870.7 km, the defined astronomical unit. Real Earth–Sun distance varies; the circle explains geometry and cannot predict dated events. [S10,S3,S36]",
-        "zh": "地球绕太阳运动；近似平行的倾斜地轴，让南北半球在不同公转位置有不同的受光关系。[S3,S4]\n\n辅助线是半径固定为 149597870.7 km 的圆，取天文单位的定义值。真实日地距离会变化；此圆只解释几何，不能预测具体日期的天象。[S10,S3,S36]"
+        "en": "Earth travels around the Sun. Its tilted axis keeps nearly the same direction, so the hemispheres take turns leaning towards sunlight. [S3,S4]\n\nThe model path is a circle with radius 149597870.7 km, the defined astronomical unit. Earth’s real distance from the Sun varies. This circle explains positions without predicting dated events. [S10,S3,S36]",
+        "zh": "地球绕太阳运行，倾斜的地轴方向近似不变，两半球便轮流倾向太阳。[S3,S4]\n\n模型路线是半径149597870.7 km的圆，采用天文单位的定义值。真实日地距离会变化，这个圆用来解释位置，不预测具体日期的天象。[S10,S3,S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -306,12 +306,12 @@
       },
       "group": "orbital-guides",
       "summary": {
-        "en": "Provides a plane for the tilt.",
-        "zh": "提供量倾角的参考面。"
+        "en": "Provides a reference for tilt angles.",
+        "zh": "提供测量倾角的参考面。"
       },
       "detail": {
-        "en": "The reference plane is Earth’s orbital plane. Earth’s axial tilt is measured from its normal; the lunar orbital tilt is measured between the two orbital planes. These are different angles. [S3,S8,S9]\n\nThe wire outline is an explanatory guide, not a sheet in space. Its extent is chosen for readability. The zero-inclination experiment makes the orbital planes coincide. [S36]",
-        "zh": "参考面是地球轨道平面。地轴倾角从它的法线量起，月轨道倾角则在两个轨道平面之间量起；两者不是同一个角。[S3,S8,S9]\n\n线框只作说明，不是太空中的薄板；边长为画面可读性而定。月轨道倾角为零时，两个轨道平面重合。[S36]"
+        "en": "This is Earth’s orbital plane. Measure axial tilt from a line perpendicular to it. Measure lunar orbital tilt between this plane and the Moon’s orbital plane. [S3,S8,S9]\n\nThe wire outline helps show the plane clearly. Set lunar tilt to zero and the two orbital planes coincide. [S36]",
+        "zh": "这是地球轨道平面。地轴倾角从它的垂线量起，月轨道倾角则在它与月球轨道平面之间量起。[S3,S8,S9]\n\n线框帮助显示这个平面。月轨道倾角设为零时，两轨道平面重合。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -339,12 +339,12 @@
       },
       "group": "orbital-guides",
       "summary": {
-        "en": "Marks the plane crossings.",
-        "zh": "标出两个平面的交线。"
+        "en": "Shows where the orbital planes meet.",
+        "zh": "标出两轨道平面的交线。"
       },
       "detail": {
-        "en": "The lunar orbit crosses Earth’s orbital plane at two nodes. Near new or full Moon, proximity to a node allows the alignment needed for an eclipse. [S40]\n\nThis guide marks the planes’ intersection, not a solid rod. When their inclination is zero the planes coincide: the unique node line is hidden and the observation window says so. [S36]",
-        "zh": "月轨道在两个交点穿过地球轨道平面。新月或满月接近交点，才可能达到日月食需要的排列。[S40]\n\n辅助线标示两个平面的交线，不是实体杆。倾角为零时，两平面重合，没有唯一交线，因此隐藏此线，并在观察窗说明。[S36]"
+        "en": "The Moon’s orbit crosses Earth’s orbital plane at two nodes. A new or full Moon near a node can line up for an eclipse. [S40]\n\nThe line marks where the planes meet. At zero tilt, the planes overlap completely, so there is no single crossing line to show. The window explains why the line is hidden. [S36]",
+        "zh": "月球轨道在两个交点穿过地球轨道平面。新月或满月接近交点时，才可能排成日月食。[S40]\n\n这条线标出平面相交的位置。倾角为零时，平面完全重合，没有唯一交线，窗口会说明隐藏原因。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -372,12 +372,12 @@
       },
       "group": "orbital-guides",
       "summary": {
-        "en": "Shows the light direction.",
-        "zh": "表示光照方向。"
+        "en": "Shows the direction towards the Sun.",
+        "zh": "标出朝向太阳的方向。"
       },
       "detail": {
-        "en": "The guide points from Earth towards the Sun and marks the light–dark boundary. It helps relate the surface observer to the illuminated half of the globe. [S3,S36]\n\nThe line is a construction aid, not a visible beam in empty space. Lighting and geometry read the same snapshot. No travelling particles or measured light-travel-time claim are used. [S36]",
-        "zh": "辅助线指向太阳，并描出地球的明暗交界，帮助把地表观察点与受光半球联系起来。[S3,S36]\n\n它是作图辅助线，不表示真空中可见的光束。光照和几何读取同一快照；不用移动粒子，也不据此宣称测出了光传播时间。[S36]"
+        "en": "The guide points from Earth towards the Sun and marks the boundary between light and dark. Compare the surface marker with the lit half of Earth. [S3,S36]\n\nThe lines show directions and the light boundary. They are drawn guides, not visible beams in space or measurements of light’s travel time. [S36]",
+        "zh": "辅助线从地球指向太阳，并标出明暗交界。比较地表标记与地球受光半面的位置。[S3,S36]\n\n线条表示方向和明暗边界，不是真空中可见的光束，也不测量光传播时间。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -405,12 +405,12 @@
       },
       "group": "orbital-guides",
       "summary": {
-        "en": "Compares centres and surfaces.",
-        "zh": "区分中心距与表面间隙。"
+        "en": "Compares centre distance and surface gap.",
+        "zh": "比较中心距与表面间隙。"
       },
       "detail": {
-        "en": "The ruler joins Earth’s and the Moon’s centres. With Earth’s diameter drawn as 10 mm, nominal centre distance is about 302 mm and surface gap about 295 mm. [S8,S9,S36]\n\nIt is shown in the true-scale background comparison, where positions and radii share one multiplier. Elsewhere the enlarged bodies and separately shortened gaps do not support this ruler. It is hidden there. [S36]",
-        "zh": "标尺连接地球和月球的球心。把地球直径画成 10 mm，名义地月中心距约 302 mm，表面间隙约 295 mm。[S8,S9,S36]\n\n标尺只用于背景章的真尺度对照：位置和半径共用倍率。其他画面分别放大天体、缩短间距，不能沿用这个标尺，因此将它隐藏。[S36]"
+        "en": "The ruler joins Earth’s and the Moon’s centres. With Earth 10 mm across, their centres are about 302 mm apart and their surfaces about 295 mm apart. [S8,S9,S36]\n\nThe ruler appears in the true-scale comparison, where sizes and distances share one scale. It is hidden in views that enlarge bodies and shorten gaps separately. [S36]",
+        "zh": "标尺连接地月球心。地球直径画成10 mm时，两球中心相距约302 mm，表面相隔约295 mm。[S8,S9,S36]\n\n标尺只在大小和距离采用同一比例的真尺度对照中显示。在分别放大球体、缩短间距的画面中，标尺隐藏。[S36]"
       },
       "clip": false,
       "castShadow": false,
@@ -521,8 +521,8 @@
           {
             "id": "coupled",
             "label": {
-              "en": "Coupled",
-              "zh": "耦合"
+              "en": "All movements together",
+              "zh": "联动"
             }
           },
           {
@@ -549,8 +549,8 @@
           {
             "id": "eclipse",
             "label": {
-              "en": "Eclipse",
-              "zh": "食"
+              "en": "Eclipses",
+              "zh": "日月食"
             }
           },
           {
@@ -701,8 +701,8 @@
       {
         "id": "moon-range",
         "label": {
-          "en": "Moon centre distance",
-          "zh": "月球中心距"
+          "en": "Earth–Moon centre distance",
+          "zh": "地月中心距"
         },
         "default": 384400,
         "kind": "step",
@@ -1341,8 +1341,8 @@
         "id": "moon-lit-percent",
         "kind": "number",
         "label": {
-          "en": "Geometric illuminated fraction",
-          "zh": "几何亮部比例"
+          "en": "Sunlit part of the Moon’s disc",
+          "zh": "月盘亮部比例"
         },
         "unit": "%",
         "decimals": 2
@@ -1709,8 +1709,8 @@
     },
     {
       "key": {
-        "en": "Geometric lit fraction",
-        "zh": "几何亮部"
+        "en": "Moon’s sunlit disc",
+        "zh": "月盘亮部"
       },
       "follow": "moon-lit-percent",
       "unit": "%",
@@ -1784,12 +1784,12 @@
     },
     {
       "key": {
-        "en": "Display mapping",
-        "zh": "显示尺度"
+        "en": "Display scale",
+        "zh": "显示比例"
       },
       "value": {
-        "en": "Switch scale · factors in observation [S36]",
-        "zh": "可切换 · 倍率见观察读数 [S36]"
+        "en": "Switch views; see scale factors in the window [S36]",
+        "zh": "可切换视图，倍率见观察窗 [S36]"
       },
       "tag": "design"
     }

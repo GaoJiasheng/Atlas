@@ -39,8 +39,8 @@
       "fov": 30
     },
     "summary": {
-      "en": "Limits of an ideal model: follow each part through the change of configuration.",
-      "zh": "理想模型的边界：沿着构型变化辨认各部分。"
+      "en": "Change one mass at a time and compare the ideal speed change.",
+      "zh": "每次改变一项质量，比较理想速度变化。"
     },
     "question": {
       "en": "Why does changing an input change the reading?",
@@ -58,12 +58,12 @@
         "vary": "payload",
         "keep": [
           {
-            "en": "The chosen effective exhaust speed",
-            "zh": "规定的有效排气速度"
+            "en": "Effective exhaust speed",
+            "zh": "有效排气速度"
           },
           {
-            "en": "Dry hardware before optional extra structure",
-            "zh": "不含额外结构的干质量"
+            "en": "Hardware mass, excluding the optional extra",
+            "zh": "结构质量，不含可选额外结构"
           }
         ],
         "observe": [
@@ -167,8 +167,8 @@
           }
         },
         "caption": {
-          "en": "The experiment uses a small imaginary rocket, not Saturn V’s flight numbers.",
-          "zh": "实验使用一枚小型假想火箭，不是土星五号的飞行数值。"
+          "en": "This experiment uses a small imaginary rocket. Its readings are separate from Saturn V’s flight.",
+          "zh": "实验使用小型假想火箭，读数与土星五号飞行分开。"
         }
       },
       {
@@ -214,7 +214,7 @@
         },
         "caption": {
           "en": "Keep propellant fixed and increase payload. The ideal speed change falls.",
-          "zh": "保持推进剂不变、增加载荷，理想速度变化会下降。"
+          "zh": "固定推进剂、增加载荷，理想速度变化减小。"
         }
       },
       {
@@ -259,8 +259,8 @@
           }
         },
         "caption": {
-          "en": "Keep payload fixed and add propellant. More mass can be expelled.",
-          "zh": "保持载荷不变、增加推进剂，可排出的质量增加。"
+          "en": "Keep payload fixed and add propellant. The rocket can expel more mass.",
+          "zh": "固定载荷、增加推进剂，火箭能排出更多质量。"
         }
       },
       {
@@ -305,8 +305,8 @@
           }
         },
         "caption": {
-          "en": "Removing unused structure changes the mass ratio, but this model ignores drag and gravity losses.",
-          "zh": "去掉无用结构会改变质量比，但本模型忽略阻力与重力损失。"
+          "en": "Removing unused structure changes the mass ratio. This ideal model leaves out drag and gravity losses.",
+          "zh": "去掉无用结构会改变质量比。理想模型省略阻力和重力损失。"
         }
       },
       {
@@ -351,8 +351,8 @@
           }
         },
         "caption": {
-          "en": "Hardware explains how a mission worked. The history also includes other programmes, crews and costs.",
-          "zh": "硬件解释任务怎样工作；历史还包括其他项目、乘组与投入。"
+          "en": "Hardware helps explain a mission. Its history also includes other programmes, crews and costs.",
+          "zh": "硬件帮助解释任务，历史还包括其他项目、乘组和投入。"
         }
       }
     ],
@@ -368,31 +368,31 @@
 
 <Lang en>
 
-The rocket picture now accompanies a separate experiment. Its <Term id="term-delta-v">ideal speed change</Term> is calculated for an imaginary small rocket. It is not Saturn V's measured speed, a launch prediction or the speed at a point in the illustrated mission. The SIM label applies even when the picture shows familiar hardware.
+Try a mass experiment with an imaginary small rocket. Its <Term id="term-delta-v">ideal speed change</Term> tells us how much the rocket could change its velocity under simplified conditions. The SIM reading belongs to this rocket, not Saturn V's flight.
 
-The model fixes effective exhaust speed at <Num s="S90">3000 m/s</Num> and dry hardware at <Num s="S90">100 kg</Num>. Payload is useful carried mass; propellant is the mass available to expel. Final mass includes the hardware and payload that remain. Initial mass adds the propellant. Optional inert hardware stays aboard throughout this ideal comparison.
+The experiment fixes effective exhaust speed at <Num s="S90">3000 m/s</Num> and dry hardware at <Num s="S90">100 kg</Num>. Dry hardware is the structure and equipment without propellant. Payload is the useful load. Final mass includes the hardware and payload left after the propellant is expelled. Initial mass includes that propellant too. Any extra inert hardware stays aboard throughout.
 
-At the default payload of <Num s="S90">200 kg</Num> and propellant of <Num s="S90">600 kg</Num>, with no extra inert hardware, initial mass is <Num s="S90">900 kg</Num> and final mass is <Num s="S90">300 kg</Num>. The calculated change is <Num s="S90">3295.84 m/s</Num>. Increase payload while keeping propellant fixed: more mass remains, and the calculated change falls.
+With <Num s="S90">200 kg</Num> of payload, <Num s="S90">600 kg</Num> of propellant and no extra structure, initial mass is <Num s="S90">900 kg</Num> and final mass is <Num s="S90">300 kg</Num>. The ideal speed change is <Num s="S90">3295.84 m/s</Num>. Keep propellant fixed and increase payload. More mass remains, so the speed change falls.
 
-Predict before revealing the new reading, then record a row. Change only one input for a clear comparison. More propellant at the same payload raises the ideal result here; carrying extra unused structure lowers it. Neither observation means a real rocket can carry unlimited propellant or ignore the structure needed to hold it.
+Predict the next reading, reveal it, then record a row. Change one input at a time. At the same payload, more propellant raises the ideal result; extra unused structure lowers it. Real rockets also need structure to hold their propellant, so they cannot add unlimited amounts.
 
-This table ignores air resistance, gravity losses and changing exhaust conditions. It does not integrate an orbit or calculate landing safety. Hardware explains part of a mission; its history also includes other programmes, crews, risks and costs. A technical comparison alone cannot decide that wider history.
+The table leaves out air resistance, gravity losses and changes in exhaust conditions. It does not calculate an orbit or landing safety. Engineering helps explain a mission. Its wider history also includes other programmes, crews, risks and costs.
 
-<More title={{"en": "The calculation behind the table", "zh": "表格背后的算式"}}>
+<More title={{"en": "The calculation", "zh": "计算方法"}}>
 
-NASA’s ideal rocket equation gives <Num s="S47">Δv = ve × ln(m0/mf)</Num>: effective exhaust speed times the natural logarithm of initial mass divided by final mass. It sets aside weight and drag. This topic chooses its inputs separately in the design study. For the default case the mass ratio is <Num s="S90">3</Num>, giving <Num s="S90">3000 × ln(3) = 3295.84 m/s</Num>.
-
-</More>
-
-<More title={{"en": "What a recorded row establishes", "zh": "一行记录能说明什么"}}>
-
-A row records a controlled comparison within this chosen model. It does not demonstrate the payload capacity, reliability or cost of a historical launch vehicle. Keep the assumptions with the result when explaining it to someone else.
+NASA's ideal rocket equation is <Num s="S47">Δv = ve × ln(m0/mf)</Num>. Divide initial mass by final mass, take the natural logarithm, then multiply by effective exhaust speed. The equation sets aside weight and drag. With the experiment's default inputs, the mass ratio is <Num s="S90">3</Num>, giving <Num s="S90">3000 × ln(3) = 3295.84 m/s</Num>.
 
 </More>
 
-<More title={{"en": "Restoring the indexed configuration", "zh": "恢复索引需要的构型"}}>
+<More title={{"en": "Explaining your result", "zh": "说明实验结果"}}>
 
-Use <a href={'?ch=ideal-model&b=1'}>the upper launch vehicle</a> before selecting the third-stage shell. Use <a href={'?ch=ideal-model&b=5'}>the returning cabin</a> before selecting the command-module shell. Returning to the experiment reconstructs its chosen defaults.
+Write the inputs beside each recorded result. This lets someone else repeat your comparison. A result describes the imaginary rocket under these assumptions; it does not measure a historical rocket's payload capacity, reliability or cost.
+
+</More>
+
+<More title={{"en": "Selecting the rocket or cabin", "zh": "选择火箭或乘员舱"}}>
+
+Open <a href={'?ch=ideal-model&b=1'}>the upper launch vehicle</a> to select the third-stage shell. Open <a href={'?ch=ideal-model&b=5'}>the returning cabin</a> to select the command-module shell. Returning to the experiment restores its default inputs.
 
 </More>
 
@@ -400,31 +400,32 @@ Use <a href={'?ch=ideal-model&b=1'}>the upper launch vehicle</a> before selectin
 
 <Lang zh>
 
-火箭图旁边现在是一项独立实验。<Term id="term-delta-v">理想速度变化</Term>是为小型假想火箭计算的量，不是土星五号的实测速度，也不是图中某一飞行时刻的速度。即使画面仍展示熟悉的硬件，带“模拟”标记的读数也不能改称历史测量。
+用一枚小型假想火箭做质量实验。<Term id="term-delta-v">理想速度变化</Term>表示在简化条件下，火箭能让速度改变多少。SIM 读数属于这枚假想火箭，不是土星五号的飞行速度。
 
-模型固定有效排气速度为 <Num s="S90">3000 米/秒</Num>，干结构为 <Num s="S90">100 千克</Num>。载荷是有用的携带物，推进剂是可供排出的质量。最终质量包括留下的结构和载荷，初始质量还要加上推进剂；额外惰性结构在这项对照中始终带着。
+实验固定有效排气速度为 <Num s="S90">3000 米/秒</Num>，干结构为 <Num s="S90">100 千克</Num>。干结构是不含推进剂的结构和设备，载荷是有用的携带物。推进剂排出后，留下的结构和载荷构成最终质量；再加上推进剂，就是初始质量。额外携带的不提供推力的结构，始终留在火箭上。
 
-默认载荷 <Num s="S90">200 千克</Num>、推进剂 <Num s="S90">600 千克</Num>，不加额外结构时，初始质量为 <Num s="S90">900 千克</Num>，最终为 <Num s="S90">300 千克</Num>，理想速度变化为 <Num s="S90">3295.84 米/秒</Num>。固定推进剂、增加载荷，留下的质量增大，读数便下降。
+载荷为 <Num s="S90">200 千克</Num>、推进剂为 <Num s="S90">600 千克</Num>，且不带额外结构时，初始质量是 <Num s="S90">900 千克</Num>，最终质量是 <Num s="S90">300 千克</Num>，理想速度变化为 <Num s="S90">3295.84 米/秒</Num>。固定推进剂、增加载荷，留下的质量增大，速度变化就减小。
 
-先保留假设，先猜再看，然后记录一行，每次只改一个输入。更多推进剂会提高这里的理想结果，多带无用结构则降低它；这不表示真实火箭能无限装推进剂。表格忽略阻力、重力损失和排气条件变化，也不计算轨道或着陆安全。硬件只是任务的一部分，历史还包括其他项目、乘组、风险和投入，不能只凭工程比较裁定。
+先猜读数，再显示结果，最后记录一行。每次只改一个输入。同样载荷下，增加推进剂会提高理想结果，多带无用结构则会降低它。真实火箭还要用结构盛装推进剂，不能无限添加。
 
-<More title={{"en": "The calculation behind the table", "zh": "表格背后的算式"}}>
+表格省略空气阻力、重力损失和排气条件的变化，不计算轨道或着陆安全。工程帮助我们理解任务，历史还包括其他项目、乘组、风险和投入。
 
-NASA 的理想火箭方程为 <Num s="S47">Δv = ve × ln(m0/mf)</Num>，即有效排气速度乘以初始质量与最终质量比的自然对数，并暂不计重量与阻力；本题设计研究另选输入。默认质量比为 <Num s="S90">3</Num>，所以得到 <Num s="S90">3000 × ln(3) = 3295.84 米/秒</Num>。
+<More title={{"en": "The calculation", "zh": "计算方法"}}>
 
-</More>
-
-<More title={{"en": "What a recorded row establishes", "zh": "一行记录能说明什么"}}>
-
-一行记录只确立所选模型中的受控比较，不能证明历史火箭的载荷能力、可靠程度或成本。向别人解释结果时，应把假设一起说明。
+NASA 的理想火箭方程为 <Num s="S47">Δv = ve × ln(m0/mf)</Num>：先用初始质量除以最终质量，取自然对数，再乘以有效排气速度。方程暂不计重量和阻力。默认输入的质量比为 <Num s="S90">3</Num>，得到 <Num s="S90">3000 × ln(3) = 3295.84 米/秒</Num>。
 
 </More>
 
-<More title={{"en": "Restoring the indexed configuration", "zh": "恢复索引需要的构型"}}>
+<More title={{"en": "Explaining your result", "zh": "说明实验结果"}}>
 
-选第三级外壳前先点<a href={'?ch=ideal-model&b=1'}>上段运载火箭</a>；选指令舱壳前先点<a href={'?ch=ideal-model&b=5'}>返回乘员舱</a>。回到实验节拍会重建规定的默认输入。
+把输入条件写在结果旁边，别人就能重复比较。读数说明假想火箭在这些条件下的结果，不测量历史火箭的载荷能力、可靠程度或成本。
+
+</More>
+
+<More title={{"en": "Selecting the rocket or cabin", "zh": "选择火箭或乘员舱"}}>
+
+选择第三级外壳前，先打开<a href={'?ch=ideal-model&b=1'}>上段运载火箭</a>。选择指令舱壳前，先打开<a href={'?ch=ideal-model&b=5'}>返回乘员舱</a>。回到实验节拍，会恢复默认输入。
 
 </More>
 
 </Lang>
-

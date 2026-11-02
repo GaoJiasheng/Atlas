@@ -8,12 +8,12 @@
         "zh": "S-IC承力外壳"
       },
       "summary": {
-        "en": "The first-stage structure carries the tanks and transfers engine thrust into the stack.",
-        "zh": "第一级结构支承储箱，并把发动机推力传到上方箭体。"
+        "en": "Supports tanks and carries thrust upwards.",
+        "zh": "支撑储箱，把推力传向上方。"
       },
       "detail": {
-        "en": "Geometry follows the nominal Apollo 11 arrangement; wall thickness, local ribs and internal layout are simplified design values. Select a configuration beat before inspecting a stage that has separated. [S25, S90]",
-        "zh": "几何依据阿波罗11号名义构型；壁厚、局部加强环和内部布局采用简化设计值。查看已经分离的级时，先切到显示该级的构型拍。[S25, S90]"
+        "en": "The first-stage structure joins the tanks and engines to the rocket above. To inspect it after separation, return to a beat that shows this stage. [S25, S90]",
+        "zh": "第一级结构把储箱、发动机和上方箭体连起来。分离后若想查看它，先回到显示第一级的节拍。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -171,12 +171,12 @@
         "zh": "S-IC煤油箱"
       },
       "summary": {
-        "en": "This tank stores RP-1 kerosene for the five F-1 engines.",
-        "zh": "这个储箱为五台F-1发动机储存RP-1煤油。"
+        "en": "Stores RP-1 kerosene for five F-1 engines.",
+        "zh": "为五台F-1储存RP-1煤油。"
       },
       "detail": {
-        "en": "The lower kerosene tank feeds the first-stage engines. Liquid oxygen is stored in the separate upper tank. Domed heads use a reduced illustrative depth to keep the two tanks physically separate. [S25, S90]",
-        "zh": "下方煤油箱向第一级发动机供料；液氧放在独立的上方储箱。封头采用较浅的示意尺寸，使两箱保持分开。[S25, S90]"
+        "en": "The lower tank feeds kerosene to the first-stage engines. The upper tank holds liquid oxygen separately. The model uses shallower curved tank ends so the tanks stay apart. [S25, S90]",
+        "zh": "下方储箱把煤油送往第一级发动机，上方储箱单独装液氧。模型把弧形封头画浅，让两箱保持分开。[S25, S90]"
       },
       "primitive": {
         "kind": "vessel",
@@ -213,12 +213,12 @@
         "zh": "S-IC液氧箱"
       },
       "summary": {
-        "en": "This tank carries liquid oxygen so combustion does not depend on outside air.",
-        "zh": "这个储箱携带液氧，让燃烧不依赖外界空气。"
+        "en": "Carries oxygen for burning fuel.",
+        "zh": "携带燃烧所需的氧。"
       },
       "detail": {
-        "en": "The upper first-stage tank supplies oxidiser, not fuel. The delivery path passes beside the fuel tank in this cutaway teaching layout; detailed plumbing is omitted. [S25, S90]",
-        "zh": "第一级上方储箱供应氧化剂，不是燃料。本教学剖面把供氧路径放在煤油箱旁，省略详细管网。[S25, S90]"
+        "en": "The upper first-stage tank supplies liquid oxygen as oxidiser. In the cutaway, its feed line passes beside the kerosene tank. Detailed pipework is left out. [S25, S90]",
+        "zh": "第一级上方储箱供应液氧氧化剂。剖面把供氧线画在煤油箱旁，省略详细管路。[S25, S90]"
       },
       "primitive": {
         "kind": "vessel",
@@ -255,12 +255,12 @@
         "zh": "中央F-1发动机"
       },
       "summary": {
-        "en": "The fixed central F-1 turns carried kerosene and oxygen into a downward exhaust stream.",
-        "zh": "固定的中央F-1把携带的煤油和氧转化为向下的排气。"
+        "en": "Burns kerosene and oxygen to produce thrust.",
+        "zh": "燃烧煤油和氧，产生推力。"
       },
       "detail": {
-        "en": "One central engine and four outer engines make five. This bell is hollow, with a visible throat and lip; its teaching profile and feed hardware do not reproduce a manufacturing drawing. [S25, S90]",
-        "zh": "中央一台加外围四台，共五台。喷管为空心，喉部与唇缘可辨；教学轮廓和供料设备不复刻制造图。[S25, S90]"
+        "en": "One fixed central F-1 and four outer F-1s make five engines. Look inside the hollow nozzle for its narrow throat and wider rim. The nozzle shape and feed equipment are simplified. [S25, S90]",
+        "zh": "中央一台固定F-1加外围四台，共五台。空心喷管里可见较窄的喉部和较宽的边缘，形状与供料设备经过简化。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -418,12 +418,12 @@
         "zh": "外围四台F-1发动机"
       },
       "summary": {
-        "en": "The four outer F-1 engines add thrust and could swivel to help steer the launch vehicle.",
-        "zh": "外围四台F-1增加推力，并能偏转帮助控制飞行方向。"
+        "en": "Add thrust and swivel to help steer.",
+        "zh": "增加推力，可偏转控制方向。"
       },
       "detail": {
-        "en": "These four repeated engines surround one fixed central engine. The illustrative 3.8 m mounting radius leaves a 0.10 m minimum mouth-to-mouth gap; their exposed bells extend beyond the tank cylinder, within the fin envelope. Gimbal motion is not simulated. [S25, S90]",
-        "zh": "四台重复发动机围绕一台固定中央发动机。3.8米示意安装半径使最近喷口边缘留0.10米间隙；露出的喷管超出储箱圆筒，但不越过尾翼包络。本模型不模拟偏转。[S25, S90]"
+        "en": "Four F-1s surround the fixed central engine. In the model, their mounting radius is 3.8 m and the smallest gap between nozzle rims is 0.10 m. The bells extend beyond the tank cylinder but stay within the fins’ outer reach. Steering movement is not shown. [S25, S90]",
+        "zh": "四台F-1围绕固定的中央发动机。模型安装半径为3.8米，喷口边缘最小间隙为0.10米。喷管超出储箱圆筒，但未超出尾翼外缘。画面不演示偏转。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -590,12 +590,12 @@
         "zh": "四片稳定尾翼"
       },
       "summary": {
-        "en": "Four fins provide aerodynamic stabilisation while the rocket travels through the atmosphere.",
-        "zh": "四片尾翼在火箭穿过大气层时帮助稳定。"
+        "en": "Help stabilise the rocket in air.",
+        "zh": "帮助火箭在大气中保持稳定。"
       },
       "detail": {
-        "en": "Geometry follows the nominal Apollo 11 arrangement; wall thickness, local ribs and internal layout are simplified design values. Select a configuration beat before inspecting a stage that has separated. [S25, S90]",
-        "zh": "几何依据阿波罗11号名义构型；壁厚、局部加强环和内部布局采用简化设计值。查看已经分离的级时，先切到显示该级的构型拍。[S25, S90]"
+        "en": "Four fins extend from the first stage. They help stabilise the rocket as it travels through the atmosphere. Return to a first-stage beat to inspect them after separation. [S25, S90]",
+        "zh": "四片尾翼伸出第一级，帮助火箭穿过大气层时保持稳定。分离后，先回到第一级仍在的节拍，再查看尾翼。[S25, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -662,12 +662,12 @@
         "zh": "S-II承力外壳"
       },
       "summary": {
-        "en": "The second-stage structure joins five hydrogen engines to the tanks and the upper stack.",
-        "zh": "第二级结构把五台氢氧发动机、储箱和上方箭体连接起来。"
+        "en": "Joins the second-stage engines and tanks.",
+        "zh": "连接第二级发动机与储箱。"
       },
       "detail": {
-        "en": "Geometry follows the nominal Apollo 11 arrangement; wall thickness, local ribs and internal layout are simplified design values. Select a configuration beat before inspecting a stage that has separated. [S25, S90]",
-        "zh": "几何依据阿波罗11号名义构型；壁厚、局部加强环和内部布局采用简化设计值。查看已经分离的级时，先切到显示该级的构型拍。[S25, S90]"
+        "en": "The second-stage structure connects five hydrogen–oxygen engines, their tanks and the upper rocket. It separates with the stage after its work is done. [S25, S90]",
+        "zh": "第二级结构连接五台氢氧发动机、储箱和上方箭体，完成工作后随这一级分离。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -793,12 +793,12 @@
         "zh": "S-II液氢箱"
       },
       "summary": {
-        "en": "The large upper second-stage tank stores liquid hydrogen.",
-        "zh": "第二级较大的上方储箱储存液氢。"
+        "en": "Stores liquid hydrogen for the second stage.",
+        "zh": "为第二级储存液氢。"
       },
       "detail": {
-        "en": "Hydrogen and oxygen share an insulated bulkhead. This simplified fuel profile includes that one boundary at y=53.5 m; the lower oxygen profile stops below it. There are no overlapping domed heads. [S25, S90]",
-        "zh": "液氢和液氧之间共用隔热底板。简化液氢轮廓包含y=53.5米处的这一道边界，下方液氧轮廓止于其下，避免封头相交。[S25, S90]"
+        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, with no overlapping tank ends. [S25, S90]",
+        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，两箱封头不重叠。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -860,12 +860,12 @@
         "zh": "S-II液氧箱"
       },
       "summary": {
-        "en": "The lower second-stage tank stores liquid oxygen for the five J-2 engines.",
-        "zh": "第二级下方储箱为五台J-2储存液氧。"
+        "en": "Stores oxygen for five second-stage J-2s.",
+        "zh": "为第二级五台J-2储存液氧。"
       },
       "detail": {
-        "en": "The upper face ends just below the common bulkhead owned by the fuel-tank geometry. Real bulkhead insulation and structural detail are omitted; the two propellants remain separate. [S25, S90]",
-        "zh": "上表面止于液氢箱几何所含的共底板下方。模型省略真实隔热层和结构细节，两种推进剂仍分开。[S25, S90]"
+        "en": "Liquid oxygen sits below the hydrogen tank. A common insulated divider keeps the two propellants separate. The model leaves out the divider’s detailed layers and structure. [S25, S90]",
+        "zh": "液氧位于液氢箱下方，共用的隔热底板让两种推进剂分开。模型省略底板的详细分层和结构。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -927,12 +927,12 @@
         "zh": "S-II中央J-2"
       },
       "summary": {
-        "en": "The central J-2 supplies one of the second stage’s five main thrust streams.",
-        "zh": "中央J-2提供第二级五股主推力中的一股。"
+        "en": "Adds thrust at the centre of the second stage.",
+        "zh": "在第二级中央提供推力。"
       },
       "detail": {
-        "en": "One fixed central J-2 and four surrounding J-2 engines burn liquid hydrogen and liquid oxygen. The hollow bell is a simplified profile. [S25, S90]",
-        "zh": "一台固定中央J-2和外围四台J-2燃烧液氢、液氧。空心喷管轮廓经过简化。[S25, S90]"
+        "en": "One fixed central J-2 works with four outer J-2s. All burn liquid hydrogen and liquid oxygen. The hollow nozzle shape is simplified. [S25, S90]",
+        "zh": "固定的中央J-2与外围四台一起工作，均燃烧液氢和液氧。空心喷管形状经过简化。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1044,12 +1044,12 @@
         "zh": "S-II外围四台J-2"
       },
       "summary": {
-        "en": "Four outer J-2 engines share the second-stage work and could swivel for control.",
-        "zh": "外围四台J-2共同承担第二级推进，并能偏转控制方向。"
+        "en": "Add thrust and swivel for control.",
+        "zh": "提供推力，可偏转控制方向。"
       },
       "detail": {
-        "en": "Four repeated outer engines plus the central engine make five, as in the NASA stage description. The 2.5 m teaching mounting radius preserves separation between the bells. Steering is not animated. [S25, S90]",
-        "zh": "四台外围重复发动机加中央一台，共五台，与NASA级段说明相符。2.5米教学安装半径使喷管彼此分开；模型不演示偏转。[S25, S90]"
+        "en": "Four outer J-2s and one central engine make five. The model places the outer engines on a 2.5 m mounting radius so their nozzles stay apart. It does not animate steering. [S25, S90]",
+        "zh": "外围四台加中央一台，共五台。模型安装半径为2.5米，让喷管保持分开，不演示偏转。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1170,12 +1170,12 @@
         "zh": "S-IVB承力外壳"
       },
       "summary": {
-        "en": "The third-stage structure carries the restartable engine and the spacecraft above it.",
-        "zh": "第三级结构支承可重启发动机和上方飞船。"
+        "en": "Supports the third-stage engine and spacecraft.",
+        "zh": "支撑第三级发动机和飞船。"
       },
       "detail": {
-        "en": "Geometry follows the nominal Apollo 11 arrangement; wall thickness, local ribs and internal layout are simplified design values. Select a configuration beat before inspecting a stage that has separated. [S25, S90]",
-        "zh": "几何依据阿波罗11号名义构型；壁厚、局部加强环和内部布局采用简化设计值。查看已经分离的级时，先切到显示该级的构型拍。[S25, S90]"
+        "en": "The third-stage structure carries one restartable engine, its tanks and the spacecraft above. Return to a third-stage beat to inspect it after separation. [S25, S90]",
+        "zh": "第三级结构支撑一台可重启发动机、储箱和上方飞船。分离后先回到第三级仍在的节拍，再查看它。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1300,12 +1300,12 @@
         "zh": "S-IVB液氢箱"
       },
       "summary": {
-        "en": "The third-stage hydrogen tank stores fuel for orbital insertion and the later restart.",
-        "zh": "第三级液氢箱储存入轨和随后重启所用燃料。"
+        "en": "Stores hydrogen for Earth orbit and departure.",
+        "zh": "储存入轨和出发所用的液氢。"
       },
       "detail": {
-        "en": "A single common boundary at y=75 m separates fuel above from oxygen below. Restart reuses the same J-2 engine; no additional engine is shown. [S25, S90]",
-        "zh": "y=75米的一道共同边界把上方液氢与下方液氧分开。重启使用同一台J-2，不额外增加发动机。[S25, S90]"
+        "en": "A shared divider separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
+        "zh": "共用底板把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1362,12 +1362,12 @@
         "zh": "S-IVB液氧箱"
       },
       "summary": {
-        "en": "The third-stage lower tank supplies liquid oxygen to the single J-2.",
-        "zh": "第三级下方储箱向唯一的J-2供应液氧。"
+        "en": "Supplies oxygen to the third-stage J-2.",
+        "zh": "向第三级J-2供应液氧。"
       },
       "detail": {
-        "en": "Its upper face stops 0.04 m below the common bulkhead in the fuel geometry, so the profiles do not interpenetrate. Tanks and feed lines are a layout study, not a pressure-vessel design. [S25, S90]",
-        "zh": "它的上表面止于液氢箱共底板下方0.04米，轮廓不会相互穿入。储箱和供料线路用于解释布局，不是压力容器设计。[S25, S90]"
+        "en": "The lower tank supplies liquid oxygen. The cutaway keeps it separate from the hydrogen above and shows the feed layout. It simplifies the tank walls and pipework. [S25, S90]",
+        "zh": "下方储箱供应液氧。剖面把它与上方液氢分开，显示供料布局，并简化储箱壁和管路。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1428,12 +1428,12 @@
         "zh": "S-IVB单台J-2"
       },
       "summary": {
-        "en": "This single restartable J-2 first helps establish Earth orbit and later sends Apollo toward the Moon.",
-        "zh": "这一台可重启J-2先帮助进入地球轨道，随后把阿波罗送向月球。"
+        "en": "Starts Earth orbit, then restarts for the Moon.",
+        "zh": "先帮助入地球轨道，再重启送往月球。"
       },
       "detail": {
-        "en": "One engine is present in every S-IVB configuration. The later burn is a restart of that engine, not a second nozzle appearing. The hollow profile is illustrative. [S25, S90]",
-        "zh": "各个S-IVB构型中始终只有一台发动机。后续燃烧是这台发动机重启，不是出现第二个喷管。空心轮廓为示意。[S25, S90]"
+        "en": "The third stage has one J-2 engine. It fires to help establish Earth orbit, then restarts to send Apollo towards the Moon. The hollow nozzle is simplified. [S25, S90]",
+        "zh": "第三级只有一台J-2，先点火帮助进入地球轨道，再次启动把阿波罗送向月球。空心喷管经过简化。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1529,12 +1529,12 @@
         "zh": "仪器舱"
       },
       "summary": {
-        "en": "The instrument unit measures motion and guides the launch vehicle.",
-        "zh": "仪器舱测量运动并引导运载火箭。"
+        "en": "Measures motion and guides the rocket.",
+        "zh": "测量运动，引导火箭。"
       },
       "detail": {
-        "en": "The ring sits between the S-IVB and spacecraft adapter. It contains guidance and control equipment, not a fourth main propulsion stage. Internal equipment is represented by a few coherent modules. [S25, S90]",
-        "zh": "这个环位于S-IVB与飞船适配器之间，内装制导控制设备，不是第四个主推进级。内部设备用少量规整模块概括。[S25, S90]"
+        "en": "This ring sits between the third stage and the spacecraft adapter. It holds guidance and control equipment, shown as a few simplified modules. It provides control rather than another main propulsion stage. [S25, S90]",
+        "zh": "这个环位于第三级与飞船适配器之间，装有制导控制设备，模型用几个简化模块表示。它负责控制，不是另一个主推进级。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1622,12 +1622,12 @@
         "zh": "飞船—登月舱适配器"
       },
       "summary": {
-        "en": "Four tapered panels enclose the folded lunar module during launch.",
-        "zh": "四片渐缩面板在发射时包住收拢的登月舱。"
+        "en": "Encloses the folded lander at launch.",
+        "zh": "发射时包住收拢的登月舱。"
       },
       "detail": {
-        "en": "The adapter joins the S-IVB/instrument unit to the service module. One LM is carried inside. Removing four panels is shown as a static configuration change; no invented hinge trajectory is implied. [S25, S26, S90]",
-        "zh": "适配器把S-IVB和仪器舱连接到服务舱，内部只携带一份登月舱。四面板以静态构型变化移除，不表示虚构的铰链运动轨迹。[S25, S26, S90]"
+        "en": "The adapter links the third stage and instrument unit to the service module. Four tapered panels enclose one lunar module. Click the beats to see the panels removed and the lander extracted. [S25, S26, S90]",
+        "zh": "适配器把第三级和仪器舱连接到服务舱。四片渐缩面板包住一艘登月舱。点击节拍，观察面板移除、登月舱抽出的顺序。[S25, S26, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1802,12 +1802,12 @@
         "zh": "指令舱乘员舱"
       },
       "summary": {
-        "en": "The command module carries the three astronauts and is the cabin that returns through Earth’s atmosphere.",
-        "zh": "指令舱搭载三名宇航员，也是穿越地球大气层返回的乘员舱。"
+        "en": "Carries three astronauts home through the atmosphere.",
+        "zh": "搭载三名宇航员穿过大气层返回。"
       },
       "detail": {
-        "en": "The cone attaches to the service module above the heat shield. Five window positions follow the general CSM arrangement; cabin equipment, wall layers and hatch mechanisms are simplified. The forward compartment cover is part of the cone and is distinct from the docking probe. [S25, S90]",
-        "zh": "锥形舱体在防热盾上方与服务舱相接。五处舷窗依据CSM总体布局；舱内设备、壁层和舱门机构经过简化。前舱盖属于锥形舱体，与对接探杆是不同零件。[S25, S90]"
+        "en": "The cone joins the service module above the heat shield. Five window positions follow the overall Apollo layout. Cabin equipment, wall layers and hatch mechanisms are simplified. The front compartment cover belongs to the cone and is separate from the docking probe. [S25, S90]",
+        "zh": "锥形舱在防热盾上方与服务舱相接，五处舷窗依据阿波罗总体布局。舱内设备、壁层和舱门机构简化。前舱盖属于锥形舱，与对接探杆分开。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2038,12 +2038,12 @@
         "zh": "钝头防热盾"
       },
       "summary": {
-        "en": "The heat shield protects the command module during atmospheric entry.",
-        "zh": "防热盾在进入大气层时保护指令舱。"
+        "en": "Protects the cabin during atmospheric entry.",
+        "zh": "进入大气层时保护乘员舱。"
       },
       "detail": {
-        "en": "The continuous blunt underside remains intact in cutaway mode. It returns with the cabin after the service module is discarded. No entry temperature, ablation rate or flight trajectory is calculated. [S25, S90]",
-        "zh": "连续的钝头底面在剖视模式中保持完整。服务舱抛弃后，它随乘员舱返回。模型不计算再入温度、烧蚀率或飞行轨迹。[S25, S90]"
+        "en": "The broad, blunt shield returns with the cabin after the service module separates. Cutaway keeps its protective surface whole. The model shows its position without calculating entry heat, loss of shield material or trajectory. [S25, S90]",
+        "zh": "服务舱分离后，宽而钝的防热盾随乘员舱返回。剖视保留完整的保护面，显示它的位置，不计算再入热量、防热材料消耗或轨迹。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2104,12 +2104,12 @@
         "zh": "三个乘员座位"
       },
       "summary": {
-        "en": "Three couches support the command-module crew during launch and return.",
-        "zh": "三个座位在发射与返回时支承指令舱乘员。"
+        "en": "Support the crew during launch and return.",
+        "zh": "发射和返回时支撑乘员。"
       },
       "detail": {
-        "en": "There are exactly three repeated couches inside the same cabin. Cushion, back and restraint shapes are simplified; people and full control panels are omitted. The couches move with every cabin pose. [S25, S90]",
-        "zh": "同一乘员舱内有三个重复座位。坐垫、靠背和约束结构经过简化，省略人物和完整控制面板。每种构型中座位都随舱体运动。[S25, S90]"
+        "en": "Three couches fit inside the command module and move with it. Cushions, backs and restraints are simplified. People and full control panels are left out so the seats stay visible. [S25, S90]",
+        "zh": "指令舱内有三个座位，随舱体一起移动。坐垫、靠背和约束装置经过简化。画面省去人物和完整控制面板，让座位看得清楚。[S25, S90]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -2184,12 +2184,12 @@
         "zh": "对接探杆"
       },
       "summary": {
-        "en": "The probe guides the command module into the lunar module’s docking drogue.",
-        "zh": "探杆引导指令舱进入登月舱的对接锥套。"
+        "en": "Guides the cabins into docking position.",
+        "zh": "引导两舱进入对接位置。"
       },
       "detail": {
-        "en": "The modeled contact point is [0,104.8,0] m in the launch frame; docking poses bring it onto the LM port at [0,92.5,0]. The probe is hidden for homeward and return configurations, distinct from the cone’s front cover. [S25, S90]",
-        "zh": "发射基准中的接触点为[0,104.8,0]米；对接姿态把它送到[0,92.5,0]的登月舱接口。返航与返回构型隐藏探杆；它与锥舱前盖不同。[S25, S90]"
+        "en": "The command-module probe meets the lunar module’s docking port. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
+        "zh": "指令舱探杆接上登月舱对接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -2252,12 +2252,12 @@
         "zh": "服务舱结构"
       },
       "summary": {
-        "en": "The service module carries propulsion and support equipment for the crew cabin.",
-        "zh": "服务舱承载乘员舱所需的推进和支持设备。"
+        "en": "Carries propulsion and support equipment.",
+        "zh": "承载推进和支持设备。"
       },
       "detail": {
-        "en": "The cylindrical service module stays rigidly attached to the command module during turnaround and docking. It has no solar wings. Four small control clusters and radiator strips are indicative external equipment; detailed nozzle counts and plumbing are not modeled. [S25, S90]",
-        "zh": "圆柱形服务舱在转身与对接时始终与指令舱刚性相接，不装太阳翼。四处小型控制组件和散热条概括外部设备，不复刻详细喷嘴计数与管线。[S25, S90]"
+        "en": "The cylindrical service module stays attached to the command module as they turn and dock. It has no solar wings. Four small control clusters and radiator strips appear outside; nozzle details and pipework are simplified. [S25, S90]",
+        "zh": "圆柱形服务舱在转身和对接时与指令舱保持连接，没有太阳翼。外部有四处小型控制组件和散热条，喷嘴细节和管路简化。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2521,12 +2521,12 @@
         "zh": "服务舱储存设备"
       },
       "summary": {
-        "en": "These vessels represent stored propulsion and support supplies in the service module.",
-        "zh": "这些储罐概括服务舱储存的推进与支持物资。"
+        "en": "Stores propulsion and crew-support supplies.",
+        "zh": "储存推进和乘员支持物资。"
       },
       "detail": {
-        "en": "The service engine draws from the service module, which also supports the crew cabin. This selection is deliberately not a complete tank inventory or routed plumbing CAD; the layout moves with the full CSM rigid body. [S25, S90]",
-        "zh": "服务发动机从服务舱取用物资，服务舱也支持乘员舱。这些几何不是完整储罐清单或管线CAD；整套布局始终随CSM刚体运动。[S25, S90]"
+        "en": "These vessels hold supplies for the service engine and crew cabin. Only some tanks are shown. The tanks and their simplified feed layout move with the command and service modules. [S25, S90]",
+        "zh": "这些储罐储存服务发动机和乘员舱所需物资。模型只显示部分储罐，储罐和简化的供料布局随指令舱、服务舱一起移动。[S25, S90]"
       },
       "primitive": {
         "kind": "vessel",
@@ -2576,12 +2576,12 @@
         "zh": "服务推进发动机"
       },
       "summary": {
-        "en": "The service engine changes the spacecraft’s motion during the lunar journey.",
-        "zh": "服务发动机在月球往返途中改变飞船运动。"
+        "en": "Changes the spacecraft’s motion on the lunar journey.",
+        "zh": "在月球往返途中改变飞船运动。"
       },
       "detail": {
-        "en": "A single hollow main bell is attached below the service module. It turns with the command and service modules when they face the LM; it never remains behind as a floating part. [S25, S90]",
-        "zh": "一个空心主喷管接在服务舱下方。CSM转向登月舱时它也一起转动，不会作为悬空零件留在原处。[S25, S90]"
+        "en": "One main engine sits below the service module. Its hollow nozzle turns with the connected command and service modules when they face the lander. [S25, S90]",
+        "zh": "一台主发动机接在服务舱下方。两舱转向登月舱时，空心喷管也随整体转动。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2677,12 +2677,12 @@
         "zh": "发射逃逸系统"
       },
       "summary": {
-        "en": "The escape system could pull the crew cabin away during a launch emergency.",
-        "zh": "发射紧急情况时，逃逸系统能把乘员舱拉离火箭。"
+        "en": "Can pull the cabin away in a launch emergency.",
+        "zh": "发射紧急时能把乘员舱拉离火箭。"
       },
       "detail": {
-        "en": "The truss and motor form a simplified launch escape system above the cabin. Its top reaches the study’s 111 m stack height. It is already absent in parking orbit and every later configuration; emergency operation is not simulated. [S25, S90]",
-        "zh": "桁架和发动机概括乘员舱上方的发射逃逸系统，顶端达到本研究111米栈高。进入停泊轨道及之后的构型都不显示它；模型不模拟紧急操作。[S25, S90]"
+        "en": "A supporting frame and motor sit above the cabin. The tower’s top reaches the model’s 111 m height. By parking orbit, this system has separated. Emergency operation is not shown. [S25, S90]",
+        "zh": "支架和发动机位于乘员舱上方，顶端达到模型111米总高。进入停泊轨道时，这套系统已分离。画面不演示紧急操作。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2859,12 +2859,12 @@
         "zh": "登月舱下降级"
       },
       "summary": {
-        "en": "The descent stage slows the lunar module and becomes its landing platform.",
-        "zh": "下降级使登月舱减速，并成为着陆平台。"
+        "en": "Slows the lander and supports it on the Moon.",
+        "zh": "让登月舱减速，并在月面支撑它。"
       },
       "detail": {
-        "en": "The octagonal equipment stage supports four legs, the ladder and one descent engine. It remains on the Moon when the ascent stage leaves. Gold-toned insulating surfaces and internal storage are simplified. [S26, S90]",
-        "zh": "八边形设备级支承四条腿、梯子和一台下降发动机。上升级离开时它留在月面。金色隔热表面与内部储存设备经过简化。[S26, S90]"
+        "en": "The octagonal stage carries four legs, a ladder and one descent engine. It stays on the Moon when the ascent stage leaves. Gold-coloured insulation and internal storage are simplified. [S26, S90]",
+        "zh": "八边形下降级装有四条腿、梯子和一台下降发动机，上升级离开后仍留在月面。金色隔热表面和内部储存设备简化。[S26, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3008,12 +3008,12 @@
         "zh": "下降发动机"
       },
       "summary": {
-        "en": "The descent engine supplies the braking thrust used for landing.",
-        "zh": "下降发动机提供着陆减速所需推力。"
+        "en": "Provides thrust to slow the lander for touchdown.",
+        "zh": "提供着陆减速所需的推力。"
       },
       "detail": {
-        "en": "This one engine belongs to the descent stage and remains with it. Its hollow nozzle is separate from the ascent engine above; neither burn nor landing trajectory is integrated. [S26, S90]",
-        "zh": "这一台发动机属于下降级并随它留下。空心喷管与上方上升发动机分开；模型不积分燃烧过程或着陆轨迹。[S26, S90]"
+        "en": "The descent stage has one engine, which stays with it on the Moon. Its hollow nozzle is separate from the ascent engine above. The model shows both engines without calculating their burns or landing paths. [S26, S90]",
+        "zh": "下降级有一台发动机，随它留在月面。空心喷管与上方的上升发动机分开。模型显示两台发动机，不计算燃烧过程或着陆轨迹。[S26, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -3108,12 +3108,12 @@
         "zh": "四条着陆支腿"
       },
       "summary": {
-        "en": "Four landing assemblies spread the load onto four footpads.",
-        "zh": "四组着陆支腿把载荷分散到四个足垫上。"
+        "en": "Spread the load across four footpads.",
+        "zh": "把载荷分散到四个足垫上。"
       },
       "detail": {
-        "en": "Four radial copies each contain a primary strut, two secondary braces and one pad. Deployed pad bottoms share y=85.6 m before the landed offset brings them to y=0. A compressed X/Z terminal envelope represents stowage inside the adapter; the model shows folded and deployed shapes rather than an exact hinge mechanism or folding path. [S26, S90]",
-        "zh": "四个径向重复组件各有一根主支柱、两根副撑和一个足垫。展开后足垫底部共处y=85.6米，着陆偏移再把它们移到y=0。适配器内的收拢状态用X/Z压缩终态包络表示；模型展示收拢和展开的形态，不表示精确铰链机构或折叠路径。[S26, S90]"
+        "en": "Each of the four legs has a main strut, two braces and a footpad. The deployed pads meet the same flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
+        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。展开后，足垫落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3232,12 +3232,12 @@
         "zh": "登月舱上升舱"
       },
       "summary": {
-        "en": "The ascent cabin carries two astronauts from the lunar surface back toward the command module.",
-        "zh": "上升舱搭载两名宇航员从月面返回指令舱所在处。"
+        "en": "Carries two astronauts back to lunar orbit.",
+        "zh": "搭载两名宇航员返回月球轨道。"
       },
       "detail": {
-        "en": "Angular pressure-cabin and equipment-bay forms follow the NASA overview. The crew work standing; this is not a streamlined cone. The front hatch, two windows and top docking port share the ascent body’s pose. Antennas and detailed support equipment are omitted. [S26, S90]",
-        "zh": "折面压力舱和设备舱形态依据NASA总览。乘员站立工作，舱体不是流线圆锥。前舱门、两扇窗和顶部对接口都随上升舱运动；省略天线和详细支持设备。[S26, S90]"
+        "en": "The angular cabin holds the crew, who work standing. Its front hatch, two windows and top docking port move with it. The model follows the broad NASA layout and leaves out antennas and detailed support equipment. [S26, S90]",
+        "zh": "有棱角的舱体容纳站立工作的乘员。前舱门、两扇窗和顶部对接口随它一起移动。模型依据NASA总体布局，省去天线和详细支持设备。[S26, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3375,12 +3375,12 @@
         "zh": "上升发动机"
       },
       "summary": {
-        "en": "The ascent engine lifts the ascent stage away from the descent platform.",
-        "zh": "上升发动机把上升级从下降平台送离。"
+        "en": "Lifts the ascent stage from the platform.",
+        "zh": "把上升级从下降平台送离。"
       },
       "detail": {
-        "en": "The single small bell belongs to the ascent stage and leaves with it. It occupies the central opening above the descent engine; the two are separate engines attached to different stages. [S26, S90]",
-        "zh": "这个小型单喷管属于上升级并随它离开，位于下降发动机上方的中央开口。两台发动机独立，分别连接不同级段。[S26, S90]"
+        "en": "One small nozzle sits in the central opening above the descent engine. It belongs to the ascent stage and leaves with it. The ascent and descent stages each have their own engine. [S26, S90]",
+        "zh": "一个小喷管位于下降发动机上方的中央开口，属于上升级并随它离开。上升级和下降级各有自己的发动机。[S26, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -3475,12 +3475,12 @@
         "zh": "两扇前窗"
       },
       "summary": {
-        "en": "Two triangular forward windows let the standing crew see the landing area.",
-        "zh": "两扇三角形前窗让站立的乘员观察着陆区。"
+        "en": "Let the standing crew see the landing area.",
+        "zh": "让站立的乘员看见着陆区。"
       },
       "detail": {
-        "en": "Both front windows belong to one selectable part and sit above the central hatch. They follow the ascent cabin in every configuration. The overhead docking window is omitted, so this part does not claim to show every LM window. [S26, S90]",
-        "zh": "两扇前窗属于一个可选零件，位于中央舱门上方，所有构型中都随上升舱运动。模型省略顶部对接窗，因此这个零件不表示登月舱全部舷窗。[S26, S90]"
+        "en": "Two triangular windows sit above the central hatch and move with the ascent cabin. You can select both as one part. The model leaves out the overhead docking window. [S26, S90]",
+        "zh": "两扇三角窗位于中央舱门上方，随上升舱移动，可作为一个零件选择。模型省去顶部对接窗。[S26, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3556,12 +3556,12 @@
         "zh": "唯一的前方舷梯"
       },
       "summary": {
-        "en": "One ladder gives the crew a route down the forward landing leg.",
-        "zh": "一支舷梯沿前方着陆腿为乘员提供下行通路。"
+        "en": "Provides a route down the front leg.",
+        "zh": "提供沿前方支腿下行的通路。"
       },
       "detail": {
-        "en": "Only the forward leg has a ladder. It stays with the descent stage during ascent. Its stowed terminal envelope is compressed with the landing gear; rung spacing is illustrative. [S26, S90]",
-        "zh": "只有前方支腿带梯子。上升级升空时，梯子随下降级留下。它的收拢终态包络与支腿一起压缩；横档间距为示意。[S26, S90]"
+        "en": "Only the front leg carries a ladder. It stays with the descent stage on the Moon. In the model, the folded ladder is compressed with the legs and its rung spacing is simplified. [S26, S90]",
+        "zh": "只有前方支腿带梯子，它随下降级留在月面。模型中收拢的梯子与支腿一起压缩，横档间距简化。[S26, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3841,12 +3841,12 @@
         "zh": "登月舱对接口"
       },
       "summary": {
-        "en": "The top docking port accepts the command module’s probe and joins the two cabins.",
-        "zh": "顶部对接口接纳指令舱探杆，并把两舱连接起来。"
+        "en": "Receives the probe and connects the cabins.",
+        "zh": "接纳探杆，连接两舱。"
       },
       "detail": {
-        "en": "Its interface centre is [0,92.5,0] m in the launch frame. Docked, extracted and rendezvous poses align it exactly with the probe tip. The tunnel is a simplified open ring; seals and docking-latch kinematics are omitted. [S25, S26, S90]",
-        "zh": "发射基准中的接口中心为[0,92.5,0]米。对接、抽取和交会姿态都把它与探杆尖端准确对齐。通道用简化开环表示，省略密封和锁扣运动机构。[S25, S26, S90]"
+        "en": "The port on top of the lunar module meets the command-module probe during docking, extraction and rendezvous. An open ring shows the passage between cabins. Seals and moving latches are left out. [S25, S26, S90]",
+        "zh": "登月舱顶部接口在对接、抽取和交会时接上指令舱探杆。开环显示两舱之间的通道，省去密封件和活动锁扣。[S25, S26, S90]"
       },
       "primitive": {
         "kind": "torus",
@@ -3929,7 +3929,7 @@
       "id": "upper-stages",
       "name": {
         "en": "Upper stages",
-        "zh": "上面级"
+        "zh": "上面两级"
       },
       "color": "token:holder-2"
     },
@@ -13767,15 +13767,15 @@
         "zh": "构型"
       },
       "value": {
-        "en": "Apollo 11 study",
-        "zh": "阿波罗11号研究"
+        "en": "Apollo 11 model",
+        "zh": "阿波罗11号模型"
       },
       "tag": "design"
     },
     {
       "key": {
         "en": "Launch height",
-        "zh": "发射栈高"
+        "zh": "发射总高"
       },
       "value": "111 m",
       "tag": "typical"
@@ -13792,8 +13792,8 @@
   "telemetry": [
     {
       "key": {
-        "en": "Reference engines · TYPICAL",
-        "zh": "参考级发动机·典型"
+        "en": "Engines in selected stage · TYPICAL",
+        "zh": "所选级发动机·典型"
       },
       "unit": "",
       "follow": "engine-count",
@@ -14002,7 +14002,7 @@
       {
         "id": "show-sic",
         "label": {
-          "en": "Show Sic",
+          "en": "Show first stage",
           "zh": "显示第一级"
         },
         "kind": "state",
@@ -14020,7 +14020,7 @@
       {
         "id": "show-sii",
         "label": {
-          "en": "Show Sii",
+          "en": "Show second stage",
           "zh": "显示第二级"
         },
         "kind": "state",
@@ -14038,7 +14038,7 @@
       {
         "id": "show-upper",
         "label": {
-          "en": "Show Upper",
+          "en": "Show third stage and instrument unit",
           "zh": "显示第三级与仪器舱"
         },
         "kind": "state",
@@ -14056,7 +14056,7 @@
       {
         "id": "show-sla",
         "label": {
-          "en": "Show Sla",
+          "en": "Show adapter",
           "zh": "显示适配器"
         },
         "kind": "state",
@@ -14074,7 +14074,7 @@
       {
         "id": "show-cm",
         "label": {
-          "en": "Show Cm",
+          "en": "Show command module",
           "zh": "显示指令舱"
         },
         "kind": "state",
@@ -14092,7 +14092,7 @@
       {
         "id": "show-probe",
         "label": {
-          "en": "Show Probe",
+          "en": "Show docking probe",
           "zh": "显示对接探杆"
         },
         "kind": "state",
@@ -14110,7 +14110,7 @@
       {
         "id": "show-sm",
         "label": {
-          "en": "Show Sm",
+          "en": "Show service module",
           "zh": "显示服务舱"
         },
         "kind": "state",
@@ -14128,7 +14128,7 @@
       {
         "id": "show-lm-descent",
         "label": {
-          "en": "Show Lm Descent",
+          "en": "Show descent stage",
           "zh": "显示下降级"
         },
         "kind": "state",
@@ -14146,7 +14146,7 @@
       {
         "id": "show-lm-ascent",
         "label": {
-          "en": "Show Lm Ascent",
+          "en": "Show ascent stage",
           "zh": "显示上升级"
         },
         "kind": "state",
@@ -14164,7 +14164,7 @@
       {
         "id": "show-les",
         "label": {
-          "en": "Show Les",
+          "en": "Show escape system",
           "zh": "显示逃逸系统"
         },
         "kind": "state",
@@ -14192,23 +14192,23 @@
             "zh": "发射构型"
           },
           "first-off": {
-            "en": "First Off",
+            "en": "First stage separated",
             "zh": "一级分离"
           },
           "parking": {
-            "en": "Parking",
+            "en": "Earth parking orbit",
             "zh": "地球停泊轨道"
           },
           "translunar": {
-            "en": "Translunar",
+            "en": "Towards the Moon",
             "zh": "向月球出发"
           },
           "separated": {
-            "en": "Separated",
+            "en": "Spacecraft separated",
             "zh": "飞船分离"
           },
           "turned": {
-            "en": "Turned",
+            "en": "Spacecraft turned",
             "zh": "飞船转身"
           },
           "docked": {
@@ -14216,19 +14216,19 @@
             "zh": "完成对接"
           },
           "extracted": {
-            "en": "Extracted",
+            "en": "Lander extracted",
             "zh": "抽出登月舱"
           },
           "lunar": {
-            "en": "Lunar",
+            "en": "On the Moon",
             "zh": "月面构型"
           },
           "ascent": {
-            "en": "Ascent",
+            "en": "Ascent stage rising",
             "zh": "上升级升空"
           },
           "rendezvous": {
-            "en": "Rendezvous",
+            "en": "Lunar-orbit rendezvous",
             "zh": "月球轨道交会"
           },
           "homeward": {
