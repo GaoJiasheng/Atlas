@@ -1,5 +1,7 @@
 /** Draft astronomy fixture: authored teaching states, scalar bindings and independent catalogue. */
 import { expect, test, type Page } from '@playwright/test';
+// The catalogue route below must reach the page, not a service-worker cache (the sky chunk now loads after the worker claims the page).
+test.use({ serviceWorkers: 'block' });
 
 type Value = number | string | boolean;
 type Vector = Record<string, number>;

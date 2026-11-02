@@ -281,9 +281,8 @@ function Replay({ ids, slow, ui }: { ids: readonly string[]; slow: number; ui: S
 }
 
 /** Play these timelines from the start (the stage watches the count). */
-export function replay(ui: SpaceUiStore, ids: readonly string[]): void {
-  ui.setState({ simReplay: { n: ui.getState().simReplay.n + 1, ids: [...ids] } });
-}
+export { replay } from '../lib/sim/replay-ui';
+import { replay } from '../lib/sim/replay-ui';
 
 function LifeCycleFold({ file, sim }: { file: PartsFile; sim: SimData }) {
   const t = useT();

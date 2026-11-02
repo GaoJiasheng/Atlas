@@ -6,6 +6,9 @@
  * S / E / N / L display modes. An explanation beat is drawn by `BeatModel`;
  * the background chapter shows one specimen fraction ({3/4}) in every view.
  */
+import { Suspense, useLayoutEffect } from 'react';
+import { SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';
+import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, ArrayModel, BlocksModel, WholeLine, DecimalTask, DecimalGrid, ClockModel, Timeline, InstrumentModel, NetModel } from './lazy-models';
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
@@ -19,42 +22,28 @@ import { solvedState } from '../lib/solve';
 import { toImproper, toMixed, valueOnLine, type Frac } from '../lib/fraction';
 import { describePicture, fractionWords } from '../lib/words';
 import type { Rect } from './layout';
-import { BarModel, EQUIV_ROW, LINE_ROW, WHOLE_GAP } from './BarModel';
-import { CircleModel } from './CircleModel';
-import { NumberLine } from './NumberLine';
-import { Rows, type RowSpec } from './Rows';
-import { BarModelDiagram } from './BarModelDiagram';
-import { CutBar } from './CutBar';
+import { EQUIV_ROW, LINE_ROW, WHOLE_GAP } from './bar-spacing';
+import { type RowSpec } from './Rows';
 import { OptionGrid, optionGrid, type OptionCell } from './OptionGrid';
 import { SvgFrac, type BarObject } from './svg';
 import { BeatModel } from './BeatModel';
 import { GridModel, describeFigure } from './GridModel';
-import type { ArrayModelSpec, GridModelSpec } from '../schema';
 import { figureOf } from '../lib/grid';
-import { ArrayModel, arrayAspect, describeArray } from './ArrayModel';
-import { BlocksModel } from './BlocksModel';
-import { WholeLine } from './WholeLine';
+import { arrayAspect, describeArray } from './array-layout';
 import { plainText } from '../../../lib/rich-text';
 import { decimalWords, wholeWords } from '../lib/words';
 import { matOf, total as blockTotal } from '../lib/blocks';
 import { isDec, isDecimalModel, isDecimalTask } from '../lib/decimal-tasks';
 import { formatDecimal } from '../lib/decimal';
-import type { ClockModelSpec, DecimalGridModelSpec } from '../schema';
-import { DecimalTask } from './DecimalTask';
 import { decimalViewModel } from '../lib/decimal-views';
 import { DecimalModel } from './BeatModel';
-import { describeMoney } from './MoneyModel';
-import { DecimalGrid } from './DecimalGrid';
+import { describeMoney } from './money-description';
 import { facesOf } from '../lib/clock';
-import { ClockModel, describeClock } from './ClockModel';
-import { Timeline } from './Timeline';
-import { InstrumentModel } from './Instrument';
-import type { InstrumentModelSpec } from '../schema';
+import { describeClock } from './clock-description';
 import { isQty, qtyText } from '../lib/value';
 import { qtyWords } from '../lib/words';
-import { NetModel, sharedUnit } from './NetModel';
+import { sharedUnit } from './net-unit';
 import type { NetHold } from './BeatModel';
-import type { NetModelSpec } from '../schema';
 import { netItems } from '../lib/net-view';
 import { describeNet } from '../lib/net-description';
 
@@ -66,6 +55,8 @@ export interface DisplayModes {
 }
 
 export interface StageContentProps {
+  /** Re-measure the equation once an asynchronously loaded drawing commits. */
+  onReady?(): void;
   defs: string;
   box: Rect;
   locale: Locale;
@@ -105,6 +96,15 @@ function Symbol({ x, y, f }: { x: number; y: number; f: Frac | null }) {
 }
 
 export function StageContent(p: StageContentProps) {
+  return <Suspense fallback={null}><StageModel {...p} /><StageReady {...p} /></Suspense>;
+}
+
+function StageReady({ onReady, beat, task, specimen, view }: StageContentProps) {
+  useLayoutEffect(() => onReady?.(), [onReady, beat, task, specimen, view]);
+  return null;
+}
+
+function StageModel(p: StageContentProps) {
   const { box } = p;
   if (box.w < 40 || box.h < 40) return null;
   if (p.specimen) return <Specimen {...p} view={p.specimen} />;
@@ -118,47 +118,6 @@ export function StageContent(p: StageContentProps) {
 /* ------------------------------------------------------------------ */
 /* Background chapter: one fraction, four ways                          */
 /* ------------------------------------------------------------------ */
-
-/** The background chapter of a grid lesson: one rectangle, covered and walked round. */
-export const SPECIMEN_GRID: GridModelSpec = {
-  kind: 'grid',
-  unit: 'cm',
-  show: 'cells',
-  figures: [{ id: 'a', rect: [0, 0, 4, 3], tone: 'cold' }],
-  tiles: { a: 'all' },
-  walk: { a: 'all' },
-  dims: [
-    { side: 'top', figure: 'a' },
-    { side: 'left', figure: 'a' },
-  ],
-};
-
-/** The background chapter of a lesson on whole numbers: an array of 3 rows of 4, its counts braced. */
-export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', layout: 'rows', rows: 3, cols: 4, braces: true, container: 'ring' };
-
-/** The background chapter of a lesson on time: a clock face at 7:20 (the hour hand a third of the way to 8). */
-export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };
-
-/** The background chapter of a measuring lesson (docs/32 §3.7): a 0–1000 g dial scale, its needle at 0 (look before you weigh). */
-export const SPECIMEN_DIAL: InstrumentModelSpec = {
-  kind: 'instrument',
-  type: 'dial',
-  unit: 'g',
-  from: { units: 0, dp: 0 },
-  to: { units: 1000_000_000, dp: 0 },
-  major: { units: 100_000_000, dp: 0 },
-  minor: { units: 50_000_000, dp: 0 },
-  value: { units: 0, dp: 0 },
-  labels: 'major',
-  scale: true,
-  tilt: 'auto',
-};
-
-/** The background chapter of a nets lesson (docs/39 §3.7): the cross-shaped cube net folded half way, isometric. */
-export const SPECIMEN_NET: NetModelSpec = { kind: 'net', solid: { type: 'cuboid', size: [1, 1, 1] }, layout: { cubeNet: '141-e' }, fold: 0.5, stagger: true, view: 'iso', turn: 0 };
-
-/** The background chapter of a lesson on decimals: a hundred grid with 0.35 shaded. */
-export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
@@ -712,3 +671,5 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   }
   return null;
 }
+
+export { SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';

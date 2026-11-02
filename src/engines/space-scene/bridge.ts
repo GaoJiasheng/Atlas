@@ -141,6 +141,10 @@ export interface SensesReading {
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {
+  /** Stage content that has really mounted (lazy chunks resolved): `scene` (clocks, parts, probes) and `overlays` (the sim overlays). */
+  stageMarks: Set<string>;
+  /** The scene asks for sim overlays now, so `__atlas.ready` also waits for the `overlays` mark. */
+  overlaysExpected: boolean;
   solarSky?: {status:string;utc?:string;latitude?:number;depth?:boolean;rows?:unknown[]};
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
@@ -244,8 +248,15 @@ export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number
   });
 }
 
+/** True once the lazily loaded stage content is on the stage (the canvas alone exists earlier). */
+export function stageReady(bridge: StageBridge): boolean {
+  return bridge.stageMarks.has('scene') && (!bridge.overlaysExpected || bridge.stageMarks.has('overlays'));
+}
+
 export function createBridge(): StageBridge {
   return {
+    stageMarks: new Set(),
+    overlaysExpected: false,
     senses: {},
     sensesSeek: () => false,
     sensesEchoSeek: () => false,

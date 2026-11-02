@@ -25,7 +25,7 @@ import { drawIndex, pageSeed } from './lib/pool';
 import { formatFrac, lcm } from './lib/fraction';
 import { isUnit, unitText } from './lib/value';
 import { formatDecimal, withPlaces } from './lib/decimal';
-import { DPLACES } from './schema';
+import { DPLACES } from './constants';
 import { asFrac } from './lib/check';
 import { numText, placedValue, readDecimals, shadedValue, shiftResult } from './lib/decimal-tasks';
 import { roundingEnds } from './lib/dline';

@@ -13,6 +13,7 @@
  * file, never values.
  */
 import { z } from 'zod';
+import { DPLACES } from './constants';
 import { bilingual, kebabId, theme } from '../../content/schema/common';
 import { sourcesFile } from '../../content/schema/sources';
 import { glossaryFile } from '../../content/schema/glossary';
@@ -20,6 +21,8 @@ import { parseFrac, type Frac } from './lib/fraction';
 import { ANSWER_UNITS, CLOCK12_NOTATIONS, CLOCK24_NOTATIONS, COMPOUND_PAIRS, DAY, DEFAULT_NOTATION, parseClock, parseDuration, parseQuantity, parseTagged, parseWhole, UNITS, WHOLE_MAX, type AnswerValue, type DecValue, type DurValue, type QtyValue } from './lib/value';
 import { DECIMAL_MAX_WHOLE, fromWhole, parseDecimal, wholePart, type Decimal } from './lib/decimal';
 import { CUBE_NET_NAMES } from './lib/net';
+
+export { DPLACES } from './constants';
 
 /* ------------------------------------------------------------------ */
 /* Vocabulary                                                          */
@@ -616,7 +619,6 @@ const gridModel = z
 /* Decimals (docs/29 §3.2–3.5, model A6) */
 const decimalTone = z.enum(['cold', 'hot', 'signal']);
 /** The places of a decimal place-value chart, highest first: thousands … ones, tenths, hundredths, thousandths. */
-export const DPLACES = ['Th', 'H', 'T', 'O', 't', 'h', 'th'] as const;
 export type DPlace = (typeof DPLACES)[number];
 /** Trades on the chart: 10 of a place for 1 of the next (`h>t`), or 1 for 10 of the one below (`t>h`). */
 export const DTRADES = ['th>h', 'h>t', 't>O', 'O>T', 'T>H', 'H>Th', 'Th>H', 'H>T', 'T>O', 'O>t', 't>h', 'h>th'] as const;

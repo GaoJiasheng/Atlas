@@ -7,7 +7,7 @@
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
 import type { DecimalWork, InputSpec, Task } from '../schema';
-import { DPLACES } from '../schema';
+import { DPLACES } from '../constants';
 import { formatDecimal, withPlaces, type Decimal } from './decimal';
 import { formatFrac } from './fraction';
 import { inputSpecOf, phasesOf, type TaskState } from './state';

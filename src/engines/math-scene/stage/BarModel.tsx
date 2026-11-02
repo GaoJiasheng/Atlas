@@ -8,6 +8,7 @@
  * Options: L labels each part 1/n, E draws finer equivalent cuts beneath,
  * N an aligned number line; folds leave creases and animate.
  */
+import { WHOLE_GAP, EQUIV_ROW } from './bar-spacing';
 import { useId } from 'react';
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
@@ -51,10 +52,6 @@ export interface BarModelProps {
 }
 
 /** Vertical gap between stacked wholes. */
-export const WHOLE_GAP = 18;
-/** Height under the bar taken by the E and N overlays. */
-export const EQUIV_ROW = 22;
-export const LINE_ROW = 34;
 
 /** Left edges of the parts as fractions of the length. */
 function edges(parts: number, cuts?: number[]): number[] {
@@ -221,3 +218,5 @@ export function AlignedLine({ x, y, w, parts }: { x: number; y: number; w: numbe
     </g>
   );
 }
+
+export { WHOLE_GAP, EQUIV_ROW, LINE_ROW } from './bar-spacing';

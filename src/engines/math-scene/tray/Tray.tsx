@@ -428,10 +428,4 @@ function OrderSlots({ task, state, ctl, locale, locked, ghost }: { task: Task; s
 }
 
 /** Parts a bar shows narrower than a finger (44 px) once cut or renamed: the −/+ stepper appears. */
-export function partsAreNarrow(task: Task | null, width: number): boolean {
-  if (!task) return false;
-  const m = task.model;
-  const parts = m.kind === 'bar' || m.kind === 'circle' ? (m.parts ?? 1) : 1;
-  const finest = task.kind === 'build-sum' && task.convert ? parts * task.convert : parts;
-  return width / Math.max(1, finest) < 44;
-}
+export { partsAreNarrow } from './parts';

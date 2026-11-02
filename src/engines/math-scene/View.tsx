@@ -42,15 +42,16 @@ import { cardValue, workingLines } from './lib/working';
 import { formatFrac } from './lib/fraction';
 import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
-import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, StageContent } from './stage/Stage';
+import { StageContent } from './stage/Stage';
+import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET } from './stage/specimens';
 import type { NetShown } from './stage/NetModel';
-import { NetTools } from './tray/NetControls';
+import { NetTools, Tray, PracticeSummary } from './lazy-ui';
 import { foldOf, lessonSolids, netItems } from './lib/net-view';
 import { solidName } from './lib/net-description';
 import { isDecimalModel } from './lib/decimal-tasks';
-import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/BeatModel';
+import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/beat-info';
 import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layout';
-import { Tray, partsAreNarrow } from './tray/Tray';
+import { partsAreNarrow } from './tray/parts';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
 import { decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
 import { lessonUnits } from './lib/measure-working';
@@ -61,7 +62,6 @@ import { MathOverlay } from './hud/Overlay';
 import { BeatLine } from './hud/BeatLine';
 import { ChapterIndex } from './hud/ChapterIndex';
 import { PlateBlock, modelRows, type PlateRow } from './hud/PlateBlock';
-import { PracticeSummary } from './practice/Summary';
 import './math-scene.css';
 
 const both = (key: Parameters<typeof t>[1]): BilingualText => ({ en: t('en', key), zh: t('zh', key) });
@@ -344,6 +344,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const modelBox: Rect = { ...L.free, h: Math.max(0, L.free.h - equationH - toolsH) };
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);
+  const [, setStageVersion] = useState(0);
+  const stageReady = useCallback(() => setStageVersion((n) => n + 1), []);
   const [equationTop, setEquationTop] = useState(0);
   useLayoutEffect(() => {
     const g = drawingRef.current;
@@ -558,14 +560,14 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <Defs id={defs} />
         {!showSummary &&
           (background ? (
-            <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} net={netHold} />
+            <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} net={netHold} />
           ) : explain ? (
             <g ref={drawingRef} key={`${s.chapter}|${beatShape(explain)}${reduced ? `|${cur.beat}` : ''}`} className="ms-beat" data-move={explain.move ?? 'none'} data-model={explain.model.kind}>
-              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} net={netHold} />
+              <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} net={netHold} />
             </g>
           ) : (
             <g ref={drawingRef} key={task?.id ?? 'none'} className="ms-beat" data-move="morph">
-              <StageContent defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} net={netHold} />
+              <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} net={netHold} />
             </g>
           ))}
         {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}

@@ -33,7 +33,8 @@ import { decimateSkinned, edgesOf, withoutHands } from './bodyGeometry';
 export const WIRE_CREASE = 20;
 /** Ink opacity of the edges and of the silhouette fill. */
 export const WIRE_LINE_OPACITY = 0.55;
-export const WIRE_FILL_OPACITY = 0.08;
+export { WIRE_FILL_OPACITY } from './bodyStyle';
+import { WIRE_FILL_OPACITY } from './bodyStyle';
 /** Triangles of the stand-in wire mesh (a glb without `skin-wire`). */
 const STAND_IN_TRIANGLES = 4000;
 /** The edges sit this much nearer than the depth pass (metres): in front of it, still behind a muscle under the skin. */

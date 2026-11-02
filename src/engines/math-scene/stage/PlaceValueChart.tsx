@@ -21,7 +21,7 @@ import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import type { BeatMove, DPlace, DTrade, PlaceValueSpec, Task } from '../schema';
-import { DPLACES } from '../schema';
+import { DPLACES } from '../constants';
 import type { Action, TaskState } from '../lib/state';
 import { formatDecimal, thousandths, type Decimal } from '../lib/decimal';
 import { asDecimal, below, chartColumns, dcounts, dstandard, dtotal, dtradeOf, discFace, PLACE_EXP, placeAt, placesBetween, placesOf, shiftedValue, spanOf, type DCounts } from '../lib/placevalue';

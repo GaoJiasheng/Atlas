@@ -10,7 +10,7 @@ import { useMemo, useSyncExternalStore } from 'react';
 import { useStore } from 'zustand';
 import { useScene, useSceneContext, useSceneStore } from '../../core/context';
 import type { SceneStore } from '../../core/store';
-import { getOrbitSession } from '../lib/sim/orbit-session';
+import { getOrbitSession } from '../lib/sim/orbit-resource';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, SpaceChapterState } from '../schema';
 import type { SimData, SimTry, SimValue, SimValues } from '../sim-schema';
