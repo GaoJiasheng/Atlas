@@ -73,7 +73,7 @@ describe('fossils rebuild: reusable anatomical geometry', () => {
     expect(scales).toHaveLength(12); // two tibiae, two tarsi, eight toes
     expect(scales.filter(p=>p.kind==='sweep'&&p.rings)).toHaveLength(10); // hallux uses the scale material's continuous pattern
     for(const part of file.parts.filter(p=>p.id.endsWith('-study'))) {
-      expect(part.material).toEqual({color:'plastic',tint:'token:f-drag'});
+      expect(part.material).toEqual({color:'plastic',tint:'token:fossil'});
       expect(part.castShadow).toBe(true);
     }
     const platform=geometry('study-plinth')[0]!;
@@ -146,7 +146,7 @@ describe('fossils rebuild: vendored museum asset', () => {
     expect(new Set(evidence.map(n=>n.getMesh())).size).toBe(12);
     const triangles=(n:typeof nodes[number])=>n.getMesh()!.listPrimitives().reduce((a,p)=>a+p.getIndices()!.getCount()/3,0);
     expect(evidence.reduce((a,n)=>a+triangles(n),0)).toBeLessThan(100_000);
-    expect(museum.reduce((a,n)=>a+triangles(n)*2,0)).toBeLessThan(350_000); // includes shadow pass
+    expect(museum.reduce((a,n)=>a+triangles(n),0)).toBeLessThan(200_000); // shadows are disabled; three studies share one mesh
     for(const part of file.parts.filter(p=>p.group==='skeleton')){expect(part.primitive).toBeUndefined();expect(part.extra).toBeUndefined();expect(authored.find(p=>p.id===part.id)?.primitive).toBeDefined();} // no runtime tessellation/replacement on an evidence filter
     // Three separate ribcages, with enough depth separation to avoid their
     // silhouettes interleaving from the elevated museum camera.

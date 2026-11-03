@@ -146,6 +146,7 @@
   --muscle-2: #ad7b6c;
   --muscle-3: #8f6a62;
   --bone: #e0d6bf;
+  --fossil: #6e5a44; /* Mineralised museum bone / fossil casts. */
   /* Exercise mode (docs/06 动作模式数据手册): the solid figure under the muscles, warm light grey. */
   --mannequin: #bfb8ac;
   /* Many-state maps (docs/06 TimeScene 按国配色): eight muted hues, distinct for colour-blind readers by hue and lightness. */
@@ -279,6 +280,7 @@
   --muscle-2: #9d5b53;
   --muscle-3: #70443f;
   --bone: #cfc5af;
+  --fossil: #97816a; /* Warm brown lifted for the dark plate. */
   --mannequin: #6f7174;
   --holder-1: #7f84c4;
   --holder-2: #d9bd72;

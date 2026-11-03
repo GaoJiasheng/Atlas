@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import { buildBird } from '../kits/bird';
 import { boneSweep, diplodocid, ribCage, theropodForelimb, theropodHindlimb, theropodPelvis, theropodSkull, vertebra, vertebralColumn } from '../kits/dinosaur-skeleton';
+import { buildSauropods } from './build-sauropods';
 import { bakeMuseum } from './bake-museum';
 import { partBounds } from '../../../src/engines/space-scene/lib/parts';
 import { partsFile, type Part, type Primitive } from '../../../src/engines/space-scene/schema';
@@ -210,3 +211,6 @@ partsFile.parse(result);
 fs.writeFileSync(path,JSON.stringify(result,(_,v)=>typeof v==='number'?Math.round(v*1e6)/1e6:v,2)+'\n');
 fs.writeFileSync('scripts/geo/fossils-and-skeletons/model-layout.json',JSON.stringify({studies:layout,cameras},null,2)+'\n');
 console.log(`Wrote ${parts.length-1} selectable parts plus context; six exact-AABB study transforms.`);
+
+// Retain the accepted study transform, then replace only its anatomical mesh.
+await buildSauropods();

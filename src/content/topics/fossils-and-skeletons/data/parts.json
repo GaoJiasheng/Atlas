@@ -11004,7 +11004,7 @@
       "mesh": "prince-study",
       "material": {
         "color": "plastic",
-        "tint": "token:f-drag"
+        "tint": "token:fossil"
       }
     },
     {
@@ -11036,7 +11036,7 @@
       "mesh": "apollonia-study",
       "material": {
         "color": "plastic",
-        "tint": "token:f-drag"
+        "tint": "token:fossil"
       }
     },
     {
@@ -11068,7 +11068,7 @@
       "mesh": "twinky-study",
       "material": {
         "color": "plastic",
-        "tint": "token:f-drag"
+        "tint": "token:fossil"
       }
     },
     {

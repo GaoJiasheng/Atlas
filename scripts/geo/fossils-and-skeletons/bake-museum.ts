@@ -39,7 +39,7 @@ export async function bakeMuseum(parts: Part[]): Promise<string> {
     part.mesh = part.id;
     // Fine roughness only: the sand normal map stretched on cortical UVs
     // produced wood-like stripes. A mineral-brown satin finish has no normal map.
-    part.material = {color:'plastic',tint:'token:f-drag'};
+    part.material = {color:'plastic',tint:'token:fossil'};
     delete part.primitive;
     delete part.extra;
   }

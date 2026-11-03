@@ -351,3 +351,118 @@ ordered IDs, simulation, labels, counts, clipping and explode data; the only
 EN/ZH copy change is the context plinth detail. All accepted myna geometry
 is identical after removing colour fields, and the accepted theropod mesh is
 byte-for-byte unchanged. No browser/desktop control or git writes were used.
+
+## Polish 2026-11-03 — round 3, chapter 07 sauropods
+
+Scope: the three generic diplodocid studies only. The theropod and myna,
+flag-only visibility path, 30° chapter/preset/beat cameras, three plinths,
+neutral contact patches, and restored EN/ZH plinth summary are preserved.
+No teaching text, number, part ID, selection, explosion vector, clipping flag,
+chapter/beat reference or simulation value changed. Exactly one new colour
+name, `fossil`, is registered and defined in both existing theme token blocks:
+paper `#6e5a44`, cinema `#97816a`. The three studies use the existing opaque,
+non-emissive plastic finish with that tint; there is no sand normal/albedo.
+
+### Completed anatomy
+
+1. **Scapulae and ilia:** replaced the oval shields with an oblique long
+   scapular strap, expanded glenoid end and anterior acromion; the ilium has a
+   long low arched blade, pre/postacetabular wings and distinct pubic/ischial
+   peduncles around an open acetabular notch. Original closed cortical meshes
+   use rounded contours, variable thickness, bowed surfaces and buttresses.
+   Surface-gradient normals avoid triangulation-dependent flat patches.
+2. **All twelve limbs:** each front hand has five unequal, appressed upright
+   metacarpals in a posteriorly open U, reduced blunt distal phalanges and one
+   medial thumb claw. Each hind foot has five short metatarsal rays, a broad
+   semi-plantigrade base, short articulated toes and a large digit-I claw with
+   successively smaller II–III claws; IV–V are clawless. Refined articular-end
+   profiles of the long bones and retained separate radius/ulna or tibia/fibula.
+3. **All three tails:** retain eighty separate caudal centra on a smooth
+   axis. Centrum radii decrease progressively; proximal transverse processes,
+   neural spines and paired chevron branches shrink independently. Projecting
+   spines vanish by caudal 30, chevrons by 37; the distal half consists solely
+   of small elongated centra. The whip remains legible instead of ending in
+   a dotted sequence of subpixel triangles. Rounded neural-spine crowns also
+   remove the former angular cap silhouettes.
+4. **Preservation and budget:** three nodes still share one mesh. The new
+   `build-sauropods.ts` performs the scoped rebuild and is also the final step
+   of `build-model.ts`. `swap-museum-mesh.ts` copies every retained compressed
+   buffer verbatim, avoiding even the one-unit normal drift caused by an
+   ordinary GLB decode/re-encode. Regression fingerprints confirm every
+   theropod index, position, normal, UV and world transform is identical to
+   accepted HEAD 2463365; all content outside the three material references
+   has the same fingerprint. No shared kit or engine code was edited.
+
+### References actually inspected
+
+- Hatcher (1901), *Diplodocus: its osteology, taxonomy and probable habits*,
+  [BHL/public domain](https://www.biodiversitylibrary.org/part/234818), and its
+  [restoration plate](https://commons.wikimedia.org/wiki/File:Hatcher_Diplodocus.jpg):
+  scapular/iliac silhouettes and diminishing caudal structures. Historical
+  tail dragging and obsolete hand posture are not adopted.
+- [Carnegie Museum mount photograph](https://carnegiemnh.org/memoirs-of-the-carnegie-museum-volume-1-number-1/):
+  viewed for proportions/girdle placement, not traced or redistributed.
+- Osborn & Granger (1901), [fore/hind limbs, p. 204, figs. 4–5](https://www.miketaylor.org.uk/dino/out-of-copyright/Osborn-Granger_1901_sauropod-limbs.pdf):
+  viewed metacarpal photographs for horseshoe topology, unequal rays and
+  articular ends. PDF downloaded and page rendered locally after the first
+  download timed out. Reference images remain in ignored `refs/` only.
+- Wilson & Sereno (1998), [published sauropod phylogeny/anatomy](https://d3qi0qp55mx5f5.cloudfront.net/paulsereno/i/docs/98-JVP-Sauropod_Phylogeny.pdf):
+  rigid U-shaped metacarpal column. Anatomical geometry remains an original
+  generic reconstruction, not a measured mount or discovered-bone inventory.
+
+### Counts and offline visual verification
+
+Complete tessellation/decoded triangles, without back-face culling:
+
+| Geometry | Before | After |
+|---|---:|---:|
+| One shared sauropod, rendered once | 54,040 | 63,500 |
+| Three sauropods on screen | 162,120 | 190,500 |
+| Plinths and twelve contact patches | 2,868 | 2,868 |
+| **Museum chapter total** | **164,988** | **193,368** |
+| Theropod | 86,864 | 86,864 |
+| Myna + comparison feather | 100,884 | 100,884 |
+| All geometry, including hidden studies | 383,704 | 412,084 |
+
+Museum total stays below 200k. `views.shadows: none` is unchanged, so there is
+no extra shadow-map pass. Curved limbs use 16–24 radial samples; minute tail
+centra use 12 and fine chevron sweeps 10. Normal-aware simplification preserves
+cortical curvature within 0.07% assembly error. Selectable/context counts are
+33 + 1, unchanged. The asset remains CC0, 13 resources and 15 nodes; no
+third-party mesh or runtime network access. Byte totals are recorded with the
+final verification below.
+
+Actually viewed CPU depth-buffer previews include the before view, successive
+geometry rounds, front/rear feet, girdles, full individual skeleton, tapering
+tail and paper/cinema museum arrays with the existing HUD-clearance proxy.
+Inspection prompted thicker whip-end centra, refined long-bone profiles,
+normal-aware simplification, analytic girdle normals and rounded spine crowns.
+The rasterizer now rejects near-plane-crossing triangles so a distant tail
+behind a close-up camera cannot project across the foot image.
+
+Preview directory: `/private/tmp/fossils-polish-2026-11-03/`.
+Final files: `round3-final-{sauropod-single,sauropod-girdles,sauropod-feet,
+sauropod-feet-rear,sauropod-tail,museum-paper,museum-cinema,museum-hud-paper,
+museum-hud-cinema}.png`. Baseline: `round3-before-*.png`; intermediate rounds:
+`round3-r1-*` through `round3-r5-*`. Counts:
+`/private/tmp/fossils-round3-counts-final.json`. These are actual decoded
+geometry with approximate CPU lighting, not browser/GPU screenshots.
+
+No requested model item is deferred. Actual browser lighting, interactive
+cutaway/explosion/picking, HUD and GPU acceptance remain for the following
+Claude browser acceptance, as instructed. No browser or desktop was opened;
+no git writes, dependency changes or unrelated topic changes were made.
+
+Final verification: `pnpm check` passes (0 errors, 0 warnings; four existing
+hints); `pnpm validate` passes (94 topics, 0 errors/warnings);
+`pnpm run test --maxWorkers=2` passes the complete test script (254 files,
+6,360 tests); `pnpm build` passes (191 pages). Worker limiting changes no test
+or timeout. Added regressions cover named theme-token resolution/contrast and
+non-emissive finish, front/hind digit and claw topology, caudal taper and loss
+of processes, closed cortical rims, exact accepted-content preservation, exact
+theropod-buffer preservation, the existing 30° composition and decoded budget.
+`git diff --check` is clean. Final GLB: **1,963,212 → 1,869,136 bytes**;
+repeated scoped builds produce the same SHA-256, also matching the exported
+`dist/models/fossils-and-skeletons.glb`:
+`9547dc62d3e4349c6455f6a286cf9ba09766529ae1a74684387cea56f1e5ffa5`.
+Gate logs: `/private/tmp/fossils-round3-{check,validate,test,build}.log`.

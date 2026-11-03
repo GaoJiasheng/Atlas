@@ -30,6 +30,12 @@ for(const node of doc.getRoot().listNodes()){
 fs.writeFileSync(`${out}/${prefix}-mesh-bounds.json`,JSON.stringify(Object.fromEntries([...meshes].map(([id,g])=>{g.computeBoundingBox();return [id,{min:g.boundingBox!.min.toArray(),max:g.boundingBox!.max.toArray()}];})),null,2));
 type Surface={positions:Float32Array;normals:Float32Array;rgb:Color;floor:boolean;opacity:number;catcher?:boolean};
 const tokens:Record<string,Record<string,string>>={paper:{bone:'#e0d6bf','ink-2':'#555047',neutral:'#8a8378',cold:'#4f7f8c','f-drag':'#93602e',lamp:'#ffc96b',mannequin:'#bfb8ac','ink-3':'#857d70','muscle-3':'#8f6a62','carbon-dioxide':'#5e554e'},cinema:{bone:'#cfc5af','ink-2':'#b9b4a8',neutral:'#938c80',cold:'#78a4ae','f-drag':'#d0a16c',lamp:'#ffd88f',mannequin:'#6f7174','ink-3':'#8c877c','muscle-3':'#70443f','carbon-dioxide':'#8a786a'}};
+// Always resolve the new fossil tint from the actual theme tokens.
+const css=fs.readFileSync('src/theme/tokens.css','utf8');
+for(const theme of ['paper','cinema']){
+ const at=css.indexOf(`:root[data-theme="${theme}"] {`),body=css.slice(at,css.indexOf('\n}',at));
+ Object.assign(tokens[theme]!,Object.fromEntries([...body.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)].map(m=>[m[1]!,m[2]!] )));
+}
 function surfaces(parts:Part[],theme:string,explode=false){
  const result:Surface[]=[];
  for(const part of parts){
@@ -65,6 +71,9 @@ function render(shapes:Surface[],camera:PerspectiveCamera,theme:string,caption:s
   const points=s.positions,ns=s.normals,v=new Vector3(),q:number[]=new Array(9);
   for(let t=0;t<points.length;t+=9){
    for(let k=0;k<3;k++){v.fromArray(points,t+k*3).applyMatrix4(matrix);q[k*3]=(v.x*.5+.5)*width;q[k*3+1]=(-v.y*.5+.5)*height;q[k*3+2]=v.z;}
+   // A close-up can leave the distant skull/tail behind its near plane.
+   // Reject crossing triangles instead of projecting them across the image.
+   if([q[2]!,q[5]!,q[8]!].some(z=>z < -1 || z > 1))continue;
    const ax=q[0]!,ay=q[1]!,bx=q[3]!,by=q[4]!,cx=q[6]!,cy=q[7]!;
    const d=(by-cy)*(ax-cx)+(cx-bx)*(ay-cy);if(Math.abs(d)<1e-7)continue;
    const x0=Math.max(0,Math.floor(Math.min(ax,bx,cx))),x1=Math.min(width-1,Math.ceil(Math.max(ax,bx,cx)));
@@ -102,6 +111,11 @@ const fitted=museumHudCamera(preset,W,H,hud.panels);
 const fittedCamera=cam(fitted.camera.position,fitted.camera.target);
 if(fitted.framing){const [x,y]=fitted.framing.shift;fittedCamera.setViewOffset(W,H,-x*W,y*H,W,H);}
 const shots=[
+ {name:'sauropod-single',parts:[museum[1]!],camera:cam([0,2.4,10],[-.35,1.2,0]),theme:'paper'},
+ {name:'sauropod-girdles',parts:[museum[1]!],camera:cam([-.25,2.4,2.7],[-.65,1.2,0],40),theme:'paper'},
+ {name:'sauropod-feet',parts:[museum[1]!],camera:cam([-.15,.80,1.7],[-.60,.20,.05],40),theme:'paper'},
+ {name:'sauropod-feet-rear',parts:[museum[1]!],camera:cam([.6,.65,-1.65],[-.60,.22,0],43),theme:'paper'},
+ {name:'sauropod-tail',parts:[museum[1]!],camera:cam([1.5,1.8,4],[1.3,1.05,0],36),theme:'paper'},
  {name:'museum-hud-paper',parts:[...museum,platform],camera:fittedCamera,theme:'paper',hud:true},
  {name:'museum-hud-cinema',parts:[...museum,platform],camera:fittedCamera,theme:'cinema',hud:true},
  {name:'museum-paper',parts:[...museum,platform],camera:cam(preset.position,preset.target),theme:'paper'},
