@@ -60,9 +60,12 @@ const views = [
   { name: 'hero', camera: { position: [8,6.2,10],target:[0,.55,0],fov:36 }, accepts: (p: Part) => !['water-cell','solid-bar','reflector-near','reflector-far','bridge-short'].includes(p.id) },
   { name: 'drum', camera: { position: [-.95,1.85,2.45],target:[-1.95,.91,1.04],fov:34 }, accepts: (p: Part) => p.id.startsWith('drum') },
   { name: 'drum-bottom', camera: { position: [-1.1,.17,2.2],target:[-1.95,.84,1.04],fov:34 }, accepts: (p: Part) => p.id.startsWith('drum') },
+  { name: 'drum-rear', camera: { position: [-2.95,1.5,-.27],target:[-1.95,.92,1.04],fov:34 }, accepts: (p: Part) => p.id.startsWith('drum') },
+  { name: 'drum-hardware', camera: { position: [-1.48,1.14,1.86],target:[-1.767,.995,1.357],fov:24 }, accepts: (p: Part) => p.id.startsWith('drum') },
   { name: 'speaker', camera: { position: [2.17,1.47,.08],target:[1.45,.97,-.91],fov:34 }, accepts: (p: Part) => p.id==='speaker-case' },
   { name: 'speaker-side', camera: { position: [2.65,1.35,-.56],target:[1.45,.97,-.91],fov:34 }, accepts: (p: Part) => p.id==='speaker-case' },
   { name: 'bench', camera: { position: [7,4,8],target:[0,-.18,0],fov:36 }, accepts: (p: Part) => p.id==='laboratory-bench' },
+  { name: 'bench-top', camera: { position: [4,3.5,4.8],target:[0,.59,0],fov:42 }, accepts: (p: Part) => p.id==='laboratory-bench' },
 ];
 const summaries = [];
 for (const view of views) {

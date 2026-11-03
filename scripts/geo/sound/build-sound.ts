@@ -3,7 +3,7 @@
  * Turned/pressed profiles follow the reference topology in reference-audit.md.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { primitiveSchema, partsFile } from '../../../src/engines/space-scene/schema';
+import { primitiveSchema, partsFile, type Primitive } from '../../../src/engines/space-scene/schema';
 
 type V = [number,number,number];
 type P = [number,number];
@@ -22,7 +22,8 @@ const circle = (r:number,n=24):P[] => Array.from({length:n},(_,i)=>[round(r*Math
 // reinforcing rings, rolled triple-flange hoop, six matched tension assemblies.
 const centre:V=[-1.95,.85,1.04];
 const shell=part('drum-shell');
-shell.primitive=lathe(centre,[[.324,-.2],[.338,-.2],[.34,-.196],[.34,.178],[.336,.194],[.326,.2],[.319,.184],[.319,-.192],[.324,-.2]],'wood');
+const hoopHardware:Primitive[]=[];
+shell.primitive=lathe(centre,[[.324,-.198],[.338,-.198],[.34,-.196],[.34,.178],[.336,.194],[.326,.2],[.319,.184],[.319,-.192],[.324,-.198]],'wood');
 shell.extra=[
   ring(add(centre,[0,-.178,0]),.319,.012,.025,'wood'),
   ring(add(centre,[0,.15,0]),.319,.012,.025,'wood'),
@@ -31,36 +32,48 @@ shell.extra=[
 for(let i=0;i<6;i++) {
   const a=(i*60+30)*Math.PI/180;
   const radial=(r:number,y:number):V=>add(centre,[r*Math.sin(a),y,r*Math.cos(a)]);
-  // Insulating gasket and tapered cast lug body: the spindle enters its top.
-  const lugShape:P[]=Array.from({length:40},(_,j)=>{const t=j*Math.PI/20;return [round(Math.sin(t)*(.012+.007*(1+Math.cos(t))/2)),round(.055*Math.cos(t))];});
-  shell.extra.push(primitiveSchema.parse({kind:'extrude',shape:lugShape,depth:.01,bevel:.002,at:radial(.344,.014),rotation:[0,i*60+30,0],color:'rubber'}));
-  shell.extra.push(primitiveSchema.parse({kind:'extrude',shape:lugShape,depth:.029,bevel:.0095,at:radial(.36,.014),rotation:[0,i*60+30,0],color:'stainless'}));
-  // A stepped spindle, fine thread ridges and square drum-key socket head.
-  const thread:P[]=[[0,-.013],[.006,-.013]];
-  for(let j=0;j<8;j++)thread.push([.0065,-.012+j*.0025],[.0053,-.0108+j*.0025]);
-  thread.push([.0053,.144],[.01,.144],[.01,.148],[0,.148]);
-  shell.extra.push(lathe(radial(.366,.066),thread,'steel',{segments:16}));
-  shell.extra.push(box(radial(.366,.221),[.014,.014,.014],'stainless',.001,{rotation:[0,i*60+30,0]}));
+  // A shell-mounted cast casing, with parallel sides and rounded shoulders,
+  // rather than the previous pointed teardrop that read as a dangling key.
+  const lugShape:P[]=[];
+  for(let corner=0;corner<4;corner++)for(let j=0;j<=6;j++) {
+    const t=(corner*90+j*15)*Math.PI/180;
+    lugShape.push([round((corner===0||corner===3?.005:-.005)+.014*Math.cos(t)),round((corner<2?.042:-.042)+.014*Math.sin(t))]);
+  }
+  const rotation:V=[0,i*60+30,0];
+  shell.extra.push(primitiveSchema.parse({kind:'extrude',shape:lugShape,depth:.01,bevel:.002,at:radial(.343,.065),rotation,color:'rubber'}));
+  shell.extra.push(primitiveSchema.parse({kind:'extrude',shape:lugShape,depth:.028,bevel:.007,at:radial(.359,.065),rotation,color:'stainless'}));
+  // Two recessed, slotted mounting screw heads on each casing's end pads.
+  for(const y of [.027,.103]) {
+    shell.extra.push(primitiveSchema.parse({kind:'extrude',shape:circle(.0055,20),holes:[[[-.0035,-.0007],[-.0035,.0007],[.0035,.0007],[.0035,-.0007]]],depth:.002,bevel:.0004,at:radial(.374,y),rotation,color:'steel'}));
+  }
+  // The swivel insert receives the rod above the casing. Threaded end is
+  // concealed inside it; no shaft, key or fastener extends below the lug.
+  hoopHardware.push(ring(radial(.366,.119),.009,.004,.012,'steel',{segments:20}));
+  const thread:P[]=[[0,.037],[.0042,.037],[.0042,.144],[.01,.144],[.01,.148],[0,.148]];
+  hoopHardware.push(lathe(radial(.366,.066),thread,'steel',{segments:16}));
+  hoopHardware.push(box(radial(.366,.221),[.014,.014,.014],'stainless',.001,{rotation:[0,i*60+30,0]}));
 }
 // A genuine little vent ferrule, open bore and rolled lip, between lugs.
 shell.extra.push(ring(add(centre,[.34,.03,0]),.012,.004,.018,'brass',{rotation:[0,0,90],segments:24}));
 shell.name={en:'Single-head drum shell',zh:'单面鼓鼓腔'};
 shell.summary={en:'A hollow shell and tension hardware support one stretched head.',zh:'空心鼓腔与张力五金支撑一层绷紧的鼓面。'};
-shell.detail={en:'A continuous wooden shell has shaped bearing edges, reinforcing rings and six lugs with tension rods. The rolled upper hoop tensions one head; the lower edge remains open with a protective ring and no second head. This generic concert-tom DESIGN is not a solved resonator. [S1, S5]',zh:'连续木质鼓腔带有成形承边、加强圈，以及六组鼓耳与拉杆。上鼓圈绷紧一层鼓面；下沿有保护圈，底部敞开，没有第二层鼓面。这是通用单面筒鼓的设计参考，不是求解过的共鸣器。[S1, S5]'};
+shell.detail={en:'A continuous wooden shell has shaped bearing edges, reinforcing rings and six rounded lug casings, each fixed by two screws. Square tension-rod heads and washers sit on the upper hoop claws; the rods descend into the lug inserts with their threaded ends concealed. The hoop tensions one head; the lower edge remains open with a protective ring and no second head. This generic concert-tom DESIGN is not a solved resonator. [S1, S5]',zh:'连续木质鼓腔带有成形承边、加强圈，以及六个圆肩鼓耳壳，每个用两颗螺钉固定。方形拉杆头与垫圈坐在上鼓圈的爪耳上；拉杆向下插入鼓耳内的螺母，螺纹末端藏在壳内。上鼓圈绷紧一层鼓面；下沿有保护圈，底部敞开，没有第二层鼓面。这是通用单面筒鼓的设计参考，不是求解过的共鸣器。[S1, S5]'};
 const head=part('drumhead');
 head.primitive=lathe([-1.95,1.054,1.04],[[0,-.002],[.321,-.002],[.327,-.004],[.335,-.009],[.34,-.016],[.34,-.004],[.335,.002],[.323,.004],[0,.004]],'membrane');
-head.extra=[lathe(add(centre,[0,.199,0]),[[.334,-.022],[.349,-.022],[.351,-.018],[.351,-.012],[.343,-.012],[.343,.018],[.347,.022],[.347,.027],[.339,.027],[.336,.022],[.336,-.014],[.334,-.014],[.334,-.022]],'stainless')];
+head.extra=[lathe(add(centre,[0,.199,0]),[[.334,-.022],[.349,-.022],[.351,-.018],[.351,-.012],[.343,-.012],[.343,.018],[.347,.022],[.347,.027],[.339,.027],[.336,.022],[.336,-.014],[.334,-.014],[.334,-.022]],'stainless'),...hoopHardware];
 for(let i=0;i<6;i++) {
   const a=(i*60+30)*Math.PI/180;
   const at=add(centre,[.355*Math.sin(a),.207,.355*Math.cos(a)]);
-  head.extra.push(primitiveSchema.parse({kind:'extrude',at,rotation:[90,0,-(i*60+30)],shape:[[-.022,-.014],[.022,-.014],[.022,.011],[.014,.026],[-.014,.026],[-.022,.011]],holes:[circle(.0075,16).map(([x,y])=>[x,y+.009])],depth:.006,bevel:.0015,color:'steel'}));
+  head.extra.push(primitiveSchema.parse({kind:'extrude',at,rotation:[90,0,-(i*60+30)],shape:[[-.022,-.014],[.022,-.014],[.022,.011],[.014,.026],[-.014,.026],[-.022,.011]],holes:[circle(.0075,16).map(([x,y])=>[x,y+.011])],depth:.006,bevel:.0015,color:'steel'}));
 }
 // Keep the existing marker's height and phase: membrane's top remains 1.058.
 
 // Bench's work surface stays at .65, so every teaching specimen stays attached.
 // Extend its structure downwards to restore standing-height island proportions.
 const bench=part('laboratory-bench');
-bench.primitive=box([0,.59,0],[6.4,.12,3.6],'powder',.025,{tint:'#666b64'});
+// Smooth non-metallic resin: the plastic family has zero normal-map strength,
+// matte roughness .62 and no colour noise (powder adds orange-peel relief).
+bench.primitive=box([0,.59,0],[6.4,.12,3.6],'plastic',.012,{tint:'#303330'});
 bench.extra=[];
 for(const x of [-2.91,2.91])for(const z of [-1.48,1.48]) {
   bench.extra.push(box([x,-.36,z],[.15,1.78,.15],'powder',.012,{tint:'#c2c4b9'}));

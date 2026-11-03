@@ -11,6 +11,7 @@ import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { longitudinalPositions } from '../../src/engines/space-scene/lib/sim/senses';
 import { echoDuration, echoPosition, echoVisualDistance } from '../../src/engines/space-scene/lib/sim/sound-motion';
 import { partBounds } from '../../src/engines/space-scene/lib/parts';
+import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 
 const DIR=join(import.meta.dirname,'../../src/content/topics/sound');
 const json=(name:string)=>JSON.parse(readFileSync(join(DIR,'data',name),'utf8'));
@@ -198,7 +199,7 @@ describe('sound: schematic geometry and visibility support the comparisons',()=>
     const yy=head.profile.map(p=>p[1]);
     expect(Math.max(...yy)-Math.min(...yy)).toBeLessThan(.025);
     expect(head.at[1]+Math.max(...yy)).toBeCloseTo(1.058,6);
-    const hardware=part('drum-shell').extra!;
+    const hardware=part('drumhead').extra!;
     const rods=hardware.filter(p=>p.kind==='lathe'&&p.segments===16);
     expect(rods).toHaveLength(6);
     const tabs=part('drumhead').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length);
@@ -207,8 +208,25 @@ describe('sound: schematic geometry and visibility support the comparisons',()=>
     const earTop=tab.at[1]+tab.depth/2;
     const keyHeads=hardware.filter(p=>p.kind==='bevelBox');
     expect(keyHeads).toHaveLength(6);
+    const casings=part('drum-shell').extra!.filter(p=>p.kind==='extrude'&&p.color==='stainless');
+    expect(casings).toHaveLength(6);
+    expect(part('drum-shell').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length)).toHaveLength(12);
     for(const [i,rod] of rods.entries()) {
       if(rod.kind!=='lathe')throw new Error('turned tension rod');
+      const casing=casings[i]!;
+      if(casing.kind!=='extrude')throw new Error('shell-mounted lug casing');
+      const bottom=rod.at[1]+Math.min(...rod.profile.map(p=>p[1]));
+      const lugBottom=casing.at[1]+Math.min(...casing.shape.map(p=>p[1]));
+      const lugTop=casing.at[1]+Math.max(...casing.shape.map(p=>p[1]));
+      // A rod's threaded end must disappear INSIDE its casing, never hang below it.
+      expect(bottom).toBeGreaterThan(lugBottom);
+      expect(bottom).toBeLessThan(lugTop);
+      const ear=tabs[i]!;
+      if(ear.kind!=='extrude')throw new Error('drilled hoop ear');
+      const angle=(i*60+30)*Math.PI/180;
+      const hole=ear.holes![0]!, offset=hole.reduce((sum,p)=>sum+p[1],0)/hole.length;
+      expect(ear.at[0]+offset*Math.sin(angle)).toBeCloseTo(rod.at[0],6);
+      expect(ear.at[2]+offset*Math.cos(angle)).toBeCloseTo(rod.at[2],6);
       const collar=rod.profile.filter(p=>p[0]===.01).map(p=>rod.at[1]+p[1]);
       expect(Math.min(...collar)).toBeCloseTo(earTop,6);
       const key=keyHeads[i]!;
@@ -217,6 +235,17 @@ describe('sound: schematic geometry and visibility support the comparisons',()=>
     }
     expect(part('drumhead').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length)).toHaveLength(6);
     expect(part('drum-shell').connects).toContain('drumhead');
+  });
+  it('keeps the dark resin worktop planar and free of orange-peel normals in both themes',()=>{
+    const top=part('laboratory-bench').primitive!;
+    if(top.kind!=='bevelBox')throw new Error('resin worktop');
+    expect(top.at[1]+top.size[1]/2).toBeCloseTo(.65,8);
+    for(const theme of ['paper','cinema'] as const) {
+      const look=resolveMaterialLook(top.color,{},theme,top.tint);
+      expect(look.normal).toBe(0); expect(look.metalness).toBe(0);
+      expect(look.roughness).toBeGreaterThanOrEqual(.6);
+      expect(look.finish).toBe('grain'); expect(look.color).toBe('#303330');
+    }
   });
   it('anchors one continuous string and halves only its supported vibrating length',()=>{
     const string=part('monochord-string').primitive!,box=part('monochord-box').primitive!;

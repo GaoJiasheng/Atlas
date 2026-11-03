@@ -58,3 +58,40 @@ No requested item left unimplemented. Browser shoot/e2e and GPU timing were not 
 - Headless WebGL shoot (paper, all 32 beats; cinema spot check; 1024×768 layout pass: 0 issues, left column folds, no camera change needed) against main at the same angles. Vacuum beat shows no purple tick; ch06 beat 2 labels 18/20 anchor apart; drum, speaker cutaway and bench read correctly in close-ups.
 - Fixes: tuning-fork U-bend outline densified from 12 to 32 steps per arc (it was visibly faceted in drum close-ups; same outline and dimensions); drum lug bevel 0.005 → 0.0095 so the cast lugs read rounded rather than as flat slabs. Both in `build-sound.ts` (re-run is idempotent).
 - Renderer: 42–46k triangles in close-ups, 69k in the busiest overview beat, 80–110 fps headless paper under heavy machine load.
+
+## Polish 2026-11-03 — round 2 drum hardware and worktop
+
+- **Drum hardware:** replaced pointed teardrop lug bodies with parallel-sided, rounded-shoulder cast casings against insulating shell gaskets. Each of six casings has two recessed slotted screw heads. Shorter vertical tension rods pass through coaxial hoop-claw holes into upper lug inserts; the threaded ends disappear inside the casings. Washers contact the tops of the claws and square drum-key heads contact the washers. Nothing projects below a lug. The rods/heads travel with the upper hoop assembly when exploded; the mounted casings stay with the shell. Also separated the wooden lower edge from the protective ring's coplanar underside to remove close-up z-fighting.
+- **Drum type/content:** chapter 01 explicitly describes one membrane and an open-bottom shell (EN and ZH), and its first beat identifies the single drumhead. Retained the single-headed concert tom, lower protective ring and open cavity; adding a resonant head or snare wires would contradict this lesson. Only the shell's EN/ZH detail was minimally revised to explain the corrected hardware; ids, six lug stations, teaching numbers, chapters, beats, marker animation and other apparatus are unchanged. The accepted speaker geometry is byte-for-byte unchanged as a JSON object.
+- **Lab worktop:** replaced powder coat with dark charcoal, nonmetallic resin using the existing smooth `plastic` family (roughness 0.62, normal strength 0 in paper and cinema, no albedo map). This removes orange-peel bump relief while retaining a matte surface with restrained sheen. Tightened the clean edge radius from 0.025 to 0.012; the flat top and all specimen contacts remain at y = 0.65. Steel frame/drawer finishes are unchanged.
+
+References actually viewed again: the existing ignored Yamaha tom photo `scripts/geo/sound/refs/drum.png` (hoop ears, square rod heads, rods terminating at rounded mounted lugs), and Kewaunee `refs/bench-small.png` (flat dark worktop). Original sources/URLs and copyright boundaries remain in the earlier section and `data/SOURCES.md`. The two-head reference photo supplies hardware topology only; the lesson's open-bottom concert-tom design is preserved. No external assets or runtime requests were added.
+
+### Round 2 counts and close-up verification
+
+Counts use actual production `partPieces` geometry via `inspect-sound.ts`, against the supplied branch state immediately before this round (which already includes Claude's tuning-fork acceptance fix):
+
+| Assembly / visibility | Before | After |
+|---|---:|---:|
+| Drum shell + head + marker | 24,672 | 24,888 |
+| Laboratory bench | 16,704 | 16,704 |
+| All authored structural geometry | 95,020 | 95,236 |
+| Maximum authored visible beat | 51,528 | 51,744 |
+
+Including the existing 8,856-triangle wave overlay and 216-triangle echo pulse, even the conservative all-parts/all-overlays bound is **104,308 triangles**, below 350k. Shadow passes and ground are excluded; no GPU/FPS claim. Hero round surfaces remain 48 segments; rods 16, small inserts 20 and screw heads 20. The existing per-material production merger batches the repeated static detail, preserving nine drum geometry/material pieces and seven bench pieces rather than adding a draw call per screw.
+
+Rendered and actually inspected `/tmp/atlas-sound-round2/after/{drum,drum-rear,drum-bottom,drum-hardware,bench,bench-top}.png`: front elevated, opposite elevated and underside angles, plus a tighter lug/rod/washer view and worktop close-up. Iterated lower-ring overlap and rod/claw-hole alignment, then regenerated and re-viewed the final images. Before images/parts/counts are in `/tmp/atlas-sound-round2/before/`; final camera manifest and counts are in `after/preview.json` and `after/counts.json`. These are CPU depth-buffer rasters of the shipped production geometry, with smooth lighting, not browser/PBR screenshots. Both-theme resin normal strength, roughness and nonmetallic response are also checked through the production material resolver.
+
+Generator rerun is byte-for-byte idempotent. Semantic comparison confirms that only `laboratory-bench`, `drum-shell` and `drumhead` differ in `parts.json`; controls, animation, cameras, ids and the accepted speaker are unchanged. Hardware regression now verifies that every rod terminates inside its lug, all six rod/claw bores are coaxial, and washers/key heads remain seated. A viewed reference/before/after contact sheet is also saved at `/tmp/atlas-sound-round2/drum-comparison.png` (development-only manufacturer photo).
+
+Final gates, all exit 0:
+
+- `pnpm check`: 1,092 files, 0 errors, 0 warnings, 4 existing hints; TypeScript also passed.
+- `pnpm validate`: 94 topics, 0 errors, 0 warnings; repeated successfully by the build.
+- `pnpm run test --maxWorkers=2 --testTimeout=60000`: 251 files, all **6,345 tests passed**, no retries. The focused sound content/layout run also passed 25/25.
+- `pnpm build`: successful static production build and local service worker; existing Vite chunk-size advisory remains. Logs: `/tmp/atlas-sound-round2/{check,validate,test,build}.log`.
+- `git diff --check`: clean. Five owned files changed; no browser or desktop automation used.
+
+### Round 2 omissions
+
+No requested geometry/material item omitted. Browser shoot/e2e and runtime material/GPU acceptance are intentionally left to the following Claude browser review, per the explicit prohibition on browser/desktop use. No git writes, engine/kit edits, other-topic edits, package changes or lockfile changes.
