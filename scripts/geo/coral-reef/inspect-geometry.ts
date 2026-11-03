@@ -10,12 +10,21 @@ import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geom
 import { partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
 import { solveTable } from '../../../src/engines/space-scene/lib/sim/table';
 
+import { parse as parseYaml } from 'yaml';
+import { fitCameraToHud, type FrameBox } from '../../../src/engines/space-scene/lib/hud-framing';
+import { fitCameraToAspect } from '../../../src/engines/space-scene/lib/camera';
+import { partBounds } from '../../../src/engines/space-scene/lib/parts';
+import { resolveAllPartDisplays } from '../../../src/engines/space-scene/lib/visibility';
+import { evaluateSim } from '../../../src/engines/space-scene/lib/sim';
+import { resolveSimValues } from '../../../src/engines/space-scene/lib/sim/controls';
+import { simEffects } from '../../../src/engines/space-scene/lib/sim/bind';
+
 const data=partsFile.parse(JSON.parse(fs.readFileSync('src/content/topics/coral-reef/data/parts.json','utf8')));
 const round=process.argv[2]??'polish-after';
 const selectedViews=process.argv[3]?new Set(process.argv[3].split(',')):undefined;
 const folder='/private/tmp/coral-reef-model-qa';
 fs.mkdirSync(folder,{recursive:true});
-const W=1200,H=850,VH=730,TOP=65;
+const W=1200,VH=730,TOP=65;
 const light=new Vector3(-.35,.8,1).normalize(), fill=new Vector3(.8,.4,-.2).normalize();
 const palette:Record<string,number[]>={
   'token:neutral':[138,131,120],'token:bone':[224,214,191],
@@ -78,7 +87,7 @@ for(const p of data.parts){
   for(const piece of pieces){
     const g=piece.geometry,pos=g.getAttribute('position'),norm=g.getAttribute('normal'),index=g.index;
     for(const name of ['position','normal'])if(!Array.from(g.getAttribute(name).array).every(Number.isFinite))throw new Error(`${p.id}: nonfinite ${name}`);
-    const m=p.mesh?p.material!:slots['slot' in piece?Number(piece.slot):0]!,color=palette[m.tint??m.color]??[193,183,160],opacity=m.color==='membrane'?.42:1;
+    const m=p.mesh?p.material!:slots['slot' in piece?Number(piece.slot):0]!,color=palette[m.tint??m.color]??(/^#[0-9a-f]{6}$/i.test(m.tint??'')?[1,3,5].map(i=>parseInt(m.tint!.slice(i,i+2),16)):[193,183,160]),opacity=m.color==='membrane'?.42:1;
     const normalMatrix=new Matrix3().getNormalMatrix(piece.matrix);
     for(let i=0;i<(index?.count??pos.count);i+=3){
       const ids=[0,1,2].map(j=>index?index.getX(i+j):i+j);
@@ -97,7 +106,7 @@ for(const p of data.parts){
 }
 const intended:Record<string,(p:Part)=>boolean>={hero:p=>p.group==='reef-habitat',reef:p=>p.group==='reef-habitat',polyp:p=>p.group==='polyp-closeup',web:p=>p.group==='web-specimens'||p.group==='feeding-flows',evidence:p=>p.group==='evidence-tools',conservation:p=>p.group==='evidence-tools'};
 type Camera={position:V3;target:V3;fov:number};
-type View={id:string;camera:Camera;only?:string[];cutaway?:boolean};
+type View={id:string;camera:Camera;only?:string[];cutaway?:boolean;aspect?:number;hidden?:Set<string>;ghost?:Set<string>;subjects?:string[]};
 const views:View[]=data.presets!.map(p=>({id:p.id,camera:{...p.camera,fov:p.camera.fov??30}}));
 function closeup(id:string,only:string[],direction:V3,cutaway=false){
   const bounds:Bounds={min:[Infinity,Infinity,Infinity],max:[-Infinity,-Infinity,-Infinity]};
@@ -129,15 +138,51 @@ closeup('nursery',['nursery-frame','nursery-fragments'],[.7,.8,1]);
 closeup('quadrat',['monitoring-quadrat'],[.1,1,.45]);
 closeup('quadrat-top',['monitoring-quadrat'],[0,1,.0001]);
 closeup('parrotfish',['web-parrotfish'],[.1,.12,1]);
+closeup('shelf',['reef-flat','reef-crest','reef-slope','colony-encrusting','substrate-context','refuge-cavity'],[.4,.7,1]);
+closeup('sheet-under',['colony-sheet'],[.4,-.5,1]);
+const fitted:Record<string,unknown>={};
+for(const file of fs.readdirSync('src/content/topics/coral-reef/chapters').filter(f=>f.endsWith('.mdx')).sort()){
+  const ch=parseYaml(fs.readFileSync(`src/content/topics/coral-reef/chapters/${file}`,'utf8').split(/^---$/m)[1]!);
+  for(const [i,beat] of [null,...ch.state.beats].entries()){
+    const state={...ch.state,...beat},values=resolveSimValues(data.sim!,{...ch.state.sim.set,...beat?.sim?.set});
+    const fx=simEffects(data.sim!,values,evaluateSim(data.sim!,values));
+    const hidden=new Set<string>([...(state.hide??[]),...fx.hidden]);
+    const display=resolveAllPartDisplays(data.parts,{view:state.view,part:state.part,layers:state.layers,hidden:[...hidden],ghosted:state.ghost??[]});
+    for(const p of data.parts)if(!display.get(p.id)?.visible)hidden.add(p.id);
+    const boxes:FrameBox[]=data.views.hudFrame!.parts.flatMap(id=>{
+      if(hidden.has(id))return [];
+      const p=data.parts.find(p=>p.id===id)!,b=p.mesh?counts[id]!.bounds:partBounds(p)!;
+      const offset=fx.offset.get(id)??[0,0,0];
+      return [{center:b.min.map((v,k)=>(v+b.max[k]!)/2+offset[k]!) as V3,half:b.min.map((v,k)=>(b.max[k]!-v)/2) as V3}];
+    });
+    const authored=typeof state.camera==='string'?data.presets!.find(p=>p.id===state.camera)!.camera:state.camera;
+    // Shared fitter with explicit CPU layout fixtures, not DOM measurements.
+    for(const fixture of [
+      {id:'hud',stage:[1520,1023],rect:{x0:340,y0:12,x1:1150,y1:951},panels:[{x0:28,y0:12,x1:328,y1:951},{x0:1162,y0:12,x1:1508,y1:610},{x0:12,y0:963,x1:1508,y1:1023}]},
+      {id:'tablet',stage:[624,711],rect:{x0:56,y0:12,x1:612,y1:621},panels:[{x0:0,y0:12,x1:44,y1:621},{x0:0,y0:633,x1:624,y1:711}]},
+      {id:'present',stage:[1920,1080],rect:{x0:12,y0:12,x1:1908,y1:1068},panels:[]},
+    ]){
+      const [width,height]=fixture.stage as [number,number],cam=fitCameraToHud(fitCameraToAspect(authored,width/height),boxes,width,height,fixture.rect,{panels:fixture.panels});
+      const id=`ch${String(ch.order).padStart(2,'0')}-b${i}-${fixture.id}`;
+      const ghost=new Set<string>(data.parts.filter(p=>display.get(p.id)?.ghost).map(p=>p.id));
+      fitted[id]={authored,camera:cam,subjects:state.labels,hidden:[...hidden]};
+      views.push({id,camera:{...cam,fov:cam.fov??30},aspect:width/height,hidden,ghost,subjects:state.labels,cutaway:state.cutaway==='half'});
+    }
+  }
+}
 const cameras:Record<string,unknown>={};
 for(const view of views.filter(view=>!selectedViews||selectedViews.has(view.id))){
-  const camera=new PerspectiveCamera(view.camera.fov,W/VH,.001,100);
+  // Preserve the fixture's pixel aspect, especially on the narrow tablet
+  // stage. Projecting a portrait camera into a wide bitmap stretches anatomy.
+  const W=1200,VH=Math.round(W/(view.aspect??1200/730)),H=VH+120;
+  const camera=new PerspectiveCamera(view.camera.fov,view.aspect??W/VH,.001,100);
   camera.position.set(...view.camera.position);camera.lookAt(new Vector3(...view.camera.target));camera.updateMatrixWorld();
   const rgba=new Uint8Array(W*VH*4),depth=new Float32Array(W*VH).fill(Infinity);
   for(let i=0;i<W*VH;i++){rgba[i*4]=233;rgba[i*4+1]=228;rgba[i*4+2]=216;rgba[i*4+3]=255;}
   const targets:Record<string,{ndcMin:number[];ndcMax:number[];visibleTriangles:number;expected:boolean}>={};
   const queue:{id:string;t:Triangle;z:number}[]=[];
   for(const p of data.parts){
+    if(view.hidden?.has(p.id))continue;
     const ndcMin=[Infinity,Infinity,Infinity],ndcMax=[-Infinity,-Infinity,-Infinity];let visibleTriangles=0;
     if(view.only&&!view.only.includes(p.id))continue;
     for(const t of baked.get(p.id)!){
@@ -146,9 +191,10 @@ for(const view of views.filter(view=>!selectedViews||selectedViews.has(view.id))
       const centroid=t.vertices[0]!.clone().add(t.vertices[1]!).add(t.vertices[2]!).multiplyScalar(1/3);
       if(t.face.dot(camera.position.clone().sub(centroid))<=0&&t.opacity===1)continue;
       if(vs.every(v=>v.x< -1)||vs.every(v=>v.x>1)||vs.every(v=>v.y< -1)||vs.every(v=>v.y>1)||vs.some(v=>v.z< -1||v.z>1))continue;
-      visibleTriangles++;queue.push({id:p.id,t,z:centroid.clone().applyMatrix4(camera.matrixWorldInverse).z});
+      const tt=view.ghost?.has(p.id)?{...t,opacity:.12}:t;
+      visibleTriangles++;queue.push({id:p.id,t:tt,z:centroid.clone().applyMatrix4(camera.matrixWorldInverse).z});
     }
-    targets[p.id]={ndcMin,ndcMax,visibleTriangles,expected:view.only?true:intended[view.id]!(p)};
+    targets[p.id]={ndcMin,ndcMax,visibleTriangles,expected:view.only?true:view.subjects?(p.group==='feeding-flows'||view.subjects.some(id=>data.parts.find(x=>x.id===id)?.group===p.group)):intended[view.id]!(p)};
   }
   // Opaque surfaces use exact depth; translucent membranes are composited back to front.
   queue.sort((a,b)=>(a.t.opacity===1?0:1)-(b.t.opacity===1?0:1)||a.z-b.z);
@@ -168,7 +214,7 @@ for(const view of views.filter(view=>!selectedViews||selectedViews.has(view.id))
       const z=u*vs[0]!.z+v*vs[1]!.z+w*vs[2]!.z,index=y*W+x;
       if(z>=depth[index]!)continue;
       const denom=u*iw[0]!+v*iw[1]!+w*iw[2]!,pu=u*iw[0]!/denom,pv=v*iw[1]!/denom,pw=w*iw[2]!/denom;
-      if(view.cutaway&&id!=='polyp-skeleton'&&(pu*t.vertices[0]!.x+pv*t.vertices[1]!.x+pw*t.vertices[2]!.x)>5)continue;
+      if(view.cutaway&&data.parts.find(p=>p.id===id)?.clip!==false&&(pu*t.vertices[0]!.z+pv*t.vertices[1]!.z+pw*t.vertices[2]!.z)>.02)continue;
       let nx=pu*t.normals[0]!.x+pv*t.normals[1]!.x+pw*t.normals[2]!.x,ny=pu*t.normals[0]!.y+pv*t.normals[1]!.y+pw*t.normals[2]!.y,nz=pu*t.normals[0]!.z+pv*t.normals[1]!.z+pw*t.normals[2]!.z;
       const norm=1/Math.hypot(nx,ny,nz);nx*=norm;ny*=norm;nz*=norm;
       const shade=.45+.48*Math.max(0,nx*light.x+ny*light.y+nz*light.z)+.13*Math.max(0,nx*fill.x+ny*fill.y+nz*fill.z)+.04*ny;
@@ -178,7 +224,7 @@ for(const view of views.filter(view=>!selectedViews||selectedViews.has(view.id))
   }
   const unexpected=Object.entries(targets).filter(([,t])=>!t.expected&&t.visibleTriangles>0).map(([id])=>id);
   cameras[view.id]={camera:view.camera,targets,unexpectedVisibleParts:unexpected};
-  const text=`<svg width="${W}" height="${H}"><g font-family="sans-serif" fill="#333"><text x="25" y="30" font-size="20">${round} · coral-reef · ${view.id}</text><text x="25" y="53" font-size="13">Actual geometry · CPU depth buffer · interpolated vertex normals${view.only?' · isolated detail':' · all groups active'}</text><text x="25" y="825" font-size="14">Offline geometry preview; GPU lighting, HUD, material grain and interaction require runtime acceptance.</text></g></svg>`;
+  const text=`<svg width="${W}" height="${H}"><g font-family="sans-serif" fill="#333"><text x="25" y="30" font-size="20">${round} · coral-reef · ${view.id}</text><text x="25" y="53" font-size="13">Actual geometry · CPU depth buffer · interpolated vertex normals${view.only?' · isolated detail':' · authored state'}</text><text x="25" y="${H-25}" font-size="14">Offline geometry preview; GPU lighting, HUD, material grain and interaction require runtime acceptance.</text></g></svg>`;
   const viewport=await sharp(Buffer.from(rgba),{raw:{width:W,height:VH,channels:4}}).png().toBuffer();
   await sharp({create:{width:W,height:H,channels:4,background:'#e9e4d8'}}).composite([{input:viewport,top:TOP,left:0},{input:Buffer.from(text),top:0,left:0}]).png().toFile(`${folder}/${round}-${view.id}.png`);
 }
@@ -191,6 +237,6 @@ for(let i=0;i<data.parts.length;i++)for(let j=i+1;j<data.parts.length;j++){
 }
 const groupTriangles:Record<string,number>={};
 for(const p of data.parts)groupTriangles[p.group??'ungrouped']=(groupTriangles[p.group??'ungrouped']??0)+counts[p.id]!.triangles;
-const report={round,kind:'offline-cpu-depth-buffer',totalTriangles,totalPieces,groupTriangles,counts,cameras,collisions,notes:['Actual engine primitive tessellation and local GLB mesh geometry.','All tessellated positions/normals finite.','Vertex normals use perspective-correct interpolation; per-pixel z-buffer resolves overlap.','Collisions are conservative AABBs: connected tissue/skeleton, nested cells and support contacts are intentional.','No exploded displacement.','No GPU/browser/runtime performance or HUD claim.']};
+const report={round,kind:'offline-cpu-depth-buffer',totalTriangles,totalPieces,groupTriangles,counts,cameras,fitted,collisions,notes:['Actual engine primitive tessellation and local GLB mesh geometry.','All tessellated positions/normals finite.','Vertex normals use perspective-correct interpolation; per-pixel z-buffer resolves overlap.','Collisions are conservative AABBs: connected tissue/skeleton, nested cells and support contacts are intentional.','No exploded displacement.','No GPU/browser/runtime performance or HUD claim.']};
 fs.writeFileSync(`${folder}/${round}${selectedViews?'-selected':''}-metrics.json`,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({round,totalTriangles,totalPieces,cameraIntrusions:Object.fromEntries(Object.entries(cameras).map(([id,c])=>[id,(c as {unexpectedVisibleParts:string[]}).unexpectedVisibleParts])),folder}));

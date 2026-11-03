@@ -82,3 +82,71 @@ Final numerical evidence, merged camera checks, per-part counts, bounds and asse
 - Fixed: the twelve tentacle tips folded back into hooks (shepherd's-crook silhouette in every polyp beat). Each tentacle is now seven evenly spaced points on one smooth arc that rises from the oral disc and leans outward to a blunt tip (tip radius 0.0040); the tip keeps the previous outer reach/height so the polyp part bounds stay put. Triangle counts unchanged.
 - Note for the engine: a first arc version whose tips sat 0.03 lower flipped the `views.hudFrame` presentation fit for chapters 01/03/06 into a wide pull-back showing the reef shelf (reproducible); restoring the tip bounds restored the close framing. The fit is sensitive to small subject-box changes.
 - Illustration re-encodes checked at 2× crops: no visible loss. `figures/coral-reef-polyp.webp` is still used in chapter 01 (docs/69 grade D, not redone here).
+
+## Polish 2026-11-03 — round 2
+
+### Completed items and references
+
+1. **Hard-coral polyp and the mouth beat.** Replaced the long spike silhouettes with twelve short, inflated, smoothly tapered fingers in two staggered sixfold cycles. Tips round off continuously without hooks. The continuous skin carries irregularly spaced and sized nematocyst-battery swellings, rather than separate bead objects. A softly raised oral disc surrounds a recessed, rounded oval throat; the ends are elliptical, not pointed like a cat's eye. The disc is the attachment sheet of the opaque tentacle crown, while the separate column remains translucent. Twenty-four alternating septa now project above a scalloped, fluted theca, with exterior costae and irregular growth bands. The mouth beat has its own elevated camera and retains both mouth and tentacle labels. A regression raycast confirms the mouth is the first opaque hit from the HUD-fitted desktop and tablet cameras. NOAA Coral Basics, Polyps up close and CDHC skeletal anatomy were re-read, and the two local NOAA photographs re-inspected.
+2. **Reef shelf and markers.** Replaced all three plain extruded zone blocks with portions of one continuous eroded limestone isosurface: relief, fused skeletal rubble, dissolution pockets, irregular front/back/bottom edges and an actual through shelter cavity. Adjacent zones share their seam coordinates. Sand deposits occupy sheltered hollows and carry subtle ripples. The flat yellow chip was `colony-encrusting`: it is now an attached, irregular living crust with recessed calices, raised walls and small septal stars, plus smaller nearby crusts. The selectable shelter lip follows the tunnel entrance. The separate `light-marker` also becomes a bevelled index arrow, preserving its vertical index binding rather than resembling a ball and stick or a field sensor. NOAA skeletal references and the existing NUS hard-coral gallery (S21) informed morphology; the terrain remains S50 DESIGN, without geographic claims.
+3. **Foliose colony.** Built overlapping rising whorls with asymmetric scalloped margins, growth ridges and a lobed, curved attachment that ends within the upper plate. Each sheet has thickness, an underside, and sealed inner, outer and angular boundaries with outward winding. A shipped-mesh edge audit finds no open edges. Top, oblique and underside CPU views were inspected; the old transparent rim gaps are closed.
+4. **Beat framing.** Chapter 02 now separately frames the flat, crest, slope and light comparison; chapter 03 separately frames the feeding crown, mouth, colony-form comparison, shelter and larva. Per-beat visibility removes unrelated local specimens where necessary. All named target stages remain available, as verified by the existing reachability test. The mouth and other polyp views use front/top-plane directions. Offline reproduction showed that a sideways camera direction can put a distant study platform across the eye plane, forcing the existing fitter to pull far back; these authored directions remove that instability. The named polyp preset and chapter 06 base camera were updated for the changed bounds. Every chapter base and every beat was re-fitted with the shared HUD functions in desktop, landscape-tablet and presentation fixtures. No engine, framing, widget or CSS file was changed.
+
+### Facts, text and behaviour
+
+The **26 selectable parts / 32 total entries, twelve tentacles, twenty-four schematic septa, eight chapters, 39 beats, six food-web nodes and four relationships** are preserved. Minimal EN/ZH edits describe short rounded tentacles and enlarged surface batteries, rounded oval lips, the encrusting crust and sand pockets. Chapter 01's twelve-tentacle note now says short/rounded rather than smooth. Species, measurements, chapter identities and teaching numbers are unchanged. The original simulation controls, rows, outputs, bindings, shell/clip flags, three-degree crown sway, cutaway, zero-distance explode and evidence-state visibility remain. The oral disc follows the crown sway; the separate mouth stays at the centre.
+
+### Geometry budget and reproduction
+
+The aggregate includes every separated study, every context object and every repeated primitive, including offscreen geometry: **348,182 → 348,310 triangles**, with **42 geometry/material pieces → 42**. It remains below 350,000 even before offscreen culling. Largest complete study: **111,772 → 136,434 triangles** (the new reef shelf); the food-web study including arrows is 104,344. The final GLB contains 242,450 triangles and procedural parts contribute 105,860.
+
+Savings come from size-appropriate colony surface sampling, replacing dense tentacle sweeps with continuous sculpted surfaces, a lighter index pointer, 24-sided tiny quadrat collars, and separately error-bounded limestone simplification. The colony calices and biological sample counts remain; no repeated detail creates a per-bump or per-calice runtime object. Terrain seam borders are locked. These are architecture counts, not measured GPU FPS, shadow-pass triangles or live draw calls.
+
+| Changed part | Before | Round 2 |
+|---|---:|---:|
+| `reef-flat` | 160 | 9,399 |
+| `reef-crest` | 28 | 6,563 |
+| `reef-slope` | 32 | 8,036 |
+| `colony-boulder` | 45,016 | 37,580 |
+| `colony-sheet` | 17,150 | 23,606 |
+| `colony-encrusting` | 124 | 8,558 |
+| `polyp-tissue` | 3,372 | 2,852 |
+| `polyp-mouth` | 490 | 680 |
+| `polyp-tentacles` | 28,800 | 12,136 |
+| `polyp-skeleton` | 5,402 | 7,018 |
+| `web-coral` | 44,952 | 37,524 |
+| `light-marker` | 3,840 | 108 |
+| `monitoring-quadrat` | 19,840 | 19,072 |
+| `colony-tissue` | 44,878 | 37,498 |
+| `refuge-cavity` | 1,024 | 516 |
+| `substrate-context` | 588 | 4,678 |
+
+Final group totals: reef-habitat 136,434, polyp-closeup 32,010, web-specimens 102,744, evidence-tools 75,522, feeding-flows 1,600.
+
+```sh
+python3 scripts/geo/coral-reef/build-model.py
+pnpm tsx scripts/geo/coral-reef/inspect-geometry.ts round2-final
+pnpm tsx scripts/geo/coral-reef/summarize-qa.ts round2-final
+```
+
+The build also runs `author-views.ts`; all chapter cameras/visibility are reproducible. Compact counts, bounds, all fitted cameras, subject projections and the asset SHA-256 are retained in `authoring/geometry-review-round2.json`.
+
+### Offline visual review and remaining acceptance
+
+Previews are in `/private/tmp/coral-reef-model-qa/round2-final-*.png`: six presets; polyp top/side/cutaway and skeleton close-ups; the shelf; sheet top/oblique/underside; and all **47 states × 3 layout fixtures**. Chapter contact sheets use `round2-final-contact-ch00-hud.png` through `ch07-hud.png`, with matching `tablet` and `present` sheets. They render the actual finished GLB and engine primitive geometry with a CPU depth buffer and smooth interpolated normals, preserving each fixture's aspect ratio. Individual details and chapter sheets were actually opened and inspected. The first mouth view pulled back too far, an early foliose version exposed its attachment stump, and a differently coloured triangle-subset cave rim showed a sawtooth border; those were corrected and re-rendered.
+
+No assigned item is deferred. Live browser/GPU materials, measured DOM label layout and interaction acceptance remain for the following Claude acceptance pass under the explicit no-browser instruction. No browser/desktop was opened or driven; no git or package-manifest write was performed.
+
+### Round 2 gates
+
+- `pnpm check` — green, 0 errors / 0 warnings; four existing unrelated hints.
+- `pnpm validate` — green, 94 topics, 0 errors / 0 warnings; also rerun by the final build.
+- `pnpm run test --maxWorkers=1 --testTimeout=60000 --hookTimeout=60000 --reporter=dot` — green, **250 files / 6,345 tests**. The final topic geometry was separately rerun: **411 tests passed**, including closed foliose edges, rounded twelve-finger proportions, contained algal markers, mouth visibility and minimum subject size after desktop/tablet HUD fitting, the aggregate 350k cap, food/evidence semantics and all named preset target stages.
+- `pnpm build` — green, 191 pages. Built/source GLB hashes match; the current asset hash is retained in the round-2 geometry audit.
+- `git diff --check` — clean. No browser, desktop, git-write, package-manifest or shared-engine action.
+
+### Claude acceptance 2026-11-03 (round 2)
+
+- GPU browser shots, en/paper all 39 beats plus a cinema chapter view. Polyp: twelve short rounded fingers in two cycles with small battery swellings, raised oral disc with a recessed oval mouth (labelled in ch01 beat 2 and ch03 beat 2), fluted corallite with radiating septa visible in the cut and the dead-skeleton beat. Foliose whorls are closed. The encrusting crust has recessed calices and the light marker is an arrow.
+- Framing: every polyp, zone, colony, shelter, larva and light beat is framed on its subject in presentation mode at normal load. A run at load average 60–130 showed stage-wide pull-backs in ch01/02/03/06. They were not reproducible at load 5–9 with the same build, so they come from the HUD measurement timing, not from the authored cameras.
+- Open: in the ch01 and ch06 chapter (HUD) views the `polyp-tissue` label has no placard. Its bounds-centre anchor sits inside the opaque cup, under the oral disc. The limestone shelf's horizontal ridges are very regular, which reads as banding. The zone blocks show flat cut side walls when they are isolated.

@@ -9,8 +9,11 @@ import { simEffects } from '../src/engines/space-scene/lib/sim/bind';
 import { resolveAllPartDisplays } from '../src/engines/space-scene/lib/visibility';
 import type { SimValues } from '../src/engines/space-scene/sim-schema';
 import { solveHudRoom } from '../src/engines/core/hud-room';
-import { BufferGeometry, DoubleSide, Euler, Float32BufferAttribute, Mesh, MeshBasicMaterial, Raycaster, Vector3 } from 'three';
+import { BufferGeometry, DoubleSide, Euler, Float32BufferAttribute, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Vector3 } from 'three';
 import { partPieces } from '../src/engines/space-scene/stages/model3d/geometry';
+import { partBounds } from '../src/engines/space-scene/lib/parts';
+import { fitCameraToHud, type FrameBox } from '../src/engines/space-scene/lib/hud-framing';
+import { fitCameraToAspect } from '../src/engines/space-scene/lib/camera';
 
 const dir = join(import.meta.dirname, '../src/content/topics/coral-reef');
 const file = partsFile.parse(JSON.parse(readFileSync(join(dir, 'data/parts.json'), 'utf8')));
@@ -260,42 +263,86 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(file.flows.reduce((n, f) => n + f.count, 0)).toBeLessThanOrEqual(80);
   });
 
-  it('models twelve slender, naturally varied tentacles around one slit mouth', () => {
-    const tentacles = file.parts.find((p) => p.id === 'polyp-tentacles')!;
-    const sweeps = [tentacles.primitive!, ...tentacles.extra!];
-    expect(sweeps).toHaveLength(12);
-    const roots: number[] = [], lengths: number[] = [];
-    for (const shape of sweeps) {
-      if (shape.kind !== 'sweep') throw new Error('Each tentacle must be one unbranched sweep');
-      expect(shape.path.length).toBeGreaterThanOrEqual(7);
-      expect(shape.radial).toBeGreaterThanOrEqual(16);
-      expect(shape.segments).toBeGreaterThanOrEqual(40);
-      const radii = shape.radius as number[];
-      expect(radii).toHaveLength(shape.path.length);
-      expect(radii.at(-1)!).toBeLessThan(radii[0]! * .2);
-      expect(radii[0]!).toBeLessThan(.025);
-      roots.push(Math.atan2(shape.path[0]![2], shape.path[0]![0]));
-      lengths.push(shape.path.slice(1).reduce((sum, p, i) => sum + Math.hypot(...p.map((v, j) => v - shape.path[i]![j]!)), 0));
+  it('has twelve short rounded fingers surrounding an open oval mouth', () => {
+    const fingers = sculptGeometry('polyp-tentacles');
+    const positions = fingers.getAttribute('position');
+    const peaks: number[] = [], widths: number[] = [];
+    for (let k = 0; k < 12; k++) {
+      const angle = k * Math.PI / 6 + .025 * Math.sin(k * 2.1);
+      const points = Array.from({ length: positions.count }, (_, i) => new Vector3().fromBufferAttribute(positions, i))
+        .filter(p => Math.hypot(p.x - 5, p.z) > .27 && Math.abs(Math.atan2(Math.sin(Math.atan2(p.z,p.x-5)-angle), Math.cos(Math.atan2(p.z,p.x-5)-angle))) < .15);
+      expect(points.length).toBeGreaterThan(30);
+      const peak = Math.max(...points.map(p => p.y));
+      peaks.push(peak);
+      expect(peak).toBeGreaterThan(.58); expect(peak).toBeLessThan(.68);
+      const shaft = points.filter(p => p.y > .52 && p.y < .55);
+      const tangential = shaft.map(p => -(p.x-5)*Math.sin(angle)+p.z*Math.cos(angle));
+      widths.push(Math.max(...tangential)-Math.min(...tangential));
     }
-    roots.sort((a, b) => a - b);
-    const gaps = roots.map((root, i) => (roots[(i + 1) % roots.length]! - root + Math.PI * 2) % (Math.PI * 2));
-    for (const gap of gaps) expect(Math.abs(gap - Math.PI / 6)).toBeLessThan(.06);
-    expect(Math.max(...gaps) - Math.min(...gaps)).toBeGreaterThan(.01);
-    expect(Math.max(...lengths) - Math.min(...lengths)).toBeGreaterThan(.04);
-    for (const id of ['polyp-tissue', 'polyp-mouth', 'polyp-skeleton']) {
-      const part = file.parts.find((p) => p.id === id)!;
+    expect(Math.max(...peaks)-Math.min(...peaks)).toBeGreaterThan(.04);
+    for (const width of widths) expect(width).toBeGreaterThan(.040);
+    expect(fingers.boundingBox!.getSize(new Vector3()).y).toBeLessThan(.24);
+    fingers.dispose();
+    for (const id of ['polyp-tissue','polyp-mouth','polyp-skeleton','polyp-tentacles']) {
+      const part = file.parts.find(p => p.id === id)!;
       expect(part.mesh).toBe(id); expect(part.primitive).toBeUndefined();
     }
     const mouth = sculptGeometry('polyp-mouth');
-    const bounds = mouth.boundingBox!;
-    const size = bounds.getSize(new Vector3());
-    expect(size.x / size.z).toBeGreaterThan(2.5); // a slit, not a round torus
-    expect(size.y).toBeGreaterThan(.04); // an opening with real depth
-    const positions = mouth.getAttribute('position');
-    for (let i = 0; i < positions.count; i++) {
-      expect(Math.hypot(positions.getX(i) - 5, positions.getZ(i))).toBeGreaterThan(.003);
-    }
+    const size = mouth.boundingBox!.getSize(new Vector3());
+    expect(size.x / size.z).toBeGreaterThan(1.8);
+    expect(size.x / size.z).toBeLessThan(2.2); // rounded oval, no pinched eye corners
+    expect(size.y).toBeGreaterThan(.06); // a real recessed throat
+    const polypChapter = chapters.find(c => c.id === 'coral-and-partners')!;
+    const beat = polypChapter.state.beats[1];
+    expect(beat.labels).toContain('polyp-mouth');
+    expect(beat.camera.position[1] - beat.camera.target[1]).toBeGreaterThan(beat.camera.position[2] - beat.camera.target[2]);
     mouth.dispose();
+  });
+
+  it('closes all foliose rims, undersides and central attachments', () => {
+    const geometry = sculptGeometry('colony-sheet'), position = geometry.getAttribute('position'), index = geometry.index!;
+    const edges = new Map<string, number>();
+    const vertex = (i:number) => [position.getX(i),position.getY(i),position.getZ(i)].map(v=>v.toFixed(6)).join(',');
+    for(let i=0;i<index.count;i+=3) for(let j=0;j<3;j++) {
+      const a=vertex(index.getX(i+j)),b=vertex(index.getX(i+(j+1)%3));
+      if(a===b) continue;
+      const key=[a,b].sort().join('|');edges.set(key,(edges.get(key)??0)+1);
+    }
+    expect([...edges.values()].filter(n=>n===1)).toHaveLength(0);
+    geometry.dispose();
+  });
+
+  it('keeps the labelled mouth unobstructed and the polyp large after the HUD refit', () => {
+    const ch=chapters.find(c=>c.id==='coral-and-partners')!,beat=ch.state.beats[1];
+    const boxes:FrameBox[]=file.parts.filter(p=>!p.context&&!ch.state.hide.includes(p.id)).map(p=>{
+      const g=p.mesh?sculptGeometry(p.mesh):undefined;
+      const b=g?.boundingBox??partBounds(p)!;
+      const min=b.min instanceof Vector3?b.min.toArray():b.min,max=b.max instanceof Vector3?b.max.toArray():b.max;
+      g?.dispose();
+      return {center:min.map((v,i)=>(v+max[i]!)/2) as [number,number,number],half:min.map((v,i)=>(max[i]!-v)/2) as [number,number,number]};
+    });
+    const material=new MeshBasicMaterial({side:DoubleSide});
+    const opaque=['polyp-mouth','polyp-tentacles','polyp-skeleton'].map(id=>{
+      const mesh=new Mesh(sculptGeometry(id),material);mesh.name=id;mesh.updateMatrixWorld();return mesh;
+    });
+    for(const fixture of [
+      {width:1520,height:1023,rect:{x0:340,y0:12,x1:1150,y1:951},panels:[{x0:28,y0:12,x1:328,y1:951},{x0:1162,y0:12,x1:1508,y1:610},{x0:12,y0:963,x1:1508,y1:1023}]},
+      {width:624,height:711,rect:{x0:56,y0:12,x1:612,y1:621},panels:[{x0:0,y0:12,x1:44,y1:621},{x0:0,y0:633,x1:624,y1:711}]},
+    ]) {
+      const {width,height,rect,panels}=fixture;
+      const fitted=fitCameraToHud(fitCameraToAspect(beat.camera,width/height),boxes,width,height,rect,{panels});
+      const camera=new PerspectiveCamera(30,width/height,.001,100);camera.position.set(...fitted.position);camera.lookAt(new Vector3(...fitted.target));camera.updateMatrixWorld();
+      const mouth=new Vector3(5,.53,0),projection=mouth.clone().project(camera);
+      const x=(projection.x+1)*width/2,y=(1-projection.y)*height/2;
+      expect(x).toBeGreaterThan(rect.x0);expect(x).toBeLessThan(rect.x1);
+      expect(y).toBeGreaterThan(rect.y0);expect(y).toBeLessThan(rect.y1);
+      const ray=new Raycaster(camera.position,mouth.sub(camera.position).normalize());
+      expect(ray.intersectObjects(opaque)[0]?.object.name).toBe('polyp-mouth');
+      const position=opaque[1]!.geometry.getAttribute('position');
+      const xs=Array.from({length:position.count},(_,i)=>(new Vector3().fromBufferAttribute(position,i).project(camera).x+1)*width/2);
+      expect(Math.max(...xs)-Math.min(...xs)).toBeGreaterThan((rect.x1-rect.x0)*.50);
+    }
+    for(const mesh of opaque)mesh.geometry.dispose();material.dispose();
   });
 
   it('contains every algal-marker vertex within the actual sculpted tissue wall', () => {
@@ -313,7 +360,7 @@ describe('coral-reef: finite model and independent science-content oracle', () =
         ray.set(new Vector3(5, point.y, 0), radial.normalize());
         const intersections = ray.intersectObject(wall).map((hit) => hit.distance)
           .filter((d, k, all) => k === 0 || Math.abs(d - all[k - 1]!) > 1e-6);
-        expect(intersections.length).toBeGreaterThanOrEqual(2);
+        expect(intersections.length, `marker ${marker.at} point ${point.toArray()} intersections ${intersections}`).toBeGreaterThanOrEqual(2);
         expect(distance, `marker ${marker.at.join(',')}`).toBeGreaterThanOrEqual(intersections[0]! - 1e-6);
         expect(distance, `marker ${marker.at.join(',')}`).toBeLessThanOrEqual(intersections[1]! + 1e-6);
       }

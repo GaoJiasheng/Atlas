@@ -8,12 +8,12 @@ level: P6
 state:
   camera:
     position:
-      - 2
-      - 1.4
-      - 3.7
+      - -1
+      - 0.88
+      - 2.05
     target:
-      - 0
-      - -0.1
+      - -1
+      - -0.2
       - 0
     fov: 30
   layers:
@@ -58,25 +58,90 @@ state:
       caption:
         en: The reef flat is the shallow zone nearest the shore. Parts may be exposed at low tide.
         zh: 礁坪靠近岸边，水较浅；部分地方会在低潮时露出水面。
+      camera:
+        position:
+          - -1
+          - 0.94
+          - 1.96
+        target:
+          - -1
+          - -0.2
+          - 0
+        fov: 30
+      hide:
+        - reef-crest
+        - reef-slope
+        - colony-sheet
+        - colony-encrusting
+        - substrate-context
     - part: reef-crest
       labels:
         - reef-crest
       caption:
         en: The crest faces incoming waves and can reduce their energy.
         zh: 礁脊迎向海浪，可削弱传来的波浪能量。
+      camera:
+        position:
+          - -0.12
+          - 1.05
+          - 1.9
+        target:
+          - -0.12
+          - -0.12
+          - 0
+        fov: 30
+      hide:
+        - reef-flat
+        - reef-slope
+        - colony-boulder
+        - colony-tissue
+        - colony-encrusting
+        - refuge-cavity
+        - substrate-context
     - part: reef-slope
       labels:
         - reef-slope
       caption:
         en: The reef slope descends seaward, where less light is available.
         zh: 礁坡向海中下降，较深处可获得的光更少。
-    - camera: evidence
+      camera:
+        position:
+          - 0.86
+          - 0.78
+          - 2.08
+        target:
+          - 0.86
+          - -0.39
+          - 0
+        fov: 30
+      hide:
+        - reef-flat
+        - reef-crest
+        - colony-boulder
+        - colony-tissue
+        - colony-sheet
+        - refuge-cavity
+        - substrate-context
+    - camera:
+        position:
+          - 14.72
+          - 0.76
+          - 1.52
+        target:
+          - 14.72
+          - 0.41
+          - 0
+        fov: 30
       layers:
         - reef-habitat
         - polyp-closeup
         - web-specimens
         - evidence-tools
-      hide: []
+      hide: &a1
+        - nursery-frame
+        - nursery-fragments
+        - monitoring-quadrat
+        - sediment-deposit
       labels:
         - light-marker
       part: null
@@ -87,13 +152,22 @@ state:
       caption:
         en: In this illustrative water case, the light index falls as depth increases.
         zh: 在这个示意水体中，深度增加，相对光指数下降。
-    - camera: evidence
+    - camera:
+        position:
+          - 14.82
+          - 0.97
+          - 1.8
+        target:
+          - 14.82
+          - 0.5
+          - 0
+        fov: 30
       layers:
         - reef-habitat
         - polyp-closeup
         - web-specimens
         - evidence-tools
-      hide: []
+      hide: *a1
       labels:
         - water-haze
         - light-marker

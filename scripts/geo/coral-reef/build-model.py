@@ -7,7 +7,7 @@ The table contract is copied unchanged from authoring/sim-plan.json.
 import json
 import math
 import subprocess
-from sculpt import Mesh, dome as sculpt_dome, corallite, tissue as sculpt_tissue, mouth as sculpt_mouth, plate, branching, write_glb
+from sculpt import Mesh, dome as sculpt_dome, corallite, tissue as sculpt_tissue, mouth as sculpt_mouth, plate, branching, tentacles as sculpt_tentacles, reef_shelf, sand_patches, encrusting, write_glb
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -109,8 +109,8 @@ part('colony-sheet','Sheet coral colony','片状珊瑚群体','reef-habitat',
      primitive('extrude',[-.1,.20,.15],'tissue','token:food',shape=sheet_outline,depth=.023,bevel=.003,rotation=[90,0,0]),sheet_extra)
 part('colony-encrusting','Encrusting coral colony','覆生珊瑚群体','reef-habitat',
      'Covers a patch of hard substrate with joined polyps.','以相连珊瑚虫覆盖一片硬基底。',
-     'An encrusting colony follows a surface rather than building a large projecting dome. It remains hard coral with living polyps over skeleton. [S3, S21]\n\nThe thin patch is laid on this schematic slope to compare growth forms. It does not claim a particular species is confined to the reef slope. [S50]',
-     '覆生形态沿着基底表面铺展，而不是形成明显突起的大圆丘；它仍是骨骼上有活珊瑚虫的硬珊瑚。[S3, S21]\n\n模型把薄层放在示意礁坡上，以便比较形态，并不表示某一种珊瑚只生活在礁坡。[S50]',
+     'An encrusting colony follows a surface rather than building a large projecting dome. It remains hard coral with living polyps over skeleton. [S3, S21]\n\nThe irregular crust follows the limestone slope and has recessed corallites. It compares growth forms. It does not claim a particular species is confined to the reef slope. [S50]',
+     '覆生形态沿着基底表面铺展，而不是形成明显突起的大圆丘；它仍是骨骼上有活珊瑚虫的硬珊瑚。[S3, S21]\n\n不规则薄层沿石灰岩礁坡铺展，表面有凹入的珊瑚杯，用于比较形态；并不表示某一种珊瑚只生活在礁坡。[S50]',
      primitive('extrude',[.64,-.12,-.04],'tissue','token:food',shape=[[-.24,.07],[-.08,.018],[.12,-.13],[.25,-.21],[.25,-.185],[.12,-.105],[-.08,.044],[-.24,.095]],depth=.34,bevel=.003))
 
 # Independent enlarged polyp. The hollow wall and oral annulus leave one
@@ -125,8 +125,8 @@ part('polyp-tissue','Living polyp tissue','珊瑚虫活组织','polyp-closeup',
 mouth_path = [[.073*math.cos(i*math.tau/32),0,.045*math.sin(i*math.tau/32)] for i in range(32)]
 part('polyp-mouth','Single central mouth','中央唯一的口','polyp-closeup',
      'Takes in food and releases waste through one opening.','以同一个开口摄食并排出废物。',
-     'Food enters through the central mouth; waste also leaves through this opening. A coral polyp does not have a second opening serving as an anus. [S5, S6]\n\nThe slit-shaped lips mark one mouth on a raised oral cone. The model does not show the detailed internal digestive filaments. Its size is schematic. [S50]',
-     '食物由中央的口进入，废物也经同一开口排出；珊瑚虫没有另一个作为肛门的开口。[S5, S6]\n\n略隆起的口锥上，狭缝状口缘标出唯一的口。模型省略了内部消化丝等细节，大小也只是示意。[S50]',
+     'Food enters through the central mouth; waste also leaves through this opening. A coral polyp does not have a second opening serving as an anus. [S5, S6]\n\nThe rounded oval lips surround one recessed mouth on a raised oral disc. The model does not show the detailed internal digestive filaments. Its size is schematic. [S50]',
+     '食物由中央的口进入，废物也经同一开口排出；珊瑚虫没有另一个作为肛门的开口。[S5, S6]\n\n隆起的口盘上，圆钝的椭圆形口缘围着唯一的凹入口。模型省略了内部消化丝等细节，大小也只是示意。[S50]',
      sweep([2.5,.622,0],mouth_path,.012,'tissue','token:muscle-3',closed=True,caps='none'),connects=['polyp-tissue'])
 tentacles=[]
 for k in range(12):
@@ -146,8 +146,8 @@ for k in range(12):
                               rings={'every':.012,'depth':.045}))
 part('polyp-tentacles','Feeding tentacles','摄食触手','polyp-closeup',
      'Surround the mouth and help capture small food.','围绕着口，帮助捕捉小型食物。',
-     'Tentacles surround the mouth and help capture food. Stinging cells in the outer tissues assist capture; the model does not enlarge or count these cells. [S5, S6]\n\nThis hard-coral study has twelve smooth, unbranched tentacles, one example of a multiple-of-six arrangement. The count is a design example, not a claim about all species. RUN adds a slow schematic sway, not a measured feeding frequency. [S5, S50]',
-     '触手环绕着口，帮助捕捉食物。外层组织中的刺细胞可协助捕食，模型没有放大或计数这些细胞。[S5, S6]\n\n这个硬珊瑚示例画了十二根光滑、不分羽状枝的触手，是六的倍数排列的一例，不代表所有物种。RUN只加入缓慢的示意摆动，不是实测摄食频率。[S5, S50]',
+     'Tentacles surround the mouth and help capture food. Stinging cells in the outer tissues assist capture; the model enlarges surface batteries as small bumps without counting individual cells. [S5, S6]\n\nThis hard-coral study has twelve short, plump, unbranched tentacles in two staggered cycles, one example of a multiple-of-six arrangement. The count is a design example, not a claim about all species. RUN adds a slow schematic sway, not a measured feeding frequency. [S5, S50]',
+     '触手环绕着口，帮助捕捉食物。外层组织中的刺细胞可协助捕食，模型以小突起放大表示刺细胞群，不计数单个细胞。[S5, S6]\n\n这个硬珊瑚示例画了分为两轮错列的十二根短而饱满、不分羽状枝的触手，是六的倍数排列的一例，不代表所有物种。RUN只加入缓慢的示意摆动，不是实测摄食频率。[S5, S50]',
      tentacles[0],tentacles[1:],connects=['polyp-mouth'])
 
 cup_profile=[[0,-.035],[.24,-.035],[.29,.025],[.325,.20],[.33,.43],[.313,.455],[.291,.44],[.288,.23],[.253,.07],[0,.07]]
@@ -247,7 +247,7 @@ part('light-marker','Relative-light marker','相对光指数标记','evidence-to
      'Moves vertically to display a relative light index.','以竖直位置显示相对光指数。',
      'This marker displays an illustrative relative light index, calculated as 100 × exp(−kz). The depth choices are 1, 3 and 7 metres; design coefficients are 0.1 and 0.5 per metre for the two water cases. [S50]\n\nThe marker’s position is an index display, not the actual depth of a coral or a light ray. It cannot establish a coral survival threshold, water temperature, bleaching risk or measured Singapore irradiance. [S10, S50]',
      '标记显示示意的相对光指数，计算为100 × exp(−kz)。深度选项为1、3和7米；两种水体采用每米0.1和0.5的设计衰减系数。[S50]\n\n标记的位置是指数读数，不是珊瑚的实际深度，也不是光线轨迹；它不确定存活阈值、水温、白化风险或新加坡现场照度。[S10, S50]',
-     sphere([7.42,0,.15],.045,'token:signal'),[sweep([7.42,0,.15],[[-.10,0,0],[.10,0,0]],.010,'tissue','token:signal')])
+     primitive('extrude',[7.42,0,.15],'powder','token:signal',shape=[[-.10,-.014],[.025,-.014],[.025,-.036],[.092,0],[.025,.036],[.025,.014],[-.10,.014]],depth=.014,bevel=.003))
 frame=primitive('bevelBox',[8.03,.10,0],'powder','token:neutral',size=[.64,.035,.43],bevel=.007)
 frame_extra=[]
 for x in [7.75,8.31]:
@@ -277,6 +277,8 @@ for t in [-.3,-.1,.1,.3]:
 # Four elbow socket collars on each straight run; 25mm PVC outer diameter.
 for x,z,rot in [(-.45,-.5,[0,0,90]),(.45,-.5,[0,0,90]),(-.45,.5,[0,0,90]),(.45,.5,[0,0,90]),(-.5,-.45,[90,0,0]),(-.5,.45,[90,0,0]),(.5,-.45,[90,0,0]),(.5,.45,[90,0,0])]:
     qextra.append(lathe([9+x,.028,z],[[.0125,-.025],[.015,-.023],[.015,.023],[.0125,.025]],'plastic','token:bone',rotation=rot))
+for collar in qextra[8:]:
+    collar['segments']=24
 part('monitoring-quadrat','Monitoring quadrat','监测样方','evidence-tools',
      'Frames a repeatable patch for observation.','框出一片可重复观察的区域。',
      'Repeated observations help researchers compare communities over time. Museum collections and documented records provide another kind of evidence; LKCNHM maintains a cnidarian collection. [S16]\n\nThis square PVC frame has a nominal one-metre side and a string grid. It is an original generic quadrat, not the measured equipment of a particular study. It suggests returning to compare evidence; it does not produce a live reef count or prove a restoration outcome. [S50]',
@@ -310,8 +312,8 @@ part('refuge-cavity','Shelter cavity','庇护岩隙','reef-habitat',
 
 part('substrate-context','Reef support context','礁体承托示意','reef-habitat',
      'Supports the connected schematic reef section.','承托连续的示意礁剖面。',
-     'This thin support belongs to the original schematic cross-section. It is not surveyed geology, a sea-level plane or a Singapore map. [S50]',
-     '薄承托面属于原创示意礁剖面，不是实测地质、海平面或新加坡地图。[S50]',
+     'Irregular sand pockets occupy sheltered hollows in this original schematic cross-section. It is not surveyed geology, a sea-level plane or a Singapore map. [S50]',
+     '不规则沙斑位于原创示意礁剖面的低洼处，不是实测地质、海平面或新加坡地图。[S50]',
      primitive('bevelBox',[0,-.78,0],'abrasive','token:neutral',size=[3.04,.05,.91],bevel=.009),context=True)
 part('inset-base','Enlarged-study base','放大模型底缘','polyp-closeup',
      'Separates the enlarged animal study from the reef.','将放大的动物模型与礁体分开。',
@@ -337,7 +339,7 @@ for id,path,parts in [
 cameras={
     'hero':([3,2.3,4],[0,-.1,0],bi('Overview','总览')),
     'reef':([2,1.4,3.7],[0,-.1,0],bi('Reef zones','礁区')),
-    'polyp':([3.4,1.4,1.8],[2.5,.4,0],bi('Polyp','珊瑚虫')),
+    'polyp':([2.5,1.30,1.48],[2.5,.36,0],bi('Polyp','珊瑚虫')),
     'web':([5,1.8,3.4],[5,.3,0],bi('Food web','食物网')),
     'evidence':([9.5,2.0,3.7],[8.35,.28,0],bi('Evidence','环境证据')),
     'conservation':([9.4,1.8,3.3],[8.4,.15,0],bi('Conservation','保护')),
@@ -366,6 +368,10 @@ meshes={
     'polyp-tissue':sculpt_tissue(),
     'polyp-mouth':sculpt_mouth(),
     'colony-sheet':plate([-.1,.11,.15]),
+    'polyp-tentacles':sculpt_tentacles(),
+    'colony-encrusting':encrusting(),
+    'substrate-context':sand_patches(),
+    **reef_shelf(),
 }
 fragmesh=Mesh()
 for x,z,s,seed in [(14.82,.07,.78,2),(15.03,-.06,.92,8),(15.23,.08,.70,11)]:
@@ -386,6 +392,12 @@ for p in PARTS:
     if p['id'] in meshes:
         old=p.pop('primitive');p.pop('extra',None)
         p.update(mesh=p['id'],material={'color':old['color'],'tint':old['tint']})
+    if p['id']=='polyp-mouth':
+        p['material']['tint']='#65443b'
+    if p['id']=='refuge-cavity':
+        p['material']['tint']='token:neutral'
+    if p['id']=='substrate-context':
+        p['material']={'color':'abrasive','tint':'token:bone'}
     if p['id']=='nursery-frame':
         # The rack's manufactured straight members need no dense curved-pipe
         # longitudinal tessellation. Preserve diameter, open bore and joints.
@@ -447,3 +459,6 @@ assert len(PARTS)==32 and sum(not p.get('context') for p in PARTS)==26
 out=TOPIC/'data/parts.json'
 out.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 print(f'{out.relative_to(ROOT)}: {len(PARTS)} parts, {len(groups)} groups, {len(flows)} flows')
+
+# Keep beat authoring reproducible alongside the generated parts and asset.
+subprocess.run(['pnpm','tsx',str(ROOT/'scripts/geo/coral-reef/author-views.ts')],cwd=ROOT,check=True)
