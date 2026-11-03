@@ -1,0 +1,1029 @@
+{
+  "sim": {
+    "kind": "table",
+    "controls": [
+      {
+        "id": "frog-view",
+        "kind": "choice",
+        "default": "egg",
+        "label": {
+          "en": "Frog stage",
+          "zh": "青蛙阶段"
+        },
+        "options": [
+          {
+            "id": "egg",
+            "label": {
+              "en": "Egg",
+              "zh": "卵"
+            }
+          },
+          {
+            "id": "tadpole",
+            "label": {
+              "en": "Tadpole",
+              "zh": "蝌蚪"
+            }
+          },
+          {
+            "id": "hind-legs",
+            "label": {
+              "en": "Tadpole with hind legs",
+              "zh": "长出后腿的蝌蚪"
+            }
+          },
+          {
+            "id": "froglet",
+            "label": {
+              "en": "Froglet with tail",
+              "zh": "带尾幼蛙"
+            }
+          },
+          {
+            "id": "adult",
+            "label": {
+              "en": "Adult frog",
+              "zh": "成蛙"
+            }
+          }
+        ]
+      },
+      {
+        "id": "chicken-view",
+        "kind": "choice",
+        "default": "egg",
+        "label": {
+          "en": "Chicken stage",
+          "zh": "鸡的阶段"
+        },
+        "options": [
+          {
+            "id": "egg",
+            "label": {
+              "en": "Egg",
+              "zh": "卵"
+            }
+          },
+          {
+            "id": "chick",
+            "label": {
+              "en": "Chick",
+              "zh": "雏鸡"
+            }
+          },
+          {
+            "id": "adult",
+            "label": {
+              "en": "Adult chicken",
+              "zh": "成鸡"
+            }
+          }
+        ]
+      },
+      {
+        "id": "egg-open",
+        "kind": "toggle",
+        "default": false,
+        "label": {
+          "en": "Open the shell window",
+          "zh": "打开壳窗"
+        }
+      },
+      {
+        "id": "fertilised",
+        "kind": "toggle",
+        "default": true,
+        "label": {
+          "en": "Choose a fertilised egg",
+          "zh": "选择受精卵"
+        }
+      },
+      {
+        "id": "compare-view",
+        "kind": "choice",
+        "default": "frog",
+        "label": {
+          "en": "Choose a life cycle",
+          "zh": "选择生活史"
+        },
+        "options": [
+          {
+            "id": "frog",
+            "label": {
+              "en": "Frog",
+              "zh": "青蛙"
+            }
+          },
+          {
+            "id": "chicken",
+            "label": {
+              "en": "Chicken",
+              "zh": "鸡"
+            }
+          },
+          {
+            "id": "mosquito",
+            "label": {
+              "en": "Mosquito",
+              "zh": "蚊子"
+            }
+          },
+          {
+            "id": "plant",
+            "label": {
+              "en": "Flowering plant",
+              "zh": "开花植物"
+            }
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "id": "frog-form",
+        "kind": "state",
+        "label": {
+          "en": "Frog stage",
+          "zh": "青蛙阶段"
+        },
+        "states": {
+          "egg": {
+            "en": "Egg",
+            "zh": "卵"
+          },
+          "tadpole": {
+            "en": "Tadpole",
+            "zh": "蝌蚪"
+          },
+          "hind-legs": {
+            "en": "Tadpole with hind legs",
+            "zh": "长出后腿的蝌蚪"
+          },
+          "froglet": {
+            "en": "Froglet with tail",
+            "zh": "带尾幼蛙"
+          },
+          "adult": {
+            "en": "Adult frog",
+            "zh": "成蛙"
+          }
+        }
+      },
+      {
+        "id": "chicken-form",
+        "kind": "state",
+        "label": {
+          "en": "Chicken stage",
+          "zh": "鸡的阶段"
+        },
+        "states": {
+          "egg": {
+            "en": "Egg",
+            "zh": "卵"
+          },
+          "chick": {
+            "en": "Chick",
+            "zh": "雏鸡"
+          },
+          "adult": {
+            "en": "Adult chicken",
+            "zh": "成鸡"
+          }
+        }
+      },
+      {
+        "id": "egg-view",
+        "kind": "state",
+        "label": {
+          "en": "Shell window",
+          "zh": "壳窗"
+        },
+        "states": {
+          "closed": {
+            "en": "Window closed",
+            "zh": "壳窗关闭"
+          },
+          "open": {
+            "en": "Window open",
+            "zh": "壳窗打开"
+          }
+        }
+      },
+      {
+        "id": "embryo-view",
+        "kind": "state",
+        "label": {
+          "en": "Embryo in view",
+          "zh": "可见的胚胎"
+        },
+        "states": {
+          "shown": {
+            "en": "Embryo visible",
+            "zh": "看见胚胎"
+          },
+          "hidden": {
+            "en": "No embryo visible",
+            "zh": "看不到胚胎"
+          }
+        }
+      },
+      {
+        "id": "egg-condition",
+        "kind": "state",
+        "label": {
+          "en": "Egg condition",
+          "zh": "卵的状态"
+        },
+        "states": {
+          "fertilised": {
+            "en": "Fertilised; needs suitable incubation",
+            "zh": "已受精；需要适宜的孵化条件"
+          },
+          "unfertilised": {
+            "en": "Unfertilised; cannot develop into a chick",
+            "zh": "未受精；无法发育成雏鸡"
+          }
+        }
+      },
+      {
+        "id": "comparison",
+        "kind": "state",
+        "label": {
+          "en": "Selected cycle",
+          "zh": "选中的生活史"
+        },
+        "states": {
+          "frog": {
+            "en": "Frog",
+            "zh": "青蛙"
+          },
+          "chicken": {
+            "en": "Chicken",
+            "zh": "鸡"
+          },
+          "mosquito": {
+            "en": "Mosquito",
+            "zh": "蚊子"
+          },
+          "plant": {
+            "en": "Flowering plant",
+            "zh": "开花植物"
+          }
+        }
+      }
+    ],
+    "bind": [
+      {
+        "output": "frog-form",
+        "part": "frog-marker",
+        "pose": {
+          "egg": "frog-at-egg",
+          "tadpole": "frog-at-tadpole",
+          "hind-legs": "frog-at-hind-legs",
+          "froglet": "frog-at-froglet",
+          "adult": "frog-at-adult"
+        }
+      },
+      {
+        "output": "chicken-form",
+        "part": "chicken-marker",
+        "pose": {
+          "egg": "chicken-at-egg",
+          "chick": "chicken-at-chick",
+          "adult": "chicken-at-adult"
+        }
+      },
+      {
+        "output": "egg-view",
+        "part": "egg-shell-window",
+        "pose": {
+          "closed": null,
+          "open": "egg-window-open"
+        }
+      },
+      {
+        "output": "embryo-view",
+        "part": "egg-embryo",
+        "visible": {
+          "eq": "shown"
+        }
+      },
+      {
+        "output": "comparison",
+        "part": "comparison-marker",
+        "pose": {
+          "frog": "compare-at-frog",
+          "chicken": "compare-at-chicken",
+          "mosquito": "compare-at-mosquito",
+          "plant": "compare-at-plant"
+        }
+      }
+    ],
+    "table": {
+      "experiments": {
+        "frog-observation": {
+          "keys": [
+            "frog-view"
+          ],
+          "rows": [
+            {
+              "when": {
+                "frog-view": "egg"
+              },
+              "set": {
+                "frog-form": "egg"
+              },
+              "source": [
+                "S22",
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "frog-view": "tadpole"
+              },
+              "set": {
+                "frog-form": "tadpole"
+              },
+              "source": [
+                "S22",
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "frog-view": "hind-legs"
+              },
+              "set": {
+                "frog-form": "hind-legs"
+              },
+              "source": [
+                "S22",
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "frog-view": "froglet"
+              },
+              "set": {
+                "frog-form": "froglet"
+              },
+              "source": [
+                "S22",
+                "S2"
+              ]
+            },
+            {
+              "when": {
+                "frog-view": "adult"
+              },
+              "set": {
+                "frog-form": "adult"
+              },
+              "source": [
+                "S22",
+                "S2"
+              ]
+            }
+          ]
+        },
+        "chicken-observation": {
+          "keys": [
+            "chicken-view"
+          ],
+          "rows": [
+            {
+              "when": {
+                "chicken-view": "egg"
+              },
+              "set": {
+                "chicken-form": "egg"
+              },
+              "source": [
+                "S22",
+                "S6"
+              ]
+            },
+            {
+              "when": {
+                "chicken-view": "chick"
+              },
+              "set": {
+                "chicken-form": "chick"
+              },
+              "source": [
+                "S22",
+                "S6"
+              ]
+            },
+            {
+              "when": {
+                "chicken-view": "adult"
+              },
+              "set": {
+                "chicken-form": "adult"
+              },
+              "source": [
+                "S22",
+                "S6"
+              ]
+            }
+          ]
+        },
+        "egg-window": {
+          "keys": [
+            "egg-open",
+            "fertilised"
+          ],
+          "rows": [
+            {
+              "when": {
+                "egg-open": false,
+                "fertilised": false
+              },
+              "set": {
+                "egg-view": "closed",
+                "embryo-view": "hidden",
+                "egg-condition": "unfertilised"
+              },
+              "source": [
+                "S22",
+                "S6",
+                "S9"
+              ]
+            },
+            {
+              "when": {
+                "egg-open": false,
+                "fertilised": true
+              },
+              "set": {
+                "egg-view": "closed",
+                "embryo-view": "hidden",
+                "egg-condition": "fertilised"
+              },
+              "source": [
+                "S22",
+                "S6",
+                "S9"
+              ]
+            },
+            {
+              "when": {
+                "egg-open": true,
+                "fertilised": false
+              },
+              "set": {
+                "egg-view": "open",
+                "embryo-view": "hidden",
+                "egg-condition": "unfertilised"
+              },
+              "source": [
+                "S22",
+                "S6",
+                "S9"
+              ]
+            },
+            {
+              "when": {
+                "egg-open": true,
+                "fertilised": true
+              },
+              "set": {
+                "egg-view": "open",
+                "embryo-view": "shown",
+                "egg-condition": "fertilised"
+              },
+              "source": [
+                "S22",
+                "S6",
+                "S9"
+              ]
+            }
+          ]
+        },
+        "comparison-selection": {
+          "keys": [
+            "compare-view"
+          ],
+          "rows": [
+            {
+              "when": {
+                "compare-view": "frog"
+              },
+              "set": {
+                "comparison": "frog"
+              },
+              "source": [
+                "S22"
+              ]
+            },
+            {
+              "when": {
+                "compare-view": "chicken"
+              },
+              "set": {
+                "comparison": "chicken"
+              },
+              "source": [
+                "S22"
+              ]
+            },
+            {
+              "when": {
+                "compare-view": "mosquito"
+              },
+              "set": {
+                "comparison": "mosquito"
+              },
+              "source": [
+                "S22"
+              ]
+            },
+            {
+              "when": {
+                "compare-view": "plant"
+              },
+              "set": {
+                "comparison": "plant"
+              },
+              "source": [
+                "S22"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "presets": [
+    {
+      "id": "overview",
+      "label": {
+        "en": "Whole display",
+        "zh": "全景"
+      },
+      "camera": {
+        "position": [
+          10,
+          10,
+          14
+        ],
+        "target": [
+          0,
+          0.4,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "frog-overview",
+      "label": {
+        "en": "Frog observations",
+        "zh": "青蛙观察"
+      },
+      "camera": {
+        "position": [
+          0,
+          5,
+          6
+        ],
+        "target": [
+          -2.8,
+          0.4,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "chicken-overview",
+      "label": {
+        "en": "Chicken observations",
+        "zh": "鸡的观察"
+      },
+      "camera": {
+        "position": [
+          5.6,
+          5,
+          6
+        ],
+        "target": [
+          2.8,
+          0.4,
+          0
+        ],
+        "fov": 32
+      }
+    },
+    {
+      "id": "egg-close",
+      "label": {
+        "en": "Inside the egg",
+        "zh": "卵的里面"
+      },
+      "camera": {
+        "position": [
+          3.8,
+          2.3,
+          0.5
+        ],
+        "target": [
+          2.8,
+          0.5,
+          -1.4
+        ],
+        "fov": 30
+      }
+    },
+    {
+      "id": "comparison-view",
+      "label": {
+        "en": "Compare life cycles",
+        "zh": "比较生活史"
+      },
+      "camera": {
+        "position": [
+          0,
+          11.7,
+          16.1
+        ],
+        "target": [
+          0,
+          0.3,
+          3.5
+        ],
+        "fov": 32
+      }
+    }
+  ],
+  "spec": [
+    {
+      "key": {
+        "en": "Frog stages shown",
+        "zh": "青蛙观察阶段"
+      },
+      "value": "5",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Chicken stages shown",
+        "zh": "鸡的观察阶段"
+      },
+      "value": "3",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Model",
+        "zh": "模型"
+      },
+      "value": {
+        "en": "Compare stages",
+        "zh": "比较发育阶段"
+      },
+      "tag": "design"
+    }
+  ],
+  "parts": {
+    "frog-eggs": {
+      "name": {
+        "en": "Jelly-coated eggs",
+        "zh": "胶质包被的卵"
+      },
+      "summary": {
+        "en": "Enclose developing embryos",
+        "zh": "包围发育中的胚胎"
+      },
+      "detail": {
+        "en": "Each jelly coat surrounds an embryo, a young animal developing inside the egg. Only a small part of the egg group is shown. [S2]\n\nThe eggs are enlarged for a clear view. Their number here does not tell us how many eggs a frog lays. [S22]",
+        "zh": "每个胶质包被围着一个胚胎，也就是在卵内发育的幼体。这里仅画了卵团的一小部分。[S2]\n\n蛙卵放大后更容易看清。图里的数量不表示青蛙一次产卵的数量。[S22]"
+      }
+    },
+    "frog-tadpole": {
+      "name": {
+        "en": "Swimming tadpole",
+        "zh": "游泳的蝌蚪"
+      },
+      "summary": {
+        "en": "Swims by moving its tail",
+        "zh": "摆动尾巴，在水中游动"
+      },
+      "detail": {
+        "en": "A rounded body joins a tapering tail with a thin membrane. This swimming tadpole has no visible legs or feathery outer gills. [S2, S3]\n\nA tadpole is a young frog. Some frogs instead develop inside their eggs and hatch as froglets. The tray shows a common pond-frog pathway. [S3, S5, S22]",
+        "zh": "圆圆的身体连着逐渐变细的尾巴，尾巴上有薄膜。这只游泳的蝌蚪还看不到腿，也没有羽毛状的外鳃。[S2, S3]\n\n蝌蚪是青蛙的幼体。有些蛙在卵内发育，孵出时已是幼蛙。展台上展示的是常见的池塘型发育路线。[S3, S5, S22]"
+      }
+    },
+    "frog-hind-legs": {
+      "name": {
+        "en": "Tadpole with hind legs",
+        "zh": "长出后腿的蝌蚪"
+      },
+      "summary": {
+        "en": "Grows hind legs beside the tail",
+        "zh": "尾巴两旁长出后腿"
+      },
+      "detail": {
+        "en": "Two hind legs are visible beside the tail. The front legs have not yet appeared. [S2, S3]\n\nEach hind foot has five toes. This view shows a point in the tadpole's growth, rather than an exact age. [S20, S22]",
+        "zh": "尾巴两旁各有一条后腿，前肢还没有显现。[S2, S3]\n\n每只后足有五趾。这个视图展示蝌蚪成长中的一个样子，没有表示确切的年龄。[S20, S22]"
+      }
+    },
+    "frog-froglet": {
+      "name": {
+        "en": "Froglet with tail",
+        "zh": "带尾幼蛙"
+      },
+      "summary": {
+        "en": "Moves with limbs as its tail shrinks",
+        "zh": "四肢出现，尾巴逐渐缩短"
+      },
+      "detail": {
+        "en": "The froglet has a frog-shaped body and four limbs. A short tail is still attached. During metamorphosis, the body remodels and absorbs the tail tissues. The tail does not break off. [S2, S4]\n\nEach front foot has four fingers and each hind foot has five toes. The tail length helps show the change in shape; it does not give the froglet's exact age. [S20, S22]",
+        "zh": "幼蛙已有蛙形的身体和四肢，身后仍连着一段短尾。变态发育时，身体改变并吸收尾部组织，尾巴不会断掉。[S2, S4]\n\n每只前足有四指，每只后足有五趾。尾巴的长度帮助我们观察形态变化，不能用来判断幼蛙的确切年龄。[S20, S22]"
+      }
+    },
+    "frog-adult": {
+      "name": {
+        "en": "Adult frog",
+        "zh": "成蛙"
+      },
+      "summary": {
+        "en": "Has four limbs and no tadpole tail",
+        "zh": "有四肢，已没有蝌蚪的尾巴"
+      },
+      "detail": {
+        "en": "The adult frog has a broad head, short front limbs and folded hind limbs. It has no tadpole tail. Each front foot has four free fingers and each hind foot has five long, webbed toes. [S2, S20, S24]\n\nThis is a general frog model. Singapore has several frog species. The link to eggs shows reproduction and a new generation. [S12, S15, S22]",
+        "zh": "成蛙的头宽，前肢短，后肢屈曲，已经没有蝌蚪的尾巴。每只前足有四根独立的手指，每只后足有五根带蹼的长趾。[S2, S20, S24]\n\n这是通用的青蛙模型。新加坡有多个蛙种。通向卵的连接表示繁殖，开始新一代。[S12, S15, S22]"
+      }
+    },
+    "chicken-egg": {
+      "name": {
+        "en": "Chicken egg",
+        "zh": "鸡卵"
+      },
+      "summary": {
+        "en": "Encloses the yolk and egg white",
+        "zh": "包住卵黄和卵白"
+      },
+      "detail": {
+        "en": "The hard shell encloses the egg white, yolk and other structures. Most of the shell stays in place when you open the model window. [S6, S7]\n\nThe cutaway shell lets you see inside. Its thickness and size have been chosen for a clear view. [S22]",
+        "zh": "坚硬的蛋壳包住卵白、卵黄等结构。打开模型壳窗后，其余蛋壳仍留在原位。[S6, S7]\n\n切开的蛋壳让我们看见内部。壳的厚度和大小经过调整，方便观察。[S22]"
+      }
+    },
+    "egg-shell-window": {
+      "name": {
+        "en": "Model shell window",
+        "zh": "模型壳窗"
+      },
+      "summary": {
+        "en": "Moves aside to reveal the egg contents",
+        "zh": "移开后露出卵的内部"
+      },
+      "detail": {
+        "en": "Open the window to move this shell piece aside and see inside the egg. Close it to make the shell whole again. [S22]\n\nThe neat cut is made for the model. A hatching chick opens the shell and comes out through the broken shell. [S6, S22]",
+        "zh": "打开壳窗，这片壳会移到一旁，露出卵的内部。关窗后，蛋壳又合成完整形状。[S22]\n\n整齐的切口是为模型设置的。真实的雏鸡孵出时会破壳，再从破开的蛋壳出来。[S6, S22]"
+      }
+    },
+    "egg-yolk": {
+      "name": {
+        "en": "Yolk",
+        "zh": "卵黄"
+      },
+      "summary": {
+        "en": "Feeds the developing embryo",
+        "zh": "给发育中的胚胎提供营养"
+      },
+      "detail": {
+        "en": "The yolk supplies food for the developing embryo. Look for the rounded yolk inside the egg. [S6, S7]\n\nThe embryo is drawn beside the yolk's surface. The yolk itself is not a small chick hidden at its centre. [S6, S22]",
+        "zh": "卵黄给发育中的胚胎提供营养。找一找卵内圆圆的卵黄。[S6, S7]\n\n模型把胚胎画在卵黄表面旁。卵黄本身不是小鸡，中心也没有藏着一只缩小的雏鸡。[S6, S22]"
+      }
+    },
+    "egg-white": {
+      "name": {
+        "en": "Albumen · egg white",
+        "zh": "卵白"
+      },
+      "summary": {
+        "en": "Surrounds the yolk with water and protein",
+        "zh": "围着卵黄，含水分和蛋白质"
+      },
+      "detail": {
+        "en": "Egg white, also called albumen, surrounds the yolk. It contains water and protein. It is separate from both the yolk and the embryo. [S7]\n\nThe pale, see-through shape shows where egg white lies. A pale lens marks the air cell at the blunt end, and twisted chalazae extend from opposite sides of the yolk. The thin shell membranes are omitted. [S7, S22]",
+        "zh": "卵白围在卵黄外面，含有水分和蛋白质。它与卵黄、胚胎是不同的结构。[S7]\n\n浅色透明部分表示卵白的位置。钝端的浅色透镜状结构标出气室，扭曲的卵黄系带从卵黄相对两端伸出。薄壳膜仍省略。[S7, S22]"
+      }
+    },
+    "egg-embryo": {
+      "name": {
+        "en": "Embryo model",
+        "zh": "胚胎模型"
+      },
+      "summary": {
+        "en": "Develops into the chick inside the egg",
+        "zh": "在卵内发育成雏鸡"
+      },
+      "detail": {
+        "en": "The small, curved shape beside the yolk represents a developing chick in a fertilised egg. The simple outline does not show an exact incubation age. [S6, S22]\n\nOpen the shell window and choose the fertilised example to see it. Closing the window covers it. In the unfertilised example, no chick develops; warmth cannot fertilise an egg. [S6, S9, S22]",
+        "zh": "卵黄旁弯曲的小轮廓，表示受精卵内发育中的小鸡。这个简化形状没有表示确切的孵化日龄。[S6, S22]\n\n打开壳窗、选择受精的例子，就能看见胚胎；关窗会把它遮住。未受精的卵无法发育出雏鸡，保温也不能使卵受精。[S6, S9, S22]"
+      }
+    },
+    "chicken-chick": {
+      "name": {
+        "en": "Chick",
+        "zh": "雏鸡"
+      },
+      "summary": {
+        "en": "Grows from a young bird into an adult",
+        "zh": "从幼鸟逐渐长成成鸡"
+      },
+      "detail": {
+        "en": "The chick has a short beak, a round body covered in down, two wings and two feet. It grows into an adult chicken without a pupa stage. [S6, S9]\n\nCompare its proportions with the hen. The chick has short tail feathers and simplified down. Its shape differs from a smaller copy of the adult. [S22]",
+        "zh": "雏鸡有短喙、覆盖绒羽的圆身体、两只翅和两只足。它逐渐长成成鸡，不经过蛹期。[S6, S9]\n\n和母鸡比较一下身体比例。雏鸡的尾羽短，模型简化了绒羽。它的形态并不是成鸡的缩小版。[S22]"
+      }
+    },
+    "chicken-adult": {
+      "name": {
+        "en": "Adult hen",
+        "zh": "成年母鸡"
+      },
+      "summary": {
+        "en": "Shows a mature female chicken",
+        "zh": "呈现已经成熟的雌鸡"
+      },
+      "detail": {
+        "en": "This domestic hen has a broad breast, layered folded wings, a single serrated comb, paired wattles and a short arched tail. A hen is a female chicken; a cock can also be an adult. [S9, S22, S23]\n\nThe hen and chick share a bird's body shape, with different proportions and feathers. Singapore's roaming flocks include domestic fowl and Red Junglefowl. Use a field guide to distinguish them outdoors. [S11, S22]",
+        "zh": "这只家鸡母鸡有丰满的胸部、分层折叠的羽翼、锯齿状单冠、成对肉垂和短拱尾。母鸡是雌性的鸡，公鸡也可以是成鸡。[S9, S22, S23]\n\n母鸡和雏鸡都有鸟类的身体形态，但比例与羽毛不同。新加坡自由活动的鸡群中有家鸡和红原鸡，要在户外区分它们，可以查阅野外图鉴。[S11, S22]"
+      }
+    },
+    "frog-marker": {
+      "name": {
+        "en": "Frog observation marker",
+        "zh": "青蛙观察标记"
+      },
+      "summary": {
+        "en": "Marks the stage you choose",
+        "zh": "标出你选择的阶段"
+      },
+      "detail": {
+        "en": "The small bead and thin ring mark the stage you choose. The control moves the marker while the animals stay in place. [S22]\n\nMove back to look at an earlier stage again. Real animals do not grow backwards. [S15, S22]",
+        "zh": "小珠和细环标出你选中的阶段。控件移动标记，动物仍留在原处。[S22]\n\n把标记往回移，可以重新细看较早的阶段。真实动物不会倒着生长。[S15, S22]"
+      }
+    },
+    "chicken-marker": {
+      "name": {
+        "en": "Chicken observation marker",
+        "zh": "鸡的观察标记"
+      },
+      "summary": {
+        "en": "Marks the stage you choose",
+        "zh": "标出你选择的阶段"
+      },
+      "detail": {
+        "en": "The small bead and thin ring mark the stage you choose. The control moves the marker while the animals stay in place. [S22]\n\nMove back to look at an earlier stage again. Real animals do not grow backwards. [S15, S22]",
+        "zh": "小珠和细环标出你选中的阶段。控件移动标记，动物仍留在原处。[S22]\n\n把标记往回移，可以重新细看较早的阶段。真实动物不会倒着生长。[S15, S22]"
+      }
+    },
+    "compare-frog": {
+      "name": {
+        "en": "Frog comparison",
+        "zh": "青蛙对照"
+      },
+      "summary": {
+        "en": "Compares the frog's changing body shapes",
+        "zh": "比较青蛙身体形态的变化"
+      },
+      "detail": {
+        "en": "Follow egg, tadpole, tadpole with hind legs, tailed froglet and adult. The froglet's tail stays attached as it shrinks. There is no pupa. [S2, S3]\n\nThese smaller specimens reuse the main stage forms, including four free fingers on each front foot and five webbed toes on each hind foot. The stages are enlarged separately. [S20, S22]",
+        "zh": "依次看卵、蝌蚪、长出后腿的蝌蚪、带尾幼蛙和成蛙。幼蛙的尾巴逐渐缩短，但仍连着身体。青蛙没有蛹期。[S2, S3]\n\n这些较小标本复用主展台的阶段外形；前足有四根独立的手指，后足有五根带蹼足趾。各阶段分别放大。[S20, S22]"
+      }
+    },
+    "compare-chicken": {
+      "name": {
+        "en": "Chicken comparison",
+        "zh": "鸡的对照"
+      },
+      "summary": {
+        "en": "Compares egg, chick and adult hen",
+        "zh": "比较卵、雏鸡和成年母鸡"
+      },
+      "detail": {
+        "en": "The row shows an egg, a downy chick and an adult hen. The chick grows as a young bird, with no pupa stage. [S6, S9]\n\nRead from egg to adult to follow the order. Each stage is enlarged separately, so its size and spacing do not show real size or time. [S22]",
+        "zh": "这一排有卵、绒羽雏鸡和成年母鸡。雏鸡作为幼鸟继续生长，没有蛹期。[S6, S9]\n\n从卵读到成鸡，可以看出先后顺序。各阶段分别放大，模型大小和间距不表示实际大小或发育时间。[S22]"
+      }
+    },
+    "compare-mosquito": {
+      "name": {
+        "en": "Mosquito comparison",
+        "zh": "蚊子的对照"
+      },
+      "summary": {
+        "en": "Shows the pupa between larva and adult",
+        "zh": "显示幼虫与成虫之间的蛹"
+      },
+      "detail": {
+        "en": "The four shapes show egg, larva, comma-shaped pupa and six-legged adult. Larvae and pupae develop in water. The adult emerges after the pupa. [S14]\n\nEach stage is enlarged separately. The mosquito lesson explains these water stages in more detail. [S13, S14, S22]",
+        "zh": "四个轮廓依次是卵、幼虫、逗号形的蛹和六足成虫。幼虫和蛹在水中发育，成虫在蛹之后羽化。[S14]\n\n各阶段分别放大。蚊子课文会详细介绍这些水中阶段。[S13, S14, S22]"
+      }
+    },
+    "compare-plant": {
+      "name": {
+        "en": "Flowering plant comparison",
+        "zh": "开花植物对照"
+      },
+      "summary": {
+        "en": "Compares seed, young and adult plant",
+        "zh": "比较种子、幼株和成株"
+      },
+      "detail": {
+        "en": "The row shows a seed, a young plant and an adult flowering plant. A seed is different from an animal egg. [S1]\n\nThese models show broad stages, with each size set separately. The linked plant lesson explains pollination, fruit and seed dispersal. [S21, S22]",
+        "zh": "这一排展示种子、幼株和开花的成株。种子与动物的卵不同。[S1]\n\n模型把过程分成几个大阶段，大小分别设定。链接的植物课文会介绍传粉、果实和种子传播。[S21, S22]"
+      }
+    },
+    "comparison-marker": {
+      "name": {
+        "en": "Comparison marker",
+        "zh": "比较标记"
+      },
+      "summary": {
+        "en": "Marks the life cycle you choose",
+        "zh": "标出你选择的生活史"
+      },
+      "detail": {
+        "en": "The small bead marks the life cycle you choose. The control moves it between the four groups while the specimens stay in place. [S22]\n\nChoose another group to compare its sequence of growth and reproduction. [S15, S22]",
+        "zh": "小珠标出你选中的生活史。控件让它在四组标本之间移动，标本仍留在原处。[S22]\n\n选另一组，比较它的生长顺序和繁殖过程。[S15, S22]"
+      }
+    },
+    "frog-next-generation": {
+      "name": {
+        "en": "Reproduction · next generation",
+        "zh": "繁殖 · 下一代"
+      },
+      "summary": {
+        "en": "Connects adults with their offspring",
+        "zh": "把成体与它们的后代相连"
+      },
+      "detail": {
+        "en": "The last link shows reproduction. It connects the adult with eggs of a new generation. [S15]\n\nThe arrow stays in place to mark this connection. It shows the reading order, rather than the time reproduction takes. [S22]",
+        "zh": "最后一段连接表示繁殖，把成体与下一代的卵连起来。[S15]\n\n箭头留在原处标出这段联系，表示阅读顺序，不表示繁殖所需的时间。[S22]"
+      }
+    },
+    "chicken-next-generation": {
+      "name": {
+        "en": "Reproduction · next generation",
+        "zh": "繁殖 · 下一代"
+      },
+      "summary": {
+        "en": "Connects adults with their offspring",
+        "zh": "把成体与它们的后代相连"
+      },
+      "detail": {
+        "en": "The last link shows reproduction. It connects the adult with eggs of a new generation. [S15]\n\nThe arrow stays in place to mark this connection. It shows the reading order, rather than the time reproduction takes. [S22]",
+        "zh": "最后一段连接表示繁殖，把成体与下一代的卵连起来。[S15]\n\n箭头留在原处标出这段联系，表示阅读顺序，不表示繁殖所需的时间。[S22]"
+      }
+    },
+    "frog-tray": {
+      "name": {
+        "en": "Observation tray",
+        "zh": "观察展台"
+      },
+      "summary": {
+        "en": "Holds the stages for comparison",
+        "zh": "摆放各阶段，方便比较"
+      },
+      "detail": {
+        "en": "The low tray holds the stages side by side. Follow the arrows to read their order. Each animal is enlarged separately, and the gaps do not show time. [S22]",
+        "zh": "低矮展台把各阶段摆在一起，方便比较。沿箭头可以看出先后顺序。各阶段分别放大，间距不表示时间。[S22]"
+      }
+    },
+    "chicken-tray": {
+      "name": {
+        "en": "Observation tray",
+        "zh": "观察展台"
+      },
+      "summary": {
+        "en": "Holds the stages for comparison",
+        "zh": "摆放各阶段，方便比较"
+      },
+      "detail": {
+        "en": "The low tray holds the stages side by side. Follow the arrows to read their order. Each animal is enlarged separately, and the gaps do not show time. [S22]",
+        "zh": "低矮展台把各阶段摆在一起，方便比较。沿箭头可以看出先后顺序。各阶段分别放大，间距不表示时间。[S22]"
+      }
+    },
+    "comparison-tray": {
+      "name": {
+        "en": "Comparison tray",
+        "zh": "比较展台"
+      },
+      "summary": {
+        "en": "Holds four life cycles side by side",
+        "zh": "并排展示四种生活史"
+      },
+      "detail": {
+        "en": "Four groups show the life cycles of a frog, chicken, mosquito and flowering plant. Each has its own display sizes. Compare the order and shapes, rather than real size or development time. [S22]",
+        "zh": "四组标本展示青蛙、鸡、蚊子和开花植物的生活史，大小分别设定。可以比较顺序和形态，不能用它们比较实际大小或发育时间。[S22]"
+      }
+    }
+  }
+}

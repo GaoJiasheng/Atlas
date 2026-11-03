@@ -174,29 +174,37 @@ describe('frog-and-chicken: drawings agree with the selected observations', () =
 
   it.each(['frog-hind-legs', 'frog-froglet', 'frog-adult'])('%s has physically distinct digits branching from each foot', (id) => {
     const p = file.parts.find((p) => p.id === id)!;
-    const digits = [p.primitive!, ...(p.extra ?? [])].filter((q) =>
-      q.kind === 'sweep' && Array.isArray(q.radius) && q.radius[0]! <= 0.021,
+    const shapes = [p.primitive!, ...(p.extra ?? [])];
+    const digits = shapes.filter((q) =>
+      q.kind === 'sweep' && Array.isArray(q.radius) && q.radius[0]! <= 0.021 &&
+      // Digits lie entirely below the ankle plane; eyelids and dorsal folds
+      // are also fine sweeps but rise on the head/back, well above the feet.
+      q.path.every((point) => point[1] < 0),
     );
-    const feet = new Map<string, number[][]>();
+    expect(digits).toHaveLength(id === 'frog-hind-legs' ? 10 : 18);
+    const near = (a: readonly number[], b: readonly number[]) => Math.hypot(...a.map((n, i) => n - b[i]!)) < .003;
+    const feet: { origin: readonly number[]; ends: (readonly number[])[] }[] = [];
     for (const digit of digits) {
       if (digit.kind !== 'sweep') continue;
       const origin = digit.path[0]!;
-      const key = JSON.stringify(origin);
-      const ends = feet.get(key) ?? [];
+      let foot = feet.find((f) => near(f.origin, origin));
+      if (!foot) { foot = { origin, ends: [] }; feet.push(foot); }
       const end = digit.path.at(-1)!;
       expect(end).not.toEqual(origin);
-      ends.push(end);
-      feet.set(key, ends);
+      expect(digit.caps).toBe('round');
+      foot.ends.push(end);
     }
-    const counts = [...feet.values()].map((ends) => {
+    const counts = feet.map(({ ends }) => {
       expect(new Set(ends.map((p) => JSON.stringify(p))).size).toBe(ends.length);
       return ends.length;
     }).sort();
     expect(counts).toEqual(id === 'frog-hind-legs' ? [5, 5] : [4, 4, 5, 5]);
-    // Each digit cluster joins a drawn limb at the same ankle/wrist.
-    for (const origin of feet.keys()) {
-      expect([p.primitive!, ...(p.extra ?? [])].some((q) =>
-        q.kind === 'sweep' && JSON.stringify(q.path.at(-1)) === origin,
+    // A continuous paired limb may have a wrist at either path endpoint.
+    // Both roots still meet a drawn limb and all four feet remain distinct.
+    for (const { origin } of feet) {
+      expect(shapes.some((q) =>
+        q.kind === 'sweep' && !digits.includes(q) &&
+        (near(q.path[0]!, origin) || near(q.path.at(-1)!, origin)),
       )).toBe(true);
     }
   });

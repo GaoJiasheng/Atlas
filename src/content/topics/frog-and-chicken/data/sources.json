@@ -262,6 +262,30 @@
         "zh": "原创 DESIGN，不是实测数据。输入是离散观察选择；查表结果移动指示珠、打开壳窗或显示示意胚胎。等弧距不代表等时长，返回观察不代表生物逆向生长。受精与窗口两个开关组合仅比较例子；不在同一卵上执行受精。未采用外部测量数据、地图或运行时服务。"
       },
       "design": true
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Jacquie Jacob, University of Kentucky / Poultry Extension. External Anatomy of Chickens: hen plumage, comb, paired wattles, earlobes, hock and three forward toes plus one rear toe.",
+        "zh": "肯塔基大学 Jacquie Jacob / Poultry Extension《鸡的外部解剖》：母鸡羽毛、鸡冠、成对肉垂、耳叶、跗关节及前三后一的足趾。"
+      },
+      "note": {
+        "en": "Read 2026-11-03. Anatomical reference only; no source illustration copied. Original generic hen reconstruction, not a breed identification or measured specimen.",
+        "zh": "2026-11-03 阅读正文。仅核对解剖关系，不复制来源插图。模型为原创通用母鸡重建，不是品种鉴定或实测标本。"
+      },
+      "url": "https://poultry.extension.org/articles/poultry-anatomy/external-anatomy-of-chickens/"
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Naturalis Biodiversity Center. Reptiles and Amphibians of the British Isles: Rana temporaria identification. Tympanum, dorsolateral folds, horizontal pupil and well-developed hind-foot webbing.",
+        "zh": "Naturalis 生物多样性中心《不列颠群岛爬行动物与两栖动物》Rana temporaria 鉴别条目：鼓膜、背侧褶、水平瞳孔和发达的后足蹼。"
+      },
+      "note": {
+        "en": "Read 2026-11-03. Morphological reference only, applied to an original generic pond-frog study. No species identification, dates, age, size or breeding calendar imported.",
+        "zh": "2026-11-03 阅读。只为原创通用池塘型蛙提供外形参考，不移用物种鉴定、日期、日龄、大小或繁殖日历。"
+      },
+      "url": "https://reptiles-and-amphibians.linnaeus.naturalis.nl/linnaeus_ng/app/views/species/taxon.php?id=98989"
     }
   ]
 }
