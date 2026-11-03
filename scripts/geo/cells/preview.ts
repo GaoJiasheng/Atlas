@@ -29,7 +29,7 @@ const bytes=(a:Float32Array|Uint32Array)=>Buffer.from(a.buffer,a.byteOffset,a.by
 type Source={part:Part;geometry:BufferGeometry;matrix:Matrix4;material:{color:string;tint?:string}};
 const sources:Source[]=[];
 await MeshoptDecoder.ready;
-const glb=data.model ? await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(`public${data.model}`) : undefined;
+const glb=data.model ? await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(arg('--asset',`public${data.model}`)) : undefined;
 if(glb)await glb.transform(dequantize());
 for(const part of data.parts){
   if(part.primitive){
@@ -68,11 +68,11 @@ type Shot={camera:Camera;groups?:string[];parts?:string[];pose?:string|null;hide
 const preset=(id:string)=>data.presets?.find(p=>p.id===id)?.camera;
 const shots:Record<string,Shot>={
   pair:{camera:preset('pair-hero')??{position:[0,.28,.65],target:[0,.12,0]},groups:['animal-cell','plant-cell']},
-  'animal-front':{camera:{position:[.1,.11,.27],target:[.1,.1,0]},groups:['animal-cell']},
+  'animal-front':{camera:{position:[.1,.11,.27],target:[.1,.1,0]},groups:['animal-cell'],labels:['animal-membrane','animal-cytoplasm','animal-nucleus']},
   'animal-oblique':{camera:preset('animal-oblique')??{position:[.30,.23,.22],target:[.1,.1,0]},groups:['animal-cell']},
   'animal-nucleus':{camera:{position:[.115,.115,.1],target:[.115,.1,.005]},groups:['animal-cell']},
   'animal-organelles':{camera:{position:[.09,.09,.13],target:[.09,.09,.004]},groups:['animal-cell']},
-  'plant-front':{camera:{position:[-.1,.12,.34],target:[-.1,.12,0]},groups:['plant-cell']},
+  'plant-front':{camera:{position:[-.1,.12,.34],target:[-.1,.12,0]},groups:['plant-cell'],labels:['plant-cell-wall','plant-membrane','plant-cytoplasm','plant-vacuole']},
   'plant-oblique':{camera:{position:[.09,.29,.27],target:[-.1,.12,0]},groups:['plant-cell']},
   'plant-chloroplasts':{camera:{position:[-.05,.12,.08],target:[-.1,.149,.018]},groups:['plant-cell']},
   'scope-whole':{camera:preset('scope-whole')??{position:[.62,.4,.65],target:[.2,.18,0]},groups:['microscope-bench']},
@@ -81,7 +81,9 @@ const shots:Record<string,Shot>={
   'scope-high':{camera:{position:[.42,.26,.32],target:[.18,.20,0]},groups:['microscope-bench'],pose:'scope-high'},
   'scope-eyepiece':{camera:{position:[.30,.39,.20],target:[.18,.32,.008]},groups:['microscope-bench']},
   'scope-knobs':{camera:{position:[.43,.22,.18],target:[.27,.16,0]},groups:['microscope-bench']},
-  'onion-patch':{camera:{position:[-.1,.14,.28],target:[-.1,.12,0]},parts:['onion-patch']},
+  'onion-patch':{camera:{position:[-.1,.04,.28],target:[-.1,.02,.03]},parts:['onion-patch']},
+  'animal-mitochondria':{camera:{position:[.135,.132,.053],target:[.135,.123,.003]},groups:['animal-cell']},
+  'plant-mitochondria':{camera:{position:[-.121,.091,.052],target:[-.121,.086,.02]},groups:['plant-cell']},
 };
 // Use the chapter's actual camera, hide list, selected part, label list and objective state.
 for(const file of readdirSync('src/content/topics/cells/chapters').filter(f=>f.endsWith('.mdx'))){
@@ -94,7 +96,7 @@ for(const file of readdirSync('src/content/topics/cells/chapters').filter(f=>f.e
     const labels=(s.labels??[]) as string[];
     const selected=s.part as string|undefined;
     const caption=(s.caption as {en?:string}|undefined)?.en??'';
-    if(![...labels,selected??''].some(l=>l==='scope-eyepiece'||l==='scope-objective-forty')&&!/eyepiece|forty.power|40×/.test(caption))continue;
+    if(!/^(02|03|07)/.test(file)&&!(file.startsWith('04')&&i===4)&&![...labels,selected??''].some(l=>l==='scope-eyepiece'||l==='scope-objective-forty')&&!/eyepiece|forty.power|40×/.test(caption))continue;
     const cam=typeof s.camera==='string'?preset(s.camera):s.camera as Camera;
     if(!cam)continue;
     const sim=(s.sim as {set?:{objective?:number}}|undefined)?.set;

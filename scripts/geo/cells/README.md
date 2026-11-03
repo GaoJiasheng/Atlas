@@ -37,8 +37,8 @@ Atlas content under the repository content licence.
 
 `generate.mjs` retains the source part metadata, then calls topic-owned
 `polish-microscope.mjs`, `polish-field.mjs` and `build-organelles.mjs`.
-The latter creates six original smooth GLB nodes for the irregular animal
-boundary/gel and rounded plant wall/membrane/gel/vacuole. Indexed vertices
+The latter creates four original smooth GLB nodes for the irregular animal
+boundary and rounded plant wall/membrane/vacuole. Indexed vertices
 share analytic smooth normals; no external mesh or texture is imported.
 The generator writes `public/models/cells.glb` at the schema-compatible
 `/models/cells.glb` URL, using Meshopt compression (16-bit positions, filtered
@@ -46,7 +46,11 @@ normals, no mesh simplification) with a hard 1,500,000-byte limit. Both the
 offline preview and geometry tests decode the production compressed asset;
 content checks also load it with Three.js's production GLTFLoader/decoder.
 Nuclei, nucleoli and six chloroplasts retain selectable logical ownership;
-mitochondrial folds and cytoplasmic membranes are merged into their gel node.
+the cytoplasm uses coplanar, fitted gel regions and multi-material reliefs.
+Mitochondrial matrices and rounded membrane lamellae have distinct warm
+colours. Each cytoplasm label points at its first actual gel region, away
+from the nucleus. Generic GLB label-point support is still missing; see
+the round-three section of `REBUILD-3D.md` for the exact engine boundary.
 Both cells have permanently exposed illustration faces in assembled mode.
 
 The microscope preserves the original pivot `[0.20, 0.23, -0.011547005]`,
@@ -66,6 +70,10 @@ The onion and tissue context reliefs also have distinct fitted cell profiles.
 
 See `src/content/topics/cells/REBUILD-3D.md` for references, original/final
 counts, preview paths and the verification boundary.
+
+`profile.ts [parts.json] [cells.glb]` measures actual primitive generation,
+Three.js GLTFLoader/Meshopt parsing, mesh pieces and triangles in Node.
+It reports offline startup proxies, never browser-ready time or GPU FPS.
 
 ## Verification boundary
 

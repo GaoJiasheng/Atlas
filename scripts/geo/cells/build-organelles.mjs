@@ -4,7 +4,7 @@ import { Document, NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { meshopt, weld } from '@gltf-transform/functions';
 import { MeshoptEncoder } from 'meshoptimizer';
-import { BufferGeometry, Float32BufferAttribute, CatmullRomCurve3, Vector3, Shape, Path, ExtrudeGeometry, SphereGeometry, TubeGeometry } from 'three';
+import { BufferGeometry, Float32BufferAttribute, CatmullRomCurve3, Vector3 } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 const V=(x,y,z=0)=>new Vector3(x,y,z);
 const tau=Math.PI*2;
@@ -31,34 +31,46 @@ function boundary(outline,profile,at){
  }
  const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(positions,3));g.setIndex(indices);g.computeVertexNormals();return g;
 }
-function solid(outline,depth,z,at,holes=[],bevel=.0006){
- const s=new Shape(outline.map(([x,y])=>({x,y})));
- for(const h of holes)s.holes.push(new Path(h.map(([x,y])=>({x,y}))));
- const g=new ExtrudeGeometry(s,{depth,steps:1,bevelEnabled:bevel>0,bevelThickness:bevel,bevelSize:bevel,bevelSegments:5,curveSegments:24});
- g.translate(at[0],at[1],at[2]+z-depth/2);return g;
-}
 const ellipse=(rx,ry,x=0,y=0)=>Array.from({length:64},(_,i)=>[x+rx*Math.cos(tau*i/64),y+ry*Math.sin(tau*i/64)]);
-function tube(points,r,segments=32,radial=8){return new TubeGeometry(new CatmullRomCurve3(points.map(p=>V(...p))),segments,r,radial,false);}
-// Closed, flattened cisternae with smoothly tapered ends, rather than open tubes.
-function sac(points,r,segments=40){
- const curve=new CatmullRomCurve3(points.map(p=>V(...p))),g=new TubeGeometry(curve,segments,r,12,false),p=g.getAttribute('position');
- for(let i=0;i<=segments;i++){
-  const t=i/segments,c=curve.getPointAt(t),f=Math.sin(Math.PI*t)**.22;
-  for(let j=0;j<=12;j++){const k=i*13+j;p.setXYZ(k,c.x+(p.getX(k)-c.x)*f,c.y+(p.getY(k)-c.y)*f,c.z+(p.getZ(k)-c.z)*f*.32);}
- }
- g.computeVertexNormals();return g;
-}
-function spheroid(at,size,segments=32,rings=20){const g=new SphereGeometry(1,segments,rings);g.scale(...size);g.translate(...at);return g;}
-function mitochondrion(x,y,angle,scale=1){
- const outline=Array.from({length:64},(_,i)=>{const t=i*tau/64;return [.008*Math.cos(t),.0035*Math.sin(t)*(1+.12*Math.cos(t))+.0012*Math.cos(t)**2];});
- const inner=shrink(outline,.77), gs=[solid(outline,.0022,.0009,[0,0,0],[inner],.00022),solid(inner,.0006,-.0003,[0,0,0],[],.00015)];
+function mitochondrion(x,y,angle,scale=1,z=.002){
+ const outline=Array.from({length:48},(_,i)=>{const t=i*tau/48;return [.008*Math.cos(t),.0035*Math.sin(t)*(1+.12*Math.cos(t))+.0012*Math.cos(t)**2];});
+ const inner=shrink(outline,.77), rotation=[0,0,angle*180/Math.PI];
+ const gs=[relief(outline,.00264,[x,y,z+.0009],'token:hot',[inner],.00022),relief(inner,.0009,[x,y,z-.0003],'token:en-heat',undefined,.00015)];
+ const cristae=[],roots=[];
  for(let k=0;k<7;k++){
-  const u=-.006+k*.0019,span=.0024*Math.sqrt(Math.max(0,1-(u/.0075)**2));
-  // Alternating inner-membrane folds attach at alternate sides; no radial fan.
-  const sign=k%2?1:-1;
-  gs.push(tube([[u,-sign*span,.0018],[u+.0005,-sign*span*.3,.0025],[u-.0003,sign*span*.55,.0026],[u+.0002,sign*span*.8,.0017]],.00023,16,8));
+  const u=-.006+k*.0019+.00012*Math.sin(k*2.1),c=u/(.008*.77),mid=.0012*c*c*.77,half=.0035*Math.sqrt(1-c*c)*(1+.12*c)*.77;
+  // Membrane lamellae rise from a continuous inner-membrane strip. Sample
+  // the rounded crests explicitly; uniform tube sampling undersamples these
+  // small tips, making them angular in a true close-up.
+  const bottom=mid-half+.00008,reach=.68+.10*Math.sin(k*1.7);
+  const r=.00025*(1+.12*Math.sin(k*2.3)),tip=bottom+half*2*reach-r;
+  const bend=t=>.00018*Math.sin(k*1.6)*Math.sin(Math.PI*t)+.00013*Math.cos(k)*t;
+  for(let j=0;j<=4;j++){const t=j/4;cristae.push([u-r+bend(t),bottom+(tip-bottom)*t]);}
+  for(let j=1;j<=8;j++){const a=Math.PI-j*Math.PI/8;cristae.push([u+bend(1)+r*Math.cos(a),tip+r*Math.sin(a)]);}
+  for(let j=3;j>=0;j--){const t=j/4;cristae.push([u+r+bend(t),bottom+(tip-bottom)*t]);}
+  roots.push([u,bottom-.00023]);
  }
- return gs.map(g=>{g.scale(scale,scale,scale);g.rotateZ(angle);g.translate(x,y,.002);return g;});
+ // The basal strip is only 0.23 mm wide at this illustrative scale; keep
+ // the bevel below half that width so concave roots cannot bridge pockets.
+ gs.push(relief([...cristae,...roots.reverse()],.0016,[x,y,z+.00145],'token:hot',undefined,.00003));
+ return gs.map(g=>({...g,at:[x,y,z+(g.at[2]-z)*scale],scale:[scale,scale,scale],rotation}));
+}
+const relief=(shape,depth,at,tint,holes,bevel=0)=>({kind:'extrude',shape,depth,at,color:'tissue',tint,bevel,...(holes?{holes}:{})});
+// Divide actual gel regions, without overlapping caps or a false label proxy.
+// The first region's bounds centre is clear cytoplasm; all share one material
+// and are merged into one draw. The shared un-bevelled seam is coplanar.
+function clipX(outline,x,keepLeft){
+ const out=[];
+ for(let i=0;i<outline.length;i++){
+  const a=outline[i],b=outline[(i+1)%outline.length],ina=keepLeft?a[0]<=x:a[0]>=x,inb=keepLeft?b[0]<=x:b[0]>=x;
+  if(ina)out.push(a);
+  if(ina!==inb){const t=(x-a[0])/(b[0]-a[0]);out.push([x,a[1]+(b[1]-a[1])*t]);}
+ }
+ return out;
+}
+function cytoplasm(parts,id,regions,organelles){
+ const p=parts.find(p=>p.id===id);delete p.mesh;delete p.material;
+ p.primitive=regions[0];p.extra=[...regions.slice(1),...organelles];
 }
 function meshGeometry(parts){
  const list=parts.map(g=>{const b=g.index?g.toNonIndexed():g;b.deleteAttribute('uv');b.clearGroups();return b;});
@@ -80,29 +92,21 @@ export async function buildOrganelles(parts){
  // so the nodes are marked open: a cutaway must not cap them with a hatched face.
  // Roll continuously from the basal membrane to the thickened visible edge.
  add('animal-membrane',[boundary(animal,[[.963,-.008],[.986,-.0071],[1,-.005],[1,.0045],[.993,.007],[.978,.008],[.963,.007],[.957,.0045],[.957,-.005],[.963,-.008]],[.1,.1,0])],'tissue','token:neutral');
- const animalCyt=solid(shrink(animal,.953),.0042,-.0037,[.1,.1,0],[ellipse(.0124,.0104,.015,0)],.00065);
- // Low undulations of the gel follow the irregular boundary rather than laminated discs.
- // Preserve smooth cap/bevel normals under the small gel undulation. Recomputing
- // normals on ExtrudeGeometry's disconnected triangles would introduce faceting.
- const ap=animalCyt.getAttribute('position'),an=animalCyt.getAttribute('normal');
- for(let i=0;i<ap.count;i++){
-  const x=ap.getX(i),y=ap.getY(i),nz=an.getZ(i);
-  const dx=.00025*137*Math.cos(x*137)*Math.cos(y*159),dy=-.00025*159*Math.sin(x*137)*Math.sin(y*159);
-  ap.setZ(i,ap.getZ(i)+.00025*Math.sin(x*137)*Math.cos(y*159));
-  const normal=V(an.getX(i)-nz*dx,an.getY(i)-nz*dy,nz).normalize();an.setXYZ(i,normal.x,normal.y,normal.z);
- }
- const animalRelief=[animalCyt,solid(ellipse(.0124,.0104,.015,0),.0003,-.0065,[.1,.1,0],[],.00005)];
+ const gel=shrink(animal,.953),animalRegions=[relief(clipX(gel,-.004,true),.0042,[.1,.1,-.0037],'token:bone'),relief(clipX(gel,-.004,false),.0042,[.1,.1,-.0037],'token:bone',[ellipse(.0124,.0104,.015,0)]),relief(ellipse(.0124,.0104,.015,0),.0004,[.1,.1,-.0065],'token:bone')];
+ const animalRelief=[];
  for(const [x,y,a,s] of [[.065,.119,.7,.9],[.135,.123,-.8,1],[.073,.076,-.5,.85],[.126,.072,.2,1.1],[.105,.133,-.2,.75]])animalRelief.push(...mitochondrion(x,y,a,s));
  // Curved cisternae near the nucleus: flattened membranes with unequal lengths.
- for(let k=0;k<4;k++)animalRelief.push(sac([[.130+k*.002,.087,.0003],[.139+k*.001,.094,.0009],[.141+k*.001,.104,.0007],[.135+k*.002,.112,.0002]],.00055,40,10));
- for(let k=0;k<4;k++)animalRelief.push(sac([[.086,.091-k*.0018,.0005],[.083,.096-k*.0016,.001],[.087,.100-k*.0016,.001],[.096,.101-k*.0016,.0005]],.00055,30,10));
- // Sparse cytoplasmic granules, deterministic and varied, kept clear of nucleus.
- for(let k=0;k<38;k++){
+ const cisterna=path=>({kind:'sweep',path,radius:[.00005,.00055,.00055,.00005],segments:24,radial:10,caps:'round',section:{flat:.32},up:[0,0,1],at:[0,0,0],color:'tissue',tint:'token:bone'});
+ for(let k=0;k<4;k++)animalRelief.push(cisterna([[.130+k*.002,.087,.0003],[.139+k*.001,.094,.0009],[.141+k*.001,.104,.0007],[.135+k*.002,.112,.0002]]));
+ for(let k=0;k<4;k++)animalRelief.push(cisterna([[.086,.091-k*.0018,.0005],[.083,.096-k*.0016,.001],[.087,.100-k*.0016,.001],[.096,.101-k*.0016,.0005]]));
+ // Sparse illustrative granules: seven clear, varied surface profiles rather
+ // than a dense collection of individually baked sub-pixel beads.
+ for(let k=0;k<7;k++){
   const a=k*2.39996,r=.012+.021*((k*17%37)/37),x=.1+Math.cos(a)*r,y=.1+Math.sin(a)*r*.8;
   if(((x-.115)/.014)**2+((y-.1)/.012)**2<1.2)continue;
-  animalRelief.push(spheroid([x,y,-.0004],[.00038+(k%3)*.00009,.00035,.00035],10,8));
+  animalRelief.push({kind:'lathe',profile:Array.from({length:9},(_,i)=>[(.00038+(k%3)*.00009)*Math.sin(i*Math.PI/8),-.00035*Math.cos(i*Math.PI/8)]),segments:10,scale:[1,1,.00035/(.00038+(k%3)*.00009)],at:[x,y,-.0004],color:'tissue',tint:'token:bone'});
  }
- add('animal-cytoplasm',animalRelief,'tissue','token:bone');
+ cytoplasm(parts,'animal-cytoplasm',animalRegions,animalRelief);
  const wallProfile=[[.965,-.025],[.990,-.024],[1,-.021],[1,.020],[.997,.023],[.981,.025],[.955,.025],[.941,.023],[.938,.020],[.938,-.021],[.944,-.024],[.965,-.025]];
  add('plant-cell-wall',[boundary(plant,wallProfile,[-.1,.12,0])],'tissue','token:food');
  add('plant-membrane',[boundary(plant,[[.933,-.022],[.933,.0185],[.931,.021],[.923,.022],[.916,.021],[.916,.0185],[.916,-.022],[.933,-.022]],[-.1,.12,0])],'tissue','token:neutral');
@@ -112,12 +116,13 @@ export async function buildOrganelles(parts){
  const vac=boundary(vacOutline,[[0,-.020],[.4,-.019],[.8,-.017],[.96,-.012],[1,-.003],[.98,.007],[.86,.014],[.60,.018],[.27,.0195],[0,.020]],[-.1,.12,0]);
  add('plant-vacuole',[vac],'tissue','token:cold');
  // Basal cytoplasm has a true opening for the nucleus and an empty vacuole lumen.
- const plantCyt=[solid(shrink(plant,.911),.0362,-.0018,[-.1,.12,0],[shrink(vacOutline,1.025),ellipse(.0073,.0063,-.0645,0)],.00025),solid(ellipse(.0073,.0063,-.0645,0),.0258,-.0072,[-.1,.12,0],[],.00005)];
+ const pg=shrink(plant,.911),plantRegions=[relief(clipX(pg,.066,false),.0362,[-.1,.12,-.0018],'token:bone'),relief(clipX(pg,.066,true),.0362,[-.1,.12,-.0018],'token:bone',[shrink(vacOutline,1.025),ellipse(.0073,.0063,-.0645,0)]),relief(ellipse(.0073,.0063,-.0645,0),.0259,[-.1,.12,-.0072],'token:bone')];
+ const plantCyt=[];
  // These mitochondria inhabit peripheral cytoplasm, independent of chloroplasts.
- for(const [x,y,a,s] of [[-.151,.14,1.2,.65],[-.05,.136,-1,.6],[-.095,.086,.1,.55]]){
-  plantCyt.push(...mitochondrion(x,y,a,s).map(g=>g.translate(0,0,.011)));
+ for(const [x,y,a,s] of [[-.151,.14,1.2,.65],[-.05,.136,-1,.6],[-.121,.086,.1,.55]]){
+  plantCyt.push(...mitochondrion(x,y,a,s,.018));
  }
- add('plant-cytoplasm',plantCyt,'tissue','token:bone');
+ cytoplasm(parts,'plant-cytoplasm',plantRegions,plantCyt);
  const out=new URL('../../../public/models/',import.meta.url);mkdirSync(out,{recursive:true});
  await MeshoptEncoder.ready;
  // Preserve the authored contours; compress without mesh simplification.
@@ -130,11 +135,11 @@ export async function buildOrganelles(parts){
 
 export function polishCellParts(parts){
  const get=id=>parts.find(p=>p.id===id);
- const sphere=(size,at,tint)=>({kind:'sphere',size:[1],scale:size,at,color:'tissue',tint});
+ const sphere=(size,at,tint,segments=40,rings=24)=>({kind:'lathe',profile:Array.from({length:rings+1},(_,i)=>[i===0||i===rings?0:size[0]*Math.sin(i*Math.PI/rings),-size[1]*Math.cos(i*Math.PI/rings)]),segments,scale:[1,1,size[2]/size[0]],at,color:'tissue',tint});
  const granule=(size,at,tint)=>({kind:'lathe',profile:Array.from({length:13},(_,i)=>[i===0||i===12?0:size[0]*Math.sin(i*Math.PI/12),-size[1]*Math.cos(i*Math.PI/12)]),segments:16,scale:[1,1,size[2]/size[0]],at,color:'tissue',tint});
  for(const [id,centre,size] of [['animal-nucleus',[.115,.1,0],[.0115,.0095,.006]],['plant-nucleus',[-.1645,.12,.012],[.007,.006,.006]]]){
   const p=get(id);p.primitive=sphere(size,centre,'token:f-push');
-  p.extra=[sphere(size.map(v=>v*.3),[centre[0]+size[0]*.17,centre[1]-size[1]*.13,centre[2]+size[2]*.88],'token:ink-2')];
+  p.extra=[sphere(size.map(v=>v*.3),[centre[0]+size[0]*.17,centre[1]-size[1]*.13,centre[2]+size[2]*.88],'token:ink-2',24,16)];
   // Nucleolus and irregular clumps of condensed chromatin distinguish a nucleus from a bare ball.
   for(let k=0;k<8;k++){
    const a=k*2.39996,r=.48+.16*Math.sin(k*3.8),z=Math.sqrt(1-r*r);
@@ -146,7 +151,7 @@ export function polishCellParts(parts){
  const spots=[[-.151,.149,-.25],[-.101,.152,.15],[-.05,.147,-.4],[-.148,.091,.3],[-.098,.089,-.22],[-.047,.094,.45]];
  for(const [i,[x,y,a]] of spots.entries()){
   const s=1+(i%3-1)*.06;
-  shells.push({...sphere([.010*s,.0048,.0031],[x,y,.0185],'token:seedling'),rotation:[0,0,a*180/Math.PI]});
+  shells.push({...sphere([.010*s,.0048,.0031],[x,y,.0185],'token:seedling',32,20),rotation:[0,0,a*180/Math.PI]});
   // Four grana stacks per chloroplast; attached lamellae cross between them.
   for(let k=0;k<4;k++){
    const u=(k-1.5)*.0035*s;

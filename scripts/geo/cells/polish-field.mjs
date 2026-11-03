@@ -55,6 +55,20 @@ function roundedOutline(points) {
     return [0, .33, .67, 1].map(t => [round((1-t)**2*enter[0]+2*t*(1-t)*v[0]+t*t*leave[0]), round((1-t)**2*enter[1]+2*t*(1-t)*v[1]+t*t*leave[1])]);
   });
 }
+// Remove redundant samples after rounding, retaining every significant bow
+// and junction. 15 µm in this enlarged model is <0.1 px in an overview.
+function simplifyContour(points,tolerance=.000015) {
+  const out=points.slice();let changed=true;
+  while(changed&&out.length>8){
+    changed=false;
+    for(let i=out.length-1;i>=0;i--){
+      const a=out[(i+out.length-1)%out.length],p=out[i],b=out[(i+1)%out.length],dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy;
+      const t=l?Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/l)):0;
+      if(Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy)<tolerance){out.splice(i,1);changed=true;}
+    }
+  }
+  return out;
+}
 // Ring silhouettes already contain rounded corners. Three.js offsets of these
 // tightly sampled annuli can bridge the hole when beveling; keep their annular
 // faces planar and bevel only the independent solid cytoplasm reliefs.
@@ -64,8 +78,8 @@ export function polishOnionPatch(parts) {
   const patch = parts.find(p=>p.id==='onion-patch'), pieces=[];
   const recipe=onionPattern(), scale=.000065;
   for(const wall of recipe.features.filter(f=>f.role==='wall')) {
-    const shape=roundedOutline(wall.pointsUm.map(([x,y])=>[x*scale,y*scale]));
-    const inner=shape.map(([x,y])=>[round(x*.972),round(y*.91)]);
+    const shape=simplifyContour(roundedOutline(wall.pointsUm.map(([x,y])=>[x*scale,y*scale])));
+    const inner=simplifyContour(shape.map(([x,y])=>[round(x*.972),round(y*.91)]));
     const at=[-.1+(wall.atUm[0]-800)*scale,.12+(wall.atUm[1]-205)*scale,0];
     pieces.push(cellPiece(shape,at,'tissue','token:food',[inner]));
     pieces.push(cellPiece(inner,[at[0],at[1],-.0009],'tissue','token:bone',undefined,.0012));

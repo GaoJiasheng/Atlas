@@ -34,7 +34,7 @@ function fluted(radius, flutes, depth, at, color='powder', rotation=[0,90,0]) {
   for(let j=0;j<flutes;j++) for(let k=0;k<4;k++) {const a=(j+k/4)*Math.PI*2/flutes,r=radius+(k===1||k===2?.00035:-.00024);outline.push([r*Math.cos(a),r*Math.sin(a)]);}
   return extrude(outline,depth,at,color,.00013,rotation);
 }
-function ring(r,h,at,color='steel',rotation,inner=r*.8,segments=48) {
+function ring(r,h,at,color='steel',rotation,inner=r*.8,segments=32) {
  return lathe([[inner,-h/2],[r-.0002,-h/2],[r,-h/2+.0002],[r,h/2-.0002],[r-.0002,h/2],[inner,h/2],[inner,-h/2]],at,color,rotation,segments);
 }
 function update(parts,id,primitive,extra=[]) {
@@ -61,7 +61,7 @@ export function polishMicroscope(parts) {
  // Cast C-arm: a variable oval section loft, with a continuous rounded spine
  // and broader shoulder/heel. It is volumetric from every oblique direction.
  const armPath=[[.263,.034,-.033],[.272,.066,-.033],[.276,.112,-.033],[.274,.163,-.033],[.266,.209,-.03],[.249,.247,-.025],[.225,.273,-.018],[.2,.284,-.011]];
- const arm=sweep(armPath,[.023,.021,.018,.018,.018,.019,.02,.023],[0,0,0],'enamel',{up:[0,0,1],section:{flat:.85},segments:96,radial:32});
+ const arm=sweep(armPath,[.023,.021,.018,.018,.018,.019,.02,.023],[0,0,0],'enamel',{up:[0,0,1],section:{flat:.85},segments:72,radial:24});
  const armExtra=[
   // Flush inlaid focus bearing housing on the cast arm's visible cheek.
   profile([[.023,-.005],[.025,-.003],[.025,.002],[.022,.005]],[.261,.16,0],'enamel',[0,0,-90]),
@@ -117,7 +117,7 @@ export function polishMicroscope(parts) {
   ];
   // Narrow engraved/grip grooves around the mounting collar, not extra
   // objectives. Barrel ends, centre and height match the original model.
-  for(let j=0;j<3;j++)extras.push(ring(.00925,.00032,[at[0],at[1]+top-.0012-j*.0007,at[2]],'steel',undefined,.00905,40));
+  for(let j=0;j<3;j++)extras.push(ring(.00925,.00032,[at[0],at[1]+top-.0012-j*.0007,at[2]],'steel',undefined,.00905,24));
   update(parts,`scope-objective-${id}`,primary,extras);
  }
  // One machined stage with a genuine light aperture and two stainless leaf

@@ -1,10 +1,12 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dequantize } from '@gltf-transform/functions';
 import { MeshoptDecoder } from 'meshoptimizer';
 import { BufferGeometry, Float32BufferAttribute, Matrix4, Mesh, MeshBasicMaterial, DoubleSide, Raycaster, Vector3 } from 'three';
+import { anchorPoint } from '../../src/engines/space-scene/stages/model3d/shapes';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { partBounds, partMaterialSlots, partPrimitives } from '../../src/engines/space-scene/lib/parts';
 import { apply3, eulerDeg } from '../../src/engines/space-scene/lib/xform';
@@ -24,9 +26,16 @@ beforeAll(async()=>{
   g.applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()));
   const m=new Mesh(g,new MeshBasicMaterial({side:DoubleSide}));m.updateMatrixWorld();meshes.set(node.getName(),m);
  }
+ for(const p of file.parts.filter(p=>p.primitive)){
+  const gs=partPieces(p).flatMap(piece=>(piece.matrices??[new Matrix4()]).map(m=>{
+   const g=piece.geometry.index?piece.geometry.toNonIndexed():piece.geometry.clone();
+   g.deleteAttribute('uv');g.clearGroups();return g.applyMatrix4(m).translate(...p.primitive!.at);
+  }));
+  const mesh=new Mesh(mergeGeometries(gs,false),new MeshBasicMaterial({side:DoubleSide}));mesh.updateMatrixWorld();meshes.set(p.id,mesh);
+ }
 });
 const bounds=(id:string)=>{const p=part(id);if(!p.mesh)return partBounds(p)!;const g=meshes.get(p.mesh)!.geometry;g.computeBoundingBox();return {min:g.boundingBox!.min.toArray(),max:g.boundingBox!.max.toArray()};};
-const hits=(id:string,x:number,y:number)=>new Raycaster(new Vector3(x,y,.1),new Vector3(0,0,-1)).intersectObject(meshes.get(part(id).mesh!)!).map(h=>h.point.z);
+const hits=(id:string,x:number,y:number)=>new Raycaster(new Vector3(x,y,.1),new Vector3(0,0,-1)).intersectObject(meshes.get(part(id).mesh??id)!).map(h=>h.point.z);
 
 describe('cells polished anatomy and microscope mechanics',()=>{
  it('retains all 29 selectable parts, teaching groups, six presets and three indexed poses',()=>{
@@ -41,7 +50,7 @@ describe('cells polished anatomy and microscope mechanics',()=>{
   for(const id of ['animal-membrane','plant-cell-wall','plant-membrane']){expect(part(id).shell).toBe(true);expect(part(id).mesh).toBeTruthy();}
   for(const [id,size]of [['animal-membrane',[.12,.09,.016]],['plant-cell-wall',[.16,.08,.05]]]as const){const b=bounds(id);size.forEach((v,k)=>expect(b.max[k]!-b.min[k]!).toBeCloseTo(v,3));}
   expect(hits('animal-membrane',.1,.1)).toHaveLength(0);expect(hits('plant-cell-wall',-.1,.12)).toHaveLength(0);
-  expect(part('animal-cytoplasm').material?.color).toBe('tissue');
+  expect(part('animal-cytoplasm').primitive?.color).toBe('tissue');
   // A circle / ellipse is centrally symmetric; the authored epithelial boundary is not.
   const pos=meshes.get('animal-membrane')!.geometry.getAttribute('position');
   const top:number[]=[],bottom:number[]=[];
@@ -57,9 +66,37 @@ describe('cells polished anatomy and microscope mechanics',()=>{
   expect(file.parts.filter(p=>p.id.endsWith('-nucleus'))).toHaveLength(2);
   for(const id of ['animal-nucleus','plant-nucleus'])expect(part(id).extra?.length).toBeGreaterThan(1);
  });
+ it('anchors cytoplasm in actual gel away from either nucleus and gives mitochondria separate relief colours',()=>{
+  for(const [id,nucleus]of [['animal-cytoplasm','animal-nucleus'],['plant-cytoplasm','plant-nucleus']]){
+   const p=part(id!),n=part(nucleus!),a=new Vector3(...p.primitive!.at).add(new Vector3(...anchorPoint(p)));
+   expect(hits(id!,a.x,a.y).length).toBeGreaterThan(0);
+   expect(a.distanceTo(new Vector3(...n.primitive!.at))).toBeGreaterThan(id==='animal-cytoplasm'?.02:.03);
+   const slots=partMaterialSlots(p).map(s=>s.tint);
+   expect(slots).toContain('token:bone');expect(slots).toContain('token:hot');expect(slots).toContain('token:en-heat');
+  }
+ });
+ it('keeps the labelled context objects unobstructed in systems and comparison beat five',()=>{
+  const context=new Set(['onion-patch','tissue-patch','leaf-context','body-context','intestine-context']);
+  for(const name of readdirSync('src/content/topics/cells/chapters').filter(n=>/^(04|07)/.test(n))){
+   const chapter=JSON.parse(readFileSync(`src/content/topics/cells/chapters/${name}`,'utf8').split('---')[1]!);
+   for(const [i,b]of chapter.state.beats.entries()){
+    if(name.startsWith('04')&&i!==4)continue;
+    const cam=typeof b.camera==='string'?file.presets!.find(p=>p.id===b.camera)!.camera:b.camera;
+    const hidden=new Set(b.hide??chapter.state.hide),layers=b.layers??chapter.state.layers;
+    for(const id of b.labels.filter((id:string)=>context.has(id))){
+     const p=part(id),at=new Vector3(...p.primitive!.at).add(new Vector3(...anchorPoint(p))),origin=new Vector3(...cam.position);
+     const ray=new Raycaster(origin,at.clone().sub(origin).normalize(),0,origin.distanceTo(at)-.002);
+     for(const other of file.parts){
+      if(other.id===id||hidden.has(other.id)||hidden.has(other.group)||!layers.includes(other.group))continue;
+      expect(ray.intersectObject(meshes.get(other.mesh??other.id)!).length,`${chapter.id}.${i+1}: ${other.id} covers ${id}`).toBe(0);
+     }
+    }
+   }
+  }
+ });
  it('keeps exactly six peripheral chloroplast bodies with membrane-stack detail',()=>{
-  const ps=partPrimitives(part('plant-chloroplasts')),shells=ps.filter(p=>p.kind==='sphere');expect(shells).toHaveLength(6);
-  expect(ps.filter(p=>p.kind==='lathe')).toHaveLength(24);
+  const ps=partPrimitives(part('plant-chloroplasts')),shells=ps.filter(p=>p.tint==='token:seedling');expect(shells).toHaveLength(6);
+  expect(ps.filter(p=>p.tint==='token:food')).toHaveLength(24);
   for(const p of shells){expect(p.at[0]).toBeGreaterThan(-.173);expect(p.at[0]).toBeLessThan(-.027);expect(Math.abs(p.at[1]-.12)).toBeGreaterThan(.025);}
  });
  it('keeps one active objective coaxial and positive coverslip clearance in all three poses',()=>{

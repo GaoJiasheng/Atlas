@@ -162,3 +162,164 @@ compare-cells beat 1). The nodes are now `closed: false`, and the cell beats
 the assembled view: the exposed fronts already show the contents, and the cut
 plane would otherwise remove the front-placed organelles. The animal-cell
 cytoplasm caption no longer mentions a cutaway (EN + ZH).
+
+## Polish 2026-11-03 — round 3 after browser acceptance
+
+### 1. Structure labels: cytoplasm fixed; generic GLB anchors still blocked
+
+Both cytoplasm labels now point into actual gel regions clear of the nuclei.
+The animal gel is partitioned into two fitted coplanar regions, with the left
+region as the main primitive. The plant gel uses a narrow right-hand region
+as its main primitive, away from its vacuole and organelles. The other regions,
+true nuclear recesses, basal beds and organelle relief move/explode/select
+with the same existing cytoplasm IDs. No invisible label proxy was added.
+The vacuole bounds centre already lies inside the vacuole and remains valid.
+
+**Not completed:** `animal-membrane`, `plant-membrane`, `plant-cell-wall`
+leaders still use the GLB bounds centre. The requested Sun–Earth–Moon fields
+are not a generic part contract in this checkout:
+
+- `bodyTransform.labelPoint` is inside `orbit-rotation-schema.ts` and is
+  evaluated by the orbit body-frame solver / `OrbitDriver`. It moves and
+  scales an Earth/Moon/Sun attachment; using it here would require an unrelated
+  orbit simulation and conflict with independent cell explode behaviour.
+- `labelAnchors: strokes` only applies to orbit-guide overlays, not GLB parts.
+- The strict part schema has no `labelPoint` / `labelAnchors` field.
+- `GltfSource.shapeOf` reads `extras.closed` and the geometry bounds, but no
+  label point. `SceneRoot` derives `glbAnchors` with `boxAnchor` and explicitly
+  uses that bounds-centre offset for `PartNode.anchorPoint`.
+
+The missing engine support is a **static, optional per-part label point**, in
+scene/rest coordinates or a clearly defined mesh-local frame, carried through
+GLB loading and into `PartHandle.point` independently of its bounds, while
+following the same pose/explode transforms. Reading an equivalent GLB
+`extras.labelPoint` would also work. No engine file was edited and no
+unsupported schema field was silently written into this topic.
+
+### 2. Mitochondria and relief
+
+The cytoplasm selections now have three merged material slots: pale gel,
+muted orange outer membrane/cristae (`hot`) and a contrasting matrix
+(`en-heat`). The five animal and three plant mitochondria retain their counts,
+varied proportions and directions. Each has seven curved lamellar crests,
+with varied spacing, lengths, widths and bends, rather than pale tubular
+marks. Explicitly sampled rounded ends stay smooth in the close-up. Narrow
+root bevels were reduced after CPU inspection caught bridged pockets. The
+smallest plant mitochondrion moved clear of a chloroplast, and all vertical
+profile offsets scale together so its floor joins its rim.
+
+The single-material GLB loader cannot preserve several materials within one
+logical part; multipart cytoplasm is the topic-only workaround. The gel is an
+exposed section, joined without visible coplanar seams. Its former 0.25 mm
+surface ripple is omitted. Decorative surface beads are reduced from 26 to
+four (not a stated biological count) to fit the existing 32-extra limit and
+avoid adding sub-pixel baked geometry. All **teaching** counts, 29 part IDs,
+one nucleus per cell, six chloroplasts, nine onion cells, six tissue cells,
+three objectives, eight chapters and forty beat references remain intact.
+No teaching prose or EN/ZH label needed changing; the existing text already
+identifies colours, thicknesses and detail counts as illustration choices.
+
+Reference: existing **S4, OpenStax Biology 2e §4.3 / Figure 4.14**, reread and
+micrograph inspected on 2026-11-03. Its double membrane and cristae inform the
+relief; the warm colours are explanatory, not microscopy colour. Existing
+S17/S18 and S20 still govern the overall topology and authored scale. No
+external image, mesh or runtime request was introduced.
+
+### 3. Comparison and systems plate
+
+The onion patch is translated down by 0.10 m and forward by 0.03 m. The tissue
+patch is translated right by 0.02 m, up by 0.10 m and forward by 0.03 m. The
+intestine and body context move right into separate columns. Their existing
+independent illustrative scales are retained. Systems beats use an explicit
+whole-plate camera; the leaf beat has a dedicated leaf camera. Compare beat 5
+uses assembled mode. Each labelled context object is visible and its leader
+has an unobstructed path; a closest-hit CPU raycast regression covers those
+requested labels. The membrane/wall endpoint limitation above remains visible
+in the annotated previews and is not claimed as fixed.
+
+### 4. Loading investigation and budget
+
+The original asset has **zero embedded GLB materials**, six mesh pieces and
+86,100 triangles. Production Three.js GLTFLoader + MeshoptDecoder parses it
+in milliseconds in Node; decoding alone is not evidence for a 3.2 s browser
+regression. `SceneRoot` synchronously builds **all** procedural parts, including
+hidden microscope/context pieces, before its GLB source can mount. The
+post-rebuild procedural baseline is 151,354 triangles / 454,062 baked vertices,
+versus the old-main whole-topic 76,120 triangles. `mergeBaked` expands and
+transforms these vertices. Shader program caching means material instances
+are not equivalent to unique shader compilations.
+
+Round-three changes remove redundant near-collinear onion contour samples
+with a 15 µm model-space tolerance, replace fixed 48×32 sphere primitives with
+explicit smooth lathe profiles chosen by visual size, reduce small retaining
+ring segments, and retain the microscope's arm curvature with fewer stations.
+Static repeated detail still merges per material; no repeated child mesh tree
+or imported asset was added.
+
+| Decoded triangles (all groups visible) | Before round 3 | After round 3 |
+| --- | ---: | ---: |
+| Animal cell | 59,808 | 37,046 |
+| Plant cell | 72,180 | 44,814 |
+| Microscope | 57,012 | 49,908 |
+| Tissue/context | 48,454 | 34,622 |
+| **Total** | **237,454** | **166,390** |
+| Cell pair | 131,988 | 81,860 |
+
+Production `/models/cells.glb`: **819,844 → 36,480 bytes** (95.6% smaller), six
+nodes → four, same Meshopt/16-bit position contract. The source `parts.json`
+grows from 557,334 to 757,482 bytes because cytoplasm relief is now data.
+Combined source JSON + GLB footprint falls **1,377,178 → 793,962 bytes**; these
+are disk bytes, not measured HTTP transfer sizes. Material/draw pieces increase
+**73 → 77** to make mitochondrial tones distinct; this is not presented as a
+draw-call reduction. Final procedural geometry is 157,174 triangles / 471,522
+baked vertices, so its CPU generation cost must be measured rather than
+inferred from the lower overall triangle count.
+
+**Still requires browser acceptance:** an actual same-load stage-ready A/B
+against the reported 8.9 s / 5.7 s. No browser, desktop or GPU was driven and
+no new browser-ready number or FPS is claimed. `scripts/geo/cells/profile.ts`
+is a reproducible offline primitive-generation / production-decoder proxy;
+its samples are stored in `/private/tmp/atlas-cells-round3/profile-final.json`.
+
+### Offline visual verification and gates
+
+Actual generated geometry, normals and transforms were CPU-rasterized with
+smooth lighting and a depth buffer, inspected and iterated. The final set is
+`/private/tmp/atlas-cells-round3/after/`: `animal-front`, `animal-oblique`,
+`animal-nucleus`, `animal-mitochondria`, `plant-front`, `plant-oblique`,
+`plant-mitochondria`, `pair`, `onion-patch`, `scope-whole`, `scope-eyepiece`,
+`scope-stage`, `beat-04-5` and all five `beat-07-*` views. PNGs end in
+`-labels.png` and `-cinema-labels.png`. Before images and original packets
+are in the sibling `before/` directory. The S4 micrograph is retained only as
+`/private/tmp/atlas-cells-round3/mitochondrion-reference.webp` for comparison.
+These verify geometry and anchor coordinates, not the browser HUD solver.
+
+Final alternating offline profile (four fresh Node processes per version):
+median procedural generation **361.21 → 292.16 ms**, production GLB parsing
+**12.03 → 5.08 ms**, decoder ready **2.95 → 2.71 ms**. These are CPU proxies
+on this host under session load, not browser stage-ready timings. The earlier
+trial had noisy generation medians of 254.45 / 261.14 ms; the raw samples are
+retained in `profile.json` and `profile-final.json` rather than asserting a
+precise browser speed-up from them.
+
+Final gates after the last geometry change all exited **0**:
+
+- `pnpm check`: 1,096 files, **0 errors / 0 warnings**, four existing hints;
+  the subsequent `tsc --noEmit` also passed.
+- `pnpm validate`: **94 topics, 0 errors / 0 warnings**.
+- `pnpm run test --maxWorkers=2`: the full `pnpm test` suite, **252 files /
+  6,348 tests passed**. Two workers avoid the known concurrent-load timeouts.
+- `pnpm build`: **191 pages**, static data and PWA completed. Built GLB bytes
+  match the source asset.
+- `git diff --check`: clean. No git writes, browser/desktop actions, dependency
+  changes, shared-kit changes or edits outside the cells ownership scope.
+
+Final logs: `/private/tmp/atlas-cells-round3/{check,validate,test,build}-final.log`.
+The three remaining GLB label endpoints and real browser-ready A/B are the
+explicit outstanding items; they are not hidden by the successful static gates.
+
+### Claude acceptance 2026-11-03 (round 3)
+
+- GPU browser shots, same angle as `2a98d7b`: cytoplasm leaders now land in the gel; mitochondria read orange with cristae; microscope, cells and onion detail unchanged. Membrane / cell-wall leaders still end at the bounds centre (on or next to the nucleus / vacuole) until the engine reads a GLB label point.
+- Fixed in acceptance: `onion-patch` joins `views.hudFrame.parts` so compare beat 5 no longer slides it under the reading panel; systems beats 1/3/4/5 use a closer whole-plate camera (`[0.08,0.235,0.92]` → `[0.08,0.105,0]`); the leaf beat hides the onion patch so its own camera is not pulled back.
+- Stage ready (`__atlas.ready`, GPU, 4 interleaved loads each): main 999 ms, `2a98d7b` 1039 ms, round 3 1078 ms (medians). No regression is visible at this measure.
