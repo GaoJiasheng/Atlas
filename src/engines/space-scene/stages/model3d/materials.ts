@@ -77,25 +77,17 @@ export interface PartUniforms {
 }
 
 const VERTEX_DECLS = /* glsl */ `
-uniform float uContract;
-uniform float uLen;
-uniform float uThick;
-uniform float uShorten;
-uniform float uBulge;
-uniform vec3 uFibreDir;
-uniform vec3 uFibreCentre;
-uniform float uGrain;
-attribute float atlasU;
+uniform float uContract, uLen, uThick, uShorten, uBulge, uGrain;
+uniform vec3 uFibreDir, uFibreCentre;
+attribute float _emission, atlasU, atlasSection;
+varying float vEmission, vAtlasU, vAtlasSection;
 attribute vec3 atlasFibre;
-attribute float atlasSection;
-varying float vAtlasU;
-varying float vAtlasSection;
-varying vec3 vGrainP;
-varying vec3 vGrainF;
+varying vec3 vGrainP, vGrainF;
 `;
 
 const CONTRACT = /* glsl */ `
 #include <begin_vertex>
+vEmission = _emission;
 vAtlasU = atlasU;
 vAtlasSection = atlasSection;
 vGrainP = position - uFibreCentre;
@@ -118,28 +110,10 @@ if (uContract > 0.0001) {
 `;
 
 const FRAGMENT_DECLS = /* glsl */ `
-uniform float uOrbitLight;
-uniform float uOrbitFill;
-uniform vec3 uOrbitSun;
-uniform float uGrain;
-uniform float uGrainK;
-varying vec3 vGrainP;
-varying vec3 vGrainF;
-uniform float uStripe;
-uniform float uTime;
-uniform float uHi;
-uniform vec3 uHiColor;
-varying float vAtlasU;
-varying float vAtlasSection;
-uniform vec3 uGlow;
-uniform float uSel;
-uniform vec3 uSelColor;
-uniform float uSelRim;
-uniform float uSelTint;
-uniform float uCut;
-uniform vec3 uCutColor;
-uniform vec3 uHatchColor;
-uniform float uHatchPx;
+varying float vEmission, vAtlasU, vAtlasSection;
+uniform float uOrbitLight, uOrbitFill, uGrain, uGrainK, uStripe, uTime, uHi, uSel, uSelRim, uSelTint, uCut, uHatchPx;
+uniform vec3 uOrbitSun, uHiColor, uGlow, uSelColor, uCutColor, uHatchColor;
+varying vec3 vGrainP, vGrainF;
 `;
 
 const GRAIN_FNS = /* glsl */ `
@@ -159,6 +133,7 @@ float atlasNoise(vec3 x) {
 }
 `;
 
+// Height in view units keeps the grain slope constant at every zoom.
 const GRAIN = /* glsl */ `
 #include <normal_fragment_maps>
 if (uGrain > 0.0001) {
@@ -177,7 +152,6 @@ if (uGrain > 0.0001) {
       vec3 r1 = cross(dpy, normal);
       vec3 r2 = cross(normal, dpx);
       float det = dot(dpx, r1);
-      // Height in view units: the grain's slope stays the same at any zoom.
       float scale = length(dpx) / max(length(fwidth(q)), 1e-6);
       vec3 grad = sign(det) * (dFdx(h) * r1 + dFdy(h) * r2) * scale;
       normal = normalize(abs(det) * normal - grad);
@@ -239,6 +213,13 @@ export interface PartMaterial {
   uniforms: PartUniforms;
 }
 
+/** Baked sky bodies carry `_emission` and linear RGBA `color`: 1 photosphere,
+ * 2 corona, 3 soft comet shell. The Sun's
+ * membrane family routes the corona through the existing transparent queue;
+ * the shader cancels its .55 base opacity, preserving fades and x-ray opacity.
+ * Missing emission attributes are zero, so all other materials retain their
+ * studio/analytic lighting. Solar output bypasses diffuse and specular light.
+ */
 export function createPartMaterial(): PartMaterial {
   const uniforms: PartUniforms = {
     uOrbitLight: { value: 0 },
@@ -283,9 +264,10 @@ export function createPartMaterial(): PartMaterial {
           float light = uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*max(0.0,dot(normalize(worldNormal),uOrbitSun));
           outgoingLight = diffuseColor.rgb * light;
         }
+if (vEmission > 0.5 && vEmission < 3.5) {if (!gl_FrontFacing) discard;float mu = abs(dot(normalize(vNormal), normalize(vViewPosition)));float gain = vEmission < 1.5 ? 1.5 * (0.46 + 0.54 * mu) : 1.0;outgoingLight = diffuseColor.rgb * gain + totalEmissiveRadiance;diffuseColor.a *= vEmission < 2.5 ? 1.0 / 0.55 : mu * mu;if (vEmission > 1.5 && vEmission < 2.5) diffuseColor.a *= pow(mu * (1.0 - mu), 2.0) * smoothstep(0.0, 0.16, mu);}
         #include <opaque_fragment>`);
   };
-  material.customProgramCacheKey = () => 'atlas-part-5';
+  material.customProgramCacheKey = () => 'part7';
   return { material, uniforms };
 }
 
@@ -329,6 +311,17 @@ export function stylePartMaterial({ material, uniforms }: PartMaterial, s: PartS
   uniforms.uHatchColor.value.set(s.ink);
   uniforms.uHatchPx.value = s.hatchPx;
   if (changed) material.needsUpdate = true;
+}
+
+/** Apply the existing chapter/x-ray fade to a family material. */
+export function fadePartMaterial(material: MeshStandardMaterial, opacity: number, ghost: boolean, blend = false): void {
+  material.opacity = opacity;
+  const transparent = blend || opacity < 0.999;
+  if (material.transparent !== transparent) {
+    material.transparent = transparent;
+    material.needsUpdate = true;
+  }
+  material.depthWrite = !ghost && opacity > 0.6 && !blend;
 }
 
 /** Fibre grain and smoothed contraction direction for a glb muscle with `_FIBRE` (after `stylePartMaterial`). */

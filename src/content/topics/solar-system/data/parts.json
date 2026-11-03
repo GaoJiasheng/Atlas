@@ -17,18 +17,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
-        "color": "matte",
-        "tint": "token:en-light",
-        "size": [
-          1
-        ]
+      "mesh": "sun",
+      "material": {
+        "color": "membrane",
+        "tint": "#ffffff"
       }
     },
     {
@@ -48,18 +40,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "mercury",
+      "material": {
         "color": "matte",
-        "tint": "token:neutral",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -79,18 +63,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "venus",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-3",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -110,18 +86,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "earth",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -141,18 +109,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "mars",
+      "material": {
         "color": "matte",
-        "tint": "token:signal",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -172,18 +132,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "jupiter",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-2",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -203,18 +155,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "saturn",
+      "material": {
         "color": "matte",
-        "tint": "token:neutral",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -234,18 +178,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "uranus",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -265,18 +201,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "neptune",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          1
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -296,38 +224,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "lathe",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "saturn-rings",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-3",
-        "profile": [
-          [
-            1.3,
-            -0.008
-          ],
-          [
-            2.05,
-            -0.008
-          ],
-          [
-            2.05,
-            0.008
-          ],
-          [
-            1.3,
-            0.008
-          ],
-          [
-            1.3,
-            -0.008
-          ]
-        ],
-        "segments": 96
+        "tint": "#ffffff"
       }
     },
     {
@@ -682,18 +582,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          -2,
-          0,
-          0
-        ],
+      "mesh": "moon-parent",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          0.8
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -713,40 +605,11 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          -0.1,
-          0,
-          0
-        ],
+      "mesh": "moon-demo",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-2",
-        "size": [
-          0.18
-        ]
-      },
-      "extra": [
-        {
-          "kind": "torus",
-          "at": [
-            -2,
-            0,
-            0
-          ],
-          "color": "matte",
-          "tint": "token:ink-3",
-          "rotation": [
-            90,
-            0,
-            0
-          ],
-          "size": [
-            1.9,
-            0.012
-          ]
-        }
-      ]
+        "tint": "#ffffff"
+      }
     },
     {
       "id": "asteroid-specimen",
@@ -765,23 +628,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          2,
-          0,
-          0
-        ],
+      "mesh": "asteroid-specimen",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-2",
-        "scale": [
-          1,
-          0.65,
-          0.8
-        ],
-        "size": [
-          0.65
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -801,27 +651,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "asteroid-belt",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-2",
-        "size": [
-          0.065
-        ]
-      },
-      "repeat": {
-        "count": 36,
-        "axis": [
-          0,
-          1,
-          0
-        ],
-        "radius": 3.2
+        "tint": "#ffffff"
       }
     },
     {
@@ -841,18 +674,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
-        "color": "matte",
-        "tint": "token:en-light",
-        "size": [
-          0.35
-        ]
+      "mesh": "comet-sun",
+      "material": {
+        "color": "membrane",
+        "tint": "#ffffff"
       }
     },
     {
@@ -872,23 +697,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "comet-nucleus",
+      "material": {
         "color": "matte",
-        "tint": "token:ink-2",
-        "scale": [
-          1.2,
-          0.75,
-          0.9
-        ],
-        "size": [
-          0.15
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -908,18 +720,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          0,
-          0
-        ],
-        "color": "membrane",
-        "tint": "token:ink-3",
-        "size": [
-          0.35
-        ]
+      "mesh": "comet-coma",
+      "material": {
+        "color": "matte",
+        "tint": "#ffffff"
       }
     },
     {
@@ -939,28 +743,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "tube",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "ion-tail",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "path": [
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            3,
-            0,
-            0
-          ]
-        ],
-        "radius": 0.025
+        "tint": "#ffffff"
       }
     },
     {
@@ -980,43 +766,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sweep",
-        "at": [
-          0,
-          0,
-          0
-        ],
+      "mesh": "dust-tail",
+      "material": {
         "color": "matte",
-        "tint": "token:neutral",
-        "path": [
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.8,
-            0,
-            -0.15
-          ],
-          [
-            1.8,
-            0,
-            -0.45
-          ],
-          [
-            2.6,
-            0,
-            -0.7
-          ]
-        ],
-        "radius": [
-          0.02,
-          0.12,
-          0.17,
-          0.04
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -1036,18 +789,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          -2,
-          0,
-          0
-        ],
+      "mesh": "meteor-world",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          0.8
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -1181,7 +926,7 @@
         "tint": "token:en-light",
         "profile": [
           [
-            0.0,
+            0,
             -1.5
           ],
           [
@@ -1230,7 +975,7 @@
           ],
           [
             1.5,
-            -0.0
+            0
           ],
           [
             1.4872,
@@ -1277,7 +1022,7 @@
             1.4872
           ],
           [
-            0.0,
+            0,
             1.5
           ]
         ],
@@ -1733,18 +1478,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          3,
-          0,
-          0
-        ],
+      "mesh": "reflecting-world",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          0.65
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -2081,18 +1818,10 @@
       },
       "clip": false,
       "castShadow": false,
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          0,
-          -0.6,
-          0
-        ],
+      "mesh": "earth-viewpoint",
+      "material": {
         "color": "matte",
-        "tint": "token:cold",
-        "size": [
-          0.5
-        ]
+        "tint": "#ffffff"
       }
     },
     {
@@ -2263,7 +1992,7 @@
             [
               0.9,
               0.27,
-              0.0
+              0
             ],
             [
               1.114404665111389,
@@ -3725,15 +3454,6 @@
         }
       },
       {
-        "output": "radius-sun",
-        "part": "sun",
-        "glow": {
-          "color": "token:en-light",
-          "full": 0.7,
-          "curve": "linear"
-        }
-      },
-      {
         "output": "comet-positions",
         "part": [
           "comet-nucleus",
@@ -3805,7 +3525,7 @@
       {
         "kind": "catalogue-sky",
         "group": "local-sky",
-        "catalogue": "stars-hyg-v41-cc-by-sa.json",
+        "catalogue": "stars-hyg-v41-readable-cc-by-sa.json",
         "radius": 5
       }
     ]
@@ -3821,5 +3541,6 @@
       },
       "duration": 0
     }
-  }
+  },
+  "model": "/models/solar-system.glb"
 }

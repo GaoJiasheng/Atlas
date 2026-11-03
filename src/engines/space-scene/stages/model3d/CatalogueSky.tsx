@@ -14,6 +14,24 @@ import { useRuntime } from './runtime';
 type Overlay = Extract<SimOverlay, {
     kind: 'catalogue-sky';
 }>;
+/** Three multiplies PointsMaterial.size by the renderer pixel ratio exactly once.
+ * With attenuation disabled this is a CSS-pixel diameter at every camera distance. */
+export function cataloguePointSize(catalogue: StarCatalogue | null): number | undefined {
+    const meta = catalogue?.meta as (StarCatalogue['meta'] & { pointSizeCssPx?: unknown }) | undefined;
+    const px = meta?.pointSizeCssPx;
+    return typeof px === 'number' && Number.isFinite(px) && px >= 1 && px <= 6 ? px : undefined;
+}
+export function createCataloguePointMaterial(color: string, sizeCssPx?: number): PointsMaterial {
+    if (sizeCssPx === undefined) return new PointsMaterial({ color, size: .12, sizeAttenuation: true, transparent: true, depthWrite: false, toneMapped: false });
+    const material = new PointsMaterial({ color, size: sizeCssPx, sizeAttenuation: false, transparent: true, depthWrite: false, toneMapped: false });
+    material.onBeforeCompile = shader => {
+        shader.fragmentShader = shader.fragmentShader.replace('#include <opaque_fragment>', `
+            diffuseColor.a *= 1.0 - smoothstep(0.32, 0.5, length(gl_PointCoord - vec2(0.5)));
+            #include <opaque_fragment>`);
+    };
+    material.customProgramCacheKey = () => 'atlas-catalogue-disc-1';
+    return material;
+}
 export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }: {
     overlay: Overlay;
     sim: SimData;
@@ -81,7 +99,8 @@ export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }
     const color = resolveDataColor('token:ink', look.tokens, look.theme);
     const lineColor = resolveDataColor('token:signal', look.tokens, look.theme);
     // Materials are built imperatively: the stage registers only a few classes as JSX (extend.ts).
-    const pointMaterial = useMemo(() => new PointsMaterial({ color, size: .12, sizeAttenuation: true, transparent: true, depthWrite: false, toneMapped: false }), [color]);
+    const pointSize = cataloguePointSize(catalogue);
+    const pointMaterial = useMemo(() => createCataloguePointMaterial(color, pointSize), [color, pointSize]);
     const lineMaterial = useMemo(() => new LineBasicMaterial({ color: lineColor, transparent: true, opacity: .65, toneMapped: false }), [lineColor]);
     useEffect(() => () => pointMaterial.dispose(), [pointMaterial]);
     useEffect(() => () => lineMaterial.dispose(), [lineMaterial]);

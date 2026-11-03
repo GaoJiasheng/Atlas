@@ -232,7 +232,7 @@ describe('published solar-system production content', () => {
     }
     expect(catalogueText).not.toMatch(/CC BY-NC-SA/);
     expect(readdirSync(`${dir}/data`)).not.toContain('stars-hyg-v41-cc-by-sa.json');
-    expect(file.sim!.overlays!.find((o) => o.kind === 'catalogue-sky')).toMatchObject({ catalogue: 'stars-hyg-v41-cc-by-sa.json', radius: 5 });
+    expect(file.sim!.overlays!.find((o) => o.kind === 'catalogue-sky')).toMatchObject({ catalogue: 'stars-hyg-v41-readable-cc-by-sa.json', radius: 5 });
   });
   it('keeps figure assets and reusable-topic links explicit, local and source-backed', () => {
     const bodies = chapters.map((c) => c.body).join('\n');
