@@ -4,8 +4,8 @@
  * pnpm tsx scripts/geo/solar-system/render-preview.ts [output-directory]
  */
 import { mkdirSync } from 'node:fs';
-import { NodeIO } from '@gltf-transform/core';
-import { EXTTextureWebP, EXTMeshoptCompression } from '@gltf-transform/extensions';
+import { NodeIO, type Accessor } from '@gltf-transform/core';
+import { EXTTextureWebP, EXTMeshoptCompression, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
 import sharp from 'sharp';
 import { Matrix4, Vector3 } from 'three';
@@ -17,7 +17,13 @@ type Placement={id:string;at?:V;scale?:number;rotation?:V};
 type View={name:string;title:string;bodies:Placement[];eye?:V;target?:V;span:number;theme?:'dark'|'paper';size?:number};
 const output=process.argv[2]??'/tmp/atlas-solar-system-polish';mkdirSync(output,{recursive:true});
 await MeshoptDecoder.ready;
-const doc=await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read('public/models/solar-system.glb');
+const doc=await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression,KHRMeshQuantization]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read('public/models/solar-system.glb');
+// Accessor elements include glTF's normalized integer decoding, as GLTFLoader does.
+function floats(accessor:Accessor){
+ const values=new Float32Array(accessor.getCount()*accessor.getElementSize()),element:number[]=[];
+ for(let i=0;i<accessor.getCount();i++)values.set(accessor.getElement(i,element),i*accessor.getElementSize());
+ return values;
+}
 const bodies=new Map<string,Body>();
 for(const node of doc.getRoot().listNodes()){
  const mesh=node.getMesh();if(!mesh)continue;
@@ -27,7 +33,7 @@ for(const node of doc.getRoot().listNodes()){
  const uv=primitive.getAttribute('TEXCOORD_0')?.getArray(),tex=primitive.getMaterial()?.getBaseColorTexture()?.getImage();
  let texture:TexturePixels|undefined;
  if(tex){const decoded=await sharp(Buffer.from(tex)).ensureAlpha().raw().toBuffer({resolveWithObject:true});texture={data:decoded.data,width:decoded.info.width,height:decoded.info.height,channels:decoded.info.channels}}
- bodies.set(node.getName(),{id:node.getName(),p:new Float32Array(pos.getArray()!),n:new Float32Array(normal.getArray()!),c:color?new Float32Array(color.getArray()!):new Float32Array(pos.getCount()*4).fill(1),e:emission?new Float32Array(emission):new Float32Array(pos.getCount()),uv:uv?new Float32Array(uv):undefined,texture,indices:new Uint32Array(index.getArray()!),closed:node.getExtras().closed!==false});
+ bodies.set(node.getName(),{id:node.getName(),p:floats(pos),n:floats(normal),c:color?floats(color):new Float32Array(pos.getCount()*4).fill(1),e:emission?new Float32Array(emission):new Float32Array(pos.getCount()),uv:uv?new Float32Array(uv):undefined,texture,indices:new Uint32Array(index.getArray()!),closed:node.getExtras().closed!==false});
 }
 const dot=(a:V,b:V)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 const normalize=(a:V):V=>{const l=Math.hypot(...a);return[a[0]/l,a[1]/l,a[2]/l]};

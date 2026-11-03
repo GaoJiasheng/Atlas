@@ -1,7 +1,7 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NodeIO, type Document, type Primitive } from '@gltf-transform/core';
-import { EXTMeshoptCompression, EXTTextureWebP } from '@gltf-transform/extensions';
+import { EXTMeshoptCompression, EXTTextureWebP, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import sharp from 'sharp';
 import { BufferGeometry, Color, Mesh, MeshStandardMaterial, ShaderLib, Texture, UniformsUtils, type WebGLRenderer } from 'three';
@@ -44,7 +44,7 @@ function components(mesh: Primitive): number[][] {
 describe('solar-system polish: baked geometry and unchanged teaching contract', () => {
   beforeAll(async () => {
     await MeshoptDecoder.ready;
-    model = await new NodeIO().registerExtensions([EXTMeshoptCompression, EXTTextureWebP])
+    model = await new NodeIO().registerExtensions([EXTMeshoptCompression, EXTTextureWebP, KHRMeshQuantization])
       .registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).read('public/models/solar-system.glb');
   });
 
@@ -66,7 +66,7 @@ describe('solar-system polish: baked geometry and unchanged teaching contract', 
       expect(normals.getCount()).toBe(positions.getCount());
       expect(positions.getArray()!.every(Number.isFinite), mesh.getName()).toBe(true);
       expect(normals.getArray()!.every(Number.isFinite), mesh.getName()).toBe(true);
-      const ns = normals.getArray()!;
+      const ns = Array.from({length:normals.getCount()},(_,i)=>normals.getElement(i,[])).flat();
       let maximumError = 0;
       for (let i = 0; i < ns.length; i += 3) maximumError = Math.max(maximumError, Math.abs(Math.hypot(ns[i]!, ns[i + 1]!, ns[i + 2]!) - 1));
       expect(maximumError, mesh.getName()).toBeLessThan(.005);
@@ -123,12 +123,12 @@ describe('solar-system polish: baked geometry and unchanged teaching contract', 
 
   it('separates opaque emissive photospheres from translucent corona shells', () => {
     for (const id of ['sun', 'comet-sun']) {
-      const mesh = primitive(id), emission = mesh.getAttribute('_EMISSION')!.getArray()!, color = mesh.getAttribute('COLOR_0')!.getArray()!;
+      const mesh = primitive(id), emission = mesh.getAttribute('_EMISSION')!.getArray()!, color = mesh.getAttribute('COLOR_0')!;
       const modes = new Set(emission);
       expect([...modes].sort()).toEqual([1, 2]);
       let photosphere = 0, corona = 0, invalidAlpha = 0;
       for (let i = 0; i < emission.length; i++) {
-        const alpha = color[i * 4 + 3]!;
+        const alpha = color.getElement(i,[])[3]!;
         if (emission[i] === 1) { photosphere++; if (alpha !== 1) invalidAlpha++; }
         if (emission[i] === 2) { corona++; if (!(alpha > 0 && alpha <= .21)) invalidAlpha++; }
       }
@@ -141,10 +141,13 @@ describe('solar-system polish: baked geometry and unchanged teaching contract', 
 
 describe('solar-system polish: local image budgets', () => {
   it('vendors nine complete planet/moon textures below 60 KB each', async () => {
-    const directory = 'public/models/solar-system';
+    const directory = 'scripts/geo/solar-system/textures';
+    expect(existsSync('public/models/solar-system')).toBe(false);
     const names = readdirSync(directory).filter(name => name.endsWith('.webp')).sort();
     expect(names).toEqual(['earth', 'jupiter', 'mars', 'mercury', 'moon', 'neptune', 'saturn', 'uranus', 'venus'].map(id => `${id}.webp`));
     for (const name of names) {
+      const embedded = model.getRoot().listTextures().find(texture => texture.getName() === name.replace('.webp', ''))!;
+      expect(Buffer.from(embedded.getImage()!).equals(readFileSync(`${directory}/${name}`)), name).toBe(true);
       expect(statSync(`${directory}/${name}`).size, name).toBeLessThanOrEqual(60_000);
       const image = await sharp(`${directory}/${name}`).metadata();
       expect([image.width, image.height], name).toEqual([1024, 512]);
@@ -299,7 +302,7 @@ describe('opted-in GLB surfaces reach the real part material', () => {
       expect(asset.materials[primitive.material].extras.atlasSurface).toBe(true);
     }
     expect(json('scripts/geo/solar-system/triangle-audit.json').max.live).toBeLessThan(350_000);
-    expect(statSync('public/models/solar-system.glb').size).toBeLessThan(8_000_000);
+    expect(statSync('public/models/solar-system.glb').size).toBeLessThanOrEqual(1_500_000);
   });
 
   it.each(['sun-earth-moon', 'bones-and-joints', 'heart-and-lungs', 'digestive-system', 'muscles-core', 'muscles-back', 'muscles-shoulders', 'muscles-chest', 'muscles-arms', 'muscles-legs', 'sample-solar'])('%s retains its existing material path and has no new surface opt-in', topic => {

@@ -25,11 +25,12 @@ export const surfaceTextureIds = [
 ] as const;
 
 const WIDTH = 1024, HEIGHT = 512, MAX_BYTES = 60_000;
-const outputDirectory = resolve(dirname(fileURLToPath(import.meta.url)), '../../../public/models/solar-system');
+// Build inputs only. The runtime reads these bytes from the GLB's embedded images.
+export const surfaceTextureDirectory = resolve(dirname(fileURLToPath(import.meta.url)), 'textures');
 
 /** Writes vendored textures and returns exactly the same compressed bytes. */
 export async function generateSurfaceTextures(): Promise<Record<string, SurfaceTexture>> {
-  await mkdir(outputDirectory, { recursive: true });
+  await mkdir(surfaceTextureDirectory, { recursive: true });
   const result: Record<string, SurfaceTexture> = {};
   for (const id of surfaceTextureIds) {
     const pixels = Buffer.alloc(WIDTH * HEIGHT * 3);
@@ -55,7 +56,7 @@ export async function generateSurfaceTextures(): Promise<Record<string, SurfaceT
       if (bytes.length <= MAX_BYTES) break;
     }
     if (!bytes || bytes.length > MAX_BYTES) throw new Error(`${id} surface exceeds ${MAX_BYTES} bytes`);
-    await writeFile(resolve(outputDirectory, `${id}.webp`), bytes);
+    await writeFile(resolve(surfaceTextureDirectory, `${id}.webp`), bytes);
     result[id] = { bytes, width: WIDTH, height: HEIGHT };
   }
   return result;

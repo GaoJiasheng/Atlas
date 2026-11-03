@@ -139,3 +139,45 @@ First WebGL look (headless Chromium, paper + cinema, DPR 1 and 2) found four pro
 - **Catalogue stars:** 3.2 CSS px discs rendered as ~1.5 px dots after the soft edge, smaller than the old points. `pointSizeCssPx` 3.2 → 5 (still within the 1–6 clamp); Orion reads at DPR 1 and 2 in both themes.
 
 Peak visible triangles now 219,008 (was 113,088 on main).
+
+## Polish 2026-11-03 — round 3 asset size
+
+Both requested size items are complete. The reference for this pass is the accepted asset at `1aa4ea3`, including its ring sampling/F-ring width, warmer Sun, stronger ochre/blue comet tails and coma, and 5 CSS-pixel catalogue stars. No new scientific or visual reference was needed; existing attribution/licences remain in `data/SOURCES.md`.
+
+1. **GLB below 1.5 MB:** **1,849,836 → 1,487,820 bytes** (362,016 bytes / 19.6% smaller; cap is 1,500,000 decimal bytes). Keep meshopt compression and pack only NORMAL as normalized signed 16-bit and COLOR_0 as normalized unsigned 8-bit attributes. Declare `KHR_mesh_quantization` for native GLTFLoader support. No engine edits. The build throws if the generated binary exceeds the cap; the existing asset-budget test now enforces the same cap.
+2. **Unpublished source textures:** moved all nine original WebPs, byte-for-byte, from public into `scripts/geo/solar-system/textures/`. Both the reuse and `--textures` regeneration paths use this build-only directory. Each image remains 1024×512 at its accepted quality, with exactly the same compressed bytes embedded in the GLB. The former public directory is absent and has no runtime references. Tests verify nine source images, embedded/source byte equality and absence of the public directory. Removed **357,338 duplicate published bytes**; combined GLB plus loose-image payload is **2,207,174 → 1,487,820 bytes**.
+
+### Preservation and counts
+
+The decoded before/after audit verifies exact positions, UVs, emission modes, indices/triangle order, node transforms, extras, material base colours/alpha modes/sidedness, and all embedded images. Maximum decoded normal-component error is 0.000015260; maximum vertex RGBA component error is 0.001960777. These are storage precision changes, not new colours/opacity recipes. No surfaces were simplified or textures downsampled.
+
+| Count | Before this round | After |
+|---|---:|---:|
+| Peak visible triangles (conservative chapter/beat bound) | 219,008 | 219,008 |
+| GLB triangles, all 22 exported meshes | 291,136 | 291,136 |
+| Topic triangles summed over mutually exclusive chapters | 550,818 | 550,818 |
+| Selectable parts | 49 | 49 |
+
+Part IDs, labels, all chapter/beat references, teaching numbers, simulation bindings, cutaway/exploded behaviour and the catalogue are unchanged. No EN/ZH text correction was necessary. The offline reader and tests now decode normalized accessor elements rather than treating integer storage as floats.
+
+### Offline visual verification
+
+Rendered the actual accepted and final GLBs to `/tmp/atlas-solar-system-round3/{before,after}/` using `render-preview.ts`. Inspected both contact sheets and 800px close-up comparisons of the Sun, Saturn, comet, asteroid, Jupiter and Moon; these include opposing Earth hemispheres, three asteroid angles, both Sun/comet themes and four anti-solar placements. Across all **22 views**, the maximum RGB-channel change is **2/255**, with mean absolute channel error below 0.071/255 in every view. There is no visible close-up loss in these CPU comparisons.
+
+- Contact sheets: `after/planets-contact-sheet.png`, `after/small-bodies-contact-sheet.png`.
+- Before-left/after-right close-ups: `{sun-paper,saturn,comet-paper,asteroid-front,jupiter,moon}-comparison.png`.
+- Numeric evidence: `asset-diff.json`, `image-diff.json`.
+
+These previews reconstruct the shader on CPU; they are not WebGL screenshots or GPU performance measurements. No browser or desktop was opened. No requested item remains unfinished; downstream browser acceptance is outside this sandbox's permitted verification.
+
+Reproduce with `pnpm tsx scripts/geo/solar-system/build-parts.ts`, `pnpm tsx scripts/geo/solar-system/audit.ts`, and `pnpm tsx scripts/geo/solar-system/render-preview.ts /tmp/atlas-solar-system-round3/after`. Add `--textures` to rebuild the source WebPs in their new private build directory.
+
+### Round 3 gates
+
+- `pnpm check`: **0 errors, 0 warnings**, four existing hints (1,096 files).
+- `pnpm validate`: **94 topics, 0 errors, 0 warnings**.
+- `pnpm build`: **191 static pages**, successful PWA generation. Production GLB matches the final source binary byte-for-byte; no loose solar-system source WebPs in `dist`.
+- `pnpm test`: **251 files, 6,369 tests passed**, no skipped tests. Includes the real Three GLTFLoader/meshopt/material path, exact embedded/source-image equality and strict 1,500,000-byte asset cap.
+- `git diff --check`: clean (read-only). All edits stay within the solar-system topic, its generation scripts/assets and its existing test; no engine, package/lockfile, other-topic, browser/desktop or git write.
+
+Logs: `/tmp/atlas-solar-system-round3/{check,validate,build,test}.log`. No requested implementation item remains unfinished.

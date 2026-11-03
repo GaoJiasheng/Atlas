@@ -3,15 +3,15 @@
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { Document, NodeIO } from '@gltf-transform/core';
-import { EXTTextureWebP, EXTMeshoptCompression } from '@gltf-transform/extensions';
-import { dedup, prune, weld } from '@gltf-transform/functions';
+import { EXTTextureWebP, EXTMeshoptCompression, KHRMeshQuantization } from '@gltf-transform/extensions';
+import { dedup, prune, quantize, weld } from '@gltf-transform/functions';
 import { MeshoptEncoder } from 'meshoptimizer';
 import { BufferGeometry, Color, Float32BufferAttribute, SphereGeometry, TorusGeometry, SRGBColorSpace, Vector3 } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { partsFile } from '../../../src/engines/space-scene/schema';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { surfaceColor } from './surfaces';
-import { generateSurfaceTextures } from './build-textures';
+import { generateSurfaceTextures, surfaceTextureDirectory, surfaceTextureIds } from './build-textures';
 
 const dir='scripts/geo/solar-system', topic='src/content/topics/solar-system';
 const baseline=JSON.parse(readFileSync(`${dir}/baseline-parts.json`,'utf8'));
@@ -22,7 +22,7 @@ doc.createExtension(EXTTextureWebP).setRequired(true);
 doc.createExtension(EXTMeshoptCompression).setRequired(true).setEncoderOptions({method:EXTMeshoptCompression.EncoderMethod.QUANTIZE});
 doc.getRoot().getAsset().copyright='Atlas original procedural meshes and surface reconstruction, CC0-1.0. Earth coastline: Natural Earth public domain via world-atlas (ISC, Mike Bostock). See solar-system/data/SOURCES.md.';
 const scene=doc.createScene('solar-system');
-const textureBytes=process.argv.includes('--textures')?await generateSurfaceTextures():Object.fromEntries(['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','moon'].map(id=>[id,{bytes:readFileSync(`public/models/solar-system/${id}.webp`)}]));
+const textureBytes=process.argv.includes('--textures')?await generateSurfaceTextures():Object.fromEntries(surfaceTextureIds.map(id=>[id,{bytes:readFileSync(`${surfaceTextureDirectory}/${id}.webp`)}]));
 const textures=Object.fromEntries(Object.entries(textureBytes).map(([id,t])=>[id,doc.createTexture(id).setImage(t.bytes).setMimeType('image/webp')]));
 const counts:Record<string,{before:number;after:number}>={};
 const noise=(x:number,y:number,z:number)=>Math.sin(x*3.1+Math.sin(z*4.7))*Math.sin(y*4.3+z*1.7)*.5+Math.sin(y*8.1-x*2.3)*.2;
@@ -172,10 +172,17 @@ file.model='/models/solar-system.glb';
 // Solar photosphere colour is baked; the former additive glow would wash it out.
 file.sim.bind=file.sim.bind.filter((b:any)=>!(b.part==='sun'&&b.glow));
 partsFile.parse(file);
-mkdirSync('public/models/solar-system',{recursive:true});
+mkdirSync('public/models',{recursive:true});
 await MeshoptEncoder.ready;
-await doc.transform(weld(),dedup(),prune());
-await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression]).registerDependencies({'meshopt.encoder':MeshoptEncoder}).write('public/models/solar-system.glb',doc);
+// Keep the accepted positions, UVs, triangle order, emission modes and WebPs intact.
+// glTF's normalized attributes pack lighting normals to 16 bits and RGBA to 8 bits;
+// GLTFLoader decodes them natively. This avoids downsampling any close-up texture.
+await doc.transform(weld(),dedup(),prune(),quantize({pattern:/^(NORMAL|COLOR_0)$/,quantizeNormal:16,quantizeColor:8}));
+// Required explicitly because only NORMAL (not POSITION) uses mesh quantization.
+doc.createExtension(KHRMeshQuantization).setRequired(true);
+const glb=await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression,KHRMeshQuantization]).registerDependencies({'meshopt.encoder':MeshoptEncoder}).writeBinary(doc);
+if(glb.byteLength>1_500_000)throw new Error(`Solar-system GLB exceeds 1,500,000 bytes: ${glb.byteLength}`);
+writeFileSync('public/models/solar-system.glb',glb);
 writeFileSync(`${dir}/proposed-parts.json`,JSON.stringify(file,null,2)+'\n');
 writeFileSync(`${topic}/data/parts.json`,JSON.stringify(file,null,2)+'\n');
 writeFileSync(`${dir}/triangle-counts.json`,JSON.stringify(counts,null,2)+'\n');
