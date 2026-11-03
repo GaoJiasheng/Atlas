@@ -5209,7 +5209,7 @@
    },
    "detail": {
     "en": "Imported water comes from the Johor River in Malaysia. Under the 1962 Water Agreement, Singapore may draw up to 250 million gallons a day, about 1.1 million m³, until 2061; Johor is entitled to buy treated water of up to 2 % of the water supplied, about 5 million gallons a day [S17, S18, S11]. Pipelines carry the water across the Causeway.\n\nThe model cuts the pipeline off at the edge of the slice; the map topic Four Taps shows the river and the route.\n\nAn earlier agreement of 1961 expired in 2011 [S17]; before it, a 1927 agreement let Singapore lease land in Johor to collect water [S19]. Linggiu Reservoir, built upstream under a 1990 agreement, releases water to supplement the river [S4].",
-    "zh": "进口水来自马来西亚的柔佛河。根据 1962 年水供协议，新加坡每天可抽取最多 2.5 亿加仑（约 110 万 m³）的水，直到 2061 年；柔佛有权购买相当于供水量最多 2 %（每天约 500 万加仑）的经处理的水 [S17, S18, S11]。水管经长堤把水送过来。\n\n模型在切片边缘把输水管截断；地图主题《四大水喉》画出河流与路线。\n\n更早的 1961 年协议已于 2011 年到期 [S17]；再往前，1927 年的协议让新加坡在柔佛租地集水 [S19]。根据 1990 年的协议在上游兴建的林木水库，放水补充河流的水量 [S4]。"
+    "zh": "进口水来自马来西亚的柔佛河。根据 1962 年水供协议，新加坡每天可抽取最多 2.5 亿加仑（约 110 万 m³）的水，直到 2061 年；柔佛有权购买相当于供水量最多 2 %（每天约 500 万加仑）的经处理的水 [S17, S18, S11]。水管经长堤把水送过来。\n\n模型在切片边缘把输水管截断；地图主题《四大水喉》画出河流与路线。\n\n更早的 1961 年协议已于 2011 年到期 [S17]；再往前，1927 年的协议让新加坡在柔佛租地集水 [S19]。根据 1990 年的协议在上游兴建的林桂水库，放水补充河流的水量 [S4]。"
    },
    "primitive": {
     "kind": "tube",

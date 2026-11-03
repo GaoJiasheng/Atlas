@@ -24,7 +24,7 @@
 | 0-7 | 事实纪律：规格行 = TYPICAL / FACT（PUB 公开值）；PLATE 块读数 = SIM（一场阵雨落在滨海集水区的模拟，§1.4），设计研究来源 S1 自描述；正文数字一律 `<Num s>` | — |
 | 0-8 | 单位：SI；PUB 用的 **mgd（百万加仑 / 日，英制加仑）** 照写并在第一次出现时换算（1 mgd ≈ 4,546 m³/日；440 mgd ≈ 200 万 m³/日），中文写"百万加仑"；雨量 mm、温度 °C | — |
 | 0-9 | 不做：品牌 / 企业名（淡化厂的运营公司不点名）、照片贴图、视频、配音文件、测验（默认不做）；每章一个"Try it / 试一试"细看块（§5），其中第 02、07 章是课纲要求的公平测试（蒸发因素），只写**在家可做、安全**的做法 | 是否保留"试一试" |
-| 0-10 | B 的地图**只用真实数据**（CLAUDE.md）：现今海岸、蓄水池面、厂址点、柔佛河与林木水库来自 URA MP2019（SODL）与 OSM（ODbL）；过去的帧 = 当年已存在的蓄水池（按 PUB / NLB 的建成年份筛选今天的多边形），**扩建前的旧轮廓与填海前的海岸不画**，在 `SOURCES.md` 与已知差距写明 | 是否接受"按年份筛选今天的面"这一方法 |
+| 0-10 | B 的地图**只用真实数据**（CLAUDE.md）：现今海岸、蓄水池面、厂址点、柔佛河与林桂水库来自 URA MP2019（SODL）与 OSM（ODbL）；过去的帧 = 当年已存在的蓄水池（按 PUB / NLB 的建成年份筛选今天的多边形），**扩建前的旧轮廓与填海前的海岸不画**，在 `SOURCES.md` 与已知差距写明 | 是否接受"按年份筛选今天的面"这一方法 |
 
 ---
 
@@ -67,7 +67,7 @@
 | F-5 | 滨海堤坝闸门与水泵 | 9 道钢闸、7 台排涝泵（P8） | FACT | 是 |
 | F-6 | 进口水 | 1962 年水协议：每日至多 250 百万加仑，至 2061 年（P3） | FACT | |
 | F-7 | 早期协议 | 1927 年协议；1961 年协议 2011 年到期（P10、P11） | FACT | 是 |
-| F-8 | 林木水库（Linggiu） | 柔佛河上游，为柔佛河取水提供调蓄（P3、P11）；建成年份 | FACT | 是 |
+| F-8 | 林桂水库（Linggiu） | 柔佛河上游，为柔佛河取水提供调蓄（P3、P11）；建成年份 | FACT | 是 |
 | F-9 | 新生水起点 | 2002 年国庆庆典首次亮相；同年第一座新生水厂（勿洛 Bedok）启用（P3） | FACT | |
 | F-10 | 新生水厂 | 4 座在运行（樟宜 2、乌鲁班丹 1、克兰芝 1；勿洛厂 2024 年到寿关闭）（P3，截至 2024-10） | FACT | |
 | F-11 | 新生水工艺 | 微滤 / 超滤 → 反渗透 → 紫外线消毒（P5） | FACT | 是 |
@@ -157,7 +157,7 @@
 |---|---|---|---|---|
 | D1 | URA **Master Plan 2019 Land Use layer**（data.gov.sg） | 今天的蓄水池水面（`LU_DESC` = RESERVOIR / WATERBODY，具体取值 **待核**）；"集水区里的城市"作对照 | Singapore Open Data Licence v1.0（docs/17 S11 已核） | 可用 |
 | D2 | URA **Master Plan 2019 Planning Area Boundary (No Sea)**（data.gov.sg） | 今天的陆地轮廓（并成一个面 = 岛尺度海岸）→ C1 底图 | SODL v1.0 | 许可 **待核** |
-| D3 | **OpenStreetMap**（Geofabrik `malaysia-singapore-brunei-latest.osm.pbf`，或构建期 Overpass 导出） | 蓄水池名称（`water=reservoir` + `name`）、柔佛河（`waterway=river`）、林木水库、跨长堤输水管（`man_made=pipeline` + `substance=water`）、水厂 / 再生水厂 / 淡化厂 / 新生水厂的位置（`man_made=water_works`、`wastewater_plant` 等） | **ODbL 1.0**：署名"© OpenStreetMap contributors"；我们导出的 GeoJSON 是衍生数据库，须同许可提供（在 `SOURCES.md` 写明） | 标签完整度 **待核** |
+| D3 | **OpenStreetMap**（Geofabrik `malaysia-singapore-brunei-latest.osm.pbf`，或构建期 Overpass 导出） | 蓄水池名称（`water=reservoir` + `name`）、柔佛河（`waterway=river`）、林桂水库、跨长堤输水管（`man_made=pipeline` + `substance=water`）、水厂 / 再生水厂 / 淡化厂 / 新生水厂的位置（`man_made=water_works`、`wastewater_plant` 等） | **ODbL 1.0**：署名"© OpenStreetMap contributors"；我们导出的 GeoJSON 是衍生数据库，须同许可提供（在 `SOURCES.md` 写明） | 标签完整度 **待核** |
 | D4 | **Natural Earth** 10m land / rivers / admin-1 | 区域底图（柔佛州、柔佛海峡）、柔佛河主干（NE 是否收录 **待核**） | 公有领域 | 可用 |
 | D5 | **OneMap**（SLA）Search API | 构建期地理编码厂址（只取坐标，不进运行时） | OneMap 使用条款 **待核**（docs/17 待核 6） | 待核；退路 = D3 |
 | D6 | PUB 集水区图（受保护 / 非受保护 / 城市集水区） | 集水区多边形 | 公开矢量数据**未找到**；PUB 图版 © PUB。若无开放矢量：**不画集水区面**，只画蓄水池面 + 文字"超过三分之二"（F-3）；不许手描 PUB 图 | 待核 |
@@ -339,11 +339,11 @@
 
 ### 4.7 B `four-taps` 的数据骨架（TimeScene）
 
-- `entities.json`：`local-catchment`（bloc axis，`color: token:water`）、`imported-water`（allied，`token:ink-2`）、`newater`（neutral，`token:loop`）、`desalination`（neutral，`token:ink-3`）。控制区 holder = 这些实体：蓄水池面属于 `local-catchment`；林木水库与柔佛河取水范围属于 `imported-water`。
+- `entities.json`：`local-catchment`（bloc axis，`color: token:water`）、`imported-water`（allied，`token:ink-2`）、`newater`（neutral，`token:loop`）、`desalination`（neutral，`token:ink-3`）。控制区 holder = 这些实体：蓄水池面属于 `local-catchment`；林桂水库与柔佛河取水范围属于 `imported-water`。
 - `control.json` 关键帧（年份全部 **待核**，D8）：K1 1868（第一座蓄水池，今麦里芝）→ K2 1912（加上下皮尔斯一带，**待核**）→ K3 1940（实里达）→ K4 1962（水协议当年的状态）→ K5 1986（西部集水区与勿洛等陆续建成后）→ K6 2008（滨海堤坝）→ K7 2011（榜鹅、实龙岗；17 个齐）。
 - `events.json`：`site` 事件 = 今天的厂址（6 水厂、4 新生水厂、5 淡化厂、再生水厂；只写 PUB 公开的名称与位置）；`political` 事件 = 1927、1961、1962 协议签署日与 2011 到期日（日期 **待核**）；其它：2002 新生水、2005 第一座淡化厂、2008 滨海堤坝启用。
 - `movements.json`：跨长堤输水管（建成年 **待核**）、DTSS 第一期（2008）走向（只在 OSM / PUB 公开图可核时画，否则不画）。
-- `presets.json`：`island`（全岛 zoom 10.6）、`johor-river`（柔佛河—林木水库 zoom 9）、`marina`、`west`（淡化厂一带）。
+- `presets.json`：`island`（全岛 zoom 10.6）、`johor-river`（柔佛河—林桂水库 zoom 9）、`marina`、`west`（淡化厂一带）。
 
 ---
 
@@ -427,7 +427,7 @@
 
 **06 `sea-and-johor`**
 - summary：Seawater is turned into fresh water with membranes, and water is also bought from Johor under a 1962 agreement. / 海水用膜变成淡水；另有按 1962 年协议从柔佛购买的水。
-- 正文提纲：① 取海水、预处理、反渗透、浓盐水（F-13）② 淡化耗电较多（定性，P5 **待核**）③ 柔佛河、林木水库、跨长堤输水管（F-6—F-8）④ 协议的事实与日期（§0-6）⑤ 指向 B 主题地图。
+- 正文提纲：① 取海水、预处理、反渗透、浓盐水（F-13）② 淡化耗电较多（定性，P5 **待核**）③ 柔佛河、林桂水库、跨长堤输水管（F-6—F-8）④ 协议的事实与日期（§0-6）⑤ 指向 B 主题地图。
 - 节拍（4）：海边取水头 → 淡化厂内反渗透→ 浓盐水管 → 北缘输水管（截断标记，字幕说"地图在下一个主题"）。
 - 细看：`Why desalination uses more energy`（定性）；`The water agreements`（日期与数量，两国一手来源；Gavin 审）；`On the map`（链接 `four-taps`）。
 - **试一试**：把一小杯盐水放在阳光下晒干，看留下的盐——蒸发把水带走、盐留下（与淡化原理不同，细看说明区别）。
@@ -447,7 +447,7 @@
 
 | # | id | 标题 EN / ZH | time | 拍（3–4） | 试一试 |
 |---|---|---|---|---|---|
-| 01 | `the-island-today` | Where Singapore's water is today / 今天新加坡的水在哪里 | 今天（K7） | 全岛 17 个蓄水池 → 中央集水区森林（D7，若可用）→ 四类厂址（`sites`）→ 柔佛河与林木水库 | 在地图上找离你家最近的蓄水池 |
+| 01 | `the-island-today` | Where Singapore's water is today / 今天新加坡的水在哪里 | 今天（K7） | 全岛 17 个蓄水池 → 中央集水区森林（D7，若可用）→ 四类厂址（`sites`）→ 柔佛河与林桂水库 | 在地图上找离你家最近的蓄水池 |
 | 02 | `the-first-reservoirs` | The first reservoirs / 最早的蓄水池 | 1868 → 1940 | K1 → K2 → K3，逐个点亮 | 对比 1868 与今天的蓝色面积 |
 | 03 | `water-from-johor` | Water from Johor / 来自柔佛的水 | 1927 → 2061 | 1927 协议 → 1961 / 1962 协议 → 2011 到期 → 2061（文字，不画未来） | 量一量柔佛河取水点到长堤的距离（比例尺） |
 | 04 | `new-taps` | New taps: NEWater and desalination / 新水喉：新生水与海水淡化 | 2002 → 今天 | 2002 新生水 → 2005 第一座淡化厂 → 今天 4 座新生水厂、5 座淡化厂 | 找出淡化厂都在海边的原因 |
@@ -488,7 +488,7 @@
 | P1 | MOE *Science Syllabus Primary 3–6*（2023 版）第 49–51 页（Water）、第 78 页（Sun as energy source）、第 15–18 页（过程技能） | docs/17 S3；本地 `scratchpad/sci/paged.txt` 已核页码 | 课纲对齐 |
 | P2 | MOE *Social Studies Syllabus Primary*（2020 版）第 23–27 页（P3 资源与环境） | docs/17 S5 | 四大水喉的课纲位置（原词 **待核**） |
 | P3 | PUB，*Our Water Story* 展板（SG60，2025-02），`pub.gov.sg/-/media/PUB/Public/Key-Initiatives/Our-Water-SG60/Resources/Exhibition-Panels/Exhibition-Panels---Our-Water-Story.pdf` | 2026-10-13 已读全文 | F-1–F-4、F-6、F-9、F-10、F-13、F-15–F-20 |
-| P4 | PUB，"Our Water Story / Four National Taps" 网页（`pub.gov.sg/Public/WaterLoop/OurWaterStory`，2024-02-28 更新） | 已读 | F-1；进口水"取自林木水库"的说法 |
+| P4 | PUB，"Our Water Story / Four National Taps" 网页（`pub.gov.sg/Public/WaterLoop/OurWaterStory`，2024-02-28 更新） | 已读 | F-1；进口水"取自林桂水库"的说法 |
 | P5 | PUB NEWater 页面（工艺三步、用途） | **待核** | F-11、F-12 |
 | P6 | PUB 水处理页面（混凝—消毒） | **待核** | F-15 |
 | P7 | PUB / MSE 家庭用水与 2030 目标（Singapore Green Plan 2030 或 PUB 年报） | **待核** | F-21 |
@@ -603,7 +603,7 @@
 **管线（城市尺度主题，docs/17 C1）**：`fetch.ts`（data.gov.sg 的 URA MP2019 土地利用与规划区边界，Overpass 的蓄水池、管线、水厂）→ `local-land.ts`（55 个规划区无海边界并成岛岸线，去掉 0.02 km² 以下碎块与大于 0.02 km² 的内陆水面，叠在 Natural Earth 周边之上；`public/geo/land-sg.json` 84 KB）→ `compose.ts`（`overlap` 选择器：面积至少一半落在 OSM 同名多边形内的 URA `WATERBODY` 地块，一个蓄水池一步）→ `simplify.ts`（Douglas–Peucker 10 m，70 条弧，`control.json` 62 KB，rings 205 / zero-area 0 / self-crossing 0，偏差 p95 0.01 km）→ `check.ts`（`geo-K#.png` 并排图）。过去的帧 = 当年已存在的蓄水池按今天的水面画（§0-10）。来源、许可（SODL v1.0 / ODbL 1.0 / 公有领域）、方法、残差在 `scripts/geo/four-taps/SOURCES-GEO.md` 与 `data/SOURCES.md`，ODbL 署名在页面来源列表（S31）。
 
 **QA 收尾做的改动**
-- **中文蓄水池名**：对照新加坡"促进华语理事会"的新加坡华语词库（S28：蓄水池 / 麦里芝 / 贝雅士上下段 / 实里达上段 / 登格）和中文维基的新加坡河流列表（克兰芝、慕莱、波扬、莎琳汶、登格、实里达下段、实龙岗、榜鹅），全部统一成"X 蓄水池"（上下段放在后面）；班丹、勿洛、德光岛、裕廊湖按通行写法未找到单独来源，沿用。**林木水库**（Linggiu，在柔佛）译名没有查到权威写法，沿用"水库"，待 Gavin 或 PUB 中文页核对。
+- **中文蓄水池名**：对照新加坡"促进华语理事会"的新加坡华语词库（S28：蓄水池 / 麦里芝 / 贝雅士上下段 / 实里达上段 / 登格）和中文维基的新加坡河流列表（克兰芝、慕莱、波扬、莎琳汶、登格、实里达下段、实龙岗、榜鹅），全部统一成"X 蓄水池"（上下段放在后面）；班丹、勿洛、德光岛、裕廊湖按通行写法未找到单独来源，沿用。**林桂水库**（Linggiu，在柔佛）译名没有查到权威写法，沿用"水库"，待 Gavin 或 PUB 中文页核对。
 - **协议章 ZH 改写**：只写日期、数量和双方（柔佛州政府 / 新加坡的水务机构，1965 年协议里写作 PUB）；去掉"作为交换"（改成"协议同时规定"）、"分家协议"（改成"新加坡脱离马来西亚的协议"）、签约方"市议会"（来源里没有，删）；"同一份协议，两种说法"一块只列两国官方说法，价格条款一句"本主题只写日期和数量，不涉及价格"。EN 同步。
 - **蓄水池引线**：历史章（01、03）原先高亮实体 `local-catchment`，引线写的是"本地集水 · 加入 1867"，每一拍都一样；现在开 `sites` 图层，每拍高亮当拍出现的蓄水池（`site-*`），引线写蓄水池名。第 02 章末拍的 `imported-water` 实体换成 `site-linggiu-reservoir`。引擎的"加入 {date}"（`time.joinedOn`）是全站共用的字符串，没有主题级覆盖，所以没有改成"启用 / opened"，而是让本主题不再高亮实体；实体卡里"加入"一行还在，要改需要引擎加一个主题级文案（见已知差距）。
 - **ZH 篇幅**：背景章与第 05 章各补一句有来源的内容（4 座新生水厂、5 座淡化厂，S25、S23）；背景章的数量统一成"4.4 亿加仑""2,400 毫米"。
@@ -614,6 +614,6 @@
 **已知差距**
 - 蓄水池扩建前的旧轮廓、已消失的水体、填海前的海岸线都没有画（SOURCES-GEO.md §3）；Marina 蓄水池的中央海湾没有蓝色（OSM 关系不含）。
 - "加入 {date}"字样仍出现在实体卡里；需要 `time.joinedOn` 的主题级覆盖（引擎改动）。
-- 林木水库中文名待核；班丹 / 勿洛 / 德光岛 / 裕廊湖的中文只有通行写法。
+- 林桂水库中文名待核；班丹 / 勿洛 / 德光岛 / 裕廊湖的中文只有通行写法。
 - 集水区没有画（PUB 只给图片）。
 
