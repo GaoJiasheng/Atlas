@@ -11,3 +11,9 @@
 原 PNG 和处理后全部 WebP 均已直接查看，透明与留边保留；技术图版灰度风格符合批准素材。程序化台架是独立设计，不对应品牌、实物尺寸或实验测量。OpenStax 13.1/13.2/14.1/14.2/14.4 正文、NOAA 声速与主动声纳说明另供物理核对，不追描其中图像。
 
 按 BRIEF 不运行 shoot/e2e、不打开用户浏览器或桌面。模型与参考并排截图、两主题/手机截图、标签遮挡与 GPU 性能需主会话端口 5452 执行；这里没有用静态图像检查代替这些门槛。
+
+## Polish 2026-11-03
+
+Viewed: Yamaha complete tom photo (`refs/drum.png`), MTX complete speaker section (`refs/speaker.jpg`), Kewaunee suspended-cabinet bench thumbnail (`refs/bench-small.png`). URLs and copyright boundaries are recorded in the topic's REBUILD-3D.md and data/SOURCES.md. Full-size Kewaunee download timed out; the successfully downloaded 300 × 300 official thumbnail supplies the visible rail/cabinet/foot relationships. Images are ignored development references and are never site textures.
+
+Compared actual engine CPU raster close-ups before/after in `/tmp/atlas-sound-qa/`; corrected open-shell windows, rod/hoop contact, lug curvature, cone/cap/spider winding and cabinetry. These are schematic original apparatus, with preserved single-head and continuous-string teaching facts; no branded model dimensions are inferred as published facts.
