@@ -2104,7 +2104,8 @@
 /* Chapter-body controls: <More>, <Num>, <FlyTo>, source popover        */
 /* ------------------------------------------------------------------ */
 
-/* <Figure>: a 4:3 graphite drawing with a hairline caption (paper multiplies, dark plate inverts: .atlas-drawing). */
+/* <Figure>: 4:3 graphite plate; invert={false} preserves illumination via the
+   shared .atlas-drawing rule in global.css, in both chapter and home contexts. */
 .atlas-figure {
   margin: 1em 0 1.1em;
   padding-top: 0.5em;

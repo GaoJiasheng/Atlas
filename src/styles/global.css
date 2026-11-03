@@ -277,10 +277,19 @@ astro-static-slot {
     user-select: none;
     -webkit-user-drag: none;
   }
-  :root[data-theme="cinema"] .atlas-drawing {
+  :root[data-theme="cinema"] .atlas-drawing:not([data-invert="false"]) {
     filter: invert(1) hue-rotate(180deg) contrast(0.94);
     mix-blend-mode: screen;
     opacity: 0.86;
+  }
+  /* Keep illumination and shadow polarity. The muted paper ground also fills
+     transparent pixels, so a dark Moon cannot disappear into the dark plate. */
+  :root[data-theme="cinema"] .atlas-drawing[data-invert="false"] {
+    background: var(--drawing-paper);
+    filter: brightness(0.85) contrast(0.95);
+    mix-blend-mode: normal;
+    opacity: 1;
+    border-radius: var(--radius-sm);
   }
 
   .atlas-grain--page {
@@ -442,6 +451,9 @@ astro-static-slot {
   }
   :root[data-theme="cinema"] .fp__item {
     mix-blend-mode: screen;
+  }
+  :root[data-theme="cinema"] .fp__item:has([data-invert="false"]) {
+    mix-blend-mode: normal;
   }
   .fp__leaders {
     position: absolute;
