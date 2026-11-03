@@ -1,9 +1,11 @@
 /** Production content evidence: captions, observation arithmetic, indexes and assets. */
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
-import { PerspectiveCamera, Vector3 } from 'three';
+import { Box3, Euler, Matrix4, PerspectiveCamera, Vector3 } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { partsFile, spaceChapterState } from '../../src/engines/space-scene/schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { solveMicroscope } from '../../src/engines/space-scene/lib/sim/microscope';
@@ -14,6 +16,21 @@ const root = join(import.meta.dirname, '../..');
 const dir = join(root, 'src/content/topics/cells');
 const file = partsFile.parse(JSON.parse(readFileSync(join(dir, 'data/parts.json'), 'utf8')));
 const sim = file.sim!;
+const meshAnchors = new Map<string, Vector3>();
+beforeAll(async () => {
+  // Decode with the same loader as production, including quantised node transforms.
+  const bytes = readFileSync(join(root, 'public', file.model!));
+  expect(bytes.length).toBeLessThanOrEqual(1_500_000);
+  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
+  expect(gltf.parser.json.extensionsRequired).toContain('EXT_meshopt_compression');
+  expect(gltf.asset.copyright).toContain('Atlas original meshes');
+  gltf.scene.updateMatrixWorld(true);
+  for (const p of file.parts.filter(p => p.mesh)) {
+    const node = gltf.scene.getObjectByName(p.mesh!);
+    expect(node, p.id).toBeDefined();
+    meshAnchors.set(p.id, new Box3().setFromObject(node!).getCenter(new Vector3()));
+  }
+});
 const chapters = readdirSync(join(dir, 'chapters')).filter(f => f.endsWith('.mdx')).sort().map(f => {
   const [, front, ...body] = readFileSync(join(dir, 'chapters', f), 'utf8').split(/^---$/m);
   const fm = parse(front!);
@@ -127,7 +144,15 @@ describe('cells: published content and observable model', () => {
         expect(hide, `${c.id}.${i + 1}: hidden ${id}`).not.toContain(id);
         expect(hide).not.toContain(p.group); expect(ghost).not.toContain(id); expect(ghost).not.toContain(p.group);
         expect(b.layers ?? c.state.layers).toContain(p.group);
-        const point = new Vector3(...p.primitive!.at).add(new Vector3(...anchorPoint(p))).project(camera);
+        const point = p.primitive ? new Vector3(...p.primitive.at).add(new Vector3(...anchorPoint(p))) : meshAnchors.get(id)!.clone();
+        const values = resolveSimValues(sim, { ...c.state.sim?.set, ...b.sim?.set });
+        const pose = file.poses![b.pose ?? (values.objective === 40 ? 'scope-high' : values.objective === 10 ? 'scope-low' : 'scope-scan')]?.parts[id];
+        if (pose) {
+          const pivot = new Vector3(...(pose.pivot ?? p.primitive?.at ?? [0, 0, 0]));
+          const rotation = pose.rotation ?? [0, 0, 0];
+          point.sub(pivot).applyMatrix4(new Matrix4().makeRotationFromEuler(new Euler(rotation[0] * Math.PI / 180, rotation[1] * Math.PI / 180, rotation[2] * Math.PI / 180))).add(pivot).add(new Vector3(...(pose.offset ?? [0, 0, 0])));
+        }
+        point.project(camera);
         expect(Math.abs(point.x), `${c.id}.${i + 1} ${id} x`).toBeLessThan(1);
         expect(Math.abs(point.y), `${c.id}.${i + 1} ${id} y`).toBeLessThan(1);
         expect(point.z).toBeGreaterThan(-1); expect(point.z).toBeLessThan(1);
