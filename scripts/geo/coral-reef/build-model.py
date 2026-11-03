@@ -6,6 +6,8 @@ The table contract is copied unchanged from authoring/sim-plan.json.
 """
 import json
 import math
+import subprocess
+from sculpt import Mesh, dome as sculpt_dome, corallite, tissue as sculpt_tissue, mouth as sculpt_mouth, plate, branching, write_glb
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -91,8 +93,8 @@ dome = [[0,-.018],[.25,-.018],[.30,.018],[.305,.075],[.275,.16],[.22,.235],[.13,
 boulder_at = [-.88,.005,-.04]
 part('colony-boulder','Boulder coral colony','圆丘状珊瑚群体','reef-habitat',
      'Joins many polyps over a shared rounded skeleton.','让许多珊瑚虫连接在圆丘状的共同骨骼上。',
-     'A hard-coral colony can contain many connected polyps over a shared skeleton. The small cups mark places occupied by polyps; the skeleton itself is not living animal tissue. [S3, S5]\n\nThis low dome is an original boulder-form study, not an identified coral species. Visible cup number and size are design choices. Use the separate tissue layer to distinguish living tissue from mineral skeleton. [S21, S50]',
-     '一个硬珊瑚群体可由许多相连的珊瑚虫组成，它们覆盖在共同的骨骼上。表面的小杯形结构是珊瑚虫所在的位置，骨骼本身不是动物的活组织。[S3, S5]\n\n这个低圆丘只表示圆丘状形态，不鉴定物种。珊瑚杯的大小和数量属于设计选择；可用独立的组织层观察活组织与矿物骨骼的区别。[S21, S50]',
+     'A hard-coral colony can contain many connected polyps over a shared skeleton. The small cups mark places occupied by polyps; the skeleton itself is not living animal tissue. [S3, S5]\n\nThis irregular, pitted dome is an original boulder-form study, not an identified coral species. Visible cup number and size are design choices. Use the separate tissue layer to distinguish living tissue from mineral skeleton. [S21, S50]',
+     '一个硬珊瑚群体可由许多相连的珊瑚虫组成，它们覆盖在共同的骨骼上。表面的小杯形结构是珊瑚虫所在的位置，骨骼本身不是动物的活组织。[S3, S5]\n\n这个表面起伏、有密集珊瑚杯凹穴的圆丘只表示圆丘状形态，不鉴定物种。珊瑚杯的大小和数量属于设计选择；可用独立的组织层观察活组织与矿物骨骼的区别。[S21, S50]',
      lathe(boulder_at,dome), cups([-.88,.20,-.04],.18,12)+cups([-.88,.285,-.04],.07,6), connects=['colony-tissue'],castShadow=True)
 
 sheet_outline = [[(.23+.017*math.cos(7*a))*math.cos(a),(.18+.018*math.sin(5*a))*math.sin(a)] for a in [i*math.tau/48 for i in range(48)]]
@@ -123,17 +125,25 @@ part('polyp-tissue','Living polyp tissue','珊瑚虫活组织','polyp-closeup',
 mouth_path = [[.073*math.cos(i*math.tau/32),0,.045*math.sin(i*math.tau/32)] for i in range(32)]
 part('polyp-mouth','Single central mouth','中央唯一的口','polyp-closeup',
      'Takes in food and releases waste through one opening.','以同一个开口摄食并排出废物。',
-     'Food enters through the central mouth; waste also leaves through this opening. A coral polyp does not have a second opening serving as an anus. [S5, S6]\n\nThe oval rim marks one mouth within the oral disc. The model does not show the detailed internal digestive filaments. Its size is schematic. [S50]',
-     '食物由中央的口进入，废物也经同一开口排出；珊瑚虫没有另一个作为肛门的开口。[S5, S6]\n\n椭圆口缘标出唯一的口，位于口盘中央。模型省略了内部消化丝等细节，大小也只是示意。[S50]',
+     'Food enters through the central mouth; waste also leaves through this opening. A coral polyp does not have a second opening serving as an anus. [S5, S6]\n\nThe slit-shaped lips mark one mouth on a raised oral cone. The model does not show the detailed internal digestive filaments. Its size is schematic. [S50]',
+     '食物由中央的口进入，废物也经同一开口排出；珊瑚虫没有另一个作为肛门的开口。[S5, S6]\n\n略隆起的口锥上，狭缝状口缘标出唯一的口。模型省略了内部消化丝等细节，大小也只是示意。[S50]',
      sweep([2.5,.622,0],mouth_path,.012,'tissue','token:muscle-3',closed=True,caps='none'),connects=['polyp-tissue'])
 tentacles=[]
 for k in range(12):
-    a=k*math.tau/12
-    # Each smooth taper has a different lean, but never a feathered branch.
-    r=[.255,.33,.44,.51]
-    h=[.59,.70,.79+.025*math.cos(3*a),.76+.045*math.cos(2*a)]
-    path=[[r[i]*math.cos(a+.055*i),h[i],r[i]*math.sin(a+.055*i)] for i in range(4)]
-    tentacles.append(sweep([2.5,0,0],path,[.032,.030,.019,.006],'tissue','token:muscle-1'))
+    a=k*math.tau/12 + .025*math.sin(k*2.1)
+    # Twelve simple tentacles with unequal extension, slender shafts and curls.
+    reach=.22+.035*math.sin(k*1.7)
+    height=.20+.055*math.cos(k*1.9)
+    # Evenly spaced points on one smooth arc: the shaft rises from the oral
+    # disc, then leans outward to a blunt tip (no back-folded hook).
+    b0,c0,t0=(.232,.474),(.29,.50+.80*height),(.235+reach,.52+height)
+    ss=[i/6 for i in range(7)]
+    r=[(1-s)**2*b0[0]+2*(1-s)*s*c0[0]+s*s*t0[0] for s in ss]
+    h=[(1-s)**2*b0[1]+2*(1-s)*s*c0[1]+s*s*t0[1] for s in ss]
+    path=[[r[i]*math.cos(a+.025*i*math.sin(k+.7)),h[i],r[i]*math.sin(a+.025*i*math.sin(k+.7))] for i in range(7)]
+    tentacles.append(primitive('sweep',[2.5,0,0],'tissue','token:muscle-1',path=path,
+                              radius=[.021,.020,.017,.013,.010,.0072,.0040],radial=20,segments=48,
+                              rings={'every':.012,'depth':.045}))
 part('polyp-tentacles','Feeding tentacles','摄食触手','polyp-closeup',
      'Surround the mouth and help capture small food.','围绕着口，帮助捕捉小型食物。',
      'Tentacles surround the mouth and help capture food. Stinging cells in the outer tissues assist capture; the model does not enlarge or count these cells. [S5, S6]\n\nThis hard-coral study has twelve smooth, unbranched tentacles, one example of a multiple-of-six arrangement. The count is a design example, not a claim about all species. RUN adds a slow schematic sway, not a measured feeding frequency. [S5, S50]',
@@ -158,7 +168,7 @@ dots=[]
 for k in range(30):
     a=(k%10)*math.tau/10+.12*(k//10)
     y=.21+.105*(k//10)
-    radius=.236+.004*(k//10)
+    radius=[.211,.218,.230][k//10]*(1+.025*math.cos(12*a)+.012*math.sin(5*a))
     dots.append(sphere([2.5+radius*math.cos(a),y,radius*math.sin(a)],.008))
 part('polyp-symbionts','Algal partners in tissue','组织内的共生藻','polyp-closeup',
      'Make food by photosynthesis while living in tissue.','在组织内生活，并通过光合作用制造食物。',
@@ -256,15 +266,23 @@ for x,z,s in [(7.82,.07,.30),(8.03,-.06,.38),(8.23,.08,.26)]:
     fragments.append(lathe([x-.025,.135+.20*s,z+.015],[[.008,0],[.020,.008],[.021,.018],[.013,.018],[.008,0]]))
 part('nursery-fragments','Nursery coral fragments','苗圃珊瑚碎片','evidence-tools',
      'Represent corals cultivated for suitable restoration.','代表为合适修复工作而培育的珊瑚。',
-     'Nursery corals may be used in restoration work. The 100k Corals Initiative was announced as a planting goal; later reports describe work carried out. A planting total is not itself a survival rate. [S13, S14, S15]\n\nThe small colonies here are illustrative copies. Their number, size and colour are not counts of real nursery stocks, transplantation success or future growth. [S50]',
-     '苗圃珊瑚可用于修复。100k珊瑚计划宣布的是种植目标，后续报告介绍已开展的工作；种植数量本身不是成活率。[S13, S14, S15]\n\n这些小群体是示意复制件；数量、大小和颜色不表示真实苗圃存量、移植成功率或未来生长情况。[S50]',
+     'Nursery corals may be used in restoration work. The 100k Corals Initiative was announced as a planting goal; later reports describe work carried out. A planting total is not itself a survival rate. [S13, S14, S15]\n\nThe three branching fragments here are illustrative copies with fused forks and open tip corallites. Their number, size and colour are not counts of real nursery stocks, transplantation success or future growth. [S50]',
+     '苗圃珊瑚可用于修复。100k珊瑚计划宣布的是种植目标，后续报告介绍已开展的工作；种植数量本身不是成活率。[S13, S14, S15]\n\n这三株分枝碎片是示意复制件，可见融合的分叉和顶端珊瑚杯；数量、大小和颜色不表示真实苗圃存量、移植成功率或未来生长情况。[S50]',
      fragments[0],fragments[1:],connects=['nursery-frame'])
-qpath=[[-.24,0,-.20],[.24,0,-.20],[.24,0,.20],[-.24,0,.20]]
+qpath=[[-.40,0,-.5],[.5,0,-.5],[.5,0,.5],[-.5,0,.5],[-.5,0,-.5],[-.40,0,-.5]]
+qextra=[]
+for t in [-.3,-.1,.1,.3]:
+    for path in [[[t,0,-.5],[t,0,.5]],[[-.5,.001,t],[.5,.001,t]]]:
+        qextra.append(primitive('sweep',[9.0,.028,0],'fabric','token:cold',path=path,radius=.0018,radial=8,segments=4,caps='flat'))
+# Four elbow socket collars on each straight run; 25mm PVC outer diameter.
+for x,z,rot in [(-.45,-.5,[0,0,90]),(.45,-.5,[0,0,90]),(-.45,.5,[0,0,90]),(.45,.5,[0,0,90]),(-.5,-.45,[90,0,0]),(-.5,.45,[90,0,0]),(.5,-.45,[90,0,0]),(.5,.45,[90,0,0])]:
+    qextra.append(lathe([9+x,.028,z],[[.0125,-.025],[.015,-.023],[.015,.023],[.0125,.025]],'plastic','token:bone',rotation=rot))
 part('monitoring-quadrat','Monitoring quadrat','监测样方','evidence-tools',
      'Frames a repeatable patch for observation.','框出一片可重复观察的区域。',
-     'Repeated observations help researchers compare communities over time. Museum collections and documented records provide another kind of evidence; LKCNHM maintains a cnidarian collection. [S16]\n\nThis observation frame is an original generic quadrat, not the measured equipment of a particular study. It suggests returning to compare evidence; it does not produce a live reef count or prove a restoration outcome. [S50]',
-     '重复观察有助研究者比较不同时期的群落。博物馆馆藏和有记录的标本提供另一类证据；LKCNHM保存刺胞动物馆藏。[S16]\n\n这个观察窗是原创的一般样方，不是某项研究仪器的实测复刻。它提示回到同一区域比较证据，不产生实时礁区数量，也不证明修复结果。[S50]',
-     sweep([8.68,.015,.07],qpath,.012,'tissue','token:cold',closed=True,caps='none'),[sweep([8.68,.015,.07],[[-.08,0,-.20],[-.08,0,.20]],.004,'tissue','token:cold'),sweep([8.68,.015,.07],[[.08,0,-.20],[.08,0,.20]],.004,'tissue','token:cold'),sweep([8.68,.015,.07],[[-.24,0,0],[.24,0,0]],.004,'tissue','token:cold')])
+     'Repeated observations help researchers compare communities over time. Museum collections and documented records provide another kind of evidence; LKCNHM maintains a cnidarian collection. [S16]\n\nThis square PVC frame has a nominal one-metre side and a string grid. It is an original generic quadrat, not the measured equipment of a particular study. It suggests returning to compare evidence; it does not produce a live reef count or prove a restoration outcome. [S50]',
+     '重复观察有助研究者比较不同时期的群落。博物馆馆藏和有记录的标本提供另一类证据；LKCNHM保存刺胞动物馆藏。[S16]\n\n这个正方形PVC框每边示意为一米，内有细绳网格；它是原创的一般样方，不是某项研究仪器的实测复刻。它提示回到同一区域比较证据，不产生实时礁区数量，也不证明修复结果。[S50]',
+     primitive('tube',[9,.028,0],'plastic','token:bone',path=qpath,radius=.0125,bendRadius=.035),qextra)
+
 part('sediment-deposit','Deposited sediment','沉积颗粒层','evidence-tools',
      'Represents particles settled onto a surface.','表示已落在表面的颗粒。',
      'Sedimentation is different from particles suspended in water. Deposited material can cover reef surfaces and affect corals; local research separates light limitation from sediment effects. [S9, S10]\n\nThe thin grey layer is an enlarged schematic deposit on a small supporting patch. It has no measured thickness, mass or deposition rate. Heat stress is a separate pressure and is not calculated here. [S9, S50]',
@@ -321,8 +339,8 @@ cameras={
     'reef':([2,1.4,3.7],[0,-.1,0],bi('Reef zones','礁区')),
     'polyp':([3.4,1.4,1.8],[2.5,.4,0],bi('Polyp','珊瑚虫')),
     'web':([5,1.8,3.4],[5,.3,0],bi('Food web','食物网')),
-    'evidence':([9,1.6,2.8],[8,.3,0],bi('Evidence','环境证据')),
-    'conservation':([8.5,1.3,2.5],[8,.2,0],bi('Conservation','保护')),
+    'evidence':([9.5,2.0,3.7],[8.35,.28,0],bi('Evidence','环境证据')),
+    'conservation':([9.4,1.8,3.3],[8.4,.15,0],bi('Conservation','保护')),
 }
 # Separate enlarged studies enough to keep neighbouring platforms out of
 # local camera frames while preserving all named presets in every chapter.
@@ -339,11 +357,83 @@ for id, (position, target, _) in cameras.items():
     position[0] += dx
     target[0] += dx
 
+# High-detail, original sculpted surfaces replace the schematic primitives.
+meshes={
+    'colony-boulder':sculpt_dome([-.88,.005,-.04]),
+    'colony-tissue':sculpt_dome([-.88,.005,-.04],overlay=True),
+    'web-coral':sculpt_dome([10,.01,0],scale=.65),
+    'polyp-skeleton':corallite(),
+    'polyp-tissue':sculpt_tissue(),
+    'polyp-mouth':sculpt_mouth(),
+    'colony-sheet':plate([-.1,.11,.15]),
+}
+fragmesh=Mesh()
+for x,z,s,seed in [(14.82,.07,.78,2),(15.03,-.06,.92,8),(15.23,.08,.70,11)]:
+    branch=branching([x,.145,z],s,seed);fragmesh.add(branch.v,branch.f)
+meshes['nursery-fragments']=fragmesh
+# A welded open rack, rather than a solid table under the living fragments.
+rack=[]
+for z in [-.19,.19]:
+    rack.append(primitive('tube',[15.03,.12,0],'powder','token:neutral',path=[[-.31,0,z],[.31,0,z]],radius=.009))
+for x in [-.31,-.21,0,.20,.31]:
+    rack.append(primitive('tube',[15.03,.12,0],'powder','token:neutral',path=[[x,0,-.19],[x,0,.19]],radius=.007))
+for x in [-.28,.28]:
+    for z in [-.17,.17]:
+        rack.append(primitive('tube',[15.03,.12,0],'powder','token:neutral',path=[[x,0,z],[x,-.2,z]],radius=.009))
+for x,z in [(-.21,.07),(0,-.06),(.20,.08)]:
+    rack.append(primitive('sweep',[15.03,.135,0],'fabric','token:bone',path=[[x-.016,-.012,z-.015],[x-.017,.012,z],[x,.018,z+.012],[x+.018,.008,z],[x+.016,-.015,z-.015]],radius=.002,radial=8,segments=16))
+for p in PARTS:
+    if p['id'] in meshes:
+        old=p.pop('primitive');p.pop('extra',None)
+        p.update(mesh=p['id'],material={'color':old['color'],'tint':old['tint']})
+    if p['id']=='nursery-frame':
+        # The rack's manufactured straight members need no dense curved-pipe
+        # longitudinal tessellation. Preserve diameter, open bore and joints.
+        for bar in rack:
+            if bar['kind']=='tube':
+                bar['kind']='sweep';bar.update(radial=20,segments=4,hollow=.002,caps='flat')
+        p['primitive']=rack[0];p['extra']=rack[1:]
+    # Sparse microscopic dots need only 8–12 radial sides, not 2,976 triangles each.
+    if p['id'] in ['polyp-symbionts','water-haze']:
+        for shape in [p['primitive'],*p.get('extra',[])]:
+            radius=shape.pop('size')[0];shape['kind']='lathe';shape['segments']=12 if p['id']=='polyp-symbionts' else 8
+            shape['profile']=[[radius*math.sin(i*math.pi/8),-radius*math.cos(i*math.pi/8)] for i in range(9)]
+
+# Four contextual arrows keep the food direction visible when animation is paused.
+# They share the active-edge outputs with particles/card, not biological counts.
+arrow_parts=[]
+for flow in flows:
+    suffix=flow['id'][2:]; path=[point[:] for point in flow['path']]
+    for point in path:point[2]+=.13
+    end=path[-1];prev=path[-2];dx,dy,dz=[end[i]-prev[i] for i in range(3)]
+    length=math.sqrt(dx*dx+dy*dy+dz*dz);head=.045
+    neck=[end[i]-(end[i]-prev[i])*head/length for i in range(3)]
+    path[-1]=neck
+    # Arrowhead cone's local Y axis points toward the recipient.
+    pitch=math.degrees(math.atan2(dz,dy));roll=-math.degrees(math.asin(dx/length))
+    head_at=[(neck[i]+end[i])/2 for i in range(3)]
+    shaft=primitive('sweep',[0,0,0],'tissue','token:food',path=path,radius=.0035,radial=8,segments=18,caps='flat')
+    arrow=part('food-arrow-'+suffix,'Food direction','食物方向','feeding-flows',
+               'Points from a food source to its consumer.','从食物来源指向消费者。',
+               'Diagram annotation: the source-to-consumer direction of this shown food path. [S19, S50]',
+               '图解标注：这条已画食物路径从食物来源指向消费者。[S19, S50]',
+               shaft,[primitive('cone',head_at,'tissue','token:food',size=[.016,head],rotation=[pitch,0,roll])],context=True,clip=False)
+    arrow_parts.append(arrow)
+# Existing table/control/outputs stay unchanged; only display bindings added.
+polish_sim=json.loads(SIM.read_text())
+for flow,arrow in zip(flows,arrow_parts):
+    polish_sim['bind'].append({'output':'active-'+flow['id'],'part':arrow['id'],'visible':{'eq':1}})
+generated=ROOT/'scripts/geo/coral-reef/refs/polish-build.glb'
+write_glb(meshes,generated)
+subprocess.run(['pnpm','tsx',str(ROOT/'scripts/geo/coral-reef/finish-mesh.ts'),str(generated)],cwd=ROOT,check=True)
+# Publish only the finished asset: validators never see the dense intermediate.
+generated.replace(ROOT/'public/models/coral-reef.glb')
+
 def camera(id):
     p,t,_=cameras[id]
     return dict(position=p,target=t,fov=30)
 
-data=dict(parts=PARTS,groups=groups,flows=flows,
+data=dict(model='/models/coral-reef.glb',parts=PARTS,groups=groups,flows=flows,
           animations=[dict(id='tentacle-feeding-sway',target='polyp-tentacles',kind='oscillate',axis=[0,1,0],amplitude=3,hz=.10,pivot=[5,.60,0],whenRun=True)],
           presets=[dict(id=id,label=label,camera=camera(id)) for id,(_,_,label) in cameras.items()],
           views=dict(assembled=dict(camera=camera('hero')),cover=camera('hero'),section=dict(plane='xy'),
@@ -352,8 +442,8 @@ data=dict(parts=PARTS,groups=groups,flows=flows,
                      hudFrame=dict(parts=[p['id'] for p in PARTS if not p.get('context')])),
           spec=[dict(key=bi('Scope','范围'),value=bi('Schematic habitat','生境示意'),tag='design'),
                 dict(key=bi('Specimens','标本'),value=bi('Separately enlarged','分别放大'),tag='design')],
-          sim=json.loads(SIM.read_text()))
-assert len(PARTS)==28 and sum(not p.get('context') for p in PARTS)==26
+          sim=polish_sim)
+assert len(PARTS)==32 and sum(not p.get('context') for p in PARTS)==26
 out=TOPIC/'data/parts.json'
 out.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 print(f'{out.relative_to(ROOT)}: {len(PARTS)} parts, {len(groups)} groups, {len(flows)} flows')
