@@ -1,4 +1,9 @@
 /** Independent checks of docs/48's teaching mathematics and the actual shipped data. */
+import { glbIssues } from '../../scripts/lib/glb-check';
+import { loadGeology } from '../../scripts/geo/inside-the-earth/load-geology';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { BufferGeometry, Vector3, type Mesh } from 'three';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -13,8 +18,9 @@ import { tableSourceIssues } from '../../src/engines/space-scene/table-schema';
 import { eachPieces, isClosedPrimitive, partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
 
 const DIR = join(import.meta.dirname, '../../src/content/topics/inside-the-earth');
-const raw = JSON.parse(readFileSync(join(DIR, 'data/parts.json'), 'utf8'));
+const raw = JSON.parse(readFileSync(process.env.ATLAS_EARTH_PARTS ?? join(DIR, 'data/parts.json'), 'utf8'));
 const file = partsFile.parse(raw);
+const meshes=file.model ? await loadGeology(process.env.ATLAS_EARTH_MESH ?? join(DIR,'../../../../public',file.model.slice(1))) : new Map();
 const sim = file.sim!;
 const chapters = readdirSync(join(DIR, 'chapters')).filter((f) => f.endsWith('.mdx')).sort().map((f) => {
   const [, front] = readFileSync(join(DIR, 'chapters', f), 'utf8').split(/^---$/m);
@@ -70,18 +76,23 @@ describe('inside-the-earth: concentric closed shells, never equal-thickness ring
 
 describe('inside-the-earth: the local geological models preserve the explanatory constraints', () => {
   const part = (id: string) => file.parts.find((p) => p.id === id)!;
-  it('each moving boundary block carries its touching crust and mantle as one logical part', () => {
-    for (const id of ['edge-div-left', 'edge-div-right', 'edge-trans-left', 'edge-trans-right', 'edge-sub-left']) {
-      const body = part(id).primitive!, crust = part(id).extra![0]!;
-      expect(body.kind).toBe('box');
-      expect(crust.kind).toBe('box');
-      if (body.kind !== 'box' || crust.kind !== 'box') throw new Error('a boundary block must contain its two layers');
-      expect(body.at[0]).toBe(crust.at[0]);
-      expect(body.at[2]).toBe(crust.at[2]);
-      expect(body.size[0]).toBe(crust.size[0]);
-      expect(body.size[2]).toBe(crust.size[2]);
-      expect(body.at[1] + body.size[1]! / 2).toBeCloseTo(crust.at[1] - crust.size[1]! / 2, 12);
-      expect(crust.size[1]!).toBeLessThan(body.size[1]!);
+  it('moving boundary samples carry continuous material strata and crust through their poses', () => {
+    for (const id of ['edge-div-left','edge-div-right','edge-trans-left','edge-trans-right']) {
+      const p=part(id), body=p.primitive!, crust=p.extra![0]!;
+      expect(body.kind).toBe('extrude');
+      expect(crust.kind).toBe('extrude');
+      if(body.kind!=='extrude' || crust.kind!=='extrude') throw new Error('geological sections need solid beds');
+      const layers=[body,...p.extra!.slice(1,5)];
+      for(let k=0;k<layers.length-1;k++) {
+        const lower=layers[k]!,upper=layers[k+1]!;
+        if(lower.kind!=='extrude' || upper.kind!=='extrude') throw new Error('bed missing');
+        expect(lower.shape.slice(lower.shape.length/2).reverse()).toEqual(upper.shape.slice(0,upper.shape.length/2));
+        expect(lower.depth).toBe(upper.depth);
+      }
+      const highest=layers.at(-1)!;
+      if(highest.kind!=='extrude') throw new Error('highest bed missing');
+      expect(highest.shape.slice(highest.shape.length/2).reverse()).toEqual(crust.shape.slice(0,crust.shape.length/2));
+      expect(crust.shape.slice(crust.shape.length/2).some((p,i,a)=> i>0 && p[1]!==a[i-1]![1])).toBe(true);
     }
     for (const id of ['edge-trans-left', 'edge-trans-right']) closeVector(offset('edge-slide', id).slice(0, 2), [0, 0]);
     expect(offset('edge-slide', 'edge-trans-left')[2]).toBe(-offset('edge-slide', 'edge-trans-right')[2]!);
@@ -176,6 +187,96 @@ describe('inside-the-earth: the local geological models preserve the explanatory
     }
   });
 
+  it('the flared conduit covers the former vent gap and reaches the crater floor without a second overlapping pipe wall',()=>{
+    const trunk=part('volcano-conduit').primitive!,vent=part('volcano-vent').primitive!,cone=part('volcano-cone').primitive!;
+    if(trunk.kind!=='sweep' || vent.kind!=='lathe' || cone.kind!=='lathe') throw new Error('vent geometry missing');
+    expect(trunk.path.at(-1)![1]).toBeCloseTo(1.22,12);
+    expect(vent.profile.some(([r,y])=>Math.abs(y-1.22)<1e-10 && Math.abs(r-0.115)<1e-10)).toBe(true);
+    expect(cone.profile.some(([r,y])=>Math.abs(y-1.22)<1e-10 && Math.abs(r-0.115)<1e-10)).toBe(true);
+    const radii=trunk.radius as number[];
+    const last=trunk.path.length-1;
+    for(let i=last-3;i<last;i++) expect(radii[i+1]).toBeGreaterThan(radii[i]!);
+    expect(part('volcano-vent').connects).toContain('volcano-conduit');
+    expect(vent.at).toEqual(trunk.path.at(-1)!.map((v,i)=>i===1 ? 0 : v));
+    expect(Math.min(...vent.profile.map(([,y])=>y))).toBeLessThan(trunk.path.at(-1)![1]);
+    const lava=part('volcano-lava').primitive!;
+    if(lava.kind!=='sweep') throw new Error('lava missing');
+    // Samples follow the wall before reaching the rim, rather than bridging
+    // diagonally over the crater's open air as a floating strip.
+    expect(lava.path.length).toBeGreaterThan(9);
+    expect(lava.path.slice(0,5).every(p=>p[2]<0 && p[1]>=1.22 && p[1]<1.34)).toBe(true);
+  });
+
+  it('fault bedding is solid, irregular and shared across the contact before horizontal slip',()=>{
+    for(const side of ['left','right']) {
+      const p=part(`fault-${side}`),beds=[p.primitive!,...p.extra!.slice(0,8)];
+      expect(beds).toHaveLength(9);
+      for(let i=0;i<beds.length-1;i++) {
+        const a=beds[i]!,b=beds[i+1]!;
+        if(a.kind!=='extrude' || b.kind!=='extrude') throw new Error('solid fault bedding missing');
+        expect(a.shape.slice(a.shape.length/2).reverse()).toEqual(b.shape.slice(0,b.shape.length/2));
+      }
+      expect(beds.every(p=>p.kind==='extrude' && p.depth===1)).toBe(true);
+    }
+  });
+
+  it('the shipped relief GLB meets the native asset licence, node and size checks',async()=>{
+    expect(file.model).toBe('/models/inside-the-earth.glb');
+    const issues=await glbIssues(process.env.ATLAS_EARTH_MESH ?? join(DIR,'../../../../public',file.model!.slice(1)),file.parts.filter(p=>p.mesh).map(p=>({node:p.mesh!,what:p.id})));
+    expect(issues).toEqual([]);
+  });
+
+  it('decodes the compressed asset with the runtime loader and preserves scene-space geometry',async()=>{
+    const bytes=readFileSync(process.env.ATLAS_EARTH_MESH ?? join(DIR,'../../../../public',file.model!.slice(1)));
+    expect(bytes.length).toBeLessThanOrEqual(1_500_000);
+    const header=JSON.parse(bytes.toString('utf8',20,20+bytes.readUInt32LE(12)));
+    expect(header.extensionsRequired).toContain('EXT_meshopt_compression');
+    const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
+      .parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength) as ArrayBuffer,'');
+    gltf.scene.updateMatrixWorld(true);
+    const vertex=new Vector3();
+    for(const [id,pieces] of meshes) {
+      const mesh=gltf.scene.getObjectByName(id) as Mesh<BufferGeometry>;
+      expect(mesh?.isMesh,id).toBe(true);
+      expect(mesh.userData.closed,id).toBe(true);
+      const runtime=mesh.geometry.getAttribute('position'),cpu=pieces[0]!.geometry.getAttribute('position');
+      expect(runtime.count,id).toBe(cpu.count);
+      expect(mesh.geometry.index!.count,id).toBe(pieces[0]!.geometry.index!.count);
+      let error=0;
+      for(let i=0;i<runtime.count;i++) {
+        vertex.fromBufferAttribute(runtime,i).applyMatrix4(mesh.matrixWorld);
+        error=Math.max(error,vertex.distanceTo(new Vector3(cpu.getX(i),cpu.getY(i),cpu.getZ(i))));
+      }
+      expect(error,id).toBeLessThan(2e-7);
+      mesh.geometry.dispose();
+    }
+  });
+
+  it('ships finite sculpted relief with outward flank winding and depth-varying terrain',()=>{
+    if(!file.model)throw new Error('geological relief GLB is required');
+    for(const id of ['volcano-cone','fault-left','fault-right','edge-sub-right','collision-fold','edge-melt']) {
+      expect(part(id).mesh).toBe(id);
+      const pieces=meshes.get(id)!;
+      expect(pieces).toHaveLength(1);
+      const g=pieces[0]!.geometry,p=g.getAttribute('position'),n=g.getAttribute('normal');
+      expect(p.count).toBeGreaterThan(500);
+      let finite=true;for(let i=0;i<p.count;i++) finite &&= [p.getX(i),p.getY(i),p.getZ(i),n.getX(i),n.getY(i),n.getZ(i)].every(Number.isFinite);
+      expect(finite,id).toBe(true);
+      g.computeBoundingBox();
+      expect(g.boundingBox!.max.z-g.boundingBox!.min.z).toBeGreaterThan(.1);
+    }
+    const cone=meshes.get('volcano-cone')![0]!.geometry,p=cone.getAttribute('position'),n=cone.getAttribute('normal');
+    // Back flank must face outward, not have inverted triangle winding.
+    let tested=0,minOutward=Infinity;
+    for(let i=0;i<p.count;i++) if(p.getZ(i)<-.3 && p.getY(i)>.1 && p.getY(i)<.7) {
+      minOutward=Math.min(minOutward,p.getX(i)*n.getX(i)+p.getZ(i)*n.getZ(i));tested++;
+    }
+    expect(tested).toBeGreaterThan(100);expect(minOutward).toBeGreaterThan(0);
+    const fault=meshes.get('fault-left')![0]!.geometry.getAttribute('position');
+    const ys=[];for(let i=0;i<fault.count;i++)if(fault.getY(i)>1.22)ys.push(fault.getY(i));
+    expect(Math.max(...ys)-Math.min(...ys)).toBeGreaterThan(.004);
+  });
+
   it('draws an irregular ash plume as one instanced shape within the topic triangle budget', () => {
     const ash = part('volcano-ash');
     const fragments = [ash.primitive!, ...ash.extra!];
@@ -196,7 +297,7 @@ describe('inside-the-earth: the local geological models preserve the explanatory
     const byGroup = new Map<string, number>();
     for (const p of file.parts) {
       const each = file.animations.some((a) => a.target === p.id && 'each' in a && a.each);
-      const pieces = each ? eachPieces(p) : partPieces(p);
+      const pieces = p.mesh ? meshes.get(p.mesh)!.map((piece: import('../../src/engines/space-scene/stages/model3d/geometry').ShapePiece)=>({...piece,geometry:piece.geometry.clone()})) : each ? eachPieces(p) : partPieces(p);
       for (const piece of pieces) {
         if (!piece.lines) {
           const count = (piece.geometry.index?.count ?? piece.geometry.getAttribute('position').count) / 3 * (piece.matrices?.length ?? 1);
@@ -207,8 +308,8 @@ describe('inside-the-earth: the local geological models preserve the explanatory
         piece.geometry.dispose();
       }
     }
-    expect(triangles).toBeLessThan(600_000);
-    for (const [group, count] of byGroup) expect(count, group).toBeLessThan(300_000);
+    expect(triangles).toBeLessThan(450_000);
+    for (const [group, count] of byGroup) expect(count, group).toBeLessThan(200_000);
   });
 
   it('loads a locked contact before releasing slip, keeps the two markers with their blocks, and marks the epicentre directly above the focus', () => {
