@@ -187,6 +187,12 @@ describe('sun-earth-moon · published content and scientific captions', () => {
     expect(dot(patch,far)).toBeGreaterThan(.5);
     expect(dot(patch,s.solarDirections.moon)).toBeGreaterThan(.5);
     expect(dot(patch,unit(sub(cam.position as V3,d.centres.moon)))).toBeGreaterThan(.3);
+    // The previous wide view left this as a tiny crescent. Give the Moon
+    // a substantial disc while retaining the unchanged physical snapshot.
+    const distance = Math.hypot(...sub(cam.position as V3,d.centres.moon));
+    const radiusAt900 = d.radii.moon * 900 / (2 * Math.tan((cam.fov ?? 34) * Math.PI / 360) * distance);
+    expect(radiusAt900).toBeGreaterThan(100);
+
   });
   it('calendar beats retain continuous phases without imposing a full Moon on day fifteen', () => {
     expect(chapters[7]!.state.sim?.set?.['lunar-tilt']).toBe(5.145);

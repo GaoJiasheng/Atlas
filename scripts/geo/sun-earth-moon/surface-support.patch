@@ -1,0 +1,116 @@
+--- a/src/engines/space-scene/stages/model3d/PartNode.tsx
++++ b/src/engines/space-scene/stages/model3d/PartNode.tsx
+@@ -55,6 +55,7 @@
+   type Group,
+   type Object3D,
+   type Plane,
++  type Texture,
+ } from 'three';
+ import type { Part, PartAnimation } from '../../schema';
+ import type { PartDisplay } from '../../lib/visibility';
+@@ -132,6 +133,8 @@
+   box?: Box3Like;
+   /** A glb muscle's fibre data (`_U` / `_FIBRE`): length origin → insertion, belly thickness, dominant direction and centre (mesh units), metres per mesh unit. */
+   fibre?: FibreMeasure;
++  /** Explicitly opted-in local glTF albedo; other GLBs keep family materials. */
++  surfaceMap?: Texture;
+ }
+ 
+ /** What the label probe needs to know about a part (filled by PartNode). */
+@@ -519,6 +522,15 @@
+   useEffect(() => {
+     pms.forEach((pm, i) => {
+       stylePartMaterial(pm, styles[i] ?? style);
++      pm.uniforms.uOrbitSurface.value = i === 0 && shape.surfaceMap ? 1 : 0;
++      if (i === 0 && shape.surfaceMap) {
++        pm.material.map = shape.surfaceMap;
++        pm.material.color.set('#ffffff');
++        pm.material.metalness = 0;
++        pm.material.roughness = 1;
++        pm.material.normalScale.setScalar(0);
++        pm.material.needsUpdate = true;
++      }
+       // glb muscles: the fibre grain follows `_FIBRE` (the UVs wrap around the belly).
+       if (shape.fibre) styleFibreGrain(pm, shape.fibre, (styles[i] ?? style).look.normal);
+     });
+--- a/src/engines/space-scene/stages/model3d/GltfSource.tsx
++++ b/src/engines/space-scene/stages/model3d/GltfSource.tsx
+@@ -26,7 +26,7 @@
+ import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+ import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
+-import { Box3, PropertyBinding, Quaternion, Vector3, type BufferGeometry, type Mesh, type Object3D, type Skeleton, type SkinnedMesh } from 'three';
++import { Box3, PropertyBinding, Quaternion, Vector3, type BufferGeometry, type Mesh, type MeshStandardMaterial, type Object3D, type Skeleton, type SkinnedMesh } from 'three';
+ import type { SpaceUiStore } from '../../ui';
+ import type { PartShape } from './PartNode';
+ 
+@@ -207,7 +207,10 @@
+         const raw = geometry.boundingBox!.getSize(new Vector3()).length();
+         fibre.metres = raw > 0 ? size.length() / raw : 1;
+       }
++      const sourceMaterial = (Array.isArray(mesh.material) ? mesh.material[0] : mesh.material) as MeshStandardMaterial;
++      const surfaceMap = mesh.userData.atlasSurface === true ? sourceMaterial.map : null;
+       return {
++        ...(surfaceMap ? { surfaceMap } : {}),
+         pieces: [
+           {
+             geometry,
+--- a/src/engines/space-scene/stages/model3d/materials.ts
++++ b/src/engines/space-scene/stages/model3d/materials.ts
+@@ -46,6 +46,7 @@
+ export interface PartUniforms {
+   /** Orbit sims (OrbitDriver): 0 = the studio lights, 1 = lit only by the analytic Sun along `uOrbitSun` (world, unit) with `uOrbitFill` on the night side, 2 = self-lit (the Sun). */
+   uOrbitLight: { value: number };
++  uOrbitSurface: { value: number };
+   uOrbitFill: { value: number };
+   uOrbitSun: { value: Vector3 };
+   uContract: { value: number };
+@@ -119,6 +120,7 @@
+ 
+ const FRAGMENT_DECLS = /* glsl */ `
+ uniform float uOrbitLight;
++uniform float uOrbitSurface;
+ uniform float uOrbitFill;
+ uniform vec3 uOrbitSun;
+ uniform float uGrain;
+@@ -242,6 +244,7 @@
+ export function createPartMaterial(): PartMaterial {
+   const uniforms: PartUniforms = {
+     uOrbitLight: { value: 0 },
++    uOrbitSurface: { value: 0 },
+     uOrbitFill: { value: 0.035 },
+     uOrbitSun: { value: new Vector3(-1, 0, 0) },
+     uContract: { value: 0 },
+@@ -282,10 +285,20 @@
+           vec3 worldNormal = inverseTransformDirection(normalize(vNormal), viewMatrix);
+           float light = uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*max(0.0,dot(normalize(worldNormal),uOrbitSun));
+           outgoingLight = diffuseColor.rgb * light;
++          if (uOrbitSurface > 0.5) {
++            if (uOrbitLight > 1.5) {
++              float mu = abs(dot(normalize(normal), normalize(vViewPosition)));
++              outgoingLight *= 0.4 + 0.6 * pow(mu, 0.55);
++            } else {
++              // Neutral teaching fill, independent of the ocean's dark albedo.
++              float day = max(0.0, dot(normalize(worldNormal), uOrbitSun));
++              outgoingLight = mix(vec3(uOrbitFill), diffuseColor.rgb, day);
++            }
++          }
+         }
+         #include <opaque_fragment>`);
+   };
+-  material.customProgramCacheKey = () => 'atlas-part-5';
++  material.customProgramCacheKey = () => 'atlas-part-6';
+   return { material, uniforms };
+ }
+ 
+--- a/src/engines/space-scene/schema.ts
++++ b/src/engines/space-scene/schema.ts
+@@ -1188,7 +1188,7 @@
+      */
+     model: z
+       .string()
+-      .regex(/^\/models\/[a-z0-9][a-z0-9._-]*\.glb$/, 'must be /models/<name>.glb')
++      .regex(/^\/models\/(?:[a-z0-9][a-z0-9-]*\/)?[a-z0-9][a-z0-9._-]*\.glb$/, 'must be /models/<name>.glb or /models/<topic>/<name>.glb')
+       .optional(),
+     parts: z.array(partSchema).min(1),
+     groups: z.array(groupSchema).default([]),

@@ -504,7 +504,10 @@
         "earth-body",
         "moon-body"
       ],
-      "primary": { "part": "earth-body", "minRadiusPx": 24 }
+      "primary": {
+        "part": "earth-body",
+        "minRadiusPx": 24
+      }
     }
   },
   "sim": {
@@ -1484,7 +1487,7 @@
         "part": "earth-body",
         "solarIllumination": {
           "body": "earth",
-          "darkFill": 0.035
+          "darkFill": 0.05
         }
       },
       {
@@ -1500,7 +1503,7 @@
         "part": "moon-body",
         "solarIllumination": {
           "body": "moon",
-          "darkFill": 0.035
+          "darkFill": 0.05
         }
       },
       {

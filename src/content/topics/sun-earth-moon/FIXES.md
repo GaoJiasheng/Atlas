@@ -70,3 +70,9 @@ Codex 的 1024 返工（上一节，`hudFrame.primary` + 最大空矩形 + 次�
 | F1 余项（BG.2、02.4 的 `earth-axis`） | **完成** | `pnpm shoot sun-earth-moon --beats`（1920×1080，en/paper）39/39 拍落位，**没有一拍报 no label**，BG.2 / 02.4 的地轴标签都在（BG.2 演示态锚点在轴端 1044, 108，标签不透明度 1）；39/39 拍链接与演示同场景。仍列出的只有章级提示（`a-turning-earth` 的 earth-axis / observer-marker 等，章镜头、HUD 态）：同一章单独打开等镜头停稳后三个标签都在（不透明度 0.935），是 shoot 章级检查的等待时长问题，不是锚点问题。 |
 | F2 1024×768 满月拍 | **完成** | 04.3 / 05.3 / 07.3 / 07.5（en/paper，07.5 另看 zh/cinema）：地球在观察卡下方、LAYERS 左侧的空位里，直径约 35 px（上次约 14 px），明暗界线清楚；月球在地球右侧入画；太阳盘在画外，不再压左栏 PLATE（只有轨道辅助细线穿过左栏）。1180×820 同几拍地球更大，月球在观察卡左侧。观察卡收起（docs/67 阶段 1 自动收起）后自由区变大，会按 0.6 s 重新取景放大。 |
 
+
+## Polish 2026-11-03 · topic-only review
+
+Reviewed F1–F5 against the current implementation and the latest browser follow-ups above. Existing F1 anchors, F2 opt-in HUD framing/minimum Earth radius, F3 guide weight and F4 bilingual shadow note are retained. F5 04.5 has an additional lunar close-up, with a projected-size regression and the unchanged α=90° / synchrony=false snapshot. Earth/Moon dark fill is raised to the permitted 0.05. No shared framing or HUD code was changed.
+
+Full per-item status, CPU preview limitations, prepared Earth/Moon/Sun surfaces, ownership blocker and the **exact browser acceptance shot list** are in [REBUILD-3D.md](REBUILD-3D.md#polish-2026-11-03). In particular, the new textured surface previews require the unapplied shared rendering patch; they do not demonstrate that the current live topic displays those maps. Browser acceptance remains pending for this polish pass.

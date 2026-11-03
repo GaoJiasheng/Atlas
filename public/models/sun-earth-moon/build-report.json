@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "earth-body": 16128,
+    "moon-body": 65024,
+    "sun-body": 16128
+  },
+  "total": 97280,
+  "bytes": 3882408,
+  "meridians": {
+    "earth": 103.7357,
+    "moon": 0
+  },
+  "lrocSha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
+  "lolaSnapshotSha256": "d1f607e938a4a38ca06fe4b81be98ba9cda410f1598b1a1177bf096a163a6a1b",
+  "landSha256": "ead5f68119c49a9250902e7da303bcb209341bbb8fefe7369a439b48b704658a",
+  "dem": {
+    "width": 1440,
+    "height": 720,
+    "channels": 1,
+    "metresPerUnit": 0.5,
+    "offsetMetres": -10000
+  }
+}
