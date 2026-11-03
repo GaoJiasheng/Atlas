@@ -321,7 +321,8 @@ export function stylePartMaterial({ material, uniforms }: PartMaterial, s: PartS
   // Orange peel on powder coat (and a trace on chitin), facets / fibres / rings on organisms; the rest keep the map at zero strength.
   material.normalScale.set(look.normal, look.normal);
   // Soft tissue: a little self-light in its own colour reads as light scattered under the surface.
-  material.emissive.set(look.color).multiplyScalar(look.glow);
+  // A vertex-coloured slot has no single own colour (its look colour is white), so it gets none.
+  material.emissive.set(look.color).multiplyScalar(material.vertexColors ? 0 : look.glow);
   uniforms.uSelColor.value.set(s.signal);
   uniforms.uSelRim.value = s.rim;
   uniforms.uSelTint.value = s.tint;

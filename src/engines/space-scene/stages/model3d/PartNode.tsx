@@ -350,6 +350,24 @@ function Piece({
   return <mesh ref={ref as Ref<Mesh>} geometry={piece.geometry} material={material} castShadow={castShadow} dispose={null} {...handlers} />;
 }
 
+/** Vertex colours belong to the geometry's material slot, never the whole part. */
+export function slotVertexColors(pieces: readonly ShapePiece[], slotCount: number): string {
+  return Array.from({ length: slotCount }, (_, slot) =>
+    pieces.some((piece) => (piece.slot ?? 0) === slot && piece.geometry.hasAttribute('color')) ? '1' : '0').join('');
+}
+
+export function createSlotMaterials(pieces: readonly ShapePiece[], slotCount: number) {
+  return createSlotMaterialsFor(slotVertexColors(pieces, slotCount));
+}
+
+function createSlotMaterialsFor(colorKey: string) {
+  return Array.from(colorKey, (flag) => {
+    const result = createPartMaterial();
+    result.material.vertexColors = flag === '1';
+    return result;
+  });
+}
+
 export function PartNode(props: PartNodeProps) {
   const { part, display, styles } = props;
   const clipping = clippingForPart(part, props.clipping);
@@ -458,7 +476,9 @@ export function PartNode(props: PartNodeProps) {
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
   const slotCount = styles.length;
-  const pms = useMemo(() => Array.from({ length: slotCount }, () => createPartMaterial()), [slotCount]);
+  // Keyed on the per-slot colour flags, so a new shape object never rebuilds materials by itself.
+  const colorKey = slotVertexColors(shape.pieces, slotCount);
+  const pms = useMemo(() => createSlotMaterialsFor(colorKey), [colorKey]);
   const hasLines = useMemo(() => shape.pieces.some((p) => p.lines), [shape]);
   const lineMat = useMemo(
     () => (hasLines ? new LineBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, clipShadows: true }) : null),

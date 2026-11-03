@@ -6,7 +6,11 @@
  * most animals are two or three draw calls. Proportions follow the reference
  * photographs listed in docs/38 §3.3; sizes are not to scale with each other.
  */
-import { add, blade, cone, cross, DEG, ellipsoid, fan, leg, norm, orient, pair, sphere, sweep, sweepAt, wing, yaw, type Model, type Prim, type V2, type V3 } from '../kit';
+import { add, blade, cone, cross, DEG, ellipsoid, fan, leg, norm, orient, pair, sphere, sweep, sweepAt, wing, type Model, type Prim, type V2, type V3 } from '../kit';
+
+import { buildBirdSculpture } from '../../kits/bird';
+import { mesh } from '../sculpture';
+import { sculptedFruitBat } from './bat';
 
 const eyes = (at: V3, r: number): Prim[] => pair(sphere(at, r, 'eye'));
 const both = (ps: Prim[]): Prim[] => ps.flatMap(pair);
@@ -95,52 +99,13 @@ export function spider(): Model {
 
 /* ---------------------------------------------------------- birds */
 
-const MYNA = '#4c4b49';
-const YELLOW = '#e3b136';
-
-/** #18 Javan myna: dark grey feathers all over, a yellow beak and yellow legs (F-32). */
-export function javanMyna(): Model {
-  const f = { color: 'feathers', tint: MYNA };
-  const feet: Prim[] = [];
-  for (const z of [0.0042, -0.0042]) {
-    feet.push(sweep([[0.002, 0.018, z], [0.0025, 0.009, z], [0.002, 0.001, z]], [0.0011, 0.0009, 0.0008], 'plastic', { tint: YELLOW, radial: 6 }));
-    for (const a of [-25, 0, 25]) feet.push(sweep([[0.002, 0.0008, z], [0.002 + 0.0065 * Math.cos(a * DEG), 0.0007, z + 0.0065 * Math.sin(a * DEG)]], 0.0006, 'plastic', { tint: YELLOW, radial: 6 }));
-    feet.push(sweep([[0.002, 0.0008, z], [-0.004, 0.0007, z]], 0.0006, 'plastic', { tint: YELLOW, radial: 6 }));
-  }
-  return {
-    primitive: ellipsoid([0, 0.029, 0], 0.0145, [1.38, 0.9, 0.86], f.color, { tint: f.tint, rotation: [0, 0, 24] }),
-    extra: [
-      sphere([0.0175, 0.0435, 0], 0.0088, f.color, { tint: f.tint }),
-      ellipsoid([0.0215, 0.0505, 0], 0.003, [1.4, 0.9, 0.9], f.color, { tint: f.tint }),
-      ...pair(wing([0.009, 0.0385, 0.0098], blade(0.036, 0.0145, 0.3, 12, 1.2), [-1, -0.42, 0.04], [0, -0.5, 1], f.color, { tint: f.tint })),
-      wing([-0.017, 0.023, 0], fan(0.022, 34, 10), [-1, -0.42, 0], [0, 0, 1], f.color, { tint: f.tint }),
-      cone([0.03, 0.0425, 0], 0.0028, 0.0105, 'plastic', { tint: YELLOW, rotation: [0, 0, -98] }),
-      ...pair(ellipsoid([0.0215, 0.0445, 0.0062], 0.0026, [1.2, 1, 0.5], 'plastic', { tint: YELLOW })),
-      ...feet,
-      ...eyes([0.0228, 0.0458, 0.0068], 0.0017),
-    ],
-  };
+/** Opt-in smooth studies; the shared kit's legacy fossils preset is unchanged. */
+function birdStudy(species:'myna'|'penguin'):Model {
+  const pieces=buildBirdSculpture(species).pieces.map(p=>mesh(p.geometry,p.color,p.tint));
+  return {primitive:pieces[0]!,extra:pieces.slice(1)};
 }
-
-const PENGUIN_BLACK = '#1f2226';
-const PENGUIN_WHITE = '#efede6';
-const ORANGE = '#de8b37';
-
-/** #19 Penguin: standing upright, black back and white front, short stiff flippers instead of flying wings. */
-export function penguin(): Model {
-  const black = { color: 'feathers', tint: PENGUIN_BLACK };
-  // Turned to face the viewer, so the white front shows.
-  return yaw({
-    primitive: { kind: 'lathe', at: [0, 0, 0], profile: [[0, 0.003], [0.011, 0.004], [0.0165, 0.014], [0.018, 0.03], [0.0165, 0.048], [0.012, 0.062], [0.0075, 0.069], [0, 0.071]], segments: 36, color: black.color, tint: black.tint, scale: [1, 1, 0.92] },
-    extra: [
-      ellipsoid([0.0078, 0.031, 0], 0.0148, [0.72, 1.8, 0.96], 'feathers', { tint: PENGUIN_WHITE }),
-      sphere([0.002, 0.074, 0], 0.0098, black.color, { tint: black.tint }),
-      cone([0.0155, 0.0725, 0], 0.0027, 0.012, 'plastic', { tint: ORANGE, rotation: [0, 0, -100] }),
-      ...pair(wing([0.001, 0.056, 0.0158], blade(0.032, 0.0095, 0.3, 12, 1.3), [-0.25, -1, 0.2], [1, -0.2, 0.1], black.color, { tint: black.tint })),
-      ...pair(ellipsoid([0.0085, 0.0018, 0.0068], 0.0055, [1.5, 0.32, 0.9], 'plastic', { tint: ORANGE })),
-    ],
-  }, -90);
-}
+export const javanMyna=():Model=>birdStudy('myna');
+export const penguin=():Model=>birdStudy('penguin');
 
 /* ---------------------------------------------------------- mammals */
 
@@ -166,48 +131,8 @@ export function plantainSquirrel(): Model {
   };
 }
 
-const BAT_FUR = '#6a4c33';
-const BAT_WING = '#3b2a20';
-
-/** The bat's left wing seen from above: skin stretched from the arm to the long finger bones and back to the leg. */
-const BAT_WING_OUTLINE: V2[] = [
-  [0.006, 0.0035],
-  [0.0045, 0.012],
-  [0.002, 0.022],
-  [-0.0035, 0.0335],
-  [-0.008, 0.029],
-  [-0.0125, 0.0305],
-  [-0.0145, 0.0245],
-  [-0.0185, 0.0235],
-  [-0.019, 0.016],
-  [-0.0215, 0.0105],
-  [-0.0165, 0.0045],
-];
-const WRIST: V2 = [0.002, 0.022];
-const BAT_BONES: V2[][] = [
-  [[0.006, 0.004], WRIST],
-  [WRIST, [-0.0035, 0.0335]],
-  [WRIST, [-0.0125, 0.0305]],
-  [WRIST, [-0.0185, 0.0235]],
-  [WRIST, [-0.0215, 0.0105]],
-];
-
-/** #21 Lesser dog-faced fruit bat: a furry body and dog-like head, skin wings half spread on long finger bones (F-35). */
-export function fruitBat(): Model {
-  const f = { color: 'fabric', tint: BAT_FUR };
-  const dihedral = 16 * DEG;
-  // Turned to face the viewer, wings spread to left and right.
-  return yaw({
-    primitive: ellipsoid([0, 0.0095, 0], 0.0092, [1.65, 0.78, 0.92], f.color, { tint: f.tint }),
-    extra: [
-      ellipsoid([0.0185, 0.0118, 0], 0.0062, [1.15, 0.95, 0.95], f.color, { tint: f.tint }),
-      ellipsoid([0.0255, 0.011, 0], 0.0034, [1.4, 0.85, 0.85], f.color, { tint: f.tint }),
-      ...pair(cone([0.0175, 0.0178, 0.0035], 0.0018, 0.0052, f.color, { tint: f.tint, rotation: [15, 0, 8] })),
-      ...pair(wing([0, 0.0115, 0.002], BAT_WING_OUTLINE, [1, 0, 0], [0, Math.sin(dihedral), Math.cos(dihedral)], 'tissue', { tint: BAT_WING, veins: BAT_BONES })),
-      ...eyes([0.0225, 0.0135, 0.0041], 0.0013),
-    ],
-  }, -90);
-}
+/** Jointed finger-supported membrane sculpture, with original fur geometry. */
+export const fruitBat=sculptedFruitBat;
 
 const DOLPHIN = '#b4a19b';
 

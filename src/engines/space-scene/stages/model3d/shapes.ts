@@ -20,6 +20,9 @@ import type { PartShape } from './PartNode';
  * axis (0 = X, 2 = Z), so its main primitive is cut into slabs along it.
  */
 export function primitiveShape(part: Part, each = false, bend?: 0 | 2): PartShape | null {
+  // A mesh part's primitive may be a rest envelope for a simulation.
+  // Keep it out of the visible stage while the local GLB is loading.
+  if (part.mesh) return null;
   const p = part.primitive;
   if (!p) return null;
   const pieces = each ? eachPieces(part) : partPieces(part, bend);

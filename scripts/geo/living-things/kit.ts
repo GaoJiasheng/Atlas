@@ -1,3 +1,4 @@
+import { BufferGeometry } from 'three';
 /**
  * Building kit for the living-things specimens (docs/38 §3.2): every specimen
  * is modelled in its own frame — origin at the centre of its footprint on the
@@ -16,7 +17,7 @@ export interface Model {
 }
 
 export const n5 = (n: number) => {
-  const v = Number(n.toFixed(5));
+  const v = Number(n.toFixed(7));
   return Object.is(v, -0) ? 0 : v;
 };
 export const r3 = (v: readonly number[]): V3 => [n5(v[0]!), n5(v[1]!), n5(v[2]!)];
@@ -68,9 +69,8 @@ export const box = (at: readonly number[], size: readonly number[], color: strin
 export const bevel = (at: readonly number[], size: readonly number[], b: number, color: string, rest: Rest = {}): Prim =>
   prim('bevelBox', at, { size: r3(size), bevel: n5(b), color, ...rest });
 /**
- * A ball drawn as a low-poly lathe (the engine's sphere is 48 × 32 segments,
- * about 3,000 triangles: far too many for 32 small specimens). Small pieces
- * (eyes, colonies) are lighter still.
+ * Smooth ellipsoidal sections with size-based sampling. Hero bodies use
+ * 32 circumferential samples; small eyes and colonies retain a lighter LOD.
  */
 function ballProfile(r: number, rings: number): V2[] {
   const pts: V2[] = [];
@@ -82,16 +82,17 @@ function ballProfile(r: number, rings: number): V2[] {
 }
 export const sphere = (at: readonly number[], r: number, color: string, rest: Rest = {}): Prim => {
   const small = r < 0.0035;
-  return prim('lathe', at, { profile: ballProfile(r, small ? 6 : 9), segments: small ? 10 : 16, color, ...rest });
+  const medium = r < 0.01;
+  return prim('lathe', at, { profile: ballProfile(r, small ? 10 : medium ? 14 : 18), segments: small ? 16 : medium ? 24 : 32, color, ...rest });
 };
 export const ellipsoid = (at: readonly number[], r: number, scale: readonly number[], color: string, rest: Rest = {}): Prim =>
   sphere(at, r, color, { scale: r3(scale), ...rest });
 export const cyl = (at: readonly number[], rTop: number, rBottom: number, h: number, color: string, rest: Rest = {}): Prim =>
   prim('cylinder', at, { size: r3([rTop, rBottom, h]), color, ...rest });
 export const cone = (at: readonly number[], r: number, h: number, color: string, rest: Rest = {}): Prim => prim('cone', at, { size: [n5(r), n5(h)], color, ...rest });
-/** A capsule (radius r, straight middle `mid`, along its own Y) as a low-poly lathe. */
+/** A capsule (radius r, straight middle `mid`, along its own Y) with smooth rounded ends. */
 export const capsule = (at: readonly number[], r: number, mid: number, color: string, rest: Rest = {}): Prim => {
-  const n = 4;
+  const n = 6;
   const pts: V2[] = [];
   for (let i = 0; i <= n; i++) {
     const a = (i / n) * (Math.PI / 2);
@@ -101,7 +102,7 @@ export const capsule = (at: readonly number[], r: number, mid: number, color: st
     const a = Math.PI / 2 + (i / n) * (Math.PI / 2);
     pts.push([i === n ? 0 : n5(r * Math.sin(a)), n5(mid / 2 - r * Math.cos(a))]);
   }
-  return prim('lathe', at, { profile: pts, segments: 8, color, ...rest });
+  return prim('lathe', at, { profile: pts, segments: r < 0.0035 ? 12 : 16, color, ...rest });
 };
 export const torus = (at: readonly number[], r: number, tube: number, color: string, rest: Rest = {}): Prim =>
   prim('torus', at, { size: [n5(r), n5(tube)], color, ...rest });
@@ -125,7 +126,7 @@ export function sweepAt(origin: readonly number[], pts: readonly (readonly numbe
   return prim('sweep', origin, {
     path: pts.map((p) => r3(sub(p, origin))),
     radius: typeof radius === 'number' ? n5(radius) : radius.map(n5),
-    radial: 14,
+    radial: 24,
     color,
     ...rest,
   });
@@ -168,6 +169,7 @@ export function fan(r: number, angle: number, n = 12, notch = 0): V2[] {
 /** Mirror a primitive in the specimen's mid-plane (z → −z): position, path, `up`, rotation (−rx, −ry, rz). */
 export function mirrorZ(p: Prim): Prim {
   const q: Prim = { ...p, at: r3([p.at[0], p.at[1], -p.at[2]]) };
+  if(p.kind==='__mesh'){const g=(p.geometry as BufferGeometry).clone().scale(1,1,-1);const ix=g.index;if(ix)for(let i=0;i<ix.count;i+=3){const a=ix.getX(i);ix.setX(i,ix.getX(i+1));ix.setX(i+1,a);}q.geometry=g;}
   if (Array.isArray(p.path)) q.path = (p.path as V3[]).map((v) => r3([v[0], v[1], -v[2]]));
   if (Array.isArray(p.up)) q.up = r3([(p.up as V3)[0], (p.up as V3)[1], -(p.up as V3)[2]]);
   if (Array.isArray(p.rotation)) {
@@ -192,6 +194,7 @@ export function yaw(m: Model, deg: number): Model {
   const rot = (v: readonly number[]): V3 => [c * v[0]! + s * v[2]!, v[1]!, -s * v[0]! + c * v[2]!];
   const turn = (p: Prim): Prim => {
     const q: Prim = { ...p, at: r3(rot(p.at)) };
+    if(p.kind==='__mesh') { q.geometry=(p.geometry as BufferGeometry).clone().rotateY(deg*DEG); return q; }
     if (Array.isArray(p.path)) q.path = (p.path as V3[]).map((v) => r3(rot(v)));
     if (Array.isArray(p.up)) q.up = r3(rot(p.up as V3));
     // Pre-multiply the piece's rotation by a turn about Y: recompute from its rotated axes.
@@ -250,6 +253,7 @@ export function scaleModel(m: Model, k: number): Model {
   const s2 = (v: unknown) => (Array.isArray(v) ? (v as number[][]).map((q) => q.map((x) => n5(x * k))) : v);
   const one = (p: Prim): Prim => {
     const q: Prim = { ...p, at: r3(mul(p.at, k)) };
+    if(p.kind==='__mesh'){ q.geometry=(p.geometry as BufferGeometry).clone().scale(k,k,k); return q; }
     if (Array.isArray(p.size)) q.size = (p.size as number[]).map((x) => n5(x * k));
     for (const f of ['bevel', 'thickness', 'depth', 'hollow']) if (f in p) q[f] = s(p[f]);
     if (Array.isArray(p.radius)) q.radius = (p.radius as number[]).map((x) => n5(x * k));

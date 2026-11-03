@@ -31,3 +31,12 @@ Published (`status: published`): a Primary 3 science topic with no heavy or cont
 
 - The magnified group's scale bar appears only when that group is the focus (the lens beats); chapter beats that show the microscope corner label the group so the bar is drawn.
 - A sort chapter's flowchart card is the right-hand top card; at 1600 × 900 with the LAYERS panel open it covers the right third of the tray, so the chapter camera is set back to keep all six pads in the free band.
+
+## Polish integration — 3 November 2026
+
+The original notes about no downloaded photographs and primitive specimen kits
+are superseded by the dated [rebuild record](REBUILD-3D.md). Reference photographs
+were downloaded and viewed; original sculpted surfaces and decoded CPU previews
+are installed with the authorized minimal renderer/flat-asset exception.
+The original part IDs, sorting model and teaching counts
+are preserved; minimal bilingual shape-description corrections are recorded there.

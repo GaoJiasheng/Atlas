@@ -86,3 +86,49 @@ Research sources not used, and why: S10 and S11 (common myna: NParks pages contr
 - NParks words the rain tree's folding leaflets two ways (BiodiversitySG: just before it rains and in the late afternoon; Flora & Fauna Web: in the early evening and on overcast days). The text follows S45 (BiodiversitySG).
 - Not found in a reputable source, so not written: that most beetles can fly (only that a beetle flies with its hind wings, S81); scales on a hawksbill's flippers (only on its head, S78); that a dolphin's tail is "horizontal" (the sources say it moves up and down, S76, S77); hair on a pangolin's face and belly.
 - Chinese species names: only 黑眶蟾蜍, 疣尾蜥虎, 大蕉松鼠, 马来穿山甲, 许氏齿弹涂鱼, 林八哥 and 孔雀鱼 are names printed by a Singapore agency (Singapore Biodiversity Online). The others (斑鳢, 短耳犬蝠, 斑腿泛树蛙, 网纹蟒, 玳瑁, 龙船花, 木麻黄, 鸟巢蕨, 鹿角蕨, 印度太平洋驼背豚) are common Chinese names, not checked against a Singapore source; they are listed for review in REVIEW.md.
+
+### Polish 2026-11-03 — original specimen sculptures
+
+The new sculptures are original build-time geometry, generated from source code
+under `scripts/geo/living-things/` and the opt-in sculpture API in
+`scripts/geo/kits/bird.ts`. No downloaded mesh, photograph texture, or runtime
+network resource is used. Dimensions remain miniature teaching reconstructions,
+not measurements of a particular specimen. The generic penguin now follows the
+gentoo silhouette and plumage; its bilingual detail explicitly identifies that
+visual reference. Photographs below were inspected as development references
+only and are not embedded or redistributed in the site.
+
+Installed asset: `public/models/living-things.glb` — original procedural work by
+Atlas (atlas.gavin.pub), copyright © 2026 Gao Jiasheng; MIT License, matching the
+generator code and repository `LICENSE`. The GLB embeds the same attribution.
+Rebuild with `pnpm tsx scripts/geo/living-things/build-parts.ts`. Its 28 named,
+vertex-coloured specimen meshes use required `EXT_meshopt_compression` and local
+decoding; no textures or external buffer URLs are included. Reference photograph
+licences below apply to the photographs only; none is included in the GLB.
+
+| Reference | Author / licence | Modelling use |
+| --- | --- | --- |
+| [Javan myna at Kent Ridge Park](https://commons.wikimedia.org/wiki/File:Acridotheres_javanicus_-_Kent_Ridge_Park.jpg) | JJ Harrison, CC BY-SA 4.0 | Posture, bill, iris, crest, folded flight feathers, white wing/tail tips |
+| [Javan myna in flight](https://commons.wikimedia.org/wiki/File:Javan_Myna_Acridotheres_javanicus.jpg) | Herbertkikoy, CC BY-SA 4.0 | White flight-feather bases and feather layering |
+| [Gentoo penguin full body](https://commons.wikimedia.org/wiki/File:Gentoo_penguin_(Pygoscelis_papua)_at_Sea_Life_Melbourne_Aquarium.jpg) | Ethmostigmus, CC BY-SA 4.0 | Continuous breast/nape/head contour, flippers, webbed feet and tail |
+| [Gentoo head](https://commons.wikimedia.org/wiki/File:Gentoo_Penguin_(24914072436).jpg) | Christopher Michel, CC BY 2.0 | Narrow two-part bill, crown stripe and eye placement |
+| [Cynopterus close-up](https://commons.wikimedia.org/wiki/File:Close-up_of_Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).JPG) | AntanO, CC BY-SA 3.0 | Dog-like muzzle, rounded pinnae, pale ear rims and short fur |
+| [Cynopterus brachyotis](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).jpg) | AntanO, CC BY-SA 4.0 | Fur and facial proportions |
+| [NParks, Going batty for bats](https://www.nparks.gov.sg/publications-resources/articles/going-batty-for-bats) | Nick Baker / EcologyAsia; copyrighted, reference only | In-flight membrane camber and elbow/wrist/finger arrangement |
+| [NParks, Cynopterus brachyotis](https://www.nparks.gov.sg/florafaunaweb/fauna/5/6/562) | NParks | Pale wing-bone/ear edges, clawed second digit and free short tail |
+| [Asplenium habit and sori](https://commons.wikimedia.org/wiki/File:Starr-090623-1444-Asplenium_nidus-habit_and_sori-Nahiku-Maui_(24335949904).jpg) | Forest and Kim Starr, CC BY 3.0 US | Broad strap fronds, dark midrib and parallel underside sori |
+| [Singapore fern](https://commons.wikimedia.org/wiki/File:2016_Singapur,_Ogrody_botaniczne_(098).jpg) | Marcin Konsek, CC BY-SA 4.0 | Natural arching leaf proportions and quietly wavy margins |
+| [Platycerium coronarium](https://commons.wikimedia.org/wiki/File:Staghorn_Fern_(Platycerium_coronarium)_(8752670563).jpg) | Bernard DUPONT, CC BY-SA 2.0 | Crown shields and hanging repeatedly bifurcated fronds |
+| [NParks, Platycerium coronarium](https://www.nparks.gov.sg/florafaunaweb/flora/1/5/1562) | NParks, existing S51 | Species-specific shield and pendulous foliage arrangement |
+| [Agaricus underside](https://commons.wikimedia.org/wiki/File:Agaricus_campestris_IMG_20200912_170142.jpg) | Accuruss, CC BY-SA 4.0 | Dense tapered lamellae, interrupted short lamellulae and annulus |
+| [Additional gill underside study](https://www.inaturalist.org/photos/351794639) | Spencer Wimmer (search metadata); licence not independently verified, development reference only, not distributed | Fine intercalated lamellulae; verified Accuruss reference above remains the licence-checked photograph |
+| [Plantain squirrel](https://www.nparks.gov.sg/florafaunaweb/fauna/4/8/488) | NParks | Cream/black flank stripes, russet belly, bushy directional coat |
+| [Sunda pangolin](https://www.nparks.gov.sg/florafaunaweb/fauna/2/1/212) | NParks | Staggered overlapping keratin scales and curved claws |
+| [House gecko](https://www.ecologyasia.com/verts/lizards/spiny-tailed_house_gecko.htm) | EcologyAsia, reference only | Five toes, expanded distal pads and underside lamellae |
+| [Hemidactylus frenatus](https://www.biosch.hku.hk/ecology/hkreptiles/lizard/Hemidactylus_frenatus.html) | University of Hong Kong | Divided lamellae and clawed distal phalanges |
+| [Hawksbill turtle](https://www.fisheries.noaa.gov/species/hawksbill-turtle) | NOAA Fisheries | Hooked bill, two pairs of prefrontal scales, overlapping shell scutes |
+
+Existing species sources remain the factual basis for classification, counts,
+status and teaching text. Feather, hair, scale, frond and gill sampling counts
+are modelling choices, not additional teaching measurements. The microscope
+colony counts, two sorus-bearing fern fronds and three rhu fruits are retained.
