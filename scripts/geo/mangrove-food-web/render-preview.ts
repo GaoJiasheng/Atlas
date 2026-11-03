@@ -8,6 +8,8 @@ import { partsFileBase } from '../../../src/engines/space-scene/schema';
 import { partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { buildParts } from './build-parts';
+import { treeMeshes, meshPiece } from './tree-meshes';
+const meshes=treeMeshes();
 const file=partsFileBase.parse(buildParts());
 const css=readFileSync(resolve('src/theme/tokens.css'),'utf8').split('[data-theme="cinema"]')[0]!;
 const color=(ref:string)=>{
@@ -18,6 +20,15 @@ const W=1400,H=1050;
 const shots: Record<string,{ids?:string[];eye:[number,number,number];target:[number,number,number];fov:number}>={
  hero:{eye:[2.2,1.7,2.6],target:[0,.30,0],fov:32},
  roots:{ids:['api-tree','api-lateral','api-pencil','bakau-tree','bakau-prop'],eye:[1.5,.85,1.7],target:[-.18,.27,-.1],fov:32},
+ api:{ids:['api-tree'],eye:[.88,1.06,1.45],target:[-.43,.41,-.10],fov:33},
+ apiBack:{ids:['api-tree'],eye:[-1.45,.93,-1.40],target:[-.43,.41,-.10],fov:33},
+ bakau:{ids:['bakau-tree','bakau-prop'],eye:[1.46,1.08,1.34],target:[.18,.41,-.25],fov:33},
+ bakauBack:{ids:['bakau-tree','bakau-prop'],eye:[-1.10,1.10,-1.92],target:[.18,.41,-.25],fov:33},
+ rootScatter:{ids:['api-lateral','api-pencil'],eye:[-.2,.80,.45],target:[-.46,.02,-.13],fov:40},
+ crabFront:{ids:['fiddler-crabs'],eye:[-.10,.15,.46],target:[-.10,.045,.18],fov:38},
+ fishFin:{ids:['giant-mudskipper'],eye:[.47,.44,.44],target:[.33,.045,.175],fov:32},
+ fishFront:{ids:['giant-mudskipper'],eye:[.66,.27,.44],target:[.33,.06,.145],fov:35},
+ fishSide:{ids:['giant-mudskipper'],eye:[.31,.11,.58],target:[.30,.06,.145],fov:36},
  heron:{ids:['heron'],eye:[.99,.54,.84],target:[.61,.27,-.02],fov:39},
  crabs:{ids:['fiddler-crabs'],eye:[.11,.18,.42],target:[-.10,.04,.15],fov:39},
  climbing:{ids:['tree-crabs'],eye:[.43,.34,.14],target:[.19,.16,-.19],fov:36},
@@ -32,13 +43,28 @@ for(const [name,shot] of Object.entries(shots)) {
  const v=new Vector3(),n=new Vector3();
  for(const part of file.parts) {
   if(shot.ids&&!shot.ids.includes(part.id)||part.id==='tidal-water')continue;
-  const slots=partMaterialSlots(part);
-  for(const piece of partPieces(part)) {
-   if(piece.lines) {piece.geometry.dispose();continue;}
+  const slots=part.primitive?partMaterialSlots(part):[part.material!];
+  for(const piece of part.mesh?[meshPiece(meshes.get(part.id)!)]:partPieces(part)) {
+   if(piece.lines) {
+    const g=piece.geometry,pos=g.getAttribute('position'),rgb=color('token:ink-2');
+    for(const instance of piece.matrices??[new Matrix4()]){
+     const world=new Matrix4().makeTranslation(...(part.primitive?.at??[0,0,0] as [number,number,number])).multiply(instance);
+     for(let i=0;i<pos.count-1;i+=2){
+      const a=new Vector3().fromBufferAttribute(pos,i).applyMatrix4(world).project(camera),b=new Vector3().fromBufferAttribute(pos,i+1).applyMatrix4(world).project(camera);
+      const ax=(a.x*.5+.5)*W,ay=(.5-a.y*.5)*H,bx=(b.x*.5+.5)*W,by=(.5-b.y*.5)*H;
+      const steps=Math.ceil(Math.max(Math.abs(bx-ax),Math.abs(by-ay)));
+      for(let j=0;j<=steps;j++){
+       const t=j/Math.max(steps,1),x=Math.round(ax+(bx-ax)*t),y=Math.round(ay+(by-ay)*t),idx=y*W+x;
+       if(x>=0&&x<W&&y>=0&&y<H&&a.z+(b.z-a.z)*t<zbuffer[idx]!+.000001)pixels.set(rgb,idx*3);
+      }
+     }
+    }
+    g.dispose();continue;
+   }
    const g=piece.geometry,pos=g.getAttribute('position'),normal=g.getAttribute('normal');
    const rgb=color(slots[piece.slot??0]!.tint??'token:neutral');
    for(const instance of piece.matrices??[new Matrix4()]) {
-    const world=new Matrix4().makeTranslation(...part.primitive!.at).multiply(instance);
+    const world=new Matrix4().makeTranslation(...(part.primitive?.at??[0,0,0] as [number,number,number])).multiply(instance);
     const nm=new Matrix3().getNormalMatrix(world);
     const coords=new Float64Array(pos.count*4);
     for(let i=0;i<pos.count;i++) {

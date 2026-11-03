@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { buildParts } from './build-parts';
+import { writeTreeMeshes } from './tree-meshes';
 
 type Text = { en: string; zh: string };
 type Node = { id: string; label: Text; role: 'producer' | 'consumer'; parts: string[]; d: [number, number]; sources: string[] };
@@ -63,6 +64,7 @@ const tideRows = removals.flatMap((remove) => ['low', 'high'].map((tide) => ({ w
   'water-rise': tide === 'high' ? .14 : 0, 'crab-rise': tide === 'high' ? .16 : 0,
   'show-fiddlers': Number(remove !== 'n-fiddlers' && tide === 'low'),
 }, source: ['S30'] })));
+await writeTreeMeshes();
 const file = buildParts();
 const anchors: Record<string, [number, number, number]> = {
   'n-mangrove': [-.1, .025, .1], 'n-algae': [.055, .014, .13],
@@ -89,7 +91,8 @@ const sim = {
     { output: 'water-rise', part: 'tidal-water', offset: { axis: [0, 1, 0], per: 1, origin: 0 } },
     { output: 'crab-rise', part: 'tree-crabs', offset: { axis: [0, 1, 0], per: 1, origin: 0 } },
     { output: 'show-fiddlers', part: 'fiddler-crabs', visible: { eq: 1 } },
-    ...graph.nodes.filter((n) => n.id !== 'n-fiddlers').map((n) => ({ control: 'remove', part: n.parts, visible: { ne: n.id } })),
+    // A removed tree also hides its bark trunk (a context part beside the selectable crown).
+    ...graph.nodes.filter((n) => n.id !== 'n-fiddlers').map((n) => ({ control: 'remove', part: n.parts.flatMap((id) => (id.endsWith('-tree') ? [id, id.replace(/-tree$/, '-trunk')] : [id])), visible: { ne: n.id } })),
     ...graph.edges.flatMap((e) => [
       { output: `active-${e.id}`, flow: `food-${e.id}`, intensity: { full: 1, mode: 'density' } },
       { control: 'tide', flow: `food-${e.id}`, visible: { eq: 'low' } },
