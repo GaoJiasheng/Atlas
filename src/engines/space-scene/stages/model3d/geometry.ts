@@ -21,12 +21,14 @@ import {
   Matrix3,
   Matrix4,
   PlaneGeometry,
+  Sphere,
   Quaternion,
   SphereGeometry,
   TorusGeometry,
   TubeGeometry,
   Vector2,
   Vector3,
+  type InterleavedBufferAttribute,
   type Skeleton,
 } from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
@@ -51,7 +53,8 @@ import type { Wing } from '../../lib/wing';
 import { shapedPieces } from './shaped';
 import { latheProfileClosed } from '../../lib/shaped';
 import { FanDeform, sweepClosed, sweepGeometry, wingMembrane, wingVeins } from './organic';
-import { layFilings, type Filing, type FilingsCard } from '../../lib/sim/field';
+import type { Filing, FilingsCard } from '../../lib/sim/field';
+import { kits } from './kits';
 import { placeAlong, STRETCH_ATTRIBUTE } from '../../lib/stretch';
 import { BEND_ATTRIBUTE, BEND_SLICES } from '../../lib/bend';
 import { sliceAlong } from './shaped';
@@ -459,7 +462,7 @@ function kindPieces(p: Primitive): BasePiece[] {
     }
     case 'filings':
       // At rest (no field state yet): sprinkled at random; the stage lays them out for the state on show.
-      return [{ geometry: new BoxGeometry(p.needle[0], p.needle[1], p.needle[1]), instances: filingMatrices(layFilings(null, filingsCard(p)), p, false), filings: true }];
+      return [{ geometry: new BoxGeometry(p.needle[0], p.needle[1], p.needle[1]), instances: filingMatrices(kits.field?.layFilings(null, filingsCard(p)) ?? [], p, false), filings: true }];
   }
 }
 
@@ -609,17 +612,56 @@ export function eachPieces(part: Pick<Part, 'primitive' | 'repeat'> & { extra?: 
   return [...out.filter((p) => !p.lines), ...out.filter((p) => p.lines)];
 }
 
+/** Index offset of each vertex of a triangle written mirrored, as (0, 2, 1). */
+const FLIP = [0, 1, -1] as const;
+
+type Vec3Reader = (i: number, out: Float64Array) => void;
+
+/** Reads vertex `i` of a 3-component attribute: straight from its array when it is a plain float one (merging is the stage's hot loop at load). */
+function vec3Reader(a: BufferAttribute | InterleavedBufferAttribute): Vec3Reader {
+  const plain = !(a as InterleavedBufferAttribute).isInterleavedBufferAttribute && !a.normalized && a.itemSize === 3;
+  const arr = a.array as ArrayLike<number>;
+  if (plain) return (i, out) => { out[0] = arr[i * 3]!; out[1] = arr[i * 3 + 1]!; out[2] = arr[i * 3 + 2]!; };
+  return (i, out) => { out[0] = a.getX(i); out[1] = a.getY(i); out[2] = a.getZ(i); };
+}
+
+/** `count` points (through `index` when given) by `m` (as Vector3.applyMatrix4) into `out` from `at`; `flip` writes each triangle as (0, 2, 1). */
+function transformPoints(read: Vec3Reader, count: number, m: Matrix4, out: Float32Array, at: number, flip = false, index: ArrayLike<number> | null = null): void {
+  const e = m.elements, v = new Float64Array(3);
+  for (let i = 0; i < count; i++) {
+    const k = flip ? i + FLIP[i % 3]! : i;
+    read(index ? index[k]! : k, v);
+    const x = v[0]!, y = v[1]!, z = v[2]!;
+    const w = 1 / (e[3]! * x + e[7]! * y + e[11]! * z + e[15]!);
+    out[at + i * 3] = (e[0]! * x + e[4]! * y + e[8]! * z + e[12]!) * w;
+    out[at + i * 3 + 1] = (e[1]! * x + e[5]! * y + e[9]! * z + e[13]!) * w;
+    out[at + i * 3 + 2] = (e[2]! * x + e[6]! * y + e[10]! * z + e[14]!) * w;
+  }
+}
+
+/** `count` normals through the normal matrix `nm`, normalised (as Vector3.applyMatrix3().normalize()). */
+function transformNormals(read: Vec3Reader, count: number, nm: Matrix3, out: Float32Array, at: number, flip: boolean, index: ArrayLike<number> | null): void {
+  const e = nm.elements, v = new Float64Array(3);
+  for (let i = 0; i < count; i++) {
+    const k = flip ? i + FLIP[i % 3]! : i;
+    read(index ? index[k]! : k, v);
+    const x0 = v[0]!, y0 = v[1]!, z0 = v[2]!;
+    const x = e[0]! * x0 + e[3]! * y0 + e[6]! * z0;
+    const y = e[1]! * x0 + e[4]! * y0 + e[7]! * z0;
+    const z = e[2]! * x0 + e[5]! * y0 + e[8]! * z0;
+    const r = 1 / (Math.sqrt(x * x + y * y + z * z) || 1);
+    out[at + i * 3] = x * r;
+    out[at + i * 3 + 1] = y * r;
+    out[at + i * 3 + 2] = z * r;
+  }
+}
+
 /** Line segments copied once per placement into one geometry. Disposes the input. */
 function bakeLines(g: BufferGeometry, matrices: Matrix4[]): BufferGeometry {
   const src = g.getAttribute('position');
   const pos = new Float32Array(src.count * 3 * matrices.length);
-  const v = new Vector3();
-  matrices.forEach((m, i) => {
-    for (let j = 0; j < src.count; j++) {
-      v.fromBufferAttribute(src, j).applyMatrix4(m);
-      pos.set([v.x, v.y, v.z], (i * src.count + j) * 3);
-    }
-  });
+  const from = vec3Reader(src);
+  matrices.forEach((m, i) => transformPoints(from, src.count, m, pos, i * src.count * 3));
   g.dispose();
   const out = new BufferGeometry();
   out.setAttribute('position', new BufferAttribute(pos, 3));
@@ -633,12 +675,15 @@ function bakeLines(g: BufferGeometry, matrices: Matrix4[]): BufferGeometry {
  * their winding fixed). Disposes the inputs.
  */
 export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[] }[]): BufferGeometry {
+  // Indexed input is read through its index (as toNonIndexed would copy it out); without normals it is flattened
+  // first, so computed normals stay per face.
   const flat = list.map((l) => {
-    const g = l.geometry.index ? l.geometry.toNonIndexed() : l.geometry;
+    const g = l.geometry.index && !l.geometry.getAttribute('normal') ? l.geometry.toNonIndexed() : l.geometry;
     if (!g.getAttribute('normal')) g.computeVertexNormals();
-    return { g, src: l.geometry, matrices: l.matrices };
+    const index = g.index ? (g.index.array as ArrayLike<number>) : null;
+    return { g, src: l.geometry, matrices: l.matrices, index, count: index ? g.index!.count : g.getAttribute('position').count };
   });
-  const total = flat.reduce((n, f) => n + f.g.getAttribute('position').count * f.matrices.length, 0);
+  const total = flat.reduce((n, f) => n + f.count * f.matrices.length, 0);
   const pos = new Float32Array(total * 3);
   const nor = new Float32Array(total * 3);
   const uv = new Float32Array(total * 2);
@@ -647,32 +692,31 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   const sec = sectioned ? new Float32Array(total) : null;
   const along = flat.some((f) => f.g.getAttribute(STRETCH_ATTRIBUTE) !== undefined) ? new Float32Array(total) : null;
   const bent = flat.some((f) => f.g.getAttribute(BEND_ATTRIBUTE) !== undefined) ? new Float32Array(total) : null;
-  const v = new Vector3();
   const nm = new Matrix3();
   let o = 0;
-  for (const { g, src, matrices } of flat) {
+  for (const { g, src, matrices, index, count: n } of flat) {
     const P = g.getAttribute('position');
     const N = g.getAttribute('normal');
     const U = g.getAttribute('uv');
     const S = g.getAttribute('atlasSection');
     const T = g.getAttribute(STRETCH_ATTRIBUTE);
     const B = g.getAttribute(BEND_ATTRIBUTE);
+    const p = vec3Reader(P), q = vec3Reader(N);
     for (const m of matrices) {
       nm.getNormalMatrix(m);
+      // Mirrored: write each triangle as (0, 2, 1).
       const flip = m.determinant() < 0;
-      for (let i = 0; i < P.count; i++) {
-        // Mirrored: write each triangle as (0, 2, 1).
-        const j = flip ? i - (i % 3) + [0, 2, 1][i % 3]! : i;
-        v.fromBufferAttribute(P, j).applyMatrix4(m);
-        pos.set([v.x, v.y, v.z], (o + i) * 3);
-        v.fromBufferAttribute(N, j).applyMatrix3(nm).normalize();
-        nor.set([v.x, v.y, v.z], (o + i) * 3);
-        if (U) uv.set([U.getX(j), U.getY(j)], (o + i) * 2);
+      transformPoints(p, n, m, pos, o * 3, flip, index);
+      transformNormals(q, n, nm, nor, o * 3, flip, index);
+      for (let i = 0; i < n; i++) {
+        const k = flip ? i + FLIP[i % 3]! : i;
+        const j = index ? index[k]! : k;
+        if (U) { uv[(o + i) * 2] = U.getX(j); uv[(o + i) * 2 + 1] = U.getY(j); }
         if (sec && S) sec[o + i] = S.getX(j);
         if (along && T) along[o + i] = T.getX(j);
         if (bent && B) bent[o + i] = B.getX(j);
       }
-      o += P.count;
+      o += n;
     }
     if (g !== src) g.dispose();
     src.dispose();
@@ -684,9 +728,21 @@ export function mergeBaked(list: { geometry: BufferGeometry; matrices: Matrix4[]
   if (sec) out.setAttribute('atlasSection', new BufferAttribute(sec, 1));
   if (along) out.setAttribute(STRETCH_ATTRIBUTE, new BufferAttribute(along, 1));
   if (bent) out.setAttribute(BEND_ATTRIBUTE, new BufferAttribute(bent, 1));
-  out.computeBoundingSphere();
-  out.computeBoundingBox();
+  boundsOf(out);
   return out;
+}
+
+/** The box and sphere three.js would compute for a plain position attribute, with one pass less (each pass is a walk over a large merged mesh). */
+function boundsOf(g: BufferGeometry): void {
+  g.computeBoundingBox();
+  const p = g.getAttribute('position').array as Float32Array;
+  const c = g.boundingBox!.getCenter(new Vector3());
+  let max = 0;
+  for (let i = 0; i < p.length; i += 3) {
+    const dx = c.x - p[i]!, dy = c.y - p[i + 1]!, dz = c.z - p[i + 2]!;
+    max = Math.max(max, dx * dx + dy * dy + dz * dz);
+  }
+  g.boundingSphere = new Sphere(c, Math.sqrt(max));
 }
 
 /** Pieces of a primitive part (rotation and repeat applied; see module doc). */

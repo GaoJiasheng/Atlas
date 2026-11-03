@@ -1,4 +1,3 @@
-import { MicroscopeField } from '../hud/MicroscopeField';
 /**
  * The try-it card (docs/22 §4.3 S3, S6, S7; docs/08 §2 HUD 铁律 d): in the
  * reading panel after the beat line and before the inspector, for a chapter
@@ -16,6 +15,7 @@ import { MicroscopeField } from '../hud/MicroscopeField';
  * here. Buttons, `[` `]` / `T` and the diagram's switches write the same
  * store value (lib/sim/controls.ts), so the URL (`sim`) follows.
  */
+import { lazy, Suspense, type ReactNode } from 'react';
 import { useStore } from 'zustand';
 import { useScene, useSceneContext, useT } from '../../core/context';
 import { tx, type UiKey } from '../../../i18n';
@@ -32,17 +32,21 @@ import { outputText, outputWords, valueText, valueWords } from '../lib/sim/text'
 import { cardTimelines } from '../lib/sim/replay';
 import { isTimeline } from '../lib/sim/timeline';
 import { revealCurrentResult, setSim, usePredictionHidden, useSimStore, useSimView } from '../hud/sim';
-import { CircuitDiagram } from '../hud/CircuitCard';
-import { EnergyDiagram } from '../hud/EnergyCard';
-import { CycleDiagram } from '../hud/CycleCard';
-import { KeyDiagram } from '../hud/KeyCard';
-import { AirfoilPlot } from './AirfoilPlot';
-import { AirfoilPressure } from './AirfoilPressure';
 import type { StageBridge } from '../bridge';
 import { TryChart } from './TryChart';
-import { TryCurve } from './TryCurve';
 import { SourceRefs } from '../../widgets/SourcePopover';
 import { tableSources } from '../lib/sim/table';
+
+// Each sim's own diagram is fetched only for the topics that have it (the top-right card usually has it loaded already).
+const MicroscopeField = lazy(() => import('../hud/MicroscopeField').then((m) => ({ default: m.MicroscopeField })));
+const CircuitDiagram = lazy(() => import('../hud/CircuitCard').then((m) => ({ default: m.CircuitDiagram })));
+const EnergyDiagram = lazy(() => import('../hud/EnergyCard').then((m) => ({ default: m.EnergyDiagram })));
+const CycleDiagram = lazy(() => import('../hud/CycleCard').then((m) => ({ default: m.CycleDiagram })));
+const KeyDiagram = lazy(() => import('../hud/KeyCard').then((m) => ({ default: m.KeyDiagram })));
+const AirfoilPlot = lazy(() => import('./AirfoilPlot').then((m) => ({ default: m.AirfoilPlot })));
+const AirfoilPressure = lazy(() => import('./AirfoilPressure').then((m) => ({ default: m.AirfoilPressure })));
+const TryCurve = lazy(() => import('./TryCurve').then((m) => ({ default: m.TryCurve })));
+const Lazy = ({ children }: { children: ReactNode }) => <Suspense fallback={null}>{children}</Suspense>;
 
 function Control({ c, value, onSet, primary }: { c: SimControl; value: SimValue | undefined; onSet(v: SimValue): void; primary: boolean }) {
   const t = useT();
@@ -289,7 +293,7 @@ function LifeCycleFold({ file, sim }: { file: PartsFile; sim: SimData }) {
   return (
     <details className="space-try__diagram" open>
       <summary>{t('space.try.cycle')}</summary>
-      <CycleDiagram file={file} sim={sim} />
+      <Lazy><CycleDiagram file={file} sim={sim} /></Lazy>
     </details>
   );
 }
@@ -299,7 +303,7 @@ function SortFold({ file, sim }: { file: PartsFile; sim: SimData }) {
   return (
     <details className="space-try__diagram" open>
       <summary>{t('space.try.key')}</summary>
-      <KeyDiagram file={file} sim={sim} />
+      <Lazy><KeyDiagram file={file} sim={sim} /></Lazy>
     </details>
   );
 }
@@ -378,28 +382,28 @@ export function TryIt({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiStore;
           </p>
         )}
       </dl>}
-      {sim.airfoil && card.vary === sim.airfoil.angle && <AirfoilPlot sim={sim} values={values} ui={ui} chapter={chapter} />}
-      {sim.airfoil && <AirfoilPressure file={file} values={values} ui={ui} bridge={bridge} />}
+      {sim.airfoil && card.vary === sim.airfoil.angle && <Lazy><AirfoilPlot sim={sim} values={values} ui={ui} chapter={chapter} /></Lazy>}
+      {sim.airfoil && <Lazy><AirfoilPressure file={file} values={values} ui={ui} bridge={bridge} /></Lazy>}
       <Replay ids={runs} slow={slow} ui={ui} />
       {hidden && <button type="button" className="space-try__opt" data-sim-reveal="" onClick={() => revealCurrentResult(ui, chapter, values)}>{t('space.try.showCurrent')}</button>}
       {hidden && notice && <p className="space-try__notice" role="status">{t('space.try.conditionsChanged')}</p>}
       {card.predict && <Predict file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
-      {!hidden && card.curve && <TryCurve sim={sim} values={values} curve={card.curve} />}
+      {!hidden && card.curve && <Lazy><TryCurve sim={sim} values={values} curve={card.curve} /></Lazy>}
       {!hidden && card.record && <Table file={file} sim={sim} card={card} ui={ui} chapter={chapter} />}
       {sim.circuit?.diagram && (
         <details className="space-try__diagram" open>
           <summary>{t('space.try.diagram')}</summary>
-          <CircuitDiagram file={file} sim={sim} />
+          <Lazy><CircuitDiagram file={file} sim={sim} /></Lazy>
         </details>
       )}
       {sim.energy && (
         <details className="space-try__diagram" open>
           <summary>{t('space.try.energy')}</summary>
-          <EnergyDiagram file={file} sim={sim} />
+          <Lazy><EnergyDiagram file={file} sim={sim} /></Lazy>
         </details>
       )}
       {sim.lifeCycle && <LifeCycleFold file={file} sim={sim} />}
-      {sim.microscope && <MicroscopeField file={file} location="mobile" />}
+      {sim.microscope && <Lazy><MicroscopeField file={file} location="mobile" /></Lazy>}
       {sim.sort && <SortFold file={file} sim={sim} />}
     </section>
   );

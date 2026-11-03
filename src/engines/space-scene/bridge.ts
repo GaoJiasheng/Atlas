@@ -141,10 +141,12 @@ export interface SensesReading {
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {
-  /** Stage content that has really mounted (lazy chunks resolved): `scene` (clocks, parts, probes) and `overlays` (the sim overlays). */
+  /** Stage content that has really been drawn (lazy chunks resolved, StageMark): `scene` (clocks, parts, probes), `overlays` (the sim overlays) and `model` (the glb's meshes). */
   stageMarks: Set<string>;
   /** The scene asks for sim overlays now, so `__atlas.ready` also waits for the `overlays` mark. */
   overlaysExpected: boolean;
+  /** The topic draws glb meshes (and they have not failed to load), so `__atlas.ready` also waits for the `model` mark. */
+  modelExpected: boolean;
   solarSky?: {status:string;utc?:string;latitude?:number;depth?:boolean;rows?:unknown[]};
   senses: SensesReading;
   sensesSeek(cycles: number): boolean;
@@ -250,13 +252,14 @@ export function cameraSettled(bridge: StageBridge, id: number, timeoutMs: number
 
 /** True once the lazily loaded stage content is on the stage (the canvas alone exists earlier). */
 export function stageReady(bridge: StageBridge): boolean {
-  return bridge.stageMarks.has('scene') && (!bridge.overlaysExpected || bridge.stageMarks.has('overlays'));
+  return bridge.stageMarks.has('scene') && (!bridge.overlaysExpected || bridge.stageMarks.has('overlays')) && (!bridge.modelExpected || bridge.stageMarks.has('model'));
 }
 
 export function createBridge(): StageBridge {
   return {
     stageMarks: new Set(),
     overlaysExpected: false,
+    modelExpected: false,
     senses: {},
     sensesSeek: () => false,
     sensesEchoSeek: () => false,
