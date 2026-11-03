@@ -130,3 +130,133 @@ Not done: browser/PBR and interactive screenshot acceptance, because this task e
 - `PartNode` builds its slot materials keyed on the per-slot colour flags instead of the shape object, so a new shape object (fill geometry, scene rebuild) no longer recreates materials for any topic.
 - aircon, heart-and-lungs and steam-engine: first three chapters pixel-identical to the base commit (same camera, HUD off).
 - `scripts/geo/living-things/mesh-support.patch` is a stale working note and is not committed.
+
+## Polish 2026-11-03 — round 3: UVs, python/toad skin and fruit-bat coat
+
+Installed from the topic generator. Both accepted renderer changes at `4a4af23`
+remain untouched: vertex-coloured slots emit no self-light, and PartNode's material
+cache depends on per-slot colour flags. No shared kit or engine file changed.
+
+### Completed items
+
+- **UV bake, all 28 sculptures:** preserve authored UVs in `modelGeometry`, author
+  along-surface charts for custom lofts/tubes and botanical ribbons, carry charts
+  through merged skin and two-sided faces, and export `TEXCOORD_0`. Missing custom
+  topology receives separate dominant-plane charts; implicit limbs retain smooth
+  normals. Native sweeps keep their arc-length/circumference charts. UV charts are
+  recovered after position simplification and shifted by whole texture periods;
+  the finish samplers' integral repeats keep the same texture phase. Bare bat
+  membranes/eyes and bare python/toad eye details use nearly constant charts so
+  coat/scales/grit do not cover them. The GLB still uses each specimen's existing
+  single runtime material slot; the toad now selects the existing dry `abrasive`
+  finish, with geometric warts carrying its larger relief.
+- **Reticulated python (`Malayopython reticulatus`):** replace floating zigzag
+  strips with pigmented, irregular dark reticulation around warm grey saddles,
+  gold borders and pale lateral ocelli on the actual body surface. Colour-aware
+  simplification retains pigment boundaries. A separate ventral chart gives the
+  broad transverse belly scutes, with shallow geometric seams. Rebuilt tapered
+  skull, joined neck, attached amber eyes/slit pupils, jaw crease and labial pits.
+  The ventral tract fades before the raised nape, avoiding a pale scute band
+  crossing the back of the head in the final top-view check.
+  References: NParks' species identification; Mary-Ruth Low's Singapore specimen
+  photographs in Biodiversity of Singapore; the development-only Getty close-up
+  linked in SOURCES for skin/head comparison. Counts of generated surface details
+  are reconstruction parameters, not new teaching facts.
+- **Asian toad (`Duttaphrynus melanostictus`):** numerous irregular embedded skin
+  tubercles with varied size/height and dark tips replace ten sparse oversized
+  wart balls. Added paired elongated, curved parotoid glands; refined attached
+  cranial crests and smoother eye rims. Dry fine finish covers head, trunk and
+  limbs. Four front/five hind digits and folded limb joints are retained.
+  References: NParks' Colleen Goh/Holly Siow photographs and species description;
+  USGS species profile (black-tipped warts and prominent parotoids).
+- **Lesser dog-faced fruit bat (`Cynopterus brachyotis`):** longer tapered canine
+  muzzle and lower jaw/lip line, larger dark eyes, rounded cupped pale-rimmed ears,
+  no nose leaf. Even short fur fins are sampled by actual surface area on the
+  head, neck, trunk and upper limbs, with an ochre/reddish collar blended into
+  brown coat. Existing pile finish supplies fine relief between fins. Preserved
+  the membrane over four elongated fingers per wing, elbow/wrist joints, thumb
+  claw, digit-II claw and five hind digits. References: NParks/Mendis Tan photo,
+  NParks' collar description and the prior AntanO/flight references in SOURCES.
+
+### Budget and preservation
+
+| Asset / part | Before | After |
+| --- | ---: | ---: |
+| Python triangles | 6,384 | 30,016 |
+| Asian toad triangles | 21,283 | 22,893 |
+| Fruit bat triangles | 22,034 | 13,080 |
+| All scene triangles, including native props/magnified cells | 295,887 | 227,351 |
+| GLB triangles | 248,323 | 179,787 |
+| GLB bytes | 1,410,936 | 1,489,796 |
+
+The conservative all-parts count is below 300k without relying on chapter
+visibility. Still 28 baked specimens, 51 part IDs in the same order and 57 geometry
+pieces; sorting, chapter/beat references, presets, explode definitions, labels,
+teaching numbers and EN/ZH prose are unchanged. Smooth-normal simplification uses
+close-view error limits; priority skin/coat borders are protected. The UV streams
+use the standard meshopt EXPONENTIAL filter, positions use a compact compensated
+quantization grid, and no new runtime decoder or network resource is needed.
+Final decoded bounds drive the existing sorting envelopes; post-quantization node
+translations seat every specimen exactly on the 15 mm cell floor.
+
+### Verification and preview reproduction
+
+CPU previews inspect the actual installed, compressed/decoded geometry with
+FrontSide culling, smooth normals and a z-buffer. `export-finish-maps.ts` calls the
+runtime procedural texture generator through a minimal offline canvas adapter;
+`render-preview.py --finishes` samples those exact albedo/normal/roughness maps.
+The offline light is an approximation, not a browser/PBR or GPU performance claim.
+
+- Final three-angle specimen sheets and case overview: `/tmp/atlas-living-round3/final/`.
+- Priority finish close-ups: `/tmp/atlas-living-round3/finish/{bat-head,bat-coat,toad-head,python-belly}-angles.png`.
+- UV checks: `/tmp/atlas-living-round3/checker/*-angles.png` (looked at body, head and limb charts).
+- Geometry-only comparisons: `/tmp/atlas-living-round3/{before,geometry}/`.
+- Exact finish fields and repeat metadata: `/tmp/atlas-living-round3/maps/`.
+
+Reproduce: `pnpm tsx scripts/geo/living-things/build-parts.ts`, then
+`export-finish-maps.ts`, `preview-baked.ts`, and
+`python3 scripts/geo/living-things/render-preview.py --finishes --out /tmp/atlas-living-round3/final`.
+`--checker` substitutes a chart checker; `--before` on the exporter uses the
+optional preserved `/tmp/living-round3-before.{glb,json}` development baseline.
+
+The loaded-asset regression checks now require finite, nonconstant UVs on every
+specimen and nondegenerate sampled UV triangles; another check preserves exact
+source UVs through translation and two-sided duplication. Budget, local bundled
+runtime decoding, anatomy/counts, cell floors/envelopes and the legacy bird API
+remain covered. Final gate results are recorded below.
+
+Not done: browser/GPU rendering or interactive screenshot acceptance, as explicitly
+prohibited by this task. No browser or desktop was opened. All requested model
+and UV work is installed for the following browser acceptance.
+
+Final round-3 gates (rerun after the nape correction):
+
+- `pnpm check`: green, 0 errors / 0 warnings (4 existing hints).
+- `pnpm validate`: green, 94 topics / 0 errors / 0 warnings.
+- `pnpm test`: green, 252 files / 6,350 tests; includes the actual bundled
+  GLTFLoader/meshopt decoding, UV, byte/triangle, anatomy and floor/envelope checks.
+- `pnpm build`: green, 191 pages. Installed and built GLBs are byte-identical:
+  SHA-256 `6769208ab07896faf9ee93a8f10a8092263301db1f1a7e3c1082c51d4cbfee78`.
+- `count-staged.ts`: green, 227,351 triangles / 57 pieces, all parts before visibility.
+- `validate-staged.ts --baseline /tmp/living-round3-before.json`: green; 51
+  identical IDs/order, sorting/presets unchanged, every decoded mesh fits its
+  floor/envelope/cell.
+- `git diff --check`: green. No git writes, package/lockfile changes, browser or
+  desktop use. The pre-existing untracked `mesh-support.patch` was left alone.
+
+Final close-view iteration removed a pale ventral patch from the raised python
+nape; its broad belly scutes remain below the body. The final installed GLB is
+**1,489,796 bytes** with the unchanged final triangle totals in the table above.
+
+### Browser acceptance 2026-11-03 (Claude)
+
+Same-angle GPU close-ups of python, toad and bat (paper + cinema) against `4a4af23`.
+Two small corrections, rebuilt with `build-parts.ts` (still 179,787 GLB triangles):
+
+- Toad parotoid glands: blunter kidney ends, sunk 0.9 mm into the skin and darker,
+  so they read as raised glands behind the eye rather than a pale ear-like flap.
+- Fruit bat coat: `#6f614b` → `#6b5442`; the olive head no longer clashes with the
+  warm collar and body.
+
+Final GLB: **1,489,956 bytes**.
+

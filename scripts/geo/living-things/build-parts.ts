@@ -61,7 +61,6 @@ const REACH = 0.036;
 const parts: Part[] = [];
 const report: string[] = [];
 let bad = false;
-const box = (p: Model) => modelBounds(p);
 
 const missingModel = SPECIMEN_IDS.filter((id) => !MODELS[id]);
 if (missingModel.length) throw new Error(`no model for ${missingModel.join(', ')}`);
@@ -103,7 +102,7 @@ for (const [i, id] of SPECIMEN_IDS.entries()) {
     sculptures.push({id,geometry:g,at});
     // Rest envelope supplies the unchanged sort solver's home/floor before
     // the local GLB loads. Loaded geometry supplies visible shapes and anchors.
-    const finish = ['javan-myna','penguin'].includes(id)?'feathers':id==='tree-frog'||id==='dolphin'?'enamel':['plantain-squirrel','fruit-bat'].includes(id)?'fabric':PART_GROUP[SPECIMENS[id]!.group]==='insects'?'chitin':['pangolin','house-gecko','python','hawksbill-turtle','snakehead','guppy','mudskipper','shark'].includes(id)?'scales':'tissue';
+    const finish = id==='asian-toad'?'abrasive':['javan-myna','penguin'].includes(id)?'feathers':id==='tree-frog'||id==='dolphin'?'enamel':['plantain-squirrel','fruit-bat'].includes(id)?'fabric':PART_GROUP[SPECIMENS[id]!.group]==='insects'?'chitin':['pangolin','house-gecko','python','hawksbill-turtle','snakehead','guppy','mudskipper','shark'].includes(id)?'scales':'tissue';
     const proxy:Prim={kind:'box',at,size:[2*Math.max(bb.max.x-at[0],at[0]-bb.min.x),bb.max.y-bb.min.y,2*Math.max(bb.max.z-at[2],at[2]-bb.min.z)],color:finish,tint:'#ffffff'};
     parts.push({id,group:PART_GROUP[SPECIMENS[id]!.group]!,mesh:id,primitive:proxy,explode:{dir:[0,1,0],dist:.04},castShadow:false});
     continue;
@@ -191,7 +190,13 @@ const data = {
   sim: SIM,
 };
 
-await writeSculptures(MESH_OUT,sculptures);
+const decodedBounds=await writeSculptures(MESH_OUT,sculptures);
+for(const part of outParts){
+ const b=decodedBounds[part.id];if(!b)continue;
+ const primitive=part.primitive!,home=primitive.at;
+ primitive.at=r3([home[0],(b.min[1]+b.max[1])*.5,home[2]]);
+ primitive.size=r3([2*Math.max(b.max[0]-home[0],home[0]-b.min[0]),b.max[1]-b.min[1],2*Math.max(b.max[2]-home[2],home[2]-b.min[2])]);
+}
 writeFileSync(OUT, `${JSON.stringify(data, null, 1)}\n`);
 console.log(report.join('\n'));
 const ctx = outParts.filter((p) => (p as { context?: boolean }).context).length;

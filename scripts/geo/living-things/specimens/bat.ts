@@ -1,30 +1,36 @@
 /** Lesser short-nosed fruit bat: original surface study after NParks photographs.
  * Four elongated digits carry each membrane, with free thumb and digit-II claws.
  * The short tail stays free of the reduced interfemoral membrane. */
-import { BufferGeometry, Float32BufferAttribute, CatmullRomCurve3, Vector3 } from 'three';
+import { BufferGeometry, Float32BufferAttribute, CatmullRomCurve3, Vector3, Color } from 'three';
 import { mesh, orb, tube, surface, type P } from '../sculpture';
 import { rng, type Model, type Prim } from '../kit';
-const FUR='#76573b',MEMBRANE='#42352c',BONE='#71604e',DARK='#221e1b';
+const FUR='#6b5442',MEMBRANE='#42352c',BONE='#71604e',DARK='#221e1b';
 export function sculptedFruitBat():Model {
  const pieces:Prim[]=[];
- const put=(g:BufferGeometry,tint:string,color='tissue')=>{if(tint===MEMBRANE||tint==='#5d4738')g.userData.twoSided=true;pieces.push(mesh(g,color,tint));};
- const line=(p:P[],r:number[],tint:string,radial=10,n=16)=>put(tube(p,r,1,radial,n),tint);
+ const coat:BufferGeometry[]=[];
+ const put=(g:BufferGeometry,tint:string,color='tissue')=>{
+  if(color==='fabric')coat.push(g);
+  else {const uv=g.getAttribute('uv');if(uv)for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*.0001,uv.getY(i)*.0001);}
+  if(tint===MEMBRANE||tint==='#5d4738')g.userData.twoSided=true;pieces.push(mesh(g,color,tint));};
+ const line=(p:P[],r:number[],tint:string,radial=10,n=16)=>put(tube(p,r,1,radial,n),tint,tint===FUR?'fabric':'tissue');
  // Continuous furry torso, broad shoulders and narrow abdomen; not a capsule.
  put(tube([[0,.006,0],[0,.012,.001],[0,.023,.002],[0,.031,.001],[0,.037,.002]], [.0001,.0038,.0067,.0084,.0040],.8,32,40),FUR,'fabric');
  put(tube([[0,.033,.002],[0,.037,.003],[0,.040,.004]],[.006,.0042,.0045],.9,24,20),FUR,'fabric');
- const headCentres=new CatmullRomCurve3([[-.003,.043],[0,.044],[.004,.0435],[.008,.0428],[.012,.0414],[.0148,.041]].map(([z,y])=>new Vector3(0,y!,z!)));
- const headRadii=new CatmullRomCurve3([[.0001,.0001],[.0048,.0055],[.0062,.0061],[.0045,.0042],[.0030,.0025],[.0020,.0012]].map(([x,y])=>new Vector3(x,y,0)));
+ const headCentres=new CatmullRomCurve3([[-.004,.043],[0,.044],[.004,.044],[.009,.043],[.015,.0417],[.020,.0408],[.021,.0405]].map(([z,y])=>new Vector3(0,y!,z!)));
+ const headRadii=new CatmullRomCurve3([[.0001,.0001],[.0048,.0052],[.0061,.0058],[.0049,.0044],[.0033,.0027],[.0026,.0017],[.0002,.0002]].map(([x,y])=>new Vector3(x,y,0)));
  const head=surface(42,32,(u,v)=>{const c=headCentres.getPoint(u),r=headRadii.getPoint(u),a=-v*Math.PI*2;return [Math.cos(a)*r.x,c.y+Math.sin(a)*r.y,c.z];});
  put(head,FUR,'fabric');
- put(orb([0,.041,.0143],[.0027,.00165,.0012],20,12),'#453a34');
+ put(orb([0,.0409,.0200],[.00265,.0017,.00125],20,12),'#453a34');
+ put(tube([[0,.0385,.009],[0,.0389,.014],[0,.0392,.019]],[.0027,.0024,.0018],.45,20,22),FUR,'fabric');
  for(const side of [-1,1]){
-  put(orb([side*.0013,.0415,.0150],[.0006,.00042,.00020],12,8),DARK,'eye');
-  put(orb([side*.00465,.0448,.0078],[.00115,.0013,.0007],24,16),DARK,'eye');
-  put(orb([side*.0048,.0452,.0084],[.00028,.00028,.00018],12,8),'#d6c6a3','eye');
+  line([[side*.0015,.0396,.020],[side*.003,.0395,.015],[side*.0041,.040,.010]],[.00011,.00014,.00005],DARK,6,16);
+  put(orb([side*.00135,.04145,.02095],[.0006,.00042,.00020],12,8),DARK,'eye');
+  put(orb([side*.0049,.0445,.0091],[.00175,.00165,.00135],24,16),DARK,'eye');
+  put(orb([side*.0051,.0452,.01025],[.00030,.00030,.00020],12,8),'#d6c6a3','eye');
   // Cupped ear pinna, broad rounded tip, pale border. Tragus not a cone.
   const ear=(u:number,v:number):P=>{
-   const w=Math.sin(Math.PI*u)*.0045*(1-.28*u),a=(v-.5)*Math.PI;
-   return [side*(.0048+u*.0032+Math.sin(a)*w),.046+u*.008,.0012+Math.cos(a)*w*.56+.0008*Math.sin(Math.PI*u)];
+   const w=Math.sqrt(Math.sin(Math.PI*u))*.0038*(1-.10*u),a=(v-.5)*Math.PI;
+   return [side*(.0048+u*.0018+Math.sin(a)*w),.046+u*.0069,.0012+Math.cos(a)*w*.56+.0008*Math.sin(Math.PI*u)];
   };
   put(surface(20,12,ear),'#5d4738');
   for(const v of [0,1])line(Array.from({length:12},(_,i)=>ear(i/11,v)),Array(12).fill(.00029),'#c8b79a',6,24);
@@ -42,7 +48,7 @@ export function sculptedFruitBat():Model {
   for(let k=0;k<3;k++){
    const A=curves[k]!,B=curves[k+1]!;
    const point=(c:P[],u:number):P=>new CatmullRomCurve3(c.map(p=>new Vector3(...p))).getPoint(u).toArray() as P;
-   put(surface(22,12,(u,v)=>{
+   put(surface(16,8,(u,v)=>{
     // Pull the free trailing edge toward the wrist between finger tips.
     const edge=1-.20*Math.sin(Math.PI*v)*Math.pow(u,3),a=point(A,u*edge),b=point(B,u*edge);
     return a.map((x,j)=>x*(1-v)+b[j]!*v+(j===2?.0017*Math.sin(Math.PI*v)*Math.sin(Math.PI*u)+.00016*Math.sin(u*58+k)*Math.sin(Math.PI*v):0)) as P;
@@ -50,7 +56,7 @@ export function sculptedFruitBat():Model {
   }
   // Plagiopatagium spans fifth digit to the ankle and body flank.
   const ankle:P=[side*.005,.002,-.002],V=curves[3]![2]!;
-  put(surface(20,12,(u,v)=>{
+  put(surface(16,8,(u,v)=>{
    const left: P=[S[0]*(1-u)+ankle[0]*u,S[1]*(1-u)+ankle[1]*u,S[2]*(1-u)+ankle[2]*u];
    const right:P=[W[0]*(1-u)+V[0]*u,W[1]*(1-u)+V[1]*u,W[2]*(1-u)+V[2]*u];
    return [left[0]*(1-v)+right[0]*v,left[1]*(1-v)+right[1]*v+.002*Math.sin(Math.PI*v)*Math.pow(u,2),left[2]*(1-v)+right[2]*v+.0015*Math.sin(Math.PI*u)*Math.sin(Math.PI*v)];
@@ -76,21 +82,35 @@ export function sculptedFruitBat():Model {
   }
  }
  line([[0,.007,-.002],[0,.003,-.004],[0,.001,-.003]],[.0007,.00045,.00008],FUR,10,12);
- // Directional short fur follows torso and cheeks; varied short tapered tufts.
- const random=rng(211),positions:number[]=[],indices:number[]=[];
- for(let i=0;i<1000;i++){
-  const u=random(),a=random()*Math.PI*2,y=.010+u*.026,r=.0035+.0048*Math.sin(u*Math.PI*.72),x=Math.cos(a)*r,z=.001+Math.sin(a)*r*.8;
-  const length=.00065+random()*.0011,offset=positions.length/3,w=.00015;
-  positions.push(x-w,y,z,x+w,y,z,x+Math.cos(a)*length*.35,y-length,z+Math.sin(a)*length*.45);indices.push(offset,offset+1,offset+2);
+ // Even, area-weighted short coat on the actual head, neck, torso and
+ // upper-limb surfaces. Roots are sampled on the skin, never on a proxy shell.
+ const random=rng(211),positions:number[]=[],indices:number[]=[],colours:number[]=[],uvs:number[]=[];
+ const brown=new Color(FUR),mantle=new Color('#a57238'),hairTip=new Color('#a49877');
+ for(const g of coat){
+  const p=g.getAttribute('position'),n=g.getAttribute('normal'),ix=g.index!,skinColors:number[]=[];
+  const coatColour=(q:Vector3)=>{
+   const collar=Math.exp(-Math.pow((q.y-.034)/.005,2))*.80;
+   return brown.clone().lerp(mantle,collar).lerp(new Color('#a29574'),Math.max(0,.021-q.y)*8);
+  };
+  for(let i=0;i<p.count;i++){const c=coatColour(new Vector3().fromBufferAttribute(p,i));skinColors.push(c.r,c.g,c.b);}
+  g.setAttribute('color',new Float32BufferAttribute(skinColors,3));
+  for(let t=0;t<ix.count;t+=3){
+   const ids=[ix.getX(t),ix.getX(t+1),ix.getX(t+2)],a=new Vector3().fromBufferAttribute(p,ids[0]!),b=new Vector3().fromBufferAttribute(p,ids[1]!),c=new Vector3().fromBufferAttribute(p,ids[2]!);
+   const area=b.clone().sub(a).cross(c.clone().sub(a)).length()*.5,count=area/0.0000016;
+   const number=Math.floor(count)+(random()<count%1?1:0);
+   for(let i=0;i<number;i++){
+    const u=Math.sqrt(random()),v=random(),weights=[1-u,u*(1-v),u*v],root=new Vector3(),normal=new Vector3();
+    ids.forEach((id,j)=>{root.addScaledVector(new Vector3().fromBufferAttribute(p,id),weights[j]!);normal.addScaledVector(new Vector3().fromBufferAttribute(n,id),weights[j]!);});normal.normalize();
+    // Muzzle tip stays nearly bare, cheeks and crown have shorter fur.
+    const face=root.z>.010,length=(.00024+random()*.00028)*(face?.60:1),w=.000035+random()*.000025;
+    const groom=new Vector3(0,-.65,root.y>.039?-.8:0).addScaledVector(normal,.45).normalize();
+    const tangent=new Vector3().crossVectors(normal,groom).normalize();if(tangent.lengthSq()<.1)tangent.set(1,0,0);
+    const end=root.clone().addScaledVector(groom,length),off=positions.length/3,col=coatColour(root);
+    const points=[root.clone().addScaledVector(tangent,-w),root.clone().addScaledVector(tangent,w),end];
+    points.forEach((q,j)=>{positions.push(...q.toArray());const c=col.clone().lerp(hairTip,j===2?.25:0);colours.push(c.r,c.g,c.b);uvs.push(q.y/.012,q.x/.012);});indices.push(off,off+1,off+2);
+   }
+  }
  }
-
- for(let i=0;i<250;i++){
-  const u=.15+random()*.52,a=random()*Math.PI*2,c=headCentres.getPoint(u),r=headRadii.getPoint(u),x=Math.cos(a)*r.x,y=c.y+Math.sin(a)*r.y,z=c.z;
-  const off=positions.length/3,w=.00010,len=.00045+random()*.0005;
-  positions.push(x-w,y,z,x+w,y,z,x+Math.cos(a)*len*.25,y-len*.3,z-len);indices.push(off,off+1,off+2);
- }
- const fur=new BufferGeometry();fur.setAttribute('position',new Float32BufferAttribute(positions,3));fur.setIndex(indices);fur.computeVertexNormals();fur.userData.twoSided=true;put(fur,'#846546','fabric');
- // Short nape collar is warmer than the belly coat.
-
+ const fur=new BufferGeometry();fur.setAttribute('position',new Float32BufferAttribute(positions,3));fur.setAttribute('color',new Float32BufferAttribute(colours,3));fur.setAttribute('uv',new Float32BufferAttribute(uvs,2));fur.setIndex(indices);fur.computeVertexNormals();fur.userData.twoSided=true;pieces.push(mesh(fur,'fabric',FUR));
  return {primitive:pieces[0]!,extra:pieces.slice(1)};
 }

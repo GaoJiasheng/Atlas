@@ -132,3 +132,26 @@ Existing species sources remain the factual basis for classification, counts,
 status and teaching text. Feather, hair, scale, frond and gill sampling counts
 are modelling choices, not additional teaching measurements. The microscope
 colony counts, two sorus-bearing fern fronds and three rhu fruits are retained.
+
+### Polish 2026-11-03 — round 3 skin, coat and UV references
+
+Original procedural meshes and generated finish fields only; the existing Atlas
+MIT attribution remains embedded in the GLB. No photograph, scan, downloaded mesh,
+or external texture is included. Development photographs were inspected locally;
+photographic copyrights below do not license redistribution in the application.
+No EN/ZH teaching text or numerical facts changed in this pass.
+
+| Reference | Attribution / rights | Modelling use |
+| --- | --- | --- |
+| [NParks: Cynopterus brachyotis](https://www.nparks.gov.sg/florafaunaweb/fauna/5/6/562) | Mendis Tan / NParks photograph; copyright retained, development reference only | Tapered dog-like muzzle, dark eyes, pale ear rims, short brown fur and warmer collar; description distinguishes reddish male/yellowish female collar |
+| [AntanO bat close-up](https://commons.wikimedia.org/wiki/File:Close-up_of_Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).JPG) | AntanO, CC BY-SA 3.0; same prior reference | Existing close-view cranial/ear reference retained; fresh raw download was denied (403), so the inspected NParks photograph and prior recorded study support this pass |
+| [NParks: Duttaphrynus melanostictus](https://www.nparks.gov.sg/florafaunaweb/fauna/8/6/865) | Colleen Goh and Holly Siow photographs; copyright retained, development reference only | Actually viewed dorsal/lateral wart distribution, dark tips, elongated glands behind the eyes and squat silhouette |
+| [USGS: Southeast Asian toad](https://nas.er.usgs.gov/queries/FactSheet.aspx?SpeciesID=2867) | US Geological Survey species profile | Corroborates black-tipped warts and prominent kidney-shaped parotoid glands |
+| [NParks: Reticulated python](https://biodiversitysg.nparks.gov.sg/our-biodiversity/reptiles/snakes/reticulated-python/) | NParks identification description; existing S27 | Geometric but irregular net pattern with brown, black and gold tones |
+| [Biodiversity of Singapore: Malayopython reticulatus](https://singapore.biodiversity.online/chordata-reptilia-squamata-pythonidae-malayopython-reticulatus) | Mary-Ruth Low, all rights reserved; development reference only | Actually viewed Singapore specimen/head study: irregular dorsal reticulation, pale lateral centres, head stripe, jaw/pit arrangement and amber slit-pupil eyes |
+| [Scientific American: Snake steak article photograph](https://www.scientificamerican.com/article/snake-steak-could-be-a-climate-friendly-source-of-protein/) | Getty Images photograph; copyright retained, development reference only | Actually viewed close-up of reticulation, scale overlap, cheek/snout proportion and labial pits; article's non-modelling claims are not used |
+
+Round-3 GLB: 1,489,796 bytes; 179,787 sculpted triangles, 227,351 triangles including
+all native scene pieces before visibility. The exact runtime procedural finish
+maps are generated locally by `textures.ts`; UVs, colour fields and all added
+geometry are original code in this topic's generator directory.

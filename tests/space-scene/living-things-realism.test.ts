@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { describe,it,expect } from 'vitest';
-import { Box3, Mesh } from 'three';
+import { Box3, BufferGeometry, Float32BufferAttribute, Mesh } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { partsFileBase } from '../../src/engines/space-scene/schema';
@@ -35,6 +35,28 @@ describe('living-things sculpture anatomy and fitting',()=>{
     const loaded=mesh as unknown as Mesh,g=loaded.geometry;
     expect(g.hasAttribute('color'),part.id).toBe(true);
     expect(g.hasAttribute('normal'),part.id).toBe(true);
+    expect(g.hasAttribute('uv'),part.id).toBe(true);
+    const uv=g.getAttribute('uv');
+    expect(uv.count,part.id).toBe(g.getAttribute('position').count);
+    let minU=Infinity,maxU=-Infinity,minV=Infinity,maxV=-Infinity,finiteUv=true;
+    for(let i=0;i<uv.count;i++){
+     const u=uv.getX(i),v=uv.getY(i);finiteUv &&= Number.isFinite(u)&&Number.isFinite(v);
+     minU=Math.min(minU,u);maxU=Math.max(maxU,u);minV=Math.min(minV,v);maxV=Math.max(maxV,v);
+    }
+    expect(finiteUv,`${part.id} finite UVs`).toBe(true);
+    expect(maxU-minU,`${part.id} U range`).toBeGreaterThan(.001);
+    expect(maxV-minV,`${part.id} V range`).toBeGreaterThan(.001);
+    // A two-axis range alone also passes collinear UVs, which cannot give a
+    // tangent-space finish. Check triangles spread throughout each sculpture.
+    const triangleCount=(g.index?.count??uv.count)/3;
+    let mappedSamples=0;
+    for(let sample=0;sample<64;sample++){
+     const start=Math.floor(sample*triangleCount/64)*3;
+     const a=g.index?.getX(start)??start,b=g.index?.getX(start+1)??start+1,c=g.index?.getX(start+2)??start+2;
+     const area=Math.abs((uv.getX(b)-uv.getX(a))*(uv.getY(c)-uv.getY(a))-(uv.getY(b)-uv.getY(a))*(uv.getX(c)-uv.getX(a)));
+     if(area>1e-9)mappedSamples++;
+    }
+    expect(mappedSamples,`${part.id} sampled UV triangle area`).toBeGreaterThan(0);
     total+=(g.index?.count??g.getAttribute('position').count)/3;
     const box=new Box3().setFromObject(loaded),envelope=partBounds(part)!;
     expect(box.min.y,part.id).toBeCloseTo(.015,5);
@@ -50,6 +72,22 @@ describe('living-things sculpture anatomy and fitting',()=>{
   expect(file.parts.filter(p=>p.mesh)).toHaveLength(28);
   expect(total).toBeLessThanOrEqual(300_000);
   gltf.scene.traverse(node=>{if(node instanceof Mesh){node.geometry.dispose();for(const m of Array.isArray(node.material)?node.material:[node.material])m.dispose();}});
+ });
+ it('preserves authored UV charts through merge, placement and back-face duplication',()=>{
+  const source=new BufferGeometry();
+  source.setAttribute('position',new Float32BufferAttribute([0,0,0,1,0,0,0,1,0],3));
+  source.setAttribute('normal',new Float32BufferAttribute([0,0,1,0,0,1,0,0,1],3));
+  const authored=[.125,.25,3.5,.25,.125,1.75];
+  source.setAttribute('uv',new Float32BufferAttribute(authored,2));source.setIndex([0,1,2]);source.userData.twoSided=true;
+  const model={primitive:{kind:'__mesh',at:[2,3,4] as [number,number,number],geometry:source,color:'tissue'},extra:[]};
+  const merged=modelGeometry(model),uv=merged.getAttribute('uv');
+  expect(uv.count).toBe(6);
+  expect(Array.from(uv.array)).toEqual([...authored,...authored]);
+  expect(Array.from(source.getAttribute('uv').array)).toEqual(authored);
+  expect(merged.getAttribute('position').getX(0)).toBe(2);
+  expect(merged.getAttribute('position').getY(0)).toBe(3);
+  expect(merged.getAttribute('position').getZ(0)).toBe(4);
+  merged.dispose();source.dispose();
  });
  it('preserves the fossils bird API and exact legacy default geometry',()=>{
   expect(createHash('sha256').update(JSON.stringify(buildBird())).digest('hex')).toBe('8e2960eed6432881aff0fe7c34fde26b6c852d5a527eb2b95b91e106c5642d2d');

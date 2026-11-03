@@ -1,6 +1,7 @@
 /** Build-time sculpture surfaces. No runtime dependency; meshes are baked locally. */
 import { BufferGeometry, Float32BufferAttribute, CatmullRomCurve3, Vector3, SphereGeometry } from 'three';
 import type { Prim } from './kit';
+import { gridUV } from './uv';
 export type P = [number,number,number];
 export const mesh = (geometry:BufferGeometry,color:string,tint?:string):Prim => ({kind:'__mesh', at:[0,0,0], geometry, color, ...(tint?{tint}:{})});
 export function surface(n:number,m:number,fn:(u:number,v:number)=>P,closed=false):BufferGeometry {
@@ -9,7 +10,7 @@ export function surface(n:number,m:number,fn:(u:number,v:number)=>P,closed=false
  for(let i=0;i<n;i++)for(let j=0;j<m;j++){
   const a=i*(m+1)+j,b=a+m+1;ix.push(a,b,a+1,b,b+1,a+1);
  }
- const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();
+ const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();gridUV(g,n,m);
  if(closed){ // Weld periodic seam normals without collapsing the UV-like parameter grid.
   const norm=g.getAttribute('normal');for(let i=0;i<=n;i++){
    const a=i*(m+1),b=a+m,v=new Vector3().fromBufferAttribute(norm,a).add(new Vector3().fromBufferAttribute(norm,b)).normalize();norm.setXYZ(a,v.x,v.y,v.z);norm.setXYZ(b,v.x,v.y,v.z);

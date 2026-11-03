@@ -9,33 +9,35 @@ import {partSchema} from '../../../src/engines/space-scene/schema';
 import {partPieces} from '../../../src/engines/space-scene/stages/model3d/geometry';
 import {partMaterialSlots} from '../../../src/engines/space-scene/lib/parts';
 await MeshoptDecoder.ready;
-const staged=process.argv.includes('--staging');
-const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(staged?'/tmp/atlas-living-polish/living-things.glb':'public/models/living-things.glb');
+const staged=process.argv.includes('--staging'),before=process.argv.includes('--before');
+const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(before?'/tmp/living-round3-before.glb':staged?'/tmp/atlas-living-polish/living-things.glb':'public/models/living-things.glb');
 await doc.transform(dequantize());
-const requested=process.argv.slice(2).filter(a=>a!=='--staging'),output:Record<string,unknown>={};
-const data=JSON.parse(readFileSync(staged?'/tmp/atlas-living-polish/parts.json':'src/content/topics/living-things/data/parts.json','utf8'));
+const requested=process.argv.slice(2).filter(a=>a!=='--staging'&&a!=='--before'),output:Record<string,unknown>={};
+const data=JSON.parse(readFileSync(before?'/tmp/living-round3-before.json':staged?'/tmp/atlas-living-polish/parts.json':'src/content/topics/living-things/data/parts.json','utf8'));
 const root=doc.getRoot();
 for(const node of root.listNodes()){
  const id=node.getName();if(requested.length&&!requested.includes(id))continue;
  const g=node.getMesh()!.listPrimitives()[0]!,p=g.getAttribute('POSITION')!,n=g.getAttribute('NORMAL')!,c=g.getAttribute('COLOR_0')!,ix=g.getIndices()!;
  const world=new Matrix4().fromArray(node.getWorldMatrix()),nm=new Matrix3().getNormalMatrix(world);
- const triangles:number[][]=[],colours:number[][]=[],normals:number[][]=[];
- for(let i=0;i<ix.getCount();i+=3){const pp:number[]=[],cc:number[]=[],nn:number[]=[];for(let j=0;j<3;j++){
+ const triangles:number[][]=[],colours:number[][]=[],normals:number[][]=[],uvs:number[][]=[];
+ const uv=g.getAttribute('TEXCOORD_0');
+ for(let i=0;i<ix.getCount();i+=3){const pp:number[]=[],cc:number[]=[],nn:number[]=[],uu:number[]=[];for(let j=0;j<3;j++){
   const k=ix.getScalar(i+j),a=p.getElement(k,[0,0,0]),b=n.getElement(k,[0,0,0]),rgb=c.getElement(k,[0,0,0]);
   const pos=new Vector3(a[0],a[1],a[2]).applyMatrix4(world),nor=new Vector3(b[0],b[1],b[2]).applyMatrix3(nm).normalize();
-  pp.push(...pos.toArray());nn.push(...nor.toArray());cc.push(...rgb);
- }triangles.push(pp);colours.push(cc);normals.push(nn);}
- output[id]={triangles,colours,normals};
+  pp.push(...pos.toArray());nn.push(...nor.toArray());cc.push(...rgb);uu.push(...(uv?.getElement(k,[0,0])??[0,0]));
+ }triangles.push(pp);colours.push(cc);normals.push(nn);uvs.push(uu);}
+ const family=data.parts.find((p:{id:string})=>p.id===id)!.primitive.color;
+ output[id]={triangles,colours,normals,uvs,family};
 }
 // Dedicated close-ups use the actual decoded surface, with no replacement geometry.
 for(const [id,name,low,high]of [
  ['javan-myna','myna-feet',0,.35],['penguin','penguin-feet',0,.20],
- ['fruit-bat','bat-head',.58,1],['mushroom','mushroom-gills',.48,.80],
+ ['fruit-bat','bat-head',.70,1],['fruit-bat','bat-coat',.24,.76],['python','python-belly',0,1],['asian-toad','toad-head',.5,1],['mushroom','mushroom-gills',.48,.80],
 ]as const){
- const source=output[id] as {triangles:number[][];colours:number[][];normals:number[][]}|undefined;if(!source)continue;
+ const source=output[id] as {triangles:number[][];colours:number[][];normals:number[][];uvs:number[][];family:string}|undefined;if(!source)continue;
  let min=Infinity,max=-Infinity;for(const t of source.triangles)for(const i of [1,4,7]){min=Math.min(min,t[i]!);max=Math.max(max,t[i]!);}
- const chosen={triangles:[]as number[][],colours:[]as number[][],normals:[]as number[][]};
- source.triangles.forEach((t,i)=>{const y=(t[1]!+t[4]!+t[7]!)/3;if(y>=min+(max-min)*low&&y<=min+(max-min)*high)for(const key of ['triangles','colours','normals']as const)chosen[key].push(source[key][i]!);});
+ const chosen={triangles:[]as number[][],colours:[]as number[][],normals:[]as number[][],uvs:[]as number[][],family:source.family};
+ source.triangles.forEach((t,i)=>{const y=(t[1]!+t[4]!+t[7]!)/3;if(y>=min+(max-min)*low&&y<=min+(max-min)*high)for(const key of ['triangles','colours','normals','uvs']as const)chosen[key].push(source[key][i]!);});
  output[name]=chosen;
 }
 // Before/after source for the unchanged counters and optional full-scene framing.

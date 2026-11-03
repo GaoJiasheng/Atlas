@@ -1,6 +1,7 @@
 /** Build-time botanical surfaces. Organic ribbons are curved in three dimensions;
  * they are baked to the topic's static mesh, never interpreted by the renderer. */
 import { BufferGeometry, Float32BufferAttribute, Color, Shape, ShapeUtils, Vector2 } from 'three';
+import { gridUV } from '../uv';
 import { add, cross, mul, norm, sub, type Prim, type V3, type V2 } from '../kit';
 
 export function surface(n: number, m: number, point: (u: number, v: number) => V3, colour?: (u: number, v: number) => string): BufferGeometry {
@@ -17,7 +18,7 @@ export function surface(n: number, m: number, point: (u: number, v: number) => V
   const g = new BufferGeometry();
   g.setAttribute('position', new Float32BufferAttribute(p, 3));
   if (c.length) g.setAttribute('color', new Float32BufferAttribute(c, 3));
-  g.setIndex(index); g.computeVertexNormals();
+  g.setIndex(index); g.computeVertexNormals();gridUV(g,n,m);
   // Polar caps and periodic seams share positions but have separate grid vertices.
   // Average their normals so a radial seam cannot crease an otherwise soft cap.
   const pos=g.getAttribute('position'),normal=g.getAttribute('normal'),seams=new Map<string,number[]>();
@@ -41,9 +42,10 @@ export function flip(g: BufferGeometry): BufferGeometry {
 
 /** Give a leaf or lamella a true fine edge and two independently lit faces. */
 export function shell(g: BufferGeometry, thickness = 0.00012): BufferGeometry {
-  const p=g.getAttribute('position'), normal=g.getAttribute('normal'), colour=g.getAttribute('color');
-  const positions:number[]=[], colors:number[]=[], indices:number[]=[],normals:number[]=[];
+  const p=g.getAttribute('position'), normal=g.getAttribute('normal'), colour=g.getAttribute('color'),uv=g.getAttribute('uv');
+  const positions:number[]=[], colors:number[]=[], indices:number[]=[],normals:number[]=[],uvs:number[]=[];
   for(const sign of [1,-1]) for(let i=0;i<p.count;i++) {
+    if(uv)uvs.push(uv.getX(i),uv.getY(i));
     positions.push(p.getX(i)+normal.getX(i)*thickness*0.5*sign,p.getY(i)+normal.getY(i)*thickness*0.5*sign,p.getZ(i)+normal.getZ(i)*thickness*0.5*sign);
     normals.push(normal.getX(i)*sign,normal.getY(i)*sign,normal.getZ(i)*sign);
     if(colour) colors.push(colour.getX(i),colour.getY(i),colour.getZ(i));
@@ -53,7 +55,7 @@ export function shell(g: BufferGeometry, thickness = 0.00012): BufferGeometry {
   for(let i=0;i<src.length;i+=3){const a=src[i]!,b=src[i+1]!,c=src[i+2]!;indices.push(a,b,c,c+p.count,b+p.count,a+p.count);
     for(const [x,y] of [[a,b],[b,c],[c,a]]){const key=Math.min(x!,y!)+','+Math.max(x!,y!);const old=edges.get(key);edges.set(key,[x!,y!,(old?.[2]??0)+1]);}}
   for(const [a,b,count] of edges.values()) if(count===1) indices.push(a,b+p.count,b,a,a+p.count,b+p.count);
-  const out=new BufferGeometry();out.setAttribute('position',new Float32BufferAttribute(positions,3));if(colors.length)out.setAttribute('color',new Float32BufferAttribute(colors,3));out.setIndex(indices);out.setAttribute('normal',new Float32BufferAttribute(normals,3));return out;
+  const out=new BufferGeometry();out.setAttribute('position',new Float32BufferAttribute(positions,3));if(colors.length)out.setAttribute('color',new Float32BufferAttribute(colors,3));out.setIndex(indices);if(uv)out.setAttribute('uv',new Float32BufferAttribute(uvs,2));out.setAttribute('normal',new Float32BufferAttribute(normals,3));return out;
 }
 
 export const mesh = (geometry: BufferGeometry, color: string, tint: string, at: V3 = [0, 0, 0]): Prim => ({ kind: '__mesh', geometry, color, tint, at });

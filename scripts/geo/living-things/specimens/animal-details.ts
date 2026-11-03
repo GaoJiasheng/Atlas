@@ -8,7 +8,10 @@
  * fisheries.noaa.gov/species/hawksbill-turtle (bill and paired head scales).
  */
 import { BufferGeometry, CatmullRomCurve3, Float32BufferAttribute, SphereGeometry, TubeGeometry, Vector3 } from 'three';
+import { wartyToad } from './toad-skin';
+import { reticulatedSkin } from './python-skin';
 import { foldedLimb } from '../implicit';
+import { gridUV, projectedUV } from '../uv';
 import { tube as sculptTube } from '../sculpture';
 import { modelGeometry } from '../bake';
 import { Color } from 'three';
@@ -23,9 +26,13 @@ const mix = (a: V3, b: V3, t: number): V3 => [a[0] + (b[0] - a[0]) * t, a[1] + (
 class Skin {
   positions: number[] = [];
   indices: number[] = [];
+  uvs: number[] = [];
   add(g: BufferGeometry) {
     const offset = this.positions.length / 3;
     const a = g.getAttribute('position');
+    const chart=g.hasAttribute('uv')?g:projectedUV(g),uv=chart.getAttribute('uv');
+    if(chart!==g){this.add(chart);g.dispose();return;}
+    for(let i=0;i<a.count;i++)this.uvs.push(uv.getX(i),uv.getY(i));
     for (let i = 0; i < a.count; i++) this.positions.push(a.getX(i), a.getY(i), a.getZ(i));
     if (g.index) for (let i = 0; i < g.index.count; i++) this.indices.push(offset + g.index.getX(i));
     else for (let i = 0; i < a.count; i++) this.indices.push(offset + i);
@@ -38,6 +45,8 @@ class Skin {
       const a = offset + i * (m + 1) + j, b = a + m + 1;
       this.indices.push(a, b, a + 1, b, b + 1, a + 1);
     }
+    const chart=new BufferGeometry();chart.setAttribute('position',new Float32BufferAttribute(this.positions.slice(offset*3),3));gridUV(chart,n,m);
+    this.uvs.push(...Array.from(chart.getAttribute('uv').array));chart.dispose();
   }
   tube(points: V3[], radius: number, radial = 6, segments = 8, taper = false) {
     const curve = new CatmullRomCurve3(points.map(v));
@@ -68,6 +77,7 @@ class Skin {
     const g = new BufferGeometry();
     g.setAttribute('position', new Float32BufferAttribute(this.positions, 3));
     g.setIndex(this.indices);
+    g.setAttribute('uv',new Float32BufferAttribute(this.uvs,2));
     g.computeVertexNormals();
     if (twoSided) g.userData.twoSided = true;
     return mesh(g, color, tint);
@@ -150,9 +160,9 @@ function digits(model: Model, kind: 'frog' | 'toad' | 'gecko' | 'squirrel'): Mod
     const eyeY = kind === 'frog' ? 0.0218 : 0.0185, eyeX = kind === 'frog' ? 0.0175 : 0.0192;
     const eyeZ = kind === 'frog' ? 0.0066 : 0.0062, eyeR = kind === 'frog' ? 0.0034 : 0.003;
     const out = new Vector3(0.50, 0.37, side * 0.78).normalize(), horizontal = new Vector3(1,0,0).addScaledVector(out,-out.x).normalize(), vertical = new Vector3().crossVectors(out, horizontal).normalize();
-    iris.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00025 - 0.00105 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00265).addScaledVector(vertical, Math.sin(a) * r * 0.00255)); }, 10, 2);
-    dark.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00031 - 0.00012 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00135).addScaledVector(vertical, Math.sin(a) * r * 0.00039)); }, 10, 2);
-    skin.tube([[eyeX - 0.003, eyeY + 0.001, side * 0.0067], [eyeX, eyeY + 0.003, side * 0.0078], [eyeX + 0.0026, eyeY + 0.0011, side * 0.0068]], 0.00036, 7, 10);
+    iris.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00025 - 0.00105 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00265).addScaledVector(vertical, Math.sin(a) * r * 0.00255)); }, 24, 4);
+    dark.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00031 - 0.00012 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00135).addScaledVector(vertical, Math.sin(a) * r * 0.00039)); }, 24, 4);
+    skin.tube([[eyeX - 0.003, eyeY + 0.001, side * 0.0067], [eyeX, eyeY + 0.003, side * 0.0078], [eyeX + 0.0026, eyeY + 0.0011, side * 0.0068]], 0.00036, 12, 18);
   }
   if (gecko) for (const side of [-1, 1]) {
     const out=new Vector3(.18,.42,side*.89).normalize(),h=new Vector3(1,0,0).addScaledVector(out,-out.x).normalize(),vertical=new Vector3().crossVectors(out,h).normalize();
@@ -431,34 +441,6 @@ function insect(model: Model, id: string): Model {
   return { primitive: model.primitive, extra: [...extra, detail.prim(id === 'spider' ? 'eye' : 'chitin', id === 'grasshopper' ? '#505b2d' : '#1e251d'), light.prim('fabric', '#947556'), joints.prim('chitin', '#6a4a31')] };
 }
 
-function pythonPattern(model: Model): Model {
-  const marks = new Skin(), jaw = new Skin();
-  const random = rng(3131);
-  const points = (model.primitive.path as V3[]).map(p => v(p).add(v(model.primitive.at)));
-  const curve = new CatmullRomCurve3(points), radius = model.primitive.radius as number[];
-  const onSkin = (t: number, angle: number): V3 => {
-    const j = t * (radius.length - 1), k = Math.min(radius.length - 2, Math.floor(j));
-    const r = radius[k]! + (radius[k + 1]! - radius[k]!) * (j - k);
-    const tangent = curve.getTangent(t), side = new Vector3().crossVectors(tangent, new Vector3(0, 1, 0)).normalize();
-    const up = new Vector3().crossVectors(side, tangent).normalize();
-    return pt(curve.getPoint(t).addScaledVector(up, (r + 0.00025) * Math.cos(angle)).addScaledVector(side, (r + 0.00025) * Math.sin(angle)));
-  };
-  for (let i = 0; i < 32; i++) {
-    const t = 0.095 + i * 0.0267 + Math.sin(i * 2.31) * 0.0014, a = Math.sin(i * 1.41) * 0.14, halfT = 0.0106 + random() * 0.003, halfA = 1.12 + random() * 0.24;
-    const corners = [[t - halfT, a], [t - 0.001 + random() * 0.002, a + halfA], [t + halfT, a + (random() - 0.5) * 0.12], [t + 0.001 - random() * 0.002, a - halfA], [t - halfT, a]];
-    // Project every point of each marking onto the curved skin. Connecting a
-    // few corner points by a free-space spline cuts chords through the body.
-    marks.grid((u, w) => {
-      const j = Math.min(3, Math.floor(u * 4)), f = u * 4 - j, p = corners[j]!, q = corners[j + 1]!;
-      const dt = q[0]! - p[0]!, da = q[1]! - p[1]!, length = Math.hypot(dt * 0.3, da * 0.005), width = (w - 0.5) * 0.00046;
-      return onSkin(p[0]! + dt * f + da * 0.005 / length * width / 0.3, p[1]! + da * f - dt * 0.3 / length * width / 0.005);
-    }, 20, 1);
-  }
-  const head = model.extra[0]!.at;
-  for (const side of [-1, 1]) jaw.tube([[head[0] + 0.006, head[1] - 0.0009, head[2] + side * 0.0015], [head[0] + 0.003, head[1] - 0.0017, head[2] + side * 0.0037], [head[0] - 0.002, head[1] - 0.0014, head[2] + side * 0.0034]], 0.00014, 4, 5);
-  return { primitive: model.primitive, extra: [...model.extra, marks.prim('scales', '#46392a'), jaw.prim('eye', '#31291f')] };
-}
-
 /** Called before placement/fitting. Models and their public part ids stay intact. */
 function detailedAnimal(id: string, model: Model): Model {
   if (id === 'tree-frog') return digits(model, 'frog');
@@ -470,7 +452,7 @@ function detailedAnimal(id: string, model: Model): Model {
   if (['snakehead', 'guppy', 'mudskipper', 'shark'].includes(id)) return fins(model, id);
   if (['grasshopper', 'beetle', 'spider'].includes(id)) return insect(model, id);
   if (id === 'dolphin') return { primitive: model.primitive, extra: model.extra.map(p => p.kind === 'extrude' ? sculptFin(p) : p) };
-  if (id === 'python') return pythonPattern(model);
+  if (id === 'python') return reticulatedSkin(model);
   return model;
 }
 
@@ -512,5 +494,6 @@ export function polishAnimal(id: string, model: Model): Model {
     const g=sculptTube(path,[...rs,r*.05],1,20,32);
     return mesh(g,p.color as string,p.tint as string);
   };
-  return { primitive: detailed.primitive, extra: detailed.extra.filter(p => p.kind !== '__mesh' || (p.geometry as BufferGeometry).getAttribute('position').count > 0).map(smoothLimb) };
+  const result={ primitive: detailed.primitive, extra: detailed.extra.filter(p => p.kind !== '__mesh' || (p.geometry as BufferGeometry).getAttribute('position').count > 0).map(smoothLimb) };
+  return id==='asian-toad'?wartyToad(result):result;
 }
