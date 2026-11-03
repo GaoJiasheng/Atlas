@@ -69,6 +69,7 @@ import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runti
 import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, fadePartMaterial, type PartStyle, type PartUniforms } from './materials';
 import type { FibreMeasure, GltfSurface } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
+import { applyVisibilityFlags, visibilityBaseOpacity } from './visibilityFlags';
 import { updateSkinAnchor } from './skinAnchor';
 import type { ShapePiece } from './geometry';
 import type { SimSettle } from '../../sim-schema';
@@ -172,6 +173,8 @@ export interface PartNodeProps {
   /** One style per material slot (`partMaterialSlots`); slot 0 is the part's own material. */
   styles: readonly PartStyle[];
   display: PartDisplay;
+  /** A simulation filter gates visibility, retaining the underlying opacity/material. */
+  instantHidden?: boolean;
   animations: readonly PartAnimation[];
   /** The pose this part eases to (rest when the pose has no entry for it). */
   pose: PartTransform;
@@ -651,9 +654,19 @@ export function PartNode(props: PartNodeProps) {
   }, [shownCopies, copies, shape, runtime, props.fillBridge, part.id]);
 
 
+  // Commit a binary simulation filter before LabelProbe's next frame. Hidden
+  // modules leave the occluder list immediately; their buffers and opaque
+  // material remain unchanged for restoration. Layer/aside fades still run.
+  useLayoutEffect(() => {
+    const m = motion.current;
+    const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown);
+    const changed = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, props.castShadow && shown && m.fade > .6);
+    if (changed) { runtime.shadowDirty = true; props.fillBridge?.invalidate(); }
+  }, [props.instantHidden, display.visible, props.castShadow, props.fill, props.fillBridge, handle, runtime]);
+
   // Hidden, faint and context parts do not take part in picking (clicks pass through).
   const pickable = display.visible && display.selectable;
-  useEffect(() => {
+  useLayoutEffect(() => {
     for (const o of pieces.current.values()) {
       if (o instanceof LineSegments) continue;
       const own =
@@ -722,13 +735,13 @@ export function PartNode(props: PartNodeProps) {
     }
 
     // Fade (a part being put aside keeps its look until the aside fade takes it).
-    const targetBase = display.visible || display.hidden ? display.opacity : 0;
+    const targetBase = visibilityBaseOpacity(display, props.instantHidden);
     m.base = snap ? targetBase : damp(m.base, targetBase, FADE_RATE, dt);
     if (Math.abs(m.base - targetBase) < 0.002) m.base = targetBase;
     const prevFade = m.fade;
     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));
     const targetFade = display.hidden ? 0 : targetBase;
-    const shown = m.fade > 0.004 && (!fill || fm.shown);
+    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown);
     if (fill && props.fillBridge) {
       const reading = props.fillBridge.fills.get(part.id);
       const volume = fm.shown ? fm.volume : 0;
@@ -740,20 +753,15 @@ export function PartNode(props: PartNodeProps) {
       (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
     });
     if (lineMat) lineMat.opacity = m.fade * LINE_OPACITY;
-    const cast = props.castShadow && m.fade > 0.6;
-    for (const o of pieces.current.values()) {
-      o.visible = shown;
-      o.castShadow = cast && !(o instanceof LineSegments);
-    }
+    const cast = props.castShadow && shown && m.fade > 0.6;
+    const visibilityChanged = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, cast);
     if (cast !== m.cast || (props.castShadow && prevFade !== m.fade)) runtime.shadowDirty = true;
     m.cast = cast;
     // See-through families (membrane, glass) never hide what is behind them from the labels.
     handle.fade = m.fade * (shape.surface?.source.transparent ? 0.55 : style.look.opacity);
-    const nowVisible = shown && display.visible;
     // The label probe reads handles before this node in a frame: a snapped change (load, deep link)
     // needs one more frame, or its anchor keeps the old visibility and its label never appears.
-    if (handle.visible !== nowVisible) keepAnimating(state.invalidate);
-    handle.visible = nowVisible;
+    if (visibilityChanged) keepAnimating(state.invalidate);
 
     // Selection edge (hover: weaker).
     const selTarget = display.selected ? 1 : props.hovered && display.visible ? 0.45 : 0;

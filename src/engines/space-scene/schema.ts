@@ -932,6 +932,8 @@ export const viewsSchema = z
     assembled: viewPreset.optional(),
     /** Main-light shadows, contact shadow only, or neither. */
     shadows: z.enum(['auto', 'contact', 'none']).optional(),
+    /** Binary try-it filters can retain opaque materials and toggle draw/pick flags immediately. */
+    simVisibility: z.enum(['fade', 'instant']).optional(),
     xray: viewPreset.optional(),
     exploded: viewPreset.optional(),
     isolate: viewPreset.optional(),

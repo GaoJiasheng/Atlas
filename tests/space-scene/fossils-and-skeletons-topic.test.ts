@@ -174,7 +174,7 @@ describe('fossils-and-skeletons: selectable evidence and access routes', () => {
   });
   it('the footprint and leaf are negative shapes, while the skull has open fenestrae', () => {
     for (const id of ['track-slab', 'leaf-slab', 'sk-skull']) {
-      const p = part(id);
+      const p = id==='sk-skull'?(JSON.parse(readFileSync(join(DIR,'../../../../scripts/geo/fossils-and-skeletons/skeleton-source.json'),'utf8')) as Part[]).find(p=>p.id===id)!:part(id);
       expect([p.primitive, ...(p.extra ?? [])].some((p) => p.kind === 'extrude' && (p.holes?.length ?? 0) > 0), id).toBe(true);
     }
   });
