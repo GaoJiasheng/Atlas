@@ -1,0 +1,591 @@
+{
+  "kind": "Conservative visible triangle bound before frustum/sim culling; not GPU statistics",
+  "max": {
+    "before": 113088,
+    "live": 219008,
+    "proposed": 219008
+  },
+  "sumAllParts": {
+    "before": 433218,
+    "live": 550818,
+    "proposed": 550818
+  },
+  "frames": [
+    {
+      "chapter": "reading-a-model",
+      "beat": 1,
+      "before": 55200,
+      "live": 219008,
+      "proposed": 219008
+    },
+    {
+      "chapter": "reading-a-model",
+      "beat": 2,
+      "before": 24576,
+      "live": 171264,
+      "proposed": 171264
+    },
+    {
+      "chapter": "reading-a-model",
+      "beat": 3,
+      "before": 45600,
+      "live": 167936,
+      "proposed": 167936
+    },
+    {
+      "chapter": "reading-a-model",
+      "beat": 4,
+      "before": 55200,
+      "live": 219008,
+      "proposed": 219008
+    },
+    {
+      "chapter": "our-star",
+      "beat": 1,
+      "before": 2976,
+      "live": 20096,
+      "proposed": 20096
+    },
+    {
+      "chapter": "our-star",
+      "beat": 2,
+      "before": 23904,
+      "live": 47072,
+      "proposed": 47072
+    },
+    {
+      "chapter": "our-star",
+      "beat": 3,
+      "before": 4558,
+      "live": 4558,
+      "proposed": 4558
+    },
+    {
+      "chapter": "our-star",
+      "beat": 4,
+      "before": 55200,
+      "live": 219008,
+      "proposed": 219008
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 1,
+      "before": 55200,
+      "live": 219008,
+      "proposed": 219008
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 2,
+      "before": 11904,
+      "live": 64512,
+      "proposed": 64512
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 3,
+      "before": 12672,
+      "live": 106752,
+      "proposed": 106752
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 4,
+      "before": 24576,
+      "live": 171264,
+      "proposed": 171264
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 5,
+      "before": 45600,
+      "live": 167936,
+      "proposed": 167936
+    },
+    {
+      "chapter": "eight-worlds",
+      "beat": 6,
+      "before": 55200,
+      "live": 219008,
+      "proposed": 219008
+    },
+    {
+      "chapter": "smaller-companions",
+      "beat": 1,
+      "before": 9408,
+      "live": 21120,
+      "proposed": 21120
+    },
+    {
+      "chapter": "smaller-companions",
+      "beat": 2,
+      "before": 113088,
+      "live": 18336,
+      "proposed": 18336
+    },
+    {
+      "chapter": "smaller-companions",
+      "beat": 3,
+      "before": 8928,
+      "live": 30080,
+      "proposed": 30080
+    },
+    {
+      "chapter": "smaller-companions",
+      "beat": 4,
+      "before": 17536,
+      "live": 36224,
+      "proposed": 36224
+    },
+    {
+      "chapter": "smaller-companions",
+      "beat": 5,
+      "before": 7212,
+      "live": 13260,
+      "proposed": 13260
+    },
+    {
+      "chapter": "through-the-air",
+      "beat": 1,
+      "before": 112612,
+      "live": 112612,
+      "proposed": 112612
+    },
+    {
+      "chapter": "through-the-air",
+      "beat": 2,
+      "before": 112612,
+      "live": 112612,
+      "proposed": 112612
+    },
+    {
+      "chapter": "through-the-air",
+      "beat": 3,
+      "before": 112612,
+      "live": 112612,
+      "proposed": 112612
+    },
+    {
+      "chapter": "through-the-air",
+      "beat": 4,
+      "before": 112612,
+      "live": 112612,
+      "proposed": 112612
+    },
+    {
+      "chapter": "through-the-air",
+      "beat": 5,
+      "before": 112612,
+      "live": 112612,
+      "proposed": 112612
+    },
+    {
+      "chapter": "a-turning-viewpoint",
+      "beat": 1,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "a-turning-viewpoint",
+      "beat": 2,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "a-turning-viewpoint",
+      "beat": 3,
+      "before": 17088,
+      "live": 23136,
+      "proposed": 23136
+    },
+    {
+      "chapter": "a-turning-viewpoint",
+      "beat": 4,
+      "before": 11136,
+      "live": 11136,
+      "proposed": 11136
+    },
+    {
+      "chapter": "a-turning-viewpoint",
+      "beat": 5,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 1,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 2,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 3,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 4,
+      "before": 14112,
+      "live": 14112,
+      "proposed": 14112
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 5,
+      "before": 11136,
+      "live": 11136,
+      "proposed": 11136
+    },
+    {
+      "chapter": "singapore-star-patterns",
+      "beat": 6,
+      "before": 5952,
+      "live": 5952,
+      "proposed": 5952
+    },
+    {
+      "chapter": "beyond-the-planets",
+      "beat": 1,
+      "before": 17856,
+      "live": 17856,
+      "proposed": 17856
+    },
+    {
+      "chapter": "beyond-the-planets",
+      "beat": 2,
+      "before": 17856,
+      "live": 17856,
+      "proposed": 17856
+    },
+    {
+      "chapter": "beyond-the-planets",
+      "beat": 3,
+      "before": 20832,
+      "live": 20832,
+      "proposed": 20832
+    },
+    {
+      "chapter": "beyond-the-planets",
+      "beat": 4,
+      "before": 29988,
+      "live": 29988,
+      "proposed": 29988
+    },
+    {
+      "chapter": "beyond-the-planets",
+      "beat": 5,
+      "before": 29988,
+      "live": 29988,
+      "proposed": 29988
+    }
+  ],
+  "parts": [
+    {
+      "id": "sun",
+      "before": 2976,
+      "live": 20096,
+      "proposed": 20096
+    },
+    {
+      "id": "mercury",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "venus",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "earth",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "mars",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "jupiter",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "saturn",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "uranus",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "neptune",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "saturn-rings",
+      "before": 768,
+      "live": 42240,
+      "proposed": 42240
+    },
+    {
+      "id": "orbit-tracks",
+      "before": 27648,
+      "live": 27648,
+      "proposed": 27648
+    },
+    {
+      "id": "scale-ruler",
+      "before": 18816,
+      "live": 18816,
+      "proposed": 18816
+    },
+    {
+      "id": "moon-parent",
+      "before": 2976,
+      "live": 9024,
+      "proposed": 9024
+    },
+    {
+      "id": "moon-demo",
+      "before": 6432,
+      "live": 12096,
+      "proposed": 12096
+    },
+    {
+      "id": "asteroid-specimen",
+      "before": 2976,
+      "live": 4992,
+      "proposed": 4992
+    },
+    {
+      "id": "asteroid-belt",
+      "before": 107136,
+      "live": 10368,
+      "proposed": 10368
+    },
+    {
+      "id": "comet-sun",
+      "before": 2976,
+      "live": 20096,
+      "proposed": 20096
+    },
+    {
+      "id": "comet-nucleus",
+      "before": 2976,
+      "live": 4992,
+      "proposed": 4992
+    },
+    {
+      "id": "comet-coma",
+      "before": 2976,
+      "live": 4992,
+      "proposed": 4992
+    },
+    {
+      "id": "ion-tail",
+      "before": 7200,
+      "live": 3072,
+      "proposed": 3072
+    },
+    {
+      "id": "dust-tail",
+      "before": 1408,
+      "live": 3072,
+      "proposed": 3072
+    },
+    {
+      "id": "meteor-world",
+      "before": 2976,
+      "live": 9024,
+      "proposed": 9024
+    },
+    {
+      "id": "atmosphere-shell",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "meteor-trail",
+      "before": 1260,
+      "live": 1260,
+      "proposed": 1260
+    },
+    {
+      "id": "pluto",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "sun-cut-shell",
+      "before": 1582,
+      "live": 1582,
+      "proposed": 1582
+    },
+    {
+      "id": "sun-core",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "star-source",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "disc-source",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "air-column",
+      "before": 4,
+      "live": 4,
+      "proposed": 4
+    },
+    {
+      "id": "light-rays",
+      "before": 17280,
+      "live": 17280,
+      "proposed": 17280
+    },
+    {
+      "id": "disc-rays",
+      "before": 69120,
+      "live": 69120,
+      "proposed": 69120
+    },
+    {
+      "id": "straight-rays",
+      "before": 17280,
+      "live": 17280,
+      "proposed": 17280
+    },
+    {
+      "id": "observer-eye",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "reflecting-world",
+      "before": 2976,
+      "live": 9024,
+      "proposed": 9024
+    },
+    {
+      "id": "reflection-rays",
+      "before": 14976,
+      "live": 14976,
+      "proposed": 14976
+    },
+    {
+      "id": "observer",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "horizon",
+      "before": 5184,
+      "live": 5184,
+      "proposed": 5184
+    },
+    {
+      "id": "sky-stars",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "orion-pattern",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "crux-pattern",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "scorpius-pattern",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "depth-stars",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "earth-viewpoint",
+      "before": 2976,
+      "live": 9024,
+      "proposed": 9024
+    },
+    {
+      "id": "light-ruler",
+      "before": 17856,
+      "live": 17856,
+      "proposed": 17856
+    },
+    {
+      "id": "proxima-marker",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "galaxy-disc",
+      "before": 24036,
+      "live": 24036,
+      "proposed": 24036
+    },
+    {
+      "id": "galaxy-bar",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    },
+    {
+      "id": "sun-location",
+      "before": 2976,
+      "live": 2976,
+      "proposed": 2976
+    }
+  ]
+}
