@@ -59,7 +59,7 @@ const cross = (a: Screen, b: Screen, x: number, y: number) => (b.x - a.x) * (y -
 
 const meshGeometries = new Map<string, BufferGeometry>();
 if (file.model) {
-  const doc = await new NodeIO().read(join(ROOT, 'public', file.model));
+  const doc = await new NodeIO().read(resolve(arg('--model',join(ROOT, 'public', file.model))));
   for (const node of doc.getRoot().listNodes()) {
     const p = node.getMesh()?.listPrimitives()[0]; if (!p) continue;
     const g = new BufferGeometry();
@@ -74,14 +74,21 @@ const ids=(names:string[]) => (p:Part) => names.includes(p.id);
 const cam=(position:number[],target:number[],fov=32)=>({position,target,fov});
 const views = [
   { name:'ear-front', camera:cam([2.1,.8,5.5],[2.0,.0,-.1]), accepts:(p:Part)=>['ear-transfer','ear-receiver'].includes(p.group??'')&&!['basilar-strip','hair-patch','signal-marker'].includes(p.id) },
+  { name:'ear-authored',camera:file.presets?.find(p=>p.id==='ear')?.camera??cam([1.55,1,5.4],[1.65,.02,-.05],30),accepts:(p:Part)=>['ear-transfer','ear-receiver'].includes(p.group??'')&&!['basilar-strip','hair-patch','signal-marker'].includes(p.id) },
   { name:'pinna-front',camera:cam([.8,.05,2.8],[.75,.02,-.10]),accepts:ids(['pinna']) },
+  { name:'pinna-rear',camera:cam([.25,.1,-2.8],[.75,.02,-.10]),accepts:ids(['pinna']) },
+  { name:'lobule-close',camera:cam([.82,-.52,.9],[.80,-.51,-.10],34),accepts:ids(['pinna']) },
+  { name:'ear-proportions',camera:cam([2.10,.30,2.25],[2.12,.10,-.07],30),accepts:ids(['eardrum','malleus','incus','stapes','oval-window','cochlea-shell','balance-context','auditory-nerve']) },
   { name:'pinna-oblique',camera:cam([2.2,.4,2.5],[.78,.02,-.10]),accepts:ids(['pinna','canal']) },
   { name:'ossicles-front',camera:cam([1.98,.13,1.8],[1.97,.12,-.055],30),accepts:ids(['malleus','incus','stapes','oval-window']) },
   { name:'ossicles-oblique',camera:cam([2.8,.65,1.3],[1.97,.10,-.055],30),accepts:ids(['malleus','incus','stapes','oval-window']) },
   { name:'eardrum-canal',camera:cam([2.3,.65,1.6],[1.45,-.09,-.08],30),accepts:ids(['canal','eardrum','malleus','eustachian-tube']) },
-  { name:'labyrinth-front',camera:cam([2.9,.3,2.7],[2.8,.25,-.1],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
-  { name:'labyrinth-oblique',camera:cam([4.4,1.4,2.2],[2.8,.25,-.1],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
-  { name:'labyrinth-top',camera:cam([2.8,3,.7],[2.8,.25,-.1],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
+  { name:'labyrinth-front',camera:cam([2.42,.22,1.35],[2.42,.09,-.08],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
+  { name:'labyrinth-oblique',camera:cam([3.25,.68,1.1],[2.42,.09,-.08],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
+  { name:'labyrinth-top',camera:cam([2.42,1.6,.30],[2.42,.09,-.08],34),accepts:ids(['cochlea-shell','balance-context','oval-window','stapes']) },
+  { name:'hair-cell-study',camera:cam([3.15,-1.2,2.7],[3.15,-1.30,.35],32),accepts:ids(['basilar-strip','hair-patch','signal-marker']) },
+  { name:'hair-cell-oblique',camera:cam([4.3,-.55,2.0],[3.15,-1.30,.35],32),accepts:ids(['basilar-strip','hair-patch','signal-marker']) },
+  { name:'bench-landmarks',camera:cam([-2.05,-2.4,5.9],[-2.05,-2.4,1.3],32),accepts:ids(['object-top','object-bottom','retinal-screen']) },
   { name:'eye-section',camera:cam([-4.3,1.1,4.8],[-2,0,0],28),accepts:(p:Part)=>['eye-front','eye-receiver'].includes(p.group??'')&&!['cornea','vitreous','iris-aperture-large'].includes(p.id) },
   { name:'iris-close',camera:cam([-4.8,.0,.15],[-2.6,0,0],30),accepts:ids(['iris','iris-aperture-small','ciliary-ring']) },
   { name:'lens-close',camera:cam([-3.4,.4,1.3],[-2.47,0,0],35),accepts:ids(['lens','ciliary-ring']) },

@@ -75,3 +75,66 @@ Earlier concurrent gate attempts suffered CPU timing failures and a built-JS-bud
 - **Cochlea section.** The solid coil showed a large hatched cap under the ear cut; the tube is now hollow (0.016 wall), so the cut shows the spiral lumen and modiolus.
 - **Optic nerve.** The nasal offset (root z −0.245) left only a stub behind the sclera on the "optic nerve" beat; the root moved to z −0.20, which keeps it off-axis, visible, and clear of the cut plane.
 - Browser numbers (`pnpm shoot --gpu --perf`, M5 Max, machine load ≈150–200): at most 279,542 drawn triangles (main 65,986), 50–63 fps in every chapter/mode (main 55–63). Software-GL shoots under load time out on this topic; GPU shoots are clean (paper + cinema, 40/40 beats).
+
+## Polish 2026-11-03 · Round 2
+
+### Completed items
+
+1. **Middle/inner-ear proportions.** Calibrated the reconstruction at 0.052 scene units/mm. The cochlea is now **9.16 mm across × 4.70 mm axially**, versus 22.90 × 11.73 mm before. Its spiral, lumen, wall and modiolus share a 0.4 scale about the relocated oval window. The incus and stapes also needed correction: their longest shipped-vertex spans are now approximately **7.05 and 2.97 mm**, versus 10.22 and 5.95 mm; malleus remains **9.03 mm**. Each semicircular loop now spans **6.91 / 6.68 / 6.22 mm**, retaining three perpendicular planes, three ampullae and vestibular insertions. The stapes footplate/window, vestibule, cochlear basal turn, middle-ear wall, auditory nerve and signal route were kept connected. The incus animation pivot follows its resized bone; all animation IDs and teaching movements remain. Anchors derive from the resized geometry. The EAR preset and middle-ear chapter camera were recentered on the smaller assembly; the cochlea view still includes the independent cell inset.
+2. **Soft lobule.** Removed the two cartilage endpoint bumps from the lobule, blended the cartilage relief out above it and rebuilt the free edge with a smooth elliptical thickness profile. Nonuniform radial sampling preserves the rounded edge in close-up. The lobe is one continuous soft pad; the concha, helix, antihelix, meatus and natural asymmetry remain.
+3. **Draw workload and visibility.** Applied offline, normal-aware, error-bounded meshoptimizer decimation to the continuous skin, bones, iris inserts and ciliary body, preserving borders and vertex normals. Removed unused vertices from the shipped buffers. Smooth optical rotations use 48 segments; small tubes use 16–24, with fewer longitudinal samples. Enlarged cell bodies retain 32 profile samples and use 32 rotational stations; the narrow oval window uses 24×20 and tiny markers 20×16 instead of the engine's fixed 48×32 sphere. The nine fine schematic stereocilia retain their paths and endpoints, using four axial divisions and eight radial segments instead of many redundant collinear rings. Existing same-material pieces stay merged, while animated/selectable parts remain separate. Introductory and care beats now explicitly switch layers for eye/ear close-ups; the overview beats still show both organs intentionally.
+
+**Acceptance fixes preserved:** hollow cochlea (scaled wall thickness 0.0064), nasal optic-nerve root at z −0.20, all readability text. A baseline comparison verified identical ordered part IDs, names, summaries, details, spec rows, poses and simulation controls/bindings. **No EN/ZH text changes were needed.** Only the incus pivot and auditory signal coordinates change within animation/flow data. Chapter/beat IDs, counts, teaching numbers and labels remain unchanged.
+
+### References and visual verification
+
+Inspected the existing public-domain Gray 904, 916, 917, 918 and 923 images under `scripts/geo/eyes-and-ears/refs/`, alongside the supplied dimensional brief. Reference provenance and the calibration boundary are recorded in `data/SOURCES.md`. No downloaded mesh or additional asset licence is involved.
+
+CPU renders use the actual shipped GLB and engine geometry builders. Inspected frontal, oblique and superior labyrinth views, frontal/oblique/rear pinna and a dedicated lobule close-up, drum/canal and bone close-ups, the entire ear and a drum–ossicles–cochlea proportion plate. Eye section, iris, lens, cornea and nerve views were also checked after decimation. Iteration 1 still showed cartilage endpoint shading in the lobule; the final blend and rounded edge remove it.
+
+Previews and evidence are in **`/tmp/atlas-eyes-and-ears-round2/`**:
+
+- `before/`, `before-detail/`, `iteration1/`, `after/`: full-size PNGs and triangle-count reports; final images are in `after/`.
+- `comparison.png` and `lobule-comparison.png`: matching before/after overview, pinna, ossicles, iris and lobule; `references.png`: inspected Gray plates.
+- `before-audit.json`, `after-audit.json`: per-part source triangles, all 40 beat visibility sets, conservative draw bounds, dimensions and recorded simplification errors.
+- `baseline/`: unchanged input JSON/GLB for reproducible comparisons.
+
+Reproduce with `pnpm tsx scripts/geo/eyes-and-ears/render-preview.ts --out /tmp/atlas-eyes-and-ears-round2/after` and `pnpm tsx scripts/geo/eyes-and-ears/audit-model.ts`. The preview now accepts `--model <baseline.glb>` in addition to `--input`, so a before render cannot accidentally load the replacement model.
+
+### Before/after triangle counts
+
+| Item | Before | Round 2 |
+|---|---:|---:|
+| Pinna | 80,288 | 24,000 |
+| Canal | 14,912 | 5,998 |
+| Malleus / incus / stapes | 18,072 / 17,248 / 23,720 | 5,000 / 5,000 / 5,000 |
+| Cochlea, lumen and modiolus | 26,016 | 15,440 |
+| Canals, ampullae and vestibule | 23,280 | 10,592 |
+| Pressure tube / partial wall | 13,352 | 6,752 |
+| Cornea / lens | 5,408 / 10,796 | 4,096 / 8,108 |
+| Iris root plus both aperture states | 48,128 | 31,072 |
+| Ciliary apparatus / optic nerve | 13,188 / 5,808 | 8,974 / 3,952 |
+| Ear anatomy without separate cell study | 222,200 | 81,078 |
+| Oval window / signal marker | 2,976 / 2,976 | 960 / 640 |
+| Basilar strip with fixed cell bodies | 8,988 | 6,204 |
+| Schematic hair bundles / optical object markers | 6,840 / 5,952 | 720 / 1,280 |
+| **All stored surfaces, including both iris states** | **339,826** | **155,666** |
+| **Worst authored beat: conservative drawn bound** | **284,622** | **128,604** |
+| **All layers, one iris, both overlays, shadow refresh** | **341,470** | **165,326** |
+| **All geometry including both iris inserts during transitions, overlays and shadow** | **363,486** | **179,326** |
+
+The 339,826 baseline includes Claude's hollow-cochlea acceptance change; the earlier 330,226 report predates that change. Previously measured browser peak was 279,542. The like-for-like offline bound adds the 5,080-triangle shadow refresh to that frame. The new all-layer bound deliberately includes every part, one active iris insert, both study overlays counted with two transparent passes, the shadow pass and four ground triangles, with **no frustum-culling or clipping savings**. The stronger 179,326 bound also includes BOTH iris inserts during pupil crossfades; no combination of layers or chapter transitions can exceed 180k under these geometry/pass assumptions. Recorded decimation errors are below 0.0003 scene units; smooth normals and borders are preserved. The compacted original CC0 GLB is approximately 2 MiB instead of 5.2 MiB.
+
+New regression checks measure the shipped bone dimensions, cochlear breadth/depth and loop diameters; verify hollow wall and basal/vestibular/window contact; resolve actual engine display/simulation state for all 40 beats; and enforce both close-up organ exclusivity and the 180k all-layer draw bound.
+
+### Gates and remaining scope
+
+Final standard gate runs all passed:
+
+- `pnpm check`: 1,095 files, zero errors, zero warnings, four existing informational hints; TypeScript passed.
+- `pnpm validate`: 94 topics, zero errors and zero warnings.
+- `pnpm build`: 191 static pages, successful PWA output.
+- `pnpm test`: 253 files / 6,349 tests passed in 26.18 seconds, without worker or timeout overrides. The build completed before tests started.
+- `git diff --check`: passed. Gate logs are in `/tmp/atlas-eyes-and-ears-round2/{check,validate,build,test}.log`.
+
+No anatomy item is intentionally deferred. Browser timing, PBR/transparency, HUD placement, touch interaction and software-GL screenshots are not certified by CPU rendering; browser/desktop access and Chromium launches were prohibited for this task. No browser, desktop, e2e/shoot, git write, package/lockfile edit, shared kit or engine edit was performed.

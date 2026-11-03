@@ -18,26 +18,38 @@ describe('polished ear anatomical geometry',()=>{
     const normals=loops.map(loop=>{
       expect(loop.kind).toBe('sweep'); if(loop.kind!=='sweep') throw new Error('Expected a tube loop');
       const points=loop.path.map(p=>new Vector3(...p));
+      let diameter=0;for(const a of points) for(const b of points) diameter=Math.max(diameter,a.distanceTo(b));
+      // Canal-loop breadth is 6–8 mm at the same scale as the 9 mm drum.
+      expect((diameter+2*Math.min(...loop.radius as number[]))/.052).toBeGreaterThan(6);
+      expect((diameter+2*Math.min(...loop.radius as number[]))/.052).toBeLessThan(8);
       const a=points[0]!,b=points[20]!,c=points[40]!;
       const normal=new Vector3().crossVectors(b.clone().sub(a),c.clone().sub(a)).normalize();
       for(const point of points) expect(Math.abs(point.clone().sub(a).dot(normal))).toBeLessThan(.000003);
       const radii=loop.radius as number[];
       const peaks=radii.filter((r,i)=>i>0&&i<radii.length-1&&r>radii[i-1]!&&r>radii[i+1]!);
-      expect(peaks).toHaveLength(1);expect(peaks[0]).toBeGreaterThan(.06);
-      const vestibule=new Vector3(2.48,.205,-.255);
-      expect(points[0]!.distanceTo(vestibule)).toBeLessThan(.14);
-      expect(points.at(-1)!.distanceTo(vestibule)).toBeLessThan(.14);
+      expect(peaks).toHaveLength(1);expect(peaks[0]).toBeGreaterThan(.024);
+      const chamber=p.extra![2]!;if(chamber.kind!=='sweep') throw new Error('Expected vestibule');
+      const vestibule=new Vector3(...chamber.path[2]!).add(new Vector3(...chamber.at));
+      expect(points[0]!.add(new Vector3(...loop.at)).distanceTo(vestibule)).toBeLessThan(.056);
+      expect(points.at(-1)!.add(new Vector3(...loop.at)).distanceTo(vestibule)).toBeLessThan(.056);
       return normal;
     });
     for(let i=0;i<3;i++) for(let j=i+1;j<3;j++) expect(Math.abs(normals[i]!.dot(normals[j]!))).toBeLessThan(.00003);
   });
   it('has a tapering 2.5-turn cochlear helix with real axial depth',()=>{
     const p=part('cochlea-shell').primitive!;expect(p.kind).toBe('sweep');if(p.kind!=='sweep') throw new Error('Expected helix');
-    const a=p.path.map(v=>Math.atan2(v[1]+.04,v[0]-2.97));let winding=0;
+    const core=part('cochlea-shell').extra![0]!;
+    const a=p.path.map(v=>Math.atan2(v[1]+p.at[1]-core.at[1],v[0]+p.at[0]-core.at[0]));let winding=0;
     for(let i=1;i<a.length;i++) winding+=Math.atan2(Math.sin(a[i]!-a[i-1]!),Math.cos(a[i]!-a[i-1]!));
     expect(winding/(Math.PI*2)).toBeCloseTo(2.5,5);
-    expect(p.path.at(-1)![2]-p.path[0]![2]).toBeGreaterThan(.35);
+    expect(p.path.at(-1)![2]-p.path[0]![2]).toBeGreaterThan(.15);
     expect((p.radius as number[])[0]).toBeGreaterThan((p.radius as number[]).at(-1)!*1.8);
+    expect(p.hollow).toBeCloseTo(.0064,6);
+    const root=new Vector3(...p.path[0]!).add(new Vector3(...p.at));
+    const chamber=part('balance-context').extra![2]!;
+    if(chamber.kind!=='sweep') throw new Error('Expected vestibule');
+    expect(root.distanceTo(new Vector3(...chamber.path[0]!).add(new Vector3(...chamber.at)))).toBeLessThan(.003);
+    expect(root.distanceTo(new Vector3(...part('oval-window').primitive!.at))).toBeLessThan((p.radius as number[])[0]!);
   });
   it('attaches the malleus handle at the inward umbo of a thin conical drum',()=>{
     const drum=part('eardrum').primitive!;expect(drum.kind).toBe('lathe');if(drum.kind!=='lathe') throw new Error('Expected drum');
@@ -58,6 +70,6 @@ describe('polished ear anatomical geometry',()=>{
       } else for(const piece of partPieces(p)) {triangles+=(piece.geometry.index?.count??piece.geometry.getAttribute('position').count)/3*(piece.matrices?.length??1);piece.geometry.dispose();}
     }
     // Includes BOTH mutually-exclusive iris inserts: stricter than any lesson state.
-    expect(triangles).toBeLessThan(350000);
+    expect(triangles).toBeLessThan(165000);
   });
 });

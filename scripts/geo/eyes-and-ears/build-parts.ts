@@ -17,8 +17,16 @@ const out = join(import.meta.dirname, '../../../src/content/topics/eyes-and-ears
 const bi = (en: string, zh: string) => ({ en, zh });
 const round = (n: number) => Number(n.toFixed(6));
 const tissue = (tint = 'token:bone') => ({ color: 'tissue', tint });
-const sphere = (at: V3, radius: number, scale: V3, color = 'tissue', tint = 'token:bone'): P =>
-  ({ kind: 'sphere', at, size: [radius], scale, color, tint });
+// Preserve 32 vertical samples on the enlarged cell bodies. Tiny markers and
+// the narrow oval window need fewer angular stations than the fixed 48×32 sphere.
+const sphere = (at: V3, radius: number, scale: V3, color = 'tissue', tint = 'token:bone'): P => {
+  const rows=radius>=.12?32:radius<=.045?16:20;
+  const segments=radius>=.12?32:radius<=.045?20:24;
+  return {kind:'lathe',at,profile:Array.from({length:rows+1},(_,i)=>[
+    Number((radius*Math.sin(Math.PI*i/rows)).toFixed(6)),
+    Number((radius*Math.cos(Math.PI*i/rows)).toFixed(6)),
+  ]).reverse(),segments,scale,color,tint};
+};
 const sweep = (at: V3, path: V3[], radius: number | number[], more: P = {}): P =>
   ({ kind: 'sweep', at, path, radius, color: 'tissue', tint: 'token:bone', radial: 12, ...more });
 const lathe = (at: V3, profile: number[][], more: P = {}): P =>
@@ -200,7 +208,7 @@ const cellExtra: P[] = [];
 const bundleExtra: P[] = [];
 for (const x of [-.30,0,.30]) {
   cellExtra.push(sphere(win(x,-.04),.13,[.70,1.55,.70],'tissue','token:bone'));
-  for (const [i,h] of [.13,.18,.23].entries()) bundleExtra.push(sweep(win(x+(i-1)*.035,.145),[[0,0,0],[.015,h,0]],.012,{...tissue('token:ink-2'),caps:'flat'}));
+  for (const [i,h] of [.13,.18,.23].entries()) bundleExtra.push(sweep(win(x+(i-1)*.035,.145),[[0,0,0],[.015,h,0]],.012,{...tissue('token:ink-2'),caps:'flat',segments:4,radial:8}));
 }
 // Fixed cell bodies stay with the membrane; only the fine bundles tilt.
 parts.find(p=>p.id==='basilar-strip')!.extra = cellExtra;
@@ -233,12 +241,12 @@ add('object-top','study-bench','Object top','物体上部',
   'This point marks the upper part of the model object.','这一点表示模型物体的上部。',
   'Rays from the upper point pass through the model lens. Their centre lands below the optical axis, the central line through the lens and receiver. [S11]\n\nThis point is one model centimetre high. Heights are drawn twenty times larger relative to horizontal distances so you can see the inverted image and blur. The upper point is larger and amber; the lower point is smaller and teal. Matching ray colours help you follow each point. These are model settings, rather than eye measurements. [S31]',
   '上点的光线穿过模型透镜，光束中心落到光轴下方。光轴是穿过透镜与接收面的中心线。[S11]\n\n上点高一模型厘米。高度相对水平距离放大二十倍，方便看清倒像与光斑。上点较大、呈琥珀色，下点较小、呈青色，同色光线帮助跟随各点。这些是模型设定，不是眼球测量。[S31]',
-  {kind:'sphere',at:benchAt(-40,1),size:[.04],color:'token:ray-top'},{clip:false,connects:['retinal-screen']});
+  sphere(benchAt(-40,1),.04,[1,1,1],'token:ray-top','token:ray-top'),{clip:false,connects:['retinal-screen']});
 add('object-bottom','study-bench','Object bottom','物体下部',
   'This point marks the lower part of the model object.','这一点表示模型物体的下部。',
   'The lower point provides the other three rays. Their centre lands on the upper part of the receiver. [S11]\n\nIt is minus half a model centimetre high, with the same twentyfold vertical enlargement as the rest of the bench. Marker sizes and colours distinguish points on a teaching object. [S31]',
   '下点提供另一组三条光线，光束中心落到接收面上部。[S11]\n\n高度为负半模型厘米，与实验台其余部分一样竖向放大二十倍。标记的大小和颜色用来区分教学物体上的两点。[S31]',
-  {kind:'sphere',at:benchAt(-40,-.5),size:[.026],color:'token:ray-bottom'},{clip:false,connects:['object-top']});
+  sphere(benchAt(-40,-.5),.026,[1,1,1],'token:ray-bottom','token:ray-bottom'),{clip:false,connects:['object-top']});
 add('retinal-screen','study-bench','Model receiver','模型接收面',
   'The fixed receiver shows where the model light bundle arrives.','固定接收面显示模型光束落在哪里。',
   'The receiver stands for the retina on the optical bench. Light paths end here. The same lens calculation gives both the readings and the focused point or blurred spot. [S11]\n\nIt stays four model centimetres behind the lens. All heights, including the spot, are drawn twenty times larger relative to horizontal distances. The receiver is a diagram at a chosen scale, rather than another retinal layer in the eye. [S31]',
@@ -270,7 +278,7 @@ const presets = [
   // The optical bench under the eye: object points, effective lens and receiver all in frame, the eye above.
   // (hudFrame only fits subjects the authored view includes, so the whole bench is inside this frame.)
   {id:'focus-bench',label:bi('FOCUS','聚焦'),camera:{position:[-2.05,-.45,9.4],target:[-2.05,-1.0,.7],fov:30}},
-  {id:'ear',label:bi('EAR','耳朵'),camera:{position:[2,1.0,5.4],target:[2.1,.02,-.05],fov:30}},
+  {id:'ear',label:bi('EAR','耳朵'),camera:{position:[1.55,1.0,5.4],target:[1.65,.02,-.05],fov:30}},
   // Cochlea and the enlarged hair-cell window below it, both clear of the caption band.
   {id:'cochlea',label:bi('COCHLEA','耳蜗'),camera:{position:[2.95,.25,5.9],target:[3.0,-.45,.1],fov:30}},
   // The particle row is the subject; the ear stays above it as context.
@@ -380,7 +388,7 @@ const data = {
   sim,
 };
 
-polishEar(parts);
+polishEar(parts, data);
 polishEye(parts, data);
 await writeEarModel(createEyeMeshes());
 Object.assign(data, {model:'/models/eyes-and-ears.glb'});

@@ -135,7 +135,7 @@ export function polishEye(parts: Part[], data?: { flows?: Part[] }): void {
     if (!p) throw new Error(`Eye polish: missing ${id}`);
     return p;
   };
-  const lathe = (at: V, profile: number[][], more: Part = {}): Part => ({kind:'lathe',at,profile,segments:64,rotation:[0,0,-90],color:'tissue',tint:'token:bone',...more});
+  const lathe = (at: V, profile: number[][], more: Part = {}): Part => ({kind:'lathe',at,profile,segments:48,rotation:[0,0,-90],color:'tissue',tint:'token:bone',...more});
   // A true spherical cap, with constant thin shell and a tangent-continuous apex.
   const corneaRadius = (.56 ** 2 + .35 ** 2) / (.35 * 2);
   const centre = -1.08 + corneaRadius;
@@ -145,7 +145,7 @@ export function polishEye(parts: Part[], data?: { flows?: Part[] }): void {
     return [round(corneaRadius * Math.sin(a)), round(centre - corneaRadius * Math.cos(a))];
   });
   const inner = [...cap].reverse().map(([r,x]) => [round(r! * .984), round(x! + .018)]);
-  part('cornea').primitive = lathe([-2,0,0], [...cap,...inner,cap[0]!], {color:'glass',arc:178,segments:64});
+  part('cornea').primitive = lathe([-2,0,0], [...cap,...inner,cap[0]!], {color:'glass',arc:178,segments:48});
 
   // Elliptic parametrisation keeps an actually rounded lens equator: a piecewise
   // square-root height profile would leave a pinched knife edge at the rim.
@@ -154,11 +154,11 @@ export function polishEye(parts: Part[], data?: { flows?: Part[] }): void {
     const depth = Math.cos(a) >= 0 ? .128 : .172;
     return [round(.40 * Math.sin(a)), round(-depth * Math.cos(a))];
   });
-  part('lens').primitive = lathe([-2.47,0,0], lensProfile, {color:'glass',tint:'token:bone',segments:64});
+  part('lens').primitive = lathe([-2.47,0,0], lensProfile, {color:'glass',tint:'token:bone',segments:48});
   // An extremely fine capsule edge gives the transparent lens a legible rim,
   // with ample gap behind the iris even in the retained near-view pose.
   const capsule = Array.from({length:25},(_,i)=>[round(.399 + .003 * Math.cos(i / 24 * TAU)),round(.006 * Math.sin(i / 24 * TAU))]);
-  part('lens').extra = [lathe([-2.47,0,0], capsule, {color:'membrane',segments:64,arc:178})];
+  part('lens').extra = [lathe([-2.47,0,0], capsule, {color:'membrane',segments:48,arc:178})];
 
   // Round the selectable iris root; surface detail belongs to each aperture state.
   const irisRoot = Array.from({length:33},(_,i)=>[round(.516 + .021 * Math.cos(i / 32 * TAU)),round(.014 * Math.sin(i / 32 * TAU))]);
@@ -176,10 +176,10 @@ export function polishEye(parts: Part[], data?: { flows?: Part[] }): void {
   const nerve = part('optic-nerve');
   // The root sits against the retinal wall. A hemispherical end-cap would
   // protrude into the eye like a nipple, so this dissected nerve has flat ends.
-  nerve.primitive = {kind:'sweep',at:OPTIC_PATH[0],path:OPTIC_PATH.map(v=>v.map((n,i)=>round(n-OPTIC_PATH[0]![i]!))),radius:[.119,.113,.101,.092],radial:24,segments:40,caps:'flat',color:'nerve',tint:'token:bone'};
+  nerve.primitive = {kind:'sweep',at:OPTIC_PATH[0],path:OPTIC_PATH.map(v=>v.map((n,i)=>round(n-OPTIC_PATH[0]![i]!))),radius:[.119,.113,.101,.092],radial:24,segments:28,caps:'flat',color:'nerve',tint:'token:bone'};
   // A shallow, off-axis optic disc meets the retinal lining at the nerve root.
   const disc = Array.from({length:41},(_,i)=>[round(.115 * Math.sin(i / 40 * Math.PI)),round(.010 * Math.cos(i / 40 * Math.PI))]);
-  nerve.extra = [lathe([-1.155,.025,-.20], disc, {color:'nerve',rotation:[0,10,-90],segments:48})];
+  nerve.extra = [lathe([-1.155,.025,-.20], disc, {color:'nerve',rotation:[0,10,-90],segments:32})];
   nerve.detail.en = nerve.detail.en.replace('The bundled tube and moving markers are schematic.', 'The optic disc and curved nerve bundle leave the posterior wall on its nasal side; the moving markers are schematic.');
   nerve.detail.zh = nerve.detail.zh.replace('束状管与移动标记都是示意。', '视盘与弯曲神经束从眼球后壁偏鼻侧的位置离开；移动标记是示意。');
   const flow = data?.flows?.find(f => f.id === 'optic-signal');

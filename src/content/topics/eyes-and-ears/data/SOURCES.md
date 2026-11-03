@@ -65,3 +65,9 @@ Development references actually opened and visually inspected on 2026-11-03:
 The surface dimensions and independent station scales remain an original teaching reconstruction (S31). Three perpendicular canal planes and 2.5 cochlear centreline turns are deliberate anatomical teaching choices, not specimen measurements. The pressure tube's pharyngeal end remains a truncated anatomical context; the throat and skull are outside the model.
 
 生成网格为 Atlas 原创程序化解剖重建，按 CC0-1.0 公开；图版和照片仅作开发时的视觉参照，不分发，也不作为贴图。三条严格互相垂直的半规管与耳蜗两圈半中心线是教学重建设定，不是个体标本测量。咽鼓管的咽部末端为截断背景结构，模型不含咽部和颅骨。
+
+### Polish 2026-11-03 · Round 2 scale calibration
+
+The round-2 brief supplies the proportional targets: cochlea approximately 9 mm across its base and 5 mm axially, malleus 8–9 mm, incus 7 mm, stapes 3 mm, eardrum approximately 9 mm and semicircular loops 6–8 mm. These calibrate the middle/inner-ear reconstruction at 0.052 scene units per millimetre; they do not introduce a clinical measurement into the lesson. Gray 904 and 916–918/923 above were inspected again for lobule contour, bone joints and vestibular/cochlear attachment. The independent eye, shortened external canal and enlarged sensory-cell study retain their existing display scales. No new external asset, source image or runtime request was introduced.
+
+本轮依据 Gavin 提供的比例目标校准中耳与内耳，采用每毫米 0.052 场景单位。比例用于解剖重建，不是临床标本测量，也没有把新尺寸写成课程中的测量结果。耳垂轮廓、听骨关节与内耳连接复核上述格雷图版；眼部、缩短的外耳道与放大细胞工位仍采用各自展示比例。

@@ -6,6 +6,7 @@ import { BufferAttribute, BufferGeometry, CatmullRomCurve3, MeshBasicMaterial, V
 import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { MarchingCubes } from 'three/examples/jsm/objects/MarchingCubes.js';
 import { Document, NodeIO } from '@gltf-transform/core';
+import { MeshoptSimplifier } from 'meshoptimizer';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 export type V3 = [number, number, number];
@@ -32,7 +33,7 @@ export function pinnaMesh(): BufferGeometry {
   const N=208, R=96, pos:number[]=[], uv:number[]=[], ix:number[]=[];
   const cx=.075, cy=-.16;
   for(let side=0;side<2;side++) for(let j=0;j<=R;j++) for(let i=0;i<N;i++) {
-    const t=i/N, r=j/R, edge=outline.getPoint(t);
+    const t=i/N, r=(1-Math.cos(Math.PI*j/R))/2, edge=outline.getPoint(t);
     // Inner opening is aligned to the conchal floor, not the silhouette centroid.
     const a=2*Math.PI*t, hx=cx+.065*Math.cos(a), hy=cy+.080*Math.sin(a);
     const x=hx*(1-r)+edge.x*r, y=hy*(1-r)+edge.y*r;
@@ -42,11 +43,16 @@ export function pinnaMesh(): BufferGeometry {
     const scapha=-.032*Math.exp(-(((r-.73)/.12)**2))*(1-lobule);
     let z=-.10-.12*concha+helix+scapha+.085*lobule;
     for(const ridge of ridgePaths) z+=ridge.h*Math.exp(-((dist(x,y,ridge.p)/ridge.w)**2));
+    // Cartilage ends above the lobule. Smoothly remove ridge endpoint domes
+    // and the scapha/helix trough here: fat/skin form one soft convex pad.
+    const q=Math.max(0,Math.min(1,(-y-.22)/.14)),soft=q*q*(3-2*q);
+    const lobeFront=-.10+.092*Math.exp(-(((x+.10)/.23)**2+((y+.55)/.25)**2));
+    z=z*(1-soft)+lobeFront*soft;
     // Tragus and antitragus, separated by the intertragic notch.
     z+=.15*Math.exp(-(((x-.15)/.051)**2+((y+.115)/.09)**2));
-    z+=.115*Math.exp(-(((x+.015)/.075)**2+((y+.35)/.070)**2));
+    z+=(1-soft)*.115*Math.exp(-(((x+.015)/.075)**2+((y+.35)/.070)**2));
     // Blend relief down at the free edge; rounded thickness instead of an extruded wall.
-    const blend=Math.min(1,(1-r)*18), back=-.175-.06*concha-.025*lobule;
+    const edgeT=Math.max(0,(r-.90)/.10),blend=Math.sqrt(Math.max(0,1-edgeT*edgeT)), back=-.175-.06*concha-.025*lobule;
     z=side===0 ? -.125+(z+.125)*blend : -.125+(back+.125)*blend;
     if(side===1) z-=.065*Math.sqrt(Math.max(0,1-r*r));
     pos.push(.90+x,y,z); uv.push(t,r);
@@ -124,7 +130,7 @@ export function ossicleMeshes():Record<string,BufferGeometry> {
 /** Continuous meatal bend with a gradually opened longitudinal wall. The
  * cartilaginous portal stays complete; the medial cut exposes the drum. */
 export function canalMesh(): BufferGeometry {
-  const c=curve(canalPath), rows=112, cols=32;
+  const c=curve(canalPath), rows=64, cols=24;
   const pos:number[]=[], ix:number[]=[];
   const radii=[.070,.10,.125,.12,.17];
   for(let side=0;side<2;side++) for(let j=0;j<=rows;j++) {
@@ -158,18 +164,28 @@ export function canalMesh(): BufferGeometry {
   const welded=mergeVertices(g,1e-6);welded.computeVertexNormals();g.dispose();return welded;
 }
 
+export const EAR_MM=.052;
+export const INCUS_JOINT:V3=[1.774,.27,-.065];
+export const INCUS_SCALE=.69;
+export const incusPoint=(p:V3):V3=>p.map((v,i)=>f(INCUS_JOINT[i]!+(v-INCUS_JOINT[i]!)*INCUS_SCALE)) as V3;
+export const STAPES_HEAD:V3=[2.155,-.04,-.05];
+export const stapesPoint=(p:V3):V3=>p.map((v,i)=>f(incusPoint(STAPES_HEAD)[i]!+(v-STAPES_HEAD[i]!)*.5)) as V3;
+export const OVAL_WINDOW=stapesPoint([2.415,-.04,-.05]);
+export const INNER_SCALE=.4;
+export const innerPoint=(p:V3):V3=>p.map((v,i)=>f(OVAL_WINDOW[i]!+(v-[2.415,-.04,-.05][i]!)*INNER_SCALE)) as V3;
+
 export const canalPath:V3[]=[[.975,-.16,-.20],[.99,-.15,-.31],[1.11,-.105,-.28],[1.24,-.068,-.19],[1.36,-.075,-.10],[1.51,-.065,-.045]];
 export const coilPath:V3[]=Array.from({length:111},(_,i)=>{const t=i/110,a=Math.PI+t*Math.PI*5,r=.47*(1-t)+.035;return [f(2.97+r*Math.cos(a)),f(-.04+r*Math.sin(a)),f(-.18+.40*t)];});
 // A right-handed orthonormal frame, two vertical planes and one horizontal plane.
 const u:V3=[Math.SQRT1_2,0,Math.SQRT1_2],v:V3=[0,1,0],w:V3=[-Math.SQRT1_2,0,Math.SQRT1_2];
 export const vestibule:V3=[2.48,.205,-.255];
-export const canalPlanes=[{name:'anterior',a:u,b:v,r:.275,h:.38},{name:'posterior',a:w,b:v,r:.315,h:.34},{name:'lateral',a:u,b:w,r:.29,h:.25}];
+export const canalPlanes=[{name:'anterior',a:u,b:v,r:.36,h:.42},{name:'posterior',a:w,b:v,r:.40,h:.39},{name:'lateral',a:u,b:w,r:.37,h:.36}];
 export const balancePaths=canalPlanes.map(({a,b,r,h})=>Array.from({length:65},(_,i)=>{
   const theta=-Math.PI/2+.34+i/64*(2*Math.PI-.68);
   return [0,1,2].map(j=>f(vestibule[j]!+a[j]!*r*Math.cos(theta)+b[j]!*h*(1+Math.sin(theta)))) as V3;
 }));
 
-export function polishEar(parts:Part[]) {
+export function polishEar(parts:Part[], data?:{flows:Part[],animations:Part[]}) {
   const part=(id:string)=>parts.find(p=>p.id===id)!;
   for(const id of ['pinna','canal','malleus','incus','stapes']) {
     const p=part(id);delete p.primitive;delete p.extra;p.mesh=id;p.material={color:'tissue',tint:['pinna','canal'].includes(id)?'token:muscle-1':'token:bone'};
@@ -181,32 +197,84 @@ export function polishEar(parts:Part[]) {
   drum.extra=[{kind:'lathe',at:[1.51,-.065,-.045],profile:[[.220,-.024],[.234,-.021],[.236,-.012],[.228,-.006],[.220,-.024]],segments:64,rotation:[0,0,-72],scale:[1,1,.80],color:'tissue',tint:'token:bone'}];
   part('malleus').detail=bi('The malleus has a rounded head joined to the incus and a tapering handle fixed along the eardrum, ending at its centre. It is one of the three ossicles. [S7, S8]\n\nThe shape follows Gray’s drawing of the bone. It rocks slowly to show movement along the chain. This does not measure how much the bones amplify movement or the delay between them. [S31]','锤骨的圆头连接砧骨，渐细的柄贴着鼓膜，一直伸到鼓膜中心，是三块听小骨之一。[S7, S8]\n\n外形依据格雷解剖图。它缓慢摆动，显示骨链怎样传递运动，不测量听骨放大运动的倍数或彼此间的延迟。[S31]');
   part('incus').detail=bi('The incus is the middle bone in the chain. Its body joins the malleus. A short projection points backwards, and a long curved projection reaches the head of the stapes. [S7, S8]\n\nThe shape follows Gray’s drawing of the bone. Small joints and ligaments are left out. [S31]','砧骨位于骨链中间，体部连接锤骨。短突向后伸出，弯曲的长突伸到镫骨头。[S7, S8]\n\n外形依据格雷解剖图，省略细小关节与韧带。[S31]');
-  const co=part('cochlea-shell');co.primitive=tube([0,0,0],coilPath,coilPath.map((_,i)=>f(.145-.07*i/110)),{radial:24,segments:260,caps:'round',hollow:.016});co.extra=[{kind:'lathe',at:[2.97,-.04,0],profile:[[0,-.25],[.08,-.245],[.14,-.23],[.17,-.16],[.165,-.10],[.14,0],[.12,.08],[.09,.16],[.05,.21],[.02,.235],[0,.24]],rotation:[90,0,0],segments:48,color:'tissue',tint:'token:bone'}];
+  const co=part('cochlea-shell');co.primitive=tube([0,0,0],coilPath,coilPath.map((_,i)=>f(.145-.07*i/110)),{radial:20,segments:180,caps:'round',hollow:.016});co.extra=[{kind:'lathe',at:[2.97,-.04,0],profile:[[0,-.25],[.08,-.245],[.14,-.23],[.17,-.16],[.165,-.10],[.14,0],[.12,.08],[.09,.16],[.05,.21],[.02,.235],[0,.24]],rotation:[90,0,0],segments:48,color:'tissue',tint:'token:bone'}];
   co.detail=bi('The cochlea is the curled hearing structure in the inner ear: a cone-shaped coil of about two and a half turns. Movement at the oval window disturbs its fluid and sends a wave along the basilar membrane. [S7]\n\nThe coil is shown closed from outside. A separate enlarged strip shows the membrane and sensory cells. [S31]','耳蜗是内耳中卷曲的听觉结构，像约两圈半的锥形螺旋。卵圆窗处的运动扰动液体，使波沿基底膜传播。[S7]\n\n螺旋从外面看是封闭的。独立放大条带显示膜与感受细胞。[S31]');
   const bal=part('balance-context');
-  const loops=balancePaths.map(path=>tube([0,0,0],path,path.map((_,j)=>f(.034+.035*Math.exp(-(((j-5)/4)**2)))),{segments:150,radial:20,tint:'token:bone'}));
-  bal.primitive=loops[0];bal.extra=[...loops.slice(1),tube([0,0,0],[[2.46,-.04,-.18],[2.48,.10,-.24],vestibule,[2.49,.29,-.25]],[.085,.14,.14,.08],{radial:32,segments:48,section:{flat:.85}})];
+  const loops=balancePaths.map(path=>tube([0,0,0],path,path.map((_,j)=>f(.034+.035*Math.exp(-(((j-5)/4)**2)))),{segments:80,radial:16,tint:'token:bone'}));
+  bal.primitive=loops[0];bal.extra=[...loops.slice(1),tube([0,0,0],[[2.46,-.04,-.18],[2.48,.10,-.24],vestibule,[2.49,.29,-.25]],[.085,.14,.14,.08],{radial:20,segments:32,section:{flat:.85}})];
   bal.connects=['cochlea-shell','oval-window'];
   bal.detail=bi('The three semicircular canals lie beside the cochlea, each in a different direction, roughly at right angles to the others. Each has one swollen end (ampulla), and all join a chamber called the vestibule. They help with balance, a different role from hearing. [S8]\n\nThe model sets the canals at exact right angles to make the three directions clear. It does not simulate balance or fluid responses. [S31]','三条半规管位于耳蜗旁，方向各不相同，彼此大约成直角。每条有一个膨大的末端（壶腹），都连到称为前庭的腔室。它们帮助维持平衡，作用与听觉不同。[S8]\n\n模型让三条管严格成直角，方便看清三个方向，不模拟平衡或液体响应。[S31]');
   // An attached funnel at the anterior-inferior middle-ear wall, then the narrow
   // isthmus and widening pharyngeal cartilage; rear half opened for context.
-  part('eustachian-tube').extra=[tube([0,0,0],[[1.54,-.04,-.16],[1.77,-.03,-.19],[2.05,-.02,-.21],[2.38,-.04,-.20]],[.23,.245,.22,.15],{hollow:.022,section:{u:170},up:[0,0,-1],caps:'none',segments:64,radial:16,tint:'token:muscle-1'})];
+  part('eustachian-tube').extra=[tube([0,0,0],[[1.54,-.04,-.16],[1.77,-.03,-.19],[2.05,-.02,-.21],[2.38,-.04,-.20]],[.23,.245,.22,.15],{hollow:.022,section:{u:170},up:[0,0,-1],caps:'none',segments:40,radial:16,tint:'token:muscle-1'})];
   part('eustachian-tube').detail=bi('The Eustachian tube connects the middle ear to the throat and helps balance pressure across the eardrum. Hearing signals reach the brain through the auditory nerve. [S8]\n\nA piece of the middle-ear floor shows where the tube starts. It narrows, then widens towards the throat. The model does not simulate opening, swallowing or pressure changes. [S31]','咽鼓管连接中耳与咽部，帮助平衡鼓膜两侧气压。听觉信号经听神经传向大脑。[S8]\n\n一小块中耳底壁显示管道起点。管道先变窄，再朝咽部变宽。不模拟开放、吞咽或气压变化。[S31]');
-  part('eustachian-tube').primitive=tube([0,0,0],[[1.77,-.15,-.17],[1.85,-.23,-.18],[1.99,-.40,-.22],[2.15,-.64,-.24],[2.31,-.83,-.23]],[.15,.12,.075,.085,.12],{hollow:.022,section:{u:240},up:[0,0,-1],caps:'none',segments:90,tint:'token:muscle-1'});
+  part('eustachian-tube').primitive=tube([0,0,0],[[1.77,-.15,-.17],[1.85,-.23,-.18],[1.99,-.40,-.22],[2.15,-.64,-.24],[2.31,-.83,-.23]],[.15,.12,.075,.085,.12],{hollow:.022,section:{u:240},up:[0,0,-1],caps:'none',segments:48,radial:20,tint:'token:muscle-1'});
+
+  // All labyrinth structures share ONE transform about the oval window.
+  // Radii, walls and the modiolus scale with the paths, retaining the hollow coil.
+  for(const id of ['cochlea-shell','balance-context']) for(const shape of [part(id).primitive,...(part(id).extra??[])]) {
+    shape.at=innerPoint(shape.at);
+    if(shape.path) shape.path=shape.path.map((p:V3)=>p.map(v=>f(v*INNER_SCALE)));
+    if(shape.radius) shape.radius=Array.isArray(shape.radius)?shape.radius.map((r:number)=>f(r*INNER_SCALE)):f(shape.radius*INNER_SCALE);
+    if(shape.hollow) shape.hollow=f(shape.hollow*INNER_SCALE);
+    if(shape.profile) shape.profile=shape.profile.map((p:number[])=>p.map(v=>f(v*INNER_SCALE)));
+  }
+  const window=part('oval-window').primitive;
+  window.at=OVAL_WINDOW;window.profile=window.profile.map((p:number[])=>p.map(v=>f(v*.5)));
+  // Keep the partial middle-ear floor against the relocated vestibule/window.
+  const wall=part('eustachian-tube').extra[0];
+  wall.path=wall.path.map((p:V3)=>[f(1.54+(p[0]-1.54)*(OVAL_WINDOW[0]-1.54)/(2.415-1.54)),p[1],p[2]]);
+  // The nerve must still emerge from the cochlear core after resizing.
+  const nerve=part('auditory-nerve').primitive;
+  const nerveOldAt:V3=[3.01,.12,-.22];
+  const nervePath:V3[]=[nerveOldAt,...nerve.path.slice(1).map((p:V3)=>p.map((v,i)=>v+nerveOldAt[i]!) as V3)].map(innerPoint);
+  nerve.at=nervePath[0];nerve.path=nervePath.map(p=>p.map((v,i)=>f(v-nervePath[0]![i]!)));nerve.radius=nerve.radius.map((r:number)=>f(r*INNER_SCALE));
+  if(data) {
+    const animation=data.animations.find(a=>a.target==='incus');if(animation?.pivot) animation.pivot=incusPoint(animation.pivot);
+    const signal=data.flows.find(f=>f.id==='auditory-signal');
+    if(signal) signal.path=[...signal.path.slice(0,4),...nervePath];
+  }
+
 }
 
 export async function writeEarModel(extra:Record<string,BufferGeometry>={}) {
-  const meshes={pinna:pinnaMesh(),canal:canalMesh(),...ossicleMeshes(),...extra};
+  const meshes:Record<string,BufferGeometry>={pinna:pinnaMesh(),canal:canalMesh(),...ossicleMeshes(),...extra};
+  for(const [id,transform] of [['incus',incusPoint],['stapes',stapesPoint]] as const) {
+    const a=meshes[id]!.getAttribute('position');
+    for(let i=0;i<a.count;i++) a.setXYZ(i,...transform([a.getX(i),a.getY(i),a.getZ(i)]));
+  }
+  await MeshoptSimplifier.ready;
+  // Error-bounded offline decimation retains the existing smooth normals.
+  // 0.0003 scene unit is 0.006 mm at the middle-ear reconstruction scale.
+  const budgets:Record<string,[number,number]>={pinna:[24000,.0005],canal:[6000,.0003],malleus:[5000,.0003],incus:[5000,.00025],stapes:[5000,.00015],
+    'ciliary-ring':[8500,.00018],'iris-aperture-small':[14000,.00018],'iris-aperture-large':[14000,.00018]};
   const doc=new Document(),buffer=doc.createBuffer(),scene=doc.createScene('eyes-and-ears');
   doc.getRoot().getAsset().copyright='Atlas original procedural anatomy, 2026. CC0-1.0. Reference: public-domain Gray’s Anatomy plates; no source geometry or image textures.';
   for(const [name,source] of Object.entries(meshes)) {
     const g = mergeVertices(source, 1e-6);
+    const before=(g.index?.count??g.getAttribute('position').count)/3;
+    const budget=budgets[name];let error=0;
+    if(budget&&g.index) {
+      const result=MeshoptSimplifier.simplifyWithAttributes(new Uint32Array(g.index.array),new Float32Array(g.getAttribute('position').array),3,
+        new Float32Array(g.getAttribute('normal').array),3,[.01,.01,.01],null,budget[0]*3,budget[1],['LockBorder','ErrorAbsolute']);
+      g.setIndex(new BufferAttribute(result[0],1));error=result[1];
+    }
+    // Drop unused vertices after decimation (also reduces startup uploads).
+    const indices=new Uint32Array(g.index!.array);
+    const [remap,count]=MeshoptSimplifier.compactMesh(indices);
+    for(const name of Object.keys(g.attributes)) {
+      const a=g.getAttribute(name),array=new Float32Array(count*a.itemSize);
+      for(let i=0;i<remap.length;i++) if(remap[i]!==0xffffffff)
+        for(let j=0;j<a.itemSize;j++) array[remap[i]!*a.itemSize+j]=a.array[i*a.itemSize+j]!;
+      g.setAttribute(name,new BufferAttribute(array,a.itemSize));
+    }
+    g.setIndex(new BufferAttribute(indices,1));
     const primitive=doc.createPrimitive();
     for(const [attr,semantic] of [['position','POSITION'],['normal','NORMAL'],['uv','TEXCOORD_0']] as const) {
       const a=g.getAttribute(attr);if(a) primitive.setAttribute(semantic,doc.createAccessor().setType(attr==='uv'?'VEC2':'VEC3').setArray(new Float32Array(a.array)).setBuffer(buffer));
     }
     if(g.index) primitive.setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(g.index.array)).setBuffer(buffer));
-    scene.addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(primitive)).setExtras({closed:name!=='canal'}));
+    scene.addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(primitive)).setExtras({closed:name!=='canal',sourceTriangles:before,triangles:g.index!.count/3,simplificationError:error}));
   }
   const output=resolve(import.meta.dirname,'../../../public/models/eyes-and-ears.glb');mkdirSync(dirname(output),{recursive:true});
   await new NodeIO().write(output,doc);
