@@ -20,7 +20,8 @@
       "ear-receiver"
     ],
     "hide": [
-      "signal-marker"
+      "signal-marker",
+      "pinna"
     ],
     "labels": [
       "cochlea-shell",
@@ -29,14 +30,14 @@
     ],
     "camera": {
       "position": [
-        2.95,
-        0.25,
-        5.9
+        2.3,
+        -0.25,
+        4.6
       ],
       "target": [
-        3,
-        -0.45,
-        0.1
+        2.3,
+        -0.65,
+        0.05
       ],
       "fov": 30
     },
@@ -64,12 +65,26 @@
     },
     "beats": [
       {
+        "camera": {
+          "position": [
+            2.1,
+            0.42,
+            2.95
+          ],
+          "target": [
+            2.1,
+            0.08,
+            -0.05
+          ],
+          "fov": 30
+        },
         "part": "cochlea-shell",
         "hide": [
           "basilar-strip",
           "hair-patch",
           "signal-marker",
-          "balance-context"
+          "balance-context",
+          "pinna"
         ],
         "labels": [
           "cochlea-shell",
@@ -81,11 +96,25 @@
         }
       },
       {
+        "camera": {
+          "position": [
+            2.3,
+            -0.25,
+            4.6
+          ],
+          "target": [
+            2.3,
+            -0.65,
+            0.05
+          ],
+          "fov": 30
+        },
         "part": "basilar-strip",
         "hide": [
           "hair-patch",
           "signal-marker",
-          "balance-context"
+          "balance-context",
+          "pinna"
         ],
         "labels": [
           "basilar-strip",
@@ -97,10 +126,24 @@
         }
       },
       {
+        "camera": {
+          "position": [
+            2.3,
+            -0.25,
+            4.6
+          ],
+          "target": [
+            2.3,
+            -0.65,
+            0.05
+          ],
+          "fov": 30
+        },
         "part": "hair-patch",
         "hide": [
           "signal-marker",
-          "balance-context"
+          "balance-context",
+          "pinna"
         ],
         "labels": [
           "hair-patch",
@@ -112,6 +155,19 @@
         }
       },
       {
+        "camera": {
+          "position": [
+            2.3,
+            -0.25,
+            4.6
+          ],
+          "target": [
+            2.3,
+            -0.65,
+            0.05
+          ],
+          "fov": 30
+        },
         "part": "signal-marker",
         "layers": [
           "ear-transfer",
@@ -119,7 +175,8 @@
           "nerve-signals"
         ],
         "hide": [
-          "balance-context"
+          "balance-context",
+          "pinna"
         ],
         "labels": [
           "hair-patch",
@@ -131,13 +188,28 @@
         }
       },
       {
+        "camera": {
+          "position": [
+            2.3,
+            -0.25,
+            4.6
+          ],
+          "target": [
+            2.3,
+            -0.65,
+            0.05
+          ],
+          "fov": 30
+        },
         "part": "auditory-nerve",
         "layers": [
           "ear-transfer",
           "ear-receiver",
           "nerve-signals"
         ],
-        "hide": [],
+        "hide": [
+          "pinna"
+        ],
         "labels": [
           "auditory-nerve",
           "hair-patch"
