@@ -36,8 +36,9 @@ describe('bones and joints: anatomical teaching relationships',()=>{
     // seams cannot return at the neck/shaft/condyle junctions.
     expect(part('bone-cortex').mesh).toBe('polished-cortex');
     expect(part('bone-cortex').primitive).toBeUndefined();
-    // Growth plate conforms to the proximal contour, rather than a blue disc.
-    expect(part('growth-plate').primitive!.kind).toBe('sweep');
+    // The cartilage spans the neck in depth rather than outlining it as a cord.
+    expect(part('growth-plate').mesh).toBe('polished-growth-disc');
+    expect(part('growth-plate').primitive).toBeUndefined();
     const pieces=partPieces(part('bone-lattice'));
     expect(pieces.length).toBe(2);
     expect(pieces[0]!.geometry.getAttribute('position').count).toBeGreaterThan(1000);

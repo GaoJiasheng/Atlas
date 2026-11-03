@@ -117,10 +117,8 @@ export function boneSpecimens() {
  const caps=[lathe(close(profile).reverse(),[1.946,.218,-.003],'token:cold',{arc:180,rotation:[0,0,45],scale:[1,1,.875]}),
   ...[-1,1].map(sign=>sweep([[sign*.024,-.231,-.002],[sign*.024,-.242,-.002],[sign*.020,-.253,-.003]],
   [sign<0?.030:.028,.023,.005],at,'token:cold',{section:{u:170,flat:.85},hollow:.0013,radial:32,segments:32}))];
- const growth=sweep([[-.055,.189,.002],[-.049,.194,.003],[-.041,.202,.004],[-.032,.211,.003],[-.023,.218,0]],
-  [.0014,.0018,.002,.0018,.0013],at,'token:cold',{section:{flat:.55},radial:16,segments:48});
  return {'bone-cortex':cortex,'bone-lattice':[...struts,...caps],
-  'bone-marrow':[yellow,...red],'bone-vessel':artery,'growth-plate':[growth]};
+  'bone-marrow':[yellow,...red],'bone-vessel':artery};
 }
 
 export function applySpecimens(parts) {

@@ -8,5 +8,5 @@ for(const [id,pieces] of Object.entries(boneSpecimens())){
  const part=data.parts.find(p=>p.id===id);part.primitive=pieces[0];
  if(pieces.length>1)part.extra=pieces.slice(1);else delete part.extra;
 }
-data.parts.find(p=>p.id==='bone-cortex').detail=studentDetail('bone-cortex');
+for(const id of ['bone-cortex','growth-plate'])data.parts.find(p=>p.id===id).detail=studentDetail(id);
 writeFileSync(file,JSON.stringify(data,null,2)+'\n');

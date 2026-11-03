@@ -4,6 +4,7 @@
 import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
 import {BufferAttribute,BufferGeometry} from 'three';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import {appendRound2} from './round2-mesh.mjs';
 import {MeshoptSimplifier} from 'meshoptimizer';
 import {partPieces} from '../../../src/engines/space-scene/stages/model3d/geometry.ts';
 import {partsFile} from '../../../src/engines/space-scene/schema.ts';
@@ -74,6 +75,7 @@ for(const [id,x,tint] of skins){
  owned.parts.push({id:`repair-${id}-skin`,name:{en:`${id==='clot'?'Clot':'Soft callus'} colour surface`,zh:id==='clot'?'血肿着色面':'软骨痂着色面'},summary:{en:id==='clot'?'Blood collects around the broken ends.':'Soft tissue bridges the broken ends.',zh:id==='clot'?'血液聚集在断端周围。':'软组织连接断端。'},detail:{en:id==='clot'?'Torn vessels release blood at a fracture. This clot occupies the space around the broken ends [S34].':'A soft callus forms around the broken ends. It helps hold them together before new bone replaces it [S34].',zh:id==='clot'?'骨折会撕裂血管。凝血块占据断端周围的空隙 [S34]。':'断端周围形成软骨痂。新骨替代它之前，它帮助连接断端 [S34]。'},group:'bone-section',context:true,mesh:name,material:{color:'tissue',tint},castShadow:false});
 }
 const cp=owned.parts.find(p=>p.id==='bone-cortex');cp.mesh='polished-cortex';cp.material={color:'tissue',tint:'token:bone'};delete cp.primitive;delete cp.extra;
+appendRound2(owned,append);
 gltf.buffers[0].byteLength=length;
 for(const key of ['extensionsUsed','extensionsRequired']){gltf[key]??=[];if(!gltf[key].includes('KHR_mesh_quantization'))gltf[key].push('KHR_mesh_quantization');}
 gltf.asset.copyright+='; Original polished teaching meshes: Atlas, CC BY-SA 4.0 (2026-11-03)';

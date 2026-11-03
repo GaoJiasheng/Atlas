@@ -35,6 +35,8 @@ export interface PartRef {
   group?: string | undefined;
   shell?: boolean | undefined;
   context?: boolean | undefined;
+  /** Context material surface belonging to a selectable part. */
+  displayWith?: string | undefined;
   /** A bilateral twin: the part it mirrors. */
   twinOf?: string | undefined;
   connects?: readonly string[] | undefined;
@@ -87,6 +89,13 @@ export function resolvePartDisplay(
   parts: readonly PartRef[],
   shells = hasShells(parts),
 ): PartDisplay {
+  // Owners are selectable (schema-enforced), so skins cannot form cycles.
+  const owner = part.context && part.displayWith ? parts.find(p => p.id === part.displayWith && !p.context) : undefined;
+  if (owner) {
+    const inherited = resolvePartDisplay(owner, state, parts, shells);
+    const hidden = inherited.hidden || (state.hidden?.includes(part.id) ?? false);
+    return { ...inherited, visible: inherited.visible && !hidden, hidden, selected: false, selectable: false };
+  }
   const selectedPart = state.part ? parts.find((p) => p.id === state.part && !p.context) ?? null : null;
   const selected = selectedPart !== null && selectedPart.id === part.id;
   const soloPart = state.solo != null && !parts.some((p) => p.group === state.solo) ? parts.find((p) => p.id === state.solo) : undefined;

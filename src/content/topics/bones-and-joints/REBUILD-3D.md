@@ -148,3 +148,95 @@ package/lock changes or review-queue/next-batch edits were made.
 Built/public model and figure hashes match. Gate logs are in
 `/tmp/bones-polish/{check,validate,test,build}-final.log`; offline architecture
 counts are in `/tmp/bones-polish/counts-{before,after}.json`.
+
+## Polish 2026-11-03 — Round 2
+
+1. **Epiphyseal plate:** replaced the narrow contour sweep with a closed
+   cartilage volume across the oblique femoral neck, between the head epiphysis
+   and metaphysis. Its asymmetric perimeter is intersected with the same
+   implicit femoral envelope as the cortex; the posterior disc, curved faces
+   and full-width cut face now have real depth. The cut face suggests staggered
+   cartilage-cell columns, enlarging towards the metaphysis. Removed the old
+   sweep generator. The EN/ZH detail card now describes the disc and identifies
+   the cell relief as enlarged. Part ids, teaching counts, chapter/beat references
+   and the accepted eight camera pull-backs are unchanged.
+2. **Remodelling:** replaced the flattened ochre sphere with an irregular
+   cortical renewal region. It follows the exact bowed-shaft spline, covers
+   the cut lip and curves onto the cortex surface. Shallow pits, uneven
+   deposition ridges and osteon-like rings fade into a smooth margin. The ochre
+   remains a teaching tint; the relief is qualitative and enlarged. No tissue
+   turnover rate or healing timescale was introduced. Existing EN/ZH turnover
+   prose remains accurate.
+3. **SOLO:** existing topic data supports one material for a GLB part; it cannot
+   attach the two differently coloured GLB skins as extra material pieces.
+   Added optional, generic `displayWith` on context skins and used it for clot
+   and soft callus. The visibility resolver inherits the selectable owner's
+   hide, ghost, SOLO, layer, isolate, X-RAY, opacity/depth and highlight state,
+   retaining unselectable skins. Ordinary scenery and topics without this
+   opt-in keep their previous behaviour. Validation rejects missing/context
+   owners and selectable skins, preventing inheritance cycles. Bilateral
+   expansion maps the owner to its matching side. Unit tests cover each repair
+   SOLO, restoration, ordinary context, explicit hide, group/layer states,
+   selected-owner X-RAY, invalid ownership and bilateral inheritance.
+   This supersedes the round-1 manual-SOLO limitation recorded above.
+4. **Asset cleanup:** searched every repository reference before deleting the
+   unused `public/illustrations/figures/bones-and-joints-protected-organs.webp`
+   (102,314 B). Only the historical generator's output declaration and audit
+   prose still name that path; neither consumes the old image. The current
+   topic-owned protected-organs plate and chapter uses are untouched. Retained
+   `public/models/bones-and-joints.glb`: it is still read by `build-cortex.mjs`,
+   the original anatomy rebuild/verifier and the byte-preservation tests, so
+   the task's "if nothing references it" condition does not hold.
+
+References: re-read [OpenStax A&P 2e §6.3](https://openstax.org/books/anatomy-and-physiology-2e/pages/6-3-bone-structure)
+and [§6.4](https://openstax.org/books/anatomy-and-physiology-2e/pages/6-4-bone-formation-and-development),
+plus the existing local long-bone illustration. Independently authored mesh,
+not a traced figure or downloaded model; code/geometry CC BY-SA 4.0.
+`data/SOURCES.md` records the reference/licence boundary.
+
+| Geometry / visible view | Before triangles | After triangles |
+|---|---:|---:|
+| Growth plate alone | 1,920 | 7,360 |
+| Remodelling patch alone | 2,976 | 7,744 |
+| Growth beat 06-01 (including section) | 125,194 | 130,634 |
+| Remodelling beat 06-03 (including section) | 126,250 | 131,018 |
+| Four repair specimens + colour skins | 40,000 | 40,000 |
+| Maximum of 40 authored beats | 292,092 | 292,092 |
+| Stored GLB (includes alternative specimens) | 383,244 | 398,348 |
+
+The live GLB grows from 3,811,228 to 3,979,016 B, below 4 MB. Runtime draw
+counts for the growth and remodelling specimens remain seven apiece. No
+shadow-pass multiplier or GPU FPS is claimed. A second GLTF decoder confirms
+53 mesh nodes and finite positions/normals; original source bytes and rig are
+still preserved. Geometric tests raycast the disc's outward cut face and
+posterior volume, and check that sampled renewal relief lies within 1.5 mm
+of the underlying cortex.
+
+Offline CPU previews were rendered and actually inspected, with frontal beat
+framing, close-ups, isolated disc and rear-oblique views. Iteration corrected
+front/back winding, trimmed the disc ends to the real neck envelope, aligned
+the patch to the exact cortex spline and refined its relief. Local ignored
+output: `scripts/geo/bones-and-joints/previews/round2-2026-11-03/`:
+`growth-beat.png`, `growth-close.png`, `growth-disc.png`, `growth-side.png`,
+`remodel.png`, `remodel-close.png`, `remodel-side.png`; `before/` preserves
+baseline growth/remodelling renders. Reproduction is in the generator README.
+These verify geometry and tints; runtime shaders/transparency remain for the
+following browser acceptance. No browser/desktop or git writes were used.
+
+Round-2 gates:
+- `pnpm check`: exit 0, 0 errors/warnings (four existing unrelated hints).
+- `pnpm validate`: 94 topics, 0 errors/warnings.
+- Space-scene suite: 112 files / 2,892 tests passed before the final geometric
+  additions; the final full suite includes every space-scene test and all
+  18 new ownership/geometry assertions.
+- `pnpm test -- --maxWorkers=2 --testTimeout=30000`: 252 files / 6,361 tests passed.
+- Final focused geometry/ownership tests: 18/18 passed after the last cell-relief
+  direction correction. `git diff --check` is clean.
+- `pnpm build`: 191 static pages (both locales); final published mesh is
+  byte-identical to the source asset and the obsolete WebP is absent from dist.
+
+Gate logs and count reports: `/tmp/bones-round2/` (`check-final.log`,
+`validate-final.log`, `test-final.log`, `space-scene.log`, `focused-final.log`,
+`build-final.log`, `counts-before.json`, `counts-after.json`, `decode.log`).
+No requested geometry or SOLO item remains unimplemented. Browser e2e/shoot
+and GPU measurements were deliberately not run under the offline-only brief.

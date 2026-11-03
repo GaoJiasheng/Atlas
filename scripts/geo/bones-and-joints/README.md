@@ -26,7 +26,8 @@ The cortex and four repair selections have no primitive stand-ins in final
 `parts.json`.
 
 `specimens.mjs` builds the deterministic irregular trabecular network, red and
-yellow marrow, branching vessel, conforming cartilage/growth plate.
+yellow marrow, branching vessel, conforming articular cartilage. `round2-mesh.mjs` adds the true neck-spanning
+cartilage disc (with cell-column relief) and a textured cortical renewal region.
 `repair-mesh.py` cuts the actual bone volumes and builds continuous clot,
 callus and remodelled surfaces. Repeated fine details are merged by the
 existing runtime builder. Original part ids, 61 selectable parts, both
@@ -36,7 +37,8 @@ chapter/beat state, poses, selection, exploded/cutaway and lever bindings remain
 shape in EN and ZH. The joint is an unchanged generic synovial schematic.
 Two uncounted material
 skins provide clot/callus colour while the parent meshes retain their selection
-geometry; every authored hide/ghost/highlight state mirrors the parent. Authored
+geometry; `displayWith` also inherits manual SOLO, hide, ghost and X-RAY
+from the parent in the shared visibility resolver. Authored
 positions are quantised to 10 μm and normals to signed bytes to keep the copied
 packet under 4 MB.
 
@@ -60,3 +62,14 @@ Views include frontal/oblique/rear bone, head and marrow close-ups, growth plate
 frontal/oblique repair row and the unchanged joint. They verify forms, tints and
 framing; they do not certify runtime shaders, transparency or GPU FPS. Image
 and geometry previews stay in ignored `previews/polish-2026-11-03/`.
+
+Round 2 previews use the same exporter with a separate output directory:
+
+```sh
+pnpm tsx scripts/geo/bones-and-joints/preview-polish.ts src/content/topics/bones-and-joints/data/parts.json scripts/geo/bones-and-joints/previews/round2-2026-11-03 growth-beat,growth-close,growth-disc,growth-side,remodel,remodel-close,remodel-side
+python3 scripts/geo/bones-and-joints/render-preview.py scripts/geo/bones-and-joints/previews/round2-2026-11-03/*.json
+```
+
+The old `public/models/bones-and-joints.glb` remains the byte-preserved input
+for `build-cortex.mjs` and the anatomy-preservation tests. It is still required
+by these references; runtime topics load the polished packet.

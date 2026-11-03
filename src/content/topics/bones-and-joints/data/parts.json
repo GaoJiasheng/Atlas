@@ -14787,64 +14787,14 @@
         "zh": "标示生长中骨的软骨区域。"
       },
       "detail": {
-        "en": "A growth plate is a region of cartilage near the end of a young long bone. New bone replaces cartilage as the bone lengthens. This band appears in the growing-bone model. The adult skeleton beside it has no growth plate [S30, S34].",
-        "zh": "生长板位于幼年长骨靠近骨端的区域，由软骨构成。骨增长时，新骨逐步替代软骨。这条带出现在生长中的骨模型上。旁边的成人骨架没有生长板 [S30, S34]。"
+        "en": "A growth plate is a region of cartilage near the end of a young long bone. New bone replaces cartilage as the bone lengthens. The cut model shows the cartilage disc across the bone, with enlarged cell columns on its cut face. The adult skeleton beside it has no growth plate [S30, S34].",
+        "zh": "生长板位于幼年长骨靠近骨端的区域，由软骨构成。骨增长时，新骨逐步替代软骨。剖开的幼骨模型显示横跨骨的软骨板，切面上的细胞柱已放大示意。旁边的成人骨架没有生长板 [S30, S34]。"
       },
       "group": "bone-section",
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -0.055,
-            0.189,
-            0.002
-          ],
-          [
-            -0.049,
-            0.194,
-            0.003
-          ],
-          [
-            -0.041,
-            0.202,
-            0.004
-          ],
-          [
-            -0.032,
-            0.211,
-            0.003
-          ],
-          [
-            -0.023,
-            0.218,
-            0
-          ]
-        ],
-        "radius": [
-          0.0014,
-          0.0018,
-          0.002,
-          0.0018,
-          0.0013
-        ],
-        "radial": 16,
-        "segments": 48,
-        "caps": "round",
-        "up": [
-          0,
-          0,
-          -1
-        ],
-        "at": [
-          2,
-          0,
-          0
-        ],
+      "mesh": "polished-growth-disc",
+      "material": {
         "color": "tissue",
-        "tint": "token:cold",
-        "section": {
-          "flat": 0.55
-        }
+        "tint": "token:cold"
       }
     },
     {
@@ -14862,23 +14812,10 @@
         "zh": "身高停止增长后，骨组织仍会更新。旧组织被去除，新组织形成，这个过程叫重塑。标出的区域示意一处骨组织的更新，不表示某个人骨生长的速度 [S30, S34]。"
       },
       "group": "bone-section",
-      "primitive": {
-        "kind": "sphere",
-        "size": [
-          0.022
-        ],
-        "at": [
-          2.026,
-          0.02,
-          0.025
-        ],
+      "mesh": "polished-remodel-region",
+      "material": {
         "color": "tissue",
-        "tint": "token:cut",
-        "scale": [
-          0.3,
-          2.3,
-          1
-        ]
+        "tint": "token:cut"
       }
     },
     {
@@ -15213,7 +15150,8 @@
         "color": "tissue",
         "tint": "token:muscle-3"
       },
-      "castShadow": false
+      "castShadow": false,
+      "displayWith": "repair-stage-clot"
     },
     {
       "id": "repair-soft-skin",
@@ -15236,7 +15174,8 @@
         "color": "tissue",
         "tint": "token:cold"
       },
-      "castShadow": false
+      "castShadow": false,
+      "displayWith": "repair-stage-soft"
     }
   ],
   "groups": [

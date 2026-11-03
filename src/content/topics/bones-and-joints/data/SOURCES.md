@@ -109,3 +109,22 @@ No adult dosage, sunlight schedule or supplement prescription is reused. The hos
   unit tests verify this. The original Z-Anatomy / BodyParts3D credits, CC BY-SA
   4.0 / CC BY-SA 2.1 Japan boundaries and source records above still apply to
   those original meshes. This is not a newly imported third-party model.
+
+### Round 2 geometry, 2026-11-03
+
+`round2-mesh.mjs` independently constructs the epiphyseal cartilage volume at
+the head/neck boundary and the cortical remodelling region. The cartilage is
+trimmed against the same implicit femoral envelope used by `cortex-mesh.py`;
+the cut face suggests staggered cell columns, with cell size increasing towards
+the metaphysis. The cortical patch follows the exact bowed-shaft spline, with
+an irregular margin, shallow resorption pits and deposition/lamellar relief.
+Microscopic relief is enlarged qualitatively for teaching, not a histology scan
+or a measurement of cell counts, growth rate or healing time. Original code and
+geometry: CC BY-SA 4.0. No downloaded mesh or texture.
+
+References re-read 2026-11-03: [OpenStax A&P 2e §6.3, Bone Structure](https://openstax.org/books/anatomy-and-physiology-2e/pages/6-3-bone-structure)
+(epiphysis/metaphysis, compact cortex and osteons) and [§6.4, Bone Formation and Development](https://openstax.org/books/anatomy-and-physiology-2e/pages/6-4-bone-formation-and-development)
+(growth-plate cartilage zones and tissue turnover). Existing local long-bone
+reference `scripts/geo/bones-and-joints/refs/long-bone.webp` was inspected.
+Only anatomical principles were used; no source illustration was traced or
+published as mesh/texture. Existing S4/S5 and S34 source boundaries remain.
