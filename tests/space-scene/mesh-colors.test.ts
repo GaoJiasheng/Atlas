@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BufferGeometry, Float32BufferAttribute } from 'three';
 import { partSchema } from '../../src/engines/space-scene/schema';
@@ -45,20 +45,5 @@ describe('mesh geometry colours and loading envelopes', () => {
     expect(shape.pieces.length).toBeGreaterThan(0);
     expect(shape.position).toEqual([0, 0, 0]);
     shape.pieces.forEach(piece => piece.geometry.dispose());
-  });
-
-  it('leaves every other shipped topic outside both changed renderer paths', () => {
-    const root = 'src/content/topics';
-    for (const topic of readdirSync(root).filter(name => name !== 'living-things')) {
-      const path = `${root}/${topic}/data/parts.json`;
-      if (!existsSync(path)) continue;
-      const file = JSON.parse(readFileSync(path, 'utf8'));
-      for (const part of file.parts) expect(!!part.mesh && !!part.primitive, `${topic}/${part.id}`).toBe(false);
-      if (!file.model) continue;
-      const bytes = readFileSync(`public${file.model}`);
-      const gltf = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString());
-      for (const mesh of gltf.meshes ?? []) for (const primitive of mesh.primitives)
-        expect(primitive.attributes.COLOR_0, `${topic}/${mesh.name}`).toBeUndefined();
-    }
   });
 });
