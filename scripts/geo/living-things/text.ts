@@ -238,8 +238,8 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Staghorn fern', '鹿角蕨'),
     t('A fern that grows on tree branches.', '长在树枝上的蕨。'),
     t(
-      'Platycerium coronarium is a large fern native to Singapore that grows on trees without harming them [S51]. In this model forked fronds, shaped like a stag’s antlers, rise from a round frond pressed against the bark.\n\nLike all ferns, it never bears flowers: it is a non-flowering plant [S3].',
-      '鹿角蕨（Platycerium coronarium）是新加坡本地的大型蕨，长在树上，对树没有伤害 [S51]。在这个模型里，像鹿角一样分叉的叶子，从一片贴着树皮的圆叶中伸出来。\n\n和所有的蕨一样，它从来不开花，是不开花植物 [S3]。',
+      'Platycerium coronarium is a large fern native to Singapore that grows on trees without harming them [S51]. In this model a crown of shield fronds clasps the bark, while long, repeatedly forked fronds hang below it.\n\nLike all ferns, it never bears flowers: it is a non-flowering plant [S3].',
+      '鹿角蕨（Platycerium coronarium）是新加坡本地的大型蕨，长在树上，对树没有伤害 [S51]。在这个模型里，冠状的盾叶抱住树皮，细长、反复分叉的叶子垂在下方。\n\n和所有的蕨一样，它从来不开花，是不开花植物 [S3]。',
     ),
   ),
   moss: p(
@@ -326,8 +326,8 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Penguin', '企鹅'),
     t('Cannot fly, but has feathers.', '不会飞，却有羽毛。'),
     t(
-      'A penguin in general, not one particular kind. Penguins are birds that cannot fly; their wings are flippers, used for swimming [S42]. They have feathers and lay eggs [S2].\n\nPenguins live almost only in the southern half of the world [S42].',
-      '这是一只一般的企鹅，不代表哪一个物种。企鹅是不会飞的鸟，它的翅膀是鳍状肢，用来游泳 [S42]。它们有羽毛，会下蛋 [S2]。\n\n企鹅几乎都生活在地球的南半部 [S42]。',
+      'This model follows a gentoo penguin’s outline and markings. Penguins are birds that cannot fly; their wings are flippers, used for swimming [S42]. They have feathers and lay eggs [S2].\n\nPenguins live almost only in the southern half of the world [S42].',
+      '这个模型参考了巴布亚企鹅的轮廓和羽色。企鹅是不会飞的鸟，它的翅膀是鳍状肢，用来游泳 [S42]。它们有羽毛，会下蛋 [S2]。\n\n企鹅几乎都生活在地球的南半部 [S42]。',
     ),
   ),
   'plantain-squirrel': p(
@@ -342,8 +342,8 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Lesser dog-faced fruit bat', '短耳犬蝠'),
     t('Flies, but has fur: a mammal.', '会飞，却有毛：哺乳动物。'),
     t(
-      'Cynopterus brachyotis is native to Singapore, widespread and common [S17]. It has a furry body, eats fruit, spreads seeds and roosts upside down [S16].\n\nBats are mammals, the only mammals that can truly fly [S42]. A bat’s wing is skin stretched between the arm, the long finger bones and the side of the body [S76]; this model draws the finger bones as lines.',
-      '短耳犬蝠（Cynopterus brachyotis）是新加坡的本地动物，分布广、很常见 [S17]。它身上毛茸茸的，吃果实，帮植物传播种子，倒挂着休息 [S16]。\n\n蝙蝠是哺乳动物，也是唯一真正会飞的哺乳动物 [S42]。蝙蝠的翅膀是一层皮，从手臂、长长的指骨一直连到身体两侧 [S76]；这个模型用细线画出指骨。',
+      'Cynopterus brachyotis is native to Singapore, widespread and common [S17]. It has a furry body, eats fruit, spreads seeds and roosts upside down [S16].\n\nBats are mammals, the only mammals that can truly fly [S42]. A bat’s wing is skin stretched between the arm, the long finger bones and the side of the body [S76]; this model shows the membrane stretched over jointed fingers.',
+      '短耳犬蝠（Cynopterus brachyotis）是新加坡的本地动物，分布广、很常见 [S17]。它身上毛茸茸的，吃果实，帮植物传播种子，倒挂着休息 [S16]。\n\n蝙蝠是哺乳动物，也是唯一真正会飞的哺乳动物 [S42]。蝙蝠的翅膀是一层皮，从手臂、长长的指骨一直连到身体两侧 [S76]；这个模型画出了绷在有节指骨上的翼膜。',
     ),
   ),
   dolphin: p(

@@ -1,213 +1,153 @@
-/**
- * Specimens #4–#9 (docs/38 §3.2): three flowering plants (an ixora in flower,
- * a young chilli plant with no flowers yet, a young rhu tree that looks like a
- * pine) and three non-flowering plants (bird's nest fern, staghorn fern, moss).
- * Each in its own frame (footprint centre on the floor, ≤ 7 cm square).
- */
-import { add, bevel, blade, cross, DEG, ellipsoid, lathe, mul, norm, sweep, wing, type Model, type Prim, type V2, type V3 } from '../kit';
+/** Botanical specimen models: curved, creased leaves and naturally irregular growth. */
+import { Color } from 'three';
+import { add, cross, DEG, ellipsoid, lathe, mul, norm, rng, sweep, type Model, type Prim, type V3 } from '../kit';
+import { barkHost, flip, forkedFrond, mesh, organicStone, ribbon, shell, surface } from './botanical-surfaces';
 
-const POT = '#b4683f';
+const POT='#b4683f';
+const pot=(r:number,h:number):Prim=>lathe([0,0,0],[[0,0],[r*0.76,0],[r*0.81,0.001],[r,h-0.004],[r*1.065,h-0.0038],[r*1.07,h+0.0006],[r*1.03,h+0.0015],[r*0.93,h+0.0015],[r*0.90,h-0.002],[0,h-0.002]],'enamel',{tint:POT,segments:48});
 
-/** A small terracotta pot: outer wall, rim, soil level `soil` below the rim. */
-const pot = (r: number, h: number, colour = POT): Prim =>
-  lathe([0, 0, 0], [[0, 0], [r * 0.78, 0], [r, h], [r * 1.07, h], [r * 1.07, h + 0.002], [r * 0.93, h + 0.002], [r * 0.9, h - 0.002], [0, h - 0.002]], 'enamel', { tint: colour });
-
-/** A leaf blade on a stem at `at`, pointing along `dir`, lying with its upper face towards the light. */
-function leaf(at: readonly number[], dir: readonly number[], l: number, w: number, tint: string, widest = 0.45, veins = false): Prim {
-  const x = norm(dir);
-  const across = norm(cross([0, 1, 0], x));
-  const outline = blade(l, w, widest, 12, 1.5);
-  return wing(at, outline, x, across, 'tissue', { tint, ...(veins ? { veins: [[[0, 0], [l * 0.92, 0]]] } : {}) });
+function leaf(at:V3,dir:V3,l:number,w:number,tint:string,seed:number):Prim[]{
+  const d=norm(dir), across=norm(cross(d,[0,1,0]));
+  const points:V3[]=[at,add(at,add(mul(d,l*0.3),[0,l*0.1,0])),add(at,add(mul(d,l*0.66),mul(across,l*0.025*Math.sin(seed)))),add(at,add(mul(d,l),[0,-l*0.14,0]))];
+  const r=ribbon(points,[0.00025,w*0.78,w,0.00002],seed,14,4,0.09,0.10);
+  return [mesh(r.geometry,'tissue',tint),sweep(r.centre,[0.00018,0.00022,0.00023,0.00024,0.00025,0.00024,0.00023,0.00021,0.00019,0.00018,0.00016,0.00014,0.00012,0.0001,0.00008,0.00006,0.00002],'tissue',{tint:'#819654',caps:'flat',radial:6,segments:10})];
 }
 
-/** A four-petalled ixora flower seen face on: one cross-shaped outline (four rounded petals). */
-function crossFlower(r: number): V2[] {
-  const pts: V2[] = [];
-  for (let i = 0; i < 48; i++) {
-    const a = (i / 48) * 2 * Math.PI + Math.PI / 4;
-    const lobe = Math.max(0, Math.cos(2 * (a - Math.PI / 4)));
-    const rr = r * (0.28 + 0.72 * Math.pow(lobe, 0.55));
-    pts.push([rr * Math.cos(a), rr * Math.sin(a)]);
+/** Each ixora floret has exactly four softly cupped petals on a narrow tube. */
+function ixoraFlower(at:V3,n:V3,seed:number):Prim[]{
+  const x=norm(cross(n,[0.1,0,1])),y=cross(n,x), extra:Prim[]=[];
+  extra.push(sweep([add(at,mul(n,-0.004)),add(at,mul(n,-0.001)),at],[0.00026,0.00030,0.00035],'tissue',{tint:'#cb542b',caps:'flat',radial:6,segments:5}));
+  for(let k=0;k<4;k++){
+    const a=k*Math.PI/2+0.1*Math.sin(seed), d=add(mul(x,Math.cos(a)),mul(y,Math.sin(a))),ac=add(mul(x,-Math.sin(a)),mul(y,Math.cos(a)));
+    const l=0.0034*(1+0.06*Math.sin(seed+k));
+    extra.push(mesh(shell(surface(3,2,(u,v)=>{
+      const s=2*v-1,w=0.0011*Math.pow(Math.sin(Math.PI*u),0.58);
+      return add(at,add(mul(d,l*u),add(mul(ac,w*s),mul(n,0.0005*Math.sin(Math.PI*u)-0.00025*u*u))));
+    }),0.00009),'tissue',k%2?'#e05a32':'#d84b26'));
   }
-  return pts;
+  return extra;
 }
 
-const IXORA_LEAF = '#2f5a24';
-const IXORA_FLOWER = '#d8512a';
-
-/** #4 Ixora in flower: dark leathery leaves on three branches, each ending in a dome of small red-orange four-petalled flowers (F-45). */
-export function ixora(): Model {
-  const extra: Prim[] = [];
-  const base: V3 = [0, 0.02, 0];
-  const tops: V3[] = [
-    [0.013, 0.086, 0.007],
-    [-0.015, 0.079, 0.005],
-    [0.002, 0.092, -0.015],
-  ];
-  for (const [i, top] of tops.entries()) {
-    const mid = add(mul(add(base, top), 0.5), [top[0] * 0.15, 0, top[2] * 0.15]);
-    extra.push(sweep([base, mid, top], [0.0017, 0.0014, 0.001], 'tissue', { tint: IXORA_LEAF, radial: 7 }));
-    const out = norm([top[0], 0, top[2]]);
-    const side = norm(cross([0, 1, 0], out));
-    // Two pairs of opposite leaves on the branch, the upper pair turned a quarter turn (decussate).
-    const p1 = add(mul(add(base, mid), 0.5), [0, 0.008, 0]);
-    const p2 = add(mul(add(mid, top), 0.5), [0, -0.004, 0]);
-    for (const s of [1, -1]) {
-      extra.push(leaf(p1, add(mul(side, s), [0, 0.25, 0]), 0.024, 0.0095, IXORA_LEAF, 0.5));
-      extra.push(leaf(p2, add(mul(out, s), [0, 0.35, 0]), 0.022, 0.009, IXORA_LEAF, 0.5));
+export function ixora():Model{
+  const extra:Prim[]=[ellipsoid([0,0.0201,0],0.0152,[1,0.08,1],'abrasive',{tint:'#4f402a',segments:32})], base:V3=[0,0.020,0];
+  const tops:V3[]=[[0.013,0.083,0.006],[-0.014,0.077,0.004],[0.001,0.09,-0.014]];
+  for(const [i,top] of tops.entries()){
+    const mid=add(mul(add(base,top),0.5),[top[0]*0.2,0,top[2]*0.2]);
+    extra.push(sweep([base,mid,top],[0.0015,0.0011,0.00055],'tissue',{tint:'#455b29',caps:'flat',radial:10,segments:16}));
+    const out=norm([top[0],0,top[2]]),side=norm(cross([0,1,0],out));
+    for(const sign of [1,-1]){
+      extra.push(...leaf(add(mul(add(base,mid),0.5),[0,0.008,0]),add(mul(side,sign),[0,0.18,0]),0.025*(1+sign*0.04),0.011,'#315d2d',i*7+sign));
+      extra.push(...leaf(add(mul(add(mid,top),0.5),[0,-0.005,0]),add(mul(out,sign),[0,0.3,0]),0.021,0.009,'#3c6b32',i*8+sign));
     }
-    // The flower head: a dome of florets, with four open flowers on top.
-    const head: V3 = add(top, [0, 0.004, 0]);
-    extra.push(ellipsoid(head, 0.0105, [1, 0.62, 1], 'tissue', { tint: IXORA_FLOWER }));
-    for (let k = 0; k < 4; k++) {
-      const a = (k * 90 + i * 25) * DEG;
-      const n = norm([Math.cos(a) * 0.75, 0.66, Math.sin(a) * 0.75]);
-      const at = add(head, [n[0] * 0.0105, n[1] * 0.0105 * 0.62 + 0.0006, n[2] * 0.0105]);
-      const t1 = norm(cross(n, [0, 0, 1]));
-      extra.push(wing(at, crossFlower(0.0042), t1, cross(n, t1), 'tissue', { tint: IXORA_FLOWER }));
+    // Spiral packing with a raised central flower: a cluster, never a coloured ball.
+    for(let k=0;k<7;k++){
+      const a=k*2.39996+i*0.37,d=0.008*Math.sqrt(k/6),n=norm([Math.cos(a)*d*40,0.9,Math.sin(a)*d*40]);
+      const at=add(top,[Math.cos(a)*d,0.004+0.003*(1-d/0.009),Math.sin(a)*d]);
+      extra.push(sweep([top,add(at,mul(n,-0.004))],[0.00020,0.00008],'tissue',{tint:'#6b783b',caps:'flat',radial:6,segments:4}));
+      extra.push(...ixoraFlower(at,n,i*11+k));
     }
   }
-  return { primitive: pot(0.017, 0.022), extra };
+  return {primitive:pot(0.017,0.022),extra};
 }
 
-const CHILLI = '#6a9a3a';
-
-/** #5 A young chilli plant: two narrow seed leaves and the first true leaves; no flowers and no fruit yet. */
-export function chilliSeedling(): Model {
-  const top: V3 = [0.001, 0.064, 0.001];
-  const extra: Prim[] = [sweep([[0, 0.018, 0], [0.0015, 0.04, 0], top], [0.0016, 0.0014, 0.0011], 'tissue', { tint: CHILLI, radial: 7 })];
-  // Seed leaves: long and narrow, opposite.
-  for (const s of [1, -1]) extra.push(leaf([0.0012, 0.042, 0], [s * 1, 0.3, 0.15 * s], 0.017, 0.0042, CHILLI, 0.45, false));
-  // True leaves: broader, pointed, in two pairs.
-  for (const s of [1, -1]) extra.push(leaf([0.0014, 0.054, 0.0005], [0.25 * s, 0.45, s * 1], 0.022, 0.0095, CHILLI, 0.35));
-  for (const s of [1, -1]) extra.push(leaf([0.001, 0.062, 0.001], [s * 1, 0.7, -0.2 * s], 0.016, 0.0075, CHILLI, 0.35));
-  extra.push(ellipsoid(add(top, [0, 0.002, 0]), 0.0022, [1, 1.3, 1], 'tissue', { tint: CHILLI }));
-  return { primitive: pot(0.015, 0.02), extra };
-}
-
-const RHU_SHOOT = '#71885a';
-const RHU_WOOD = '#6b5039';
-
-/** #6 A young rhu tree: a thin trunk with tiers of thin drooping green shoots, like a pine, and three small cone-like fruits (F-46, F-100). */
-export function rhuSapling(): Model {
-  const extra: Prim[] = [];
-  const trunk = (y: number): V3 => [0.0015 * Math.sin(y * 40), y, 0.001 * Math.cos(y * 30)];
-  extra.push(sweep([trunk(0.02), trunk(0.05), trunk(0.08), trunk(0.112)], [0.0024, 0.002, 0.0013, 0.0006], 'wood', { tint: RHU_WOOD, radial: 7 }));
-  const tiers = [0.046, 0.06, 0.073, 0.085, 0.096, 0.106];
-  for (const [i, y] of tiers.entries()) {
-    const reach = 0.03 - i * 0.0036;
-    for (let k = 0; k < 4; k++) {
-      const a = (k * 90 + i * 37) * DEG;
-      const o: V3 = [Math.cos(a), 0, Math.sin(a)];
-      const start = trunk(y);
-      extra.push(
-        sweep(
-          [start, add(start, [o[0] * reach * 0.45, 0.004, o[2] * reach * 0.45]), add(start, [o[0] * reach * 0.85, -0.004, o[2] * reach * 0.85]), add(start, [o[0] * reach, -0.016 + i * 0.0015, o[2] * reach])],
-          [0.0011, 0.001, 0.0009, 0.0005],
-          'tissue',
-          { tint: RHU_SHOOT, radial: 6, segments: 12 },
-        ),
-      );
-    }
+export function chilliSeedling():Model{
+  const extra:Prim[]=[ellipsoid([0,0.0181,0],0.0134,[1,0.08,1],'abrasive',{tint:'#51442e',segments:32}),sweep([[0,0.018,0],[0.0014,0.04,0],[0.0007,0.063,0.001]],[0.0013,0.001,0.0006],'tissue',{tint:'#66893d',caps:'flat',radial:10,segments:20})];
+  for(const sign of [1,-1]){
+    extra.push(...leaf([0.0012,0.041,0],[sign,0.28,sign*0.15],0.017*(1+0.05*sign),0.0043,'#7a9b45',sign));
+    extra.push(...leaf([0.0013,0.052,0.0005],[0.25*sign,0.35,sign],0.022*(1-0.05*sign),0.0095,'#5a9136',sign+4));
+    extra.push(...leaf([0.0008,0.061,0.001],[sign,0.56,-0.2*sign],0.015*(1+0.06*sign),0.0064,'#77a448',sign+7));
   }
-  for (const [k, y] of [0.058, 0.07, 0.082].entries()) {
-    const a = (k * 130 + 20) * DEG;
-    extra.push(ellipsoid(add(trunk(y), [Math.cos(a) * 0.009, -0.004, Math.sin(a) * 0.009]), 0.0024, [1, 1.15, 1], 'wood', { tint: RHU_WOOD }));
-  }
-  return { primitive: pot(0.016, 0.021), extra };
+  extra.push(...leaf([0.0007,0.063,0.001],[0.1,0.95,0.2],0.005,0.0022,'#8daf52',11));
+  return {primitive:pot(0.015,0.020),extra};
 }
 
-const BARK = '#6e553d';
-const NEST_GREEN = '#5f9a2c';
-
-/** #7 A bird's nest fern on a piece of bark: a rosette of broad, strap-shaped fronds around an empty centre; two fronds show the brown lines underneath (F-47). */
-export function birdsNestFern(): Model {
-  const extra: Prim[] = [];
-  const l = 0.04;
-  const w = 0.0115;
-  const outline = blade(l, w, 0.6, 14, 1.3);
-  for (let k = 0; k < 10; k++) {
-    const a = (k * 36 + 8) * DEG;
-    const up = (52 + (k % 3) * 6) * DEG;
-    const x: V3 = [Math.cos(a) * Math.cos(up), Math.sin(up), Math.sin(a) * Math.cos(up)];
-    const across = norm(cross([0, 1, 0], x));
-    const veins: V2[][] = [];
-    if (k === 2) {
-      veins.push([[0, 0], [l * 0.95, 0]]);
-      for (let t = 0.28; t < 0.86; t += 0.07) {
-        veins.push([[l * t, 0.0012], [l * (t + 0.05), w * 0.36]]);
-        veins.push([[l * t, -0.0012], [l * (t + 0.05), -w * 0.36]]);
+export function rhuSapling():Model{
+  const extra:Prim[]=[ellipsoid([0,0.0191,0],0.0143,[1,0.08,1],'abrasive',{tint:'#55452e',segments:32})], random=rng(604), trunk=(y:number):V3=>[0.0015*Math.sin(y*40),y,0.0008*Math.cos(y*30)];
+  extra.push(sweep([trunk(0.020),trunk(0.044),trunk(0.074),trunk(0.101),trunk(0.113)],[0.0021,0.0017,0.0012,0.0007,0.00015],'wood',{tint:'#72573e',caps:'flat',radial:12,segments:24}));
+  // Casuarina's foliage is jointed green branchlets, not pine needles or radial sticks.
+  for(let level=0;level<6;level++){
+    const y=0.042+level*0.012;
+    for(let k=0;k<3;k++){
+      const a=k*2.14+level*1.18+random()*0.28,reach=(0.029-level*0.0036)*(0.86+random()*0.22),o:V3=[Math.cos(a),0,Math.sin(a)],start=trunk(y);
+      const branch=[start,add(start,add(mul(o,reach*0.42),[0,0.005,0])),add(start,add(mul(o,reach*0.82),[0,-0.0005,0])),add(start,add(mul(o,reach),[0,-0.011,0]))];
+      extra.push(sweep(branch,[0.00055,0.00046,0.00028,0.00003],'tissue',{tint:'#617949',caps:'flat',radial:6,segments:10,rings:{every:0.0025,depth:0.11}}));
+      for(let j=1;j<=2;j++){
+        const t=j/4,attach=add(start,add(mul(o,reach*t),[0,0.004*Math.sin(t*Math.PI),0])),side=a+(j%2?1:-1)*(0.42+random()*0.35),l=(0.013+random()*0.008)*(1-level*0.1);
+        extra.push(sweep([attach,add(attach,[Math.cos(side)*l*0.4,-0.002,Math.sin(side)*l*0.4]),add(attach,[Math.cos(side)*l*0.7,-0.011,Math.sin(side)*l*0.7]),add(attach,[Math.cos(side)*l*0.8,-0.019*(1-level*0.09),Math.sin(side)*l*0.8])],[0.00032,0.00028,0.00018,0.00002],'tissue',{tint:j===2?'#7d925c':'#6e8750',caps:'flat',radial:6,segments:5,rings:{every:0.0022,depth:0.16}}));
       }
     }
-    extra.push(wing(add([0, 0.013, 0], [Math.cos(a) * 0.003, 0, Math.sin(a) * 0.003]), outline, x, across, 'tissue', { tint: NEST_GREEN, veins }));
   }
-  return { primitive: bevel([0, 0.006, 0], [0.058, 0.012, 0.044], 0.004, 'wood', { tint: BARK, rotation: [0, 12, 0] }), extra };
+  // Three persistent woody fruit clusters with visibly open scales, as stated in the part text.
+  for(const [k,y] of [0.056,0.069,0.081].entries()){
+    const a=(k*130+20)*DEG,at=add(trunk(y),[Math.cos(a)*0.008,-0.003,Math.sin(a)*0.008]);
+    extra.push(sweep([trunk(y),at],[0.0005,0.0003],'wood',{tint:'#72573e',caps:'flat',radial:6,segments:6}));
+    extra.push(ellipsoid(at,0.0023,[1,1.22,1],'wood',{tint:'#6f4d32',segments:20}));
+    for(let row=0;row<4;row++)for(let j=0;j<5;j++){
+      const angle=j*Math.PI/3+row*0.4,rr=0.0022*Math.sin((row+0.7)/4.6*Math.PI),p=add(at,[Math.cos(angle)*rr,(row-1.5)*0.00115,Math.sin(angle)*rr]);
+      extra.push(mesh(surface(3,4,(u,v)=>{const aa=(v-0.5)*Math.PI,rr=0.00065*Math.sin(Math.PI*u);return add(p,[Math.cos(angle)*rr*Math.cos(aa),0.0009*(u-0.5),Math.sin(angle)*rr*Math.cos(aa)]);}), 'wood','#a08055'));
+    }
+  }
+  return {primitive:pot(0.016,0.021),extra};
 }
 
-const STAG_GREEN = '#7d9c5a';
-
-/** A staghorn frond: a stalk that widens and forks twice into blunt antler tips. */
-function antler(l: number, w: number): V2[] {
-  const top: V2[] = [
-    [0, w * 0.14],
-    [l * 0.3, w * 0.22],
-    [l * 0.48, w * 0.5],
-    [l * 0.66, w * 0.95],
-    [l * 0.78, w * 1.25],
-    [l * 0.8, w * 1.12],
-    [l * 0.68, w * 0.7],
-    [l * 0.82, w * 0.62],
-    [l * 1.0, w * 0.66],
-    [l * 1.0, w * 0.52],
-    [l * 0.78, w * 0.42],
-    [l * 0.6, w * 0.24],
-    [l * 0.7, w * 0.08],
-    [l * 0.86, w * 0.1],
-  ];
-  return [...top, ...top.slice().reverse().map(([x, y]): V2 => [x, -y])];
+export function birdsNestFern():Model{
+  const extra:Prim[]=barkHost(), random=rng(701);
+  for(let k=0;k<10;k++){
+    const a=k*2.39996+random()*0.17,reach=0.026+random()*0.006,height=0.032+random()*0.012,o:V3=[Math.cos(a),0,Math.sin(a)],base:V3=[o[0]*0.003,0.016,o[2]*0.003];
+    const points:V3[]=[base,add(base,add(mul(o,reach*0.20),[0,height*0.38,0])),add(base,add(mul(o,reach*0.59),[0,height*0.79,0])),add(base,add(mul(o,reach),[0,height*(0.6+random()*0.13),0]))];
+    const r=ribbon(points,[0.0006,0.004,0.0083,0.0103,0.0102,0.0088,0.00006],k*1.19,28,4,0.12);
+    const green=new Color('#4f842d').lerp(new Color('#74a73b'),random()*0.8).getHexString();
+    extra.push(mesh(r.geometry,'tissue',`#${green}`));
+    extra.push(sweep(r.centre,r.centre.map((_,i)=>0.00035*(1-i/18)),'tissue',{tint:'#394a20',caps:'flat',radial:6,segments:20}));
+    if(k===3||k===8)for(let j=0;j<10;j++)for(const side of [-1,1]){
+      const t=0.46+j*0.041,p0=r.sample(t,side*0.15),p1=r.sample(t+0.026,side*0.77),p2=r.sample(t+0.037,side*0.91);
+      const offset:V3=[0,-0.00018,0];
+      extra.push(sweep([add(p0,offset),add(p1,offset),add(p2,offset)],[0.00012,0.00014,0.00004],'tissue',{tint:'#765133',caps:'flat',radial:6,segments:4}));
+    }
+  }
+  // Short, tangled roots and old stipe bases leave the nest centre hollow.
+  for(let k=0;k<16;k++){
+    const a=k*2.4,d=0.003+random()*0.003;
+    extra.push(sweep([[Math.cos(a)*d,0.015,Math.sin(a)*d],[Math.cos(a+0.35)*d*1.3,0.013,Math.sin(a+0.35)*d*1.3],[Math.cos(a+0.7)*d*1.6,0.011,Math.sin(a+0.7)*d*1.6]],[0.00035,0.00025,0.00003],'wood',{tint:k%2?'#806443':'#5d4d31',caps:'flat',radial:6,segments:5}));
+  }
+  const primitive=extra.shift()!;
+  return {primitive,extra};
 }
 
-/** #8 A staghorn fern on a piece of bark: a round shield frond pressed to the bark and forked, antler-like fronds (F-48). */
-export function staghornFern(): Model {
-  const extra: Prim[] = [];
-  const shield: V2[] = [];
-  for (let i = 0; i < 28; i++) {
-    const a = (i / 28) * 2 * Math.PI;
-    const r = 0.017 * (1 + 0.06 * Math.sin(5 * a));
-    shield.push([r * Math.cos(a), r * Math.sin(a)]);
+export function staghornFern():Model{
+   const extra:Prim[]=barkHost(true);
+  // Sterile shields wrap the host in a shallow crown, their upper margins lobed.
+  for(let layer=0;layer<2;layer++){
+    const phase=layer*1.9,half=0.016+layer*0.0015;
+    extra.push(mesh(shell(surface(layer===0?8:18,layer===0?18:24,(u,v)=>{
+      const angle=(v-0.5)*Math.PI*1.25+phase*0.12,spread=half*Math.sin(Math.PI*u*0.77),lobes=0.0013*Math.sin(v*Math.PI*7+phase+0.17*Math.sin(v*14))*u*u;
+      return [Math.sin(angle)*spread,0.032+u*((layer===0?0.018:0.031)+lobes*4)-0.003*layer,0.012+Math.cos(angle)*spread*0.42+0.003*Math.sin(Math.PI*u)];
+    }),0.00018),'tissue',layer===0?'#9b8a5b':'#8da85a'));
   }
-  extra.push(
-    wing([-0.002, 0.0128, -0.001], shield, [1, 0.08, 0], [0, 0.12, 1], 'tissue', {
-      tint: STAG_GREEN,
-    }),
-  );
-  const fronds: [number, number, number][] = [
-    [20, 34, 0.032],
-    [75, 46, 0.03],
-    [140, 30, 0.031],
-    [210, 40, 0.028],
-    [290, 36, 0.03],
-  ];
-  for (const [deg, elev, l] of fronds) {
-    const a = deg * DEG;
-    const e = elev * DEG;
-    const x: V3 = [Math.cos(a) * Math.cos(e), Math.sin(e), Math.sin(a) * Math.cos(e)];
-    extra.push(wing([Math.cos(a) * 0.003, 0.014, Math.sin(a) * 0.003], antler(l, 0.0075), x, norm(cross([0, 1, 0], x)), 'tissue', { tint: STAG_GREEN }));
-  }
-  return { primitive: bevel([0, 0.006, 0], [0.06, 0.012, 0.042], 0.004, 'wood', { tint: BARK, rotation: [0, -8, 0] }), extra };
+  // Each blade is one continuous surface with two rounded bifurcations.
+  for(let k=0;k<5;k++)extra.push(mesh(forkedFrond([(k-2)*0.0043,0.040,0.017],k*1.7),'tissue',k%2?'#819d58':'#77934d'));
+  const primitive=extra.shift()!;return {primitive,extra};
 }
 
-/** #9 Moss: low, soft green cushions on a flat stone. */
-export function moss(): Model {
-  const cushions: [number, number, number, number][] = [
-    [-0.012, 0.004, 0.012, 0.5],
-    [0.008, -0.006, 0.013, 0.45],
-    [0.014, 0.01, 0.009, 0.5],
-    [-0.004, -0.012, 0.009, 0.45],
-    [-0.02, -0.006, 0.007, 0.5],
-  ];
-  return {
-    primitive: ellipsoid([0, 0.0085, 0], 0.027, [1.12, 0.32, 0.88], 'abrasive', { tint: '#86837c', rotation: [0, -20, 0] }),
-    extra: cushions.map(([x, z, r, s]) => ellipsoid([x, 0.0165, z], r, [1, s, 1], 'fabric', { tint: '#5b8a2c' })),
-  };
+export function moss():Model{
+  const extra:Prim[]=[],random=rng(901);
+  const patches:[number,number,number][]=[[-0.012,0.004,0.011],[0.008,-0.006,0.012],[0.014,0.010,0.008],[-0.004,-0.012,0.008],[-0.020,-0.006,0.006]];
+  // Interlocking leafy mats below the visible shoots form five soft cushions.
+  // Their low, irregular surfaces have many tiny tuft summits, never ball silhouettes.
+  for(const [k,[x,z,r]] of patches.entries())extra.push(mesh(flip(surface(8,20,(u,v)=>{
+    const a=v*Math.PI*2,rr=r*u*(1+0.09*Math.sin(a*5+k)+0.05*Math.sin(a*11));
+    const tuft=0.00018*(Math.sin(u*25+a*6)+Math.cos(u*17-a*9));
+    const xx=x+Math.cos(a)*rr,zz=z+Math.sin(a)*rr,ground=0.008+0.009*Math.sqrt(Math.max(0,1-(xx/0.030)**2-(zz/0.023)**2))-0.0004;
+    return [xx,ground+0.0037*Math.pow(Math.max(0,1-u*u),0.65)+tuft*Math.sin(Math.PI*u),zz];
+  },(u,v)=>new Color('#3e6024').lerp(new Color('#73953b'),0.4+0.25*Math.sin(u*47+v*36)).getStyle())),'tissue','#ffffff'));
+  for(let i=0;i<55;i++){
+    const [px,pz,r]=patches[i%patches.length]!,a=i*2.39996+random()*0.4,d=Math.sqrt(random())*r*0.88,x=px+Math.cos(a)*d,z=pz+Math.sin(a)*d,y=0.008+0.009*Math.sqrt(Math.max(0,1-(x/0.030)**2-(z/0.023)**2))-0.0004+0.0037*Math.pow(Math.max(0,1-(d/r)**2),0.65),h=0.0018+random()*0.0028;
+    extra.push(sweep([[x,y,z],[x+0.0003,y+h*0.6,z],[x-0.0002,y+h,z+0.0003]],[0.00012,0.00009,0.00002],'tissue',{tint:'#516d29',caps:'flat',radial:6,segments:4}));
+    for(let j=0;j<5;j++){
+      const aa=j*2.4+i*0.7,at:V3=[x,y+h*(0.12+j*0.13),z],l=0.0020*(0.8+random()*0.5),dx=Math.cos(aa)*l,dz=Math.sin(aa)*l;
+      const r=ribbon([at,add(at,[dx*0.75,l*0.28,dz*0.75]),add(at,[dx,l*0.6,dz])],[0.0001,0.00065,0.00002],i+j,3,1,0.10,0.15);
+      extra.push(mesh(r.geometry,'tissue',j>3?'#86a440':i%3?'#668934':'#557d2b'));
+    }
+  }
+  return {primitive:organicStone(),extra};
 }

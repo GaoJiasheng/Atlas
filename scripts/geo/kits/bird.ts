@@ -5,6 +5,7 @@
  * flower-and-seed sunbird, frog-and-chicken hen and living-things specimens.
  * Dimensions are an original teaching reconstruction, not specimen measurements.
  */
+import { BufferGeometry, Float32BufferAttribute, Vector3, CatmullRomCurve3, SphereGeometry, Color } from 'three';
 import type { Primitive } from '../../../src/engines/space-scene/schema';
 
 type V = [number, number, number];
@@ -196,3 +197,195 @@ export function buildBird(options: BirdOptions = {}): BirdGeometry {
   }
   return { body, wing, legs, feather };
 }
+
+/** Additional build-time museum specimens. buildBird's historical output above
+ * is deliberately unchanged; these smooth surface studies opt in separately. */
+export interface BirdSculpturePiece { geometry: import('three').BufferGeometry; color: string; tint: string }
+export interface BirdSculpture { pieces: BirdSculpturePiece[]; digits: { foot: number; digit: number; root: V; tip: V }[] }
+
+function studySurface(n:number,m:number,fn:(u:number,v:number)=>V,closed=false):BufferGeometry {
+ const p:number[]=[],ix:number[]=[];
+ for(let i=0;i<=n;i++)for(let j=0;j<=m;j++)p.push(...fn(i/n,j/m));
+ for(let i=0;i<n;i++)for(let j=0;j<m;j++){
+  const a=i*(m+1)+j,b=a+m+1;ix.push(a,b,a+1,b,b+1,a+1);
+ }
+ const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();
+ if(closed){ // Weld periodic seam normals without collapsing the UV-like parameter grid.
+  const norm=g.getAttribute('normal');for(let i=0;i<=n;i++){
+   const a=i*(m+1),b=a+m,v=new Vector3().fromBufferAttribute(norm,a).add(new Vector3().fromBufferAttribute(norm,b)).normalize();norm.setXYZ(a,v.x,v.y,v.z);norm.setXYZ(b,v.x,v.y,v.z);
+  }
+ }
+ return g;
+}
+/** Smooth variable elliptical section along an arbitrary centreline; tapered caps. */
+function studyTube(points:V[],radii:number[],flat=1,radial=16,segments=24):BufferGeometry {
+ const curve=new CatmullRomCurve3(points.map(p=>new Vector3(...p)));
+ const frame=curve.computeFrenetFrames(segments,false);
+ return outward(studySurface(segments,radial,(u,v)=>{
+  const q=u*(radii.length-1),i=Math.min(radii.length-2,Math.floor(q)),t=q-i;
+  const r=radii[i]!*(1-t)+radii[i+1]!*t,c=curve.getPoint(u),a=v*Math.PI*2,k=Math.min(segments,Math.round(u*segments));
+  return c.addScaledVector(frame.normals[k]!,Math.cos(a)*r).addScaledVector(frame.binormals[k]!,Math.sin(a)*r*flat).toArray() as V;
+ },true));
+}
+function studyOrb(at:V,size:V,segments=24,rings=16):BufferGeometry {
+ const g=new SphereGeometry(1,segments,rings);g.scale(...size).translate(...at);return g;
+}
+/** Cambered lens feather/frond: closed, curved centre, asymmetric vane widths. */
+function studyLancet(root:V,tip:V,width:number,normal:V,camber=.001,segments=16,across=8):BufferGeometry {
+ const a=new Vector3(...root),b=new Vector3(...tip),axis=b.clone().sub(a),N=new Vector3(...normal).normalize(),side=new Vector3().crossVectors(N,axis).normalize();
+ return outward(studySurface(segments,across*2,(u,v)=>{
+  const angle=v*2*Math.PI,span=Math.pow(Math.sin(Math.PI*u),.65)*width*.5;
+  const w=Math.cos(angle)*span*(Math.cos(angle)>0?1:.78),h=Math.sin(angle)*width*.032*Math.sin(Math.PI*u);
+  const q=a.clone().addScaledVector(axis,u).addScaledVector(side,w).addScaledVector(N,h+camber*Math.sin(Math.PI*u)+.0003*Math.sin(u*8)*Math.abs(w)/width);
+  return q.toArray() as V;
+ },true));
+}
+
+/** A cross-section sculpt, rather than a surface of revolution: each ring has
+ * its own centre, fore/aft fullness and lateral width. Cubic interpolation
+ * blends the breast, nape and cranium without a ball-on-egg junction. */
+function studyBody(rings: [number, number, number, number, number][], n=64, m=48):BufferGeometry {
+ const centres=new CatmullRomCurve3(rings.map(([y,x,z])=>new Vector3(x,y,z)));
+ const radii=new CatmullRomCurve3(rings.map(([, , ,rx,rz])=>new Vector3(rx,rz,0)));
+ return studySurface(n,m,(u,v)=>{
+  const c=centres.getPoint(u),r=radii.getPoint(u),a=v*Math.PI*2;
+  return [c.x+Math.cos(a)*Math.max(0,r.x),c.y,c.z+Math.sin(a)*Math.max(0,r.y)];
+ },true);
+}
+
+/** Original miniature reconstructions, metre-sized for a 7 cm specimen cell.
+ * Myna is lateral (+X facing), gentoo-shaped penguin faces +Z. */
+export function buildBirdSculpture(species:'myna'|'penguin'):BirdSculpture {
+ const pieces:BirdSculpturePiece[]=[],digits:BirdSculpture['digits']=[];
+ const put=(geometry:BufferGeometry,tint:string,color='feathers')=>pieces.push({geometry,tint,color});
+ const line=(points:V[],radii:number[],tint:string,flat=1,radial=12,n=20,color='tissue')=>put(studyTube(points,radii,flat,Math.max(...radii)<.0012?Math.min(radial,8):radial,Math.max(...radii)<.0012?Math.min(n,10):n),tint,color);
+ const eye=(at:V,size:V,tint:string)=>put(studyOrb(at,size,14,10),tint,'eye');
+ const feather=(root:V,tip:V,width:number,normal:V,tint:string,curve=.0008)=>put(studyLancet(root,tip,width,normal,curve,12,3),tint);
+ const dark=species==='myna'?'#505255':'#272c30',pale='#e9e7df',yellow='#deb43f';
+ if(species==='myna'){
+  const bodyRings:[number,number,number,number,number][]=[
+   [.016,-.006,0,.001,.001],[.019,-.005,0,.009,.007],[.026,-.003,0,.016,.010],
+   [.033,.001,0,.014,.011],[.039,.008,0,.009,.008],[.044,.015,0,.0075,.0075],
+   [.049,.018,0,.008,.0073],[.053,.018,0,.006,.006],[.055,.017,0,0,0],
+  ];
+  put(studyBody(bodyRings,56,40),dark);
+  // Fit every vane to the very same cubic cross-sections as the body.
+  const bodyCentres=new CatmullRomCurve3(bodyRings.map(([y,x,z])=>new Vector3(x,y,z)));
+  const bodyRadii=new CatmullRomCurve3(bodyRings.map(([, , ,rx,rz])=>new Vector3(rx,rz,0)));
+  const skinRings=Array.from({length:257},(_,i)=>{const c=bodyCentres.getPoint(i/256),r=bodyRadii.getPoint(i/256);return [c.y,c.x,r.x,r.y];});
+  const folded=(root:V,tip:V,width:number,side:number,tint:string,camber=.0008)=>{
+   const g=studyLancet(root,tip,width,[0,.12,side],camber,12,3),p=g.getAttribute('position');
+   for(let i=0;i<p.count;i++){
+    const x=p.getX(i),y=p.getY(i);let k=0;while(k<skinRings.length-2&&y>skinRings[k+1]![0]!)k++;
+    const a=skinRings[k]!,b=skinRings[k+1]!,t=Math.max(0,Math.min(1,(y-a[0]!)/(b[0]!-a[0]!)));
+    const cx=a[1]!*(1-t)+b[1]!*t,rx=a[2]!*(1-t)+b[2]!*t,rz=a[3]!*(1-t)+b[3]!*t;
+    const z=rz*Math.sqrt(Math.max(0,1-((x-cx)/rx)**2));
+    p.setZ(i,side*(Math.max(.003,z)+.00048+(Math.abs(root[2])-.008)*.45+.00003*Math.sin(root[0]*2000))+(p.getZ(i)-root[2])*.25);
+   }
+   g.computeVertexNormals();put(g,tint);
+  };
+  // Broad-rooted maxilla with a shallow arched culmen; each cross-section
+  // independently controls bill width and depth, unlike a cone.
+  const billLoft=(points:V[],radii:V[],tint:string)=>{
+   const centre=new CatmullRomCurve3(points.map(p=>new Vector3(...p))),r=new CatmullRomCurve3(radii.map(p=>new Vector3(...p)));
+   put(studySurface(24,20,(u,v)=>{const c=centre.getPoint(u),rr=r.getPoint(u),a=-v*Math.PI*2;return [c.x,c.y+Math.cos(a)*rr.x,c.z+Math.sin(a)*rr.y];},true),tint,'plastic');
+  };
+  billLoft([[.023,.047,0],[.027,.0473,0],[.031,.0466,0],[.034,.0456,0]],[[.0019,.0024,0],[.0017,.0021,0],[.0008,.0011,0],[.00003,.00003,0]],yellow);
+  billLoft([[.023,.0445,0],[.028,.0447,0],[.0315,.0451,0],[.0338,.0455,0]],[[.0010,.0019,0],[.00075,.0015,0],[.00035,.00065,0],[.00003,.00003,0]],yellow);
+  for(const side of [-1,1]){
+   line([[.024,.0456,side*.0023],[.029,.0455,side*.0016],[.033,.0455,side*.0006]],[.00022,.00018,.00004],dark,1,6,10);
+   eye([.0267,.0487,side*.0019],[.00045,.00022,.00015],dark);
+   eye([.021,.0496,side*.0064],[.00135,.00135,.0005],yellow);
+   eye([.0213,.0496,side*.00685],[.00078,.00082,.00038],'#181b1b');
+   eye([.0216,.0502,side*.00715],[.00022,.00022,.00012],pale);
+   // Nine exposed primaries, six secondaries, and imbricate covert rows.
+   for(let i=0;i<9;i++){
+    const u=i/8,z=side*(.0085+.0010*Math.sin(u*Math.PI));
+    folded([.007-u*.010,.034-u*.001,z],[-.019-u*.002,.023+u*.006,side*.0065],.0047,side,i%3===0?'#3c4043':dark);
+   }
+   folded([.008,.0335,side*.0094],[.0015,.0288,side*.0100],.0024,side,dark); // reduced tenth primary
+   for(let i=0;i<6;i++)folded([.007-i*.0028,.0344-i*.00018,side*.0100],[-.005-i*.0029,.0275,side*.0093],.0051,side,i===3?pale:'#505154');
+   for(let i=0;i<3;i++)folded([.003-i*.003,.0346-i*.00035,side*.0103],[-.008-i*.002,.0283,side*.009],.0040,side,'#55575a'); // tertials
+   for(let row=0;row<2;row++)for(let i=0;i<7;i++){
+    const x=.007-i*.0027,y=.0350-row*.0020-i*.00030;
+    folded([x,y,side*.0100],[x-.006,y-.0035,side*.0105],.0036,side,row?'#4a4e50':'#55575a',.00025);
+   }
+  }
+  for(let i=0;i<12;i++){
+   const z=(i-5.5)*.00085,tip:V=[-.039+Math.abs(i-5.5)*.00055,.0115+Math.abs(i-5.5)*.00045,z*1.7];
+   const root:V=[-.012,.024,z*.6];feather(root,tip,.0037,[0,1,0],dark,.0006);
+   const r:V=root.map((v,k)=>v+(tip[k]!-v)*.86) as V;feather(r,[tip[0],tip[1]+.00015,tip[2]],.0023,[0,1,0],pale,.0001);
+  }
+  for(let i=0;i<6;i++)feather([.019-i*.0013,.0535,-.0008+i*.0002],[.020-i*.0017,.0574-i*.00038+Math.sin(i*2)*.0004,-.0003],.0013,[0,0,1],dark,.0003);
+  for(let foot=0;foot<2;foot++){
+   const z=(foot?1:-1)*.0046;
+   line([[0,.022,z],[.0015,.016,z],[.0005,.011,z]],[.003,.0023,.0010],dark,1,16,16);
+   line([[.0005,.012,z],[-.001,.007,z],[.001,.002,z]],[.001,.00085,.00072],yellow,1,12,18,'plastic');
+   for(let i=0;i<8;i++){
+    const y=.003+i*.00105,x=.001-(y-.002)*.25;
+    line([[x-.00055,y,z-.00060],[x-.0008,y+.00017,z],[x-.00055,y,z+.00060]],[.00012,.00013,.00012],'#b49037',1,6,5,'plastic');
+   }
+   for(let digit=0;digit<4;digit++){
+    const back=digit===3,spread=back?(foot?-.0012:.0012):(digit-1)*.0023;
+    const end:V=[back?-.0063:.0076+(digit===1?.0019:0),.00075,z+spread];
+    const root:V=[.001,.0018,z],mid:V=[root[0]+(end[0]-root[0])*.55,.0009,z+spread*.52];
+    line([root,mid,end],[.00072,.00062,.00039],yellow,1,10,14,'plastic');
+    const claw:V=[end[0]+(back?-.0017:.0018),.00035,end[2]+spread*.12];
+    line([end,[end[0]+(back?-.0009:.0009),.0010,end[2]],claw],[.0004,.00032,.00003],'#444238',1,8,10,'plastic');
+    digits.push({foot,digit,root,tip:end});
+    for(let k=1;k<3;k++){
+     const t=k/3,p:V=root.map((a,j)=>a+(end[j]!-a)*t) as V;
+     eye(p,[.00067,.00025,.00064],yellow);
+    }
+   }
+  }
+ }else{
+  const g=studyBody([
+   [.005,0,-.001,.001,.001],[.009,0,-.001,.011,.009],[.019,0,-.001,.016,.014],
+   [.031,0,0,.018,.015],[.044,0,-.001,.016,.013],[.055,0,-.002,.0125,.0105],
+   [.064,0,-.004,.008,.008],[.071,0,-.001,.009,.0095],[.078,0,.001,.010,.010],
+   [.083,0,.001,.0085,.008],[.087,0,0,.004,.004],[.088,0,0,0,0],
+  ],72,48);
+  // White feather tracts follow the surface, never an ellipsoid laid on top.
+  const pos=g.getAttribute('position'),colors:number[]=[];
+  for(let i=0;i<pos.count;i++){
+   const x=pos.getX(i),y=pos.getY(i),z=pos.getZ(i);
+   const fade=(d:number,w=.0007)=>{const t=Math.max(0,Math.min(1,.5+d/w));return t*t*(3-2*t);};
+   const belly=fade(Math.min(y-.009,.064-y,z-(-.002+Math.pow(Math.abs(x)/.018,2)*.008)));
+   const brow=fade(Math.min(y-(.081-.0008*Math.cos(z*170)),.085-y,Math.abs(x)-.0045,.006-z,z+.005),.0008);
+   const c=new Color(dark).lerp(new Color(pale),Math.max(belly,brow));colors.push(c.r,c.g,c.b);
+  }
+  g.setAttribute('color',new Float32BufferAttribute(colors,3));put(g,'#ffffff');
+  line([[0,.076,.008],[0,.0758,.013],[0,.0745,.019],[0,.0742,.023]],[.0026,.0023,.0012,.00005],'#c56a32',.52,24,26,'plastic');
+  line([[0,.0738,.008],[0,.0736,.016],[0,.0740,.0228]],[.0020,.0016,.00005],'#a55630',.42,20,20,'plastic');
+  for(const side of [-1,1]){
+   line([[side*.0021,.0745,.011],[side*.0015,.0742,.018],[0,.0741,.0226]],[.00024,.00020,.00003],dark,1,6,12);
+   eye([side*.00835,.0782,.00665],[.00065,.0007,.0005],'#10181a');
+   eye([side*.00855,.0785,.0070],[.00018,.00018,.00012],pale);
+   feather([side*.011,.058,-.001],[side*.030,.024,-.006],.011,[side*.2,0,1],dark,.002);
+   feather([side*.012,.057,.0003],[side*.029,.025,-.0048],.007,[side*.2,0,1],'#41484a',.001);
+   line([[side*.0065,.011,.001],[side*.0065,.006,.004],[side*.0065,.002,.008]],[.003,.0023,.002],'#b9794d',1,16,18,'plastic');
+   const wrist:V=[side*.0065,.002,.007];
+   const tips:V[]=[[-.004,.0008,.019],[0,.0008,.022],[.004,.0008,.019]].map(([x,y,z])=>[side*.0065+x!,y!,z!] as V);
+   // Web follows digit rays and a shallow scallop between three forward toes.
+   for(let k=0;k<2;k++){
+    const a=tips[k]!,b=tips[k+1]!;
+    put(studySurface(12,8,(u,v)=>{
+     const x=a[0]*(1-v)+b[0]*v,z=a[2]*(1-v)+b[2]*v-.0012*Math.sin(v*Math.PI);
+     return [wrist[0]*(1-u)+x*u,.0012+.00055*Math.sin(u*Math.PI),wrist[2]*(1-u)+z*u];
+    }),'#bb7950','plastic');
+   }
+   for(let digit=0;digit<4;digit++){
+    const end=digit<3?tips[digit]!:[side*.0065,.0022,.002] as V;
+    const root:V=[...wrist];line([root,[(root[0]+end[0])/2,.0017,(root[2]+end[2])/2],end],[.0012,.0010,.00065],'#bc794f',1,10,14,'plastic');
+    line([end,[end[0],.0012,end[2]+(digit<3?.0013:-.0013)],[end[0],.0006,end[2]+(digit<3?.002:-.002)]],[.00065,.00042,.00003],dark,1,8,8,'plastic');
+    digits.push({foot:side<0?0:1,digit,root,tip:end});
+   }
+   for(let row=0;row<5;row++)line([[side*.0065-.002,.0021,.008+row*.0016],[side*.0065,.0024,.008+row*.0016],[side*.0065+.002,.0021,.008+row*.0016]],[.00020,.00023,.00020],'#976044',1,6,6,'plastic');
+  }
+  for(let i=0;i<9;i++)feather([0,.014,-.008],[(i-4)*.0012,.005,-.026+Math.abs(i-4)*.001],.0032,[0,1,0],dark,.0006);
+ }
+ return {pieces,digits};
+}
+
+function outward(g:BufferGeometry):BufferGeometry {const ix=g.index!;for(let i=0;i<ix.count;i+=3){const a=ix.getX(i);ix.setX(i,ix.getX(i+1));ix.setX(i+1,a);}g.computeVertexNormals();return g;}

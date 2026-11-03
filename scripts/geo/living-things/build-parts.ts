@@ -12,20 +12,22 @@
  * Texts come from ./text.ts. Prints each specimen's footprint and height, and
  * fails if one does not fit its cell.
  */
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { primitiveSchema } from '../../../src/engines/space-scene/schema';
 import { partBounds, partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
 import { r3, place, scaleModel, type Model, type Prim, type V3 } from './kit';
 import { PAD_IDS, SIM, SPECIMENS, SPECIMEN_IDS } from './sort-data';
-import { asianToad, beetle, dolphin, fruitBat, grasshopper, guppy, hawksbillTurtle, houseGecko, javanMyna, mudskipper, pangolin, penguin, plantainSquirrel, python, shark, snakehead, spider, treeFrog } from './specimens/animals';
-import { bacteriaDish, bracketFungus, mouldyBread, mushroom, yeast } from './specimens/fungi-bacteria';
+import { MODELS, specimen } from './models';
+import { modelBounds, modelGeometry, writeSculptures, type BakedSpecimen } from './bake';
 import { bacteriaCells, bench, caseCell, cellPlinth, LAYOUTS, MAGNIFICATION, microscope, padPrim, PLINTH, sortingTray, specimenCase, yeastCells } from './specimens/lab';
-import { pebble, plasticFlower, toyCar } from './specimens/non-living';
-import { birdsNestFern, chilliSeedling, ixora, moss, rhuSapling, staghornFern } from './specimens/plants';
 import { GROUP_TEXT, PART_TEXT, PRESET_TEXT, SPEC_TEXT, TELEMETRY_TEXT } from './text';
 
-const OUT = join(import.meta.dirname, '../../../src/content/topics/living-things/data/parts.json');
+const STAGING = process.argv.includes('--staging');
+const OUT = STAGING ? '/tmp/atlas-living-polish/parts.json' : join(import.meta.dirname, '../../../src/content/topics/living-things/data/parts.json');
+const MESH_OUT = STAGING ? '/tmp/atlas-living-polish/living-things.glb' : join(import.meta.dirname, '../../../public/models/living-things.glb');
+const sculptures:BakedSpecimen[]=[];
+mkdirSync('/tmp/atlas-living-polish',{recursive:true});
 
 interface Part {
   id: string;
@@ -36,43 +38,8 @@ interface Part {
   context?: boolean;
   castShadow?: boolean;
   clip?: boolean;
+  mesh?: string;
 }
-
-/** Specimen models in case order (§3.2 #1–#32). */
-const MODELS: Record<string, () => Model> = {
-  'toy-car': toyCar,
-  pebble,
-  'plastic-flower': plasticFlower,
-  ixora,
-  'chilli-seedling': chilliSeedling,
-  'rhu-sapling': rhuSapling,
-  'birds-nest-fern': birdsNestFern,
-  'staghorn-fern': staghornFern,
-  moss,
-  mushroom,
-  'bracket-fungus': bracketFungus,
-  'mouldy-bread': mouldyBread,
-  yeast,
-  'bacteria-dish': bacteriaDish,
-  grasshopper,
-  beetle,
-  spider,
-  'javan-myna': javanMyna,
-  penguin,
-  'plantain-squirrel': plantainSquirrel,
-  'fruit-bat': fruitBat,
-  dolphin,
-  pangolin,
-  snakehead,
-  guppy,
-  mudskipper,
-  shark,
-  'tree-frog': treeFrog,
-  'asian-toad': asianToad,
-  'house-gecko': houseGecko,
-  python,
-  'hawksbill-turtle': hawksbillTurtle,
-};
 
 /** The part group (LAYERS) of each true group of the sort model. */
 const PART_GROUP: Record<string, string> = {
@@ -94,19 +61,24 @@ const REACH = 0.036;
 const parts: Part[] = [];
 const report: string[] = [];
 let bad = false;
-const box = (p: { primitive: Prim; extra?: Prim[] }) =>
-  partBounds({ primitive: primitiveSchema.parse(p.primitive), extra: p.extra?.map((e) => primitiveSchema.parse(e)) } as never)!;
 
 const missingModel = SPECIMEN_IDS.filter((id) => !MODELS[id]);
 if (missingModel.length) throw new Error(`no model for ${missingModel.join(', ')}`);
 for (const [i, id] of SPECIMEN_IDS.entries()) {
+  const baked = i>=3 && id!=='bacteria-dish';
+  // Native parts use the renderer/sort solver's conservative envelopes (a
+  // rotated primitive's box can exceed its sampled surface). Meshes use the
+  // actual sculpted bounds, then carry that same envelope into the solver.
+  const box = (m:Model) => baked ? modelBounds(m) : partBounds({
+    primitive:primitiveSchema.parse(m.primitive),extra:m.extra.map(p=>primitiveSchema.parse(p)),
+  })!;
   // A model that reaches further than 3.6 cm from its home is scaled down to fit (§3.2: 8 cm pitch, about 1 cm apart).
   const reachOf = (m: Model) => {
     const bb = box(m);
     const [hx, , hz] = m.primitive.at;
     return Math.max(bb.max[0] - hx, hx - bb.min[0], bb.max[2] - hz, hz - bb.min[2]);
   };
-  const drawn = MODELS[id]!();
+  const drawn = specimen(id);
   const fit = Math.min(1, REACH / reachOf(drawn));
   const raw = fit < 1 ? scaleModel(drawn, fit) : drawn;
   // Main primitive over the cell centre (the model's home), bottom on the cell floor.
@@ -114,7 +86,7 @@ for (const [i, id] of SPECIMEN_IDS.entries()) {
   const b = box(local);
   const reach = reachOf(local);
   const h = b.max[1] - b.min[1];
-  const slots = partMaterialSlots({ primitive: primitiveSchema.parse(local.primitive), extra: local.extra.map((e) => primitiveSchema.parse(e)) } as never).length;
+  const slots = baked ? 1 : partMaterialSlots({ primitive: primitiveSchema.parse(local.primitive), extra: local.extra.map((e) => primitiveSchema.parse(e)) } as never).length;
   // §3.2: within 3.7 cm of its home in x and z (8 cm grid pitch, 1 cm apart at the closest) and at most 12 cm high.
   const fits = reach <= REACH + 2e-4 && h <= 0.12;
   if (!fits) bad = true;
@@ -122,6 +94,19 @@ for (const [i, id] of SPECIMEN_IDS.entries()) {
     `${String(i + 1).padStart(2)} ${id.padEnd(18)} ${((b.max[0] - b.min[0]) * 100).toFixed(1)} × ${((b.max[2] - b.min[2]) * 100).toFixed(1)} × ${(h * 100).toFixed(1)} cm  reach ${(reach * 100).toFixed(2)} cm${fit < 1 ? ` (drawn ×${fit.toFixed(2)})` : ''}  ${slots} slots${fits ? '' : '  <-- does not fit its cell'}`,
   );
   const placed = place(local, caseCell(i + 1));
+  if (baked) {
+    const g=modelGeometry(placed);g.computeBoundingBox();
+    const bb=g.boundingBox!.clone(),home=placed.primitive.at;
+    const at:V3=[home[0],(bb.min.y+bb.max.y)*.5,home[2]];
+    g.translate(-at[0],-at[1],-at[2]);
+    sculptures.push({id,geometry:g,at});
+    // Rest envelope supplies the unchanged sort solver's home/floor before
+    // the local GLB loads. Loaded geometry supplies visible shapes and anchors.
+    const finish = id==='asian-toad'?'abrasive':['javan-myna','penguin'].includes(id)?'feathers':id==='tree-frog'||id==='dolphin'?'enamel':['plantain-squirrel','fruit-bat'].includes(id)?'fabric':PART_GROUP[SPECIMENS[id]!.group]==='insects'?'chitin':['pangolin','house-gecko','python','hawksbill-turtle','snakehead','guppy','mudskipper','shark'].includes(id)?'scales':'tissue';
+    const proxy:Prim={kind:'box',at,size:[2*Math.max(bb.max.x-at[0],at[0]-bb.min.x),bb.max.y-bb.min.y,2*Math.max(bb.max.z-at[2],at[2]-bb.min.z)],color:finish,tint:'#ffffff'};
+    parts.push({id,group:PART_GROUP[SPECIMENS[id]!.group]!,mesh:id,primitive:proxy,explode:{dir:[0,1,0],dist:.04},castShadow:false});
+    continue;
+  }
   parts.push({ id, group: PART_GROUP[SPECIMENS[id]!.group]!, primitive: placed.primitive, ...(placed.extra.length ? { extra: placed.extra } : {}), explode: { dir: [0, 1, 0], dist: 0.04 }, castShadow: false });
 }
 
@@ -183,6 +168,7 @@ for (const [id, tx] of Object.entries(PART_TEXT)) {
 
 const hero = cam([0.55, 0.9, 1.15], [0.02, 0.0, -0.05], 30);
 const data = {
+  model: '/models/living-things.glb',
   parts: outParts,
   groups,
   views: {
@@ -204,6 +190,13 @@ const data = {
   sim: SIM,
 };
 
+const decodedBounds=await writeSculptures(MESH_OUT,sculptures);
+for(const part of outParts){
+ const b=decodedBounds[part.id];if(!b)continue;
+ const primitive=part.primitive!,home=primitive.at;
+ primitive.at=r3([home[0],(b.min[1]+b.max[1])*.5,home[2]]);
+ primitive.size=r3([2*Math.max(b.max[0]-home[0],home[0]-b.min[0]),b.max[1]-b.min[1],2*Math.max(b.max[2]-home[2],home[2]-b.min[2])]);
+}
 writeFileSync(OUT, `${JSON.stringify(data, null, 1)}\n`);
 console.log(report.join('\n'));
 const ctx = outParts.filter((p) => (p as { context?: boolean }).context).length;
