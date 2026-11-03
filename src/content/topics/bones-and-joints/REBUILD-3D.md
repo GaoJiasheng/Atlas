@@ -240,3 +240,22 @@ Gate logs and count reports: `/tmp/bones-round2/` (`check-final.log`,
 `build-final.log`, `counts-before.json`, `counts-after.json`, `decode.log`).
 No requested geometry or SOLO item remains unimplemented. Browser e2e/shoot
 and GPU measurements were deliberately not run under the offline-only brief.
+
+## Round 3 (2026-11-03): remodelling patch reads at its beat
+
+Acceptance found the renewal region faint at beat 06-03. Cause: on the curved
+outer cortex `remodelRegion()` offset its relief tangentially, so the wrap lay
+on the cortex spline, inside or coplanar with the shipped cortex mesh; only the
+narrow cut-lip strip showed, edge-on, in an ochre close to the yellow marrow.
+
+- Relief now rises along the outward normal (turning from the cut-face normal
+  over the lip) with a small lift that keeps the new bone 0.0005–0.003 model units proud of
+  the cortex; island, pit and ridge amplitudes are about 1.7× round 2.
+- Woven (new) bone takes `token:hot` against the lamellar cortex `token:bone`
+  (was `token:cut`, the cutaway ochre, too close to the marrow).
+- Beat 06-03 frames the patch from the front-lateral side at about a third of
+  the old distance.
+
+Only the `polished-remodel-region` accessors and the beat camera changed;
+part ids, counts and every other mesh are byte-identical. New test: rays from
+the lateral and posterolateral sides meet the patch before the cortex.

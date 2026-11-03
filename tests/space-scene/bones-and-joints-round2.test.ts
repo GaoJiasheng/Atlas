@@ -37,6 +37,16 @@ describe('bones and joints round 2',()=>{
    expect(a[0]!.point.z-b[0]!.point.z).toBeLessThan(.0015);
   }
  });
+ it('raises the new bone proud of the curved outer cortex, not inside it',()=>{
+  const patch=mesh('polished-remodel-region'),cortex=mesh('polished-cortex');
+  for(const y of [0,.026,.05])for(const deg of [90,120,150]){
+   const a=deg*Math.PI/180,origin=[Math.sin(a)*.1,y,-.008+Math.cos(a)*.1],dir=[-Math.sin(a),0,-Math.cos(a)];
+   const p=rays(patch,origin,dir),c=rays(cortex,origin,dir);
+   expect(p.length).toBeGreaterThan(0);
+   expect(c[0]!.distance-p[0]!.distance).toBeGreaterThan(.0005);
+   expect(c[0]!.distance-p[0]!.distance).toBeLessThan(.003);
+  }
+ });
  it('keeps every repair colour skin with its stage for each manual SOLO selection',()=>{
   for(const id of ['clot','soft','hard','remodelled']){
    const owner=`repair-stage-${id}`;

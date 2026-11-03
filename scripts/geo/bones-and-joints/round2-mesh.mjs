@@ -75,18 +75,26 @@ export function remodelRegion(){
   let x,z;
   if(v<=.43){x=cx+r-width*(1-t);z=cz+.001;}
   else {const angle=(v-.43)/.57*.98*edge;x=cx+r*Math.cos(angle);z=cz-r*.84*Math.sin(angle)+.001;}
-  // Irregular overlapping lamellar islands, shallow resorption pits and
+  // Irregular overlapping woven-bone islands, shallow resorption pits and
   // deposition ridges fade smoothly into the existing cortex at the border.
-  let texture=.000055*Math.sin(1730*y+4*Math.sin(v*13))+.00007*Math.sin(71*v+233*y);
+  // Round 3: about 1.7x the round-2 relief so the coarse new bone reads at
+  // its beat camera against the smooth lamellar cortex (still qualitative).
+  let texture=.00009*Math.sin(1730*y+4*Math.sin(v*13))+.00012*Math.sin(71*v+233*y);
   for(let j=0;j<11;j++){
    const a=.075+j*.082+.016*Math.sin(j*3),b=.21+.52*(.5+.5*Math.sin(j*2.3));
    const q=Math.sqrt(sq((u-a)/(.039+.009*Math.sin(j)))+sq((v-b)/(.12+.02*Math.cos(j))));
-   texture+=.00058*Math.exp(-sq((q-.75)/.17))-.00028*Math.exp(-sq(q/.28));
+   texture+=.00098*Math.exp(-sq((q-.75)/.17))-.00048*Math.exp(-sq(q/.28));
   }
   const blend=Math.pow(Math.sin(Math.PI*u)*Math.sin(Math.PI*v),.7);
-  const height=bottom?-.00022:(.00045+texture)*blend+.00025;
   const angle=v>.43?(v-.43)/.57*.98*edge:0;
-  x+=height*Math.sin(angle);z+=height*Math.cos(angle);
+  // Round 3: on the curved outer cortex the relief rises along the outward
+  // normal (it was tangential, leaving the region inside the cortex mesh),
+  // turning from the cut-face normal over the lip; a small extra lift keeps
+  // the new bone proud of the cortex surface, which the spline undershoots.
+  const w=Math.min(1,angle/.12),lift=bottom?0:.0011*w*Math.pow(Math.sin(Math.PI*u),.5);
+  const height=bottom?-.00022:(.00075+texture)*blend+.00025+lift;
+  let nx=w*Math.cos(angle),nz=(1-w)-w*Math.sin(angle)/.84;const nl=Math.hypot(nx,nz);nx/=nl;nz/=nl;
+  x+=height*nx;z+=height*nz;
   return [x,y,z];
  };
  surface(g,96,28,(u,v)=>point(u,v),true);
@@ -96,7 +104,7 @@ export function remodelRegion(){
  return finish(g);
 }
 export function appendRound2(owned,append){
- for(const [id,name,geometry,tint] of [['growth-plate','polished-growth-disc',growthDisc(),'token:cold'],['remodel-patch','polished-remodel-region',remodelRegion(),'token:cut']]){
+ for(const [id,name,geometry,tint] of [['growth-plate','polished-growth-disc',growthDisc(),'token:cold'],['remodel-patch','polished-remodel-region',remodelRegion(),'token:hot']]){
   append(name,geometry,[2,0,0]);const p=owned.parts.find(p=>p.id===id);
   p.mesh=name;p.material={color:'tissue',tint};delete p.primitive;delete p.extra;
  }
