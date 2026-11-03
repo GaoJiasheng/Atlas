@@ -207,6 +207,7 @@ export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSess
       if (!h?.object) continue;
       const t = bodyPlacement(s, d, b),
         o = h.object;
+      h.placed = true;
       o.position.fromArray(t.position);
       o.quaternion.fromArray(t.quaternion);
       o.scale.setScalar(t.scale);

@@ -76,6 +76,7 @@ export interface PartUniforms {
   uHatchPx: { value: number };
 }
 
+// GLSL is emitted without indentation to preserve the first-screen transfer budget.
 const VERTEX_DECLS = /* glsl */ `
 uniform float uContract, uLen, uThick, uShorten, uBulge, uGrain;
 uniform vec3 uFibreDir, uFibreCentre;
@@ -93,19 +94,19 @@ vAtlasSection = atlasSection;
 vGrainP = position - uFibreCentre;
 vGrainF = atlasFibre;
 if (uContract > 0.0001) {
-  float u = clamp(atlasU, 0.0, 1.0);
-  vec3 dir = mix(uFibreDir, atlasFibre, 0.5);
-  float dl = length(dir);
-  dir = dl > 0.0001 ? dir / dl : uFibreDir;
-  float cap = ${MAX_SHORTEN_CAP.toFixed(3)} * uLen;
-  float d = u * uContract * uShorten * uLen;
-  d = cap * tanh(d / max(cap, 1e-6));
-  transformed -= dir * d;
-  vec3 side = normal - dir * dot(normal, dir);
-  float sl = length(side);
-  side = sl > 0.0001 ? side / sl : normal;
-  float p = sin(3.14159265 * u);
-  transformed += side * p * p * uThick * uBulge * uContract;
+float u = clamp(atlasU, 0.0, 1.0);
+vec3 dir = mix(uFibreDir, atlasFibre, 0.5);
+float dl = length(dir);
+dir = dl > 0.0001 ? dir / dl : uFibreDir;
+float cap = ${MAX_SHORTEN_CAP.toFixed(3)} * uLen;
+float d = u * uContract * uShorten * uLen;
+d = cap * tanh(d / max(cap, 1e-6));
+transformed -= dir * d;
+vec3 side = normal - dir * dot(normal, dir);
+float sl = length(side);
+side = sl > 0.0001 ? side / sl : normal;
+float p = sin(3.14159265 * u);
+transformed += side * p * p * uThick * uBulge * uContract;
 }
 `;
 
@@ -118,18 +119,18 @@ varying vec3 vGrainP, vGrainF;
 
 const GRAIN_FNS = /* glsl */ `
 float atlasHash(vec3 p) {
-  p = fract(p * 0.3183099 + 0.1);
-  p *= 17.0;
-  return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+p = fract(p * 0.3183099 + 0.1);
+p *= 17.0;
+return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
 }
 float atlasNoise(vec3 x) {
-  vec3 i = floor(x);
-  vec3 f = fract(x);
-  f = f * f * (3.0 - 2.0 * f);
-  return mix(
-    mix(mix(atlasHash(i), atlasHash(i + vec3(1.0, 0.0, 0.0)), f.x), mix(atlasHash(i + vec3(0.0, 1.0, 0.0)), atlasHash(i + vec3(1.0, 1.0, 0.0)), f.x), f.y),
-    mix(mix(atlasHash(i + vec3(0.0, 0.0, 1.0)), atlasHash(i + vec3(1.0, 0.0, 1.0)), f.x), mix(atlasHash(i + vec3(0.0, 1.0, 1.0)), atlasHash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y),
-    f.z);
+vec3 i = floor(x);
+vec3 f = fract(x);
+f = f * f * (3.0 - 2.0 * f);
+return mix(
+mix(mix(atlasHash(i), atlasHash(i + vec3(1.0, 0.0, 0.0)), f.x), mix(atlasHash(i + vec3(0.0, 1.0, 0.0)), atlasHash(i + vec3(1.0, 1.0, 0.0)), f.x), f.y),
+mix(mix(atlasHash(i + vec3(0.0, 0.0, 1.0)), atlasHash(i + vec3(1.0, 0.0, 1.0)), f.x), mix(atlasHash(i + vec3(0.0, 1.0, 1.0)), atlasHash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y),
+f.z);
 }
 `;
 
@@ -137,38 +138,38 @@ float atlasNoise(vec3 x) {
 const GRAIN = /* glsl */ `
 #include <normal_fragment_maps>
 if (uGrain > 0.0001) {
-  float gl = length(vGrainF);
-  if (gl > 0.0001) {
-    vec3 gf = vGrainF / gl;
-    float along = dot(vGrainP, gf);
-    vec3 q = (vGrainP - gf * along) * uGrainK + gf * (along * uGrainK * 0.05);
-    float foot = length(fwidth(q));
-    float fade = 1.0 - smoothstep(0.3, 0.75, foot);
-    if (fade > 0.001) {
-      float h = (atlasNoise(q) + 0.5 * atlasNoise(q * 2.03 + 7.1)) * uGrain * fade;
-      vec3 sp = -vViewPosition;
-      vec3 dpx = dFdx(sp);
-      vec3 dpy = dFdy(sp);
-      vec3 r1 = cross(dpy, normal);
-      vec3 r2 = cross(normal, dpx);
-      float det = dot(dpx, r1);
-      float scale = length(dpx) / max(length(fwidth(q)), 1e-6);
-      vec3 grad = sign(det) * (dFdx(h) * r1 + dFdy(h) * r2) * scale;
-      normal = normalize(abs(det) * normal - grad);
-    }
-  }
+float gl = length(vGrainF);
+if (gl > 0.0001) {
+vec3 gf = vGrainF / gl;
+float along = dot(vGrainP, gf);
+vec3 q = (vGrainP - gf * along) * uGrainK + gf * (along * uGrainK * 0.05);
+float foot = length(fwidth(q));
+float fade = 1.0 - smoothstep(0.3, 0.75, foot);
+if (fade > 0.001) {
+float h = (atlasNoise(q) + 0.5 * atlasNoise(q * 2.03 + 7.1)) * uGrain * fade;
+vec3 sp = -vViewPosition;
+vec3 dpx = dFdx(sp);
+vec3 dpy = dFdy(sp);
+vec3 r1 = cross(dpy, normal);
+vec3 r2 = cross(normal, dpx);
+float det = dot(dpx, r1);
+float scale = length(dpx) / max(length(fwidth(q)), 1e-6);
+vec3 grad = sign(det) * (dFdx(h) * r1 + dFdy(h) * r2) * scale;
+normal = normalize(abs(det) * normal - grad);
+}
+}
 }
 `;
 
 const CUT_FACE = /* glsl */ `
 #include <clipping_planes_fragment>
 if (uCut > 0.5 && !gl_FrontFacing) {
-  float d = (gl_FragCoord.x + gl_FragCoord.y) / uHatchPx;
-  float f = abs(fract(d) - 0.5) * uHatchPx * 0.7071;
-  float line = 1.0 - smoothstep(0.35, 1.1, f);
-  gl_FragColor = vec4(mix(uCutColor, uHatchColor, line * 0.55), opacity);
-  #include <colorspace_fragment>
-  return;
+float d = (gl_FragCoord.x + gl_FragCoord.y) / uHatchPx;
+float f = abs(fract(d) - 0.5) * uHatchPx * 0.7071;
+float line = 1.0 - smoothstep(0.35, 1.1, f);
+gl_FragColor = vec4(mix(uCutColor, uHatchColor, line * 0.55), opacity);
+#include <colorspace_fragment>
+return;
 }
 `;
 
@@ -176,14 +177,14 @@ const TINT = /* glsl */ `
 #include <color_fragment>
 diffuseColor.rgb = mix(diffuseColor.rgb, uHiColor, uHi);
 if (vAtlasSection > 0.5) {
-  float hd = (gl_FragCoord.x + gl_FragCoord.y) / uHatchPx;
-  float hf = abs(fract(hd) - 0.5) * uHatchPx * 0.7071;
-  diffuseColor.rgb = mix(diffuseColor.rgb, uHatchColor, (1.0 - smoothstep(0.35, 1.1, hf)) * 0.4);
+float hd = (gl_FragCoord.x + gl_FragCoord.y) / uHatchPx;
+float hf = abs(fract(hd) - 0.5) * uHatchPx * 0.7071;
+diffuseColor.rgb = mix(diffuseColor.rgb, uHatchColor, (1.0 - smoothstep(0.35, 1.1, hf)) * 0.4);
 }
 if (uStripe > 0.001) {
-  float w = fract(vAtlasU * 7.0 - uTime * 0.8);
-  float band = smoothstep(0.0, 0.16, w) * (1.0 - smoothstep(0.2, 0.42, w));
-  diffuseColor.rgb = mix(diffuseColor.rgb, uSelColor, band * uStripe);
+float w = fract(vAtlasU * 7.0 - uTime * 0.8);
+float band = smoothstep(0.0, 0.16, w) * (1.0 - smoothstep(0.2, 0.42, w));
+diffuseColor.rgb = mix(diffuseColor.rgb, uSelColor, band * uStripe);
 }
 `;
 
@@ -191,9 +192,9 @@ const SELECTION = /* glsl */ `
 #include <emissivemap_fragment>
 totalEmissiveRadiance += uGlow;
 if (uSel > 0.001) {
-  float facing = abs(dot(normalize(normal), normalize(vViewPosition)));
-  float rim = pow(1.0 - facing, 2.5);
-  totalEmissiveRadiance += uSelColor * uSel * (uSelRim * rim + uSelTint);
+float facing = abs(dot(normalize(normal), normalize(vViewPosition)));
+float rim = pow(1.0 - facing, 2.5);
+totalEmissiveRadiance += uSelColor * uSel * (uSelRim * rim + uSelTint);
 }
 `;
 
@@ -258,16 +259,20 @@ export function createPartMaterial(): PartMaterial {
       .replace('#include <clipping_planes_fragment>', CUT_FACE)
       .replace('#include <color_fragment>', TINT)
       .replace('#include <emissivemap_fragment>', SELECTION)
+      // Three supplies USE_MAP for the retained surface albedo. A neutral floor
+      // keeps mapped orbit bodies readable; inverseTransformDirection normalises.
       .replace('#include <opaque_fragment>', `
         if (uOrbitLight > 0.5) {
-          vec3 worldNormal = inverseTransformDirection(normalize(vNormal), viewMatrix);
-          float light = uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*max(0.0,dot(normalize(worldNormal),uOrbitSun));
-          outgoingLight = diffuseColor.rgb * light;
+float day = max(0.0,dot(inverseTransformDirection(normalize(vNormal),viewMatrix),uOrbitSun));
+outgoingLight = diffuseColor.rgb * (uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*day);
+#ifdef USE_MAP
+if (uOrbitLight < 1.5) outgoingLight = mix(vec3(uOrbitFill),diffuseColor.rgb,day);
+#endif
         }
 if (vEmission > 0.5 && vEmission < 3.5) {if (!gl_FrontFacing) discard;float mu = abs(dot(normalize(vNormal), normalize(vViewPosition)));float gain = vEmission < 1.5 ? 1.5 * (0.46 + 0.54 * mu) : 1.0;outgoingLight = diffuseColor.rgb * gain + totalEmissiveRadiance;diffuseColor.a *= vEmission < 2.5 ? 1.0 / 0.55 : mu * mu;if (vEmission > 1.5 && vEmission < 2.5) diffuseColor.a *= pow(mu * (1.0 - mu), 2.0) * smoothstep(0.0, 0.16, mu);}
         #include <opaque_fragment>`);
   };
-  material.customProgramCacheKey = () => 'part7';
+  material.customProgramCacheKey = () => 'part8';
   return { material, uniforms };
 }
 

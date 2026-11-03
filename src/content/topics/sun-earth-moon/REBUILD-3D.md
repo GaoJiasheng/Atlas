@@ -1,8 +1,8 @@
 # Sun, Earth and Moon — 3D rebuild
 
-## Polish 2026-11-03
+## Polish 2026-11-03 — round 1 historical checkpoint
 
-**Status: topic-only improvements applied; full surface integration prepared but blocked by the explicit ownership boundary.** The user permits this topic's generators, content, assets and tests, while the current renderer discards glTF albedo maps and accepts only flat `/models/<name>.glb` routes. A concise approval request for the minimum shared support was sent during the work; no approval has been received. No shared engine file, framing code, browser, desktop, package/lock file or git state was modified. The reviewable proposed shared diff is `scripts/geo/sun-earth-moon/surface-support.patch`; it is **not applied**.
+**Historical checkpoint, superseded by round 2 below.** At the end of round 1, surfaces were prepared but not integrated because the allowed scope excluded shared renderer support. Only topic data, assets and the F5 close-up were live. The later accepted solar-system work supplied the shared surface/emission mechanism used in round 2. No shared engine, browser, desktop, package/lock or git write was performed in round 1.
 
 ### Items and references
 
@@ -15,8 +15,8 @@
 
 - Thirteen selectable part ids, four groups, eight chapters, 39 beats, thirteen controls, 23 outputs and the existing teaching numbers are retained. No explode/cutaway mechanism was added: these are already disabled for the orbit model.
 - Baseline and final live triangle counts are unchanged (only fill and one camera changed). The prepared model's counts and complete visible-scene comparison are recorded below after generation.
-- The complete proposed topic data is produced by `pnpm tsx scripts/geo/sun-earth-moon/build-parts.ts` at `/tmp/atlas-sun-earth-moon/proposed-parts.json`. It replaces only the three body spheres with the prepared meshes and minimally corrects Earth, observer, Moon and near-side details in EN + ZH. Live details still accurately describe the unintegrated model.
-- Rebuild: `pnpm tsx scripts/geo/sun-earth-moon/build-surfaces.ts`. Committed NASA inputs are under this topic's `sources/`; Natural Earth comes from installed world-atlas. `prepare-support-patch.py` creates a diff without writing to shared paths. Apply that diff only after scope approval, then install proposed parts and rerun the gates.
+- Round 1 prepared three surface meshes and minimal bilingual corrections for Earth, observer, Moon and the near-side pin; these were not live at that checkpoint. Round 2 installs them through `build-parts.ts`.
+- Committed NASA inputs are under this topic's `sources/`; Natural Earth comes from installed world-atlas. Current rebuild commands are listed in round 2 below.
 
 ### Offline visual QA and browser handoff
 
@@ -58,4 +58,72 @@ Final gates for the authorised topic-only state:
 
 Logs: `/tmp/atlas-sun-earth-moon/check-complete.log`, `tsc-final.log`, `validate-final.log`, `test-complete.log`, `build-final.log`.
 
-These gates do **not** validate the unapplied shared patch or an integrated textured runtime. Activating the prepared surfaces and neutral night shader remains unfinished solely because approval to change the four shared files has not arrived. The exact files are `PartNode.tsx`, `GltfSource.tsx`, `materials.ts` and `schema.ts` under `src/engines/space-scene/`; no core/framing/widgets code is proposed. The patch retains local opted-in albedo maps, provides neutral night fill and solar limb darkening, and admits the topic-owned nested GLB route. After that scope exception, install the proposed data, rerun the gates against the integrated state, and perform the browser checklist above. No browser, desktop, Chromium, e2e or GPU tool was used in this polish pass, as instructed.
+Those historical gates covered the unintegrated topic-only state. Round 2 below supersedes the unfinished integration and its old renderer proposal. No browser, desktop, Chromium, e2e or GPU tool was used in either pass, as instructed.
+
+## Polish 2026-11-03 — round 2 completed integration
+
+The live topic now loads `public/models/sun-earth-moon.glb`. All requested implementation items are complete. Browser/WebGL, interaction and GPU acceptance remain unperformed because this task explicitly prohibits browser/desktop use; the exact downstream checklist is in [FIXES.md](FIXES.md#polish-2026-11-03--round-2-browser-acceptance).
+
+### Per-item changes and references
+
+- **Earth:** enabled the Natural Earth 110m continents, illustrative broken cloud wisps and fixed Singapore ring. The geographic +X meridian remains 103.7357° E, so the movable observer at 1.3342° N coincides with Singapore's locator. Spin, true physical radii, axial tilt, equator, authored controls and dates are unchanged. Earth and Moon night sides now have a neutral 0.05 linear-grey floor, independent of ocean/albedo colour. Compared offline renders to the existing Apollo 17 Blue Marble reference; the cloud/surface colours remain illustrations rather than observed weather. All references and licences are in `data/SOURCES.md`.
+- **Moon:** enabled NASA SVS CGI Moon Kit / LROC maria, highlands and rays with the real LOLA relief. Longitude zero remains local +X, the synchronous near-side direction. Preserved the original measured height scale and small artificial orientation pin. Inspection from Earth's direction at four actual orbit snapshots shows the same maria face. Fixed a newly exposed polar-normal defect: longitude samples collapse to one mean pole radius with radial pole normals, eliminating a lighting singularity at the cap.
+- **Sun:** uses material `extras.atlasSurface` and `_EMISSION=1`, exactly the accepted solar-system mechanism. Warm gold granulation and its view-dependent limb darkening remain visible against both themes. The accepted shader replaces diffuse/specular illumination; the Sun uses the same membrane family as solar-system so its 0.55 opacity compensation preserves linear visibility fades. There is no moving studio highlight and no new Sun API, glow shell, flare or extra draw.
+- **Integration:** moved `atlasSurface` from node extras to material extras; the accepted GLTFLoader/style/fade path preserves embedded albedo, sRGB and UV orientation. The sole essential renderer addition is a neutral night-fill expression gated by Three's existing `USE_MAP` define inside the existing analytic orbit-light branch. The accepted loader supplies that map through `atlasSurface`; there is no new material API or uniform. Untextured orbit bodies and solar-system's non-orbit PBR path retain their previous behavior. The GLB sits at the flat `/models/sun-earth-moon.glb` route (Claude acceptance moved it so the shared schema regex stays unchanged); build/audit reports stay in `public/models/sun-earth-moon/`. No changes to GltfSource, PartNode, CatalogueSky, lighting rig, core, widgets, framing or camera files.
+- **Cleanup / text:** deleted the obsolete renderer proposal and its generator. `build-parts.ts` now installs live data by default and is idempotent (identical SHA-256 after a second run). Only Earth, observer, Moon and near-side pin details changed minimally in **both EN and ZH** to describe the now-visible surfaces. No part id/count, chapter/beat caption/reference, teaching number, sim input, group or binding changed. The solar-system test's obsolete assertions that this topic has no surface/emission opt-in were retired; its other material regressions remain intact.
+- **F1–F5:** retained all axis/normal/track label anchors, `hudFrame.parts`, 24px Earth minimum radius, orbit-guide radius 0.006, one-scale shadow note, 04.5 close-up visibility and 06.5 framing. No new camera numbers or helper-line changes. Existing 18 content tests cover those behavior contracts. Exploded/cutaway remain disabled for this orbit model, as before.
+
+### Counts and asset budget
+
+| Item | Round-1 live before | Round-2 live after |
+|---|---:|---:|
+| Sun | 2,976 | 16,128 |
+| Earth | 2,976 | 16,128 |
+| Moon | 2,976 | 65,024 |
+| Axis, equator and two markers | 6,816 | 6,816 |
+| Six runtime guides, all enabled | 4,992 | 4,992 |
+| **Conservative simultaneous total** | **20,736** | **109,088** |
+| Prepared → final GLB bytes | **3,882,408** | **1,420,292** |
+
+The full 97,280 body triangles from the prepared model are retained: no surface/silhouette reduction or height quantisation. Compression uses **WebP + lossless meshopt**. Earth/Moon remain 2048×1024 at quality 88 (105,746 / 381,990 bytes); Sun remains 1024×512 at quality 85 (15,066 bytes). The final GLB is below the **1,500,000-byte** task limit. Counts come from decoded indices and the actual six-sided runtime guide segments; they are conservative geometry inventory, not measured GPU/FPS/draw-call claims. Reports: `public/models/sun-earth-moon/{build-report,triangle-audit}.json`.
+
+### Offline visual verification
+
+Actual final compressed geometry and embedded images were decoded through meshopt and CPU-rasterised. Inspected Earth Singapore/Africa/Americas, its night side, Singapore plus actual observer, lunar near side/quarter/far side/night, Sun on paper/cinema with opposing light/camera directions, the four synchronous inspections, 02.1 tilt and 04.5 far-side patch. Close-up comparison used the existing Apollo 17 reference and NASA LROC map. The first normal audit exposed the lunar pole issue; fixed, rebuilt, rerendered and passed the audit. No missing surface is represented by an unchanged primitive preview.
+
+Previews: **`/tmp/atlas-sun-earth-moon/round-2/previews/`**. Key files: `contact-sheet.png`, `earth-singapore.png`, `earth-africa.png`, `earth-americas.png`, `earth-night.png`, `singapore-observer.png`, `moon-nearside.png`, `moon-quarter.png`, `moon-farside.png`, `moon-night.png`, `sun-self-lit.png`, `sun-self-lit-cinema.png`, `synchronous-{0,90,180,270}.png`, `tilt-02-1.png`, `far-side-04-5.png`. `before-04-5.png` is explicitly labelled a round-1 primitive baseline. Synchronous inspection panels use an explicitly labelled camera-aligned inspection light to isolate face orientation from phase; the other panels reconstruct analytic sunlight. These are offline material reconstructions, not browser screenshots or HUD acceptance.
+
+Reproduction:
+
+```sh
+pnpm tsx scripts/geo/sun-earth-moon/build-surfaces.ts
+pnpm tsx scripts/geo/sun-earth-moon/build-parts.ts
+pnpm tsx scripts/geo/sun-earth-moon/audit-geometry.ts
+pnpm tsx scripts/geo/sun-earth-moon/render-preview.ts /tmp/atlas-sun-earth-moon/round-2/previews
+```
+
+### Final gates
+
+The tiny mapped-orbit lighting addition initially pushed sample-space’s existing first-screen JS limit over by 70 bytes. Reused Three’s `USE_MAP` flag (no new loader code/API), shared the analytic-light dot product and removed indentation from emitted GLSL strings; these formatting changes alter no shader operations. The unchanged 539 KB budget subsequently passed. A final fade check also verifies the Sun’s family opacity matches the accepted photosphere compensation.
+
+All four required gates pass on the final integrated assets and Sun fade setup:
+
+- `pnpm check`: **0 errors / 0 warnings**, four existing hints (1,103 files).
+- `pnpm validate`: **94 topics, 0 errors / 0 warnings**.
+- `pnpm build`: **191 static pages**, successful PWA generation. The built GLB is byte-identical to the vendored file (SHA-256 `91479e3c21891782db4b5f3dbbaf3e9f3bdb4f09ba7ce470fe5ca8c7eae6e1f9`).
+- `pnpm test`: **252 files / 6,376 tests passed**, no skipped tests; final complete run after build/check completion. Includes production GLTFLoader, meshopt, material/style/fade, the 1.5 MB asset budget, measured relief/winding/normals/maria, all F1–F5 topic contracts, legacy GLB and solar-system regressions, and the unchanged first-screen JS budget.
+- `git diff --check`: clean (read-only; no git writes).
+
+No requested implementation item remains unfinished. Browser/WebGL/interaction/HUD acceptance and GPU performance are intentionally left to the downstream acceptance in FIXES.md because this task prohibits browser/desktop use. No e2e/Chromium session, package/lockfile edit, core/widget/framing change or other-topic content change was performed.
+
+Logs: `/tmp/atlas-sun-earth-moon/round-2/{check,validate,build,test,focused,preview,audit}.log`.
+
+## Claude browser acceptance · 2026-11-03 (round 2)
+
+GPU `pnpm shoot --beats` (en/paper, zh/cinema) against branch HEAD 93c5301 found the live surfaces broken in the real renderer, although every offline/unit check passed:
+
+- **All three bodies sat at the origin** (Sun drawn over Earth, Earth/Moon hidden inside it in most beats). Cause: GLB parts mount after OrbitDriver, so their PartNode frame ran later and reset the placed position to the GLB rest pose each frame (scale survived). Fix: OrbitDriver marks the handles it places (`placed`), and PartNode leaves their position to it — the same result primitive bodies always got by running earlier. Two lines in PartNode/OrbitDriver; first-screen JS budget still passes.
+- **Earth/Moon had no `_EMISSION` attribute** while sharing the part shader with the Sun; a missing attribute reads whatever generic value an earlier draw left. Every body now carries it (Earth/Moon 0), as solar-system does. GLB 1,420,292 bytes.
+- The shared-schema regex change was reverted; the GLB moved to the flat `/models/sun-earth-moon.glb` route. The e2e external-request check now ignores the `blob:` URLs GLTFLoader uses for embedded textures.
+
+After the fixes all 39 beats draw Earth (continents, clouds, Singapore ring), Moon (maria, relief) and a self-lit gold Sun in place; 39/39 beat links match. Remaining caveat: on cinema the neutral grey night side is close to the dark plate, so a fully night-side Earth (01.1) reads mostly by its outline.

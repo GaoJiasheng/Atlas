@@ -6,7 +6,7 @@ Provenance, public-domain terms and credits are in
 
 - `lroc.jpg`: NASA SVS CGI Moon Kit 4720's `lroc_color_2k.jpg`, downloaded
   2026-11-03 without pixel changes. 2048×1024, zero longitude at image centre,
-  north at the top. The original JPEG is embedded in the generated GLB.
+  north at the top. Re-encoded to embedded 2048×1024 WebP, quality 88.
 - `lola.u16`: the losslessly decoded pixel plane of that kit's
   `ldem_4_uint.tif`. 1440×720, one channel, little-endian unsigned uint16,
   no header. `lola.json` supplies dimensions and the original half-metre units.

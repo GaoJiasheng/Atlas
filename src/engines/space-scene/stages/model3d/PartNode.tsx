@@ -140,6 +140,8 @@ export interface PartShape {
 export interface PartHandle {
   /** Orbit sims: the material uniforms OrbitDriver writes the analytic sunlight into. */
   orbitUniforms?: PartUniforms[];
+  /** Orbit sims: OrbitDriver owns this part's position (a GLB body mounts after OrbitDriver, so its frame would run later and undo it). */
+  placed?: boolean;
   /** Whether cutaway planes apply to this part and its label / site anchors. */
   clip: boolean;
   object: Object3D;
@@ -689,7 +691,7 @@ export function PartNode(props: PartNodeProps) {
     // Explode (eased centrally, see ExplodeClock; a peel stage moves in its own window).
     const e = (props.stages > 0 ? stagedAmount(runtime.explode, part.explode.stage, props.stages) : runtime.explode) + slide;
     const g = posRef.current;
-    if (g) {
+    if (g && !handle.placed) {
       const x = shape.position[0] + push[0] * e;
       const y = shape.position[1] + push[1] * e;
       const z = shape.position[2] + push[2] * e;

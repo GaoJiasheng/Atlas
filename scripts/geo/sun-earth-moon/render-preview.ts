@@ -1,12 +1,14 @@
 /** CPU triangle rasterisation of the actual generated mesh and analytic
- * sunlight. No browser, desktop, WebGL or GPU. The coloured previews show the
- * proposed surface-support patch, not the current unpatched runtime.
+ * sunlight, atlasSurface night fill and accepted solar emission path.
+ * No browser, desktop, WebGL or GPU; DOM/HUD acceptance remains downstream.
  * pnpm tsx scripts/geo/sun-earth-moon/render-preview.ts
  */
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { NodeIO } from '@gltf-transform/core';
+import { EXTTextureWebP, EXTMeshoptCompression } from '@gltf-transform/extensions';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { BufferAttribute, BufferGeometry, CylinderGeometry, Color, Matrix3, Matrix4, PerspectiveCamera, Quaternion, Vector3 } from 'three';
 import { parse } from 'yaml';
 import { partsFile } from '../../../src/engines/space-scene/schema';
@@ -30,7 +32,8 @@ const snapshot=(chapter:number,beat:number)=>orbitSnapshot(cfg,resolveSimValues(
 interface Texture {data:Buffer;width:number;height:number;channels:number}
 interface Piece {g:BufferGeometry;matrix:Matrix4;color:Color;texture?:Texture;body?:'earth'|'moon'|'sun';kind?:string}
 const maps=new Map<string,{g:BufferGeometry;texture:Texture}>();
-const doc=await new NodeIO().read(resolve(root,'public/models/sun-earth-moon/surfaces.glb'));
+await MeshoptDecoder.ready;
+const doc=await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(resolve(root,'public/models/sun-earth-moon.glb'));
 for(const n of doc.getRoot().listNodes()){
  const p=n.getMesh()!.listPrimitives()[0]!,g=new BufferGeometry();
  for(const [a,b]of [['POSITION','position'],['NORMAL','normal'],['TEXCOORD_0','uv']]){
@@ -47,18 +50,18 @@ function color(s:string):Color{
  const a=/var\(--([\w-]+)\)/.exec(s);if(a)return color(tokens.get(a[1]!)??'#857d70');
  return new Color(s.startsWith('#')?s:'#c9bc9f');
 }
-function pieces(s:OrbitSnapshot,proposed=true,only?:string[]):Piece[]{
+function pieces(s:OrbitSnapshot,textured=true,only?:string[]):Piece[]{
  const d=orbitDisplay(cfg,s,'schematic'),out:Piece[]=[];
  for(const part of file.parts){
   if(only&&!only.includes(part.id))continue;
   const binding=sim.bind.find(b=>'part'in b&&b.part===part.id&&b.bodyTransform);
   if(!binding||!('bodyTransform'in binding)||!binding.bodyTransform)continue;
   const t=bodyPlacement(s,d,binding.bodyTransform),m=new Matrix4().compose(new Vector3(...t.position),new Quaternion(...t.quaternion),new Vector3(t.scale,t.scale,t.scale));
-  const surface=proposed?maps.get(part.id):null;
+  const surface=textured?maps.get(part.id):null;
   const body=binding.bodyTransform.body==='observer'?undefined:binding.bodyTransform.body;
   if(surface){out.push({g:surface.g,matrix:m,color:new Color('white'),texture:surface.texture,body});continue;}
-  for(const piece of partPieces(part))for(const instance of piece.matrices??[new Matrix4()]){
-   const slot=partMaterialSlots(part)[piece.slot??0]!;
+  for(const piece of partPieces(!textured&&maps.has(part.id)?{...part,mesh:undefined,primitive:{kind:'sphere' as const,size:[1],at:[0,0,0],color:'matte',tint:part.id==='earth-body'?'token:cold':part.id==='moon-body'?'token:neutral':'token:en-light'}}:part))for(const instance of piece.matrices??[new Matrix4()]){
+   const slot=partMaterialSlots(part)[piece.slot??0]??{color:'matte',tint:part.id==='earth-body'?'token:cold':part.id==='moon-body'?'token:neutral':'token:en-light'};
    out.push({g:piece.geometry,matrix:m.clone().multiply(instance),color:color(slot.tint??slot.color),body:part.id.endsWith('-body')?body:undefined,kind:part.id});
   }
  }
@@ -87,7 +90,7 @@ const aces=(v:number)=>Math.max(0,Math.min(1,(v*(2.51*v+.03))/(v*(2.43*v+.59)+.1
 const gamma=(v:number)=>v<=.0031308?12.92*v:1.055*v**(1/2.4)-.055;
 const linear=Array.from({length:256},(_,i)=>{const v=i/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});
 const viewReports:unknown[]=[];
-async function render(name:string,items:Piece[],position:V3,target:V3,fov:number,sun:V3,title:string,proposed=true,dark=false,baselineFill=.035){
+async function render(name:string,items:Piece[],position:V3,target:V3,fov:number,sun:V3,title:string,textured=true,dark=false,baselineFill=.035){
  if(only&&name!==only)return;
  const camera=new PerspectiveCamera(fov,width/(height-footer),.0001,10000);camera.position.fromArray(position);camera.lookAt(...target);camera.updateMatrixWorld();
  const buffer=Buffer.alloc(width*height*3);for(let i=0;i<width*height;i++)[0,1,2].forEach(c=>buffer[i*3+c]=dark?[31,33,36][c]!:[233,228,216][c]!);
@@ -116,18 +119,18 @@ async function render(name:string,items:Piece[],position:V3,target:V3,fov:number
     const day=Math.max(0,nx*light.x+ny*light.y+nz*light.z);
     let rgb:V3=[r,g,bl];
     if(item.body==='sun'){
-     if(proposed){const vx=position[0]-interp('px'),vy=position[1]-interp('py'),vz=position[2]-interp('pz'),mu=Math.abs((vx*nx+vy*ny+vz*nz)/Math.hypot(vx,vy,vz));rgb=rgb.map(v=>v*(.4+.6*mu**.55)) as V3;}
+     if(textured){const vx=position[0]-interp('px'),vy=position[1]-interp('py'),vz=position[2]-interp('pz'),mu=Math.abs((vx*nx+vy*ny+vz*nz)/Math.hypot(vx,vy,vz));rgb=rgb.map(v=>v*(1.5*(.46+.54*mu))) as V3;}
     }else if(item.body){
-     const fill=proposed?.05:baselineFill;
-     rgb=rgb.map(v=>proposed?fill*(1-day)+v*day:v*(fill+(1-fill)*day)) as V3;
+     const fill=textured?.05:baselineFill;
+     rgb=rgb.map(v=>textured?fill*(1-day)+v*day:v*(fill+(1-fill)*day)) as V3;
     }else{const lit=.45+.55*Math.max(0,nx*.4+ny*.7+nz*.5);rgb=rgb.map(v=>v*lit) as V3;}
     rgb.forEach((v,k)=>buffer[j*3+k]=Math.round(gamma(aces(v*(dark?1:1.05)))*255));
    }
   }
  }
- const caption=`<svg width="${width}" height="${height}"><text x="20" y="${height-30}" font-size="15" font-family="sans-serif" fill="${dark?'#e7e5df':'#2a2824'}">${title}</text><text x="20" y="${height-12}" font-size="11" font-family="monospace" fill="${dark?'#b9b4a8':'#555047'}">CPU MESH PREVIEW · ${proposed?'PROPOSED SHARED SURFACE SUPPORT':'CURRENT PRIMITIVES'} · ${tris} TRIANGLES · NO BROWSER / GPU / HUD QA</text></svg>`;
+ const caption=`<svg width="${width}" height="${height}"><text x="20" y="${height-30}" font-size="15" font-family="sans-serif" fill="${dark?'#e7e5df':'#2a2824'}">${title}</text><text x="20" y="${height-12}" font-size="11" font-family="monospace" fill="${dark?'#b9b4a8':'#555047'}">CPU MESH PREVIEW · ${textured?'LIVE ATLAS SURFACE':'ROUND-1 BASELINE'} · ${tris} TRIANGLES · NO BROWSER / GPU / HUD QA</text></svg>`;
  await sharp(buffer,{raw:{width,height,channels:3}}).composite([{input:Buffer.from(caption)}]).png().toFile(resolve(output,name+'.png'));
- viewReports.push({name,triangles:tris,position,target,fov,proposed});process.stdout.write(name+'\n');
+ viewReports.push({name,triangles:tris,position,target,fov,textured});process.stdout.write(name+'\n');
 }
 // Close-ups use the same shipped geometry with unit-scale body placements.
 const identity=new Matrix4();
@@ -145,14 +148,28 @@ for(const [name,pos,light]of [['moon-nearside',[3.4,.1,0],[1,.15,.15]],['moon-qu
 }
 const sun=maps.get('sun-body')!;
 await render('sun-self-lit',[{g:sun.g,matrix:identity,color:new Color('white'),texture:sun.texture,body:'sun'}],[2,.7,3],[0,0,0],38,[-1,0,0],'Self-luminous photosphere · restrained granulation and limb darkening');
+await render('sun-self-lit-cinema',[{g:sun.g,matrix:identity,color:new Color('white'),texture:sun.texture,body:'sun'}],[-2,.2,-3],[0,0,0],38,[1,0,0],'Self-lit Sun · opposing camera and light · no moving specular',true,true);
+await render('moon-night',[{g:moon.g,matrix:identity,color:new Color('white'),texture:moon.texture,body:'moon'}],[3.4,.1,0],[0,0,0],38,[-1,0,0],'Neutral dark grey lunar night-side teaching fill',true,true);
+// A camera and inspection light at Earth isolate orientation from lunar phase.
+// These four panels verify the actual snapshot quaternion, not a duplicate map.
+for(const angle of [0,90,180,270]){
+ const s=orbitSnapshot(cfg,resolveSimValues(sim,{...chapters[4]!.state.sim.set,'lunar-angle':angle,synchronous:true}),{timeSeconds:0});
+ const d=orbitDisplay(cfg,s,'schematic'),centre=new Vector3(...d.centres.moon),direction=new Vector3(...d.centres.earth).sub(centre).normalize();
+ const eye=centre.clone().addScaledVector(direction,d.radii.moon*3.4).toArray() as V3;
+ await render(`synchronous-${angle}`,pieces(s,true,['moon-body']),eye,centre.toArray() as V3,38,direction.toArray() as V3,`Moon from Earth at orbit ${angle}° · camera-aligned inspection light (phase isolated)`);
+}
+{
+ const s=snapshot(3,0),d=orbitDisplay(cfg,s,'schematic'),centre=new Vector3(...d.centres.earth);
+ const direction=new Vector3(...s.bodies.observer.position).sub(new Vector3(...s.bodies.earth.position)).normalize();
+ await render('singapore-observer',pieces(s,true,['earth-body','observer-marker']),centre.clone().addScaledVector(direction,d.radii.earth*3.5).toArray() as V3,centre.toArray() as V3,38,s.solarDirections.earth,'03.1 · Singapore texture ring and actual moving observer share the same meridian');
+}
 for(const [name,ci,bi]of [['tilt-02-1',2,0],['far-side-04-5',4,4]] as const){
  const s=snapshot(ci,bi),c=chapters[ci]!.state.beats[bi]!.camera,hide=chapters[ci]!.state.beats[bi]!.hide;
  const visible=file.parts.filter(p=>!hide.includes(p.id)).map(p=>p.id);
  await render(name,[...pieces(s,true,visible),...(ci===2?tiltGuides(s):[])],c.position,c.target,c.fov,s.solarDirections.moon,ci===2?'02.1 · 23.4° axial tilt and equator':'04.5 · enlarged sunlit far-side patch; original controls unchanged');
- if(ci===4)await render('live-after-04-5',pieces(s,false,visible),c.position,c.target,c.fov,s.solarDirections.moon,'Live topic-only fix · enlarged far-side patch, surface integration pending',false,false,.05);
  if(ci===4)await render('before-04-5',pieces(s,false),[.15,.65,1.6],[0,0,.5],42,s.solarDirections.moon,'Before · blank Moon and the previous wide camera',false);
 }
 const reportPath=resolve(output,'preview.json');
 const previous=only&&existsSync(reportPath)?JSON.parse(readFileSync(reportPath,'utf8')).views as {name:string}[]:[];
 const rendered=new Set(viewReports.map(v=>(v as {name:string}).name));
-writeFileSync(reportPath,JSON.stringify({kind:'CPU raster of generated geometry; proposed surface support; not current runtime, HUD or GPU acceptance',views:[...previous.filter(v=>!rendered.has(v.name)),...viewReports]},null,2)+'\n');
+writeFileSync(reportPath,JSON.stringify({kind:'CPU raster of final compressed geometry and accepted material formulas; not WebGL, HUD or GPU acceptance',views:[...previous.filter(v=>!rendered.has(v.name)),...viewReports]},null,2)+'\n');

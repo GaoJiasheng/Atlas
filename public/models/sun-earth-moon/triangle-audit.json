@@ -1,15 +1,14 @@
 {
   "method": "CPU generated triangle inventory, conservative all-body/all-guide visibility; excludes UI, optional ground and GPU draw-call/FPS measurements",
   "liveBefore": 20736,
-  "liveAfter": 20736,
-  "preparedAfter": 109088,
+  "liveAfter": 109088,
   "parts": {
-    "sun-body": 2976,
-    "earth-body": 2976,
+    "sun-body": 16128,
+    "earth-body": 16128,
     "earth-axis": 192,
     "equator-ring": 3456,
     "observer-marker": 2976,
-    "moon-body": 2976,
+    "moon-body": 65024,
     "near-side-mark": 192,
     "lunar-track": 12,
     "earth-track": 12,
@@ -17,11 +16,6 @@
     "node-line": 12,
     "light-ray-guide": 12,
     "scale-ruler": 12
-  },
-  "prepared": {
-    "earth-body": 16128,
-    "moon-body": 65024,
-    "sun-body": 16128
   },
   "guideTriangles": 4992
 }

@@ -1,27 +1,95 @@
-import { beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { readFileSync, statSync } from 'node:fs';
 import { NodeIO, type Document } from '@gltf-transform/core';
+import { EXTTextureWebP, EXTMeshoptCompression } from '@gltf-transform/extensions';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import sharp from 'sharp';
-import { Vector3 } from 'three';
+import { Mesh, ShaderLib, Texture, UniformsUtils, Vector3, type WebGLRenderer } from 'three';
+import { partsFile } from '../../src/engines/space-scene/schema';
+import { gltfSurface } from '../../src/engines/space-scene/stages/model3d/GltfSource';
+import { createPartMaterial, stylePartMaterial } from '../../src/engines/space-scene/stages/model3d/materials';
+import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
+import live from '../../src/content/topics/sun-earth-moon/data/parts.json';
 import { geographicDirection, globe, sampleMap, SINGAPORE } from '../../scripts/geo/sun-earth-moon/surfaces';
-const model='public/models/sun-earth-moon/surfaces.glb';
-let doc:Document;
-beforeAll(async()=>{doc=await new NodeIO().read(model);});
+const model='public/models/sun-earth-moon.glb';
+let doc:Document, gltf:GLTF;
+beforeAll(async()=>{
+  await MeshoptDecoder.ready;
+  doc=await new NodeIO().registerExtensions([EXTTextureWebP,EXTMeshoptCompression]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(model);
+  vi.stubGlobal('self',globalThis);
+  vi.stubGlobal('createImageBitmap',async(blob:Blob)=>{
+    const img=await sharp(Buffer.from(await blob.arrayBuffer())).metadata();
+    return {width:img.width,height:img.height,close(){}};
+  });
+  const bytes=readFileSync(model);
+  gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+});
+afterAll(()=>vi.unstubAllGlobals());
 
-describe('sun-earth-moon prepared surface asset (integration is separately gated by ownership)',()=>{
+describe('sun-earth-moon live local surfaces',()=>{
   it('keeps all three surfaces local, credited, and well below the screen and asset budgets',()=>{
-    expect(statSync(model).size).toBeLessThan(8*1024*1024);
+    expect(statSync(model).size).toBeLessThanOrEqual(1_500_000);
+    expect(live.model).toBe('/models/sun-earth-moon.glb');
+    expect(partsFile.safeParse(live).success).toBe(true);
     expect(doc.getRoot().getAsset().copyright).toContain('Natural Earth');
     expect(doc.getRoot().getAsset().copyright).toContain('NASA');
     expect(doc.getRoot().listNodes().map(n=>n.getName()).sort()).toEqual(['earth-body','moon-body','sun-body']);
     let count=0;
     for(const node of doc.getRoot().listNodes()){
-      expect(node.getExtras().atlasSurface).toBe(true);
       const p=node.getMesh()!.listPrimitives()[0]!;
-      expect(p.getMaterial()!.getBaseColorTexture()!.getImage()!.length).toBeGreaterThan(10000);
+      expect(p.getMaterial()!.getExtras().atlasSurface).toBe(true);
+      expect(p.getMaterial()!.getBaseColorTexture()!.getMimeType()).toBe('image/webp');
+      expect(p.getMaterial()!.getBaseColorTexture()!.getImage()!.length).toBeGreaterThan(1000);
+      expect(live.parts.find(part=>part.id===node.getName())?.mesh).toBe(node.getName());
       count+=p.getIndices()!.getCount()/3;
     }
     expect(count+11808).toBeLessThan(350000);
+  });
+  it.each(['paper','cinema'] as const)('uses the production loader and style/fade adapters on %s',theme=>{
+    for(const id of ['earth-body','moon-body','sun-body']){
+      const mesh=gltf.scene.getObjectByName(id) as Mesh,surface=gltfSurface(mesh)!;
+      expect(surface,id).toBeDefined();
+      const pm=createPartMaterial();
+      const kitTexture=new Texture();
+      const look=resolveMaterialLook(live.parts.find(p=>p.id===id)!.material!.color,{},theme,'#ffffff');
+      stylePartMaterial(pm,{look,kit:{roughness:()=>kitTexture,normal:()=>kitTexture,albedo:()=>null,dispose(){}},signal:'#cc6328',cold:'#4f7f8c',cut:'#b8973c',ink:'#2a2824',rim:.35,tint:.05,hatchPx:7});
+      surface.style(pm.material);
+      expect(pm.material.map).toBe(surface.source.map);
+      expect(pm.material.map!.colorSpace).toBe('srgb');
+      expect(pm.material.map!.flipY).toBe(false);
+      expect(pm.material.normalMap).toBeNull();
+      expect(pm.material.roughness).toBe(1);
+      expect(pm.material.metalness).toBe(0);
+      for(const fade of [0,.4,1]){
+        surface.fade(pm.material,fade*look.opacity,false);
+        expect(pm.material.opacity).toBe(fade*look.opacity);
+        expect(pm.material.transparent).toBe(fade*look.opacity<.999);
+        if(id==='sun-body'){
+          expect(look.opacity).toBe(.55);
+          expect(pm.material.opacity/.55).toBeCloseTo(fade,12);
+        }
+      }
+      const emission=mesh.geometry.getAttribute('_emission');
+      // Every body carries the attribute (Earth/Moon all 0): a missing one reads a stale generic value in WebGL.
+      expect(Array.from(emission.array).every(v=>v===(id==='sun-body'?1:0))).toBe(true);
+      pm.material.dispose();
+      kitTexture.dispose();
+    }
+  });
+  it('gates neutral analytic night fill to mapped orbit bodies, retaining PBR and self-lit Sun paths',()=>{
+    const pm=createPartMaterial();
+    const shader={uniforms:UniformsUtils.clone(ShaderLib.standard.uniforms),vertexShader:ShaderLib.standard.vertexShader,fragmentShader:ShaderLib.standard.fragmentShader} as Parameters<typeof pm.material.onBeforeCompile>[0];
+    pm.material.onBeforeCompile(shader,{} as WebGLRenderer);
+    expect(pm.uniforms.uOrbitLight.value).toBe(0);
+    expect(shader.fragmentShader).toContain('#ifdef USE_MAP\nif (uOrbitLight < 1.5) outgoingLight = mix(vec3(uOrbitFill),diffuseColor.rgb,day);\n#endif');
+    expect(shader.fragmentShader).toContain('#include <lights_physical_fragment>');
+    expect(shader.fragmentShader).toContain('outgoingLight = diffuseColor.rgb * gain + totalEmissiveRadiance;');
+    pm.material.dispose();
+  });
+  it('uses the flat local /models/<name>.glb route',()=>{
+    for(const model of ['/models/earth.glb','/models/sun-earth-moon.glb'])expect(partsFile.safeParse({...live,model}).success).toBe(true);
+    for(const model of ['https://example.com/a.glb','/models/../a.glb','/models/topic/surfaces.glb','/models/a.glb?q=1'])expect(partsFile.safeParse({...live,model}).success).toBe(false);
   });
   it('has outward winding and smooth outward normals, including the seam and poles',()=>{
     for(const node of doc.getRoot().listNodes()){

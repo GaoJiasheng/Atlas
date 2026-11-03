@@ -5,7 +5,28 @@
     "sun-body": 16128
   },
   "total": 97280,
-  "bytes": 3882408,
+  "bytes": 1420292,
+  "textures": {
+    "earth": {
+      "width": 2048,
+      "height": 1024,
+      "bytes": 105746,
+      "quality": 88
+    },
+    "moon": {
+      "width": 2048,
+      "height": 1024,
+      "bytes": 381990,
+      "quality": 88
+    },
+    "sun": {
+      "width": 1024,
+      "height": 512,
+      "bytes": 15066,
+      "quality": 85
+    }
+  },
+  "compression": "WebP + lossless meshopt",
   "meridians": {
     "earth": 103.7357,
     "moon": 0

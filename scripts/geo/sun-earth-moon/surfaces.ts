@@ -27,12 +27,17 @@ export function fbm(x: number, y: number, z: number): number {
  * Radius may be sampled from LOLA; 256 × 128 needs only 65,024 triangles. */
 export function globe(meridian: number, around = 128, rows = 64, radius: (lat: number, lon: number) => number = () => 1): BufferGeometry {
   const pos: number[] = [], uv: number[] = [], normals: number[] = [], indices: number[] = [];
-  const point = (lat: number, lon: number) => new Vector3(...geographicDirection(lat,lon,meridian)).multiplyScalar(radius(lat,lon));
+  // Equirectangular DEM rows contain multiple samples surrounding one pole.
+  // Collapse them to their mean radius; longitude is undefined at that point.
+  const pole = (lat:number) => Array.from({length:around},(_,i)=>radius(lat,-180+i/around*360)).reduce((a,b)=>a+b,0)/around;
+  const north=pole(90),south=pole(-90);
+  const point = (lat: number, lon: number) => new Vector3(...geographicDirection(lat,lon,meridian)).multiplyScalar(lat===90?north:lat===-90?south:radius(lat,lon));
   for (let j=0;j<=rows;j++) for (let i=0;i<=around;i++) {
     const lat=90-j/rows*180, lon=-180+i/around*360;
     const p=point(lat,lon), tangent=point(Math.max(-89.999,Math.min(89.999,lat+.025)),lon).sub(point(Math.max(-89.999,Math.min(89.999,lat-.025)),lon));
     const east=point(Math.max(-89.999,Math.min(89.999,lat)),lon+.025).sub(point(Math.max(-89.999,Math.min(89.999,lat)),lon-.025));
     const n=tangent.cross(east).normalize();
+    if(j===0||j===rows)n.copy(p).normalize();
     if (n.dot(p)<0) n.negate();
     pos.push(p.x,p.y,p.z); normals.push(n.x,n.y,n.z); uv.push(i/around,j/rows);
   }
