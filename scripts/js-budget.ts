@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 
 // space-scene is a ratchet (docs/02 target 300 KB): lowered as the 3D stage is split further, never raised.
-export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 539, 'math-scene': 300, 'time-scene': 481, simulation: 300 };
+export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 509, 'math-scene': 300, 'time-scene': 481, simulation: 300 };
 export interface Chunk { imports: string[]; dynamicImports: string[]; modules: string[] }
 export interface BudgetResult { topic: string; engine: string; gzipKB: number; budgetKB: number; files: string[] }
 
@@ -114,7 +114,7 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
       }
     }
     // Selected conditional feature roots are added below; never count unrelated dynamic imports.
-    for (const suffix of firstScreenModules(engine, data)) {
+    for (const suffix of firstScreenModules(engine, data, html)) {
       const id = moduleChunk(suffix);
       if (id) roots.add(id); // In an older/eager build it is already in the entry closure.
     }
@@ -127,7 +127,7 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
   });
 }
 
-function firstScreenModules(engine: string, data: any): string[] {
+function firstScreenModules(engine: string, data: any, html = ''): string[] {
   const modules: string[] = [];
   const add = (path: string) => modules.push(`${engine}/${path}`);
   if (engine === 'space-scene') {
@@ -138,6 +138,14 @@ function firstScreenModules(engine: string, data: any): string[] {
       const model = ({ 'life-cycle': 'lifecycle', magnet: 'magnet-solver', table: 'table-solver' } as Record<string, string>)[sim.kind] ?? sim.kind;
       add(`lib/sim/${model}.ts`);
       add('explorer/TryIt.tsx');
+      // The try-it card's own diagrams (each one fetched only for the sims that have it).
+      if (sim.circuit?.diagram) hud('CircuitCard');
+      if (sim.energy) hud('EnergyCard');
+      if (sim.lifeCycle) hud('CycleCard');
+      if (sim.sort) hud('KeyCard');
+      if (sim.microscope) hud('MicroscopeField');
+      if (sim.airfoil) { add('explorer/AirfoilPlot.tsx'); add('explorer/AirfoilPressure.tsx'); }
+      if (/&quot;curve&quot;:\[0,\{&quot;x&quot;/.test(html)) add('explorer/TryCurve.tsx');
       if (!sim.orbitRotation) stage('TimelineClock');
       if (sim.orbitRotation) { stage('OrbitSceneRoot'); stage('OrbitDriver'); add('lib/sim/orbit-session.ts'); }
       if (sim.senses?.profile === 'sound-only') stage('SoundClock');
@@ -158,6 +166,9 @@ function firstScreenModules(engine: string, data: any): string[] {
     if (file.mechanisms?.length) stage('MechanismDriver');
     if (file.flows.length) stage('Flows');
     if (file.parts.some((p: any) => p.mesh)) stage('GltfSource');
+    // Stage kits (stages/model3d/kits.ts) the stage waits for before it renders.
+    if (file.rig) add('stages/model3d/bodyKit.ts');
+    if (sim?.magnet || file.parts.some((p: any) => p.primitive?.kind === 'filings' || p.extra?.some((e: any) => e.kind === 'filings'))) add('lib/sim/field.ts');
     const moving = file.rig || data.fitness || file.animations.some((a: any) => a.kind === 'contract' || (a.kind === 'sequence' && (a.target.startsWith('joint:') || a.keys.some((k: any) => k.contract)))) || Object.values(file.poses ?? {}).some((p: any) => Object.keys(p.contract ?? {}).length || Object.keys(p.joints ?? {}).length);
     if (moving) stage('MotionDriver');
     // GLTF body helpers are requested only when the topic contains exercise poses.

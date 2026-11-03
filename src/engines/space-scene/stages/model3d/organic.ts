@@ -64,12 +64,6 @@ export function sweepGeometry(p: Sweep): BufferGeometry {
     const sy = Math.sin(th) * r * flat;
     return [0, 1, 2].map((i) => g.c[i]! + g.b[i]! * cx + g.n[i]! * sy);
   };
-  const normal = (g: Ring, th: number, sign: number): number[] => {
-    const rad = [0, 1, 2].map((i) => g.b[i]! * Math.cos(th) + (g.n[i]! * Math.sin(th)) / flat);
-    const l = Math.hypot(rad[0]!, rad[1]!, rad[2]!) || 1;
-    const k = Math.cos(g.cap);
-    return [0, 1, 2].map((i) => sign * ((rad[i]! / l) * k - g.t[i]! * g.tilt) + g.t[i]! * Math.sin(g.cap));
-  };
 
   // Outer surface rings: stations, plus dome rings for round caps (solid only).
   const base: Ring[] = stations.map((st) => ({ c: st.p, t: st.t, n: st.n, b: st.b, r: st.r, tilt: st.dr, cap: 0, s: st.s }));
@@ -87,13 +81,26 @@ export function sweepGeometry(p: Sweep): BufferGeometry {
 
   const grid = (rings: Ring[], inset: number, sign: 1 | -1, close: boolean) => {
     const start = pos.length / 3;
-    rings.forEach((g) => {
+    // The hot loop of a sweep: point() and normal() written out (same arithmetic), without arrays per vertex.
+    for (const g of rings) {
+      const { c, b, n, t } = g;
+      const r = Math.max(g.r * 0.08, g.r - inset);
+      const kc = Math.cos(g.cap), ks = Math.sin(g.cap), u = g.s * uScale;
       for (let j = 0; j <= R; j++) {
         const th = th0 + ((th1 - th0) * j) / R;
-        const r = Math.max(g.r * 0.08, g.r - inset);
-        vtx(point(g, th, r), normal(g, th, sign), g.s * uScale, j / R);
+        const cos = Math.cos(th), sin = Math.sin(th);
+        const cx = cos * r, sy = sin * r * flat;
+        pos.push(c[0]! + b[0]! * cx + n[0]! * sy, c[1]! + b[1]! * cx + n[1]! * sy, c[2]! + b[2]! * cx + n[2]! * sy);
+        const r0 = b[0]! * cos + (n[0]! * sin) / flat, r1 = b[1]! * cos + (n[1]! * sin) / flat, r2 = b[2]! * cos + (n[2]! * sin) / flat;
+        const l = Math.hypot(r0, r1, r2) || 1;
+        const n0 = sign * ((r0 / l) * kc - t[0]! * g.tilt) + t[0]! * ks;
+        const n1 = sign * ((r1 / l) * kc - t[1]! * g.tilt) + t[1]! * ks;
+        const n2 = sign * ((r2 / l) * kc - t[2]! * g.tilt) + t[2]! * ks;
+        const m = Math.hypot(n0, n1, n2) || 1;
+        nor.push(n0 / m, n1 / m, n2 / m);
+        uv.push(u, j / R);
       }
-    });
+    }
     const rows = rings.length;
     const last = close ? rows : rows - 1;
     for (let k = 0; k < last; k++) {

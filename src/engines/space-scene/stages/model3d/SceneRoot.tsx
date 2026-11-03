@@ -15,7 +15,7 @@ import type { SpaceSceneExt } from '../../index';
 import type { PartsFile, SpaceChapterState } from '../../schema';
 import type { FitnessBundle } from '../../../../content/schema/fitness';
 import type { SpaceUiStore } from '../../ui';
-import type { StageBridge } from '../../bridge';
+import { expectsModel, type StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
 import { explodeStages, targetExplodeAmount } from '../../lib/explode';
 import { bendAxisIndex } from '../../lib/bend';
@@ -35,12 +35,11 @@ import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, 
 import { WIRE_FILL_OPACITY } from './bodyStyle';
 import { StageMark } from './StageMark';
 import type { HandColors } from './Hands';
-import { handPlan, RELAXED } from '../../lib/hands';
+import type { HandPlan } from '../../lib/hands';
 import type { ExerciseBody } from '../../../../lib/anatomy';
 import type { GltfRig } from './GltfSource';
 import { makeGrip } from './grip';
 import { makeFoot } from './foot';
-import { heldSpan } from '../../lib/equipment';
 import { exercisePosture, EXERCISE_VIEWS } from '../../lib/camera';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
@@ -55,7 +54,8 @@ import { evaluateSimOnStage } from '../../lib/sim/carrier';
 import { frameKey, type MagnetFrames } from '../../lib/sim/frame';
 import { simEffects, type SimEffects } from '../../lib/sim/bind';
 import { shiftDelays } from '../../lib/sim/shift';
-import { fieldLines, ironFilings, type Filing } from '../../lib/sim/field';
+import type { Filing } from '../../lib/sim/field';
+import { kits } from './kits';
 import { filingMatrices, filingsCard } from './geometry';
 import type { Matrix4 } from 'three';
 import type { OrbitSession } from '../../lib/sim/orbit-session';
@@ -258,6 +258,13 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     setRig(r);
   }, []);
   const hasModel = data.model !== undefined && meshNames.size > 0;
+  // Ready waits for the glb's meshes to be applied to their parts and drawn too, unless the model failed (bridge.ts).
+  const modelState = useStore(ui, (u) => u.model.state);
+  const modelExpected = expectsModel(data, modelState);
+  useEffect(() => {
+    bridge.modelExpected = modelExpected;
+    return () => { bridge.modelExpected = false; };
+  }, [bridge, modelExpected]);
   useEffect(() => {
     if (hasModel && ui.getState().model.state === 'none') ui.setState({ model: { state: 'loading', progress: 0 } });
   }, [hasModel, ui]);
@@ -445,7 +452,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
   }, [rig, data.rig, bounds]);
   // Standing lifts with a long bar under an authored camera: the camera keeps its ends off the HUD side panels.
   const exerciseSpan = useCallback(
-    (id: string) => (playable.has(id) ? heldSpan(fitness?.exercises.find((e) => e.id === id)?.motion) : null),
+    (id: string) => (playable.has(id) && kits.body ? kits.body.heldSpan(fitness?.exercises.find((e) => e.id === id)?.motion) : null),
     [fitness, playable],
   );
   // The exercise camera's direction (the posture's default or `motion.camera`) and the body's turn.
@@ -473,9 +480,10 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     return [bone('hand.l'), bone('hand.r')];
   }, [rig, data.rig]);
   // The hands of the exercise on show (kept while the body fades out after it).
-  const lastPlans = useRef({ l: RELAXED, r: RELAXED });
+  // The body kit is here whenever the topic has a rig (kits.ts); without one there are no hands to plan.
+  const lastPlans = useRef<{ l: HandPlan; r: HandPlan } | null>(kits.body && { l: kits.body.RELAXED, r: kits.body.RELAXED });
   const handPlans = useMemo(() => {
-    if (exercising && exerciseSheet?.motion) lastPlans.current = { l: handPlan(exerciseSheet.motion, 'l'), r: handPlan(exerciseSheet.motion, 'r') };
+    if (exercising && exerciseSheet?.motion && kits.body) lastPlans.current = { l: kits.body.handPlan(exerciseSheet.motion, 'l'), r: kits.body.handPlan(exerciseSheet.motion, 'r') };
     return lastPlans.current;
   }, [exercising, exerciseSheet]);
   const trunkBone = useMemo(() => {
@@ -570,14 +578,14 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     sim?.states.forEach((state, id) => {
       const prim = data.parts.find((p) => p.id === id)?.primitive;
       if (prim?.kind !== 'filings') return;
-      const filings = ironFilings(data.sim, state, id, filingsCard(prim), place);
+      const filings = kits.field?.ironFilings(data.sim, state, id, filingsCard(prim), place) ?? [];
       let list = filingCache.current.get(filings);
       if (!list) filingCache.current.set(filings, (list = filingMatrices(filings, prim, true)));
       out.set(id, list);
     });
     return out;
   }, [sim, data.parts, data.sim, place]);
-  const linesOf = useCallback((state: string) => (data.sim ? fieldLines(data.sim, state, place) : []), [data.sim, place]);
+  const linesOf = useCallback((state: string) => (data.sim && kits.field ? kits.field.fieldLines(data.sim, state, place) : []), [data.sim, place]);
   const explodeTarget = targetExplodeAmount(s.view, s.explode);
   const anims = useMemo(() => animationsByPart(data.animations), [data.animations]);
   const alwaysOn = useMemo(
@@ -662,7 +670,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       {skinShape && skinned && (wireShape !== null || bodyStyle === 'wire') && (
         <WireBody shape={wireShape ?? skinShape} standIn={wireShape === null} color={wireInk} on={body === 'wire'} hands={handBones} />
       )}
-      {skinned && (grips.l || grips.r) && (
+      {skinned && handPlans && (grips.l || grips.r) && (
         <Hands plans={handPlans} equipment={equipment} grips={grips} style={body ?? lastBody.current} colors={handColors} on={exercising && skinned} />
       )}
       {data.parts.map((part) => {
@@ -766,6 +774,8 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       <ShadowUpdater runtime={runtime} enabled={!data.views.shadows || data.views.shadows === 'auto'} bridge={bridge} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />
       <StageMark bridge={bridge} name="scene" />
+      {/* In the commit that gives the parts their glb geometry (GltfSource hands every mesh part over at once). */}
+      {meshShapes && <StageMark bridge={bridge} name="model" />}
       </Suspense>
     </RuntimeContext.Provider>
   );

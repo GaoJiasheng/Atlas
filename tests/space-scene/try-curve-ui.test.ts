@@ -2,7 +2,7 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createStore } from 'zustand/vanilla';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { SceneContext, type SceneContextValue } from '../../src/engines/core/context';
 import { createHudStore } from '../../src/engines/core/controls';
 import { createSpaceUi, type SpaceUiStore } from '../../src/engines/space-scene/ui';
@@ -43,6 +43,12 @@ function render(options: { locale?: 'en' | 'zh'; revealed?: boolean; answered?: 
 }
 
 describe('model curve and predictive result visibility', () => {
+  // TryIt fetches its curve lazily: one render starts the fetch, then static renders find it loaded.
+  beforeAll(async () => {
+    render({ answered: true });
+    await import('../../src/engines/space-scene/explorer/TryCurve');
+    await new Promise((r) => setTimeout(r, 0));
+  });
   it('unanswered predictions omit readouts, the complete curve, model value table and numerical HUD', () => {
     const { reader, plate } = render();
     expect(reader).toContain('data-predict="up"');

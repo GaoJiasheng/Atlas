@@ -31,6 +31,7 @@ import { extendThree } from './extend';
 import { useStageLook } from './look';
 import { SceneRoot } from './SceneRoot';
 import { stageDpr } from './dpr';
+import { stageKitsPending } from './kits';
 
 export interface Model3DStageProps {
   store: SceneStore<SpaceSceneExt>;
@@ -55,6 +56,9 @@ const MEASURE_DELAY_MS = 120;
 const NO_TRAINING: readonly string[] = [];
 
 export default function Model3DStage({ store, data, ui, bridge, chapters, label, fitness, training = NO_TRAINING, locale }: Model3DStageProps) {
+  // The topic's optional stage code (kits.ts) arrives before the first render: the scene calls it synchronously.
+  const kitsPending = stageKitsPending(data);
+  if (kitsPending) throw kitsPending;
   const { hud } = useSceneContext();
   const playable = useMemo(() => new Set(training), [training]);
   const model = useStore(ui, (u) => u.model);
