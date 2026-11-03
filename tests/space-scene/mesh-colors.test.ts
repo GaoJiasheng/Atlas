@@ -1,4 +1,3 @@
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { BufferGeometry, Float32BufferAttribute } from 'three';
 import { partSchema } from '../../src/engines/space-scene/schema';
