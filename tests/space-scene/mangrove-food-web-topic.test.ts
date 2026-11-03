@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
+import { anchorPoint } from '../../src/engines/space-scene/stages/model3d/shapes';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
@@ -62,7 +63,7 @@ describe('mangrove-food-web: sourced finite table', () => {
     expect(chapters.map((c) => c.state.beats.length)).toEqual([3, 4, 4, 5, 5, 5, 6, 4]);
     const selectable = file.parts.filter((p) => !p.context);
     expect(selectable).toHaveLength(18);
-    expect(file.parts.filter((p) => p.context)).toHaveLength(2);
+    expect(file.parts.filter((p) => p.context)).toHaveLength(4);
     const indexed = new Set(chapters.flatMap((c) => c.state.index.parts));
     for (const p of selectable) expect(indexed.has(p.id), p.id).toBe(true);
     expect(file.flows).toHaveLength(6);
@@ -81,26 +82,29 @@ describe('mangrove-food-web: sourced finite table', () => {
         expect(hidden.has(label), `${c.id}: ${label}`).toBe(false);
     }
   });
+  it('keeps the burrow rim anchor above mud and readable in both high-water label beats',()=>{
+    const part=file.parts.find(p=>p.id==='burrow-mouth')!;
+    const anchor=anchorPoint(part);
+    // Mud surface is y = 0; the mud lip around the shaft rim stands above it.
+    expect(part.primitive!.at[1]+anchor[1]).toBeGreaterThan(.005);
+    const chapter=chapters.find(c=>c.id==='changing-tides')!;
+    const beats=chapter.state.beats.filter((b:{labels?:string[];sim?:{set?:{tide?:string}}})=>b.sim?.set?.tide==='high'&&b.labels?.includes('burrow-mouth'));
+    expect(beats).toHaveLength(2);
+    for(const beat of beats)expect(beat.view??chapter.state.view).toBe('xray');
+  });
   it('has separate connected root systems, paired fish eyes and anatomically complete crab appendages', () => {
     const by = (id: string) => file.parts.find((p) => p.id === id)!;
     expect(by('api-pencil').connects).toContain('api-lateral');
     expect(by('api-lateral').connects).toContain('api-tree');
     expect(by('bakau-prop').connects).toContain('bakau-tree');
-    expect(by('fiddler-crabs').extra!.length).toBeLessThanOrEqual(16);
-    expect(by('tree-crabs').extra!.length).toBeLessThanOrEqual(16);
+    expect(by('fiddler-crabs').extra!.length).toBeLessThanOrEqual(32);
+    expect(by('tree-crabs').extra!.length).toBeLessThanOrEqual(32);
     for (const id of ['fiddler-crabs', 'tree-crabs']) {
       const extras = by(id).extra!;
       expect(extras.slice(0, 8).every((p) => p.kind === 'sweep')).toBe(true);
-      // Smooth lofted pincers replace the old faceted plates. Each claw has
-      // two tapered tips and a broad palm, after its separate cheliped arm.
-      for (const index of [9, 13]) {
-        const claw = extras[index]!;
-        expect(claw.kind).toBe('sweep');
-        if (claw.kind === 'sweep') {
-          expect(claw.path).toHaveLength(9);
-          expect(claw.radial).toBeGreaterThanOrEqual(16);
-        }
-      }
+      // A major cheliped has separate articulated arm, palm and fingers;
+      // the minor chela remains small, and the eight legs precede them.
+      expect(extras.filter(p=>p.kind==='sweep'&&p.radial!>=20).length).toBeGreaterThanOrEqual(6);
     }
     expect(by('giant-mudskipper').extra!.filter((p) => p.color === 'eye')).toHaveLength(2);
     const legs = by('heron').extra!.filter((p) => p.kind === 'sweep' && p.path.some((point) => p.at[1] + point[1] < .01) && p.path.some((point) => p.at[1] + point[1] > .2));

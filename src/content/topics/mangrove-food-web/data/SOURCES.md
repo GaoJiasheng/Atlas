@@ -56,3 +56,18 @@ procedural work; its dimensions and repeat counts remain DESIGN, not survey data
 - [Ring-legged fiddler crab](https://commons.wikimedia.org/wiki/File:Ring-legged_Fiddler_Crab_(Uca_annulipes)_(15748699382).jpg), Bernard Dupont, CC BY-SA 2.0: front-wide carapace, long eye stalks, large male palm and opposing fingers. Climbing crabs remain the existing functional group, not a species-level reconstruction.
 - [Periophthalmodon schlosseri](https://commons.wikimedia.org/wiki/File:Periophthalmodon_schlosseri.jpg), Bernhard Luth, CC BY-SA 2.0 DE (existing S22): raised dorsal eyes, broad head and fleshy pectoral base.
 - [Smithsonian Ocean: Mangroves](https://ocean.si.edu/ocean-life/plants-algae/mangroves), Ocean Portal Team, reviewed by Candy Feller: root aeration, branching prop roots and lenticels; factual consultation only.
+
+## Polish 2026-11-03 · original geometry
+
+The same four read-only photographs listed above were downloaded to the ignored
+`refs/` directory and inspected again: Abu Hamas's Avicennia leaf attachment,
+Hans Hillewaert's branching Rhizophora root arches (genus-level reference),
+Bernard Dupont's male fiddler palm/fingers and Bernhard Luth's mudskipper eyes
+and fleshy pectoral base. None of their pixels, outlines or meshes is distributed.
+The crowns, individual doubly curved leaves, cable roots and aerial-root meshes
+in `/models/mangrove-food-web.glb` are original mathematical surfaces built by
+`scripts/geo/kits/tree.ts` and `scripts/geo/mangrove-food-web/tree-meshes.ts`.
+They carry the repository's CC BY-NC-SA 4.0 content licence, also recorded in the
+GLB asset copyright. No third-party mesh or texture, and no runtime network
+resource, was added. Branch/root placement and 336 leaves per tree, 72 pencils,
+12 prop arches and six forks are DESIGN display counts, not field measurements.
