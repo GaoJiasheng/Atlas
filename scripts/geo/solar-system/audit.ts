@@ -1,13 +1,13 @@
 /** Conservative chapter triangle bounds, before frustum/sim culling. No GPU/FPS claim. */
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { NodeIO } from '@gltf-transform/core';
-import { EXTMeshoptCompression, EXTTextureWebP } from '@gltf-transform/extensions';
+import { EXTMeshoptCompression, EXTTextureWebP, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
 import { partsFile } from '../../../src/engines/space-scene/schema';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 
 await MeshoptDecoder.ready;
-const doc=await new NodeIO().registerExtensions([EXTMeshoptCompression,EXTTextureWebP]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read('public/models/solar-system.glb');
+const doc=await new NodeIO().registerExtensions([EXTMeshoptCompression,EXTTextureWebP,KHRMeshQuantization]).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read('public/models/solar-system.glb');
 const meshCounts=new Map(doc.getRoot().listNodes().map(n=>[n.getName(),n.getMesh()?.listPrimitives().reduce((a,p)=>a+(p.getIndices()?.getCount()??0)/3,0)??0]));
 const base=partsFile.parse(JSON.parse(readFileSync('scripts/geo/solar-system/baseline-parts.json','utf8')));
 const live=partsFile.parse(JSON.parse(readFileSync('src/content/topics/solar-system/data/parts.json','utf8')));
