@@ -2,7 +2,7 @@
 import { readFileSync, statSync } from 'node:fs';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
-import { BUDGET, OUTPUT, svg, thorax, type Point, type Rib, type Side } from '../../scripts/figures/bones-protected-organs';
+import { BUDGET, OUTPUT, svg, thorax, type Point, type Rib, type Side } from '../../scripts/geo/bones-and-joints/protected-organs';
 
 const t = thorax();
 const SIDES: Side[] = ['right', 'left'];
@@ -139,6 +139,18 @@ describe('bones and joints: protected-organs figure geometry', () => {
     expect(box(t.lungs.left).x1).toBeGreaterThan(heart.x1);
   });
 
+  it('shows protective cranial and vertebral sections with bilingual organ labels', () => {
+    const plate=svg(t);
+    expect(plate).toContain('id="cranial-section"');
+    expect(plate).toContain('id="vertebral-canal"');
+    // Four midline vertebrae with the cord in the canal between bodies and arches, plus one vertebra seen from above.
+    expect(plate.match(/data-section-vertebra="/g)).toHaveLength(4);
+    expect(plate).toContain('data-axial-vertebra="1"');
+    // In the anterior thorax view the whole thoracic spine is ghosted behind the sternum.
+    expect(plate).toContain('<g id="spine" opacity="0.32">');
+    for(const word of ['Brain','脑','Skull','颅骨','Spinal cord','脊髓','Heart','心脏','Lungs','肺','Sternum','胸骨','Costal cartilage','肋软骨']) expect(plate).toContain(word);
+  });
+
   it('draws one group per rib in the SVG, each with its back half', () => {
     const text = svg(t);
     expect(text.match(/data-rib="/g)).toHaveLength(24);
@@ -161,6 +173,6 @@ describe('bones and joints: protected-organs figure geometry', () => {
     expect(coloured).toBe(0);
     expect(transparent).toBeGreaterThan(0);
     const body = readFileSync('src/content/topics/bones-and-joints/chapters/02-living-bone.mdx', 'utf8');
-    expect(body.match(/<Figure src="figures\/bones-and-joints-protected-organs"/g)).toHaveLength(2);
+    expect(body.match(/<Figure src="bones-and-joints\/bones-and-joints-protected-organs"/g)).toHaveLength(2);
   });
 });

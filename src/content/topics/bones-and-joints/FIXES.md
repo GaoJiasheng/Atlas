@@ -78,3 +78,14 @@ Current non-browser gates: `pnpm check` (0 errors/warnings), `pnpm validate` (85
 ### Redrawn from geometry (2026-11-02) — DONE
 
 The figure is now generated from explicit geometry rather than an image model, so the rib count and attachments hold by construction and are unit-tested; see F1 above and FIGURES.md. Both `<Figure>` uses in chapter 02 and the e2e image assertion are restored.
+
+
+### Polish 2026-11-03
+
+The current protected-organs plate extends the count-audited 040f192 thorax
+with skull/brain and vertebral-canal/cord sections, numbered ribs and EN/ZH
+leaders. Both chapter uses point to the new topic-owned asset. The long-bone
+section now has a single smooth cortical mesh, irregular trabeculae and
+cavity-shaped marrow; growth/cartilage and the repair row follow femoral
+anatomy. See `FIGURES.md` and `REBUILD-3D.md` for sources, counts, reproduction
+commands, offline previews and the verification record.

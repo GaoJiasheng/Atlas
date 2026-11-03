@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import {BufferAttribute,BufferGeometry,Mesh,MeshBasicMaterial,Raycaster,Vector3} from 'three';
+import {parse} from 'yaml';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
@@ -19,11 +21,54 @@ describe('bones and joints: exact source geometry packet', () => {
     expect(manifest.parts.slice(0,34).every((p: {station: number[]}) => p.station.every(x => x === 0))).toBe(true);
     expect(manifest.parts.slice(34).every((p: {station: number[]}) => p.station[0]! < -2)).toBe(true);
     expect(file.parts.filter(p => !p.context)).toHaveLength(61);
-    expect(file.parts.filter(p => p.context).map(p => p.id).sort()).toEqual(['lever-pivot', 'skin-outline']);
+    expect(file.parts.filter(p => p.context).map(p => p.id).sort()).toEqual(['lever-pivot','repair-clot-skin','repair-soft-skin','skin-outline']);
     const meshNames = gltf.nodes.filter((n: {mesh?: number}) => n.mesh !== undefined).map((n: {name: string}) => n.name).sort();
     expect(meshNames).toHaveLength(44);
-    expect(meshNames).toEqual(file.parts.flatMap(p => p.mesh ? [p.mesh] : []).sort());
+    expect(meshNames).toEqual(file.parts.flatMap(p => p.mesh && !p.mesh.startsWith('polished-') ? [p.mesh] : []).sort());
     expect(new Set(meshNames).size).toBe(44);
+  });
+  it('adds only the original polished cortex while retaining the audited anatomy byte-for-byte', () => {
+    expect(file.model).toBe('/models/bones-and-joints-polished.glb');
+    const copy=readFileSync('public/models/bones-and-joints-polished.glb');
+    const length=copy.readUInt32LE(12), json=JSON.parse(copy.subarray(20,20+length).toString('utf8'));
+    expect(json.nodes.slice(0,gltf.nodes.length)).toEqual(gltf.nodes);
+    expect(json.meshes.slice(0,gltf.meshes.length)).toEqual(gltf.meshes);
+    expect(json.accessors.slice(0,gltf.accessors.length)).toEqual(gltf.accessors);
+    const sourceBinary=28+glb.readUInt32LE(12),copyBinary=28+length;
+    expect(copy.subarray(copyBinary,copyBinary+glb.readUInt32LE(sourceBinary-8)).equals(glb.subarray(sourceBinary))).toBe(true);
+    const added=json.nodes.filter((n:{name:string})=>n.name==='polished-cortex');
+    expect(added).toHaveLength(1);
+    expect(added[0].translation).toEqual([2,0,0]);
+    const mesh=json.meshes[added[0].mesh].primitives[0];
+    expect(json.accessors[mesh.indices].count/3).toBeLessThan(35_000);
+    // At midshaft the coronal window is open: a ray reaches the inner
+    // posterior cortex, rather than a slab across the marrow cavity.
+    const buffer=copy.subarray(copyBinary);
+    const array=(id:number)=>{const a=json.accessors[id],v=json.bufferViews[a.bufferView];
+      const chunk=Uint8Array.from(buffer.subarray(v.byteOffset,v.byteOffset+v.byteLength)).buffer;
+      return a.componentType===5125?new Uint32Array(chunk):a.componentType===5123?new Uint16Array(chunk):a.componentType===5122?new Int16Array(chunk):new Float32Array(chunk);};
+    const geometry=new BufferGeometry().setAttribute('position',new BufferAttribute(Float32Array.from(array(mesh.attributes.POSITION),(v,i)=>v*added[0].scale[i%3]),3))
+      .setIndex(new BufferAttribute(new Uint32Array(array(mesh.indices)),1));
+    const material=new MeshBasicMaterial(), specimen=new Mesh(geometry,material);
+    specimen.updateMatrixWorld(true);
+    const hits=new Raycaster(new Vector3(-.012,.02,.1),new Vector3(0,0,-1)).intersectObject(specimen);
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits[0]!.point.z).toBeLessThan(-.012);
+    const portal=new Raycaster(new Vector3(.06,-.042,-.0085),new Vector3(-1,0,0)).intersectObject(specimen);
+    const nearby=new Raycaster(new Vector3(.06,-.058,-.0085),new Vector3(-1,0,0)).intersectObject(specimen);
+    expect(portal[0]!.point.x).toBeLessThan(-.016);
+    expect(nearby[0]!.point.x).toBeGreaterThan(-.004);
+    geometry.dispose();material.dispose();
+    expect(copy.length).toBeLessThanOrEqual(4_000_000);
+    expect(file.parts.filter(p=>!p.context)).toHaveLength(61);
+  });
+  it('keeps both uncounted tissue skins in the parent stage’s authored visibility states',()=>{
+    for(const name of readdirSync('src/content/topics/bones-and-joints/chapters').filter(n=>n.endsWith('.mdx'))){
+      const c=parse(readFileSync('src/content/topics/bones-and-joints/chapters/'+name,'utf8').split('---')[1]!);
+      for(const beat of [{},...c.state.beats]){const state={...c.state,...beat};
+        for(const id of ['clot','soft'])expect(state.hide.includes(`repair-${id}-skin`)).toBe(state.hide.includes(`repair-stage-${id}`));
+      }
+    }
   });
   it('retains exactly twelve named ribs on each real side and separates paired long bones', () => {
     for (const side of ['l','r']) {

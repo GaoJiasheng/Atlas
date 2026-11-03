@@ -601,6 +601,8 @@ export const partSchema = z
      * or exploded, and casts no shadow unless `castShadow` says so.
      */
     context: z.boolean().optional(),
+    /** A context material skin inherits its selectable owner’s display state. */
+    displayWith: kebabId.optional(),
     /** Override the automatic shadow choice (only parts ≥ 28 % of the model radius cast). */
     castShadow: z.boolean().optional(),
     /** Keep this part whole in every cutaway (scenery such as benches and tables). */
@@ -1374,6 +1376,9 @@ export const partsFileBase = z
       if (p.group !== undefined && !groups.has(p.group)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'group'], message: `unknown group "${p.group}"` });
       }
+      if (p.displayWith !== undefined && (!p.context || !parts.has(p.displayWith) || contextIds.has(p.displayWith))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'displayWith'], message: 'displayWith requires a context skin and a selectable owner' });
+      }
       p.connects.forEach((c, j) => {
         if (!parts.has(c)) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['parts', i, 'connects', j], message: `unknown part "${c}"` });
@@ -1472,6 +1477,7 @@ export function expandBilateral(file: PartsFileInput): Omit<PartsFileInput, 'par
       ...(p.repeat ? { repeat: mirrorRepeat(p.repeat, axis) } : {}),
       explode: { ...p.explode, dir: mirrorPoint(p.explode.dir, axis) },
       connects: p.connects.map(twinOf),
+      ...(p.displayWith ? { displayWith: twinOf(p.displayWith) } : {}),
     });
   }
   const animations = file.animations.flatMap((a) => {

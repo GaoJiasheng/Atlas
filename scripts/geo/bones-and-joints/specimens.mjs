@@ -4,7 +4,6 @@
 const bone = 'token:bone';
 const shape = (kind, size, at, tint = bone, extra = {}) => ({ kind, size, at, color: 'tissue', tint, ...extra });
 const lathe = (profile, at, tint = bone, extra = {}) => ({ kind: 'lathe', profile, segments: 48, at, color: 'tissue', tint, ...extra });
-const tube = (path, radius, at, tint = bone) => ({ kind: 'tube', path, radius, at, color: 'tissue', tint });
 const close = points => [...points, points[0]];
 
 export function jointSpecimens() {
@@ -38,113 +37,92 @@ export function jointSpecimens() {
   };
 }
 
+// Original femoral teaching envelope: bowed shaft, oblique neck, offset
+// head, greater trochanter and unequal distal condyles. All stations are
+// smoothly interpolated; no rotationally symmetric spool or detached balls.
+const shaftPath=[[.002,-.199,0],[-.003,-.150,-.002],[-.010,-.070,-.006],[-.012,.020,-.009],[-.005,.100,-.005],[.009,.158,0],[.012,.180,0]];
+const shaftR=[.033,.024,.021,.020,.022,.029,.031];
+const sweep=(path,radius,at,tint=bone,extra={})=>({kind:'sweep',path,radius,radial:24,segments:64,caps:'round',up:[0,0,-1],at,color:'tissue',tint,...extra});
+const random=seed=>()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
 export function boneSpecimens() {
-  const outer = [[.075,-.26],[.082,-.23],[.073,-.19],[.045,-.13],[.035,-.04],[.037,.12],[.068,.20],[.075,.25]];
-  const inner = [[.047,.25],[.043,.20],[.022,.12],[.021,-.04],[.028,-.13],[.048,-.19],[.055,-.23],[.050,-.26]];
-  // A narrow interruption in the right cut lip is the nutrient foramen.
-  // Upper/lower wall sections and a shorter arc across the entry band
-  // leave an actual opening rather than burying the artery in solid cortex.
-  const low = close([...outer.slice(0,4),[.0355,-.048],[.0215,-.048],...inner.slice(4)]);
-  const high = close([[.035,-.034],...outer.slice(5),...inner.slice(0,3),[.021,-.034]]);
-  const portal = close([[.0355,-.048],[.035,-.034],[.021,-.034],[.0215,-.048]]);
-  const periosteum = close(outer.slice(2,6).map(([r,y])=>[r+.002,y]).concat(outer.slice(2,6).reverse().map(([r,y])=>[r+.0035,y])));
-  // The removed front 160° exposes the wall's 14–28 mm section thickness.
-  const cortex = [lathe(low,[2,0,0],bone,{arc:200}),lathe(high,[2,0,0],bone,{arc:200}),
-    lathe(portal,[2,0,0],bone,{arc:180,rotation:[0,10,0]}),
-    lathe(periosteum,[2,0,0],'token:neutral',{arc:75,rotation:[0,65,0]}),
-    {kind:'sweep',path:[[.043,-.11,-.015],[.062,-.065,-.012],[.074,-.02,.004]],radius:[.016,.017,.012],
-      scale:[1,1,.1],at:[2,0,0],color:'tissue',tint:'token:neutral'}];
-  const struts = [], red = [];
-  // A connected 3-D grid clipped to the two end volumes. Every rod joins
-  // another rod; oblique braces connect adjacent layers, leaving marrow spaces.
-  const step = .016;
-  for (const cy of [-.212,.207]) {
-    const nodes = new Map();
-    for(let ix=-3;ix<=3;ix++) for(let iy=-2;iy<=2;iy++) for(let iz=-3;iz<=1;iz++) {
-      const x=ix*step,y=iy*step,z=iz*step;
-      if ((x/.057)**2+(y/.042)**2+(z/.057)**2<=1) nodes.set(`${ix},${iy},${iz}`,[x,cy+y,z]);
-    }
-    const edges=[];
-    const lobules=[];
-    for(const [key,p] of nodes) {
-      const [ix,iy,iz]=key.split(',').map(Number);
-      for(const [dx,dy,dz] of [[1,0,0],[0,1,0],[0,0,1],...(iy%2===0?[[1,1,0],[0,1,1]]:[])]) {
-        const q=nodes.get(`${ix+dx},${iy+dy},${iz+dz}`);
-        if(q) edges.push([p,q]);
-      }
-      // Lobules sit in the cells rather than replacing the white struts.
-      const c=[p[0]+step/2,p[1]+step/2,p[2]+step/2];
-      if((c[0]/.052)**2+((c[1]-cy)/.038)**2+(c[2]/.052)**2<1)
-        lobules.push(c);
-    }
-    // A depth-first walk follows only actual lattice edges. Splitting the
-    // walk into <=64-point paths stays within the existing primitive schema;
-    // no engine limits or data format change is needed.
-    const graph=new Map();
-    for(const [a,b] of edges) for(const [p,q] of [[a,b],[b,a]]) {
-      const key=p.join(',');if(!graph.has(key))graph.set(key,[]);graph.get(key).push(q);
-    }
-    const seen=new Set(),walk=[];
-    const visit=p=>{const key=p.join(',');seen.add(key);walk.push(p);for(const q of graph.get(key)??[])if(!seen.has(q.join(','))){visit(q);walk.push(p);}};
-    visit(nodes.values().next().value);
-    // Non-tree edges are useful braces: include each as a short excursion
-    // from the walk's first visit to its endpoint, returning along that edge.
-    for(const [a,b] of edges) {
-      const index=walk.indexOf(a);
-      if(index>=0 && walk[index+1]!==b && walk[index-1]!==b) walk.splice(index+1,0,b,a);
-    }
-    for(let i=0;i<walk.length-1;i+=62) {
-      const path=walk.slice(i,i+63);
-      struts.push({kind:'sweep',path,radius:.0019,radial:6,segments:path.length*4,caps:'flat',at:[2,0,0],color:'tissue',tint:bone});
-    }
-    for(let i=0;i<15;i++) {
-      const c=lobules[Math.floor(i*lobules.length/15)];
-      red.push(shape('sphere',[.009],[2+c[0],c[1],c[2]],'token:muscle-3',{scale:[1,1.15,1]}));
-    }
+ const rand=random(0x20261103);
+ const at=[2,0,0];
+ const cortex=[];
+ // The periosteal sleeve follows the shaft; a peeled leaf stays attached at
+ // its lower edge. It is intentionally opaque so its thin edge stays readable.
+ cortex.push(sweep(shaftPath.slice(1,5),shaftR.slice(1,5).map(r=>r+.0008),at,'token:neutral',
+  {section:{u:292,flat:.85},hollow:.001,radial:24,segments:64}),
+  sweep([[.019,-.119,.003],[.037,-.090,.011],[.049,-.047,.020],[.047,-.018,.026]],
+  [.004,.014,.016,.001],at,'token:neutral',{section:{flat:.06},radial:16,segments:40,up:[0,0,1]}));
+ const struts=[],red=[];
+ const volumes=[{c:[-.053,.217,-.007],r:[.025,.025,.021],anchors:[[-.081,.229,-.0095],[-.029,.233,-.0095]]},
+  {c:[.020,.178,-.005],r:[.024,.027,.015],anchors:[[.054,.190,-.0095],[-.0245,.164,-.0095]]},
+  {c:[-.023,-.223,-.008],r:[.025,.027,.021],anchors:[[-.049,-.238,-.0095],[-.008,-.249,-.0095]]},
+  {c:[.022,-.222,-.008],r:[.023,.026,.021],anchors:[[.0485,-.236,-.0095],[.010,-.249,-.0095]]}];
+ for(const {c,r,anchors} of volumes){
+  const nodes=[];
+  // Stratified samples are jittered in all axes before clipping. Three nearest
+  // neighbours form an irregular connected open-cell network, not a cubic grid.
+  for(let ix=-3;ix<=3;ix++)for(let iy=-3;iy<=3;iy++)for(let iz=-3;iz<=1;iz++){
+   const p=[(ix+(rand()-.5)*.8)/3.5,(iy+(rand()-.5)*.8)/3.5,(iz+(rand()-.5)*.8)/3.5];
+   if(p.reduce((v,a)=>v+a*a,0)<.91)nodes.push(p.map((v,k)=>c[k]+v*r[k]));
   }
-  const artery = [tube([[.10,-.075,.018],[.06,-.058,.014],[.033,-.041,.007],[.015,-.025,0],[.008,.09,0]],.004,[2,0,0],'token:blood-rich'),
-    tube([[.015,-.025,0],[.006,-.09,0],[0,-.17,0],[.023,-.21,0]],.0028,[2,0,0],'token:blood-rich'),
-    tube([[.008,.06,0],[.012,.15,0],[-.021,.21,0]],.0028,[2,0,0],'token:blood-rich'),
-    tube([[.012,.15,0],[.035,.20,-.012]],.002,[2,0,0],'token:blood-rich')];
-  return {'bone-cortex':cortex,'bone-lattice':struts,
-    'bone-marrow':[shape('capsule',[.018,.21],[2,-.003,-.005],'token:cut'),...red],
-    'bone-vessel':artery};
-}
-
-export function repairSpecimens() {
-  // All four share the same flared ends and shaft envelope. The first three
-  // retain complementary jagged fracture faces in a longitudinal window.
-  const lower = close([[0,-.19],[.025,-.19],[.041,-.174],[.043,-.145],[.026,-.10],[.025,-.014],[.018,-.007],[0,-.009]]);
-  const upper = lower.map(([r,y])=>[r,-y]).reverse();
-  const result={};
-  for(const [i,id] of ['clot','soft','hard','remodelled'].entries()) {
-    const x=[1.46,1.82,2.18,2.54][i];
-    let pieces=[lathe(lower,[x,0,0]),lathe(upper,[x,0,0])];
-    if(i===0) {
-      pieces.push(shape('sphere',[.041],[x,0,-.016],'token:muscle-3',{scale:[1,1.05,.65]}));
-      pieces.push(tube([[-.025,.012,.025],[-.008,.005,.026],[.005,.014,.026],[.018,.007,.026],[.025,.015,.025]],.0015,[x,0,0],'token:ink-2'));
-    } else if(i===1) {
-      const callus=close([[.028,-.066],[.043,-.042],[.050,0],[.043,.042],[.028,.066],[.022,.054],[.023,0],[.022,-.054]]);
-      pieces.push(lathe(callus,[x,0,0],'token:cold',{arc:235}),shape('sphere',[.029],[x,0,-.012],'token:cold',{scale:[1,1.65,.6]}));
-    } else if(i===2) {
-      const callus=close([[.028,-.067],[.043,-.049],[.052,-.019],[.049,.022],[.044,.049],[.028,.067],[.023,.05],[.023,-.05]]);
-      pieces.push(lathe(callus,[x,0,0],bone,{arc:250}));
-      for(let n=0;n<11;n++) {
-        const a=n*Math.PI*2/11;
-        pieces.push(tube([[Math.cos(a)*.027,-.057,Math.sin(a)*.027],[Math.cos(a)*.049,0,Math.sin(a)*.049],[Math.cos(a)*.027,.057,Math.sin(a)*.027]],.0024,[x,0,0]));
-      }
-      pieces.push(shape('sphere',[.027],[x,0,-.012],bone,{scale:[1,1.7,.7]}));
-    } else {
-      const smooth=close([[0,-.19],[.025,-.19],[.041,-.174],[.043,-.145],[.026,-.10],[.025,-.055],[.030,0],[.025,.055],[.026,.10],[.043,.145],[.041,.174],[.025,.19],[0,.19]]);
-      pieces=[lathe(smooth,[x,0,0])];
-    }
-    result[`repair-stage-${id}`]=pieces;
+  const edges=new Set(),graph=nodes.map(()=>[]);
+  nodes.forEach((p,i)=>{
+   const near=nodes.map((q,j)=>({j,d:Math.hypot(...p.map((v,k)=>v-q[k]))})).filter(q=>q.j!==i).sort((a,b)=>a.d-b.d).slice(0,3);
+   for(const {j} of near){const key=[Math.min(i,j),Math.max(i,j)].join(':');if(edges.has(key))continue;edges.add(key);graph[i].push(j);graph[j].push(i);}
+  });
+  const seen=new Set();
+  // Each connected component is a closed edge walk. Bounded chunks share
+  // their last station, so every piece meets another at an actual node.
+  for(let start=0;start<nodes.length;start++){
+   if(graph[start].every(j=>seen.has([Math.min(start,j),Math.max(start,j)].join(':'))))continue;
+   const walk=[nodes[start]];
+   const visit=i=>{for(const j of graph[i]){const key=[Math.min(i,j),Math.max(i,j)].join(':');if(seen.has(key))continue;seen.add(key);walk.push(nodes[j]);visit(j);walk.push(nodes[i]);}};
+   visit(start);
+   for(let k=0;k<walk.length-1;k+=119){const path=walk.slice(k,k+120);
+    struts.push(sweep(path,path.map((p,i)=>.00065+.00015*Math.sin(i*1.7+p[1]*40)),at,bone,{radial:7,segments:Math.min(512,path.length*2),caps:'flat'}));
+   }
   }
-  return result;
+  // These braces meet actual cortical material at both ends and pass
+  // through two existing lattice nodes, tying the network to the wall.
+  const nearest=target=>nodes.reduce((best,p)=>Math.hypot(...p.map((v,k)=>v-target[k]))<Math.hypot(...best.map((v,k)=>v-target[k]))?p:best);
+  struts.push(sweep([anchors[0],nearest(anchors[0]),[c[0],c[1]+r[1]*.08,c[2]-.002],nearest(anchors[1]),anchors[1]],
+   [.001,.0012,.0013,.0012,.001],at,bone,{radial:7,segments:28,caps:'flat'}));
+  // Red marrow is a contiguous lobed bed behind the open lattice. Its
+  // undulating surface is recessed, leaving real empty trabecular spaces.
+  red.push(sweep([[c[0]-r[0]*.45,c[1]-r[1]*.65,-.011],[c[0]+r[0]*.08,c[1]-r[1]*.3,-.012],
+   [c[0]-r[0]*.1,c[1]+r[1]*.3,-.012],[c[0]+r[0]*.2,c[1]+r[1]*.65,-.012]],
+   [r[0]*.32,r[0]*.69,r[0]*.62,r[0]*.18],at,'token:muscle-3',{section:{flat:.18},radial:20,segments:40}));
+ }
+ // Principal compressive/tensile arches run from neck into proximal shaft.
+ for(let i=0;i<5;i++){
+  const d=i*.0066;
+  struts.push(sweep([[-.058+d,.226,-.004],[-.035+d*.6,.193,-.007],[-.010+d*.25,.152,-.007],[-.006+d*.1,.119,-.008]],
+   [.001,.0014,.0013,.0007],at,bone,{radial:7,segments:32}));
+ }
+ const yellow=sweep([[-.003,-.177,-.008],[-.009,-.131,-.008],[-.012,-.079,-.009],[-.013,-.022,-.009],[-.010,.042,-.008],[-.003,.095,-.006],[.005,.129,-.006]],
+  [.008,.015,.0135,.014,.013,.012,.006],at,'token:cut',{section:{flat:.61},radial:32,segments:100});
+ const artery=[sweep([[.073,-.072,.019],[.041,-.058,.013],[.021,-.043,-.0085],[.004,-.041,-.0085],[.001,-.026,-.004],[-.002,.013,.003],[-.001,.105,.001]],
+  [.0036,.0034,.003,.0028,.0026,.0023,.0015],at,'token:blood-rich',{radial:16,segments:72}),
+  sweep([[.001,-.026,-.004],[-.001,-.075,.002],[-.003,-.145,0],[-.014,-.199,0],[-.028,-.230,0]],
+  [.0028,.0026,.0022,.0016,.0008],at,'token:blood-rich',{radial:14,segments:64}),
+  sweep([[-.001,.105,.001],[.001,.150,0],[-.025,.190,-.002],[-.054,.222,-.002]],[.0017,.0015,.0011,.0006],at,'token:blood-rich',{radial:12,segments:48}),
+  sweep([[.001,.150,0],[.025,.183,-.001],[.031,.199,-.003]],[.0014,.001,.0005],at,'token:blood-rich',{radial:12,segments:32})];
+ // Thin articular coatings hug the external head and distal condyles, leaving
+ // the teaching window open. They are part of the lattice selection's pieces.
+ const profile=[];
+ for(let i=0;i<=44;i++){const a=i/44*2.02;profile.push([.033*Math.sin(a),.032*Math.cos(a)]);}
+ for(let i=44;i>=0;i--){const a=i/44*2.02;profile.push([.0318*Math.sin(a),.0308*Math.cos(a)]);}
+ const caps=[lathe(close(profile).reverse(),[1.946,.218,-.003],'token:cold',{arc:180,rotation:[0,0,45],scale:[1,1,.875]}),
+  ...[-1,1].map(sign=>sweep([[sign*.024,-.231,-.002],[sign*.024,-.242,-.002],[sign*.020,-.253,-.003]],
+  [sign<0?.030:.028,.023,.005],at,'token:cold',{section:{u:170,flat:.85},hollow:.0013,radial:32,segments:32}))];
+ return {'bone-cortex':cortex,'bone-lattice':[...struts,...caps],
+  'bone-marrow':[yellow,...red],'bone-vessel':artery};
 }
 
 export function applySpecimens(parts) {
-  const specimens={...jointSpecimens(),...boneSpecimens(),...repairSpecimens()};
+  const specimens={...jointSpecimens(),...boneSpecimens()};
   for(const [id,pieces] of Object.entries(specimens)) {
     const part=parts.find(p=>p.id===id);
     part.primitive=pieces[0];

@@ -30,16 +30,29 @@ describe('bones and joints: anatomical teaching relationships',()=>{
   });
   it('shows both marrow types and a connected, merged end lattice inside a thick section wall',()=>{
     const marrow=partPrimitives(part('bone-marrow'));
-    expect(marrow.some(p=>p.tint==='token:cut'&&p.kind==='capsule')).toBe(true);
-    for(const sign of [-1,1])expect(marrow.some(p=>p.tint==='token:muscle-3'&&p.at[1]*sign>.15)).toBe(true);
-    const walls=partPrimitives(part('bone-cortex')).filter(p=>p.kind==='lathe');
-    expect(walls.every(p=>p.kind==='lathe'&&p.profile[0]![0]===p.profile.at(-1)![0])).toBe(true);
-    expect(walls.filter(p=>p.arc===200).length).toBe(2);
+    expect(marrow.some(p=>p.tint==='token:cut'&&p.kind==='sweep')).toBe(true);
+    for(const sign of [-1,1])expect(marrow.some(p=>p.tint==='token:muscle-3'&&p.kind==='sweep'&&p.path.some(v=>v[1]*sign>.15))).toBe(true);
+    // The cortical shell is one implicit mesh, so overlapping primitive
+    // seams cannot return at the neck/shaft/condyle junctions.
+    expect(part('bone-cortex').mesh).toBe('polished-cortex');
+    expect(part('bone-cortex').primitive).toBeUndefined();
+    // The cartilage spans the neck in depth rather than outlining it as a cord.
+    expect(part('growth-plate').mesh).toBe('polished-growth-disc');
+    expect(part('growth-plate').primitive).toBeUndefined();
     const pieces=partPieces(part('bone-lattice'));
-    expect(pieces.length).toBe(1);
+    expect(pieces.length).toBe(2);
     expect(pieces[0]!.geometry.getAttribute('position').count).toBeGreaterThan(1000);
-    expect((pieces[0]!.geometry.index?.count??0)/3).toBeLessThan(150_000);
+    expect(pieces.reduce((n,p)=>n+(p.geometry.index?.count??0)/3,0)).toBeLessThan(90_000);
     pieces.forEach(p=>p.geometry.dispose());
+  });
+  it('faces the conforming head cartilage outwards, so it covers the posterior joint surface',()=>{
+    const p=part('bone-lattice'),material=new MeshBasicMaterial();
+    const meshes=partPieces(p).map(piece=>{const m=new Mesh(piece.geometry,material);m.position.fromArray(p.primitive!.at);m.updateMatrixWorld(true);return m;});
+    const hits=new Raycaster(new Vector3(1.946,.218,-.1),new Vector3(0,0,1)).intersectObjects(meshes,false);
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits[0]!.point.z).toBeLessThan(-.0314);
+    expect(hits[0]!.face!.normal.z).toBeLessThan(-.9);
+    meshes.forEach(m=>m.geometry.dispose());material.dispose();
   });
   it('keeps the fulcrum fixed and places the beam dot at 0.04 m for every model angle',()=>{
     const pivot=part('lever-pivot');expect(pivot.context).toBe(true);
