@@ -11,6 +11,7 @@ import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { longitudinalPositions } from '../../src/engines/space-scene/lib/sim/senses';
 import { echoDuration, echoPosition, echoVisualDistance } from '../../src/engines/space-scene/lib/sim/sound-motion';
 import { partBounds } from '../../src/engines/space-scene/lib/parts';
+import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 
 const DIR=join(import.meta.dirname,'../../src/content/topics/sound');
 const json=(name:string)=>JSON.parse(readFileSync(join(DIR,'data',name),'utf8'));
@@ -189,24 +190,74 @@ describe('sound: schematic geometry and visibility support the comparisons',()=>
     expect(handle.at[0]).toBe(body.at[0]);expect(handle.at[2]).toBe(body.at[2]);
     expect(handle.at[1]+handle.size[2]!/2).toBeGreaterThan(body.at[1]+Math.min(...body.shape.map(p=>p[1])));
   });
-  it('keeps one membrane over an open hollow drum frame',()=>{
+  it('keeps one thin head on a complete hollow shell with connected tension hardware',()=>{
     const shell=part('drum-shell').primitive!,head=part('drumhead').primitive!;
-    expect(shell.kind).toBe('lathe');expect(head.kind).toBe('cylinder');
-    if(shell.kind!=='lathe'||head.kind!=='cylinder') throw new Error('drum topology must remain inspectable');
-    expect(Math.min(...shell.profile.map(p=>p[0]))).toBeGreaterThan(0);
-    expect(shell.arc).toBeLessThan(360);
-    expect(new Set(shell.profile.map(p=>p[0])).size).toBe(2);
-    expect(head.size[2]).toBeLessThan(.02);
-    expect(Math.abs((head.at[1]-head.size[2]!/2)-(shell.at[1]+Math.max(...shell.profile.map(p=>p[1]))))).toBeLessThan(.005);
-    expect(part('drumhead').extra!.every(p=>p.kind==='torus')).toBe(true);
+    expect(shell.kind).toBe('lathe');expect(head.kind).toBe('lathe');
+    if(shell.kind!=='lathe'||head.kind!=='lathe') throw new Error('formed shell and head profiles');
+    expect(shell.arc).toBeUndefined();
+    expect(Math.min(...shell.profile.map(p=>p[0]))).toBeGreaterThan(.3);
+    const yy=head.profile.map(p=>p[1]);
+    expect(Math.max(...yy)-Math.min(...yy)).toBeLessThan(.025);
+    expect(head.at[1]+Math.max(...yy)).toBeCloseTo(1.058,6);
+    const hardware=part('drumhead').extra!;
+    const rods=hardware.filter(p=>p.kind==='lathe'&&p.segments===16);
+    expect(rods).toHaveLength(6);
+    const tabs=part('drumhead').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length);
+    const tab=tabs[0]!;
+    if(tab.kind!=='extrude')throw new Error('drilled hoop ear');
+    const earTop=tab.at[1]+tab.depth/2;
+    const keyHeads=hardware.filter(p=>p.kind==='bevelBox');
+    expect(keyHeads).toHaveLength(6);
+    const casings=part('drum-shell').extra!.filter(p=>p.kind==='extrude'&&p.color==='stainless');
+    expect(casings).toHaveLength(6);
+    expect(part('drum-shell').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length)).toHaveLength(12);
+    for(const [i,rod] of rods.entries()) {
+      if(rod.kind!=='lathe')throw new Error('turned tension rod');
+      const casing=casings[i]!;
+      if(casing.kind!=='extrude')throw new Error('shell-mounted lug casing');
+      const bottom=rod.at[1]+Math.min(...rod.profile.map(p=>p[1]));
+      const lugBottom=casing.at[1]+Math.min(...casing.shape.map(p=>p[1]));
+      const lugTop=casing.at[1]+Math.max(...casing.shape.map(p=>p[1]));
+      // A rod's threaded end must disappear INSIDE its casing, never hang below it.
+      expect(bottom).toBeGreaterThan(lugBottom);
+      expect(bottom).toBeLessThan(lugTop);
+      const ear=tabs[i]!;
+      if(ear.kind!=='extrude')throw new Error('drilled hoop ear');
+      const angle=(i*60+30)*Math.PI/180;
+      const hole=ear.holes![0]!, offset=hole.reduce((sum,p)=>sum+p[1],0)/hole.length;
+      expect(ear.at[0]+offset*Math.sin(angle)).toBeCloseTo(rod.at[0],6);
+      expect(ear.at[2]+offset*Math.cos(angle)).toBeCloseTo(rod.at[2],6);
+      const collar=rod.profile.filter(p=>p[0]===.01).map(p=>rod.at[1]+p[1]);
+      expect(Math.min(...collar)).toBeCloseTo(earTop,6);
+      const key=keyHeads[i]!;
+      if(key.kind!=='bevelBox')throw new Error('square key head');
+      expect(key.at[1]-key.size[1]/2).toBeCloseTo(Math.max(...collar),6);
+    }
+    expect(part('drumhead').extra!.filter(p=>p.kind==='extrude'&&p.holes?.length)).toHaveLength(6);
     expect(part('drum-shell').connects).toContain('drumhead');
+  });
+  it('keeps the dark resin worktop planar and free of orange-peel normals in both themes',()=>{
+    const top=part('laboratory-bench').primitive!;
+    if(top.kind!=='bevelBox')throw new Error('resin worktop');
+    expect(top.at[1]+top.size[1]/2).toBeCloseTo(.65,8);
+    for(const theme of ['paper','cinema'] as const) {
+      const look=resolveMaterialLook(top.color,{},theme,top.tint);
+      expect(look.normal).toBe(0); expect(look.metalness).toBe(0);
+      expect(look.roughness).toBeGreaterThanOrEqual(.6);
+      expect(look.finish).toBe('grain'); expect(look.color).toBe('#303330');
+    }
   });
   it('anchors one continuous string and halves only its supported vibrating length',()=>{
     const string=part('monochord-string').primitive!,box=part('monochord-box').primitive!;
-    expect(string.kind).toBe('tube');expect(box.kind).toBe('panelHole');
-    if(string.kind!=='tube') throw new Error('single continuous string');
-    expect(string.path).toHaveLength(2);expect(part('monochord-string').extra??[]).toHaveLength(0);
-    const ends=string.path.map(p=>p.map((v,i)=>v+string.at[i]!));
+    expect(string.kind).toBe('sweep');expect(box.kind).toBe('panelHole');
+    if(string.kind!=='sweep') throw new Error('single continuous string');
+    expect(string.path).toHaveLength(2);
+    const tail=part('monochord-string').extra![0]!;
+    if(tail.kind!=='sweep') throw new Error('continuous second string span');
+    const world=(q:typeof string)=>q.path.map(p=>p.map((v,i)=>v+q.at[i]!));
+    const first=world(string),last=world(tail);
+    for(let i=0;i<3;i++) expect(first[1]![i]).toBeCloseTo(last[0]![i]!,12);
+    const ends=[first[0]!,last[1]!];
     const anchors=part('monochord-anchors');
     expect(ends[0]![0]).toBeCloseTo(anchors.primitive!.at[0],12);expect(ends[1]![0]).toBeCloseTo(anchors.extra![0]!.at[0],12);
     const fixed=part('monochord-fixed-bridge').primitive!,long=part('bridge-long').primitive!,short=part('bridge-short').primitive!;
