@@ -26,9 +26,10 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader, type GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
-import { Box3, PropertyBinding, Quaternion, Vector3, type BufferGeometry, type Mesh, type Object3D, type Skeleton, type SkinnedMesh } from 'three';
+import { Box3, DoubleSide, PropertyBinding, Quaternion, Vector3, type BufferGeometry, type Mesh, type MeshStandardMaterial, type Object3D, type Skeleton, type SkinnedMesh } from 'three';
 import type { SpaceUiStore } from '../../ui';
 import type { PartShape } from './PartNode';
+import { fadePartMaterial } from './materials';
 
 /** The skeleton left after the meshes were taken out, and a node by its glb name. */
 export interface GltfRig {
@@ -56,6 +57,36 @@ function findMesh(node: Object3D | undefined): Mesh | null {
     if (!found && (o as Mesh).isMesh) found = o as Mesh;
   });
   return found;
+}
+
+/** Kept in the lazy GLB loader so primitive topics do not pay for source-material handling. */
+export interface GltfSurface {
+  source: MeshStandardMaterial;
+  style(target: MeshStandardMaterial): void;
+  fade(target: MeshStandardMaterial, opacity: number, ghost: boolean): void;
+}
+
+/** Explicit material opt-in preserves the established family look of older assets. */
+export function gltfSurface(mesh: Mesh): GltfSurface | undefined {
+  const source = mesh.material as MeshStandardMaterial;
+  if (!source.isMeshStandardMaterial || source.userData.atlasSurface !== true) return;
+  return {
+    source,
+    style(target) {
+      // Family styling has just installed its maps; source styling changes that feature set.
+      target.needsUpdate = true;
+      target.map = source.map;
+      target.normalMap = target.roughnessMap = null;
+      target.color.multiply(source.color);
+      target.roughness = source.roughness;
+      target.metalness = source.metalness;
+      target.vertexColors = source.vertexColors;
+      target.alphaTest = source.alphaTest;
+    },
+    fade(target, opacity, ghost) {
+      fadePartMaterial(target, opacity * source.opacity, ghost, source.transparent);
+    },
+  };
 }
 
 const _v = new Vector3();
@@ -186,6 +217,7 @@ export default function GltfSource({
     const skeletons: Skeleton[] = [];
     const shapeOf = (mesh: Mesh): PartShape => {
       const geometry = mesh.geometry;
+      const surface = gltfSurface(mesh);
       adoptFibreAttributes(geometry);
       const position = new Vector3();
       const quaternion = new Quaternion();
@@ -220,7 +252,8 @@ export default function GltfSource({
         scale,
         radius: size.length() / 2,
         closed: extras.closed !== false,
-        twoSided: false,
+        twoSided: surface?.source.side === DoubleSide,
+        ...(surface ? { surface } : {}),
         restFan: 1,
         box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
         ...(fibre ? { fibre } : {}),

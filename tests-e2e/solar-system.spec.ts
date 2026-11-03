@@ -108,7 +108,7 @@ test('received twinkle samples, anti-solar comet and light-distance targets matc
 test('catalogue stays a separate same-origin sidecar and loaded sky comparisons work offline', async ({ page }) => {
   const requested: string[] = [];
   page.on('request', (request) => requested.push(request.url()));
-  const response = page.waitForResponse((r) => r.url().endsWith('/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json'));
+  const response = page.waitForResponse((r) => r.url().endsWith('/catalogues/solar-system/stars-hyg-v41-readable-cc-by-sa.json'));
   await open(page, 'singapore-star-patterns', 2);
   const sidecar = await (await response).json();
   expect(sidecar.meta.licence).toBe('CC BY-SA 4.0');

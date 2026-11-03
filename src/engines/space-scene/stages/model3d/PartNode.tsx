@@ -66,8 +66,8 @@ import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
-import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, type PartStyle, type PartUniforms } from './materials';
-import type { FibreMeasure } from './GltfSource';
+import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, fadePartMaterial, type PartStyle, type PartUniforms } from './materials';
+import type { FibreMeasure, GltfSurface } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import { updateSkinAnchor } from './skinAnchor';
 import type { ShapePiece } from './geometry';
@@ -115,6 +115,8 @@ export interface ShiftMove {
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
 export interface PartShape {
   pieces: ShapePiece[];
+  /** Opted-in GLB base colour and alpha; shared loader materials are never mutated or disposed here. */
+  surface?: GltfSurface;
   /** Part centre at rest (before explode). */
   position: [number, number, number];
   /** Extra transform of the pieces (glb meshes; identity for primitives). */
@@ -458,7 +460,7 @@ export function PartNode(props: PartNodeProps) {
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
   const slotCount = styles.length;
-  const pms = useMemo(() => Array.from({ length: slotCount }, () => createPartMaterial()), [slotCount]);
+  const pms = useMemo(() => Array.from({ length: slotCount }, () => createPartMaterial()), [slotCount, shape.surface]);
   const hasLines = useMemo(() => shape.pieces.some((p) => p.lines), [shape]);
   const lineMat = useMemo(
     () => (hasLines ? new LineBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, clipShadows: true }) : null),
@@ -519,10 +521,11 @@ export function PartNode(props: PartNodeProps) {
   useEffect(() => {
     pms.forEach((pm, i) => {
       stylePartMaterial(pm, styles[i] ?? style);
+      shape.surface?.style(pm.material);
       // glb muscles: the fibre grain follows `_FIBRE` (the UVs wrap around the belly).
       if (shape.fibre) styleFibreGrain(pm, shape.fibre, (styles[i] ?? style).look.normal);
     });
-  }, [pms, styles, style, shape.fibre]);
+  }, [pms, styles, style, shape.fibre, shape.surface]);
   useEffect(() => {
     lineMat?.color.set(props.lineColor);
   }, [lineMat, props.lineColor]);
@@ -712,13 +715,7 @@ export function PartNode(props: PartNodeProps) {
     }
     pms.forEach((pm, i) => {
       const mat = pm.material;
-      mat.opacity = m.fade * (styles[i] ?? style).look.opacity;
-      const transparent = mat.opacity < 0.999;
-      if (mat.transparent !== transparent) {
-        mat.transparent = transparent;
-        mat.needsUpdate = true;
-      }
-      mat.depthWrite = !display.ghost && mat.opacity > 0.6;
+      (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
     });
     if (lineMat) lineMat.opacity = m.fade * LINE_OPACITY;
     const cast = props.castShadow && m.fade > 0.6;
@@ -729,7 +726,7 @@ export function PartNode(props: PartNodeProps) {
     if (cast !== m.cast || (props.castShadow && prevFade !== m.fade)) runtime.shadowDirty = true;
     m.cast = cast;
     // See-through families (membrane, glass) never hide what is behind them from the labels.
-    handle.fade = m.fade * style.look.opacity;
+    handle.fade = m.fade * (shape.surface?.source.transparent ? 0.55 : style.look.opacity);
     const nowVisible = shown && display.visible;
     // The label probe reads handles before this node in a frame: a snapped change (load, deep link)
     // needs one more frame, or its anchor keeps the old visibility and its label never appears.

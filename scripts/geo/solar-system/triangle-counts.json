@@ -1,0 +1,90 @@
+{
+  "sun": {
+    "before": 2976,
+    "after": 20096
+  },
+  "mercury": {
+    "before": 2976,
+    "after": 16128
+  },
+  "venus": {
+    "before": 2976,
+    "after": 16128
+  },
+  "earth": {
+    "before": 2976,
+    "after": 16128
+  },
+  "mars": {
+    "before": 2976,
+    "after": 16128
+  },
+  "jupiter": {
+    "before": 2976,
+    "after": 16128
+  },
+  "saturn": {
+    "before": 2976,
+    "after": 16128
+  },
+  "uranus": {
+    "before": 2976,
+    "after": 16128
+  },
+  "neptune": {
+    "before": 2976,
+    "after": 16128
+  },
+  "saturn-rings": {
+    "before": 768,
+    "after": 42240
+  },
+  "moon-parent": {
+    "before": 2976,
+    "after": 9024
+  },
+  "meteor-world": {
+    "before": 2976,
+    "after": 9024
+  },
+  "earth-viewpoint": {
+    "before": 2976,
+    "after": 9024
+  },
+  "reflecting-world": {
+    "before": 2976,
+    "after": 9024
+  },
+  "moon-demo": {
+    "before": 6432,
+    "after": 12096
+  },
+  "asteroid-specimen": {
+    "before": 2976,
+    "after": 4992
+  },
+  "asteroid-belt": {
+    "before": 107136,
+    "after": 10368
+  },
+  "comet-sun": {
+    "before": 2976,
+    "after": 20096
+  },
+  "comet-nucleus": {
+    "before": 2976,
+    "after": 4992
+  },
+  "comet-coma": {
+    "before": 2976,
+    "after": 4992
+  },
+  "ion-tail": {
+    "before": 7200,
+    "after": 3072
+  },
+  "dust-tail": {
+    "before": 1408,
+    "after": 3072
+  }
+}
