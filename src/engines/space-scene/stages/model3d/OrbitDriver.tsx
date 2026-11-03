@@ -10,6 +10,7 @@ import { bodyPlacement, orbitalTiltGuide, orbitGuideLabelPoint } from '../../lib
 import { add, mul, sub, unit, cross, rotate, qm, qy, qx, type V3 } from '../../lib/sim/orbit-rotation';
 import { holds } from '../../lib/sim/bind';
 import { keepAnimating, useRuntime } from './runtime';
+import { orbitReadingComplete } from './orbitReading';
 
 /** Six-sided tubes: 128 sampled orbit segments, shared preallocated vertex storage. */
 function writeSegments(g: BufferGeometry, points: readonly V3[], radius: number) {
@@ -133,7 +134,20 @@ export function OrbitClockDriver({ orbit }: { orbit: OrbitSession }) {
   }, -2);
   return null;
 }
-export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSession; data: PartsFile; handles: Map<string, PartHandle>; bridge: StageBridge }) {
+export function OrbitDriver({
+  orbit,
+  data,
+  handles,
+  bridge,
+  expected,
+}: {
+  orbit: OrbitSession;
+  data: PartsFile;
+  handles: Map<string, PartHandle>;
+  bridge: StageBridge;
+  /** Parts that are or will be on the stage (orbitReading.ts): the reading waits for every one the snapshot places. */
+  expected: ReadonlySet<string>;
+}) {
   const runtime = useRuntime();
   const tmp = useMemo(
     () => ({
@@ -305,7 +319,8 @@ export function OrbitDriver({ orbit, data, handles, bridge }: { orbit: OrbitSess
     }
     if (tmp.last !== orbit.id) runtime.moved++;
     tmp.last = orbit.id;
-    reading.snapshotId = orbit.id;
+    // Only a frame that placed every expected body vouches for this snapshot (a glb body may still be loading).
+    if (orbitReadingComplete(transforms.map((t) => t.id), expected, handles)) reading.snapshotId = orbit.id;
     bridge.orbitRendered = reading;
   });
   return null;

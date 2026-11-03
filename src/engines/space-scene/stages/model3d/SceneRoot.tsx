@@ -45,6 +45,7 @@ import { exercisePosture, EXERCISE_VIEWS } from '../../lib/camera';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
 import { boxAnchor } from './glbAnchor';
+import { orbitExpectedParts } from './orbitReading';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
 import type { StageLook } from './look';
@@ -277,6 +278,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     return out;
   }, [primitiveShapes, meshShapes, rig, data.parts, exerciseOn]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
+  const orbitParts = useMemo(() => orbitExpectedParts(data.parts, shapes, modelExpected), [data.parts, shapes, modelExpected]);
   // Label anchors: from the primitives, or a glb part's measured bounds (and opt-in `extras.labelPoint`) once it has loaded.
   const glbAnchors = useMemo(() => {
     const out = new Map<string, { offset: Vec3; point: Vec3; half: Vec3; radius: number }>();
@@ -739,7 +741,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       )}
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
-      {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} />}
+      {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} expected={orbitParts} />}
       {data.flows.length > 0 && <Suspense fallback={null}><Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} /></Suspense>}
       <CameraRig
         handles={handles}
