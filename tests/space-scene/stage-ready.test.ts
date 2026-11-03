@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createBridge, stageReady } from '../../src/engines/space-scene/bridge';
+import { createBridge, expectsModel, stageReady } from '../../src/engines/space-scene/bridge';
 
 describe('stage readiness', () => {
   it('waits for the lazily mounted scene, and for the overlays and the glb meshes when the scene has them', () => {
@@ -15,6 +15,18 @@ describe('stage readiness', () => {
     expect(stageReady(bridge)).toBe(false);
     bridge.stageMarks.add('model');
     expect(stageReady(bridge)).toBe(true);
+  });
+});
+
+describe('glb readiness', () => {
+  it('waits for the glb when parts are drawn from its meshes, until it has failed', () => {
+    const parts = [{ mesh: 'liver' }, {}];
+    expect(expectsModel({ model: '/models/x.glb', parts }, 'none')).toBe(true);
+    expect(expectsModel({ model: '/models/x.glb', parts }, 'loading')).toBe(true);
+    expect(expectsModel({ model: '/models/x.glb', parts }, 'ready')).toBe(true);
+    expect(expectsModel({ model: '/models/x.glb', parts }, 'failed')).toBe(false);
+    expect(expectsModel({ parts }, 'none')).toBe(false);
+    expect(expectsModel({ model: '/models/x.glb', parts: [{}] }, 'none')).toBe(false);
   });
 });
 

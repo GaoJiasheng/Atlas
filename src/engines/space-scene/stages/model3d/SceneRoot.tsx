@@ -15,7 +15,7 @@ import type { SpaceSceneExt } from '../../index';
 import type { PartsFile, SpaceChapterState } from '../../schema';
 import type { FitnessBundle } from '../../../../content/schema/fitness';
 import type { SpaceUiStore } from '../../ui';
-import type { StageBridge } from '../../bridge';
+import { expectsModel, type StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
 import { explodeStages, targetExplodeAmount } from '../../lib/explode';
 import { bendAxisIndex } from '../../lib/bend';
@@ -258,9 +258,9 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     setRig(r);
   }, []);
   const hasModel = data.model !== undefined && meshNames.size > 0;
-  // Ready waits for the glb's meshes to be drawn too, unless the model failed (the primitives still draw).
-  const modelFailed = useStore(ui, (u) => u.model.state === 'failed');
-  const modelExpected = hasModel && !modelFailed;
+  // Ready waits for the glb's meshes to be applied to their parts and drawn too, unless the model failed (bridge.ts).
+  const modelState = useStore(ui, (u) => u.model.state);
+  const modelExpected = expectsModel(data, modelState);
   useEffect(() => {
     bridge.modelExpected = modelExpected;
     return () => { bridge.modelExpected = false; };
@@ -774,6 +774,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       <ShadowUpdater runtime={runtime} enabled={!data.views.shadows || data.views.shadows === 'auto'} bridge={bridge} />
       <ResolutionGovernor bridge={bridge} base={stageDpr} />
       <StageMark bridge={bridge} name="scene" />
+      {/* In the commit that gives the parts their glb geometry (GltfSource hands every mesh part over at once). */}
       {meshShapes && <StageMark bridge={bridge} name="model" />}
       </Suspense>
     </RuntimeContext.Provider>
