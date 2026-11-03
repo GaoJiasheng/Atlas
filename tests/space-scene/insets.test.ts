@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { insetRect } from '../../src/engines/space-scene/lib/insets';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import topic from '../../src/content/topics/eyes-and-ears/data/parts.json';
+import { NodeIO } from '@gltf-transform/core';
+import { resolve } from 'node:path';
 import { partBounds } from '../../src/engines/space-scene/lib/parts';
 
 const box = (x0: number, y0: number, x1: number, y1: number, shown = true, onScreen = true) => ({ x0, y0, x1, y1, shown, onScreen });
@@ -33,12 +35,21 @@ describe('views.insets contract', () => {
     raw.views.insets = [{ id: 'x', parts: ['iris-aperture-small'], label: { en: 'A', zh: '甲' } }];
     expect(partsFile.safeParse(raw).success).toBe(false);
   });
-  it('eyes-and-ears frames its hair-cell window clear of the middle ear', () => {
+  it('eyes-and-ears frames its hair-cell window clear of the middle ear', async () => {
     const file = partsFile.parse(topic);
     const inset = file.views.insets!.find((i) => i.id === 'hair-cell-window')!;
     expect(inset.label.en).toMatch(/different scale/);
     expect(inset.label.zh).toContain('非同一比例');
-    const parts = (ids: string[]) => ids.map((id) => partBounds(file.parts.find((p) => p.id === id)!)!);
+    // Sculpted ossicles now use local meshes; inspect their actual vertex bounds.
+    const model = await new NodeIO().read(resolve(import.meta.dirname, '../../public', file.model!.slice(1)));
+    const parts = (ids: string[]) => ids.map((id) => {
+      const part = file.parts.find((p) => p.id === id)!;
+      const primitive = partBounds(part); if (primitive) return primitive;
+      const attr = model.getRoot().listNodes().find(n => n.getName() === part.mesh)!.getMesh()!.listPrimitives()[0]!.getAttribute('POSITION')!;
+      const min = [Infinity, Infinity, Infinity], max = [-Infinity, -Infinity, -Infinity], v: number[] = [];
+      for (let i = 0; i < attr.getCount(); i++) { attr.getElement(i, v); for (let j = 0; j < 3; j++) { min[j] = Math.min(min[j]!, v[j]!); max[j] = Math.max(max[j]!, v[j]!); } }
+      return { min, max };
+    });
     const window = parts(inset.parts), ear = parts(['eardrum', 'malleus', 'incus', 'stapes', 'oval-window', 'eustachian-tube', 'cochlea-shell']);
     const top = Math.max(...window.map((b) => b.max[1]!)), left = Math.min(...window.map((b) => b.min[0]!));
     // Entirely below the middle ear and the cochlea, and right of the Eustachian tube.
