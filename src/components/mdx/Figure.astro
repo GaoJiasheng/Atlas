@@ -14,14 +14,17 @@ interface Props {
   src: string;
   alt: BilingualText | string;
   caption: BilingualText | string;
+  /** Preserve physical light/dark meaning (Moon phases, shadows, dark boxes). */
+  invert?: boolean;
 }
-const { src, alt, caption } = Astro.props;
+const { src, alt, caption, invert = true } = Astro.props;
 const locale = pageLocale(Astro.url, Astro.currentLocale);
 const one = withBase(`/illustrations/${src}.webp`);
 ---
 <figure class="atlas-figure">
   <img
     class="atlas-drawing atlas-figure__img"
+    data-invert={invert ? undefined : 'false'}
     src={one}
     sizes="(max-width: 1023px) 92vw, 420px"
     width="1200"
