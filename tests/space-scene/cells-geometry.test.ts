@@ -14,6 +14,7 @@ import { partPieces } from '../../src/engines/space-scene/stages/model3d/geometr
 const file=partsFile.parse(JSON.parse(readFileSync('src/content/topics/cells/data/parts.json','utf8')));
 const part=(id:string)=>file.parts.find(p=>p.id===id)!;
 const meshes=new Map<string,Mesh>();
+const labelPoints=new Map<string,Vector3>();
 beforeAll(async()=>{
  await MeshoptDecoder.ready;
  const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(`public${file.model}`);
@@ -24,6 +25,8 @@ beforeAll(async()=>{
   const n=prim.getAttribute('NORMAL');if(n)g.setAttribute('normal',new Float32BufferAttribute(n.getArray()!,3));
   const idx=prim.getIndices();if(idx)g.setIndex(Array.from(idx.getArray()!));
   g.applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()));
+  const lp=(node.getExtras() as {labelPoint?:[number,number,number]}).labelPoint;
+  if(lp)labelPoints.set(node.getName(),new Vector3(...lp).applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix())));
   const m=new Mesh(g,new MeshBasicMaterial({side:DoubleSide}));m.updateMatrixWorld();meshes.set(node.getName(),m);
  }
  for(const p of file.parts.filter(p=>p.primitive)){
@@ -56,6 +59,22 @@ describe('cells polished anatomy and microscope mechanics',()=>{
   const top:number[]=[],bottom:number[]=[];
   for(let i=0;i<pos.count;i++){if(pos.getY(i)>.141)top.push(pos.getX(i));if(pos.getY(i)<.059)bottom.push(pos.getX(i));}
   expect(Math.abs((Math.min(...top)+Math.max(...top))-(Math.min(...bottom)+Math.max(...bottom)))).toBeGreaterThan(.005);
+ });
+ it('ends each boundary leader on its own visible front rim, clear of the nucleus and vacuole',()=>{
+  const cell={'animal-membrane':'animal-cell','plant-cell-wall':'plant-cell','plant-membrane':'plant-cell'} as const;
+  expect([...labelPoints.keys()].sort()).toEqual(Object.keys(cell).sort());
+  for(const [id,group] of Object.entries(cell)){
+   const p=labelPoints.get(id)!,b=bounds(id),centre=new Vector3(...b.min).add(new Vector3(...b.max)).multiplyScalar(.5);
+   // On this boundary: its nearest vertex is within one profile step (the hit below pins the surface).
+   const pos=meshes.get(id)!.geometry.getAttribute('position');let near=Infinity;
+   for(let i=0;i<pos.count;i++)near=Math.min(near,Math.hypot(pos.getX(i)-p.x,pos.getY(i)-p.y,pos.getZ(i)-p.z));
+   expect(near,id).toBeLessThan(.002);
+   expect(Math.hypot(p.x-centre.x,p.y-centre.y),id).toBeGreaterThan(.03);
+   // Seen from the front, the first surface on the line of sight is this boundary, at the point.
+   const others=file.parts.filter(q=>q.group===group).map(q=>meshes.get(q.mesh??q.id)!);
+   const hit=new Raycaster(new Vector3(p.x,p.y,p.z+.1),new Vector3(0,0,-1)).intersectObjects(others)[0]!;
+   expect(hit.object,id).toBe(meshes.get(id));expect(hit.point.z,id).toBeCloseTo(p.z,3);
+  }
  });
  it('leaves actual basal openings around each nucleus and the central vacuole',()=>{
   expect(hits('animal-cytoplasm',.115,.1).every(z=>z<-.0062)).toBe(true);

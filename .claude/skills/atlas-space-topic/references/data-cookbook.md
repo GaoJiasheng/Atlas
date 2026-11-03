@@ -227,7 +227,7 @@ state:
 ```
 
 - **名字**：glb 节点名 = 零件 id + `.l` / `.r`；数据只写左侧零件（身体自己的左 = +X），右侧用 `bilateral.mesh` 指向 `.r` 节点（不镜像几何；右侧仍是完整零件 `<id>-r`）。three 读节点名时去掉 `.`，引擎自动对得上；两个名字去点后不能撞（validate 查）。
-- **材质**：glb 零件必须写 `material`（`muscle` + `token:muscle-1/2/3` 浅 → 深；骨 `tissue` + `token:bone`；皮肤 `membrane` + `shell: true` + `context: true`）。glb 节点 `extras.closed: false` = 剖切不填剖面。
+- **材质**：glb 零件必须写 `material`（`muscle` + `token:muscle-1/2/3` 浅 → 深；骨 `tissue` + `token:bone`；皮肤 `membrane` + `shell: true` + `context: true`）。glb 节点 `extras.closed: false` = 剖切不填剖面；`extras.labelPoint: [x, y, z]`（节点本地坐标）= 刚性零件的引线终点（包围盒中心落在空处或被别的零件挡住时用）。
 - **关节**：`axes` 是场景坐标的解剖轴，正角 = 这一侧做这个动作；反向动作自动取负（一对只写一根）；按书写顺序作用、相对父骨。左关节的角自动驱动右关节。姿态写 `joint:<名>`，片段 `target: "joint:<名>"` + 每键 `angles`。
 - **收缩**：0..1；管线烘焙 `_U` / `_FIBRE` 时沿纤维缩短 + 鼓起 + 细纹，没有就整体缩放。姿态 `contract`、片段键的 `contract`、`kind: contract` 动画、动作关键帧都能给。
 - **剥层**：`explode.stage` 0 / 1 / 2 = 浅 / 中 / 深依次外移（窗口 0–0.4 / 0.3–0.7 / 0.6–1.0）；骨与邻区 `dist: 0`。

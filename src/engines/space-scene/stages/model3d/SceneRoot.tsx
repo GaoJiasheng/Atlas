@@ -43,9 +43,9 @@ import { makeFoot } from './foot';
 import { exercisePosture, EXERCISE_VIEWS } from '../../lib/camera';
 import { partBounds, partMaterialSlots } from '../../lib/parts';
 import { anchorHalf, anchorOffset, anchorPoint, anchorRadius, primitiveShape, stageBounds } from './shapes';
+import { boxAnchor } from './glbAnchor';
 import { createTextureKit } from './textures';
 import type { PartStyle } from './materials';
-import type { Box3Like } from '../../lib/parts';
 import type { StageLook } from './look';
 import { stageDpr } from './dpr';
 import { resolveSimValues } from '../../lib/sim/controls';
@@ -94,13 +94,6 @@ const NO_IDS: readonly string[] = [];
 /** The pipeline's separate skin hands (`skin-hand.l` / `.r`): the exercise body draws procedural hands instead. */
 const isSkinHand = (mesh: string | undefined) => mesh !== undefined && mesh.startsWith('skin-hand');
 const NO_EQUIPMENT: readonly never[] = [];
-
-/** Label anchor fields from a glb part's measured rest bounds (relative to its centre). */
-function boxAnchor(box: Box3Like, at: readonly number[]): { offset: Vec3; half: Vec3; radius: number } {
-  const offset: Vec3 = [(box.min[0] + box.max[0]) / 2 - at[0]!, (box.min[1] + box.max[1]) / 2 - at[1]!, (box.min[2] + box.max[2]) / 2 - at[2]!];
-  const half: Vec3 = [(box.max[0] - box.min[0]) / 2, (box.max[1] - box.min[1]) / 2, (box.max[2] - box.min[2]) / 2];
-  return { offset, half, radius: Math.hypot(half[0], half[1], half[2]) * 0.75 };
-}
 
 /** FLOW fade-in (master-spec H: ~0.6 s). */
 /** EXPLODED toggle (master-spec H: ~2 s easeInOut); slider drags follow quickly. */
@@ -283,11 +276,11 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     return out;
   }, [primitiveShapes, meshShapes, rig, data.parts, exerciseOn]);
   const bounds = useMemo(() => stageBounds(data.parts, shapes), [data.parts, shapes]);
-  // Label anchors: from the primitives, or a glb part's measured bounds once it has loaded.
+  // Label anchors: from the primitives, or a glb part's measured bounds (and opt-in `extras.labelPoint`) once it has loaded.
   const glbAnchors = useMemo(() => {
-    const out = new Map<string, { offset: Vec3; half: Vec3; radius: number }>();
+    const out = new Map<string, { offset: Vec3; point: Vec3; half: Vec3; radius: number }>();
     meshShapes?.forEach((shape, id) => {
-      if (shape.box) out.set(id, boxAnchor(shape.box, shape.position));
+      if (shape.box) out.set(id, boxAnchor(shape.box, shape.position, shape.labelPoint));
     });
     return out;
   }, [meshShapes]);
@@ -301,7 +294,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     ui.setState({ meshBounds: out });
   }, [meshShapes, ui]);
   const anchors = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorOffset(p)] as [string, Vec3])), [data.parts, glbAnchors]);
-  const points = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.offset ?? anchorPoint(p)] as [string, Vec3])), [data.parts, glbAnchors]);
+  const points = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.point ?? anchorPoint(p)] as [string, Vec3])), [data.parts, glbAnchors]);
   const radii = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.radius ?? anchorRadius(p)] as [string, number])), [data.parts, glbAnchors]);
   const halves = useMemo(() => new Map(data.parts.map((p) => [p.id, glbAnchors.get(p.id)?.half ?? anchorHalf(p)] as [string, Vec3])), [data.parts, glbAnchors]);
   const stages = useMemo(() => explodeStages(data.parts), [data.parts]);

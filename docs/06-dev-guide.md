@@ -1126,6 +1126,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "explode": { "dir": [0.2, 0, 1], "dist": 0.06, "stage": 0 },   // M4：剥层，stage 0 先走
   "group": "superficial", "connects": ["clavicle", "humerus"] }
 // glb 节点 extras.closed: false → 剖切不填剖面（默认填）
+// glb 节点 extras.labelPoint: [x, y, z]（节点本地坐标）→ 刚性零件的引线落在这一点，而不是包围盒中心（空心壳、杯里的组织用；蒙皮零件忽略）
 
 // poses：零件条目之外可以写关节角与收缩
 "poses": { "bench-bottom": {

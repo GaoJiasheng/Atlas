@@ -132,6 +132,8 @@ export interface PartShape {
   restFan: number;
   /** Rest bounds in scene coordinates (glb parts, measured from the geometry): label anchor and stage bounds. */
   box?: Box3Like;
+  /** Leader-label point at rest in scene coordinates: a rigid glb node's opt-in `extras.labelPoint` (else the bounds centre). */
+  labelPoint?: [number, number, number];
   /** A glb muscle's fibre data (`_U` / `_FIBRE`): length origin → insertion, belly thickness, dominant direction and centre (mesh units), metres per mesh unit. */
   fibre?: FibreMeasure;
 }
