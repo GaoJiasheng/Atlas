@@ -6,11 +6,11 @@ title:
   zh: 结构与摄食
 level: P6
 state:
-  camera:
+  camera: &a1
     position:
-      - 5.9
-      - 1.4
-      - 1.8
+      - 5
+      - 1.55
+      - 0.93
     target:
       - 5
       - 0.4
@@ -21,8 +21,8 @@ state:
     - polyp-closeup
     - web-specimens
     - evidence-tools
-    - feeding-flows
-  hide: []
+  hide:
+    - larva-inset
   labels:
     - polyp-tentacles
   part: null
@@ -50,6 +50,7 @@ state:
       caption:
         en: Tentacles with stinging cells help capture small prey.
         zh: 带有刺细胞的触手有助捕捉微小猎物。
+      camera: *a1
     - part: polyp-mouth
       run: false
       labels:
@@ -58,13 +59,31 @@ state:
       caption:
         en: Tentacles are structures; extending and using them to feed is behaviour.
         zh: 触手是结构；伸展触手并用它摄食，是行为。
-    - camera: reef
+      camera:
+        position:
+          - 5
+          - 1.55
+          - 0.7
+        target:
+          - 5
+          - 0.43
+          - 0
+        fov: 30
+    - camera:
+        position:
+          - -0.12
+          - 2.05
+          - 2.15
+        target:
+          - -0.12
+          - -0.02
+          - 0
+        fov: 30
       layers:
         - reef-habitat
         - polyp-closeup
         - web-specimens
         - evidence-tools
-        - feeding-flows
       hide: []
       labels:
         - colony-boulder
@@ -74,28 +93,57 @@ state:
       caption:
         en: Coral colonies can form boulders or sheets. They are not leaves or branches of a plant.
         zh: 珊瑚群体可呈块状或片状，并非植物的叶或枝。
-    - camera: reef
+    - camera:
+        position:
+          - -1.12
+          - -0.2
+          - 1.26
+        target:
+          - -1.12
+          - -0.29
+          - 0.25
+        fov: 30
       layers:
         - reef-habitat
         - polyp-closeup
         - web-specimens
         - evidence-tools
-        - feeding-flows
-      hide: []
+      hide:
+        - reef-crest
+        - reef-slope
+        - colony-sheet
+        - colony-encrusting
+        - colony-boulder
+        - colony-tissue
+        - substrate-context
       labels:
         - refuge-cavity
       part: refuge-cavity
       caption:
         en: Spaces within the reef provide shelter for other organisms.
         zh: 礁体里的空隙为其他生物提供庇护。
-    - camera: polyp
+    - camera:
+        position:
+          - 5.62
+          - 0.46
+          - 0.64
+        target:
+          - 5.62
+          - 0.21
+          - 0.04
+        fov: 30
       layers:
         - reef-habitat
         - polyp-closeup
         - web-specimens
         - evidence-tools
-        - feeding-flows
-      hide: []
+      hide:
+        - polyp-tissue
+        - polyp-mouth
+        - polyp-tentacles
+        - polyp-skeleton
+        - polyp-symbionts
+        - inset-base
       labels:
         - larva-inset
       part: larva-inset

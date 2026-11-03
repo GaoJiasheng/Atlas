@@ -8,9 +8,9 @@ level: P6
 state:
   camera:
     position:
-      - 5.9
-      - 1.4
-      - 1.8
+      - 5
+      - 1.55
+      - 0.93
     target:
       - 5
       - 0.4
@@ -21,8 +21,8 @@ state:
     - polyp-closeup
     - web-specimens
     - evidence-tools
-    - feeding-flows
-  hide: []
+  hide:
+    - larva-inset
   labels:
     - polyp-tissue
   part: null
@@ -58,6 +58,16 @@ state:
       caption:
         en: A mouth lies inside the ring of tentacles.
         zh: 一圈触手围着中央的口。
+      camera:
+        position:
+          - 5
+          - 1.55
+          - 0.7
+        target:
+          - 5
+          - 0.43
+          - 0
+        fov: 30
     - part: polyp-skeleton
       cutaway: half
       labels:
@@ -66,6 +76,16 @@ state:
       caption:
         en: The hard skeleton lies around and beneath the living tissue.
         zh: 坚硬的骨骼位于活组织周围和下方。
+      camera:
+        position:
+          - 5
+          - 0.98
+          - 1.32
+        target:
+          - 5
+          - 0.31
+          - 0
+        fov: 30
     - part: polyp-symbionts
       view: xray
       labels:
@@ -77,6 +97,16 @@ state:
       caption:
         en: Tiny algal partners live within the tissue and make food using light.
         zh: 微小共生藻住在组织内，利用光制造食物。
+      camera:
+        position:
+          - 5
+          - 1.04
+          - 1.22
+        target:
+          - 5
+          - 0.33
+          - 0
+        fov: 30
     - part: polyp-tentacles
       run: true
       labels:
@@ -107,7 +137,7 @@ The coral remains an animal even though its partners photosynthesise. Its tentac
 
 <More title={{"en": "Tentacles and scale", "zh": "触手与比例"}}>
 
-This model draws <Num s="S50">12</Num> smooth tentacles as an example of sixfold organisation. Hard-coral tentacle counts are multiples of six, not always twelve. The close-up has no verified magnification or shared scale with the reef. [S5]
+This model draws <Num s="S50">12</Num> short, rounded tentacles as an example of sixfold organisation. Hard-coral tentacle counts are multiples of six, not always twelve. The close-up has no verified magnification or shared scale with the reef. [S5]
 
 </More>
 
@@ -133,7 +163,7 @@ For the photosynthesis process, see <TopicLink slug="plant" ch="leaves-make-food
 
 <More title={{"en": "Tentacles and scale", "zh": "触手与比例"}}>
 
-本模型用 <Num s="S50">12</Num> 根光滑触手示意六倍数排列；硬珊瑚的触手并非一律十二根。近景没有经过核定的放大倍数，也不与礁区共用实物比例。[S5]
+本模型用 <Num s="S50">12</Num> 根短而圆钝的触手示意六倍数排列；硬珊瑚的触手并非一律十二根。近景没有经过核定的放大倍数，也不与礁区共用实物比例。[S5]
 
 </More>
 

@@ -8,6 +8,12 @@ import { resolveSimValues } from '../src/engines/space-scene/lib/sim/controls';
 import { simEffects } from '../src/engines/space-scene/lib/sim/bind';
 import { resolveAllPartDisplays } from '../src/engines/space-scene/lib/visibility';
 import type { SimValues } from '../src/engines/space-scene/sim-schema';
+import { solveHudRoom } from '../src/engines/core/hud-room';
+import { BufferGeometry, DoubleSide, Euler, Float32BufferAttribute, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Vector3 } from 'three';
+import { partPieces } from '../src/engines/space-scene/stages/model3d/geometry';
+import { partBounds } from '../src/engines/space-scene/lib/parts';
+import { fitCameraToHud, type FrameBox } from '../src/engines/space-scene/lib/hud-framing';
+import { fitCameraToAspect } from '../src/engines/space-scene/lib/camera';
 
 const dir = join(import.meta.dirname, '../src/content/topics/coral-reef');
 const file = partsFile.parse(JSON.parse(readFileSync(join(dir, 'data/parts.json'), 'utf8')));
@@ -22,6 +28,33 @@ const at = (chapter: string, beat: number) => {
   const c = chapters.find((c) => c.id === chapter)!;
   return resolveSimValues(sim, { ...c.state.sim.set, ...c.state.beats[beat - 1].sim?.set });
 };
+
+/** Read the original local GLB directly: anatomical assertions use the shipped mesh. */
+function sculptGeometry(id: string): BufferGeometry {
+  const data = readFileSync(join(import.meta.dirname, '../public', file.model!));
+  const jsonLength = data.readUInt32LE(12);
+  const gltf = JSON.parse(data.subarray(20, 20 + jsonLength).toString());
+  const binaryOffset = 20 + jsonLength + 8;
+  const node = gltf.nodes.find((n: { name: string }) => n.name === id);
+  if (!node) throw new Error(`Missing sculpted node: ${id}`);
+  const primitive = gltf.meshes[node.mesh].primitives[0];
+  const floats = (index: number) => {
+    const a = gltf.accessors[index], view = gltf.bufferViews[a.bufferView];
+    const offset = binaryOffset + (view.byteOffset ?? 0) + (a.byteOffset ?? 0);
+    // NodeIO writes interleaved POSITION/NORMAL buffers; each vertex may
+    // occupy more than its position's twelve bytes.
+    const stride = view.byteStride ?? 12;
+    return Array.from({ length: a.count * 3 }, (_, i) => data.readFloatLE(offset + Math.floor(i / 3) * stride + (i % 3) * 4));
+  };
+  const a = gltf.accessors[primitive.indices], view = gltf.bufferViews[a.bufferView];
+  const offset = binaryOffset + (view.byteOffset ?? 0) + (a.byteOffset ?? 0);
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(floats(primitive.attributes.POSITION), 3));
+  const indexBytes = a.componentType === 5125 ? 4 : a.componentType === 5123 ? 2 : 1;
+  geometry.setIndex(Array.from({ length: a.count }, (_, i) => data.readUIntLE(offset + i * indexBytes, indexBytes)));
+  geometry.computeBoundingBox();
+  return geometry;
+}
 
 // Independent curriculum graph, deliberately not read from the table or its foodWeb metadata.
 // A work-list reachability oracle catches indirect support loss and disconnected components.
@@ -151,6 +184,53 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(evaluate({ remove: 'n-turf-algae', inspect: 'n-parrotfish' })['food-status']).toBe('no-shown-food');
   });
 
+  it('keeps a static food-to-consumer arrow for each active path, including when flow motion is paused', () => {
+    for (const [id, from, to] of edges) {
+      const arrowId = id.replace(/^e-/, 'food-arrow-');
+      const arrow = file.parts.find((p) => p.id === arrowId)!;
+      expect(arrow, id).toBeDefined();
+      expect(arrow.context).toBe(true);
+      expect(arrow.group).toBe('feeding-flows');
+      expect(file.flows.find((f) => f.id === id)?.parts).toEqual([from.replace('n-', 'web-'), to.replace('n-', 'web-')]);
+      expect(sim.bind).toContainEqual(expect.objectContaining({ output: `active-${id}`, part: arrowId, visible: { eq: 1 } }));
+      const cone = arrow.extra?.find((p) => p.kind === 'cone');
+      if (cone?.kind !== 'cone') throw new Error(`Missing direction head: ${id}`);
+      const rotation = cone.rotation ?? [0, 0, 0];
+      const tip = new Vector3(0, cone.size[1]! / 2, 0)
+        .applyEuler(new Euler(...rotation.map((v) => v * Math.PI / 180) as [number, number, number], 'XYZ'))
+        .add(new Vector3(...cone.at));
+      const end = file.flows.find((f) => f.id === id)!.path.at(-1)!;
+      for (const axis of [0, 1, 2]) expect(tip.getComponent(axis), `${id}: cone tip axis ${axis}`).toBeCloseTo(end[axis]! + (axis === 2 ? .13 : 0), 6);
+      // Reachability, including indirect loss of support, determines the annotations.
+      // They are ordinary geometry, so pausing particles or reduced motion keeps their direction readable.
+      for (const remove of ['none', ...nodes]) {
+        const active = graphOracle(remove, 'n-coral')[`active-${id}`] === 1;
+        expect(effects({ remove }).hidden.has(arrowId), `${id}/${remove}`).toBe(!active);
+      }
+    }
+    for (const c of chapters) {
+      const teachesWeb = ['sunlight-and-food', 'changing-one-node'].includes(c.id);
+      for (const beat of [null, ...c.state.beats]) {
+        const state = { ...c.state, ...beat };
+        expect(state.layers.includes('feeding-flows'), `${c.id}/${beat?.id ?? 'base'}`).toBe(teachesWeb);
+      }
+    }
+  });
+
+  it('lets the shared HUD solver fold the web card before preserving the model band at 1024 × 768', () => {
+    // Shared solver fixture: this is a policy check, not a browser layout measurement.
+    const room = solveHudRoom({ width: 1024, height: 768 }, {
+      top: 90, bottom: 90, reader: 400, edge: 24, tab: 44,
+      left: { width: 300, height: 580, metadata: 180 },
+      right: { width: 264, height: 500, legends: 160, card: 180 },
+    });
+    expect(room.steps).toEqual(['legends', 'card', 'metadata', 'left']);
+    expect(room.folds).toMatchObject({ cardOpen: false, legendsOpen: false, leftColumn: 'collapsed', reader: true });
+    expect(room.stage.x1 - room.stage.x0).toBe(532);
+    expect(room.stage.y1 - room.stage.y0).toBe(588);
+    expect(room.meetsShare).toBe(true);
+  });
+
   it.each(evidence)('uses tissue evidence rather than whiteness, with skeleton retained: %s', (state) => {
     const fx = effects({ 'evidence-state': state });
     for (const id of ['polyp-tissue', 'polyp-mouth', 'polyp-tentacles']) expect(fx.hidden.has(id)).toBe(state === 'dead-skeleton');
@@ -174,7 +254,8 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(chapters).toHaveLength(8);
     expect(chapters.map((c) => c.state.beats.length)).toEqual([4, 5, 5, 5, 5, 5, 5, 5]);
     expect(file.parts.filter((p) => !p.context)).toHaveLength(26);
-    expect(file.parts.filter((p) => p.context)).toHaveLength(2);
+    expect(file.parts.filter((p) => p.context)).toHaveLength(6);
+    expect(file.parts).toHaveLength(32);
     expect(file.views.hudFrame?.parts).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id));
     const indexed = new Set<string>(chapters.flatMap((c) => c.state.index.parts));
     expect([...indexed].sort()).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id).sort());
@@ -182,65 +263,171 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(file.flows.reduce((n, f) => n + f.count, 0)).toBeLessThanOrEqual(80);
   });
 
-  it('models twelve smooth tentacles around one mouth and one matching oral-disc aperture', () => {
-    const tentacles = file.parts.find((p) => p.id === 'polyp-tentacles')!;
-    const sweeps = [tentacles.primitive!, ...tentacles.extra!];
-    expect(sweeps).toHaveLength(12);
-    const roots: number[] = [];
-    for (const shape of sweeps) {
-      expect(shape.kind).toBe('sweep');
-      if (shape.kind !== 'sweep') throw new Error('Tentacle must be a single unbranched sweep');
-      expect(shape.path).toHaveLength(4);
-      expect(Array.isArray(shape.radius)).toBe(true);
-      const radii = shape.radius as number[];
-      expect(radii.at(-1)!).toBeLessThan(radii[0]!);
-      roots.push(Math.atan2(shape.path[0]![2], shape.path[0]![0]));
+  it('has twelve short rounded fingers surrounding an open oval mouth', () => {
+    const fingers = sculptGeometry('polyp-tentacles');
+    const positions = fingers.getAttribute('position');
+    const peaks: number[] = [], widths: number[] = [];
+    for (let k = 0; k < 12; k++) {
+      const angle = k * Math.PI / 6 + .025 * Math.sin(k * 2.1);
+      const points = Array.from({ length: positions.count }, (_, i) => new Vector3().fromBufferAttribute(positions, i))
+        .filter(p => Math.hypot(p.x - 5, p.z) > .27 && Math.abs(Math.atan2(Math.sin(Math.atan2(p.z,p.x-5)-angle), Math.cos(Math.atan2(p.z,p.x-5)-angle))) < .15);
+      expect(points.length).toBeGreaterThan(30);
+      const peak = Math.max(...points.map(p => p.y));
+      peaks.push(peak);
+      expect(peak).toBeGreaterThan(.58); expect(peak).toBeLessThan(.68);
+      const shaft = points.filter(p => p.y > .52 && p.y < .55);
+      const tangential = shaft.map(p => -(p.x-5)*Math.sin(angle)+p.z*Math.cos(angle));
+      widths.push(Math.max(...tangential)-Math.min(...tangential));
     }
-    roots.sort((a, b) => a - b);
-    for (let i = 1; i < roots.length; i++) expect(roots[i]! - roots[i - 1]!).toBeCloseTo(Math.PI / 6, 8);
-    const mouth = file.parts.find((p) => p.id === 'polyp-mouth')!;
-    expect(mouth.extra ?? []).toHaveLength(0); expect(mouth.repeat).toBeUndefined();
-    expect(mouth.primitive!.kind).toBe('sweep');
-    if (mouth.primitive!.kind !== 'sweep') throw new Error('Mouth must have one continuous rim');
-    expect(mouth.primitive.closed).toBe(true);
-    const tissue = file.parts.find((p) => p.id === 'polyp-tissue')!;
-    const discs = tissue.extra!.filter((p) => p.kind === 'extrude');
-    expect(discs).toHaveLength(1);
-    const disc = discs[0]!;
-    if (disc.kind !== 'extrude') throw new Error('Oral disc must have an aperture');
-    expect(disc.holes).toHaveLength(1);
-    for (const [rimAxis, holeAxis] of [[0, 0], [2, 1]] as const) {
-      const rim = Math.max(...mouth.primitive.path.map((p) => Math.abs(p[rimAxis])));
-      const aperture = Math.max(...disc.holes![0]!.map((p) => Math.abs(p[holeAxis])));
-      expect(aperture).toBeCloseTo(rim, 5);
+    expect(Math.max(...peaks)-Math.min(...peaks)).toBeGreaterThan(.04);
+    for (const width of widths) expect(width).toBeGreaterThan(.040);
+    expect(fingers.boundingBox!.getSize(new Vector3()).y).toBeLessThan(.24);
+    fingers.dispose();
+    for (const id of ['polyp-tissue','polyp-mouth','polyp-skeleton','polyp-tentacles']) {
+      const part = file.parts.find(p => p.id === id)!;
+      expect(part.mesh).toBe(id); expect(part.primitive).toBeUndefined();
     }
+    const mouth = sculptGeometry('polyp-mouth');
+    const size = mouth.boundingBox!.getSize(new Vector3());
+    expect(size.x / size.z).toBeGreaterThan(1.8);
+    expect(size.x / size.z).toBeLessThan(2.2); // rounded oval, no pinched eye corners
+    expect(size.y).toBeGreaterThan(.06); // a real recessed throat
+    const polypChapter = chapters.find(c => c.id === 'coral-and-partners')!;
+    const beat = polypChapter.state.beats[1];
+    expect(beat.labels).toContain('polyp-mouth');
+    expect(beat.camera.position[1] - beat.camera.target[1]).toBeGreaterThan(beat.camera.position[2] - beat.camera.target[2]);
+    mouth.dispose();
   });
 
-  it('places whole algal-partner spheres inside the tissue wall rather than the cavity or seawater', () => {
-    const wall = file.parts.find((p) => p.id === 'polyp-tissue')!.primitive!;
-    if (wall.kind !== 'lathe') throw new Error('Tissue wall requires an annular profile');
+  it('closes all foliose rims, undersides and central attachments', () => {
+    const geometry = sculptGeometry('colony-sheet'), position = geometry.getAttribute('position'), index = geometry.index!;
+    const edges = new Map<string, number>();
+    const vertex = (i:number) => [position.getX(i),position.getY(i),position.getZ(i)].map(v=>v.toFixed(6)).join(',');
+    for(let i=0;i<index.count;i+=3) for(let j=0;j<3;j++) {
+      const a=vertex(index.getX(i+j)),b=vertex(index.getX(i+(j+1)%3));
+      if(a===b) continue;
+      const key=[a,b].sort().join('|');edges.set(key,(edges.get(key)??0)+1);
+    }
+    expect([...edges.values()].filter(n=>n===1)).toHaveLength(0);
+    geometry.dispose();
+  });
+
+  it('keeps the labelled mouth unobstructed and the polyp large after the HUD refit', () => {
+    const ch=chapters.find(c=>c.id==='coral-and-partners')!,beat=ch.state.beats[1];
+    const boxes:FrameBox[]=file.parts.filter(p=>!p.context&&!ch.state.hide.includes(p.id)).map(p=>{
+      const g=p.mesh?sculptGeometry(p.mesh):undefined;
+      const b=g?.boundingBox??partBounds(p)!;
+      const min=b.min instanceof Vector3?b.min.toArray():b.min,max=b.max instanceof Vector3?b.max.toArray():b.max;
+      g?.dispose();
+      return {center:min.map((v,i)=>(v+max[i]!)/2) as [number,number,number],half:min.map((v,i)=>(max[i]!-v)/2) as [number,number,number]};
+    });
+    const material=new MeshBasicMaterial({side:DoubleSide});
+    const opaque=['polyp-mouth','polyp-tentacles','polyp-skeleton'].map(id=>{
+      const mesh=new Mesh(sculptGeometry(id),material);mesh.name=id;mesh.updateMatrixWorld();return mesh;
+    });
+    for(const fixture of [
+      {width:1520,height:1023,rect:{x0:340,y0:12,x1:1150,y1:951},panels:[{x0:28,y0:12,x1:328,y1:951},{x0:1162,y0:12,x1:1508,y1:610},{x0:12,y0:963,x1:1508,y1:1023}]},
+      {width:624,height:711,rect:{x0:56,y0:12,x1:612,y1:621},panels:[{x0:0,y0:12,x1:44,y1:621},{x0:0,y0:633,x1:624,y1:711}]},
+    ]) {
+      const {width,height,rect,panels}=fixture;
+      const fitted=fitCameraToHud(fitCameraToAspect(beat.camera,width/height),boxes,width,height,rect,{panels});
+      const camera=new PerspectiveCamera(30,width/height,.001,100);camera.position.set(...fitted.position);camera.lookAt(new Vector3(...fitted.target));camera.updateMatrixWorld();
+      const mouth=new Vector3(5,.53,0),projection=mouth.clone().project(camera);
+      const x=(projection.x+1)*width/2,y=(1-projection.y)*height/2;
+      expect(x).toBeGreaterThan(rect.x0);expect(x).toBeLessThan(rect.x1);
+      expect(y).toBeGreaterThan(rect.y0);expect(y).toBeLessThan(rect.y1);
+      const ray=new Raycaster(camera.position,mouth.sub(camera.position).normalize());
+      expect(ray.intersectObjects(opaque)[0]?.object.name).toBe('polyp-mouth');
+      const position=opaque[1]!.geometry.getAttribute('position');
+      const xs=Array.from({length:position.count},(_,i)=>(new Vector3().fromBufferAttribute(position,i).project(camera).x+1)*width/2);
+      expect(Math.max(...xs)-Math.min(...xs)).toBeGreaterThan((rect.x1-rect.x0)*.50);
+    }
+    for(const mesh of opaque)mesh.geometry.dispose();material.dispose();
+  });
+
+  it('contains every algal-marker vertex within the actual sculpted tissue wall', () => {
+    const geometry = sculptGeometry('polyp-tissue');
+    const material = new MeshBasicMaterial({ side: DoubleSide });
+    const wall = new Mesh(geometry, material); wall.updateMatrixWorld();
+    const ray = new Raycaster();
     const partners = file.parts.find((p) => p.id === 'polyp-symbionts')!;
-    const radiiAt = (y: number) => wall.profile.flatMap((p, i) => {
-      const q = wall.profile[(i + 1) % wall.profile.length]!;
-      return (y >= Math.min(p[1], q[1]) && y < Math.max(p[1], q[1]))
-        ? [p[0] + (q[0] - p[0]) * (y - p[1]) / (q[1] - p[1])] : [];
-    }).sort((a, b) => a - b);
-    const spheres = [partners.primitive!, ...partners.extra!];
-    expect(spheres.length).toBeGreaterThan(1);
-    for (const sphere of spheres) {
-      if (sphere.kind !== 'sphere') throw new Error('Algal partners must be contained cell markers');
-      const r = sphere.size[0]!;
-      const centre = Math.hypot(sphere.at[0] - wall.at[0], sphere.at[2] - wall.at[2]);
-      // Cross-sections through each sphere check the whole dot, not just its centre.
-      for (let i = -8; i <= 8; i++) {
-        const dy = r * i / 8;
-        const radius = Math.sqrt(Math.max(0, r * r - dy * dy));
-        const boundary = radiiAt(sphere.at[1] - wall.at[1] + dy);
-        expect(boundary).toHaveLength(2);
-        expect(centre - radius + 1e-8).toBeGreaterThanOrEqual(boundary[0]!);
-        expect(centre + radius - 1e-8).toBeLessThanOrEqual(boundary[1]!);
+    for (const marker of [partners.primitive!, ...partners.extra!]) {
+      if (marker.kind !== 'lathe') throw new Error('Partner markers must be smooth closed cells');
+      for (const [radius, y] of marker.profile) for (let i = 0; i < 12; i++) {
+        const angle = i * Math.PI / 6;
+        const point = new Vector3(marker.at[0] + radius * Math.cos(angle), marker.at[1] + y, marker.at[2] + radius * Math.sin(angle));
+        const radial = new Vector3(point.x - 5, 0, point.z), distance = radial.length();
+        ray.set(new Vector3(5, point.y, 0), radial.normalize());
+        const intersections = ray.intersectObject(wall).map((hit) => hit.distance)
+          .filter((d, k, all) => k === 0 || Math.abs(d - all[k - 1]!) > 1e-6);
+        expect(intersections.length, `marker ${marker.at} point ${point.toArray()} intersections ${intersections}`).toBeGreaterThanOrEqual(2);
+        expect(distance, `marker ${marker.at.join(',')}`).toBeGreaterThanOrEqual(intersections[0]! - 1e-6);
+        expect(distance, `marker ${marker.at.join(',')}`).toBeLessThanOrEqual(intersections[1]! + 1e-6);
       }
     }
+    geometry.dispose(); material.dispose();
+  }, 20000);
+
+  it('renders a one-metre square quadrat with four straight sides and a crossing five-by-five grid', () => {
+    const quadrat = file.parts.find((p) => p.id === 'monitoring-quadrat')!;
+    const frame = partPieces({ primitive: quadrat.primitive! });
+    const vertices = frame.flatMap((piece) => {
+      const positions = piece.geometry.getAttribute('position');
+      return Array.from({ length: positions.count }, (_, i) => new Vector3().fromBufferAttribute(positions, i));
+    });
+    const widths = [0, 2].map((axis) => Math.max(...vertices.map((v) => v.getComponent(axis))) - Math.min(...vertices.map((v) => v.getComponent(axis))));
+    expect(widths[0]).toBeCloseTo(1.025, 3);
+    expect(widths[1]).toBeCloseTo(widths[0]!, 3);
+    // Actual tessellation must stay along four edges; an oval with the same bounds fails this.
+    const edgeDeviation = Math.max(...vertices.map((p) => Math.min(Math.abs(Math.abs(p.x) - .5), Math.abs(Math.abs(p.z) - .5))));
+    expect(edgeDeviation).toBeLessThan(.035);
+    for (const axis of ['x', 'z'] as const) for (const sign of [-1, 1]) for (const along of [-.4, -.2, 0, .2, .4]) {
+      const sample = axis === 'x' ? new Vector3(sign * .5, 0, along) : new Vector3(along, 0, sign * .5);
+      expect(Math.min(...vertices.map((v) => v.distanceTo(sample)))).toBeLessThan(.02);
+    }
+    frame.forEach((p) => p.geometry.dispose());
+
+    const strings = quadrat.extra!.filter((p) => p.color === 'fabric');
+    expect(strings).toHaveLength(8);
+    const rows: number[] = [], columns: number[] = [];
+    for (const string of strings) {
+      const pieces = partPieces({ primitive: string });
+      expect(pieces).toHaveLength(1);
+      const geometry = pieces[0]!.geometry; geometry.computeBoundingBox();
+      const box = geometry.boundingBox!, size = box.getSize(new Vector3()), centre = box.getCenter(new Vector3());
+      if (size.x > .99 && size.z < .005) rows.push(centre.z);
+      else if (size.z > .99 && size.x < .005) columns.push(centre.x);
+      else throw new Error('Each grid string must span one metre across the opposite pair of frame sides');
+      geometry.dispose();
+    }
+    for (const positions of [rows, columns]) {
+      expect(positions).toHaveLength(4);
+      positions.sort((a, b) => a - b);
+      positions.forEach((v, i) => expect(v).toBeCloseTo(-.3 + i * .2, 4));
+    }
+    expect(rows.length * columns.length).toBe(16);
+  });
+
+  it('keeps all loaded specimen and annotation tessellation within 350,000 triangles', () => {
+    const data = readFileSync(join(import.meta.dirname, '../public', file.model!));
+    const gltf = JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString());
+    let triangles = 0;
+    for (const part of file.parts) {
+      if (part.mesh) {
+        const node = gltf.nodes.find((n: { name: string }) => n.name === part.mesh);
+        expect(node, part.id).toBeDefined();
+        for (const primitive of gltf.meshes[node.mesh].primitives) {
+          expect(primitive.mode ?? 4, part.id).toBe(4);
+          triangles += gltf.accessors[primitive.indices ?? primitive.attributes.POSITION].count / 3;
+        }
+      }
+      for (const piece of partPieces(part)) {
+        if (!piece.lines) triangles += (piece.geometry.index?.count ?? piece.geometry.getAttribute('position').count) / 3 * (piece.matrices?.length ?? 1);
+        piece.geometry.dispose();
+      }
+    }
+    // Includes every offscreen study and all contextual arrows, a stricter ceiling than one camera.
+    expect(triangles).toBeLessThanOrEqual(350000);
   });
 
   it('resets every chapter and never labels an object hidden by its beat or evidence', () => {
