@@ -13,10 +13,10 @@ const before=count();
 await doc.transform(weld());
 for (const mesh of doc.getRoot().listMeshes()) {
   // Broad limestone has no organic silhouette or fine calice detail. Its
-  // conservative error cap is 0.15% of the zone span; keep shared borders.
+  // conservative error cap is under 0.2% of the zone span; keep shared borders.
   const terrain = ['reef-flat','reef-crest','reef-slope'].includes(mesh.getName());
   for (const primitive of mesh.listPrimitives()) simplifyPrimitive(primitive, {
-    simplifier:MeshoptSimplifier,ratio:terrain ? .20 : .43,error:terrain ? .0015 : .001,lockBorder:true,
+    simplifier:MeshoptSimplifier,ratio:terrain ? .17 : .43,error:terrain ? .0018 : .001,lockBorder:true,
   });
 }
 await doc.transform(dedup());

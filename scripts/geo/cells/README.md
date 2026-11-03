@@ -49,8 +49,10 @@ Nuclei, nucleoli and six chloroplasts retain selectable logical ownership;
 the cytoplasm uses coplanar, fitted gel regions and multi-material reliefs.
 Mitochondrial matrices and rounded membrane lamellae have distinct warm
 colours. Each cytoplasm label points at its first actual gel region, away
-from the nucleus. Generic GLB label-point support is still missing; see
-the round-three section of `REBUILD-3D.md` for the exact engine boundary.
+from the nucleus. The animal membrane, plant wall and plant membrane nodes
+carry `extras.labelPoint` (node-local, written after quantisation) on their
+visible front rims, so their leaders end on the boundary itself rather than
+over the nucleus or vacuole.
 Both cells have permanently exposed illustration faces in assembled mode.
 
 The microscope preserves the original pivot `[0.20, 0.23, -0.011547005]`,

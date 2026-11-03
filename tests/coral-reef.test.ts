@@ -345,6 +345,36 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     for(const mesh of opaque)mesh.geometry.dispose();material.dispose();
   });
 
+  it('ends the living-tissue leader on tissue above the opaque cup, visible from both tissue chapters', () => {
+    const data = readFileSync(join(import.meta.dirname, '../public', file.model!));
+    const gltf = JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString());
+    const point = new Vector3(...gltf.nodes.find((n: { name: string }) => n.name === 'polyp-tissue').extras.labelPoint);
+    const tissue = sculptGeometry('polyp-tissue');
+    const position = tissue.getAttribute('position');
+    let near = Infinity;
+    for (let i = 0; i < position.count; i++) near = Math.min(near, new Vector3().fromBufferAttribute(position, i).distanceTo(point));
+    expect(near).toBeLessThan(.06);
+    // The bounds centre the leader used to end on lies inside the cup; the point is above its rim.
+    const cup = sculptGeometry('polyp-skeleton');
+    expect(tissue.boundingBox!.getCenter(new Vector3()).y).toBeLessThan(cup.boundingBox!.max.y);
+    expect(point.y).toBeGreaterThan(cup.boundingBox!.max.y + .02);
+    const material = new MeshBasicMaterial({ side: DoubleSide });
+    const occluders = ['polyp-skeleton', 'polyp-tentacles', 'polyp-mouth'].map((id) => {
+      const mesh = new Mesh(id === 'polyp-skeleton' ? cup : sculptGeometry(id), material); mesh.updateMatrixWorld(); return mesh;
+    });
+    const wall = new Mesh(tissue, material); wall.updateMatrixWorld();
+    for (const id of ['coral-and-partners', 'bleaching-and-pressures']) {
+      const eye = new Vector3(...chapters.find((c) => c.id === id)!.state.camera.position);
+      const ray = new Raycaster(eye, point.clone().sub(eye).normalize(), 0, eye.distanceTo(point) - .02);
+      expect(ray.intersectObjects(occluders), id).toHaveLength(0);
+      // The first tissue surface on that line of sight is the labelled point itself.
+      ray.far = Infinity;
+      expect(ray.intersectObject(wall)[0]!.point.distanceTo(point), id).toBeLessThan(.003);
+    }
+    for (const mesh of occluders) mesh.geometry.dispose();
+    tissue.dispose(); material.dispose();
+  });
+
   it('contains every algal-marker vertex within the actual sculpted tissue wall', () => {
     const geometry = sculptGeometry('polyp-tissue');
     const material = new MeshBasicMaterial({ side: DoubleSide });

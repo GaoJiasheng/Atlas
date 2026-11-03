@@ -139,7 +139,12 @@ def tissue():
             mod=(1-f)*(.025*math.cos(12*a)+.012*math.sin(5*a))
             row.append([r*(1+mod)*math.cos(a),y+.004*(1-f)*math.cos(12*a)*max(0,(y-.3)/.2),r*(1+mod)*math.sin(a)*(1-.5*f)])
         rows.append(row)
-    return Mesh().grid(rows).move([5,0,0])
+    m=Mesh().grid(rows).move([5,0,0])
+    # The bounds centre sits inside the opaque skeletal cup. The leader ends on
+    # the outer column above the rim, between two front tentacles: the middle
+    # of a vertical mesh edge (profile rows 3-4, column 42 at ~106 degrees).
+    m.label_point=((np.asarray(rows[3][42])+rows[4][42])/2+[5,0,0]).tolist()
+    return m
 
 def mouth():
     rows=[]
@@ -240,22 +245,54 @@ def reef_height(x,z):
     # Low bedding ridges and irregular erosion; colony roots retain their seats.
     return base+relief+.014*np.sin(z*11+x*5)
 
+def _lattice(ix,iy,iz,seed):
+    h=np.sin(ix*127.1+iy*311.7+iz*74.7+seed*19.19)*43758.5453
+    return h-np.floor(h)
+
+def value_noise(x,y,z,size,seed):
+    """Deterministic smooth value noise in [-1, 1]; no periodic stripes."""
+    x,y,z=[np.asarray(v,dtype=float)/size for v in (x,y,z)]
+    i=[np.floor(v) for v in (x,y,z)];f=[v-q for v,q in zip((x,y,z),i)]
+    u=[t*t*(3-2*t) for t in f];out=0
+    for dx in (0,1):
+        for dy in (0,1):
+            for dz in (0,1):
+                w=(u[0] if dx else 1-u[0])*(u[1] if dy else 1-u[1])*(u[2] if dz else 1-u[2])
+                out=out+w*_lattice(i[0]+dx,i[1]+dy,i[2]+dz,seed)
+    return 2*out-1
+
+def fbm(x,y,z,size,seed,octaves=3):
+    total,amp,norm=0,1,0
+    for k in range(octaves):
+        total=total+amp*value_noise(x,y,z,size/2**k,seed+k*7.3);norm+=amp;amp*=.5
+    return total/norm
+
+def shelf_edge(x,y,front=True):
+    """Front / back face of the shelf: irregular eroded relief, no bedding bands."""
+    return .44+.03*fbm(x,y,0 if front else 3.1,.16,11)
+
+# Zone boundaries: irregular fracture surfaces shared by neighbouring zones.
+ZONE_SEAMS=[(-.5,23),(.25,37)]
+
+def zone_seam(x0,seed,y,z):
+    return x0+.022*fbm(0,y,z,.14,seed)+.008*value_noise(1.7,y,z,.045,seed+2)
+
 def reef_shelf():
     """Eroded limestone with an actual through cavity, fused rubble and pores.
 
-    One continuous isosurface split into the existing three teaching zones.
-    Seam vertices are identical: no disconnected blocks at zone boundaries.
+    One continuous rock field, closed separately for each of the three teaching
+    zones along irregular fracture surfaces: an isolated zone shows a broken
+    rock face, while assembled zones meet with no gap or visible seam.
     """
     step=.016
     lo=np.array([-1.57,-.80,-.50]);hi=np.array([1.57,.29,.50])
     axes=[np.arange(lo[i],hi[i]+step,step) for i in range(3)]
     x,y,z=np.meshgrid(*axes,indexing='ij')
-    edge=.426+.018*np.sin(11*x+4*y)+.012*np.cos(23*x-9*y)+.010*np.sin(37*y+7*x)
-    side=np.abs(z)-edge
+    side=np.abs(z)-np.where(z>0,shelf_edge(x,y),shelf_edge(x,y,False))
     top=y-reef_height(x,z)
     bottom=-.722+.036*np.sin(7*x+9*z)+.012*np.sin(19*x-13*z)-y
     # Gently rounded, eroded ends, never six rectangular planar faces.
-    ends=np.abs(x)-1.50+.014*np.sin(13*y+9*z)
+    ends=np.abs(x)-1.50+.018*fbm(np.sign(x),y,z,.14,5)
     field=np.maximum.reduce([top,bottom,side,ends])
     # Broad fused, broken skeletal clasts on the crest and flat.
     for cx,cz,rx,rz,hh in [(-1.30,-.23,.10,.055,.035),(-.57,.23,.11,.07,.040),(-.34,-.22,.12,.09,.045),(.16,.26,.10,.065,.05),(.43,-.22,.10,.075,.040),(.85,.20,.11,.075,.035),(1.21,-.20,.10,.07,.025)]:
@@ -270,14 +307,17 @@ def reef_shelf():
     for cx,cy,cz,rx,ry,rz in [(-1.38,-.40,.43,.045,.035,.030),(-.72,-.24,.43,.060,.032,.026),(-.42,-.48,.43,.052,.042,.025),(.03,-.17,.43,.045,.038,.025),(.49,-.42,.43,.053,.042,.035),(.97,-.58,.43,.060,.030,.030),(-.95,-.58,-.43,.050,.037,.028)]:
         pocket=(np.sqrt(((x-cx)/rx)**2+((y-cy)/ry)**2+((z-cz)/rz)**2)-1)*min(rx,ry,rz)
         field=np.maximum(field,-pocket)
-    field+=.0022*np.sin(87*x+21*y)*np.sin(74*z-19*x)*np.cos(91*y)
-    v,f,_,_=marching_cubes(field,0,spacing=(step,step,step),allow_degenerate=False)
-    v+=lo
-    centres=v[f].mean(axis=1)
+    # Fine granular pitting, isotropic rather than layered.
+    field+=.0024*value_noise(x,y,z,.034,3)
+    seams=[zone_seam(x0,seed,y,z) for x0,seed in ZONE_SEAMS]
+    # Neighbours overlap by two cells, so the rounded crease where a fracture
+    # face meets the outer rock lies inside the next zone: no groove when
+    # assembled, where the shared outer surface is the same isosurface.
+    lap=step
     meshes={}
-    for name,mask in [('reef-flat',centres[:,0]<-.5),('reef-crest',(centres[:,0]>=-.5)&(centres[:,0]<.25)),('reef-slope',centres[:,0]>=.25)]:
-        used,inv=np.unique(f[mask],return_inverse=True)
-        meshes[name]=Mesh().add(v[used],inv.reshape(-1,3))
+    for name,limits in [('reef-flat',[x-seams[0]-lap]),('reef-crest',[seams[0]-lap-x,x-seams[1]-lap]),('reef-slope',[seams[1]-lap-x])]:
+        v,f,_,_=marching_cubes(np.maximum.reduce([field,*limits]),0,spacing=(step,step,step),allow_degenerate=False)
+        meshes[name]=Mesh().add(v+lo,f)
     # A smoothly eroded lip around the actual tunnel. Using a triangle subset
     # as a differently coloured collar exposes a sawtooth border at close range.
     rows=[]
@@ -287,8 +327,7 @@ def reef_shelf():
             irregular=1+.023*math.sin(3*a)+.014*math.sin(7*a+.3)
             x=-1.12-.009*math.sin(.43*9)+.14*scale*irregular*math.cos(a)
             y=-.29-.007*math.cos(.43*13)+.105*scale*irregular*math.sin(a)
-            edge=.426+.018*math.sin(11*x+4*y)+.012*math.cos(23*x-9*y)+.010*math.sin(37*y+7*x)
-            row.append([x,y,edge+dz])
+            row.append([x,y,float(shelf_edge(x,y))+dz])
         rows.append(row)
     meshes['refuge-cavity']=Mesh().grid(rows)
     return meshes
@@ -404,7 +443,9 @@ def write_glb(meshes,path):
         attrs=dict(POSITION=buf(v,'VEC3',5126,34962),NORMAL=buf(n,'VEC3',5126,34962))
         small=len(v)<65536
         indices=buf(f.reshape(-1).astype(np.uint16 if small else np.uint32),'SCALAR',5123 if small else 5125,34963)
-        nodes.append(dict(name=name,mesh=len(out),extras={'closed':True}));out.append(dict(name=name,primitives=[dict(attributes=attrs,indices=indices,mode=4)]))
+        # Opt-in leader end (node-local; nodes sit at the origin).
+        extras={'closed':True,**({'labelPoint':m.label_point} if getattr(m,'label_point',None) else {})}
+        nodes.append(dict(name=name,mesh=len(out),extras=extras));out.append(dict(name=name,primitives=[dict(attributes=attrs,indices=indices,mode=4)]))
     gltf=dict(asset={'version':'2.0','generator':'Atlas original coral sculpt','copyright':'Atlas original procedural geometry, 2026. CC BY-NC-SA 4.0. No third-party mesh or texture.'},scene=0,scenes=[{'nodes':list(range(len(nodes)))}],nodes=nodes,meshes=out,buffers=[{'byteLength':len(binary)}],bufferViews=views,accessors=access)
     js=json.dumps(gltf,separators=(',',':')).encode();js+=b' '*((-len(js))%4);binary+=b'\0'*((-len(binary))%4)
     data=struct.pack('<III',0x46546c67,2,12+8+len(js)+8+len(binary))+struct.pack('<II',len(js),0x4e4f534a)+js+struct.pack('<II',len(binary),0x004e4942)+binary

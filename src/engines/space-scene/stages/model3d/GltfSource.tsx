@@ -15,7 +15,10 @@
  *    the bone hierarchy, is mounted by the stage so the bones' world matrices
  *    stay current for skinning, the rig, sites and equipment.
  *  - per part: the rest transform, scene-space bounds (label anchor, stage
- *    bounds), `extras.closed` (false: the cut leaves it open), and for muscles
+ *    bounds), `extras.closed` (false: the cut leaves it open), an optional
+ *    `extras.labelPoint` (node-local; where a rigid part's leader ends instead
+ *    of its bounds centre; a skinned part measures its anchor from the
+ *    bones), and for muscles
  *    with `_U` / `_FIBRE` the fibre length, belly thickness, dominant fibre
  *    direction, centre and metres per mesh unit the contraction and grain
  *    shader needs (the attributes are renamed `atlasU` /
@@ -30,6 +33,7 @@ import { Box3, DoubleSide, PropertyBinding, Quaternion, Vector3, type BufferGeom
 import type { SpaceUiStore } from '../../ui';
 import type { PartShape } from './PartNode';
 import { fadePartMaterial } from './materials';
+import { glbLabelPoint } from './glbAnchor';
 
 /** The skeleton left after the meshes were taken out, and a node by its glb name. */
 export interface GltfRig {
@@ -232,6 +236,7 @@ export default function GltfSource({
       const box = new Box3().copy(skinned ? skinned.boundingBox! : geometry.boundingBox!).applyMatrix4(mesh.matrixWorld);
       const size = box.getSize(new Vector3());
       const extras = { ...mesh.parent?.userData, ...mesh.userData } as { closed?: unknown };
+      const labelPoint = skinned ? null : glbLabelPoint(mesh);
       const fibre = fibreMeasure(geometry);
       if (fibre) {
         // Quantised positions: the scene bounds over the raw attribute bounds give metres per mesh unit.
@@ -256,6 +261,7 @@ export default function GltfSource({
         ...(surface ? { surface } : {}),
         restFan: 1,
         box: { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] },
+        ...(labelPoint ? { labelPoint } : {}),
         ...(fibre ? { fibre } : {}),
       };
     };

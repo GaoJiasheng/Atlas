@@ -175,8 +175,16 @@ true nuclear recesses, basal beds and organelle relief move/explode/select
 with the same existing cytoplasm IDs. No invisible label proxy was added.
 The vacuole bounds centre already lies inside the vacuole and remains valid.
 
-**Not completed:** `animal-membrane`, `plant-membrane`, `plant-cell-wall`
-leaders still use the GLB bounds centre. The requested Sun–Earth–Moon fields
+**Resolved (2026-11-03):** the engine now reads an opt-in glb node
+`extras.labelPoint` (node-local) into a rigid part's leader end. The
+`animal-membrane` (right rim), `plant-cell-wall` (upper left front band) and
+`plant-membrane` (lower left crest) nodes carry one, on the outer sides of
+the side-by-side pair; a geometry test checks
+each lies on its boundary, away from the bounds centre, and is the first
+surface seen from the front. The original round-three record follows.
+
+**Was not completed:** `animal-membrane`, `plant-membrane`, `plant-cell-wall`
+leaders still used the GLB bounds centre. The requested Sun–Earth–Moon fields
 are not a generic part contract in this checkout:
 
 - `bodyTransform.labelPoint` is inside `orbit-rotation-schema.ts` and is
