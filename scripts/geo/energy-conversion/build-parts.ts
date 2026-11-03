@@ -30,9 +30,7 @@ export function rebuild(data: any): void {
     part.castShadow = false;
   };
   const place = (p: BicyclePrimitive[]) => placeBicycle(p, ORIGIN, true);
-  replace('bicycle-frame', [...place([...diamondFrame(), ...bicycleChain()]),
-    { kind: 'torus', at: DYNAMO_HINGE, size: [0.009, 0.002], color: 'steel', rotation: [90, 0, -31.4] },
-  ]);
+  replace('bicycle-frame', place([...diamondFrame(), ...bicycleChain()]));
   replace('front-wheel', place(bicycleWheel()));
   replace('rear-wheel', place(bicycleWheel(true)));
   replace('crank-pedals', place(bicycleCrankset()));
@@ -40,6 +38,9 @@ export function rebuild(data: any): void {
   const dynamo = bottleDynamo(DYNAMO_AT, DYNAMO_AXIS);
   // Clamp at the stay, a hinged arm and the terminal insulator.
   dynamo.casing.push(
+    // Hinge eye aligned with the release pivot: the bearing stays coaxial
+    // when the bottle swings, including in the inverted teaching pose.
+    { kind: 'lathe', at: DYNAMO_HINGE, profile: Array.from({ length: 9 }, (_, i): [number, number] => [.009 + .002 * Math.cos(i * Math.PI / 4), .002 * Math.sin(i * Math.PI / 4)]), segments: 16, color: 'steel', rotation: [0, 0, 90] },
     { kind: 'sweep', at: DYNAMO_HINGE, path: [[0, 0, 0], [-0.006, 0.001, 0.025], [-0.016, -0.019, 0.031]], radius: 0.004, radial: 12, segments: 12, caps: 'flat', color: 'steel' },
     // Feedthrough at the hinge: its position remains fixed as the bottle
     // swings away, so the frame-mounted leads stay connected in both poses.
@@ -49,7 +50,7 @@ export function rebuild(data: any): void {
   replace('dynamo-magnet', dynamo.rotor);
   replace('dynamo-coil', dynamo.coil);
 
-  const wire: V3[] = [DYNAMO_HINGE, [1.28, 0.54, 1.627], [1.245, 0.48, 1.625], [1.16, 0.34, 1.63], [1.08, 0.315, 1.626], [0.65, 0.315, 1.626], [0.56, 0.34, 1.626], [0.52, 0.46, 1.626], [0.333, 0.38, 1.615]];
+  const wire: V3[] = [DYNAMO_HINGE, [1.28, 0.54, 1.627], [1.245, 0.48, 1.625], [1.16, 0.34, 1.63], [1.143, 0.309, 1.616], [0.90, 0.294, 1.616], [0.58, 0.271, 1.616], [0.54, 0.315, 1.616], [0.53, 0.415, 1.616], [0.333, 0.38, 1.615]];
   replace('dynamo-wires', [0, 0.005].map((z) => ({ kind: 'sweep', at: [0, 0, 0], path: wire.map((p) => [p[0], p[1], p[2] + z]), radius: 0.0015, radial: 8, segments: 64, caps: 'flat', color: 'rubber' })));
   const lamp = parts.get('headlamp');
   for (const p of [lamp.primitive, ...lamp.extra]) p.segments = 64;
