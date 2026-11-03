@@ -79,3 +79,33 @@ No adult dosage, sunlight schedule or supplement prescription is reused. The hos
 - [S33] American Academy of Orthopaedic Surgeons / ASES. Triceps Tendon Tear at the Elbow. Anatomy: triceps tendon attaches to olecranon of ulna. / 美国骨科医师学会AAOS：肘部肱三头肌腱，解剖段确认止于尺骨鹰嘴。 (Accessed 2026-10-27. Preparation id S33 maps to S33. Locator: Anatomy: triceps tendon attaches to olecranon of ulna. Licence: Copyrighted; read factual anatomy only, no figure download/reuse. Facts: terminology/licence/context only. Primary page independently read during build; paraphrases only. / 2026-10-27核查。准备档S33对应运行时S33，编号意义不变。事实索引：术语、许可或背景。施工时独立读取原始页面，仅用独立表述。) — https://www.orthoinfo.org/diseases--conditions/triceps-tendon-tear-at-the-elbow/
 - [S34] Atlas original design study for bones-and-joints: adult reference skeleton with grouped selectable regions; schematic long-bone, joint and repair specimens. Ideal static lever: external force W=0/10/20 N, distance L=0.15/0.30 m, angle θ=30/60/90/120 degrees from downward vertical, fixed perpendicular muscle arm r=0.04 m. Compute d=L sin θ, load torque τ=W d, equivalent muscle force Fm=τ/r. SIM: W20,L0.30,θ90 gives d0.30m,τ6N·m,Fm150N; L0.15 gives75N; θ30 gives d0.15m,τ3N·m,Fm75N. Twenty-four table rows are independently recomputed. Station offsets x=−2,+2,+4m are layout choices. / 本主题的Atlas原创设计研究：成人参考骨架按区域合并点选；长骨、关节与修复标本为定性示意。理想静力杠杆：外加力W=0/10/20牛顿，距离L=0.15/0.30米，角度θ=30/60/90/120度（从竖直向下方向量起），固定垂直肌肉力臂r=0.04米。算法d=L sin θ，负载力矩τ=W d，等效肌肉拉力Fm=τ/r。模拟：W20、L0.30、θ90得d0.30米、τ6牛顿米、Fm150牛顿；L0.15时75牛顿；θ30时d0.15米、τ3牛顿米、Fm75牛顿。24行表值独立重算。工位x=−2、+2、+4米仅是排版位置。 (Not human measurements or strength targets. Principles S16–S17; all constants are original DESIGN, not typical anatomical dimensions. Omits forearm/beam weight, varying muscle moment arm, acceleration, neural control and co-contraction. Table values remain defined in explore mode; mode only controls visuals and left-elbow override. Force-arrow display uses0.001m/N with0.20m cap; arrow direction is an ideal equivalent pull perpendicular to beam, not the biceps line. Poses are conservative design examples, not recommended range of motion. Geometry packet constants/glue are offered under CC BY-SA4.0; chapter prose is CC BY-NC-SA4.0. / 不是人体测量或力量目标。原理见S16–S17；常数全是原创设计值，不是典型解剖尺寸。省略前臂及梁自重、变化的肌肉力臂、加速度、神经控制与共同收缩。探索模式仍能求出表值；模式只控制可视与左肘覆盖。力箭头按每牛顿0.001米画，最长0.20米；垂直梁的等效拉力不代表二头肌真实作用线。姿态是保守设计例子，不是建议活动幅度。几何包常数与胶水按CC BY-SA4.0提供；章节正文按CC BY-NC-SA4.0。) (design study / 设计研究)
 <!-- sources:end -->
+
+## Original polish geometry and protection plate · 2026-11-03
+
+- Protection plate generator: `scripts/geo/bones-and-joints/protected-organs.ts`.
+  Reuses the independently authored and count-audited rib centreline construction
+  in `scripts/figures/bones-protected-organs.ts` (commit 040f192); adds original
+  cranial and vertebral-canal sections and EN/ZH leaders. No image generation,
+  traced artwork, downloaded model or runtime network request. Original plate:
+  CC BY-NC-SA 4.0, consistent with the other topic illustrations.
+- Anatomical references re-read and reference figures inspected on 2026-11-03:
+  OpenStax *Anatomy and Physiology 2e*, [6.3 Bone Structure](https://openstax.org/books/anatomy-and-physiology-2e/pages/6-3-bone-structure)
+  (femoral outline, cortex, marrow spaces, periosteum and vessels),
+  [7.2 The Skull](https://openstax.org/books/anatomy-and-physiology-2e/pages/7-2-the-skull)
+  (cranial vault and brain), [7.3 The Vertebral Column](https://openstax.org/books/anatomy-and-physiology-2e/pages/7-3-the-vertebral-column)
+  (body, arch and protected canal), and [7.4 The Thoracic Cage](https://openstax.org/books/anatomy-and-physiology-2e/pages/7-4-the-thoracic-cage)
+  (12 pairs, T1–T12, sternum and costal attachments). These are references for
+  independently constructed geometry, not copied artwork or prose. Downloaded
+  reference figures remain in the ignored `scripts/geo/bones-and-joints/refs/`.
+- Femoral cortex and repair specimens: original implicit surfaces in `cortex-mesh.py` / `repair-mesh.py`, marching cubes,
+  Taubin smoothing and meshoptimizer simplification in `build-cortex.mjs`.
+  Original geometry/code CC BY-SA 4.0. Sizes are qualitative teaching design,
+  not a patient scan or a new numerical anatomy claim. Trabecular networks and
+  marrow beds are original, deterministic procedural teaching geometry.
+- `/models/bones-and-joints-polished.glb` is a topic-specific **copy** of the
+  existing licensed anatomy packet with the original cortex, four repair meshes and two uncounted tissue colour
+  surfaces appended.
+  All original nodes, mesh/accessor definitions and binary bytes are retained;
+  unit tests verify this. The original Z-Anatomy / BodyParts3D credits, CC BY-SA
+  4.0 / CC BY-SA 2.1 Japan boundaries and source records above still apply to
+  those original meshes. This is not a newly imported third-party model.
