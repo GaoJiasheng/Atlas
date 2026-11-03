@@ -1,7 +1,7 @@
 import { readFileSync, statSync } from 'node:fs';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
-import { boardCircuit, conducting, festiveCircuit, boardsSvg, festiveSvg, OUTPUTS as CIRCUITS } from '../scripts/figures/circuits';
+import { boardCircuit, conducting, festiveCircuit, assertClearance, assertTrayContainment, boardsSvg, festiveSvg, OUTPUTS as CIRCUITS } from '../scripts/figures/circuits';
 import { CAN, SCREEN, project, shadow, silhouette, shadowsSvg, OUTPUT as SHADOWS } from '../scripts/figures/light-shadows';
 import { RADIUS, SLICES, fractionsSvg, OUTPUTS as FRACTIONS } from '../scripts/figures/fractions';
 import { BUDGET } from '../scripts/figures/graphite';
@@ -27,6 +27,12 @@ describe('geometry-drawn illustration facts', () => {
   expect(c.bulbs[0]!.brightness).toBeGreaterThan(boardCircuit(false).bulbs[0]!.brightness);
   expect(boardsSvg().match(/data-brightness="1"/g)).toHaveLength(2);
   expect(boardsSvg().match(/data-brightness="0.26"/g)).toHaveLength(2);
+ });
+ it('keeps wires clear of unrelated terminals and every lamp inside the tray lip',()=>{
+  for(const c of [boardCircuit(false),boardCircuit(true),festiveCircuit()])expect(()=>assertClearance(c)).not.toThrow();
+  expect(()=>assertTrayContainment()).not.toThrow();
+  const short=festiveCircuit();short.wires[0]!.points.splice(1,0,short.terminals['11']!);
+  expect(()=>assertClearance(short)).toThrow(/passes terminal/);
  });
  it('draws ten series lamps, one open filament, all ten dark; repairing it closes the loop', () => {
   const c=festiveCircuit();expect(c.bulbs).toHaveLength(10);
@@ -69,8 +75,10 @@ describe('geometry-drawn illustration facts', () => {
   expect([meta.width,meta.height]).toEqual(output.includes('fractions')?[output.includes('@2x')?1600:800,output.includes('@2x')?1600:800]:[1200,900]);
   expect(meta.hasAlpha).toBe(true);
   const {data,info}=await sharp(output).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+  // Lossy WebP RGB↔YUV rounding can differ by one 8-bit code value.
+  // This tolerance admits codec rounding, while still rejecting coloured artwork.
   let neutral=true,transparent=false;
-  for(let i=0;i<data.length;i+=info.channels){if(data[i]!==data[i+1]||data[i]!==data[i+2])neutral=false;if(data[i+3]===0)transparent=true;}
+  for(let i=0;i<data.length;i+=info.channels){if(Math.max(data[i]!,data[i+1]!,data[i+2]!)-Math.min(data[i]!,data[i+1]!,data[i+2]!)>1)neutral=false;if(data[i+3]===0)transparent=true;}
   expect(neutral).toBe(true);expect(transparent).toBe(true);
  });
 });
@@ -110,10 +118,10 @@ describe('physical-tone opt-outs from docs/69 §4.1.4',()=>{
    expect(tone(mean(252,227))-tone(mean(315,227))).toBeGreaterThan(70);
   }
  });
- it('marks both language copies of exactly the six named chapter figures',async()=>{
+ it('marks both language copies of exactly the seven named chapter figures',async()=>{
   const {globSync}=await import('node:fs');
   const counts:Record<string,number>={};
   for(const p of globSync('src/content/topics/*/chapters/*.mdx'))for(const m of readFileSync(p,'utf8').matchAll(/<Figure src="([^"]+)" invert=\{false\}/g)) counts[m[1]!]=(counts[m[1]!]??0)+1;
-  expect(counts).toEqual(Object.fromEntries(['sun-earth-moon-four-phases','sun-earth-moon-parallel-axes','light-and-shadows-shadow-distance','light-and-shadows-same-object-two-shadows','light-and-shadows-sun-day','plant-light-fair-test'].map(s=>[`figures/${s}`,2])));
+  expect(counts).toEqual(Object.fromEntries(['circuits-series-parallel','sun-earth-moon-four-phases','sun-earth-moon-parallel-axes','light-and-shadows-shadow-distance','light-and-shadows-same-object-two-shadows','light-and-shadows-sun-day','plant-light-fair-test'].map(s=>[`figures/${s}`,2])));
  });
 });

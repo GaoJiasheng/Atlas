@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync } from 'node:fs';
 import sharp from 'sharp';
 import { pathToFileURL } from 'node:url';
-import { f, path, random, svg, writePlate, type Point } from './graphite';
+import { cast, f, path, svg, writePlate, type Point } from './graphite';
+import { breadTexture } from './materials';
 export const RADIUS=600;
 export const SLICES=Array.from({length:8},(_,i)=>({start:(i-1)*Math.PI/4,end:i*Math.PI/4,offset:i===0?95:0}));
 export const onCircle=(a:number,r=RADIUS):Point=>[r*Math.cos(a),r*Math.sin(a)];
@@ -17,33 +18,20 @@ export function assertFractions():void {
  assert(Math.abs(area-Math.PI*RADIUS**2)<1e-8);
 }
 export function fractionsSvg(size=1600):string {
- const r=random(39017);let texture='';
- // Flattened roti blisters: irregular rings of graphite, with fine curved hatching.
- for(let i=0;i<220;i++) {
-  const a=r()*Math.PI*2,rad=Math.sqrt(r())*588;const [x,y]=onCircle(a,rad);const rx=5+r()*24,ry=3+r()*9;
-  const d=`M${f(x-rx)} ${f(y)}q${f(rx*.4)} ${f(-ry*1.7)} ${f(rx*1.3)} ${f(-ry)}q${f(rx*1.15)} ${f(ry*.35)} ${f(rx*.6)} ${f(ry*1.5)}q${f(-rx*.7)} ${f(ry)} ${f(-rx*1.9)} ${f(-ry*.5)}Z`;
-  texture+=path(d,i%4===0?'#aaaaaa':'#cecece','#999999',.9,`opacity="${f(.25+r()*.4)}"`);
-  if(i%2===0)texture+=path(`M${f(x-rx*.5)} ${f(y)}q${f(rx*.55)} ${f(-ry*.6)} ${f(rx)} 0`,'none','#777777',1.1,'opacity=".42"');
- }
- // Irregular lamination lines retain the original roti's flaky, hand-drawn surface.
- for(let i=0;i<90;i++){
-  const a=r()*Math.PI*2,rad=100+r()*450,span=.05+r()*.13;
-  const p=onCircle(a,rad),q=onCircle(a+span,rad),m=onCircle(a+span*.45,rad+6+r()*8);
-  texture+=path(`M${f(p[0])} ${f(p[1])}Q${f(m[0])} ${f(m[1])} ${f(q[0])} ${f(q[1])}`,'none','#888888',1.6,'opacity=".6"');
- }
+ const texture=`<image x="-600" y="-600" width="1200" height="1200" href="${breadTexture()}"/>`;
  const clip=`<defs><clipPath id="pie-disc"><circle r="600"/></clipPath>${SLICES.map((s,i)=>`<clipPath id="slice-${i}">${path(sector(s.start,s.end),'white','none',0)}</clipPath>`).join('')}</defs>`;
+ const bottoms=SLICES.map(s=>{const a=(s.start+s.end)/2;const d=sector(s.start,s.end),dx=f(s.offset*Math.cos(a)),dy=s.offset*Math.sin(a);return path(d,'#9f9f9f','#777777',.8,`transform="translate(${dx} ${f(dy+14)})"`)+[3,7,11].map((y,i)=>path(d,'none',i%2?'#787878':'#d4d4d4',.9,`transform="translate(${dx} ${f(dy+y)})" stroke-dasharray="11 1 5 2"`)).join('');}).join('');
  const pieces=SLICES.map((s,i)=>{
   const a=(s.start+s.end)/2,dx=s.offset*Math.cos(a),dy=s.offset*Math.sin(a),d=sector(s.start,s.end);
-  const start=onCircle(s.start,585),end=onCircle(s.end,585);
-  const rim=`M${f(start[0])} ${f(start[1])}A585 585 0 0 1 ${f(end[0])} ${f(end[1])}`;
+  const start=onCircle(s.start,597),end=onCircle(s.end,597);
+  const rim=`M${f(start[0])} ${f(start[1])}A597 597 0 0 1 ${f(end[0])} ${f(end[1])}`;
   return `<g data-slice="${i}" transform="translate(${f(dx)} ${f(dy)})">`+
-   path(d,'#b0b0b0','#777777',2,'transform="translate(0 14)"')+
-   path(d,'#e4e4e4','#666666',3)+
+   path(d,'#e8e8e8','#777777',1.4)+
    `<g clip-path="url(#slice-${i})"><g clip-path="url(#pie-disc)">${texture}</g>`+
-   path(rim,'none','#8a8a8a',8,'opacity=".3"')+path(d,'url(#hatch)','#777777',1,'opacity=".16"')+'</g>'+
-   path(d,'none','#666666',2.5)+path(rim,'none','#aaaaaa',1.5)+'</g>';
+   path(d,'url(#hatch)','#777777',1,'opacity=".16"')+'</g>'+
+   path(d,'none','#777777',1.2)+path(rim,'none','#a0a0a0',.7,'stroke-dasharray="7 2 3 1"')+'</g>';
  }).join('');
- return svg(`<g transform="scale(${size/1600}) translate(755 810) scale(1.1 .99)">${pieces}</g>`,size,size,clip);
+ return svg(`<g transform="scale(${size/1600}) translate(755 810) scale(1.1 .99)">${cast(15,35,690,620)}${bottoms}${pieces}</g>`,size,size,clip);
 }
 export const OUTPUTS=['public/illustrations/fractions.webp','public/illustrations/fractions@2x.webp'] as const;
 /** Keep the home frontispiece leader mask in sync with the new cover silhouette. */
