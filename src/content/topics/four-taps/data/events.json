@@ -72,7 +72,7 @@
     },
     "detail": {
       "en": "Both governments give the same date, 29 September 1962, the same term of 99 years and the same quantity [S13, S16, S17]. The agreement also provides that Johor may receive treated water: up to 2 % of the water supplied to Singapore, or 5 million gallons a day, as Singapore's foreign ministry puts it [S13]; 5 million gallons a day under Clause 11, in the words of Malaysia's ministry [S16]. Johor's state government records that the Johor River Waterworks at Kota Tinggi and the Linggiu Dam are to be handed to Johor on 30 September 2061 [S17].",
-      "zh": "两国政府给出的日期都是 1962 年 9 月 29 日，期限都是 99 年，取水量也一样 [S13、S16、S17]。协议还规定柔佛可获得处理过的水：新加坡外交部的说法是至多相当于新加坡供水量的 2%，即每日 5 百万加仑 [S13]；马来西亚部门的说法是按第 11 条每日 5 百万加仑 [S16]。柔佛州政府记录，哥打丁宜的柔佛河水厂和林木水坝将于 2061 年 9 月 30 日交给柔佛 [S17]。"
+      "zh": "两国政府给出的日期都是 1962 年 9 月 29 日，期限都是 99 年，取水量也一样 [S13、S16、S17]。协议还规定柔佛可获得处理过的水：新加坡外交部的说法是至多相当于新加坡供水量的 2%，即每日 5 百万加仑 [S13]；马来西亚部门的说法是按第 11 条每日 5 百万加仑 [S16]。柔佛州政府记录，哥打丁宜的柔佛河水厂和林桂水坝将于 2061 年 9 月 30 日交给柔佛 [S17]。"
     },
     "sources": [
       "S13",
@@ -117,11 +117,11 @@
     "importance": 2,
     "title": {
       "en": "The 1990 Linggiu agreement",
-      "zh": "1990 年林木协议"
+      "zh": "1990 年林桂协议"
     },
     "summary": {
       "en": "PUB and the Johor State government agree to build Linggiu Reservoir upstream on the Johor River, as a supplement to the 1962 agreement.",
-      "zh": "PUB 与柔佛州政府签约，在柔佛河上游兴建林木水库，作为 1962 年协议的补充。"
+      "zh": "PUB 与柔佛州政府签约，在柔佛河上游兴建林桂水库，作为 1962 年协议的补充。"
     },
     "detail": {
       "en": "Singapore's sources describe it as an agreement supplementary to the 1962 agreement [S13, S14]; Malaysia's public broadcaster refers to the 1962 agreement and a supplementary agreement of 1990 [S20]. Johor owns the dam; PUB built it, paid for it and operates it [S13, S20]. The exact day of signing is not given in the sources read for this topic.",
@@ -130,7 +130,9 @@
     "sources": [
       "S13",
       "S14",
-      "S20"
+      "S20",
+      "S34",
+      "S35"
     ]
   },
   {
@@ -509,7 +511,7 @@
     "importance": 2,
     "title": {
       "en": "Linggiu Reservoir",
-      "zh": "林木水库"
+      "zh": "林桂水库"
     },
     "summary": {
       "en": "A reservoir on the upper Johor River in Johor, completed in 1993, that keeps enough water in the river for the intake downstream.",
@@ -517,7 +519,9 @@
     },
     "sources": [
       "S2",
-      "S14"
+      "S14",
+      "S34",
+      "S35"
     ]
   },
   {
@@ -531,7 +535,7 @@
     "importance": 1,
     "title": {
       "en": "Linggiu Dam",
-      "zh": "林木水坝"
+      "zh": "林桂水坝"
     },
     "summary": {
       "en": "Owned by Johor; built, paid for and operated by PUB under the 1990 agreement.",
@@ -539,7 +543,9 @@
     },
     "sources": [
       "S13",
-      "S20"
+      "S20",
+      "S34",
+      "S35"
     ]
   },
   {

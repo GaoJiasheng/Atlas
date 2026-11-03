@@ -122,7 +122,7 @@
       "K5": {
         "type": "GeometryCollection",
         "geometries": [
-          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林木水库"},"src":["G3"]}},
+          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林桂水库"},"src":["G3"]}},
           {"arcs":[[20]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Bedok Reservoir","zh":"勿洛蓄水池"},"src":["G1","G3"]}},
           {"arcs":[[[3,4]],[[5,6]]],"type":"MultiPolygon","properties":{"holder":"local-catchment","label":{"en":"Jurong Lake","zh":"裕廊湖"},"src":["G1","G3"]}},
           {"arcs":[[8]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Kranji Reservoir","zh":"克兰芝蓄水池"},"src":["G1","G3"]}},
@@ -141,7 +141,7 @@
       "K6": {
         "type": "GeometryCollection",
         "geometries": [
-          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林木水库"},"src":["G3"]}},
+          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林桂水库"},"src":["G3"]}},
           {"arcs":[[20]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Bedok Reservoir","zh":"勿洛蓄水池"},"src":["G1","G3"]}},
           {"arcs":[[[3,4]],[[5,6]]],"type":"MultiPolygon","properties":{"holder":"local-catchment","label":{"en":"Jurong Lake","zh":"裕廊湖"},"src":["G1","G3"]}},
           {"arcs":[[8]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Kranji Reservoir","zh":"克兰芝蓄水池"},"src":["G1","G3"]}},
@@ -162,7 +162,7 @@
       "K7": {
         "type": "GeometryCollection",
         "geometries": [
-          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林木水库"},"src":["G3"]}},
+          {"arcs":[[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31],[32],[33],[34],[35],[36],[37],[38],[39],[40],[41],[42],[43],[44],[45],[46],[47],[48],[49],[50],[51]],"type":"Polygon","properties":{"holder":"imported-water","label":{"en":"Linggiu Reservoir","zh":"林桂水库"},"src":["G3"]}},
           {"arcs":[[20]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Bedok Reservoir","zh":"勿洛蓄水池"},"src":["G1","G3"]}},
           {"arcs":[[[3,4]],[[5,6]]],"type":"MultiPolygon","properties":{"holder":"local-catchment","label":{"en":"Jurong Lake","zh":"裕廊湖"},"src":["G1","G3"]}},
           {"arcs":[[8]],"type":"Polygon","properties":{"holder":"local-catchment","label":{"en":"Kranji Reservoir","zh":"克兰芝蓄水池"},"src":["G1","G3"]}},

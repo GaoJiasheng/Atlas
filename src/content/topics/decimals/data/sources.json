@@ -224,6 +224,18 @@
         "en": "Primary pupils run 1.6 km in the NAPFA walk-run; secondary students and above run 2.4 km (step 15). Page checked 2026-10-18.",
         "zh": "NAPFA 的跑走项目，小学生是 1.6 km，中学生及以上是 2.4 km（第 15 步）。页面于 2026-10-18 核对。"
       }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Monetary Authority of Singapore, Circulation Currency: Coins, Second Series note. MAS stopped issuing the 1-cent coin on 1 April 2002; existing 1-cent coins remain legal tender.",
+        "zh": "新加坡金融管理局《流通货币：硬币》第二系列说明：1 分硬币自 2002 年 4 月 1 日起停止发行；现有的 1 分硬币仍是法定货币。"
+      },
+      "url": "https://www.mas.gov.sg/currency/circulation-currency/circulation-currency-coins",
+      "note": {
+        "en": "Effective date: 1 April 2002. Page publication date not stated; checked 3 November 2026. Exact excerpt (10 words): “MAS stopped issuing the 1-cent coin from 1 April 2002”. This is cessation of issuance, not demonetisation or a claim that none remain in circulation.",
+        "zh": "停发日期：2002 年 4 月 1 日。页面未注明发布日期；2026 年 11 月 3 日核对。英文原文节录共 10 词，见本条英文说明。停止发行不等于取消法定货币地位，也不表示所有 1 分硬币都已退出流通。"
+      }
     }
   ]
 }
