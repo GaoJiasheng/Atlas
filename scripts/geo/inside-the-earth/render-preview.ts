@@ -8,10 +8,11 @@
  *   --input /tmp/atlas-earth-baseline/parts.json --out /tmp/atlas-earth-qa/before
  * Optional --width 1200 --height 900. No browser or GPU is used.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { loadGeology } from './load-geology';
 import { Matrix3, Matrix4, PerspectiveCamera, Vector3 } from 'three';
 import { partsFile, type Part } from '../../../src/engines/space-scene/schema';
 import { partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
@@ -32,6 +33,8 @@ const width = Number(arg('--width', '1200')), height = Number(arg('--height', '9
 if (![width, height].every((n) => Number.isInteger(n) && n >= 320 && n <= 2400)) throw new Error('Image dimensions must be integers from 320 to 2400');
 const file = partsFile.parse(JSON.parse(readFileSync(input, 'utf8')));
 mkdirSync(output, { recursive: true });
+const meshPath=arg('--mesh',file.model ? join(ROOT,'public',file.model) : '');
+const meshPieces=meshPath ? await loadGeology(meshPath) : new Map();
 
 // First definitions are the paper theme. Alias resolution uses those same
 // definitions, so preview colours follow tokens.css rather than a second palette.
@@ -56,17 +59,37 @@ const footer = 36;
 type Screen = { x: number; y: number; q: number; light: number; section: number };
 const cross = (a: Screen, b: Screen, x: number, y: number) => (b.x - a.x) * (y - a.y) - (b.y - a.y) * (x - a.x);
 
-const views = [
-  { name: 'earth', preset: 'earth-view', accepts: (p: Part) => p.id.startsWith('earth-') },
-  { name: 'volcano', preset: 'volcano-view', accepts: (p: Part) => p.group === 'volcano-system' },
-  { name: 'boundaries', preset: 'edge-view', accepts: (p: Part) => p.group === 'boundary-blocks' },
-  { name: 'fault', preset: 'fault-view', accepts: (p: Part) => p.group === 'ground-and-waves' },
+type View = { name: string; preset?: string; camera?: { position: number[]; target: number[]; fov?: number }; accepts: (p: Part) => boolean; pose?: string; explode?: boolean };
+const idIs = (...ids: string[]) => (p: Part) => ids.includes(p.id);
+const views: View[] = [
+  { name:'earth',preset:'earth-view',accepts:p=>p.id.startsWith('earth-') },
+  { name:'volcano',preset:'volcano-view',accepts:p=>p.group==='volcano-system' },
+  { name:'boundaries',preset:'edge-view',accepts:p=>p.group==='boundary-blocks' },
+  { name:'boundaries-open',preset:'edge-view',accepts:p=>p.group==='boundary-blocks',pose:'edge-open' },
+  { name:'boundaries-slide',preset:'edge-view',accepts:p=>p.group==='boundary-blocks',pose:'edge-slide' },
+  { name:'fault',preset:'fault-view',accepts:p=>p.group==='ground-and-waves' },
+  { name:'plate-close',camera:{position:[1.6,-0.6,2.2],target:[0,-1.5,0]},accepts:p=>p.id.startsWith('plate-') },
+  { name:'crater-close',camera:{position:[0.75,1.95,1.2],target:[0,1.16,0],fov:32},accepts:idIs('volcano-cone','volcano-conduit','volcano-vent','volcano-lava') },
+  { name:'crater-front',camera:{position:[-0.18,1.42,1.3],target:[0,1.12,0],fov:32},accepts:idIs('volcano-cone','volcano-conduit','volcano-vent') },
+  { name:'volcano-back',camera:{position:[-3.6,2.7,-5.5],target:[0,0.65,0]},accepts:p=>p.group==='volcano-system' },
+  { name:'subduction-close',camera:{position:[2.5,2.4,3.1],target:[0.95,0.75,0]},accepts:p=>['edge-sub-left','edge-sub-right','edge-slab','edge-melt'].includes(p.id) },
+  { name:'fault-close',camera:{position:[2.5,2.3,3.8],target:[0,0.98,0]},accepts:p=>p.id.startsWith('fault-') },
+  { name:'fault-loaded',camera:{position:[2.5,2.3,3.8],target:[0,0.98,0]},accepts:p=>p.id.startsWith('fault-'),pose:'fault-loaded' },
+  { name:'fault-slipped',camera:{position:[2.5,2.3,3.8],target:[0,0.98,0]},accepts:p=>p.id.startsWith('fault-'),pose:'fault-slipped' },
+  { name:'earth-exploded',preset:'earth-view',accepts:p=>p.id.startsWith('earth-'),explode:true },
+  { name:'volcano-exploded',preset:'volcano-view',accepts:p=>p.group==='volcano-system',explode:true },
+  { name:'sea',preset:'sea-view',accepts:p=>p.id.startsWith('sea-') },
+  { name:'sea-displaced',preset:'sea-view',accepts:p=>p.id.startsWith('sea-'),pose:'sea-snap-3' },
+  { name:'building',preset:'building-view',accepts:p=>p.id.startsWith('building-') },
+  { name:'building-sway',preset:'building-view',accepts:p=>p.id.startsWith('building-'),pose:'building-positive' },
 ];
+const only=arg('--only','');
 const summaries = [];
-for (const view of views) {
-  const setting = file.presets!.find((p) => p.id === view.preset)!.camera;
+for (const view of views.filter(v=>!only || only.split(',').includes(v.name))) {
+  const setting = view.camera ?? file.presets!.find((p) => p.id === view.preset)!.camera;
   const camera = new PerspectiveCamera(setting.fov ?? 34, width / (height - footer), 0.01, 100);
   camera.position.fromArray(setting.position);
+  if(view.explode){const target=new Vector3().fromArray(setting.target);camera.position.sub(target).multiplyScalar(1.15).add(target);}
   camera.lookAt(new Vector3().fromArray(setting.target));
   camera.updateMatrixWorld();
   camera.updateProjectionMatrix();
@@ -108,7 +131,7 @@ for (const view of views) {
     if (!part.primitive) continue;
     const slots = partMaterialSlots(part);
     const each = file.animations.some((a) => a.target === part.id && 'each' in a && a.each);
-    const shapes = each ? eachPieces(part) : partPieces(part);
+    const shapes = part.mesh ? meshPieces.get(part.mesh)!.map((piece: import('../../../src/engines/space-scene/stages/model3d/geometry').ShapePiece)=>({...piece,geometry:piece.geometry.clone()})) : each ? eachPieces(part) : partPieces(part);
     pieces += shapes.length;
     for (const piece of shapes) {
       if (piece.lines) { piece.geometry.dispose(); continue; }
@@ -117,7 +140,22 @@ for (const view of views) {
       const indices = piece.geometry.index;
       const slot = slots[piece.slot ?? 0]!;
       const color = rgb(slot.tint ?? slot.color);
-      const placement = new Matrix4().makeTranslation(...part.primitive.at);
+      const placement = part.mesh ? new Matrix4() : new Matrix4().makeTranslation(...part.primitive.at);
+      const pose = view.pose ? file.poses?.[view.pose]?.parts[part.id] : undefined;
+      if(pose) {
+        const pivot=new Vector3(...(pose.pivot ?? part.primitive.at));
+        const transform=new Matrix4().makeTranslation(...(pose.offset ?? [0,0,0])).multiply(new Matrix4().makeTranslation(...pivot.toArray()));
+        const rotation=pose.rotation ?? [0,0,0];
+        transform.multiply(new Matrix4().makeRotationZ(rotation[2]*Math.PI/180)).multiply(new Matrix4().makeRotationY(rotation[1]*Math.PI/180)).multiply(new Matrix4().makeRotationX(rotation[0]*Math.PI/180));
+        const scale=pose.scale ?? 1;
+        transform.multiply(new Matrix4().makeScale(...(typeof scale==='number' ? [scale,scale,scale] as const : scale)));
+        transform.multiply(new Matrix4().makeTranslation(-pivot.x,-pivot.y,-pivot.z));
+        placement.premultiply(transform);
+      }
+      if(view.explode) {
+        const dir=new Vector3(...part.explode.dir).normalize().multiplyScalar(part.explode.dist);
+        placement.premultiply(new Matrix4().makeTranslation(dir.x,dir.y,dir.z));
+      }
       for (const instance of piece.matrices ?? [new Matrix4()]) {
         instances++;
         const matrix = placement.clone().multiply(instance);
@@ -141,8 +179,12 @@ for (const view of views) {
   const caption = `<svg width="${width}" height="${height}"><text x="18" y="${height - 14}" fill="#555047" font-size="13" font-family="monospace">CPU GEOMETRY PREVIEW · ${view.name.toUpperCase()} · ${triangles.toLocaleString('en')} TRIANGLES · NOT WEBGL QA</text></svg>`;
   const path = join(output, `${view.name}.png`);
   await sharp(pixels, { raw: { width, height, channels: 3 } }).composite([{ input: Buffer.from(caption) }]).png().toFile(path);
-  const summary = { view: view.name, path, triangles, geometryPieces: pieces, instances, camera: setting };
+  const summary = { view: view.name, path, triangles, geometryPieces: pieces, instances, camera: {...setting,position:camera.position.toArray()} };
   summaries.push(summary);
   process.stdout.write(`${view.name}: ${triangles} triangles, ${pieces} geometry pieces → ${path}\n`);
 }
-writeFileSync(join(output, 'preview.json'), `${JSON.stringify({ kind: 'CPU GEOMETRY PREVIEW — NOT WEBGL QA', input, width, height, limitations: ['Opaque rest geometry only', 'No runtime PBR, shadow, transparency, HUD, or interaction checks'], views: summaries }, null, 2)}\n`);
+const previous=only && existsSync(join(output,'preview.json')) ? JSON.parse(readFileSync(join(output,'preview.json'),'utf8')) as {input:string;views:typeof summaries} : null;
+const summaryViews=previous?.input===input ? [...new Map([...previous.views,...summaries].map(v=>[v.view,v])).values()] : summaries;
+writeFileSync(join(output, 'preview.json'), `${JSON.stringify({ kind: 'CPU GEOMETRY PREVIEW — NOT WEBGL QA', input, mesh:meshPath || null, width, height, limitations: ['Opaque geometry with authored static poses and exploded offsets', 'No runtime PBR, shadow, transparency, HUD, or interaction checks'], views: summaryViews }, null, 2)}\n`);
+
+for(const pieces of meshPieces.values())for(const piece of pieces)piece.geometry.dispose();
