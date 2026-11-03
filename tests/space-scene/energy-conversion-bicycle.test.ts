@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { Euler, Vector3 } from 'three';
-import { BICYCLE, bicycleChain, bicycleWheel, bottleDynamo, chainLoop, placeBicycle } from '../../scripts/geo/kits/bicycle';
+import { BICYCLE, bicycleChain, bicycleSaddle, bicycleWheel, bottleDynamo, chainLoop, placeBicycle } from '../../scripts/geo/kits/bicycle';
 import { DYNAMO_AT, DYNAMO_AXIS, DYNAMO_HINGE, DYNAMO_OFF, ORIGIN, rebuild } from '../../scripts/geo/energy-conversion/build-parts';
 import { partSchema } from '../../src/engines/space-scene/schema';
 import { eachPieces, partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
@@ -91,6 +91,41 @@ describe('the rebuilt bicycle is an assembled, driven machine', () => {
     expect(data).toEqual(file);
     rebuild(data);
     expect(data).toEqual(file);
+  });
+
+
+  it('keeps padded saddle thickness and a dished profile at close-up scale', () => {
+    const pad = bicycleSaddle()[0]!;
+    const prototype = file.parts.find((p: any) => p.id === 'bicycle-frame');
+    const pieces = partPieces(partSchema.parse({ ...prototype, primitive: pad, extra: undefined }));
+    const points = pieces.flatMap(({ geometry }) => {
+      const a = geometry.getAttribute('position');
+      return Array.from({ length: a.count }, (_, i) => new Vector3().fromBufferAttribute(a, i));
+    });
+    const range = (lo: number, hi: number) => {
+      const y = points.filter((p) => p.x >= lo && p.x <= hi).map((p) => p.y);
+      return [Math.min(...y), Math.max(...y)];
+    };
+    const nose = range(.125, .14), waist = range(.19, .22), rear = range(.29, .32);
+    expect(nose[1]! - nose[0]!).toBeGreaterThan(.010);
+    expect(rear[1]! - rear[0]!).toBeGreaterThan(.045);
+    expect(rear[1]! - waist[1]!).toBeGreaterThan(.008);
+    expect(Math.max(...points.map((p) => p.z)) - Math.min(...points.map((p) => p.z))).toBeGreaterThan(.16);
+    pieces.forEach((p) => p.geometry.dispose());
+  });
+
+  it('keeps the complete topic below the 320k triangle polish budget', () => {
+    const each = new Set(file.animations.filter((a: any) => a.each).map((a: any) => a.target));
+    let triangles = 0;
+    for (const p of file.parts) {
+      const part = partSchema.parse(p);
+      const pieces = each.has(p.id) ? eachPieces(part) : partPieces(part);
+      for (const piece of pieces) {
+        triangles += (piece.geometry.index?.count ?? piece.geometry.getAttribute('position').count) / 3 * (piece.matrices?.length ?? 1);
+        piece.geometry.dispose();
+      }
+    }
+    expect(triangles).toBeLessThanOrEqual(320_000);
   });
 
   it('generates finite geometry for every rebuilt assembly', () => {
