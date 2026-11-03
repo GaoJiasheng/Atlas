@@ -12,8 +12,9 @@ import { partsFile, primitiveSchema, type Primitive } from '../../src/engines/sp
 
 const ROOT = join(import.meta.dirname, '../..');
 const file = partsFile.parse(JSON.parse(readFileSync(join(ROOT, 'src/content/topics/fossils-and-skeletons/data/parts.json'), 'utf8')));
+const authored=JSON.parse(readFileSync(join(ROOT,'scripts/geo/fossils-and-skeletons/skeleton-source.json'),'utf8')) as typeof file.parts;
 const geometry = (id: string) => {
-  const part = file.parts.find(p => p.id === id)!;
+  const part = authored.find(p=>p.id===id)??file.parts.find(p => p.id === id)!;
   return [part.primitive, ...(part.extra ?? [])].filter((p): p is Primitive => !!p);
 };
 const end = (p: Primitive): number[] => p.kind === 'sweep' ? p.at.map((v, i) => v + p.path.at(-1)![i]!) : p.at;
@@ -34,11 +35,12 @@ describe('fossils rebuild: reusable anatomical geometry', () => {
     }
     const museum = diplodocid(0, 0);
     expect(museum.length).toBeGreaterThan(33); // baked into one shared local mesh
-    for (const p of [...modules.flat(), ...museum]) {
+    for (const p of modules.flat()) {
       expect(primitiveSchema.safeParse(p).success, p.kind).toBe(true);
       if (p.kind === 'sweep') expect(p.radial).toBeGreaterThanOrEqual(Math.max(...[p.radius].flat()) < FINE_BONE ? 16 : Math.max(...[p.radius].flat()) < THIN_BONE ? 24 : 48);
       if (p.kind === 'lathe') expect(p.segments).toBeGreaterThanOrEqual(48);
     }
+    for(const p of museum){expect(primitiveSchema.safeParse(p).success).toBe(true);if(p.kind==='lathe')expect(p.segments).toBeGreaterThanOrEqual(12);if(p.kind==='sweep')expect(p.radial).toBeGreaterThanOrEqual(16);}
     expect(museum.filter(p => p.kind === 'lathe')).toHaveLength(15 + 10 + 5 + 80);
   });
 
@@ -60,6 +62,27 @@ describe('fossils rebuild: reusable anatomical geometry', () => {
       }
     }
     expect(bird.legs.filter(p => p.kind === 'sweep' && p.rings)).toHaveLength(8);
+  });
+
+  it('tucks the myna feathered thigh into its belly above the scaled lower leg', () => {
+    const layout=JSON.parse(readFileSync(join(ROOT,'scripts/geo/fossils-and-skeletons/model-layout.json'),'utf8')).studies.bird;
+    const authorY=(y:number)=>(y-2-layout.lift)/layout.scale+layout.center[1];
+    const thighs=geometry('myna-leg').filter(p=>p.kind==='sweep'&&p.tint==='token:ink-2'&&authorY(p.at[1])>.9);
+    expect(thighs).toHaveLength(0); // continuous belly, no separate external femoral stump
+    const scales=geometry('myna-leg').filter(p=>p.kind==='sweep'&&p.color==='scales');
+    expect(scales).toHaveLength(12); // two tibiae, two tarsi, eight toes
+    expect(scales.filter(p=>p.kind==='sweep'&&p.rings)).toHaveLength(10); // hallux uses the scale material's continuous pattern
+    for(const part of file.parts.filter(p=>p.id.endsWith('-study'))) {
+      expect(part.material).toEqual({color:'plastic',tint:'token:f-drag'});
+      expect(part.castShadow).toBe(true);
+    }
+    const platform=geometry('study-plinth')[0]!;
+    expect(platform.kind).toBe('bevelBox');
+    expect(geometry('study-plinth').filter(p=>p.kind==='bevelBox')).toHaveLength(3);
+    expect(file.views.shadows).toBe('none'); // no global central shadow blob
+    expect(geometry('myna-leg').filter(p=>p.color==='scales').every(p=>p.tint==='token:lamp')).toBe(true);
+    expect(geometry('myna-body').filter(p=>p.kind==='sweep'&&p.tint==='token:lamp')).toHaveLength(2);
+    expect(geometry('myna-wing').filter(p=>p.tint==='token:bone')).toHaveLength(4);
   });
 
   it('each of twelve dorsal vertebrae supports its own rib pair along the curved back', () => {
@@ -102,23 +125,39 @@ describe('fossils rebuild: reusable anatomical geometry', () => {
 });
 
 describe('fossils rebuild: vendored museum asset', () => {
-  it('decodes locally into three named modules sharing one finite, meshopt-compressed skeleton', async () => {
+  it('decodes locally into independent evidence modules and three shared finite museum skeletons', async () => {
     expect(file.model).toMatch(/^\/models\/fossils-and-skeletons(?:\/[^/]+)?\.glb$/);
     const path = join(ROOT, `public${file.model!}`);
-    expect(statSync(path).size).toBeLessThanOrEqual(1_500_000);
+    expect(statSync(path).size).toBeLessThanOrEqual(2_500_000);
     await MeshoptDecoder.ready;
     const doc = await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).read(path);
     const root = doc.getRoot();
     expect(root.listExtensionsRequired().map(e => e.extensionName)).toContain('EXT_meshopt_compression');
     const nodes = root.listNodes();
-    expect(nodes.map(n => n.getName()).sort()).toEqual(['apollonia-study', 'prince-study', 'twinky-study']);
-    expect(root.listMeshes()).toHaveLength(1);
-    expect(nodes.every(n => n.getMesh() === nodes[0]!.getMesh())).toBe(true);
+    expect(nodes.map(n => n.getName()).sort()).toEqual(file.parts.filter(p=>p.mesh).map(p=>p.mesh).sort());
+    const museum=nodes.filter(n=>n.getName().endsWith('-study'));
+    expect(museum).toHaveLength(3);
+    expect(root.listMeshes()).toHaveLength(13);
+    expect(museum.every(n=>n.getMesh()===museum[0]!.getMesh())).toBe(true);
+    // Every evidence selector still owns its own mesh and transform. Filtering
+    // can reuse these immutable buffers, including when whole restores them.
+    const evidence=nodes.filter(n=>n.getName().startsWith('sk-'));
+    expect(evidence).toHaveLength(12);
+    expect(new Set(evidence.map(n=>n.getMesh())).size).toBe(12);
+    const triangles=(n:typeof nodes[number])=>n.getMesh()!.listPrimitives().reduce((a,p)=>a+p.getIndices()!.getCount()/3,0);
+    expect(evidence.reduce((a,n)=>a+triangles(n),0)).toBeLessThan(100_000);
+    expect(museum.reduce((a,n)=>a+triangles(n)*2,0)).toBeLessThan(350_000); // includes shadow pass
+    for(const part of file.parts.filter(p=>p.group==='skeleton')){expect(part.primitive).toBeUndefined();expect(part.extra).toBeUndefined();expect(authored.find(p=>p.id===part.id)?.primitive).toBeDefined();} // no runtime tessellation/replacement on an evidence filter
+    // Three separate ribcages, with enough depth separation to avoid their
+    // silhouettes interleaving from the elevated museum camera.
+    const zs=museum.map(n=>n.getTranslation()[2]).sort((a,b)=>a-b);
+    expect(zs[1]!-zs[0]!).toBeGreaterThan(3);
+    expect(zs[2]!-zs[1]!).toBeGreaterThan(3);
     for (const node of nodes) expect(file.parts.find(p => p.id === node.getName())?.mesh).toBe(node.getName());
     await doc.transform(dequantize());
-    for (const primitive of root.listMeshes()[0]!.listPrimitives()) {
+    for (const primitive of root.listMeshes().flatMap(m=>m.listPrimitives())) {
       const positions = primitive.getAttribute('POSITION')!, normals = primitive.getAttribute('NORMAL')!;
-      expect(positions.getCount()).toBeGreaterThan(1000);
+      expect(positions.getCount()).toBeGreaterThan(100);
       expect(normals.getCount()).toBe(positions.getCount());
       expect(Array.from(positions.getArray()!).every(Number.isFinite)).toBe(true);
       expect(Array.from(normals.getArray()!).every(Number.isFinite)).toBe(true);

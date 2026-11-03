@@ -93,7 +93,29 @@ sk('sk-tail-base',['Tail base','尾基'],'inferred',['sculpted restoration','示
 sk('sk-tail-tip',['Tail tip','尾端'],'inferred',['sculpted restoration','示意补塑'],['Tapers into a long tail raised clear of the platform.','逐渐收细为抬离台面的长尾。'],vertebralColumn([[2.4,1.73,0],[3.1,1.65,0],[3.7,1.62,0],[4.07,1.68,0]],24,.062,.008,.07,{chevrons:true,archLimit:8}),[1,0,0],.7);
 
 // Local living-bird study. A separate enlarged feather is a comparison object.
-const bird = buildBird();
+const bird = buildBird({ billLegTint: 'token:lamp' });
+// Lemon-yellow iris, without the Common Myna's bare eye patch.
+for (const p of bird.body) if (p.kind === 'sphere' && p.size[0] === .027) p.tint = 'token:lamp';
+// Topic-local correction: the shared bird kit also serves other owned topics.
+// The continuous belly encloses the feathered thighs; the scaled lower legs
+// start inside that plumage and emerge without a second surface or seam.
+for (const p of bird.legs) {
+ if (p.kind !== 'sweep') continue;
+ if (p.tint === 'token:lamp' && Math.abs(p.at[1] - .73) < 1e-6) {
+   const endY = p.at[1] + p.path.at(-1)![1];
+   p.at[1] = .83; p.path = [[0,0,0],[.013,-.10,.005*Math.sign(p.at[2])],[.035,endY-.83,.012*Math.sign(p.at[2])]];
+   p.radius = [.023,.022,.020]; p.rings = {every:.028,depth:.13};
+ }
+ if (p.tint === 'token:lamp') p.color = 'scales';
+ // Tiny claws and toe scales do not need the body's 48 radial samples.
+ p.radial = 24;
+}
+
+// The continuous belly is the external feathered thigh surface. Remove the
+// kit's separate femoral cuffs so no intersecting stump/seam can show.
+bird.legs = bird.legs.filter(p=>!(p.kind==='sweep'&&p.tint==='token:ink-2'&&p.at[1]>.9));
+const belly=bird.body[0]!;
+if(belly.kind==='sweep'&&Array.isArray(belly.radius))belly.radius[2]=.275;
 const bodyGeo=bird.body;
 add('myna-body','living-museum',['Myna','八哥'],['Shows the main outline of a local living bird.','显示本地活鸟的大部位轮廓。'],['This original teaching bird represents a Javan myna found in Singapore. Birds are nested within theropod dinosaurs; combining that classification with the local occurrence makes this a local living-dinosaur example. It is not a Tyrannosaurus transforming into a myna. [S8, S23, S90]','这只原创教学鸟代表新加坡能见到的爪哇八哥。鸟类嵌套于兽脚类恐龙内；把这项分类与本地出现资料合起来，它就是本地活恐龙的例子，不是霸王龙变成八哥。[S8, S23, S90]'],bodyGeo);
 const wingGeo=bird.wing;
@@ -103,8 +125,8 @@ add('myna-leg','living-museum',['Bird hindlimbs','鸟的后肢'],['Supports the 
 const featherGeo=bird.feather;
 add('myna-feather','living-museum',['Feather','羽毛比较件'],['Enlarges a modern feather for comparison.','放大现生鸟羽以便比较。'],['This is a modern-bird comparison model, not a fossil and not drawn to the bird body scale. Archaeopteryx fossils preserve a combination of features useful in studying early birds; this does not label it the proven direct ancestor of all birds. [S10, S90]','这是现生鸟类比较模型，不是化石，也不与鸟身体采用同一尺度。始祖鸟化石保存的特征组合有助研究早期鸟类，但不表示它已被证实是所有鸟的直接祖先。[S10, S90]'],featherGeo);
 
-for(const [id,cx,z,title,zh]of [['prince-study',.0,-.65,'Prince','Prince'],['apollonia-study',1.0,.1,'Apollonia','Apollonia'],['twinky-study',2.0,.85,'Twinky','Twinky']]as const){
- add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],diplodocid(cx,z));
+for(const [id,cx,z,title,zh]of [['prince-study',-.65,-2.6,'Prince','Prince'],['apollonia-study',0,0,'Apollonia','Apollonia'],['twinky-study',.65,2.6,'Twinky','Twinky']]as const){
+ add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],diplodocid(cx,z),{castShadow:true});
 }
 
 // Bake the spec's one-time positive uniform affine transform for all six studies.
@@ -116,7 +138,7 @@ const grounded=new Set(['skeleton','museum']);
 for(const [set,ids]of Object.entries(sets)){
  const items=parts.filter(p=>ids.includes(p.id));const boxes=items.map(p=>partBounds(p)!);
  const min=[0,1,2].map(i=>Math.min(...boxes.map(b=>b.min[i]!)))as V,max=[0,1,2].map(i=>Math.max(...boxes.map(b=>b.max[i]!)))as V;
- const c=min.map((v,i)=>(v+max[i]!)/2)as V;const h=min.map((v,i)=>(max[i]!-v)/2);const k=Math.min(...[4,2,1.4].map((v,i)=>h[i]!>0?v/h[i]!:Infinity));
+ const c=min.map((v,i)=>(v+max[i]!)/2)as V;const h=min.map((v,i)=>(max[i]!-v)/2);const k=Math.min(...(set==='museum'?[4,2,3.8]:[4,2,1.4]).map((v,i)=>h[i]!>0?v/h[i]!:Infinity));
  const lift=grounded.has(set)?-(2+k*(min[1]-c[1])):0;
  layout[set]={center:c,scale:k,bounds:{min,max},lift};
  const point=(v:V)=>v.map((x,i)=>[0,2+lift,0][i]!+k*(x-c[i]!)) as V;
@@ -139,20 +161,32 @@ const cameras={
  'layers-close':camera('age-section',[4,2.6,5],[0,1,0]),
  'skeleton-side':camera('skeleton',[1.08,3.128,14.04],[0,1.4,0]),
  'bird-close':camera('bird',[-.5,2,5],[-1.5,1,0]),
- 'museum-close':camera('museum',[4,3,7],[1.6,1,0]),
+ 'museum-close':camera('museum',[3.42,7.27472,11.0835],[.45,.65,0]),
  'pores-detail':camera('burial',[1.6,1.6,2.6],[0,1,.5]),
  'crystal-detail':camera('age-section',[2.8,2.8,3],[1.1,1.9,.5]),
  'hands-detail':camera('skeleton',[-.7,1.9,3.7],[-1.3,1.4,0]),
  'feather-detail':camera('bird',[.2,1.8,3],[-.52,1.14,.4]),
- 'museum-pair':camera('museum',[2.7,2.3,5],[1,1,0]),
+ 'museum-pair':camera('museum',[3.42,7.27472,11.0835],[.45,.65,0]),
 };
-add('study-plinth','context',['Study platform','示意底台'],['Supports the schematic studies.','承托示意研究。'],['A schematic layout platform, not a museum mount.','示意布局底台，不是馆藏展台。'],[box([0,-.10,0],[9,.12,3],'token:neutral')],{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
+add('study-plinth','context',['Study platform','示意底台'],['Supports the teaching models.','承托教学模型。'],['Three low bevelled display plinths support the generic studies; they do not copy the museum mounts.','三座带倒角的低展台分别承托通用示意模型，不复制馆藏的真实展台。'],[-1,0,1].map(i=>({kind:'bevelBox',at:[i*.65*layout.museum!.scale,-.09,i*2.6*layout.museum!.scale],size:[6.5,.16,1.32],bevel:.045,color:'plastic',tint:'token:mannequin'} as Primitive)),{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
+// Small, translucent contact patches at each real manus/pes contact. These
+// remain under the feet; the opaque plinth covers the shared central blob.
+const plinth = parts.at(-1)!;
+const museumLayout = layout.museum!;
+for (const [cx,z] of [[-.65,-2.6],[0,0],[.65,2.6]]) for (const x of [-.29,.46]) for (const side of [-1,1]) {
+ const k=museumLayout.scale, c=museumLayout.center;
+ const at:V=[k*(cx!+x-.04-c[0]),-.006,k*(z!+side*(x>0?.20:.23)-c[2])];
+ const shadow:Primitive={kind:'extrude',at,shape:ellipse(0,0,.14,.105,24) as [number,number][],depth:.0004,bevel:0,rotation:[-90,0,0],color:'glass',tint:'token:carbon-dioxide'};
+ (plinth.extra??=[]).push(shadow);
+}
+
 const labels:Record<string,[string,string]>={'evidence-close':['Evidence','证据'],'burial-close':['Burial','埋藏'],'layers-close':['Layers','地层'],'skeleton-side':['Skeleton','骨架'],'bird-close':['Bird','鸟'],'museum-close':['Museum','馆藏']};
 const path='src/content/topics/fossils-and-skeletons/data/parts.json';
 const previous=fs.existsSync(path)?JSON.parse(fs.readFileSync(path,'utf8')):{};
 // Published copy is edited independently of the bootstrap text above. A form
 // rebuild must preserve that editorial work and every evidence label/fact.
 for(const part of parts){
+ if(part.id==='study-plinth')continue;
  const published=previous.parts?.find((p:Part)=>p.id===part.id);
  if(!published)continue;
  for(const key of ['name','short','chainName','summary','detail','connects']as const){
@@ -160,7 +194,7 @@ for(const part of parts){
   else delete (part as any)[key];
  }
 }
-const result={...previous,parts,groups:[{id:'specimens',name:bi('Fossil evidence','化石证据'),color:'token:ink-2',card:false},{id:'burial',name:bi('Burial and minerals','埋藏与矿物'),color:'token:neutral',card:false},{id:'age-section',name:bi('Layers and ages','地层与年龄'),color:'token:ink-2',card:false},{id:'skeleton',name:bi('Rebuilding','骨架复原'),color:'token:bone'},{id:'living-museum',name:bi('Living birds and museum','活鸟与馆藏'),color:'token:neutral',card:false}],flows:[],animations:[],views:{assembled:{camera:cameras['skeleton-side']},xray:{camera:cameras['burial-close']},exploded:{camera:cameras['skeleton-side']},reference:{fit:'layers'},section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:1.07}},presets:Object.entries(labels).map(([id,label])=>({id,label:bi(...label),camera:cameras[id as keyof typeof cameras]}))};
+const result={...previous,parts,groups:[{id:'specimens',name:bi('Fossil evidence','化石证据'),color:'token:ink-2',card:false},{id:'burial',name:bi('Burial and minerals','埋藏与矿物'),color:'token:neutral',card:false},{id:'age-section',name:bi('Layers and ages','地层与年龄'),color:'token:ink-2',card:false},{id:'skeleton',name:bi('Rebuilding','骨架复原'),color:'token:bone'},{id:'living-museum',name:bi('Living birds and museum','活鸟与馆藏'),color:'token:neutral',card:false}],flows:[],animations:[],views:{shadows:'none',simVisibility:'instant',assembled:{camera:cameras['skeleton-side']},xray:{camera:cameras['burial-close']},exploded:{camera:cameras['skeleton-side']},reference:{fit:'layers'},section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:1.07}},presets:Object.entries(labels).map(([id,label])=>({id,label:bi(...label),camera:cameras[id as keyof typeof cameras]}))};
 result.spec=[
  {key:bi('MODEL','模型'),value:bi('Schematic','示意'),tag:'design'},
  {key:bi('EVIDENCE','证据'),value:bi('Body and activity','身体与活动'),tag:'typical'},
@@ -170,6 +204,7 @@ result.spec=[
 result.sim=JSON.parse(fs.readFileSync('scripts/geo/fossils-and-skeletons/sim.json','utf8'));
 if(previous.groups)result.groups=previous.groups;
 if(previous.spec)result.spec=previous.spec;
+fs.writeFileSync('scripts/geo/fossils-and-skeletons/skeleton-source.json',JSON.stringify(parts.filter(p=>p.group==='skeleton'),null,2)+'\n');
 result.model=await bakeMuseum(parts);
 partsFile.parse(result);
 fs.writeFileSync(path,JSON.stringify(result,(_,v)=>typeof v==='number'?Math.round(v*1e6)/1e6:v,2)+'\n');

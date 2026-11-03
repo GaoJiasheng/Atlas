@@ -65,8 +65,32 @@ photograph, illustration, scan or external texture is shipped.
 - [NParks Javan myna](https://avs.nparks.gov.sg/wildlife/encountering-wildlife/house-crows-pigeons-javan-mynas/javan-mynas/)
   and [BiodiversitySG identification](https://biodiversitysg.nparks.gov.sg/our-biodiversity/birds/crows-starlings-mynas/javan-myna/):
   bill, short crest, iris, white flight-feather/tail patches. Photo download
-  was blocked (403); no photo or derived texture is included. Existing ivory
-  bill/leg tokens remain part of the technical-plate palette.
+  was blocked (403); no photo or derived texture is included. The return polish below replaces the old ivory bill/leg palette with yellow.
 - [Abourachid et al., foot morphology in arboreal birds](https://pmc.ncbi.nlm.nih.gov/articles/PMC5472528/):
   anisodactyly in passerines, digit I backward and II–IV forward. Used for
   foot topology only; the model does not assert measured myna osteology.
+
+## Polish geometry provenance (2026-11-03)
+
+The original CC0 local asset now also contains the twelve independently
+selectable theropod modules: 1,963,212 bytes, 13 mesh resources, 15 selectable
+nodes; the three diplodocids still instance one resource. Sources are the
+original skeleton kit, `sculpt-museum.ts`, and `bake-museum.ts`. The generated
+`skeleton-source.json` retains the theropod's authoring primitives outside
+runtime content. No external mesh or texture was added.
+
+Hatcher's public-domain [1901 restoration plate](https://commons.wikimedia.org/wiki/File:Hatcher_Diplodocus.jpg)
+was inspected for the curved girdle and scapular outlines. The
+[BHL original publication](https://www.biodiversitylibrary.org/part/234818)
+records its public-domain status. [NParks identification](https://biodiversitysg.nparks.gov.sg/our-biodiversity/birds/crows-starlings-mynas/javan-myna/)
+was consulted; its photo request returned 403. The
+[Animal Photos author's side photograph](https://www.animal.photos/bird1/myna-jav.htm)
+was viewed solely for the feathered belly/leg junction. It remains with its
+photographer; no pixels, tracing or derived texture are shipped. These
+references do not turn the generic studies into measured specimen models.
+
+## Acceptance return polish references (2026-11-03)
+
+- Rechecked [NParks / AVS Javan myna identification](https://avs.nparks.gov.sg/wildlife/encountering-wildlife/house-crows-pigeons-javan-mynas/javan-mynas/): yellow bill, legs and feet; white wing/tail bars. The topic uses warm yellow `token:lamp` for the bill, legs and small iris; the wing patch retains the warm-white `token:bone`. Re-viewed the previously downloaded Animal Photos side reference for the leg/plumage junction. No reference pixels are distributed.
+- Re-viewed Hatcher's public-domain Diplodocus plate for girdle openings and limb contacts. Bone geometry, counts and the generic-study caveat are retained.
+- Rechecked [LKCNHM's Tschopp interview](https://lkcnhm.nus.edu.sg/interview-with-an-evolutionary-paleobiologist-dr-emanuel-tschopp/) for the distinction between the named exhibits and these generic studies. The three bevelled plinths, 30° view, mineral-brown finish and contact shading are original display design, not a copy of the museum mounts or a diagnostic colour for original bone.

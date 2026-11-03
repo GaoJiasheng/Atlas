@@ -199,5 +199,14 @@ export function diplodocid(cx: number, z: number): Primitive[] {
       if(isHind&&j<3) out.push(boneSweep(toe,[[0,0,0],[-.035,-.007,0],[-.05,-.02,0]],[.011,.009,.001],.65,6));
     }
   }
+  // Small exhibit bones: radial density follows their projected diameter.
+  // Broad articular ends keep 24 samples; hairline distal centra use 12.
+  for (const p of out) {
+    if(p.kind==='lathe') {
+      const r=Math.max(...p.profile.map(v=>v[0]));
+      p.segments=r<.012?12:r<.035?16:24;
+    }
+    if(p.kind==='sweep')p.radial=Math.max(...[p.radius].flat())<.025?16:24;
+  }
   return out;
 }

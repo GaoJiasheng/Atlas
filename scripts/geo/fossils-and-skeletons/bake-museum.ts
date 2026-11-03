@@ -3,13 +3,20 @@
  * The source geometry is original Atlas procedural work, released as CC0.
  */
 import fs from 'node:fs';
+import { museumBoneGeometry } from './sculpt-museum';
 import { Document, NodeIO, type Extension } from '@gltf-transform/core';
 import { dedup, meshopt, simplify, weld } from '@gltf-transform/functions';
 import { MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
-import { Matrix4 } from 'three';
+import { Matrix4, type BufferGeometry } from 'three';
 import { primitiveSchema, type Part } from '../../../src/engines/space-scene/schema';
 import { mergeBaked, partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 
+function normaliseUV(geometry: BufferGeometry) {
+  // No photographic maps: keep the procedural surface's range quantisable.
+  const uv=geometry.getAttribute('uv');let u=1,v=1;
+  for(let i=0;i<uv.count;i++){u=Math.max(u,Math.abs(uv.getX(i)));v=Math.max(v,Math.abs(uv.getY(i)));}
+  for(let i=0;i<uv.count;i++)uv.setXY(i,(uv.getX(i)/u+1)/2,(uv.getY(i)/v+1)/2);
+}
 export async function bakeMuseum(parts: Part[]): Promise<string> {
   const museum = parts.filter(p => p.id.endsWith('-study'));
   const first = museum[0]!;
@@ -18,13 +25,8 @@ export async function bakeMuseum(parts: Part[]): Promise<string> {
   const buffer = doc.createBuffer();
   const scene = doc.createScene('fossils-and-skeletons');
   const input = { ...first, primitive: primitiveSchema.parse(first.primitive), extra: first.extra!.map(p => primitiveSchema.parse(p)) };
-  const pieces = partPieces(input);
-  const geometry = mergeBaked(pieces.map(p => ({ geometry: p.geometry, matrices: p.matrices ?? [new Matrix4()] })));
-  // Normalise the sweep UV range before quantisation (no photographic maps).
-  const uv = geometry.getAttribute('uv');
-  let umax=1, vmax=1;
-  for(let i=0;i<uv.count;i++){umax=Math.max(umax,Math.abs(uv.getX(i)));vmax=Math.max(vmax,Math.abs(uv.getY(i)));}
-  for(let i=0;i<uv.count;i++) uv.setXY(i,(uv.getX(i)/umax+1)/2,(uv.getY(i)/vmax+1)/2);
+  const geometry = museumBoneGeometry(input);
+  normaliseUV(geometry);
   const mesh = doc.createMesh('diplodocid-bones');
   const primitive = doc.createPrimitive();
   for (const [name, type] of [['position','POSITION'],['normal','NORMAL'],['uv','TEXCOORD_0']] as const) {
@@ -35,23 +37,44 @@ export async function bakeMuseum(parts: Part[]): Promise<string> {
   for (const part of museum) {
     scene.addChild(doc.createNode(part.id).setMesh(mesh).setTranslation(part.primitive!.at).setExtras({closed: true}));
     part.mesh = part.id;
-    part.material = {color:'tissue',tint:'token:bone'};
+    // Fine roughness only: the sand normal map stretched on cortical UVs
+    // produced wood-like stripes. A mineral-brown satin finish has no normal map.
+    part.material = {color:'plastic',tint:'token:f-drag'};
     delete part.primitive;
     delete part.extra;
   }
   geometry.dispose();
+  // The twelve evidence modules remain independently selectable and movable.
+  // Bake their dense sweep tessellation once and simplify redundant triangles
+  // within 0.10% of the module extent. No runtime geometry work on filtering.
+  for (const part of parts.filter(p=>p.group==='skeleton')) {
+    const pieces = partPieces(part);
+    const g = mergeBaked(pieces.map(p=>({geometry:p.geometry,matrices:p.matrices??[new Matrix4()]})));
+    normaliseUV(g);
+    const m = doc.createMesh(part.id), prim = doc.createPrimitive();
+    for (const [name,type] of [['position','POSITION'],['normal','NORMAL'],['uv','TEXCOORD_0']] as const) {
+      const a=g.getAttribute(name);
+      prim.setAttribute(type,doc.createAccessor().setType(name==='uv'?'VEC2':'VEC3').setArray(new Float32Array(a.array)).setBuffer(buffer));
+    }
+    m.addPrimitive(prim);
+    scene.addChild(doc.createNode(part.id).setMesh(m).setTranslation(part.primitive!.at).setExtras({closed:true}));
+    part.mesh=part.id;
+    part.material={color:part.primitive!.color,...(part.primitive!.tint?{tint:part.primitive!.tint}:{})};
+    delete part.primitive;delete part.extra;
+    g.dispose();pieces.forEach(p=>p.geometry.dispose());
+  }
   await MeshoptEncoder.ready;
   await MeshoptSimplifier.ready;
-  // Build every curved bone at 48 radial divisions, then remove redundant
+  // Build curved bones at their size-appropriate radial divisions, then remove redundant
   // coplanar/interior triangles within a 0.10% assembly error bound.
-  await doc.transform(weld(), dedup(), simplify({simplifier:MeshoptSimplifier,ratio:.25,error:.001}), meshopt({encoder:MeshoptEncoder,level:'high',quantizeNormal:8}));
+  await doc.transform(weld(), dedup(), simplify({simplifier:MeshoptSimplifier,ratio:.18,error:.001}), meshopt({encoder:MeshoptEncoder,level:'high',quantizeNormal:8}));
   console.log(`Shared diplodocid mesh: ${primitive.getIndices()!.getCount()/3} triangles.`);
   const extensions = doc.getRoot().listExtensionsUsed().map(e => e.constructor as unknown as typeof Extension);
   const bytes = await new NodeIO().registerExtensions(extensions).registerDependencies({'meshopt.encoder':MeshoptEncoder}).writeBinary(doc);
-  if (bytes.length > 1_500_000) throw new Error(`Museum asset exceeds 1.5 MB: ${bytes.length}`);
+  if (bytes.length > 2_500_000) throw new Error(`Museum asset exceeds 2.5 MB: ${bytes.length}`);
   // The existing model schema requires the flat /models/<name>.glb route.
   const url = '/models/fossils-and-skeletons.glb';
   fs.writeFileSync(`public${url}`,bytes);
-  console.log(`Museum: ${bytes.length} bytes; three nodes sharing one original procedural mesh.`);
+  console.log(`Museum: ${bytes.length} bytes; three shared museum nodes plus twelve independently filtered evidence meshes.`);
   return url;
 }

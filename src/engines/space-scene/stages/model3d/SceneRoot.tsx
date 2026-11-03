@@ -31,6 +31,7 @@ import { PartNode, type PartHandle, type PartShape, type ShiftMove, type SimMove
 import { CameraRig } from './CameraRig';
 import { Lighting } from './Lighting';
 import { GroundShadow } from './GroundShadow';
+import { gateSimulationVisibility } from './visibilityFlags';
 import { LabelProbe, ResolutionGovernor, ShadowUpdater, SitesProbe, StatsProbe, type GroupMembers } from './probes';
 import { WIRE_FILL_OPACITY } from './bodyStyle';
 import { StageMark } from './StageMark';
@@ -404,22 +405,20 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
     bridge.overlaysExpected = overlaysExpected;
     return () => { bridge.overlaysExpected = false; };
   }, [bridge, overlaysExpected]);
-  const displays = useMemo(() => {
+  const { displays, instantHidden } = useMemo(() => {
     const out = resolveAllPartDisplays(data.parts, { view: s.view, part: s.part, layers: s.layers, hidden: s.hidden, ghosted, solo: s.solo, highlight });
-    // A part a try-it binding hides fades out like a hidden layer (and is not picked).
-    for (const id of sim?.hidden ?? []) {
-      const d = out.get(id);
-      if (d) out.set(id, { ...d, visible: false, selectable: false, selected: false });
-    }
-    if (!mannequin) return out;
+    // Simulation visibility is a binary gate over the unchanged layer/look.
+    // Keep the underlying opaque material warm; no fade or shader variant on a filter.
+    const instantHidden = gateSimulationVisibility(out, sim?.hidden ?? new Set(), data.views.simVisibility === 'instant');
+    if (!mannequin) return { displays: out, instantHidden };
     // With the mannequin: the skin is drawn by it, the bones (parts that are neither muscle nor context) step aside unless the beat keeps them.
     for (const p of data.parts) {
       const d = out.get(p.id);
       if (!d) continue;
       if (p.id === skinPart?.id || isSkinHand(p.mesh) || (!bonesOn && p.muscle === undefined && !p.context)) out.set(p.id, { ...d, visible: false, hidden: false, selectable: false });
     }
-    return out;
-  }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart, sim]);
+    return { displays: out, instantHidden };
+  }, [data.parts, s.view, s.part, s.layers, s.hidden, ghosted, s.solo, highlight, mannequin, bonesOn, skinPart, sim, data.views.simVisibility]);
   const sitesOn = useMemo(() => activeSites(data.sites, s.part, s.sites), [data.sites, s.part, s.sites]);
   const equipment = useMemo(() => {
     const e = exerciseSheet && playable.has(exerciseSheet.id) ? exerciseSheet.motion?.equipment : undefined;
@@ -677,6 +676,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
             shape={shape}
             styles={partStyles}
             display={display}
+            instantHidden={instantHidden.has(part.id)}
             animations={anims.get(part.id) ?? []}
             {...(() => {
               const pp = partPose(part.id);
