@@ -11,13 +11,13 @@
   "state": {
     "camera": {
       "position": [
-        0,
-        0.3,
-        0.85
+        -0.01,
+        0.25,
+        0.72
       ],
       "target": [
-        0,
-        0.12,
+        -0.01,
+        0.115,
         0
       ],
       "fov": 30
@@ -29,7 +29,9 @@
     "pose": null,
     "part": "leaf-context",
     "labels": [
-      "leaf-context"
+      "leaf-context",
+      "plant-cell-wall",
+      "animal-membrane"
     ],
     "hide": [
       "scope-base",
@@ -50,16 +52,7 @@
       "onion-patch",
       "tissue-patch",
       "intestine-context",
-      "body-context",
-      "animal-membrane",
-      "animal-cytoplasm",
-      "animal-nucleus",
-      "plant-cell-wall",
-      "plant-membrane",
-      "plant-cytoplasm",
-      "plant-nucleus",
-      "plant-chloroplasts",
-      "plant-vacuole"
+      "body-context"
     ],
     "sim": {
       "set": {
@@ -68,7 +61,7 @@
         "slide-x": 0,
         "slide-y": 0,
         "focus-z": 0,
-        "illumination": 0.5,
+        "illumination": 1,
         "field-on": false
       }
     },
@@ -97,7 +90,19 @@
     },
     "beats": [
       {
-        "camera": "pair-hero",
+        "camera": {
+          "position": [
+            -0.01,
+            0.25,
+            0.72
+          ],
+          "target": [
+            -0.01,
+            0.115,
+            0
+          ],
+          "fov": 30
+        },
         "view": "assembled",
         "cutaway": "none",
         "explode": 0,
@@ -105,7 +110,9 @@
         "pose": null,
         "part": "leaf-context",
         "labels": [
-          "leaf-context"
+          "leaf-context",
+          "plant-cell-wall",
+          "animal-membrane"
         ],
         "hide": [
           "scope-base",
@@ -126,16 +133,7 @@
           "onion-patch",
           "tissue-patch",
           "intestine-context",
-          "body-context",
-          "animal-membrane",
-          "animal-cytoplasm",
-          "animal-nucleus",
-          "plant-cell-wall",
-          "plant-membrane",
-          "plant-cytoplasm",
-          "plant-nucleus",
-          "plant-chloroplasts",
-          "plant-vacuole"
+          "body-context"
         ],
         "sim": {
           "set": {
@@ -144,13 +142,13 @@
             "slide-x": 0,
             "slide-y": 0,
             "focus-z": 0,
-            "illumination": 0.5,
+            "illumination": 1,
             "field-on": false
           }
         },
         "caption": {
-          "en": "Start with a leaf, an organ made of tissues and cells. The following views change scale to separately enlarged cell models.",
-          "zh": "先看叶的整体：器官由组织和细胞构成。后面的画面改变尺度，切到另外放大的细胞模型。"
+          "en": "A leaf is an organ made of tissues and cells. Beside it are separately enlarged plant and animal cell models; their scales are different.",
+          "zh": "叶是由组织和细胞构成的器官。旁边是分别放大的植物与动物细胞模型；它们采用不同尺度。"
         }
       },
       {
@@ -193,7 +191,7 @@
             "slide-x": 0,
             "slide-y": 0,
             "focus-z": 0,
-            "illumination": 0.5,
+            "illumination": 1,
             "field-on": false
           }
         },
@@ -244,7 +242,7 @@
             "slide-x": 0,
             "slide-y": 0,
             "focus-z": 0,
-            "illumination": 0.5,
+            "illumination": 1,
             "field-on": false
           }
         },
@@ -293,7 +291,7 @@
             "slide-x": 0,
             "slide-y": 0,
             "focus-z": 0,
-            "illumination": 0.5,
+            "illumination": 1,
             "field-on": false
           }
         },
@@ -344,7 +342,7 @@
             "slide-x": 0,
             "slide-y": 0,
             "focus-z": 0,
-            "illumination": 0.5,
+            "illumination": 1,
             "field-on": false
           }
         },

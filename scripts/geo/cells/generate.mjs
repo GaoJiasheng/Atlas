@@ -6,12 +6,14 @@
  */
 import { writeFileSync } from 'node:fs';
 import { makeMicroscopeSim } from '../../../src/engines/space-scene/lib/sim/microscope-fixture.ts';
+import { polishMicroscope } from './polish-microscope.mjs';
+import { polishField, polishOnionPatch } from './polish-field.mjs';
+import { buildOrganelles, polishCellParts } from './build-organelles.mjs';
 import { fileURLToPath } from 'node:url';
 const root = new URL('../../../', import.meta.url);
 const output = new URL('src/content/topics/cells/data/parts.json', root);
 const bi = (en, zh) => ({ en, zh });
 const round = n => Math.round(n * 1e9) / 1e9;
-const ellipse = (rx, ry, x=0, y=0, n=48) => Array.from({length:n}, (_,i) => [round(x+rx*Math.cos(i*2*Math.PI/n)),round(y+ry*Math.sin(i*2*Math.PI/n))]);
 const rect = (w,h,r=.003) => {
   const pts=[];
   for (let c=0;c<4;c++) {
@@ -29,25 +31,14 @@ const parts=[];
 const part = (id,en,zh,group,summary,detail,primitive,more={}) => {
  const p={id,name:bi(en,zh),group,summary:bi(...summary),detail:bi(...detail),primitive,castShadow:false,...more}; parts.push(p); return p;
 };
-// A thin ellipsoid shell is laminated in Z: each layer is an annulus,
-// never a second solid cell. The cytoplasm has an actual nucleus opening.
-const animalLayers = (membrane) => Array.from({length:15}, (_,i) => {
- const depth=.016/15, z=(i-7)*depth, f=Math.sqrt(1-(z/.008)**2);
- const outer=ellipse(.060*f,.045*f);
- let holes=[];
- if(membrane) holes=[ellipse(.0587*f,.0437*f)];
- else if(Math.abs(z-.001)<.0065+depth/2) {const near=Math.max(0,Math.abs(z-.001)-depth/2), nf=Math.sqrt(Math.max(0,1-(near/.0065)**2)); holes=[ellipse(.012*nf,.010*nf,.015,0)];}
- return extrude(membrane?outer:ellipse(.0587*f,.0437*f),depth,[.1,.1,z],membrane?'membrane':'membrane',holes);
-});
-const am=animalLayers(true), ac=animalLayers(false);
 part('animal-membrane','Cell membrane','细胞膜','animal-cell',
  ['Regulates substances entering and leaving the cell.','调节物质进出细胞。'],
  ['The cell membrane separates the inside of this animal cell from its surroundings. It regulates the passage of substances; it is not a rigid cell wall [S4].\n\nThe model uses a hollow, thickened boundary around a flattened example cell. Real membranes are much thinner than this visible model boundary, and real animal cells have varied shapes [S20].',
- '细胞膜分隔这个动物细胞的内外，调节物质进出；它不是坚硬的细胞壁 [S4]。\n\n模型用加厚的中空薄壳围住一个扁平的示例细胞。真实细胞膜远比模型边界薄，动物细胞的形状也并不相同 [S20]。'],am[7],{extra:am.filter((_,i)=>i!==7),shell:true,explode:{dir:[0,0,1],dist:.07,stage:0},connects:['animal-cytoplasm']});
+ '细胞膜分隔这个动物细胞的内外，调节物质进出；它不是坚硬的细胞壁 [S4]。\n\n模型用加厚的中空薄壳围住一个扁平的示例细胞。真实细胞膜远比模型边界薄，动物细胞的形状也并不相同 [S20]。'],undefined,{shell:true,explode:{dir:[0,0,1],dist:.07,stage:0},connects:['animal-cytoplasm']});
 part('animal-cytoplasm','Cytoplasm','细胞质','animal-cell',
  ['Supports many chemical reactions in the cell.','是细胞内许多化学反应发生的区域。'],
  ['Cytoplasm occupies the region inside the membrane and outside the nucleus. Many chemical reactions occur here; the model leaves a space for the nucleus rather than filling it with another solid layer [S4].\n\nThe translucent material exposes the model interior. It is an explanatory colour and does not reproduce the appearance of an unstained cell through a classroom microscope [S20].',
- '细胞质位于细胞膜以内、细胞核以外，许多化学反应在这里发生。模型为细胞核留出空间，没有用第二层实心材料把核填满 [S4]。\n\n半透明的材料便于看见模型内部；它是说明用的视觉编码，不代表未经染色的细胞在课堂显微镜下的样子 [S20]。'],ac[7],{extra:ac.filter((_,i)=>i!==7),explode:{dir:[0,0,-1],dist:.02,stage:1},connects:['animal-membrane','animal-nucleus']});
+ '细胞质位于细胞膜以内、细胞核以外，许多化学反应在这里发生。模型为细胞核留出空间，没有用第二层实心材料把核填满 [S4]。\n\n半透明的材料便于看见模型内部；它是说明用的视觉编码，不代表未经染色的细胞在课堂显微镜下的样子 [S20]。'],undefined,{explode:{dir:[0,0,-1],dist:.02,stage:1},connects:['animal-membrane','animal-nucleus']});
 part('animal-nucleus','Nucleus','细胞核','animal-cell',
  ['Holds genetic instructions and helps control the cell.','保存遗传指令，并参与控制细胞活动。'],
  ['The nucleus contains genetic material and helps control the activities of this example cell. It is a separate structure within the cytoplasm [S4].\n\nThis flattened epithelial model has one nucleus. The example does not mean that all animal cells have the same shape or that a nucleus is always central; small vesicles and other structures are omitted [S20].',
@@ -55,23 +46,15 @@ part('animal-nucleus','Nucleus','细胞核','animal-cell',
 part('plant-cell-wall','Cell wall','细胞壁','plant-cell',
  ['Supports and protects the plant cell.','支持并保护植物细胞。'],
  ['The cell wall lies outside the cell membrane. It supports and protects the plant cell, while the membrane still regulates passage into and out of the cell [S4].\n\nThe rounded rectangular shell is a design study of one photosynthetic plant cell. Wall thickness is exaggerated so the wall and membrane remain distinguishable; neither is a solid box filling the cell [S20].',
- '细胞壁在细胞膜外侧，支持和保护植物细胞。细胞膜仍然存在，继续调节物质进出 [S4]。\n\n圆角长方壳代表一个能进行光合作用的植物细胞。模型把壁厚画大，让壁和膜可以分别辨认；两者都不是填满内部的实心盒子 [S20]。'],ring(.16,.08,.158,.078,.05,[-.1,.12,0],'tissue'),{shell:true,explode:{dir:[0,0,1],dist:.18,stage:0},connects:['plant-membrane']});
+ '细胞壁在细胞膜外侧，支持和保护植物细胞。细胞膜仍然存在，继续调节物质进出 [S4]。\n\n圆角长方壳代表一个能进行光合作用的植物细胞。模型把壁厚画大，让壁和膜可以分别辨认；两者都不是填满内部的实心盒子 [S20]。'],undefined,{shell:true,explode:{dir:[0,0,1],dist:.18,stage:0},connects:['plant-membrane']});
 part('plant-membrane','Cell membrane','细胞膜','plant-cell',
  ['Regulates substances entering and leaving the cell.','调节物质进出植物细胞。'],
  ['The plant cell membrane forms a boundary just inside the cell wall and regulates substances passing into and out of the cell. The wall does not replace it [S4].\n\nA narrow visual gap separates the two hollow shells in this model. That separation and the membrane thickness are enlarged for legibility, rather than measured from a microscope image [S20].',
- '植物细胞膜紧靠细胞壁内侧，形成细胞内外的边界并调节物质进出；细胞壁不会代替细胞膜 [S4]。\n\n模型在两个中空薄壳之间留了可见间隙。间隙与膜厚都是为了辨认而放大，不是从显微图像量得的尺寸 [S20]。'],ring(.1576,.0776,.1564,.0764,.046,[-.1,.12,0]),{shell:true,explode:{dir:[0,0,1],dist:.125,stage:1},connects:['plant-cell-wall','plant-cytoplasm']});
-const cyt=[
- extrude([[-.009,-.03],[.009,-.03],[.009,.03],[-.009,.03]],.044,[-.169,.12,0],'membrane',[ellipse(.0073,.0063)]),
- box([.018,.06,.044],[-.031,.12,0]),
- box([.156,.008,.044],[-.1,.154,0]),
- box([.156,.008,.044],[-.1,.086,0]),
- box([.12,.06,.002],[-.1,.12,.021]),
- box([.12,.06,.002],[-.1,.12,-.021]),
-];
+ '植物细胞膜紧靠细胞壁内侧，形成细胞内外的边界并调节物质进出；细胞壁不会代替细胞膜 [S4]。\n\n模型在两个中空薄壳之间留了可见间隙。间隙与膜厚都是为了辨认而放大，不是从显微图像量得的尺寸 [S20]。'],undefined,{shell:true,explode:{dir:[0,0,1],dist:.125,stage:1},connects:['plant-cell-wall','plant-cytoplasm']});
 part('plant-cytoplasm','Cytoplasm','细胞质','plant-cell',
  ['Supports reactions in the region around the vacuole.','在大液泡外围，是许多化学反应发生的区域。'],
  ['Much of the cytoplasm in a mature plant cell can lie around a large central vacuole. Many chemical reactions take place in the cytoplasm [S4].\n\nSix thin model bodies surround the vacuole; the side body also has an opening for the nucleus. The empty centre is not a second solid mass of cytoplasm, and the translucent colour is an explanatory choice [S20].',
- '成熟植物细胞的大液泡外围可分布着一层细胞质；许多化学反应在细胞质中进行 [S4]。\n\n模型用六个薄体围住液泡，侧面的薄体为核留孔，没有把中央再填成实心细胞质。半透明颜色只是说明用的视觉编码 [S20]。'],cyt[0],{extra:cyt.slice(1),explode:{dir:[0,0,-1],dist:.035,stage:1},connects:['plant-membrane','plant-nucleus','plant-chloroplasts','plant-vacuole']});
+ '成熟植物细胞的大液泡外围可分布着一层细胞质；许多化学反应在细胞质中进行 [S4]。\n\n模型用六个薄体围住液泡，侧面的薄体为核留孔，没有把中央再填成实心细胞质。半透明颜色只是说明用的视觉编码 [S20]。'],undefined,{explode:{dir:[0,0,-1],dist:.035,stage:1},connects:['plant-membrane','plant-nucleus','plant-chloroplasts','plant-vacuole']});
 part('plant-nucleus','Nucleus','细胞核','plant-cell',
  ['Holds genetic instructions and helps control the cell.','保存遗传指令，并参与控制细胞活动。'],
  ['The nucleus contains genetic material and helps control cell activities. A large vacuole may leave it near the side of a mature plant cell, so position alone is not an identification rule [S4, S10].\n\nThis model places one nucleus outside the central vacuole with a visible gap. The location, size and separation are design choices for reading the model [S20].',
@@ -85,7 +68,7 @@ part('plant-chloroplasts','Chloroplasts','叶绿体','plant-cell',
 part('plant-vacuole','Large vacuole','大液泡','plant-cell',
  ['Contains cell sap and helps support the plant cell.','容纳细胞液，并帮助支持植物细胞。'],
  ['A large central vacuole contains water and dissolved substances, often called cell sap. Its contents help maintain pressure against the cell wall and support a mature plant cell [S4].\n\nThe clear central body represents liquid, not air or an empty hole. Its design envelope is 0.12 × 0.06 × 0.04 m in the enlarged model. Animal cells can have smaller vesicles, which are omitted here [S20, S4].',
- '大液泡中含有水和溶解物质，常称为细胞液。液泡内的液体有助于维持向细胞壁施加的压力，支持成熟植物细胞 [S4]。\n\n中央透明体表示液体，不是空气或空洞。在放大的模型中，其设计包络为 0.12 × 0.06 × 0.04 米。动物细胞也可有较小囊泡，本模型没有画出 [S20, S4]。'],box([.12,.06,.04],[-.1,.12,0],'glass',.004),{explode:{dir:[0,0,1],dist:.075,stage:2},connects:['plant-cytoplasm']});
+ '大液泡中含有水和溶解物质，常称为细胞液。液泡内的液体有助于维持向细胞壁施加的压力，支持成熟植物细胞 [S4]。\n\n中央透明体表示液体，不是空气或空洞。在放大的模型中，其设计包络为 0.12 × 0.06 × 0.04 米。动物细胞也可有较小囊泡，本模型没有画出 [S20, S4]。'],undefined,{explode:{dir:[0,0,1],dist:.075,stage:2},connects:['plant-cytoplasm']});
 // Instrument: base sits on y=0; the vertical specimen optical axis is x=.18,z=0.
 part('scope-base','Base','底座','microscope-bench',['Supports the microscope on the bench.','在台面上稳固支撑显微镜。'],['The broad base supports the microscope and houses the lower illumination assembly [S7].\n\nThis unbranded design is 0.18 m wide, 0.03 m tall and 0.14 m deep. In class, carry an instrument according to the teacher’s guidance; the general laboratory method supports the base while holding the arm [S20, S6].','宽底座支撑显微镜，下方照明机构也位于这里 [S7]。\n\n这个无品牌模型的底座设计为宽 0.18 米、高 0.03 米、深 0.14 米。课堂搬运应听从教师指导；一般实验室方法是握住镜臂，同时托住底座 [S20, S6]。'],box([.18,.03,.14],[.2,.015,0],'enamel',.007),{castShadow:true,connects:['scope-arm','scope-illuminator']});
 const armShape=[[.022,-.15],[.04,-.15],[.04,.044],[.034,.073],[.017,.098],[-.013,.115],[-.064,.115],[-.064,.093],[-.017,.093],[.002,.079],[.013,.054],[.016,.02],[.016,-.11]];
@@ -119,7 +102,7 @@ part('intestine-context','Small intestine','小肠','tissue-context',['Connects 
 const bodyShape=[[-.012,.105],[-.026,.091],[-.026,.065],[-.016,.05],[-.043,.038],[-.065,-.012],[-.055,-.018],[-.029,.016],[-.028,-.025],[-.023,-.047],[-.026,-.12],[-.012,-.12],[0,-.052],[.012,-.12],[.026,-.12],[.023,-.047],[.028,-.025],[.029,.016],[.055,-.018],[.065,-.012],[.043,.038],[.016,.05],[.026,.065],[.026,.091],[.012,.105]];
 part('body-context','Body outline','身体轮廓','tissue-context',['Places organs within the context of body systems.','把器官连回身体系统。'],['Organs work together in systems. The digestive, respiratory and circulatory systems help obtain and transport substances needed by the body’s cells [S1].\n\nThis plain silhouette is a context symbol at a separate scale. Open the heart-and-lungs and digestive-system topics for their organ structures and processes; the outline itself does not depict those processes [S20].','器官在系统中共同作用。消化、呼吸和循环系统帮助身体获取并运送细胞所需的物质 [S1]。\n\n这个轮廓只是采用独立比例的背景示意。心肺主题和消化系统主题另有器官结构与过程；身体轮廓本身不表示这些过程 [S20]。'],extrude(bodyShape,.003,[.2,.14,-.05],'membrane'));
 const cameras=[
- ['pair-hero','Cell pair','细胞对照',[0,.3,.85],[0,.12,0]],
+ ['pair-hero','Cell pair','细胞对照',[-.01,.25,.66],[-.01,.115,0]],
  ['animal-close','Animal front','动物细胞正面',[.1,.17,.36],[.1,.1,0]],
  ['animal-oblique','Animal depth','动物细胞厚度',[.32,.22,.27],[.1,.1,0]],
  ['plant-close','Plant cell','植物细胞',[-.1,.22,.4],[-.1,.12,0]],
@@ -132,26 +115,37 @@ for(const [name,angle] of [['scope-scan',0],['scope-low',-120],['scope-high',120
  poses[name]={duration:.8};
  for(const id of ['scope-turret','scope-objective-four','scope-objective-ten','scope-objective-forty'])poses[name][id]={pivot,rotation:[0,angle,0]};
 }
-export function buildCellsParts(){
+export async function buildCellsParts(){
+ polishCellParts(parts);
+ polishOnionPatch(parts);
+ polishMicroscope(parts);
+ // Separate the illustrative scales on the plate. The onion formerly sat
+ // inside the plant model; the tissue overlapped its right-hand wall.
+ for(const [id,offset] of [['onion-patch',[0,-.1,.03]],['tissue-patch',[.02,.10,.03]],['intestine-context',[.07,0,.02]],['body-context',[.16,0,0]]]){
+  const p=parts.find(p=>p.id===id);
+  for(const q of [p.primitive,...(p.extra??[])])q.at=q.at.map((v,k)=>round(v+offset[k]));
+ }
+ const organic=await buildOrganelles(parts);
  const sim=makeMicroscopeSim('S20');
+ polishField(sim);
  sim.bind=[
   {control:'objective',part:['scope-turret','scope-objective-four','scope-objective-ten','scope-objective-forty'],pose:{4:'scope-scan',10:'scope-low',40:'scope-high'}},
   {control:'slide-x',part:['slide-glass','coverslip-glass'],offset:{axis:[1,0,0],per:1e-6,origin:0}},
   {control:'slide-y',part:['slide-glass','coverslip-glass'],offset:{axis:[0,0,-1],per:1e-6,origin:0}},
   {control:'focus-z',part:'scope-fine-focus',rotate:{axis:[1,0,0],per:9,origin:0}},
  ];
- return {sim,units:{modelUnit:'m',scale:1},parts,groups:[
+ return {model:organic.model,sim,units:{modelUnit:'m',scale:1},parts,groups:[
   {id:'animal-cell',name:bi('Animal cell','动物细胞'),color:'token:neutral',scale:{unit:'um',magnification:2000}},
   {id:'plant-cell',name:bi('Plant cell','植物细胞'),color:'token:seedling',scale:{unit:'um',magnification:2000}},
   {id:'microscope-bench',name:bi('Microscope','显微镜'),color:'token:ink-2'},
   {id:'tissue-context',name:bi('Tissue','组织背景'),color:'token:neutral',card:false},
  ],flows:[],animations:[],presets:cameras.map(row=>({id:row[0],label:bi(row[1],row[2]),camera:camera(row)})),poses,
- views:{assembled:{camera:camera(cameras[0])},exploded:{camera:camera(cameras[0])},cover:camera(cameras[0]),reference:{fit:'layers'},shadows:'contact',section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:.003},explodeLabel:bi('Separate model','分离示意'),hudFrame:{parts:['animal-membrane','plant-cell-wall','scope-base','scope-arm','leaf-context','tissue-patch','intestine-context','body-context']}},
+ views:{assembled:{camera:camera(cameras[0])},exploded:{camera:camera(cameras[0])},cover:camera(cameras[0]),reference:{fit:'layers'},shadows:'contact',section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:.003},explodeLabel:bi('Separate model','分离示意'),hudFrame:{parts:['animal-membrane','plant-cell-wall','scope-base','scope-arm','scope-eyepiece','scope-stage','onion-patch','tissue-patch','intestine-context','body-context']}},
  telemetry:[{key:bi('Total power','总倍率'),unit:'×',decimals:0,follow:'total-power'},{key:bi('Field diameter','视野直径'),unit:'µm',decimals:0,follow:'field-diameter-um'}],
  spec:[{key:bi('Model','模型'),value:bi('Separate enlarged cells','细胞独立放大'),tag:'design'},{key:bi('Eyepiece','目镜'),value:'10× DESIGN',tag:'design'},{key:bi('Objectives','物镜'),value:'4 / 10 / 40× DESIGN',tag:'design'},{key:bi('Field number','视场数'),value:'18 mm DESIGN',tag:'design'}]};
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {
- const file=buildCellsParts();
+ const file=await buildCellsParts();
  writeFileSync(output,JSON.stringify(file,null,2)+'\n');
  process.stdout.write(`Generated ${parts.length} selectable cells parts.\n`);
 }
