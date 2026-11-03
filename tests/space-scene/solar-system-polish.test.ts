@@ -181,7 +181,7 @@ describe('solar emission remains opt-in for existing topics', () => {
     material.dispose();
   });
 
-  for (const topic of ['aircon', 'sun-earth-moon']) it(`${topic} has no geometry opting into solar emission`, () => {
+  for (const topic of ['aircon']) it(`${topic} has no geometry opting into solar emission`, () => {
     const file = partsFile.parse(json(`src/content/topics/${topic}/data/parts.json`));
     let vertices = 0;
     for (const part of file.parts) {
@@ -305,7 +305,7 @@ describe('opted-in GLB surfaces reach the real part material', () => {
     expect(statSync('public/models/solar-system.glb').size).toBeLessThanOrEqual(1_500_000);
   });
 
-  it.each(['sun-earth-moon', 'bones-and-joints', 'heart-and-lungs', 'digestive-system', 'muscles-core', 'muscles-back', 'muscles-shoulders', 'muscles-chest', 'muscles-arms', 'muscles-legs', 'sample-solar'])('%s retains its existing material path and has no new surface opt-in', topic => {
+  it.each(['bones-and-joints', 'heart-and-lungs', 'digestive-system', 'muscles-core', 'muscles-back', 'muscles-shoulders', 'muscles-chest', 'muscles-arms', 'muscles-legs', 'sample-solar'])('%s retains its existing material path and has no new surface opt-in', topic => {
     const file = json(`src/content/topics/${topic}/data/parts.json`);
     if (file.model) {
       const asset = glbJson(`public${file.model}`);

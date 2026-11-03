@@ -266,7 +266,7 @@ for (const locale of ['en', 'zh']) for (const theme of ['paper', 'cinema']) {
   test(`published content ${locale}/${theme}: safe observing, source links and figures`, async ({ page }) => {
     const errors: string[] = [], external: string[] = [];
     page.on('pageerror', e => errors.push(e.message));
-    page.on('request', r => { if (!new URL(r.url()).hostname.match(/^(localhost|127\.0\.0\.1)$/)) external.push(r.url()); });
+    page.on('request', r => { if (!/^(blob|data):/.test(r.url()) && !new URL(r.url()).hostname.match(/^(localhost|127\.0\.0\.1)$/)) external.push(r.url()); });
     await open(page, `?ch=a-ring-over-singapore&theme=${theme}`, locale);
     await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? '26 December 2019' : '2019 年 12 月 26 日');
     await expect(page.locator('.atlas-reader')).toContainText(locale === 'en' ? 'not a reconstruction of Singapore' : '没有重现当天的新加坡天空');
