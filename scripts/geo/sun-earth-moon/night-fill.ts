@@ -21,9 +21,9 @@ export function mappedOrbitLight(shader:string) {
   const expression=/#ifdef USE_MAP\nif \(uOrbitLight < 1.5\) outgoingLight = ([^;]+);/.exec(shader)?.[1];
   if(!expression)throw new Error('Mapped orbit fill expression missing');
   const scalar=expression
-    .replaceAll('diffuseColor.rgb','albedo').replaceAll('uHatchColor.r','ink')
+    .replaceAll('diffuseColor.rgb','albedo').replaceAll('uSelRim','rim')
     .replaceAll('abs(dot(normalize(vNormal),normalize(vViewPosition)))','mu');
   if(/[^\w\s.,()+*\-/]/.test(scalar))throw new Error('Unsupported mapped orbit expression');
-  const evaluate=new Function('albedo','day','mu','ink','uOrbitFill','mix','step','vec3',`return ${scalar};`) as (...args:unknown[])=>number;
-  return (albedo:RGB,day:number,mu:number,cinema:boolean,fill=.05):RGB=>albedo.map(v=>evaluate(v,day,mu,cinema?1:0,fill,(a:number,b:number,t:number)=>a*(1-t)+b*t,(a:number,b:number)=>b<a?0:1,(v:number)=>v)) as RGB;
+  const evaluate=new Function('albedo','day','mu','rim','uOrbitFill','mix','step','vec3',`return ${scalar};`) as (...args:unknown[])=>number;
+  return (albedo:RGB,day:number,mu:number,cinema:boolean,fill=.05):RGB=>albedo.map(v=>evaluate(v,day,mu,cinema?.35:.75,fill,(a:number,b:number,t:number)=>a*(1-t)+b*t,(a:number,b:number)=>b<a?0:1,(v:number)=>v)) as RGB;
 }

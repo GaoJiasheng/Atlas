@@ -185,3 +185,11 @@ The preview reads/evaluates the emitted shader night expression, so it cannot si
 The supplied `node_modules` initially symlinked into another checkout: Vite first could not write its config cache, and later could not transform Drei's deep ESM import outside this worktree. A local snapshot of the identical dependency tree resolved both environment issues; the environment repair required no package/lockfile, dependency version, test assertion or budget changes. The final full test run passed after the final production build completed.
 
 Logs: **`/tmp/atlas-sun-earth-moon/fix-2026-11-04/{check,validate,build,test,focused,solar-regression,preview,triangle-audit}.log`**. No requested implementation item remains undone. No git write or other-topic source edit was performed.
+
+### Acceptance 2026-11-04 (Claude, GPU shoots)
+
+- **Gate bug fixed.** The delivered gate `step(0.5,uHatchColor.r)` never fired at runtime: SceneRoot passes `CINEMA_INK = #1f2124` (the plate colour) as hatch ink on cinema, not the `--ink` token, so the GPU cinema shoots were byte-identical to main. The gate now reads the existing theme signal `uSelRim` (SceneRoot: cinema 0.35, paper 0.75) as `step(uSelRim,0.5)`; `night-fill.ts` and the unit test follow it, and the test pins SceneRoot's `rim: cinema ? 0.35 : 0.75`.
+- **Night endpoint retuned on GPU.** Once live, Codex's `f*(2+0.5A)*(0.55+0.45mu)` made the night hemisphere about as bright as the lit ocean near the terminator (it read as frosted grey, not night) and faded the night limb into the plate. Shipped: `f*(1.3+A)*(0.8+0.2mu)` (cinema only). Line 271 of `materials.ts` is still the only executable engine line changed.
+- **GPU numbers (beat 01.1, en-cinema, sRGB-decoded relative luminance over the night disc):** night Y 0.044 → 0.068 against plate Y 0.017; ratio 2.58× → 3.99×; contrast 1.40:1 → 1.76:1. Faint continents/clouds and lunar maria now show, the terminator and the night-side silhouette stay crisp, and the lit side is unchanged.
+- **Scope verified by pixel diff vs main:** all 39 sun-earth-moon paper beats and all 40 solar-system cinema beats are byte-identical; only sun-earth-moon cinema beats change, and only on Earth/Moon night pixels.
+- The CPU previews in `/tmp/atlas-sun-earth-moon/fix-2026-11-04/` show Codex's first formula; rerun `render-preview.ts` to regenerate.
