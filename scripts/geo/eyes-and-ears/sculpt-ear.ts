@@ -237,7 +237,7 @@ export function polishEar(parts:Part[], data?:{flows:Part[],animations:Part[]}) 
 
 }
 
-export async function writeEarModel(extra:Record<string,BufferGeometry>={}) {
+export async function writeEarModel(extra:Record<string,BufferGeometry>={},labelPoints:Record<string,V3>={}) {
   const meshes:Record<string,BufferGeometry>={pinna:pinnaMesh(),canal:canalMesh(),...ossicleMeshes(),...extra};
   for(const [id,transform] of [['incus',incusPoint],['stapes',stapesPoint]] as const) {
     const a=meshes[id]!.getAttribute('position');
@@ -274,7 +274,7 @@ export async function writeEarModel(extra:Record<string,BufferGeometry>={}) {
       const a=g.getAttribute(attr);if(a) primitive.setAttribute(semantic,doc.createAccessor().setType(attr==='uv'?'VEC2':'VEC3').setArray(new Float32Array(a.array)).setBuffer(buffer));
     }
     if(g.index) primitive.setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(g.index.array)).setBuffer(buffer));
-    scene.addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(primitive)).setExtras({closed:name!=='canal',sourceTriangles:before,triangles:g.index!.count/3,simplificationError:error}));
+    scene.addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(primitive)).setExtras({closed:name!=='canal',sourceTriangles:before,triangles:g.index!.count/3,simplificationError:error,...(labelPoints[name]?{labelPoint:labelPoints[name]}:{})}));
   }
   const output=resolve(import.meta.dirname,'../../../public/models/eyes-and-ears.glb');mkdirSync(dirname(output),{recursive:true});
   await new NodeIO().write(output,doc);

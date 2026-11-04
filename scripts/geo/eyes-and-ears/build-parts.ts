@@ -10,6 +10,8 @@ import { dirname, join } from 'node:path';
 import { polishEar, writeEarModel } from './sculpt-ear';
 import { polishEye, createEyeMeshes } from './polish-eye';
 import { partsFile } from '../../../src/engines/space-scene/schema';
+import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 type V3 = [number, number, number];
 type P = Record<string, unknown>;
@@ -280,7 +282,7 @@ const presets = [
   {id:'focus-bench',label:bi('FOCUS','聚焦'),camera:{position:[-2.05,-.45,9.4],target:[-2.05,-1.0,.7],fov:30}},
   {id:'ear',label:bi('EAR','耳朵'),camera:{position:[1.55,1.0,5.4],target:[1.65,.02,-.05],fov:30}},
   // Cochlea and the enlarged hair-cell window below it, both clear of the caption band.
-  {id:'cochlea',label:bi('COCHLEA','耳蜗'),camera:{position:[2.95,.25,5.9],target:[3.0,-.45,.1],fov:30}},
+  {id:'cochlea',label:bi('COCHLEA','耳蜗'),camera:{position:[2.4,-.55,5.55],target:[2.4,-.95,.05],fov:30}},
   // The particle row is the subject; the ear stays above it as context.
   {id:'wave',label:bi('VIBRATION','振动'),camera:{position:[2.1,-.05,6.3],target:[2.1,-.5,.65],fov:28}},
 ];
@@ -390,7 +392,23 @@ const data = {
 
 polishEar(parts, data);
 polishEye(parts, data);
-await writeEarModel(createEyeMeshes());
+// Preserve the nine existing sweeps verbatim, but ship them as one static mesh
+// so the leader can use a surface point instead of the centre of one bristle.
+// The explicit bundle-bend pivot still moves all nine together as before.
+const hair=parts.find(p=>p.id==='hair-patch')!;
+const hairSource=partsFile.parse({...data,model:'/models/eyes-and-ears.glb'}).parts.find(p=>p.id==='hair-patch')!;
+const hairPieces=partPieces(hairSource);
+const hairMesh=mergeGeometries(hairPieces.map(p=>p.geometry),false)!;
+hairMesh.translate(...hairSource.primitive!.at);
+const positions=hairMesh.getAttribute('position');
+// Outer, tallest bundle: its front/right tip is an actual shipped vertex.
+let tip=0;
+for(let i=1;i<positions.count;i++) if(positions.getX(i)+positions.getY(i)>positions.getX(tip)+positions.getY(tip))tip=i;
+const hairLabel:V3=[positions.getX(tip),positions.getY(tip),positions.getZ(tip)];
+hair.mesh='hair-patch';hair.material={color:'tissue',tint:'token:ink-2'};
+delete hair.primitive;delete hair.extra;
+await writeEarModel({...createEyeMeshes(),'hair-patch':hairMesh},{'hair-patch':hairLabel});
+for(const p of hairPieces)p.geometry.dispose();hairMesh.dispose();
 Object.assign(data, {model:'/models/eyes-and-ears.glb'});
 
 // Validate the geometry contract before writing; cross-file sources are checked

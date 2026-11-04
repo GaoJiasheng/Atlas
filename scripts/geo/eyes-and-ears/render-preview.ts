@@ -29,7 +29,12 @@ function arg(name: string, fallback: string): string {
 }
 const input = resolve(arg('--input', join(ROOT, 'src/content/topics/eyes-and-ears/data/parts.json')));
 const output = resolve(arg('--out', '/tmp/atlas-eyes-and-ears-qa'));
-const width = Number(arg('--width', '1200')), height = Number(arg('--height', '900'));
+// Topic label audit can supply the exact projected cameras and CPU SVG leaders.
+// These remain offline studies, not screenshots of the application.
+interface PreviewView { name:string; camera:{position:number[];target:number[];fov?:number}; accepts:(p:Part)=>boolean; svg?:string }
+const planPath=arg('--scenes','');
+const plan=planPath?JSON.parse(readFileSync(planPath,'utf8')) as {width:number;height:number;views:{name:string;camera:PreviewView['camera'];ids:string[];svg:string}[]}:null;
+const width = plan?.width??Number(arg('--width', '1200')), height = plan?.height??Number(arg('--height', '900'));
 if (![width, height].every((n) => Number.isInteger(n) && n >= 320 && n <= 2400)) throw new Error('Image dimensions must be integers from 320 to 2400');
 const file = partsFile.parse(JSON.parse(readFileSync(input, 'utf8')));
 mkdirSync(output, { recursive: true });
@@ -53,7 +58,7 @@ function rgb(value: string, depth = 0): RGB {
 const paper = rgb('token:paper');
 const key = new Vector3(-0.55, 0.8, 0.9).normalize();
 const fill = new Vector3(0.8, 0.25, -0.1).normalize();
-const footer = 36;
+const footer = plan?0:36;
 type Screen = { x: number; y: number; q: number; light: number; section: number };
 const cross = (a: Screen, b: Screen, x: number, y: number) => (b.x - a.x) * (y - a.y) - (b.y - a.y) * (x - a.x);
 
@@ -72,7 +77,7 @@ if (file.model) {
 }
 const ids=(names:string[]) => (p:Part) => names.includes(p.id);
 const cam=(position:number[],target:number[],fov=32)=>({position,target,fov});
-const views = [
+const views:PreviewView[] = plan?plan.views.map(v=>({...v,accepts:ids(v.ids)})):[
   { name:'ear-front', camera:cam([2.1,.8,5.5],[2.0,.0,-.1]), accepts:(p:Part)=>['ear-transfer','ear-receiver'].includes(p.group??'')&&!['basilar-strip','hair-patch','signal-marker'].includes(p.id) },
   { name:'ear-authored',camera:file.presets?.find(p=>p.id==='ear')?.camera??cam([1.55,1,5.4],[1.65,.02,-.05],30),accepts:(p:Part)=>['ear-transfer','ear-receiver'].includes(p.group??'')&&!['basilar-strip','hair-patch','signal-marker'].includes(p.id) },
   { name:'pinna-front',camera:cam([.8,.05,2.8],[.75,.02,-.10]),accepts:ids(['pinna']) },
@@ -184,7 +189,7 @@ for (const view of views.filter(v=>!selected.length || selected.includes(v.name)
       if (!mesh) piece.geometry.dispose();
     }
   }
-  const caption = `<svg width="${width}" height="${height}"><text x="18" y="${height - 14}" fill="#555047" font-size="13" font-family="monospace">CPU GEOMETRY PREVIEW · ${view.name.toUpperCase()} · ${triangles.toLocaleString('en')} TRIANGLES · NOT WEBGL QA</text></svg>`;
+  const caption = view.svg??`<svg width="${width}" height="${height}"><text x="18" y="${height - 14}" fill="#555047" font-size="13" font-family="monospace">CPU GEOMETRY PREVIEW · ${view.name.toUpperCase()} · ${triangles.toLocaleString('en')} TRIANGLES · NOT WEBGL QA</text></svg>`;
   const path = join(output, `${view.name}.png`);
   await sharp(pixels, { raw: { width, height, channels: 3 } }).composite([{ input: Buffer.from(caption) }]).png().toFile(path);
   const summary = { view: view.name, path, triangles, geometryPieces: pieces, instances, camera: setting };

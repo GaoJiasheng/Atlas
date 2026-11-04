@@ -138,3 +138,69 @@ Final standard gate runs all passed:
 - `git diff --check`: passed. Gate logs are in `/tmp/atlas-eyes-and-ears-round2/{check,validate,build,test}.log`.
 
 No anatomy item is intentionally deferred. Browser timing, PBR/transparency, HUD placement, touch interaction and software-GL screenshots are not certified by CPU rendering; browser/desktop access and Chromium launches were prohibited for this task. No browser, desktop, e2e/shoot, git write, package/lockfile edit, shared kit or engine edit was performed.
+
+## Fix 2026-11-04
+
+### Tablet callouts and framing
+
+Completed the chapter 05 hair-cell-window label correction, with a topic-wide review of all 40 authored beats. Only topic camera, visibility, label-selection and model-anchor data changed; shared label layout, CameraRig, framing code, widgets and scene CSS were not edited.
+
+- **05.2–05.5:** each beat labels its current teaching subject (membrane, hair cells, signal marker, then hearing nerve). Rebalanced the cameras around the separate cell window and its relationship to the ear, leaving space for the inset heading and callouts. The first cochlea/window orientation beat retains its two labels. The COCHLEA inspection preset follows the revised framing.
+- **Hair-cell anchor:** baked the existing nine bristle sweeps into one GLB node solely to support `extras.labelPoint`. Its leader now ends on an actual vertex at the outer, tallest bundle tip. The three cell bodies, nine sweeps, dimensions, normals, materials, explicit bend pivot and animation keys are preserved. Triangle-by-triangle comparison against the original primitive output found a maximum position difference of **1.18 × 10⁻⁷ scene units** from Float32 storage. Every pre-existing GLB mesh's position/normal/UV/index buffers is identical to the baseline.
+- **07.3:** uses the same cell anchor and an explicit revised camera, with one cell callout rather than a second cochlea callout.
+- **04.2–04.4:** closer drum/bone and footplate cameras; unrelated external-ear/pressure/balance structures yield the close-up. The three-bone beat displays the three bones without surrounding drum/cochlear surfaces behind their labels. All three bone names remain labelled together. The stapes and oval-window beats each name their immediate subject.
+- **03.3:** removed the redundant ciliary-ring callout whose anchor nearly coincided with the lens (about 1.1 px in the 1024 HUD fixture / 2.1 px in presentation). Both remain available through the chapter index.
+
+**Teaching content preserved:** ordered part IDs, names/short labels, EN/ZH summaries/details, counts, sources, chapter IDs/order, all 40 beat captions, complete chapter bodies and indices, animations, poses, flows and simulation controls/bindings. No EN/ZH prose correction was necessary. Labels omitted from an individual beat remain reachable through its chapter index and their established visibility beats. Cutaway, exploded and animation definitions are unchanged. A saved comparison is `preservation.json` in the preview directory.
+
+### Geometry and visual evidence
+
+References used were the shipped topic geometry, existing chapter 05/07 teaching statements, the previous F4 inset acceptance notes, docs/08, and the existing pure anchor/framing/leader functions. This is a framing correction; no new anatomy, external asset, scientific claim or licence was introduced.
+
+`audit-labels.ts` projects the shipped GLB `labelPoint` (or the engine's primitive anchor), measured GLB bounds and the beat camera. It uses the real `fitCameraToAspect`, `fitCameraToHud` and `layoutLeaders` functions. All 40 beats were audited at **1024×768, 1366×1024 and 1440×900**, with docked-reader and presentation fixtures. The HUD fixtures reserve the open 400 px reader, 44 px tabs, controls and chapter axis; they are conservative offline rectangles, **not measured browser DOM**. Three-line font dimensions are conservative estimates. The eight regression tests also sample the membrane/bundle animation extrema (t = 0, 0.25, 0.75), verify on-screen primary anchors and index reachability, and reject cell callout overlap with the cell-study bounds or heading.
+
+Chapter 05.3 spacing, in stage CSS pixels (same fixtures before/after):
+
+| Viewport / mode | Callouts before → after | Label/model overlap before → after (px²) | Closest model clearance before → after (px) |
+|---|---:|---:|---:|
+| 1024×768, docked HUD | 1 → 1 | 0 → 0 | 93.3 → 74.4 |
+| 1024×768, presentation | 2 → 1 | 5,556.4 → 0 | 0 → 9.3 |
+| 1366×1024, docked HUD | 2 → 1 | 329.0 → 0 | 0 → 12.5 |
+| 1366×1024, presentation | 2 → 1 | 132.3 → 0 | 0 → 24.5 |
+| 1440×900, docked HUD | 1 → 1 | 1,321.1 → 0 | 0 → 15.6 |
+| 1440×900, presentation | 2 → 1 | 0 → 0 | 2.8 → 27.2 |
+
+The 1024 docked HUD already limits the overlay to its selected callout; the revision preserves that clear state. All four chapter 05 cell/signal beats and care beat 07.3 have zero estimated callout overlap with the inset's part bounds/heading at all three sizes. The closest pair of bone anchors in 04.3 increases from **29.9 px HUD / 49.0 px presentation** to **80.1 px HUD / 131.4 px presentation**; the named bone close-up now has substantially more room. The spacing table describes projected bounds and estimated placards, not a claim that browser font/occlusion acceptance has run.
+
+CPU z-buffer previews use the actual shipped geometry and projected cameras. Inspected all three resolution contact sheets, the individual cell and bone close-ups, and English/Chinese examples. Iterations removed the duplicate cell labels, moved the leader onto the bundle tip, and cleared contextual anatomy from the bone-only view. Previews are under **`/tmp/atlas-eyes-and-ears-labels/`**:
+
+- `baseline/`, `before/`: preserved input data/model and matching original-camera previews.
+- `final/{1024,1366,1440}-{hud,present}-{en,zh}/`: final CPU PNGs (eight views per combination).
+- `plates/after-1024.png`, `after-1366.png`, `after-1440.png`: resolution contact sheets; `plates/before-after-1024.png`: matched cell/bone comparisons.
+- `before/label-projections.json`, `after/label-projections.json`, `spacing-summary.json`: coordinates, projected bounds, label rectangles and measured spacing.
+
+Reproduce the final study with `pnpm tsx scripts/geo/eyes-and-ears/audit-labels.ts src/content/topics/eyes-and-ears /tmp/atlas-eyes-and-ears-labels/after`, then `pnpm tsx scripts/geo/eyes-and-ears/render-preview.ts --scenes /tmp/atlas-eyes-and-ears-labels/after/scenes-1024-present-en.json --out /tmp/atlas-eyes-and-ears-labels/final/1024-present-en` (the scene plans cover all sizes/modes/locales).
+
+### Triangle counts and gates
+
+| Count | Before | After |
+|---|---:|---:|
+| Hair bundles | 720 | 720 |
+| All stored surfaces, including both iris states | 155,666 | 155,666 |
+| Worst authored beat, conservative drawn bound | 128,604 | 128,604 |
+| All layers, one iris, overlays and shadow refresh | 165,326 | 165,326 |
+| All geometry including both iris inserts during transitions, overlays and shadow | 179,326 | 179,326 |
+
+The anchor node adds about 27 KB to the local GLB (2,118,692 → 2,146,324 bytes), while retaining the source surface and draw budgets. No FPS is claimed.
+
+Final gates:
+
+- `pnpm check`: passed; 1,195 files, zero errors/warnings, five existing informational hints.
+- `pnpm validate`: passed; 94 topics, zero errors/warnings.
+- `pnpm build`: passed; 191 static pages and PWA output.
+- `pnpm test`: passed; **271 files / 6,508 tests**, standard command without worker or timeout overrides.
+- `git diff --check`: passed.
+
+Gate logs are in `/tmp/atlas-eyes-and-ears-labels/{check,validate,build,test}.log`. The worktree initially linked `node_modules` to a different checkout: Astro could not write its cache, and Vitest could not transform a deep dependency outside its allowed root. Verification uses local writable caches and unchanged copies of the affected installed dependencies; package.json, lockfile and application/tooling configuration were not edited. The original dependency symlink is restored after verification.
+
+No requested data-side correction is intentionally deferred. CPU images do not certify exact browser fonts, PBR/transparency, touch interaction or live DOM layout. Chromium, e2e/shoot and the user's browser/desktop were not opened, as instructed; browser acceptance remains with the following reviewer. No git write, deployment, shared-kit, engine, widget or queue-file edit was performed.
