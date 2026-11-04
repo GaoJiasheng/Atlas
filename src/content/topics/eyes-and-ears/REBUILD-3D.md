@@ -204,3 +204,12 @@ Final gates:
 Gate logs are in `/tmp/atlas-eyes-and-ears-labels/{check,validate,build,test}.log`. The worktree initially linked `node_modules` to a different checkout: Astro could not write its cache, and Vitest could not transform a deep dependency outside its allowed root. Verification uses local writable caches and unchanged copies of the affected installed dependencies; package.json, lockfile and application/tooling configuration were not edited. The original dependency symlink is restored after verification.
 
 No requested data-side correction is intentionally deferred. CPU images do not certify exact browser fonts, PBR/transparency, touch interaction or live DOM layout. Chromium, e2e/shoot and the user's browser/desktop were not opened, as instructed; browser acceptance remains with the following reviewer. No git write, deployment, shared-kit, engine, widget or queue-file edit was performed.
+
+### Acceptance 2026-11-04 (browser, GPU shoot)
+
+Shot every beat at 1024×768, 1366×1024 and 1440×900 (EN paper) plus 1024×768 ZH cinema against main. Two follow-ups applied:
+
+- **03.3:** the ciliary-ring callout is back. Its GLB node now carries `extras.labelPoint` on the ring's upper inner edge at the section plane, so its leader no longer ends on the lens centre; the lens and ring placards stack cleanly at all three sizes.
+- **04.4:** the stapes camera pulls back (position `[2.15, 0.2, 1.75]`, target `[2.15, 0.04, -0.055]`) so the incus is no longer cut off at the top-left edge and the whole chain reads.
+
+Known residual (engine, not data): in 05.3 and 07.3 the single hair-cell placard sits just right of the hair-cell bounds, and the inset frame (padded around the wider basilar strip) runs through its text. Main has the same crossing. The fix belongs in the shared leader layout (treat inset frames as a placard obstacle).

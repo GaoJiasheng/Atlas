@@ -407,7 +407,15 @@ for(let i=1;i<positions.count;i++) if(positions.getX(i)+positions.getY(i)>positi
 const hairLabel:V3=[positions.getX(tip),positions.getY(tip),positions.getZ(tip)];
 hair.mesh='hair-patch';hair.material={color:'tissue',tint:'token:ink-2'};
 delete hair.primitive;delete hair.extra;
-await writeEarModel({...createEyeMeshes(),'hair-patch':hairMesh},{'hair-patch':hairLabel});
+const eyeMeshes=createEyeMeshes();
+// The ciliary ring's bounds centre coincides with the lens centre on screen; its
+// leader ends on the ring's upper inner edge at the section plane instead, so the
+// two callouts stay distinct (the outer rim sits under the sclera's cut face).
+const ringPos=eyeMeshes['ciliary-ring']!.getAttribute('position');
+let top=-1;
+for(let i=0;i<ringPos.count;i++) if(ringPos.getZ(i)>-.03&&ringPos.getY(i)>.5&&(top<0||ringPos.getY(i)<ringPos.getY(top)))top=i;
+const ringLabel:V3=[ringPos.getX(top),ringPos.getY(top),ringPos.getZ(top)];
+await writeEarModel({...eyeMeshes,'hair-patch':hairMesh},{'hair-patch':hairLabel,'ciliary-ring':ringLabel});
 for(const p of hairPieces)p.geometry.dispose();hairMesh.dispose();
 Object.assign(data, {model:'/models/eyes-and-ears.glb'});
 
