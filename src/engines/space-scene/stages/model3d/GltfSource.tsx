@@ -73,6 +73,19 @@ export interface GltfSurface {
 /** Explicit material opt-in preserves the established family look of older assets. */
 export function gltfSurface(mesh: Mesh): GltfSurface | undefined {
   const source = mesh.material as MeshStandardMaterial;
+  // A per-region roughness mask retains the part family's colour and coat maps.
+  if (source.isMeshStandardMaterial && source.userData.atlasRoughness === true && source.roughnessMap) {
+    return {
+      source,
+      style(target) {
+        target.needsUpdate = true;
+        target.roughnessMap = source.roughnessMap;
+      },
+      fade(target, opacity, ghost) {
+        fadePartMaterial(target, opacity, ghost);
+      },
+    };
+  }
   if (!source.isMeshStandardMaterial || source.userData.atlasSurface !== true) return;
   return {
     source,

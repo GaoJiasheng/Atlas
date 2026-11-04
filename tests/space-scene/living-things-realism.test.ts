@@ -1,7 +1,8 @@
 /** Anatomical and pipeline regressions; visual judgement is recorded in REBUILD-3D. */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { describe,it,expect } from 'vitest';
+import { describe,it,expect,vi } from 'vitest';
+import sharp from 'sharp';
 import { Box3, BufferGeometry, Float32BufferAttribute, Mesh } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
@@ -22,9 +23,18 @@ describe('living-things sculpture anatomy and fitting',()=>{
   const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
   expect(json.extensionsRequired).toContain('EXT_meshopt_compression');
   expect(json.buffers.every((b:{uri?:string})=>!b.uri)).toBe(true);
-  expect(json.images??[]).toHaveLength(0);
+  expect(json.images).toHaveLength(1);
+  expect(json.images[0]).toMatchObject({mimeType:'image/png',bufferView:expect.any(Number)});
+  expect(json.images[0].uri).toBeUndefined();
   const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-  const gltf=await loader.parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+  // GLTFLoader owns texture/UV/material interpretation; only image decoding
+  // is supplied offline, since this regression runs without a browser.
+  vi.stubGlobal('self',globalThis);
+  vi.stubGlobal('createImageBitmap',async(blob:Blob)=>{
+   const image=await sharp(Buffer.from(await blob.arrayBuffer())).metadata();
+   return {width:image.width,height:image.height,close(){}};
+  });
+  const gltf=await loader.parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'').finally(()=>vi.unstubAllGlobals());
   gltf.scene.updateMatrixWorld(true);
   let total=0;
   for(const part of file.parts){

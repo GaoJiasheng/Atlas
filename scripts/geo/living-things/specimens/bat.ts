@@ -10,24 +10,31 @@ export function sculptedFruitBat():Model {
  const coat:BufferGeometry[]=[];
  const put=(g:BufferGeometry,tint:string,color='tissue')=>{
   if(color==='fabric')coat.push(g);
-  else {const uv=g.getAttribute('uv');if(uv)for(let i=0;i<uv.count;i++)uv.setXY(i,uv.getX(i)*.0001,uv.getY(i)*.0001);}
+  else {const uv=g.getAttribute('uv');if(uv)for(let i=0;i<uv.count;i++)uv.setXY(i,0,0);}
   if(tint===MEMBRANE||tint==='#5d4738')g.userData.twoSided=true;pieces.push(mesh(g,color,tint));};
  const line=(p:P[],r:number[],tint:string,radial=10,n=16)=>put(tube(p,r,1,radial,n),tint,tint===FUR?'fabric':'tissue');
  // Continuous furry torso, broad shoulders and narrow abdomen; not a capsule.
  put(tube([[0,.006,0],[0,.012,.001],[0,.023,.002],[0,.031,.001],[0,.037,.002]], [.0001,.0038,.0067,.0084,.0040],.8,32,40),FUR,'fabric');
  put(tube([[0,.033,.002],[0,.037,.003],[0,.040,.004]],[.006,.0042,.0045],.9,24,20),FUR,'fabric');
- // Photographic face study: AntanO frontal + three-quarter Cynopterus
- // photographs (SOURCES.md, Fix 2026-11-04). The broad cranium steps into a
- // SHORT nasal bridge. The former 21 mm pointed muzzle is deliberately gone.
- const headCentres=new CatmullRomCurve3([[-.005,.043],[-.003,.044],[.001,.0445],[.005,.044],[.008,.0428],[.011,.0417],[.0135,.0412],[.0145,.0412],[.015,.0412]].map(([z,y])=>new Vector3(0,y!,z!)));
- const headRadii=new CatmullRomCurve3([[.0001,.0001],[.0048,.0052],[.0067,.0066],[.0068,.0060],[.0056,.0049],[.0043,.0035],[.0037,.0028],[.0028,.0020],[.0001,.0001]].map(([x,y])=>new Vector3(x,y,0)));
- const head=surface(56,48,(u,v)=>{
+ // A high rounded vault stops above the orbits, then drops onto a short,
+ // deep, nearly parallel-sided muzzle (Cynopterus brachyotis photo studies).
+ const sections=[
+  [-.005,.043,.0001,.0001],[-.004,.044,.0040,.0047],
+  [-.001,.0448,.0062,.0068],[.002,.0450,.0069,.0071],
+  [.0045,.0450,.0068,.0070],[.006,.0445,.0064,.0065],
+  [.0073,.0430,.0056,.0046],[.0088,.0418,.0044,.0035],
+  [.0105,.0416,.0040,.00325],[.0122,.0416,.0039,.00315],
+  [.0127,.0417,.0033,.0028],[.0130,.0417,.0001,.0001],
+ ];
+ const headCentres=new CatmullRomCurve3(sections.map(([z,y])=>new Vector3(0,y!,z!)));
+ const headRadii=new CatmullRomCurve3(sections.map(([, ,x,y])=>new Vector3(x,y,0)));
+ const head=surface(80,64,(u,v)=>{
   const c=headCentres.getPoint(u),r=headRadii.getPoint(u),a=-v*Math.PI*2;
   const x=Math.cos(a)*r.x,y=c.y+Math.sin(a)*r.y,z=c.z;
-  // Soft cheek pads beneath the eyes, broad brow and gently recessed orbits.
-  const cheek=.00048*Math.exp(-Math.pow((z-.008)/.0035,2)-Math.pow((y-.0415)/.0028,2));
+  const cheek=.00042*Math.exp(-Math.pow((z-.0078)/.003,2)-Math.pow((y-.0418)/.0028,2));
   return [x+Math.sign(x)*cheek,y,z];
  },true);
+ head.userData.anatomy='cranial-skin';
  put(head,FUR,'fabric');
  const faceProxy=new Mesh(head,new MeshBasicMaterial({side:DoubleSide})),ray=new Raycaster();
  const onFace=(q:Vector3,N:Vector3)=>{
@@ -35,63 +42,84 @@ export function sculptedFruitBat():Model {
   throw new Error('Bat eye footprint missed cranial skin');
  };
  // Rounded jaw ends under the lip, with no straight projecting lower plank.
- put(tube([[0,.0384,.005],[0,.0386,.010],[0,.0390,.0132],[0,.0398,.0141]],[.0038,.0033,.0025,.0002],.53,24,24),FUR,'fabric');
- // One sculpted fleshy rhinarium: paired alae, real recessed nostril bowls,
- // raised flared margins and a median philtrum. No spherical nose/bead nares.
- const noseColours:number[]=[];
- const nose=surface(32,48,(u,v)=>{
-  const a=u*Math.PI,b=-v*Math.PI*2;
-  let x=.00275*Math.sin(a)*Math.cos(b),y=.04165+.00195*Math.sin(a)*Math.sin(b),z=.01435+.00145*Math.cos(a);
-  const front=Math.max(0,Math.cos(a));
-  const split=Math.exp(-Math.pow(x/.00052,2))*Math.exp(-Math.pow((y-.0403)/.0009,2))*front;
-  z-=.00038*split;
-  let cavity=0;
-  for(const side of [-1,1]){
-   const dx=(x-side*.00165)/.00059,dy=(y-.04220-side*x*.035)/.00050,d=dx*dx+dy*dy;
-   if(front>0){z+=front*(.00032*Math.exp(-Math.pow((Math.sqrt(d)-1.08)/.30,2))-.00065*Math.exp(-d*1.8));cavity=Math.max(cavity,Math.exp(-d*2.4)*front);}
-  }
-  const colour=new Color('#453a34').lerp(new Color('#151411'),Math.min(1,cavity*2.2));noseColours.push(colour.r,colour.g,colour.b);
-  return [x,y,z];
+ put(tube([[0,.0384,.005],[0,.0386,.009],[0,.0389,.0118],[0,.0394,.0129]],[.0038,.0033,.0025,.0002],.53,24,24),FUR,'fabric');
+ // Small squarish grey-pink rhinarium, with a deep sagittal groove.
+ const signedPower=(x:number,p:number)=>Math.sign(x)*Math.pow(Math.abs(x),p);
+ const nose=surface(24,48,(u,v)=>{
+  const a=u*Math.PI,b=-v*Math.PI*2,front=Math.max(0,Math.cos(a));
+  const x=.0019*Math.sin(a)*signedPower(Math.cos(b),.70);
+  const y=.0417+.00125*Math.sin(a)*signedPower(Math.sin(b),.75);
+  return [x,y,.0133+.00075*Math.cos(a)-.00042*front*Math.exp(-Math.pow(x/.00038,2))];
  },true);
- // The polar nose parameterization is inward; reverse once, then preserve
- // seam-averaged normals. The dark recesses are part of the pad itself.
- {const ix=nose.index!;for(let i=0;i<ix.count;i+=3){const b=ix.getX(i+1);ix.setX(i+1,ix.getX(i+2));ix.setX(i+2,b);}const n=nose.getAttribute('normal');for(let i=0;i<n.count;i++)n.setXYZ(i,-n.getX(i),-n.getY(i),-n.getZ(i));}
- nose.setAttribute('color',new Float32BufferAttribute(noseColours,3));put(nose,'#453a34');
+ const reverse=(g:BufferGeometry)=>{const ix=g.index!,n=g.getAttribute('normal');for(let i=0;i<ix.count;i+=3){const b=ix.getX(i+1);ix.setX(i+1,ix.getX(i+2));ix.setX(i+2,b);}for(let i=0;i<n.count;i++)n.setXYZ(i,-n.getX(i),-n.getY(i),-n.getZ(i));return g;};
+ put(reverse(nose),'#786560');
+ for(const side of [-1,1]){
+  // Each naris has an outer alar wall, rolled flare and a real deep lumen.
+  const N=new Vector3(side*.36,.18,.92).normalize(),U=new Vector3(N.z,0,-N.x).normalize(),V=new Vector3().crossVectors(N,U);
+  const c=new Vector3(side*.00118,.04205,.01355),cols:number[]=[];
+  const profile=new CatmullRomCurve3([[.00088,-.00080],[.00086,-.00028],[.00073,.00038],[.00058,.00052],[.00043,.00030],[.00037,-.00025],[.00012,-.00105]].map(([r,z])=>new Vector3(r,z,0)));
+  const naris=surface(24,40,(u,v)=>{
+   const q=profile.getPoint(u),a=-v*Math.PI*2;
+   const col=new Color('#8b706a').lerp(new Color('#211b19'),Math.max(0,(u-.58)/.42));cols.push(col.r,col.g,col.b);
+   return c.clone().addScaledVector(U,Math.cos(a)*q.x).addScaledVector(V,Math.sin(a)*q.x*.78).addScaledVector(N,q.y).toArray() as P;
+  },true);
+  naris.setAttribute('color',new Float32BufferAttribute(cols,3));naris.userData.anatomy='tubular-nostril';put(naris,'#8b706a');
+ }
  // Paired upper-lip lobes continue beneath the rhinarium, with an actual
  // shallow median cleft rather than a painted line at the chin.
  const lipPad=surface(24,40,(u,v)=>{
   const a=u*Math.PI,b=-v*Math.PI*2,front=Math.max(0,Math.cos(a));
-  const x=.00305*Math.sin(a)*Math.cos(b),y=.03965+.00100*Math.sin(a)*Math.sin(b);
+  const x=.00305*Math.sin(a)*Math.cos(b),y=.03965+.00075*Math.sin(a)*Math.sin(b);
   const lobes=.00024*Math.exp(-Math.pow((Math.abs(x)-.00145)/.00075,2));
   const cleft=.00035*Math.exp(-Math.pow(x/.00043,2));
-  return [x,y,.01390+.00145*Math.cos(a)+front*(lobes-cleft)];
+  return [x,y,.01285+.00092*Math.cos(a)+front*(lobes-cleft)];
  },true);
  {const ix=lipPad.index!,n=lipPad.getAttribute('normal');for(let i=0;i<ix.count;i+=3){const b=ix.getX(i+1);ix.setX(i+1,ix.getX(i+2));ix.setX(i+2,b);}for(let i=0;i<n.count;i++)n.setXYZ(i,-n.getX(i),-n.getY(i),-n.getZ(i));}
  put(lipPad,FUR,'fabric');
- line([[0,.0406,.0157],[0,.0399,.0153],[0,.0396,.0148]],[.00010,.00010,.00004],DARK,6,12);
+ line([[0,.0408,.01365],[0,.0401,.01360],[0,.0396,.01345]],[.00010,.00010,.00004],DARK,6,12);
  for(const side of [-1,1]){
-  // Closed, slightly split upper lip and gently curved mouth corner.
-  const lipN=new Vector3(side*.28,-.70,.66).normalize();
-  const lip:P[]=[[0,.0396,.0148],[side*.0019,.03935,.0141],[side*.0031,.03915,.0121],[side*.0040,.0396,.0094]];
-  line(lip.map(p=>onFace(new Vector3(...p),lipN).addScaledVector(lipN,-.000035).toArray() as P),[.00008,.00009,.00008,.00002],DARK,6,20);
-  // High forward-facing eyes are almond corneal surfaces seated inside lids.
-  const N=new Vector3(0,0,1),U=new Vector3(.985,-side*.17,0).normalize(),eyeV=new Vector3().crossVectors(N,U).normalize(),q=new Vector3(side*.0040,.0460,.0080);
-  const eyePoint=(r:number,a:number,lift=0)=>onFace(q.clone().addScaledVector(U,Math.cos(a)*r*.00180).addScaledVector(eyeV,Math.sin(a)*r*.00125*(.80+.20*Math.abs(Math.sin(a)))),N).addScaledVector(N,.000045+.00070*Math.max(0,1-r*r)+lift);
-  const eye=surface(8,32,(r,t)=>eyePoint(r,t*Math.PI*2).toArray() as P,true);
-  // radial-then-angular charts have outward winding with U x V = N.
-  put(eye,DARK,'eye');
-  const lid=surface(4,32,(s,t)=>{
-   const a=t*Math.PI*2,r=1+s*.18;
-   return eyePoint(r,a,.00010*Math.sin(Math.PI*s)).toArray() as P;
-  },true);put(lid,FUR,'fabric');
-  put(orb(eyePoint(.26,2.1,.00005).toArray() as P,[.00014,.00014,.00009],10,6),'#d6c6a3','eye');
+  // Mouth follows the fleshy lip rather than projecting in front of the nose.
+  line([[0,.0396,.01345],[side*.0017,.03935,.0134],[side*.0028,.0392,.0120],[side*.0038,.03955,.0097]],[.00006,.00007,.00006,.00002],DARK,6,20);
+  // True 2.2 mm eyeballs, sunk only 0.7 mm into the orbital skin: their
+  // poles stand 1.5 mm proud. Oblique axes keep both eyes facing forward.
+  const N=new Vector3(side*.52,.13,.844).normalize(),U=new Vector3(N.z,0,-N.x).normalize(),eyeV=new Vector3().crossVectors(N,U);
+  const skin=onFace(new Vector3(side*.0045,.0468,.0066),N),centre=skin.clone().addScaledVector(N,-.0007),R=.0022;
+  const eyePoint=(theta:number,a:number,r=R)=>centre.clone().addScaledVector(N,Math.cos(theta)*r).addScaledVector(U,Math.sin(theta)*Math.cos(a)*r).addScaledVector(eyeV,Math.sin(theta)*Math.sin(a)*r);
+  const eyeColours:number[]=[];
+  const eye=surface(24,40,(u,v)=>{
+   const theta=u*Math.PI,a=-v*Math.PI*2;
+   const radial=(.5+.5*Math.sin(a*31+Math.sin(a*11)*1.6))*.25+.10*Math.sin(theta*95+a*7);
+   const iris=new Color('#5c3519').lerp(new Color('#997043'),Math.max(0,radial));
+   const col=theta<.51?new Color('#090a08'):theta<1.02?iris:new Color('#231f1a');
+   if(theta>.94&&theta<1.02)col.lerp(new Color('#161410'),(theta-.94)/.08);
+   eyeColours.push(col.r,col.g,col.b);
+   return eyePoint(theta,a).toArray() as P;
+  },true);
+  reverse(eye); // polar chart (theta, clockwise azimuth)
+  eye.setAttribute('color',new Float32BufferAttribute(eyeColours,3));
+  eye.userData.anatomy='eyeball';eye.userData.radius=R;eye.userData.proud=.0015;
+  put(eye,'#ffffff','cornea');
+  // Thin wet dark lid margin hugs the globe. The surrounding furry orbit
+  // blends out to the cranial surface instead of floating over the skin.
+  const lidTheta=(a:number)=>.98+.22*Math.cos(2*a)+side*.035*Math.sin(a);
+  const lid=surface(6,64,(s,t)=>{
+   const a=-t*Math.PI*2,theta=lidTheta(a)+s*.055;
+   return eyePoint(theta,a,R+.000025+.000055*Math.sin(Math.PI*s)).toArray() as P;
+  },true);reverse(lid);put(lid,'#302821');
+  const orbit=surface(10,64,(s,t)=>{
+   const a=-t*Math.PI*2,start=lidTheta(a)+.055;
+   // Roll the furred lid back over the buried globe. The entire back edge
+   // intersects cranial skin; projecting a wide ring onto the crown folded
+   // the outer canthus over itself at oblique viewing angles.
+   return eyePoint(start+s*(1.8-start),a,R+.00005+.00004*Math.sin(Math.PI*s)).toArray() as P;
+  },true);reverse(orbit);put(orbit,FUR,'fabric');
   // Broad oval pinnae with rounded upper margins, shallow conchal cups and
   // pale whitish rims. Small left/right differences retain natural attitude.
   const ear=(r:number,t:number):P=>{
    const a=t*Math.PI*2,w=.00255+side*.00008;
    return [side*(.0067+Math.cos(a)*r*w+Math.sin(a)*r*.00075),.0500+Math.sin(a)*r*(.00385+side*.0001),.0003+.00145*(1-r*r)+.0005*r*Math.sin(a)];
   };
-  put(surface(12,48,ear),'#5d4738');
+  put(surface(24,64,ear),'#5d4738');
   line(Array.from({length:49},(_,i)=>ear(1,i/48)),Array(49).fill(.00022),'#d0c7ad',8,64);
   // Arms bend at elbow before the long radius/ulna reaches the carpus.
   const S:P=[side*.006,.032,.001],E:P=[side*.014,.039,-.001],W:P=[side*.023,.034,.002];

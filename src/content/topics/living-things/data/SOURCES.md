@@ -175,3 +175,19 @@ The toad retains the species basis in S6 (NParks Common Asian Toad): cranial
 crests behind the eyes and dry bumpy skin. This fix changes how those existing
 features join the dermis, without adding species or teaching claims. All warts,
 crests and parotoids are now continuous displacement of the parent skin.
+
+### Fix 2026-11-04 round 2 — fruit-bat face
+
+The same inspected AntanO frontal and three-quarter photographs above, plus the
+Nick Baker / EcologyAsia flight photograph linked under Polish 2026-11-03,
+support this pass. The latter supplies a true profile, cropped and mirrored
+only in the development comparison. It remains copyrighted, reference only.
+No reference photograph is embedded in the GLB or shipped as a texture.
+
+The forehead stop, short deep muzzle, paired flared nasal tubes, globe size,
+lid seating and amber iris are original photographic reconstructions. The
+2.2 mm globe radius and 1.5 mm protrusion are **model design dimensions**, not
+measurements of a biological specimen. The existing bilingual species text
+and all teaching counts remain unchanged. A build-only two-pixel roughness
+mask is prepared for the proposed loader opt-in; it contains numeric finish
+values, no photographic content. See REBUILD-3D.md for its pending status.
