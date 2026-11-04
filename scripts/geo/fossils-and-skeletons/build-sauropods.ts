@@ -1,6 +1,6 @@
-/** Round-three surgical rebuild: replaces ONLY the shared sauropod mesh.
- * All theropod accessors, nodes, myna primitives, cameras, plinths, simulation
- * and editorial text are preserved. pnpm tsx .../build-sauropods.ts */
+/** Surgical museum rebuild: shared sauropod sculpture/surface and display X
+ * stagger only. Theropod buffers, myna, cameras, simulation and editorial
+ * text are preserved. pnpm tsx .../build-sauropods.ts */
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { Document, NodeIO } from '@gltf-transform/core';
@@ -11,6 +11,7 @@ import { Matrix4 } from 'three';
 import { diplodocidStudy } from './sauropod-study';
 import { museumBoneGeometry } from './sculpt-museum';
 import { swapMuseumMesh } from './swap-museum-mesh';
+import { boneSurface, BONE_ALBEDO, BONE_ROUGHNESS } from './bone-surface';
 import type { Part } from '../../../src/engines/space-scene/schema';
 
 export async function buildSauropods(){
@@ -39,16 +40,31 @@ await fresh.transform(weld(),dedup());
 const indices=primitive.getIndices()!,positions=primitive.getAttribute('POSITION')!,normals=primitive.getAttribute('NORMAL')!;
 const [reduced]=MeshoptSimplifier.simplifyWithAttributes(new Uint32Array(indices.getArray()!),new Float32Array(positions.getArray()!),3,new Float32Array(normals.getArray()!),3,[.08,.08,.08],null,Math.min(Math.floor(indices.getCount()*.22/3)*3,64_500*3),.0007);
 indices.setArray(new Uint32Array(reduced));
+// COLOR_0 is linear reflectance, multiplied by token:fossil at runtime.
+// Bake after simplification: surface detail must not increase triangle count.
+const surface=boneSurface(new Float32Array(positions.getArray()!),new Float32Array(normals.getArray()!),new Uint32Array(reduced));
+primitive.setAttribute('COLOR_0',fresh.createAccessor().setType('VEC3').setArray(surface.colors).setBuffer(buffer));
+primitive.setMaterial(fresh.createMaterial('mineralised-cortex').setBaseColorFactor([BONE_ALBEDO,BONE_ALBEDO,BONE_ALBEDO,1]).setRoughnessFactor(BONE_ROUGHNESS).setMetallicFactor(0).setExtras({atlasSurface:true}));
 await fresh.transform(meshopt({encoder:MeshoptEncoder,level:'high',quantizeNormal:10}));
 const origin=primitives[0]!.at;
 const anchor=origin.map((v,i)=>[0,2+layout.lift,0][i]!+layout.scale*(v-layout.center[i]));
 for(const p of file.parts.filter((p:Part)=>p.id.endsWith('-study')))p.material={color:'plastic',tint:'token:fossil'};
-const bytes=swapMuseumMesh(previous,Buffer.from(await io.writeBinary(fresh)),anchor);
+const rowSpacing=.3*layout.scale;
+const bytes=swapMuseumMesh(previous,Buffer.from(await io.writeBinary(fresh)),anchor,rowSpacing);
+// Move each plinth and its four contact patches with the skeleton. Preserve
+// the accepted 30-degree chapter/beat cameras and all teaching data.
+const plinth=file.parts.find((p:Part)=>p.id==='study-plinth');
+const platforms=[plinth.primitive,...plinth.extra.slice(0,2)];
+platforms.forEach((p:any,i:number)=>p.at[0]=Number(((i-1)*rowSpacing).toFixed(6)));
+plinth.extra.slice(2).forEach((p:any,i:number)=>{
+ const row=Math.floor(i/4)-1,x=i%4<2?-.29:.46;
+ p.at[0]=Number((layout.scale*(row*.3+x-.04-layout.center[0])).toFixed(6));
+});
 if(bytes.length>2_500_000)throw new Error('Museum asset exceeds 2.5 MB.');
 fs.writeFileSync(`public${file.model}`,bytes);
 fs.writeFileSync(path,JSON.stringify(file,null,2)+'\n');
 const tris=mesh.listPrimitives().reduce((sum,p)=>sum+p.getIndices()!.getCount()/3,0);
-console.log(JSON.stringify({perStudy:tris,threeStudies:tris*3,assetBytes:bytes.length}));
+console.log(JSON.stringify({perStudy:tris,threeStudies:tris*3,assetBytes:bytes.length,surface:surface.stats}));
 geometry.dispose();
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)await buildSauropods();

@@ -126,7 +126,7 @@ add('myna-leg','living-museum',['Bird hindlimbs','鸟的后肢'],['Supports the 
 const featherGeo=bird.feather;
 add('myna-feather','living-museum',['Feather','羽毛比较件'],['Enlarges a modern feather for comparison.','放大现生鸟羽以便比较。'],['This is a modern-bird comparison model, not a fossil and not drawn to the bird body scale. Archaeopteryx fossils preserve a combination of features useful in studying early birds; this does not label it the proven direct ancestor of all birds. [S10, S90]','这是现生鸟类比较模型，不是化石，也不与鸟身体采用同一尺度。始祖鸟化石保存的特征组合有助研究早期鸟类，但不表示它已被证实是所有鸟的直接祖先。[S10, S90]'],featherGeo);
 
-for(const [id,cx,z,title,zh]of [['prince-study',-.65,-2.6,'Prince','Prince'],['apollonia-study',0,0,'Apollonia','Apollonia'],['twinky-study',.65,2.6,'Twinky','Twinky']]as const){
+for(const [id,cx,z,title,zh]of [['prince-study',-.3,-2.6,'Prince','Prince'],['apollonia-study',0,0,'Apollonia','Apollonia'],['twinky-study',.3,2.6,'Twinky','Twinky']]as const){
  add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],diplodocid(cx,z),{castShadow:true});
 }
 
@@ -169,12 +169,12 @@ const cameras={
  'feather-detail':camera('bird',[.2,1.8,3],[-.52,1.14,.4]),
  'museum-pair':camera('museum',[3.42,7.27472,11.0835],[.45,.65,0]),
 };
-add('study-plinth','context',['Study platform','示意底台'],['Supports the teaching models.','承托教学模型。'],['Three low bevelled display plinths support the generic studies; they do not copy the museum mounts.','三座带倒角的低展台分别承托通用示意模型，不复制馆藏的真实展台。'],[-1,0,1].map(i=>({kind:'bevelBox',at:[i*.65*layout.museum!.scale,-.09,i*2.6*layout.museum!.scale],size:[6.5,.16,1.32],bevel:.045,color:'plastic',tint:'token:mannequin'} as Primitive)),{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
+add('study-plinth','context',['Study platform','示意底台'],['Supports the teaching models.','承托教学模型。'],['Three low bevelled display plinths support the generic studies; they do not copy the museum mounts.','三座带倒角的低展台分别承托通用示意模型，不复制馆藏的真实展台。'],[-1,0,1].map(i=>({kind:'bevelBox',at:[i*.3*layout.museum!.scale,-.09,i*2.6*layout.museum!.scale],size:[6.5,.16,1.32],bevel:.045,color:'plastic',tint:'token:mannequin'} as Primitive)),{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
 // Small, translucent contact patches at each real manus/pes contact. These
 // remain under the feet; the opaque plinth covers the shared central blob.
 const plinth = parts.at(-1)!;
 const museumLayout = layout.museum!;
-for (const [cx,z] of [[-.65,-2.6],[0,0],[.65,2.6]]) for (const x of [-.29,.46]) for (const side of [-1,1]) {
+for (const [cx,z] of [[-.3,-2.6],[0,0],[.3,2.6]]) for (const x of [-.29,.46]) for (const side of [-1,1]) {
  const k=museumLayout.scale, c=museumLayout.center;
  const at:V=[k*(cx!+x-.04-c[0]),-.006,k*(z!+side*(x>0?.20:.23)-c[2])];
  const shadow:Primitive={kind:'extrude',at,shape:ellipse(0,0,.14,.105,24) as [number,number][],depth:.0004,bevel:0,rotation:[-90,0,0],color:'glass',tint:'token:carbon-dioxide'};
