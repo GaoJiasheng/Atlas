@@ -259,14 +259,16 @@ export function createPartMaterial(): PartMaterial {
       .replace('#include <clipping_planes_fragment>', CUT_FACE)
       .replace('#include <color_fragment>', TINT)
       .replace('#include <emissivemap_fragment>', SELECTION)
-      // Three supplies USE_MAP for the retained surface albedo. A neutral floor
-      // keeps mapped orbit bodies readable; inverseTransformDirection normalises.
+      // Mapped analytic orbit bodies only. The existing hatch ink is light on
+      // cinema (> .5 linear red), dark on paper: keep paper's floor exact.
+      // Cinema gets neutral illustrative ambient/camera fill, not direct Sun
+      // or city emission; faint albedo and broad facing falloff retain form.
       .replace('#include <opaque_fragment>', `
         if (uOrbitLight > 0.5) {
 float day = max(0.0,dot(inverseTransformDirection(normalize(vNormal),viewMatrix),uOrbitSun));
 outgoingLight = diffuseColor.rgb * (uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*day);
 #ifdef USE_MAP
-if (uOrbitLight < 1.5) outgoingLight = mix(vec3(uOrbitFill),diffuseColor.rgb,day);
+if (uOrbitLight < 1.5) outgoingLight = mix(mix(vec3(uOrbitFill),uOrbitFill*(vec3(2.0)+diffuseColor.rgb*0.5)*(0.55+0.45*abs(dot(normalize(vNormal),normalize(vViewPosition)))),step(0.5,uHatchColor.r)),diffuseColor.rgb,day);
 #endif
         }
 if (vEmission > 0.5 && vEmission < 3.5) {if (!gl_FrontFacing) discard;float mu = abs(dot(normalize(vNormal), normalize(vViewPosition)));float gain = vEmission < 1.5 ? 1.5 * (0.46 + 0.54 * mu) : 1.0;outgoingLight = diffuseColor.rgb * gain + totalEmissiveRadiance;diffuseColor.a *= vEmission < 2.5 ? 1.0 / 0.55 : mu * mu;if (vEmission > 1.5 && vEmission < 2.5) diffuseColor.a *= pow(mu * (1.0 - mu), 2.0) * smoothstep(0.0, 0.16, mu);}

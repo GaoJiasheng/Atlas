@@ -127,3 +127,61 @@ GPU `pnpm shoot --beats` (en/paper, zh/cinema) against branch HEAD 93c5301 found
 - The shared-schema regex change was reverted; the GLB moved to the flat `/models/sun-earth-moon.glb` route. The e2e external-request check now ignores the `blob:` URLs GLTFLoader uses for embedded textures.
 
 After the fixes all 39 beats draw Earth (continents, clouds, Singapore ring), Moon (maria, relief) and a self-lit gold Sun in place; 39/39 beat links match. Remaining caveat: on cinema the neutral grey night side is close to the dark plate, so a fully night-side Earth (01.1) reads mostly by its outline.
+
+## Fix 2026-11-04 — cinema night-hemisphere readability
+
+Completed the leftover Earth/Moon night-side fix. Cinema now has a restrained neutral diffuse fill, with faint surface-albedo variation and a broad facing falloff toward the limb. Continents/clouds and lunar maria/relief remain faintly visible when the whole visible hemisphere faces away from the Sun. This is illustrative ambient illumination for the teaching model, not a measured night photograph or a phase-dependent earthshine simulation. No city lights, atmosphere on the Moon, glow shell, new geometry, lights, uniforms, textures or runtime requests were added.
+
+### Exact renderer scope and preserved behaviour
+
+Only `src/engines/space-scene/stages/model3d/materials.ts` changes in the engine:
+
+- **Line 271** (previously 269): replaces the existing `USE_MAP` night-fill expression inside `uOrbitLight > 0.5` / `uOrbitLight < 1.5`. With albedo `A`, view-facing cosine `mu`, and existing fill `f`, cinema uses `f * (2 + 0.5*A) * (0.55 + 0.45*mu)` as the night endpoint. The original `mix(night, A, day)` and exact analytic Sun dot product remain in place. Zero authored fill still produces zero night light.
+- **Lines 262–265**: explanatory comments only. No other engine lines change.
+
+Theme detection reuses the existing linear hatch-ink colour: its red channel is below 0.5 on paper and above 0.5 on cinema. Paper therefore uses the exact previous `vec3(uOrbitFill)` endpoint. No theme API or renderer-wide ambient setting changes. Solar-system uses ordinary PBR/emission (`uOrbitLight=0`), and sample-orbit has untextured primitives; neither enters this mapped analytic-body expression. The Sun's self-light branch is unchanged. Unit coverage evaluates the actual emitted GLSL expression, checks the real theme tokens, the contrast floor, paper equivalence, zero fill, full daylight, unchanged solar direction, and branch gating.
+
+All 13 ids, four groups, eight chapters, 39 beats, teaching values, phase/terminator geometry, orbit/spin/synchrony behaviour, camera/framing, labels and visibility fades are retained. Explode/cutaway remain disabled as authored. **No EN/ZH text changes were necessary:** the existing description of neutral grey night fill remains accurate.
+
+### Numerical contrast and geometry
+
+Measurements use the actual decoded shipped triangles and embedded albedo. The CPU rasteriser now uses the installed Three r180 `ACESFilmicToneMapping` input/output matrices, fit and exposure (cinema 1.0, paper 1.05), followed by sRGB encoding. The former preview used a different common ACES approximation and overstated the old night visibility. Statistics average decoded linear-sRGB luminance over visible Earth/Moon pixels with `N·Sun <= 0`, excluding guides, background and captions. They are CPU predictions, not GPU readbacks.
+
+Cinema plate token `--paper` / `--stage-bg` = **#1f2124**, relative luminance **0.01506394**. Both direct luminance ratios and `(lighter + 0.05)/(darker + 0.05)` contrast ratios are provided:
+
+| View | Night mean Y before → after | Night Y / plate Y before → after | Contrast before → after |
+|---|---:|---:|---:|
+| **Earth, actual 01.1 snapshot/camera** | 0.031896 → 0.079163 | **2.117× → 5.255×** | **1.259:1 → 1.985:1** |
+| Earth, night close-up | 0.031896 → 0.078241 | 2.117× → 5.194× | 1.259:1 → 1.971:1 |
+| Moon, night close-up | 0.031896 → 0.083591 | **2.117× → 5.549×** | **1.259:1 → 2.053:1** |
+
+Paper's seven before/after pairs (Earth/Moon night, quarter and reverse views, plus 01.1) have **byte-identical pixels throughout the 1100×850 rendered region**, excluding the changed captions. Paper 01.1 night mean remains 0.034340 and its paper-background contrast remains 9.814:1.
+
+**Triangles before → after: 109,088 → 109,088** conservative simultaneous inventory. Sun 16,128; Earth 16,128; Moon 65,024; axes/equator/markers 6,816; runtime guides 4,992. The shipped 1,420,292-byte GLB is unchanged. A fresh `audit-geometry.ts` run reproduces the existing inventory. No GPU FPS or draw-call performance claim is made.
+
+### References, visual iteration and reproduction
+
+References: existing NASA SVS/LROC/LOLA and Natural Earth inputs/provenance in `data/SOURCES.md`; the cinema/paper tokens in `src/theme/tokens.css`; existing exposures in `Lighting.tsx`; installed `three/src/renderers/shaders/ShaderChunk/tonemapping_pars_fragment.glsl.js` for the exact tone mapper. No new external asset was used.
+
+Actually inspected the CPU before/after sheet, the actual 01.1 close-up, Earth geography from opposing directions, lunar night and quarter close-ups. The first candidate was too bright in the lunar quarter view; reduced its floor/albedo contribution and strengthened the limb falloff, rerendered and inspected the final pairs. The final night side remains subdued beside the illuminated quarter while showing surface and volume against cinema. Paper comparisons are unchanged.
+
+Previews and machine-readable contrast data: **`/tmp/atlas-sun-earth-moon/fix-2026-11-04/previews/`**. Key files: `contact-sheet.png`, `beat-01-1-cinema-{before,after}.png`, `{earth,moon}-{night,quarter,reverse}-cinema-{before,after}.png`, the corresponding paper pairs, `preview.json` and `paper-parity.json`.
+
+```sh
+pnpm tsx scripts/geo/sun-earth-moon/render-preview.ts /tmp/atlas-sun-earth-moon/fix-2026-11-04/previews
+pnpm tsx scripts/geo/sun-earth-moon/audit-geometry.ts
+```
+
+The preview reads/evaluates the emitted shader night expression, so it cannot silently retain an obsolete duplicate formula. No browser, desktop, Chromium, e2e or GPU session was opened. Implementation is complete; live browser/GPU acceptance remains with the downstream reviewer as required by the task.
+
+### Final gates
+
+- `pnpm check`: **pass**, 1,194 files, 0 errors / 0 warnings, four existing hints outside this topic.
+- `pnpm validate`: **pass**, 94 topics, 0 errors / 0 warnings.
+- `pnpm build`: **pass**, 191 static pages, PWA generated; built/vendored GLBs are byte-identical.
+- `pnpm run test --maxWorkers=4` (full `pnpm test` gate with four workers): **270 files / 6,501 tests passed**, none skipped. Includes all 28 solar-system polish regressions and the unchanged first-screen JS budget.
+- `git diff --check`: **pass** (read-only inspection).
+
+The supplied `node_modules` initially symlinked into another checkout: Vite first could not write its config cache, and later could not transform Drei's deep ESM import outside this worktree. A local snapshot of the identical dependency tree resolved both environment issues; the environment repair required no package/lockfile, dependency version, test assertion or budget changes. The final full test run passed after the final production build completed.
+
+Logs: **`/tmp/atlas-sun-earth-moon/fix-2026-11-04/{check,validate,build,test,focused,solar-regression,preview,triangle-audit}.log`**. No requested implementation item remains undone. No git write or other-topic source edit was performed.

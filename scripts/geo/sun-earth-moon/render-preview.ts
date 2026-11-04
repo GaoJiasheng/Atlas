@@ -19,6 +19,7 @@ import { orbitDisplay, bodyPlacement, orbitalTiltGuide } from '../../../src/engi
 import { resolveSimValues } from '../../../src/engines/space-scene/lib/sim/controls';
 import { simSchema } from '../../../src/engines/space-scene/sim-schema';
 import { sampleMap, geographicDirection } from './surfaces';
+import { aces, luminance, toLinear, mappedOrbitLight } from './night-fill';
 const root=resolve(import.meta.dirname,'../../..'),topic=resolve(root,'src/content/topics/sun-earth-moon');
 const output=process.argv[2]?.startsWith('--')?'/tmp/atlas-sun-earth-moon/previews':process.argv[2]??'/tmp/atlas-sun-earth-moon/previews';
 const selected=process.argv.indexOf('--only');const only=selected<0?null:process.argv[selected+1];mkdirSync(output,{recursive:true});
@@ -86,15 +87,16 @@ function tiltGuides(s:OrbitSnapshot):Piece[]{
 const width=1100,height=900,footer=50;
 type Screen={x:number;y:number;q:number;u:number;v:number;nx:number;ny:number;nz:number;px:number;py:number;pz:number};
 const cross=(a:Screen,b:Screen,x:number,y:number)=>(b.x-a.x)*(y-a.y)-(b.y-a.y)*(x-a.x);
-const aces=(v:number)=>Math.max(0,Math.min(1,(v*(2.51*v+.03))/(v*(2.43*v+.59)+.14)));
+const orbitLight=mappedOrbitLight(readFileSync(resolve(root,'src/engines/space-scene/stages/model3d/materials.ts'),'utf8'));
 const gamma=(v:number)=>v<=.0031308?12.92*v:1.055*v**(1/2.4)-.055;
 const linear=Array.from({length:256},(_,i)=>{const v=i/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});
 const viewReports:unknown[]=[];
-async function render(name:string,items:Piece[],position:V3,target:V3,fov:number,sun:V3,title:string,textured=true,dark=false,baselineFill=.035){
+async function render(name:string,items:Piece[],position:V3,target:V3,fov:number,sun:V3,title:string,textured=true,dark=false,baselineFill=.035,legacyNight=false){
  if(only&&name!==only)return;
  const camera=new PerspectiveCamera(fov,width/(height-footer),.0001,10000);camera.position.fromArray(position);camera.lookAt(...target);camera.updateMatrixWorld();
  const buffer=Buffer.alloc(width*height*3);for(let i=0;i<width*height;i++)[0,1,2].forEach(c=>buffer[i*3+c]=dark?[31,33,36][c]!:[233,228,216][c]!);
  const depth=new Float64Array(width*height).fill(Infinity);const light=new Vector3(...sun).normalize();let tris=0;
+ const night=new Uint8Array(width*height),luma=new Float64Array(width*height);
  for(const item of items){
   const p=item.g.getAttribute('position'),n=item.g.getAttribute('normal'),uv=item.g.getAttribute('uv'),idx=item.g.index;
   const nm=new Matrix3().getNormalMatrix(item.matrix);
@@ -117,20 +119,30 @@ async function render(name:string,items:Piece[],position:V3,target:V3,fov:number
     let r=item.color.r,g=item.color.g,bl=item.color.b;
     if(item.texture){const tex=item.texture,lat=90-interp('v')*180,lon=interp('u')*360-180;[r,g,bl]=[0,1,2].map(k=>{const v=sampleMap(tex.data,tex.width,tex.height,tex.channels,lat,lon,k),i=Math.max(0,Math.min(254,Math.floor(v)));return linear[i]!+(linear[i+1]!-linear[i]!)*(v-i);}) as V3;}
     const day=Math.max(0,nx*light.x+ny*light.y+nz*light.z);
+    const vx=position[0]-interp('px'),vy=position[1]-interp('py'),vz=position[2]-interp('pz'),mu=Math.abs((vx*nx+vy*ny+vz*nz)/Math.hypot(vx,vy,vz));
     let rgb:V3=[r,g,bl];
     if(item.body==='sun'){
-     if(textured){const vx=position[0]-interp('px'),vy=position[1]-interp('py'),vz=position[2]-interp('pz'),mu=Math.abs((vx*nx+vy*ny+vz*nz)/Math.hypot(vx,vy,vz));rgb=rgb.map(v=>v*(1.5*(.46+.54*mu))) as V3;}
+     if(textured){rgb=rgb.map(v=>v*(1.5*(.46+.54*mu))) as V3;}
     }else if(item.body){
      const fill=textured?.05:baselineFill;
-     rgb=rgb.map(v=>textured?fill*(1-day)+v*day:v*(fill+(1-fill)*day)) as V3;
+     rgb=textured&&!legacyNight?orbitLight(rgb,day,mu,dark,fill):rgb.map(v=>textured?fill*(1-day)+v*day:v*(fill+(1-fill)*day)) as V3;
     }else{const lit=.45+.55*Math.max(0,nx*.4+ny*.7+nz*.5);rgb=rgb.map(v=>v*lit) as V3;}
-    rgb.forEach((v,k)=>buffer[j*3+k]=Math.round(gamma(aces(v*(dark?1:1.05)))*255));
+    rgb=aces(rgb,dark?1:1.05);
+    night[j]=day===0&&item.body==='earth'?1:day===0&&item.body==='moon'?2:0;
+    rgb.forEach((v,k)=>buffer[j*3+k]=Math.round(gamma(v)*255));
+    luma[j]=luminance([0,1,2].map(k=>toLinear(buffer[j*3+k]!/255)) as V3);
    }
   }
  }
  const caption=`<svg width="${width}" height="${height}"><text x="20" y="${height-30}" font-size="15" font-family="sans-serif" fill="${dark?'#e7e5df':'#2a2824'}">${title}</text><text x="20" y="${height-12}" font-size="11" font-family="monospace" fill="${dark?'#b9b4a8':'#555047'}">CPU MESH PREVIEW · ${textured?'LIVE ATLAS SURFACE':'ROUND-1 BASELINE'} · ${tris} TRIANGLES · NO BROWSER / GPU / HUD QA</text></svg>`;
  await sharp(buffer,{raw:{width,height,channels:3}}).composite([{input:Buffer.from(caption)}]).png().toFile(resolve(output,name+'.png'));
- viewReports.push({name,triangles:tris,position,target,fov,textured});process.stdout.write(name+'\n');
+ const plate=luminance((dark?[31,33,36]:[233,228,216]).map(v=>toLinear(v/255)) as V3);
+ const contrast=['earth','moon'].flatMap((body,k)=>{
+  let count=0,sum=0;for(let j=0;j<night.length;j++)if(night[j]===k+1){count++;sum+=luma[j]!;}
+  if(!count)return [];
+  const mean=sum/count;return [{body,pixels:count,meanLuminance:mean,plateLuminance:plate,luminanceRatio:mean/plate,contrastRatio:(Math.max(mean,plate)+.05)/(Math.min(mean,plate)+.05)}];
+ });
+ viewReports.push({name,triangles:tris,position,target,fov,textured,theme:dark?'cinema':'paper',legacyNight,contrast});process.stdout.write(name+'\n');
 }
 // Close-ups use the same shipped geometry with unit-scale body placements.
 const identity=new Matrix4();
@@ -141,7 +153,7 @@ for(const [name,direction]of [['earth-singapore',geographicDirection(10,108)],['
  await render(name,[{g:model.g,matrix:identity,color:new Color('white'),texture:model.texture,body:'earth'}],pos,[0,0,0],38,light,'Natural Earth 110m · continents, illustrative clouds, fixed Singapore locator');
 }
 const earth=maps.get('earth-body')!;
-await render('earth-night',[{g:earth.g,matrix:identity,color:new Color('white'),texture:earth.texture,body:'earth'}],[3.5,.6,0],[0,0,0],38,[-1,.1,0],'Neutral grey teaching fill on the night side',true,true);
+await render('earth-night',[{g:earth.g,matrix:identity,color:new Color('white'),texture:earth.texture,body:'earth'}],[3.5,.6,0],[0,0,0],38,[-1,.1,0],'Cinema · neutral illustrative night fill; analytic Sun unchanged',true,true);
 const moon=maps.get('moon-body')!;
 for(const [name,pos,light]of [['moon-nearside',[3.4,.1,0],[1,.15,.15]],['moon-quarter',[3.4,.1,0],[.15,.1,1]],['moon-farside',[-3.4,.2,0],[-1,.3,.2]]] as [string,V3,V3][]){
  await render(name,[{g:moon.g,matrix:identity,color:new Color('white'),texture:moon.texture,body:'moon'}],pos,[0,0,0],38,light,'LROC maria and crater rays · LOLA relief at true vertical scale');
@@ -150,6 +162,19 @@ const sun=maps.get('sun-body')!;
 await render('sun-self-lit',[{g:sun.g,matrix:identity,color:new Color('white'),texture:sun.texture,body:'sun'}],[2,.7,3],[0,0,0],38,[-1,0,0],'Self-luminous photosphere · restrained granulation and limb darkening');
 await render('sun-self-lit-cinema',[{g:sun.g,matrix:identity,color:new Color('white'),texture:sun.texture,body:'sun'}],[-2,.2,-3],[0,0,0],38,[1,0,0],'Self-lit Sun · opposing camera and light · no moving specular',true,true);
 await render('moon-night',[{g:moon.g,matrix:identity,color:new Color('white'),texture:moon.texture,body:'moon'}],[3.4,.1,0],[0,0,0],38,[-1,0,0],'Neutral dark grey lunar night-side teaching fill',true,true);
+// Direct before/after pairs, quarter phase and geographically different night
+// views. Paper pairs must be byte-identical below the captions.
+for(const body of ['earth','moon'] as const)for(const dark of [false,true])for(const legacy of [true,false]){
+ const model=maps.get(`${body}-body`)!;
+ for(const [view,pos,light]of [['night',[3.5,.1,0],[-1,0,0]],['quarter',[3.5,.1,0],[0,0,1]],['reverse',[-3.5,.3,0],[1,0,0]]] as [string,V3,V3][]){
+  await render(`${body}-${view}-${dark?'cinema':'paper'}-${legacy?'before':'after'}`,[{g:model.g,matrix:identity,color:new Color('white'),texture:model.texture,body}],pos,[0,0,0],38,light,`${body} · ${view} · ${dark?'cinema':'paper'} · ${legacy?'before':'after'} · illustrative ambient, not measured radiance`,true,dark,.035,legacy);
+ }
+}
+{
+ const s=snapshot(1,0),c=chapters[1]!.state.beats[0]!.camera,hide=chapters[1]!.state.beats[0]!.hide;
+ const items=pieces(s,true,file.parts.filter(p=>!hide.includes(p.id)).map(p=>p.id));
+ for(const dark of [false,true])for(const legacy of [true,false])await render(`beat-01-1-${dark?'cinema':'paper'}-${legacy?'before':'after'}`,items,c.position,c.target,c.fov,s.solarDirections.earth,`01.1 · actual snapshot and author camera · ${dark?'cinema':'paper'} · ${legacy?'before':'after'}`,true,dark,.035,legacy);
+}
 // A camera and inspection light at Earth isolate orientation from lunar phase.
 // These four panels verify the actual snapshot quaternion, not a duplicate map.
 for(const angle of [0,90,180,270]){

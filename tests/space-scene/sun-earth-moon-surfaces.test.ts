@@ -12,6 +12,7 @@ import { createPartMaterial, stylePartMaterial } from '../../src/engines/space-s
 import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 import live from '../../src/content/topics/sun-earth-moon/data/parts.json';
 import { geographicDirection, globe, sampleMap, SINGAPORE } from '../../scripts/geo/sun-earth-moon/surfaces';
+import { aces, luminance, toLinear, mappedOrbitLight, type RGB } from '../../scripts/geo/sun-earth-moon/night-fill';
 const model='public/models/sun-earth-moon.glb';
 let doc:Document, gltf:GLTF;
 beforeAll(async()=>{
@@ -82,9 +83,53 @@ describe('sun-earth-moon live local surfaces',()=>{
     const shader={uniforms:UniformsUtils.clone(ShaderLib.standard.uniforms),vertexShader:ShaderLib.standard.vertexShader,fragmentShader:ShaderLib.standard.fragmentShader} as Parameters<typeof pm.material.onBeforeCompile>[0];
     pm.material.onBeforeCompile(shader,{} as WebGLRenderer);
     expect(pm.uniforms.uOrbitLight.value).toBe(0);
-    expect(shader.fragmentShader).toContain('#ifdef USE_MAP\nif (uOrbitLight < 1.5) outgoingLight = mix(vec3(uOrbitFill),diffuseColor.rgb,day);\n#endif');
+    expect(shader.fragmentShader).toMatch(/#ifdef USE_MAP\nif \(uOrbitLight < 1.5\) outgoingLight = [^;]+;\n#endif/);
     expect(shader.fragmentShader).toContain('#include <lights_physical_fragment>');
     expect(shader.fragmentShader).toContain('outgoingLight = diffuseColor.rgb * gain + totalEmissiveRadiance;');
+    pm.material.dispose();
+  });
+  it('separates the cinema night surface from the actual plate token, preserving paper and the direct-Sun term',()=>{
+    const pm=createPartMaterial();
+    const shader={uniforms:UniformsUtils.clone(ShaderLib.standard.uniforms),vertexShader:ShaderLib.standard.vertexShader,fragmentShader:ShaderLib.standard.fragmentShader} as Parameters<typeof pm.material.onBeforeCompile>[0];
+    pm.material.onBeforeCompile(shader,{} as WebGLRenderer);
+    // Evaluate the emitted GLSL expression, rather than a duplicate fill formula.
+    const light=mappedOrbitLight(shader.fragmentShader);
+    const css=readFileSync('src/theme/tokens.css','utf8');
+    const themes=[css.split(':root[data-theme="cinema"]')[0]!,css.split(':root[data-theme="cinema"]')[1]!];
+    const token=(theme:string,key:string):RGB=>{
+      const hex=new RegExp(`--${key}: #([a-f0-9]{6});`).exec(theme)![1]!;
+      return [0,2,4].map(i=>toLinear(parseInt(hex.slice(i,i+2),16)/255)) as RGB;
+    };
+    expect(token(themes[0]!,'ink')[0]).toBeLessThan(.5);
+    expect(token(themes[1]!,'ink')[0]).toBeGreaterThan(.5);
+    const plate=luminance(token(themes[1]!,'paper'));
+    const contrast=(y:number)=>(y+.05)/(plate+.05);
+    const before=luminance(aces([.05,.05,.05],1));
+    expect(contrast(before)).toBeLessThan(1.3);
+    // Screen-area-weighted normals across a night disc; includes the dark
+    // ocean and bright lunar highlands without inventing city-light textures.
+    for(const albedo of [[.03,.06,.07],[.45,.43,.4]] as RGB[]){
+      let mean=0;
+      for(let i=0;i<200;i++){
+        const mu=Math.sqrt(1-(i+.5)/200);
+        mean+=luminance(aces(light(albedo,0,mu,true),1))/200;
+        for(const day of [0,.001,.1,.5,1]){
+          const paper=albedo.map(v=>.05*(1-day)+v*day) as RGB;
+          expect(light(albedo,day,mu,false)).toEqual(paper);
+        }
+      }
+      expect(contrast(mean)).toBeGreaterThan(1.9);
+      expect(mean).toBeLessThan(.12); // still a dark surface, not a lit grey day
+      expect(light(albedo,1,.6,true)).toEqual(albedo);
+      expect(light(albedo,0,.6,true,0)).toEqual([0,0,0]);
+      expect(luminance(light(albedo,0,1,true))).toBeGreaterThan(luminance(light(albedo,0,0,true)));
+    }
+    // Shader scope: PBR (uOrbitLight=0), self-lit Sun (=2), and untextured
+    // analytic bodies retain the old paths, including the exact Lambert dot.
+    expect(shader.fragmentShader).toContain('if (uOrbitLight > 0.5) {');
+    expect(shader.fragmentShader).toContain('float day = max(0.0,dot(inverseTransformDirection(normalize(vNormal),viewMatrix),uOrbitSun));');
+    expect(shader.fragmentShader).toContain('outgoingLight = diffuseColor.rgb * (uOrbitLight > 1.5 ? 1.0 : uOrbitFill + (1.0-uOrbitFill)*day);');
+    expect(readFileSync('src/content/topics/solar-system/data/parts.json','utf8')).not.toContain('solarIllumination');
     pm.material.dispose();
   });
   it('uses the flat local /models/<name>.glb route',()=>{
