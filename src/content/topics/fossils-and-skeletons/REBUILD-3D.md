@@ -607,3 +607,21 @@ clean. The final built/public GLBs match SHA-256
 Logs, counts, before snapshot and measurements are in
 `/private/tmp/fossils-fix-2026-11-04/` (`check.log`, `validate.log`, `test.log`,
 `build.log`, `counts-after.json`, `{before,final}-colours.json`).
+
+### Acceptance 2026-11-04 (Claude, real GPU)
+
+Measured on `pnpm shoot fossils-and-skeletons --beats --gpu` (Metal ANGLE,
+1920×1080), museum beat 1, median sRGB over bone pixels (chroma mask) at the
+same authored camera, main vs this branch:
+
+| Theme | Token | Before | After | After p10 / p90 |
+|---|---|---|---|---|
+| Paper | `#6e5a44` | `#a58868` | `#6f5943` | (76,59,42) / (157,141,123) |
+| Cinema | `#97816a` | `#c3b19b` | `#8e7b67` | (96,81,66) / (173,155,133) |
+
+Per skeleton (Prince / Apollonia / Twinky ribcage) the paper medians are
+`#6f5942` / `#6f5942` / `#705a43`; bone vs paper background contrast is about
+5.3:1 (was 2.6:1). The CPU estimates above agree with the GPU within a few
+levels. Every other beat in both themes (theropod, myna, strata, tracks) is
+pixel-identical to main. The three studies now read as three dark outlines on
+the ivory plate; separation comes mainly from value contrast plus the stagger.
