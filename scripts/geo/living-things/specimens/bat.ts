@@ -29,7 +29,9 @@ export function sculptedFruitBat():Model {
  const headCentres=new CatmullRomCurve3(sections.map(([z,y])=>new Vector3(0,y!,z!)));
  const headRadii=new CatmullRomCurve3(sections.map(([, ,x,y])=>new Vector3(x,y,0)));
  const head=surface(80,64,(u,v)=>{
-  const c=headCentres.getPoint(u),r=headRadii.getPoint(u),a=-v*Math.PI*2;
+  // Start the periodic chart under the chin: a simplified triangle straddling
+  // the UV seam samples the coarsest mip, so it must not sit on the cheek.
+  const c=headCentres.getPoint(u),r=headRadii.getPoint(u),a=-v*Math.PI*2-Math.PI/2;
   const x=Math.cos(a)*r.x,y=c.y+Math.sin(a)*r.y,z=c.z;
   const cheek=.00042*Math.exp(-Math.pow((z-.0078)/.003,2)-Math.pow((y-.0418)/.0028,2));
   return [x+Math.sign(x)*cheek,y,z];
@@ -68,7 +70,7 @@ export function sculptedFruitBat():Model {
  // Paired upper-lip lobes continue beneath the rhinarium, with an actual
  // shallow median cleft rather than a painted line at the chin.
  const lipPad=surface(24,40,(u,v)=>{
-  const a=u*Math.PI,b=-v*Math.PI*2,front=Math.max(0,Math.cos(a));
+  const a=u*Math.PI,b=-v*Math.PI*2-Math.PI/2,front=Math.max(0,Math.cos(a));
   const x=.00305*Math.sin(a)*Math.cos(b),y=.03965+.00075*Math.sin(a)*Math.sin(b);
   const lobes=.00024*Math.exp(-Math.pow((Math.abs(x)-.00145)/.00075,2));
   const cleft=.00035*Math.exp(-Math.pow(x/.00043,2));
@@ -76,7 +78,7 @@ export function sculptedFruitBat():Model {
  },true);
  {const ix=lipPad.index!,n=lipPad.getAttribute('normal');for(let i=0;i<ix.count;i+=3){const b=ix.getX(i+1);ix.setX(i+1,ix.getX(i+2));ix.setX(i+2,b);}for(let i=0;i<n.count;i++)n.setXYZ(i,-n.getX(i),-n.getY(i),-n.getZ(i));}
  put(lipPad,FUR,'fabric');
- line([[0,.0408,.01365],[0,.0401,.01360],[0,.0396,.01345]],[.00010,.00010,.00004],DARK,6,12);
+ line([[0,.0407,.01350],[0,.04045,.01346],[0,.0402,.01340]],[.00006,.00005,.00002],DARK,6,12);
  for(const side of [-1,1]){
   // Mouth follows the fleshy lip rather than projecting in front of the nose.
   line([[0,.0396,.01345],[side*.0017,.03935,.0134],[side*.0028,.0392,.0120],[side*.0038,.03955,.0097]],[.00006,.00007,.00006,.00002],DARK,6,20);
@@ -107,7 +109,7 @@ export function sculptedFruitBat():Model {
    return eyePoint(theta,a,R+.000025+.000055*Math.sin(Math.PI*s)).toArray() as P;
   },true);reverse(lid);put(lid,'#302821');
   const orbit=surface(10,64,(s,t)=>{
-   const a=-t*Math.PI*2,start=lidTheta(a)+.055;
+   const a=-t*Math.PI*2-Math.PI/2,start=lidTheta(a)+.055; // UV seam under the eye
    // Roll the furred lid back over the buried globe. The entire back edge
    // intersects cranial skin; projecting a wide ring onto the crown folded
    // the outer canthus over itself at oblique viewing angles.

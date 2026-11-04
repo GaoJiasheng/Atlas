@@ -90,7 +90,7 @@ export async function writeSculptures(path:string,specimens:BakedSpecimen[]):Pro
    ...MeshoptSimplifier,
    simplify:(indices:Uint32Array,positions:Float32Array,stride:number,target:number,error:number,flags:('LockBorder')[])=>MeshoptSimplifier.simplifyWithAttributes(indices,positions,stride,new Float32Array(p.getAttribute('COLOR_0')!.getArray()!),3,[.01,.01,.01],null,target,error,flags),
   }:MeshoptSimplifier;
-  simplifyPrimitive(p,{simplifier,ratio:m.getName()==='fruit-bat'?.14:m.getName()==='python'?.55:hero?.32:.20,error:m.getName()==='fruit-bat'?.001:m.getName()==='python'?.001:hero?.0008:.0014,lockBorder:hero});
+  simplifyPrimitive(p,{simplifier,ratio:m.getName()==='fruit-bat'?.14:m.getName()==='python'?.55:hero?.32:.20,error:m.getName()==='fruit-bat'?.0008:m.getName()==='python'?.001:hero?.0008:.0014,lockBorder:hero});
  }
  for(const m of doc.getRoot().listMeshes())restoreUV(doc,buffer,m.listPrimitives()[0]!,charts.get(m.getName())!);
  // Edge collapse can remove the lowest sample. Reseat the simplified surface

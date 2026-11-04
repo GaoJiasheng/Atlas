@@ -538,3 +538,30 @@ Nothing remains unfinished in this cornea-finish scope. Browser/GPU and
 interactive acceptance remain with the subsequent browser review because
 this task explicitly prohibits browser/desktop use. No such acceptance or
 GPU FPS is claimed.
+
+### Browser acceptance 2026-11-04 round 2 (Claude, GPU close-ups)
+
+**Fruit bat: accepted.** Same-angle GPU close-ups (target (0.320, 0.0546, 0.063),
+FOV 5°, 0.35 m; front, both three-quarters, both profiles, high and rear; paper and
+cinema) against main and the AntanO photographs. The face now reads as a
+Cynopterus: big glossy amber-brown globes with softbox catchlights, a clear stop,
+a short blunt muzzle, a grey-pink pad with paired nostrils, pale-rimmed rounded
+ears and a smooth crown. Three small fixes, bat only:
+
+- **Coat seam patches.** The cranial loft's periodic UV seam ran along the right
+  cheek. Simplified triangles straddling it carried UVs from both ends of the chart,
+  so the GPU sampled the coarsest pile mip and drew flat, hard-edged smooth patches
+  on the cheek and muzzle side (also present in round 1; the CPU preview has no
+  mips, so it could not show them). The head, orbit and upper-lip charts now start
+  under the chin / under the eye, out of view. A faint crescent remains where the
+  seam reaches the occipital pole, visible only from directly behind at close range.
+- **Median cleft.** The dark philtrum line stood in front of the lip and read as a
+  pin hanging from the nose; it is now thinner, seated in the groove and stops at
+  the lip.
+- **Bat simplification error** 0.0010 → 0.0008, for rounder nostrils and lids.
+
+Fruit bat 23,098 → 24,952 triangles; topic 192,889 GLB triangles; GLB 1,467,944 →
+1,497,244 bytes. `audit-face-fix.ts --bat-only`: the other 27 decoded meshes and all
+non-envelope topic data are identical. The `atlasRoughness` opt-in in
+`GltfSource.tsx` was checked on frog-and-chicken (paper and cinema, every shot):
+main-vs-branch pixel differences stay within main-vs-main GPU run noise.
