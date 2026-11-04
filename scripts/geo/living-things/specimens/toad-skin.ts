@@ -23,14 +23,15 @@ export function dermalRelief(q:Vector3,n:Vector3,warts:Wart[],cranial=false):Rel
    const u=(q.x-.0068)/.0058,z=side*q.z-(.0090+.00065*Math.sin(u*2.4));
    const f=profile(u*u+(z/.0031)**2)*Math.min(1,n.y*3);
    height+=.00125*f;dark=Math.max(dark,.34*f);
-   const path=[[.0205,.0035],[.0183,.0050],[.0155,.0062],[.0120,.0075]];
+   const path=[[.0205,.0035],[.0183,.0050],[.0155,.0062],[.0120,.0075],[.0104,.0087]];
    let distance=Infinity;
    for(let i=0;i<path.length-1;i++){
     const a=path[i]!,b=path[i+1]!,dx=b[0]!-a[0]!,dz=b[1]!-a[1]!,t=Math.max(0,Math.min(1,((q.x-a[0]!)*dx+(side*q.z-a[1]!)*dz)/(dx*dx+dz*dz)));
     distance=Math.min(distance,Math.hypot(q.x-a[0]!-dx*t,side*q.z-a[1]!-dz*t));
    }
-   const crest=profile((distance/.00086)**2)*Math.min(1,n.y*3);
-   height+=.00063*crest;dark=Math.max(dark,.88*crest);
+   // Raised enough to read as the dark bony ridge at specimen distance.
+   const crest=profile((distance/.00100)**2)*Math.min(1,n.y*3);
+   height+=.00090*crest;dark=Math.max(dark,crest);
   }
  }
  return {height,dark};
@@ -58,7 +59,7 @@ export function wartyToad(model:Model):Model {
   const axes=cranial?new Vector3(...(part===0?[.01775,.010224,.01491]:[.0092,.00644,.010304]) as [number,number,number]):null;
   // Resolution goes into the uninterrupted skin rather than separate wart
   // caps. The tiny ventral regions receive fewer vertices during baking.
-  let g=cranial?new SphereGeometry(1,part===0?128:96,part===0?72:56):modelGeometry({primitive:prim,extra:[]});
+  let g=cranial?new SphereGeometry(1,128,part===0?72:80):modelGeometry({primitive:prim,extra:[]});
   if(cranial)g.scale(axes!.x,axes!.y,axes!.z).translate(centre!.x,centre!.y,centre!.z);
   const p=g.getAttribute('position'),n=g.getAttribute('normal'),ix=g.index!,warts:Wart[]=[];
   const makeWart=(q:Vector3,normal:Vector3)=>{

@@ -370,3 +370,22 @@ Local ignored cache directories and a byte-for-byte local copy of the existing
 Drei dependency resolved Vite cache permissions and one unrelated solar-system
 suite's deep-import resolution. No dependency versions or tracked configuration
 changed. Final gate logs are in `/tmp/atlas-living-fix-2026-11-04/`.
+
+### Browser acceptance 2026-11-04 (Claude, GPU close-ups)
+
+- **Asian toad: accepted after three seating fixes.** Codex's dermal warts,
+  crests and parotoids are seated (no gap at 3–6° grazing views). Two older
+  pieces from `digits()` still floated and are now toad-only rebuilds: the upper
+  eyelid is a fold running along the eyeball sphere and sunk into it along its
+  whole length (it was an arc hovering above the eye), and the tympanum is a
+  thin disc turned to the torso skin normal and sunk to stand barely proud (it
+  was a coin standing upright on the head). The displaced cranial crests were
+  too faint to read as the dark bony ridges the detail text names, so they are
+  raised to 0.90 mm over a 1.0 mm support, fully dark, extended a little behind
+  the orbit, and the head dermis is sampled 128 × 80 so the narrow ridge no
+  longer stair-steps. Toad 20,861 → 24,123 triangles; topic 231,589; GLB
+  1,470,024 bytes. The tree frog is unchanged.
+- **Fruit bat: sent back.** The face is better than the shrew it replaced but
+  still reads as a rat or opossum at specimen close range: flat black almond
+  eye decals instead of large glossy eyeballs, and a profile whose crown runs
+  in one slope into a tapering muzzle.
