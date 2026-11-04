@@ -155,3 +155,39 @@ Round-3 GLB: 1,489,796 bytes; 179,787 sculpted triangles, 227,351 triangles incl
 all native scene pieces before visibility. The exact runtime procedural finish
 maps are generated locally by `textures.ts`; UVs, colour fields and all added
 geometry are original code in this topic's generator directory.
+
+
+### Fix 2026-11-04 — Cynopterus face and integrated toad dermis
+
+Original generated geometry; no third-party mesh or photo texture was added.
+The round-3 coat palette and existing runtime finish samplers are retained.
+The following photographs were actually inspected before rebuilding and during
+front/three-quarter comparisons. They remain development references outside
+the deployed site; their licences do not describe the original procedural mesh.
+
+| Photographic reference | Author / licence | Features checked |
+| --- | --- | --- |
+| [Cynopterus frontal face](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).jpg) | AntanO, CC BY-SA 4.0 | Broad crown and cheeks, high almond eyes, short nasal bridge, paired flared nostrils, upper-lip cleft |
+| [Cynopterus three-quarter close-up](https://commons.wikimedia.org/wiki/File:Close-up_of_Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).JPG) | AntanO, CC BY-SA 3.0 | Blunt snout profile, fleshy nostril margin, curved closed lip and eye seating |
+| [Cynopterus in flight, Philippines](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis,_Philippines_2.jpg) | Author unknown, Philippine Government source; Commons marks PD-PhilippinesGov | Rounded cupped ears, pale perimeter, broad canine face and forward eyes |
+
+The toad retains the species basis in S6 (NParks Common Asian Toad): cranial
+crests behind the eyes and dry bumpy skin. This fix changes how those existing
+features join the dermis, without adding species or teaching claims. All warts,
+crests and parotoids are now continuous displacement of the parent skin.
+
+### Fix 2026-11-04 round 2 — fruit-bat face
+
+The same inspected AntanO frontal and three-quarter photographs above, plus the
+Nick Baker / EcologyAsia flight photograph linked under Polish 2026-11-03,
+support this pass. The latter supplies a true profile, cropped and mirrored
+only in the development comparison. It remains copyrighted, reference only.
+No reference photograph is embedded in the GLB or shipped as a texture.
+
+The forehead stop, short deep muzzle, paired flared nasal tubes, globe size,
+lid seating and amber iris are original photographic reconstructions. The
+2.2 mm globe radius and 1.5 mm protrusion are **model design dimensions**, not
+measurements of a biological specimen. The existing bilingual species text
+and all teaching counts remain unchanged. A build-only two-pixel roughness
+mask is prepared for the proposed loader opt-in; it contains numeric finish
+values, no photographic content. See REBUILD-3D.md for its pending status.

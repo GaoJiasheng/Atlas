@@ -101,7 +101,7 @@ Final gate results are recorded in the continuation section below. Decoded check
 
 Final decoded close-ups: `/tmp/atlas-living-polish/{javan-myna,penguin,fruit-bat,myna-feet,penguin-feet,bat-head,birds-nest-fern,staghorn-fern,mushroom,mushroom-gills,tree-frog,house-gecko}-angles.png` (three angles each). Every baked specimen also has a three-angle sheet in that directory, plus `case-overview-angles.png`. Additional authored surface previews: `/tmp/atlas-living-botanical/*-angles.png` and `/tmp/atlas-living-animal-details/*-angles.png`. Reference contact sheet: `/tmp/living-refs/contact-sheet.jpg`. Final previews inspect installed, compressed/decoded geometry with outward FrontSide culling, smooth vertex normals and a z-buffer; they are CPU geometry checks, not PBR/browser/GPU or interaction acceptance.
 
-Reproduce the installed assets with `pnpm tsx scripts/geo/living-things/build-parts.ts`, then `count-staged.ts`, `validate-staged.ts`, `preview-baked.ts` and `python3 scripts/geo/living-things/render-preview.py`. The three checking/export scripts default to the live assets; `--staging` checks the optional `/tmp/atlas-living-polish/` candidate instead. To compare to the original, preserve its parts as `/tmp/living-before.json` and pass `--baseline /tmp/living-before.json` to the validator. `preview.ts` inspects raw authored surfaces.
+Reproduce the installed assets with `pnpm tsx scripts/geo/living-things/build-parts.ts --cornea-finish`, then `count-staged.ts`, `validate-staged.ts`, `preview-baked.ts` and `python3 scripts/geo/living-things/render-preview.py`. The three checking/export scripts default to the live assets; `--staging` checks the optional `/tmp/atlas-living-polish/` candidate instead. To compare to the original, preserve its parts as `/tmp/living-before.json` and pass `--baseline /tmp/living-before.json` to the validator. `preview.ts` inspects raw authored surfaces.
 
 ## Polish 2026-11-03 — authorized integration
 
@@ -260,3 +260,308 @@ Two small corrections, rebuilt with `build-parts.ts` (still 179,787 GLB triangle
 
 Final GLB: **1,489,956 bytes**.
 
+
+## Fix 2026-11-04
+
+Both browser-acceptance leftovers are installed in the live generated asset.
+The existing **Polish 2026-11-03** record above remains the baseline; this is the
+requested follow-up, preserving the accepted round-3 coat colours and runtime
+finish samplers.
+
+- **Lesser dog-faced fruit bat (`fruit-bat`)**: rebuilt the cranial/muzzle loft
+  with a broad rounded crown and cheeks, a much shorter nasal bridge, high
+  forward-facing almond corneas fitted to the actual cranial surface, closed
+  curved lips and a separate bilobed upper-lip continuation with a median
+  cleft. The broad sculpted rhinarium includes recessed paired nares and
+  flared margins. Pinnae now have continuous oval conchal cups and rounded
+  pale rims. Repeated decoded-photo comparisons corrected the first pass's
+  too-lateral eyes, excessive nose width, eye-footprint misses, steep eye
+  slant and weak upper-lip split; lip seams were seated on the actual surface.
+  References actually viewed: [AntanO frontal face](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).jpg)
+  (CC BY-SA 4.0), [AntanO three-quarter close-up](https://commons.wikimedia.org/wiki/File:Close-up_of_Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).JPG)
+  (CC BY-SA 3.0), and [Philippine Government flight photo](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis,_Philippines_2.jpg)
+  (Commons: PD-PhilippinesGov). Photo metadata/licences and modelling purposes
+  are also in `data/SOURCES.md`. Photos remain development-only references;
+  no photo or downloaded mesh is included in the site.
+- **Asian toad (`asian-toad`)**: removed the detached wart caps, legacy crest
+  sweeps and separate gland shells. Warts, cranial crests and curved paired
+  parotoids are now displacement of the underlying dermis. Compact cubic
+  supports go to zero height and zero slope at their bases; normals derive
+  from that same deformed skin. There is therefore no separate surface edge
+  to hover or cast a seam. Existing limb skin receives integrated small
+  relief too. Brown/black skin colours and physical 12 mm finish charts stay.
+  Species basis remains NParks Common Asian Toad (S6); no new teaching claim.
+  Authored geometry fell from 71,545 to 65,193 triangles, allocating detail
+  to continuous skin instead of overlapping caps.
+
+### Loaded counts and preservation
+
+Counts include the installed meshopt-decoded meshes, all native geometry and
+instances, every part before visibility (including microscopy and all pads).
+
+| Geometry | Before this fix | Installed after |
+| --- | ---: | ---: |
+| Fruit bat | 13,080 | 16,088 |
+| Asian toad | 22,893 | 20,861 |
+| Whole topic | 227,351 | 228,327 |
+| Geometry pieces / draw batches | 57 | 57 |
+| GLB bytes | 1,489,956 | 1,448,636 |
+
+`audit-face-fix.ts /tmp/living-fix-before.glb` confirms only those two decoded
+meshes changed: the other 26 meshes have byte-identical positions, normals,
+colours, UVs, indices and world transforms. Every topic-data field except the
+bat/toad derived envelopes is identical to the baseline. All 51 IDs/order,
+chapter/beat references, labels, teaching counts, sorting, presets, explode
+behaviour and material assignments remain. **No EN/ZH text changes were needed.**
+No engine, shared kit, runtime finish, package or lockfile edits were made.
+
+### Offline visual verification
+
+Actually inspected the decoded final full bat, frontal/three-quarter/profile
+face, toad head and near-horizontal toad sheets, using FrontSide culling,
+smooth normals, a depth buffer and the round-3 runtime finish maps. The final
+preview candidate is byte-identical to the installed GLB. Earlier iteration
+sheets and photo comparisons are retained beside the final directory.
+
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-face-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-reference-front.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-reference-three-quarter.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/fruit-bat-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/toad-head-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/toad-grazing-angles.png`
+
+Face views are frontal (elevation 28°), three-quarter (azimuth 40°, elevation
+25°) and profile (90°, 12°). The three-quarter reference is roll-aligned −15°;
+photo pose/cropping differ, so these are visual comparisons, not a metric scan
+registration. Grazing toad views use elevations 3°, 3° and 6°. The jagged lower
+edge in the isolated head crop is the inspection crop, not an open skin seam.
+
+Reproduce with `build-parts.ts`, `preview-baked.ts fruit-bat asian-toad`, then
+`python3 scripts/geo/living-things/render-preview.py --finishes --out /tmp/atlas-living-fix-2026-11-04/final`
+and `compare-bat-reference.py` (reference directory option `--refs`).
+`export-finish-maps.ts` supplies the unchanged round-3 map samples if needed.
+New regressions verify the torso/head have closed continuous skin topology,
+unit normals, and zero-height/zero-slope wart bases.
+
+Not done: browser/PBR/GPU and interactive screenshot acceptance, because this
+task forbids opening or driving a browser/desktop. No browser or desktop was
+opened; no GPU FPS claim is made. Both requested geometry fixes are complete
+for the subsequent browser acceptance.
+
+### Final gates
+
+- `pnpm check`: green, 0 errors / 0 warnings (4 existing hints).
+- `pnpm validate`: green, 94 topics / 0 errors / 0 warnings.
+- `pnpm test`: green, **271 files / 6,502 tests**. Includes continuous toad
+  topology/support checks and the existing runtime GLTFLoader/meshopt, UV,
+  triangle/byte and sorting-envelope regressions.
+- `pnpm build`: green, **191 pages**. Built GLB is byte-identical to the installed
+  source; SHA-256 `17ef4f366eeab41386b5557587b06378561cf54c78e6d031706a5c18709736ce`.
+- `count-staged.ts`: green, 228,327 triangles / 57 pieces before visibility.
+- `validate-staged.ts --baseline /tmp/living-fix-before.json`: green, all floors,
+  envelopes and case cells fit; IDs/order, sorting and presets unchanged.
+- `audit-face-fix.ts /tmp/living-fix-before.glb`: green, exact preservation of
+  all 26 other decoded meshes and every non-envelope topic-data field.
+- `git diff --check`: green. No git writes, browser/desktop use, package or
+  lockfile changes.
+
+The worktree initially linked all dependencies to a read-only sibling checkout.
+Local ignored cache directories and a byte-for-byte local copy of the existing
+Drei dependency resolved Vite cache permissions and one unrelated solar-system
+suite's deep-import resolution. No dependency versions or tracked configuration
+changed. Final gate logs are in `/tmp/atlas-living-fix-2026-11-04/`.
+
+### Browser acceptance 2026-11-04 (Claude, GPU close-ups)
+
+- **Asian toad: accepted after three seating fixes.** Codex's dermal warts,
+  crests and parotoids are seated (no gap at 3–6° grazing views). Two older
+  pieces from `digits()` still floated and are now toad-only rebuilds: the upper
+  eyelid is a fold running along the eyeball sphere and sunk into it along its
+  whole length (it was an arc hovering above the eye), and the tympanum is a
+  thin disc turned to the torso skin normal and sunk to stand barely proud (it
+  was a coin standing upright on the head). The displaced cranial crests were
+  too faint to read as the dark bony ridges the detail text names, so they are
+  raised to 0.90 mm over a 1.0 mm support, fully dark, extended a little behind
+  the orbit, and the head dermis is sampled 128 × 80 so the narrow ridge no
+  longer stair-steps. Toad 20,861 → 24,123 triangles; topic 231,589; GLB
+  1,470,024 bytes. The tree frog is unchanged.
+- **Fruit bat: sent back.** The face is better than the shrew it replaced but
+  still reads as a rat or opossum at specimen close range: flat black almond
+  eye decals instead of large glossy eyeballs, and a profile whose crown runs
+  in one slope into a tapering muzzle.
+
+## Fix 2026-11-04 round 2
+
+**Geometry and selective corneal gloss installed.** No toad or tree-frog source was edited. The before/after decoded
+mesh audit confirms exact preservation of all 27 other specimens, including
+3c639336's accepted toad eyelid, tympanum, cranial crests and high-resolution
+head. All non-envelope topic data, IDs/order, teaching counts, bilingual text,
+chapters, beats, sorting, exploding behaviour and presets are unchanged.
+
+### Shape corrections
+
+- Replaced the flat almond eye patches with two closed 2.2 mm spherical globes,
+  embedded 0.7 mm into orbital skin, with 1.5 mm exposed poles. Their diameter
+  is about 23% of cranial length. The cell-fitting scale makes the installed
+  radii approximately 2.08 mm and protrusion approximately 1.42 mm. Dark
+  amber-brown radial irises surround large black pupils. Thin dark lid margins
+  follow the globe, with furred lids rolling back into the skull; a projecting
+  outer-canthal flap found in the first comparisons was removed.
+- Raised the frontal vault about 1.5–2 mm relative to the prior surface over
+  the orbit, then stepped down onto a short, deep muzzle. Successive distal
+  sections retain nearly equal width/depth before the blunt terminal face.
+  The lower jaw and lip were shortened to stay behind the nose, and the
+  median split remains seated in the lip rather than hanging in front.
+- Replaced the old wide rhinarium and shallow depressions with a smaller,
+  squarish grey-pink pad, deep median groove, and two separate flared tubes.
+  Each tube has an outer alar wall, rolled rim and dark descending lumen.
+- Cranial skin is sampled 80 × 64 (previously 56 × 48), with dense samples
+  across the stop and smooth periodic normals. Pinna sampling increased from
+  12 × 48 to 24 × 64. Bare surfaces use constant UVs so the coat's tangent
+  normal map cannot create triangle-dependent faux faceting there. The coat
+  retains its brown/ochre colours, area-weighted directional hairs, authored
+  charts and original fabric/pile material finish.
+- Adjusted **only the bat's** bake simplification to fit the byte budget while
+  retaining the inspected contours. No lower-resolution toad substitute or
+  changes to other specimen encodings were used to pay for the face.
+
+References actually viewed: AntanO's frontal photograph (CC BY-SA 4.0),
+AntanO's close-up (CC BY-SA 3.0), and Nick Baker's NParks flight photograph
+(copyright retained, development reference only). Exact links and purposes
+are in data/SOURCES.md. These are photographic reconstructions, not scans or
+biological measurements. No third-party mesh or photo texture was introduced.
+
+### Polish 2026-11-03 — cornea finish installed (2026-11-04 continuation)
+
+The main session installed the explicit `atlasRoughness` opt-in in
+`GltfSource.tsx`; this continuation leaves that engine file untouched.
+Regenerated with `pnpm tsx scripts/geo/living-things/build-parts.ts --staging
+--cornea-finish` and installed the staged GLB at
+`public/models/living-things.glb`. The generated parts JSON is byte-identical
+to the already installed round-2 data, so it requires no replacement.
+
+A second constant UV channel samples the embedded two-pixel numeric mask:
+235/255 for the coat and 20/255 for the corneas. The existing fabric roughness
+factor (0.96) gives approximately **0.885 coat / 0.075 cornea**. Only the
+roughness map is replaced; the accepted coat colours, albedo/normal charts,
+vertex colours, shader and family fading stay intact. The low-roughness eye
+surfaces now reflect the studio softboxes as clear specular catchlights.
+No painted highlights, new geometry or third-party texture was introduced.
+References remain the three photographs listed above; no new biological or
+teaching claims, labels or EN/ZH text changes are needed.
+
+`living-things-cornea.test.ts` loads the installed embedded PNG with the real
+Three GLTFLoader and meshopt decoder (offline image decoding only). It checks
+numeric pixels, UV channel/orientation/colour space, exclusive bat opt-in,
+paper/cinema styling, shader/uniform preservation and ordinary/ghost fading.
+Absent, false and non-boolean flags retain the exact existing material path;
+existing `atlasSurface` materials retain their previous colour-map behavior.
+The realism loader regression now expects the one local embedded PNG.
+
+Finish-only preservation audit: **all 28 decoded meshes**, indices, attributes
+(including both UV channels), transforms and complete topic data are identical
+to the installed geometry baseline. Fruit bat **23,098 → 23,098 triangles**;
+whole topic **238,599 → 238,599 triangles**, **57 → 57 pieces**; GLB
+**1,467,456 → 1,467,944 bytes** (+488), below 1.5 MB. All 27 other specimens,
+including the accepted toad, retain their exact decoded geometry.
+
+### Budgets and visual verification
+
+| | Before (accepted-toad baseline) | Installed geometry + finish |
+|---|---:|---:|
+| Fruit bat | 16,088 triangles | 23,098 triangles |
+| All sculpted specimens | 184,025 triangles | 191,035 triangles |
+| Entire topic before visibility | 231,589 triangles | 238,599 triangles |
+| Stage pieces | 57 | 57 |
+| GLB bytes | 1,470,024 | 1,467,944 |
+
+All fit the case/sorting envelopes and floor; the entire-topic count includes
+hidden and magnified parts and remains below 300k, hence below the requested
+350k on-screen ceiling. No GPU FPS is claimed.
+
+Offline raster uses the decoded compressed GLB. Key/fill/rim directions,
+colours/intensities, hemisphere colours/intensity, environment intensity and
+exposure are read directly from the engine's `Lighting.tsx` paper rig. The
+same Three.js `RoomEnvironment` is sampled with CPU rays; numerical diffuse/
+specular convolution substitutes for GPU PMREM. GGX, ACES and sRGB output are
+used, along with the actual exported runtime pile-map pixels. This is a CPU
+PBR comparison, not a claim of pixel-identical GPU PMREM output.
+
+All cameras target **(0.320, 0.0546, 0.063)** at **FOV 5°, distance 0.35 m**.
+The case mesh is translated to its tray pose (+0.5, −0.004, +0.345), without
+altering its geometry. Front uses azimuth/elevation 0°/28°, three-quarter
+40°/25°, profile 90°/0°; an additional rear view is 180°/5°. Three-quarter
+photo roll is aligned −15°; profile reference is mirrored to match direction.
+
+Actually inspected successive iterations, including front/three-quarter/profile
+and rear: `/tmp/atlas-living-bat-round2/iteration3` through `iteration8`.
+The installed-finish comparisons were regenerated from the real public GLB
+and inspected at close range:
+
+- `/tmp/atlas-living-bat-round2/finish-installed/comparison-front.png`
+- `/tmp/atlas-living-bat-round2/finish-installed/comparison-three-quarter.png`
+- `/tmp/atlas-living-bat-round2/finish-installed/comparison-profile.png`
+- `/tmp/atlas-living-bat-round2/finish-installed/bat-rear.png`
+- `/tmp/atlas-living-bat-round2/finish-installed/bat-angles.png`
+
+The CPU preview now decodes both roughness values from the embedded mask and
+uses the production fabric roughness factor, including the coat region.
+Reproduce using `preview-bat-studio.ts <output-dir>
+public/models/living-things.glb` then `render-bat-studio.py <output-dir>`.
+These are the live installed materials, with no proposal override.
+
+Browser/GPU acceptance, interactive screenshots and e2e are not run because
+the task expressly forbids browser/desktop use. No browser or desktop was
+opened; no git writes, package/lockfile or shared engine edits were made.
+
+### Final gates for the installed geometry and cornea finish
+
+- `pnpm check`: green, 0 errors / 0 warnings; 4 pre-existing hints.
+- `pnpm validate`: green, 94 topics / 0 errors / 0 warnings.
+- `pnpm test`: green, **273 files / 6,512 tests**, including the eight new
+  cornea loading/material regressions. No test limits were changed.
+- `pnpm build`: green, **191 pages**. Source and built GLB are byte-identical;
+  SHA-256 `27b3b98a52a08638f4535815c3b4cb4b47778c92d68fb1b01ecaa779b8d97b3f`.
+- `audit-face-fix.ts <accepted-toad-before.glb> --bat-only`: green; all 27
+  other decoded meshes and every non-envelope topic-data field are identical.
+- Finish-only audit against `finish-installed/before.glb`: green; all 28
+  decoded meshes, transforms and the complete parts JSON are identical.
+- `validate-staged.ts --baseline <before.json>`: green; floors, envelopes,
+  footprints, IDs/order, sorting and presets preserved.
+- `count-staged.ts`: green, **238,599 triangles / 57 pieces** before visibility.
+- `git diff --check`: green. The engine opt-in was already applied by the main
+  session and was not edited further. Gate logs, preservation evidence and the
+  inspected live-material previews are in
+  `/tmp/atlas-living-bat-round2/finish-installed/`.
+
+Nothing remains unfinished in this cornea-finish scope. Browser/GPU and
+interactive acceptance remain with the subsequent browser review because
+this task explicitly prohibits browser/desktop use. No such acceptance or
+GPU FPS is claimed.
+
+### Browser acceptance 2026-11-04 round 2 (Claude, GPU close-ups)
+
+**Fruit bat: accepted.** Same-angle GPU close-ups (target (0.320, 0.0546, 0.063),
+FOV 5°, 0.35 m; front, both three-quarters, both profiles, high and rear; paper and
+cinema) against main and the AntanO photographs. The face now reads as a
+Cynopterus: big glossy amber-brown globes with softbox catchlights, a clear stop,
+a short blunt muzzle, a grey-pink pad with paired nostrils, pale-rimmed rounded
+ears and a smooth crown. Three small fixes, bat only:
+
+- **Coat seam patches.** The cranial loft's periodic UV seam ran along the right
+  cheek. Simplified triangles straddling it carried UVs from both ends of the chart,
+  so the GPU sampled the coarsest pile mip and drew flat, hard-edged smooth patches
+  on the cheek and muzzle side (also present in round 1; the CPU preview has no
+  mips, so it could not show them). The head, orbit and upper-lip charts now start
+  under the chin / under the eye, out of view. A faint crescent remains where the
+  seam reaches the occipital pole, visible only from directly behind at close range.
+- **Median cleft.** The dark philtrum line stood in front of the lip and read as a
+  pin hanging from the nose; it is now thinner, seated in the groove and stops at
+  the lip.
+- **Bat simplification error** 0.0010 → 0.0008, for rounder nostrils and lids.
+
+Fruit bat 23,098 → 24,952 triangles; topic 192,889 GLB triangles; GLB 1,467,944 →
+1,497,244 bytes. `audit-face-fix.ts --bat-only`: the other 27 decoded meshes and all
+non-envelope topic data are identical. The `atlasRoughness` opt-in in
+`GltfSource.tsx` was checked on frog-and-chicken (paper and cinema, every shot):
+main-vs-branch pixel differences stay within main-vs-main GPU run noise.

@@ -7,7 +7,7 @@
  * biosch.hku.hk/ecology/hkreptiles/lizard/Hemidactylus_frenatus.html (split pads),
  * fisheries.noaa.gov/species/hawksbill-turtle (bill and paired head scales).
  */
-import { BufferGeometry, CatmullRomCurve3, Float32BufferAttribute, SphereGeometry, TubeGeometry, Vector3 } from 'three';
+import { BufferGeometry, CatmullRomCurve3, Float32BufferAttribute, Quaternion, SphereGeometry, TubeGeometry, Vector3 } from 'three';
 import { wartyToad } from './toad-skin';
 import { reticulatedSkin } from './python-skin';
 import { foldedLimb } from '../implicit';
@@ -154,7 +154,13 @@ function digits(model: Model, kind: 'frog' | 'toad' | 'gecko' | 'squirrel'): Mod
   if (kind === 'toad') extra = extra.map((p, i) => p.kind === 'lathe' && i >= 1 && i <= 10 ? { ...p, scale: [0.50 + (i % 3) * 0.14, 0.30 + (i % 4) * 0.11, 0.46 + (i % 2) * 0.19] } : p);
   if (kind === 'frog' || kind === 'toad') for (const side of [-1, 1]) {
     // Tympanum behind each eye, upper eyelid, gently bowed jaw and nostrils.
-    skin.oval([0.0118, 0.0183, side * 0.0082], [0.0017, 0.00165, 0.0004]);
+    if (kind === 'toad') {
+      // Tympanum lies in the torso skin under it (the dermis wartyToad rebuilds): a thin disc turned to the skin normal and sunk to stand barely proud.
+      const x = 0.0118, z = side * 0.0082, a = 0.01775, b = 0.010224, c = 0.01491, y = 0.0122 + b * Math.sqrt(1 - (x / a) ** 2 - (z / c) ** 2);
+      const normal = new Vector3(x / a ** 2, (y - 0.0122) / b ** 2, z / c ** 2).normalize(), drum = new SphereGeometry(1, 16, 10);
+      drum.scale(0.0016, 0.00155, 0.0004).applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 0, 1), normal));
+      skin.add(drum.translate(...pt(new Vector3(x, y, z).addScaledVector(normal, -0.00026))));
+    } else skin.oval([0.0118, 0.0183, side * 0.0082], [0.0017, 0.00165, 0.0004]);
     dark.tube([[0.023, 0.0142, side * 0.0038], [0.0205, 0.0136, side * 0.0074], [0.012, 0.013, side * 0.009]], 0.00019, 6, 9);
     dark.oval([0.023, 0.018, side * 0.0033], [0.00031, 0.00017, 0.00023]);
     const eyeY = kind === 'frog' ? 0.0218 : 0.0185, eyeX = kind === 'frog' ? 0.0175 : 0.0192;
@@ -162,7 +168,15 @@ function digits(model: Model, kind: 'frog' | 'toad' | 'gecko' | 'squirrel'): Mod
     const out = new Vector3(0.50, 0.37, side * 0.78).normalize(), horizontal = new Vector3(1,0,0).addScaledVector(out,-out.x).normalize(), vertical = new Vector3().crossVectors(out, horizontal).normalize();
     iris.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00025 - 0.00105 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00265).addScaledVector(vertical, Math.sin(a) * r * 0.00255)); }, 24, 4);
     dark.grid((u, r) => { const a = -u * Math.PI * 2; return pt(new Vector3(eyeX, eyeY, side * eyeZ).addScaledVector(out, eyeR + 0.00031 - 0.00012 * r * r).addScaledVector(horizontal, Math.cos(a) * r * 0.00135).addScaledVector(vertical, Math.sin(a) * r * 0.00039)); }, 24, 4);
-    skin.tube([[eyeX - 0.003, eyeY + 0.001, side * 0.0067], [eyeX, eyeY + 0.003, side * 0.0078], [eyeX + 0.0026, eyeY + 0.0011, side * 0.0068]], 0.00036, 12, 18);
+    if (kind === 'toad') {
+      // Upper eyelid hugs the eyeball: the fold runs along the sphere, sunk into it along its whole length, so no gap shows at grazing angles.
+      const centre = new Vector3(eyeX, eyeY, side * eyeZ), up = new Vector3(0, 1, 0).addScaledVector(out, 0.25).normalize();
+      const along = new Vector3(1, 0, 0).addScaledVector(up, -up.x).normalize();
+      skin.tube(Array.from({ length: 13 }, (_, i) => {
+        const a = (-1 + i / 6) * 1.45, d = up.clone().multiplyScalar(Math.cos(a)).addScaledVector(along, Math.sin(a));
+        return pt(centre.clone().addScaledVector(d, eyeR + 0.00012 - 0.0004 * Math.abs(a / 1.45) ** 3));
+      }), 0.0004, 12, 24);
+    } else skin.tube([[eyeX - 0.003, eyeY + 0.001, side * 0.0067], [eyeX, eyeY + 0.003, side * 0.0078], [eyeX + 0.0026, eyeY + 0.0011, side * 0.0068]], 0.00036, 12, 18);
   }
   if (gecko) for (const side of [-1, 1]) {
     const out=new Vector3(.18,.42,side*.89).normalize(),h=new Vector3(1,0,0).addScaledVector(out,-out.x).normalize(),vertical=new Vector3().crossVectors(out,h).normalize();

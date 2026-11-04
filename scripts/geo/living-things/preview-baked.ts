@@ -40,6 +40,17 @@ for(const [id,name,low,high]of [
  source.triangles.forEach((t,i)=>{const y=(t[1]!+t[4]!+t[7]!)/3;if(y>=min+(max-min)*low&&y<=min+(max-min)*high)for(const key of ['triangles','colours','normals','uvs']as const)chosen[key].push(source[key][i]!);});
  output[name]=chosen;
 }
+// Face-only matched-angle study, excluding the raised wing thumbs.
+const bat=output['fruit-bat'] as {triangles:number[][];colours:number[][];normals:number[][];uvs:number[][];family:string}|undefined;
+if(bat){
+ const part=data.parts.find((p:{id:string})=>p.id==='fruit-bat'),cx=part.primitive.at[0];
+ let lo=Infinity,hi=-Infinity;for(const t of bat.triangles)for(const i of [1,4,7]){lo=Math.min(lo,t[i]!);hi=Math.max(hi,t[i]!);}
+ const face={triangles:[]as number[][],colours:[]as number[][],normals:[]as number[][],uvs:[]as number[][],family:bat.family,views:[[0,28],[40,25],[90,12]]};
+ bat.triangles.forEach((t,i)=>{if([0,3,6].every(j=>Math.abs(t[j]!-cx)<.0093)&&[1,4,7].every(j=>t[j]!>lo+(hi-lo)*.738))for(const key of ['triangles','colours','normals','uvs']as const)face[key].push(bat[key][i]!);});
+ output['bat-face']=face;
+}
+const toad=output['asian-toad'] as {triangles:number[][];colours:number[][];normals:number[][];uvs:number[][];family:string}|undefined;
+if(toad)output['toad-grazing']={...toad,views:[[70,3],[115,3],[5,6]]};
 // Before/after source for the unchanged counters and optional full-scene framing.
 const scene={triangles:[]as number[][],colours:[]as number[][],normals:[]as number[][]};
 for(const raw of data.parts){
