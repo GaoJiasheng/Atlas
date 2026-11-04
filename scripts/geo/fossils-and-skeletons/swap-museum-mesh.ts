@@ -7,15 +7,27 @@ function unpack(bytes:Buffer):{json:Json;bin:Buffer}{
  const length=bytes.readUInt32LE(12),json=JSON.parse(bytes.subarray(20,20+length).toString());
  const start=20+length;return {json,bin:bytes.subarray(start+8,start+8+bytes.readUInt32LE(start))};
 }
-export function swapMuseumMesh(original:Buffer,replacement:Buffer,anchor:number[]):Buffer{
+export function swapMuseumMesh(original:Buffer,replacement:Buffer,anchor:number[],rowSpacing?:number):Buffer{
  const base=unpack(original),fresh=unpack(replacement),json=base.json;
  json.asset.copyright='Original Atlas procedural dinosaur studies: dinosaur-skeleton.ts, sauropod-study.ts and sculpt-museum.ts. CC0-1.0; https://creativecommons.org/publicdomain/zero/1.0/ . No scans or third-party meshes.';
  if(json.skins||json.animations||json.images)throw new Error('This surgical writer supports the geometry-only fossil asset.');
  const nodes=json.nodes.filter((n:Json)=>n.name.endsWith('-study')),meshId=nodes[0].mesh;
  const center=[...nodes.find((n:Json)=>n.name==='apollonia-study').translation];
  const newNode=fresh.json.nodes.find((n:Json)=>n.mesh!==undefined);
+ // The museum mesh opts into the existing GLB surface hook. Retained meshes
+ // keep their materials and compressed buffers byte for byte.
+ const freshMaterials=fresh.json.materials??[];
+ const materialOffset=(json.materials??[]).length;
+ // Replace a previous surgical surface instead of accumulating unused slots.
+ const oldSurface=json.meshes[meshId].primitives[0].material;
+ const reuse=oldSurface!==undefined&&json.materials?.[oldSurface]?.extras?.atlasSurface===true;
+ const surfaceIndex=reuse?oldSurface:materialOffset;
+ json.materials??=[];
+ if(freshMaterials.length)json.materials[surfaceIndex]=structuredClone(freshMaterials[0]);
  for(const node of nodes){
   const offset=node.translation.map((v:number,i:number)=>v-center[i]);
+  // Absolute display-only stagger: rebuilding must never accumulate shifts.
+  if(rowSpacing!==undefined)offset[0]=Math.sign(offset[2])*rowSpacing;
   node.translation=anchor.map((v,i)=>v+(newNode.translation?.[i]??0)+offset[i]);
   node.scale=newNode.scale??[1,1,1];
  }
@@ -45,6 +57,7 @@ export function swapMuseumMesh(original:Buffer,replacement:Buffer,anchor:number[
  json.meshes=json.meshes.map((mesh:Json,i:number)=>{
   const source=i===meshId?fresh:base;
   const output=structuredClone(i===meshId?fresh.json.meshes[newNode.mesh]:mesh);
+  if(i===meshId)for(const p of output.primitives)if(p.material!==undefined)p.material=surfaceIndex;
   for(const p of output.primitives){
    p.indices=copyAccessor(source,p.indices);
    p.attributes=Object.fromEntries(Object.entries(p.attributes).map(([name,index])=>[name,copyAccessor(source,index as number)]));

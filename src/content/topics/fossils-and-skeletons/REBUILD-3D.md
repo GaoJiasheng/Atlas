@@ -466,3 +466,144 @@ repeated scoped builds produce the same SHA-256, also matching the exported
 `dist/models/fossils-and-skeletons.glb`:
 `9547dc62d3e4349c6455f6a286cf9ba09766529ae1a74684387cea56f1e5ffa5`.
 Gate logs: `/private/tmp/fossils-round3-{check,validate,test,build}.log`.
+
+## Fix 2026-11-04 — mineral bone colour and museum separation
+
+**Completed:** corrected the three sauropods' material at topic/asset level and
+adjusted their longitudinal display stagger. No shared engine, theme token,
+kit, package manifest, lockfile or other topic changed. The accepted sculpture,
+33 selectable IDs, context ID, EN/ZH copy, teaching counts, chapter/beat
+references, selection, cutaway and explosion settings remain intact. The
+museum content lives in `07-singapore-skeletons.mdx` in this checkout (the
+three-sauropod scene identified as ch06 in the return brief).
+
+### Cause and repair
+
+The token is correctly registered and resolves to paper `#6e5a44` / cinema
+`#97816a`; Three converts it from sRGB to linear exactly once. The old GLB had
+no texture, vertex colours or source material on this mesh. Its topic material
+was opaque, non-emissive `plastic` (metalness 0, roughness .62, grain roughness
+map). There is no persistent chapter fade or x-ray alpha in the assembled
+museum state. Fog starts outside this assembly's bounds. The pale result
+comes from treating the intended *display* brown as a dielectric base albedo
+under the bright studio lighting: hemisphere + three directionals + the
+RoomEnvironment, followed by ACES (exposure 1.05 paper / 1 cinema). The earlier
+preview omitted that environment and ACES, concealing the problem.
+
+`build-sauropods.ts` now authors an explicit `atlasSurface` GLB material using
+the existing engine hook: linear base-colour multiplier **.44**, roughness
+**.92**, metalness **0**, opaque, no emissive/map/normal map. The fossil token
+still supplies the theme-dependent hue. Original CC0 `bone-surface.ts` bakes
+24 short hemisphere rays per retained vertex into linear `COLOR_0`: darker
+recesses/joint gaps, restrained convex-ridge wear, continuous 3D mottling and
+a very small warm shift on exposed cortex. Colours remain in [0,1]. Baking
+after simplification adds no triangles, meshes, draw calls or runtime work.
+The three skeleton nodes still share one mesh and one material.
+
+The display's source X offsets are now **−.3 / 0 / +.3**, with its existing
+Z offsets **−2.6 / 0 / +2.6** and common scale retained. This makes the heads
+and ribcages step diagonally through the paper plate instead of lining up.
+The corresponding plinths and all twelve foot-contact patches move with their
+skeletons. Two offline layout variants were inspected; the stronger diagonal
+was selected. The accepted 30° chapter/preset/beat cameras are unchanged.
+Three viewport composition regressions still pass. Even the deliberately
+lower side-view diagnostic improves the rear skeleton's visible fraction
+from 85.2% to 86.9% and the middle one from 91.2% to 92.0%; the authored view
+has over 99.98% of each study's projected bone pixels visible.
+
+### Lighting-matched offline measurement and references
+
+`studio-preview.ts` rasterises the actual decoded GLB, with perspective-correct
+normal/colour interpolation, front-face culling and depth testing.
+`studio-cpu.ts` uses the installed engine's linear colours, directional and
+hemisphere intensities/directions, scene environment intensity, GGX/DFG
+multiscattering, exposure and exact Three ACES matrices, then sRGB output.
+It ray-samples the actual installed `RoomEnvironment`, including its boxes,
+point light and emissive panels, and numerically integrates spherical Gaussian
+filters using PMREM's sigma values. This finite sampling replaces GPU cubeUV
+filtering; the old roughness map uses its .92 mean. These are measurements of
+a CPU rendering with the same studio rig, **not GPU screenshots or a promise
+of pixel-identical GPU output**. Fog is outside the sampled assembly. The
+first sampler revision incorrectly counted black-emissive room surfaces as
+emitters; it was corrected and all final before/after images re-rendered.
+Only `before-*`, `final-*` and `comparison-*` are final evidence.
+
+Median sRGB over visible bone pixels only, at the same authored museum camera:
+
+| Theme | Intended token | Before | After |
+|---|---|---|---|
+| Paper | `#6e5a44` | **`#a48765`** (164,135,101) | **`#705a43`** (112,90,67) |
+| Cinema | `#97816a` | **`#c5b39d`** (197,179,157) | **`#927f6a`** (146,127,106) |
+
+Bone pixels: 40,990 before / 40,890 after (stagger changes coverage).
+Paper background/median-bone contrast rises **2.66:1 → 5.12:1**. The stationary
+Apollonia girdle close-up controls for layout: identical 264,482 covered
+pixels, median **`#a38664` → `#705943`**. Colour manifests:
+`/private/tmp/fossils-fix-2026-11-04/{before,final}-colours.json`.
+
+References used: Gavin's specified brown tokens; the installed
+`Lighting.tsx`, `lib/color.ts`, `GltfSource.tsx`, `PartNode.tsx`, Three
+`RoomEnvironment.js`, `lights_physical_pars_fragment.glsl.js`,
+`envmap_physical_pars_fragment.glsl.js` and `tonemapping_pars_fragment.glsl.js`.
+The existing public-domain Hatcher restoration plate
+(`/private/tmp/fossils-diplodocus.jpg`) was inspected for the retained silhouette,
+not for colour. The [museum's official gallery](https://lkcnhm.nus.edu.sg/exhibition/biodiversity-gallery/)
+was checked, but its direct photo retrieval was blocked; no photograph was
+used as a texture, colour measurement or new anatomical authority.
+
+Actually viewed before/after paper/cinema arrays, HUD-clearance proxy arrays,
+single skeleton, girdles, front/rear feet and tail renders. Final previews:
+`/private/tmp/fossils-fix-2026-11-04/final-{museum-paper,museum-cinema,
+museum-hud-paper,museum-hud-cinema,museum-side,sauropod-single,sauropod-girdles,
+sauropod-feet,sauropod-feet-rear,sauropod-tail}.png`.
+Side-by-side boards: `comparison-{paper,cinema}.png` in that directory.
+The HUD rectangles are explicitly labelled offline clearance proxies.
+
+### Geometry, preservation and gates
+
+| Geometry | Before triangles | After triangles |
+|---|---:|---:|
+| One shared sauropod, rendered once | 63,500 | 63,500 |
+| Three sauropods | 190,500 | 190,500 |
+| Three plinths + twelve contact patches | 2,868 | 2,868 |
+| **Museum chapter on screen** | **193,368** | **193,368** |
+| Theropod | 86,864 | 86,864 |
+| Myna + comparison feather | 100,884 | 100,884 |
+| All geometry, including hidden studies | 412,084 | 412,084 |
+
+Asset: **1,869,136 → 2,116,224 bytes**, below 2.5 MB. The retained compressed
+theropod buffers are copied verbatim, with their original exact regression
+fingerprint passing. IDs, names, summaries, details, counts, clipping flags,
+connectivity and explosion vectors compare identical to the input. The data
+preservation fingerprint masks only the authorised museum material and
+plinth/contact X placements; separate checks verify their new placements.
+New regressions load the real asset with Three's GLTFLoader and exercise the
+production material hook, linear tint multiplication, matte/opaque state,
+vertex-colour range and the calibrated lighting response. No test timeout or
+test selection was weakened.
+
+No requested colour or separation fix is deferred. Browser/GPU lighting,
+interactive picking/explosion/cutaway and e2e acceptance remain for the next
+browser-capable session, because this task explicitly prohibits opening or
+driving a browser/desktop. No git writes were used.
+
+Final gates: `pnpm check` passes (0 errors/warnings, four pre-existing hints),
+`pnpm validate` passes (94 topics, 0 errors/warnings), and `pnpm build` passes
+(191 pages). The full unchanged test suite passes: **271 files / 6,502 tests**,
+using `pnpm run test --config /private/tmp/fossils-fix-2026-11-04/vitest-worktree.config.mts --maxWorkers=2`.
+The temporary configuration imports the repository's exact Vitest configuration
+and only adds this worktree and its shared `/Users/gavin/work/atlas/node_modules`
+to Vite's filesystem allow list. The default run collected/passed 6,474 tests
+but could not import Drei's existing `Html.js` for the unrelated solar-system
+suite through the external dependency symlink; the access-only configuration
+restores all 28 tests in that suite. No assertions, selection or timeouts
+changed. A local dependency wrapper also keeps Vite's writable cache inside
+this worktree; no dependencies or manifests changed.
+
+All six topic files pass (72 tests), including the actual GLTFLoader material
+integration and unchanged theropod-buffer fingerprint. `git diff --check` is
+clean. The final built/public GLBs match SHA-256
+`23bf1977bbad64711a77a8d54eb1d6ea0fb049d366bc3d9269d99a320ce5b38e`.
+Logs, counts, before snapshot and measurements are in
+`/private/tmp/fossils-fix-2026-11-04/` (`check.log`, `validate.log`, `test.log`,
+`build.log`, `counts-after.json`, `{before,final}-colours.json`).

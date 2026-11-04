@@ -58,9 +58,14 @@ describe('chapter 07 sauropod osteology',()=>{
   g.computeBoundingBox();expect(g.boundingBox!.max.z-g.boundingBox!.min.z).toBeGreaterThan(.35);
   g.dispose();
  });
- it('preserves all accepted content, camera, plinth/contact and visibility decisions',()=>{
-  const preserved=structuredClone(file);for(const p of preserved.parts.filter((p:Part)=>p.id.endsWith('-study')))delete p.material;
-  expect(createHash('sha256').update(JSON.stringify(preserved)).digest('hex')).toBe('5ba4e051a3b47479da67175f78f2dfa522ed4b5f9fddd9fa37ad47e5c607e455');
+ it('preserves all accepted content, cameras and visibility except the authorised horizontal display stagger',()=>{
+  const preserved=structuredClone(file);
+  for(const p of preserved.parts){
+   if(p.id.endsWith('-study'))delete p.material;
+   if(p.id==='study-plinth')for(const g of [p.primitive,...p.extra])g.at[0]=0;
+  }
+  // Fingerprint of the accepted input with only the authorised fields masked.
+  expect(createHash('sha256').update(JSON.stringify(preserved)).digest('hex')).toBe('b225abc877661ad3a37ef87ff7dc4ffad5b05830a316583296c10ed6f92afd91');
  });
  it('preserves every theropod index, position, normal, UV and world transform exactly',async()=>{
   await MeshoptDecoder.ready;
