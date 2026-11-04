@@ -260,3 +260,113 @@ Two small corrections, rebuilt with `build-parts.ts` (still 179,787 GLB triangle
 
 Final GLB: **1,489,956 bytes**.
 
+
+## Fix 2026-11-04
+
+Both browser-acceptance leftovers are installed in the live generated asset.
+The existing **Polish 2026-11-03** record above remains the baseline; this is the
+requested follow-up, preserving the accepted round-3 coat colours and runtime
+finish samplers.
+
+- **Lesser dog-faced fruit bat (`fruit-bat`)**: rebuilt the cranial/muzzle loft
+  with a broad rounded crown and cheeks, a much shorter nasal bridge, high
+  forward-facing almond corneas fitted to the actual cranial surface, closed
+  curved lips and a separate bilobed upper-lip continuation with a median
+  cleft. The broad sculpted rhinarium includes recessed paired nares and
+  flared margins. Pinnae now have continuous oval conchal cups and rounded
+  pale rims. Repeated decoded-photo comparisons corrected the first pass's
+  too-lateral eyes, excessive nose width, eye-footprint misses, steep eye
+  slant and weak upper-lip split; lip seams were seated on the actual surface.
+  References actually viewed: [AntanO frontal face](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).jpg)
+  (CC BY-SA 4.0), [AntanO three-quarter close-up](https://commons.wikimedia.org/wiki/File:Close-up_of_Cynopterus_brachyotis_(Lesser_short-nosed_fruit_bat).JPG)
+  (CC BY-SA 3.0), and [Philippine Government flight photo](https://commons.wikimedia.org/wiki/File:Cynopterus_brachyotis,_Philippines_2.jpg)
+  (Commons: PD-PhilippinesGov). Photo metadata/licences and modelling purposes
+  are also in `data/SOURCES.md`. Photos remain development-only references;
+  no photo or downloaded mesh is included in the site.
+- **Asian toad (`asian-toad`)**: removed the detached wart caps, legacy crest
+  sweeps and separate gland shells. Warts, cranial crests and curved paired
+  parotoids are now displacement of the underlying dermis. Compact cubic
+  supports go to zero height and zero slope at their bases; normals derive
+  from that same deformed skin. There is therefore no separate surface edge
+  to hover or cast a seam. Existing limb skin receives integrated small
+  relief too. Brown/black skin colours and physical 12 mm finish charts stay.
+  Species basis remains NParks Common Asian Toad (S6); no new teaching claim.
+  Authored geometry fell from 71,545 to 65,193 triangles, allocating detail
+  to continuous skin instead of overlapping caps.
+
+### Loaded counts and preservation
+
+Counts include the installed meshopt-decoded meshes, all native geometry and
+instances, every part before visibility (including microscopy and all pads).
+
+| Geometry | Before this fix | Installed after |
+| --- | ---: | ---: |
+| Fruit bat | 13,080 | 16,088 |
+| Asian toad | 22,893 | 20,861 |
+| Whole topic | 227,351 | 228,327 |
+| Geometry pieces / draw batches | 57 | 57 |
+| GLB bytes | 1,489,956 | 1,448,636 |
+
+`audit-face-fix.ts /tmp/living-fix-before.glb` confirms only those two decoded
+meshes changed: the other 26 meshes have byte-identical positions, normals,
+colours, UVs, indices and world transforms. Every topic-data field except the
+bat/toad derived envelopes is identical to the baseline. All 51 IDs/order,
+chapter/beat references, labels, teaching counts, sorting, presets, explode
+behaviour and material assignments remain. **No EN/ZH text changes were needed.**
+No engine, shared kit, runtime finish, package or lockfile edits were made.
+
+### Offline visual verification
+
+Actually inspected the decoded final full bat, frontal/three-quarter/profile
+face, toad head and near-horizontal toad sheets, using FrontSide culling,
+smooth normals, a depth buffer and the round-3 runtime finish maps. The final
+preview candidate is byte-identical to the installed GLB. Earlier iteration
+sheets and photo comparisons are retained beside the final directory.
+
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-face-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-reference-front.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/bat-reference-three-quarter.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/fruit-bat-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/toad-head-angles.png`
+- `/tmp/atlas-living-fix-2026-11-04/final/toad-grazing-angles.png`
+
+Face views are frontal (elevation 28°), three-quarter (azimuth 40°, elevation
+25°) and profile (90°, 12°). The three-quarter reference is roll-aligned −15°;
+photo pose/cropping differ, so these are visual comparisons, not a metric scan
+registration. Grazing toad views use elevations 3°, 3° and 6°. The jagged lower
+edge in the isolated head crop is the inspection crop, not an open skin seam.
+
+Reproduce with `build-parts.ts`, `preview-baked.ts fruit-bat asian-toad`, then
+`python3 scripts/geo/living-things/render-preview.py --finishes --out /tmp/atlas-living-fix-2026-11-04/final`
+and `compare-bat-reference.py` (reference directory option `--refs`).
+`export-finish-maps.ts` supplies the unchanged round-3 map samples if needed.
+New regressions verify the torso/head have closed continuous skin topology,
+unit normals, and zero-height/zero-slope wart bases.
+
+Not done: browser/PBR/GPU and interactive screenshot acceptance, because this
+task forbids opening or driving a browser/desktop. No browser or desktop was
+opened; no GPU FPS claim is made. Both requested geometry fixes are complete
+for the subsequent browser acceptance.
+
+### Final gates
+
+- `pnpm check`: green, 0 errors / 0 warnings (4 existing hints).
+- `pnpm validate`: green, 94 topics / 0 errors / 0 warnings.
+- `pnpm test`: green, **271 files / 6,502 tests**. Includes continuous toad
+  topology/support checks and the existing runtime GLTFLoader/meshopt, UV,
+  triangle/byte and sorting-envelope regressions.
+- `pnpm build`: green, **191 pages**. Built GLB is byte-identical to the installed
+  source; SHA-256 `17ef4f366eeab41386b5557587b06378561cf54c78e6d031706a5c18709736ce`.
+- `count-staged.ts`: green, 228,327 triangles / 57 pieces before visibility.
+- `validate-staged.ts --baseline /tmp/living-fix-before.json`: green, all floors,
+  envelopes and case cells fit; IDs/order, sorting and presets unchanged.
+- `audit-face-fix.ts /tmp/living-fix-before.glb`: green, exact preservation of
+  all 26 other decoded meshes and every non-envelope topic-data field.
+- `git diff --check`: green. No git writes, browser/desktop use, package or
+  lockfile changes.
+
+The worktree initially linked all dependencies to a read-only sibling checkout.
+Local ignored cache directories and a byte-for-byte local copy of the existing
+Drei dependency resolved Vite cache permissions and one unrelated solar-system
+suite's deep-import resolution. No dependency versions or tracked configuration
+changed. Final gate logs are in `/tmp/atlas-living-fix-2026-11-04/`.

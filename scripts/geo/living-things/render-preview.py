@@ -95,6 +95,7 @@ for name,obj in data.items():
     if name=='birds-nest-fern':views=[(35,24),(130,-16),(25,68)]
     if name=='bat-head':views=[(0,12),(55,12),(110,12)]
     if name=='python-belly':views=[(35,-38),(130,-25),(25,-70)]
+    views=obj.get('views',views)
     for angle,(az,el) in enumerate(views):
         az,el=math.radians(az),math.radians(el)
         front=np.array([math.sin(az)*math.cos(el),math.sin(el),math.cos(az)*math.cos(el)])
