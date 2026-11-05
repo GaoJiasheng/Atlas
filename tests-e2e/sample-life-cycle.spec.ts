@@ -105,7 +105,7 @@ test.describe('sample-life-cycle (SpaceScene life-cycle model)', () => {
 
   test('Chinese: the ring in words', async ({ page }) => {
     await open(page, '/zh/topics/sample-life-cycle/?ch=warm-water&sim=temp.20');
-    await expect(ring(page)).toHaveAttribute('aria-label', '这个模型里水温 20 °C 时的生活史：卵，等水来；一龄，3.0 天；二龄，1.5 天；三龄，1.6 天；四龄，3.2 天；蛹，4.1 天；成虫，产卵。');
+    await expect(ring(page)).toHaveAttribute('aria-label', '这个模型里水温 20 °C 时的生命周期：卵，等水来；一龄，3.0 天；二龄，1.5 天；三龄，1.6 天；四龄，3.2 天；蛹，4.1 天；成虫，产卵。');
     await expect(ring(page)).toContainText('在水里');
   });
 

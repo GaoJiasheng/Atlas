@@ -429,7 +429,7 @@ describe('fractions topic (MathScene)', () => {
   it('engine data and chapter states parse', () => {
     const data = mathSceneData.parse(loadData('fractions'));
     expect(data.lesson.steps).toHaveLength(12);
-    expect(data.glossary?.terms).toHaveLength(12);
+    expect(data.glossary?.terms).toHaveLength(13);
     for (const c of loadChapters('fractions')) expect(mathChapterState.safeParse((c as { state?: unknown }).state ?? {}).success).toBe(true);
   });
 

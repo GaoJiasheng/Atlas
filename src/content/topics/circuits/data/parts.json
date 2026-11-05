@@ -6939,7 +6939,7 @@
         "states": {
           "open": {
             "en": "Open",
-            "zh": "开路"
+            "zh": "断路"
           },
           "closed": {
             "en": "Closed",

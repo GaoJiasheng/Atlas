@@ -26,7 +26,7 @@ export const aedesSim: SimData = simSchema.parse({
     { id: 'day', kind: 'step', values: [0, 1, 2, 3, 4, 5, 6, 7, 8], default: 0, unit: 'd', label: b('Days after hatching', '孵化后第几天') },
     { id: 'every', kind: 'step', values: [2, 4, 6, 8, 10, 14], default: 14, unit: 'd', label: b('Water tipped out every', '每隔几天倒一次水') },
     { id: 'wipe', kind: 'toggle', default: false, label: b('Wall scrubbed too', '倒水后也刷壁') },
-    { id: 'compare', kind: 'toggle', default: false, label: b("Show a grasshopper's cycle", '并排看蝗虫的生活史') },
+    { id: 'compare', kind: 'toggle', default: false, label: b("Show a grasshopper's cycle", '并排看蝗虫的生命周期') },
   ],
   outputs: [
     {

@@ -11,7 +11,7 @@
     },
     {
       "id": "life-cycle",
-      "term": { "en": "Life cycle", "zh": "生活史" },
+      "term": { "en": "Life cycle", "zh": "生命周期" },
       "definition": {
         "en": "The stages a living thing passes through as it grows up and has young of its own, which then go through the same stages again.",
         "zh": "一种生物从出生、长大到生下后代所经历的各个阶段；后代又重新经历这些阶段，一圈接一圈。"
@@ -59,7 +59,7 @@
       "term": { "en": "Complete metamorphosis", "zh": "完全变态" },
       "definition": {
         "en": "A life cycle with four stages that look completely different: egg, larva, pupa and adult. Mosquitoes, butterflies and beetles grow up this way.",
-        "zh": "有卵、幼虫、蛹、成虫四个样子完全不同的阶段的生活史。蚊子、蝴蝶和甲虫都是这样长大的。"
+        "zh": "有卵、幼虫、蛹、成虫四个样子完全不同的阶段的生命周期。蚊子、蝴蝶和甲虫都是这样长大的。"
       },
       "see": ["incomplete-metamorphosis", "pupa"]
     },
@@ -68,7 +68,7 @@
       "term": { "en": "Incomplete metamorphosis", "zh": "不完全变态" },
       "definition": {
         "en": "A life cycle with three stages, egg, nymph and adult, and no pupa. The young look broadly like the adults and change a little at each moult, as in grasshoppers and cockroaches.",
-        "zh": "只有卵、若虫、成虫三个阶段、没有蛹的生活史。幼体大体上像成虫，每蜕一次皮就变化一点，蝗虫和蟑螂就是这样。"
+        "zh": "只有卵、若虫、成虫三个阶段、没有蛹的生命周期。幼体大体上像成虫，每蜕一次皮就变化一点，蝗虫和蟑螂就是这样。"
       },
       "see": ["complete-metamorphosis"]
     },

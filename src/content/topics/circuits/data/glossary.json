@@ -29,7 +29,7 @@
     },
     {
       "id": "open-circuit",
-      "term": { "en": "Open circuit", "zh": "开路（断路）" },
+      "term": { "en": "Open circuit", "zh": "断路（开路）" },
       "definition": {
         "en": "A circuit with a gap somewhere: an open switch, a loose clip, a broken filament or an insulator in the way. No current flows anywhere in the loop.",
         "zh": "回路某处断开了：开关断开、夹子松了、灯丝断了，或者中间隔着绝缘体。整个回路都没有电流。"

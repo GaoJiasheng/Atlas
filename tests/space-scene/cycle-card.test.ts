@@ -96,6 +96,6 @@ describe('ring words', () => {
     expect(cycleSummary(lc, at(28), '28 °C', 'en')).toBe(
       'Life cycle in this model at 28 °C: Egg, waits for water; Larva 1, 1.9 days; Larva 2, 0.7 days; Larva 3, 1.0 days; Larva 4, 1.8 days; Pupa, 1.9 days; Adult, lays eggs.',
     );
-    expect(cycleSummary(lc, at(20), '20 °C', 'zh')).toBe('这个模型里水温 20 °C 时的生活史：卵，等水来；一龄，3.0 天；二龄，1.5 天；三龄，1.6 天；四龄，3.2 天；蛹，4.1 天；成虫，产卵。');
+    expect(cycleSummary(lc, at(20), '20 °C', 'zh')).toBe('这个模型里水温 20 °C 时的生命周期：卵，等水来；一龄，3.0 天；二龄，1.5 天；三龄，1.6 天；四龄，3.2 天；蛹，4.1 天；成虫，产卵。');
   });
 });

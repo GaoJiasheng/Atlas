@@ -1,7 +1,7 @@
 {
   "notation": {
-    "clock12": "h.mm am",
-    "clock24": "HHMM"
+    "clock12": "h:mm am",
+    "clock24": "HH MM"
   },
   "syllabus": [
     {

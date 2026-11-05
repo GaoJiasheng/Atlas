@@ -34,6 +34,9 @@
       "definition": { "en": "A line on which every number has its place. From 0 to 1 is one whole; cut it into 4 equal jumps, and the end of the third jump is {3/4}. Count the jumps, not the marks.", "zh": "每个数都有自己位置的一条线。0 到 1 是一个整体；平均分成 4 段，第三段的终点就是 {3/4}。数的是段，不是刻度线。" } },
     { "id": "mixed-number", "term": { "en": "mixed number", "zh": "带分数" },
       "definition": { "en": "A whole number and a fraction together, such as {1 3/4}, read one and three quarters. It is the same amount as the improper fraction {7/4}, whose top is at least as big as its bottom.", "zh": "整数和分数合在一起，如 {1 3/4}，读作一又四分之三。它和假分数 {7/4} 一样多；假分数的分子大于或等于分母。" },
-      "see": ["fraction"] }
+      "see": ["fraction", "improper-fraction"] },
+    { "id": "improper-fraction", "term": { "en": "improper fraction", "zh": "假分数" },
+      "definition": { "en": "A fraction whose numerator is greater than or equal to its denominator, such as {7/4} or {4/4}. It is 1 whole or more.", "zh": "分子大于或等于分母的分数，如 {7/4}、{4/4}。它等于或大于 1 个整体。" },
+      "see": ["mixed-number"] }
   ]
 }

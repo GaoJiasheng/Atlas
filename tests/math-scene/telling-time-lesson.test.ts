@@ -61,8 +61,8 @@ describe('telling-time lesson', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('writes times the Singapore way: 7.20 am and four-digit 24-hour times', () => {
-    expect(lesson.notation).toEqual({ clock12: 'h.mm am', clock24: 'HHMM' });
+  it('writes times as the MOE textbooks do: 7:20 am and 24-hour times such as 19 20', () => {
+    expect(lesson.notation).toEqual({ clock12: 'h:mm am', clock24: 'HH MM' });
   });
 
   it('keeps to the step limits the spec sets (docs/20 §9.3)', () => {
