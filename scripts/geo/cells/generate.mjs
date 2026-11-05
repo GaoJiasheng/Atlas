@@ -140,7 +140,7 @@ export async function buildCellsParts(){
   {id:'microscope-bench',name:bi('Microscope','显微镜'),color:'token:ink-2'},
   {id:'tissue-context',name:bi('Tissue','组织背景'),color:'token:neutral',card:false},
  ],flows:[],animations:[],presets:cameras.map(row=>({id:row[0],label:bi(row[1],row[2]),camera:camera(row)})),poses,
- views:{assembled:{camera:camera(cameras[0])},exploded:{camera:camera(cameras[0])},cover:camera(cameras[0]),reference:{fit:'layers'},shadows:'contact',section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:.003},explodeLabel:bi('Separate model','分离示意'),hudFrame:{parts:['animal-membrane','plant-cell-wall','scope-base','scope-arm','scope-eyepiece','scope-stage','onion-patch','tissue-patch','intestine-context','body-context']}},
+ views:{assembled:{camera:camera(cameras[0])},exploded:{camera:camera(cameras[0])},cover:camera(cameras[0]),reference:{fit:'layers'},shadows:'contact',section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:.003},explodeLabel:bi('Separate model','分离示意'),hudFrame:{parts:['leaf-context','animal-membrane','plant-cell-wall','scope-base','scope-arm','scope-eyepiece','scope-stage','onion-patch','tissue-patch','intestine-context','body-context']}},
  telemetry:[{key:bi('Total power','总倍率'),unit:'×',decimals:0,follow:'total-power'},{key:bi('Field diameter','视野直径'),unit:'µm',decimals:0,follow:'field-diameter-um'}],
  spec:[{key:bi('Model','模型'),value:bi('Separate enlarged cells','细胞独立放大'),tag:'design'},{key:bi('Eyepiece','目镜'),value:'10× DESIGN',tag:'design'},{key:bi('Objectives','物镜'),value:'4 / 10 / 40× DESIGN',tag:'design'},{key:bi('Field number','视场数'),value:'18 mm DESIGN',tag:'design'}]};
 }

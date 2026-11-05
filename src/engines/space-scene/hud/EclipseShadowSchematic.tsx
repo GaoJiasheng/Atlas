@@ -21,7 +21,7 @@ export function shadowCones(source: Disc, caster: Disc, end: number) {
   };
 }
 export const solarLayout = { source:{x:30,y:86,r:24}, caster:{x:170,y:86,r:12}, earth:{x:332,y:86,r:25}, end:358 };
-export const lunarLayout = { source:{x:30,y:88,r:24}, caster:{x:180,y:88,r:14}, total:{x:284,y:88,r:5}, partial:{x:316,y:81,r:5}, end:350 };
+export const lunarLayout = { source:{x:30,y:88,r:24}, caster:{x:180,y:88,r:14}, total:{x:284,y:88,r:5}, partial:{x:316,y:81,r:5}, end:362 };
 const txt = (zh: boolean, en: string, cn: string) => zh ? cn : en;
 const line = {fill:'none',stroke:'var(--ink-3)',strokeWidth:.7};
 const label = {fill:'var(--ink-2)',fontFamily:'var(--font-mono)',fontSize:12.5};
@@ -38,7 +38,7 @@ export function EclipseShadowSchematic({zh, active, note}: {zh:boolean; active:'
   const sun=(s:Disc) => <circle cx={s.x} cy={s.y} r={s.r} fill="var(--en-light)" stroke="var(--ink-2)" strokeWidth=".7"/>;
   return <figure className="space-orbit__shadow" data-shadow-diagram="schematic">
     <figcaption style={{fontSize:11}}>{txt(zh,'Schematic, not to scale','示意，未按比例')}</figcaption>
-    {active === 'solar' && <svg viewBox="0 0 362 156" role="img" style={{maxHeight:'none'}} aria-label={txt(zh,'Solar eclipse: converging lunar umbra just reaches Earth; partial eclipse in the diverging penumbra','日食：收敛的月球本影刚触及地球，发散的半影内可见日偏食')}>
+    {active === 'solar' && <svg viewBox="0 0 362 140" role="img" style={{maxHeight:'none'}} aria-label={txt(zh,'Solar eclipse: converging lunar umbra just reaches Earth; partial eclipse in the diverging penumbra','日食：收敛的月球本影刚触及地球，发散的半影内可见日偏食')}>
       <defs><clipPath id={`${id}-earth`}><circle cx="332" cy="86" r="25"/></clipPath></defs>
       <text x="4" y="16" style={{...label,fill:active==='solar'?'var(--signal)':'var(--ink)'}}>{txt(zh,'SOLAR · Moon casts the shadow','日食 · 月球投影')}</text>
       {cones(solar)}{sun(solarLayout.source)}
@@ -52,8 +52,8 @@ export function EclipseShadowSchematic({zh, active, note}: {zh:boolean; active:'
       <text x="205" y="48" style={label}>{txt(zh,'Penumbra','半影')}</text>
       <text x="213" y="101" style={label}>{txt(zh,'Umbra','本影')}</text>
       <circle cx="307" cy="86" r="1.8" fill="var(--signal)"/>
-      <path d="M307 86 L288 119 L236 119" style={line}/>
-      <text x="218" y="144" style={label}>{txt(zh,'Total','全食')}</text>
+      <path d="M307 86 L290 127 H263" style={line}/>
+      <text x="259" y="131" textAnchor="end" style={label}>{txt(zh,'Total','全食')}</text>
       <circle cx={332-Math.sqrt(625-225)} cy="71" r="1.8" fill="var(--signal)"/>
       <path d={`M${332-Math.sqrt(625-225)} 71 L315 37 H294`} style={line}/>
       <text x="287" y="31" style={label}>{txt(zh,'Partial','偏食')}</text>

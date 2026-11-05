@@ -33542,6 +33542,7 @@
     },
     "hudFrame": {
       "parts": [
+        "leaf-context",
         "animal-membrane",
         "plant-cell-wall",
         "scope-base",

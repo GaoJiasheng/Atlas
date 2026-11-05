@@ -2,9 +2,9 @@ import {describe,it,expect} from 'vitest';
 import {readFileSync} from 'node:fs';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {shadowCones,solarLayout,lunarLayout,EclipseShadowSchematic} from '../../scripts/geo/sun-earth-moon/shadow-schematic';
+import {shadowCones,solarLayout,lunarLayout,EclipseShadowSchematic} from '../../src/engines/space-scene/hud/EclipseShadowSchematic';
 
-describe('sun-earth-moon F4 ownership fallback: finite-source schematic geometry',()=>{
+describe('sun-earth-moon F4: finite-source schematic geometry',()=>{
  it('has exact circle tangents, a converging umbra and diverging penumbra',()=>{
   for(const layout of [solarLayout,lunarLayout]){
    const {source,caster,end}=layout, cone=shadowCones(source,caster,end);
