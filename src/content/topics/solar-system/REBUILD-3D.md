@@ -181,3 +181,34 @@ Reproduce with `pnpm tsx scripts/geo/solar-system/build-parts.ts`, `pnpm tsx scr
 - `git diff --check`: clean (read-only). All edits stay within the solar-system topic, its generation scripts/assets and its existing test; no engine, package/lockfile, other-topic, browser/desktop or git write.
 
 Logs: `/tmp/atlas-solar-system-round3/{check,validate,build,test}.log`. No requested implementation item remains unfinished.
+
+## Polish 2026-11-03 — group B leftover stars
+
+Verified the current topic already uses the separately licensed readable HYG catalogue with 5 CSS-pixel points. Raised its presentation-only `meta.pointSizeCssPx` to **5.8 CSS px** in both the vendored display copy and reproducible generator. This is a 16% diameter increase and approximately 35% more integrated ink/light coverage for the existing soft disc. The full-contrast core is more visible at laptop DPR while the antialiased edge stays restrained; no halo was added. Reference: the existing accepted HYG v4.1 display, the actual CatalogueSky point shader, Three's point-uniform uploader and the Technical Plate ink/background tokens. No new scientific facts or source rows were introduced.
+
+**Preserved:** all 28 catalogue rows (including magnitudes and precise sky positions), every attribution/licence field, the original catalogue used by sample-solar, 49 selectable parts, 40 beats, all cameras, links, simulation bindings, labels and teaching text. No EN/ZH correction was necessary.
+
+**Scope limitation:** the shared renderer accepts one global CSS-pixel size and uses the same `token:ink` for every star. It does not consume magnitude-dependent brightness/diameter metadata. A true real-sky magnitude range cannot be added through current topic data without changing factual catalogue values or the shared engine, both forbidden in this pass. The permitted size/readability improvement is complete; per-star brightness remains unimplemented for that reason.
+
+**Counts before → after this pass:** conservative peak visible triangles **219,008 → 219,008**; GLB mesh triangles **291,136 → 291,136**; all topic parts summed across mutually exclusive chapters **550,818 → 550,818**; GLB bytes **1,487,820 → 1,487,820**. Re-ran `pnpm tsx scripts/geo/solar-system/audit.ts`; no geometry or GLB was regenerated.
+
+**Offline verification:** CPU reconstruction of the actual catalogue projection, production point-size uniform and soft-disc alpha in all 11 sky beats (five viewpoint beats and six star-pattern/depth beats), both themes, DPR 1 and 2. Inspected `/tmp/atlas-group-b/solar-system/{after,viewpoint-after}/contact-sheet.png` and native-size close-ups; dots remain round, visible and separate from the muted links. Before/after sets and JSON size/visibility reports are in `/tmp/atlas-group-b/solar-system/{before,after,viewpoint-before,viewpoint-after}/`, including `{paper,cinema}-{beat}-{1,2}x.png`. The renderer now accepts an output path, optional size override and chapter selector so the 5 CSS px baseline can be reproduced without editing catalogue data:
+
+```sh
+pnpm tsx scripts/geo/solar-system/render-sky-preview.ts /tmp/atlas-group-b/solar-system/before 5
+pnpm tsx scripts/geo/solar-system/render-sky-preview.ts /tmp/atlas-group-b/solar-system/after
+pnpm tsx scripts/geo/solar-system/render-sky-preview.ts /tmp/atlas-group-b/solar-system/viewpoint-after 5.8 05-a-turning-viewpoint
+```
+
+These are CPU point/shader previews, not WebGL screenshots or GPU measurements. No browser or desktop was opened. Root session runs the combined required gates for the four-topic pass.
+
+Targeted topic verification: **3 suites / 57 tests pass**. The polish test isolates Drei's unused DOM `Html` overlay with a narrow mock to avoid Node ESM deep-import resolution in the shared dependency installation; it still imports and exercises the real CatalogueSky size/material functions, real Three point shader/uniform uploader and real GLB geometry/material pipeline. No runtime source changed for this test environment fix.
+
+### Combined group B gates · run 2026-11-05
+
+- `pnpm check`: PASS, 0 errors / 0 warnings, 5 existing unused-code hints.
+- `pnpm validate`: PASS, 94 topics, 0 errors / 0 warnings.
+- `pnpm build`: PASS, 191 pages and PWA generation; the full built-topic JavaScript budget test passes.
+- **`pnpm test`: NOT GREEN** — 275 suites / 6,527 tests pass; one untouched `tests/space-scene/living-things-toad-skin.test.ts` geometry test exceeds its existing 5,000 ms limit. Repeated with default workers, two workers, and alone: the same timeout is the only failure. The isolated test passes both assertions/tests with a diagnostic 30,000 ms command-line limit (13.08 s test time); no foreign source, assertion or stored timeout was changed. That diagnostic is not presented as a passing standard gate. The permitted four-topic implementation and regression suites pass. Fixing the unrelated test's timing contract is outside this task's ownership.
+
+Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers2,toad-isolated,toad-diagnostic}.log`. All inspected CPU previews are linked from `/tmp/atlas-group-b/index.md`. No browser, desktop, e2e or GPU pass was run. No git write or package/lockfile edit was performed. An ephemeral local dependency-cache wrapper allowed the gates to run without writing through the pre-existing read-only `node_modules` symlink; the original symlink was restored afterwards.

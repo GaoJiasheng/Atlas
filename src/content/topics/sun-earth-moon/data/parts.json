@@ -1653,9 +1653,10 @@
         },
         "north": "earth-axis",
         "shadowNote": {
-          "en": "At one scale, the shadow cones are too thin to see clearly.",
-          "zh": "同一比例下，影锥太细，难以看清。"
-        }
+          "en": "At one true scale, the shadow cones are too thin to see clearly.",
+          "zh": "真实同一比例下，影锥太细，难以看清。"
+        },
+        "shadowDiagram": "schematic"
       },
       "sources": [
         "S8",

@@ -134,6 +134,8 @@ export const orbitRotationSchema = z
           .strict(),
         north: z.literal('earth-axis'),
         shadowNote: bilingual.optional(),
+        /** Explicit editorial illustration; never changes the orbital snapshot. */
+        shadowDiagram: z.enum(['true-scale', 'schematic']).optional(),
       })
       .strict(),
     sources: z.array(sourceId).min(1),

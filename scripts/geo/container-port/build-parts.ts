@@ -15,6 +15,18 @@ for(const p of onward.slice(4)) {
  p.scale=[.65,.65,.65];
 }
 const lockModel=[cyl(.08,.35,[0,12.65,-19.1]),box([.32,.12,.16],[0,12.53,-19.1]),cyl(.08,.35,[0,12.65,-16.9]),box([.32,.12,.16],[0,12.53,-16.9])];
+// Neutral paint follows the bright cinema UI ink. Actual paving instead uses
+// matte mineral finishes and restrained physical-value tokens in both themes.
+type V=[number,number,number];
+const concrete=(size:V,at:V):P=>({...box(size,at,'abrasive'),tint:'token:mannequin'});
+// The stock abrasive preset is a stable charcoal mineral value (#5f574e /
+// #6b6359), unlike UI grey tokens that invert or lift strongly in cinema.
+const asphalt=(size:V,at:V):P=>box(size,at,'abrasive');
+const paving:P[]=[concrete([200,1,64],[0,-.5,32]),asphalt([200,.024,40],[0,.012,44])];
+// Saw-cut apron joints, 45 mm wide; no raised decorative grid. One merged
+// material slot, clear of the four crane running rails and the AGV load path.
+for(let x=-90;x<=90;x+=10)paving.push(asphalt([.045,.006,24],[x,.003,12]));
+for(const z of [8,16])paving.push(asphalt([200,.006,.045],[0,.003,z]));
 const geometry:Record<string,P[]>={
  'ship-hull':hull,'ship-deck':shipDeck(),'ship-bridge':shipBridge(),'ship-cargo':shipCargo(),
  portal:stsPortal(),'rail-bogies':stsBogies(),'crane-rails':[1.2,2.8,21.2,22.8].map(z=>box([190,.12,.3],[0,.1,z])),
@@ -26,8 +38,12 @@ const geometry:Record<string,P[]>={
  'onward-ship':onward,
  'destination-box':[isoContainer(ISO.twenty,[-25,1.2955,38],false,'powder',true),...containerDetails(ISO.twenty,[-25,1.2955,38])],
  'control-room':[rounded([11,7,9],[-30,3.5,48],.12,'enamel'),box([12,.6,10],[-30,7.3,48]),box([9,1.3,.12],[-30,5.5,52.55],'powder'),fins([.12,1.5,.12],8,1,'x',[-30,5.5,52.65],'enamel')],
- 'quay-context':[box([200,1,64],[0,-.5,32],'token:neutral')],
- 'water-context':[{kind:'plane',size:[240,90],rotation:[-90,0,0],at:[0,-.85,-45],color:'casing',tint:'token:cold'}],
+ 'quay-context':paving,
+ // Topic primitives do not accept texture paths, and the GLB source surface
+ // bridge clears normal maps. Use the permitted data-only fallback: a satin
+ // nonmetal surface, rather than reflective brushed aluminium masquerading
+ // as sea. A dedicated ripple normal still needs an engine capability.
+ 'water-context':[{kind:'plane',size:[240,90],rotation:[-90,0,0],at:[0,-.85,-45],color:'enamel',tint:'token:cold'}],
 };
 for(const id of ['a','b','c','d'])geometry[`rope-${id}`]=[cyl(.055,1,[0,0,0])];
 for(const [id,y] of [['yard-target',1.2955],['yard-blocker-a',3.8865],['yard-blocker-b',6.4775]] as const) geometry[id]=[isoContainer(ISO.twenty,[18,y,40],false,'powder',true),...containerDetails(ISO.twenty,[18,y,40])];

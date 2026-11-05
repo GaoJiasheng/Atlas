@@ -331,3 +331,60 @@ explicit outstanding items; they are not hidden by the successful static gates.
 - GPU browser shots, same angle as `2a98d7b`: cytoplasm leaders now land in the gel; mitochondria read orange with cristae; microscope, cells and onion detail unchanged. Membrane / cell-wall leaders still end at the bounds centre (on or next to the nucleus / vacuole) until the engine reads a GLB label point.
 - Fixed in acceptance: `onion-patch` joins `views.hudFrame.parts` so compare beat 5 no longer slides it under the reading panel; systems beats 1/3/4/5 use a closer whole-plate camera (`[0.08,0.235,0.92]` → `[0.08,0.105,0]`); the leaf beat hides the onion patch so its own camera is not pulled back.
 - Stage ready (`__atlas.ready`, GPU, 4 interleaved loads each): main 999 ms, `2a98d7b` 1039 ms, round 3 1078 ms (medians). No regression is visible at this measure.
+
+## Polish 2026-11-03 — group B leftover verification
+
+Verified against the current production data on 2026-11-05 before changing
+anything. Both requested content fixes are already present in this checkout:
+
+1. **40× visibility.** Beats **01.4, 05.3 and 06.3** use objective 40,
+   its indexed `scope-high` pose, the `scope-stage-close` camera and a
+   `scope-objective-forty` leader. The long blue-ring barrel, nose and positive
+   coverslip clearance are visible below the nosepiece, rather than behind it.
+   Closest-hit rays from each actual authored camera hit that objective at its
+   leader endpoint. Inspected CPU depth-buffered close-ups in paper and cinema,
+   plus whole/front/stage/eyepiece/knob views; no additional rotation, geometry
+   or camera change is necessary.
+2. **Highlighted parts and labels.** Audited all **40 beats**: each of their
+   **36 non-null selected parts** has its own requested leader and an entry in
+   the chapter index; every requested leader target is also indexed. Existing
+   tests cover revealing every indexed part in a visible beat. The content
+   regression now explicitly checks selected-part leaders, index access and
+   visibility, so future edits cannot quietly omit a highlighted object.
+   The preview exporter now includes all forty authored cameras and uses the
+   production GLB's node-local `extras.labelPoint` transformed before
+   dequantisation, matching the live loader instead of drawing obsolete
+   bounds-centre endpoints. The projection test uses those same real anchors.
+
+References: the existing S6/S7/S21 microscope handling/parts references and
+S20 authored optical layout, plus the current generated parts, indexed poses,
+chapter captions and the production GLB. No external asset or runtime request
+was added. All 29 IDs, objective counts, lens powers, teaching numbers,
+EN/ZH text, eight chapters and forty beats are unchanged.
+
+Decoded triangles before → after: **166,390 → 166,390** across every group;
+animal **37,046**, plant **44,814**, microscope **49,908**, tissue/context
+**34,622**, all unchanged. The highest authored beat is **116,482** triangles.
+No model or material was rebuilt in this verification pass.
+
+Offline previews: `/private/tmp/atlas-cells-group-b/verified/` contains
+`beat-00-1-labels.png` through `beat-07-5-labels.png`, eight chapter contact
+sheets, six microscope angles/close-ups and paper/cinema close-ups of the
+three named 40× beats. All chapter contact sheets and the named-lens close-ups
+were actually inspected. The old anchor exporter baseline is in `../before/`.
+These are CPU geometry/anchor checks; the browser's final HUD solver remains
+for Claude acceptance under the explicit no-browser task boundary.
+
+Topic checks: **27/27 tests across four cells test files passed** with
+`pnpm exec vitest run --configLoader runner` (the runner avoids Vite's bundled
+config temp directory outside this writable worktree). Root session owns the
+full-project gates. No requested cells fix remains open.
+
+### Combined group B gates · run 2026-11-05
+
+- `pnpm check`: PASS, 0 errors / 0 warnings, 5 existing unused-code hints.
+- `pnpm validate`: PASS, 94 topics, 0 errors / 0 warnings.
+- `pnpm build`: PASS, 191 pages and PWA generation; the full built-topic JavaScript budget test passes.
+- **`pnpm test`: NOT GREEN** — 275 suites / 6,527 tests pass; one untouched `tests/space-scene/living-things-toad-skin.test.ts` geometry test exceeds its existing 5,000 ms limit. Repeated with default workers, two workers, and alone: the same timeout is the only failure. The isolated test passes both assertions/tests with a diagnostic 30,000 ms command-line limit (13.08 s test time); no foreign source, assertion or stored timeout was changed. That diagnostic is not presented as a passing standard gate. The permitted four-topic implementation and regression suites pass. Fixing the unrelated test's timing contract is outside this task's ownership.
+
+Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers2,toad-isolated,toad-diagnostic}.log`. All inspected CPU previews are linked from `/tmp/atlas-group-b/index.md`. No browser, desktop, e2e or GPU pass was run. No git write or package/lockfile edit was performed. An ephemeral local dependency-cache wrapper allowed the gates to run without writing through the pre-existing read-only `node_modules` symlink; the original symlink was restored afterwards.

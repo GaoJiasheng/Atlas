@@ -28,8 +28,16 @@ const vec=(v: readonly number[])=>new Vector3(v[0],v[1],v[2]);
 const bytes=(a:Float32Array|Uint32Array)=>Buffer.from(a.buffer,a.byteOffset,a.byteLength).toString('base64');
 type Source={part:Part;geometry:BufferGeometry;matrix:Matrix4;material:{color:string;tint?:string}};
 const sources:Source[]=[];
+const meshLabelPoints=new Map<string,Vector3>();
 await MeshoptDecoder.ready;
 const glb=data.model ? await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(arg('--asset',`public${data.model}`)) : undefined;
+// Extras are authored in the quantised node's local frame. Capture world
+// points before dequantize changes that frame, matching production GLTFLoader.
+if(glb)for(const part of data.parts.filter(p=>p.mesh)){
+  const node=glb.getRoot().listNodes().find(n=>n.getName()===part.mesh);
+  const point=node?.getExtras().labelPoint;
+  if(Array.isArray(point)&&point.length===3&&point.every(Number.isFinite))meshLabelPoints.set(part.id,vec(point).applyMatrix4(new Matrix4().fromArray(node!.getWorldMatrix())));
+}
 if(glb)await glb.transform(dequantize());
 for(const part of data.parts){
   if(part.primitive){
@@ -96,7 +104,6 @@ for(const file of readdirSync('src/content/topics/cells/chapters').filter(f=>f.e
     const labels=(s.labels??[]) as string[];
     const selected=s.part as string|undefined;
     const caption=(s.caption as {en?:string}|undefined)?.en??'';
-    if(!/^(02|03|07)/.test(file)&&!(file.startsWith('04')&&i===4)&&![...labels,selected??''].some(l=>l==='scope-eyepiece'||l==='scope-objective-forty')&&!/eyepiece|forty.power|40×/.test(caption))continue;
     const cam=typeof s.camera==='string'?preset(s.camera):s.camera as Camera;
     if(!cam)continue;
     const sim=(s.sim as {set?:{objective?:number}}|undefined)?.set;
@@ -146,6 +153,7 @@ for(const [name,shot] of Object.entries(shots)){
       seen.add(part.id);
       let point:Vector3;
       if(part.primitive)point=vec(anchorPoint(part)).add(vec(part.primitive.at));
+      else if(meshLabelPoints.has(part.id))point=meshLabelPoints.get(part.id)!.clone();
       else {g.computeBoundingBox();point=g.boundingBox!.getCenter(new Vector3()).applyMatrix4(s.matrix);}
       point.applyMatrix4(transform).applyMatrix4(projection);
       labels.push({id:part.id,text:part.name.en,x:(point.x+1)*width/2,y:(1-point.y)*height/2});

@@ -59,3 +59,41 @@ First browser shoots (`--beats`, paper; default shots, cinema; hardware GL). Two
 - Stack-top lashing fittings belonged to `ship-deck`, so they floated above the bare deck when a beat hid `ship-cargo` (chapter 02). Only deck-level fittings remain on the deck.
 
 Perf (cinema, hardware GL, loaded machine): 73 calls, 252,948 drawn triangles, 60 fps on every preset.
+
+
+## Polish 2026-11-03
+
+Verified the current generated data before editing: the quay was a single `token:neutral` satin surface, which resolves to the bright UI grey `#a6a199` in cinema; the sea used brushed, 80%-metal `casing` tinted cold. No topic GLB or texture existed.
+
+- **Quay and yard:** the same `quay-context` now contains a matte concrete apron (`abrasive` + `token:mannequin`) and a charcoal asphalt yard (the existing `abrasive` mineral preset). Cinema concrete base colour is `#6f7174`; asphalt is `#6b6359`. Both use zero metalness, roughness .93 and fine mineral grit. The apron has flush 45 mm saw-cut expansion joints at a schematic 10 m × 8 m spacing. The yard topping is 24 mm thick; no teaching part, load height, rail, parking position or solver coordinate changed. The first CPU proof showed the alternate carbon-dioxide tint was too brown on cinema, so the final yard uses the quieter mineral preset. All colours are existing token/material families.
+- **Water:** applied the explicitly permitted **data-only fallback**: `enamel` + `token:cold` gives nonmetal satin water (roughness .34) instead of brushed aluminium. A dedicated animated/static ripple normal is **not implemented**: primitive placement/material data has no texture URI/normal-scale field (`schema.ts`), and opt-in GLB source materials explicitly clear `normalMap` (`GltfSource.tsx`). Adding that capability would require the shared engine, outside this task's ownership. No decorative strips, fake waves or extra asset fetches were added.
+- **References:** the existing S1 design study, Liebherr container-crane/terminal photographs and Konecranes RTG photographs listed in `data/SOURCES.md`; technical-plate material discipline in `docs/08-technical-plate.md`, `master-spec.md` E/R3 and the existing engine material/token definitions. Surface values and joint layout are original design choices, not Tuas measurements. No reference asset is redistributed; EN/ZH teaching text and facts remain unchanged.
+
+Measured with the actual renderer geometry factory, all authored parts and maximum sample repeats expanded (including parts hidden in normal lesson states):
+
+| Metric | Before polish | After polish |
+|---|---:|---:|
+| Selectable / context parts | 30 / 2 | 30 / 2 |
+| Expanded triangles | 305,030 | 305,294 |
+| Mesh/material pieces | 89 | 90 |
+| Instanced meshes | 26 | 26 |
+| Topic GLB bytes | 0 | 0 |
+| parts.json bytes | 823,560 | 828,965 |
+| parts.json gzip bytes | 28,173 | 28,323 |
+
+The earlier rebuild table predates the accepted deck-fitting removal; this fresh baseline measures the code at the start of this polish. The maximum remains below 350k, now enforced by `tests/container-port-rebuild.test.ts`. The two material slots of the context paving merge independently; 22 added cuboids contribute just 264 triangles. No GLTF parse, Draco decode, texture fetch or extra runtime model request is introduced. The shipped compressed data grows by less than 200 bytes. Alternating seven Node CPU geometry builds per state measured cold 116.8/93.4 ms and warm medians 64.2/74.4 ms before/after on the shared task host; the small noisy difference is not a browser first-load or GPU timing. No browser load-time/FPS claim is made.
+
+**Offline visual verification:** actual generated geometry, theme-resolved base colours, depth buffer; inspected overall hero, quay, yard and water close-ups for both themes. Final images: `/tmp/atlas-port-polish-after-{paper,cinema}-{hero,quay,yard,water}-depth.png`. Before equivalents use `before` instead of `after`. CPU previews validate silhouettes, surface separation and material values; they do not reproduce the GPU's PBR grit, reflections, shadows or HUD. Reproduction scripts and metrics are `/tmp/atlas-port-polish-{render.mts,zbuffer.py,metrics.ts}` and `/tmp/atlas-port-polish-{before,after}-metrics.json`. No Chromium, user browser or desktop was opened.
+
+Targeted verification: `pnpm exec vitest run --configLoader runner tests/container-port-rebuild.test.ts tests/space-scene/container-port-model.test.ts tests/space-scene/container-port-content.test.ts` — 3 files / 18 tests pass. The runner config loader avoids the read-only shared `node_modules/.vite-temp` path. Global check/validate/test/build are run by the coordinating session after all four topic changes.
+
+Production build cross-check: `dist/topics/container-port/data.json` is **324,168 bytes / 24,179 gzip bytes** (minified, excluding HTML/shared code). The source `parts.json` table above is pretty-printed generator input, so its byte count is larger. There is still no GLB or new texture request. The combined preview index is `/tmp/atlas-group-b/index.md`.
+
+### Combined group B gates · run 2026-11-05
+
+- `pnpm check`: PASS, 0 errors / 0 warnings, 5 existing unused-code hints.
+- `pnpm validate`: PASS, 94 topics, 0 errors / 0 warnings.
+- `pnpm build`: PASS, 191 pages and PWA generation; the full built-topic JavaScript budget test passes.
+- **`pnpm test`: NOT GREEN** — 275 suites / 6,527 tests pass; one untouched `tests/space-scene/living-things-toad-skin.test.ts` geometry test exceeds its existing 5,000 ms limit. Repeated with default workers, two workers, and alone: the same timeout is the only failure. The isolated test passes both assertions/tests with a diagnostic 30,000 ms command-line limit (13.08 s test time); no foreign source, assertion or stored timeout was changed. That diagnostic is not presented as a passing standard gate. The permitted four-topic implementation and regression suites pass. Fixing the unrelated test's timing contract is outside this task's ownership.
+
+Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers2,toad-isolated,toad-diagnostic}.log`. All inspected CPU previews are linked from `/tmp/atlas-group-b/index.md`. No browser, desktop, e2e or GPU pass was run. No git write or package/lockfile edit was performed. An ephemeral local dependency-cache wrapper allowed the gates to run without writing through the pre-existing read-only `node_modules` symlink; the original symlink was restored afterwards.

@@ -1,4 +1,5 @@
 /** Three observations in the existing card / narrow reader slot; one shared session. */
+import { EclipseShadowSchematic } from './EclipseShadowSchematic';
 import { SourceRefs } from '../../widgets/SourcePopover';
 import { useStageLook } from '../stages/model3d/look';
 import { holds } from '../lib/sim/bind';
@@ -134,7 +135,7 @@ function Discs({ orbit, label }: { orbit: OrbitSession; label: string }) {
     </svg>
   );
 }
-function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
+function TrueScaleShadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
   const s = orbit.snapshot,
     R = s.bodies.earth.radiusKm,
     mr = s.bodies.moon.radiusKm,
@@ -196,6 +197,12 @@ function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
       {orbit.config.panel.shadowNote && <p>{text(zh, orbit.config.panel.shadowNote.en, orbit.config.panel.shadowNote.zh)}</p>}
     </figure>
   );
+}
+function Shadow({ orbit, zh }: { orbit: OrbitSession; zh: boolean }) {
+  if (orbit.config.panel.shadowDiagram !== 'schematic') return <TrueScaleShadow orbit={orbit} zh={zh} />;
+  const q = orbit.snapshot.quantities;
+  const active = q['lunar-eclipse'] !== 'none' || orbit.snapshot.lab === 'moon' ? 'lunar' : 'solar';
+  return <EclipseShadowSchematic zh={zh} active={active} note={orbit.config.panel.shadowNote} />;
 }
 export function OrbitCard({ file, reader = false }: { file: PartsFile; reader?: boolean }) {
   const { locale } = useSceneContext(),

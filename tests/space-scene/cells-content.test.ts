@@ -28,7 +28,10 @@ beforeAll(async () => {
   for (const p of file.parts.filter(p => p.mesh)) {
     const node = gltf.scene.getObjectByName(p.mesh!);
     expect(node, p.id).toBeDefined();
-    meshAnchors.set(p.id, new Box3().setFromObject(node!).getCenter(new Vector3()));
+    const point=node!.userData.labelPoint;
+    meshAnchors.set(p.id, Array.isArray(point)&&point.length===3&&point.every(Number.isFinite)
+      ? node!.localToWorld(new Vector3(...point as [number,number,number]))
+      : new Box3().setFromObject(node!).getCenter(new Vector3()));
   }
 });
 const chapters = readdirSync(join(dir, 'chapters')).filter(f => f.endsWith('.mdx')).sort().map(f => {
@@ -62,6 +65,13 @@ describe('cells: published content and observable model', () => {
         expect(b.caption.zh).toMatch(/[\u3400-\u9fff]/);
         expect(b.labels!.length).toBeLessThanOrEqual(6);
         for (const id of b.labels!) expect(ids, `${c.id}: ${id}`).toContain(id);
+        if (b.part) {
+          expect(b.labels, `${c.id}: highlighted ${b.part} has a leader`).toContain(b.part);
+          expect(ids, `${c.id}: highlighted ${b.part} is reachable from the chapter index`).toContain(b.part);
+          const p = file.parts.find(p => p.id === b.part)!;
+          expect(b.hide ?? c.state.hide ?? [], `${c.id}: highlighted ${b.part} is visible`).not.toContain(b.part);
+          expect(b.hide ?? c.state.hide ?? []).not.toContain(p.group);
+        }
         expect(Object.keys(b.sim!.set!).sort()).toEqual(sim.controls.map(c => c.id).sort());
       }
     }

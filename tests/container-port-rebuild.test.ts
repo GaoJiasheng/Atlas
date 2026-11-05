@@ -73,7 +73,7 @@ describe('container-port realism rebuild contracts', () => {
         piece.geometry.dispose();
       }
     }
-    expect(triangles).toBeLessThan(1_500_000);
+    expect(triangles).toBeLessThan(350_000);
     expect(pieces).toBeLessThan(150);
   });
 

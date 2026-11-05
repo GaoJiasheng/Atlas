@@ -193,3 +193,44 @@ Logs: **`/tmp/atlas-sun-earth-moon/fix-2026-11-04/{check,validate,build,test,foc
 - **GPU numbers (beat 01.1, en-cinema, sRGB-decoded relative luminance over the night disc):** night Y 0.044 → 0.068 against plate Y 0.017; ratio 2.58× → 3.99×; contrast 1.40:1 → 1.76:1. Faint continents/clouds and lunar maria now show, the terminator and the night-side silhouette stay crisp, and the lit side is unchanged.
 - **Scope verified by pixel diff vs main:** all 39 sun-earth-moon paper beats and all 40 solar-system cinema beats are byte-identical; only sun-earth-moon cinema beats change, and only on Earth/Moon night pixels.
 - The CPU previews in `/tmp/atlas-sun-earth-moon/fix-2026-11-04/` show Codex's first formula; rerun `render-preview.ts` to regenerate.
+
+## Polish 2026-11-03 — group B shadow-strip decision
+
+### Item and implementation boundary
+
+Verified current F4: the finite-Sun strip is still a true-scale drawing in the shared `hud/OrbitCard.tsx`; topic data supports only the bilingual note. Its strict schema has no data-defined drawing or asset hook. The requested editorial replacement is therefore delivered through the explicitly authorised fallback: [shadow-strip-schematic.patch](shadow-strip-schematic.patch), **not applied to shared code**. The live topic's strip is unchanged until the engine owner applies it. No other F1–F5 work was reopened.
+
+The patch installs a default-preserving `panel.shadowDiagram: 'schematic'` option for this topic, preserving the old behavior for other orbit topics. It shows both solar and lunar eclipse diagrams, each with labelled total/partial cases, Sun/Earth/Moon, umbra and penumbra. Lunar alternative positions are labelled as one Moon. Beat 05.3 (total lunar) and 05.4 (total solar) display the matching diagram; only one is shown at a time to keep the card compact. Both themes use existing `--ink`, `--ink-2`, `--ink-3`, `--panel-solid`, `--signal`, `--en-light` and font tokens, with no new global CSS. The heading explicitly says **“示意，未按比例 / Schematic, not to scale”**. The true-one-scale fact remains a short bilingual note. The comparison is distinguished from the current computed observation above it.
+
+Common internal/external tangents are solved from the actual illustrated circular discs. Umbra edges converge and penumbra edges diverge; the Moon's umbral tip extends only 3 illustration units past Earth's near limb. Total/partial solar observers lie on the same near-facing Earth surface; the total lunar disc is wholly inside Earth's umbra, while the alternate partial disc intersects its edge. No simulation input or teaching number changes. Two chapter-05 explanations claiming that the shadow drawing is true scale are minimally corrected in **both EN and ZH in the patch**.
+
+### References
+
+- Existing S6, NASA [Types of Eclipses](https://science.nasa.gov/eclipses/types/), and [Eclipses and the Moon](https://science.nasa.gov/moon/eclipses/): solar/lunar body order and total/partial distinction; checked 2026-11-05. No source image redistributed.
+- NASA [Why Do Eclipses Happen?](https://science.nasa.gov/eclipses/geometry/): finite-source shadow geometry and the lunar umbra reaching Earth's surface.
+- Existing S36 physical model and `docs/08-technical-plate.md`; diagram distances/radii are explicitly illustration coordinates, never astronomical measurements.
+
+### Counts and offline evidence
+
+Current conservative all-body/all-guide inventory: **109,088 → 109,088 3D triangles**. GLB unchanged: **1,420,292 bytes**. The replacement is an SVG card and adds no 3D geometry. `audit-geometry.ts`'s historical `liveBefore: 20,736` refers to the earlier untextured rebuild, not this pass's baseline.
+
+Exact candidate React SVGs were CPU-rasterised and inspected at native card scale and 3×, iterated to raise type size and separate labels. All EN/ZH × paper/cinema × 05.3/05.4 combinations: `/tmp/atlas-group-b/sun-earth-moon/contact-sheet.png`; individual `*-card.png`, SVGs and close-up PNGs are alongside. These verify the proposed drawing, **not live shared-panel installation, browser layout, GPU performance or interaction**. Five regression tests cover tangent geometry, cone widening/narrowing, near-limb solar reach, total/partial lunar containment, bilingual labels, consistent opt-in configuration and patch applicability before/after installation.
+
+Reproduce:
+
+```sh
+pnpm tsx scripts/geo/sun-earth-moon/build-shadow-patch.ts
+pnpm tsx scripts/geo/sun-earth-moon/render-shadow-schematic.tsx
+pnpm exec vitest run tests/space-scene/sun-earth-moon-shadow-schematic.test.ts
+```
+
+The implementation source for the patch is `scripts/geo/sun-earth-moon/shadow-schematic.tsx`. Rebuilding the patch reads current shared files and writes only this topic's patch. No shared engine, camera, framing, CSS, package/lockfile or git state was written. F4's remaining action is patch installation in the shared engine owner's branch, as required by the ownership restriction. Details and acceptance handoff are in FIXES.md F4.
+
+### Combined group B gates · run 2026-11-05
+
+- `pnpm check`: PASS, 0 errors / 0 warnings, 5 existing unused-code hints.
+- `pnpm validate`: PASS, 94 topics, 0 errors / 0 warnings.
+- `pnpm build`: PASS, 191 pages and PWA generation; the full built-topic JavaScript budget test passes.
+- **`pnpm test`: NOT GREEN** — 275 suites / 6,527 tests pass; one untouched `tests/space-scene/living-things-toad-skin.test.ts` geometry test exceeds its existing 5,000 ms limit. Repeated with default workers, two workers, and alone: the same timeout is the only failure. The isolated test passes both assertions/tests with a diagnostic 30,000 ms command-line limit (13.08 s test time); no foreign source, assertion or stored timeout was changed. That diagnostic is not presented as a passing standard gate. The permitted four-topic implementation and regression suites pass. Fixing the unrelated test's timing contract is outside this task's ownership.
+
+Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers2,toad-isolated,toad-diagnostic}.log`. All inspected CPU previews are linked from `/tmp/atlas-group-b/index.md`. No browser, desktop, e2e or GPU pass was run. No git write or package/lockfile edit was performed. An ephemeral local dependency-cache wrapper allowed the gates to run without writing through the pre-existing read-only `node_modules` symlink; the original symlink was restored afterwards.

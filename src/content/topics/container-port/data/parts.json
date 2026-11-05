@@ -37049,8 +37049,319 @@
           -0.5,
           32
         ],
-        "color": "token:neutral"
-      }
+        "color": "abrasive",
+        "tint": "token:mannequin"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            200,
+            0.024,
+            40
+          ],
+          "at": [
+            0,
+            0.012,
+            44
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -90,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -80,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -70,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -60,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -50,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -40,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -30,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -20,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            -10,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            0,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            10,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            20,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            30,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            40,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            50,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            60,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            70,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            80,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.045,
+            0.006,
+            24
+          ],
+          "at": [
+            90,
+            0.003,
+            12
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            200,
+            0.006,
+            0.045
+          ],
+          "at": [
+            0,
+            0.003,
+            8
+          ],
+          "color": "abrasive"
+        },
+        {
+          "kind": "box",
+          "size": [
+            200,
+            0.006,
+            0.045
+          ],
+          "at": [
+            0,
+            0.003,
+            16
+          ],
+          "color": "abrasive"
+        }
+      ]
     },
     {
       "id": "water-context",
@@ -37085,7 +37396,7 @@
           -0.85,
           -45
         ],
-        "color": "casing",
+        "color": "enamel",
         "tint": "token:cold"
       }
     }

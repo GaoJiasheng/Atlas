@@ -165,7 +165,8 @@ add('ion-tail',tail(false),[0,0,0],true);add('dust-tail',tail(true),[0,0,0],true
 // A separately licensed display copy opts into CSS-pixel points. The shared
 // source catalogue and legacy sample-solar fixture remain byte-for-byte intact.
 const catalogue=JSON.parse(readFileSync('public/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json','utf8'));
-catalogue.meta.pointSizeCssPx=5;
+// Slightly stronger core coverage at laptop DPR without a halo or world-space geometry.
+catalogue.meta.pointSizeCssPx=5.8;
 writeFileSync('public/catalogues/solar-system/stars-hyg-v41-readable-cc-by-sa.json',JSON.stringify(catalogue,null,2)+'\n');
 file.sim.overlays.find((o:any)=>o.kind==='catalogue-sky').catalogue='stars-hyg-v41-readable-cc-by-sa.json';
 file.model='/models/solar-system.glb';

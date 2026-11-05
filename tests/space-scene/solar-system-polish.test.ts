@@ -13,6 +13,10 @@ import { gltfSurface } from '../../src/engines/space-scene/stages/model3d/GltfSo
 import { cataloguePointSize, createCataloguePointMaterial } from '../../src/engines/space-scene/stages/model3d/CatalogueSky';
 import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 
+// These Node tests exercise real geometry/material functions, not Drei's DOM overlay.
+// Isolate that unused browser dependency while retaining the production point shader.
+vi.mock('@react-three/drei/web/Html', () => ({ Html: () => null }));
+
 const json = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const baseline = partsFile.parse(json('scripts/geo/solar-system/baseline-parts.json'));
 const live = partsFile.parse(json('src/content/topics/solar-system/data/parts.json'));
@@ -355,11 +359,11 @@ describe('catalogue stars use restrained CSS-pixel discs', () => {
     expect(readable.stars).toEqual(original.stars);
     const {pointSizeCssPx,...meta}=readable.meta;
     expect(meta).toEqual(original.meta);
-    expect(pointSizeCssPx).toBe(5);
+    expect(pointSizeCssPx).toBe(5.8);
     const fixture=json('src/content/topics/sample-solar/data/parts.json');
     expect(fixture.sim.overlays.find((o:{kind:string})=>o.kind==='catalogue-sky').catalogue).toBe('stars-hyg-v41-cc-by-sa.json');
     expect(cataloguePointSize(original)).toBeUndefined();
-    expect(cataloguePointSize(readable)).toBe(5);
+    expect(cataloguePointSize(readable)).toBe(5.8);
     const material=createCataloguePointMaterial('#2a2824',cataloguePointSize(original));
     expect(material.size).toBe(.12);
     expect(material.sizeAttenuation).toBe(true);

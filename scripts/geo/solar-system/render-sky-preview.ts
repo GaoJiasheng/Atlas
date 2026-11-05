@@ -10,12 +10,18 @@ import { parseStarCatalogue, skySnapshot } from '../../../src/engines/space-scen
 import { cataloguePointSize, createCataloguePointMaterial } from '../../../src/engines/space-scene/stages/model3d/CatalogueSky';
 import { resolveDataColor } from '../../../src/engines/space-scene/lib/color';
 import type { SimValues } from '../../../src/engines/space-scene/sim-schema';
-const out='/tmp/atlas-solar-system-polish/sky';mkdirSync(out,{recursive:true});
+const out=process.argv[2]??'/tmp/atlas-solar-system-polish/sky';mkdirSync(out,{recursive:true});
 const file=partsFile.parse(JSON.parse(readFileSync('src/content/topics/solar-system/data/parts.json','utf8')));
-const chapter=JSON.parse(readFileSync('src/content/topics/solar-system/chapters/06-singapore-star-patterns.mdx','utf8').split('---')[1]!);
+const chapterFile=process.argv[4]??'06-singapore-star-patterns';
+if(!['05-a-turning-viewpoint','06-singapore-star-patterns'].includes(chapterFile))throw new Error('Expected a sky chapter');
+const chapter=JSON.parse(readFileSync(`src/content/topics/solar-system/chapters/${chapterFile}.mdx`,'utf8').split('---')[1]!);
 const c=file.sim!.solarSystem!, overlay=file.sim!.overlays!.find(x=>x.kind==='catalogue-sky')!;
 if(overlay.kind!=='catalogue-sky')throw new Error('Missing catalogue overlay');
 const catalogue=parseStarCatalogue(JSON.parse(readFileSync(`public/catalogues/solar-system/${overlay.catalogue}`,'utf8')),c.patterns);
+// Optional presentation-only override for a repeatable before/after comparison.
+const sizeOverride=process.argv[3]===undefined?undefined:Number(process.argv[3]);
+if(sizeOverride!==undefined&&(!Number.isFinite(sizeOverride)||sizeOverride<1||sizeOverride>6))throw new Error('Point size must be 1–6 CSS px');
+const pointSize=sizeOverride??cataloguePointSize(catalogue);
 const modulePath='three/src/renderers/webgl/WebGLMaterials.js';
 const {WebGLMaterials}=await import(modulePath), uploader=WebGLMaterials({},{});
 const css=readFileSync('src/theme/tokens.css','utf8');
@@ -26,7 +32,7 @@ for(const theme of ['paper','cinema'] as const){
  const block=css.slice(css.indexOf(`:root[data-theme="${theme}"]`)).split('}')[0]!;
  const tokens=Object.fromEntries([...block.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(m=>[m[1]!,m[2]!.trim()]));
  for(let i=0;i<6;i++)for(const [k,v] of Object.entries(tokens))tokens[k]=v.replace(/var\(--([\w-]+)\)/g,(_,n:string)=>tokens[n]??'#888888');
- const material=createCataloguePointMaterial(resolveDataColor('token:ink',tokens,theme),cataloguePointSize(catalogue));
+ const material=createCataloguePointMaterial(resolveDataColor('token:ink',tokens,theme),pointSize);
  const bg=new Color(tokens.paper!), ink=material.color;
  for(const dpr of [1,2])for(const [index,beat] of chapter.state.beats.entries()){
   const values:SimValues={...Object.fromEntries(file.sim!.controls.map(x=>[x.id,x.default])),...chapter.state.sim.set,...beat.sim?.set};
@@ -68,10 +74,10 @@ for(const theme of ['paper','cinema'] as const){
 }
 writeFileSync(`${out}/report.json`,JSON.stringify(report,null,2)+'\n');
 const previews=[];
-for(const theme of ['paper','cinema'])for(const beat of [1,3,5]){
+for(const theme of ['paper','cinema'])for(const beat of chapter.state.beats.map((_:unknown,i:number)=>i+1)){
  const png=await sharp(`${out}/${theme}-${beat}-1x.png`).resize(640,416).png().toBuffer();
- const title=Buffer.from(`<svg width="640" height="30"><rect width="640" height="30" fill="#1f2124"/><text x="10" y="20" fill="#e9e4d8" font-size="13" font-family="sans-serif">${theme} · beat ${beat} · 3.2 CSS px · CPU reconstruction</text></svg>`);
+ const title=Buffer.from(`<svg width="640" height="30"><rect width="640" height="30" fill="#1f2124"/><text x="10" y="20" fill="#e9e4d8" font-size="13" font-family="sans-serif">${theme} · beat ${beat} · ${pointSize} CSS px · CPU reconstruction</text></svg>`);
  previews.push({png,title});
 }
-await sharp({create:{width:1920,height:892,channels:3,background:'#1f2124'}}).composite(previews.flatMap((p,i)=>[{input:p.png,left:(i%3)*640,top:Math.floor(i/3)*446},{input:p.title,left:(i%3)*640,top:Math.floor(i/3)*446+416}])).png().toFile(`${out}/contact-sheet.png`);
+await sharp({create:{width:1920,height:Math.ceil(previews.length/3)*446,channels:3,background:'#1f2124'}}).composite(previews.flatMap((p,i)=>[{input:p.png,left:(i%3)*640,top:Math.floor(i/3)*446},{input:p.title,left:(i%3)*640,top:Math.floor(i/3)*446+416}])).png().toFile(`${out}/contact-sheet.png`);
 console.log(out,report);
