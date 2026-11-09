@@ -24,11 +24,24 @@ materials © UKRI 2026 (Open Government Licence 3.0, which still applies to the
 underlying BGS material). City coordinates from GeoNames are CC BY 4.0.
 Attribution: `THIRD-PARTY-NOTICES.md`.
 
+Note — Second World War (topic `ww2`): no exception; its map data
+(`data/control.json`, `data/movements.json`) stays under CC BY-NC-SA 4.0 as
+above and contains no CC BY-SA material. Its inputs are CShapes 2.0
+(CC BY-NC-SA 4.0); OpenHistoricalMap (CC0 1.0; no licence-tagged feature used);
+Natural Earth (public domain); author-released public-domain monthly situation
+maps on Wikimedia Commons; US Military Academy Department of History atlases,
+US Army Center of Military History maps and a declassified OSS report (public
+domain, US Government works); and geoBoundaries gbOpen Greece ADM3
+municipalities (CC BY 4.0; Runfola et al. 2020), used as an administrative
+approximation of the Crete occupation zones. Per-keyframe sources, licences and
+registration methods: `src/content/topics/ww2/data/SOURCES.md` and
+`scripts/geo/ww2/SOURCES-GEO.md`. Attribution: `THIRD-PARTY-NOTICES.md`.
+
 Why NonCommercial-ShareAlike: the historical control areas are derived from
-CShapes 2.0 (CC BY-NC-SA 4.0) and from Wikimedia Commons maps (CC BY-SA); the
-derived data must carry compatible terms. Third-party sources and their own
-licences are listed per topic in `src/content/topics/*/data/SOURCES.md`,
-`scripts/geo/*/SOURCES-GEO.md`, and summarised in `THIRD-PARTY-NOTICES.md`.
+CShapes 2.0 (CC BY-NC-SA 4.0), so the derived data must carry the same terms.
+Third-party sources and their own licences are listed per topic in
+`src/content/topics/*/data/SOURCES.md`, `scripts/geo/*/SOURCES-GEO.md`, and
+summarised in `THIRD-PARTY-NOTICES.md`.
 
 Exception — human muscle series (topics `muscles-*`): the 3D models
 (`public/models/muscles-*.glb`), the geometry derived from them

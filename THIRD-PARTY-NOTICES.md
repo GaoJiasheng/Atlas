@@ -10,8 +10,9 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 | CShapes 2.0 (Schvitz, Girardin, Rüegger, Walter, Cederman, Gleditsch; ETH Zürich) | sovereign borders at each keyframe date | CC BY-NC-SA 4.0 |
 | OpenHistoricalMap | boundary relations for occupations, colonies, client states | CC0 (features tagged `license=*` excepted; none used) |
 | Natural Earth 1:50m and 1:10m (via `world-atlas`) | basemap land, coastlines, country borders | Public domain |
-| Wikimedia Commons historical maps (per-file list in each topic's `SOURCES-GEO.md`) | georeferenced control areas and fronts; `warring-states` control areas and rivers are traced only from these maps and are published CC BY-SA 4.0 (see LICENSE-CONTENT) | CC BY-SA 2.5 / 3.0 / 4.0 or public domain, as listed |
-| United States Military Academy, Department of History atlases; US Army Center of Military History maps | fronts, routes, dates | Public domain (US Government work) |
+| Wikimedia Commons historical maps (per-file list in each topic's `SOURCES-GEO.md`) | georeferenced control areas and fronts; `warring-states` control areas and rivers are traced only from these maps and are published CC BY-SA 4.0 (see LICENSE-CONTENT). `ww2` uses only the public-domain ones (author-released monthly situation maps of Europe; US Government maps hosted on Commons) | CC BY-SA 2.5 / 3.0 / 4.0 or public domain, as listed |
+| United States Military Academy, Department of History atlases; US Army Center of Military History maps; US Office of Strategic Services report A-12634 (1943, `ww2` location facts only) | fronts, routes, dates | Public domain (US Government work) |
+| geoBoundaries gbOpen, Greece ADM3 municipalities (2010 boundaries; build 2023-12-12), https://www.geoboundaries.org/. Runfola, D. et al. (2020), *geoBoundaries: A global database of political administrative boundaries*, PLoS ONE 15(4): e0231866, doi:10.1371/journal.pone.0231866; underlying sources credited in the Greece ADM3 metadata (CC0 1.0 / CC BY 3.0) | `ww2` Crete occupation zones (`data/control.json`, keyframes K5–K8, K10 and K11): selected municipalities used as an administrative approximation; changes: selection, merging, simplification, quantisation | CC BY 4.0 |
 | UMN Historical National Boundaries | cross-check only | see repository |
 | Cliopatria v0.2.1, Seshat Global History Databank (https://github.com/Seshat-Global-History-Databank/cliopatria, Zenodo record 13363121, data paper doi:10.1038/s41597-025-04516-9) | `ancient-civilisations` control areas (16 keyframes) and Southeast Asian sphere layers (`public/geo/ac-*.json`); changes: clipped to the Natural Earth coast, simplified, records merged per state | CC BY 4.0 |
 | GeoNames gazetteer (https://www.geonames.org), records 131231 (Hormoz) and 157382 (Kilwa Kisiwani) | two site coordinates of `zheng-he` (`data/events.json`); no changes beyond selection and added descriptions | CC BY 4.0 |
@@ -139,6 +140,7 @@ redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
 | Work | Licence |
 |---|---|
 | IBM Plex Sans Condensed, IBM Plex Mono (self-hosted via `@fontsource`) | SIL Open Font License 1.1 |
+| Helvetiker Bold, © 2004 MAGENTA Ltd (shipped with three.js), outlines extruded as relief lettering in `public/models/b200-server.glb` | MgOpen font licence; notice kept in `scripts/geo/b200-server/LETTERING-LICENSE.txt` |
 | MapLibre GL JS | BSD-3-Clause |
 | three.js, @react-three/fiber, @react-three/drei | MIT |
 | Astro, React, zustand, topojson-client, vite-plugin-pwa and other npm dependencies | see `package.json` and each package's licence |
