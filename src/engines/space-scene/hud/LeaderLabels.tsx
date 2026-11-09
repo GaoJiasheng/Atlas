@@ -29,12 +29,16 @@
  *  - PRESENTATION: the beat's `labels` (else the chapter's) only, at most 6,
  *    20 % larger, not capped by camera distance, and shown with the HUD
  *    hidden (they keep clear of the caption card and the title block only)
+ *  - PRESENTATION on a phone (stage under 760 px, `lib/phone-label.ts`): one
+ *    short placard (no note) for the beat's focus part, placed clear of that
+ *    part and of the caption card, the title and the safe areas, or none. It
+ *    stays part of the presentation's tap surface (a tap is the next beat)
  *  - click / tap a label to select its part; hidden with the host's LABELS
  *    switch (L) and with the HUD (outside the presentation)
  *  - each placard carries `data-id`; the group carries `data-want` (the
  *    listed labels, when there is a list) for `pnpm shoot`'s label check
  */
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from 'zustand';
 import { useHud, useScene, useSceneContext, useSceneStore } from '../../core/context';
 import type { Chapter } from '../../core/types';
@@ -42,8 +46,9 @@ import { tx } from '../../../i18n';
 import { resolveAllPartDisplays } from '../lib/visibility';
 import { partBounds } from '../lib/parts';
 import { labelBudget } from '../lib/schematic';
-import { layoutLeaders, type LeaderFrame, type LeaderItem, type ScreenRect, type Side } from '../lib/leader-layout';
+import { layoutLeaders, type LeaderFrame, type LeaderItem, type LeaderPlace, type ScreenRect, type Side } from '../lib/leader-layout';
 import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP } from '../lib/labels';
+import { beatFocusPart, placePhoneLabel } from '../lib/phone-label';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, SpaceChapterState } from '../schema';
 import type { ScreenAnchor, StageBridge } from '../bridge';
@@ -111,10 +116,26 @@ function priority(file: PartsFile): Map<string, number> {
   );
 }
 
+/** Below 760 px the host lays out a phone and hides the leaders slot (space-scene.css reopens it for the one presentation label). */
+function usePhoneWidth(): boolean {
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 759px)');
+    const update = () => setPhone(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+  return phone;
+}
+
 export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; chapters: readonly Chapter[]; bridge: StageBridge; ui: SpaceUiStore }) {
   const { locale } = useSceneContext();
   const store = useSceneStore<SpaceSceneExt>();
   const presenting = useStore(ui, (u) => u.presenting);
+  const phone = usePhoneWidth();
+  /** A phone presentation: one label at most, for the beat's focus part. */
+  const solo = presenting && phone;
   const hudOn = useHud((h) => h.hud);
   const cardOpen = useHud((h) => h.cardOpen);
   // The chapter axis folds to a hairline (`panelsOpen`): the band below the labels changes.
@@ -147,9 +168,14 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const groups = useMemo(() => new Map(file.groups.map((g) => [g.id, g])), [file.groups]);
   const listed = useMemo(() => {
     const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
-    const beatLabels = s.beat !== null ? (state?.beats?.[s.beat]?.labels ?? null) : null;
-    return listedLabels({ presenting, beat: beatLabels, chapter: state?.labels });
-  }, [presenting, chapters, s.chapter, s.beat]);
+    const beat = s.beat !== null ? state?.beats?.[s.beat] : undefined;
+    if (solo) {
+      // A chapter without beats of its own is its one beat.
+      const focus = beatFocusPart(state?.beats?.length ? beat : state);
+      return focus ? [focus] : [];
+    }
+    return listedLabels({ presenting, beat: beat?.labels ?? null, chapter: state?.labels });
+  }, [presenting, solo, chapters, s.chapter, s.beat]);
   // Twins whose part names both sides (`labelBoth`), by the part's id.
   const both = useMemo(
     () => new Map(file.parts.filter((p) => p.pair && !p.twinOf && typeof p.bilateral === 'object' && p.bilateral.labelBoth).map((p) => [p.id, p.pair!])),
@@ -165,7 +191,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       solo: s.solo,
     });
     const pool = listed
-      ? listed.flatMap((id) => (both.has(id) ? [id, both.get(id)!] : [id]))
+      ? listed.flatMap((id) => (!solo && both.has(id) ? [id, both.get(id)!] : [id]))
       : file.parts.filter((p) => !p.twinOf || [...both.values()].includes(p.id)).map((p) => p.id);
     const labelled = (id: string) => displays.get(id)?.visible === true && displays.get(id)?.selectable === true;
     // A group placard while any of its parts is on show.
@@ -180,7 +206,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     // The selected part comes first; outside an explicit presentation list it is always labelled.
     if (s.part && labelled(s.part) && (!presenting || listed === null || ids.includes(s.part))) return [s.part, ...ids.filter((id) => id !== s.part)];
     return ids;
-  }, [file.parts, groups, listed, presenting, s, sizes, both]);
+  }, [file.parts, groups, listed, presenting, solo, s, sizes, both]);
 
   const root = useRef<SVGGElement>(null);
   const labels = useRef(new Map<string, LabelState>());
@@ -236,6 +262,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     // Presenting: only the caption card and the title block count (the HUD blocks are fading out, still `visible`).
     const blocks = [...scene.querySelectorAll('[data-hud-panel]')]
       .filter((el) => !presenting || el.getAttribute('data-hud-panel')!.startsWith('present'))
+      .concat(solo ? [...scene.querySelectorAll('.atlas-hud-restore')] : [])
       .flatMap((el) => (el.getAttribute('data-hud-panel') === 'overlay' ? [...el.children] : [el]));
     for (const el of blocks) {
       const r = el.getBoundingClientRect();
@@ -244,16 +271,26 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       if (getComputedStyle(el).visibility === 'hidden') continue;
       rects.push({ x0: r.left - box.left, y0: r.top - box.top, x1: r.right - box.left, y1: r.bottom - box.top });
     }
-    // Blocks across the middle at the bottom (the chapter axis, the reader sheet) close the band from below.
-    for (const r of rects) if (r.y0 > H * 0.45 && r.x0 < W / 2 && r.x1 > W / 2) bottom = Math.min(bottom, r.y0 - 12);
-    for (const r of rects) {
-      if (r.y0 >= bottom || r.y1 <= top) continue;
-      if (r.x1 < W / 2) left = Math.max(left, r.x1 + 18);
-      else if (r.x0 > W / 2) right = Math.min(right, r.x0 - 18);
+    if (solo) {
+      // The band is the safe area only (read through `scroll-padding`, space-scene.css): the blocks stay obstacles, not band edges.
+      const css = getComputedStyle(svg);
+      const px = (v: string) => parseFloat(v) || 0;
+      top = Math.max(top, px(css.scrollPaddingTop) - box.top);
+      left = Math.max(left, px(css.scrollPaddingLeft) - box.left);
+      bottom = Math.min(bottom, window.innerHeight - px(css.scrollPaddingBottom) - box.top);
+      right = Math.min(right, window.innerWidth - px(css.scrollPaddingRight) - box.left);
+    } else {
+      // Blocks across the middle at the bottom (the chapter axis, the reader sheet) close the band from below.
+      for (const r of rects) if (r.y0 > H * 0.45 && r.x0 < W / 2 && r.x1 > W / 2) bottom = Math.min(bottom, r.y0 - 12);
+      for (const r of rects) {
+        if (r.y0 >= bottom || r.y1 <= top) continue;
+        if (r.x1 < W / 2) left = Math.max(left, r.x1 + 18);
+        else if (r.x0 > W / 2) right = Math.min(right, r.x0 - 18);
+      }
     }
     Object.assign(f, { width: W, height: H, top, bottom, left, right, obstacles: rects });
     bridge.invalidate();
-  }, [bridge, presenting]);
+  }, [bridge, presenting, solo]);
 
   useLayoutEffect(() => {
     measure();
@@ -295,6 +332,16 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     };
   }, [measure, labelsOn]);
 
+  // A phone's caption card is most of the free stage, and its height follows the caption, which arrives after the beat.
+  useEffect(() => {
+    if (!solo) return;
+    const scene = root.current?.ownerSVGElement?.closest('.atlas-scene');
+    if (!scene) return;
+    const ro = new ResizeObserver(() => measure());
+    for (const el of scene.querySelectorAll('[data-hud-panel^="present"]')) ro.observe(el);
+    return () => ro.disconnect();
+  }, [solo, measure, s.chapter, s.beat, labelsOn]);
+
   // The stage checks occlusion for these parts only (none while the labels are off).
   useEffect(() => {
     bridge.labelled = new Set(labelsOn ? candidates : []);
@@ -317,7 +364,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       if (!f.ok) return;
       const map = labels.current;
       // Band between the HUD blocks too narrow for placards beside the model (720p laptops): only the selected part is labelled.
-      const roomy = f.right - f.left >= MIN_BAND;
+      const roomy = solo || f.right - f.left >= MIN_BAND;
       // Presenting: the beat's list as it is (≤ 6); otherwise fewer labels in close-ups, but never fewer than the chapter lists (≤ 6).
       const wanted = presenting
         ? PRESENT_LABEL_CAP
@@ -345,9 +392,12 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       // the same live anchors and stage size as the visible dashed frame.
       const inset = bridge.insetLayout?.();
       // Frame titles are hard barriers, even when a crowded view loses a label.
-      const places = inset ? layoutLeaders(items, {
-        ...f, obstacles: [...f.obstacles, ...inset.bodies], beside: inset.frames, accept: (p, i) => inset.clear(p, i.ax, i.ay),
-      }) : layoutLeaders(items, f);
+      const accept = (p: LeaderPlace, i: LeaderItem) => inset!.clear(p, i.ax, i.ay);
+      const places = solo
+        ? items.flatMap((i) => placePhoneLabel(i, inset ? { ...f, accept } : f) ?? [])
+        : inset
+          ? layoutLeaders(items, { ...f, obstacles: [...f.obstacles, ...inset.bodies], beside: inset.frames, accept })
+          : layoutLeaders(items, f);
       let moving = false;
       placed.clear();
       const k = Math.min(1, dt * 10);
@@ -364,8 +414,8 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           l.side = p.side;
           l.y = -1;
         }
-        // Glide to the new place (snap on the first frame and after a side change).
-        if (l.y < 0) {
+        // Glide to the new place (snap on the first frame and after a side change; always on a phone, where only the final place is known to be clear).
+        if (l.y < 0 || solo) {
           l.x = p.x0;
           l.y = p.y0;
         } else {
@@ -406,7 +456,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       for (const [id, l] of map) {
         if (placed.has(id)) continue;
         // An unplaceable label can no longer fade through an inset's new border.
-        if (inset) l.vis = 0;
+        if (inset || solo) l.vis = 0;
         if (l.vis > 0) {
           l.vis = Math.max(0, l.vis - dt * FADE * 0.6);
           moving = true;
@@ -424,11 +474,11 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     return () => {
       bridge.listeners.delete(layout);
     };
-  }, [bridge, candidates, selected, labelsOn, presenting, listed, file.views.insets]);
+  }, [bridge, candidates, selected, labelsOn, presenting, solo, listed, file.views.insets]);
 
   if (!labelsOn) return null;
   return (
-    <g ref={root} className="space-leaders" data-presenting={presenting || undefined} data-want={listed?.join(',')}>
+    <g ref={root} className="space-leaders" data-presenting={presenting || undefined} data-solo={solo || undefined} data-want={listed?.join(',')}>
       {candidates.map((id) => {
         const group = labelGroup(id);
         const g = group !== null ? groups.get(group) : undefined;
@@ -455,7 +505,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
             n={partNumber(file, id)}
             en={tx(part.short ?? part.name, 'en')}
             zh={tx(part.short ?? part.name, 'zh')}
-            note={clip(tx(part.summary, locale), locale === 'zh' ? 18 : 34)}
+            note={solo ? '' : clip(tx(part.summary, locale), locale === 'zh' ? 18 : 34)}
             on={id === selected}
             register={register}
             onSelect={() => store.getState().patch({ part: id })}

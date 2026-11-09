@@ -323,6 +323,13 @@ div.space-inspector__detail:not([hidden]) {
 .space-leaders[data-presenting] .space-co__note {
   font-size: calc(1.2 * 10.6 * var(--u));
 }
+/* A phone presentation's one label: the host hides the slot below 760 px. `scroll-padding` only carries the safe-area insets to the layout as px. */
+@media (max-width: 759px) {
+  .atlas-leaders:has(.space-leaders[data-solo]) {
+    display: block;
+    scroll-padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /* Card: part chain                                                    */

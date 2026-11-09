@@ -142,6 +142,11 @@ export function createSpaceTestHooks(file: PartsFile, store: SceneStore<SpaceSce
           const a = bridge.anchors.get(id);
           return a ? { x: Math.round(a.x * 10) / 10, y: Math.round(a.y * 10) / 10, shown: a.shown, onScreen: a.onScreen } : null;
         },
+        // QA: the on-screen box of part `id` (stage CSS px), which a phone presentation's label must keep clear of.
+        anchorBox: (id: string) => {
+          const a = bridge.anchors.get(id);
+          return a ? { x0: a.x0, y0: a.y0, x1: a.x1, y1: a.y1 } : null;
+        },
         // QA: hold timeline output `id` at model time `t` (s); false if the stage has no such run.
         simSeek: (id: string, t: number) => {
           if (!bridge.playback.has(id) || !Number.isFinite(t)) return false;
