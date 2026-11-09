@@ -613,6 +613,8 @@ export type TimeLayer = (typeof TIME_LAYERS)[number];
 export const timeBeat = z
   .object({
     t: timePoint.optional(),
+    /** Display fraction within this chapter's axis segment; does not change the date. */
+    axisPosition: z.number().min(0).max(1).optional(),
     inset: z.enum(['world', 'southeast-asia', 'mexico']).optional(),
     insetVisible: z.boolean().optional(),
     fossilMode: z.enum(['age-window', 'all-mesozoic']).optional(),

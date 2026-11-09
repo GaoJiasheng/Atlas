@@ -42,11 +42,11 @@ The build started from docs/43 after the second fact-check pass (§0.4, 46 chang
 
 ## Still open (⚑) — not blocking, stated in the text's own words where used
 
-1. F35 Indianisation: Cœdès / Vickery not read; 06 More ③ gives facts only.
-2. F60 mandala: Wolters not read; "mandala" only in the glossary, with a plain definition and no scholar named.
+1. F35 Indianisation: closed in the polish pass below with Mabbett’s published extract (S443); no claim to have read Cœdès or Vickery.
+2. F60 mandala: closed with Latif’s published ISEAS chapter summary (S444); glossary and ch07 now identify it as a historical model.
 3. "What Funan's people called it is not known" (06): kept per §0.4 #27; no source read says it outright.
 4. The trade explanation for writing (01 More ②) rests on World History Encyclopedia (S109, second tier), shown beside the Met's view as §1.4 asks; drop it if second-tier sources are not wanted.
-5. UNESCO years for Sanchi 1989, Taxila 1980, Nalanda 2016, the Qin mausoleum 1987 and the Silk Roads 2014 rest on the research pass (UNESCO returns 403 to scripts); re-check before publishing. Olympia's year is not given.
+5. UNESCO years for Sanchi 1989, Taxila 1980, Nalanda 2016, the Qin mausoleum 1987 and the Silk Roads 2014: rechecked on the official property pages on 2026-11-05; S216/S217/S218/S231/S235 record the exact Date of Inscription field. Olympia's year is not given.
 6. Met Uruk page (S107) returned HTTP 429 on 22 October; it rests on the 21 October read.
 7. `majapahit-founded`: "about 1293" (sources give the 1292 expedition); Trowulan as the capital is not checked and the detail says so. `khmer-802`: the marker is on Phnom Kulen, one of Jayavarman II's capitals; no source places the 802 proclamation there, and the detail says only the first.
 8. The UNESCO Chinese name 吴哥窟 for the whole Angkor property comes from the research pass.
@@ -59,3 +59,10 @@ The build started from docs/43 after the second fact-check pass (§0.4, 46 chang
 ## Map
 
 All control areas and spheres are Cliopatria v0.2.1 records, unchanged except for coast clipping and simplification (INVENTORY.md, SOURCES-GEO.md): 16 keyframes (K16 empty), 35 features, all approximate, control.json 311 KB, rings 0 / 0; three sphere layers; 66 Wikidata points; two schematic sea routes. Side-by-side checks `docs/screenshots/ancient-civilisations/geo-K1…K15.png` (product vs raw records) match territory by territory.
+
+## Polish 2026-11-03 (executed 2026-11-05)
+
+- F35 and F60 are sourced as above. Removed the unsupported assertion about the words historical people used. Mandala wording describes a model rather than a universal rule for every kingdom.
+- Slavery: removed the broad Sumerian workforce-share generalisation; kept qualified, sourced evidence. Ch02 now links Janzen and UCL (S129/S446). New ch03 note uses the CSMVS museum’s Ashoka edict record (S447), without inferring counts or compliance. New ch07 note uses Lustig & Lustig’s inscription research (S445), distinguishing bonded workers from an assumption that every temple worker had the same status. The old India/Southeast Asia gap above is now resolved for these specific examples, not for every kingdom in the topic.
+- The five UNESCO listing years above are verified; existing source ids and years retained.
+- Camera and unapplied engine patches, offline evidence and gate results are in REBUILD-3D.md.

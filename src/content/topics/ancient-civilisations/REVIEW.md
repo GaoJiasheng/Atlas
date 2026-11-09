@@ -11,7 +11,7 @@
    - 细看“谁说谁是‘文明’”三段：barbaroi（据 Britannica，起初连罗马人也在内，很快带贬义；罗马人后来的用法）；《岛夷志略》书名里的“夷”与 NLB 的英译 *Description of the Barbarians of the Isles*。“苏美尔”一名的来历一句**已删**（ETCSL 读不到）。
    - 细看“这张地图是怎么画的”末两段：印度河城市、扶南、素可泰、**马六甲**、希腊城邦只画点。
 2. **01 苏美尔**
-   - 细看“谁在干活？轮子是谁发明的？”第 1 段：乌尔第三王朝与古地亚时期文献里的奴隶（战俘、境外买来的人、因债务或犯罪沦为奴隶的本城人；学者认为只占劳动力一小部分）。第 2 段：轮子的证据在几个地区，最早在哪里没有定论。
+   - 细看“谁在干活？轮子是谁发明的？”第 1 段：乌尔第三王朝与古地亚时期文献里的奴隶（战俘、境外买来的人、因债务或犯罪沦为奴隶的本城人；原有劳动力占比概括已删，证据见 S113/S114）。第 2 段：轮子的证据在几个地区，最早在哪里没有定论。
    - 正文第 3 段末句：乌尔纳姆法典已有关于逃亡奴隶的条文。
    - 事件 `ur-royal-tombs`（atrocity）：摘要一句（一个坑里 74 人，多为年轻女子，与王室墓葬同葬）；细节写宾大博物馆的说法、74 只是 PG 1237 一个坑、伍利认为服毒且自愿、两个头骨的 CT 显示可能是击打、是否自愿不知道。**正文不写。** 按 §0.4 第四节第 1 条的默认做法；要更克制或不建，请定。
    - 事件 `akkad-conquers-sumer`（征服，political）。
@@ -36,7 +36,7 @@
    - 第 3 拍字幕（亚历山大的征服到印度河）。
 7. **06 东南亚（一）**
    - 细看“‘扶南’是谁起的名字”两段（中国文献里的名字，当地人怎么称呼今天不知道——这一句没有来源直接这样说，是按 §0.4 第 27 条保留的写法；扶南只画点的理由）。
-   - 细看“印度的影响是怎么来的”（只写碑文、寺庙；“印度化”注明是近代学者的标签；学术史没写，F35 仍未核）。
+   - 细看“印度的影响是怎么来的”（碑文、宗教建筑和外来记载；S443 的公开摘录支持文化接触与史家的不同解释，F35 已据此改写）。
    - 细看“黑石号：在亚洲文明博物馆”第 2 段（商业打捞的争议一句，亚洲协会的话）。
    - 正文第 3 段与事件 `chola-raids-1025`（朱罗夺取巨港、掳走国王；无伤亡数字；航线不画）。
 8. **07 东南亚（二）**（`sensitive: true`）
@@ -50,7 +50,7 @@
    - 细看“零：谁‘最早’”（巴克沙利手稿年代之争两边写；高棉 683、瓜廖尔 876；不说“世界上最早的零”）。
    - 正文第 4 段与细看“东南亚的世界遗产”表最后一行：新加坡植物园是英国殖民时期的植物园（UNESCO 原话），不是古迹。
    - 正文第 1 段末句与第 1 拍：最早的字母从哪里来“仍有争论，一种说法认为源自埃及符号”（Britannica 只列为几种说法之一，所以没照 spec 写“不少学者认为”）。
-10. **名词**：`civilisation`、`mandala`（白话释义，不署学者名，F60 未核）、`maritime-silk-road`、`legacy` 的释义。
+10. **名词**：`civilisation`、`mandala`（白话释义，S444 支持历史模型及重叠、变化的范围，F60 已改写）、`maritime-silk-road`、`legacy` 的释义。
 
 ## 二、要你定的（默认做法已经做进去了）
 
@@ -70,3 +70,7 @@
 ## 三、交付时的门槛
 
 见最终报告与 AUDIT.md 末节。
+
+## Polish 2026-11-03 (executed 2026-11-05)
+
+F35/F60 and the five UNESCO dates previously flagged have now been sourced (S443/S444; S216/S217/S218/S231/S235). Slavery/bonded labour has new explicit references and qualified notes for Egypt, Ashoka’s edict and Angkor (S446/S447/S445); the Sumerian workforce-share claim was removed. See AUDIT.md and REBUILD-3D.md for exact scope. The 07.3 camera is updated. Shared participation labels and land anchors are supplied as an unapplied patch because engine files are outside this task’s ownership.

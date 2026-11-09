@@ -34,6 +34,8 @@ export interface SegmentSpec {
   time: number;
   /** Its beats' times in beat order; empty = one tick at `time`. */
   beats: readonly number[];
+  /** Optional authored axis fractions; dates and beat indices stay exact. */
+  positions?: readonly (number | undefined)[];
 }
 
 export interface SegmentScaleInput {
@@ -122,7 +124,10 @@ export function createSegmentScale(input: SegmentScaleInput): SegmentScale {
     // Time order (beat order breaks ties), positions spread, then back to beat order.
     const order = s.ticks.map((t, index) => ({ t, index })).sort((a, b) => a.t - b.t || a.index - b.index);
     const xs = spreadTicks(
-      order.map((o) => lin(o.t)),
+      order.map((o) => {
+        const position = s.positions?.[o.index];
+        return position === undefined ? lin(o.t) : x0 + position * (x1 - x0);
+      }),
       x0,
       x1,
       minTickGap,

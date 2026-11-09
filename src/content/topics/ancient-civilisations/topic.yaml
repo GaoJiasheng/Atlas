@@ -17,6 +17,8 @@ illustration: ancient-civilisations
 basemap:
   region:
     bounds: [-12, -12, 135, 58]
+    # Default 8% paper margin, except south to 22°S so 07.3 can frame Java above the presentation caption.
+    maxBounds: [-23.76, -22, 146.76, 63.6]
     land: ancient-world-plate
     rivers: ancient-rivers
   maxZoom: 9

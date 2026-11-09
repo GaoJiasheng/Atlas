@@ -110,7 +110,7 @@ function dateTicks(min: number, max: number, rung: DateRung, locale: Locale, ce 
     const step = rung.years;
     for (let y = Math.floor(y0 / step) * step; y <= y1; y += step) {
       const t = at(y);
-      if (inside(t)) major.push({ t, label: yearLabel(y, locale, ce) });
+      if (inside(t) && (!ce || y !== 0)) major.push({ t, label: yearLabel(y, locale, ce) });
     }
     if (rung.minorYears > 0) {
       for (let y = Math.floor(y0 / rung.minorYears) * rung.minorYears; y <= y1; y += rung.minorYears) {
@@ -199,4 +199,23 @@ export function thinTicks<T extends { t: number }>(
     last = px;
   }
   return { major: majors, minor: minors };
+}
+
+/** Fit full label boxes on a compressed axis; keep the ticks and dates intact. */
+export function fitTickLabels<T extends { x: number; label: string }>(
+  ticks: readonly T[],
+  left: number,
+  right: number,
+  gap: number,
+  widthOf: (label: string) => number,
+): (T & { labelX: number; showLabel: boolean })[] {
+  let lastRight = -Infinity;
+  return ticks.map((tick, index) => ({ tick, index })).sort((a, b) => a.tick.x - b.tick.x || a.index - b.index).map(({ tick, index }) => {
+    const width = widthOf(tick.label);
+    const half = width / 2;
+    const labelX = width <= right - left ? Math.max(left + half, Math.min(right - half, tick.x)) : (left + right) / 2;
+    const showLabel = width <= right - left && labelX - half >= lastRight + gap;
+    if (showLabel) lastRight = labelX + half;
+    return { index, value: { ...tick, labelX, showLabel } };
+  }).sort((a, b) => a.index - b.index).map(({ value }) => value);
 }

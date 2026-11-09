@@ -69,3 +69,7 @@ Focused：`pnpm test -- tests/industrial-revolution.test.ts tests/steam-engine-c
 
 
 本轮最终非浏览器门槛（2026-10-27）：`pnpm check` exit 0，814 files、0 errors／0 warnings、4 hints；`pnpm validate` exit 0，63 topics、0 errors／0 warnings；全量 `pnpm test -- --maxWorkers=2` exit 0，175 files／4,479 tests 全过；`pnpm build` exit 0，129 static pages、PWA 完成（共享大 chunk 提醒仍在）。初次默认并发 test 有两项未修改的几何测试超过 5 秒，降低 worker 数后完整重跑通过；未放宽超时或改测试配置。`git diff --check` 通过。EN／ZH 静态成品各有 40 个郑和可选 FlyTo 行，两题仍为 draft。shoot／e2e 按用户要求未运行，完全未打开或驱动浏览器／桌面。
+
+## Polish 2026-11-03 (executed 2026-11-05)
+
+Ch05 now includes a short bilingual account of Chinese tin-mine labour recruitment through Singapore, passage debt and receiving depots, sourced to Amarjit Kaur (S84). The numerical claim is **at least six recruiting agencies before 1876**, not six workers, mines or a workforce total. This is separate from the existing Indian migration account. Abstract passages in ch02–07 now use concrete language about jobs, wages, fuel, money, knowledge and historical evidence; existing dates, quantities, source attributions and event/beat references are retained. Details and gates: REBUILD-3D.md.

@@ -127,7 +127,7 @@ describe('industrial-revolution documentary content', () => {
       expect(returnBody).toContain(`<TopicLink slug="industrial-revolution" ch="${history}">`);
     }
     expect(json('presets').presets).toHaveLength(14);
-    expect(new Set(json('sources').sources.map((s: { id: string }) => s.id)).size).toBe(54);
+    expect(new Set(json('sources').sources.map((s: { id: string }) => s.id)).size).toBe(55);
   });
 
   it('puts the city-location explanation in the background note and keeps labels about their places', () => {

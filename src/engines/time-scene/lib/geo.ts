@@ -2,6 +2,8 @@
  * Small planar helpers on [lng, lat] polylines (good enough for arrows a few
  * hundred km long; no great-circle maths). Pure, unit-tested.
  */
+import { polylabel, signedDistance } from './territory';
+
 export type LngLat = [number, number];
 type Pos = readonly number[];
 
@@ -138,34 +140,60 @@ export function pointAlong(coords: readonly Pos[], fraction: number): LngLat | n
   return slice[slice.length - 1] ?? null;
 }
 
+/** Cached anchors per polygon object (the polylabel fallback is not free). */
+const anchors = new WeakMap<object, { area: number; x: number; y: number } | null>();
+
+/** Anchor of one polygon: the outer ring's centroid when it lies on the polygon, else its pole of inaccessibility. */
+function polygonAnchor(poly: readonly (readonly Pos[])[]): { area: number; x: number; y: number } | null {
+  const ring = poly[0];
+  if (!ring || ring.length < 3) return null;
+  let a = 0;
+  let cx = 0;
+  let cy = 0;
+  let x0 = Infinity;
+  let x1 = -Infinity;
+  let y0 = Infinity;
+  let y1 = -Infinity;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [ax = 0, ay = 0] = ring[j]!;
+    const [bx = 0, by = 0] = ring[i]!;
+    const f = ax * by - bx * ay;
+    a += f;
+    cx += (ax + bx) * f;
+    cy += (ay + by) * f;
+    x0 = Math.min(x0, bx);
+    x1 = Math.max(x1, bx);
+    y0 = Math.min(y0, by);
+    y1 = Math.max(y1, by);
+  }
+  if (a === 0) return null;
+  const area = Math.abs(a / 2);
+  const c = { x: cx / (3 * a), y: cy / (3 * a) };
+  if (signedDistance(c.x, c.y, poly as Parameters<typeof signedDistance>[2]) > 0) return { area, ...c };
+  // The centroid fell in a sea, lake or concavity: use the most interior point instead.
+  const pole = polylabel(poly as Parameters<typeof polylabel>[0], Math.max(1e-7, Math.max(x1 - x0, y1 - y0) / 300));
+  return { area, x: pole.x, y: pole.y };
+}
+
 /**
- * Centroid of the largest outer ring (label anchor for an area). With
- * `onScreen`, the largest ring whose centroid passes it (an empire's home
- * polygon when its largest colony is off the stage); if none passes, the
- * largest overall. Same rule as the territory labels.
+ * Label anchor for an area: the anchor of its largest polygon (outer-ring
+ * area). With `onScreen`, the largest polygon whose anchor passes it (an
+ * empire's home polygon when its largest colony is off the stage); if none
+ * passes, the largest overall. The anchor is always on the polygon, never in
+ * an enclosed sea or a bay.
  */
 export function areaLabelPoint(polygons: readonly (readonly (readonly Pos[])[])[], onScreen?: (at: LngLat) => boolean): LngLat | null {
   let best: { area: number; x: number; y: number } | null = null;
   let bestOn: { area: number; x: number; y: number } | null = null;
   for (const poly of polygons) {
-    const ring = poly[0];
-    if (!ring || ring.length < 3) continue;
-    let a = 0;
-    let cx = 0;
-    let cy = 0;
-    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-      const [x0 = 0, y0 = 0] = ring[j]!;
-      const [x1 = 0, y1 = 0] = ring[i]!;
-      const f = x0 * y1 - x1 * y0;
-      a += f;
-      cx += (x0 + x1) * f;
-      cy += (y0 + y1) * f;
+    let c = anchors.get(poly);
+    if (c === undefined) {
+      c = polygonAnchor(poly);
+      anchors.set(poly, c);
     }
-    if (a === 0) continue;
-    const area = Math.abs(a / 2);
-    const c = { area, x: cx / (3 * a), y: cy / (3 * a) };
-    if (!best || area > best.area) best = c;
-    if (onScreen && onScreen([c.x, c.y]) && (!bestOn || area > bestOn.area)) bestOn = c;
+    if (!c) continue;
+    if (!best || c.area > best.area) best = c;
+    if (onScreen?.([c.x, c.y]) && (!bestOn || c.area > bestOn.area)) bestOn = c;
   }
   const pick = bestOn ?? best;
   return pick ? [pick.x, pick.y] : null;

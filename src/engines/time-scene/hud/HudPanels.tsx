@@ -17,7 +17,7 @@ import type { Locale } from '../../core/types';
 import { useT } from '../../core/context';
 import type { Playhead } from '../lib/playhead';
 import type { EntityN, TimeModel } from '../lib/model';
-import { ruleTicks, thinTicks } from '../lib/ticks';
+import { fitTickLabels, ruleTicks, thinTicks } from '../lib/ticks';
 import { areaAt, controlAreas } from '../lib/stats';
 import { planBandRows, rankBandEntities, type BandRowPlan } from '../lib/bandRows';
 import { createSegmentScale, type Anchor, type SegmentSpec } from '../lib/segmentScale';
@@ -104,7 +104,10 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
   const x = (n: number) => x0 + scale.x(n);
   const ticks = useMemo(() => {
     const raw = ruleTicks(model.min, model.max, model.scale, Math.max(2, (x1 - x0) / (64 * u)), locale, model.mixedEra);
-    return thinTicks(raw.major, raw.minor, (n) => x0 + scale.x(n), 34 * u);
+    const ticks = thinTicks(raw.major, raw.minor, (n) => x0 + scale.x(n), 0);
+    // 10px Plex Mono + letter spacing; CJK fallback glyphs occupy a full em.
+    const widthOf = (label: string) => [...label].reduce((w, c) => w + (c.codePointAt(0)! > 0xff ? 10.4 : 6.4) * u, 0);
+    return { ...ticks, major: fitTickLabels(ticks.major, x0, x1, 8 * u, widthOf) };
   }, [model, x0, x1, u, locale, scale]);
   const win = scale.segments[current];
   const headX = x0 + scale.x(t, anchor);
@@ -230,7 +233,7 @@ export function BandCard({ model, playhead, locale, highlight, segments, anchor,
           <g key={m.t}>
             <line className="ts-svg__axis" x1={m.x} x2={m.x} y1={0.5} y2={5.5 * u} />
             {m.showLabel && (
-              <text className="ts-svg__mono" x={m.x} y={14.5 * u} textAnchor="middle">
+              <text className="ts-svg__mono" x={m.labelX} y={14.5 * u} textAnchor="middle">
                 {m.label}
               </text>
             )}

@@ -215,7 +215,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         const first = beats.find((b) => b.t !== undefined)?.t;
         const timeOf = (p: TimePoint | null | undefined) => (p !== null && p !== undefined ? toNumber(p) : Number.NaN);
         const time = [timeOf(own), timeOf(first as TimePoint | undefined), model.min].find(Number.isFinite)!;
-        return { id: c.id, time, beats: beats.map((b) => (b.t !== undefined ? toNumber(b.t as TimePoint) : time)) };
+        return { id: c.id, time, beats: beats.map((b) => (b.t !== undefined ? toNumber(b.t as TimePoint) : time)), positions: beats.map((b) => b.axisPosition) };
       }),
     [story, store, model],
   );
