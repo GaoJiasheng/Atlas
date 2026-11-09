@@ -1,0 +1,660 @@
+{
+  "date": "2026-11-05",
+  "status": "Historical inventory only; not an active recipe or geometry input",
+  "sources": {
+    "cshapes": {
+      "ref": "G1",
+      "title": "CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019",
+      "url": "https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson",
+      "file": "cshapes-2.0.geojson",
+      "page": "https://icr.ethz.ch/data/cshapes/",
+      "author": "Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022",
+      "license": "CC BY-NC-SA 4.0",
+      "role": "sovereign and colonial base borders on each keyframe date"
+    },
+    "ne-admin1": {
+      "ref": "G4",
+      "title": "Natural Earth 1:10m Admin 1 states and provinces (v5)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "ne_10m_admin_1_states_provinces.geojson",
+      "page": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "author": "Natural Earth",
+      "license": "Public domain",
+      "role": "province units to cut partially occupied colonies (Burma, Philippines, Sumatra) at the dated front"
+    },
+    "svg-china-1940": {
+      "ref": "G3",
+      "title": "Japanese Occupation of China 1940 (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Japanese_Occupation_of_China_1940.svg",
+      "file": "Japanese_Occupation_of_China_1940.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_Occupation_of_China_1940.svg",
+      "author": "Rowanwindwhistler (SVG from File:Japanese_Occupation_-_Map.jpg), Odie5533 (English)",
+      "license": "CC BY-SA 3.0",
+      "role": "Japanese-occupied China (front line 1940, static until 1944 apart from Nanning withdrawn 1940)"
+    },
+    "svg-europe-1942": {
+      "ref": "G5",
+      "title": "World War II in Europe, 1942 (no labels) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/World_War_II_in_Europe%2C_1942_%28no_labels%29.svg",
+      "file": "World_War_II_in_Europe,_1942_(no_labels).svg",
+      "page": "https://commons.wikimedia.org/wiki/File:World_War_II_in_Europe,_1942_(no_labels).svg",
+      "author": "Goran tek-en",
+      "license": "CC BY-SA 4.0",
+      "role": "Axis-held Europe: Reich, German-occupied, allied/client, nominally unoccupied; areas retaken in the Soviet 1941-42 winter offensive"
+    },
+    "svg-asia-1937-1942": {
+      "ref": "G6",
+      "title": "Second world war asia 1937-1942 map (French) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Second_world_war_asia_1937-1942_map-fr.svg",
+      "file": "Second_world_war_asia_1937-1942_map-fr.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_world_war_asia_1937-1942_map-fr.svg",
+      "author": "RedTony (original), Skimel (French translation and corrections)",
+      "license": "CC BY-SA 4.0",
+      "role": "cross-check image for K1 (Japanese Empire 1936) and K6 (conquests Dec 1941 - May 1942)"
+    },
+    "eastern-front-1942": {
+      "ref": "G7",
+      "title": "Eastern Front 1941-12 to 1942-05 (Spanish) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Eastern_Front_1941-12_to_1942-05-es.svg",
+      "file": "Eastern_Front_1941-12_to_1942-05-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1941-12_to_1942-05-es.svg",
+      "author": "Gdr (original PNG), Rowanwindwhistler (SVG)",
+      "license": "CC BY-SA 3.0",
+      "role": "cross-check for the Eastern Front line after the 1941-42 winter offensive"
+    },
+    "pd-burma-1942": {
+      "ref": "G8",
+      "title": "Japanese advance in Burma, 20 January - 19 March 1942 (Map 3)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Japanese_advance_in_Burma%2C_20_January-19_March_1942.jpg",
+      "file": "burma-1942-cmh.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_advance_in_Burma,_20_January-19_March_1942.jpg",
+      "author": "C. F. Romanus, R. Sunderland, Stilwell's Mission to China (US Army CMH, 1953)",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the Burma cut (Moulmein 30 Jan, Sittang 21 Feb, Pegu/Rangoon 7-8 Mar)"
+    },
+    "pd-dei-1942": {
+      "ref": "G9",
+      "title": "Netherlands East Indies 1941: Japanese centrifugal offensive, Dec 1941 - Apr 1942 (Map 10)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "file": "dei-1941-42-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the DEI / Philippines cut (landings and surrenders before 9 Mar 1942)"
+    },
+    "svg-europe-1939-09": {
+      "ref": "G10",
+      "title": "Second World War Europe 09 1939 (German SVG), situation at the end of September 1939",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Second_World_War_Europe_09_1939_de.svg",
+      "file": "Second_World_War_Europe_09_1939_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_09_1939_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K3 cross-check: German / Soviet occupation of Poland at the end of September 1939"
+    },
+    "svg-europe-1940-06": {
+      "ref": "G11",
+      "title": "Second World War Europe 06 1940 (German SVG), situation at the end of June 1940",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Second_World_War_Europe_06_1940_de.svg",
+      "file": "Second_World_War_Europe_06_1940_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_06_1940_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K4 cross-check: occupied France, the Low Countries, Denmark and Norway, Vichy zone, Soviet annexations"
+    },
+    "svg-europe-1941-11": {
+      "ref": "G12",
+      "title": "Second World War Europe 11 1941 (German SVG), situation at the end of November 1941",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Second_World_War_Europe_11_1941_de.svg",
+      "file": "Second_World_War_Europe_11_1941_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_11_1941_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K5: Axis-held Europe, North Africa and the Eastern Front at the end of November 1941"
+    },
+    "svg-europe-1942-10": {
+      "ref": "G13",
+      "title": "Second World War Europe 10 1942 (German SVG), situation at the end of October 1942",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Second_World_War_Europe_10_1942_de.svg",
+      "file": "Second_World_War_Europe_10_1942_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_10_1942_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K7: Axis-held Europe at its peak (Stalingrad, Caucasus, El Alamein)"
+    },
+    "svg-europe-1942-12": {
+      "ref": "G14",
+      "title": "Second World War Europe 12 1942 (German SVG), situation at the end of December 1942",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Second_World_War_Europe_12_1942_de.svg",
+      "file": "Second_World_War_Europe_12_1942_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_12_1942_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K8: German and Italian occupation zones in France and the Balkans after November 1942"
+    },
+    "eastern-front-1943b": {
+      "ref": "G15",
+      "title": "Eastern Front 1943-02 to 1943-08 (Spanish) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Eastern_Front_1943-02_to_1943-08-es.svg",
+      "file": "Eastern_Front_1943-02_to_1943-08-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1943-02_to_1943-08-es.svg",
+      "author": "Gdr (original PNG), SVG by Rowanwindwhistler",
+      "license": "CC BY-SA 3.0",
+      "role": "K8: the front after the German counter-offensive of February-March 1943 (Kursk salient)"
+    },
+    "eastern-front-1944": {
+      "ref": "G16",
+      "title": "Eastern Front 1943-08 to 1944-12 (Spanish) (SVG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Eastern_Front_1943-08_to_1944-12-es.svg",
+      "file": "Eastern_Front_1943-08_to_1944-12-es.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1943-08_to_1944-12-es.svg",
+      "author": "Gdr, Zocky, Mahahahaneapneap, Julieta39, Claude Zygiel",
+      "license": "CC BY-SA 4.0",
+      "role": "K9, K10: Soviet advances to 30 April 1944 and to 31 December 1944"
+    },
+    "png-eastern-front-1945": {
+      "ref": "G17",
+      "title": "Eastern Front 1945-01 to 1945-05 (PNG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Eastern_Front_1945-01_to_1945-05.png",
+      "file": "Eastern_Front_1945-01_to_1945-05.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Front_1945-01_to_1945-05.png",
+      "author": "Gdr",
+      "license": "CC BY-SA 3.0",
+      "role": "K11: the Soviet front of May 1945"
+    },
+    "png-europe-1943-1945": {
+      "ref": "G18",
+      "title": "Second world war europe 1943-1945 map (English PNG)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Second_world_war_europe_1943-1945_map_en.png",
+      "file": "Second_world_war_europe_1943-1945_map_en.png",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_world_war_europe_1943-1945_map_en.png",
+      "author": "San Jose (German original, 2005), English labels by Jarry1250",
+      "license": "CC BY-SA 3.0",
+      "role": "K9-K11: Allied gains by April 1944 / December 1944 / May 1945 and the German-held pockets of May 1945"
+    },
+    "png-china-1945": {
+      "ref": "G19",
+      "title": "China, 1900-1949, Map 5: Situation at the End of World War II",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Situation_at_the_End_of_World_War_Two.PNG",
+      "file": "Situation_at_the_End_of_World_War_Two.PNG",
+      "page": "https://commons.wikimedia.org/wiki/File:Situation_at_the_End_of_World_War_Two.PNG",
+      "author": "US Military Academy, Department of History (West Point atlas, Chinese Civil War series)",
+      "license": "Public domain (US Government work)",
+      "role": "K9-K11: Japanese-occupied China in 1944-45, incl. the Ichi-Go corridor (Henan, Hunan, Guangxi, Guangdong)"
+    },
+    "pd-new-guinea": {
+      "ref": "G20",
+      "title": "The New Guinea Area - Allied Advance (American Military History, map AMH-43)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/The_New_Guinea_Area_-_Allied_Advance_%28AMH-43%29.jpg",
+      "file": "new-guinea-amh43.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:The_New_Guinea_Area_-_Allied_Advance_(AMH-43).jpg",
+      "author": "US Army Center of Military History, American Military History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: Allied advance in New Guinea, the Solomons and the Bismarcks 1942-44"
+    },
+    "pd-burma-1944-45": {
+      "ref": "G21",
+      "title": "Allied Third Burma Campaign, June 1944 - May 1945",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Allied_Third_Burma_Campaign_June_1944-May_1945.jpg",
+      "file": "burma-1944-45-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Allied_Third_Burma_Campaign_June_1944-May_1945.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: the reconquest of Burma (Rangoon 3 May 1945; Japanese withdrawal to Tenasserim)"
+    },
+    "pd-pacific-1942": {
+      "ref": "G22",
+      "title": "Pacific War - Micronesia, Melanesia and New Guinea 1941-42",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pacific_War_-_Micronesia%2C_Melanesia_and_New_Guinea_1941-42_-_Map.jpg",
+      "file": "pacific-1941-42-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Pacific_War_-_Micronesia,_Melanesia_and_New_Guinea_1941-42_-_Map.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: Japanese landings in New Guinea, the Solomons and the Aleutians in 1942"
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "date": "1937-07-07",
+      "sources": [
+        "G1",
+        "G2"
+      ],
+      "incompatible": false
+    },
+    {
+      "id": "K2",
+      "date": "1938-10-27",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K3",
+      "date": "1939-10-06",
+      "sources": [
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K4",
+      "date": "1940-07-01",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G11"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K5",
+      "date": "1941-12-05",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G5",
+        "G12"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K6",
+      "date": "1942-03-09",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G7"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K7",
+      "date": "1942-11-08",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G13"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K8",
+      "date": "1943-07-12",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G14",
+        "G15"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K9",
+      "date": "1944-06-05",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G15",
+        "G16",
+        "G18",
+        "G19"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K10",
+      "date": "1944-12-16",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G15",
+        "G16",
+        "G18",
+        "G19"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K11",
+      "date": "1945-05-08",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G16",
+        "G17",
+        "G18",
+        "G19"
+      ],
+      "incompatible": true
+    },
+    {
+      "id": "K12",
+      "date": "1945-09-02",
+      "sources": [
+        "G1",
+        "G2"
+      ],
+      "incompatible": false
+    }
+  ],
+  "derived": [
+    {
+      "file": "work/K1.geojson",
+      "sources": [
+        "G1",
+        "G2"
+      ],
+      "incompatible": false
+    },
+    {
+      "file": "work/K2.geojson",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K3.geojson",
+      "sources": [
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K4.geojson",
+      "sources": [
+        "G1",
+        "G11",
+        "G2",
+        "G3"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K5.geojson",
+      "sources": [
+        "G1",
+        "G12",
+        "G2",
+        "G3",
+        "G5"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K6.geojson",
+      "sources": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G7"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K7.geojson",
+      "sources": [
+        "G1",
+        "G13",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K8.geojson",
+      "sources": [
+        "G1",
+        "G14",
+        "G15",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K9.geojson",
+      "sources": [
+        "G1",
+        "G15",
+        "G16",
+        "G18",
+        "G19",
+        "G2",
+        "G3",
+        "G4",
+        "G5"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K10.geojson",
+      "sources": [
+        "G1",
+        "G15",
+        "G16",
+        "G18",
+        "G19",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K11.geojson",
+      "sources": [
+        "G1",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "work/K12.geojson",
+      "sources": [
+        "G1",
+        "G2"
+      ],
+      "incompatible": false
+    },
+    {
+      "file": "work/svg-china-1940.geojson",
+      "sources": [
+        "G3"
+      ],
+      "license": "CC BY-SA 3.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1942.geojson",
+      "sources": [
+        "G5"
+      ],
+      "license": "CC BY-SA 4.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-eastern-front-1942.geojson",
+      "sources": [
+        "G7"
+      ],
+      "license": "CC BY-SA 3.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1939-09.geojson",
+      "sources": [
+        "G10"
+      ],
+      "license": "Public domain (released by the author)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1940-06.geojson",
+      "sources": [
+        "G11"
+      ],
+      "license": "Public domain (released by the author)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1941-11.geojson",
+      "sources": [
+        "G12"
+      ],
+      "license": "Public domain (released by the author)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1942-10.geojson",
+      "sources": [
+        "G13"
+      ],
+      "license": "Public domain (released by the author)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-europe-1942-12.geojson",
+      "sources": [
+        "G14"
+      ],
+      "license": "Public domain (released by the author)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-eastern-front-1943b.geojson",
+      "sources": [
+        "G15"
+      ],
+      "license": "CC BY-SA 3.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/svg-eastern-front-1944.geojson",
+      "sources": [
+        "G16"
+      ],
+      "license": "CC BY-SA 4.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/raster-eastern-front-1945.geojson",
+      "sources": [
+        "G17"
+      ],
+      "license": "CC BY-SA 3.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/raster-europe-1943-1945.geojson",
+      "sources": [
+        "G18"
+      ],
+      "license": "CC BY-SA 3.0",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/raster-china-1945.geojson",
+      "sources": [
+        "G19"
+      ],
+      "license": "Public domain (US Government work)",
+      "combined_with_CShapes_in": "control.json"
+    },
+    {
+      "file": "work/ohm-<set>.geojson (12 sets)",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "src/content/topics/ww2/data/control.json",
+      "sources": [
+        "G1",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16",
+        "G17",
+        "G18",
+        "G19",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G7"
+      ],
+      "incompatible": true
+    },
+    {
+      "file": "src/content/topics/ww2/data/movements.json",
+      "sources": [
+        "S92 (Gdr, CC BY-SA 3.0)",
+        "Other campaign/text references listed in SOURCES.md",
+        "Natural Earth (public domain)"
+      ],
+      "incompatible": false,
+      "reason": "No CShapes geometry in the standalone route coordinates; however the runtime data.json packaged these BY-SA-derived paths with NC-SA CShapes control and Atlas content. All three paths have now been independently replaced; no separate BY-SA route exception is used.",
+      "runtimePackageIncompatible": true
+    },
+    {
+      "file": "dist/topics/ww2/data.json",
+      "sources": [
+        "control.json (CShapes NC-SA + former BY-SA map traces)",
+        "movements.json (former S92 BY-SA route traces)",
+        "Atlas bilingual content (NC-SA)"
+      ],
+      "incompatible": true,
+      "status": "Legacy packaged derivative, superseded by the compatible rebuilt output"
+    }
+  ],
+  "baselineCommit": "6668a386ab3b68e04dd7c2f61aa7cd0d311a1886",
+  "controlSha256": "af53433885da34ca5b3ee2ca10af990f17baf37f6001f1091c0e5048c3c26ca5",
+  "reviewed": "2026-11-09"
+}

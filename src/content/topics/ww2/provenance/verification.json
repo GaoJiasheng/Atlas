@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-09",
+  "baselineCommit": "6668a386ab3b68e04dd7c2f61aa7cd0d311a1886",
+  "controlSha256": "a68f0885bc4fc14d82f879da898a34d7778bd1e85be1f943b4d4827049537fd7",
+  "movementsSha256": "73d3622c12cee3cc221722a8293c4703b012c0eb68ba10e4427a0300da14a627",
+  "builtDataSha256": "c10171f18a2fc12478cb1732c011e48bcf7f12a0e2836859cb7db0f24c55ef26",
+  "builtControlAndRoutesMatch": true,
+  "counts": {
+    "datasets": {
+      "before": 21,
+      "after": 28
+    },
+    "keyframes": {
+      "before": 12,
+      "after": 12
+    },
+    "mixedKeyframes": {
+      "before": 10,
+      "after": 0
+    },
+    "bySaTracedMaps": {
+      "before": 7,
+      "after": 0
+    },
+    "bySaDerivedRoutePaths": {
+      "before": 3,
+      "after": 0
+    },
+    "routes": {
+      "before": 31,
+      "after": 31
+    },
+    "chapters": 11,
+    "entities": 34,
+    "events": 78,
+    "controlBytes": {
+      "before": 1662950,
+      "after": 1633448
+    },
+    "maxCpuFillTriangles": {
+      "before": 90232,
+      "after": 91132
+    }
+  },
+  "audits": {
+    "licenceArtifacts": 65,
+    "placeHolderChecks": 39,
+    "ringAudits": 12,
+    "rings": 13351,
+    "zeroArea": 0,
+    "selfCrossing": 0,
+    "newMissingInteriorSamples": 0,
+    "originalBilingualMapLabelsRetained": true,
+    "byteIdenticalNarrativeConfigFiles": 16,
+    "allRouteNonGeometryFieldsPreserved": true,
+    "bibliographyUpdates": [
+      "S92 (EN/ZH)"
+    ]
+  },
+  "gates": [
+    {
+      "step": "licences",
+      "exit": 0,
+      "seconds": 12.69
+    },
+    {
+      "step": "map",
+      "exit": 0,
+      "seconds": 10.24
+    },
+    {
+      "step": "coverage",
+      "exit": 0,
+      "seconds": 21.9
+    },
+    {
+      "step": "previews",
+      "exit": 0,
+      "seconds": 97.2
+    },
+    {
+      "step": "ledger",
+      "exit": 0,
+      "seconds": 3.77
+    },
+    {
+      "step": "check",
+      "exit": 0,
+      "seconds": 211.71
+    },
+    {
+      "step": "validate",
+      "exit": 0,
+      "seconds": 22.91
+    },
+    {
+      "step": "build",
+      "exit": 0,
+      "seconds": 90.16
+    },
+    {
+      "step": "test",
+      "exit": 0,
+      "command": "pnpm run test --config scripts/geo/ww2/verification.config.ts",
+      "filesPassed": 275,
+      "testsPassed": 6523,
+      "notes": "Same full suite; no skipped assertions. Scoped resolver for inherited extensionless Drei import, two workers and 30s test timeout. Explicit CPU performance assertions remain unchanged."
+    }
+  ],
+  "clientJavaScript": {
+    "clientFilesBefore": 126,
+    "clientFilesAfter": 126,
+    "changed": [],
+    "allByteIdentical": true,
+    "gzipKB": 480.17
+  },
+  "previews": {
+    "directory": "scripts/geo/ww2/work/previews/final-2026-11-09",
+    "files": [
+      "K1.png",
+      "K10-china-detail.png",
+      "K10-europe-detail.png",
+      "K10.png",
+      "K11-central-europe-detail.png",
+      "K11.png",
+      "K12.png",
+      "K2-china-detail.png",
+      "K2.png",
+      "K3.png",
+      "K4.png",
+      "K5.png",
+      "K6-greece-detail.png",
+      "K6.png",
+      "K7.png",
+      "K8-east-front-detail.png",
+      "K8.png",
+      "K9-east-front-detail.png",
+      "K9.png",
+      "all-keyframes.png",
+      "routes-pd-19.png",
+      "routes-pd-20.png"
+    ],
+    "method": "Actual decoded TopoJSON rasterised on CPU in Mercator with equal axis scale; diagnostic holder colours; source-map tracing overlays also inspected. No browser or desktop was used."
+  },
+  "unappliedPatch": "scripts/geo/ww2/drei-import.patch",
+  "notRun": [
+    "Browser/e2e/shoot: explicitly prohibited by the task."
+  ],
+  "limitations": [
+    "Greece/Crete municipal units are 2010 administrative approximations, not claimed wartime boundaries.",
+    "Existing map date offsets and the 1940 China approximation remain documented per keyframe.",
+    "CPU fill triangles exclude basemap, strokes, MapLibre tile subdivision and UI; not a live GPU measurement."
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "method": "CPU earcut of decoded full keyframe polygons; excludes tile subdivision, strokes, basemap and UI; not a live GPU measurement",
+  "before": {
+    "bytes": 1662950,
+    "maxTriangles": 90232,
+    "arcs": 8967,
+    "arcVertices": 107885,
+    "frames": [
+      {
+        "date": "1937-07-07",
+        "features": 33,
+        "polygons": 892,
+        "vertices": 84680,
+        "triangles": 82005
+      },
+      {
+        "date": "1938-10-27",
+        "features": 34,
+        "polygons": 934,
+        "vertices": 86063,
+        "triangles": 83264
+      },
+      {
+        "date": "1939-10-06",
+        "features": 38,
+        "polygons": 973,
+        "vertices": 87952,
+        "triangles": 85045
+      },
+      {
+        "date": "1940-07-01",
+        "features": 38,
+        "polygons": 977,
+        "vertices": 88164,
+        "triangles": 85238
+      },
+      {
+        "date": "1941-12-05",
+        "features": 35,
+        "polygons": 1093,
+        "vertices": 92090,
+        "triangles": 88822
+      },
+      {
+        "date": "1942-03-09",
+        "features": 40,
+        "polygons": 1111,
+        "vertices": 91706,
+        "triangles": 88385
+      },
+      {
+        "date": "1942-11-08",
+        "features": 40,
+        "polygons": 1116,
+        "vertices": 92493,
+        "triangles": 89157
+      },
+      {
+        "date": "1943-07-12",
+        "features": 40,
+        "polygons": 1111,
+        "vertices": 92094,
+        "triangles": 88772
+      },
+      {
+        "date": "1944-06-05",
+        "features": 43,
+        "polygons": 1035,
+        "vertices": 90174,
+        "triangles": 87073
+      },
+      {
+        "date": "1944-12-16",
+        "features": 48,
+        "polygons": 1129,
+        "vertices": 92282,
+        "triangles": 88901
+      },
+      {
+        "date": "1945-05-08",
+        "features": 50,
+        "polygons": 1157,
+        "vertices": 93684,
+        "triangles": 90232
+      },
+      {
+        "date": "1945-09-02",
+        "features": 46,
+        "polygons": 976,
+        "vertices": 88939,
+        "triangles": 86019
+      }
+    ]
+  },
+  "after": {
+    "bytes": 1633448,
+    "maxTriangles": 91132,
+    "arcs": 8437,
+    "arcVertices": 106588,
+    "frames": [
+      {
+        "date": "1937-07-07",
+        "features": 33,
+        "polygons": 892,
+        "vertices": 84416,
+        "triangles": 81741
+      },
+      {
+        "date": "1938-10-27",
+        "features": 34,
+        "polygons": 988,
+        "vertices": 88604,
+        "triangles": 85666
+      },
+      {
+        "date": "1939-10-06",
+        "features": 38,
+        "polygons": 1036,
+        "vertices": 90765,
+        "triangles": 87690
+      },
+      {
+        "date": "1940-07-01",
+        "features": 38,
+        "polygons": 1038,
+        "vertices": 90774,
+        "triangles": 87688
+      },
+      {
+        "date": "1941-12-05",
+        "features": 35,
+        "polygons": 1143,
+        "vertices": 93837,
+        "triangles": 90439
+      },
+      {
+        "date": "1942-03-09",
+        "features": 40,
+        "polygons": 1169,
+        "vertices": 94497,
+        "triangles": 91025
+      },
+      {
+        "date": "1942-11-08",
+        "features": 40,
+        "polygons": 1153,
+        "vertices": 94558,
+        "triangles": 91132
+      },
+      {
+        "date": "1943-07-12",
+        "features": 40,
+        "polygons": 1157,
+        "vertices": 93915,
+        "triangles": 90477
+      },
+      {
+        "date": "1944-06-05",
+        "features": 43,
+        "polygons": 1078,
+        "vertices": 92528,
+        "triangles": 89307
+      },
+      {
+        "date": "1944-12-16",
+        "features": 48,
+        "polygons": 1110,
+        "vertices": 92286,
+        "triangles": 88987
+      },
+      {
+        "date": "1945-05-08",
+        "features": 49,
+        "polygons": 1120,
+        "vertices": 94207,
+        "triangles": 90869
+      },
+      {
+        "date": "1945-09-02",
+        "features": 46,
+        "polygons": 975,
+        "vertices": 88587,
+        "triangles": 85667
+      }
+    ]
+  }
+}

@@ -1,0 +1,4473 @@
+{
+  "postCompose": [
+    {
+      "frame": "K5",
+      "source": "G35/G38",
+      "newFeatures": 1,
+      "method": "Sitia municipal unit clipped to dated CShapes Greece; period OSS location evidence. Explicit administrative approximation, not an invented wartime boundary."
+    },
+    {
+      "frame": "K6",
+      "source": "G35/G38",
+      "newFeatures": 1,
+      "method": "Sitia municipal unit clipped to dated CShapes Greece; period OSS location evidence. Explicit administrative approximation, not an invented wartime boundary."
+    },
+    {
+      "frame": "K7",
+      "source": "G35/G38",
+      "newFeatures": 1,
+      "method": "Sitia municipal unit clipped to dated CShapes Greece; period OSS location evidence. Explicit administrative approximation, not an invented wartime boundary."
+    },
+    {
+      "frame": "K8",
+      "source": "G35/G38",
+      "newFeatures": 1,
+      "method": "Sitia municipal unit clipped to dated CShapes Greece; period OSS location evidence. Explicit administrative approximation, not an invented wartime boundary."
+    },
+    {
+      "frame": "K5",
+      "source": "G12",
+      "newFeatures": 2,
+      "method": "Registered monthly-map class intersect dated CShapes Poland/Yugoslavia/USSR, minus all existing composed coverage. Existing holders never overwritten."
+    },
+    {
+      "frame": "K7",
+      "source": "G13",
+      "newFeatures": 2,
+      "method": "Registered monthly-map class intersect dated CShapes Poland/Yugoslavia/USSR, minus all existing composed coverage. Existing holders never overwritten."
+    }
+  ],
+  "date": "2026-11-09",
+  "rule": "No derivative file combines CC BY-SA with CC BY-NC-SA",
+  "sources": {
+    "G1": {
+      "ref": "G1",
+      "title": "CShapes 2.0 (GW version), borders of independent states and dependent territories 1886-2019",
+      "url": "https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson",
+      "file": "cshapes-2.0.geojson",
+      "page": "https://icr.ethz.ch/data/cshapes/",
+      "author": "Schvitz, Rüegger, Girardin, Cederman, Weidmann, Gleditsch (ETH Zürich ICR), 2022",
+      "license": "CC BY-NC-SA 4.0",
+      "role": "sovereign and colonial base borders on each keyframe date"
+    },
+    "G4": {
+      "ref": "G4",
+      "title": "Natural Earth 1:10m Admin 1 states and provinces (v5)",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "ne_10m_admin_1_states_provinces.geojson",
+      "page": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "author": "Natural Earth",
+      "license": "Public domain",
+      "role": "province units to cut partially occupied colonies (Burma, Philippines, Sumatra) at the dated front"
+    },
+    "G8": {
+      "ref": "G8",
+      "title": "Japanese advance in Burma, 20 January - 19 March 1942 (Map 3)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Japanese_advance_in_Burma%2C_20_January-19_March_1942.jpg",
+      "file": "burma-1942-cmh.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_advance_in_Burma,_20_January-19_March_1942.jpg",
+      "author": "C. F. Romanus, R. Sunderland, Stilwell's Mission to China (US Army CMH, 1953)",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the Burma cut (Moulmein 30 Jan, Sittang 21 Feb, Pegu/Rangoon 7-8 Mar)"
+    },
+    "G9": {
+      "ref": "G9",
+      "title": "Netherlands East Indies 1941: Japanese centrifugal offensive, Dec 1941 - Apr 1942 (Map 10)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "file": "dei-1941-42-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates for the DEI / Philippines cut (landings and surrenders before 9 Mar 1942)"
+    },
+    "G10": {
+      "ref": "G10",
+      "title": "Second World War Europe 09 1939 (German SVG), situation at the end of September 1939",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Second_World_War_Europe_09_1939_de.svg",
+      "file": "Second_World_War_Europe_09_1939_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_09_1939_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K3 cross-check: German / Soviet occupation of Poland at the end of September 1939"
+    },
+    "G11": {
+      "ref": "G11",
+      "title": "Second World War Europe 06 1940 (German SVG), situation at the end of June 1940",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Second_World_War_Europe_06_1940_de.svg",
+      "file": "Second_World_War_Europe_06_1940_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_06_1940_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K4 cross-check: occupied France, the Low Countries, Denmark and Norway, Vichy zone, Soviet annexations"
+    },
+    "G12": {
+      "ref": "G12",
+      "title": "Second World War Europe 11 1941 (German SVG), situation at the end of November 1941",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Second_World_War_Europe_11_1941_de.svg",
+      "file": "Second_World_War_Europe_11_1941_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_11_1941_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K5: Axis-held Europe, North Africa and the Eastern Front at the end of November 1941"
+    },
+    "G13": {
+      "ref": "G13",
+      "title": "Second World War Europe 10 1942 (German SVG), situation at the end of October 1942",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Second_World_War_Europe_10_1942_de.svg",
+      "file": "Second_World_War_Europe_10_1942_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_10_1942_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K7: Axis-held Europe at its peak (Stalingrad, Caucasus, El Alamein)"
+    },
+    "G14": {
+      "ref": "G14",
+      "title": "Second World War Europe 12 1942 (German SVG), situation at the end of December 1942",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Second_World_War_Europe_12_1942_de.svg",
+      "file": "Second_World_War_Europe_12_1942_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_12_1942_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K8: German and Italian occupation zones in France and the Balkans after November 1942"
+    },
+    "G19": {
+      "ref": "G19",
+      "title": "China, 1900-1949, Map 5: Situation at the End of World War II",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Situation_at_the_End_of_World_War_Two.PNG",
+      "file": "Situation_at_the_End_of_World_War_Two.PNG",
+      "page": "https://commons.wikimedia.org/wiki/File:Situation_at_the_End_of_World_War_Two.PNG",
+      "author": "US Military Academy, Department of History (West Point atlas, Chinese Civil War series)",
+      "license": "Public domain (US Government work)",
+      "role": "K9-K11: Japanese-occupied China in 1944-45, incl. the Ichi-Go corridor (Henan, Hunan, Guangxi, Guangdong)"
+    },
+    "G20": {
+      "ref": "G20",
+      "title": "The New Guinea Area - Allied Advance (American Military History, map AMH-43)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/The_New_Guinea_Area_-_Allied_Advance_%28AMH-43%29.jpg",
+      "file": "new-guinea-amh43.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:The_New_Guinea_Area_-_Allied_Advance_(AMH-43).jpg",
+      "author": "US Army Center of Military History, American Military History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: Allied advance in New Guinea, the Solomons and the Bismarcks 1942-44"
+    },
+    "G21": {
+      "ref": "G21",
+      "title": "Allied Third Burma Campaign, June 1944 - May 1945",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Allied_Third_Burma_Campaign_June_1944-May_1945.jpg",
+      "file": "burma-1944-45-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Allied_Third_Burma_Campaign_June_1944-May_1945.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: the reconquest of Burma (Rangoon 3 May 1945; Japanese withdrawal to Tenasserim)"
+    },
+    "G22": {
+      "ref": "G22",
+      "title": "Pacific War - Micronesia, Melanesia and New Guinea 1941-42",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pacific_War_-_Micronesia%2C_Melanesia_and_New_Guinea_1941-42_-_Map.jpg",
+      "file": "pacific-1941-42-usma.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Pacific_War_-_Micronesia,_Melanesia_and_New_Guinea_1941-42_-_Map.jpg",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "dates only: Japanese landings in New Guinea, the Solomons and the Aleutians in 1942"
+    },
+    "G23": {
+      "ref": "G23",
+      "title": "Japanese Occupation, 1940 — China 1900–1949, map 4 (original USMA raster)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Japanese_Occupation_-_Map.jpg",
+      "file": "Japanese_Occupation_-_Map.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Japanese_Occupation_-_Map.jpg",
+      "author": "US Military Academy, Department of History; cartography Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Independently registered and colour-traced original, replacing G3; no geometry or registration pixels copied from its CC BY-SA SVG derivative"
+    },
+    "G24": {
+      "ref": "G24",
+      "title": "Second World War Europe, end of March 1942 (public-domain monthly map)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Second_World_War_Europe_03_1942_de.svg",
+      "file": "Second_World_War_Europe_03_1942_de.svg",
+      "page": "https://commons.wikimedia.org/wiki/File:Second_World_War_Europe_03_1942_de.svg",
+      "author": "San Jose (after OKH GenStdH Lagekarten, BArch RH 2, and USMA Department of History)",
+      "license": "Public domain (released by the author)",
+      "role": "K6 Europe and Eastern Front; 22-day date offset replaces May 1942 line"
+    },
+    "G25": {
+      "ref": "G25",
+      "title": "German Summer Offensive, Situation 4 July 1943 (left panel only)",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope27Combined.jpg?w=1400",
+      "file": "pd-27.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G26": {
+      "ref": "G26",
+      "title": "Russian Leningrad and Ukraine Offensives, 2 December 1943–30 April 1944",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope29.jpg?w=1400",
+      "file": "pd-29.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G27": {
+      "ref": "G27",
+      "title": "Russian Balkan and Baltic Campaigns, 19 August–31 December 1944",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope31.jpg?w=1400",
+      "file": "pd-31.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G28": {
+      "ref": "G28",
+      "title": "The General Situation, 15 December 1944",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope71.jpg?w=1400",
+      "file": "pd-71.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G29": {
+      "ref": "G29",
+      "title": "Allied Advance to Gothic Line, 5 June–31 December 1944",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope51.jpg?w=1400",
+      "file": "pd-51.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G30": {
+      "ref": "G30",
+      "title": "Final Operations, 19 April–7 May 1945",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope82.jpg?w=1400",
+      "file": "pd-82.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G31": {
+      "ref": "G31",
+      "title": "Allied Gains in Europe, 15 December 1944–7 May 1945",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope78.jpg?w=1400",
+      "file": "pd-78.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G32": {
+      "ref": "G32",
+      "title": "Allied Advance to Volturno River and Attack on Gustav Line, 17 January–11 May 1944",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope48.jpg?w=1400",
+      "file": "pd-48.png",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History; Edward J. Krasnoborski / Frank Martini",
+      "license": "Public domain (US Government work)",
+      "role": "Registered published campaign map; 1400-pixel server rendition normalised losslessly to PNG by prepare.ts"
+    },
+    "G33": {
+      "ref": "G33",
+      "title": "The Partition of Greece, map 2, German Antiguerrilla Operations in the Balkans (1941–1944), CMH Publication 104-18 (1954)",
+      "url": "https://www.ibiblio.org/hyperwar/ETO/East/Balkans/maps/AG/AG-Balkans-2.jpg",
+      "file": "cmh-greece-full.jpg",
+      "page": "https://www.ibiblio.org/hyperwar/ETO/East/Balkans/AG-Balkans.html",
+      "author": "US Department of the Army, Office of the Chief of Military History",
+      "license": "Public domain (US Government work)",
+      "role": "Independently registered Italian/German occupation-zone demarcation, replacing the G5 mask"
+    },
+    "G35": {
+      "ref": "G35",
+      "title": "geoBoundaries gbOpen Greece ADM3, municipalities (2010 boundaries; build 2023-12-12)",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/main/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3_simplified.geojson",
+      "file": "grc-adm3.geojson",
+      "page": "https://www.geoboundaries.org/",
+      "author": "Runfola, D. et al. and geoBoundaries community contributors (2020), PLoS ONE 15(4), e0231866; source geometries credited in geoBoundaries Greece metadata",
+      "license": "CC BY 4.0 (gbOpen; underlying Greece metadata lists CC0 1.0 and CC BY 3.0)",
+      "role": "Real municipal units as explicit administrative approximations: Chania/Platanias/Apokoronas for the German northwestern Crete pocket; Sitia, Agios Nikolaos, Ierapetra and Lasithi Plateau for Italian eastern Crete, with location evidence G38. No invented border."
+    },
+    "G36": {
+      "ref": "G36",
+      "title": "German Invasion of Russia, 22 June–25 August 1941, USMA plate 19",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope19.jpg?w=1800",
+      "file": "pd-19.jpg",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "Independent route-axis redigitisation replacing the S92/Gdr adaptation; main-map pixels, no old route geometry"
+    },
+    "G37": {
+      "ref": "G37",
+      "title": "German Invasion of Russia, Advance on Moscow, 26 August–5 December 1941, USMA plate 20",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope20.jpg?w=1800",
+      "file": "pd-20.jpg",
+      "page": "https://dhc.westpoint.edu/atlases/",
+      "author": "US Military Academy, Department of History",
+      "license": "Public domain (US Government work)",
+      "role": "Independent route-axis redigitisation replacing the S92/Gdr adaptation; main-map pixels, no old route geometry"
+    },
+    "G38": {
+      "ref": "G38",
+      "title": "OSS dissemination A-12634, Italian-German relations and Italian troops in eastern Crete, distributed 15 October 1943 (reports August–September 1943)",
+      "url": "https://www.elia.org.gr/userfiles/pdf_archieve/1943%2010-2443%20Crete%2C%20Ierapetra%2C%20Sitia%2C%20Iraklion%2C%20Italian%20Surrender%2C%20226-CID-L19124%20%28A-12634%2C%20British%29.pdf",
+      "file": "oss-crete-a12634.pdf",
+      "page": "https://www.elia.org.gr/userfiles/pdf_archieve/1943%2010-2443%20Crete%2C%20Ierapetra%2C%20Sitia%2C%20Iraklion%2C%20Italian%20Surrender%2C%20226-CID-L19124%20%28A-12634%2C%20British%29.pdf",
+      "author": "United States Office of Strategic Services, Washington DC; declassified archival report, ELIA archive scan",
+      "license": "Public domain (US Government work)",
+      "role": "Location evidence for Italian posts in Sitia, Ierapetra, Agios Nikolaos and Palaiokastro before the September 1943 surrender. Text facts only; no geometry traced from the PDF. Municipal boundaries remain an explicit approximation, including in the earlier frames."
+    },
+    "G2": {
+      "title": "OpenHistoricalMap contributors, dated boundary relations without licence overrides",
+      "license": "CC0 1.0",
+      "page": "https://www.openhistoricalmap.org/copyright"
+    },
+    "G34": {
+      "title": "Natural Earth 1:50m world land and 1:10m Southeast Asia coastline",
+      "license": "Public domain",
+      "page": "https://www.naturalearthdata.com/about/terms-of-use/"
+    }
+  },
+  "keyframes": [
+    {
+      "id": "K1",
+      "date": "1937-07-07",
+      "file": "work/K1.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "date": "1938-10-27",
+      "file": "work/K2.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4",
+            "G23"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "date": "1939-10-06",
+      "file": "work/K3.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "date": "1940-07-01",
+      "file": "work/K4.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G11",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G11"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "date": "1941-12-05",
+      "file": "work/K5.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G12",
+        "G14",
+        "G23",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G12",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G12",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2",
+            "G12"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G2",
+            "G12",
+            "G14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "date": "1942-03-09",
+      "file": "work/K6.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G23",
+        "G24",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G24",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "date": "1942-11-08",
+      "file": "work/K7.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G13",
+        "G14",
+        "G23",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G13",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G13",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2",
+            "G13"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "date": "1943-07-12",
+      "file": "work/K8.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G23",
+        "G25",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G25"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G14",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "date": "1944-06-05",
+      "file": "work/K9.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G19",
+        "G23",
+        "G25",
+        "G26",
+        "G32",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G32"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G25",
+            "G26"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25",
+            "G26"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K10",
+      "date": "1944-12-16",
+      "file": "work/K10.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G19",
+        "G23",
+        "G25",
+        "G27",
+        "G28",
+        "G29",
+        "G34",
+        "G35"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "philippines",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G28"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G1",
+            "G28"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G29"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G35"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "yugoslavia",
+          "sources": [
+            "G1",
+            "G27",
+            "G28"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "poland",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2",
+            "G27"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25",
+            "G27"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K11",
+      "date": "1945-05-08",
+      "file": "work/K11.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G19",
+        "G23",
+        "G27",
+        "G30",
+        "G31",
+        "G34",
+        "G35"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G30"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G30"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G4",
+            "G30",
+            "G31",
+            "G35"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K12",
+      "date": "1945-09-02",
+      "file": "work/K12.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "raw/cshapes-2.0.geojson",
+      "source": "cshapes",
+      "license": "CC BY-NC-SA 4.0",
+      "sha256": "384b1ea90b9419f30a858d7ec237c85a22c60d1b35b5f85f215a1204f9989d42"
+    },
+    {
+      "file": "raw/ne_10m_admin_1_states_provinces.geojson",
+      "source": "ne-admin1",
+      "license": "Public domain",
+      "sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5"
+    },
+    {
+      "file": "raw/burma-1942-cmh.jpg",
+      "source": "pd-burma-1942",
+      "license": "Public domain (US Government work)",
+      "sha256": "d4d176d173fd096d5d8e8b1d943e743483941e3280847e0216f677f67d36c8d8"
+    },
+    {
+      "file": "raw/dei-1941-42-usma.jpg",
+      "source": "pd-dei-1942",
+      "license": "Public domain (US Government work)",
+      "sha256": "0e771265782b3041f5c68b32d141384653765da45230734655ec3221917d2f1e"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_09_1939_de.svg",
+      "source": "svg-europe-1939-09",
+      "license": "Public domain (released by the author)",
+      "sha256": "909d4adf027a96bcc48b259cf7c290205fbd4ae645919eb71d6f777d9946db82"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_06_1940_de.svg",
+      "source": "svg-europe-1940-06",
+      "license": "Public domain (released by the author)",
+      "sha256": "aebb42b92bbd3b9d3c17a9d2fb0ec66092cd8fbd15caacde915a5f4bde571095"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_11_1941_de.svg",
+      "source": "svg-europe-1941-11",
+      "license": "Public domain (released by the author)",
+      "sha256": "1d4d1f64299ac60fe22a8613e439da59af2c4b993a7504f69f7d65f9ec825683"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_10_1942_de.svg",
+      "source": "svg-europe-1942-10",
+      "license": "Public domain (released by the author)",
+      "sha256": "f838a3fba6859465df532e14d788d61f914562105f51704b6c1bb2bacb7c2344"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_12_1942_de.svg",
+      "source": "svg-europe-1942-12",
+      "license": "Public domain (released by the author)",
+      "sha256": "e27eb3ec92ae76c0c7e1b627c4bcb1bb49bab7964f65407debeb8b294f87fb42"
+    },
+    {
+      "file": "raw/Situation_at_the_End_of_World_War_Two.PNG",
+      "source": "png-china-1945",
+      "license": "Public domain (US Government work)",
+      "sha256": "6858af35aeb25c6ceeff2d92d5e7cad5850693799cd32e0a1f33cc6bc85ed083"
+    },
+    {
+      "file": "raw/new-guinea-amh43.jpg",
+      "source": "pd-new-guinea",
+      "license": "Public domain (US Government work)",
+      "sha256": "58323f3e419f192bf91e39ec5a30636826f0a5602935ab44285c3c6d3d1b6c8f"
+    },
+    {
+      "file": "raw/burma-1944-45-usma.jpg",
+      "source": "pd-burma-1944-45",
+      "license": "Public domain (US Government work)",
+      "sha256": "4919d2dffe4924b8f18860e860e8b9df49a9382d1aa95e38b0cbb100b57feeb8"
+    },
+    {
+      "file": "raw/pacific-1941-42-usma.jpg",
+      "source": "pd-pacific-1942",
+      "license": "Public domain (US Government work)",
+      "sha256": "70acbf6713338a2e1494e6d8a569c44eaa192d5866627166be92614544f6949f"
+    },
+    {
+      "file": "raw/Japanese_Occupation_-_Map.jpg",
+      "source": "pd-china-1940",
+      "license": "Public domain (US Government work)",
+      "sha256": "051be97270fb658b4cd411fb7af043c80db02ff8f606dd82799d021457aec777"
+    },
+    {
+      "file": "raw/Second_World_War_Europe_03_1942_de.svg",
+      "source": "pd-europe-1942-03",
+      "license": "Public domain (released by the author)",
+      "sha256": "38639936b87726705785620cc0a5838e8416fd3c8333f42245868832ae33bb88"
+    },
+    {
+      "file": "raw/pd-27.png",
+      "source": "pd-27",
+      "license": "Public domain (US Government work)",
+      "sha256": "000dc3df73ee0bc69304f54ba3a556393423de0ad4cdc424d06796df4abe1178"
+    },
+    {
+      "file": "raw/pd-29.png",
+      "source": "pd-29",
+      "license": "Public domain (US Government work)",
+      "sha256": "a09fb0f2b18d0320f447f1c32da8bfb3d617e1e197a5bd98f0ec1b18110bc88f"
+    },
+    {
+      "file": "raw/pd-31.png",
+      "source": "pd-31",
+      "license": "Public domain (US Government work)",
+      "sha256": "3366b43f2eeda0fa6a91650bcc51ed2ba21ed137d82fe01fa98a9f7fe01b4ff6"
+    },
+    {
+      "file": "raw/pd-71.png",
+      "source": "pd-71",
+      "license": "Public domain (US Government work)",
+      "sha256": "6007fd7af89e213b3814a4416246e285a1c0333e7aecd73b8b52619cec0f0ca4"
+    },
+    {
+      "file": "raw/pd-51.png",
+      "source": "pd-51",
+      "license": "Public domain (US Government work)",
+      "sha256": "8bb1f7a30fef1446953dce2a3581a8fedb55696f85599e9de8aec0a65f400cee"
+    },
+    {
+      "file": "raw/pd-82.png",
+      "source": "pd-82",
+      "license": "Public domain (US Government work)",
+      "sha256": "ffc563e18f6d00da0655299a75434be80850bdca10c1a6a29f64042e2abf8fdb"
+    },
+    {
+      "file": "raw/pd-78.png",
+      "source": "pd-78",
+      "license": "Public domain (US Government work)",
+      "sha256": "5230cdd3c8eea01296885ecb8850d9c581c95a3d8bc5d5dbe07e5a9923c74cee"
+    },
+    {
+      "file": "raw/pd-48.png",
+      "source": "pd-48",
+      "license": "Public domain (US Government work)",
+      "sha256": "399c1ecf2e4fdbb50bf0731eb13b618c602742e905981f82418b52a400d8484b"
+    },
+    {
+      "file": "raw/cmh-greece-full.jpg",
+      "source": "pd-greece",
+      "license": "Public domain (US Government work)",
+      "sha256": "677b57ce36b33059b7c5f0bf807b2e128ed6c94ada4608b8dd6d0c4e29f34b9c"
+    },
+    {
+      "file": "raw/grc-adm3.geojson",
+      "source": "gb-greece-municipalities",
+      "license": "CC BY 4.0 (gbOpen; underlying Greece metadata lists CC0 1.0 and CC BY 3.0)",
+      "sha256": "72179d50a8a85aa9fecf996761f905db9e8a59f4eb882f8481f88651692b7e18"
+    },
+    {
+      "file": "raw/pd-19.jpg",
+      "source": "pd-19",
+      "license": "Public domain (US Government work)",
+      "sha256": "c534280f55aa3023f0804a9e40e5017eb48df6db069e31d4536c208b426414dd"
+    },
+    {
+      "file": "raw/pd-20.jpg",
+      "source": "pd-20",
+      "license": "Public domain (US Government work)",
+      "sha256": "0ce27601f70dd4d5eb472e595ddc1093a1797465d913bb97362152600a8adde2"
+    },
+    {
+      "file": "raw/oss-crete-a12634.pdf",
+      "source": "pd-oss-crete",
+      "license": "Public domain (US Government work)",
+      "sha256": "909a968fab0e50ca01906240cc14e7106a28561c37c1b7015e7e1a7763dc7b5b"
+    },
+    {
+      "file": "work/svg-europe-1939-09.geojson",
+      "sources": [
+        "G10"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/svg-europe-1940-06.geojson",
+      "sources": [
+        "G11"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/svg-europe-1941-11.geojson",
+      "sources": [
+        "G12"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/svg-europe-1942-10.geojson",
+      "sources": [
+        "G13"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/svg-europe-1942-12.geojson",
+      "sources": [
+        "G14"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/svg-europe-1942-03.geojson",
+      "sources": [
+        "G24"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (released by the author))"
+    },
+    {
+      "file": "work/raster-china-1945.geojson",
+      "sources": [
+        "G19"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (US Government work))"
+    },
+    {
+      "file": "work/raster-pd-china-1940.geojson",
+      "sources": [
+        "G23"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (US Government work))"
+    },
+    {
+      "file": "work/raster-pd-gains-1945.geojson",
+      "sources": [
+        "G31"
+      ],
+      "license": "CC BY-NC-SA 4.0 (Atlas adaptation; original source Public domain (US Government work))"
+    },
+    {
+      "file": "work/ohm-k1.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k6.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k2.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k3.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k4.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k5.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k7.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k8.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k9.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k10.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k11.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/ohm-k12.geojson",
+      "sources": [
+        "G2"
+      ],
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "work/lines-traces.geojson",
+      "sources": [
+        "G25",
+        "G26",
+        "G27",
+        "G28",
+        "G29",
+        "G32",
+        "G30",
+        "G33"
+      ],
+      "license": "Public-domain sources; Atlas redigitisation CC BY-NC-SA 4.0"
+    },
+    {
+      "file": "work/svg-lines.geojson",
+      "sources": [
+        "G25",
+        "G26",
+        "G27",
+        "G28",
+        "G29",
+        "G32",
+        "G30",
+        "G33",
+        "G4"
+      ],
+      "license": "Public-domain source adaptation; Atlas contribution CC BY-NC-SA 4.0"
+    },
+    {
+      "file": "src/content/topics/ww2/data/control.json",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G34",
+        "G4",
+        "G23",
+        "G11",
+        "G12",
+        "G14",
+        "G33",
+        "G35",
+        "G38",
+        "G24",
+        "G13",
+        "G25",
+        "G19",
+        "G26",
+        "G32",
+        "G27",
+        "G28",
+        "G29",
+        "G30",
+        "G31"
+      ],
+      "sha256": "1e1ecc117312a5da8b231c981a25985945fb16535205e59761ae8c1851091c98"
+    },
+    {
+      "file": "src/content/topics/ww2/data/movements.json",
+      "license": "CC BY-NC-SA 4.0 (public-domain map routes; no BY-SA input)",
+      "sources": [
+        "S22",
+        "S23",
+        "S24",
+        "S47",
+        "S60",
+        "S65",
+        "S66",
+        "S75",
+        "S76",
+        "S88",
+        "S91",
+        "G36",
+        "G37",
+        "S93",
+        "S116",
+        "S119",
+        "S121",
+        "S128",
+        "S129",
+        "S130",
+        "S133",
+        "S135",
+        "S145",
+        "S150",
+        "S151",
+        "S156",
+        "S157",
+        "S161",
+        "Natural Earth land-50m (public domain)"
+      ],
+      "sha256": "73d3622c12cee3cc221722a8293c4703b012c0eb68ba10e4427a0300da14a627"
+    },
+    {
+      "id": "K1",
+      "date": "1937-07-07",
+      "file": "work/K1.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "99971be7eb6764c55a06cd192cfa566e89fbaaa9b48a785e456f00bbbcdd4471"
+    },
+    {
+      "id": "K2",
+      "date": "1938-10-27",
+      "file": "work/K2.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4",
+            "G23"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "a2522c3ee676fcbf0724b6e8b2d9b7a2d9d468ecb3b777383e8a45fbecce75c5"
+    },
+    {
+      "id": "K3",
+      "date": "1939-10-06",
+      "file": "work/K3.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "1537c7d088dff34bad2e57de8b8d3dfa37cc3b139536d215e8796ca04126e03a"
+    },
+    {
+      "id": "K4",
+      "date": "1940-07-01",
+      "file": "work/K4.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G11",
+        "G23",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G11"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "3c761abf3d1e746e9c1800670da66a67bbfbc8b3848d3551cb39ce9de4313205"
+    },
+    {
+      "id": "K5",
+      "date": "1941-12-05",
+      "file": "work/K5.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G12",
+        "G14",
+        "G23",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G12",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G12",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2",
+            "G12"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G12"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G2",
+            "G12",
+            "G14"
+          ]
+        }
+      ],
+      "sha256": "6e385d05edeeacc251ad5b537a79c481330282344cba73103107d49c2537377e"
+    },
+    {
+      "id": "K6",
+      "date": "1942-03-09",
+      "file": "work/K6.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G23",
+        "G24",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G24",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G24"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1"
+          ]
+        }
+      ],
+      "sha256": "f0971abc0be8e530ac4d1b0689e38f402e1f874444596186ec5e45e104c26a49"
+    },
+    {
+      "id": "K7",
+      "date": "1942-11-08",
+      "file": "work/K7.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G13",
+        "G14",
+        "G23",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G13",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G13",
+            "G14"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1",
+            "G2",
+            "G13"
+          ]
+        },
+        {
+          "holder": "vichy-france",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G13"
+          ]
+        }
+      ],
+      "sha256": "8528ceeee89743ee6249d40cb6ad67db165e0109734d23ea3b420f0c9a4e93bd"
+    },
+    {
+      "id": "K8",
+      "date": "1943-07-12",
+      "file": "work/K8.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G23",
+        "G25",
+        "G33",
+        "G34",
+        "G35",
+        "G38"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G25"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G2",
+            "G4",
+            "G14",
+            "G33",
+            "G35"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25"
+          ]
+        }
+      ],
+      "sha256": "0525add6f375c49fd8d38fb34c1e03fb332e943a6b498c6842099d0bf903f29c"
+    },
+    {
+      "id": "K9",
+      "date": "1944-06-05",
+      "file": "work/K9.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G14",
+        "G19",
+        "G23",
+        "G25",
+        "G26",
+        "G32",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G32"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G25",
+            "G26"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G1",
+            "G14"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "hungary",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25",
+            "G26"
+          ]
+        }
+      ],
+      "sha256": "b210190043159bac83301cfcdac03055de20fdb13fbd8d94e19900fa13a73ef8"
+    },
+    {
+      "id": "K10",
+      "date": "1944-12-16",
+      "file": "work/K10.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G19",
+        "G23",
+        "G25",
+        "G27",
+        "G28",
+        "G29",
+        "G34",
+        "G35"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "philippines",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G28"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G1",
+            "G28"
+          ]
+        },
+        {
+          "holder": "italy",
+          "sources": [
+            "G1",
+            "G29"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G35"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "yugoslavia",
+          "sources": [
+            "G1",
+            "G27",
+            "G28"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "poland",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G2",
+            "G27"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G25",
+            "G27"
+          ]
+        }
+      ],
+      "sha256": "ca6c23cb1304dd3261a5a4f12802a5004d5536a2af71f674cb95feaa3368453a"
+    },
+    {
+      "id": "K11",
+      "date": "1945-05-08",
+      "file": "work/K11.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G4",
+        "G19",
+        "G23",
+        "G27",
+        "G30",
+        "G31",
+        "G34",
+        "G35"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G23"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G19"
+          ]
+        },
+        {
+          "holder": "manchukuo",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "netherlands",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1",
+            "G4"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G30"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G1",
+            "G30"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G4",
+            "G30",
+            "G31",
+            "G35"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G1",
+            "G27"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "germany",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "f1f67781ee231f7e191c1c3772cbe258e04f165f7b9406700d8e3b199ed92fe5"
+    },
+    {
+      "id": "K12",
+      "date": "1945-09-02",
+      "file": "work/K12.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "sources": [
+        "G1",
+        "G2",
+        "G34"
+      ],
+      "steps": [
+        {
+          "holder": "japan",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "japan",
+          "sources": [
+            "G1"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "thailand",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G1",
+            "G2"
+          ]
+        },
+        {
+          "holder": "usa",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "uk",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "ussr",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "romania",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "bulgaria",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "finland",
+          "sources": [
+            "G2"
+          ]
+        },
+        {
+          "holder": "free-france",
+          "sources": [
+            "G2"
+          ]
+        }
+      ],
+      "sha256": "45e85f2610c89c5cd6bbc3cf79a8b83f397390d1a64d75c150a0830e86e03bf6"
+    }
+  ]
+}

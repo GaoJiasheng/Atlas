@@ -1,0 +1,258 @@
+{
+  "date": "2026-11-09",
+  "normalization": "USMA w=1400 server renditions decoded to PNG, no cropping or redrawing; all registration coordinates refer to these images",
+  "inputs": [
+    {
+      "id": "cshapes",
+      "ref": "G1",
+      "url": "https://icr.ethz.ch/data/cshapes/CShapes-2.0.geojson",
+      "file": "cshapes-2.0.geojson",
+      "license": "CC BY-NC-SA 4.0",
+      "bytes": 26344671,
+      "sha256": "384b1ea90b9419f30a858d7ec237c85a22c60d1b35b5f85f215a1204f9989d42"
+    },
+    {
+      "id": "ne-admin1",
+      "ref": "G4",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "file": "ne_10m_admin_1_states_provinces.geojson",
+      "license": "Public domain",
+      "bytes": 40726851,
+      "sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5"
+    },
+    {
+      "id": "pd-burma-1942",
+      "ref": "G8",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Japanese_advance_in_Burma%2C_20_January-19_March_1942.jpg",
+      "file": "burma-1942-cmh.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 206397,
+      "sha256": "d4d176d173fd096d5d8e8b1d943e743483941e3280847e0216f677f67d36c8d8"
+    },
+    {
+      "id": "pd-dei-1942",
+      "ref": "G9",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Pacific_War_-_Dutch_East_Indies_1941-42_-_Map.jpg",
+      "file": "dei-1941-42-usma.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 191418,
+      "sha256": "0e771265782b3041f5c68b32d141384653765da45230734655ec3221917d2f1e"
+    },
+    {
+      "id": "svg-europe-1939-09",
+      "ref": "G10",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Second_World_War_Europe_09_1939_de.svg",
+      "file": "Second_World_War_Europe_09_1939_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1048750,
+      "sha256": "909d4adf027a96bcc48b259cf7c290205fbd4ae645919eb71d6f777d9946db82"
+    },
+    {
+      "id": "svg-europe-1940-06",
+      "ref": "G11",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Second_World_War_Europe_06_1940_de.svg",
+      "file": "Second_World_War_Europe_06_1940_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1100286,
+      "sha256": "aebb42b92bbd3b9d3c17a9d2fb0ec66092cd8fbd15caacde915a5f4bde571095"
+    },
+    {
+      "id": "svg-europe-1941-11",
+      "ref": "G12",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Second_World_War_Europe_11_1941_de.svg",
+      "file": "Second_World_War_Europe_11_1941_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1104072,
+      "sha256": "1d4d1f64299ac60fe22a8613e439da59af2c4b993a7504f69f7d65f9ec825683"
+    },
+    {
+      "id": "svg-europe-1942-10",
+      "ref": "G13",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Second_World_War_Europe_10_1942_de.svg",
+      "file": "Second_World_War_Europe_10_1942_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1109840,
+      "sha256": "f838a3fba6859465df532e14d788d61f914562105f51704b6c1bb2bacb7c2344"
+    },
+    {
+      "id": "svg-europe-1942-12",
+      "ref": "G14",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Second_World_War_Europe_12_1942_de.svg",
+      "file": "Second_World_War_Europe_12_1942_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1112339,
+      "sha256": "e27eb3ec92ae76c0c7e1b627c4bcb1bb49bab7964f65407debeb8b294f87fb42"
+    },
+    {
+      "id": "png-china-1945",
+      "ref": "G19",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Situation_at_the_End_of_World_War_Two.PNG",
+      "file": "Situation_at_the_End_of_World_War_Two.PNG",
+      "license": "Public domain (US Government work)",
+      "bytes": 333409,
+      "sha256": "6858af35aeb25c6ceeff2d92d5e7cad5850693799cd32e0a1f33cc6bc85ed083"
+    },
+    {
+      "id": "pd-new-guinea",
+      "ref": "G20",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/The_New_Guinea_Area_-_Allied_Advance_%28AMH-43%29.jpg",
+      "file": "new-guinea-amh43.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 98562,
+      "sha256": "58323f3e419f192bf91e39ec5a30636826f0a5602935ab44285c3c6d3d1b6c8f"
+    },
+    {
+      "id": "pd-burma-1944-45",
+      "ref": "G21",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Allied_Third_Burma_Campaign_June_1944-May_1945.jpg",
+      "file": "burma-1944-45-usma.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 201337,
+      "sha256": "4919d2dffe4924b8f18860e860e8b9df49a9382d1aa95e38b0cbb100b57feeb8"
+    },
+    {
+      "id": "pd-pacific-1942",
+      "ref": "G22",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Pacific_War_-_Micronesia%2C_Melanesia_and_New_Guinea_1941-42_-_Map.jpg",
+      "file": "pacific-1941-42-usma.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 174956,
+      "sha256": "70acbf6713338a2e1494e6d8a569c44eaa192d5866627166be92614544f6949f"
+    },
+    {
+      "id": "pd-china-1940",
+      "ref": "G23",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Japanese_Occupation_-_Map.jpg",
+      "file": "Japanese_Occupation_-_Map.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 493474,
+      "sha256": "051be97270fb658b4cd411fb7af043c80db02ff8f606dd82799d021457aec777"
+    },
+    {
+      "id": "pd-europe-1942-03",
+      "ref": "G24",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Second_World_War_Europe_03_1942_de.svg",
+      "file": "Second_World_War_Europe_03_1942_de.svg",
+      "license": "Public domain (released by the author)",
+      "bytes": 1129209,
+      "sha256": "38639936b87726705785620cc0a5838e8416fd3c8333f42245868832ae33bb88"
+    },
+    {
+      "id": "pd-27",
+      "ref": "G25",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope27Combined.jpg?w=1400",
+      "file": "pd-27.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 1064946,
+      "sha256": "000dc3df73ee0bc69304f54ba3a556393423de0ad4cdc424d06796df4abe1178"
+    },
+    {
+      "id": "pd-29",
+      "ref": "G26",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope29.jpg?w=1400",
+      "file": "pd-29.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 727177,
+      "sha256": "a09fb0f2b18d0320f447f1c32da8bfb3d617e1e197a5bd98f0ec1b18110bc88f"
+    },
+    {
+      "id": "pd-31",
+      "ref": "G27",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope31.jpg?w=1400",
+      "file": "pd-31.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 1135989,
+      "sha256": "3366b43f2eeda0fa6a91650bcc51ed2ba21ed137d82fe01fa98a9f7fe01b4ff6"
+    },
+    {
+      "id": "pd-71",
+      "ref": "G28",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope71.jpg?w=1400",
+      "file": "pd-71.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 423733,
+      "sha256": "6007fd7af89e213b3814a4416246e285a1c0333e7aecd73b8b52619cec0f0ca4"
+    },
+    {
+      "id": "pd-51",
+      "ref": "G29",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope51.jpg?w=1400",
+      "file": "pd-51.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 1193373,
+      "sha256": "8bb1f7a30fef1446953dce2a3581a8fedb55696f85599e9de8aec0a65f400cee"
+    },
+    {
+      "id": "pd-82",
+      "ref": "G30",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope82.jpg?w=1400",
+      "file": "pd-82.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 560041,
+      "sha256": "ffc563e18f6d00da0655299a75434be80850bdca10c1a6a29f64042e2abf8fdb"
+    },
+    {
+      "id": "pd-78",
+      "ref": "G31",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope78.jpg?w=1400",
+      "file": "pd-78.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 480546,
+      "sha256": "5230cdd3c8eea01296885ecb8850d9c581c95a3d8bc5d5dbe07e5a9923c74cee"
+    },
+    {
+      "id": "pd-48",
+      "ref": "G32",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope48.jpg?w=1400",
+      "file": "pd-48.png",
+      "license": "Public domain (US Government work)",
+      "bytes": 379456,
+      "sha256": "399c1ecf2e4fdbb50bf0731eb13b618c602742e905981f82418b52a400d8484b"
+    },
+    {
+      "id": "pd-greece",
+      "ref": "G33",
+      "url": "https://www.ibiblio.org/hyperwar/ETO/East/Balkans/maps/AG/AG-Balkans-2.jpg",
+      "file": "cmh-greece-full.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 140796,
+      "sha256": "677b57ce36b33059b7c5f0bf807b2e128ed6c94ada4608b8dd6d0c4e29f34b9c"
+    },
+    {
+      "id": "gb-greece-municipalities",
+      "ref": "G35",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/main/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3_simplified.geojson",
+      "file": "grc-adm3.geojson",
+      "license": "CC BY 4.0 (gbOpen; underlying Greece metadata lists CC0 1.0 and CC BY 3.0)",
+      "bytes": 1263212,
+      "sha256": "72179d50a8a85aa9fecf996761f905db9e8a59f4eb882f8481f88651692b7e18"
+    },
+    {
+      "id": "pd-19",
+      "ref": "G36",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope19.jpg?w=1800",
+      "file": "pd-19.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 466117,
+      "sha256": "c534280f55aa3023f0804a9e40e5017eb48df6db069e31d4536c208b426414dd"
+    },
+    {
+      "id": "pd-20",
+      "ref": "G37",
+      "url": "https://wpvip.westpoint.edu/dhc/wp-content/uploads/sites/6/2025/01/WWIIEurope20.jpg?w=1800",
+      "file": "pd-20.jpg",
+      "license": "Public domain (US Government work)",
+      "bytes": 486512,
+      "sha256": "0ce27601f70dd4d5eb472e595ddc1093a1797465d913bb97362152600a8adde2"
+    },
+    {
+      "id": "pd-oss-crete",
+      "ref": "G38",
+      "url": "https://www.elia.org.gr/userfiles/pdf_archieve/1943%2010-2443%20Crete%2C%20Ierapetra%2C%20Sitia%2C%20Iraklion%2C%20Italian%20Surrender%2C%20226-CID-L19124%20%28A-12634%2C%20British%29.pdf",
+      "file": "oss-crete-a12634.pdf",
+      "license": "Public domain (US Government work)",
+      "bytes": 975525,
+      "sha256": "909a968fab0e50ca01906240cc14e7106a28561c37c1b7015e7e1a7763dc7b5b"
+    }
+  ]
+}
