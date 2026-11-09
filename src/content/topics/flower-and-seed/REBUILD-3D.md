@@ -509,3 +509,122 @@ Minor residuals, not blocking:
 - Fig florets are sparse beads floating in the cavity, not a dense layer lining the wall.
 - The Costus cone is close to a cylinder and a duller red than *Costus woodsonii*.
 - The bat's toe claws cannot be made out at beat size.
+
+
+## Rebuild 2026-11-05 — residual polish, delivered 2026-11-09
+
+Scope: the five requested residuals in the accepted live topic. No display text was changed. Six selectable meshes were revised because moss foliage and sporophytes are separate parts. This section supersedes the three minor residuals listed after round-4 GPU acceptance, and addresses the durian holder and moss request.
+
+### Per-part review and accounting
+
+A means credible under the docs/68 form/attachment/detail criteria for this residual scope. These are offline self-grades, not new GPU acceptance of the whole topic. Existing accepted anatomy and other specimens were kept.
+
+| Part | Triangles before → after | Estimated material calls | Self-grade | Change |
+|---|---:|---:|:---:|---|
+| `fig-cut` | 9,936 → 24,042 | 1 → 1 | A | Hundreds of sessile florets form a dense wall lining. Broad bases are embedded in the cavity loft; their axes follow its local inward normal. The 26 established teaching locations, half-section, green rind, stalk and flush ostiole remain. Shared-ring meshes and a fig-only simplification setting recover bytes. |
+| `red-flower` | 10,074 → 10,074 | 1 → 1 | A | The same 24 imbricate bracts now follow a broad-shouldered, progressively tapering cone. Red derives from technical-plate blood-rich #c8222d with pole-n #b5473a variation; studio-calibrated pigment shading avoids the first pink result. Both corolla mouths/contact anchors remain fixed. |
+| `nectar-bat` | 20,287 → 20,287 | 1 → 1 | A | Five toes on each foot have separate, slightly wider spacing and small swept keratin hooks. Reduced the first oversized pale trial to warm-grey #857d70 claws with 0.46 mm root radius and a 2.3 mm upturned hook. Accepted face, coat, membranes and whole-part hover source are retained; embedded finishes are byte-identical. |
+| `durian-flowers` | 16,760 → 16,760 | 1 → 1 | A | Removed the actual third beige support block from the table context. Extended/flared the bark-covered branch butt to the table and cut its basal 3 mm onto y=0. Three flowers, their bundles, pedicels and bat contact sites remain in place. |
+| `moss-cushion` | 18,072 → 8,706 | 1 → 1 | A | Low irregular cushion with 174 short leafy shoots and seven individually cambered leaves per shoot, varied azimuth, lean and colour. Shortened shoot/leaf rise, broadened tiny leaves and integrated the shaded olive undergrowth; replaces the grass-like upright blades. Six-edge leaf meshes free bytes for the fig. |
+| `moss-capsules` | 3,116 → 3,116 | 1 → 1 | A | Retained exactly five sporophytes. Bases now enter the cushion instead of starting above it; finer curved setae carry narrower olive capsules. The selectable part and all chapter/beat references remain. |
+
+### Look → change → look record
+
+1. Inspected the real reference contact sheets and round-1 four-view plates. The fig still had exposed lanes and pale isolated ovaries; the new Costus pigment looked pink under ACES; claws were too pale/bulky; moss had thick setae and rounded capsule heads. Replaced fig grids with closed shared-ring florets, widened their embedded bases and darkened their token-derived pigmentation. Calibrated Costus bract pigment to 0.58 of the initial linear-light trial. Reduced claw radius/height and changed ivory to warm grey. Lowered/fined the five moss setae and narrowed the capsules.
+2. Inspected `look3` against the photographs. Fig rows were unevenly spaced in physical space; sparse moss shoots still showed bare substrate. Changed fig placement to arc-length spacing and staggered circumference-dependent packing with broader sessile roots. Broadened moss leaves, reduced their rise, added the olive undergrowth and lowered its profile into a cushion. The durian base needed genuine contact: flattened the cut woody butt onto the table plane.
+3. Inspected `look4` Costus and the later `look5` fig / `look6` moss sheets, plus the claw close-up. The cone now tapers, scarlet overlaps remain visible, fig florets cover the wall and the moss reads as a low leafy carpet. Reduced redundant leaf boundary vertices rather than removing characteristic detail to stay under the file cap. Final sheets are decoded once more from the shipping file, with both themes and the actual chapter-03 beat cameras/hover phases.
+
+The first oversize trials and intermediate renders are not shipping assets. Their rasters informed iteration only; final evidence is bound to the delivered asset hash. All images and baseline binaries remain outside git.
+
+### Real references (development-only)
+
+The Commons file pages give author/licence; the frozen download URLs and attribution metadata are in `scripts/geo/flower-and-seed/residual-references.json`. No photograph is a new runtime texture.
+
+**fig**
+
+- [Syconium ficus glomerata.JPG](https://commons.wikimedia.org/wiki/File:Syconium_ficus_glomerata.JPG) — Prashanthns; CC BY-SA 3.0.
+- [Inside fig.jpg](https://commons.wikimedia.org/wiki/File:Inside_fig.jpg) — Nikhil More; CC BY-SA 4.0.
+- [Ficus-variegata-SF24281-02.jpg](https://commons.wikimedia.org/wiki/File:Ficus-variegata-SF24281-02.jpg) — Steve Fitzgerald; CC BY-SA 4.0.
+- [Ficus variegata SF26128-01.jpg](https://commons.wikimedia.org/wiki/File:Ficus_variegata_SF26128-01.jpg) — Steve Fitzgerald; CC BY-SA 4.0.
+
+**costus**
+
+- [Costus woodsonii (flower).jpg](https://commons.wikimedia.org/wiki/File:Costus_woodsonii_(flower).jpg) — Hans Hillewaert; CC BY-SA 3.0.
+- [Costus woodsonii (inflorescense).jpg](https://commons.wikimedia.org/wiki/File:Costus_woodsonii_(inflorescense).jpg) — Hans Hillewaert; CC BY-SA 3.0.
+- [Costus Woodsonii Flower.jpg](https://commons.wikimedia.org/wiki/File:Costus_Woodsonii_Flower.jpg) — PapiPijuan; CC BY-SA 4.0.
+
+**bat**
+
+- [Eonycteris spelaea.jpg](https://commons.wikimedia.org/wiki/File:Eonycteris_spelaea.jpg) — Naturalis Biodiversity Center; CC0.
+- [Eonycteris spelea.png](https://commons.wikimedia.org/wiki/File:Eonycteris_spelea.png) — Stephen Rossiter; CC BY 4.0.
+- [Eonycteris spelaea 364063832.jpg](https://commons.wikimedia.org/wiki/File:Eonycteris_spelaea_364063832.jpg) — Samuel GUIRAUDOU; CC BY 4.0.
+
+**durian**
+
+- [Durian (Durio zibethinus L.); flowering and fruiting branch, Wellcome V0042690.jpg](https://commons.wikimedia.org/wiki/File:Durian_%28Durio_zibethinus_L.%29%3B_flowering_and_fruiting_branch%2C_Wellcome_V0042690.jpg) — Wellcome Collection; CC BY 4.0.
+- [Durio flower 2, Cho Lach, Ben Tre, Viet Nam.JPG](https://commons.wikimedia.org/wiki/File:Durio_flower_2%2C_Cho_Lach%2C_Ben_Tre%2C_Viet_Nam.JPG) — Cheers!-test; CC BY-SA 3.0.
+
+**moss**
+
+- [Moss plants with sporangia.(capsules).jpg](https://commons.wikimedia.org/wiki/File:Moss_plants_with_sporangia.%28capsules%29.jpg) — Krishna satya 333; CC0.
+- [Horn Calcareous Moss (Mnium hornum) capsule of a sporophyte (13564331274).jpg](https://commons.wikimedia.org/wiki/File:Horn_Calcareous_Moss_%28Mnium_hornum%29_capsule_of_a_sporophyte_%2813564331274%29.jpg) — Bernard DUPONT; CC BY-SA 2.0.
+
+Fig interior references are *F. racemosa* structural proxies for the existing *F. variegata* classroom specimen. The Naturalis bat skin supplies the real foot/claw reference; its spread specimen posture differs from the accepted upstroke. Four-view sheets show front, three-quarter, profile and characteristic-detail renders next to real references, with pose differences labelled. Exact same-pose photographic registration is not available for every angle: the accepted bat upstroke and the exhibited cut branch are retained as requested. Those sheets are structural/angle studies, not claimed pixel-matched photography.
+
+### Studio evidence and reproduction
+
+Absolute comparison-sheet directory: `/private/tmp/flower-and-seed-residual/final`. Each target has four render | reference plates and a `*-sheet.webp`, plus cinema views. `*-before-after-detail.webp` adds accepted baseline | final | reference. Chapter-03 beat images retain the authored perspective camera, actual `fitCameraToAspect`, hover pivot/axis and animation phase in both themes.
+
+`preview.ts` decodes the actual meshopt shipping GLB and embedded finishes. It reuses fossils-and-skeletons `studio-cpu.ts`: installed RoomEnvironment, hemisphere, three directional lights, exposure, linear-light GGX, Three ACES and sRGB. It checks the renderer's actual Lighting.tsx values. This numerical preview cannot reproduce GPU shadow filtering, mip derivatives or antialiasing. No browser or desktop was opened. Independent GPU acceptance remains for Claude, as instructed.
+
+```sh
+python3 scripts/geo/flower-and-seed/fetch-residual-refs.py
+pnpm tsx scripts/geo/flower-and-seed/build-parts.ts
+RESIDUAL=1 ROUND4=1 ONLY=fig-cut,red-flower,nectar-bat,durian-flowers,moss-cushion PREVIEW_OUT=/tmp/flower-and-seed-residual/final pnpm tsx scripts/geo/flower-and-seed/preview.ts final
+node scripts/geo/flower-and-seed/review-sheets.mjs /tmp/flower-and-seed-residual/final
+pnpm tsx scripts/geo/flower-and-seed/audit-residual.ts /tmp/flower-and-seed-residual
+node scripts/geo/flower-and-seed/residual-sheets.mjs /tmp/flower-and-seed-residual
+```
+
+The audit and before/after strips require the accepted baseline GLB, parts and metrics saved in the external `before` directory before rebuilding; reference downloads stay in ignored `refs`.
+
+### Preservation, totals and gates
+
+- Conservative full-table triangles: **260,025 → 264,177**, below 350,000 even before mutually exclusive chapter visibility.
+- Estimated material calls: **71 → 71**, or **80 → 80** with all seven flows and both ground passes. No GPU FPS claim.
+- GLB after meshopt: **1,498,568 → 1,497,176 bytes**; cap 1,500,000 bytes. No new image texture was added.
+- Decoded audit: **29 untouched meshes** have identical attributes, indices, transforms, extras, materials, samplers and embedded image bytes. Bat material/coat finish is identical. All EN/ZH text, ids, counts, chapters/beats, flow paths, animation data, poses, explosion controls and connections are unchanged. Only the durian holder primitive is removed from `table.extra`.
+- Final SHA-256: `64ff54c79ad061bbd8b17d625281f31993587b96ff39e6352c174776c84b034a`. Final snapshot and regression audit must match.
+- Gates: see the completed results recorded below. No browser gates were attempted because Chromium/desktop use is expressly forbidden for this task.
+
+
+### Final verification results — full-suite gate blocked
+
+- `pnpm check`: **passed**, 1,501 files; 0 errors, 0 warnings, 24 existing hints. Both Astro diagnostics and TypeScript completed.
+- `pnpm validate`: **passed**, 94 topics; 0 errors/warnings.
+- `pnpm build`: **passed**, 191 static pages.
+- Topic tests: **32 passed** across `flower-and-seed-rebuild.test.ts` and `flower-and-seed-reuse.test.ts`, including actual GLTFLoader/material-bridge, finite normals, decoded labels, interaction preservation and budgets.
+- Full `pnpm run test --configLoader runner --maxWorkers=1 --testTimeout=30000 --pool=threads --reporter=dot`: **301 files / 6,753 tests passed; 5 files / 5 tests failed; 1 skipped**. The 55-minute run encountered only timing failures in untouched code.
+- Reran the five failing files unchanged, with the same limits: **487 passed, 4 failed**. The liquid CPU-budget test passed on rerun. The following four remained:
+
+| Untouched test | Reproduced failure |
+|---|---|
+| `tests/coral-reef.test.ts:358` | Algal-marker containment test exceeded its explicit 20 s timeout (32.78 s on rerun). |
+| `tests/time-scene/science-catalogue-contract.test.ts:88` | Search p95 was 147.17 ms against a 100 ms limit (168.10 ms in the full run). |
+| `tests/space-scene/lazy-sim-tools.test.ts:35` | `sample-orbit` preparation exceeded 30 s, again at 30.41 s. |
+| `tests/space-scene/living-things-toad-skin.test.ts:15` | Closed toad-skin test exceeded its explicit 20 s timeout again. |
+
+The host reported a load average of **595.92** during verification and **201.50** before the isolated rerun. These results are consistent with resource contention, but a quiet-host pass has not been demonstrated. **The full-suite gate is not green.** A clean full-suite rerun remains outstanding; all four reproduced failures are outside this task's permitted edit scope. Their source and timing limits were retained. No engine or other-topic fix is claimed.
+
+A temporary `/tmp` dependency overlay kept writable Astro/Vite caches out of the shared, read-only `node_modules` target. Package files stayed shared and unchanged; the original workspace dependency symlink was restored after verification. No Vitest configuration file was added.
+
+All four final snapshot hashes match the delivered asset, actual engine lighting source, frozen reference manifest and final preview source. The final four-view, before/after/detail, cinema and beat sheets were inspected; `hash-verification.json` and the decoded preservation audit agree. `git diff --check` passed. The machine-readable record is `scripts/geo/flower-and-seed/residual-verification.json`; full logs remain beside the external comparison directory. GPU acceptance and exact same-pose photographic registration for every angle remain outstanding for the reasons stated above.
+
+### GPU acceptance fixes (Claude, 2026-11-09)
+
+GPU review at the chapter beats, in paper and cinema, passed the fig, Costus taper, bat claws and durian branch. Two faults needed fixing:
+
+- `moss-cushion`: the sprigs sat sparsely on a bald, flat disc. The mat is now domed with `skin()` and trimmed inside the foliage footprint. It carries 240 evenly spread five-leaf shoots in deeper, patchy greens.
+- `red-flower`: the receptacle was unshaded and showed as a neon band with a torn edge. The receptacle and bract backs now take the bracts' x0.58 shade, and the first six bracts skirt down past the base.
+
+`fig-cut` keeps the settings above. A higher simplification error washed the green out of its stalk and rind, so the moss shoot count pays for the bytes instead. GLB: 1,497,588 bytes, SHA-256 `84ce8dd0e8e1092315b4eff46b5536cf63b75b10c784c3d0486cc6de3b541724`. Against the Codex delivery, only `moss-cushion` and `red-flower` differ.

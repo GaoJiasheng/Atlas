@@ -2,6 +2,7 @@
 import { BufferGeometry, CatmullRomCurve3, Color, Float32BufferAttribute, Vector3 } from "three";
 import { surface, type P } from "../living-things/sculpture";
 import type { Model } from "../living-things/kit";
+import { rng } from "../living-things/kit";
 import { Sculpt } from "./sculpt";
 
 const TAU = Math.PI * 2;
@@ -12,15 +13,6 @@ function reverse(g: BufferGeometry) {
     const a = index.getX(i); index.setX(i, index.getX(i + 1)); index.setX(i + 1, a);
   }
   g.computeVertexNormals(); return g;
-}
-function floretPetal(root: P, tip: P) {
-  const A = new Vector3(...root), D = new Vector3(...tip).sub(A), N = new Vector3(0, 0, 1);
-  const S = new Vector3().crossVectors(N, D).normalize();
-  return reverse(surface(8, 6, (u, v) => {
-    const t = v * TAU, f = Math.sin(Math.PI * u);
-    return A.clone().addScaledVector(D, u).addScaledVector(S, Math.cos(t) * .0008 * f)
-      .addScaledVector(N, .00025 * f + .00003 * f * Math.sin(t)).toArray() as P;
-  }, true));
 }
 
 export function figCutRound3(): Model {
@@ -129,13 +121,65 @@ export function figCutRound3(): Model {
     }, true), k % 2 ? "#576a2f" : "#555047");
   }
 
-  // Exactly 26 individual display florets, retaining their established placement.
-  for (let i = 0; i < 26; i++) {
-    const u = .16 + i / 25 * .65, a = .16 + (i * 2.39996 % 2.78);
-    const base = interior(u, a), tip: P = [base[0] * .80, base[1] + .001 * Math.sin(i * 3), base[2] * .80];
-    s.line([base, mix(base, tip, .5), tip], [.0011, .0015, .0008], "#b8602e", 1, 8, 7);
-    s.orb(mix(base, tip, .60), [.0015, .0025, .0014], i % 3 ? "#b8973c" : "#b8602e", 12, 8);
-    s.put(floretPetal(tip, [tip[0] * .93, tip[1] + .0022, tip[2] + .0007]), "#c9bea6");
+  // Twenty-six established teaching florets are retained within a continuous,
+  // tightly packed population of sessile florets. Every broad ovary base is
+  // buried in the SAME cavity loft; no independent beads in empty space.
+  const random = rng(51105);
+  const floret = (u: number, a: number, i: number) => {
+    const base = new Vector3(...interior(u, a));
+    const du = new Vector3(...interior(Math.min(.99,u+.001),a)).sub(new Vector3(...interior(Math.max(.01,u-.001),a))).normalize();
+    const da = new Vector3(...interior(u,a+.001)).sub(base).normalize();
+    const N = new Vector3().crossVectors(du,da).normalize();
+    if (N.dot(new Vector3(-base.x,0,-base.z)) < 0) N.negate();
+    const length = .0026 + random() * .0013, width = .00185 + random() * .00030;
+    const c = new Color(i % 4 ? "#744518" : "#b8602e").lerp(new Color("#c9bea6"),.10 + random()*.18);
+    // Closed shared-ring mesh: no duplicated seam or degenerate pole rings.
+    // Eight radial samples suffice for millimetre-scale florets; interpolated
+    // surface normals remain smooth after meshopt simplification.
+    const positions:number[]=[], colors:number[]=[], indices:number[]=[];
+    positions.push(...base.clone().addScaledVector(N,-.0007).toArray());
+    for(let ring=1;ring<=3;ring++) {
+      const t=[.04,.42,.76][ring-1]!;
+      for(let k=0;k<8;k++) {
+        const az=k/8*TAU, r=width*(ring===1?.90:ring===2?1:.72);
+        positions.push(...base.clone().addScaledVector(N,-.00045+length*t)
+          .addScaledVector(du,Math.cos(az)*r+.0005*t*t*Math.sin(i*2.1))
+          .addScaledVector(da,Math.sin(az)*r).toArray());
+      }
+    }
+    positions.push(...base.clone().addScaledVector(N,length-.00045).addScaledVector(du,.0005*Math.sin(i*2.1)).toArray());
+    for(let k=0;k<8;k++) {
+      const next=(k+1)%8;
+      indices.push(0,1+next,1+k);
+      for(let ring=0;ring<2;ring++) {
+        const a=1+ring*8+k,b=1+ring*8+next;
+        indices.push(a,b,a+8,b,b+8,a+8);
+      }
+      indices.push(17+k,17+next,25);
+    }
+    for(let n=0;n<26;n++) {
+      const shade=c.clone().multiplyScalar(.76+.24*Math.min(1,n/18));
+      colors.push(shade.r,shade.g,shade.b);
+    }
+    const g=new BufferGeometry();g.setAttribute("position",new Float32BufferAttribute(positions,3));
+    g.setAttribute("color",new Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();
+    s.put(g,"#b8602e");
+    // Pale style emerges directly from ovary tip; tapered, never a floating dot.
+    if(i%3===0) {
+      const tip = base.clone().addScaledVector(N,length-.0005);
+      s.line([tip.toArray() as P,tip.clone().addScaledVector(N,.0011).addScaledVector(du,.0006).toArray() as P], [.00025,.00008],"#c9bea6",1,5,3);
+    }
+  };
+  for (let i=0;i<26;i++) floret(.16+i/25*.65,.16+(i*2.39996%2.78),i);
+  // Staggered near-hexagonal packing varies with local wall circumference.
+  let index=26;
+  for(let row=0;row<24;row++) {
+    const u=cavity.getUtoTmapping(.06+row/23*.88,0), radius=cavity.getPoint(u).x;
+    const count=Math.max(5,Math.floor(Math.PI*radius/.0038));
+    for(let k=0;k<count;k++) {
+      const a=.035+(k+.25+.5*(row%2)+random()*.17)/(count+.5)*(Math.PI-.07);
+      floret(u+(random()-.5)*.013,a,index++);
+    }
   }
   return s.finish();
 }

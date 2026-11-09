@@ -104,25 +104,32 @@ export function fernRound3(): Model {
 /** Dense gametophyte cushion: small curled lanceolate leaves, no exposed green lump. */
 export function mossRound3(): Model {
   const s = new Sculpt(), random = rng(17103), sites: [number, number][] = [];
+  const MAT_X = .0355, MAT_Z = .0272, DOME = .0085;
   const skin = (x: number, z: number) => {
-    const r = Math.hypot(x / .040, z / .031);
-    return .0008 + .0022 * Math.sqrt(Math.max(0, 1 - r * r)) + .00035 * Math.sin(x * 195 + Math.sin(z * 260)) * Math.sin(z * 210);
+    const r = Math.hypot(x / MAT_X, z / MAT_Z), crown = Math.sqrt(Math.max(0, 1 - r * r));
+    return .0004 + crown * (DOME + .00075 * Math.sin(x * 195 + Math.sin(z * 260)) * Math.sin(z * 210));
   };
-  // Dark rhizoids below the living shoots, deeply irregular at the perimeter.
-  darken(s.put(surface(18, 40, (u, v) => {
-    const t = u * Math.PI, a = v * TAU, r = Math.sin(t) * (1 + .045 * Math.sin(a * 7 + t * 5) + .027 * Math.cos(a * 13));
-    return [Math.cos(a) * r * .0395, .0014 + Math.cos(t) * .0014, Math.sin(a) * r * .0305];
-  }, true), BARK, .06), .15);
-  for (let i = 0; i < 410; i++) {
-    let x = 0, z = 0;
-    for (let attempt = 0; attempt < 50; attempt++) {
+  // Deep-shaded undergrowth domed with the shoots, trimmed inside their foliage footprint.
+  darken(s.put(surface(24, 64, (u, v) => {
+    const t = u * Math.PI, a = v * TAU, r = Math.min(1, Math.sin(t) * (1 + .03 * Math.sin(a * 7 + t * 5) + .018 * Math.cos(a * 13)));
+    const x = Math.cos(a) * r * MAT_X, z = Math.sin(a) * r * MAT_Z;
+    return [x, Math.cos(t) > 0 ? Math.max(.0002, skin(x, z) - .0006) : .0002 - .00015 * Math.sin(t), z];
+  }, true), LEAF, .06), .40);
+  for (let i = 0; i < 240; i++) {
+    // Best-candidate sampling spreads the rosettes evenly, leaving no bald lanes.
+    let x = 0, z = 0, best = -1;
+    for (let attempt = 0; attempt < 24; attempt++) {
       const a = random() * TAU, r = Math.sqrt(random());
-      x = Math.cos(a) * r * .0380; z = Math.sin(a) * r * .0290;
-      if (!sites.some(([X, Z]) => (x - X) ** 2 + (z - Z) ** 2 < .00165 ** 2)) break;
+      const X = Math.cos(a) * r * .0380, Z = Math.sin(a) * r * .0290;
+      const gap = sites.reduce((m, [P, Q]) => Math.min(m, (X - P) ** 2 + (Z - Q) ** 2), Infinity);
+      if (gap > best) { best = gap; x = X; z = Z; }
     }
     sites.push([x, z]);
-    const y = skin(x, z), h = .0035 + random() * .0075, az = random() * TAU;
-    const lean = .0007 + random() * .0010, col = i % 5 ? LEAF : OLIVE;
+    const y = skin(x, z), h = .0019 + random() * .0030, az = random() * TAU;
+    const lean = .00035 + random() * .0006;
+    // Clumps drift between deep and olive greens; only a few shoots are young.
+    const patch = .5 + .5 * Math.sin(x * 142 + 1.3) * Math.sin(z * 171 + .7), young = i % 9 === 0;
+    const col = young ? new Color(YOUNG) : new Color(LEAF).lerp(new Color(OLIVE), patch * .85 + random() * .15);
     const stem = (t: number) => new Vector3(x + Math.cos(az) * lean * t, y + h * t, z + Math.sin(az) * lean * t);
     // At this visual scale a triangular tapered stem is entirely behind its leaves.
     // One actual apex replaces the coincident vertices of a collapsed tube ring.
@@ -138,25 +145,25 @@ export function mossRound3(): Model {
     const leaves = 5;
     for (let k = 0; k < leaves; k++) {
       const t = .10 + k / leaves * .82, a = az + k * 2.39996 + (random() - .5) * .28;
-      const L = (.0038 + random() * .0020) * (1 - .15 * t), W = .00065 + random() * .00022;
+      const L = (.0038 + random() * .0012) * (1 - .15 * t), W = .0013 + random() * .0004;
       const root = stem(t), D = new Vector3(Math.cos(a), 0, Math.sin(a)), S = new Vector3(-Math.sin(a), 0, Math.cos(a));
-      const lift = .45 + .75 * t + random() * .18, curl = .00018 + random() * .00026;
-      // An eight-point lanceolate boundary and one raised keel vertex. Actual single
+      const lift = .10 + .48 * t + random() * .16, curl = .00018 + random() * .00026;
+      // A six-point lanceolate boundary and one raised keel vertex. Actual single
       // root/tip vertices avoid dozens of locked degenerate grid-border vertices.
       const point = (u: number, q: number) => {
         const span = W * Math.sin(Math.PI * u) * (1 - .28 * u);
         return root.clone().addScaledVector(D, L * (u - .18 * u * u * u))
           .addScaledVector(S, q * span + curl * .45 * Math.sin(Math.PI * u))
-          .add(new Vector3(0, L * (lift * u + .20 * Math.sin(Math.PI * u)) + curl * u ** 3 + ((1 - Math.abs(q)) * .00065 + .00025 * q * q + .00013 * q) * Math.sin(Math.PI * u), 0)).toArray() as P;
+          .add(new Vector3(0, L * (lift * u + .20 * Math.sin(Math.PI * u)) + curl * u ** 3 + ((1 - Math.abs(q)) * .00030 + .00012 * q * q + .00013 * q) * Math.sin(Math.PI * u), 0)).toArray() as P;
       };
-      const coordinates = [[0, 0], [.24, -1], [.55, -1], [.82, -.65], [1, 0], [.82, .65], [.55, 1], [.24, 1], [.52, 0]] as const;
+      const coordinates = [[0, 0], [.28, -1], [.68, -.86], [1, 0], [.68, .86], [.28, 1], [.50, 0]] as const;
       const positions = coordinates.flatMap(([u, q]) => point(u, q));
       const triangles: number[] = [];
-      for (let j = 0; j < 8; j++) triangles.push(8, (j + 1) % 8, j);
+      for (let j = 0; j < 6; j++) triangles.push(6, (j + 1) % 6, j);
       const g = new BufferGeometry();
       g.setAttribute("position", new Float32BufferAttribute(positions, 3));
       g.setIndex(triangles); g.computeVertexNormals();
-      const c = new Color(col).lerp(new Color(YOUNG), .04 + .16 * t + random() * .08).multiplyScalar(.82 + random() * .22);
+      const c = col.clone().lerp(new Color(YOUNG), .02 + .10 * t + random() * .06).multiplyScalar(.70 + random() * .26);
       const colors: number[] = [];
       for (const [u] of coordinates) {
         const light = lerp(.82, 1.07, u);

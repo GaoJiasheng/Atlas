@@ -498,11 +498,11 @@ export function nectarBat(): Model {
       legUV.setXY(j, .14 + legUV.getX(j) * .16, .05 + legUV.getY(j) * .15);
     furBlades(s, leg, 260);
     for (let j = 0; j < 5; j++) {
-      const toe: P = [-.050 - .0003*j, -.0105, side * (.0185 + j * .0016)];
-      const tip: P = [toe[0]-.0020, -.0098, toe[2]];
-      s.line([foot, toe, tip], [.00065,.00048,.00025], "#554235", 1, 6, 9);
-      s.line([tip, [tip[0]-.0008,tip[1]+.0010,tip[2]], [tip[0]-.0003,tip[1]+.0017,tip[2]]],
-        [.00028,.00022,.000015], palette.dark, 1, 6, 7);
+      const toe: P = [-.050 - .0003*j, -.0105, side * (.0165 + j * .0026)];
+      const tip: P = [toe[0]-.0030, -.0098, toe[2]];
+      s.line([foot, toe, tip], [.00072,.00060,.00040], "#554235", 1, 6, 9);
+      s.line([tip, [tip[0]-.0016,tip[1]+.0012,tip[2]], [tip[0]-.0010,tip[1]+.0023,tip[2]]],
+        [.00046,.00034,.00003], "#857d70", 1, 6, 7);
     }
     // Asymmetric upstroke, four long digits II–V, one free thumb.
     const lift = ((side > 0 ? 57 : 62) * Math.PI) / 180,
@@ -1039,7 +1039,14 @@ export function balsamPod(): Model {
 }
 export function durianFlowers(): Model {
   const s = new Sculpt();
-  const branch=barkBranch(s,[[.14,.028,-.02],[.145,.14,-.022],[.12,.235,-.02],[.02,.255,-.018],[-.1,.25,-.02]],[.008,.007,.0065,.005,.0028],24,64);
+  const branch=barkBranch(s,[[.14,.002,-.02],[.145,.14,-.022],[.12,.235,-.02],[.02,.255,-.018],[-.1,.25,-.02]],[.012,.007,.0065,.005,.0028],24,64);
+  // Saw-cut the actual woody butt onto the specimen plane. This affects only
+  // its basal 3 mm; the flowering branch and all floral contact sites stay put.
+  for (const g of s.pieces) {
+    const p=g.getAttribute("position");
+    for(let i=0;i<p.count;i++) if(p.getY(i)<.003) p.setY(i,0);
+    g.computeVertexNormals();
+  }
   for(const u of [.64,.78,.92]) {
     const p=branch.getPoint(u);
     barkBranch(s,[p.toArray() as P,[p.x-.004,p.y+.003,p.z-.003],[p.x-.006,p.y+.0035,p.z-.004]],[.0026,.0020,.0008],20,14);
@@ -1311,20 +1318,20 @@ export function mossCapsules(): Model {
   sites.forEach(([x, z, h, lean]) => {
     const top: P = [
       x! + Math.sin((lean! * Math.PI) / 180) * h!,
-      0.028 + h!,
+      0.006 + h! * .70,
       z!,
     ];
     s.line(
       [
-        [x!, 0.026, z!],
+        [x!, 0.003, z!],
         [
           x! + Math.sin((lean! * Math.PI) / 180) * h! * 0.5,
-          0.028 + h! * 0.55,
+          0.006 + h! * .70 * 0.55,
           z!,
         ],
         top,
       ],
-      [0.0007, 0.0006, 0.0005],
+      [0.00042, 0.00034, 0.00028],
       "#6e5a44",
       1,
       8,
@@ -1333,9 +1340,9 @@ export function mossCapsules(): Model {
     const g = axial(
       [
         [0, 0, 0, 0],
-        [0.002, 0, 0.002, 0.002],
-        [0.006, 0, 0.0028, 0.0028],
-        [0.0085, 0, 0.0016, 0.0016],
+        [0.002, 0, 0.0013, 0.0013],
+        [0.006, 0, 0.0017, 0.0017],
+        [0.0085, 0, 0.0012, 0.0012],
         [0.009, 0, 0, 0],
       ],
       24,
@@ -1344,7 +1351,7 @@ export function mossCapsules(): Model {
     g.applyMatrix4(
       new Matrix4().makeRotationZ(((20 + lean!) * Math.PI) / 180),
     ).translate(...top);
-    s.put(g, "#6e5a44", 0.03);
+    s.put(g, "#576a2f", 0.03);
     const end: P = [
       top[0] + Math.cos(((20 + lean!) * Math.PI) / 180) * 0.008,
       top[1] + Math.sin(((20 + lean!) * Math.PI) / 180) * 0.008,

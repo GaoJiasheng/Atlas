@@ -7,7 +7,10 @@ import { Sculpt } from "./sculpt";
 const TAU = Math.PI * 2;
 const HEAD_Y = 0.17;
 const HEAD_H = 0.08;
-const RED = "#82372b";
+// Technical-plate blood-rich pigment: botanical scarlet under the warm studio key.
+const RED = "#c8222d";
+// Receptacle and bract backs take the bracts' studio-calibrated pigment shade.
+const SHADED_RED = `#${new Color(RED).multiplyScalar(.58).getHexString()}`;
 const ORANGE = "#b8602e";
 const LEAF = "#2d5a34";
 const RIB = "#576a2f";
@@ -24,20 +27,15 @@ function reverse(g: BufferGeometry) {
   return g;
 }
 function envelope(t: number) {
-  return (
-    0.0165 *
-    Math.max(
-      0,
-      Math.sin(Math.PI * (0.09 + 0.91 * Math.min(0.99999, Math.max(0, t)))),
-    ) **
-      0.29
-  );
+  const u = Math.min(1, Math.max(0, t));
+  // Broad basal shoulder, steadily diminishing spiral, rounded closed apex.
+  return .0185 * (1 - .48 * u) * Math.sin(Math.PI * (.20 + .80 * u)) ** .46;
 }
 /** Paint variation follows wax growth / the thin central pale streak seen on mature bracts. */
 function bractColour(g: BufferGeometry, k: number, n: number, m: number) {
   const out: number[] = [],
     red = new Color(RED),
-    warm = new Color("#94372c"),
+    warm = new Color("#b5473a"),
     old = new Color("#857d70");
   for (let i = 0; i <= n; i++)
     for (let j = 0; j <= m; j++) {
@@ -52,7 +50,7 @@ function bractColour(g: BufferGeometry, k: number, n: number, m: number) {
         .lerp(warm, 0.1 + 0.05 * Math.sin(k * 2.4) + 0.12 * u ** 9)
         .lerp(old, streak)
         .multiplyScalar(
-          (0.7 + 0.29 * Math.sin(Math.PI * Math.min(0.98, u + 0.1)) ** 0.55) *
+          (.58 * (0.7 + 0.29 * Math.sin(Math.PI * Math.min(0.98, u + 0.1)) ** 0.55)) *
             (0.98 + 0.025 * Math.cos(v * 4 + u * 2 + k)),
         );
       out.push(col.r, col.g, col.b);
@@ -75,7 +73,7 @@ export function redFlowerRound3(): Model {
       },
       true,
     ),
-    RED,
+    SHADED_RED,
   );
 
   s.put(
@@ -95,7 +93,7 @@ export function redFlowerRound3(): Model {
         true,
       ),
     ),
-    RED,
+    SHADED_RED,
   );
 
   for (let k = 0; k < 24; k++) {
@@ -109,10 +107,12 @@ export function redFlowerRound3(): Model {
     const face = (u: number, v: number, inside = false): P => {
       const q = v * 2 - 1;
       // Broad circular upper margins overlap the next spiral: roots and side joins remain buried.
-      const y = HEAD_Y + t * HEAD_H + h * u - 0.0050 * q * q * u;
+      // The first whorl skirts down past the receptacle's base, closing it from view.
+      const skirt = k < 6 ? Math.max(0, t * HEAD_H + 0.003) * (1 - u) ** 2 : 0;
+      const y = HEAD_Y + t * HEAD_H + h * u - 0.0050 * q * q * u - skirt;
       const T = (y - HEAD_Y) / HEAD_H;
       const a = az + q * half * (0.72 + 0.28 * Math.sin(u * Math.PI / 2));
-      const root = -0.0012 * (1 - u) ** 3;
+      const root = k < 6 ? 0.0004 * (1 - u) : -0.0012 * (1 - u) ** 3;
       const crown =
         0.00065 * Math.sin(Math.PI * u) * (1 - 0.65 * q * q) +
         0.0018 * u ** 9 * (1 - 0.30 * q * q);
@@ -128,7 +128,7 @@ export function redFlowerRound3(): Model {
       ),
       RED,
     );
-    s.put(reverse(surface(5, 10, (u, v) => face(u, v, true))), RED);
+    s.put(reverse(surface(5, 10, (u, v) => face(u, v, true))), SHADED_RED);
     // Rounded finite thickness at the curled free margin, with the lower seam hidden underneath.
     s.put(
       surface(3, 14, (u, v) => {
@@ -140,16 +140,16 @@ export function redFlowerRound3(): Model {
         p[2] += 0.00023 * Math.sin(Math.PI * u) * Math.sin(az);
         return p;
       }),
-      RED,
+      SHADED_RED,
     );
     for (const edge of [0, 1])
       s.put(
         surface(8, 2, (u, v) => lerp(face(u, edge), face(u, edge, true), v)),
-        RED,
+        SHADED_RED,
       );
     s.put(
       surface(1, 10, (u, v) => lerp(face(0, v), face(0, v, true), u)),
-      RED,
+      SHADED_RED,
     );
   }
 

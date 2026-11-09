@@ -33,15 +33,16 @@ import { SIDE, VISIT, FRUITS, FLOWER, FIG, at, dirIn } from "./layout";
 import { tokens } from "./bake";
 const round = process.argv[2] ?? "round1",
   out = process.env.PREVIEW_OUT ?? `scripts/geo/flower-and-seed/evidence/${round}`;
+const residual = process.env.RESIDUAL === "1";
 const round4 = process.env.ROUND4 === "1";
 fs.mkdirSync(out, { recursive: true });
 const baseline = process.argv.includes("--before");
 const file = partsFile.parse(
   JSON.parse(
     fs.readFileSync(
-      baseline
+      process.env.PREVIEW_PARTS ?? (baseline
         ? "scripts/geo/flower-and-seed/evidence/before/parts.json"
-        : "src/content/topics/flower-and-seed/data/parts.json",
+        : "src/content/topics/flower-and-seed/data/parts.json"),
       "utf8",
     ),
   ),
@@ -474,7 +475,25 @@ for (const [id, ref, station] of heroes) {
   const ps =
     id === "flower"
       ? ["flower", "sepals", "stamens", "pistil"].flatMap(pieces)
-      : pieces(id);
+      : residual && id === "moss-cushion" ? ["moss-cushion","moss-capsules"].flatMap(pieces) : pieces(id);
+  if (residual && id === "durian-flowers") {
+    const holderAt=new Vector3(...at(VISIT,[.22,.015,-.09]));
+    // partPieces(table) merges all wood by material. Extract the actual holder
+    // primitive before merging, so the baseline plate really shows its block.
+    const table=file.parts.find(p=>p.id==="table")!;
+    for(const q of table.extra ?? []) {
+      if(q.kind!=="bevelBox" || new Vector3(...q.at).distanceTo(holderAt)>.03) continue;
+      const look=resolveMaterialLook(q.color,tokens,"paper",q.tint);
+      for(const piece of partPieces({primitive:q})) {
+        if(piece.lines)continue;
+        for(const matrix of piece.matrices ?? [new Matrix4()]) {
+          const g=piece.geometry.clone().applyMatrix4(matrix).translate(...q.at);
+          if(!g.index)g.setIndex(Array.from({length:g.getAttribute("position").count},(_,i)=>i));
+          ps.push({g,rough:look.roughness,color:new Color(look.color),metal:look.metalness,env:look.envIntensity});
+        }
+      }
+    }
+  }
   for (const [name, dir, k] of [
     ["front", [0, 0.25, 1], 0],
     ["three-quarter", [0.7, 0.55, 1], 1],
@@ -557,6 +576,18 @@ for (const [id, ref, station] of heroes) {
         );
       zoom = 0.38;
     }
+    if (residual && id === "fig-cut" && name === "detail") {
+      target = new Vector3(...at(FIG,[0,.058,-.022])); zoom=.40; rotated.splice(0,3,0,.15,1);
+    }
+    if (residual && id === "nectar-bat" && name === "detail") {
+      const pivot = file.animations.find(a=>a.target===id)!.pivot!;
+      const local = new Vector3(-.050,-.008,.023).applyMatrix4(new Matrix4().makeRotationZ(12*Math.PI/180));
+      target = new Vector3(...pivot).add(new Vector3(...dirIn(VISIT,local.toArray())));
+      zoom=.11; rotated.splice(0,3,-.30,-.20,1);
+    }
+    if (residual && id === "durian-flowers" && name === "detail") {
+      target = new Vector3(...at(VISIT,[.22,.020,-.09]));zoom=.19;rotated.splice(0,3,.7,.35,1);
+    }
     const img = await render(ps, dirIn(station, rotated), zoom, target);
     fs.writeFileSync(`${out}/${id}-${name}.png`, img);
     const rows = manifest[ref] ?? [],
@@ -590,11 +621,15 @@ for (const [id, ref, station] of heroes) {
                           ? 1
                           : 2
                       : k,
-      row = rows[Math.min(refIndex, rows.length - 1)];
+      row = rows[Math.min(residual && ref === "fig" ? name === "detail" ? 1 : 0 : residual && ref === "moss" ? name === "detail" ? 1 : 0 : refIndex, rows.length - 1)];
     if (row) {
       const reference = sharp(`scripts/geo/flower-and-seed/refs/${row.file}`);
       if(id === "fig-cut" && name === "detail" && row.detailCrop) reference.extract(row.detailCrop);
       else if (row.crop) reference.extract(row.crop);
+      if (residual && ref === "bat" && name === "detail") {
+        const info=await sharp(`scripts/geo/flower-and-seed/refs/${row.file}`).metadata();
+        if(row.file === "bat-0.jpg") reference.extract({left:Math.round(info.width!*.40),top:Math.round(info.height!*.60),width:Math.round(info.width!*.20),height:Math.round(info.height!*.26)});
+      }
       const right = await reference
         .resize(W, H, { fit: "contain", background: "#e9e4d8" })
         .png()
@@ -645,7 +680,7 @@ for (const [id, ref, station] of heroes) {
  * Perspective-varying attributes above are interpolated with reciprocal W.
  */
 const beatEvidence: unknown[] = [];
-if (round4) {
+if (round4 && process.env.SKIP_BEATS !== "1") {
   const chapterPath = "src/content/topics/flower-and-seed/chapters/03-who-carries-pollen.mdx";
   const chapter = JSON.parse(fs.readFileSync(chapterPath, "utf8").split("---")[1]!);
   const viewport = { width: 1520, height: 1023 };
@@ -728,7 +763,7 @@ fs.writeFileSync(
       views: ["front", "three-quarter", "profile", "detail", "cinema", "cinema-detail"],
       beatViews: beatEvidence,
       normalMapsEnabled: !process.env.NO_NORMAL,
-      referenceManifestSha256: hash(fs.readFileSync("scripts/geo/flower-and-seed/evidence/reference-manifest.json")),
+      referenceManifestSha256: hash(fs.readFileSync(residual ? "scripts/geo/flower-and-seed/residual-references.json" : "scripts/geo/flower-and-seed/evidence/reference-manifest.json")),
       material: file.parts.find(p=>p.id==="nectar-bat")?.material,
       renderer:
         "CPU GGX / sampled RoomEnvironment / engine studio rig / actual family roughness and environment intensity / Three ACES; GPU pending",

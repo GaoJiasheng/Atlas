@@ -7086,22 +7086,6 @@
      "tint": "#d3b58b"
     },
     {
-     "kind": "bevelBox",
-     "size": [
-      0.05,
-      0.03,
-      0.05
-     ],
-     "bevel": 0.004,
-     "at": [
-      0.7312675,
-      0.015,
-      -0.3264167
-     ],
-     "color": "wood",
-     "tint": "#d3b58b"
-    },
-    {
      "kind": "lathe",
      "profile": [
       [

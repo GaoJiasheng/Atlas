@@ -328,7 +328,7 @@ function redFlowerPerch(a: V3, b: V3) {
 }
 
 const DUR_AT: V3 = [0.08, 0, -0.07];
-holder(at(VISIT, add3(DUR_AT, [0.14, 0, -0.02])));
+// The bark-covered cut branch meets the table directly; no display block.
 add("durian-flowers", "visitors", place(VISIT, M.durianFlowers(), DUR_AT, 0));
 // The bat hovers at the left of the flowers in side view, wings up, its muzzle at the first flower.
 const durianCalyx = (i: number): V3 => {

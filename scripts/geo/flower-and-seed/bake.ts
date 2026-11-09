@@ -416,8 +416,8 @@ export async function bake(data: any) {
     };
     simplifyPrimitive(p, {
       simplifier,
-      ratio: mesh.getName() === "durian-flowers" ? .30 : mesh.getName() === "coconut" ? .29 : mesh.getName() === "moss-cushion" ? .24 : mesh.getName() === "fern-fronds" ? .30 : mesh.getName() === "fig-cut" ? .30 : .38,
-      error: mesh.getName() === "coconut" ? .0009 : mesh.getName() === "nectar-bat" ? 0.0006 : 0.0012,
+      ratio: mesh.getName() === "durian-flowers" ? .30 : mesh.getName() === "coconut" ? .29 : mesh.getName() === "moss-cushion" ? .24 : mesh.getName() === "fern-fronds" ? .30 : mesh.getName() === "fig-cut" ? .22 : .38,
+      error: mesh.getName() === "fig-cut" ? .0035 : mesh.getName() === "coconut" ? .0009 : mesh.getName() === "nectar-bat" ? 0.0006 : 0.0012,
       lockBorder: true,
     });
   }

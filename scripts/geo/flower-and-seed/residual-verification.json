@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-09",
+  "assetSha256": "84ce8dd0e8e1092315b4eff46b5536cf63b75b10c784c3d0486cc6de3b541724",
+  "bytesBefore": 1498568,
+  "bytesAfter": 1497588,
+  "trianglesBefore": 260025,
+  "trianglesAfter": 264293,
+  "estimatedCallsBefore": 71,
+  "estimatedCallsAfter": 71,
+  "hashVerification": {
+    "asset": true,
+    "lighting": true,
+    "references": true,
+    "renderer": true
+  },
+  "decodedAudit": {
+    "untouchedMeshesIdentical": 29,
+    "batMaterialAndEmbeddedFinishIdentical": true,
+    "partsUnchangedExceptDurianHolder": true
+  },
+  "gates": {
+    "check": {
+      "passed": true,
+      "files": 1501,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 24
+    },
+    "validate": {
+      "passed": true,
+      "topics": 94,
+      "errors": 0,
+      "warnings": 0
+    },
+    "build": {
+      "passed": true,
+      "pages": 191
+    },
+    "topicTests": {
+      "passed": true,
+      "files": 2,
+      "tests": 32
+    },
+    "fullTests": {
+      "passed": false,
+      "passedFiles": 301,
+      "failedFiles": 5,
+      "passedTests": 6753,
+      "failedTests": 5,
+      "skipped": 1
+    },
+    "unchangedFailureRerun": {
+      "passed": false,
+      "passedTests": 487,
+      "failedTests": 4,
+      "files": 5
+    }
+  },
+  "remainingFailures": [
+    "tests/coral-reef.test.ts:358 (20 s timeout)",
+    "tests/time-scene/science-catalogue-contract.test.ts:88 (147.17 ms p95, limit 100 ms)",
+    "tests/space-scene/lazy-sim-tools.test.ts:35, sample-orbit (30 s timeout)",
+    "tests/space-scene/living-things-toad-skin.test.ts:15 (20 s timeout)"
+  ],
+  "observedHostLoadAverage": 595.92,
+  "comparisonDirectory": "/private/tmp/flower-and-seed-residual/final",
+  "logsDirectory": "/private/tmp/flower-and-seed-residual",
+  "browserUsed": false,
+  "displayTextChanged": false,
+  "fullSuiteGate": "BLOCKED: reproducible timing failures outside the permitted edit scope; no clean full-suite pass claimed",
+  "claudeGpuFixes": {
+    "moss": "domed mat trimmed to footprint, 240 evenly spread five-leaf shoots, deeper varied greens",
+    "costus": "receptacle and bract backs at the bracts x0.58 shade; first six bracts skirt past the base"
+  }
+}
