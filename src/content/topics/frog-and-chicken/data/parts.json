@@ -30778,11 +30778,11 @@
       },
       "summary": {
         "en": "Marks the life cycle you choose",
-        "zh": "标出你选择的生活史"
+        "zh": "标出你选择的生命周期"
       },
       "detail": {
         "en": "The small bead marks the life cycle you choose. The control moves it between the four groups while the specimens stay in place. [S22]\n\nChoose another group to compare its sequence of growth and reproduction. [S15, S22]",
-        "zh": "小珠标出你选中的生活史。控件让它在四组标本之间移动，标本仍留在原处。[S22]\n\n选另一组，比较它的生长顺序和繁殖过程。[S15, S22]"
+        "zh": "小珠标出你选中的生命周期。控件让它在四组标本之间移动，标本仍留在原处。[S22]\n\n选另一组，比较它的生长顺序和繁殖过程。[S15, S22]"
       },
       "primitive": {
         "kind": "sweep",
@@ -31734,11 +31734,11 @@
       },
       "summary": {
         "en": "Holds four life cycles side by side",
-        "zh": "并排展示四种生活史"
+        "zh": "并排展示四种生命周期"
       },
       "detail": {
         "en": "Four groups show the life cycles of a frog, chicken, mosquito and flowering plant. Each has its own display sizes. Compare the order and shapes, rather than real size or development time. [S22]",
-        "zh": "四组标本展示青蛙、鸡、蚊子和开花植物的生活史，大小分别设定。可以比较顺序和形态，不能用它们比较实际大小或发育时间。[S22]"
+        "zh": "四组标本展示青蛙、鸡、蚊子和开花植物的生命周期，大小分别设定。可以比较顺序和形态，不能用它们比较实际大小或发育时间。[S22]"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -31782,7 +31782,7 @@
       "id": "comparison",
       "name": {
         "en": "Life-cycle comparison",
-        "zh": "生活史比较"
+        "zh": "生命周期比较"
       },
       "color": "token:cold"
     }
@@ -32011,7 +32011,7 @@
       "id": "comparison-view",
       "label": {
         "en": "Compare life cycles",
-        "zh": "比较生活史"
+        "zh": "比较生命周期"
       },
       "camera": {
         "position": [
@@ -32196,7 +32196,7 @@
         "default": "frog",
         "label": {
           "en": "Choose a life cycle",
-          "zh": "选择生活史"
+          "zh": "选择生命周期"
         },
         "options": [
           {
@@ -32342,7 +32342,7 @@
         "kind": "state",
         "label": {
           "en": "Selected cycle",
-          "zh": "选中的生活史"
+          "zh": "选中的生命周期"
         },
         "states": {
           "frog": {

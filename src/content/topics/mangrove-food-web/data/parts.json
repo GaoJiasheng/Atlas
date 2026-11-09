@@ -10178,7 +10178,7 @@
       },
       "summary": {
         "en": "Marks a place to observe the habitat.",
-        "zh": "标示观察生境的位置。"
+        "zh": "标示观察栖息地的位置。"
       },
       "detail": {
         "en": "The boardwalk edge suggests observing without collecting animals. It is part of the display setting. [S30]",
@@ -10219,11 +10219,11 @@
       },
       "summary": {
         "en": "Supports the habitat and enlarged close-ups.",
-        "zh": "承托生境和放大近景。"
+        "zh": "承托栖息地和放大近景。"
       },
       "detail": {
         "en": "This display stand supports the habitat and the separate enlarged diagrams. [S30]",
-        "zh": "展示台承托生境和旁边独立的放大示意图。[S30]"
+        "zh": "展示台承托栖息地和旁边独立的放大示意图。[S30]"
       },
       "primitive": {
         "kind": "box",
@@ -10337,7 +10337,7 @@
       "id": "habitat",
       "name": {
         "en": "Habitat",
-        "zh": "生境"
+        "zh": "栖息地"
       },
       "color": "token:neutral"
     },
@@ -10450,7 +10450,7 @@
       "id": "hero",
       "label": {
         "en": "Whole habitat",
-        "zh": "生境全景"
+        "zh": "栖息地全景"
       },
       "camera": {
         "position": [
@@ -10470,7 +10470,7 @@
       "id": "habitat-view",
       "label": {
         "en": "Habitat",
-        "zh": "生境"
+        "zh": "栖息地"
       },
       "camera": {
         "position": [
@@ -10575,7 +10575,7 @@
       },
       "value": {
         "en": "Mangrove habitat",
-        "zh": "红树林生境"
+        "zh": "红树林栖息地"
       },
       "tag": "design"
     },

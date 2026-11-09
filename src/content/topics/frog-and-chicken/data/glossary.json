@@ -4,11 +4,11 @@
       "id": "life-cycle",
       "term": {
         "en": "Life cycle",
-        "zh": "生活史（生命周期）"
+        "zh": "生命周期"
       },
       "definition": {
         "en": "How living things develop and reproduce across generations. A life-cycle ring connects parents with their offspring.",
-        "zh": "生物发育、繁殖，并一代接一代的过程。生活史的环形图把亲代和后代连起来。"
+        "zh": "生物发育、繁殖，并一代接一代的过程。生命周期的环形图把亲代和后代连起来。"
       },
       "see": [
         "adult",
@@ -189,7 +189,7 @@
       },
       "definition": {
         "en": "The stage between larva and adult in a mosquito's life cycle. Frogs and chickens have no pupa stage.",
-        "zh": "蚊子的生活史中，幼虫与成虫之间的阶段。青蛙和鸡没有蛹期。"
+        "zh": "蚊子的生命周期中，幼虫与成虫之间的阶段。青蛙和鸡没有蛹期。"
       },
       "see": [
         "metamorphosis",

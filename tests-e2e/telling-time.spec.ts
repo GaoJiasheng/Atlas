@@ -50,7 +50,7 @@ test.describe('telling time (MathScene clock and timeline)', () => {
     await page.keyboard.press('.');
     await expect.poll(async () => (await state(page)).beat).toBe(2);
     await expect(page.locator('.ms-svg .ms-clock__lens')).toHaveCount(1);
-    await expect(page.locator('.ms-equation')).toHaveText('3.45');
+    await expect(page.locator('.ms-equation')).toHaveText('3:45');
     // No school level anywhere on the page.
     await expect(page.locator('body')).not.toContainText(/\bP[1-6]\b|Primary [1-6]|Bridge/);
   });
@@ -143,7 +143,7 @@ test.describe('telling time (MathScene clock and timeline)', () => {
     await open(page, '/en/topics/telling-time/?ch=how-long');
     await force(page, 'how-long', 1);
     await expect.poll(async () => (await info(page)).id).toBe('hl-library-visit');
-    // 8.50 am → 10.15 am: +10 min to the hour, +1 h, then +5 min three times.
+    // 8:50 am → 10:15 am: +10 min to the hour, +1 h, then +5 min three times.
     await tray(page).getByRole('button', { name: 'Jump on 10 min' }).click();
     await tray(page).getByRole('button', { name: 'Jump on 1 h' }).click();
     for (let i = 0; i < 4; i++) await tray(page).getByRole('button', { name: 'Jump on 5 min' }).click();
@@ -185,7 +185,7 @@ test.describe('telling time (MathScene clock and timeline)', () => {
   test('zh: the beat line, the card and the check speak Chinese', async ({ page }) => {
     await open(page, '/zh/topics/telling-time/?ch=twenty-four-hour-clock&b=3');
     await expect(page.locator('.ms-beatline')).toContainText('小时数加 12');
-    await expect(page.locator('.ms-equation')).toHaveText('3.15 pm = 1515');
+    await expect(page.locator('.ms-equation')).toHaveText('3:15 pm = 15 15');
     await page.locator('.atlas-axis__tick[data-beat="twenty-four-hour-clock.5"]').click();
     await expect(tray(page)).toBeVisible();
     await expect(tray(page).locator('[data-another]')).toHaveText('再来一道');

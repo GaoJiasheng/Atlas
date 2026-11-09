@@ -5956,7 +5956,7 @@
       },
       "detail": {
         "en": "Reefs provide habitat and shelter for many organisms. Crevices and cavities contribute physical spaces within that habitat. [S2, S4]\n\nThe selectable inner rim marks an original small shelter opening. This is neither a mapped cave nor an observation of an animal occupying a named Singapore site. [S50]",
-        "zh": "珊瑚礁为许多生物提供生境和庇护，缝隙与洞穴构成其中的空间。[S2, S4]\n\n可选中的内缘标出原创的小型庇护开口；它不是测绘洞穴，也不表示在新加坡某地点观察到某种动物居住。[S50]"
+        "zh": "珊瑚礁为许多生物提供栖息地和庇护，缝隙与洞穴构成其中的空间。[S2, S4]\n\n可选中的内缘标出原创的小型庇护开口；它不是测绘洞穴，也不表示在新加坡某地点观察到某种动物居住。[S50]"
       },
       "castShadow": false,
       "clip": false,
@@ -6742,7 +6742,7 @@
       },
       "value": {
         "en": "Schematic habitat",
-        "zh": "生境示意"
+        "zh": "栖息地示意"
       },
       "tag": "design"
     },

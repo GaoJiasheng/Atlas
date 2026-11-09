@@ -110,7 +110,7 @@
     },
     {
       "id": "regroup",
-      "term": { "en": "regroup (also called trading)", "zh": "换（满十进一、退一作十）" },
+      "term": { "en": "regroup (also called renaming)", "zh": "换（满十进一、退一作十）" },
       "definition": {
         "en": "Trading 10 of one place for 1 of the place to its left, or 1 for 10 of the place to its right. 13 hundredths is 1 tenth and 3 hundredths; the number stays the same.",
         "zh": "把 10 个某一位的单位换成左边一位的 1 个，或者把 1 个换成右边一位的 10 个。13 个百分之一就是 1 个十分之一和 3 个百分之一，大小不变。"
