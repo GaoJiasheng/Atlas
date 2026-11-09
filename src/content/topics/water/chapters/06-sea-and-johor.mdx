@@ -13,11 +13,13 @@ state:
   summary: { en: "Seawater is turned into fresh water with membranes, and water is also bought from Johor under a 1962 agreement.", zh: "海水用膜变成淡水；另有按 1962 年协议从柔佛购买的水。" }
   beats:
     - labels: [sea, desal-intake]
+      hide: ["rain-cloud", "cumulus"]
       caption: { en: "A desalination plant draws seawater through an intake out at sea. The grey dots are seawater travelling along the sea floor to the plant.", zh: "海水淡化厂通过伸到海里的取水口取海水。灰色的点是沿着海床流向厂里的海水。" }
     - labels: [desal-pretreat, desal-ro]
       camera: { position: [-0.55, 0.75, -0.05], target: [-1.25, 0.02, -0.78], fov: 30 }
       caption: { en: "Basins remove sand and algae first. Then pumps push the seawater through reverse osmosis membranes that hold back the salt, and the dots turn steel blue.", zh: "先在池里去掉泥沙和藻类，再由水泵把海水压过反渗透膜，盐被挡在外面，点就变成钢蓝色。" }
     - labels: [brine-outfall, desal-ro, sea]
+      hide: ["rain-cloud", "cumulus"]
       caption: { en: "The fresh water joins the supply mains. The leftover water, now saltier, goes back to the sea through an outfall pipe.", zh: "淡水接进供水干管。剩下变得更咸的水，经排放管回到海里。" }
     - layers: [sky-and-sea, desal, imported, supply, catchment]
       labels: [johor-main, waterworks-mixing]

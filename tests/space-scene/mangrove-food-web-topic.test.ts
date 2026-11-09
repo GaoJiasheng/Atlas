@@ -102,7 +102,7 @@ describe('mangrove-food-web: sourced finite table', () => {
     const chapter=chapters.find(c=>c.id==='changing-tides')!;
     const beats=chapter.state.beats.filter((b:{labels?:string[];sim?:{set?:{tide?:string}}})=>b.sim?.set?.tide==='high'&&b.labels?.includes('burrow-mouth'));
     expect(beats).toHaveLength(2);
-    for(const beat of beats)expect(beat.view??chapter.state.view).toBe('xray');
+    for(const beat of beats)expect(beat.view??chapter.state.view).toBe('assembled');
   });
   it('has separate connected root systems, paired fish eyes and anatomically complete crab appendages', () => {
     const by = (id: string) => file.parts.find((p) => p.id === id)!;

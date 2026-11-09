@@ -54,7 +54,7 @@ describe('mangrove realism and geometry budget',()=>{
    const trunk=by(id.replace('-tree','-trunk'));
    expect(p.material).toEqual({color:'tissue',tint:'token:seedling'});
    expect(trunk.context).toBe(true);
-   expect(trunk.material).toEqual({color:'wood',tint:'token:neutral'});
+   expect(trunk.material).toEqual({color:'wood',tint:'token:mat-bark'});
   }
  });
  it('has 72 varied pneumatophores with each foot attached to a wandering cable',()=>{

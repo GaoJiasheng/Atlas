@@ -107,7 +107,7 @@ const cameras=[
  ['animal-oblique','Animal depth','动物细胞厚度',[.32,.22,.27],[.1,.1,0]],
  ['plant-close','Plant cell','植物细胞',[-.1,.22,.4],[-.1,.12,0]],
  ['scope-whole','Microscope','显微镜',[.62,.4,.65],[.2,.18,0]],
- ['scope-stage-close','Stage detail','载物台近景',[.42,.26,.32],[.18,.17,0]],
+ ['scope-stage-close','Stage detail','载物台近景',[.5,.31,.4],[.18,.195,0]],
 ];
 const camera = row => ({position:row[3],target:row[4],fov:30});
 const poses={};
@@ -149,6 +149,7 @@ if(process.argv[1]===fileURLToPath(import.meta.url)) {
  const textOnly=process.argv.includes('--text-only');
  const file=await buildCellsParts({textOnly});
  if(textOnly){await new Promise(done => process.stdout.write(JSON.stringify(file)+'\n', () => done()));process.exit(0);}
+ for(const [id,tint] of [['leaf-context','token:mat-leaf'],['body-context','token:mat-skin'],['tissue-patch','token:mat-tissue']])for(const q of [parts.find(p=>p.id===id).primitive,...(parts.find(p=>p.id===id).extra??[])])q.tint=tint;
  writeFileSync(output,JSON.stringify(file,null,2)+'\n');
  process.stdout.write(`Generated ${parts.length} selectable cells parts.\n`);
 }

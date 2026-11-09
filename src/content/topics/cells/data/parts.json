@@ -33645,7 +33645,8 @@
           -0.03
         ],
         "color": "tissue",
-        "bevel": 0
+        "bevel": 0,
+        "tint": "token:mat-leaf"
       },
       "castShadow": false,
       "extra": [
@@ -33669,7 +33670,8 @@
             0.2,
             -0.0285
           ],
-          "color": "tissue"
+          "color": "tissue",
+          "tint": "token:mat-leaf"
         }
       ]
     },
@@ -33763,7 +33765,7 @@
           0.03
         ],
         "color": "tissue",
-        "tint": "token:neutral",
+        "tint": "token:mat-tissue",
         "bevel": 0,
         "holes": [
           [
@@ -34006,7 +34008,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         },
         {
           "kind": "extrude",
@@ -34083,7 +34085,7 @@
             0.03
           ],
           "color": "tissue",
-          "tint": "token:neutral",
+          "tint": "token:mat-tissue",
           "bevel": 0,
           "holes": [
             [
@@ -34324,7 +34326,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         },
         {
           "kind": "extrude",
@@ -34401,7 +34403,7 @@
             0.03
           ],
           "color": "tissue",
-          "tint": "token:neutral",
+          "tint": "token:mat-tissue",
           "bevel": 0,
           "holes": [
             [
@@ -34642,7 +34644,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         },
         {
           "kind": "extrude",
@@ -34719,7 +34721,7 @@
             0.03
           ],
           "color": "tissue",
-          "tint": "token:neutral",
+          "tint": "token:mat-tissue",
           "bevel": 0,
           "holes": [
             [
@@ -34960,7 +34962,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         },
         {
           "kind": "extrude",
@@ -35037,7 +35039,7 @@
             0.03
           ],
           "color": "tissue",
-          "tint": "token:neutral",
+          "tint": "token:mat-tissue",
           "bevel": 0,
           "holes": [
             [
@@ -35278,7 +35280,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         },
         {
           "kind": "extrude",
@@ -35355,7 +35357,7 @@
             0.03
           ],
           "color": "tissue",
-          "tint": "token:neutral",
+          "tint": "token:mat-tissue",
           "bevel": 0,
           "holes": [
             [
@@ -35596,7 +35598,7 @@
             0.0327
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-tissue"
         }
       ]
     },
@@ -35794,7 +35796,8 @@
           -0.05
         ],
         "color": "membrane",
-        "bevel": 0
+        "bevel": 0,
+        "tint": "token:mat-skin"
       },
       "castShadow": false
     }
@@ -35953,13 +35956,13 @@
       },
       "camera": {
         "position": [
-          0.42,
-          0.26,
-          0.32
+          0.5,
+          0.31,
+          0.4
         ],
         "target": [
           0.18,
-          0.17,
+          0.195,
           0
         ],
         "fov": 30

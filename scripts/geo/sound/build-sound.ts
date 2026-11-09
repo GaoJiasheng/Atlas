@@ -152,5 +152,6 @@ const bend=(r:number,from:number,to:number):P[]=>Array.from({length:33},(_,i)=>{
 part('fork').primitive.shape=[[-.2,.62],...bend(.2,1,2),[.2,.62],[.12,.62],...bend(.12,2,1),[-.12,.62]];
 // Parse without serialising defaults into the authored data.
 partsFile.parse(data);
+for (const p of data.parts) for (const q of [p.primitive, ...(p.extra ?? [])]) if (q?.color === 'wood') q.tint = 'token:mat-wood-tan';
 writeFileSync(path,JSON.stringify(data,null,2)+'\n');
 console.log('Built sound: drum, loudspeaker, laboratory bench; preserved numbered parts and simulations.');

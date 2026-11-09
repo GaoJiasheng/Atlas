@@ -192,22 +192,22 @@ const HUMAN_FLOWS: FlowDef[] = [
     { at: 1, color: 'token:blood-poor' },
   ]),
   bloodFlow('from-body', 'blood-poor', 0.14, ['vessels-back', 'great-vessels', 'liver']),
-  { id: 'oxygen-lungs', group: 'gases', speed: 0.03, color: 'token:oxygen', count: 60, size: 0.22, spread: 0.0012, parts: ['lung-right', 'lung-left'] },
-  { id: 'co2-lungs', group: 'gases', speed: 0.03, color: 'token:carbon-dioxide', count: 40, size: 0.22, spread: 0.0012, parts: ['lung-right', 'lung-left'] },
-  { id: 'oxygen-muscle', group: 'gases', speed: 0.03, color: 'token:oxygen', count: 40, size: 0.22, spread: 0.0015 },
-  { id: 'co2-muscle', group: 'gases', speed: 0.03, color: 'token:carbon-dioxide', count: 30, size: 0.22, spread: 0.0015 },
+  { id: 'oxygen-lungs', group: 'gases', speed: 0.03, color: 'token:oxygen', flat: true, count: 60, size: 0.22, spread: 0.0012, parts: ['lung-right', 'lung-left'] },
+  { id: 'co2-lungs', group: 'gases', speed: 0.03, color: 'token:carbon-dioxide', flat: true, count: 40, size: 0.22, spread: 0.0012, parts: ['lung-right', 'lung-left'] },
+  { id: 'oxygen-muscle', group: 'gases', speed: 0.03, color: 'token:oxygen', flat: true, count: 40, size: 0.22, spread: 0.0015 },
+  { id: 'co2-muscle', group: 'gases', speed: 0.03, color: 'token:carbon-dioxide', flat: true, count: 30, size: 0.22, spread: 0.0015 },
   { id: 'food-in', group: 'digested-food', speed: 0.03, color: 'token:food', count: 60, size: 0.22, spread: 0.0012, parts: ['small-intestine', 'vessels-back'] },
   { id: 'food-route', group: 'digested-food', speed: 0.1, color: 'token:food', count: 120, size: 0.22, spread: 0.001, parts: ['small-intestine', 'vessels-back', 'liver', 'heart', 'lung-right', 'vessels-out', 'leg-muscles'] },
 ];
 
 const BENCH_FLOWS: (FlowDef & { paths: { id: string; path: V3[] }[] })[] = [
   { id: 'gill-water', group: 'fish-water', speed: 0.06, color: 'token:cold', count: 120, size: 0.07, spread: 0.0015, clip: false, parts: ['fish-body', 'gills', 'gill-cover'], paths: fishWaterPaths() },
-  { id: 'fish-o2', group: 'fish-water', speed: 0.012, color: 'token:oxygen', count: 24, size: 0.06, spread: 0.0006, clip: false, paths: fishGasPaths('in') },
-  { id: 'fish-co2', group: 'fish-water', speed: 0.012, color: 'token:carbon-dioxide', count: 16, size: 0.06, spread: 0.0006, clip: false, paths: fishGasPaths('out') },
+  { id: 'fish-o2', group: 'fish-water', speed: 0.012, color: 'token:oxygen', flat: true, count: 24, size: 0.06, spread: 0.0006, clip: false, paths: fishGasPaths('in') },
+  { id: 'fish-co2', group: 'fish-water', speed: 0.012, color: 'token:carbon-dioxide', flat: true, count: 16, size: 0.06, spread: 0.0006, clip: false, paths: fishGasPaths('out') },
   { id: 'plant-water', group: 'plant-flow', speed: 0.04, color: 'token:cold', count: 60, size: 0.07, spread: 0.0006, clip: false, paths: plantPaths('water') },
   { id: 'plant-food', group: 'plant-flow', speed: 0.03, color: 'token:food', count: 40, size: 0.07, spread: 0.0006, clip: false, paths: plantPaths('food') },
-  { id: 'plant-o2', group: 'plant-gases', speed: 0.02, color: 'token:oxygen', count: 24, size: 0.08, spread: 0.001, clip: false, paths: plantGasPaths('in') },
-  { id: 'plant-co2', group: 'plant-gases', speed: 0.02, color: 'token:carbon-dioxide', count: 18, size: 0.08, spread: 0.001, clip: false, paths: plantGasPaths('out') },
+  { id: 'plant-o2', group: 'plant-gases', speed: 0.02, color: 'token:oxygen', flat: true, count: 24, size: 0.08, spread: 0.001, clip: false, paths: plantGasPaths('in') },
+  { id: 'plant-co2', group: 'plant-gases', speed: 0.02, color: 'token:carbon-dioxide', flat: true, count: 18, size: 0.08, spread: 0.001, clip: false, paths: plantGasPaths('out') },
 ];
 
 const withPaths = (def: FlowDef, paths: { id: string; path: number[][] }[]) => {

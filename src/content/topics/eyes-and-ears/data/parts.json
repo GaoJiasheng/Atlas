@@ -535,7 +535,7 @@
           -90
         ],
         "color": "tissue",
-        "tint": "token:ink-2"
+        "tint": "token:mat-iris"
       },
       "castShadow": false,
       "connects": [
@@ -2112,7 +2112,7 @@
       "mesh": "malleus",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-warm"
       }
     },
     {
@@ -2146,7 +2146,7 @@
       "mesh": "incus",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-warm"
       }
     },
     {
@@ -2180,7 +2180,7 @@
       "mesh": "stapes",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-warm"
       }
     },
     {
@@ -3131,7 +3131,7 @@
         "segments": 180,
         "caps": "round",
         "color": "tissue",
-        "tint": "token:bone",
+        "tint": "token:mat-bone-warm",
         "hollow": 0.0064
       },
       "castShadow": false,
@@ -3197,7 +3197,7 @@
           ],
           "segments": 48,
           "color": "tissue",
-          "tint": "token:bone"
+          "tint": "token:mat-bone-warm"
         }
       ],
       "connects": [
@@ -4226,7 +4226,7 @@
         "segments": 80,
         "caps": "round",
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-warm"
       },
       "castShadow": false,
       "extra": [
@@ -4635,7 +4635,7 @@
           "segments": 80,
           "caps": "round",
           "color": "tissue",
-          "tint": "token:bone"
+          "tint": "token:mat-bone-warm"
         },
         {
           "kind": "sweep",
@@ -5042,7 +5042,7 @@
           "segments": 80,
           "caps": "round",
           "color": "tissue",
-          "tint": "token:bone"
+          "tint": "token:mat-bone-warm"
         },
         {
           "kind": "sweep",
@@ -5083,7 +5083,7 @@
           "segments": 32,
           "caps": "round",
           "color": "tissue",
-          "tint": "token:bone",
+          "tint": "token:mat-bone-warm",
           "section": {
             "flat": 0.85
           }
@@ -5615,7 +5615,7 @@
       "mesh": "iris-aperture-small",
       "material": {
         "color": "tissue",
-        "tint": "token:ink-2"
+        "tint": "token:mat-iris"
       }
     },
     {
@@ -5638,7 +5638,7 @@
       "mesh": "iris-aperture-large",
       "material": {
         "color": "tissue",
-        "tint": "token:ink-2"
+        "tint": "token:mat-iris"
       }
     }
   ],
@@ -6221,7 +6221,8 @@
           "zh": "耳部剖面"
         }
       }
-    }
+    },
+    "shadows": "none"
   },
   "presets": [
     {

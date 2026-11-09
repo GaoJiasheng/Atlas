@@ -248,7 +248,7 @@
       "mesh": "clavicle.l",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The collarbone: a strut from breastbone to shoulder.",
@@ -274,7 +274,7 @@
       "mesh": "scapula.l",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The shoulder blade: it slides and turns on the ribs.",
@@ -304,7 +304,7 @@
       "mesh": "humerus.l",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The upper-arm bone: pectoralis major pulls on it.",
@@ -330,7 +330,7 @@
       "mesh": "forearm.l",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The two forearm bones, shown to make the arm whole.",
@@ -360,7 +360,7 @@
       "mesh": "thorax",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The rib cage: most chest muscles start here.",
@@ -386,7 +386,7 @@
       "mesh": "thoracic-spine",
       "material": {
         "color": "tissue",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The twelve vertebrae the ribs hang from.",
@@ -587,7 +587,7 @@
       "mesh": "skin-outline",
       "material": {
         "color": "membrane",
-        "tint": "token:bone"
+        "tint": "token:mat-bone-pale"
       },
       "summary": {
         "en": "The skin surface of the whole body, for finding the muscles on yourself.",

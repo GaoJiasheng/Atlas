@@ -3218,7 +3218,8 @@
           2.46,
           0.12
         ],
-        "color": "wood"
+        "color": "wood",
+        "tint": "token:mat-wood-brown"
       }
     },
     {
@@ -3632,7 +3633,8 @@
           0,
           -1.436803043460745
         ],
-        "color": "wood"
+        "color": "wood",
+        "tint": "token:mat-wood-brown"
       },
       "extra": [
         {
@@ -10424,7 +10426,8 @@
             0,
             0
           ],
-          "color": "rubber"
+          "color": "rubber",
+          "tint": "token:mat-belt"
         },
         {
           "kind": "cone",
@@ -11787,7 +11790,8 @@
           2.6,
           -0.65
         ],
-        "color": "wood"
+        "color": "wood",
+        "tint": "token:mat-wood-brown"
       },
       "explode": {
         "dir": [
@@ -12065,7 +12069,8 @@
           3.5,
           0
         ],
-        "color": "wood"
+        "color": "wood",
+        "tint": "token:mat-wood-brown"
       },
       "extra": [
         {
@@ -13357,7 +13362,8 @@
           0,
           -9.65740412190554
         ],
-        "color": "wood"
+        "color": "wood",
+        "tint": "token:mat-wood-brown"
       },
       "extra": [
         {
@@ -13378,7 +13384,8 @@
             0,
             9.65740412190554
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13393,7 +13400,8 @@
             1.7,
             -0.36
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13408,7 +13416,8 @@
             0.1,
             -0.36
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13428,7 +13437,8 @@
             0,
             -9.65740412190554
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13448,7 +13458,8 @@
             0,
             9.65740412190554
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13463,7 +13474,8 @@
             1.7,
             0.45
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13478,7 +13490,8 @@
             0.1,
             0.45
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13493,7 +13506,8 @@
             4.88,
             0
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13612,7 +13626,8 @@
             1.175,
             -1.08
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13679,7 +13694,8 @@
             2.3,
             -0.45
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13694,7 +13710,8 @@
             4.7,
             -0.45
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "cylinder",
@@ -13728,7 +13745,8 @@
             1,
             0.7
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "bevelBox",
@@ -13743,7 +13761,8 @@
             2,
             0.7
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         }
       ]
     },
@@ -14003,7 +14022,8 @@
             3.26,
             0
           ],
-          "color": "wood"
+          "color": "wood",
+          "tint": "token:mat-wood-brown"
         },
         {
           "kind": "lathe",

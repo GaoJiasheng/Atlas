@@ -109,5 +109,6 @@ setShape('comparison-support',{kind:'extrude',shape:[[-2.25,-.8],[2.25,-.8],[2.2
 
 // Keep authored ids, numbering, labels, controls, facts and mechanism drivers.
 for(const p of parts)for(const primitive of [p.primitive,...(p.extra??[])])if(primitive.color==='ceramic')primitive.color='matte';
+for(const p of parts)for(const q of [p.primitive,...(p.extra??[])]){if(q?.color==='wood')q.tint='token:mat-wood-brown';if(q?.color==='rubber')q.tint='token:mat-belt';}
 partsFile.parse(data);
 writeFileSync(new URL('../../../src/content/topics/steam-engine/data/parts.json',import.meta.url),JSON.stringify(data,null,2)+'\n');

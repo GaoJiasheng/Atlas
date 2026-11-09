@@ -13,10 +13,10 @@ import { add, blade, box, ellipsoid, r3, sweep, wing, type Prim, type V3 } from 
 
 const bi = (en: string, zh: string) => ({ en, zh });
 const ink = 'token:ink-2';
-const bark = { color: 'wood', tint: 'token:neutral' };
+const bark = { color: 'wood', tint: 'token:mat-bark' };
 const foliage = { color: 'tissue', tint: 'token:seedling' };
-const hard = { color: 'chitin', tint: 'token:neutral' };
-const fish = { color: 'tissue', tint: 'token:ink-3' };
+const hard = { color: 'chitin', tint: 'token:mat-shell' };
+const fish = { color: 'tissue', tint: 'token:mat-fish' };
 const line = (path: V3[], radius: number | number[], material = bark): Prim => sweep(path, radius, material.color, { tint: material.tint, radial: 10, segments: 14, caps: 'flat' });
 const oval = (at: V3, radius: number, scale: V3, material = hard): Prim => ellipsoid(at, radius, scale, material.color, { tint: material.tint, segments: 28, profile: Array.from({length:13},(_,i)=>[i===0||i===12?0:radius*Math.sin(i*Math.PI/12),-radius*Math.cos(i*Math.PI/12)]) });
 const camera = (position: V3, target: V3, fov = 32) => ({ position, target, fov });
@@ -79,8 +79,8 @@ function crab(at: V3, male: boolean, vertical = false) {
  * two tibia/ankle/tarsus chains and three forward toes plus a hallux per foot.
  */
 function heronModel() {
-  const plumage={color:'feathers',tint:'token:ink-3'};
-  const wingMaterial={color:'feathers',tint:'token:ink-2'};
+  const plumage={color:'feathers',tint:'token:mat-plumage'};
+  const wingMaterial={color:'feathers',tint:'token:mat-wing'};
   const extra: Prim[]=[
     line([[.59,.32,-.02],[.612,.367,-.02],[.577,.410,-.02],[.552,.469,-.02],[.608,.516,-.02],[.661,.483,-.02]],[.023,.018,.012,.011,.015,.017],plumage),
     oval([.679,.482,-.02],.027,[1.43,.78,.82],plumage),
@@ -160,7 +160,7 @@ function burrowLip():Prim {
     path.push([+(r*Math.cos(a)).toFixed(5),+(.0012*Math.sin(t*Math.PI)).toFixed(5),+(r*Math.sin(a)-.025).toFixed(5)]);
     radius.push(+((.0026+.0042*Math.sin(t*Math.PI))*(1+.18*Math.sin(i*1.7))).toFixed(5));
   }
-  return {kind:'sweep',at:[-.26,.0050,.145],path,radius,section:{flat:.45},radial:16,segments:40,caps:'flat',color:'abrasive',tint:'token:neutral'} as Prim;
+  return {kind:'sweep',at:[-.26,.0050,.145],path,radius,section:{flat:.45},radial:16,segments:40,caps:'flat',color:'abrasive',tint:'token:mat-mud'} as Prim;
 }
 
 /** Enlarged partial head section, facing right like the main mudskipper.
@@ -199,7 +199,7 @@ export function buildParts() {
     if (summary.en.length > 60 || summary.zh.length > 60) throw new Error(`${id}: long summary`);
     parts.push({id,name,...(group ? {group} : {}),summary,detail,...geometry,explode:{dir:[0,1,0],dist:0},clip:false,castShadow:false,...options});
   };
-  addPart('mud-bank',bi('Mud bank','泥岸'),'habitat',bi("Supports roots beside the tidal channel.","承托潮沟旁的树根。"),bi("The mudbank supports the roots, with a lower channel along its front. Rising tide covers more of its surface. [S27, S30]","泥岸承托树根，前缘有较低的潮沟。潮水升高时，会盖住更多泥面。[S27, S30]"),{primitive:{kind:'extrude',shape:[[-.8,-.5],[.8,-.5],...shore],depth:.24,bevel:.008,at:[0,-.12,0],rotation:[90,0,0],color:'abrasive',tint:'token:neutral'},extra:[box([0,-.21,.35],[1.6,.06,.3],'abrasive',{tint:'token:neutral'})]},{shell:true,clip:true,castShadow:true});
+  addPart('mud-bank',bi('Mud bank','泥岸'),'habitat',bi("Supports roots beside the tidal channel.","承托潮沟旁的树根。"),bi("The mudbank supports the roots, with a lower channel along its front. Rising tide covers more of its surface. [S27, S30]","泥岸承托树根，前缘有较低的潮沟。潮水升高时，会盖住更多泥面。[S27, S30]"),{primitive:{kind:'extrude',shape:[[-.8,-.5],[.8,-.5],...shore],depth:.24,bevel:.008,at:[0,-.12,0],rotation:[90,0,0],color:'abrasive',tint:'token:mat-mud'},extra:[box([0,-.21,.35],[1.6,.06,.3],'abrasive',{tint:'token:mat-mud'})]},{shell:true,clip:true,castShadow:true});
   addPart('tidal-water',bi('Tidal water','潮水'),'habitat',bi("Covers and exposes mud as the tide changes.","随潮水涨退，覆盖或露出泥面。"),bi("Tides change conditions around the mudbank. Switch between low and high water to compare the exposed mud. Both views keep the same food links. [S27, S30]","潮水涨退会改变泥岸周围的条件。切换低水位和高水位，比较露出的泥面。两种画面保留相同的食物关系。[S27, S30]"),{primitive:box([0,-.04,0],[1.58,.008,.99],'glass',{tint:'token:cold'})});
   addPart('burrow-mouth',bi('Burrow opening','洞口'),'habitat',bi("Provides a hiding place for fiddler crabs.","为招潮蟹提供藏身处。"),bi("Fiddler crabs retreat into burrows at high tide. The crab can be hidden while its burrow opening remains visible. [S5]\n\nOnly the opening is shown here. [S30]","高潮时，招潮蟹会退入洞中。蟹藏起来时，画面仍保留洞口。[S5]\n\n这里只显示洞口。[S30]"),{primitive:burrowLip(),extra:[{kind:'sweep',at:[-.26,.008,.12],path:[[0,0,0],[0,-.04,0]],radius:.026,hollow:.007,radial:48,segments:8,color:'abrasive',tint:'token:ink-2'}]});
   addPart('api-tree',bi('Api-api Putih tree','Api-api Putih 红树'),'mangroves',bi("Makes food and releases salt through its leaves.","制造食物，并通过叶片排盐。"),bi("Api-api Putih (Avicennia alba) has salt glands in its leaves. These help it excrete salt. Different mangrove kinds handle salt in different ways. [S3]\n\nShallow side roots join its upright, pencil-shaped breathing roots. [S2, S3]","Api-api Putih（Avicennia alba）的叶片有盐腺，帮助它排出盐分。不同红树处理盐的方式不同。[S3]\n\n浅层侧根与直立的铅笔状呼吸根相连。[S2, S3]"),{mesh:'api-tree',material:foliage},{connects:['api-lateral'],castShadow:true});
@@ -209,7 +209,7 @@ export function buildParts() {
   addPart('bakau-tree',bi('Bakau Minyak tree','Bakau Minyak 红树'),'mangroves',bi("Makes food and supplies leaves.","制造食物并供应叶片。"),bi("Bakau Minyak has prop roots reaching down from its trunk. Mangrove trees provide shelter and leaves that can become food. [S2, S6, S8]\n\nIts food-web node supplies new leaf material. Removing it leaves old fallen leaves in the scene. [S30]","Bakau Minyak 的支柱根从树干向下伸出。红树提供庇护，叶片也能成为食物。[S2, S6, S8]\n\n它的食物网节点供应新的叶片物质。移走节点后，画面仍保留旧落叶。[S30]"),{mesh:'bakau-tree',material:foliage},{connects:['bakau-prop'],castShadow:true});
   addPart('bakau-prop',bi('Prop roots','支柱根'),'mangroves',bi("Anchors the tree and shelters young animals.","固定树体，并庇护幼小动物。"),bi("Bakau prop roots reach from the trunk towards the mud and anchor the tree. Spaces between the roots shelter young animals. [S2]\n\nCompare them with the pencil-shaped roots of the neighbouring Api-api. [S30]","Bakau 的支柱根从树干伸向泥地，固定树体。根之间的空隙能庇护幼小动物。[S2]\n\n可以与旁边 Api-api 的铅笔状根比较。[S30]"),{mesh:'bakau-prop',material:bark},{connects:['bakau-tree']});
   const fallen = [[-.13,.008,.11],[-.075,.009,.08],[-.16,.012,.06]] as V3[];
-  const deadLeaves=fallen.map((p,i)=>({...ellipticLeaf(p,.10,.04,[0,i%2?-28:28,0]),tint:'token:neutral'}));
+  const deadLeaves=fallen.map((p,i)=>({...ellipticLeaf(p,.10,.04,[0,i%2?-28:28,0]),tint:'token:mat-leaf-litter'}));
   addPart('fallen-leaves',bi('Fallen leaf material','落叶物质'),'mangroves',bi("Provides food after leaves fall.","叶片掉落后仍能提供食物。"),bi("Some mangrove crabs eat fallen leaves and break them into smaller pieces. Dead leaves still contain food energy. [S6, S24]\n\nOld leaves remain when you remove the continuing leaf supply. The calculation leaves out their decay rate. [S30]","有些红树林蟹吃落叶，把叶弄成较小的碎片。死叶仍含有食物中的能量。[S6, S24]\n\n移走持续的叶片供应后，旧落叶仍会保留。计算没有包括它们的分解速率。[S30]"),{primitive:deadLeaves[0]!,extra:deadLeaves.slice(1)});
   addPart('algae-patch',bi('Surface algae','泥面藻类'),'closeups',bi('Makes food using sunlight.','利用阳光制造食物。'),bi("Algae use sunlight to make food. Some fiddler crabs and climbing crabs eat algae, as recorded in different observations. [S7, S18, S24]\n\nThe patch represents algae on the mud surface. [S30]","藻类利用阳光制造食物。不同观察记录到，一些招潮蟹和攀爬蟹类会吃藻类。[S7, S18, S24]\n\n这个斑块代表泥面上的藻类。[S30]"),{primitive:oval([.055,.008,.13],.08,[1.5,.04,.65],foliage)});
   addPart('fiddler-crabs',bi('Fiddler crabs','招潮蟹'),'animals',bi("Feeds with a small claw; the male displays a large claw.","用小螯取食；雄蟹用大螯展示。"),bi("A male fiddler crab has one enlarged claw and a smaller feeding claw. It also has eye stalks and four pairs of walking legs. [S5, S32]\n\nAt high tide, it hides in its burrow. The single crab shape represents the group. [S5, S30]","雄招潮蟹有一只大螯和一只取食小螯，还有眼柄和四对步足。[S5, S32]\n\n高潮时，它藏进洞里。图中用一只蟹代表这一组生物。[S5, S30]"),crab([-.10,0,.13],true));

@@ -151,6 +151,31 @@
   --muscle-3: #8f6a62;
   --bone: #e0d6bf;
   --fossil: #6e5a44; /* Mineralised museum bone / fossil casts. */
+  /* Physical materials (rock, wood, bark, shell, tissue): one real-world colour, the same on both plates. */
+  --mat-rock-dark: #6b6153;
+  --mat-rock: #8b7f6e;
+  --mat-rock-pale: #e4dcc8;
+  --mat-crust: #9a7350;
+  --mat-mantle: #b4552d;
+  --mat-outer-core: #e39a35;
+  --mat-inner-core: #f1d27a;
+  --mat-shell: #7f6a55;
+  --mat-fish: #7b6f5e;
+  --mat-bark: #6f5a45;
+  --mat-plumage: #8f9499;
+  --mat-wing: #6c7177;
+  --mat-mud: #6a5b4b;
+  --mat-leaf-litter: #9a7a3f;
+  --mat-wood-brown: #7a5636;
+  --mat-wood-tan: #8a5a34;
+  --mat-belt: #8a6a48;
+  --mat-leaf: #5f8f4a;
+  --mat-skin: #b98f76;
+  --mat-tissue: #b98a78;
+  --mat-bone-warm: #c8b58c;
+  --mat-iris: #5b4a3a;
+  --mat-bone-tan: #c2ae85;
+  --mat-bone-pale: #c9b78f;
   /* Exercise mode (docs/06 动作模式数据手册): the solid figure under the muscles, warm light grey. */
   --mannequin: #bfb8ac;
   /* Many-state maps (docs/06 TimeScene 按国配色): eight muted hues, distinct for colour-blind readers by hue and lightness. */
@@ -285,6 +310,30 @@
   --muscle-3: #70443f;
   --bone: #cfc5af;
   --fossil: #97816a; /* Warm brown lifted for the dark plate. */
+  --mat-rock-dark: #6b6153;
+  --mat-rock: #8b7f6e;
+  --mat-rock-pale: #e4dcc8;
+  --mat-crust: #9a7350;
+  --mat-mantle: #b4552d;
+  --mat-outer-core: #e39a35;
+  --mat-inner-core: #f1d27a;
+  --mat-shell: #7f6a55;
+  --mat-fish: #7b6f5e;
+  --mat-bark: #6f5a45;
+  --mat-plumage: #8f9499;
+  --mat-wing: #6c7177;
+  --mat-mud: #6a5b4b;
+  --mat-leaf-litter: #9a7a3f;
+  --mat-wood-brown: #7a5636;
+  --mat-wood-tan: #8a5a34;
+  --mat-belt: #8a6a48;
+  --mat-leaf: #5f8f4a;
+  --mat-skin: #b98f76;
+  --mat-tissue: #b98a78;
+  --mat-bone-warm: #c8b58c;
+  --mat-iris: #5b4a3a;
+  --mat-bone-tan: #c2ae85;
+  --mat-bone-pale: #c9b78f;
   --mannequin: #6f7174;
   --holder-1: #7f84c4;
   --holder-2: #d9bd72;

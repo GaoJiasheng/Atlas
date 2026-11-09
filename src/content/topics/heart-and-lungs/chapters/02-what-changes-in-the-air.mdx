@@ -34,14 +34,17 @@ state:
           - { id: same, label: { en: "The same", zh: "一样多" }, means: same }
   beats:
     - labels: [air-jar, n2-balls, o2-balls]
+      layers: ["bench", "air-sample"]
       caption:
         en: "Air is a mixture of gases. Here each ball stands for one part in a hundred: about 78 are nitrogen and 21 are oxygen."
         zh: "空气是几种气体混合在一起的。这里每个小球代表百分之一：大约 78 个是氮气，21 个是氧气。"
     - labels: [co2-balls, h2o-balls, o2-balls]
+      layers: ["bench", "air-sample"]
       caption:
         en: "Carbon dioxide is only about 0.04 per cent of air, less than one ball. How much water vapour there is depends on the weather."
         zh: "二氧化碳只占空气的大约 0.04%，连一个球都不到。水蒸气有多少，要看天气。"
     - sim: { set: { sample: out } }
+      layers: ["bench", "air-sample"]
       labels: [o2-balls, co2-balls, h2o-balls]
       caption:
         en: "Breathed-out air still has about 16 parts oxygen in a hundred. Carbon dioxide rises to about 4, a hundred times more, and there is more water vapour."

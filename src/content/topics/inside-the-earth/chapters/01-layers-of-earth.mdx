@@ -41,6 +41,7 @@ state:
       flow-mode: none
   beats:
   - part: earth-crust
+    hide: ["plate-crust", "plate-rigid-mantle", "plate-deep-mantle"]
     labels: *id001
     sim:
       set:
@@ -54,6 +55,7 @@ state:
       en: "The crust is a thin rocky skin. Its thickness varies; this model uses a land-crust example."
       zh: "地壳是薄薄的岩石外层，各处厚度不同。模型采用陆壳示例。"
   - part: earth-mantle
+    hide: ["plate-crust", "plate-rigid-mantle", "plate-deep-mantle"]
     labels:
     - earth-mantle
     sim:
@@ -68,6 +70,7 @@ state:
       en: "Most mantle rock is solid. It can still change shape over very long times."
       zh: "地幔大部分是固态岩石，仍能在漫长时间内变形。"
   - part: earth-outer-core
+    hide: ["plate-crust", "plate-rigid-mantle", "plate-deep-mantle"]
     labels:
     - earth-outer-core
     - earth-inner-core
@@ -83,6 +86,7 @@ state:
       en: "Liquid metal surrounds the solid inner core. Volcanic magma comes from neither core."
       zh: "液态金属包围固态内核，火山岩浆不来自内核或外核。"
   - part: null
+    hide: ["plate-crust", "plate-rigid-mantle", "plate-deep-mantle"]
     labels:
     - earth-inner-core
     - earth-outer-core
@@ -107,6 +111,7 @@ state:
       - -1.4
       - 0
       fov: 34
+    hide: ["earth-crust", "earth-mantle", "earth-outer-core", "earth-inner-core"]
     labels:
     - plate-crust
     - plate-rigid-mantle

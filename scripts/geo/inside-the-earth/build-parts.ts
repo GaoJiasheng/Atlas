@@ -24,9 +24,9 @@ type V2 = [number, number];
 const bi = (en: string, zh: string) => ({ en, zh });
 const parts: Part[] = [];
 const poses: Record<string, Pose> = {};
-const ink = 'token:ink-2';
-const light = 'token:paper';
-const muted = 'token:ink-3';
+const ink = 'token:mat-rock-dark';
+const light = 'token:mat-rock-pale';
+const muted = 'token:mat-rock';
 const hot = 'token:hot';
 const cold = 'token:cold';
 const accent = 'token:accent-1';
@@ -56,10 +56,10 @@ function hemisphere(outer: number, inner: number): V2[] {
 }
 const radii = [1, 6341 / 6371, 3485 / 6371, 1221 / 6371, 0];
 const earth = [
-  ['crust', 'Crust', '地壳', accent, 'The crust is Earth’s thin rocky outer layer.', '地壳是地球外面很薄的岩石层。', "The shell uses a uniform land-crust example of about 30 km. Real crust varies in thickness, and oceanic crust can be much thinner. [S59, S63]", "薄壳统一采用约 30 千米的陆壳示例。真实地壳厚薄不同，海洋地壳可以薄得多。[S59, S63]"],
-  ['mantle', 'Mantle', '地幔', muted, 'The mantle is mostly solid rock beneath the crust.', '地幔在地壳下方，大部分是固态岩石。', "Most mantle rock is solid, but it can slowly change shape over geological time. Its thickness here combines the cited Earth measurements to make a teaching model. Fine section grain is illustrative, not additional seismic layers. It is not a global magma ocean. [S6, S58, S59, S63]", "地幔岩石大部分是固态，却能在漫长地质时间内缓慢变形。模型根据所引地球尺寸画出厚度；剖面细纹仅为示意，不表示额外的地震分层；地幔不是全球岩浆海。[S6, S58, S59, S63]"],
-  ['outer-core', 'Outer core', '外核', light, 'Liquid metal surrounds the solid inner core.', '液态金属包围着固态内核。', "The outer core is liquid metal. Its outer boundary is about 3,485 km from Earth's centre. The shell shows its position; volcanic magma does not come from it. [S58, S59, S10, S63]", "外核是液态金属，外边界离地心约 3485 千米。壳层显示它的位置，火山岩浆不来自这里。[S58, S59, S10, S63]"],
-  ['inner-core', 'Inner core', '内核', ink, 'The inner core is solid metal at Earth’s centre.', '内核是地心的固态金属。', "The inner core is solid metal with a radius of about 1,221 km. The sphere with a quarter wedge removed reveals the centre. A radius runs from the centre to the boundary, rather than all the way across. [S59, S63]", "内核是固态金属，半径约 1221 千米。球体切去四分之一楔形后露出中心。半径从中心量到边界，不是横跨整个内核的距离。[S59, S63]"],
+  ['crust', 'Crust', '地壳', 'token:mat-crust', 'The crust is Earth’s thin rocky outer layer.', '地壳是地球外面很薄的岩石层。', "The shell uses a uniform land-crust example of about 30 km. Real crust varies in thickness, and oceanic crust can be much thinner. [S59, S63]", "薄壳统一采用约 30 千米的陆壳示例。真实地壳厚薄不同，海洋地壳可以薄得多。[S59, S63]"],
+  ['mantle', 'Mantle', '地幔', 'token:mat-mantle', 'The mantle is mostly solid rock beneath the crust.', '地幔在地壳下方，大部分是固态岩石。', "Most mantle rock is solid, but it can slowly change shape over geological time. Its thickness here combines the cited Earth measurements to make a teaching model. Fine section grain is illustrative, not additional seismic layers. It is not a global magma ocean. [S6, S58, S59, S63]", "地幔岩石大部分是固态，却能在漫长地质时间内缓慢变形。模型根据所引地球尺寸画出厚度；剖面细纹仅为示意，不表示额外的地震分层；地幔不是全球岩浆海。[S6, S58, S59, S63]"],
+  ['outer-core', 'Outer core', '外核', 'token:mat-outer-core', 'Liquid metal surrounds the solid inner core.', '液态金属包围着固态内核。', "The outer core is liquid metal. Its outer boundary is about 3,485 km from Earth's centre. The shell shows its position; volcanic magma does not come from it. [S58, S59, S10, S63]", "外核是液态金属，外边界离地心约 3485 千米。壳层显示它的位置，火山岩浆不来自这里。[S58, S59, S10, S63]"],
+  ['inner-core', 'Inner core', '内核', 'token:mat-inner-core', 'The inner core is solid metal at Earth’s centre.', '内核是地心的固态金属。', "The inner core is solid metal with a radius of about 1,221 km. The sphere with a quarter wedge removed reveals the centre. A radius runs from the centre to the boundary, rather than all the way across. [S59, S63]", "内核是固态金属，半径约 1221 千米。球体切去四分之一楔形后露出中心。半径从中心量到边界，不是横跨整个内核的距离。[S59, S63]"],
 ];
 earth.forEach(([id, en, zh, tint, sen, szh, den, dzh], i) => add(`earth-${id}`, en!, zh!, 'planet-shells', {
   kind: 'lathe', profile: hemisphere(radii[i]!, radii[i + 1]!), segments: 96, arc: 270, rotation: [0, -25, 0], at: [0, 0, 0], color: i < 3 ? 'plastic' : 'steel', tint,

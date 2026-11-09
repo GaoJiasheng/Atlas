@@ -405,7 +405,7 @@
           0
         ],
         "color": "plastic",
-        "tint": "token:accent-1"
+        "tint": "token:mat-crust"
       },
       "summary": {
         "en": "The crust is Earth’s thin rocky outer layer.",
@@ -762,7 +762,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -1063,7 +1063,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -1364,7 +1364,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -1690,7 +1690,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -1936,7 +1936,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -2122,7 +2122,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -2383,7 +2383,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -2629,7 +2629,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -2870,7 +2870,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -3106,7 +3106,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -3307,7 +3307,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -3503,7 +3503,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "caps": "flat"
         },
         {
@@ -3781,7 +3781,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "rotation": [
             0,
             -70,
@@ -4063,7 +4063,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "rotation": [
             0,
             -70,
@@ -4345,7 +4345,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "rotation": [
             0,
             -160,
@@ -4627,7 +4627,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper",
+          "tint": "token:mat-crust",
           "rotation": [
             0,
             -160,
@@ -5040,7 +5040,7 @@
           0
         ],
         "color": "plastic",
-        "tint": "token:ink-3"
+        "tint": "token:mat-mantle"
       },
       "summary": {
         "en": "The mantle is mostly solid rock beneath the crust.",
@@ -5467,7 +5467,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -5877,7 +5877,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -6287,7 +6287,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -6697,7 +6697,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -7107,7 +7107,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -7517,7 +7517,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -7927,7 +7927,7 @@
             0.00034
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -70,
@@ -8337,7 +8337,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -8747,7 +8747,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -9157,7 +9157,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -9567,7 +9567,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -9977,7 +9977,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -10387,7 +10387,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -10797,7 +10797,7 @@
             0.00094
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-mantle",
           "rotation": [
             0,
             -160,
@@ -11210,7 +11210,7 @@
           0
         ],
         "color": "plastic",
-        "tint": "token:paper"
+        "tint": "token:mat-outer-core"
       },
       "summary": {
         "en": "Liquid metal surrounds the solid inner core.",
@@ -11450,7 +11450,7 @@
           0
         ],
         "color": "steel",
-        "tint": "token:ink-2"
+        "tint": "token:mat-inner-core"
       },
       "summary": {
         "en": "The inner core is solid metal at Earth’s centre.",
@@ -11918,7 +11918,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -12323,7 +12323,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -12728,7 +12728,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -12861,7 +12861,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -12994,7 +12994,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -13127,7 +13127,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -13151,7 +13151,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "This layer moves with the rest of the lithospheric plate.",
@@ -13577,7 +13577,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -13982,7 +13982,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -14387,7 +14387,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -14520,7 +14520,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -14653,7 +14653,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -14786,7 +14786,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -14810,7 +14810,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "The mantle below the plate remains mostly solid.",
@@ -15234,7 +15234,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -15639,7 +15639,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -16044,7 +16044,7 @@
             0.226
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -16177,7 +16177,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -16310,7 +16310,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -16443,7 +16443,7 @@
             0.227
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -16857,7 +16857,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Separating plates allow magma to rise and make new oceanic crust.",
@@ -17686,7 +17686,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -18091,7 +18091,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -18496,7 +18496,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -18901,7 +18901,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -19034,7 +19034,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -19167,7 +19167,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -19300,7 +19300,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -19714,7 +19714,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Separating plates allow magma to rise and make new oceanic crust.",
@@ -20543,7 +20543,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -20948,7 +20948,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -21353,7 +21353,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -21758,7 +21758,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -21891,7 +21891,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -22024,7 +22024,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -22157,7 +22157,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -22181,7 +22181,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "The incoming plate continues into the descending slab.",
@@ -22350,7 +22350,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -22483,7 +22483,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -22616,7 +22616,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -23222,7 +23222,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "This continuous slab descends into the mantle.",
@@ -24437,7 +24437,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -25034,7 +25034,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -25631,7 +25631,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         }
       ]
     },
@@ -25869,7 +25869,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "The overriding plate sits above the descending slab.",
@@ -26700,7 +26700,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -27105,7 +27105,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -27510,7 +27510,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -27915,7 +27915,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -28320,7 +28320,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -28453,7 +28453,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -28586,7 +28586,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -28719,7 +28719,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -28852,7 +28852,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ],
       "mesh": "edge-sub-right"
@@ -29412,7 +29412,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "This plate slides horizontally past its neighbour.",
@@ -30241,7 +30241,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -30646,7 +30646,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -31051,7 +31051,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -31456,7 +31456,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -31589,7 +31589,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -31722,7 +31722,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -31855,7 +31855,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -31870,7 +31870,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -32284,7 +32284,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "This plate slides horizontally past its neighbour.",
@@ -33113,7 +33113,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -33518,7 +33518,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -33923,7 +33923,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -34328,7 +34328,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -34461,7 +34461,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -34594,7 +34594,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -34727,7 +34727,7 @@
             0.351
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -34742,7 +34742,7 @@
             0
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -35156,7 +35156,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "Converging continents can build mountains.",
@@ -35580,7 +35580,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -35985,7 +35985,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -36390,7 +36390,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -36795,7 +36795,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -37333,7 +37333,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -37466,7 +37466,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -37599,7 +37599,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -37732,7 +37732,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -37865,7 +37865,7 @@
             0.352
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ],
       "mesh": "collision-fold"
@@ -38093,7 +38093,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "Rock builds the cone around a surface opening.",
@@ -39180,7 +39180,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -39713,7 +39713,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -40779,7 +40779,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -41312,7 +41312,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -42378,7 +42378,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -42911,7 +42911,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -43977,7 +43977,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "sweep",
@@ -44161,7 +44161,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-rock",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -44354,7 +44354,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -44547,7 +44547,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -44740,7 +44740,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-rock",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -44933,7 +44933,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -45126,7 +45126,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -45319,7 +45319,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-rock",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -45512,7 +45512,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -45705,7 +45705,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -45898,7 +45898,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-rock",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -46091,7 +46091,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -46284,7 +46284,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -46477,7 +46477,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3",
+          "tint": "token:mat-rock",
           "caps": "flat",
           "section": {
             "flat": 0.1
@@ -46530,7 +46530,7 @@
           -0.31
         ],
         "color": "abrasive",
-        "tint": "token:ink-2",
+        "tint": "token:mat-rock-dark",
         "holes": [
           [
             [
@@ -47216,7 +47216,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -47621,7 +47621,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -48026,7 +48026,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -48431,7 +48431,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -48836,7 +48836,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -49241,7 +49241,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -49646,7 +49646,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -50051,7 +50051,7 @@
             0.002
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -50184,7 +50184,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -50317,7 +50317,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -50450,7 +50450,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -50583,7 +50583,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -50716,7 +50716,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -50849,7 +50849,7 @@
             0.003
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ],
       "shell": true,
@@ -51192,7 +51192,7 @@
             0
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51231,7 +51231,7 @@
             37
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51270,7 +51270,7 @@
             74
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51309,7 +51309,7 @@
             111
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51348,7 +51348,7 @@
             148
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51387,7 +51387,7 @@
             185
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51426,7 +51426,7 @@
             222
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51465,7 +51465,7 @@
             259
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51504,7 +51504,7 @@
             296
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51543,7 +51543,7 @@
             333
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "lathe",
@@ -51582,7 +51582,7 @@
             370
           ],
           "color": "enamel",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         }
       ],
       "chainName": {
@@ -52009,7 +52009,7 @@
           0.092
         ],
         "color": "plastic",
-        "tint": "token:paper"
+        "tint": "token:mat-rock-pale"
       },
       "summary": {
         "en": "Gas can form expanding bubbles as magma rises and pressure falls.",
@@ -52302,7 +52302,7 @@
           0
         ],
         "color": "plastic",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Volcanic ash consists of small rock, mineral and glass fragments.",
@@ -52364,7 +52364,7 @@
             29
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52407,7 +52407,7 @@
             58
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52450,7 +52450,7 @@
             87
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52493,7 +52493,7 @@
             116
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52536,7 +52536,7 @@
             145
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52579,7 +52579,7 @@
             174
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52622,7 +52622,7 @@
             203
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52665,7 +52665,7 @@
             232
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52708,7 +52708,7 @@
             261
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52751,7 +52751,7 @@
             290
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52794,7 +52794,7 @@
             319
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52837,7 +52837,7 @@
             348
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52880,7 +52880,7 @@
             377
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52923,7 +52923,7 @@
             406
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -52966,7 +52966,7 @@
             435
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53009,7 +53009,7 @@
             464
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53052,7 +53052,7 @@
             493
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53095,7 +53095,7 @@
             522
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53138,7 +53138,7 @@
             551
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53181,7 +53181,7 @@
             580
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53224,7 +53224,7 @@
             609
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53267,7 +53267,7 @@
             638
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53310,7 +53310,7 @@
             667
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53353,7 +53353,7 @@
             696
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53396,7 +53396,7 @@
             725
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53439,7 +53439,7 @@
             754
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53482,7 +53482,7 @@
             783
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53525,7 +53525,7 @@
             812
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53568,7 +53568,7 @@
             841
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53611,7 +53611,7 @@
             870
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53654,7 +53654,7 @@
             899
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "lathe",
@@ -53697,7 +53697,7 @@
             928
           ],
           "color": "plastic",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ],
       "repeat": {
@@ -54124,7 +54124,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "Rock stores elastic strain before sudden fault slip.",
@@ -54548,7 +54548,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -54953,7 +54953,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -55358,7 +55358,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -55763,7 +55763,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -56168,7 +56168,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -56573,7 +56573,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -56978,7 +56978,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -57383,7 +57383,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -57516,7 +57516,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -57649,7 +57649,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -57782,7 +57782,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -57915,7 +57915,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58048,7 +58048,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58181,7 +58181,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58314,7 +58314,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58447,7 +58447,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58580,7 +58580,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58713,7 +58713,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -58846,7 +58846,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "sweep",
@@ -58966,7 +58966,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -59095,7 +59095,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -59224,7 +59224,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -59353,7 +59353,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -59482,7 +59482,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -59611,7 +59611,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -60035,7 +60035,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "Rock stores elastic strain before sudden fault slip.",
@@ -60459,7 +60459,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -60864,7 +60864,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -61269,7 +61269,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -61674,7 +61674,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -62079,7 +62079,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -62484,7 +62484,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -62889,7 +62889,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -63294,7 +63294,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -63427,7 +63427,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -63560,7 +63560,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -63693,7 +63693,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -63826,7 +63826,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -63959,7 +63959,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64092,7 +64092,7 @@
             0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64225,7 +64225,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64358,7 +64358,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64491,7 +64491,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64624,7 +64624,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -64757,7 +64757,7 @@
             -0.501
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "sweep",
@@ -64877,7 +64877,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -65006,7 +65006,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -65135,7 +65135,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -65264,7 +65264,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -65393,7 +65393,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -65522,7 +65522,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "caps": "flat",
           "section": {
             "flat": 0.2
@@ -70627,7 +70627,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Sudden vertical seafloor movement can displace the water above.",
@@ -71051,7 +71051,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -71456,7 +71456,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -71861,7 +71861,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -71994,7 +71994,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -72127,7 +72127,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -72260,7 +72260,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -72284,7 +72284,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Sudden vertical seafloor movement can displace the water above.",
@@ -72708,7 +72708,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -73113,7 +73113,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -73518,7 +73518,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -73651,7 +73651,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -73784,7 +73784,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -73917,7 +73917,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -73941,7 +73941,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Sudden vertical seafloor movement can displace the water above.",
@@ -74365,7 +74365,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -74770,7 +74770,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         },
         {
           "kind": "extrude",
@@ -75175,7 +75175,7 @@
             0.326
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -75308,7 +75308,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -75441,7 +75441,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -75574,7 +75574,7 @@
             0.327
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -80561,7 +80561,7 @@
           -0.04
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "A long wave slows in shallower water and its height may grow.",
@@ -81283,7 +81283,7 @@
             0.262
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         },
         {
           "kind": "extrude",
@@ -81688,7 +81688,7 @@
             0.262
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "extrude",
@@ -82093,7 +82093,7 @@
             0.262
           ],
           "color": "abrasive",
-          "tint": "token:paper"
+          "tint": "token:mat-rock-pale"
         }
       ]
     },
@@ -82117,7 +82117,7 @@
           0.53
         ],
         "color": "abrasive",
-        "tint": "token:ink-3"
+        "tint": "token:mat-rock"
       },
       "summary": {
         "en": "Moving ground supplies the motion at the foundation.",
@@ -82153,7 +82153,7 @@
             -0.07
           ],
           "color": "abrasive",
-          "tint": "token:ink-3"
+          "tint": "token:mat-rock"
         }
       ]
     },
@@ -82177,7 +82177,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "The foundation connects the structure to the ground.",
@@ -82222,7 +82222,7 @@
           0.35
         ],
         "color": "abrasive",
-        "tint": "token:ink-2"
+        "tint": "token:mat-rock-dark"
       },
       "summary": {
         "en": "Connected beams and columns support this generic structure.",
@@ -82260,7 +82260,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82275,7 +82275,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82290,7 +82290,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82305,7 +82305,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82320,7 +82320,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82335,7 +82335,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82350,7 +82350,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82365,7 +82365,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82380,7 +82380,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82395,7 +82395,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82410,7 +82410,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82425,7 +82425,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82440,7 +82440,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82455,7 +82455,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82470,7 +82470,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82485,7 +82485,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82500,7 +82500,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82515,7 +82515,7 @@
             -0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82530,7 +82530,7 @@
             0.35
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82545,7 +82545,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         },
         {
           "kind": "box",
@@ -82560,7 +82560,7 @@
             0
           ],
           "color": "abrasive",
-          "tint": "token:ink-2"
+          "tint": "token:mat-rock-dark"
         }
       ]
     },
@@ -82584,7 +82584,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:paper"
+        "tint": "token:mat-rock-pale"
       },
       "summary": {
         "en": "Floor slabs connect to the frame and structural wall in this sample.",

@@ -140,7 +140,7 @@
    "mesh": "larynx",
    "material": {
     "color": "tissue",
-    "tint": "token:bone"
+    "tint": "token:mat-bone-tan"
    },
    "explode": {
     "dir": [
@@ -180,7 +180,7 @@
    "mesh": "trachea",
    "material": {
     "color": "tissue",
-    "tint": "token:bone"
+    "tint": "token:mat-bone-tan"
    },
    "connects": [
     "lung-right",
@@ -281,7 +281,7 @@
    "mesh": "bronchi",
    "material": {
     "color": "tissue",
-    "tint": "token:bone"
+    "tint": "token:mat-bone-tan"
    }
   },
   {
@@ -19695,7 +19695,8 @@
    "parts": [
     "lung-right",
     "lung-left"
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "co2-lungs",
@@ -19925,7 +19926,8 @@
    "parts": [
     "lung-right",
     "lung-left"
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "oxygen-muscle",
@@ -20106,7 +20108,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "co2-muscle",
@@ -20287,7 +20290,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "food-in",
@@ -22111,7 +22115,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "fish-co2",
@@ -22163,7 +22168,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "plant-water",
@@ -22539,7 +22545,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   },
   {
    "id": "plant-co2",
@@ -22611,7 +22618,8 @@
       ]
      ]
     }
-   ]
+   ],
+   "flat": true
   }
  ],
  "animations": [

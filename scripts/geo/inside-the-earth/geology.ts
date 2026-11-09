@@ -18,7 +18,7 @@ export function beds(x0: number, x1: number, bottom: number, top: number, depth:
     return bottom + (top - bottom) * f + Math.sin(Math.PI * f) * (0.012 * Math.sin(x * 7.1) + 0.006 * Math.sin(x * 18 + 0.5))
       - (weathered && k === count ? 0.007 * (0.5 + 0.5 * Math.sin(x * 23 + t)) : 0);
   }));
-  return Array.from({ length: count }, (_, k) => section(contacts[k]!, contacts[k + 1]!, depth, k % 3 === 0 ? 'token:ink-2' : 'token:ink-3'));
+  return Array.from({ length: count }, (_, k) => section(contacts[k]!, contacts[k + 1]!, depth, k % 3 === 0 ? 'token:mat-rock-dark' : 'token:mat-rock'));
 }
 /** Thin, branching mineralised joints on a specimen's cut face. */
 export function joints(x0: number, x1: number, y0: number, y1: number, z: number, count = 4): Primitive[] {
@@ -28,7 +28,7 @@ export function joints(x0: number, x1: number, y0: number, y1: number, z: number
       const t = i / 14;
       return [x + 0.024 * Math.sin(t * 8 + k) + 0.035 * t, y0 + (y1 - y0) * t];
     });
-    return { kind: 'extrude', shape: [...points, ...points.slice().reverse().map(([a, b]): V2 => [a + 0.0025, b])], depth: 0.0015, at: [0, 0, z], color: 'abrasive', tint: 'token:ink-2' };
+    return { kind: 'extrude', shape: [...points, ...points.slice().reverse().map(([a, b]): V2 => [a + 0.0025, b])], depth: 0.0015, at: [0, 0, z], color: 'abrasive', tint: 'token:mat-rock-dark' };
   });
 }
 /** Grain ribbons confined to a globe's two meridian cut faces. These do not
@@ -43,6 +43,6 @@ export function shellGrain(inner: number, outer: number): Primitive[] {
       return [rr * Math.sin(a), rr * Math.cos(a)];
     });
     const other = line.map(([x, y]): V2 => { const h = Math.hypot(x, y), rr = h + 0.0015 + 0.0008 * Math.sin(k + y * 18); return [x * rr / h, y * rr / h]; });
-    return { ...section(line, other, 0.0012, k % 3 ? 'token:ink-2' : 'token:ink-3'), rotation: [0, rotation, 0], at: face ? [0.00034,0,0.00094] : [-0.00094,0,0.00034] };
+    return { ...section(line, other, 0.0012, k % 3 ? 'token:mat-rock-dark' : 'token:mat-rock'), rotation: [0, rotation, 0], at: face ? [0.00034,0,0.00094] : [-0.00094,0,0.00034] };
   }));
 }

@@ -2252,7 +2252,6 @@
           "options": [
             {
               "id": "a",
-              "value": "0.5",
               "correct": true,
               "text": {
                 "en": "The shaded amount is 0.5.",
@@ -2261,7 +2260,6 @@
             },
             {
               "id": "b",
-              "value": "0.50",
               "correct": true,
               "text": {
                 "en": "The shaded amount is 0.50.",

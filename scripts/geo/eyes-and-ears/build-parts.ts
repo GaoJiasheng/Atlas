@@ -374,6 +374,7 @@ const data = {
     'object-near':{'object-top':{offset:[round((40-12)*BENCH_CM),0,0]},'object-bottom':{offset:[round((40-12)*BENCH_CM),0,0]},duration:.3},
   },
   views:{
+    shadows:'none',
     assembled:{camera:presets[0]!.camera},exploded:{camera:presets[3]!.camera},
     cutaway:{normal:[0,0,-1],offset:0},section:{plane:'xy'},cover:presets[0]!.camera,
     hudFrame:{parts:['cornea','sclera-shell','object-top','object-bottom','retinal-screen','pinna','cochlea-shell','auditory-nerve','basilar-strip','hair-patch','signal-marker','wave-reference']},
@@ -430,4 +431,14 @@ Object.assign(data, {model:'/models/eyes-and-ears.glb'});
 partsFile.parse(data);
 if (parts.filter(p=>!p.context).length !== 26 || parts.filter(p=>p.context).length !== 2) throw new Error('Expected 26 selectable parts and two iris inserts');
 mkdirSync(dirname(out), {recursive:true});
+type Tinted = { tint?: string };
+for (const raw of parts) {
+  const part = raw as unknown as { id: string; primitive?: Tinted; material?: Tinted; extra?: Tinted[] };
+  const bone = ['malleus', 'incus', 'stapes', 'cochlea-shell', 'balance-context'].includes(part.id);
+  const iris = ['iris', 'iris-aperture-small', 'iris-aperture-large'].includes(part.id);
+  if (!bone && !iris) continue;
+  const from = bone ? 'token:bone' : 'token:ink-2';
+  const to = bone ? 'token:mat-bone-warm' : 'token:mat-iris';
+  for (const q of [part.primitive, part.material, ...(part.extra ?? [])]) if (q?.tint === from) q.tint = to;
+}
 writeFileSync(out, JSON.stringify(data,null,2)+'\n');

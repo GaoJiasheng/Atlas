@@ -333,7 +333,7 @@
           0
         ],
         "color": "abrasive",
-        "tint": "token:neutral"
+        "tint": "token:mat-mud"
       },
       "extra": [
         {
@@ -344,7 +344,7 @@
             0.3
           ],
           "color": "abrasive",
-          "tint": "token:neutral",
+          "tint": "token:mat-mud",
           "at": [
             0,
             -0.21,
@@ -492,7 +492,7 @@
         "segments": 40,
         "caps": "flat",
         "color": "abrasive",
-        "tint": "token:neutral"
+        "tint": "token:mat-mud"
       },
       "extra": [
         {
@@ -585,7 +585,7 @@
       "mesh": "api-lateral",
       "material": {
         "color": "wood",
-        "tint": "token:neutral"
+        "tint": "token:mat-bark"
       },
       "explode": {
         "dir": [
@@ -620,7 +620,7 @@
       "mesh": "api-pencil",
       "material": {
         "color": "wood",
-        "tint": "token:neutral"
+        "tint": "token:mat-bark"
       },
       "explode": {
         "dir": [
@@ -688,7 +688,7 @@
       "mesh": "bakau-prop",
       "material": {
         "color": "wood",
-        "tint": "token:neutral"
+        "tint": "token:mat-bark"
       },
       "explode": {
         "dir": [
@@ -778,7 +778,7 @@
           0
         ],
         "color": "tissue",
-        "tint": "token:neutral"
+        "tint": "token:mat-leaf-litter"
       },
       "extra": [
         {
@@ -840,7 +840,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-leaf-litter"
         },
         {
           "kind": "sweep",
@@ -901,7 +901,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:neutral"
+          "tint": "token:mat-leaf-litter"
         }
       ],
       "explode": {
@@ -1070,7 +1070,7 @@
         ],
         "radial": 48,
         "color": "chitin",
-        "tint": "token:neutral",
+        "tint": "token:mat-shell",
         "segments": 40,
         "caps": "flat",
         "at": [
@@ -1162,7 +1162,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1253,7 +1253,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1344,7 +1344,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1435,7 +1435,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1526,7 +1526,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1617,7 +1617,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1708,7 +1708,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1799,7 +1799,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1842,7 +1842,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -1880,7 +1880,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 18,
           "caps": "flat",
           "at": [
@@ -1930,7 +1930,7 @@
           ],
           "radial": 32,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 28,
           "caps": "flat",
           "at": [
@@ -1985,7 +1985,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 26,
           "caps": "flat",
           "at": [
@@ -2040,7 +2040,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 26,
           "caps": "flat",
           "at": [
@@ -2120,7 +2120,7 @@
             1,
             0.45
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.114,
             0.074,
@@ -2190,7 +2190,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.143,
             0.065,
@@ -2260,7 +2260,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.137,
             0.0696602,
@@ -2330,7 +2330,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.131,
             0.0683773,
@@ -2400,7 +2400,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.125,
             0.0627874,
@@ -2470,7 +2470,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.119,
             0.0600192,
@@ -2540,7 +2540,7 @@
             0.85,
             0.5
           ],
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "at": [
             -0.113,
             0.0636029,
@@ -2567,7 +2567,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 7,
           "caps": "flat",
           "at": [
@@ -2596,7 +2596,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 7,
           "caps": "flat",
           "at": [
@@ -2625,7 +2625,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 7,
           "caps": "flat",
           "at": [
@@ -2660,7 +2660,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -2765,7 +2765,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -2809,7 +2809,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -2847,7 +2847,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 18,
           "caps": "flat",
           "at": [
@@ -2882,7 +2882,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -3032,7 +3032,7 @@
         ],
         "radial": 48,
         "color": "chitin",
-        "tint": "token:neutral",
+        "tint": "token:mat-shell",
         "segments": 40,
         "caps": "flat",
         "at": [
@@ -3124,7 +3124,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3215,7 +3215,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3306,7 +3306,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3397,7 +3397,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3488,7 +3488,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3579,7 +3579,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3670,7 +3670,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3761,7 +3761,7 @@
           ],
           "radial": 16,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 20,
           "caps": "flat",
           "at": [
@@ -3804,7 +3804,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -3848,7 +3848,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -3886,7 +3886,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 18,
           "caps": "flat",
           "at": [
@@ -3921,7 +3921,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -4026,7 +4026,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -4070,7 +4070,7 @@
           ],
           "radial": 24,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -4108,7 +4108,7 @@
           ],
           "radial": 20,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 18,
           "caps": "flat",
           "at": [
@@ -4143,7 +4143,7 @@
           ],
           "radial": 10,
           "color": "chitin",
-          "tint": "token:neutral",
+          "tint": "token:mat-shell",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -4305,7 +4305,7 @@
         ],
         "radial": 48,
         "color": "tissue",
-        "tint": "token:ink-3",
+        "tint": "token:mat-fish",
         "segments": 60,
         "caps": "flat",
         "at": [
@@ -4381,7 +4381,7 @@
             1.2,
             0.92
           ],
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.395,
             0.085,
@@ -4490,7 +4490,7 @@
           ],
           "radial": 24,
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "segments": 26,
           "caps": "flat",
           "at": [
@@ -4769,7 +4769,7 @@
             2.5504709
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.338,
             0.016,
@@ -4799,7 +4799,7 @@
             2.5504709
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -5039,7 +5039,7 @@
             1.2,
             0.92
           ],
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.395,
             0.085,
@@ -5148,7 +5148,7 @@
           ],
           "radial": 24,
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "segments": 26,
           "caps": "flat",
           "at": [
@@ -5427,7 +5427,7 @@
             2.5504709
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.338,
             0.016,
@@ -5457,7 +5457,7 @@
             2.5504709
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -5869,7 +5869,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.179,
             0.036,
@@ -5899,7 +5899,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -6247,7 +6247,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.227,
             0.059,
@@ -6277,7 +6277,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -6615,7 +6615,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.306,
             0.075,
@@ -6645,7 +6645,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -6840,7 +6840,7 @@
         ],
         "radial": 24,
         "color": "feathers",
-        "tint": "token:ink-3",
+        "tint": "token:mat-plumage",
         "segments": 36,
         "caps": "flat",
         "at": [
@@ -6897,7 +6897,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-3",
+          "tint": "token:mat-plumage",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -6969,7 +6969,7 @@
             0.78,
             0.82
           ],
-          "tint": "token:ink-3",
+          "tint": "token:mat-plumage",
           "at": [
             0.679,
             0.482,
@@ -7052,7 +7052,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -7095,7 +7095,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7138,7 +7138,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7181,7 +7181,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7224,7 +7224,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7267,7 +7267,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7583,7 +7583,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 14,
           "caps": "flat",
           "at": [
@@ -7626,7 +7626,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7669,7 +7669,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7712,7 +7712,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7755,7 +7755,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -7798,7 +7798,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-2",
+          "tint": "token:mat-wing",
           "segments": 16,
           "caps": "flat",
           "at": [
@@ -8108,7 +8108,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-3",
+          "tint": "token:mat-plumage",
           "segments": 12,
           "caps": "flat",
           "at": [
@@ -8151,7 +8151,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-3",
+          "tint": "token:mat-plumage",
           "segments": 12,
           "caps": "flat",
           "at": [
@@ -8194,7 +8194,7 @@
           ],
           "radial": 10,
           "color": "feathers",
-          "tint": "token:ink-3",
+          "tint": "token:mat-plumage",
           "segments": 12,
           "caps": "flat",
           "at": [
@@ -8294,7 +8294,7 @@
         ],
         "radial": 48,
         "color": "tissue",
-        "tint": "token:ink-3",
+        "tint": "token:mat-fish",
         "segments": 60,
         "caps": "flat",
         "at": [
@@ -8370,7 +8370,7 @@
             1.2,
             0.92
           ],
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.37336,
             -0.05834,
@@ -8570,7 +8570,7 @@
             -175.969234
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.34726,
             -0.0711,
@@ -8640,7 +8640,7 @@
             1.2,
             0.92
           ],
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.37336,
             -0.05834,
@@ -8840,7 +8840,7 @@
             -175.969234
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.34726,
             -0.0711,
@@ -8882,7 +8882,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.24982,
             -0.0711,
@@ -9128,7 +9128,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "at": [
             0.2881,
             -0.0537,
@@ -9158,7 +9158,7 @@
             0
           ],
           "color": "tissue",
-          "tint": "token:ink-3",
+          "tint": "token:mat-fish",
           "veins": [
             [
               [
@@ -9378,7 +9378,7 @@
           0.75,
           0.75
         ],
-        "tint": "token:ink-2",
+        "tint": "token:mat-rock-dark",
         "at": [
           1.02,
           0.21,
@@ -9449,7 +9449,7 @@
             1.7,
             0.8
           ],
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "at": [
             1.07,
             0.25,
@@ -9519,7 +9519,7 @@
             0.8,
             0.8
           ],
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "at": [
             0.98,
             0.27,
@@ -9575,7 +9575,7 @@
         "radius": 0.00181,
         "radial": 10,
         "color": "tissue",
-        "tint": "token:ink-2",
+        "tint": "token:mat-rock-dark",
         "segments": 10,
         "caps": "flat",
         "at": [
@@ -9607,7 +9607,7 @@
           "radius": 0.00139,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9638,7 +9638,7 @@
           "radius": 0.00097,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9669,7 +9669,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9700,7 +9700,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9731,7 +9731,7 @@
           "radius": 0.00097,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9762,7 +9762,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9793,7 +9793,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9824,7 +9824,7 @@
           "radius": 0.00139,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9855,7 +9855,7 @@
           "radius": 0.00097,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9886,7 +9886,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9917,7 +9917,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9948,7 +9948,7 @@
           "radius": 0.00097,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -9979,7 +9979,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -10010,7 +10010,7 @@
           "radius": 0.00055,
           "radial": 10,
           "color": "tissue",
-          "tint": "token:ink-2",
+          "tint": "token:mat-rock-dark",
           "segments": 10,
           "caps": "flat",
           "at": [
@@ -10178,7 +10178,7 @@
       "mesh": "api-trunk",
       "material": {
         "color": "wood",
-        "tint": "token:neutral"
+        "tint": "token:mat-bark"
       },
       "explode": {
         "dir": [
@@ -10209,7 +10209,7 @@
       "mesh": "bakau-trunk",
       "material": {
         "color": "wood",
-        "tint": "token:neutral"
+        "tint": "token:mat-bark"
       },
       "explode": {
         "dir": [
