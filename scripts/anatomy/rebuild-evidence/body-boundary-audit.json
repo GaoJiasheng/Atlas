@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-09",
+  "method": "Exact decoded/skinned positions, welded by exact Float32 position; undirected geometric edges. This is a positional boundary audit, not certification of indexed manifold topology. All open-edge coordinates lie at the cut wrist rings; no open head/foot boundary in the body mesh (hands are audited separately). Ten four-face positional coincidences remain and are disclosed; source-surface/detail grade is B.",
+  "rows": [
+    {
+      "topic": "arms",
+      "assetSha256": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30291804671287537,
+          0.30288106203079224
+        ],
+        [
+          -0.41314417123794556,
+          -0.3973792791366577
+        ],
+        [
+          0.03231232613325119,
+          0.07916322350502014
+        ]
+      ]
+    },
+    {
+      "topic": "back",
+      "assetSha256": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30291804671287537,
+          0.30288106203079224
+        ],
+        [
+          -0.36301738023757935,
+          -0.3472524881362915
+        ],
+        [
+          0.05079416558146477,
+          0.09764505922794342
+        ]
+      ]
+    },
+    {
+      "topic": "chest",
+      "assetSha256": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30290156602859497,
+          0.30289754271507263
+        ],
+        [
+          -0.5147178769111633,
+          -0.4989530146121979
+        ],
+        [
+          -0.05347791686654091,
+          -0.006627020426094532
+        ]
+      ]
+    },
+    {
+      "topic": "core",
+      "assetSha256": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30291804671287537,
+          0.30288106203079224
+        ],
+        [
+          -0.20526687800884247,
+          -0.18950201570987701
+        ],
+        [
+          0.032995693385601044,
+          0.07984659075737
+        ]
+      ]
+    },
+    {
+      "topic": "legs",
+      "assetSha256": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30291804671287537,
+          0.30288106203079224
+        ],
+        [
+          -0.07600156962871552,
+          -0.06023670360445976
+        ],
+        [
+          0.04422042518854141,
+          0.09107132256031036
+        ]
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "assetSha256": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab",
+      "openGeometricEdges": 495,
+      "fourFacePositionalEdges": 10,
+      "openEdgeBounds": [
+        [
+          -0.30291804671287537,
+          0.30288106203079224
+        ],
+        [
+          -0.5748675465583801,
+          -0.5591026544570923
+        ],
+        [
+          0.00024484843015670776,
+          0.04709574580192566
+        ]
+      ]
+    }
+  ]
+}

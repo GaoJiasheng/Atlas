@@ -1,0 +1,6 @@
+{
+  "pnpm check": "PASS (exit 0; 115.01s; `scripts/anatomy/rebuild-evidence/gate-logs/1-check.log`)",
+  "pnpm validate": "PASS (exit 0; 15.02s; `scripts/anatomy/rebuild-evidence/gate-logs/2-validate.log`)",
+  "pnpm test (2 workers, 30s timeout)": "PASS (exit 0; 108.35s; `scripts/anatomy/rebuild-evidence/gate-logs/3-test.log`)",
+  "pnpm build": "PASS (exit 0; 81.45s; `scripts/anatomy/rebuild-evidence/gate-logs/4-build.log`)"
+}

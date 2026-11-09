@@ -1,0 +1,38 @@
+[
+  {
+    "file": "public/illustrations/muscles-core.webp",
+    "bytes": 82108,
+    "width": 800,
+    "height": 800,
+    "maxChannelSpread": 1,
+    "visiblePixels": 296625,
+    "sha256": "4a2c7755c0807a188362e74ec4c15b8d29d5a0f07978de0d7fc3041fb510063e"
+  },
+  {
+    "file": "public/illustrations/muscles-core@2x.webp",
+    "bytes": 206654,
+    "width": 1600,
+    "height": 1600,
+    "maxChannelSpread": 1,
+    "visiblePixels": 1187410,
+    "sha256": "ac937962458d8d497bb55b3692efd9741f967472d2cacceb5fd1b372e1c4f4cc"
+  },
+  {
+    "file": "public/illustrations/muscles-shoulders.webp",
+    "bytes": 59976,
+    "width": 800,
+    "height": 800,
+    "maxChannelSpread": 1,
+    "visiblePixels": 315945,
+    "sha256": "8def8474c636e3386afeec548b30a2889aded20022d02f3d483d6343b548f860"
+  },
+  {
+    "file": "public/illustrations/muscles-shoulders@2x.webp",
+    "bytes": 184892,
+    "width": 1600,
+    "height": 1600,
+    "maxChannelSpread": 1,
+    "visiblePixels": 1262601,
+    "sha256": "44bebba65b90d5cde8273d984e23411344702e1a4ae048bcfa29e80bcb8548c8"
+  }
+]

@@ -1,0 +1,198 @@
+{
+  "studies": [
+    {
+      "id": "barbell",
+      "name": "barbell-photo-angle",
+      "ref": "Olympic_barbell.jpg",
+      "camera": {
+        "position": [
+          -1.25,
+          0.25,
+          0.9
+        ],
+        "target": [
+          -0.18,
+          0,
+          0
+        ],
+        "fov": 42
+      },
+      "residual": "Perspective near/far plate scale and ascending shaft matched approximately. Reference has 450 mm multi-plate loading; model deliberately preserves original 300 mm single plate per side and 2.2 m bar.",
+      "render": {
+        "file": "scripts/anatomy/rebuild-evidence/gym/final/barbell-photo-angle.png",
+        "triangles": 35096,
+        "draws": 1,
+        "camera": {
+          "angle": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "height": 0.33598292350769043
+        },
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "id": "dumbbell",
+      "name": "dumbbell-photo-angle",
+      "ref": "Dumbells_and_free_weights_in_a_gym.jpg",
+      "crop": {
+        "left": 380,
+        "top": 455,
+        "width": 110,
+        "height": 125
+      },
+      "camera": {
+        "position": [
+          0.58,
+          0.055,
+          0.025
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 30
+      },
+      "residual": "Cropped one fixed round dumbbell, viewing down its grip axis from above. Head shape is a generic fixed 140 mm head; reference has three relief rings and printed markings, which this design does not copy.",
+      "render": {
+        "file": "scripts/anatomy/rebuild-evidence/gym/final/dumbbell-photo-angle.png",
+        "triangles": 22784,
+        "draws": 1,
+        "camera": {
+          "angle": 0,
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "height": 0.15679829835891726
+        },
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "id": "bench-flat",
+      "name": "bench-photo-angle",
+      "ref": "WeightBenchSide.jpg",
+      "camera": {
+        "position": [
+          -1.8,
+          0.95,
+          1.1
+        ],
+        "target": [
+          0,
+          -0.17,
+          0.04
+        ],
+        "fov": 41
+      },
+      "residual": "Matched side-oblique view and flat pad setting using same factory at incline=0. Reference is a curved-leg consumer bench with leg developer; model is generic ladder-adjustable steel-section bench preserving existing 1.2×.3/.45 m contract.",
+      "render": {
+        "file": "scripts/anatomy/rebuild-evidence/gym/final/bench-photo-angle.png",
+        "triangles": 28012,
+        "draws": 1,
+        "camera": {
+          "angle": 0,
+          "target": [
+            0,
+            -0.2249999873595243,
+            0.00947427749633789
+          ],
+          "height": 0.5040160900975025
+        },
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "id": "rack",
+      "name": "rack-photo-angle",
+      "ref": "Power_Rack.JPG",
+      "crop": {
+        "left": 750,
+        "top": 460,
+        "width": 230,
+        "height": 440
+      },
+      "camera": {
+        "position": [
+          0.95,
+          1.17,
+          1.12
+        ],
+        "target": [
+          0.6,
+          1.02,
+          -0.01
+        ],
+        "fov": 32
+      },
+      "residual": "Matched near-front post / hole / support detail with modest side elevation. Reference is four-post cage and different holder system; model preserves two stand uprights and existing J-cup bar axis.",
+      "render": {
+        "file": "scripts/anatomy/rebuild-evidence/gym/final/rack-photo-angle.png",
+        "triangles": 21780,
+        "draws": 1,
+        "camera": {
+          "angle": 0,
+          "target": [
+            -2.9802322387695312e-8,
+            0.7250000236518681,
+            -0.07499998807907104
+          ],
+          "height": 1.624000053831339
+        },
+        "width": 800,
+        "height": 600
+      }
+    },
+    {
+      "id": "cable",
+      "name": "cable-photo-angle",
+      "ref": "Multifunctional_cable_and_row_machines_in_a_gym.jpg",
+      "crop": {
+        "left": 325,
+        "top": 445,
+        "width": 125,
+        "height": 280
+      },
+      "camera": {
+        "position": [
+          0.38,
+          0.64,
+          0.7
+        ],
+        "target": [
+          0,
+          0.4,
+          -0.37
+        ],
+        "fov": 43
+      },
+      "residual": "Matched low front-oblique view of the stack and vertical rods. Reference frame is round-section, shrouded multi-station equipment; model is an unshrouded single tower and does not assert identical weight/count/mechanical advantage.",
+      "render": {
+        "file": "scripts/anatomy/rebuild-evidence/gym/final/cable-photo-angle.png",
+        "triangles": 69492,
+        "draws": 1,
+        "camera": {
+          "angle": 0,
+          "target": [
+            0,
+            1.099999904707074,
+            -0.2974999938160181
+          ],
+          "height": 2.4639997862100604
+        },
+        "width": 800,
+        "height": 600
+      }
+    }
+  ],
+  "claim": "Approximate photo-angle/crop matching studies, NOT exact model or camera calibration. Full mandatory matched front/three-quarter/profile/detail evidence remains incomplete."
+}

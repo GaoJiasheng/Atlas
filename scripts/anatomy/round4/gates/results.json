@@ -1,0 +1,43 @@
+[
+  {
+    "command": "pnpm exec vitest run tests/muscles-round4.test.ts tests/muscles-round3.test.ts tests/space-scene/muscles-rebuild.test.ts",
+    "exitCode": 0,
+    "seconds": 3.32,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/exec-vitest-run-tests_muscles-round4.test.ts-tests_muscles-round3.test.ts-tests_space-scene_muscles-rebuild.test.ts.log"
+  },
+  {
+    "command": "pnpm check",
+    "exitCode": 0,
+    "seconds": 47.36,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/check.log"
+  },
+  {
+    "command": "pnpm validate",
+    "exitCode": 0,
+    "seconds": 4.11,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/validate.log"
+  },
+  {
+    "command": "pnpm test",
+    "exitCode": 0,
+    "seconds": 72.67,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/test.log"
+  },
+  {
+    "command": "pnpm build",
+    "exitCode": 0,
+    "seconds": 61.44,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/build.log"
+  },
+  {
+    "command": "pnpm exec vitest run tests/js-budget.test.ts",
+    "exitCode": 0,
+    "seconds": 3.52,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/exec-vitest-run-tests_js-budget.test.ts.log"
+  },
+  {
+    "command": "pnpm check (final evidence-script cleanup)",
+    "exitCode": 0,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round4/gates/check-final.log"
+  }
+]

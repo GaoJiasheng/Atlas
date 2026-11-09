@@ -1086,8 +1086,8 @@
         "zh": "显示参考人体上的本区位置。"
       },
       "detail": {
-        "en": "Locates the region on a male reference body. This low-detail shell is faded in anatomy views. Motion shows a regional joint chain, with illustrative skin weights rather than an individual body measurement.",
-        "zh": "帮助在男性参考人体上找到本区。解剖视图中淡显低精度皮肤轮廓。动作只演示本区关节链，皮肤权重是示意，不能当作个人身体测量。"
+        "en": "Locates the region on a male reference body. This smooth source-derived shell is faded in anatomy views. Motion shows a regional joint chain, with illustrative skin weights rather than an individual body measurement.",
+        "zh": "帮助在男性参考人体上找到本区。解剖视图中淡显平滑皮肤轮廓。动作只演示本区关节链，皮肤权重是示意，不能当作个人身体测量。"
       },
       "context": true,
       "shell": true,
@@ -1349,6 +1349,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

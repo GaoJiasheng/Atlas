@@ -1,0 +1,314 @@
+{
+  "pose": {
+    "shoulder.l": {
+      "flexion": 90
+    },
+    "elbow.r": {
+      "flexion": 90
+    },
+    "hip.l": {
+      "flexion": 60
+    },
+    "knee.r": {
+      "flexion": 90
+    },
+    "ankle.l": {
+      "dorsiflexion": 15
+    },
+    "ankle.r": {
+      "dorsiflexion": 15
+    }
+  },
+  "renderer": "Same anglesQuat/foldAngles/mirrorSignedAxes as MotionDriver; complete 19 source joints",
+  "limits": "Checks the common asymmetric deformation pose. Held-object contact and runtime procedural hands remain GPU/patch acceptance.",
+  "shots": [
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/arms-pose-0.png",
+      "triangles": 41400,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.0000779181718826294,
+          -0.2585654556751251,
+          0.17586635053157806
+        ],
+        "height": 1.6151668071746828
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/arms-pose-35.png",
+      "triangles": 41400,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.0000779181718826294,
+          -0.2585654556751251,
+          0.17586635053157806
+        ],
+        "height": 1.6151668071746828
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/arms-pose-90.png",
+      "triangles": 41400,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.0000779181718826294,
+          -0.2585654556751251,
+          0.17586635053157806
+        ],
+        "height": 1.6151668071746828
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/back-pose-0.png",
+      "triangles": 31944,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.00003629922866821289,
+          -0.20868095755577087,
+          0.1942109912633896
+        ],
+        "height": 1.6126728916168214
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/back-pose-35.png",
+      "triangles": 31944,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00003629922866821289,
+          -0.20868095755577087,
+          0.1942109912633896
+        ],
+        "height": 1.6126728916168214
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/back-pose-90.png",
+      "triangles": 31944,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.00003629922866821289,
+          -0.20868095755577087,
+          0.1942109912633896
+        ],
+        "height": 1.6126728916168214
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/chest-pose-0.png",
+      "triangles": 31940,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000020310282707214355,
+          -0.3604571223258972,
+          0.08993875980377197
+        ],
+        "height": 1.6131940650939942
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/chest-pose-35.png",
+      "triangles": 31940,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000020310282707214355,
+          -0.3604571223258972,
+          0.08993875980377197
+        ],
+        "height": 1.6131940650939942
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/chest-pose-90.png",
+      "triangles": 31940,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000020310282707214355,
+          -0.3604571223258972,
+          0.08993875980377197
+        ],
+        "height": 1.6131940650939942
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/core-pose-0.png",
+      "triangles": 31982,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.00003662705421447754,
+          -0.051069170236587524,
+          0.17630945146083832
+        ],
+        "height": 1.6130890560150148
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/core-pose-35.png",
+      "triangles": 31982,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00003662705421447754,
+          -0.051069170236587524,
+          0.17630945146083832
+        ],
+        "height": 1.6130890560150148
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/core-pose-90.png",
+      "triangles": 31982,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.00003662705421447754,
+          -0.051069170236587524,
+          0.17630945146083832
+        ],
+        "height": 1.6130890560150148
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/legs-pose-0.png",
+      "triangles": 21491,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -1.4901161193847656e-8,
+          0.07837647199630737,
+          0.1873210370540619
+        ],
+        "height": 1.6127732276916504
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/legs-pose-35.png",
+      "triangles": 21491,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -1.4901161193847656e-8,
+          0.07837647199630737,
+          0.1873210370540619
+        ],
+        "height": 1.6127732276916504
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/legs-pose-90.png",
+      "triangles": 21491,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -1.4901161193847656e-8,
+          0.07837647199630737,
+          0.1873210370540619
+        ],
+        "height": 1.6127732276916504
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/shoulders-pose-0.png",
+      "triangles": 31904,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000022858381271362305,
+          -0.42068856954574585,
+          0.1436728984117508
+        ],
+        "height": 1.6130370521545412
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/shoulders-pose-35.png",
+      "triangles": 31904,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000022858381271362305,
+          -0.42068856954574585,
+          0.1436728984117508
+        ],
+        "height": 1.6130370521545412
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-probe/shoulders-pose-90.png",
+      "triangles": 31904,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000022858381271362305,
+          -0.42068856954574585,
+          0.1436728984117508
+        ],
+        "height": 1.6130370521545412
+      },
+      "width": 640,
+      "height": 800
+    }
+  ]
+}

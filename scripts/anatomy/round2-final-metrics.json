@@ -1,0 +1,68 @@
+[
+  {
+    "topic": "arms",
+    "beforeBytes": 1386976,
+    "afterBytes": 1320728,
+    "beforeTriangles": 142616,
+    "afterTriangles": 154894,
+    "beforeDraws": 64,
+    "afterDraws": 112,
+    "exerciseTriangles": 6846,
+    "sha256": "3f2f702a7f95692d1c5a96da8bb964c136815887c77ea148dce4d804418e6a4b"
+  },
+  {
+    "topic": "back",
+    "beforeBytes": 1483520,
+    "afterBytes": 1363952,
+    "beforeTriangles": 159762,
+    "afterTriangles": 172369,
+    "beforeDraws": 62,
+    "afterDraws": 97,
+    "exerciseTriangles": 8407,
+    "sha256": "55139b57ade71d191853e92f05fcc1e68a5c12792471a2d2225b2b22cf0f834f"
+  },
+  {
+    "topic": "chest",
+    "beforeBytes": 1351732,
+    "afterBytes": 1364000,
+    "beforeTriangles": 155639,
+    "afterTriangles": 183213,
+    "beforeDraws": 42,
+    "afterDraws": 62,
+    "exerciseTriangles": 6560,
+    "sha256": "da282a56e0f61ef591021936675b08a64953bbb2d8ae212ce03ad07b28511b02"
+  },
+  {
+    "topic": "core",
+    "beforeBytes": 1452448,
+    "afterBytes": 1386608,
+    "beforeTriangles": 170810,
+    "afterTriangles": 190567,
+    "beforeDraws": 36,
+    "afterDraws": 58,
+    "exerciseTriangles": 4973,
+    "sha256": "b26f7eccc43b2b6011dcc2c228c5aa3fe2faf51d8da643bb36681535e035a3eb"
+  },
+  {
+    "topic": "legs",
+    "beforeBytes": 1446512,
+    "afterBytes": 1341536,
+    "beforeTriangles": 149174,
+    "afterTriangles": 159064,
+    "beforeDraws": 66,
+    "afterDraws": 110,
+    "exerciseTriangles": 5674,
+    "sha256": "0016306e9e5e84db14edf59cd0ad10a62c454d8537086cfc20484623b2e7ecfe"
+  },
+  {
+    "topic": "shoulders",
+    "beforeBytes": 1103084,
+    "afterBytes": 1021188,
+    "beforeTriangles": 129896,
+    "afterTriangles": 140347,
+    "beforeDraws": 48,
+    "afterDraws": 72,
+    "exerciseTriangles": 5941,
+    "sha256": "322f80705e42d96d8f1d01ba78077c1e524e9e9f4430920d212fcb62a1f90f65"
+  }
+]

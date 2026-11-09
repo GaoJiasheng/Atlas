@@ -1,0 +1,428 @@
+{
+  "lighting": {
+    "source": "src/engines/space-scene/stages/model3d/Lighting.tsx",
+    "rigs": {
+      "paper": {
+        "hemi": [
+          [
+            1,
+            0.9215818562755338,
+            0.8069522576650873
+          ],
+          [
+            0.5840784178830671,
+            0.514917665367466,
+            0.3813260114221238
+          ],
+          0.75
+        ],
+        "lights": [
+          [
+            "#fff0dc",
+            2.6,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#e9edf0",
+            0.55,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#ffffff",
+            0.9,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.7,
+        "exposure": 1.05
+      },
+      "cinema": {
+        "hemi": [
+          [
+            0.4019777798219466,
+            0.45641102317066595,
+            0.514917665367466
+          ],
+          [
+            0.008568125615105716,
+            0.009134058699157796,
+            0.010329823026364548
+          ],
+          0.35
+        ],
+        "lights": [
+          [
+            "#e9eff5",
+            2.4,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#c9d1d9",
+            0.28,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#f2f2f2",
+            1.15,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.8,
+        "exposure": 1
+      }
+    },
+    "backend": "CPU depth raster; GGX / sampled installed RoomEnvironment / ACES / sRGB",
+    "limits": "No GPU, shader derivative micrograin, screen AA, or exercise contact acceptance."
+  },
+  "materialSource": "SceneRoot.tsx equipmentStyle / Equipment.tsx overrides",
+  "roughness": 0.68,
+  "metalness": 0,
+  "envMapIntensity": 0.5,
+  "shots": [
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/barbell-front.png",
+      "triangles": 35096,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 3.2450000703334805
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/barbell-three-quarter.png",
+      "triangles": 35096,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 2.342529677441971
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/barbell-profile.png",
+      "triangles": 35096,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 0.44247751086950315
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/barbell-detail.png",
+      "triangles": 35096,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0.753,
+          0,
+          0
+        ],
+        "height": 0.35
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/dumbbell-front.png",
+      "triangles": 22784,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 0.4867500193417072
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/dumbbell-three-quarter.png",
+      "triangles": 22784,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 0.4651691804499673
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/dumbbell-profile.png",
+      "triangles": 22784,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "height": 0.20649775899946696
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/dumbbell-detail.png",
+      "triangles": 22784,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0.1,
+          0,
+          0
+        ],
+        "height": 0.24
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/bench-front.png",
+      "triangles": 25660,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.034586310386657715,
+          0.05680108070373535
+        ],
+        "height": 0.9803748023509978
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/bench-three-quarter.png",
+      "triangles": 25660,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          -0.071898452937603,
+          -0.041365474462509155,
+          0.015389353036880493
+        ],
+        "height": 1.6378102944794466
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/bench-profile.png",
+      "triangles": 25660,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          -0.034586310386657715,
+          0.05680108070373535
+        ],
+        "height": 1.658335119485855
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/bench-detail.png",
+      "triangles": 25660,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0,
+          -0.13,
+          -0.12
+        ],
+        "height": 0.63
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/rack-front.png",
+      "triangles": 21780,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -2.9802322387695312e-8,
+          0.7250000236518681,
+          -0.07499998807907104
+        ],
+        "height": 1.9469825819134712
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/rack-three-quarter.png",
+      "triangles": 21780,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          -0.018231093883514404,
+          0.6871892958879471,
+          -0.21429374814033508
+        ],
+        "height": 2.1031868005455947
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/rack-profile.png",
+      "triangles": 21780,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -2.9802322387695312e-8,
+          0.7250000236518681,
+          -0.07499998807907104
+        ],
+        "height": 1.7110000567151604
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/rack-detail.png",
+      "triangles": 21780,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0.6,
+          1.13,
+          0
+        ],
+        "height": 0.36
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/cable-front.png",
+      "triangles": 69492,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          1.099999904707074,
+          -0.2974999938160181
+        ],
+        "height": 2.595999774757028
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/cable-three-quarter.png",
+      "triangles": 69492,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          -0.013560935854911804,
+          1.0737064480781555,
+          -0.3749425634741783
+        ],
+        "height": 2.7042501759529114
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/cable-profile.png",
+      "triangles": 69492,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          1.099999904707074,
+          -0.2974999938160181
+        ],
+        "height": 2.595999774757028
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/gym/resume-look1/cable-detail.png",
+      "triangles": 69492,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0,
+          0.4,
+          -0.27
+        ],
+        "height": 0.8
+      },
+      "width": 640,
+      "height": 800
+    }
+  ],
+  "limitations": "These are comparison studies of related equipment; references do not supply matching orthogonal views, so front/profile are construction checks, not photo-matched acceptance."
+}

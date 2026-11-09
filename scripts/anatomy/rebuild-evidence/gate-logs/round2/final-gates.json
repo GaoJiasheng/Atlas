@@ -1,0 +1,12 @@
+{
+  "live": {
+    "status": "PASS",
+    "runs": 5,
+    "record": "scripts/anatomy/rebuild-evidence/gate-logs/round2/live-run.json"
+  },
+  "patch": {
+    "status": "PASS",
+    "runs": 7,
+    "record": "scripts/anatomy/rebuild-evidence/gate-logs/round2/patch-run.json"
+  }
+}

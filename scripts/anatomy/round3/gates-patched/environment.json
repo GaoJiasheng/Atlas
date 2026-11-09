@@ -1,0 +1,5 @@
+{
+  "nodeModules": "writable facade of installed versions",
+  "vitestOverride": "server.deps.inline: @react-three/drei; maxWorkers: 2 to avoid unrelated 5-second CPU timeouts while offline renders run",
+  "reason": "Existing solar-system-polish suite fails Vite SSR external loading of Html.js in original config; real dependency inlining passes all 28 assertions. Product source and repository test assertions unchanged."
+}

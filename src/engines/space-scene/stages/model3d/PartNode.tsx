@@ -1,3 +1,4 @@
+import { applyExerciseMaskDepth, exerciseMaskVisible } from '../../../../content/topics/muscles-core/runtime/highlight';
 /**
  * One part on the stage: position (shared eased explode), fade (visibility /
  * x-ray / faint), put-aside motion (`hide`: slide out along the explode
@@ -114,6 +115,8 @@ export interface ShiftMove {
 
 /** Geometry + rest transform of a part (from a primitive or a glb mesh). */
 export interface PartShape {
+  /** Muscle sheet projected onto and skinned with the mannequin; exercise only. */
+  exerciseShape?: PartShape;
   pieces: ShapePiece[];
   /** Opted-in GLB base colour and alpha; shared loader materials are never mutated or disposed here. */
   surface?: GltfSurface;
@@ -385,7 +388,9 @@ export function PartNode(props: PartNodeProps) {
   const fillShape = useMemo(() => (filled && part.primitive ? fillKit!.fillShapeForPrimitive(part.primitive) : null), [part, filled, fillKit]);
   const meniscus = props.fill?.meniscus ?? 0;
   const fillGeometry = useMemo(() => (fillShape ? fillKit!.createFillGeometry(fillShape, meniscus) : null), [fillShape, meniscus, fillKit]);
-  const shape = useMemo(() => fillGeometry ? { ...props.shape, pieces: [{ ...props.shape.pieces[0]!, geometry: fillGeometry, matrices: null }] } : props.shape, [props.shape, fillGeometry]);
+  const exerciseMask = props.tintLive === true && props.shape.exerciseShape !== undefined;
+  const baseShape = exerciseMask ? props.shape.exerciseShape! : props.shape;
+  const shape = useMemo(() => fillGeometry ? { ...baseShape, pieces: [{ ...baseShape.pieces[0]!, geometry: fillGeometry, matrices: null }] } : baseShape, [baseShape, fillGeometry]);
   const fillMotion = useRef({ from: 0, to: NaN, now: 0, start: 0, shown: false, level: 0, volume: 0, drawn: NaN });
   useEffect(() => {
     // New buffers start empty: draw the current volume into them on the next frame.
@@ -416,6 +421,7 @@ export function PartNode(props: PartNodeProps) {
   const posRef = useRef<Group>(null);
   const poseRef = useRef<Group>(null);
   const animRef = useRef<Group>(null);
+  useLayoutEffect(() => { animRef.current?.matrix.identity(); }, [baseShape]);
   const pieces = useRef(new Map<ShapePiece, Object3D>());
   const motion = useRef({
     base: display.visible ? display.opacity : 0,
@@ -487,7 +493,7 @@ export function PartNode(props: PartNodeProps) {
   const slotCount = styles.length;
   // Keyed on the per-slot colour flags and the glb surface, so a new shape object never rebuilds materials by itself.
   const colorKey = slotVertexColors(shape.pieces, slotCount);
-  const pms = useMemo(() => createSlotMaterialsFor(colorKey), [colorKey, shape.surface]);
+  const pms = useMemo(() => createSlotMaterialsFor(colorKey), [colorKey, shape.surface, shape.fibre]);
   const hasLines = useMemo(() => shape.pieces.some((p) => p.lines), [shape]);
   const lineMat = useMemo(
     () => (hasLines ? new LineBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, clipShadows: true }) : null),
@@ -551,8 +557,10 @@ export function PartNode(props: PartNodeProps) {
       shape.surface?.style(pm.material);
       // glb muscles: the fibre grain follows `_FIBRE` (the UVs wrap around the belly).
       if (shape.fibre) styleFibreGrain(pm, shape.fibre, (styles[i] ?? style).look.normal);
+      // An exercise mask is a skin patch: the muscle normal map on its skin UVs aliases into stripes.
+      if (exerciseMask) pm.material.normalScale.set(0, 0);
     });
-  }, [pms, styles, style, shape.fibre, shape.surface]);
+  }, [pms, styles, style, shape.fibre, shape.surface, exerciseMask]);
   useEffect(() => {
     lineMat?.color.set(props.lineColor);
   }, [lineMat, props.lineColor]);
@@ -661,10 +669,10 @@ export function PartNode(props: PartNodeProps) {
   // material remain unchanged for restoration. Layer/aside fades still run.
   useLayoutEffect(() => {
     const m = motion.current;
-    const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown);
+    const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown) && exerciseMaskVisible(exerciseMask, display.tint);
     const changed = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, props.castShadow && shown && m.fade > .6);
     if (changed) { runtime.shadowDirty = true; props.fillBridge?.invalidate(); }
-  }, [props.instantHidden, display.visible, props.castShadow, props.fill, props.fillBridge, handle, runtime]);
+  }, [props.instantHidden, display.visible, display.tint, exerciseMask, props.castShadow, props.fill, props.fillBridge, handle, runtime]);
 
   // Hidden, faint and context parts do not take part in picking (clicks pass through).
   const pickable = display.visible && display.selectable;
@@ -743,7 +751,7 @@ export function PartNode(props: PartNodeProps) {
     const prevFade = m.fade;
     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));
     const targetFade = display.hidden ? 0 : targetBase;
-    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown);
+    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown) && exerciseMaskVisible(exerciseMask, display.tint);
     if (fill && props.fillBridge) {
       const reading = props.fillBridge.fills.get(part.id);
       const volume = fm.shown ? fm.volume : 0;
@@ -752,7 +760,9 @@ export function PartNode(props: PartNodeProps) {
     }
     pms.forEach((pm, i) => {
       const mat = pm.material;
-      (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
+      applyExerciseMaskDepth(mat, exerciseMask);
+      if (exerciseMask) fadePartMaterial(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost, true);
+      else (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
     });
     if (lineMat) lineMat.opacity = m.fade * LINE_OPACITY;
     const cast = props.castShadow && shown && m.fade > 0.6;
@@ -1078,7 +1088,7 @@ export function PartNode(props: PartNodeProps) {
     // Animations (about their pivots) and the fan they or the pose give a folding wing.
     let fan = m.poseNow.fan ?? shape.restFan;
     const anim = animRef.current;
-    const scaled = !shape.fibre && (c > 0 || contractChanged);
+    const scaled = !shape.fibre && !exerciseMask && (c > 0 || contractChanged);
     if (anim && (props.animations.length > 0 || scaled)) {
       anim.matrix.identity();
       const running = runtime.energy > 0;

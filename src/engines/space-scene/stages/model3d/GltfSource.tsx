@@ -298,7 +298,13 @@ export default function GltfSource({
     };
     for (const [partId, name] of meshes) {
       const mesh = findMesh(root.getObjectByName(loaded(name)));
-      if (mesh) out.set(partId, shapeOf(mesh)); // `pnpm validate` checks every node exists.
+      if (mesh) {
+        const shape = shapeOf(mesh);
+        const exercise = findMesh(root.getObjectByName(loaded(`exercise-${name}`)));
+        if (exercise) shape.exerciseShape = { ...shapeOf(exercise), closed: false };
+        else if (mesh.userData.exerciseMaskSet) shape.exerciseShape = { ...shape, pieces: [] };
+        out.set(partId, shape); // `pnpm validate` checks every node exists.
+      }
     }
     const body = new Map<string, PartShape>();
     for (const name of BODY_NODES) {

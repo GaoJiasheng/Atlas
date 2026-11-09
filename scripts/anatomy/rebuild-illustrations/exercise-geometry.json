@@ -1,0 +1,43 @@
+{
+  "barbellBenchPress": {
+    "startShoulder": [
+      252,
+      460
+    ],
+    "startBar": [
+      252,
+      265
+    ],
+    "endElbow": [
+      332,
+      566
+    ],
+    "endWrist": [
+      330,
+      480
+    ],
+    "twoPlatePacks": true,
+    "twoCollars": true
+  },
+  "heelWalk": {
+    "shoePitchDegrees": 30,
+    "projectedPitchDegrees": 24.8,
+    "heelOnlyContact": true
+  },
+  "cableHipAdduction": {
+    "machineTransformIdentical": true,
+    "supportLegIdentical": true,
+    "nearLegStartAnkle": [
+      225,
+      787
+    ],
+    "nearLegEndAnkle": [
+      396,
+      791
+    ],
+    "pulley": [
+      128,
+      760
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-09",
+  "counting": "Decoded named GLB node instances including optional skin-wire copy; on-screen exercise uses one body style and excludes anatomy-context alternatives",
+  "rows": [
+    {
+      "topic": "arms",
+      "beforeBytes": 3196088,
+      "afterBytes": 1386976,
+      "beforeTriangles": 199435,
+      "afterTriangles": 142616,
+      "draws": 64
+    },
+    {
+      "topic": "back",
+      "beforeBytes": 3954616,
+      "afterBytes": 1483520,
+      "beforeTriangles": 273682,
+      "afterTriangles": 159762,
+      "draws": 62
+    },
+    {
+      "topic": "chest",
+      "beforeBytes": 3802480,
+      "afterBytes": 1351732,
+      "beforeTriangles": 237847,
+      "afterTriangles": 155639,
+      "draws": 42
+    },
+    {
+      "topic": "core",
+      "beforeBytes": 3828212,
+      "afterBytes": 1452448,
+      "beforeTriangles": 280452,
+      "afterTriangles": 170810,
+      "draws": 36
+    },
+    {
+      "topic": "legs",
+      "beforeBytes": 3983112,
+      "afterBytes": 1446512,
+      "beforeTriangles": 251523,
+      "afterTriangles": 149174,
+      "draws": 66
+    },
+    {
+      "topic": "shoulders",
+      "beforeBytes": 2231780,
+      "afterBytes": 1103084,
+      "beforeTriangles": 156803,
+      "afterTriangles": 129896,
+      "draws": 48
+    }
+  ],
+  "gripBytes": 362668
+}

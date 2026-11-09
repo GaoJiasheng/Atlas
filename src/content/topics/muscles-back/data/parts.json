@@ -970,8 +970,8 @@
         "zh": "在全身上标出背部肌肉的位置。"
       },
       "detail": {
-        "en": "A simplified skin surface from the same reference body. X-RAY fades it so that you can see the muscles underneath [M3].",
-        "zh": "同一具参考人体的简化皮肤。透视模式会把它调淡，让你看到下面的肌肉 [M3]。"
+        "en": "A smooth source-derived skin surface from the same reference body. X-RAY fades it so that you can see the muscles underneath [M3].",
+        "zh": "同一具参考人体的平滑皮肤。透视模式会把它调淡，让你看到下面的肌肉 [M3]。"
       }
     }
   ],
@@ -1150,6 +1150,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

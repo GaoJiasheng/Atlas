@@ -1,0 +1,174 @@
+{
+  "lighting": {
+    "source": "src/engines/space-scene/stages/model3d/Lighting.tsx",
+    "executingSourceSha256": "390534a055203ee1dfacdecbcdeb3c8171e5b3ecc69ec11271a56a2120e0f6e0",
+    "roomFingerprint": "166d09d88824f4a134b46385258412339f7ac3d7a5588fbc501201ee8b81b58c",
+    "rigs": {
+      "paper": {
+        "hemi": [
+          [
+            1,
+            0.9215818562755338,
+            0.8069522576650873
+          ],
+          [
+            0.5840784178830671,
+            0.514917665367466,
+            0.3813260114221238
+          ],
+          0.75
+        ],
+        "lights": [
+          [
+            "#fff0dc",
+            2.6,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#e9edf0",
+            0.55,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#ffffff",
+            0.9,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.7,
+        "exposure": 1.05
+      },
+      "cinema": {
+        "hemi": [
+          [
+            0.4019777798219466,
+            0.45641102317066595,
+            0.514917665367466
+          ],
+          [
+            0.008568125615105716,
+            0.009134058699157796,
+            0.010329823026364548
+          ],
+          0.35
+        ],
+        "lights": [
+          [
+            "#e9eff5",
+            2.4,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#c9d1d9",
+            0.28,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#f2f2f2",
+            1.15,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.8,
+        "exposure": 1
+      }
+    },
+    "backend": "CPU depth raster; GGX / sampled installed RoomEnvironment / material emission / ACES / sRGB",
+    "limits": "No GPU, shader derivative micrograin, screen AA, shadows or exercise contact acceptance. Roughness map uses its approximate mean."
+  },
+  "materialSource": "SceneRoot.tsx equipmentStyle / Equipment.tsx overrides",
+  "roughness": 0.68,
+  "metalness": 0,
+  "envMapIntensity": 0.5,
+  "shots": [
+    {
+      "file": "scripts/anatomy/round2-gym/look2/pulldown-front.png",
+      "triangles": 94764,
+      "draws": 1,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          1.1012500525265931,
+          0.36500442028045654
+        ],
+        "height": 2.598950123611093
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/round2-gym/look2/pulldown-three-quarter.png",
+      "triangles": 94764,
+      "draws": 1,
+      "camera": {
+        "angle": 45,
+        "target": [
+          0.11750364303588867,
+          1.0249169617891312,
+          0.2551571726799011
+        ],
+        "height": 2.866136432290077
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/round2-gym/look2/pulldown-profile.png",
+      "triangles": 94764,
+      "draws": 1,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          1.1012500525265931,
+          0.36500442028045654
+        ],
+        "height": 2.598950123611093
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/round2-gym/look2/pulldown-detail.png",
+      "triangles": 94764,
+      "draws": 1,
+      "camera": {
+        "angle": 63,
+        "target": [
+          0,
+          0.4,
+          0.91
+        ],
+        "height": 0.85
+      },
+      "width": 640,
+      "height": 800
+    }
+  ],
+  "limitations": "These are comparison studies of related equipment; references do not supply matching orthogonal views, so front/profile are construction checks, not photo-matched acceptance."
+}

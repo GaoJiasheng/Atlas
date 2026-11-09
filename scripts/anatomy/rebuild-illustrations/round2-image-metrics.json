@@ -1,0 +1,227 @@
+[
+  {
+    "file": "public/illustrations/muscles-arms.webp",
+    "beforeBytes": 53758,
+    "afterBytes": 62282,
+    "sha256": "fa5f629c944c55f9bfea72cc31b1df92ece2b8ad99a162684d71b49a622aef30",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      64,
+      49,
+      64,
+      49
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-arms@2x.webp",
+    "beforeBytes": 115828,
+    "afterBytes": 180700,
+    "sha256": "2709805374c2fc5c0dcdfff3da524a0d26c821eeedae6c3d1dd41b116898ba5e",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      128,
+      97,
+      128,
+      96
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-back.webp",
+    "beforeBytes": 48864,
+    "afterBytes": 64912,
+    "sha256": "8c50ca9014f1178f89add2f3d3b5ec7a422effd50315aa21cdf50b1bda8d8c30",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      93,
+      48,
+      93,
+      49
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-back@2x.webp",
+    "beforeBytes": 112014,
+    "afterBytes": 197872,
+    "sha256": "b46c0ee016e435cb47c07a047a8c83a87c76888d584fdc0a36d1b3b97adae888",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      186,
+      97,
+      186,
+      96
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-chest.webp",
+    "beforeBytes": 53358,
+    "afterBytes": 59392,
+    "sha256": "a5207aeaee0c09b032af582ba9f241d642d3708bfc6aa818cbbc92dff5e04929",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      47,
+      66,
+      48,
+      66
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-chest@2x.webp",
+    "beforeBytes": 114316,
+    "afterBytes": 178288,
+    "sha256": "3e30436ef460cb41abe73d71dcffba65e00212e2b1c7f5697b20b5181ff225f4",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      95,
+      132,
+      96,
+      131
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-core.webp",
+    "beforeBytes": 52694,
+    "afterBytes": 66880,
+    "sha256": "5f2b4451aa371944beab2ab492ae5a568c21d7116476a06a87a161142abb8b51",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      103,
+      48,
+      103,
+      49
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-core@2x.webp",
+    "beforeBytes": 111668,
+    "afterBytes": 236934,
+    "sha256": "79d012929d673a57f0c971284b1051c765428fc10b93bff7cd0fb9383c9d9bfb",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      206,
+      96,
+      206,
+      96
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-legs.webp",
+    "beforeBytes": 45122,
+    "afterBytes": 42330,
+    "sha256": "63c7410c5c103541cd43897297b350fca488e033ff4951a7c52929f3a89899af",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      279,
+      48,
+      279,
+      48
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-legs@2x.webp",
+    "beforeBytes": 105200,
+    "afterBytes": 123352,
+    "sha256": "aedaa0d357029ad6323d4d8c958a286cc7d157a2cabbe554024702f2dc330534",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      558,
+      96,
+      558,
+      96
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-shoulders.webp",
+    "beforeBytes": 50044,
+    "afterBytes": 60722,
+    "sha256": "863ffada32185fa1a98939c28c87de568bc3144b66df121fcfabc1becdb2fe06",
+    "width": 800,
+    "height": 800,
+    "alphaMargins": [
+      48,
+      92,
+      48,
+      92
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/muscles-shoulders@2x.webp",
+    "beforeBytes": 114044,
+    "afterBytes": 188276,
+    "sha256": "8a19cfd5650ec3df3f2c2c5ddb3c6bf51887ab2c70f8ce69ea0d89fbce8c8ac2",
+    "width": 1600,
+    "height": 1600,
+    "alphaMargins": [
+      97,
+      183,
+      95,
+      183
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/exercises/barbell-bench-press.webp",
+    "beforeBytes": 108458,
+    "afterBytes": 81342,
+    "sha256": "7666fa774aa3d898086ff7a15fe7b4331f2e4d9bdeb272fd150bed1444b3f258",
+    "width": 1200,
+    "height": 800,
+    "alphaMargins": [
+      72,
+      119,
+      72,
+      119
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/exercises/heel-walk.webp",
+    "beforeBytes": 80106,
+    "afterBytes": 58564,
+    "sha256": "9d791ca55efc3f5d8cf75bf7002a92b85f36470fd8e1942edac2b0d55cdf5b90",
+    "width": 1200,
+    "height": 800,
+    "alphaMargins": [
+      156,
+      48,
+      155,
+      48
+    ],
+    "maxRGBChannelSpread": 1
+  },
+  {
+    "file": "public/illustrations/exercises/cable-hip-adduction.webp",
+    "beforeBytes": 115326,
+    "afterBytes": 81708,
+    "sha256": "774e380c48290802fb7cc3cf35e28b01ca1590f5bb5bddab531bb4a00a6d2dcd",
+    "width": 1200,
+    "height": 800,
+    "alphaMargins": [
+      72,
+      94,
+      73,
+      95
+    ],
+    "maxRGBChannelSpread": 1
+  }
+]

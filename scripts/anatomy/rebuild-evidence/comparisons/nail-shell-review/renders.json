@@ -1,0 +1,116 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-front.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 0,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-three-quarter.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 35,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-profile.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 90,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-detail.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -2.2351741790771484e-8,
+        -0.018990814685821533,
+        0.014750201255083084
+      ],
+      "height": 0.3999729728698731
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-body.png",
+    "triangles": 51690,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000020310282707214355,
+        -0.3938295841217041,
+        0.029101934283971786
+      ],
+      "height": 1.9157469177246096
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/arms-body-front.png",
+    "triangles": 51690,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000020310282707214355,
+        -0.3938295841217041,
+        0.029101934283971786
+      ],
+      "height": 1.9157469177246096
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/nail-shell-review/hand-dorsal.png",
+    "triangles": 9594,
+    "draws": 1,
+    "camera": {
+      "angle": 180,
+      "target": [
+        0.281939372420311,
+        -0.4736192673444748,
+        0.08133739233016968
+      ],
+      "height": 0.1906311884522438
+    },
+    "width": 640,
+    "height": 800,
+    "imageInPlaneRotationDeg": 180,
+    "directionVerification": "Actual decoded nail-triangle occlusion:95.8percent visible from180,13.5percent from0"
+  }
+]

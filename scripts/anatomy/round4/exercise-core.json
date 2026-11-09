@@ -1,0 +1,192 @@
+{
+  "twistVertices": 1080,
+  "bodyBudget": {
+    "before": 34572,
+    "after": 26999,
+    "maxErrorM": 0.00024998252047225833
+  },
+  "masks": [
+    {
+      "node": "exercise-rectus-abdominis.l",
+      "before": 233,
+      "after": 502,
+      "removedIslands": 5,
+      "intermediateAlpha": 155
+    },
+    {
+      "node": "exercise-rectus-abdominis.r",
+      "before": 228,
+      "after": 498,
+      "removedIslands": 3,
+      "intermediateAlpha": 148
+    },
+    {
+      "node": "exercise-erector-spinae-lumbar.l",
+      "before": 260,
+      "after": 656,
+      "removedIslands": 35,
+      "intermediateAlpha": 229
+    },
+    {
+      "node": "exercise-erector-spinae-lumbar.r",
+      "before": 210,
+      "after": 516,
+      "removedIslands": 33,
+      "intermediateAlpha": 197
+    },
+    {
+      "node": "exercise-external-oblique.l",
+      "before": 387,
+      "after": 530,
+      "removedIslands": 13,
+      "intermediateAlpha": 202
+    },
+    {
+      "node": "exercise-external-oblique.r",
+      "before": 416,
+      "after": 596,
+      "removedIslands": 7,
+      "intermediateAlpha": 223
+    },
+    {
+      "node": "exercise-gluteus-maximus.l",
+      "before": 420,
+      "after": 849,
+      "removedIslands": 5,
+      "intermediateAlpha": 229
+    },
+    {
+      "node": "exercise-gluteus-maximus.r",
+      "before": 400,
+      "after": 830,
+      "removedIslands": 7,
+      "intermediateAlpha": 236
+    },
+    {
+      "node": "exercise-iliacus.l",
+      "before": 36,
+      "after": 191,
+      "removedIslands": 1,
+      "intermediateAlpha": 67
+    },
+    {
+      "node": "exercise-iliacus.r",
+      "before": 36,
+      "after": 156,
+      "removedIslands": 0,
+      "intermediateAlpha": 57
+    },
+    {
+      "node": "exercise-internal-oblique.l",
+      "before": 18,
+      "after": 177,
+      "removedIslands": 1,
+      "intermediateAlpha": 96
+    },
+    {
+      "node": "exercise-internal-oblique.r",
+      "before": 22,
+      "after": 202,
+      "removedIslands": 0,
+      "intermediateAlpha": 99
+    },
+    {
+      "node": "exercise-latissimus-dorsi.l",
+      "before": 435,
+      "after": 855,
+      "removedIslands": 14,
+      "intermediateAlpha": 241
+    },
+    {
+      "node": "exercise-latissimus-dorsi.r",
+      "before": 442,
+      "after": 930,
+      "removedIslands": 5,
+      "intermediateAlpha": 267
+    },
+    {
+      "node": "exercise-multifidus-lumborum.l",
+      "before": 108,
+      "after": 286,
+      "removedIslands": 4,
+      "intermediateAlpha": 99
+    },
+    {
+      "node": "exercise-multifidus-lumborum.r",
+      "before": 110,
+      "after": 268,
+      "removedIslands": 2,
+      "intermediateAlpha": 88
+    },
+    {
+      "node": "exercise-psoas-major.l",
+      "before": 55,
+      "after": 175,
+      "removedIslands": 1,
+      "intermediateAlpha": 68
+    },
+    {
+      "node": "exercise-psoas-major.r",
+      "before": 62,
+      "after": 196,
+      "removedIslands": 1,
+      "intermediateAlpha": 69
+    },
+    {
+      "node": "exercise-quadratus-lumborum.l",
+      "before": 168,
+      "after": 395,
+      "removedIslands": 7,
+      "intermediateAlpha": 129
+    },
+    {
+      "node": "exercise-quadratus-lumborum.r",
+      "before": 177,
+      "after": 398,
+      "removedIslands": 6,
+      "intermediateAlpha": 125
+    },
+    {
+      "node": "exercise-serratus-anterior.l",
+      "before": 692,
+      "after": 1146,
+      "removedIslands": 98,
+      "intermediateAlpha": 326
+    },
+    {
+      "node": "exercise-serratus-anterior.r",
+      "before": 450,
+      "after": 909,
+      "removedIslands": 68,
+      "intermediateAlpha": 316
+    },
+    {
+      "node": "exercise-tensor-fasciae-latae.l",
+      "before": 75,
+      "after": 213,
+      "removedIslands": 1,
+      "intermediateAlpha": 75
+    },
+    {
+      "node": "exercise-tensor-fasciae-latae.r",
+      "before": 65,
+      "after": 208,
+      "removedIslands": 0,
+      "intermediateAlpha": 74
+    },
+    {
+      "node": "exercise-transversus-abdominis.l",
+      "before": 6,
+      "after": 99,
+      "removedIslands": 0,
+      "intermediateAlpha": 29
+    },
+    {
+      "node": "exercise-transversus-abdominis.r",
+      "before": 8,
+      "after": 197,
+      "removedIslands": 0,
+      "intermediateAlpha": 61
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-09",
+  "status": "HISTORICAL camera-direction investigation before the real native-thickness nail-shell repair; component volumes and occlusion percentages do not describe final assets",
+  "finalEvidence": "Final camera180 plus image roll180 visually reverified in comparisons/final/hand-dorsal-sheet.png; exact final asset SHA and closed plate topology/volume are in nail-shell-audit.json and comparisons/final/asset-hashes.json",
+  "method": "ActualGLTFLoader/meshopt indexed hand mesh; topology components; nail component centroids versus nearest30 skin vertices in screen XY",
+  "rows": [
+    {
+      "index": 0,
+      "vertices": 3877,
+      "centre": [
+        0.2810238823201399,
+        -0.48215805711451704,
+        0.08586871622479686
+      ],
+      "nearSkinZ": [
+        0.052923921273809404,
+        0.08679097784843355
+      ]
+    },
+    {
+      "index": 1,
+      "vertices": 102,
+      "centre": [
+        0.28556472858950005,
+        -0.5461398861561892,
+        0.11801010967886677
+      ],
+      "nearSkinZ": [
+        0.10833112292196809,
+        0.12869550603140245
+      ]
+    },
+    {
+      "index": 2,
+      "vertices": 80,
+      "centre": [
+        0.3376836233408272,
+        -0.47766613496656946,
+        0.09906708876466123
+      ],
+      "nearSkinZ": [
+        0.09226547426625958,
+        0.10860995975139895
+      ]
+    },
+    {
+      "index": 3,
+      "vertices": 68,
+      "centre": [
+        0.3184902438586673,
+        -0.5393644473512467,
+        0.11414104364343301
+      ],
+      "nearSkinZ": [
+        0.10474806966378143,
+        0.1225378593814708
+      ]
+    },
+    {
+      "index": 4,
+      "vertices": 65,
+      "centre": [
+        0.25786057296564574,
+        -0.5358218254333276,
+        0.12033161659106631
+      ],
+      "nearSkinZ": [
+        0.10287986290659462,
+        0.130317406922592
+      ]
+    },
+    {
+      "index": 5,
+      "vertices": 45,
+      "centre": [
+        0.22779486472715493,
+        -0.5214810923863483,
+        0.10576324226870941
+      ],
+      "nearSkinZ": [
+        0.09997763624026834,
+        0.11614087778627763
+      ]
+    }
+  ],
+  "actualDecodedOcclusion": {
+    "method": "Projected nail-face centroid Z test against actual indexed skin triangles; area-weighted in XY, not nativeFBX normals",
+    "totalNailProjectedAreaM2": 0.000332473881232892,
+    "visibleFromAngle0M2": 4.495873008381944e-05,
+    "visibleFromAngle180M2": 0.00031839260711432206,
+    "fractionAngle0": 0.13522484809062837,
+    "fractionAngle180": 0.9576469764591635
+  },
+  "nailBoundaryDiagnosis": {
+    "mainSkinOpenBoundaryEdges": 252,
+    "maxOpenBoundaryDistanceFromWristPlaneM": 1.3947278450282194e-06,
+    "openEdgesAwayFromWrist": 0,
+    "nailFaces": 700,
+    "nailFacesGeometricVsVertexNormalDisagreement": 37,
+    "nailTinyAreaFaces": 2
+  }
+}

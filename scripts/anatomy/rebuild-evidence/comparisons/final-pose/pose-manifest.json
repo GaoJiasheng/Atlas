@@ -1,0 +1,424 @@
+{
+  "poses": {
+    "arms": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    },
+    "back": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    },
+    "chest": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    },
+    "core": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    },
+    "legs": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    },
+    "shoulders": {
+      "shoulder.l": {
+        "flexion": 90
+      },
+      "elbow.r": {
+        "flexion": 90
+      },
+      "hip.l": {
+        "flexion": 60
+      },
+      "knee.r": {
+        "flexion": 90
+      },
+      "ankle.l": {
+        "dorsiflexion": 15
+      },
+      "ankle.r": {
+        "dorsiflexion": 15
+      }
+    }
+  },
+  "assetHashes": {
+    "arms": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+    "back": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+    "chest": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+    "core": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+    "legs": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+    "shoulders": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab"
+  },
+  "renderer": "Executing topic-data joint specs and supported subset; same anglesQuat/foldAngles/mirrorSignedAxes and parent-rest conversion as MotionDriver",
+  "limits": "Checks the common asymmetric deformation pose. Held-object contact and runtime procedural hands remain GPU/patch acceptance.",
+  "shots": [
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/arms-pose-0.png",
+      "triangles": 51690,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000020310282707214355,
+          -0.2597637474536896,
+          0.17074018716812134
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/arms-pose-35.png",
+      "triangles": 51690,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000020310282707214355,
+          -0.2597637474536896,
+          0.17074018716812134
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/arms-pose-90.png",
+      "triangles": 51690,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000020310282707214355,
+          -0.2597637474536896,
+          0.17074018716812134
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/back-pose-0.png",
+      "triangles": 51650,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000020310282707214355,
+          -0.20963695645332336,
+          0.18922202289104462
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/back-pose-35.png",
+      "triangles": 51650,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000020310282707214355,
+          -0.20963695645332336,
+          0.18922202289104462
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/back-pose-90.png",
+      "triangles": 51650,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000020310282707214355,
+          -0.20963695645332336,
+          0.18922202289104462
+        ],
+        "height": 1.615439443588257
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/chest-pose-0.png",
+      "triangles": 51708,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00003679096698760986,
+          -0.36133742332458496,
+          0.08494985103607178
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/chest-pose-35.png",
+      "triangles": 51708,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00003679096698760986,
+          -0.36133742332458496,
+          0.08494985103607178
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/chest-pose-90.png",
+      "triangles": 51708,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00003679096698760986,
+          -0.36133742332458496,
+          0.08494985103607178
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/core-pose-0.png",
+      "triangles": 51694,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000020310282707214355,
+          -0.05188643932342529,
+          0.17142353951931
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/core-pose-35.png",
+      "triangles": 51694,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000020310282707214355,
+          -0.05188643932342529,
+          0.17142353951931
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/core-pose-90.png",
+      "triangles": 51694,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000020310282707214355,
+          -0.05188643932342529,
+          0.17142353951931
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/legs-pose-0.png",
+      "triangles": 51682,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000020310282707214355,
+          0.07737889885902405,
+          0.18264825642108917
+        ],
+        "height": 1.6154393100738527
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/legs-pose-35.png",
+      "triangles": 51682,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000020310282707214355,
+          0.07737889885902405,
+          0.18264825642108917
+        ],
+        "height": 1.6154393100738527
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/legs-pose-90.png",
+      "triangles": 51682,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000020310282707214355,
+          0.07737889885902405,
+          0.18264825642108917
+        ],
+        "height": 1.6154393100738527
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/shoulders-pose-0.png",
+      "triangles": 51680,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000020295381546020508,
+          -0.42148709297180176,
+          0.13867269456386566
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/shoulders-pose-35.png",
+      "triangles": 51680,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000020295381546020508,
+          -0.42148709297180176,
+          0.13867269456386566
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/final-pose/shoulders-pose-90.png",
+      "triangles": 51680,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000020295381546020508,
+          -0.42148709297180176,
+          0.13867269456386566
+        ],
+        "height": 1.6154393768310549
+      },
+      "width": 640,
+      "height": 800
+    }
+  ]
+}

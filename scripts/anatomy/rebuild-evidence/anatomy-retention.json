@@ -1,0 +1,47 @@
+{
+  "method": "Actual final compressed GLBs independently decoded and skinned to bind space; exact topology and vertices compared against the input meshes used by surface-audit.json.",
+  "rows": [
+    {
+      "topic": "arms",
+      "assetSha256": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+      "meshes": 60,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    },
+    {
+      "topic": "back",
+      "assetSha256": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+      "meshes": 58,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    },
+    {
+      "topic": "chest",
+      "assetSha256": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+      "meshes": 38,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    },
+    {
+      "topic": "core",
+      "assetSha256": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+      "meshes": 32,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    },
+    {
+      "topic": "legs",
+      "assetSha256": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+      "meshes": 62,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    },
+    {
+      "topic": "shoulders",
+      "assetSha256": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab",
+      "meshes": 44,
+      "maxDecodedBindPositionDeltaM": 0,
+      "topology": "exact same decoded indices"
+    }
+  ]
+}

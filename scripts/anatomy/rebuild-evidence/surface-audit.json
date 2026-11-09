@@ -1,0 +1,2982 @@
+{
+  "date": "2026-11-09",
+  "limits": "Source muscle/bone geometry only; skin/hand/nail reconstruction assessed separately. Sampled errors, not global Hausdorff certificates. Meshopt error inputs are targets, not the measured maxima.",
+  "topics": {
+    "arms": {
+      "topic": "arms",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "anconeus.l",
+          "beforeTriangles": 1442,
+          "afterTriangles": 504,
+          "sourceToCandidateMaxM": 0.001051237169789594,
+          "candidateToSourceMaxM": 0.00040671367224930853,
+          "sourceToCandidateP95M": 0.00027040841421789477,
+          "candidateToSourceP95M": 0.00021668240733036033,
+          "samplesEach": 3400
+        },
+        {
+          "name": "anconeus.r",
+          "beforeTriangles": 1442,
+          "afterTriangles": 504,
+          "sourceToCandidateMaxM": 0.0010512363945942276,
+          "candidateToSourceMaxM": 0.00040214895830558616,
+          "sourceToCandidateP95M": 0.00027330040480327714,
+          "candidateToSourceP95M": 0.00020501491973402852,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-long.l",
+          "beforeTriangles": 3218,
+          "afterTriangles": 1126,
+          "sourceToCandidateMaxM": 0.0013570140132643804,
+          "candidateToSourceMaxM": 0.0005942849111760113,
+          "sourceToCandidateP95M": 0.0003670231846174968,
+          "candidateToSourceP95M": 0.0002847284476730837,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-long.r",
+          "beforeTriangles": 3218,
+          "afterTriangles": 1126,
+          "sourceToCandidateMaxM": 0.0010698652058698317,
+          "candidateToSourceMaxM": 0.0005894363678106965,
+          "sourceToCandidateP95M": 0.00037327885786424557,
+          "candidateToSourceP95M": 0.0002930244452934107,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-short.l",
+          "beforeTriangles": 2696,
+          "afterTriangles": 938,
+          "sourceToCandidateMaxM": 0.0012760733424564228,
+          "candidateToSourceMaxM": 0.0006567622988081449,
+          "sourceToCandidateP95M": 0.00035251039420423083,
+          "candidateToSourceP95M": 0.00027429740432305004,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-short.r",
+          "beforeTriangles": 2696,
+          "afterTriangles": 938,
+          "sourceToCandidateMaxM": 0.0013747149986576336,
+          "candidateToSourceMaxM": 0.0007914889718486942,
+          "sourceToCandidateP95M": 0.0003535485452026735,
+          "candidateToSourceP95M": 0.00028210598042576824,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachialis.l",
+          "beforeTriangles": 3478,
+          "afterTriangles": 1216,
+          "sourceToCandidateMaxM": 0.0012385049083641336,
+          "candidateToSourceMaxM": 0.0005747775061243323,
+          "sourceToCandidateP95M": 0.000361752511929456,
+          "candidateToSourceP95M": 0.00026773738676434683,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachialis.r",
+          "beforeTriangles": 3478,
+          "afterTriangles": 1216,
+          "sourceToCandidateMaxM": 0.0012385046576116623,
+          "candidateToSourceMaxM": 0.0005647682906747254,
+          "sourceToCandidateP95M": 0.0003664990058066061,
+          "candidateToSourceP95M": 0.00025539602173707565,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachioradialis.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0012583975255749142,
+          "candidateToSourceMaxM": 0.00048159772171147336,
+          "sourceToCandidateP95M": 0.0003409410670100396,
+          "candidateToSourceP95M": 0.00025012757840847135,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachioradialis.r",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0006845462666208513,
+          "candidateToSourceMaxM": 0.0005939552305945161,
+          "sourceToCandidateP95M": 0.00033370048583348724,
+          "candidateToSourceP95M": 0.00025473792783684826,
+          "samplesEach": 3400
+        },
+        {
+          "name": "coracobrachialis.l",
+          "beforeTriangles": 1160,
+          "afterTriangles": 406,
+          "sourceToCandidateMaxM": 0.0005739544248022558,
+          "candidateToSourceMaxM": 0.00035278026581132816,
+          "sourceToCandidateP95M": 0.00028241492365631147,
+          "candidateToSourceP95M": 0.00022240439241640565,
+          "samplesEach": 3400
+        },
+        {
+          "name": "coracobrachialis.r",
+          "beforeTriangles": 1160,
+          "afterTriangles": 406,
+          "sourceToCandidateMaxM": 0.000642305008419671,
+          "candidateToSourceMaxM": 0.0004910918917060329,
+          "sourceToCandidateP95M": 0.0002977062954008652,
+          "candidateToSourceP95M": 0.0002565460223643495,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0010384956323958752,
+          "candidateToSourceMaxM": 0.0007270118326224165,
+          "sourceToCandidateP95M": 0.0005675365151576895,
+          "candidateToSourceP95M": 0.00041689612774636556,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0010385481866014388,
+          "candidateToSourceMaxM": 0.0007617686108531745,
+          "sourceToCandidateP95M": 0.0005742740076599852,
+          "candidateToSourceP95M": 0.0004913832379606494,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-lateral.l",
+          "beforeTriangles": 1498,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0018419284417291245,
+          "candidateToSourceMaxM": 0.0009135450357588167,
+          "sourceToCandidateP95M": 0.0005733465045423725,
+          "candidateToSourceP95M": 0.00048565304227400445,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-lateral.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0018406680343201402,
+          "candidateToSourceMaxM": 0.0009130181116974845,
+          "sourceToCandidateP95M": 0.0005984120171029434,
+          "candidateToSourceP95M": 0.0004894318959942542,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.l",
+          "beforeTriangles": 1498,
+          "afterTriangles": 562,
+          "sourceToCandidateMaxM": 0.0012407049857008539,
+          "candidateToSourceMaxM": 0.0008858752680312355,
+          "sourceToCandidateP95M": 0.000569375762701216,
+          "candidateToSourceP95M": 0.00042898231486603516,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 542,
+          "sourceToCandidateMaxM": 0.0013684481117724558,
+          "candidateToSourceMaxM": 0.0009134147195670857,
+          "sourceToCandidateP95M": 0.0005583051292356529,
+          "candidateToSourceP95M": 0.00047674027255981794,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-radialis-brevis.l",
+          "beforeTriangles": 3142,
+          "afterTriangles": 1098,
+          "sourceToCandidateMaxM": 0.0005556252184674291,
+          "candidateToSourceMaxM": 0.00041177605637413294,
+          "sourceToCandidateP95M": 0.0002107447373601546,
+          "candidateToSourceP95M": 0.00015848434068432027,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-radialis-brevis.r",
+          "beforeTriangles": 3142,
+          "afterTriangles": 1098,
+          "sourceToCandidateMaxM": 0.0005279705289760673,
+          "candidateToSourceMaxM": 0.00037471270492873043,
+          "sourceToCandidateP95M": 0.0002093526322796743,
+          "candidateToSourceP95M": 0.00015629602582783875,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-radialis-longus.l",
+          "beforeTriangles": 3705,
+          "afterTriangles": 1296,
+          "sourceToCandidateMaxM": 0.00036116214295221533,
+          "candidateToSourceMaxM": 0.00039589897064230367,
+          "sourceToCandidateP95M": 0.00020526793061305507,
+          "candidateToSourceP95M": 0.0001508898675660421,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-radialis-longus.r",
+          "beforeTriangles": 3705,
+          "afterTriangles": 1296,
+          "sourceToCandidateMaxM": 0.00036117992473653685,
+          "candidateToSourceMaxM": 0.0003728168630693161,
+          "sourceToCandidateP95M": 0.00019985901814420935,
+          "candidateToSourceP95M": 0.0001532239874021927,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-ulnaris.l",
+          "beforeTriangles": 1412,
+          "afterTriangles": 492,
+          "sourceToCandidateMaxM": 0.0012464183647950531,
+          "candidateToSourceMaxM": 0.0008332465746315235,
+          "sourceToCandidateP95M": 0.00032928592914883195,
+          "candidateToSourceP95M": 0.0002568962988020403,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-carpi-ulnaris.r",
+          "beforeTriangles": 1412,
+          "afterTriangles": 494,
+          "sourceToCandidateMaxM": 0.0012474034784740998,
+          "candidateToSourceMaxM": 0.0006705549777403967,
+          "sourceToCandidateP95M": 0.0003350980217707444,
+          "candidateToSourceP95M": 0.0002558039565599414,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-digitorum.l",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1396,
+          "sourceToCandidateMaxM": 0.0010743722349877975,
+          "candidateToSourceMaxM": 0.00041183260436808406,
+          "sourceToCandidateP95M": 0.0002865915011569622,
+          "candidateToSourceP95M": 0.00021389624998540208,
+          "samplesEach": 3400
+        },
+        {
+          "name": "extensor-digitorum.r",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1396,
+          "sourceToCandidateMaxM": 0.0010718876399252188,
+          "candidateToSourceMaxM": 0.0005068573253802874,
+          "sourceToCandidateP95M": 0.00028868891007470727,
+          "candidateToSourceP95M": 0.00023409213320658447,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-carpi-radialis.l",
+          "beforeTriangles": 1666,
+          "afterTriangles": 582,
+          "sourceToCandidateMaxM": 0.0010451525127652306,
+          "candidateToSourceMaxM": 0.0006681439230226791,
+          "sourceToCandidateP95M": 0.0003239989769250935,
+          "candidateToSourceP95M": 0.0002688915858691406,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-carpi-radialis.r",
+          "beforeTriangles": 1666,
+          "afterTriangles": 582,
+          "sourceToCandidateMaxM": 0.000718273770982298,
+          "candidateToSourceMaxM": 0.0005950318166556938,
+          "sourceToCandidateP95M": 0.0003203989247408064,
+          "candidateToSourceP95M": 0.0002426661897749832,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-carpi-ulnaris.l",
+          "beforeTriangles": 3990,
+          "afterTriangles": 1394,
+          "sourceToCandidateMaxM": 0.0008123901337843414,
+          "candidateToSourceMaxM": 0.0006395042469877837,
+          "sourceToCandidateP95M": 0.00032231138715956606,
+          "candidateToSourceP95M": 0.0002160285127129707,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-carpi-ulnaris.r",
+          "beforeTriangles": 3986,
+          "afterTriangles": 1392,
+          "sourceToCandidateMaxM": 0.0005518982688875547,
+          "candidateToSourceMaxM": 0.0005246238806996666,
+          "sourceToCandidateP95M": 0.000312031146574138,
+          "candidateToSourceP95M": 0.00023069185852213358,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-digitorum-superficialis.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0014760594791028308,
+          "candidateToSourceMaxM": 0.000660750808170012,
+          "sourceToCandidateP95M": 0.00045814095631173515,
+          "candidateToSourceP95M": 0.0003272022071621295,
+          "samplesEach": 3400
+        },
+        {
+          "name": "flexor-digitorum-superficialis.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0010663497954303577,
+          "candidateToSourceMaxM": 0.0006135563046722358,
+          "sourceToCandidateP95M": 0.0004464134307436628,
+          "candidateToSourceP95M": 0.0003147760665812749,
+          "samplesEach": 3400
+        },
+        {
+          "name": "hand.l",
+          "beforeTriangles": 6000,
+          "afterTriangles": 1800,
+          "sourceToCandidateMaxM": 0.0014071069879546246,
+          "candidateToSourceMaxM": 0.0012941632737629367,
+          "sourceToCandidateP95M": 0.0007034437590371365,
+          "candidateToSourceP95M": 0.0005564669643061537,
+          "samplesEach": 3400
+        },
+        {
+          "name": "hand.r",
+          "beforeTriangles": 6000,
+          "afterTriangles": 1798,
+          "sourceToCandidateMaxM": 0.0014084037787645293,
+          "candidateToSourceMaxM": 0.0011680021304850954,
+          "sourceToCandidateP95M": 0.0007046036472138999,
+          "candidateToSourceP95M": 0.0005329440841855921,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0009241299347346448,
+          "candidateToSourceMaxM": 0.0008363301703788501,
+          "sourceToCandidateP95M": 0.000455618867292068,
+          "candidateToSourceP95M": 0.0003552595254832716,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008773219510902056,
+          "candidateToSourceMaxM": 0.0008544355875517234,
+          "sourceToCandidateP95M": 0.00041666554979393324,
+          "candidateToSourceP95M": 0.0003092941719599044,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.l",
+          "beforeTriangles": 2042,
+          "afterTriangles": 1494,
+          "sourceToCandidateMaxM": 0.0009499988474838902,
+          "candidateToSourceMaxM": 0.0007635972494657455,
+          "sourceToCandidateP95M": 0.0003878137864812462,
+          "candidateToSourceP95M": 0.0002734235319577085,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.r",
+          "beforeTriangles": 2070,
+          "afterTriangles": 1506,
+          "sourceToCandidateMaxM": 0.0011211942592966107,
+          "candidateToSourceMaxM": 0.0007790116465584125,
+          "sourceToCandidateP95M": 0.0003878785035033897,
+          "candidateToSourceP95M": 0.00026028370810073266,
+          "samplesEach": 3400
+        },
+        {
+          "name": "palmaris-longus.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1396,
+          "sourceToCandidateMaxM": 0.0008138861174095294,
+          "candidateToSourceMaxM": 0.00046473323575465646,
+          "sourceToCandidateP95M": 0.00031355618503006873,
+          "candidateToSourceP95M": 0.00021883105707147337,
+          "samplesEach": 3400
+        },
+        {
+          "name": "palmaris-longus.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1400,
+          "sourceToCandidateMaxM": 0.0008578549605554387,
+          "candidateToSourceMaxM": 0.0005534315610730875,
+          "sourceToCandidateP95M": 0.00031122318421979313,
+          "candidateToSourceP95M": 0.00021724999725575538,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-abdominal.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0006704048698925763,
+          "candidateToSourceMaxM": 0.00050533194036753,
+          "sourceToCandidateP95M": 0.00037192564245196885,
+          "candidateToSourceP95M": 0.00028451128791807435,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-abdominal.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0009447573280633331,
+          "candidateToSourceMaxM": 0.0008549041265853523,
+          "sourceToCandidateP95M": 0.000396454237272698,
+          "candidateToSourceP95M": 0.00030771102657224956,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.l",
+          "beforeTriangles": 850,
+          "afterTriangles": 314,
+          "sourceToCandidateMaxM": 0.0022752928264821327,
+          "candidateToSourceMaxM": 0.0007479785473652436,
+          "sourceToCandidateP95M": 0.0005395786440582983,
+          "candidateToSourceP95M": 0.0004108598178602629,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.r",
+          "beforeTriangles": 850,
+          "afterTriangles": 340,
+          "sourceToCandidateMaxM": 0.002275370171850418,
+          "candidateToSourceMaxM": 0.0006231170316592459,
+          "sourceToCandidateP95M": 0.0005129402716644861,
+          "candidateToSourceP95M": 0.00037651729152375917,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.l",
+          "beforeTriangles": 1492,
+          "afterTriangles": 1078,
+          "sourceToCandidateMaxM": 0.0009714711484201398,
+          "candidateToSourceMaxM": 0.0008215599404294948,
+          "sourceToCandidateP95M": 0.0004534809411015125,
+          "candidateToSourceP95M": 0.00032822176112822215,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.r",
+          "beforeTriangles": 1490,
+          "afterTriangles": 1104,
+          "sourceToCandidateMaxM": 0.0020259790176596452,
+          "candidateToSourceMaxM": 0.0006197324378965914,
+          "sourceToCandidateP95M": 0.000458049440296606,
+          "candidateToSourceP95M": 0.0002930029789020455,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pronator-teres.l",
+          "beforeTriangles": 3660,
+          "afterTriangles": 1276,
+          "sourceToCandidateMaxM": 0.0005689252389413643,
+          "candidateToSourceMaxM": 0.0003768922996016047,
+          "sourceToCandidateP95M": 0.0002388606631885661,
+          "candidateToSourceP95M": 0.00017771371851532406,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pronator-teres.r",
+          "beforeTriangles": 3660,
+          "afterTriangles": 1278,
+          "sourceToCandidateMaxM": 0.0005694867627443796,
+          "candidateToSourceMaxM": 0.00040565259600742223,
+          "sourceToCandidateP95M": 0.0002608652280066747,
+          "candidateToSourceP95M": 0.00021606187811572513,
+          "samplesEach": 3400
+        },
+        {
+          "name": "radius.l",
+          "beforeTriangles": 784,
+          "afterTriangles": 234,
+          "sourceToCandidateMaxM": 0.001168161183771514,
+          "candidateToSourceMaxM": 0.00116403902273467,
+          "sourceToCandidateP95M": 0.0007063778215500969,
+          "candidateToSourceP95M": 0.0005152966454484514,
+          "samplesEach": 3400
+        },
+        {
+          "name": "radius.r",
+          "beforeTriangles": 784,
+          "afterTriangles": 234,
+          "sourceToCandidateMaxM": 0.001041237984630085,
+          "candidateToSourceMaxM": 0.0010102251177242932,
+          "sourceToCandidateP95M": 0.0007276939483579129,
+          "candidateToSourceP95M": 0.00046057111291923294,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0006939059512605545,
+          "candidateToSourceMaxM": 0.0005945877572806291,
+          "sourceToCandidateP95M": 0.00041913401293607765,
+          "candidateToSourceP95M": 0.00034127567322809685,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008213633807519808,
+          "candidateToSourceMaxM": 0.0006146500572376059,
+          "sourceToCandidateP95M": 0.0004178636893173449,
+          "candidateToSourceP95M": 0.00032619403114039866,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-lateral.l",
+          "beforeTriangles": 3628,
+          "afterTriangles": 1268,
+          "sourceToCandidateMaxM": 0.0008803427649590158,
+          "candidateToSourceMaxM": 0.0006068092811975735,
+          "sourceToCandidateP95M": 0.00040506255988385475,
+          "candidateToSourceP95M": 0.0002990978085846262,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-lateral.r",
+          "beforeTriangles": 3628,
+          "afterTriangles": 1268,
+          "sourceToCandidateMaxM": 0.0008805912230142207,
+          "candidateToSourceMaxM": 0.0007117436683758072,
+          "sourceToCandidateP95M": 0.0004040952267304867,
+          "candidateToSourceP95M": 0.000290610239516022,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-long.l",
+          "beforeTriangles": 3950,
+          "afterTriangles": 1382,
+          "sourceToCandidateMaxM": 0.0005957712173764864,
+          "candidateToSourceMaxM": 0.00044898227838465913,
+          "sourceToCandidateP95M": 0.0003191052298262208,
+          "candidateToSourceP95M": 0.00023256386455026168,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-long.r",
+          "beforeTriangles": 3950,
+          "afterTriangles": 1382,
+          "sourceToCandidateMaxM": 0.0005930713390121228,
+          "candidateToSourceMaxM": 0.0006447783367558854,
+          "sourceToCandidateP95M": 0.0003197083692367285,
+          "candidateToSourceP95M": 0.0002543045941100305,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-medial.l",
+          "beforeTriangles": 2686,
+          "afterTriangles": 940,
+          "sourceToCandidateMaxM": 0.0007237996619888594,
+          "candidateToSourceMaxM": 0.00047165790614084785,
+          "sourceToCandidateP95M": 0.00029888003331554706,
+          "candidateToSourceP95M": 0.00023207643006284125,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii-medial.r",
+          "beforeTriangles": 2686,
+          "afterTriangles": 940,
+          "sourceToCandidateMaxM": 0.0007501950014445797,
+          "candidateToSourceMaxM": 0.0005157117669505524,
+          "sourceToCandidateP95M": 0.0003007400176188358,
+          "candidateToSourceP95M": 0.00021364347287432554,
+          "samplesEach": 3400
+        },
+        {
+          "name": "ulna.l",
+          "beforeTriangles": 904,
+          "afterTriangles": 270,
+          "sourceToCandidateMaxM": 0.0011906535949888519,
+          "candidateToSourceMaxM": 0.0008368151053613016,
+          "sourceToCandidateP95M": 0.0006139704087244502,
+          "candidateToSourceP95M": 0.0004494981676674037,
+          "samplesEach": 3400
+        },
+        {
+          "name": "ulna.r",
+          "beforeTriangles": 904,
+          "afterTriangles": 270,
+          "sourceToCandidateMaxM": 0.0011906538608201253,
+          "candidateToSourceMaxM": 0.0011094463948511048,
+          "sourceToCandidateP95M": 0.0006238462619836845,
+          "candidateToSourceP95M": 0.00040596019732090123,
+          "samplesEach": 3400
+        }
+      ]
+    },
+    "back": {
+      "topic": "back",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "biceps-brachii.l",
+          "beforeTriangles": 1490,
+          "afterTriangles": 696,
+          "sourceToCandidateMaxM": 0.001897617784033224,
+          "candidateToSourceMaxM": 0.0008190838506302277,
+          "sourceToCandidateP95M": 0.0006046974900610774,
+          "candidateToSourceP95M": 0.00042658849732571456,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii.r",
+          "beforeTriangles": 1492,
+          "afterTriangles": 706,
+          "sourceToCandidateMaxM": 0.001897221019965295,
+          "candidateToSourceMaxM": 0.0010452171559236917,
+          "sourceToCandidateP95M": 0.0005957371032020503,
+          "candidateToSourceP95M": 0.00041900009326627084,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachialis.l",
+          "beforeTriangles": 1496,
+          "afterTriangles": 454,
+          "sourceToCandidateMaxM": 0.0011701440072838477,
+          "candidateToSourceMaxM": 0.0008771945186904189,
+          "sourceToCandidateP95M": 0.0006228854266584743,
+          "candidateToSourceP95M": 0.0004584461868303701,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachialis.r",
+          "beforeTriangles": 1496,
+          "afterTriangles": 478,
+          "sourceToCandidateMaxM": 0.0011270357227138035,
+          "candidateToSourceMaxM": 0.000926254246309969,
+          "sourceToCandidateP95M": 0.0006408639877119537,
+          "candidateToSourceP95M": 0.0004858362879300749,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachioradialis.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 462,
+          "sourceToCandidateMaxM": 0.0021442413572302474,
+          "candidateToSourceMaxM": 0.0009556576029274722,
+          "sourceToCandidateP95M": 0.0005912160934997079,
+          "candidateToSourceP95M": 0.0004328232905086367,
+          "samplesEach": 3400
+        },
+        {
+          "name": "brachioradialis.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 452,
+          "sourceToCandidateMaxM": 0.0019772917293981265,
+          "candidateToSourceMaxM": 0.0008847407361144037,
+          "sourceToCandidateP95M": 0.0005680279648265354,
+          "candidateToSourceP95M": 0.0004403262439440882,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.0008551234363602785,
+          "candidateToSourceMaxM": 0.0007667532256285658,
+          "sourceToCandidateP95M": 0.0004361726787485498,
+          "candidateToSourceP95M": 0.0003515867157487221,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.000749934102670857,
+          "candidateToSourceMaxM": 0.000507837787246086,
+          "sourceToCandidateP95M": 0.00041561615664871337,
+          "candidateToSourceP95M": 0.00035215458610989784,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.0010729017900075928,
+          "candidateToSourceMaxM": 0.0009026681261895581,
+          "sourceToCandidateP95M": 0.0006434338916880449,
+          "candidateToSourceP95M": 0.0005525819257435126,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 460,
+          "sourceToCandidateMaxM": 0.0010729293956979577,
+          "candidateToSourceMaxM": 0.0008859850470434262,
+          "sourceToCandidateP95M": 0.0006338444674868947,
+          "candidateToSourceP95M": 0.0005545662303263286,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.l",
+          "beforeTriangles": 1498,
+          "afterTriangles": 502,
+          "sourceToCandidateMaxM": 0.0020859903056693703,
+          "candidateToSourceMaxM": 0.0010299769242971227,
+          "sourceToCandidateP95M": 0.0006151015818406515,
+          "candidateToSourceP95M": 0.0004942568786061102,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 480,
+          "sourceToCandidateMaxM": 0.0020841505426272794,
+          "candidateToSourceMaxM": 0.0010906768400947506,
+          "sourceToCandidateP95M": 0.0006357731688980253,
+          "candidateToSourceP95M": 0.0005419077655138227,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.l",
+          "beforeTriangles": 7986,
+          "afterTriangles": 2498,
+          "sourceToCandidateMaxM": 0.0027850872468100077,
+          "candidateToSourceMaxM": 0.0011151345849128766,
+          "sourceToCandidateP95M": 0.0006322483379315727,
+          "candidateToSourceP95M": 0.00045718070795291185,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.r",
+          "beforeTriangles": 7988,
+          "afterTriangles": 2396,
+          "sourceToCandidateMaxM": 0.0028802078319698295,
+          "candidateToSourceMaxM": 0.0011284468126877619,
+          "sourceToCandidateP95M": 0.0006456561598846986,
+          "candidateToSourceP95M": 0.0004347093093967977,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.l",
+          "beforeTriangles": 2902,
+          "afterTriangles": 1140,
+          "sourceToCandidateMaxM": 0.0018098917197242985,
+          "candidateToSourceMaxM": 0.0011405745956793345,
+          "sourceToCandidateP95M": 0.0006522373525749593,
+          "candidateToSourceP95M": 0.00046899560989516984,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.r",
+          "beforeTriangles": 2896,
+          "afterTriangles": 1106,
+          "sourceToCandidateMaxM": 0.0017739413162290577,
+          "candidateToSourceMaxM": 0.0009814350404047313,
+          "sourceToCandidateP95M": 0.0006416365629788793,
+          "candidateToSourceP95M": 0.0004995734027914851,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008670249905685345,
+          "candidateToSourceMaxM": 0.001014987218797903,
+          "sourceToCandidateP95M": 0.00042769785504974937,
+          "candidateToSourceP95M": 0.00029863755772586005,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008471383539058977,
+          "candidateToSourceMaxM": 0.0008305455418410028,
+          "sourceToCandidateP95M": 0.00043082288075497403,
+          "candidateToSourceP95M": 0.00031624173695622547,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliocostalis-lumborum.l",
+          "beforeTriangles": 3994,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.002221483543566273,
+          "candidateToSourceMaxM": 0.0008128522466274811,
+          "sourceToCandidateP95M": 0.0005106867169705176,
+          "candidateToSourceP95M": 0.00036602885243862,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliocostalis-lumborum.r",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1196,
+          "sourceToCandidateMaxM": 0.002218300406271738,
+          "candidateToSourceMaxM": 0.0008245291542352787,
+          "sourceToCandidateP95M": 0.00048555333731201817,
+          "candidateToSourceP95M": 0.00037710832061489886,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliocostalis-thoracis.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0007878746125497623,
+          "candidateToSourceMaxM": 0.000703289293015072,
+          "sourceToCandidateP95M": 0.0003750637574990966,
+          "candidateToSourceP95M": 0.0002905604843639904,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliocostalis-thoracis.r",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0007884894104391449,
+          "candidateToSourceMaxM": 0.0006741290474222547,
+          "sourceToCandidateP95M": 0.0003785775883935435,
+          "candidateToSourceP95M": 0.00030528946741533423,
+          "samplesEach": 3400
+        },
+        {
+          "name": "infraspinatus.l",
+          "beforeTriangles": 3166,
+          "afterTriangles": 948,
+          "sourceToCandidateMaxM": 0.0012295263311207256,
+          "candidateToSourceMaxM": 0.0006113569296873127,
+          "sourceToCandidateP95M": 0.00036554990158646944,
+          "candidateToSourceP95M": 0.00027310945135872877,
+          "samplesEach": 3400
+        },
+        {
+          "name": "infraspinatus.r",
+          "beforeTriangles": 3166,
+          "afterTriangles": 948,
+          "sourceToCandidateMaxM": 0.0016136966962077464,
+          "candidateToSourceMaxM": 0.0004718706757572584,
+          "sourceToCandidateP95M": 0.0003650531245058093,
+          "candidateToSourceP95M": 0.0002568242631634746,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.l",
+          "beforeTriangles": 8958,
+          "afterTriangles": 2686,
+          "sourceToCandidateMaxM": 0.001223713795146387,
+          "candidateToSourceMaxM": 0.000906415808233623,
+          "sourceToCandidateP95M": 0.0005932467881477264,
+          "candidateToSourceP95M": 0.00044378889384982616,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.r",
+          "beforeTriangles": 11886,
+          "afterTriangles": 3564,
+          "sourceToCandidateMaxM": 0.0011110794716190347,
+          "candidateToSourceMaxM": 0.0008368908611049045,
+          "sourceToCandidateP95M": 0.0005132536722582053,
+          "candidateToSourceP95M": 0.0003597427613597449,
+          "samplesEach": 3400
+        },
+        {
+          "name": "levator-scapulae.l",
+          "beforeTriangles": 3082,
+          "afterTriangles": 924,
+          "sourceToCandidateMaxM": 0.0006131710298478798,
+          "candidateToSourceMaxM": 0.00044911425708026904,
+          "sourceToCandidateP95M": 0.000275199405463014,
+          "candidateToSourceP95M": 0.00020250270788796653,
+          "samplesEach": 3400
+        },
+        {
+          "name": "levator-scapulae.r",
+          "beforeTriangles": 3082,
+          "afterTriangles": 924,
+          "sourceToCandidateMaxM": 0.0006131734704970515,
+          "candidateToSourceMaxM": 0.00046945255360993944,
+          "sourceToCandidateP95M": 0.0002748840134190633,
+          "candidateToSourceP95M": 0.00021589699164289405,
+          "samplesEach": 3400
+        },
+        {
+          "name": "longissimus-thoracis.l",
+          "beforeTriangles": 6900,
+          "afterTriangles": 2068,
+          "sourceToCandidateMaxM": 0.0024608253351387846,
+          "candidateToSourceMaxM": 0.0009922766100501626,
+          "sourceToCandidateP95M": 0.0005792776080379084,
+          "candidateToSourceP95M": 0.0004142830333575121,
+          "samplesEach": 3400
+        },
+        {
+          "name": "longissimus-thoracis.r",
+          "beforeTriangles": 6918,
+          "afterTriangles": 2072,
+          "sourceToCandidateMaxM": 0.00197814031129057,
+          "candidateToSourceMaxM": 0.001099926574890364,
+          "sourceToCandidateP95M": 0.0005769038697883408,
+          "candidateToSourceP95M": 0.00043715126103304077,
+          "samplesEach": 3400
+        },
+        {
+          "name": "lumbar-spine",
+          "beforeTriangles": 5996,
+          "afterTriangles": 2442,
+          "sourceToCandidateMaxM": 0.0017881568555397354,
+          "candidateToSourceMaxM": 0.0012923291960431872,
+          "sourceToCandidateP95M": 0.000836848734091326,
+          "candidateToSourceP95M": 0.0005867288442327437,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pelvis",
+          "beforeTriangles": 12000,
+          "afterTriangles": 3600,
+          "sourceToCandidateMaxM": 0.0015238303141229398,
+          "candidateToSourceMaxM": 0.001229640315629545,
+          "sourceToCandidateP95M": 0.0006546305689690163,
+          "candidateToSourceP95M": 0.0003841198744124305,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-major.l",
+          "beforeTriangles": 3994,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0005787994382458834,
+          "candidateToSourceMaxM": 0.0005456797143068669,
+          "sourceToCandidateP95M": 0.0003235625215898767,
+          "candidateToSourceP95M": 0.00024084844072594721,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-major.r",
+          "beforeTriangles": 3994,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0006004922362400467,
+          "candidateToSourceMaxM": 0.0005519026073487485,
+          "sourceToCandidateP95M": 0.00031419409522429493,
+          "candidateToSourceP95M": 0.00024805908212007356,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-minor.l",
+          "beforeTriangles": 1494,
+          "afterTriangles": 448,
+          "sourceToCandidateMaxM": 0.0004846415001412362,
+          "candidateToSourceMaxM": 0.00045503248739648777,
+          "sourceToCandidateP95M": 0.00026607850437155076,
+          "candidateToSourceP95M": 0.00019035768775351158,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-minor.r",
+          "beforeTriangles": 1494,
+          "afterTriangles": 446,
+          "sourceToCandidateMaxM": 0.000437629482325199,
+          "candidateToSourceMaxM": 0.0003091168716698113,
+          "sourceToCandidateP95M": 0.00024884929343497216,
+          "candidateToSourceP95M": 0.00020506421271750992,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0007080956662138141,
+          "candidateToSourceMaxM": 0.0006840576458030836,
+          "sourceToCandidateP95M": 0.0004187261960631842,
+          "candidateToSourceP95M": 0.0003332822137285544,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0007996151222627199,
+          "candidateToSourceMaxM": 0.0006485680297638342,
+          "sourceToCandidateP95M": 0.00043559187043504596,
+          "candidateToSourceP95M": 0.00035104547161415563,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.l",
+          "beforeTriangles": 1980,
+          "afterTriangles": 1328,
+          "sourceToCandidateMaxM": 0.0018712584987599942,
+          "candidateToSourceMaxM": 0.0010144273436692552,
+          "sourceToCandidateP95M": 0.0005407399980607002,
+          "candidateToSourceP95M": 0.0003055401403714239,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.r",
+          "beforeTriangles": 2022,
+          "afterTriangles": 1340,
+          "sourceToCandidateMaxM": 0.0028725064724158737,
+          "candidateToSourceMaxM": 0.0009379371537989814,
+          "sourceToCandidateP95M": 0.000581705916100962,
+          "candidateToSourceP95M": 0.000317171767174048,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-posterior-inferior.l",
+          "beforeTriangles": 3990,
+          "afterTriangles": 1194,
+          "sourceToCandidateMaxM": 0.0013786041464374772,
+          "candidateToSourceMaxM": 0.0009724260850471536,
+          "sourceToCandidateP95M": 0.0005666238657895414,
+          "candidateToSourceP95M": 0.00042089255621679026,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-posterior-inferior.r",
+          "beforeTriangles": 3988,
+          "afterTriangles": 1194,
+          "sourceToCandidateMaxM": 0.0011542469724588166,
+          "candidateToSourceMaxM": 0.0008524702000838085,
+          "sourceToCandidateP95M": 0.0005672230272918576,
+          "candidateToSourceP95M": 0.0004433251875812663,
+          "samplesEach": 3400
+        },
+        {
+          "name": "spinalis-thoracis.l",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1194,
+          "sourceToCandidateMaxM": 0.0009157992118996678,
+          "candidateToSourceMaxM": 0.000467202870103554,
+          "sourceToCandidateP95M": 0.00027559096793864485,
+          "candidateToSourceP95M": 0.000194389606153085,
+          "samplesEach": 3400
+        },
+        {
+          "name": "spinalis-thoracis.r",
+          "beforeTriangles": 3994,
+          "afterTriangles": 1196,
+          "sourceToCandidateMaxM": 0.001378630600218048,
+          "candidateToSourceMaxM": 0.00043322554809221276,
+          "sourceToCandidateP95M": 0.00028480990859292894,
+          "candidateToSourceP95M": 0.00019744275684539813,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-major.l",
+          "beforeTriangles": 1154,
+          "afterTriangles": 342,
+          "sourceToCandidateMaxM": 0.000778766300545938,
+          "candidateToSourceMaxM": 0.00062913773985562,
+          "sourceToCandidateP95M": 0.00038262753301790967,
+          "candidateToSourceP95M": 0.00030121020620687324,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-major.r",
+          "beforeTriangles": 1154,
+          "afterTriangles": 342,
+          "sourceToCandidateMaxM": 0.0006402739090950812,
+          "candidateToSourceMaxM": 0.0005645794151125771,
+          "sourceToCandidateP95M": 0.0003753789570650174,
+          "candidateToSourceP95M": 0.00030215623601026215,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-minor.l",
+          "beforeTriangles": 1522,
+          "afterTriangles": 456,
+          "sourceToCandidateMaxM": 0.0005970360666727417,
+          "candidateToSourceMaxM": 0.0005061549219640806,
+          "sourceToCandidateP95M": 0.00035516594101055827,
+          "candidateToSourceP95M": 0.00024245886159864405,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-minor.r",
+          "beforeTriangles": 1522,
+          "afterTriangles": 456,
+          "sourceToCandidateMaxM": 0.0005970391679367819,
+          "candidateToSourceMaxM": 0.0005240487056342115,
+          "sourceToCandidateP95M": 0.0003446102007936112,
+          "candidateToSourceP95M": 0.00026353529399985714,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thoracic-spine",
+          "beforeTriangles": 14982,
+          "afterTriangles": 4494,
+          "sourceToCandidateMaxM": 0.0014498235484403368,
+          "candidateToSourceMaxM": 0.0012441000782116532,
+          "sourceToCandidateP95M": 0.0007603892627179906,
+          "candidateToSourceP95M": 0.0005207865081064781,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thorax",
+          "beforeTriangles": 24992,
+          "afterTriangles": 7496,
+          "sourceToCandidateMaxM": 0.001461868743992895,
+          "candidateToSourceMaxM": 0.0012317353974281287,
+          "sourceToCandidateP95M": 0.0008101826178936401,
+          "candidateToSourceP95M": 0.0005879996001649503,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-ascending.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.001556719765519251,
+          "candidateToSourceMaxM": 0.000725411211754741,
+          "sourceToCandidateP95M": 0.0004757302382911466,
+          "candidateToSourceP95M": 0.0003703654195407755,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-ascending.r",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0015573508061897212,
+          "candidateToSourceMaxM": 0.0007230214770694722,
+          "sourceToCandidateP95M": 0.0004648331375108014,
+          "candidateToSourceP95M": 0.00036139663150286936,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-descending.l",
+          "beforeTriangles": 3988,
+          "afterTriangles": 1196,
+          "sourceToCandidateMaxM": 0.001317903398396904,
+          "candidateToSourceMaxM": 0.0008690647737654712,
+          "sourceToCandidateP95M": 0.0005747565641039544,
+          "candidateToSourceP95M": 0.00045730445880165385,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-descending.r",
+          "beforeTriangles": 3988,
+          "afterTriangles": 1194,
+          "sourceToCandidateMaxM": 0.001186644415418103,
+          "candidateToSourceMaxM": 0.0008819155761545779,
+          "sourceToCandidateP95M": 0.000571668039685972,
+          "candidateToSourceP95M": 0.00040823593198750075,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-transverse.l",
+          "beforeTriangles": 2992,
+          "afterTriangles": 896,
+          "sourceToCandidateMaxM": 0.0028401001228184836,
+          "candidateToSourceMaxM": 0.0008164571239386878,
+          "sourceToCandidateP95M": 0.0004424989720650045,
+          "candidateToSourceP95M": 0.00033200300920717673,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-transverse.r",
+          "beforeTriangles": 2992,
+          "afterTriangles": 896,
+          "sourceToCandidateMaxM": 0.0019058528331569137,
+          "candidateToSourceMaxM": 0.0006203856764981757,
+          "sourceToCandidateP95M": 0.00043627959827508917,
+          "candidateToSourceP95M": 0.0003308963372691567,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.l",
+          "beforeTriangles": 1496,
+          "afterTriangles": 934,
+          "sourceToCandidateMaxM": 0.0009314300109981143,
+          "candidateToSourceMaxM": 0.0009295290852640204,
+          "sourceToCandidateP95M": 0.00047395648591469735,
+          "candidateToSourceP95M": 0.0003732423147651096,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 938,
+          "sourceToCandidateMaxM": 0.001204312266627734,
+          "candidateToSourceMaxM": 0.0009207387048752347,
+          "sourceToCandidateP95M": 0.0005159779585373056,
+          "candidateToSourceP95M": 0.00039000377683614585,
+          "samplesEach": 3400
+        }
+      ]
+    },
+    "chest": {
+      "topic": "chest",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "biceps-brachii-short.l",
+          "beforeTriangles": 1484,
+          "afterTriangles": 516,
+          "sourceToCandidateMaxM": 0.005142498553024733,
+          "candidateToSourceMaxM": 0.0007122851617111812,
+          "sourceToCandidateP95M": 0.0005476509469191299,
+          "candidateToSourceP95M": 0.0004526660524440515,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-short.r",
+          "beforeTriangles": 1484,
+          "afterTriangles": 518,
+          "sourceToCandidateMaxM": 0.004630157986148194,
+          "candidateToSourceMaxM": 0.0008643807342239537,
+          "sourceToCandidateP95M": 0.000537734069003368,
+          "candidateToSourceP95M": 0.00045611210876288097,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.0006895767422418497,
+          "candidateToSourceMaxM": 0.0005654007445124305,
+          "sourceToCandidateP95M": 0.00042473071975570773,
+          "candidateToSourceP95M": 0.0003532560247373129,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.000749931117455605,
+          "candidateToSourceMaxM": 0.0006732325132752945,
+          "sourceToCandidateP95M": 0.0004123896126909969,
+          "candidateToSourceP95M": 0.0003522792536687062,
+          "samplesEach": 3400
+        },
+        {
+          "name": "coracobrachialis.l",
+          "beforeTriangles": 1000,
+          "afterTriangles": 350,
+          "sourceToCandidateMaxM": 0.0008885654504941575,
+          "candidateToSourceMaxM": 0.000407317215162114,
+          "sourceToCandidateP95M": 0.00030230684481237724,
+          "candidateToSourceP95M": 0.00026210435422141406,
+          "samplesEach": 3400
+        },
+        {
+          "name": "coracobrachialis.r",
+          "beforeTriangles": 1000,
+          "afterTriangles": 350,
+          "sourceToCandidateMaxM": 0.0008886712554637336,
+          "candidateToSourceMaxM": 0.0003883569407261731,
+          "sourceToCandidateP95M": 0.0003230965653304738,
+          "candidateToSourceP95M": 0.000261059114513275,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.l",
+          "beforeTriangles": 2000,
+          "afterTriangles": 700,
+          "sourceToCandidateMaxM": 0.000886791095720524,
+          "candidateToSourceMaxM": 0.0008393092709747576,
+          "sourceToCandidateP95M": 0.00047766482662357735,
+          "candidateToSourceP95M": 0.0003895787022125887,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.r",
+          "beforeTriangles": 2000,
+          "afterTriangles": 700,
+          "sourceToCandidateMaxM": 0.001045497070744578,
+          "candidateToSourceMaxM": 0.000809043154469123,
+          "sourceToCandidateP95M": 0.0004720076778625985,
+          "candidateToSourceP95M": 0.0003772138933408801,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.l",
+          "beforeTriangles": 7992,
+          "afterTriangles": 2908,
+          "sourceToCandidateMaxM": 0.002784812680153494,
+          "candidateToSourceMaxM": 0.0010862430601903737,
+          "sourceToCandidateP95M": 0.0005429409578786704,
+          "candidateToSourceP95M": 0.00037829777587941506,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.r",
+          "beforeTriangles": 7986,
+          "afterTriangles": 2838,
+          "sourceToCandidateMaxM": 0.0026405779451619867,
+          "candidateToSourceMaxM": 0.000873000083046512,
+          "sourceToCandidateP95M": 0.0005734517220573419,
+          "candidateToSourceP95M": 0.0004091847118867906,
+          "samplesEach": 3400
+        },
+        {
+          "name": "forearm.l",
+          "beforeTriangles": 1688,
+          "afterTriangles": 506,
+          "sourceToCandidateMaxM": 0.0011926935498263278,
+          "candidateToSourceMaxM": 0.0010441061819687365,
+          "sourceToCandidateP95M": 0.0006463335916068434,
+          "candidateToSourceP95M": 0.00043786699434055035,
+          "samplesEach": 3400
+        },
+        {
+          "name": "forearm.r",
+          "beforeTriangles": 1688,
+          "afterTriangles": 506,
+          "sourceToCandidateMaxM": 0.0011926999849091022,
+          "candidateToSourceMaxM": 0.0008833842998658809,
+          "sourceToCandidateP95M": 0.0006314776614139609,
+          "candidateToSourceP95M": 0.0004186191044083924,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008602302143654117,
+          "candidateToSourceMaxM": 0.0007000022638512938,
+          "sourceToCandidateP95M": 0.00043596280941158834,
+          "candidateToSourceP95M": 0.00032446438841056207,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008036793916027855,
+          "candidateToSourceMaxM": 0.0006581492951610543,
+          "sourceToCandidateP95M": 0.0004242341793634744,
+          "candidateToSourceP95M": 0.00030953768921587575,
+          "samplesEach": 3400
+        },
+        {
+          "name": "intercostals-external",
+          "beforeTriangles": 19782,
+          "afterTriangles": 6934,
+          "sourceToCandidateMaxM": 0.002289335603297991,
+          "candidateToSourceMaxM": 0.0007520501766594179,
+          "sourceToCandidateP95M": 0.000621447832999971,
+          "candidateToSourceP95M": 0.0003458833212045211,
+          "samplesEach": 3400
+        },
+        {
+          "name": "intercostals-internal",
+          "beforeTriangles": 19860,
+          "afterTriangles": 6952,
+          "sourceToCandidateMaxM": 0.002224234141589819,
+          "candidateToSourceMaxM": 0.0007796303235475784,
+          "sourceToCandidateP95M": 0.0005352961540692732,
+          "candidateToSourceP95M": 0.00033603966837116397,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.l",
+          "beforeTriangles": 3000,
+          "afterTriangles": 1916,
+          "sourceToCandidateMaxM": 0.001589053997299125,
+          "candidateToSourceMaxM": 0.0007853035705729045,
+          "sourceToCandidateP95M": 0.00044827564818561525,
+          "candidateToSourceP95M": 0.0003083392723813856,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.r",
+          "beforeTriangles": 2996,
+          "afterTriangles": 1950,
+          "sourceToCandidateMaxM": 0.001340954389856054,
+          "candidateToSourceMaxM": 0.0009501404777342829,
+          "sourceToCandidateP95M": 0.00046415398201665606,
+          "candidateToSourceP95M": 0.00032313652762263457,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-abdominal.l",
+          "beforeTriangles": 1508,
+          "afterTriangles": 526,
+          "sourceToCandidateMaxM": 0.0006522994206093156,
+          "candidateToSourceMaxM": 0.0005473284315448819,
+          "sourceToCandidateP95M": 0.00036935881845103304,
+          "candidateToSourceP95M": 0.00030102092688906755,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-abdominal.r",
+          "beforeTriangles": 1508,
+          "afterTriangles": 526,
+          "sourceToCandidateMaxM": 0.0006302625019850979,
+          "candidateToSourceMaxM": 0.000616179119433899,
+          "sourceToCandidateP95M": 0.00037808178664337056,
+          "candidateToSourceP95M": 0.00030386899108642533,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.l",
+          "beforeTriangles": 850,
+          "afterTriangles": 316,
+          "sourceToCandidateMaxM": 0.002275299206706616,
+          "candidateToSourceMaxM": 0.0006008356166337554,
+          "sourceToCandidateP95M": 0.0005312633204982877,
+          "candidateToSourceP95M": 0.0003766657876658704,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.r",
+          "beforeTriangles": 850,
+          "afterTriangles": 340,
+          "sourceToCandidateMaxM": 0.0022753767337744943,
+          "candidateToSourceMaxM": 0.000597805347778646,
+          "sourceToCandidateP95M": 0.0005086689863938801,
+          "candidateToSourceP95M": 0.00037751455556448316,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.l",
+          "beforeTriangles": 3222,
+          "afterTriangles": 1350,
+          "sourceToCandidateMaxM": 0.0015093366331484033,
+          "candidateToSourceMaxM": 0.001015032367934711,
+          "sourceToCandidateP95M": 0.0005601826143315355,
+          "candidateToSourceP95M": 0.000403525236015688,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.r",
+          "beforeTriangles": 3222,
+          "afterTriangles": 1366,
+          "sourceToCandidateMaxM": 0.0015093363851626713,
+          "candidateToSourceMaxM": 0.0009259906291133129,
+          "sourceToCandidateP95M": 0.000578567722660467,
+          "candidateToSourceP95M": 0.00040181083372690593,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-minor.l",
+          "beforeTriangles": 4086,
+          "afterTriangles": 1430,
+          "sourceToCandidateMaxM": 0.0014068143903757995,
+          "candidateToSourceMaxM": 0.0005132222168282519,
+          "sourceToCandidateP95M": 0.0002781897014293867,
+          "candidateToSourceP95M": 0.00020723338824179372,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-minor.r",
+          "beforeTriangles": 4086,
+          "afterTriangles": 1430,
+          "sourceToCandidateMaxM": 0.0009915258506077165,
+          "candidateToSourceMaxM": 0.0004973483102529521,
+          "sourceToCandidateP95M": 0.0002829241863508405,
+          "candidateToSourceP95M": 0.000205233021691103,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-abdominis.l",
+          "beforeTriangles": 1998,
+          "afterTriangles": 1022,
+          "sourceToCandidateMaxM": 0.0011505007515678024,
+          "candidateToSourceMaxM": 0.0008965683868042935,
+          "sourceToCandidateP95M": 0.0004957513221354495,
+          "candidateToSourceP95M": 0.0003765011257162725,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-abdominis.r",
+          "beforeTriangles": 2328,
+          "afterTriangles": 1108,
+          "sourceToCandidateMaxM": 0.0009956720867328628,
+          "candidateToSourceMaxM": 0.0008203257458537962,
+          "sourceToCandidateP95M": 0.0005257556028805813,
+          "candidateToSourceP95M": 0.00039169568892815786,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.000847961052479994,
+          "candidateToSourceMaxM": 0.0008176988021074574,
+          "sourceToCandidateP95M": 0.0004203684659053747,
+          "candidateToSourceP95M": 0.00035619699468376583,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008000232197266533,
+          "candidateToSourceMaxM": 0.0007459141049085536,
+          "sourceToCandidateP95M": 0.0004176419748325981,
+          "candidateToSourceP95M": 0.00035492559988218285,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.l",
+          "beforeTriangles": 18848,
+          "afterTriangles": 6596,
+          "sourceToCandidateMaxM": 0.0009894302416982906,
+          "candidateToSourceMaxM": 0.0005117961659534209,
+          "sourceToCandidateP95M": 0.0003045706906683393,
+          "candidateToSourceP95M": 0.00020457960861690157,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.r",
+          "beforeTriangles": 19184,
+          "afterTriangles": 6712,
+          "sourceToCandidateMaxM": 0.0008055841813968905,
+          "candidateToSourceMaxM": 0.0005152449427856818,
+          "sourceToCandidateP95M": 0.00029874779658005884,
+          "candidateToSourceP95M": 0.00021584966966416497,
+          "samplesEach": 3400
+        },
+        {
+          "name": "subclavius.l",
+          "beforeTriangles": 794,
+          "afterTriangles": 276,
+          "sourceToCandidateMaxM": 0.0018382422579356834,
+          "candidateToSourceMaxM": 0.0003378847815315541,
+          "sourceToCandidateP95M": 0.00029116582856674806,
+          "candidateToSourceP95M": 0.00022198298727595095,
+          "samplesEach": 3400
+        },
+        {
+          "name": "subclavius.r",
+          "beforeTriangles": 794,
+          "afterTriangles": 274,
+          "sourceToCandidateMaxM": 0.0018385489238013678,
+          "candidateToSourceMaxM": 0.00045032068082917216,
+          "sourceToCandidateP95M": 0.00031451827395268135,
+          "candidateToSourceP95M": 0.00026417025286922094,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thoracic-spine",
+          "beforeTriangles": 14981,
+          "afterTriangles": 4493,
+          "sourceToCandidateMaxM": 0.0015303676089699738,
+          "candidateToSourceMaxM": 0.0012014361304146844,
+          "sourceToCandidateP95M": 0.0007737569446646701,
+          "candidateToSourceP95M": 0.0005377441800833069,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thorax",
+          "beforeTriangles": 24990,
+          "afterTriangles": 7496,
+          "sourceToCandidateMaxM": 0.0012517778804174695,
+          "candidateToSourceMaxM": 0.00174688924173062,
+          "sourceToCandidateP95M": 0.0008197764110036287,
+          "candidateToSourceP95M": 0.0006219221045488565,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.l",
+          "beforeTriangles": 2996,
+          "afterTriangles": 1470,
+          "sourceToCandidateMaxM": 0.002171792742425637,
+          "candidateToSourceMaxM": 0.000860387899182459,
+          "sourceToCandidateP95M": 0.0005139619098118527,
+          "candidateToSourceP95M": 0.0003836727174220641,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.r",
+          "beforeTriangles": 2996,
+          "afterTriangles": 1422,
+          "sourceToCandidateMaxM": 0.002171210867001338,
+          "candidateToSourceMaxM": 0.0008505581599719358,
+          "sourceToCandidateP95M": 0.0005148873238319135,
+          "candidateToSourceP95M": 0.0003816068773148312,
+          "samplesEach": 3400
+        }
+      ]
+    },
+    "core": {
+      "topic": "core",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "erector-spinae-lumbar.l",
+          "beforeTriangles": 11362,
+          "afterTriangles": 3972,
+          "sourceToCandidateMaxM": 0.0014484443404202535,
+          "candidateToSourceMaxM": 0.0006600160037686604,
+          "sourceToCandidateP95M": 0.0004777980649421499,
+          "candidateToSourceP95M": 0.0003132134274110377,
+          "samplesEach": 3400
+        },
+        {
+          "name": "erector-spinae-lumbar.r",
+          "beforeTriangles": 7884,
+          "afterTriangles": 2902,
+          "sourceToCandidateMaxM": 0.0018966999835166838,
+          "candidateToSourceMaxM": 0.0009922738213093388,
+          "sourceToCandidateP95M": 0.000577784336180271,
+          "candidateToSourceP95M": 0.00038882861735396637,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.l",
+          "beforeTriangles": 12168,
+          "afterTriangles": 4258,
+          "sourceToCandidateMaxM": 0.0016667116434722596,
+          "candidateToSourceMaxM": 0.0008616897675265961,
+          "sourceToCandidateP95M": 0.000489599927213984,
+          "candidateToSourceP95M": 0.0003376423480397418,
+          "samplesEach": 3400
+        },
+        {
+          "name": "external-oblique.r",
+          "beforeTriangles": 12188,
+          "afterTriangles": 4264,
+          "sourceToCandidateMaxM": 0.0021905251518129455,
+          "candidateToSourceMaxM": 0.0008349428879833127,
+          "sourceToCandidateP95M": 0.0004970416402300964,
+          "candidateToSourceP95M": 0.00034508787009823424,
+          "samplesEach": 3400
+        },
+        {
+          "name": "femur.l",
+          "beforeTriangles": 3794,
+          "afterTriangles": 1138,
+          "sourceToCandidateMaxM": 0.0011718943587885027,
+          "candidateToSourceMaxM": 0.0010637761019067534,
+          "sourceToCandidateP95M": 0.00065141485214207,
+          "candidateToSourceP95M": 0.0004549002338034834,
+          "samplesEach": 3400
+        },
+        {
+          "name": "femur.r",
+          "beforeTriangles": 3794,
+          "afterTriangles": 1138,
+          "sourceToCandidateMaxM": 0.0011405636495339193,
+          "candidateToSourceMaxM": 0.0009519660216361224,
+          "sourceToCandidateP95M": 0.0006604472069421387,
+          "candidateToSourceP95M": 0.000461295284719505,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.l",
+          "beforeTriangles": 2900,
+          "afterTriangles": 1316,
+          "sourceToCandidateMaxM": 0.0018098981291492493,
+          "candidateToSourceMaxM": 0.0013685296171383667,
+          "sourceToCandidateP95M": 0.0005594031543523987,
+          "candidateToSourceP95M": 0.0004126059273957138,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.r",
+          "beforeTriangles": 2896,
+          "afterTriangles": 1278,
+          "sourceToCandidateMaxM": 0.00177395073917004,
+          "candidateToSourceMaxM": 0.0008158237538527744,
+          "sourceToCandidateP95M": 0.0005571777840067723,
+          "candidateToSourceP95M": 0.00042437548530554017,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliacus.l",
+          "beforeTriangles": 4264,
+          "afterTriangles": 1490,
+          "sourceToCandidateMaxM": 0.0017174008245665706,
+          "candidateToSourceMaxM": 0.0005524764801606111,
+          "sourceToCandidateP95M": 0.00037270253650609035,
+          "candidateToSourceP95M": 0.00029018611418174766,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliacus.r",
+          "beforeTriangles": 4272,
+          "afterTriangles": 1492,
+          "sourceToCandidateMaxM": 0.0017154499337885154,
+          "candidateToSourceMaxM": 0.0005668734065435213,
+          "sourceToCandidateP95M": 0.0003643496133914419,
+          "candidateToSourceP95M": 0.0002789763159400313,
+          "samplesEach": 3400
+        },
+        {
+          "name": "internal-oblique.l",
+          "beforeTriangles": 26691,
+          "afterTriangles": 9341,
+          "sourceToCandidateMaxM": 0.0009814978577129098,
+          "candidateToSourceMaxM": 0.0004846301139518327,
+          "sourceToCandidateP95M": 0.00026871573889025247,
+          "candidateToSourceP95M": 0.00018337642216762398,
+          "samplesEach": 3400
+        },
+        {
+          "name": "internal-oblique.r",
+          "beforeTriangles": 26673,
+          "afterTriangles": 9331,
+          "sourceToCandidateMaxM": 0.0007945794288100146,
+          "candidateToSourceMaxM": 0.00037442203498303016,
+          "sourceToCandidateP95M": 0.0002723874903254688,
+          "candidateToSourceP95M": 0.0001829266945134282,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.l",
+          "beforeTriangles": 2062,
+          "afterTriangles": 1502,
+          "sourceToCandidateMaxM": 0.0009513258807042295,
+          "candidateToSourceMaxM": 0.0009374787573690562,
+          "sourceToCandidateP95M": 0.000396373379489712,
+          "candidateToSourceP95M": 0.0002723569761144118,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.r",
+          "beforeTriangles": 2054,
+          "afterTriangles": 1486,
+          "sourceToCandidateMaxM": 0.001114494262624821,
+          "candidateToSourceMaxM": 0.0008369681001954441,
+          "sourceToCandidateP95M": 0.0004009516019944264,
+          "candidateToSourceP95M": 0.00026320610894887487,
+          "samplesEach": 3400
+        },
+        {
+          "name": "lumbar-spine",
+          "beforeTriangles": 5996,
+          "afterTriangles": 2458,
+          "sourceToCandidateMaxM": 0.0016040038309246504,
+          "candidateToSourceMaxM": 0.0014935102323328086,
+          "sourceToCandidateP95M": 0.0008112309441939456,
+          "candidateToSourceP95M": 0.0005765838146116866,
+          "samplesEach": 3400
+        },
+        {
+          "name": "multifidus-lumborum.l",
+          "beforeTriangles": 2820,
+          "afterTriangles": 986,
+          "sourceToCandidateMaxM": 0.000702770808245709,
+          "candidateToSourceMaxM": 0.0005673008262874997,
+          "sourceToCandidateP95M": 0.0003323486335252846,
+          "candidateToSourceP95M": 0.0002542848540003583,
+          "samplesEach": 3400
+        },
+        {
+          "name": "multifidus-lumborum.r",
+          "beforeTriangles": 2820,
+          "afterTriangles": 984,
+          "sourceToCandidateMaxM": 0.000702770808245709,
+          "candidateToSourceMaxM": 0.00043738911989979733,
+          "sourceToCandidateP95M": 0.00032473163869381494,
+          "candidateToSourceP95M": 0.00023998975622131557,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pelvis",
+          "beforeTriangles": 12000,
+          "afterTriangles": 3600,
+          "sourceToCandidateMaxM": 0.0013382184896056025,
+          "candidateToSourceMaxM": 0.0012097779884437292,
+          "sourceToCandidateP95M": 0.0006816733006792401,
+          "candidateToSourceP95M": 0.0004230784510835024,
+          "samplesEach": 3400
+        },
+        {
+          "name": "psoas-major.l",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1396,
+          "sourceToCandidateMaxM": 0.004172343643499526,
+          "candidateToSourceMaxM": 0.0010911608734665555,
+          "sourceToCandidateP95M": 0.0005884144281110778,
+          "candidateToSourceP95M": 0.00044341550590313824,
+          "samplesEach": 3400
+        },
+        {
+          "name": "psoas-major.r",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1396,
+          "sourceToCandidateMaxM": 0.001216312659974053,
+          "candidateToSourceMaxM": 0.0010424454146069522,
+          "sourceToCandidateP95M": 0.000570651074612736,
+          "candidateToSourceP95M": 0.0004525926522610545,
+          "samplesEach": 3400
+        },
+        {
+          "name": "quadratus-lumborum.l",
+          "beforeTriangles": 2832,
+          "afterTriangles": 986,
+          "sourceToCandidateMaxM": 0.0006911819414576381,
+          "candidateToSourceMaxM": 0.0005813553672413046,
+          "sourceToCandidateP95M": 0.0003641703024648194,
+          "candidateToSourceP95M": 0.0002615536365341812,
+          "samplesEach": 3400
+        },
+        {
+          "name": "quadratus-lumborum.r",
+          "beforeTriangles": 2832,
+          "afterTriangles": 986,
+          "sourceToCandidateMaxM": 0.0006911819414576381,
+          "candidateToSourceMaxM": 0.0007010628747664634,
+          "sourceToCandidateP95M": 0.000350502242032139,
+          "candidateToSourceP95M": 0.00026310196066713564,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-abdominis.l",
+          "beforeTriangles": 5418,
+          "afterTriangles": 1896,
+          "sourceToCandidateMaxM": 0.0011799938127880698,
+          "candidateToSourceMaxM": 0.0008779421322594471,
+          "sourceToCandidateP95M": 0.0004991540685442742,
+          "candidateToSourceP95M": 0.0003802307726927254,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-abdominis.r",
+          "beforeTriangles": 10828,
+          "afterTriangles": 3788,
+          "sourceToCandidateMaxM": 0.000659128307642167,
+          "candidateToSourceMaxM": 0.0005543351089534583,
+          "sourceToCandidateP95M": 0.00032644651330955104,
+          "candidateToSourceP95M": 0.00022021520458703785,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.l",
+          "beforeTriangles": 1900,
+          "afterTriangles": 1402,
+          "sourceToCandidateMaxM": 0.0020039290530487253,
+          "candidateToSourceMaxM": 0.0008746732143619595,
+          "sourceToCandidateP95M": 0.0004232202324447041,
+          "candidateToSourceP95M": 0.00022626401080316462,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.r",
+          "beforeTriangles": 1966,
+          "afterTriangles": 1376,
+          "sourceToCandidateMaxM": 0.0012878050323879614,
+          "candidateToSourceMaxM": 0.00072648939891117,
+          "sourceToCandidateP95M": 0.0004230248865770882,
+          "candidateToSourceP95M": 0.0002263271227665179,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tensor-fasciae-latae.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0008621158617122305,
+          "candidateToSourceMaxM": 0.0005433091325599381,
+          "sourceToCandidateP95M": 0.00039737547519911584,
+          "candidateToSourceP95M": 0.0003041422531058536,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tensor-fasciae-latae.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0008262851733916468,
+          "candidateToSourceMaxM": 0.0006350901322443056,
+          "sourceToCandidateP95M": 0.0004032096037483456,
+          "candidateToSourceP95M": 0.000318280156612405,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thoracic-spine",
+          "beforeTriangles": 14974,
+          "afterTriangles": 4492,
+          "sourceToCandidateMaxM": 0.0015314518515397424,
+          "candidateToSourceMaxM": 0.0011109446491291341,
+          "sourceToCandidateP95M": 0.0007729703858072492,
+          "candidateToSourceP95M": 0.0005245300825813186,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thorax",
+          "beforeTriangles": 24984,
+          "afterTriangles": 7494,
+          "sourceToCandidateMaxM": 0.0013276135033173562,
+          "candidateToSourceMaxM": 0.0012228675052265855,
+          "sourceToCandidateP95M": 0.0008045465818436989,
+          "candidateToSourceP95M": 0.0006075406618942531,
+          "samplesEach": 3400
+        },
+        {
+          "name": "transversus-abdominis.l",
+          "beforeTriangles": 10764,
+          "afterTriangles": 3766,
+          "sourceToCandidateMaxM": 0.0012324911228838195,
+          "candidateToSourceMaxM": 0.0010613195306058525,
+          "sourceToCandidateP95M": 0.000517674705768979,
+          "candidateToSourceP95M": 0.00036320210646266835,
+          "samplesEach": 3400
+        },
+        {
+          "name": "transversus-abdominis.r",
+          "beforeTriangles": 10702,
+          "afterTriangles": 3744,
+          "sourceToCandidateMaxM": 0.0012312061169466656,
+          "candidateToSourceMaxM": 0.0008280291140098129,
+          "sourceToCandidateP95M": 0.0005372731392697912,
+          "candidateToSourceP95M": 0.000372477603807426,
+          "samplesEach": 3400
+        }
+      ]
+    },
+    "legs": {
+      "topic": "legs",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "adductor-brevis.l",
+          "beforeTriangles": 2132,
+          "afterTriangles": 530,
+          "sourceToCandidateMaxM": 0.0008636502748633135,
+          "candidateToSourceMaxM": 0.0006472633712094612,
+          "sourceToCandidateP95M": 0.00045186033506192016,
+          "candidateToSourceP95M": 0.00029207702750068783,
+          "samplesEach": 3400
+        },
+        {
+          "name": "adductor-brevis.r",
+          "beforeTriangles": 2132,
+          "afterTriangles": 530,
+          "sourceToCandidateMaxM": 0.0007650466708905572,
+          "candidateToSourceMaxM": 0.0005858107883838198,
+          "sourceToCandidateP95M": 0.0004487114941149663,
+          "candidateToSourceP95M": 0.0003203696446833496,
+          "samplesEach": 3400
+        },
+        {
+          "name": "adductor-longus.l",
+          "beforeTriangles": 3714,
+          "afterTriangles": 926,
+          "sourceToCandidateMaxM": 0.0007267146553100514,
+          "candidateToSourceMaxM": 0.0005295485871149349,
+          "sourceToCandidateP95M": 0.00037657599354175465,
+          "candidateToSourceP95M": 0.0002922690781438665,
+          "samplesEach": 3400
+        },
+        {
+          "name": "adductor-longus.r",
+          "beforeTriangles": 3714,
+          "afterTriangles": 926,
+          "sourceToCandidateMaxM": 0.0007267109167457975,
+          "candidateToSourceMaxM": 0.0007128195154933375,
+          "sourceToCandidateP95M": 0.00038489572743078337,
+          "candidateToSourceP95M": 0.00028722454621007943,
+          "samplesEach": 3400
+        },
+        {
+          "name": "adductor-magnus.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1026,
+          "sourceToCandidateMaxM": 0.0026878456525996366,
+          "candidateToSourceMaxM": 0.0008752043881948819,
+          "sourceToCandidateP95M": 0.0006692338978223639,
+          "candidateToSourceP95M": 0.0004952247160148599,
+          "samplesEach": 3400
+        },
+        {
+          "name": "adductor-magnus.r",
+          "beforeTriangles": 3990,
+          "afterTriangles": 1038,
+          "sourceToCandidateMaxM": 0.002374016045245359,
+          "candidateToSourceMaxM": 0.0013896527093590913,
+          "sourceToCandidateP95M": 0.0006457461022951642,
+          "candidateToSourceP95M": 0.0004837985968528944,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-femoris-long.l",
+          "beforeTriangles": 6858,
+          "afterTriangles": 1714,
+          "sourceToCandidateMaxM": 0.0018393483535517634,
+          "candidateToSourceMaxM": 0.0006891589885367779,
+          "sourceToCandidateP95M": 0.0004403579176941811,
+          "candidateToSourceP95M": 0.00032572234245985433,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-femoris-long.r",
+          "beforeTriangles": 6848,
+          "afterTriangles": 1712,
+          "sourceToCandidateMaxM": 0.0014185465688513197,
+          "candidateToSourceMaxM": 0.0006660162241689246,
+          "sourceToCandidateP95M": 0.00043853064040584263,
+          "candidateToSourceP95M": 0.00033316358501453956,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-femoris-short.l",
+          "beforeTriangles": 2476,
+          "afterTriangles": 618,
+          "sourceToCandidateMaxM": 0.0009187137096384209,
+          "candidateToSourceMaxM": 0.0006054270059046039,
+          "sourceToCandidateP95M": 0.00043111559536882063,
+          "candidateToSourceP95M": 0.00038814370701445607,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-femoris-short.r",
+          "beforeTriangles": 2476,
+          "afterTriangles": 618,
+          "sourceToCandidateMaxM": 0.0009279575243457618,
+          "candidateToSourceMaxM": 0.0007123674287370184,
+          "sourceToCandidateP95M": 0.0004473785664453706,
+          "candidateToSourceP95M": 0.00035922668017137927,
+          "samplesEach": 3400
+        },
+        {
+          "name": "femur.l",
+          "beforeTriangles": 3794,
+          "afterTriangles": 1138,
+          "sourceToCandidateMaxM": 0.001261325386465787,
+          "candidateToSourceMaxM": 0.0009902704394478096,
+          "sourceToCandidateP95M": 0.0006506515977182144,
+          "candidateToSourceP95M": 0.0004585430491516718,
+          "samplesEach": 3400
+        },
+        {
+          "name": "femur.r",
+          "beforeTriangles": 3794,
+          "afterTriangles": 1138,
+          "sourceToCandidateMaxM": 0.0010798405885505075,
+          "candidateToSourceMaxM": 0.0011612387362668931,
+          "sourceToCandidateP95M": 0.0006285441181042279,
+          "candidateToSourceP95M": 0.00043946343778460074,
+          "samplesEach": 3400
+        },
+        {
+          "name": "fibularis-longus.l",
+          "beforeTriangles": 1486,
+          "afterTriangles": 386,
+          "sourceToCandidateMaxM": 0.0034444032529519844,
+          "candidateToSourceMaxM": 0.0010112838228925369,
+          "sourceToCandidateP95M": 0.0006760375931593579,
+          "candidateToSourceP95M": 0.0005254273109953278,
+          "samplesEach": 3400
+        },
+        {
+          "name": "fibularis-longus.r",
+          "beforeTriangles": 1480,
+          "afterTriangles": 370,
+          "sourceToCandidateMaxM": 0.003020989502542562,
+          "candidateToSourceMaxM": 0.0009338666436819465,
+          "sourceToCandidateP95M": 0.0007265834652348755,
+          "candidateToSourceP95M": 0.0006272586581977644,
+          "samplesEach": 3400
+        },
+        {
+          "name": "foot.l",
+          "beforeTriangles": 4784,
+          "afterTriangles": 2062,
+          "sourceToCandidateMaxM": 0.0017861683511433846,
+          "candidateToSourceMaxM": 0.0015717279421341218,
+          "sourceToCandidateP95M": 0.0008380536703769524,
+          "candidateToSourceP95M": 0.0006000236856239256,
+          "samplesEach": 3400
+        },
+        {
+          "name": "foot.r",
+          "beforeTriangles": 4740,
+          "afterTriangles": 2064,
+          "sourceToCandidateMaxM": 0.0015653507632039495,
+          "candidateToSourceMaxM": 0.0013764828606591501,
+          "sourceToCandidateP95M": 0.0008431411199322462,
+          "candidateToSourceP95M": 0.0005968676585400608,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gastrocnemius-lateral.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0008518066926087288,
+          "candidateToSourceMaxM": 0.0007404883677653071,
+          "sourceToCandidateP95M": 0.0004594647629423294,
+          "candidateToSourceP95M": 0.00036013624219807637,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gastrocnemius-lateral.r",
+          "beforeTriangles": 3996,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0008159080693691227,
+          "candidateToSourceMaxM": 0.0007193869034992832,
+          "sourceToCandidateP95M": 0.00047572429120850394,
+          "candidateToSourceP95M": 0.0003742418440409345,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gastrocnemius-medial.l",
+          "beforeTriangles": 3990,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.001715059536253464,
+          "candidateToSourceMaxM": 0.0008483805730448873,
+          "sourceToCandidateP95M": 0.0005526833533821164,
+          "candidateToSourceP95M": 0.0004515980339506394,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gastrocnemius-medial.r",
+          "beforeTriangles": 3990,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0017126706610846466,
+          "candidateToSourceMaxM": 0.0008079695855628075,
+          "sourceToCandidateP95M": 0.000558604022395479,
+          "candidateToSourceP95M": 0.00046168117512319196,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.l",
+          "beforeTriangles": 3326,
+          "afterTriangles": 1136,
+          "sourceToCandidateMaxM": 0.001692153183763681,
+          "candidateToSourceMaxM": 0.0010579247051953013,
+          "sourceToCandidateP95M": 0.0006726445531727412,
+          "candidateToSourceP95M": 0.00047478900232354417,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-maximus.r",
+          "beforeTriangles": 3326,
+          "afterTriangles": 1064,
+          "sourceToCandidateMaxM": 0.001691504101184206,
+          "candidateToSourceMaxM": 0.0010022318831268931,
+          "sourceToCandidateP95M": 0.0006599310579195089,
+          "candidateToSourceP95M": 0.0004723127423061776,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-medius.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.0038233552348053853,
+          "candidateToSourceMaxM": 0.0007410587980779022,
+          "sourceToCandidateP95M": 0.0005040176289546196,
+          "candidateToSourceP95M": 0.00040311141295009426,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-medius.r",
+          "beforeTriangles": 3998,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0038233522507509455,
+          "candidateToSourceMaxM": 0.000849120351326845,
+          "sourceToCandidateP95M": 0.0005020988934746113,
+          "candidateToSourceP95M": 0.00037583039474087303,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-minimus.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.002231899042439841,
+          "candidateToSourceMaxM": 0.00047530794682224084,
+          "sourceToCandidateP95M": 0.0003665112175191556,
+          "candidateToSourceP95M": 0.0002742106735777251,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gluteus-minimus.r",
+          "beforeTriangles": 3996,
+          "afterTriangles": 994,
+          "sourceToCandidateMaxM": 0.0022332144628605375,
+          "candidateToSourceMaxM": 0.0005425534092871821,
+          "sourceToCandidateP95M": 0.00037559451708596913,
+          "candidateToSourceP95M": 0.0003042320597137399,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gracilis.l",
+          "beforeTriangles": 3992,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0018364777096692307,
+          "candidateToSourceMaxM": 0.0006425673228115436,
+          "sourceToCandidateP95M": 0.00045810752010171595,
+          "candidateToSourceP95M": 0.0003251708624036928,
+          "samplesEach": 3400
+        },
+        {
+          "name": "gracilis.r",
+          "beforeTriangles": 3994,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0018389587980562696,
+          "candidateToSourceMaxM": 0.0007158249912977257,
+          "sourceToCandidateP95M": 0.00046412352697120884,
+          "candidateToSourceP95M": 0.00036359627035509844,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliacus.l",
+          "beforeTriangles": 1496,
+          "afterTriangles": 564,
+          "sourceToCandidateMaxM": 0.003509885141938234,
+          "candidateToSourceMaxM": 0.0009155019672530341,
+          "sourceToCandidateP95M": 0.0006160012491017023,
+          "candidateToSourceP95M": 0.0004767684954808935,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliacus.r",
+          "beforeTriangles": 1494,
+          "afterTriangles": 554,
+          "sourceToCandidateMaxM": 0.003060766072231149,
+          "candidateToSourceMaxM": 0.0010129101125775704,
+          "sourceToCandidateP95M": 0.0006004009418583612,
+          "candidateToSourceP95M": 0.00046613356645475656,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliotibial-tract.l",
+          "beforeTriangles": 3988,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.0020422714423063257,
+          "candidateToSourceMaxM": 0.0007807655068785645,
+          "sourceToCandidateP95M": 0.0005149920955156035,
+          "candidateToSourceP95M": 0.00040359304430734766,
+          "samplesEach": 3400
+        },
+        {
+          "name": "iliotibial-tract.r",
+          "beforeTriangles": 3994,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.0018546421191377735,
+          "candidateToSourceMaxM": 0.0007987412616804148,
+          "sourceToCandidateP95M": 0.0004985870904413626,
+          "candidateToSourceP95M": 0.00039628114251753137,
+          "samplesEach": 3400
+        },
+        {
+          "name": "lower-leg.l",
+          "beforeTriangles": 2934,
+          "afterTriangles": 880,
+          "sourceToCandidateMaxM": 0.0012550676640381458,
+          "candidateToSourceMaxM": 0.0010179596653006454,
+          "sourceToCandidateP95M": 0.0006719820906048271,
+          "candidateToSourceP95M": 0.0004745387339645414,
+          "samplesEach": 3400
+        },
+        {
+          "name": "lower-leg.r",
+          "beforeTriangles": 2934,
+          "afterTriangles": 880,
+          "sourceToCandidateMaxM": 0.0012552309501943576,
+          "candidateToSourceMaxM": 0.001200002001606531,
+          "sourceToCandidateP95M": 0.0006477450754629149,
+          "candidateToSourceP95M": 0.00043470142268097075,
+          "samplesEach": 3400
+        },
+        {
+          "name": "lumbar-spine",
+          "beforeTriangles": 4000,
+          "afterTriangles": 2488,
+          "sourceToCandidateMaxM": 0.0014214217694508678,
+          "candidateToSourceMaxM": 0.0013202510508385082,
+          "sourceToCandidateP95M": 0.0007956994341150725,
+          "candidateToSourceP95M": 0.0005291895339653274,
+          "samplesEach": 3400
+        },
+        {
+          "name": "patella.l",
+          "beforeTriangles": 276,
+          "afterTriangles": 276,
+          "sourceToCandidateMaxM": 6.245004513516506e-17,
+          "candidateToSourceMaxM": 5.721958498152797e-17,
+          "sourceToCandidateP95M": 1.5515838457795457e-17,
+          "candidateToSourceP95M": 1.5515838457795457e-17,
+          "samplesEach": 3400
+        },
+        {
+          "name": "patella.r",
+          "beforeTriangles": 276,
+          "afterTriangles": 276,
+          "sourceToCandidateMaxM": 6.245004513516506e-17,
+          "candidateToSourceMaxM": 5.763878168445254e-17,
+          "sourceToCandidateP95M": 1.5515838457795457e-17,
+          "candidateToSourceP95M": 1.5515838457795457e-17,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectineus.l",
+          "beforeTriangles": 1952,
+          "afterTriangles": 488,
+          "sourceToCandidateMaxM": 0.0012926150214456777,
+          "candidateToSourceMaxM": 0.0007643163467517437,
+          "sourceToCandidateP95M": 0.0004479025653287278,
+          "candidateToSourceP95M": 0.0003773394796157563,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectineus.r",
+          "beforeTriangles": 1952,
+          "afterTriangles": 488,
+          "sourceToCandidateMaxM": 0.0012915819017338284,
+          "candidateToSourceMaxM": 0.0006153747878773221,
+          "sourceToCandidateP95M": 0.00042689408320084236,
+          "candidateToSourceP95M": 0.0003134894940288399,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pelvis",
+          "beforeTriangles": 6000,
+          "afterTriangles": 3212,
+          "sourceToCandidateMaxM": 0.0016584413183733245,
+          "candidateToSourceMaxM": 0.0011704208087277748,
+          "sourceToCandidateP95M": 0.0007801981880835606,
+          "candidateToSourceP95M": 0.00045915493675348644,
+          "samplesEach": 3400
+        },
+        {
+          "name": "psoas-major.l",
+          "beforeTriangles": 1498,
+          "afterTriangles": 954,
+          "sourceToCandidateMaxM": 0.004862833082778318,
+          "candidateToSourceMaxM": 0.001424609930392399,
+          "sourceToCandidateP95M": 0.0005827507618344029,
+          "candidateToSourceP95M": 0.00037117686324047007,
+          "samplesEach": 3400
+        },
+        {
+          "name": "psoas-major.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 964,
+          "sourceToCandidateMaxM": 0.004978212802822591,
+          "candidateToSourceMaxM": 0.001105179954092818,
+          "sourceToCandidateP95M": 0.0005768729222942648,
+          "candidateToSourceP95M": 0.00044070258339149484,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-femoris.l",
+          "beforeTriangles": 5610,
+          "afterTriangles": 1400,
+          "sourceToCandidateMaxM": 0.0010017346575310754,
+          "candidateToSourceMaxM": 0.0009457298229641719,
+          "sourceToCandidateP95M": 0.0005679123064927683,
+          "candidateToSourceP95M": 0.0004644154979099719,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rectus-femoris.r",
+          "beforeTriangles": 3992,
+          "afterTriangles": 1136,
+          "sourceToCandidateMaxM": 0.0012971607440613842,
+          "candidateToSourceMaxM": 0.0011284652857306281,
+          "sourceToCandidateP95M": 0.0006285408006648481,
+          "candidateToSourceP95M": 0.0005038379682583263,
+          "samplesEach": 3400
+        },
+        {
+          "name": "sartorius.l",
+          "beforeTriangles": 3990,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.0014246282569479838,
+          "candidateToSourceMaxM": 0.0006762672601714916,
+          "sourceToCandidateP95M": 0.00041212631506851307,
+          "candidateToSourceP95M": 0.0003224968323275704,
+          "samplesEach": 3400
+        },
+        {
+          "name": "sartorius.r",
+          "beforeTriangles": 4912,
+          "afterTriangles": 1226,
+          "sourceToCandidateMaxM": 0.0009282727504179424,
+          "candidateToSourceMaxM": 0.000538619382820725,
+          "sourceToCandidateP95M": 0.00034391095793914403,
+          "candidateToSourceP95M": 0.00028694701574683,
+          "samplesEach": 3400
+        },
+        {
+          "name": "semimembranosus.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.002651505167240263,
+          "candidateToSourceMaxM": 0.0011391127500885857,
+          "sourceToCandidateP95M": 0.0006209637159551308,
+          "candidateToSourceP95M": 0.00048283318868992025,
+          "samplesEach": 3400
+        },
+        {
+          "name": "semimembranosus.r",
+          "beforeTriangles": 3998,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.002109961286535355,
+          "candidateToSourceMaxM": 0.00088232263175481,
+          "sourceToCandidateP95M": 0.0006162764665116335,
+          "candidateToSourceP95M": 0.00043546267009732687,
+          "samplesEach": 3400
+        },
+        {
+          "name": "semitendinosus.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.0013235934597614213,
+          "candidateToSourceMaxM": 0.0005905557904172228,
+          "sourceToCandidateP95M": 0.00040358982521768405,
+          "candidateToSourceP95M": 0.00030669461430341916,
+          "samplesEach": 3400
+        },
+        {
+          "name": "semitendinosus.r",
+          "beforeTriangles": 3998,
+          "afterTriangles": 998,
+          "sourceToCandidateMaxM": 0.001045759673995182,
+          "candidateToSourceMaxM": 0.0005871059780097027,
+          "sourceToCandidateP95M": 0.0003988910619978895,
+          "candidateToSourceP95M": 0.00030482647975141206,
+          "samplesEach": 3400
+        },
+        {
+          "name": "soleus.l",
+          "beforeTriangles": 6440,
+          "afterTriangles": 1604,
+          "sourceToCandidateMaxM": 0.0014235466294376905,
+          "candidateToSourceMaxM": 0.0006552398252599086,
+          "sourceToCandidateP95M": 0.0004521681396295338,
+          "candidateToSourceP95M": 0.0003575636138763733,
+          "samplesEach": 3400
+        },
+        {
+          "name": "soleus.r",
+          "beforeTriangles": 6470,
+          "afterTriangles": 1612,
+          "sourceToCandidateMaxM": 0.001126147095155555,
+          "candidateToSourceMaxM": 0.0006414978468893305,
+          "sourceToCandidateP95M": 0.00044078158099302215,
+          "candidateToSourceP95M": 0.000341409133828648,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tensor-fasciae-latae.l",
+          "beforeTriangles": 1862,
+          "afterTriangles": 464,
+          "sourceToCandidateMaxM": 0.00086285844596772,
+          "candidateToSourceMaxM": 0.0006824369512849107,
+          "sourceToCandidateP95M": 0.0004595635907960261,
+          "candidateToSourceP95M": 0.0003710822525081296,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tensor-fasciae-latae.r",
+          "beforeTriangles": 1862,
+          "afterTriangles": 464,
+          "sourceToCandidateMaxM": 0.0008612397205555826,
+          "candidateToSourceMaxM": 0.0007320167339657319,
+          "sourceToCandidateP95M": 0.0004626850615543182,
+          "candidateToSourceP95M": 0.00039344014633969584,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tibialis-anterior.l",
+          "beforeTriangles": 3526,
+          "afterTriangles": 876,
+          "sourceToCandidateMaxM": 0.0055139142222742,
+          "candidateToSourceMaxM": 0.0005658541225657588,
+          "sourceToCandidateP95M": 0.0004216365887187414,
+          "candidateToSourceP95M": 0.0003123334600078805,
+          "samplesEach": 3400
+        },
+        {
+          "name": "tibialis-anterior.r",
+          "beforeTriangles": 3526,
+          "afterTriangles": 876,
+          "sourceToCandidateMaxM": 0.005512762553903112,
+          "candidateToSourceMaxM": 0.0005890503189669055,
+          "sourceToCandidateP95M": 0.00042148707805667463,
+          "candidateToSourceP95M": 0.00029321431893911684,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-intermedius.l",
+          "beforeTriangles": 3988,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.001957555715936993,
+          "candidateToSourceMaxM": 0.0010829703829120297,
+          "sourceToCandidateP95M": 0.000646111763391766,
+          "candidateToSourceP95M": 0.00045998936969587933,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-intermedius.r",
+          "beforeTriangles": 3990,
+          "afterTriangles": 996,
+          "sourceToCandidateMaxM": 0.0014887329048735465,
+          "candidateToSourceMaxM": 0.0010307277660313138,
+          "sourceToCandidateP95M": 0.0006054276100106515,
+          "candidateToSourceP95M": 0.0004449115342373507,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-lateralis.l",
+          "beforeTriangles": 6334,
+          "afterTriangles": 1582,
+          "sourceToCandidateMaxM": 0.0011239080759145525,
+          "candidateToSourceMaxM": 0.0009256923033614437,
+          "sourceToCandidateP95M": 0.000599908891196563,
+          "candidateToSourceP95M": 0.00046006286552356033,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-lateralis.r",
+          "beforeTriangles": 6354,
+          "afterTriangles": 1588,
+          "sourceToCandidateMaxM": 0.0011174075747708934,
+          "candidateToSourceMaxM": 0.001016261157060429,
+          "sourceToCandidateP95M": 0.000591616447392679,
+          "candidateToSourceP95M": 0.00045981158653309327,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-medialis.l",
+          "beforeTriangles": 4322,
+          "afterTriangles": 1138,
+          "sourceToCandidateMaxM": 0.0013940954470135602,
+          "candidateToSourceMaxM": 0.0009310035924716776,
+          "sourceToCandidateP95M": 0.0006438037594815569,
+          "candidateToSourceP95M": 0.0005180956557909851,
+          "samplesEach": 3400
+        },
+        {
+          "name": "vastus-medialis.r",
+          "beforeTriangles": 4322,
+          "afterTriangles": 1148,
+          "sourceToCandidateMaxM": 0.001076771319093463,
+          "candidateToSourceMaxM": 0.00111914525706293,
+          "sourceToCandidateP95M": 0.0006307153772579942,
+          "candidateToSourceP95M": 0.0005255924803088552,
+          "samplesEach": 3400
+        }
+      ]
+    },
+    "shoulders": {
+      "topic": "shoulders",
+      "method": "Decoded GLB bind-space; up to 1800 evenly spaced vertices and 1600 deterministic area-weighted interior points each direction; exact closest point on source/candidate triangles, accelerated by a complete triangle bounding-sphere lower-bound search. Sampled error, not certified global Hausdorff.",
+      "meshes": [
+        {
+          "name": "biceps-brachii-long.l",
+          "beforeTriangles": 1498,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.0020496891271413234,
+          "candidateToSourceMaxM": 0.0009599343004066635,
+          "sourceToCandidateP95M": 0.0005543394719245985,
+          "candidateToSourceP95M": 0.00044433298839874233,
+          "samplesEach": 3400
+        },
+        {
+          "name": "biceps-brachii-long.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.002047921141023211,
+          "candidateToSourceMaxM": 0.000864171852641253,
+          "sourceToCandidateP95M": 0.0005852623012266413,
+          "candidateToSourceP95M": 0.00040352675848087145,
+          "samplesEach": 3400
+        },
+        {
+          "name": "cervical-spine",
+          "beforeTriangles": 6000,
+          "afterTriangles": 2072,
+          "sourceToCandidateMaxM": 0.0015940505189354296,
+          "candidateToSourceMaxM": 0.001211789183527549,
+          "sourceToCandidateP95M": 0.0008056613175748111,
+          "candidateToSourceP95M": 0.0006231051005257988,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.0007307939056507931,
+          "candidateToSourceMaxM": 0.0007078388884363976,
+          "sourceToCandidateP95M": 0.00044291908743315827,
+          "candidateToSourceP95M": 0.0003424727523935473,
+          "samplesEach": 3400
+        },
+        {
+          "name": "clavicle.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 450,
+          "sourceToCandidateMaxM": 0.0007115642784197291,
+          "candidateToSourceMaxM": 0.0005391661850047131,
+          "sourceToCandidateP95M": 0.0004116609977250781,
+          "candidateToSourceP95M": 0.00032160788106651127,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.l",
+          "beforeTriangles": 2902,
+          "afterTriangles": 1014,
+          "sourceToCandidateMaxM": 0.0007275807608443819,
+          "candidateToSourceMaxM": 0.0006653213378633614,
+          "sourceToCandidateP95M": 0.00038119432128306803,
+          "candidateToSourceP95M": 0.00027480469166675655,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-anterior.r",
+          "beforeTriangles": 2902,
+          "afterTriangles": 1014,
+          "sourceToCandidateMaxM": 0.0007272436058523474,
+          "candidateToSourceMaxM": 0.0006592045369522951,
+          "sourceToCandidateP95M": 0.000382095474804277,
+          "candidateToSourceP95M": 0.0003004289901698925,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-lateral.l",
+          "beforeTriangles": 2964,
+          "afterTriangles": 1034,
+          "sourceToCandidateMaxM": 0.0006467670085848813,
+          "candidateToSourceMaxM": 0.0005333707665354917,
+          "sourceToCandidateP95M": 0.0003792657354048291,
+          "candidateToSourceP95M": 0.0002779956732165805,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-lateral.r",
+          "beforeTriangles": 2964,
+          "afterTriangles": 1034,
+          "sourceToCandidateMaxM": 0.0006445308451684823,
+          "candidateToSourceMaxM": 0.0005839040249229877,
+          "sourceToCandidateP95M": 0.0003854836506475073,
+          "candidateToSourceP95M": 0.0002758509265337633,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.l",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0007384945019891533,
+          "candidateToSourceMaxM": 0.000654046855178155,
+          "sourceToCandidateP95M": 0.00035164983370427233,
+          "candidateToSourceP95M": 0.00027314487202000304,
+          "samplesEach": 3400
+        },
+        {
+          "name": "deltoid-posterior.r",
+          "beforeTriangles": 3998,
+          "afterTriangles": 1398,
+          "sourceToCandidateMaxM": 0.0007350043659981436,
+          "candidateToSourceMaxM": 0.0006147225947342252,
+          "sourceToCandidateP95M": 0.00034169421241924167,
+          "candidateToSourceP95M": 0.00026640044827095765,
+          "samplesEach": 3400
+        },
+        {
+          "name": "forearm.l",
+          "beforeTriangles": 1688,
+          "afterTriangles": 506,
+          "sourceToCandidateMaxM": 0.0012500867043591605,
+          "candidateToSourceMaxM": 0.0009572388881178009,
+          "sourceToCandidateP95M": 0.0006571030136433343,
+          "candidateToSourceP95M": 0.0004193737784952363,
+          "samplesEach": 3400
+        },
+        {
+          "name": "forearm.r",
+          "beforeTriangles": 1688,
+          "afterTriangles": 506,
+          "sourceToCandidateMaxM": 0.0011926844252955488,
+          "candidateToSourceMaxM": 0.0008046396057550355,
+          "sourceToCandidateP95M": 0.0006404666412411117,
+          "candidateToSourceP95M": 0.000403111352292924,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.l",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008206011702004594,
+          "candidateToSourceMaxM": 0.0006995875691556696,
+          "sourceToCandidateP95M": 0.00041652402369417605,
+          "candidateToSourceP95M": 0.0002955034934574891,
+          "samplesEach": 3400
+        },
+        {
+          "name": "humerus.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0008105681375170108,
+          "candidateToSourceMaxM": 0.0006742398838635084,
+          "sourceToCandidateP95M": 0.0004296939698970745,
+          "candidateToSourceP95M": 0.0003193297708233506,
+          "samplesEach": 3400
+        },
+        {
+          "name": "infraspinatus.l",
+          "beforeTriangles": 3166,
+          "afterTriangles": 1108,
+          "sourceToCandidateMaxM": 0.0015841116330551747,
+          "candidateToSourceMaxM": 0.00044816145582812967,
+          "sourceToCandidateP95M": 0.00031186944509752193,
+          "candidateToSourceP95M": 0.00021537156488271396,
+          "samplesEach": 3400
+        },
+        {
+          "name": "infraspinatus.r",
+          "beforeTriangles": 3166,
+          "afterTriangles": 1108,
+          "sourceToCandidateMaxM": 0.0016128080314237393,
+          "candidateToSourceMaxM": 0.00046376773009969237,
+          "sourceToCandidateP95M": 0.0003066909461320589,
+          "candidateToSourceP95M": 0.00021588068599900573,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.l",
+          "beforeTriangles": 2024,
+          "afterTriangles": 1510,
+          "sourceToCandidateMaxM": 0.000993648062583998,
+          "candidateToSourceMaxM": 0.0006985445554901395,
+          "sourceToCandidateP95M": 0.00036681136313193135,
+          "candidateToSourceP95M": 0.00023919956406802582,
+          "samplesEach": 3400
+        },
+        {
+          "name": "latissimus-dorsi.r",
+          "beforeTriangles": 2036,
+          "afterTriangles": 1486,
+          "sourceToCandidateMaxM": 0.0011139949061395136,
+          "candidateToSourceMaxM": 0.0007376759696271101,
+          "sourceToCandidateP95M": 0.0003876355560428911,
+          "candidateToSourceP95M": 0.00024465302663578896,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.l",
+          "beforeTriangles": 850,
+          "afterTriangles": 314,
+          "sourceToCandidateMaxM": 0.0022752894149316145,
+          "candidateToSourceMaxM": 0.0007643216433020521,
+          "sourceToCandidateP95M": 0.0005235852348975304,
+          "candidateToSourceP95M": 0.0003934569418535555,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-clavicular.r",
+          "beforeTriangles": 850,
+          "afterTriangles": 342,
+          "sourceToCandidateMaxM": 0.00227537686527809,
+          "candidateToSourceMaxM": 0.0006624375816344382,
+          "sourceToCandidateP95M": 0.00051584966622926,
+          "candidateToSourceP95M": 0.00037278000172846906,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.l",
+          "beforeTriangles": 1492,
+          "afterTriangles": 1096,
+          "sourceToCandidateMaxM": 0.0020259794910012187,
+          "candidateToSourceMaxM": 0.0008009044511059551,
+          "sourceToCandidateP95M": 0.0004386822370456729,
+          "candidateToSourceP95M": 0.0003174980168968245,
+          "samplesEach": 3400
+        },
+        {
+          "name": "pectoralis-major-sternocostal.r",
+          "beforeTriangles": 1490,
+          "afterTriangles": 1102,
+          "sourceToCandidateMaxM": 0.0020259782124979844,
+          "candidateToSourceMaxM": 0.0009630967916052854,
+          "sourceToCandidateP95M": 0.00043999647371501736,
+          "candidateToSourceP95M": 0.0002805569558443956,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-major.l",
+          "beforeTriangles": 1494,
+          "afterTriangles": 522,
+          "sourceToCandidateMaxM": 0.0008577505239613321,
+          "candidateToSourceMaxM": 0.0006273678837984606,
+          "sourceToCandidateP95M": 0.0004250628378008278,
+          "candidateToSourceP95M": 0.0003143149119785911,
+          "samplesEach": 3400
+        },
+        {
+          "name": "rhomboid-major.r",
+          "beforeTriangles": 1494,
+          "afterTriangles": 522,
+          "sourceToCandidateMaxM": 0.0013021623093083237,
+          "candidateToSourceMaxM": 0.0006701122925628494,
+          "sourceToCandidateP95M": 0.0004098334177276028,
+          "candidateToSourceP95M": 0.0003256066469017158,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.l",
+          "beforeTriangles": 3996,
+          "afterTriangles": 1198,
+          "sourceToCandidateMaxM": 0.0006906855189262173,
+          "candidateToSourceMaxM": 0.0005318844832438183,
+          "sourceToCandidateP95M": 0.000409394461566842,
+          "candidateToSourceP95M": 0.000312446471879691,
+          "samplesEach": 3400
+        },
+        {
+          "name": "scapula.r",
+          "beforeTriangles": 4000,
+          "afterTriangles": 1200,
+          "sourceToCandidateMaxM": 0.0007159992022636492,
+          "candidateToSourceMaxM": 0.0005524107772274123,
+          "sourceToCandidateP95M": 0.0004056742458255054,
+          "candidateToSourceP95M": 0.0003023991384848638,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.l",
+          "beforeTriangles": 1930,
+          "afterTriangles": 1402,
+          "sourceToCandidateMaxM": 0.0013940220904671244,
+          "candidateToSourceMaxM": 0.0009185455842425296,
+          "sourceToCandidateP95M": 0.00041224115473979193,
+          "candidateToSourceP95M": 0.00024995668202837406,
+          "samplesEach": 3400
+        },
+        {
+          "name": "serratus-anterior.r",
+          "beforeTriangles": 2008,
+          "afterTriangles": 1386,
+          "sourceToCandidateMaxM": 0.0022397907911539663,
+          "candidateToSourceMaxM": 0.0008647617233216909,
+          "sourceToCandidateP95M": 0.0004235470256269948,
+          "candidateToSourceP95M": 0.00022850663619065898,
+          "samplesEach": 3400
+        },
+        {
+          "name": "subscapularis.l",
+          "beforeTriangles": 2954,
+          "afterTriangles": 1032,
+          "sourceToCandidateMaxM": 0.0033833672355811275,
+          "candidateToSourceMaxM": 0.00040171243449441433,
+          "sourceToCandidateP95M": 0.0002769478578072115,
+          "candidateToSourceP95M": 0.00018119284885398645,
+          "samplesEach": 3400
+        },
+        {
+          "name": "subscapularis.r",
+          "beforeTriangles": 2954,
+          "afterTriangles": 1032,
+          "sourceToCandidateMaxM": 0.0033814051528907366,
+          "candidateToSourceMaxM": 0.00037131151178929983,
+          "sourceToCandidateP95M": 0.00028298295992803743,
+          "candidateToSourceP95M": 0.0001922415267544867,
+          "samplesEach": 3400
+        },
+        {
+          "name": "supraspinatus.l",
+          "beforeTriangles": 1430,
+          "afterTriangles": 500,
+          "sourceToCandidateMaxM": 0.0011464732418451184,
+          "candidateToSourceMaxM": 0.0007474625257036648,
+          "sourceToCandidateP95M": 0.0003617888889002243,
+          "candidateToSourceP95M": 0.0002994104709008498,
+          "samplesEach": 3400
+        },
+        {
+          "name": "supraspinatus.r",
+          "beforeTriangles": 1430,
+          "afterTriangles": 500,
+          "sourceToCandidateMaxM": 0.0007217909207094816,
+          "candidateToSourceMaxM": 0.000592240917831836,
+          "sourceToCandidateP95M": 0.0003635453615870817,
+          "candidateToSourceP95M": 0.0002856730046226225,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-major.l",
+          "beforeTriangles": 1154,
+          "afterTriangles": 398,
+          "sourceToCandidateMaxM": 0.0006356942733231885,
+          "candidateToSourceMaxM": 0.0005544511586490165,
+          "sourceToCandidateP95M": 0.0003563389095663657,
+          "candidateToSourceP95M": 0.0002663081630241584,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-major.r",
+          "beforeTriangles": 1154,
+          "afterTriangles": 398,
+          "sourceToCandidateMaxM": 0.000635696521624334,
+          "candidateToSourceMaxM": 0.0004947799632676048,
+          "sourceToCandidateP95M": 0.0003271549647561651,
+          "candidateToSourceP95M": 0.00024861799079966776,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-minor.l",
+          "beforeTriangles": 1522,
+          "afterTriangles": 532,
+          "sourceToCandidateMaxM": 0.000597039182676028,
+          "candidateToSourceMaxM": 0.00043552983286985163,
+          "sourceToCandidateP95M": 0.00030687593839860526,
+          "candidateToSourceP95M": 0.000227895372333436,
+          "samplesEach": 3400
+        },
+        {
+          "name": "teres-minor.r",
+          "beforeTriangles": 1522,
+          "afterTriangles": 532,
+          "sourceToCandidateMaxM": 0.0005438057788093993,
+          "candidateToSourceMaxM": 0.0004601109723268073,
+          "sourceToCandidateP95M": 0.00029511273119271834,
+          "candidateToSourceP95M": 0.00025393284591835664,
+          "samplesEach": 3400
+        },
+        {
+          "name": "thorax",
+          "beforeTriangles": 24992,
+          "afterTriangles": 7496,
+          "sourceToCandidateMaxM": 0.0016574228025445356,
+          "candidateToSourceMaxM": 0.001443922161496957,
+          "sourceToCandidateP95M": 0.0008148412425514253,
+          "candidateToSourceP95M": 0.0006260839231580701,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-descending.l",
+          "beforeTriangles": 1494,
+          "afterTriangles": 800,
+          "sourceToCandidateMaxM": 0.0009417202519348144,
+          "candidateToSourceMaxM": 0.0009355943659602872,
+          "sourceToCandidateP95M": 0.0005261508346236473,
+          "candidateToSourceP95M": 0.0003787856515893834,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-descending.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 806,
+          "sourceToCandidateMaxM": 0.0009460059233132143,
+          "candidateToSourceMaxM": 0.0008001724145488419,
+          "sourceToCandidateP95M": 0.0005205513899519116,
+          "candidateToSourceP95M": 0.0003801059553748779,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-transverse.l",
+          "beforeTriangles": 1496,
+          "afterTriangles": 558,
+          "sourceToCandidateMaxM": 0.0021624772423029805,
+          "candidateToSourceMaxM": 0.0009659754694930144,
+          "sourceToCandidateP95M": 0.0005822683636518311,
+          "candidateToSourceP95M": 0.0004782054675422157,
+          "samplesEach": 3400
+        },
+        {
+          "name": "trapezius-transverse.r",
+          "beforeTriangles": 1498,
+          "afterTriangles": 524,
+          "sourceToCandidateMaxM": 0.002204645285942394,
+          "candidateToSourceMaxM": 0.0007052736833555001,
+          "sourceToCandidateP95M": 0.0005475102132498841,
+          "candidateToSourceP95M": 0.0004772215976454586,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.l",
+          "beforeTriangles": 1500,
+          "afterTriangles": 1038,
+          "sourceToCandidateMaxM": 0.001080742308308784,
+          "candidateToSourceMaxM": 0.0007069998202102317,
+          "sourceToCandidateP95M": 0.00041786258214655673,
+          "candidateToSourceP95M": 0.00031357381359699857,
+          "samplesEach": 3400
+        },
+        {
+          "name": "triceps-brachii.r",
+          "beforeTriangles": 1500,
+          "afterTriangles": 1044,
+          "sourceToCandidateMaxM": 0.0011075875949868648,
+          "candidateToSourceMaxM": 0.0009109571119132426,
+          "sourceToCandidateP95M": 0.0004260437362748496,
+          "candidateToSourceP95M": 0.00031240937671029776,
+          "samplesEach": 3400
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "root": {
+    "rotation": [
+      -90,
+      0,
+      0
+    ]
+  },
+  "equipment": [
+    {
+      "kind": "barbell",
+      "grip": "pronated",
+      "width": 0.8
+    },
+    {
+      "kind": "bench",
+      "at": [
+        0,
+        -0.205,
+        0.02
+      ]
+    },
+    {
+      "kind": "rack"
+    }
+  ],
+  "contacts": [
+    "seat"
+  ],
+  "keys": [
+    {
+      "phase": "start",
+      "joints": {
+        "shoulder.l": {
+          "flexion": 80,
+          "abduction": 10
+        },
+        "elbow.l": {
+          "flexion": 5
+        },
+        "hip.l": {
+          "extension": 16,
+          "abduction": 18
+        },
+        "knee.l": {
+          "flexion": 80
+        },
+        "ankle.l": {
+          "dorsiflexion": 6
+        }
+      },
+      "contract": {
+        "pectoralis-major-sternocostal": 1,
+        "triceps-brachii": 1
+      }
+    },
+    {
+      "phase": "end",
+      "joints": {
+        "shoulder.l": {
+          "extension": 25,
+          "abduction": 45,
+          "horizontal-abduction": 15
+        },
+        "elbow.l": {
+          "flexion": 110
+        },
+        "hip.l": {
+          "extension": 16,
+          "abduction": 18
+        },
+        "knee.l": {
+          "flexion": 80
+        },
+        "ankle.l": {
+          "dorsiflexion": 6
+        }
+      },
+      "contract": {
+        "pectoralis-major-sternocostal": 0,
+        "triceps-brachii": 0
+      }
+    }
+  ],
+  "tempo": [
+    2,
+    0.3,
+    1.2,
+    0.5
+  ],
+  "camera": {
+    "azimuth": 32,
+    "elevation": 40
+  }
+}

@@ -1,0 +1,1898 @@
+{
+  "studio": {
+    "source": "src/engines/space-scene/stages/model3d/Lighting.tsx",
+    "executingSourceSha256": "390534a055203ee1dfacdecbcdeb3c8171e5b3ecc69ec11271a56a2120e0f6e0",
+    "roomFingerprint": "166d09d88824f4a134b46385258412339f7ac3d7a5588fbc501201ee8b81b58c",
+    "rigs": {
+      "paper": {
+        "hemi": [
+          [
+            1,
+            0.9215818562755338,
+            0.8069522576650873
+          ],
+          [
+            0.5840784178830671,
+            0.514917665367466,
+            0.3813260114221238
+          ],
+          0.75
+        ],
+        "lights": [
+          [
+            "#fff0dc",
+            2.6,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#e9edf0",
+            0.55,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#ffffff",
+            0.9,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.7,
+        "exposure": 1.05
+      },
+      "cinema": {
+        "hemi": [
+          [
+            0.4019777798219466,
+            0.45641102317066595,
+            0.514917665367466
+          ],
+          [
+            0.008568125615105716,
+            0.009134058699157796,
+            0.010329823026364548
+          ],
+          0.35
+        ],
+        "lights": [
+          [
+            "#e9eff5",
+            2.4,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#c9d1d9",
+            0.28,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#f2f2f2",
+            1.15,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.8,
+        "exposure": 1
+      }
+    },
+    "backend": "CPU depth raster; GGX / sampled installed RoomEnvironment / material emission / ACES / sRGB",
+    "limits": "No GPU, shader derivative micrograin, screen AA, shadows or exercise contact acceptance. Roughness map uses its approximate mean."
+  },
+  "materialPatch": "--- a/src/engines/space-scene/stages/model3d/PartNode.tsx\n+++ b/src/engines/space-scene/stages/model3d/PartNode.tsx\n@@ -748,7 +748,7 @@\n     const prevFade = m.fade;\n     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));\n     const targetFade = display.hidden ? 0 : targetBase;\n-    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown);\n+    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown) && (!exerciseMask || display.tint !== null);\n     if (fill && props.fillBridge) {\n       const reading = props.fillBridge.fills.get(part.id);\n       const volume = fm.shown ? fm.volume : 0;\n@@ -757,6 +757,10 @@\n     }\n     pms.forEach((pm, i) => {\n       const mat = pm.material;\n+      // Exact-skin exercise masks need a depth bias; never leak it into anatomy.\n+      mat.polygonOffset = exerciseMask;\n+      mat.polygonOffsetFactor = exerciseMask ? -1 : 0;\n+      mat.polygonOffsetUnits = exerciseMask ? -4 : 0;\n       if (exerciseMask) fadePartMaterial(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost, true);\n       else (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);\n     });\n",
+  "rows": [
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-start-paper-0.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0000702589750289917,
+          0.1309589333832264,
+          0.1038694977760315
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-start-paper-35.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000702589750289917,
+          0.1309589333832264,
+          0.1038694977760315
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-start-paper-90.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0000702589750289917,
+          0.1309589333832264,
+          0.1038694977760315
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-start-cinema-35.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000702589750289917,
+          0.1309589333832264,
+          0.1038694977760315
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-end-paper-0.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0000702589750289917,
+          0.08269896358251572,
+          0.12064370512962341
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-end-paper-35.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000702589750289917,
+          0.08269896358251572,
+          0.12064370512962341
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-end-paper-90.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0000702589750289917,
+          0.08269896358251572,
+          0.12064370512962341
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/curl-up-end-cinema-35.png",
+      "triangles": 55058,
+      "draws": 9,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000702589750289917,
+          0.08269896358251572,
+          0.12064370512962341
+        ],
+        "height": 0.7186115521937608
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-start-paper-0.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-start-paper-35.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-start-paper-90.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-start-cinema-35.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-end-paper-0.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-end-paper-35.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-end-paper-90.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/forearm-plank-end-cinema-35.png",
+      "triangles": 57020,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000023126602172851562,
+          -0.07757747918367386,
+          -0.14526814222335815
+        ],
+        "height": 0.8515885442495346
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-start-paper-0.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00005608797073364258,
+          -0.031722187995910645,
+          0.015908263623714447
+        ],
+        "height": 2.4452413702011104
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-start-paper-35.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00005608797073364258,
+          -0.031722187995910645,
+          0.015908263623714447
+        ],
+        "height": 2.4452413702011104
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-start-paper-90.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00005608797073364258,
+          -0.031722187995910645,
+          0.015908263623714447
+        ],
+        "height": 2.4452413702011104
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-start-cinema-35.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00005608797073364258,
+          -0.031722187995910645,
+          0.015908263623714447
+        ],
+        "height": 2.4452413702011104
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-end-paper-0.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00005608797073364258,
+          0.1551876962184906,
+          0.19215209782123566
+        ],
+        "height": 2.005131602883339
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-end-paper-35.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00005608797073364258,
+          0.1551876962184906,
+          0.19215209782123566
+        ],
+        "height": 2.005131602883339
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-end-paper-90.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00005608797073364258,
+          0.1551876962184906,
+          0.19215209782123566
+        ],
+        "height": 2.005131602883339
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/hanging-knee-raise-end-cinema-35.png",
+      "triangles": 55421,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00005608797073364258,
+          0.1551876962184906,
+          0.19215209782123566
+        ],
+        "height": 2.005131602883339
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-start-paper-0.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.5709840953350067,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.562786815315485
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-start-paper-35.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.5709840953350067,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.562786815315485
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-start-paper-90.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.5709840953350067,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.562786815315485
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-start-cinema-35.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.5709840953350067,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.562786815315485
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-end-paper-0.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.5897327959537506,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.5223131537437435
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-end-paper-35.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.5897327959537506,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.5223131537437435
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-end-paper-90.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.5897327959537506,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.5223131537437435
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-pallof-press-end-cinema-35.png",
+      "triangles": 117622,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.5897327959537506,
+          0.08393228054046631,
+          0.4162250757217407
+        ],
+        "height": 2.5223131537437435
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-start-paper-0.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.00004673004150390625,
+          -0.05094057321548462,
+          0.0078093260526657104
+        ],
+        "height": 1.9196145975589751
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-start-paper-35.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00004673004150390625,
+          -0.05094057321548462,
+          0.0078093260526657104
+        ],
+        "height": 1.9196145975589751
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-start-paper-90.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.00004673004150390625,
+          -0.05094057321548462,
+          0.0078093260526657104
+        ],
+        "height": 1.9196145975589751
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-start-cinema-35.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00004673004150390625,
+          -0.05094057321548462,
+          0.0078093260526657104
+        ],
+        "height": 1.9196145975589751
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-end-paper-0.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.00004673004150390625,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.4193969726562499
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-end-paper-35.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00004673004150390625,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.4193969726562499
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-end-paper-90.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.00004673004150390625,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.4193969726562499
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-back-squat-end-cinema-35.png",
+      "triangles": 55265,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00004673004150390625,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.4193969726562499
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-start-paper-0.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00000947713851928711,
+          -0.05579361319541931,
+          0.11333715543150902
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-start-paper-35.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000947713851928711,
+          -0.05579361319541931,
+          0.11333715543150902
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-start-paper-90.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00000947713851928711,
+          -0.05579361319541931,
+          0.11333715543150902
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-start-cinema-35.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000947713851928711,
+          -0.05579361319541931,
+          0.11333715543150902
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-end-paper-0.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00000947713851928711,
+          -0.19775032997131348,
+          0.27495311945676804
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-end-paper-35.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000947713851928711,
+          -0.19775032997131348,
+          0.27495311945676804
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-end-paper-90.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00000947713851928711,
+          -0.19775032997131348,
+          0.27495311945676804
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-romanian-deadlift-end-cinema-35.png",
+      "triangles": 77693,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000947713851928711,
+          -0.19775032997131348,
+          0.27495311945676804
+        ],
+        "height": 3.1075009092688557
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-start-paper-0.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.46163325011730194,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-start-paper-35.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.46163325011730194,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-start-paper-90.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.46163325011730194,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-start-cinema-35.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.46163325011730194,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-end-paper-0.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.35492753982543945,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.687158545851707
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-end-paper-35.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.35492753982543945,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.687158545851707
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-end-paper-90.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.35492753982543945,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.687158545851707
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-abduction-end-cinema-35.png",
+      "triangles": 117347,
+      "draws": 12,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.35492753982543945,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.687158545851707
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-start-paper-0.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-start-paper-35.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-start-paper-90.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-start-cinema-35.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.26179686188697815
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-end-paper-0.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.2618671655654907
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-end-paper-35.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.2618671655654907
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-end-paper-90.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.2618671655654907
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-hip-adduction-end-cinema-35.png",
+      "triangles": 116737,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.4630596190690994,
+          0.10000002384185791,
+          0.2618671655654907
+        ],
+        "height": 2.4860000538825986
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-start-paper-0.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0000068247318267822266,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-start-paper-35.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000068247318267822266,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-start-paper-90.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0000068247318267822266,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-start-cinema-35.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0000068247318267822266,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-end-paper-0.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000009208917617797852,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-end-paper-35.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000009208917617797852,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-end-paper-90.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000009208917617797852,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/lat-pulldown-end-cinema-35.png",
+      "triangles": 150221,
+      "draws": 16,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000009208917617797852,
+          0.49131447076797485,
+          -0.3452956974506378
+        ],
+        "height": 2.822955020666122
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-start-paper-0.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000035881996154785156,
+          0.00019341707229614258,
+          0.9408821724355221
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-start-paper-35.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000035881996154785156,
+          0.00019341707229614258,
+          0.9408821724355221
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-start-paper-90.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000035881996154785156,
+          0.00019341707229614258,
+          0.9408821724355221
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-start-cinema-35.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000035881996154785156,
+          0.00019341707229614258,
+          0.9408821724355221
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-end-paper-0.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0010598748922348022,
+          0.00019341707229614258,
+          0.9110097475349903
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-end-paper-35.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0010598748922348022,
+          0.00019341707229614258,
+          0.9110097475349903
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-end-paper-90.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0010598748922348022,
+          0.00019341707229614258,
+          0.9110097475349903
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/face-pull-end-cinema-35.png",
+      "triangles": 118698,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0010598748922348022,
+          0.00019341707229614258,
+          0.9110097475349903
+        ],
+        "height": 2.7115629851818084
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-start-paper-0.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00002370774745941162,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-start-paper-35.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00002370774745941162,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-start-paper-90.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00002370774745941162,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-start-cinema-35.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00002370774745941162,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-end-paper-0.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000046193599700927734,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-end-paper-35.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000046193599700927734,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-end-paper-90.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000046193599700927734,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/dumbbell-shrug-end-cinema-35.png",
+      "triangles": 53934,
+      "draws": 5,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000046193599700927734,
+          -0.5519853085279465,
+          0.023115355521440506
+        ],
+        "height": 1.9403586235642432
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-start-paper-0.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.3255504369735718
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-start-paper-35.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.3255504369735718
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-start-paper-90.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.3255504369735718
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-start-cinema-35.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.3255504369735718
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-end-paper-0.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.2100757509469986
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-end-paper-35.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.2100757509469986
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-end-paper-90.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.2100757509469986
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/cable-fly-end-cinema-35.png",
+      "triangles": 180922,
+      "draws": 17,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.0732041597366333,
+          -0.2100757509469986
+        ],
+        "height": 4.336736929416656
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-start-paper-0.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0004099607467651367,
+          0.02554449439048767,
+          0.18661844730377197
+        ],
+        "height": 3.1075519293546674
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-start-paper-35.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0004099607467651367,
+          0.02554449439048767,
+          0.18661844730377197
+        ],
+        "height": 3.1075519293546674
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-start-paper-90.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0004099607467651367,
+          0.02554449439048767,
+          0.18661844730377197
+        ],
+        "height": 3.1075519293546674
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-start-cinema-35.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0004099607467651367,
+          0.02554449439048767,
+          0.18661844730377197
+        ],
+        "height": 3.1075519293546674
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-end-paper-0.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.0004118680953979492,
+          -0.18705487251281738,
+          0.18661844730377197
+        ],
+        "height": 3.107611536979675
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-end-paper-35.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0004118680953979492,
+          -0.18705487251281738,
+          0.18661844730377197
+        ],
+        "height": 3.107611536979675
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-end-paper-90.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.0004118680953979492,
+          -0.18705487251281738,
+          0.18661844730377197
+        ],
+        "height": 3.107611536979675
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/barbell-bench-press-end-cinema-35.png",
+      "triangles": 105877,
+      "draws": 13,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.0004118680953979492,
+          -0.18705487251281738,
+          0.18661844730377197
+        ],
+        "height": 3.107611536979675
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-start-paper-0.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.000004231929779052734,
+          0.10922950506210327,
+          0.1334449052810669
+        ],
+        "height": 3.107500572502613
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-start-paper-35.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000004231929779052734,
+          0.10922950506210327,
+          0.1334449052810669
+        ],
+        "height": 3.107500572502613
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-start-paper-90.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.000004231929779052734,
+          0.10922950506210327,
+          0.1334449052810669
+        ],
+        "height": 3.107500572502613
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-start-cinema-35.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.000004231929779052734,
+          0.10922950506210327,
+          0.1334449052810669
+        ],
+        "height": 3.107500572502613
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-end-paper-0.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.00000286102294921875,
+          -0.11087937653064728,
+          0.1334449052810669
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-end-paper-35.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000286102294921875,
+          -0.11087937653064728,
+          0.1334449052810669
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-end-paper-90.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.00000286102294921875,
+          -0.11087937653064728,
+          0.1334449052810669
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look1/close-grip-bench-press-end-cinema-35.png",
+      "triangles": 105539,
+      "draws": 21,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.00000286102294921875,
+          -0.11087937653064728,
+          0.1334449052810669
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    }
+  ]
+}

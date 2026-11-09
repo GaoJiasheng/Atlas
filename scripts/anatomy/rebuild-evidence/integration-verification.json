@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-09",
+  "worktreeEnginesChanged": false,
+  "testSnapshot": "/private/tmp/atlas-muscles-patches-check",
+  "patchSha256": {
+    "gym-runtime.patch": "a77518aae25e56a7a29686ef21fcf7516873499151118dab1e4bb56f284060a4",
+    "hands-runtime.patch": "4806ea8b00d8fea63a17f7d97d25c24474e22ad6c3a5f23b0ff509dd8ae83d4b",
+    "linea-alba.patch": "7baf7fc7007fc53f1730d34f59e31534ae5ed47835f1591aa7f63f133046d581"
+  },
+  "combinedTypecheck": {
+    "command": "pnpm exec astro sync && pnpm exec tsc --noEmit",
+    "exitCode": 0
+  },
+  "patchedRegressionTests": {
+    "command": "pnpm exec vitest run tests/space-scene/hands.test.ts tests/space-scene/muscles-gym.test.ts --maxWorkers=1 --testTimeout=30000",
+    "filesPassed": 2,
+    "testsPassed": 17,
+    "exitCode": 0
+  },
+  "limits": "Patch application/typecheck/regression only, not GPU, exercise contact, photomatch or runtime-browser acceptance. Geometry factory position comparison is separate verify-gym-patch.ts."
+}

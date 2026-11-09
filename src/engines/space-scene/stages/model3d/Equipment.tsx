@@ -29,47 +29,30 @@
  * see-through. None casts a shadow. One draw call per piece, never picked or
  * labelled.
  */
-import { useEffect, useMemo, useRef } from 'react';
+import { lazy, useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Matrix4, Quaternion, Vector3, type BufferGeometry, type Group, type Mesh, type Object3D } from 'three';
+import { BufferGeometry, Matrix4, MeshStandardMaterial, Quaternion, Vector3, type Group, type Mesh, type Object3D } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import type { GymAssetFactory, PropFactories } from '../../../../content/topics/muscles-core/runtime/GymAssets';
+const GymAssets = lazy(() => import('../../../../content/topics/muscles-core/runtime/GymAssets').then(m => ({default:m.GymAssets})));
 import type { EquipmentSpec } from '../../../../content/schema/fitness';
 import {
   BAND,
-  backExtensionShape,
-  barbellShape,
   barYaw,
-  benchShape,
-  cableHandleShape,
-  columnShape,
-  dipBarShape,
-  dumbbellShape,
-  floorShape,
   heightOf,
   INCLINE_DEFAULT,
-  kettlebellShape,
   LAT_BAR,
-  lineShape,
-  machineFrameShape,
-  machineSeatShape,
   placeFixed,
   POST,
-  postShape,
-  pullUpBarShape,
-  rackShape,
   rackYaw,
   ROPE,
   THIGH_PAD,
-  ropeGripShape,
-  stepShape,
-  straightBarShape,
-  wallShape,
   type EquipmentShape,
   type PlaceContext,
 } from '../../lib/equipment';
 import type { Part } from '../../schema';
 import { partPieces } from './geometry';
-import { createPartMaterial, stylePartMaterial, type PartMaterial, type PartStyle } from './materials';
+import { type PartStyle } from './materials';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 import { damp } from '../../lib/math';
 import { gripPoint, type Grip } from './grip';
@@ -111,6 +94,7 @@ type Place =
   | { kind: 'fixed'; side: number }
   /** A cable's pulley wheel, at the trunk + `at`. */
   | { kind: 'pulley' }
+  | { kind: 'lat-frame' }
   /** A line from the pulley / anchor to a palm, the palms' midpoint, a foot's ball, an ankle (a cuff) or a rope's end (`hook`). */
   | { kind: 'line'; to: 'l' | 'r' | 'mid' | 'foot-l' | 'foot-r' | 'ankle-l' | 'ankle-r' | 'hook' }
   /** A rope strand from the rope's end to a palm. */
@@ -119,7 +103,7 @@ type Place =
   | { kind: 'cupped' };
 
 /** A free-standing piece shaped by its placement (the rack's hook height, the back-extension bench's leg line): a key and the shape, or null (keep the current one). */
-type Fit = (ctx: PlaceContext, at: readonly number[], yaw: number, floor: number | null) => { key: string; shape: () => EquipmentShape } | null;
+type Fit = (ctx: PlaceContext, at: readonly number[], yaw: number, floor: number | null) => { key: string; shape: () => EquipmentShape | BufferGeometry } | null;
 
 interface Piece {
   place: Place;
@@ -132,34 +116,27 @@ interface Piece {
   key?: string;
 }
 
-/** The rack's J-hooks at the bar's height above the floor it stands on. */
-const rackFit: Fit = (ctx, at) => {
-  if (!ctx.bar) return null;
-  const hook = ctx.bar.at[1] - at[1]!;
-  return { key: hook.toFixed(3), shape: () => rackShape(hook) };
-};
-
 /** A machine seat's thigh pad over the thighs just behind the knees (the knees at the first key, in the seat's frame turned `yaw`°). */
-const seatFit = (spec: EquipmentSpec): Fit => (ctx, at, yaw) => {
+const seatFit = (spec: EquipmentSpec, factories:PropFactories): Fit => (ctx, at, yaw) => {
   const k = ctx.knees;
   if (!k) return null;
   const a = (-yaw * Math.PI) / 180;
   const dx = k[0] - at[0]!;
   const dz = k[2] - at[2]!;
   const pad: [number, number] = [k[1] - at[1]! + THIGH_PAD.up, -Math.sin(a) * dx + Math.cos(a) * dz - THIGH_PAD.back];
-  return { key: `${pad[0].toFixed(3)},${pad[1].toFixed(3)}`, shape: () => machineSeatShape(spec.angle, heightOf(spec), pad) };
+  return { key: `${pad[0].toFixed(3)},${pad[1].toFixed(3)}`, shape: () => factories.machineSeatShape(spec.angle, heightOf(spec), pad) };
 };
 
 /** A post under a resting hand: its rail's top just under the palm at the first key. */
-const postFit = (hand: 'left' | 'right'): Fit => (ctx, at) => {
+const postFit = (hand: 'left' | 'right', factories:PropFactories): Fit => (ctx, at) => {
   const p = ctx.hands?.[hand === 'left' ? 0 : 1];
   if (!p) return null;
   const h = p[1] - at[1]! + 0.3 * POST.rail;
-  return { key: h.toFixed(3), shape: () => postShape(h, true) };
+  return { key: h.toFixed(3), shape: () => factories.postShape(h, true) };
 };
 
 /** The back-extension bench along the leg line: the feet (scene) in the bench's own frame (turned `yaw`° about +Y), the floor below its pad. */
-const backExtensionFit: Fit = (ctx, at, yaw, fl) => {
+const backExtensionFit = (factories:PropFactories): Fit => (ctx, at, yaw, fl) => {
   const f = ctx.feet;
   if (!f || fl === null) return null;
   const a = (-yaw * Math.PI) / 180;
@@ -167,7 +144,7 @@ const backExtensionFit: Fit = (ctx, at, yaw, fl) => {
   const dz = f[2] - at[2]!;
   const local: [number, number, number] = [0, f[1] - at[1]!, -Math.sin(a) * dx + Math.cos(a) * dz];
   const low = fl - at[1]!;
-  return { key: `${local[1].toFixed(3)},${local[2].toFixed(3)},${low.toFixed(3)}`, shape: () => backExtensionShape(local, low) };
+  return { key: `${local[1].toFixed(3)},${local[2].toFixed(3)},${low.toFixed(3)}`, shape: () => factories.backExtensionShape(local, low) };
 };
 
 /**
@@ -190,30 +167,31 @@ function oneGeometry(shape: EquipmentShape): BufferGeometry {
 const sides = (hand: EquipmentSpec['hand']): ('l' | 'r')[] => (hand === 'left' ? ['l'] : hand === 'right' ? ['r'] : ['l', 'r']);
 
 /** The pieces one spec draws, held (in the body's frame) or not. */
-function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
+function piecesOf(spec: EquipmentSpec, held: boolean, cable: number, asset: (name: string, fit?: number) => BufferGeometry, pulldown: boolean, factories:PropFactories): Piece[] {
+  const {backExtensionShape,cableHandleShape,dipBarShape,floorShape,kettlebellShape,lineShape,machineFrameShape,machineSeatShape,postShape,pullUpBarShape,ropeGripShape,stepShape,straightBarShape,wallShape}=factories;
   const out: Piece[] = [];
   const isHeld = (p: Place) => p.kind === 'hands' || p.kind === 'palm' || p.kind === 'back' || p.kind === 'cupped';
   const want = (p: Place) => isHeld(p) === held;
-  const each = (place: Place, shape: () => EquipmentShape, see = false, fit?: Fit) => {
-    if (want(place)) out.push({ place, spec, geometry: oneGeometry(shape()), see, ...(fit ? { fit } : {}) });
+  const each = (place: Place, shape: () => EquipmentShape | BufferGeometry, see = false, fit?: Fit) => {
+    if (want(place)) out.push({ place, spec, geometry: compiled(shape()), see, ...(fit ? { fit } : {}) });
   };
   switch (spec.kind) {
     case 'barbell':
-      each(spec.on === 'back' ? { kind: 'back' } : { kind: 'hands' }, barbellShape);
+      each(spec.on === 'back' ? { kind: 'back' } : { kind: 'hands' }, () => asset('barbell'));
       break;
     case 'dumbbell':
     case 'kettlebell':
     case 'cable-handle': {
-      const shape = spec.kind === 'dumbbell' ? dumbbellShape : spec.kind === 'kettlebell' ? kettlebellShape : cableHandleShape;
+      const shape = spec.kind === 'dumbbell' ? () => asset('dumbbell') : spec.kind === 'kettlebell' ? kettlebellShape : cableHandleShape;
       // On end in both hands: one, between the palms.
       if (spec.hold === 'both' || (spec.hold === 'vertical' && (spec.hand ?? 'both') === 'both')) each({ kind: 'cupped' }, shape);
       else for (const side of sides(spec.hand)) each({ kind: 'palm', side }, shape);
       break;
     }
     case 'lat-bar':
-      each({ kind: 'hands' }, () => straightBarShape(LAT_BAR.length));
+      each({ kind: 'hands' }, () => asset('lat-bar'));
       each({ kind: 'line', to: 'mid' }, () => lineShape(cable));
-      each({ kind: 'pulley' }, () => columnPulley());
+      if (!pulldown) each({ kind: 'pulley' }, () => asset('pulley'));
       break;
     case 'cable':
       if (spec.to === 'ankle.l' || spec.to === 'ankle.r') each({ kind: 'line', to: spec.to === 'ankle.l' ? 'ankle-l' : 'ankle-r' }, () => lineShape(cable));
@@ -231,20 +209,29 @@ function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
           each({ kind: 'palm', side }, cableHandleShape);
           each({ kind: 'line', to: side }, () => lineShape(cable));
         }
-      each({ kind: 'fixed', side: 0 }, () => columnShape(0), true);
-      each({ kind: 'pulley' }, () => columnPulley());
+      each({ kind: 'fixed', side: 0 }, () => asset('cable'), true);
+      each({ kind: 'pulley' }, () => asset('pulley'));
       break;
     case 'band':
       for (const side of sides(spec.hand)) each({ kind: 'line', to: spec.to === 'feet' ? (side === 'l' ? 'foot-l' : 'foot-r') : side }, () => lineShape(BAND.thick));
       break;
     case 'bench':
-      each({ kind: 'fixed', side: 0 }, () => benchShape(spec.incline ?? 0), true);
+      each({ kind: 'fixed', side: 0 }, () => asset(`bench-${spec.incline ?? 0}`), true);
       break;
     case 'incline-bench':
-      each({ kind: 'fixed', side: 0 }, () => benchShape(spec.angle ?? INCLINE_DEFAULT), true);
+      each({ kind: 'fixed', side: 0 }, () => asset(`bench-${spec.angle ?? INCLINE_DEFAULT}`), true);
       break;
     case 'machine-seat':
-      each({ kind: 'fixed', side: 0 }, () => machineSeatShape(spec.angle, heightOf(spec), spec.thighPad ?? false), true, spec.thighPad ? seatFit(spec) : undefined);
+      if (pulldown) {
+        each({ kind: 'fixed', side: 0 }, () => asset('lat-seat'), true);
+        each({ kind: 'fixed', side: 0 }, () => asset('lat-pads'), true, (ctx, at, yaw) => {
+          const fit = seatFit(spec,factories)(ctx, at, yaw, null);
+          if (!fit || !ctx.knees) return null;
+          const a=-yaw*Math.PI/180,dx=ctx.knees[0]-at[0]!,dz=ctx.knees[2]-at[2]!;
+          const y=ctx.knees[1]-at[1]!+.115,z=-Math.sin(a)*dx+Math.cos(a)*dz-THIGH_PAD.back;
+          return {key:fit.key,shape:()=>asset('lat-pads').translate(0,y,z)};
+        });
+      } else each({ kind: 'fixed', side: 0 }, () => machineSeatShape(spec.angle, heightOf(spec), spec.thighPad ?? false), true, spec.thighPad ? seatFit(spec,factories) : undefined);
       break;
     case 'pull-up-bar':
       each({ kind: 'fixed', side: 0 }, () => pullUpBarShape(heightOf(spec)), true);
@@ -263,17 +250,19 @@ function piecesOf(spec: EquipmentSpec, held: boolean, cable: number): Piece[] {
       each({ kind: 'fixed', side: 0 }, () => wallShape(heightOf(spec)), true);
       break;
     case 'post':
-      if (spec.hand && spec.hand !== 'both') each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec), true), true, postFit(spec.hand));
+      if (spec.hand && spec.hand !== 'both') each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec), true), true, postFit(spec.hand,factories));
       else each({ kind: 'fixed', side: 0 }, () => postShape(heightOf(spec)), true);
       break;
     case 'machine-frame':
-      each({ kind: 'fixed', side: 0 }, () => machineFrameShape(heightOf(spec)), true);
+      // A physical pulldown tower is opaque, including beside the wire body.
+      if(pulldown) each({ kind: 'lat-frame' }, () => asset('lat-frame'));
+      else each({ kind: 'fixed', side: 0 }, () => machineFrameShape(heightOf(spec)), true);
       break;
     case 'rack':
-      each({ kind: 'fixed', side: 0 }, () => rackShape(1), true, rackFit);
+      each({ kind: 'fixed', side: 0 }, () => asset('rack',1), true, (ctx,at) => ctx.bar ? {key:(ctx.bar.at[1]-at[1]!).toFixed(3),shape:()=>asset('rack',ctx.bar!.at[1]-at[1]!)} : null);
       break;
     case 'back-extension':
-      each({ kind: 'fixed', side: 0 }, () => backExtensionShape([0, -0.55, -0.55], -0.85), true, backExtensionFit);
+      each({ kind: 'fixed', side: 0 }, () => backExtensionShape([0, -0.55, -0.55], -0.85), true, backExtensionFit(factories));
       break;
   }
   return out;
@@ -306,23 +295,9 @@ function heldTurn(hold: EquipmentSpec['hold'], grip: EquipmentSpec['grip'], fore
   return _q.setFromRotationMatrix(_m.makeBasis(_x, _y, _z));
 }
 
-/** The pulley wheel (a short disc along X) on its own, at the pulley point. */
-function columnPulley(): EquipmentShape {
-  const shape = columnShape(0);
-  const wheel = shape.extra![0]!;
-  return { primitive: { ...wheel, at: [0, 0, 0] } };
-}
+const compiled = (shape: EquipmentShape | BufferGeometry): BufferGeometry => shape instanceof BufferGeometry ? shape : oneGeometry(shape);
 
-export function Equipment({
-  specs,
-  held,
-  grips,
-  footing,
-  trunk,
-  style,
-  solid,
-  thin = false,
-}: {
+type EquipmentProps = {
   specs: readonly EquipmentSpec[];
   /** Held pieces (inside the root group) or the rest (scene). */
   held: boolean;
@@ -337,17 +312,32 @@ export function Equipment({
   /** With the mannequin or the wire figure: solid, drawn before the body. */
   solid: boolean;
   /** Beside the wire figure: the cables thinner. */
-  thin?: boolean;
-}) {
+  thin?: boolean;};
+
+export function Equipment(props:EquipmentProps){return <GymAssets>{(asset,factories)=><EquipmentBody {...props} asset={asset} factories={factories}/>}</GymAssets>;}
+
+function EquipmentBody({
+  specs,
+  held,
+  grips,
+  footing,
+  trunk,
+  style,
+  solid,
+  thin = false,
+  asset,
+  factories,
+}: EquipmentProps & {asset:GymAssetFactory;factories:PropFactories}) {
   const runtime = useRuntime();
-  const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held, thin ? THIN_CABLE : LAT_BAR.cable)), [specs, held, thin]);
+  const pieces = useMemo(() => specs.flatMap((spec) => piecesOf(spec, held, thin ? THIN_CABLE : LAT_BAR.cable, asset, (specs.some(s=>s.kind==='lat-bar')&&specs.some(s=>s.kind==='machine-frame')),factories)), [specs, held, thin, asset,factories]);
   useEffect(() => () => pieces.forEach((p) => p.geometry.dispose()), [pieces]);
   const meshes = useRef<(Mesh | null)[]>([]);
 
-  const materials = useMemo<PartMaterial[]>(() => pieces.map(() => createPartMaterial()), [pieces]);
+  const materials = useMemo(() => pieces.map(() => ({ material: new MeshStandardMaterial() })), [pieces]);
   useEffect(() => {
     materials.forEach((m, i) => {
-      stylePartMaterial(m, style);
+      // Equipment has no tissue deformation attributes or UV textures.
+      m.material.color.set(style.look.color);
       // The floor slab's top is the ground shadow's plane: its depth is pushed back so the shadow never z-fights it.
       const floor = pieces[i]!.spec.kind === 'floor';
       m.material.polygonOffset = floor;
@@ -453,9 +443,26 @@ export function Equipment({
           const mesh = meshes.current[i];
           if (fitted && fitted.key !== p.key && mesh) {
             p.geometry.dispose();
-            p.geometry = oneGeometry(fitted.shape());
+            p.geometry = compiled(fitted.shape());
             p.key = fitted.key;
             mesh.geometry = p.geometry;
+          }
+          break;
+        }
+        case 'lat-frame': {
+          const bar=specs.find(s=>s.kind==='lat-bar');
+          if(!bar || !ex || !anchor(bar,_a))return;
+          const floor=ex.floor??ex.modelFloor;
+          g.position.set(_a.x,floor,_a.z);
+          // Floor-authored +Y tower; fit the upper rails, never scale the stack.
+          g.scale.set(1,1,1);
+          g.rotation.set(0,((p.spec.turn??0)*Math.PI)/180,0);
+          const height=_a.y-floor,key=height.toFixed(4),mesh=meshes.current[i];
+          if(mesh && p.key!==key){
+            p.geometry.dispose();
+            p.geometry=asset('lat-frame',height);
+            p.key=key;
+            mesh.geometry=p.geometry;
           }
           break;
         }
@@ -494,6 +501,12 @@ export function Equipment({
           }
           // (The rope's end is in the scene already.)
           if (place.kind === 'strand' || place.to !== 'hook') _b.applyMatrix4(runtime.root);
+          if (p.spec.kind === 'lat-bar') {
+            // Seat the cable on the bar eye and on the sheave groove tangent.
+            _b.y += .038;
+            const dy=_b.y-_a.y,dz=_b.z-_a.z,r=.034,l2=dy*dy+dz*dz;
+            if(l2>r*r){const k=r*Math.sqrt(l2-r*r)/l2;_a.y+=r*r*dy/l2-k*dz;_a.z+=r*r*dz/l2+k*dy;}
+          }
           _x.subVectors(_b, _a);
           const len = _x.length();
           if (len < 1e-4) return;

@@ -1,0 +1,1186 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-start-0.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00005774199962615967,
+        -0.39391469955444336,
+        0.057292722165584564
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-start-35.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00005774199962615967,
+        -0.39391469955444336,
+        0.057292722165584564
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-start-90.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00005774199962615967,
+        -0.39391469955444336,
+        0.057292722165584564
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-start-groin.png",
+    "triangles": 34536,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000015988945960998535,
+        -0.39391469955444336,
+        0.03664854168891907
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-end-0.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00017400085926055908,
+        -0.39391469955444336,
+        0.1271551176905632
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-end-35.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00017400085926055908,
+        -0.39391469955444336,
+        0.1271551176905632
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-end-90.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00017400085926055908,
+        -0.39391469955444336,
+        0.1271551176905632
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-reverse-curl-end-groin.png",
+    "triangles": 34536,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00017400085926055908,
+        -0.39391469955444336,
+        0.07129298895597458
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-start-0.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.00002364814281463623,
+        -0.1586923599243164,
+        -0.09047339856624603
+      ],
+      "height": 2.2555899429321293
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-start-35.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.00002364814281463623,
+        -0.1586923599243164,
+        -0.09047339856624603
+      ],
+      "height": 2.2555899429321293
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-start-90.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.00002364814281463623,
+        -0.1586923599243164,
+        -0.09047339856624603
+      ],
+      "height": 2.2555899429321293
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-start-groin.png",
+    "triangles": 34536,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.00002364814281463623,
+        -0.23304709792137146,
+        -0.09047339856624603
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-end-0.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000018611550331115723,
+        -0.34902703762054443,
+        -0.05306481570005417
+      ],
+      "height": 1.8151411437988283
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-end-35.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000018611550331115723,
+        -0.34902703762054443,
+        -0.05306481570005417
+      ],
+      "height": 1.8151411437988283
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-end-90.png",
+    "triangles": 60572,
+    "draws": 51,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000018611550331115723,
+        -0.34902703762054443,
+        -0.05306481570005417
+      ],
+      "height": 1.8151411437988283
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chin-up-end-groin.png",
+    "triangles": 34536,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.00007365643978118896,
+        -0.34902703762054443,
+        -0.05306481570005417
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-start-0.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000008478760719299316,
+        -0.5582265257835388,
+        -0.008884645998477936
+      ],
+      "height": 1.9214876365661624
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-start-35.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000008478760719299316,
+        -0.5582265257835388,
+        -0.008884645998477936
+      ],
+      "height": 1.9214876365661624
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-start-90.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000008478760719299316,
+        -0.5582265257835388,
+        -0.008884645998477936
+      ],
+      "height": 1.9214876365661624
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-start-groin.png",
+    "triangles": 34522,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.0000785142183303833,
+        -0.5582265257835388,
+        -0.008884645998477936
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-end-0.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000032395124435424805,
+        -0.3594818115234375,
+        -0.008884645998477936
+      ],
+      "height": 2.3666757965087895
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-end-35.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000032395124435424805,
+        -0.3594818115234375,
+        -0.008884645998477936
+      ],
+      "height": 2.3666757965087895
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-end-90.png",
+    "triangles": 59641,
+    "draws": 27,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000032395124435424805,
+        -0.3594818115234375,
+        -0.008884645998477936
+      ],
+      "height": 2.3666757965087895
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-overhead-press-end-groin.png",
+    "triangles": 34522,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000009760260581970215,
+        -0.4290059804916382,
+        -0.008884645998477936
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-start-0.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00002244114875793457,
+        -0.03361225128173828,
+        0.3104012608528137
+      ],
+      "height": 1.377705764770508
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-start-35.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00002244114875793457,
+        -0.03361225128173828,
+        0.3104012608528137
+      ],
+      "height": 1.377705764770508
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-start-90.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00002244114875793457,
+        -0.03361225128173828,
+        0.3104012608528137
+      ],
+      "height": 1.377705764770508
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-start-groin.png",
+    "triangles": 34550,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000021845102310180664,
+        -0.09997080266475677,
+        0.3104012608528137
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-end-0.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00009647011756896973,
+        -0.21753060072660446,
+        0.3104012608528137
+      ],
+      "height": 0.9657286620140076
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-end-35.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00009647011756896973,
+        -0.21753060072660446,
+        0.3104012608528137
+      ],
+      "height": 0.9657286620140076
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-end-90.png",
+    "triangles": 60276,
+    "draws": 23,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00009647011756896973,
+        -0.21753060072660446,
+        0.3104012608528137
+      ],
+      "height": 0.9657286620140076
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-bench-press-end-groin.png",
+    "triangles": 34550,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00009647011756896973,
+        -0.2854766473174095,
+        0.3104012608528137
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-start-0.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-start-35.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-start-90.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-start-groin.png",
+    "triangles": 34572,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.08837566524744034
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-end-0.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-end-35.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-end-90.png",
+    "triangles": 58727,
+    "draws": 25,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.146994911134243
+      ],
+      "height": 1.0189115047454835
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/side-plank-end-groin.png",
+    "triangles": 34572,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.17932531237602234,
+        0.043860793113708496,
+        0.08837566524744034
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-start-0.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.00004673004150390625,
+        -0.05094057321548462,
+        0.0078093260526657104
+      ],
+      "height": 1.9026268577575685
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-start-35.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.00004673004150390625,
+        -0.05094057321548462,
+        0.0078093260526657104
+      ],
+      "height": 1.9026268577575685
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-start-90.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.00004673004150390625,
+        -0.05094057321548462,
+        0.0078093260526657104
+      ],
+      "height": 1.9026268577575685
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-start-groin.png",
+    "triangles": 34562,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000005409121513366699,
+        -0.05094057321548462,
+        0.0078093260526657104
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-end-0.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.00004673004150390625,
+        0.11183790862560272,
+        0.20229841396212578
+      ],
+      "height": 1.3311071348190309
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-end-35.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.00004673004150390625,
+        0.11183790862560272,
+        0.20229841396212578
+      ],
+      "height": 1.3311071348190309
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-end-90.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.00004673004150390625,
+        0.11183790862560272,
+        0.20229841396212578
+      ],
+      "height": 1.3311071348190309
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-back-squat-end-groin.png",
+    "triangles": 34562,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000005409121513366699,
+        0.11183790862560272,
+        0.20229841396212578
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-start-0.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00001531839370727539,
+        -0.05579361319541931,
+        0.045951131731271744
+      ],
+      "height": 1.9134976673126223
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-start-35.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00001531839370727539,
+        -0.05579361319541931,
+        0.045951131731271744
+      ],
+      "height": 1.9134976673126223
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-start-90.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00001531839370727539,
+        -0.05579361319541931,
+        0.045951131731271744
+      ],
+      "height": 1.9134976673126223
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-start-groin.png",
+    "triangles": 34562,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.0003723353147506714,
+        -0.05579361319541931,
+        0.03599115088582039
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-end-0.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00001531839370727539,
+        -0.19775032997131348,
+        0.27495311945676804
+      ],
+      "height": 1.5812726402282717
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-end-35.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00001531839370727539,
+        -0.19775032997131348,
+        0.27495311945676804
+      ],
+      "height": 1.5812726402282717
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-end-90.png",
+    "triangles": 59422,
+    "draws": 47,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00001531839370727539,
+        -0.19775032997131348,
+        0.27495311945676804
+      ],
+      "height": 1.5812726402282717
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/barbell-romanian-deadlift-end-groin.png",
+    "triangles": 34562,
+    "draws": 1,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.0003723353147506714,
+        -0.19775032997131348,
+        0.27495311945676804
+      ],
+      "height": 0.75
+    },
+    "width": 720,
+    "height": 850
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/arms-body-0.png",
+    "triangles": 53726,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.39391469955444336,
+        0.029446832835674286
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/arms-body-35.png",
+    "triangles": 53726,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000043019652366638184,
+        -0.39391469955444336,
+        0.029446832835674286
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/arms-body-90.png",
+    "triangles": 53726,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000043019652366638184,
+        -0.39391469955444336,
+        0.029446832835674286
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/back-body-0.png",
+    "triangles": 53718,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.34378790855407715,
+        0.04792868345975876
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/back-body-35.png",
+    "triangles": 53718,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000043019652366638184,
+        -0.34378790855407715,
+        0.04792868345975876
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/back-body-90.png",
+    "triangles": 53718,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000043019652366638184,
+        -0.34378790855407715,
+        0.04792868345975876
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chest-body-0.png",
+    "triangles": 53716,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00005950033664703369,
+        -0.49548840522766113,
+        -0.056343402713537216
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chest-body-35.png",
+    "triangles": 53716,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.00005950033664703369,
+        -0.49548840522766113,
+        -0.056343402713537216
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/chest-body-90.png",
+    "triangles": 53716,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.00005950033664703369,
+        -0.49548840522766113,
+        -0.056343402713537216
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/core-body-0.png",
+    "triangles": 53754,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.18603742122650146,
+        0.03013020008802414
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/core-body-35.png",
+    "triangles": 53754,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000043019652366638184,
+        -0.18603742122650146,
+        0.03013020008802414
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/core-body-90.png",
+    "triangles": 53754,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000043019652366638184,
+        -0.18603742122650146,
+        0.03013020008802414
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/legs-body-0.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.05677211284637451,
+        0.04135493189096451
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/legs-body-35.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000043019652366638184,
+        -0.05677211284637451,
+        0.04135493189096451
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/legs-body-90.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000043019652366638184,
+        -0.05677211284637451,
+        0.04135493189096451
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/shoulders-body-0.png",
+    "triangles": 53700,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.5556380748748779,
+        -0.0026206448674201965
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/shoulders-body-35.png",
+    "triangles": 53700,
+    "draws": 3,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000043019652366638184,
+        -0.5556380748748779,
+        -0.0026206448674201965
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final/shoulders-body-90.png",
+    "triangles": 53700,
+    "draws": 3,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000043019652366638184,
+        -0.5556380748748779,
+        -0.0026206448674201965
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  }
+]

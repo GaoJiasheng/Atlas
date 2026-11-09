@@ -1,0 +1,5470 @@
+[
+  {
+    "topic": "core",
+    "beforeBytes": 1396164,
+    "afterBytes": 3275612,
+    "sha256": "c07796e1baf211bc1b08544fa2f5ec2522b18c30153db9f129995476bc17d24d",
+    "before": {
+      "triangles": 191113,
+      "draws": 62,
+      "parts": [
+        {
+          "node": "erector-spinae-lumbar.l",
+          "triangles": 3972,
+          "draws": 1
+        },
+        {
+          "node": "erector-spinae-lumbar.r",
+          "triangles": 2902,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 4258,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 4264,
+          "draws": 1
+        },
+        {
+          "node": "femur.l",
+          "triangles": 1138,
+          "draws": 1
+        },
+        {
+          "node": "femur.r",
+          "triangles": 1138,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 1316,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 1278,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.l",
+          "triangles": 1490,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.r",
+          "triangles": 1492,
+          "draws": 1
+        },
+        {
+          "node": "internal-oblique.l",
+          "triangles": 9341,
+          "draws": 1
+        },
+        {
+          "node": "internal-oblique.r",
+          "triangles": 9331,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 1502,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 1486,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 2458,
+          "draws": 1
+        },
+        {
+          "node": "multifidus-lumborum.l",
+          "triangles": 986,
+          "draws": 1
+        },
+        {
+          "node": "multifidus-lumborum.r",
+          "triangles": 984,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 3600,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.l",
+          "triangles": 1396,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.r",
+          "triangles": 1396,
+          "draws": 1
+        },
+        {
+          "node": "quadratus-lumborum.l",
+          "triangles": 986,
+          "draws": 1
+        },
+        {
+          "node": "quadratus-lumborum.r",
+          "triangles": 986,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.l",
+          "triangles": 5418,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.r",
+          "triangles": 10828,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1402,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 1376,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9618,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9564,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34572,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34572,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.l",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.r",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 4492,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 7494,
+          "draws": 1
+        },
+        {
+          "node": "transversus-abdominis.l",
+          "triangles": 3766,
+          "draws": 1
+        },
+        {
+          "node": "transversus-abdominis.r",
+          "triangles": 3744,
+          "draws": 1
+        },
+        {
+          "node": "exercise-erector-spinae-lumbar.l",
+          "triangles": 260,
+          "draws": 1
+        },
+        {
+          "node": "exercise-erector-spinae-lumbar.r",
+          "triangles": 210,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 387,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 416,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 420,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 400,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.l",
+          "triangles": 36,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.r",
+          "triangles": 36,
+          "draws": 1
+        },
+        {
+          "node": "exercise-internal-oblique.l",
+          "triangles": 18,
+          "draws": 1
+        },
+        {
+          "node": "exercise-internal-oblique.r",
+          "triangles": 22,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 435,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 442,
+          "draws": 1
+        },
+        {
+          "node": "exercise-multifidus-lumborum.l",
+          "triangles": 108,
+          "draws": 1
+        },
+        {
+          "node": "exercise-multifidus-lumborum.r",
+          "triangles": 110,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.l",
+          "triangles": 55,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.r",
+          "triangles": 62,
+          "draws": 1
+        },
+        {
+          "node": "exercise-quadratus-lumborum.l",
+          "triangles": 168,
+          "draws": 1
+        },
+        {
+          "node": "exercise-quadratus-lumborum.r",
+          "triangles": 177,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.l",
+          "triangles": 233,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.r",
+          "triangles": 228,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 692,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.l",
+          "triangles": 75,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.r",
+          "triangles": 65,
+          "draws": 1
+        },
+        {
+          "node": "exercise-transversus-abdominis.l",
+          "triangles": 6,
+          "draws": 1
+        },
+        {
+          "node": "exercise-transversus-abdominis.r",
+          "triangles": 8,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 329980,
+      "draws": 62,
+      "parts": [
+        {
+          "node": "erector-spinae-lumbar.l",
+          "triangles": 11362,
+          "draws": 1
+        },
+        {
+          "node": "erector-spinae-lumbar.r",
+          "triangles": 7884,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 12168,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 12188,
+          "draws": 1
+        },
+        {
+          "node": "femur.l",
+          "triangles": 3794,
+          "draws": 1
+        },
+        {
+          "node": "femur.r",
+          "triangles": 3794,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 2900,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 2896,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.l",
+          "triangles": 4264,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.r",
+          "triangles": 4272,
+          "draws": 1
+        },
+        {
+          "node": "internal-oblique.l",
+          "triangles": 26691,
+          "draws": 1
+        },
+        {
+          "node": "internal-oblique.r",
+          "triangles": 26673,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 2062,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 2054,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 5996,
+          "draws": 1
+        },
+        {
+          "node": "multifidus-lumborum.l",
+          "triangles": 2820,
+          "draws": 1
+        },
+        {
+          "node": "multifidus-lumborum.r",
+          "triangles": 2820,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 12000,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.l",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.r",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "quadratus-lumborum.l",
+          "triangles": 2832,
+          "draws": 1
+        },
+        {
+          "node": "quadratus-lumborum.r",
+          "triangles": 2832,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.l",
+          "triangles": 5418,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.r",
+          "triangles": 10828,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1900,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 1966,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9618,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9564,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 26999,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 26999,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 14974,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 24984,
+          "draws": 1
+        },
+        {
+          "node": "transversus-abdominis.l",
+          "triangles": 10764,
+          "draws": 1
+        },
+        {
+          "node": "transversus-abdominis.r",
+          "triangles": 10702,
+          "draws": 1
+        },
+        {
+          "node": "exercise-erector-spinae-lumbar.l",
+          "triangles": 656,
+          "draws": 1
+        },
+        {
+          "node": "exercise-erector-spinae-lumbar.r",
+          "triangles": 516,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 530,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 596,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 849,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 830,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.l",
+          "triangles": 191,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.r",
+          "triangles": 156,
+          "draws": 1
+        },
+        {
+          "node": "exercise-internal-oblique.l",
+          "triangles": 177,
+          "draws": 1
+        },
+        {
+          "node": "exercise-internal-oblique.r",
+          "triangles": 202,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 855,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 930,
+          "draws": 1
+        },
+        {
+          "node": "exercise-multifidus-lumborum.l",
+          "triangles": 286,
+          "draws": 1
+        },
+        {
+          "node": "exercise-multifidus-lumborum.r",
+          "triangles": 268,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.l",
+          "triangles": 175,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.r",
+          "triangles": 196,
+          "draws": 1
+        },
+        {
+          "node": "exercise-quadratus-lumborum.l",
+          "triangles": 395,
+          "draws": 1
+        },
+        {
+          "node": "exercise-quadratus-lumborum.r",
+          "triangles": 398,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.l",
+          "triangles": 502,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.r",
+          "triangles": 498,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 1146,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 909,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.l",
+          "triangles": 213,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.r",
+          "triangles": 208,
+          "draws": 1
+        },
+        {
+          "node": "exercise-transversus-abdominis.l",
+          "triangles": 99,
+          "draws": 1
+        },
+        {
+          "node": "exercise-transversus-abdominis.r",
+          "triangles": 197,
+          "draws": 1
+        }
+      ]
+    }
+  },
+  {
+    "topic": "back",
+    "beforeBytes": 1376788,
+    "afterBytes": 3443044,
+    "sha256": "d3622387ea9137fa61cefc5623a5a4e0fde13ebee28ac472f80d47fdbd057771",
+    "before": {
+      "triangles": 173642,
+      "draws": 102,
+      "parts": [
+        {
+          "node": "biceps-brachii.l",
+          "triangles": 696,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii.r",
+          "triangles": 706,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.l",
+          "triangles": 454,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.r",
+          "triangles": 478,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.l",
+          "triangles": 462,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.r",
+          "triangles": 452,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 460,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 502,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 480,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 2498,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 2396,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 1140,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 1106,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-lumborum.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-lumborum.r",
+          "triangles": 1196,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-thoracis.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-thoracis.r",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.l",
+          "triangles": 948,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.r",
+          "triangles": 948,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 2686,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 3564,
+          "draws": 1
+        },
+        {
+          "node": "levator-scapulae.l",
+          "triangles": 924,
+          "draws": 1
+        },
+        {
+          "node": "levator-scapulae.r",
+          "triangles": 924,
+          "draws": 1
+        },
+        {
+          "node": "longissimus-thoracis.l",
+          "triangles": 2068,
+          "draws": 1
+        },
+        {
+          "node": "longissimus-thoracis.r",
+          "triangles": 2072,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 2442,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 3600,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.r",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-minor.l",
+          "triangles": 448,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-minor.r",
+          "triangles": 446,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1328,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 1340,
+          "draws": 1
+        },
+        {
+          "node": "serratus-posterior-inferior.l",
+          "triangles": 1194,
+          "draws": 1
+        },
+        {
+          "node": "serratus-posterior-inferior.r",
+          "triangles": 1194,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9632,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9558,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34528,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34528,
+          "draws": 1
+        },
+        {
+          "node": "spinalis-thoracis.l",
+          "triangles": 1194,
+          "draws": 1
+        },
+        {
+          "node": "spinalis-thoracis.r",
+          "triangles": 1196,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.l",
+          "triangles": 342,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.r",
+          "triangles": 342,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.l",
+          "triangles": 456,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.r",
+          "triangles": 456,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 4494,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 7496,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-ascending.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-ascending.r",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.l",
+          "triangles": 1196,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.r",
+          "triangles": 1194,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.l",
+          "triangles": 896,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.r",
+          "triangles": 896,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 934,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 938,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii.l",
+          "triangles": 240,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii.r",
+          "triangles": 209,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.l",
+          "triangles": 44,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.r",
+          "triangles": 60,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.l",
+          "triangles": 257,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.r",
+          "triangles": 231,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 458,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 336,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 263,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 222,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 624,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 640,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 412,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 381,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliocostalis-lumborum.l",
+          "triangles": 14,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliocostalis-lumborum.r",
+          "triangles": 11,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.l",
+          "triangles": 144,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.r",
+          "triangles": 123,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 332,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 366,
+          "draws": 1
+        },
+        {
+          "node": "exercise-levator-scapulae.l",
+          "triangles": 26,
+          "draws": 1
+        },
+        {
+          "node": "exercise-levator-scapulae.r",
+          "triangles": 31,
+          "draws": 1
+        },
+        {
+          "node": "exercise-longissimus-thoracis.l",
+          "triangles": 5,
+          "draws": 1
+        },
+        {
+          "node": "exercise-longissimus-thoracis.r",
+          "triangles": 567,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.l",
+          "triangles": 205,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.r",
+          "triangles": 250,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 150,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 110,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.l",
+          "triangles": 126,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.r",
+          "triangles": 125,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.l",
+          "triangles": 26,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.r",
+          "triangles": 21,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-ascending.l",
+          "triangles": 651,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-ascending.r",
+          "triangles": 489,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.l",
+          "triangles": 119,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.r",
+          "triangles": 124,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.l",
+          "triangles": 326,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.r",
+          "triangles": 353,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 304,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 305,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 330009,
+      "draws": 102,
+      "parts": [
+        {
+          "node": "biceps-brachii.l",
+          "triangles": 1490,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii.r",
+          "triangles": 1492,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.l",
+          "triangles": 1496,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.r",
+          "triangles": 1496,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 7986,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 7988,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 2902,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 2896,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-lumborum.l",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-lumborum.r",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-thoracis.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "iliocostalis-thoracis.r",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.l",
+          "triangles": 3166,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.r",
+          "triangles": 3166,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 8958,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 11886,
+          "draws": 1
+        },
+        {
+          "node": "levator-scapulae.l",
+          "triangles": 3082,
+          "draws": 1
+        },
+        {
+          "node": "levator-scapulae.r",
+          "triangles": 3082,
+          "draws": 1
+        },
+        {
+          "node": "longissimus-thoracis.l",
+          "triangles": 6900,
+          "draws": 1
+        },
+        {
+          "node": "longissimus-thoracis.r",
+          "triangles": 6918,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 5996,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 12000,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.l",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.r",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-minor.l",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-minor.r",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1980,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 2022,
+          "draws": 1
+        },
+        {
+          "node": "serratus-posterior-inferior.l",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "serratus-posterior-inferior.r",
+          "triangles": 3988,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9632,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9558,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 26999,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 26999,
+          "draws": 1
+        },
+        {
+          "node": "spinalis-thoracis.l",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "spinalis-thoracis.r",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.l",
+          "triangles": 1154,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.r",
+          "triangles": 1154,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.l",
+          "triangles": 1522,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.r",
+          "triangles": 1522,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 14982,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 24992,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-ascending.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-ascending.r",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.l",
+          "triangles": 3988,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.r",
+          "triangles": 3988,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.l",
+          "triangles": 2992,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.r",
+          "triangles": 2992,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 1496,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii.l",
+          "triangles": 464,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii.r",
+          "triangles": 428,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.l",
+          "triangles": 231,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.r",
+          "triangles": 268,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.l",
+          "triangles": 483,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.r",
+          "triangles": 469,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 652,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 568,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 490,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 448,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 1061,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 1102,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 852,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 832,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliocostalis-lumborum.l",
+          "triangles": 92,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliocostalis-lumborum.r",
+          "triangles": 132,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.l",
+          "triangles": 299,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.r",
+          "triangles": 262,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 667,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 722,
+          "draws": 1
+        },
+        {
+          "node": "exercise-levator-scapulae.l",
+          "triangles": 110,
+          "draws": 1
+        },
+        {
+          "node": "exercise-levator-scapulae.r",
+          "triangles": 121,
+          "draws": 1
+        },
+        {
+          "node": "exercise-longissimus-thoracis.l",
+          "triangles": 92,
+          "draws": 1
+        },
+        {
+          "node": "exercise-longissimus-thoracis.r",
+          "triangles": 945,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.l",
+          "triangles": 430,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.r",
+          "triangles": 463,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 464,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 378,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.l",
+          "triangles": 317,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.r",
+          "triangles": 301,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.l",
+          "triangles": 102,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.r",
+          "triangles": 91,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-ascending.l",
+          "triangles": 793,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-ascending.r",
+          "triangles": 666,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.l",
+          "triangles": 288,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.r",
+          "triangles": 325,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.l",
+          "triangles": 539,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.r",
+          "triangles": 548,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 630,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 608,
+          "draws": 1
+        }
+      ]
+    }
+  },
+  {
+    "topic": "chest",
+    "beforeBytes": 1369752,
+    "afterBytes": 3336744,
+    "sha256": "cf43599e207bc797ebf4fdb2893f287de4029fe3b274290bcd7c126d41cd7d65",
+    "before": {
+      "triangles": 184009,
+      "draws": 64,
+      "parts": [
+        {
+          "node": "biceps-brachii-short.l",
+          "triangles": 516,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.r",
+          "triangles": 518,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.l",
+          "triangles": 350,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.r",
+          "triangles": 350,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 700,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 700,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 2908,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 2838,
+          "draws": 1
+        },
+        {
+          "node": "forearm.l",
+          "triangles": 506,
+          "draws": 1
+        },
+        {
+          "node": "forearm.r",
+          "triangles": 506,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "intercostals-external",
+          "triangles": 12848,
+          "draws": 1
+        },
+        {
+          "node": "intercostals-internal",
+          "triangles": 12908,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 1916,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 1950,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.l",
+          "triangles": 980,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.r",
+          "triangles": 980,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 2094,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 2094,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-minor.l",
+          "triangles": 1430,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-minor.r",
+          "triangles": 1430,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.l",
+          "triangles": 1998,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.r",
+          "triangles": 2328,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 6596,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 6712,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9622,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9544,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34550,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34550,
+          "draws": 1
+        },
+        {
+          "node": "subclavius.l",
+          "triangles": 276,
+          "draws": 1
+        },
+        {
+          "node": "subclavius.r",
+          "triangles": 274,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 4493,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 7496,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 1470,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 1422,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.l",
+          "triangles": 179,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.r",
+          "triangles": 160,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 465,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 347,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 553,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 582,
+          "draws": 1
+        },
+        {
+          "node": "exercise-intercostals-external",
+          "triangles": 391,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 380,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 402,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.l",
+          "triangles": 33,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.r",
+          "triangles": 28,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 266,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 124,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 462,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 353,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-minor.l",
+          "triangles": 523,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-minor.r",
+          "triangles": 273,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.l",
+          "triangles": 6,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 458,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 403,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 480,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 488,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 288383,
+      "draws": 64,
+      "parts": [
+        {
+          "node": "biceps-brachii-short.l",
+          "triangles": 1484,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.r",
+          "triangles": 1484,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.l",
+          "triangles": 1000,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.r",
+          "triangles": 1000,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 2000,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 2000,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.l",
+          "triangles": 7992,
+          "draws": 1
+        },
+        {
+          "node": "external-oblique.r",
+          "triangles": 7986,
+          "draws": 1
+        },
+        {
+          "node": "forearm.l",
+          "triangles": 1688,
+          "draws": 1
+        },
+        {
+          "node": "forearm.r",
+          "triangles": 1688,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "intercostals-external",
+          "triangles": 19782,
+          "draws": 1
+        },
+        {
+          "node": "intercostals-internal",
+          "triangles": 19860,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 3000,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 2996,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.l",
+          "triangles": 1508,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.r",
+          "triangles": 1508,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 3222,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 3222,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-minor.l",
+          "triangles": 4086,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-minor.r",
+          "triangles": 4086,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.l",
+          "triangles": 1998,
+          "draws": 1
+        },
+        {
+          "node": "rectus-abdominis.r",
+          "triangles": 2328,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 18848,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 19184,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9622,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9544,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 26997,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 26997,
+          "draws": 1
+        },
+        {
+          "node": "subclavius.l",
+          "triangles": 794,
+          "draws": 1
+        },
+        {
+          "node": "subclavius.r",
+          "triangles": 794,
+          "draws": 1
+        },
+        {
+          "node": "thoracic-spine",
+          "triangles": 14981,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 24990,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 2996,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 2996,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.l",
+          "triangles": 368,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.r",
+          "triangles": 332,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 656,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 556,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.l",
+          "triangles": 934,
+          "draws": 1
+        },
+        {
+          "node": "exercise-external-oblique.r",
+          "triangles": 982,
+          "draws": 1
+        },
+        {
+          "node": "exercise-intercostals-external",
+          "triangles": 992,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 720,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 777,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.l",
+          "triangles": 156,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.r",
+          "triangles": 153,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 371,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 264,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 649,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 551,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-minor.l",
+          "triangles": 635,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-minor.r",
+          "triangles": 498,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-abdominis.l",
+          "triangles": 100,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 843,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 744,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 859,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 882,
+          "draws": 1
+        }
+      ]
+    }
+  },
+  {
+    "topic": "arms",
+    "beforeBytes": 1320728,
+    "afterBytes": 2874324,
+    "sha256": "3b1713f8611403ba63cbb4806b2a7103ed7945a6ede3c53e335826441a987538",
+    "before": {
+      "triangles": 154894,
+      "draws": 112,
+      "parts": [
+        {
+          "node": "anconeus.l",
+          "triangles": 504,
+          "draws": 1
+        },
+        {
+          "node": "anconeus.r",
+          "triangles": 504,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.l",
+          "triangles": 1126,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.r",
+          "triangles": 1126,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.l",
+          "triangles": 938,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.r",
+          "triangles": 938,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.l",
+          "triangles": 1216,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.r",
+          "triangles": 1216,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.l",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.r",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.l",
+          "triangles": 406,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.r",
+          "triangles": 406,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.l",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.r",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 562,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 542,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-brevis.l",
+          "triangles": 1098,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-brevis.r",
+          "triangles": 1098,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-longus.l",
+          "triangles": 1296,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-longus.r",
+          "triangles": 1296,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-ulnaris.l",
+          "triangles": 492,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-ulnaris.r",
+          "triangles": 494,
+          "draws": 1
+        },
+        {
+          "node": "extensor-digitorum.l",
+          "triangles": 1396,
+          "draws": 1
+        },
+        {
+          "node": "extensor-digitorum.r",
+          "triangles": 1396,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-radialis.l",
+          "triangles": 582,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-radialis.r",
+          "triangles": 582,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-ulnaris.l",
+          "triangles": 1394,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-ulnaris.r",
+          "triangles": 1392,
+          "draws": 1
+        },
+        {
+          "node": "flexor-digitorum-superficialis.l",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "flexor-digitorum-superficialis.r",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "hand.l",
+          "triangles": 1800,
+          "draws": 1
+        },
+        {
+          "node": "hand.r",
+          "triangles": 1798,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 1506,
+          "draws": 1
+        },
+        {
+          "node": "palmaris-longus.l",
+          "triangles": 1396,
+          "draws": 1
+        },
+        {
+          "node": "palmaris-longus.r",
+          "triangles": 1400,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.l",
+          "triangles": 974,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.r",
+          "triangles": 974,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 1048,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 1068,
+          "draws": 1
+        },
+        {
+          "node": "pronator-teres.l",
+          "triangles": 1276,
+          "draws": 1
+        },
+        {
+          "node": "pronator-teres.r",
+          "triangles": 1278,
+          "draws": 1
+        },
+        {
+          "node": "radius.l",
+          "triangles": 234,
+          "draws": 1
+        },
+        {
+          "node": "radius.r",
+          "triangles": 234,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9634,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9556,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34536,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34536,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-lateral.l",
+          "triangles": 1268,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-lateral.r",
+          "triangles": 1268,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-long.l",
+          "triangles": 1382,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-long.r",
+          "triangles": 1382,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-medial.l",
+          "triangles": 940,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-medial.r",
+          "triangles": 940,
+          "draws": 1
+        },
+        {
+          "node": "ulna.l",
+          "triangles": 270,
+          "draws": 1
+        },
+        {
+          "node": "ulna.r",
+          "triangles": 270,
+          "draws": 1
+        },
+        {
+          "node": "exercise-anconeus.l",
+          "triangles": 25,
+          "draws": 1
+        },
+        {
+          "node": "exercise-anconeus.r",
+          "triangles": 24,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.l",
+          "triangles": 85,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.r",
+          "triangles": 81,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.l",
+          "triangles": 153,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.r",
+          "triangles": 130,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.l",
+          "triangles": 33,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.r",
+          "triangles": 40,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.l",
+          "triangles": 211,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.r",
+          "triangles": 196,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 382,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 277,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.l",
+          "triangles": 392,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.r",
+          "triangles": 342,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 178,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 153,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-brevis.l",
+          "triangles": 14,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-brevis.r",
+          "triangles": 11,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-longus.l",
+          "triangles": 98,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-longus.r",
+          "triangles": 89,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-ulnaris.l",
+          "triangles": 95,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-ulnaris.r",
+          "triangles": 91,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-digitorum.l",
+          "triangles": 143,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-digitorum.r",
+          "triangles": 145,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-radialis.l",
+          "triangles": 69,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-radialis.r",
+          "triangles": 66,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-ulnaris.l",
+          "triangles": 207,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-ulnaris.r",
+          "triangles": 216,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-digitorum-superficialis.l",
+          "triangles": 4,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-digitorum-superficialis.r",
+          "triangles": 6,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 332,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 353,
+          "draws": 1
+        },
+        {
+          "node": "exercise-palmaris-longus.l",
+          "triangles": 109,
+          "draws": 1
+        },
+        {
+          "node": "exercise-palmaris-longus.r",
+          "triangles": 152,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.l",
+          "triangles": 71,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.r",
+          "triangles": 72,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 270,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 127,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 464,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 359,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pronator-teres.l",
+          "triangles": 8,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pronator-teres.r",
+          "triangles": 7,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-lateral.l",
+          "triangles": 90,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-lateral.r",
+          "triangles": 97,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-long.l",
+          "triangles": 146,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-long.r",
+          "triangles": 141,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-medial.l",
+          "triangles": 42,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-medial.r",
+          "triangles": 50,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 268341,
+      "draws": 112,
+      "parts": [
+        {
+          "node": "anconeus.l",
+          "triangles": 1442,
+          "draws": 1
+        },
+        {
+          "node": "anconeus.r",
+          "triangles": 1442,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.l",
+          "triangles": 3218,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.r",
+          "triangles": 3218,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.l",
+          "triangles": 2696,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-short.r",
+          "triangles": 2696,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.l",
+          "triangles": 3478,
+          "draws": 1
+        },
+        {
+          "node": "brachialis.r",
+          "triangles": 3478,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "brachioradialis.r",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.l",
+          "triangles": 1160,
+          "draws": 1
+        },
+        {
+          "node": "coracobrachialis.r",
+          "triangles": 1160,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.l",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-brevis.l",
+          "triangles": 3142,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-brevis.r",
+          "triangles": 3142,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-longus.l",
+          "triangles": 3705,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-radialis-longus.r",
+          "triangles": 3705,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-ulnaris.l",
+          "triangles": 1412,
+          "draws": 1
+        },
+        {
+          "node": "extensor-carpi-ulnaris.r",
+          "triangles": 1412,
+          "draws": 1
+        },
+        {
+          "node": "extensor-digitorum.l",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "extensor-digitorum.r",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-radialis.l",
+          "triangles": 1666,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-radialis.r",
+          "triangles": 1666,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-ulnaris.l",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "flexor-carpi-ulnaris.r",
+          "triangles": 3986,
+          "draws": 1
+        },
+        {
+          "node": "flexor-digitorum-superficialis.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "flexor-digitorum-superficialis.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "hand.l",
+          "triangles": 6000,
+          "draws": 1
+        },
+        {
+          "node": "hand.r",
+          "triangles": 6000,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 2042,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 2070,
+          "draws": 1
+        },
+        {
+          "node": "palmaris-longus.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "palmaris-longus.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-abdominal.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 1492,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 1490,
+          "draws": 1
+        },
+        {
+          "node": "pronator-teres.l",
+          "triangles": 3660,
+          "draws": 1
+        },
+        {
+          "node": "pronator-teres.r",
+          "triangles": 3660,
+          "draws": 1
+        },
+        {
+          "node": "radius.l",
+          "triangles": 784,
+          "draws": 1
+        },
+        {
+          "node": "radius.r",
+          "triangles": 784,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9634,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9556,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34536,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34536,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-lateral.l",
+          "triangles": 3628,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-lateral.r",
+          "triangles": 3628,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-long.l",
+          "triangles": 3950,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-long.r",
+          "triangles": 3950,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-medial.l",
+          "triangles": 2686,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii-medial.r",
+          "triangles": 2686,
+          "draws": 1
+        },
+        {
+          "node": "ulna.l",
+          "triangles": 904,
+          "draws": 1
+        },
+        {
+          "node": "ulna.r",
+          "triangles": 904,
+          "draws": 1
+        },
+        {
+          "node": "exercise-anconeus.l",
+          "triangles": 105,
+          "draws": 1
+        },
+        {
+          "node": "exercise-anconeus.r",
+          "triangles": 105,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.l",
+          "triangles": 227,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.r",
+          "triangles": 225,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.l",
+          "triangles": 325,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-short.r",
+          "triangles": 300,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.l",
+          "triangles": 218,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachialis.r",
+          "triangles": 217,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.l",
+          "triangles": 447,
+          "draws": 1
+        },
+        {
+          "node": "exercise-brachioradialis.r",
+          "triangles": 422,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 797,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 596,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.l",
+          "triangles": 671,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.r",
+          "triangles": 601,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 449,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 403,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-brevis.l",
+          "triangles": 170,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-brevis.r",
+          "triangles": 141,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-longus.l",
+          "triangles": 314,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-radialis-longus.r",
+          "triangles": 268,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-ulnaris.l",
+          "triangles": 264,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-carpi-ulnaris.r",
+          "triangles": 240,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-digitorum.l",
+          "triangles": 339,
+          "draws": 1
+        },
+        {
+          "node": "exercise-extensor-digitorum.r",
+          "triangles": 355,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-radialis.l",
+          "triangles": 179,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-radialis.r",
+          "triangles": 213,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-ulnaris.l",
+          "triangles": 394,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-carpi-ulnaris.r",
+          "triangles": 412,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-digitorum-superficialis.l",
+          "triangles": 109,
+          "draws": 1
+        },
+        {
+          "node": "exercise-flexor-digitorum-superficialis.r",
+          "triangles": 92,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 680,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 734,
+          "draws": 1
+        },
+        {
+          "node": "exercise-palmaris-longus.l",
+          "triangles": 335,
+          "draws": 1
+        },
+        {
+          "node": "exercise-palmaris-longus.r",
+          "triangles": 378,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.l",
+          "triangles": 263,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-abdominal.r",
+          "triangles": 251,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 553,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 322,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 788,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 622,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pronator-teres.l",
+          "triangles": 92,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pronator-teres.r",
+          "triangles": 101,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-lateral.l",
+          "triangles": 247,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-lateral.r",
+          "triangles": 267,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-long.l",
+          "triangles": 365,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-long.r",
+          "triangles": 365,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-medial.l",
+          "triangles": 152,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii-medial.r",
+          "triangles": 164,
+          "draws": 1
+        }
+      ]
+    }
+  },
+  {
+    "topic": "legs",
+    "beforeBytes": 1350972,
+    "afterBytes": 3682876,
+    "sha256": "ff747d3016a845c7c0a43c1f459f3b7f32cec75779c144ae684cd1b93c0076e8",
+    "before": {
+      "triangles": 159646,
+      "draws": 114,
+      "parts": [
+        {
+          "node": "adductor-brevis.l",
+          "triangles": 530,
+          "draws": 1
+        },
+        {
+          "node": "adductor-brevis.r",
+          "triangles": 530,
+          "draws": 1
+        },
+        {
+          "node": "adductor-longus.l",
+          "triangles": 926,
+          "draws": 1
+        },
+        {
+          "node": "adductor-longus.r",
+          "triangles": 926,
+          "draws": 1
+        },
+        {
+          "node": "adductor-magnus.l",
+          "triangles": 1026,
+          "draws": 1
+        },
+        {
+          "node": "adductor-magnus.r",
+          "triangles": 1038,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-long.l",
+          "triangles": 1714,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-long.r",
+          "triangles": 1712,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-short.l",
+          "triangles": 618,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-short.r",
+          "triangles": 618,
+          "draws": 1
+        },
+        {
+          "node": "femur.l",
+          "triangles": 1138,
+          "draws": 1
+        },
+        {
+          "node": "femur.r",
+          "triangles": 1138,
+          "draws": 1
+        },
+        {
+          "node": "fibularis-longus.l",
+          "triangles": 386,
+          "draws": 1
+        },
+        {
+          "node": "fibularis-longus.r",
+          "triangles": 370,
+          "draws": 1
+        },
+        {
+          "node": "foot.l",
+          "triangles": 2062,
+          "draws": 1
+        },
+        {
+          "node": "foot.r",
+          "triangles": 2064,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-lateral.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-lateral.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-medial.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-medial.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 1136,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 1064,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-medius.l",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-medius.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-minimus.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-minimus.r",
+          "triangles": 994,
+          "draws": 1
+        },
+        {
+          "node": "gracilis.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "gracilis.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.l",
+          "triangles": 564,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.r",
+          "triangles": 554,
+          "draws": 1
+        },
+        {
+          "node": "iliotibial-tract.l",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "iliotibial-tract.r",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "lower-leg.l",
+          "triangles": 880,
+          "draws": 1
+        },
+        {
+          "node": "lower-leg.r",
+          "triangles": 880,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 2488,
+          "draws": 1
+        },
+        {
+          "node": "patella.l",
+          "triangles": 276,
+          "draws": 1
+        },
+        {
+          "node": "patella.r",
+          "triangles": 276,
+          "draws": 1
+        },
+        {
+          "node": "pectineus.l",
+          "triangles": 488,
+          "draws": 1
+        },
+        {
+          "node": "pectineus.r",
+          "triangles": 488,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 3212,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.l",
+          "triangles": 954,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.r",
+          "triangles": 964,
+          "draws": 1
+        },
+        {
+          "node": "rectus-femoris.l",
+          "triangles": 1400,
+          "draws": 1
+        },
+        {
+          "node": "rectus-femoris.r",
+          "triangles": 1136,
+          "draws": 1
+        },
+        {
+          "node": "sartorius.l",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "sartorius.r",
+          "triangles": 1226,
+          "draws": 1
+        },
+        {
+          "node": "semimembranosus.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "semimembranosus.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "semitendinosus.l",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "semitendinosus.r",
+          "triangles": 998,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9628,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9558,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34562,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34562,
+          "draws": 1
+        },
+        {
+          "node": "soleus.l",
+          "triangles": 1604,
+          "draws": 1
+        },
+        {
+          "node": "soleus.r",
+          "triangles": 1612,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.l",
+          "triangles": 464,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.r",
+          "triangles": 464,
+          "draws": 1
+        },
+        {
+          "node": "tibialis-anterior.l",
+          "triangles": 876,
+          "draws": 1
+        },
+        {
+          "node": "tibialis-anterior.r",
+          "triangles": 876,
+          "draws": 1
+        },
+        {
+          "node": "vastus-intermedius.l",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "vastus-intermedius.r",
+          "triangles": 996,
+          "draws": 1
+        },
+        {
+          "node": "vastus-lateralis.l",
+          "triangles": 1582,
+          "draws": 1
+        },
+        {
+          "node": "vastus-lateralis.r",
+          "triangles": 1588,
+          "draws": 1
+        },
+        {
+          "node": "vastus-medialis.l",
+          "triangles": 1138,
+          "draws": 1
+        },
+        {
+          "node": "vastus-medialis.r",
+          "triangles": 1148,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-longus.l",
+          "triangles": 29,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-longus.r",
+          "triangles": 30,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-magnus.l",
+          "triangles": 18,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-magnus.r",
+          "triangles": 15,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-long.l",
+          "triangles": 165,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-long.r",
+          "triangles": 177,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-short.l",
+          "triangles": 219,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-short.r",
+          "triangles": 213,
+          "draws": 1
+        },
+        {
+          "node": "exercise-fibularis-longus.l",
+          "triangles": 160,
+          "draws": 1
+        },
+        {
+          "node": "exercise-fibularis-longus.r",
+          "triangles": 141,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-lateral.l",
+          "triangles": 218,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-lateral.r",
+          "triangles": 214,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-medial.l",
+          "triangles": 267,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-medial.r",
+          "triangles": 284,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 400,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 357,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-medius.l",
+          "triangles": 80,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-medius.r",
+          "triangles": 75,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-minimus.l",
+          "triangles": 76,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-minimus.r",
+          "triangles": 74,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gracilis.l",
+          "triangles": 129,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gracilis.r",
+          "triangles": 124,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.l",
+          "triangles": 8,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.r",
+          "triangles": 8,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliotibial-tract.l",
+          "triangles": 240,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliotibial-tract.r",
+          "triangles": 228,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectineus.l",
+          "triangles": 38,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectineus.r",
+          "triangles": 42,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.l",
+          "triangles": 13,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.r",
+          "triangles": 12,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-femoris.l",
+          "triangles": 180,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-femoris.r",
+          "triangles": 175,
+          "draws": 1
+        },
+        {
+          "node": "exercise-sartorius.l",
+          "triangles": 128,
+          "draws": 1
+        },
+        {
+          "node": "exercise-sartorius.r",
+          "triangles": 135,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semimembranosus.l",
+          "triangles": 81,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semimembranosus.r",
+          "triangles": 85,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semitendinosus.l",
+          "triangles": 138,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semitendinosus.r",
+          "triangles": 133,
+          "draws": 1
+        },
+        {
+          "node": "exercise-soleus.l",
+          "triangles": 109,
+          "draws": 1
+        },
+        {
+          "node": "exercise-soleus.r",
+          "triangles": 110,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.l",
+          "triangles": 63,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.r",
+          "triangles": 60,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tibialis-anterior.l",
+          "triangles": 222,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tibialis-anterior.r",
+          "triangles": 211,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-lateralis.l",
+          "triangles": 105,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-lateralis.r",
+          "triangles": 90,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-medialis.l",
+          "triangles": 87,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-medialis.r",
+          "triangles": 90,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 332006,
+      "draws": 114,
+      "parts": [
+        {
+          "node": "adductor-brevis.l",
+          "triangles": 2132,
+          "draws": 1
+        },
+        {
+          "node": "adductor-brevis.r",
+          "triangles": 2132,
+          "draws": 1
+        },
+        {
+          "node": "adductor-longus.l",
+          "triangles": 3714,
+          "draws": 1
+        },
+        {
+          "node": "adductor-longus.r",
+          "triangles": 3714,
+          "draws": 1
+        },
+        {
+          "node": "adductor-magnus.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "adductor-magnus.r",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-long.l",
+          "triangles": 6858,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-long.r",
+          "triangles": 6848,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-short.l",
+          "triangles": 2476,
+          "draws": 1
+        },
+        {
+          "node": "biceps-femoris-short.r",
+          "triangles": 2476,
+          "draws": 1
+        },
+        {
+          "node": "femur.l",
+          "triangles": 3794,
+          "draws": 1
+        },
+        {
+          "node": "femur.r",
+          "triangles": 3794,
+          "draws": 1
+        },
+        {
+          "node": "fibularis-longus.l",
+          "triangles": 1486,
+          "draws": 1
+        },
+        {
+          "node": "fibularis-longus.r",
+          "triangles": 1480,
+          "draws": 1
+        },
+        {
+          "node": "foot.l",
+          "triangles": 4784,
+          "draws": 1
+        },
+        {
+          "node": "foot.r",
+          "triangles": 4740,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-lateral.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-lateral.r",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-medial.l",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "gastrocnemius-medial.r",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.l",
+          "triangles": 3326,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-maximus.r",
+          "triangles": 3326,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-medius.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-medius.r",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-minimus.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "gluteus-minimus.r",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "gracilis.l",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "gracilis.r",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.l",
+          "triangles": 1496,
+          "draws": 1
+        },
+        {
+          "node": "iliacus.r",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "iliotibial-tract.l",
+          "triangles": 3988,
+          "draws": 1
+        },
+        {
+          "node": "iliotibial-tract.r",
+          "triangles": 3994,
+          "draws": 1
+        },
+        {
+          "node": "lower-leg.l",
+          "triangles": 2934,
+          "draws": 1
+        },
+        {
+          "node": "lower-leg.r",
+          "triangles": 2934,
+          "draws": 1
+        },
+        {
+          "node": "lumbar-spine",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "patella.l",
+          "triangles": 276,
+          "draws": 1
+        },
+        {
+          "node": "patella.r",
+          "triangles": 276,
+          "draws": 1
+        },
+        {
+          "node": "pectineus.l",
+          "triangles": 1952,
+          "draws": 1
+        },
+        {
+          "node": "pectineus.r",
+          "triangles": 1952,
+          "draws": 1
+        },
+        {
+          "node": "pelvis",
+          "triangles": 6000,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.l",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "psoas-major.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "rectus-femoris.l",
+          "triangles": 5610,
+          "draws": 1
+        },
+        {
+          "node": "rectus-femoris.r",
+          "triangles": 3992,
+          "draws": 1
+        },
+        {
+          "node": "sartorius.l",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "sartorius.r",
+          "triangles": 4912,
+          "draws": 1
+        },
+        {
+          "node": "semimembranosus.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "semimembranosus.r",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "semitendinosus.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "semitendinosus.r",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9628,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9558,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34562,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34562,
+          "draws": 1
+        },
+        {
+          "node": "soleus.l",
+          "triangles": 6440,
+          "draws": 1
+        },
+        {
+          "node": "soleus.r",
+          "triangles": 6470,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.l",
+          "triangles": 1862,
+          "draws": 1
+        },
+        {
+          "node": "tensor-fasciae-latae.r",
+          "triangles": 1862,
+          "draws": 1
+        },
+        {
+          "node": "tibialis-anterior.l",
+          "triangles": 3526,
+          "draws": 1
+        },
+        {
+          "node": "tibialis-anterior.r",
+          "triangles": 3526,
+          "draws": 1
+        },
+        {
+          "node": "vastus-intermedius.l",
+          "triangles": 3988,
+          "draws": 1
+        },
+        {
+          "node": "vastus-intermedius.r",
+          "triangles": 3990,
+          "draws": 1
+        },
+        {
+          "node": "vastus-lateralis.l",
+          "triangles": 6334,
+          "draws": 1
+        },
+        {
+          "node": "vastus-lateralis.r",
+          "triangles": 6354,
+          "draws": 1
+        },
+        {
+          "node": "vastus-medialis.l",
+          "triangles": 4322,
+          "draws": 1
+        },
+        {
+          "node": "vastus-medialis.r",
+          "triangles": 4322,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-longus.l",
+          "triangles": 140,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-longus.r",
+          "triangles": 140,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-magnus.l",
+          "triangles": 112,
+          "draws": 1
+        },
+        {
+          "node": "exercise-adductor-magnus.r",
+          "triangles": 88,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-long.l",
+          "triangles": 393,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-long.r",
+          "triangles": 415,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-short.l",
+          "triangles": 442,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-femoris-short.r",
+          "triangles": 432,
+          "draws": 1
+        },
+        {
+          "node": "exercise-fibularis-longus.l",
+          "triangles": 511,
+          "draws": 1
+        },
+        {
+          "node": "exercise-fibularis-longus.r",
+          "triangles": 488,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-lateral.l",
+          "triangles": 410,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-lateral.r",
+          "triangles": 420,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-medial.l",
+          "triangles": 507,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gastrocnemius-medial.r",
+          "triangles": 515,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.l",
+          "triangles": 867,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-maximus.r",
+          "triangles": 824,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-medius.l",
+          "triangles": 222,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-medius.r",
+          "triangles": 251,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-minimus.l",
+          "triangles": 246,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gluteus-minimus.r",
+          "triangles": 219,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gracilis.l",
+          "triangles": 426,
+          "draws": 1
+        },
+        {
+          "node": "exercise-gracilis.r",
+          "triangles": 439,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.l",
+          "triangles": 125,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliacus.r",
+          "triangles": 118,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliotibial-tract.l",
+          "triangles": 634,
+          "draws": 1
+        },
+        {
+          "node": "exercise-iliotibial-tract.r",
+          "triangles": 568,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectineus.l",
+          "triangles": 148,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectineus.r",
+          "triangles": 139,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.l",
+          "triangles": 69,
+          "draws": 1
+        },
+        {
+          "node": "exercise-psoas-major.r",
+          "triangles": 68,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-femoris.l",
+          "triangles": 522,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rectus-femoris.r",
+          "triangles": 532,
+          "draws": 1
+        },
+        {
+          "node": "exercise-sartorius.l",
+          "triangles": 485,
+          "draws": 1
+        },
+        {
+          "node": "exercise-sartorius.r",
+          "triangles": 480,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semimembranosus.l",
+          "triangles": 337,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semimembranosus.r",
+          "triangles": 353,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semitendinosus.l",
+          "triangles": 374,
+          "draws": 1
+        },
+        {
+          "node": "exercise-semitendinosus.r",
+          "triangles": 348,
+          "draws": 1
+        },
+        {
+          "node": "exercise-soleus.l",
+          "triangles": 352,
+          "draws": 1
+        },
+        {
+          "node": "exercise-soleus.r",
+          "triangles": 350,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.l",
+          "triangles": 191,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tensor-fasciae-latae.r",
+          "triangles": 214,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tibialis-anterior.l",
+          "triangles": 497,
+          "draws": 1
+        },
+        {
+          "node": "exercise-tibialis-anterior.r",
+          "triangles": 476,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-lateralis.l",
+          "triangles": 299,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-lateralis.r",
+          "triangles": 278,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-medialis.l",
+          "triangles": 214,
+          "draws": 1
+        },
+        {
+          "node": "exercise-vastus-medialis.r",
+          "triangles": 222,
+          "draws": 1
+        }
+      ]
+    }
+  },
+  {
+    "topic": "shoulders",
+    "beforeBytes": 1045368,
+    "afterBytes": 1975152,
+    "sha256": "0e02a2b98863c4eac89f62a38d40787ee798bf20715ecd1b314d43a67f23d4ee",
+    "before": {
+      "triangles": 142196,
+      "draws": 82,
+      "parts": [
+        {
+          "node": "biceps-brachii-long.l",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.r",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "cervical-spine",
+          "triangles": 2072,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 450,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 1014,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 1014,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.l",
+          "triangles": 1034,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.r",
+          "triangles": 1034,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 1398,
+          "draws": 1
+        },
+        {
+          "node": "forearm.l",
+          "triangles": 506,
+          "draws": 1
+        },
+        {
+          "node": "forearm.r",
+          "triangles": 506,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.l",
+          "triangles": 1108,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.r",
+          "triangles": 1108,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 1510,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 1486,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 550,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 1060,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 1068,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.l",
+          "triangles": 522,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.r",
+          "triangles": 522,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 1198,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 1200,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1402,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 1386,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9622,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9556,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34522,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34522,
+          "draws": 1
+        },
+        {
+          "node": "subscapularis.l",
+          "triangles": 1032,
+          "draws": 1
+        },
+        {
+          "node": "subscapularis.r",
+          "triangles": 1032,
+          "draws": 1
+        },
+        {
+          "node": "supraspinatus.l",
+          "triangles": 500,
+          "draws": 1
+        },
+        {
+          "node": "supraspinatus.r",
+          "triangles": 500,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.l",
+          "triangles": 398,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.r",
+          "triangles": 398,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.l",
+          "triangles": 532,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.r",
+          "triangles": 532,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 7496,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.l",
+          "triangles": 800,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.r",
+          "triangles": 806,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.l",
+          "triangles": 558,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.r",
+          "triangles": 524,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 1038,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 1044,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.l",
+          "triangles": 174,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.r",
+          "triangles": 169,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 366,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 272,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.l",
+          "triangles": 372,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.r",
+          "triangles": 325,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 169,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 147,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.l",
+          "triangles": 12,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.r",
+          "triangles": 9,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 305,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 327,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 270,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 125,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 485,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 384,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.l",
+          "triangles": 204,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.r",
+          "triangles": 248,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 280,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 210,
+          "draws": 1
+        },
+        {
+          "node": "exercise-subscapularis.l",
+          "triangles": 405,
+          "draws": 1
+        },
+        {
+          "node": "exercise-subscapularis.r",
+          "triangles": 211,
+          "draws": 1
+        },
+        {
+          "node": "exercise-supraspinatus.l",
+          "triangles": 158,
+          "draws": 1
+        },
+        {
+          "node": "exercise-supraspinatus.r",
+          "triangles": 109,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.l",
+          "triangles": 126,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.r",
+          "triangles": 125,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.l",
+          "triangles": 135,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.r",
+          "triangles": 128,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.l",
+          "triangles": 116,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.r",
+          "triangles": 118,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.l",
+          "triangles": 333,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.r",
+          "triangles": 328,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 317,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 328,
+          "draws": 1
+        }
+      ]
+    },
+    "after": {
+      "triangles": 226151,
+      "draws": 82,
+      "parts": [
+        {
+          "node": "biceps-brachii-long.l",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "biceps-brachii-long.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "cervical-spine",
+          "triangles": 6000,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "clavicle.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.l",
+          "triangles": 2902,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-anterior.r",
+          "triangles": 2902,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.l",
+          "triangles": 2964,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-lateral.r",
+          "triangles": 2964,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.l",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "deltoid-posterior.r",
+          "triangles": 3998,
+          "draws": 1
+        },
+        {
+          "node": "forearm.l",
+          "triangles": 1688,
+          "draws": 1
+        },
+        {
+          "node": "forearm.r",
+          "triangles": 1688,
+          "draws": 1
+        },
+        {
+          "node": "humerus.l",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "humerus.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.l",
+          "triangles": 3166,
+          "draws": 1
+        },
+        {
+          "node": "infraspinatus.r",
+          "triangles": 3166,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.l",
+          "triangles": 2024,
+          "draws": 1
+        },
+        {
+          "node": "latissimus-dorsi.r",
+          "triangles": 2036,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.l",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-clavicular.r",
+          "triangles": 850,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.l",
+          "triangles": 1492,
+          "draws": 1
+        },
+        {
+          "node": "pectoralis-major-sternocostal.r",
+          "triangles": 1490,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.l",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "rhomboid-major.r",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "scapula.l",
+          "triangles": 3996,
+          "draws": 1
+        },
+        {
+          "node": "scapula.r",
+          "triangles": 4000,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.l",
+          "triangles": 1930,
+          "draws": 1
+        },
+        {
+          "node": "serratus-anterior.r",
+          "triangles": 2008,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.l",
+          "triangles": 9622,
+          "draws": 1
+        },
+        {
+          "node": "skin-hand.r",
+          "triangles": 9556,
+          "draws": 1
+        },
+        {
+          "node": "skin-outline",
+          "triangles": 34522,
+          "draws": 1
+        },
+        {
+          "node": "skin-wire",
+          "triangles": 34522,
+          "draws": 1
+        },
+        {
+          "node": "subscapularis.l",
+          "triangles": 2954,
+          "draws": 1
+        },
+        {
+          "node": "subscapularis.r",
+          "triangles": 2954,
+          "draws": 1
+        },
+        {
+          "node": "supraspinatus.l",
+          "triangles": 1430,
+          "draws": 1
+        },
+        {
+          "node": "supraspinatus.r",
+          "triangles": 1430,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.l",
+          "triangles": 1154,
+          "draws": 1
+        },
+        {
+          "node": "teres-major.r",
+          "triangles": 1154,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.l",
+          "triangles": 1522,
+          "draws": 1
+        },
+        {
+          "node": "teres-minor.r",
+          "triangles": 1522,
+          "draws": 1
+        },
+        {
+          "node": "thorax",
+          "triangles": 24992,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.l",
+          "triangles": 1494,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-descending.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.l",
+          "triangles": 1496,
+          "draws": 1
+        },
+        {
+          "node": "trapezius-transverse.r",
+          "triangles": 1498,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.l",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "triceps-brachii.r",
+          "triangles": 1500,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.l",
+          "triangles": 413,
+          "draws": 1
+        },
+        {
+          "node": "exercise-biceps-brachii-long.r",
+          "triangles": 359,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.l",
+          "triangles": 745,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-anterior.r",
+          "triangles": 599,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.l",
+          "triangles": 633,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-lateral.r",
+          "triangles": 577,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.l",
+          "triangles": 429,
+          "draws": 1
+        },
+        {
+          "node": "exercise-deltoid-posterior.r",
+          "triangles": 361,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.l",
+          "triangles": 79,
+          "draws": 1
+        },
+        {
+          "node": "exercise-infraspinatus.r",
+          "triangles": 107,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.l",
+          "triangles": 656,
+          "draws": 1
+        },
+        {
+          "node": "exercise-latissimus-dorsi.r",
+          "triangles": 700,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.l",
+          "triangles": 546,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-clavicular.r",
+          "triangles": 319,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.l",
+          "triangles": 817,
+          "draws": 1
+        },
+        {
+          "node": "exercise-pectoralis-major-sternocostal.r",
+          "triangles": 659,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.l",
+          "triangles": 460,
+          "draws": 1
+        },
+        {
+          "node": "exercise-rhomboid-major.r",
+          "triangles": 513,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.l",
+          "triangles": 661,
+          "draws": 1
+        },
+        {
+          "node": "exercise-serratus-anterior.r",
+          "triangles": 539,
+          "draws": 1
+        },
+        {
+          "node": "exercise-subscapularis.l",
+          "triangles": 764,
+          "draws": 1
+        },
+        {
+          "node": "exercise-subscapularis.r",
+          "triangles": 503,
+          "draws": 1
+        },
+        {
+          "node": "exercise-supraspinatus.l",
+          "triangles": 393,
+          "draws": 1
+        },
+        {
+          "node": "exercise-supraspinatus.r",
+          "triangles": 313,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.l",
+          "triangles": 317,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-major.r",
+          "triangles": 299,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.l",
+          "triangles": 326,
+          "draws": 1
+        },
+        {
+          "node": "exercise-teres-minor.r",
+          "triangles": 323,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.l",
+          "triangles": 301,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-descending.r",
+          "triangles": 326,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.l",
+          "triangles": 710,
+          "draws": 1
+        },
+        {
+          "node": "exercise-trapezius-transverse.r",
+          "triangles": 698,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.l",
+          "triangles": 629,
+          "draws": 1
+        },
+        {
+          "node": "exercise-triceps-brachii.r",
+          "triangles": 661,
+          "draws": 1
+        }
+      ]
+    }
+  }
+]

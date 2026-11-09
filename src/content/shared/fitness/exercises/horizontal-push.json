@@ -138,7 +138,7 @@
       "motion": {
         "root": {
           "rotation": [
-            -90,
+            -93.3018,
             0,
             0
           ]
@@ -147,13 +147,13 @@
           {
             "kind": "barbell",
             "grip": "pronated",
-            "width": 0.8
+            "width": 0.6651
           },
           {
             "kind": "bench",
             "at": [
               0,
-              -0.205,
+              -0.1788,
               0.02
             ]
           },
@@ -169,21 +169,38 @@
             "phase": "start",
             "joints": {
               "shoulder.l": {
-                "flexion": 80,
-                "abduction": 10
+                "flexion": 87.617,
+                "abduction": 2.119,
+                "horizontal-adduction": -2.832,
+                "internal-rotation": 3.74
               },
               "elbow.l": {
-                "flexion": 5
+                "flexion": -13.939
               },
               "hip.l": {
-                "extension": 16,
-                "abduction": 18
+                "extension": 21.182,
+                "abduction": 18.815
               },
               "knee.l": {
-                "flexion": 80
+                "flexion": 81.66
               },
               "ankle.l": {
-                "dorsiflexion": 6
+                "dorsiflexion": 8.641
+              },
+              "forearm.l": {
+                "pronation": -7.177
+              },
+              "shoulder.r": {
+                "flexion": 87.809,
+                "abduction": 2.161,
+                "horizontal-adduction": -2.817,
+                "internal-rotation": 3.612
+              },
+              "elbow.r": {
+                "flexion": -13.938
+              },
+              "forearm.r": {
+                "pronation": -7.182
               }
             },
             "contract": {
@@ -192,25 +209,84 @@
             }
           },
           {
+            "phase": "mid",
+            "joints": {
+              "shoulder.l": {
+                "flexion": 19.527,
+                "abduction": 8.319,
+                "horizontal-adduction": -1.758,
+                "internal-rotation": -0.814
+              },
+              "elbow.l": {
+                "flexion": 85.052
+              },
+              "hip.l": {
+                "extension": 21.182,
+                "abduction": 18.815
+              },
+              "knee.l": {
+                "flexion": 81.66
+              },
+              "ankle.l": {
+                "dorsiflexion": 8.641
+              },
+              "forearm.l": {
+                "pronation": -83.68
+              },
+              "shoulder.r": {
+                "flexion": 19.617,
+                "abduction": 8.465,
+                "horizontal-adduction": -1.871,
+                "internal-rotation": -0.925
+              },
+              "elbow.r": {
+                "flexion": 84.934
+              },
+              "forearm.r": {
+                "pronation": -85.396
+              }
+            },
+            "contract": {
+              "pectoralis-major-sternocostal": 0.5,
+              "triceps-brachii": 0.5
+            }
+          },
+          {
             "phase": "end",
             "joints": {
               "shoulder.l": {
-                "extension": 25,
-                "abduction": 45,
-                "horizontal-abduction": 15
+                "flexion": -37.912,
+                "abduction": 30.293,
+                "horizontal-adduction": -13.675,
+                "internal-rotation": -5.372
               },
               "elbow.l": {
-                "flexion": 110
+                "flexion": 115.821
               },
               "hip.l": {
-                "extension": 16,
-                "abduction": 18
+                "extension": 21.182,
+                "abduction": 18.815
               },
               "knee.l": {
-                "flexion": 80
+                "flexion": 81.66
               },
               "ankle.l": {
-                "dorsiflexion": 6
+                "dorsiflexion": 8.641
+              },
+              "forearm.l": {
+                "pronation": -164.905
+              },
+              "shoulder.r": {
+                "flexion": -37.768,
+                "abduction": 30.313,
+                "horizontal-adduction": -13.646,
+                "internal-rotation": -5.467
+              },
+              "elbow.r": {
+                "flexion": 115.361
+              },
+              "forearm.r": {
+                "pronation": -167.762
               }
             },
             "contract": {

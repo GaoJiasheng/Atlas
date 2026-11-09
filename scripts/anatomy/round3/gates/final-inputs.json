@@ -1,0 +1,210 @@
+[
+  {
+    "path": "src/engines/space-scene/stages/model3d/Equipment.tsx",
+    "sha256": "36929d638938757c13b430be7eece681f6c013565ebb86e804b7d10b67227911",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/shared/fitness/exercises/arms.json",
+    "sha256": "5281baacccd2cb5403269a5a477d22e0bad7d260eff4cd766f1c42f8051e0530",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/shared/fitness/exercises/horizontal-push.json",
+    "sha256": "3634d21e0c54951d7c4888782dde2b1b50206961c26775e7d0111c4996b19a70",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/topics/muscles-back/chapters/05-training-the-back.mdx",
+    "sha256": "55be95cb488bd0932a67210b0da5de6c00a6243b69bb45d513e720fcc102f3d7",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/topics/muscles-core/runtime/GymAssets.tsx",
+    "sha256": "e195a2969580dac67efee234bce5d69e9da1144084366d4ae6242c1b7331809e",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/topics/muscles-core/runtime/gymGeometry.ts",
+    "sha256": "e8c1136ee7629ea9678ee05ddbf81b93ee64d0717377163834dd624d924c005f",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "src/content/topics/muscles-core/runtime/highlight.ts",
+    "sha256": "541c1b622a7b158d3319395af4b55505873754e5578d428b1e4b434280ce18e2",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "tests/muscles-round3.test.ts",
+    "sha256": "2161a341729523be475a163642af4a32c403f8da93494bd8d17225fa888b961c",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "scripts/anatomy/round3/runtime-motion.test.ts",
+    "sha256": "8258b2a8e493d11a75919a4b74f0c22e752b7a6d327d7736b99b654f172d4a84",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "scripts/anatomy/round3/equipment.test.ts",
+    "sha256": "568cb71fbe9af9f5ef7021fbe98f25f713081608feb504904348a523ad9bd3da",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "scripts/anatomy/round3/masks.test.ts",
+    "sha256": "dc504d65099b7744bfc0ca16429883df691c4c73dbb3eb6b1d09c1ba87fbc9c5",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "scripts/anatomy/round3/highlights.test.ts",
+    "sha256": "3a12b53a08fc459d2f16663db443e0adbb1ab25c1d8a62817e2a3aad50eec4fb",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-arms-hands.glb",
+    "sha256": "c678d476b6906100d0c41f1bc7d236d0fbb6925b1e9ffd856258869f4aff0475",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-arms.glb",
+    "sha256": "3f2f702a7f95692d1c5a96da8bb964c136815887c77ea148dce4d804418e6a4b",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-legs.glb",
+    "sha256": "6e0ed644f409b81ed6f12fb10800419d748acb23804604f81618b6bf49c913d2",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-back.glb",
+    "sha256": "2ee8ffba7188dc0d902bca78ee38484d0e3a98717dd35233bbad1312681fcb95",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-core.glb",
+    "sha256": "8ef757c15f38ac8b78421b08a0bfd5fddd37d673a85fb9bdd5fc314eef2e244e",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-core-linea.glb",
+    "sha256": "af47ecd1ecbe1eaef189e6ab79cdfaedc0da36b546b66048c4034b744f4754b0",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-back-pulldown.glb",
+    "sha256": "4baa4dc5fc49212e32ea86e599e51e0e4f330cc493d457b74e6e512fee2ffdeb",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-core-gym.glb",
+    "sha256": "d49022f0717e472660c028089347633aba6c3e48588390adda2a42929b5b8dd9",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-shoulders.glb",
+    "sha256": "df7f5b6d49ecf9360de5565bbdfbfda2155f0ecbf30f6b76c0c24561ad2401fa",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/models/muscles-chest.glb",
+    "sha256": "a4869d4447740c2ab5ed9cf9f59504f101e2bc825e57da99687e629393165d53",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/illustrations/muscles-core@2x.webp",
+    "sha256": "ac937962458d8d497bb55b3692efd9741f967472d2cacceb5fd1b372e1c4f4cc",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/illustrations/muscles-core.webp",
+    "sha256": "4a2c7755c0807a188362e74ec4c15b8d29d5a0f07978de0d7fc3041fb510063e",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/illustrations/muscles-shoulders@2x.webp",
+    "sha256": "44bebba65b90d5cde8273d984e23411344702e1a4ae048bcfa29e80bcb8548c8",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  },
+  {
+    "path": "public/illustrations/muscles-shoulders.webp",
+    "sha256": "8def8474c636e3386afeec548b30a2889aded20022d02f3d483d6343b548f860",
+    "verificationSnapshotsMatch": {
+      "live": true,
+      "patched": true
+    }
+  }
+]

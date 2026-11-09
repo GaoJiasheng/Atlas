@@ -1,0 +1,1230 @@
+{
+  "date": "2026-11-09",
+  "method": "Exact GLTFLoader/meshopt world vertices; graph components excluding main skin; each plate has five-finger/ten-toe count, closed two-manifold opposite directed edges, positive centered signed volume over1mm3. Normal disagreement/tiny faces are reported independently, not concealed.",
+  "rows": [
+    {
+      "topic": "arms",
+      "assetSha256": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 269,
+          "triangles": 534,
+          "signedVolumeMM3": 62.370020327168795,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 10
+        },
+        {
+          "vertices": 227,
+          "triangles": 450,
+          "signedVolumeMM3": 56.32612674769928,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 6
+        },
+        {
+          "vertices": 206,
+          "triangles": 408,
+          "signedVolumeMM3": 56.70776279216487,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 185,
+          "triangles": 366,
+          "signedVolumeMM3": 43.76932531883131,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 170,
+          "triangles": 336,
+          "signedVolumeMM3": 24.0142619968669,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        }
+      ]
+    },
+    {
+      "topic": "arms",
+      "assetSha256": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 267,
+          "triangles": 530,
+          "signedVolumeMM3": 62.02981793814412,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 10
+        },
+        {
+          "vertices": 219,
+          "triangles": 434,
+          "signedVolumeMM3": 55.985167895236145,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 18
+        },
+        {
+          "vertices": 211,
+          "triangles": 418,
+          "signedVolumeMM3": 56.1219045086442,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 203,
+          "triangles": 402,
+          "signedVolumeMM3": 24.15383072400349,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 198,
+          "triangles": 392,
+          "signedVolumeMM3": 44.31544705072243,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "arms",
+      "assetSha256": "07618c50d5b58c12148c64d1baeaddb019b5861ca118262ee30992e210daf0c5",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 190,
+          "triangles": 376,
+          "signedVolumeMM3": 251.27951413976092,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 180,
+          "triangles": 356,
+          "signedVolumeMM3": 250.27336076871734,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 141,
+          "triangles": 278,
+          "signedVolumeMM3": 139.82269605762005,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 141,
+          "triangles": 278,
+          "signedVolumeMM3": 138.07926429799468,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 118,
+          "triangles": 232,
+          "signedVolumeMM3": 121.24991541231196,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 114,
+          "triangles": 224,
+          "signedVolumeMM3": 107.92670483299648,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 104,
+          "triangles": 204,
+          "signedVolumeMM3": 119.94782115615195,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 100,
+          "triangles": 196,
+          "signedVolumeMM3": 107.9158435023096,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 72,
+          "triangles": 140,
+          "signedVolumeMM3": 43.58773806507661,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 70,
+          "triangles": 136,
+          "signedVolumeMM3": 44.03287777516527,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        }
+      ]
+    },
+    {
+      "topic": "back",
+      "assetSha256": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 261,
+          "triangles": 518,
+          "signedVolumeMM3": 62.14995678568678,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 9
+        },
+        {
+          "vertices": 227,
+          "triangles": 450,
+          "signedVolumeMM3": 56.22496344604468,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 206,
+          "triangles": 408,
+          "signedVolumeMM3": 56.6596971190551,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 187,
+          "triangles": 370,
+          "signedVolumeMM3": 44.030518214735594,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 169,
+          "triangles": 334,
+          "signedVolumeMM3": 24.05034087879196,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "back",
+      "assetSha256": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 268,
+          "triangles": 532,
+          "signedVolumeMM3": 61.92876176047334,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 8
+        },
+        {
+          "vertices": 216,
+          "triangles": 428,
+          "signedVolumeMM3": 56.01610262674503,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 18
+        },
+        {
+          "vertices": 213,
+          "triangles": 422,
+          "signedVolumeMM3": 56.05901324445956,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 202,
+          "triangles": 400,
+          "signedVolumeMM3": 24.177386309623248,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 198,
+          "triangles": 392,
+          "signedVolumeMM3": 44.27967212085246,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "back",
+      "assetSha256": "b9bc6607fd6e784db94beddbecaff35ad9828c8a6f218aefd3f05be2dde6ca29",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 191,
+          "triangles": 378,
+          "signedVolumeMM3": 251.41731523545013,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 176,
+          "triangles": 348,
+          "signedVolumeMM3": 250.86219306847576,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 142,
+          "triangles": 280,
+          "signedVolumeMM3": 139.63632569899235,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 139,
+          "triangles": 274,
+          "signedVolumeMM3": 137.92266850674258,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 116,
+          "triangles": 228,
+          "signedVolumeMM3": 120.73218408005944,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 112,
+          "triangles": 220,
+          "signedVolumeMM3": 107.75225971166802,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 104,
+          "triangles": 204,
+          "signedVolumeMM3": 119.77421174975979,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 98,
+          "triangles": 192,
+          "signedVolumeMM3": 108.26493526488852,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 71,
+          "triangles": 138,
+          "signedVolumeMM3": 43.466372696535,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 69,
+          "triangles": 134,
+          "signedVolumeMM3": 44.05079230286415,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        }
+      ]
+    },
+    {
+      "topic": "chest",
+      "assetSha256": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 273,
+          "triangles": 542,
+          "signedVolumeMM3": 62.17533829503964,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 9
+        },
+        {
+          "vertices": 229,
+          "triangles": 454,
+          "signedVolumeMM3": 56.194145187232046,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 6
+        },
+        {
+          "vertices": 205,
+          "triangles": 406,
+          "signedVolumeMM3": 56.707318046565625,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 187,
+          "triangles": 370,
+          "signedVolumeMM3": 43.75170774388798,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 170,
+          "triangles": 336,
+          "signedVolumeMM3": 24.01798147977548,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        }
+      ]
+    },
+    {
+      "topic": "chest",
+      "assetSha256": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 267,
+          "triangles": 530,
+          "signedVolumeMM3": 62.0043991212633,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 8
+        },
+        {
+          "vertices": 219,
+          "triangles": 434,
+          "signedVolumeMM3": 56.04512575476781,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 19
+        },
+        {
+          "vertices": 213,
+          "triangles": 422,
+          "signedVolumeMM3": 56.000147681695886,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 199,
+          "triangles": 394,
+          "signedVolumeMM3": 44.32281728679779,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 195,
+          "triangles": 386,
+          "signedVolumeMM3": 24.258167968963186,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        }
+      ]
+    },
+    {
+      "topic": "chest",
+      "assetSha256": "c8bf9b6b0a70e7df4210158121428be9e5e0c81dee13819b84ad3e3189c0e5f0",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 191,
+          "triangles": 378,
+          "signedVolumeMM3": 251.24198994625883,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 180,
+          "triangles": 356,
+          "signedVolumeMM3": 250.23749615098566,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 142,
+          "triangles": 280,
+          "signedVolumeMM3": 139.66961797428846,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 142,
+          "triangles": 280,
+          "signedVolumeMM3": 138.030718743283,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 119,
+          "triangles": 234,
+          "signedVolumeMM3": 121.121102697515,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 113,
+          "triangles": 222,
+          "signedVolumeMM3": 107.79861225554289,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 107,
+          "triangles": 210,
+          "signedVolumeMM3": 119.90610060678159,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 99,
+          "triangles": 194,
+          "signedVolumeMM3": 108.22002299569623,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 74,
+          "triangles": 144,
+          "signedVolumeMM3": 43.61558041209571,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 70,
+          "triangles": 136,
+          "signedVolumeMM3": 44.1897995545147,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        }
+      ]
+    },
+    {
+      "topic": "core",
+      "assetSha256": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 269,
+          "triangles": 534,
+          "signedVolumeMM3": 62.370020327168795,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 10
+        },
+        {
+          "vertices": 229,
+          "triangles": 454,
+          "signedVolumeMM3": 56.353048977176854,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 7
+        },
+        {
+          "vertices": 205,
+          "triangles": 406,
+          "signedVolumeMM3": 56.6456774457762,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 187,
+          "triangles": 370,
+          "signedVolumeMM3": 44.02255382302625,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 173,
+          "triangles": 342,
+          "signedVolumeMM3": 24.007266029122253,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        }
+      ]
+    },
+    {
+      "topic": "core",
+      "assetSha256": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 267,
+          "triangles": 530,
+          "signedVolumeMM3": 62.119384850695866,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 8
+        },
+        {
+          "vertices": 217,
+          "triangles": 430,
+          "signedVolumeMM3": 56.06487316475928,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 19
+        },
+        {
+          "vertices": 212,
+          "triangles": 420,
+          "signedVolumeMM3": 55.83486197236274,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 205,
+          "triangles": 406,
+          "signedVolumeMM3": 24.13831215580915,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 198,
+          "triangles": 392,
+          "signedVolumeMM3": 44.334103959675026,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "core",
+      "assetSha256": "b8d6db283be13295e1eaff56aa0921aa0fe6b3e46b48776e09eeccce6128d1b9",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 190,
+          "triangles": 376,
+          "signedVolumeMM3": 251.17298419316245,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 181,
+          "triangles": 358,
+          "signedVolumeMM3": 250.8863606405788,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 141,
+          "triangles": 278,
+          "signedVolumeMM3": 139.7725146353678,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 140,
+          "triangles": 276,
+          "signedVolumeMM3": 137.78149787953836,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 117,
+          "triangles": 230,
+          "signedVolumeMM3": 120.69252910981376,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 113,
+          "triangles": 222,
+          "signedVolumeMM3": 107.7338028583143,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 105,
+          "triangles": 206,
+          "signedVolumeMM3": 120.03136597837697,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 98,
+          "triangles": 192,
+          "signedVolumeMM3": 107.9038501038646,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 72,
+          "triangles": 140,
+          "signedVolumeMM3": 43.61106103165871,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 68,
+          "triangles": 132,
+          "signedVolumeMM3": 43.937816682528734,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        }
+      ]
+    },
+    {
+      "topic": "legs",
+      "assetSha256": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 262,
+          "triangles": 520,
+          "signedVolumeMM3": 62.55516874723147,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 10
+        },
+        {
+          "vertices": 226,
+          "triangles": 448,
+          "signedVolumeMM3": 56.26376466194023,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 7
+        },
+        {
+          "vertices": 206,
+          "triangles": 408,
+          "signedVolumeMM3": 56.68757095465051,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 188,
+          "triangles": 372,
+          "signedVolumeMM3": 44.005994741097,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 175,
+          "triangles": 346,
+          "signedVolumeMM3": 24.017153078505633,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "legs",
+      "assetSha256": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 266,
+          "triangles": 528,
+          "signedVolumeMM3": 61.89365506919994,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 9
+        },
+        {
+          "vertices": 220,
+          "triangles": 436,
+          "signedVolumeMM3": 56.0685992567816,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 18
+        },
+        {
+          "vertices": 210,
+          "triangles": 416,
+          "signedVolumeMM3": 56.03866288349682,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 204,
+          "triangles": 404,
+          "signedVolumeMM3": 24.27471915648983,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 198,
+          "triangles": 392,
+          "signedVolumeMM3": 44.30019210118677,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "legs",
+      "assetSha256": "f143525883833a449f96e16f486a0ce80dbaa22d8920805afc41866b69633c9c",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 193,
+          "triangles": 382,
+          "signedVolumeMM3": 250.9638391206623,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 176,
+          "triangles": 348,
+          "signedVolumeMM3": 250.96397247943284,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 142,
+          "triangles": 280,
+          "signedVolumeMM3": 139.7476773058974,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 141,
+          "triangles": 278,
+          "signedVolumeMM3": 138.13163873108496,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 115,
+          "triangles": 226,
+          "signedVolumeMM3": 120.82840687573193,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 110,
+          "triangles": 216,
+          "signedVolumeMM3": 108.04209276524831,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 103,
+          "triangles": 202,
+          "signedVolumeMM3": 119.99603479570733,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 100,
+          "triangles": 196,
+          "signedVolumeMM3": 108.42041380602195,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 74,
+          "triangles": 144,
+          "signedVolumeMM3": 43.57456814595343,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 72,
+          "triangles": 140,
+          "signedVolumeMM3": 44.2224042912773,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        }
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "assetSha256": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab",
+      "node": "skin-hand.l",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 270,
+          "triangles": 536,
+          "signedVolumeMM3": 62.25510304251339,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 10
+        },
+        {
+          "vertices": 228,
+          "triangles": 452,
+          "signedVolumeMM3": 56.32805449011977,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 6
+        },
+        {
+          "vertices": 206,
+          "triangles": 408,
+          "signedVolumeMM3": 56.657240249490584,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 11
+        },
+        {
+          "vertices": 188,
+          "triangles": 372,
+          "signedVolumeMM3": 43.971940347389015,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 171,
+          "triangles": 338,
+          "signedVolumeMM3": 23.999498673844542,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "assetSha256": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab",
+      "node": "skin-hand.r",
+      "expectedPlates": 5,
+      "plates": [
+        {
+          "vertices": 267,
+          "triangles": 530,
+          "signedVolumeMM3": 61.915036873917884,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 9
+        },
+        {
+          "vertices": 220,
+          "triangles": 436,
+          "signedVolumeMM3": 55.98994475483504,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 19
+        },
+        {
+          "vertices": 210,
+          "triangles": 416,
+          "signedVolumeMM3": 55.90494982208802,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 5
+        },
+        {
+          "vertices": 199,
+          "triangles": 394,
+          "signedVolumeMM3": 44.2873165296287,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        },
+        {
+          "vertices": 198,
+          "triangles": 392,
+          "signedVolumeMM3": 24.145636821036376,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 3
+        }
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "assetSha256": "37e8f42f6b6c024f30a58f11e24e00e13373d0775592985316e47a046d6036ab",
+      "node": "skin-outline",
+      "expectedPlates": 10,
+      "plates": [
+        {
+          "vertices": 191,
+          "triangles": 378,
+          "signedVolumeMM3": 251.2272760289665,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 178,
+          "triangles": 352,
+          "signedVolumeMM3": 251.31660269463208,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 144,
+          "triangles": 284,
+          "signedVolumeMM3": 139.67743576156204,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 141,
+          "triangles": 278,
+          "signedVolumeMM3": 137.79637182734993,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 116,
+          "triangles": 228,
+          "signedVolumeMM3": 120.91828475762618,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 4
+        },
+        {
+          "vertices": 110,
+          "triangles": 216,
+          "signedVolumeMM3": 107.69943778582743,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 105,
+          "triangles": 206,
+          "signedVolumeMM3": 119.89931116377808,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 2
+        },
+        {
+          "vertices": 99,
+          "triangles": 194,
+          "signedVolumeMM3": 108.14779292396551,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 1
+        },
+        {
+          "vertices": 70,
+          "triangles": 136,
+          "signedVolumeMM3": 43.45541060588729,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        },
+        {
+          "vertices": 69,
+          "triangles": 134,
+          "signedVolumeMM3": 44.176214741450686,
+          "openEdges": 0,
+          "inconsistentWindingEdges": 0,
+          "tinyFaces": 0,
+          "normalDisagreementFaces": 0
+        }
+      ]
+    }
+  ]
+}

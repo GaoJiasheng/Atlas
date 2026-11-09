@@ -1,0 +1,1181 @@
+{
+  "method": "Face winding versus the posed smooth-normal field; edges longer than 1 mm; no GPU or contact acceptance implied",
+  "rows": [
+    {
+      "topic": "arms",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 546,
+      "invertedAreaFraction": 0.012082783986880561,
+      "p99EdgeStretch": 2.150890526800295,
+      "maxEdgeStretch": 16.589996539162325,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.038901906572667344,
+          "invertedAreaFraction": 0.0005850644367574642,
+          "invertedFaces": 29,
+          "p99EdgeStretch": 1.0000296276136909
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.03881651374969554,
+          "invertedAreaFraction": 0.00044695100791257317,
+          "invertedFaces": 34,
+          "p99EdgeStretch": 1.0000186375962248
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.8627668928590823,
+          "invertedAreaFraction": 0.009293989100291602,
+          "invertedFaces": 198,
+          "p99EdgeStretch": 4.035658968034867
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.8081679589699835,
+          "invertedAreaFraction": 0.018481505296744593,
+          "invertedFaces": 278,
+          "p99EdgeStretch": 1.825553803734253
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15454009537833613,
+          "invertedAreaFraction": 0.000006850199191880076,
+          "invertedFaces": 7,
+          "p99EdgeStretch": 1.1169247230377628
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.0004055283617674105,
+          "rest": [
+            -0.18466408550739288,
+            -0.09706373512744904,
+            -0.04507647827267647
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0004044158392167876,
+          "rest": [
+            0.15061778823534647,
+            -0.06165371090173721,
+            0.07706645627816518
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003952910020613488,
+          "rest": [
+            0.15161831676959991,
+            -0.04474911466240883,
+            0.07260322570800781
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003749643660909871,
+          "rest": [
+            0.15053079028924307,
+            -0.12827158470948538,
+            0.04039486745993296
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003742740466312818,
+          "rest": [
+            0.15401088694731394,
+            -0.04178232575456301,
+            0.0644858864446481
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003674790289082666,
+          "rest": [
+            -0.23552581171194711,
+            -0.13743293285369873,
+            -0.04319722205400467
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00033992729688902206,
+          "rest": [
+            0.147720605134964,
+            -0.12225970874230067,
+            0.0686881070335706
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000311747221208779,
+          "rest": [
+            -0.18461188673973083,
+            -0.1371719241142273,
+            -0.03134746973713239
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000274239469086991,
+          "rest": [
+            -0.012477263187368711,
+            -0.5609615445137024,
+            0.038628714780012764
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00027199239320058974,
+          "rest": [
+            0.1511746048927307,
+            -0.07912382483482361,
+            0.0750566969315211
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002619328407825876,
+          "rest": [
+            0.14202193915843964,
+            -0.19679481784502664,
+            0.07117638488610585
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00025264290131169875,
+          "rest": [
+            -0.012581666931509972,
+            -0.6037059426307678,
+            0.02928463617960612
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00024345833713079594,
+          "rest": [
+            0.14256134629249573,
+            -0.118187981347243,
+            0.08319144199291865
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00024077589666145693,
+          "rest": [
+            0.007585534049818913,
+            -0.5801282326380411,
+            -0.018975700562198956
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021750280926417946,
+          "rest": [
+            0.14353578289349875,
+            -0.21671841541926065,
+            0.07108067969481151
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    },
+    {
+      "topic": "back",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 546,
+      "invertedAreaFraction": 0.01208206398369395,
+      "p99EdgeStretch": 2.1511791246550898,
+      "maxEdgeStretch": 16.58996723388207,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.0389016289732586,
+          "invertedAreaFraction": 0.0005730142300234936,
+          "invertedFaces": 29,
+          "p99EdgeStretch": 1.000024151885106
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.03881650655164534,
+          "invertedAreaFraction": 0.00042887209880609044,
+          "invertedFaces": 30,
+          "p99EdgeStretch": 1.000016271800932
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.8627668716742741,
+          "invertedAreaFraction": 0.009294013063514787,
+          "invertedFaces": 200,
+          "p99EdgeStretch": 4.035656356748961
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.808167960187518,
+          "invertedAreaFraction": 0.018481504713378963,
+          "invertedFaces": 281,
+          "p99EdgeStretch": 1.8255538703706704
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15453950262642546,
+          "invertedAreaFraction": 0.0000053588296004644875,
+          "invertedFaces": 6,
+          "p99EdgeStretch": 1.1169248606604276
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.0004055283764378766,
+          "rest": [
+            -0.18466408550739288,
+            -0.046936942458463214,
+            -0.02659463882446289
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0004044158392167876,
+          "rest": [
+            0.15061778823534647,
+            -0.011526919901371002,
+            0.0955482969681422
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00039529093332517037,
+          "rest": [
+            0.15161831676959991,
+            0.0053776757170756655,
+            0.09108506391445796
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003749644204880094,
+          "rest": [
+            0.15053079028924307,
+            -0.07814479743440945,
+            0.05887670566638311
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003742743187799358,
+          "rest": [
+            0.15401088694731394,
+            0.008344465245803198,
+            0.08296772340933482
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00036747902149166797,
+          "rest": [
+            -0.23552581171194711,
+            -0.08730614433685939,
+            -0.02471538322667281
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00033992759356613153,
+          "rest": [
+            0.147720605134964,
+            -0.07213292146722476,
+            0.08716994772354762
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00031174715775952546,
+          "rest": [
+            -0.18461188673973083,
+            -0.08704513683915138,
+            -0.012865630288918814
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00027423918821895324,
+          "rest": [
+            -0.012477263187368711,
+            -0.5108347535133362,
+            0.05711055422822634
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.0002719924126986794,
+          "rest": [
+            0.1511746048927307,
+            -0.028997032592693966,
+            0.09353853762149811
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000261932807606954,
+          "rest": [
+            0.14202193915843964,
+            -0.14666802684466043,
+            0.089658223092556
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00025264277510239267,
+          "rest": [
+            -0.012581666931509972,
+            -0.5535791516304016,
+            0.047766475627819695
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00024345835398078855,
+          "rest": [
+            0.14256134629249573,
+            -0.06806119407216708,
+            0.10167328019936879
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000240776765863831,
+          "rest": [
+            0.007585534049818913,
+            -0.5300014416376749,
+            -0.0004938605319087704
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021750280418930752,
+          "rest": [
+            0.14353578289349875,
+            -0.16659162441889444,
+            0.08956252038478851
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    },
+    {
+      "topic": "chest",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 544,
+      "invertedAreaFraction": 0.012082361770080803,
+      "p99EdgeStretch": 2.1508997203134066,
+      "maxEdgeStretch": 16.589812007766845,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.03890141093856548,
+          "invertedAreaFraction": 0.0005801481129180701,
+          "invertedFaces": 31,
+          "p99EdgeStretch": 1.0000294255061082
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.03881629085752818,
+          "invertedAreaFraction": 0.0004363728345609601,
+          "invertedFaces": 30,
+          "p99EdgeStretch": 1.0000191731133925
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.862766875002547,
+          "invertedAreaFraction": 0.009294011421644889,
+          "invertedFaces": 200,
+          "p99EdgeStretch": 4.035658659307171
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.8081680060584754,
+          "invertedAreaFraction": 0.018481502651870402,
+          "invertedFaces": 277,
+          "p99EdgeStretch": 1.8255519763791745
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15453984510815696,
+          "invertedAreaFraction": 0.000005358748237807179,
+          "invertedFaces": 6,
+          "p99EdgeStretch": 1.1169239661135888
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.0004055281385636933,
+          "rest": [
+            -0.1846476048231125,
+            -0.1986374408006668,
+            -0.13086672127246857
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0004044158408879766,
+          "rest": [
+            0.15063426891962686,
+            -0.16322741409142813,
+            -0.008723785014202198
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003952908644931916,
+          "rest": [
+            0.1516347974538803,
+            -0.1463228166103363,
+            -0.013187017912666002
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003749643775704522,
+          "rest": [
+            0.15054727097352347,
+            -0.22984529038270315,
+            -0.04539537553985914
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003742741201240374,
+          "rest": [
+            0.15402736763159433,
+            -0.14335602521896362,
+            -0.021304359038670857
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003674794564600722,
+          "rest": [
+            -0.23550933102766672,
+            -0.23900664846102396,
+            -0.12898746132850647
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00033992747070811497,
+          "rest": [
+            0.14773708581924438,
+            -0.22383341193199158,
+            -0.017102133482694626
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003117470388170157,
+          "rest": [
+            -0.18459540605545044,
+            -0.23874562978744507,
+            -0.11713771273692448
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002742388452730885,
+          "rest": [
+            -0.012460782503088316,
+            -0.6625352501869202,
+            -0.047161528219779335
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00027199238241022445,
+          "rest": [
+            0.1511910855770111,
+            -0.18069752554098764,
+            -0.010733545292168856
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002619328550544294,
+          "rest": [
+            0.14203841984272003,
+            -0.29836852351824444,
+            -0.014613859045008818
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00025264275562959153,
+          "rest": [
+            -0.012565186247229576,
+            -0.7052796483039856,
+            -0.05650560682018598
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00024345837039051657,
+          "rest": [
+            0.14257782697677612,
+            -0.2197616845369339,
+            -0.002598800463601947
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00024077604052922023,
+          "rest": [
+            0.007602014734099309,
+            -0.6817019383112589,
+            -0.10476594418287277
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021750287729407417,
+          "rest": [
+            0.14355226357777914,
+            -0.31829212109247845,
+            -0.014709562063217163
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    },
+    {
+      "topic": "core",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 548,
+      "invertedAreaFraction": 0.012082719969010296,
+      "p99EdgeStretch": 2.150890526800295,
+      "maxEdgeStretch": 16.590077016137563,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.03890211680450589,
+          "invertedAreaFraction": 0.0005812844339970953,
+          "invertedFaces": 32,
+          "p99EdgeStretch": 1.000023410822372
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.03881645240907879,
+          "invertedAreaFraction": 0.00045029056799153846,
+          "invertedFaces": 32,
+          "p99EdgeStretch": 1.0000075373634043
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.8627667012029993,
+          "invertedAreaFraction": 0.009294016345570599,
+          "invertedFaces": 200,
+          "p99EdgeStretch": 4.0320317926236
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.8081685254551652,
+          "invertedAreaFraction": 0.01848162145620552,
+          "invertedFaces": 278,
+          "p99EdgeStretch": 1.825554523594574
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15453957780826572,
+          "invertedAreaFraction": 0.000005358627453044771,
+          "invertedFaces": 6,
+          "p99EdgeStretch": 1.1169196957666112
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.00040552875679136633,
+          "rest": [
+            -0.18466408550739288,
+            0.1108135258158048,
+            -0.044393111020326614
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0004044158973089662,
+          "rest": [
+            0.15061778823534647,
+            0.14622356494267783,
+            0.07774982353051503
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00039529076276716005,
+          "rest": [
+            0.15161831676959991,
+            0.16312816242376962,
+            0.07328659296035767
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00037496435743120126,
+          "rest": [
+            0.15053079028924307,
+            0.07960568865140279,
+            0.041078234712282814
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003742739935167714,
+          "rest": [
+            0.15401088694731394,
+            0.1660949538151423,
+            0.06516925369699796
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00036747897415643176,
+          "rest": [
+            -0.23552581171194711,
+            0.0704443280895551,
+            -0.042513854801654816
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00033992718613991496,
+          "rest": [
+            0.147720605134964,
+            0.08561756710211436,
+            0.06937147428592046
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000311747037713676,
+          "rest": [
+            -0.18461188673973083,
+            0.07070533434549968,
+            -0.030664102484782536
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000274239332797042,
+          "rest": [
+            -0.012477263187368711,
+            -0.353084276119868,
+            0.03931208203236262
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00027199229987542276,
+          "rest": [
+            0.1511746048927307,
+            0.12875345100959143,
+            0.07574006418387096
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00026193287753172685,
+          "rest": [
+            0.14202193915843964,
+            0.011082461724678675,
+            0.0718597521384557
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00025264283414556195,
+          "rest": [
+            -0.012581666931509972,
+            -0.39582865436871845,
+            0.029968003431955974
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.0002434586884773266,
+          "rest": [
+            0.14256134629249573,
+            0.08968929449717204,
+            0.08387480924526851
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.000240776269063261,
+          "rest": [
+            0.007585534049818913,
+            -0.37225096424420673,
+            -0.018292333309849102
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021760695310536955,
+          "rest": [
+            0.14353578289349875,
+            -0.008841135228673616,
+            0.07175534715255101
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    },
+    {
+      "topic": "legs",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 550,
+      "invertedAreaFraction": 0.012082898747051565,
+      "p99EdgeStretch": 2.1508893701992844,
+      "maxEdgeStretch": 16.589999833620233,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.03890204042610762,
+          "invertedAreaFraction": 0.0005897936728063927,
+          "invertedFaces": 33,
+          "p99EdgeStretch": 1.000027298885689
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.03881639112394584,
+          "invertedAreaFraction": 0.00045362013678492606,
+          "invertedFaces": 33,
+          "p99EdgeStretch": 1.000014940147359
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.8627668771632662,
+          "invertedAreaFraction": 0.00929399160619215,
+          "invertedFaces": 199,
+          "p99EdgeStretch": 4.035659989843504
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.8081679537999749,
+          "invertedAreaFraction": 0.018481507666361776,
+          "invertedFaces": 279,
+          "p99EdgeStretch": 1.8255551299945771
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15453992285143137,
+          "invertedAreaFraction": 0.0000053586966596013365,
+          "invertedFaces": 6,
+          "p99EdgeStretch": 1.1169146093761066
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.0004055285287979409,
+          "rest": [
+            -0.18466408550739288,
+            0.24007883171240488,
+            -0.03316837859650453
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00040441570236697636,
+          "rest": [
+            0.15061778823534647,
+            0.27548887332280475,
+            0.0889745553334554
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00039529077669219295,
+          "rest": [
+            0.15161831676959991,
+            0.29239346583684284,
+            0.08451132476329803
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00037496447280529127,
+          "rest": [
+            0.15053079028924307,
+            0.20887099703152975,
+            0.05230296651522318
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003742741240330047,
+          "rest": [
+            0.15401088694731394,
+            0.2953602572282155,
+            0.0763939842581749
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003674785301912546,
+          "rest": [
+            -0.23552581171194711,
+            0.19970963398615518,
+            -0.03128912175695101
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003399273281466823,
+          "rest": [
+            0.147720605134964,
+            0.2148828754822413,
+            0.08059620608886083
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003117472066588508,
+          "rest": [
+            -0.18461188673973083,
+            0.19997064272562662,
+            -0.019439370060960453
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002742393176270803,
+          "rest": [
+            -0.012477263187368711,
+            -0.22381897270679474,
+            0.050536813835302986
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.0002719923861983447,
+          "rest": [
+            0.1511746048927307,
+            0.25801876187324524,
+            0.08696479598681132
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002619327583691632,
+          "rest": [
+            0.14202193915843964,
+            0.14034777134656906,
+            0.08308448394139607
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002526430132473931,
+          "rest": [
+            -0.012581666931509972,
+            -0.2665633459885915,
+            0.04119273523489634
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00024345859156268724,
+          "rest": [
+            0.14256134629249573,
+            0.21895460287729898,
+            0.09509954104820888
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002407754846236095,
+          "rest": [
+            0.007585534049818913,
+            -0.2429856558640798,
+            -0.007067601118857662
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021750262774167391,
+          "rest": [
+            0.14353578289349875,
+            0.12042417377233505,
+            0.08298877875010173
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "pose": {
+        "shoulder.l": {
+          "flexion": 90
+        },
+        "elbow.r": {
+          "flexion": 90
+        },
+        "hip.l": {
+          "flexion": 60
+        },
+        "knee.r": {
+          "flexion": 90
+        },
+        "ankle.l": {
+          "dorsiflexion": 15
+        },
+        "ankle.r": {
+          "dorsiflexion": 15
+        }
+      },
+      "invertedFaces": 548,
+      "invertedAreaFraction": 0.012082553312904108,
+      "p99EdgeStretch": 2.150900218863443,
+      "maxEdgeStretch": 16.589820931136693,
+      "breakdown": {
+        "skin-hand.l/hand": {
+          "areaM2": 0.038902032438833244,
+          "invertedAreaFraction": 0.0005815684207358763,
+          "invertedFaces": 32,
+          "p99EdgeStretch": 1.0000331026921279
+        },
+        "skin-hand.r/hand": {
+          "areaM2": 0.038816430439732416,
+          "invertedAreaFraction": 0.0004444568721211825,
+          "invertedFaces": 32,
+          "p99EdgeStretch": 1.0000189639046968
+        },
+        "skin-outline/hip-leg": {
+          "areaM2": 0.8627668766064479,
+          "invertedAreaFraction": 0.009294010908583698,
+          "invertedFaces": 200,
+          "p99EdgeStretch": 4.0356582666813825
+        },
+        "skin-outline/trunk-arm": {
+          "areaM2": 0.8081679575005716,
+          "invertedAreaFraction": 0.01848150435208928,
+          "invertedFaces": 278,
+          "p99EdgeStretch": 1.8255523983888875
+        },
+        "skin-outline/foot": {
+          "areaM2": 0.15453954128005024,
+          "invertedAreaFraction": 0.000005358652778395925,
+          "invertedFaces": 6,
+          "p99EdgeStretch": 1.116913345804503
+        }
+      },
+      "largestInvertedFaces": [
+        {
+          "area": 0.00040552831486102684,
+          "rest": [
+            -0.18466408550739288,
+            -0.2587871005137761,
+            -0.07714395473400752
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0004044159169983744,
+          "rest": [
+            0.15061778823534647,
+            -0.2233770787715912,
+            0.04499897981683413
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003952908410836216,
+          "rest": [
+            0.15161831676959991,
+            -0.20647248129049936,
+            0.040535746763149895
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003749643346528952,
+          "rest": [
+            0.15053079028924307,
+            -0.2899949550628662,
+            0.008327389446397623
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00037427418270558093,
+          "rest": [
+            0.15401088694731394,
+            -0.20350569486618042,
+            0.032418406258026757
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003674796892771739,
+          "rest": [
+            -0.23552581171194711,
+            -0.2991563181082408,
+            -0.07526469975709915
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00033992744138158293,
+          "rest": [
+            0.147720605134964,
+            -0.2839830815792084,
+            0.03662063119312128
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0003117468149488689,
+          "rest": [
+            -0.18461188673973083,
+            -0.29889530936876935,
+            -0.06341494619846344
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.00027423935744992314,
+          "rest": [
+            -0.012477263187368711,
+            -0.722684919834137,
+            0.006561236688867211
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.0002719924126986794,
+          "rest": [
+            0.1511746048927307,
+            -0.24084719518820444,
+            0.04298922047019005
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002619328090815633,
+          "rest": [
+            0.14202193915843964,
+            -0.35851819316546124,
+            0.039108906562129654
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002526428027383022,
+          "rest": [
+            -0.012581666931509972,
+            -0.7654293179512024,
+            -0.0027828416399036846
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00024345840760180718,
+          "rest": [
+            0.14256134629249573,
+            -0.2799113591512044,
+            0.0511239655315876
+          ],
+          "surface": "skin-outline/trunk-arm"
+        },
+        {
+          "area": 0.0002407759643512165,
+          "rest": [
+            0.007585534049818913,
+            -0.7418516079584757,
+            -0.051043178886175156
+          ],
+          "surface": "skin-outline/hip-leg"
+        },
+        {
+          "area": 0.00021750288681389056,
+          "rest": [
+            0.14353578289349875,
+            -0.37844179073969525,
+            0.03901320385436217
+          ],
+          "surface": "skin-outline/trunk-arm"
+        }
+      ]
+    }
+  ]
+}

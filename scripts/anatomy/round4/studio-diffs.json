@@ -1,0 +1,170 @@
+[
+  {
+    "topic": "core",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "core",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "core",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "core",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "back",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "back",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "back",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "back",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "chest",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "chest",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "chest",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "chest",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "arms",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "arms",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "arms",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "arms",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "legs",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "legs",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "legs",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "legs",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "shoulders",
+    "view": "front",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "shoulders",
+    "view": "three-quarter",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "shoulders",
+    "view": "profile",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  },
+  {
+    "topic": "shoulders",
+    "view": "detail",
+    "mae": 0,
+    "max": 0,
+    "changedChannels": 0
+  }
+]

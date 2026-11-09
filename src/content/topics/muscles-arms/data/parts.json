@@ -978,8 +978,8 @@
         "zh": "在参考人体上定位手臂肌肉。"
       },
       "detail": {
-        "en": "The low-detail skin surface comes from the same male reference body as the muscles [M3]. X-RAY reveals the muscles through it.",
-        "zh": "低细节皮肤轮廓与肌肉来自同一具男性参考人体 [M3]。透视模式让肌肉从轮廓中显露。"
+        "en": "The smooth source-derived skin surface comes from the same male reference body as the muscles [M3]. X-RAY reveals the muscles through it.",
+        "zh": "平滑皮肤轮廓与肌肉来自同一具男性参考人体 [M3]。透视模式让肌肉从轮廓中显露。"
       },
       "context": true,
       "shell": true
@@ -1176,6 +1176,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

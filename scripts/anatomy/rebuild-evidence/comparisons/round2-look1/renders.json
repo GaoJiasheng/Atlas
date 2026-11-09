@@ -1,0 +1,98 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-front.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-three-quarter.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-profile.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-detail.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 20,
+      "target": [
+        5.774199962615967e-7,
+        0.013624534010887146,
+        0.11376534774899483
+      ],
+      "height": 0.45733146190643315
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-body.png",
+    "triangles": 51696,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000020310282707214355,
+        -0.1859523057937622,
+        0.02978529781103134
+      ],
+      "height": 1.9157469177246096
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-look1/core-body-front.png",
+    "triangles": 51696,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000020310282707214355,
+        -0.1859523057937622,
+        0.02978529781103134
+      ],
+      "height": 1.9157469177246096
+    },
+    "width": 640,
+    "height": 800
+  }
+]

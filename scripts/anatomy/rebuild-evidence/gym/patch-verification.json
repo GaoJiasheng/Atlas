@@ -1,0 +1,7 @@
+{
+  "date": "2026-11-09",
+  "patch": "scripts/geo/muscles-core/gym-runtime.patch",
+  "factories": 6,
+  "result": "Passed: actual isolated patched equipment factories and actual Equipment.tsx oneGeometry path match review geometry position-for-position.",
+  "limits": "Original engine files remain unchanged. This does not execute useFrame placement, grip contacts, cable tangency, browser rendering or GPU shaders."
+}

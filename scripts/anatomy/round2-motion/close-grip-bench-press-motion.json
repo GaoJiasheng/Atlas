@@ -1,0 +1,123 @@
+{
+  "root": {
+    "rotation": [
+      -93.3018,
+      0,
+      0
+    ]
+  },
+  "equipment": [
+    {
+      "kind": "barbell",
+      "grip": "pronated",
+      "width": 0.605
+    },
+    {
+      "kind": "bench",
+      "at": [
+        0,
+        -0.099,
+        0.02
+      ]
+    },
+    {
+      "kind": "rack"
+    }
+  ],
+  "keys": [
+    {
+      "phase": "start",
+      "joints": {
+        "hip.l": {
+          "extension": 21.182,
+          "abduction": 18.817
+        },
+        "knee.l": {
+          "flexion": 81.659
+        },
+        "ankle.l": {
+          "dorsiflexion": 8.64
+        },
+        "scapula.l": {
+          "retraction": 6
+        },
+        "shoulder.l": {
+          "flexion": 89.687,
+          "abduction": -6.464,
+          "horizontal-adduction": -2.74,
+          "internal-rotation": 1.178
+        },
+        "elbow.l": {
+          "flexion": -13.985
+        },
+        "forearm.l": {
+          "pronation": -6.543
+        },
+        "shoulder.r": {
+          "flexion": 89.688,
+          "abduction": -6.334,
+          "horizontal-adduction": -2.608,
+          "internal-rotation": 1.257
+        },
+        "elbow.r": {
+          "flexion": -13.985
+        },
+        "forearm.r": {
+          "pronation": -6.54
+        }
+      }
+    },
+    {
+      "phase": "end",
+      "joints": {
+        "hip.l": {
+          "extension": 21.182,
+          "abduction": 18.817
+        },
+        "knee.l": {
+          "flexion": 81.659
+        },
+        "ankle.l": {
+          "dorsiflexion": 8.64
+        },
+        "scapula.l": {
+          "retraction": 6
+        },
+        "shoulder.l": {
+          "flexion": -41.42,
+          "abduction": 20.83,
+          "horizontal-adduction": 0.677,
+          "internal-rotation": 1.506
+        },
+        "elbow.l": {
+          "flexion": 116.619
+        },
+        "forearm.l": {
+          "pronation": 0.146
+        },
+        "shoulder.r": {
+          "flexion": -41.421,
+          "abduction": 20.828,
+          "horizontal-adduction": 0.68,
+          "internal-rotation": 1.508
+        },
+        "elbow.r": {
+          "flexion": 116.621
+        },
+        "forearm.r": {
+          "pronation": 0.146
+        }
+      }
+    }
+  ],
+  "tempo": [
+    1.2,
+    0.4,
+    2,
+    0.4
+  ],
+  "camera": {
+    "azimuth": 32,
+    "elevation": 40
+  }
+}

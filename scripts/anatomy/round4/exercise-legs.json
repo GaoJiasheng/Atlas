@@ -1,0 +1,342 @@
+{
+  "twistVertices": 1080,
+  "bodyBudget": null,
+  "masks": [
+    {
+      "node": "exercise-adductor-longus.l",
+      "before": 29,
+      "after": 140,
+      "removedIslands": 0,
+      "intermediateAlpha": 53
+    },
+    {
+      "node": "exercise-adductor-longus.r",
+      "before": 30,
+      "after": 140,
+      "removedIslands": 0,
+      "intermediateAlpha": 54
+    },
+    {
+      "node": "exercise-adductor-magnus.l",
+      "before": 18,
+      "after": 112,
+      "removedIslands": 0,
+      "intermediateAlpha": 41
+    },
+    {
+      "node": "exercise-adductor-magnus.r",
+      "before": 15,
+      "after": 88,
+      "removedIslands": 0,
+      "intermediateAlpha": 32
+    },
+    {
+      "node": "exercise-biceps-femoris-long.l",
+      "before": 165,
+      "after": 393,
+      "removedIslands": 0,
+      "intermediateAlpha": 121
+    },
+    {
+      "node": "exercise-biceps-femoris-long.r",
+      "before": 177,
+      "after": 415,
+      "removedIslands": 0,
+      "intermediateAlpha": 118
+    },
+    {
+      "node": "exercise-biceps-femoris-short.l",
+      "before": 219,
+      "after": 442,
+      "removedIslands": 0,
+      "intermediateAlpha": 118
+    },
+    {
+      "node": "exercise-biceps-femoris-short.r",
+      "before": 213,
+      "after": 432,
+      "removedIslands": 0,
+      "intermediateAlpha": 119
+    },
+    {
+      "node": "exercise-fibularis-longus.l",
+      "before": 160,
+      "after": 511,
+      "removedIslands": 0,
+      "intermediateAlpha": 181
+    },
+    {
+      "node": "exercise-fibularis-longus.r",
+      "before": 141,
+      "after": 488,
+      "removedIslands": 0,
+      "intermediateAlpha": 186
+    },
+    {
+      "node": "exercise-gastrocnemius-lateral.l",
+      "before": 218,
+      "after": 410,
+      "removedIslands": 0,
+      "intermediateAlpha": 105
+    },
+    {
+      "node": "exercise-gastrocnemius-lateral.r",
+      "before": 214,
+      "after": 420,
+      "removedIslands": 0,
+      "intermediateAlpha": 111
+    },
+    {
+      "node": "exercise-gastrocnemius-medial.l",
+      "before": 267,
+      "after": 507,
+      "removedIslands": 0,
+      "intermediateAlpha": 125
+    },
+    {
+      "node": "exercise-gastrocnemius-medial.r",
+      "before": 284,
+      "after": 515,
+      "removedIslands": 0,
+      "intermediateAlpha": 122
+    },
+    {
+      "node": "exercise-gluteus-maximus.l",
+      "before": 400,
+      "after": 867,
+      "removedIslands": 0,
+      "intermediateAlpha": 241
+    },
+    {
+      "node": "exercise-gluteus-maximus.r",
+      "before": 357,
+      "after": 824,
+      "removedIslands": 0,
+      "intermediateAlpha": 234
+    },
+    {
+      "node": "exercise-gluteus-medius.l",
+      "before": 80,
+      "after": 222,
+      "removedIslands": 0,
+      "intermediateAlpha": 75
+    },
+    {
+      "node": "exercise-gluteus-medius.r",
+      "before": 75,
+      "after": 251,
+      "removedIslands": 0,
+      "intermediateAlpha": 91
+    },
+    {
+      "node": "exercise-gluteus-minimus.l",
+      "before": 76,
+      "after": 246,
+      "removedIslands": 0,
+      "intermediateAlpha": 91
+    },
+    {
+      "node": "exercise-gluteus-minimus.r",
+      "before": 74,
+      "after": 219,
+      "removedIslands": 0,
+      "intermediateAlpha": 80
+    },
+    {
+      "node": "exercise-gracilis.l",
+      "before": 129,
+      "after": 426,
+      "removedIslands": 0,
+      "intermediateAlpha": 162
+    },
+    {
+      "node": "exercise-gracilis.r",
+      "before": 124,
+      "after": 439,
+      "removedIslands": 0,
+      "intermediateAlpha": 165
+    },
+    {
+      "node": "exercise-iliacus.l",
+      "before": 8,
+      "after": 125,
+      "removedIslands": 0,
+      "intermediateAlpha": 40
+    },
+    {
+      "node": "exercise-iliacus.r",
+      "before": 8,
+      "after": 118,
+      "removedIslands": 0,
+      "intermediateAlpha": 42
+    },
+    {
+      "node": "exercise-iliotibial-tract.l",
+      "before": 240,
+      "after": 634,
+      "removedIslands": 0,
+      "intermediateAlpha": 192
+    },
+    {
+      "node": "exercise-iliotibial-tract.r",
+      "before": 228,
+      "after": 568,
+      "removedIslands": 0,
+      "intermediateAlpha": 158
+    },
+    {
+      "node": "exercise-pectineus.l",
+      "before": 38,
+      "after": 148,
+      "removedIslands": 0,
+      "intermediateAlpha": 54
+    },
+    {
+      "node": "exercise-pectineus.r",
+      "before": 42,
+      "after": 139,
+      "removedIslands": 0,
+      "intermediateAlpha": 51
+    },
+    {
+      "node": "exercise-psoas-major.l",
+      "before": 13,
+      "after": 69,
+      "removedIslands": 0,
+      "intermediateAlpha": 24
+    },
+    {
+      "node": "exercise-psoas-major.r",
+      "before": 12,
+      "after": 68,
+      "removedIslands": 0,
+      "intermediateAlpha": 25
+    },
+    {
+      "node": "exercise-rectus-femoris.l",
+      "before": 180,
+      "after": 522,
+      "removedIslands": 0,
+      "intermediateAlpha": 196
+    },
+    {
+      "node": "exercise-rectus-femoris.r",
+      "before": 175,
+      "after": 532,
+      "removedIslands": 0,
+      "intermediateAlpha": 192
+    },
+    {
+      "node": "exercise-sartorius.l",
+      "before": 128,
+      "after": 485,
+      "removedIslands": 0,
+      "intermediateAlpha": 196
+    },
+    {
+      "node": "exercise-sartorius.r",
+      "before": 135,
+      "after": 480,
+      "removedIslands": 0,
+      "intermediateAlpha": 192
+    },
+    {
+      "node": "exercise-semimembranosus.l",
+      "before": 81,
+      "after": 337,
+      "removedIslands": 0,
+      "intermediateAlpha": 138
+    },
+    {
+      "node": "exercise-semimembranosus.r",
+      "before": 85,
+      "after": 353,
+      "removedIslands": 0,
+      "intermediateAlpha": 143
+    },
+    {
+      "node": "exercise-semitendinosus.l",
+      "before": 138,
+      "after": 374,
+      "removedIslands": 0,
+      "intermediateAlpha": 125
+    },
+    {
+      "node": "exercise-semitendinosus.r",
+      "before": 133,
+      "after": 348,
+      "removedIslands": 0,
+      "intermediateAlpha": 109
+    },
+    {
+      "node": "exercise-soleus.l",
+      "before": 109,
+      "after": 352,
+      "removedIslands": 0,
+      "intermediateAlpha": 136
+    },
+    {
+      "node": "exercise-soleus.r",
+      "before": 110,
+      "after": 350,
+      "removedIslands": 0,
+      "intermediateAlpha": 137
+    },
+    {
+      "node": "exercise-tensor-fasciae-latae.l",
+      "before": 63,
+      "after": 191,
+      "removedIslands": 0,
+      "intermediateAlpha": 67
+    },
+    {
+      "node": "exercise-tensor-fasciae-latae.r",
+      "before": 60,
+      "after": 214,
+      "removedIslands": 0,
+      "intermediateAlpha": 78
+    },
+    {
+      "node": "exercise-tibialis-anterior.l",
+      "before": 222,
+      "after": 497,
+      "removedIslands": 0,
+      "intermediateAlpha": 139
+    },
+    {
+      "node": "exercise-tibialis-anterior.r",
+      "before": 211,
+      "after": 476,
+      "removedIslands": 0,
+      "intermediateAlpha": 135
+    },
+    {
+      "node": "exercise-vastus-lateralis.l",
+      "before": 105,
+      "after": 299,
+      "removedIslands": 0,
+      "intermediateAlpha": 96
+    },
+    {
+      "node": "exercise-vastus-lateralis.r",
+      "before": 90,
+      "after": 278,
+      "removedIslands": 0,
+      "intermediateAlpha": 96
+    },
+    {
+      "node": "exercise-vastus-medialis.l",
+      "before": 87,
+      "after": 214,
+      "removedIslands": 0,
+      "intermediateAlpha": 69
+    },
+    {
+      "node": "exercise-vastus-medialis.r",
+      "before": 90,
+      "after": 222,
+      "removedIslands": 0,
+      "intermediateAlpha": 70
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "beforeGLBBytes": 0,
+  "afterGLBBytes": 1047684,
+  "models": {
+    "barbell": {
+      "beforeTriangles": 1536,
+      "afterTriangles": 35096,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -1.100000023841858,
+          -0.15000000596046448,
+          -0.15000000596046448
+        ],
+        "max": [
+          1.100000023841858,
+          0.15000000596046448,
+          0.15000000596046448
+        ]
+      }
+    },
+    "dumbbell": {
+      "beforeTriangles": 880,
+      "afterTriangles": 22784,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -0.16500000655651093,
+          -0.07000000029802322,
+          -0.07000000029802322
+        ],
+        "max": [
+          0.16500000655651093,
+          0.07000000029802322,
+          0.07000000029802322
+        ]
+      }
+    },
+    "bench": {
+      "beforeTriangles": 1212,
+      "afterTriangles": 28012,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -0.29750001430511475,
+          -0.44999998807907104,
+          -0.505346417427063
+        ],
+        "max": [
+          0.29750001430511475,
+          0.3808273673057556,
+          0.6189485788345337
+        ]
+      }
+    },
+    "rack": {
+      "beforeTriangles": 4704,
+      "afterTriangles": 21780,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -0.6600000262260437,
+          -3.799796033376879e-10,
+          -0.42499998211860657
+        ],
+        "max": [
+          0.6599999666213989,
+          1.4500000476837158,
+          0.2750000059604645
+        ]
+      }
+    },
+    "cable": {
+      "beforeTriangles": 1368,
+      "afterTriangles": 69492,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -0.25,
+          1.490116086078075e-10,
+          -0.6399999856948853
+        ],
+        "max": [
+          0.25,
+          2.1999998092651367,
+          0.044999998062849045
+        ]
+      }
+    },
+    "pulley": {
+      "beforeTriangles": 192,
+      "afterTriangles": 5240,
+      "beforeDraws": 1,
+      "afterDraws": 1,
+      "bounds": {
+        "min": [
+          -0.05249999836087227,
+          -0.07999999821186066,
+          -0.13699999451637268
+        ],
+        "max": [
+          0.05249999836087227,
+          0.07999999821186066,
+          0.04100000113248825
+        ]
+      }
+    }
+  },
+  "runtimeModels": {
+    "barbell": {
+      "beforeTriangles": 1536,
+      "afterTriangles": 35096,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    },
+    "dumbbell": {
+      "beforeTriangles": 880,
+      "afterTriangles": 22784,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    },
+    "bench": {
+      "beforeTriangles": 1212,
+      "afterTriangles": 28012,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    },
+    "rack": {
+      "beforeTriangles": 4704,
+      "afterTriangles": 21780,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    },
+    "cable": {
+      "beforeTriangles": 1368,
+      "afterTriangles": 64252,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    },
+    "pulley": {
+      "beforeTriangles": 192,
+      "afterTriangles": 5240,
+      "beforeDraws": 1,
+      "afterDraws": 1
+    }
+  },
+  "scope": "Review cable mesh includes output carriage; runtime uses cable frame plus separate output carriage. Runtime equipment remains old procedural geometry until patch applied."
+}

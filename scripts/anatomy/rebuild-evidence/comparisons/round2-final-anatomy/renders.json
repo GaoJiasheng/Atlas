@@ -1,0 +1,628 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-front.png",
+    "triangles": 59786,
+    "draws": 60,
+    "camera": {
+      "angle": 0,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033973995596170425
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-three-quarter.png",
+    "triangles": 59786,
+    "draws": 60,
+    "camera": {
+      "angle": 35,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033973995596170425
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-profile.png",
+    "triangles": 59786,
+    "draws": 60,
+    "camera": {
+      "angle": 90,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033973995596170425
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-detail.png",
+    "triangles": 59786,
+    "draws": 60,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -2.2351741790771484e-8,
+        -0.018990814685821533,
+        0.014750202186405659
+      ],
+      "height": 0.3999729728698731
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-body.png",
+    "triangles": 53726,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000043019652366638184,
+        -0.39391469955444336,
+        0.029446832835674286
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/arms-body-front.png",
+    "triangles": 53726,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.39391469955444336,
+        0.029446832835674286
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/hand-dorsal.png",
+    "triangles": 9634,
+    "draws": 1,
+    "camera": {
+      "angle": 180,
+      "target": [
+        0.281981885433197,
+        -0.4736562818288803,
+        0.08132118545472622
+      ],
+      "height": 0.1907237246632576
+    },
+    "width": 640,
+    "height": 800,
+    "imageInPlaneRotationDeg": 180,
+    "directionVerification": "Decoded dorsal surface/nail relief visually confirmed from180; earlier pre-shell occlusion calculation retained as historical audit"
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-front.png",
+    "triangles": 75716,
+    "draws": 58,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000007525086402893066,
+        -0.055838167667388916,
+        0.04690415412187576
+      ],
+      "height": 0.9684437942504883
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-three-quarter.png",
+    "triangles": 75716,
+    "draws": 58,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000007525086402893066,
+        -0.055838167667388916,
+        0.04690415412187576
+      ],
+      "height": 0.9684437942504883
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-profile.png",
+    "triangles": 75716,
+    "draws": 58,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000007525086402893066,
+        -0.055838167667388916,
+        0.04690415412187576
+      ],
+      "height": 0.9684437942504883
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-posterior.png",
+    "triangles": 75716,
+    "draws": 58,
+    "camera": {
+      "angle": 180,
+      "target": [
+        -0.000007525086402893066,
+        -0.055838167667388916,
+        0.04690415412187576
+      ],
+      "height": 0.9684437942504883
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-detail.png",
+    "triangles": 75716,
+    "draws": 58,
+    "camera": {
+      "angle": 180,
+      "target": [
+        1.4901161193847656e-8,
+        0.14917334914207458,
+        -0.015608856454491615
+      ],
+      "height": 0.5092179965972901
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-body.png",
+    "triangles": 53718,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000043019652366638184,
+        -0.34378790855407715,
+        0.04792868345975876
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/back-body-front.png",
+    "triangles": 53718,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.34378790855407715,
+        0.04792868345975876
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-front.png",
+    "triangles": 88387,
+    "draws": 38,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000016495585441589355,
+        -0.19820984825491905,
+        -0.05189889296889305
+      ],
+      "height": 0.6749217975139619
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-three-quarter.png",
+    "triangles": 88387,
+    "draws": 38,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000016495585441589355,
+        -0.19820984825491905,
+        -0.05189889296889305
+      ],
+      "height": 0.6749217975139619
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-profile.png",
+    "triangles": 88387,
+    "draws": 38,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000016495585441589355,
+        -0.19820984825491905,
+        -0.05189889296889305
+      ],
+      "height": 0.6749217975139619
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-detail.png",
+    "triangles": 88387,
+    "draws": 38,
+    "camera": {
+      "angle": 20,
+      "target": [
+        0.00001648813486099243,
+        -0.059452299028635025,
+        -0.0002540759742259979
+      ],
+      "height": 0.2657785713672638
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-body.png",
+    "triangles": 53716,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.00005950033664703369,
+        -0.49548840522766113,
+        -0.056343402713537216
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/chest-body-front.png",
+    "triangles": 53716,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.00005950033664703369,
+        -0.49548840522766113,
+        -0.056343402713537216
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-front.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-three-quarter.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-profile.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000041075050830841064,
+        -0.09892408549785614,
+        0.03409210219979286
+      ],
+      "height": 1.1457153081893923
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-detail.png",
+    "triangles": 97268,
+    "draws": 32,
+    "camera": {
+      "angle": 20,
+      "target": [
+        5.774199962615967e-7,
+        0.013624534010887146,
+        0.11376534774899483
+      ],
+      "height": 0.45733146190643315
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-body.png",
+    "triangles": 53754,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000043019652366638184,
+        -0.18603742122650146,
+        0.03013020008802414
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/core-body-front.png",
+    "triangles": 53754,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.18603742122650146,
+        0.03013020008802414
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-front.png",
+    "triangles": 65080,
+    "draws": 62,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.000032685697078704834,
+        -0.32871514558792114,
+        0.05536281690001488
+      ],
+      "height": 1.2840586280822754
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-three-quarter.png",
+    "triangles": 65080,
+    "draws": 62,
+    "camera": {
+      "angle": 35,
+      "target": [
+        -0.000032685697078704834,
+        -0.32871514558792114,
+        0.05536281690001488
+      ],
+      "height": 1.2840586280822754
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-profile.png",
+    "triangles": 65080,
+    "draws": 62,
+    "camera": {
+      "angle": 90,
+      "target": [
+        -0.000032685697078704834,
+        -0.32871514558792114,
+        0.05536281690001488
+      ],
+      "height": 1.2840586280822754
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-detail.png",
+    "triangles": 65080,
+    "draws": 62,
+    "camera": {
+      "angle": 180,
+      "target": [
+        -0.0000023096799850463867,
+        -0.5550059378147125,
+        -0.019614780321717262
+      ],
+      "height": 0.33529572486877446
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-body.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000043019652366638184,
+        -0.05677211284637451,
+        0.04135493189096451
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/legs-body-front.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.05677211284637451,
+        0.04135493189096451
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/foot-profile.png",
+    "triangles": 53748,
+    "draws": 3,
+    "camera": {
+      "angle": 270,
+      "target": [
+        -0.08,
+        -0.8019906425476074,
+        0.060929931700229645
+      ],
+      "height": 0.42
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-front.png",
+    "triangles": 46184,
+    "draws": 44,
+    "camera": {
+      "angle": 0,
+      "target": [
+        1.4901161193847656e-8,
+        -0.2058144509792328,
+        -0.0031651705503463745
+      ],
+      "height": 0.780840768814087
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-three-quarter.png",
+    "triangles": 46184,
+    "draws": 44,
+    "camera": {
+      "angle": 35,
+      "target": [
+        1.4901161193847656e-8,
+        -0.2058144509792328,
+        -0.0031651705503463745
+      ],
+      "height": 0.780840768814087
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-profile.png",
+    "triangles": 46184,
+    "draws": 44,
+    "camera": {
+      "angle": 90,
+      "target": [
+        1.4901161193847656e-8,
+        -0.2058144509792328,
+        -0.0031651705503463745
+      ],
+      "height": 0.780840768814087
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-detail.png",
+    "triangles": 46184,
+    "draws": 44,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -1.4901161193847656e-8,
+        -0.0729156956076622,
+        -0.042666852474212646
+      ],
+      "height": 0.22
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-body.png",
+    "triangles": 53700,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        0.000043019652366638184,
+        -0.5556380748748779,
+        -0.0026206448674201965
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/round2-final-anatomy/shoulders-body-front.png",
+    "triangles": 53700,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000043019652366638184,
+        -0.5556380748748779,
+        -0.0026206448674201965
+      ],
+      "height": 1.915689506530762
+    },
+    "width": 640,
+    "height": 800
+  }
+]

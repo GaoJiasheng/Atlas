@@ -1,0 +1,298 @@
+{
+  "studio": {
+    "source": "src/engines/space-scene/stages/model3d/Lighting.tsx",
+    "executingSourceSha256": "390534a055203ee1dfacdecbcdeb3c8171e5b3ecc69ec11271a56a2120e0f6e0",
+    "roomFingerprint": "166d09d88824f4a134b46385258412339f7ac3d7a5588fbc501201ee8b81b58c",
+    "rigs": {
+      "paper": {
+        "hemi": [
+          [
+            1,
+            0.9215818562755338,
+            0.8069522576650873
+          ],
+          [
+            0.5840784178830671,
+            0.514917665367466,
+            0.3813260114221238
+          ],
+          0.75
+        ],
+        "lights": [
+          [
+            "#fff0dc",
+            2.6,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#e9edf0",
+            0.55,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#ffffff",
+            0.9,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.7,
+        "exposure": 1.05
+      },
+      "cinema": {
+        "hemi": [
+          [
+            0.4019777798219466,
+            0.45641102317066595,
+            0.514917665367466
+          ],
+          [
+            0.008568125615105716,
+            0.009134058699157796,
+            0.010329823026364548
+          ],
+          0.35
+        ],
+        "lights": [
+          [
+            "#e9eff5",
+            2.4,
+            [
+              0.55,
+              1,
+              0.7
+            ]
+          ],
+          [
+            "#c9d1d9",
+            0.28,
+            [
+              -1,
+              0.35,
+              0.45
+            ]
+          ],
+          [
+            "#f2f2f2",
+            1.15,
+            [
+              -1,
+              0.45,
+              -0.7
+            ]
+          ]
+        ],
+        "env": 0.8,
+        "exposure": 1
+      }
+    },
+    "backend": "CPU depth raster; GGX / sampled installed RoomEnvironment / material emission / ACES / sRGB",
+    "limits": "No GPU, shader derivative micrograin, screen AA, shadows or exercise contact acceptance. Roughness map uses its approximate mean."
+  },
+  "materialPatch": "--- a/src/engines/space-scene/stages/model3d/PartNode.tsx\n+++ b/src/engines/space-scene/stages/model3d/PartNode.tsx\n@@ -1,3 +1,4 @@\n+import { applyExerciseMaskDepth, exerciseMaskVisible } from '../../../../content/topics/muscles-core/runtime/highlight';\n /**\n  * One part on the stage: position (shared eased explode), fade (visibility /\n  * x-ray / faint), put-aside motion (`hide`: slide out along the explode\n@@ -666,10 +667,10 @@\n   // material remain unchanged for restoration. Layer/aside fades still run.\n   useLayoutEffect(() => {\n     const m = motion.current;\n-    const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown);\n+    const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown) && exerciseMaskVisible(exerciseMask, display.tint);\n     const changed = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, props.castShadow && shown && m.fade > .6);\n     if (changed) { runtime.shadowDirty = true; props.fillBridge?.invalidate(); }\n-  }, [props.instantHidden, display.visible, props.castShadow, props.fill, props.fillBridge, handle, runtime]);\n+  }, [props.instantHidden, display.visible, display.tint, exerciseMask, props.castShadow, props.fill, props.fillBridge, handle, runtime]);\n \n   // Hidden, faint and context parts do not take part in picking (clicks pass through).\n   const pickable = display.visible && display.selectable;\n@@ -748,7 +749,7 @@\n     const prevFade = m.fade;\n     m.fade = m.base * (1 - smooth(0.45, 1, m.aside));\n     const targetFade = display.hidden ? 0 : targetBase;\n-    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown);\n+    const shown = !props.instantHidden && m.fade > 0.004 && (!fill || fm.shown) && exerciseMaskVisible(exerciseMask, display.tint);\n     if (fill && props.fillBridge) {\n       const reading = props.fillBridge.fills.get(part.id);\n       const volume = fm.shown ? fm.volume : 0;\n@@ -757,6 +758,7 @@\n     }\n     pms.forEach((pm, i) => {\n       const mat = pm.material;\n+      applyExerciseMaskDepth(mat, exerciseMask);\n       if (exerciseMask) fadePartMaterial(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost, true);\n       else (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);\n     });\n",
+  "rows": [
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-paper-beat.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 1.9026268577575685
+      },
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-paper-0.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-paper-35.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-paper-90.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-cinema-beat.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 1.9026268577575685
+      },
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-start-cinema-35.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.05094057321548462,
+          -0.02479393780231476
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-paper-beat.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.3311071348190309
+      },
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-paper-0.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-paper-35.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-paper-90.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-cinema-beat.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 1.3311071348190309
+      },
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "scripts/anatomy/round3/comparisons/look2/barbell-back-squat-end-cinema-35.png",
+      "triangles": 77641,
+      "draws": 14,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          0.11183790862560272,
+          0.20229841396212578
+        ],
+        "height": 3.1075000673532482
+      },
+      "width": 720,
+      "height": 900
+    }
+  ]
+}

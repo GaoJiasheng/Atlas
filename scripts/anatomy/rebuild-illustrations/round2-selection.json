@@ -1,0 +1,16 @@
+{
+  "covers": {
+    "arms": 2,
+    "back": 2,
+    "chest": 2,
+    "core": 1,
+    "legs": 1,
+    "shoulders": 2
+  },
+  "exercises": {
+    "barbell-bench-press": 4,
+    "heel-walk": 1,
+    "cable-hip-adduction": 1
+  },
+  "pipeline": "scripts/illustrate.ts unchanged in shadow workspace"
+}

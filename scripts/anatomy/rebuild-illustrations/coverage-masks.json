@@ -1,0 +1,122 @@
+{
+  "muscles-arms": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "00017a9779a60000",
+      "0005ffffffff4000",
+      "0005ffffffff4000",
+      "0006ffffffff4000",
+      "0007ebffffbf5000",
+      "000ba4fffe4d9000",
+      "003f83fffe3be200",
+      "004f55ffff58f300",
+      "006c07ffff62e500",
+      "009801698610a900",
+      "04f7000000008f40",
+      "05f7000000008e50",
+      "0293000000003920",
+      "0000000000000000"
+    ]
+  },
+  "muscles-back": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "0000003443000000",
+      "00049bfffeb83000",
+      "002effffffffc100",
+      "004fffffffffe300",
+      "003fffffffffe200",
+      "006ffffffffef500",
+      "007e9ffffff9f600",
+      "00cc3effffe3cc00",
+      "02fa1dffffd0ae20",
+      "02f80cffffc09e20",
+      "00b43fffffe24b00",
+      "00207ffffff50200",
+      "00006cccccc50000",
+      "0000000100000000"
+    ]
+  },
+  "muscles-chest": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "0000000000000000",
+      "0000000000000000",
+      "0001210000121000",
+      "019dedb88bded910",
+      "07ffffffffffff70",
+      "0bffffffffffffb0",
+      "0affffffffffffa0",
+      "0affffffffffffa0",
+      "0bfcffffffffcfb0",
+      "0ce5effffffe5ec0",
+      "1db1cffffffb1cd1",
+      "1c80affffff809c1",
+      "01107aaaaaa60210",
+      "0000000000000000"
+    ]
+  },
+  "muscles-core": {
+    "mask": [
+      "0000000000000000",
+      "007ccabbbbbbc600",
+      "007ffffffffff700",
+      "003effffffffd200",
+      "000affffffff9000",
+      "0006ffffffff5000",
+      "0002effffffd1000",
+      "0001cffffffb0000",
+      "0000affffff80000",
+      "0000bffffffa0000",
+      "0003effffffe2000",
+      "0004fffffffe2000",
+      "0005ffffffff4000",
+      "00029effffe82000",
+      "000004adda400000",
+      "0000000000000000"
+    ]
+  },
+  "muscles-legs": {
+    "mask": [
+      "0000001000000000",
+      "000002caab200000",
+      "000003ffff300000",
+      "000005ffef500000",
+      "000006fedf600000",
+      "000005fcbf400000",
+      "000002ebbe200000",
+      "000001d89d100000",
+      "000002e66e200000",
+      "000003f77f400000",
+      "000002f55e200000",
+      "000001c33c000000",
+      "0000009339000000",
+      "000000b33b000000",
+      "000002c22c200000",
+      "0000001001000000"
+    ]
+  },
+  "muscles-shoulders": {
+    "mask": [
+      "0000000000000000",
+      "0000000000000000",
+      "0000000000000000",
+      "0000013333100000",
+      "0047adffffda7400",
+      "06ffffffffffff60",
+      "1cffffffffffffc1",
+      "1effffffffffffd2",
+      "0bffffffffffffc0",
+      "0cffffffffffffc0",
+      "1eecffffffffcfd2",
+      "1ee5effffffe5ed1",
+      "1ec0affffffa1ce1",
+      "09907ddedbb60a90",
+      "0010101220000100",
+      "0000000000000000"
+    ]
+  }
+}

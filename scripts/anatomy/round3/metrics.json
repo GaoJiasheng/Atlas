@@ -1,0 +1,172 @@
+[
+  {
+    "topic": "core",
+    "beforeBytes": 1386608,
+    "afterBytes": 1396164,
+    "before": {
+      "triangles": 190567,
+      "draws": 58,
+      "maskTriangles": 4973
+    },
+    "after": {
+      "triangles": 191113,
+      "draws": 62,
+      "maskTriangles": 5519
+    },
+    "nativePrimitivesUnchanged": 36,
+    "sha256": "8ef757c15f38ac8b78421b08a0bfd5fddd37d673a85fb9bdd5fc314eef2e244e"
+  },
+  {
+    "topic": "back",
+    "beforeBytes": 1363952,
+    "afterBytes": 1376788,
+    "before": {
+      "triangles": 172369,
+      "draws": 97,
+      "maskTriangles": 8407
+    },
+    "after": {
+      "triangles": 173642,
+      "draws": 102,
+      "maskTriangles": 9680
+    },
+    "nativePrimitivesUnchanged": 62,
+    "sha256": "2ee8ffba7188dc0d902bca78ee38484d0e3a98717dd35233bbad1312681fcb95"
+  },
+  {
+    "topic": "chest",
+    "beforeBytes": 1364000,
+    "afterBytes": 1369752,
+    "before": {
+      "triangles": 183213,
+      "draws": 62,
+      "maskTriangles": 6560
+    },
+    "after": {
+      "triangles": 184009,
+      "draws": 64,
+      "maskTriangles": 7356
+    },
+    "nativePrimitivesUnchanged": 42,
+    "sha256": "a4869d4447740c2ab5ed9cf9f59504f101e2bc825e57da99687e629393165d53"
+  },
+  {
+    "topic": "arms",
+    "beforeBytes": 1320728,
+    "afterBytes": 1320728,
+    "before": {
+      "triangles": 154894,
+      "draws": 112,
+      "maskTriangles": 6846
+    },
+    "after": {
+      "triangles": 154894,
+      "draws": 112,
+      "maskTriangles": 6846
+    },
+    "nativePrimitivesUnchanged": 64,
+    "sha256": "3f2f702a7f95692d1c5a96da8bb964c136815887c77ea148dce4d804418e6a4b"
+  },
+  {
+    "topic": "legs",
+    "beforeBytes": 1341536,
+    "afterBytes": 1350972,
+    "before": {
+      "triangles": 159064,
+      "draws": 110,
+      "maskTriangles": 5674
+    },
+    "after": {
+      "triangles": 159646,
+      "draws": 114,
+      "maskTriangles": 6256
+    },
+    "nativePrimitivesUnchanged": 66,
+    "sha256": "6e0ed644f409b81ed6f12fb10800419d748acb23804604f81618b6bf49c913d2"
+  },
+  {
+    "topic": "shoulders",
+    "beforeBytes": 1021188,
+    "afterBytes": 1045368,
+    "before": {
+      "triangles": 140347,
+      "draws": 72,
+      "maskTriangles": 5941
+    },
+    "after": {
+      "triangles": 142196,
+      "draws": 82,
+      "maskTriangles": 7790
+    },
+    "nativePrimitivesUnchanged": 48,
+    "sha256": "df7f5b6d49ecf9360de5565bbdfbfda2155f0ecbf30f6b76c0c24561ad2401fa"
+  },
+  {
+    "topic": "core-gym",
+    "beforeBytes": 1312116,
+    "afterBytes": 1312116,
+    "before": {
+      "triangles": 225616,
+      "draws": 9,
+      "maskTriangles": 0
+    },
+    "after": {
+      "triangles": 225616,
+      "draws": 9,
+      "maskTriangles": 0
+    },
+    "nativePrimitivesUnchanged": 0,
+    "sha256": "d49022f0717e472660c028089347633aba6c3e48588390adda2a42929b5b8dd9"
+  },
+  {
+    "topic": "back-pulldown",
+    "beforeBytes": 515228,
+    "afterBytes": 519412,
+    "before": {
+      "triangles": 94732,
+      "draws": 4,
+      "maskTriangles": 0
+    },
+    "after": {
+      "triangles": 94732,
+      "draws": 4,
+      "maskTriangles": 0
+    },
+    "nativePrimitivesUnchanged": 0,
+    "sha256": "4baa4dc5fc49212e32ea86e599e51e0e4f330cc493d457b74e6e512fee2ffdeb"
+  },
+  {
+    "topic": "core-linea",
+    "beforeBytes": 10608,
+    "afterBytes": 10608,
+    "before": {
+      "triangles": 2324,
+      "draws": 1,
+      "maskTriangles": 0
+    },
+    "after": {
+      "triangles": 2324,
+      "draws": 1,
+      "maskTriangles": 0
+    },
+    "nativePrimitivesUnchanged": 0,
+    "sha256": "af47ecd1ecbe1eaef189e6ab79cdfaedc0da36b546b66048c4034b744f4754b0"
+  },
+  {
+    "topic": "arms-hands",
+    "beforeBytes": 362668,
+    "afterBytes": 362668,
+    "before": {
+      "triangles": 54000,
+      "draws": 6,
+      "maskTriangles": 0
+    },
+    "after": {
+      "triangles": 54000,
+      "draws": 6,
+      "maskTriangles": 0
+    },
+    "nativePrimitivesUnchanged": 0,
+    "sha256": "c678d476b6906100d0c41f1bc7d236d0fbb6925b1e9ffd856258869f4aff0475"
+  }
+]

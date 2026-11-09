@@ -1,0 +1,188 @@
+[
+  {
+    "topic": "core",
+    "node": "exercise-external-oblique.l",
+    "before": 603,
+    "after": 387
+  },
+  {
+    "topic": "core",
+    "node": "exercise-external-oblique.r",
+    "before": 627,
+    "after": 416
+  },
+  {
+    "topic": "core",
+    "node": "exercise-internal-oblique.l",
+    "before": 21,
+    "after": 18
+  },
+  {
+    "topic": "core",
+    "node": "exercise-internal-oblique.r",
+    "before": 26,
+    "after": 22
+  },
+  {
+    "topic": "core",
+    "node": "exercise-rectus-abdominis.l",
+    "before": 23,
+    "after": 233
+  },
+  {
+    "topic": "core",
+    "node": "exercise-rectus-abdominis.r",
+    "before": 21,
+    "after": 228
+  },
+  {
+    "topic": "core",
+    "node": "exercise-multifidus-lumborum.l",
+    "before": 0,
+    "after": 108
+  },
+  {
+    "topic": "core",
+    "node": "exercise-multifidus-lumborum.r",
+    "before": 0,
+    "after": 110
+  },
+  {
+    "topic": "core",
+    "node": "exercise-quadratus-lumborum.l",
+    "before": 0,
+    "after": 168
+  },
+  {
+    "topic": "core",
+    "node": "exercise-quadratus-lumborum.r",
+    "before": 0,
+    "after": 177
+  },
+  {
+    "topic": "back",
+    "node": "exercise-longissimus-thoracis.r",
+    "before": 0,
+    "after": 567
+  },
+  {
+    "topic": "back",
+    "node": "exercise-rhomboid-major.l",
+    "before": 0,
+    "after": 205
+  },
+  {
+    "topic": "back",
+    "node": "exercise-rhomboid-major.r",
+    "before": 0,
+    "after": 250
+  },
+  {
+    "topic": "back",
+    "node": "exercise-teres-major.l",
+    "before": 0,
+    "after": 126
+  },
+  {
+    "topic": "back",
+    "node": "exercise-teres-major.r",
+    "before": 0,
+    "after": 125
+  },
+  {
+    "topic": "chest",
+    "node": "exercise-pectoralis-minor.l",
+    "before": 0,
+    "after": 523
+  },
+  {
+    "topic": "chest",
+    "node": "exercise-pectoralis-minor.r",
+    "before": 0,
+    "after": 273
+  },
+  {
+    "topic": "legs",
+    "node": "exercise-biceps-femoris-short.l",
+    "before": 0,
+    "after": 219
+  },
+  {
+    "topic": "legs",
+    "node": "exercise-biceps-femoris-short.r",
+    "before": 0,
+    "after": 213
+  },
+  {
+    "topic": "legs",
+    "node": "exercise-gluteus-minimus.l",
+    "before": 0,
+    "after": 76
+  },
+  {
+    "topic": "legs",
+    "node": "exercise-gluteus-minimus.r",
+    "before": 0,
+    "after": 74
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-rhomboid-major.l",
+    "before": 0,
+    "after": 204
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-rhomboid-major.r",
+    "before": 0,
+    "after": 248
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-subscapularis.l",
+    "before": 0,
+    "after": 405
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-subscapularis.r",
+    "before": 0,
+    "after": 211
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-supraspinatus.l",
+    "before": 0,
+    "after": 158
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-supraspinatus.r",
+    "before": 0,
+    "after": 109
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-teres-major.l",
+    "before": 0,
+    "after": 126
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-teres-major.r",
+    "before": 0,
+    "after": 125
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-teres-minor.l",
+    "before": 0,
+    "after": 135
+  },
+  {
+    "topic": "shoulders",
+    "node": "exercise-teres-minor.r",
+    "before": 0,
+    "after": 128
+  }
+]

@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-09",
+  "mode": "actual compressed core GLB body meshes; native rig; engine studio / ACES",
+  "rows": [
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/standing-0.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0.000043019652366638184,
+          -0.18598061800003052,
+          0.03015032783150673
+        ],
+        "height": 1.9158167457580568
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/hips-0.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          -0.18048502445220949,
+          0.03147326037287712
+        ],
+        "height": 0.58
+      },
+      "width": 900,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/standing-35.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0.000043019652366638184,
+          -0.18598061800003052,
+          0.03015032783150673
+        ],
+        "height": 1.9158167457580568
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/hips-35.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          0,
+          -0.18048502445220949,
+          0.03147326037287712
+        ],
+        "height": 0.58
+      },
+      "width": 900,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/standing-90.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0.000043019652366638184,
+          -0.18598061800003052,
+          0.03015032783150673
+        ],
+        "height": 1.9158167457580568
+      },
+      "width": 720,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/hips-90.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          0,
+          -0.18048502445220949,
+          0.03147326037287712
+        ],
+        "height": 0.58
+      },
+      "width": 900,
+      "height": 900
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/supine-hips-0.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.041816120513250885,
+          0.17837270597048993
+        ],
+        "height": 0.7
+      },
+      "width": 900,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/supine-hips-35.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.041816120513250885,
+          0.17837270597048993
+        ],
+        "height": 0.7
+      },
+      "width": 900,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/neutral-cap/cap-look2/supine-hips-90.png",
+      "triangles": 45602,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          0,
+          0.041816120513250885,
+          0.17837270597048993
+        ],
+        "height": 0.7
+      },
+      "width": 900,
+      "height": 800
+    }
+  ]
+}

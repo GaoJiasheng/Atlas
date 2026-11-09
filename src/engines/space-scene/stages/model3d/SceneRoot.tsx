@@ -67,6 +67,8 @@ const OrbitSceneRoot = lazy(() => import('./OrbitSceneRoot'));
 const SoundClock = lazy(() => import('./SoundClock').then(m => ({ default: m.SoundClock })));
 const Flows = lazy(() => import('./Flows').then(m => ({ default: m.Flows })));
 const MotionDriver = lazy(() => import('./MotionDriver').then(m => ({ default: m.MotionDriver })));
+// The linea alba carries its own source profile: only topics with a rectus abdominis load it.
+const LineaAlba = lazy(() => import('./LineaAlba').then(m => ({ default: m.LineaAlba })));
 const Equipment = lazy(() => import('./Equipment').then(m => ({ default: m.Equipment })));
 const Mannequin = lazy(() => import('./Mannequin').then(m => ({ default: m.Mannequin })));
 const WireBody = lazy(() => import('./WireBody').then(m => ({ default: m.WireBody })));
@@ -654,6 +656,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
         />
       )}
       {rig && <primitive object={rig.root} />}
+      {rig && data.parts.some((p) => p.muscle === 'rectus-abdominis') && <Suspense fallback={null}><LineaAlba rig={rig} model={data.model ?? ''} color={resolveDataColor('token:bone',look.tokens,look.theme,'#d7d0c3')} clipping={clipping} opacity={mannequin ? 0 : Math.max(0,...data.parts.filter(p=>p.muscle==='rectus-abdominis').map(p=>{const d=displays.get(p.id);return d?.visible ? d.opacity : 0;}))} /></Suspense>}
       {equipment.length > 0 && (
         <Equipment specs={equipment} held={false} grips={grips} footing={footing} trunk={trunkBone} style={equipmentStyle} solid={mannequin} thin={body === 'wire'} />
       )}

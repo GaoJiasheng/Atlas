@@ -49,7 +49,7 @@
  * The cable's `rope` handle: a short grip in each palm, two strands to the
  * cable's end 0.2 m toward the pulley.
  */
-import type { ContactKind, EquipmentKind } from '../../../lib/anatomy';
+import { equipmentList, type ContactKind, type EquipmentKind } from '../../../lib/anatomy';
 import type { Primitive } from '../schema';
 import { isStanding } from './stance';
 
@@ -166,13 +166,14 @@ const latheX = (profile: [number, number][], at: V3, segments = 40): Prim =>
   ({ kind: 'lathe', profile, segments, at: [...at], rotation: [0, 0, 90], color: grey }) as Prim;
 
 export function barbellShape(): EquipmentShape {
-  const sleeveAt = BAR.length / 2 - BAR.sleeveLength / 2;
-  // Plates sit on the inner end of each sleeve, against the collar.
-  const plateAt = BAR.length / 2 - BAR.sleeveLength + 0.03 + BAR.plateThick / 2;
-  const plate = (x: number): Prim => latheX(chamferRing(BAR.plate / 2, -BAR.plateThick / 2, BAR.plateThick / 2, 0.006), [x, 0, 0], 48);
+  const sleeveAt = (BAR.length - BAR.sleeveLength) / 2;
+  const plateAt = BAR.length / 2 - BAR.sleeveLength + .03 + BAR.plateThick / 2;
   return {
     primitive: alongX(BAR.shaft, BAR.length - 2 * BAR.sleeveLength, [0, 0, 0]),
-    extra: [alongX(BAR.sleeve, BAR.sleeveLength, [-sleeveAt, 0, 0]), alongX(BAR.sleeve, BAR.sleeveLength, [sleeveAt, 0, 0]), plate(-plateAt), plate(plateAt)],
+    extra: [-1, 1].flatMap(side => [
+      alongX(BAR.sleeve, BAR.sleeveLength, [side * sleeveAt, 0, 0]),
+      latheX(chamferRing(BAR.plate / 2, -BAR.plateThick / 2, BAR.plateThick / 2, .006), [side * plateAt, 0, 0], 48),
+    ]),
   };
 }
 
@@ -617,7 +618,7 @@ export function heldReach(list: readonly Placed[]): number {
  */
 export function heldSpan(motion: { root?: { rotation: readonly number[] } | undefined; equipment?: Placed | readonly Placed[] | undefined } | undefined): { half: number; yaw: number } | null {
   if (!motion) return null;
-  const list = motion.equipment === undefined ? [] : Array.isArray(motion.equipment) ? (motion.equipment as readonly Placed[]) : [motion.equipment as Placed];
+  const list = equipmentList(motion.equipment);
   if (!list.some((e) => e.kind === 'barbell')) return null;
   if (!isStanding(motion.root?.rotation, list)) return null;
   return { half: BAR.length / 2, yaw: motion.root?.rotation[1] ?? 0 };
@@ -637,7 +638,7 @@ export function defaultContacts(motion: {
   feet?: string | undefined;
 }): ContactKind[] {
   if (motion.contacts) return [...motion.contacts];
-  const list = motion.equipment === undefined ? [] : Array.isArray(motion.equipment) ? (motion.equipment as readonly Placed[]) : [motion.equipment as Placed];
+  const list = equipmentList(motion.equipment);
   if (list.some((e) => EQUIPMENT_INFO[e.kind].holdsHands)) return ['hands'];
   // Face down on the floor: the palms and the feet (the pair is dropped when the rig has no hands).
   if (list.some((e) => e.kind === 'floor') && (motion.root?.rotation[0] ?? 0) >= 30) return ['hands', 'feet'];

@@ -1,0 +1,24 @@
+[
+  {
+    "topic": "legs",
+    "node": "gluteus-minimus.l",
+    "triangles": 76,
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "method": "Native deep-muscle anatomical footprint projected to corresponding body surface; x-ray teaching region, not exposed skin anatomy."
+  },
+  {
+    "topic": "legs",
+    "node": "gluteus-minimus.r",
+    "triangles": 74,
+    "direction": [
+      -1,
+      0,
+      0
+    ],
+    "method": "Native deep-muscle anatomical footprint projected to corresponding body surface; x-ray teaching region, not exposed skin anatomy."
+  }
+]

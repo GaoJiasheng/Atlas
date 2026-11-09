@@ -4,7 +4,7 @@
  * wire figure's feature edges, and the stand-in wire mesh for a glb without a
  * `skin-wire` node (the skin outline decimated at load).
  *
- * Derived geometries share the source's attribute buffers and only carry a
+ * Derived geometries own their attribute buffers and carry a
  * new index, so they skin to the same skeleton with the same bind matrix.
  */
 import { BufferAttribute, BufferGeometry, Float32BufferAttribute, Vector3, type Bone, type Matrix4, type Object3D, type Skeleton } from 'three';
@@ -57,7 +57,9 @@ function indexOf(geometry: BufferGeometry): ArrayLike<number> {
 
 function withIndex(source: BufferGeometry, index: number[]): BufferGeometry {
   const out = new BufferGeometry();
-  for (const [name, attr] of Object.entries(source.attributes)) out.setAttribute(name, attr);
+  // Disposing a view must not delete buffers still bound by a live view.
+  const data = {};
+  for (const [name, attr] of Object.entries(source.attributes)) out.setAttribute(name, attr.clone(data));
   out.setIndex(index);
   return out;
 }

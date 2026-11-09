@@ -1,0 +1,434 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/arms-front.png",
+    "triangles": 163802,
+    "draws": 60,
+    "camera": {
+      "angle": 0,
+      "target": [
+        3.8743019104003906e-7,
+        -0.18717321753501892,
+        0.033978596329689026
+      ],
+      "height": 0.8120412158966065
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/arms-three-quarter.png",
+    "triangles": 163802,
+    "draws": 60,
+    "camera": {
+      "angle": 35,
+      "target": [
+        3.8743019104003906e-7,
+        -0.18717321753501892,
+        0.033978596329689026
+      ],
+      "height": 0.8120412158966065
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/arms-profile.png",
+    "triangles": 163802,
+    "draws": 60,
+    "camera": {
+      "angle": 90,
+      "target": [
+        3.8743019104003906e-7,
+        -0.18717321753501892,
+        0.033978596329689026
+      ],
+      "height": 0.8120412158966065
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/arms-detail.png",
+    "triangles": 163802,
+    "draws": 60,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -2.2351741790771484e-8,
+        -0.018990814685821533,
+        0.01434967340901494
+      ],
+      "height": 0.3999729728698731
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/arms-body.png",
+    "triangles": 32192,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.00009010732173919678,
+        -0.39376354217529297,
+        0.02948981523513794
+      ],
+      "height": 1.9151493072509767
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/hand-dorsal.png",
+    "triangles": 1853,
+    "draws": 1,
+    "camera": {
+      "angle": 180,
+      "target": [
+        0.2818460762500763,
+        -0.4738522171974182,
+        0.08184108510613441
+      ],
+      "height": 0.19056260585784912
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-front.png",
+    "triangles": 238088,
+    "draws": 58,
+    "camera": {
+      "angle": 0,
+      "target": [
+        4.470348358154297e-7,
+        -0.056008800864219666,
+        0.046902138739824295
+      ],
+      "height": 0.9688260793685914
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-three-quarter.png",
+    "triangles": 238088,
+    "draws": 58,
+    "camera": {
+      "angle": 35,
+      "target": [
+        4.470348358154297e-7,
+        -0.056008800864219666,
+        0.046902138739824295
+      ],
+      "height": 0.9688260793685914
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-profile.png",
+    "triangles": 238088,
+    "draws": 58,
+    "camera": {
+      "angle": 90,
+      "target": [
+        4.470348358154297e-7,
+        -0.056008800864219666,
+        0.046902138739824295
+      ],
+      "height": 0.9688260793685914
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-posterior.png",
+    "triangles": 238088,
+    "draws": 58,
+    "camera": {
+      "angle": 180,
+      "target": [
+        4.470348358154297e-7,
+        -0.056008800864219666,
+        0.046902138739824295
+      ],
+      "height": 0.9688260793685914
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-detail.png",
+    "triangles": 238088,
+    "draws": 58,
+    "camera": {
+      "angle": 180,
+      "target": [
+        1.4901161193847656e-8,
+        0.14917336404323578,
+        -0.015598589554429054
+      ],
+      "height": 0.5092180299758912
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/back-body.png",
+    "triangles": 32187,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.00008997321128845215,
+        -0.3436282277107239,
+        0.048003219068050385
+      ],
+      "height": 1.9151302146911624
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/chest-front.png",
+    "triangles": 202201,
+    "draws": 38,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000016480684280395508,
+        -0.1980353742837906,
+        -0.051896002143621445
+      ],
+      "height": 0.6753126192092896
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/chest-three-quarter.png",
+    "triangles": 202201,
+    "draws": 38,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000016480684280395508,
+        -0.1980353742837906,
+        -0.051896002143621445
+      ],
+      "height": 0.6753126192092896
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/chest-profile.png",
+    "triangles": 202201,
+    "draws": 38,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000016480684280395508,
+        -0.1980353742837906,
+        -0.051896002143621445
+      ],
+      "height": 0.6753126192092896
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/chest-detail.png",
+    "triangles": 202201,
+    "draws": 38,
+    "camera": {
+      "angle": 20,
+      "target": [
+        0.00001648813486099243,
+        -0.05931590124964714,
+        -0.00025117769837379456
+      ],
+      "height": 0.26608410239219665
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/chest-body.png",
+    "triangles": 32233,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.00011999905109405518,
+        -0.4953293800354004,
+        -0.05630043148994446
+      ],
+      "height": 1.9153079223632814
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/legs-front.png",
+    "triangles": 226796,
+    "draws": 62,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0.000004276633262634277,
+        -0.3287867307662964,
+        0.055365901440382004
+      ],
+      "height": 1.2842189788818361
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/legs-three-quarter.png",
+    "triangles": 226796,
+    "draws": 62,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0.000004276633262634277,
+        -0.3287867307662964,
+        0.055365901440382004
+      ],
+      "height": 1.2842189788818361
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/legs-profile.png",
+    "triangles": 226796,
+    "draws": 62,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0.000004276633262634277,
+        -0.3287867307662964,
+        0.055365901440382004
+      ],
+      "height": 1.2842189788818361
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/legs-detail.png",
+    "triangles": 226796,
+    "draws": 62,
+    "camera": {
+      "angle": 180,
+      "target": [
+        3.725290298461914e-8,
+        -0.5548938810825348,
+        -0.019613576121628284
+      ],
+      "height": 0.3355570125579834
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/legs-body.png",
+    "triangles": 21289,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.00003501772880554199,
+        -0.056704699993133545,
+        0.04122421517968178
+      ],
+      "height": 1.9153550529479981
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/shoulders-front.png",
+    "triangles": 121194,
+    "draws": 44,
+    "camera": {
+      "angle": 0,
+      "target": [
+        0,
+        -0.20586511492729187,
+        -0.0031644999980926514
+      ],
+      "height": 0.7809542560577394
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/shoulders-three-quarter.png",
+    "triangles": 121194,
+    "draws": 44,
+    "camera": {
+      "angle": 35,
+      "target": [
+        0,
+        -0.20586511492729187,
+        -0.0031644999980926514
+      ],
+      "height": 0.7809542560577394
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/shoulders-profile.png",
+    "triangles": 121194,
+    "draws": 44,
+    "camera": {
+      "angle": 90,
+      "target": [
+        0,
+        -0.20586511492729187,
+        -0.0031644999980926514
+      ],
+      "height": 0.7809542560577394
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/shoulders-detail.png",
+    "triangles": 121194,
+    "draws": 44,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -1.4901161193847656e-8,
+        -0.0729156956076622,
+        -0.04263184033334255
+      ],
+      "height": 0.22
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/baseline/shoulders-body.png",
+    "triangles": 32165,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.000022858381271362305,
+        -0.5555235147476196,
+        -0.002577662467956543
+      ],
+      "height": 1.9150673294067384
+    },
+    "width": 640,
+    "height": 800
+  }
+]

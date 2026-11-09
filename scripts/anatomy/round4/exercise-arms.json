@@ -1,0 +1,342 @@
+{
+  "twistVertices": 1080,
+  "bodyBudget": null,
+  "masks": [
+    {
+      "node": "exercise-anconeus.l",
+      "before": 25,
+      "after": 105,
+      "removedIslands": 0,
+      "intermediateAlpha": 40
+    },
+    {
+      "node": "exercise-anconeus.r",
+      "before": 24,
+      "after": 105,
+      "removedIslands": 0,
+      "intermediateAlpha": 41
+    },
+    {
+      "node": "exercise-biceps-brachii-long.l",
+      "before": 85,
+      "after": 227,
+      "removedIslands": 0,
+      "intermediateAlpha": 83
+    },
+    {
+      "node": "exercise-biceps-brachii-long.r",
+      "before": 81,
+      "after": 225,
+      "removedIslands": 0,
+      "intermediateAlpha": 77
+    },
+    {
+      "node": "exercise-biceps-brachii-short.l",
+      "before": 153,
+      "after": 325,
+      "removedIslands": 0,
+      "intermediateAlpha": 88
+    },
+    {
+      "node": "exercise-biceps-brachii-short.r",
+      "before": 130,
+      "after": 300,
+      "removedIslands": 0,
+      "intermediateAlpha": 87
+    },
+    {
+      "node": "exercise-brachialis.l",
+      "before": 33,
+      "after": 218,
+      "removedIslands": 0,
+      "intermediateAlpha": 85
+    },
+    {
+      "node": "exercise-brachialis.r",
+      "before": 40,
+      "after": 217,
+      "removedIslands": 0,
+      "intermediateAlpha": 84
+    },
+    {
+      "node": "exercise-brachioradialis.l",
+      "before": 211,
+      "after": 447,
+      "removedIslands": 0,
+      "intermediateAlpha": 133
+    },
+    {
+      "node": "exercise-brachioradialis.r",
+      "before": 196,
+      "after": 422,
+      "removedIslands": 0,
+      "intermediateAlpha": 127
+    },
+    {
+      "node": "exercise-deltoid-anterior.l",
+      "before": 382,
+      "after": 797,
+      "removedIslands": 0,
+      "intermediateAlpha": 217
+    },
+    {
+      "node": "exercise-deltoid-anterior.r",
+      "before": 277,
+      "after": 596,
+      "removedIslands": 0,
+      "intermediateAlpha": 170
+    },
+    {
+      "node": "exercise-deltoid-lateral.l",
+      "before": 392,
+      "after": 671,
+      "removedIslands": 0,
+      "intermediateAlpha": 143
+    },
+    {
+      "node": "exercise-deltoid-lateral.r",
+      "before": 342,
+      "after": 601,
+      "removedIslands": 0,
+      "intermediateAlpha": 134
+    },
+    {
+      "node": "exercise-deltoid-posterior.l",
+      "before": 178,
+      "after": 449,
+      "removedIslands": 0,
+      "intermediateAlpha": 138
+    },
+    {
+      "node": "exercise-deltoid-posterior.r",
+      "before": 153,
+      "after": 403,
+      "removedIslands": 0,
+      "intermediateAlpha": 124
+    },
+    {
+      "node": "exercise-extensor-carpi-radialis-brevis.l",
+      "before": 14,
+      "after": 170,
+      "removedIslands": 0,
+      "intermediateAlpha": 67
+    },
+    {
+      "node": "exercise-extensor-carpi-radialis-brevis.r",
+      "before": 11,
+      "after": 141,
+      "removedIslands": 0,
+      "intermediateAlpha": 67
+    },
+    {
+      "node": "exercise-extensor-carpi-radialis-longus.l",
+      "before": 98,
+      "after": 314,
+      "removedIslands": 0,
+      "intermediateAlpha": 128
+    },
+    {
+      "node": "exercise-extensor-carpi-radialis-longus.r",
+      "before": 89,
+      "after": 268,
+      "removedIslands": 0,
+      "intermediateAlpha": 105
+    },
+    {
+      "node": "exercise-extensor-carpi-ulnaris.l",
+      "before": 95,
+      "after": 264,
+      "removedIslands": 0,
+      "intermediateAlpha": 106
+    },
+    {
+      "node": "exercise-extensor-carpi-ulnaris.r",
+      "before": 91,
+      "after": 240,
+      "removedIslands": 0,
+      "intermediateAlpha": 108
+    },
+    {
+      "node": "exercise-extensor-digitorum.l",
+      "before": 143,
+      "after": 339,
+      "removedIslands": 0,
+      "intermediateAlpha": 95
+    },
+    {
+      "node": "exercise-extensor-digitorum.r",
+      "before": 145,
+      "after": 355,
+      "removedIslands": 0,
+      "intermediateAlpha": 122
+    },
+    {
+      "node": "exercise-flexor-carpi-radialis.l",
+      "before": 69,
+      "after": 179,
+      "removedIslands": 0,
+      "intermediateAlpha": 67
+    },
+    {
+      "node": "exercise-flexor-carpi-radialis.r",
+      "before": 66,
+      "after": 213,
+      "removedIslands": 0,
+      "intermediateAlpha": 96
+    },
+    {
+      "node": "exercise-flexor-carpi-ulnaris.l",
+      "before": 207,
+      "after": 394,
+      "removedIslands": 0,
+      "intermediateAlpha": 102
+    },
+    {
+      "node": "exercise-flexor-carpi-ulnaris.r",
+      "before": 216,
+      "after": 412,
+      "removedIslands": 0,
+      "intermediateAlpha": 109
+    },
+    {
+      "node": "exercise-flexor-digitorum-superficialis.l",
+      "before": 4,
+      "after": 109,
+      "removedIslands": 0,
+      "intermediateAlpha": 33
+    },
+    {
+      "node": "exercise-flexor-digitorum-superficialis.r",
+      "before": 6,
+      "after": 92,
+      "removedIslands": 0,
+      "intermediateAlpha": 28
+    },
+    {
+      "node": "exercise-latissimus-dorsi.l",
+      "before": 332,
+      "after": 680,
+      "removedIslands": 0,
+      "intermediateAlpha": 182
+    },
+    {
+      "node": "exercise-latissimus-dorsi.r",
+      "before": 353,
+      "after": 734,
+      "removedIslands": 0,
+      "intermediateAlpha": 200
+    },
+    {
+      "node": "exercise-palmaris-longus.l",
+      "before": 109,
+      "after": 335,
+      "removedIslands": 0,
+      "intermediateAlpha": 131
+    },
+    {
+      "node": "exercise-palmaris-longus.r",
+      "before": 152,
+      "after": 378,
+      "removedIslands": 0,
+      "intermediateAlpha": 135
+    },
+    {
+      "node": "exercise-pectoralis-major-abdominal.l",
+      "before": 71,
+      "after": 263,
+      "removedIslands": 0,
+      "intermediateAlpha": 110
+    },
+    {
+      "node": "exercise-pectoralis-major-abdominal.r",
+      "before": 72,
+      "after": 251,
+      "removedIslands": 0,
+      "intermediateAlpha": 98
+    },
+    {
+      "node": "exercise-pectoralis-major-clavicular.l",
+      "before": 270,
+      "after": 553,
+      "removedIslands": 0,
+      "intermediateAlpha": 149
+    },
+    {
+      "node": "exercise-pectoralis-major-clavicular.r",
+      "before": 127,
+      "after": 322,
+      "removedIslands": 0,
+      "intermediateAlpha": 102
+    },
+    {
+      "node": "exercise-pectoralis-major-sternocostal.l",
+      "before": 464,
+      "after": 788,
+      "removedIslands": 0,
+      "intermediateAlpha": 164
+    },
+    {
+      "node": "exercise-pectoralis-major-sternocostal.r",
+      "before": 359,
+      "after": 622,
+      "removedIslands": 0,
+      "intermediateAlpha": 129
+    },
+    {
+      "node": "exercise-pronator-teres.l",
+      "before": 8,
+      "after": 92,
+      "removedIslands": 0,
+      "intermediateAlpha": 30
+    },
+    {
+      "node": "exercise-pronator-teres.r",
+      "before": 7,
+      "after": 101,
+      "removedIslands": 0,
+      "intermediateAlpha": 35
+    },
+    {
+      "node": "exercise-triceps-brachii-lateral.l",
+      "before": 90,
+      "after": 247,
+      "removedIslands": 0,
+      "intermediateAlpha": 80
+    },
+    {
+      "node": "exercise-triceps-brachii-lateral.r",
+      "before": 97,
+      "after": 267,
+      "removedIslands": 0,
+      "intermediateAlpha": 92
+    },
+    {
+      "node": "exercise-triceps-brachii-long.l",
+      "before": 146,
+      "after": 365,
+      "removedIslands": 0,
+      "intermediateAlpha": 110
+    },
+    {
+      "node": "exercise-triceps-brachii-long.r",
+      "before": 141,
+      "after": 365,
+      "removedIslands": 0,
+      "intermediateAlpha": 116
+    },
+    {
+      "node": "exercise-triceps-brachii-medial.l",
+      "before": 42,
+      "after": 152,
+      "removedIslands": 0,
+      "intermediateAlpha": 62
+    },
+    {
+      "node": "exercise-triceps-brachii-medial.r",
+      "before": 50,
+      "after": 164,
+      "removedIslands": 0,
+      "intermediateAlpha": 65
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Clavicular head of pectoralis major muscle.r": {
+    "changedVertices": 17,
+    "maxDisplacement": 0.0020000000000000087
+  },
+  "Sternocostal head of pectoralis major muscle.r": {
+    "changedVertices": 388,
+    "maxDisplacement": 0.0020000000000000963
+  },
+  "(Abdominal part of pectoralis major muscle).l": {
+    "changedVertices": 0,
+    "maxDisplacement": 0
+  },
+  "Clavicular head of pectoralis major muscle.l": {
+    "changedVertices": 17,
+    "maxDisplacement": 0.0020000000000000083
+  },
+  "Sternocostal head of pectoralis major muscle.l": {
+    "changedVertices": 388,
+    "maxDisplacement": 0.0020000000000001033
+  },
+  "(Abdominal part of pectoralis major muscle).r": {
+    "changedVertices": 0,
+    "maxDisplacement": 0
+  },
+  "Rectus abdominis muscle.l": {
+    "changedVertices": 275,
+    "maxDisplacement": 0.002000000000000107
+  },
+  "Rectus abdominis muscle.r": {
+    "changedVertices": 273,
+    "maxDisplacement": 0.002000000000000108
+  }
+}

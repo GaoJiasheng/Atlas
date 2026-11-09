@@ -74,3 +74,7 @@ scripts/geo/.tools
 scripts/geo/flower-and-seed/evidence/*
 !scripts/geo/flower-and-seed/evidence/metrics.json
 !scripts/geo/flower-and-seed/evidence/before/
+scripts/anatomy/**/*.png
+scripts/anatomy/**/*.jpg
+scripts/anatomy/**/*.jpeg
+scripts/anatomy/**/*.webp

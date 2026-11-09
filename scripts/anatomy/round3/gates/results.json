@@ -1,0 +1,56 @@
+[
+  {
+    "command": "pnpm check",
+    "exitCode": 0,
+    "seconds": 52.42,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/check.log"
+  },
+  {
+    "command": "pnpm validate",
+    "exitCode": 0,
+    "seconds": 5.59,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/validate.log"
+  },
+  {
+    "command": "pnpm test",
+    "exitCode": 0,
+    "seconds": 64.47,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/test.log"
+  },
+  {
+    "command": "pnpm build",
+    "exitCode": 0,
+    "seconds": 44.12,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/build.log"
+  },
+  {
+    "command": "pnpm exec vitest run tests/js-budget.test.ts",
+    "exitCode": 0,
+    "seconds": 2.84,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/exec-vitest-run-tests_js-budget.test.ts.log"
+  },
+  {
+    "command": "pnpm exec tsc --noEmit",
+    "exitCode": 0,
+    "seconds": 14.79,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/final-exec-tsc---noEmit.log"
+  },
+  {
+    "command": "pnpm test tests/muscles-round3.test.ts",
+    "exitCode": 0,
+    "seconds": 3.95,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/final-test-tests_muscles-round3.test.ts.log"
+  },
+  {
+    "command": "pnpm build",
+    "exitCode": 0,
+    "seconds": 36.39,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/final-build.log"
+  },
+  {
+    "command": "pnpm exec vitest run tests/js-budget.test.ts",
+    "exitCode": 0,
+    "seconds": 2.23,
+    "log": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/round3/gates/final-exec-vitest-run-tests_js-budget.test.ts.log"
+  }
+]

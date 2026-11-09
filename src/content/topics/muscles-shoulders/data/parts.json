@@ -799,8 +799,8 @@
         "zh": "全身皮肤轮廓显示肩部所在的位置。"
       },
       "detail": {
-        "en": "The same male reference body as the muscles; simplified for orientation [M3].",
-        "zh": "与肌肉同一具男性参考人体，经过简化，用于定位 [M3]。"
+        "en": "The same male reference body as the muscles; smoothly reconstructed for orientation [M3].",
+        "zh": "与肌肉同一具男性参考人体，重建为平滑表面，用于定位 [M3]。"
       }
     }
   ],
@@ -915,6 +915,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

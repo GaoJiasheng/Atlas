@@ -22,14 +22,17 @@
  * cross and double up).
  */
 import { useEffect, useMemo, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { withBase } from '../../../../i18n';
+import { useFrame, useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { BackSide, Matrix4, MeshBasicMaterial, MeshStandardMaterial, Quaternion, Vector3, type BufferGeometry, type Group, type Material, type Mesh } from 'three';
 import type { EquipmentSpec } from '../../../../content/schema/fitness';
 import { PALM_LIFT } from '../../lib/equipment';
 import { handFrame, PALM, surfaceHeights, surfaceUnder, type HandPlan } from '../../lib/hands';
 import { damp } from '../../lib/math';
 import { gripPoint, type Grip } from './grip';
-import { handGeometry, heelPoint, palmGeometry, WRIST_RADIUS, wristCapGeometry, wristLinkGeometry } from './handShapes';
+import { heelPoint, WRIST_RADIUS, wristCapGeometry, wristLinkGeometry } from './handShapes';
 import { FADE_RATE } from './Mannequin';
 import { keepAnimating, MAX_DT, useRuntime } from './runtime';
 
@@ -102,15 +105,28 @@ export function Hands({
   on: boolean;
 }) {
   const runtime = useRuntime();
+  // Local build-time sculptures use the SAME frame and heel contract as handShapes.
+  const sculptures = useLoader(GLTFLoader, withBase('/models/muscles-arms-hands.glb'), (loader) => loader.setMeshoptDecoder(MeshoptDecoder));
+  const sourceGeometry = (kind: 'fist' | 'palm' | 'relaxed', radius = .015): BufferGeometry => {
+    const size = [12, 15, 18, 25].reduce((a, b) => Math.abs(a / 1000 - radius) < Math.abs(b / 1000 - radius) ? a : b);
+    const name = kind === 'fist' ? `fist-${size}` : kind;
+    sculptures.scene.updateMatrixWorld(true);
+    const mesh = sculptures.scene.getObjectByName(name) as Mesh;
+    if (!mesh?.geometry) throw new Error(`Missing local muscle hand sculpture: ${name}`);
+    const geometry = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld);
+    // The grip radius stays exact between the four sculpted diameter samples.
+    if (kind === 'fist') geometry.scale(1, radius / (size / 1000), radius / (size / 1000));
+    return geometry;
+  };
   const geos = useMemo(
     () => ({
-      l: handGeometry(plans.l.kind, plans.l.radius),
-      r: plans.r.kind === plans.l.kind && plans.r.radius === plans.l.radius ? null : handGeometry(plans.r.kind, plans.r.radius),
-      palm: palmGeometry(),
+      l: sourceGeometry(plans.l.kind, plans.l.radius),
+      r: plans.r.kind === plans.l.kind && plans.r.radius === plans.l.radius ? null : sourceGeometry(plans.r.kind, plans.r.radius),
+      palm: sourceGeometry('palm'),
       link: wristLinkGeometry(),
       cap: wristCapGeometry(),
     }),
-    [plans],
+    [plans, sculptures],
   );
   useEffect(() => () => [geos.l, geos.r, geos.palm, geos.link, geos.cap].forEach((g) => g?.dispose()), [geos]);
   const handGeo = (side: Side): BufferGeometry => (side === 'r' ? (geos.r ?? geos.l) : geos.l);

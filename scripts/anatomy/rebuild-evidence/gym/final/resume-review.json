@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-09",
+  "views": [
+    "barbell-front.png",
+    "barbell-three-quarter.png",
+    "barbell-profile.png",
+    "barbell-detail.png",
+    "dumbbell-front.png",
+    "dumbbell-three-quarter.png",
+    "dumbbell-profile.png",
+    "dumbbell-detail.png",
+    "bench-front.png",
+    "bench-three-quarter.png",
+    "bench-profile.png",
+    "bench-detail.png",
+    "rack-front.png",
+    "rack-three-quarter.png",
+    "rack-profile.png",
+    "rack-detail.png",
+    "cable-front.png",
+    "cable-three-quarter.png",
+    "cable-profile.png",
+    "cable-detail.png"
+  ],
+  "inspectedCloseups": [
+    "barbell-detail-comparison.png",
+    "dumbbell-photo-angle-comparison.png",
+    "bench-detail.png",
+    "bench-profile.png",
+    "bench-photo-angle-comparison.png",
+    "rack-detail-comparison.png",
+    "cable-three-quarter-comparison.png",
+    "cable-photo-angle-comparison.png",
+    "cable-cinema.png"
+  ],
+  "grade": "B candidate / C unchanged runtime",
+  "residuals": [
+    "Related-design rather than exact-model four-angle references",
+    "GPU exercise contacts pending",
+    "Existing external cable centre anchor and static return retained"
+  ]
+}

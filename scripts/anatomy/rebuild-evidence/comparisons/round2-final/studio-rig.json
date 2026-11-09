@@ -1,0 +1,101 @@
+{
+  "source": "src/engines/space-scene/stages/model3d/Lighting.tsx",
+  "executingSourceSha256": "390534a055203ee1dfacdecbcdeb3c8171e5b3ecc69ec11271a56a2120e0f6e0",
+  "roomFingerprint": "166d09d88824f4a134b46385258412339f7ac3d7a5588fbc501201ee8b81b58c",
+  "rigs": {
+    "paper": {
+      "hemi": [
+        [
+          1,
+          0.9215818562755338,
+          0.8069522576650873
+        ],
+        [
+          0.5840784178830671,
+          0.514917665367466,
+          0.3813260114221238
+        ],
+        0.75
+      ],
+      "lights": [
+        [
+          "#fff0dc",
+          2.6,
+          [
+            0.55,
+            1,
+            0.7
+          ]
+        ],
+        [
+          "#e9edf0",
+          0.55,
+          [
+            -1,
+            0.35,
+            0.45
+          ]
+        ],
+        [
+          "#ffffff",
+          0.9,
+          [
+            -1,
+            0.45,
+            -0.7
+          ]
+        ]
+      ],
+      "env": 0.7,
+      "exposure": 1.05
+    },
+    "cinema": {
+      "hemi": [
+        [
+          0.4019777798219466,
+          0.45641102317066595,
+          0.514917665367466
+        ],
+        [
+          0.008568125615105716,
+          0.009134058699157796,
+          0.010329823026364548
+        ],
+        0.35
+      ],
+      "lights": [
+        [
+          "#e9eff5",
+          2.4,
+          [
+            0.55,
+            1,
+            0.7
+          ]
+        ],
+        [
+          "#c9d1d9",
+          0.28,
+          [
+            -1,
+            0.35,
+            0.45
+          ]
+        ],
+        [
+          "#f2f2f2",
+          1.15,
+          [
+            -1,
+            0.45,
+            -0.7
+          ]
+        ]
+      ],
+      "env": 0.8,
+      "exposure": 1
+    }
+  },
+  "backend": "CPU depth raster; GGX / sampled installed RoomEnvironment / material emission / ACES / sRGB",
+  "limits": "No GPU, shader derivative micrograin, screen AA, shadows or exercise contact acceptance. Roughness map uses its approximate mean."
+}

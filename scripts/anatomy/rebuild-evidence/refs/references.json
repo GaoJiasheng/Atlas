@@ -1,0 +1,63 @@
+[
+  {
+    "file": "Gray410.png",
+    "role": "chest-shoulders-arms-front",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray410.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/d/de/Gray410.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray409.png",
+    "role": "back-posterior",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray409.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/9/95/Gray409.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray392.png",
+    "role": "core-abdominal-wall",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray392.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Gray392.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray414.png",
+    "role": "forearm-front",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray414.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/9/98/Gray414.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray424.png",
+    "role": "hand-dorsal",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray424.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/1/15/Gray424.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray434.png",
+    "role": "thigh-back",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray434.png",
+    "download": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Gray434.png",
+    "licence": "Public domain: Gray, Anatomy of the Human Body, 1918; Henry Vandyke Carter historical plate."
+  },
+  {
+    "file": "Gray438.png",
+    "role": "calf-posterior",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray438.png",
+    "licence": "Public domain: Henry Vandyke Carter / Gray Anatomy of the Human Body, 1918."
+  },
+  {
+    "file": "Gray441.png",
+    "role": "foot-lateral",
+    "url": "https://commons.wikimedia.org/wiki/File:Gray441.png",
+    "licence": "Public domain: Henry Vandyke Carter / Gray Anatomy of the Human Body, 1918."
+  },
+  {
+    "file": "OpenStax1105.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:1105_Anterior_and_Posterior_Views_of_Muscles.jpg",
+    "author": "OpenStax",
+    "licence": "CC BY 4.0",
+    "role": "Whole-body anterior/posterior proportions. Front/back crops for comparison only; no traced geometry."
+  }
+]

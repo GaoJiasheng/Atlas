@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-09",
+  "imageHashesVerified": 15,
+  "coverBackingHashesVerified": 6,
+  "sixCheckManifestsVerified": 9,
+  "gatedInputMismatches": [],
+  "postGateDocumentationOnly": [
+    "scripts/anatomy/rebuild-evidence/write-reports.py"
+  ],
+  "ownedChangedOrUntrackedPaths": 989,
+  "outsideOwnership": [],
+  "allFourGates": "PASS",
+  "tests": {
+    "files": 278,
+    "passed": 6537,
+    "workers": 2,
+    "timeoutMS": 30000
+  },
+  "comparisonDirectory": "/Users/gavin/work/atlas-b2-r-muscles/scripts/anatomy/rebuild-evidence/comparison-sheets",
+  "remaining": "Source/detail/pose/cover candidates B; unchanged runtime gym/grips C until supplied engine patches applied; exact four-angle photomatch and GPU/contact acceptance incomplete."
+}

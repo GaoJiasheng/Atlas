@@ -587,8 +587,8 @@
         "zh": "在全身参考人体上定位腰腹。"
       },
       "detail": {
-        "en": "Simplified whole-body surface from Z-Anatomy [M3]. The core focus is between the lower thorax and pelvis; distant regions are context.",
-        "zh": "Z-Anatomy 的简化全身体表 [M3]。讲解重点在下胸廓与骨盆之间，远处仅作背景。"
+        "en": "Smooth source-derived whole-body surface from Z-Anatomy [M3]. The core focus is between the lower thorax and pelvis; distant regions are context.",
+        "zh": "Z-Anatomy 的平滑全身体表 [M3]。讲解重点在下胸廓与骨盆之间，远处仅作背景。"
       }
     }
   ],
@@ -751,6 +751,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

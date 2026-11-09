@@ -1,0 +1,290 @@
+{
+  "twistVertices": 1080,
+  "bodyBudget": {
+    "before": 34528,
+    "after": 26999,
+    "maxErrorM": 0.0002575711696408689
+  },
+  "masks": [
+    {
+      "node": "exercise-biceps-brachii.l",
+      "before": 240,
+      "after": 464,
+      "removedIslands": 3,
+      "intermediateAlpha": 122
+    },
+    {
+      "node": "exercise-biceps-brachii.r",
+      "before": 209,
+      "after": 428,
+      "removedIslands": 3,
+      "intermediateAlpha": 112
+    },
+    {
+      "node": "exercise-brachialis.l",
+      "before": 44,
+      "after": 231,
+      "removedIslands": 1,
+      "intermediateAlpha": 88
+    },
+    {
+      "node": "exercise-brachialis.r",
+      "before": 60,
+      "after": 268,
+      "removedIslands": 0,
+      "intermediateAlpha": 106
+    },
+    {
+      "node": "exercise-brachioradialis.l",
+      "before": 257,
+      "after": 483,
+      "removedIslands": 9,
+      "intermediateAlpha": 147
+    },
+    {
+      "node": "exercise-brachioradialis.r",
+      "before": 231,
+      "after": 469,
+      "removedIslands": 4,
+      "intermediateAlpha": 139
+    },
+    {
+      "node": "exercise-deltoid-anterior.l",
+      "before": 458,
+      "after": 652,
+      "removedIslands": 76,
+      "intermediateAlpha": 165
+    },
+    {
+      "node": "exercise-deltoid-anterior.r",
+      "before": 336,
+      "after": 568,
+      "removedIslands": 47,
+      "intermediateAlpha": 164
+    },
+    {
+      "node": "exercise-deltoid-posterior.l",
+      "before": 263,
+      "after": 490,
+      "removedIslands": 19,
+      "intermediateAlpha": 137
+    },
+    {
+      "node": "exercise-deltoid-posterior.r",
+      "before": 222,
+      "after": 448,
+      "removedIslands": 11,
+      "intermediateAlpha": 123
+    },
+    {
+      "node": "exercise-external-oblique.l",
+      "before": 624,
+      "after": 1061,
+      "removedIslands": 12,
+      "intermediateAlpha": 236
+    },
+    {
+      "node": "exercise-external-oblique.r",
+      "before": 640,
+      "after": 1102,
+      "removedIslands": 6,
+      "intermediateAlpha": 240
+    },
+    {
+      "node": "exercise-gluteus-maximus.l",
+      "before": 412,
+      "after": 852,
+      "removedIslands": 6,
+      "intermediateAlpha": 231
+    },
+    {
+      "node": "exercise-gluteus-maximus.r",
+      "before": 381,
+      "after": 832,
+      "removedIslands": 8,
+      "intermediateAlpha": 236
+    },
+    {
+      "node": "exercise-iliocostalis-lumborum.l",
+      "before": 14,
+      "after": 92,
+      "removedIslands": 1,
+      "intermediateAlpha": 36
+    },
+    {
+      "node": "exercise-iliocostalis-lumborum.r",
+      "before": 11,
+      "after": 132,
+      "removedIslands": 0,
+      "intermediateAlpha": 40
+    },
+    {
+      "node": "exercise-infraspinatus.l",
+      "before": 144,
+      "after": 299,
+      "removedIslands": 22,
+      "intermediateAlpha": 96
+    },
+    {
+      "node": "exercise-infraspinatus.r",
+      "before": 123,
+      "after": 262,
+      "removedIslands": 23,
+      "intermediateAlpha": 85
+    },
+    {
+      "node": "exercise-latissimus-dorsi.l",
+      "before": 332,
+      "after": 667,
+      "removedIslands": 9,
+      "intermediateAlpha": 193
+    },
+    {
+      "node": "exercise-latissimus-dorsi.r",
+      "before": 366,
+      "after": 722,
+      "removedIslands": 6,
+      "intermediateAlpha": 209
+    },
+    {
+      "node": "exercise-levator-scapulae.l",
+      "before": 26,
+      "after": 110,
+      "removedIslands": 3,
+      "intermediateAlpha": 39
+    },
+    {
+      "node": "exercise-levator-scapulae.r",
+      "before": 31,
+      "after": 121,
+      "removedIslands": 1,
+      "intermediateAlpha": 45
+    },
+    {
+      "node": "exercise-longissimus-thoracis.l",
+      "before": 5,
+      "after": 92,
+      "removedIslands": 0,
+      "intermediateAlpha": 28
+    },
+    {
+      "node": "exercise-longissimus-thoracis.r",
+      "before": 567,
+      "after": 945,
+      "removedIslands": 29,
+      "intermediateAlpha": 225
+    },
+    {
+      "node": "exercise-rhomboid-major.l",
+      "before": 205,
+      "after": 430,
+      "removedIslands": 7,
+      "intermediateAlpha": 124
+    },
+    {
+      "node": "exercise-rhomboid-major.r",
+      "before": 250,
+      "after": 463,
+      "removedIslands": 19,
+      "intermediateAlpha": 132
+    },
+    {
+      "node": "exercise-serratus-anterior.l",
+      "before": 150,
+      "after": 464,
+      "removedIslands": 24,
+      "intermediateAlpha": 191
+    },
+    {
+      "node": "exercise-serratus-anterior.r",
+      "before": 110,
+      "after": 378,
+      "removedIslands": 12,
+      "intermediateAlpha": 151
+    },
+    {
+      "node": "exercise-teres-major.l",
+      "before": 126,
+      "after": 317,
+      "removedIslands": 1,
+      "intermediateAlpha": 103
+    },
+    {
+      "node": "exercise-teres-major.r",
+      "before": 125,
+      "after": 301,
+      "removedIslands": 1,
+      "intermediateAlpha": 93
+    },
+    {
+      "node": "exercise-teres-minor.l",
+      "before": 26,
+      "after": 102,
+      "removedIslands": 3,
+      "intermediateAlpha": 39
+    },
+    {
+      "node": "exercise-teres-minor.r",
+      "before": 21,
+      "after": 91,
+      "removedIslands": 2,
+      "intermediateAlpha": 33
+    },
+    {
+      "node": "exercise-trapezius-ascending.l",
+      "before": 651,
+      "after": 793,
+      "removedIslands": 104,
+      "intermediateAlpha": 178
+    },
+    {
+      "node": "exercise-trapezius-ascending.r",
+      "before": 489,
+      "after": 666,
+      "removedIslands": 90,
+      "intermediateAlpha": 168
+    },
+    {
+      "node": "exercise-trapezius-descending.l",
+      "before": 119,
+      "after": 288,
+      "removedIslands": 2,
+      "intermediateAlpha": 93
+    },
+    {
+      "node": "exercise-trapezius-descending.r",
+      "before": 124,
+      "after": 325,
+      "removedIslands": 3,
+      "intermediateAlpha": 111
+    },
+    {
+      "node": "exercise-trapezius-transverse.l",
+      "before": 326,
+      "after": 539,
+      "removedIslands": 50,
+      "intermediateAlpha": 151
+    },
+    {
+      "node": "exercise-trapezius-transverse.r",
+      "before": 353,
+      "after": 548,
+      "removedIslands": 66,
+      "intermediateAlpha": 164
+    },
+    {
+      "node": "exercise-triceps-brachii.l",
+      "before": 304,
+      "after": 630,
+      "removedIslands": 6,
+      "intermediateAlpha": 169
+    },
+    {
+      "node": "exercise-triceps-brachii.r",
+      "before": 305,
+      "after": 608,
+      "removedIslands": 6,
+      "intermediateAlpha": 166
+    }
+  ]
+}

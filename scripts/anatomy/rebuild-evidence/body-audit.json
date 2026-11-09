@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-09",
+  "method": "Exact shipped GLTFLoader meshopt decode and rest skeleton; scene-space vertices; signed volume includes open wrist cuts and tiny nail meshes, so is a diagnostic not a medical body measurement",
+  "rows": [
+    {
+      "topic": "arms",
+      "bytes": 1386976,
+      "bodySignedVolumeL": 72.60326133846381,
+      "soleMinY": -1.2490737438201904,
+      "rigFloorY": -1.2487447451567277,
+      "soleOffsetM": -0.00032899866346269846,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.0001624953083301028
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.00014434107329800192
+        }
+      ]
+    },
+    {
+      "topic": "back",
+      "bytes": 1483520,
+      "bodySignedVolumeL": 72.68795072231661,
+      "soleMinY": -1.1989469528198242,
+      "rigFloorY": -1.1986179541563615,
+      "soleOffsetM": -0.00032899866346269846,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.00016250152320765405
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.0001443409510828976
+        }
+      ]
+    },
+    {
+      "topic": "chest",
+      "bytes": 1351732,
+      "bodySignedVolumeL": 72.44970632535822,
+      "soleMinY": -1.3506474494934082,
+      "rigFloorY": -1.3503184508299455,
+      "soleOffsetM": -0.00032899866346269846,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.00016249841575589162
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.00014434107329800358
+        }
+      ]
+    },
+    {
+      "topic": "core",
+      "bytes": 1452448,
+      "bodySignedVolumeL": 72.98283514671542,
+      "soleMinY": -1.0411964654922485,
+      "rigFloorY": -1.0408674668287858,
+      "soleOffsetM": -0.00032899866346269846,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.0001624953083300901
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.0001443385721049695
+        }
+      ]
+    },
+    {
+      "topic": "legs",
+      "bytes": 1446512,
+      "bodySignedVolumeL": 73.21484606195996,
+      "soleMinY": -0.9119311533868313,
+      "rigFloorY": -0.9116021584486589,
+      "soleOffsetM": -0.0003289949381724,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.00016250212381866953
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.00014433922799743623
+        }
+      ]
+    },
+    {
+      "topic": "shoulders",
+      "bytes": 1103084,
+      "bodySignedVolumeL": 72.31973484028028,
+      "soleMinY": -1.410797119140625,
+      "rigFloorY": -1.4104681204771623,
+      "soleOffsetM": -0.00032899866346269846,
+      "seams": [
+        {
+          "side": "l",
+          "cutVertices": 256,
+          "maxClosestBodyVertexM": 0.00016251030377405183
+        },
+        {
+          "side": "r",
+          "cutVertices": 249,
+          "maxClosestBodyVertexM": 0.00014433988390399565
+        }
+      ]
+    }
+  ]
+}

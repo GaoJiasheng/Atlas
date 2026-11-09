@@ -1,0 +1,74 @@
+{
+  "pose": {
+    "shoulder.l": {
+      "flexion": 90
+    },
+    "elbow.r": {
+      "flexion": 90
+    },
+    "hip.l": {
+      "flexion": 60
+    },
+    "knee.r": {
+      "flexion": 90
+    },
+    "ankle.l": {
+      "dorsiflexion": 15
+    },
+    "ankle.r": {
+      "dorsiflexion": 15
+    }
+  },
+  "renderer": "Same anglesQuat/foldAngles/mirrorSignedAxes as MotionDriver; complete 19 source joints",
+  "limits": "Checks the common asymmetric deformation pose. Held-object contact and runtime procedural hands remain GPU/patch acceptance.",
+  "shots": [
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-weight-refinement/arms-pose-0.png",
+      "triangles": 41394,
+      "draws": 3,
+      "camera": {
+        "angle": 0,
+        "target": [
+          -0.00004902482032775879,
+          -0.25810176134109497,
+          0.18088681995868683
+        ],
+        "height": 1.6115878868103028
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-weight-refinement/arms-pose-35.png",
+      "triangles": 41394,
+      "draws": 3,
+      "camera": {
+        "angle": 35,
+        "target": [
+          -0.00004902482032775879,
+          -0.25810176134109497,
+          0.18088681995868683
+        ],
+        "height": 1.6115878868103028
+      },
+      "width": 640,
+      "height": 800
+    },
+    {
+      "file": "scripts/anatomy/rebuild-evidence/comparisons/pose-weight-refinement/arms-pose-90.png",
+      "triangles": 41394,
+      "draws": 3,
+      "camera": {
+        "angle": 90,
+        "target": [
+          -0.00004902482032775879,
+          -0.25810176134109497,
+          0.18088681995868683
+        ],
+        "height": 1.6115878868103028
+      },
+      "width": 640,
+      "height": 800
+    }
+  ]
+}

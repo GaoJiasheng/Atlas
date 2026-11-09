@@ -594,8 +594,8 @@
         "zh": "全身的皮肤表面，用来在自己身上找到这些肌肉。"
       },
       "detail": {
-        "en": "A low-detail skin surface of the same male reference body the muscles come from [M3]. It is drawn faint so the chest muscles show through.",
-        "zh": "与肌肉同一具男性参考人体的皮肤表面，做了简化 [M3]。画得很淡，让胸部肌肉透出来。"
+        "en": "A smooth source-derived skin surface of the same male reference body the muscles come from [M3]. It is drawn faint so the chest muscles show through.",
+        "zh": "与肌肉同一具男性参考人体的皮肤表面，重建为平滑表面 [M3]。画得很淡，让胸部肌肉透出来。"
       }
     }
   ],
@@ -710,6 +710,7 @@
     }
   ],
   "views": {
+    "exerciseBody": "mannequin",
     "assembled": {
       "camera": {
         "position": [

@@ -1,0 +1,114 @@
+[
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-front.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 0,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-three-quarter.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 35,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-profile.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 90,
+      "target": [
+        9.834766387939453e-7,
+        -0.1873345747590065,
+        0.033980026841163635
+      ],
+      "height": 0.8116797757148744
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-detail.png",
+    "triangles": 58506,
+    "draws": 60,
+    "camera": {
+      "angle": 20,
+      "target": [
+        -2.2351741790771484e-8,
+        -0.018990814685821533,
+        0.014750201255083084
+      ],
+      "height": 0.3999729728698731
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-body.png",
+    "triangles": 41736,
+    "draws": 3,
+    "camera": {
+      "angle": 25,
+      "target": [
+        -0.00008101761341094971,
+        -0.39387792348861694,
+        0.02826988697052002
+      ],
+      "height": 1.9157264900207522
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/arms-body-front.png",
+    "triangles": 41736,
+    "draws": 3,
+    "camera": {
+      "angle": 0,
+      "target": [
+        -0.00008101761341094971,
+        -0.39387792348861694,
+        0.02826988697052002
+      ],
+      "height": 1.9157264900207522
+    },
+    "width": 640,
+    "height": 800
+  },
+  {
+    "file": "scripts/anatomy/rebuild-evidence/comparisons/iteration3/hand-dorsal.png",
+    "triangles": 5200,
+    "draws": 1,
+    "camera": {
+      "angle": 180,
+      "target": [
+        0.2013652790337801,
+        -0.4950612485408783,
+        0.021809644997119904
+      ],
+      "height": 0.24427153170108795
+    },
+    "width": 640,
+    "height": 800
+  }
+]

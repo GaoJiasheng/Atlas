@@ -1,0 +1,2 @@
+import{loadTopic,render,bounds}from'./rebuild-evidence/studio';
+const body=await loadTopic('arms',false,'paper','body');await render(body,'scripts/anatomy/cache/continuous-skin-body.png',{angle:25,width:640,height:800});const hand=body.filter(s=>s.id==='skin-hand.l'),box=bounds(hand),target=box.getCenter(box.min.clone()).toArray()as[number,number,number];await render(hand,'scripts/anatomy/cache/continuous-skin-hand.png',{angle:0,width:640,height:800,target,size:box.getSize(box.min.clone()).y*1.2});
