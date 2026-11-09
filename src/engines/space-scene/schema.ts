@@ -1859,7 +1859,8 @@ export function spaceChapterIssues(state: SpaceChapterState, data: SpaceSceneDat
       else if (selectable && p.context) out.push(`${where}${field}: "${id}" is a context part (never selected or labelled)`);
     };
     if (s.part) part('part', s.part, true);
-    for (const id of s.hide ?? []) part('hide', id, false);
+    // A beat may also hide one flow of a layer that holds several.
+    for (const id of s.hide ?? []) if (!f.flows.some((x) => x.id === id)) part('hide', id, false);
     for (const id of s.labels ?? []) {
       if (!id.startsWith(GROUP_LABEL_PREFIX)) part('labels', id, true);
       else if (!groups.has(id.slice(GROUP_LABEL_PREFIX.length))) out.push(`${where}labels: unknown group "${id.slice(GROUP_LABEL_PREFIX.length)}"`);

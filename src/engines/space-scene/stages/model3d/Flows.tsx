@@ -319,6 +319,7 @@ export function Flows({
   airfoil,
   flows,
   layers,
+  hidden = [],
   look,
   clipping,
   effects,
@@ -328,6 +329,8 @@ export function Flows({
   airfoil?: {file:PartsFile;ui:SpaceUiStore;values:SimValues;on:boolean;run:boolean};
   flows: readonly Flow[];
   layers: readonly string[];
+  /** Ids a beat hides; a flow listed here is off while its layer stays on. */
+  hidden?: readonly string[];
   look: StageLook;
   clipping: Plane[] | null;
   /** Try-it bindings per flow id (lib/sim/bind.ts). */
@@ -343,7 +346,7 @@ export function Flows({
           key={flow.id}
           flow={flow}
           index={i}
-          layerOn={layers.includes(flow.group)}
+          layerOn={layers.includes(flow.group) && !hidden.includes(flow.id)}
           look={look}
           clipping={clipping}
           effect={effects?.get(flow.id)}

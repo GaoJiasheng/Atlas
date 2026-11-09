@@ -745,7 +745,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
       </group>
       {/* Flow paths do not follow the parts apart: no particles while exploded (docs/12 §7.5, G16). */}
       {orbitSession && <OrbitDriver orbit={orbitSession} data={data} handles={handles} bridge={bridge} expected={orbitParts} />}
-      {data.flows.length > 0 && <Suspense fallback={null}><Flows airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} /></Suspense>}
+      {data.flows.length > 0 && <Suspense fallback={null}><Flows hidden={s.hidden} airfoil={data.sim?.airfoil ? {file:data,ui,values:resolveSimValues(data.sim,s.sim),on:s.view !== 'exploded' && displays.get(data.sim.airfoil.section.part)?.visible === true,run:s.run && !referenceOn} : undefined} bridge={bridge} flows={data.flows} layers={s.view === 'exploded' ? NO_LAYERS : s.layers} look={look} clipping={clipping} effects={sim?.flows} fieldLines={linesOf} /></Suspense>}
       <CameraRig
         handles={handles}
         orbitSession={orbitSession}

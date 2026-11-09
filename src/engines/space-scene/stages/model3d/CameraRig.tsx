@@ -56,7 +56,7 @@ import type { SceneStore } from '../../../core/store';
 import type { Chapter, OrbitCamera } from '../../../core/types';
 import { isOrbitCamera, normalizeCamera } from '../../../core/camera';
 import type { SpaceSceneExt } from '../../index';
-import type { ViewPresets } from '../../schema';
+import type { SpaceChapterState, ViewPresets } from '../../schema';
 import type { SpaceUiStore } from '../../ui';
 import { hudFrameReady, stageReady, type StageBridge } from '../../bridge';
 import {
@@ -112,6 +112,9 @@ type PendingView = { id: number; instant: boolean } & (
   { source: ViewSource } | { exercise: string; fallback: ViewSource | null; t0: number }
 );
 type Shift = [number, number];
+
+/** Fetched for portrait stages only; until it arrives a beat keeps the plain eased camera. */
+let portraitFocus: typeof import('../../lib/portrait-focus') | null = null;
 
 export function CameraRig({
   store,
@@ -430,7 +433,9 @@ export function CameraRig({
     // The authored view: plain = aspect-fitted for this stage (hudFrame topics: as authored, fitHud fits it), design = for the design HUD layout.
     const fitted: ViewSource | null = authored && (() => {
       const aspect = liveAspect();
-      const plain = views.hudFrame ? authored : fitCameraToAspect(authored, aspect);
+      const eased = fitCameraToAspect(authored, aspect);
+      const beatSpec = state.beat === null ? undefined : (chapter?.state as SpaceChapterState | undefined)?.beats?.[state.beat];
+      const plain = views.hudFrame ? authored : portraitFocus && aspect < 0.8 ? portraitFocus.framePortraitBeat(authored, eased, beatSpec?.part ? [beatSpec.part] : (beatSpec?.labels ?? []), handles, aspect) : eased;
       const design = fitCameraToAspect(authored, DESIGN_ASPECT);
       return { plain: bar ? fitSpan(plain, bar, aspect) : plain, design: bar ? fitSpan(design, bar, DESIGN_ASPECT) : design };
     });
@@ -507,6 +512,10 @@ export function CameraRig({
     moveShift(toShift, COVER_TWEEN_MS);
     invalidate();
   };
+
+  useEffect(() => {
+    if (!portraitFocus && size.height > size.width * 1.25) void import('../../lib/portrait-focus').then((m) => { portraitFocus = m; });
+  }, [size.width, size.height]);
 
   // Transitions as the store emits them (in order, even several in one tick); the first one on mount is instant.
   useEffect(() => {

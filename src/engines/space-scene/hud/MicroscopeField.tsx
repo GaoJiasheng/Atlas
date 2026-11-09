@@ -1,6 +1,6 @@
-/** One responsive renderer, shared by the desktop card and phone TryIt. */
+/** One responsive renderer, shared by the desktop card, the phone TryIt and the stage (HUD hidden). Only the one on show draws. */
 import { useEffect, useRef, useSyncExternalStore } from 'react';
-import { useSceneContext } from '../../core/context';
+import { useHud, useSceneContext } from '../../core/context';
 import { tx } from '../../../i18n';
 import { resolveColorRef, readThemeTokens } from '../../../theme/theme';
 import type { PartsFile } from '../schema';
@@ -14,14 +14,14 @@ const themeSubscribe=(fn:()=>void)=>{const observer=new MutationObserver(fn);obs
 const themeSnapshot=()=>document.documentElement.dataset.theme??'paper';
 const words={sharp:{en:'In focus',zh:'对焦清晰'},soft:{en:'Slightly out of focus',zh:'焦点稍偏'},blurred:{en:'Out of focus',zh:'焦点模糊'},dark:{en:'Illumination is off',zh:'照明已关闭'},outside:{en:'Target centre is outside the field',zh:'目标中心在视野外'},inactive:{en:'Observation is off',zh:'观察已关闭'}};
 const roles={wall:{en:'Cell wall boundary',zh:'细胞壁边界'},'membrane-boundary':{en:'Cell boundary',zh:'细胞边界'},nucleus:{en:'Stained nucleus',zh:'染色细胞核'},chloroplast:{en:'Chloroplasts',zh:'叶绿体'},'cytoplasm-area':{en:'Faint cell contents',zh:'浅淡的细胞内部'}};
-export function MicroscopeField({file,location}:{file:PartsFile;location:'desktop'|'mobile'}){
+export function MicroscopeField({file,location}:{file:PartsFile;location:'desktop'|'mobile'|'stage'}){
  const isDesktop=useSyncExternalStore(subscribe,desktop,()=>true),view=useSimView(file),canvas=useRef<HTMLCanvasElement>(null);
- const {locale}=useSceneContext();
+ const {locale}=useSceneContext(),hudOn=useHud(h=>h.hud);
  const buffer=useRef<HTMLCanvasElement|null>(null);
  const theme=useSyncExternalStore(themeSubscribe,themeSnapshot,()=> 'paper');
  const config=file.sim?.microscope,overlay=file.sim?.overlays.find(o=>o.kind==='microscope-field');
  const active=!!config&&!!view&&view.values[config.controls.enabled]===true;
- const shown=active&&isDesktop===(location==='desktop');
+ const shown=active&&(location==='stage'?!hudOn:hudOn&&isDesktop===(location==='desktop'));
  useEffect(()=>{
   if(!shown||!config||!view||!canvas.current)return;
   const size=512,c=canvas.current,ctx=c.getContext('2d');if(!ctx)return;

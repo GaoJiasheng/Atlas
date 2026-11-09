@@ -101,6 +101,7 @@ const AirfoilDriver = lazy(() => import('./explorer/AirfoilDriver').then(m => ({
 const TryIt = lazy(() => import('./explorer/TryIt').then(m => ({ default: m.TryIt })));
 const OrbitCard = lazy(() => import('./hud/OrbitCard').then(m => ({ default: m.OrbitCard })));
 const Model3DStage = lazy(() => import('./stages/model3d/Model3DStage'));
+const StagePanel = lazy(() => import('./stages/panels/StagePanel'));
 
 function StageLoading({ label }: { label: string }) {
   return (
@@ -720,6 +721,7 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
       </Suspense>
 
       {presentation.element}
+      {!hudOn && (file.sim?.microscope || file.sim?.orbitRotation || chapters.some((c) => (c.state as SpaceChapterState).sim?.try?.curve)) && <Suspense fallback={null}><StagePanel file={file} ui={ui} /></Suspense>}
 
       <SceneSlot name="leaders">
         <LeaderLabels file={file} chapters={chapters} bridge={bridge} ui={ui} />

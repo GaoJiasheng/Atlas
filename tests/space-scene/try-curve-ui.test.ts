@@ -6,7 +6,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { SceneContext, type SceneContextValue } from '../../src/engines/core/context';
 import { createHudStore } from '../../src/engines/core/controls';
 import { createSpaceUi, type SpaceUiStore } from '../../src/engines/space-scene/ui';
-import { TryIt } from '../../src/engines/space-scene/explorer/TryIt';
+import { loadTryRecord, TryIt } from '../../src/engines/space-scene/explorer/TryIt';
 import { PlateBlock } from '../../src/engines/space-scene/hud/PlateBlock';
 import { createBridge } from '../../src/engines/space-scene/bridge';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
@@ -45,6 +45,7 @@ function render(options: { locale?: 'en' | 'zh'; revealed?: boolean; answered?: 
 describe('model curve and predictive result visibility', () => {
   // TryIt fetches its curve lazily: one render starts the fetch, then static renders find it loaded.
   beforeAll(async () => {
+    await loadTryRecord();
     render({ answered: true });
     await import('../../src/engines/space-scene/explorer/TryCurve');
     await new Promise((r) => setTimeout(r, 0));

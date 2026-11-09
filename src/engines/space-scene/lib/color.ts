@@ -185,6 +185,15 @@ export function resolveDataColor(
   return parsed ? rgbaToHex(parsed) : fallback;
 }
 
+/** Above this luma a plastic tint (a white ruler, a pale block) would glare on the dark plate. Pure white is not a colour here: it passes shipped textures and vertex colours through. */
+const PALE_LUMA = 0.72;
+const PALE_DIM = 0.6;
+function dimPaleOnDark(hex: string): string {
+  const c = parseCssColor(hex);
+  if (!c || hex.toLowerCase() === '#ffffff' || 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b <= PALE_LUMA) return hex;
+  return rgbaToHex({ r: c.r * PALE_DIM, g: c.g * PALE_DIM, b: c.b * PALE_DIM, a: 1 });
+}
+
 /**
  * A family colour with a data tint. Wood keeps its paper-to-cinema relation
  * under a tint (a light bench top must not glare on the dark plate): the tint
@@ -192,6 +201,7 @@ export function resolveDataColor(
  */
 function tintedColor(f: FamilySpec, tint: string, tokens: Partial<Record<string, string>>, theme: Theme): string {
   const c = resolveDataColor(tint, tokens, theme, f.color[theme]);
+  if (theme === 'cinema' && f === MATERIAL_FAMILIES.plastic) return dimPaleOnDark(c);
   if (theme === 'paper' || f.finish !== 'wood') return c;
   const base = parseCssColor(f.color.paper);
   const dim = parseCssColor(f.color.cinema);

@@ -31,6 +31,8 @@ export interface ChainNode {
   y: number;
   w: number;
   h: number;
+  /** The name as set, when `nameOf` was given (one line, or two for a long name). */
+  lines?: readonly string[];
 }
 
 export interface ChainLink {
@@ -53,9 +55,27 @@ export interface ChainLayout {
   header: number;
   /** Rows: the compact pitch was used (a column longer than `compactAfter`). */
   compact: boolean;
+  /** Characters of a name that fit one line of a node at this column width. */
+  maxChars: number;
+  /** Width (layout units) a line of `maxChars` takes: a slightly longer line is condensed to it. */
+  lineWidth: number;
   columns: ChainColumn[];
   nodes: ChainNode[];
   links: ChainLink[];
+}
+
+/** How far a line may run over `max` and still be set (condensed to fit) rather than wrapped. */
+const CONDENSE = 1.2;
+/** A node's name on at most two lines, broken at spaces and after hyphens; only what still does not fit is clipped. */
+export function wrapChainName(name: string, max: number): string[] {
+  const room = Math.floor(max * CONDENSE);
+  if (name.length <= room) return [name];
+  const words = name.match(/[^\s-]+-?/g) ?? [name];
+  const glue = (w: readonly string[]) => w.reduce((a, b) => (a === '' || a.endsWith('-') ? a + b : `${a} ${b}`), '');
+  let first = 1;
+  while (first < words.length && glue(words.slice(0, first + 1)).length <= room) first += 1;
+  const second = glue(words.slice(first));
+  return second === '' ? [name.slice(0, room - 1).trimEnd() + '…'] : [glue(words.slice(0, first)), second.length <= room ? second : `${second.slice(0, room - 1).trimEnd()}…`];
 }
 
 export type ChainPart = Pick<Part, 'id' | 'group' | 'connects'> & { context?: boolean | undefined; twinOf?: string | undefined };
@@ -76,7 +96,7 @@ export function partChain(
   parts: readonly ChainPart[],
   groups: readonly (Pick<PartGroup, 'id'> & { card?: boolean | undefined })[],
   width = 330,
-  opts: { header?: number; row?: number; compactRow?: number; compactAfter?: number; gap?: number; pad?: number } = {},
+  opts: { header?: number; row?: number; compactRow?: number; compactAfter?: number; gap?: number; pad?: number; nameOf?: (id: string) => string } = {},
 ): ChainLayout {
   const header = opts.header ?? 16;
   const gap = opts.gap ?? 22;
@@ -94,15 +114,22 @@ export function partChain(
   const nodeH = compact ? row - 3 : row - 6;
   const colW = (width - pad * 2 - gap * (cols.length - 1)) / Math.max(1, cols.length);
   const columns = cols.map((id, i) => ({ id, x: pad + i * (colW + gap), w: colW }));
+  const charW = compact ? 5.4 : 5.8;
+  const lineWidth = colW - 22;
+  const maxChars = Math.max(6, Math.floor(lineWidth / charW));
+  const linePitch = compact ? 10 : 11;
   const nodes: ChainNode[] = [];
   const rowsUsed = new Map<string, number>();
   const number = new Map(numbered.map((p, i) => [p.id, i + 1]));
   list.forEach((p) => {
     const c = columns.find((col) => col.id === p.group);
     if (!c || p.group === undefined) return;
-    const r = rowsUsed.get(p.group) ?? 0;
-    rowsUsed.set(p.group, r + 1);
-    nodes.push({ id: p.id, group: p.group, n: number.get(p.id)!, x: c.x, y: header + 6 + r * row, w: c.w, h: nodeH });
+    const name = opts.nameOf?.(p.id);
+    const lines = name === undefined ? undefined : wrapChainName(name, maxChars);
+    const extra = ((lines?.length ?? 1) - 1) * linePitch;
+    const y = rowsUsed.get(p.group) ?? header + 6;
+    rowsUsed.set(p.group, y + row + extra);
+    nodes.push({ id: p.id, group: p.group, n: number.get(p.id)!, x: c.x, y, w: c.w, h: nodeH + extra, ...(lines ? { lines } : {}) });
   });
   const byId = new Map(nodes.map((n) => [n.id, n]));
   const seen = new Set<string>();
@@ -136,8 +163,8 @@ export function partChain(
       links.push({ a: a.id, b: b.id, group: a.group === b.group ? a.group : null, d });
     }
   }
-  const rows = Math.max(1, ...[...rowsUsed.values()]);
-  return { width, height: header + 6 + rows * row, header, compact, columns, nodes, links };
+  const height = Math.max(header + 6 + row, ...rowsUsed.values());
+  return { width, height, header, compact, maxChars, lineWidth, columns, nodes, links };
 }
 
 /** Order-free key of a link between two parts. */

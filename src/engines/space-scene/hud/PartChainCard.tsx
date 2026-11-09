@@ -27,7 +27,7 @@ export function PartChainCard({ file }: { file: PartsFile }) {
     layers: st.layers,
   }));
   const layout = useMemo(
-    () => partChain(file.parts, file.groups, W, { row: 23, compactRow: 16, compactAfter: 10, header: 18, gap: 10 }),
+    () => partChain(file.parts, file.groups, W, { row: 23, compactRow: 16, compactAfter: 10, header: 18, gap: 10, nameOf: (id) => tx(chainName(file.parts.find((p) => p.id === id)!), 'en').toUpperCase() }),
     [file.parts, file.groups],
   );
   const onFlow = useMemo(() => flowLinks(file.flows), [file.flows]);
@@ -37,7 +37,7 @@ export function PartChainCard({ file }: { file: PartsFile }) {
   const chained = new Set(file.flows.filter((f) => f.parts).map((f) => f.group));
   const groups = new Map(file.groups.map((g) => [g.id, g]));
   const byId = new Map(file.parts.map((p) => [p.id, p]));
-  const maxChars = Math.max(6, Math.floor(((layout.columns[0]?.w ?? 90) - 22) / (layout.compact ? 5.4 : 5.8)));
+  const lineH = layout.compact ? 10 : 11;
   const textDy = layout.compact ? 3.5 : 3.8;
 
   const linkColor = (a: string, b: string, group: string | null): string | undefined => {
@@ -63,7 +63,7 @@ export function PartChainCard({ file }: { file: PartsFile }) {
         return (
           <g key={c.id} className="space-chain__col">
             <text x={c.x} y={11} className="space-chain__head">
-              {String(n).padStart(2, '0')} {clip(tx(g?.name, 'en').toUpperCase(), maxChars)}
+              {String(n).padStart(2, '0')} {clip(tx(g?.name, 'en').toUpperCase(), layout.maxChars)}
             </text>
             <line x1={c.x} x2={c.x + c.w} y1={16} y2={16} className="space-chain__rule" style={{ stroke: resolveColorRef(g?.color ?? 'token:ink') }} />
           </g>
@@ -88,12 +88,20 @@ export function PartChainCard({ file }: { file: PartsFile }) {
           <g key={n.id} className="space-chain__node" data-on={on || undefined}>
             <title>{tx(part.name, 'en')} · {tx(part.name, 'zh')}</title>
             <rect x={n.x} y={n.y} width={n.w} height={n.h} />
-            <text x={n.x + 4} y={n.y + n.h / 2 + textDy} className="space-chain__n">
+            <text x={n.x + 4} y={n.y + n.h / 2 + textDy - ((n.lines!.length - 1) / 2) * lineH} className="space-chain__n">
               {String(n.n).padStart(2, '0')}
             </text>
-            <text x={n.x + 20} y={n.y + n.h / 2 + textDy} className="space-chain__name">
-              {clip(tx(chainName(part), 'en').toUpperCase(), maxChars)}
-            </text>
+            {n.lines!.map((line, i) => (
+              <text
+                key={i}
+                x={n.x + 20}
+                y={n.y + n.h / 2 + textDy + (i - (n.lines!.length - 1) / 2) * lineH}
+                className="space-chain__name"
+                {...(line.length > layout.maxChars ? { textLength: layout.lineWidth, lengthAdjust: 'spacingAndGlyphs' as const } : {})}
+              >
+                {line}
+              </text>
+            ))}
           </g>
         );
       })}

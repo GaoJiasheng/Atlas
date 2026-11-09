@@ -6,10 +6,11 @@
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Color, PlaneGeometry, ShaderMaterial, ShadowMaterial, type Group } from 'three';
+import { Color, PlaneGeometry, ShaderMaterial, ShadowMaterial, type Group, type PerspectiveCamera } from 'three';
 import type { StageLook } from './look';
 import type { StageRuntime } from './runtime';
 import { resolveDataColor } from '../../lib/color';
+import { groundShadowFade } from './groundFade';
 
 const vertexShader = /* glsl */ `
 varying vec2 vUv;
@@ -45,6 +46,8 @@ export function GroundShadow({
   shadows?: 'auto' | 'contact' | 'none';
 }) {
   const group = useRef<Group>(null);
+  const strength = useRef({ blob: 0.26, catcher: 0.16 });
+  const seen = useRef('');
   const geometry = useMemo(() => new PlaneGeometry(1, 1), []);
   const blob = useMemo(
     () =>
@@ -70,11 +73,11 @@ export function GroundShadow({
     const cinema = look.theme === 'cinema';
     const ink = new Color(cinema ? '#000000' : resolveDataColor('token:ink', look.tokens, look.theme));
     blob.uniforms.uColor!.value = ink;
-    blob.uniforms.uStrength!.value = cinema ? 0.6 : 0.26;
+    strength.current = cinema ? { blob: 0.6, catcher: 0.42 } : { blob: 0.26, catcher: 0.16 };
+    seen.current = '';
     catcher.color.copy(ink);
-    catcher.opacity = cinema ? 0.42 : 0.16;
   }, [blob, catcher, look]);
-  useFrame(() => {
+  useFrame(({ camera }) => {
     const g = group.current;
     if (!g) return;
     // Exercise mode: the floor the equipment stands on (bench feet, the planted palms), under the trunk.
@@ -83,6 +86,15 @@ export function GroundShadow({
     const x = ex?.floor != null ? ex.trunk.x : 0;
     const z = ex?.floor != null ? ex.trunk.z : 0;
     if (g.position.y !== y || g.position.x !== x || g.position.z !== z) g.position.set(x, y, z);
+    // Only when the view or the floor moved; this runs inside frames the stage draws anyway.
+    const p = camera.position;
+    const key = `${p.x},${p.y},${p.z},${y},${look.theme}`;
+    if (key === seen.current) return;
+    seen.current = key;
+    const fov = (camera as PerspectiveCamera).fov ?? 30;
+    const fade = groundShadowFade([p.x, p.y, p.z], y, [x, z], radius * 1.1, fov);
+    blob.uniforms.uStrength!.value = strength.current.blob * fade;
+    catcher.opacity = strength.current.catcher * fade;
   });
   return (
     <group ref={group} position={[0, floor[0], 0]} visible={shadows !== 'none'}>

@@ -2281,3 +2281,69 @@ button.space-plate__sel:focus-visible {
     min-width: var(--hit);
   }
 }
+
+/* The try-it picture on the stage while the HUD is hidden (stages/panels): top right, under the caption card's level; on phones docked above it. */
+.space-stage-panel {
+  --panel-gap: calc(24 * var(--u));
+  position: absolute;
+  z-index: 4;
+  top: var(--panel-gap);
+  right: var(--panel-gap);
+  box-sizing: border-box;
+  width: clamp(220px, calc(320 * var(--u)), 34%);
+  max-height: calc(100% - var(--caption-top, 0px) - 2 * var(--panel-gap));
+  overflow: hidden;
+  padding: calc(12 * var(--u)) calc(14 * var(--u));
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  color: var(--ink);
+  pointer-events: none;
+}
+.space-stage-panel .space-microscope {
+  max-width: none !important;
+  padding: 0;
+}
+.space-stage-panel .space-microscope figcaption { align-items: flex-start; }
+.space-stage-panel .space-microscope canvas {
+  width: min(100%, calc(100dvh - var(--caption-top, 0px) - 170px));
+  margin-inline: auto;
+}
+.space-stage-panel .space-stage-chart { margin: 0; }
+.space-stage-panel .space-chart__svg { max-width: none; }
+.space-stage-chart__note {
+  margin: 2px 0 0;
+  font: 400 10.5px / 1.4 var(--font-hud);
+  color: var(--ink-3);
+}
+@media (max-width: 759px) {
+  .space-stage-panel {
+    --panel-gap: 8px;
+    top: auto;
+    left: 24px;
+    right: 24px;
+    bottom: calc(var(--caption-top, 16px) + var(--panel-gap));
+    width: auto;
+    max-height: none;
+    padding: 8px 10px;
+  }
+  .space-stage-panel .space-microscope {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    column-gap: 12px;
+    align-content: start;
+  }
+  .space-stage-panel .space-microscope figcaption { grid-column: 2; padding-bottom: 4px; }
+  .space-stage-panel .space-microscope canvas { grid-column: 1; grid-row: 1 / span 3; width: 104px; }
+  .space-stage-panel .space-microscope p { grid-column: 2; margin: 0 0 2px; }
+  .space-stage-panel .space-microscope ul { display: none; }
+  .space-stage-chart__note { display: none; }
+}
+/* Short landscape stages: TOOLS (the longest list) goes to two columns so LAYERS, TOOLS and KEY all fit above the chapter axis. */
+@media (min-width: 760px) and (max-height: 960px) {
+  .space-overlay .atlas-ctl__section:nth-of-type(2) .atlas-ctl__rows:not([hidden]) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+  }
+  .space-overlay .atlas-ctl__section:nth-of-type(2) .atlas-ctl__key { display: none; }
+}
