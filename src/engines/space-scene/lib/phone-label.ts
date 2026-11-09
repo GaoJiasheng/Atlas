@@ -14,7 +14,7 @@
  * layout (`leader-layout.ts`) a placard may also sit above or below it, with
  * the leader leaving from the placard's bottom or top edge.
  */
-import { LEADER, segmentThroughRect, type LeaderFrame, type LeaderItem, type LeaderPlace, type ScreenRect, type Side } from './leader-layout';
+import { ELBOW, hits, INSET, PAD, segmentThroughRect, STEP, type LeaderFrame, type LeaderItem, type LeaderPlace, type ScreenRect, type Side } from './leader-layout';
 import { labelGroup } from './labels';
 
 /** Smallest touch target, px. */
@@ -51,18 +51,16 @@ export function phoneTarget(x0: number, y0: number, w: number, h: number): Scree
   return { x0: x0 - TARGET_INSET, y0: top, x1: x0 - TARGET_INSET + tw, y1: top + th };
 }
 
-const clash = (a: ScreenRect, b: ScreenRect, pad: number) => a.x0 < b.x1 + pad && a.x1 > b.x0 - pad && a.y0 < b.y1 + pad && a.y1 > b.y0 - pad;
-
 /** The leader for a placard, set towards its anchor; `null` when the anchor is level with and under the placard. */
 function route(item: LeaderItem, x0: number, y0: number): { side: Side; sx: number; sy: number; ex: number; vertical: boolean } | null {
   const x1 = x0 + item.w;
   const y1 = y0 + item.h;
-  const room = LEADER.ELBOW + LEADER.INSET;
+  const room = ELBOW + INSET;
   const sy = y0 + item.lead;
-  if (item.ax >= x1 + room) return { side: 'L', sx: x1 + LEADER.INSET, sy, ex: x1 + LEADER.INSET + LEADER.ELBOW, vertical: false };
-  if (item.ax <= x0 - room) return { side: 'R', sx: x0 - LEADER.INSET, sy, ex: x0 - LEADER.INSET - LEADER.ELBOW, vertical: false };
+  if (item.ax >= x1 + room) return { side: 'L', sx: x1 + INSET, sy, ex: x1 + INSET + ELBOW, vertical: false };
+  if (item.ax <= x0 - room) return { side: 'R', sx: x0 - INSET, sy, ex: x0 - INSET - ELBOW, vertical: false };
   if (item.ay > y0 && item.ay < y1) return null;
-  const x = Math.min(Math.max(item.ax, x0 + LEADER.INSET), x1 - LEADER.INSET);
+  const x = Math.min(Math.max(item.ax, x0 + INSET), x1 - INSET);
   return { side: item.ax >= (x0 + x1) / 2 ? 'L' : 'R', sx: x, sy: item.ay > y0 ? y1 + 2 : y0 - 2, ex: x, vertical: true };
 }
 
@@ -82,7 +80,7 @@ export function placePhoneLabel(item: LeaderItem, f: LeaderFrame): LeaderPlace |
   const focus: ScreenRect = item.bounds ?? { x0: ax, y0: ay, x1: ax, y1: ay };
   const xs = [focus.x0 - FOCUS_GAP - origin.x1, focus.x1 + FOCUS_GAP - origin.x0, ax - w / 2, minX, maxX];
   const ys = [focus.y0 - FOCUS_GAP - origin.y1, focus.y1 + FOCUS_GAP - origin.y0, ay - item.lead];
-  for (let y = minY; y <= maxY; y += LEADER.STEP) ys.push(y);
+  for (let y = minY; y <= maxY; y += STEP) ys.push(y);
   if (item.prev) {
     xs.push(item.prev.x0);
     ys.push(item.prev.y0);
@@ -96,8 +94,8 @@ export function placePhoneLabel(item: LeaderItem, f: LeaderFrame): LeaderPlace |
     for (const rawY of ys) {
       const y0 = Math.min(Math.max(rawY, minY), maxY);
       const target = phoneTarget(x0, y0, w, h);
-      if (clash(target, focus, FOCUS_GAP - 0.5)) continue;
-      if (f.obstacles.some((r) => clash(target, r, LEADER.PAD))) continue;
+      if (hits(target, focus, FOCUS_GAP - 0.5)) continue;
+      if (f.obstacles.some((r) => hits(target, r, PAD))) continue;
       const lead = route(item, x0, y0);
       if (!lead) continue;
       const length = Math.hypot(ax - lead.ex, ay - lead.sy) + Math.abs(lead.ex - lead.sx);

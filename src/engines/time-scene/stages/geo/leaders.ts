@@ -20,7 +20,7 @@
 import type { Map as MlMap } from 'maplibre-gl';
 import type { LngLat } from '../../lib/geo';
 import { displayOffsetScale, eventDisplayPoint, type DisplayOffset } from '../../lib/event-display';
-import { placeLeaders } from '../../lib/leader-layout';
+import { placeLeaders, START_GAP } from '../../lib/leader-layout';
 
 export interface LeaderItem {
   /** Unique key (`event:sample-meeting`). */
@@ -354,7 +354,7 @@ export function createLeaders(options: {
       e.el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
       e.el.style.opacity = '1';
       const ly = y + Math.min(e.h / 2, 9 * b.u);
-      const lx = side === 'L' ? x + e.w + 3 * b.u : x - 3 * b.u;
+      const lx = side === 'L' ? x + e.w + START_GAP * b.u : x - START_GAP * b.u;
       const ex = lx + (side === 'L' ? ELBOW : -ELBOW) * b.u;
       const ax = e.sx + b.ox;
       const ay = e.sy + b.oy;

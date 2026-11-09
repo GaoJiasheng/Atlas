@@ -556,6 +556,8 @@ export const partSchema = z
     chainName: bilingual.optional(),
     /** Required, except for `context` parts (which may stand outside every group). */
     group: kebabId.optional(),
+    /** Where the leader label points, from `primitive.at` (default: computed): for parts with a hole at their centre, such as a ring-shaped seal. */
+    labelPoint: vec3.optional(),
     /** Required, except for parts that link a `muscle` (then the muscle sheet's). */
     summary: bilingual.optional(),
     /**

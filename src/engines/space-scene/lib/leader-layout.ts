@@ -14,11 +14,13 @@
  *    placards and of every labelled anchor; a left-hand placard (text set
  *    right) has its anchor to its right, a right-hand one to its left, so the
  *    leader never runs across the text
- *  - soft limits: placards keep off the labelled parts' screen bounds (other
- *    parts strongly, their own part less), leaders do not cross each other or
+ *  - soft limits: placards keep off the labelled parts' screen bounds (the
+ *    part the view is about hardest, other parts strongly, their own part less), leaders do not cross each other or
  *    run through a placard, and a placard keeps its side and place while the
  *    camera moves (hysteresis). Placards may sit over the model where no
  *    labelled part is.
+ *
+ * `freeBand` works out the band from the HUD blocks; `noteLines` sets a note.
  *
  * Items come in priority order (the selected part, groups, larger parts); a
  * placard with no legal place is left out.
@@ -44,6 +46,8 @@ export interface LeaderItem {
   lead: number;
   /** On-screen bounds of the labelled part (or group). */
   bounds: ScreenRect | null;
+  /** The part the view is about (selected, or the beat's focus): placards keep off it hardest. */
+  focus?: boolean;
   /** Where the placard was last frame (keeps it steady while the camera moves). */
   prev: { side: Side; x0: number; y0: number } | null;
 }
@@ -59,6 +63,8 @@ export interface LeaderFrame {
   bottom: number;
   /** HUD blocks over the stage. */
   obstacles: readonly ScreenRect[];
+  /** Readouts drawn on the stage (energy bars): no placard on them, and leaders go round when they can. */
+  avoid?: readonly ScreenRect[];
   /** Optional data-driven barrier rule, supplied by the lazy inset HUD. */
   accept?: (place: LeaderPlace, item: LeaderItem) => boolean;
   /** Framed windows (insets): a placard whose anchor sits inside one also tries just outside its left and right edges. */
@@ -79,32 +85,38 @@ export interface LeaderPlace {
   ex: number;
 }
 
-export const LEADER = {
-  /** Minimum gap between placards, px. */
-  GAP: 8,
-  /** Horizontal leader stub, px. */
-  ELBOW: 16,
-  /** Leader start, px from the placard edge. */
-  INSET: 6,
-  /** Stage margin, px. */
-  EDGE: 14,
-  /** HUD blocks are kept this far away, px. */
-  PAD: 8,
-  /** Outermost column position when no HUD block bounds the band (share of the stage width). */
-  COLUMN_SHARE: 0.22,
-  /** Longest leader (share of the stage width). */
-  MAX_LEADER_SHARE: 0.35,
-  /** Narrowest column, px (two columns need twice this plus gaps). */
-  MIN_COL: 120,
-  /** Vertical search step, px. */
-  STEP: 6,
-} as const;
+/** Minimum gap between placards, px. */
+export const GAP = 8;
+/** Horizontal leader stub, px. */
+export const ELBOW = 16;
+/** Leader start, px from the placard edge. */
+export const INSET = 6;
+/** Stage margin, px. */
+export const EDGE = 14;
+/** HUD blocks are kept this far away, px. */
+export const PAD = 8;
+/** Outermost column position when no HUD block bounds the band (share of the stage width). */
+export const COLUMN_SHARE = 0.22;
+/** Longest leader (share of the stage width). */
+export const MAX_LEADER_SHARE = 0.35;
+/** Narrowest column, px (two columns need twice this plus gaps). */
+export const MIN_COL = 120;
+/** Vertical search step, px. */
+export const STEP = 6;
+
+/** Free band (px) below which only the selected part is labelled. */
+export const MIN_BAND = 360;
+/** A side's HUD blocks bound the band only when they fill this share of its height. */
+const COLUMN_FILL = 0.4;
+/** HUD blocks that bound the band are kept this far from it, px. */
+export const BAND_GAP = 18;
 
 /* Costs (px-equivalents). */
 const W_DY = 1;
 const W_DX = 0.15;
 const W_OTHER = 600;
 const W_OWN = 260;
+const W_FOCUS = 1500;
 const W_BESIDE = 90;
 const W_NEAR = 130;
 const W_WRONG_SIDE = 150;
@@ -117,7 +129,7 @@ const W_THROUGH = 700;
 
 const overlap = (a: ScreenRect, b: ScreenRect) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 
-const hits = (a: ScreenRect, b: ScreenRect, pad: number) => a.x0 < b.x1 + pad && a.x1 > b.x0 - pad && a.y0 < b.y1 + pad && a.y1 > b.y0 - pad;
+export const hits = (a: ScreenRect, b: ScreenRect, pad: number) => a.x0 < b.x1 + pad && a.x1 > b.x0 - pad && a.y0 < b.y1 + pad && a.y1 > b.y0 - pad;
 
 /** Do segments p1–p2 and p3–p4 cross (proper intersection)? */
 function segmentsCross(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): boolean {
@@ -172,7 +184,7 @@ export function naturalSide(f: LeaderFrame, cols: { L: number; R: number }, x: n
 
 /** Can the band hold two columns? */
 export function twoColumns(f: LeaderFrame, colW: number): boolean {
-  return f.right - f.left >= 2 * Math.max(LEADER.MIN_COL, colW * 0.6) + 6 * LEADER.GAP;
+  return f.right - f.left >= 2 * Math.max(MIN_COL, colW * 0.6) + 6 * GAP;
 }
 
 /**
@@ -182,13 +194,13 @@ export function twoColumns(f: LeaderFrame, colW: number): boolean {
  * towards its anchors' parts (never past them, never out of the band).
  */
 export function columnEdges(items: readonly LeaderItem[], f: LeaderFrame): { L: number; R: number; two: boolean } {
-  const colW = items.reduce<number>((m, i) => Math.max(m, i.w), LEADER.MIN_COL);
+  const colW = items.reduce<number>((m, i) => Math.max(m, i.w), MIN_COL);
   const two = twoColumns(f, colW);
   const mid = (f.left + f.right) / 2;
   const baseL = f.left + colW;
   const baseR = f.right - colW;
-  const innerL = two ? Math.max(baseL, Math.min(f.width * LEADER.COLUMN_SHARE, mid - 3 * LEADER.GAP)) : baseL;
-  const innerR = two ? Math.min(baseR, Math.max(f.width * (1 - LEADER.COLUMN_SHARE), mid + 3 * LEADER.GAP)) : baseR;
+  const innerL = two ? Math.max(baseL, Math.min(f.width * COLUMN_SHARE, mid - 3 * GAP)) : baseL;
+  const innerR = two ? Math.min(baseR, Math.max(f.width * (1 - COLUMN_SHARE), mid + 3 * GAP)) : baseR;
   let minL = Infinity;
   let maxR = -Infinity;
   const third = (f.right - f.left) / 3;
@@ -198,7 +210,7 @@ export function columnEdges(items: readonly LeaderItem[], f: LeaderFrame): { L: 
     else if (two && i.ax <= f.right - third) continue;
     else maxR = Math.max(maxR, i.bounds ? Math.max(i.bounds.x1, i.ax) : i.ax);
   }
-  const reach = 2 * LEADER.ELBOW;
+  const reach = 2 * ELBOW;
   const L = Number.isFinite(minL) ? Math.max(baseL, Math.min(innerL, minL - reach)) : innerL;
   const R = Number.isFinite(maxR) ? Math.min(baseR, Math.max(innerR, maxR + reach)) : innerR;
   return { L, R, two };
@@ -211,9 +223,77 @@ export function columnEdges(items: readonly LeaderItem[], f: LeaderFrame): { L: 
  */
 function leaderStart(side: Side, x0: number, x1: number, y0: number, item: LeaderItem): { sx: number; sy: number; ex: number } | null {
   const sy = y0 + item.lead;
-  const room = LEADER.ELBOW + LEADER.INSET;
-  if (side === 'L') return item.ax >= x1 + room ? { sx: x1 + LEADER.INSET, sy, ex: x1 + LEADER.INSET + LEADER.ELBOW } : null;
-  return item.ax <= x0 - room ? { sx: x0 - LEADER.INSET, sy, ex: x0 - LEADER.INSET - LEADER.ELBOW } : null;
+  const room = ELBOW + INSET;
+  if (side === 'L') return item.ax >= x1 + room ? { sx: x1 + INSET, sy, ex: x1 + INSET + ELBOW } : null;
+  return item.ax <= x0 - room ? { sx: x0 - INSET, sy, ex: x0 - INSET - ELBOW } : null;
+}
+
+/**
+ * How far a side's blocks close the band: the innermost edge that blocks
+ * reaching at least that far fill `COLUMN_FILL` of the band's height with.
+ * A column of stacked cards bounds the band; a title or a small floating
+ * card beside open stage does not (it stays an obstacle), however wide it is.
+ * `reach` is a block's inward extent, larger = further into the stage.
+ */
+function closedEdge(blocks: readonly ScreenRect[], reach: (r: ScreenRect) => number, top: number, bottom: number): number | null {
+  const filledTo = (at: number) => blocks.reduce((sum, r) => (reach(r) >= at ? sum + Math.max(0, Math.min(r.y1, bottom) - Math.max(r.y0, top)) : sum), 0);
+  const edges = blocks.map(reach).filter((at) => filledTo(at) >= (bottom - top) * COLUMN_FILL);
+  return edges.length ? Math.max(...edges) : null;
+}
+
+/** The free band between the HUD blocks over a `width` × `height` stage. */
+export function freeBand(rects: readonly ScreenRect[], width: number, height: number): Pick<LeaderFrame, 'top' | 'bottom' | 'left' | 'right'> {
+  const top = EDGE;
+  let bottom = height - EDGE;
+  // Blocks across the middle at the bottom (the chapter axis, the reader sheet) close the band from below.
+  for (const r of rects) if (r.y0 > height * 0.45 && r.x0 < width / 2 && r.x1 > width / 2) bottom = Math.min(bottom, r.y0 - 12);
+  const beside = rects.filter((r) => r.y0 < bottom && r.y1 > top);
+  const leftEdge = closedEdge(beside.filter((r) => r.x1 < width / 2), (r) => r.x1, top, bottom);
+  const rightEdge = closedEdge(beside.filter((r) => r.x0 > width / 2), (r) => -r.x0, top, bottom);
+  return {
+    top,
+    bottom,
+    left: leftEdge === null ? EDGE : leftEdge + BAND_GAP,
+    right: rightEdge === null ? width - EDGE : -rightEdge - BAND_GAP,
+  };
+}
+
+/** The energy-bars readout (`EnergyBarLabels`): the block's half width, its row height and rows, px. */
+export const ENERGY_HALF = 62;
+export const ENERGY_ROW = 14;
+export const ENERGY_ROWS = 3;
+
+/** Where the readout's block sits on the stage: under the bars' base, kept on the stage. */
+export const energyBlockAt = (x: number, y: number, width: number, height: number) => ({
+  x: Math.min(Math.max(x, ENERGY_HALF + 2), width - ENERGY_HALF - 2),
+  y: Math.min(y + 6, height - ENERGY_ROWS * ENERGY_ROW - 6),
+});
+
+/** The screen box of one energy-bars readout: the bars (up to `b.top`) and the block under them. */
+export function energyBarsRect(b: { x: number; y: number; top: number }, width: number, height: number): ScreenRect {
+  const { x, y } = energyBlockAt(b.x, b.y, width, height);
+  return { x0: x - ENERGY_HALF, y0: Math.min(b.top, y), x1: x + ENERGY_HALF, y1: y + ENERGY_ROWS * ENERGY_ROW + 1 };
+}
+
+/**
+ * A placard's note in at most two lines, broken between words (Chinese
+ * anywhere). Text that still does not fit ends in an ellipsis after a whole word.
+ */
+export function noteLines(text: string, locale: 'en' | 'zh'): string[] {
+  const max = locale === 'zh' ? 18 : 34;
+  const lines: string[] = [];
+  let rest = text.trim();
+  while (rest) {
+    if (rest.length <= max) return [...lines, rest];
+    const last = lines.length === 1;
+    const room = last ? max - 1 : max;
+    const space = locale === 'zh' ? -1 : rest.lastIndexOf(' ', room);
+    const end = space > 0 ? space : room;
+    lines.push(rest.slice(0, end).trimEnd() + (last ? '…' : ''));
+    if (last) break;
+    rest = rest.slice(end).trimStart();
+  }
+  return lines;
 }
 
 /** Re-placement passes after the greedy one (each placard again, with all the others in place). */
@@ -266,9 +346,9 @@ function bestPlace(
   cols: { L: number; R: number; two: boolean },
 ): { place: LeaderPlace; cost: number } | null {
   if (item.h > f.bottom - f.top) return null;
-  const maxLeader = f.width * LEADER.MAX_LEADER_SHARE;
-  const minX = LEADER.EDGE;
-  const maxX = f.width - LEADER.EDGE;
+  const maxLeader = f.width * MAX_LEADER_SHARE;
+  const minX = EDGE;
+  const maxX = f.width - EDGE;
   const sides: Side[] = cols.two ? ['L', 'R'] : ['R', 'L'];
   let best: LeaderPlace | null = null;
   let bestCost = Infinity;
@@ -277,7 +357,7 @@ function bestPlace(
   for (const side of sides) {
     // Box left edges: the column, beside the part's bounds, beside the anchor.
     const own = item.bounds;
-    const reach = 2 * LEADER.ELBOW;
+    const reach = 2 * ELBOW;
     const xs: [number, number][] =
       side === 'L'
         ? [
@@ -291,7 +371,7 @@ function bestPlace(
             [item.ax + reach, W_NEAR],
           ];
     // Just outside a framed window around the anchor: the stub stays outside, one leg enters the frame.
-    const clearance = Math.max(LEADER.PAD, LEADER.INSET + LEADER.ELBOW) + 1;
+    const clearance = Math.max(PAD, INSET + ELBOW) + 1;
     for (const r of f.beside ?? []) {
       if (item.ax <= r.x0 || item.ax >= r.x1 || item.ay <= r.y0 || item.ay >= r.y1) continue;
       xs.push(side === 'L' ? [r.x0 - clearance - item.w, W_BESIDE] : [r.x1 + clearance, W_BESIDE]);
@@ -305,19 +385,20 @@ function bestPlace(
       const x1 = x0 + item.w;
       const desired = item.ay - item.lead;
       const ys: number[] = [];
-      for (let y = f.top; y <= f.bottom - item.h; y += LEADER.STEP) ys.push(y);
+      for (let y = f.top; y <= f.bottom - item.h; y += STEP) ys.push(y);
       ys.push(Math.min(Math.max(desired, f.top), f.bottom - item.h));
       if (item.prev && item.prev.side === side) ys.push(Math.min(Math.max(item.prev.y0, f.top), f.bottom - item.h));
       for (const y0 of ys) {
         const box: ScreenRect = { x0, y0, x1, y1: y0 + item.h };
         const lead = leaderStart(side, x0, x1, y0, item);
         if (!lead) continue;
-        const len = Math.hypot(item.ax - lead.ex, item.ay - lead.sy) + LEADER.ELBOW;
+        const len = Math.hypot(item.ax - lead.ex, item.ay - lead.sy) + ELBOW;
         if (len > maxLeader) continue;
-        if (f.obstacles.some((r) => hits(box, r, LEADER.PAD))) continue;
+        if (f.obstacles.some((r) => hits(box, r, PAD))) continue;
+        if (f.avoid?.some((r) => hits(box, r, PAD))) continue;
         if (f.accept && !f.accept({id:item.id,side,...box,...lead},item)) continue;
-        if (placed.some((p) => hits(box, p, LEADER.GAP / 2))) continue;
-        if (items.some((o) => o.ax > x0 - LEADER.PAD && o.ax < x1 + LEADER.PAD && o.ay > y0 - LEADER.PAD && o.ay < box.y1 + LEADER.PAD)) continue;
+        if (placed.some((p) => hits(box, p, GAP / 2))) continue;
+        if (items.some((o) => o.ax > x0 - PAD && o.ax < x1 + PAD && o.ay > y0 - PAD && o.ay < box.y1 + PAD)) continue;
         let cost = xCost + W_DY * Math.abs(lead.sy - item.ay) + W_DX * Math.abs(item.ax - lead.ex);
         if (side !== natural) cost += W_WRONG_SIDE;
         if (item.prev && item.prev.side === side) cost += W_PREV_Y * Math.abs(item.prev.y0 - y0) + W_PREV_X * Math.abs(item.prev.x0 - x0);
@@ -325,9 +406,10 @@ function bestPlace(
         for (const o of items) {
           if (!o.bounds) continue;
           const a = overlap(box, o.bounds);
-          if (a > 0) cost += (a / area) * (o.id === item.id ? W_OWN : W_OTHER);
+          if (a > 0) cost += (a / area) * (o.focus ? W_FOCUS : o.id === item.id ? W_OWN : W_OTHER);
         }
         if (cost >= bestCost) continue;
+        for (const r of f.avoid ?? []) if (segmentThroughRect(lead.ex, lead.sy, item.ax, item.ay, r)) cost += W_THROUGH;
         for (const p of placed) {
           const pa = byId.get(p.id)!;
           if (segmentsCross(lead.ex, lead.sy, item.ax, item.ay, p.ex, p.sy, pa.ax, pa.ay)) cost += W_CROSS;

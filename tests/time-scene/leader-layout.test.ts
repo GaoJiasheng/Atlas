@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LEADER_REACH, placeLeaders, type LeaderBand, type LeaderInput } from '../../src/engines/time-scene/lib/leader-layout';
+import { LEADER_REACH, START_GAP, placeLeaders, type LeaderBand, type LeaderInput } from '../../src/engines/time-scene/lib/leader-layout';
 
 const band: LeaderBand = { left: 340, right: 1002, top: 14, bottom: 590, u: 1, obstacles: [{ x: 16, y: 10, w: 300, h: 70 }] };
 const item = (key: string, sx: number, sy: number, over: Partial<LeaderInput> = {}): LeaderInput => ({ key, w: 168, h: 50, sx, sy, side: null, ...over });
@@ -10,6 +10,12 @@ describe('placeLeaders', () => {
     const run = slot.side === 'R' ? slot.x - 452 : 452 - (slot.x + slot.w);
     expect(run).toBeGreaterThan(0);
     expect(run).toBeLessThanOrEqual(LEADER_REACH);
+  });
+
+  it('leaves the start gap and elbow between the placard and its anchor', () => {
+    const slot = placeLeaders([item('a', 452, 299)], band, 1024, 768).get('a')!;
+    const run = slot.side === 'R' ? slot.x - 452 : 452 - (slot.x + slot.w);
+    expect(run).toBeGreaterThanOrEqual(14 + START_GAP);
   });
 
   it('uses the other side when the near side has no room', () => {

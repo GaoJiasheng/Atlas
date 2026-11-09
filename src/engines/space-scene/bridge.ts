@@ -46,6 +46,8 @@ export interface EnergyBarsOnScreen {
   sound: number;
   x: number;
   y: number;
+  /** Screen y of the bars' top (labels keep off the bars as well as the block). */
+  top: number;
   /** Drawn now (its part on show, `when` holds, not exploded, in front of the camera). */
   shown: boolean;
 }

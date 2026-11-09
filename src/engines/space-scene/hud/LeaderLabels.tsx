@@ -1,7 +1,7 @@
 /**
  * Leader labels (master-spec J) in the host's `leaders` SVG slot.
  *
- *  - label = number + EN name (bold) / 中文 / one-line note (the part's summary);
+ *  - label = number + EN name (bold) / 中文 / note of up to two lines (the part's summary);
  *    a part's `short` name when it has one (M13);
  *    left-hand placards set right, right-hand ones set left behind a small triangle
  *  - thin leader: label edge → short horizontal → straight run → hollow circle
@@ -11,7 +11,8 @@
  *    78 % of the stage, moving in towards their anchors), each placard on its
  *    anchor's side and as level with it as stacking allows, clear of the HUD
  *    blocks and of the labelled parts' screen boxes; placards may sit over the
- *    model where no labelled part is (then a paper plate backs the text)
+ *    model where no labelled part is. Every placard has a plate of the stage
+ *    colour behind its text: invisible on the empty stage, a chip on any surface
  *  - per rendered frame (stage bridge): only `transform` / `opacity` / `d` /
  *    `cx` / `cy` are written; sizes and the `[data-hud-panel]` blocks are
  *    measured on resize and when the label set changes
@@ -46,14 +47,14 @@ import { tx } from '../../../i18n';
 import { resolveAllPartDisplays } from '../lib/visibility';
 import { partBounds } from '../lib/parts';
 import { labelBudget } from '../lib/schematic';
-import { layoutLeaders, type LeaderFrame, type LeaderItem, type LeaderPlace, type ScreenRect, type Side } from '../lib/leader-layout';
+import { EDGE, energyBarsRect, freeBand, layoutLeaders, MIN_BAND, noteLines, type LeaderFrame, type LeaderItem, type LeaderPlace, type ScreenRect, type Side } from '../lib/leader-layout';
 import { groupLabelId, labelGroup, listedLabels, PRESENT_LABEL_CAP } from '../lib/labels';
 import { beatFocusPart, placePhoneLabel } from '../lib/phone-label';
 import type { SpaceSceneExt } from '../index';
 import type { PartsFile, SpaceChapterState } from '../schema';
 import type { ScreenAnchor, StageBridge } from '../bridge';
 import type { SpaceUiStore } from '../ui';
-import { clip, partNumber } from './common';
+import { partNumber } from './common';
 import { beginLabelGesture } from '../lib/label-gesture';
 
 interface LabelDom {
@@ -77,22 +78,12 @@ interface LabelState {
   x: number;
   y: number;
   vis: number;
-  /** The paper plate is on (the placard lies over the model). */
-  plate: boolean;
 }
 
 interface Frame extends LeaderFrame {
   /** HUD blocks over the stage (placards keep clear; anchors under them get no label). */
   obstacles: ScreenRect[];
   ok: boolean;
-}
-
-/** Does the box overlap the on-screen box of any part on show (group anchors left out: their boxes have gaps)? */
-function overModel(anchors: ReadonlyMap<string, ScreenAnchor>, b: ScreenRect): boolean {
-  for (const [id, a] of anchors) {
-    if (a.shown && a.onScreen && labelGroup(id) === null && b.x0 < a.x1 && b.x1 > a.x0 && b.y0 < a.y1 && b.y1 > a.y0) return true;
-  }
-  return false;
 }
 
 const under = (rects: readonly ScreenRect[], x: number, y: number) => rects.some((r) => x >= r.x0 && x <= r.x1 && y >= r.y0 && y <= r.y1);
@@ -102,8 +93,6 @@ const TRI = 8;
 /** Padding of the paper plate behind a placard's text, px. */
 const PLATE_PAD = 4;
 const FADE = 9;
-/** Free stage band (stage px) below which leader labels are limited to the selected part. */
-const MIN_BAND = 480;
 /** Re-measure this long after the HUD shows or hides, in case its fade's `transitionend` never comes (`--dur-hud` is 350 ms). */
 const HUD_FADE_MS = 1000;
 
@@ -166,16 +155,16 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   }));
   const sizes = useMemo(() => priority(file), [file]);
   const groups = useMemo(() => new Map(file.groups.map((g) => [g.id, g])), [file.groups]);
+  const shownState = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
+  const beat = s.beat !== null ? shownState?.beats?.[s.beat] : undefined;
   const listed = useMemo(() => {
-    const state = chapters.find((c) => c.id === s.chapter)?.state as SpaceChapterState | undefined;
-    const beat = s.beat !== null ? state?.beats?.[s.beat] : undefined;
     if (solo) {
       // A chapter without beats of its own is its one beat.
-      const focus = beatFocusPart(state?.beats?.length ? beat : state);
+      const focus = beatFocusPart(shownState?.beats?.length ? beat : shownState);
       return focus ? [focus] : [];
     }
-    return listedLabels({ presenting, beat: beat?.labels ?? null, chapter: state?.labels });
-  }, [presenting, solo, chapters, s.chapter, s.beat]);
+    return listedLabels({ presenting, beat: beat?.labels ?? null, chapter: shownState?.labels });
+  }, [presenting, solo, shownState, beat]);
   // Twins whose part names both sides (`labelBoth`), by the part's id.
   const both = useMemo(
     () => new Map(file.parts.filter((p) => p.pair && !p.twinOf && typeof p.bilateral === 'object' && p.bilateral.labelBoth).map((p) => [p.id, p.pair!])),
@@ -213,6 +202,8 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
   const frame = useRef<Frame>({ width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0, obstacles: [], ok: false });
   const clock = useRef(0);
   const selected = s.part;
+  // The part the view is about: the selected one, else the beat's focus.
+  const focus = s.part ?? beatFocusPart(beat);
 
   const register = useCallback((id: string, dom: LabelDom | null) => {
     const map = labels.current;
@@ -221,7 +212,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       return;
     }
     const prev = map.get(id);
-    map.set(id, prev ? { ...prev, dom, plate: true } : { dom, w: 0, h: 0, top: 0, side: null, x: 0, y: -1, vis: 0, plate: true });
+    map.set(id, prev ? { ...prev, dom } : { dom, w: 0, h: 0, top: 0, side: null, x: 0, y: -1, vis: 0 });
   }, []);
 
   /* ---------------- measure (resize, label set, fonts) ---------------- */
@@ -252,10 +243,6 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     }
     const W = box.width;
     const H = box.height;
-    let top = 14;
-    let bottom = H - 14;
-    let left = 14;
-    let right = W - 14;
     const scene = svg.closest('.atlas-scene') ?? document;
     const rects: ScreenRect[] = [];
     // The overlay column is wider than its right-aligned cards: use the cards.
@@ -271,24 +258,19 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       if (getComputedStyle(el).visibility === 'hidden') continue;
       rects.push({ x0: r.left - box.left, y0: r.top - box.top, x1: r.right - box.left, y1: r.bottom - box.top });
     }
+    let band = freeBand(rects, W, H);
     if (solo) {
       // The band is the safe area only (read through `scroll-padding`, space-scene.css): the blocks stay obstacles, not band edges.
       const css = getComputedStyle(svg);
       const px = (v: string) => parseFloat(v) || 0;
-      top = Math.max(top, px(css.scrollPaddingTop) - box.top);
-      left = Math.max(left, px(css.scrollPaddingLeft) - box.left);
-      bottom = Math.min(bottom, window.innerHeight - px(css.scrollPaddingBottom) - box.top);
-      right = Math.min(right, window.innerWidth - px(css.scrollPaddingRight) - box.left);
-    } else {
-      // Blocks across the middle at the bottom (the chapter axis, the reader sheet) close the band from below.
-      for (const r of rects) if (r.y0 > H * 0.45 && r.x0 < W / 2 && r.x1 > W / 2) bottom = Math.min(bottom, r.y0 - 12);
-      for (const r of rects) {
-        if (r.y0 >= bottom || r.y1 <= top) continue;
-        if (r.x1 < W / 2) left = Math.max(left, r.x1 + 18);
-        else if (r.x0 > W / 2) right = Math.min(right, r.x0 - 18);
-      }
+      band = {
+        top: Math.max(EDGE, px(css.scrollPaddingTop) - box.top),
+        left: Math.max(EDGE, px(css.scrollPaddingLeft) - box.left),
+        bottom: Math.min(H - EDGE, window.innerHeight - px(css.scrollPaddingBottom) - box.top),
+        right: Math.min(W - EDGE, window.innerWidth - px(css.scrollPaddingRight) - box.left),
+      };
     }
-    Object.assign(f, { width: W, height: H, top, bottom, left, right, obstacles: rects });
+    Object.assign(f, { width: W, height: H, ...band, obstacles: rects });
     bridge.invalidate();
   }, [bridge, presenting, solo]);
 
@@ -385,19 +367,23 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           h: l.h,
           lead: Math.min(l.h * 0.22, -l.top * 0.7),
           bounds: { x0: a.x0, y0: a.y0, x1: a.x1, y1: a.y1 },
+          focus: id === focus,
           prev: l.side && l.y >= 0 ? { side: l.side, x0: l.x, y0: l.y } : null,
         });
       }
       // Only inset-enabled topics load the barrier geometry. Its provider uses
       // the same live anchors and stage size as the visible dashed frame.
       const inset = bridge.insetLayout?.();
+      // Readouts drawn on the stage move with the model: taken afresh each frame.
+      const avoid: ScreenRect[] = [];
+      for (const b of bridge.energyBars.values()) if (b.shown) avoid.push(energyBarsRect(b, f.width, f.height));
       // Frame titles are hard barriers, even when a crowded view loses a label.
       const accept = (p: LeaderPlace, i: LeaderItem) => inset!.clear(p, i.ax, i.ay);
       const places = solo
         ? items.flatMap((i) => placePhoneLabel(i, inset ? { ...f, accept } : f) ?? [])
         : inset
-          ? layoutLeaders(items, { ...f, obstacles: [...f.obstacles, ...inset.bodies], beside: inset.frames, accept })
-          : layoutLeaders(items, f);
+          ? layoutLeaders(items, { ...f, avoid, obstacles: [...f.obstacles, ...inset.bodies], beside: inset.frames, accept })
+          : layoutLeaders(items, { ...f, avoid });
       let moving = false;
       placed.clear();
       const k = Math.min(1, dt * 10);
@@ -410,7 +396,6 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           l.dom.text.setAttribute('text-anchor', p.side === 'L' ? 'end' : 'start');
           for (const ts of l.dom.text.children) ts.setAttribute('x', String(p.side === 'L' ? l.w + TRI : TRI));
           l.dom.tri.style.display = p.side === 'L' ? 'none' : '';
-          l.dom.hit.setAttribute('x', '-4');
           l.side = p.side;
           l.y = -1;
         }
@@ -434,12 +419,6 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
         else moving = true;
         const dx = l.x - p.x0;
         const dy = l.y - p.y0;
-        // The paper plate only where the placard lies over a part on show.
-        const over = overModel(bridge.anchors, p);
-        if (l.plate !== over) {
-          l.plate = over;
-          l.dom.plate.style.opacity = over ? '' : '0';
-        }
         const baseline = l.y - l.top;
         l.dom.g.setAttribute('transform', `translate(${l.x.toFixed(1)} ${baseline.toFixed(1)})`);
         l.dom.g.style.opacity = l.vis.toFixed(3);
@@ -474,7 +453,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     return () => {
       bridge.listeners.delete(layout);
     };
-  }, [bridge, candidates, selected, labelsOn, presenting, solo, listed, file.views.insets]);
+  }, [bridge, candidates, selected, focus, labelsOn, presenting, solo, listed, file.views.insets]);
 
   if (!labelsOn) return null;
   return (
@@ -490,7 +469,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
               n=""
               en={tx(g.name, 'en')}
               zh={tx(g.name, 'zh')}
-              note=""
+              note={[]}
               group
               on={false}
               register={register}
@@ -505,7 +484,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
             n={partNumber(file, id)}
             en={tx(part.short ?? part.name, 'en')}
             zh={tx(part.short ?? part.name, 'zh')}
-            note={solo ? '' : clip(tx(part.summary, locale), locale === 'zh' ? 18 : 34)}
+            note={solo ? [] : noteLines(tx(part.summary, locale), locale)}
             on={id === selected}
             register={register}
             onSelect={() => store.getState().patch({ part: id })}
@@ -521,7 +500,7 @@ function Label(props: {
   n: string;
   en: string;
   zh: string;
-  note: string;
+  note: readonly string[];
   /** A whole group (`group:<id>`): name only, nothing to select. */
   group?: boolean;
   on: boolean;
@@ -573,11 +552,11 @@ function Label(props: {
           <tspan className="space-co__zh" x={0} dy="1.5em" lang={zhFirst ? 'en' : 'zh-Hans'}>
             {zhFirst ? props.en.toUpperCase() : props.zh}
           </tspan>
-          {props.note && (
-            <tspan className="space-co__note" x={0} dy="1.45em">
-              {props.note}
+          {props.note.map((line, i) => (
+            <tspan key={i} className="space-co__note" x={0} dy={i === 0 ? '1.45em' : '1.3em'}>
+              {line}
             </tspan>
-          )}
+          ))}
         </text>
       </g>
     </>

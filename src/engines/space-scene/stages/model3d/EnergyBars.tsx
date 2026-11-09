@@ -114,7 +114,7 @@ export default function EnergyBars({
       const base = i * BAR_QUADS * 4;
       if (!h || !v || s.fade[i]! <= 0) {
         parr.fill(0, base * 3, (base + BAR_QUADS * 4) * 3);
-        bridge.energyBars.set(index, { timeline: o.timeline, potential: v?.potential ?? 0, kinetic: v?.kinetic ?? 0, lost: v?.lost ?? 0, heat: v?.heat ?? 0, sound: v?.sound ?? 0, x: 0, y: 0, shown: false });
+        bridge.energyBars.set(index, { timeline: o.timeline, potential: v?.potential ?? 0, kinetic: v?.kinetic ?? 0, lost: v?.lost ?? 0, heat: v?.heat ?? 0, sound: v?.sound ?? 0, x: 0, y: 0, top: 0, shown: false });
         return;
       }
       any = true;
@@ -163,11 +163,18 @@ export default function EnergyBars({
       if (parent) parent.localToWorld(tmpCam);
       tmpCam.project(cam);
       const front = tmpCam.z < 1 && Math.abs(tmpCam.x) <= 0.97 && Math.abs(tmpCam.y) <= 0.97;
+      const screenX = ((tmpCam.x + 1) / 2) * state.size.width;
+      const screenY = ((1 - tmpCam.y) / 2) * state.size.height;
+      // The top of the full-height bars, for the leader labels to keep off.
+      tmpCam.set(tmpA.x, tmpA.y + full, tmpA.z);
+      if (parent) parent.localToWorld(tmpCam);
+      tmpCam.project(cam);
       bridge.energyBars.set(index, {
         timeline: o.timeline,
         ...v,
-        x: ((tmpCam.x + 1) / 2) * state.size.width,
-        y: ((1 - tmpCam.y) / 2) * state.size.height,
+        x: screenX,
+        y: screenY,
+        top: ((1 - tmpCam.y) / 2) * state.size.height,
         shown: front && s.fade[i]! > 0.5,
       });
     });

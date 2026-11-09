@@ -15,6 +15,8 @@ export interface LeaderSlot extends LeaderBox { side: 'L' | 'R' }
 const GAP = 8;
 const EDGE = 22;
 const ELBOW = 14;
+/** Gap between a placard's text and the start of its leader. */
+export const START_GAP = 7;
 const MIN_COL = 120;
 const SIDE_HYSTERESIS = 40;
 /** The longest horizontal run from a placard to its anchor. */
@@ -33,6 +35,7 @@ export function placeLeaders(items: readonly LeaderInput[], band: LeaderBand, wi
   const gap = GAP * u;
   const elbow = ELBOW * u;
   const reach = LEADER_REACH * u;
+  const clearance = elbow + START_GAP * u;
   const twoColumns = room >= 2 * MIN_COL * u + 6 * gap;
   const oneColumn = room >= MIN_COL * u + 2 * gap;
   const shown = items.filter((e) => {
@@ -72,8 +75,8 @@ export function placeLeaders(items: readonly LeaderInput[], band: LeaderBand, wi
 
   /** Left edge of the placard on `s`: the column, pulled in to within `reach` of the anchor and never on it. */
   const xFor = (e: LeaderInput, s: 'L' | 'R') => s === 'L'
-    ? Math.min(Math.max(xL, e.sx - reach), e.sx - elbow) - e.w
-    : Math.max(Math.min(xR, e.sx + reach), e.sx + elbow);
+    ? Math.min(Math.max(xL, e.sx - reach), e.sx - clearance) - e.w
+    : Math.max(Math.min(xR, e.sx + reach), e.sx + clearance);
   const margin = EDGE * u;
   const restY = (e: LeaderInput) => Math.min(Math.max(e.sy - e.h * 0.35, band.top), band.bottom - e.h);
   const fits = (e: LeaderInput, s: 'L' | 'R') => {

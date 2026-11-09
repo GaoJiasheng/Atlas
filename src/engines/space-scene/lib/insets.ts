@@ -1,4 +1,4 @@
-import { LEADER, segmentThroughRect, type LeaderPlace, type ScreenRect } from './leader-layout';
+import { PAD, segmentThroughRect, type LeaderPlace, type ScreenRect } from './leader-layout';
 
 /** Enlarged-window border (docs/58 F4): the stage-pixel frame around the parts of an inset. */
 export interface InsetBox { x0: number; y0: number; x1: number; y1: number; shown: boolean; onScreen: boolean }
@@ -34,10 +34,10 @@ export function leaderClearOfInsets(p: LeaderPlace, ax: number, ay: number, inse
     segmentThroughRect(p.sx,p.sy,p.ex,p.sy,t,0) || segmentThroughRect(p.ex,p.sy,ax,ay,t,0))) return false;
   return insets.every(r => {
     const inside = ax > r.x0 && ax < r.x1 && ay > r.y0 && ay < r.y1;
-    if (inside && p.x0 >= r.x0 + LEADER.PAD && p.x1 <= r.x1 - LEADER.PAD &&
-      p.y0 >= r.y0 + LEADER.PAD && p.y1 <= r.y1 - LEADER.PAD &&
+    if (inside && p.x0 >= r.x0 + PAD && p.x1 <= r.x1 - PAD &&
+      p.y0 >= r.y0 + PAD && p.y1 <= r.y1 - PAD &&
       Math.min(p.sx,p.ex) > r.x0 && Math.max(p.sx,p.ex) < r.x1) return true;
-    const clear = !(p.x0 < r.x1+LEADER.PAD && p.x1 > r.x0-LEADER.PAD && p.y0 < r.y1+LEADER.PAD && p.y1 > r.y0-LEADER.PAD-INSET_TITLE) &&
+    const clear = !(p.x0 < r.x1+PAD && p.x1 > r.x0-PAD && p.y0 < r.y1+PAD && p.y1 > r.y0-PAD-INSET_TITLE) &&
       !segmentThroughRect(p.sx,p.sy,p.ex,p.sy,r,0);
     // From an outside elbow, a straight leg into a convex window crosses its border exactly once.
     return clear && (inside || !segmentThroughRect(p.ex,p.sy,ax,ay,r,0));

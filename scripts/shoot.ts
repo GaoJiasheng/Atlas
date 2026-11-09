@@ -432,6 +432,18 @@ function unlabelled(s: Session): Promise<string[]> {
   });
 }
 
+/**
+ * A SpaceScene beat that lists labels and shows none of them (`missing` is all
+ * of the list). A phone presentation is exempt: its one label may have no safe place.
+ */
+function lostEveryLabel(s: Session, missing: number): Promise<boolean> {
+  return s.page.evaluate((n) => {
+    if (n === 0 || !document.querySelector('.atlas-scene[data-engine="space-scene"]')) return false;
+    const g = document.querySelector<SVGElement>('.space-leaders');
+    return !!g && g.dataset.solo === undefined && (g.dataset.want ?? '').split(',').filter(Boolean).length === n;
+  }, missing);
+}
+
 /** The authored beat's rendered scene, including discrete monthly maps. */
 type BeatScene = Record<string, unknown> & { unfinished: string[] };
 async function beatSceneOf(page: Page): Promise<BeatScene | null> {
@@ -944,6 +956,7 @@ async function runBeats(s: Session, o: Options, out: string, report: RunReport):
       missing = await unlabelled(s);
     }
     if (missing.length) report.beatNotes.push(`${name}: no label for ${missing.join(', ')}`);
+    if (await lostEveryLabel(s, missing.length)) report.beatFailures.push(`${name}: none of its labels is on screen (${missing.join(', ')})`);
     // A monthly map commits its month on a drawn frame once the rain source has settled (slow under software GL): wait, then judge.
     await settleClimate(s.page);
     // The scene this beat shows (SpaceScene), for its link below.

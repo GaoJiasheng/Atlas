@@ -78,7 +78,7 @@
   --radius-md: 2px;
   --radius-lg: 6px;
   /* Small leader descriptions: AA on the sheet and the darker paper tones. */
-  --leader-note: var(--ink-2);
+  --leader-note: var(--ink);
   --hit: 44px; /* minimum touch target */
   --reader-width: clamp(340px, calc(400px * var(--kb)), 640px);
 

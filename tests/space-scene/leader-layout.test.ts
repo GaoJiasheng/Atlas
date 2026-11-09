@@ -1,6 +1,7 @@
 import { leaderClearOfInsets } from '../../src/engines/space-scene/lib/insets';
 import { describe, expect, it } from 'vitest';
-import { columnEdges, layoutLeaders, LEADER, naturalSide, type LeaderFrame, type LeaderItem, type ScreenRect } from '../../src/engines/space-scene/lib/leader-layout';
+import * as LEADER from '../../src/engines/space-scene/lib/leader-layout';
+import { BAND_GAP, columnEdges, energyBarsRect, freeBand, layoutLeaders, MIN_BAND, naturalSide, noteLines, type LeaderFrame, type LeaderItem, type ScreenRect } from '../../src/engines/space-scene/lib/leader-layout';
 
 /** A 1200 × 800 stage with HUD blocks at the left (title), right (card) and bottom (panels). */
 const hudFrame = (): LeaderFrame => ({
@@ -32,6 +33,8 @@ const item = (id: string, ax: number, ay: number, bounds: ScreenRect | null = nu
 });
 
 const inside = (a: ScreenRect, b: ScreenRect) => a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
+
+const overlapArea = (a: ScreenRect, b: ScreenRect) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0)) * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 
 describe('leader columns', () => {
   it('sit no further out than 22 % / 78 % of an open stage and move in towards their anchors', () => {
@@ -188,5 +191,87 @@ describe('magnified inset borders', () => {
     const p = layoutLeaders([anchor],{...openFrame(),accept:(p,i)=>leaderClearOfInsets(p,i.ax,i.ay,[inset])})[0]!;
     expect(leaderClearOfInsets(p,anchor.ax,anchor.ay,[inset])).toBe(true);
     expect(leaderClearOfInsets({...p,x0:300,x1:450,y0:380,y1:420,sy:389,sx:456,ex:472},anchor.ax,anchor.ay,[inset])).toBe(false);
+  });
+});
+
+describe('free band', () => {
+  it('leaves a presentation title as an obstacle, however wide it is (768 x 1024)', () => {
+    const band = freeBand([{ x0: 22, y0: 19, x1: 370, y1: 73 }, { x0: 24, y0: 861, x1: 744, y1: 1005 }], 768, 1024);
+    expect(band.left).toBe(LEADER.EDGE);
+    expect(band.right).toBe(768 - LEADER.EDGE);
+    expect(band.bottom).toBe(861 - 12);
+    expect(band.right - band.left).toBeGreaterThanOrEqual(MIN_BAND);
+  });
+
+  it('is closed by a column of stacked cards, not by a floating card beside it (1440 x 900 reading view)', () => {
+    const left = [{ x0: 22, y0: 60, x1: 262, y1: 152 }, { x0: 22, y0: 168, x1: 262, y1: 301 }, { x0: 22, y0: 574, x1: 262, y1: 786 }];
+    const right = [{ x0: 754, y0: 16, x1: 1018, y1: 331 }, { x0: 754, y0: 340, x1: 1018, y1: 786 }];
+    const band = freeBand([...left, ...right, { x0: 22, y0: 797, x1: 1018, y1: 843 }], 1040, 854);
+    expect(band.left).toBe(262 + BAND_GAP);
+    expect(band.right).toBe(754 - BAND_GAP);
+    expect(band.right - band.left).toBeGreaterThanOrEqual(MIN_BAND);
+  });
+
+  it('takes the edge the blocks actually fill, not a shorter card further in (1024 x 768)', () => {
+    const tab = { x0: 580, y0: 16, x1: 624, y1: 300 };
+    const floating = { x0: 338, y0: 16, x1: 558, y1: 182 };
+    const band = freeBand([tab, floating], 624, 703);
+    expect(band.right).toBe(580 - BAND_GAP);
+  });
+});
+
+describe('energy readout and focus part', () => {
+  it('keeps a placard and, when it can, its leader off a readout', () => {
+    const avoid = [energyBarsRect({ x: 560, y: 440, top: 352 }, 1440, 900)];
+    const places = layoutLeaders([item('toy', 760, 450)], { ...openFrame(), avoid });
+    expect(places).toHaveLength(1);
+    expect(inside(places[0]!, avoid[0]!)).toBe(false);
+  });
+
+  it('keeps the readout rectangle on the stage with the block', () => {
+    const r = energyBarsRect({ x: 10, y: 880, top: 800 }, 1440, 900);
+    expect(r.x0).toBe(2);
+    expect(r.y1).toBeLessThanOrEqual(900);
+    expect(r.y0).toBe(800);
+  });
+
+  it('moves a placard off the focus part sooner than off another part', () => {
+    const focus: ScreenRect = { x0: 500, y0: 300, x1: 1100, y1: 600 };
+    const items = (on: boolean) => [{ ...item('big', 800, 450, focus), focus: on }, item('small', 460, 450, { x0: 440, y0: 430, x1: 480, y1: 470 })];
+    const place = (on: boolean) => layoutLeaders(items(on), openFrame()).find((p) => p.id === 'small')!;
+    expect(overlapArea(place(true), focus)).toBeLessThanOrEqual(overlapArea(place(false), focus));
+    expect(overlapArea(place(true), focus)).toBe(0);
+  });
+});
+
+describe('placard notes', () => {
+  it('keeps a short note on one line', () => {
+    expect(noteLines('Holds the gut.', 'en')).toEqual(['Holds the gut.']);
+    expect(noteLines('', 'en')).toEqual([]);
+  });
+
+  it('breaks between words and never mid-word', () => {
+    const lines = noteLines('Carries heat between the bath and the handle of the spoon', 'en');
+    expect(lines).toHaveLength(2);
+    for (const line of lines) {
+      expect(line.length).toBeLessThanOrEqual(34);
+      for (const word of line.replace('…', '').split(' ')) expect('Carries heat between the bath and the handle of the spoon').toContain(word);
+    }
+    expect(lines.join(' ')).toBe('Carries heat between the bath and the handle of the spoon');
+  });
+
+  it('ends an over-long note after a whole word', () => {
+    const lines = noteLines('Holds the legs and wings; has a large muscle block that beats the wings hundreds of times every second', 'en');
+    expect(lines).toHaveLength(2);
+    expect(lines[1]!.endsWith('…')).toBe(true);
+    expect(lines[1]!.length).toBeLessThanOrEqual(34);
+    expect(' Holds the legs and wings; has a large muscle block that beats the wings hundreds of times every second ').toContain(` ${lines[1]!.slice(0, -1)} `);
+  });
+
+  it('fills two lines of Chinese', () => {
+    const lines = noteLines('一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十', 'zh');
+    expect(lines).toHaveLength(2);
+    expect(lines[0]).toHaveLength(18);
+    expect(lines[1]!.endsWith('…')).toBe(true);
   });
 });

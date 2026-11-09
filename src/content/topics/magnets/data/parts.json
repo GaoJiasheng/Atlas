@@ -5102,6 +5102,7 @@
     },
     {
       "id": "door-gasket",
+      "labelPoint": [0.118, -0.08, 0],
       "name": {
         "en": "Door seal and magnetic strip",
         "zh": "门封与磁条"

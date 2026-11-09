@@ -229,9 +229,8 @@ div.space-inspector__detail:not([hidden]) {
 }
 .space-co__plate {
   fill: var(--stage-bg);
-  opacity: 0.8;
+  opacity: 0.88;
   pointer-events: none;
-  transition: opacity var(--dur-fast) linear;
 }
 .space-co__text {
   pointer-events: none;

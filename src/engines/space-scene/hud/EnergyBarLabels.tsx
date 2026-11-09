@@ -7,10 +7,10 @@
  */
 import { useEffect, useMemo, useRef } from 'react';
 import { useT } from '../../core/context';
+import { ENERGY_ROW as ROW, energyBlockAt } from '../lib/leader-layout';
 import type { PartsFile } from '../schema';
 import type { StageBridge } from '../bridge';
 
-const ROW = 14;
 const ROWS = [
   { key: 'potential', color: 'var(--en-potential)', label: 'space.energy.potential' },
   { key: 'kinetic', color: 'var(--en-kinetic)', label: 'space.energy.kinetic' },
@@ -39,8 +39,7 @@ export function EnergyBarLabels({ file, bridge }: { file: PartsFile; bridge: Sta
           }
           return;
         }
-        const x = Math.min(Math.max(b.x, 64), bridge.width - 64);
-        const y = Math.min(b.y + 6, bridge.height - 3 * ROW - 6);
+        const { x, y } = energyBlockAt(b.x, b.y, bridge.width, bridge.height);
         const values = [b.potential, b.kinetic, b.lost].map((v) => `${Math.round(v)} %`);
         const key = `${x.toFixed(1)},${y.toFixed(1)}|${values.join('|')}`;
         if (last.get(index) === key) return;

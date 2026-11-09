@@ -59,9 +59,10 @@ export function anchorOffset(part: Part): Vec3 {
  * Where a part's leader label points, relative to its centre: the bounds
  * centre, except a single tube (a pipe run), whose bounds centre is often in
  * mid air: the point halfway along its path. A part with `extra` points at
- * its main primitive.
+ * its main primitive; a part with an authored `labelPoint` points there.
  */
 export function anchorPoint(part: Part): Vec3 {
+  if (part.labelPoint) return part.labelPoint;
   const p = part.primitive;
   // An annular cutaway's bounds centre lies in its hole. Put its leader on
   // the actual section face instead; keep bounds/occlusion extents intact.
