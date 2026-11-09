@@ -20,7 +20,7 @@ import { partSchema } from '../../../src/engines/space-scene/schema';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { eulerMatrix, orient, r3, type Prim, type V3 } from '../living-things/kit';
 
-export const PLANT_FILE = join(import.meta.dirname, '../../../src/content/topics/plant/data/parts.json');
+export const PLANT_FILE = join(import.meta.dirname, '../plant/baseline-parts.json');
 
 interface PlantPart {
   id: string;
