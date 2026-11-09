@@ -48,11 +48,11 @@
     "kind": "extrude",
     "shape": [
      [
-      -3.0,
+      -3,
       -0.03
      ],
      [
-      -3.0,
+      -3,
       -0.46
      ],
      [
@@ -76,7 +76,7 @@
     "at": [
      0,
      0,
-     0.0
+     0
     ],
     "color": "membrane",
     "tint": "#6c919a"
@@ -101,170 +101,6 @@
     "en": "A cloud is made of tiny droplets of liquid water, not of water vapour. Warm, moist air rises from the sea and cools as it goes higher; the cooler air cannot hold as much water vapour, so some of it condenses into droplets far too small to fall [S26].\n\nPuffy cumulus clouds like this one grow over the sea and the land on hot afternoons. The model draws the cloud far closer to the ground than it is.\n\nIf the droplets join into drops heavy enough to fall, the cloud gives rain.",
     "zh": "云是由极小的液态水滴组成的，不是水蒸气。温暖潮湿的空气从海面升起，越往上越冷；冷空气容纳不下那么多水蒸气，一部分就凝结成小水滴，小得落不下来 [S26]。\n\n像这样一团团的积云，常在炎热的午后出现在海面和陆地上空。模型把云画得离地面近得多。\n\n小水滴合成够重的大水滴，云就下雨了。"
    },
-   "primitive": {
-    "kind": "sphere",
-    "size": [
-     0.23
-    ],
-    "at": [
-     -2.12,
-     1.26,
-     -0.25
-    ],
-    "color": "plastic",
-    "tint": "#f3f0e8",
-    "scale": [
-     1,
-     0.9,
-     1
-    ]
-   },
-   "extra": [
-    {
-     "kind": "sphere",
-     "size": [
-      0.19
-     ],
-     "at": [
-      -2.39,
-      1.12,
-      -0.19
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.72,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.2
-     ],
-     "at": [
-      -1.84,
-      1.13,
-      -0.28
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.72,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.18
-     ],
-     "at": [
-      -2.06,
-      1.12,
-      -0.02
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.7,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.18
-     ],
-     "at": [
-      -2.22,
-      1.14,
-      -0.48
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.7,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.13
-     ],
-     "at": [
-      -2.58,
-      1.08,
-      -0.33
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.66,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.13
-     ],
-     "at": [
-      -1.64,
-      1.08,
-      -0.15
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.66,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.17
-     ],
-     "at": [
-      -2.02,
-      1.44,
-      -0.21
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.95,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.15
-     ],
-     "at": [
-      -2.26,
-      1.36,
-      -0.33
-     ],
-     "color": "plastic",
-     "tint": "#f3f0e8",
-     "scale": [
-      1,
-      0.9,
-      1
-     ]
-    }
-   ],
    "castShadow": false,
    "explode": {
     "dir": [
@@ -276,7 +112,12 @@
    },
    "connects": [
     "rain-cloud"
-   ]
+   ],
+   "mesh": "cumulus",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "rain-cloud",
@@ -293,278 +134,6 @@
     "en": "Inside a rain cloud the droplets collide and join into drops heavy enough to fall. Rain is the part of the water cycle that brings fresh water back to the land [S26]. Singapore receives a lot of it: on average about 2,534 mm a year across the island, and about 2,113 mm at the Changi climate station [S24, S23].\n\nIn this topic's simulation a heavy shower of 30 mm an hour falls on the catchment [S1]. In the storm pose the model makes the cloud larger and moves the sea cloud inland.\n\nWithout rain the reservoirs slowly go down, which is why Singapore also has sources that do not depend on the weather.",
     "zh": "雨云里的小水滴互相碰撞，合成重得能落下来的大水滴。下雨是水循环中把淡水送回陆地的一步 [S26]。新加坡的雨水很多：全岛平均每年约 2,534 mm，樟宜气候站约 2,113 mm [S24, S23]。\n\n在本主题的模拟里，一场每小时 30 mm 的大阵雨落在集水区上 [S1]。在\"暴雨\"姿态下，模型把雨云放大，把海上的云往内陆推。\n\n不下雨，蓄水池的水位就慢慢下降；所以新加坡还有不靠天气的水源。"
    },
-   "primitive": {
-    "kind": "sphere",
-    "size": [
-     0.17
-    ],
-    "at": [
-     -0.15,
-     1.06,
-     -0.56
-    ],
-    "color": "plastic",
-    "tint": "#a7a7a2",
-    "scale": [
-     1,
-     0.66,
-     1.0
-    ]
-   },
-   "extra": [
-    {
-     "kind": "sphere",
-     "size": [
-      0.21
-     ],
-     "at": [
-      0.14,
-      1.11,
-      -0.72
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.24
-     ],
-     "at": [
-      0.45,
-      1.15,
-      -0.54
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.25
-     ],
-     "at": [
-      0.76,
-      1.18,
-      -0.69
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.26
-     ],
-     "at": [
-      1.08,
-      1.19,
-      -0.55
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.25
-     ],
-     "at": [
-      1.4,
-      1.17,
-      -0.69
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.22
-     ],
-     "at": [
-      1.7,
-      1.14,
-      -0.54
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.2
-     ],
-     "at": [
-      2.0,
-      1.11,
-      -0.67
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.16
-     ],
-     "at": [
-      2.26,
-      1.07,
-      -0.56
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.19
-     ],
-     "at": [
-      0.6,
-      1.34,
-      -0.62
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.2
-     ],
-     "at": [
-      1.05,
-      1.38,
-      -0.6
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.18
-     ],
-     "at": [
-      1.5,
-      1.32,
-      -0.64
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.15
-     ],
-     "at": [
-      0.3,
-      1.18,
-      -0.42
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.16
-     ],
-     "at": [
-      1.3,
-      1.14,
-      -0.38
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.17
-     ],
-     "at": [
-      0.9,
-      1.13,
-      -0.88
-     ],
-     "color": "plastic",
-     "tint": "#a7a7a2",
-     "scale": [
-      1,
-      0.66,
-      1.0
-     ]
-    }
-   ],
    "castShadow": false,
    "explode": {
     "dir": [
@@ -576,7 +145,12 @@
    },
    "connects": [
     "forest-hill"
-   ]
+   ],
+   "mesh": "rain-cloud",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "forest-hill",
@@ -590,720 +164,18 @@
     "zh": "受保护的森林接住雨水。"
    },
    "detail": {
-    "en": "Forest on the hills catches the rain. Water soaks into the soil and runs down the slopes into streams and into the reservoir in the valley. Singapore's oldest reservoirs lie among protected forest in the centre of the island; its highest natural point, Bukit Timah Hill, is only 163 m high [S31].\n\nThe model raises the hills far above their real height and draws the trees as round crowns.\n\nKeeping the forest and its streams clean keeps the water clean: what falls or is dumped in a catchment ends up in the reservoir [S25].",
-    "zh": "山上的森林接住雨水。水渗进土里，再顺着山坡流进小溪、流进山谷里的蓄水池。新加坡最早的几座蓄水池就在岛中央受保护的森林里；全岛最高的自然地点武吉知马山也只有 163 米 [S31]。\n\n模型把山画得比实际高得多，树也画成一个个圆圆的树冠。\n\n保持森林和溪流干净，水也就干净：落在或被丢在集水区里的东西，最后都会流进蓄水池 [S25]。"
+    "en": "Forest on the hills catches the rain. Water soaks into the soil and runs down the slopes into streams and into the reservoir in the valley. Singapore's oldest reservoirs lie among protected forest in the centre of the island; its highest natural point, Bukit Timah Hill, is only 163 m high [S31].\n\nThe model exaggerates the hills and shows branching trees with overlapping, unequal crowns.\n\nKeeping the forest and its streams clean keeps the water clean: what falls or is dumped in a catchment ends up in the reservoir [S25].",
+    "zh": "山上的森林接住雨水。水渗进土里，再顺着山坡流进小溪、流进山谷里的蓄水池。新加坡最早的几座蓄水池就在岛中央受保护的森林里；全岛最高的自然地点武吉知马山也只有 163 米 [S31]。\n\n模型把山的高度夸大，树木则呈现分枝和高低不齐、交叠的树冠。\n\n保持森林和溪流干净，水也就干净：落在或被丢在集水区里的东西，最后都会流进蓄水池 [S25]。"
    },
-   "primitive": {
-    "kind": "extrude",
-    "shape": [
-     [
-      1.05,
-      -1.2
-     ],
-     [
-      3.0,
-      -1.2
-     ],
-     [
-      3.0,
-      -0.22
-     ],
-     [
-      2.18,
-      -0.22
-     ],
-     [
-      2.18,
-      -0.37
-     ],
-     [
-      2.46,
-      -0.455
-     ],
-     [
-      2.515,
-      -0.62
-     ],
-     [
-      2.485,
-      -0.85
-     ],
-     [
-      2.335,
-      -0.955
-     ],
-     [
-      2.0,
-      -0.955
-     ],
-     [
-      1.71,
-      -0.86
-     ],
-     [
-      1.605,
-      -0.66
-     ],
-     [
-      1.74,
-      -0.49
-     ],
-     [
-      1.88,
-      -0.405
-     ],
-     [
-      1.88,
-      -0.22
-     ],
-     [
-      1.05,
-      -0.22
-     ]
-    ],
-    "depth": 0.1,
-    "rotation": [
-     90,
-     0,
-     0
-    ],
-    "at": [
-     0,
-     0.05,
-     0
-    ],
-    "color": "tissue",
-    "tint": "#71805a"
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.3,
-       0
-      ],
-      [
-       0.27,
-       0.044
-      ],
-      [
-       0.216,
-       0.1144
-      ],
-      [
-       0.15,
-       0.176
-      ],
-      [
-       0.075,
-       0.2112
-      ],
-      [
-       0,
-       0.22
-      ]
-     ],
-     "segments": 40,
-     "at": [
-      1.38,
-      0.1,
-      -0.86
-     ],
-     "color": "tissue",
-     "tint": "#71805a",
-     "scale": [
-      1,
-      1,
-      0.92
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.25,
-       0
-      ],
-      [
-       0.225,
-       0.054
-      ],
-      [
-       0.18,
-       0.1404
-      ],
-      [
-       0.125,
-       0.216
-      ],
-      [
-       0.0625,
-       0.2592
-      ],
-      [
-       0,
-       0.27
-      ]
-     ],
-     "segments": 40,
-     "at": [
-      2.76,
-      0.1,
-      -0.86
-     ],
-     "color": "tissue",
-     "tint": "#71805a",
-     "scale": [
-      1,
-      1,
-      1.25
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.17,
-       0
-      ],
-      [
-       0.153,
-       0.024
-      ],
-      [
-       0.1224,
-       0.0624
-      ],
-      [
-       0.085,
-       0.096
-      ],
-      [
-       0.0425,
-       0.1152
-      ],
-      [
-       0,
-       0.12
-      ]
-     ],
-     "segments": 40,
-     "at": [
-      2.18,
-      0.1,
-      -1.08
-     ],
-     "color": "tissue",
-     "tint": "#71805a",
-     "scale": [
-      1,
-      1,
-      0.7
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.12,
-      0.118,
-      -1.12
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.2,
-      0.2428,
-      -0.95
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.18,
-      0.1685,
-      -0.7
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.3,
-      0.118,
-      -0.55
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.48,
-      0.1183,
-      -0.6
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.52,
-      0.1516,
-      -1.08
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.33,
-      0.118,
-      -0.36
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.55,
-      0.118,
-      -0.3
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.68,
-      0.118,
-      -1.08
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.6,
-      0.2148,
-      -0.92
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.25,
-      0.1959,
-      -1.05
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.45,
-      0.2949,
-      -0.98
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.62,
-      0.118,
-      -1.12
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.85,
-      0.1969,
-      -1.1
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.95,
-      0.2139,
-      -0.95
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.65,
-      0.1791,
-      -0.62
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.9,
-      0.1447,
-      -0.62
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.8,
-      0.118,
-      -0.4
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.6,
-      0.118,
-      -0.3
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.92,
-      0.118,
-      -0.32
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.7,
-      0.3734,
-      -0.82
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.4,
-      0.118,
-      -0.3
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.42,
-      0.118,
-      -1.12
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.05,
-      0.1558,
-      -1.12
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.9,
-      0.118,
-      -1.1
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      2.25,
-      0.2005,
-      -1.13
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.034
-     ],
-     "at": [
-      1.62,
-      0.118,
-      -0.42
-     ],
-     "color": "tissue",
-     "tint": "#5b6c45",
-     "scale": [
-      1,
-      0.8,
-      1
-     ]
-    }
-   ],
    "connects": [
     "inland-reservoir"
-   ]
+   ],
+   "mesh": "forest-hill",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "inland-reservoir",
@@ -1344,7 +216,7 @@
       -0.94
      ],
      [
-      2.0,
+      2,
       -0.94
      ],
      [
@@ -1531,71 +403,18 @@
     "zh": "屋顶、路面和空地把雨水排走。"
    },
    "detail": {
-    "en": "In Singapore's city, roofs, roads and open ground are part of the catchment too. Rain that falls on them runs into drains and canals that lead to reservoirs; rain falling on about two-thirds of the land is collected this way [S3].\n\nThe model draws the city as a grid of plain blocks. Rain on hard surfaces runs off much faster than rain on forest: the drainage code counts almost all of it on paved ground and less than half on vegetated ground [S30].\n\nLitter and oil left on the ground are washed into the drains with the next shower.",
-    "zh": "在新加坡，城市的屋顶、道路和空地也是集水区的一部分。落在上面的雨流进排水沟和运河，再流到蓄水池；约三分之二土地上的雨水都这样收集起来 [S3]。\n\n模型把城市画成一格格简单的楼块。雨落在硬地上，比落在森林里流走得快得多：排水规范把铺装地上的雨几乎全部算作径流，植被地上不到一半 [S30]。\n\n丢在地上的垃圾和油污，下一场雨就被冲进排水沟。"
-   },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.2,
-     0.15,
-     0.07
-    ],
-    "bevel": 0.006,
-    "at": [
-     0.075,
-     0.075,
-     -1.0
-    ],
-    "color": "enamel",
-    "tint": "#c5beac"
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.2,
-      0.15,
-      0.07
-     ],
-     "bevel": 0.006,
-     "at": [
-      0.075,
-      0.075,
-      -0.72
-     ],
-     "color": "enamel",
-     "tint": "#c5beac"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.2,
-      0.15,
-      0.07
-     ],
-     "bevel": 0.006,
-     "at": [
-      0.075,
-      0.075,
-      -0.44
-     ],
-     "color": "enamel",
-     "tint": "#c5beac"
-    }
-   ],
-   "repeat": {
-    "count": 4,
-    "axis": [
-     1,
-     0,
-     0
-    ],
-    "spacing": 0.35
+    "en": "In Singapore's city, roofs, roads and open ground are part of the catchment too. Rain that falls on them runs into drains and canals that lead to reservoirs; rain falling on about two-thirds of the land is collected this way [S3].\n\nThe model shows slab and point blocks, with open ground floors, recessed windows and urban trees. Rain on hard surfaces runs off much faster than rain on forest: the drainage code counts almost all of it on paved ground and less than half on vegetated ground [S30].\n\nLitter and oil left on the ground are washed into the drains with the next shower.",
+    "zh": "在新加坡，城市的屋顶、道路和空地也是集水区的一部分。落在上面的雨流进排水沟和运河，再流到蓄水池；约三分之二土地上的雨水都这样收集起来 [S3]。\n\n模型用板式和点式组屋、架空底层、内凹窗户及街道树木表示城市。雨落在硬地上，比落在森林里流走得快得多：排水规范把铺装地上的雨几乎全部算作径流，植被地上不到一半 [S30]。\n\n丢在地上的垃圾和油污，下一场雨就被冲进排水沟。"
    },
    "connects": [
     "drains"
-   ]
+   ],
+   "mesh": "city-blocks",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "drains",
@@ -1616,22 +435,22 @@
     "kind": "sweep",
     "path": [
      [
-      0.0,
-      0.0,
-      0.0
+      0,
+      0,
+      0
      ],
      [
-      0.0,
-      0.0,
+      0,
+      0,
       0.28
      ],
      [
-      0.0,
-      0.0,
+      0,
+      0,
       0.56
      ],
      [
-      0.0,
+      0,
       -0.004,
       0.66
      ]
@@ -1650,21 +469,22 @@
      -0.86
     ],
     "color": "enamel",
-    "tint": "#bdb7aa"
+    "tint": "#bdb7aa",
+    "segments": 48
    },
    "extra": [
     {
      "kind": "sweep",
      "path": [
       [
-       0.0,
-       0.0,
-       0.0
+       0,
+       0,
+       0
       ],
       [
        1.04,
-       0.0,
-       0.0
+       0,
+       0
       ]
      ],
      "radius": 0.013,
@@ -1681,20 +501,21 @@
       -0.86
      ],
      "color": "enamel",
-     "tint": "#bdb7aa"
+     "tint": "#bdb7aa",
+     "segments": 4
     },
     {
      "kind": "sweep",
      "path": [
       [
-       0.0,
-       0.0,
-       0.0
+       0,
+       0,
+       0
       ],
       [
        1.04,
-       0.0,
-       0.0
+       0,
+       0
       ]
      ],
      "radius": 0.013,
@@ -1711,20 +532,21 @@
       -0.58
      ],
      "color": "enamel",
-     "tint": "#bdb7aa"
+     "tint": "#bdb7aa",
+     "segments": 4
     },
     {
      "kind": "sweep",
      "path": [
       [
-       0.0,
-       0.0,
-       0.0
+       0,
+       0,
+       0
       ],
       [
        1.02,
-       0.0,
-       0.0
+       0,
+       0
       ]
      ],
      "radius": 0.013,
@@ -1741,7 +563,8 @@
       -0.3
      ],
      "color": "enamel",
-     "tint": "#bdb7aa"
+     "tint": "#bdb7aa",
+     "segments": 4
     }
    ],
    "connects": [
@@ -1767,14 +590,14 @@
     "kind": "sweep",
     "path": [
      [
-      0.0,
-      0.0,
-      0.0
+      0,
+      0,
+      0
      ],
      [
       -0.64,
-      0.0,
-      0.0
+      0,
+      0
      ],
      [
       -0.94,
@@ -1897,339 +720,6 @@
     "en": "A barrage is a low dam across a river mouth. It keeps the sea out, so that the water behind it becomes a freshwater reservoir, and it holds the reservoir at a steady level. Marina Barrage also protects low-lying parts of the city from flooding [S7].\n\nThe model draws the barrage as a concrete sill with ten piers, nine gates between them and a crest walkway, simplified from public photos; a pump house stands at one end.\n\nWithout the barrage, seawater would flow in and out of the river mouth with every tide.",
     "zh": "堤坝是横跨河口的低矮水坝。它把海水挡在外面，让坝后的水变成淡水蓄水池，并保持水位稳定。滨海堤坝也保护市区低洼地带免受水淹 [S7]。\n\n模型按公开照片简化：混凝土坝基、十座闸墩、闸墩之间九道闸门和坝顶走道；一端是泵房。\n\n没有堤坝，海水会随着每一次潮汐流进流出河口。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.09,
-     0.04,
-     0.87
-    ],
-    "bevel": 0.005,
-    "at": [
-     -1.69,
-     -0.08,
-     0.64
-    ],
-    "color": "enamel",
-    "tint": "#bdb7aa"
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.28
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.36
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.44
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.52
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.6
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.68
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.76
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.84
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      0.92
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.085,
-      0.15,
-      0.02
-     ],
-     "bevel": 0.002,
-     "at": [
-      -1.69,
-      -0.025,
-      1.0
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.28
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.36
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.44
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.52
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.6
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.68
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.76
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.84
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      0.92
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.05,
-      0.004,
-      0.034
-     ],
-     "at": [
-      -1.684,
-      0.062,
-      1.0
-     ],
-     "color": "enamel"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.034,
-      0.01,
-      0.87
-     ],
-     "at": [
-      -1.661,
-      0.012,
-      0.64
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -2241,7 +731,13 @@
    "connects": [
     "crest-gates",
     "pump-house"
-   ]
+   ],
+   "mesh": "barrage",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "crest-gates",
@@ -2255,36 +751,18 @@
     "zh": "退潮时放倒，把多余的水放出去。"
    },
    "detail": {
-    "en": "Nine steel crest gates, each about 30 m long and 5 m tall, sit between the piers [S8]. They are hinged at the bottom. When heavy rain falls at low tide, the gates are lowered so that the excess water spills over them into the sea [S7].\n\nThe model draws the gates far shorter than they are; in the gates-open pose they tip towards the sea.\n\nAt high tide the sea is higher than the reservoir, so opening the gates would let seawater in; then the pumps do the work.",
-    "zh": "九道钢闸门立在闸墩之间，每道长约 30 m、高约 5 m [S8]。闸门底部装有铰链。退潮时遇上大雨，就把闸门放倒，让多余的水漫过闸门流进大海 [S7]。\n\n模型把闸门画得短得多；在\"开闸\"姿态下，闸门向海的一侧倒下。\n\n涨潮时海面比蓄水池高，打开闸门会让海水倒灌，这时就靠水泵。"
-   },
-   "primitive": {
-    "kind": "box",
-    "size": [
-     0.01,
-     0.065,
-     0.07
-    ],
-    "at": [
-     -1.705,
-     -0.0275,
-     0.6
-    ],
-    "color": "steel"
-   },
-   "repeat": {
-    "count": 9,
-    "axis": [
-     0,
-     0,
-     1
-    ],
-    "spacing": 0.08
+    "en": "Nine steel crest gates, each about 30 m long and 5 m tall, sit between the piers [S8]. They are hinged at the bottom. When heavy rain falls at low tide, the gates are lowered so that the excess water spills over them into the sea [S7].\n\nThe model compresses the barrage’s overall length while keeping the gate leaves broad and low; in the gates-open pose they tip towards the sea.\n\nAt high tide the sea is higher than the reservoir, so opening the gates would let seawater in; then the pumps do the work.",
+    "zh": "九道钢闸门立在闸墩之间，每道长约 30 m、高约 5 m [S8]。闸门底部装有铰链。退潮时遇上大雨，就把闸门放倒，让多余的水漫过闸门流进大海 [S7]。\n\n模型压缩堤坝的总长度，保留闸门宽而低的比例；在“开闸”姿态下，闸门向大海的一侧倒下。\n\n涨潮时海面比蓄水池高，打开闸门会让海水倒灌，这时就靠水泵。"
    },
    "castShadow": false,
    "connects": [
     "pump-house"
-   ]
+   ],
+   "mesh": "crest-gates",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "pump-house",
@@ -2298,175 +776,9 @@
     "zh": "涨潮又遇暴雨时，把水泵进海里。"
    },
    "detail": {
-    "en": "When heavy rain coincides with high tide, the gates cannot be lowered, so pumps lift the stormwater over the barrage into the sea [S7]. Marina Barrage has seven pumps of 40 m³ per second each, 280 m³ per second together [S8].\n\nThe model draws the pump house as a block with a green roof and seven outlet pipes facing the sea.\n\nIf the pumps could not keep up in a long storm at high tide, the reservoir and low-lying streets would rise.",
-    "zh": "大雨碰上涨潮时，闸门不能放倒，就由水泵把暴雨水抽过堤坝排进海里 [S7]。滨海堤坝有 7 台水泵，每台每秒 40 m³，合计每秒 280 m³ [S8]。\n\n模型把泵房画成一个带绿色屋顶的方块，七根排水管朝向大海。\n\n如果涨潮时的暴雨太久、水泵来不及抽，蓄水池和低洼街道的水位就会上涨。"
+    "en": "When heavy rain coincides with high tide, the gates cannot be lowered, so pumps lift the stormwater over the barrage into the sea [S7]. Marina Barrage has seven pumps of 40 m³ per second each, 280 m³ per second together [S8].\n\nThe model shows a low curved green roof around an open courtyard and seven outlet pipes facing the sea. The building footprint is compressed to fit this slice.\n\nIf the pumps could not keep up in a long storm at high tide, the reservoir and low-lying streets would rise.",
+    "zh": "大雨碰上涨潮时，闸门不能放倒，就由水泵把暴雨水抽过堤坝排进海里 [S7]。滨海堤坝有 7 台水泵，每台每秒 40 m³，合计每秒 280 m³ [S8]。\n\n模型画出围绕露天庭院的低矮弧形绿屋顶，以及七根朝向大海的排水管。建筑平面经过压缩，以便放进示意切片。\n\n如果涨潮时的暴雨太久、水泵来不及抽，蓄水池和低洼街道的水位就会上涨。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.17,
-     0.1,
-     0.12
-    ],
-    "bevel": 0.008,
-    "at": [
-     -1.645,
-     0.05,
-     1.135
-    ],
-    "color": "enamel"
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.18,
-      0.012,
-      0.13
-     ],
-     "bevel": 0.004,
-     "at": [
-      -1.645,
-      0.105,
-      1.135
-     ],
-     "color": "enamel",
-     "tint": "#93a06c"
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.083
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.0985
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.114
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.1295
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.145
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.1605
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.0065,
-      0.0065,
-      0.06
-     ],
-     "at": [
-      -1.745,
-      -0.02,
-      1.176
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      90
-     ]
-    }
-   ],
    "shell": true,
    "explode": {
     "dir": [
@@ -2475,7 +787,13 @@
      1
     ],
     "dist": 0.2
-   }
+   },
+   "mesh": "pump-house",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "raw-water-main",
@@ -2904,7 +1222,7 @@
       ],
       [
        0.21,
-       0.0
+       0
       ],
       [
        0.16,
@@ -2963,7 +1281,7 @@
      [
       0.335,
       -0.01,
-      0.0
+      0
      ],
      [
       0.16,
@@ -3037,7 +1355,7 @@
      ],
      "radius": 0.01,
      "at": [
-      0.0,
+      0,
       -0.05,
       -0.2
      ],
@@ -3063,142 +1381,19 @@
     "zh": "组屋：家庭用掉约 45 % 的水。"
    },
    "detail": {
-    "en": "Most Singaporeans live in HDB flats. Households use about 45 % of Singapore's water and the non-domestic sector about 55 % [S32, S12]. In 2025 household use averaged 141 litres per person per day; the national target is 130 litres by 2030 [S12, S13].\n\nThe model draws one slab block of twelve storeys with a grid of floors and columns. One flat is drawn opened up so that its kitchen tap shows.\n\nWater saved in every flat adds up across the hundreds of thousands of flats on the island.",
-    "zh": "大多数新加坡人住在组屋里。家庭用掉新加坡约 45 % 的水，非家庭部门约 55 % [S32, S12]。2025 年，家庭人均每天用水 141 升；国家目标是到 2030 年降到 130 升 [S12, S13]。\n\n模型画了一栋十二层的板式组屋，楼层和柱子排成格子。有一户画成打开的样子，好让人看见厨房的水龙头。\n\n每一户省下的水，乘上全岛几十万户，就是很大的数量。"
+    "en": "Most Singaporeans live in HDB flats. Households use about 45 % of Singapore's water and the non-domestic sector about 55 % [S32, S12]. In 2025 household use averaged 141 litres per person per day; the national target is 130 litres by 2030 [S12, S13].\n\nThe model shows a twelve-storey slab block with an open void deck, recessed windows, common corridors and a lift core. One flat is drawn opened up so that its kitchen tap shows.\n\nWater saved in every flat adds up across the hundreds of thousands of flats on the island.",
+    "zh": "大多数新加坡人住在组屋里。家庭用掉新加坡约 45 % 的水，非家庭部门约 55 % [S32, S12]。2025 年，家庭人均每天用水 141 升；国家目标是到 2030 年降到 130 升 [S12, S13]。\n\n模型画了一栋十二层的板式组屋，设有架空底层、内凹窗户、公共走廊及电梯核心。有一户画成打开的样子，好让人看见厨房的水龙头。\n\n每一户省下的水，乘上全岛几十万户，就是很大的数量。"
    },
-   "primitive": {
-    "kind": "box",
-    "size": [
-     0.245,
-     0.42,
-     0.1
-    ],
-    "at": [
-     0.3075,
-     0.21,
-     0.55
-    ],
-    "color": "enamel",
-    "tint": "#cdc7b8"
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.095,
-      0.42,
-      0.1
-     ],
-     "at": [
-      0.0375,
-      0.21,
-      0.55
-     ],
-     "color": "enamel",
-     "tint": "#cdc7b8"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.1,
-      0.42,
-      0.055
-     ],
-     "at": [
-      0.135,
-      0.21,
-      0.5275
-     ],
-     "color": "enamel",
-     "tint": "#cdc7b8"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.1,
-      0.191,
-      0.045
-     ],
-     "at": [
-      0.135,
-      0.0955,
-      0.5775
-     ],
-     "color": "enamel",
-     "tint": "#cdc7b8"
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.1,
-      0.162,
-      0.045
-     ],
-     "at": [
-      0.135,
-      0.339,
-      0.5775
-     ],
-     "color": "enamel",
-     "tint": "#cdc7b8"
-    },
-    {
-     "kind": "fins",
-     "size": [
-      0.452,
-      0.114,
-      0.005
-     ],
-     "count": 12,
-     "gap": 0.0285,
-     "axis": "y",
-     "at": [
-      0.21,
-      0.2075,
-      0.55
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "fins",
-     "size": [
-      0.11,
-      0.41,
-      0.006
-     ],
-     "count": 9,
-     "gap": 0.044,
-     "axis": "x",
-     "at": [
-      0.21,
-      0.21,
-      0.55
-     ],
-     "color": "enamel",
-     "tint": "#bdb7aa"
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.08,
-      0.04,
-      0.07
-     ],
-     "bevel": 0.005,
-     "at": [
-      0.09,
-      0.44,
-      0.55
-     ],
-     "color": "enamel",
-     "tint": "#cdc7b8"
-    }
-   ],
    "shell": true,
    "connects": [
     "roof-tank"
-   ]
+   ],
+   "mesh": "hdb-block",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "roof-tank",
@@ -3215,104 +1410,6 @@
     "en": "Water from the main is pumped up a pipe to tanks on the roof; from there it flows down to every flat by gravity [S20, S21]. Two tanks side by side let one be cleaned while the other stays in use.\n\nThe model draws the riser up the back of the block and the down pipe to the opened flat; both show in X-ray.\n\nThe tanks are covered and cleaned regularly, because dirt or animals getting in would spoil the treated water.",
     "zh": "干管里的水被泵沿着管子送上屋顶的水箱，再靠重力流到每一户 [S20, S21]。两个水箱并排，一个清洗时另一个照常使用。\n\n模型把上水管画在楼的背面，下水管通到打开的那一户；X 光模式下两者都看得见。\n\n水箱加盖并定期清洗，因为污物或小动物进去会弄脏处理好的水。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.055,
-     0.044,
-     0.07
-    ],
-    "bevel": 0.004,
-    "at": [
-     0.27,
-     0.444,
-     0.55
-    ],
-    "color": "casing"
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.055,
-      0.044,
-      0.07
-     ],
-     "bevel": 0.004,
-     "at": [
-      0.33,
-      0.444,
-      0.55
-     ],
-     "color": "casing"
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0.01,
-       -0.24,
-       -0.01
-      ],
-      [
-       0.01,
-       0.235,
-       -0.01
-      ],
-      [
-       -0.02,
-       0.235,
-       0.015
-      ]
-     ],
-     "radius": 0.0055,
-     "at": [
-      0.35,
-      0.2,
-      0.52
-     ],
-     "color": "steel",
-     "bendRadius": 0.012
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0.09,
-       0.102,
-       0.0
-      ],
-      [
-       -0.035,
-       0.102,
-       -0.007
-      ],
-      [
-       -0.045,
-       0.07,
-       -0.007
-      ],
-      [
-       -0.045,
-       -0.08,
-       -0.007
-      ],
-      [
-       -0.045,
-       -0.08,
-       0.005
-      ]
-     ],
-     "radius": 0.0045,
-     "at": [
-      0.18,
-      0.33,
-      0.55
-     ],
-     "color": "steel",
-     "bendRadius": 0.012
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3323,7 +1420,13 @@
    },
    "connects": [
     "kitchen-tap"
-   ]
+   ],
+   "mesh": "roof-tank",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   },
+   "castShadow": false
   },
   {
    "id": "kitchen-tap",
@@ -3344,22 +1447,22 @@
     "kind": "tube",
     "path": [
      [
-      0.0,
+      0,
       0.002,
       -0.015
      ],
      [
-      0.0,
+      0,
       0.002,
       -0.003
      ],
      [
-      0.0,
+      0,
       0.004,
       0.015
      ],
      [
-      0.0,
+      0,
       -0.008,
       0.019
      ]
@@ -3465,13 +1568,13 @@
      ],
      [
       -0.015,
-      0.0,
+      0,
       -0.22
      ],
      [
       -0.015,
       -0.01,
-      0.0
+      0
      ],
      [
       0.03,
@@ -3521,29 +1624,29 @@
      [
       -0.62,
       -0.06,
-      0.0
+      0
      ],
      [
       -0.62,
       -0.13,
-      0.0
+      0
      ],
      [
       0.65,
       -0.16,
-      0.0
+      0
      ],
      [
       0.65,
       0.24,
-      0.0
+      0
      ]
     ],
     "radius": 0.05,
     "at": [
      0.8,
      -0.3,
-     1.0
+     1
     ],
     "color": "enamel",
     "tint": "#a9a49a",
@@ -3739,7 +1842,7 @@
      "at": [
       1.45,
       -0.03,
-      1.0
+      1
      ],
      "color": "enamel",
      "tint": "#bdb7aa"
@@ -4166,18 +2269,18 @@
     "path": [
      [
       -0.09,
-      0.0,
-      0.0
+      0,
+      0
      ],
      [
-      0.0,
-      0.0,
-      0.0
+      0,
+      0,
+      0
      ],
      [
       0.09,
-      0.0,
-      0.0
+      0,
+      0
      ]
     ],
     "radius": 0.011,
@@ -4222,7 +2325,7 @@
      ],
      "radius": 0.009,
      "at": [
-      1.0,
+      1,
       -0.05,
       1.05
      ],
@@ -4358,37 +2461,37 @@
      [
       -0.55,
       -0.1556,
-      0.0
+      0
      ],
      [
       -0.2,
       -0.096,
-      0.0
+      0
      ],
      [
       0.22,
       0.074,
-      0.0
+      0
      ],
      [
       0.32,
       0.145,
-      0.0
+      0
      ],
      [
       0.5,
       0.145,
-      0.0
+      0
      ],
      [
       0.5,
       0.2,
-      0.0
+      0
      ]
     ],
     "radius": 0.013,
     "at": [
-     -2.0,
+     -2,
      -0.2,
      -0.9
     ],
@@ -5215,18 +3318,18 @@
     "kind": "tube",
     "path": [
      [
-      0.0,
-      0.0,
+      0,
+      0,
       -0.77
      ],
      [
-      0.0,
-      0.0,
+      0,
+      0,
       0.63
      ],
      [
       0.24,
-      0.0,
+      0,
       0.63
      ],
      [
@@ -5302,17 +3405,17 @@
      [
       0.58,
       0.22,
-      0.0
+      0
      ],
      [
       0.38,
       0.145,
-      0.0
+      0
      ],
      [
       0.22,
       0.072,
-      0.0
+      0
      ],
      [
       -0.2,
@@ -5327,7 +3430,7 @@
     ],
     "radius": 0.01,
     "at": [
-     -2.0,
+     -2,
      -0.2,
      -0.5
     ],
@@ -5446,11 +3549,11 @@
       -1.2
      ],
      [
-      3.0,
+      3,
       -1.2
      ],
      [
-      3.0,
+      3,
       1.2
      ],
      [
@@ -5566,7 +3669,7 @@
     "kind": "extrude",
     "shape": [
      [
-      -3.0,
+      -3,
       -0.62
      ],
      [
@@ -5586,7 +3689,7 @@
       -0.31
      ],
      [
-      -3.0,
+      -3,
       -0.46
      ]
     ],
@@ -5594,7 +3697,7 @@
     "at": [
      0,
      0,
-     0.0
+     0
     ],
     "color": "tissue",
     "tint": "#c9b58c"
@@ -5771,12 +3874,12 @@
      -0.25
     ],
     [
-     -1.0,
+     -1,
      1.24,
      -0.42
     ],
     [
-     0.0,
+     0,
      1.2,
      -0.55
     ],
@@ -5821,12 +3924,12 @@
    "group": "water-cycle",
    "path": [
     [
-     1.0,
+     1,
      0.98,
      -0.6
     ],
     [
-     1.0,
+     1,
      0.06,
      -0.6
     ]
@@ -6031,7 +4134,7 @@
     ],
     [
      1.25,
-     -0.0,
+     0,
      -0.05
     ],
     [
@@ -6273,31 +4376,31 @@
     [
      0.18,
      -0.06,
-     1.0
+     1
     ],
     [
      0.18,
      -0.36,
-     1.0
+     1
     ],
     [
      0.18,
      -0.43,
-     1.0
+     1
     ],
     [
      1.45,
      -0.46,
-     1.0
+     1
     ],
     [
      1.45,
      -0.06,
-     1.0
+     1
     ],
     [
      1.45,
-     0.0,
+     0,
      0.93
     ],
     [
@@ -6540,7 +4643,7 @@
     ],
     [
      -1.5,
-     0.0,
+     0,
      -0.9
     ],
     [
@@ -6694,8 +4797,8 @@
   "gates-open": {
    "crest-gates": {
     "pivot": [
-     -1.705,
-     -0.06,
+     -1.715,
+     -0.032,
      0.64
     ],
     "rotation": [
@@ -6710,7 +4813,7 @@
    "inland-reservoir": {
     "pivot": [
      2.06,
-     0.0,
+     0,
      -0.64
     ],
     "offset": [
@@ -6726,7 +4829,7 @@
    },
    "estuary-reservoir": {
     "pivot": [
-     -1.0,
+     -1,
      -0.1,
      0.62
     ],
@@ -6743,7 +4846,7 @@
    },
    "rain-cloud": {
     "pivot": [
-     1.0,
+     1,
      1.08,
      -0.62
     ],
@@ -6754,7 +4857,7 @@
   "storm": {
    "rain-cloud": {
     "pivot": [
-     1.0,
+     1,
      1.08,
      -0.62
     ],
@@ -6781,7 +4884,7 @@
     "target": [
      0.45,
      0.2,
-     0.0
+     0
     ],
     "fov": 30
    }
@@ -6789,7 +4892,7 @@
   "exploded": {
    "camera": {
     "position": [
-     5.0,
+     5,
      4.2,
      9.2
     ],
@@ -6807,7 +4910,7 @@
     0,
     -1
    ],
-   "offset": 1.0
+   "offset": 1
   },
   "cuts": {
    "ground": {
@@ -6816,7 +4919,7 @@
      0,
      -1
     ],
-    "offset": 1.0,
+    "offset": 1,
     "label": {
      "en": "Underground",
      "zh": "地下"
@@ -6835,7 +4938,7 @@
    "target": [
     0.05,
     0.3,
-    0.0
+    0
    ],
    "fov": 30
   }
@@ -6856,7 +4959,7 @@
     "target": [
      0.45,
      0.2,
-     0.0
+     0
     ],
     "fov": 30
    }
@@ -6915,7 +5018,7 @@
     ],
     "target": [
      1.85,
-     0.0,
+     0,
      0.45
     ],
     "fov": 30
@@ -6949,7 +5052,7 @@
    },
    "camera": {
     "position": [
-     1.0,
+     1,
      0.7,
      2.2
     ],
@@ -7047,5 +5150,6 @@
    "lag": 12,
    "decimals": 0
   }
- ]
+ ],
+ "model": "/models/water.glb"
 }

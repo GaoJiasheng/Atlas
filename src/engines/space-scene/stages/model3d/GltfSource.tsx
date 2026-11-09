@@ -102,6 +102,15 @@ export function gltfSurface(mesh: Mesh): GltfSurface | undefined {
     },
     fade(target, opacity, ghost) {
       fadePartMaterial(target, opacity * source.opacity, ghost, source.transparent);
+      // Alpha-tested cutouts retain their silhouette while the part fades.
+      // The alpha-test chunk sees map.a * material.opacity.
+      target.alphaTest = source.alphaTest * target.opacity;
+      // Opaque cutouts resolve their edges through MSAA coverage; a blended fade keeps its opacity.
+      const coverage = source.alphaTest > 0 && !target.transparent;
+      if (target.alphaToCoverage !== coverage) {
+        target.alphaToCoverage = coverage;
+        target.needsUpdate = true;
+      }
     },
   };
 }

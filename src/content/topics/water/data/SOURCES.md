@@ -79,3 +79,13 @@ Kept in `scripts/geo/water/refs/` (gitignored), listed in `refs/SOURCES.txt`. Si
 - [S32] PUB, Water Conservation Quiz (SG60 resources): households use about 45 % of Singapore's water and the non-domestic sector about 55 %. / PUB 节水问答（SG60 资料）：家庭用掉新加坡约 45 % 的水，非家庭部门约 55 %。 (Read in full. / 已读全文。) — https://www.pub.gov.sg/-/media/PUB/Public/Key-Initiatives/Our-Water-SG60/Resources/Activities/Quiz.pdf
 - [S33] World Health Organization, Guidelines for Drinking-water Quality, fourth edition incorporating the first and second addenda (2022): the international reference for safe drinking water that PUB measures its tap water against (S10). / 世界卫生组织《饮用水水质准则》第四版（含第一、第二增补，2022 年）：PUB 用来衡量自来水的国际饮用水安全基准（S10）。 (Cited for the title and edition only; the topic gives no limit values. / 只引书名和版本；本主题不写具体限值。) — https://www.who.int/publications/i/item/9789240045064
 <!-- sources:end -->
+
+## Rebuild 2026-11-05 — scenery geometry
+
+Original deterministic procedural meshes: `scripts/geo/water/scenery.ts` and `build.ts`; MIT under repository LICENSE. `public/models/water.glb` contains no external meshes, scans, photo textures or runtime network references. Visual references, attribution and licences are recorded in [REBUILD-3D.md](../REBUILD-3D.md) and `scripts/geo/water/reference-manifest.json`. Reference photographs are development-only.
+
+### Round 2 — original leaf atlas and estate refinement (2026-11-09)
+
+`vegetation.ts` generates four original tropical tree variants and curved leaf-cluster cards. Three grayscale botanical albedos (broadleaf shoots, bipinnate rain-tree clusters and pinnate angsana clusters) were generated with built-in `image_gen.imagegen`, packed with petiole anchoring into a 512 × 512 palette PNG, and embedded as exact lossless WebP; the build verifies decoded RGBA equality. Source image and exact prompt/mode are versioned in `scripts/geo/water/leaf-clusters-generated-v1.png` and `leaf-atlas-generation.json`. `estate.ts` / `occlusion.ts` generate solid architecture with openings and remove buried faces. Geometry is original procedural code; the atlas is an original generated texture. No reference-photo pixels or third-party meshes are embedded. `build-round2.ts` / `combine-glb.ts` replace only forest/city geometry while copying the accepted compressed mesh streams. References and licences: [REBUILD-3D.md](../REBUILD-3D.md) and `scripts/geo/water/reference-manifest.json`.
+
+Botanical morphology was checked against [NParks: Samanea saman](https://www.nparks.gov.sg/florafaunaweb/flora/3/1/3106) and [NParks: Pterocarpus indicus](https://www.nparks.gov.sg/florafaunaweb/flora/3/0/3093), alongside the Singapore photographs listed in the rebuild report. The variants are habit studies, not a botanical census of this catchment.

@@ -283,7 +283,9 @@ describe('opted-in GLB surfaces reach the real part material', () => {
     surface.style(pm.material);
     surface.fade(pm.material, .5, true);
     expect(pm.material.opacity).toBe(.2);
-    expect(pm.material.alphaTest).toBe(.1);
+    // The cutoff scales with the faded opacity, so the cutout silhouette holds; a blended fade skips alpha-to-coverage.
+    expect(pm.material.alphaTest).toBeCloseTo(.1 * .2, 10);
+    expect(pm.material.alphaToCoverage).toBe(false);
     const ordinary = createPartMaterial();
     stylePartMaterial(ordinary, partStyle('paper'));
     fadePartMaterial(ordinary.material, 1, false);

@@ -28,6 +28,7 @@ import {
   type Camera,
   type Intersection,
   type Mesh,
+  type MeshStandardMaterial,
   type Object3D,
   type PerspectiveCamera,
   type Plane,
@@ -58,6 +59,23 @@ const OCCLUSION_SAMPLES: readonly (readonly [number, number])[] = [
   [-1, 1],
   [1, 1],
 ];
+/** Alpha of a cutout map's texel (one CPU copy per image; null when unreadable): occlusion rays pass through discarded texels. */
+const _alpha = new WeakMap<object, ImageData | null>();
+function texelAlpha(image: ImageBitmap, u: number, v: number): number | null {
+  let d = _alpha.get(image);
+  if (d === undefined) {
+    try {
+      const ctx = new OffscreenCanvas(image.width, image.height).getContext('2d')!;
+      ctx.drawImage(image, 0, 0);
+      d = ctx.getImageData(0, 0, image.width, image.height);
+    } catch {
+      d = null;
+    }
+    _alpha.set(image, d);
+  }
+  return d && d.data[(Math.floor((v - Math.floor(v)) * d.height) * d.width + Math.floor((u - Math.floor(u)) * d.width)) * 4 + 3]! / 255;
+}
+
 /** On-screen radius of a group anchor = its projected half-diagonal × this (label columns keep clear of the whole group). */
 const GROUP_CLEARANCE = 1;
 
@@ -260,6 +278,9 @@ export function LabelProbe({
         seen = !_hits.some((hit) => {
           const materials = (hit.object as Mesh).material;
           const material = Array.isArray(materials) ? materials[0] : materials;
+          // An alpha-tested hit on a texel the material discards hides nothing.
+          const a = material?.alphaTest && hit.uv && (material as MeshStandardMaterial).map ? texelAlpha((material as MeshStandardMaterial).map!.image as ImageBitmap, hit.uv.x, hit.uv.y) : null;
+          if (a !== null && a * material!.opacity < material!.alphaTest) return false;
           return !material?.clippingPlanes?.length || !clipped(hit.point);
         });
       }

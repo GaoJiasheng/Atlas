@@ -1,0 +1,386 @@
+{
+  "iteration": 40,
+  "trianglesBefore": 348266,
+  "trianglesAfter": 310901,
+  "perPartBefore": {
+    "forest-hill": 88604,
+    "city-blocks": 60730
+  },
+  "perPartAfter": {
+    "forest-hill": 54036,
+    "city-blocks": 57933
+  },
+  "drawCallsBefore": 60,
+  "drawCallsAfter": 60,
+  "glbBytesBefore": 1460284,
+  "glbBytesAfter": 1499672,
+  "atlasBytes": 87866,
+  "atlasMime": "image/webp",
+  "atlasLosslessRGBA": true,
+  "protectedLeafTriangles": {
+    "forest-hill": 13872,
+    "city-blocks": 2448
+  },
+  "acceptedMeshesUnchanged": [
+    "cumulus",
+    "rain-cloud",
+    "hdb-block",
+    "roof-tank",
+    "barrage",
+    "crest-gates",
+    "pump-house"
+  ],
+  "acceptedFingerprints": {
+    "cumulus": "6606fb4f6d68ec01e8a1d2be5999ceb35036360af315fddd012f90e8bd8c36a1",
+    "rain-cloud": "49d0e47c239b8f299af052d58f8383f1bf0ff35a7583b1208e6b1a24ca448d8d",
+    "hdb-block": "c05b1a0bdffcebf8039b9e3c7c55c2e4150e98be4d747a72c74033e9e89f4e92",
+    "roof-tank": "8dac67187840d8323692eea8c1956153a7194270cbfc26ca927148eff09f29c5",
+    "barrage": "b1ed72e63de9adce0f045a299b417d204b27e217da1d6407acd9e753fc94fd2e",
+    "crest-gates": "00c642dc442b9867acfc1e96338b38b8237af46bfa14ff33a085f0ca30d81150",
+    "pump-house": "7afb07a3d9f0a52e952fc00e17bb434b66b269bc3fe49ee3a87d4612cd7e11fe"
+  },
+  "treeInstances": [
+    {
+      "part": "forest-hill",
+      "variant": "angsana",
+      "at": [
+        1.12,
+        0.10822382798897157,
+        -1.12
+      ],
+      "height": 0.455,
+      "seed": 730
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        1.2,
+        0.1926143906373572,
+        -0.95
+      ],
+      "height": 0.5598176877044871,
+      "seed": 731
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        1.18,
+        0.14811764939461458,
+        -0.7
+      ],
+      "height": 0.5412424834831651,
+      "seed": 732
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        1.3,
+        0.11579528506952408,
+        -0.55
+      ],
+      "height": 0.4211413853320534,
+      "seed": 733
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        1.48,
+        0.1416818526433945,
+        -0.6
+      ],
+      "height": 0.3408991361211928,
+      "seed": 734
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        1.52,
+        0.13774999749847638,
+        -1.08
+      ],
+      "height": 0.3949780675581325,
+      "seed": 735
+    },
+    {
+      "part": "forest-hill",
+      "variant": "rain-tree",
+      "at": [
+        1.33,
+        0.10055369164097105,
+        -0.36
+      ],
+      "height": 0.5197156825166752,
+      "seed": 736
+    },
+    {
+      "part": "forest-hill",
+      "variant": "angsana",
+      "at": [
+        1.55,
+        0.10019042279437818,
+        -0.3
+      ],
+      "height": 0.5682690637493366,
+      "seed": 737
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        1.68,
+        0.11464557444301748,
+        -1.08
+      ],
+      "height": 0.48348047142917794,
+      "seed": 738
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        1.6,
+        0.15582855453914157,
+        -0.92
+      ],
+      "height": 0.3651642578647446,
+      "seed": 739
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        1.25,
+        0.18854499170134886,
+        -1.05
+      ],
+      "height": 0.35260397407833427,
+      "seed": 740
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        1.45,
+        0.2239697493854258,
+        -0.98
+      ],
+      "height": 0.46058576708154036,
+      "seed": 741
+    },
+    {
+      "part": "forest-hill",
+      "variant": "rain-tree",
+      "at": [
+        2.62,
+        0.15396891771537025,
+        -1.12
+      ],
+      "height": 0.5619919146101167,
+      "seed": 742
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.85,
+        0.18108501973973,
+        -1.1
+      ],
+      "height": 0.5374456389785652,
+      "seed": 743
+    },
+    {
+      "part": "forest-hill",
+      "variant": "angsana",
+      "at": [
+        2.95,
+        0.18099246987855766,
+        -0.95
+      ],
+      "height": 0.41584316946380506,
+      "seed": 744
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.65,
+        0.19493241442018738,
+        -0.62
+      ],
+      "height": 0.3403366849332953,
+      "seed": 745
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        2.9,
+        0.14429810334757032,
+        -0.62
+      ],
+      "height": 0.3998135066914169,
+      "seed": 746
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.8,
+        0.10960874843208135,
+        -0.4
+      ],
+      "height": 0.5242566633661115,
+      "seed": 747
+    },
+    {
+      "part": "forest-hill",
+      "variant": "rain-tree",
+      "at": [
+        2.6,
+        0.10101137540378757,
+        -0.3
+      ],
+      "height": 0.567169878243483,
+      "seed": 748
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.92,
+        0.1006360164385316,
+        -0.32
+      ],
+      "height": 0.4780350965799368,
+      "seed": 749
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        2.7,
+        0.25668927530252716,
+        -0.82
+      ],
+      "height": 0.3617830673884514,
+      "seed": 750
+    },
+    {
+      "part": "forest-hill",
+      "variant": "angsana",
+      "at": [
+        2.4,
+        0.10004240731583525,
+        -0.3
+      ],
+      "height": 0.3552673541117081,
+      "seed": 751
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        2.42,
+        0.12454174938147267,
+        -1.12
+      ],
+      "height": 0.46615834828174607,
+      "seed": 752
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.05,
+        0.12515489969991367,
+        -1.12
+      ],
+      "height": 0.5639135741119818,
+      "seed": 753
+    },
+    {
+      "part": "forest-hill",
+      "variant": "rain-tree",
+      "at": [
+        1.9,
+        0.11659784656007433,
+        -1.1
+      ],
+      "height": 0.5334541715338653,
+      "seed": 754
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-b",
+      "at": [
+        2.25,
+        0.1263845214336876,
+        -1.13
+      ],
+      "height": 0.41063738804786193,
+      "seed": 755
+    },
+    {
+      "part": "forest-hill",
+      "variant": "emergent-a",
+      "at": [
+        1.62,
+        0.10151416100376642,
+        -0.42
+      ],
+      "height": 0.34004491042128376,
+      "seed": 756
+    },
+    {
+      "part": "city-blocks",
+      "variant": "rain-tree",
+      "at": [
+        -0.82,
+        0,
+        -1.03
+      ],
+      "height": 0.13,
+      "seed": 990
+    },
+    {
+      "part": "city-blocks",
+      "variant": "angsana",
+      "at": [
+        -0.83,
+        0,
+        -0.62
+      ],
+      "height": 0.14200000000000002,
+      "seed": 991
+    },
+    {
+      "part": "city-blocks",
+      "variant": "rain-tree",
+      "at": [
+        -0.68,
+        0,
+        -0.24
+      ],
+      "height": 0.13,
+      "seed": 992
+    },
+    {
+      "part": "city-blocks",
+      "variant": "angsana",
+      "at": [
+        0.72,
+        0,
+        -0.23
+      ],
+      "height": 0.14200000000000002,
+      "seed": 993
+    }
+  ],
+  "sha256": "35a44bd76d10b4735e41246574e0957783f38238ae795ec653d72dfba3b87c2c"
+}
