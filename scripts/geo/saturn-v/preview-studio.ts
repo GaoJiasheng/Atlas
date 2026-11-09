@@ -18,7 +18,7 @@ import {partMaterialSlots} from '../../../src/engines/space-scene/lib/parts';
 import {resolveMaterialLook} from '../../../src/engines/space-scene/lib/color';
 type V=[number,number,number];type Surface={id:string;g:BufferGeometry;r:number;m:number;rgb:Color;double:boolean};
 const round=process.argv[2]??'round1',theme=process.argv[3]==='cinema'?'cinema':'paper';
-const out=`scripts/geo/saturn-v/comparisons/${round}-${theme}`;fs.mkdirSync(out,{recursive:true});
+const out=`${process.env.ATLAS_PREVIEW_OUT??'scripts/geo/saturn-v/comparisons'}/${round}-${theme}`;fs.mkdirSync(out,{recursive:true});
 const data=partsFile.parse(JSON.parse(fs.readFileSync(round==='baseline'?'scripts/geo/saturn-v/baseline/parts.json':'src/content/topics/saturn-v/data/parts.json','utf8')));
 const css=fs.readFileSync('src/theme/tokens.css','utf8'),at=css.indexOf(`:root[data-theme="${theme}"] {`),body=css.slice(at,css.indexOf('\n}',at));
 const tokens=Object.fromEntries([...body.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)].map(m=>[m[1],m[2]]));
@@ -40,7 +40,8 @@ for(const mode of ['paper','cinema'] as const){
 }
 await MeshoptDecoder.ready;prepareStudio();
 const surfaces:Surface[]=[];
-const doc=data.model?await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(`public${data.model}`):null;
+const modelPath=process.env.SATURN_MODEL_FILE??`public${data.model}`;
+const doc=data.model?await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(modelPath):null;
 if(doc)await doc.transform(dequantize());
 for(const p of data.parts){
  if(p.mesh&&doc){
@@ -96,9 +97,14 @@ shots['lm-descent-cutaway']={ids:['lm-descent','lm-descent-engine'],center:[0,87
 shots['lm-leg-detail']={ids:['lm-legs','lm-ladder','lm-descent'],center:[0,87.2,2.5],extent:6.2,direction:[.9,.35,1],ref:'lm-drawing.png'};
 shots['lm-hatch-photo']={ids:['lm-ascent','lm-windows','lm-ladder','lm-descent'],center:[0,90.45,1.25],extent:5.9,direction:[.72,-.55,1],ref:'as11-40-5863.jpg',note:'AS11-40-5863: open hatch and EVA in photo; compare canted glazing and skin. Model hatch closed.'};
 shots['lm-pad-photo']={ids:['lm-legs'],center:[0,85.95,4.25],extent:1.9,direction:[.5,.45,1],ref:'as11-40-5917.jpg'};
+series('polish-ascent',['lm-ascent','lm-windows','lm-docking-port'],[0,90.8,0],6.7,['polish-ascent-front.jpg','polish-ascent-quarter.jpg','polish-ascent-profile.jpg']);
+shots['polish-ascent-detail']={ids:['lm-ascent','lm-windows'],center:[0,91.2,1.5],extent:3.5,direction:[0,.12,1],ref:'polish-windows.jpg'};
+shots['polish-target-detail']={ids:['lm-ascent'],center:[.04,91.10,1.961],extent:1.3,direction:[.25,.15,1],ref:'polish-target.jpg'};
+series('polish-descent',['lm-descent','lm-descent-engine'],[0,87.95,0],5.8,['polish-descent-front.jpg','polish-descent-quarter.jpg','polish-descent-profile.jpg']);
+shots['polish-descent-detail']={ids:['lm-descent'],center:[0,87.95,2.1],extent:2.2,direction:[.25,.18,1],ref:'polish-foil.jpg'};
 const selected=process.env.SATURN_SHOTS?new RegExp(process.env.SATURN_SHOTS):null;
 const manifestPath=`${out}/render-manifest.json`,manifest=fs.existsSync(manifestPath)?JSON.parse(fs.readFileSync(manifestPath,'utf8')):{};
-const assetSHA256=data.model?createHash('sha256').update(fs.readFileSync(`public${data.model}`)).digest('hex'):null;
+const assetSHA256=data.model?createHash('sha256').update(fs.readFileSync(modelPath)).digest('hex'):null;
 function render(shot:typeof shots[string]){
  const cam=shot.fov?new PerspectiveCamera(shot.fov,W/H,.01,1000):new OrthographicCamera(-shot.extent*W/H/2,shot.extent*W/H/2,shot.extent/2,-shot.extent/2,.01,1000);
  cam.position.fromArray(shot.center).add(new Vector3(...shot.direction).normalize().multiplyScalar(shot.distance??200));cam.lookAt(new Vector3(...shot.center));cam.updateMatrixWorld();cam.updateProjectionMatrix();

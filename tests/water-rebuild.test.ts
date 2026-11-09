@@ -16,9 +16,30 @@ import { bakeFlowPath } from '../src/engines/space-scene/lib/flow-curve';
 import { partPieces } from '../src/engines/space-scene/stages/model3d/geometry';
 import { toTransform } from '../src/engines/space-scene/lib/pose';
 import { partFrame, applyFrame } from '../src/engines/space-scene/lib/sim/frame';
+import {pipelineScene} from '../scripts/geo/water/pipeline-visibility';
+import {parse as parseYaml} from 'yaml';
+import {fitCameraToAspect} from '../src/engines/space-scene/lib/camera';
 const before=JSON.parse(fs.readFileSync('scripts/geo/water/baseline-parts.json','utf8'));
 const after=JSON.parse(fs.readFileSync('src/content/topics/water/data/parts.json','utf8'));
 describe('water scenery rebuild',()=>{
+ it('keeps the pipeline midpoint visible in the two actual beat cameras through the production ray pattern',async()=>{
+  const scene=await pipelineScene();
+  try{
+   expect(scene.cast([6.55,4.8,11.3]).every(r=>r.blocker==='forest-hill')).toBe(true);
+   for(const [filename,index]of [['01-one-island-four-taps.mdx',2],['07-every-drop.mdx',0]] as const){
+    const state=parseYaml(fs.readFileSync('src/content/topics/water/chapters/'+filename,'utf8').split('---')[1]!).state,beat={...state,...state.beats[index]},camera=typeof beat.camera==='string'?after.presets.find((p:{id:string})=>p.id===beat.camera).camera:beat.camera;
+    const rays=scene.cast(camera.position,'johor-main',beat.layers);
+    expect(rays[0]!.blocker,filename+' midpoint').toBeNull();expect(rays.filter(r=>!r.blocker).length).toBeGreaterThanOrEqual(3);
+    const cam=new (await import('three')).PerspectiveCamera(camera.fov,16/9,.001,100);cam.position.fromArray(camera.position);cam.lookAt(new Vector3().fromArray(camera.target));cam.updateMatrixWorld();
+    const ndc=new Vector3().fromArray(scene.center).project(cam);expect(Math.abs(ndc.x)).toBeLessThan(.85);expect(Math.abs(ndc.y)).toBeLessThan(.85);
+    for(const label of beat.labels)expect(scene.cast(camera.position,label,beat.layers).some(r=>!r.blocker),filename+'/'+label).toBe(true);
+    for(const aspect of [16/9,4/3,390/844]){
+     const fitted=fitCameraToAspect(camera,aspect);
+     expect(scene.cast(fitted.position,'johor-main',beat.layers)[0]!.blocker,filename+'/'+aspect+' fitted midpoint').toBeNull();
+    }
+   }
+  }finally{scene.dispose();}
+ });
  it('preserves teaching objects, flows, animation endpoints and all chapter references',()=>{
   expect(after.parts.map((p:any)=>p.id)).toEqual(before.parts.map((p:any)=>p.id));
   for(const key of ['flows','animations','groups','spec','telemetry','views','presets'])expect(JSON.stringify(after[key])).toBe(JSON.stringify(before[key]));

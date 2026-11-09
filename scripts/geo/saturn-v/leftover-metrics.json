@@ -1,0 +1,939 @@
+{
+  "saturn-v": {
+    "before": {
+      "triangles": 337962,
+      "draws": 34,
+      "bytes": 1476616,
+      "sha256": "44c26812112e71617e81a5ef64046314526053f57330ec32af2f4485a56c3363",
+      "perPart": {
+        "sic-shell": {
+          "triangles": 9948,
+          "draws": 1
+        },
+        "sic-fuel": {
+          "triangles": 12552,
+          "draws": 1
+        },
+        "sic-oxidiser": {
+          "triangles": 11232,
+          "draws": 1
+        },
+        "f1-centre": {
+          "triangles": 19608,
+          "draws": 1
+        },
+        "f1-outer": {
+          "triangles": 79576,
+          "draws": 1
+        },
+        "sic-fins": {
+          "triangles": 176,
+          "draws": 1
+        },
+        "sii-shell": {
+          "triangles": 7232,
+          "draws": 1
+        },
+        "sii-fuel": {
+          "triangles": 5420,
+          "draws": 1
+        },
+        "sii-oxidiser": {
+          "triangles": 5200,
+          "draws": 1
+        },
+        "j2-centre": {
+          "triangles": 9824,
+          "draws": 1
+        },
+        "j2-outer": {
+          "triangles": 38482,
+          "draws": 1
+        },
+        "sivb-shell": {
+          "triangles": 9210,
+          "draws": 1
+        },
+        "sivb-fuel": {
+          "triangles": 5952,
+          "draws": 1
+        },
+        "sivb-oxidiser": {
+          "triangles": 3636,
+          "draws": 1
+        },
+        "sivb-engine": {
+          "triangles": 10286,
+          "draws": 1
+        },
+        "iu-ring": {
+          "triangles": 4198,
+          "draws": 1
+        },
+        "sla-shell": {
+          "triangles": 6920,
+          "draws": 1
+        },
+        "cm-shell": {
+          "triangles": 5098,
+          "draws": 1
+        },
+        "cm-heatshield": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "cm-couches": {
+          "triangles": 5452,
+          "draws": 1
+        },
+        "cm-probe": {
+          "triangles": 2136,
+          "draws": 1
+        },
+        "sm-shell": {
+          "triangles": 11676,
+          "draws": 1
+        },
+        "sm-tanks": {
+          "triangles": 8478,
+          "draws": 1
+        },
+        "sm-engine": {
+          "triangles": 2800,
+          "draws": 1
+        },
+        "les-tower": {
+          "triangles": 6102,
+          "draws": 1
+        },
+        "lm-descent": {
+          "triangles": 11548,
+          "draws": 1
+        },
+        "lm-descent-engine": {
+          "triangles": 1620,
+          "draws": 1
+        },
+        "lm-legs": {
+          "triangles": 26726,
+          "draws": 1
+        },
+        "lm-ascent": {
+          "triangles": 9884,
+          "draws": 1
+        },
+        "lm-ascent-engine": {
+          "triangles": 1576,
+          "draws": 1
+        },
+        "lm-windows": {
+          "triangles": 160,
+          "draws": 1
+        },
+        "lm-ladder": {
+          "triangles": 646,
+          "draws": 1
+        },
+        "lm-docking-port": {
+          "triangles": 3968,
+          "draws": 2
+        }
+      }
+    },
+    "after": {
+      "triangles": 342131,
+      "draws": 34,
+      "bytes": 1496840,
+      "sha256": "e5c1051ad3aa812606a16e98ffaf37c2efc0fb7821ae1a956d42e4f125f1362d",
+      "perPart": {
+        "sic-shell": {
+          "triangles": 9948,
+          "draws": 1
+        },
+        "sic-fuel": {
+          "triangles": 12552,
+          "draws": 1
+        },
+        "sic-oxidiser": {
+          "triangles": 11232,
+          "draws": 1
+        },
+        "f1-centre": {
+          "triangles": 19608,
+          "draws": 1
+        },
+        "f1-outer": {
+          "triangles": 79576,
+          "draws": 1
+        },
+        "sic-fins": {
+          "triangles": 176,
+          "draws": 1
+        },
+        "sii-shell": {
+          "triangles": 7232,
+          "draws": 1
+        },
+        "sii-fuel": {
+          "triangles": 5420,
+          "draws": 1
+        },
+        "sii-oxidiser": {
+          "triangles": 5200,
+          "draws": 1
+        },
+        "j2-centre": {
+          "triangles": 9824,
+          "draws": 1
+        },
+        "j2-outer": {
+          "triangles": 38482,
+          "draws": 1
+        },
+        "sivb-shell": {
+          "triangles": 9210,
+          "draws": 1
+        },
+        "sivb-fuel": {
+          "triangles": 5952,
+          "draws": 1
+        },
+        "sivb-oxidiser": {
+          "triangles": 3636,
+          "draws": 1
+        },
+        "sivb-engine": {
+          "triangles": 10286,
+          "draws": 1
+        },
+        "iu-ring": {
+          "triangles": 4198,
+          "draws": 1
+        },
+        "sla-shell": {
+          "triangles": 6920,
+          "draws": 1
+        },
+        "cm-shell": {
+          "triangles": 5098,
+          "draws": 1
+        },
+        "cm-heatshield": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "cm-couches": {
+          "triangles": 5452,
+          "draws": 1
+        },
+        "cm-probe": {
+          "triangles": 2136,
+          "draws": 1
+        },
+        "sm-shell": {
+          "triangles": 11676,
+          "draws": 1
+        },
+        "sm-tanks": {
+          "triangles": 8478,
+          "draws": 1
+        },
+        "sm-engine": {
+          "triangles": 2800,
+          "draws": 1
+        },
+        "les-tower": {
+          "triangles": 6102,
+          "draws": 1
+        },
+        "lm-descent": {
+          "triangles": 13042,
+          "draws": 1
+        },
+        "lm-descent-engine": {
+          "triangles": 1620,
+          "draws": 1
+        },
+        "lm-legs": {
+          "triangles": 26726,
+          "draws": 1
+        },
+        "lm-ascent": {
+          "triangles": 12559,
+          "draws": 1
+        },
+        "lm-ascent-engine": {
+          "triangles": 1576,
+          "draws": 1
+        },
+        "lm-windows": {
+          "triangles": 160,
+          "draws": 1
+        },
+        "lm-ladder": {
+          "triangles": 646,
+          "draws": 1
+        },
+        "lm-docking-port": {
+          "triangles": 3968,
+          "draws": 2
+        }
+      }
+    },
+    "displayText": "All EN/ZH pairs unchanged"
+  },
+  "heat": {
+    "before": {
+      "triangles": 329952,
+      "draws": 87,
+      "bytes": 377716,
+      "sha256": "a5ea55e4668e65a7793115942c0988a948739e71a56a981f2d6ee8d1be80e835",
+      "perPart": {
+        "bath-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "bath-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "metal-spoon": {
+          "triangles": 6528,
+          "draws": 1
+        },
+        "plastic-spoon": {
+          "triangles": 6528,
+          "draws": 1
+        },
+        "metal-tip-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "plastic-tip-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "retort-stand": {
+          "triangles": 4604,
+          "draws": 4
+        },
+        "probe-clamp": {
+          "triangles": 22632,
+          "draws": 3
+        },
+        "heater": {
+          "triangles": 14196,
+          "draws": 8
+        },
+        "heater-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "heater-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "heater-probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "heater-probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "cooling-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "cooling-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "cool-probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "cool-probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "wrap": {
+          "triangles": 512,
+          "draws": 1
+        },
+        "air-gap": {
+          "triangles": 512,
+          "draws": 1
+        },
+        "rod": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "rod-end-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "rod-support-left": {
+          "triangles": 1368,
+          "draws": 2
+        },
+        "rod-support-right": {
+          "triangles": 1368,
+          "draws": 2
+        },
+        "expansion-ball": {
+          "triangles": 9216,
+          "draws": 1
+        },
+        "expansion-ring": {
+          "triangles": 31556,
+          "draws": 5
+        },
+        "expansion-thermometer": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "gas-cylinder": {
+          "triangles": 2396,
+          "draws": 3
+        },
+        "gas-piston": {
+          "triangles": 960,
+          "draws": 3
+        },
+        "bath-holder": {
+          "triangles": 32892,
+          "draws": 5
+        },
+        "heater-probe-support": {
+          "triangles": 27236,
+          "draws": 5
+        },
+        "cooler-probe-support": {
+          "triangles": 27236,
+          "draws": 5
+        },
+        "room-reference": {
+          "triangles": 1820,
+          "draws": 4
+        },
+        "bench": {
+          "triangles": 35940,
+          "draws": 7
+        }
+      }
+    },
+    "after": {
+      "triangles": 332128,
+      "draws": 85,
+      "bytes": 504256,
+      "sha256": "58bd5ddbda9c2870ef7b6c424f88e3fae929cea94e7f78d759d246c239f8dcb1",
+      "perPart": {
+        "bath-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "bath-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "metal-spoon": {
+          "triangles": 6528,
+          "draws": 1
+        },
+        "plastic-spoon": {
+          "triangles": 6528,
+          "draws": 1
+        },
+        "metal-tip-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "plastic-tip-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "retort-stand": {
+          "triangles": 4604,
+          "draws": 4
+        },
+        "probe-clamp": {
+          "triangles": 22632,
+          "draws": 3
+        },
+        "heater": {
+          "triangles": 14196,
+          "draws": 8
+        },
+        "heater-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "heater-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "heater-probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "heater-probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "cooling-beaker": {
+          "triangles": 24960,
+          "draws": 1
+        },
+        "cooling-water": {
+          "triangles": 192,
+          "draws": 1
+        },
+        "cool-probe": {
+          "triangles": 8176,
+          "draws": 4
+        },
+        "cool-probe-marker": {
+          "triangles": 384,
+          "draws": 1
+        },
+        "wrap": {
+          "triangles": 512,
+          "draws": 1
+        },
+        "air-gap": {
+          "triangles": 512,
+          "draws": 1
+        },
+        "rod": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "rod-end-marker": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "rod-support-left": {
+          "triangles": 1368,
+          "draws": 2
+        },
+        "rod-support-right": {
+          "triangles": 1368,
+          "draws": 2
+        },
+        "expansion-ball": {
+          "triangles": 9216,
+          "draws": 1
+        },
+        "expansion-ring": {
+          "triangles": 31556,
+          "draws": 5
+        },
+        "expansion-thermometer": {
+          "triangles": 640,
+          "draws": 1
+        },
+        "gas-cylinder": {
+          "triangles": 4572,
+          "draws": 1
+        },
+        "gas-piston": {
+          "triangles": 960,
+          "draws": 3
+        },
+        "bath-holder": {
+          "triangles": 32892,
+          "draws": 5
+        },
+        "heater-probe-support": {
+          "triangles": 27236,
+          "draws": 5
+        },
+        "cooler-probe-support": {
+          "triangles": 27236,
+          "draws": 5
+        },
+        "room-reference": {
+          "triangles": 1820,
+          "draws": 4
+        },
+        "bench": {
+          "triangles": 35940,
+          "draws": 7
+        }
+      }
+    },
+    "displayText": "All EN/ZH pairs unchanged"
+  },
+  "water": {
+    "before": {
+      "triangles": 310901,
+      "draws": 60,
+      "bytes": 1499716,
+      "sha256": "99d601e360075a45914c09b6da8b8a005dd6f36cbfebdf2a9efa6d3cd95a1b38",
+      "perPart": {
+        "sun": {
+          "triangles": 2976,
+          "draws": 1
+        },
+        "sea": {
+          "triangles": 20,
+          "draws": 1
+        },
+        "cumulus": {
+          "triangles": 14350,
+          "draws": 1
+        },
+        "rain-cloud": {
+          "triangles": 22730,
+          "draws": 1
+        },
+        "forest-hill": {
+          "triangles": 54036,
+          "draws": 1
+        },
+        "inland-reservoir": {
+          "triangles": 40,
+          "draws": 1
+        },
+        "earth-dam": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "intake-tower": {
+          "triangles": 396,
+          "draws": 1
+        },
+        "city-blocks": {
+          "triangles": 57933,
+          "draws": 1
+        },
+        "drains": {
+          "triangles": 5360,
+          "draws": 1
+        },
+        "canal": {
+          "triangles": 4952,
+          "draws": 1
+        },
+        "estuary-reservoir": {
+          "triangles": 36,
+          "draws": 1
+        },
+        "barrage": {
+          "triangles": 4512,
+          "draws": 1
+        },
+        "crest-gates": {
+          "triangles": 2016,
+          "draws": 1
+        },
+        "pump-house": {
+          "triangles": 8643,
+          "draws": 1
+        },
+        "raw-water-main": {
+          "triangles": 6012,
+          "draws": 1
+        },
+        "waterworks-mixing": {
+          "triangles": 1200,
+          "draws": 2
+        },
+        "clarifiers": {
+          "triangles": 1764,
+          "draws": 3
+        },
+        "filter-beds": {
+          "triangles": 3672,
+          "draws": 3
+        },
+        "clear-water-tank": {
+          "triangles": 600,
+          "draws": 2
+        },
+        "service-reservoir": {
+          "triangles": 480,
+          "draws": 2
+        },
+        "distribution-main": {
+          "triangles": 19044,
+          "draws": 1
+        },
+        "hdb-block": {
+          "triangles": 15300,
+          "draws": 1
+        },
+        "roof-tank": {
+          "triangles": 2025,
+          "draws": 1
+        },
+        "kitchen-tap": {
+          "triangles": 1836,
+          "draws": 1
+        },
+        "house-sewer": {
+          "triangles": 9144,
+          "draws": 1
+        },
+        "dtss-tunnel": {
+          "triangles": 2016,
+          "draws": 1
+        },
+        "reclamation-plant": {
+          "triangles": 2328,
+          "draws": 2
+        },
+        "newater-hall": {
+          "triangles": 2940,
+          "draws": 1
+        },
+        "newater-membranes": {
+          "triangles": 3168,
+          "draws": 2
+        },
+        "newater-ro": {
+          "triangles": 5760,
+          "draws": 2
+        },
+        "uv-reactors": {
+          "triangles": 1152,
+          "draws": 1
+        },
+        "newater-main": {
+          "triangles": 18288,
+          "draws": 1
+        },
+        "factory": {
+          "triangles": 2148,
+          "draws": 3
+        },
+        "desal-intake": {
+          "triangles": 5712,
+          "draws": 1
+        },
+        "desal-pretreat": {
+          "triangles": 1800,
+          "draws": 2
+        },
+        "desal-ro": {
+          "triangles": 7140,
+          "draws": 4
+        },
+        "johor-main": {
+          "triangles": 8388,
+          "draws": 2
+        },
+        "brine-outfall": {
+          "triangles": 10284,
+          "draws": 1
+        },
+        "ground-shell": {
+          "triangles": 80,
+          "draws": 2
+        },
+        "seabed-block": {
+          "triangles": 20,
+          "draws": 1
+        },
+        "causeway-stub": {
+          "triangles": 588,
+          "draws": 1
+        }
+      }
+    },
+    "after": {
+      "triangles": 310901,
+      "draws": 60,
+      "bytes": 1499716,
+      "sha256": "99d601e360075a45914c09b6da8b8a005dd6f36cbfebdf2a9efa6d3cd95a1b38",
+      "perPart": {
+        "sun": {
+          "triangles": 2976,
+          "draws": 1
+        },
+        "sea": {
+          "triangles": 20,
+          "draws": 1
+        },
+        "cumulus": {
+          "triangles": 14350,
+          "draws": 1
+        },
+        "rain-cloud": {
+          "triangles": 22730,
+          "draws": 1
+        },
+        "forest-hill": {
+          "triangles": 54036,
+          "draws": 1
+        },
+        "inland-reservoir": {
+          "triangles": 40,
+          "draws": 1
+        },
+        "earth-dam": {
+          "triangles": 12,
+          "draws": 1
+        },
+        "intake-tower": {
+          "triangles": 396,
+          "draws": 1
+        },
+        "city-blocks": {
+          "triangles": 57933,
+          "draws": 1
+        },
+        "drains": {
+          "triangles": 5360,
+          "draws": 1
+        },
+        "canal": {
+          "triangles": 4952,
+          "draws": 1
+        },
+        "estuary-reservoir": {
+          "triangles": 36,
+          "draws": 1
+        },
+        "barrage": {
+          "triangles": 4512,
+          "draws": 1
+        },
+        "crest-gates": {
+          "triangles": 2016,
+          "draws": 1
+        },
+        "pump-house": {
+          "triangles": 8643,
+          "draws": 1
+        },
+        "raw-water-main": {
+          "triangles": 6012,
+          "draws": 1
+        },
+        "waterworks-mixing": {
+          "triangles": 1200,
+          "draws": 2
+        },
+        "clarifiers": {
+          "triangles": 1764,
+          "draws": 3
+        },
+        "filter-beds": {
+          "triangles": 3672,
+          "draws": 3
+        },
+        "clear-water-tank": {
+          "triangles": 600,
+          "draws": 2
+        },
+        "service-reservoir": {
+          "triangles": 480,
+          "draws": 2
+        },
+        "distribution-main": {
+          "triangles": 19044,
+          "draws": 1
+        },
+        "hdb-block": {
+          "triangles": 15300,
+          "draws": 1
+        },
+        "roof-tank": {
+          "triangles": 2025,
+          "draws": 1
+        },
+        "kitchen-tap": {
+          "triangles": 1836,
+          "draws": 1
+        },
+        "house-sewer": {
+          "triangles": 9144,
+          "draws": 1
+        },
+        "dtss-tunnel": {
+          "triangles": 2016,
+          "draws": 1
+        },
+        "reclamation-plant": {
+          "triangles": 2328,
+          "draws": 2
+        },
+        "newater-hall": {
+          "triangles": 2940,
+          "draws": 1
+        },
+        "newater-membranes": {
+          "triangles": 3168,
+          "draws": 2
+        },
+        "newater-ro": {
+          "triangles": 5760,
+          "draws": 2
+        },
+        "uv-reactors": {
+          "triangles": 1152,
+          "draws": 1
+        },
+        "newater-main": {
+          "triangles": 18288,
+          "draws": 1
+        },
+        "factory": {
+          "triangles": 2148,
+          "draws": 3
+        },
+        "desal-intake": {
+          "triangles": 5712,
+          "draws": 1
+        },
+        "desal-pretreat": {
+          "triangles": 1800,
+          "draws": 2
+        },
+        "desal-ro": {
+          "triangles": 7140,
+          "draws": 4
+        },
+        "johor-main": {
+          "triangles": 8388,
+          "draws": 2
+        },
+        "brine-outfall": {
+          "triangles": 10284,
+          "draws": 1
+        },
+        "ground-shell": {
+          "triangles": 80,
+          "draws": 2
+        },
+        "seabed-block": {
+          "triangles": 20,
+          "draws": 1
+        },
+        "causeway-stub": {
+          "triangles": 588,
+          "draws": 1
+        }
+      }
+    },
+    "displayText": "All EN/ZH pairs unchanged"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-09",
+  "gates": {
+    "check": {
+      "log": "/tmp/atlas-leftover-polish/check-final.log",
+      "sha256": "630e7c0d97f93afcd825b24886b6ae1cc30f512e59a9873e2467c24465fb27e8",
+      "status": "PASS"
+    },
+    "validate": {
+      "log": "/tmp/atlas-leftover-polish/validate-final.log",
+      "sha256": "3976a158a1bc4c6cabdec20cab0d3db4450a6b178ee008f6863d1fe061bdcede",
+      "status": "PASS"
+    },
+    "test": {
+      "log": "/tmp/atlas-leftover-polish/test-final.log",
+      "sha256": "3e1bf298b24fee835168f23651c14b7db90cc03806331d0e152924dbeccb62d0",
+      "status": "PASS"
+    },
+    "build": {
+      "log": "/tmp/atlas-leftover-polish/build-final.log",
+      "sha256": "c2a204bc7281c210e47e51d551d7913d4f87a264cfd658d26675601a55a9b113",
+      "status": "PASS"
+    }
+  },
+  "tests": {
+    "files": 305,
+    "passed": 6743,
+    "skipped": 0
+  },
+  "buildPages": 191,
+  "assets": {
+    "saturn-v": {
+      "triangles": 342131,
+      "draws": 34,
+      "bytes": 1496840,
+      "sha256": "e5c1051ad3aa812606a16e98ffaf37c2efc0fb7821ae1a956d42e4f125f1362d"
+    },
+    "heat": {
+      "triangles": 332128,
+      "draws": 85,
+      "bytes": 504256,
+      "sha256": "58bd5ddbda9c2870ef7b6c424f88e3fae929cea94e7f78d759d246c239f8dcb1"
+    },
+    "water": {
+      "triangles": 310901,
+      "draws": 60,
+      "bytes": 1499716,
+      "sha256": "99d601e360075a45914c09b6da8b8a005dd6f36cbfebdf2a9efa6d3cd95a1b38"
+    }
+  },
+  "metrics": "scripts/geo/saturn-v/leftover-metrics.json",
+  "comparisonDirectory": "/tmp/atlas-leftover-polish/sheets",
+  "finalSheets": {
+    "/tmp/atlas-leftover-polish/sheets/heat-final.jpg": "b49edf38371bb581682836c9dd46173b80f0de0c619c106af46813767cb64db6",
+    "/tmp/atlas-leftover-polish/sheets/saturn-final-cinema-ascent.jpg": "c1943e9afb283782d9b68ba0c5a7c30679717c2f362aba4aa047630761de2bc4",
+    "/tmp/atlas-leftover-polish/sheets/saturn-final-cinema-descent.jpg": "376fed517e81a2c6687f72c6a7ee5f956e4c46e8de4d9ee2295af105d502dd8d",
+    "/tmp/atlas-leftover-polish/sheets/saturn-final-paper-ascent.jpg": "1ea514827a5a4aaa513a10c66ee3290918100108699857d79108f1889d23e135",
+    "/tmp/atlas-leftover-polish/sheets/saturn-final-paper-descent.jpg": "93de97701f82fc2eed6940a7ec974d2b0fd27556c685cfa6053b1d80ca992324",
+    "/tmp/atlas-leftover-polish/sheets/saturn-final-target.jpg": "b440cb305fe3e84c8d385ea9e545ba1688ed50a406faeca378ec09f5a5e616ef",
+    "/tmp/atlas-leftover-polish/sheets/water-final.jpg": "dbe1ca023b551fd1972d3609772c7daa22e684b7b49b1093c72cb279f43646f9"
+  },
+  "displayText": "All EN/ZH values unchanged",
+  "runtimeEdits": [],
+  "gitWrites": false,
+  "browserDesktopChromium": false,
+  "GPUAcceptance": false,
+  "strictEveryViewPhotoRegistration": false,
+  "evidenceException": "Flight references are oblique/roof and rear-quarter views; full four-angle camera registration is not claimed. See all three REBUILD-3D.md appendices.",
+  "sandboxVerification": {
+    "astro": "NODE_OPTIONS=--import=./scripts/geo/saturn-v/local-astro-cache.mjs redirects only cacheDir in memory",
+    "vitest": "Existing vitest.config.ts with --configLoader=runner --maxWorkers=2 --testTimeout=30000"
+  }
+}

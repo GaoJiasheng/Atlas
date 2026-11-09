@@ -373,6 +373,19 @@ it('LM corner quads retain sixteen open mouths across both horizontal translatio
  (mesh.material as MeshBasicMaterial).dispose();
 });
 
+it('delivers black window cheeks, quad shields, a smooth docking target and measurable black blanket relief',()=>{
+ const cabin=actualMeshes.get('lm-ascent')!,p=cabin.getAttribute('position'),c=cabin.getAttribute('color');
+ for(const side of [-1,1]){
+  const cheek=Array.from({length:p.count},(_,i)=>i).filter(i=>side*p.getX(i)>.4&&side*p.getX(i)<1.05&&p.getY(i)>90.85&&p.getY(i)<91.55&&p.getZ(i)>1.20&&p.getZ(i)<1.9);
+  expect(cheek.filter(i=>c.getX(i)<.05&&c.getY(i)<.05).length).toBeGreaterThan(12);
+ }
+ const ring=Array.from({length:p.count},(_,i)=>i).filter(i=>Math.abs(Math.hypot(p.getX(i)-.04,p.getY(i)-91.1)-.216)<.002&&p.getZ(i)>1.973);
+ expect(ring.length).toBeGreaterThanOrEqual(60);
+ const descent=actualMeshes.get('lm-descent')!,d=descent.getAttribute('position'),color=descent.getAttribute('color');
+ const foil=Array.from({length:d.count},(_,i)=>i).filter(i=>Math.abs(d.getX(i))<.90&&d.getY(i)>87.1&&d.getY(i)<88.75&&d.getZ(i)>2.0&&color.getX(i)<.15);
+ const z=foil.map(i=>d.getZ(i));expect(z.length).toBeGreaterThan(100);expect(Math.max(...z)-Math.min(...z)).toBeGreaterThan(.02);expect(Math.min(...z)).toBeGreaterThan(2.097);
+});
+
 it('CM hatch top and bottom seals stay in relief over the curved shell',()=>{
  const mesh=new Mesh(actualMeshes.get('cm-shell')!,new MeshBasicMaterial({side:DoubleSide}));mesh.updateMatrixWorld();const ray=new Raycaster();
  for(const [lo,hi]of [[99.05,99.18],[100.28,100.43]]){

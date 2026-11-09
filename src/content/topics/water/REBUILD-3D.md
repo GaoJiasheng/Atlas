@@ -236,3 +236,41 @@ Fixes made in acceptance:
 
 Open: at the hero camera of beat 1·3 the Johor pipeline's midpoint is behind the western forest edge, so its label is hidden (correctly occluded, listed by `--beats`). A beat camera from further west or a cleared pipeline corridor would show it.
 - Tests: `water-rebuild.test.ts` checks the applied fade (scaled cutoff, alpha-to-coverage only while opaque) instead of the removed patch file. `solar-system-polish.test.ts` had a synthetic alphaTest material that asserted the old unscaled cutoff; it now asserts the new contract. The real solar-system glb has no alpha-tested material.
+
+
+## Rebuild 2026-11-05 — leftover pipeline visibility (audit 2026-11-09)
+
+Scope: only the cameras of beats **1·3** and **7·1**. The accepted forest, every tree, the pipeline/label ID and the entire GLB are unchanged. No clearing, extra pipe, misleading corridor or display-text edit was needed.
+
+### Real context photographs, inspected
+
+1. [Causeway pipeline.jpg](https://commons.wikimedia.org/wiki/File:Causeway_pipeline.jpg), **Mohamed Shaaz**, CC BY-SA 2.0: large water mains seated beside the Causeway. Original-file downloads failed; the Commons-hosted 960-pixel thumbnail succeeded. Its historical caption's supply percentage is not adopted as a teaching fact.
+2. [Johor-Singapore Causeway.JPG](https://commons.wikimedia.org/wiki/File:Johor-Singapore_Causeway.JPG), **Terence Ong**, CC BY 2.5 (also CC BY-SA 3.0/GFDL): Causeway roadside context. This camera correction retains the existing schematic route and does not turn that diorama into a surveyed Causeway replica.
+
+### Looked-at iterations and corrections
+
+1. **Before:** inspected the original studio overview and actual ray hits. All five production-pattern rays from `[6.55,4.8,11.3]` hit `forest-hill`; the midpoint label was correctly hidden. Moved the two beat cameras to the western side, testing the decoded GLB/leaf alpha rather than changing label-occlusion rules.
+2. **Look 1:** the west-side overview revealed the pipeline and kept clear rays to all requested highlights, but the imported-water explanation remained too distant. Gave **1·3** a dedicated close-up (`[-3.35,2.02,-2.06]` → `[1.0,0.12,-0.65]`, 34 degrees). **7·1** retains the all-four-taps west overview (`[-10,5,-4]` → `[0.45,0.2,0]`, 30 degrees). Other beats still use their original cameras/presets.
+3. **Look 2 / final:** inspected both beats in paper/cinema. The pipeline midpoint and two additional sample rays are clear in each camera; every requested highlight has a clear ray. The regression reads the actual chapter beat state, uses the same five sample positions and 2 cm endpoint tolerance as LabelProbe, samples the actual embedded foliage alpha, and repeats the midpoint test through production `fitCameraToAspect` at 16:9, 4:3 and 390:844. No camera/framing/label-engine file is changed.
+
+### Part self-grade and counts
+
+| Part / feature | Self-grade | Triangles before → after | Estimated draws | Change |
+|---|---|---:|---:|---|
+| `johor-main` visibility in beats 1·3 / 7·1 | **A** (visibility repair) | 8,388 → 8,388 | 2 → 2 | Dedicated west-side beat cameras reveal the midpoint and keep the existing label eligible. |
+| Forest and all other accepted scenery/mechanisms | **A retained** | Unchanged | Unchanged | No geometry, text, flows, poses or labels changed. |
+
+Whole topic: **310,901 → 310,901 triangles**, **60 → 60 estimated draws**, GLB **1,499,716 → 1,499,716 bytes**, identical SHA-256 `99d601e360075a45914c09b6da8b8a005dd6f36cbfebdf2a9efa6d3cd95a1b38`.
+
+Primary sheets: `/tmp/atlas-leftover-polish/sheets/water-{look1,look2,final}.jpg`. Both final paper/cinema camera renders are in `/tmp/atlas-leftover-polish/water/`. Reproduce with `ATLAS_PREVIEW_SHOT=pipeline-01-3-paper,pipeline-07-1-paper,pipeline-01-3-cinema,pipeline-07-1-cinema ATLAS_PREVIEW_OUT=/tmp/atlas-leftover-polish/water pnpm tsx scripts/geo/water/preview.ts final`. These CPU images show the scene; the actual production label eligibility is verified by `pipeline-visibility.ts` and the topic test, not by a fabricated browser HUD.
+
+
+### Verification and evidence boundary
+
+`pnpm check` PASS (0 errors/warnings; 23 existing hints), `pnpm validate` PASS (94 topics, 0 errors/warnings), `pnpm run test --configLoader=runner --maxWorkers=2 --testTimeout=30000` PASS (**305 files / 6,743 tests, zero skips**), `pnpm build` PASS (**191 pages**). The read-only shared `node_modules` link prevents Astro/Vite's default cache writes. Check/build use `NODE_OPTIONS=--import=./scripts/geo/saturn-v/local-astro-cache.mjs`; that hook changes only Astro's cache path in memory. Vitest uses its existing config through the `runner` config loader. No config file, package, lockfile, engine, existing shared kit, browser/desktop or git index was modified. `git diff --check` passed.
+
+All EN/ZH display-text pairs, teaching numbers, IDs, counts of teaching objects, chapters and beat captions are unchanged. New surfaces are original procedural geometry; the retained NASA source licence is unchanged. Counts below are decoded geometry and estimated colour/material draws, not measured GPU frames or shadow-pass counts.
+
+Evidence root: `/tmp/atlas-leftover-polish/sheets` (absolute host path; no evidence images are tracked). Reused the fossils studio CPU renderer: actual engine studio key/fill/rim directions, intensities, hemisphere, sampled installed RoomEnvironment, exposure, linear shading, Three ACES and sRGB. Saturn and water explicitly compare against `Lighting.tsx` and its consumers; heat uses that same verified renderer. Preview source materials and actual shipped GLBs are decoded, rather than substituting a token-only proxy. CPU environment filtering, mip handling and transparent sorting remain approximations, not GPU pixel identity.
+
+**Not done / concrete limits:** Chromium/browser/desktop/GPU acceptance is intentionally unrun under the task prohibition. Exact camera registration for every requested photographic front/profile angle is also **not complete**: the accessible flight photographs are roof/front-quarter and rear-quarter views. The four-view sheets explicitly label the nearest available reference views; neither the generic teaching gas cylinder nor Singapore's schematic diorama is claimed as a surveyed replica. The NASA/Grumman manual recovered from the Apollo Journals mirror supplied independent structure/shielding cross-checks, but its configuration figure is itself a quarter view. This is an explicit evidence exception, not a claim that all requested same-angle photographs were obtained. The changed-feature A grades below mean docs/68's “credible, retain” self-assessment; they do not certify exact flight-specific fastening patterns or GPU acceptance.

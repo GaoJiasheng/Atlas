@@ -303,7 +303,7 @@ export function windows(cabin:BufferGeometry){const h=new Hardware(),mesh=new Me
  const clip=(poly:Vertex[],a:XY,b:XY,inside:boolean)=>{const out:Vertex[]=[];for(let i=0;i<poly.length;i++){const v=poly[i]!,w=poly[(i+1)%poly.length]!,dv=cross(a,b,v),dw=cross(a,b,w),iv=inside?dv<=0:dv>=0,iw=inside?dw<=0:dw>=0;if(iv)out.push(v);if(iv!==iw)out.push(mix(v,w,dv/(dv-dw)));}return out;};
  const subtract=(poly:Vertex[],hole:XY[])=>{const output:Vertex[][]=[];let pending=poly;for(let i=0;i<3&&pending.length;i++){const a=hole[i]!,b=hole[(i+1)%3]!,outside=clip(pending,a,b,false);if(outside.length>=3)output.push(outside);pending=clip(pending,a,b,true);}return output;};
  for(let t=0;t<(ix?.count??p.count);t+=3){const tri=[0,1,2].map(k=>vertex(ix?ix.getX(t+k):t+k));let polys=[tri];
-  if(tri.every(v=>v.p[2]>.9)&&tri.some(v=>v.n[2]>.25))for(const hole of apertures)polys=polys.flatMap(poly=>subtract(poly,hole));
+  if(tri.every(v=>v.p[2]>.9))for(const hole of apertures)polys=polys.flatMap(poly=>subtract(poly,hole));
   for(const poly of polys)for(let i=1;i<poly.length-1;i++)for(const v of [poly[0]!,poly[i]!,poly[i+1]!]){result.p.push(...v.p);result.n.push(...v.n);result.c.push(...v.c);}
  }
  const cut=new BufferGeometry().setAttribute('position',new Float32BufferAttribute(result.p,3)).setAttribute('normal',new Float32BufferAttribute(result.n,3)).setAttribute('color',new Float32BufferAttribute(result.c,3));cabin.copy(mergeVertices(cut,.000001));cut.dispose();mesh.geometry.dispose();(mesh.material as MeshBasicMaterial).dispose();return h.merge();}

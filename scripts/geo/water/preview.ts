@@ -8,6 +8,7 @@ import { toTransform } from '../../../src/engines/space-scene/lib/pose';
 import { partFrame, applyFrame } from '../../../src/engines/space-scene/lib/sim/frame';
 import { prepareStudio, studioShade, studioRigs, aces } from '../fossils-and-skeletons/studio-cpu';
 import sharp from 'sharp';
+import {parse as parseYaml} from 'yaml';
 import { BufferAttribute, BufferGeometry, Matrix4, Matrix3, PerspectiveCamera, OrthographicCamera, Vector3, Color, Box3 } from 'three';
 
 import { NodeIO } from '@gltf-transform/core';
@@ -216,6 +217,11 @@ for(const theme of ['paper','cinema'] as const){
 const cam=(position:number[],target:number[],fov=34)=>{const c=new PerspectiveCamera(fov,W/H,.001,100);c.position.fromArray(position);c.lookAt(new Vector3().fromArray(target));c.updateMatrixWorld();return c;};
 const group=(ids:string[])=>file.parts.filter(p=>ids.includes(p.id));
 const shots:{name:string;ids:string[];position:number[];target:number[];fov?:number;theme?:string;tree?:number}[]=[];
+for(const [filename,beat]of [['01-one-island-four-taps.mdx',2],['07-every-drop.mdx',0]] as const){
+ const state=parseYaml(fs.readFileSync('src/content/topics/water/chapters/'+filename,'utf8').split('---')[1]!).state,merged={...state,...state.beats[beat]},camera=typeof merged.camera==='string'?file.presets!.find(p=>p.id===merged.camera)!.camera:merged.camera;
+ for(const theme of ['paper','cinema'])shots.push({name:`pipeline-${filename.slice(0,2)}-${beat+1}-${theme}`,ids:file.parts.filter(p=>(p.context||merged.layers.includes(p.group))&&!merged.hide?.includes(p.id)).map(p=>p.id),...camera,theme});
+}
+shots.push({name:'pipeline-before',ids:file.parts.filter(p=>p.group!=='water-cycle').map(p=>p.id),position:[6.55,4.8,11.3],target:[.45,.2,0],fov:30});
 function hero(name:string,ids:string[],center:number[],size:number,refFront=false){
  const [x,y,z]=center as [number,number,number];
  const dirs=refFront?[[0,0,-3],[-1.5,-.35,-2.8],[3,.15,0],[.65,.4,1.1]]:[[0,.08,3],[1.5,.7,2.8],[3,.15,0],[.65,.4,1.1]];

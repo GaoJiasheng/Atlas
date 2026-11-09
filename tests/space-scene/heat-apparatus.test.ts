@@ -1,13 +1,14 @@
 /** The compressed delivery asset, runtime source-material contract and mesh shape. */
 import fs from 'node:fs';
 import sharp from 'sharp';
-import {beforeAll,describe,it,expect} from 'vitest';
+import {beforeAll,describe,it,expect,vi} from 'vitest';
 import {NodeIO,type Document} from '@gltf-transform/core';
 import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
 import {dequantize} from '@gltf-transform/functions';
 import {MeshoptDecoder} from 'meshoptimizer';
 import {Mesh,MeshStandardMaterial,Texture,Matrix4,Matrix3,Vector3,PerspectiveCamera} from 'three';
 import {gltfSurface} from '../../src/engines/space-scene/stages/model3d/GltfSource';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {partsFile} from '../../src/engines/space-scene/schema';
 import {partFrame,applyFrame} from '../../src/engines/space-scene/lib/sim/frame';
 import {toTransform} from '../../src/engines/space-scene/lib/pose';
@@ -18,6 +19,28 @@ const data=partsFile.parse(read('src/content/topics/heat/data/parts.json'));
 let doc:Document;
 beforeAll(async()=>{await MeshoptDecoder.ready;doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(new URL('public'+data.model,root).pathname);await doc.transform(dequantize());});
 describe('heat rebuilt delivery apparatus',()=>{
+ it('keeps the delivered gas floor above its support with uniform inner-floor normals and real vertex alpha',async()=>{
+  const node=doc.getRoot().listNodes().find(n=>n.getName()==='gas-cylinder')!,p=node.getMesh()!.listPrimitives()[0]!,xyz=p.getAttribute('POSITION')!,norm=p.getAttribute('NORMAL')!,color=p.getAttribute('COLOR_0')!,matrix=new Matrix4().fromArray(node.getWorldMatrix()),nm=new Matrix3().getNormalMatrix(matrix);
+  expect(color.getElementSize()).toBe(4);expect(p.getMaterial()!.getAlphaMode()).toBe('BLEND');expect(p.getMaterial()!.getExtras().atlasSurface).toBe(true);
+  const floor:Vector3[]=[],inner:Vector3[]=[];let opaque=0;
+  for(let i=0;i<xyz.getCount();i++){
+   const at=new Vector3().fromArray(xyz.getElement(i,[0,0,0])).applyMatrix4(matrix),alpha=color.getElement(i,[0,0,0,0])[3]!;
+   if(alpha>.9){opaque++;continue;}
+   if(at.y<.765){floor.push(at);if(Math.hypot(at.x-.65,at.z+.24)<.0201&&Math.abs(at.y-.761)<.00002){const n=new Vector3().fromArray(norm.getElement(i,[0,0,0])).applyMatrix3(nm).normalize();expect(n.y).toBeGreaterThan(.999);inner.push(at);}}
+  }
+  expect(opaque).toBeGreaterThan(100);expect(inner.length).toBeGreaterThan(128);
+  expect(Math.min(...floor.map(p=>p.y))).toBeGreaterThan(.7562);
+  vi.stubGlobal('self',globalThis);vi.stubGlobal('createImageBitmap',async(blob:Blob)=>{const d=await sharp(Buffer.from(await blob.arrayBuffer())).ensureAlpha().raw().toBuffer({resolveWithObject:true});return {data:d.data,width:d.info.width,height:d.info.height,close(){}};});
+  try{
+   const bytes=fs.readFileSync(new URL('public'+data.model,root));
+   const loaded=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+   const mesh=loaded.scene.getObjectByName('gas-cylinder') as Mesh;
+   expect(mesh.geometry.getAttribute('color').itemSize).toBe(4);
+   const target=new MeshStandardMaterial({normalMap:new Texture()}),surface=gltfSurface(mesh)!;
+   expect(surface.source.transparent).toBe(true);surface.style(target);surface.fade(target,1,false);
+   expect(target.transparent).toBe(true);expect(target.depthWrite).toBe(false);expect(target.normalMap).toBeNull();expect(target.vertexColors).toBe(true);
+  }finally{vi.unstubAllGlobals();}
+ });
  it('keeps every teaching part ID and stays below the full-scene geometry and byte budgets',()=>{
   const before=read('scripts/geo/heat/baseline-parts.json');expect(data.parts.map(p=>p.id)).toEqual(before.parts.map((p:{id:string})=>p.id));
   expect(fs.statSync(new URL('public'+data.model,root)).size).toBeLessThanOrEqual(1_500_000);

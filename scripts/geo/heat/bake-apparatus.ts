@@ -7,6 +7,7 @@ import {Document,NodeIO} from '@gltf-transform/core';
 import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
 import {dedup,weld,meshopt} from '@gltf-transform/functions';
 import {MeshoptEncoder} from 'meshoptimizer';
+import {bakeGasCylinder} from './gas-cylinder';
 type P=Record<string,any>;
 function geometry(pos:number[],uv:number[],ix:number[]){const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(pos,3));g.setAttribute('uv',new Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();return g;}
 function beaker(iteration:number){
@@ -108,10 +109,11 @@ export async function bakeApparatus(parts:P[],iteration=2){
   delete part.primitive;delete part.extra;
   if(isCup)part.detail={en:'This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. Its printed millilitre scale is approximate, and its water surface is shown separately. [S27]',zh:'敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。印上的毫升刻度只是近似值，水面单独显示。[S27]'};
  }
+ counts['gas-cylinder']=bakeGasCylinder(doc,parts.find(p=>p.id==='gas-cylinder')!);
  await MeshoptEncoder.ready;
  await doc.transform(weld(),dedup(),meshopt({encoder:MeshoptEncoder,level:'high',quantizePosition:16,quantizeTexcoord:14}));
  // Quantised frames require local-space label anchors.
- for(const n of doc.getRoot().listNodes()){const p=parts.find(p=>p.id===n.getName())!;const old=n.getWorldMatrix();const at=p.id.includes('beaker')?[old[12]!,old[13]!+.070,old[14]!+.043]:null;if(at)n.setExtras({...n.getExtras(),labelPoint:new Vector3(...at as [number,number,number]).applyMatrix4(new Matrix4().fromArray(old).invert()).toArray()});}
+ for(const n of doc.getRoot().listNodes()){const p=parts.find(p=>p.id===n.getName())!;const old=n.getWorldMatrix();const at=p.id.includes('beaker')?[old[12]!,old[13]!+.070,old[14]!+.043]:n.getExtras().labelPoint;if(at)n.setExtras({...n.getExtras(),labelPoint:new Vector3(...at as [number,number,number]).applyMatrix4(new Matrix4().fromArray(old).invert()).toArray()});}
  const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder});const bytes=await io.writeBinary(doc);
  if(bytes.length>1_500_000)throw new Error(`Heat GLB exceeds budget: ${bytes.length}`);
  fs.mkdirSync('public/models',{recursive:true});fs.writeFileSync('public/models/heat-apparatus.glb',bytes);

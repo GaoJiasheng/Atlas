@@ -149,7 +149,7 @@ export function spacecraftEngine(kind:'sps'|'descent'|'ascent'){
  }
  return h.merge();
 }
-export function rcsQuad(h:Hardware,at:V,angle:number,scale=1){const q=new Hardware();
+export function rcsQuad(h:Hardware,at:V,angle:number,scale=1,thermalShield=false){const q=new Hardware();
  body(q,[0,0,0],.09*scale,.18*scale,P.grey,[0,0,1]);
  // Four chambers/nozzles; both opposed vertical and tangential pairs are open.
  for(const d of [[0,1,0],[0,-1,0],[1,0,0],[-1,0,0]] as V[]){
@@ -157,7 +157,7 @@ export function rcsQuad(h:Hardware,at:V,angle:number,scale=1){const q=new Hardwa
   body(g,[0,.255*scale,0],.035*scale,.08*scale,P.silver);
   q.pieces.push(g.merge().applyQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0,-1,0),new Vector3(...d))).translate(d[0]*.35*scale,d[1]*.35*scale,.045));
  }
- q.plate([0,0,-.09],[[-.16,-.15],[.16,-.15],[.16,.15],[-.16,.15]],.08,P.silver);
+ q.plate([0,0,-.09],[[-.16,-.15],[.16,-.15],[.16,.15],[-.16,.15]],.08,thermalShield?P.dark:P.silver);
  for(const s of [-1,1])pipe(q,[[s*.13,-.12,-.04],[s*.13,.12,-.04],[0,.15,.02]],.012*scale,P.grey,8);
  h.pieces.push(q.merge().rotateY(angle).translate(...at));
 }
@@ -318,8 +318,35 @@ export async function ascentCabin(){const h=new Hardware();
    // splitting genuine facet boundaries at a 12-degree dihedral.
    const old=g;g=toCreasedNormals(g,Math.PI/15);if(g!==old)old.dispose();
    const name=node.getName(),mat=primitive.getMaterial()!.getName();
+   if(name==='polySurfac'){
+    // Flight LM-5 has broad black thermal shields surrounding the two
+    // windows. Colour complete facets, including their recessed cheeks;
+    // a vertex z-threshold painted only the projecting centre nose.
+    if(g.index){const old=g;g=g.toNonIndexed();old.dispose();}
+   }
    h.add(g,mat.startsWith('blinn6')?P.dark:P.silver);
-   if(name==='polySurfac'){const p=g.getAttribute('position'),n=g.getAttribute('normal'),c=g.getAttribute('color'),black=new Color(P.dark);for(let i=0;i<p.count;i++)if(p.getZ(i)>1.65&&p.getY(i)>90.85&&p.getY(i)<91.75&&n.getZ(i)>.25)c.setXYZ(i,black.r,black.g,black.b);}
+   if(name==='polySurfac'){
+    const p=g.getAttribute('position'),c=g.getAttribute('color'),black=new Color(P.dark);
+    const boundaries=new Map<string,{a:Vector3;b:Vector3;n:Vector3;black:boolean;other?:Vector3}>();
+    for(let i=0;i<p.count;i+=3){
+     const pts=[0,1,2].map(k=>new Vector3().fromBufferAttribute(p,i+k)),mid=pts[0]!.clone().add(pts[1]!).add(pts[2]!).multiplyScalar(1/3),normal=pts[1]!.clone().sub(pts[0]!).cross(pts[2]!.clone().sub(pts[0]!)).normalize();
+     const shield=mid.z>1.22&&Math.abs(mid.x)>.29&&mid.y>90.65&&mid.y<91.72;
+     if(shield)for(let k=0;k<3;k++)c.setXYZ(i+k,black.r,black.g,black.b);
+     // Folded sheet joints follow genuine cabin facet boundaries. No grid
+     // of decorative lines across a smooth shell, and no duplicated skin.
+     if(mid.z<.5||Math.abs(mid.x)<.28||mid.y<89.35)continue;
+     for(let k=0;k<3;k++){
+      const a=pts[k]!,b=pts[(k+1)%3]!,keys=[a,b].map(q=>q.toArray().map(v=>v.toFixed(4)).join(',')).sort(),key=keys.join('/'),old=boundaries.get(key);
+      if(old)old.other=normal;else boundaries.set(key,{a,b,n:normal,black:shield});
+     }
+    }
+    for(const e of boundaries.values())if(e.other&&e.a.distanceTo(e.b)>.20&&e.n.dot(e.other)<.97){
+     const n=e.n.clone().add(e.other).normalize(),across=e.b.clone().sub(e.a).normalize().cross(n);
+     // A folded lap strap has a peaked sheet section, rather than a round
+     // wire glued onto the panels. Its underside is buried in the joint.
+     h.add(surface(1,2,(u,v)=>e.a.clone().lerp(e.b,u).addScaledVector(across,(v-.5)*.014).addScaledVector(n,.004+(1-Math.abs(v*2-1))*.004).toArray() as V,false),e.black?P.grey:P.silver);
+    }
+   }
   }
  }
  // Hatch latch, external handrails and porch attachment on the actual hatch
@@ -337,7 +364,13 @@ export async function ascentCabin(){const h=new Hardware();
    // putting all four on the lateral axis eliminates one translation axis.
    const at:V=[s*1.60,90.55,zz*1.55],a=Math.atan2(at[0],at[2]);
    h.rod([s*1.28,90.51,zz*1.23],at,.045,P.silver);
-   h.rod([s*1.30,90.20,zz*1.27],at,.027,P.grey);rcsQuad(h,at,a,.82);
+   h.rod([s*1.30,90.20,zz*1.27],at,.027,P.grey);
+   // Black Inconel plume shielding wraps the quad support, leaving the
+   // sixteen independent nozzle mouths and chamber openings untouched.
+   const shield=new Hardware();
+   blanket(shield,[[-.22,-.22,-.105],[-.22,.23,-.105],[.22,.23,-.105],[.22,-.22,-.105]],P.dark,830+zz+s*3);
+   for(const side of [-1,1])facet(shield,[[side*.22,-.22,-.105],[side*.22,.23,-.105],[side*.14,.17,.005],[side*.14,-.17,.005]],P.dark);
+   h.pieces.push(shield.merge().rotateY(a).translate(...at));rcsQuad(h,at,a,.82,true);
   }
  }
  // Apollo 11 deployed rendezvous radar dish and steerable S-band, both
@@ -347,8 +380,6 @@ export async function ascentCabin(){const h=new Hardware();
  for(const [x,z] of [[.76,-.52],[-.77,-.80]] as XY[]){
   h.rod([x,92.00,z],[x,92.80,z],.009,P.silver);for(const d of [-1,1])h.rod([x,92.43,z],[x+d*.18,92.33,z],.006,P.grey);
  }
- h.rod([.42,92.12,-.15],[.42,92.75,-.15],.016,P.grey);
- for(const s of [-1,1])h.rod([.42,92.72,-.15],[.42+s*.14,92.58,-.15],.010,P.silver);
  return h.merge();
 }
 export function descentStage(){const h=new Hardware();
@@ -400,12 +431,18 @@ export function descentStage(){const h=new Hardware();
 function blanket(h:Hardware,corners:V[],color:string,seed:number){
  const [a,b,c,d]=corners as [V,V,V,V],n=new Vector3(...b).sub(new Vector3(...a)).cross(new Vector3(...d).sub(new Vector3(...a))).normalize();
  let state=seed;const rand=()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/4294967296);
- const folds=Array.from({length:13},()=>({x:rand(),y:rand(),angle:rand()*T,width:.018+rand()*.04,len:.2+rand()*.42,height:(rand()-.4)*.085}));
- h.add(surface(14,16,(u,v)=>{
+ const black=color===P.dark;
+ const folds=Array.from({length:black?21:13},()=>({x:rand(),y:rand(),angle:rand()*T,width:.018+rand()*.04,len:.2+rand()*.42,height:(rand()-.4)*(black?.19:.085)}));
+ const sheet=surface(black?20:14,black?22:16,(u,v)=>{
   const p=a.map((x,i)=>x*(1-u)*(1-v)+b[i]!*u*(1-v)+c[i]!*u*v+d[i]!*(1-u)*v) as V;let z=0;
   for(const f of folds){const dx=u-f.x,dy=v-f.y,aa=dx*Math.cos(f.angle)+dy*Math.sin(f.angle),bb=-dx*Math.sin(f.angle)+dy*Math.cos(f.angle);z+=f.height*Math.exp(-Math.abs(bb)/f.width)*Math.max(0,1-Math.abs(aa)/f.len);}
-  z*=Math.min(1,Math.min(u,v,1-u,1-v)*14);return [p[0]+n.x*z,p[1]+n.y*z,p[2]+n.z*z];
- },false),color);
+  z*=Math.min(1,Math.min(u,v,1-u,1-v)*14);
+  // The quad winding's n points into the stage. Black blanket slack must
+  // buckle outwards; inward folds exposed the tank cover through the foil.
+  if(black)z=-Math.abs(z);
+  return [p[0]+n.x*z,p[1]+n.y*z,p[2]+n.z*z];
+ },false);
+ h.add(sheet,black?P.glass:color);
 }
 export function landingGear(){const h=new Hardware();
  for(let k=0;k<4;k++){
@@ -620,4 +657,17 @@ export function j2StartTank(at:V){const h=new Hardware();
  h.sphere([-.19,2.40,.42],[.31,.31/1.125,.31],P.silver);
  h.ring([0,0,0],.311,.005,P.grey).rotateX(Math.PI/2).scale(1,1/1.125,1).translate(-.19,2.40,.42);
  return h.merge().scale(1,1.125,1).translate(...at);
+}
+
+/** Protected flight target: painted annulus/cross on a thin attached sheet,
+ * with physical fastening heads. The markings themselves have no fake depth. */
+export function dockingTarget(){const h=new Hardware(),at:V=[.04,91.10,1.969];
+ const annulus=(inner:number,outer:number,z:number,color:string)=>h.add(surface(1,64,(u,v)=>{const a=T*v,r=inner+(outer-inner)*u;return [at[0]+r*Math.sin(a),at[1]+r*Math.cos(a),z];}),color);
+ annulus(0,.255,at[2],P.white);annulus(.178,.216,at[2]+.007,P.dark);
+ facet(h,[[at[0]-.0125,at[1]-.285,at[2]+.014],[at[0]+.0125,at[1]-.285,at[2]+.014],[at[0]+.0125,at[1]+.285,at[2]+.014],[at[0]-.0125,at[1]+.285,at[2]+.014]],P.dark);
+ facet(h,[[at[0]+.0125,at[1]-.0125,at[2]+.014],[at[0]+.285,at[1]-.0125,at[2]+.014],[at[0]+.285,at[1]+.0125,at[2]+.014],[at[0]+.0125,at[1]+.0125,at[2]+.014]],P.dark);
+ for(let i=0;i<28;i++){const a=T*i/28,x=at[0]+.197*Math.sin(a),y=at[1]+.197*Math.cos(a);
+  h.add(surface(1,8,(u,v)=>{const a=T*v,r=.006*u;return [x+r*Math.sin(a),y+r*Math.cos(a),at[2]+.012-.002*u*u];}),P.silver);
+ }
+ return h.merge();
 }

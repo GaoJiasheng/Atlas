@@ -3,6 +3,7 @@
  * actual authored cameras, alpha decals and simulation liquid fill. CPU ≠ GPU acceptance.
  */
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import sharp from 'sharp';
 import {Color,Box3,Matrix3,Matrix4,PerspectiveCamera,Vector3,BufferGeometry,BufferAttribute} from 'three';
 import {NodeIO} from '@gltf-transform/core';
@@ -26,19 +27,21 @@ import {parse as yaml} from 'yaml';
 import {partFrame,applyFrame} from '../../../src/engines/space-scene/lib/sim/frame';
 import {toTransform} from '../../../src/engines/space-scene/lib/pose';
 const round=process.argv[2]??'round1',baseline=round==='before';
-const out=`scripts/geo/heat/comparisons/${round}`;fs.mkdirSync(out,{recursive:true});
+const out=`${process.env.ATLAS_PREVIEW_OUT??'scripts/geo/heat/comparisons'}/${round}`;fs.mkdirSync(out,{recursive:true});
 const data=partsFile.parse(JSON.parse(fs.readFileSync(process.env.HEAT_PARTS_FILE??(baseline?'scripts/geo/heat/baseline-parts.json':'src/content/topics/heat/data/parts.json'),'utf8')));
 const W=Number(process.env.HEAT_WIDTH??900),H=Number(process.env.HEAT_HEIGHT??720);
+const modelPath=process.env.HEAT_MODEL_FILE??('public'+data.model);
+fs.writeFileSync(`${out}/provenance.json`,JSON.stringify({model:modelPath,sha256:data.model?createHash('sha256').update(fs.readFileSync(modelPath)).digest('hex'):null,lighting:'Engine studio + sampled RoomEnvironment + ACES; source RGBA/surface',GPU:false,width:W,height:H},null,2)+'\n');
 const tokens:Record<string,Record<string,string>>={paper:{},cinema:{}};const css=fs.readFileSync('src/theme/tokens.css','utf8');
 for(const theme of ['paper','cinema']){const start=css.indexOf(`:root[data-theme="${theme}"] {`),body=css.slice(start,css.indexOf('\n}',start));Object.assign(tokens[theme]!,Object.fromEntries([...body.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)].map(m=>[m[1]!,m[2]!])));}
 type Texture={pixels:Uint8Array;width:number;height:number};
-type Source={id:string;g:BufferGeometry;matrix:Matrix4;slot:{color:string;tint?:string};surface?:{roughness:number;metalness:number;texture?:Texture}};
+type Source={id:string;g:BufferGeometry;matrix:Matrix4;slot:{color:string;tint?:string};surface?:{roughness:number;metalness:number;twoSided:boolean;texture?:Texture}};
 const sources:Source[]=[];
 if(data.model){await MeshoptDecoder.ready;const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(process.env.HEAT_MODEL_FILE??('public'+data.model));await doc.transform(dequantize());
  for(const node of doc.getRoot().listNodes()){const p=data.parts.find(p=>p.mesh===node.getName()),prim=node.getMesh()?.listPrimitives()[0];if(!p||!prim)continue;
-  const g=new BufferGeometry();for(const [attr,semantic,n] of [['position','POSITION',3],['normal','NORMAL',3],['uv','TEXCOORD_0',2]] as const){const a=prim.getAttribute(semantic);if(a)g.setAttribute(attr,new BufferAttribute(Float32Array.from(a.getArray()!),n));}const ix=prim.getIndices();if(ix)g.setIndex(new BufferAttribute(Uint32Array.from(ix.getArray()!),1));
+  const g=new BufferGeometry();for(const [attr,semantic,n] of [['position','POSITION',3],['normal','NORMAL',3],['uv','TEXCOORD_0',2],['color','COLOR_0',4]] as const){const a=prim.getAttribute(semantic);if(a)g.setAttribute(attr,new BufferAttribute(Float32Array.from(a.getArray()!),n));}const ix=prim.getIndices();if(ix)g.setIndex(new BufferAttribute(Uint32Array.from(ix.getArray()!),1));
   const mat=prim.getMaterial(),src:Source={id:p.id,g,matrix:new Matrix4().fromArray(node.getWorldMatrix()),slot:p.material!};
-  if(mat?.getExtras().atlasSurface){src.surface={roughness:mat.getRoughnessFactor(),metalness:mat.getMetallicFactor()};const image=mat.getBaseColorTexture()?.getImage();if(image){const {data:pixels,info}=await sharp(Buffer.from(image)).ensureAlpha().raw().toBuffer({resolveWithObject:true});src.surface.texture={pixels,width:info.width,height:info.height};}}
+  if(mat?.getExtras().atlasSurface){src.surface={roughness:mat.getRoughnessFactor(),metalness:mat.getMetallicFactor(),twoSided:mat.getDoubleSided()};const image=mat.getBaseColorTexture()?.getImage();if(image){const {data:pixels,info}=await sharp(Buffer.from(image)).ensureAlpha().raw().toBuffer({resolveWithObject:true});src.surface.texture={pixels,width:info.width,height:info.height};}}
   sources.push(src);
  }
 }
@@ -47,9 +50,11 @@ const counts:Record<string,{triangles:number;calls:number}>={};for(const src of 
 fs.writeFileSync(`${out}/counts.json`,JSON.stringify({total:Object.values(counts).reduce((a,b)=>a+b.triangles,0),calls:Object.values(counts).reduce((a,b)=>a+b.calls,0),parts:counts},null,2));
 if(process.env.HEAT_COUNTS==='1')process.exit(0);
 prepareStudio();
-type Shot={name:string;ids:string[];position:number[];target:number[];ref?:string;refCrop?:{left:number;top:number;width:number;height:number};fov?:number;theme?:'paper'|'cinema';values?:Record<string,number|string>;pose?:string;region?:'flask'|'gravesande'};
+type Shot={name:string;ids:string[];position:number[];target:number[];ref?:string;refCrop?:{left:number;top:number;width:number;height:number};fov?:number;theme?:'paper'|'cinema';values?:Record<string,number|string>;pose?:string;region?:'flask'|'gravesande'|'gas'};
 const stand=['retort-stand','probe-clamp'];const cup=['bath-beaker'];const thermometer=['probe','probe-marker'];const heater=['heater'];
 const shots:Shot[]=[];
+for(const [angle,v] of [['front',[0,.03,1]],['three-quarter',[.65,.35,1]],['profile',[1,.03,0]]] as [string,number[]][]){const target=[.65,.82,-.24];shots.push({name:`gas-${angle}`,ids:['gas-cylinder','gas-piston'],target,position:target.map((x,i)=>x+v[i]!*.38),ref:'Gas_syringe.jpg'});}
+for(const theme of ['paper','cinema'] as const)shots.push({name:`gas-floor-${theme}`,ids:['gas-cylinder','bench'],target:[.65,.756,-.24],position:[.676,.86,-.20],fov:25,theme,ref:'Glass_100ml_beaker.jpg',region:'gas'});
 const bounds=new Map<string,Box3>();for(const s of sources){s.g.computeBoundingBox();const box=s.g.boundingBox!.clone().applyMatrix4(s.matrix);bounds.set(s.id,bounds.has(s.id)?bounds.get(s.id)!.union(box):box);}
 const framingAudit:Record<string,unknown>={};
 for(const [hero,ids,target,d,ref] of [
@@ -102,17 +107,19 @@ async function render(shot:Shot){
  framingAudit[shot.name]={camera:cam,panels,projected};
 
  const values=resolveSimValues(data.sim!,shot.values??{}),effects=simEffects(data.sim!,values,evaluateSim(data.sim!,values));
- const triangles:{screen:number[];reciprocalW:number[];lit:number[];uv:number[];texture?:Texture;opacity:number;z:number}[]=[];
+ const triangles:{screen:number[];reciprocalW:number[];lit:number[];uv:number[];texture?:Texture;opacity:number;twoSided:boolean;z:number}[]=[];
  for(const src of sources){if(!shot.ids.includes(src.id))continue;let g=src.g;const fill=effects.fill.get(src.id);if(fill){const shape=fillShapeForPrimitive(data.parts.find(p=>p.id===src.id)!.primitive)!;g=createFillGeometry(shape,fill.meniscus);updateFillGeometry(g,shape,fill.volume,fill.below,fill.meniscus);g.setIndex(new BufferAttribute(Uint32Array.from(g.index!.array.slice(0,g.drawRange.count)),1));}
-  const look=resolveMaterialLook(src.slot.color,tokens[theme]!,theme,src.slot.tint),p=g.getAttribute('position'),n=g.getAttribute('normal'),uv=g.getAttribute('uv'),idx=g.index,pose=shot.pose?data.poses?.[shot.pose]?.parts[src.id]:undefined,frame=partFrame(data.parts.find(p=>p.id===src.id)?.primitive?.at??src.matrix.elements.slice(12,15),toTransform(pose)),fm=new Matrix4().set(frame.r[0],frame.r[1],frame.r[2],frame.t[0],frame.r[3],frame.r[4],frame.r[5],frame.t[1],frame.r[6],frame.r[7],frame.r[8],frame.t[2],0,0,0,1),nm=new Matrix3().getNormalMatrix(fm.clone().multiply(src.matrix)),rgb=new Color(look.color).toArray();const points:number[][]=[],lights:number[][]=[],reciprocalW:number[]=[],include:boolean[]=[];
+  const look=resolveMaterialLook(src.slot.color,tokens[theme]!,theme,src.slot.tint),p=g.getAttribute('position'),n=g.getAttribute('normal'),uv=g.getAttribute('uv'),vertexColor=g.getAttribute('color'),idx=g.index,pose=shot.pose?data.poses?.[shot.pose]?.parts[src.id]:undefined,frame=partFrame(data.parts.find(p=>p.id===src.id)?.primitive?.at??src.matrix.elements.slice(12,15),toTransform(pose)),fm=new Matrix4().set(frame.r[0],frame.r[1],frame.r[2],frame.t[0],frame.r[3],frame.r[4],frame.r[5],frame.t[1],frame.r[6],frame.r[7],frame.r[8],frame.t[2],0,0,0,1),nm=new Matrix3().getNormalMatrix(fm.clone().multiply(src.matrix)),rgb=new Color(look.color).toArray();const points:number[][]=[],lights:number[][]=[],reciprocalW:number[]=[],include:boolean[]=[];
   for(let i=0;i<p.count;i++){
    const restPoint=new Vector3().fromBufferAttribute(p,i).applyMatrix4(src.matrix);const point=new Vector3(...applyFrame(frame,restPoint.toArray()));include.push(!shot.region||src.id!=='bench'||restPoint.y<=.751||(shot.region==='flask'?restPoint.x>.35:restPoint.x<.35));const normal=new Vector3().fromBufferAttribute(n,i).applyMatrix3(nm).normalize(),view=camera.position.clone().sub(point).normalize();
    const offset=effects.offset.get(src.id);if(offset)point.add(new Vector3(...offset));
    reciprocalW.push(-1/point.clone().applyMatrix4(camera.matrixWorldInverse).z);
    const q=point.clone().applyMatrix4(projection);points.push([(q.x*.5+.5)*W,(.5-q.y*.5)*H,q.z]);
-   lights.push(studioShade(rgb as [number,number,number],normal.toArray() as [number,number,number],view.toArray() as [number,number,number],theme,src.surface?.roughness??look.roughness*.92,src.surface?.metalness??look.metalness));
+   if(src.surface?.twoSided&&normal.dot(view)<0)normal.negate();
+   const base=vertexColor?rgb.map((v,k)=>v*vertexColor.getComponent(i,k)):rgb;
+   lights.push(studioShade(base as [number,number,number],normal.toArray() as [number,number,number],view.toArray() as [number,number,number],theme,src.surface?.roughness??look.roughness*.92,src.surface?.metalness??look.metalness));
   }
-  for(let t=0;t<(idx?.count??p.count);t+=3){const ids=[0,1,2].map(k=>idx?idx.getX(t+k):t+k);const screen=ids.flatMap(i=>points[i]!);if(ids.some(i=>!include[i]))continue;if(ids.some(i=>points[i]![2]! < -1||points[i]![2]!>1))continue;triangles.push({screen,reciprocalW:ids.map(i=>reciprocalW[i]!),lit:ids.flatMap(i=>lights[i]!),uv:ids.flatMap(i=>uv?[uv.getX(i),uv.getY(i)]:[0,0]),texture:src.surface?.texture,opacity:src.surface?1:look.opacity,z:(screen[2]!+screen[5]!+screen[8]!)/3});}
+  for(let t=0;t<(idx?.count??p.count);t+=3){const ids=[0,1,2].map(k=>idx?idx.getX(t+k):t+k);const screen=ids.flatMap(i=>points[i]!);if(ids.some(i=>!include[i]))continue;if(ids.some(i=>points[i]![2]! < -1||points[i]![2]!>1))continue;triangles.push({screen,reciprocalW:ids.map(i=>reciprocalW[i]!),lit:ids.flatMap(i=>lights[i]!),uv:ids.flatMap(i=>uv?[uv.getX(i),uv.getY(i)]:[0,0]),texture:src.surface?.texture,opacity:vertexColor?.itemSize===4?ids.reduce((sum,i)=>sum+vertexColor.getW(i),0)/3:src.surface?1:look.opacity,twoSided:src.surface?.twoSided??false,z:(screen[2]!+screen[5]!+screen[8]!)/3});}
  }
  // Painter's transparent layer plus opaque depth; texture alpha is sampled per pixel.
  triangles.sort((a,b)=>Number(!!a.texture||a.opacity<1)-Number(!!b.texture||b.opacity<1)||b.z-a.z);
@@ -120,7 +127,7 @@ async function render(shot:Shot){
  for(let i=0;i<W*H;i++)color.set(bg.toArray(),i*3);
  for(const tri of triangles){const [ax,ay,,bx,by,,cx,cy]=tri.screen as number[],d=(by!-cy!)*(ax!-cx!)+(cx!-bx!)*(ay!-cy!);if(Math.abs(d)<1e-8)continue;
   // Single-sided metal is culled; glass decals are double-sided in the delivered asset.
-  if(d>0&&!tri.texture)continue;
+  if(d>0&&!tri.texture&&!tri.twoSided)continue;
   const x0=Math.max(0,Math.floor(Math.min(ax!,bx!,cx!))),x1=Math.min(W-1,Math.ceil(Math.max(ax!,bx!,cx!))),y0=Math.max(0,Math.floor(Math.min(ay!,by!,cy!))),y1=Math.min(H-1,Math.ceil(Math.max(ay!,by!,cy!)));
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const a=((by!-cy!)*(x+.5-cx!)+(cx!-bx!)*(y+.5-cy!))/d,b=((cy!-ay!)*(x+.5-cx!)+(ax!-cx!)*(y+.5-cy!))/d,c=1-a-b;if(a<0||b<0||c<0)continue;
    const pi=y*W+x,z=a*tri.screen[2]!+b*tri.screen[5]!+c*tri.screen[8]!;if(z>=depth[pi]!)continue;

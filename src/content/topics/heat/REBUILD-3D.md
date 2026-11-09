@@ -289,3 +289,45 @@ Hardware GL (Apple M5 Max, ANGLE Metal), `pnpm shoot heat --beats --gpu` and `--
 - JS: `scripts/js-budget.ts` gives heat 457.03 KB on main and 479.54 KB here. The whole difference is two chunks, `GltfSource` (20.27 KB) and `BufferGeometryUtils` (1.99 KB). These are the same files already in the closure of cells and the other glb topics (cells 477.9 KB on both builds). The cause is the topic's first GLB, not curve code or bundled data.
 - Remaining outside this job: the gas cylinder's floor shows the same bench-plane streaks (an engine primitive from round 1).
 - Text: regenerating from the stale `build-parts.ts` had reverted 58 EN/ZH values (32 fields) to the pre-readability 2d5deeb3 wording (see atlas-prep/TEXT-AUDIT.md). Main's wording is restored in `build-parts.ts` itself, so a rebuild now reproduces it exactly. `water()` takes a summary, a `cite()` helper avoids a doubled `[S27]`, and `outputLabelsZh` holds the four Chinese readout labels. Only text that the new shapes actually need was changed, each rewritten from main's sentence: beakers (thick base, rim, approximate scale), probe liquid columns (name, summary, detail), clamp and probe supports (screw clamp, padded jaws), brass ball and ring, and the flask/tube column and bench. A second rebuild gives a byte-identical parts.json.
+
+
+## Rebuild 2026-11-05 — leftover gas-floor polish (audit 2026-11-09)
+
+Scope: `gas-cylinder` floor only, retaining its existing piston, scale divisions, supporting plate, top station and 35 mm warm-pose travel. All existing beaker/spoon meshes are preserved while the gas mesh is compressed separately and merged into the topic GLB. Targeted rebuild: `pnpm tsx scripts/geo/heat/polish-gas.ts`; `HEAT_BASE_MODEL` optionally supplies an immutable predecessor GLB. The ordinary apparatus baker also calls the same gas-floor generator.
+
+### Real references, inspected
+
+1. [Gas syringe.jpg](https://commons.wikimedia.org/wiki/File:Gas_syringe.jpg), **Geni**, GFDL 1.2+ / CC BY-SA 3.0: real glass wall, seated end and movable piston. The photograph was cropped to the assembled lower view and rotated 270 degrees for a vertical-cylinder comparison; not stretched.
+2. [Glass 100ml beaker.jpg](https://commons.wikimedia.org/wiki/File:Glass_100ml_beaker.jpg), **Lilly_M**, CC BY-SA 3.0 (also other offered licences): thick moulded base, rounded heel and smooth transparent glass. This is a base/seating study, not a claim that the gas demonstrator is a beaker or an exact named syringe.
+
+### Looked-at iterations and corrections
+
+1. **Before / first look:** the studio floor close-up showed alternating depth-fight bands. The old cylinder bottom coincided with the bench and intersected its own support plate (top y=0.756 m). Rebuilt its returned wall with a lifted, shallow-domed underside, a rounded heel above that plate, sector-local centre UVs and analytic normals; the inner floor has a uniform upward normal. No floor shares either support plane.
+2. **Second look (`look2`)**: the floor was clean, but the glass read too dense beside the real glass photographs. Reduced only the new glass region's vertex alpha from 0.09 to 0.055, keeping scale marks/support opaque. The production atlasSurface adapter explicitly clears the old family normal map and retains source RGBA colours; it is not a token-only material test.
+3. **Final look / preservation check:** inspected four views and paper/cinema base close-ups. The first rebake globally welded existing beaker pole vertices and failed the existing regression. Corrected the builder to compress the new gas node in a separate document and merge it without rewriting existing geometry. The original beaker regression and new decoded gas clearance/normal/alpha regression both pass. The gas regression also parses the shipping file through the production GLTFLoader, confirms an actual four-channel colour attribute and transparent source material, and runs that source through gltfSurface to verify vertex colour retention and removal of the family normal map. Piston geometry and all poses remain unchanged.
+
+### Part self-grade and counts
+
+| Part / feature | Self-grade | Triangles before → after | Estimated draws | What changed |
+|---|---|---:|---:|---|
+| `gas-cylinder` floor/wall, fixed scale and support | **A** (floor repair) | 2,396 → 4,572 | 3 → 1 | Custom lofted floor and returned wall, sector-local poles, flat inner-floor normals; opaque hardware and transparent glass merged under the same selectable ID. |
+| `gas-piston` | **A retained** | 960 → 960 | 3 → 3 | Original geometry and start/warm travel unchanged. |
+
+Whole topic: **329,952 → 332,128 triangles**, **87 → 85 estimated draws**. Meshopt topic GLB **377,716 → 504,256 bytes**. Original shipping mesh streams are retained rather than trading away accepted glass detail. All display text remains on main's wording, byte-identical EN/ZH pairs; no new dimensions are taught.
+
+Primary sheets: `/tmp/atlas-leftover-polish/sheets/heat-{before-polish,look2,final}.jpg`. Source renders and individual photo pairs: `/tmp/atlas-leftover-polish/heat/final/`, including `gas-floor-{paper,cinema}.png`. Reproduce with `HEAT_SHOT='^gas-' ATLAS_PREVIEW_OUT=/tmp/atlas-leftover-polish/heat pnpm tsx scripts/geo/heat/studio-preview.ts final`; the preview decodes the actual RGBA and source surface instead of painting the cylinder with a replacement material.
+
+
+### Verification and evidence boundary
+
+`pnpm check` PASS (0 errors/warnings; 23 existing hints), `pnpm validate` PASS (94 topics, 0 errors/warnings), `pnpm run test --configLoader=runner --maxWorkers=2 --testTimeout=30000` PASS (**305 files / 6,743 tests, zero skips**), `pnpm build` PASS (**191 pages**). The read-only shared `node_modules` link prevents Astro/Vite's default cache writes. Check/build use `NODE_OPTIONS=--import=./scripts/geo/saturn-v/local-astro-cache.mjs`; that hook changes only Astro's cache path in memory. Vitest uses its existing config through the `runner` config loader. No config file, package, lockfile, engine, existing shared kit, browser/desktop or git index was modified. `git diff --check` passed.
+
+All EN/ZH display-text pairs, teaching numbers, IDs, counts of teaching objects, chapters and beat captions are unchanged. New surfaces are original procedural geometry; the retained NASA source licence is unchanged. Counts below are decoded geometry and estimated colour/material draws, not measured GPU frames or shadow-pass counts.
+
+Evidence root: `/tmp/atlas-leftover-polish/sheets` (absolute host path; no evidence images are tracked). Reused the fossils studio CPU renderer: actual engine studio key/fill/rim directions, intensities, hemisphere, sampled installed RoomEnvironment, exposure, linear shading, Three ACES and sRGB. Saturn and water explicitly compare against `Lighting.tsx` and its consumers; heat uses that same verified renderer. Preview source materials and actual shipped GLBs are decoded, rather than substituting a token-only proxy. CPU environment filtering, mip handling and transparent sorting remain approximations, not GPU pixel identity.
+
+**Not done / concrete limits:** Chromium/browser/desktop/GPU acceptance is intentionally unrun under the task prohibition. Exact camera registration for every requested photographic front/profile angle is also **not complete**: the accessible flight photographs are roof/front-quarter and rear-quarter views. The four-view sheets explicitly label the nearest available reference views; neither the generic teaching gas cylinder nor Singapore's schematic diorama is claimed as a surveyed replica. The NASA/Grumman manual recovered from the Apollo Journals mirror supplied independent structure/shielding cross-checks, but its configuration figure is itself a quarter view. This is an explicit evidence exception, not a claim that all requested same-angle photographs were obtained. The changed-feature A grades below mean docs/68's “credible, retain” self-assessment; they do not certify exact flight-specific fastening patterns or GPU acceptance.
+
+### GPU acceptance correction (2026-11-09)
+
+The first GPU pass found that `gas-cylinder` kept a `glass` main primitive, so the engine multiplied the glass family's 0.22 opacity over the whole baked mesh (walls almost invisible, support plate see-through). `gas-cylinder.ts` now sets the primitive's colour to the neutral white the vertex colours need. Because one blended draw has no depth writes, the material is single-sided so the opaque plate's back faces are culled; roughness is 0.45 and glass vertex alpha 0.10 to read on the GPU. Making slot 0 neutral also bakes the top collar, which the earlier bake dropped with slot 0 (mesh 5,084 triangles). GLB 509,984 bytes, rebaked from main's GLB with `HEAT_BASE_MODEL`.

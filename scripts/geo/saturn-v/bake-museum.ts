@@ -73,14 +73,15 @@ export async function rebuildMuseum(file:Data){
   // so four merged copies do not receive a looser budget than one engine.
   simplifyPrimitive(p,{simplifier:MeshoptSimplifier,ratio:.12,error:retained.has(n.getName())?.0003:(n.getName()==='cm-couches'?.008:new Set(['lm-ascent','lm-descent','lm-legs','les-tower']).has(n.getName())?.005:new Set(['f1-centre','f1-outer','j2-centre','j2-outer','sivb-engine']).has(n.getName())?.0095:.012)/span,lockBorder:true});
  }
- // Preserve the small identifying start spheres without making every valve
- // or tube in the six engines pay for the same close-up tessellation.
- const protectedTanks:Record<string,BufferGeometry>={
+ // Protect the smooth target and identifying start spheres independently
+ // of the hardware simplification applied to their selectable assemblies.
+ const protectedHardware:Record<string,BufferGeometry>={
+  'lm-ascent':a11.dockingTarget(),
   'j2-centre':a11.j2StartTank([0,42.5,0]),
   'j2-outer':copies(a11.j2StartTank([0,42.5,0]),2.5),
   'sivb-engine':a11.j2StartTank([0,67.3,0]),
  };
- for(const [id,g]of Object.entries(protectedTanks)){
+ for(const [id,g]of Object.entries(protectedHardware)){
   const p=doc.getRoot().listNodes().find(n=>n.getName()===id)!.getMesh()!.listPrimitives()[0]!,offset=p.getAttribute('POSITION')!.getCount();
   for(const [key,semantic]of [['position','POSITION'],['normal','NORMAL'],['color','COLOR_0']]as const){const accessor=p.getAttribute(semantic)!,old=accessor.getArray()!,added=g.getAttribute(key).array,merged=new Float32Array(old.length+added.length);merged.set(old);merged.set(added,old.length);accessor.setArray(merged);}
   const accessor=p.getIndices()!,old=accessor.getArray()!,extra=g.index!,indices=new Uint32Array(old.length+extra.count);indices.set(old);for(let i=0;i<extra.count;i++)indices[old.length+i]=extra.getX(i)+offset;accessor.setArray(indices);bounds[id]={min:p.getAttribute('POSITION')!.getMin([0,0,0]),max:p.getAttribute('POSITION')!.getMax([0,0,0])};g.dispose();

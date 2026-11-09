@@ -9268,7 +9268,7 @@
             0.006
           ]
         ],
-        "color": "glass",
+        "color": "#ffffff",
         "segments": 96
       },
       "explode": {
@@ -9501,7 +9501,11 @@
           "color": "powder",
           "bevel": 0.0024000000000000002
         }
-      ]
+      ],
+      "mesh": "gas-cylinder",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "gas-piston",
