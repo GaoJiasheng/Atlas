@@ -811,6 +811,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     container,
     labelRoot: options.labelRoot,
     onSelect: (id) => options.onSelectEvent(id),
+    locale: () => locale,
     // PRESENTATION: the HUD panels are on their way out (they keep `visibility` for the fade), so only the caption card and title block count.
     panelFilter: (el) => !presenting || (el.getAttribute('data-hud-panel') ?? '').startsWith('present'),
     onBand: (band) => {
@@ -828,7 +829,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   disposers.push(() => leaders.destroy());
 
   /* ---------- territory names (who holds what at `t`; N) ---------- */
-  const territory = createTerritoryLabels({ map, container, root: options.territoryRoot, model });
+  const territory = createTerritoryLabels({ map, container, root: options.territoryRoot, model, locale: () => locale });
   disposers.push(() => territory.destroy());
 
   /* ---------- rivers of a regional plate (dated courses; names follow N) ---------- */

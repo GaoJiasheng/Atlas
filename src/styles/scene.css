@@ -633,11 +633,13 @@
 /* The column's blocks sit on one soft plate (a token mix, no blur), so a map or model behind never fights the type.
    The bleed past each block is a box-shadow: it adds nothing to the block's measured box or scrollable overflow, which
    the HUD room and the label solver read, and half the rail's top margin from each side closes the gap between blocks. */
+.atlas-left-body {
+  isolation: isolate; /* All the bleeds paint under all the blocks' content: one block's bleed never veils its neighbour's last row. */
+}
 .atlas-title,
 .atlas-rail,
 .atlas-plate {
   position: relative;
-  isolation: isolate;
 }
 .atlas-title::before,
 .atlas-rail::before,

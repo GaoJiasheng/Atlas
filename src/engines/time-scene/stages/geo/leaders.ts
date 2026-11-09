@@ -18,6 +18,7 @@
  *    (`data-labels="off"`, `data-hud="off"`).
  */
 import type { Map as MlMap } from 'maplibre-gl';
+import type { Locale } from '../../../core/types';
 import type { LngLat } from '../../lib/geo';
 import { displayOffsetScale, eventDisplayPoint, type DisplayOffset } from '../../lib/event-display';
 import { placeLeaders, START_GAP } from '../../lib/leader-layout';
@@ -109,6 +110,8 @@ export function createLeaders(options: {
   container: HTMLElement;
   labelRoot: HTMLElement;
   onSelect(id: string): void;
+  /** The active language leads on the placard; the other stays beneath it. */
+  locale(): Locale;
   /** Called after every re-measure (the controller places the scale bar). */
   onBand?(band: Band): void;
   /** Which `[data-hud-panel]` blocks count as obstacles (default all). PRESENTATION ignores the HUD panels that are still fading out. */
@@ -191,17 +194,18 @@ export function createLeaders(options: {
       badge.textContent = item.badge;
       el.appendChild(badge);
     }
-    const en = document.createElement('b');
-    en.className = 'ts-co__en';
-    en.lang = 'en';
-    en.textContent = item.en;
-    el.appendChild(en);
+    const zhFirst = options.locale() === 'zh' && !!item.zh;
+    const lead = document.createElement('b');
+    lead.className = 'ts-co__en';
+    lead.lang = zhFirst ? 'zh-Hans' : 'en';
+    lead.textContent = zhFirst ? item.zh : item.en;
+    el.appendChild(lead);
     if (item.zh && item.zh !== item.en) {
-      const zh = document.createElement('span');
-      zh.className = 'ts-co__zh';
-      zh.lang = 'zh-Hans';
-      zh.textContent = item.zh;
-      el.appendChild(zh);
+      const second = document.createElement('span');
+      second.className = 'ts-co__zh';
+      second.lang = zhFirst ? 'en' : 'zh-Hans';
+      second.textContent = zhFirst ? item.en : item.zh;
+      el.appendChild(second);
     }
     const note = document.createElement('span');
     note.className = 'ts-co__note';
@@ -215,7 +219,7 @@ export function createLeaders(options: {
     e.path.dataset.pinned = String(item.pinned);
   };
 
-  const signature = (i: LeaderItem) => `${i.badge ?? ''}|${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
+  const signature = (i: LeaderItem) => `${options.locale()}|${i.badge ?? ''}|${i.en}|${i.zh}|${i.note}|${i.date ?? ''}|${i.pinned}|${i.clickable}`;
   const sigs = new Map<string, string>();
 
   function setItems(items: LeaderItem[]) {

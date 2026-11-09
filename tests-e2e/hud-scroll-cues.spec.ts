@@ -24,6 +24,13 @@ test.describe('768x1024 left column', () => {
   });
 });
 
+test('Chinese map labels lead with Chinese', async ({ page }) => {
+  await open(page, 'ww2', 'zh');
+  const placard = page.locator('.ts-co__en:visible').first();
+  await expect(placard).toHaveAttribute('lang', 'zh-Hans');
+  await expect(page.locator('.ts-terr__en:visible').first()).toHaveAttribute('lang', 'zh-Hans');
+});
+
 test.describe('390x844 presentation', () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   test('a long caption is reachable to its last line, and the cue goes when it is', async ({ page }) => {

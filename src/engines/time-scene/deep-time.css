@@ -51,8 +51,8 @@
 }
 @media (max-width: 700px) {
   .ts-modern { padding: 8px; font-size: .8rem; }
-  /* Below the title block, and short enough to leave map above the caption card. */
-  .ts-modern-evidence { top: 132px; right: 8px; left: 8px; width: auto; max-height: 34vh; }
+  /* Below a two-line title plate, and short enough to leave map above the caption card. */
+  .ts-modern-evidence { top: 92px; right: 8px; left: 8px; width: auto; max-height: 38vh; }
   .ts-modern-evidence .ts-modern__views, .ts-modern-evidence .ts-modern__modes, .ts-modern-evidence .ts-modern__counts { display: none; }
   .ts-modern-evidence .ts-modern__mode { font-size: .7rem; }
 }

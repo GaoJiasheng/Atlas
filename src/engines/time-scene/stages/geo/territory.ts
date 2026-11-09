@@ -22,6 +22,7 @@
  * and HUD switches: they are part of the map (N toggles them).
  */
 import type { Map as MlMap } from 'maplibre-gl';
+import type { Locale } from '../../../core/types';
 import type { ControlFeature } from '../../schema';
 import type { TimeModel } from '../../lib/model';
 import { projectNearCentre, type LngLat } from '../../lib/geo';
@@ -119,7 +120,7 @@ interface Candidate extends PlaceCandidate {
   offsets: { dx: number; dy: number }[];
 }
 
-export function createTerritoryLabels(options: { map: MlMap; container: HTMLElement; root: HTMLElement; model: TimeModel }): TerritoryLabels {
+export function createTerritoryLabels(options: { map: MlMap; container: HTMLElement; root: HTMLElement; model: TimeModel; locale(): Locale }): TerritoryLabels {
   const { map, container, root, model } = options;
   const geometry = new Map<string, LabelGeometry[]>();
   const sizes = new Map<string, { w: number; h: number }>();
@@ -139,22 +140,23 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
 
   const fill = (el: HTMLElement, en: string, zh: string) => {
     el.replaceChildren();
+    const zhFirst = options.locale() === 'zh' && !!zh;
     const a = document.createElement('span');
     a.className = 'ts-terr__en';
-    a.lang = 'en';
-    a.textContent = en;
+    a.lang = zhFirst ? 'zh-Hans' : 'en';
+    a.textContent = zhFirst ? zh : en;
     el.appendChild(a);
     if (zh && zh !== en) {
       const b = document.createElement('span');
       b.className = 'ts-terr__zh';
-      b.lang = 'zh-Hans';
-      b.textContent = zh;
+      b.lang = zhFirst ? 'en' : 'zh-Hans';
+      b.textContent = zhFirst ? en : zh;
       el.appendChild(b);
     }
   };
 
   const measure = (en: string, zh: string, tier: Tier) => {
-    const key = `${tier}|${en}|${zh}`;
+    const key = `${options.locale()}|${tier}|${en}|${zh}`;
     let s = sizes.get(key);
     if (!s) {
       measurer.dataset.tier = String(tier);
@@ -362,8 +364,9 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
   /** Put the right text in a label for the blend (a gliding pair switches at half the crossfade). */
   function say(s: Shown, blend: number) {
     const q = s.texts.length > 1 ? textAtBlend(s.texts[0]!, s.texts[1]!, blend) : s.texts[0]!;
-    if (s.el.dataset.text === q.text && s.el.dataset.tier === String(s.tier)) return q;
+    if (s.el.dataset.text === q.text && s.el.dataset.tier === String(s.tier) && s.el.dataset.locale === options.locale()) return q;
     s.el.dataset.text = q.text;
+    s.el.dataset.locale = options.locale();
     s.el.dataset.tier = String(s.tier);
     fill(s.el, q.en, q.zh);
     return q;

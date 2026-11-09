@@ -82,6 +82,7 @@ export function createClimatologyController(options: ClimatologyStageProps & { c
     map,
     container,
     labelRoot,
+    locale: () => locale,
     onSelect(id) {
       if (!presentation && !options.isPresenting?.()) {if(options.geography)options.onSelectGeography?.(id);else options.onSelectSite(id);}
     },
