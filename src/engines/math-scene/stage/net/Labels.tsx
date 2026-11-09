@@ -122,11 +122,13 @@ export function NetDims({ shape, pose, fit, spec, defs, locale }: { shape: NetSh
     const parent = net.nodes[n.parent]!;
     const hs = screenOf([[a[0], a[1], 0], [b[0], b[1], 0]], pose, fit);
     const m: P2 = [(hs[0]![0] + hs[1]![0]) / 2, (hs[0]![1] + hs[1]![1]) / 2];
+    // A face's number sits inside it by the hinge, moved along the hinge so it stays clear of the mark at the face's centre.
+    const along: P2 = [(hs[1]![0] - hs[0]![0]) * 0.3, (hs[1]![1] - hs[0]![1]) * 0.3];
     const toward = (poly: P2[]) => {
       const c = centre(screenOf(poly.map(([x, y]) => [x, y, 0]), pose, fit));
       const v: P2 = [c[0] - m[0], c[1] - m[1]];
       const L = Math.hypot(v[0], v[1]) || 1;
-      return [m[0] + (v[0] / L) * 13, m[1] + (v[1] / L) * 13] as P2;
+      return [m[0] + along[0] + (v[0] / L) * 13, m[1] + along[1] + (v[1] / L) * 13] as P2;
     };
     return [{ key: i, hinge: hs, mine: { at: toward(n.poly), text: len(sideOf(n.poly)) }, theirs: { at: toward(parent.poly), text: len(sideOf(parent.poly)) } }];
   });

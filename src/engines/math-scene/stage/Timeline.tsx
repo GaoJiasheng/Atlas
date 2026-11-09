@@ -8,7 +8,8 @@
  * small triangle and a label (cold the start, hot the end); jumps are arcs
  * ("+ 20 min" at the top, forwards above the line, back below it) that a
  * `jump` beat draws one after the other. A clock face beside the line can
- * show the time at its last mark.
+ * show the time at its last mark (above the line on a phone, where the two
+ * would not fit side by side).
  *
  * On a `duration` check the child jumps with the tray's chips: each run of
  * jumps is a signal arc from the time known, the point reached is a signal
@@ -22,7 +23,7 @@ import { t, tx } from '../../../i18n';
 import { NotationContext } from '../../../lib/rich-text';
 import type { BeatMove, Task, TimelineSpec } from '../schema';
 import type { TaskState } from '../lib/state';
-import { hopArcs, hopEnd, hopStart, hourMarks, jumpLabel, labelEvery, minorMarks, minorOf, rangeOf } from '../lib/timeline';
+import { hopArcs, hopEnd, hopStart, hourMarks, jumpLabel, labelEvery, minorMarks, minorOf, markRows, placeJumpLabels, rangeOf, type LabelBox } from '../lib/timeline';
 import { ampmText, clockParts, clockText, DAY, durationText, HOUR, naturalUnits } from '../lib/value';
 import { ClockModel } from './ClockModel';
 import type { Rect } from './layout';
@@ -42,13 +43,18 @@ export interface TimelineProps {
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+/** The clock above the line: the gap under it, and the smallest it is still worth drawing. */
+const CLOCK_GAP = 14;
+const CLOCK_MIN = 84;
+/** About how wide a text is: `perChar` for Latin and digits, a full square for a Chinese character. */
+const textWidth = (s: string, perChar: number) => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 0x2e7f ? 13.5 : perChar), 0);
 
 export function Timeline(p: TimelineProps) {
   const m = p.model;
   const notation = useContext(NotationContext);
   const { box, locale } = p;
   const r = rangeOf(m);
-  // The clock beside the line, when there is room for both (a phone draws the line alone).
+  // The clock beside the line when there is room for both; otherwise above it (below).
   const clockSide = m.clock && box.w >= 560 ? Math.floor(clamp(Math.min(box.h * 0.62, box.w * 0.3), 90, 340)) : 0;
   const left = box.x + (clockSide ? clockSide + 48 : 50);
   const right = box.x + box.w - 40;
@@ -59,18 +65,46 @@ export function Timeline(p: TimelineProps) {
   const out: ReactNode[] = [];
   const under: ReactNode[] = [];
   const live = p.task?.kind === 'duration' && p.state ? p.task : null;
-  const arcMax = clamp(box.h * 0.22, 24, 64);
+  const arcMax = clamp(box.h * (m.clock && !clockSide ? 0.12 : 0.22), 24, 64);
   const arcH = (a: number, b: number) => clamp(Math.abs(X(b) - X(a)) * 0.45, 14, arcMax);
+  const hours = hourMarks(r);
+  const every = labelEvery(r, width, m.labels === '12h' ? 40 : 58);
+  const labelledHours = hours.filter((t) => ((t - (hours[0] ?? 0)) / HOUR) % every === 0);
+
+  /* The jumps' labels, clear of the hour labels and of each other. */
+  const hourHalf = r.duration ? 14 : m.labels === '24h' || both ? 22 : 12;
+  const twoLine = !r.duration && m.labels !== '24h';
+  const hourBoxes: LabelBox[] = labelledHours.flatMap((t) => [
+    { x0: X(t) - hourHalf, x1: X(t) + hourHalf, y0: 18, y1: twoLine ? 48 : 34 },
+    ...(both ? [{ x0: X(t) - 22, x1: X(t) + 22, y0: -32, y1: -18 }] : []),
+  ]);
+  const drawnArcs = [...(m.jumps ?? []), ...(live && p.state ? hopArcs(live, p.state.hops) : [])];
+  const labelY = placeJumpLabels(
+    drawnArcs.map(([a, b]) => ({ x0: X(a), x1: X(b), rise: arcH(a, b), back: b < a, width: jumpLabel(a, b).length * 7.8 })),
+    hourBoxes,
+  );
+
   // Above the line, bottom up: the 24-hour labels (both), the arcs, then the marks' labels, then the bands' names.
   const above24 = both ? 30 : 0;
-  const forward = [...(m.jumps ?? []), ...(live && p.state ? hopArcs(live, [...p.state.hops, ...(p.ghost?.hops ?? [])]) : [])].filter(([a, b]) => b > a);
-  const maxUp = forward.length ? Math.max(...forward.map(([a, b]) => arcH(a, b))) + 22 : 0;
+  const forward = [...drawnArcs, ...(live && p.ghost ? hopArcs(live, p.ghost.hops) : [])].filter(([a, b]) => b > a);
+  const highestLabel = Math.max(0, ...labelY.map((v, i) => (drawnArcs[i]![1] > drawnArcs[i]![0] ? -v : 0)));
+  const maxUp = forward.length ? Math.max(Math.max(...forward.map(([a, b]) => arcH(a, b))) + 22, highestLabel + 12) : 0;
   const hasMarks = (m.marks?.length ?? 0) > 0;
+  const marksLabelled = (m.marks ?? []).some((k) => k.label);
+  const markTimeText = (at: number) => (r.duration ? durationText(at, naturalUnits(at), locale, true) : clockText(at, m.labels === '24h' ? '24' : '12', notation, locale, true));
+  const rowOfMark = markRows((m.marks ?? []).map((k) => ({ x: X(k.at), width: Math.max(textWidth(markTimeText(k.at), 9.6), k.label ? textWidth(tx(k.label, locale), 7) : 0) })));
+  const markRowH = marksLabelled ? 42 : 22;
   const markOff = above24 + Math.max(maxUp, 26) + 12;
-  const topOff = hasMarks ? markOff + ((m.marks ?? []).some((k) => k.label) ? 22 : 0) + 18 : above24 + maxUp + 12;
-  // The whole drawing (labels above, hour labels and arcs back below) centred in the box, the line where that puts it.
-  const below = 56;
-  const y = Math.round(box.y + Math.max(topOff, (box.h - topOff - below) / 2 + topOff));
+  const topOff = hasMarks ? markOff + Math.max(0, ...rowOfMark) * markRowH + (marksLabelled ? 22 : 0) + 18 : above24 + maxUp + 12;
+  // Below the line: the hour labels, or further when an arc going back has pushed its label past them.
+  const below = Math.max(56, ...labelY.map((v, i) => (drawnArcs[i]![1] < drawnArcs[i]![0] ? v + 8 : 0)));
+  // On a narrow stage the clock goes above the line, as large as the height left allows; with too little left, the line alone.
+  const bandRoom = m.bands === 'ampm' ? 24 : 0;
+  const spare = m.clock && !clockSide ? Math.floor(Math.min(box.h - topOff - below - bandRoom - CLOCK_GAP, box.w * 0.62, 240)) : 0;
+  const clockAbove = spare >= CLOCK_MIN ? spare : 0;
+  const drop = clockAbove ? clockAbove + CLOCK_GAP + bandRoom : 0;
+  // The whole drawing (labels above, hour labels and arcs back below) centred in what is left, the line where that puts it.
+  const y = Math.round(box.y + drop + Math.max(topOff, (box.h - drop - topOff - below) / 2 + topOff));
   const markTime = y - markOff;
   const topmost = y - topOff;
 
@@ -111,8 +145,6 @@ export function Timeline(p: TimelineProps) {
   /* the rule, its minor and hour marks */
   out.push(<line key="axis" className="ms-line__axis" x1={x0 - 10} x2={x0 + width + 10} y1={y} y2={y} />);
   for (const t of minorMarks(r, minorOf(m))) out.push(<line key={`n${t}`} className="ms-line__minor" x1={X(t)} x2={X(t)} y1={y - 6} y2={y + 6} />);
-  const hours = hourMarks(r);
-  const every = labelEvery(r, width, m.labels === '12h' ? 40 : 58);
   const hourLabel = (t: number, mode: '12' | '24'): ReactNode => {
     if (r.duration) return `${t / HOUR === 0 ? '0' : `${t / HOUR} h`}`;
     if (mode === '24') return t === DAY ? clockText(0, '24', notation).replace(/^00/, '24') : clockText(t, '24', notation);
@@ -127,7 +159,7 @@ export function Timeline(p: TimelineProps) {
     );
   };
   for (const t of hours) {
-    const labelled = ((t - (hours[0] ?? 0)) / HOUR) % every === 0;
+    const labelled = labelledHours.includes(t);
     out.push(
       <g key={`h${t}`}>
         <line className="ms-line__major" x1={X(t)} x2={X(t)} y1={y - 11} y2={y + 11} />
@@ -151,13 +183,13 @@ export function Timeline(p: TimelineProps) {
     const dir = b >= a ? -1 : 1;
     return `M${X(a)} ${y + dir * 3}Q${(X(a) + X(b)) / 2} ${y + dir * 2 * h} ${X(b)} ${y + dir * 3}`;
   };
+  let drawn = 0;
   const arc = (key: string, a: number, b: number, cls: string, delay: number, landed = true) => {
-    const dir = b >= a ? -1 : 1;
-    const h = arcH(a, b);
+    const baseline = labelY[drawn++]!;
     out.push(
       <g key={key} className={`ms-tl__jump ${cls}`} style={{ animationDelay: `${delay}ms` }} aria-hidden="true">
         <path d={arcPath(a, b)} />
-        <text x={(X(a) + X(b)) / 2} y={y + dir * (h + 10) + (dir > 0 ? 10 : 0)} textAnchor="middle">
+        <text x={(X(a) + X(b)) / 2} y={y + baseline} textAnchor="middle">
           {jumpLabel(a, b)}
         </text>
         <circle className="ms-tl__land" cx={X(a)} cy={y} r={3.5} />
@@ -185,16 +217,17 @@ export function Timeline(p: TimelineProps) {
   /* marks: a triangle on the line, its time (and label) above the arcs, a hairline between */
   (m.marks ?? []).forEach((mk, i) => {
     const x = X(mk.at);
-    const time = r.duration ? durationText(mk.at, naturalUnits(mk.at), locale, true) : clockText(mk.at, m.labels === '24h' ? '24' : '12', notation, locale, true);
+    const time = markTimeText(mk.at);
+    const textY = markTime - rowOfMark[i]! * markRowH;
     out.push(
       <g key={`k${i}`} className="ms-tl__mark-group" data-tone={mk.tone}>
         <path className={`ms-tl__mark ms-tl__mark--${mk.tone}`} d={`M${x} ${y - 4}l-7 -13h14Z`} />
-        {markTime + 8 < y - 17 - above24 && <line className="ms-tl__mark-lead" x1={x} x2={x} y1={markTime + 8} y2={y - 17 - (above24 ? above24 - 4 : 0)} />}
-        <text className="ms-tl__mark-time" x={x} y={markTime} textAnchor="middle">
+        {textY + 8 < y - 17 - above24 && <line className="ms-tl__mark-lead" x1={x} x2={x} y1={textY + 8} y2={y - 17 - (above24 ? above24 - 4 : 0)} />}
+        <text className="ms-tl__mark-time" x={x} y={textY} textAnchor="middle">
           {time}
         </text>
         {mk.label && (
-          <text className="ms-tl__mark-label" x={x} y={markTime - 20} textAnchor="middle">
+          <text className="ms-tl__mark-label" x={x} y={textY - 20} textAnchor="middle">
             {tx(mk.label, locale)}
           </text>
         )}
@@ -202,10 +235,10 @@ export function Timeline(p: TimelineProps) {
     );
   });
 
-  /* the clock beside the line */
-  if (m.clock) {
+  /* the clock beside the line, or above it */
+  if (clockSide || clockAbove) {
     const now = timelineNow(m, p.task, p.state);
-    const cb: Rect = { x: box.x + 8, y: box.y + (box.h - clockSide) / 2, w: clockSide, h: clockSide };
+    const cb: Rect = clockSide ? { x: box.x + 8, y: box.y + (box.h - clockSide) / 2, w: clockSide, h: clockSide } : { x: box.x + (box.w - clockAbove) / 2, y: box.y, w: clockAbove, h: clockAbove };
     out.push(
       <ClockModel key="clock" box={cb} model={{ kind: 'clock', time: now, face: 'clock', numerals: true, ticks: 'minutes', ampm: m.labels === '24h' ? undefined : 'show' }} time={now} locale={locale} label="" defs={p.defs} move={p.move === 'jump' || live ? 'sweep' : null} />,
     );

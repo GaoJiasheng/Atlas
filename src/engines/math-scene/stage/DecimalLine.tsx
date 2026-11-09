@@ -90,7 +90,13 @@ export function DecimalLine(p: DecimalLineProps) {
   };
 
   // The ends of a line as they are written (3.0 keeps its 0), the ticks between with the step's places.
-  const tickText = (l: LineLevel, k: number) => D(k === 0 ? l.from : k === l.steps ? l.to : valueAt(l, k));
+  const tickText = (l: LineLevel, k: number) => {
+    if (k === 0) return D(l.from);
+    if (k === l.steps) return D(l.to);
+    const v = valueAt(l, k);
+    // One format on an axis: where the ends are written as whole numbers (0 and 2), so is a whole number between them.
+    return v.units % 1_000_000 === 0 && Math.max(l.from.dp, l.to.dp) === 0 ? D({ units: v.units, dp: 0 }) : D(v);
+  };
   const below = m.dual ? 58 : 38;
   // The deepest line each mark lies on: its value above the ring, its smaller-unit reading under the line.
   const placed = marks.map((mk) => {
@@ -155,7 +161,7 @@ export function DecimalLine(p: DecimalLineProps) {
             <path className="ms-dline__bracket" d={`M${X(l, next.from)} ${y + below}v6H${X(l, next.to)}v-6`} />
             <line className="ms-dline__leader" x1={X(l, next.from)} y1={y + below + 6} x2={x0} y2={yOf(i + 1) - 14} />
             <line className="ms-dline__leader" x1={X(l, next.to)} y1={y + below + 6} x2={x0 + w} y2={yOf(i + 1) - 14} />
-            <text className="ms-dline__times" x={(X(l, next.to) + x0 + w) / 2 + 14} y={(y + yOf(i + 1)) / 2} textAnchor="start">
+            <text className="ms-dline__times" x={(X(l, next.to) + x0 + w) / 2 + 14} y={(y + below + 6 + yOf(i + 1) - 14) / 2 - 6} textAnchor="start">
               ×10
             </text>
           </g>
@@ -174,7 +180,8 @@ export function DecimalLine(p: DecimalLineProps) {
       const text = D(mid);
       const crowded = placed.some((pm) => pm.li === levels.length - 1 && Math.abs(pm.x - hx) < (D(pm.mk).length * MARK_CH + text.length * HALF_CH) / 2 + 6);
       const k = tickOf(last, mid);
-      const underTaken = k !== null && labelled(last, levels.length - 1, k);
+      // A mark exactly on the halfway point already prints this number.
+      const underTaken = (k !== null && labelled(last, levels.length - 1, k)) || placed.some((pm) => pm.li === levels.length - 1 && eq(pm.mk, mid));
       out.push(
         <g key="half" className="ms-dline__half" aria-hidden="true" data-under={(crowded && !underTaken) || undefined}>
           <line x1={hx} x2={hx} y1={y - 18} y2={crowded && !underTaken ? y + 17 : y + 4} />

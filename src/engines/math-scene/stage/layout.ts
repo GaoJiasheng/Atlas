@@ -7,7 +7,7 @@
  * (`docked`: the tray is the floor). HUD hidden: the whole stage; presenting:
  * the caption card is the floor and the title block an obstacle.
  */
-import { useLayoutEffect, useState, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 
 export interface Rect {
   x: number;
@@ -151,15 +151,19 @@ const same = (a: StageLayout, b: StageLayout) => JSON.stringify(a) === JSON.stri
 /** Lay the stage out now and whenever the stage or the HUD around it changes size. */
 export function useStageLayout(root: RefObject<HTMLElement | null>, tray: RefObject<HTMLElement | null>, mode: LayoutMode, key: string): StageLayout {
   const [layout, setLayout] = useState<StageLayout>({ w: 0, h: 0, free: { x: 0, y: 0, w: 0, h: 0 }, dock: 0, obstacles: [], floor: 0 });
+  const pending = useRef(0);
+  const latestMode = useRef(mode);
   useLayoutEffect(() => {
+    latestMode.current = mode;
     const el = root.current;
     if (!el) return;
     const scene = el.closest<HTMLElement>('.atlas-scene');
-    let frame = 0;
+    // One measure per frame; a frame already asked for stands, so changes arriving faster than frames cannot starve it.
     const run = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const next = measure(el, mode, tray.current);
+      if (pending.current) return;
+      pending.current = requestAnimationFrame(() => {
+        pending.current = 0;
+        const next = measure(el, latestMode.current, tray.current);
         setLayout((prev) => (same(prev, next) ? prev : next));
       });
     };
@@ -183,7 +187,6 @@ export function useStageLayout(root: RefObject<HTMLElement | null>, tray: RefObj
     };
     window.addEventListener('resize', onResize);
     return () => {
-      cancelAnimationFrame(frame);
       window.clearTimeout(late);
       window.clearTimeout(later);
       window.clearTimeout(settle);
@@ -191,5 +194,12 @@ export function useStageLayout(root: RefObject<HTMLElement | null>, tray: RefObj
       window.removeEventListener('resize', onResize);
     };
   }, [root, tray, mode, key]);
+  useEffect(
+    () => () => {
+      cancelAnimationFrame(pending.current);
+      pending.current = 0;
+    },
+    [],
+  );
   return layout;
 }

@@ -30,12 +30,12 @@ export interface PanItem {
   label?: string;
 }
 
-/** Things side by side on a pan of width `w`, as tall as they can be (at most `maxH`). */
-function laid(items: PanItem[], x: number, w: number, y: number, maxH: number): { item: PanItem; box: Rect }[] {
+/** Things side by side on a pan of width `w`, as tall as they can be (a unit at most `maxH`, the tallest at most `ceiling`). */
+function laid(items: PanItem[], x: number, w: number, y: number, maxH: number, ceiling: number): { item: PanItem; box: Rect }[] {
   if (items.length === 0) return [];
   const gap = 4;
   const units = items.reduce((a, it) => a + it.aspect * it.size, 0);
-  const h = Math.min(maxH, (w - gap * (items.length - 1)) / units);
+  const h = Math.min(maxH, (w - gap * (items.length - 1)) / units, ceiling / Math.max(...items.map((it) => it.size)));
   const total = items.reduce((a, it) => a + it.aspect * it.size * h, 0) + gap * (items.length - 1);
   let at = x + (w - total) / 2;
   return items.map((item) => {
@@ -46,6 +46,9 @@ function laid(items: PanItem[], x: number, w: number, y: number, maxH: number): 
   });
 }
 
+/** Room over the tallest thing on a raised pan for its mass tag. */
+const TAG_ROOM = 26;
+
 export function BalanceDrawing({ f, tilt, left, right, tipMs, label }: { f: BalanceFrame; tilt: -1 | 0 | 1; left: PanItem[]; right: PanItem[]; tipMs: number; label: string }) {
   const deg = beamAngle(tilt);
   const rad = (deg * Math.PI) / 180;
@@ -54,6 +57,8 @@ export function BalanceDrawing({ f, tilt, left, right, tipMs, label }: { f: Bala
   const stem = Math.min(60, half * 0.3);
   const thick = Math.max(6, half * 0.035);
   const maxH = Math.min(panW * 0.55, 120);
+  // The height over a pan at its highest, the same for both pans so things keep their sizes as the beam tips.
+  const ceiling = Math.max(24, pivot.y - stem - f.half * Math.sin((Math.abs(beamAngle(1)) * Math.PI) / 180) - f.top - TAG_ROOM);
   const pan = (side: -1 | 1, items: PanItem[]) => {
     const cx = pivot.x + side * half * Math.cos(rad);
     const lift = side * dy;
@@ -62,7 +67,7 @@ export function BalanceDrawing({ f, tilt, left, right, tipMs, label }: { f: Bala
       <g className="ms-bal__side" style={{ transform: `translate(${cx - (pivot.x + side * half)}px, ${lift}px)`, transitionDuration: `${tipMs}ms` }}>
         <line className="ms-bal__stem" x1={pivot.x + side * half} x2={pivot.x + side * half} y1={pivot.y} y2={top} />
         <path className="ms-bal__pan" d={`M${pivot.x + side * half - panW / 2} ${top}h${panW}l${-panW * 0.06} ${thick * 1.4}h${-panW * 0.88}Z`} />
-        {laid(items, pivot.x + side * half - panW / 2 + 6, panW - 12, top, maxH).map(({ item, box }) =>
+        {laid(items, pivot.x + side * half - panW / 2 + 6, panW - 12, top, maxH, ceiling).map(({ item, box }) =>
           item.onTap ? (
             <g key={item.key} className="ms-bal__thing" role="button" tabIndex={0} aria-label={item.label} onClick={item.onTap} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), item.onTap!())}>
               <rect className="ms-inst__hit" x={box.x - Math.max(0, (44 - box.w) / 2)} y={box.y - Math.max(0, (44 - box.h) / 2)} width={Math.max(44, box.w)} height={Math.max(44, box.h)} />

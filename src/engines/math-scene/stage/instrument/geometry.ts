@@ -301,6 +301,8 @@ export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFra
 
 /** A balance in a box: the stand, the pivot, the beam's length, the pans' size. */
 export interface BalanceFrame {
+  /** The top of the box: what stands on the raised pan stays below it. */
+  top: number;
   pivot: Pt;
   half: number;
   panW: number;
@@ -311,7 +313,7 @@ export function balanceFrame(box: Rect): BalanceFrame {
   const half = clamp(box.w * 0.34, 90, 380);
   const height = clamp(box.h * 0.5, 120, 420);
   const pivot = { x: box.x + box.w / 2, y: box.y + box.h / 2 - height * 0.05 };
-  return { pivot, half, panW: clamp(half * 0.72, 70, 260), base: { x: pivot.x - half * 0.5, y: pivot.y + height * 0.48, w: half, h: clamp(height * 0.06, 8, 20) } };
+  return { top: box.y, pivot, half, panW: clamp(half * 0.72, 70, 260), base: { x: pivot.x - half * 0.5, y: pivot.y + height * 0.48, w: half, h: clamp(height * 0.06, 8, 20) } };
 }
 
 /** The magnifier's box beside the instrument (wide) or under it (narrow), and the room left for the instrument. */

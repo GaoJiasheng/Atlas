@@ -137,9 +137,10 @@ function Face({ f, cx, cy, r, time, defs, locale, mini, sweep, active, ghost }: 
       const r1 = ring - r * 0.1 - k * r * 0.075;
       const r0 = r1 - r * 0.06;
       out.push(<path key={`arc${k}`} className="ms-clock__arc" d={band(start, start + Math.min(span, 359.9), r0, r1)} style={{ fill: `url(#${defs}-fine)` }} />);
+      // Inside the numerals, clear of the hand at the start.
       if (span >= 360 && !mini)
         out.push(
-          <text key={`arc${k}h`} className="ms-clock__arc-label" x={at(start + 12, r0 - r * 0.06).x} y={at(start + 12, r0 - r * 0.06).y + 4} textAnchor="middle">
+          <text key={`arc${k}h`} className="ms-clock__arc-label" x={at(start + 22, r * (0.52 - k * 0.1)).x} y={at(start + 22, r * (0.52 - k * 0.1)).y + 4} textAnchor="middle">
             1 h
           </text>,
         );

@@ -268,7 +268,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
               disabled={locked}
               onClick={() => ctl.act({ do: 'choose', id: o.id })}
             >
-              <b>{letter}</b> {renderRich(o.text ? tx(o.text, locale) : optionText(o, locale), locale)}
+              <b>{letter}</b> <span>{renderRich(o.text ? tx(o.text, locale) : optionText(o, locale), locale)}</span>
             </button>
           ))}
         </div>,

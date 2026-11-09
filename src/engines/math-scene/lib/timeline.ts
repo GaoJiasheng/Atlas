@@ -130,6 +130,85 @@ export function hopsTo(from: number, to: number): number[] {
   return out;
 }
 
+/* ------------------------------------------------------------------ */
+/* Where the jumps' labels go                                          */
+/* ------------------------------------------------------------------ */
+
+/** A box in the line's own frame: x along the page, y down from the line. */
+export interface LabelBox {
+  x0: number;
+  x1: number;
+  y0: number;
+  y1: number;
+}
+
+/** One arc as drawn: its ends on the page, how high it rises (above the line going forward, below it going back), its label's width. */
+export interface ArcShape {
+  x0: number;
+  x1: number;
+  rise: number;
+  back: boolean;
+  width: number;
+}
+
+const LABEL_STEP = 8;
+const LABEL_TRIES = 10;
+const ARC_SAMPLES = 24;
+
+const hits = (a: LabelBox, b: LabelBox) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+
+/** A label box for the baseline `y` of 13 px type. */
+const labelBox = (cx: number, w: number, y: number): LabelBox => ({ x0: cx - w / 2 - 2, x1: cx + w / 2 + 2, y0: y - 11, y1: y + 3 });
+
+/** Points along a drawn arc, as tiny boxes (the quadratic of `arcPath`: control point at twice the rise). */
+function arcPoints(a: ArcShape): LabelBox[] {
+  const dir = a.back ? 1 : -1;
+  return Array.from({ length: ARC_SAMPLES + 1 }, (_, i) => {
+    const t = i / ARC_SAMPLES;
+    const x = a.x0 + (a.x1 - a.x0) * t;
+    const y = (1 - t) ** 2 * dir * 3 + 2 * t * (1 - t) * dir * 2 * a.rise + t ** 2 * dir * 3;
+    return { x0: x - 1, x1: x + 1, y0: y - 1, y1: y + 1 };
+  });
+}
+
+/**
+ * The baseline of each arc's label (y down from the line): just past the top of its arc, or stepped away from the line until it is
+ * clear of `obstacles` (the hour labels), of every arc's curve and of the labels already placed.
+ */
+export function placeJumpLabels(arcs: readonly ArcShape[], obstacles: readonly LabelBox[]): number[] {
+  const curve = arcs.flatMap(arcPoints);
+  const placed: LabelBox[] = [];
+  return arcs.map((a) => {
+    const cx = (a.x0 + a.x1) / 2;
+    const dir = a.back ? 1 : -1;
+    const base = a.back ? a.rise + 20 : -(a.rise + 10);
+    for (let k = 0; k < LABEL_TRIES; k++) {
+      const y = base + dir * k * LABEL_STEP;
+      const box = labelBox(cx, a.width, y);
+      if (obstacles.some((o) => hits(box, o)) || curve.some((o) => hits(box, o)) || placed.some((o) => hits(box, o))) continue;
+      placed.push(box);
+      return y;
+    }
+    placed.push(labelBox(cx, a.width, base));
+    return base;
+  });
+}
+
+/** The row each mark's text stands in, from the line up: a mark whose text would touch its neighbour's goes up a row. */
+export function markRows(marks: readonly { x: number; width: number }[]): number[] {
+  const rows = marks.map(() => 0);
+  const right = [-Infinity, -Infinity];
+  [...marks.keys()]
+    .sort((a, b) => marks[a]!.x - marks[b]!.x)
+    .forEach((i) => {
+      const { x, width } = marks[i]!;
+      const row = x - width / 2 >= right[0]! + 8 ? 0 : x - width / 2 >= right[1]! + 8 ? 1 : 0;
+      rows[i] = row;
+      right[row] = x + width / 2;
+    });
+  return rows;
+}
+
 /** "+ 20 min", "− 1 h" (a jump's label; h / min in both languages, as in a number sentence). */
 export function jumpLabel(from: number, to: number): string {
   const d = Math.abs(to - from);

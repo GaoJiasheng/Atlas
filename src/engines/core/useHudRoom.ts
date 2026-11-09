@@ -53,6 +53,11 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       panelsIn(column)
         .filter(counts)
         .reduce((n, e) => n + Math.max(0, e.scrollHeight - e.getBoundingClientRect().height), 0);
+    /** A block's box plus whatever it hides in its own scroll boxes (a PLATE body, an overflowing panel). */
+    const unclipped = (c: HTMLElement) =>
+      [c, ...c.querySelectorAll<HTMLElement>('*')]
+        .filter((e) => e.scrollHeight > e.clientHeight + 1 && (e === c || /auto|scroll/.test(getComputedStyle(e).overflowY)))
+        .reduce((n, e) => n + e.scrollHeight - e.clientHeight, c.getBoundingClientRect().height);
     /** How far the left column's content runs past its box: the rail counted at a few rows (it is
      * meant to scroll), every other block at its natural height (a squeezed PLATE included). */
     const leftOverflow = () => {
@@ -62,10 +67,7 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
       for (const c of Array.from(body.children) as HTMLElement[]) {
         if (!visible(c)) continue;
         if (c.dataset.hudPanel !== 'rail') {
-          // Its box, plus whatever a squeezed block hides in its own scroll boxes (a PLATE body, an overflowing panel).
-          need += [c, ...c.querySelectorAll<HTMLElement>('*')]
-            .filter((e) => e.scrollHeight > e.clientHeight + 1 && (e === c || /auto|scroll/.test(getComputedStyle(e).overflowY)))
-            .reduce((n, e) => n + e.scrollHeight - e.clientHeight, c.getBoundingClientRect().height);
+          need += unclipped(c);
           continue;
         }
         const list = c.querySelector<HTMLElement>('.atlas-rail__list');
@@ -142,8 +144,10 @@ export function useHudRoom(root: RefObject<HTMLElement | null>, hud: HudStore, a
         else sizes.left.height += sizes.left.metadata;
         // Compact, the column needs back what the title block lost (its open height, margins included); a
         // small margin keeps a column that only just fits from flipping between open and compact.
-        const title = box('.atlas-hud__left [data-hud-panel="title"]')?.height ?? 0;
-        if (state.leftColumn === 'open') titleOpen = title;
+        const titleBlock = scene.querySelector<HTMLElement>('.atlas-hud__left [data-hud-panel="title"]');
+        const title = titleBlock?.getBoundingClientRect().height ?? 0;
+        // What it would take to reopen, counted unclipped: a squeezed title hides part of what compact mode gave back.
+        if (state.leftColumn === 'open') titleOpen = titleBlock ? unclipped(titleBlock) : 0;
         sizes.left.overflow =
           state.leftColumn === 'compact' ? leftOverflow() + Math.max(sizes.left.metadata, titleOpen - title) + OVERFLOW_HYSTERESIS : leftOverflow();
       } else sizes.left.overflow = 0;

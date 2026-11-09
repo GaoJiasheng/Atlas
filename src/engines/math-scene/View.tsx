@@ -189,7 +189,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   /* ---------- entering a chapter draws its check; a beat past the end shows the last one ---------- */
   useEffect(() => {
     ctl.visit(s.chapter);
-    ui.setState({ summary: false });
+    // The presentation says for itself which beat is the summary (it may have just entered this chapter on it).
+    if (!ui.getState().presenting) ui.setState({ summary: false });
   }, [s.chapter, ctl, ui]);
   useEffect(() => {
     const n = beatCount(place);

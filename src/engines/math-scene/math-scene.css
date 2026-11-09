@@ -2025,9 +2025,6 @@
   .ms-tray-dock .ms-tray__where {
     display: none;
   }
-  .ms-tray-dock .ms-keypad {
-    grid-template-columns: repeat(6, var(--hit));
-  }
   .ms-tray-dock .ms-input__frac {
     flex-direction: row;
     gap: 6px;
@@ -3309,6 +3306,24 @@
 }
 .ms-keypad:where([data-point]) {
   grid-template-columns: repeat(12, var(--hit));
+}
+/* A phone (the docked tray and the presentation card): rows of at most six keys, fewer on a narrower card; the answer boxes wrap above them. */
+@media (max-width: 759px) {
+  .ms-input,
+  .ms-input__rows {
+    max-width: 100%;
+  }
+  .ms-input {
+    width: 100%;
+  }
+  .ms-input__rows,
+  .ms-input__row {
+    flex-wrap: wrap;
+  }
+  .ms-keypad {
+    width: min(100%, calc(6 * var(--hit) + 5 * 4px));
+    grid-template-columns: repeat(auto-fill, var(--hit));
+  }
 }
 .ms-key--point {
   font-weight: 700;

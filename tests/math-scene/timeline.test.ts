@@ -8,7 +8,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { model as modelSchema, taskSchema, type MisconceptionCode, type Model, type Task, type TimelineSpec } from '../../src/engines/math-scene/schema';
-import { canHop, hopArcs, hopEnd, hopsTo, hourMarks, jumpLabel, labelEvery, minorMarks, minorOf, rangeOf } from '../../src/engines/math-scene/lib/timeline';
+import { canHop, hopArcs, hopEnd, hopsTo, hourMarks, jumpLabel, labelEvery, minorMarks, minorOf, markRows, placeJumpLabels, rangeOf } from '../../src/engines/math-scene/lib/timeline';
 import { check } from '../../src/engines/math-scene/lib/check';
 import { apply, durationGoal, sampleState, solve } from '../../src/engines/math-scene/lib/solve';
 import { initialState, inputSpecOf, reduce } from '../../src/engines/math-scene/lib/state';
@@ -126,5 +126,40 @@ describe('the jumps of a duration check', () => {
     const night = task({ kind: 'duration', model: { kind: 'timeline', scale: 'day' }, ask: 'end', start: '23:30', length: '50m', answer: { answer: '00:20', form: 'time24' } });
     expect(valueTaskIssues(night, { sameDay: true }).join()).toMatch(/past midnight/);
     expect(valueTaskIssues(night, undefined).join()).not.toMatch(/past midnight/);
+  });
+});
+
+describe('jump labels (placeJumpLabels)', () => {
+  const arc = (x0: number, x1: number, rise = 14, width = 62) => ({ x0, x1, rise, back: x1 < x0, width });
+  it('puts a label just past its arc when nothing is in the way', () => {
+    expect(placeJumpLabels([arc(100, 300, 40)], [])).toEqual([-50]);
+    expect(placeJumpLabels([arc(300, 100, 40)], [])).toEqual([60]);
+  });
+  it('steps a label going back away from the hour label under the arc', () => {
+    const hour = { x0: 188, x1: 212, y0: 18, y1: 48 };
+    const [y] = placeJumpLabels([arc(240, 160, 14)], [hour]);
+    expect(y).toBeGreaterThan(48 + 10);
+  });
+  it('keeps two neighbouring labels apart, and off the next arc', () => {
+    const arcs = [arc(100, 160, 14), arc(160, 340, 40), arc(340, 400, 14)];
+    const ys = placeJumpLabels(arcs, []);
+    const box = (i: number) => {
+      const cx = (arcs[i]!.x0 + arcs[i]!.x1) / 2;
+      return { x0: cx - 31, x1: cx + 31, y0: ys[i]! - 11, y1: ys[i]! + 3 };
+    };
+    for (const [a, b] of [[0, 1], [1, 2]] as const) {
+      const A = box(a);
+      const B = box(b);
+      expect(A.x0 < B.x1 && B.x0 < A.x1 && A.y0 < B.y1 && B.y0 < A.y1).toBe(false);
+    }
+  });
+});
+
+describe('mark rows (markRows)', () => {
+  it('leaves marks that do not touch on the first row', () => {
+    expect(markRows([{ x: 100, width: 50 }, { x: 300, width: 50 }])).toEqual([0, 0]);
+  });
+  it('lifts a mark whose text would touch its neighbour, whatever the order given', () => {
+    expect(markRows([{ x: 150, width: 60 }, { x: 100, width: 60 }, { x: 320, width: 60 }])).toEqual([1, 0, 0]);
   });
 });

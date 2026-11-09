@@ -45,6 +45,9 @@ export interface PlaceValueChartProps {
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const HEAD = 46;
+/** Room a line of discs takes beyond the discs themselves. */
+const DISC_PAD = 14;
+const MIN_PRINTED_DISC = 20;
 
 interface Cellish {
   d: number;
@@ -172,6 +175,7 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
   const held = columns.map((pl) => Math.max(dealt[pl], final[pl])).filter((n) => n > 0);
   const discRowsOf = (c: DCounts | undefined, perRow: number) => (c ? Math.max(1, ...columns.map((pl) => Math.ceil(c[pl] / perRow))) : 0);
   const colArea = cc && wide ? cc.cols * 30 + 50 : 0;
+  const copyRows = lines.length > 2 && lines.every((l) => l.rowLabel && l.discs);
   const chartDiscs = lines.some((l) => l.discs && columns.some((pl) => l.discs![pl] > 0));
   let cw = clamp((box.w - 40 - colArea) / cols, p.mini ? 18 : 46, p.mini ? 60 : 200);
   let shrink = 1;
@@ -215,20 +219,38 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
     return { ...best, pd, pw, ph, h: best.rows * (ph + 10) - 10, w: across * (pw + 10) };
   }
   function sizes(w: number, k: number) {
-    const disc = clamp((w - 14) / 4.4, 12, 40);
-    const perRow = clamp(Math.floor((w - 8) / (disc * 1.18)), 2, 5);
+    let disc = clamp((w - 14) / 4.4, 12, 40);
+    let perRow = clamp(Math.floor((w - 8) / (disc * 1.18)), 2, 5);
+    let discPad = DISC_PAD;
+    let tight = false;
     const digitH = clamp(w * 0.95, 40, 170);
-    const rowHs = lines.map((l) => (l.digits && showDigits ? digitH : 0) + (l.discs ? discRowsOf(l.discs, perRow) * disc * 1.18 + 14 : 0) + 8);
+    const heightOf = (d: number, q: number, pad: number) => lines.map((l) => (l.digits && showDigits ? digitH : 0) + (l.discs ? discRowsOf(l.discs, q) * d * 1.18 + pad : 0) + 8);
+    const room = box.h - 20 - titleH - HEAD - 6;
+    // Equal rows (× a whole number) too many for the height: longer rows of discs on closer lines, each copy on as few lines as the column allows.
+    if (copyRows && heightOf(disc, perRow, discPad).reduce((a, b) => a + b, 0) > room) {
+      let best = { disc: 0, perRow };
+      for (const q of [5, 6, 8, 10]) {
+        const deep = discRowsOf(lines[0]!.discs, q);
+        const d = Math.min(40, (w - 8) / (q * 1.18), (room / lines.length - 8) / (deep * 1.18));
+        if (d > best.disc + 0.5) best = { disc: d, perRow: q };
+      }
+      disc = Math.max(10, best.disc);
+      perRow = best.perRow;
+      discPad = 0;
+      tight = true;
+    }
+    const rowHs = heightOf(disc, perRow, discPad);
     const chartH = HEAD + rowHs.reduce((a, b) => a + b, 0) + 6;
-    const colCell = cc ? clamp((wide ? Math.min(34, (box.h * 0.7) / (cc.rows * 1.5)) : Math.min(32, (box.w - 40) / cc.cols)) * k, 14, 34) : 0;
+    // Beside the chart the column method has the whole height; under it, it gives way with the chart.
+    const colCell = cc ? clamp(wide ? Math.min(34, (box.h - 20 - titleH) / (cc.rows * 1.5)) : Math.min(32, (box.w - 40) / cc.cols) * k, 14, 34) : 0;
     const colH = cc ? cc.rows * colCell * 1.5 : 0;
     const colW = cc ? cc.cols * colCell : 0;
     const pl = platesOf(box.w - 20 - (cc && wide ? colW + 50 : 0), box.h - 20 - titleH - chartH - 18 - (cc && !wide ? colH + 24 : 0), disc);
     const leftH = chartH + (plates ? pl.h + 18 : 0);
     const total = wide ? Math.max(leftH, colH) : leftH + (cc ? colH + 24 : 0);
-    return { disc, perRow, digitH, rowHs, chartH, colCell, colH, colW, pl, leftH, total };
+    return { disc, perRow, tight, digitH, rowHs, chartH, colCell, colH, colW, pl, leftH, total };
   }
-  const { disc, perRow, digitH, rowHs, chartH, colCell, colH, colW, pl: plate, leftH } = layout;
+  const { disc, perRow, tight, digitH, rowHs, chartH, colCell, colH, colW, pl: plate, leftH } = layout;
   const chartW = cols * cw;
   const leftW = Math.max(chartW, plate.w);
   const contentW = wide && cc ? leftW + 50 + colW : Math.max(leftW, colW);
@@ -286,7 +308,9 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
       if (l.slider && live) out.push(<SliderRow key={`sl${li}`} {...p} kind={l.slider} x={x0} y={ry} w={chartW} h={digitH} />);
     }
     if (l.discs) {
-      const dy = ry + (l.digits && showDigits ? digitH : 0) + 8;
+      const dy = ry + (l.digits && showDigits ? digitH : 0) + (tight ? 4 : 8);
+      // Rings too small for their printing count alone: the column's head says what each is worth.
+      const printed = !tight || disc >= MIN_PRINTED_DISC;
       for (const pl of columns) {
         const n = l.discs[pl];
         for (let i = 0; i < n; i++) {
@@ -296,9 +320,11 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
           out.push(
             <g key={`c${li}${pl}${i}`} className="ms-disc" data-lit={lit || undefined} style={{ animationDelay: m.fill ? `${Math.max(0, m.fill.indexOf(pl)) * 160 + i * 25}ms` : undefined }}>
               <circle cx={cx} cy={cy} r={disc / 2} />
-              <text x={cx} y={cy + disc * 0.13} textAnchor="middle" fontSize={clamp(disc * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 7, 15)}>
-                {discFace(pl, money)}
-              </text>
+              {printed && (
+                <text x={cx} y={cy + disc * 0.13} textAnchor="middle" fontSize={clamp(disc * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 7, 15)}>
+                  {discFace(pl, money)}
+                </text>
+              )}
             </g>,
           );
         }

@@ -50,8 +50,9 @@ export function DecimalColumn({ spec, x, y, cell }: { spec: DecimalColumnSpec; x
   const rh = cell * 1.5;
   const out: ReactNode[] = [];
   const dot = (cx: number, row: number, key: string, cls = 'ms-col__point') => <circle key={key} className={cls} cx={cx} cy={y + row * rh + rh * 0.68} r={Math.max(2, cell * 0.1)} />;
+  // The digits scale with the cell (the traded digits smaller), so a small cell never overprints the row above.
   const digit = (col: number, row: number, d: string | number, cls: string, key: string) => (
-    <text key={key} className={cls} x={x + col * cell + cell / 2} y={y + row * rh + rh * 0.72} textAnchor="middle">
+    <text key={key} className={cls} x={x + col * cell + cell / 2} y={y + row * rh + rh * 0.72} textAnchor="middle" style={{ fontSize: cls === 'ms-col__carry' ? Math.max(11, Math.round(cell * 0.42)) : Math.round(cell * 0.68) }}>
       {d}
     </text>
   );
