@@ -45,3 +45,11 @@ Rules: skill atlas-space-topic (references/writing-rules.md) and skill industria
 - [S38] Alberta Agriculture and Forestry, Grasshoppers: life cycle, damage assessment and management strategy (Agdex 3497). Grasshopper eggs are eaten by bee flies, blister beetles, ground beetles and crickets; spiders, some wasps and many birds feed on grasshoppers; Scelio wasps may destroy 5–50 % of the eggs; flesh flies and tachinid flies may parasitise up to 60 % of nymphs and adults; a fungus also kills grasshoppers. / 加拿大艾伯塔省农业与林业厅，蚱蜢：生活史、危害评估与管理（Agdex 3497）。蚱蜢的卵会被蜂虻、芫菁、步甲和蟋蟀吃掉；蜘蛛、一些胡蜂和许多鸟吃蚱蜢；黑卵蜂可毁掉 5–50 % 的卵；麻蝇和寄蝇可寄生多达 60 % 的若虫和成虫；还有一种真菌会杀死蚱蜢。 (Read 2026-10-10. It describes grasshoppers of the Canadian prairies; it is used only for the kinds of animals that eat grasshoppers in general. / 2026-10-10 读取。对象是加拿大草原的蚱蜢，只用来说明一般吃蚱蜢的动物有哪些。) — https://www1.agric.gov.ab.ca/$department/deptdocs.nsf/all/agdex3497
 - [S39] Parks and Trees Act (Singapore, Cap. 216), section 9: no person shall, without the approval of the Commissioner, capture, displace or feed any animal, or collect or remove any other organism, in a national park or nature reserve; 'animal' includes insects; the penalty is a fine of up to $50,000, imprisonment of up to six months, or both. / 新加坡《公园与树木法》（第 216 章）第 9 条：未经专员批准，不得在国家公园或自然保护区内捕捉、驱赶或喂养任何动物，或采集、带走任何其他生物；“动物”包括昆虫；违者最高罚款 5 万元、监禁最长六个月，或两者兼施。 (Read 2026-10-10 in the FAOLEX consolidation (in force from 2 January 2011); the current official text is on Singapore Statutes Online, which refused automated access. Rules for ordinary public parks are in the Parks and Trees Regulations, which were not read. / 2026-10-10 读 FAOLEX 收录的合并文本（2011 年 1 月 2 日起有效）；新加坡法规在线的现行官方文本拒绝自动访问。普通公园的规定在《公园与树木条例》里，未读。) — https://faolex.fao.org/docs/pdf/sin52454.pdf
 <!-- sources:end -->
+
+## Rebuild 2026-11-05 — original relief geometry
+
+`public/models/grasshopper.glb` is original Atlas build-time geometry, generated
+by `scripts/geo/grasshopper/rebuild.mjs` and the new `insect-relief.mjs` kit.
+No third-party mesh or photographic texture is embedded. Reference photographs
+are development comparisons only. Full attribution, reference URLs, anatomical
+interpretation and limits are recorded in `../REBUILD-3D.md`.

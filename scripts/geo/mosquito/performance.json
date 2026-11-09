@@ -1,0 +1,984 @@
+{
+  "before": {
+    "inventoryTriangles": 301340,
+    "inventoryCalls": 81,
+    "glbBytes": 0,
+    "maxAuthoredTriangles": 251848,
+    "maxAuthoredCalls": 58,
+    "states": [
+      {
+        "chapter": "before-you-start",
+        "beat": 0,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 1,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 2,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 3,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 4,
+        "triangles": 46560,
+        "calls": 22
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 0,
+        "triangles": 131156,
+        "calls": 35
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 1,
+        "triangles": 131156,
+        "calls": 35
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 2,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 3,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 4,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 5,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 0,
+        "triangles": 131156,
+        "calls": 35
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 1,
+        "triangles": 131156,
+        "calls": 35
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 2,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 3,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 4,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 5,
+        "triangles": 67924,
+        "calls": 28
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 0,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 1,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 2,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 3,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 4,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 5,
+        "triangles": 89680,
+        "calls": 19
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 6,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 0,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 1,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 2,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 3,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 4,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 5,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 0,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 1,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 2,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 3,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 4,
+        "triangles": 188616,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 5,
+        "triangles": 251848,
+        "calls": 58
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 0,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 1,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 2,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 3,
+        "triangles": 46560,
+        "calls": 22
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 4,
+        "triangles": 46064,
+        "calls": 20
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 5,
+        "triangles": 45824,
+        "calls": 19
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 6,
+        "triangles": 35508,
+        "calls": 18
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 7,
+        "triangles": 248392,
+        "calls": 57
+      }
+    ],
+    "parts": {
+      "head-capsule": {
+        "triangles": 848,
+        "calls": 2
+      },
+      "compound-eyes": {
+        "triangles": 1152,
+        "calls": 1
+      },
+      "antennae": {
+        "triangles": 2336,
+        "calls": 1
+      },
+      "palps": {
+        "triangles": 1216,
+        "calls": 2
+      },
+      "proboscis": {
+        "triangles": 840,
+        "calls": 1
+      },
+      "stylets": {
+        "triangles": 1296,
+        "calls": 1
+      },
+      "thorax": {
+        "triangles": 4576,
+        "calls": 2
+      },
+      "fore-legs": {
+        "triangles": 3136,
+        "calls": 2
+      },
+      "mid-legs": {
+        "triangles": 3136,
+        "calls": 2
+      },
+      "hind-legs": {
+        "triangles": 4736,
+        "calls": 2
+      },
+      "wings": {
+        "triangles": 7136,
+        "calls": 2
+      },
+      "wings-r": {
+        "triangles": 7136,
+        "calls": 2
+      },
+      "halteres": {
+        "triangles": 488,
+        "calls": 1
+      },
+      "halteres-r": {
+        "triangles": 488,
+        "calls": 1
+      },
+      "salivary-glands": {
+        "triangles": 2640,
+        "calls": 1
+      },
+      "abdomen": {
+        "triangles": 23136,
+        "calls": 2
+      },
+      "midgut": {
+        "triangles": 1248,
+        "calls": 1
+      },
+      "ovaries": {
+        "triangles": 1792,
+        "calls": 1
+      },
+      "male-body": {
+        "triangles": 27072,
+        "calls": 3
+      },
+      "male-antennae": {
+        "triangles": 18560,
+        "calls": 1
+      },
+      "male-palps": {
+        "triangles": 3328,
+        "calls": 2
+      },
+      "male-wings": {
+        "triangles": 14272,
+        "calls": 1
+      },
+      "dish": {
+        "triangles": 2304,
+        "calls": 2
+      },
+      "dish-water": {
+        "triangles": 4480,
+        "calls": 1
+      },
+      "eggs": {
+        "triangles": 2400,
+        "calls": 1
+      },
+      "larva-l1": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l2": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l3": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l4": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "moult-skins": {
+        "triangles": 2832,
+        "calls": 1
+      },
+      "pupa": {
+        "triangles": 2512,
+        "calls": 1
+      },
+      "developing-adult": {
+        "triangles": 3064,
+        "calls": 1
+      },
+      "pupal-case": {
+        "triangles": 5520,
+        "calls": 1
+      },
+      "emerging-adult": {
+        "triangles": 20504,
+        "calls": 2
+      },
+      "escaped-adults": {
+        "triangles": 41008,
+        "calls": 2
+      },
+      "flower-pot": {
+        "triangles": 13184,
+        "calls": 2
+      },
+      "soil-hardened": {
+        "triangles": 592,
+        "calls": 2
+      },
+      "soil-loosened": {
+        "triangles": 384,
+        "calls": 1
+      },
+      "pot-plate": {
+        "triangles": 480,
+        "calls": 1
+      },
+      "plate-water": {
+        "triangles": 288,
+        "calls": 1
+      },
+      "pail": {
+        "triangles": 4656,
+        "calls": 1
+      },
+      "pail-water": {
+        "triangles": 240,
+        "calls": 1
+      },
+      "vase": {
+        "triangles": 10264,
+        "calls": 4
+      },
+      "vase-water": {
+        "triangles": 256,
+        "calls": 1
+      },
+      "roof-gutter": {
+        "triangles": 124,
+        "calls": 1
+      },
+      "gutter-debris": {
+        "triangles": 13440,
+        "calls": 1
+      },
+      "gutter-water": {
+        "triangles": 12,
+        "calls": 1
+      },
+      "bti-granules": {
+        "triangles": 3136,
+        "calls": 1
+      },
+      "follow-marker": {
+        "triangles": 3456,
+        "calls": 1
+      },
+      "dish-ruler": {
+        "triangles": 1188,
+        "calls": 2
+      },
+      "bench": {
+        "triangles": 588,
+        "calls": 1
+      },
+      "home-floor": {
+        "triangles": 672,
+        "calls": 2
+      },
+      "home-wall": {
+        "triangles": 1176,
+        "calls": 2
+      },
+      "home-plinth": {
+        "triangles": 588,
+        "calls": 1
+      }
+    }
+  },
+  "after": {
+    "inventoryTriangles": 383372,
+    "inventoryCalls": 74,
+    "glbBytes": 682912,
+    "maxAuthoredTriangles": 333880,
+    "maxAuthoredCalls": 51,
+    "states": [
+      {
+        "chapter": "before-you-start",
+        "beat": 0,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 1,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 2,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 3,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "before-you-start",
+        "beat": 4,
+        "triangles": 46560,
+        "calls": 22
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 0,
+        "triangles": 213188,
+        "calls": 28
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 1,
+        "triangles": 213188,
+        "calls": 28
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 2,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 3,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 4,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "the-adult",
+        "beat": 5,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 0,
+        "triangles": 213188,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 1,
+        "triangles": 213188,
+        "calls": 28
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 2,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 3,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 4,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "female-and-male",
+        "beat": 5,
+        "triangles": 113570,
+        "calls": 23
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 0,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 1,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 2,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 3,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 4,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 5,
+        "triangles": 89680,
+        "calls": 19
+      },
+      {
+        "chapter": "eggs-and-larvae",
+        "beat": 6,
+        "triangles": 121280,
+        "calls": 24
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 0,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 1,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 2,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 3,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 4,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "pupa-to-adult",
+        "beat": 5,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 0,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 1,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 2,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 3,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 4,
+        "triangles": 234262,
+        "calls": 46
+      },
+      {
+        "chapter": "round-the-cycle",
+        "beat": 5,
+        "triangles": 333880,
+        "calls": 51
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 0,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 1,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 2,
+        "triangles": 117824,
+        "calls": 23
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 3,
+        "triangles": 46560,
+        "calls": 22
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 4,
+        "triangles": 46064,
+        "calls": 20
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 5,
+        "triangles": 45824,
+        "calls": 19
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 6,
+        "triangles": 35508,
+        "calls": 18
+      },
+      {
+        "chapter": "breaking-the-cycle",
+        "beat": 7,
+        "triangles": 330424,
+        "calls": 50
+      }
+    ],
+    "parts": {
+      "head-capsule": {
+        "triangles": 848,
+        "calls": 2
+      },
+      "compound-eyes": {
+        "triangles": 1152,
+        "calls": 1
+      },
+      "antennae": {
+        "triangles": 2336,
+        "calls": 1
+      },
+      "palps": {
+        "triangles": 1216,
+        "calls": 2
+      },
+      "proboscis": {
+        "triangles": 840,
+        "calls": 1
+      },
+      "stylets": {
+        "triangles": 1296,
+        "calls": 1
+      },
+      "thorax": {
+        "triangles": 4576,
+        "calls": 2
+      },
+      "fore-legs": {
+        "triangles": 7784,
+        "calls": 1
+      },
+      "mid-legs": {
+        "triangles": 7784,
+        "calls": 1
+      },
+      "hind-legs": {
+        "triangles": 7782,
+        "calls": 1
+      },
+      "wings": {
+        "triangles": 23788,
+        "calls": 1
+      },
+      "wings-r": {
+        "triangles": 23788,
+        "calls": 1
+      },
+      "halteres": {
+        "triangles": 488,
+        "calls": 1
+      },
+      "halteres-r": {
+        "triangles": 488,
+        "calls": 1
+      },
+      "salivary-glands": {
+        "triangles": 2640,
+        "calls": 1
+      },
+      "abdomen": {
+        "triangles": 23136,
+        "calls": 2
+      },
+      "midgut": {
+        "triangles": 1248,
+        "calls": 1
+      },
+      "ovaries": {
+        "triangles": 1792,
+        "calls": 1
+      },
+      "male-body": {
+        "triangles": 30160,
+        "calls": 1
+      },
+      "male-antennae": {
+        "triangles": 18560,
+        "calls": 1
+      },
+      "male-palps": {
+        "triangles": 3328,
+        "calls": 2
+      },
+      "male-wings": {
+        "triangles": 47570,
+        "calls": 1
+      },
+      "dish": {
+        "triangles": 2304,
+        "calls": 2
+      },
+      "dish-water": {
+        "triangles": 4480,
+        "calls": 1
+      },
+      "eggs": {
+        "triangles": 2400,
+        "calls": 1
+      },
+      "larva-l1": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l2": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l3": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "larva-l4": {
+        "triangles": 7856,
+        "calls": 2
+      },
+      "moult-skins": {
+        "triangles": 2832,
+        "calls": 1
+      },
+      "pupa": {
+        "triangles": 2512,
+        "calls": 1
+      },
+      "developing-adult": {
+        "triangles": 3064,
+        "calls": 1
+      },
+      "pupal-case": {
+        "triangles": 5520,
+        "calls": 1
+      },
+      "emerging-adult": {
+        "triangles": 20504,
+        "calls": 2
+      },
+      "escaped-adults": {
+        "triangles": 41008,
+        "calls": 2
+      },
+      "flower-pot": {
+        "triangles": 13184,
+        "calls": 2
+      },
+      "soil-hardened": {
+        "triangles": 592,
+        "calls": 2
+      },
+      "soil-loosened": {
+        "triangles": 384,
+        "calls": 1
+      },
+      "pot-plate": {
+        "triangles": 480,
+        "calls": 1
+      },
+      "plate-water": {
+        "triangles": 288,
+        "calls": 1
+      },
+      "pail": {
+        "triangles": 4656,
+        "calls": 1
+      },
+      "pail-water": {
+        "triangles": 240,
+        "calls": 1
+      },
+      "vase": {
+        "triangles": 10264,
+        "calls": 4
+      },
+      "vase-water": {
+        "triangles": 256,
+        "calls": 1
+      },
+      "roof-gutter": {
+        "triangles": 124,
+        "calls": 1
+      },
+      "gutter-debris": {
+        "triangles": 13440,
+        "calls": 1
+      },
+      "gutter-water": {
+        "triangles": 12,
+        "calls": 1
+      },
+      "bti-granules": {
+        "triangles": 3136,
+        "calls": 1
+      },
+      "follow-marker": {
+        "triangles": 3456,
+        "calls": 1
+      },
+      "dish-ruler": {
+        "triangles": 1188,
+        "calls": 2
+      },
+      "bench": {
+        "triangles": 588,
+        "calls": 1
+      },
+      "home-floor": {
+        "triangles": 672,
+        "calls": 2
+      },
+      "home-wall": {
+        "triangles": 1176,
+        "calls": 2
+      },
+      "home-plinth": {
+        "triangles": 588,
+        "calls": 1
+      }
+    }
+  }
+}

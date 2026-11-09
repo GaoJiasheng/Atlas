@@ -1,0 +1,14 @@
+{
+  "grasshopper": {
+    "bytes": 906888,
+    "sha256": "e8293b67b0b301a40aa5d260de82f9e0bd4129321182ea31e652513bdbeb6832",
+    "builtSha256": "e8293b67b0b301a40aa5d260de82f9e0bd4129321182ea31e652513bdbeb6832",
+    "identical": true
+  },
+  "mosquito": {
+    "bytes": 682912,
+    "sha256": "325f3068702256d41933b0ee91523da3ad5a36684d49d496af3e46d155f4962c",
+    "builtSha256": "325f3068702256d41933b0ee91523da3ad5a36684d49d496af3e46d155f4962c",
+    "identical": true
+  }
+}
