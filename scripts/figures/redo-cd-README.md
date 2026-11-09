@@ -5,10 +5,10 @@ The muscles covers, exercises, B-grade batch and already-approved replacements
 were left alone. `b200-gpu-tray` is present but has no content reference, so the
 brief's conditional assignment excludes it.
 
-- `public/illustrations/redo-cd-manifest.jsonl`: one record per redrawn/re-encoded
+- `scripts/figures/redo-cd-manifest.jsonl`: one record per redrawn/re-encoded
   image, six checks each, source pointers, exact bytes, SHA-256, alpha bounds,
   projected key-feature extents, bilingual replacement text and theme policy.
-- `public/illustrations/redo-cd-unused.json`: the six deletions and individual
+- `scripts/figures/redo-cd-unused.json`: the six deletions and individual
   reasons. Reference search covered `src/`, including the MDX chapters.
 - `redo-cd-ai-prompts.json`: exact original generation/edit prompts recovered
   from the interrupted run. The approved final energy cover is the sun-removal

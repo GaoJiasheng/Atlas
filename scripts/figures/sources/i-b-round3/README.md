@@ -48,7 +48,7 @@ the two revised illustrations use normal inversion because their values describe
 materials, not physical illumination. The simulation uses the application's
 multiply / inverse-contrast-screen formula and paper/cinema backgrounds.
 The size/hash/bounds report identifies the exact inspected rasters. No browser
-or desktop is opened. Public checklists are in b-review-manifest.jsonl.
+or desktop is opened. Checklists are in scripts/figures/b-review-manifest.jsonl.
 
 Power-chain EN/ZH chapter alt and captions describe its new two-row order and
 end-on sections. Cover alt is supplied by the application from the topic title;

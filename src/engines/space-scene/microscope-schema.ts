@@ -30,7 +30,7 @@ const feature = z.object({
   if(Math.abs(area)<1e-9)ctx.addIssue({code:'custom',path:['pointsUm'],message:'polygon must have positive area'});
 });
 const range=z.tuple([finite.int().min(-20).max(20),finite.int().min(-20).max(20)]).refine(([a,b])=>a<=b,'tile range must ascend');
-export const microscopePatternSchema=z.object({id:z.enum(MICROSCOPE_PATTERNS),periodUm:z.tuple([positive,positive]),originUm:point,tileRange:z.object({x:range,y:range}).strict(),features:z.array(feature).min(1).max(32)}).strict().superRefine((p,ctx)=>{
+export const microscopePatternSchema=z.object({id:z.enum(MICROSCOPE_PATTERNS),periodUm:z.tuple([positive,positive]),originUm:point,tileRange:z.object({x:range,y:range}).strict(),features:z.array(feature).min(1).max(72)}).strict().superRefine((p,ctx)=>{
   if((p.tileRange.x[1]-p.tileRange.x[0]+1)*(p.tileRange.y[1]-p.tileRange.y[0]+1)*p.features.length>2048)ctx.addIssue({code:'custom',path:['tileRange'],message:'finite patch exceeds 2048 feature instances'});
   if(new Set(p.features.map(f=>f.atUm[2])).size>3)ctx.addIssue({code:'custom',path:['features'],message:'at most three optical depth layers'});
   p.features.forEach((f,i)=>{

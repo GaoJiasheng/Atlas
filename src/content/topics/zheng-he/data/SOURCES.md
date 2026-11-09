@@ -13,9 +13,9 @@ GeoNames licence and table contract: https://download.geonames.org/export/dump/r
 
 ## Nanjing display offsets / 南京记录的显示偏移（2026-10-27）
 
-All `at` coordinates still copy the 17 sourced anchors exactly. `site-nanjing` remains at D02 `[118.778029, 32.051965]`. Nine dated records at that anchor use `displayOffset` in CSS pixels, independent of zoom: radius 96 px, first slot north, clockwise every 40°, rounded to 0.1 px. Slot order is chronological, with equal-year records in the explicit order below. These offsets separate symbols, their click targets and leader anchors; each shifted mark draws a hairline leg back to the Nanjing point; they are not geographic coordinates, departure quays, court buildings, or a route. The background note and prose explain the display convention in both languages. City point and every record can be selected independently; adjacent centres are approximately 65.7 px apart, exceeding the 44 px target width.
+All `at` coordinates still copy the 17 sourced anchors exactly. `site-nanjing` remains at D02 `[118.778029, 32.051965]`. Nine dated records at that anchor use `displayOffset` in CSS pixels: radius 96 px at map zoom 4.2 and closer, narrowing to 0.68 of that (65.3 px) at zoom 2.5 and wider, first slot north, clockwise every 40°, rounded to 0.1 px. Slot order is chronological, with equal-year records in the explicit order below. These offsets separate symbols, their click targets and leader anchors; each shifted mark draws a hairline leg back to the Nanjing point; they are not geographic coordinates, departure quays, court buildings, or a route. The background note and prose explain the display convention in both languages. City point and every record can be selected independently; adjacent centres are approximately 65.7 px apart, exceeding the 44 px target width.
 
-南京原始坐标不变；九条有日期记录按半径 96 CSS px 的圆环分开显示，从正北起顺时针每隔 40° 一条，偏移四舍五入至 0.1 px。偏移只区分记录，每个偏移标记画一条细线连回南京点，不代表历史实址。中央城市点不偏移。
+南京原始坐标不变；九条有日期记录按半径 96 CSS px 的圆环分开显示（map zoom 4.2 及更近时为 96 px，到 zoom 2.5 及更远收窄到 0.68 倍，即 65.3 px），从正北起顺时针每隔 40° 一条，偏移四舍五入至 0.1 px。偏移只区分记录，每个偏移标记画一条细线连回南京点，不代表历史实址。中央城市点不偏移。
 
 | Slot | Record | Offset `[x,y]` px |
 |---|---|---|

@@ -4,18 +4,26 @@
  * measured cell size. The tracked nucleus remains exactly [200, 0, 0] µm.
  */
 const round = n => Math.round(n * 1e5) / 1e5;
-const PERIOD_X = 1800, PERIOD_Y = 540;
-const starts = [[-100, 475, 1110, 1700], [80, 730, 1290, 1880], [-290, 340, 970, 1510]];
+const PERIOD_X = 2400, PERIOD_Y = 1080, ROWS = 6, COLUMNS = 4;
+// Row files of unequal height; four unequal cells per row, staggered so no end wall lines up with its neighbours'.
+const ROW_Y = [-65, 105, 300, 470, 640, 835];
+const STARTS = [[-100, 620, 1180, 1710], [130, 640, 1390, 1870], [-280, 300, 830, 1580], [40, 720, 1200, 1930], [-190, 270, 1010, 1560], [180, 830, 1340, 1910]];
 const mod = (n, d) => ((n % d) + d) % d;
+const baseY = row => ROW_Y[mod(row, ROWS)] + Math.floor(row / ROWS) * PERIOD_Y;
+// Periodic in x, so tiles join; each long wall wanders on its own phase rather than running ruler-straight.
 const boundaryY = (row, x) => {
-  const phase = mod(row, 3), t = 2 * Math.PI * x / PERIOD_X;
-  return -65 + row * 180 + 8 * Math.sin(t * 3 + phase * 1.4) + 4 * Math.cos(t * 5 + phase * .8);
+  const r = mod(row, ROWS), t = 2 * Math.PI * x / PERIOD_X;
+  return baseY(row) + 14 * Math.sin(t * 2 + r * 1.7) + 9 * Math.sin(t * 5 + r * 2.9) + 4 * Math.cos(t * 7 + r * .8);
 };
+// End walls lean: ±44 µm at the top, the opposite at the bottom.
+const lean = (row, col) => ((mod(row, ROWS) * 7 + mod(col, COLUMNS) * 13) % 9 - 4) * 11;
+const startX = (row, col) => STARTS[mod(row, ROWS)][mod(col, COLUMNS)] + Math.floor(col / COLUMNS) * PERIOD_X;
+const endTop = (row, col) => startX(row, col) + lean(row, col);
+const endBottom = (row, col) => startX(row, col) - lean(row, col);
 // Both neighbouring rows use the very same vertices along a shared wall.
 function boundaryPoints(row, left, right) {
-  const columns = [mod(row - 1, 3), mod(row, 3)];
-  const samples = Array.from({ length: 20 }, (_, i) => i * 90);
-  columns.forEach(r => starts[r].slice(0, 3).forEach(x => samples.push(mod(x, PERIOD_X))));
+  const samples = Array.from({ length: PERIOD_X / 150 }, (_, i) => i * 150);
+  for (let c = 0; c < COLUMNS; c++) samples.push(mod(endBottom(row - 1, c), PERIOD_X), mod(endTop(row, c), PERIOD_X));
   const values = new Set([left, right]);
   for (const x of samples) for (let tile = -2; tile <= 2; tile++) {
     const p = x + tile * PERIOD_X;
@@ -23,22 +31,28 @@ function boundaryPoints(row, left, right) {
   }
   return [...values].sort((a, b) => a - b).map(x => [round(x), round(boundaryY(row, x))]);
 }
+// One end wall, top to bottom, shared by the cells on either side.
+function endWall(row, col) {
+  const top = endTop(row, col), bottom = endBottom(row, col), yTop = boundaryY(row, top), yBottom = boundaryY(row + 1, bottom);
+  const bow = 5 + (row * 3 + col * 5) % 9;
+  return [.25, .5, .75].map(t => [round(top + (bottom - top) * t + Math.sin(Math.PI * t) * bow), round(yTop + (yBottom - yTop) * t)]);
+}
 function onionPattern() {
   const features = [];
-  for (let row = 0; row < 3; row++) for (let col = 0; col < 3; col++) {
-    const i = row * 3 + col, id = i === 0 ? 'onion-cell' : `onion-cell-${i + 1}`;
-    const left = starts[row][col], right = starts[row][col + 1];
-    const top = boundaryPoints(row, left, right), bottom = boundaryPoints(row + 1, left, right).reverse();
-    const side = (x, edge) => [.25, .5, .75].map(t => [round(x + Math.sin(Math.PI * t) * (edge % 2 ? -1 : 1) * (5 + (edge * 7 % 9))), round(boundaryY(row, x) * (1 - t) + boundaryY(row + 1, x) * t)]);
-    const absolute = [...top, ...side(right, row * 3 + (col + 1) % 3), ...bottom, ...side(left, i).reverse()];
+  for (let row = 0; row < ROWS; row++) for (let col = 0; col < COLUMNS; col++) {
+    const i = row * COLUMNS + col, id = i === 0 ? 'onion-cell' : `onion-cell-${i + 1}`;
+    const top = boundaryPoints(row, endTop(row, col), endTop(row, col + 1));
+    const bottom = boundaryPoints(row + 1, endBottom(row, col), endBottom(row, col + 1)).reverse();
+    const absolute = [...top, ...endWall(row, col + 1), ...bottom, ...endWall(row, col).reverse()];
+    const left = startX(row, col), right = startX(row, col + 1);
     // Place each outline around its own local origin, keeping values compact.
-    const cx = (left + right) / 2, cy = -65 + (row + .5) * 180;
+    const cx = (left + right) / 2, cy = (baseY(row) + baseY(row + 1)) / 2;
     const points = absolute.map(([x, y]) => [round(x - cx), round(y - cy)]);
     features.push({ id, kind: 'polygon', role: 'wall', atUm: [cx, cy, 0], parentCell: id, contrast: .72, pointsUm: points });
     features.push({ id: i === 0 ? 'onion-content' : `onion-content-${i + 1}`, kind: 'polygon', role: 'cytoplasm-area', atUm: [cx, cy, 0], parentCell: id, contrast: .025 + (i % 3) * .006, pointsUm: points.map(([x, y]) => [round(x * .986), round(y * .96)]) });
-    features.push({ id: i === 0 ? 'onion-nucleus' : `onion-nucleus-${i + 1}`, kind: 'ellipse', role: 'nucleus', atUm: i === 0 ? [200, 0, 0] : [round(left + (right - left) * (.27 + (i % 4) * .13)), round(cy - 40 + (i * 19 % 73)), 0], parentCell: id, contrast: .66 + (i % 3) * .04, axesUm: [17 + (i * 3 % 8), 11 + (i * 5 % 6)] });
+    features.push({ id: i === 0 ? 'onion-nucleus' : `onion-nucleus-${i + 1}`, kind: 'ellipse', role: 'nucleus', atUm: i === 0 ? [200, 0, 0] : [round(left + (right - left) * (.22 + (i * 7 % 5) * .13)), round(cy - 40 + (i * 19 % 73)), 0], parentCell: id, contrast: .66 + (i % 3) * .04, axesUm: [17 + (i * 3 % 8), 11 + (i * 5 % 6)] });
   }
-  return { id: 'onion-grid', periodUm: [PERIOD_X, PERIOD_Y], originUm: [0, 0], tileRange: { x: [-2, 2], y: [-6, 6] }, features };
+  return { id: 'onion-grid', periodUm: [PERIOD_X, PERIOD_Y], originUm: [0, 0], tileRange: { x: [-2, 1], y: [-3, 3] }, features };
 }
 export function polishField(sim) {
   sim.microscope.patterns = sim.microscope.patterns.map(p => p.id === 'onion-grid' ? onionPattern() : p);
@@ -77,7 +91,9 @@ const nucleusPiece = (at, size) => ({kind:'lathe',profile:Array.from({length:19}
 export function polishOnionPatch(parts) {
   const patch = parts.find(p=>p.id==='onion-patch'), pieces=[];
   const recipe=onionPattern(), scale=.000065;
-  for(const wall of recipe.features.filter(f=>f.role==='wall')) {
+  // The 3D patch is the first three rows and three cells of the live field's mosaic.
+  const patchWalls=recipe.features.filter(f=>f.role==='wall').slice(0,3*COLUMNS).filter((_,i)=>i%COLUMNS<3);
+  for(const wall of patchWalls) {
     const shape=simplifyContour(roundedOutline(wall.pointsUm.map(([x,y])=>[x*scale,y*scale])));
     const inner=simplifyContour(shape.map(([x,y])=>[round(x*.972),round(y*.91)]));
     const at=[-.1+(wall.atUm[0]-800)*scale,.12+(wall.atUm[1]-205)*scale,0];

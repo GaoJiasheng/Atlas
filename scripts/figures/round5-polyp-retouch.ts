@@ -105,5 +105,5 @@ const audit={slug:'coral-reef',kind:'figure',file:'figures/coral-reef-polyp.webp
   sha256:createHash('sha256').update(encoded).digest('hex'),source,alt,requiresNoInvert:false,
   previews:{directory:dir,contactSheet:'contact-sheet-420.png',paper4x:'paper-before-after-4x.png',cinema4x:'cinema-before-after-4x.png'}};
 writeFileSync(`${dir}/audit.json`,JSON.stringify(audit,null,2)+'\n');
-writeFileSync('public/illustrations/round5-manifest.jsonl',JSON.stringify(audit)+'\n');
+writeFileSync('scripts/figures/round5-manifest.jsonl',JSON.stringify(audit)+'\n');
 console.log(JSON.stringify({bytes:encoded.length,quality,changed,maxAlphaError,previews:dir}));

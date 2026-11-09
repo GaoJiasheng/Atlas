@@ -42,10 +42,10 @@ const records=entries.map(e=>{
  assert(checks.length>=3&&checks.length<=6);
  return{slug:e.slug,kind:'figure',file:`figures/${e.id}.webp`,chapterIdea:e.caption.en,subject:e.alt.en,method:e.method,checks,verifiedAt:'2026-11-09',...s,id:undefined,keySpans420:spans,requiresNoInvert:false,cinema:'invert(1), contrast(.94), screen, opacity .86; no physical light/dark semantics',sources:['data/SOURCES.md'],alt:e.alt,caption:e.caption,previews:{paper420:`${e.id}-paper-420.png`,cinema420:`${e.id}-cinema-420.png`,paperWithA840:`${e.id}-paper-with-A-840.png`,cinemaWithA840:`${e.id}-cinema-with-A-840.png`}};
 });
-writeFileSync('public/illustrations/round2-manifest.jsonl',records.map(r=>JSON.stringify(r)).join('\n')+'\n');
+writeFileSync('scripts/figures/round2-manifest.jsonl',records.map(r=>JSON.stringify(r)).join('\n')+'\n');
 const ids=new Set(records.map(r=>r.file));
-const previous=readFileSync('public/illustrations/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(Boolean).map(s=>JSON.parse(s)as{file:string});
+const previous=readFileSync('scripts/figures/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(Boolean).map(s=>JSON.parse(s)as{file:string});
 // Keep accepted artwork/re-encode records byte-for-byte as text, replacing only this batch's entries.
-const kept=readFileSync('public/illustrations/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(line=>!ids.has((JSON.parse(line)as{file:string}).file));
-writeFileSync('public/illustrations/redo-cd-manifest.jsonl',[...kept,...records.map(r=>JSON.stringify(r))].join('\n')+'\n');
+const kept=readFileSync('scripts/figures/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(line=>!ids.has((JSON.parse(line)as{file:string}).file));
+writeFileSync('scripts/figures/redo-cd-manifest.jsonl',[...kept,...records.map(r=>JSON.stringify(r))].join('\n')+'\n');
 console.log(`Verified ${records.length} round2 checklists; retained ${previous.length-kept.length} superseded records only in source history.`);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { displayLeg, eventAtDisplayPoint, eventDisplayPoint } from '../../src/engines/time-scene/lib/event-display';
+import { DISPLAY_OFFSET_MIN_SCALE, displayLeg, displayOffsetScale, eventAtDisplayPoint, eventDisplayPoint, scaledDisplayOffset } from '../../src/engines/time-scene/lib/event-display';
 import { eventSchema, staticSite } from '../../src/engines/time-scene/schema';
 import type { LngLat } from '../../src/engines/time-scene/lib/geo';
 
@@ -47,6 +47,25 @@ describe('screen-only event offsets', () => {
       const display = eventDisplayPoint(project, item, at[0]);
       expect(eventAtDisplayPoint(points, project, display)).toBe(item.id);
     }
+  });
+
+  it('draws the spread narrower on a whole-ocean view while every mark keeps a 44 px target', () => {
+    expect(displayOffsetScale(5.7)).toBe(1);
+    expect(displayOffsetScale(4.3)).toBe(1);
+    expect(displayOffsetScale(3.4)).toBeLessThan(1);
+    expect(displayOffsetScale(2.1)).toBe(DISPLAY_OFFSET_MIN_SCALE);
+    const scale = displayOffsetScale(1);
+    const slots = [[0, -96], [61.7, -73.5], [94.5, -16.7], [83.1, 48], [32.8, 90.2], [-32.8, 90.2], [-83.1, 48], [-94.5, -16.7], [-61.7, -73.5]] as const;
+    const points = [...slots.map((displayOffset, i) => ({ id: `slot-${i}`, at, displayOffset })), { id: 'nanjing', at }];
+    for (let i = 0; i < points.length; i++) {
+      const a = eventDisplayPoint(project, points[i]!, at[0], scale);
+      for (let j = i + 1; j < points.length; j++) {
+        const b = eventDisplayPoint(project, points[j]!, at[0], scale);
+        expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThan(44);
+      }
+      expect(eventAtDisplayPoint(points, project, a, 22, scale)).toBe(points[i]!.id);
+    }
+    expect(scaledDisplayOffset([0, -96], scale)).toEqual([0, -96 * DISPLAY_OFFSET_MIN_SCALE]);
   });
 
   it('chooses the nearest mark when targets overlap and includes the complete 44px square', () => {

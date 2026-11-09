@@ -392,3 +392,7 @@ Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers
 ### Claude acceptance · 2026-11-05 (browser, GPU)
 
 40× objective visible and labelled in 01.4, 05.3 and 06.3 (paper and cinema). `pnpm shoot cells --beats` found one remaining unlabelled highlight: the chapter-00 view selects and labels `leaf-context`, but the HUD framing left the leaf under the left column, so its label was dropped. `leaf-context` is now in `views.hudFrame.parts` (generator and parts.json), and the rerun lists no unlabelled highlight in any chapter or beat.
+
+## Polish 2026-11-09
+
+Animal and plant gel regions use `token:seedling-pale` instead of `token:bone`, so cytoplasm separates from the paper ground. The live onion field is now six rows of four unequal cells with leaning end walls and wandering long walls (period 2400 × 1080 µm, 2,016 finite features, under the 2,048 ceiling); `microscope-schema` allows 72 features per pattern for this. The 3D patch keeps nine cells, from the same mosaic. `cells.glb` is unchanged.

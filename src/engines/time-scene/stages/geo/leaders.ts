@@ -23,7 +23,7 @@
  */
 import type { Map as MlMap } from 'maplibre-gl';
 import type { LngLat } from '../../lib/geo';
-import { eventDisplayPoint, type DisplayOffset } from '../../lib/event-display';
+import { displayOffsetScale, eventDisplayPoint, type DisplayOffset } from '../../lib/event-display';
 
 export interface LeaderItem {
   /** Unique key (`event:sample-meeting`). */
@@ -347,7 +347,7 @@ export function createLeaders(options: {
     const shown: Entry[] = [];
     for (const e of entries.values()) {
       // The world copy the camera is looking at (a path across the antimeridian sits in the neighbouring copy).
-      const p = eventDisplayPoint((q) => map.project(q), e.item, width / 2);
+      const p = eventDisplayPoint((q) => map.project(q), e.item, width / 2, displayOffsetScale(map.getZoom()));
       e.sx = p.x;
       e.sy = p.y;
       const onStage = p.x >= 0 && p.x <= width && p.y >= 0 && p.y <= height;

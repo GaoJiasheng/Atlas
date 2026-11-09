@@ -60,7 +60,7 @@ for(const theme of ['paper','cinema']){
 }
 writeFileSync(`${out}/sizes.json`,JSON.stringify(sizes,null,2)+'\n');
 // A stale checklist cannot certify a later asset revision.
-for(const row of readFileSync('public/illustrations/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s))){
+for(const row of readFileSync('scripts/figures/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s))){
  const file=`public/illustrations/${row.file}`;
  assert(row.checks.length>=3&&row.checks.length<=6,`${row.file}: checklist length`);
  assert.equal(row.bytes,statSync(file).size,`${row.file}: stale size`);

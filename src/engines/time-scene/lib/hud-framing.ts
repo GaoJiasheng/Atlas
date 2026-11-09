@@ -122,6 +122,8 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
   let authored: GeoCamera | null = null;
   /** The reader has panned / zoomed since `authored`. */
   let userMoved = false;
+  /** The zoom the map settled at for `authored`: above the goal when minZoom or a plate's maxBounds floored it. */
+  let settledZoom: number | null = null;
   const resize = new ResizeObserver(() => schedule());
 
   const measure = () => {
@@ -173,7 +175,10 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
 
   const onMoveStart = (e: { originalEvent?: Event }) => { if (e.originalEvent) { userMoved = true; } };
   const onWheel = () => { userMoved = true; };
-  const onMoveEnd = () => schedule();
+  const onMoveEnd = () => {
+    if (authored && !userMoved) settledZoom = map.getZoom();
+    schedule();
+  };
   map.on('movestart', onMoveStart);
   map.on('wheel', onWheel);
   map.on('moveend', onMoveEnd);
@@ -187,10 +192,12 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
       measure();
       authored = camera;
       userMoved = false;
+      settledZoom = null;
       framed = { padding: { ...padding }, shift };
       return goal(camera);
     },
-    storedZoom: (zoom) => Math.round((zoom - shift) * 100) / 100,
+    // A pan leaves the zoom where it settled, so the authored zoom stands; subtracting the shift from a floored map zoom would invent a jump.
+    storedZoom: (zoom) => (authored && settledZoom !== null && Math.abs(zoom - settledZoom) < 0.02 ? authored.zoom : Math.round((zoom - shift) * 100) / 100),
     fitPadding(margin) {
       const box = container.getBoundingClientRect();
       measure();

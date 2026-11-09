@@ -56,7 +56,7 @@ for(const id of compactIds){
 }
 await sharp({create:{width:840,height:top,channels:3,background:'#e9e4d8'}}).composite(compact).png().toFile(`${out}/contact-sheet-420.png`);
 // Checklist hashes certify these exact final rasters, not an earlier attempt.
-const checklist=readFileSync('public/illustrations/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s));
+const checklist=readFileSync('scripts/figures/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s));
 for(const item of sizes){
  const row=checklist.find(r=>`public/illustrations/${r.file}`===item.file);assert(row,`${item.file}: missing checklist`);
  assert(row.checks.length>=3&&row.checks.length<=6);assert.equal(row.sha256,item.sha256);assert.equal(row.bytes,item.bytes);

@@ -91,7 +91,7 @@ describe('cells polished anatomy and microscope mechanics',()=>{
    expect(hits(id!,a.x,a.y).length).toBeGreaterThan(0);
    expect(a.distanceTo(new Vector3(...n.primitive!.at))).toBeGreaterThan(id==='animal-cytoplasm'?.02:.03);
    const slots=partMaterialSlots(p).map(s=>s.tint);
-   expect(slots).toContain('token:bone');expect(slots).toContain('token:hot');expect(slots).toContain('token:en-heat');
+   expect(slots).toContain('token:seedling-pale');expect(slots).toContain('token:hot');expect(slots).toContain('token:en-heat');
   }
  });
  it('keeps the labelled context objects unobstructed in systems and comparison beat five',()=>{

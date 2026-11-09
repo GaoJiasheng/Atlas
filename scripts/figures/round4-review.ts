@@ -137,6 +137,6 @@ for(const [row,e] of entries.entries()) {
 const dark=await sharp({create:{width:420,height:690,channels:3,background:'#1f2124'}}).png().toBuffer();
 await sharp({create:{width:840,height:690,channels:3,background:'#e9e4d8'}})
   .composite([{input:dark,left:420,top:0},...composites]).png().toFile(`${dir}/contact-sheet-420.png`);
-writeFileSync('public/illustrations/round4-manifest.jsonl',records.map(r=>JSON.stringify(r)).join('\n')+'\n');
+writeFileSync('scripts/figures/round4-manifest.jsonl',records.map(r=>JSON.stringify(r)).join('\n')+'\n');
 writeFileSync(`${dir}/audit.json`,JSON.stringify(records,null,2)+'\n');
 console.log(records.map(r=>`${r.file}: ${r.bytes} bytes; changed ${r.masterEditedPixels} master pixels; max alpha encoding delta ${r.maxExportAlphaError}`).join('\n'));

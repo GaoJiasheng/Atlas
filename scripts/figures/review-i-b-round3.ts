@@ -65,7 +65,7 @@ for(const id of [ids[0]!,ids[2]!]){
 }
 await sharp({create:{width:840,height:top,channels:3,background:'#e9e4d8'}}).composite(compact).png().toFile(`${out}/contact-sheet-420.png`);
 writeFileSync(`${out}/sizes.json`,JSON.stringify(sizes,null,2)+'\n');console.log(out);
-const manifest=readFileSync('public/illustrations/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s));
+const manifest=readFileSync('scripts/figures/b-review-manifest.jsonl','utf8').trim().split('\n').map(s=>JSON.parse(s));
 for(const item of sizes){
  const row=manifest.find(r=>`public/illustrations/${r.file}`===item.file);
  assert(row&&row.checks.length>=3&&row.checks.length<=6,'required checklist');

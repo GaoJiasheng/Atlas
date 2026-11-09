@@ -102,7 +102,7 @@ export async function buildOrganelles(parts){
  // Roll continuously from the basal membrane to the thickened visible edge.
  add('animal-membrane',[boundary(animal,[[.963,-.008],[.986,-.0071],[1,-.005],[1,.0045],[.993,.007],[.978,.008],[.963,.007],[.957,.0045],[.957,-.005],[.963,-.008]],[.1,.1,0])],'tissue','token:neutral',
   rim(animal,[.1,.1,0],.978,.008,0));
- const gel=shrink(animal,.953),animalRegions=[relief(clipX(gel,-.004,true),.0042,[.1,.1,-.0037],'token:bone'),relief(clipX(gel,-.004,false),.0042,[.1,.1,-.0037],'token:bone',[ellipse(.0124,.0104,.015,0)]),relief(ellipse(.0124,.0104,.015,0),.0004,[.1,.1,-.0065],'token:bone')];
+ const gel=shrink(animal,.953),animalRegions=[relief(clipX(gel,-.004,true),.0042,[.1,.1,-.0037],'token:seedling-pale'),relief(clipX(gel,-.004,false),.0042,[.1,.1,-.0037],'token:seedling-pale',[ellipse(.0124,.0104,.015,0)]),relief(ellipse(.0124,.0104,.015,0),.0004,[.1,.1,-.0065],'token:seedling-pale')];
  const animalRelief=[];
  for(const [x,y,a,s] of [[.065,.119,.7,.9],[.135,.123,-.8,1],[.073,.076,-.5,.85],[.126,.072,.2,1.1],[.105,.133,-.2,.75]])animalRelief.push(...mitochondrion(x,y,a,s));
  // Curved cisternae near the nucleus: flattened membranes with unequal lengths.
@@ -128,7 +128,7 @@ export async function buildOrganelles(parts){
  const vac=boundary(vacOutline,[[0,-.020],[.4,-.019],[.8,-.017],[.96,-.012],[1,-.003],[.98,.007],[.86,.014],[.60,.018],[.27,.0195],[0,.020]],[-.1,.12,0]);
  add('plant-vacuole',[vac],'tissue','token:cold');
  // Basal cytoplasm has a true opening for the nucleus and an empty vacuole lumen.
- const pg=shrink(plant,.911),plantRegions=[relief(clipX(pg,.066,false),.0362,[-.1,.12,-.0018],'token:bone'),relief(clipX(pg,.066,true),.0362,[-.1,.12,-.0018],'token:bone',[shrink(vacOutline,1.025),ellipse(.0073,.0063,-.0645,0)]),relief(ellipse(.0073,.0063,-.0645,0),.0259,[-.1,.12,-.0072],'token:bone')];
+ const pg=shrink(plant,.911),plantRegions=[relief(clipX(pg,.066,false),.0362,[-.1,.12,-.0018],'token:seedling-pale'),relief(clipX(pg,.066,true),.0362,[-.1,.12,-.0018],'token:seedling-pale',[shrink(vacOutline,1.025),ellipse(.0073,.0063,-.0645,0)]),relief(ellipse(.0073,.0063,-.0645,0),.0259,[-.1,.12,-.0072],'token:seedling-pale')];
  const plantCyt=[];
  // These mitochondria inhabit peripheral cytoplasm, independent of chloroplasts.
  for(const [x,y,a,s] of [[-.151,.14,1.2,.65],[-.05,.136,-1,.6],[-.121,.086,.1,.55]]){

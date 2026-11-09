@@ -29,8 +29,8 @@ const records=entries.map(e=>{
  return {slug:e.slug,kind:'figure',file:`figures/${e.id}.webp`,chapterIdea:e.caption.en,subject:e.alt.en,method:e.method,checks,tries:3,verifiedAt:'2026-11-09',...s,id:undefined,keySpans420:keySpans420[e.id],requiresNoInvert:false,sources:e.slug==='warring-states'?['src/content/topics/warring-states/data/SOURCES.md']:[],alt:e.alt,caption:e.caption,previews:{directory:`${PREVIEW}/final`,paper420:`${e.id}-paper-with-A-420.png`,cinema420:`${e.id}-cinema-with-A-420.png`,paper2x:`${e.id}-paper-with-A-840.png`,cinema2x:`${e.id}-cinema-with-A-840.png`}};
 });
 const lines=records.map(r=>JSON.stringify(r));
-writeFileSync('public/illustrations/round3-manifest.jsonl',lines.join('\n')+'\n');
+writeFileSync('scripts/figures/round3-manifest.jsonl',lines.join('\n')+'\n');
 const ids=new Set(records.map(r=>r.file));
-const kept=readFileSync('public/illustrations/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(line=>!ids.has((JSON.parse(line) as {file:string}).file));
-writeFileSync('public/illustrations/redo-cd-manifest.jsonl',[...kept,...lines].join('\n')+'\n');
+const kept=readFileSync('scripts/figures/redo-cd-manifest.jsonl','utf8').trim().split('\n').filter(line=>!ids.has((JSON.parse(line) as {file:string}).file));
+writeFileSync('scripts/figures/redo-cd-manifest.jsonl',[...kept,...lines].join('\n')+'\n');
 console.log(`Wrote five six-item checklists; preserved ${kept.length} existing records.`);

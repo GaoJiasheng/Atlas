@@ -12,12 +12,14 @@ const chapters = readdirSync('src/content/topics/cells/chapters').map(f => JSON.
 
 describe('cells polish: microscope fields and authored beats', () => {
   it('keeps target arithmetic while replacing the repeated rectangle with staggered irregular cells', () => {
-    expect(onion.features.filter(f => f.role === 'wall')).toHaveLength(9);
-    expect(onion.features.filter(f => f.role === 'nucleus')).toHaveLength(9);
+    expect(onion.features.filter(f => f.role === 'wall')).toHaveLength(24);
+    expect(onion.features.filter(f => f.role === 'nucleus')).toHaveLength(24);
     expect(onion.features.some(f => f.role === 'chloroplast')).toBe(false);
     const walls = onion.features.filter(f => f.role === 'wall');
     const widths = walls.map(f => Math.max(...f.pointsUm!.map(p => p[0])) - Math.min(...f.pointsUm!.map(p => p[0])));
-    expect(new Set(widths).size).toBeGreaterThan(3);
+    expect(new Set(widths).size).toBeGreaterThan(12);
+    const heights = walls.map(f => Math.max(...f.pointsUm!.map(p => p[1])) - Math.min(...f.pointsUm!.map(p => p[1])));
+    expect(Math.max(...heights) - Math.min(...heights)).toBeGreaterThan(15);
     expect(walls.every(f => f.pointsUm!.length > 8)).toBe(true);
     expect(onion.features.find(f => f.id === 'onion-nucleus')!.atUm).toEqual([200, 0, 0]);
     expect(solveMicroscope(m, values)['target-u']).toBe(0);
@@ -28,7 +30,7 @@ describe('cells polish: microscope fields and authored beats', () => {
   it('stays under the finite feature budget and keeps the whole low-power field populated', () => {
     const nx = onion.tileRange.x[1] - onion.tileRange.x[0] + 1;
     const ny = onion.tileRange.y[1] - onion.tileRange.y[0] + 1;
-    expect(nx * ny * onion.features.length).toBe(1755);
+    expect(nx * ny * onion.features.length).toBe(2016);
     expect(nx * ny * onion.features.length).toBeLessThanOrEqual(2048);
     for (const x of [-1000, 0, 1000]) for (const y of [-1000, 0, 1000]) {
       const features = microscopeFeatures(m, { ...values, objective: 4, 'slide-x': x, 'slide-y': y });

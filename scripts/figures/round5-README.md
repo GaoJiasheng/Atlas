@@ -24,7 +24,7 @@ the generic 40px teaching-feature target. Inversion is appropriate: graphite
 shading describes relief, not a physical illumination state.
 
 Six manually inspected acceptance checks ship in
-`public/illustrations/round5-manifest.jsonl`. Offline paper/cinema proofs,
+`scripts/figures/round5-manifest.jsonl`. Offline paper/cinema proofs,
 420/840px views, native-4× before/after crops and lossless-master/export
 comparisons are in `/private/tmp/atlas-ia-round5`. No browser or desktop is used.
 

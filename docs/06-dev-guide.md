@@ -609,7 +609,7 @@ UI：左 PLATE 显示现今国形、上下文/日期/成员数，C 显示基准�
 
 可选 `componentsComplete` 必须伴随 components；分项和不得超过总数，`true` 只用于 `reported` 且和必须相等。不完整分项不推导“其余”记录，约数与下界估计不合成新总量。同一事件不能兼具 impacts 与旧 casualties。EventInspector 在摘要后常显每条定义、静态中性 Counter、scope、来源日期与 SourceRefs，独立估计逐条画，不进 CounterVersus。Counter 的可选 `valueLabel` 只替换数字文案（如 `More than 70,000 / 超过70,000`），不改图标刻度或算法；无此属性时旧显示逐字不变。分项保持作者顺序，非完整表有双语提示；具体“四国”范围由内容写在 scope。`__atlas.engine.impacts(eventId)` 返回已校验记录，未知事件返回 `[]`。没有新增选择或 URL 状态。合成 fixture 与 E-PH1 共用 `sample-science-layers`，其测试估计不作历史事实。
 
-**同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
+**同址事件的显示偏移**：`events.json` 可选 `displayOffset: [x, y]`（CSS px，右／下为正，每轴 −96…96）。它只移动事件／地点标记、脉冲、引线锚点及 44 px 点击目标，全图视角下偏移按缩放收窄（`displayOffsetScale`：map zoom ≥ 4.2 为原值，≤ 2.5 为 0.68 倍，保证 9 点圆环的相邻点中心距仍 > 44 px）；偏移后的圆点画一条 hairline 腿连回原坐标（`displayLeg`，离锚点留 6 px），读者看得出它属于哪个地点；`at`、地理包围盒和镜头取景仍使用原始来源坐标。只用于拆开重叠点，并在主题 `data/SOURCES.md` 记录确定性排布规则；显示偏移不声称事件发生在另一地理位置。引擎选择偏移后最近的标记，未配置时位置不变。单测见 `tests/time-scene/event-display.test.ts`。
 ### 任务地点与非战争呈现（missions）
 
 默认主题保持原有地图、统计、参与卡行为。可在 `topic.yaml` opt-in：

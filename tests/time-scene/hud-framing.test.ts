@@ -140,7 +140,7 @@ describe('TimeScene HUD framing lifecycle', () => {
     const handlers = new Map<string, (e: object) => void>();
     const map = {
       on: vi.fn((event: string, fn: (e: object) => void) => handlers.set(event, fn)), off: vi.fn(),
-      isMoving: () => false, getPadding: () => current,
+      isMoving: () => false, getPadding: () => current, getZoom: vi.fn(() => 5),
       easeTo: vi.fn((o: { padding: typeof zero }) => { current = o.padding; }),
       jumpTo: vi.fn((o: { padding: typeof zero }) => { current = o.padding; }),
       unproject: vi.fn(([x, y]: [number, number]) => ({ lng: x / 10, lat: y / 10 })),
@@ -200,6 +200,22 @@ describe('TimeScene HUD framing lifecycle', () => {
     s.handlers.get('wheel')!({});
     s.free(250, 0, 850, 700); s.settle();
     expect(s.map.easeTo).not.toHaveBeenCalled();
+  });
+
+  it('keeps the authored zoom after a pan when the map settled above its goal (dinosaur-earth: 1.1 must not become 1.6)', () => {
+    const s = setup();
+    s.free(262, 0, 838, 676);
+    s.settle();
+    const t = s.framing.target(authored);
+    expect(t.zoom).toBeLessThan(authored.zoom);
+    const floored = t.zoom + 0.6;
+    s.map.getZoom = vi.fn(() => floored);
+    s.handlers.get('moveend')!({});
+    s.handlers.get('movestart')!({ originalEvent: {} });
+    s.handlers.get('moveend')!({});
+    expect(s.framing.storedZoom(floored)).toBe(authored.zoom);
+    // A real zoom still converts through the shift.
+    expect(s.framing.storedZoom(t.zoom + 1)).toBeCloseTo(authored.zoom + 1, 1);
   });
 
   it('writes back zoom in authored units', () => {

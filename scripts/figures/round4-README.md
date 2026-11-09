@@ -38,7 +38,7 @@ error at most 0.245/255. Neither figure needs an inversion exception: graphite
 tone models surface shading, not an illumination state.
 
 Six manually inspected checks per figure are in
-`public/illustrations/round4-manifest.jsonl`. The selected final proofs and
+`scripts/figures/round4-manifest.jsonl`. The selected final proofs and
 audit are in `/private/tmp/atlas-ia-round4/final`, including
 `contact-sheet-420.png`, both themes at 420/840px, native-2× local details and
 lossless-master/WebP comparisons. All checks were inspected in both themes.

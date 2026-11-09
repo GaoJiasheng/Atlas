@@ -36,7 +36,7 @@ import { t as translate, tx, withBase } from '../../../../i18n';
 import type { TimeSceneExt } from '../../index';
 import { entityBlocAt, type TimeModel } from '../../lib/model';
 import type { SceneEvent } from '../../schema';
-import { displayLeg, eventAtDisplayPoint, type DisplayOffset } from '../../lib/event-display';
+import { displayLeg, displayOffsetScale, eventAtDisplayPoint, scaledDisplayOffset, type DisplayOffset } from '../../lib/event-display';
 import { sideAt, warStatusAt } from '../../lib/bloc';
 import { blocLabel, entityDated, entityWord } from '../../lib/blocLabels';
 import type { BasemapOptions, BlocLabels, DatedLayerDef, EntityStrings } from '../../../../content/schema/topic';
@@ -684,12 +684,16 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- HTML marks: hollow squares, siege rings, site diamonds ---------- */
   const marks = new Map<string, Marker>();
   let marksSig = '';
+  let marksOffsetScale = 1;
+  const offsetAtZoom = (offset: DisplayOffset | undefined): DisplayOffset => (offset ? scaledDisplayOffset(offset, displayOffsetScale(map.getZoom())) : [0, 0]);
   const updateMarks = (frame: Frame, on: Set<string>, hl: Set<string>, hlSig: string) => {
     const battles = on.has('battles');
     const sitesOn = on.has('sites');
     const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}|${tokens.ink}|${tokens.signal}|${tokens.paper}`;
-    if (sig === marksSig) return;
+    const offsetScale = displayOffsetScale(map.getZoom());
+    if (sig === marksSig && offsetScale === marksOffsetScale) return;
     marksSig = sig;
+    marksOffsetScale = offsetScale;
     const want = new Map<string, { at: LngLat; className: string; size: number; active: boolean; hl: boolean; color?: string; displayOffset?: DisplayOffset; ring?: { r: number; dot: number; stroke: string; fill: string; width: number; opacity: number } }>();
     if (battles) {
       for (const ef of frame.events) {
@@ -731,7 +735,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     for (const [key, m] of want) {
       const id = key.slice(key.indexOf(':') + 1);
       const event = model.events.find((entry) => entry.event.id === id)?.event ?? model.sites.find((entry) => entry.id === id);
-      m.displayOffset = event?.displayOffset;
+      m.displayOffset = event?.displayOffset && scaledDisplayOffset(event.displayOffset, offsetScale);
       let marker = marks.get(key);
       if (!marker) {
         const el = document.createElement('div');
@@ -741,6 +745,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         el.appendChild(body);
         marker = new Marker({ element: el, anchor: 'center', offset: m.displayOffset ? [...m.displayOffset] : [0, 0] }).setLngLat(m.at).addTo(map);
         marks.set(key, marker);
+      } else if (m.displayOffset) {
+        marker.setOffset([...m.displayOffset]);
       }
       const el = marker.getElement();
       if (m.ring) {
@@ -769,7 +775,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     el.className = SQUARE_KINDS.has(e.kind) ? 'ts-pulse ts-pulse--square' : 'ts-pulse';
     el.style.setProperty('--ts-color', eventColor(e, en.start));
     el.style.setProperty('--ts-size', `${(3 + 2 * e.importance) * 2}px`);
-    const marker = new Marker({ element: el, offset: e.displayOffset ? [...e.displayOffset] : [0, 0] }).setLngLat(e.at).addTo(map);
+    const marker = new Marker({ element: el, offset: [...offsetAtZoom(e.displayOffset)] }).setLngLat(e.at).addTo(map);
     const timer = setTimeout(() => {
       marker.remove();
       pulseTimers.delete(timer);
@@ -1085,7 +1091,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     ];
     // Coordinate-free records (docs/60) have no marker to hit.
     const placed = events.filter((ev): ev is typeof ev & { at: LngLat } => ev.at !== undefined);
-    const eventId = eventAtDisplayPoint(placed, (at) => map.project(at), e.point);
+    const eventId = eventAtDisplayPoint(placed, (at) => map.project(at), e.point, 22, displayOffsetScale(map.getZoom()));
     if (eventId) { options.onSelectEvent(eventId); return; }
     const candidates: { id: string; distance: number }[] = [];
     const active = datedLayers.filter((layer) => on.has(layer.id) && layer.def.catalogue);
@@ -1259,6 +1265,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.on('move', () => {
     reorientArrows();
     updateScale();
+    if (displayOffsetScale(map.getZoom()) !== marksOffsetScale) requestRender();
   });
   map.on('render', () => {
     leaders.update();
