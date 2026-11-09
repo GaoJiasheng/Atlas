@@ -148,6 +148,8 @@ type Pick5 = Pick<SpaceSceneExt, 'view' | 'explode' | 'run' | 'cutaway' | 'part'
 
 const sameJson = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 const ownBeats = (c: Chapter | undefined): readonly SpaceBeatSpec[] => (c?.state as SpaceChapterState | undefined)?.beats ?? [];
+let tableIndexModule: Promise<typeof import('./lib/table-index')> | null = null;
+const loadTableIndex = () => (tableIndexModule ??= import('./lib/table-index'));
 
 function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: EngineViewProps & { orbitRuntime: typeof import('./lib/sim/orbit-session') | null; testHooks?: typeof import('./test-hooks').createSpaceTestHooks }) {
   const file = (data as SpaceSceneData).parts;
@@ -176,6 +178,13 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
     beat: st.beat,
     sim: st.sim,
   }));
+
+  const tableSim = file.sim?.kind === 'table';
+  useEffect(() => {
+    if (!tableSim) return;
+    const id = window.setTimeout(() => void loadTableIndex(), 0);
+    return () => window.clearTimeout(id);
+  }, [tableSim]);
 
   const microscopeOn = file.sim?.microscope && resolveSimValues(file.sim, s.sim)[file.sim.microscope.controls.enabled] === true;
   useEffect(() => {
@@ -349,11 +358,17 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
   const selectIndexedPart = useCallback((id: string) => {
     const st = store.getState(), state = chapters.find(c => c.id === st.chapter)?.state as SpaceChapterState | undefined;
     if (file.sim?.kind === 'table') {
-      // The table index evaluates the simulation, so load it only when a table topic's index is used.
-      void import('./lib/table-index').then(({ tableIndexBeat }) => {
+      // The table index evaluates the simulation, so it stays out of the first frame (prefetched after
+      // mount). The tap selects at once; the beat that shows the part follows when the module is in.
+      store.getState().patch({ part: id });
+      void loadTableIndex().then(({ tableIndexBeat }) => {
+        const now = store.getState();
+        if (now.chapter !== st.chapter || now.part !== id) return;
         const beat = tableIndexBeat(state, file, id);
-        if (st.chapter && beat !== null) goToBeat(st.chapter, beat);
-        store.getState().patch({ part: id });
+        if (st.chapter && beat !== null) {
+          goToBeat(st.chapter, beat);
+          store.getState().patch({ part: id });
+        }
       });
       return;
     }
