@@ -22,7 +22,7 @@
           23.78,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             5.03,
@@ -72,7 +72,7 @@
             8.1,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               5.05,
@@ -104,7 +104,7 @@
             23.3,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               5.05,
@@ -136,7 +136,7 @@
             41.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               5.05,
@@ -161,7 +161,11 @@
           ],
           "segments": 64
         }
-      ]
+      ],
+      "mesh": "sic-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sic-fuel",
@@ -185,11 +189,10 @@
           16,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "radius": 4.6,
         "length": 11,
-        "headRatio": 0.35,
-        "tint": "token:holder-4"
+        "headRatio": 0.35
       },
       "explode": {
         "dir": [
@@ -203,7 +206,11 @@
         "f1-centre",
         "f1-outer"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sic-fuel",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sic-oxidiser",
@@ -217,8 +224,8 @@
         "zh": "携带燃烧所需的氧。"
       },
       "detail": {
-        "en": "The upper first-stage tank supplies liquid oxygen as oxidiser. In the cutaway, its feed line passes beside the kerosene tank. Detailed pipework is left out. [S25, S90]",
-        "zh": "第一级上方储箱供应液氧氧化剂。剖面把供氧线画在煤油箱旁，省略详细管路。[S25, S90]"
+        "en": "The upper first-stage tank supplies liquid oxygen as oxidiser. In the cutaway, its five feed lines run down through the kerosene tank to the engines. Smaller pipework is left out. [S25, S90]",
+        "zh": "第一级上方储箱供应液氧氧化剂。剖面中，五根供氧管穿过煤油箱通往发动机，省略较细的管路。[S25, S90]"
       },
       "primitive": {
         "kind": "vessel",
@@ -227,11 +234,10 @@
           33,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "radius": 4.6,
         "length": 13,
-        "headRatio": 0.35,
-        "tint": "token:holder-2"
+        "headRatio": 0.35
       },
       "explode": {
         "dir": [
@@ -245,7 +251,11 @@
         "f1-centre",
         "f1-outer"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sic-oxidiser",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "f1-centre",
@@ -269,7 +279,7 @@
           2.75,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1.85,
@@ -355,7 +365,7 @@
             5.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.55,
             0.55,
@@ -369,7 +379,7 @@
             1.2,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             1.68,
             0.07
@@ -387,7 +397,7 @@
             4.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.35,
@@ -408,7 +418,11 @@
           "radius": 0.14,
           "bendRadius": 0.28
         }
-      ]
+      ],
+      "mesh": "f1-centre",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "f1-outer",
@@ -432,7 +446,7 @@
           2.75,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1.85,
@@ -518,7 +532,7 @@
             5.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.55,
             0.55,
@@ -532,7 +546,7 @@
             1.2,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             1.68,
             0.07
@@ -550,7 +564,7 @@
             4.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.35,
@@ -580,6 +594,10 @@
           0
         ],
         "radius": 3.8
+      },
+      "mesh": "f1-outer",
+      "material": {
+        "color": "#ffffff"
       }
     },
     {
@@ -604,7 +622,7 @@
           4.8,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "shape": [
           [
             0,
@@ -652,7 +670,11 @@
         ],
         "radius": 5.03
       },
-      "clip": false
+      "clip": false,
+      "mesh": "sic-fins",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sii-shell",
@@ -676,7 +698,7 @@
           54.48,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             5.03,
@@ -726,7 +748,7 @@
             46,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               5.05,
@@ -758,7 +780,7 @@
             66.7,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               5.05,
@@ -783,7 +805,11 @@
           ],
           "segments": 64
         }
-      ]
+      ],
+      "mesh": "sii-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sii-fuel",
@@ -797,8 +823,8 @@
         "zh": "为第二级储存液氢。"
       },
       "detail": {
-        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, at y = 53.5 m in the launch model, with no overlapping tank ends. [S25, S90]",
-        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，位于发射模型中y=53.5米处，两箱封头不重叠。[S25, S90]"
+        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, curving up from its rim at y = 50.6 m in the launch model, with no overlapping tank ends. [S25, S90]",
+        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，从发射模型中y=50.6米处的边缘向上拱起，两箱封头不重叠。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -807,7 +833,7 @@
           59,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0,
@@ -834,8 +860,7 @@
             6.2
           ]
         ],
-        "segments": 64,
-        "tint": "token:holder-4"
+        "segments": 64
       },
       "explode": {
         "dir": [
@@ -850,7 +875,11 @@
         "j2-centre",
         "j2-outer"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sii-fuel",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sii-oxidiser",
@@ -874,7 +903,7 @@
           49,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0,
@@ -901,8 +930,7 @@
             4.46
           ]
         ],
-        "segments": 64,
-        "tint": "token:holder-2"
+        "segments": 64
       },
       "explode": {
         "dir": [
@@ -917,7 +945,11 @@
         "j2-centre",
         "j2-outer"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sii-oxidiser",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "j2-centre",
@@ -941,7 +973,7 @@
           44,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1,
@@ -1027,14 +1059,18 @@
             45.7,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.32,
             0.32,
             0.6
           ]
         }
-      ]
+      ],
+      "mesh": "j2-centre",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "j2-outer",
@@ -1058,7 +1094,7 @@
           44,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1,
@@ -1153,14 +1189,18 @@
             45.7,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.32,
             0.32,
             0.6
           ]
         }
-      ]
+      ],
+      "mesh": "j2-outer",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sivb-shell",
@@ -1184,7 +1224,7 @@
           78.1,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             3.305,
@@ -1233,7 +1273,7 @@
             69.2,
             0
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "profile": [
             [
               5.03,
@@ -1265,7 +1305,7 @@
             84.5,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               3.325,
@@ -1290,7 +1330,11 @@
           ],
           "segments": 64
         }
-      ]
+      ],
+      "mesh": "sivb-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sivb-fuel",
@@ -1304,8 +1348,8 @@
         "zh": "储存入轨和出发所用的液氢。"
       },
       "detail": {
-        "en": "A shared divider, at y = 75 m in the model, separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
-        "zh": "共用底板位于模型中y=75米处，把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
+        "en": "A shared divider, curving up from its rim at y = 73.5 m in the model, separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
+        "zh": "共用底板从模型中y=73.5米处的边缘向上拱起，把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1314,7 +1358,7 @@
           80,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0,
@@ -1337,8 +1381,7 @@
             3.4
           ]
         ],
-        "segments": 64,
-        "tint": "token:holder-4"
+        "segments": 64
       },
       "explode": {
         "dir": [
@@ -1352,7 +1395,11 @@
         "sivb-oxidiser",
         "sivb-engine"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sivb-fuel",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sivb-oxidiser",
@@ -1376,7 +1423,7 @@
           72,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0,
@@ -1403,8 +1450,7 @@
             2.96
           ]
         ],
-        "segments": 64,
-        "tint": "token:holder-2"
+        "segments": 64
       },
       "explode": {
         "dir": [
@@ -1418,7 +1464,11 @@
         "sivb-fuel",
         "sivb-engine"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sivb-oxidiser",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sivb-engine",
@@ -1442,7 +1492,7 @@
           68.8,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1,
@@ -1519,7 +1569,11 @@
         "sivb-fuel",
         "sivb-oxidiser"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sivb-engine",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "iu-ring",
@@ -1533,8 +1587,8 @@
         "zh": "测量运动，引导火箭。"
       },
       "detail": {
-        "en": "This ring sits between the third stage and the spacecraft adapter. It holds guidance and control equipment, shown as a few simplified modules. It provides control rather than another main propulsion stage. [S25, S90]",
-        "zh": "这个环位于第三级与飞船适配器之间，装有制导控制设备，模型用几个简化模块表示。它负责控制，不是另一个主推进级。[S25, S90]"
+        "en": "This ring sits between the third stage and the spacecraft adapter. It holds guidance and control equipment in racks around the inside of the ring. It provides control rather than another main propulsion stage. [S25, S90]",
+        "zh": "这个环位于第三级与飞船适配器之间，环的内侧排着装制导控制设备的机架。它负责控制，不是另一个主推进级。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1543,7 +1597,7 @@
           85.13,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             3.305,
@@ -1589,7 +1643,7 @@
             85.13,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.45,
             0.5,
@@ -1604,7 +1658,7 @@
             85.13,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.45,
             0.5,
@@ -1612,7 +1666,11 @@
           ],
           "bevel": 0.025
         }
-      ]
+      ],
+      "mesh": "iu-ring",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sla-shell",
@@ -1636,7 +1694,7 @@
           89.795,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             3.305,
@@ -1685,7 +1743,7 @@
             89.795,
             0
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "profile": [
             [
               3.305,
@@ -1723,7 +1781,7 @@
             89.795,
             0
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "profile": [
             [
               3.305,
@@ -1761,7 +1819,7 @@
             89.795,
             0
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "profile": [
             [
               3.305,
@@ -1792,7 +1850,11 @@
             0
           ]
         }
-      ]
+      ],
+      "mesh": "sla-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "cm-shell",
@@ -1813,10 +1875,10 @@
         "kind": "lathe",
         "at": [
           0,
-          102.5,
+          100,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             1.95,
@@ -1862,10 +1924,10 @@
           "kind": "extrude",
           "at": [
             -0.9749213004483983,
-            102.75,
+            100.25,
             0.5183748505760878
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.13,
@@ -1896,10 +1958,10 @@
           "kind": "extrude",
           "at": [
             -0.48403480791293957,
-            102.75,
+            100.25,
             0.9924184261219968
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.13,
@@ -1930,10 +1992,10 @@
           "kind": "extrude",
           "at": [
             0,
-            102.15,
+            99.65,
             1.4061666666666637
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.13,
@@ -1964,10 +2026,10 @@
           "kind": "extrude",
           "at": [
             0.48403480791293957,
-            102.75,
+            100.25,
             0.9924184261219968
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.13,
@@ -1998,10 +2060,10 @@
           "kind": "extrude",
           "at": [
             0.9749213004483983,
-            102.75,
+            100.25,
             0.5183748505760878
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.13,
@@ -2028,7 +2090,11 @@
             0
           ]
         }
-      ]
+      ],
+      "mesh": "cm-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "cm-heatshield",
@@ -2049,7 +2115,7 @@
         "kind": "lathe",
         "at": [
           0,
-          101,
+          98.5,
           0
         ],
         "color": "abrasive",
@@ -2115,10 +2181,10 @@
         "kind": "bevelBox",
         "at": [
           0,
-          101.85,
+          99.35,
           0.25
         ],
-        "color": "fabric",
+        "color": "#ffffff",
         "size": [
           0.53,
           0.16,
@@ -2157,10 +2223,10 @@
           "kind": "bevelBox",
           "at": [
             0,
-            102.18,
+            99.68,
             -0.3
           ],
-          "color": "fabric",
+          "color": "#ffffff",
           "size": [
             0.53,
             0.75,
@@ -2174,7 +2240,11 @@
           ]
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "cm-couches",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "cm-probe",
@@ -2188,17 +2258,17 @@
         "zh": "引导两舱进入对接位置。"
       },
       "detail": {
-        "en": "The command-module probe meets the lunar module’s docking port. In the launch model its tip is at y = 104.8 m, and docking poses bring it to the port at y = 92.5 m. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
-        "zh": "指令舱探杆接上登月舱对接口。在发射模型中，探杆尖端位于y=104.8米；对接姿态把它送到y=92.5米处的接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
+        "en": "The command-module probe meets the lunar module’s docking port. In the launch model its tip is at y = 102.3 m, and docking poses bring it to the port at y = 92.5 m. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
+        "zh": "指令舱探杆接上登月舱对接口。在发射模型中，探杆尖端位于y=102.3米；对接姿态把它送到y=92.5米处的接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
       },
       "primitive": {
         "kind": "tube",
         "at": [
           0,
-          104.2,
+          101.7,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "path": [
           [
             0,
@@ -2232,17 +2302,21 @@
           "kind": "cone",
           "at": [
             0,
-            104.71,
+            102.21,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.16,
             0.18
           ]
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "cm-probe",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sm-shell",
@@ -2256,37 +2330,37 @@
         "zh": "承载推进和支持设备。"
       },
       "detail": {
-        "en": "The cylindrical service module stays attached to the command module as they turn and dock. It has no solar wings. Four small control clusters and radiator strips appear outside; nozzle details and pipework are simplified. [S25, S90]",
-        "zh": "圆柱形服务舱在转身和对接时与指令舱保持连接，没有太阳翼。外部有四处小型控制组件和散热条，喷嘴细节和管路简化。[S25, S90]"
+        "en": "The cylindrical service module stays attached to the command module as they turn and dock. It has no solar wings. Four thruster clusters, radiator panels and a dish antenna appear outside; pipework is simplified. [S25, S90]",
+        "zh": "圆柱形服务舱在转身和对接时与指令舱保持连接，没有太阳翼。外部有四组小推力器、散热板和一副碟形天线，管路简化。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
         "at": [
           0,
-          97.5,
+          96.25,
           0
         ],
-        "color": "enamel",
+        "color": "#ffffff",
         "profile": [
           [
             1.95,
-            -3.5
+            -2.25
           ],
           [
             1.95,
-            3.5
+            2.25
           ],
           [
             1.8699999999999999,
-            3.5
+            2.25
           ],
           [
             1.8699999999999999,
-            -3.5
+            -2.25
           ],
           [
             1.95,
-            -3.5
+            -2.25
           ]
         ],
         "segments": 64
@@ -2314,7 +2388,7 @@
             100.7,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               1.97,
@@ -2346,7 +2420,7 @@
             94.3,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "profile": [
             [
               1.97,
@@ -2378,7 +2452,7 @@
             99.2,
             2
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.3,
             0.35,
@@ -2393,7 +2467,7 @@
             96.6,
             1.96
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.4,
             1.8,
@@ -2413,7 +2487,7 @@
             99.2,
             1.2246467991473532e-16
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.3,
             0.35,
@@ -2428,7 +2502,7 @@
             96.6,
             1.2001538631644062e-16
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.4,
             1.8,
@@ -2448,7 +2522,7 @@
             99.2,
             -2
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.3,
             0.35,
@@ -2463,7 +2537,7 @@
             96.6,
             -1.96
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.4,
             1.8,
@@ -2483,7 +2557,7 @@
             99.2,
             -3.6739403974420594e-16
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.3,
             0.35,
@@ -2498,7 +2572,7 @@
             96.6,
             -3.6004615894932183e-16
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.4,
             1.8,
@@ -2511,7 +2585,11 @@
             0
           ]
         }
-      ]
+      ],
+      "mesh": "sm-shell",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sm-tanks",
@@ -2525,17 +2603,17 @@
         "zh": "储存推进和乘员支持物资。"
       },
       "detail": {
-        "en": "These vessels hold supplies for the service engine and crew cabin. Only some tanks are shown. The tanks and their simplified feed layout move with the command and service modules. [S25, S90]",
-        "zh": "这些储罐储存服务发动机和乘员舱所需物资。模型只显示部分储罐，储罐和简化的供料布局随指令舱、服务舱一起移动。[S25, S90]"
+        "en": "These vessels hold supplies for the service engine and crew cabin. Four large propellant tanks, three fuel cells and the oxygen and hydrogen tanks sit in separate bays. They move with the command and service modules. [S25, S90]",
+        "zh": "这些储罐储存服务发动机和乘员舱所需物资。四个大推进剂储箱、三组燃料电池以及氧、氢储罐分装在不同舱位，随指令舱、服务舱一起移动。[S25, S90]"
       },
       "primitive": {
         "kind": "vessel",
         "at": [
           0.9,
-          97.6,
+          96.3,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "radius": 0.6,
         "length": 3.3,
         "headRatio": 0.5
@@ -2558,15 +2636,19 @@
           "kind": "vessel",
           "at": [
             -0.9,
-            97.6,
+            96.3,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "radius": 0.6,
           "length": 3.3,
           "headRatio": 0.5
         }
-      ]
+      ],
+      "mesh": "sm-tanks",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "sm-engine",
@@ -2587,10 +2669,10 @@
         "kind": "lathe",
         "at": [
           0,
-          94,
+          92.75,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             1.15,
@@ -2667,7 +2749,11 @@
         "sm-shell",
         "sm-tanks"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "sm-engine",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "les-tower",
@@ -2681,8 +2767,8 @@
         "zh": "发射紧急时能把乘员舱拉离火箭。"
       },
       "detail": {
-        "en": "A supporting frame and motor sit above the cabin. The tower’s top reaches the model’s 111 m height. By parking orbit, this system has separated. Emergency operation is not shown. [S25, S90]",
-        "zh": "支架和发动机位于乘员舱上方，顶端达到模型111米总高。进入停泊轨道时，这套系统已分离。画面不演示紧急操作。[S25, S90]"
+        "en": "A supporting frame and motor sit above the cabin. At launch, a cover over the cabin protects it and leaves with the tower. The tower’s top reaches the model’s 111 m height. By parking orbit, this system has separated. Emergency operation is not shown. [S25, S90]",
+        "zh": "支架和发动机位于乘员舱上方。发射时，一个罩子盖住乘员舱加以保护，并随逃逸塔一起离开。逃逸塔顶端达到模型111米总高。进入停泊轨道时，这套系统已分离。画面不演示紧急操作。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2691,7 +2777,7 @@
           104.35,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0.61,
@@ -2736,7 +2822,7 @@
             105.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.46,
@@ -2759,7 +2845,7 @@
             105.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.46,
@@ -2782,7 +2868,7 @@
             105.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.46,
@@ -2805,7 +2891,7 @@
             105.9,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.46,
@@ -2828,7 +2914,7 @@
             108.55,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.38,
             0.38,
@@ -2842,14 +2928,18 @@
             110.45,
             0
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.38,
             1.1
           ]
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "les-tower",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-descent",
@@ -2863,8 +2953,8 @@
         "zh": "让登月舱减速，并在月面支撑它。"
       },
       "detail": {
-        "en": "The octagonal stage carries four legs, a ladder and one descent engine. It stays on the Moon when the ascent stage leaves. Gold-coloured insulation and internal storage are simplified. [S26, S90]",
-        "zh": "八边形下降级装有四条腿、梯子和一台下降发动机，上升级离开后仍留在月面。金色隔热表面和内部储存设备简化。[S26, S90]"
+        "en": "The octagonal stage carries four legs, a ladder and one descent engine. It stays on the Moon when the ascent stage leaves. It is wrapped in crinkled gold and black insulation. The cutaway shows four propellant tanks around the engine; the wrinkles are drawn, not measured. [S26, S90]",
+        "zh": "八边形下降级装有四条腿、梯子和一台下降发动机，上升级离开后仍留在月面。它包着起皱的金色和黑色隔热层。剖视可见发动机周围的四个推进剂储箱；褶皱是画出来的，不是实测的。[S26, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -2873,7 +2963,7 @@
           88,
           0
         ],
-        "color": "brass",
+        "color": "#ffffff",
         "shape": [
           [
             1.9863409948992663,
@@ -2998,7 +3088,11 @@
         "lm-ladder",
         "lm-ascent"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "lm-descent",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-descent-engine",
@@ -3022,7 +3116,7 @@
           86.9,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0.72,
@@ -3098,7 +3192,11 @@
       "connects": [
         "lm-descent"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "lm-descent-engine",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-legs",
@@ -3112,8 +3210,8 @@
         "zh": "把载荷分散到四个足垫上。"
       },
       "detail": {
-        "en": "Each of the four legs has a main strut, two braces and a footpad. In the launch model the deployed pad bottoms sit at y = 85.6 m; the landed offset brings them to y = 0, one flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
-        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。在发射模型中，展开后的足垫底部在y=85.6米处；着陆偏移把它们移到y=0，落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
+        "en": "Each of the four legs has a main strut, two braces and a footpad. Three legs also carry a long probe under the footpad that touches the ground first; the ladder leg has none. In the launch model the deployed pad bottoms sit at y = 85.6 m; the landed offset brings them to y = 0, one flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
+        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。其中三条腿的足垫下还有一根长探针，会先碰到地面；带梯子的那条腿没有。在发射模型中，展开后的足垫底部在y=85.6米处；着陆偏移把它们移到y=0，落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3122,7 +3220,7 @@
           87.5,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "path": [
           [
             0,
@@ -3168,7 +3266,7 @@
             87.5,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.75,
@@ -3191,7 +3289,7 @@
             87.5,
             0
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.75,
@@ -3214,7 +3312,7 @@
             85.68,
             -2.25
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.46,
             0.46,
@@ -3222,7 +3320,11 @@
           ]
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "lm-legs",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-ascent",
@@ -3236,8 +3338,8 @@
         "zh": "搭载两名宇航员返回月球轨道。"
       },
       "detail": {
-        "en": "The angular cabin holds the crew, who work standing. Its front hatch, two windows and top docking port move with it. The model follows the broad NASA layout and leaves out antennas and detailed support equipment. [S26, S90]",
-        "zh": "有棱角的舱体容纳站立工作的乘员。前舱门、两扇窗和顶部对接口随它一起移动。模型依据NASA总体布局，省去天线和详细支持设备。[S26, S90]"
+        "en": "The angular cabin holds the crew, who work standing. Its front hatch, two windows, top docking port, radar dish, antennas and four thruster clusters move with it. The model follows the Apollo 11 lunar module, Eagle; detailed support equipment is simplified. [S26, S90]",
+        "zh": "有棱角的舱体容纳站立工作的乘员。前舱门、两扇窗、顶部对接口、雷达天线、其他天线和四组小推力器随它一起移动。模型依据阿波罗11号登月舱“鹰”号，详细支持设备简化。[S26, S90]"
       },
       "primitive": {
         "kind": "extrude",
@@ -3246,7 +3348,7 @@
           90.6,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "shape": [
           [
             -1.15,
@@ -3308,7 +3410,7 @@
             90.05,
             1.26
           ],
-          "color": "enamel",
+          "color": "#ffffff",
           "size": [
             0.81,
             0.81,
@@ -3323,7 +3425,7 @@
             90.5,
             -1.3
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             2.7,
             1.4,
@@ -3338,7 +3440,7 @@
             90.1,
             -0.15
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.48
           ],
@@ -3355,7 +3457,7 @@
             90.1,
             -0.15
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "size": [
             0.48
           ],
@@ -3365,7 +3467,11 @@
             1
           ]
         }
-      ]
+      ],
+      "mesh": "lm-ascent",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-ascent-engine",
@@ -3389,7 +3495,7 @@
           89,
           0
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "profile": [
           [
             0.43,
@@ -3465,7 +3571,11 @@
       "connects": [
         "lm-ascent"
       ],
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "lm-ascent-engine",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-windows",
@@ -3489,7 +3599,7 @@
           91.12,
           1.25
         ],
-        "color": "glass",
+        "color": "#ffffff",
         "shape": [
           [
             -0.37,
@@ -3527,7 +3637,7 @@
             91.12,
             1.25
           ],
-          "color": "glass",
+          "color": "#ffffff",
           "shape": [
             [
               -0.37,
@@ -3546,7 +3656,11 @@
           "bevel": 0.01
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "lm-windows",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-ladder",
@@ -3570,7 +3684,7 @@
           87,
           2.6
         ],
-        "color": "steel",
+        "color": "#ffffff",
         "path": [
           [
             -0.25,
@@ -3607,7 +3721,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               0.25,
@@ -3630,7 +3744,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3653,7 +3767,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3676,7 +3790,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3699,7 +3813,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3722,7 +3836,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3745,7 +3859,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3768,7 +3882,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3791,7 +3905,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3814,7 +3928,7 @@
             87,
             2.6
           ],
-          "color": "steel",
+          "color": "#ffffff",
           "path": [
             [
               -0.25,
@@ -3831,7 +3945,11 @@
           "bendRadius": 0.07
         }
       ],
-      "clip": false
+      "clip": false,
+      "mesh": "lm-ladder",
+      "material": {
+        "color": "#ffffff"
+      }
     },
     {
       "id": "lm-docking-port",
@@ -3989,24 +4107,24 @@
           "id": "fuel-1",
           "path": [
             [
-              0,
-              10,
-              0
+              -0.57,
+              8.913387939707807,
+              0.35
             ],
             [
-              0,
-              8,
-              0
+              -0.57,
+              7.8,
+              0.35
             ],
             [
-              0.22,
+              -0.78,
               6.2,
-              0
+              0.35
             ],
             [
-              0.22,
-              5.2,
-              0
+              -0.78,
+              4.662000000000001,
+              0.35
             ]
           ]
         },
@@ -4014,24 +4132,24 @@
           "id": "fuel-2",
           "path": [
             [
-              0,
-              10,
-              0
+              -0.57,
+              9.635123456066044,
+              -3.4499999999999997
             ],
             [
-              0,
-              8,
-              -3.04
+              -0.57,
+              7.8,
+              -3.4499999999999997
             ],
             [
-              0.22,
+              -0.78,
               6.2,
-              -3.8
+              -3.4499999999999997
             ],
             [
-              0.22,
-              5.2,
-              -3.8
+              -0.78,
+              4.662000000000001,
+              -3.4499999999999997
             ]
           ]
         },
@@ -4039,24 +4157,24 @@
           "id": "fuel-3",
           "path": [
             [
-              0,
-              10,
-              0
+              -3.4499999999999997,
+              9.635123456066044,
+              0.57
             ],
             [
-              -3.04,
-              8,
-              0
+              -3.4499999999999997,
+              7.8,
+              0.57
             ],
             [
-              -3.5799999999999996,
+              -3.4499999999999997,
               6.2,
-              0
+              0.78
             ],
             [
-              -3.5799999999999996,
-              5.2,
-              0
+              -3.4499999999999997,
+              4.662000000000001,
+              0.78
             ]
           ]
         },
@@ -4064,24 +4182,24 @@
           "id": "fuel-4",
           "path": [
             [
-              0,
-              10,
-              0
+              0.57,
+              9.635123456066044,
+              3.4499999999999997
             ],
             [
-              0,
-              8,
-              3.04
+              0.57,
+              7.8,
+              3.4499999999999997
             ],
             [
-              0.22,
+              0.78,
               6.2,
-              3.8
+              3.4499999999999997
             ],
             [
-              0.22,
-              5.2,
-              3.8
+              0.78,
+              4.662000000000001,
+              3.4499999999999997
             ]
           ]
         },
@@ -4089,24 +4207,24 @@
           "id": "fuel-5",
           "path": [
             [
-              0,
-              10,
-              0
+              3.4499999999999997,
+              9.635123456066044,
+              -0.5700000000000001
             ],
             [
-              3.04,
-              8,
-              0
+              3.4499999999999997,
+              7.8,
+              -0.5700000000000001
             ],
             [
-              4.02,
+              3.4499999999999997,
               6.2,
-              0
+              -0.7800000000000001
             ],
             [
-              4.02,
-              5.2,
-              0
+              3.4499999999999997,
+              4.662000000000001,
+              -0.7800000000000001
             ]
           ]
         }
@@ -4129,29 +4247,29 @@
           "id": "oxygen-1",
           "path": [
             [
-              4.2,
-              26,
+              0,
+              25.9,
               0
             ],
             [
-              4.74,
-              24.3,
+              0,
+              23.8,
               0
             ],
             [
-              4.74,
-              8.6,
+              0,
+              8,
               0
             ],
             [
-              -0.22,
-              7.3,
+              0.3,
+              6,
               0
             ],
             [
-              -0.22,
-              5.2,
-              0
+              0.77,
+              4.861800000000001,
+              0.05
             ]
           ]
         },
@@ -4159,29 +4277,29 @@
           "id": "oxygen-2",
           "path": [
             [
-              4.2,
-              26,
-              0
-            ],
-            [
-              4.74,
-              24.3,
-              0
-            ],
-            [
-              4.74,
-              8.6,
-              0
-            ],
-            [
-              -0.22,
-              7.3,
+              0,
+              25.9,
               -3.8
             ],
             [
-              -0.22,
-              5.2,
+              0,
+              23.8,
               -3.8
+            ],
+            [
+              0,
+              8,
+              -3.8
+            ],
+            [
+              0.3,
+              6,
+              -3.8
+            ],
+            [
+              0.77,
+              4.861800000000001,
+              -3.75
             ]
           ]
         },
@@ -4189,29 +4307,29 @@
           "id": "oxygen-3",
           "path": [
             [
-              4.2,
-              26,
+              -3.8,
+              25.9,
               0
             ],
             [
-              4.74,
-              24.3,
+              -3.8,
+              23.8,
               0
             ],
             [
-              4.74,
-              8.6,
+              -3.8,
+              8,
               0
             ],
             [
-              -4.02,
-              7.3,
-              0
+              -3.8,
+              6,
+              -0.3
             ],
             [
-              -4.02,
-              5.2,
-              0
+              -3.75,
+              4.861800000000001,
+              -0.77
             ]
           ]
         },
@@ -4219,29 +4337,29 @@
           "id": "oxygen-4",
           "path": [
             [
-              4.2,
-              26,
-              0
-            ],
-            [
-              4.74,
-              24.3,
-              0
-            ],
-            [
-              4.74,
-              8.6,
-              0
-            ],
-            [
-              -0.22,
-              7.3,
+              0,
+              25.9,
               3.8
             ],
             [
-              -0.22,
-              5.2,
+              0,
+              23.8,
               3.8
+            ],
+            [
+              0,
+              8,
+              3.8
+            ],
+            [
+              -0.3,
+              6,
+              3.8
+            ],
+            [
+              -0.77,
+              4.861800000000001,
+              3.75
             ]
           ]
         },
@@ -4249,29 +4367,29 @@
           "id": "oxygen-5",
           "path": [
             [
-              4.2,
-              26,
+              3.8,
+              25.9,
               0
             ],
             [
-              4.74,
-              24.3,
+              3.8,
+              23.8,
               0
             ],
             [
-              4.74,
-              8.6,
+              3.8,
+              8,
               0
             ],
             [
-              3.5799999999999996,
-              7.3,
-              0
+              3.8,
+              6,
+              0.3
             ],
             [
-              3.5799999999999996,
-              5.2,
-              0
+              3.75,
+              4.861800000000001,
+              0.77
             ]
           ]
         }
@@ -4778,7 +4896,7 @@
       "cm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -4800,7 +4918,7 @@
       "cm-heatshield": {
         "pivot": [
           0,
-          101,
+          98.5,
           0
         ],
         "rotation": [
@@ -4822,7 +4940,7 @@
       "cm-couches": {
         "pivot": [
           0,
-          101.85,
+          99.35,
           0.25
         ],
         "rotation": [
@@ -4844,7 +4962,7 @@
       "cm-probe": {
         "pivot": [
           0,
-          104.2,
+          101.7,
           0
         ],
         "rotation": [
@@ -4866,7 +4984,7 @@
       "sm-shell": {
         "pivot": [
           0,
-          97.5,
+          96.25,
           0
         ],
         "rotation": [
@@ -4888,7 +5006,7 @@
       "sm-tanks": {
         "pivot": [
           0.9,
-          97.6,
+          96.3,
           0
         ],
         "rotation": [
@@ -4910,7 +5028,7 @@
       "sm-engine": {
         "pivot": [
           0,
-          94,
+          92.75,
           0
         ],
         "rotation": [
@@ -5507,7 +5625,7 @@
       "cm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -5529,7 +5647,7 @@
       "cm-heatshield": {
         "pivot": [
           0,
-          101,
+          98.5,
           0
         ],
         "rotation": [
@@ -5551,7 +5669,7 @@
       "cm-couches": {
         "pivot": [
           0,
-          101.85,
+          99.35,
           0.25
         ],
         "rotation": [
@@ -5573,7 +5691,7 @@
       "cm-probe": {
         "pivot": [
           0,
-          104.2,
+          101.7,
           0
         ],
         "rotation": [
@@ -5595,7 +5713,7 @@
       "sm-shell": {
         "pivot": [
           0,
-          97.5,
+          96.25,
           0
         ],
         "rotation": [
@@ -5617,7 +5735,7 @@
       "sm-tanks": {
         "pivot": [
           0.9,
-          97.6,
+          96.3,
           0
         ],
         "rotation": [
@@ -5639,7 +5757,7 @@
       "sm-engine": {
         "pivot": [
           0,
-          94,
+          92.75,
           0
         ],
         "rotation": [
@@ -6236,7 +6354,7 @@
       "cm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -6258,7 +6376,7 @@
       "cm-heatshield": {
         "pivot": [
           0,
-          101,
+          98.5,
           0
         ],
         "rotation": [
@@ -6280,7 +6398,7 @@
       "cm-couches": {
         "pivot": [
           0,
-          101.85,
+          99.35,
           0.25
         ],
         "rotation": [
@@ -6302,7 +6420,7 @@
       "cm-probe": {
         "pivot": [
           0,
-          104.2,
+          101.7,
           0
         ],
         "rotation": [
@@ -6324,7 +6442,7 @@
       "sm-shell": {
         "pivot": [
           0,
-          97.5,
+          96.25,
           0
         ],
         "rotation": [
@@ -6346,7 +6464,7 @@
       "sm-tanks": {
         "pivot": [
           0.9,
-          97.6,
+          96.3,
           0
         ],
         "rotation": [
@@ -6368,7 +6486,7 @@
       "sm-engine": {
         "pivot": [
           0,
-          94,
+          92.75,
           0
         ],
         "rotation": [
@@ -6965,7 +7083,7 @@
       "cm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -6987,7 +7105,7 @@
       "cm-heatshield": {
         "pivot": [
           0,
-          101,
+          98.5,
           0
         ],
         "rotation": [
@@ -7009,7 +7127,7 @@
       "cm-couches": {
         "pivot": [
           0,
-          101.85,
+          99.35,
           0.25
         ],
         "rotation": [
@@ -7031,7 +7149,7 @@
       "cm-probe": {
         "pivot": [
           0,
-          104.2,
+          101.7,
           0
         ],
         "rotation": [
@@ -7053,7 +7171,7 @@
       "sm-shell": {
         "pivot": [
           0,
-          97.5,
+          96.25,
           0
         ],
         "rotation": [
@@ -7075,7 +7193,7 @@
       "sm-tanks": {
         "pivot": [
           0.9,
-          97.6,
+          96.3,
           0
         ],
         "rotation": [
@@ -7097,7 +7215,7 @@
       "sm-engine": {
         "pivot": [
           0,
-          94,
+          92.75,
           0
         ],
         "rotation": [
@@ -9092,7 +9210,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9109,7 +9227,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9126,7 +9244,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9143,7 +9261,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9160,7 +9278,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9177,7 +9295,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9194,7 +9312,7 @@
         ],
         "offset": [
           0,
-          -0.7,
+          -3.2,
           0
         ]
       },
@@ -9786,7 +9904,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9803,7 +9921,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9820,7 +9938,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9837,7 +9955,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9854,7 +9972,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9871,7 +9989,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -9888,7 +10006,7 @@
         ],
         "offset": [
           0,
-          -85.7,
+          -88.2,
           0
         ]
       },
@@ -11868,7 +11986,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11885,7 +12003,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11902,7 +12020,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11919,7 +12037,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11936,7 +12054,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11953,7 +12071,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -11970,7 +12088,7 @@
         ],
         "offset": [
           0,
-          -78.3,
+          -80.8,
           0
         ]
       },
@@ -12562,7 +12680,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12579,7 +12697,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12596,7 +12714,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12613,7 +12731,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12630,7 +12748,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12647,7 +12765,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -12664,7 +12782,7 @@
         ],
         "offset": [
           0,
-          -94,
+          -91.5,
           0
         ]
       },
@@ -13246,7 +13364,7 @@
       "cm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13256,14 +13374,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "cm-heatshield": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13273,14 +13391,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "cm-couches": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13290,14 +13408,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "cm-probe": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13307,14 +13425,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "sm-shell": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13324,14 +13442,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "sm-tanks": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13341,14 +13459,14 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
       "sm-engine": {
         "pivot": [
           0,
-          102.5,
+          100,
           0
         ],
         "rotation": [
@@ -13358,7 +13476,7 @@
         ],
         "offset": [
           0,
-          -100,
+          -97.5,
           0
         ]
       },
@@ -15041,5 +15159,6 @@
         }
       }
     ]
-  }
+  },
+  "model": "/models/saturn-v.glb"
 }

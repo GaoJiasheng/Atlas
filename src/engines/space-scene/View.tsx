@@ -348,6 +348,15 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
   );
   const selectIndexedPart = useCallback((id: string) => {
     const st = store.getState(), state = chapters.find(c => c.id === st.chapter)?.state as SpaceChapterState | undefined;
+    if (file.sim?.kind === 'table') {
+      // The table index evaluates the simulation, so load it only when a table topic's index is used.
+      void import('./lib/table-index').then(({ tableIndexBeat }) => {
+        const beat = tableIndexBeat(state, file, id);
+        if (st.chapter && beat !== null) goToBeat(st.chapter, beat);
+        store.getState().patch({ part: id });
+      });
+      return;
+    }
     const beat = microscopeIndexBeat(state, file, id);
     if (st.chapter && beat !== null) goToBeat(st.chapter, beat);
     store.getState().patch({ part: id });
@@ -739,7 +748,7 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
         <Inspector file={file} fitness={fitness} training={training} />
       </SceneSlot>
       <SceneSlot name="readerEnd">
-        <ChapterIndex index={(here?.state as SpaceChapterState | undefined)?.index} file={file} fitness={fitness} training={training} onSelectPart={file.sim?.microscope ? selectIndexedPart : undefined} />
+        <ChapterIndex index={(here?.state as SpaceChapterState | undefined)?.index} file={file} fitness={fitness} training={training} onSelectPart={file.sim?.microscope || file.sim?.kind === 'table' ? selectIndexedPart : undefined} />
       </SceneSlot>
     </>
   );

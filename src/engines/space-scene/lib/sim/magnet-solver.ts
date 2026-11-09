@@ -2,7 +2,10 @@ import type { MagnetData, SimValues } from '../../sim-schema';
 import type { Vec3 } from '../math';
 import type { MagnetFrames } from './frame';
 import { fieldStateOf, fieldMagnets, magnetPoles, pull, magnetCharges, earthField, fieldAt, bearingOf, magnetNumber as num } from './magnet';
-export { ringPoint, CLIP_QUANTITIES } from './magnet';
+import { CLIP_QUANTITIES } from './magnet';
+export { ringPoint } from './magnet';
+/** Read the constant after module initialization; avoids the magnet facade cycle. */
+export function clipQuantities() { return CLIP_QUANTITIES; }
 export function solveMagnets(m: MagnetData, values: SimValues, compass: Vec3 | null = null, frames?: MagnetFrames): Record<string, number | string> {
   const out: Record<string, number | string> = {};
   const [a, b] = m.magnets;

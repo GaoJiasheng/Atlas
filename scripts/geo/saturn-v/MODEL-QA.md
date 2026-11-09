@@ -1,3 +1,5 @@
+> Historical baseline record below. **Superseded by Rebuild 2026-11-05, resumed 2026-11-09:** the delivered topic now uses the named meshopt GLB. Current counts, source rights, per-part self-grades, actual-payload clearances and all comparison iterations are in `src/content/topics/saturn-v/REBUILD-3D.md`, `mesh-audit.json` and `fit-audit.json`. The old octagonal LM, 104.8 m probe tip, 0.2033 m packed clearance and primitive-only counts below describe the former model, not this delivery. The new contact tip is at 102.3 m; the final tests read compressed meshes and simulator outputs.
+
 # Saturn V geometry build record
 
 Generator: `pnpm tsx scripts/geo/saturn-v/build-parts.ts`. Output: `src/content/topics/saturn-v/data/parts.json`. No engine or package changes. All coordinates are metres and belong to the S90 teaching design, constrained by S25/S26 NASA topology and nominal envelopes.

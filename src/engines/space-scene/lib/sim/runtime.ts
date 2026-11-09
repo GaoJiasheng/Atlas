@@ -21,7 +21,7 @@ const loaders: Record<SimKind, () => Promise<Solver>> = {
     let compass: Vec3 | null = c ? ('at' in c ? c.at : at(c.ring, c.control)) : null;
     if (!c) for (const b of s.bind) if ('part' in b && b.at !== undefined && b.control !== undefined) { compass = at(b.at, b.control); break; }
     const q: Record<string, SimOutputValue> = m.solveMagnets(s.magnet, v, compass, frames);
-    const clip = observe.map(id => s.outputs.find(o => o.id === id)?.from ?? id).find(f => (m.CLIP_QUANTITIES as readonly string[]).includes(f));
+    const clip = observe.map(id => s.outputs.find(o => o.id === id)?.from ?? id).find(f => (m.clipQuantities() as readonly string[]).includes(f));
     q.clips = clip !== undefined ? q[clip]! : NaN;
     return q;
   }),

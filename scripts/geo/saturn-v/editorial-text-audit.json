@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-09",
+  "bilingualValues": 360,
+  "sourceSHA256": "46041cb4f68701064f706146725795be6ae92186fd0d822980f3000f3e90d257",
+  "outputSHA256": "46041cb4f68701064f706146725795be6ae92186fd0d822980f3000f3e90d257",
+  "changedByBake": 0,
+  "source": "Current checked-in parts.json immediately before the geometry bake; build literals never replace editorial copy."
+}

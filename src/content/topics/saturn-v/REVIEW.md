@@ -33,3 +33,28 @@ CI=1 ATLAS_E2E_PORT=5449 pnpm e2e
 ```
 
 重点查看全部35拍标签、被隐藏对象的索引两步入口、P演示与冷链接一致性、FLOW仅01章RUN后出现、paper/cinema材质、EN/ZH、390×844手机与44px目标。记录真实draw calls/triangles；当前离线网格计数不是运行时帧统计。请求没有授权git写入，所有更改留工作树，由主session提交/合并。
+
+## Rebuild 2026-11-05
+
+Supersedes the primitive-shape descriptions above. The topic now loads a local meshopt GLB; the 33 selections, 13 configurations, seven chapters and 35 beats remain. Chapter 05's final beat compares the launch cabin and explicitly indexes `les-tower` and `cm-probe`.
+
+The two-step hidden-part index route cannot be changed through chapter data. A tested candidate and an **unapplied** shared-engine patch are provided in `scripts/geo/saturn-v/index-route.ts` and `index-one-tap.patch`. The main session must decide/apply that patch, then verify one physical tap in its GPU browser. This worktree does not claim that the index bug is fixed at runtime.
+
+Read `REBUILD-3D.md` for the source licence, per-part counts, comparison iterations and explicit B-grade exceptions. CPU studio evidence is not GPU acceptance. No browser/desktop operation or git write was performed.
+
+### Resume audit 2026-11-09
+
+- Inspected inherited and new four-view reference sheets for all six hero groups under paper/cinema studio lighting and ACES. Corrected CSM hatch interference, duplicate intersecting LM foil, periodic foil folds, F-1/J-2 bell/neck proportions, J-2 start tank, antenna dish supports and fairing crowns; preserved the probe's full smooth lathe for its close-up.
+- Actual payload: 157,908 → 335,549 triangles; estimated material draw pieces 41 → 34; topic GLB 0 → 1,485,956 bytes. Packed LM, camera anchors, probe/docking interfaces and actual five F-1 mouth clearances are checked from the decoded payload.
+- Self-grade: 10 A / 23 B, provisional pending GPU acceptance. Detailed engine castings, exact flight-specific spacecraft/MLI layouts, internal teaching vessels and articulated LM stowage remain explicit B exceptions, each with its reason in `REBUILD-3D.md`. This is not an all-A museum acceptance claim.
+- ch05 tower/probe index entries are present. The one-tap shared-engine patch passes `git apply --check` but remains unapplied under the ownership restriction. No runtime one-tap fix is claimed.
+
+## Rebuild 2026-11-05 — round 2 (audit 2026-11-09)
+
+Current flight identity: AS-506 / CSM-107 Columbia / LM-5 Eagle. This section supersedes the preceding round-1 geometry grades and index-patch status. The main session's already-applied one-tap index behavior was preserved.
+
+All 23 former B selections received engine-specific hardware, true glazing/thruster openings, spacecraft radial structure and bay contents, LES cover/canards, or Apollo 11 LM structure and fittings. Selected NASA pressure-cabin/bay/tank-cover meshes preserve the actual facet topology; newly built diagonal RCS, antennas, engine cover, foil, struts and contact probes remain separate forms within the original selection IDs. The compressed terminal-stow composition remains S90, not a hinge-dynamics claim.
+
+Current per-part self-grades, payload counts, references and every looked-at correction are in `REBUILD-3D.md`; current gate results are in `scripts/geo/saturn-v/round2-verification.json`. CPU paper/cinema evidence uses the shipped GLB, actual atlasSurface parameters, the engine studio/ACES numerical counterpart, interpolated fragment normals and fragment cut planes. All multipart node interiors explicitly stay open under the engine's cut shader. GPU acceptance is pending as required; no browser or desktop was used.
+
+Global build/full-suite blockers are documented and supplied as **unapplied** `build-magnet-cycle.patch` and `catalogue-html-import.patch`. Shared code was not changed. The isolated build-cycle reproducer fails without Saturn content and loads with the proposed fix substituted in memory. This does not make the unmodified full build green.

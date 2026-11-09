@@ -667,6 +667,16 @@ export function CameraRig({
     }
     const t = controls.current?.target;
     if (t) bridge.cameraDistance = camera.position.distanceTo(t);
+    if (t && !orbitSession) {
+      // A fixed 5 cm near plane leaves ~9 cm of depth resolution at 250 m, so a large model's skin
+      // and the parts just inside it fight. Scale the near plane with the viewing distance; scenes
+      // viewed from under 12.5 m keep the 5 cm plane exactly.
+      const near = Math.max(0.05, bridge.cameraDistance / 250);
+      if (camera.near !== near && (near === 0.05 || Math.abs(camera.near - near) > camera.near * 0.1)) {
+        camera.near = near;
+        camera.updateProjectionMatrix();
+      }
+    }
   });
 
   useEffect(

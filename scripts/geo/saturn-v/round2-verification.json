@@ -1,0 +1,344 @@
+{
+  "date": "2026-11-09",
+  "flight": "AS-506 / CSM-107 Columbia / LM-5 Eagle",
+  "asset": {
+    "path": "public/models/saturn-v.glb",
+    "bytes": 1476600,
+    "sha256": "ec00039de3813fa44da76660aed42d2e12cf26eb9c727884a34fd48db061a570",
+    "trianglesAllParts": 337962,
+    "estimatedMaterialDrawPieces": 34,
+    "runtimeNetwork": false
+  },
+  "round1": {
+    "triangles": 335549,
+    "glbBytes": 1485956,
+    "drawCalls": 34,
+    "parts": {
+      "sla-shell": 6920,
+      "iu-ring": 3280,
+      "sic-shell": 9942,
+      "sii-shell": 7232,
+      "sivb-shell": 9210,
+      "f1-centre": 23544,
+      "f1-outer": 75550,
+      "j2-centre": 17568,
+      "j2-outer": 57960,
+      "sivb-engine": 17586,
+      "sic-fins": 176,
+      "les-tower": 3294,
+      "cm-probe": 2136,
+      "sm-shell": 20324,
+      "cm-shell": 5124,
+      "sm-engine": 6896,
+      "cm-couches": 2792,
+      "lm-descent": 13818,
+      "lm-ascent": 15745,
+      "lm-legs": 6452,
+      "lm-ladder": 646,
+      "lm-descent-engine": 3772,
+      "lm-ascent-engine": 3534,
+      "lm-windows": 160
+    }
+  },
+  "selfGrades": {
+    "A": 33,
+    "B": 0,
+    "C": 0,
+    "scope": "Mechanical shape/attachment/quantity review under studio+ACES; provisional for Claude GPU acceptance, not manufacturing CAD or a flight dynamics certification."
+  },
+  "gates": {
+    "check": {
+      "status": "pass",
+      "command": "pnpm check",
+      "errors": 0,
+      "warnings": 0,
+      "hints": 5,
+      "log": "round2-check-complete.log",
+      "finalPreviewTypecheck": "pnpm exec tsc --noEmit; pass"
+    },
+    "validate": {
+      "status": "pass",
+      "command": "pnpm validate",
+      "topics": 94,
+      "errors": 0,
+      "warnings": 0
+    },
+    "saturnRegression": {
+      "status": "pass",
+      "tests": 69,
+      "withinFullSuite": true,
+      "readsActualCompressedPayload": true,
+      "log": "round2-saturn-final.log"
+    },
+    "test": {
+      "status": "blocked_outside_topic",
+      "command": "pnpm run test --maxWorkers=2 --testTimeout=15000",
+      "filesPassed": 273,
+      "filesFailed": 2,
+      "testsPassed": 6513,
+      "testsFailed": 1,
+      "failures": [
+        "solar-system-polish: shared CatalogueSky extensionless Drei Html import",
+        "JS budget: dist/en/topics missing after blocked build"
+      ],
+      "log": "round2-suite-final.log",
+      "defaultLog": "round2-suite-default-final.log",
+      "defaultRun": "Default pnpm test also ran; an unrelated toad-dermis 5s timeout cleared in the limited-concurrency rerun. No Vitest config added or modified."
+    },
+    "build": {
+      "status": "blocked_outside_topic",
+      "command": "pnpm build",
+      "error": "Cannot access 'CLIP_QUANTITIES' before initialization",
+      "log": "round2-build-complete.log",
+      "isolationProof": "Schema/runtime-only Vite entry fails without any Saturn content; same entry imports successfully with proposed cycle fix substituted in memory."
+    }
+  },
+  "editorialText": {
+    "date": "2026-11-09",
+    "bilingualValues": 360,
+    "sourceSHA256": "031bd637bff7ceb5ca7458be39bdb6bc3cdb278a7bcff9aac1abd79d78d702f8",
+    "outputSHA256": "031bd637bff7ceb5ca7458be39bdb6bc3cdb278a7bcff9aac1abd79d78d702f8",
+    "changedByBake": 0,
+    "source": "Current checked-in parts.json immediately before the geometry bake; build literals never replace editorial copy."
+  },
+  "sharedPatches": [
+    {
+      "path": "scripts/geo/saturn-v/build-magnet-cycle.patch",
+      "applied": false,
+      "gitApplyCheck": "pass"
+    },
+    {
+      "path": "scripts/geo/saturn-v/catalogue-html-import.patch",
+      "applied": false,
+      "gitApplyCheck": "pass"
+    }
+  ],
+  "evidence": [
+    {
+      "directory": "/Users/gavin/work/atlas-b2-r-saturn-v/scripts/geo/saturn-v/comparisons/round2-final-paper",
+      "renderReferencePairs": 39,
+      "heroContacts": 6,
+      "allFramesMatchFinalAsset": true,
+      "rearPhotoProjection": {
+        "assetSHA256": "ec00039de3813fa44da76660aed42d2e12cf26eb9c727884a34fd48db061a570",
+        "theme": "paper",
+        "projection": "perspective",
+        "fov": 48,
+        "distance": 14,
+        "center": [
+          0,
+          87.6,
+          0
+        ],
+        "direction": [
+          0.7,
+          0,
+          -1
+        ],
+        "extent": 14.8,
+        "ref": "lm-front-1.jpg",
+        "cutZ": null,
+        "minY": null,
+        "shading": "interpolated-fragment-normals",
+        "rig": {
+          "hemi": [
+            [
+              1,
+              0.9215818562755338,
+              0.8069522576650873
+            ],
+            [
+              0.5840784178830671,
+              0.514917665367466,
+              0.3813260114221238
+            ],
+            0.75
+          ],
+          "lights": [
+            [
+              "#fff0dc",
+              2.6,
+              [
+                0.55,
+                1,
+                0.7
+              ]
+            ],
+            [
+              "#e9edf0",
+              0.55,
+              [
+                -1,
+                0.35,
+                0.45
+              ]
+            ],
+            [
+              "#ffffff",
+              0.9,
+              [
+                -1,
+                0.45,
+                -0.7
+              ]
+            ]
+          ],
+          "env": 0.7,
+          "exposure": 1.05
+        }
+      }
+    },
+    {
+      "directory": "/Users/gavin/work/atlas-b2-r-saturn-v/scripts/geo/saturn-v/comparisons/round2-final-cinema",
+      "renderReferencePairs": 39,
+      "heroContacts": 6,
+      "allFramesMatchFinalAsset": true,
+      "rearPhotoProjection": {
+        "assetSHA256": "ec00039de3813fa44da76660aed42d2e12cf26eb9c727884a34fd48db061a570",
+        "theme": "cinema",
+        "projection": "perspective",
+        "fov": 48,
+        "distance": 14,
+        "center": [
+          0,
+          87.6,
+          0
+        ],
+        "direction": [
+          0.7,
+          0,
+          -1
+        ],
+        "extent": 14.8,
+        "ref": "lm-front-1.jpg",
+        "cutZ": null,
+        "minY": null,
+        "shading": "interpolated-fragment-normals",
+        "rig": {
+          "hemi": [
+            [
+              0.4019777798219466,
+              0.45641102317066595,
+              0.514917665367466
+            ],
+            [
+              0.008568125615105716,
+              0.009134058699157796,
+              0.010329823026364548
+            ],
+            0.35
+          ],
+          "lights": [
+            [
+              "#e9eff5",
+              2.4,
+              [
+                0.55,
+                1,
+                0.7
+              ]
+            ],
+            [
+              "#c9d1d9",
+              0.28,
+              [
+                -1,
+                0.35,
+                0.45
+              ]
+            ],
+            [
+              "#f2f2f2",
+              1.15,
+              [
+                -1,
+                0.45,
+                -0.7
+              ]
+            ]
+          ],
+          "env": 0.8,
+          "exposure": 1
+        }
+      }
+    }
+  ],
+  "fit": {
+    "lm-descent": {
+      "minimumRadialClearance": 0.3950110089807142,
+      "worstPoint": [
+        0.950219988822937,
+        88.7898941040039,
+        2.1103708744049072
+      ],
+      "minY": 86.70227813720703,
+      "maxY": 89.2144775390625
+    },
+    "lm-descent-engine": {
+      "minimumRadialClearance": 2.414606579722298,
+      "worstPoint": [
+        0.14045648276805878,
+        86.1500015258789,
+        0.7063376307487488
+      ],
+      "minY": 86.1500015258789,
+      "maxY": 87.65926361083984
+    },
+    "lm-legs": {
+      "minimumRadialClearance": 0.3874838614079059,
+      "worstPoint": [
+        2.8251640796661377,
+        85.65084075927734,
+        -0.12005085498094559
+      ],
+      "minY": 85.60115814208984,
+      "maxY": 88.59883880615234
+    },
+    "lm-ascent": {
+      "minimumRadialClearance": 0.037163637773947045,
+      "worstPoint": [
+        -1.6826252937316895,
+        90.8366470336914,
+        -1.6297602653503418
+      ],
+      "minY": 88.89653015136719,
+      "maxY": 92.9325180053711
+    },
+    "lm-ascent-engine": {
+      "minimumRadialClearance": 2.0706867958146615,
+      "worstPoint": [
+        0.3536771535873413,
+        89.6500015258789,
+        0.3536771535873413
+      ],
+      "minY": 88.5999984741211,
+      "maxY": 89.6500015258789
+    },
+    "lm-windows": {
+      "minimumRadialClearance": 0.3435423398732018,
+      "worstPoint": [
+        0.3439215719699861,
+        91.45536804199219,
+        1.905657172203064
+      ],
+      "minY": 90.95250701904297,
+      "maxY": 91.4799575805664
+    },
+    "lm-ladder": {
+      "minimumRadialClearance": 0.38638948429151787,
+      "worstPoint": [
+        -0.23988041281700134,
+        86.21597290039062,
+        2.727225856781006
+      ],
+      "minY": 86.18437194824219,
+      "maxY": 89.12470245361328
+    }
+  },
+  "retainedBehavior": "33 IDs, 35 beats, 13 terminal configurations, existing one-tap fix, teaching tables and animation/flow gates retained. S90 terminal stow remains an educational compressed envelope, not new hinge dynamics.",
+  "notPerformed": [
+    "GPU/browser/desktop acceptance, as prohibited",
+    "Application of shared-engine patches, outside ownership",
+    "Git writes"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-09",
+  "check": {
+    "status": "pass",
+    "errors": 0,
+    "warnings": 0,
+    "hints": 5
+  },
+  "validate": {
+    "status": "pass",
+    "topics": 94,
+    "errors": 0,
+    "warnings": 0
+  },
+  "test": {
+    "status": "pass",
+    "files": 275,
+    "passed": 6526,
+    "failed": 0,
+    "skipped": 0,
+    "command": "pnpm run test --config scripts/geo/saturn-v/vitest-worktree.config.ts --maxWorkers=4 --testTimeout=30000"
+  },
+  "saturnFinalRegression": {
+    "status": "pass",
+    "passed": 53
+  },
+  "build": {
+    "status": "pass",
+    "pages": 191,
+    "deployedGlbMatchesSource": true
+  },
+  "asset": {
+    "path": "public/models/saturn-v.glb",
+    "bytes": 1485956,
+    "sha256": "179e45c3b0b4496b84d9913e9fbf8b887db8931ddc6935dc5ba589d901e9b32e"
+  },
+  "grades": {
+    "A": 10,
+    "B": 23,
+    "C": 0,
+    "GPUAccepted": false
+  },
+  "sharedIndexPatch": {
+    "applies": true,
+    "applied": false
+  },
+  "browserUsed": false,
+  "gitWrites": false
+}

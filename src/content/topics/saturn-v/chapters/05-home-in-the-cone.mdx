@@ -247,7 +247,7 @@
         "part": null,
         "run": false,
         "cutaway": "none",
-        "pose": "return-cm",
+        "pose": "launch-packed",
         "hide": [],
         "ghost": [],
         "layers": [
@@ -259,19 +259,20 @@
         ],
         "camera": {
           "position": [
-            8,
-            6,
-            10
+            20,
+            104,
+            30
           ],
           "target": [
             0,
-            2.5,
+            102.5,
             0
           ],
           "fov": 30
         },
         "labels": [
-          "cm-shell"
+          "les-tower",
+          "cm-probe"
         ],
         "sim": {
           "set": {
@@ -279,12 +280,12 @@
             "propellant": 600,
             "carry-inert": false,
             "stage-choice": "first",
-            "phase": 12
+            "phase": 0
           }
         },
         "caption": {
-          "en": "The command module returns. The rocket stages and lunar module stay behind.",
-          "zh": "指令舱返回，火箭各级和登月舱不随它回到地球。"
+          "en": "At launch, the escape tower and docking probe sit on the cabin. Both are gone before it comes home.",
+          "zh": "发射时，乘员舱上装着逃逸塔和对接探杆。返回前，两者都已移除。"
         }
       }
     ],
@@ -295,7 +296,9 @@
         "sm-tanks",
         "cm-shell",
         "sm-shell",
-        "cm-heatshield"
+        "cm-heatshield",
+        "les-tower",
+        "cm-probe"
       ]
     }
   }

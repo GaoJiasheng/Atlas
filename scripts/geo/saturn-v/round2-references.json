@@ -1,0 +1,155 @@
+[
+  {
+    "id": "R14",
+    "file": "refs/9264931.jpg",
+    "url": "https://images-assets.nasa.gov/image/9264931/9264931~medium.jpg",
+    "title": "NASA Saturn V News Reference R-1 F-1 Engine Fact Sheet",
+    "license": "NASA US government work, public domain in the US",
+    "use": "F-1 pump, heat exchanger, exhaust collector, chamber/extension geometry; quarter-view drawing"
+  },
+  {
+    "id": "R15",
+    "file": "refs/0100981.jpg",
+    "url": "https://images-assets.nasa.gov/image/0100981/0100981~medium.jpg",
+    "title": "NASA S-IC stage cutaway, MSFC 67 IND 1200-61A",
+    "license": "NASA US government work, public domain in the US",
+    "use": "Separate curved tanks, five LOX downcomers, four helium cylinders, slosh baffles"
+  },
+  {
+    "id": "R16",
+    "file": "refs/0100982.jpg",
+    "url": "https://images-assets.nasa.gov/image/0100982/0100982~medium.jpg",
+    "title": "NASA S-IC section with numbered equipment",
+    "license": "NASA archive reference; original Boeing drawing",
+    "use": "Tank/intertank topology and dome section only; not distributed in runtime asset"
+  },
+  {
+    "id": "R17",
+    "file": "refs/0100984.jpg",
+    "url": "https://images-assets.nasa.gov/image/0100984/0100984~medium.jpg",
+    "title": "NASA Saturn V Instrument Unit, MSFC 68-IND-1200-25A",
+    "license": "NASA US government work, public domain in the US",
+    "use": "Circumferential cold plates, equipment groupings and ST-124 location"
+  },
+  {
+    "id": "R18",
+    "file": "refs/lm5-front.jpg",
+    "url": "https://images-assets.nasa.gov/image/as11-44-6642/as11-44-6642~medium.jpg",
+    "title": "Apollo 11 Eagle ascent stage on return, AS11-44-6642",
+    "license": "NASA US government photograph, public domain in the US",
+    "use": "LM-5 facet and blanket pattern, front hatch and unequal blisters"
+  },
+  {
+    "id": "R19",
+    "file": "refs/les-flight.jpg",
+    "url": "https://images-assets.nasa.gov/image/6900547/6900547~small.jpg",
+    "title": "Apollo 11 spacecraft atop launch vehicle",
+    "license": "NASA US government photograph, public domain in the US",
+    "use": "Flight LES stowed canards and protective cover silhouette"
+  },
+  {
+    "id": "R20",
+    "file": "refs/as11-40-5863.jpg",
+    "url": "https://images-assets.nasa.gov/image/as11-40-5863/as11-40-5863~medium.jpg",
+    "title": "Apollo 11 forward hatch, AS11-40-5863",
+    "license": "NASA US government photograph, public domain in the US",
+    "use": "Window facets, hatch, porch and foil"
+  },
+  {
+    "id": "R21",
+    "file": "refs/as11-40-5917.jpg",
+    "url": "https://images-assets.nasa.gov/image/as11-40-5917/as11-40-5917~medium.jpg",
+    "title": "Apollo 11 footpad and strut close-up, AS11-40-5917",
+    "license": "NASA US government photograph, public domain in the US",
+    "use": "Dished pad, joint, primary strut foil and secondary strut"
+  },
+  {
+    "id": "R22",
+    "file": "refs/6862832.jpg",
+    "url": "https://images-assets.nasa.gov/image/6862832/6862832~medium.jpg",
+    "title": "F-1 assembly side photograph; nozzle extension absent",
+    "license": "NASA US government photograph, public domain in the US",
+    "use": "Side hardware study only; extension contour controlled by R14"
+  },
+  {
+    "id": "NASM-J2",
+    "file": "refs/j2-museum-side.jpg",
+    "url": "https://airandspace.si.edu/collection-objects/rocket-engine-liquid-fuel-j-2/nasm_A19760773000",
+    "imageURL": "https://ids.si.edu/ids/deliveryService?id=NASM-A19760773000_DSH02&max=1200",
+    "title": "J-2 engine NASM A19760773000, side photograph",
+    "license": "Smithsonian NASM image-use conditions; no CC0 claim; development comparison only",
+    "use": "Side plumbing/collector view, ground support excluded"
+  },
+  {
+    "id": "NASA-LM-mesh",
+    "file": "nasa-lm-source.glb",
+    "url": "https://science.nasa.gov/3d-resources/apollo-lunar-module/",
+    "sourceURL": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/Apollo%20Lunar%20Module/Apollo%20Lunar%20Module.glb",
+    "title": "NASA/Michael D. Carbajal Apollo Lunar Module",
+    "license": "NASA public-domain US government work",
+    "use": "Pressure-cabin facet topology, rear equipment bay, unequal tank covers and hatch; separate original Atlas hardware and real aperture clipping"
+  },
+  {
+    "id": "R23",
+    "file": "refs/f1-furnace-brazing.pdf",
+    "url": "https://digitalprojects.uah.edu/files/original/20/10980/Furnbrazf1thrucham_082007094528.pdf",
+    "title": "Francis X. De Carlo / Rocketdyne, Furnace Brazing the F-1 Thrust Chamber for Apollo",
+    "license": "Primary contractor technical report under NASA contract NASw-16, UAH archive; reference only, no imported imagery or PD claim",
+    "use": "Opening page explicitly records 178 primary and 356 secondary tubes; no new learner teaching numbers"
+  },
+  {
+    "id": "R24",
+    "file": "refs/9801810.jpg",
+    "url": "https://images-assets.nasa.gov/image/9801810/9801810~small.jpg",
+    "title": "NASA S-II stage cutaway, MSFC 67 IND 1200-63A",
+    "license": "NASA US government work, public domain in the US",
+    "use": "Common bulkhead, LOX slosh baffle, LH2 barrel/dome and pressure-system layout"
+  },
+  {
+    "id": "R25",
+    "file": "refs/0100983.jpg",
+    "url": "https://images-assets.nasa.gov/image/0100983/0100983~medium.jpg",
+    "title": "NASA S-IVB stage cutaway, MSFC 67 IND 1200-65A",
+    "license": "NASA US government work, public domain in the US",
+    "use": "Curved common bulkhead, cold helium vessel placement and tank proportions; nine confirmed in Apollo 11 press kit printed p116"
+  },
+  {
+    "id": "NASM-J2-quarter",
+    "file": "refs/j2-nasm-DSH03.jpg",
+    "url": "https://airandspace.si.edu/collection-objects/rocket-engine-liquid-fuel-j-2/nasm_A19760773000",
+    "imageURL": "https://ids.si.edu/ids/deliveryService?id=NASM-A19760773000_DSH03&max=1200",
+    "title": "J-2 engine NASM A19760773000, DSH03 quarter photograph",
+    "license": "Smithsonian NASM image-use conditions; development comparison only, no CC0 asset claim",
+    "use": "Close quarter reference replacing the factory-wide photograph; correct opposite-side profile"
+  },
+  {
+    "id": "R26",
+    "url": "https://ntrs.nasa.gov/api/citations/19730011146/downloads/19730011146.pdf",
+    "title": "NASA Apollo power-generation technical note",
+    "use": "Primary text: three modules, each 44 inches high and 22.5 inches diameter; dimension cross-check only",
+    "license": "NASA technical report; reference only"
+  },
+  {
+    "id": "R27",
+    "url": "https://ntrs.nasa.gov/api/citations/19730023037/downloads/19730023037.pdf",
+    "title": "NASA Apollo fluid-system manufacturing experience, figure 3",
+    "use": "Primary text: four 45-inch SPS propellant vessels and two spherical helium vessels more than 40 inches diameter",
+    "license": "NASA technical report; reference only"
+  },
+  {
+    "id": "R28",
+    "url": "https://www.nasa.gov/wp-content/uploads/static/history/afj/aoh/aoh-v1-2-04-sps.pdf",
+    "title": "Apollo Operations Handbook Block II SPS, 2.4-43, April/July 1969",
+    "use": "Primary text: 98.4-inch nozzle exit, 159.944-inch maximum engine length and 62.5:1 exit-area ratio",
+    "license": "NASA technical manual; reference only"
+  },
+  {
+    "id": "R29",
+    "file": "refs/crewcouch.jpg",
+    "url": "https://apollojournals.org/afj/ap16fj/02system_couches.html",
+    "imageURL": "https://apollojournals.org/afj/ap16fj/pics/crewcouch.jpg",
+    "title": "Weber Apollo foldable crew couch photograph and NASA AFJ couch drawings",
+    "license": "NASA flight-journal archival technical illustrations; Weber photograph credited to Weber Aircraft; development reference only, no runtime image",
+    "use": "Supine torso, bent leg pans, notched footplates, common support beams, eight attenuators and four outer-couch armrests; donor-hardware close-up cross-check, not an Apollo 16 upholstery substitution"
+  }
+]
