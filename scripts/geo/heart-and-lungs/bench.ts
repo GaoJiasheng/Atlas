@@ -16,8 +16,12 @@
  * that belong to the fish and the plant (the body's flows come from
  * scripts/anatomy/heart-lungs/routes.json).
  */
-import { add, bevel, blade, box, cross, cyl, ellipsoid, fan, lathe, mul, norm, r3, scaleModel, sphere, sweep, wing, type Prim, type V3 } from '../living-things/kit';
+import { add, bevel, blade, box, cross, cyl, ellipsoid, fan, lathe, mul, norm, scaleModel, sphere, sweep, wing, type Prim, type V3 } from '../living-things/kit';
 import { chilliSeedling } from '../living-things/specimens/plants';
+
+// Preserve this topic's established five-decimal scene-coordinate contract;
+// the shared specimen kit now rounds to seven decimals for its own meshes.
+const r3 = (v: readonly number[]): V3 => v.map(x => Number(x.toFixed(5))) as V3;
 
 /** Top surface of the table. */
 export const TABLE_TOP = 0.115;
@@ -197,13 +201,12 @@ export function gillCover(): Prim {
 /** The glass tank and the water in it (context, in the compare group). */
 export function fishTank(): { primitive: Prim; extra: Prim[] } {
   const c: V3 = [FISH_AT[0], TABLE_TOP + 0.08, FISH_AT[2]];
-  return {
-    primitive: bevel(c, [0.32, 0.16, 0.16], 0.004, 'glass'),
-    extra: [
-      bevel([c[0], TABLE_TOP + 0.0705, c[2]], [0.31, 0.135, 0.15], 0.003, 'glass', { tint: 'token:cold' }),
-      bevel([c[0], TABLE_TOP + 0.005, c[2]], [0.33, 0.01, 0.17], 0.002, 'plastic', { tint: 'token:ink-3' }),
-    ],
-  };
+  // Five separate 2 mm glass panes, open above the waterline, plus fine
+  // silicone seams. This keeps a real hollow tank rather than a solid box.
+  const glass = (at: V3,size: V3) => box(at,size,'glass');
+  const extra:Prim[]=[glass([c[0],c[1],c[2]-.079],[.32,.16,.002]),glass([c[0]-.159,c[1],c[2]],[.002,.16,.156]),glass([c[0]+.159,c[1],c[2]],[.002,.16,.156]),glass([c[0],TABLE_TOP+.001,c[2]],[.316,.002,.156]),bevel([c[0],TABLE_TOP+.0705,c[2]],[.314,.135,.154],.001,'glass',{tint:'token:cold'}),bevel([c[0],TABLE_TOP+.005,c[2]],[.33,.01,.17],.002,'plastic',{tint:'token:ink-3'})];
+  for(const x of [-.159,.159])for(const z of [-.079,.079])extra.push(box([c[0]+x,c[1],c[2]+z],[.0015,.16,.0015],'rubber',{tint:'token:ink-3'}));
+  return {primitive:glass([c[0],c[1],c[2]+.079],[.32,.16,.002]),extra};
 }
 
 /** Water past the gills: in at the mouth, over the arches, out under the back edge of the cover (4 paths). */

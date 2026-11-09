@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "tooth-section": {
+      "sourceTriangles": 166113,
+      "triangles": 49000,
+      "simplificationError": 0.000020477888028835878,
+      "drawCalls": 1
+    },
+    "stomach-wall": {
+      "sourceTriangles": 69632,
+      "triangles": 23000,
+      "simplificationError": 0.00006207454862305894,
+      "drawCalls": 1
+    },
+    "villi-block": {
+      "sourceTriangles": 25799,
+      "triangles": 14499,
+      "simplificationError": 0.000022424088456318714,
+      "drawCalls": 1
+    },
+    "villi-field": {
+      "sourceTriangles": 22400,
+      "triangles": 22400,
+      "simplificationError": 0,
+      "drawCalls": 1
+    }
+  },
+  "originalGlbBytes": 2093620,
+  "protectedAnatomyBinBytes": 2006568,
+  "sculptPacketBytes": 531832,
+  "combinedGlbBytes": 2625036,
+  "originalBinSha256": "f54d9e696c53ebd9268ad99b0735bbd88defc3ae85ccff1ae5d706627124d674",
+  "combinedOriginalBinSha256": "f54d9e696c53ebd9268ad99b0735bbd88defc3ae85ccff1ae5d706627124d674",
+  "anatomyUnchanged": true
+}

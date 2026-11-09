@@ -262,16 +262,16 @@ export const PART_TEXT: Record<string, PartText> = {
     name: t('Fish', '鱼'),
     summary: t('Takes in oxygen dissolved in water through its gills.', '用鳃吸收溶在水里的氧气。'),
     detail: t(
-      'A teaching model of a bony fish, not a particular kind and not to scale. A fish takes up the oxygen dissolved in water through its gills [S40]. Water that comes in through the mouth passes over the gills, which sit in a chamber on each side under a flap, the gill cover [S40].\n\nIn this model the left gill cover can be lifted to show the gills [S37].',
-      '一条硬骨鱼的教学模型，不代表某一种鱼，也不按比例。鱼用鳃吸收溶在水里的氧气 [S40]。从口进来的水流过鳃；鳃在身体两侧的腔里，外面盖着一片鳃盖 [S40]。\n\n在这个模型里，左边的鳃盖可以掀开，露出鳃 [S37]。',
+      'A teaching model based on a freshwater European perch, not to scale. A fish takes up the oxygen dissolved in water through its gills [S40]. Water that comes in through the mouth passes over the gills, which sit in a chamber on each side under a flap, the gill cover [S40].\n\nIn this model the left gill cover can be lifted to show the gills [S37].',
+      '以淡水欧洲河鲈为参考的教学模型，不按比例。鱼用鳃吸收溶在水里的氧气 [S40]。从口进来的水流过鳃；鳃在身体两侧的腔里，外面盖着一片鳃盖 [S40]。\n\n在这个模型里，左边的鳃盖可以掀开，露出鳃 [S37]。',
     ),
   },
   gills: {
     name: t('Gills', '鳃'),
     summary: t('Oxygen passes from water into blood; carbon dioxide out.', '氧气从水进入血液，二氧化碳从血液进入水。'),
     detail: t(
-      'Gills are thin filaments, highly branched and folded, so they have a large surface [S40]. As water flows over them, oxygen passes into the blood in their tiny blood vessels, and carbon dioxide passes from the blood into the water [S40].\n\nThis model shows four arches with one row of filaments each, simplified [S37].',
-      '鳃是很薄的细丝，分支多、褶皱多，所以表面很大 [S40]。水流过鳃时，氧气进入鳃里细小血管中的血液，二氧化碳从血液进入水中 [S40]。\n\n这个模型画了四道鳃弓，每道一排鳃丝，已经简化 [S37]。',
+      'Gills are thin filaments, highly branched and folded, so they have a large surface [S40]. As water flows over them, oxygen passes into the blood in their tiny blood vessels, and carbon dioxide passes from the blood into the water [S40].\n\nThis model shows four arches with two rows of filaments on each arch, simplified [S37].',
+      '鳃是很薄的细丝，分支多、褶皱多，所以表面很大 [S40]。水流过鳃时，氧气进入鳃里细小血管中的血液，二氧化碳从血液进入水中 [S40]。\n\n这个模型画了四道鳃弓，每道两排鳃丝，已经简化 [S37]。',
     ),
   },
   'gill-cover': {

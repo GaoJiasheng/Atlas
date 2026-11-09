@@ -874,217 +874,15 @@
         "zh": "剖开的牙：牙釉质、牙本质和牙髓。"
       },
       "detail": {
-        "en": "A tooth drawn six times life size and cut in half. The crown is covered with very hard enamel; under it is dentine, and in the middle a pulp cavity holds blood vessels and nerves, which enter through the tip of the root [S4]. The root sits in the jawbone, and the gum covers the bone around the neck of the tooth [S4].\n\nThis is a teaching diagram, not traced from the model's teeth [S1]. A back tooth has two or three roots; the diagram shows one. Its scale bar gives real sizes.",
-        "zh": "一颗牙，放大 6 倍并从中间剖开。牙冠外面是很硬的牙釉质，下面是牙本质，中间的牙髓腔里有血管和神经，它们从牙根尖进入 [S4]。牙根长在颌骨里，牙龈包住牙颈周围的骨 [S4]。\n\n这是教学示意，不是从模型的牙齿描出来的 [S1]。后牙有两到三个牙根，图里只画了一个。实际大小看它的比例尺。"
+        "en": "A tooth drawn six times life size and cut in half. The crown is covered with very hard enamel; under it is dentine, and in the middle a pulp cavity holds blood vessels and nerves, which enter through the tip of the root [S4]. The root sits in the jawbone, and the gum covers the bone around the neck of the tooth [S4].\n\nThis is a teaching diagram, not traced from the model's teeth [S1]. This lower molar has two unequal roots, with a pulp canal running into each. Its scale bar gives real sizes.",
+        "zh": "一颗牙，放大 6 倍并从中间剖开。牙冠外面是很硬的牙釉质，下面是牙本质，中间的牙髓腔里有血管和神经，它们从牙根尖进入 [S4]。牙根长在颌骨里，牙龈包住牙颈周围的骨 [S4]。\n\n这是教学示意，不是从模型的牙齿描出来的 [S1]。这颗下磨牙有两个不等大的牙根，各有一条牙髓管通入。实际大小看它的比例尺。"
       },
       "connects": [],
-      "primitive": {
-        "kind": "lathe",
-        "at": [
-          0.5,
-          0.0,
-          0.05
-        ],
-        "color": "enamel",
-        "tint": "token:bone",
-        "profile": [
-          [
-            0,
-            0.047
-          ],
-          [
-            0.013,
-            0.048
-          ],
-          [
-            0.023,
-            0.044
-          ],
-          [
-            0.029,
-            0.035
-          ],
-          [
-            0.031,
-            0.02
-          ],
-          [
-            0.029,
-            0.006
-          ],
-          [
-            0.025,
-            0.0
-          ],
-          [
-            0,
-            0.0
-          ]
-        ],
-        "arc": 180,
-        "segments": 40
-      },
-      "extra": [
-        {
-          "kind": "lathe",
-          "at": [
-            0.5,
-            0.0,
-            0.051
-          ],
-          "color": "tissue",
-          "tint": "token:bone",
-          "profile": [
-            [
-              0,
-              0.04
-            ],
-            [
-              0.019,
-              0.039
-            ],
-            [
-              0.025,
-              0.031
-            ],
-            [
-              0.026,
-              0.014
-            ],
-            [
-              0.024,
-              0.0
-            ],
-            [
-              0.019,
-              -0.03
-            ],
-            [
-              0.011,
-              -0.066
-            ],
-            [
-              0.004,
-              -0.079
-            ],
-            [
-              0,
-              -0.08
-            ]
-          ],
-          "arc": 180,
-          "segments": 40
-        },
-        {
-          "kind": "lathe",
-          "at": [
-            0.5,
-            0.0,
-            0.052
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-3",
-          "profile": [
-            [
-              0,
-              0.029
-            ],
-            [
-              0.011,
-              0.027
-            ],
-            [
-              0.013,
-              0.014
-            ],
-            [
-              0.01,
-              -0.008
-            ],
-            [
-              0.005,
-              -0.055
-            ],
-            [
-              0.0015,
-              -0.075
-            ],
-            [
-              0,
-              -0.076
-            ]
-          ],
-          "arc": 180,
-          "segments": 32
-        },
-        {
-          "kind": "sweep",
-          "at": [
-            0.5,
-            0.0,
-            0.0532
-          ],
-          "color": "tissue",
-          "tint": "token:ink-3",
-          "path": [
-            [
-              0,
-              -0.088,
-              0
-            ],
-            [
-              0,
-              -0.06,
-              0
-            ],
-            [
-              -0.003,
-              -0.02,
-              0
-            ],
-            [
-              0,
-              0.02,
-              0
-            ]
-          ],
-          "radius": 0.0012,
-          "segments": 20,
-          "radial": 8
-        },
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.5,
-            -0.012,
-            0.025
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.11,
-            0.028,
-            0.05
-          ],
-          "bevel": 0.004
-        },
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.5,
-            -0.062,
-            0.025
-          ],
-          "color": "tissue",
-          "tint": "token:bone",
-          "size": [
-            0.11,
-            0.072,
-            0.05
-          ],
-          "bevel": 0.004
-        }
-      ]
+      "mesh": "tooth-section",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
+      }
     },
     {
       "id": "stomach-wall",
@@ -1102,446 +900,11 @@
         "zh": "一块胃壁，放大 10 倍，内壁朝上。最上面是内壁，有褶皱，胃撑大时褶皱会展平；下面是一层结缔组织，再下面是三层肌肉：内层斜行，中层环绕胃一圈，外层顺着胃的长轴 [S5]。切面上的短线和圆点表示每层肌纤维的方向。\n\n三个方向的肌肉让胃不只是挤压，还能搅拌、混合 [S5]。这是教学示意，各层没有按真实厚度画 [S1]。"
       },
       "connects": [],
-      "primitive": {
-        "kind": "extrude",
-        "at": [
-          0.72,
-          0.0,
-          0.05
-        ],
+      "mesh": "stomach-wall",
+      "material": {
         "color": "tissue",
-        "tint": "token:muscle-1",
-        "shape": [
-          [
-            -0.06,
-            0.028
-          ],
-          [
-            0.06,
-            0.028
-          ],
-          [
-            0.06,
-            0.052
-          ],
-          [
-            0.0429,
-            0.04
-          ],
-          [
-            0.0257,
-            0.052
-          ],
-          [
-            0.0086,
-            0.04
-          ],
-          [
-            -0.0086,
-            0.052
-          ],
-          [
-            -0.0257,
-            0.04
-          ],
-          [
-            -0.0429,
-            0.052
-          ],
-          [
-            -0.06,
-            0.04
-          ]
-        ],
-        "depth": 0.05,
-        "bevel": 0.001
-      },
-      "extra": [
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.72,
-            0.022,
-            0.05
-          ],
-          "color": "tissue",
-          "tint": "token:neutral",
-          "size": [
-            0.12,
-            0.0115,
-            0.05
-          ],
-          "bevel": 0.0012
-        },
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.72,
-            0.01,
-            0.05
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-3",
-          "size": [
-            0.12,
-            0.0115,
-            0.05
-          ],
-          "bevel": 0.0012
-        },
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.72,
-            -0.002,
-            0.05
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-2",
-          "size": [
-            0.12,
-            0.0115,
-            0.05
-          ],
-          "bevel": 0.0012
-        },
-        {
-          "kind": "bevelBox",
-          "at": [
-            0.72,
-            -0.014,
-            0.05
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.12,
-            0.0115,
-            0.05
-          ],
-          "bevel": 0.0012
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.672,
-            0.01,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-3",
-          "size": [
-            0.0016,
-            0.012
-          ],
-          "rotation": [
-            0,
-            0,
-            50
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.672,
-            -0.002,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-2",
-          "size": [
-            0.0016,
-            0.016
-          ],
-          "rotation": [
-            0,
-            0,
-            90
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.678,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.666,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.696,
-            0.01,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-3",
-          "size": [
-            0.0016,
-            0.012
-          ],
-          "rotation": [
-            0,
-            0,
-            50
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.696,
-            -0.002,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-2",
-          "size": [
-            0.0016,
-            0.016
-          ],
-          "rotation": [
-            0,
-            0,
-            90
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.702,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.69,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.72,
-            0.01,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-3",
-          "size": [
-            0.0016,
-            0.012
-          ],
-          "rotation": [
-            0,
-            0,
-            50
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.72,
-            -0.002,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-2",
-          "size": [
-            0.0016,
-            0.016
-          ],
-          "rotation": [
-            0,
-            0,
-            90
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.726,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.714,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.744,
-            0.01,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-3",
-          "size": [
-            0.0016,
-            0.012
-          ],
-          "rotation": [
-            0,
-            0,
-            50
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.744,
-            -0.002,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-2",
-          "size": [
-            0.0016,
-            0.016
-          ],
-          "rotation": [
-            0,
-            0,
-            90
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.75,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.738,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.768,
-            0.01,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-3",
-          "size": [
-            0.0016,
-            0.012
-          ],
-          "rotation": [
-            0,
-            0,
-            50
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.768,
-            -0.002,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-2",
-          "size": [
-            0.0016,
-            0.016
-          ],
-          "rotation": [
-            0,
-            0,
-            90
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.774,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        },
-        {
-          "kind": "sphere",
-          "at": [
-            0.762,
-            -0.014,
-            0.07620000000000002
-          ],
-          "color": "muscle",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0022
-          ]
-        }
-      ]
+        "tint": "token:bone"
+      }
     },
     {
       "id": "villi-block",
@@ -1563,128 +926,11 @@
         "zh": "一根绒毛，放大 100 倍并从中间剖开，立在一块小肠内壁的前面。绒毛里有一张毛细血管网（深色），吸收糖等消化后的小分子物质；中央的淋巴管（浅色）吸收大部分脂肪 [S8]。真实的绒毛高约 0.5–1 毫米 [S6]。\n\n再进一步：从绒毛流出的血先到肝，再流向全身 [S8]。"
       },
       "connects": [],
-      "primitive": {
-        "kind": "bevelBox",
-        "at": [
-          0.94,
-          0.0,
-          0.05
-        ],
+      "mesh": "villi-block",
+      "material": {
         "color": "tissue",
-        "tint": "token:muscle-2",
-        "size": [
-          0.13,
-          0.02,
-          0.11
-        ],
-        "bevel": 0.003
-      },
-      "extra": [
-        {
-          "kind": "lathe",
-          "at": [
-            0.94,
-            0.01,
-            0.112
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "profile": [
-            [
-              0,
-              0
-            ],
-            [
-              0.0075,
-              0
-            ],
-            [
-              0.0075,
-              0.058
-            ],
-            [
-              0.0055,
-              0.068
-            ],
-            [
-              0,
-              0.071
-            ]
-          ],
-          "arc": 180,
-          "segments": 24
-        },
-        {
-          "kind": "sweep",
-          "at": [
-            0.94,
-            0.01,
-            0.1125
-          ],
-          "color": "tissue",
-          "tint": "token:bone",
-          "path": [
-            [
-              0,
-              0,
-              0
-            ],
-            [
-              0,
-              0.03,
-              0
-            ],
-            [
-              0,
-              0.058,
-              0
-            ]
-          ],
-          "radius": 0.0016,
-          "segments": 12,
-          "radial": 8
-        },
-        {
-          "kind": "sweep",
-          "at": [
-            0.94,
-            0.01,
-            0.1135
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-3",
-          "path": [
-            [
-              -0.0045,
-              0,
-              0
-            ],
-            [
-              -0.0045,
-              0.05,
-              0
-            ],
-            [
-              0,
-              0.064,
-              0
-            ],
-            [
-              0.0045,
-              0.05,
-              0
-            ],
-            [
-              0.0045,
-              0,
-              0
-            ]
-          ],
-          "radius": 0.0009,
-          "segments": 28,
-          "radial": 8
-        }
-      ]
+        "tint": "token:bone"
+      }
     },
     {
       "id": "villi-field",
@@ -1698,96 +944,10 @@
         "zh": "指状的绒毛布满小肠的内壁。"
       },
       "detail": {
-        "en": "A patch of small-intestine lining drawn a hundred times life size. Villi like these, and much smaller folds on their cells, give the small intestine a very large inside surface: about 200 square metres by a textbook estimate [S6]. A 2014 study, measuring a different way, put the lining of the whole gut at about 32 square metres [S15]. Either way, a large surface lets digested food pass into the blood quickly.\n\nThe patch is a teaching diagram: real villi stand closer together [S1].",
-        "zh": "一块小肠内壁，放大 100 倍。像这样的绒毛，加上绒毛细胞表面更小的褶，让小肠的内表面非常大：按课本的估算约 200 平方米 [S6]；2014 年的一项研究用另一种方法估算，整条消化道的内壁约 32 平方米 [S15]。无论哪个数字，表面大，消化后的食物就能很快进入血液。\n\n这是教学示意，真实的绒毛排得更密 [S1]。"
+        "en": "A patch of small-intestine lining drawn a hundred times life size. Villi like these, and much smaller folds on their cells, give the small intestine a very large inside surface: about 200 square metres by a textbook estimate [S6]. A 2014 study, measuring a different way, put the lining of the whole gut at about 32 square metres [S15]. Either way, a large surface lets digested food pass into the blood quickly.\n\nThe patch is a teaching diagram; the position and shape of each villus are reconstructed, not microscopic measurements [S1].",
+        "zh": "一块小肠内壁，放大 100 倍。像这样的绒毛，加上绒毛细胞表面更小的褶，让小肠的内表面非常大：按课本的估算约 200 平方米 [S6]；2014 年的一项研究用另一种方法估算，整条消化道的内壁约 32 平方米 [S15]。无论哪个数字，表面大，消化后的食物就能很快进入血液。\n\n这块内壁是教学示意，绒毛的位置和形状是重建的，并非显微测量结果 [S1]。"
       },
       "connects": [],
-      "primitive": {
-        "kind": "capsule",
-        "at": [
-          0.94,
-          0.04,
-          0.004
-        ],
-        "color": "tissue",
-        "tint": "token:muscle-1",
-        "size": [
-          0.0048,
-          0.05
-        ]
-      },
-      "extra": [
-        {
-          "kind": "capsule",
-          "at": [
-            0.94,
-            0.04,
-            0.02
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0048,
-            0.05
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.94,
-            0.04,
-            0.036
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0048,
-            0.05
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.94,
-            0.04,
-            0.052
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0048,
-            0.05
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.94,
-            0.04,
-            0.068
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0048,
-            0.05
-          ]
-        },
-        {
-          "kind": "capsule",
-          "at": [
-            0.94,
-            0.04,
-            0.084
-          ],
-          "color": "tissue",
-          "tint": "token:muscle-1",
-          "size": [
-            0.0048,
-            0.05
-          ]
-        }
-      ],
       "repeat": {
         "count": 7,
         "axis": [
@@ -1796,6 +956,11 @@
           0
         ],
         "spacing": 0.018
+      },
+      "mesh": "villi-field",
+      "material": {
+        "color": "tissue",
+        "tint": "token:bone"
       }
     }
   ],
@@ -1970,112 +1135,112 @@
       ],
       "path": [
         [
-          0.0,
+          0,
           0.5184,
           -0.0244
         ],
         [
-          0.0,
+          0,
           0.5189,
           -0.0303
         ],
         [
-          0.0,
+          0,
           0.5198,
           -0.0361
         ],
         [
-          0.0,
+          0,
           0.521,
           -0.0419
         ],
         [
-          0.0,
+          0,
           0.5224,
           -0.0476
         ],
         [
-          0.0,
+          0,
           0.5235,
           -0.0534
         ],
         [
-          0.0,
+          0,
           0.5243,
           -0.0593
         ],
         [
-          0.0,
+          0,
           0.5245,
           -0.0652
         ],
         [
-          0.0,
+          0,
           0.5235,
           -0.071
         ],
         [
-          0.0,
+          0,
           0.5214,
           -0.0764
         ],
         [
-          0.0,
+          0,
           0.518,
           -0.0811
         ],
         [
-          0.0,
+          0,
           0.5132,
           -0.0844
         ],
         [
-          0.0,
+          0,
           0.5078,
           -0.0867
         ],
         [
-          0.0,
+          0,
           0.5025,
           -0.0892
         ],
         [
-          0.0,
+          0,
           0.4971,
           -0.0918
         ],
         [
-          0.0,
+          0,
           0.4917,
           -0.0941
         ],
         [
-          0.0,
+          0,
           0.4861,
           -0.0958
         ],
         [
-          0.0,
+          0,
           0.4803,
           -0.0972
         ],
         [
-          0.0,
+          0,
           0.4747,
           -0.0988
         ],
         [
-          0.0,
+          0,
           0.4691,
           -0.1006
         ],
         [
-          0.0,
+          0,
           0.4635,
           -0.1026
         ],
         [
-          0.0,
+          0,
           0.4583,
           -0.1053
         ],
@@ -6162,7 +5327,7 @@
             ],
             [
               -0.0929,
-              -0.0,
+              0,
               -0.0659
             ],
             [
@@ -6957,7 +6122,7 @@
         1.62
       ],
       "target": [
-        0.0,
+        0,
         0.16,
         -0.09
       ],

@@ -1,0 +1,302 @@
+{
+  "downloaded": "2026-11-09",
+  "scope": "Offline visual evidence only; no runtime assets",
+  "licenceLinks": {
+    "CC BY 3.0": "https://creativecommons.org/licenses/by/3.0/",
+    "CC BY-SA 3.0": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "CC BY-SA 4.0": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "Public domain": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "angleCaveat": "Canonical views are compared to genuine source images with matching anatomy and the closest available camera or section axis. A proximal molar elevation now supports the X-axis profile; a genuine Wellcome electron micrograph supports an oblique exterior villus profile. Tissue-block side/front sources still have perspective differences, explicitly labelled. No reference was warped or relit. Lower-wisdom photograph is a third molar; use form rather than first-molar cusp counts.",
+  "references": [
+    {
+      "file": "2409_Tooth.jpg",
+      "hero": "molar",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:2409_Tooth.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/2409_Tooth.jpg",
+      "author": "OpenStax College",
+      "licence": "CC BY 3.0",
+      "angle": "front longitudinal section",
+      "dimensions": [
+        643,
+        483
+      ],
+      "observation": "Enamel is a thin continuous crown shell; dentin surrounds a central pulp chamber with cuspal horns; two narrow root canals follow the tapered roots.",
+      "crops": [
+        {
+          "file": "molar-front-section.jpg",
+          "pixelBox": [
+            120,
+            0,
+            449,
+            483
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Lower_wisdom_tooth.jpg",
+      "hero": "molar",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lower_wisdom_tooth.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Lower_wisdom_tooth.jpg",
+      "author": "Gleam~commonswiki (assumed creator per Commons)",
+      "licence": "CC BY-SA 3.0",
+      "angle": "near frontal, mildly elevated three-quarter photograph",
+      "dimensions": [
+        600,
+        613
+      ],
+      "observation": "Human lower third molar, not claimed to be first molar. Broad crown; linked asymmetric rounded cusps; narrowed cervical margin; two unequal roots. Good surface anatomy, not exact first-molar cusp count.",
+      "crops": [
+        {
+          "file": "molar-cusp-photo.jpg",
+          "pixelBox": [
+            117,
+            61,
+            481,
+            299
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Gray1002.png",
+      "hero": "molar",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gray1002.png",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Gray1002.png",
+      "author": "Henry Vandyke Carter / Gray’s Anatomy (1918), after Burchard",
+      "licence": "Public domain (PD-old-100-expired / PD-scan)",
+      "angle": "side/profile tooth plates",
+      "dimensions": [
+        400,
+        268
+      ],
+      "observation": "Lower molars are the first three in bottom row; broad multicusped crowns and two curved unequal roots. Plate orientation inverted for upper row.",
+      "crops": [
+        {
+          "file": "molar-profile-drawing.png",
+          "pixelBox": [
+            131,
+            139,
+            205,
+            259
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Sobo_1906_335.png",
+      "hero": "molar",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sobo_1906_335.png",
+      "author": "Dr. Johannes Sobotta, Atlas and Text-book of Human Anatomy (1906)",
+      "licence": "Public domain (PD-old-80-expired / PD-scan)",
+      "angle": "Proximal side elevation (mesial/distal); roots overlap",
+      "dimensions": [
+        960,
+        563
+      ],
+      "observation": "Lower first molar moi 1 is third from right on bottom row. This proximal elevation shows one dominant root silhouette, unlike the two-root cheek-side elevation in Gray1002. Crown leans with rounded cusp relief.",
+      "crops": [
+        {
+          "file": "molar-proximal-profile.png",
+          "pixelBox": [
+            579,
+            302,
+            701,
+            502
+          ],
+          "operation": "crop only"
+        }
+      ],
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sobo_1906_335.png/960px-Sobo_1906_335.png"
+    },
+    {
+      "file": "2415_Histology_of_StomachN.jpg",
+      "hero": "stomach-wall",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:2415_Histology_of_StomachN.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/2415_Histology_of_StomachN.jpg",
+      "author": "OpenStax College",
+      "licence": "CC BY 3.0",
+      "angle": "three-quarter block section",
+      "dimensions": [
+        1214,
+        568
+      ],
+      "observation": "Stomach has invaginated pits opening into gastric glands, not villi. Distinct mucosa, thin muscularis mucosae, submucosa, three directional muscle layers and serosa.",
+      "crops": [
+        {
+          "file": "stomach-wall-block.jpg",
+          "pixelBox": [
+            380,
+            0,
+            800,
+            558
+          ],
+          "operation": "crop only"
+        },
+        {
+          "file": "stomach-pits-detail.jpg",
+          "pixelBox": [
+            380,
+            0,
+            799,
+            310
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Illu_stomach_layers.jpg",
+      "hero": "stomach-wall",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Illu_stomach_layers.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Illu_stomach_layers.jpg",
+      "author": "US National Cancer Institute / SEER Training",
+      "licence": "Public domain (US Federal Government)",
+      "angle": "three-quarter block section",
+      "dimensions": [
+        330,
+        278
+      ],
+      "observation": "Dense irregularly spaced gastric area/pit surface, deep gland tubes; oblique, circular, longitudinal muscle layers exposed on stepped side. Low-resolution historical scientific illustration.",
+      "crops": []
+    },
+    {
+      "file": "Gray1050.png",
+      "hero": "stomach-wall",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gray1050.png",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/1/11/Gray1050.png",
+      "author": "Henry Vandyke Carter / Gray’s Anatomy (1918)",
+      "licence": "Public domain (PD-old-100-expired / PD-scan)",
+      "angle": "front opened stomach",
+      "dimensions": [
+        960,
+        628
+      ],
+      "observation": "Rugae are branching irregular curving folds, mostly longitudinal near lesser curvature; gross folds and microscopic pits are different scales.",
+      "crops": [
+        {
+          "file": "stomach-rugae-detail.png",
+          "pixelBox": [
+            400,
+            239,
+            843,
+            580
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Histology_of_normal_fundic_mucosa.png",
+      "hero": "stomach-wall",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Histology_of_normal_fundic_mucosa.png",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Histology_of_normal_fundic_mucosa.png/960px-Histology_of_normal_fundic_mucosa.png",
+      "author": "Carrasco G, Corvalan AH (2013); via Wikimedia Commons",
+      "licence": "CC BY 3.0",
+      "angle": "Frontal histological longitudinal section, H&E 10x with 40x inset",
+      "dimensions": [
+        960,
+        711
+      ],
+      "observation": "Actual normal gastric mucosa micrograph: irregular recessed gastric pits above long branched gland tubes. Comparison concerns mucosa only; the image does not expose all three gross muscularis externa layers. Staining colours are not natural tissue colour. Commons description confusingly calls the fundic file antral; use only visible pit/gland morphology and cite original study DOI10.1155/2013/393015.",
+      "crops": []
+    },
+    {
+      "file": "2418_Histology_Small_IntestinesN.jpg",
+      "hero": "villi",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:2418_Histology_Small_IntestinesN.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/2418_Histology_Small_IntestinesN.jpg",
+      "author": "OpenStax College (drawing); Regents of University of Michigan Medical School © 2012 (micrographs b–d)",
+      "licence": "CC BY 3.0 per Commons file (micrograph credit retained)",
+      "angle": "front longitudinal section plus histological profile",
+      "dimensions": [
+        1079,
+        824
+      ],
+      "observation": "Tall round-ended villi vary in width and angle, with crypts between bases. Capillaries lie around a central blind-ended lacteal; the lacteal does not reach through the tip. Microvilli belong to individual epithelial cells.",
+      "crops": [
+        {
+          "file": "villi-front-section.jpg",
+          "pixelBox": [
+            388,
+            0,
+            723,
+            427
+          ],
+          "operation": "crop only"
+        },
+        {
+          "file": "villi-histology-profile.jpg",
+          "pixelBox": [
+            410,
+            566,
+            800,
+            790
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Gray1061.png",
+      "hero": "villi",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gray1061.png",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Gray1061.png",
+      "author": "Henry Vandyke Carter / Gray’s Anatomy (1918), after Cadiat",
+      "licence": "Public domain (PD-old-100-expired / PD-scan)",
+      "angle": "near frontal cutaway forest, slight three-quarter",
+      "dimensions": [
+        960,
+        722
+      ],
+      "observation": "Crowded irregular tall fingers with narrow clefts; peripheral vascular reticulum; wider blind-ended central lymphatic. Base vasculature joins continuous plexus.",
+      "crops": [
+        {
+          "file": "villi-capillary-detail.png",
+          "pixelBox": [
+            176,
+            0,
+            714,
+            647
+          ],
+          "operation": "crop only"
+        }
+      ]
+    },
+    {
+      "file": "Gray1060.png",
+      "hero": "villi",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gray1060.png",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Gray1060.png",
+      "author": "Henry Vandyke Carter / Gray’s Anatomy (1918), after von Ebner",
+      "licence": "Public domain (PD-old-100-expired / PD-scan)",
+      "angle": "transverse cross section of human villus",
+      "dimensions": [
+        400,
+        399
+      ],
+      "observation": "One columnar epithelial layer forms outer ring with goblet cells; central lacteal plus peripheral smaller blood vessels. Reference supports noncylindrical section and tissue arrangement.",
+      "crops": []
+    },
+    {
+      "file": "wellcome-intestinal-villi-B0006133.jpg",
+      "hero": "villi",
+      "sourcePage": "https://wellcomecollection.org/works/b5tfxwc4",
+      "downloadUrl": "https://iiif.wellcomecollection.org/image/B0006133/full/1200,/0/default.jpg",
+      "author": "Liz Hirst, Medical Research Council / Wellcome Collection",
+      "licence": "CC BY 4.0",
+      "angle": "Oblique exterior profile / tip, horizontal long axis",
+      "dimensions": [
+        1200,
+        788
+      ],
+      "observation": "Actual coloured scanning-electron micrograph. Rounded blunt villus tip; individual enterocyte surfaces form irregular tiles, not perfectly repeated grooves. Neighbouring villi crowded around it. Species not identified in catalogue description, so not asserted human. False colour does not establish tissue token colour.",
+      "crops": []
+    }
+  ]
+}

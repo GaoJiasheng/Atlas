@@ -14,6 +14,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { airJar, ballRack, ballRow, fishBody, fishGasPaths, fishTank, fishWaterPaths, gillCover, gills, GILL_HINGE, plant, plantGasPaths, plantPaths, ROWS, sideTable } from './bench';
 import { SIM } from './sim';
+import { buildFish } from './build-fish';
 import { CUT_LABEL, EXPLODE_LABEL, GROUP_TEXT, PART_TEXT, PRESET_TEXT, SPEC, TELEMETRY } from './text';
 
 type V3 = [number, number, number];
@@ -302,3 +303,6 @@ for (const f of flows) {
   const len = lengthOf(ps);
   console.log(`  ${f.id.padEnd(15)} ${String(ps.length).padStart(2)} paths ${len.toFixed(3)} m  count ${f.count}  flux ${((f.count / len) * f.speed).toFixed(1)}`);
 }
+
+// Sculpted bench geometry replaces only its four retained part ids.
+await buildFish();

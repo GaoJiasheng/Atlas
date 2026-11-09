@@ -313,7 +313,11 @@ describe('opted-in GLB surfaces reach the real part material', () => {
     expect(statSync('public/models/solar-system.glb').size).toBeLessThanOrEqual(1_500_000);
   });
 
-  it.each(['bones-and-joints', 'heart-and-lungs', 'digestive-system', 'muscles-core', 'muscles-back', 'muscles-shoulders', 'muscles-chest', 'muscles-arms', 'muscles-legs', 'sample-solar'])('%s retains its existing material path and has no new surface opt-in', topic => {
+  // heart-and-lungs and digestive-system now opt their rebuilt sculptures in to
+  // atlasSurface (like fossils-and-skeletons, sun-earth-moon and living-things);
+  // their surfaces are covered by the production-hook regressions in
+  // heart-and-lungs-rebuild.test.ts and digestive-system-rebuild.test.ts.
+  it.each(['bones-and-joints', 'muscles-core', 'muscles-back', 'muscles-shoulders', 'muscles-chest', 'muscles-arms', 'muscles-legs', 'sample-solar'])('%s retains its existing material path and has no new surface opt-in', topic => {
     const file = json(`src/content/topics/${topic}/data/parts.json`);
     if (file.model) {
       const asset = glbJson(`public${file.model}`);
