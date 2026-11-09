@@ -43,8 +43,8 @@ motor.extra=[canFace(-1), ...[1,-1].map(s=>({kind:'curvedPanel',radius:R,angle:2
 ];
 file.parts.find((p:P)=>p.id==='motor-fan').primitive.at[1]=.0340;
 // Preserve the circuit's electrical facts. Only the physical description changes.
-motor.detail.en=motor.detail.en.replace('A small motor in a steel case with a shaft and two tabs for wires,','A small brushed motor with a flattened steel can, crimped plastic end bell, cooling openings, a shaft bearing and two punched tabs for wires,');
-motor.detail.zh=motor.detail.zh.replace('一个装在钢壳里的小电机，有一根轴和两个接线片，','一个有刷小电机，带压扁的钢罐外壳、铆合塑料端盖、通风孔、轴承和两个带孔接线片，');
+motor.detail.en=motor.detail.en.replace('A small motor in a steel case with a shaft and two tabs for wires,','A small brushed motor with a flattened steel case, a plastic end cap clamped on, cooling holes, a bearing for the shaft and two metal tabs with holes for the wires,');
+motor.detail.zh=motor.detail.zh.replace('一个装在钢壳里的小电机，有一根轴和两个接线片，','一个有刷小电机，带压扁的钢外壳、夹紧固定的塑料端盖、通风孔、转轴轴承和两个带孔的金属接线片，');
 const buzzer=file.parts.find((p:P)=>p.id==='buzzer');
 // The cited CMI-1295 form is Ø12 × 10 mm; the previous Ø30 mm puck was wrong.
 // Deep port and recessed diaphragm, rather than a steel decal over the lid.
@@ -61,8 +61,8 @@ buzzer.extra=[
 ];
 buzzer.detail.en=buzzer.detail.en.replace('The housing follows the 12 mm diameter and 10 mm height of the reference form [S18]. ', '');
 buzzer.detail.zh=buzzer.detail.zh.replace('外壳按参考器件的直径 12 mm、高 10 mm 绘制 [S18]。', '');
-buzzer.detail.en=buzzer.detail.en.replace('A small round buzzer with two leads,','A small cylindrical magnetic buzzer with a recessed sound opening and two soldered leads,').replace(/(?:The generic housing.*?\[S18\]\. )?Inside, a coil/,'The generic housing is drawn 12 mm across and 10 mm tall, close to the small magnetic buzzer cited here [S18]. Inside, a coil');
-buzzer.detail.zh=buzzer.detail.zh.replace('一个小小的圆形蜂鸣器，带两根引线，','一个圆筒形电磁蜂鸣器，带凹入的发声孔和两根焊接引线，').replace(/(?:通用外壳.*?\[S18\]。)?里面有一个线圈/,'通用外壳画为直径 12 mm、高 10 mm，与这里所引的小型电磁蜂鸣器接近 [S18]。里面有一个线圈');
+buzzer.detail.en=buzzer.detail.en.replace('A small round buzzer with two leads,','A small can-shaped magnetic buzzer with a sunken sound hole and two wires soldered on,').replace(/(?:(?:The generic housing|Its case is a typical one).*?\[S18\]\. )?Inside, a coil/,'Its case is a typical one, drawn 12 mm across and 10 mm tall, close to the size of the small magnetic buzzer in the source [S18]. Inside, a coil');
+buzzer.detail.zh=buzzer.detail.zh.replace('一个小小的圆形蜂鸣器，带两根引线，','一个圆筒形电磁蜂鸣器，带凹进去的发声孔和两根焊上的导线，').replace(/(?:(?:通用外壳|外壳是常见的样式).*?\[S18\]。)?里面有一个线圈/,'外壳是常见的样式，画成直径 12 mm、高 10 mm，和资料里的小型电磁蜂鸣器差不多大 [S18]。里面有一个线圈');
 const clips=file.parts.find((p:P)=>p.id==='gap-clips');
 const all:P[]=[];
 // Stamped channel jaws, with hollow hinge cheeks, staggered teeth and coil spring.
@@ -93,8 +93,8 @@ clips.primitive=all[0];clips.extra=all.slice(1);
 // Wire endpoints land inside the two rear crimp barrels, no exposed air gap.
 const leads=file.parts.find((p:P)=>p.id==='leads');
 leads.extra[0].path[leads.extra[0].path.length-1]=[.0215,-.0032,.045];
-clips.detail.en=clips.detail.en.replace('Two crocodile clips','Two spring-loaded crocodile clips with serrated metal jaws, hinge pins and insulated wire crimps');
-clips.detail.zh=clips.detail.zh.replace('电路板前方的两只鳄鱼夹','电路板前方的两只弹簧鳄鱼夹，带锯齿金属夹口、铰轴和绝缘压线尾套');
+clips.detail.en=clips.detail.en.replace('Two crocodile clips','Two spring-loaded crocodile clips with toothed metal jaws, hinge pins and insulated covers where the wires join,');
+clips.detail.zh=clips.detail.zh.replace('电路板前方的两只鳄鱼夹','电路板前方的两只弹簧鳄鱼夹，带锯齿形金属夹口、转轴和包住接线处的绝缘套');
 // Whole-topic sweep: remove the remaining low-resolution manufactured curves.
 file.parts.find((p:P)=>p.id==='plastic-straw').primitive.segments=64;
 file.parts.find((p:P)=>p.id==='wooden-stick').primitive.shape=roundedRect(.054,.010,.005,0,0,12);

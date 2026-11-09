@@ -255,8 +255,8 @@ export const PART_TEXT: Record<string, PartText> = {
     t('North arrow', '指北箭头'),
     t('Points north.', '指向北方。'),
     t(
-      'A dark arrow and north–south line inlaid in the paving, pointing north [S1]. Use them to read which way the pole’s shadow points. The low perimeter wall is part of the courtyard design study.',
-      '铺砖中嵌着深色箭头和南北线，箭头指北 [S1]。用它们来看杆子的影子指向哪个方位。外围矮墙属于庭院设计示意。',
+      'A dark arrow and north–south line inlaid in the paving, pointing north [S1]. Use them to read which way the pole’s shadow points. The low wall around the edge only shows how the courtyard could be designed.',
+      '铺砖中嵌着深色箭头和南北线，箭头指北 [S1]。用它们来看杆子的影子指向哪个方位。外围的矮墙只是示意庭院可以怎样设计。',
     ),
   ),
   sun: part(
@@ -295,7 +295,7 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Courtyard', '日影庭院'),
     t('Level ground that catches the pole’s shadow.', '平整的地面，接住杆子的影子。'),
     t(
-      'A round, level paved court 11 m across, edged by a low parapet with an entrance, standing for an open school courtyard in Singapore at 1.3° N, 103.8° E [S1, S13]. The model takes the ground as perfectly flat and the sky as clear.\n\nIt is drawn 10 m from the light bench so that each can be shown on its own; the two are never on the same view.',
+      'A round, level paved court 11 m across, edged by a low wall with an entrance, standing for an open school courtyard in Singapore at 1.3° N, 103.8° E [S1, S13]. The model takes the ground as perfectly flat and the sky as clear.\n\nIt is drawn 10 m from the light bench so that each can be shown on its own; the two are never on the same view.',
       '一块直径 11 米的平整铺砖庭院，外围有带入口的矮墙，代表新加坡（北纬 1.3°、东经 103.8°）一所学校里的空地 [S1, S13]。模型假设地面完全平整、天空无云。\n\n它画在光学实验台旁边 10 米外，两处各看各的，从不同框。',
     ),
   ),

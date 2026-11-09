@@ -31,7 +31,7 @@ stand.extra=[
  lathe([[.003,-.003],[.006,-.003],[.006,.003],[.003,.003],[.003,-.003]],[.015,.013,-.18],'casing'),
  lathe([[0,-.005],[.0014,-.005],[.0014,.003],[.004,.003],[.004,.005],[0,.005]],[.079,.244,-.169],'brass',[90,0,0]),
 ];
-stand.detail.en=stand.detail.en.replace('A stand with a thin thread','A retort stand with a cast base, adjustable boss, three-prong utility clamp, thin thread');
+stand.detail.en=stand.detail.en.replace('A stand with a thin thread','A retort stand with a cast-metal base, an adjustable holder and a three-pronged clamp. A thin thread').replace(' and a paper cradle for the bar magnet.',' and a paper cradle carry the bar magnet.');
 stand.detail.zh=stand.detail.zh.replace('支架上挂着','铸造底座的铁架台带有可调夹头和三爪夹，上面挂着');
 // The sweep also exposed two auxiliary bent-rod supports. Their attachments
 // stay with the existing parent parts, so chapter and exploded behavior stays.

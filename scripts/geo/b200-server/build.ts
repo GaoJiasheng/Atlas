@@ -213,8 +213,8 @@ foam([0,.667,.4546],.426,.418,15,15);finish('rack-neighbour',.62,.5);
 // Keep all four original part-rotation and service semantics. A GLB has no
 // instance pivots; only static parts are converted, rotors stay engine primitives.
 for(const p of file.parts)if(!p.mesh){for(const q of [p.primitive,...(p.extra??[])])if(q){if(q.color==='plastic'||q.color==='powder'||q.color==='steel')delete q.tint;if(p.id==='fan-rotors')q.color='powder';}}
-by.get('bezel')!.detail.en=by.get('bezel')!.detail.en.replace('the model shows it as a solid champagne-coloured panel','the model reconstructs it as a champagne-coloured open-cell web with real holes and a folded perimeter');
-by.get('bezel')!.detail.zh=by.get('bezel')!.detail.zh.replace('模型把它画成一整块实心的香槟金色板','模型将它重建为带真实通孔和折边的香槟金色开孔网');
+by.get('bezel')!.detail.en=by.get('bezel')!.detail.en.replace('the model shows it as a solid champagne-coloured panel','the model shows it as a champagne-coloured metal web full of real holes, with folded edges');
+by.get('bezel')!.detail.zh=by.get('bezel')!.detail.zh.replace('模型把它画成一整块实心的香槟金色板','模型把它做成香槟金色的金属网，上面有真正的孔，边缘有折边');
 file.model='/models/b200-server.glb';
 const runtime=round==='final'?runtimeDetails(file,seed):new Set<string>();
 // meshopt compressed transport, preserving the per-part draw-call boundaries.

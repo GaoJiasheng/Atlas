@@ -12,8 +12,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. Its printed millilitre scale is approximate, and its water surface is shown separately. [S27]",
-        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。印上的毫升刻度只是近似值，水面单独显示。[S27]"
+        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. The millilitre marks printed on it are only approximate. Its water surface is shown as a separate part. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。杯上印的毫升刻度只是大概的数值，水面作为单独的部分显示。[S27]"
       },
       "explode": {
         "dir": [
@@ -1272,12 +1272,12 @@
         "zh": "温浴温度计液柱"
       },
       "summary": {
-        "en": "Its top marks the model temperature on the probe.",
-        "zh": "液柱顶端标示探头对应的模型温度。"
+        "en": "The top of the liquid shows the temperature at the probe in this model.",
+        "zh": "液柱顶端显示这个模型里探头处的温度。"
       },
       "detail": {
-        "en": "The liquid column and card use the same temperature value before rounding. The column rises inside the stem to show that temperature, without calculating a liquid volume. [S27]",
-        "zh": "液柱和卡片使用同一个取整前的温度值。液柱在杆内升高来显示温度，不计算液柱体积。[S27]"
+        "en": "The liquid column and the card use the same temperature, before it is rounded. The column rises inside the stem to show that temperature. The model does not work out the liquid’s volume. [S27]",
+        "zh": "液柱和卡片用的是同一个温度值，都是取整之前的数。液柱在杆里升高来显示温度，模型不计算液柱的体积。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -3300,8 +3300,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. Its printed millilitre scale is approximate, and its water surface is shown separately. [S27]",
-        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。印上的毫升刻度只是近似值，水面单独显示。[S27]"
+        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. The millilitre marks printed on it are only approximate. Its water surface is shown as a separate part. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。杯上印的毫升刻度只是大概的数值，水面作为单独的部分显示。[S27]"
       },
       "explode": {
         "dir": [
@@ -4406,12 +4406,12 @@
         "zh": "加热探头液柱"
       },
       "summary": {
-        "en": "Its top marks the model temperature on the probe.",
-        "zh": "液柱顶端标示探头对应的模型温度。"
+        "en": "The top of the liquid shows the temperature at the probe in this model.",
+        "zh": "液柱顶端显示这个模型里探头处的温度。"
       },
       "detail": {
-        "en": "The liquid column and card use the same temperature value before rounding. The column rises inside the stem to show that temperature, without calculating a liquid volume. [S27]",
-        "zh": "液柱和卡片使用同一个取整前的温度值。液柱在杆内升高来显示温度，不计算液柱体积。[S27]"
+        "en": "The liquid column and the card use the same temperature, before it is rounded. The column rises inside the stem to show that temperature. The model does not work out the liquid’s volume. [S27]",
+        "zh": "液柱和卡片用的是同一个温度值，都是取整之前的数。液柱在杆里升高来显示温度，模型不计算液柱的体积。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -4467,8 +4467,8 @@
         "zh": "盛放液体，杯口保持敞开。"
       },
       "detail": {
-        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. Its printed millilitre scale is approximate, and its water surface is shown separately. [S27]",
-        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。印上的毫升刻度只是近似值，水面单独显示。[S27]"
+        "en": "This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. The millilitre marks printed on it are only approximate. Its water surface is shown as a separate part. [S27]",
+        "zh": "敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。杯上印的毫升刻度只是大概的数值，水面作为单独的部分显示。[S27]"
       },
       "explode": {
         "dir": [
@@ -5573,12 +5573,12 @@
         "zh": "冷却探头液柱"
       },
       "summary": {
-        "en": "Its top marks the model temperature on the probe.",
-        "zh": "液柱顶端标示探头对应的模型温度。"
+        "en": "The top of the liquid shows the temperature at the probe in this model.",
+        "zh": "液柱顶端显示这个模型里探头处的温度。"
       },
       "detail": {
-        "en": "The liquid column and card use the same temperature value before rounding. The column rises inside the stem to show that temperature, without calculating a liquid volume. [S27]",
-        "zh": "液柱和卡片使用同一个取整前的温度值。液柱在杆内升高来显示温度，不计算液柱体积。[S27]"
+        "en": "The liquid column and the card use the same temperature, before it is rounded. The column rises inside the stem to show that temperature. The model does not work out the liquid’s volume. [S27]",
+        "zh": "液柱和卡片用的是同一个温度值，都是取整之前的数。液柱在杆里升高来显示温度，模型不计算液柱的体积。[S27]"
       },
       "primitive": {
         "kind": "lathe",
@@ -6147,8 +6147,8 @@
         "zh": "比较小球原状与受热后的示意状态。"
       },
       "detail": {
-        "en": "The brass ball hangs on a chain from a wooden handle. The ball-and-ring picture enlarges the size change to make it visible. It is a separate comparison from the rod and uses neither the rod’s dimensions nor its expansion coefficient. It gives no numerical ball temperature or expansion. [S27]",
-        "zh": "黄铜球用链条挂在木柄下。球环图放大尺寸变化，方便观察。它与杆是不同的比较，不采用杆的尺寸或膨胀系数，也没有给出球的温度或膨胀量数值。[S27]"
+        "en": "The brass ball hangs on a chain from a wooden handle. The ball-and-ring picture enlarges the size change to make it visible. It is a separate comparison from the rod. It does not use the rod’s size or how much the rod expands for each degree. It gives no number for the ball’s temperature or for how much it expands. [S27]",
+        "zh": "黄铜球用链条挂在木柄下。球环图放大尺寸变化，方便观察。它与杆是不同的比较，不用杆的尺寸，也不用杆每升高一度膨胀多少的数值；球的温度和膨胀了多少，这里都没有给出数字。[S27]"
       },
       "primitive": {
         "kind": "lathe",

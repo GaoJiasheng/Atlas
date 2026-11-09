@@ -60,7 +60,7 @@ describe('digestive rebuild: source anatomy and teaching contract', () => {
     expect(hash(Object.fromEntries(Object.entries(partsRaw).filter(([k]) => !['model', 'parts'].includes(k))))).toBe(baseline.configuration);
     const field=parts.parts.find(p=>p.id==='villi-field')!;
     expect(field.detail!.en).toContain('200 square metres'); expect(field.detail!.en).toContain('32 square metres');
-    expect(field.detail!.en).toContain('not microscopic measurements'); expect(field.detail!.zh).toContain('并非显微测量结果');
+    expect(field.detail!.en).toContain('not measured under a microscope'); expect(field.detail!.zh).toContain('不是在显微镜下量出来的');
     for (const id of IDS) {
       const part = parts.parts.find(p => p.id === id)!;
       expect(part.mesh).toBe(id); expect(part.primitive).toBeUndefined(); expect(part.extra).toBeUndefined();

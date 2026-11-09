@@ -823,8 +823,8 @@
         "zh": "为第二级储存液氢。"
       },
       "detail": {
-        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows a single divider, curving up from its rim at y = 50.6 m in the launch model, with no overlapping tank ends. [S25, S90]",
-        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面，从发射模型中y=50.6米处的边缘向上拱起，两箱封头不重叠。[S25, S90]"
+        "en": "The large upper tank stores hydrogen. A shared insulated divider separates it from oxygen below. The model shows one divider. At launch its edge is 50.6 m above the bottom of the engines, and it curves upward from there. The ends of the two tanks do not overlap. [S25, S90]",
+        "zh": "较大的上方储箱装液氢，与下方液氧箱共用隔热底板。模型只画一道分隔面。发射时，它的边缘在发动机底部上方50.6米处，从那里向上拱起；两个储箱的端部不重叠。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1348,8 +1348,8 @@
         "zh": "储存入轨和出发所用的液氢。"
       },
       "detail": {
-        "en": "A shared divider, curving up from its rim at y = 73.5 m in the model, separates hydrogen above from oxygen below. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
-        "zh": "共用底板从模型中y=73.5米处的边缘向上拱起，把上方液氢与下方液氧分开。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
+        "en": "A shared divider separates hydrogen above from oxygen below. In the model its edge is 73.5 m above the bottom of the engines, and it curves upward from there. Both burns draw on these tanks and use the same J-2 engine. [S25, S90]",
+        "zh": "共用底板把上方液氢与下方液氧分开。模型中，它的边缘在发动机底部上方73.5米处，从那里向上拱起。两次燃烧都取用这些储箱，使用同一台J-2。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -1587,8 +1587,8 @@
         "zh": "测量运动，引导火箭。"
       },
       "detail": {
-        "en": "This ring sits between the third stage and the spacecraft adapter. It holds guidance and control equipment in racks around the inside of the ring. It provides control rather than another main propulsion stage. [S25, S90]",
-        "zh": "这个环位于第三级与飞船适配器之间，环的内侧排着装制导控制设备的机架。它负责控制，不是另一个主推进级。[S25, S90]"
+        "en": "This ring sits between the third stage and the spacecraft adapter. It holds guidance and control equipment in racks around the inside of the ring. Its job is control: it is not another stage with main engines. [S25, S90]",
+        "zh": "这个环位于第三级与飞船适配器之间，环的内侧排着装制导控制设备的机架。它负责控制，不是另一个装主发动机的级。[S25, S90]"
       },
       "primitive": {
         "kind": "lathe",
@@ -2258,8 +2258,8 @@
         "zh": "引导两舱进入对接位置。"
       },
       "detail": {
-        "en": "The command-module probe meets the lunar module’s docking port. In the launch model its tip is at y = 102.3 m, and docking poses bring it to the port at y = 92.5 m. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
-        "zh": "指令舱探杆接上登月舱对接口。在发射模型中，探杆尖端位于y=102.3米；对接姿态把它送到y=92.5米处的接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
+        "en": "The command-module probe meets the lunar module’s docking port. In the launch model its tip is 102.3 m above the bottom of the engines. The docking views bring it to the port, 92.5 m above the bottom of the engines. It is separate from the cone’s front cover. The homeward and return views hide the probe. [S25, S90]",
+        "zh": "指令舱探杆接上登月舱对接口。在发射模型中，探杆尖端在发动机底部上方102.3米处；对接画面把它送到发动机底部上方92.5米处的接口。它与锥形舱的前舱盖分开，在返航和返回画面中隐藏。[S25, S90]"
       },
       "primitive": {
         "kind": "tube",
@@ -3210,8 +3210,8 @@
         "zh": "把载荷分散到四个足垫上。"
       },
       "detail": {
-        "en": "Each of the four legs has a main strut, two braces and a footpad. Three legs also carry a long probe under the footpad that touches the ground first; the ladder leg has none. In the launch model the deployed pad bottoms sit at y = 85.6 m; the landed offset brings them to y = 0, one flat surface. The model shows folded and open shapes, with compressed folded legs to fit the adapter. It does not show the exact hinge motion. [S26, S90]",
-        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。其中三条腿的足垫下还有一根长探针，会先碰到地面；带梯子的那条腿没有。在发射模型中，展开后的足垫底部在y=85.6米处；着陆偏移把它们移到y=0，落在同一平面。模型显示收拢和展开的形态，收拢支腿经过压缩以放入适配器，不演示精确铰链运动。[S26, S90]"
+        "en": "Each of the four legs has a main strut, two braces and a footpad. Three legs also carry a long probe under the footpad that touches the ground first; the ladder leg has none. In the launch model the bottoms of the opened footpads are 85.6 m above the bottom of the engines. In the landed view all four rest on one flat surface. The model shows the legs folded and open; the folded legs are squeezed to fit inside the adapter. It does not show exactly how the hinges move. [S26, S90]",
+        "zh": "四条腿各有一根主支柱、两根副撑和一个足垫。其中三条腿的足垫下还有一根长探针，会先碰到地面；带梯子的那条腿没有。在发射模型中，展开后的足垫底部在发动机底部上方85.6米处；在着陆画面里，四个足垫都落在同一个平面上。模型显示支腿收拢和展开的样子，收拢的支腿压缩了一些，好放进适配器，不演示铰链的确切运动。[S26, S90]"
       },
       "primitive": {
         "kind": "tube",

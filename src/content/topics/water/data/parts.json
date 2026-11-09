@@ -164,7 +164,7 @@
     "zh": "受保护的森林接住雨水。"
    },
    "detail": {
-    "en": "Forest on the hills catches the rain. Water soaks into the soil and runs down the slopes into streams and into the reservoir in the valley. Singapore's oldest reservoirs lie among protected forest in the centre of the island; its highest natural point, Bukit Timah Hill, is only 163 m high [S31].\n\nThe model exaggerates the hills and shows branching trees with overlapping, unequal crowns.\n\nKeeping the forest and its streams clean keeps the water clean: what falls or is dumped in a catchment ends up in the reservoir [S25].",
+    "en": "Forest on the hills catches the rain. Water soaks into the soil and runs down the slopes into streams and into the reservoir in the valley. Singapore's oldest reservoirs lie among protected forest in the centre of the island; its highest natural point, Bukit Timah Hill, is only 163 m high [S31].\n\nThe model makes the hills look higher than they really are. Its trees have branches and overlapping tops of different sizes.\n\nKeeping the forest and its streams clean keeps the water clean: what falls or is dumped in a catchment ends up in the reservoir [S25].",
     "zh": "山上的森林接住雨水。水渗进土里，再顺着山坡流进小溪、流进山谷里的蓄水池。新加坡最早的几座蓄水池就在岛中央受保护的森林里；全岛最高的自然地点武吉知马山也只有 163 米 [S31]。\n\n模型把山的高度夸大，树木则呈现分枝和高低不齐、交叠的树冠。\n\n保持森林和溪流干净，水也就干净：落在或被丢在集水区里的东西，最后都会流进蓄水池 [S25]。"
    },
    "connects": [
@@ -403,8 +403,8 @@
     "zh": "屋顶、路面和空地把雨水排走。"
    },
    "detail": {
-    "en": "In Singapore's city, roofs, roads and open ground are part of the catchment too. Rain that falls on them runs into drains and canals that lead to reservoirs; rain falling on about two-thirds of the land is collected this way [S3].\n\nThe model shows slab and point blocks, with open ground floors, recessed windows and urban trees. Rain on hard surfaces runs off much faster than rain on forest: the drainage code counts almost all of it on paved ground and less than half on vegetated ground [S30].\n\nLitter and oil left on the ground are washed into the drains with the next shower.",
-    "zh": "在新加坡，城市的屋顶、道路和空地也是集水区的一部分。落在上面的雨流进排水沟和运河，再流到蓄水池；约三分之二土地上的雨水都这样收集起来 [S3]。\n\n模型用板式和点式组屋、架空底层、内凹窗户及街道树木表示城市。雨落在硬地上，比落在森林里流走得快得多：排水规范把铺装地上的雨几乎全部算作径流，植被地上不到一半 [S30]。\n\n丢在地上的垃圾和油污，下一场雨就被冲进排水沟。"
+    "en": "In Singapore's city, roofs, roads and open ground are part of the catchment too. Rain that falls on them runs into drains and canals that lead to reservoirs; rain falling on about two-thirds of the land is collected this way [S3].\n\nThe model shows long blocks and tower blocks of flats, with open void decks, windows set back into the walls and trees along the streets. Rain on hard surfaces runs off much faster than rain on forest: the drainage code counts almost all of it on paved ground and less than half on vegetated ground [S30].\n\nLitter and oil left on the ground are washed into the drains with the next shower.",
+    "zh": "在新加坡，城市的屋顶、道路和空地也是集水区的一部分。落在上面的雨流进排水沟和运河，再流到蓄水池；约三分之二土地上的雨水都这样收集起来 [S3]。\n\n模型用长条形和塔形的组屋、架空底层、凹进墙里的窗户和街边的树木来表示城市。雨落在硬地上，比落在森林里流走得快得多：排水规范把铺装地上的雨几乎全部算作径流，植被地上不到一半 [S30]。\n\n丢在地上的垃圾和油污，下一场雨就被冲进排水沟。"
    },
    "connects": [
     "drains"
@@ -751,8 +751,8 @@
     "zh": "退潮时放倒，把多余的水放出去。"
    },
    "detail": {
-    "en": "Nine steel crest gates, each about 30 m long and 5 m tall, sit between the piers [S8]. They are hinged at the bottom. When heavy rain falls at low tide, the gates are lowered so that the excess water spills over them into the sea [S7].\n\nThe model compresses the barrage’s overall length while keeping the gate leaves broad and low; in the gates-open pose they tip towards the sea.\n\nAt high tide the sea is higher than the reservoir, so opening the gates would let seawater in; then the pumps do the work.",
-    "zh": "九道钢闸门立在闸墩之间，每道长约 30 m、高约 5 m [S8]。闸门底部装有铰链。退潮时遇上大雨，就把闸门放倒，让多余的水漫过闸门流进大海 [S7]。\n\n模型压缩堤坝的总长度，保留闸门宽而低的比例；在“开闸”姿态下，闸门向大海的一侧倒下。\n\n涨潮时海面比蓄水池高，打开闸门会让海水倒灌，这时就靠水泵。"
+    "en": "Nine steel crest gates, each about 30 m long and 5 m tall, sit between the piers [S8]. They are hinged at the bottom. When heavy rain falls at low tide, the gates are lowered so that the excess water spills over them into the sea [S7].\n\nThe model shows the barrage shorter than it really is, but keeps the gates wide and low. When the gates are open, they tip towards the sea.\n\nAt high tide the sea is higher than the reservoir, so opening the gates would let seawater in; then the pumps do the work.",
+    "zh": "九道钢闸门立在闸墩之间，每道长约 30 m、高约 5 m [S8]。闸门底部装有铰链。退潮时遇上大雨，就把闸门放倒，让多余的水漫过闸门流进大海 [S7]。\n\n模型把堤坝画得比实际短，但闸门仍然又宽又低；开闸时，闸门向大海的一侧倒下。\n\n涨潮时海面比蓄水池高，打开闸门会让海水倒灌，这时就靠水泵。"
    },
    "castShadow": false,
    "connects": [
@@ -776,8 +776,8 @@
     "zh": "涨潮又遇暴雨时，把水泵进海里。"
    },
    "detail": {
-    "en": "When heavy rain coincides with high tide, the gates cannot be lowered, so pumps lift the stormwater over the barrage into the sea [S7]. Marina Barrage has seven pumps of 40 m³ per second each, 280 m³ per second together [S8].\n\nThe model shows a low curved green roof around an open courtyard and seven outlet pipes facing the sea. The building footprint is compressed to fit this slice.\n\nIf the pumps could not keep up in a long storm at high tide, the reservoir and low-lying streets would rise.",
-    "zh": "大雨碰上涨潮时，闸门不能放倒，就由水泵把暴雨水抽过堤坝排进海里 [S7]。滨海堤坝有 7 台水泵，每台每秒 40 m³，合计每秒 280 m³ [S8]。\n\n模型画出围绕露天庭院的低矮弧形绿屋顶，以及七根朝向大海的排水管。建筑平面经过压缩，以便放进示意切片。\n\n如果涨潮时的暴雨太久、水泵来不及抽，蓄水池和低洼街道的水位就会上涨。"
+    "en": "When heavy rain coincides with high tide, the gates cannot be lowered, so pumps lift the stormwater over the barrage into the sea [S7]. Marina Barrage has seven pumps of 40 m³ per second each, 280 m³ per second together [S8].\n\nThe model shows a low curved green roof around an open courtyard and seven outlet pipes facing the sea. The building takes up less ground than the real one, so that it fits in this slice of the model.\n\nIf the pumps could not keep up in a long storm at high tide, the reservoir and low-lying streets would rise.",
+    "zh": "大雨碰上涨潮时，闸门不能放倒，就由水泵把暴雨水抽过堤坝排进海里 [S7]。滨海堤坝有 7 台水泵，每台每秒 40 m³，合计每秒 280 m³ [S8]。\n\n模型画出围绕露天庭院的低矮弧形绿屋顶，以及七根朝向大海的排水管。建筑占地比实际小，这样才放得进这一段模型。\n\n如果涨潮时的暴雨太久、水泵来不及抽，蓄水池和低洼街道的水位就会上涨。"
    },
    "shell": true,
    "explode": {
@@ -1381,8 +1381,8 @@
     "zh": "组屋：家庭用掉约 45 % 的水。"
    },
    "detail": {
-    "en": "Most Singaporeans live in HDB flats. Households use about 45 % of Singapore's water and the non-domestic sector about 55 % [S32, S12]. In 2025 household use averaged 141 litres per person per day; the national target is 130 litres by 2030 [S12, S13].\n\nThe model shows a twelve-storey slab block with an open void deck, recessed windows, common corridors and a lift core. One flat is drawn opened up so that its kitchen tap shows.\n\nWater saved in every flat adds up across the hundreds of thousands of flats on the island.",
-    "zh": "大多数新加坡人住在组屋里。家庭用掉新加坡约 45 % 的水，非家庭部门约 55 % [S32, S12]。2025 年，家庭人均每天用水 141 升；国家目标是到 2030 年降到 130 升 [S12, S13]。\n\n模型画了一栋十二层的板式组屋，设有架空底层、内凹窗户、公共走廊及电梯核心。有一户画成打开的样子，好让人看见厨房的水龙头。\n\n每一户省下的水，乘上全岛几十万户，就是很大的数量。"
+    "en": "Most Singaporeans live in HDB flats. Households use about 45 % of Singapore's water and the non-domestic sector about 55 % [S32, S12]. In 2025 household use averaged 141 litres per person per day; the national target is 130 litres by 2030 [S12, S13].\n\nThe model shows a twelve-storey long block of flats with an open void deck, windows set back into the walls, shared corridors and a lift shaft. One flat is drawn opened up so that its kitchen tap shows.\n\nWater saved in every flat adds up across the hundreds of thousands of flats on the island.",
+    "zh": "大多数新加坡人住在组屋里。家庭用掉新加坡约 45 % 的水，非家庭部门约 55 % [S32, S12]。2025 年，家庭人均每天用水 141 升；国家目标是到 2030 年降到 130 升 [S12, S13]。\n\n模型画了一栋十二层的长条形组屋，设有架空底层、凹进墙里的窗户、公共走廊和电梯井。有一户画成打开的样子，好让人看见厨房的水龙头。\n\n每一户省下的水，乘上全岛几十万户，就是很大的数量。"
    },
    "shell": true,
    "connects": [

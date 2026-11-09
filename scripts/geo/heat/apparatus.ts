@@ -90,8 +90,8 @@ export function polishApparatus(parts:P[],sim:P,iteration=2){
   const bind=sim.bind.find((q:P)=>q.part===marker);delete bind.offset;
   bind.fill={per:Math.PI*.00065**2*.0008,below:57.5,meniscus:.00015,ease:0};
   get(marker).name={en:get(id).name.en+' liquid column',zh:get(id).name.zh+'液柱'};
-  get(marker).summary={en:'Its top marks the model temperature on the probe.',zh:'液柱顶端标示探头对应的模型温度。'};
-  get(marker).detail={en:'The liquid column and card use the same temperature value before rounding. The column rises inside the stem to show that temperature, without calculating a liquid volume. [S27]',zh:'液柱和卡片使用同一个取整前的温度值。液柱在杆内升高来显示温度，不计算液柱体积。[S27]'};
+  get(marker).summary={en:'The top of the liquid shows the temperature at the probe in this model.',zh:'液柱顶端显示这个模型里探头处的温度。'};
+  get(marker).detail={en:'The liquid column and the card use the same temperature, before it is rounded. The column rises inside the stem to show that temperature. The model does not work out the liquid’s volume. [S27]',zh:'液柱和卡片用的是同一个温度值，都是取整之前的数。液柱在杆里升高来显示温度，模型不计算液柱的体积。[S27]'};
  }
  // Hotplate with a ceramic deck, rolled casing seam, vent slots and recessed fascia.
  const heater=[b([.15,.765,.1],[.14,.028,.14],'enamel',.006),b([.15,.779,.1],[.139,.003,.139],'rubber',.001),rod([.15,.783,.1],.054,.007,'steel'),rod([.15,.787,.1],.052,.002,'enamel')];

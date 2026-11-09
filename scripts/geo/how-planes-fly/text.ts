@@ -27,10 +27,16 @@ export const PART_TEXT: Record<string, PartText> = {
   'cockpit-glazing': {
     name: t('Cockpit', '驾驶舱'),
     summary: t('Marks the nose, where the crew sit.', '标出机头，机组坐在这里。'),
-    detail: {
-      "en": "The flight crew sit behind these windows at the front of the fuselage. They mark the nose, which faces into the incoming air, towards −X in the model.\n\nSix windscreen panes sit in frames set into the curved nose. The shape is generic, not one particular aircraft type [S58].",
-      "zh": "机组坐在机身前端的窗户后面。窗户标出机头的位置，朝向来流，也就是模型中的 −X 方向。\n\n六块风挡玻璃装在窗框里，嵌进弯曲的机头。外形是通用设计，不是某一种机型 [S58]。"
-    },
+    detail: p(
+      [
+        'The flight crew sit behind these windows at the front of the fuselage. They mark the nose, which faces into the incoming air.',
+        'Six windscreen panes sit in frames set into the curved nose. The shape is generic, not one particular aircraft type [S58].',
+      ],
+      [
+        '机组坐在机身前端的窗户后面。窗户标出机头的位置，机头朝向迎面而来的空气。',
+        '六块风挡玻璃装在窗框里，嵌进弯曲的机头。外形是通用设计，不是某一种机型 [S58]。',
+      ],
+    ),
   },
   'wing-left': {
     name: t('Left wing', '左翼'),

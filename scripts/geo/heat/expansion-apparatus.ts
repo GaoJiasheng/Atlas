@@ -26,7 +26,7 @@ export function rebuildExpansion(parts:P[],poses:P){
  // Hold the suspension point fixed while the sphere expands below it; links never sink into the sphere.
  poses['ball-ring-start']['expansion-ball']={scale:1,pivot:[.24,.885,-.22]};
  poses['ball-ring-warm']['expansion-ball']={scale:1.2,pivot:[.24,.885,-.22]};
- get('expansion-ball').detail={en:'The brass ball hangs on a chain from a wooden handle. The ball-and-ring picture enlarges the size change to make it visible. It is a separate comparison from the rod and uses neither the rod’s dimensions nor its expansion coefficient. It gives no numerical ball temperature or expansion. [S27]',zh:'黄铜球用链条挂在木柄下。球环图放大尺寸变化，方便观察。它与杆是不同的比较，不采用杆的尺寸或膨胀系数，也没有给出球的温度或膨胀量数值。[S27]'};
+ get('expansion-ball').detail={en:'The brass ball hangs on a chain from a wooden handle. The ball-and-ring picture enlarges the size change to make it visible. It is a separate comparison from the rod. It does not use the rod’s size or how much the rod expands for each degree. It gives no number for the ball’s temperature or for how much it expands. [S27]',zh:'黄铜球用链条挂在木柄下。球环图放大尺寸变化，方便观察。它与杆是不同的比较，不用杆的尺寸，也不用杆每升高一度膨胀多少的数值；球的温度和膨胀了多少，这里都没有给出数字。[S27]'};
  const suspensionStart=bench.extra.length;
  bench.extra.push({kind:'torus',at:[.24,.8866,-.22],size:[.0018,.00065],color:'brass'} as Primitive);
  for(let j=0;j<10;j++){

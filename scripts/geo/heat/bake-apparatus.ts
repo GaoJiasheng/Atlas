@@ -107,7 +107,7 @@ export async function bakeApparatus(parts:P[],iteration=2){
   counts[part.id]=g.index!.count/3;
   part.mesh=part.id;part.material=isCup?{color:'enamel',tint:'token:bone'}:{color:part.primitive.color};
   delete part.primitive;delete part.extra;
-  if(isCup)part.detail={en:'This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. Its printed millilitre scale is approximate, and its water surface is shown separately. [S27]',zh:'敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。印上的毫升刻度只是近似值，水面单独显示。[S27]'};
+  if(isCup)part.detail={en:'This open glass beaker has a thin wall, a thick base, a rounded rim and a small pouring lip. The millilitre marks printed on it are only approximate. Its water surface is shown as a separate part. [S27]',zh:'敞口玻璃烧杯有薄壁、厚杯底、圆润杯沿和小杯嘴。杯上印的毫升刻度只是大概的数值，水面作为单独的部分显示。[S27]'};
  }
  counts['gas-cylinder']=bakeGasCylinder(doc,parts.find(p=>p.id==='gas-cylinder')!);
  await MeshoptEncoder.ready;

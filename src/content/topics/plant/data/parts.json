@@ -2933,8 +2933,8 @@
         "zh": "利用光制造植物的大部分食物。"
       },
       "detail": {
-        "en": "The older, darker leaves make most of the plant's food. Their green parts use light, water and carbon dioxide to make sugar and give out oxygen [S6].\n\nChilli leaves are oval to lance-shaped with a smooth edge, 4–13 cm long [S10, S12]; the model's are 7.5–9.5 cm [S1]. A main vein runs down the middle and side veins branch from it; the curved blades show a midrib fold and branching side veins.",
-        "zh": "颜色较深的老叶制造了植物大部分的食物。叶子的绿色部分利用光、水和二氧化碳制造糖，并放出氧 [S6]。\n\n辣椒叶呈椭圆形到披针形，边缘光滑，长 4–13 厘米 [S10, S12]；模型里的长 7.5–9.5 厘米 [S1]。中间一条主脉，两侧分出侧脉；弯曲的叶片有沿主脉的折痕和分支的侧脉。"
+        "en": "The older, darker leaves make most of the plant's food. Their green parts use light, water and carbon dioxide to make sugar and give out oxygen [S6].\n\nChilli leaves are oval to lance-shaped with a smooth edge, 4–13 cm long [S10, S12]; the model's are 7.5–9.5 cm [S1]. A main vein runs down the middle and side veins branch from it; the curved leaves in the model have a fold along the main vein.",
+        "zh": "颜色较深的老叶制造了植物大部分的食物。叶子的绿色部分利用光、水和二氧化碳制造糖，并放出氧 [S6]。\n\n辣椒叶呈椭圆形到披针形，边缘光滑，长 4–13 厘米 [S10, S12]；模型里的长 7.5–9.5 厘米 [S1]。中间一条主脉，两侧分出侧脉；模型中弯曲的叶片沿主脉有一道折痕。"
       },
       "explode": {
         "dir": [
@@ -5253,8 +5253,8 @@
         "zh": "每粒花粉里有雄性生殖细胞。"
       },
       "detail": {
-        "en": "Pollen grains from the anthers, greatly magnified. Each grain carries a male reproductive cell [S7].\n\nThe model draws them as rounded grains with three lengthwise furrows, fewer than in a real anther.\n\nPollen is carried from flower to flower on the hairy bodies of bees [S7].",
-        "zh": "从花药里出来的花粉粒，放大了很多倍。每一粒都带着雄性生殖细胞 [S7]。\n\n模型把它们画成带三条纵沟的圆形颗粒，数量比真实花药里的少。\n\n花粉靠蜜蜂多毛的身体从一朵花带到另一朵 [S7]。"
+        "en": "Pollen grains from the anthers, greatly magnified. Each grain carries a male reproductive cell [S7].\n\nThe model draws them as round grains with three long grooves. It shows fewer grains than a real anther holds.\n\nPollen is carried from flower to flower on the hairy bodies of bees [S7].",
+        "zh": "从花药里出来的花粉粒，放大了很多倍。每一粒都带着雄性生殖细胞 [S7]。\n\n模型把它们画成带三条长沟的圆形颗粒，数量比真实花药里的少。\n\n花粉靠蜜蜂多毛的身体从一朵花带到另一朵 [S7]。"
       },
       "connects": [
         "stamens"
@@ -5391,7 +5391,7 @@
         "zh": "水：纤维层里有空气，能漂浮。"
       },
       "detail": {
-        "en": "A coconut, drawn at about 0.4 times life size [S1]: one half cut open lying face up, the other half beside it, partly dehusked to expose the shell and its three recessed pores. Around the seed is a hard shell, and around that a thick fibrous husk [S17].\n\nThe coconut is adapted to be carried by sea currents [S17]; it floats and can be washed up on another shore.",
+        "en": "A coconut, drawn at about 0.4 times life size [S1]: one half cut open lying face up, the other half beside it, with part of the husk taken off to show the shell and its three sunken pores. Around the seed is a hard shell, and around that a thick fibrous husk [S17].\n\nThe coconut is adapted to be carried by sea currents [S17]; it floats and can be washed up on another shore.",
         "zh": "一个椰子，画成实物的约 0.4 倍 [S1]：一半剖开、切面朝上，另一半放在旁边，部分纤维层已去掉，露出硬壳和三个凹陷的孔。种子外面是坚硬的壳，壳外面是一层厚厚的纤维 [S17]。\n\n椰子适应于随海流传播 [S17]：它能漂浮，被冲到别的岸边。"
       },
       "mesh": "coconut",
@@ -5412,8 +5412,8 @@
         "zh": "动物：钩刺挂在毛上被带走。"
       },
       "detail": {
-        "en": "A hooked fruit, drawn about 3 times life size as a cocklebur-like specimen [S1]. Its many recurved hooks and paired terminal beaks are based on cocklebur reference specimens. Its hooks catch in the fur or feathers of animals brushing past, and the fruit drops off somewhere else.\n\nIn Singapore, beggar's tick (Bidens pilosa) has small one-seeded fruits with barbed hooks at the tip that stick to fur and feathers [S19].\n\nIt is the same idea as hook-and-loop fasteners on shoes.",
-        "zh": "一个带钩的果实，画成类似苍耳的刺果，约为实物的 3 倍 [S1]。许多弯钩和顶端成对的喙状突起参照苍耳标本。动物经过时，钩刺挂在它们的毛或羽毛上，果实在别处掉下来。\n\n在新加坡，鬼针草（Bidens pilosa）的小果实只有一粒种子，顶端有带倒刺的钩，会粘在毛和羽毛上 [S19]。\n\n鞋上的魔术贴用的也是同样的道理。"
+        "en": "A hooked fruit, drawn about 3 times life size and shaped like a cocklebur [S1]. Its many backward-curving hooks and the pair of beak-like points at its tip are based on real cocklebur specimens. Its hooks catch in the fur or feathers of animals brushing past, and the fruit drops off somewhere else.\n\nIn Singapore, beggar's tick (Bidens pilosa) has small one-seeded fruits with barbed hooks at the tip that stick to fur and feathers [S19].\n\nIt is the same idea as hook-and-loop fasteners on shoes.",
+        "zh": "一个带钩的果实，样子像苍耳，画成实物的约 3 倍 [S1]。许多向后弯的钩和顶端那对像鸟嘴的突起，都参照了真实的苍耳标本。动物经过时，钩刺挂在它们的毛或羽毛上，果实在别处掉下来。\n\n在新加坡，鬼针草（Bidens pilosa）的小果实只有一粒种子，顶端有带倒刺的钩，会粘在毛和羽毛上 [S19]。\n\n鞋上的魔术贴用的也是同样的道理。"
       },
       "mesh": "hooked-fruit",
       "material": {

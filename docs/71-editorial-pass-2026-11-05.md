@@ -134,3 +134,36 @@ SEAB 没有另外的小学术语表；MOE 和 SEAB 都没有公开的小学科�
 7. **Vincent Cheng 的中文名**：未核到，正文保留英文。
 8. **邦达连科来源**：S50 页码转引自维基百科，有条件时请翻原书第 266 页。
 9. **ww2 与 1819–1965 的两个中文名**：“武吉知卓 / 鸦片山”“伊丽莎白·蔡 / 蔡杨素梅”（review-queue §六），不在本次范围，仍待定。
+
+## 八、2026-11-09 补充：Codex 重建新增文字的可读性修改
+
+范围：`git diff 6668a386..main` 中改过的零件 `summary` / `detail`（18 个主题，53 个字段）和全部主题的 `<Figure>` alt / caption（15 张图）。原则：事实、数字、来源标注和零件 id 都不动，EN / ZH 同步，读者文字里不留建模术语和坐标。本来就够浅白的字段没有改（零件 18 个，图 3 张）。
+
+**零件文字：35 个字段**
+
+| 主题 | 字段数 | 主题 | 字段数 |
+|---|---|---|---|
+| heat | 10 | circuits | 3 |
+| saturn-v | 5 | light-and-shadows | 2 |
+| water | 5 | b200-server、digestive-system、flower-and-seed、how-planes-fly、magnets、materials | 各 1 |
+| plant | 4 | | |
+
+**图的 alt / caption：12 张图，22 个字段**（每张图在 EN、ZH 两段各出现一次，两处都改）
+
+coral-reef 4、warring-states 4，circuits、digestive-system、inside-the-earth、plates-and-hazards、singapore-land-use、water 各 2，mosquito、steam-engine 各 1。
+
+**例子**
+
+- saturn-v `sii-fuel`：“rim at y = 50.6 m in the launch model” → “At launch its edge is 50.6 m above the bottom of the engines”。坐标原点就是发动机喷口最低点，数字保留。
+- heat `expansion-ball`：“expansion coefficient” → “how much the rod expands for each degree”。
+- water `pump-house`：“footprint is compressed to fit this slice” → “takes up less ground than the real one”。
+- `digestive-system-swallowing` 图：“Mid-sagittal swallowing section … bolus … larynx” → “A side view cut down the middle … lump of food … opening of the windpipe”，与本章正文用词一致。
+- `warring-states-tiger-tally` 图：去掉“Graphite drawing”，“inscription bands”改成“bands for writing”。
+
+**生成器**：12 个主题的生成脚本同步修改，只动文字行，并逐个重跑，比对重跑后的 `summary` / `detail` / `name`：11 个主题完全一致；how-planes-fly 见下。`tests/space-scene/digestive-system-rebuild.test.ts` 里钉住旧句子的断言已跟着改。
+
+**留给 Gavin 的问题（超出本次范围，没有改）**
+
+1. saturn-v `lm-docking-port` 仍写着 “y = 92.5 m”，solar-system `horizon` 仍写着 “scene −Z, east +X, up +Y”。这两个字段自 6668a386 以来没有变，不在这次的范围内。
+2. how-planes-fly 的 `text.ts` 比 `parts.json` 旧：除了这次改的 `cockpit-glazing`，还有 53 个字段重跑后会退回可读性修改之前的文字。重跑该主题前要先同步。
+3. “borosilicate” 只出现在 `docs/68-3d-realism/review-machines.md`，main 的读者文字里没有。
