@@ -1,0 +1,11 @@
+{
+  "counts": {
+    "bath-beaker": 24960,
+    "metal-spoon": 6528,
+    "plastic-spoon": 6528,
+    "heater-beaker": 24960,
+    "cooling-beaker": 24960
+  },
+  "bytes": 377716,
+  "model": "/models/heat-apparatus.glb"
+}

@@ -2,7 +2,10 @@
  * Rebuild: pnpm tsx scripts/geo/heat/build-parts.ts
  * DESIGN geometry and effective thermal parameters [S27]; never apparatus measurements.
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { polishApparatus } from './apparatus';
+import { rebuildExpansion } from './expansion-apparatus';
+import { bakeApparatus } from './bake-apparatus';
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { partsFile, type Primitive } from '../../../src/engines/space-scene/schema';
 import { HEAT_CONTROLS, HEAT_OUTPUTS, heatBench } from '../../../tests/space-scene/fixtures/heat-bench';
@@ -29,6 +32,8 @@ const annulus = (at: V, inner: number, outer: number, height: number, color: str
 const tube = (at: V, path: V[], radius: number, color = 'steel'): Primitive => ({ kind: 'tube', at, path, radius, color }) as Primitive;
 const bevel = (at: V, size: V, color: string, edge = 0.002): Primitive => ({ kind: 'bevelBox', at, size, bevel: edge, color }) as Primitive;
 const parts: Record<string, unknown>[] = [];
+// Every detail cites the design source once; text that already ends with its citation keeps its own spacing.
+const cite = (text: string) => (text.endsWith('[S27]') ? text : `${text} [S27]`);
 function add(
   id: string,
   group: string,
@@ -44,7 +49,7 @@ function add(
     group,
     name: l(...name),
     summary: l(...summary),
-    detail: l(`${detail[0]} [S27]`, `${detail[1]} [S27]`),
+    detail: l(cite(detail[0]), cite(detail[1])),
     primitive,
     ...(extra.length ? { extra } : {}),
     explode: { dir: [0, 1, 0], dist: 0.025 },
@@ -96,12 +101,20 @@ function cup(id: string, group: string, x: number, z: number, bottom: number, na
     { shell: true, connects: [id === 'bath-beaker' ? 'bath-water' : id === 'heater-beaker' ? 'heater-water' : 'cooling-water'] },
   );
 }
-function water(id: string, x: number, z: number, bottom: number, name: [string, string], description: [string, string]) {
+function water(
+  id: string,
+  x: number,
+  z: number,
+  bottom: number,
+  name: [string, string],
+  description: [string, string],
+  summary: [string, string] = ['Keeps the bath at the selected temperature.', '表示保持选定温度的水。'],
+) {
   add(
     id,
     id === 'bath-water' ? 'transfer' : 'curves',
     name,
-    ['Provides the liquid whose temperature is modelled.', '表示模型求温度的液体。'],
+    summary,
     description,
     cyl([x, bottom + 0.006 + 0.0325, z], 0.041, 0.065, 'glass'),
     [],
@@ -117,8 +130,8 @@ function probe(id: string, marker: string, group: string, x: number, z: number, 
     name,
     ['Measures temperature with its bulb in the water.', '感温端浸入水中以测量温度。'],
     [
-      'The bulb is above the cup bottom and clear of its wall. Its support holds the stem; the separate indicator is a linear temperature display, not a liquid-volume calculation.',
-      '感温端不碰杯底和杯壁。支架固定测温杆；独立指示片按温度线性移动，并非液体体积模型。',
+      'The sensing bulb sits in the water, clear of the bottom and wall. A support holds the stem. The separate indicator moves evenly with temperature as a diagram; it does not calculate an expanding liquid’s volume. [S27]',
+      '感温端浸在水中，不碰杯底或杯壁。支架固定测温杆。旁边的指示片随温度均匀移动，只作图示，不计算液体膨胀的体积。[S27]',
     ],
     tube(
       [x, bulb, z],
@@ -156,8 +169,8 @@ water(
   0.75,
   ['Maintained bath', '恒温温浴'],
   [
-    'An external reservoir maintains the selected bath temperature. The model does not solve the finite bath’s energy change.',
-    '外部热库维持选定的温浴温度。模型不求这杯有限水量的能量变化。',
+    'An external source keeps the bath at the selected temperature as it exchanges energy with the spoons. The bath’s temperature stays fixed in the calculation. [S27]',
+    '外部来源维持选定浴温，让水与勺子交换能量时仍保持恒温。计算中，浴温不变。[S27]',
   ],
 );
 for (const [id, x, color, name] of [
@@ -207,8 +220,8 @@ for (const [id, x, color, name] of [
     [...name],
     ['Carries heat between the bath and its far end.', '在温浴与勺柄远端之间传热。'],
     [
-      'The shallow hollow bowl joins the continuous handle. Both spoons have the same outline, immersion depth, initial temperature and effective tip heat capacity in this teaching model. These are effective paths, not measured real-spoon properties.',
-      '浅凹勺碗与连续手柄相连。教学模型让两勺外形、浸入深度、初温和远端有效热容量相同。这是有效导热通路，并非两把真实勺子的实测性质。',
+      'A shallow bowl joins a continuous handle. The two model spoons have the same shape, immersion depth, starting temperature and tip heat capacity: the energy needed for each degree of warming. Their heat-transfer rates were chosen for comparison, rather than measured from real spoons. [S27]',
+      '浅勺碗与完整勺柄相连。两把模型勺子的形状、浸入深度、初温和远端热容量相同。热容量表示升高一度需要多少能量。传热快慢是比较用的设定，不是实测值。[S27]',
     ],
     bowl,
     [handle],
@@ -225,8 +238,8 @@ for (const [id, x, spoon, name] of [
     [...name],
     ['Indicates the model temperature at the far end.', '指示模型中勺柄远端的温度。'],
     [
-      'This separate pointer is a temperature diagram. The uniform tip node is not the temperature at every location along the spoon, and the material does not glow when warm.',
-      '独立指示片是温度示意。远端单节点温度并非整把勺子各处的温度；材料受热时不发光。',
+      'This separate pointer shows the temperature at the far end of the handle. Other places along a real spoon can have different temperatures. The colours show temperature; a warm spoon does not glow. [S27]',
+      '独立指示片显示勺柄远端的温度。真实勺子其他位置的温度可能不同。颜色用来表示温度，温热勺子本身不会发光。[S27]',
     ],
     box([x, 0.944, 0.095], [0.007, 0.002, 0.003], 'token:signal'),
     [],
@@ -260,10 +273,10 @@ add(
   'heater',
   'curves',
   ['Electric heater', '电热台'],
-  ['Supplies the selected power to the heating model.', '向加热模型提供选定功率。'],
+  ['Supplies energy at the selected power.', '按选定功率供给能量。'],
   [
-    'The generic electric heater supports an open beaker. The ideal model ignores container heat capacity and heat loss; switching decorative RUN does not advance time.',
-    '通用电热台支承敞口烧杯。理想模型忽略容器热容量与散热；装饰性运转开关不会推进实验时间。',
+    'The electric heater supports an open beaker. In this ideal model, all supplied energy heats the water; the container absorbs none and no heat escapes. Use the time control to advance the experiment. RUN only switches the moving symbols on or off. [S27]',
+    '电热台支承敞口烧杯。理想模型中，供给的能量全部用于加热水，容器不吸热，也没有散热。用时间控件推进实验；RUN 只开关移动符号。[S27]',
   ],
   bevel([0.15, 0.7675, 0.1], [0.14, 0.035, 0.14], 'enamel', 0.004),
   [cyl([0.15, 0.786, 0.1], 0.052, 0.003, 'steel')],
@@ -277,9 +290,10 @@ water(
   0.788,
   ['Heated water', '加热的水'],
   [
-    'Water mass is an independent numerical input to the heat-capacity model. The displayed level is a fixed schematic level, not a volume or mass scale.',
-    '水的质量是热容量模型的独立数值输入。画面水位固定为示意水位，不是体积或质量刻度。',
+    'Set the water’s mass with the control. Its drawn level stays fixed, so read the control rather than estimating mass or volume from the picture. [S27]',
+    '用控件设定水的质量。画面的水位不变，要读控件数值，不要从图中估计质量或体积。[S27]',
   ],
+  ['Warms as the heater supplies energy.', '获得加热器供给的能量而升温。'],
 );
 probe('heater-probe', 'heater-probe-marker', 'curves', 0.15, 0.078, 0.788, ['Heating probe', '加热探头'], 'heater-probe-support');
 cup('cooling-beaker', 'curves', 0.55, 0.1, 0.75, ['Cooling beaker', '冷却烧杯']);
@@ -290,19 +304,20 @@ water(
   0.75,
   ['Cooling water', '冷却的水'],
   [
-    'This body exchanges heat with a fixed 25 °C reservoir. The effective conductance includes the whole heat-transfer path and is not a material’s thermal conductivity.',
-    '这份水与固定为25 °C的热库交换热量。有效传热系数代表整条传热通路，不是某种材料的导热率。',
+    'The water exchanges heat with surroundings held at 25 °C. The transfer setting describes the whole route between them, rather than the conductivity of one material. [S27]',
+    '水与保持 25 °C 的环境交换热量。传热参数描述两者之间的整条通路，并非某一种材料的导热率。[S27]',
   ],
+  ['Exchanges heat with the surroundings.', '与周围环境交换热量。'],
 );
 probe('cool-probe', 'cool-probe-marker', 'curves', 0.55, 0.078, 0.75, ['Cooling probe', '冷却探头'], 'cooler-probe-support');
 add(
   'wrap',
   'curves',
   ['Insulating wrap', '隔热包覆层'],
-  ['Reduces the model’s heat-transfer rate.', '减小模型中的传热速率。'],
+  ['Slows heat transfer into or out of the water.', '减慢能量传入水中或从水中传出。'],
   [
-    'An annular sleeve surrounds the cooling cup without sealing its open mouth. The wrapped setting uses lower effective conductance; it supplies no energy and can also slow warming from cold.',
-    '环形包覆层围住冷却杯，不封住杯口。包覆条件采用较低的有效传热系数；它不供能，也能减慢冷物体升温。',
+    'The sleeve surrounds the cup and leaves its mouth open. It slows heat transfer without supplying energy. It can slow both the cooling of hot water and the warming of cold water. [S27]',
+    '包覆层围住杯身，杯口保持敞开。它不供能，只减慢传热，既能减慢热水冷却，也能减慢冷水变暖。[S27]',
   ],
   annulus([0.55, 0.807, 0.1], 0.05, 0.06, 0.102, 'rubber'),
   [],
@@ -314,8 +329,8 @@ add(
   ['Air gap', '空气间隙'],
   ['Marks the space between the cup and its wrap.', '标示烧杯与包覆层之间的间隙。'],
   [
-    'This hollow annular space is a schematic part of the insulation path. It is not a fluid pipe or a separate solved air-temperature field.',
-    '中空环形间隙示意隔热通路的一部分，不是流体管线，也没有独立求解空气温度场。',
+    'This ring-shaped gap lies between the cup and its wrap. It is part of the insulation. The model does not calculate a separate temperature for the air in the gap. [S27]',
+    '杯身与包覆层之间留有环形空隙，是隔热结构的一部分。模型不单独计算空隙中的空气温度。[S27]',
   ],
   annulus([0.55, 0.807, 0.1], 0.0455, 0.0495, 0.1, 'glass'),
   [],
@@ -329,8 +344,8 @@ add(
   ['Steel rod', '钢杆'],
   ['Provides a solid with a freely moving right end.', '表示右端能够自由伸缩的固体杆。'],
   [
-    'The rod is 100 mm long at the 25 °C reference in the linear model. Its drawn mesh stays at its reference length; only the separate pointer displays the calculated endpoint displacement enlarged 500 times.',
-    '线性模型中，钢杆在25 °C参考温度下长100 mm。杆网格保留参考长度；只有独立指示片显示放大500倍的计算端点位移。',
+    'In the model, the rod is 100 mm long at 25 °C. The drawn rod stays at this length. A separate pointer shows its calculated length change enlarged 500 times. [S27]',
+    '模型中，杆在 25 °C 时长 100 mm。画出的杆保持这个长度，独立指示片显示放大 500 倍的计算伸缩量。[S27]',
   ],
   cyl([0.05, 0.807, -0.22], 0.003, 0.1, 'steel', [0, 0, 90]),
   [],
@@ -342,8 +357,8 @@ add(
   ['Enlarged endpoint indicator', '放大端点指示片'],
   ['Shows rod-end displacement enlarged 500 times.', '显示放大500倍的杆端位移。'],
   [
-    'The thin pointer is separate from the rod. A 0.072 mm model extension moves it 0.036 m on this diagram; negative extension moves it left. It is not the physical rod end.',
-    '薄指示片与钢杆分开。模型伸长0.072 mm时，图中指示片移动0.036 m；负伸长使它向左移动。它不是钢杆的实际端头。',
+    'The pointer is separate from the rod. When the calculated extension is 0.072 mm, the pointer moves 0.036 m in the diagram. It moves left when the rod contracts. Read the actual calculated extension from the number. [S27]',
+    '指示片与杆分开。计算伸长 0.072 mm 时，图中指示片移动 0.036 m；杆收缩时，指示片向左移动。计算的实际伸缩量要看数字。[S27]',
   ],
   box([0.1, 0.825, -0.198], [0.0015, 0.032, 0.015], 'token:signal'),
   [],
@@ -359,8 +374,8 @@ for (const [id, x, name] of [
     [...name],
     ['Supports the rod without locking both ends.', '托住钢杆，不把两端同时锁死。'],
     [
-      'An open shallow saddle supports the rod. The rod can move along its axis as temperature changes; the pair is not a pair of fixed end clamps.',
-      '开放浅鞍座托住钢杆，允许它随温度变化沿轴向移动；两个支承不是两只锁死端点的夹具。',
+      'The shallow, open support lets the rod slide along its length as temperature changes. The two supports hold it up without clamping both ends in place. [S27]',
+      '开放的浅槽托住杆，让杆随温度变化沿长度方向滑动。两个支座承托杆身，不把两端锁死。[S27]',
     ],
     bevel([x, 0.775, -0.22], [0.018, 0.05, 0.035], 'steel', 0.002),
     [
@@ -433,8 +448,8 @@ add(
   ['Open-top piston cylinder', '可动活塞筒'],
   ['Contains the gas below a movable piston.', '围住可动活塞下方的气体。'],
   [
-    'The transparent cylinder has a fixed bottom and an open top. The piston moves upward in the qualitative warm pose; no pressure, gas volume or gas law is calculated.',
-    '透明筒有固定底部和敞开上端。受热定性姿态使活塞上移；模型不计算压强、气体体积或气体方程。',
+    'The clear cylinder has a fixed bottom and an open top. In the warm view, the piston moves up to give the gas more space. The picture does not calculate pressure or volume using a gas law. [S27]',
+    '透明筒底部固定，上端敞开。受热视图中，活塞上移，给气体更多空间。画面不使用气体定律计算压强或体积。[S27]',
   ],
   lathe(
     [0.65, 0.75, -0.24],
@@ -458,8 +473,8 @@ add(
   ['Movable piston', '可动活塞'],
   ['Moves to leave more space for warmed gas.', '移动以给受热气体留出更大空间。'],
   [
-    'The piston is a separate solid disc with a slender handle. Its two positions show a qualitative change in gas space under a movable boundary, not a sealed rigid container being heated.',
-    '活塞是带细柄的独立圆盘。两个位置只定性表示可动边界下的气体空间变化，不表示加热密封刚性容器。',
+    'This disc has a slender handle. Its two positions show gas taking up more space beneath a movable piston. A rigid sealed container would hold the volume fixed. [S27]',
+    '圆盘带有细柄。两个位置显示气体在可动活塞下占据更多空间。刚性密闭容器则会限制体积。[S27]',
   ],
   cyl([0.65, 0.815, -0.24], 0.0255, 0.008, 'steel'),
   [cyl([0.65, 0.866, -0.24], 0.0025, 0.094, 'steel'), cyl([0.65, 0.914, -0.24], 0.011, 0.006, 'plastic')],
@@ -473,8 +488,8 @@ add(
   ['Spoon holder', '勺架'],
   ['Holds both spoons at the same immersion depth.', '把两勺固定在相同浸入深度。'],
   [
-    'A rear upright carries a crossbar behind both handles. Two short front tabs meet the handles without covering their bowls. Equal immersion is a design condition, not an inferred property of their colours.',
-    '后方立柱支承两勺柄后面的横梁；短托片接触手柄，不遮住勺碗。相同浸入深度是设计条件，不由颜色推断。',
+    'An upright and crossbar support both spoon handles. Short tabs touch the handles without covering the bowls. The holder keeps both bowls immersed to the same depth. [S27]',
+    '立柱与横梁支承两根勺柄。短托片接触勺柄，不遮住勺碗，让两个勺碗保持相同浸入深度。[S27]',
   ],
   box([-0.55, 0.905, 0.12], [0.055, 0.006, 0.02], 'steel'),
   [
@@ -518,8 +533,8 @@ add(
   ['Room-temperature reference', '环境温度参考'],
   ['Marks the fixed environment used by the cooling model.', '标示冷却模型采用的固定环境温度。'],
   [
-    'The model reservoir stays at the design reference of 25 °C. This is not a live thermometer or a reading of Singapore weather.',
-    '模型热库固定为设计参考值25 °C。这不是实时温度计，也不是新加坡天气读数。',
+    'The surroundings stay at 25 °C in this simulation. This chosen temperature is not a live reading of your room or Singapore weather. [S27]',
+    '模拟环境保持 25 °C。这个设定温度不是你的房间或新加坡天气的实时读数。[S27]',
   ],
   bevel([0.75, 0.79, 0.1], [0.045, 0.08, 0.014], 'enamel', 0.002),
   [box([0.75, 0.756, 0.1], [0.07, 0.012, 0.05], 'steel')],
@@ -593,14 +608,23 @@ const outputLabels: Record<string, string> = {
   'metal-energy-j': 'Metal net energy',
   'plastic-energy-j': 'Plastic net energy',
 };
+// Chinese labels that read better than the shared fixture's short forms.
+const outputLabelsZh: Record<string, string> = {
+  'metal-direction': '金属温度变化',
+  'plastic-direction': '塑料温度变化',
+  'heated-change-k': '加热温度变化',
+  'cool-change-k': '冷却温度变化',
+};
 const camera = (position: V, target: V) => ({ position, target, fov: 30 });
-const hero = camera([2.6, 2.2, 3.25], [0, 0.55, 0]);
+const hero = camera([-0.30, 1.10, 0.66], [-0.595, 0.87, 0.09]);
+// The HUD-off cover and the assembled / exploded views show every experiment, so no chapter hides its own apparatus behind the bath close-up.
+const overview = camera([-0.04, 1.42, 1.95], [-0.04, 0.80, -0.05]);
 const presets = [
   { id: 'view-hero', label: l('Bench', '实验台'), camera: hero },
-  { id: 'view-probe', label: l('Thermometer', '温度计'), camera: camera([-0.15, 1.15, 0.65], [-0.55, 0.87, 0.08]) },
-  { id: 'view-spoons', label: l('Spoons', '勺子'), camera: camera([-0.2, 1.25, 0.8], [-0.55, 0.86, 0.08]) },
-  { id: 'view-heater', label: l('Heating', '加热'), camera: camera([0.65, 1.25, 0.75], [0.15, 0.9, 0.1]) },
-  { id: 'view-cooler', label: l('Cooling', '冷却'), camera: camera([1.05, 1.2, 0.75], [0.55, 0.86, 0.1]) },
+  { id: 'view-probe', label: l('Thermometer', '温度计'), camera: camera([-0.34, 1.09, 0.56], [-0.60, 0.89, 0.085]) },
+  { id: 'view-spoons', label: l('Spoons', '勺子'), camera: camera([-0.36, 1.10, 0.57], [-0.59, 0.88, 0.10]) },
+  { id: 'view-heater', label: l('Heating', '加热'), camera: camera([0.43, 1.26, 1.08], [0.36, 0.89, 0.08]) },
+  { id: 'view-cooler', label: l('Cooling', '冷却'), camera: camera([0.68, 1.26, 1.08], [0.43, 0.89, 0.08]) },
   { id: 'view-expansion', label: l('Expansion', '膨胀'), camera: camera([0.7, 1.3, 0.7], [0.32, 0.85, -0.22]) },
 ];
 const poses = {
@@ -614,7 +638,7 @@ const poses = {
 const sim = {
   kind: 'heat',
   controls: HEAT_CONTROLS.map((c) => ({ ...c, label: l(...controlLabels[c.id]!) })),
-  outputs: HEAT_OUTPUTS.map((o) => ({ ...o, label: { ...o.label, en: outputLabels[o.id] } })),
+  outputs: HEAT_OUTPUTS.map((o) => ({ ...o, label: { en: outputLabels[o.id], zh: outputLabelsZh[o.id] ?? o.label.zh } })),
   heat: heatBench,
   bind: [
     { control: 'bath-c', part: 'probe-marker', offset: { axis: [0, 1, 0], per: 0.0008, origin: 25 } },
@@ -664,9 +688,10 @@ const raw = {
   poses,
   units: { modelUnit: 'm', scale: 1 },
   views: {
-    assembled: { camera: hero },
-    exploded: { camera: hero },
-    cover: hero,
+    assembled: { camera: overview },
+    exploded: { camera: overview },
+    cover: overview,
+    hudFrame: { parts: ['bath-beaker','retort-stand','bath-holder','probe','heater','heater-beaker','heater-probe-support','heater-probe','cooling-beaker','cooler-probe-support','cool-probe','room-reference','rod','expansion-ball','expansion-ring','expansion-thermometer','gas-cylinder','gas-piston'], primary: {part:'bath-beaker',minRadiusPx:28} },
     section: { plane: 'xy' },
     reference: { fit: 'layers' },
     cutaway: { normal: [0, 0, -1], offset: 0.1 },
@@ -684,9 +709,9 @@ const raw = {
   telemetry: [
     { key: l('Temperature', '温度'), follow: ['heated-c', 'cool-c'], unit: '°C', scope: 'observe', lag: 0, decimals: 1 },
     { key: l('Far ends', '勺柄远端'), follow: ['metal-c', 'plastic-c'], unit: '°C', scope: 'observe', lag: 0, decimals: 1 },
-    { key: l('Net energy', '净传入能量'), follow: ['heated-j', 'cool-energy-j'], unit: 'J', scope: 'observe', lag: 0, decimals: 0 },
+    { key: l('Net energy received', '净传入能量'), follow: ['heated-j', 'cool-energy-j'], unit: 'J', scope: 'observe', lag: 0, decimals: 0 },
     { key: l('Input energy', '外部供能'), follow: 'heated-input-j', unit: 'J', scope: 'observe', lag: 0, decimals: 0 },
-    { key: l('Net rate', '净传入功率'), follow: ['cool-rate-w', 'metal-rate-w', 'plastic-rate-w'], unit: 'W', scope: 'observe', lag: 0, decimals: 1 },
+    { key: l('Net power received', '净传入功率'), follow: ['cool-rate-w', 'metal-rate-w', 'plastic-rate-w'], unit: 'W', scope: 'observe', lag: 0, decimals: 1 },
     { key: l('Rod extension', '钢杆伸长'), follow: 'rod-delta-mm', unit: 'mm', scope: 'observe', lag: 0, decimals: 3 },
   ],
   sim,
@@ -695,8 +720,22 @@ const raw = {
 export function buildHeatParts() {
   return partsFile.parse(raw);
 }
+polishApparatus(parts, sim, Number(process.env.HEAT_ITERATION ?? 3));
+rebuildExpansion(parts, poses);
+const baked = await bakeApparatus(parts, Number(process.env.HEAT_ITERATION ?? 3));
+Object.assign(raw, {model: baked.model});
+writeFileSync('scripts/geo/heat/mesh-metrics.json', JSON.stringify(baked,null,2)+'\n');
 const data = buildHeatParts();
 const target = fileURLToPath(new URL('../../../src/content/topics/heat/data/', import.meta.url));
 mkdirSync(target, { recursive: true });
 writeFileSync(`${target}/parts.json`, `${JSON.stringify(raw, null, 2)}\n`);
 console.log(`heat: ${data.parts.filter((p) => !p.context).length} parts + bench; ${data.groups.length} groups; ${data.flows.length} flows; ${data.presets?.length} presets`);
+
+// Keep baseline chapter cameras and beat presets in agreement; prose and beats remain intact.
+const chapterCameras: Record<string,string> = {'00-before-you-start':'view-hero','01-temperature-and-heat':'view-probe','02-heat-along-spoons':'view-spoons','03-slowing-heat-transfer':'view-cooler','04-heating-curves':'view-heater','05-cooling-curves':'view-cooler','06-expansion-and-contraction':'view-expansion','07-explain-with-evidence':'view-spoons'};
+for(const [name,id] of Object.entries(chapterCameras)){
+ const path=fileURLToPath(new URL(`../../../src/content/topics/heat/chapters/${name}.mdx`,import.meta.url));
+ const c=presets.find(p=>p.id===id)!.camera;
+ const block=`  camera:\n    position:\n${c.position.map(v=>`    - ${v}`).join('\n')}\n    target:\n${c.target.map(v=>`    - ${v}`).join('\n')}\n    fov: ${c.fov}\n`;
+ writeFileSync(path,readFileSync(path,'utf8').replace(/  camera:\n    position:[\s\S]*?    fov: 30\n/,block));
+}

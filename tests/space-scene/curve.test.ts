@@ -27,11 +27,12 @@ const fixture = () => simSchema.parse({
 const curve: CurveSpec = { x: 'elapsed-s', y: ['heated-c', 'cool-c'], samples: 101 };
 
 describe('continuous model curve', () => {
-  it('samples exact analytic trajectories and endpoints, with a fixed 0–100 °C axis', () => {
+  it('samples exact analytic trajectories and endpoints, with a data-fitted °C axis', () => {
     const sim = fixture();
     const model = curveModel(sim, {}, curve)!;
     expect(model.domain).toEqual([0, 300]);
-    expect(model.yDomain).toEqual([0, 100]);
+    expect(model.yDomain).toEqual([20, 100]);
+    expect(model.yTicks).toEqual([20, 40, 60, 80, 100]);
     expect(model.ticks).toEqual([0, 60, 120, 180, 240, 300]);
     expect(model.series[0]!.points).toHaveLength(101);
     expect(model.series[0]!.points[0]).toEqual({ x: 0, y: 25 });

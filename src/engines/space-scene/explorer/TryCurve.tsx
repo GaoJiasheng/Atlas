@@ -48,7 +48,8 @@ export function TryCurve({
   const [start, end] = model.domain;
   const sx = (x: number) =>
     P.l + ((x - start) / (end - start)) * (W - P.l - P.r);
-  const sy = (y: number) => P.t + (1 - y / 100) * (H - P.t - P.b);
+  const [yMin, yMax] = model.yDomain;
+  const sy = (y: number) => P.t + (1 - (y - yMin) / (yMax - yMin)) * (H - P.t - P.b);
   return (
     <figure className="space-chart space-curve" data-model-curve="">
       <figcaption className="space-chart__title">
@@ -76,10 +77,10 @@ export function TryCurve({
         <text className="space-chart__axis-title" x={P.l} y={10}>
           °C
         </text>
-        {[0, 25, 50, 75, 100].map((y) => (
+        {model.yTicks.map((y) => (
           <g key={y}>
             <path
-              className={y === 0 ? "space-chart__axis" : "space-chart__grid"}
+              className={y === yMin ? "space-chart__axis" : "space-chart__grid"}
               d={`M${P.l} ${sy(y)}H${W - P.r}`}
             />
             <text
@@ -88,7 +89,7 @@ export function TryCurve({
               y={sy(y) + 3}
               textAnchor="end"
             >
-              {y}
+              {round(y)}
             </text>
           </g>
         ))}

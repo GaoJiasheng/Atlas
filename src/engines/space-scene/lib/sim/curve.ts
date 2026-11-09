@@ -11,7 +11,8 @@ export interface CurveSeries {
 export interface CurveModel {
   x: string;
   domain: readonly [number, number];
-  yDomain: readonly [0, 100];
+  yDomain: readonly [number, number];
+  yTicks: readonly number[];
   ticks: readonly number[];
   series: readonly CurveSeries[];
   table: readonly { x: number; values: Record<string, number> }[];
@@ -82,6 +83,26 @@ export function curveCacheKey(
   ]);
 }
 
+/** Fit every sampled series, never just the current cursor. 1/2/5 ticks stay legible
+ * for small cold-start changes, large heating ranges and a constant curve. */
+export function fitTemperatureAxis(series: readonly { points: readonly { y: number }[] }[]) {
+  const ys = series.flatMap(s => s.points.map(p => p.y)).filter(Number.isFinite);
+  if (!ys.length) return { domain: [0, 1] as [number, number], ticks: [0, .2, .4, .6, .8, 1] };
+  const low = Math.min(...ys), high = Math.max(...ys);
+  const span = Math.max(high - low, 2);
+  const padding = span * .06;
+  const rawStep = (span + 2 * padding) / 5;
+  const power = 10 ** Math.floor(Math.log10(rawStep));
+  const step = [1, 2, 5, 10].find(n => n * power >= rawStep)! * power;
+  const min = Math.floor((low - padding) / step) * step;
+  const max = Math.ceil((high + padding) / step) * step;
+  const clean = (n: number) => Number(n.toPrecision(12));
+  return {
+    domain: [clean(min), clean(max)] as [number, number],
+    ticks: Array.from({ length: Math.round((max - min) / step) + 1 }, (_, i) => clean(min + i * step)),
+  };
+}
+
 // Bounded per-model cache: old topics and their samples can be garbage collected.
 const cache = new WeakMap<SimData, Map<string, CurveModel>>();
 export function curveModel(
@@ -103,16 +124,19 @@ export function curveModel(
       i === samples - 1 ? end : start + ((end - start) * i) / (samples - 1);
     return { x, values: evaluator.sampleAt(x) };
   });
+  const series = curve.y.map((id) => ({
+    output: sim.outputs.find((o) => o.id === id)!,
+    points: points.map((p) => ({ x: p.x, y: p.values[id]! })),
+  }));
+  const axis = fitTemperatureAxis(series);
   const model: CurveModel = {
     x: curve.x,
     domain: evaluator.domain,
-    yDomain: [0, 100],
+    yDomain: axis.domain,
+    yTicks: axis.ticks,
     ticks: Array.from({ length: 6 }, (_, i) => start + ((end - start) * i) / 5),
     table: Array.from({ length: 6 }, (_, i) => { const x = start + ((end - start) * i) / 5; return { x, values: evaluator.sampleAt(x) }; }),
-    series: curve.y.map((id) => ({
-      output: sim.outputs.find((o) => o.id === id)!,
-      points: points.map((p) => ({ x: p.x, y: p.values[id]! })),
-    })),
+    series,
     key,
   };
   if (!entries) {

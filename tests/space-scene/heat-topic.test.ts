@@ -1,4 +1,9 @@
 /** Shipped heat lesson claims must match the evaluator and its apparatus bindings. */
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { createStore } from 'zustand/vanilla';
+import { SceneContext, type SceneContextValue } from '../../src/engines/core/context';
+import { TryCurve } from '../../src/engines/space-scene/explorer/TryCurve';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as yaml } from 'yaml';
@@ -6,7 +11,8 @@ import { describe, expect, it } from 'vitest';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
-import { curveCursor, curveModel } from '../../src/engines/space-scene/lib/sim/curve';
+import { curveCursor, curveModel, fitTemperatureAxis } from '../../src/engines/space-scene/lib/sim/curve';
+import { fillShapeForPrimitive, fillSlice } from '../../src/engines/space-scene/lib/fill';
 import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import type { SimTry, SimValues } from '../../src/engines/space-scene/sim-schema';
 const DIR = join(import.meta.dirname, '../../src/content/topics/heat');
@@ -64,7 +70,8 @@ describe('heat published topic', () => {
         const q = evaluateSim(sim, values);
         const model = curveModel(sim, values, curve)!;
         const cursor = curveCursor(sim, values, curve)!;
-        expect(model.domain).toEqual([0, 300]); expect(model.yDomain).toEqual([0, 100]);
+        expect(model.domain).toEqual([0, 300]);
+        expect(model.series.every(s => s.points.every(p => p.y >= model.yDomain[0] && p.y <= model.yDomain[1]))).toBe(true);
         for (const s of model.series) {
           expect(s.points).toHaveLength(101);
           expect(cursor.values[s.output.id]).toBe(q[s.output.id]);
@@ -84,19 +91,85 @@ describe('heat published topic', () => {
     for (const [probeId, waterId] of [['probe', 'bath-water'], ['heater-probe', 'heater-water'], ['cool-probe', 'cooling-water']]) {
       const probe = file.parts.find((p) => p.id === probeId)!;
       const liquid = file.parts.find((p) => p.id === waterId)!.primitive!;
-      const bulb = probe.extra!.find((p) => p.kind === 'sphere')!;
-      expect(liquid.kind).toBe('cylinder'); expect(bulb.kind).toBe('sphere');
-      if (liquid.kind !== 'cylinder' || bulb.kind !== 'sphere') throw new Error('probe apparatus must include liquid and bulb');
-      expect(bulb.at[1] - bulb.size[0]!).toBeGreaterThan(liquid.at[1] - liquid.size[2]! / 2);
-      expect(bulb.at[1] + bulb.size[0]!).toBeLessThan(liquid.at[1] + liquid.size[2]! / 2);
-      expect(Math.hypot(bulb.at[0] - liquid.at[0], bulb.at[2] - liquid.at[2]) + bulb.size[0]!).toBeLessThan(liquid.size[0]!);
+      const bulb = probe.primitive!;
+      expect(liquid.kind).toBe('cylinder'); expect(bulb.kind).toBe('lathe');
+      if (liquid.kind !== 'cylinder' || bulb.kind !== 'lathe') throw new Error('missing glass reservoir');
+      expect(bulb.at[1] - .007).toBeGreaterThan(liquid.at[1] - liquid.size[2]! / 2);
+      expect(bulb.at[1] + .011).toBeLessThan(liquid.at[1] + liquid.size[2]! / 2);
+      expect(Math.hypot(bulb.at[0] - liquid.at[0], bulb.at[2] - liquid.at[2]) + .0028).toBeLessThan(liquid.size[0]!);
+      // A reservoir must blend into its neck, never collapse to a point and reopen.
+      expect(bulb.profile.slice(1,-1).every(([radius])=>radius>0)).toBe(true);
+      // Coloured upper capillary remains inside the glass (including its radius).
+      const column=file.parts.find(p=>p.id===probeId+'-marker')?.primitive ?? file.parts.find(p=>p.id==='probe-marker')!.primitive!;
+      expect(Math.abs(column!.at[2]-bulb.at[2])+.00065).toBeLessThan(.0022);
     }
-    const stem = file.parts.find((p) => p.id === 'probe')!.primitive!;
-    const clamp = file.parts.find((p) => p.id === 'probe-clamp')!.extra![0]!;
-    if (stem.kind !== 'tube' || clamp.kind !== 'box') throw new Error('missing connected thermometer support');
-    const end = stem.at[1] + Math.max(...stem.path.map((p) => p[1]));
-    expect(end).toBeGreaterThanOrEqual(clamp.at[1] + clamp.size[1]! / 2);
-    expect(stem.at[1]).toBeLessThan(clamp.at[1]);
+    for (const id of ['probe-clamp', 'heater-probe-support', 'cooler-probe-support']) {
+      const clamp = file.parts.find(p => p.id === id)!;
+      expect([clamp.primitive, ...clamp.extra!].filter(p => p?.kind === 'coil')).toHaveLength(3);
+      expect([clamp.primitive, ...clamp.extra!].filter(p => p?.color === 'token:neutral')).toHaveLength(3);
+    }
+  });
+  it('uses the actual fill binding and engine fill geometry for a connected fixed-bulb liquid column', () => {
+    for (const [probeId, marker] of [['probe', 'probe-marker'], ['heater-probe', 'heater-probe-marker'], ['cool-probe', 'cool-probe-marker']]) {
+      const column = file.parts.find(p => p.id === marker)!;
+      const probe = file.parts.find(p => p.id === probeId)!;
+      const shape = fillShapeForPrimitive(column.primitive)!;
+      const binding = sim.bind.find(b => 'part' in b && b.part === marker)!;
+      expect('fill' in binding && binding.fill).toBeTruthy();
+      const temperatures = [5, 25, 80];
+      const levels = temperatures.map(temperature => {
+        const v = resolveSimValues(sim, { 'bath-c': temperature, 'cool-start-c': temperature, 'elapsed-s': 0 });
+        const effects = simEffects(sim, v, evaluateSim(sim, v));
+        const fill = effects.fill.get(marker!)!;
+        const slice = fillSlice(shape, fill.volume, { below: fill.below, meniscus: fill.meniscus });
+        expect(slice.shown).toBe(true);
+        const at = column.primitive!.at[1];
+        const stemTop = probe.primitive!.at[1] + .202;
+        expect(slice.level + at).toBeLessThan(stemTop);
+        expect(slice.bottom + at).toBeCloseTo(probe.primitive!.at[1] + .05, 8);
+        return slice.level;
+      });
+      if (probeId !== 'heater-probe') expect(levels[0]!).toBeLessThan(levels[2]!);
+    }
+  });
+  it('the fitted °C axis covers complete trajectories and keeps cursor sampling exact', () => {
+    for (const c of chapters) {
+      const curve = c.state.sim.try?.curve; if (!curve) continue;
+      for (let i=1; i<=c.state.beats.length; i++) {
+        const values = valuesAt(c.id, i), model = curveModel(sim, values, curve)!;
+        for (const series of model.series) for (const p of series.points) {
+          expect(p.y).toBeGreaterThanOrEqual(model.yDomain[0]);
+          expect(p.y).toBeLessThanOrEqual(model.yDomain[1]);
+        }
+        expect(model.yTicks.length).toBeGreaterThanOrEqual(3);
+        expect(model.yTicks.length).toBeLessThanOrEqual(9);
+        expect(curveModel(sim, { ...values, 'elapsed-s': 0 }, curve)!.yDomain).toEqual(model.yDomain);
+      }
+    }
+    const cold=curveModel(sim,valuesAt('slowing-heat-transfer',4),chapter('slowing-heat-transfer').state.sim.try!.curve!)!;
+    expect(cold.yDomain[1]-cold.yDomain[0]).toBeLessThanOrEqual(10);
+    for (const values of [[25,25],[-15,-2],[5,8],[25,190]]) {
+      const axis=fitTemperatureAxis([{points:values.map(y=>({y}))}]);
+      expect(axis.domain[0]).toBeLessThanOrEqual(Math.min(...values));
+      expect(axis.domain[1]).toBeGreaterThanOrEqual(Math.max(...values));
+      expect(axis.ticks.every(Number.isFinite)).toBe(true);
+    }
+  });
+  it('renders TryCurve with fitted ticks and a visible cold-start rise in EN and ZH', () => {
+    const curve=chapter('slowing-heat-transfer').state.sim.try!.curve!;
+    const values=valuesAt('slowing-heat-transfer',4);
+    for (const locale of ['en','zh'] as const) {
+      const context={locale,store:createStore(()=>({sim:values}))} as unknown as SceneContextValue;
+      const html=renderToStaticMarkup(createElement(SceneContext.Provider,{value:context},createElement(TryCurve,{sim,values,curve})));
+      const points=html.match(/<polyline[^>]*points="([^"]+)"/)![1]!.split(' ').map(p=>p.split(',').map(Number));
+      expect(points).toHaveLength(101);
+      const ys=points.map(p=>p[1]!);
+      expect(Math.max(...ys)-Math.min(...ys)).toBeGreaterThan(20);
+      expect(Math.min(...ys)).toBeGreaterThanOrEqual(18);
+      expect(Math.max(...ys)).toBeLessThanOrEqual(160);
+      expect(html).not.toContain('>100</text>');
+      expect(html).toContain('>5</text>');
+    }
   });
   it('all beat labels have accessible chapter index entries and concise bilingual captions', () => {
     for (const c of chapters) for (const b of c.state.beats) {
