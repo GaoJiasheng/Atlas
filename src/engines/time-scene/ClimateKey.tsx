@@ -8,16 +8,19 @@ export function ClimateKey({
   layers,
   snapshot,
   controller,
+  compact = false,
 }: {
   topic: TopicMeta;
   locale: Locale;
   layers: string[];
   snapshot: ClimateSnapshot | null;
   controller: ClimateGeoController | null;
+  /** Presentation: the colour ramp and arrow scale only. */
+  compact?: boolean;
 }) {
   const zh = locale === 'zh';
   return (
-    <div className="ts-climate-key" data-climate-key>
+    <div className="ts-climate-key" data-climate-key={compact ? 'present' : ''}>
       {(topic.monthlyLayers ?? [])
         .filter((d) => layers.includes(d.id))
         .map((layer) => {
@@ -59,21 +62,21 @@ export function ClimateKey({
                   <span>□ {zh ? '无数据' : 'No data'}</span>
                 </div>
               )}
-              {resource && (
+              {!compact && resource && (
                 <p>
                   {resource.period.startYear}–{resource.period.endYear} · {resource.grid.dlon}° × {resource.grid.dlat}°
                   {'pressureHpa' in resource ? ` · ${resource.pressureHpa} hPa` : ''}
                 </p>
               )}
-              <SourceRefs ids={[...new Set([...layer.sources, ...(topic.climatology?.keySources ?? [])])]} locale={locale} />
+              {!compact && <SourceRefs ids={[...new Set([...layer.sources, ...(topic.climatology?.keySources ?? [])])]} locale={locale} />}
             </div>
           );
         })}
-      <p>
+      {!compact && <p>
         {zh
           ? '区域气压层风；高地可能为外推值。格点不是学校观测。'
           : 'Regional pressure-level wind; values over high terrain may be extrapolated. Cells are not school observations.'}
-      </p>
+      </p>}
     </div>
   );
 }

@@ -67,16 +67,24 @@ export function createRiverLabels(map: MlMap): RiverLabels {
     },
     resolve(occupied) {
       const taken: DOMRect[] = [...occupied];
+      // A river drawn in several courses is named once on screen.
+      const named = new Set<string>();
+      const bounds = map.getContainer().getBoundingClientRect();
       for (const r of rivers) {
         const entry = markers.get(r.id);
         if (!entry) continue;
         const el = entry.marker.getElement();
         const rect = (el.firstElementChild ?? el).getBoundingClientRect();
+        const onScreen = rect.right > bounds.left && rect.left < bounds.right && rect.bottom > bounds.top && rect.top < bounds.bottom;
         const hit =
           rect.width === 0 ||
+          (onScreen && named.has(entry.text)) ||
           taken.some((o) => rect.left < o.right + PAD && rect.right > o.left - PAD && rect.top < o.bottom + PAD && rect.bottom > o.top - PAD);
         el.dataset.collided = String(hit);
-        if (!hit) taken.push(rect);
+        if (!hit) {
+          taken.push(rect);
+          if (onScreen) named.add(entry.text);
+        }
       }
     },
     count() {

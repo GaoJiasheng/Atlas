@@ -3,7 +3,7 @@ import { useHud, useSceneContext } from '../../core/context';
 import { FoldHeader } from '../../widgets/FoldHeader';
 
 /** TimeScene panels share the host's manual, automatic and stage-only folds. */
-export function HudFold({ title, children, panel, kind = 'legends', className = '', headClassName = '', closeLabel, onClose }: {
+export function HudFold({ title, children, panel, kind = 'legends', className = '', headClassName = '', closeLabel, onClose, held }: {
   title: ReactNode;
   children: ReactNode;
   panel?: string;
@@ -12,11 +12,14 @@ export function HudFold({ title, children, panel, kind = 'legends', className = 
   headClassName?: string;
   closeLabel?: string;
   onClose?(): void;
+  /** The fold's own state instead of the host's (a panel a beat depends on, which the room logic must not fold). */
+  held?: { open: boolean; set(open: boolean): void };
 }) {
-  const open = useHud((s) => kind === 'plate' ? s.plateOpen : s.legendsOpen);
+  const hostOpen = useHud((s) => kind === 'plate' ? s.plateOpen : s.legendsOpen);
+  const open = held ? held.open : hostOpen;
   const { actions } = useSceneContext();
   const bodyId = useId();
-  const setOpen = kind === 'plate' ? actions.setPlate : actions.setLegends;
+  const setOpen = held ? held.set : kind === 'plate' ? actions.setPlate : actions.setLegends;
   return <section className={`ts-fold ${className}`} data-hud-panel={panel} data-folded={!open || undefined}>
     {/* Presentation's capture listener must leave Space to these native buttons. */}
     <div className="ts-fold__header" data-keys="own">

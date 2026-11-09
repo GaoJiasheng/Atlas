@@ -111,7 +111,6 @@ describe('TimeScene HUD folds', () => {
   const insetProps: ModernInsetProps = { bundle, config, locale: 'en', selectedMa: 66, view: 'world', insetVisible: true, fossilMode: 'age-window', fossilsEnabled: true, highlight: [], selectedObjectId: null, onSelect() {}, onPatch() {} };
   const geologyProps: GeologyReadoutProps = { bundle, locale: 'en', selectedMa: 66, stats: null, fossilMode: 'age-window', counts: null, recordSources: [] };
   for (const [panel, node, field] of [
-    ['present-evidence', createElement(ModernEvidence, insetProps), 'legendsOpen'],
     ['reconstruction-age', createElement(ReconstructionReadout, geologyProps), 'legendsOpen'],
     ['geology-plate', createElement(GeologyPlate, geologyProps), 'plateOpen'],
   ] as const) {
@@ -130,6 +129,14 @@ describe('TimeScene HUD folds', () => {
       expectFold(h.render(node), true, panel);
     });
   }
+  it('present-evidence: the room logic cannot fold the map a beat cites', () => {
+    const h = harness();
+    const node = createElement(ModernEvidence, { ...insetProps, beatKey: 'fossil-atlas:0' });
+    expectFold(h.render(node), true, 'present-evidence');
+    h.hud.setState({ legendsOpen: false });
+    h.actions.setStageOnly(true);
+    expectFold(h.render(node), true, 'present-evidence');
+  });
   it('hosted find map: the host card supplies the one title and the fold, the header row is the view buttons and ×', () => {
     const h = harness();
     const html = h.render(createElement(ModernInset, { ...insetProps, hosted: true }));
@@ -147,6 +154,6 @@ describe('TimeScene HUD folds', () => {
     expect(html).not.toContain('data-hud-panel');
     expect(html).not.toContain('ts-fold__body');
     expect(html).toContain('ts-modern__map');
-    expect(h.render(createElement(ModernEvidence, { ...insetProps, insetVisible: false }))).toBe('');
+    expect(h.render(createElement(ModernEvidence, { ...insetProps, insetVisible: false, beatKey: 'a:0' }))).toBe('');
   });
 });

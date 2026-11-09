@@ -426,6 +426,11 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         onSnapshot={setSnapshot}
       />
       {presentation.element}
+      {presentation.presenting && (topic.monthlyLayers ?? []).some((d) => state.layers.includes(d.id)) && (
+        <aside className="clim-present-key" data-hud-panel="present-key">
+          <ClimateKey topic={topic} locale={locale} layers={state.layers} snapshot={snapshot} controller={controller} compact />
+        </aside>
+      )}
       <SceneSlot name="plate">
         <HudFold panel="climatology-plate" kind="plate" title={locale === 'zh' ? '月气候平均' : 'Climatology'}>
           {monthControl}

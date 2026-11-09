@@ -3,6 +3,8 @@
 .ts-recon-readout small, .ts-recon-readout strong { display:block; }
 .atlas-scene[data-hud="off"] .ts-recon-readout { visibility:hidden; }
 .atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { display:block; visibility:visible; }
+/* A phone has no room beside the title; the caption's header already gives the age. */
+@media (max-width:700px) { .atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { display:none; } }
 .ts-geology-plate { overflow-y:auto; }
 .ts-geology-plate .ts-plate__row dd { text-align:right; }
 .ts-geology-plate__note { margin:6px 0 0; color:var(--ink-3); font:calc(10 * var(--u))/1.5 var(--font-hud); }

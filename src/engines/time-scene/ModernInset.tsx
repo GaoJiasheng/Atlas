@@ -31,6 +31,8 @@ export interface ModernInsetProps {
   /** In the host's right-hand card: the card supplies the one title and the fold; the header row is the view buttons. */
   hosted?: boolean;
   panel?: 'modern-inset' | 'present-evidence';
+  /** The fold's own state (presentation: the beat's caption cites this map, so the room logic may not fold it). */
+  held?: { open: boolean; set(open: boolean): void };
 }
 const words = (locale: Locale, en: string, zh: string) => locale === 'zh' ? zh : en;
 const ma = (n: number) => String(Number(n.toFixed(3)));
@@ -56,7 +58,7 @@ function EvidenceCard({ card, locale, onSelect }: { card: ReferenceCard; locale:
 }
 
 export function ModernInset(props: ModernInsetProps) {
-  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch, embedded, hosted, panel = 'modern-inset' } = props;
+  const { bundle, config, locale, selectedMa, view, insetVisible, fossilMode, fossilsEnabled, highlight, selectedObjectId, onSelect, onPatch, embedded, hosted, panel = 'modern-inset', held } = props;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hitRadius, setHitRadius] = useState(22);
   useEffect(() => {
@@ -151,7 +153,7 @@ export function ModernInset(props: ModernInsetProps) {
       </nav>}
     </details>
   </>;
-  // One title per map: the reader names it, the host card names it (and folds it), presentation evidence folds with the HUD.
+  // One title per map: the reader names it, the host card names it (and folds it), presentation evidence keeps its own fold.
   if (embedded) return <section className="ts-modern" aria-label={title}>
     <header className="ts-modern__header"><strong>{title}</strong>{hide}</header>
     {views}
@@ -161,7 +163,7 @@ export function ModernInset(props: ModernInsetProps) {
     <header className="ts-modern__header">{views}{hide}</header>
     {content}
   </section>;
-  return <HudFold className="ts-modern" panel={panel} title={title} closeLabel={closeLabel} onClose={() => onPatch({ insetVisible: false })}>
+  return <HudFold className="ts-modern" panel={panel} title={title} closeLabel={closeLabel} onClose={() => onPatch({ insetVisible: false })} held={held}>
     {views}
     {content}
   </HudFold>;
@@ -185,8 +187,7 @@ export function ModernInspector({ object, locale, outsideWindow, showAll, onClos
       {showAll && <button type="button" onClick={showAll}>{words(locale, 'Show all selected records', '显示全部所选记录')}</button>}</p>}
     {object.kind === 'reference-card'
       ? <p>{tx(object.regionLabel, locale)} · {cardPrecision(object.precision, locale)}</p>
-      : <p>{words(locale, 'Modern position', '现代位置')} [{object.at.join(', ')}]
-        {object.kind === 'fossil-collection' ? <> · {tx(object.precision, locale)}</> : words(locale, ' · reference only', ' · 仅为参照')}</p>}
+      : <p>{object.kind === 'fossil-collection' ? <>{words(locale, 'Where it is today', '今天的位置')} · {tx(object.precision, locale)}</> : words(locale, 'Where it is today, for comparison only', '今天的位置，仅作对照')}</p>}
     {object.kind === 'reference' && object.role === 'impact-site' && <p>{words(locale, `Event age: ${ma(object.eventAge.ma)} Ma`, `事件年龄：${ma(object.eventAge.ma)} 百万年前`)}</p>}
     {object.kind === 'fossil-collection' && <>
       <p>{words(locale, 'PBDB collection', 'PBDB 采集记录组')} {object.pbdbCollectionId} · {words(locale, `${object.occurrenceAges.length} occurrence records`, `${object.occurrenceAges.length} 条化石出现记录`)}</p>
@@ -208,8 +209,11 @@ export function ModernIndex({ ids, bundle, locale, onSelect }: { ids: readonly s
 }
 
 /** Presentation evidence uses the same filtered picture and named cards as the reader. */
-export function ModernEvidence(props: ModernInsetProps) {
-  return props.insetVisible ? <aside className="ts-modern-evidence"><ModernInset {...props} embedded={false} panel="present-evidence" /></aside> : null;
+export function ModernEvidence({ beatKey, ...props }: ModernInsetProps & { beatKey: string }) {
+  // Open on every beat that shows it; a reader's fold lasts until the next beat.
+  const [open, setOpen] = useState(true);
+  useEffect(() => setOpen(true), [beatKey]);
+  return props.insetVisible ? <aside className="ts-modern-evidence"><ModernInset {...props} embedded={false} panel="present-evidence" held={{ open, set: setOpen }} /></aside> : null;
 }
 
 export interface GeologyReadoutProps {

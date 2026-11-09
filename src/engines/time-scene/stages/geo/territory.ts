@@ -50,6 +50,8 @@ export interface TerritoryInput {
   blend: number;
   /** Holders whose unlabelled areas carry a leader placard instead (highlighted entities). */
   skipHolders: ReadonlySet<string>;
+  /** Names on the leader placards (`nameKey`): a territory name that only repeats one is left out. */
+  named: ReadonlySet<string>;
   /** Container-local boxes to keep clear of: leader placards, then HUD panels. */
   obstacles: readonly Box[];
 }
@@ -67,6 +69,8 @@ export interface TerritoryLabels {
   count(): number;
   destroy(): void;
 }
+
+export const nameKey = (name: string) => name.trim().toLocaleLowerCase('en');
 
 export const MAX_TERRITORY_LABELS = 24;
 /** Same holder + text in both keyframes and closer than this (px): one moving label. */
@@ -223,7 +227,7 @@ export function createTerritoryLabels(options: { map: MlMap; container: HTMLElem
         const label = f.properties.label;
         if (!label && input.skipHolders.has(holder)) return;
         const text = labelText(label, model.entities.get(holder)?.entity.name);
-        if (!text) return;
+        if (!text || input.named.has(nameKey(text.en))) return;
         // The largest of the feature's polygons whose anchor is on screen (an empire's home island when its largest part is not).
         for (const g of geometryOf(k, i, f)) {
           if (g.area * s2 < TIER_MIN_AREA[3]) break;

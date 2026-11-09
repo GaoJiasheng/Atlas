@@ -20,7 +20,7 @@
  *
  * Loaded lazily (dynamic import) so MapLibre stays out of the View chunk.
  */
-import { Map as MlMap, Marker, type GeoJSONSource } from 'maplibre-gl';
+import { Map as MlMap, Marker, type ExpressionSpecification, type GeoJSONSource } from 'maplibre-gl';
 import type { ReconstructionManifest } from '../../deep-time';
 import type { ReconstructionStats } from '../../lib/reconstruction';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -54,7 +54,8 @@ import type { CatalogueEntry, CatalogueIndex } from '../../catalogueSchema';
 import { createCatalogueLoader } from '../../lib/catalogueLoader';
 import { prepareDatedLayer, type DatedLayerLoaded } from '../../lib/datedLayers';
 import { createLeaders, intersects, type LeaderItem } from './leaders';
-import { createTerritoryLabels } from './territory';
+import { markerFocus, type MarkerFocus } from '../../lib/markers';
+import { createTerritoryLabels, nameKey } from './territory';
 import { createRiverLabels } from './rivers';
 import { createDatedMapLayer, datedLayerStyles, type DatedLayerStats, type DatedMapLayer } from './datedLayers';
 import { EMPTY, GROUPS, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, MAX_ZOOM, DASH_SEQUENCE, DASH_STEP_MS, REFERENCE_MS, REGION, SRC, buildGeoStyle, graticule, riverFilter } from './style';
@@ -146,10 +147,20 @@ const FRONTIER_PX = 0.8;
 /** An approximate area (`certainty: approximate`): its tint and hatch this much lighter. */
 const APPROX_TINT = 0.7;
 const APPROX_HATCH = 0.55;
+/** Close in, one holder's area fills the frame: its tint and hatch ease to CLOSE_UP_FADE between these zooms. */
+const CLOSE_UP_ZOOM: readonly [number, number] = [9, 12];
+const CLOSE_UP_FADE = 0.3;
+/** `value`, faded at close zoom (a paint expression; `zoom` has to stay at its top level). */
+const closeUpFade = (value: unknown[]): ExpressionSpecification =>
+  ['interpolate', ['linear'], ['zoom'], CLOSE_UP_ZOOM[0], value, CLOSE_UP_ZOOM[1], ['*', CLOSE_UP_FADE, value]] as unknown as ExpressionSpecification;
 /** Modern country names (borders on): a secondary class, only close in and away from territory names. */
 const MAX_PLACE_LABELS = 8;
 const PLACE_MIN_ZOOM = 5;
 const PLACE_CLEAR_PX = 60;
+/** Territory names keep this far from placards and HUD blocks (the title included), and from placard anchors. */
+const TERRITORY_CLEAR_PX = 12;
+const ANCHOR_CLEAR_PX = 16;
+const padded = (b: { x: number; y: number; w: number; h: number }) => ({ x: b.x - TERRITORY_CLEAR_PX, y: b.y - TERRITORY_CLEAR_PX, w: b.w + 2 * TERRITORY_CLEAR_PX, h: b.h + 2 * TERRITORY_CLEAR_PX });
 /** Leader labels shown for a presentation beat (its highlighted ids). */
 const PRESENTATION_MAX_LABELS = 6;
 const PULSE_MS = 900;
@@ -240,7 +251,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.touchZoomRotate.disableRotation();
 
   const disposers: (() => void)[] = [];
-  const hudFraming = createMapHudFraming(map, container, { reducedMotion, hud: options.hud });
+  const hudFraming = createMapHudFraming(map, container, { reducedMotion, hud: options.hud, plate: region?.bounds });
   disposers.push(() => hudFraming.destroy());
   let loaded = false;
   let destroyed = false;
@@ -315,6 +326,9 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   const layersOn = () => new Set(store.getState().layers);
   const highlight = () => store.getState().highlight ?? [];
+  /** A beat is on show: what it names stands out and the rest of the map's markers step back. */
+  const inBeat = () => presenting || store.getState().beat != null;
+  const beatFocus = (): MarkerFocus => (!inBeat() ? 'map' : highlight().length ? 'named' : 'beat');
 
   /* ---------- hatch patterns (one per entity, rebuilt on theme change) ---------- */
   const applyHatches = () => {
@@ -489,8 +503,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     setIfChanged(SRC.prev, `${control.prevIndex}|${hlSig}|${themeSig}`, () => controlFc(control.prevIndex, hl, t));
     setIfChanged(SRC.next, `${control.nextIndex}|${hlSig}|${themeSig}`, () => controlFc(control.nextIndex, hl, t));
     const fade = (prefix: 'prev' | 'next', o: number) => {
-      map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', ['*', CONTROL_TINT * o, ['get', 'tint']]);
-      map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', approximate ? ['*', o, ['get', 'ho']] : o);
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevFill : LAYER.nextFill, 'fill-opacity', closeUpFade(['*', CONTROL_TINT * o, ['get', 'tint']]));
+      map.setPaintProperty(prefix === 'prev' ? LAYER.prevHatch : LAYER.nextHatch, 'fill-opacity', closeUpFade(approximate ? ['*', o, ['get', 'ho']] : ['literal', o]));
       map.setPaintProperty(prefix === 'prev' ? LAYER.prevLine : LAYER.nextLine, 'line-opacity', o);
       if (approximate) map.setPaintProperty(prefix === 'prev' ? LAYER.prevDash : LAYER.nextDash, 'line-opacity', o);
     };
@@ -540,6 +554,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     updateArrowheads(frame, on.has('movements'));
 
     /* events: hollow ring (hairline) + dot sized by importance; squares and siege rings are HTML (updateMarks) */
+    const focus = beatFocus();
     const eventFeatures: Feature[] = frame.events.flatMap((ef): Feature[] => {
       const en = model.events.find((x) => x.event.id === ef.id)!;
       const e = en.event;
@@ -556,13 +571,13 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
           color,
           stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'],
           sw: isHl ? 1.6 : 1,
-          o: e.displayOffset || SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : ef.active || isHl ? 1 : 0.6,
+          o: e.displayOffset || SQUARE_KINDS.has(e.kind) || TRIANGLE_KINDS.has(e.kind) ? 0 : markerFocus(focus, ef.active, isHl),
         },
       }];
     });
     setIfChanged(
       SRC.events,
-      `${frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',')}|${hlSig}|${themeSig}`,
+      `${frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',')}|${hlSig}|${themeSig}|${focus}`,
       () => ({ type: 'FeatureCollection', features: eventFeatures }),
     );
 
@@ -689,7 +704,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   const updateMarks = (frame: Frame, on: Set<string>, hl: Set<string>, hlSig: string) => {
     const battles = on.has('battles');
     const sitesOn = on.has('sites');
-    const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}|${tokens.ink}|${tokens.signal}|${tokens.paper}`;
+    const focus = beatFocus();
+    const sig = `${battles ? frame.events.map((e) => `${e.id}:${e.active ? 1 : 0}`).join(',') : '-'}|${sitesOn}|${hlSig}|${focus}|${tokens.ink}|${tokens.signal}|${tokens.paper}`;
     const offsetScale = displayOffsetScale(map.getZoom());
     if (sig === marksSig && offsetScale === marksOffsetScale) return;
     marksSig = sig;
@@ -705,7 +721,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         if (e.displayOffset && !SQUARE_KINDS.has(e.kind) && !TRIANGLE_KINDS.has(e.kind)) {
           const color = eventColor(e, en.start);
           want.set(`ring:${e.id}`, { at: e.at, displayOffset: e.displayOffset, className: 'ts-mark', size: 2 * (r + 2), active: ef.active, hl: isHl,
-            ring: { r, dot: 0.8 + 0.7 * e.importance, stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'], fill: color, width: isHl ? 1.6 : 1, opacity: ef.active || isHl ? 1 : 0.6 } });
+            ring: { r, dot: 0.8 + 0.7 * e.importance, stroke: isHl ? tokens.signal : ef.active ? color : tokens['ink-2'], fill: color, width: isHl ? 1.6 : 1, opacity: markerFocus(focus, ef.active, isHl) } });
         }
         if (SQUARE_KINDS.has(e.kind)) {
           want.set(`square:${e.id}`, { at: e.at, className: 'ts-mark ts-mark--square', size: Math.round(r * 1.8), active: ef.active, hl: isHl });
@@ -761,6 +777,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       if (m.color) el.style.setProperty('--ts-color', m.color);
       el.dataset.active = String(m.active);
       el.dataset.hl = String(m.hl);
+      // On the mark's body: MapLibre owns the marker element's opacity, and rings carry theirs in the SVG above.
+      if (!m.ring) (el.firstElementChild as HTMLElement).style.opacity = focus === 'map' ? '' : String(markerFocus(focus, m.active && !key.startsWith('site:'), m.hl));
     }
   };
 
@@ -849,6 +867,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       Math.round(control.blend * 20),
       highlight().join(','),
       presenting,
+      leaders.named().join(','),
       boxes.map((b) => `${Math.round(b.x / 8)},${Math.round(b.y / 8)}`).join(';'),
     ].join('|');
     if (!force && sig === territorySig) {
@@ -868,7 +887,12 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       nextIndex: control.nextIndex,
       blend: control.blend,
       skipHolders: skip,
-      obstacles: [...boxes, ...(band?.obstacles ?? []).map((r) => ({ x: r.x, y: r.y, w: r.width, h: r.height }))],
+      named: new Set(leaders.named().map(nameKey)),
+      obstacles: [
+        ...boxes.map(padded),
+        ...leaders.anchors().map((a) => ({ x: a.x - ANCHOR_CLEAR_PX, y: a.y - ANCHOR_CLEAR_PX, w: 2 * ANCHOR_CLEAR_PX, h: 2 * ANCHOR_CLEAR_PX })),
+        ...(band?.obstacles ?? []).map((r) => padded({ x: r.x, y: r.y, w: r.width, h: r.height })),
+      ],
     });
   };
 
@@ -884,7 +908,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
     if (on.has('battles')) {
       for (const ef of frame.events) {
         if (!ef.active && !hl.has(ef.id)) continue;
-        if (presenting && !hl.has(ef.id)) continue;
+        // A beat labels only what it names; one that names nothing keeps the events under way.
+        if ((presenting || (inBeat() && hl.size > 0)) && !hl.has(ef.id)) continue;
         const e = model.events.find((x) => x.event.id === ef.id)!.event;
         if (!hasMapAnchor(e)) continue;
         items.push({
@@ -1248,7 +1273,8 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   /* ---------- camera ---------- */
   const applyCamera = (camera: GeoCamera, instant: boolean) => {
     // Framed in the free stage rect (lib/hud-framing.ts): centred between the HUD blocks, zoomed out when that room is small.
-    const target = hudFraming.target(camera);
+    const { reason, fields } = store.getState().transition;
+    const target = hudFraming.target(camera, { free: reason === 'preset' || (reason === 'url' && (fields ?? []).includes('camera')) });
     if (instant || reducedMotion) map.jumpTo(target);
     else map.flyTo({ ...target, duration: FLY_MS, essential: true });
   };
@@ -1312,7 +1338,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
       }
       if (s.pick !== prev.pick || s.layers !== prev.layers) catalogueLoader.requestPick(s.pick, s.layers);
       if (s.pick !== prev.pick) for (const layer of datedLayers) layer.setSelected(s.pick ?? null);
-      if (s.highlight !== prev.highlight || s.pick !== prev.pick) requestRender();
+      if (s.highlight !== prev.highlight || s.pick !== prev.pick || s.beat !== prev.beat) requestRender();
     }),
   );
   disposers.push(playhead.subscribe(requestRender));

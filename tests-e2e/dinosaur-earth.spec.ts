@@ -127,6 +127,26 @@ test('narrow presentation retains current evidence; all assets load with externa
 });
 
 
+test('a beat that cites the small map shows it at 1024x768, and phone panels clear the title', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await page.goto('/en/topics/dinosaur-earth/');
+  await page.waitForFunction(() => !!window.__atlas);
+  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await geology(page);
+  await pickBeat(page, 'fossil-atlas', 0);
+  const map = page.locator('[data-hud-panel="present-evidence"] .ts-modern__map');
+  await expect(map).toBeVisible();
+  expect((await map.boundingBox())!.height).toBeGreaterThan(120);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(map).toBeVisible();
+  await expect.poll(async () => {
+    const title = (await page.locator('[data-hud-panel="present-title"]').boundingBox())!;
+    const panel = (await page.locator('.ts-modern-evidence').boundingBox())!;
+    return panel.y >= title.y + title.height - 1;
+  }).toBe(true);
+  await expect(page.locator('[data-hud-panel="reconstruction-age"]')).toBeHidden();
+});
+
 test('visited deep-time frames and modern evidence reload without a network connection', async ({ page, context }) => {
   test.setTimeout(120_000);
   await open(page, 'en', 'ch=impact-boundary&b=2');

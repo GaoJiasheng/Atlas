@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Map as MlMap } from 'maplibre-gl';
 import { createHudStore } from '../../src/engines/core/controls';
 import { measureFreeStage } from '../../src/engines/core/hud-room';
-import { containerFreeRect, createMapHudFraming, FIT_MARGIN, fitHudPadding, frameZoomShift, GAP, mapHudPadding, MAX_ZOOM_OUT, paddedCentre, REF_FREE, REFIT_MS, type FrameRect } from '../../src/engines/time-scene/lib/hud-framing';
+import { containerFreeRect, createMapHudFraming, FIT_MARGIN, fitHudPadding, frameZoomShift, GAP, mapHudPadding, MAX_ZOOM_OUT, paddedCentre, REF_FREE, REFIT_MS, type FrameRect, plateCamera } from '../../src/engines/time-scene/lib/hud-framing';
 
 // The free rect comes from the host (core/useHudRoom → hud.freeStage); the map adds its GAP inset.
 const freeStageRect = (width: number, height: number, panels: readonly FrameRect[]) =>
@@ -222,5 +222,34 @@ describe('TimeScene HUD framing lifecycle', () => {
     const s = setup();
     const t = s.framing.target(authored);
     expect(s.framing.storedZoom(t.zoom)).toBeCloseTo(5, 2);
+  });
+});
+
+describe('plateCamera', () => {
+  const plate = [35, -15, 125, 37] as const;
+  const none = { top: 0, bottom: 0, left: 0, right: 0 };
+  it('stops the zoom-out where the plate still fills the canvas', () => {
+    const r = plateCamera({ center: [80, 10], zoom: 2.9 }, 4.3, plate, 1024, 768, none);
+    expect(r.zoom).toBeCloseTo(Math.log2((768 / ((Math.log(Math.tan(Math.PI / 4 + (37 * Math.PI) / 360)) - Math.log(Math.tan(Math.PI / 4 - (15 * Math.PI) / 360))) / (2 * Math.PI))) / 512), 3);
+  });
+  it('keeps a wide authored view when filling would crop the plate hard', () => {
+    expect(plateCamera({ center: [80, 10], zoom: 1.5 }, 2.4, plate, 768, 1024, none).zoom).toBe(2.4);
+  });
+  it('fills a landscape stage even from a view wider than the plate', () => {
+    expect(plateCamera({ center: [80, 10], zoom: 1.5 }, 2.4, plate, 1024, 768, none).zoom).toBeGreaterThan(3);
+  });
+  it('moves the centre back so the canvas stays on the plate', () => {
+    const r = plateCamera({ center: [119, 28], zoom: 3.4 }, 4.3, plate, 1024, 768, none);
+    const halfDeg = (512 / (512 * 2 ** r.zoom)) * 360;
+    expect(r.center[0] + halfDeg).toBeLessThanOrEqual(125.001);
+  });
+  it('does not push a southern subject behind the caption to fill the strip below the free rect', () => {
+    const full = plateCamera({ center: [42, -6], zoom: 3.3 }, 4.2, plate, 1024, 768, none);
+    const free = plateCamera({ center: [42, -6], zoom: 3.3 }, 4.2, plate, 1024, 768, none, 600);
+    expect(free.center[1]).toBeLessThan(full.center[1]);
+  });
+  it('leaves a camera well inside the plate alone', () => {
+    const r = plateCamera({ center: [80, 10], zoom: 5 }, 5.8, plate, 1024, 768, none);
+    expect(r).toEqual({ center: [expect.closeTo(80, 6), expect.closeTo(10, 6)], zoom: 5 });
   });
 });

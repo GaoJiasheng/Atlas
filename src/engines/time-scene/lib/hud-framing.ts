@@ -35,6 +35,8 @@ export const MAX_ZOOM_OUT = 1.5;
 export const REFIT_MS = 600;
 /** WHOLE AREA / plate fits: margin inside the free rect, as a share of its shorter side. */
 export const FIT_MARGIN = 0.08;
+/** A plate may be zoomed to fill the stage when at least this share of its cropped axis stays on screen. */
+export const PLATE_FILL_SHARE = 0.75;
 
 const ZERO: PaddingOptions = { top: 0, bottom: 0, left: 0, right: 0 };
 
@@ -78,9 +80,44 @@ export function paddedCentre(width: number, height: number, p: PaddingOptions): 
   return [(p.left! + width - p.right!) / 2, (p.top! + height - p.bottom!) / 2];
 }
 
+const unitX = (lng: number) => (lng + 180) / 360;
+const unitY = (lat: number) => 0.5 - Math.log(Math.tan(Math.PI / 4 + (Math.max(-85, Math.min(85, lat)) * Math.PI) / 360)) / (2 * Math.PI);
+const lngOf = (x: number) => x * 360 - 180;
+const latOf = (y: number) => (Math.atan(Math.sinh(Math.PI * (1 - 2 * y))) * 180) / Math.PI;
+
+/**
+ * A regional plate ends in a hard edge at `bounds`, so an authored camera may
+ * not be shifted out past it: the zoom-out stops where the plate still fills
+ * the canvas (a view framed wider than the plate stays as authored when filling
+ * would crop the plate hard, as on a portrait screen), and the centre moves back until the canvas is on the
+ * plate on every axis where it can fit. `visibleBottom` is where the free rect
+ * ends: below it sit the caption card or chapter axis, and a subject near the
+ * plate's south edge must not be pushed behind them to fill that strip.
+ */
+export function plateCamera(goal: { center: [number, number]; zoom: number }, authoredZoom: number, bounds: readonly [number, number, number, number], width: number, height: number, padding: PaddingOptions, visibleBottom = height): { center: [number, number]; zoom: number } {
+  const [w, s, e, n] = bounds;
+  const x0 = unitX(w), x1 = unitX(e), y0 = unitY(n), y1 = unitY(s);
+  const fillPx = Math.max(width / (x1 - x0), visibleBottom / (y1 - y0));
+  const fill = Math.log2(fillPx / 512);
+  // At `fill` one axis is shown whole and the other is cropped by the aspect ratio alone: when that keeps most of the plate, even a wider authored view fills the stage.
+  const shown = Math.min((width / fillPx) / (x1 - x0), (visibleBottom / fillPx) / (y1 - y0));
+  const zoom = Math.max(goal.zoom, shown >= PLATE_FILL_SHARE ? fill : Math.min(authoredZoom, fill));
+  const size = 512 * 2 ** zoom;
+  const [cx, cy] = paddedCentre(width, height, { ...ZERO, ...padding });
+  const clamp = (v: number, lo: number, hi: number) => (lo <= hi ? Math.min(hi, Math.max(lo, v)) : v);
+  return {
+    zoom,
+    center: [
+      lngOf(clamp(unitX(goal.center[0]), x0 + cx / size, x1 - (width - cx) / size)),
+      latOf(clamp(unitY(goal.center[1]), y0 + cy / size, y1 - (visibleBottom - cy) / size)),
+    ],
+  };
+}
+
 export interface MapHudFraming {
-  /** Where an authored camera goes now (padding + shifted zoom); it becomes the camera re-fits return to. */
-  target(camera: GeoCamera): { center: [number, number]; zoom: number; pitch: number; bearing: number; padding: PaddingOptions };
+  /** Where an authored camera goes now (padding + shifted zoom); it becomes the camera re-fits return to.
+   * `free`: a fitted preset or the reader's own link, which may show the whole sheet. */
+  target(camera: GeoCamera, options?: { free?: boolean }): { center: [number, number]; zoom: number; pitch: number; bearing: number; padding: PaddingOptions };
   /** A map zoom in authored units (for writing a reader's camera back to the store). */
   storedZoom(zoom: number): number;
   /** Padding for `cameraForBounds` (WHOLE AREA, the plate); convert its zoom with `storedZoom`. */
@@ -98,6 +135,8 @@ export interface MapHudFramingOptions {
   /** Applied to the authored zoom before the shift (e.g. a reconstruction's max zoom). */
   clampZoom?(zoom: number): number;
   reducedMotion?: boolean;
+  /** A regional plate's `bounds`: authored cameras stay on it (`plateCamera`). */
+  plate?: readonly [number, number, number, number];
 }
 
 /** The host's stage-local free rect in container coordinates, inset by GAP and clipped to the canvas. */
@@ -122,6 +161,8 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
   let authored: GeoCamera | null = null;
   /** The reader has panned / zoomed since `authored`. */
   let userMoved = false;
+  /** `authored` is a fitted preset or a reader's link: not held on the plate. */
+  let freeCamera = false;
   /** The zoom the map settled at for `authored`: above the goal when minZoom or a plate's maxBounds floored it. */
   let settledZoom: number | null = null;
   const resize = new ResizeObserver(() => schedule());
@@ -137,13 +178,12 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
     return { width: box.width, height: box.height };
   };
 
-  const goal = (camera: GeoCamera) => ({
-    center: [camera.center[0], camera.center[1]] as [number, number],
-    zoom: clampZoom(camera.zoom) + shift,
-    pitch: camera.pitch ?? 0,
-    bearing: camera.bearing ?? 0,
-    padding: { ...padding },
-  });
+  const goal = (camera: GeoCamera) => {
+    const shifted = { center: [camera.center[0], camera.center[1]] as [number, number], zoom: clampZoom(camera.zoom) + shift };
+    const box = container.getBoundingClientRect();
+    const framed = options.plate && !freeCamera ? plateCamera(shifted, clampZoom(camera.zoom), options.plate, box.width, box.height, padding, rect ? Math.min(box.height, rect.y1 + GAP) : box.height) : shifted;
+    return { ...framed, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0, padding: { ...padding } };
+  };
 
   const samePadding = (a: PaddingOptions, b: PaddingOptions) =>
     ['top', 'bottom', 'left', 'right'].every(k => Math.abs((a[k as keyof PaddingOptions] ?? 0) - (b[k as keyof PaddingOptions] ?? 0)) < 1);
@@ -188,9 +228,10 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
   measure();
 
   return {
-    target(camera) {
+    target(camera, targetOptions) {
       measure();
       authored = camera;
+      freeCamera = targetOptions?.free ?? false;
       userMoved = false;
       settledZoom = null;
       framed = { padding: { ...padding }, shift };

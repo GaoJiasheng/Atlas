@@ -375,9 +375,9 @@
   --focus: var(--signal);
   --overlay: rgba(231, 229, 223, 0.05);
 
-  --land: #2a2c30;
+  --land: #3a3d40;
   --land-edge: var(--hair);
-  --water: #1b1d20;
+  --water: #17191c;
   --rivers: #5d7e86;
 
   --accent-allied: var(--cold);
