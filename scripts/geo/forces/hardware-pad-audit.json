@@ -1,0 +1,9 @@
+{
+  "source": "decoded candidate POSITION/COLOR_0 attributes and actual runtime pose data",
+  "restInnerPadMm": 11.998431926896313,
+  "rimHalfWidthMm": 9.5,
+  "lightScale": 0.8,
+  "lightGapMm": 0.09874554151705246,
+  "firmScale": 0.785,
+  "firmGapMm": -0.08123093738639404
+}

@@ -1,0 +1,65 @@
+{
+  "rows": [
+    {
+      "id": "retort-stand",
+      "beforeTriangles": 1560,
+      "afterTriangles": 11864,
+      "beforeCalls": 2,
+      "afterCalls": 1
+    },
+    {
+      "id": "drop-stand",
+      "beforeTriangles": 11148,
+      "afterTriangles": 4620,
+      "beforeCalls": 2,
+      "afterCalls": 1
+    },
+    {
+      "id": "release-clamps",
+      "beforeTriangles": 2136,
+      "afterTriangles": 15224,
+      "beforeCalls": 2,
+      "afterCalls": 1
+    },
+    {
+      "id": "paper-crumpled",
+      "beforeTriangles": 144,
+      "afterTriangles": 10672,
+      "beforeCalls": 1,
+      "afterCalls": 1
+    },
+    {
+      "id": "wheel-stand",
+      "beforeTriangles": 3516,
+      "afterTriangles": 23352,
+      "beforeCalls": 3,
+      "afterCalls": 1
+    },
+    {
+      "id": "brake-caliper",
+      "beforeTriangles": 6908,
+      "afterTriangles": 17048,
+      "beforeCalls": 2,
+      "afterCalls": 1
+    },
+    {
+      "id": "brake-cable",
+      "beforeTriangles": 8800,
+      "afterTriangles": 1920,
+      "beforeCalls": 1,
+      "afterCalls": 1
+    },
+    {
+      "id": "shoe-soles",
+      "beforeTriangles": 360,
+      "afterTriangles": 24680,
+      "beforeCalls": 2,
+      "afterCalls": 1
+    }
+  ],
+  "beforeTriangles": 34572,
+  "afterTriangles": 109380,
+  "beforeCalls": 15,
+  "afterCalls": 8,
+  "glbBytes": 560620
+}

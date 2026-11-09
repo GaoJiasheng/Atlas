@@ -38,3 +38,11 @@ scripts/geo/warring-states/work/
 .claude/worktrees/
 /art/
 scripts/geo/industrial-revolution/qa/
+
+# Codex 3D-rebuild comparison sheets and iteration renders (QA records, local only)
+scripts/geo/circuits/**/*.png
+scripts/geo/circuits/**/*.jpg
+scripts/geo/forces/**/*.png
+scripts/geo/forces/**/*.jpg
+scripts/geo/magnets/**/*.png
+scripts/geo/magnets/**/*.jpg

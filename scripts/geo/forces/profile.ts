@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {NodeIO} from '@gltf-transform/core';
+import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
+import {MeshoptDecoder} from 'meshoptimizer';
+import {partsFile} from '../../../src/engines/space-scene/schema';
+import {partPieces,eachPieces} from '../../../src/engines/space-scene/stages/model3d/geometry';
+const path=process.argv[2]??'src/content/topics/forces/data/parts.json';
+const data=partsFile.parse(JSON.parse(fs.readFileSync(path,'utf8')));
+await MeshoptDecoder.ready;
+const doc=data.model?await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(`public${data.model}`):null;
+const counts=new Map(doc?.getRoot().listNodes().map(n=>[n.getName(),n.getMesh()?.listPrimitives().reduce((a,p)=>a+(p.getIndices()?.getCount()??p.getAttribute('POSITION')!.getCount())/3,0)??0]));
+const rows=data.parts.map(p=>{if(p.mesh)return {id:p.id,triangles:counts.get(p.mesh)??0,calls:1};const pcs=(p.id==='car-wheels'?eachPieces:partPieces)(p);let triangles=0;for(const piece of pcs){triangles+=(piece.geometry.index?.count??piece.geometry.getAttribute('position').count)/3*(piece.matrices?.length??1);piece.geometry.dispose();}return {id:p.id,triangles,calls:pcs.length};});
+console.log(JSON.stringify({path,triangles:rows.reduce((a,r)=>a+r.triangles,0),calls:rows.reduce((a,r)=>a+r.calls,0),glbBytes:data.model?fs.statSync(`public${data.model}`).size:0,parts:rows},null,2));

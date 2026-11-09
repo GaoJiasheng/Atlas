@@ -44,3 +44,7 @@ Rules: skill atlas-space-topic (references/writing-rules.md) and skill industria
 - **Lower secondary.** S22 is cited only for "measure force in newtons" and "compare mass and weight"; it does not name Hooke's law or a weight formula, so the chapters only say these ideas come again in later science.
 - **Chinese terms.** 力、推力、拉力、静止、运动、重力（地心引力）、重量、质量、摩擦力、表面、弹簧的弹力、伸长、磁力、弹簧秤、牛顿、公平测试 follow the usage of Singapore Chinese-language science materials as far as it could be checked; no official MOE Chinese glossary for this topic was found, so this is editorial terminology.
 - **Reference images.** The apparatus is modelled from the Tier-1 descriptions in docs/30 §3.3 (common school equipment); no reference photographs were downloaded for this build, and none are published.
+
+## Rebuild geometry 2026-11-05
+
+`/models/forces.glb` contains original Atlas procedural geometry. The toy-car geometry is CC0-1.0; the apparatus geometry is released under the repository MIT licence. No third-party mesh, scan, photograph or texture is embedded. Reference photographs, their creators/licences, the self-graded B paper limitation and CPU/GPU evidence limits are recorded in `../REBUILD-3D.md`. Build sources: `scripts/geo/forces/build-car.mjs`, `hardware-model.ts` and `hardware-build.ts`; local meshopt compression, no runtime network. The intermediate hardware GLB stays in the topic's script evidence directory and is not a public asset.

@@ -1,0 +1,1096 @@
+{
+  "parts": [
+    {
+      "id": "retort-stand",
+      "name": {
+        "en": "Retort stand",
+        "zh": "铁架台"
+      },
+      "group": "spring",
+      "summary": {
+        "en": "Holds the test spring and the weighing balance.",
+        "zh": "挂着弹簧和称重用的弹簧秤。"
+      },
+      "detail": {
+        "en": "A heavy base, an upright rod 62 cm tall, a clamp and a cross arm [S1]. The arm holds the test spring near one end and a spring balance at the other.",
+        "zh": "一个沉重的底座、一根高 62 cm 的立杆、一个夹子和一根横杆 [S1]。横杆一端挂着实验用的弹簧，另一端挂着一只弹簧秤。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.006,
+          0.006,
+          0.62
+        ],
+        "at": [
+          0.04,
+          0.325,
+          -0.25
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.2,
+            0.015,
+            0.14
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.12,
+            0.0075,
+            -0.22
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.024,
+            0.024,
+            0.024
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.04,
+            0.53,
+            -0.25
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.005,
+            0.005,
+            0.27
+          ],
+          "at": [
+            0.175,
+            0.53,
+            -0.25
+          ],
+          "color": "steel",
+          "rotation": [
+            0,
+            0,
+            90
+          ]
+        }
+      ],
+      "castShadow": true
+    },
+    {
+      "id": "drop-stand",
+      "name": {
+        "en": "Drop tower",
+        "zh": "落体架"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Holds things at a set height above the sand.",
+        "zh": "把物体固定在沙面上方一定高度。"
+      },
+      "detail": {
+        "en": "An upright rod 1.6 m tall on a heavy base, standing on the floor beside the bench, with marks at 0.5, 1.0 and 1.5 m above the sand [S1].\n\nNever drop things from a height where someone could be below [S28].",
+        "zh": "一根高 1.6 m 的立杆，装在沉重的底座上，立在实验台旁的地上；立杆上在沙面以上 0.5、1.0、1.5 m 处各有一道标记 [S1]。\n\n不要从高处往下扔东西，下面可能有人 [S28]。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.008,
+          0.008,
+          1.62
+        ],
+        "at": [
+          1.17,
+          0.08,
+          -0.17
+        ],
+        "color": "steel"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.24,
+            0.02,
+            0.2
+          ],
+          "bevel": 0.004,
+          "at": [
+            1.17,
+            -0.74,
+            -0.17
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "torus",
+          "size": [
+            0.0105,
+            0.0016
+          ],
+          "at": [
+            1.17,
+            -0.205,
+            -0.17
+          ],
+          "color": "powder",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "torus",
+          "size": [
+            0.0105,
+            0.0016
+          ],
+          "at": [
+            1.17,
+            0.295,
+            -0.17
+          ],
+          "color": "powder",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "torus",
+          "size": [
+            0.0105,
+            0.0016
+          ],
+          "at": [
+            1.17,
+            0.795,
+            -0.17
+          ],
+          "color": "powder",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "castShadow": true
+    },
+    {
+      "id": "release-clamps",
+      "name": {
+        "en": "Release clamps",
+        "zh": "释放夹"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "Let go of two objects at the same moment.",
+        "zh": "让两个物体在同一时刻放开。"
+      },
+      "detail": {
+        "en": "Two clamps on one arm that open together, so neither object gets a head start [S1]. The arm slides up and down the rod to the chosen height. Letting go together, from the same height, keeps the comparison fair.",
+        "zh": "同一根横臂上的两只夹子，一起张开，谁也不会先走一步 [S1]。横臂可以沿立杆上下移到选定的高度。同一高度、同时放手，比较才公平。"
+      },
+      "primitive": {
+        "kind": "cylinder",
+        "size": [
+          0.005,
+          0.005,
+          0.2
+        ],
+        "at": [
+          1.17,
+          0.307,
+          -0.07
+        ],
+        "color": "steel",
+        "rotation": [
+          90,
+          0,
+          0
+        ]
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.3,
+            0.012,
+            0.012
+          ],
+          "bevel": 0.002,
+          "at": [
+            1.17,
+            0.307,
+            0.035
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.026,
+            0.03,
+            0.026
+          ],
+          "bevel": 0.003,
+          "at": [
+            1.17,
+            0.307,
+            -0.17
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.12
+          ],
+          "at": [
+            1.04,
+            0.307,
+            0.1
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.12
+          ],
+          "at": [
+            1.1,
+            0.307,
+            0.1
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.12
+          ],
+          "at": [
+            1.24,
+            0.307,
+            0.1
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.002,
+            0.002,
+            0.12
+          ],
+          "at": [
+            1.3,
+            0.307,
+            0.1
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.1
+      }
+    },
+    {
+      "id": "paper-crumpled",
+      "name": {
+        "en": "Crumpled sheet",
+        "zh": "纸团"
+      },
+      "group": "drop",
+      "summary": {
+        "en": "A matching sheet, crumpled into a ball.",
+        "zh": "一样的一张纸，揉成一团。"
+      },
+      "detail": {
+        "en": "The same mass, about 5 g, crumpled into a ball about 5 cm across [S1, S27]. Much less air pushes back on it: in this model it falls 1.0 m in about 0.46 s, almost as fast as the steel balls [S1, S6].",
+        "zh": "质量一样，约 5 g，揉成直径约 5 cm 的一团 [S1, S27]。空气对它的向上推力小得多：在这个模型里，下落 1.0 m 约用 0.46 s，几乎和钢球一样快 [S1, S6]。"
+      },
+      "primitive": {
+        "kind": "lathe",
+        "profile": [
+          [
+            0,
+            -0.024
+          ],
+          [
+            0.012,
+            -0.021
+          ],
+          [
+            0.021,
+            -0.013
+          ],
+          [
+            0.025,
+            -0.003
+          ],
+          [
+            0.021,
+            0.005
+          ],
+          [
+            0.024,
+            0.013
+          ],
+          [
+            0.016,
+            0.02
+          ],
+          [
+            0.008,
+            0.024
+          ],
+          [
+            0,
+            0.025
+          ]
+        ],
+        "segments": 9,
+        "at": [
+          1.07,
+          0.319,
+          0.14
+        ],
+        "color": "enamel",
+        "rotation": [
+          14,
+          31,
+          8
+        ],
+        "tint": "#f1ece0"
+      }
+    },
+    {
+      "id": "wheel-stand",
+      "name": {
+        "en": "Wheel stand",
+        "zh": "轮架"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Holds the wheel off the bench so it spins freely.",
+        "zh": "把轮子架离台面，让它自由转动。"
+      },
+      "detail": {
+        "en": "A base with two uprights that hold the axle and carry the brake at the top, and a short handlebar for the brake lever [S1]. The wheel stays in one place, so only the brake changes from one run to the next.",
+        "zh": "一个底座和两根立柱：立柱夹住轮轴，顶上装着刹车；旁边还有一小段车把，装着刹车把 [S1]。轮子不会跑开，每次只改变刹车。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.3,
+          0.015,
+          0.16
+        ],
+        "bevel": 0.003,
+        "at": [
+          0.56,
+          0.0075,
+          -0.12
+        ],
+        "color": "powder"
+      },
+      "extra": [
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.016,
+            0.285,
+            0.014
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.56,
+            0.1575,
+            -0.075
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.016,
+            0.53,
+            0.014
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.56,
+            0.28,
+            -0.165
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.03,
+            0.018,
+            0.068
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.56,
+            0.554,
+            -0.139
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.07,
+            0.012,
+            0.07
+          ],
+          "bevel": 0.003,
+          "at": [
+            0.83,
+            0.006,
+            -0.12
+          ],
+          "color": "powder"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.008,
+            0.008,
+            0.49
+          ],
+          "at": [
+            0.83,
+            0.245,
+            -0.12
+          ],
+          "color": "steel"
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.011,
+            0.011,
+            0.17
+          ],
+          "at": [
+            0.83,
+            0.5,
+            -0.12
+          ],
+          "color": "steel",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "size": [
+            0.0135,
+            0.0135,
+            0.075
+          ],
+          "at": [
+            0.83,
+            0.5,
+            -0.0725
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        }
+      ],
+      "castShadow": true
+    },
+    {
+      "id": "brake-caliper",
+      "name": {
+        "en": "Rim brake",
+        "zh": "轮圈刹车"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Squeezes rubber pads against the rim.",
+        "zh": "把橡胶刹车块夹紧在轮圈上。"
+      },
+      "detail": {
+        "en": "Two arms with a rubber pad on each, one on each side of the metal rim [S1]. Squeezed, the pads rub on the rim and friction slows the wheel: in this model a light squeeze stops it in about 1.8 s and a firm squeeze in about 0.6 s [S1, S29].\n\nWet rims make rim brakes work less well, so cyclists start braking earlier in the rain [S18, S19].",
+        "zh": "两只夹臂，各装一块橡胶刹车块，分别在金属轮圈的两侧 [S1]。一捏刹车，刹车块就擦着轮圈，摩擦力让轮子慢下来：在这个模型里，轻捏约 1.8 s 停下，用力捏约 0.6 s 停下 [S1, S29]。\n\n轮圈湿了，轮圈刹车的效果会变差，所以下雨天骑车要早一点刹车 [S18, S19]。"
+      },
+      "primitive": {
+        "kind": "bevelBox",
+        "size": [
+          0.02,
+          0.012,
+          0.06
+        ],
+        "bevel": 0.003,
+        "at": [
+          0.56,
+          0.537,
+          -0.12
+        ],
+        "color": "casing"
+      },
+      "extra": [
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0.036,
+              -0.012
+            ],
+            [
+              0,
+              0.034,
+              -0.03
+            ],
+            [
+              0,
+              0.012,
+              -0.031
+            ],
+            [
+              0,
+              -0.02,
+              -0.024
+            ],
+            [
+              0,
+              -0.031,
+              -0.0225
+            ]
+          ],
+          "radius": 0.0028,
+          "at": [
+            0.56,
+            0.5,
+            -0.12
+          ],
+          "color": "casing",
+          "caps": "flat"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.046,
+            0.014,
+            0.003
+          ],
+          "bevel": 0.0008,
+          "at": [
+            0.56,
+            0.468,
+            -0.1415
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "sweep",
+          "path": [
+            [
+              0,
+              0.036,
+              0.012
+            ],
+            [
+              0,
+              0.034,
+              0.03
+            ],
+            [
+              0,
+              0.012,
+              0.031
+            ],
+            [
+              0,
+              -0.02,
+              0.024
+            ],
+            [
+              0,
+              -0.031,
+              0.0225
+            ]
+          ],
+          "radius": 0.0028,
+          "at": [
+            0.56,
+            0.5,
+            -0.12
+          ],
+          "color": "casing",
+          "caps": "flat"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.046,
+            0.014,
+            0.003
+          ],
+          "bevel": 0.0008,
+          "at": [
+            0.56,
+            0.468,
+            -0.0985
+          ],
+          "color": "casing"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.012,
+            0.007
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0.56,
+            0.468,
+            -0.1365
+          ],
+          "color": "rubber"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.04,
+            0.012,
+            0.007
+          ],
+          "bevel": 0.0015,
+          "at": [
+            0.56,
+            0.468,
+            -0.1035
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.08
+      }
+    },
+    {
+      "id": "brake-cable",
+      "name": {
+        "en": "Brake cable",
+        "zh": "刹车线"
+      },
+      "group": "brake",
+      "summary": {
+        "en": "Carries the pull from the lever to the brake.",
+        "zh": "把刹车把的拉力传到刹车上。"
+      },
+      "detail": {
+        "en": "A steel inner wire in a plastic outer case [S1].",
+        "zh": "塑料外套里穿着一根钢丝 [S1]。"
+      },
+      "primitive": {
+        "kind": "sweep",
+        "path": [
+          [
+            0.135,
+            -0.04,
+            0.045
+          ],
+          [
+            0.12,
+            0.02,
+            0.04
+          ],
+          [
+            0.05,
+            0.055,
+            0.03
+          ],
+          [
+            -0.04,
+            0.045,
+            0.015
+          ],
+          [
+            -0.12,
+            0,
+            0.004
+          ]
+        ],
+        "radius": 0.0024,
+        "at": [
+          0.68,
+          0.56,
+          -0.12
+        ],
+        "color": "powder",
+        "caps": "flat"
+      },
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.06
+      }
+    },
+    {
+      "id": "shoe-soles",
+      "name": {
+        "en": "Shoe soles",
+        "zh": "鞋底样品"
+      },
+      "group": "everyday",
+      "summary": {
+        "en": "A smooth sole and a grooved rubber sole.",
+        "zh": "一只光滑的鞋底和一只带花纹的橡胶鞋底。"
+      },
+      "detail": {
+        "en": "A smooth leather sole and a rubber sole with deep grooves, both laid upside down [S1]. Grooves and soft rubber help a sole grip the floor.\n\nThe kind of floor matters too: shoes grip a dry wooden floor many times better than ice [S4].",
+        "zh": "一只光滑的皮鞋底和一只带深纹的橡胶鞋底，都底朝上放着 [S1]。花纹和柔软的橡胶让鞋底抓得住地面。\n\n地面也有关系：鞋子在干燥木地板上抓得比在冰上牢好几倍 [S4]。"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "shape": [
+          [
+            0.11,
+            0
+          ],
+          [
+            0.10724,
+            0.0083
+          ],
+          [
+            0.09911,
+            0.01592
+          ],
+          [
+            0.086,
+            0.02226
+          ],
+          [
+            0.06858,
+            0.02689
+          ],
+          [
+            0.04773,
+            0.02955
+          ],
+          [
+            0.02448,
+            0.0297
+          ],
+          [
+            0,
+            0.02587
+          ],
+          [
+            -0.02448,
+            0.0235
+          ],
+          [
+            -0.04773,
+            0.02433
+          ],
+          [
+            -0.06858,
+            0.02257
+          ],
+          [
+            -0.086,
+            0.01821
+          ],
+          [
+            -0.09911,
+            0.01269
+          ],
+          [
+            -0.10724,
+            0.00651
+          ],
+          [
+            -0.11,
+            0
+          ],
+          [
+            -0.10724,
+            -0.00651
+          ],
+          [
+            -0.09911,
+            -0.01269
+          ],
+          [
+            -0.086,
+            -0.01821
+          ],
+          [
+            -0.06858,
+            -0.02257
+          ],
+          [
+            -0.04773,
+            -0.02433
+          ],
+          [
+            -0.02448,
+            -0.0235
+          ],
+          [
+            0,
+            -0.02587
+          ],
+          [
+            0.02448,
+            -0.0297
+          ],
+          [
+            0.04773,
+            -0.02955
+          ],
+          [
+            0.06858,
+            -0.02689
+          ],
+          [
+            0.086,
+            -0.02226
+          ],
+          [
+            0.09911,
+            -0.01592
+          ],
+          [
+            0.10724,
+            -0.0083
+          ]
+        ],
+        "depth": 0.01,
+        "at": [
+          0.33,
+          0.005,
+          0.012
+        ],
+        "color": "plastic",
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "tint": "#7a5a40"
+      },
+      "extra": [
+        {
+          "kind": "extrude",
+          "shape": [
+            [
+              0.11,
+              0
+            ],
+            [
+              0.10724,
+              0.0083
+            ],
+            [
+              0.09911,
+              0.01592
+            ],
+            [
+              0.086,
+              0.02226
+            ],
+            [
+              0.06858,
+              0.02689
+            ],
+            [
+              0.04773,
+              0.02955
+            ],
+            [
+              0.02448,
+              0.0297
+            ],
+            [
+              0,
+              0.02587
+            ],
+            [
+              -0.02448,
+              0.0235
+            ],
+            [
+              -0.04773,
+              0.02433
+            ],
+            [
+              -0.06858,
+              0.02257
+            ],
+            [
+              -0.086,
+              0.01821
+            ],
+            [
+              -0.09911,
+              0.01269
+            ],
+            [
+              -0.10724,
+              0.00651
+            ],
+            [
+              -0.11,
+              0
+            ],
+            [
+              -0.10724,
+              -0.00651
+            ],
+            [
+              -0.09911,
+              -0.01269
+            ],
+            [
+              -0.086,
+              -0.01821
+            ],
+            [
+              -0.06858,
+              -0.02257
+            ],
+            [
+              -0.04773,
+              -0.02433
+            ],
+            [
+              -0.02448,
+              -0.0235
+            ],
+            [
+              0,
+              -0.02587
+            ],
+            [
+              0.02448,
+              -0.0297
+            ],
+            [
+              0.04773,
+              -0.02955
+            ],
+            [
+              0.06858,
+              -0.02689
+            ],
+            [
+              0.086,
+              -0.02226
+            ],
+            [
+              0.09911,
+              -0.01592
+            ],
+            [
+              0.10724,
+              -0.0083
+            ]
+          ],
+          "depth": 0.01,
+          "at": [
+            0.6,
+            0.005,
+            0.012
+          ],
+          "color": "rubber",
+          "rotation": [
+            90,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "fins",
+          "size": [
+            0.052,
+            0.005,
+            0.007
+          ],
+          "count": 12,
+          "gap": 0.0085,
+          "axis": "x",
+          "at": [
+            0.604,
+            0.0115,
+            0.012
+          ],
+          "color": "rubber"
+        }
+      ],
+      "explode": {
+        "dir": [
+          0,
+          1,
+          0
+        ],
+        "dist": 0.08
+      }
+    }
+  ]
+}
