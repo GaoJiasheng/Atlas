@@ -39,9 +39,13 @@ function skin(x:number,y:number):P{
  const cheek=smooth((-.037-x)/.045)*Math.exp(-(((y+.003)/.025)**2));
  c.lerp(BONE.clone().lerp(FIN,.04).multiplyScalar(.35),.33*cheek);
  // Fine pigment variation belongs to the dermis, never a photographed map.
+ const jaw=Math.exp(-(((x+.102)/.016)**6)-(((y-(-.005-.20*(x+.114)))/.0009)**2));
+ c.lerp(DARK.clone().multiplyScalar(.08),jaw*.64);
+ const orbital=Math.exp(-(((Math.hypot(x-PERCH_EYE[0]!,(y-PERCH_EYE[1]!)/.94)-.00495)/.00035)**2));
+ c.lerp(OCHRE.clone().lerp(DARK,.50).multiplyScalar(.16),orbital*.85);
  c.multiplyScalar(1+.035*Math.sin(x*3100+y*1700)*Math.sin(x*1600-y*2700));return ratio(c);
 }
-const eyeX=PERCH_EYE[0]!,eyeY=PERCH_EYE[1]!,eyeR=.0064;
+const eyeX=PERCH_EYE[0]!,eyeY=PERCH_EYE[1]!,eyeR=.0049;
 function power(x:number){return .50-.24*smooth((x+.083)/.012)*(1-smooth((x+.027)/.012));}
 function bodyPoint(x:number,a:number):P{
  const s=shape(x),co=Math.cos(a),si=Math.sin(a),y=s.c+s.h*co;
@@ -66,10 +70,10 @@ function cranialField(x:number,y:number,z:number){
  const s=shape(x),relief=.0008*Math.exp(-(((x+.090)/.012)**2)-(((y+.005)/.012)**2));
  const maxilla=.0008*Math.exp(-(((x+.103)/.015)**4)-(((y-(-.003-.20*(x+.115)))/.0019)**2));
  const socket=-.0005*Math.exp(-(((Math.hypot((x-eyeX)/.0055,(y-eyeY)/.0052)-.98)/.21)**2));
- const crease=.00040*Math.exp(-(((x+.102)/.017)**6)-(((y-(-.005-.20*(x+.114)))/.00070)**2));
+ const crease=.00075*Math.exp(-(((x+.102)/.017)**6)-(((y-(-.005-.20*(x+.114)))/.00095)**2));
  const zz=s.z+relief+maxilla+socket-crease;
  const outer=(Math.hypot((y-s.c)/s.h,z/zz)-1)*Math.min(s.h,zz);
- const cap=-.122+.004*((y+.002)/.019)**2+.004*(z/.015)**2;
+ const cap=-.1214+.0018*((y+.002)/.019)**2+.0015*(z/.015)**2;
  const capped=smoothMax(outer,cap-x,.0015);
  return smoothMax(capped,-oralField(x,y,z),.00075);
 }
@@ -101,7 +105,7 @@ function coverDistance(x:number,y:number){x+=.073;let inside=false,d=Infinity;fo
  }return inside?d:-d;
 }
 let membranes:BufferGeometry[]=[];
-export function fishMembraneSculpt(){return join(membranes,FISH_AT);}
+export function fishMembraneSculpt(){return membranes.map(g=>{g.translate(...FISH_AT);return g;});}
 export function fishSculpt(){
  membranes=[];const gs:BufferGeometry[]=[];
  // Continuous SDF head, with flesh around the carved oral passage.
@@ -133,7 +137,7 @@ export function fishSculpt(){
  // share a bulging surface, with a thin dark circumorbital rim.
  for(const sign of [-1,1]){
   const eye=surface(12,40,(u,v)=>{const a=v*2*Math.PI,x=eyeX+eyeR*u*Math.cos(a),y=eyeY+eyeR*.94*u*Math.sin(a);return [x,y,sign*(sideZ(x,y)+.0002+.0010*(1-u*u))] as P;});
-  paint(eye,(_,i)=>{const u=Math.floor(i/41)/12,j=i%41;const c=u<.48?DARK.clone().multiplyScalar(.018):u>.90?DARK.clone().multiplyScalar(.10):OCHRE.clone().lerp(FIN,.15+.06*Math.sin(j*2.3)).multiplyScalar(.55+.12*Math.sin(j*3.4));return ratio(c);});gs.push(sign===1?eye:flip(eye));
+  paint(eye,(_,i)=>{const u=Math.floor(i/41)/12,j=i%41;const c=u<.62?DARK.clone().multiplyScalar(.018):u>.92?DARK.clone().multiplyScalar(.10):OCHRE.clone().lerp(OLIVE,.48+.05*Math.sin(j*2.3)).multiplyScalar(.15+.025*Math.sin(j*3.4));return ratio(c);});gs.push(sign===1?eye:flip(eye));
   const z=sideZ(eyeX-.0011,eyeY+.0013)+.00117;gs.push(paint(orb([eyeX-.0011,eyeY+.0013,sign*z],[.00024,.00018,.00009],12,8),ratio(BONE.clone().multiplyScalar(.80))));
   for(const [x,y,r] of [[-.1095,.013,.00045],[-.106,.015,.00037]]){const p:P=[x!,y!,sign*(sideZ(x!,y!)+.00002)];gs.push(paint(orb(p,[r!,r!*.64,.00009],12,8),ratio(DARK.clone().multiplyScalar(.10))));}
  }
@@ -148,7 +152,9 @@ export function fishSculpt(){
    const sag=(kind==='spines'?.0017:.00065)*Math.sin(Math.PI*t),p=mix(root,edge,v);p[1]-=Math.sign(edge[1]-root[1])*sag*v;
    p[2]+=.0008*Math.sin(u*Math.PI)*Math.sin(v*Math.PI)+.00030*Math.sin(Math.PI*t)*Math.sin(v*Math.PI);return p;
   }
-  const patch=shell(surface(n*3,4,at),.000022);
+  // Single thin, cambered surface. Runtime uses one DoubleSide transparent
+  // draw per fin, so each fin sorts independently; the raised rays stay solid.
+  const patch=surface(n*3,6,at);
   paint(patch,p=>{const blotch=kind==='spines'?Math.exp(-(((p[0]-.012)/.012)**4)-(((p[1]-.042)/.016)**4)):0,c=kind==='red'?FIN.clone().multiplyScalar(.65):NEUTRAL.clone().lerp(OCHRE,.20).multiplyScalar(.45);return ratio(c.lerp(DARK.clone().multiplyScalar(.025),blotch*.98));});membranes.push(patch);
   for(let k=0;k<=n;k++){
    const u=stations[k]!,pts=[0,.2,.4,.6,.8,1].map(v=>at(u,v));
@@ -185,7 +191,7 @@ export function coverSculpt(n=12,m=80){
   const pre=.003+.002*Math.exp(-(((y-.005)/.014)**2))-.35*Math.max(0,-y),groove=.00024*Math.exp(-(((x-pre)/.0012)**2));
   const ridge=.00035*Math.exp(-(((x-pre-.0025)/.0016)**2)),bone=.00065*Math.exp(-(((x-.019)/.011)**2)-(((y-.006)/.018)**2));
   return [x,y,sideZ(xx,y)-front+.00025+bone+ridge-groove];};
- const g=shell(surface(n,m,point),.00018);paint(g,p=>skin(p[0]-.073,p[1]));
+ const g=shell(surface(n,m,point),.000065);paint(g,p=>skin(p[0]-.073,p[1]));
  const pieces=[g];
  for(let row=0;row<9;row++)for(let col=0;col<7;col++){
   const x=.004+col*.0028+(row%2)*.0013,y=-.018+row*.0031;

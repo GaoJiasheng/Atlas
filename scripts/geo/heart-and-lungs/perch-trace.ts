@@ -10,7 +10,7 @@
 export const PERCH_TRACE={source:'https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_img_33558.jpg',image:[960,640],landmarks:{snout:[190,344],nape:[252,289],headBack:[430,199],hump:[510,175],throat:[287,415],maxillaEnd:[286,378],eye:[294,324],preopercle:[352,370],opercleSpine:[433,324],opercleVentral:[405,427]}};
 /** pixel x, upper silhouette y, lower silhouette y, reconstructed half-width */
 const SIDE_TRACE=[
- [190,344,367,.0100],[207,321,378,.0113],[230,302,393,.0138],
+ [190,333,375,.0107],[207,318,380,.0116],[230,302,393,.0138],
  [252,289,404,.0155],[278,274,413,.0172],[310,258,422,.0190],
  [348,242,431,.0212],[388,221,438,.0213],[430,199,441,.0208],
  [470,182,444,.0205],[510,175,441,.0200]

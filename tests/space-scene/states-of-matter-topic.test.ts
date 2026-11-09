@@ -4,13 +4,15 @@
  * beat's settings; each liquid is drawn inside its vessel; the wording rules
  * (docs/36 D3, D5) and the content fixes from the engine review hold.
  */
+import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { NodeIO, type Primitive as GltfPrimitive } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dequantize } from '@gltf-transform/functions';
 import { MeshoptDecoder } from 'meshoptimizer';
-import { Vector3, Matrix4, Matrix3, Box3, Triangle, Euler, Mesh, MeshStandardMaterial } from 'three';
+import { Vector3, Matrix4, Matrix3, Box3, Triangle, Euler, Mesh, MeshStandardMaterial, Raycaster } from 'three';
+import { poreSponge } from '../../scripts/geo/states-of-matter/pore-sponge.mjs';
 import { parseShippingGLB } from '../../scripts/geo/states-of-matter/node-gltf';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
@@ -459,8 +461,38 @@ describe('states-of-matter shipping rebuild', () => {
     }
   });
 
+  it('preserves accepted normal vectors exactly through meshopt export', async () => {
+    const doc=await decoded,hash=createHash('sha256');
+    for(const id of ["balance-a", "balance-b", "balance-stand", "ball-pump", "balloon-long", "balloon-pump", "balloon-round", "basketball", "beam-balance", "bench", "bicycle-wheel", "floor-pump", "plunger-air", "plunger-sand", "plunger-water", "sand-grains", "sand-heap", "side-table", "sugar-heap", "syringe-rack", "tissue", "torch"]){
+      const node=doc.getRoot().listNodes().find(n=>n.getName()===id)!;hash.update(id);
+      for(const p of node.getMesh()!.listPrimitives()){const a=p.getAttribute('NORMAL')!.getArray()!;hash.update(Buffer.from(a.buffer,a.byteOffset,a.byteLength));}
+    }
+    expect(hash.digest('hex')).toBe('462ead66ad3150dc3b07dafa5d9bbcf36493b6568ff8bb1bf2b9ca9f9b8639a2');
+  });
+
+  it('retains curved, differently sized open pores on every face and seats the sponge on its tray', async () => {
+    const model = await parseShippingGLB(new Uint8Array(readFileSync(join(import.meta.dirname, '../../public/models/states-of-matter.glb'))));
+    model.scene.updateMatrixWorld(true);
+    const mesh = model.scene.getObjectByName('sponge') as Mesh;
+    const bounds = new Box3().setFromObject(mesh);
+    expect(bounds.min.y).toBeCloseTo(.015, 4); expect(bounds.max.y).toBeCloseTo(.055, 4);
+    expect(bounds.getCenter(new Vector3()).z).toBeCloseTo(.14, 4);
+    const source = poreSponge(), mouths = source.userData.poreProof as {axis:number;sign:number;point:number[];radius:number;segments:number}[];
+    expect(mouths.length).toBeGreaterThan(290);
+    expect(Math.max(...mouths.map(m=>m.radius))/Math.min(...mouths.map(m=>m.radius))).toBeGreaterThan(6);
+    expect(mouths.filter(m=>m.radius>.0022).every(m=>m.segments>=32)).toBe(true);
+    const ray = new Raycaster(); let open = 0;
+    for (const mouth of mouths) {
+      const normal = new Vector3().setComponent(mouth.axis,mouth.sign), origin = new Vector3(...mouth.point as [number,number,number]).addScaledVector(normal,.005);
+      ray.set(origin,normal.clone().negate()); const hit=ray.intersectObject(mesh,false)[0];
+      if (hit && hit.distance>.00565) open++;
+    }
+    expect(open/mouths.length).toBeGreaterThan(.97);
+    source.dispose();
+  });
+
   it('delivers clear ice shells, bubbles, crack films and a dish through one RGBA source mesh', async () => {
-    const ice = part('ice-cube'), { node, primitive } = await meshVertices('ice-cube');
+    const ice = part('ice-cube'), { node, primitive, vertices } = await meshVertices('ice-cube');
     expect(ice.mesh).toBe('ice-cube'); expect(ice.primitive).toBeUndefined(); expect(ice.extra).toBeUndefined();
     // Multiple glTF primitives become separate Mesh children; GltfSource only
     // uses the first child. One primitive proves all four regions reach it.
@@ -470,22 +502,30 @@ describe('states-of-matter shipping rebuild', () => {
     expect(material.getRoughnessFactor()).toBeCloseTo(.04, 6);
     const alphas = Array.from({ length: rgba.getCount() }, (_, i) => rgba.getElement(i, [0, 0, 0, 0])[3]!);
     expect(alphas.every(a => a >= 0 && a <= 1)).toBe(true);
-    // Test the decoded shipping attribute, including its actual face/edge
-    // ramp. The old constant .12 shell passed a source-only gate but vanished.
+    // Actual clear windows use a restrained opacity range, with colour and
+    // GGX reflection providing edge contrast rather than painted frost bands.
     const islands = connected(primitive, () => true, true);
-    const shells = islands.filter(c => Math.min(...c.map(i => alphas[i]!)) > .20 && Math.min(...c.map(i => alphas[i]!)) < .24 && Math.max(...c.map(i => alphas[i]!)) > .55);
+    const shells = islands.filter(c => Math.min(...c.map(i => alphas[i]!)) > .15 && Math.min(...c.map(i => alphas[i]!)) < .17 && Math.max(...c.map(i => alphas[i]!)) > .18 && Math.max(...c.map(i => alphas[i]!)) < .21);
     expect(shells).toHaveLength(2);
     for (const c of shells) {
-      expect(Math.max(...c.map(i => alphas[i]!))).toBeLessThanOrEqual(.66);
-      expect(c.filter(i => alphas[i]! < .24).length).toBeGreaterThan(8);
-      expect(c.filter(i => alphas[i]! > .55).length).toBeGreaterThan(8);
+      expect(c.filter(i => alphas[i]! < .18).length).toBeGreaterThan(8);
+      const bottom=Math.min(...c.map(i=>vertices[i]![1]!));
+      expect(bottom).toBeGreaterThan(.004); expect(bottom).toBeLessThan(.00435);
     }
-    const bubbles = islands.filter(c => c.every(i => Math.abs(alphas[i]! - .635) < .006));
-    expect(bubbles.length).toBeGreaterThanOrEqual(50);
-    const cracks = islands.filter(c => Math.min(...c.map(i => alphas[i]!)) < .07 && Math.max(...c.map(i => alphas[i]!)) > .55);
-    expect(cracks.length).toBeGreaterThanOrEqual(6);
+    const bubbles = islands.filter(c => c.every(i => Math.abs(alphas[i]! - .38) < .008));
+    expect(bubbles.length).toBeGreaterThanOrEqual(20);
+    const cracks = islands.filter(c => Math.min(...c.map(i => alphas[i]!)) < .07 && Math.max(...c.map(i => alphas[i]!)) > .50 && Math.max(...c.map(i => alphas[i]!)) < .90);
+    // Branches share their actual attachment vertices: three connected networks.
+    expect(cracks.length).toBeGreaterThanOrEqual(3);
     expect(islands.some(c => c.every(i => alphas[i]! > .99))).toBe(true);
     expect(islands.some(c => c.every(i => Math.abs(alphas[i]! - .255) < .008))).toBe(true);
+    // Blended ice writes no depth: the dish's underside and wall must paint before its floor.
+    const index = primitive.getIndices()!, dishUp: number[] = [];
+    for (let t = 0; t < index.getCount(); t += 3) {
+      const [a, b, c] = [0, 1, 2].map(k => new Vector3(...vertices[index.getScalar(t + k)]!)) as [Vector3, Vector3, Vector3];
+      if (alphas[index.getScalar(t)]! > .99) dishUp.push(b.clone().sub(a).cross(c.clone().sub(a)).normalize().y);
+    }
+    expect(dishUp.every((y, i) => i === 0 || y >= dishUp[i - 1]! - .03)).toBe(true);
 
   });
 

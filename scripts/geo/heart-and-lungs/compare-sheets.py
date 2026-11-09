@@ -22,7 +22,7 @@ for hero,views in references.items():
   y=i*540
   d.text((12,y+12),f'{hero.upper()} / ROUND {round} — {angle}',fill='#2a2824')
   p=proof.get({'gills':'gills','plant':'plant-specimen'}.get(hero,''))
-  evidence=f"ENGINE STUDIO + ACES / retained R{p['sourceRound']} CPU view; current surface SHA256 verified" if p else 'Decoded shipped mesh / ENGINE STUDIO + ACES / offline CPU'
+  evidence=f"ENGINE STUDIO + ACES / retained R{p['sourceRound']} CPU view; current surface SHA256 verified" if p else 'Shipping GLB + proposed fin-group patch / STUDIO + ACES / CPU'
   d.text((12,y+32),evidence,fill='#555047')
   d.text((652,y+32),f'Wikimedia Commons: {ref} (see REBUILD-3D.md for URL/credit)',fill='#555047')
   im=Image.open(out/(render+'.png'));sheet.paste(im,(0,y+55))

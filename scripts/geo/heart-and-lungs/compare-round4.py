@@ -15,7 +15,7 @@ def fit(im,w,h):
 def sheet(name,render,reference,caption,crop=None):
  page=Image.new('RGB',(1920,620),'#e9e4d8');d=ImageDraw.Draw(page)
  d.text((16,10),f'R{round} / {caption}',fill='#2a2824')
- d.text((16,30),'Decoded shipping asset | actual studio rig + ACES | offline CPU, not GPU acceptance',fill='#555047')
+ d.text((16,30),'Shipping GLB + proposed transparent-fins.patch | studio ACES CPU | not GPU acceptance',fill='#555047')
  d.text((976,30),'Real reference: Pmau / Wikimedia Commons / CC BY-SA 4.0 / img_33558',fill='#555047')
  a=fit(Image.open(source/(render+'.png')),940,560)
  b=Image.open(refs/reference)
@@ -33,11 +33,12 @@ for render,ref,label,mirror,crop in [
  ('fish-three-quarter','fish-oblique.jpg','Shallow three-quarter; reference mirrored to face left.',True,None),
  ('fish-profile','fish-profile.jpg','Lateral profile; reference preserved/dead specimen.',False,None),
  ('fish-close','Perca_fluviatilis_img_33558.jpg','Characteristic head detail; model mouth open.',False,(160,205,475,455)),
+ ('fish-fin-close','fish-profile.jpg','Spinous fin detail; real membrane against leaf background.',False,(240,45,510,190)),
  ('fish-scales','fish-profile.jpg','Ctenoid flank scale relief; real mid-flank crop.',False,(450,310,850,600)),
 ]:
  page=Image.new('RGB',(1280,540),'#e9e4d8');d=ImageDraw.Draw(page)
  d.text((12,8),f'R{round} / {label}',fill='#2a2824')
- d.text((12,28),'ENGINE STUDIO + ACES / current runtime mesh',fill='#555047')
+ d.text((12,28),'ENGINE STUDIO + ACES / GLB + proposed fin-group patch',fill='#555047')
  d.text((652,28),f'Wikimedia Commons / {ref} / sources in REBUILD-3D.md',fill='#555047')
  im=fit(Image.open(source/(render+'.png')),630,480);page.paste(im,((640-im.width)//2,55+(480-im.height)//2))
  im=Image.open(refs/ref)

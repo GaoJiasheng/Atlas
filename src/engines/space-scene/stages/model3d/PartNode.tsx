@@ -43,6 +43,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, type Ref } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import {
   Color,
+  DoubleSide,
   DetachedBindMode,
   Euler,
   InstancedMesh,
@@ -67,7 +68,7 @@ import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';
-import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, fadePartMaterial, type PartStyle, type PartUniforms } from './materials';
+import { createPartMaterial, clippingForPart, setPartClipping, stylePartMaterial, styleFibreGrain, fadePartMaterial, type PartStyle, type PartUniforms, type PartMaterial } from './materials';
 import type { FibreMeasure, GltfSurface } from './GltfSource';
 import { skinnedRaycast } from './skinPick';
 import { applyVisibilityFlags, visibilityBaseOpacity } from './visibilityFlags';
@@ -120,6 +121,8 @@ export interface PartShape {
   pieces: ShapePiece[];
   /** Opted-in GLB base colour and alpha; shared loader materials are never mutated or disposed here. */
   surface?: GltfSurface;
+  /** Opt-in rigid GLB group: one independent surface per piece slot. */
+  surfaces?: readonly GltfSurface[];
   /** Part centre at rest (before explode). */
   position: [number, number, number];
   /** Extra transform of the pieces (glb meshes; identity for primitives). */
@@ -379,6 +382,28 @@ function createSlotMaterialsFor(colorKey: string) {
   });
 }
 
+/** One material per opted-in source surface; legacy shapes retain their slots. */
+export function gltfSlotCount(shape: PartShape, authored: number): number {
+  return Math.max(authored, shape.surfaces?.length ?? 0);
+}
+export function gltfSlotSurface(shape: PartShape, slot: number): GltfSurface | undefined {
+  return shape.surfaces?.[slot] ?? shape.surface;
+}
+
+/** Run after source styling: clipping must retain a web's DoubleSide setting
+ * and must not treat a zero-thickness membrane as a solid cut face. */
+export function gltfSlotClipping(pm: PartMaterial, shape: PartShape, slot: number, clipping: Plane[] | null, familySheet: boolean, filled = false): void {
+  const sheet = familySheet || shape.surfaces?.[slot]?.source.side === DoubleSide;
+  setPartClipping(pm, clipping, shape.closed && (!sheet || filled), shape.twoSided || sheet);
+}
+
+/** The frame's general visibility pass writes castShadow on every object.
+ * Reapply the opt-in source policy after that pass, including initial layout. */
+export function gltfGroupShadowFlags(shape: PartShape, pieces: ReadonlyMap<ShapePiece, Pick<Object3D, 'castShadow'>>): void {
+  if (!shape.surfaces) return;
+  for (const [piece, object] of pieces) if (shape.surfaces[piece.slot ?? 0]?.source.transparent) object.castShadow = false;
+}
+
 export function PartNode(props: PartNodeProps) {
   const { part, display, styles } = props;
   const fillKit = props.fill ? readPartFill() : null;
@@ -490,10 +515,10 @@ export function PartNode(props: PartNodeProps) {
   });
   const press = useRef<{ timer: ReturnType<typeof setTimeout> | null; x: number; y: number }>({ timer: null, x: 0, y: 0 });
 
-  const slotCount = styles.length;
+  const slotCount = gltfSlotCount(shape, styles.length);
   // Keyed on the per-slot colour flags and the glb surface, so a new shape object never rebuilds materials by itself.
   const colorKey = slotVertexColors(shape.pieces, slotCount);
-  const pms = useMemo(() => createSlotMaterialsFor(colorKey), [colorKey, shape.surface, shape.fibre]);
+  const pms = useMemo(() => createSlotMaterialsFor(colorKey), [colorKey, shape.surface, shape.surfaces, shape.fibre]);
   const hasLines = useMemo(() => shape.pieces.some((p) => p.lines), [shape]);
   const lineMat = useMemo(
     () => (hasLines ? new LineBasicMaterial({ transparent: true, depthWrite: false, toneMapped: false, clipShadows: true }) : null),
@@ -554,13 +579,13 @@ export function PartNode(props: PartNodeProps) {
   useEffect(() => {
     pms.forEach((pm, i) => {
       stylePartMaterial(pm, styles[i] ?? style);
-      shape.surface?.style(pm.material);
+      gltfSlotSurface(shape, i)?.style(pm.material);
       // glb muscles: the fibre grain follows `_FIBRE` (the UVs wrap around the belly).
       if (shape.fibre) styleFibreGrain(pm, shape.fibre, (styles[i] ?? style).look.normal);
       // An exercise mask is a skin patch: the muscle normal map on its skin UVs aliases into stripes.
       if (exerciseMask) pm.material.normalScale.set(0, 0);
     });
-  }, [pms, styles, style, shape.fibre, shape.surface, exerciseMask]);
+  }, [pms, styles, style, shape.fibre, shape.surface, shape.surfaces, exerciseMask]);
   useEffect(() => {
     lineMat?.color.set(props.lineColor);
   }, [lineMat, props.lineColor]);
@@ -568,8 +593,7 @@ export function PartNode(props: PartNodeProps) {
   useEffect(() => {
     pms.forEach((pm, i) => {
       // Filled liquids retain their own material on cut faces.
-      const sheet = (styles[i] ?? style).look.doubleSided;
-      setPartClipping(pm, clipping, shape.closed && (!sheet || !!props.fill), shape.twoSided || sheet);
+      gltfSlotClipping(pm, shape, i, clipping, (styles[i] ?? style).look.doubleSided, !!props.fill);
       if (props.fill) {
         pm.uniforms.uCutColor.value.set((styles[i] ?? style).look.color);
         pm.uniforms.uHatchColor.value.set((styles[i] ?? style).look.color);
@@ -579,7 +603,7 @@ export function PartNode(props: PartNodeProps) {
       lineMat.clippingPlanes = clipping;
       lineMat.needsUpdate = true;
     }
-  }, [pms, lineMat, clipping, shape.closed, shape.twoSided, styles, style]);
+  }, [pms, lineMat, clipping, shape.closed, shape.twoSided, shape.surfaces, styles, style]);
 
   useEffect(() => {
     motion.current.snap = true;
@@ -671,6 +695,7 @@ export function PartNode(props: PartNodeProps) {
     const m = motion.current;
     const shown = !props.instantHidden && m.fade > .004 && (!props.fill || fillMotion.current.shown) && exerciseMaskVisible(exerciseMask, display.tint);
     const changed = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, props.castShadow && shown && m.fade > .6);
+    gltfGroupShadowFlags(shape, pieces.current);
     if (changed) { runtime.shadowDirty = true; props.fillBridge?.invalidate(); }
   }, [props.instantHidden, display.visible, display.tint, exerciseMask, props.castShadow, props.fill, props.fillBridge, handle, runtime]);
 
@@ -762,11 +787,12 @@ export function PartNode(props: PartNodeProps) {
       const mat = pm.material;
       applyExerciseMaskDepth(mat, exerciseMask);
       if (exerciseMask) fadePartMaterial(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost, true);
-      else (shape.surface?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
+      else (gltfSlotSurface(shape, i)?.fade ?? fadePartMaterial)(mat, m.fade * (styles[i] ?? style).look.opacity, display.ghost);
     });
     if (lineMat) lineMat.opacity = m.fade * LINE_OPACITY;
     const cast = props.castShadow && shown && m.fade > 0.6;
     const visibilityChanged = applyVisibilityFlags(pieces.current.values(), handle, shown, display.visible, cast);
+    gltfGroupShadowFlags(shape, pieces.current);
     if (cast !== m.cast || (props.castShadow && prevFade !== m.fade)) runtime.shadowDirty = true;
     m.cast = cast;
     // See-through families (membrane, glass) never hide what is behind them from the labels.
@@ -1311,7 +1337,7 @@ export function PartNode(props: PartNodeProps) {
                 key={i}
                 piece={piece}
                 material={piece.lines && lineMat ? lineMat : (pms[piece.slot ?? 0] ?? pms[0]!).material}
-                castShadow={props.castShadow && !piece.lines}
+                castShadow={props.castShadow && !piece.lines && !shape.surfaces?.[piece.slot ?? 0]?.source.transparent}
                 register={register}
                 handlers={handlers}
                 instances={piece.filings ? (props.filings ?? null) : null}

@@ -426,3 +426,138 @@ Checked with `pnpm shoot states-of-matter --beats --gpu`, paper and cinema, agai
 Residual minor issues (not blocking):
 - Ice still reads frosted/milky rather than clear; the crack ribbons are regular crossed strokes, and the bright edge bands look slightly painted at close range.
 - Sponge pore mouths are polygonal up close, and the large pores are still a little round and evenly spread (a trace of Swiss cheese); the side walls look layered rather than open-celled.
+
+## Rebuild 2026-11-05 — batch 2 ice/sponge residual polish
+
+Executed 2026-11-09 against the accepted round-3 asset. No display wording,
+teaching quantity, part id/count, chapter/beat, camera, pose, mechanism, flow,
+material token or other object was changed. Both changes use existing engine
+materials; no engine patch or transmission material is needed for this topic.
+
+### Parts, references and self-grades
+
+| Part | Final form/material change | Self-grade against docs/68 |
+|---|---|---|
+| `ice-cube` | Clear restrained-alpha windows (about 0.16–0.195), neutral cold-token pigment and smooth GGX highlights instead of broad painted white edge bands. Sparse unequal bubbles, five thin unequal fracture branches forming three connected networks, differing endpoints/inclinations and taper. Dish/meltwater presentation retained. | **A** for the requested clear-ice scientific illustration; alpha glass has no physical refraction. |
+| `sponge` | Explicit analytic pore outlines replace the simplified SDF polygons. 304 deliberately unequal, lobed/elliptical mouths on all six faces; large mouths retain 32 perimeter samples, smaller mouths 20 or 12 according to size. Curved lips, partly open recessed septa and real throats, rounded body edges, deep cavity shading and the existing procedural micro-cavity texture. Side faces use the same open-cell construction. Correct 120 × 40 × 80 mm envelope and 15 mm tray contact retained. | **A** for gross cellulose form and the requested rim/size correction. Microscopic fibres are not individually modelled. |
+
+References were downloaded and inspected again. They remain development-only:
+
+- Ice: [Editor at Large, Icecube.jpg](https://commons.wikimedia.org/wiki/File:Icecube.jpg), CC BY-SA 2.5; [Pål Berge, Ice cubes.jpg](https://commons.wikimedia.org/wiki/File:Ice_cubes.jpg), CC BY 2.0; [Lusilier, Ice cube Air entrapment](https://commons.wikimedia.org/wiki/File:Ice_cube_Air_entrapment.JPG), CC BY-SA 3.0. Checked clear windows, rounded wet edges and the distinction between sparse inclusions and a cloudy freeze core; no cloudy core was added.
+- Sponge: [Johan, Sponge-viscose](https://commons.wikimedia.org/wiki/File:Sponge-viscose.jpg), CC BY-SA 3.0; [Sylenius, Cleaning sponge detail](https://commons.wikimedia.org/wiki/File:Cleaning_sponge_detail.jpg), CC BY-SA 3.0; [Lionel Allorge, Éponge type 3 (2)](https://commons.wikimedia.org/wiki/File:%C3%89ponge_type_3_(2).jpg), CC BY-SA 3.0. Checked different pore sizes, non-circular mouths, smooth lips, cellular side walls and fine-scale land texture. These are morphology references, not a claim that all three photographs depict the same sponge formulation.
+
+### Inspected rounds and corrections
+
+1. **Accepted-before / polish-1 LOOK:** the original ice had milky windows,
+   broad white borders and three conspicuously crossed ribbons. Subdividing
+   the existing sponge did not remove its angular pore silhouettes.
+   **CHANGED:** narrowed and branched the fractures, removed frost-like
+   pigment/opacity, tested finer curved-edge refinement and rejected that
+   sponge candidate after the photo comparison.
+2. **Polish-2 / polish-3 LOOK:** overly weak ice windows disappeared against
+   the saucer. The new analytic sponge lips were smoother, but coarse
+   interpolation produced diagonal bands on the planar lands.
+   **CHANGED:** restored restrained dark-window contrast without transmission,
+   removed the painted bright-border colour, made the sponge lands truly
+   planar, authored their normal transition, and reduced redundant geometry
+   while retaining 32-point large rims and a broad size distribution.
+3. **Polish-UV / perspective LOOK:** found that the CPU renderer interpolated
+   UVs affinely in screen space. This incorrectly stretched the texture on
+   long triangles. **CHANGED:** perspective-correct attribute interpolation,
+   retained 14-bit texture coordinates rather than squeezing them to 8 bits,
+   and inspected the decoded candidate again. No band repair or texture
+   distortion was hidden in a reference image.
+4. **Final LOOK:** inspected all four render/photo rows, plus paper/cinema
+   and beat-scale renders from the shipping file. Smooth unequal mouths and
+   clear ice windows survive the characteristic close-ups. The native-loader
+   ray test checks >97% of all intended mouths remain open after export, and
+   verifies the actual sponge bounds/contact and >6× radius range.
+
+The final sheets are in
+`/private/tmp/atlas-fish-states-polish/comparisons/ice-sponge/`.
+Front, three-quarter, profile and characteristic-detail rows use unwarped real
+photographs at the nearest available angles. These are not a registered
+same-specimen turntable; the profile cloudy-ice photo checks inclusion
+morphology, and the sponge-side photo depicts a different sponge. No missing
+photographic angle is fabricated.
+
+The offline preview asserts the active engine studio rig/directions/exposure,
+reads decoded GLB pigments/alpha/normals/UVs and source material factors,
+reuses the fossils-derived GGX/RoomEnvironment evaluator and applies direct
+ACES/sRGB before transparent blending. It now interpolates attributes with
+perspective correction. `preview-rig.json` records the exact shipping SHA.
+It remains a CPU approximation of PMREM filtering, shadows and rasterization;
+Claude's GPU acceptance is still required. No browser or desktop was used.
+
+### Measured output and preservation
+
+| Metric | Accepted before | Batch 2 after |
+|---|---:|---:|
+| Ice/dish/water/inclusions triangles / draws | 5,238 / 1 | 3,942 / 1 |
+| Sponge triangles / draws | 34,484 / 1 | 33,451 / 1 |
+| Every topic part together, triangles / draws | 306,270 / 84 | 303,941 / 84 |
+| Shared meshopt GLB | 1,496,852 bytes | 1,491,816 bytes |
+
+`audit-polish.mjs` compares the complete part-data contract and every decoded
+attribute, index array, world transform and source finish of all 22 retained
+meshes against the accepted baseline. It passes exact comparisons. A stricter
+normal audit initially caught one-unit octahedral decode/re-encode drift in
+accepted normals; `preserve-normal-streams.mjs` now copies their original
+compressed normal streams byte-for-byte. A frozen aggregate-normal regression
+prevents repeating that error. The inherited tissue and every accepted object
+are otherwise unchanged. No source image enters the runtime GLB.
+
+Reproduce with `pnpm tsx scripts/geo/states-of-matter/polish-batch.mjs`
+(surgical, repeatable rebuild from the current GLB),
+`pnpm tsx scripts/geo/states-of-matter/audit-polish.mjs`,
+`pnpm tsx scripts/geo/states-of-matter/preview-studio.mjs final ice-cube,sponge`
+and `pnpm tsx scripts/geo/states-of-matter/make-comparisons.mjs final`.
+All new geometry is original Atlas CC0 work; photo attributions remain in
+`references.json` and `data/SOURCES.md`. No other part or display text changed.
+
+Final contact audit: both cube bases now sit within the melt film (native shipping-shell minimum Y between 4.00 and 4.35 mm), rather than leaving the smaller cube raised at the larger cube's centre height. The source-mesh regression checks both bases.
+
+
+### Frozen final gates — 2026-11-09
+
+All final gates passed in `/private/tmp/atlas-fish-states-polish/gates`, an
+isolated copy with **the proposed transparent-fins.patch applied only there**.
+The real worktree's engine files remain unchanged. Package, lockfile, Astro
+and Vitest configs are byte-identical; no test config was added.
+
+- `pnpm check`: exit 0; zero errors/warnings, 22 hints.
+- `pnpm validate`: exit 0; 94 topics, zero errors/warnings.
+- `pnpm build`: exit 0; 191 pages.
+- Export audit: exit 0; the built endpoint matches parsed source and copied
+  GLB SHA-256 matches the frozen shipping asset.
+- Full tests: **306 files / 6,743 tests passed**, exit 0, with no unhandled
+  worker errors. Final command: `pnpm run test --pool=threads --reporter=dot
+  --maxWorkers=2 --minWorkers=1 --testTimeout=180000 --hookTimeout=180000
+  --retry=2` (one command, shown wrapped for readability).
+
+Runner environment used `NODE_OPTIONS=--max-old-space-size=8192`. Earlier
+fork-pool runs suffered unrelated timing/performance failures under host
+load exceeding 600 on 18 CPUs; the four affected files passed all 448 tests
+in isolation without changing assertions or explicit 20-second/100-ms
+budgets. A subsequent fork run passed all 6,743 assertions but exited 1 on
+two hard-coded 60-second worker-reporting RPC timeouts. Switching to Vitest's
+supported thread pool and dot reporter produced a complete clean exit;
+no errors were ignored, no dependency was patched, and no source assertion
+or threshold was weakened. All raw failures and successful logs remain in
+`/private/tmp/atlas-fish-states-polish/`, with commands, durations and exit
+codes in `gate-status.json`.
+
+Both shipping GLBs, the proposed patch and package/config hashes were checked
+before and after the successful final suite against `frozen-inputs.json`.
+The comparison previews match these exact GLB hashes. Final sheets:
+`/private/tmp/atlas-fish-states-polish/comparisons/`.
+
+Frozen shipping SHA-256: `29cd6ba1e97ce363d78db1c1034a0696703974bbf2e931cfc41e40ce8b9afc80`.
+
+### GPU acceptance: ice and sponge (c-fish-states, 2026-11-09)
+
+Sponge: smoother, varied pores; accepted.
+
+Ice, after a Claude fix pass:
+- **Dark saucer streak:** the blended ice writes no depth, so simplified dish triangles painted in index order and an outer-wall triangle landed over the floor. `polish-batch.mjs` now orders the dish's triangles by facing, upward floor last, with a test. The meltwater film also moved wholly inside the flat floor, with one pole vertex and exact normals.
+- **Cracks:** ragged sheets turned toward the authored cameras, white cores between thin cool flanks, explicit normals (double-sided windings had cancelled them), plus bubble strings. Readable at before-you-start 4 and sorting-matter 5, paper and cinema. No transmission material. Only `ice-cube` changed; 1,497,500 bytes.

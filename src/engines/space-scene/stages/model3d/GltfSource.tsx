@@ -34,6 +34,7 @@ import type { SpaceUiStore } from '../../ui';
 import type { PartShape } from './PartNode';
 import { fadePartMaterial } from './materials';
 import { glbLabelPoint } from './glbAnchor';
+import { gltfGroupShape } from './gltfGroupShape';
 
 /** The skeleton left after the meshes were taken out, and a node by its glb name. */
 export interface GltfRig {
@@ -299,7 +300,7 @@ export default function GltfSource({
     for (const [partId, name] of meshes) {
       const mesh = findMesh(root.getObjectByName(loaded(name)));
       if (mesh) {
-        const shape = shapeOf(mesh);
+        const shape = gltfGroupShape(root.getObjectByName(loaded(name))!, mesh, shapeOf(mesh));
         const exercise = findMesh(root.getObjectByName(loaded(`exercise-${name}`)));
         if (exercise) shape.exerciseShape = { ...shapeOf(exercise), closed: false };
         else if (mesh.userData.exerciseMaskSet) shape.exerciseShape = { ...shape, pieces: [] };
@@ -323,6 +324,7 @@ export default function GltfSource({
     });
     ui.setState({ model: { state: 'ready', progress: 1 } });
     onShapes(out, { root, node: (name) => nodes.get(loaded(name)) ?? null, body });
+    return () => { for (const shape of out.values()) for (const piece of shape.pieces) if (piece.geometry.userData.atlasGroupClone) piece.geometry.dispose(); };
   }, [gltf, meshes, url, onShapes, ui]);
   return null;
 }

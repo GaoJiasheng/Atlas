@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import sharp from 'sharp';
+import {createHash} from 'node:crypto';
 import {NodeIO} from '@gltf-transform/core';
 import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
 import {dequantize} from '@gltf-transform/functions';
@@ -26,7 +27,7 @@ for(const theme of ['paper','cinema']){
 }
 for(const [i,name] of ['KEY','FILL','RIM'].entries()){const d=lighting.match(new RegExp(`const ${name}_DIR: Vec3 = normalize3\\(\\[([^\\]]+)`))[1].split(',').map(Number);if(JSON.stringify(d)!==JSON.stringify(studioRigs.paper.lights[i][2]))throw new Error('Direction drift');}
 const tokens={};for(const m of fs.readFileSync('src/theme/tokens.css','utf8').matchAll(/--([\w-]+):\s*(#[\da-f]{6})/gi))if(!tokens[m[1]])tokens[m[1]]=m[2];
-const meshes=new Map();if(file.model){await MeshoptDecoder.ready;const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(process.env.ATLAS_CANDIDATE?'/private/tmp/states-of-matter-candidate.glb':`public${file.model}`);await doc.transform(dequantize());for(const node of doc.getRoot().listNodes()){
+const meshes=new Map();if(file.model){await MeshoptDecoder.ready;const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(process.env.ATLAS_PREVIEW_MODEL??(process.env.ATLAS_CANDIDATE?'/private/tmp/states-of-matter-candidate.glb':`public${file.model}`));await doc.transform(dequantize());for(const node of doc.getRoot().listNodes()){
  const p=node.getMesh()?.listPrimitives()[0];if(!p)continue;const g=new BufferGeometry();for(const [a,s] of [['position','POSITION'],['normal','NORMAL'],['color','COLOR_0'],['uv','TEXCOORD_0']]){const x=p.getAttribute(s);if(x)g.setAttribute(a,new BufferAttribute(new Float32Array(x.getArray()),x.getElementSize()));}const ix=p.getIndices();g.setIndex(new BufferAttribute(new Uint32Array(ix.getArray()),1));g.applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()));const m=p.getMaterial(),image=m.getBaseColorTexture()?.getImage(),texture=image?await sharp(image).removeAlpha().raw().toBuffer({resolveWithObject:true}):null;g.userData={texture,textureScale:m.getBaseColorTextureInfo()?.getExtension('KHR_texture_transform')?.getScale()??[1,1],textureOffset:m.getBaseColorTextureInfo()?.getExtension('KHR_texture_transform')?.getOffset()??[0,0],factor:m.getBaseColorFactor().slice(0,3),roughness:m.getRoughnessFactor(),metalness:m.getMetallicFactor(),opacity:m.getBaseColorFactor()[3],transparent:m.getAlphaMode()==='BLEND',double:m.getDoubleSided()};meshes.set(node.getName(),g);
 }}
 function shapes(part,pose='full'){
@@ -54,7 +55,7 @@ async function render(surfaces,dir,target,extent,path,theme='paper'){
  const triangles=[];
  for(const s of surfaces){const {g}=s,ps=g.getAttribute('position'),ns=g.getAttribute('normal'),co=g.getAttribute('color'),uv=g.getAttribute('uv'),ix=g.index,n=ix?.count??ps.count;
   for(let t=0;t<n;t+=3){const vs=[],nn=[],cc=[],aa=[],uvs=[];for(let k=0;k<3;k++){const i=ix?ix.getX(t+k):t+k;vs.push(new Vector3().fromBufferAttribute(ps,i));nn.push(new Vector3().fromBufferAttribute(ns,i));cc.push(co?[co.getX(i)*s.rgb.r,co.getY(i)*s.rgb.g,co.getZ(i)*s.rgb.b]:s.rgb.toArray());aa.push((co?.itemSize===4?co.getW(i):1)*s.opacity);uvs.push(uv?[uv.getX(i),uv.getY(i)]:[0,0]);}
-   const facing=vs[1].clone().sub(vs[0]).cross(vs[2].clone().sub(vs[0])).dot(cam.position.clone().sub(vs[0]));if(!s.double&&facing<=0)continue;const q=vs.map(v=>v.clone().applyMatrix4(cm));if(q.some(v=>v.z< -1||v.z>1))continue;triangles.push({q,nn,cc,aa,uvs,s,facing,z:q.reduce((a,v)=>a+v.z,0)/3});
+   const facing=vs[1].clone().sub(vs[0]).cross(vs[2].clone().sub(vs[0])).dot(cam.position.clone().sub(vs[0]));if(!s.double&&facing<=0)continue;const inv=vs.map(v=>{const e=cm.elements;return 1/(e[3]*v.x+e[7]*v.y+e[11]*v.z+e[15]);}),q=vs.map(v=>v.clone().applyMatrix4(cm));if(q.some(v=>v.z< -1||v.z>1))continue;triangles.push({q,inv,nn,cc,aa,uvs,s,facing,z:q.reduce((a,v)=>a+v.z,0)/3});
   }
  }
  // Opaque batches write depth; transparent batches keep their decoded index
@@ -67,7 +68,7 @@ async function render(surfaces,dir,target,extent,path,theme='paper'){
  const display=rgb=>aces(rgb,studioRigs[theme].exposure).map(encode);
  const bg=new Color(theme==='paper'?'#e9e4d8':'#1f2124'),linear=new Float32Array(W*H*3);for(let i=0;i<W*H;i++)linear.set(bg.toArray().map(encode),i*3);
  for(const t of triangles){const q=t.q.map(v=>[(v.x*.5+.5)*W,(-v.y*.5+.5)*H,v.z]),[A,B,C]=q,d=(B[1]-C[1])*(A[0]-C[0])+(C[0]-B[0])*(A[1]-C[1]);if(Math.abs(d)<1e-8)continue;const x0=Math.max(0,Math.floor(Math.min(A[0],B[0],C[0]))),x1=Math.min(W-1,Math.ceil(Math.max(A[0],B[0],C[0]))),y0=Math.max(0,Math.floor(Math.min(A[1],B[1],C[1]))),y1=Math.min(H-1,Math.ceil(Math.max(A[1],B[1],C[1])));
-  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){const a=((B[1]-C[1])*(x+.5-C[0])+(C[0]-B[0])*(y+.5-C[1]))/d,b=((C[1]-A[1])*(x+.5-C[0])+(A[0]-C[0])*(y+.5-C[1]))/d,c=1-a-b;if(a<0||b<0||c<0)continue;const z=a*A[2]+b*B[2]+c*C[2],i=y*W+x,k=i*3;if(z>=depth[i])continue;const rgb=t.cc[0].map((v,j)=>a*v+b*t.cc[1][j]+c*t.cc[2][j]),normal=t.nn[0].clone().multiplyScalar(a).addScaledVector(t.nn[1],b).addScaledVector(t.nn[2],c).normalize();if(t.facing<0)normal.negate();const op=a*t.aa[0]+b*t.aa[1]+c*t.aa[2];
+  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){let a=((B[1]-C[1])*(x+.5-C[0])+(C[0]-B[0])*(y+.5-C[1]))/d,b=((C[1]-A[1])*(x+.5-C[0])+(A[0]-C[0])*(y+.5-C[1]))/d,c=1-a-b;if(a<0||b<0||c<0)continue;const z=a*A[2]+b*B[2]+c*C[2],i=y*W+x,k=i*3;if(z>=depth[i])continue;const denom=a*t.inv[0]+b*t.inv[1]+c*t.inv[2];a=a*t.inv[0]/denom;b=b*t.inv[1]/denom;c=c*t.inv[2]/denom;const rgb=t.cc[0].map((v,j)=>a*v+b*t.cc[1][j]+c*t.cc[2][j]),normal=t.nn[0].clone().multiplyScalar(a).addScaledVector(t.nn[1],b).addScaledVector(t.nn[2],c).normalize();if(t.facing<0)normal.negate();const op=a*t.aa[0]+b*t.aa[1]+c*t.aa[2];
    if(t.s.texture){const {data,info}=t.s.texture,u=(a*t.uvs[0][0]+b*t.uvs[1][0]+c*t.uvs[2][0])*t.s.textureScale[0]+t.s.textureOffset[0],v=(a*t.uvs[0][1]+b*t.uvs[1][1]+c*t.uvs[2][1])*t.s.textureScale[1]+t.s.textureOffset[1],tx=(u-Math.floor(u))*info.width-.5,ty=(v-Math.floor(v))*info.height-.5,xx=Math.floor(tx),yy=Math.floor(ty),fx=tx-xx,fy=ty-yy;let ao=0;
     for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++){const pixel=((yy+dy+info.height)%info.height*info.width+(xx+dx+info.width)%info.width)*info.channels,encoded=data[pixel]/255,linear=encoded<=.04045?encoded/12.92:((encoded+.055)/1.055)**2.4;ao+=linear*(dx?fx:1-fx)*(dy?fy:1-fy);}for(let j=0;j<3;j++)rgb[j]*=ao;
    }
@@ -87,3 +88,6 @@ for(const id of ids){const p=file.parts.find(p=>p.id===id),ss=shapes(p),bb=new B
  if(!before)await render(ss,[.7,.35,1],target,extent,`${out}/${id}-cinema.png`,'cinema');
  for(const s of ss)s.g.dispose();console.log(`${round} ${id}`);
 }
+
+const modelPath=process.env.ATLAS_PREVIEW_MODEL??(process.env.ATLAS_CANDIDATE?'/private/tmp/states-of-matter-candidate.glb':`public${file.model}`);
+fs.writeFileSync(`${out}/preview-rig.json`,JSON.stringify({modelPath,sha256:createHash('sha256').update(fs.readFileSync(modelPath)).digest('hex'),studioRigs,method:'Decoded shipping GLB; perspective-correct CPU PBR + RoomEnvironment approximation + engine studio + direct ACES/sRGB before alpha blending. Native triangle/material order; not GPU acceptance.'},null,2));

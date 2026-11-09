@@ -4,6 +4,8 @@ import {describe,it,expect} from 'vitest';
 import {MeshoptDecoder} from 'meshoptimizer';
 import {Mesh,PropertyBinding} from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {gltfGroupShape} from '../../src/engines/space-scene/stages/model3d/gltfGroupShape';
+import type {PartShape} from '../../src/engines/space-scene/stages/model3d/PartNode';
 import {unpack} from '../../scripts/geo/heart-and-lungs/append-glb';
 import {partsFile} from '../../src/engines/space-scene/schema';
 import {partPieces} from '../../src/engines/space-scene/stages/model3d/geometry';
@@ -61,12 +63,12 @@ describe('heart-and-lungs museum bench',()=>{
    }
   }
  });
- it('binds the fish packet within 600 KB and gives it two surface draws',()=>{
+ it('binds the fish packet within 600 KB and gives it separate opaque and transparent surface draws',()=>{
   const packet=readFileSync('scripts/geo/heart-and-lungs/fish-packet.glb');
   expect(packet.byteLength).toBeLessThanOrEqual(600000);
   const fish=unpack(packet);
   expect(shipped.bin.subarray(shipped.bin.length-fish.bin.length).equals(fish.bin)).toBe(true);
-  expect(fish.json.meshes.reduce((n:number,m:any)=>n+m.primitives.length,0)).toBe(2);
+  expect(fish.json.meshes.reduce((n:number,m:any)=>n+m.primitives.length,0)).toBe(10);
   for(const id of ['fish-body','gill-cover']){
    const node=shipped.json.nodes.find((n:any)=>n.name===id);
    for(const p of shipped.json.meshes[node.mesh].primitives){
@@ -93,22 +95,21 @@ describe('heart-and-lungs museum bench',()=>{
   expect(file.model).toBe('/models/heart-and-lungs-bench.glb');
   for(const id of ids){const part=file.parts.find(p=>p.id===id)!;expect(part.mesh).toBe(id);expect(part.primitive).toBeUndefined();expect(shipped.json.nodes.some((n:any)=>n.name===id&&n.mesh!==undefined)).toBe(true);}
  });
- it('gives every renderer-bound part exactly one decoded mesh so GltfSource cannot discard geometry',async()=>{
+ it('preserves every decoded mesh through the opt-in group loader',async()=>{
   const bytes=readFileSync(`public${file.model}`);
   const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(Uint8Array.from(bytes).buffer,'');
   try{
-   // GltfSource.findMesh returns the first descendant Mesh, and shapeOf takes
-   // only its geometry and material. GLTFLoader splits multiple primitives
-   // into a Group: a second membrane primitive would disappear at runtime.
+   // The engine loader's own opt-in group helper.
    for(const part of file.parts){
     if(!part.mesh)continue;
     const root=gltf.scene.getObjectByName(PropertyBinding.sanitizeNodeName(part.mesh));
     expect(root,`${part.id} renderer-bound node`).toBeDefined();
     const meshes:Mesh[]=[];root!.traverse(node=>{if(node instanceof Mesh)meshes.push(node);});
-    expect(meshes,`${part.id} would lose every mesh after the first in GltfSource`).toHaveLength(1);
+    expect(meshes).toHaveLength(part.id==='fish-body'?9:1);
+    if(part.id==='fish-body'){expect(root!.userData.atlasSurfaceGroup).toBe(true);const base={pieces:[],box:{min:[0,0,0],max:[0,0,0]}} as unknown as PartShape;const shape=gltfGroupShape(root!,meshes[0]!,base);expect(shape.pieces).toHaveLength(9);expect(shape.pieces.reduce((n,p)=>n+p.geometry.index!.count/3,0)).toBe(meshes.reduce((n,m)=>n+m.geometry.index!.count/3,0));for(const p of shape.pieces)p.geometry.dispose();}
     const authored=shipped.json.nodes.find((node:any)=>node.name===part.mesh),primitives=shipped.json.meshes[authored.mesh].primitives;
     const triangles=primitives.reduce((count:number,p:any)=>count+shipped.json.accessors[p.indices].count/3,0);
-    expect(meshes[0]!.geometry.index!.count/3,`${part.id} geometry reaching PartNode`).toBe(triangles);
+    expect(meshes.reduce((n,m)=>n+m.geometry.index!.count/3,0),`${part.id} geometry reaching PartNode`).toBe(triangles);
    }
   }finally{
    gltf.scene.traverse(node=>{if(node instanceof Mesh){node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])material.dispose();}});

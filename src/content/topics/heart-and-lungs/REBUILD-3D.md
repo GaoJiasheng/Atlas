@@ -1009,3 +1009,143 @@ Residual minor issues (not blocking):
 - The open gill cover still reads somewhat thick at its rim in beat 3; it should be thinner bone.
 - The eye is still slightly large, and its pale iris ring reads a little cartoonish next to the photo.
 - The snout tip is slightly pointed, and the maxilla line is faint at beat-3 distance.
+
+## Rebuild 2026-11-05 — batch 2 residual polish
+
+Executed 2026-11-09 against the accepted round-4 asset. This section concerns
+only fish chapter 6 beats 2–3. All wording, part ids/counts, ray stations,
+chapters, cameras, poses, gill-water paths and animation parameters are
+unchanged. The gills, plant and inherited anatomy remain untouched.
+
+**Integration dependency:** `scripts/geo/heart-and-lungs/transparent-fins.patch`
+contains the necessary engine change **and its renderer-slot regression test**.
+Protected engine files in this worktree are unchanged. Main must apply this
+patch before GPU acceptance: today's unpatched `GltfSource.findMesh` takes
+only the first child of a multi-primitive GLB, so it omits the eight webs.
+The proposed loader is explicitly opt-in (`atlasSurfaceGroup`), keeps the
+existing part/pose/framing contract, maps each rigid surface into the first
+mesh's coordinate frame, and gives every surface its own material slot.
+Opaque body/rays write depth; independent DoubleSide BLEND webs do not write
+depth, sort separately through Three's transparent queue, use one pass and
+cast no opaque shadow. Legacy and skinned parts retain their existing path.
+No alpha hash, stippled mask, runtime texture, transmission or network is used.
+
+### Parts and self-grades
+
+A means credible under docs/68, assessed against the photographs below; it is
+not a claim of GPU acceptance. The fin grade explicitly depends on integration.
+
+| Part / characteristic detail | Change | Self-grade |
+|---|---|---|
+| `fish-body`: fin membranes | Eight continuous cambered, individually sorted web surfaces, alpha about 0.32–0.56 from margin to root; all raised rays remain in the opaque skin draw. | **A candidate with patch; B/unresolved in the unpatched runtime**, because the protected loader drops the web children. |
+| `gill-cover`: free rim | Physical shell thickness 0.180 → 0.065 mm; fitted contour, hinge and bone relief retained. | **A** |
+| `fish-body`: eyes | Corneal radius 6.4 → 4.9 mm, larger dark pupil fraction, subdued bronze/olive iris and a pigmented orbital transition replacing the pale halo. Convex geometry retained. | **A** |
+| `fish-body`: snout | Fuller terminal section, less sharply curved anterior SDF cap, broad upper/lower lip envelope; the actual teaching-water inlet remains unobstructed. | **A** |
+| `fish-body`: maxilla | Deeper/wider sculpted cleft, with restrained dark pigment following the same fold. | **A** |
+
+### Real references inspected
+
+These are development photographs, not runtime maps. They were downloaded
+again in this worktree; their attribution also remains in `data/SOURCES.md`.
+
+- [Pmau, Perca fluviatilis img 33558](https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_img_33558.jpg), CC BY-SA 4.0: blunt lip profile, small dark eye, maxilla and opercular margin.
+- [George Chernilevsky, Perca fluviatilis 2008 G1](https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_2008_G1.jpg), public domain: lateral outline, rays and translucent inter-ray webbing.
+- [H. Zell, Perca fluviatilis – Wilhelma 01](https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_-_Wilhelma_01.jpg), CC BY-SA 3.0: shallow three-quarter form and fin attachment.
+- [Dellex, Barsch3](https://commons.wikimedia.org/wiki/File:Barsch3.jpg), CC BY-SA 4.0: real near-frontal jaw/eye relationships.
+
+### Actual look → change rounds
+
+1. **R501 LOOK:** the alpha-tested, ray-aligned texture avoided hash static but
+   made the fins read as gauze in the studio profile/close-up. Rejected it.
+   **CHANGED:** separate transparent web primitives and a tested opt-in loader
+   patch; reduced/thoroughly recoloured the eyes, thinned the cover, deepened
+   the maxillary fold and filled out the snout tip.
+2. **R502 LOOK:** the fins became continuous membranes with distinct opaque
+   rays. The small eye still had a pale orbital transition; the snout could
+   be fuller at its terminal section. **CHANGED:** darkened that skin/iris
+   transition and widened the tip vertically while preserving the open gape.
+3. **R503 LOOK:** inspected front, shallow three-quarter, profile, head detail,
+   open-cover beat 3, closed cover and cinema. The final depth/material test
+   exercises all nine surfaces and their world transforms, vertex alpha,
+   DoubleSide setting before/after the actual clipping setup, single-pass
+   rendering, solid-only cut-face shader, opacity/fade and depth-write policy. The
+   exhaustive closed-gill and real water-particle-spread audits still pass.
+   The final review reserves fin runtime acceptance for main's applied patch.
+
+`preview-studio.ts` loads the actual shipping GLB with production GLTFLoader
+and meshopt, probes `gltfSurface`, uses perspective-correct interpolation,
+normal/world transforms, the installed RoomEnvironment radiance, the engine's
+asserted studio rig/exposure, GGX and direct ACES/sRGB before transparent
+blending. Transparent items sort by their own geometry bounds, preserving
+index order within a draw. This reconstructs the **proposed patched** material
+binding; it does not pretend that the unpatched engine renders the webs.
+Two-times supersampling is offline antialiasing, not GPU pixel identity.
+
+The four requested comparison views and actual beat cameras are in
+`/private/tmp/atlas-fish-states-polish/comparisons/fish/`. Photos are cropped,
+resized and, for the oblique reference, mirrored to face left. They are the
+closest real photographic angles, not a calibrated same-specimen turntable;
+the living reference has a closed mouth/cover while the teaching pose opens
+both. No invented or warped reference view is presented as a photograph.
+
+### Measured budget and preservation
+
+| Metric | Accepted before | Batch 2 after |
+|---|---:|---:|
+| `fish-body` triangles / surface draws | 47,261 / 1 | 44,997 / 9 with patch |
+| `gill-cover` triangles / surface draws | 4,586 / 1 | 4,586 / 1 |
+| Conservative whole topic, all layers: triangles / draws | 349,359 / 43 | 347,095 / 51 with patch |
+| Fish/cover meshopt packet | 447,352 bytes | 444,888 bytes |
+| Combined runtime container | 2,760,368 bytes | 2,757,976 bytes |
+
+The combined container's pre-existing >1.5 MB exception remains: the accepted
+anatomy alone is 1,952,300 bytes and its binary/metadata prefix is preserved
+verbatim. The replacement fish packet is below 0.45 MB. No original anatomy,
+gill or plant stream was re-filtered, re-sculpted or decimated.
+
+Reproduce with `pnpm tsx scripts/geo/heart-and-lungs/build-fish.ts 503`,
+`pnpm tsx scripts/geo/heart-and-lungs/preview-studio.ts 503 fish`, and
+`python3 scripts/geo/heart-and-lungs/compare-round4.py 503` after restoring the
+listed development refs. The patch is validated in an isolated temporary
+copy with the unchanged package/config files; it is not applied here.
+
+
+### Frozen final gates — 2026-11-09
+
+All final gates passed in `/private/tmp/atlas-fish-states-polish/gates`, an
+isolated copy with **the proposed transparent-fins.patch applied only there**.
+The real worktree's engine files remain unchanged. Package, lockfile, Astro
+and Vitest configs are byte-identical; no test config was added.
+
+- `pnpm check`: exit 0; zero errors/warnings, 22 hints.
+- `pnpm validate`: exit 0; 94 topics, zero errors/warnings.
+- `pnpm build`: exit 0; 191 pages.
+- Export audit: exit 0; the built endpoint matches parsed source and copied
+  GLB SHA-256 matches the frozen shipping asset.
+- Full tests: **306 files / 6,743 tests passed**, exit 0, with no unhandled
+  worker errors. Final command: `pnpm run test --pool=threads --reporter=dot
+  --maxWorkers=2 --minWorkers=1 --testTimeout=180000 --hookTimeout=180000
+  --retry=2` (one command, shown wrapped for readability).
+
+Runner environment used `NODE_OPTIONS=--max-old-space-size=8192`. Earlier
+fork-pool runs suffered unrelated timing/performance failures under host
+load exceeding 600 on 18 CPUs; the four affected files passed all 448 tests
+in isolation without changing assertions or explicit 20-second/100-ms
+budgets. A subsequent fork run passed all 6,743 assertions but exited 1 on
+two hard-coded 60-second worker-reporting RPC timeouts. Switching to Vitest's
+supported thread pool and dot reporter produced a complete clean exit;
+no errors were ignored, no dependency was patched, and no source assertion
+or threshold was weakened. All raw failures and successful logs remain in
+`/private/tmp/atlas-fish-states-polish/`, with commands, durations and exit
+codes in `gate-status.json`.
+
+Both shipping GLBs, the proposed patch and package/config hashes were checked
+before and after the successful final suite against `frozen-inputs.json`.
+The comparison previews match these exact GLB hashes. Final sheets:
+`/private/tmp/atlas-fish-states-polish/comparisons/`.
+
+Frozen shipping SHA-256: `0df9fe2339727c88ebc083ee0037a147971eec5e4222447f9df1e82e37b45b7c`.
+
+### GPU acceptance: translucent fins (c-fish-states, 2026-11-09)
+
+`transparent-fins.patch` is applied, narrowed to the `atlasSurfaceGroup` opt-in: the patch's unconditional `target.side = source.side` is removed (clipping already sets the side) and the transparent-shadow rule reads `shape.surfaces` only. Fins render cleanly translucent at chapter 6 beats 2-3 in paper and cinema, with no alpha-hash static. Draw calls at those beats: 15 to 23 and 13 to 20. Pixel diffs against main over living-things, frog-and-chicken, fossils-and-skeletons and heart-and-lungs match a main-vs-main noise floor (flow particles, heartbeat, one label leader).
