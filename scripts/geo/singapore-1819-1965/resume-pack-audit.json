@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-09",
+  "method": "Existing shared TopoJSON arcs, source-scale 5m town/Jurong and 25m elsewhere; arc ids/endpoints retained, no new geometry",
+  "fineBoxes": [
+    [
+      103.828,
+      1.274,
+      103.878,
+      1.325
+    ],
+    [
+      103.6,
+      1.27,
+      103.78,
+      1.373
+    ]
+  ],
+  "fineScope": "Historical land arcs only; exclusive current-coast and mask arcs retain25m precision",
+  "sourceVertices": 31377,
+  "publishedVertices": 17124,
+  "restoredArcs": 24,
+  "quantizationFactor": 3,
+  "gridStepM": [
+    1.610418349721331,
+    1.041041127025945
+  ],
+  "bytes": 203557,
+  "issues": {
+    "rings": 361,
+    "zeroArea": 0,
+    "selfCrossing": 0
+  }
+}

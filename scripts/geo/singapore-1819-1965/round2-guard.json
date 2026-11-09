@@ -1,0 +1,630 @@
+{
+  "date": "2026-11-09",
+  "status": "passed",
+  "freshSourceRebuild": "passed",
+  "publishedAssets": [
+    {
+      "path": "public/geo/land-sg-history.json",
+      "bytes": 272857,
+      "sha256": "8e0a0cb522e6a46396959db3cc864438fbb46e03f00417ffb3535e6ad005255c"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/control.json",
+      "bytes": 635244,
+      "sha256": "b168bed91861ca70f75007aebdc06317418be0b3f417747c129ae361cc85fbf8"
+    }
+  ],
+  "sourceHashesVerified": [
+    {
+      "id": "G14",
+      "license": "Public domain",
+      "sha256": "738c875867e607407cb3abc252f2df40299959cc702c7352f616ad853c215096"
+    },
+    {
+      "id": "G35",
+      "license": "Public domain; ANU item dc.rights Copyright Expired; original UK Crown copyright expired",
+      "sha256": "8d8954e8445834bc234f387eadce32165b80c696c8bc17770cfea00b66bde46e"
+    },
+    {
+      "id": "G23",
+      "license": "Public domain",
+      "sha256": "f4e3626af3bd43256648407cc2b6cfa8ee73e349a3c1c9ab60dfee49cb430a91"
+    },
+    {
+      "id": "G34",
+      "license": "Public domain (PD-old/PD-US), original1903; Library of Congress g8033s.ct001930",
+      "sha256": "c9b9dc9a04b196d504b1c68220be4fc15452a26ce93c5558eb15e67b4bc9574d"
+    },
+    {
+      "id": "G1",
+      "license": "Public domain",
+      "sha256": "6ecf50108c5dab0a0db493e7560d7b9e817f30f6092be94736e1596177edc4cc"
+    },
+    {
+      "id": "G7",
+      "license": "Public domain",
+      "sha256": "191f6841f986ad848571052dfb27dacf5eed8bad52015c35eff4cb3d4d33b2a8"
+    },
+    {
+      "id": "G4",
+      "license": "Public domain",
+      "sha256": "1cf21036223d63c6bdb8234cd00524d04b96fa35a7074cf9fbbfc77c14592a9e"
+    },
+    {
+      "id": "G9",
+      "license": "Public domain",
+      "sha256": "363819236e3a03160060fe718c9d4faca1edc2e41384c595ec9636d455d2a65e"
+    },
+    {
+      "id": "G11",
+      "license": "Public domain",
+      "sha256": "fdf4d9ff4b4480383b9c0d772b0e5a10bca0867511e11d195b753155b76892b5"
+    },
+    {
+      "id": "G16",
+      "license": "Public domain",
+      "sha256": "2d9bfea7b4e0abd965d61f106322b3adfc9843bb4e2ec52646482b80057d3ba0"
+    },
+    {
+      "id": "G15",
+      "license": "Public domain",
+      "sha256": "bc00c000e109733955769626d78263f04d48afd95ce32b5f97729580f80fa407"
+    }
+  ],
+  "jurongHead": {
+    "accepted": true,
+    "inputRings": {
+      "rings": 2,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "delivery": [
+      {
+        "id": "L5",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      },
+      {
+        "id": "K15a",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      },
+      {
+        "id": "K16",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      },
+      {
+        "id": "K17",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      },
+      {
+        "id": "K18",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      },
+      {
+        "id": "K19",
+        "checks": [
+          {
+            "native": [
+              2005,
+              230
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2002,
+              240
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2013,
+              260
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2019,
+              275
+            ],
+            "land": false
+          },
+          {
+            "native": [
+              2081,
+              275
+            ],
+            "land": false
+          }
+        ]
+      }
+    ],
+    "dryDelivery": [
+      {
+        "id": "L5",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      },
+      {
+        "id": "K15a",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      },
+      {
+        "id": "K16",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      },
+      {
+        "id": "K17",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      },
+      {
+        "id": "K18",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      },
+      {
+        "id": "K19",
+        "checks": [
+          {
+            "native": [
+              1970,
+              230
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2020,
+              250
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2055,
+              188
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              2090,
+              290
+            ],
+            "land": true
+          },
+          {
+            "native": [
+              1940,
+              315
+            ],
+            "land": true
+          }
+        ]
+      }
+    ],
+    "reason": "Paired bank redraw; source-native water and dry/island witnesses checked independently on decoded coast and all five 1961–1965 frames."
+  },
+  "g15Splice": {
+    "accepted": true,
+    "method": "G15 Tuas open natural-bank arc, joined at exact segment intersections to the complementary G16 mainland arc. Poyan/Berih north of 1.34141N stays on the complete G16 source rather than the incomplete northern G15 mask; its omitted G15-observed mangrove tip is restored separately. No source coverage closure or new straight connector is exposed.",
+    "north": {
+      "p": [
+        103.63865888226296,
+        1.3414098139488673
+      ],
+      "a": 1358,
+      "b": 1386,
+      "t": 0.13309199206696742,
+      "u": 0.5465842951053831
+    },
+    "south": {
+      "p": [
+        103.65327,
+        1.3034727113160705
+      ],
+      "a": 1697,
+      "b": 692,
+      "t": 0.813238300236221,
+      "u": 0.25422632140872153
+    },
+    "guard": "Exact source-bank intersections and simple-ring checks; no coverage cap or invented connector."
+  },
+  "northernDryPeninsula": [
+    {
+      "native": [
+        5000,
+        6060
+      ],
+      "lnglat": [
+        103.66673142630927,
+        1.3769272497535003
+      ],
+      "land": true
+    },
+    {
+      "native": [
+        5050,
+        6100
+      ],
+      "lnglat": [
+        103.66744504871133,
+        1.3763562980228299
+      ],
+      "land": true
+    }
+  ],
+  "falseInlandCoverageVertices": 0,
+  "deliveredRings": {
+    "coast": {
+      "rings": 481,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    },
+    "control": {
+      "rings": 2700,
+      "zeroArea": 0,
+      "selfCrossing": 0
+    }
+  },
+  "accuracyPolicy": "Report fitted and leave-one-out RMS; positions approximate, no strict RMS tolerance. Source licence, geometry, wet/dry witnesses and fresh rebuild are hard guards."
+}

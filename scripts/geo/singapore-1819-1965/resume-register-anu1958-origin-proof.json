@@ -1,0 +1,50 @@
+{
+  "method": "The1958redoriginminute glyphs are partlyfaded. Compare four candidate readings using the same16pointnativegridpixel fit and independently visible southwestgraticulecorner103°37′47″E/01°12′50″N. No modernWGS84point or externaltranslation is involved. Numbers are native-graticule consistency diagnostics, not externalgrounderrors.",
+  "nativeSouthwestPixel": [
+    375,
+    6360
+  ],
+  "printedSouthwestCornerLngLat": [
+    103.62972222222221,
+    1.2138888888888888
+  ],
+  "localGridMetres": [
+    418909.98110911966,
+    182722.77596658753
+  ],
+  "comparisons": [
+    {
+      "origin": "2°1′33.30″N /103°23′45.93″E",
+      "cornerLngLat": [
+        103.46285981538493,
+        1.1974805363363066
+      ],
+      "printedCornerMismatchM": 18639.68179464269
+    },
+    {
+      "origin": "2°1′33.30″N /103°33′45.93″E",
+      "cornerLngLat": [
+        103.62952648205159,
+        1.1974805363363066
+      ],
+      "printedCornerMismatchM": 1824.6578391562998
+    },
+    {
+      "origin": "2°2′33.30″N /103°23′45.93″E",
+      "cornerLngLat": [
+        103.46286022148297,
+        1.2141473272208871
+      ],
+      "printedCornerMismatchM": 18550.090942617684
+    },
+    {
+      "origin": "2°2′33.30″N /103°33′45.93″E",
+      "cornerLngLat": [
+        103.62952688814961,
+        1.2141473272208871
+      ],
+      "printedCornerMismatchM": 36.01907887761899
+    }
+  ],
+  "additionalEvidence": "G11sameJohoreGrid clearprintedorigin2°02′33.30″N/103°33′45.93″E; previewwork/resume-G11-origin-footer.png;1958cornerpreviewwork/resume-register-anu1958-corner-proof.png"
+}

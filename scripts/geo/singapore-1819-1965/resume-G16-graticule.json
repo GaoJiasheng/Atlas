@@ -1,0 +1,338 @@
+{
+  "method": "16 border ticks, 8 constrain only longitude and 8 only latitude. Independent affine axis fits in Mercator metres. No invented intersection or unobserved degree coordinate. External translation anchored to the original six named controls; historical datum and cape generalisation remain unresolved.",
+  "axisObservations": [
+    {
+      "side": "top",
+      "svg": [
+        7412.5,
+        590.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 103.66666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "top",
+      "svg": [
+        10917.0,
+        590.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 103.83333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "top",
+      "svg": [
+        17916.5,
+        590.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 104.16666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "top",
+      "svg": [
+        21417.0,
+        590.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 104.33333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "bottom",
+      "svg": [
+        7396.5,
+        15800.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 103.66666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "bottom",
+      "svg": [
+        10897.5,
+        15800.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 103.83333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "bottom",
+      "svg": [
+        17892.5,
+        15800.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 104.16666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "bottom",
+      "svg": [
+        21395.5,
+        15800.0
+      ],
+      "observedAxis": "longitude",
+      "observedDegrees": 104.33333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "left",
+      "svg": [
+        545.0,
+        2766.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.5,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "left",
+      "svg": [
+        545.0,
+        6297.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.3333333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "left",
+      "svg": [
+        545.0,
+        9818.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.1666666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "left",
+      "svg": [
+        545.0,
+        13340.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "right",
+      "svg": [
+        26980.0,
+        2755.5
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.5,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "right",
+      "svg": [
+        26980.0,
+        6279.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.3333333333333333,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "right",
+      "svg": [
+        26980.0,
+        9793.0
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1.1666666666666667,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    },
+    {
+      "side": "right",
+      "svg": [
+        26980.0,
+        13316.5
+      ],
+      "observedAxis": "latitude",
+      "observedDegrees": 1,
+      "qualification": "Printed axis tick only. Other geographic coordinate is not known; this is not an independent ground control point."
+    }
+  ],
+  "internalAxisFits": {
+    "longitude": {
+      "coefficients": [
+        11500807.67020656,
+        53008.13935373671,
+        70.57296659592387
+      ],
+      "fitRmsM": 9.941235126987284,
+      "fitMaxM": 16.428261814638972,
+      "looRmsM": 15.992695752923245,
+      "looMaxM": 29.8791910354048,
+      "residualsM": [
+        -16.428261814638972,
+        7.025709157809615,
+        3.5759187135845423,
+        5.826633943244815,
+        6.100197412073612,
+        11.001319609582424,
+        -16.302133543416858,
+        -0.7993834745138884
+      ],
+      "looResidualsM": [
+        -29.8791910354048,
+        10.036184629425406,
+        5.108596021309495,
+        10.595090391114354,
+        11.08994266577065,
+        15.714840216562152,
+        -23.28584073856473,
+        -1.4534017853438854
+      ]
+    },
+    "latitude": {
+      "coefficients": [
+        181606.9968588485,
+        -38.36951509805974,
+        -52690.81203211462
+      ],
+      "fitRmsM": 18.181066830002514,
+      "fitMaxM": 32.313359272433445,
+      "looRmsM": 30.836007987281185,
+      "looMaxM": 61.6117483850976,
+      "residualsM": [
+        32.313359272433445,
+        -13.884641030337662,
+        -8.648321292421315,
+        -9.780396950125578,
+        -13.791101255570538,
+        -20.470992534275865,
+        21.64889562614553,
+        12.613198163628113
+      ],
+      "looResidualsM": [
+        61.6117483850976,
+        -19.14916778524639,
+        -11.929536694427952,
+        -18.634613052781788,
+        -26.25810735419509,
+        -28.231433557433775,
+        29.855873252963647,
+        24.01539263050654
+      ]
+    }
+  },
+  "externalTranslationFit": {
+    "count": 6,
+    "translationMetres": [
+      -20.13630689214915,
+      -16.626038941882143
+    ],
+    "fitRmsM": 45.6192442436163,
+    "fitMaxM": 60.726541653173626,
+    "looRmsM": 54.743093092339564,
+    "looMaxM": 72.87184998380835,
+    "checks": [
+      {
+        "name": "Tanjong Changi",
+        "svg": [
+          14136,
+          5013
+        ],
+        "lnglat": [
+          103.9865343,
+          1.3928616
+        ],
+        "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate.",
+        "dx": -47.30659188143909,
+        "dy": -70.93523222216754,
+        "errorM": 60.726541653173626,
+        "looErrorM": 72.87184998380835
+      },
+      {
+        "name": "Tanjong Berlayer",
+        "svg": [
+          10312,
+          7790
+        ],
+        "lnglat": [
+          103.8051074,
+          1.2622889
+        ],
+        "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate.",
+        "dx": 7.057659963145852,
+        "dy": 7.438453803450102,
+        "errorM": 36.31269260764108,
+        "looErrorM": 43.575231129169296
+      },
+      {
+        "name": "Tanjong Rimau",
+        "svg": [
+          10346,
+          7838
+        ],
+        "lnglat": [
+          103.8066725,
+          1.2597496
+        ],
+        "source": "Second-pass native G16 rocky headland tip read in work/G16-changi-review.png / G16-berlayer-review.png. OSM coordinate is CP-only; chart outer shore generalisation remains approximate.",
+        "dx": 0.7173709589987993,
+        "dy": -22.257251509145135,
+        "errorM": 21.600611910248265,
+        "looErrorM": 25.92073429229792
+      },
+      {
+        "name": "Sultan Shoal Lighthouse",
+        "svg": [
+          7024,
+          8277
+        ],
+        "lnglat": [
+          103.64806666666667,
+          1.2396166666666666
+        ],
+        "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json",
+        "dx": -48.99749247170985,
+        "dy": 36.40194690442877,
+        "errorM": 60.37329969427208,
+        "looErrorM": 72.44795963312649
+      },
+      {
+        "name": "Raffles Lighthouse (Pulau Satumu)",
+        "svg": [
+          8970,
+          9940
+        ],
+        "lnglat": [
+          103.74083333333333,
+          1.1601
+        ],
+        "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json",
+        "dx": -49.37959912978113,
+        "dy": -47.346162031040876,
+        "errorM": 42.41339533105797,
+        "looErrorM": 50.896074397269565
+      },
+      {
+        "name": "Horsburgh Lighthouse (Pedra Branca)",
+        "svg": [
+          22923,
+          6343
+        ],
+        "lnglat": [
+          104.40561666666666,
+          1.3302333333333334
+        ],
+        "source": "MPA named light position, independently paired with chart named tower/star; details and native crop in georef-G16-lighthouse-candidates.json",
+        "dx": 17.09081120789051,
+        "dy": -3.057988596818177,
+        "errorM": 39.62259850389031,
+        "looErrorM": 47.547118204668365
+      }
+    ]
+  }
+}

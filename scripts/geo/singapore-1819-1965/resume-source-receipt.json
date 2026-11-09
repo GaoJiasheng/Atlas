@@ -1,0 +1,13 @@
+{
+  "id": "G35",
+  "file": "raw/resume-source-anu1958.jpg",
+  "bytes": 11068520,
+  "sha256": "8d8954e8445834bc234f387eadce32165b80c696c8bc17770cfea00b66bde46e",
+  "md5": "753796180f2c7d659280ec601a5602bb",
+  "nativeSize": [
+    8350,
+    6806
+  ],
+  "licence": "ANU item dc.rights: Copyright Expired",
+  "metadata": "resume-source-anu.json"
+}

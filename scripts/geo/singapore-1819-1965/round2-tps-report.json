@@ -1,0 +1,3335 @@
+{
+  "date": "2026-11-09",
+  "reports": [
+    {
+      "id": "G1",
+      "count": 12,
+      "baselineLooRmsM": 58.38849832300288,
+      "trials": [
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 26.82950907269032,
+            "maxM": 65.20610017846865
+          },
+          "loo": {
+            "rmsM": 50.447117414615256,
+            "maxM": 104.9868070997475
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 22.477571665451194,
+              "looM": 31.88098228818586
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 8.749065366176769,
+              "looM": 11.984583638348765
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 28.69478032947969,
+              "looM": 39.69445358925496
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 14.760162540720415,
+              "looM": 20.835966926248634
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 9.927996785819902,
+              "looM": 14.663286557266272
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 22.399277434025834,
+              "looM": 45.321422204263165
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 19.323330478772842,
+              "looM": 34.29122660890878
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 29.59378119172742,
+              "looM": 53.54025994823029
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 15.937473013371887,
+              "looM": 59.30336777715247
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 8.677600972988017,
+              "looM": 29.679633564408753
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 65.20610017846865,
+              "looM": 104.9868070997475
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 24.170549329543363,
+              "looM": 75.08418436000836
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 37.117902362207666,
+            "maxM": 81.67961094477931
+          },
+          "loo": {
+            "rmsM": 54.03090368147716,
+            "maxM": 110.4235092710795
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 28.435834162798308,
+              "looM": 34.36929463999759
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 21.993739083357365,
+              "looM": 26.047448999172914
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 46.14168842111239,
+              "looM": 54.2742622578552
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 23.983970881672978,
+              "looM": 28.511720301228117
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 22.53209360634641,
+              "looM": 27.55489731014631
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 23.464775418091847,
+              "looM": 34.864883677007235
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 32.86900278545976,
+              "looM": 44.588073603714555
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 40.029747418625966,
+              "looM": 58.903608965504574
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 36.08861091392313,
+              "looM": 81.61509947812449
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 18.102062788947755,
+              "looM": 38.92632631246996
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 81.67961094477931,
+              "looM": 110.4235092710795
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 22.21671233601868,
+              "looM": 40.14389369349769
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 41.509847442597994,
+            "maxM": 86.67533276617947
+          },
+          "loo": {
+            "rmsM": 57.772909807810976,
+            "maxM": 113.14551296246405
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 30.189048734619213,
+              "looM": 35.55746604279301
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 26.051549494440412,
+              "looM": 29.963622465181224
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 51.969174080898014,
+              "looM": 58.999793210218485
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 30.260589338572675,
+              "looM": 34.51712655396861
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 28.614257392238247,
+              "looM": 33.549435312695536
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 25.924474546180836,
+              "looM": 35.978477980868114
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 35.38726403152963,
+              "looM": 46.124919576918764
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 42.20260632008789,
+              "looM": 60.246903448677244
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 45.89249535832119,
+              "looM": 90.75976718521147
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 22.97396942492949,
+              "looM": 44.79738701083881
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 86.67533276617947,
+              "looM": 113.14551296246405
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 28.276116180139997,
+              "looM": 44.661932449483466
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 12.588365668623727,
+            "maxM": 29.513729404912482
+          },
+          "loo": {
+            "rmsM": 58.1952438902425,
+            "maxM": 135.15333912491022
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 16.587164257819147,
+              "looM": 39.468185912528256
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 4.876521223875699,
+              "looM": 9.654483993152901
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 11.39488324128312,
+              "looM": 26.65845732975036
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 11.635276929892735,
+              "looM": 28.328172836140016
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 5.660211571024298,
+              "looM": 15.36291222937726
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 9.912479289559156,
+              "looM": 56.00500848982311
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.074355729231247,
+              "looM": 18.746728864765576
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 10.991689820848052,
+              "looM": 48.431431643335685
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 3.564247013999967,
+              "looM": 45.40146242458175
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.168497126530406,
+              "looM": 26.685441745112016
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 29.513729404912482,
+              "looM": 101.81688132721953
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 13.464270178198921,
+              "looM": 135.15333912491022
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 42.14833190753451,
+            "maxM": 87.35250496094118
+          },
+          "loo": {
+            "rmsM": 58.32442181656041,
+            "maxM": 113.53758213699714
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 30.40033719849453,
+              "looM": 35.70653603723772
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 26.576600396379035,
+              "looM": 30.464816548899964
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 52.74800859616174,
+              "looM": 59.62591334264582
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 31.174912709909893,
+              "looM": 35.374307353472126
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 29.471817631063843,
+              "looM": 34.37592532132762
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 26.422374241693433,
+              "looM": 36.36068906119584
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 35.65871598615579,
+              "looM": 46.28102712627782
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 42.4628463867342,
+              "looM": 60.41694591779982
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 47.28939247852086,
+              "looM": 91.94900729574486
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 23.708071830412536,
+              "looM": 45.68768099949361
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 87.35250496094118,
+              "looM": 113.53758213699714
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 29.374685178972115,
+              "looM": 45.63434852294528
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 2.9458017482547025,
+            "maxM": 5.186259789322575
+          },
+          "loo": {
+            "rmsM": 63.99074507420159,
+            "maxM": 157.92237716079336
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 5.091443389107516,
+              "looM": 45.0940426588047
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 4.023041727174899,
+              "looM": 23.932628417071406
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 3.4403581135048076,
+              "looM": 31.01559119053788
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.1175223502830702,
+              "looM": 31.620720518668858
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 1.6991575197650466,
+              "looM": 21.223327917818274
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 1.4798071690705823,
+              "looM": 58.49998041994864
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 0.6641145063586722,
+              "looM": 19.254348537123175
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 1.6355085408140446,
+              "looM": 47.11873092643964
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 0.4016901448661576,
+              "looM": 39.53606823939053
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 0.31878706349950653,
+              "looM": 30.487374398681574
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 5.186259789322575,
+              "looM": 103.31536776354017
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 2.2621080074955966,
+              "looM": 157.92237716079336
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 2.5523358743794428e-11,
+            "maxM": 4.4207754124059305e-11
+          },
+          "loo": {
+            "rmsM": 65.96937864151396,
+            "maxM": 163.85079754207413
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 46.585418820875695
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 0,
+              "looM": 27.01908875486302
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 0,
+              "looM": 34.17887798677055
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 0,
+              "looM": 33.26733504325748
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 23.21284623947778
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 58.91936212135908
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 0,
+              "looM": 20.508598833032565
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 0,
+              "looM": 46.81727038853105
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 38.72477236038383
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 31.67161236690013
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 105.24159614660793
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 163.85079754207413
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    },
+    {
+      "id": "G4",
+      "count": 12,
+      "baselineLooRmsM": 60.15601288888902,
+      "trials": [
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 3.2673118574595263,
+            "maxM": 5.241143866888041
+          },
+          "loo": {
+            "rmsM": 30.939111253881578,
+            "maxM": 51.123523081774685
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 4.4280584262856735,
+              "looM": 22.995938248944586
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 4.154322748568774,
+              "looM": 19.155660997915383
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 5.241143866888041,
+              "looM": 34.81048856362692
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 2.9292230818406404,
+              "looM": 16.99019519461222
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 1.8903956137344033,
+              "looM": 12.60647520723461
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 2.385934130754218,
+              "looM": 30.352567933709164
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 2.583546781876269,
+              "looM": 30.00391654968453
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 4.287263885723927,
+              "looM": 43.13999018672343
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 1.719693118969649,
+              "looM": 44.591030996412854
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.396115885859054,
+              "looM": 51.123523081774685
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 3.469444791482235,
+              "looM": 24.750298252652275
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 0.36124740625346,
+              "looM": 5.8742328002783895
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 2.924068085823774e-11,
+            "maxM": 4.4207754124059305e-11
+          },
+          "loo": {
+            "rmsM": 31.421778538931193,
+            "maxM": 52.63427269983998
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 17.764946992144196
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 0,
+              "looM": 16.18028769692479
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 33.71467654572374
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 19.378813047412297
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 0,
+              "looM": 14.616765956690196
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 32.11537054828852
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 31.75519204442363
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 43.09795327874734
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 46.98722360985044
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 52.63427269983998
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 0,
+              "looM": 24.108234083632887
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 9.385077004535823
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 13.00430039189821,
+            "maxM": 22.913892786673312
+          },
+          "loo": {
+            "rmsM": 32.89968806990981,
+            "maxM": 49.81642148182858
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 22.913892786673312,
+              "looM": 44.18557031533836
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 19.510085703756083,
+              "looM": 35.838956627249416
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 16.19084853987947,
+              "looM": 32.55209413516157
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 4.015822214892102,
+              "looM": 7.663773368390709
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 6.6511842483040375,
+              "looM": 13.440057672741204
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 8.750480975953236,
+              "looM": 26.089520685423164
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 7.06959195147866,
+              "looM": 20.319747859355026
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 16.858978580059627,
+              "looM": 43.78021435565868
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 7.3386808609557335,
+              "looM": 37.843834353056145
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 11.594321138808665,
+              "looM": 49.81642148182858
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 12.034696018891804,
+              "looM": 25.19326312847067
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 7.566354923478041,
+              "looM": 29.901108563501722
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 30.217673683009064,
+            "maxM": 57.62316623756712
+          },
+          "loo": {
+            "rmsM": 48.23850399238317,
+            "maxM": 82.12041990239496
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 57.62316623756712,
+              "looM": 76.16033749113194
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 53.563696363461446,
+              "looM": 70.34214401604014
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 10.649302441520048,
+              "looM": 13.982844682428127
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 10.313023647889914,
+              "looM": 13.660696660974875
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 22.402827248437713,
+              "looM": 30.724155372980537
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 12.516626449808744,
+              "looM": 22.17487559828774
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.194608008891333,
+              "looM": 6.504648179956185
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 29.455149659849642,
+              "looM": 48.713026074417115
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 13.43309718353958,
+              "looM": 34.636139713788644
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 27.916193859141604,
+              "looM": 62.706063804323826
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 21.784357637544833,
+              "looM": 32.65648838072397
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 39.62266116375443,
+              "looM": 82.12041990239496
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 41.65156312615256,
+            "maxM": 73.30073395964648
+          },
+          "loo": {
+            "rmsM": 58.01403660472234,
+            "maxM": 100.60722739575867
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 73.30073395964648,
+              "looM": 88.02620373398116
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 71.78407748761002,
+              "looM": 85.15283711042763
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 2.21023320504194,
+              "looM": 2.5837282980295457
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 15.974846108236791,
+              "looM": 18.956553133788532
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 31.092825724511826,
+              "looM": 38.00258712339083
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 12.730997446526457,
+              "looM": 19.004708877217166
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 14.536848588598092,
+              "looM": 19.278454755193838
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 37.37971388930883,
+              "looM": 55.809881225293765
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 27.10582153649135,
+              "looM": 50.525180478613564
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 39.84034869315603,
+              "looM": 72.3705378847262
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 31.23136999556905,
+              "looM": 42.63820446025017
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 63.225135900499446,
+              "looM": 100.60722739575867
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 44.08118473424577,
+            "maxM": 75.52554071417777
+          },
+          "loo": {
+            "rmsM": 59.91629010785937,
+            "maxM": 103.16699046930323
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 75.52554071417777,
+              "looM": 89.58697972621931
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 74.66750803586017,
+              "looM": 87.31982563033691
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 5.112711419217726,
+              "looM": 5.8600357335589885
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 17.989394268878222,
+              "looM": 20.89177502590811
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 32.5369861015559,
+              "looM": 38.92727474632195
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 14.178312476880622,
+              "looM": 20.4127581249895
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 16.26782729661242,
+              "looM": 21.141074240779783
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 39.33948841759035,
+              "looM": 57.797812501214665
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 31.75809866006811,
+              "looM": 55.1114469869828
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 42.55859911518883,
+              "looM": 74.23735968231169
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 33.79160759829951,
+              "looM": 45.24075628061332
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 68.22834084031682,
+              "looM": 103.16699046930323
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 44.3616964083982,
+            "maxM": 75.75702776491667
+          },
+          "loo": {
+            "rmsM": 60.13179666455625,
+            "maxM": 103.43846192617667
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 75.75702776491667,
+              "looM": 89.74729096572614
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 74.97582173386871,
+              "looM": 87.54934138248507
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 5.46158653726053,
+              "looM": 6.246272145502816
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 18.24426222689012,
+              "looM": 21.135817858351338
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 32.69855914513348,
+              "looM": 39.026808906753494
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 14.395500957166393,
+              "looM": 20.63955560825198
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 16.451371787951167,
+              "looM": 21.33472239403961
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 39.57002379906455,
+              "looM": 58.033992337777875
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 32.32413730536524,
+              "looM": 55.63746001349551
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 42.876433238199525,
+              "looM": 74.45113866460726
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 34.09729977115073,
+              "looM": 45.547572828136325
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 68.80125943637115,
+              "looM": 103.43846192617667
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    },
+    {
+      "id": "G7",
+      "count": 12,
+      "baselineLooRmsM": 32.7696324790701,
+      "trials": [
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 4.280397387392849e-11,
+            "maxM": 8.841550824811861e-11
+          },
+          "loo": {
+            "rmsM": 23.121724197668367,
+            "maxM": 60.77302917647116
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 22.628285370993844
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 19.258074865946256
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 0,
+              "looM": 12.735932126263332
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 0,
+              "looM": 3.563161100899787
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 9.723966491535124
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 9.398219425364488
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 8.841550824811861e-11,
+              "looM": 11.81582919843201
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 6.631163118608895e-11,
+              "looM": 8.511401571522777
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 60.77302917647116
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 26.946661916415934
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 4.4207754124059305e-11,
+              "looM": 1.2621228954062074
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 2.2103877062029653e-11,
+              "looM": 23.27101804752552
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 0.8676812424267695,
+            "maxM": 2.115795747845155
+          },
+          "loo": {
+            "rmsM": 23.508035960735672,
+            "maxM": 59.60416281790188
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 0.8520095829824005,
+              "looM": 21.922913478813967
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 1.0696134234164907,
+              "looM": 19.11422274459454
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 0.38761534682655285,
+              "looM": 12.206336064425916
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 0.13093049066363924,
+              "looM": 3.9520707184386055
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 0.24353338102992297,
+              "looM": 9.966708076274799
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 0.09492657240540706,
+              "looM": 9.423180604611076
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 0.12111706757714599,
+              "looM": 11.844724370064805
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 0.10247979560137024,
+              "looM": 8.513428461891023
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 1.1395629514047947,
+              "looM": 59.60416281790188
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 1.0611441938117279,
+              "looM": 31.837191582095713
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 0.048516231508553,
+              "looM": 0.37695948684446096
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 2.115795747845155,
+              "looM": 25.566369579743363
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 5.487092202018669,
+            "maxM": 13.053867175425772
+          },
+          "loo": {
+            "rmsM": 25.259230326273755,
+            "maxM": 50.59568909772994
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 3.9817242081742132,
+              "looM": 17.332362834103847
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 5.674810979273581,
+              "looM": 18.59523291917515
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 2.09673284899547,
+              "looM": 10.11852874221107
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 1.238859514672106,
+              "looM": 5.608008313226135
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 1.9100520003363397,
+              "looM": 11.012014770460755
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 0.7692021565885341,
+              "looM": 9.750782413017033
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 0.9465518187754398,
+              "looM": 12.11397132137029
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 0.806235576882126,
+              "looM": 8.601856337316951
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 6.934744261246702,
+              "looM": 50.59568909772994
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 8.771525733419375,
+              "looM": 50.09844563642851
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 2.4677448199756196,
+              "looM": 5.318183663305693
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 13.053867175425772,
+              "looM": 36.62203137045727
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 13.812571240246779,
+            "maxM": 33.390139602741236
+          },
+          "loo": {
+            "rmsM": 25.99525627366201,
+            "maxM": 59.59357633437393
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 2.907871478532128,
+              "looM": 5.317688809188466
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 12.611101824835348,
+              "looM": 20.810283325711744
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.154048921691424,
+              "looM": 7.31085346803844
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.4788680591798244,
+              "looM": 6.2110270026701055
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 5.715421577979295,
+              "looM": 11.345464980793475
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 3.6574898481735048,
+              "looM": 13.424050583557221
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.386721679487598,
+              "looM": 16.626884151592623
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 3.174307454687066,
+              "looM": 10.260603375159091
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 11.107932812972221,
+              "looM": 23.074560011730316
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 26.25912722628309,
+              "looM": 59.59357633437393
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 9.455107220218535,
+              "looM": 14.261023669425489
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 33.390139602741236,
+              "looM": 50.77208504192779
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 19.11284767836088,
+            "maxM": 44.648818021640636
+          },
+          "loo": {
+            "rmsM": 28.48177511105799,
+            "maxM": 58.50947052473286
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 6.799717237118772,
+              "looM": 8.721013355940705
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 23.21876257771374,
+              "looM": 29.484376507463708
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.10253373645027,
+              "looM": 5.262815984654129
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 0.7687266445070667,
+              "looM": 1.0303075347850943
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 5.657971049865266,
+              "looM": 7.9905643776899575
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 12.179293140013657,
+              "looM": 27.843520608532998
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 18.590155371955095,
+              "looM": 37.318141041766346
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 8.169234800895625,
+              "looM": 18.356338393404926
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 7.186462053305874,
+              "looM": 9.276028556150756
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 30.127369108938154,
+              "looM": 47.28899373449077
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 15.340922197851118,
+              "looM": 21.119505670627433
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 44.648818021640636,
+              "looM": 58.50947052473286
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 23.06836893421887,
+            "maxM": 49.09207865033809
+          },
+          "loo": {
+            "rmsM": 31.96934763514806,
+            "maxM": 62.51167203456025
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 14.247492092607589,
+              "looM": 16.251599150229197
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 31.775117996838866,
+              "looM": 36.42698968791209
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 10.549160655304645,
+              "looM": 12.484468631872332
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 2.2851177679179626,
+              "looM": 2.880372528400374
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 3.6478676112318564,
+              "looM": 4.810682080063695
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 19.219152962636304,
+              "looM": 38.26566496063629
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 31.580226728444874,
+              "looM": 48.61316515026494
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 12.034352792042629,
+              "looM": 25.024287372873196
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 7.003304665750833,
+              "looM": 8.318276651689493
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 25.858107627726067,
+              "looM": 36.6394993642382
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 20.102256003821893,
+              "looM": 26.70313391613696
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 49.09207865033809,
+              "looM": 62.51167203456025
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 23.911877119947953,
+            "maxM": 49.8463155155382
+          },
+          "loo": {
+            "rmsM": 32.68280966067229,
+            "maxM": 63.2218080473609
+          },
+          "points": [
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 15.730379586382321,
+              "looM": 17.627811483825845
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 33.41497928812262,
+              "looM": 37.68046016165894
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 11.84875725015922,
+              "looM": 13.85426956796508
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 2.769313148431672,
+              "looM": 3.4648225418202427
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 3.2084690508187115,
+              "looM": 4.195817251461373
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 20.533088387357036,
+              "looM": 40.066349637188154
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 34.045868296146665,
+              "looM": 50.2884227684735
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 12.747832296890438,
+              "looM": 26.240181073524624
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 7.0762317234531995,
+              "looM": 8.327080509338472
+            },
+            {
+              "name": "South Bridge Road / Temple Street",
+              "fitM": 24.87771098959962,
+              "looM": 34.72782439927332
+            },
+            {
+              "name": "South Bridge Road / Pagoda Street",
+              "fitM": 21.026352125543543,
+              "looM": 27.762223947564472
+            },
+            {
+              "name": "South Bridge Road / Mosque Street",
+              "fitM": 49.8463155155382,
+              "looM": 63.2218080473609
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    },
+    {
+      "id": "G9",
+      "count": 18,
+      "baselineLooRmsM": 107.71275243591705,
+      "trials": [
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 17.7537957504291,
+            "maxM": 37.50480707538981
+          },
+          "loo": {
+            "rmsM": 107.7409836285417,
+            "maxM": 231.86434371246943
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 1.430858252849908,
+              "looM": 116.19907903758907
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 3.6147470544393396,
+              "looM": 230.77332153671588
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 1.451654331909513,
+              "looM": 231.86434371246943
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 3.403554552562391,
+              "looM": 226.6209525864379
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 11.72552129612057,
+              "looM": 77.84762027497018
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 11.16929694168851,
+              "looM": 74.18915120895424
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 37.50480707538981,
+              "looM": 69.56552753450477
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 24.531207188609425,
+              "looM": 39.36446379314566
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 10.043935180399549,
+              "looM": 15.914329037168683
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 11.6218847750343,
+              "looM": 19.006014800680408
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 22.542278453835145,
+              "looM": 38.533878952448894
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 12.269775278617916,
+              "looM": 26.569026151622207
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 16.328341132882986,
+              "looM": 33.050043700808914
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 19.7238227876476,
+              "looM": 38.65708140879679
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 7.04150310953722,
+              "looM": 21.95150109178364
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 18.102174675873847,
+              "looM": 53.22658738318619
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 33.045713071905446,
+              "looM": 68.11019909066793
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 18.828932145647233,
+              "looM": 75.96304527686675
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 68.97866776991992,
+            "maxM": 152.6001361162211
+          },
+          "loo": {
+            "rmsM": 107.7466900698071,
+            "maxM": 244.92441052822764
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 58.791134286683146,
+              "looM": 111.87588975219872
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 152.6001361162211,
+              "looM": 221.1191258427538
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 67.15465959968995,
+              "looM": 244.92441052822764
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 122.25953943152739,
+              "looM": 201.1103371130441
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 8.299589170473448,
+              "looM": 10.297802251832787
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 64.19054125917752,
+              "looM": 78.44377105440199
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 59.13802957965606,
+              "looM": 63.78291113140068
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 22.132622979666994,
+              "looM": 23.829415495092046
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 22.51380285379908,
+              "looM": 24.200617952113625
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 8.494088957050336,
+              "looM": 9.112746088013491
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 40.73666384557116,
+              "looM": 43.646525337502226
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 49.35011193104179,
+              "looM": 53.07226829547412
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 29.370084675884986,
+              "looM": 31.442854766571223
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 26.66177793617856,
+              "looM": 28.60618475771532
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 88.61643721194491,
+              "looM": 94.9053363529436
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 100.69890403418106,
+              "looM": 107.88725771851274
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 11.794070676248339,
+              "looM": 12.798707579973495
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 82.99749109250764,
+              "looM": 90.67328259086887
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 65.11329250027318,
+            "maxM": 146.61474130119865
+          },
+          "loo": {
+            "rmsM": 108.3551489871866,
+            "maxM": 249.12981973102453
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 53.36559816213942,
+              "looM": 108.97699817426503
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 146.61474130119865,
+              "looM": 221.39397372262042
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 64.95520697187861,
+              "looM": 249.12981973102453
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 120.60832486246885,
+              "looM": 212.22417629889244
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 27.476051439415198,
+              "looM": 41.454304523877184
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 44.2034202731861,
+              "looM": 66.17454385117813
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 60.14154098091899,
+              "looM": 65.49748759386866
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 20.71066528243055,
+              "looM": 22.495440961400938
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 24.17098481114503,
+              "looM": 26.21280872478053
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 12.356748314659828,
+              "looM": 13.392023773483475
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 34.595658174206555,
+              "looM": 37.55350495409096
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 47.64973734161092,
+              "looM": 51.92343408085362
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 27.195347487750443,
+              "looM": 29.661849432074447
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 29.37268984739132,
+              "looM": 32.090306078280975
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 78.63560444169474,
+              "looM": 87.49150761474993
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 89.83865846087897,
+              "looM": 99.81683417326501
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 11.970132603074308,
+              "looM": 13.176457497764753
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 79.03641704543234,
+              "looM": 88.1554631149822
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 6.876633350353154,
+            "maxM": 15.72352544119272
+          },
+          "loo": {
+            "rmsM": 109.38126868171464,
+            "maxM": 230.86981834750407
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.1469887682417224,
+              "looM": 114.61152968473618
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 0.3694842164773102,
+              "looM": 230.86981834750407
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 0.14715458033417259,
+              "looM": 226.82331051022024
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 0.34861119232563303,
+              "looM": 225.52305332746315
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 1.7839027888931878,
+              "looM": 82.78500127275474
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 1.6819735150063189,
+              "looM": 78.41217814803369
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 15.72352544119272,
+              "looM": 82.19841815262536
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 14.715315588001625,
+              "looM": 48.82767365010542
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.835753346700325,
+              "looM": 16.36828625748324
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 6.036824253691509,
+              "looM": 24.14022992975973
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 9.213721127572413,
+              "looM": 41.5075302770173
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 2.0150282990679624,
+              "looM": 15.17722569609632
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.026639321820619,
+              "looM": 25.33199526794567
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 5.603447307158811,
+              "looM": 32.84716428845245
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 2.588435945814402,
+              "looM": 32.21866253474901
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 4.518338884308305,
+              "looM": 52.9633064713195
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 11.292385661350364,
+              "looM": 79.23035408583857
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 5.48421135049476,
+              "looM": 99.11047165413682
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 50.75357324556514,
+            "maxM": 107.53514157248112
+          },
+          "loo": {
+            "rmsM": 110.4007441183024,
+            "maxM": 258.1582568467693
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 41.15736511648248,
+              "looM": 118.94766898495362
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 107.53514157248112,
+              "looM": 224.30962284346364
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 47.973660025379154,
+              "looM": 258.1582568467693
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 93.96764960676447,
+              "looM": 226.53109672317703
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 37.751446235623185,
+              "looM": 72.5182287765528
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 30.122720645423147,
+              "looM": 57.64502781342427
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 56.09847280097467,
+              "looM": 63.923270232790955
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 20.52567144686246,
+              "looM": 23.028850924826784
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 20.755873923143298,
+              "looM": 23.10200797572403
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 14.628739042010494,
+              "looM": 16.230947123133483
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 26.723015768876433,
+              "looM": 29.80888529946023
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 44.70685803152394,
+              "looM": 50.19699682385451
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 26.342154719061917,
+              "looM": 29.949854187304133
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 37.11673032073316,
+              "looM": 42.172428376401896
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 52.03801689051728,
+              "looM": 65.77499176213004
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 64.05571311685554,
+              "looM": 80.07564894318287
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 24.71988218480974,
+              "looM": 29.577820365507407
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 56.79157625280717,
+              "looM": 72.60740625903811
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 7.147681276503544e-10,
+            "maxM": 1.215713238411631e-9
+          },
+          "loo": {
+            "rmsM": 110.87486799653112,
+            "maxM": 231.0289032120726
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 9.283628366052454e-10,
+              "looM": 116.79624051047931
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 5.083910494508206e-10,
+              "looM": 231.0289032120726
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 6.631177509138244e-10,
+              "looM": 225.76283770449973
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 1.1272977301635124e-9,
+              "looM": 226.0233633420138
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 1.215713238411631e-9,
+              "looM": 85.67812839158061
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 1.1936093613496012e-9,
+              "looM": 80.49742546514702
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 6.189085577368303e-10,
+              "looM": 87.6707395506345
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 5.525969265507413e-10,
+              "looM": 49.274348533700234
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 5.968046806748006e-10,
+              "looM": 20.914937796172946
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 5.525969265507413e-10,
+              "looM": 18.480442903952493
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 5.08389172426682e-10,
+              "looM": 39.267404337717004
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 4.4207754124059306e-10,
+              "looM": 11.128906683094755
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.862852953646523e-10,
+              "looM": 24.444551417454083
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 4.862852953646523e-10,
+              "looM": 29.368638489145976
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 4.641814183026227e-10,
+              "looM": 34.103806796516615
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 4.199736641785634e-10,
+              "looM": 52.985265737114396
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 6.189085577368303e-10,
+              "looM": 88.02193706030435
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 6.410124347988599e-10,
+              "looM": 112.46891188583201
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 28.69715887157212,
+            "maxM": 49.07992203822974
+          },
+          "loo": {
+            "rmsM": 111.25296263839897,
+            "maxM": 256.293416106463
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 12.663095152106,
+              "looM": 131.91157689226517
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 29.869264615221855,
+              "looM": 230.65986150725274
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 12.792702008165692,
+              "looM": 256.293416106463
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 27.922637842434884,
+              "looM": 232.83651119305156
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 28.772514103724816,
+              "looM": 71.98944563810825
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 26.3832785956074,
+              "looM": 65.51572338270421
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 49.07992203822974,
+              "looM": 62.909978589642456
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 24.871679756982214,
+              "looM": 30.72636867582736
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 13.6499365202009,
+              "looM": 16.63568138300446
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 12.133236354451753,
+              "looM": 14.771993867655544
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 23.72317166058421,
+              "looM": 29.234490510175732
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 32.02086129802337,
+              "looM": 41.54719451886033
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 27.990510354865826,
+              "looM": 35.85116033273762
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 35.65402596187249,
+              "looM": 45.88007830656946
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 18.55923906486041,
+              "looM": 31.640867157203807
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 35.81714161064658,
+              "looM": 59.116037363549005
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 40.85726302925871,
+              "looM": 58.08336150018131
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 31.674735453191925,
+              "looM": 59.783243142815124
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    },
+    {
+      "id": "G11",
+      "count": 18,
+      "baselineLooRmsM": 77.78134402871518,
+      "trials": [
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 35.647872705399564,
+            "maxM": 70.92154531319883
+          },
+          "loo": {
+            "rmsM": 55.449743018030325,
+            "maxM": 108.58316229898976
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 38.94795431280671,
+              "looM": 100.73875937583391
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 29.743504151230475,
+              "looM": 59.42851383701331
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 16.052727132572137,
+              "looM": 75.60255695102113
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 46.06520040004793,
+              "looM": 108.58316229898976
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 13.032641914741335,
+              "looM": 24.632955942139077
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 16.245495701176985,
+              "looM": 30.37561971451816
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 35.8872680998923,
+              "looM": 40.56690607498643
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 70.92154531319883,
+              "looM": 79.00103538003351
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 32.204167415682896,
+              "looM": 35.66229099490111
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 13.597695636037763,
+              "looM": 15.024079234720155
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 12.148457263683165,
+              "looM": 13.482596336956123
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 57.10968298962924,
+              "looM": 63.86259996879985
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 17.869923829337417,
+              "looM": 20.215349061672818
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 66.6028161135044,
+              "looM": 75.0507571064872
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 19.37841757952286,
+              "looM": 23.87684541487413
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 36.55622177019266,
+              "looM": 44.97457588130569
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 13.952855403552345,
+              "looM": 16.619293636705546
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 6.93519930160681,
+              "looM": 8.585479289369681
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 28.102451929336848,
+            "maxM": 59.954457849730645
+          },
+          "loo": {
+            "rmsM": 59.72421344688063,
+            "maxM": 114.47216229267563
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 14.053223083426182,
+              "looM": 114.47216229267563
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 9.83054387692801,
+              "looM": 64.83891915782034
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 6.597625106916136,
+              "looM": 102.01710225541218
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 15.72124558333579,
+              "looM": 113.41131549641437
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 8.441554752902382,
+              "looM": 19.605236141487882
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 7.966574923101129,
+              "looM": 18.202327791708882
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 36.88417244893762,
+              "looM": 46.61153656343972
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 59.954457849730645,
+              "looM": 73.0227936791438
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 22.387930266332987,
+              "looM": 26.87427886825985
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 7.644099721994203,
+              "looM": 9.112824321986649
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 11.54389640103452,
+              "looM": 13.930000511629892
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 46.720209332341575,
+              "looM": 59.714651011530314
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 17.714057138273922,
+              "looM": 22.33542521634596
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 57.834897365168345,
+              "looM": 72.42320338982498
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 17.06241397154036,
+              "looM": 27.428446913872822
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 37.38515372873741,
+              "looM": 60.3487264929299
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 16.0540186766242,
+              "looM": 23.00072766385872
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 7.7507849203029195,
+              "looM": 13.227655083261332
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 45.1983356677618,
+            "maxM": 81.82771691605429
+          },
+          "loo": {
+            "rmsM": 62.90799740264724,
+            "maxM": 115.24015967080344
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 54.22056190991415,
+              "looM": 105.78449645477522
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 34.872095246126214,
+              "looM": 53.33340499865386
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 14.67003626604673,
+              "looM": 52.51438904917442
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 63.84311487109099,
+              "looM": 115.24015967080344
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 59.864969225167094,
+              "looM": 88.41094226407
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 65.33491525921444,
+              "looM": 95.40147634117564
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 32.110218077501564,
+              "looM": 34.88675739127453
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 81.82771691605429,
+              "looM": 88.6591283711879
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 43.54235171464664,
+              "looM": 47.130232344136886
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 25.69273327875263,
+              "looM": 27.805850252488067
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 22.709619114399036,
+              "looM": 24.6036083225893
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 58.115266034725266,
+              "looM": 63.233957085085045
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 11.995365116828214,
+              "looM": 13.050211053253935
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 57.77786978423901,
+              "looM": 62.937854348542665
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 11.548058041248899,
+              "looM": 12.751037946855595
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 50.34060854152241,
+              "looM": 55.62560153180074
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 8.049469316716868,
+              "looM": 8.843126107752617
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 9.052943240907842,
+              "looM": 10.019284166006928
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 17.68992882208413,
+            "maxM": 41.14481903722512
+          },
+          "loo": {
+            "rmsM": 65.69738304932275,
+            "maxM": 132.5569489398622
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 2.1837608812487295,
+              "looM": 132.5569489398622
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 1.331987055079546,
+              "looM": 69.78088590794182
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 1.0946126693084854,
+              "looM": 129.232089362248
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 2.1986219928750868,
+              "looM": 120.97650712785368
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 6.62978204294048,
+              "looM": 33.11100981832428
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 6.385504676569418,
+              "looM": 31.545933355070517
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 31.50966703886647,
+              "looM": 57.68286121820019
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 41.14481903722512,
+              "looM": 63.80511519455691
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.377573607337782,
+              "looM": 6.569320117916517
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 5.311171953937354,
+              "looM": 7.971224586802425
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 10.517432559951645,
+              "looM": 16.781049269958217
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 19.353358864279265,
+              "looM": 40.723221095376445
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 9.719071411800261,
+              "looM": 18.802373351205244
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 32.63953837261324,
+              "looM": 58.919957731866106
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 16.519384684835142,
+              "looM": 44.936885034145426
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 27.161123305398533,
+              "looM": 75.47219648625902
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 9.136443980572066,
+              "looM": 17.309296165320063
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 7.956992295994369,
+              "looM": 23.17361134817849
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 7.154485507660465,
+            "maxM": 19.727802401122084
+          },
+          "loo": {
+            "rmsM": 66.00839911568288,
+            "maxM": 133.81793703751663
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.23132279495774213,
+              "looM": 133.81793703751663
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 0.13700702273358714,
+              "looM": 69.89671177653513
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 0.10355964982198253,
+              "looM": 116.99973556729208
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 0.2265157996541939,
+              "looM": 120.374617943472
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 1.265365646120132,
+              "looM": 38.63020999466058
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 1.2390735226901388,
+              "looM": 37.5435836341864
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 13.025059930976099,
+              "looM": 67.81583471437695
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 19.727802401122084,
+              "looM": 58.652323504634154
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 6.082382306883632,
+              "looM": 17.34220651006876
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 4.291916933956362,
+              "looM": 13.045498152746314
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 4.757915889128895,
+              "looM": 17.76929020703975
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 4.350405657365605,
+              "looM": 29.051081818040647
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.887524615384242,
+              "looM": 28.154184089851086
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 10.994134625282998,
+              "looM": 53.006487228910665
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 6.649468855611008,
+              "looM": 63.797204862513816
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 8.178514652256588,
+              "looM": 82.48500332483904
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 1.5234009603968106,
+              "looM": 7.5920917509874615
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 2.0218529834389707,
+              "looM": 18.72936189129961
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 4.55649250174763e-9,
+            "maxM": 8.692193324164063e-9
+          },
+          "loo": {
+            "rmsM": 66.22956337669025,
+            "maxM": 133.79451380320998
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 6.715542002638607e-9,
+              "looM": 133.79451380320998
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 6.283763473493037e-9,
+              "looM": 69.56473197270762
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 5.492135344109641e-9,
+              "looM": 109.29545330783664
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 8.692193324164063e-9,
+              "looM": 119.30464102062273
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 5.770207806239536e-9,
+              "looM": 39.971898265697284
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 6.853235841508094e-9,
+              "looM": 38.94373850436042
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 3.445423077132868e-9,
+              "looM": 75.97004710171694
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 3.4079920995824357e-9,
+              "looM": 54.866612939104066
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 3.395716056908041e-9,
+              "looM": 26.85321520343817
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.3594621821131496e-9,
+              "looM": 8.967218099662047
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 2.1959454086571406e-9,
+              "looM": 15.29182229922033
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 1.7019985337762832e-9,
+              "looM": 30.48864014430542
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 2.1290406173237955e-9,
+              "looM": 31.106512795685298
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 3.267413711773611e-9,
+              "looM": 52.15768125535495
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 2.079997175376043e-9,
+              "looM": 69.48414902447425
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.0478022643539525e-9,
+              "looM": 86.3841131203742
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 3.5228130678661135e-9,
+              "looM": 9.140130131856989
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 3.6034744129206186e-9,
+              "looM": 10.590900235345739
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 58.52427287043709,
+            "maxM": 113.95433572457381
+          },
+          "loo": {
+            "rmsM": 75.01558720384452,
+            "maxM": 138.44777451289204
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 65.01152074382641,
+              "looM": 119.68288064863391
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 32.679074262564356,
+              "looM": 48.363385079343196
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 10.776308127242876,
+              "looM": 37.09269228578353
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 75.93568168188929,
+              "looM": 128.94956866727335
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 107.49540863420009,
+              "looM": 132.52642343764836
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 113.95433572457381,
+              "looM": 138.44777451289204
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 30.194164381845045,
+              "looM": 32.533973177732285
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 90.50210249229976,
+              "looM": 97.29699927708864
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 53.335466484793876,
+              "looM": 57.26396567886348
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 37.04800258261348,
+              "looM": 39.71984453294121
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 34.86179488107276,
+              "looM": 37.334650644342794
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 60.51338864407384,
+              "looM": 65.07847582645408
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 19.053742102710036,
+              "looM": 20.38399732226467
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 48.45123644450659,
+              "looM": 51.96848190370684
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 19.631835726484677,
+              "looM": 20.992630568824634
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 67.15784645304879,
+              "looM": 71.90892660955485
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 4.63988907776297,
+              "looM": 5.03375496136767
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 10.467026163070923,
+              "looM": 11.399639008465732
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    },
+    {
+      "id": "G16",
+      "count": 6,
+      "baselineLooRmsM": 152.5278004870376,
+      "trials": [
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 34.53713094165449,
+            "maxM": 45.90171469027075
+          },
+          "loo": {
+            "rmsM": 159.2571584567023,
+            "maxM": 308.52291138176287
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 37.766037644535814,
+              "looM": 168.11106411011448
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 37.8267844068759,
+              "looM": 50.21135865280658
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 23.1833420237117,
+              "looM": 30.758263062259278
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 37.76135807538013,
+              "looM": 80.19692480979482
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 45.90171469027075,
+              "looM": 137.224416053373
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 15.145505655496388,
+              "looM": 308.52291138176287
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 16.219313715326525,
+            "maxM": 25.458804978698367
+          },
+          "loo": {
+            "rmsM": 170.01543949627955,
+            "maxM": 344.93378392792744
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 16.555925978964677,
+              "looM": 166.2203435573959
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 25.458804978698367,
+              "looM": 42.23183122801351
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 11.022265360328676,
+              "looM": 18.25616529134541
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 10.786989089233185,
+              "looM": 81.15841674379685
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 19.764710108907945,
+              "looM": 134.60860428340226
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 5.258721844594535,
+              "looM": 344.93378392792744
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 8.427339704208327,
+            "maxM": 15.726689092545683
+          },
+          "loo": {
+            "rmsM": 178.76196865422625,
+            "maxM": 377.36520014325424
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 2.5765065963303493,
+              "looM": 167.50571516277498
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 15.726689092545683,
+              "looM": 31.13590653366601
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 12.74996824908334,
+              "looM": 25.067845970533924
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 1.1404192636630663,
+              "looM": 69.49896253740584
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 2.7797834482827284,
+              "looM": 121.83777066412966
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 0.7508318169295183,
+              "looM": 377.36520014325424
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 7.067800945530885,
+            "maxM": 12.375952106343279
+          },
+          "loo": {
+            "rmsM": 200.79859924123042,
+            "maxM": 447.8015815865789
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.29905567937762606,
+              "looM": 183.43661424440091
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 12.375952106343279,
+              "looM": 29.093110942620278
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 12.100845683012057,
+              "looM": 28.214465988724093
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 0.10287178650219854,
+              "looM": 57.025714369017415
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 0.14020158442714664,
+              "looM": 53.39306632799553
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 0.09236375483627686,
+              "looM": 447.8015815865789
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 3.0219455208460677,
+            "maxM": 5.238785861795677
+          },
+          "loo": {
+            "rmsM": 353.5319529706555,
+            "maxM": 691.6084732450255
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.040295910718330295,
+              "looM": 244.19999816360024
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 5.238785861795677,
+              "looM": 28.87679661562787
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 5.227822075712232,
+              "looM": 28.577458730074405
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 0.08245198026111439,
+              "looM": 362.64201116347124
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 0.09641452143942499,
+              "looM": 280.7015540910321
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 0.014476715830936935,
+              "looM": 691.6084732450255
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 0.4495329412453111,
+            "maxM": 0.7784888389695898
+          },
+          "loo": {
+            "rmsM": 448.0550424982163,
+            "maxM": 843.8786213548753
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.004697965884879795,
+              "looM": 283.4140203790707
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 0.7784888389695898,
+              "looM": 28.855052666055258
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 0.7784576833971768,
+              "looM": 28.614281784670787
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 0.012902847883514942,
+              "looM": 501.96268973856087
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 0.01569180232641123,
+              "looM": 398.0544674353662
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 0.0017796967244666658,
+              "looM": 843.8786213548753
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 1.0674096844681487e-8,
+            "maxM": 2.6004107557579323e-8
+          },
+          "loo": {
+            "rmsM": 463.6176478976639,
+            "maxM": 870.2710108834834
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 2.5687139881165624e-9,
+              "looM": 290.2816501467477
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 6.631163118608895e-11,
+              "looM": 28.852635422619485
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 8.841550824811861e-11,
+              "looM": 28.618379163353172
+            },
+            {
+              "name": "Sultan Shoal Lighthouse",
+              "fitM": 8.178434512950971e-10,
+              "looM": 523.091729342836
+            },
+            {
+              "name": "Raffles Lighthouse (Pulau Satumu)",
+              "fitM": 3.5366203299247444e-10,
+              "looM": 415.6157219755381
+            },
+            {
+              "name": "Horsburgh Lighthouse (Pedra Branca)",
+              "fitM": 2.6004107557579323e-8,
+              "looM": 870.2710108834834
+            }
+          ]
+        }
+      ],
+      "adopted": false,
+      "qualification": "Existing source/ground correspondence limitations remain. A smaller LOO error alone cannot certify an uncertain landmark or extrapolation."
+    }
+  ]
+}

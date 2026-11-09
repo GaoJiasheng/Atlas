@@ -1,0 +1,205 @@
+{
+  "id" : "23618e83-c884-4d56-a47e-b1e8909dc2a7",
+  "uuid" : "23618e83-c884-4d56-a47e-b1e8909dc2a7",
+  "name" : "Singapore, Singapore, Series: GSGS 4923, Sheet: Singapore, 1958, 1:63 360",
+  "handle" : "1885/146329",
+  "metadata" : {
+    "dc.coverage.spatial" : [ {
+      "value" : "Singapore",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    }, {
+      "value" : "1:63 360",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 1
+    } ],
+    "dc.date.accessioned" : [ {
+      "value" : "2018-08-14T02:02:30Z",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.date.available" : [ {
+      "value" : "2018-08-14T02:02:34Z",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.date.issued" : [ {
+      "value" : "1958",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.format.extent" : [ {
+      "value" : "167 MB",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    }, {
+      "value" : "300 dpi",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 1
+    } ],
+    "dc.format.mimetype" : [ {
+      "value" : "image/tiff",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.identifier" : [ {
+      "value" : "3571",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.identifier.uri" : [ {
+      "value" : "http://hdl.handle.net/1885/146329",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.language.iso" : [ {
+      "value" : "en",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.provenance" : [ {
+      "value" : "Date Scanned: 31/01/2012",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.publisher" : [ {
+      "value" : "United Kingdon: D Survey War Office and Air Ministry",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.relation.ispartofseries" : [ {
+      "value" : "Series: GSGS 4923",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.relation.isversionof" : [ {
+      "value" : "1-GSGS",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.rights" : [ {
+      "value" : "Copyright Expired",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.subject.other" : [ {
+      "value" : "Singapore -- Maps",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.title" : [ {
+      "value" : "Singapore, Singapore, Series: GSGS 4923, Sheet: Singapore, 1958, 1:63 360",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dc.type" : [ {
+      "value" : "Cartographic material",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "dcterms.accessRights" : [ {
+      "value" : "Open Access",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "local.description.notes" : [ {
+      "value" : "Map Library Server, Asia Pacific Map Collection",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "local.identifier.sheetNumber" : [ {
+      "value" : "Sheet: Singapore",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ],
+    "local.type.status" : [ {
+      "value" : "Published Version",
+      "language" : null,
+      "authority" : null,
+      "confidence" : -1,
+      "place" : 0
+    } ]
+  },
+  "inArchive" : true,
+  "discoverable" : true,
+  "withdrawn" : false,
+  "lastModified" : "2022-08-03T00:33:42.815+00:00",
+  "entityType" : null,
+  "type" : "item",
+  "_links" : {
+    "accessStatus" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/accessStatus"
+    },
+    "bundles" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/bundles"
+    },
+    "identifiers" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/identifiers"
+    },
+    "mappedCollections" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/mappedCollections"
+    },
+    "owningCollection" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/owningCollection"
+    },
+    "relationships" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/relationships"
+    },
+    "version" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/version"
+    },
+    "templateItemOf" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/templateItemOf"
+    },
+    "thumbnail" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/thumbnail"
+    },
+    "self" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7"
+    }
+  }
+}

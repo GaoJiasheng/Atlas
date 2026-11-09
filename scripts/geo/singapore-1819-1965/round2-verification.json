@@ -1,0 +1,97 @@
+{
+  "date": "2026-11-09",
+  "status": "complete-with-documented-approximation",
+  "sourceGuard": "passed",
+  "counts": {
+    "date": "2026-11-09",
+    "before": {
+      "coastBytes": 243491,
+      "controlBytes": 567154,
+      "coastArcs": 2517,
+      "controlArcs": 2473,
+      "coastVertices": 17618,
+      "coastRings": {
+        "rings": 512,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      },
+      "controlRings": {
+        "rings": 2141,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      },
+      "keyframes": 23,
+      "eras": 6,
+      "triangles": {
+        "L0": 4823,
+        "L1": 4994,
+        "L2": 5075,
+        "L3": 4844,
+        "L4": 4576,
+        "L5": 8236
+      }
+    },
+    "after": {
+      "coastBytes": 272857,
+      "controlBytes": 635244,
+      "coastArcs": 1825,
+      "controlArcs": 1948,
+      "coastVertices": 21829,
+      "coastRings": {
+        "rings": 481,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      },
+      "controlRings": {
+        "rings": 2700,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      },
+      "keyframes": 23,
+      "eras": 6,
+      "triangles": {
+        "L0": 6148,
+        "L1": 6322,
+        "L2": 6389,
+        "L3": 6157,
+        "L4": 4601,
+        "L5": 7299
+      }
+    },
+    "jurongSourceWater": {
+      "before": {
+        "parts": 1,
+        "vertices": 1136,
+        "holes": 2,
+        "sourceWaterPixels": 32181
+      },
+      "after": {
+        "parts": 1,
+        "vertices": 847,
+        "holes": 1
+      }
+    },
+    "triangleMethod": "CPU earcut on decoded land polygons, one coast era at a time; not runtime tiled GPU counts",
+    "chapters": 12,
+    "teachingFacts": "unchanged; only S376 bilingual source-method threshold wording corrected"
+  },
+  "gates": {
+    "check": "passed",
+    "validate": "passed",
+    "test": {
+      "passed": true,
+      "suites": 275,
+      "tests": 6523,
+      "config": "ephemeral /tmp/atlas-sg-maps-vitest.mjs; no repository config"
+    },
+    "build": {
+      "passed": true,
+      "pages": 191
+    },
+    "freshRebuild": "passed",
+    "jsGzipKiB": 480.17,
+    "jsGrowthKiB": 0
+  },
+  "notReconstructed": "Exact later1961\u20131965 reclamation footprints; dates of individual corrections unqualified.",
+  "teachingFacts": "unchanged; S376 method threshold wording corrected in EN/ZH."
+}

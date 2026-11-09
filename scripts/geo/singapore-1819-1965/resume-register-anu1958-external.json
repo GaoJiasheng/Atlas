@@ -1,0 +1,546 @@
+{
+  "controlPoints": [
+    {
+      "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+      "svg": [
+        3417,
+        3775
+      ],
+      "lnglat": [
+        103.776068175,
+        1.3402483
+      ],
+      "nativeRead": [
+        284,
+        288
+      ],
+      "searchWindow": [
+        3133,
+        3487,
+        3693,
+        4047
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+      "svg": [
+        3107,
+        2973
+      ],
+      "lnglat": [
+        103.7610695,
+        1.379693
+      ],
+      "nativeRead": [
+        282,
+        296
+      ],
+      "searchWindow": [
+        2825,
+        2677,
+        3385,
+        3237
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Yio Chu Kang Road / Upper Serangoon Road",
+      "svg": [
+        5516,
+        3487
+      ],
+      "lnglat": [
+        103.8779647,
+        1.3539814
+      ],
+      "nativeRead": [
+        292,
+        285
+      ],
+      "searchWindow": [
+        5224,
+        3202,
+        5784,
+        3762
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Clementi Road / Pasir Panjang Road",
+      "svg": [
+        3250,
+        4758
+      ],
+      "lnglat": [
+        103.7680848,
+        1.2923909
+      ],
+      "nativeRead": [
+        280,
+        291
+      ],
+      "searchWindow": [
+        2970,
+        4467,
+        3530,
+        5027
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Bukit Timah Road / Adam-Farrer Road",
+      "svg": [
+        4178,
+        4121
+      ],
+      "lnglat": [
+        103.81328475,
+        1.3230049
+      ],
+      "nativeRead": [
+        281,
+        281
+      ],
+      "searchWindow": [
+        3897,
+        3840,
+        4457,
+        4400
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Thomson Road / Balestier Road",
+      "svg": [
+        4756,
+        4053
+      ],
+      "lnglat": [
+        103.8419455,
+        1.3263877
+      ],
+      "nativeRead": [
+        271,
+        283
+      ],
+      "searchWindow": [
+        4485,
+        3770,
+        5045,
+        4330
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Changi Road / Joo Chiat Road",
+      "svg": [
+        5919,
+        4265
+      ],
+      "lnglat": [
+        103.8975743,
+        1.3161647
+      ],
+      "nativeRead": [
+        292,
+        287
+      ],
+      "searchWindow": [
+        5627,
+        3978,
+        6187,
+        4538
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Tanjong Changi",
+      "svg": [
+        7708,
+        2693
+      ],
+      "lnglat": [
+        103.9865343,
+        1.3928616
+      ],
+      "nativeRead": [
+        257,
+        295
+      ],
+      "searchWindow": [
+        7451,
+        2398,
+        8011,
+        2958
+      ],
+      "readUncertaintyPx": 10,
+      "status": "native-source-reading-candidate",
+      "qualification": "Rocky named cape candidate; generalised shoreline position is not a fixed surveyed monument. Changi multiple-lobes position is additionally ambiguous."
+    },
+    {
+      "name": "Tanjong Berlayer",
+      "svg": [
+        4009,
+        5373
+      ],
+      "lnglat": [
+        103.8051074,
+        1.2622889
+      ],
+      "nativeRead": [
+        279,
+        291
+      ],
+      "searchWindow": [
+        3730,
+        5082,
+        4290,
+        5642
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Rocky named cape candidate; generalised shoreline position is not a fixed surveyed monument. Changi multiple-lobes position is additionally ambiguous."
+    },
+    {
+      "name": "Tanjong Rimau",
+      "svg": [
+        4031,
+        5420
+      ],
+      "lnglat": [
+        103.8066725,
+        1.2597496
+      ],
+      "nativeRead": [
+        269,
+        286
+      ],
+      "searchWindow": [
+        3762,
+        5134,
+        4322,
+        5694
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Rocky named cape candidate; generalised shoreline position is not a fixed surveyed monument. Changi multiple-lobes position is additionally ambiguous."
+    },
+    {
+      "name": "Bridge Street river crossing / later Elgin Bridge centre",
+      "svg": [
+        4914,
+        4834
+      ],
+      "lnglat": [
+        103.8493033,
+        1.2890664
+      ],
+      "nativeRead": [
+        278,
+        300
+      ],
+      "searchWindow": [
+        4636,
+        4534,
+        5196,
+        5094
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / High Street",
+      "svg": [
+        4933,
+        4808
+      ],
+      "lnglat": [
+        103.850015,
+        1.2901963
+      ],
+      "nativeRead": [
+        282,
+        297
+      ],
+      "searchWindow": [
+        4651,
+        4511,
+        5211,
+        5071
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / Coleman Street",
+      "svg": [
+        4951,
+        4775
+      ],
+      "lnglat": [
+        103.8509674,
+        1.2917649
+      ],
+      "nativeRead": [
+        280,
+        296
+      ],
+      "searchWindow": [
+        4671,
+        4479,
+        5231,
+        5039
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / Stamford Road canal",
+      "svg": [
+        4977,
+        4738
+      ],
+      "lnglat": [
+        103.8520429,
+        1.2935887
+      ],
+      "nativeRead": [
+        284,
+        297
+      ],
+      "searchWindow": [
+        4693,
+        4441,
+        5253,
+        5001
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / Bras Basah Road",
+      "svg": [
+        4996,
+        4705
+      ],
+      "lnglat": [
+        103.8531036,
+        1.2951261
+      ],
+      "nativeRead": [
+        282,
+        295
+      ],
+      "searchWindow": [
+        4714,
+        4410,
+        5274,
+        4970
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Beach Road / Bras Basah Road",
+      "svg": [
+        5029,
+        4730
+      ],
+      "lnglat": [
+        103.8546543,
+        1.2939345
+      ],
+      "nativeRead": [
+        283,
+        296
+      ],
+      "searchWindow": [
+        4746,
+        4434,
+        5306,
+        4994
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / Middle Road",
+      "svg": [
+        5037,
+        4643
+      ],
+      "lnglat": [
+        103.8549985,
+        1.2976349
+      ],
+      "nativeRead": [
+        284,
+        285
+      ],
+      "searchWindow": [
+        4753,
+        4358,
+        5313,
+        4918
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Beach Road / Middle Road",
+      "svg": [
+        5063,
+        4668
+      ],
+      "lnglat": [
+        103.8562528,
+        1.2965189
+      ],
+      "nativeRead": [
+        284,
+        287
+      ],
+      "searchWindow": [
+        4779,
+        4381,
+        5339,
+        4941
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "North Bridge Road / Arab Street",
+      "svg": [
+        5108,
+        4564
+      ],
+      "lnglat": [
+        103.8585234,
+        1.301971
+      ],
+      "nativeRead": [
+        282,
+        294
+      ],
+      "searchWindow": [
+        4826,
+        4270,
+        5386,
+        4830
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "Beach Road / Arab Street",
+      "svg": [
+        5136,
+        4594
+      ],
+      "lnglat": [
+        103.8599148,
+        1.3002979
+      ],
+      "nativeRead": [
+        282,
+        290
+      ],
+      "searchWindow": [
+        4854,
+        4304,
+        5414,
+        4864
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "South Bridge Road / Upper Pickering Street",
+      "svg": [
+        4877,
+        4899
+      ],
+      "lnglat": [
+        103.8471684,
+        1.2854539
+      ],
+      "nativeRead": [
+        284,
+        291
+      ],
+      "searchWindow": [
+        4593,
+        4608,
+        5153,
+        5168
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    },
+    {
+      "name": "South Bridge Road / Cross Street",
+      "svg": [
+        4852,
+        4940
+      ],
+      "lnglat": [
+        103.8461028,
+        1.2836322
+      ],
+      "nativeRead": [
+        281,
+        295
+      ],
+      "searchWindow": [
+        4571,
+        4645,
+        5131,
+        5205
+      ],
+      "readUncertaintyPx": 3,
+      "status": "native-source-reading-candidate",
+      "qualification": "Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference."
+    }
+  ],
+  "excludedCandidates": [
+    {
+      "name": "Nee Soon Road / Springleaf Road",
+      "reason": "Cannot establish the modern Nee Soon/Springleaf intersection among 1958 unlabelled minor village roads."
+    },
+    {
+      "name": "Braddell Road / Thomson Road",
+      "reason": "1958 Braddell-Thomson branch lies materially north of the modern junction; later road realignment cannot be excluded."
+    },
+    {
+      "name": "Holland Road / Farrer Road",
+      "reason": "1958 Farrer-Holland intersection lies west of current junction; clear changed road geometry. Excluded for correspondence, before fitting."
+    }
+  ]
+}

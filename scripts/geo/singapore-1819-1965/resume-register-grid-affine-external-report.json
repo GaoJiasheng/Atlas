@@ -1,0 +1,849 @@
+{
+  "qualification": "Diagnostic only; no live geometry changed. Internal grid calibration and external georegistration separated. Scale/shear are fitted and explicitly not held fixed. All points in each pre-existing named set retained.",
+  "reports": [
+    {
+      "map": "G9",
+      "set": "all18-original-observations",
+      "externalCount": 18,
+      "independentGridCount": 16,
+      "method": "16-source-grid poly2 scan calibration fixed; full6parameter affine grid-to-ellipsoidalWGS84-LAEA transformation; leave-one-external-out holds gridcalibration fixed; no residual pruning",
+      "fit": {
+        "rmsM": 69.78602283690837,
+        "maxM": 153.23544071377555
+      },
+      "loo": {
+        "rmsM": 107.88074643387644,
+        "maxM": 245.98833749740083
+      },
+      "budget": {
+        "rmsM": 40,
+        "maxM": 80
+      },
+      "numericallyWithinBudget": false,
+      "externalQualification": "Existing point identity/generalisation limitations remain; a numerical pass alone cannot qualify ambiguous original observations.",
+      "affine": {
+        "matrix": [
+          [
+            1.0055847945004643,
+            0.0007200247619039146
+          ],
+          [
+            -0.023738986967146047,
+            1.0412515813604841
+          ]
+        ],
+        "translationMetres": [
+          -26276.74462137117,
+          19789.39375405811
+        ],
+        "axisScales": [
+          1.0058649603365093,
+          1.0412518303087714
+        ],
+        "axisScaleChangePercent": [
+          0.5864960336509295,
+          4.125183030877144
+        ],
+        "determinant": 1.0470838501241049,
+        "principalScales": [
+          1.0447161945435703,
+          1.0022663146153
+        ],
+        "axisAngleDegrees": 91.3127186596511,
+        "shearDeviationFrom90Degrees": -1.3127186596510967,
+        "rotationEastAxisDegrees": -1.352338645987679
+      },
+      "residuals": [
+        {
+          "name": "Tanjong Changi",
+          "errorM": 60.9843249258646
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "errorM": 153.23544071377555
+        },
+        {
+          "name": "Tanjong Tajam",
+          "errorM": 67.88602156334144
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "errorM": 120.64752181951398
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 4.341530827466042
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 71.50913926332656
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 58.6673180385028
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 22.249046777782876
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 21.178560336051685
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 6.865785318231708
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 42.6249764126123
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 49.433045198767125
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 30.47960112746629
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 25.645271209743456
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 90.94537365929034
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 103.46078110278758
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 11.459747244858926
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 82.33107469801938
+        }
+      ],
+      "looResiduals": [
+        {
+          "name": "Tanjong Changi",
+          "errorM": 114.70240232359531
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "errorM": 220.93654014343326
+        },
+        {
+          "name": "Tanjong Tajam",
+          "errorM": 245.98833749740083
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "errorM": 196.17211858326854
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 5.163819357346537
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 83.65442422985384
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 63.179871424643586
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 23.916244795105065
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 22.72420686198052
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 7.349359274510305
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 45.537429349886075
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 53.005553577309925
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 32.501204696584615
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 27.40762324451614
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 96.70926063917705
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 110.08533725577175
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 12.413531286174816
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 89.7224387992052
+        }
+      ]
+    },
+    {
+      "map": "G11",
+      "set": "all18-original-observations",
+      "externalCount": 18,
+      "independentGridCount": 16,
+      "method": "16-source-grid poly2 scan calibration fixed; full6parameter affine grid-to-ellipsoidalWGS84-LAEA transformation; leave-one-external-out holds gridcalibration fixed; no residual pruning",
+      "fit": {
+        "rmsM": 61.75553046593941,
+        "maxM": 124.41716320382332
+      },
+      "loo": {
+        "rmsM": 77.6113857810437,
+        "maxM": 145.77799186956858
+      },
+      "budget": {
+        "rmsM": 30,
+        "maxM": 60
+      },
+      "numericallyWithinBudget": false,
+      "externalQualification": "Existing point identity/generalisation limitations remain; a numerical pass alone cannot qualify ambiguous original observations.",
+      "affine": {
+        "matrix": [
+          [
+            1.0099233452710905,
+            -0.006224241200470715
+          ],
+          [
+            -0.007281012130988529,
+            1.0127025789279287
+          ]
+        ],
+        "translationMetres": [
+          -446831.87213656685,
+          -191520.66155809897
+        ],
+        "axisScales": [
+          1.0099495910495742,
+          1.0127217063664624
+        ],
+        "axisScaleChangePercent": [
+          0.9949591049574158,
+          1.2721706366462415
+        ],
+        "determinant": 1.0227066574998676,
+        "principalScales": [
+          1.018207228201423,
+          1.00441897206563
+        ],
+        "axisAngleDegrees": 90.76521016108305,
+        "shearDeviationFrom90Degrees": -0.7652101610830471,
+        "rotationEastAxisDegrees": -0.41306505109810315
+      },
+      "residuals": [
+        {
+          "name": "Tanjong Changi",
+          "errorM": 67.92695851198732
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "errorM": 32.29489338776068
+        },
+        {
+          "name": "Tanjong Tajam",
+          "errorM": 10.278104535750963
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "errorM": 78.09191729722991
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 118.10290600977658
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 124.41716320382332
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 29.883840496581968
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 92.01115068593492
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 55.21274341713947
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 39.42904039507386
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 37.19145893238435
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 61.688134294158615
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 20.980786346097634
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 46.749413390274405
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 21.942524777825135
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 70.4366988775338
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 3.524941769270513
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 11.25709938023614
+        }
+      ],
+      "looResiduals": [
+        {
+          "name": "Tanjong Changi",
+          "errorM": 123.85680521234572
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "errorM": 47.611154012471765
+        },
+        {
+          "name": "Tanjong Tajam",
+          "errorM": 35.184103869889206
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "errorM": 131.20957514900476
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 140.5121649384665
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 145.77799186956858
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 32.15886020290656
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 98.7824988927219
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 59.18685916968411
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 42.19155840363998
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 39.73514149653899
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 66.18470492655725
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 22.37122066621976
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 49.98765936603088
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 23.330445987788927
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 74.99895644161344
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 3.8182728007468905
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 12.236886165903057
+        }
+      ]
+    },
+    {
+      "map": "G35",
+      "set": "all22-original-candidates",
+      "externalCount": 22,
+      "independentGridCount": 16,
+      "method": "16-source-grid poly2 scan calibration fixed; full6parameter affine grid-to-ellipsoidalWGS84-LAEA transformation; leave-one-external-out holds gridcalibration fixed; no residual pruning",
+      "fit": {
+        "rmsM": 46.35353563510043,
+        "maxM": 89.04789107528251
+      },
+      "loo": {
+        "rmsM": 71.80013125581408,
+        "maxM": 240.52106995622773
+      },
+      "budget": {
+        "rmsM": 30,
+        "maxM": 60
+      },
+      "numericallyWithinBudget": false,
+      "externalQualification": "Existing point identity/generalisation limitations remain; a numerical pass alone cannot qualify ambiguous original observations.",
+      "affine": {
+        "matrix": [
+          [
+            1.0018689763946895,
+            0.0015044157207739772
+          ],
+          [
+            0.0006517729379993398,
+            0.9990622525929211
+          ]
+        ],
+        "translationMetres": [
+          -444734.33954508865,
+          -192353.44989517416
+        ],
+        "axisScales": [
+          1.0018691884024111,
+          0.9990633852877919
+        ],
+        "axisScaleChangePercent": [
+          0.1869188402411126,
+          -0.09366147122080726
+        ],
+        "determinant": 1.0009284958223883,
+        "principalScales": [
+          1.0022353697037012,
+          0.9986960409492441
+        ],
+        "axisAngleDegrees": 89.87644831846492,
+        "shearDeviationFrom90Degrees": 0.12355168153507634,
+        "rotationEastAxisDegrees": 0.0372741687384259
+      },
+      "residuals": [
+        {
+          "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+          "errorM": 10.4568683868569
+        },
+        {
+          "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+          "errorM": 42.1649178971667
+        },
+        {
+          "name": "Yio Chu Kang Road / Upper Serangoon Road",
+          "errorM": 81.26288078904544
+        },
+        {
+          "name": "Clementi Road / Pasir Panjang Road",
+          "errorM": 20.27899213658383
+        },
+        {
+          "name": "Bukit Timah Road / Adam-Farrer Road",
+          "errorM": 48.699536087719885
+        },
+        {
+          "name": "Thomson Road / Balestier Road",
+          "errorM": 65.53120847939894
+        },
+        {
+          "name": "Changi Road / Joo Chiat Road",
+          "errorM": 80.07653330882984
+        },
+        {
+          "name": "Tanjong Changi",
+          "errorM": 89.04789107528251
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 22.132135911433352
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 82.50822653917426
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 48.80813452593023
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 30.427101725139554
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 25.26004952930219
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 33.67486070730787
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 19.839008704420486
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 25.310682435095586
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 41.91463585318683
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 32.71311965021342
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 19.47416349493564
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 11.852206925271386
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 18.03065279365175
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 16.638873014236758
+        }
+      ],
+      "looResiduals": [
+        {
+          "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+          "errorM": 13.748079008302003
+        },
+        {
+          "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+          "errorM": 92.05839497553335
+        },
+        {
+          "name": "Yio Chu Kang Road / Upper Serangoon Road",
+          "errorM": 94.9606646588588
+        },
+        {
+          "name": "Clementi Road / Pasir Panjang Road",
+          "errorM": 24.424322394954494
+        },
+        {
+          "name": "Bukit Timah Road / Adam-Farrer Road",
+          "errorM": 53.3566743159401
+        },
+        {
+          "name": "Thomson Road / Balestier Road",
+          "errorM": 69.95122050216843
+        },
+        {
+          "name": "Changi Road / Joo Chiat Road",
+          "errorM": 89.8577812269329
+        },
+        {
+          "name": "Tanjong Changi",
+          "errorM": 240.52106995622773
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "errorM": 25.821567236890097
+        },
+        {
+          "name": "Tanjong Rimau",
+          "errorM": 97.06595424917926
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 52.1440920989303
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 32.44812111161384
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 26.87713267549135
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 35.757064825596316
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 21.029702819815427
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 26.9093857643169
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 44.32468004708095
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 34.67837219650151
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 20.572087048124715
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 12.551879512636217
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 19.369278356309664
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 17.944369892310007
+        }
+      ]
+    },
+    {
+      "map": "G35",
+      "set": "previously-declared19-roads",
+      "externalCount": 19,
+      "independentGridCount": 16,
+      "method": "16-source-grid poly2 scan calibration fixed; full6parameter affine grid-to-ellipsoidalWGS84-LAEA transformation; leave-one-external-out holds gridcalibration fixed; no residual pruning",
+      "fit": {
+        "rmsM": 33.700842952616156,
+        "maxM": 79.48061600843442
+      },
+      "loo": {
+        "rmsM": 44.45046678997745,
+        "maxM": 107.40667394948011
+      },
+      "budget": {
+        "rmsM": 30,
+        "maxM": 60
+      },
+      "numericallyWithinBudget": false,
+      "externalQualification": "Existing point identity/generalisation limitations remain; a numerical pass alone cannot qualify ambiguous original observations.",
+      "affine": {
+        "matrix": [
+          [
+            0.9969116726915672,
+            -0.00327532016672194
+          ],
+          [
+            -0.0017072117270799936,
+            0.9955569641415423
+          ]
+        ],
+        "translationMetres": [
+          -441627.12344592216,
+          -190631.56833762204
+        ],
+        "axisScales": [
+          0.9969131344909543,
+          0.9955623519262461
+        ],
+        "axisScaleChangePercent": [
+          -0.30868655090456887,
+          -0.4437648073753908
+        ],
+        "determinant": 0.992476766717085,
+        "principalScales": [
+          0.9988163346844487,
+          0.993652919213254
+        ],
+        "axisAngleDegrees": 90.2866178067297,
+        "shearDeviationFrom90Degrees": -0.2866178067296943,
+        "rotationEastAxisDegrees": -0.09811895452350655
+      },
+      "residuals": [
+        {
+          "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+          "errorM": 20.476708326815686
+        },
+        {
+          "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+          "errorM": 47.92395010002515
+        },
+        {
+          "name": "Yio Chu Kang Road / Upper Serangoon Road",
+          "errorM": 19.955480603762005
+        },
+        {
+          "name": "Clementi Road / Pasir Panjang Road",
+          "errorM": 29.722102832933608
+        },
+        {
+          "name": "Bukit Timah Road / Adam-Farrer Road",
+          "errorM": 51.024868017376235
+        },
+        {
+          "name": "Thomson Road / Balestier Road",
+          "errorM": 79.48061600843442
+        },
+        {
+          "name": "Changi Road / Joo Chiat Road",
+          "errorM": 30.995302266455408
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 45.18262228991101
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 24.435527466728104
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 22.443793915056162
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 26.247422000921038
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 17.063511051719914
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 19.698199280709336
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 39.27659036423473
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 28.325349003218303
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 17.475004140686263
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 9.888767201603454
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 19.55541244447305
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 7.694063861111538
+        }
+      ],
+      "looResiduals": [
+        {
+          "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+          "errorM": 27.2882908721916
+        },
+        {
+          "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+          "errorM": 107.40667394948011
+        },
+        {
+          "name": "Yio Chu Kang Road / Upper Serangoon Road",
+          "errorM": 35.32391188046774
+        },
+        {
+          "name": "Clementi Road / Pasir Panjang Road",
+          "errorM": 50.300381567337375
+        },
+        {
+          "name": "Bukit Timah Road / Adam-Farrer Road",
+          "errorM": 56.09502997743761
+        },
+        {
+          "name": "Thomson Road / Balestier Road",
+          "errorM": 87.16564520190057
+        },
+        {
+          "name": "Changi Road / Joo Chiat Road",
+          "errorM": 41.7020861227104
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "errorM": 49.294076777315794
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "errorM": 26.540568822658233
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "errorM": 24.25948457790587
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "errorM": 28.24797168865732
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "errorM": 18.308686136195906
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "errorM": 21.21063398633504
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "errorM": 42.00844139662728
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "errorM": 30.383070293357576
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "errorM": 18.72456882441909
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "errorM": 10.624398334651701
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "errorM": 21.624326689743466
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "errorM": 8.596633506853705
+        }
+      ]
+    }
+  ]
+}

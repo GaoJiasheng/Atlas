@@ -1,0 +1,2180 @@
+{
+  "date": "2026-11-09",
+  "method": "Regularised thin-plate spline. Smoothing selected by independent leave-one-out RMS; fitted RMS is also reported. No strict tolerance imposed.",
+  "addedControlEvidence": "georef-fixed-buildings-candidates.json; named source footprint and cached NHB/OSM identity receipts independently inspected.",
+  "reports": [
+    {
+      "id": "G9",
+      "previousControls": 18,
+      "controlPoints": [
+        {
+          "name": "Tanjong Changi",
+          "lnglat": [
+            103.9865343,
+            1.3928616
+          ],
+          "node": 10308106625,
+          "svg": [
+            8302,
+            2588
+          ]
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "lnglat": [
+            103.955389,
+            1.4189142
+          ],
+          "node": 10312600921,
+          "svg": [
+            7680,
+            2088
+          ]
+        },
+        {
+          "name": "Tanjong Tajam",
+          "lnglat": [
+            103.9269082,
+            1.423175
+          ],
+          "node": 10312600922,
+          "svg": [
+            7057,
+            2008
+          ]
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "lnglat": [
+            103.9921622,
+            1.4081417
+          ],
+          "node": 10312600919,
+          "svg": [
+            8390,
+            2260
+          ]
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "lnglat": [
+            103.8051074,
+            1.2622889
+          ],
+          "node": 10307757281,
+          "svg": [
+            4584,
+            5309
+          ]
+        },
+        {
+          "name": "Tanjong Rimau",
+          "lnglat": [
+            103.8066725,
+            1.2597496
+          ],
+          "node": 4568824207,
+          "svg": [
+            4611,
+            5371
+          ],
+          "source": "Second-pass native-raster review: northwestern rocky headland shoreline tip. First-pass G9 point lay in water south of the actual headland; corrected to the printed tip. Current OSM cape node is coordinate control only."
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "svg": [
+            5480,
+            4752
+          ],
+          "lnglat": [
+            103.8493033,
+            1.2890664
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "svg": [
+            5507,
+            4721
+          ],
+          "lnglat": [
+            103.850015,
+            1.2901963
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "svg": [
+            5525,
+            4693
+          ],
+          "lnglat": [
+            103.8509674,
+            1.2917649
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "svg": [
+            5545,
+            4654
+          ],
+          "lnglat": [
+            103.8520429,
+            1.2935887
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "svg": [
+            5568,
+            4614
+          ],
+          "lnglat": [
+            103.8531036,
+            1.2951261
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "svg": [
+            5607,
+            4643
+          ],
+          "lnglat": [
+            103.8546543,
+            1.2939345
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "svg": [
+            5600,
+            4567
+          ],
+          "lnglat": [
+            103.8549985,
+            1.2976349
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "svg": [
+            5635,
+            4593
+          ],
+          "lnglat": [
+            103.8562528,
+            1.2965189
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "svg": [
+            5670,
+            4466
+          ],
+          "lnglat": [
+            103.8585234,
+            1.301971
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "svg": [
+            5704,
+            4495
+          ],
+          "lnglat": [
+            103.8599148,
+            1.3002979
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "svg": [
+            5447,
+            4818
+          ],
+          "lnglat": [
+            103.8471684,
+            1.2854539
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "svg": [
+            5424,
+            4871
+          ],
+          "lnglat": [
+            103.8461028,
+            1.2836322
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+          "svg": [
+            5552,
+            4705
+          ],
+          "lnglat": [
+            103.85224460336309,
+            1.2923368361275789
+          ]
+        }
+      ],
+      "model": "regularised thin-plate spline λ=0.01",
+      "adopted": true,
+      "previousLooRmsM": 107.71275243591705,
+      "smoothing": 0.01,
+      "fit": {
+        "rmsM": 26.387396672144728,
+        "maxM": 76.43791364433027
+      },
+      "loo": {
+        "rmsM": 109.14808415758148,
+        "maxM": 242.07895734632453
+      },
+      "points": [
+        {
+          "name": "Tanjong Changi",
+          "fitM": 1.1924358187542305,
+          "looM": 96.6228986077343
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "fitM": 3.6039952075447874,
+          "looM": 230.08494726838228
+        },
+        {
+          "name": "Tanjong Tajam",
+          "fitM": 1.518232718346784,
+          "looM": 242.07895734632453
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "fitM": 3.2839575115005175,
+          "looM": 218.56234690668236
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "fitM": 9.51230170593747,
+          "looM": 62.60960962707981
+        },
+        {
+          "name": "Tanjong Rimau",
+          "fitM": 9.25188496296137,
+          "looM": 61.05643267597685
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "fitM": 35.03334666727515,
+          "looM": 64.73671530917896
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "fitM": 39.51229390736679,
+          "looM": 60.393025459905104
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "fitM": 15.39657839256796,
+          "looM": 22.469832803942726
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "fitM": 5.163444196514608,
+          "looM": 8.28152762885251
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "fitM": 19.872773661351303,
+          "looM": 33.928964925088664
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "fitM": 30.66131058298843,
+          "looM": 60.20221010276492
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "fitM": 22.169836212721403,
+          "looM": 44.331675636512195
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "fitM": 13.461380040872287,
+          "looM": 26.167830164546867
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "fitM": 13.145186107887174,
+          "looM": 40.51836418739471
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "fitM": 22.724945247665794,
+          "looM": 66.4181144179458
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "fitM": 33.864148732480594,
+          "looM": 69.78701357549913
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "fitM": 16.94808902484678,
+          "looM": 68.28135000720009
+        },
+        {
+          "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+          "fitM": 76.43791364433027,
+          "looM": 136.51116147659283
+        }
+      ],
+      "nativeBounds": {
+        "min": [
+          991.403635214613,
+          1013.5327108037719
+        ],
+        "max": [
+          8596.562204813714,
+          5262.422362764315
+        ]
+      },
+      "qualification": "Added independently named St Andrew’s Cathedral 1861 surviving nave footprint. Native symbol centre, not a geodetic monument; 3-pixel read and map generalisation retained. Modern coordinate is a separately attributed OSM control point only.",
+      "trials": [
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 26.387396672144728,
+            "maxM": 76.43791364433027
+          },
+          "loo": {
+            "rmsM": 109.14808415758148,
+            "maxM": 242.07895734632453
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 1.1924358187542305,
+              "looM": 96.6228986077343
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 3.6039952075447874,
+              "looM": 230.08494726838228
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 1.518232718346784,
+              "looM": 242.07895734632453
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 3.2839575115005175,
+              "looM": 218.56234690668236
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 9.51230170593747,
+              "looM": 62.60960962707981
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 9.25188496296137,
+              "looM": 61.05643267597685
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 35.03334666727515,
+              "looM": 64.73671530917896
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 39.51229390736679,
+              "looM": 60.393025459905104
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 15.39657839256796,
+              "looM": 22.469832803942726
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 5.163444196514608,
+              "looM": 8.28152762885251
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 19.872773661351303,
+              "looM": 33.928964925088664
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 30.66131058298843,
+              "looM": 60.20221010276492
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 22.169836212721403,
+              "looM": 44.331675636512195
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 13.461380040872287,
+              "looM": 26.167830164546867
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 13.145186107887174,
+              "looM": 40.51836418739471
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 22.724945247665794,
+              "looM": 66.4181144179458
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 33.864148732480594,
+              "looM": 69.78701357549913
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 16.94808902484678,
+              "looM": 68.28135000720009
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 76.43791364433027,
+              "looM": 136.51116147659283
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 75.33105009293925,
+            "maxM": 153.07330671077415
+          },
+          "loo": {
+            "rmsM": 110.20542747852761,
+            "maxM": 239.87491197905544
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 53.64380599609048,
+              "looM": 101.77905339511615
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 153.07330671077415,
+              "looM": 221.7926986721313
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 65.97341769002068,
+              "looM": 239.87491197905544
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 124.34926607482828,
+              "looM": 204.34992420188956
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 16.975732513856332,
+              "looM": 20.960785788323868
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 55.882894996447426,
+              "looM": 67.9211102415322
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 54.36791666698348,
+              "looM": 58.33358351352471
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 25.22620307940822,
+              "looM": 27.021662980955703
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 14.860053518949686,
+              "looM": 15.893960850409698
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.2428902658981253,
+              "looM": 3.4624947515395688
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 49.84241395189912,
+              "looM": 53.15870519158823
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 50.036352547438945,
+              "looM": 53.5407790315234
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 36.00685264610399,
+              "looM": 38.37975048135955
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 23.20135463308691,
+              "looM": 24.775356496033684
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 97.29270909596042,
+              "looM": 103.78538868785903
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 110.12905536807003,
+              "looM": 117.48084324056444
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 17.86282741404108,
+              "looM": 19.276937644704407
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 72.13147993178097,
+              "looM": 78.34035949249882
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 143.25709494096972,
+              "looM": 153.61698091120175
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 72.18899555785485,
+            "maxM": 147.20742350420622
+          },
+          "loo": {
+            "rmsM": 111.27443127457381,
+            "maxM": 245.34125111363647
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 49.80219782013876,
+              "looM": 101.52851240057701
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 147.20742350420622,
+              "looM": 222.26792624833715
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 64.11482621108858,
+              "looM": 245.34125111363647
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 121.83219693220715,
+              "looM": 214.31147925871122
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 32.06449580763806,
+              "looM": 48.29748080040474
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 39.706625516792755,
+              "looM": 59.31979236577175
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 54.90320586317441,
+              "looM": 59.42228782799229
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 23.994439850782108,
+              "looM": 25.899650002069173
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 14.776742745397335,
+              "looM": 15.926238531773574
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 1.5978422304143296,
+              "looM": 1.7214705346243695
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 44.802823705627276,
+              "looM": 48.35938572005371
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 47.45355458711023,
+              "looM": 51.38480172283921
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 32.60708289060822,
+              "looM": 35.37438147387886
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 22.945854853211213,
+              "looM": 24.921329275370454
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 87.95285983540617,
+              "looM": 97.38479268318602
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 100.28620583127596,
+              "looM": 110.82945394198978
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 19.978318995299578,
+              "looM": 21.85231805142782
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 67.5600212366168,
+              "looM": 74.8651344384769
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 144.52874191408156,
+              "looM": 156.2515728336216
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 38.86556822543943,
+            "maxM": 114.66209844378697
+          },
+          "loo": {
+            "rmsM": 111.59715335677174,
+            "maxM": 253.5737235211071
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 11.656338508185572,
+              "looM": 121.23467507794396
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 29.842573675106628,
+              "looM": 230.45324712048705
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 12.685544329680758,
+              "looM": 253.5737235211071
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 27.624928225857477,
+              "looM": 230.32142899720608
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 26.371408063976553,
+              "looM": 65.87513708499134
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 24.92849992650017,
+              "looM": 61.86582477292894
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 46.58915088125341,
+              "looM": 58.95455557293005
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 38.77027578524405,
+              "looM": 46.838170552989
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 10.219128572971133,
+              "looM": 12.145663141741089
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.4016336066703654,
+              "looM": 4.080083005121105
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 31.383568577890436,
+              "looM": 38.4840226970682
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 35.535120457144316,
+              "looM": 45.02176650330317
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 26.554086779331826,
+              "looM": 33.99282797760632
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 26.883483143791626,
+              "looM": 34.33503828515231
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 17.506275150281223,
+              "looM": 29.8109507538248
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 38.567243197786325,
+              "looM": 63.605840421126196
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 49.52061452021736,
+              "looM": 69.91330717182377
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 23.956956442243925,
+              "looM": 44.90058084218969
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 114.66209844378697,
+              "looM": 140.67402588624856
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 10.097446969305366,
+            "maxM": 25.749858719196997
+          },
+          "loo": {
+            "rmsM": 112.3754198740938,
+            "maxM": 251.18102255717386
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.1182984875556608,
+              "looM": 92.11088372597435
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 0.36866106490151257,
+              "looM": 230.35482912078052
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 0.16311825101601488,
+              "looM": 251.18102255717386
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 0.3330875878676306,
+              "looM": 215.41750813280407
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 1.2859320524353515,
+              "looM": 58.995079377679154
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 1.2419237841153026,
+              "looM": 57.363302471863186
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 17.192419968956763,
+              "looM": 89.41463137467467
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 20.68567494945217,
+              "looM": 65.72871228479028
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 8.860683651134377,
+              "looM": 25.441267395634437
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.960994731862654,
+              "looM": 15.734050378972285
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 4.717475428015256,
+              "looM": 20.63519313111354
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 12.778102997657214,
+              "looM": 76.91851002196356
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 5.995870285977701,
+              "looM": 37.249724268158495
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 5.024476970821603,
+              "looM": 29.434656164627036
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 4.012514237036119,
+              "looM": 49.56174944837245
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 5.976760033516558,
+              "looM": 69.54502201615959
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 11.432300433195769,
+              "looM": 80.20851727604784
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 4.872802025089342,
+              "looM": 87.88850079243426
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 25.749858719196997,
+              "looM": 137.34695591441903
+            }
+          ]
+        },
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 58.73306365936007,
+            "maxM": 137.19925114091785
+          },
+          "loo": {
+            "rmsM": 112.48343654314243,
+            "maxM": 255.09920522576508
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 39.395623355286354,
+              "looM": 113.76963400146589
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 107.83402467353986,
+              "looM": 224.9235522317489
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 47.486225344987666,
+              "looM": 255.09920522576508
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 94.16889098636683,
+              "looM": 227.01353547162321
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 37.709111896497056,
+              "looM": 72.43689157434726
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 29.11511657746811,
+              "looM": 55.7081216973261
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 52.06653077085179,
+              "looM": 58.76188317204349
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 28.62725783243615,
+              "looM": 31.795455182714072
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 10.413694445406222,
+              "looM": 11.477225050391784
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 2.140009733451301,
+              "looM": 2.354801294460733
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 36.92828142892548,
+              "looM": 40.929158605723984
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 43.61035729978057,
+              "looM": 48.54021435288155
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 26.073433424169433,
+              "looM": 29.507426110295636
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 28.353898050110274,
+              "looM": 32.01623071226432
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 57.404876443564746,
+              "looM": 72.38562315609799
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 71.71689897846504,
+              "looM": 89.33854651090596
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 37.04475042686449,
+              "looM": 43.90365471541715
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 44.06726014079901,
+              "looM": 55.77843969395054
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 137.19925114091785,
+              "looM": 152.03449508622958
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 3.984176424257386e-9,
+            "maxM": 8.125813353407614e-9
+          },
+          "loo": {
+            "rmsM": 114.40600484222853,
+            "maxM": 257.035794696416
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 3.9786978711653373e-10,
+              "looM": 91.27236388979694
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 1.9893489355826686e-10,
+              "looM": 230.52566798142115
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 6.631163118608895e-11,
+              "looM": 257.035794696416
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 2.431426476823262e-10,
+              "looM": 214.46252007584394
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 8.015402853408938e-9,
+              "looM": 58.23959138037093
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 8.125813353407614e-9,
+              "looM": 56.33279951977363
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 4.056403991921043e-9,
+              "looM": 98.20242818471415
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 3.932373790284599e-9,
+              "looM": 59.80229890667479
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 3.850010657299374e-9,
+              "looM": 19.741981283354672
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.7065374646015873e-9,
+              "looM": 16.50883167819711
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 3.5234543989153284e-9,
+              "looM": 15.87003046105503
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 3.249269928118359e-9,
+              "looM": 82.43064390116872
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 3.0724389116221215e-9,
+              "looM": 30.24499170086709
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 3.0945427886841514e-9,
+              "looM": 33.62558287169248
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 2.7408807556916767e-9,
+              "looM": 51.69438135939379
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.7629846327537066e-9,
+              "looM": 71.06782823882875
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 4.285117507637173e-9,
+              "looM": 92.40929066966982
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 4.5363596983618546e-9,
+              "looM": 102.25585317168924
+            },
+            {
+              "name": "St Andrew’s Cathedral, standing1861 nave/footprint centre",
+              "fitM": 3.808912382581449e-9,
+              "looM": 137.45290499794453
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G11",
+      "previousControls": 18,
+      "controlPoints": [
+        {
+          "name": "Tanjong Changi",
+          "lnglat": [
+            103.9865343,
+            1.3928616
+          ],
+          "node": 10308106625,
+          "svg": [
+            7247,
+            2718
+          ]
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "lnglat": [
+            103.955389,
+            1.4189142
+          ],
+          "node": 10312600921,
+          "svg": [
+            6683,
+            2236
+          ]
+        },
+        {
+          "name": "Tanjong Tajam",
+          "lnglat": [
+            103.9269082,
+            1.423175
+          ],
+          "node": 10312600922,
+          "svg": [
+            6158,
+            2167
+          ]
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "lnglat": [
+            103.9921622,
+            1.4081417
+          ],
+          "node": 10312600919,
+          "svg": [
+            7367,
+            2448
+          ]
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "lnglat": [
+            103.8051074,
+            1.2622889
+          ],
+          "node": 10307757281,
+          "svg": [
+            3873,
+            5143
+          ]
+        },
+        {
+          "name": "Tanjong Rimau",
+          "lnglat": [
+            103.8066725,
+            1.2597496
+          ],
+          "node": 4568824207,
+          "svg": [
+            3899,
+            5189
+          ],
+          "source": "Second-pass native-raster review: northwestern rocky headland shoreline tip. First-pass G9 point lay in water south of the actual headland; corrected to the printed tip. Current OSM cape node is coordinate control only."
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "svg": [
+            4700,
+            4629
+          ],
+          "lnglat": [
+            103.8493033,
+            1.2890664
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "svg": [
+            4723,
+            4596
+          ],
+          "lnglat": [
+            103.850015,
+            1.2901963
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "svg": [
+            4739,
+            4573
+          ],
+          "lnglat": [
+            103.8509674,
+            1.2917649
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "svg": [
+            4760,
+            4543
+          ],
+          "lnglat": [
+            103.8520429,
+            1.2935887
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "svg": [
+            4778,
+            4514
+          ],
+          "lnglat": [
+            103.8531036,
+            1.2951261
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "svg": [
+            4814,
+            4544
+          ],
+          "lnglat": [
+            103.8546543,
+            1.2939345
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "svg": [
+            4811,
+            4470
+          ],
+          "lnglat": [
+            103.8549985,
+            1.2976349
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "svg": [
+            4837,
+            4501
+          ],
+          "lnglat": [
+            103.8562528,
+            1.2965189
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "svg": [
+            4877,
+            4390
+          ],
+          "lnglat": [
+            103.8585234,
+            1.301971
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "svg": [
+            4908,
+            4414
+          ],
+          "lnglat": [
+            103.8599148,
+            1.3002979
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "svg": [
+            4664,
+            4698
+          ],
+          "lnglat": [
+            103.8471684,
+            1.2854539
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "svg": [
+            4646,
+            4730
+          ],
+          "lnglat": [
+            103.8461028,
+            1.2836322
+          ],
+          "source": "Modern shared road centreline node in raw/control-roads-osm.json (CP only); independently reread native-raster printed street topology, second pass. Historic street width/generalisation makes exact centreline matching approximate."
+        }
+      ],
+      "model": "regularised thin-plate spline λ=1",
+      "adopted": true,
+      "previousLooRmsM": 77.78134402871518,
+      "smoothing": 1,
+      "fit": {
+        "rmsM": 35.647872705399564,
+        "maxM": 70.92154531319883
+      },
+      "loo": {
+        "rmsM": 55.449743018030325,
+        "maxM": 108.58316229898976
+      },
+      "points": [
+        {
+          "name": "Tanjong Changi",
+          "fitM": 38.94795431280671,
+          "looM": 100.73875937583391
+        },
+        {
+          "name": "Tanjong Batu Kekek",
+          "fitM": 29.743504151230475,
+          "looM": 59.42851383701331
+        },
+        {
+          "name": "Tanjong Tajam",
+          "fitM": 16.052727132572137,
+          "looM": 75.60255695102113
+        },
+        {
+          "name": "Tanjong Chek Jawa",
+          "fitM": 46.06520040004793,
+          "looM": 108.58316229898976
+        },
+        {
+          "name": "Tanjong Berlayer",
+          "fitM": 13.032641914741335,
+          "looM": 24.632955942139077
+        },
+        {
+          "name": "Tanjong Rimau",
+          "fitM": 16.245495701176985,
+          "looM": 30.37561971451816
+        },
+        {
+          "name": "Bridge Street river crossing / later Elgin Bridge centre",
+          "fitM": 35.8872680998923,
+          "looM": 40.56690607498643
+        },
+        {
+          "name": "North Bridge Road / High Street",
+          "fitM": 70.92154531319883,
+          "looM": 79.00103538003351
+        },
+        {
+          "name": "North Bridge Road / Coleman Street",
+          "fitM": 32.204167415682896,
+          "looM": 35.66229099490111
+        },
+        {
+          "name": "North Bridge Road / Stamford Road canal",
+          "fitM": 13.597695636037763,
+          "looM": 15.024079234720155
+        },
+        {
+          "name": "North Bridge Road / Bras Basah Road",
+          "fitM": 12.148457263683165,
+          "looM": 13.482596336956123
+        },
+        {
+          "name": "Beach Road / Bras Basah Road",
+          "fitM": 57.10968298962924,
+          "looM": 63.86259996879985
+        },
+        {
+          "name": "North Bridge Road / Middle Road",
+          "fitM": 17.869923829337417,
+          "looM": 20.215349061672818
+        },
+        {
+          "name": "Beach Road / Middle Road",
+          "fitM": 66.6028161135044,
+          "looM": 75.0507571064872
+        },
+        {
+          "name": "North Bridge Road / Arab Street",
+          "fitM": 19.37841757952286,
+          "looM": 23.87684541487413
+        },
+        {
+          "name": "Beach Road / Arab Street",
+          "fitM": 36.55622177019266,
+          "looM": 44.97457588130569
+        },
+        {
+          "name": "South Bridge Road / Upper Pickering Street",
+          "fitM": 13.952855403552345,
+          "looM": 16.619293636705546
+        },
+        {
+          "name": "South Bridge Road / Cross Street",
+          "fitM": 6.93519930160681,
+          "looM": 8.585479289369681
+        }
+      ],
+      "nativeBounds": {
+        "min": [
+          566.5462340513009,
+          1267.4539731297784
+        ],
+        "max": [
+          7632.5779444295185,
+          5612.5116714032065
+        ]
+      },
+      "qualification": "Existing 18 source references retained, including approximate road axes/capes; no new or discarded ground control. Western extrapolation is approximate.",
+      "trials": [
+        {
+          "smoothing": 1,
+          "fit": {
+            "rmsM": 35.647872705399564,
+            "maxM": 70.92154531319883
+          },
+          "loo": {
+            "rmsM": 55.449743018030325,
+            "maxM": 108.58316229898976
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 38.94795431280671,
+              "looM": 100.73875937583391
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 29.743504151230475,
+              "looM": 59.42851383701331
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 16.052727132572137,
+              "looM": 75.60255695102113
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 46.06520040004793,
+              "looM": 108.58316229898976
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 13.032641914741335,
+              "looM": 24.632955942139077
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 16.245495701176985,
+              "looM": 30.37561971451816
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 35.8872680998923,
+              "looM": 40.56690607498643
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 70.92154531319883,
+              "looM": 79.00103538003351
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 32.204167415682896,
+              "looM": 35.66229099490111
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 13.597695636037763,
+              "looM": 15.024079234720155
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 12.148457263683165,
+              "looM": 13.482596336956123
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 57.10968298962924,
+              "looM": 63.86259996879985
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 17.869923829337417,
+              "looM": 20.215349061672818
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 66.6028161135044,
+              "looM": 75.0507571064872
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 19.37841757952286,
+              "looM": 23.87684541487413
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 36.55622177019266,
+              "looM": 44.97457588130569
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 13.952855403552345,
+              "looM": 16.619293636705546
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 6.93519930160681,
+              "looM": 8.585479289369681
+            }
+          ]
+        },
+        {
+          "smoothing": 0.1,
+          "fit": {
+            "rmsM": 28.102451929336848,
+            "maxM": 59.954457849730645
+          },
+          "loo": {
+            "rmsM": 59.72421344688063,
+            "maxM": 114.47216229267563
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 14.053223083426182,
+              "looM": 114.47216229267563
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 9.83054387692801,
+              "looM": 64.83891915782034
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 6.597625106916136,
+              "looM": 102.01710225541218
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 15.72124558333579,
+              "looM": 113.41131549641437
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 8.441554752902382,
+              "looM": 19.605236141487882
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 7.966574923101129,
+              "looM": 18.202327791708882
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 36.88417244893762,
+              "looM": 46.61153656343972
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 59.954457849730645,
+              "looM": 73.0227936791438
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 22.387930266332987,
+              "looM": 26.87427886825985
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 7.644099721994203,
+              "looM": 9.112824321986649
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 11.54389640103452,
+              "looM": 13.930000511629892
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 46.720209332341575,
+              "looM": 59.714651011530314
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 17.714057138273922,
+              "looM": 22.33542521634596
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 57.834897365168345,
+              "looM": 72.42320338982498
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 17.06241397154036,
+              "looM": 27.428446913872822
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 37.38515372873741,
+              "looM": 60.3487264929299
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 16.0540186766242,
+              "looM": 23.00072766385872
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 7.7507849203029195,
+              "looM": 13.227655083261332
+            }
+          ]
+        },
+        {
+          "smoothing": 10,
+          "fit": {
+            "rmsM": 45.1983356677618,
+            "maxM": 81.82771691605429
+          },
+          "loo": {
+            "rmsM": 62.90799740264724,
+            "maxM": 115.24015967080344
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 54.22056190991415,
+              "looM": 105.78449645477522
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 34.872095246126214,
+              "looM": 53.33340499865386
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 14.67003626604673,
+              "looM": 52.51438904917442
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 63.84311487109099,
+              "looM": 115.24015967080344
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 59.864969225167094,
+              "looM": 88.41094226407
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 65.33491525921444,
+              "looM": 95.40147634117564
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 32.110218077501564,
+              "looM": 34.88675739127453
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 81.82771691605429,
+              "looM": 88.6591283711879
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 43.54235171464664,
+              "looM": 47.130232344136886
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 25.69273327875263,
+              "looM": 27.805850252488067
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 22.709619114399036,
+              "looM": 24.6036083225893
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 58.115266034725266,
+              "looM": 63.233957085085045
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 11.995365116828214,
+              "looM": 13.050211053253935
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 57.77786978423901,
+              "looM": 62.937854348542665
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 11.548058041248899,
+              "looM": 12.751037946855595
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 50.34060854152241,
+              "looM": 55.62560153180074
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 8.049469316716868,
+              "looM": 8.843126107752617
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 9.052943240907842,
+              "looM": 10.019284166006928
+            }
+          ]
+        },
+        {
+          "smoothing": 0.01,
+          "fit": {
+            "rmsM": 17.68992882208413,
+            "maxM": 41.14481903722512
+          },
+          "loo": {
+            "rmsM": 65.69738304932275,
+            "maxM": 132.5569489398622
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 2.1837608812487295,
+              "looM": 132.5569489398622
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 1.331987055079546,
+              "looM": 69.78088590794182
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 1.0946126693084854,
+              "looM": 129.232089362248
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 2.1986219928750868,
+              "looM": 120.97650712785368
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 6.62978204294048,
+              "looM": 33.11100981832428
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 6.385504676569418,
+              "looM": 31.545933355070517
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 31.50966703886647,
+              "looM": 57.68286121820019
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 41.14481903722512,
+              "looM": 63.80511519455691
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 4.377573607337782,
+              "looM": 6.569320117916517
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 5.311171953937354,
+              "looM": 7.971224586802425
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 10.517432559951645,
+              "looM": 16.781049269958217
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 19.353358864279265,
+              "looM": 40.723221095376445
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 9.719071411800261,
+              "looM": 18.802373351205244
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 32.63953837261324,
+              "looM": 58.919957731866106
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 16.519384684835142,
+              "looM": 44.936885034145426
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 27.161123305398533,
+              "looM": 75.47219648625902
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 9.136443980572066,
+              "looM": 17.309296165320063
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 7.956992295994369,
+              "looM": 23.17361134817849
+            }
+          ]
+        },
+        {
+          "smoothing": 0.001,
+          "fit": {
+            "rmsM": 7.154485507660465,
+            "maxM": 19.727802401122084
+          },
+          "loo": {
+            "rmsM": 66.00839911568288,
+            "maxM": 133.81793703751663
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 0.23132279495774213,
+              "looM": 133.81793703751663
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 0.13700702273358714,
+              "looM": 69.89671177653513
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 0.10355964982198253,
+              "looM": 116.99973556729208
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 0.2265157996541939,
+              "looM": 120.374617943472
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 1.265365646120132,
+              "looM": 38.63020999466058
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 1.2390735226901388,
+              "looM": 37.5435836341864
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 13.025059930976099,
+              "looM": 67.81583471437695
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 19.727802401122084,
+              "looM": 58.652323504634154
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 6.082382306883632,
+              "looM": 17.34220651006876
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 4.291916933956362,
+              "looM": 13.045498152746314
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 4.757915889128895,
+              "looM": 17.76929020703975
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 4.350405657365605,
+              "looM": 29.051081818040647
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 4.887524615384242,
+              "looM": 28.154184089851086
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 10.994134625282998,
+              "looM": 53.006487228910665
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 6.649468855611008,
+              "looM": 63.797204862513816
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 8.178514652256588,
+              "looM": 82.48500332483904
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 1.5234009603968106,
+              "looM": 7.5920917509874615
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 2.0218529834389707,
+              "looM": 18.72936189129961
+            }
+          ]
+        },
+        {
+          "smoothing": 0,
+          "fit": {
+            "rmsM": 4.55649250174763e-9,
+            "maxM": 8.692193324164063e-9
+          },
+          "loo": {
+            "rmsM": 66.22956337669025,
+            "maxM": 133.79451380320998
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 6.715542002638607e-9,
+              "looM": 133.79451380320998
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 6.283763473493037e-9,
+              "looM": 69.56473197270762
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 5.492135344109641e-9,
+              "looM": 109.29545330783664
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 8.692193324164063e-9,
+              "looM": 119.30464102062273
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 5.770207806239536e-9,
+              "looM": 39.971898265697284
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 6.853235841508094e-9,
+              "looM": 38.94373850436042
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 3.445423077132868e-9,
+              "looM": 75.97004710171694
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 3.4079920995824357e-9,
+              "looM": 54.866612939104066
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 3.395716056908041e-9,
+              "looM": 26.85321520343817
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 3.3594621821131496e-9,
+              "looM": 8.967218099662047
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 2.1959454086571406e-9,
+              "looM": 15.29182229922033
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 1.7019985337762832e-9,
+              "looM": 30.48864014430542
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 2.1290406173237955e-9,
+              "looM": 31.106512795685298
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 3.267413711773611e-9,
+              "looM": 52.15768125535495
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 2.079997175376043e-9,
+              "looM": 69.48414902447425
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 2.0478022643539525e-9,
+              "looM": 86.3841131203742
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 3.5228130678661135e-9,
+              "looM": 9.140130131856989
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 3.6034744129206186e-9,
+              "looM": 10.590900235345739
+            }
+          ]
+        },
+        {
+          "smoothing": 100,
+          "fit": {
+            "rmsM": 58.52427287043709,
+            "maxM": 113.95433572457381
+          },
+          "loo": {
+            "rmsM": 75.01558720384452,
+            "maxM": 138.44777451289204
+          },
+          "points": [
+            {
+              "name": "Tanjong Changi",
+              "fitM": 65.01152074382641,
+              "looM": 119.68288064863391
+            },
+            {
+              "name": "Tanjong Batu Kekek",
+              "fitM": 32.679074262564356,
+              "looM": 48.363385079343196
+            },
+            {
+              "name": "Tanjong Tajam",
+              "fitM": 10.776308127242876,
+              "looM": 37.09269228578353
+            },
+            {
+              "name": "Tanjong Chek Jawa",
+              "fitM": 75.93568168188929,
+              "looM": 128.94956866727335
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "fitM": 107.49540863420009,
+              "looM": 132.52642343764836
+            },
+            {
+              "name": "Tanjong Rimau",
+              "fitM": 113.95433572457381,
+              "looM": 138.44777451289204
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "fitM": 30.194164381845045,
+              "looM": 32.533973177732285
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "fitM": 90.50210249229976,
+              "looM": 97.29699927708864
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "fitM": 53.335466484793876,
+              "looM": 57.26396567886348
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "fitM": 37.04800258261348,
+              "looM": 39.71984453294121
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "fitM": 34.86179488107276,
+              "looM": 37.334650644342794
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "fitM": 60.51338864407384,
+              "looM": 65.07847582645408
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "fitM": 19.053742102710036,
+              "looM": 20.38399732226467
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "fitM": 48.45123644450659,
+              "looM": 51.96848190370684
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "fitM": 19.631835726484677,
+              "looM": 20.992630568824634
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "fitM": 67.15784645304879,
+              "looM": 71.90892660955485
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "fitM": 4.63988907776297,
+              "looM": 5.03375496136767
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "fitM": 10.467026163070923,
+              "looM": 11.399639008465732
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

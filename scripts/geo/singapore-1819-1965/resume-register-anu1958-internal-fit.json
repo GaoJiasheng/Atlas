@@ -1,0 +1,184 @@
+{
+  "definition": "+proj=cass +lat_0=2.042583333333333 +lon_0=103.56275833333333 +x_0=411480 +y_0=274320 +ellps=evrst30 +units=m",
+  "qualification": "Internal grid scan fit only. No historical datum shift assumed; this is not WGS84 ground accuracy.",
+  "fits": [
+    {
+      "model": "Johore-printed-Everest-local+affine",
+      "rmsKm": 0.02420665395993802,
+      "maxKm": 0.04107465368259663,
+      "looRmsKm": 0.030148277764900658,
+      "looMaxKm": 0.0524789558997598,
+      "points": [
+        {
+          "name": "Johore E460000 N230000 yd",
+          "residualKm": 0.027682597442408034,
+          "looKm": 0.03979585319464146
+        },
+        {
+          "name": "Johore E470000 N230000 yd",
+          "residualKm": 0.025072764914016145,
+          "looKm": 0.03087051961543803
+        },
+        {
+          "name": "Johore E480000 N230000 yd",
+          "residualKm": 0.022136989082733115,
+          "looKm": 0.0274615069801204
+        },
+        {
+          "name": "Johore E490000 N230000 yd",
+          "residualKm": 0.022530411491856965,
+          "looKm": 0.033263860432606936
+        },
+        {
+          "name": "Johore E460000 N220000 yd",
+          "residualKm": 0.04107465368259663,
+          "looKm": 0.0524789558997598
+        },
+        {
+          "name": "Johore E470000 N220000 yd",
+          "residualKm": 0.0312516242469286,
+          "looKm": 0.034406215879578796
+        },
+        {
+          "name": "Johore E480000 N220000 yd",
+          "residualKm": 0.02543363066358284,
+          "looKm": 0.027907902233133636
+        },
+        {
+          "name": "Johore E490000 N220000 yd",
+          "residualKm": 0.017496332118012967,
+          "looKm": 0.02209547751363292
+        },
+        {
+          "name": "Johore E460000 N210000 yd",
+          "residualKm": 0.0064204036357270195,
+          "looKm": 0.00835761569122472
+        },
+        {
+          "name": "Johore E470000 N210000 yd",
+          "residualKm": 0.021848097577416365,
+          "looKm": 0.024196814761661595
+        },
+        {
+          "name": "Johore E480000 N210000 yd",
+          "residualKm": 0.019470094512901676,
+          "looKm": 0.021277070094859397
+        },
+        {
+          "name": "Johore E490000 N210000 yd",
+          "residualKm": 0.02427336543089976,
+          "looKm": 0.030159019749856214
+        },
+        {
+          "name": "Johore E470000 N200000 yd",
+          "residualKm": 0.022797779968607792,
+          "looKm": 0.028585604903181447
+        },
+        {
+          "name": "Johore E475000 N200000 yd",
+          "residualKm": 0.023492738134810686,
+          "looKm": 0.028528907589074438
+        },
+        {
+          "name": "Johore E480000 N200000 yd",
+          "residualKm": 0.012892409477898747,
+          "looKm": 0.0157470700293843
+        },
+        {
+          "name": "Johore E485000 N200000 yd",
+          "residualKm": 0.02532335142153945,
+          "looKm": 0.03230897320349194
+        }
+      ]
+    },
+    {
+      "model": "Johore-printed-Everest-local+poly2",
+      "rmsKm": 0.009747719017865664,
+      "maxKm": 0.0227514011815618,
+      "looRmsKm": 0.01730345174475362,
+      "looMaxKm": 0.04091730239615819,
+      "points": [
+        {
+          "name": "Johore E460000 N230000 yd",
+          "residualKm": 0.005733984494277673,
+          "looKm": 0.016580796689471083
+        },
+        {
+          "name": "Johore E470000 N230000 yd",
+          "residualKm": 0.0074703771256303215,
+          "looKm": 0.011511515147676617
+        },
+        {
+          "name": "Johore E480000 N230000 yd",
+          "residualKm": 0.00429197846172087,
+          "looKm": 0.00655791018371816
+        },
+        {
+          "name": "Johore E490000 N230000 yd",
+          "residualKm": 0.0066239612276140485,
+          "looKm": 0.02097172933598197
+        },
+        {
+          "name": "Johore E460000 N220000 yd",
+          "residualKm": 0.0227514011815618,
+          "looKm": 0.03443981265927529
+        },
+        {
+          "name": "Johore E470000 N220000 yd",
+          "residualKm": 0.007144613581178253,
+          "looKm": 0.00956588939677726
+        },
+        {
+          "name": "Johore E480000 N220000 yd",
+          "residualKm": 0.007467779633596788,
+          "looKm": 0.010099927922467763
+        },
+        {
+          "name": "Johore E490000 N220000 yd",
+          "residualKm": 0.0037065452373439274,
+          "looKm": 0.005607325603436401
+        },
+        {
+          "name": "Johore E460000 N210000 yd",
+          "residualKm": 0.01903921984075857,
+          "looKm": 0.04091730239615819
+        },
+        {
+          "name": "Johore E470000 N210000 yd",
+          "residualKm": 0.005918474498946386,
+          "looKm": 0.007621972268447017
+        },
+        {
+          "name": "Johore E480000 N210000 yd",
+          "residualKm": 0.006792312098533979,
+          "looKm": 0.00875349053378724
+        },
+        {
+          "name": "Johore E490000 N210000 yd",
+          "residualKm": 0.004294673154231665,
+          "looKm": 0.007737721459272238
+        },
+        {
+          "name": "Johore E470000 N200000 yd",
+          "residualKm": 0.00804633965252625,
+          "looKm": 0.013331652738966854
+        },
+        {
+          "name": "Johore E475000 N200000 yd",
+          "residualKm": 0.0077826899628942875,
+          "looKm": 0.01059076230487231
+        },
+        {
+          "name": "Johore E480000 N200000 yd",
+          "residualKm": 0.009289535027376589,
+          "looKm": 0.012578296093236392
+        },
+        {
+          "name": "Johore E485000 N200000 yd",
+          "residualKm": 0.007577475437520885,
+          "looKm": 0.013126664040452596
+        }
+      ]
+    }
+  ]
+}

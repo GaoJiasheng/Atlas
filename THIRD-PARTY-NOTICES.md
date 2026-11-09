@@ -135,6 +135,19 @@ BGS product also carries *Contains OS data © Crown copyright 2020*; no OS map i
 redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
 `scripts/geo/industrial-revolution/SOURCES-GEO.md`.
 
+## Singapore 1819–1965 map data (`singapore-1819-1965`)
+
+| Work | Use | Licence |
+|---|---|---|
+| Urban Redevelopment Authority, *Master Plan 2019 Planning Area Boundary (No Sea)* and *Master Plan 2019 Land Use layer*, via data.gov.sg | modern coast foundation and inland-water (WATERBODY) exclusions of the dated coasts (`public/geo/land-sg-history.json`) | Singapore Open Data Licence v1.0, https://data.gov.sg/open-data-licence |
+| War Office and Air Ministry (D Survey), *Singapore*, GSGS 4923, 1:63,360, edition 1-GSGS, October 1958, Australian National University Open Research repository | registered and traced for the pre-reclamation Jurong coast of the 1961 coast era | Public domain (ANU item rights: Copyright Expired) |
+| Historical maps on Wikimedia Commons (per-file list in the topic's `data/SOURCES.md` and `scripts/geo/singapore-1819-1965/SOURCES-GEO.md`) | dated coasts, town and river water, regional traces | Public domain or CC0, as listed |
+| OpenStreetMap contributors, named reservoirs (Overpass export) | name / overlap selectors for URA water parcels only; no OSM geometry is published | ODbL 1.0 |
+
+Attribution: **Contains information from the Master Plan 2019 Planning Area
+Boundary (No Sea) and Master Plan 2019 Land Use layer accessed from data.gov.sg,
+made available under the terms of the Singapore Open Data Licence version 1.0.**
+
 ## Fonts and libraries
 
 | Work | Licence |

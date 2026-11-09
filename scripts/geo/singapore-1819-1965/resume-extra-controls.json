@@ -1,0 +1,18 @@
+{
+  "method": "Fresh readings on native G9/G11 rasters; inverse predictions only centre 560px search windows. 20px native coordinate grids and 10px details were actually opened offline. Modern road coordinates are reused from third-control-guides.ts (OSM coordinate controls only). Candidate road-axis continuity is not certified; no live control is overwritten and no old observation is deleted.",
+  "observations": [
+    {"map":"G9","guideIndex":1,"svg":[3655,2910],"readUncertaintyPx":5,"note":"Centre of orange Choa Chu Kang / main trunk road convergence, west of Bukit Panjang label. Large temporal displacement from current junction is unresolved."},
+    {"map":"G9","guideIndex":4,"svg":[6070,3436],"readUncertaintyPx":5,"note":"Orange-road crossing at Paya Lebar Police Station / Post Office; road topology only, historical axes generalised."},
+    {"map":"G9","guideIndex":7,"svg":[4742,4053],"readUncertaintyPx":5,"note":"Orange Farrer road joining Bukit Timah Road south of Cluny label; widening and highway reconstruction remain unresolved."},
+    {"map":"G9","guideIndex":9,"svg":[6468,4198],"readUncertaintyPx":5,"note":"Southeast orange Joo Chiat branch meeting main east-west Changi Road, distinct from northward uncoloured track."},
+    {"map":"G11","guideIndex":4,"svg":[5242,3442],"readUncertaintyPx":6,"note":"SW-NE main-road / NW-SE road crossing near Paya Lebar Police Station; red buildings and heavy labels limit exact centre reading."},
+    {"map":"G11","guideIndex":7,"svg":[4043,4019],"readUncertaintyPx":5,"note":"Farrer road joining Bukit Timah trunk west of Cluny area; historical axis continuity unresolved."},
+    {"map":"G11","guideIndex":9,"svg":[5614,4151],"readUncertaintyPx":5,"note":"SE Joo Chiat branch at Changi Road, east of canal; distinctly not the canal crossing at x5595."}
+  ],
+  "withheldBeforeFitting": [
+    {"map":"G9","guideIndex":2,"reason":"Predicted modern Springleaf site lies on a continuous main-road section; historical branch identity not established."},
+    {"map":"G9","guideIndex":3,"reason":"Visible historical Braddell branch lies materially north of modern target; no independently fixed axis pair."},
+    {"map":"G9","guideIndex":6,"reason":"Holland/Farrer junction visibly differs from current branch layout; temporal correspondence unresolved."},
+    {"map":"G11","guideIndex":1,"reason":"Dense red town blocks and road ink prevent an independently unambiguous Choa Chu Kang junction-centre reading in the inspected window."}
+  ]
+}

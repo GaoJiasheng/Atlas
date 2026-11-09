@@ -1,0 +1,14 @@
+{
+  "source": "G14",
+  "status": "candidate-only-not-published",
+  "scope": "Eastern bank of Sungei Bajau and the seaward mangrove fringe towards Tanjong Penjuru. This is a trace of the 1961-survey chart, NOT a certified 1961 shoreline: the surviving edition has additions through 1966.",
+  "pixelConvention": "Coordinates below are in the independently inspected crop raw/G14.jpg [600,480,8150,4000], reduced exactly 5:1. Native x=600+5*x; native y=480+5*y.",
+  "path": [[445,0],[440,20],[430,45],[420,75],[410,100],[402,130],[398,160],[400,185],[416,205],[440,218],[460,230],[480,245],[500,264],[518,282],[526,307],[531,336],[545,356],[564,380],[583,398],[607,417],[630,433],[650,451],[665,470],[679,486],[699,489],[721,487],[744,486],[755,490],[762,501],[776,510],[798,518],[820,524],[843,530],[866,531],[892,530],[918,533],[942,532],[966,528],[987,521],[1008,511],[1028,505],[1050,499],[1070,493],[1090,493],[1108,497],[1118,489],[1128,486]],
+  "excluded": "Caltex jetty, dredged channel, leading lines, soundings, fish stakes and islands. None is substituted for mainland shoreline.",
+  "limitations": [
+    "The chart distinguishes mangrove fringe, intertidal mud and dry land; its seaward vegetation edge is not automatically a mean-high-water coastline.",
+    "Individual coastal corrections between the 1961 survey and 1966 edition have not been independently dated.",
+    "Printed-graticule residuals measure scan registration only. External WGS84 datum and shoreline accuracy are unmeasured.",
+    "The trace requires native-image close-up review and independent date/datum qualification before use in a live keyframe."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-09",
+  "status": "passed",
+  "cachedOriginalSources": true,
+  "steps": [
+    {
+      "name": "lines",
+      "command": "pnpm tsx scripts/geo/lib/lines.ts --topic singapore-1819-1965",
+      "exitCode": 0
+    },
+    {
+      "name": "inputs",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/coast-inputs.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "register",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/round2-register.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "history",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/resume-history-land.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "splice",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/resume-coast-inputs.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "borders",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/borders.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "local",
+      "command": "pnpm tsx scripts/geo/lib/local-land.ts --topic singapore-1819-1965",
+      "exitCode": 0
+    },
+    {
+      "name": "pack",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/resume-pack.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "compose",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/keyframes.ts --all",
+      "exitCode": 0
+    },
+    {
+      "name": "simplify",
+      "command": "pnpm tsx scripts/geo/lib/simplify.ts --topic singapore-1819-1965",
+      "exitCode": 0
+    },
+    {
+      "name": "water",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/resume-final-water.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "holds",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/finalise-control.ts",
+      "exitCode": 0
+    },
+    {
+      "name": "colour",
+      "command": "pnpm tsx scripts/geo/lib/colour-holders.ts --topic singapore-1819-1965 --write",
+      "exitCode": 0
+    }
+  ],
+  "assets": [
+    {
+      "path": "public/geo/land-sg-history.json",
+      "bytes": 272857,
+      "sha256": "8e0a0cb522e6a46396959db3cc864438fbb46e03f00417ffb3535e6ad005255c"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/control.json",
+      "bytes": 635244,
+      "sha256": "b168bed91861ca70f75007aebdc06317418be0b3f417747c129ae361cc85fbf8"
+    }
+  ]
+}

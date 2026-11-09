@@ -101,3 +101,17 @@ The coordinator asked that `data/control.json` (and `scripts/geo/singapore-1819-
 ## Gates at hand-over
 
 See docs/28 §11.4.
+
+## Geographic polish audit — 5 November 2026
+
+The live-map polish remains incomplete; see [REBUILD-3D.md](REBUILD-3D.md) and the new dated section in [data/SOURCES.md](data/SOURCES.md). There is no NAS-restricted scan in the active map-trace dependencies, so obtaining NAS permission is not the outstanding action. The unresolved work is geographic: G9/G11/G16 still fail their external leave-one-out tolerances, and the public-domain G14 chart's 1961 survey credit does not date its later coastal corrections to 1961. Its new 16-point graticule fit and source-pixel shore trial remain explicitly unpublished. Neither the small internal grid residual nor successful software gates certify the live coast. Chapters, beats, facts and runtime map assets are unchanged.
+
+## Fix 2026-11-09
+
+The November 5 statement above is historical. Live vectors now include the source-reviewed October 1958 GSGS 4923 Jurong/Pandan coast and rivers from ANU's item-specific Copyright Expired original, the revised G16 printed-graticule model, Coleman's upper river/marsh island, and finer source-bank detail. The 1958 shore at 1 January 1961 is an explicit preconstruction inference from the dated September 1961 earth-moving chronology; later reclamation stages remain unmapped. Both themes and native-source overlays were inspected offline. Lower-channel/island checks pass, exported rings have zero defects and six exact hold pairs remain. Final close-up inspection nevertheless found collapsed paired-bank reaches in the upper Jurong river, and the fresh source rebuild fails the northern G15/G16 water-only splice guard. Those source-completeness failures remain unresolved; the retained assets are review drafts. Teaching facts, beats, labels and dates remain unchanged; only four bilingual map-method paragraphs and two appended source entries differ.
+
+**Strict geographic acceptance still fails.** External LOO RMS/max: G9 **107.71/243.91 m**, G11 **77.78/146.13 m**, revised G16 **54.74/72.87 m** (previously 152.53/289.29), new G35 **39.82/82.01 m**. Source grid precision does not establish ground accuracy. See [REBUILD-3D.md](REBUILD-3D.md) for counts, gates, source qualifications and the remaining work. No NAS map permission is needed for the adopted inputs.
+
+## Fix 2026-11-09 — round 2
+
+The prior strict-RMS / incomplete-splice status is superseded by Gavin's reset and the current records in [REBUILD-3D.md](REBUILD-3D.md) and [data/SOURCES.md](data/SOURCES.md). Paired upper Jurong banks, the northern peninsula and the G15/G16 source splice now pass the independent delivery guard and full fresh rebuild. All 23 keyframes were inspected offline in both themes. G11 LOO RMS improves 77.78→55.45 m; G9's retained 19-point set reports 109.15 m honestly. Approximation/source notes are bilingual; later reclamation stages and unmeasured external cases remain explicitly qualified. Chapters, beats, teaching facts, dates and labels are unchanged. S376's source-method note only removes the obsolete strict tolerance in EN/ZH. No browser, shared engine, package/lockfile or repository Vitest config was changed.

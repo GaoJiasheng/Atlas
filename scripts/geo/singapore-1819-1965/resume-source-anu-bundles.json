@@ -1,0 +1,100 @@
+{
+  "_embedded" : {
+    "bundles" : [ {
+      "uuid" : "684d4867-8e4a-49d2-b127-6029c0d6da3f",
+      "name" : "ORIGINAL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "ORIGINAL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/684d4867-8e4a-49d2-b127-6029c0d6da3f/item"
+        },
+        "bitstreams" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/684d4867-8e4a-49d2-b127-6029c0d6da3f/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/684d4867-8e4a-49d2-b127-6029c0d6da3f/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/684d4867-8e4a-49d2-b127-6029c0d6da3f"
+        }
+      }
+    }, {
+      "uuid" : "451c7165-9ec1-4f36-9e5f-0669cd4e86d3",
+      "name" : "THUMBNAIL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "THUMBNAIL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/451c7165-9ec1-4f36-9e5f-0669cd4e86d3/item"
+        },
+        "bitstreams" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/451c7165-9ec1-4f36-9e5f-0669cd4e86d3/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/451c7165-9ec1-4f36-9e5f-0669cd4e86d3/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/451c7165-9ec1-4f36-9e5f-0669cd4e86d3"
+        }
+      }
+    }, {
+      "uuid" : "0c6eabed-38f8-4d77-bd2f-7b4b1d9ebf54",
+      "name" : "BRANDED_PREVIEW",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "BRANDED_PREVIEW",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/0c6eabed-38f8-4d77-bd2f-7b4b1d9ebf54/item"
+        },
+        "bitstreams" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/0c6eabed-38f8-4d77-bd2f-7b4b1d9ebf54/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/0c6eabed-38f8-4d77-bd2f-7b4b1d9ebf54/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://openresearch-repository.anu.edu.au/server/api/core/bundles/0c6eabed-38f8-4d77-bd2f-7b4b1d9ebf54"
+        }
+      }
+    } ]
+  },
+  "page" : {
+    "number" : 0,
+    "size" : 20,
+    "totalPages" : 1,
+    "totalElements" : 3
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://openresearch-repository.anu.edu.au/server/api/core/items/23618e83-c884-4d56-a47e-b1e8909dc2a7/bundles"
+    }
+  }
+}

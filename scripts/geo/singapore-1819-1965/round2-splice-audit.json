@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-09",
+  "method": "G15 Tuas open natural-bank arc, joined at exact segment intersections to the complementary G16 mainland arc. Poyan/Berih north of 1.34141N stays on the complete G16 source rather than the incomplete northern G15 mask; its omitted G15-observed mangrove tip is restored separately. No source coverage closure or new straight connector is exposed.",
+  "north": {
+    "p": [
+      103.63865888226296,
+      1.3414098139488673
+    ],
+    "a": 1358,
+    "b": 1386,
+    "t": 0.13309199206696742,
+    "u": 0.5465842951053831
+  },
+  "south": {
+    "p": [
+      103.65327,
+      1.3034727113160705
+    ],
+    "a": 1697,
+    "b": 692,
+    "t": 0.813238300236221,
+    "u": 0.25422632140872153
+  },
+  "g15SourceVertices": 696,
+  "g16RetainedVertices": 6990,
+  "issues": {
+    "rings": 1,
+    "zeroArea": 0,
+    "selfCrossing": 0
+  }
+}

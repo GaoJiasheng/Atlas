@@ -1,0 +1,197 @@
+{
+  "grid": "Johore Cassini Soldner Everest; map printed origin 2\u00b002\u203233.30\u2033N 103\u00b033\u203245.93\u2033E, false E450000/N300000 yards",
+  "controlPoints": [
+    {
+      "name": "Johore E460000 N230000 yd",
+      "svg": [
+        851.0,
+        1395.5
+      ],
+      "gridYards": [
+        460000,
+        230000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E470000 N230000 yd",
+      "svg": [
+        2390.0,
+        1400.5
+      ],
+      "gridYards": [
+        470000,
+        230000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E480000 N230000 yd",
+      "svg": [
+        3925.0,
+        1408.0
+      ],
+      "gridYards": [
+        480000,
+        230000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E490000 N230000 yd",
+      "svg": [
+        5462.5,
+        1410.0
+      ],
+      "gridYards": [
+        490000,
+        230000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E460000 N220000 yd",
+      "svg": [
+        853.0,
+        2929.0
+      ],
+      "gridYards": [
+        460000,
+        220000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E470000 N220000 yd",
+      "svg": [
+        2390.5,
+        2933.5
+      ],
+      "gridYards": [
+        470000,
+        220000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E480000 N220000 yd",
+      "svg": [
+        3926.5,
+        2938.5
+      ],
+      "gridYards": [
+        480000,
+        220000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E490000 N220000 yd",
+      "svg": [
+        5463.5,
+        2943.5
+      ],
+      "gridYards": [
+        490000,
+        220000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E460000 N210000 yd",
+      "svg": [
+        851.5,
+        4465.5
+      ],
+      "gridYards": [
+        460000,
+        210000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E470000 N210000 yd",
+      "svg": [
+        2389.5,
+        4471.0
+      ],
+      "gridYards": [
+        470000,
+        210000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E480000 N210000 yd",
+      "svg": [
+        3924.5,
+        4476.5
+      ],
+      "gridYards": [
+        480000,
+        210000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E490000 N210000 yd",
+      "svg": [
+        5464.0,
+        4480.0
+      ],
+      "gridYards": [
+        490000,
+        210000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E465000 N200000 yd",
+      "svg": [
+        1624.0,
+        6003.5
+      ],
+      "gridYards": [
+        465000,
+        200000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E470000 N200000 yd",
+      "svg": [
+        2389.5,
+        6008.0
+      ],
+      "gridYards": [
+        470000,
+        200000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E480000 N200000 yd",
+      "svg": [
+        3925.5,
+        6013.0
+      ],
+      "gridYards": [
+        480000,
+        200000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    },
+    {
+      "name": "Johore E490000 N200000 yd",
+      "svg": [
+        5463.0,
+        6020.0
+      ],
+      "gridYards": [
+        490000,
+        200000
+      ],
+      "qualification": "Printed internal grid intersection; not independent WGS84 ground control."
+    }
+  ]
+}

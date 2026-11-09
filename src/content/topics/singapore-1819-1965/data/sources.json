@@ -3406,6 +3406,30 @@
         "en": "Geographic chronology cross-check: identifies Jurong Industrial Estate as conceptualised in 1961. The introduction supplies no dated shoreline or reclamation boundary, and no geometry was copied from it.",
         "zh": "地图年代核对：指出裕廊工业区于1961年构思。介绍页不提供带日期的海岸线或填海边界；没有从该页复制几何数据。"
       }
+    },
+    {
+      "id": "S376",
+      "text": {
+        "en": "War Office and Air Ministry, Singapore GSGS 4923 edition 1-GSGS, October 1958 (ANU)",
+        "zh": "英国陆军部与空军部《新加坡》GSGS 4923，第1-GSGS版，1958年10月（澳大利亚国立大学）"
+      },
+      "url": "https://openresearch-repository.anu.edu.au/items/23618e83-c884-4d56-a47e-b1e8909dc2a7",
+      "note": {
+        "en": "Original 8350 by 6806 scan downloaded and checked against the repository MD5. Item-specific rights: Copyright Expired. Native blue banks redraw the preconstruction Jurong shore; brown coral outlines remain water. Used for January 1961 as a temporal inference, not a newly surveyed 1961 source. Sixteen internal grid observations and 19 external road candidates: external LOO RMS 39.82 m / maximum 82.01 m, positions approximate. Full method and coordinates in the geographic source ledger.",
+        "zh": "下载8350×6806原始扫描图，并核对云库的MD5。此件权利标为“版权已到期”。裕廊开发前的海岸按原图蓝色岸线重绘，棕色珊瑚符号仍属水域。用于1961年1月属于年代推断，并非1961年的新测量。采用16个内部格网观测和19个外部道路候选点：外部留一法均方根误差为39.82米，最大82.01米，位置为近似值。完整方法和坐标见地理来源记录。"
+      }
+    },
+    {
+      "id": "S377",
+      "text": {
+        "en": "Goh Keng Swee, Budget Statement, 9 March 1970, p.11",
+        "zh": "吴庆瑞《财政预算声明》，1970年3月9日，第11页"
+      },
+      "url": "https://www.nas.gov.sg/archivesonline/data/pdfdoc/PressR19700309.pdf",
+      "note": {
+        "en": "Read the dated statement title and printed p.11. It dates the first Jurong industrial-estate earth-moving to September 1961. Supports the stated use of a 1958 preconstruction shore at 1 January 1961; no reclamation polygon or restricted NAS map scan is copied. Later 1961 to 1965 reclamation stages are not individually reconstructed.",
+        "zh": "读取声明日期和印本第11页。文中把裕廊工业区首次土方工程定为1961年9月，支持在1961年1月1日采用1958年开发前海岸的年代推断；没有复制填海多边形或受限制的NAS地图扫描图。1961–1965年各阶段的填海范围没有逐一重建。"
+      }
     }
   ]
 }

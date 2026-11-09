@@ -1,0 +1,2084 @@
+{
+  "qualification": "19 road axes are independently read candidates; widening and generalisation remain unresolved. External30mRMS/60mmax gate FAILED.",
+  "reports": [
+    {
+      "set": "all",
+      "count": 22,
+      "autoFits": [
+        {
+          "model": "laea(103.9,1.3)+affine",
+          "rmsKm": 0.04621783454809925,
+          "maxKm": 0.08855041576883396,
+          "looRmsKm": 0.07122313463186924,
+          "looMaxKm": 0.2391103978964312,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.009624640444251568,
+              "looKm": 0.012651897190623174
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.03810874404039803,
+              "looKm": 0.08327410776786769
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.08145066580794265,
+              "looKm": 0.09516592544754943
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.01970924228928075,
+              "looKm": 0.023737698603233645
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04420723499085659,
+              "looKm": 0.04842907680801965
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06077151407112754,
+              "looKm": 0.06486339329659228
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.07769247367809584,
+              "looKm": 0.08718200716861549
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.08837632010275594,
+              "looKm": 0.2391103978964312
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.027052499332376734,
+              "looKm": 0.03154906044015455
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.08855041576883396,
+              "looKm": 0.10412391327224792
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.049788945813080014,
+              "looKm": 0.053192539136632085
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.03161074788415162,
+              "looKm": 0.033710962531309396
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.02693027925549127,
+              "looKm": 0.028654940077478725
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.03538363582350715,
+              "looKm": 0.03757253014411911
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.022271175096372352,
+              "looKm": 0.023608567218252757
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.027309594926598,
+              "looKm": 0.029035424107092884
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03932191132346971,
+              "looKm": 0.04158421237972764
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.03048371278676894,
+              "looKm": 0.032316098173242006
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.022922354901634634,
+              "looKm": 0.024215442785706576
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009900703524306722,
+              "looKm": 0.010485520832838612
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017677363876492855,
+              "looKm": 0.018989624483848246
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.015834920145792734,
+              "looKm": 0.01707698637900011
+            }
+          ]
+        },
+        {
+          "model": "lcc(103.9,1.3,1.4)+affine",
+          "rmsKm": 0.04621804453633502,
+          "maxKm": 0.08854984066245183,
+          "looRmsKm": 0.07122360373857278,
+          "looMaxKm": 0.2391133596805076,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.009622795116612175,
+              "looKm": 0.012649471446302324
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.03810784244791606,
+              "looKm": 0.08327213796946716
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.08145179102750767,
+              "looKm": 0.09516724010293481
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.019710433727049226,
+              "looKm": 0.023739133563121465
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04420686582397183,
+              "looKm": 0.048428672352427725
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06077170559193666,
+              "looKm": 0.06486359768130019
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.07769430119516069,
+              "looKm": 0.08718405790277785
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.08837741424575628,
+              "looKm": 0.2391133596805076
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.027052088939936103,
+              "looKm": 0.03154858179279277
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.08854984066245183,
+              "looKm": 0.10412323704646655
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.04978889160597618,
+              "looKm": 0.05319248122760075
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.03161061394480639,
+              "looKm": 0.03371081962961154
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.026930236846630345,
+              "looKm": 0.028654894941166676
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.035383544866366766,
+              "looKm": 0.03757243353986708
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.022271173249511958,
+              "looKm": 0.02360856524457891
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.02730955501326378,
+              "looKm": 0.029035381679408553
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.039321799060205484,
+              "looKm": 0.041584093665614524
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.03048365627077909,
+              "looKm": 0.032316038292001775
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.022922532104719593,
+              "looKm": 0.02421562995920369
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009900762107876375,
+              "looKm": 0.010485582867345567
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017677213369465882,
+              "looKm": 0.018989462790671915
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.01583461097299073,
+              "looKm": 0.017076653008489595
+            }
+          ]
+        },
+        {
+          "model": "equirectangular+affine",
+          "rmsKm": 0.04626737263603366,
+          "maxKm": 0.08872213490684729,
+          "looRmsKm": 0.07133936892926555,
+          "looMaxKm": 0.23969344924257124,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.009604325169886838,
+              "looKm": 0.012625192097379648
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.03811407536100854,
+              "looKm": 0.08328575771105003
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.0814266348692283,
+              "looKm": 0.09513784724870653
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.019917616810981923,
+              "looKm": 0.023988663667197093
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.0441628458078627,
+              "looKm": 0.048380448406523044
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06071134288728179,
+              "looKm": 0.0647991704654826
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.07779937838203362,
+              "looKm": 0.08730196910769968
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.08859181753111378,
+              "looKm": 0.23969344924257124
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.027223900040088192,
+              "looKm": 0.03174895060748389
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.08872213490684729,
+              "looKm": 0.10432583186057012
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.04978746842678653,
+              "looKm": 0.0531909607933539
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.03163124837156447,
+              "looKm": 0.03373282507237891
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.026944866401006413,
+              "looKm": 0.028670461408419046
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.0354240270701772,
+              "looKm": 0.037615420102375625
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.022305172445737216,
+              "looKm": 0.02364460612354372
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.027350002627326737,
+              "looKm": 0.02907838538657434
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.039316019329892656,
+              "looKm": 0.04157798137351234
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.030494149577433485,
+              "looKm": 0.032327162290907645
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.02298235479762744,
+              "looKm": 0.024278827387307307
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009939960398325499,
+              "looKm": 0.010527096539092439
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017703751627296718,
+              "looKm": 0.01901797109378755
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.015835080912297184,
+              "looKm": 0.017077159755440493
+            }
+          ]
+        },
+        {
+          "model": "mercator+affine",
+          "rmsKm": 0.04626834391374924,
+          "maxKm": 0.0886899255948551,
+          "looRmsKm": 0.07134345479611448,
+          "looMaxKm": 0.23969717828391832,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.009612570341042334,
+              "looKm": 0.012636030628625993
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.038150999421987436,
+              "looKm": 0.08336645017678636
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.08143225029683879,
+              "looKm": 0.09514440813895034
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.01991780174169353,
+              "looKm": 0.023988886407649092
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04419287323800521,
+              "looKm": 0.04841334312081266
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06072924899301572,
+              "looKm": 0.06481828213998411
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.07780724953944054,
+              "looKm": 0.08731080164995744
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.08859319579986827,
+              "looKm": 0.23969717828391832
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.027190262289029956,
+              "looKm": 0.031709721680744075
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.0886899255948551,
+              "looKm": 0.10428795753383424
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.049786695860582805,
+              "looKm": 0.053190135669101184
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.03162834682831776,
+              "looKm": 0.0337297308694314
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.026939360677334667,
+              "looKm": 0.02866460317533318
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.03541715875590637,
+              "looKm": 0.037608126984505746
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.02229486173054598,
+              "looKm": 0.023633676297688287
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.027341898948992784,
+              "looKm": 0.029069769661651673
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.039329130551135225,
+              "looKm": 0.04159184680281677
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.030504398114939716,
+              "looKm": 0.03233802682122145
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.022965884997398114,
+              "looKm": 0.024261428532414028
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009947064956233967,
+              "looKm": 0.010534620751630443
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017702795849854933,
+              "looKm": 0.019016944364813264
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.015843566741777317,
+              "looKm": 0.017086311237656915
+            }
+          ]
+        },
+        {
+          "model": "laea(103.9,1.3)+poly2",
+          "rmsKm": 0.03329314597292073,
+          "maxKm": 0.06906968952558597,
+          "looRmsKm": 0.1143903085812283,
+          "looMaxKm": 0.4704949022550987,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.005172159875743773,
+              "looKm": 0.007836337751198586
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.004079791060045001,
+              "looKm": 0.059305554542518416
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.06252839276060156,
+              "looKm": 0.15457501582835503
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.024668994327758036,
+              "looKm": 0.07054903173669652
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.021734718121359367,
+              "looKm": 0.02856292017754452
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06906968952558597,
+              "looKm": 0.0909863496872855
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.059955193552578036,
+              "looKm": 0.08973397889516047
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.016788688171380777,
+              "looKm": 0.4704949022550987
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.03297170529276535,
+              "looKm": 0.052890249622015974
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.03915594219945147,
+              "looKm": 0.06866881259070158
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.047523004169489326,
+              "looKm": 0.051296077214909946
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.02530711190390252,
+              "looKm": 0.02725794826383993
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.02474150842979453,
+              "looKm": 0.026581219777951994
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.025726501865397856,
+              "looKm": 0.02761448372017596
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.01912702162433034,
+              "looKm": 0.020523009324181923
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.018016982333175297,
+              "looKm": 0.019465839085861962
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03835367708637584,
+              "looKm": 0.041234075632872076
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.029263011345296915,
+              "looKm": 0.031595114646718846
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018302548056188465,
+              "looKm": 0.019823459579779906
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.01371988172833825,
+              "looKm": 0.014917080975917414
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017408327053700687,
+              "looKm": 0.018986038062706448
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.008186863664525748,
+              "looKm": 0.009012467641799237
+            }
+          ]
+        },
+        {
+          "model": "equirectangular+poly2",
+          "rmsKm": 0.03329337106690826,
+          "maxKm": 0.06907004445741814,
+          "looRmsKm": 0.11439155646886315,
+          "looMaxKm": 0.47050000142085674,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.005170969437787194,
+              "looKm": 0.00783453414001496
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.004079431406820264,
+              "looKm": 0.05930032768609103
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.06253001364310067,
+              "looKm": 0.15457902585010552
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.024671202595173785,
+              "looKm": 0.07055534931253042
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.021736145341393415,
+              "looKm": 0.02856479569834053
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06907004445741814,
+              "looKm": 0.09098681676901493
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.059955203352886004,
+              "looKm": 0.08973399197732129
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.016788865442476278,
+              "looKm": 0.47050000142085674
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.03297270783190857,
+              "looKm": 0.052891857582798865
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.039154680338086036,
+              "looKm": 0.06866659887814601
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.04752298208747811,
+              "looKm": 0.05129605345968388
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.02530674485668204,
+              "looKm": 0.027257552922985002
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.024741408676871423,
+              "looKm": 0.026581112620728382
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.025725985525829,
+              "looKm": 0.027613929498019867
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.019126839882145225,
+              "looKm": 0.020522814324168043
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.01801670932396117,
+              "looKm": 0.01946554412204803
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03835398367489621,
+              "looKm": 0.041234405247303596
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.02926324980759769,
+              "looKm": 0.03159537211231745
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018302352104575027,
+              "looKm": 0.01982324735039345
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.013719975563234585,
+              "looKm": 0.014917182983155957
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.01740800699502075,
+              "looKm": 0.018985688973142185
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.008186562487780687,
+              "looKm": 0.009012136093979406
+            }
+          ]
+        },
+        {
+          "model": "lcc(103.9,1.3,1.4)+poly2",
+          "rmsKm": 0.03329344461287064,
+          "maxKm": 0.06906976773829714,
+          "looRmsKm": 0.11439311104339098,
+          "looMaxKm": 0.47050832839047,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.005171182386863409,
+              "looKm": 0.007834856750557069
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.004079563976260524,
+              "looKm": 0.05930225342313871
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.06252963513487672,
+              "looKm": 0.15457808712694593
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.02467017825432021,
+              "looKm": 0.07055241765050692
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.021735316644468327,
+              "looKm": 0.028563706727230975
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.06906976773829714,
+              "looKm": 0.09098645268984293
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.05995642675647013,
+              "looKm": 0.0897358245595388
+            },
+            {
+              "name": "Tanjong Changi",
+              "residualKm": 0.016789166682954663,
+              "looKm": 0.47050832839047
+            },
+            {
+              "name": "Tanjong Berlayer",
+              "residualKm": 0.032972213237594195,
+              "looKm": 0.0528910644654845
+            },
+            {
+              "name": "Tanjong Rimau",
+              "residualKm": 0.03915578577061433,
+              "looKm": 0.06866853832258525
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.0475232457853708,
+              "looKm": 0.051296337949521646
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.025307142251585743,
+              "looKm": 0.02725798097141657
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.024741676020763832,
+              "looKm": 0.026581399826466724
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.025726398911980385,
+              "looKm": 0.027614373143158486
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.019127102182034585,
+              "looKm": 0.020523095741799637
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.018017004844166715,
+              "looKm": 0.019465863379886497
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03835368868594587,
+              "looKm": 0.04123408811146296
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.02926300168004716,
+              "looKm": 0.03159510421345114
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.01830249087331803,
+              "looKm": 0.019823397687602794
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.01371980985602853,
+              "looKm": 0.014917002840055975
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.017407881049667503,
+              "looKm": 0.018985551653783305
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.00818695706069636,
+              "looKm": 0.00901257040786498
+            }
+          ]
+        }
+      ],
+      "gridPlusTranslation": {
+        "translationMetres": [
+          -172.91638907062588,
+          -29.03198246416022
+        ],
+        "fitRmsM": 47.923543704774744,
+        "fitMaxM": 129.28352455940785,
+        "looRmsM": 50.20561721452592,
+        "looMaxM": 135.4398828717606,
+        "residuals": [
+          {
+            "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+            "dx": -189.47655207919888,
+            "dy": -44.51574115914991,
+            "errorM": 22.67125453509749
+          },
+          {
+            "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+            "dx": -181.80999734293437,
+            "dy": -2.1493054557067808,
+            "errorM": 28.31562450736528
+          },
+          {
+            "name": "Yio Chu Kang Road / Upper Serangoon Road",
+            "dx": -233.32810024596984,
+            "dy": -64.25577987762517,
+            "errorM": 69.93061383512945
+          },
+          {
+            "name": "Clementi Road / Pasir Panjang Road",
+            "dx": -169.76927033410175,
+            "dy": -31.27093580775545,
+            "errorM": 3.862287976909222
+          },
+          {
+            "name": "Bukit Timah Road / Adam-Farrer Road",
+            "dx": -173.19872786436463,
+            "dy": -82.01902582752518,
+            "errorM": 52.98779557205196
+          },
+          {
+            "name": "Thomson Road / Balestier Road",
+            "dx": -118.59179575793678,
+            "dy": -71.44658319911105,
+            "errorM": 68.92140301890521
+          },
+          {
+            "name": "Changi Road / Joo Chiat Road",
+            "dx": -237.19305282912683,
+            "dy": -50.31123520093388,
+            "errorM": 67.70743017541632
+          },
+          {
+            "name": "Tanjong Changi",
+            "dx": -45.01621821394656,
+            "dy": -10.16995666269213,
+            "errorM": 129.28352455940785
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "dx": -165.52684479684103,
+            "dy": -30.784057479264447,
+            "errorM": 7.594414489134692
+          },
+          {
+            "name": "Tanjong Rimau",
+            "dx": -110.7054847862455,
+            "dy": -57.035477244266076,
+            "errorM": 68.22310702232605
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "dx": -156.51071410183795,
+            "dy": 18.742002858110936,
+            "errorM": 50.512373184736575
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "dx": -180.37569014332257,
+            "dy": 3.280524510628311,
+            "errorM": 33.16231716103221
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "dx": -172.0312161659822,
+            "dy": -1.485320217354456,
+            "errorM": 27.5608804650851
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "dx": -193.3875344377593,
+            "dy": 0.4173114678415004,
+            "errorM": 35.86542493454862
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "dx": -178.41827215004014,
+            "dy": -7.7517401593213435,
+            "errorM": 21.979977933842406
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "dx": -184.88820413447684,
+            "dy": -4.265381565404823,
+            "errorM": 27.50834193478917
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "dx": -189.95691032259492,
+            "dy": -64.99881848186487,
+            "errorM": 39.79940524258202
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "dx": -191.4342808999354,
+            "dy": -53.21480506507214,
+            "errorM": 30.458516489632007
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "dx": -182.87202164233895,
+            "dy": -11.745811072760262,
+            "errorM": 19.948091168726105
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "dx": -179.93914903182304,
+            "dy": -34.573699241678696,
+            "errorM": 8.945936637089691
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "dx": -193.37713692500256,
+            "dy": -29.60555073028081,
+            "errorM": 20.468785584794237
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "dx": -176.3533853479894,
+            "dy": -9.544228600338101,
+            "errorM": 19.788519248986887
+          }
+        ]
+      }
+    },
+    {
+      "set": "roads-only",
+      "count": 19,
+      "autoFits": [
+        {
+          "model": "equirectangular+affine",
+          "rmsKm": 0.03276783756355356,
+          "maxKm": 0.07692339450104785,
+          "looRmsKm": 0.04293858809156037,
+          "looMaxKm": 0.09918368938682237,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.019277236379309847,
+              "looKm": 0.025686079577244142
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.04421332564430181,
+              "looKm": 0.09918368938682237
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.02172890604960115,
+              "looKm": 0.038481273279046865
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.030954328360270865,
+              "looKm": 0.05237532567454424
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04737470982224547,
+              "looKm": 0.052077772267135704
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07692339450104785,
+              "looKm": 0.08435272916164442
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.029848833306687677,
+              "looKm": 0.040155353156756286
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.044558489585807284,
+              "looKm": 0.048611465236991065
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.023743871468564045,
+              "looKm": 0.02578872048177978
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.022162438033254787,
+              "looKm": 0.023955064809076783
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.026150426725519794,
+              "looKm": 0.02814347821613228
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.017289385140598298,
+              "looKm": 0.01855108490398868
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.01963489517734306,
+              "looKm": 0.021142390153647612
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.038903361356851816,
+              "looKm": 0.04160948706051982
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.028102614434826513,
+              "looKm": 0.030144223964257876
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018587624694562932,
+              "looKm": 0.019916811677459893
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.00945974023242054,
+              "looKm": 0.010163459038823928
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.020375887654875927,
+              "looKm": 0.02252999694015899
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.005434095416625683,
+              "looKm": 0.006070964242947325
+            }
+          ]
+        },
+        {
+          "model": "mercator+affine",
+          "rmsKm": 0.032775100299873405,
+          "maxKm": 0.076931490240097,
+          "looRmsKm": 0.04295289145874871,
+          "looMaxKm": 0.09926043941889008,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.019287611226784893,
+              "looKm": 0.025699903592284388
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.04424753408326948,
+              "looKm": 0.09926043941889008
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.02172723771293864,
+              "looKm": 0.038478318657042036
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.030961385278028865,
+              "looKm": 0.05238726513603494
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04739949214462234,
+              "looKm": 0.05210501438321008
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.076931490240097,
+              "looKm": 0.08436160671660721
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.029851239068528514,
+              "looKm": 0.040158589592722234
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.044566847117948,
+              "looKm": 0.048620583177136925
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.023751778229562134,
+              "looKm": 0.02579730827392902
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.022167578880253253,
+              "looKm": 0.02396062153439802
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.02615336663460691,
+              "looKm": 0.02814664226410777
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.017290563358458785,
+              "looKm": 0.01855234913939568
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.019638008429313836,
+              "looKm": 0.021145742486520805
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03890559123624569,
+              "looKm": 0.041611871855911926
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.028103163323106316,
+              "looKm": 0.030144812628307247
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018581855005504893,
+              "looKm": 0.019910629443424907
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009462260221872031,
+              "looKm": 0.010166166485253425
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.020366479673295492,
+              "looKm": 0.02251959434089704
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.005452143959511076,
+              "looKm": 0.006091128059660555
+            }
+          ]
+        },
+        {
+          "model": "lcc(103.8,1.3,1.4)+affine",
+          "rmsKm": 0.032773157075992716,
+          "maxKm": 0.07690827817655227,
+          "looRmsKm": 0.04295319792859226,
+          "looMaxKm": 0.09921831462244791,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.019285147563982145,
+              "looKm": 0.02569662098616583
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.04422876041832699,
+              "looKm": 0.09921831462244791
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.021828817242332616,
+              "looKm": 0.038658213514008305
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.03098222693836974,
+              "looKm": 0.0524225311531911
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04741092424920731,
+              "looKm": 0.052117581817425596
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07690827817655227,
+              "looKm": 0.08433615328701013
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.02982572449942454,
+              "looKm": 0.040124265266184914
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.0445619373331619,
+              "looKm": 0.04861522643731772
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.023737557925625142,
+              "looKm": 0.025781863200335483
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.022163276023423547,
+              "looKm": 0.023955970607034336
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.026138185340185787,
+              "looKm": 0.02813030379492001
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.01728736388086689,
+              "looKm": 0.018548916184102267
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.019630130279876035,
+              "looKm": 0.021137259397145475
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.038907380177335554,
+              "looKm": 0.04161378542636046
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.028101922910841636,
+              "looKm": 0.030143482247758497
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018586648698420145,
+              "looKm": 0.0199157659546131
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009471725677206295,
+              "looKm": 0.010176336088339644
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.02036576456932128,
+              "looKm": 0.02251880370462973
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.005429165739983722,
+              "looKm": 0.006065456825171234
+            }
+          ]
+        },
+        {
+          "model": "laea(103.8,1.3)+affine",
+          "rmsKm": 0.03277323387524085,
+          "maxKm": 0.07690830119661231,
+          "looRmsKm": 0.04295333857318188,
+          "looMaxKm": 0.0992189441481856,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.01928602005038493,
+              "looKm": 0.02569778353896187
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.04422904127989513,
+              "looKm": 0.0992189441481856
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.0218288766359329,
+              "looKm": 0.0386583187305482
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.03098226741298899,
+              "looKm": 0.052422599663407725
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.04741103249973133,
+              "looKm": 0.05211770083422561
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07690830119661231,
+              "looKm": 0.08433617850717068
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.029825498923074754,
+              "looKm": 0.04012396180313507
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.04456208319649079,
+              "looKm": 0.04861538564047898
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.02373771250116452,
+              "looKm": 0.025782031097853295
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.022163357748379426,
+              "looKm": 0.023956058904607804
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.026138229258382988,
+              "looKm": 0.028130351105339613
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.017287367981316446,
+              "looKm": 0.018548920539372914
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.019630147820959364,
+              "looKm": 0.02113727831287318
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03890744472148809,
+              "looKm": 0.04161385446722383
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.028101973961472407,
+              "looKm": 0.030143536966296285
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.018586528747233332,
+              "looKm": 0.019915637357236973
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.009471878421808836,
+              "looKm": 0.010176500203331974
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.020365611932921787,
+              "looKm": 0.022518634918972696
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.005429580162075002,
+              "looKm": 0.006065919806370784
+            }
+          ]
+        },
+        {
+          "model": "equirectangular+poly2",
+          "rmsKm": 0.02417790981021337,
+          "maxKm": 0.049322056311379536,
+          "looRmsKm": 0.07527619296005013,
+          "looMaxKm": 0.19709090409545293,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.027163486502938462,
+              "looKm": 0.05007507164829365
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.009403735060001838,
+              "looKm": 0.16040867360438146
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.015716223619994068,
+              "looKm": 0.19709090409545293
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.011509873523589316,
+              "looKm": 0.14904631171840757
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.02392988690330608,
+              "looKm": 0.03691433052252105
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.049322056311379536,
+              "looKm": 0.07121941120810334
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.008178581287299758,
+              "looKm": 0.05853671936329765
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.034700327162819435,
+              "looKm": 0.03909171371597623
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.014890819291476058,
+              "looKm": 0.016533968640181775
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.014753075606430816,
+              "looKm": 0.01616784089257105
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.023728387594807002,
+              "looKm": 0.02577163326538092
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.013911226403281466,
+              "looKm": 0.015052180928067023
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.014626486658059896,
+              "looKm": 0.01590500495158934
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.039131168255174174,
+              "looKm": 0.042412488121724545
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.030525020221158484,
+              "looKm": 0.033131823705903916
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.021964638022535593,
+              "looKm": 0.02418957311867998
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.006848366454640333,
+              "looKm": 0.007542214518644329
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.032550550820539065,
+              "looKm": 0.03875276690549364
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.012766948022690409,
+              "looKm": 0.016034793515502598
+            }
+          ]
+        },
+        {
+          "model": "lcc(103.8,1.3,1.4)+poly2",
+          "rmsKm": 0.02417795070174008,
+          "maxKm": 0.04932216176935762,
+          "looRmsKm": 0.07527662210702822,
+          "looMaxKm": 0.1970928549440999,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.027163548226825412,
+              "looKm": 0.0500751845728267
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.009403889562545476,
+              "looKm": 0.1604113243589658
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.015716380805137584,
+              "looKm": 0.1970928549440999
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.011509740385792406,
+              "looKm": 0.14904459555641245
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.023930200507774675,
+              "looKm": 0.03691481458138383
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.04932216176935762,
+              "looKm": 0.07121956368565732
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.008178632625832677,
+              "looKm": 0.05853708845148276
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.034700289797679466,
+              "looKm": 0.039091671458550026
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.014890788803586194,
+              "looKm": 0.016533934835226687
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.014753100327269529,
+              "looKm": 0.016167867964436228
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.023728388776832088,
+              "looKm": 0.025771634467358202
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.013911305451505604,
+              "looKm": 0.01505226642482706
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.014626546762416094,
+              "looKm": 0.0159050702927694
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03913102556755644,
+              "looKm": 0.042412333505771505
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.030524896126086786,
+              "looKm": 0.03313168898712051
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.02196482142411356,
+              "looKm": 0.024189775098768
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.006848302878163656,
+              "looKm": 0.007542144455579588
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.03255068297551615,
+              "looKm": 0.03875292437340864
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.012767139707515219,
+              "looKm": 0.016035034213665388
+            }
+          ]
+        },
+        {
+          "model": "laea(103.8,1.3)+poly2",
+          "rmsKm": 0.024178054780173444,
+          "maxKm": 0.0493225933577539,
+          "looRmsKm": 0.07527798238279838,
+          "looMaxKm": 0.19709562529355237,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.02716428008474829,
+              "looKm": 0.0500765337773674
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.009404156015643402,
+              "looKm": 0.160415871256946
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.01571660172009428,
+              "looKm": 0.19709562529355237
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.011510038813883967,
+              "looKm": 0.14904846007242586
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.02393019409729807,
+              "looKm": 0.036914804720644616
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.0493225933577539,
+              "looKm": 0.0712201868824718
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.008178600332996899,
+              "looKm": 0.05853685735330345
+            },
+            {
+              "name": "Bridge Street river crossing / later Elgin Bridge centre",
+              "residualKm": 0.034700265739358326,
+              "looKm": 0.03909164443183072
+            },
+            {
+              "name": "North Bridge Road / High Street",
+              "residualKm": 0.014890834561044319,
+              "looKm": 0.01653398559414437
+            },
+            {
+              "name": "North Bridge Road / Coleman Street",
+              "residualKm": 0.014753088062169751,
+              "looKm": 0.016167854535383015
+            },
+            {
+              "name": "North Bridge Road / Stamford Road canal",
+              "residualKm": 0.023728369885221,
+              "looKm": 0.025771614004378406
+            },
+            {
+              "name": "North Bridge Road / Bras Basah Road",
+              "residualKm": 0.013911267569509615,
+              "looKm": 0.01505222547052295
+            },
+            {
+              "name": "Beach Road / Bras Basah Road",
+              "residualKm": 0.014626516657895437,
+              "looKm": 0.015905037572862653
+            },
+            {
+              "name": "North Bridge Road / Middle Road",
+              "residualKm": 0.03913106735759208,
+              "looKm": 0.04241237877581806
+            },
+            {
+              "name": "Beach Road / Middle Road",
+              "residualKm": 0.030524939893258735,
+              "looKm": 0.03313173653163508
+            },
+            {
+              "name": "North Bridge Road / Arab Street",
+              "residualKm": 0.021964730972980576,
+              "looKm": 0.02418967548511248
+            },
+            {
+              "name": "Beach Road / Arab Street",
+              "residualKm": 0.006848478449932082,
+              "looKm": 0.007542337864734481
+            },
+            {
+              "name": "South Bridge Road / Upper Pickering Street",
+              "residualKm": 0.032550671410826376,
+              "looKm": 0.038752910562996935
+            },
+            {
+              "name": "South Bridge Road / Cross Street",
+              "residualKm": 0.012766950868393426,
+              "looKm": 0.01603479708872314
+            }
+          ]
+        }
+      ],
+      "gridPlusTranslation": {
+        "translationMetres": [
+          -183.31115851351242,
+          -28.458638043436956
+        ],
+        "fitRmsM": 37.72555783472689,
+        "fitMaxM": 77.695298082928,
+        "looRmsM": 39.82142215887839,
+        "looMaxM": 82.01170353197955,
+        "residuals": [
+          {
+            "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+            "dx": -189.47655207919888,
+            "dy": -44.51574115914991,
+            "errorM": 17.200076694260602
+          },
+          {
+            "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+            "dx": -181.80999734293437,
+            "dy": -2.1493054557067808,
+            "errorM": 26.35212450774799
+          },
+          {
+            "name": "Yio Chu Kang Road / Upper Serangoon Road",
+            "dx": -233.32810024596984,
+            "dy": -64.25577987762517,
+            "errorM": 61.507152622804995
+          },
+          {
+            "name": "Clementi Road / Pasir Panjang Road",
+            "dx": -169.76927033410175,
+            "dy": -31.27093580775545,
+            "errorM": 13.830826229074438
+          },
+          {
+            "name": "Bukit Timah Road / Adam-Farrer Road",
+            "dx": -173.19872786436463,
+            "dy": -82.01902582752518,
+            "errorM": 54.50666375055193
+          },
+          {
+            "name": "Thomson Road / Balestier Road",
+            "dx": -118.59179575793678,
+            "dy": -71.44658319911105,
+            "errorM": 77.695298082928
+          },
+          {
+            "name": "Changi Road / Joo Chiat Road",
+            "dx": -237.19305282912683,
+            "dy": -50.31123520093388,
+            "errorM": 58.1446002442779
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "dx": -156.51071410183795,
+            "dy": 18.742002858110936,
+            "errorM": 54.27858069423084
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "dx": -180.37569014332257,
+            "dy": 3.280524510628311,
+            "errorM": 31.874620220259313
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "dx": -172.0312161659822,
+            "dy": -1.485320217354456,
+            "errorM": 29.236911155429294
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "dx": -193.3875344377593,
+            "dy": 0.4173114678415004,
+            "errorM": 30.583554599566167
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "dx": -178.41827215004014,
+            "dy": -7.7517401593213435,
+            "errorM": 21.27712285411363
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "dx": -184.88820413447684,
+            "dy": -4.265381565404823,
+            "errorM": 24.244602118872706
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "dx": -189.95691032259492,
+            "dy": -64.99881848186487,
+            "errorM": 37.1396123240509
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "dx": -191.4342808999354,
+            "dy": -53.21480506507214,
+            "errorM": 26.054806138367326
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "dx": -182.87202164233895,
+            "dy": -11.745811072760262,
+            "errorM": 16.718595232357362
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "dx": -179.93914903182304,
+            "dy": -34.573699241678696,
+            "errorM": 6.983152683626847
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "dx": -193.37713692500256,
+            "dy": -29.60555073028081,
+            "errorM": 10.13110705164193
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "dx": -176.3533853479894,
+            "dy": -9.544228600338101,
+            "errorM": 20.15354787634325
+          }
+        ]
+      }
+    },
+    {
+      "set": "rural-road-only",
+      "count": 7,
+      "autoFits": [
+        {
+          "model": "equirectangular+affine",
+          "rmsKm": 0.035759481418539754,
+          "maxKm": 0.07356360211811089,
+          "looRmsKm": 0.059521038094130445,
+          "looMaxKm": 0.0892031243075066,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.01820771630544071,
+              "looKm": 0.024303166563946443
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.016269686940347094,
+              "looKm": 0.05871986713244495
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.02056846130592536,
+              "looKm": 0.038355112403528645
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.020646638793543153,
+              "looKm": 0.06963265694082947
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.029509760960954836,
+              "looKm": 0.035444964451992085
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07356360211811089,
+              "looKm": 0.0892031243075066
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.034974063111613225,
+              "looKm": 0.0722997004017552
+            }
+          ]
+        },
+        {
+          "model": "mercator+affine",
+          "rmsKm": 0.03576465260512366,
+          "maxKm": 0.07356510168851434,
+          "looRmsKm": 0.05953957504053867,
+          "looMaxKm": 0.08920494266879984,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.018214717019886247,
+              "looKm": 0.02431251092181907
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.016285714809956626,
+              "looKm": 0.058777718956342095
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.020567302257816045,
+              "looKm": 0.03835295102858179
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.020657436940268118,
+              "looKm": 0.06966907618487471
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.029522532882923086,
+              "looKm": 0.035460304793073404
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07356510168851434,
+              "looKm": 0.08920494266879984
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.03498034378619265,
+              "looKm": 0.07231268559115359
+            }
+          ]
+        },
+        {
+          "model": "laea(103.8,1.3)+affine",
+          "rmsKm": 0.03578192320037212,
+          "maxKm": 0.07358142676182973,
+          "looRmsKm": 0.05958083447013468,
+          "looMaxKm": 0.0892247388441362,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.018212545380994184,
+              "looKm": 0.024309612354116182
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.016298458269753572,
+              "looKm": 0.05882370735763663
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.02066227088140368,
+              "looKm": 0.03853004453583126
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.020691970958515087,
+              "looKm": 0.06978554145097694
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.029562464283405043,
+              "looKm": 0.03550826784095033
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07358142676182973,
+              "looKm": 0.0892247388441362
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.03495472622202873,
+              "looKm": 0.07225972473370425
+            }
+          ]
+        },
+        {
+          "model": "lcc(103.8,1.3,1.4)+affine",
+          "rmsKm": 0.03578197633521284,
+          "maxKm": 0.07358149324601787,
+          "looRmsKm": 0.05958118434623026,
+          "looMaxKm": 0.08922481947724187,
+          "points": [
+            {
+              "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+              "residualKm": 0.018211615865196488,
+              "looKm": 0.024308371651201425
+            },
+            {
+              "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+              "residualKm": 0.01629851943510068,
+              "looKm": 0.05882392807641823
+            },
+            {
+              "name": "Yio Chu Kang Road / Upper Serangoon Road",
+              "residualKm": 0.020662450085064597,
+              "looKm": 0.038530378671044606
+            },
+            {
+              "name": "Clementi Road / Pasir Panjang Road",
+              "residualKm": 0.020692424106330754,
+              "looKm": 0.06978706958077287
+            },
+            {
+              "name": "Bukit Timah Road / Adam-Farrer Road",
+              "residualKm": 0.029562604837779432,
+              "looKm": 0.03550843664098312
+            },
+            {
+              "name": "Thomson Road / Balestier Road",
+              "residualKm": 0.07358149324601787,
+              "looKm": 0.08922481947724187
+            },
+            {
+              "name": "Changi Road / Joo Chiat Road",
+              "residualKm": 0.0349549297375316,
+              "looKm": 0.07226014534572239
+            }
+          ]
+        }
+      ],
+      "gridPlusTranslation": {
+        "translationMetres": [
+          -186.1953566362333,
+          -49.42408664682963
+        ],
+        "fitRmsM": 45.06812069303467,
+        "fitMaxM": 71.10015328971373,
+        "looRmsM": 52.57947414187379,
+        "looMaxM": 82.95017883799936,
+        "residuals": [
+          {
+            "name": "Jurong Road / Bukit Timah Road (now Jalan Jurong Kechil)",
+            "dx": -189.47655207919888,
+            "dy": -44.51574115914991,
+            "errorM": 5.904074776064744
+          },
+          {
+            "name": "Choa Chu Kang Road / Upper Bukit Timah Road",
+            "dx": -181.80999734293437,
+            "dy": -2.1493054557067808,
+            "errorM": 47.47774544773441
+          },
+          {
+            "name": "Yio Chu Kang Road / Upper Serangoon Road",
+            "dx": -233.32810024596984,
+            "dy": -64.25577987762517,
+            "errorM": 49.411280536670844
+          },
+          {
+            "name": "Clementi Road / Pasir Panjang Road",
+            "dx": -169.76927033410175,
+            "dy": -31.27093580775545,
+            "errorM": 24.481691048439718
+          },
+          {
+            "name": "Bukit Timah Road / Adam-Farrer Road",
+            "dx": -173.19872786436463,
+            "dy": -82.01902582752518,
+            "errorM": 35.09048901949083
+          },
+          {
+            "name": "Thomson Road / Balestier Road",
+            "dx": -118.59179575793678,
+            "dy": -71.44658319911105,
+            "errorM": 71.10015328971373
+          },
+          {
+            "name": "Changi Road / Joo Chiat Road",
+            "dx": -237.19305282912683,
+            "dy": -50.31123520093388,
+            "errorM": 51.00541196323892
+          }
+        ]
+      }
+    }
+  ]
+}

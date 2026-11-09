@@ -1,0 +1,197 @@
+{
+  "method": "Printed squares are two statute miles per margin note. Indices have an arbitrary common origin; absolute position must come from independently observed ground controls.",
+  "controlPoints": [
+    {
+      "name": "Printed two-mile square intersection C1 R1",
+      "svg": [
+        1233.0,
+        1687.0
+      ],
+      "gridMetres": [
+        3218.688,
+        -3218.688
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C5 R1",
+      "svg": [
+        3624.5,
+        1675.0
+      ],
+      "gridMetres": [
+        16093.44,
+        -3218.688
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C9 R1",
+      "svg": [
+        6014.5,
+        1657.5
+      ],
+      "gridMetres": [
+        28968.192000000003,
+        -3218.688
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C13 R1",
+      "svg": [
+        8401.5,
+        1637.0
+      ],
+      "gridMetres": [
+        41842.944,
+        -3218.688
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C1 R4",
+      "svg": [
+        1235.0,
+        3506.0
+      ],
+      "gridMetres": [
+        3218.688,
+        -12874.752
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C5 R4",
+      "svg": [
+        3629.0,
+        3494.0
+      ],
+      "gridMetres": [
+        16093.44,
+        -12874.752
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C9 R4",
+      "svg": [
+        6022.0,
+        3477.0
+      ],
+      "gridMetres": [
+        28968.192000000003,
+        -12874.752
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C13 R4",
+      "svg": [
+        8412.0,
+        3459.5
+      ],
+      "gridMetres": [
+        41842.944,
+        -12874.752
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C1 R7",
+      "svg": [
+        1244.0,
+        5331.0
+      ],
+      "gridMetres": [
+        3218.688,
+        -22530.816
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C5 R7",
+      "svg": [
+        3637.0,
+        5315.5
+      ],
+      "gridMetres": [
+        16093.44,
+        -22530.816
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C9 R7",
+      "svg": [
+        6031.0,
+        5300.0
+      ],
+      "gridMetres": [
+        28968.192000000003,
+        -22530.816
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C11 R7",
+      "svg": [
+        7226.0,
+        5291.0
+      ],
+      "gridMetres": [
+        35405.568,
+        -22530.816
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C4 R10",
+      "svg": [
+        3052.0,
+        7141.0
+      ],
+      "gridMetres": [
+        12874.752,
+        -32186.88
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C6 R10",
+      "svg": [
+        4248.5,
+        7132.0
+      ],
+      "gridMetres": [
+        19312.128,
+        -32186.88
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C8 R10",
+      "svg": [
+        5443.0,
+        7125.0
+      ],
+      "gridMetres": [
+        25749.504,
+        -32186.88
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    },
+    {
+      "name": "Printed two-mile square intersection C10 R10",
+      "svg": [
+        6638.0,
+        7119.0
+      ],
+      "gridMetres": [
+        32186.88,
+        -32186.88
+      ],
+      "qualification": "Internal printed two-statute-mile grid only; arbitrary local origin, no invented latitude/longitude or datum."
+    }
+  ]
+}

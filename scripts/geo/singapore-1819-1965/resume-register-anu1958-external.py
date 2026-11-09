@@ -1,0 +1,8 @@
+import json
+from pathlib import Path
+p=Path(__file__).resolve().parent;g=json.loads((p/'work/resume-register-anu1958-guides.json').read_text())['guides']
+reads={0:[284,288],1:[282,296],4:[292,285],5:[280,291],7:[281,281],8:[271,283],9:[292,287],10:[257,295],11:[279,291],12:[269,286],13:[278,300],14:[282,297],15:[280,296],16:[284,297],17:[282,295],18:[283,296],19:[284,285],20:[284,287],21:[282,294],22:[282,290],23:[284,291],24:[281,295]}
+cps=[]
+for k,xy in reads.items():
+ c=g[k];x,y=c['predictionOnly'];cps.append({'name':c['name'],'svg':[x-280+xy[0],y-280+xy[1]],'lnglat':c['lnglat'],'nativeRead':[xy[0],xy[1]],'searchWindow':[x-280,y-280,x+280,y+280],'readUncertaintyPx':3 if k!=10 else 10,'status':'native-source-reading-candidate','qualification':'Historical road topology matches named modern roads; exact axis survival after widening is not independently established. Coordinate-only OSM reference.' if k not in [10,11,12] else 'Rocky named cape candidate; generalised shoreline position is not a fixed surveyed monument. Changi multiple-lobes position is additionally ambiguous.'})
+(p/'resume-register-anu1958-external.json').write_text(json.dumps({'controlPoints':cps,'excludedCandidates':[{'name':g[k]['name'],'reason':r} for k,r in [(2,'Cannot establish the modern Nee Soon/Springleaf intersection among 1958 unlabelled minor village roads.'),(3,'1958 Braddell-Thomson branch lies materially north of the modern junction; later road realignment cannot be excluded.'),(6,'1958 Farrer-Holland intersection lies west of current junction; clear changed road geometry. Excluded for correspondence, before fitting.')]]},indent=2)+'\n')

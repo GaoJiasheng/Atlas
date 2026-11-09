@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-09",
+  "scope": "Native source-pixel Singapore River mask review; geographic fitting and published output are parent integration steps",
+  "countsBefore": {
+    "G1": 85,
+    "G4": 57
+  },
+  "G4UpperTraceVertices": 402,
+  "G4UpperTraceMarshIslandHoles": 1,
+  "sourceMasks": [
+    "G1 1822 Jackson proposed plan",
+    "G4 1839 Coleman survey",
+    "G7 1893 Constable city map"
+  ],
+  "findings": [
+    "G1 broad triangular Swamp basin and limited upstream reach match native source; top channel source frame [750,60] maps to 103.8455651,1.2893951 in existing fit, so no omitted upper main channel is visible on this source.",
+    "G4 prior 69-point lower river mask stopped artificially near [301,441]. Added native raster bank contours for broad upper channel and eastern marsh loop, preserving one real printed marsh island as hole.",
+    "G7 existing segmentation follows river to map top frame; published close-up is limited by viewport and 25m DP. Keep native shoreline and lower DP to 5m if budget allows."
+  ],
+  "method": "Grayscale channel interior threshold 180, 2x2 opening, connected source seed [315,440], one-pixel expansion to bank-ink centre; contour simplification 0.6 native pixels; retain printed marsh islands >40 square pixels; narrow eastern marsh channel follows source-constrained bright-interior path (4px corridor). Lower overprinted reaches use reviewed direct source-pixel trace.",
+  "limitations": [
+    "G4 faint narrow tributaries outside the connected bank selection remain outside this trace. This contour does not claim exhaustive historical marsh hydrology.",
+    "RMS is unchanged by this source-pixel extension; parent re-registration provides final figures.",
+    "No browser used; inspected offline source overlays."
+  ],
+  "previews": [
+    "work/resume-town-G1-before.png",
+    "work/resume-town-G4-combined-overlay.png",
+    "work/resume-town-G4-upper-overlay.png",
+    "work/resume-town-G7-town-shore-preview.png"
+  ]
+}

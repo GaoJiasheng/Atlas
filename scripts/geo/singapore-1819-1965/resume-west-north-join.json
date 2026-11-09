@@ -1,0 +1,331 @@
+{
+  "date": "2026-11-09",
+  "status": "source-coast-intersection-qualified; east-dry-path-passes; west-horizontal-sea-path-FAILS",
+  "point": [
+    103.66999,
+    1.376824100441372
+  ],
+  "G15": {
+    "native": [
+      5229.509086706021,
+      6068.822562110205
+    ],
+    "ring": 0,
+    "segment": 129,
+    "segmentEndpoints": [
+      [
+        103.66999,
+        1.37676
+      ],
+      [
+        103.66999,
+        1.37693
+      ]
+    ],
+    "sourceFirstGuideNative": [
+      5200,
+      6000
+    ],
+    "sourceFirstGuideLngLat": [
+      103.6695644139143,
+      1.3778123530013535
+    ],
+    "qualification": "Observed native mangrove/vegetated bank. This point lies approximately69native pixels below first real coast guide, not on source-frame closure. G15 graticule is internal only; external datum unmeasured."
+  },
+  "G16": {
+    "native": [
+      7482.829409566947,
+      5367.07406085735
+    ],
+    "ring": 1,
+    "segment": 975,
+    "segmentEndpoints": [
+      [
+        103.6702560343865,
+        1.3770834351103591
+      ],
+      [
+        103.6698759987176,
+        1.376712970127641
+      ]
+    ],
+    "qualification": "Observed native west-facing vegetated/mangrove shore, not text/sounding/frame; source is corrected through1954 and source accuracy remains approximate."
+  },
+  "intersectionMethod": "Exact segment/segment crossing between work/G15-west-water.geojson and work/resume-G16-registered.geojson. All segments touching known G15closure vertices and all >1km frame edges excluded; search103.65..103.69E,1.373..1.378N. Unique geometric crossing in this range, inspected against both native rasters.",
+  "commonLandEast": {
+    "from": [
+      103.66999,
+      1.376824100441372
+    ],
+    "to": [
+      103.691,
+      1.376824100441372
+    ],
+    "sampleCount": 1000,
+    "startBoundaryExcluded": true,
+    "failures": 0,
+    "failureIntervals": [],
+    "failureExamples": []
+  },
+  "commonSeaWestQualified": {
+    "from": [
+      103.66999,
+      1.376824100441372
+    ],
+    "to": [
+      103.65,
+      1.376824100441372
+    ],
+    "sampleCount": 1000,
+    "startBoundaryExcluded": true,
+    "failures": 40,
+    "failureIntervals": [
+      {
+        "startIndex": 35,
+        "endIndex": 58,
+        "startPoint": [
+          103.66929035,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66883058,
+          1.376824100441372
+        ]
+      },
+      {
+        "startIndex": 277,
+        "endIndex": 291,
+        "startPoint": [
+          103.66445277,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66417291,
+          1.376824100441372
+        ]
+      },
+      {
+        "startIndex": 319,
+        "endIndex": 319,
+        "startPoint": [
+          103.66361319,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66361319,
+          1.376824100441372
+        ]
+      }
+    ],
+    "failureExamples": [
+      {
+        "i": 35,
+        "point": [
+          103.66929035,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 36,
+        "point": [
+          103.66927036,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 291,
+        "point": [
+          103.66417291,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 319,
+        "point": [
+          103.66361319,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      }
+    ]
+  },
+  "commonSeaWestToCoverageEdge": {
+    "from": [
+      103.66999,
+      1.376824100441372
+    ],
+    "to": [
+      103.603,
+      1.376824100441372
+    ],
+    "sampleCount": 1000,
+    "startBoundaryExcluded": true,
+    "failures": 12,
+    "failureIntervals": [
+      {
+        "startIndex": 11,
+        "endIndex": 17,
+        "startPoint": [
+          103.66925311,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66885117,
+          1.376824100441372
+        ]
+      },
+      {
+        "startIndex": 83,
+        "endIndex": 87,
+        "startPoint": [
+          103.66442983,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66416187,
+          1.376824100441372
+        ]
+      }
+    ],
+    "failureExamples": [
+      {
+        "i": 11,
+        "point": [
+          103.66925311,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 12,
+        "point": [
+          103.66918611999999,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 86,
+        "point": [
+          103.66422886,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 87,
+        "point": [
+          103.66416187,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      }
+    ]
+  },
+  "commonSeaWestIncludingUnknownStrip": {
+    "from": [
+      103.66999,
+      1.376824100441372
+    ],
+    "to": [
+      103.59,
+      1.376824100441372
+    ],
+    "sampleCount": 1000,
+    "startBoundaryExcluded": true,
+    "failures": 170,
+    "failureIntervals": [
+      {
+        "startIndex": 9,
+        "endIndex": 14,
+        "startPoint": [
+          103.66927009,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66887014,
+          1.376824100441372
+        ]
+      },
+      {
+        "startIndex": 70,
+        "endIndex": 72,
+        "startPoint": [
+          103.6643907,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.66423071999999,
+          1.376824100441372
+        ]
+      },
+      {
+        "startIndex": 840,
+        "endIndex": 1000,
+        "startPoint": [
+          103.6027984,
+          1.376824100441372
+        ],
+        "endPoint": [
+          103.59,
+          1.376824100441372
+        ]
+      }
+    ],
+    "failureExamples": [
+      {
+        "i": 9,
+        "point": [
+          103.66927009,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 10,
+        "point": [
+          103.6691901,
+          1.376824100441372
+        ],
+        "G16land": true,
+        "G15water": true
+      },
+      {
+        "i": 999,
+        "point": [
+          103.59007999,
+          1.376824100441372
+        ],
+        "G16land": false,
+        "G15water": false
+      },
+      {
+        "i": 1000,
+        "point": [
+          103.59,
+          1.376824100441372
+        ],
+        "G16land": false,
+        "G15water": false
+      }
+    ]
+  },
+  "unqualifiedWesternStrip": {
+    "westBoxMin": 103.59,
+    "G15CoverageWestAtJoin": 103.602854777065,
+    "action": "Remove complete selector-born disconnected coverage component; do not claim this unknown strip is source water."
+  },
+  "requiredAction": "The qualified source intersection can anchor a revised G15 northern splice. East path is verified common land. Do NOT use straight westward latitude edge; G16mainland protrusions cross it. Derive and verify a common-sea route around those protrusions, or separately source-qualify a complete replacement. No runtime edits performed by this audit."
+}

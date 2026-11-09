@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-09",
+  "source": "G15",
+  "method": "Native outer mangrove-symbol front of the western Poyan peninsula, reread independently on source crop [4800,5800,5300,6600]. Smooth interpolation between source readings; 2–4 native-pixel reading uncertainty and unmeasured external datum. The three bottom/west coverage legs are entirely inside retained G16 land and cannot become coast. The uninked internal clearing has no qualified water symbol and is not promoted to a water polygon.",
+  "closureLandSamples": 2002,
+  "sourceVertices": 36,
+  "removedFragments": [
+    {
+      "nativeRing": [
+        [
+          4868.34133058886,
+          5969.507139306523
+        ],
+        [
+          4876.568770103713,
+          5972.476601770503
+        ],
+        [
+          4888.301375537396,
+          5972.562029931665
+        ],
+        [
+          4873.075922263838,
+          5968.975429170097
+        ],
+        [
+          4868.34133058886,
+          5969.507139306523
+        ]
+      ],
+      "source": "G15 native crop contains soundings and sea here, no dry island; complete detached G16 chart-glyph fragment removed"
+    }
+  ]
+}

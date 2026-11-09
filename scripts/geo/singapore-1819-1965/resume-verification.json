@@ -1,0 +1,984 @@
+{
+  "date": "2026-11-09",
+  "status": "INCOMPLETE \u2014 geographic acceptance and source rebuild fail",
+  "gates": [
+    {
+      "command": "pnpm check",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-check-final.log",
+      "logSHA256": "fa37215ce931c40cffc4ac4c88bde05c6b8eb94c4b4c4936f5ccc96430312889",
+      "files": 1232,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6
+    },
+    {
+      "command": "pnpm exec tsc --noEmit",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-tsc-final.log",
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "pnpm validate",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-validate-final.log",
+      "logSHA256": "c1e0e36cf4a18474f9ac36046ecf8252af8f8482bec0c75b0b1aa761b75b4819",
+      "topics": 94,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "command": "pnpm test -- --config scripts/geo/singapore-1819-1965/resume-vitest.config.ts --maxWorkers=2 --testTimeout=30000",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-test-final.log",
+      "logSHA256": "93d25328d6b5e54a791dd8da92f9d0cbfbc1d1a3805ddc7c9d6eb1f4f64d30db",
+      "suites": 275,
+      "tests": 6523,
+      "skipped": 0,
+      "qualification": "Whole unchanged test set; topic config permits the existing external pnpm store and inlines Drei. Plain earlier pnpm test failed on the linked-store loader and unrelated timeouts."
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-build-final.log",
+      "logSHA256": "45084abe7f6203e6197feb2f65dd597358f3b5fa34ea36ad3deb70ff53416a75",
+      "pages": 191
+    },
+    {
+      "command": "pnpm vitest run tests/geo-rings.test.ts --maxWorkers=1",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-rings-final.log",
+      "logSHA256": "779f5c328998c8f2a4d1a217773601aca609290093e707895ef505f848d73e6b",
+      "tests": 9
+    },
+    {
+      "command": "pnpm tsx scripts/js-budget.ts --check singapore-1819-1965",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-js-budget-final.log",
+      "logSHA256": "78b059d4989e6e611f85c62ea71da147e6a6d63673e83863d9ca1e4aa2e8d344",
+      "gzipKiB": 480.17,
+      "budgetKiB": 481
+    },
+    {
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/polish-audit.ts",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-audit-final.log",
+      "logSHA256": "f1cd06d532caf1c82c855e46a0d673b28b4b22264675be8b8cfa096a2e26c28f",
+      "qualification": "Source receipts, teaching-content preservation, lower delivery witnesses and exported rings pass; report explicitly contains failed source completeness."
+    },
+    {
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/polish-audit.ts --require-accuracy",
+      "exitCode": 1,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-accuracy-final.log",
+      "logSHA256": "f1cd06d532caf1c82c855e46a0d673b28b4b22264675be8b8cfa096a2e26c28f",
+      "qualification": "External registration and source completeness fail; not waived."
+    },
+    {
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/resume-coast-inputs.ts",
+      "exitCode": 1,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-rebuild-final.log",
+      "logSHA256": "99f5acca98c834814e848c110b66a6a24f93cc25fdf7efa130cb3820df70b33e",
+      "qualification": "Northern G15 source-water splice fails before live-asset writes."
+    },
+    {
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/finalise-control.ts",
+      "exitCode": 0,
+      "log": "scripts/geo/singapore-1819-1965/work/resume-holds-final.log",
+      "logSHA256": "9c612fc3c34c3ac32d1b73ed1b2ad4595bf7440c9890638af50f1fe4cd0a4d10",
+      "holds": 6
+    }
+  ],
+  "files": {
+    "public/geo/land-sg-history.json": {
+      "bytes": 243491,
+      "sha256": "170191c0b76dc9a9a75907e9e1960bcc3c37f59c43925d53f42c634fba29a6db"
+    },
+    "src/content/topics/singapore-1819-1965/data/control.json": {
+      "bytes": 567154,
+      "sha256": "db4aed50ef16204d3df159c84912808b40cb9c818cdbfd75f353a794051a3b1c"
+    },
+    "scripts/geo/singapore-1819-1965/sources.json": {
+      "bytes": 282583,
+      "sha256": "a5c892ae1cf47d2bd758343403e8e524e5bd601f47ca01ca8f856edc4f57b441"
+    },
+    "scripts/geo/singapore-1819-1965/resume-jurong-east-verified-full-water.json": {
+      "bytes": 85422,
+      "sha256": "4dbc2793c42fbba1c6844b966967abbb6258f3ccef3cc78b92cbc8008ef00320"
+    },
+    "scripts/geo/singapore-1819-1965/polish-audit.json": {
+      "bytes": 61016,
+      "sha256": "93ba0e5660eb0c341cec1281e06b3cf4b9fca656ceb762b57129b556a49e8036"
+    }
+  },
+  "counts": {
+    "chapters": {
+      "before": 12,
+      "after": 12
+    },
+    "keyframes": {
+      "before": 23,
+      "after": 23
+    },
+    "coastEras": {
+      "before": 6,
+      "after": 6
+    },
+    "coast": {
+      "beforeBytes": 193916,
+      "afterBytes": 243491,
+      "beforeArcs": 2753,
+      "afterArcs": 2517,
+      "vertices": 17618,
+      "rings": {
+        "rings": 512,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      }
+    },
+    "control": {
+      "beforeBytes": 524573,
+      "afterBytes": 567154,
+      "beforeArcs": 2367,
+      "afterArcs": 2473,
+      "rings": {
+        "rings": 2141,
+        "zeroArea": 0,
+        "selfCrossing": 0
+      }
+    },
+    "triangles": {
+      "method": "CPU earcut on decoded published local-land polygons, one era at a time; not runtime MapLibre tile or GPU measurements",
+      "before": {
+        "L0": 4420,
+        "L1": 4420,
+        "L2": 4493,
+        "L3": 4415,
+        "L4": 4561,
+        "L5": 4976
+      },
+      "after": {
+        "L0": 4823,
+        "L1": 4994,
+        "L2": 5075,
+        "L3": 4844,
+        "L4": 4576,
+        "L5": 8236
+      },
+      "liveGeometryChanged": true
+    },
+    "sourceOriginals": {
+      "before": 10,
+      "after": 11
+    }
+  },
+  "externalRegistration": [
+    {
+      "id": "G9",
+      "before": {
+        "model": "equirectangular+affine",
+        "fitRmsM": 69.7882732950707,
+        "fitMaxM": 153.31293040898393,
+        "looRmsM": 107.71275243591705,
+        "looMaxM": 243.9071115020286,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 60.02729928314077,
+            "looM": 112.8666221516699
+          },
+          {
+            "name": "Tanjong Batu Kekek",
+            "fitM": 153.31293040898393,
+            "looM": 221.04821781872243
+          },
+          {
+            "name": "Tanjong Tajam",
+            "fitM": 67.34780844268028,
+            "looM": 243.9071115020286
+          },
+          {
+            "name": "Tanjong Chek Jawa",
+            "fitM": 122.3623938408208,
+            "looM": 198.90288709269583
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 3.5830334796559793,
+            "looM": 4.262791610849778
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 69.15355641083542,
+            "looM": 80.9085925389927
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "fitM": 58.73878692063412,
+            "looM": 63.25782654058866
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "fitM": 22.533687244352823,
+            "looM": 24.22258229959421
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "fitM": 22.076697752408553,
+            "looM": 23.688220567130468
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "fitM": 7.6878685544233765,
+            "looM": 8.229436826165657
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "fitM": 42.14835902190159,
+            "looM": 45.02851576316898
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "fitM": 49.873729842218346,
+            "looM": 53.479514180561345
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "fitM": 29.96823118228885,
+            "looM": 31.956044253915252
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "fitM": 26.431330649569663,
+            "looM": 28.248258387961734
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "fitM": 90.546567363515,
+            "looM": 96.28520265366782
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "fitM": 102.87198898993671,
+            "looM": 109.46012754291985
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "fitM": 11.905545760791917,
+            "looM": 12.896745751414594
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "fitM": 83.47239559705612,
+            "looM": 90.96956912668679
+          }
+        ]
+      },
+      "after": {
+        "model": "equirectangular+affine",
+        "fitRmsM": 69.7882732950707,
+        "fitMaxM": 153.31293040898393,
+        "looRmsM": 107.71275243591705,
+        "looMaxM": 243.9071115020286,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 60.02729928314077,
+            "looM": 112.8666221516699
+          },
+          {
+            "name": "Tanjong Batu Kekek",
+            "fitM": 153.31293040898393,
+            "looM": 221.04821781872243
+          },
+          {
+            "name": "Tanjong Tajam",
+            "fitM": 67.34780844268028,
+            "looM": 243.9071115020286
+          },
+          {
+            "name": "Tanjong Chek Jawa",
+            "fitM": 122.3623938408208,
+            "looM": 198.90288709269583
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 3.5830334796559793,
+            "looM": 4.262791610849778
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 69.15355641083542,
+            "looM": 80.9085925389927
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "fitM": 58.73878692063412,
+            "looM": 63.25782654058866
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "fitM": 22.533687244352823,
+            "looM": 24.22258229959421
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "fitM": 22.076697752408553,
+            "looM": 23.688220567130468
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "fitM": 7.6878685544233765,
+            "looM": 8.229436826165657
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "fitM": 42.14835902190159,
+            "looM": 45.02851576316898
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "fitM": 49.873729842218346,
+            "looM": 53.479514180561345
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "fitM": 29.96823118228885,
+            "looM": 31.956044253915252
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "fitM": 26.431330649569663,
+            "looM": 28.248258387961734
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "fitM": 90.546567363515,
+            "looM": 96.28520265366782
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "fitM": 102.87198898993671,
+            "looM": 109.46012754291985
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "fitM": 11.905545760791917,
+            "looM": 12.896745751414594
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "fitM": 83.47239559705612,
+            "looM": 90.96956912668679
+          }
+        ]
+      },
+      "accepted": false
+    },
+    {
+      "id": "G11",
+      "before": {
+        "model": "equirectangular+affine",
+        "fitRmsM": 61.91261562126605,
+        "fitMaxM": 124.72676483577162,
+        "looRmsM": 77.78134402871518,
+        "looMaxM": 146.13145764389674,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 67.64536593103124,
+            "looM": 123.34848653918078
+          },
+          {
+            "name": "Tanjong Batu Kekek",
+            "fitM": 32.115322074237575,
+            "looM": 47.3436972775864
+          },
+          {
+            "name": "Tanjong Tajam",
+            "fitM": 10.185600201526105,
+            "looM": 34.87398555859396
+          },
+          {
+            "name": "Tanjong Chek Jawa",
+            "fitM": 78.77145774998992,
+            "looM": 132.36873810554954
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 118.02241874527485,
+            "looM": 140.40653283920318
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 124.72676483577162,
+            "looM": 146.13145764389674
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "fitM": 29.93899482078794,
+            "looM": 32.218253171243994
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "fitM": 92.37782408745657,
+            "looM": 99.17603376555455
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "fitM": 55.478682002950805,
+            "looM": 59.471784456527466
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "fitM": 39.56492183960495,
+            "looM": 42.33680520010074
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "fitM": 37.592267168943096,
+            "looM": 40.1632052852948
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "fitM": 61.42573366771996,
+            "looM": 65.90299580388006
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "fitM": 21.609596668454486,
+            "looM": 23.04161598814131
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "fitM": 46.73010835975084,
+            "looM": 49.966731418061066
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "fitM": 22.814319463552554,
+            "looM": 24.257350652996408
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "fitM": 70.94590923132306,
+            "looM": 75.54046634283833
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "fitM": 3.9544766501361908,
+            "looM": 4.283617121240973
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "fitM": 10.740427464492834,
+            "looM": 11.675456710537954
+          }
+        ]
+      },
+      "after": {
+        "model": "equirectangular+affine",
+        "fitRmsM": 61.91261562126605,
+        "fitMaxM": 124.72676483577162,
+        "looRmsM": 77.78134402871518,
+        "looMaxM": 146.13145764389674,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 67.64536593103124,
+            "looM": 123.34848653918078
+          },
+          {
+            "name": "Tanjong Batu Kekek",
+            "fitM": 32.115322074237575,
+            "looM": 47.3436972775864
+          },
+          {
+            "name": "Tanjong Tajam",
+            "fitM": 10.185600201526105,
+            "looM": 34.87398555859396
+          },
+          {
+            "name": "Tanjong Chek Jawa",
+            "fitM": 78.77145774998992,
+            "looM": 132.36873810554954
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 118.02241874527485,
+            "looM": 140.40653283920318
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 124.72676483577162,
+            "looM": 146.13145764389674
+          },
+          {
+            "name": "Bridge Street river crossing / later Elgin Bridge centre",
+            "fitM": 29.93899482078794,
+            "looM": 32.218253171243994
+          },
+          {
+            "name": "North Bridge Road / High Street",
+            "fitM": 92.37782408745657,
+            "looM": 99.17603376555455
+          },
+          {
+            "name": "North Bridge Road / Coleman Street",
+            "fitM": 55.478682002950805,
+            "looM": 59.471784456527466
+          },
+          {
+            "name": "North Bridge Road / Stamford Road canal",
+            "fitM": 39.56492183960495,
+            "looM": 42.33680520010074
+          },
+          {
+            "name": "North Bridge Road / Bras Basah Road",
+            "fitM": 37.592267168943096,
+            "looM": 40.1632052852948
+          },
+          {
+            "name": "Beach Road / Bras Basah Road",
+            "fitM": 61.42573366771996,
+            "looM": 65.90299580388006
+          },
+          {
+            "name": "North Bridge Road / Middle Road",
+            "fitM": 21.609596668454486,
+            "looM": 23.04161598814131
+          },
+          {
+            "name": "Beach Road / Middle Road",
+            "fitM": 46.73010835975084,
+            "looM": 49.966731418061066
+          },
+          {
+            "name": "North Bridge Road / Arab Street",
+            "fitM": 22.814319463552554,
+            "looM": 24.257350652996408
+          },
+          {
+            "name": "Beach Road / Arab Street",
+            "fitM": 70.94590923132306,
+            "looM": 75.54046634283833
+          },
+          {
+            "name": "South Bridge Road / Upper Pickering Street",
+            "fitM": 3.9544766501361908,
+            "looM": 4.283617121240973
+          },
+          {
+            "name": "South Bridge Road / Cross Street",
+            "fitM": 10.740427464492834,
+            "looM": 11.675456710537954
+          }
+        ]
+      },
+      "accepted": false
+    },
+    {
+      "id": "G16",
+      "before": {
+        "model": "mercator+affine",
+        "fitRmsM": 41.16263458714197,
+        "fitMaxM": 53.68524483683913,
+        "looRmsM": 152.5278004870376,
+        "looMaxM": 289.2906651752727,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 43.95853025813367,
+            "looM": 166.7039631330376
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 40.656070867034,
+            "looM": 50.31594472577026
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 27.98418220387267,
+            "looM": 34.553346087092066
+          },
+          {
+            "name": "Sultan Shoal Lighthouse",
+            "fitM": 50.44507379378599,
+            "looM": 76.78081969078625
+          },
+          {
+            "name": "Raffles Lighthouse (Pulau Satumu)",
+            "fitM": 53.68524483683913,
+            "looM": 135.9711622176492
+          },
+          {
+            "name": "Horsburgh Lighthouse (Pedra Branca)",
+            "fitM": 19.260867043191226,
+            "looM": 289.2906651752727
+          }
+        ]
+      },
+      "after": {
+        "model": "16 printed Mercator axis ticks + six-ground translation",
+        "fitRmsM": 45.6192442436163,
+        "fitMaxM": 60.726541653173626,
+        "looRmsM": 54.743093092339564,
+        "looMaxM": 72.87184998380835,
+        "points": [
+          {
+            "name": "Tanjong Changi",
+            "fitM": 60.726541653173626,
+            "looM": 72.87184998380835
+          },
+          {
+            "name": "Tanjong Berlayer",
+            "fitM": 36.31269260764108,
+            "looM": 43.575231129169296
+          },
+          {
+            "name": "Tanjong Rimau",
+            "fitM": 21.600611910248265,
+            "looM": 25.92073429229792
+          },
+          {
+            "name": "Sultan Shoal Lighthouse",
+            "fitM": 60.37329969427208,
+            "looM": 72.44795963312649
+          },
+          {
+            "name": "Raffles Lighthouse (Pulau Satumu)",
+            "fitM": 42.41339533105797,
+            "looM": 50.896074397269565
+          },
+          {
+            "name": "Horsburgh Lighthouse (Pedra Branca)",
+            "fitM": 39.62259850389031,
+            "looM": 47.547118204668365
+          }
+        ]
+      },
+      "accepted": false
+    }
+  ],
+  "G35ExternalLOO": {
+    "rmsM": 39.82142215887839,
+    "maxM": 82.01170353197955,
+    "accepted": false
+  },
+  "sourceCompleteness": {
+    "accepted": false,
+    "jurongHead": {
+      "inputRings": {
+        "rings": 3,
+        "zeroArea": 0,
+        "selfCrossing": 1
+      },
+      "delivery": [
+        {
+          "id": "L5",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        },
+        {
+          "id": "K15a",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        },
+        {
+          "id": "K16",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        },
+        {
+          "id": "K17",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        },
+        {
+          "id": "K18",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        },
+        {
+          "id": "K19",
+          "checks": [
+            {
+              "native": [
+                2005,
+                230
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2002,
+                240
+              ],
+              "land": false
+            },
+            {
+              "native": [
+                2013,
+                260
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2019,
+                275
+              ],
+              "land": true
+            },
+            {
+              "native": [
+                2081,
+                275
+              ],
+              "land": true
+            }
+          ]
+        }
+      ],
+      "reason": "The upper native mask retraces/crosses itself; paired blue-bank reaches collapse into fragments. The passing lower-water witnesses do not qualify this head."
+    },
+    "g15Splice": {
+      "accepted": false,
+      "reason": "Fresh resume-coast-inputs.ts fails the common-source-water route at the northern G15/G16 join. The old water-mask coverage cap disconnects the source intersection from the verified western sea. No failing rebuild output was published.",
+      "log": "work/resume-rebuild-final.log"
+    }
+  },
+  "contentPreservation": {
+    "chapterMethodOnly": true,
+    "sourcesAppendOnly": true,
+    "changedParagraphs": 4,
+    "receipt": "resume-text-changes.json"
+  },
+  "visualInspection": {
+    "method": "Offline CPU rasterisation of decoded actual published vectors using existing paper/cinema tokens; native-source overlays actually opened. No browser or desktop used. The upper channel fails visual/source acceptance.",
+    "previews": [
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/paper-island.png",
+        "sha256": "6ddd3a2c128fcc226ecb43a320384cbab674b27b58dfa14c06fa3a48f8997ecf"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/paper-jurong.png",
+        "sha256": "291e315f912a680f112442987d766abb8d5166aa6d376fca58673e85a52a1337"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/paper-river.png",
+        "sha256": "f853435bbe9692cbf599809fc64a0193fb3fee6fa3a360f58fa5d986d9471b4e"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/paper-settlements.png",
+        "sha256": "0d8358c0a491d46c6e902d316a67c1a8a8f3114325a69776daf0e9a73956e8b3"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/cinema-island.png",
+        "sha256": "8573165ca2555eef5e51bdedee2b7090d8decddcf443dad8f9df550d0460790d"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/cinema-jurong.png",
+        "sha256": "3ea211bbdea7c405db2b8b5a3d8edfab990f7e1b73da0166a73cc46763e2c921"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/cinema-river.png",
+        "sha256": "3e66d5362206ac1026ac9c08542783bb13cea4bd9f6bd2fd4aac1ca189b08a9f"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/cinema-settlements.png",
+        "sha256": "769769d4c99e993bbcbadae76a32387bda96a837001233c993ac78b18f33b111"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/G35-published-mouth.png",
+        "sha256": "b0a7da6f4270149cbc4e741c4835397ebfda79cf8913f8aac70775ded005cbbf"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/G35-published-pandan.png",
+        "sha256": "ddbfc0b3f12011cbd99f58924e5b717ccdfab55522dba19193e0753062d91435"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/G35-published-west.png",
+        "sha256": "92f4cc912a76cdbae261f123de9336c34c13720e78d6b0c30b440a7b4f4796fb"
+      },
+      {
+        "path": "scripts/geo/singapore-1819-1965/previews/G35-upper-channel-unqualified.png",
+        "sha256": "d034ad44a379157918e5df18dbcccc1626cee2f9f960027d8b0c998eea4f317e"
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-05",
+  "method": "Read-only comparison against HEAD before any live runtime edit; original bytes, not inferred shape counts.",
+  "runtimeFiles": [
+    {
+      "path": "public/geo/land-sg-history.json",
+      "bytes": 193916,
+      "sha256": "f9329c9dc7fc7f829b2021ee28bc95a4ffa6d0de6ce9b7f519850fce552fc76d"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/00-background.mdx",
+      "bytes": 16384,
+      "sha256": "3f585e4d1b42ca48bd64feffc494c97fbd454d1a167fbfc059ad39b70e859905"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/01-founding-1819.mdx",
+      "bytes": 10501,
+      "sha256": "d7c21c9b94a4870db55173a94545139100ea2a717adf6d700c4f79166f3b3897"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/02-town-plan.mdx",
+      "bytes": 9784,
+      "sha256": "a20d158f503d8ab5663ce1daffb9e470e02a4cbeff2b0f32a74be3823cd05f15"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/03-free-port.mdx",
+      "bytes": 10499,
+      "sha256": "531c153c7a83848c393961e3a319f39cfe2bc61f8c34b1ef03a0e165e608a4cb"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/04-arrivals.mdx",
+      "bytes": 10907,
+      "sha256": "7a701c25764a021439d71b2d8df0a8785d4da76c9a49a00d373d37b89b33bcfd"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/05-town-life.mdx",
+      "bytes": 12113,
+      "sha256": "6d4d2010dea311bdbc01cbd87c782ea45ab1bce48242b2999b25f6c00acf3853"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/06-british-malaya.mdx",
+      "bytes": 11636,
+      "sha256": "7b8be3dca7cdd638029c1a9c8a652d8bee896f8fb3f67b465bc37aade011901b"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/07-war-and-occupation.mdx",
+      "bytes": 14416,
+      "sha256": "04b5f2e8418b87e8be31d4cd694c740e907e91f0c2ebf188f4a91abc34b74ff0"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/08-after-the-war.mdx",
+      "bytes": 11209,
+      "sha256": "b4597d829fccd37971e4804cd3586f4c84bfbece32797eb74afa4de90c0a8ac7"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/09-self-government.mdx",
+      "bytes": 10473,
+      "sha256": "5780262b68588d35c7553af960570de846c15ef780f67b2e816178aeb9168cab"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/10-merger.mdx",
+      "bytes": 11119,
+      "sha256": "481db154c71eaf528f94989d0d90c22c1caeb99e3e22efa9365a1cd3ac6e7861"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/11-separation.mdx",
+      "bytes": 13214,
+      "sha256": "816312f4f90b066df9d21d2c0167dc127d55ba86846252933db2b81e4256ba5a"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/control.json",
+      "bytes": 524573,
+      "sha256": "4b01aa0fd9be3242f367136571339a8f1c275835e16b92e1500f51a9725eadb3"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/entities.json",
+      "bytes": 6108,
+      "sha256": "8b435cd5ac544e28c060766cb778797ffc26f2e95680d0996ec392bb334f1841"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/events.json",
+      "bytes": 127088,
+      "sha256": "85dbc17cd3103f175c7a142ca98585c39358216dc6385e7f0925fe427524f51f"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/glossary.json",
+      "bytes": 8364,
+      "sha256": "20909444728b27daf76813d2d1fb566a7c519b46453b60b972f829e047e35abe"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/movements.json",
+      "bytes": 28263,
+      "sha256": "8a7f1842218ebcc380e08fcbdce03644995f1acdff9c0d93efe5a7a29efed66d"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/presets.json",
+      "bytes": 1386,
+      "sha256": "2a1bdc771a089b4e85567803b919129af3b87f0651cada2e5ddc68317b90386f"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/sources.json",
+      "bytes": 319547,
+      "sha256": "f6735636037aa37b8b31ad1677a38469145bd52326fb1de7d9a7a34cb6533a6d"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/topic.yaml",
+      "bytes": 1133,
+      "sha256": "2532b1065a00d9aa428d032f72b3678a4b84bf57ebe985324dc4626c2b7ee8fa"
+    }
+  ],
+  "triangleCounts": {
+    "L0": 4420,
+    "L1": 4420,
+    "L2": 4493,
+    "L3": 4415,
+    "L4": 4561,
+    "L5": 4976
+  }
+}

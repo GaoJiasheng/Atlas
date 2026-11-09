@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Tanjong Changi",
+    "OSMNamePoint": [
+      103.9865343,
+      1.3928616
+    ],
+    "nearestModernCoast": [
+      103.98640475841938,
+      1.3926400634889566
+    ],
+    "distanceM": 28.53393083427664,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  },
+  {
+    "name": "Tanjong Batu Kekek",
+    "OSMNamePoint": [
+      103.955389,
+      1.4189142
+    ],
+    "nearestModernCoast": [
+      103.95545406205409,
+      1.4190174035825862
+    ],
+    "distanceM": 13.564630043060475,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  },
+  {
+    "name": "Tanjong Tajam",
+    "OSMNamePoint": [
+      103.9269082,
+      1.423175
+    ],
+    "nearestModernCoast": [
+      103.92662175649905,
+      1.423230674644374
+    ],
+    "distanceM": 32.43749552810684,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  },
+  {
+    "name": "Tanjong Chek Jawa",
+    "OSMNamePoint": [
+      103.9921622,
+      1.4081417
+    ],
+    "nearestModernCoast": [
+      103.99213811904029,
+      1.4040825242806936
+    ],
+    "distanceM": 451.3679818840783,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  },
+  {
+    "name": "Tanjong Berlayer",
+    "OSMNamePoint": [
+      103.8051074,
+      1.2622889
+    ],
+    "nearestModernCoast": [
+      103.80512352616024,
+      1.2623112242317363
+    ],
+    "distanceM": 3.0620005323734047,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  },
+  {
+    "name": "Tanjong Rimau",
+    "OSMNamePoint": [
+      103.8066725,
+      1.2597496
+    ],
+    "nearestModernCoast": [
+      103.80672145669794,
+      1.259745684534428
+    ],
+    "distanceM": 5.459811163125275,
+    "qualification": "Nearest coast is a geometric diagnostic, not a corresponding historic point or replacement control."
+  }
+]
