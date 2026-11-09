@@ -536,6 +536,7 @@ function Label(props: {
   const leader = useRef<SVGPathElement>(null);
   const dot = useRef<SVGCircleElement>(null);
   const { id, register } = props;
+  const zhFirst = useSceneContext().locale === 'zh';
   const gesture = useRef<(() => void) | null>(null);
   useEffect(() => () => gesture.current?.(), []);
   useLayoutEffect(() => {
@@ -567,10 +568,10 @@ function Label(props: {
         <text ref={text} className="space-co__text">
           <tspan className="space-co__en">
             {props.n && <tspan className="space-co__n">{props.n} </tspan>}
-            {props.en.toUpperCase()}
+            {zhFirst ? props.zh : props.en.toUpperCase()}
           </tspan>
-          <tspan className="space-co__zh" x={0} dy="1.5em" lang="zh-Hans">
-            {props.zh}
+          <tspan className="space-co__zh" x={0} dy="1.5em" lang={zhFirst ? 'en' : 'zh-Hans'}>
+            {zhFirst ? props.en.toUpperCase() : props.zh}
           </tspan>
           {props.note && (
             <tspan className="space-co__note" x={0} dy="1.45em">

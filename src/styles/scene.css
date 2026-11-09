@@ -170,6 +170,25 @@
   opacity: 0.75;
   visibility: visible;
 }
+/* Touch has no H key, and this button is its only way back from a hidden HUD or a presentation: no key hint, and
+   out of the caption card's way at the top right. */
+@media (pointer: coarse) {
+  .atlas-hud-restore {
+    top: max(8px, var(--safe-top));
+    right: max(8px, var(--safe-right));
+    left: auto;
+    bottom: auto;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink-2);
+  }
+  .atlas-hud-restore kbd {
+    display: none;
+  }
+  .atlas-scene[data-hud="off"] .atlas-hud-restore {
+    opacity: 1;
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /* HUD buttons (18px hairline, uppercase, wide tracking)               */
@@ -610,6 +629,27 @@
   text-shadow:
     0 0 calc(3 * var(--u)) var(--bg),
     0 0 calc(6 * var(--u)) var(--bg);
+}
+/* The column's blocks sit on one soft plate (a token mix, no blur), so a map or model behind never fights the type.
+   The bleed past each block is a box-shadow: it adds nothing to the block's measured box or scrollable overflow, which
+   the HUD room and the label solver read, and half the rail's top margin from each side closes the gap between blocks. */
+.atlas-title,
+.atlas-rail,
+.atlas-plate {
+  position: relative;
+  isolation: isolate;
+}
+.atlas-title::before,
+.atlas-rail::before,
+.atlas-plate::before {
+  --plate: color-mix(in srgb, var(--bg) 86%, transparent);
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--plate);
+  box-shadow: 0 0 0 calc(10 * var(--u)) var(--plate);
+  pointer-events: none;
 }
 .atlas-hud__right {
   grid-area: right;
@@ -1564,11 +1604,43 @@
 /* ------------------------------------------------------------------ */
 
 .atlas-rail {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 0;
   margin-top: calc(20 * var(--u));
   pointer-events: auto;
+}
+/* Script-driven scrolling here (current chapter, More) glides, unless the reader asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .atlas-rail__list,
+  .atlas-present__caption {
+    scroll-behavior: smooth;
+  }
+}
+/* Scroll cue (useScrollCue): the hidden end fades out, and a chevron points at what is left. */
+:is(.atlas-rail__list, .atlas-present__caption):is([data-more-start], [data-more-end]) {
+  --fade-start: 0px;
+  --fade-end: 0px;
+  mask-image: linear-gradient(var(--fade-to, to bottom), transparent, var(--ink) var(--fade-start), var(--ink) calc(100% - var(--fade-end)), transparent);
+}
+:is(.atlas-rail__list, .atlas-present__caption)[data-more-start] {
+  --fade-start: 28px;
+}
+:is(.atlas-rail__list, .atlas-present__caption)[data-more-end] {
+  --fade-end: 28px;
+}
+.atlas-rail:has(> .atlas-rail__list[data-more-end])::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--signal);
+  border-bottom: 1.5px solid var(--signal);
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 .atlas-rail__heading {
   display: flex;
@@ -1676,9 +1748,16 @@
     display: none;
   }
   .atlas-rail__list {
+    --fade-to: to right;
     display: flex;
     gap: 4px;
     overflow: auto hidden;
+  }
+  .atlas-rail:has(> .atlas-rail__list[data-more-end])::after {
+    left: auto;
+    right: 4px;
+    bottom: 18px;
+    transform: rotate(-45deg);
   }
   .atlas-rail__list > li {
     flex: none;
@@ -2577,7 +2656,11 @@
   flex-direction: column;
   gap: calc(6 * var(--u));
   margin: 0;
+  padding: calc(10 * var(--u)) calc(14 * var(--u));
   max-width: 60%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  text-shadow: none;
   pointer-events: none;
 }
 .atlas-present__title small {
@@ -2712,12 +2795,14 @@
 /* The caption fades in once the flight (2.2 s) is mostly done; at most four lines at 1920, then it scrolls inside the card. */
 .atlas-present__caption {
   --caption-size: max(18px, calc(28 * var(--u)));
-  max-height: calc(4 * 1.4 * var(--caption-size));
+  --caption-leading: 1.4;
+  --caption-lines: 4;
+  max-height: calc(var(--caption-lines) * var(--caption-leading) * var(--caption-size));
   margin: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  font: 400 var(--caption-size) / 1.4 var(--font-serif);
+  font: 400 var(--caption-size) / var(--caption-leading) var(--font-serif);
   text-align: center;
   text-wrap: pretty;
   touch-action: pan-y;
@@ -2725,6 +2810,54 @@
 }
 .atlas-present[data-instant] .atlas-present__caption {
   animation: none;
+}
+/* Holds the caption and, while text is hidden below, the More control on its bottom edge. */
+.atlas-present__capbox {
+  position: relative;
+  min-width: 0;
+}
+.atlas-present__foot[data-tucked] .atlas-present__capbox {
+  display: none;
+}
+.atlas-present__more {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: var(--panel-solid);
+  color: var(--ink);
+  font: 600 12px / 1 var(--font-hud);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.atlas-present__capbox:has(> [data-more-end]) .atlas-present__more {
+  display: inline-flex;
+}
+.atlas-present__more::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  min-width: var(--hit);
+  height: var(--hit);
+  transform: translateY(-50%);
+}
+.atlas-present__more i {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.atlas-present__more:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 1px;
 }
 @keyframes atlas-caption-in {
   from {
@@ -2896,6 +3029,29 @@
   }
   .atlas-present__foot {
     padding-inline: calc(16 * var(--u));
+  }
+  /* Same card height as four lines at the desktop size, but six lines of a size a phone can read in one go. */
+  .atlas-present__caption {
+    --caption-size: 20px;
+    --caption-leading: 1.3;
+    --caption-lines: 6;
+  }
+  .atlas-present__title {
+    left: 12px;
+    top: 10px;
+    gap: 2px;
+    padding: 6px 10px;
+    max-width: calc(100% - 124px); /* clear of the Show HUD control at the top right */
+  }
+  .atlas-present__title small {
+    display: none;
+  }
+  .atlas-present__title span:first-of-type {
+    font-size: 20px;
+  }
+  .atlas-present__title span + span {
+    font-size: 11px;
+    letter-spacing: 0.1em;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3137,13 +3293,14 @@
 .atlas-axis__seg[data-state="current"] .atlas-axis__track i {
   background: var(--signal);
 }
-/* A tick per beat, evenly spaced; its hit area is its share of the segment (at most 28 px). */
+/* A tick per beat, evenly spaced. Hit area: 44 px tall (down from the track, leaving the chapter label above it to the
+   segment's button) and 44 px wide, or its even share of the segment when beats sit closer than that. */
 .atlas-axis__tick {
   position: absolute;
   z-index: 1;
   top: 20px;
-  width: min(28px, calc(100% / var(--n)));
-  height: 24px;
+  width: min(var(--hit), calc(100% / var(--n)));
+  height: var(--hit);
   margin: 0;
   padding: 0;
   border: 0;
@@ -3155,7 +3312,7 @@
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 12px;
   width: 7px;
   height: 7px;
   box-sizing: border-box;

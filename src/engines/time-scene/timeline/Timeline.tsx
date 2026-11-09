@@ -307,12 +307,12 @@ export function Timeline(props: TimelineProps) {
                       </button>
                       {seg.ticks.map((k, j) => {
                         const { caption, date: time } = props.beatLabel(seg.id, k.index);
-                        // The hit area reaches halfway to the neighbouring ticks (10–28 px).
+                        // The hit area reaches halfway to the neighbouring ticks (10–44 px).
                         const sorted = [...seg.ticks].sort((a, b) => a.x - b.x);
                         const at = sorted.indexOf(k);
-                        const left = at > 0 ? (k.x - sorted[at - 1]!.x) / 2 : 14;
-                        const right = at < sorted.length - 1 ? (sorted[at + 1]!.x - k.x) / 2 : 14;
-                        const hit = Math.max(10, Math.min(28, 2 * Math.min(left, right)));
+                        const left = at > 0 ? (k.x - sorted[at - 1]!.x) / 2 : 22;
+                        const right = at < sorted.length - 1 ? (sorted[at + 1]!.x - k.x) / 2 : 22;
+                        const hit = Math.max(10, Math.min(44, 2 * Math.min(left, right)));
                         return (
                           <button
                             key={j}

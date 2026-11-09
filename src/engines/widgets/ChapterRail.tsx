@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import type { Chapter, Locale } from '../core/types';
 import { chapterNumbers, isBackground, storyChapters } from '../core/chapters';
+import { centredOffset } from '../core/scroll-cue';
+import { useScrollCue } from '../core/useScrollCue';
 import { t, tx } from '../../i18n';
 
 export interface ChapterRailProps {
@@ -22,10 +24,19 @@ export function ChapterRail({ chapters, currentId, locale, onSelect }: ChapterRa
   const listRef = useRef<HTMLOListElement>(null);
   const numbers = chapterNumbers(chapters);
 
+  // The list scrolls itself (not `scrollIntoView`, which also moves the page): the current chapter sits mid-list.
   useEffect(() => {
-    const el = listRef.current?.querySelector<HTMLElement>('[aria-current="step"]');
-    el?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    const list = listRef.current;
+    const el = list?.querySelector<HTMLElement>('[aria-current="step"]');
+    if (!list || !el) return;
+    const box = list.getBoundingClientRect();
+    const item = el.getBoundingClientRect();
+    list.scrollTo({
+      left: centredOffset(item.left - box.left + list.scrollLeft, item.width, list.clientWidth, list.scrollWidth),
+      top: centredOffset(item.top - box.top + list.scrollTop, item.height, list.clientHeight, list.scrollHeight),
+    });
   }, [currentId]);
+  useScrollCue(listRef, [chapters.length]);
 
   return (
     <nav aria-label={t(locale, 'scene.chapters')} className="atlas-rail" data-hud-panel="rail">

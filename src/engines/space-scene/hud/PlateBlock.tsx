@@ -26,6 +26,7 @@ import { useStore } from 'zustand';
 import { useHud, useScene, useSceneContext, useT } from '../../core/context';
 import { activePreset } from '../../core/controls';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../../i18n';
+import type { Locale } from '../../core/types';
 import { resolveColorRef } from '../../../theme/theme';
 import { FoldHeader } from '../../widgets/FoldHeader';
 import { elevation, numberedParts } from '../lib/schematic';
@@ -160,21 +161,22 @@ function useReadings(cells: readonly Cell[], targets: readonly number[], snapId:
 }
 
 function Row({ label, value, on }: { label: BilingualText; value: ReactNode; on?: boolean }) {
+  const { locale } = useSceneContext();
   return (
     <div className="space-plate__row" data-on={on || undefined} title={`${label.en} / ${label.zh}`}>
-      <dt>{label.en.toUpperCase()}</dt>
+      <dt>{tx(label, locale).toUpperCase()}</dt>
       <dd>{value}</dd>
     </div>
   );
 }
 
 /** A try-it control's value in the status line: `2 BATTERIES`, `SERIES`, `SWITCH ON`. */
-function controlStatus(c: SimControl, v: SimValue | undefined): string {
-  const label = c.label.en.toUpperCase();
-  if (c.kind === 'toggle') return `${label}: ${v ? 'ON' : 'OFF'}`;
-  if (c.kind === 'step' && c.format === 'time') return timeText(Number(v), 'en').toUpperCase();
+function controlStatus(c: SimControl, v: SimValue | undefined, locale: Locale): string {
+  const label = tx(c.label, locale).toUpperCase();
+  if (c.kind === 'toggle') return `${label}: ${locale === 'zh' ? (v ? '开' : '关') : v ? 'ON' : 'OFF'}`;
+  if (c.kind === 'step' && c.format === 'time') return timeText(Number(v), locale).toUpperCase();
   if (c.kind === 'step') return `${v}${c.unit ? ` ${c.unit.toUpperCase()}` : ''} ${label}`;
-  return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, 'en').toUpperCase();
+  return tx(c.options.find((o) => o.id === v)?.label ?? { en: String(v), zh: String(v) }, locale).toUpperCase();
 }
 
 function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run: boolean; file: PartsFile; ui: SpaceUiStore }) {
@@ -252,7 +254,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
               data-observe={follows && (ids.some((id) => observed.has(id)) || (isClips && !blank)) ? '' : undefined}
               title={`${r.key.en} / ${r.key.zh}`}
             >
-              {r.key.en.toUpperCase()} <b>{blank ? (noTransmission ? (locale === 'zh' ? '无传播' : 'No transmission') : '—') : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, 'en').toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
+              {tx(r.key, locale).toUpperCase()} <b>{blank ? (noTransmission ? (locale === 'zh' ? '无传播' : 'No transmission') : '—') : shown.map((j) => cells[j]!.id !== null && outputs.get(cells[j]!.id!)?.format === 'time' ? timeText(values[j]!, locale).toUpperCase() : formatReading(values[j]!, cells[j]!.decimals)).join(' · ')}</b>
               {r.unit && !blank && !ids.some((id) => outputs.get(id)?.format === 'time') && <small> {r.unit}</small>}
               {follows && !blank && ids.every((id) => outputs.get(id)?.tag === 'typical') && (
                 <>
@@ -268,7 +270,7 @@ function Telemetry({ rows, run, file, ui }: { rows: readonly TelemetryRow[]; run
       {view && (state || tried.length > 0) && (
         <p className="space-plate__simstate" data-state={stateValue} data-tag={tag.toLowerCase()} aria-label={[tag, state ? tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, locale) : '', ...tried.map((c) => valueWords(c, view.values[c.id], locale))].filter(Boolean).join(' · ')}>
           {tag}{state ? ` ${tx(state.states?.[stateValue] ?? { en: stateValue, zh: stateValue }, 'en').toUpperCase()}` : ''}
-          {tried.map((c) => ` · ${controlStatus(c, view.values[c.id])}`).join('')}
+          {tried.map((c) => ` · ${controlStatus(c, view.values[c.id], locale)}`).join('')}
         </p>
       )}
     </>
@@ -332,7 +334,7 @@ export function PlateBlock({ file, ui, bridge }: { file: PartsFile; ui: SpaceUiS
               <Row label={bi('space.state.flow')} value={activeFlows > 0 ? `${activeFlows}/${file.flows.length}` : up(t('space.state.off'))} on={activeFlows > 0} />
             )}
             <Row label={bi('space.state.anim')} value={moving > 0 ? String(moving) : up(t('space.state.still'))} on={moving > 0} />
-            <Row label={bi('space.state.view')} value={up(reference ? t('space.mode.reference') : preset ? tx(preset, 'en') : free ? t('space.state.free') : `CH ${chapterNo}`)} />
+            <Row label={bi('space.state.view')} value={up(reference ? t('space.mode.reference') : preset ? tx(preset, locale) : free ? t('space.state.free') : `CH ${chapterNo}`)} />
             <Row
               label={file.views.explodeLabel ?? bi('space.state.explode')}
               value={`${String(explode).padStart(2, '0')} %`}

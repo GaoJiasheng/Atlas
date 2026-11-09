@@ -2,7 +2,7 @@
  * PRESENTATION: the only HUD left on the stage — the title block and one
  * paper caption card at the bottom (fades in once the flight is done): a
  * header line (`04 / 11 · chapter · readout · 2 / 3`), the caption (large
- * serif, scrolls inside the card when it is long) and a two-level progress
+ * serif; when it is long it scrolls inside the card, with a fade and a More control) and a two-level progress
  * bar — one hairline segment per chapter, the current chapter's segment split
  * into its beats; the filled part is the progress up to the current beat.
  * Beside the bar, the AUTO-PLAY and VOICE checkboxes. A ⌄ button tucks the
@@ -26,6 +26,8 @@ import { tx, type BilingualText } from '../../../i18n';
 import { chapterNumberText, speakSequence, speakableText, SPEECH_LANG, stopSpeech, voiceFor, type Narration, type SpeechPart } from '../../../lib/speech';
 import { AFTER_SPEECH_MS, afterSettle, autoplayDwell, CAPTION_IN_MS, lostEndFallback } from './autoplay';
 import { chapterSpans, type Beat } from './beats';
+import { pageStep } from '../scroll-cue';
+import { useScrollCue } from '../useScrollCue';
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
 /** A press on the card that moves more than this (px) is a drag or a scroll, not a click to the next beat. */
@@ -112,6 +114,7 @@ export function Presentation({
   useEffect(() => {
     caption.current?.scrollTo({ top: 0 });
   }, [index]);
+  useScrollCue(caption, [index, captionText]);
   const go = (i: number) => (e: { detail: number; currentTarget: HTMLElement }) => {
     onGo(i);
     if (e.detail > 0) e.currentTarget.blur();
@@ -280,13 +283,14 @@ export function Presentation({
       window.removeEventListener('wheel', hold, true);
     };
   }, [autoplay, held, last, index, instant, settled, gate, audio, captionText, spoken, onStep, voiceOn]);
+  const otherTitle = locale === 'zh' ? title.en : title.zh;
   return (
     <div className="atlas-present" data-instant={instant || undefined} data-free={free || undefined}>
       <div className="atlas-present__hit" aria-hidden="true" />
       <p className="atlas-present__title" data-hud-panel="present-title">
         <small>{tr('present.title').toLocaleUpperCase('en')}</small>
-        <span lang="en">{title.en}</span>
-        {title.zh && <span lang="zh-Hans">{title.zh}</span>}
+        <span lang={locale === 'zh' ? 'zh-Hans' : 'en'}>{tx(title, locale)}</span>
+        {otherTitle && otherTitle !== tx(title, locale) && <span lang={locale === 'zh' ? 'en' : 'zh-Hans'}>{otherTitle}</span>}
       </p>
       <div
         className="atlas-present__foot"
@@ -320,9 +324,23 @@ export function Presentation({
             </em>
           )}
         </p>
-        <p className="atlas-present__caption" key={index} ref={caption} aria-live="polite">
-          {captionNode ?? captionText}
-        </p>
+        <div className="atlas-present__capbox">
+          <p className="atlas-present__caption" key={index} ref={caption} aria-live="polite">
+            {captionNode ?? captionText}
+          </p>
+          <button
+            type="button"
+            className="atlas-present__more"
+            onClick={(e) => {
+              const el = caption.current;
+              if (el) el.scrollBy({ top: pageStep(el.clientHeight, parseFloat(getComputedStyle(el).lineHeight) || 0) });
+              if (e.detail > 0) e.currentTarget.blur();
+            }}
+          >
+            {tr('present.more')}
+            <i aria-hidden="true" />
+          </button>
+        </div>
         {actions && (
           <div className="atlas-present__actions" data-present-actions="">
             {actions}

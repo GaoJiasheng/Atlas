@@ -558,6 +558,7 @@ button.ts-co:focus-visible {
   }
   .ts-state {
     justify-self: end;
+    margin-top: 6px; /* clear of the segment dates at the foot of the rule above */
   }
 }
 /* Phones: controls, then the rule on its own full-width row, then the counts. */
@@ -766,6 +767,13 @@ button.ts-co:focus-visible {
   transform: translateX(-50%);
   cursor: pointer;
   pointer-events: auto;
+}
+/* 44 px tall: the extra reach is upward, so the segment's label below stays the segment's. */
+.ts-seg__tick::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--hit);
 }
 .ts-seg__tick::before {
   content: "";

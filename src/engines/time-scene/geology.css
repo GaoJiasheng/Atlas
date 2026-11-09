@@ -3,6 +3,7 @@
 .ts-recon-readout small, .ts-recon-readout strong { display:block; }
 .atlas-scene[data-hud="off"] .ts-recon-readout { visibility:hidden; }
 .atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { display:block; visibility:visible; }
+@media (max-width:759px) { .atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { top:68px; } }
 /* A phone has no room beside the title; the caption's header already gives the age. */
 @media (max-width:700px) { .atlas-scene:has(.ts-stage[data-presenting]) .ts-recon-readout { display:none; } }
 .ts-geology-plate { overflow-y:auto; }

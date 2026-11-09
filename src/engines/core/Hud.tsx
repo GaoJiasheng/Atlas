@@ -8,7 +8,7 @@
  * place the others in their control panel (`widgets/ControlPanel.tsx`, stage
  * overlay). Sizes are in design pixels scaled by `--u` (see scene.css).
  */
-import { useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode, type RefObject } from 'react';
+import { lazy, Suspense, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode, type RefObject } from 'react';
 import { useStore } from 'zustand';
 import type { Chapter, Locale, TopicMeta } from './types';
 import { chapterNumbers, isBackground } from './chapters';
@@ -28,10 +28,18 @@ import {
 } from './controls';
 import type { SlotName } from './context';
 import { t, tx, type BilingualText, type UiKey } from '../../i18n';
-import { ControlsGuide } from './ControlsGuide';
 import { GlobalToggles } from '../widgets/GlobalToggles';
 
+/** Fetched when first opened: it is not part of the first frame. */
+const ControlsGuide = lazy(() => import('./ControlsGuide').then((m) => ({ default: m.ControlsGuide })));
+
 const upper = (s: string) => s.toLocaleUpperCase('en');
+const otherLang = (locale: Locale) => (locale === 'zh' ? 'en' : 'zh-Hans');
+/** The language not on show, or nothing when it is missing or identical. */
+const otherText = (text: BilingualText, locale: Locale) => {
+  const other = locale === 'zh' ? text.en : text.zh;
+  return other && other !== tx(text, locale) ? other : '';
+};
 
 /** Keep focus off HUD buttons after a pointer click, so SPACE / keys go to the scene. */
 function blurAfterPointer(e: MouseEvent<HTMLElement>) {
@@ -216,8 +224,8 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
                   blurAfterPointer(e);
                 }}
               >
-                <i aria-hidden="true">▶</i> {upper(t('en', 'present.button'))}
-                <small lang="zh-Hans">{t('zh', 'present.button')}</small>
+                <i aria-hidden="true">▶</i> {upper(t(locale, 'present.button'))}
+                <small lang={locale === 'zh' ? 'en' : 'zh-Hans'}>{upper(t(locale === 'zh' ? 'en' : 'zh', 'present.button'))}</small>
               </button>
             )}
           </div>
@@ -272,7 +280,11 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
           )}
         </p>
       </div>
-      <ControlsGuide hud={hud} actions={actions} engine={topic.engine} locale={locale} />
+      {guide && (
+        <Suspense>
+          <ControlsGuide hud={hud} actions={actions} engine={topic.engine} locale={locale} />
+        </Suspense>
+      )}
     </header>
   );
 }
@@ -281,11 +293,13 @@ export function TopBar({ topic, chapters, chapter, chapterNumber, locale, path, 
 /* Title block                                                         */
 /* ------------------------------------------------------------------ */
 
-function Bi({ text }: { text: BilingualText }) {
+/** The active language first; the other one small beside it, when it says something different. */
+function Bi({ text, locale }: { text: BilingualText; locale: Locale }) {
+  const other = otherText(text, locale);
   return (
     <>
-      {text.en}
-      {text.zh && text.zh !== text.en && <small lang="zh-Hans">{text.zh}</small>}
+      {tx(text, locale)}
+      {other && <small lang={otherLang(locale)}>{other}</small>}
     </>
   );
 }
@@ -296,7 +310,7 @@ export function defaultSpecRows(topic: TopicMeta, chapterCount: number, locale: 
   return [
     { id: 'subject', label: bi('spec.subject'), value: t(locale, `subject.${topic.subject}` as UiKey) },
     { id: 'chapters', label: bi('spec.chapters'), value: String(chapterCount).padStart(2, '0'), mono: true },
-    { id: 'syllabus', label: bi('spec.syllabus'), value: String(topic.moe.length), mono: true },
+    ...(topic.moe.length > 0 ? [{ id: 'syllabus', label: bi('spec.syllabus'), value: String(topic.moe.length), mono: true }] : []),
   ];
 }
 
@@ -319,9 +333,13 @@ export function TitleBlock({
 }) {
   const extra = useStore(hud, (s) => s.controls.specRows);
   const rows = [...defaultSpecRows(topic, chapterCount, locale), ...(extra ?? [])].slice(0, MAX_SPEC_ROWS);
-  const words = topic.title.en.trim().split(/\s+/);
+  // English sets its last word in signal orange; Chinese has no word breaks, so its title is one run of ink.
+  const titleText = tx(topic.title, locale);
+  const words = locale === 'zh' ? [] : titleText.trim().split(/\s+/);
   const last = words.pop() ?? '';
-  const zhLine = [topic.title.zh, topic.subtitle.zh].filter((s) => s && s.trim()).join(' · ');
+  const otherLine = [locale === 'zh' ? topic.title.en : topic.title.zh, otherText(topic.subtitle, locale)].filter((s) => s && s.trim()).join(' · ');
+  const note = topic.note ?? { en: t('en', 'hud.note'), zh: t('zh', 'hud.note') };
+  const noteOther = otherText(note, locale);
   // Kicker: chapter title in the page language, the other language small beside it.
   const other = chapter ? (locale === 'zh' ? chapter.title.en : chapter.title.zh) : undefined;
 
@@ -337,19 +355,25 @@ export function TitleBlock({
           </>
         )}
       </p>
-      <h1 className="atlas-title__h" lang="en">
-        {words.length > 0 && `${words.join(' ')} `}
-        <span>{last}</span>
+      <h1 className="atlas-title__h" lang={locale === 'zh' ? 'zh-Hans' : 'en'}>
+        {locale === 'zh' ? (
+          titleText
+        ) : (
+          <>
+            {words.length > 0 && `${words.join(' ')} `}
+            <span>{last}</span>
+          </>
+        )}
       </h1>
       <p className="atlas-title__sub">
-        <span lang="en">{topic.subtitle.en}</span>
-        {zhLine && <small lang="zh-Hans">{zhLine}</small>}
+        <span lang={locale === 'zh' ? 'zh-Hans' : 'en'}>{tx(topic.subtitle, locale)}</span>
+        {otherLine && <small lang={otherLang(locale)}>{otherLine}</small>}
       </p>
       <dl className="atlas-spec">
         {rows.map((row) => (
           <div key={row.id} className="atlas-spec__row">
             <dt>
-              <Bi text={row.label} />
+              <Bi text={row.label} locale={locale} />
             </dt>
             <dd data-mono={row.mono || undefined}>
               {tx(row.value, locale)}
@@ -359,11 +383,11 @@ export function TitleBlock({
         ))}
       </dl>
       <p className="atlas-title__note">
-        {upper(topic.note?.en ?? t('en', 'hud.note'))}
-        {(topic.note ? topic.note.zh : t('zh', 'hud.note')) && (
+        {upper(tx(note, locale))}
+        {noteOther && (
           <>
             {' · '}
-            <span lang="zh-Hans">{topic.note ? topic.note.zh : t('zh', 'hud.note')}</span>
+            <span lang={otherLang(locale)}>{locale === 'zh' ? upper(noteOther) : noteOther}</span>
           </>
         )}
       </p>
@@ -375,12 +399,22 @@ export function TitleBlock({
 /* Card + bottom panels (frames; engines fill the bodies via slots)    */
 /* ------------------------------------------------------------------ */
 
-function PanelHeader({ n, title }: { n: string; title: BilingualText }) {
+/** A panel's name: the active language in small caps, the other beside it. */
+function PanelName({ title, locale }: { title: BilingualText; locale: Locale }) {
+  const other = otherText(title, locale);
+  return (
+    <>
+      {upper(tx(title, locale))}
+      {other && <em lang={otherLang(locale)}>{locale === 'zh' ? upper(other) : other}</em>}
+    </>
+  );
+}
+
+function PanelHeader({ n, title, locale }: { n: string; title: BilingualText; locale: Locale }) {
   return (
     <h2 className="hud-ph">
       <i>{n}</i>
-      {upper(title.en)}
-      {title.zh && <em lang="zh-Hans">{title.zh}</em>}
+      <PanelName title={title} locale={locale} />
     </h2>
   );
 }
@@ -418,11 +452,11 @@ export function CardFrame({ hud, slotRef, locale, actions }: { hud: HudStore; sl
                 blurAfterPointer(e);
               }}
             >
-              <PanelHeader n="A" title={title} />
+              <PanelHeader n="A" title={title} locale={locale} />
               <i className="atlas-card__chev" aria-hidden="true" />
             </button>
           ) : (
-            <PanelHeader n="A" title={title} />
+            <PanelHeader n="A" title={title} locale={locale} />
           )}
           <button
             type="button"
@@ -453,8 +487,7 @@ export function CardFrame({ hud, slotRef, locale, actions }: { hud: HudStore; sl
           <i aria-hidden="true" />
           <span>
             <b>A</b>
-            {upper(title.en)}
-            {title.zh && <em lang="zh-Hans">{title.zh}</em>}
+            <PanelName title={title} locale={locale} />
           </span>
         </button>
       )}
@@ -539,8 +572,7 @@ export function BottomPanels({
         {filled.map((id) => (
           <span key={id} className="atlas-panels__name">
             <b>{id.slice(-2)}</b>
-            {upper(panels[id]!.en)}
-            {panels[id]!.zh && <em lang="zh-Hans">{panels[id]!.zh}</em>}
+            <PanelName title={panels[id]!} locale={locale} />
           </span>
         ))}
       </button>
@@ -555,14 +587,14 @@ export function BottomPanels({
               aria-selected={current === id}
               onClick={() => setTab(current === id ? null : id)}
             >
-              <i>{id.slice(-2)}</i> {upper(panels[id]!.en)}
+              <i>{id.slice(-2)}</i> {upper(tx(panels[id]!, locale))}
             </button>
           ))}
         </div>
         <div className="atlas-panels__grid">
           {filled.map((id) => (
             <section key={id} className="hud-panel atlas-panels__panel" data-hud-panel={id} data-active={current === id || undefined}>
-              <PanelHeader n={id.slice(-2)} title={panels[id]!} />
+              <PanelHeader n={id.slice(-2)} title={panels[id]!} locale={locale} />
               <div ref={slotRef(id)} className="hud-panel__body" />
             </section>
           ))}

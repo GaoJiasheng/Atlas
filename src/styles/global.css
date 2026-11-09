@@ -514,6 +514,14 @@ astro-static-slot {
   .fp__label[data-align="end"] {
     transform: translate(-100%, -100%);
   }
+  /* The label reads small; its tap target is 44 px tall. */
+  .fp__label::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: var(--hit);
+    transform: translateY(-50%);
+  }
   .fp__label-sep {
     color: var(--ink-3);
     letter-spacing: 0;
