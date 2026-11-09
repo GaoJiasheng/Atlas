@@ -1,0 +1,592 @@
+{
+  "before": {
+    "triangles": 233056,
+    "draws": 119,
+    "byPart": {
+      "balance-a": {
+        "triangles": 2040,
+        "draws": 3
+      },
+      "beam-balance": {
+        "triangles": 72408,
+        "draws": 2
+      },
+      "object-tray": {
+        "triangles": 588,
+        "draws": 1
+      },
+      "stone": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "sponge": {
+        "triangles": 588,
+        "draws": 1
+      },
+      "marble": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "clay-ball": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "water-beaker": {
+        "triangles": 864,
+        "draws": 2
+      },
+      "cylinder-a": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "cyl-a-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "tall-glass": {
+        "triangles": 480,
+        "draws": 1
+      },
+      "glass-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "flask": {
+        "triangles": 960,
+        "draws": 1
+      },
+      "flask-water": {
+        "triangles": 384,
+        "draws": 1
+      },
+      "bowl": {
+        "triangles": 5088,
+        "draws": 1
+      },
+      "bowl-water": {
+        "triangles": 8832,
+        "draws": 1
+      },
+      "cylinder-b": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "cyl-b-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "drop-stone": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-marble": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-clay-ball": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-clay-roll": {
+        "triangles": 1088,
+        "draws": 1
+      },
+      "basin": {
+        "triangles": 480,
+        "draws": 1
+      },
+      "basin-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "basin-water-cup": {
+        "triangles": 672,
+        "draws": 1
+      },
+      "cup": {
+        "triangles": 576,
+        "draws": 1
+      },
+      "cup-hole-mark": {
+        "triangles": 3648,
+        "draws": 1
+      },
+      "cup-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "trapped-air": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "tissue": {
+        "triangles": 8928,
+        "draws": 1
+      },
+      "balance-b": {
+        "triangles": 5496,
+        "draws": 4
+      },
+      "basketball": {
+        "triangles": 16800,
+        "draws": 2
+      },
+      "ball-pump": {
+        "triangles": 4548,
+        "draws": 3
+      },
+      "balloon-pump": {
+        "triangles": 1260,
+        "draws": 1
+      },
+      "balloon-round": {
+        "triangles": 2016,
+        "draws": 1
+      },
+      "balloon-long": {
+        "triangles": 1088,
+        "draws": 1
+      },
+      "syringe-rack": {
+        "triangles": 12408,
+        "draws": 3
+      },
+      "syringe-air": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "syringe-water": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "syringe-sand": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "plunger-air": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "plunger-water": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "plunger-sand": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "water-column": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "sand-column": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "masses-air": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "masses-water": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "masses-sand": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "sand-heap": {
+        "triangles": 1456,
+        "draws": 2
+      },
+      "sugar-heap": {
+        "triangles": 1456,
+        "draws": 2
+      },
+      "water-dish": {
+        "triangles": 864,
+        "draws": 2
+      },
+      "cylinder-c": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "sand-in-cylinder": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "water-over-sand": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "pour-cup": {
+        "triangles": 576,
+        "draws": 1
+      },
+      "jug-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "magnifier": {
+        "triangles": 4832,
+        "draws": 2
+      },
+      "bicycle-wheel": {
+        "triangles": 18660,
+        "draws": 5
+      },
+      "floor-pump": {
+        "triangles": 5312,
+        "draws": 4
+      },
+      "drink-can": {
+        "triangles": 1452,
+        "draws": 1
+      },
+      "can-drink": {
+        "triangles": 384,
+        "draws": 1
+      },
+      "kaya-jar": {
+        "triangles": 1920,
+        "draws": 3
+      },
+      "ice-cube": {
+        "triangles": 1656,
+        "draws": 2
+      },
+      "juice-glass": {
+        "triangles": 768,
+        "draws": 2
+      },
+      "torch": {
+        "triangles": 1272,
+        "draws": 4
+      },
+      "torch-beam": {
+        "triangles": 96,
+        "draws": 1
+      },
+      "sand-grains": {
+        "triangles": 2180,
+        "draws": 3
+      },
+      "sugar-crystals": {
+        "triangles": 220,
+        "draws": 1
+      },
+      "bench": {
+        "triangles": 648,
+        "draws": 2
+      },
+      "side-table": {
+        "triangles": 636,
+        "draws": 2
+      },
+      "balance-stand": {
+        "triangles": 792,
+        "draws": 2
+      },
+      "closer-plinth": {
+        "triangles": 588,
+        "draws": 1
+      }
+    },
+    "glbBytes": 0
+  },
+  "after": {
+    "triangles": 347558,
+    "draws": 103,
+    "byPart": {
+      "balance-a": {
+        "triangles": 2040,
+        "draws": 3
+      },
+      "beam-balance": {
+        "triangles": 2712,
+        "draws": 2
+      },
+      "object-tray": {
+        "triangles": 588,
+        "draws": 1
+      },
+      "stone": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "sponge": {
+        "triangles": 69416,
+        "draws": 1
+      },
+      "marble": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "clay-ball": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "water-beaker": {
+        "triangles": 864,
+        "draws": 2
+      },
+      "cylinder-a": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "cyl-a-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "tall-glass": {
+        "triangles": 480,
+        "draws": 1
+      },
+      "glass-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "flask": {
+        "triangles": 960,
+        "draws": 1
+      },
+      "flask-water": {
+        "triangles": 384,
+        "draws": 1
+      },
+      "bowl": {
+        "triangles": 5088,
+        "draws": 1
+      },
+      "bowl-water": {
+        "triangles": 8832,
+        "draws": 1
+      },
+      "cylinder-b": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "cyl-b-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "drop-stone": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-marble": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-clay-ball": {
+        "triangles": 2976,
+        "draws": 1
+      },
+      "drop-clay-roll": {
+        "triangles": 1088,
+        "draws": 1
+      },
+      "basin": {
+        "triangles": 480,
+        "draws": 1
+      },
+      "basin-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "basin-water-cup": {
+        "triangles": 672,
+        "draws": 1
+      },
+      "cup": {
+        "triangles": 576,
+        "draws": 1
+      },
+      "cup-hole-mark": {
+        "triangles": 3648,
+        "draws": 1
+      },
+      "cup-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "trapped-air": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "tissue": {
+        "triangles": 4382,
+        "draws": 1
+      },
+      "balance-b": {
+        "triangles": 5496,
+        "draws": 4
+      },
+      "basketball": {
+        "triangles": 47690,
+        "draws": 1
+      },
+      "ball-pump": {
+        "triangles": 4430,
+        "draws": 1
+      },
+      "balloon-pump": {
+        "triangles": 4472,
+        "draws": 1
+      },
+      "balloon-round": {
+        "triangles": 8022,
+        "draws": 1
+      },
+      "balloon-long": {
+        "triangles": 6668,
+        "draws": 1
+      },
+      "syringe-rack": {
+        "triangles": 12408,
+        "draws": 3
+      },
+      "syringe-air": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "syringe-water": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "syringe-sand": {
+        "triangles": 1800,
+        "draws": 2
+      },
+      "plunger-air": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "plunger-water": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "plunger-sand": {
+        "triangles": 696,
+        "draws": 2
+      },
+      "water-column": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "sand-column": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "masses-air": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "masses-water": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "masses-sand": {
+        "triangles": 1600,
+        "draws": 1
+      },
+      "sand-heap": {
+        "triangles": 1456,
+        "draws": 2
+      },
+      "sugar-heap": {
+        "triangles": 1456,
+        "draws": 2
+      },
+      "water-dish": {
+        "triangles": 864,
+        "draws": 2
+      },
+      "cylinder-c": {
+        "triangles": 912,
+        "draws": 3
+      },
+      "sand-in-cylinder": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "water-over-sand": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "pour-cup": {
+        "triangles": 576,
+        "draws": 1
+      },
+      "jug-water": {
+        "triangles": 288,
+        "draws": 1
+      },
+      "magnifier": {
+        "triangles": 4832,
+        "draws": 2
+      },
+      "bicycle-wheel": {
+        "triangles": 26348,
+        "draws": 1
+      },
+      "floor-pump": {
+        "triangles": 4928,
+        "draws": 1
+      },
+      "drink-can": {
+        "triangles": 1452,
+        "draws": 1
+      },
+      "can-drink": {
+        "triangles": 384,
+        "draws": 1
+      },
+      "kaya-jar": {
+        "triangles": 1920,
+        "draws": 3
+      },
+      "ice-cube": {
+        "triangles": 12888,
+        "draws": 3
+      },
+      "juice-glass": {
+        "triangles": 768,
+        "draws": 2
+      },
+      "torch": {
+        "triangles": 15228,
+        "draws": 1
+      },
+      "torch-beam": {
+        "triangles": 96,
+        "draws": 1
+      },
+      "sand-grains": {
+        "triangles": 39298,
+        "draws": 1
+      },
+      "sugar-crystals": {
+        "triangles": 220,
+        "draws": 1
+      },
+      "bench": {
+        "triangles": 3010,
+        "draws": 1
+      },
+      "side-table": {
+        "triangles": 3010,
+        "draws": 1
+      },
+      "balance-stand": {
+        "triangles": 792,
+        "draws": 2
+      },
+      "closer-plinth": {
+        "triangles": 588,
+        "draws": 1
+      }
+    },
+    "glbBytes": 1493868
+  }
+}

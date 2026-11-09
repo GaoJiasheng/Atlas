@@ -15,113 +15,6 @@
     "en": "A flat body with a round pan and a display window; the reading appears in the Try it card and in the PLATE block, not on the model. Put an empty container on first and press zero (tare), and the balance then shows only what you add [S1].\n\nSchool balances that read to 0.1 g with a 2 kg capacity are made for classrooms and laboratories [S41]; this one is drawn to that example. The last digit of a display is not the same as its accuracy: a real reading can drift a little.\n\nA balance measures mass, how much matter something contains [S29]. Weight is a different quantity, the pull of gravity on that mass.",
     "zh": "扁平的机身、圆形秤盘和一块显示窗；读数出现在“试一试”卡片和 PLATE 块里，不画在模型上。先放上空容器，按“归零”，秤就只显示后来加进去的东西 [S1]。\n\n学校和实验室用的电子秤，有量程 2 千克、读到 0.1 克的型号 [S41]；这台就照这个例子画。显示屏的最后一位不等于准确度：真实的读数会有一点漂移。\n\n秤量的是质量，也就是东西里有多少物质 [S29]。重量是另一个量，是重力对这份质量的拉力。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.16,
-     0.04,
-     0.18
-    ],
-    "bevel": 0.008,
-    "color": "enamel",
-    "tint": "#e6e2d8",
-    "at": [
-     -0.7,
-     0.02,
-     0.13
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.012,
-       0
-      ],
-      [
-       0.012,
-       0.006
-      ],
-      [
-       0.06,
-       0.008
-      ],
-      [
-       0.062,
-       0.012
-      ],
-      [
-       0,
-       0.012
-      ]
-     ],
-     "segments": 48,
-     "color": "stainless",
-     "at": [
-      -0.7,
-      0.04,
-      0.13
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.07,
-      0.016,
-      0.004
-     ],
-     "bevel": 0.0015,
-     "color": "powder",
-     "at": [
-      -0.7,
-      0.022,
-      0.221
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.005,
-      0.005,
-      0.004
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      -0.65,
-      0.022,
-      0.222
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.005,
-      0.005,
-      0.004
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      -0.636,
-      0.022,
-      0.222
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -129,6 +22,11 @@
      0
     ],
     "dist": 0.06
+   },
+   "mesh": "balance-a",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -146,241 +44,6 @@
     "en": "A beam rests on a pivot at the top of a column, with a pan hanging from each end and a pointer in the middle. The side with more mass goes down. You can compare two masses this way without reading any number.\n\nIn chapter 1 the big sponge goes in one pan and the small stone in the other, and the stone side goes down: a bigger thing is not always heavier. The tilt in the model is drawn at 6° to show which side is heavier; it is not a measurement [S1].",
     "zh": "横梁架在一根立柱顶上的支点上，两端各挂一只秤盘，中间一根指针。哪一边的质量大，哪一边就沉下去。这样比较两样东西的质量，不用读任何数字。\n\n第 1 章把大海绵放在一边，小石头放在另一边，石头那边沉了下去：大的东西不一定更重。模型里横梁倾斜 6°，只是为了看出哪边重，不是测量值 [S1]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.28,
-     0.008,
-     0.012
-    ],
-    "bevel": 0.002,
-    "color": "stainless",
-    "at": [
-     -0.62,
-     0.2,
-     -0.17
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.05,
-       0.004
-      ],
-      [
-       0.052,
-       0.009
-      ],
-      [
-       0.05,
-       0.009
-      ],
-      [
-       0.048,
-       0.006
-      ],
-      [
-       0,
-       0.002
-      ]
-     ],
-     "segments": 48,
-     "color": "stainless",
-     "at": [
-      -0.75,
-      0.06,
-      -0.17
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.05,
-       0.004
-      ],
-      [
-       0.052,
-       0.009
-      ],
-      [
-       0.05,
-       0.009
-      ],
-      [
-       0.048,
-       0.006
-      ],
-      [
-       0,
-       0.002
-      ]
-     ],
-     "segments": 48,
-     "color": "stainless",
-     "at": [
-      -0.49,
-      0.06,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       0.045,
-       -0.13,
-       0
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.75,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.0225,
-       -0.13,
-       0.03897
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.75,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.0225,
-       -0.13,
-       -0.03897
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.75,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       0.045,
-       -0.13,
-       0
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.49,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.0225,
-       -0.13,
-       0.03897
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.49,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.0225,
-       -0.13,
-       -0.03897
-      ]
-     ],
-     "radius": 0.0007,
-     "color": "brass",
-     "at": [
-      -0.49,
-      0.196,
-      -0.17
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.002,
-      0.06,
-      0.002
-     ],
-     "color": "brass",
-     "at": [
-      -0.62,
-      0.165,
-      -0.162
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -388,6 +51,11 @@
      0
     ],
     "dist": 0.08
+   },
+   "mesh": "beam-balance",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -487,22 +155,6 @@
     "en": "A block 12 × 8 × 4 cm, which is 384 cm³. Flexible foam is mostly air: most blocks are 15 to 60 kg per cubic metre [S17]. This model takes 30 kg per cubic metre, so the sponge reads 11.5 g, less than a fifth of the much smaller stone [S1].\n\nSqueeze it and it gets smaller, because the air is pushed out of its holes; the thin solid walls only fold. It floats and soaks up water, so you cannot find its volume by dropping it into a measuring cylinder.",
     "zh": "一块 12 × 8 × 4 厘米的海绵，体积 384 立方厘米。软泡沫里大部分是空气：大多数泡沫块每立方米 15 到 60 千克 [S17]。这个模型取每立方米 30 千克，所以海绵读 11.5 克，还不到那块小得多的石头的五分之一 [S1]。\n\n捏它，它会变小，那是因为孔里的空气被挤了出去；薄薄的固体孔壁只是被折弯了。它会浮在水上，还会吸水，所以不能把它丢进量筒里量体积。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.12,
-     0.04,
-     0.08
-    ],
-    "bevel": 0.008,
-    "color": "fabric",
-    "tint": "#d6b44c",
-    "at": [
-     -0.45,
-     0.035,
-     0.14
-    ]
-   },
    "explode": {
     "dir": [
      0,
@@ -510,6 +162,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "sponge",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -760,7 +417,7 @@
      ],
      "segments": 6,
      "color": "powder",
-     "tint": "#3d4245",
+     "tint": "token:ink",
      "at": [
       -0.37,
       0,
@@ -779,7 +436,8 @@
       -0.374,
       0.0213,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -793,7 +451,8 @@
       -0.374,
       0.0306,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -807,7 +466,8 @@
       -0.374,
       0.0399,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -821,7 +481,8 @@
       -0.374,
       0.0492,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -835,7 +496,8 @@
       -0.372,
       0.0585,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -849,7 +511,8 @@
       -0.374,
       0.0678,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -863,7 +526,8 @@
       -0.374,
       0.0771,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -877,7 +541,8 @@
       -0.374,
       0.0864,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -891,7 +556,8 @@
       -0.374,
       0.0957,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -905,7 +571,8 @@
       -0.372,
       0.10501,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -919,7 +586,8 @@
       -0.374,
       0.11431,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -933,7 +601,8 @@
       -0.374,
       0.12361,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -947,7 +616,8 @@
       -0.374,
       0.13291,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -961,7 +631,8 @@
       -0.374,
       0.14221,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -975,7 +646,8 @@
       -0.372,
       0.15151,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -989,7 +661,8 @@
       -0.374,
       0.16081,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1003,7 +676,8 @@
       -0.374,
       0.17011,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1017,7 +691,8 @@
       -0.374,
       0.17941,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1031,7 +706,8 @@
       -0.374,
       0.18871,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1045,7 +721,8 @@
       -0.372,
       0.19801,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1059,7 +736,8 @@
       -0.374,
       0.20731,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1073,7 +751,8 @@
       -0.374,
       0.21661,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1087,7 +766,8 @@
       -0.374,
       0.22591,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1101,7 +781,8 @@
       -0.374,
       0.23521,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -1115,7 +796,8 @@
       -0.372,
       0.24451,
       -0.0999
-     ]
+     ],
+     "tint": "token:ink"
     }
    ],
    "shell": true,
@@ -2197,7 +1879,7 @@
      ],
      "segments": 6,
      "color": "powder",
-     "tint": "#3d4245",
+     "tint": "token:ink",
      "at": [
       -0.25,
       0,
@@ -2216,7 +1898,8 @@
       -0.254,
       0.0213,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2230,7 +1913,8 @@
       -0.254,
       0.0306,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2244,7 +1928,8 @@
       -0.254,
       0.0399,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2258,7 +1943,8 @@
       -0.254,
       0.0492,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2272,7 +1958,8 @@
       -0.252,
       0.0585,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2286,7 +1973,8 @@
       -0.254,
       0.0678,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2300,7 +1988,8 @@
       -0.254,
       0.0771,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2314,7 +2003,8 @@
       -0.254,
       0.0864,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2328,7 +2018,8 @@
       -0.254,
       0.0957,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2342,7 +2033,8 @@
       -0.252,
       0.10501,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2356,7 +2048,8 @@
       -0.254,
       0.11431,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2370,7 +2063,8 @@
       -0.254,
       0.12361,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2384,7 +2078,8 @@
       -0.254,
       0.13291,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2398,7 +2093,8 @@
       -0.254,
       0.14221,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2412,7 +2108,8 @@
       -0.252,
       0.15151,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2426,7 +2123,8 @@
       -0.254,
       0.16081,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2440,7 +2138,8 @@
       -0.254,
       0.17011,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2454,7 +2153,8 @@
       -0.254,
       0.17941,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2468,7 +2168,8 @@
       -0.254,
       0.18871,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2482,7 +2183,8 @@
       -0.252,
       0.19801,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2496,7 +2198,8 @@
       -0.254,
       0.20731,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2510,7 +2213,8 @@
       -0.254,
       0.21661,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2524,7 +2228,8 @@
       -0.254,
       0.22591,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2538,7 +2243,8 @@
       -0.254,
       0.23521,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -2552,7 +2258,8 @@
       -0.252,
       0.24451,
       0.1201
-     ]
+     ],
+     "tint": "token:ink"
     }
    ],
    "shell": true,
@@ -3212,62 +2919,6 @@
     "en": "A crumpled dry tissue pushed into the bottom of the cup. While the cup holds its air, the tissue stays dry. When the air escapes and water fills the cup, it gets wet and turns darker [S31].",
     "zh": "一团揉皱的干纸巾，塞在杯底。杯里有空气，纸巾就是干的。空气跑掉、水灌满杯子，纸巾就湿了，颜色变深 [S31]。"
    },
-   "primitive": {
-    "kind": "sphere",
-    "size": [
-     0.026
-    ],
-    "color": "fabric",
-    "tint": "#f1eee6",
-    "scale": [
-     1.25,
-     0.32,
-     1.25
-    ],
-    "at": [
-     0.19,
-     0.2965,
-     0.12
-    ]
-   },
-   "extra": [
-    {
-     "kind": "sphere",
-     "size": [
-      0.012
-     ],
-     "color": "fabric",
-     "tint": "#f1eee6",
-     "scale": [
-      1,
-      0.55,
-      0.9
-     ],
-     "at": [
-      0.202,
-      0.2925,
-      0.128
-     ]
-    },
-    {
-     "kind": "sphere",
-     "size": [
-      0.011
-     ],
-     "color": "fabric",
-     "tint": "#f1eee6",
-     "scale": [
-      1.1,
-      0.6,
-      1
-     ],
-     "at": [
-      0.179,
-      0.2935,
-      0.11
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3275,6 +2926,11 @@
      0
     ],
     "dist": 0.06
+   },
+   "mesh": "tissue",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -3292,132 +2948,6 @@
     "en": "A second balance like the first, with a ring on its pan so the ball cannot roll [S41]. It is set to read the ball and the air already inside it: 600.0 g before pumping, in this model [S1].",
     "zh": "和第一台一样的电子秤，秤盘上放一个圈，球不会滚走 [S41]。在这个模型里，它读的是球加上球里原有的空气：打气前 600.0 克 [S1]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.16,
-     0.04,
-     0.18
-    ],
-    "bevel": 0.008,
-    "color": "enamel",
-    "tint": "#e6e2d8",
-    "at": [
-     0.17,
-     0.02,
-     -0.2
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.012,
-       0
-      ],
-      [
-       0.012,
-       0.006
-      ],
-      [
-       0.06,
-       0.008
-      ],
-      [
-       0.062,
-       0.012
-      ],
-      [
-       0,
-       0.012
-      ]
-     ],
-     "segments": 48,
-     "color": "stainless",
-     "at": [
-      0.17,
-      0.04,
-      -0.2
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.07,
-      0.016,
-      0.004
-     ],
-     "bevel": 0.0015,
-     "color": "powder",
-     "at": [
-      0.17,
-      0.022,
-      -0.109
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.005,
-      0.005,
-      0.004
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      0.22,
-      0.022,
-      -0.108
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.005,
-      0.005,
-      0.004
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      0.234,
-      0.022,
-      -0.108
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.05,
-      0.005
-     ],
-     "color": "rubber",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "tint": "#3a3633",
-     "at": [
-      0.17,
-      0.057,
-      -0.2
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3425,6 +2955,11 @@
      0
     ],
     "dist": 0.04
+   },
+   "mesh": "balance-b",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -3442,97 +2977,6 @@
     "en": "A size 7 ball, 75 cm round. FIBA lists 750 to 770 mm round and 580 to 620 g for a size 7 ball [S38]. This model ball reads 600.0 g before pumping, with about 7 litres of space inside [S1].\n\nEach pump pushes in 0.2 litres of room air, which is 0.236 g at 1.18 g per litre [S6]. After 20 pumps the balance reads 604.7 g in this model: the extra 4.7 g is the air pumped in. The ball keeps its outside size, so the air around it pushes up on it just as before and the extra reading is the air alone [S1].\n\nThe NBA rule asks for 7.5 to 8.5 pounds pressure in a game ball [S10]. Do not pump a ball harder than its maker says.",
     "zh": "一只 7 号球，周长 75 厘米。国际篮联（FIBA）规定 7 号球周长 750 到 770 毫米、质量 580 到 620 克 [S38]。这只模型球打气前读 600.0 克，里面约有 7 升空间 [S1]。\n\n每打一下，压进 0.2 升室内空气，按每升 1.18 克算是 0.236 克 [S6]。在这个模型里，打 20 下以后秤读 604.7 克：多出来的 4.7 克就是打进去的空气。球的外面大小不变，周围空气托它的力和原来一样，所以多出来的读数只是空气 [S1]。\n\nNBA 的规则要求比赛用球的气压在 7.5 到 8.5 磅之间 [S10]。打气不要超过球上标的气压。"
    },
-   "primitive": {
-    "kind": "sphere",
-    "size": [
-     0.11937
-    ],
-    "color": "rubber",
-    "tint": "#b8622e",
-    "at": [
-     0.17,
-     0.17087,
-     -0.2
-    ]
-   },
-   "extra": [
-    {
-     "kind": "torus",
-     "size": [
-      0.11977,
-      0.0016
-     ],
-     "color": "rubber",
-     "rotation": [
-      0,
-      0,
-      0
-     ],
-     "tint": "#2a211c",
-     "at": [
-      0.17,
-      0.17087,
-      -0.2
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.11977,
-      0.0016
-     ],
-     "color": "rubber",
-     "rotation": [
-      0,
-      90,
-      0
-     ],
-     "tint": "#2a211c",
-     "at": [
-      0.17,
-      0.17087,
-      -0.2
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.09561,
-      0.0016
-     ],
-     "color": "rubber",
-     "rotation": [
-      0,
-      90,
-      0
-     ],
-     "tint": "#2a211c",
-     "at": [
-      0.242,
-      0.17087,
-      -0.2
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.09561,
-      0.0016
-     ],
-     "color": "rubber",
-     "rotation": [
-      0,
-      90,
-      0
-     ],
-     "tint": "#2a211c",
-     "at": [
-      0.098,
-      0.17087,
-      -0.2
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3543,7 +2987,12 @@
    },
    "connects": [
     "balance-b"
-   ]
+   ],
+   "mesh": "basketball",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "ball-pump",
@@ -3560,140 +3009,6 @@
     "en": "A hand pump with a hose and a needle that fits the ball's valve. In this model each full stroke pushes in 0.2 litres of room air, with no leaks [S1]. Real pumps differ: one floor pump is sold as moving 318 cc a stroke [S43].",
     "zh": "一只手动打气筒，软管末端的气针插进球的气门。在这个模型里，每次推到底压进 0.2 升室内空气，不漏气 [S1]。真实的打气筒各不相同：有一款落地打气筒标的是每下 318 毫升 [S43]。"
    },
-   "primitive": {
-    "kind": "cylinder",
-    "size": [
-     0.016,
-     0.016,
-     0.185
-    ],
-    "color": "plastic",
-    "rotation": [
-     0,
-     0,
-     90
-    ],
-    "tint": "#5f7f74",
-    "at": [
-     0.1775,
-     0.017,
-     -0.04
-    ]
-   },
-   "extra": [
-    {
-     "kind": "cylinder",
-     "size": [
-      0.006,
-      0.006,
-      0.016
-     ],
-     "color": "plastic",
-     "rotation": [
-      0,
-      0,
-      90
-     ],
-     "tint": "#5f7f74",
-     "at": [
-      0.077,
-      0.017,
-      -0.04
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.016,
-      0.018,
-      0.09
-     ],
-     "bevel": 0.004,
-     "color": "rubber",
-     "tint": "#2f2c2a",
-     "at": [
-      0.065,
-      0.017,
-      -0.04
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.009,
-      0.009,
-      0.012
-     ],
-     "color": "rubber",
-     "rotation": [
-      0,
-      0,
-      90
-     ],
-     "tint": "#2f2c2a",
-     "at": [
-      0.276,
-      0.017,
-      -0.04
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       0.03,
-       0.008,
-       -0.01
-      ],
-      [
-       -0.03607,
-       0.08794,
-       -0.02582
-      ],
-      [
-       -0.06607,
-       0.10794,
-       -0.04582
-      ]
-     ],
-     "radius": 0.004,
-     "color": "rubber",
-     "tint": "#2f2c2a",
-     "bendRadius": 0.012,
-     "at": [
-      0.282,
-      0.017,
-      -0.04
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.0042,
-       0.0042,
-       -0.01043
-      ]
-     ],
-     "radius": 0.0012,
-     "color": "stainless",
-     "at": [
-      0.21593,
-      0.12494,
-      -0.08582
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3704,7 +3019,12 @@
    },
    "connects": [
     "basketball"
-   ]
+   ],
+   "mesh": "ball-pump",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "balloon-pump",
@@ -3721,69 +3041,6 @@
     "en": "A small pump for balloons. Using a pump instead of your breath keeps the moisture from your lungs out of the balloon [S30].",
     "zh": "一只小小的气球打气筒。用打气筒而不用嘴吹，可以不把肺里的水汽带进气球 [S30]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.03,
-      0
-     ],
-     [
-      0.03,
-      0.01
-     ],
-     [
-      0.018,
-      0.012
-     ],
-     [
-      0.018,
-      0.14
-     ],
-     [
-      0.008,
-      0.148
-     ],
-     [
-      0.005,
-      0.16
-     ],
-     [
-      0,
-      0.16
-     ]
-    ],
-    "segments": 48,
-    "color": "plastic",
-    "tint": "#6a6d8c",
-    "at": [
-     0.36,
-     0,
-     -0.26
-    ]
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.09,
-      0.01,
-      0.03
-     ],
-     "bevel": 0.003,
-     "color": "plastic",
-     "tint": "#6a6d8c",
-     "at": [
-      0.36,
-      0.005,
-      -0.26
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -3794,7 +3051,12 @@
    },
    "connects": [
     "balloon-round"
-   ]
+   ],
+   "mesh": "balloon-pump",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "balloon-round",
@@ -3811,112 +3073,6 @@
     "en": "A red balloon on the pump. The air inside spreads out to fill it, so the air takes the round shape of the balloon [S1].",
     "zh": "套在打气筒上的红气球。里面的空气散开，充满整只气球，所以空气是气球的圆形 [S1]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.0135,
-      0.00747
-     ],
-     [
-      0.03305,
-      0.01495
-     ],
-     [
-      0.0424,
-      0.02242
-     ],
-     [
-      0.04983,
-      0.0299
-     ],
-     [
-      0.05563,
-      0.03737
-     ],
-     [
-      0.05996,
-      0.04485
-     ],
-     [
-      0.06291,
-      0.05232
-     ],
-     [
-      0.06457,
-      0.0598
-     ],
-     [
-      0.06499,
-      0.06728
-     ],
-     [
-      0.06423,
-      0.07475
-     ],
-     [
-      0.06236,
-      0.08223
-     ],
-     [
-      0.05943,
-      0.0897
-     ],
-     [
-      0.05551,
-      0.09717
-     ],
-     [
-      0.05066,
-      0.10465
-     ],
-     [
-      0.04491,
-      0.11213
-     ],
-     [
-      0.03832,
-      0.1196
-     ],
-     [
-      0.03087,
-      0.12707
-     ],
-     [
-      0.02253,
-      0.13455
-     ],
-     [
-      0.01299,
-      0.14202
-     ],
-     [
-      0.004,
-      0.1495
-     ],
-     [
-      0,
-      0.1495
-     ]
-    ],
-    "segments": 48,
-    "color": "rubber",
-    "tint": "#b4413a",
-    "scale": [
-     0.32,
-     0.4,
-     0.32
-    ],
-    "at": [
-     0.36,
-     0.16,
-     -0.26
-    ]
-   },
    "explode": {
     "dir": [
      0,
@@ -3924,6 +3080,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "balloon-round",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -3941,30 +3102,6 @@
     "en": "A blue balloon that blows up long and thin. Air has no shape of its own: in this balloon it takes a long shape [S1].",
     "zh": "一只吹起来细长的蓝气球。空气没有自己的形状：在这只气球里，它就是长条形 [S1]。"
    },
-   "primitive": {
-    "kind": "capsule",
-    "size": [
-     0.024,
-     0.15
-    ],
-    "color": "rubber",
-    "tint": "#3d6a9e",
-    "rotation": [
-     0,
-     0,
-     90
-    ],
-    "scale": [
-     0.45,
-     0.38,
-     0.45
-    ],
-    "at": [
-     0.44762,
-     0.0108,
-     -0.31
-    ]
-   },
    "explode": {
     "dir": [
      0,
@@ -3972,6 +3109,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "balloon-long",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -3989,198 +3131,6 @@
     "en": "A base plate, two posts and a clamp bar hold three syringes tip down, side by side, so that the same masses can be put on each plunger at the same time [S1]. In a classroom, pressing gently by hand does the same job; masses make the readings easy to compare [S32].",
     "zh": "一块底板、两根立柱和一根夹杆，把三支针筒并排竖直夹住，针口朝下，这样每支柱塞上可以同时放同样的砝码 [S1]。课堂上用手轻轻压也行；用砝码是为了读数好比较 [S32]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.32,
-     0.012,
-     0.12
-    ],
-    "bevel": 0.004,
-    "color": "powder",
-    "tint": "#c9ccc8",
-    "at": [
-     0.52,
-     0.006,
-     -0.05
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.008,
-       0
-      ],
-      [
-       0.008,
-       0.19
-      ],
-      [
-       0,
-       0.19
-      ]
-     ],
-     "segments": 24,
-     "color": "stainless",
-     "at": [
-      0.375,
-      0.012,
-      -0.075
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.008,
-       0
-      ],
-      [
-       0.008,
-       0.19
-      ],
-      [
-       0,
-       0.19
-      ]
-     ],
-     "segments": 24,
-     "color": "stainless",
-     "at": [
-      0.665,
-      0.012,
-      -0.075
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.3,
-      0.014,
-      0.014
-     ],
-     "bevel": 0.003,
-     "color": "powder",
-     "tint": "#c9ccc8",
-     "at": [
-      0.52,
-      0.11,
-      -0.075
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.0135,
-      0.0022
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "tint": "#c9ccc8",
-     "at": [
-      0.43,
-      0.11,
-      -0.05
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.0135,
-      0.0022
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "tint": "#c9ccc8",
-     "at": [
-      0.52,
-      0.11,
-      -0.05
-     ]
-    },
-    {
-     "kind": "torus",
-     "size": [
-      0.0135,
-      0.0022
-     ],
-     "color": "powder",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "tint": "#c9ccc8",
-     "at": [
-      0.61,
-      0.11,
-      -0.05
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.012,
-      0.012,
-      0.003
-     ],
-     "color": "rubber",
-     "tint": "#2f2c2a",
-     "at": [
-      0.43,
-      0.0135,
-      -0.05
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.012,
-      0.012,
-      0.003
-     ],
-     "color": "rubber",
-     "tint": "#2f2c2a",
-     "at": [
-      0.52,
-      0.0135,
-      -0.05
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.012,
-      0.012,
-      0.003
-     ],
-     "color": "rubber",
-     "tint": "#2f2c2a",
-     "at": [
-      0.61,
-      0.0135,
-      -0.05
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -4188,6 +3138,11 @@
      0
     ],
     "dist": 0.01
+   },
+   "mesh": "syringe-rack",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -5465,108 +4420,6 @@
     "en": "A plastic rod with a rubber seal and a small platform on top for the masses. Its seal moves 0.32 cm for every millilitre, so from 20 ml to 9 ml it moves down about 3.5 cm [S1].",
     "zh": "一根塑料杆，下端是橡胶塞，顶上一个小平台放砝码。橡胶塞每走 0.32 厘米是 1 毫升，所以从 20 毫升到 9 毫升，它往下走了约 3.5 厘米 [S1]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.0098,
-      0
-     ],
-     [
-      0.0098,
-      0.003
-     ],
-     [
-      0.009,
-      0.004
-     ],
-     [
-      0.0098,
-      0.005
-     ],
-     [
-      0.0098,
-      0.008
-     ],
-     [
-      0,
-      0.008
-     ]
-    ],
-    "segments": 32,
-    "color": "rubber",
-    "tint": "#26272b",
-    "at": [
-     0.43,
-     0.10166,
-     -0.05
-    ]
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.014,
-      0.05534,
-      0.0018
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.43,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.0018,
-      0.05534,
-      0.014
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.43,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.035,
-       0
-      ],
-      [
-       0.035,
-       0.004
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.43,
-      0.165,
-      -0.05
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -5574,6 +4427,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "plunger-air",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -5591,108 +4449,6 @@
     "en": "The same plunger on the water syringe. The water hardly squashes, so the plunger does not move that you can see [S1].",
     "zh": "装水针筒上同样的柱塞。水几乎压不小，所以看不出柱塞在动 [S1]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.0098,
-      0
-     ],
-     [
-      0.0098,
-      0.003
-     ],
-     [
-      0.009,
-      0.004
-     ],
-     [
-      0.0098,
-      0.005
-     ],
-     [
-      0.0098,
-      0.008
-     ],
-     [
-      0,
-      0.008
-     ]
-    ],
-    "segments": 32,
-    "color": "rubber",
-    "tint": "#26272b",
-    "at": [
-     0.52,
-     0.10166,
-     -0.05
-    ]
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.014,
-      0.05534,
-      0.0018
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.52,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.0018,
-      0.05534,
-      0.014
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.52,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.035,
-       0
-      ],
-      [
-       0.035,
-       0.004
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.52,
-      0.165,
-      -0.05
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -5700,6 +4456,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "plunger-water",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -5717,108 +4478,6 @@
     "en": "The same plunger on the sand syringe, held up by the grains underneath [S1].",
     "zh": "装沙针筒上同样的柱塞，被下面的沙粒顶住 [S1]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.0098,
-      0
-     ],
-     [
-      0.0098,
-      0.003
-     ],
-     [
-      0.009,
-      0.004
-     ],
-     [
-      0.0098,
-      0.005
-     ],
-     [
-      0.0098,
-      0.008
-     ],
-     [
-      0,
-      0.008
-     ]
-    ],
-    "segments": 32,
-    "color": "rubber",
-    "tint": "#26272b",
-    "at": [
-     0.61,
-     0.10166,
-     -0.05
-    ]
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.014,
-      0.05534,
-      0.0018
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.61,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.0018,
-      0.05534,
-      0.014
-     ],
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.61,
-      0.13733,
-      -0.05
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.035,
-       0
-      ],
-      [
-       0.035,
-       0.004
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "plastic",
-     "tint": "#e3ddd0",
-     "at": [
-      0.61,
-      0.165,
-      -0.05
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -5826,6 +4485,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "plunger-sand",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -6159,110 +4823,6 @@
     "en": "Dry sand poured onto a dish piles into a cone. Its sides slope at about 33° in this model; one measured dry quartz sand settled at about 32.5° [S14]. Water poured onto a dish spreads out flat instead.\n\nSand pours because its grains can roll past each other. Each grain keeps its own shape and volume, so each grain is a solid [S28].",
     "zh": "干沙倒在碟子上，堆成一个圆锥。在这个模型里，沙堆的坡约 33°；有一种实测的干石英沙，坡约 32.5° [S14]。水倒在碟子上，却会摊平。\n\n沙会倒，是因为沙粒能互相滚过去。每一粒都保持自己的形状和体积，所以每一粒都是固体 [S28]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0.004
-     ],
-     [
-      0.036,
-      0.004
-     ],
-     [
-      0.0324,
-      0.00685
-     ],
-     [
-      0.0288,
-      0.00753
-     ],
-     [
-      0.0252,
-      0.01203
-     ],
-     [
-      0.0216,
-      0.01314
-     ],
-     [
-      0.018,
-      0.01495
-     ],
-     [
-      0.0144,
-      0.01922
-     ],
-     [
-      0.0108,
-      0.01951
-     ],
-     [
-      0.0072,
-      0.02264
-     ],
-     [
-      0.0036,
-      0.02597
-     ],
-     [
-      0,
-      0.02738
-     ]
-    ],
-    "segments": 40,
-    "color": "abrasive",
-    "tint": "#c8ab78",
-    "at": [
-     0.55,
-     0,
-     0.245
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.038,
-       0
-      ],
-      [
-       0.046,
-       0.012
-      ],
-      [
-       0.048,
-       0.016
-      ],
-      [
-       0.045,
-       0.016
-      ],
-      [
-       0.04,
-       0.006
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "enamel",
-     "tint": "#e9e4d8",
-     "at": [
-      0.55,
-      0,
-      0.245
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -6270,6 +4830,11 @@
      0
     ],
     "dist": 0.04
+   },
+   "mesh": "sand-heap",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -6287,110 +4852,6 @@
     "en": "Granulated sugar is made of small crystals; ordinary grades have grains about 0.4 to 1 mm across on average [S40]. It pours and piles up like sand, and each crystal is a solid.",
     "zh": "砂糖是一粒粒小晶体；普通规格的糖粒，平均大小约 0.4 到 1 毫米 [S40]。它会像沙一样倒出来、堆起来，每一粒晶体都是固体。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0.004
-     ],
-     [
-      0.034,
-      0.004
-     ],
-     [
-      0.0306,
-      0.0053
-     ],
-     [
-      0.0272,
-      0.00844
-     ],
-     [
-      0.0238,
-      0.01151
-     ],
-     [
-      0.0204,
-      0.01164
-     ],
-     [
-      0.017,
-      0.01575
-     ],
-     [
-      0.0136,
-      0.0175
-     ],
-     [
-      0.0102,
-      0.01842
-     ],
-     [
-      0.0068,
-      0.0228
-     ],
-     [
-      0.0034,
-      0.02339
-     ],
-     [
-      0,
-      0.02608
-     ]
-    ],
-    "segments": 40,
-    "color": "abrasive",
-    "tint": "#f1eee6",
-    "at": [
-     0.665,
-     0,
-     0.255
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.038,
-       0
-      ],
-      [
-       0.046,
-       0.012
-      ],
-      [
-       0.048,
-       0.016
-      ],
-      [
-       0.045,
-       0.016
-      ],
-      [
-       0.04,
-       0.006
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "enamel",
-     "tint": "#e9e4d8",
-     "at": [
-      0.665,
-      0,
-      0.255
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -6398,6 +4859,11 @@
      0
     ],
     "dist": 0.04
+   },
+   "mesh": "sugar-heap",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -6574,7 +5040,7 @@
      ],
      "segments": 6,
      "color": "powder",
-     "tint": "#3d4245",
+     "tint": "token:ink",
      "at": [
       0.8,
       0,
@@ -6593,7 +5059,8 @@
       0.796,
       0.0213,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6607,7 +5074,8 @@
       0.796,
       0.0306,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6621,7 +5089,8 @@
       0.796,
       0.0399,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6635,7 +5104,8 @@
       0.796,
       0.0492,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6649,7 +5119,8 @@
       0.798,
       0.0585,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6663,7 +5134,8 @@
       0.796,
       0.0678,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6677,7 +5149,8 @@
       0.796,
       0.0771,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6691,7 +5164,8 @@
       0.796,
       0.0864,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6705,7 +5179,8 @@
       0.796,
       0.0957,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6719,7 +5194,8 @@
       0.798,
       0.10501,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6733,7 +5209,8 @@
       0.796,
       0.11431,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6747,7 +5224,8 @@
       0.796,
       0.12361,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6761,7 +5239,8 @@
       0.796,
       0.13291,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6775,7 +5254,8 @@
       0.796,
       0.14221,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6789,7 +5269,8 @@
       0.798,
       0.15151,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6803,7 +5284,8 @@
       0.796,
       0.16081,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6817,7 +5299,8 @@
       0.796,
       0.17011,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6831,7 +5314,8 @@
       0.796,
       0.17941,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6845,7 +5329,8 @@
       0.796,
       0.18871,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6859,7 +5344,8 @@
       0.798,
       0.19801,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6873,7 +5359,8 @@
       0.796,
       0.20731,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6887,7 +5374,8 @@
       0.796,
       0.21661,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6901,7 +5389,8 @@
       0.796,
       0.22591,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6915,7 +5404,8 @@
       0.796,
       0.23521,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     },
     {
      "kind": "box",
@@ -6929,7 +5419,8 @@
       0.798,
       0.24451,
       -0.0399
-     ]
+     ],
+     "tint": "token:ink"
     }
    ],
    "shell": true,
@@ -7276,637 +5767,6 @@
     "en": "A bicycle wheel in a low stand, with its tyre connected to a floor pump. Each stroke squeezes more air into the same tyre. The tyre hardly gets bigger, so the air inside is squashed closer together and the tyre feels harder [S5].\n\nPump a tyre only to the pressure marked on its side.",
     "zh": "一只装在矮架上的脚车轮，轮胎的气门接着落地打气筒。每打一下，就把更多空气压进同一条轮胎。轮胎几乎没有变大，所以里面的空气被压得更紧，轮胎摸起来更硬 [S5]。\n\n给轮胎打气，不要超过轮胎侧面标的气压。"
    },
-   "primitive": {
-    "kind": "torus",
-    "size": [
-     0.288,
-     0.022
-    ],
-    "color": "rubber",
-    "tint": "#2c2a28",
-    "at": [
-     -1.45,
-     0.345,
-     -0.15
-    ]
-   },
-   "extra": [
-    {
-     "kind": "torus",
-     "size": [
-      0.284,
-      0.007
-     ],
-     "color": "casing",
-     "at": [
-      -1.45,
-      0.345,
-      -0.15
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.035
-      ],
-      [
-       0.012,
-       -0.035
-      ],
-      [
-       0.012,
-       -0.03
-      ],
-      [
-       0.022,
-       -0.03
-      ],
-      [
-       0.022,
-       -0.026
-      ],
-      [
-       0.012,
-       -0.022
-      ],
-      [
-       0.012,
-       0.022
-      ],
-      [
-       0.022,
-       0.026
-      ],
-      [
-       0.022,
-       0.03
-      ],
-      [
-       0.012,
-       0.03
-      ],
-      [
-       0.012,
-       0.035
-      ],
-      [
-       0,
-       0.035
-      ]
-     ],
-     "segments": 24,
-     "color": "steel",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      -1.45,
-      0.345,
-      -0.15
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -82.5
-     ],
-     "at": [
-      -1.29434,
-      0.36549,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -67.5
-     ],
-     "at": [
-      -1.30495,
-      0.40508,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -52.5
-     ],
-     "at": [
-      -1.32544,
-      0.44058,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -37.5
-     ],
-     "at": [
-      -1.35442,
-      0.46956,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -22.5
-     ],
-     "at": [
-      -1.38992,
-      0.49005,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      -7.5
-     ],
-     "at": [
-      -1.42951,
-      0.50066,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      7.5
-     ],
-     "at": [
-      -1.47049,
-      0.50066,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      22.5
-     ],
-     "at": [
-      -1.51008,
-      0.49005,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      37.5
-     ],
-     "at": [
-      -1.54558,
-      0.46956,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      52.5
-     ],
-     "at": [
-      -1.57456,
-      0.44058,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      67.5
-     ],
-     "at": [
-      -1.59505,
-      0.40508,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      82.5
-     ],
-     "at": [
-      -1.60566,
-      0.36549,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      97.5
-     ],
-     "at": [
-      -1.60566,
-      0.32451,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      112.5
-     ],
-     "at": [
-      -1.59505,
-      0.28492,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      127.5
-     ],
-     "at": [
-      -1.57456,
-      0.24942,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      142.5
-     ],
-     "at": [
-      -1.54558,
-      0.22044,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      157.5
-     ],
-     "at": [
-      -1.51008,
-      0.19995,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      172.5
-     ],
-     "at": [
-      -1.47049,
-      0.18934,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      187.5
-     ],
-     "at": [
-      -1.42951,
-      0.18934,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      202.5
-     ],
-     "at": [
-      -1.38992,
-      0.19995,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      217.5
-     ],
-     "at": [
-      -1.35442,
-      0.22044,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      232.5
-     ],
-     "at": [
-      -1.32544,
-      0.24942,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      247.5
-     ],
-     "at": [
-      -1.30495,
-      0.28492,
-      -0.156
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.001,
-      0.001,
-      0.254
-     ],
-     "color": "steel",
-     "rotation": [
-      0,
-      0,
-      262.5
-     ],
-     "at": [
-      -1.29434,
-      0.32451,
-      -0.144
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.003,
-      0.003,
-      0.03
-     ],
-     "color": "brass",
-     "rotation": [
-      0,
-      0,
-      -35
-     ],
-     "at": [
-      -1.29399,
-      0.12219,
-      -0.15
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.18,
-      0.016,
-      0.14
-     ],
-     "bevel": 0.004,
-     "color": "powder",
-     "tint": "#3b3e42",
-     "at": [
-      -1.45,
-      0.008,
-      -0.15
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       0.058,
-       0.329,
-       -0.045
-      ]
-     ],
-     "radius": 0.007,
-     "color": "powder",
-     "tint": "#3b3e42",
-     "at": [
-      -1.52,
-      0.016,
-      -0.15
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.058,
-       0.329,
-       -0.045
-      ]
-     ],
-     "radius": 0.007,
-     "color": "powder",
-     "tint": "#3b3e42",
-     "at": [
-      -1.38,
-      0.016,
-      -0.15
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -7914,6 +5774,11 @@
      0
     ],
     "dist": 0.1
+   },
+   "mesh": "bicycle-wheel",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -7931,129 +5796,6 @@
     "en": "A standing pump with a T-shaped handle and a hose to the tyre valve. Pumps differ in how much air one stroke moves; one is sold as 318 cc a stroke [S43].",
     "zh": "一只立式打气筒，T 形把手，软管接到轮胎气门。打气筒每下能压进多少空气各不相同；有一款标的是每下 318 毫升 [S43]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0.02
-     ],
-     [
-      0.02,
-      0.02
-     ],
-     [
-      0.02,
-      0.52
-     ],
-     [
-      0.012,
-      0.53
-     ],
-     [
-      0,
-      0.53
-     ]
-    ],
-    "segments": 48,
-    "color": "powder",
-    "tint": "#4b6f8e",
-    "at": [
-     -1.15,
-     0,
-     -0.245
-    ]
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.16,
-      0.02,
-      0.05
-     ],
-     "bevel": 0.005,
-     "color": "powder",
-     "tint": "#2e3033",
-     "at": [
-      -1.15,
-      0.01,
-      -0.245
-     ]
-    },
-    {
-     "kind": "cylinder",
-     "size": [
-      0.005,
-      0.005,
-      0.06
-     ],
-     "color": "steel",
-     "at": [
-      -1.15,
-      0.56,
-      -0.245
-     ]
-    },
-    {
-     "kind": "capsule",
-     "size": [
-      0.013,
-      0.14
-     ],
-     "color": "rubber",
-     "tint": "#2a2827",
-     "rotation": [
-      90,
-      0,
-      0
-     ],
-     "at": [
-      -1.15,
-      0.592,
-      -0.245
-     ]
-    },
-    {
-     "kind": "tube",
-     "path": [
-      [
-       0,
-       0,
-       0
-      ],
-      [
-       -0.01,
-       -0.005,
-       0.036
-      ],
-      [
-       -0.11087,
-       0.015,
-       0.071
-      ],
-      [
-       -0.13087,
-       0.02719,
-       0.091
-      ],
-      [
-       -0.13087,
-       0.05719,
-       0.091
-      ]
-     ],
-     "radius": 0.004,
-     "color": "rubber",
-     "tint": "#2a2827",
-     "bendRadius": 0.014,
-     "at": [
-      -1.17,
-      0.035,
-      -0.241
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      1,
@@ -8064,7 +5806,12 @@
    },
    "connects": [
     "bicycle-wheel"
-   ]
+   ],
+   "mesh": "floor-pump",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "drink-can",
@@ -8389,87 +6136,6 @@
     "en": "Two ice cubes on a dish. Ice is water as a solid: it keeps its own shape until it melts [S2]. How ice melts is in the topic on water.",
     "zh": "碟子里的两块冰。冰是固体的水：它在融化之前保持自己的形状 [S2]。冰怎样融化，在讲水的主题里。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.025,
-     0.025,
-     0.025
-    ],
-    "bevel": 0.004,
-    "color": "glass",
-    "tint": "#a9d3e0",
-    "rotation": [
-     0,
-     18,
-     0
-    ],
-    "at": [
-     -1.492,
-     0.0185,
-     0.14
-    ]
-   },
-   "extra": [
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.025,
-      0.025,
-      0.025
-     ],
-     "bevel": 0.004,
-     "color": "glass",
-     "tint": "#a9d3e0",
-     "rotation": [
-      0,
-      -25,
-      0
-     ],
-     "at": [
-      -1.464,
-      0.0185,
-      0.146
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.04,
-       0
-      ],
-      [
-       0.05,
-       0.006
-      ],
-      [
-       0.047,
-       0.006
-      ],
-      [
-       0.038,
-       0.004
-      ],
-      [
-       0,
-       0.004
-      ]
-     ],
-     "segments": 48,
-     "color": "enamel",
-     "tint": "#5f7d8c",
-     "at": [
-      -1.48,
-      0,
-      0.14
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -8477,6 +6143,11 @@
      0
     ],
     "dist": 0.05
+   },
+   "mesh": "ice-cube",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -8586,101 +6257,6 @@
     "en": "The torch is matter: it has mass and takes up space. The light it gives out is not: light has no mass and takes up no space. Light and heat are forms of energy [S2].",
     "zh": "手电筒是物质：它有质量，也占据空间。它发出的光不是物质：光没有质量，也不占据空间。光和热是能量的形式 [S2]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      0
-     ],
-     [
-      0.013,
-      0
-     ],
-     [
-      0.013,
-      0.11
-     ],
-     [
-      0.02,
-      0.135
-     ],
-     [
-      0.02,
-      0.16
-     ],
-     [
-      0,
-      0.16
-     ]
-    ],
-    "segments": 48,
-    "color": "powder",
-    "rotation": [
-     0,
-     0,
-     -90
-    ],
-    "tint": "#38414a",
-    "at": [
-     -1.81,
-     0.05,
-     0.255
-    ]
-   },
-   "extra": [
-    {
-     "kind": "cylinder",
-     "size": [
-      0.018,
-      0.018,
-      0.002
-     ],
-     "color": "glass",
-     "rotation": [
-      0,
-      0,
-      90
-     ],
-     "tint": "#f4ecd2",
-     "at": [
-      -1.649,
-      0.05,
-      0.255
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.014,
-      0.004,
-      0.008
-     ],
-     "color": "rubber",
-     "tint": "#2a2827",
-     "at": [
-      -1.75,
-      0.064,
-      0.255
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.05,
-      0.035,
-      0.05
-     ],
-     "bevel": 0.004,
-     "color": "wood",
-     "tint": "#b99c74",
-     "at": [
-      -1.73,
-      0.0175,
-      0.255
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -8688,6 +6264,11 @@
      0
     ],
     "dist": 0.04
+   },
+   "mesh": "torch",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
    }
   },
   {
@@ -8749,1465 +6330,6 @@
     "en": "Grains of sand drawn 40 times life size: real grains here are about 0.2 to 1 mm across, inside the sand range of 0.0625 to 2 mm [S13]. They differ in size and colour, their corners are worn round, and there are gaps of air between them [S1].",
     "zh": "放大 40 倍画的沙粒：这些沙粒实际约 0.2 到 1 毫米，在沙的大小范围 0.0625 到 2 毫米之内 [S13]。它们大小、颜色各不相同，棱角被磨圆了，彼此之间有空气的空隙 [S1]。"
    },
-   "primitive": {
-    "kind": "lathe",
-    "profile": [
-     [
-      0,
-      -0.00479
-     ],
-     [
-      0.0054,
-      -0.00386
-     ],
-     [
-      0.00772,
-      -0.00039
-     ],
-     [
-      0.00633,
-      0.00324
-     ],
-     [
-      0.00232,
-      0.00479
-     ],
-     [
-      0,
-      0.00509
-     ]
-    ],
-    "segments": 8,
-    "color": "plastic",
-    "tint": "#8f887e",
-    "scale": [
-     1.1488973603467456,
-     0.8025899634696543,
-     0.8797647182131186
-    ],
-    "rotation": [
-     -11.159591688774526,
-     32.715381206944585,
-     6.240663304924965
-    ],
-    "at": [
-     -0.01837,
-     0.01663,
-     -1.67913
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.007
-      ],
-      [
-       0.00791,
-       -0.00565
-      ],
-      [
-       0.01129,
-       -0.00056
-      ],
-      [
-       0.00926,
-       0.00474
-      ],
-      [
-       0.00339,
-       0.007
-      ],
-      [
-       0,
-       0.00745
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.015617316449061,
-      1.003959568985738,
-      1.022386377165094
-     ],
-     "rotation": [
-      0.5271119973622262,
-      38.153382539749146,
-      -6.328629485797137
-     ],
-     "at": [
-      -0.05866,
-      0.01878,
-      -1.714
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00469
-      ],
-      [
-       0.00529,
-       -0.00378
-      ],
-      [
-       0.00756,
-       -0.00038
-      ],
-      [
-       0.0062,
-       0.00318
-      ],
-      [
-       0.00227,
-       0.00469
-      ],
-      [
-       0,
-       0.00499
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.048639634042047,
-      1.0238379674730822,
-      0.9136285240761937
-     ],
-     "rotation": [
-      3.9858317957259715,
-      105.02183949574828,
-      5.19759421935305
-     ],
-     "at": [
-      -0.08312,
-      0.01654,
-      -1.64689
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00568
-      ],
-      [
-       0.00642,
-       -0.00458
-      ],
-      [
-       0.00917,
-       -0.00046
-      ],
-      [
-       0.00752,
-       0.00385
-      ],
-      [
-       0.00275,
-       0.00568
-      ],
-      [
-       0,
-       0.00605
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.2903264832100831,
-      0.983219189196825,
-      0.9417182370321826
-     ],
-     "rotation": [
-      -13.06836145464331,
-      212.78098837472498,
-      1.63824244402349
-     ],
-     "at": [
-      -0.03713,
-      0.0175,
-      -1.69579
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.0042
-      ],
-      [
-       0.00475,
-       -0.00339
-      ],
-      [
-       0.00678,
-       -0.00034
-      ],
-      [
-       0.00556,
-       0.00285
-      ],
-      [
-       0.00203,
-       0.0042
-      ],
-      [
-       0,
-       0.00447
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.167105424636975,
-      0.9982008438790217,
-      1.0804781204555183
-     ],
-     "rotation": [
-      6.427161355968565,
-      154.0569931268692,
-      1.7890810151584446
-     ],
-     "at": [
-      -0.03845,
-      0.01607,
-      -1.71859
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00279
-      ],
-      [
-       0.00315,
-       -0.00225
-      ],
-      [
-       0.0045,
-       -0.00023
-      ],
-      [
-       0.00369,
-       0.00189
-      ],
-      [
-       0.00135,
-       0.00279
-      ],
-      [
-       0,
-       0.00297
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.2128900648560375,
-      0.9795671025523915,
-      0.8521964114625007
-     ],
-     "rotation": [
-      5.261001081671566,
-      358.8901025801897,
-      -2.2515199589543045
-     ],
-     "at": [
-      -0.11037,
-      0.0147,
-      -1.69247
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00299
-      ],
-      [
-       0.00338,
-       -0.00241
-      ],
-      [
-       0.00482,
-       -0.00024
-      ],
-      [
-       0.00395,
-       0.00203
-      ],
-      [
-       0.00145,
-       0.00299
-      ],
-      [
-       0,
-       0.00318
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.1133184125530533,
-      0.8470959956757724,
-      0.8830226069549099
-     ],
-     "rotation": [
-      -7.433798681013286,
-      219.9903065431863,
-      -10.834727715700865
-     ],
-     "at": [
-      -0.10936,
-      0.01489,
-      -1.75427
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.0067
-      ],
-      [
-       0.00756,
-       -0.0054
-      ],
-      [
-       0.0108,
-       -0.00054
-      ],
-      [
-       0.00886,
-       0.00454
-      ],
-      [
-       0.00324,
-       0.0067
-      ],
-      [
-       0,
-       0.00713
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.2191322932834736,
-      0.8898012553341687,
-      1.0553554989630356
-     ],
-     "rotation": [
-      13.273183875717223,
-      101.67320874519646,
-      5.2309223636984825
-     ],
-     "at": [
-      0.00387,
-      0.01848,
-      -1.65347
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.0026
-      ],
-      [
-       0.00293,
-       -0.00209
-      ],
-      [
-       0.00419,
-       -0.00021
-      ],
-      [
-       0.00344,
-       0.00176
-      ],
-      [
-       0.00126,
-       0.0026
-      ],
-      [
-       0,
-       0.00277
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.2199275765917263,
-      0.9489001147449017,
-      1.0843161492841318
-     ],
-     "rotation": [
-      5.920756137929857,
-      344.3103225622326,
-      -9.612719127908349
-     ],
-     "at": [
-      -0.0519,
-      0.01451,
-      -1.69471
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00279
-      ],
-      [
-       0.00315,
-       -0.00225
-      ],
-      [
-       0.0045,
-       -0.00023
-      ],
-      [
-       0.00369,
-       0.00189
-      ],
-      [
-       0.00135,
-       0.00279
-      ],
-      [
-       0,
-       0.00297
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#8f887e",
-     "scale": [
-      1.2176206342177465,
-      0.85182435864117,
-      0.8613875852897763
-     ],
-     "rotation": [
-      -10.87751432089135,
-      330.6846901215613,
-      3.234088502358645
-     ],
-     "at": [
-      -0.03196,
-      0.0147,
-      -1.68048
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00688
-      ],
-      [
-       0.00777,
-       -0.00555
-      ],
-      [
-       0.0111,
-       -0.00055
-      ],
-      [
-       0.0091,
-       0.00466
-      ],
-      [
-       0.00333,
-       0.00688
-      ],
-      [
-       0,
-       0.00732
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.1967122309957632,
-      0.886218868335709,
-      0.88263688783627
-     ],
-     "rotation": [
-      -11.345394076779485,
-      0.07665376178920269,
-      4.757276033051312
-     ],
-     "at": [
-      -0.10557,
-      0.01866,
-      -1.66485
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.01196
-      ],
-      [
-       0.0135,
-       -0.00965
-      ],
-      [
-       0.01929,
-       -0.00096
-      ],
-      [
-       0.01582,
-       0.0081
-      ],
-      [
-       0.00579,
-       0.01196
-      ],
-      [
-       0,
-       0.01273
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.0460317785269582,
-      0.9032368931919337,
-      0.9104606951819734
-     ],
-     "rotation": [
-      -9.053183407522738,
-      143.64758879877627,
-      8.977479441091418
-     ],
-     "at": [
-      -0.08492,
-      0.02358,
-      -1.69068
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00695
-      ],
-      [
-       0.00785,
-       -0.00561
-      ],
-      [
-       0.01121,
-       -0.00056
-      ],
-      [
-       0.00919,
-       0.00471
-      ],
-      [
-       0.00336,
-       0.00695
-      ],
-      [
-       0,
-       0.0074
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.3111833430593833,
-      0.9100540376035496,
-      1.0177624403499068
-     ],
-     "rotation": [
-      14.684382027480751,
-      156.9159789942205,
-      2.9099854244850576
-     ],
-     "at": [
-      0.00339,
-      0.01873,
-      -1.68828
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.01107
-      ],
-      [
-       0.0125,
-       -0.00893
-      ],
-      [
-       0.01785,
-       -0.00089
-      ],
-      [
-       0.01464,
-       0.0075
-      ],
-      [
-       0.00536,
-       0.01107
-      ],
-      [
-       0,
-       0.01178
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.1930044518900105,
-      0.765348008600995,
-      0.9148369629634545
-     ],
-     "rotation": [
-      1.6597135830670595,
-      202.00672659091651,
-      9.29693462792784
-     ],
-     "at": [
-      -0.02665,
-      0.02271,
-      -1.64725
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.0074
-      ],
-      [
-       0.00835,
-       -0.00597
-      ],
-      [
-       0.01193,
-       -0.0006
-      ],
-      [
-       0.00979,
-       0.00501
-      ],
-      [
-       0.00358,
-       0.0074
-      ],
-      [
-       0,
-       0.00788
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.2834267180180177,
-      1.0417994840769098,
-      0.9070535100065172
-     ],
-     "rotation": [
-      6.456398984882981,
-      235.2282183431089,
-      -3.7398305372335017
-     ],
-     "at": [
-      -0.06174,
-      0.01916,
-      -1.65062
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00478
-      ],
-      [
-       0.00539,
-       -0.00385
-      ],
-      [
-       0.00771,
-       -0.00039
-      ],
-      [
-       0.00632,
-       0.00324
-      ],
-      [
-       0.00231,
-       0.00478
-      ],
-      [
-       0,
-       0.00509
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.1739655510289595,
-      0.7855288021964952,
-      1.0502965130843223
-     ],
-     "rotation": [
-      2.4262073286809027,
-      298.029741179198,
-      1.6600645682774484
-     ],
-     "at": [
-      -0.00175,
-      0.01662,
-      -1.73735
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00377
-      ],
-      [
-       0.00426,
-       -0.00304
-      ],
-      [
-       0.00608,
-       -0.0003
-      ],
-      [
-       0.00499,
-       0.00255
-      ],
-      [
-       0.00182,
-       0.00377
-      ],
-      [
-       0,
-       0.00401
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.2839281376218423,
-      0.9350561036495492,
-      0.981747657712549
-     ],
-     "rotation": [
-      14.077437242958695,
-      219.7065000794828,
-      12.252439276780933
-     ],
-     "at": [
-      -0.10118,
-      0.01565,
-      -1.74458
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00271
-      ],
-      [
-       0.00307,
-       -0.00219
-      ],
-      [
-       0.00438,
-       -0.00022
-      ],
-      [
-       0.00359,
-       0.00184
-      ],
-      [
-       0.00131,
-       0.00271
-      ],
-      [
-       0,
-       0.00289
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.2988273952854796,
-      0.8380811602575704,
-      0.8640981242991984
-     ],
-     "rotation": [
-      -4.883048494812101,
-      309.43454487249255,
-      6.732362990733236
-     ],
-     "at": [
-      -0.01895,
-      0.01463,
-      -1.74292
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00426
-      ],
-      [
-       0.00481,
-       -0.00344
-      ],
-      [
-       0.00687,
-       -0.00034
-      ],
-      [
-       0.00563,
-       0.00289
-      ],
-      [
-       0.00206,
-       0.00426
-      ],
-      [
-       0,
-       0.00453
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.0976624711300247,
-      0.756326995510608,
-      0.8130226865643636
-     ],
-     "rotation": [
-      0.8173939073458314,
-      56.107968064025044,
-      1.710520125925541
-     ],
-     "at": [
-      -0.08053,
-      0.01612,
-      -1.66354
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00332
-      ],
-      [
-       0.00375,
-       -0.00268
-      ],
-      [
-       0.00536,
-       -0.00027
-      ],
-      [
-       0.00439,
-       0.00225
-      ],
-      [
-       0.00161,
-       0.00332
-      ],
-      [
-       0,
-       0.00354
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.0656491447240115,
-      0.9002104505198076,
-      0.9209718746598811
-     ],
-     "rotation": [
-      3.048863026779145,
-      129.7402649000287,
-      8.28476587543264
-     ],
-     "at": [
-      0.00447,
-      0.01522,
-      -1.67046
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00383
-      ],
-      [
-       0.00432,
-       -0.00309
-      ],
-      [
-       0.00617,
-       -0.00031
-      ],
-      [
-       0.00506,
-       0.00259
-      ],
-      [
-       0.00185,
-       0.00383
-      ],
-      [
-       0,
-       0.00407
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#c4a171",
-     "scale": [
-      1.1136062302975915,
-      0.7869513334706426,
-      0.9891656131716445
-     ],
-     "rotation": [
-      11.308492342941463,
-      3.5900858882814646,
-      4.391471827402711
-     ],
-     "at": [
-      -0.0562,
-      0.0157,
-      -1.74929
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00981
-      ],
-      [
-       0.01108,
-       -0.00791
-      ],
-      [
-       0.01582,
-       -0.00079
-      ],
-      [
-       0.01298,
-       0.00665
-      ],
-      [
-       0.00475,
-       0.00981
-      ],
-      [
-       0,
-       0.01044
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.2060663274140098,
-      0.9096536528784782,
-      0.8673779407283292
-     ],
-     "rotation": [
-      -11.23887861147523,
-      331.9352805521339,
-      13.153792577795684
-     ],
-     "at": [
-      -0.01076,
-      0.02149,
-      -1.71339
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00952
-      ],
-      [
-       0.01075,
-       -0.00768
-      ],
-      [
-       0.01535,
-       -0.00077
-      ],
-      [
-       0.01259,
-       0.00645
-      ],
-      [
-       0.00461,
-       0.00952
-      ],
-      [
-       0,
-       0.01013
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.1888049402274192,
-      0.7720764302881434,
-      0.9409457638394088
-     ],
-     "rotation": [
-      -13.162481628824025,
-      148.1858504936099,
-      -6.851887812372297
-     ],
-     "at": [
-      -0.07652,
-      0.02121,
-      -1.73848
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00758
-      ],
-      [
-       0.00855,
-       -0.00611
-      ],
-      [
-       0.01222,
-       -0.00061
-      ],
-      [
-       0.01002,
-       0.00513
-      ],
-      [
-       0.00367,
-       0.00758
-      ],
-      [
-       0,
-       0.00806
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.1425445810309611,
-      0.9654551580548286,
-      0.8677816055016593
-     ],
-     "rotation": [
-      9.771804115734994,
-      51.93339572288096,
-      5.041674887761474
-     ],
-     "at": [
-      -0.03888,
-      0.01933,
-      -1.74037
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00733
-      ],
-      [
-       0.00827,
-       -0.00591
-      ],
-      [
-       0.01182,
-       -0.00059
-      ],
-      [
-       0.00969,
-       0.00496
-      ],
-      [
-       0.00354,
-       0.00733
-      ],
-      [
-       0,
-       0.0078
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.2338292074389756,
-      1.0021167011233048,
-      1.0227576605509967
-     ],
-     "rotation": [
-      1.574903957080096,
-      349.09437518566847,
-      -11.679967080708593
-     ],
-     "at": [
-      -0.05298,
-      0.01909,
-      -1.67496
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00777
-      ],
-      [
-       0.00878,
-       -0.00627
-      ],
-      [
-       0.01254,
-       -0.00063
-      ],
-      [
-       0.01028,
-       0.00527
-      ],
-      [
-       0.00376,
-       0.00777
-      ],
-      [
-       0,
-       0.00827
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.0130557948490604,
-      0.9896099339006469,
-      1.0960463660769164
-     ],
-     "rotation": [
-      9.831457121763378,
-      338.97170847281814,
-      -10.997484347317368
-     ],
-     "at": [
-      -0.10612,
-      0.01952,
-      -1.72148
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00277
-      ],
-      [
-       0.00313,
-       -0.00224
-      ],
-      [
-       0.00447,
-       -0.00022
-      ],
-      [
-       0.00367,
-       0.00188
-      ],
-      [
-       0.00134,
-       0.00277
-      ],
-      [
-       0,
-       0.00295
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.1164633402717299,
-      1.0277910787146538,
-      1.0661179010523483
-     ],
-     "rotation": [
-      -7.9930448066443205,
-      110.10311457328498,
-      10.980797284282744
-     ],
-     "at": [
-      -0.01165,
-      0.01468,
-      -1.75019
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.0028
-      ],
-      [
-       0.00317,
-       -0.00226
-      ],
-      [
-       0.00452,
-       -0.00023
-      ],
-      [
-       0.00371,
-       0.0019
-      ],
-      [
-       0.00136,
-       0.0028
-      ],
-      [
-       0,
-       0.00299
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.289879581471905,
-      0.8725485543021932,
-      1.0031702500302344
-     ],
-     "rotation": [
-      -1.8748032138682902,
-      303.1497008353472,
-      3.397285540122539
-     ],
-     "at": [
-      -0.02026,
-      0.01471,
-      -1.69269
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00403
-      ],
-      [
-       0.00455,
-       -0.00325
-      ],
-      [
-       0.0065,
-       -0.00033
-      ],
-      [
-       0.00533,
-       0.00273
-      ],
-      [
-       0.00195,
-       0.00403
-      ],
-      [
-       0,
-       0.00429
-      ]
-     ],
-     "segments": 7,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.1156207433668897,
-      0.9646941964281723,
-      0.8281299953348935
-     ],
-     "rotation": [
-      -9.86947946017608,
-      321.4030751399696,
-      -3.4473476582206786
-     ],
-     "at": [
-      0.00117,
-      0.0159,
-      -1.75475
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00518
-      ],
-      [
-       0.00585,
-       -0.00418
-      ],
-      [
-       0.00835,
-       -0.00042
-      ],
-      [
-       0.00685,
-       0.00351
-      ],
-      [
-       0.00251,
-       0.00518
-      ],
-      [
-       0,
-       0.00551
-      ]
-     ],
-     "segments": 6,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.076354746078141,
-      0.7640052927425132,
-      0.9307226235046984
-     ],
-     "rotation": [
-      9.570954975206405,
-      70.94573551788926,
-      4.616448737215251
-     ],
-     "at": [
-      -0.11411,
-      0.01701,
-      -1.6452
-     ]
-    },
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       -0.00287
-      ],
-      [
-       0.00324,
-       -0.00231
-      ],
-      [
-       0.00463,
-       -0.00023
-      ],
-      [
-       0.00379,
-       0.00194
-      ],
-      [
-       0.00139,
-       0.00287
-      ],
-      [
-       0,
-       0.00305
-      ]
-     ],
-     "segments": 8,
-     "color": "plastic",
-     "tint": "#e3dccb",
-     "scale": [
-      1.31203596299747,
-      0.8733704179991036,
-      1.0158403498819097
-     ],
-     "rotation": [
-      -2.0792422257363796,
-      256.994944056496,
-      7.853342439047992
-     ],
-     "at": [
-      -0.01008,
-      0.01478,
-      -1.66658
-     ]
-    }
-   ],
    "explode": {
     "dir": [
      0,
@@ -10216,7 +6338,12 @@
     ],
     "dist": 0
    },
-   "castShadow": true
+   "castShadow": true,
+   "mesh": "sand-grains",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "sugar-crystals",
@@ -10721,102 +6848,14 @@
     "en": "A wooden bench 1.8 m long. The layout of the five stations is a design for this topic [S1].",
     "zh": "一张 1.8 米长的木实验台。五个工位的摆放是本主题的设计 [S1]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     1.8,
-     0.04,
-     0.7
-    ],
-    "bevel": 0.006,
-    "color": "wood",
-    "tint": "#d3b58b",
-    "at": [
-     0,
-     -0.02,
-     0
-    ]
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -0.84,
-      -0.4,
-      -0.3
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      0.84,
-      -0.4,
-      -0.3
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -0.84,
-      -0.4,
-      0.3
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      0.84,
-      -0.4,
-      0.3
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      1.68,
-      0.03,
-      0.03
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      0,
-      -0.68,
-      0
-     ]
-    }
-   ],
    "clip": false,
    "context": true,
-   "castShadow": true
+   "castShadow": true,
+   "mesh": "bench",
+   "material": {
+    "color": "wood",
+    "tint": "#d3b58b"
+   }
   },
   {
    "id": "side-table",
@@ -10833,87 +6872,14 @@
     "en": "A small table beside the bench, at the same height, for the things in chapter 6 [S1].",
     "zh": "实验台旁边一张一样高的小桌，放第 6 章的东西 [S1]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.8,
-     0.04,
-     0.6
-    ],
-    "bevel": 0.006,
-    "color": "wood",
-    "tint": "#c9a57a",
-    "at": [
-     -1.45,
-     -0.02,
-     0
-    ]
-   },
-   "extra": [
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -1.81,
-      -0.4,
-      -0.26
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -1.09,
-      -0.4,
-      -0.26
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -1.81,
-      -0.4,
-      0.26
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.045,
-      0.76,
-      0.045
-     ],
-     "color": "wood",
-     "tint": "#c7a77c",
-     "at": [
-      -1.09,
-      -0.4,
-      0.26
-     ]
-    }
-   ],
    "clip": false,
    "context": true,
-   "castShadow": true
+   "castShadow": true,
+   "mesh": "side-table",
+   "material": {
+    "color": "wood",
+    "tint": "#c9a57a"
+   }
   },
   {
    "id": "balance-stand",
@@ -10930,71 +6896,12 @@
     "en": "The base and column of the beam balance; the beam rocks on the top of the column [S1].",
     "zh": "天平的底座和立柱；横梁在立柱顶上摆动 [S1]。"
    },
-   "primitive": {
-    "kind": "bevelBox",
-    "size": [
-     0.12,
-     0.012,
-     0.08
-    ],
-    "bevel": 0.003,
-    "color": "powder",
-    "tint": "#4a4e52",
-    "at": [
-     -0.62,
-     0.006,
-     -0.17
-    ]
-   },
-   "extra": [
-    {
-     "kind": "lathe",
-     "profile": [
-      [
-       0,
-       0
-      ],
-      [
-       0.008,
-       0
-      ],
-      [
-       0.008,
-       0.18
-      ],
-      [
-       0.004,
-       0.188
-      ],
-      [
-       0,
-       0.188
-      ]
-     ],
-     "segments": 24,
-     "color": "stainless",
-     "at": [
-      -0.62,
-      0.012,
-      -0.17
-     ]
-    },
-    {
-     "kind": "box",
-     "size": [
-      0.012,
-      0.012,
-      0.03
-     ],
-     "color": "stainless",
-     "at": [
-      -0.62,
-      0.194,
-      -0.17
-     ]
-    }
-   ],
-   "context": true
+   "context": true,
+   "mesh": "balance-stand",
+   "material": {
+    "color": "plastic",
+    "tint": "#ffffff"
+   }
   },
   {
    "id": "closer-plinth",
@@ -11256,18 +7163,213 @@
      "path": [
       [
        0.105,
-       0.017,
+       0.0215,
        -0.04
+      ],
+      [
+       0.274456,
+       0.020621,
+       -0.037486
       ],
       [
        0.282,
-       0.017,
+       0.0215,
        -0.04
       ],
       [
-       0.3,
-       0.03,
-       -0.05
+       0.285,
+       0.021713,
+       -0.040941
+      ],
+      [
+       0.288298,
+       0.021745,
+       -0.041888
+      ],
+      [
+       0.291778,
+       0.021666,
+       -0.042839
+      ],
+      [
+       0.295322,
+       0.021548,
+       -0.04379
+      ],
+      [
+       0.298814,
+       0.021461,
+       -0.044741
+      ],
+      [
+       0.302138,
+       0.021477,
+       -0.045688
+      ],
+      [
+       0.305178,
+       0.021666,
+       -0.04663
+      ],
+      [
+       0.307815,
+       0.022101,
+       -0.047564
+      ],
+      [
+       0.309935,
+       0.022852,
+       -0.048488
+      ],
+      [
+       0.31142,
+       0.023991,
+       -0.0494
+      ],
+      [
+       0.312205,
+       0.026134,
+       -0.050529
+      ],
+      [
+       0.311028,
+       0.030855,
+       -0.051987
+      ],
+      [
+       0.307508,
+       0.037255,
+       -0.053292
+      ],
+      [
+       0.302083,
+       0.044955,
+       -0.054503
+      ],
+      [
+       0.295195,
+       0.053573,
+       -0.055674
+      ],
+      [
+       0.287282,
+       0.062729,
+       -0.056863
+      ],
+      [
+       0.278785,
+       0.072043,
+       -0.058125
+      ],
+      [
+       0.270142,
+       0.081134,
+       -0.059517
+      ],
+      [
+       0.261794,
+       0.089621,
+       -0.061096
+      ],
+      [
+       0.25418,
+       0.097125,
+       -0.062917
+      ],
+      [
+       0.24774,
+       0.103263,
+       -0.065037
+      ],
+      [
+       0.243813,
+       0.106827,
+       -0.066857
+      ],
+      [
+       0.240753,
+       0.109356,
+       -0.068513
+      ],
+      [
+       0.237811,
+       0.111572,
+       -0.070274
+      ],
+      [
+       0.234966,
+       0.113533,
+       -0.07212
+      ],
+      [
+       0.232196,
+       0.115296,
+       -0.074032
+      ],
+      [
+       0.229479,
+       0.11692,
+       -0.075991
+      ],
+      [
+       0.226793,
+       0.11846,
+       -0.077979
+      ],
+      [
+       0.224117,
+       0.119975,
+       -0.079974
+      ],
+      [
+       0.221429,
+       0.121521,
+       -0.081959
+      ],
+      [
+       0.218707,
+       0.123157,
+       -0.083914
+      ],
+      [
+       0.21593,
+       0.12494,
+       -0.08582
+      ],
+      [
+       0.215406,
+       0.125464,
+       -0.087124
+      ],
+      [
+       0.214882,
+       0.125988,
+       -0.088427
+      ],
+      [
+       0.214359,
+       0.126511,
+       -0.089731
+      ],
+      [
+       0.213835,
+       0.127035,
+       -0.091035
+      ],
+      [
+       0.213311,
+       0.127559,
+       -0.092339
+      ],
+      [
+       0.212787,
+       0.128082,
+       -0.093643
+      ],
+      [
+       0.212264,
+       0.128606,
+       -0.094946
       ],
       [
        0.21174,
@@ -11291,7 +7393,7 @@
      "path": [
       [
        0.36,
-       0.04,
+       0.073,
        -0.26
       ],
       [
@@ -11306,7 +7408,7 @@
       ],
       [
        0.36,
-       0.25,
+       0.195,
        -0.26
       ]
      ]
@@ -11316,7 +7418,7 @@
    "color": "token:cold",
    "count": 90,
    "size": 0.4,
-   "spread": 0.002,
+   "spread": 0.00065,
    "clip": false,
    "whenRun": true
   },
@@ -11335,14 +7437,174 @@
      -0.245
     ],
     [
-     -1.18,
-     0.03,
-     -0.205
+     -1.166181,
+     0.035153,
+     -0.248028
     ],
     [
-     -1.27399,
-     0.05,
-     -0.17
+     -1.17,
+     0.035,
+     -0.241
+    ],
+    [
+     -1.172976,
+     0.034901,
+     -0.235332
+    ],
+    [
+     -1.175739,
+     0.034838,
+     -0.229782
+    ],
+    [
+     -1.178417,
+     0.034791,
+     -0.224278
+    ],
+    [
+     -1.181138,
+     0.034736,
+     -0.218751
+    ],
+    [
+     -1.184028,
+     0.034651,
+     -0.213131
+    ],
+    [
+     -1.187217,
+     0.034515,
+     -0.207345
+    ],
+    [
+     -1.190832,
+     0.034306,
+     -0.201325
+    ],
+    [
+     -1.195,
+     0.034,
+     -0.195
+    ],
+    [
+     -1.203032,
+     0.032483,
+     -0.183615
+    ],
+    [
+     -1.212842,
+     0.029558,
+     -0.170227
+    ],
+    [
+     -1.223854,
+     0.025984,
+     -0.155765
+    ],
+    [
+     -1.23549,
+     0.022523,
+     -0.141164
+    ],
+    [
+     -1.247176,
+     0.019933,
+     -0.127355
+    ],
+    [
+     -1.258335,
+     0.018976,
+     -0.11527
+    ],
+    [
+     -1.268391,
+     0.020411,
+     -0.105841
+    ],
+    [
+     -1.276768,
+     0.025,
+     -0.1
+    ],
+    [
+     -1.283432,
+     0.033225,
+     -0.098083
+    ],
+    [
+     -1.289506,
+     0.045009,
+     -0.098997
+    ],
+    [
+     -1.294958,
+     0.059228,
+     -0.102135
+    ],
+    [
+     -1.299756,
+     0.074761,
+     -0.106893
+    ],
+    [
+     -1.303867,
+     0.090486,
+     -0.112664
+    ],
+    [
+     -1.307261,
+     0.105279,
+     -0.118843
+    ],
+    [
+     -1.309905,
+     0.11802,
+     -0.124823
+    ],
+    [
+     -1.311768,
+     0.127584,
+     -0.13
+    ],
+    [
+     -1.312329,
+     0.131089,
+     -0.132342
+    ],
+    [
+     -1.312592,
+     0.134061,
+     -0.134767
+    ],
+    [
+     -1.312627,
+     0.136623,
+     -0.137258
+    ],
+    [
+     -1.312501,
+     0.138897,
+     -0.139793
+    ],
+    [
+     -1.312283,
+     0.141007,
+     -0.142355
+    ],
+    [
+     -1.312043,
+     0.143077,
+     -0.144922
+    ],
+    [
+     -1.311848,
+     0.145228,
+     -0.147477
+    ],
+    [
+     -1.311768,
+     0.147584,
+     -0.15
     ],
     [
      -1.29399,
@@ -11894,6 +8156,11 @@
   },
   "balloons-full": {
    "balloon-round": {
+    "offset": [
+     0,
+     -0.008,
+     0
+    ],
     "pivot": [
      0.36,
      0.16,
@@ -12932,5 +9199,6 @@
     "jug": 100
    }
   }
- }
+ },
+ "model": "/models/states-of-matter.glb"
 }

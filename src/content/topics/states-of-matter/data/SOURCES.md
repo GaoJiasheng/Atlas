@@ -59,3 +59,57 @@ Gaps, and why:
 - The NBA rule (S10) says "pounds pressure"; reading it as pounds per square inch is the usual interpretation, not the rule's words.
 - No source gives a 0.2 litre stroke for a generic ball pump or a 7 litre inside for a size 7 ball: both are declared design values in S1, and S43 shows that real pumps differ.
 - The 1–2 ml that a real pour might leave on the walls (docs/36 §5.4) is not stated: no source gives a number for it.
+
+## Rebuild 2026-11-05 — visual sources and asset rights
+
+The original procedural `/models/states-of-matter.glb` is Atlas work released under CC0-1.0. No third-party mesh or texture is embedded. The following real photographs/drawings informed construction; they are not sources for new teaching measurements. Cropped/resized copies appear only in development comparison sheets and retain the stated licences. No geometric warping or generated replacement photograph was used. Per-part links and inspection records: ../REBUILD-3D.md.
+
+- [Bicycle wheel.jpg](https://commons.wikimedia.org/wiki/File:Bicycle_wheel.jpg) — Dhodges at English Wikipedia; CC BY-SA 3.0 ([licence](http://creativecommons.org/licenses/by-sa/3.0/)).
+- [ForhjulSide.jpg](https://commons.wikimedia.org/wiki/File:ForhjulSide.jpg) — KjellElec; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0)).
+- [Bike pump.jpg](https://commons.wikimedia.org/wiki/File:Bike_pump.jpg) — User Ewok Slayer on en.wikipedia; Public domain.
+- [Flashlight.jpg](https://commons.wikimedia.org/wiki/File:Flashlight.jpg) — KMJ at German Wikipedia; CC BY-SA 3.0 ([licence](http://creativecommons.org/licenses/by-sa/3.0/)).
+- [Fixed gear hub.jpg](https://commons.wikimedia.org/wiki/File:Fixed_gear_hub.jpg) — Bartosz Marcin Kojak; CC BY-SA 2.5 ([licence](https://creativecommons.org/licenses/by-sa/2.5)).
+- [SKS Rennkompressor Standpumpe.jpg](https://commons.wikimedia.org/wiki/File:SKS_Rennkompressor_Standpumpe.jpg) — SKS GERMANY; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [Bicycle pump Luftpumpe.jpg](https://commons.wikimedia.org/wiki/File:Bicycle_pump_Luftpumpe.jpg) — User:Hedwig von Ebbel; Public domain.
+- [St Pats Metairie 2013 Balloon Pump.JPG](https://commons.wikimedia.org/wiki/File:St_Pats_Metairie_2013_Balloon_Pump.JPG) — Infrogmation of New Orleans; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0)).
+- [Round latex balloons.png](https://commons.wikimedia.org/wiki/File:Round_latex_balloons.png) — Qualatex Balloons, Hedstrom Bouncy Balls, Intex Beach Balls; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [11 Sapphire Blue.jpg](https://commons.wikimedia.org/wiki/File:11_Sapphire_Blue.jpg) — Photographer: Warren Denning. Creative Director: Stan Weir. Marketing Director: Tim Vlamis; CC BY 3.0 ([licence](https://creativecommons.org/licenses/by/3.0)).
+- [Rubber Balloon manufactured.jpg](https://commons.wikimedia.org/wiki/File:Rubber_Balloon_manufactured.jpg) — Vis M; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [Ice cube Air entrapment.JPG](https://commons.wikimedia.org/wiki/File:Ice_cube_Air_entrapment.JPG) — Lusilier; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0)).
+- [Ice cubes.jpg](https://commons.wikimedia.org/wiki/File:Ice_cubes.jpg) — Pål Berge; CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)).
+- [Fenix P1D LED flashlight (2739718566).jpg](https://commons.wikimedia.org/wiki/File:Fenix_P1D_LED_flashlight_%282739718566%29.jpg) — Darron Birgenheier from Reno, NV, USA; CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)).
+- [Basketball (Ball).jpg](https://commons.wikimedia.org/wiki/File:Basketball_%28Ball%29.jpg) — ; CC BY-SA 3.0 ([licence](http://creativecommons.org/licenses/by-sa/3.0/)).
+- [Close-up of a basketball with a blurry background.jpg](https://commons.wikimedia.org/wiki/File:Close-up_of_a_basketball_with_a_blurry_background.jpg) — Shixart1985; CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)).
+- [Sponge Macro.jpg](https://commons.wikimedia.org/wiki/File:Sponge_Macro.jpg) — Prosthetic Head; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [Sponge-viscose.jpg](https://commons.wikimedia.org/wiki/File:Sponge-viscose.jpg) — Johan; CC BY-SA 3.0 ([licence](http://creativecommons.org/licenses/by-sa/3.0/)).
+- [Crumpled tissue paper.jpg](https://commons.wikimedia.org/wiki/File:Crumpled_tissue_paper.jpg) — Uraniumneptuniumplutonium929394; CC0 ([licence](http://creativecommons.org/publicdomain/zero/1.0/deed.en)).
+- [Ballons.jpg](https://commons.wikimedia.org/wiki/File:Ballons.jpg) — Magicludovic; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0)).
+- [Balloon modelling.jpg](https://commons.wikimedia.org/wiki/File:Balloon_modelling.jpg) — Paula Rey; CC BY-SA 2.0 ([licence](https://creativecommons.org/licenses/by-sa/2.0)).
+- [Balloon Twister.jpg](https://commons.wikimedia.org/wiki/File:Balloon_Twister.jpg) — Tracy Hunter; CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)).
+- [Balloon Dog.jpg](https://commons.wikimedia.org/wiki/File:Balloon_Dog.jpg) — Poppa Balloon; CC BY 3.0 ([licence](https://creativecommons.org/licenses/by/3.0)).
+- [Sugar crystals.jpg](https://commons.wikimedia.org/wiki/File:Sugar_crystals.jpg) — Masha Milshina; CC BY 4.0 ([licence](https://creativecommons.org/licenses/by/4.0)).
+- [Sand under electron microscope.jpg](https://commons.wikimedia.org/wiki/File:Sand_under_electron_microscope.jpg) — NASA; Public domain.
+- [Песчинки-1. Желтый строительный песок.jpg](https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D1%81%D1%87%D0%B8%D0%BD%D0%BA%D0%B8-1._%D0%96%D0%B5%D0%BB%D1%82%D1%8B%D0%B9_%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%81%D0%BE%D0%BA.jpg) — Alexander Klepnev; CC BY 4.0 ([licence](https://creativecommons.org/licenses/by/4.0)).
+- [Paillasse chimie.jpg](https://commons.wikimedia.org/wiki/File:Paillasse_chimie.jpg) — Cjp24; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0)).
+- [Laboratory pipettes.jpg](https://commons.wikimedia.org/wiki/File:Laboratory_pipettes.jpg) — J.N. Eskra; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [Tissue paper white.jpg](https://commons.wikimedia.org/wiki/File:Tissue_paper_white.jpg) — Dineshkumar Nallaveerappan; CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)).
+- [Bicycle wheel dish diagram.svg](https://commons.wikimedia.org/wiki/File:Bicycle_wheel_dish_diagram.svg) — Keithonearth; CC BY-SA 3.0 / GFDL.
+- [US20230381802A1 Fig. 1](https://patents.google.com/patent/US20230381802A1/en) — Stephen C. Park / Bell Sports; US patent drawing; development reference only.
+- [Laboratory table.png](https://commons.wikimedia.org/wiki/File:Laboratory_table.png) — Togopic / DBCLS; CC BY-SA 3.0 ([licence](https://creativecommons.org/licenses/by-sa/3.0/)).
+- [Basicbench.jpg](https://commons.wikimedia.org/wiki/File:Basicbench.jpg) — Bob Key; Public domain ([licence](https://creativecommons.org/publicdomain/mark/1.0/)).
+
+### Round 2 supplementary morphology references (2026-11-05 rebuild)
+
+- [Foam Open Cell.jpg](https://commons.wikimedia.org/wiki/File:Foam_Open_Cell.jpg) — Mdiproducts, public domain; multiscale pore mouths and communicating chamber rims.
+- [Polymeric open cell foam.jpg](https://commons.wikimedia.org/wiki/File:Polymeric_open_cell_foam.jpg) — TomArenas, CC BY-SA 3.0; polymer wall junctions and open paths. Optical micrograph, not a scale claim.
+- The earlier “Sponge Macro.jpg” is a metallic reticulated material. It is excluded from round 2 photographic acceptance; it does not establish kitchen sponge morphology.
+
+The round 2 cloth, cavity/channel SDF and ice fracture meshes are original Atlas procedural work, CC0-1.0. Photos remain development references and are not shipped. Teaching sources and values are unchanged.
+
+### Round 3 visual references (2026-11-09)
+
+- [Icecube.jpg](https://commons.wikimedia.org/wiki/File:Icecube.jpg) — Editor at Large, [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/); rounded melting silhouette and pale edge scattering on a light background.
+- [Cleaning sponge detail.jpg](https://commons.wikimedia.org/wiki/File:Cleaning_sponge_detail.jpg) — Sylenius, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); cellulose pore lips and the fine pitting between larger mouths.
+- [Éponge type 3 (2).jpg](https://commons.wikimedia.org/wiki/File:%C3%89ponge_type_3_%282%29.jpg) — Lionel Allorge, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), selected from the offered licences; the comparison crops the cellulose end face. Its red scouring layer is a different product feature and is not part of this topic's plain cellulose sponge.
+
+The round 3 ice, sponge, shared geometric micro-pit field and embedded 64 × 64 micro-cavity occlusion tile are original Atlas procedural work, CC0-1.0. The tile is an original shading asset, not a reference photograph. No third-party image or mesh is shipped. Reference photographs and comparison PNGs remain ignored development evidence. Teaching sources, EN/ZH labels and numerical claims are unchanged.

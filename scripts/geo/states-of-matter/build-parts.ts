@@ -10,6 +10,8 @@
  * vessel and as the `matter` model (docs/36 §4.2–§4.3), so the drawn levels
  * are the model's readings. Texts come from ./text.ts.
  */
+import { Vector3, Quaternion, Euler } from 'three';
+import { rebuildMeshes } from './rebuild-meshes.mjs';
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
@@ -107,8 +109,18 @@ add1({ id: 'balance-a', group: 'weighing', ...balance(BAL_A), explode: { dir: [0
 const PIVOT: V3 = [-0.62, 0.2, -0.17];
 const ARM = 0.13;
 const PAN_Y = 0.06;
+// The six hanger wires are geometrically straight. A long tube's thousands
+// of axial rings added no shape; use the same round-wire centreline with one
+// axial span and the engine's smooth cylinder cross-section.
 const hanger = (end: V3, pan: V3): Prim[] =>
-  [0, 120, 240].map((a) => tube(end, [end, [pan[0] + 0.045 * Math.cos(a * DEG), pan[1] + 0.006, pan[2] + 0.045 * Math.sin(a * DEG)]], 0.0007, 'brass'));
+  [0, 120, 240].map((a) => {
+    const foot: V3 = [pan[0] + 0.045 * Math.cos(a * DEG), pan[1] + 0.006, pan[2] + 0.045 * Math.sin(a * DEG)];
+    const target = add(end, r3(sub(foot, end)));
+    const direction = new Vector3(...target).sub(new Vector3(...end));
+    const rotation = new Euler().setFromQuaternion(new Quaternion().setFromUnitVectors(new Vector3(0, 1, 0), direction.clone().normalize()));
+    return { kind: 'cylinder', at: add(end, target).map(n => n / 2) as V3, size: [0.0007, 0.0007, direction.length()], color: 'brass', rotation: [rotation.x / DEG, rotation.y / DEG, rotation.z / DEG] };
+  });
+
 {
   const L: V3 = [PIVOT[0] - ARM, PIVOT[1] - 0.004, PIVOT[2]];
   const R: V3 = [PIVOT[0] + ARM, PIVOT[1] - 0.004, PIVOT[2]];
@@ -381,7 +393,7 @@ const VALVE_DIR: V3 = (() => {
   return [v[0] / l, v[1] / l, v[2] / l];
 })();
 const VALVE: V3 = add(BALL_C, [VALVE_DIR[0] * BALL_R, VALVE_DIR[1] * BALL_R, VALVE_DIR[2] * BALL_R]);
-const PUMP_Y = 0.017;
+const PUMP_Y = 0.0215; // supports the 43 mm barrel required by the 0.2 L design stroke
 const PUMP_Z = -0.04;
 const PUMP_X0 = 0.085; // handle end
 const PUMP_X1 = 0.27; // hose end
@@ -846,7 +858,7 @@ poses['cup-pushed'] = {
 };
 // Blown up: the round balloon about its neck, the long one about its knot.
 poses['balloons-full'] = {
-  'balloon-round': { pivot: r3(NOZZLE), scale: r3([1 / LIMP_ROUND[0], 1 / LIMP_ROUND[1], 1 / LIMP_ROUND[2]]) },
+  'balloon-round': { offset: [0, -0.008, 0], pivot: r3(NOZZLE), scale: r3([1 / LIMP_ROUND[0], 1 / LIMP_ROUND[1], 1 / LIMP_ROUND[2]]) },
   'balloon-long': { pivot: r3(KNOT), scale: r3([1 / LIMP_LONG[1], 1 / LIMP_LONG[0], 1 / LIMP_LONG[2]]) },
   duration: 1.2,
 };
@@ -1089,6 +1101,8 @@ const data = {
   poses,
   sim,
 };
+
+if(await rebuildMeshes(data))process.exit(0);
 
 writeFileSync(OUT, `${JSON.stringify(data, null, 1)}\n`);
 const ctx = outParts.filter((p) => (p as { context?: boolean }).context).length;
