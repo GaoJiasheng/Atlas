@@ -196,3 +196,81 @@ Directory: `scripts/geo/singapore-1819-1965/previews/`.
 ### Limits / not done
 
 All requested source-completeness and fresh-rebuild fixes are completed. Map positions remain approximate: control LOO errors do not bound unsampled coastline or western extrapolation, G15/G34 external RMS remains unmeasured, and marsh/minor-drain boundaries remain source-generalised. Exact 1961–1965 reclamation stages are **not** reconstructed because the available corrected charts do not date individual footprints; the 1958 natural coast at January1961 remains an explicitly documented temporal inference. No exact historical survey or per-map RMS pass is claimed. Teaching facts and neutral chapter prose stay intact. GPU/browser acceptance remains for the user's following session, as requested.
+
+## Fix 2026-11-09 — north-west live-topic residuals
+
+### Source tracing and completed items
+
+1. **Stepped mangrove/coast edges.** Re-inspected the existing checksummed G9, G11 and G16 originals at native resolution. Replaced graticule excursions and stepped source-bank sections with measured vectors, using shape-preserving interpolation sampled at no more than two original pixels. Raster ink is not blurred, dilated or converted into an invented geographic polygon. G9's Kranji police-station bank, Buluh shoulder, Gedong wedge and Murai mouth/head now follow the printed bank centres; Sarimbun lettering, the Perampun grid stub, lower Kranji, the Gedong join and Pergam's trig-symbol detour are corrected too. G11's readable physical outer shore, the Buloh–Kranji shoulder and pre-causeway east bank receive separate source measurements. G16 follows its continuous outer mangrove-tree front. Soundings, grid lines, contour strokes and individual tree-symbol interiors are excluded from bank readings. Nine whole isolated G16 ink components (76 native vertices), in water outside the qualified banks without a printed closed dry-island shore, are removed by exact existing-component identity; these include three Berih caption strokes. No clipping boundary is drawn.
+
+2. **1937–1960 creeks.** G11's readable paired Kranji–Tengah–Peng Siang banks and Sungei Buloh are traced into the actual era and dated control geometry. Pulau Buloh is traced as a separate source-visible island, correcting its former mainland connection. G16's independently visible paired Kranji banks replace its later-era simplified estuary too; the adjoining Berih mouth is traced around its two readable paired heads, removing caption/number loops. G11 geometry is not transplanted to G16. Narrow tips stop at the last independently readable paired bank centres. Blue mangrove hatch remains land.
+
+3. **Reproduction and independent checks.** Added the native-bank stage between source-line selection and registration in the full rebuild. Four released native measurement files and their SHA-256 hashes are included in the rebuild receipt. Every replacement is checked for source-ring crossings before reprojection; independent source water/dry-land witnesses are checked again on decoded delivered coast and control layers. Exact keyframe metadata, feature properties and all unchanged topic-file hashes are checked, including both display languages. The historical audit predates accepted historian edits and consequently rejects the already-live prose against its old baseline. Its default check and receipt remain intact; the explicit `--accepted-live` mode instead verifies all 22 original content files against the start-of-pass hashes, independently matched to the accepted HEAD. No display edit is allowed by this mode. No engine, display-text, manifest, lockfile, Vitest configuration or review-queue change is made.
+
+Only existing public-domain sources are used: **G9 PD-France / PD-US-expired; G11 PD-USGov-Military; G16 PD-UKGov**. Item-specific rights and original checksums remain in `data/SOURCES.md` and the source ledger. G11 remains the existing 1937 revision / 1941 War Office / 1944 AMS temporal substitution for 1937–1960. Registration controls and external leave-one-out RMS remain **G9 109.15 m, G11 55.45 m, G16 54.74 m**; finer source vectors do not improve those ground errors or bound unsampled banks.
+
+Native replacement counts below are per sequential arc operation and include each open arc's endpoints; a later operation can replace an earlier sampled join. They are not net delivered TopoJSON counts. `residual-trace-audit.json` records each endpoint-join distance, replacement length and source method.
+
+| Source | Replaced native arc vertices | New sampled arc vertices | Separate island vertices |
+|---|---:|---:|---:|
+| G9 — nine arcs | 479 | 2,220 | 0 |
+| G11 — eight arcs | 712 | 11,295 | 340 |
+| G16 — four arcs | 1,070 | 5,365 | 0 |
+
+### Limits / deliberately retained approximations
+
+Sarimbun/Perampat on G11 do not expose independently readable paired banks distinct from marsh hatch, roads and single drainage strokes. The uncertain Murai mouth/north-head interval and Berih bank obscured by the large red “20” keep their prior outlines. Ink-obscured continuations, the unresolved narrow lower-west Kranji head curl and single-stroke inland drainage are not widened or guessed. G9 Perampun stops at the printed paired-to-single transition; its beige upstream area remains dry. Existing bilingual approximation notes, dates, labels, teaching numbers, chapters and beats remain unchanged. No new survey accuracy or year-by-year creek change is claimed. Offline CPU rasterisation is used; the user's browser, desktop and Chromium are never launched.
+
+### Delivered counts before → after
+
+Baseline is the accepted live asset at the start of this pass, retained in ignored `work/residual-before-*.json`. Exact measurements are in `residual-counts.json`. Chapters **12 → 12**, keyframes **23 → 23**, coast eras **6 → 6**, exact hold pairs **6 → 6**. All 22 original content-file hashes and exact control keyframe/feature-property hashes match the accepted live baseline.
+
+| Delivery measure | Before | After |
+|---|---:|---:|
+| Coast JSON bytes | 272,857 | 426,315 |
+| Control JSON bytes | 635,244 | 788,447 |
+| Coast arcs | 1,825 | 1,797 |
+| Control arcs | 1,948 | 1,933 |
+| Coast vertices | 21,829 | 38,526 |
+| Control vertices | 39,907 | 56,583 |
+| Coast rings / zero-area / self-crossing | 481 / 0 / 0 | 458 / 0 / 0 |
+| Control rings / zero-area / self-crossing | 2,700 / 0 / 0 | 2,587 / 0 / 0 |
+
+The coast data exceeds the old 200 KiB soft target to retain native-source detail; control remains below 1 MiB. No raster is shipped and no runtime module is added. Fill counts below are CPU earcut counts per decoded coast era, **not** tiled/GPU runtime counts:
+
+| Era | Before triangles | After triangles |
+|---|---:|---:|
+| L0 | 6,148 | 7,899 |
+| L1 | 6,322 | 8,073 |
+| L2 | 6,389 | 8,140 |
+| L3 | 6,157 | 7,909 |
+| L4 | 4,601 | 15,442 |
+| L5 | 7,299 | 11,457 |
+
+### Offline previews actually inspected
+
+All paths below are under `scripts/geo/singapore-1819-1965/previews/`; images remain ignored evidence, not committed assets.
+
+- `residual-after-{G9,G11,G16}.png`: actual decoded delivered coast over the unblurred original maps, including the extended Berih window.
+- `residual-after-{G9,G11,G16}-close.png`: native-scale delivered Kranji banks, shoulders, branches and source island.
+- `residual-after-paper.png`, `residual-after-cinema.png`: actual delivered NW silhouette in both existing theme palettes. Corresponding `residual-before-*` rasters retain the accepted live comparison.
+- `paper-all-keyframes.png`, `cinema-all-keyframes.png`: all 23 actual dated control frames over their matching era coast, opened in both themes.
+
+The fresh 14-stage rebuild passes. The original `round2-guard.ts` passes source rights/hashes, the Jurong paired banks and dry/island witnesses, the northern dry peninsula, absence of the false inland cap and zero ring defects. `residual-guard.ts` additionally passes **614 independent source wet/dry checks across all 29 coast/control layers**, current asset/input hashes, exact metadata and unchanged display content. Asset and measurement-file receipts are in `round2-rebuild-audit.json`, `round2-guard.json`, `residual-guard.json` and `residual-trace-audit.json`.
+
+First-load JavaScript is **439.9912109375 KiB gzip → 439.9912109375 KiB**, exactly unchanged in both EN and ZH and below the 442 KiB budget. The baseline and final measurements are `work/residual-js-before.json` and `work/residual-js-after.json`; the budget assertion passes. The final built `dist/geo/land-sg-history.json` matches the published coast byte-for-byte, and the built topic payload's control object equals the final source control object. No stale pre-polish geometry is delivered by the final build.
+
+### Final gates
+
+| Gate | Result |
+|---|---|
+| `pnpm check` | PASS: 1,515 files; 0 errors, 0 warnings, 24 existing hints |
+| `pnpm validate` | PASS: 94 topics; 0 errors/warnings |
+| `pnpm test -- --maxWorkers=1 --pool=threads --retry=1 --testTimeout=30000 --reporter=dot` | PASS: all 306 files and all 6,759 tests; no skips; exit 0 |
+| `pnpm build` | PASS: 191 pages and PWA generation |
+| `round2-rebuild.ts` | PASS: all 14 stages, including native banks, from the retained original rasters |
+| `polish-audit.ts --accepted-live` + `round2-guard.ts` + `residual-guard.ts` | PASS: original source/geometry guards, 614 residual witnesses, unchanged display content and current asset/input hashes |
+| `measureBudgets` / `assertBudgets`, both locales | PASS: exactly unchanged 439.9912109375 KiB gzip |
+| Final scope / whitespace / payload checks | PASS: owned topic/scripts and the named coast asset only; no evidence images or Vitest configuration tracked; `git diff --check` clean; built coast/control match source |
+
+The final test run uses the existing repository configuration and includes every suite/assertion. An earlier two-worker run encountered unrelated catalogue timing, toad timeout and worker-RPC failures under heavy host load; the final single-worker thread run above passes the complete suite against the completed build. No test or runtime code was changed to obtain that result. Final logs are `work/residual-{check-final-all,validate-release,test-release,build-release,rebuild-release,polish-release,round2-guard-release,guard-release,js-release}.log`.

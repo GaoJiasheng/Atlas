@@ -13,11 +13,11 @@
     "method": "Only whole detached components entirely within G35 verified open sea removed; selection creates no edge"
   },
   "coast": {
-    "bytes": 272857,
-    "arcs": 1825,
-    "vertices": 21829,
+    "bytes": 426315,
+    "arcs": 1797,
+    "vertices": 38526,
     "issues": {
-      "rings": 481,
+      "rings": 458,
       "zeroArea": 0,
       "selfCrossing": 0
     },
@@ -128,10 +128,10 @@
     ]
   },
   "control": {
-    "bytes": 633684,
-    "arcs": 1948,
+    "bytes": 786887,
+    "arcs": 1933,
     "issues": {
-      "rings": 2700,
+      "rings": 2587,
       "zeroArea": 0,
       "selfCrossing": 0
     },

@@ -144,10 +144,22 @@ const sourcePath='src/content/topics/singapore-1819-1965/data/sources.json';
 const sourceEntries=JSON.parse(readFileSync(resolve(dir,'../../..',sourcePath),'utf8')).sources;
 const sourcesAppendOnly=hashText(JSON.stringify(sourceEntries.slice(0,textReceipt.originalSourceCount)))===textReceipt.originalSourcesCanonicalSHA256
   && baseline.runtimeFiles.some((f:any)=>f.path===sourcePath&&f.sha256===textReceipt.sourcesBeforeSHA256);
-const teachingFactsUnchanged=runtimeChecks.filter((f:any)=>!f.path.endsWith('/control.json')&&!f.path.endsWith('/land-sg-history.json'))
+const legacyTeachingFactsUnchanged=runtimeChecks.filter((f:any)=>!f.path.endsWith('/control.json')&&!f.path.endsWith('/land-sg-history.json'))
   .every((f:any)=>f.unchanged||(f.path===textReceipt.chapter&&chapterMethodOnly)||(f.path===sourcePath&&sourcesAppendOnly));
-if(!chapterMethodOnly||!sourcesAppendOnly||!teachingFactsUnchanged)throw Error('Unreviewed teaching-content change');
-const chaptersUnchanged = runtimeChecks.filter((f: { path: string }) => f.path.includes('/chapters/')).every((f: { unchanged: boolean }) => f.unchanged);
+// The accepted live topic includes later historian edits. An explicit residual
+// mode compares every original content file with its start-of-pass hash instead
+// of treating those already accepted edits as changes made by this map pass.
+// The old baseline/receipt and default historical check remain intact.
+const acceptedLive=process.argv.includes('--accepted-live');
+const liveBaseline=acceptedLive?read('residual-text-baseline.json'):null;
+const liveChecks=acceptedLive?Object.entries(liveBaseline.files).map(([path,sha256])=>({
+ path,sha256,unchanged:hashText(readFileSync(resolve(dir,'../../..',path),'utf8'))===sha256,
+})):[];
+const expectedTextPaths=runtimeChecks.filter((f:any)=>!f.path.endsWith('/control.json')&&!f.path.endsWith('/land-sg-history.json')).map((f:any)=>f.path);
+if(acceptedLive&&(!expectedTextPaths.every((p:string)=>liveChecks.some(f=>f.path===p))||!liveChecks.every(f=>f.unchanged)))throw Error('Accepted live topic content changed');
+const teachingFactsUnchanged=acceptedLive?liveChecks.every(f=>f.unchanged):legacyTeachingFactsUnchanged;
+if(!acceptedLive&&(!chapterMethodOnly||!sourcesAppendOnly||!teachingFactsUnchanged))throw Error('Unreviewed teaching-content change');
+const chaptersUnchanged = (acceptedLive?liveChecks:runtimeChecks).filter((f: { path: string }) => f.path.includes('/chapters/')).every((f: { unchanged: boolean }) => f.unchanged);
 const geometryUnchanged = runtimeChecks.filter((f: { path: string }) => f.path.endsWith('/control.json') || f.path.endsWith('/land-sg-history.json')).every((f: { unchanged: boolean }) => f.unchanged);
 const ground35 = read('resume-register-anu1958-fit-report.json').reports.find((r: any)=>r.set==='roads-only');
 const reviewed = existsSync(`${dir}/resume-jurong-reviewed.json`) ? read('resume-jurong-reviewed.json') : null;
@@ -167,7 +179,8 @@ const report = {
   rejected1966Trial: {source:'G14',internalPrintedGrid:metres(gridFit.report),published:false,reason:'Corrected1966 edition cannot establish an exact1961 shore.'},
   runtimeChecks,deliveryChecks,sourceCompleteness,deliveredRings:{coast:coastRings,control:controlRings},
   mapMethodCorrection:{chapterMethodOnly,sourcesAppendOnly,changedParagraphs:textReceipt.changes.length,receipt:'resume-text-changes.json'},
-  unchanged: { chapters: chaptersUnchanged, beats: chapterMethodOnly, facts: teachingFactsUnchanged, liveGeometry: geometryUnchanged,
+  acceptedLiveBaseline:acceptedLive?{receipt:'residual-text-baseline.json',checks:liveChecks,unchanged:teachingFactsUnchanged}:null,
+  unchanged: { chapters: chaptersUnchanged, beats: acceptedLive?teachingFactsUnchanged:chapterMethodOnly, facts: teachingFactsUnchanged, liveGeometry: geometryUnchanged,
     controlBytes: readFileSync(`${dataDir}/control.json`).length,
     coastBytes: readFileSync(resolve(dir, '../../../public/geo/land-sg-history.json')).length,
     controlArcs: control.topology.arcs.length, coastArcs: coast.arcs.length },

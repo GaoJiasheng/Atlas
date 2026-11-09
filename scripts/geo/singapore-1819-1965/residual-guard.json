@@ -1,0 +1,6512 @@
+{
+  "date": "2026-11-09",
+  "status": "passed",
+  "method": "Independent original-pixel water/land witnesses transformed by unchanged measured registration; actual decoded delivery tested, including every 1937–1960 and 1961–1965 frame. Exact keyframe properties and all unedited topic file hashes verified.",
+  "delivery": [
+    {
+      "source": "G9",
+      "layer": "L0",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "L1",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "L2",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "L3",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K1",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K2",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K3",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K4",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K4a",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K5",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K6",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G9",
+      "layer": "K6a",
+      "checks": [
+        {
+          "name": "kranji-police-north-bank-clear-water",
+          "native": [
+            3330,
+            1615
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-police-north-bank-dry-headland",
+          "native": [
+            3305,
+            1655
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "tanjong-buluh-east-shoulder-clear-water",
+          "native": [
+            3100,
+            1540
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-buluh-dry-headland",
+          "native": [
+            3050,
+            1530
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-gedong-paired-mouth-clear-water",
+          "native": [
+            1869,
+            2088
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sungei-gedong-south-bank-dry-ground",
+          "native": [
+            1871,
+            2101
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sungei-murai-paired-mouth-clear-water",
+          "native": [
+            1798,
+            2300
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "tanjong-murai-dry-headland",
+          "native": [
+            1752,
+            2295
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-outer-bank-clear-sea",
+          "native": [
+            2290,
+            1750
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-outer-bank-dry-before-place-name",
+          "native": [
+            2300,
+            1790
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "perampun-mouth-clear-sea",
+          "native": [
+            2460,
+            1628
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "perampun-upstream-single-strokes-beige-ground",
+          "native": [
+            2480,
+            1674
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "lower-kranji-clear-water-west-of-source-bank",
+          "native": [
+            2980,
+            2275
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "lower-kranji-dry-ground-west-of-old-grid-detour",
+          "native": [
+            3007,
+            2275
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "gedong-murai-join-clear-water",
+          "native": [
+            1810,
+            2158
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "gedong-murai-join-dry-ground",
+          "native": [
+            1838,
+            2158
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "pergam-clear-sea-west-of-source-bank",
+          "native": [
+            1618,
+            2570
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "pergam-dry-ground-north-of-trig-symbol",
+          "native": [
+            1646,
+            2545
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "L4",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K6b",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K7",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K8",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K9",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K10",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K11",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K12",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K13",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K14",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G11",
+      "layer": "K15",
+      "checks": [
+        {
+          "name": "Kranji broad middle channel",
+          "native": [
+            2579,
+            2253
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            220,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Kranji dry western mangrove",
+          "native": [
+            2509,
+            2189
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            166,
+            203,
+            169
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Kranji upper paired channel",
+          "native": [
+            2404,
+            2607
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Dry interfluve between Kranji and Peng Siang",
+          "native": [
+            2465,
+            2658
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            151,
+            197,
+            160
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Tengah resolved paired reach",
+          "native": [
+            2264,
+            2740
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            225,
+            221,
+            210
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Peng Siang resolved paired reach",
+          "native": [
+            2553,
+            2693
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            226,
+            223,
+            216
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh main narrow channel",
+          "native": [
+            2447,
+            1710
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            227,
+            216,
+            214
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Buloh dry mangrove",
+          "native": [
+            2399,
+            1719
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            198,
+            186,
+            186
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "Buloh island main-arm water",
+          "native": [
+            2399,
+            1666
+          ],
+          "land": false,
+          "sourceRead": "Independently inspected native original: unhatched pale channel between printed banks; selected away from dark ink.",
+          "sourceRgb": [
+            215,
+            213,
+            218
+          ],
+          "actualLand": false
+        },
+        {
+          "name": "Pulau Buloh source-visible dry interior",
+          "native": [
+            2409,
+            1632
+          ],
+          "land": true,
+          "sourceRead": "Independently inspected native original: printed island/green or blue-hatched mangrove land; selected away from dark ink.",
+          "sourceRgb": [
+            232,
+            227,
+            221
+          ],
+          "actualLand": true
+        },
+        {
+          "name": "murai-south-outer-sea",
+          "native": [
+            1255,
+            2440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "murai-south-outer-dry-headland",
+          "native": [
+            1288,
+            2440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "sarimbun-north-outer-sea",
+          "native": [
+            1775,
+            1935
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "sarimbun-north-outer-dry-interior",
+          "native": [
+            1830,
+            1965
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "west-mangrove-open-water",
+          "native": [
+            1190,
+            2595
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "west-mangrove-dry-interior",
+          "native": [
+            1260,
+            2585
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-south-cape-open-water",
+          "native": [
+            1190,
+            3000
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-south-cape-dry-mangrove",
+          "native": [
+            1234,
+            3040
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-outer-open-water",
+          "native": [
+            2980,
+            1820
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-outer-dry-mangrove",
+          "native": [
+            3040,
+            1890
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "buloh-kranji-shoulder-open-water",
+          "native": [
+            2570,
+            1710
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "buloh-kranji-shoulder-dry-mangrove",
+          "native": [
+            2530,
+            1755
+          ],
+          "land": true,
+          "actualLand": true
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "L5",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "K15a",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "K16",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "K17",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "K18",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    },
+    {
+      "source": "G16",
+      "layer": "K19",
+      "checks": [
+        {
+          "name": "kranji-mouth-clear-water",
+          "native": [
+            8947,
+            4085
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-main-trunk-clear-water",
+          "native": [
+            8930,
+            4440
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-arm-clear-water",
+          "native": [
+            8485,
+            4613
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-clear-water",
+          "native": [
+            8665,
+            4720
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-west-southern-head-clear-water",
+          "native": [
+            8618,
+            4968
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-east-southern-head-clear-water",
+          "native": [
+            8808,
+            5190
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "kranji-southern-fork-dry-peninsula",
+          "native": [
+            8720,
+            4980
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-north-dry-peninsula",
+          "native": [
+            8540,
+            4440
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-west-arm-south-dry-peninsula",
+          "native": [
+            8565,
+            4835
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "kranji-east-bank-dry-interior",
+          "native": [
+            9090,
+            4550
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 23 seaward of continuous NW bank",
+          "native": [
+            7298.373032,
+            4949.934264
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 24 seaward of continuous NW bank",
+          "native": [
+            7275.075511,
+            4968.043142
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 27 seaward of continuous NW bank",
+          "native": [
+            7272.666527,
+            5072.999735
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 28 seaward of continuous NW bank",
+          "native": [
+            7293.319775,
+            5062.512476
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "Unclosed mangrove/chart-ink fleck 29 seaward of continuous NW bank",
+          "native": [
+            7281.95024,
+            5022.52677
+          ],
+          "land": false,
+          "reason": "Independent source classification of the isolated stroke as tidal-flat/chart ink, not a closed dry island.",
+          "actualLand": false
+        },
+        {
+          "name": "berih-mouth-clear-water-below-caption",
+          "native": [
+            7270,
+            5377
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-upper-paired-channel-clear-water",
+          "native": [
+            7640,
+            5312
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-paired-channel-clear-water",
+          "native": [
+            7534,
+            5454
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-lower-head-clear-water",
+          "native": [
+            7556,
+            5610
+          ],
+          "land": false,
+          "actualLand": false
+        },
+        {
+          "name": "berih-north-bank-dry-mangrove-interior",
+          "native": [
+            7390,
+            5230
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-southwest-dry-mangrove-peninsula",
+          "native": [
+            7390,
+            5500
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "berih-eastern-dry-interior-between-heads",
+          "native": [
+            7610,
+            5415
+          ],
+          "land": true,
+          "actualLand": true
+        },
+        {
+          "name": "Berih caption/open-ink fragment 31",
+          "native": [
+            7320.519655,
+            5313.987197
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 32",
+          "native": [
+            7329.963783,
+            5324.032322
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 33",
+          "native": [
+            7335.928909,
+            5331.539863
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: stroke of the printed h in Berih, in open charted water; no dry-island bank.",
+          "actualLand": false
+        },
+        {
+          "name": "Berih caption/open-ink fragment 34",
+          "native": [
+            7377.646328,
+            5338.157339
+          ],
+          "land": false,
+          "reason": "Native 10x inspection: isolated open cartographic stroke among offshore dots/dashes north of the mangrove tip, without closed dry-island shore or stippled dry interior.",
+          "actualLand": false
+        }
+      ]
+    }
+  ],
+  "textUnchanged": [
+    {
+      "path": "src/content/topics/singapore-1819-1965/topic.yaml",
+      "sha256": "2532b1065a00d9aa428d032f72b3678a4b84bf57ebe985324dc4626c2b7ee8fa"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/AUDIT.md",
+      "sha256": "ab5aff2d2162c53ca5a640b7fbff09fc403668e7e49bb09d9197797141ade371"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/RESEARCH.md",
+      "sha256": "e4512af34b7ac8a1bbd51f8acede03b74f52a35194f39eaed330a990133fdefe"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/REVIEW.md",
+      "sha256": "408c81ee12a2a9a4e0195efad70711c9f720e07b9553ed66ee3b056659f5c87d"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/05-town-life.mdx",
+      "sha256": "6d4d2010dea311bdbc01cbd87c782ea45ab1bce48242b2999b25f6c00acf3853"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/11-separation.mdx",
+      "sha256": "4b01110f934fd1f84213495b19fbb2854dcbfa6f62b7228ef67292bd386d440c"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/10-merger.mdx",
+      "sha256": "481db154c71eaf528f94989d0d90c22c1caeb99e3e22efa9365a1cd3ac6e7861"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/09-self-government.mdx",
+      "sha256": "d9f89d5f392f05a545b650811385b147a4e56aab0712fcc278616edd8aa397d5"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/08-after-the-war.mdx",
+      "sha256": "b4597d829fccd37971e4804cd3586f4c84bfbece32797eb74afa4de90c0a8ac7"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/01-founding-1819.mdx",
+      "sha256": "d7c21c9b94a4870db55173a94545139100ea2a717adf6d700c4f79166f3b3897"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/06-british-malaya.mdx",
+      "sha256": "e39a4d55180ff888353b93bf37e863f341d7b2cac7552eed1070264d18755af2"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/07-war-and-occupation.mdx",
+      "sha256": "04b5f2e8418b87e8be31d4cd694c740e907e91f0c2ebf188f4a91abc34b74ff0"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/00-background.mdx",
+      "sha256": "155694f63b33568defba0583a2f86898c0db3cca9aee09625b017899efc1fa63"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/02-town-plan.mdx",
+      "sha256": "a20d158f503d8ab5663ce1daffb9e470e02a4cbeff2b0f32a74be3823cd05f15"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/03-free-port.mdx",
+      "sha256": "531c153c7a83848c393961e3a319f39cfe2bc61f8c34b1ef03a0e165e608a4cb"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/chapters/04-arrivals.mdx",
+      "sha256": "7a701c25764a021439d71b2d8df0a8785d4da76c9a49a00d373d37b89b33bcfd"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/sources.json",
+      "sha256": "eb3c9f41b3253489c880122cc50c365f88958756c47c7f6e932ebf63a70da2a7"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/movements.json",
+      "sha256": "8a7f1842218ebcc380e08fcbdce03644995f1acdff9c0d93efe5a7a29efed66d"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/events.json",
+      "sha256": "1066be4bf7eda1158ef86e0e33a8fd93090bed438e63f6e1984857a2b487f849"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/presets.json",
+      "sha256": "2a1bdc771a089b4e85567803b919129af3b87f0651cada2e5ddc68317b90386f"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/glossary.json",
+      "sha256": "20909444728b27daf76813d2d1fb566a7c519b46453b60b972f829e047e35abe"
+    },
+    {
+      "path": "src/content/topics/singapore-1819-1965/data/entities.json",
+      "sha256": "8b435cd5ac544e28c060766cb778797ffc26f2e95680d0996ec392bb334f1841"
+    }
+  ],
+  "originalGuard": "passed"
+}

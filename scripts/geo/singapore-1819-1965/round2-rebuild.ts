@@ -8,6 +8,7 @@ mkdirSync(`${d}/work`,{recursive:true});
 const steps=[
  ['lines',`scripts/geo/lib/lines.ts --topic ${slug}`],
  ['inputs',`scripts/geo/${slug}/coast-inputs.ts`],
+ ['north-west-banks',`scripts/geo/${slug}/residual-trace.ts`],
  ['register',`scripts/geo/${slug}/round2-register.ts`],
  ['history',`scripts/geo/${slug}/resume-history-land.ts`],
  ['splice',`scripts/geo/${slug}/resume-coast-inputs.ts`],
@@ -27,5 +28,6 @@ for(const [name,command]of steps){
  writeFileSync(`${d}/work/round2-rebuild-${name}.log`,output);completed.push({name,command:`pnpm tsx ${command}`,exitCode:0});
 }
 const assets=['public/geo/land-sg-history.json',`src/content/topics/${slug}/data/control.json`].map(path=>{const b=readFileSync(`${root}/${path}`);return{path,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')};});
-writeFileSync(`${d}/round2-rebuild-audit.json`,JSON.stringify({date:'2026-11-09',status:'passed',cachedOriginalSources:true,steps:completed,assets},null,2)+'\n');
+const bankInputs=['residual-G9-banks.json','residual-G11-banks.json','residual-G11-outer.json','residual-G16-banks.json'].map(file=>({file,sha256:createHash('sha256').update(readFileSync(`${d}/${file}`)).digest('hex')}));
+writeFileSync(`${d}/round2-rebuild-audit.json`,JSON.stringify({date:'2026-11-09',status:'passed',cachedOriginalSources:true,steps:completed,assets,bankInputs},null,2)+'\n');
 console.log('Fresh source rebuild passed');

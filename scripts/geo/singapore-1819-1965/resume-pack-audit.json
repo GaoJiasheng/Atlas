@@ -16,17 +16,17 @@
     ]
   ],
   "fineScope": "Historical land arcs only; exclusive current-coast and mask arcs retain25m precision",
-  "sourceVertices": 31377,
-  "publishedVertices": 17124,
-  "restoredArcs": 24,
-  "quantizationFactor": 3,
+  "sourceVertices": 31949,
+  "publishedVertices": 17275,
+  "restoredArcs": 22,
+  "quantizationFactor": 4,
   "gridStepM": [
-    1.610418349721331,
-    1.041041127025945
+    2.147224466295108,
+    1.3880548360345932
   ],
-  "bytes": 203557,
+  "bytes": 203543,
   "issues": {
-    "rings": 361,
+    "rings": 357,
     "zeroArea": 0,
     "selfCrossing": 0
   }

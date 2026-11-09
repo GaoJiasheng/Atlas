@@ -14,6 +14,11 @@
       "exitCode": 0
     },
     {
+      "name": "north-west-banks",
+      "command": "pnpm tsx scripts/geo/singapore-1819-1965/residual-trace.ts",
+      "exitCode": 0
+    },
+    {
       "name": "register",
       "command": "pnpm tsx scripts/geo/singapore-1819-1965/round2-register.ts",
       "exitCode": 0
@@ -72,13 +77,31 @@
   "assets": [
     {
       "path": "public/geo/land-sg-history.json",
-      "bytes": 272857,
-      "sha256": "8e0a0cb522e6a46396959db3cc864438fbb46e03f00417ffb3535e6ad005255c"
+      "bytes": 426315,
+      "sha256": "fee37dc2b137495d5b3612a1784892e755977f1750ea1330f94d69a293dd0b1b"
     },
     {
       "path": "src/content/topics/singapore-1819-1965/data/control.json",
-      "bytes": 635244,
-      "sha256": "b168bed91861ca70f75007aebdc06317418be0b3f417747c129ae361cc85fbf8"
+      "bytes": 788447,
+      "sha256": "29ad9003200c8da71c2d91629fe4e2d66bd75e58dc307cb6598c4883b61398cc"
+    }
+  ],
+  "bankInputs": [
+    {
+      "file": "residual-G9-banks.json",
+      "sha256": "ede56eb4d70da6b6553ead5c63a38b8b92331b632e2bbb2a787fbe404fb2fe80"
+    },
+    {
+      "file": "residual-G11-banks.json",
+      "sha256": "7cb3607ef675beb7b107a2d96be7736e50dad95fbda919a06120e2f556065fa4"
+    },
+    {
+      "file": "residual-G11-outer.json",
+      "sha256": "5b5449483e313f93973177faa2207884f61c91dc3f4f3b45df9a5c23a9fcf39d"
+    },
+    {
+      "file": "residual-G16-banks.json",
+      "sha256": "87a8a4d0d7e74539715b2421743c524c63f676ac0a5e3f9b4ec357ff99217ef9"
     }
   ]
 }

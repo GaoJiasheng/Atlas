@@ -5,13 +5,13 @@
   "publishedAssets": [
     {
       "path": "public/geo/land-sg-history.json",
-      "bytes": 272857,
-      "sha256": "8e0a0cb522e6a46396959db3cc864438fbb46e03f00417ffb3535e6ad005255c"
+      "bytes": 426315,
+      "sha256": "fee37dc2b137495d5b3612a1784892e755977f1750ea1330f94d69a293dd0b1b"
     },
     {
       "path": "src/content/topics/singapore-1819-1965/data/control.json",
-      "bytes": 635244,
-      "sha256": "b168bed91861ca70f75007aebdc06317418be0b3f417747c129ae361cc85fbf8"
+      "bytes": 788447,
+      "sha256": "29ad9003200c8da71c2d91629fe4e2d66bd75e58dc307cb6598c4883b61398cc"
     }
   ],
   "sourceHashesVerified": [
@@ -569,23 +569,23 @@
     "method": "G15 Tuas open natural-bank arc, joined at exact segment intersections to the complementary G16 mainland arc. Poyan/Berih north of 1.34141N stays on the complete G16 source rather than the incomplete northern G15 mask; its omitted G15-observed mangrove tip is restored separately. No source coverage closure or new straight connector is exposed.",
     "north": {
       "p": [
-        103.63865888226296,
-        1.3414098139488673
+        103.63865888226297,
+        1.341409813948873
       ],
-      "a": 1358,
+      "a": 1350,
       "b": 1386,
-      "t": 0.13309199206696742,
-      "u": 0.5465842951053831
+      "t": 0.13309199210418726,
+      "u": 0.5465842951143741
     },
     "south": {
       "p": [
         103.65327,
-        1.3034727113160705
+        1.303472711316068
       ],
-      "a": 1697,
+      "a": 1689,
       "b": 692,
       "t": 0.813238300236221,
-      "u": 0.25422632140872153
+      "u": 0.25422632136144563
     },
     "guard": "Exact source-bank intersections and simple-ring checks; no coverage cap or invented connector."
   },
@@ -616,12 +616,12 @@
   "falseInlandCoverageVertices": 0,
   "deliveredRings": {
     "coast": {
-      "rings": 481,
+      "rings": 458,
       "zeroArea": 0,
       "selfCrossing": 0
     },
     "control": {
-      "rings": 2700,
+      "rings": 2587,
       "zeroArea": 0,
       "selfCrossing": 0
     }

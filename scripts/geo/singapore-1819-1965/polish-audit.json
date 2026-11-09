@@ -1382,7 +1382,7 @@
     },
     {
       "path": "src/content/topics/singapore-1819-1965/chapters/06-british-malaya.mdx",
-      "unchanged": true
+      "unchanged": false
     },
     {
       "path": "src/content/topics/singapore-1819-1965/chapters/07-war-and-occupation.mdx",
@@ -1394,7 +1394,7 @@
     },
     {
       "path": "src/content/topics/singapore-1819-1965/chapters/09-self-government.mdx",
-      "unchanged": true
+      "unchanged": false
     },
     {
       "path": "src/content/topics/singapore-1819-1965/chapters/10-merger.mdx",
@@ -1402,7 +1402,7 @@
     },
     {
       "path": "src/content/topics/singapore-1819-1965/chapters/11-separation.mdx",
-      "unchanged": true
+      "unchanged": false
     },
     {
       "path": "src/content/topics/singapore-1819-1965/data/control.json",
@@ -1414,7 +1414,7 @@
     },
     {
       "path": "src/content/topics/singapore-1819-1965/data/events.json",
-      "unchanged": true
+      "unchanged": false
     },
     {
       "path": "src/content/topics/singapore-1819-1965/data/glossary.json",
@@ -2449,35 +2449,35 @@
       "method": "G15 Tuas open natural-bank arc, joined at exact segment intersections to the complementary G16 mainland arc. Poyan/Berih north of 1.34141N stays on the complete G16 source rather than the incomplete northern G15 mask; its omitted G15-observed mangrove tip is restored separately. No source coverage closure or new straight connector is exposed.",
       "north": {
         "p": [
-          103.63865888226296,
-          1.3414098139488673
+          103.63865888226297,
+          1.341409813948873
         ],
-        "a": 1358,
+        "a": 1350,
         "b": 1386,
-        "t": 0.13309199206696742,
-        "u": 0.5465842951053831
+        "t": 0.13309199210418726,
+        "u": 0.5465842951143741
       },
       "south": {
         "p": [
           103.65327,
-          1.3034727113160705
+          1.303472711316068
         ],
-        "a": 1697,
+        "a": 1689,
         "b": 692,
         "t": 0.813238300236221,
-        "u": 0.25422632140872153
+        "u": 0.25422632136144563
       },
       "guard": "Exact source-bank intersections and simple-ring checks; no coverage cap or invented connector."
     }
   },
   "deliveredRings": {
     "coast": {
-      "rings": 481,
+      "rings": 458,
       "zeroArea": 0,
       "selfCrossing": 0
     },
     "control": {
-      "rings": 2700,
+      "rings": 2587,
       "zeroArea": 0,
       "selfCrossing": 0
     }
@@ -2488,14 +2488,130 @@
     "changedParagraphs": 4,
     "receipt": "resume-text-changes.json"
   },
+  "acceptedLiveBaseline": {
+    "receipt": "residual-text-baseline.json",
+    "checks": [
+      {
+        "path": "src/content/topics/singapore-1819-1965/topic.yaml",
+        "sha256": "2532b1065a00d9aa428d032f72b3678a4b84bf57ebe985324dc4626c2b7ee8fa",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/AUDIT.md",
+        "sha256": "ab5aff2d2162c53ca5a640b7fbff09fc403668e7e49bb09d9197797141ade371",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/RESEARCH.md",
+        "sha256": "e4512af34b7ac8a1bbd51f8acede03b74f52a35194f39eaed330a990133fdefe",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/REVIEW.md",
+        "sha256": "408c81ee12a2a9a4e0195efad70711c9f720e07b9553ed66ee3b056659f5c87d",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/05-town-life.mdx",
+        "sha256": "6d4d2010dea311bdbc01cbd87c782ea45ab1bce48242b2999b25f6c00acf3853",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/11-separation.mdx",
+        "sha256": "4b01110f934fd1f84213495b19fbb2854dcbfa6f62b7228ef67292bd386d440c",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/10-merger.mdx",
+        "sha256": "481db154c71eaf528f94989d0d90c22c1caeb99e3e22efa9365a1cd3ac6e7861",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/09-self-government.mdx",
+        "sha256": "d9f89d5f392f05a545b650811385b147a4e56aab0712fcc278616edd8aa397d5",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/08-after-the-war.mdx",
+        "sha256": "b4597d829fccd37971e4804cd3586f4c84bfbece32797eb74afa4de90c0a8ac7",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/01-founding-1819.mdx",
+        "sha256": "d7c21c9b94a4870db55173a94545139100ea2a717adf6d700c4f79166f3b3897",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/06-british-malaya.mdx",
+        "sha256": "e39a4d55180ff888353b93bf37e863f341d7b2cac7552eed1070264d18755af2",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/07-war-and-occupation.mdx",
+        "sha256": "04b5f2e8418b87e8be31d4cd694c740e907e91f0c2ebf188f4a91abc34b74ff0",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/00-background.mdx",
+        "sha256": "155694f63b33568defba0583a2f86898c0db3cca9aee09625b017899efc1fa63",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/02-town-plan.mdx",
+        "sha256": "a20d158f503d8ab5663ce1daffb9e470e02a4cbeff2b0f32a74be3823cd05f15",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/03-free-port.mdx",
+        "sha256": "531c153c7a83848c393961e3a319f39cfe2bc61f8c34b1ef03a0e165e608a4cb",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/chapters/04-arrivals.mdx",
+        "sha256": "7a701c25764a021439d71b2d8df0a8785d4da76c9a49a00d373d37b89b33bcfd",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/sources.json",
+        "sha256": "eb3c9f41b3253489c880122cc50c365f88958756c47c7f6e932ebf63a70da2a7",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/movements.json",
+        "sha256": "8a7f1842218ebcc380e08fcbdce03644995f1acdff9c0d93efe5a7a29efed66d",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/events.json",
+        "sha256": "1066be4bf7eda1158ef86e0e33a8fd93090bed438e63f6e1984857a2b487f849",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/presets.json",
+        "sha256": "2a1bdc771a089b4e85567803b919129af3b87f0651cada2e5ddc68317b90386f",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/glossary.json",
+        "sha256": "20909444728b27daf76813d2d1fb566a7c519b46453b60b972f829e047e35abe",
+        "unchanged": true
+      },
+      {
+        "path": "src/content/topics/singapore-1819-1965/data/entities.json",
+        "sha256": "8b435cd5ac544e28c060766cb778797ffc26f2e95680d0996ec392bb334f1841",
+        "unchanged": true
+      }
+    ],
+    "unchanged": true
+  },
   "unchanged": {
-    "chapters": false,
+    "chapters": true,
     "beats": true,
     "facts": true,
     "liveGeometry": false,
-    "controlBytes": 635244,
-    "coastBytes": 272857,
-    "controlArcs": 1948,
-    "coastArcs": 1825
+    "controlBytes": 788447,
+    "coastBytes": 426315,
+    "controlArcs": 1933,
+    "coastArcs": 1797
   }
 }
