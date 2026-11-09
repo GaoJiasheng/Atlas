@@ -202,7 +202,7 @@ describe('how-planes-fly production content and model', () => {
 
   it('leaves the illustrated hot gas inside an open combustion passage between two liner walls', () => {
     const chamber = part('combustor-ring');
-    const walls = [chamber.primitive!, ...(chamber.extra ?? [])];
+    const walls = [chamber.primitive!, ...(chamber.extra ?? [])].filter(p=>p.kind==='lathe');
     expect(walls).toHaveLength(2);
     for (const wall of walls) {
       if (wall.kind !== 'lathe') throw new Error('annular liner required');

@@ -38,11 +38,11 @@ export const PART_TEXT: Record<string, PartText> = {
     detail: p(
       [
         'The windows at the front of the fuselage, where the flight crew sit. On the stage they mark which end is the nose: the airliner flies towards −X, into the incoming air.',
-        'The glazing is drawn as a simple band; real window frames and their number are not modelled [S58].',
+        'Six inset windscreen panes and their frames follow the curved nose. The generic design also includes rounded cabin windows; it does not reproduce a particular aircraft type [S58].',
       ],
       [
         '机身前端的窗户，机组坐在后面。在舞台上，它标出哪一头是机头：客机朝 −X 方向飞，迎着来流。',
-        '风挡只画成一条简单的带子，没有画真实的窗框和窗的数目 [S58]。',
+        '六块嵌入式风挡和窗框顺着机头曲面布置；通用设计还画出圆角舷窗，并不复刻某一型号 [S58]。',
       ],
     ),
   },

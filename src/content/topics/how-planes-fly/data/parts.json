@@ -15,135 +15,6 @@
         "en": "The fuselage joins the wings, tail and cockpit. Passengers and cargo travel inside. The four-force arrows start around this long body.\n\nThis model represents an airliner about 40 m long, with a 36 m wingspan and a height of 12 m. It is drawn ten times smaller [S58]. The aircraft, fuel and everything it carries contribute to its weight. Lift balances that weight in level flight [S1].\n\nThe simple outline and windows represent a general airliner, without a particular maker, model or airline [S58].",
         "zh": "机身连接机翼、尾翼和驾驶舱，里面载着乘客和货物。四力箭头从这段长条形机体周围画出。\n\n模型代表一架约长 40 米、翼展 36 米、高 12 米的客机，画面缩小十倍 [S58]。飞机、燃油和所载的一切都计入重量。水平飞行时，升力与重力平衡 [S1]。\n\n简化的外形和窗户代表一般客机，没有指定厂家、型号或航空公司 [S58]。"
       },
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -2,
-            -0.03,
-            0
-          ],
-          [
-            -1.93,
-            -0.022,
-            0
-          ],
-          [
-            -1.82,
-            -0.012,
-            0
-          ],
-          [
-            -1.65,
-            -0.004,
-            0
-          ],
-          [
-            -1.4,
-            0,
-            0
-          ],
-          [
-            -1,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.8,
-            0,
-            0
-          ],
-          [
-            1.2,
-            0.03,
-            0
-          ],
-          [
-            1.5,
-            0.07,
-            0
-          ],
-          [
-            1.75,
-            0.1,
-            0
-          ],
-          [
-            1.95,
-            0.12,
-            0
-          ],
-          [
-            2.02,
-            0.125,
-            0
-          ]
-        ],
-        "radius": [
-          0.012,
-          0.075,
-          0.13,
-          0.17,
-          0.195,
-          0.2,
-          0.2,
-          0.2,
-          0.19,
-          0.16,
-          0.11,
-          0.06,
-          0.025
-        ],
-        "radial": 32,
-        "segments": 120,
-        "at": [
-          0,
-          1.1,
-          0
-        ],
-        "color": "casing"
-      },
-      "extra": [
-        {
-          "kind": "fins",
-          "size": [
-            0.006,
-            0.026,
-            0.018
-          ],
-          "count": 36,
-          "gap": 0.042,
-          "axis": "x",
-          "at": [
-            -0.34,
-            1.135,
-            0.197
-          ],
-          "color": "rubber"
-        },
-        {
-          "kind": "fins",
-          "size": [
-            0.006,
-            0.026,
-            0.018
-          ],
-          "count": 36,
-          "gap": 0.042,
-          "axis": "x",
-          "at": [
-            -0.34,
-            1.135,
-            -0.197
-          ],
-          "color": "rubber"
-        }
-      ],
       "shell": true,
       "explode": {
         "dir": [
@@ -160,7 +31,11 @@
         "tailplane-left",
         "tailplane-right",
         "fin"
-      ]
+      ],
+      "mesh": "fuselage-shell",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "cockpit-glazing",
@@ -174,75 +49,16 @@
         "zh": "标出机头，机组坐在这里。"
       },
       "detail": {
-        "en": "The flight crew sit behind these windows at the front of the fuselage. They mark the nose, which faces into the incoming air, towards −X in the model.\n\nThe windows form a simple band, with individual frames and window counts left out [S58].",
-        "zh": "机组坐在机身前端的窗户后面。窗户标出机头的位置，朝向来流，也就是模型中的 −X 方向。\n\n窗户简化成一条带子，省略了各个窗框和具体窗数 [S58]。"
-      },
-      "primitive": {
-        "kind": "lathe",
-        "profile": [
-          [
-            0.109,
-            -0.08
-          ],
-          [
-            0.129,
-            -0.04
-          ],
-          [
-            0.1411,
-            0
-          ],
-          [
-            0.1505,
-            0.04
-          ],
-          [
-            0.1599,
-            0.08
-          ],
-          [
-            0.1519,
-            0.08
-          ],
-          [
-            0.1425,
-            0.04
-          ],
-          [
-            0.1331,
-            0
-          ],
-          [
-            0.121,
-            -0.04
-          ],
-          [
-            0.101,
-            -0.08
-          ],
-          [
-            0.109,
-            -0.08
-          ]
-        ],
-        "segments": 64,
-        "arc": 120,
-        "at": [
-          -1.79,
-          1.089,
-          0
-        ],
-        "rotation": [
-          90,
-          0,
-          -90
-        ],
-        "color": "glass",
-        "tint": "#33424b"
+        "en": "The flight crew sit behind these windows at the front of the fuselage. They mark the nose, which faces into the incoming air, towards −X in the model.\n\nSix windscreen panes sit in frames set into the curved nose. The shape is generic, not one particular aircraft type [S58].",
+        "zh": "机组坐在机身前端的窗户后面。窗户标出机头的位置，朝向来流，也就是模型中的 −X 方向。\n\n六块风挡玻璃装在窗框里，嵌进弯曲的机头。外形是通用设计，不是某一种机型 [S58]。"
       },
       "connects": [
         "fuselage-shell"
-      ]
+      ],
+      "mesh": "cockpit-glazing",
+      "material": {
+        "color": "powder"
+      }
     },
     {
       "id": "wing-left",
@@ -258,142 +74,6 @@
       "detail": {
         "en": "This is the left wing from the pilot’s viewpoint. An airliner’s wings provide most of its lift, while the engines provide thrust [S1]. The left aileron, flap, slat and spoiler sit on this wing, with an engine below.\n\nThe wing’s cross-sectional shape is its airfoil. The angle between its chord and the incoming air is the angle of attack, which affects lift [S3]. The separate wing-box cutaway reveals the spars and ribs inside [S43]. Here the wing is shown as a solid shape.\n\nLift acts at right angles to the incoming air. When the aircraft banks, lift tilts with the wings [S1, S5].",
         "zh": "这是飞行员视角的左翼。客机的机翼提供大部分升力，发动机提供推力 [S1]。左副翼、襟翼、缝翼和扰流板装在这边，发动机挂在下面。\n\n机翼的剖面形状叫翼型。翼弦与来流之间的角叫迎角，会影响升力 [S3]。独立的翼盒剖面展示了里面的翼梁和翼肋 [S43]，这里的机翼则画成实心外形。\n\n升力垂直于来流。飞机倾斜时，升力也随机翼倾斜 [S1, S5]。"
-      },
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -0.2866,
-            -0.083,
-            -0.79
-          ],
-          [
-            -0.2582,
-            -0.0738,
-            -0.7022
-          ],
-          [
-            -0.2298,
-            -0.0646,
-            -0.6144
-          ],
-          [
-            -0.2015,
-            -0.0554,
-            -0.5267
-          ],
-          [
-            -0.1731,
-            -0.0461,
-            -0.4389
-          ],
-          [
-            -0.1447,
-            -0.0369,
-            -0.3511
-          ],
-          [
-            -0.1135,
-            -0.0277,
-            -0.2633
-          ],
-          [
-            -0.0756,
-            -0.0185,
-            -0.1756
-          ],
-          [
-            -0.0378,
-            -0.0092,
-            -0.0878
-          ],
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.0378,
-            0.0092,
-            0.0878
-          ],
-          [
-            0.0756,
-            0.0185,
-            0.1756
-          ],
-          [
-            0.1135,
-            0.0277,
-            0.2633
-          ],
-          [
-            0.1513,
-            0.0369,
-            0.3511
-          ],
-          [
-            0.1891,
-            0.0461,
-            0.4389
-          ],
-          [
-            0.2269,
-            0.0554,
-            0.5267
-          ],
-          [
-            0.2648,
-            0.0646,
-            0.6144
-          ],
-          [
-            0.3026,
-            0.0738,
-            0.7022
-          ],
-          [
-            0.3404,
-            0.083,
-            0.79
-          ]
-        ],
-        "radius": [
-          0.3106,
-          0.2925,
-          0.2743,
-          0.2562,
-          0.238,
-          0.2199,
-          0.2046,
-          0.1959,
-          0.1872,
-          0.1785,
-          0.1698,
-          0.1611,
-          0.1524,
-          0.1437,
-          0.135,
-          0.1263,
-          0.1176,
-          0.1089,
-          0.1002
-        ],
-        "section": {
-          "flat": 0.14
-        },
-        "up": [
-          0,
-          1,
-          0
-        ],
-        "radial": 28,
-        "at": [
-          0.0408,
-          1.073,
-          0.91
-        ],
-        "color": "casing"
       },
       "shell": true,
       "explode": {
@@ -412,7 +92,11 @@
         "flap-left",
         "slat-left",
         "nacelle-left"
-      ]
+      ],
+      "mesh": "wing-left",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "wing-right",
@@ -428,142 +112,6 @@
       "detail": {
         "en": "This is the right wing from the pilot’s viewpoint, mirroring the left. It carries the right aileron, flap and slat, with an engine below. In the banked pose this wing lowers, and the lift arrow leans towards it [S5].\n\nThe wings provide most of the airliner’s lift [S1]. This general example is drawn ten times smaller [S58].\n\nDuring a bank, lift’s sideways part curves the flight path. The model holds one banked position to show this direction [S5, S58].",
         "zh": "这是飞行员视角的右翼，与左翼对称。右副翼、襟翼和缝翼装在这边，发动机挂在下面。倾斜姿态中，这侧机翼降低，升力箭头朝它倾斜 [S5]。\n\n机翼提供客机的大部分升力 [S1]。这个一般客机模型缩小了十倍 [S58]。\n\n倾斜时，升力的侧向部分让航迹弯曲。模型固定在一个倾斜姿态，展示这个方向 [S5, S58]。"
-      },
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -0.2866,
-            -0.083,
-            0.79
-          ],
-          [
-            -0.2582,
-            -0.0738,
-            0.7022
-          ],
-          [
-            -0.2298,
-            -0.0646,
-            0.6144
-          ],
-          [
-            -0.2015,
-            -0.0554,
-            0.5267
-          ],
-          [
-            -0.1731,
-            -0.0461,
-            0.4389
-          ],
-          [
-            -0.1447,
-            -0.0369,
-            0.3511
-          ],
-          [
-            -0.1135,
-            -0.0277,
-            0.2633
-          ],
-          [
-            -0.0756,
-            -0.0185,
-            0.1756
-          ],
-          [
-            -0.0378,
-            -0.0092,
-            0.0878
-          ],
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.0378,
-            0.0092,
-            -0.0878
-          ],
-          [
-            0.0756,
-            0.0185,
-            -0.1756
-          ],
-          [
-            0.1135,
-            0.0277,
-            -0.2633
-          ],
-          [
-            0.1513,
-            0.0369,
-            -0.3511
-          ],
-          [
-            0.1891,
-            0.0461,
-            -0.4389
-          ],
-          [
-            0.2269,
-            0.0554,
-            -0.5267
-          ],
-          [
-            0.2648,
-            0.0646,
-            -0.6144
-          ],
-          [
-            0.3026,
-            0.0738,
-            -0.7022
-          ],
-          [
-            0.3404,
-            0.083,
-            -0.79
-          ]
-        ],
-        "radius": [
-          0.3106,
-          0.2925,
-          0.2743,
-          0.2562,
-          0.238,
-          0.2199,
-          0.2046,
-          0.1959,
-          0.1872,
-          0.1785,
-          0.1698,
-          0.1611,
-          0.1524,
-          0.1437,
-          0.135,
-          0.1263,
-          0.1176,
-          0.1089,
-          0.1002
-        ],
-        "section": {
-          "flat": 0.14
-        },
-        "up": [
-          0,
-          1,
-          0
-        ],
-        "radial": 28,
-        "at": [
-          0.0408,
-          1.073,
-          -0.91
-        ],
-        "color": "casing"
       },
       "shell": true,
       "explode": {
@@ -581,7 +129,11 @@
         "flap-right",
         "slat-right",
         "nacelle-right"
-      ]
+      ],
+      "mesh": "wing-right",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "wing-tip-left",
@@ -598,40 +150,6 @@
         "en": "The outermost piece completes the left wing’s outline.\n\nThis model has a small upturned tip. Its effect on fuel use and drag is not calculated [S58].",
         "zh": "左翼最外端的一块，接成完整的机翼轮廓。\n\n这里画成向上翘起的小翼尖，模型没有计算它对耗油和阻力的影响 [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0,
-            0
-          ],
-          [
-            0.2,
-            0
-          ],
-          [
-            0.235,
-            0.17
-          ],
-          [
-            0.165,
-            0.178
-          ]
-        ],
-        "depth": 0.012,
-        "bevel": 0.004,
-        "at": [
-          0.31,
-          1.1501,
-          1.7
-        ],
-        "rotation": [
-          12,
-          0,
-          0
-        ],
-        "color": "casing"
-      },
       "explode": {
         "dir": [
           0,
@@ -642,7 +160,11 @@
       },
       "connects": [
         "wing-left"
-      ]
+      ],
+      "mesh": "wing-tip-left",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "wing-tip-right",
@@ -659,40 +181,6 @@
         "en": "The outermost piece completes the right wing’s outline and mirrors the left tip.\n\nThis model has a small upturned tip. Its effect on fuel use and drag is not calculated [S58].",
         "zh": "右翼最外端的一块，与左翼尖对称，接成完整的机翼轮廓。\n\n这里画成向上翘起的小翼尖，模型没有计算它对耗油和阻力的影响 [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0,
-            0
-          ],
-          [
-            0.2,
-            0
-          ],
-          [
-            0.235,
-            0.17
-          ],
-          [
-            0.165,
-            0.178
-          ]
-        ],
-        "depth": 0.012,
-        "bevel": 0.004,
-        "at": [
-          0.31,
-          1.1501,
-          -1.7
-        ],
-        "rotation": [
-          -12,
-          0,
-          0
-        ],
-        "color": "casing"
-      },
       "explode": {
         "dir": [
           0,
@@ -703,7 +191,11 @@
       },
       "connects": [
         "wing-right"
-      ]
+      ],
+      "mesh": "wing-tip-right",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "wing-box-skin",
@@ -1897,41 +1389,6 @@
         "en": "This hinged surface sits near the outer back edge of the left wing.\n\nThe two ailerons move in opposite directions, one up and one down, to roll the aircraft into a bank [S5]. Each turns 12° in this model so the movement is easy to see [S58].\n\nBanking tilts lift. Its sideways part curves the flight path [S5].",
         "zh": "左副翼装在左翼外侧的后缘，可以绕铰链偏转。\n\n两侧副翼一上一下，让飞机滚转、倾斜 [S5]。模型中每块偏转 12°，方便看清动作 [S58]。\n\n飞机倾斜时，升力也倾斜。升力的侧向部分让航迹弯曲 [S5]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0.2532,
-            1.0055
-          ],
-          [
-            0.4854,
-            1.7094
-          ],
-          [
-            0.5379,
-            1.7094
-          ],
-          [
-            0.3448,
-            1.0055
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          0.9774,
-          0
-        ],
-        "rotation": [
-          84,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.3,
@@ -1942,7 +1399,12 @@
       },
       "connects": [
         "wing-left"
-      ]
+      ],
+      "mesh": "aileron-left",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "aileron-right",
@@ -1959,41 +1421,6 @@
         "en": "This hinged surface sits near the outer back edge of the right wing. It moves opposite to the left aileron.\n\nOpposite aileron movements roll the aircraft [S5]. Each turns 12° in this model so the movement is easy to see [S58].\n\nOnce the aircraft banks, lift’s sideways part curves its flight path [S5].",
         "zh": "右副翼装在右翼外侧的后缘，偏转方向与左副翼相反。\n\n两侧副翼反向偏转，让飞机滚转 [S5]。模型中每块偏转 12°，方便看清动作 [S58]。\n\n飞机倾斜以后，升力的侧向部分让航迹弯曲 [S5]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0.2532,
-            -1.0055
-          ],
-          [
-            0.4854,
-            -1.7094
-          ],
-          [
-            0.5379,
-            -1.7094
-          ],
-          [
-            0.3448,
-            -1.0055
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          0.9774,
-          0
-        ],
-        "rotation": [
-          96,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.3,
@@ -2004,7 +1431,12 @@
       },
       "connects": [
         "wing-right"
-      ]
+      ],
+      "mesh": "aileron-right",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "spoiler-left",
@@ -2083,49 +1515,6 @@
         "en": "The left flap sits on the inner part of the wing’s trailing edge and slides back and down.\n\nFlaps change the wing’s shape. Sliding flaps also increase its area, helping it produce more lift at lower speed. Extended flaps add drag [S8]. This flap slides back 0.04 m and turns down 20° on the model, which is ten times smaller than the aircraft it represents [S58].\n\nCompare the extended flap with the raised spoiler: the flap helps maintain low-speed lift, while the spoiler reduces lift [S8].",
         "zh": "左襟翼位于机翼后缘靠近机身的一段，向后、向下伸出。\n\n襟翼改变机翼形状，滑出的襟翼还增加面积，让机翼在较低速度下产生更多升力。放出的襟翼也增加阻力 [S8]。模型中，它后移 0.04 米、下转 20°；这是缩小十倍的模型上的距离 [S58]。\n\n对比放出的襟翼和抬起的扰流板：襟翼帮助维持低速升力，扰流板则减少升力 [S8]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0.0805,
-            0.2212
-          ],
-          [
-            0.1271,
-            0.6234
-          ],
-          [
-            0.2465,
-            0.9854
-          ],
-          [
-            0.3393,
-            0.9854
-          ],
-          [
-            0.24,
-            0.6234
-          ],
-          [
-            0.24,
-            0.2212
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          0.9774,
-          0
-        ],
-        "rotation": [
-          84,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.4,
@@ -2136,7 +1525,12 @@
       },
       "connects": [
         "wing-left"
-      ]
+      ],
+      "mesh": "flap-left",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "flap-right",
@@ -2153,49 +1547,6 @@
         "en": "The right flap mirrors the left one on the inner trailing edge. Both extend together.\n\nExtended flaps help the wing maintain enough lift at lower speed and also add drag [S8]. This model’s flap slides back 0.04 m and turns down 20° [S58].",
         "zh": "右襟翼位于机翼内侧后缘，与左襟翼对称，两侧一起伸出。\n\n放出的襟翼帮助机翼在较低速度下维持足够的升力，同时增加阻力 [S8]。模型中，襟翼后移 0.04 米、下转 20° [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            0.0805,
-            -0.2212
-          ],
-          [
-            0.1271,
-            -0.6234
-          ],
-          [
-            0.2465,
-            -0.9854
-          ],
-          [
-            0.3393,
-            -0.9854
-          ],
-          [
-            0.24,
-            -0.6234
-          ],
-          [
-            0.24,
-            -0.2212
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          0.9774,
-          0
-        ],
-        "rotation": [
-          96,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.4,
@@ -2206,7 +1557,12 @@
       },
       "connects": [
         "wing-right"
-      ]
+      ],
+      "mesh": "flap-right",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "slat-left",
@@ -2223,73 +1579,6 @@
         "en": "The left slat is a curved strip along the wing’s leading edge. Moving forwards opens a narrow gap ahead of the wing.\n\nLeading-edge slats and trailing-edge flaps change the wing for slower flight [S8]. This slat moves forwards 0.025 m in the model [S58].",
         "zh": "左缝翼是沿机翼前缘的一条弯曲翼片。向前伸出时，它与机翼之间留下一道窄缝。\n\n前缘缝翼和后缘襟翼都能改变机翼，帮助慢速飞行 [S8]。这块缝翼在模型中前移 0.025 米 [S58]。"
       },
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -0.3498,
-            -0.0694,
-            -0.66
-          ],
-          [
-            -0.2623,
-            -0.052,
-            -0.495
-          ],
-          [
-            -0.1749,
-            -0.0347,
-            -0.33
-          ],
-          [
-            -0.0875,
-            -0.0173,
-            -0.165
-          ],
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.0875,
-            0.0173,
-            0.165
-          ],
-          [
-            0.1749,
-            0.0347,
-            0.33
-          ],
-          [
-            0.2624,
-            0.052,
-            0.495
-          ],
-          [
-            0.3498,
-            0.0694,
-            0.66
-          ]
-        ],
-        "radius": 0.016,
-        "section": {
-          "flat": 0.48
-        },
-        "up": [
-          0,
-          1,
-          0
-        ],
-        "radial": 16,
-        "at": [
-          -0.1412,
-          1.0783,
-          0.96
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           -0.6,
@@ -2300,7 +1589,12 @@
       },
       "connects": [
         "wing-left"
-      ]
+      ],
+      "mesh": "slat-left",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "slat-right",
@@ -2317,73 +1611,6 @@
         "en": "The right slat mirrors the left one along the wing’s leading edge. Both move forwards together.\n\nLeading-edge slats help the wing at lower speed [S8]. This slat moves forwards 0.025 m in the model [S58].",
         "zh": "右缝翼沿右翼前缘延伸，与左缝翼对称，两侧一起向前伸出。\n\n前缘缝翼帮助机翼低速飞行 [S8]。模型中，这块缝翼前移 0.025 米 [S58]。"
       },
-      "primitive": {
-        "kind": "sweep",
-        "path": [
-          [
-            -0.3498,
-            -0.0694,
-            0.66
-          ],
-          [
-            -0.2623,
-            -0.052,
-            0.495
-          ],
-          [
-            -0.1749,
-            -0.0347,
-            0.33
-          ],
-          [
-            -0.0875,
-            -0.0173,
-            0.165
-          ],
-          [
-            0,
-            0,
-            0
-          ],
-          [
-            0.0875,
-            0.0173,
-            -0.165
-          ],
-          [
-            0.1749,
-            0.0347,
-            -0.33
-          ],
-          [
-            0.2624,
-            0.052,
-            -0.495
-          ],
-          [
-            0.3498,
-            0.0694,
-            -0.66
-          ]
-        ],
-        "radius": 0.016,
-        "section": {
-          "flat": 0.48
-        },
-        "up": [
-          0,
-          1,
-          0
-        ],
-        "radial": 16,
-        "at": [
-          -0.1412,
-          1.0783,
-          -0.96
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           -0.6,
@@ -2394,7 +1621,12 @@
       },
       "connects": [
         "wing-right"
-      ]
+      ],
+      "mesh": "slat-right",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "tailplane-left",
@@ -2415,40 +1647,6 @@
         "en": "This is the left half of the horizontal tail at the back of the fuselage. The left elevator is hinged to its back edge.\n\nThis airliner has a conventional rear tail. The Wright brothers’ first aircraft placed its elevator at the front instead [S6].",
         "zh": "这是机身后方水平尾翼的左半边。左升降舵铰接在它的后缘。\n\n这架客机采用常规的后置尾翼。莱特兄弟的第一架飞机则把升降舵装在前面 [S6]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.446,
-            0.0402
-          ],
-          [
-            1.8743,
-            0.7039
-          ],
-          [
-            1.9895,
-            0.7039
-          ],
-          [
-            1.7377,
-            0.0402
-          ]
-        ],
-        "depth": 0.022,
-        "bevel": 0.007,
-        "at": [
-          0,
-          1.155,
-          0
-        ],
-        "rotation": [
-          84,
-          0,
-          0
-        ],
-        "color": "casing"
-      },
       "explode": {
         "dir": [
           0,
@@ -2460,7 +1658,11 @@
       "connects": [
         "fuselage-shell",
         "elevator-left"
-      ]
+      ],
+      "mesh": "tailplane-left",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "tailplane-right",
@@ -2481,40 +1683,6 @@
         "en": "The right half of the horizontal tail mirrors the left. The right elevator is hinged to its back edge.\n\nOn a conventional tail, the elevator forms part of the horizontal tail [S6]. This model uses a general tail shape [S58].",
         "zh": "水平尾翼的右半边与左半边对称。右升降舵铰接在它的后缘。\n\n常规尾翼的升降舵是水平尾翼的一部分 [S6]。这里采用一般的尾翼外形 [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.446,
-            -0.0402
-          ],
-          [
-            1.8743,
-            -0.7039
-          ],
-          [
-            1.9895,
-            -0.7039
-          ],
-          [
-            1.7377,
-            -0.0402
-          ]
-        ],
-        "depth": 0.022,
-        "bevel": 0.007,
-        "at": [
-          0,
-          1.155,
-          0
-        ],
-        "rotation": [
-          96,
-          0,
-          0
-        ],
-        "color": "casing"
-      },
       "explode": {
         "dir": [
           0,
@@ -2526,7 +1694,11 @@
       "connects": [
         "fuselage-shell",
         "elevator-right"
-      ]
+      ],
+      "mesh": "tailplane-right",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "elevator-left",
@@ -2543,41 +1715,6 @@
         "en": "The left elevator is hinged to the back of the horizontal tail. Both elevators rise together in the demonstration.\n\nElevators change pitch, turning the aircraft’s nose up or down [S6]. This one turns 10° up in the model [S58].",
         "zh": "左升降舵铰接在水平尾翼后缘。演示中，两侧升降舵一起上偏。\n\n升降舵改变俯仰，让机头向上或向下转 [S6]。模型中，这块舵面上偏 10° [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.7607,
-            0.0905
-          ],
-          [
-            1.9859,
-            0.6837
-          ],
-          [
-            2.0287,
-            0.6837
-          ],
-          [
-            1.865,
-            0.0905
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          1.155,
-          0
-        ],
-        "rotation": [
-          84,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.4,
@@ -2588,7 +1725,12 @@
       },
       "connects": [
         "tailplane-left"
-      ]
+      ],
+      "mesh": "elevator-left",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "elevator-right",
@@ -2605,41 +1747,6 @@
         "en": "The right elevator is hinged to the back of the horizontal tail and moves together with the left one.\n\nElevators change pitch [S6]. This model shows a 10° upward movement [S58].",
         "zh": "右升降舵铰接在水平尾翼后缘，与左升降舵一起运动。\n\n升降舵改变飞机的俯仰 [S6]。模型演示的是向上偏转 10° [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.7607,
-            -0.0905
-          ],
-          [
-            1.9859,
-            -0.6837
-          ],
-          [
-            2.0287,
-            -0.6837
-          ],
-          [
-            1.865,
-            -0.0905
-          ]
-        ],
-        "depth": 0.009,
-        "bevel": 0.003,
-        "at": [
-          0,
-          1.155,
-          0
-        ],
-        "rotation": [
-          96,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.4,
@@ -2650,7 +1757,12 @@
       },
       "connects": [
         "tailplane-right"
-      ]
+      ],
+      "mesh": "elevator-right",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "fin",
@@ -2667,35 +1779,6 @@
         "en": "The fin is the upright surface at the back of the fuselage. The rudder is hinged to its back edge.\n\nThe rudder on the vertical tail controls yaw [S7]. This model uses a general fin shape [S58].",
         "zh": "垂直尾翼是机身后方竖立的翼面。方向舵铰接在它的后缘。\n\n垂直尾翼上的方向舵控制偏航 [S7]。模型采用一般的垂直尾翼外形 [S58]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.3,
-            1.25
-          ],
-          [
-            1.7922,
-            1.88
-          ],
-          [
-            1.9672,
-            1.88
-          ],
-          [
-            1.762,
-            1.25
-          ]
-        ],
-        "depth": 0.024,
-        "bevel": 0.008,
-        "at": [
-          0,
-          0,
-          0
-        ],
-        "color": "casing"
-      },
       "explode": {
         "dir": [
           0,
@@ -2707,7 +1790,11 @@
       "connects": [
         "fuselage-shell",
         "rudder"
-      ]
+      ],
+      "mesh": "fin",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "rudder",
@@ -2724,36 +1811,6 @@
         "en": "The rudder is hinged to the back of the vertical fin.\n\nIt controls yaw, turning the nose left or right. In a coordinated turn, it helps the aircraft line up with its curving path [S7]. This model shows a 10° movement [S58].\n\nBanking provides the main turning force by tilting the lift sideways [S5].",
         "zh": "方向舵铰接在垂直尾翼的后缘。\n\n它控制偏航，让机头向左或向右转。协调转弯时，它帮助飞机对准弯曲的航迹 [S7]。模型中的偏转幅度是 10° [S58]。\n\n飞机主要靠倾斜来转弯，倾斜让升力的一部分指向侧面 [S5]。"
       },
-      "primitive": {
-        "kind": "extrude",
-        "shape": [
-          [
-            1.7855,
-            1.31
-          ],
-          [
-            1.9614,
-            1.85
-          ],
-          [
-            2.0383,
-            1.85
-          ],
-          [
-            1.9678,
-            1.31
-          ]
-        ],
-        "depth": 0.01,
-        "bevel": 0.003,
-        "at": [
-          0,
-          0,
-          0
-        ],
-        "color": "casing",
-        "tint": "#8d949a"
-      },
       "explode": {
         "dir": [
           0.5,
@@ -2764,7 +1821,12 @@
       },
       "connects": [
         "fin"
-      ]
+      ],
+      "mesh": "rudder",
+      "material": {
+        "color": "casing",
+        "tint": "token:neutral"
+      }
     },
     {
       "id": "nacelle-left",
@@ -2781,151 +1843,6 @@
         "en": "This streamlined casing surrounds the left engine below the wing. Both engines briefly disappear during the comparison with a glider.\n\nEngines provide thrust, while wings provide most of the lift [S1]. The separate cutaway reveals the machinery inside a turbofan [S9].\n\nAt greater height, engines still need enough air. Available thrust helps limit an aircraft’s cruising height [S12].",
         "zh": "流线形的左发动机外罩挂在机翼下面。比较滑翔机时，画面暂时隐藏两台发动机。\n\n发动机提供推力，机翼提供大部分升力 [S1]。独立的剖面展示涡扇里面的机械 [S9]。\n\n飞得更高时，发动机仍需足够的空气。可用推力是限制巡航高度的因素之一 [S12]。"
       },
-      "primitive": {
-        "kind": "lathe",
-        "profile": [
-          [
-            0.098,
-            -0.22
-          ],
-          [
-            0.109,
-            -0.2
-          ],
-          [
-            0.115,
-            -0.15
-          ],
-          [
-            0.117,
-            -0.06
-          ],
-          [
-            0.113,
-            0.06
-          ],
-          [
-            0.102,
-            0.17
-          ],
-          [
-            0.094,
-            0.22
-          ],
-          [
-            0.086,
-            0.22
-          ],
-          [
-            0.087,
-            0.06
-          ],
-          [
-            0.089,
-            -0.12
-          ],
-          [
-            0.09,
-            -0.19
-          ],
-          [
-            0.093,
-            -0.215
-          ],
-          [
-            0.098,
-            -0.22
-          ]
-        ],
-        "segments": 48,
-        "at": [
-          -0.58,
-          0.84,
-          0.6
-        ],
-        "rotation": [
-          0,
-          0,
-          -90
-        ],
-        "color": "casing"
-      },
-      "extra": [
-        {
-          "kind": "extrude",
-          "shape": [
-            [
-              -0.64,
-              0.94
-            ],
-            [
-              -0.42,
-              1.0409
-            ],
-            [
-              0,
-              1.0309
-            ],
-            [
-              0.02,
-              0.9989
-            ],
-            [
-              -0.3,
-              0.94
-            ]
-          ],
-          "depth": 0.022,
-          "bevel": 0.006,
-          "at": [
-            0,
-            0,
-            0.6
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "lathe",
-          "profile": [
-            [
-              0,
-              0.17
-            ],
-            [
-              0.074,
-              0.17
-            ],
-            [
-              0.07,
-              0.24
-            ],
-            [
-              0.048,
-              0.3
-            ],
-            [
-              0.022,
-              0.345
-            ],
-            [
-              0,
-              0.36
-            ]
-          ],
-          "segments": 32,
-          "at": [
-            -0.58,
-            0.84,
-            0.6
-          ],
-          "rotation": [
-            0,
-            0,
-            -90
-          ],
-          "color": "steel"
-        }
-      ],
       "shell": true,
       "explode": {
         "dir": [
@@ -2938,7 +1855,11 @@
       "connects": [
         "wing-left",
         "fan-left"
-      ]
+      ],
+      "mesh": "nacelle-left",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "nacelle-right",
@@ -2955,151 +1876,6 @@
         "en": "This casing surrounds the right engine below the wing. During the stall demonstration, it appears beside the wing experiment with its fan still turning.\n\nA wing stall concerns airflow and lift [S3]. The engine can keep running and supplying thrust [S1].",
         "zh": "右发动机外罩挂在右翼下面。演示失速时，它出现在机翼实验旁边，风扇继续转动。\n\n机翼失速描述的是气流和升力的变化 [S3]。发动机仍可运转，提供推力 [S1]。"
       },
-      "primitive": {
-        "kind": "lathe",
-        "profile": [
-          [
-            0.098,
-            -0.22
-          ],
-          [
-            0.109,
-            -0.2
-          ],
-          [
-            0.115,
-            -0.15
-          ],
-          [
-            0.117,
-            -0.06
-          ],
-          [
-            0.113,
-            0.06
-          ],
-          [
-            0.102,
-            0.17
-          ],
-          [
-            0.094,
-            0.22
-          ],
-          [
-            0.086,
-            0.22
-          ],
-          [
-            0.087,
-            0.06
-          ],
-          [
-            0.089,
-            -0.12
-          ],
-          [
-            0.09,
-            -0.19
-          ],
-          [
-            0.093,
-            -0.215
-          ],
-          [
-            0.098,
-            -0.22
-          ]
-        ],
-        "segments": 48,
-        "at": [
-          -0.58,
-          0.84,
-          -0.6
-        ],
-        "rotation": [
-          0,
-          0,
-          -90
-        ],
-        "color": "casing"
-      },
-      "extra": [
-        {
-          "kind": "extrude",
-          "shape": [
-            [
-              -0.64,
-              0.94
-            ],
-            [
-              -0.42,
-              1.0409
-            ],
-            [
-              0,
-              1.0309
-            ],
-            [
-              0.02,
-              0.9989
-            ],
-            [
-              -0.3,
-              0.94
-            ]
-          ],
-          "depth": 0.022,
-          "bevel": 0.006,
-          "at": [
-            0,
-            0,
-            -0.6
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "lathe",
-          "profile": [
-            [
-              0,
-              0.17
-            ],
-            [
-              0.074,
-              0.17
-            ],
-            [
-              0.07,
-              0.24
-            ],
-            [
-              0.048,
-              0.3
-            ],
-            [
-              0.022,
-              0.345
-            ],
-            [
-              0,
-              0.36
-            ]
-          ],
-          "segments": 32,
-          "at": [
-            -0.58,
-            0.84,
-            -0.6
-          ],
-          "rotation": [
-            0,
-            0,
-            -90
-          ],
-          "color": "steel"
-        }
-      ],
       "shell": true,
       "explode": {
         "dir": [
@@ -3112,7 +1888,11 @@
       "connects": [
         "wing-right",
         "fan-right"
-      ]
+      ],
+      "mesh": "nacelle-right",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "fan-left",
@@ -3228,201 +2008,6 @@
         "zh": "发动机外壳靠近你的半边已被剖开，露出内部。风扇后面固定的导向叶片连在外壳上。\n\n空气从前方进入，经过风扇后分成核心气流和外圈的外涵气流 [S9]。这个剖面有自己的比例，与整架客机分开 [S58]。"
       },
       "shell": true,
-      "primitive": {
-        "kind": "lathe",
-        "profile": [
-          [
-            0.345,
-            -0.92
-          ],
-          [
-            0.366,
-            -0.905
-          ],
-          [
-            0.384,
-            -0.86
-          ],
-          [
-            0.396,
-            -0.78
-          ],
-          [
-            0.401,
-            -0.6
-          ],
-          [
-            0.398,
-            -0.3
-          ],
-          [
-            0.386,
-            -0.05
-          ],
-          [
-            0.372,
-            0.12
-          ],
-          [
-            0.353,
-            0.12
-          ],
-          [
-            0.346,
-            -0.1
-          ],
-          [
-            0.339,
-            -0.5
-          ],
-          [
-            0.336,
-            -0.78
-          ],
-          [
-            0.339,
-            -0.88
-          ],
-          [
-            0.345,
-            -0.92
-          ]
-        ],
-        "segments": 64,
-        "at": [
-          0,
-          0.8,
-          -2.8
-        ],
-        "rotation": [
-          0,
-          0,
-          -90
-        ],
-        "color": "casing"
-      },
-      "extra": [
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            1.0338,
-            -2.665
-          ],
-          "rotation": [
-            30,
-            0,
-            0
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            0.8,
-            -2.53
-          ],
-          "rotation": [
-            90,
-            0,
-            0
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            0.5662,
-            -2.665
-          ],
-          "rotation": [
-            150,
-            0,
-            0
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            0.5662,
-            -2.935
-          ],
-          "rotation": [
-            210,
-            0,
-            0
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            0.8,
-            -3.07
-          ],
-          "rotation": [
-            270,
-            0,
-            0
-          ],
-          "color": "casing"
-        },
-        {
-          "kind": "bevelBox",
-          "size": [
-            0.035,
-            0.13,
-            0.012
-          ],
-          "bevel": 0.003,
-          "at": [
-            -0.42,
-            1.0338,
-            -2.935
-          ],
-          "rotation": [
-            330,
-            0,
-            0
-          ],
-          "color": "casing"
-        }
-      ],
       "explode": {
         "dir": [
           0,
@@ -3437,7 +2022,11 @@
         "compressor-bank",
         "turbine-bank",
         "core-nozzle"
-      ]
+      ],
+      "mesh": "engine-shell",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "fan-disc",
@@ -3761,112 +2350,6 @@
         "en": "Fixed rows of compressor blades sit between the rotating rows. They are attached to the core case and stay still.\n\nCore air is compressed before fuel is added and burned [S9]. Rotating blades compress it, while these fixed rows guide it onwards. The number of rows is simplified [S58].",
         "zh": "压气机固定的叶排夹在转动叶排之间，装在核心机匣上，保持不动。\n\n核心空气先被压缩，再加入燃料燃烧 [S9]。转动叶片负责压缩，固定叶排引导气流继续前进。叶排数量经过简化 [S58]。"
       },
-      "primitive": {
-        "kind": "box",
-        "size": [
-          0.003,
-          0.003,
-          0.003
-        ],
-        "at": [
-          -0.405,
-          0.8,
-          -2.8
-        ],
-        "color": "casing",
-        "tint": "#a3a8ad"
-      },
-      "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.026,
-            0.0765,
-            0.0045
-          ],
-          "at": [
-            -0.405,
-            0.9173,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -38,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.026,
-            0.062,
-            0.0045
-          ],
-          "at": [
-            -0.295,
-            0.9135,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -38,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.026,
-            0.0483,
-            0.0045
-          ],
-          "at": [
-            -0.185,
-            0.9102,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -38,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.026,
-            0.0352,
-            0.0045
-          ],
-          "at": [
-            -0.075,
-            0.9072,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -38,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        }
-      ],
-      "repeat": {
-        "count": 24,
-        "axis": [
-          1,
-          0,
-          0
-        ],
-        "radius": 0.001
-      },
       "explode": {
         "dir": [
           0,
@@ -3879,7 +2362,11 @@
         "engine-shell",
         "compressor-rotor",
         "combustor-ring"
-      ]
+      ],
+      "mesh": "compressor-bank",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "compressor-rotor",
@@ -3900,107 +2387,6 @@
         "en": "The compressor’s rotating blade rows are attached to the hollow core shaft.\n\nThe core turbine drives the compressor through this shaft [S9]. In the model, the compressor rotor, core shaft and core turbine turn together at 45 rpm. They turn faster than the fan spool, but both speeds are slowed for viewing [S58].\n\nCore air passes through compression, combustion and then the turbines, in that order [S9].",
         "zh": "压气机的转动叶排连在空心核心轴上。\n\n核心涡轮通过轴带动压气机 [S9]。模型中，压气机转子、核心轴和核心涡轮一起以每分钟 45 转转动，比风扇那一组快。两组都已放慢，方便观察 [S58]。\n\n核心气流依次经过压缩、燃烧和涡轮 [S9]。"
       },
-      "primitive": {
-        "kind": "box",
-        "size": [
-          0.003,
-          0.003,
-          0.003
-        ],
-        "at": [
-          -0.46,
-          0.8,
-          -2.8
-        ],
-        "color": "steel"
-      },
-      "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0882,
-            0.0045
-          ],
-          "at": [
-            -0.46,
-            0.9114,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "steel"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0732,
-            0.0045
-          ],
-          "at": [
-            -0.35,
-            0.9074,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "steel"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0588,
-            0.0045
-          ],
-          "at": [
-            -0.24,
-            0.9037,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "steel"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0458,
-            0.0045
-          ],
-          "at": [
-            -0.13,
-            0.9007,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "steel"
-        }
-      ],
-      "repeat": {
-        "count": 24,
-        "axis": [
-          1,
-          0,
-          0
-        ],
-        "radius": 0.001
-      },
       "explode": {
         "dir": [
           0,
@@ -4012,7 +2398,11 @@
       "connects": [
         "compressor-bank",
         "hp-shaft"
-      ]
+      ],
+      "mesh": "compressor-rotor",
+      "material": {
+        "color": "steel"
+      }
     },
     {
       "id": "combustor-ring",
@@ -4135,6 +2525,342 @@
             -90
           ],
           "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              0.16199999999999998,
+              0
+            ],
+            [
+              0.022,
+              0.142,
+              0
+            ],
+            [
+              0.052,
+              0.142,
+              0
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              0.14029611541307904,
+              0.08099999999999997
+            ],
+            [
+              0.022,
+              0.12297560733739028,
+              0.07099999999999998
+            ],
+            [
+              0.052,
+              0.12297560733739028,
+              0.07099999999999998
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              0.081,
+              0.14029611541307904
+            ],
+            [
+              0.022,
+              0.07100000000000001,
+              0.12297560733739027
+            ],
+            [
+              0.052,
+              0.07100000000000001,
+              0.12297560733739027
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              9.919639073093559e-18,
+              0.16199999999999998
+            ],
+            [
+              0.022,
+              8.694992273946207e-18,
+              0.142
+            ],
+            [
+              0.052,
+              8.694992273946207e-18,
+              0.142
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -0.08099999999999995,
+              0.14029611541307904
+            ],
+            [
+              0.022,
+              -0.07099999999999997,
+              0.12297560733739028
+            ],
+            [
+              0.052,
+              -0.07099999999999997,
+              0.12297560733739028
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -0.14029611541307904,
+              0.08099999999999997
+            ],
+            [
+              0.022,
+              -0.12297560733739028,
+              0.07099999999999998
+            ],
+            [
+              0.052,
+              -0.12297560733739028,
+              0.07099999999999998
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -0.16199999999999998,
+              1.9839278146187118e-17
+            ],
+            [
+              0.022,
+              -0.142,
+              1.7389984547892414e-17
+            ],
+            [
+              0.052,
+              -0.142,
+              1.7389984547892414e-17
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -0.14029611541307907,
+              -0.08099999999999995
+            ],
+            [
+              0.022,
+              -0.1229756073373903,
+              -0.07099999999999995
+            ],
+            [
+              0.052,
+              -0.1229756073373903,
+              -0.07099999999999995
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -0.08100000000000006,
+              -0.14029611541307901
+            ],
+            [
+              0.022,
+              -0.07100000000000006,
+              -0.12297560733739026
+            ],
+            [
+              0.052,
+              -0.07100000000000006,
+              -0.12297560733739026
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              -2.975891721928068e-17,
+              -0.16199999999999998
+            ],
+            [
+              0.022,
+              -2.6084976821838618e-17,
+              -0.142
+            ],
+            [
+              0.052,
+              -2.6084976821838618e-17,
+              -0.142
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              0.081,
+              -0.14029611541307904
+            ],
+            [
+              0.022,
+              0.07100000000000001,
+              -0.12297560733739027
+            ],
+            [
+              0.052,
+              0.07100000000000001,
+              -0.12297560733739027
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
+        },
+        {
+          "kind": "tube",
+          "at": [
+            0,
+            0.8,
+            -2.8
+          ],
+          "path": [
+            [
+              0.008,
+              0.140296115413079,
+              -0.08100000000000006
+            ],
+            [
+              0.022,
+              0.12297560733739024,
+              -0.07100000000000006
+            ],
+            [
+              0.052,
+              0.12297560733739024,
+              -0.07100000000000006
+            ]
+          ],
+          "radius": 0.0035,
+          "bendRadius": 0.006,
+          "color": "stainless"
         }
       ],
       "explode": {
@@ -4169,92 +2895,6 @@
         "en": "Fixed turbine blade rows sit between the rotating rows. They are attached to the core case and stay still.\n\nHot gas flows from the combustor through the turbines, transferring energy to drive the compressor and fan [S9]. These fixed rows guide gas towards the rotating blades. The row count is simplified [S58].",
         "zh": "固定的涡轮叶排夹在转动叶排之间，装在核心机匣上，保持不动。\n\n热气从燃烧室流过涡轮，把能量传给涡轮，带动压气机和风扇 [S9]。固定叶排把热气引向转动叶片，叶排数量经过简化 [S58]。"
       },
-      "primitive": {
-        "kind": "box",
-        "size": [
-          0.003,
-          0.003,
-          0.003
-        ],
-        "at": [
-          0.235,
-          0.8,
-          -2.8
-        ],
-        "color": "casing",
-        "tint": "#a3a8ad"
-      },
-      "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0646,
-            0.0045
-          ],
-          "at": [
-            0.235,
-            0.9233,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -45,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0565,
-            0.0045
-          ],
-          "at": [
-            0.375,
-            0.9261,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -40,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.03,
-            0.0663,
-            0.0045
-          ],
-          "at": [
-            0.505,
-            0.9341,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            -40,
-            0
-          ],
-          "color": "casing",
-          "tint": "#a3a8ad"
-        }
-      ],
-      "repeat": {
-        "count": 24,
-        "axis": [
-          1,
-          0,
-          0
-        ],
-        "radius": 0.001
-      },
       "explode": {
         "dir": [
           0,
@@ -4269,7 +2909,11 @@
         "hp-turbine-rotor",
         "lp-turbine-rotor",
         "core-nozzle"
-      ]
+      ],
+      "mesh": "turbine-bank",
+      "material": {
+        "color": "casing"
+      }
     },
     {
       "id": "hp-turbine-rotor",
@@ -4286,50 +2930,6 @@
         "en": "The core turbine is the first rotating turbine behind the combustor. It is attached to the hollow core shaft.\n\nIt takes energy from hot gas and drives the compressor through the shaft [S9]. In the model, both turn together at 45 rpm, slowed down for viewing [S58].",
         "zh": "核心涡轮紧接在燃烧室后面，是第一组转动的涡轮，连在空心核心轴上。\n\n它从热气取得能量，通过轴带动压气机 [S9]。模型中，两者一起以每分钟 45 转转动，已放慢，方便观察 [S58]。"
       },
-      "primitive": {
-        "kind": "box",
-        "size": [
-          0.003,
-          0.003,
-          0.003
-        ],
-        "at": [
-          0.295,
-          0.8,
-          -2.8
-        ],
-        "color": "steel"
-      },
-      "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.032,
-            0.0574,
-            0.0045
-          ],
-          "at": [
-            0.295,
-            0.9097,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            48,
-            0
-          ],
-          "color": "steel"
-        }
-      ],
-      "repeat": {
-        "count": 24,
-        "axis": [
-          1,
-          0,
-          0
-        ],
-        "radius": 0.001
-      },
       "explode": {
         "dir": [
           0,
@@ -4341,7 +2941,11 @@
       "connects": [
         "turbine-bank",
         "hp-shaft"
-      ]
+      ],
+      "mesh": "hp-turbine-rotor",
+      "material": {
+        "color": "steel"
+      }
     },
     {
       "id": "lp-turbine-rotor",
@@ -4358,69 +2962,6 @@
         "en": "The fan turbine’s rotating rows sit behind the core turbine. They are attached to the inner fan shaft.\n\nIn this two-spool engine, that shaft runs inside the core shaft to drive the fan [S9]. This turbine and the fan turn together at 30 rpm on screen, slowed down for viewing [S58]. Other engines can have more spools [S9].",
         "zh": "风扇涡轮的转动叶排位于核心涡轮后面，连在内侧的风扇轴上。\n\n这台两转子发动机的风扇轴穿过核心轴内部，带动风扇 [S9]。风扇涡轮和风扇在画面中一起以每分钟 30 转转动，已放慢 [S58]。其他发动机也可能有更多转子 [S9]。"
       },
-      "primitive": {
-        "kind": "box",
-        "size": [
-          0.003,
-          0.003,
-          0.003
-        ],
-        "at": [
-          0.44,
-          0.8,
-          -2.8
-        ],
-        "color": "steel"
-      },
-      "extra": [
-        {
-          "kind": "box",
-          "size": [
-            0.032,
-            0.0647,
-            0.0045
-          ],
-          "at": [
-            0.44,
-            0.9234,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            45,
-            0
-          ],
-          "color": "steel"
-        },
-        {
-          "kind": "box",
-          "size": [
-            0.032,
-            0.075,
-            0.0045
-          ],
-          "at": [
-            0.565,
-            0.9285,
-            -2.8
-          ],
-          "rotation": [
-            0,
-            45,
-            0
-          ],
-          "color": "steel"
-        }
-      ],
-      "repeat": {
-        "count": 24,
-        "axis": [
-          1,
-          0,
-          0
-        ],
-        "radius": 0.001
-      },
       "explode": {
         "dir": [
           1,
@@ -4432,7 +2973,11 @@
       "connects": [
         "turbine-bank",
         "lp-shaft"
-      ]
+      ],
+      "mesh": "lp-turbine-rotor",
+      "material": {
+        "color": "steel"
+      }
     },
     {
       "id": "lp-shaft",
@@ -4954,15 +3499,15 @@
           ],
           [
             0.9993014335632324,
-            2.741862545008189e-06
+            0.000002741862545008189
           ],
           [
             0.9972084164619446,
-            2.1881633074372075e-05
+            0.000021881633074372075
           ],
           [
             0.9937286972999573,
-            7.355193520197645e-05
+            0.00007355193520197645
           ],
           [
             0.9888752698898315,
@@ -5450,15 +3995,15 @@
           ],
           [
             0.9937286972999573,
-            -7.355193520197645e-05
+            -0.00007355193520197645
           ],
           [
             0.9972084164619446,
-            -2.1881633074372075e-05
+            -0.000021881633074372075
           ],
           [
             0.9993014335632324,
-            -2.741862545008189e-06
+            -0.000002741862545008189
           ]
         ],
         "depth": 0.12,
@@ -8105,5 +6650,6 @@
         }
       }
     ]
-  }
+  },
+  "model": "/models/how-planes-fly-polish.glb"
 }

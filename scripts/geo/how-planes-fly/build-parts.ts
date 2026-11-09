@@ -15,6 +15,7 @@ import { Euler, Quaternion, Vector3 } from 'three';
 import { airfoilOutline } from '../../../src/engines/space-scene/lib/sim/airfoil-field';
 import { A, B, BOX, CG, E, ENGINE, ORIGIN, PIVOT, PRESETS, W, cam, type Vec3 } from './layout';
 import { PART_TEXT } from './text';
+import { polishAircraft } from './polish';
 
 type T = { en: string; zh: string };
 type Json = Record<string, unknown>;
@@ -469,11 +470,6 @@ const rotorRow = (u: number, chord: number, stagger: number) => ({ u, r0: rIn(u)
 const statorRow = (u: number, chord: number, stagger: number) => ({ u, r0: rIn(u) + 0.006, r1: rOut(u), chord, stagger });
 
 function engineParts(): Record<string, Json> {
-  const struts: Json[] = [30, 90, 150, 210, 270, 330].map((deg) => {
-    const a = deg * DEG,
-      r = 0.27;
-    return { kind: 'bevelBox', size: [0.035, 0.13, 0.012], bevel: 0.003, at: v4([-0.42, EY + r * Math.cos(a), EZ + r * Math.sin(a)]), rotation: [r4(deg), 0, 0], color: 'casing' };
-  });
   return {
     // Core casing and its cowl: the inner wall of the bypass outside, the core path inside; inlet guide vanes at the splitter.
     // The engine case: fan case and nacelle, the outer wall of the bypass, with fixed guide vanes (struts) behind the fan.
@@ -498,7 +494,6 @@ function engineParts(): Record<string, Json> {
         ],
         SKIN,
       ),
-      extra: struts,
     },
     'fan-disc': {
       primitive: { kind: 'blades', count: 22, radius: 0.325, hub: 0.1, chord: 0.11, twist: 38, sweep: 18, pitch: 52, thickness: 0.007, at: onAxis(-0.72), rotation: [0, 0, 90], color: 'steel' },
@@ -558,7 +553,7 @@ function engineParts(): Record<string, Json> {
         [[0.082, 0.03], [0.078, 0.08], [0.08, 0.17], [0.096, 0.212],
          [0.102, 0.212], [0.086, 0.17], [0.084, 0.08], [0.088, 0.03], [0.082, 0.03]],
         { color: 'stainless' },
-      )],
+      ), ...Array.from({length:12},(_,i)=>{const a=i*2*Math.PI/12,r=.142;return {kind:'tube',at:onAxis(0),path:[[.008,(r+.02)*Math.cos(a),(r+.02)*Math.sin(a)],[.022,r*Math.cos(a),r*Math.sin(a)],[.052,r*Math.cos(a),r*Math.sin(a)]],radius:.0035,bendRadius:.006,color:'stainless'};})],
     },
     'turbine-bank': bladeRows([statorRow(0.235, 0.03, -45), statorRow(0.375, 0.03, -40), statorRow(0.505, 0.03, -40)], { color: 'casing', tint: '#a3a8ad' }),
     'hp-turbine-rotor': bladeRows([rotorRow(0.295, 0.032, 48)], { color: 'steel' }),
@@ -1107,5 +1102,7 @@ function build(): Json {
   };
 }
 
-writeFileSync(OUT, `${JSON.stringify(build(), null, 2)}\n`);
+const result=build();
+await polishAircraft(result);
+writeFileSync(OUT, `${JSON.stringify(result, null, 2)}\n`);
 console.log(`wrote ${OUT}`);

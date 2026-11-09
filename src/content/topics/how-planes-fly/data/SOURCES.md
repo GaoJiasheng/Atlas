@@ -75,3 +75,19 @@ Three images, all from `art/planned/how-planes-fly/manifest.jsonl` (not publishe
 | `how-planes-fly-turbofan-cutaway.png` (1536 × 1152) | Chapter 05 figure | Generated for Atlas (two tries, the first rejected), same processing; no real stage counts, sizes, bypass ratio or shaft speeds; the shaft arrangement is taught by the interactive model and S9 |
 
 The manifest keeps each image's prompt set, source file hash, post-processing and the visual checks. No other images were made or downloaded, and NASA and TU Delft figures were used for reading only.
+
+## Rebuild 2026-11-05 · geometry reference provenance
+
+Original code-generated geometry; no third-party meshes or photo textures. Runtime remains local-only. Reference images are used in development comparison sheets, under their stated licences. Exact links, author credits and the iteration record:
+
+- **front** — [Airbus A330 Front View.jpg](https://commons.wikimedia.org/wiki/File:Airbus_A330_Front_View.jpg); AlexanderCraker; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0).
+- **nose** — [G-VGEM Airbus A330 Virgin Atlantic Nose (9319525067).jpg](https://commons.wikimedia.org/wiki/File:G-VGEM_Airbus_A330_Virgin_Atlantic_Nose_(9319525067).jpg); Aeroprints.com; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **profile** — [PK-GPA Airbus A330 Garuda Indonesia Nose (7590247646).jpg](https://commons.wikimedia.org/wiki/File:PK-GPA_Airbus_A330_Garuda_Indonesia_Nose_(7590247646).jpg); Aeroprints.com; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **airframe** — [Aeroflot Airbus A330 Kustov.jpg](https://commons.wikimedia.org/wiki/File:Aeroflot_Airbus_A330_Kustov.jpg); Sergey Kustov; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **drawing** — [Airbus A330-300 v1.0.png](https://commons.wikimedia.org/wiki/File:Airbus_A330-300_v1.0.png); Julien.scavini; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **engine-photo** — [National Air and Space Museum - Washington DC - General Electric CF6.jpg](https://commons.wikimedia.org/wiki/File:National_Air_and_Space_Museum_-_Washington_DC_-_General_Electric_CF6.jpg); Donatingpictures; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **engine-detail** — [National Air and Space Museum - Washington DC - General Electric CF6 - Compressor and Combustor Cut Out.jpg](https://commons.wikimedia.org/wiki/File:National_Air_and_Space_Museum_-_Washington_DC_-_General_Electric_CF6_-_Compressor_and_Combustor_Cut_Out.jpg); Donatingpictures; [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+- **engine** — [CF6-6 engine cutaway.jpg](https://commons.wikimedia.org/wiki/File:CF6-6_engine_cutaway.jpg); This image is a work of an unknown Federal Aviation Administration employee.; [Public domain](https://commons.wikimedia.org/wiki/File:CF6-6_engine_cutaway.jpg).
+- **engine-section** — [Overall layout of General Electric CF6.svg](https://commons.wikimedia.org/wiki/File:Overall_layout_of_General_Electric_CF6.svg); Olivier Cleynen; [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0).
+
+See `../REBUILD-3D.md`. Auxiliary inverter photographs establish component shapes only; this design does not reproduce manufacturer electronics.
