@@ -538,8 +538,8 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Water: thick husk and the cavity help it float.', '水：厚纤维外皮和果核里的腔帮它浮起。'),
     para(
       t(
-        'A coconut has a fibrous husk round a hard, woody shell [S12]. Inside, the seed has a thin white layer of flesh and a large cavity filled with water [S12]. Coconuts grow up to 30 cm long [S12].',
-        '椰子坚硬的木质壳外包着一层纤维 [S12]。里面的种子有一层薄薄的白色果肉和一个装满水的大腔 [S12]。椰子长可达 30 厘米 [S12]。',
+        'A coconut has a fibrous husk round a hard, woody shell [S12]. Inside, the seed has a thin white layer of flesh and a large cavity filled with water [S12]. Coconuts grow up to 30 cm long [S12]. A lengthwise window in this model shows these layers while retaining the end of the shell [S1].',
+        '椰子坚硬的木质壳外包着一层纤维 [S12]。里面的种子有一层薄薄的白色果肉和一个装满水的大腔 [S12]。椰子长可达 30 厘米 [S12]。模型沿纵向开窗，露出这些层次，并保留壳的端部 [S1]。',
       ),
       t(
         'One paper proposes that the cavity within the nut adds to the buoyancy given by the thick husk [S13]. It is put forward as a hypothesis, not as a measurement.',

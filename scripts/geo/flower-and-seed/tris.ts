@@ -5,39 +5,74 @@
  * triangles), built with the stage's own geometry code. With a comma list of
  * part ids, only those; a group id prefixed `group:` sums one group.
  */
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { partSchema } from '../../../src/engines/space-scene/schema';
-import { partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
-import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
+import { readFileSync } from "node:fs";
+import { NodeIO } from "@gltf-transform/core";
+import { ALL_EXTENSIONS } from "@gltf-transform/extensions";
+import { MeshoptDecoder } from "meshoptimizer";
+import { join } from "node:path";
+import { partSchema } from "../../../src/engines/space-scene/schema";
+import { partMaterialSlots } from "../../../src/engines/space-scene/lib/parts";
+import { partPieces } from "../../../src/engines/space-scene/stages/model3d/geometry";
 
-const file = process.env.PARTS ?? join(import.meta.dirname, '../../../src/content/topics/flower-and-seed/data/parts.json');
-const data = JSON.parse(readFileSync(file, 'utf8')) as { parts: { id: string; group?: string }[] };
-const args = (process.argv[2] ?? '').split(',').filter(Boolean);
+const file =
+  process.env.PARTS ??
+  join(
+    import.meta.dirname,
+    "../../../src/content/topics/flower-and-seed/data/parts.json",
+  );
+const data = JSON.parse(readFileSync(file, "utf8")) as {
+  model?: string;
+  parts: { id: string; group?: string }[];
+};
+const meshCounts = new Map<string, number>();
+if (data.model) {
+  await MeshoptDecoder.ready;
+  const doc = await new NodeIO()
+    .registerExtensions(ALL_EXTENSIONS)
+    .registerDependencies({ "meshopt.decoder": MeshoptDecoder })
+    .read(`public${data.model}`);
+  for (const node of doc.getRoot().listNodes()) {
+    const p = node.getMesh()?.listPrimitives()[0];
+    if (p) meshCounts.set(node.getName(), p.getIndices()!.getCount() / 3);
+  }
+}
+const args = (process.argv[2] ?? "").split(",").filter(Boolean);
 const pick = (p: { id: string; group?: string }) =>
-  args.length === 0 || args.includes(p.id) || args.some((a) => a.startsWith('group:') && a.slice(6) === (p.group ?? 'context'));
+  args.length === 0 ||
+  args.includes(p.id) ||
+  args.some(
+    (a) => a.startsWith("group:") && a.slice(6) === (p.group ?? "context"),
+  );
 let total = 0;
 let calls = 0;
 const byGroup = new Map<string, [number, number]>();
 for (const raw of data.parts) {
   if (!pick(raw)) continue;
   const part = partSchema.parse(raw);
-  let tris = 0;
+  let tris = part.mesh ? (meshCounts.get(part.mesh) ?? 0) : 0;
   let lines = 0;
   for (const piece of partPieces(part as never)) {
     const g = piece.geometry;
-    const n = g.index ? g.index.count : g.getAttribute('position').count;
+    const n = g.index ? g.index.count : g.getAttribute("position").count;
     const copies = piece.matrices ? piece.matrices.length : 1;
     if ((piece as { lines?: boolean }).lines) lines += 1;
     else tris += (n / 3) * copies;
   }
-  const slots = partMaterialSlots(part as never).length + lines;
-  console.log(`${part.id.padEnd(22)} ${String(Math.round(tris)).padStart(7)} tris  ${slots} calls`);
+  const slots =
+    (part.mesh ? 1 : partMaterialSlots(part as never).length) + lines;
+  console.log(
+    `${part.id.padEnd(22)} ${String(Math.round(tris)).padStart(7)} tris  ${slots} calls`,
+  );
   total += tris;
   calls += slots;
-  const g = raw.group ?? 'context';
+  const g = raw.group ?? "context";
   const [t0, c0] = byGroup.get(g) ?? [0, 0];
   byGroup.set(g, [t0 + tris, c0 + slots]);
 }
-for (const [g, [t, c]] of byGroup) console.log(`  group ${g.padEnd(14)} ${String(Math.round(t)).padStart(7)} tris  ${c} calls`);
-console.log(`total ${Math.round(total)} triangles, ${calls} calls (before visibility)`);
+for (const [g, [t, c]] of byGroup)
+  console.log(
+    `  group ${g.padEnd(14)} ${String(Math.round(t)).padStart(7)} tris  ${c} calls`,
+  );
+console.log(
+  `total ${Math.round(total)} triangles, ${calls} calls (before visibility)`,
+);

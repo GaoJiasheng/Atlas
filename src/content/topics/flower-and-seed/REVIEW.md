@@ -25,3 +25,17 @@ Parts are generated: `pnpm tsx scripts/geo/flower-and-seed/build-parts.ts` (text
 17. **Figures**: the cover and the two approved drafts (bee on a chilli flower, ch 02; germinating bean, ch 06). The bee figure is 150 KB, over the 120 KB figure target. No other images were made.
 18. **Chapter 07's body is about 340 words** (guide 200–300) because it carries the four-cup reasoning.
 19. **The plant topic links here** from its chapters 05, 06 and 07 (one sentence each in an existing More box).
+
+## Rebuild 2026-11-05 — resumed 2026-11-09
+
+The dated [rebuild report](REBUILD-3D.md) supersedes items 10 and 13 for rebuilt geometry and performance: the fern, bat, sunbird, coconut and fruit specimens now use authored mesh surfaces; colour batching retains selectable parts and reduces the conservative all-parts estimate to 71 material calls (80 with all seven flows and both ground passes). This replaces the earlier claim that keeping the colours prevented further batching. The bat retains its existing whole-part hover behaviour. The bat remains self-grade B for the close-up fur finish; the report includes a proposed, unapplied engine material patch and the exact remaining work. No browser acceptance has been claimed; the CPU comparison sheets and actual renderer material-bridge tests are documented in the report.
+
+
+## Rebuild 2026-11-05 — round 2, 2026-11-09
+
+The round-2 section of [REBUILD-3D.md](REBUILD-3D.md) supersedes the preceding open fur-finish item. `nectar-bat` now has embedded directional coat colour and normal maps, continuous body/head UVs, bare membranes and calibrated regional roughness using the main session's existing microstructure opt-in. The coat is self-grade A offline after four inspected iteration rounds; GPU acceptance remains reserved. The new GLB is 1,478,916 bytes; the whole table is 262,733 triangles / 71 material calls (80 including all flows and ground passes). No engine edits or teaching-text changes were made in this round.
+
+
+## Round 3 — 2026-11-09
+
+The Round 3 reconstruction and photo comparisons supersede earlier retained-A/coat-only-A claims for the bat, coconut, fern, fig-cut, red-flower, durian branch, ripe-fig branch, sea-almond-cut and moss cushion. All are self-graded B against the stricter whole-object photo-adjacent bar. They are not recommended as A-complete. The exact remaining defects, iteration changes, references, counts and evidence path are in `REBUILD-3D.md`, “Rebuild 2026-11-05 — Round 3”. GPU acceptance remains pending; these are decoded-asset studio/ACES CPU comparisons.

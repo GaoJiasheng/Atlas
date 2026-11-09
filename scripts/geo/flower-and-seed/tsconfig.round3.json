@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  "files": [
+    "preview.ts",
+    "bake.ts",
+    "sculpt.ts",
+    "costus.ts",
+    "fern-moss.ts",
+    "coir-finish.ts",
+    "audit-round3.ts"
+  ],
+  "include": [],
+  "exclude": [],
+  "compilerOptions": {
+    "typeRoots": ["../../../node_modules/@types"]
+  }
+}

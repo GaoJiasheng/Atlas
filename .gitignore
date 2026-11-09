@@ -71,3 +71,6 @@ scripts/geo/.tools
 !scripts/geo/states-of-matter/evidence/round1-parts.json
 !scripts/geo/states-of-matter/evidence/before-parts.json
 !scripts/geo/states-of-matter/evidence/round1-metrics.json
+scripts/geo/flower-and-seed/evidence/*
+!scripts/geo/flower-and-seed/evidence/metrics.json
+!scripts/geo/flower-and-seed/evidence/before/

@@ -80,6 +80,11 @@ export function gltfSurface(mesh: Mesh): GltfSurface | undefined {
       style(target) {
         target.needsUpdate = true;
         target.roughnessMap = source.roughnessMap;
+        if (source.userData.atlasMicrostructure === true) {
+          target.map = source.map;
+          target.normalMap = source.normalMap;
+          target.normalScale.copy(source.normalScale);
+        }
       },
       fade(target, opacity, ghost) {
         fadePartMaterial(target, opacity, ghost);
@@ -94,6 +99,10 @@ export function gltfSurface(mesh: Mesh): GltfSurface | undefined {
       target.needsUpdate = true;
       target.map = source.map;
       target.normalMap = target.roughnessMap = null;
+      if (source.userData.atlasMicrostructure === true) {
+        target.normalMap = source.normalMap;
+        target.normalScale.copy(source.normalScale);
+      }
       target.color.multiply(source.color);
       target.roughness = source.roughness;
       target.metalness = source.metalness;
