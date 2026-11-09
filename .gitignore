@@ -78,3 +78,6 @@ scripts/anatomy/**/*.png
 scripts/anatomy/**/*.jpg
 scripts/anatomy/**/*.jpeg
 scripts/anatomy/**/*.webp
+
+# App Store screenshots: 79 MB, kept on disk only (regenerate with scripts/app-store-shots.ts).
+docs/app-store/screenshots/
