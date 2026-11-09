@@ -1,3 +1,4 @@
+import { installSceneClock, pauseSceneClock, poll, sceneFrame, sceneReady } from './scene-signals';
 /**
  * SpaceScene heart-and-lungs engine pieces (docs/40 §4, E-HL1–E-HL4) on the
  * placeholder bench `sample-heart`: a deep link draws the table's values at
@@ -20,8 +21,7 @@ type Engine = {
 
 async function open(page: Page, query: string, locale = 'en') {
   await page.goto(`/${locale}/topics/sample-heart/?${query}`);
-  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
-  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await sceneReady(page);
 }
 const sim = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unknown as Engine).sim());
 const animation = (page: Page, id: string) => page.evaluate((x) => (window.__atlas!.engine as unknown as Engine).animation(x), id);
@@ -39,7 +39,7 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
     await open(page, 'ch=sample-air&sim=sample.out');
     const o = (await sim(page)).outputs;
     expect([o.n2, o.o2, o.co2, o.h2o]).toEqual([78, 16, 4, 6]);
-    await expect.poll(() => copies(page, 'o2-balls')).toBe(16);
+    await poll(() => copies(page, 'o2-balls')).toBe(16);
     expect(await copies(page, 'co2-balls')).toBe(4);
     expect(await copies(page, 'h2o-balls')).toBe(6);
     await expect(readout(page, 'co2')).toHaveText('4');
@@ -60,17 +60,17 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
     await open(page, 'ch=sample-air&sim=sample.out');
     await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
     await page.keyboard.press('[');
-    await expect.poll(async () => (await sim(page)).values.sample).toBe('in');
+    await poll(async () => (await sim(page)).values.sample).toBe('in');
     await expect(readout(page, 'co2')).toHaveText('0.04');
     await expect(readout(page, 'o2')).toHaveText('21');
-    await expect.poll(() => copies(page, 'o2-balls')).toBe(21);
+    await poll(() => copies(page, 'o2-balls')).toBe(21);
     expect(await copies(page, 'co2-balls')).toBe(0);
     await expect(page.locator('.space-try__sim[data-tag="typical"] .atlas-src')).toHaveText(['S1']);
   });
 
   test('a deep link plays the heart and the breathing at the bound frequency at once', async ({ page }) => {
     await open(page, 'ch=sample-effort&sim=activity.run');
-    await expect.poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(165 / 60, 3);
+    await poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(165 / 60, 3);
     for (const id of BREATHING) expect((await animation(page, id))!.hz).toBeCloseTo(40 / 60, 3);
     // Bound together: one phase.
     // Read all three in one call, so no frame passes between the readings.
@@ -85,31 +85,41 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
   });
 
   test('] eases the heartbeat to the new frequency and changes the flows\' pace', async ({ page }) => {
+    await installSceneClock(page);
     await open(page, 'ch=sample-effort');
-    await expect.poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(1.5, 3);
+    await poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(1.5, 3);
+    await pauseSceneClock(page);
     await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
     await page.keyboard.press(']');
-    await expect.poll(async () => (await sim(page)).values.activity).toBe('walk');
-    await expect(page).toHaveURL(/sim=activity\.walk/);
-    // On its way: some frame shows a frequency between the two.
+    await poll(async () => (await sim(page)).values.activity).toBe('walk');
+    // Observe every app frame from the key press, before waiting for the
+    // debounced URL. Real-time protocol polling can miss the entire ease.
     let between = false;
-    for (let i = 0; i < 40 && !between; i++) {
+    await poll(async () => {
+      await sceneFrame(page);
       const hz = (await animation(page, 'heartbeat'))!.hz;
-      between = hz > 1.51 && hz < 115 / 60 - 0.01;
-      await page.waitForTimeout(15);
-    }
+      between ||= hz > 1.51 && hz < 115 / 60 - 0.01;
+      return hz;
+    }, { intervals: [0] }).toBeCloseTo(115 / 60, 3);
     expect(between).toBe(true);
-    await expect.poll(async () => (await animation(page, 'heartbeat'))?.hz, { timeout: 5_000 }).toBeCloseTo(115 / 60, 3);
+    await expect(page).toHaveURL(/sim=activity\.walk/);
     expect((await flow(page, 'heart-left'))?.pace).toBeCloseTo(1.28, 6);
     // The phase keeps going (it is integrated, never reset by the change).
     const a = (await animation(page, 'breathe'))!.phase;
-    await expect.poll(async () => (await animation(page, 'breathe'))!.phase, { timeout: 5_000 }).not.toBe(a);
+    await sceneFrame(page);
+    expect((await animation(page, 'breathe'))!.phase).not.toBe(a);
   });
 
   test('breathing held in stops the breathing animations and holds the pose', async ({ page }) => {
+    await installSceneClock(page);
     await open(page, 'ch=sample-effort');
+    await pauseSceneClock(page);
     await page.locator('.space-try [data-sim-control="phase"] [data-sim-value="in"]').click();
-    await expect.poll(async () => (await animation(page, 'breathe'))?.on).toBe(0);
+    await poll(async () => {
+      await sceneFrame(page);
+      // All bound animations must have stopped in the same drawn frame.
+      return page.evaluate(ids => ids.map(id => (window.__atlas!.engine as unknown as Engine).animation(id)?.on), BREATHING);
+    }, { intervals: [0] }).toEqual([0, 0, 0]);
     expect((await sim(page)).outputs.chest).toBe('bigger');
     await expect(page.locator('.space-try [data-sim-output="chest"]')).toHaveAttribute('data-state', 'bigger');
     // The heart still beats.
@@ -119,9 +129,9 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
   test('the round shows a step\'s segment and the one before it', async ({ page }) => {
     await open(page, 'ch=sample-round&sim=stop.1');
     const shown = async (id: string) => Object.values((await flow(page, id))?.paths ?? {}).some((p) => p.visible);
-    await expect.poll(() => shown('to-lungs')).toBe(true);
-    await expect.poll(() => shown('exchange-lungs')).toBe(false);
-    await expect.poll(() => shown('heart-left')).toBe(true);
+    await poll(() => shown('to-lungs')).toBe(true);
+    await poll(() => shown('exchange-lungs')).toBe(false);
+    await poll(() => shown('heart-left')).toBe(true);
     await expect(page.locator('.space-try [data-sim-output="where"]')).toHaveAttribute('data-state', 'to-lungs');
   });
 
@@ -142,9 +152,9 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
     expect(box.height).toBeGreaterThanOrEqual(44);
     expect(box.x + box.width).toBeLessThanOrEqual(390);
     await option.click();
-    await expect.poll(async () => (await sim(page)).values.activity).toBe('run');
+    await poll(async () => (await sim(page)).values.activity).toBe('run');
     await expect(readout(page, 'beats')).toHaveText('165');
-    await expect.poll(async () => (await animation(page, 'heartbeat'))?.hz, { timeout: 5_000 }).toBeCloseTo(2.75, 3);
+    await poll(async () => (await animation(page, 'heartbeat'))?.hz).toBeCloseTo(2.75, 3);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   });
 });

@@ -1,3 +1,4 @@
+import { installSceneClock, pauseSceneClock, poll, sceneFrame, sceneReady } from './scene-signals';
 /** Production steam-engine: docs/52 content, actual drawn members, synchronized ports and recovery.
  * Browser gates are run by the main session with ATLAS_E2E_PORT=5421 after build. */
 import { readFileSync } from 'node:fs';
@@ -31,14 +32,13 @@ const sim = (page: Page) => page.evaluate(() => (window.__atlas!.engine as unkno
 const set = (page: Page, values: Record<string, number | string | boolean>) => page.evaluate(v => (window.__atlas!.engine as unknown as Engine).setSim(v), values);
 async function open(page: Page, query = 'ch=power-both-ways&b=1', lang = 'en') {
   await page.goto(`/${lang}/topics/steam-engine/?${query}`);
-  await page.waitForFunction(() => window.__atlas !== undefined, null, { timeout: 30_000 });
-  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
-  await expect.poll(() => read(page)).not.toBeNull();
+  await sceneReady(page);
+  await poll(() => read(page)).not.toBeNull();
 }
 async function seek(page: Page, angle: number) {
   expect(await page.evaluate(deg => (window.__atlas!.engine as unknown as Engine).seekMechanism('main-engine', deg), angle)).toBe(true);
   const theta = angle * Math.PI / 180;
-  await expect.poll(async () => Math.abs((await read(page))!.thetaRad - theta), { timeout: 30_000 }).toBeLessThan(1e-12);
+  await poll(async () => Math.abs((await read(page))!.thetaRad - theta)).toBeLessThan(1e-12);
   return (await read(page))!;
 }
 const distance = (a: number[], b: number[]) => Math.hypot(...a.map((n, i) => n - b[i]!));
@@ -123,13 +123,13 @@ test.describe('steam-engine shared rigid frame', () => {
       expect(Object.values(before.ports).filter(Boolean)).toHaveLength(2);
       const closed = await seek(page, angle);
       expect(closed.pistonDirection).toBe('switch'); checkFrame(closed);
-      await expect.poll(() => page.evaluate(() => {
+      await poll(() => page.evaluate(() => {
         const e = window.__atlas!.engine as unknown as Engine;
         return ['port-steam','exhaust-steam'].flatMap(id => Object.values(e.flow(id)?.paths ?? {}).map(p => p.visible));
       })).toEqual([false, false, false, false]);
       const after = await seek(page, angle + .1);
       expect(after.pistonDirection).not.toBe(before.pistonDirection);
-      await expect.poll(() => page.evaluate(() => {
+      await poll(() => page.evaluate(() => {
         const e = window.__atlas!.engine as unknown as Engine;
         const f = e.mechanism('main-engine')!;
         return Object.entries(f.gates).every(([key, value]) => { const [flow, path] = key.split(':'); return e.flow(flow!)?.paths[path!]!.visible === value; });
@@ -151,7 +151,7 @@ test.describe('steam-engine shared rigid frame', () => {
     expect((await read(page))!.thetaRad).toBe(fractional.thetaRad);
     expect(await page.evaluate(() => ({ url: location.search, set: (window.__atlas!.engine as unknown as Engine).sim().set }))).toEqual(before);
     await set(page, { 'phase-deg': 180 });
-    await expect.poll(async () => (await read(page))!.phaseDeg).toBe(180);
+    await poll(async () => (await read(page))!.phaseDeg).toBe(180);
   });
 
   test('manual deep links and axis beat changes produce the same frame; explicit sim overrides the beat', async ({ page }) => {
@@ -159,9 +159,9 @@ test.describe('steam-engine shared rigid frame', () => {
     const linked = (await read(page))!;
     expect(linked.phaseDeg).toBe(180); checkFrame(linked);
     await page.locator('.atlas-axis__tick[data-beat="power-both-ways.0"]').click();
-    await expect.poll(async () => (await read(page))!.phaseDeg).toBe(0);
+    await poll(async () => (await read(page))!.phaseDeg).toBe(0);
     await page.locator('.atlas-axis__tick[data-beat="power-both-ways.2"]').click();
-    await expect.poll(async () => (await read(page))!.phaseDeg).toBe(180);
+    await poll(async () => (await read(page))!.phaseDeg).toBe(180);
     expect((await read(page))!.points).toEqual(linked.points);
     await open(page, 'ch=power-both-ways&b=3&sim=experiment.mechanism~motion-mode.manual~phase-deg.90');
     expect((await read(page))!.phaseDeg).toBe(90);
@@ -169,29 +169,30 @@ test.describe('steam-engine shared rigid frame', () => {
   });
 
   test('auto rate changes stay continuous; unrelated table controls preserve phase and RUN freezes immediately', async ({ page }) => {
+    await installSceneClock(page);
     await open(page, 'ch=sun-and-planet&b=4');
-    await expect.poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(.01);
-    const sample = await page.evaluate(async () => {
+    await poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(.01);
+    await pauseSceneClock(page);
+    const sample = await page.evaluate(() => {
       const e = window.__atlas!.engine as unknown as Engine;
-      const raf = () => new Promise<void>(r => requestAnimationFrame(() => r()));
-      // Two frames are the measure below: first let the slow frames after loading (lazily mounted stage content can
-      // take most of a second under software WebGL) pass, so they are ordinary frames.
-      for (let i = 0; i < 20; i++) { const t = performance.now(); await raf(); if (performance.now() - t < 250) break; }
       const before = e.mechanism('main-engine')!.thetaRad;
       e.setSim({ 'cycle-rate': 12, 'cold-pressure': 50, 'work-share': 30, 'governor-rpm': 120 });
-      const immediate = e.mechanism('main-engine')!.thetaRad;
-      await raf(); await raf();
-      const after = e.mechanism('main-engine')!.thetaRad;
-      window.__atlas!.setPaused(true);
-      await raf(); await raf();
-      const frozen = e.mechanism('main-engine')!.thetaRad;
-      await new Promise(r => setTimeout(r, 200));
-      return { before, immediate, after, frozen, later: e.mechanism('main-engine')!.thetaRad };
+      return { before, immediate: e.mechanism('main-engine')!.thetaRad };
     });
+    // Keep the original two-frame continuity bound, with frame deltas that
+    // cannot grow when software WebGL or another worker stalls the machine.
+    await sceneFrame(page);
+    await sceneFrame(page);
+    const after = (await read(page))!.thetaRad;
+    await page.evaluate(() => window.__atlas!.setPaused(true));
+    await sceneFrame(page);
+    const frozen = (await read(page))!.thetaRad;
+    await page.clock.runFor(200);
     expect(sample.immediate).toBe(sample.before);
-    expect(sample.after).toBeGreaterThan(sample.before);
-    expect(sample.after - sample.before).toBeLessThan(.4);
-    expect(sample.later).toBe(sample.frozen);
+    expect(after).toBeGreaterThan(sample.before);
+    expect(after - sample.before).toBeLessThan(.4);
+    expect(frozen).toBe(after);
+    expect((await read(page))!.thetaRad).toBe(frozen);
     expect(await page.evaluate(() => window.__atlas!.commands().some(c => c.id === 'sim-replay'))).toBe(false);
   });
 
@@ -200,7 +201,7 @@ test.describe('steam-engine shared rigid frame', () => {
     for (const protection of ['reference', 'exploded', 'isolate', 'solo']) {
       await page.evaluate(() => window.__atlas!.setPaused(false));
       const start = (await read(page))!.thetaRad;
-      await expect.poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(start + .005);
+      await poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(start + .005);
       const result = await page.evaluate(async id => {
         const a = window.__atlas!, e = a.engine as unknown as Engine;
         const raf = () => new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
@@ -231,14 +232,14 @@ test.describe('steam-engine shared rigid frame', () => {
     await page.evaluate(() => window.__atlas!.setMode('flow', true, { instant: true }));
     const saved = await seek(page, 137.25);
     await page.keyboard.press('p');
-    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation), { timeout: 30_000 }).not.toBeNull();
+    await poll(() => page.evaluate(() => window.__atlas!.state().presentation)).not.toBeNull();
     await page.keyboard.press('p');
-    await expect.poll(() => page.evaluate(() => window.__atlas!.state().presentation), { timeout: 30_000 }).toBeNull();
-    await expect.poll(async () => (await read(page))!.thetaRad, { timeout: 30_000 }).toBe(saved.thetaRad);
+    await poll(() => page.evaluate(() => window.__atlas!.state().presentation)).toBeNull();
+    await poll(async () => (await read(page))!.thetaRad).toBe(saved.thetaRad);
     await page.waitForTimeout(100);
     expect((await read(page))!.thetaRad).toBe(saved.thetaRad);
     await set(page, {'phase-deg':90});
-    await expect.poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(Math.PI/2);
+    await poll(async () => (await read(page))!.thetaRad).toBeGreaterThan(Math.PI/2);
   });
 
   test('three duration-zero governor positions and three visible energy counts', async ({ page }) => {
@@ -259,7 +260,7 @@ test.describe('steam-engine shared rigid frame', () => {
         'governor-lower-right':middle(endpoint.right,endpoint.collar),
       };
       // Existing anchor API reads the actual pose-transformed parts; compare with independent perspective projection.
-      await expect.poll(async () => page.evaluate(points => {
+      await poll(async () => page.evaluate(points => {
         const e=window.__atlas!.engine as unknown as Engine;
         const canvas=document.querySelector<HTMLCanvasElement>('.atlas-stage canvas')!;
         const W=canvas.clientWidth,H=canvas.clientHeight;
@@ -287,7 +288,7 @@ test.describe('steam-engine shared rigid frame', () => {
       await set(page, { 'work-share':work });
       const out = (await sim(page)).outputs;
       expect(Number(out['useful-work']) + Number(out['heat-out'])).toBe(100);
-      await expect.poll(() => page.evaluate(() => { const e=window.__atlas!.engine as unknown as Engine; return [e.copies('energy-input'),e.copies('energy-work'),e.copies('energy-reject')]; })).toEqual([100,work,100-work]);
+      await poll(() => page.evaluate(() => { const e=window.__atlas!.engine as unknown as Engine; return [e.copies('energy-input'),e.copies('energy-work'),e.copies('energy-reject')]; })).toEqual([100,work,100-work]);
     }
   });
 
@@ -298,7 +299,7 @@ test.describe('steam-engine shared rigid frame', () => {
     await page.waitForTimeout(200);
     expect((await read(page))!.thetaRad).toBe(stopped);
     await set(page, { 'motion-mode':'manual','phase-deg':270 });
-    await expect.poll(async () => (await read(page))!.phaseDeg).toBe(270);
+    await poll(async () => (await read(page))!.phaseDeg).toBe(270);
     checkFrame((await read(page))!);
     await expect(page.locator('[data-hud-panel="reader"]')).toContainText('从摆动到转动');
   });

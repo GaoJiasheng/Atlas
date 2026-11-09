@@ -1,3 +1,4 @@
+import { installSceneClock, pauseSceneClock, poll, sceneFrame, sceneReady, signalTimeout } from './scene-signals';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
 // Software WebGL needs time to load two scenes and settle the damped camera.
@@ -15,25 +16,38 @@ async function centre(label: Locator): Promise<Point> {
 async function open(page: Page, theme: 'paper' | 'cinema') {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('/en/topics/mosquito/?ch=the-adult');
-  await page.waitForFunction(() => window.__atlas !== undefined);
-  expect(await page.evaluate(() => window.__atlas!.ready)).toBe(true);
+  await sceneReady(page);
   await page.evaluate((t) => {
     window.__atlas!.setTheme(t);
     window.__atlas!.setPreset('hero', { instant: true });
   }, theme);
-  await expect.poll(async () => (await state(page)).preset).toBe('hero');
+  await poll(async () => (await state(page)).preset).toBe('hero');
   const label = page.locator('.space-co[data-id="thorax"] .space-co__hit');
-  await expect.poll(() => label.evaluate((el) => getComputedStyle(el).pointerEvents)).toBe('all');
-  // Software WebGL: the first frames after `ready` (lazily mounted stage content) can take most of a second;
-  // wait until frames come at a normal pace, then allow the label's layout glide and its opacity to finish.
-  await page.evaluate(async () => {
-    for (let i = 0; i < 20; i++) {
-      const t = performance.now();
-      await new Promise((r) => requestAnimationFrame(r));
-      if (performance.now() - t < 250) break;
-    }
+  await poll(() => label.evaluate((el) => getComputedStyle(el).pointerEvents)).toBe('all');
+  // Read actual camera and placard layout at frame boundaries; frame speed
+  // says nothing about whether the camera fit, font metrics and glide settled.
+  const settled = await page.evaluateHandle(() => {
+    let previous = '', stable = 0;
+    return () => {
+      const el = document.querySelector<SVGRectElement>('.space-co[data-id="thorax"] .space-co__hit');
+      if (!el || document.fonts.status !== 'loaded') return false;
+      const b = el.getBoundingClientRect();
+      const camera = (window.__atlas!.stats() as unknown as { camera: unknown }).camera;
+      if (!camera) return false;
+      const key = JSON.stringify([camera, b.x.toFixed(1), b.y.toFixed(1), b.width, b.height]);
+      stable = key === previous ? stable + 1 : 0;
+      previous = key;
+      const p = { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+      return stable >= 3 && getComputedStyle(el.parentElement!).opacity === '1'
+        && getComputedStyle(el).pointerEvents === 'all'
+        && document.elementFromPoint(p.x, p.y)?.closest('.space-co') === el.parentElement;
+    };
   });
-  await page.waitForTimeout(500);
+  try {
+    await page.waitForFunction(sample => sample(), settled, { polling: 'raf', timeout: signalTimeout() });
+  } finally {
+    await settled.dispose();
+  }
   return label;
 }
 
@@ -45,9 +59,9 @@ async function drag(page: Page, from: Point, to: Point) {
 }
 
 async function freed(page: Page, camera: unknown) {
-  await expect.poll(async () => (await state(page)).preset, { timeout: 30_000, intervals: [500] }).toBeNull();
-  await expect.poll(async () => JSON.stringify((await state(page)).camera)).not.toBe(JSON.stringify(camera));
-  await expect.poll(async () => (await state(page)).part).toBeNull();
+  await poll(async () => (await state(page)).preset, { intervals: [500] }).toBeNull();
+  await poll(async () => JSON.stringify((await state(page)).camera)).not.toBe(JSON.stringify(camera));
+  await poll(async () => (await state(page)).part).toBeNull();
 }
 
 for (const theme of ['paper', 'cinema'] as const) {
@@ -59,7 +73,7 @@ for (const theme of ['paper', 'cinema'] as const) {
     const text = page.locator('.space-co[data-id="thorax"] .space-co__text');
     const point = await centre(text);
     await page.mouse.click(point.x, point.y);
-    await expect.poll(async () => (await state(page)).part).toBe('thorax');
+    await poll(async () => (await state(page)).part).toBe('thorax');
 
     await open(page, theme);
     const before = (await state(page)).camera;
@@ -69,6 +83,7 @@ for (const theme of ['paper', 'cinema'] as const) {
   });
 
   test(`SpaceScene ${theme}: a drag released on a label keeps the camera free without selecting`, async ({ page }) => {
+    await installSceneClock(page);
     const label = await open(page, theme);
     const before = (await state(page)).camera;
     const to = await centre(label);
@@ -76,13 +91,14 @@ for (const theme of ['paper', 'cinema'] as const) {
     await page.mouse.move(from.x, from.y);
     await page.mouse.down();
     await page.mouse.move(to.x, to.y, { steps: 12 });
-    // Rotation can hide the original part. End over a currently interactive
-    // placard, following its glide rather than using a stale screen position.
-    let overLabel = false;
-    let pointer = to;
-    // The damped orbit keeps the placards gliding for a while (the framed hero view sits them near the HUD): chase longer.
-    for (let attempt = 0; attempt < 30 && !overLabel; attempt++) {
-      const end = await page.evaluate((near) => {
+    // Rotation can hide the original part. Find a reachable placard on an
+    // actual app frame, then move/check/release within that same virtual frame.
+    // Native mouse events and hit testing are unchanged, even under load.
+    await pauseSceneClock(page);
+    const end: { point: Point | null } = { point: null };
+    await poll(async () => {
+      await sceneFrame(page);
+      end.point = await page.evaluate((near) => {
         return [...document.querySelectorAll<SVGRectElement>('.space-co:not([data-group]) .space-co__hit')]
           .filter((el) => getComputedStyle(el).pointerEvents === 'all')
           .map((el) => {
@@ -92,28 +108,25 @@ for (const theme of ['paper', 'cinema'] as const) {
           // Only placards the pointer can reach there (one gliding under a HUD column is not interactive at that point).
           .filter((p) => document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])'))
           .sort((a, b) => Math.hypot(a.x - near.x, a.y - near.y) - Math.hypot(b.x - near.x, b.y - near.y))[0] ?? null;
-      }, pointer);
-      if (end) {
-        pointer = end;
-        await page.mouse.move(end.x, end.y);
-        // Checked at once and released at once below: a placard still gliding after the drag would leave a waiting pointer behind.
-        overLabel = await page.evaluate((p) => Boolean(document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])')), end);
-        if (!overLabel) await page.waitForTimeout(100);
-      } else await page.waitForTimeout(100);
-    }
-    expect(overLabel).toBe(true);
+      }, to);
+      return end.point;
+    }, { intervals: [0] }).not.toBeNull();
+    const release = end.point!;
+    await page.mouse.move(release.x, release.y);
+    expect(await page.evaluate(p => Boolean(document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])')), release)).toBe(true);
     await page.mouse.up();
+    await page.clock.resume();
     await freed(page, before);
   });
 
   test(`SpaceScene ${theme}: group labels, leader lines and anchor dots let the orbit through`, async ({ page }) => {
     await open(page, theme);
     for (const selector of ['.space-co__leader', '.space-co__dot', '.space-co[data-group] .space-co__hit']) {
-      await expect.poll(() => page.locator(selector).count()).toBeGreaterThan(0);
+      await poll(() => page.locator(selector).count()).toBeGreaterThan(0);
       expect(await page.locator(selector).evaluateAll((els) => els.every((el) => getComputedStyle(el).pointerEvents === 'none'))).toBe(true);
     }
     const group = page.locator('.space-co[data-id="group:head"] .space-co__text');
-    await expect.poll(() => group.locator('..').evaluate((el) => Number(getComputedStyle(el).opacity))).toBeGreaterThan(0.5);
+    await poll(() => group.locator('..').evaluate((el) => Number(getComputedStyle(el).opacity))).toBeGreaterThan(0.5);
     const from = await centre(group);
     expect(await page.evaluate((p) => document.elementFromPoint(p.x, p.y)?.closest('.space-co') === null, from)).toBe(true);
     const before = (await state(page)).camera;
@@ -170,8 +183,7 @@ test.describe('SpaceScene touch labels', () => {
     const text = page.locator('.space-co[data-id="thorax"] .space-co__text');
     const point = await centre(text);
     await page.touchscreen.tap(point.x, point.y);
-    await page.waitForTimeout(100);
-    await expect.poll(async () => (await state(page)).part).toBe('thorax');
+    await poll(async () => (await state(page)).part).toBe('thorax');
 
     const label = await open(page, 'paper');
     const before = (await state(page)).camera;
@@ -196,14 +208,14 @@ test.describe('SpaceScene touch labels', () => {
     // Calibrate the overlap with a native long press on the uncovered model:
     // ordinary model picking must continue to work.
     await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: touch(point) });
-    await expect.poll(async () => (await state(page)).part).not.toBeNull();
+    await poll(async () => (await state(page)).part).not.toBeNull();
     await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
 
     await page.evaluate(() => {
       window.__atlas!.goToChapter('the-adult', { instant: true });
       window.__atlas!.setPreset('hero', { instant: true });
     });
-    await expect.poll(async () => (await state(page)).part).toBeNull();
+    await poll(async () => (await state(page)).part).toBeNull();
     await coverPoint(page, point);
     const before = (await state(page)).camera;
     await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: touch(point) });
@@ -220,7 +232,7 @@ test.describe('SpaceScene touch labels', () => {
     });
     await coverPoint(page, point);
     await page.touchscreen.tap(point.x, point.y);
-    await expect.poll(async () => (await state(page)).part).toBe('thorax');
+    await poll(async () => (await state(page)).part).toBe('thorax');
     await client.detach();
   });
 
