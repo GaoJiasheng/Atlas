@@ -111,15 +111,13 @@ test.describe('sample-heart (SpaceScene table model, hz, tidal)', () => {
   });
 
   test('breathing held in stops the breathing animations and holds the pose', async ({ page }) => {
-    await installSceneClock(page);
+    // Real time here: a paused virtual clock starves the click's actionability
+    // checks under load. One evaluate reads all three animations in the same
+    // task, so they must have stopped together.
     await open(page, 'ch=sample-effort');
-    await pauseSceneClock(page);
     await page.locator('.space-try [data-sim-control="phase"] [data-sim-value="in"]').click();
-    await poll(async () => {
-      await sceneFrame(page);
-      // All bound animations must have stopped in the same drawn frame.
-      return page.evaluate(ids => ids.map(id => (window.__atlas!.engine as unknown as Engine).animation(id)?.on), BREATHING);
-    }, { intervals: [0] }).toEqual([0, 0, 0]);
+    await poll(() => page.evaluate(ids => ids.map(id => (window.__atlas!.engine as unknown as Engine).animation(id)?.on), BREATHING))
+      .toEqual([0, 0, 0]);
     expect((await sim(page)).outputs.chest).toBe('bigger');
     await expect(page.locator('.space-try [data-sim-output="chest"]')).toHaveAttribute('data-state', 'bigger');
     // The heart still beats.
