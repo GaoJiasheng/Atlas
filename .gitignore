@@ -67,3 +67,4 @@ scripts/**/resume*/**
 !scripts/geo/water/comparisons/round2-before-metrics.json
 !scripts/geo/water/comparisons/round2-final-metrics.json
 !scripts/geo/zheng-he/evidence/**
+scripts/geo/.tools
