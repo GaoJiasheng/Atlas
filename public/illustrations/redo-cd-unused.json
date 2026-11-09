@@ -1,0 +1,35 @@
+{
+  "verifiedAt": "2026-11-09",
+  "deleted": [
+    {
+      "id": "b200-cpu-tray",
+      "reason": "No content reference; the published chapter already uses the rack, module and airflow figures."
+    },
+    {
+      "id": "b200-power",
+      "reason": "No content reference; the published chapter already uses the rack, module and airflow figures."
+    },
+    {
+      "id": "plant-chilli-life-cycle",
+      "reason": "No content reference; current plant chapters already have topic-specific figures."
+    },
+    {
+      "id": "plant-leaf-cross-section",
+      "reason": "No content reference; current plant chapters already have topic-specific figures."
+    },
+    {
+      "id": "plant-stoma",
+      "reason": "No content reference; current plant chapters already have topic-specific figures."
+    },
+    {
+      "id": "water-johor-river",
+      "reason": "No content reference; the water-supply lesson uses its existing map and treatment figures."
+    }
+  ],
+  "skipped": [
+    {
+      "id": "b200-gpu-tray",
+      "reason": "Present but unreferenced; brief explicitly assigns a redraw only if present AND referenced."
+    }
+  ]
+}

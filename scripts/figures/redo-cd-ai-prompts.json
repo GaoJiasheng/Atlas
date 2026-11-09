@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-11-05",
+  "recoveredAt": "2026-11-09",
+  "method": "Built-in imagegen; existing illustrate.ts figure/process raster pipeline. Final cover uses the sun-removal edit.",
+  "prompts": [
+    {
+      "id": "energy-conversion",
+      "stage": "generate",
+      "prompt": "Use case: scientific-educational. Asset: Atlas energy-conversion topic COVER, one square graphite technical plate, transparent background. Draw ONE intact compact two-storey Singapore apartment building cutaway, a single continuous building with straight full-height columns and joined floors, with THREE clearly LARGE readable devices only: roof solar-panel array with sun above, one elevator car in a continuous shaft on right, and one large electric desk fan in the open lower-left room. Roof panel and each device should be at least one quarter building width, filling 85% of square canvas. No people. Focus on conversion sunlight to electricity, electricity to lifting and air motion through the appearance of the devices, NO diagrams or arrows needed. Fine nineteenth-century graphite engineering plate, clean thin contours, delicate crosshatching, graphite greys only, isolated museum-plate treatment. THREE countable devices, ONE solar disc, ONE intact building, TWO joined floors, ONE elevator car, ONE fan. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles, NO labels, NO numbers, NO logos, NO ground shadow, NO paper texture, NO background, NO border. All floor slabs have straight edges and connect to structural columns. Solid continuous intact outline."
+    },
+    {
+      "id": "rubber-and-tin",
+      "stage": "generate",
+      "prompt": "Use case: historical-scene, scientific educational technical plate for a Singapore history textbook. One isolated graphite museum arrangement on transparent ground, landscape 4:3, occupies 85% of canvas. LEFT TWO THIRDS: close view of ONE rubber tree trunk with plain vertically furrowed rough bark, one narrow clean half-spiral tapping incision running downward at about 30 degrees, only ONE narrow cut, not an exposed sheet or herringbone pattern. At the lower end ONE small metal spout conducts a thin trail of latex into ONE large round cup fixed directly below; cup diameter at least a sixth of total canvas width. RIGHT: ONE small curved-blade jebong tapping knife, TWO hanging smoked rubber sheets, ONE plain trapezoid tin ingot. Materials have fine precise graphite contour and restrained crosshatching matching a nineteenth century scientific engineering plate. All individual subjects large legible at 420px; the incision is a single smooth oblique line with a narrow rim. Only tiny unmarked natural bark cracks, NO ornamental flower shapes. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles, NO labels, NO logos, NO numbers, NO paper texture, NO frame, NO ground shadow. The knife is a separate specimen beside the trunk, not attached to it. Count: ONE trunk, ONE incision, ONE spout, ONE collection cup, ONE knife, TWO sheets, ONE ingot."
+    },
+    {
+      "id": "energy-conversion",
+      "stage": "edit",
+      "prompt": "Edit this graphite technical-plate cover. Remove ONLY the floating sun disc and all its rays and halo above the roof, replacing that space with fully transparent pixels. Keep the entire intact building, its continuous floors/columns, roof solar array, large desk fan and one elevator car exactly as shown, in the same high-quality fine graphite crosshatching style. The three large devices are sufficient to communicate energy conversions. Keep ONE intact building, TWO continuous floors, ONE solar array, ONE elevator car, ONE fan. No sun. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles, NO logos, NO frame, NO paper texture, NO background. The finished subject must fit within the frame without cutting off the building or panels. Preserve all existing transparency."
+    }
+  ]
+}

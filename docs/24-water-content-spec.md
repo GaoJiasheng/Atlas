@@ -578,7 +578,7 @@
 
 ### A · `water`（SpaceScene）
 
-**数量**：7 章 33 拍（5 / 5 / 5 / 5 / 5 / 4 / 4）；42 个零件（39 个 + 3 个 context：地表壳、海床块、长堤残段）、9 组、11 条流、3 个动画（刮泥桥转动、云漂移、紫外线脉动）、3 个姿态（storm / gates-open / dry-spell）、6 个预设（hero / cycle / barrage-view / plants / coast / home）、1 个剖切（`ground`）；16 个名词；32 条来源（S1 自描述的设计研究来源；S27 并入 S26 的 `note`）；6 张章节图在用（`water-cycle`、`water-three-states`、`water-marina-barrage`、`water-treatment`、`water-newater-membranes`、`water-ro-membrane`；`water-johor-river` 入库未用，柔佛的水管在 B 的地图上）加首页图；每章一个"试一试"，第 02、07 章是公平测试，都只写在家能做的安全做法。
+**数量**：7 章 33 拍（5 / 5 / 5 / 5 / 5 / 4 / 4）；42 个零件（39 个 + 3 个 context：地表壳、海床块、长堤残段）、9 组、11 条流、3 个动画（刮泥桥转动、云漂移、紫外线脉动）、3 个姿态（storm / gates-open / dry-spell）、6 个预设（hero / cycle / barrage-view / plants / coast / home）、1 个剖切（`ground`）；16 个名词；32 条来源（S1 自描述的设计研究来源；S27 并入 S26 的 `note`）；6 张章节图在用（`water-cycle`、`water-three-states`、`water-marina-barrage`、`water-treatment`、`water-newater-membranes`、`water-ro-membrane`；`water-johor-river` 未用，2026-11-09 已删除，柔佛的水管在 B 的地图上）加首页图；每章一个"试一试"，第 02、07 章是公平测试，都只写在家能做的安全做法。
 
 **QA 收尾做的改动**
 - **文字**：全篇照 `atlas-space-topic/references/writing-rules.md` 读过一遍（EN / ZH）；统一：数量都包 `<Num s>`（补了"三分之二 / two-thirds"四处）；第 06 章把"第四个水喉来自新加坡以外"改成"第二个水喉，进口水，来自新加坡以外"（与第 01 章的编号一致）；第 04 章去掉"厂房从上面剖开"。名词表 16 个，每个只在首次出现处包。试一试不是测验，不判对错。

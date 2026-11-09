@@ -1,5 +1,5 @@
 {
-  "method": "Approved PNGs through existing illustrate.ts, then grayscale near-lossless WebP quality40; alpha retained. This avoids 1-level chroma decoder rounding in lossy YUV WebP. No new image generation.",
+  "method": "Approved PNGs through existing illustrate.ts, then grayscale near-lossless WebP quality40; alpha retained. This avoids 1-level chroma decoder rounding in lossy YUV WebP. No new image generation. Tsunami shoaling was replaced on 2026-11-09 by asserted SVG geometry using graphite.ts; its record was refreshed from the shipped raster. Round 2: tsunami restyled from an asserted SVG guide with AI graphite rendering and the figure/prepress pipeline on 2026-11-09; record refreshed to the final raster.",
   "softBudgetDeviation": "Exact decoded R=G=B takes priority over the illustrate.ts soft compression targets; actual sizes recorded below.",
   "reports": [
     {
@@ -31,11 +31,11 @@
     },
     {
       "file": "public/illustrations/figures/plates-and-hazards-tsunami-shoaling.webp",
-      "bytes": 138682,
-      "sha256": "f6e74cf7eb0c17b242cb171bc189f239e3efe94bf7bf943a5410e9643d67a0d4",
+      "bytes": 118264,
+      "sha256": "4977515ab55206af1706cd4adf4407976bcbb2ef0e77c602f51b18d096666247",
       "width": 1200,
       "height": 900,
-      "transparentPixels": 746323,
+      "transparentPixels": 457720,
       "colouredPixels": 0
     }
   ]

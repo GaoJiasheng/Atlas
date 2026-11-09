@@ -1,0 +1,72 @@
+{
+  "tool": "built-in image_gen, followed by pnpm tsx scripts/illustrate.ts figure and round2-export.ts",
+  "note": "Consolidated final art briefs, including targeted correction iterations; the scripts contain exact composition geometry. Final selected source filenames are recorded in the preview sources.json.",
+  "prompts": [
+    {
+      "id": "coral-reef-polyp",
+      "method": "SVG guide + AI graphite; targeted mouth/septa edits",
+      "prompt": "Oblique cutaway of a coral polyp: twelve tentacles on the oral-disc rim, a small oval mouth and six thin radial septa in the skeletal cup. Count twelve distinct tentacles, each rooted on the oral-disc rim outside and above the cutaway; no tentacle grows inside the cup. Check one small horizontal oval mouth without nested eye-like markings, and six thin radial septa attached to the cup floor and wall. Trace the continuous cup wall and oblique cut edges; septa have thin laminar edges, not teeth or fangs. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles.",
+      "corrections": [
+        "Flatten all six septa into thin radial laminae with rounded level edges.",
+        "Widen only the oval mouth by45% for420px legibility."
+      ]
+    },
+    {
+      "id": "digestive-system-swallowing",
+      "method": "Targeted AI edit of original anatomy",
+      "prompt": "Mid-sagittal swallowing section: the tongue pushes a bolus back beneath the raised soft palate; the epiglottis covers the larynx and food enters the oesophagus behind the ringed trachea. Check a clean mid-sagittal section with the tongue pushing one bolus posteriorly and the soft palate raised against the posterior pharyngeal wall. Follow the food into the oesophagus behind the ringed trachea; the rooted, folded epiglottis covers the laryngeal inlet. Inspect embedded teeth and a smooth continuous posterior neck outline: no floating tooth or external vertebral spikes. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles.",
+      "corrections": [
+        "Raise soft palate to seal the posterior nasal passage."
+      ]
+    },
+    {
+      "id": "inside-the-earth-boundary-models",
+      "method": "Original grounded blocks + asserted SVG overlay + local AI material edit",
+      "prompt": "Three grounded plate-boundary blocks: divergent arrows point apart, convergent arrows point together above a subducting slab, and transform arrows follow a fault across which a reference band is offset. Check all three original grounded block bodies retain continuous bases and cut faces; no slab floats above a base. Check outward divergence arrows and inward convergence arrows; follow the descending slab beneath the opposing plate. Check the transform arrows are opposite and parallel to the fault, and the same reference band meets the fault at visibly separated positions. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "monsoon-and-weather-cloud-cutaway",
+      "method": "SVG particle/composition guide + targeted AI edit of original cloud",
+      "prompt": "A cut-open cumulonimbus with a broad anvil: six enlarged hexagonal ice crystals above a faint freezing line, six round droplets below, and slanting rain shafts beneath the base. Count six distinct hexagonal ice crystals above the freezing line and six distinct round liquid drops below it. Check a real billowing tower and broad anvil, not a rectangular box or a solid shell. Check the faint horizontal guide separates the two phase groups and separate slanted rain shafts emerge beneath the cloud. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles.",
+      "corrections": [
+        "Enlarge each of the six ice crystals and six drops by22%.",
+        "Final local edit: lower round droplets enlarged to180px in1448px source; six crystals kept unchanged."
+      ]
+    },
+    {
+      "id": "warring-states-tiger-tally",
+      "method": "Manual PD Du tally contour trace + AI graphite rendering",
+      "prompt": "Two longitudinal halves of a bronze Du tiger tally: an outer flank above and a flat hatched mating face below, both with a blunt feline muzzle, short legs and curled tail; all inscription fields are blank. Compare the blunt muzzle, short legs, broad paws, hip and curling tail against Gary Todd’s CC0 Du tally photograph; both halves share the traced silhouette. Check exactly two half-thickness longitudinal pieces: upper sculpted flank with narrow seam edge, lower flat mating face; not two complete animals. Inspect both flanks and mating plane for blank inscription fields: no characters, pseudo-writing or copied photo inscriptions. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "warring-states-crossbow-trigger",
+      "method": "Asserted SVG exploded guide + AI graphite style transfer",
+      "prompt": "Opened guo housing below an exploded ancient bronze mechanism: an integrated wangshan sight and ya catch at left, a gouxin sear across the middle, a long xuandao trigger at right, and two withdrawn pins with assembly guides. Count one guo housing, three moving members (integrated wangshan/ya, gouxin and xuandao) and exactly two withdrawn pins. Follow trigger → sear → catch through the adjacent contact faces and motion arrows; dashed assembly guides align the pins with the two pivot bores. Compare the sight/catch and long trigger silhouettes against the CC0 museum reference; no comb-like row of teeth, extra spring or invented decorative writing. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "warring-states-zhou-war-chariot",
+      "method": "Asserted structural guide + AI graphite edit of original chariot",
+      "prompt": "Two stocky horses draw a small square chariot box on a centred axle and two large many-spoked wheels; one curved central pole meets a crossbar with two yoke-saddles seated on it. Count two stocky horses, one small near-square box, two large many-spoked wheels, one centred axle and one curved central pole. Follow the single pole continuously to the transverse crossbar and check both yoke-saddles are seated on it and rest over the horses’ necks. Inspect wheel/box alignment and joined harness structure; no floating yoke, breast medallion, modern breast collar or side traces. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "warring-states-qin-measure-and-slips",
+      "method": "Glyph removal ONLY: targeted AI edit of original",
+      "prompt": "Original graphite bronze capacity measure with one rectangular cavity and straight handle beside eight bamboo slips joined by two cords; all surfaces are uninscribed. Compare with the original: same cavity, rim, handle, eight strips, two cords, frayed ends, perspective and layout. Inspect every strip, the measure front, inner walls and handle at 2×: all fake glyphs are removed and surfaces remain uninscribed. Check surrounding graphite material modelling and contours are retained; this is a local glyph-removal edit, not a replacement design. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "water-marina-barrage",
+      "method": "PD/CC photograph trace + asserted nine-bay guide + AI graphite",
+      "prompt": "Marina Barrage from the sea side: nine broad steel crest gates partly lowered beneath a low deck with thin overflow, the bowed pump-building roof and grassy ramp at right, and the Singapore skyline behind. Count exactly nine broad steel crest-gate bays beneath a low continuous deck; each leaf is visible and partly lowered, with only a thin overflow. Compare the bowed roof, glazed end, open columns and planted roof ramp with the CC0/CC-BY-SA site photographs, and the skyline with the roof-view photograph. Check a long low barrage, reservoir and distant skyline: no high dam, deep spillway, tall waterfall, signage or invented lettering. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "coral-reef-zones",
+      "method": "Asserted SVG section guide + AI graphite restyle",
+      "prompt": "A graphite reef section beneath a horizontal sea surface: shallow reef flat at left, a raised wave-washed crest in the middle and a descending slope at right, separated by two dashed guides. Count three bracketed zones separated by two dashed guides; horizontal sea surface stays above the flat and crest. Follow the shallow flat, rounded wave-washed crest and continuous slope down into deeper right-hand water. Check rooted coral silhouettes, fine limestone bedding and layered pencil hatching; no floating coral or flat noise-textured block. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    },
+    {
+      "id": "plates-and-hazards-tsunami-shoaling",
+      "method": "Asserted shallow-water SVG guide + AI graphite restyle",
+      "prompt": "Graphite ocean section: low widely spaced waves over deep water become taller and closer together as the seabed rises to the right-hand coast; a dashed line marks still sea level. Follow low long deep-water waves becoming distinctly taller and closer together towards the right-hand coast. Check a continuous rising seabed, exposed dry coast and dashed still-water line; every trough remains above the seabed. Check two rightward travel arrows, deep/shallow depth comparison and layered graphite section hatching; mathematical guide asserts decreasing depth, growing amplitude and shortening wavelength. Fine graphite technical plate matching circuits-series-parallel, with layered form-following hatching and cross-hatching, varied thin slightly jittered pencil contours and 3D material shading; no flat grey vector fills or noise-texture fills. Transparent 4:3 background. Preserve all code-guide geometry/counts and original regions outside an edit. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO exposed bones outside muscles."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+[
+  {
+    "id": "coral-reef-polyp",
+    "slug": "coral-reef",
+    "chapter": "01-coral-and-partners",
+    "method": "Code geometry, oblique 90-degree wedge; curved graphite hatching and porous stone marks only.",
+    "alt": {
+      "en": "Oblique wedge cut through a hard-coral polyp and its ribbed, porous skeletal cup, with twelve upright rim tentacles, an oval mouth, descending soft column, six thin septa and a small columella.",
+      "zh": "硬珊瑚虫与有肋纹、孔隙的骨骼杯的斜切剖面：口盘边缘有十二根向上伸展的触手、椭圆小口，软体柱向杯内延伸，杯内有六片薄隔片和小中轴。"
+    },
+    "caption": {
+      "en": "A quarter wedge exposes the soft column inside the calcareous cup. Six skeletal septa project inward around a small columella; twelve tentacles rise from the surviving oral-disc rim. Enlarged general teaching model.",
+      "zh": "切去约四分之一的楔形部分，显示石灰质杯内的软体柱。六片骨骼隔片向小中轴伸出，十二根触手从保留的口盘边缘向上伸展。一般硬珊瑚的放大教学模型。"
+    },
+    "checks": [
+      "Oblique wedge continues through living column and calcareous cup; no mouth-shaped front window or separate tissue lid.",
+      "Twelve blunt, tapering tentacles rise from the surviving rim; small oval mouth; six thin radial septa stop short of the small columella.",
+      "Cup has longitudinal costae and irregular pores; tissue and skeleton are modelled by hatching, with no flat grey or noise-texture fills."
+    ]
+  },
+  {
+    "id": "monsoon-and-weather-cloud-cutaway",
+    "slug": "monsoon-and-weather",
+    "chapter": "06-thunder-and-shelter",
+    "method": "Code-drawn cumulonimbus silhouette and irregular section; scattered hydrometeors with fixed coordinates, graphite hatching and fading rain strokes.",
+    "alt": {
+      "en": "A tall cumulonimbus tower spreads into a wide anvil. An irregular cutaway shows scattered small ice plates above a faint dashed freezing-level line, varied droplets below it and soft slanting rain under the base.",
+      "zh": "高耸的积雨云塔向上铺展成宽阔云砧；不规则剖面中，淡虚线冰点层上方散布小冰片，下方散布大小不同的水滴，云底下是柔和的斜雨线。"
+    },
+    "caption": {
+      "en": "Ice plates occupy the upper section, above the dashed 0 °C level; droplets occupy the lower section. A few particles are enlarged. Rain streaks fade beneath the cloud base.",
+      "zh": "上部冰片位于虚线所示的 0 °C 层以上，下部为水滴；少量粒子已放大。云底下的雨线逐渐淡去。"
+    },
+    "checks": [
+      "Tall convective tower narrows into the broad anvil; irregular opening has no rectangular window or box walls.",
+      "Scattered un-faceted ice plates are above the freezing line; varied droplets below; no rows, grid or glass marbles.",
+      "Slanting rain is made from soft, staggered, fading graphite strokes; no icicle-shaped shafts."
+    ]
+  },
+  {
+    "id": "warring-states-tiger-tally",
+    "slug": "warring-states",
+    "chapter": "08-changping-handan",
+    "method": "Targeted edit of original graphite image with Gary Todd CC0 Du tally outline reference; deterministic mirroring of the edited half.",
+    "alt": {
+      "en": "Two matching longitudinal halves of a bronze walking-tiger tally face opposite directions, with rounded ears, a compact body, short legs, curled raised tails and blank inscription fields.",
+      "zh": "两片青铜行虎形虎符的纵向半片朝向相反，并排摆放：圆耳、紧凑躯干、短腿、翘起卷尾，铭文区留白，两片轮廓互为镜像。"
+    },
+    "caption": {
+      "en": "Matching tiger-tally halves, with the walking outline adapted from the Du tally. The inscription fields are left blank.",
+      "zh": "配对虎符半片，行虎轮廓参照杜虎符，铭文区留白。"
+    },
+    "checks": [
+      "Original graphite bronze surface retained through a targeted edit; every fake glyph removed and inscription fields blank.",
+      "Complete walking-tiger silhouette has rounded ears, thick short neck, compact body, short legs and raised curled tail.",
+      "The two halves are exact reflected copies of one contour, verified against flipped decoded pixels before export."
+    ]
+  },
+  {
+    "id": "warring-states-crossbow-trigger",
+    "slug": "warring-states",
+    "chapter": "07-alliances",
+    "method": "Code structure traced/adapted from Gary Todd CC0 mechanism photograph and the standard assembled/parts diagram; graphite hatching only.",
+    "alt": {
+      "en": "A bronze crossbow mechanism separated along its two pin axes: rectangular guo housing with two bores, a single wangshan-and-two-ya casting, a compact gouxin cam, a hanging xuandao blade and two pins.",
+      "zh": "沿两根销钉轴线分开的青铜弩机：带两个销孔的长方体郭、望山与双牙一体件、小钩心凸轮、下垂悬刀，以及两根销钉。"
+    },
+    "caption": {
+      "en": "Pulling the xuandao frees the gouxin cam, allowing the two ya teeth to drop. The parts separate along the pin axes; the blade hangs below the guo floor.",
+      "zh": "扣动悬刀使钩心脱开，双牙随之落下。各部件沿销钉轴线分开显示；悬刀下垂至郭的底部以下。"
+    },
+    "checks": [
+      "Plain rectangular guo has two pin bores; both explosion directions are parallel to the transverse pin axes, with dashed alignment guides.",
+      "Wangshan and two solid ya teeth belong to one casting; gouxin is a compact rocking cam, not a hinged connecting rod.",
+      "Xuandao descends below housing floor and aligns with the rear pin; exactly two pins, no floating off-axis fasteners or glyph-like decoration."
+    ]
+  },
+  {
+    "id": "warring-states-zhou-war-chariot",
+    "slug": "warring-states",
+    "chapter": "03-jin-and-chu",
+    "method": "Code construction adapted from Philg88 CC0 reconstruction, horse anatomy from Gary Todd CC0 Qin horse references; form-following graphite hatching only.",
+    "alt": {
+      "en": "A two-horse chariot with stocky horses, one curved central pole joining a transverse heng, two inverted-V yoke saddles above the withers, a small square box over its axle and two large many-spoked wheels.",
+      "zh": "双马战车：两匹体形敦实的马，一根弯曲的中央辕连接横衡，两副倒 V 形轭架在马的肩颈上方，小方车舆居于车轴上，两只大轮有密集辐条。"
+    },
+    "caption": {
+      "en": "One curved pole connects the box underside to the centre of the heng. Two saddle yokes rest over the horses’ withers; the axle lies beneath the box centre. Vehicle geometry follows a pre-Han reconstruction.",
+      "zh": "一根曲辕从车舆底部连到横衡中央，两副轭架在马的肩颈上；车轴位于车舆中央下方。车体结构参照先秦战车复原图。"
+    },
+    "checks": [
+      "Exactly one curved pole joins box underside to heng centre; two inverted-V yoke saddles rest above the withers, not below the chins.",
+      "Small square box sits over one centred axle; two large wheels each have twenty-eight spokes.",
+      "Two stocky horses have anatomical head, neck, barrel, knees, hocks and hooves; plain vehicle has no glyph-like ornament or invented AI connections."
+    ]
+  }
+]
