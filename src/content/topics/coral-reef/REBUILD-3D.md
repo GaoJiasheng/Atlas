@@ -156,3 +156,34 @@ No assigned item is deferred. Live browser/GPU materials, measured DOM label lay
 - `polyp-tissue` label: the glb node now carries `extras.labelPoint` (new generic engine support), the middle of a vertical mesh edge on the outer column above the cup rim, between two front tentacles. The placard shows in the ch01 and ch06 chapter views; a test checks the point lies above the rim and is the first tissue surface on the line of sight from both chapter cameras, with no cup, tentacle or mouth in the way.
 - Shelf relief: the periodic `sin` terms that made horizontal bands on the front, back and end faces are replaced by deterministic smooth value noise (fBm), and the fine pitting is isotropic. The top surface (`reef_height`) is unchanged, so colonies, crust and sand stay seated.
 - Isolated zones: each zone is closed by marching cubes of the shared rock field limited by an irregular fracture surface, so an isolated zone shows a broken rock face, not a flat wall or an open seam. Neighbours overlap by one cell each, which hides the rounded crease where a fracture face meets the outer rock when assembled. Zone bounds move by at most 0.03 m; terrain simplification is ratio 0.17 / error 0.0018, keeping the topic below its baseline triangle total (still under 350k).
+
+## Polish 2026-11-03 — group A leftover verification
+
+Verified against incoming code rather than replacing completed work:
+
+- **Presentation arrows already fixed:** four physical food-direction parts live in the `feeding-flows` layer, independently of the hidden food-web card. Existing bindings keep their direction and presence consistent with the active paths while motion is paused. The current EN/ZH arrow captions are accurate. CPU presentation/tablet views were inspected with the partner-to-coral arrow present.
+- **1024×768 already fixed:** existing `views.hudFrame` names all selectable subjects and the shared HUD solver folds the card before preserving the stage band. The existing topic regression verifies this resolution. A trial layer reduction was rejected by the named-view regression and fully reverted: every named study remains available from every chapter/beat. No engine, camera source or widget change.
+- **§9 illustration overages already fixed:** polyp **122,860 B**, reef zones **122,466 B**, both below **122,880 B / 120 KiB**; no recompression or asset edit needed.
+- **Counts unchanged:** **348,208 → 348,208** total triangles (all independent studies, before offscreen culling); 26 selectable parts / 32 total entries, 12 tentacles, 24 schematic septa, six web nodes and four relationships retained. This is a CPU inventory, not GPU draw-pass/FPS measurement.
+- **References/QA:** existing NOAA and topic source records; actual geometry, arrow bindings and authored bilingual captions. Inspected `/tmp/atlas-group-a/after/coral-tablet/` and `after/coral-present/`. Explicit CPU HUD fixtures are not live DOM measurements. No requested open code fix remains; the subsequent Claude pass performs browser acceptance as instructed.
+
+## Fix 2026-11-09
+
+- **Presentation arrows:** verified the incoming rebuild already supplies four stage arrows in `feeding-flows`, including while particles are paused. All four follow the food-web bindings, so the existing EN/ZH arrow captions remain correct in presentation mode. No caption edit was required.
+- **1024×768:** verified the incoming topic's complete subject list and existing HUD-room folding regression. Inspected the tablet fixture and presentation at 1024×768, including cinema. The web specimens and their arrows remain within the free band; no engine, camera rig, widget or stylesheet was changed.
+- **§9 figure overages:** already fixed. Polyp **122,860 B**, zones **122,466 B**, both below 122,880 B; no further image generation/recompression.
+- **Asset budget:** encoded the previously uncompressed stage GLB with meshopt, 16-bit positions and the existing high-level normal filter: **5,581,076 → 1,403,368 B**. No triangle was removed. The node-local tissue leader point is explicitly remapped through world space when quantisation changes its node transform. Updated CPU inspection and tests decode the actual distributed packet before anatomical/raycast assertions. `finish-mesh.ts` now applies this codec after generation.
+- **Counts/facts:** **348,208 → 348,208** complete/maximum conservative authored triangles; **32 → 32 entries, 26 selectable**; six web nodes, four relationships, twelve tentacles and 24 schematic septa unchanged. Part IDs, poses, simulation tables and bilingual labels remain unchanged.
+- **References:** existing NOAA/CDHC/source records and incoming rebuild; no new biological claim or third-party asset. Quantisation/compression is a delivery parameter.
+- **Visual review:** actually inspected `/tmp/atlas-group-a/fix-2026-11-09/coral-tablet/`, `coral-present/`, `coral-cinema/`; decoded polyp inspection under `/private/tmp/coral-reef-model-qa/fix-2026-11-09-*`. Studio/ACES CPU previews reproduce the engine's lighting inputs; PMREM specular, finish textures, shadows, actual DOM layout and GPU timing are not simulated. No browser or desktop action.
+- **Not done:** no assigned content/code item deferred; live GPU/browser acceptance belongs to the following Claude review.
+
+### Final gates · 2026-11-09
+
+- `pnpm check`: green, 0 errors / 0 warnings (five existing unrelated hints); frozen-source `pnpm exec tsc --noEmit` also exits 0.
+- `pnpm validate`: green, 94 topics, 0 errors / 0 warnings.
+- `pnpm run test --config /tmp/atlas-group-a/vitest-worktree.config.mts --maxWorkers=2 --testTimeout=60000 --hookTimeout=60000`: green, **275 files / 6,527 assertions**. The temporary config preserves the project's test include pattern and node environment; it only allows Vite to read the shared dependency path `/Users/gavin/work/atlas/node_modules`. The plain-config run passed 6,499 assertions but could not load the unrelated solar-system suite because that shared path was outside Vite's default read allowlist. No suite or assertion was skipped/changed to bypass that environment failure, and no project/global config was edited.
+- `pnpm build`: green, **191 static pages**. All four active source GLBs are byte-identical to their built copies and below 1,500,000 B. `git diff --check` clean.
+- Final identity audit against HEAD: same ordered part IDs/context flags, selectable counts, simulation tables and poses in all four topics. No shared engine/widget/framing/style, other topic, package/lockfile, review-queue, git-write, browser or desktop action.
+
+Logs: `/tmp/atlas-group-a/{check-2026-11-09,validate-2026-11-09,test-worktree-2026-11-09,build-2026-11-09}.log`. Final studio/ACES previews: `/tmp/atlas-group-a/fix-2026-11-09/`. These CPU fixtures are the requested offline evidence; live browser/GPU acceptance remains for the following review.

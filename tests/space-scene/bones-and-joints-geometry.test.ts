@@ -1,7 +1,8 @@
+import {readModel,meshGeometry} from '../../scripts/geo/bones-and-joints/read-model';
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import {BufferAttribute,BufferGeometry,Mesh,MeshBasicMaterial,Raycaster,Vector3} from 'three';
+import {Mesh,MeshBasicMaterial,Raycaster,Vector3} from 'three';
 import {parse} from 'yaml';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
@@ -27,39 +28,27 @@ describe('bones and joints: exact source geometry packet', () => {
     expect(meshNames).toEqual(file.parts.flatMap(p => p.mesh && !p.mesh.startsWith('polished-') ? [p.mesh] : []).sort());
     expect(new Set(meshNames).size).toBe(44);
   });
-  it('adds only the original polished cortex while retaining the audited anatomy byte-for-byte', () => {
-    expect(file.model).toBe('/models/bones-and-joints-polished.glb');
-    const copy=readFileSync('public/models/bones-and-joints-polished.glb');
-    const length=copy.readUInt32LE(12), json=JSON.parse(copy.subarray(20,20+length).toString('utf8'));
-    expect(json.nodes.slice(0,gltf.nodes.length)).toEqual(gltf.nodes);
-    expect(json.meshes.slice(0,gltf.meshes.length)).toEqual(gltf.meshes);
-    expect(json.accessors.slice(0,gltf.accessors.length)).toEqual(gltf.accessors);
-    const sourceBinary=28+glb.readUInt32LE(12),copyBinary=28+length;
-    expect(copy.subarray(copyBinary,copyBinary+glb.readUInt32LE(sourceBinary-8)).equals(glb.subarray(sourceBinary))).toBe(true);
-    const added=json.nodes.filter((n:{name:string})=>n.name==='polished-cortex');
-    expect(added).toHaveLength(1);
-    expect(added[0].translation).toEqual([2,0,0]);
-    const mesh=json.meshes[added[0].mesh].primitives[0];
-    expect(json.accessors[mesh.indices].count/3).toBeLessThan(35_000);
-    // At midshaft the coronal window is open: a ray reaches the inner
-    // posterior cortex, rather than a slab across the marrow cavity.
-    const buffer=copy.subarray(copyBinary);
-    const array=(id:number)=>{const a=json.accessors[id],v=json.bufferViews[a.bufferView];
-      const chunk=Uint8Array.from(buffer.subarray(v.byteOffset,v.byteOffset+v.byteLength)).buffer;
-      return a.componentType===5125?new Uint32Array(chunk):a.componentType===5123?new Uint16Array(chunk):a.componentType===5122?new Int16Array(chunk):new Float32Array(chunk);};
-    const geometry=new BufferGeometry().setAttribute('position',new BufferAttribute(Float32Array.from(array(mesh.attributes.POSITION),(v,i)=>v*added[0].scale[i%3]),3))
-      .setIndex(new BufferAttribute(new Uint32Array(array(mesh.indices)),1));
-    const material=new MeshBasicMaterial(), specimen=new Mesh(geometry,material);
-    specimen.updateMatrixWorld(true);
+  it('ships a measured delivery codec while retaining the untouched source archive', async () => {
+    const bytes=readFileSync('public'+file.model!);
+    const audit=json('src/content/topics/bones-and-joints/authoring/delivery-codec-audit.json');
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(audit.deliverySha256);
+    expect(bytes.length).toBeLessThanOrEqual(1_500_000);
+    expect(audit.parts).toHaveLength(53);
+    for(const p of audit.parts){
+      const cap=p.name==='skin-outline'?.0032:p.name==='biceps-l'?.0015:.001;
+      expect(Number.isFinite(p.maxSampledSurfaceErrorM)).toBe(true);
+      expect(p.maxSampledSurfaceErrorM,p.name).toBeLessThan(cap);
+      if(p.name.startsWith('polished-')){expect(p.after).toBe(p.before);expect(p.maxSampledSurfaceErrorM).toBeLessThan(.00003);}
+    }
+    const decoded=await readModel('public'+file.model!);
+    const geometry=meshGeometry(decoded.getRoot().listNodes().find(n=>n.getName()==='polished-cortex')!,false);
+    const specimen=new Mesh(geometry,new MeshBasicMaterial());specimen.updateMatrixWorld(true);
     const hits=new Raycaster(new Vector3(-.012,.02,.1),new Vector3(0,0,-1)).intersectObject(specimen);
-    expect(hits.length).toBeGreaterThan(0);
     expect(hits[0]!.point.z).toBeLessThan(-.012);
     const portal=new Raycaster(new Vector3(.06,-.042,-.0085),new Vector3(-1,0,0)).intersectObject(specimen);
     const nearby=new Raycaster(new Vector3(.06,-.058,-.0085),new Vector3(-1,0,0)).intersectObject(specimen);
-    expect(portal[0]!.point.x).toBeLessThan(-.016);
-    expect(nearby[0]!.point.x).toBeGreaterThan(-.004);
-    geometry.dispose();material.dispose();
-    expect(copy.length).toBeLessThanOrEqual(4_000_000);
+    expect(portal[0]!.point.x).toBeLessThan(-.016);expect(nearby[0]!.point.x).toBeGreaterThan(-.004);
+    geometry.dispose();
     expect(file.parts.filter(p=>!p.context)).toHaveLength(61);
   });
   it('keeps both uncounted tissue skins in the parent stage’s authored visibility states',()=>{

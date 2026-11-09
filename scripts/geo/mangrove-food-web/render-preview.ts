@@ -31,7 +31,7 @@ const shots: Record<string,{ids?:string[];eye:[number,number,number];target:[num
  fishSide:{ids:['giant-mudskipper'],eye:[.31,.11,.58],target:[.30,.06,.145],fov:36},
  heron:{ids:['heron'],eye:[.99,.54,.84],target:[.61,.27,-.02],fov:39},
  crabs:{ids:['fiddler-crabs'],eye:[.11,.18,.42],target:[-.10,.04,.15],fov:39},
- climbing:{ids:['tree-crabs'],eye:[.43,.34,.14],target:[.19,.16,-.19],fov:36},
+ climbing:{ids:['tree-crabs','api-trunk'],eye:[-.17,.31,.19],target:[-.445,.16,-.10],fov:36},
  mudskipper:{ids:['giant-mudskipper'],eye:[.57,.21,.55],target:[.30,.06,.145],fov:36},
 };
 const light=new Vector3(-.5,1,.65).normalize();

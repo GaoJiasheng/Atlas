@@ -7,6 +7,18 @@ function digits(primitives: P[]) {
 }
 const distance = (a: V, b: V) => Math.hypot(...a.map((n, i) => n - b[i]!));
 describe('frog observation anatomy', () => {
+  it('keeps the shrinking tail dorsal, axial and free of leg-like joints or digits', () => {
+    const adult=frog(),young=frog(true);
+    expect(young).toHaveLength(adult.length+1);
+    const tail=young.at(-1)!;
+    expect(tail.kind).toBe('sweep');
+    const path=tail.path as V[],radii=tail.radius as number[];
+    expect(path.every(p=>p[1]>=.275&&Math.abs(p[2])<=.003)).toBe(true);
+    expect(path.at(-1)![0]-path[0]![0]).toBeLessThan(.28);
+    expect(path.at(-1)![1]).toBeGreaterThan(path[0]![1]);
+    for(let i=1;i<radii.length;i++)expect(radii[i]).toBeLessThan(radii[i-1]!);
+    expect(digits(young)).toHaveLength(18);
+  });
   it('preserves four bare forefingers and five separately capped, webbed hind toes on each side', () => {
     for (const stage of [frog(), frog(true)]) {
       expect(stage.length).toBeLessThanOrEqual(33);

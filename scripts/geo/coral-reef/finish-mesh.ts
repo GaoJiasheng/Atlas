@@ -1,4 +1,5 @@
 /** Error-bounded offline mesh reduction; no runtime dependencies beyond GLB. */
+import {compressModel} from './compress-model';
 import { NodeIO } from '@gltf-transform/core';
 import { dedup, simplifyPrimitive, weld } from '@gltf-transform/functions';
 import { MeshoptSimplifier } from 'meshoptimizer';
@@ -22,3 +23,5 @@ for (const mesh of doc.getRoot().listMeshes()) {
 await doc.transform(dedup());
 await io.write(path,doc);
 console.log(`Coral mesh finish: ${before} -> ${count()} triangles`);
+
+await compressModel(path);

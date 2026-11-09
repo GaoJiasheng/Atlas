@@ -1,4 +1,5 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import {readModel} from '../scripts/geo/coral-reef/read-model';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
@@ -9,7 +10,7 @@ import { simEffects } from '../src/engines/space-scene/lib/sim/bind';
 import { resolveAllPartDisplays } from '../src/engines/space-scene/lib/visibility';
 import type { SimValues } from '../src/engines/space-scene/sim-schema';
 import { solveHudRoom } from '../src/engines/core/hud-room';
-import { BufferGeometry, DoubleSide, Euler, Float32BufferAttribute, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Vector3 } from 'three';
+import { BufferGeometry, DoubleSide, Euler, Mesh, MeshBasicMaterial, PerspectiveCamera, Raycaster, Vector3 } from 'three';
 import { partPieces } from '../src/engines/space-scene/stages/model3d/geometry';
 import { partBounds } from '../src/engines/space-scene/lib/parts';
 import { fitCameraToHud, type FrameBox } from '../src/engines/space-scene/lib/hud-framing';
@@ -29,31 +30,11 @@ const at = (chapter: string, beat: number) => {
   return resolveSimValues(sim, { ...c.state.sim.set, ...c.state.beats[beat - 1].sim?.set });
 };
 
-/** Read the original local GLB directly: anatomical assertions use the shipped mesh. */
-function sculptGeometry(id: string): BufferGeometry {
-  const data = readFileSync(join(import.meta.dirname, '../public', file.model!));
-  const jsonLength = data.readUInt32LE(12);
-  const gltf = JSON.parse(data.subarray(20, 20 + jsonLength).toString());
-  const binaryOffset = 20 + jsonLength + 8;
-  const node = gltf.nodes.find((n: { name: string }) => n.name === id);
-  if (!node) throw new Error(`Missing sculpted node: ${id}`);
-  const primitive = gltf.meshes[node.mesh].primitives[0];
-  const floats = (index: number) => {
-    const a = gltf.accessors[index], view = gltf.bufferViews[a.bufferView];
-    const offset = binaryOffset + (view.byteOffset ?? 0) + (a.byteOffset ?? 0);
-    // NodeIO writes interleaved POSITION/NORMAL buffers; each vertex may
-    // occupy more than its position's twelve bytes.
-    const stride = view.byteStride ?? 12;
-    return Array.from({ length: a.count * 3 }, (_, i) => data.readFloatLE(offset + Math.floor(i / 3) * stride + (i % 3) * 4));
-  };
-  const a = gltf.accessors[primitive.indices], view = gltf.bufferViews[a.bufferView];
-  const offset = binaryOffset + (view.byteOffset ?? 0) + (a.byteOffset ?? 0);
-  const geometry = new BufferGeometry();
-  geometry.setAttribute('position', new Float32BufferAttribute(floats(primitive.attributes.POSITION), 3));
-  const indexBytes = a.componentType === 5125 ? 4 : a.componentType === 5123 ? 2 : 1;
-  geometry.setIndex(Array.from({ length: a.count }, (_, i) => data.readUIntLE(offset + i * indexBytes, indexBytes)));
-  geometry.computeBoundingBox();
-  return geometry;
+const decoded=await readModel(join(import.meta.dirname,'../public',file.model!));
+/** Assertions exercise the actual decoded stage surfaces, including codec transforms. */
+function sculptGeometry(id:string):BufferGeometry {
+ const p=decoded.meshes.get(id)?.[0];if(!p)throw Error(`Missing sculpted node: ${id}`);
+ const g=p.geometry.clone().applyMatrix4(p.matrix);g.computeBoundingBox();return g;
 }
 
 // Independent curriculum graph, deliberately not read from the table or its foodWeb metadata.
@@ -256,6 +237,7 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(file.parts.filter((p) => !p.context)).toHaveLength(26);
     expect(file.parts.filter((p) => p.context)).toHaveLength(6);
     expect(file.parts).toHaveLength(32);
+    expect(statSync(join(import.meta.dirname,'../public',file.model!)).size).toBeLessThanOrEqual(1_500_000);
     expect(file.views.hudFrame?.parts).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id));
     const indexed = new Set<string>(chapters.flatMap((c) => c.state.index.parts));
     expect([...indexed].sort()).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id).sort());
@@ -346,9 +328,7 @@ describe('coral-reef: finite model and independent science-content oracle', () =
   });
 
   it('ends the living-tissue leader on tissue above the opaque cup, visible from both tissue chapters', () => {
-    const data = readFileSync(join(import.meta.dirname, '../public', file.model!));
-    const gltf = JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString());
-    const point = new Vector3(...gltf.nodes.find((n: { name: string }) => n.name === 'polyp-tissue').extras.labelPoint);
+    const point=decoded.labelPoints.get('polyp-tissue')!.clone();
     const tissue = sculptGeometry('polyp-tissue');
     const position = tissue.getAttribute('position');
     let near = Infinity;

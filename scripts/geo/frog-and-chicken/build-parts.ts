@@ -195,7 +195,7 @@ const data = {
   ],
   flows: [], animations: [], poses,
   presets: editorial.presets,
-  views: { assembled: { camera: { position: [10, 10, 14], target: [0, .4, 0], fov: 32 } }, cover: { position: [8, 9, 14], target: [0, .5, .6], fov: 32 }, shadows: 'contact', section: { plane: 'xz' } },
+  views: { assembled: { camera: { position: [10, 10, 14], target: [0, .4, 0], fov: 32 } }, cover: { position: [8, 9, 14], target: [0, .5, .6], fov: 32 }, shadows: 'contact', section: { plane: 'xz' }, hudFrame: { parts: parts.filter(p => !p.context && !String(p.id).includes('marker') && !String(p.id).includes('next-generation')).map(p => String(p.id)), primary: { part: 'frog-froglet', minRadiusPx: 32 } } },
   spec: editorial.spec,
   sim: editorial.sim,
 };

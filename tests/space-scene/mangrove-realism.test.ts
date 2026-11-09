@@ -1,3 +1,4 @@
+import {statSync} from 'node:fs';
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
@@ -8,12 +9,37 @@ import { buildParts } from '../../scripts/geo/mangrove-food-web/build-parts';
 import { partsFileBase } from '../../src/engines/space-scene/schema';
 import { partPrimitives } from '../../src/engines/space-scene/lib/parts';
 import { geometryBounds, geometryPieces } from '../../scripts/geo/mangrove-food-web/geometry';
-import { treeStudies } from '../../scripts/geo/mangrove-food-web/tree-meshes';
-import { Vector3 } from 'three';
+import { treeMeshes, treeStudies } from '../../scripts/geo/mangrove-food-web/tree-meshes';
+import { DoubleSide, Mesh, MeshBasicMaterial, Raycaster, Vector3 } from 'three';
 const data=partsFileBase.parse(buildParts());
 const by=(id:string)=>data.parts.find(p=>p.id===id)!;
 
 describe('mangrove realism and geometry budget',()=>{
+ it('seats all eight climbing feet in the surviving Api-api bark at both tide heights',()=>{
+  const meshes=treeMeshes(),wood=meshes.get('api-trunk')!,material=new MeshBasicMaterial({side:DoubleSide}),trunk=new Mesh(wood,material);
+  trunk.updateMatrixWorld(true);
+  const p=by('tree-crabs');
+  for(const rise of [0,.16])for(const leg of p.extra!.slice(0,8)){
+   if(leg.kind!=='sweep')throw Error('Walking leg required');
+   const tip=new Vector3(...leg.path.at(-1)!).add(new Vector3(...leg.at));tip.y+=rise;
+   const ray=new Raycaster(new Vector3(tip.x,tip.y,.1),new Vector3(0,0,-1));
+   const hit=ray.intersectObject(trunk)[0];
+   expect(hit,'foot ray must meet actual trunk mesh').toBeDefined();
+   expect(tip.z-hit!.point.z).toBeLessThan(.004);
+   expect(tip.z-hit!.point.z).toBeGreaterThan(-.024);
+  }
+  material.dispose();for(const g of meshes.values())g.dispose();
+ });
+ it('opens the cheek onto an actual chamber while keeping the muzzle intact',()=>{
+  const g=treeMeshes().get('gill-inset')!,material=new MeshBasicMaterial(),mesh=new Mesh(g,material);mesh.updateMatrixWorld(true);
+  const chamber=new Raycaster(new Vector3(.992,.174,.45),new Vector3(0,0,-1)).intersectObject(mesh);
+  const muzzle=new Raycaster(new Vector3(1.135,.168,.45),new Vector3(0,0,-1)).intersectObject(mesh);
+  expect(chamber[0]!.point.z).toBeLessThan(.29);
+  expect(muzzle[0]!.point.z).toBeGreaterThan(.29);
+  expect(g.hasAttribute('color')).toBe(true);
+  expect(statSync('public/models/mangrove-food-web.glb').size).toBeLessThanOrEqual(1_500_000);
+  g.dispose();material.dispose();
+ });
  it('uses irregular tree crowns with 336 individual curled elliptic leaves',()=>{
   for(const id of ['api-tree','bakau-tree'] as const) {
    const p=by(id),study=treeStudies[id];
@@ -91,14 +117,14 @@ describe('mangrove realism and geometry budget',()=>{
     g.dispose();
    }
   }
-  expect(triangles).toBeLessThanOrEqual(250_000);
+  expect(triangles).toBeLessThanOrEqual(350_000);
   expect(calls).toBeLessThan(100);
  });
- it('ships the same five original mesh surfaces inspected in the CPU audit',async()=>{
+ it('ships the same original mesh surfaces inspected in the CPU audit',async()=>{
   await MeshoptDecoder.ready;
   const doc=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read(resolve('public/models/mangrove-food-web.glb'));
   expect(doc.getRoot().getAsset().copyright).toContain('Original Atlas');
-  expect(doc.getRoot().listNodes().map(n=>n.getName()).sort()).toEqual(['api-tree','bakau-tree','api-trunk','bakau-trunk','api-lateral','api-pencil','bakau-prop'].sort());
+  expect(doc.getRoot().listNodes().map(n=>n.getName()).sort()).toEqual(['api-tree','bakau-tree','api-trunk','bakau-trunk','api-lateral','api-pencil','bakau-prop','gill-inset'].sort());
   for(const node of doc.getRoot().listNodes()){
    const expected=geometryPieces(by(node.getName()));
    const triangles=expected.reduce((n,p)=>n+(p.geometry.index?.count??p.geometry.getAttribute('position').count)/3,0);

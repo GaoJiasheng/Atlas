@@ -72,3 +72,30 @@ Trim (no visible loss in side-by-side CPU previews and browser shots):
 | Full inventory | 659,552 | 336,371 |
 
 Hardware GL (Apple M5 Max, ANGLE Metal, 1920×1080, camera easing continuously): 60 fps on every chapter before and after. Software GL (SwiftShader) on the Background chapter, with the machine at load ≈150: main 0.8–0.9 frames/s at 80k triangles, this branch 0.3–0.4 frames/s at 224k triangles. The software fallback is about 2.5× slower than main, from more triangles and more draw calls (65 vs 36).
+
+## Polish 2026-11-03 — group A leftover acceptance
+
+- **02-3 tail:** a short, dorsally attached, laterally compressed remnant replaces the low, laterally drifting tail. It tapers continuously along the body midline above the hind-limb junction; no joint, foot or extra digit. Root/endpoint heights are .275/.315 in specimen coordinates. Reference: Viridiflavus's common-frog photograph (CC BY-SA 3.0; inspected, not distributed; `data/SOURCES.md`). The comparison cast is regenerated from the same froglet.
+- **1024×768:** opt into the existing subject/HUD fitter using the selectable biological specimens. Tray overviews look straight across the frog tray. The tail-inspection beat hides the other frog stages, pointer, generation link and tray and uses a rear-quarter camera. Other chapter/beat content, labels, teaching numbers, simulation tables, 24 part IDs and 13 existing poses are unchanged. `author-views.ts` reproduces only these camera/hide edits while preserving bilingual prose and YAML aliases.
+- **Counts:** inventory **336,371 → 336,789**; conservative maximum authored state **225,814 → 226,122** triangles; froglet **27,672 → 27,980**. The comparison-row increase is 110 triangles. Counts include offscreen and simulation-hidden geometry and exclude rendering passes.
+- **Visual QA:** `/tmp/atlas-group-a/after/frog/` (quarter, dorsal and rear), `after/frog-tablet/` (02-3) and `after/frog-present/`. Before: `before/frog/`. Images were actually viewed. The topic-owned `preview.ts` uses engine tessellation, locally decoded meshopt GLBs, depth testing, smooth normals and explicit HUD fixtures; it also correctly bakes anatomy rest skins for the other group A topics. These are CPU diagnostics, not browser/PBR/HUD measurements.
+- **Other §8 items:** the existing EN/ZH prose already qualifies typical chicken incubation, leaves Cinnamon Bush Frog in English and does not claim the candidate Chinese names are MOE-approved. Those fact boundaries and published names are retained. No requested model fix deferred; browser acceptance is left to the following Claude pass, as instructed.
+
+## Fix 2026-11-09
+
+- **02-3 tail:** verified and retained the partial pass's short dorsal, midline, laterally compressed remnant above the vent, with a broad embedded root and continuous taper. It has no limb bend, foot or digits. The comparison cast uses the same froglet. Reference: Viridiflavus's common-frog photograph, CC BY-SA 3.0, actually inspected; scope and URL remain in `data/SOURCES.md`.
+- **1024×768 tray:** retained the straight-on tray overview camera and the existing HUD subject fitter opt-in. Beat 02-3 isolates the froglet and uses a rear/side view that separates its remnant from both hind limbs. The five-stage overview was inspected with the complete specimens in frame. `author-views.ts` reproduces the chapter/preset edits while preserving bilingual prose and YAML aliases.
+- **§8 wording:** incubation is already qualified as typical, Cinnamon Bush Frog remains in English, and candidate Chinese terminology is not presented as MOE-approved. No new factual/editorial claim was introduced.
+- **Counts:** inventory **336,371 → 336,789**, conservative maximum authored state **225,814 → 226,122** triangles; froglet **27,672 → 27,980**; comparison row +110. **24 → 24 IDs, 21 selectable**, and 13 existing poses unchanged. GLB **663,120 → 664,016 B**. Simulation tables and teaching counts unchanged. No GPU pass/FPS claim.
+- **Visual review:** actually inspected `/tmp/atlas-group-a/fix-2026-11-09/frog-close/` (dorsal/rear), `frog-tablet/`, `frog-present/` and `frog-overview/`. Updated the topic-owned CPU preview to use the engine's key/fill/rim/hemisphere inputs, diffuse sampled RoomEnvironment, material families, exposure and exact Three r180 ACES/sRGB. These fixtures do not reproduce PMREM specular, finish textures, shadows or measured DOM label layout.
+- **Not done:** no assigned content/code item deferred. Browser/GPU acceptance remains with the following Claude review, per the explicit no-browser instruction.
+
+### Final gates · 2026-11-09
+
+- `pnpm check`: green, 0 errors / 0 warnings (five existing unrelated hints); frozen-source `pnpm exec tsc --noEmit` also exits 0.
+- `pnpm validate`: green, 94 topics, 0 errors / 0 warnings.
+- `pnpm run test --config /tmp/atlas-group-a/vitest-worktree.config.mts --maxWorkers=2 --testTimeout=60000 --hookTimeout=60000`: green, **275 files / 6,527 assertions**. The temporary config preserves the project's test include pattern and node environment; it only allows Vite to read the shared dependency path `/Users/gavin/work/atlas/node_modules`. The plain-config run passed 6,499 assertions but could not load the unrelated solar-system suite because that shared path was outside Vite's default read allowlist. No suite or assertion was skipped/changed to bypass that environment failure, and no project/global config was edited.
+- `pnpm build`: green, **191 static pages**. All four active source GLBs are byte-identical to their built copies and below 1,500,000 B. `git diff --check` clean.
+- Final identity audit against HEAD: same ordered part IDs/context flags, selectable counts, simulation tables and poses in all four topics. No shared engine/widget/framing/style, other topic, package/lockfile, review-queue, git-write, browser or desktop action.
+
+Logs: `/tmp/atlas-group-a/{check-2026-11-09,validate-2026-11-09,test-worktree-2026-11-09,build-2026-11-09}.log`. Final studio/ACES previews: `/tmp/atlas-group-a/fix-2026-11-09/`. These CPU fixtures are the requested offline evidence; live browser/GPU acceptance remains for the following review.

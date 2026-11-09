@@ -24,6 +24,18 @@ const evaluate = (values: SimValues) => evaluateSim(sim, resolveSimValues(sim, v
 const oracle = JSON.parse(readFileSync(join(import.meta.dirname, 'fixtures/mangrove-table-oracle.json'), 'utf8')) as { input: SimValues; expected: Record<string, number | string> }[];
 
 describe('mangrove-food-web: sourced finite table', () => {
+  it('keeps the climbing specimen at the surviving Api-api when Bakau is removed, at either tide',()=>{
+    for(const tide of ['low','high']){
+      const values=resolveSimValues(sim,{remove:'n-mangrove',tide});
+      const fx=simEffects(sim,values,evaluateSim(sim,values));
+      expect(fx.hidden.has('bakau-trunk')).toBe(true);
+      expect(fx.hidden.has('api-trunk')).toBe(false);
+      expect(fx.hidden.has('tree-crabs')).toBe(false);
+      const crab=file.parts.find(p=>p.id==='tree-crabs')!;
+      const anchor=anchorPoint(crab);
+      expect(crab.primitive!.at[0]+anchor[0]!).toBeLessThan(-.4);
+    }
+  });
   it.each(oracle)('matches preparation independently audited case $input', ({ input, expected }) => {
     const outputs = evaluate(input);
     for (const [key, value] of Object.entries(expected)) expect(outputs[key], key).toEqual(value);

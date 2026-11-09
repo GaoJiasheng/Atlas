@@ -1,17 +1,14 @@
+import {readModel,meshGeometry} from '../../scripts/geo/bones-and-joints/read-model';
 import {readFileSync} from 'node:fs';
 import {describe,expect,it} from 'vitest';
-import {BufferAttribute,BufferGeometry,Mesh,MeshBasicMaterial,Raycaster,Vector3} from 'three';
+import {Mesh,MeshBasicMaterial,Raycaster,Vector3} from 'three';
 import {partsFile} from '../../src/engines/space-scene/schema';
 import {resolveAllPartDisplays} from '../../src/engines/space-scene/lib/visibility';
 const data=JSON.parse(readFileSync('src/content/topics/bones-and-joints/data/parts.json','utf8'));
-const file=partsFile.parse(data),bytes=readFileSync('public'+file.model!);
-const len=bytes.readUInt32LE(12),doc=JSON.parse(bytes.subarray(20,20+len).toString()),bin=bytes.subarray(28+len);
+const file=partsFile.parse(data),decoded=await readModel('public'+file.model!);
 function mesh(name:string){
- const node=doc.nodes.find((n:{name:string})=>n.name===name),prim=doc.meshes[node.mesh].primitives[0];
- const array=(id:number)=>{const a=doc.accessors[id],v=doc.bufferViews[a.bufferView];const b=Uint8Array.from(bin.subarray(v.byteOffset,v.byteOffset+v.byteLength)).buffer;
- return a.componentType===5122?new Int16Array(b):a.componentType===5123?new Uint16Array(b):new Uint32Array(b);};
- const g=new BufferGeometry().setAttribute('position',new BufferAttribute(Float32Array.from(array(prim.attributes.POSITION),(v,i)=>v*node.scale[i%3]),3)).setIndex(Array.from(array(prim.indices)));
- g.computeVertexNormals();const m=new Mesh(g,new MeshBasicMaterial());m.updateMatrixWorld();return m;
+ const node=decoded.getRoot().listNodes().find(n=>n.getName()===name)!;
+ const g=meshGeometry(node,false);g.computeVertexNormals();const m=new Mesh(g,new MeshBasicMaterial());m.updateMatrixWorld();return m;
 }
 const rays=(m:Mesh,origin:number[],direction:number[])=>new Raycaster(new Vector3(...origin),new Vector3(...direction).normalize()).intersectObject(m);
 describe('bones and joints round 2',()=>{

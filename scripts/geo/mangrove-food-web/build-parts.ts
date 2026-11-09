@@ -30,7 +30,7 @@ function crab(at: V3, male: boolean, vertical = false) {
   const extra: Prim[]=[];
   for (const side of [-1,1]) for (const z of [-.027,-.010,.009,.026]) {
     const bend=z*1.8;
-    const joints: V3[]=[[side*.032,.028,z],[side*.058,.042,bend],[side*.076,.040,bend+.008],[side*(vertical?.035:.094),.017,bend+.018],[side*(vertical?.024:.104),.002,bend+.026]];
+    const joints: V3[]=[[side*.032,.028,z],[side*.058,.042,bend],[side*.076,.040,bend+.008],[side*(vertical?.021:.094),.017,bend+.018],[side*(vertical?.008:.104),.002,bend+.026]];
     const radii=[.0038,.0048,.0036,.0023,.0006];
     const path:V3[]=[],sizes:number[]=[];
     joints.forEach((joint,j)=>{
@@ -163,6 +163,33 @@ function burrowLip():Prim {
   return {kind:'sweep',at:[-.26,.0050,.145],path,radius,section:{flat:.45},radial:16,segments:40,caps:'flat',color:'abrasive',tint:'token:neutral'} as Prim;
 }
 
+/** Enlarged partial head section, facing right like the main mudskipper.
+ * The removed near cheek exposes an inflated, irregular opercular chamber;
+ * only a sample of branchial folds is shown, not a complete arch inventory.
+ */
+export function gillDetails() {
+  const at:V3=[1.04,.17,.27],pt=(p:V3)=>r3(add(at,p));
+  const extra:Prim[]=[];
+  for(const side of [-1,1])extra.push({...oval(pt([.057,.054,side*.035]),.006,[1.2,1,.5],{color:'eye',tint:'token:ink'}),segments:16});
+  for(let arch=0;arch<3;arch++) {
+    const x=.004-arch*.021,r=.035-arch*.003;
+    const archPoint=(t:number):V3=>pt([x+.015*Math.sin(t*Math.PI),-.004+r*1.13*Math.cos(t*Math.PI),-.014+.018*Math.sin(t*Math.PI)]);
+    const arc=Array.from({length:13},(_,i)=>archPoint(i/12));
+    extra.push({...line(arc,arc.map((_,i)=>i===0||i===12?.0010:.0031),{color:'tissue',tint:'token:muscle-1'}),radial:16,segments:40});
+    // Unequal, stout, laterally compressed filaments, attached along a curved
+    // arch. Narrow clefts between rounded lobes replace isolated Y-shaped
+    // sticks. These are selected enlarged folds, not a complete inventory.
+    for(const [j,t] of [.12,.245,.375,.50,.625,.755,.875].entries()) {
+      const b=archPoint(t+(arch-1)*.012),len=(.010+.006*Math.sin(t*Math.PI))*(1+.13*Math.sin(j*2.3+arch)),thick=.0022+.0006*Math.sin(t*Math.PI);
+      const path:V3[]=[b,[b[0]-len*.30,b[1]-.0007,b[2]+.003],[b[0]-len*.63,b[1]-.0011,b[2]+.006],[b[0]-len*.91,b[1]-.0002,b[2]+.0068],[b[0]-len,b[1]+.0011,b[2]+.0056]];
+      extra.push({...line(path,[thick*.72,thick,thick*1.16,thick*.85,thick*.015],{color:'tissue',tint:'token:muscle-1'}),section:{flat:.68},up:[0,1,0],radial:20,segments:20,caps:'flat'});
+      const fork=path[2]!;
+      extra.push({...line([fork,[fork[0]-len*.20,fork[1]+.0032,fork[2]+.002],[fork[0]-len*.32,fork[1]+.0051,fork[2]+.0025]],[thick*.70,thick*.54,.00003],{color:'tissue',tint:'token:muscle-1'}),section:{flat:.74},radial:16,segments:12,caps:'flat'});
+    }
+  }
+  return extra;
+}
+
 export function buildParts() {
   const parts: unknown[] = [];
   // A gently eroded bank edge; rear and specimen-cut faces remain planar.
@@ -186,7 +213,7 @@ export function buildParts() {
   addPart('fallen-leaves',bi('Fallen leaf material','落叶物质'),'mangroves',bi("Provides food after leaves fall.","叶片掉落后仍能提供食物。"),bi("Some mangrove crabs eat fallen leaves and break them into smaller pieces. Dead leaves still contain food energy. [S6, S24]\n\nOld leaves remain when you remove the continuing leaf supply. The calculation leaves out their decay rate. [S30]","有些红树林蟹吃落叶，把叶弄成较小的碎片。死叶仍含有食物中的能量。[S6, S24]\n\n移走持续的叶片供应后，旧落叶仍会保留。计算没有包括它们的分解速率。[S30]"),{primitive:deadLeaves[0]!,extra:deadLeaves.slice(1)});
   addPart('algae-patch',bi('Surface algae','泥面藻类'),'closeups',bi('Makes food using sunlight.','利用阳光制造食物。'),bi("Algae use sunlight to make food. Some fiddler crabs and climbing crabs eat algae, as recorded in different observations. [S7, S18, S24]\n\nThe patch represents algae on the mud surface. [S30]","藻类利用阳光制造食物。不同观察记录到，一些招潮蟹和攀爬蟹类会吃藻类。[S7, S18, S24]\n\n这个斑块代表泥面上的藻类。[S30]"),{primitive:oval([.055,.008,.13],.08,[1.5,.04,.65],foliage)});
   addPart('fiddler-crabs',bi('Fiddler crabs','招潮蟹'),'animals',bi("Feeds with a small claw; the male displays a large claw.","用小螯取食；雄蟹用大螯展示。"),bi("A male fiddler crab has one enlarged claw and a smaller feeding claw. It also has eye stalks and four pairs of walking legs. [S5, S32]\n\nAt high tide, it hides in its burrow. The single crab shape represents the group. [S5, S30]","雄招潮蟹有一只大螯和一只取食小螯，还有眼柄和四对步足。[S5, S32]\n\n高潮时，它藏进洞里。图中用一只蟹代表这一组生物。[S5, S30]"),crab([-.10,0,.13],true));
-  addPart('tree-crabs',bi('Climbing crabs','攀爬蟹类'),'animals',bi("Eats leaf material and climbs above rising water.","吃叶片，也会爬到涨水水面上方。"),bi("This group brings together several climbing-crab kinds. Some eat leaves; others graze on algae. The leaf-feeding record comes from Sungei Buloh. These records do not give one Episesarma species a fixed diet of both foods. [S6, S7]\n\nThe crab has four pairs of walking legs and two claws. At high water, it moves up the Bakau trunk. [S32, S30]","这一组包含几类攀爬蟹。有些吃叶片，有些刮食藻类。叶片取食的记录来自双溪布洛。这些记录不表示同一种 Episesarma 固定吃这两种食物。[S6, S7]\n\n蟹有四对步足和一对螯。高水位时，它沿 Bakau 树干向上移。[S32, S30]"),crab([.19,.12,-.226],false,true));
+  addPart('tree-crabs',bi('Climbing crabs','攀爬蟹类'),'animals',bi("Eats leaf material and climbs above rising water.","吃叶片，也会爬到涨水水面上方。"),bi("This group brings together several climbing-crab kinds. Some eat leaves; others graze on algae. The leaf-feeding record comes from Sungei Buloh. These records do not give one Episesarma species a fixed diet of both foods. [S6, S7]\n\nThe crab has four pairs of walking legs and two claws. In this display, high water moves it up the neighbouring Api-api trunk. That trunk remains when the Bakau leaf-supply node is removed, so the crab keeps its climbing support. This placement is illustrative. [S32, S30]","这一组包含几类攀爬蟹。有些吃叶片，有些刮食藻类。叶片取食的记录来自双溪布洛。这些记录不表示同一种 Episesarma 固定吃这两种食物。[S6, S7]\n\n蟹有四对步足和一对螯。本展示在高水位时把蟹沿旁边 Api-api 的树干上移。移走 Bakau 叶片供应节点后，这根树干仍在，蟹仍有攀附处。这是示意摆位。[S32, S30]"),crab([-.445,.12,-.110],false,true));
   addPart('giant-mudskipper',bi('Giant mudskipper','弹涂鱼'),'animals',bi("Moves across mud with fleshy pectoral fins.","用肉质胸鳍在泥面移动。"),bi("Giant mudskippers are fish. Their modified gill chambers and skin help them breathe out of water. Fleshy pectoral fins help them move over mud. [S4]\n\nGeneral guides list crabs as food. Local diet samples differ, so the crab-to-fish arrows show possible feeding relationships. [S4, S13, S31]","弹涂鱼是鱼。特化的鳃腔和皮肤帮助它离水呼吸，肉质胸鳍帮助它在泥面移动。[S4]\n\n一般指南把蟹列为食物，当地食物样本却有差异。因此，蟹到鱼的箭头表示可能的取食关系。[S4, S13, S31]"),fishModel([.30,.031,.145]));
   addPart('heron',bi('Heron','鹭'),'animals',bi("Catches food with a long neck and bill.","借助长颈和长喙捕食。"),bi("Herons have long necks and bills. They eat fish and crustaceans. NParks lists herons among the giant mudskipper’s predators. [S4, S29]\n\nThe two-legged bird represents herons as a group. [S30]","鹭有长颈和长喙，吃鱼和甲壳类。NParks 把鹭列为弹涂鱼的捕食者。[S4, S29]\n\n图中这只两腿的鸟代表鹭类。[S30]"),heronModel());
   addPart('small-fish',bi('Other small fish','其他小鱼'),'animals',bi("Provides another possible food for larger animals.","为较大的动物提供另一种可能的食物。"),bi("Herons and giant mudskippers can eat small fish. Real animals may have more food choices than a short food web shows. [S4, S29]\n\nThis small fish lies outside the food-web calculation. [S30]","鹭和弹涂鱼都可能吃小鱼。真实动物的食物选择可能比简短食物网上显示的更多。[S4, S29]\n\n这条小鱼没有加入食物网计算。[S30]"),fishModel([.32,-.074,.34],true));
@@ -199,7 +226,7 @@ export function buildParts() {
   };
   hypha([1.04,.12,.09],Math.PI/2,.059,3);
   addPart('fungi-inset',bi('Fungal threads schematic','真菌丝体示意'),'closeups',bi('Breaks down dead organic material.','分解死亡的有机物质。'),bi("Fungi help break down mangrove leaf litter. They obtain energy from organic material, without using photosynthesis to make food. [S10]\n\nThe branching threads are an enlarged diagram. [S30]","真菌参与红树林落叶的分解。它们从有机物获得能量，不通过光合作用制造食物。[S10]\n\n分枝的丝体是放大示意图。[S30]"),{primitive:fungalModels[0]!,extra:fungalModels.slice(1)});
-  addPart('gill-inset',bi('Gill-chamber schematic','鳃腔示意'),'closeups',bi("Retains water to help the fish breathe out of water.","保留水分，帮助鱼离水呼吸。"),bi("The giant mudskipper’s modified gill chambers and gas exchange through its skin help it breathe out of water. It is a fish. [S4]\n\nThis enlarged diagram shows a cavity, without the detailed gill anatomy. [S30]","弹涂鱼特化的鳃腔和皮肤气体交换，帮助它离水呼吸。它是鱼。[S4]\n\n这个放大的空腔是示意，没有显示详细鳃部结构。[S30]"),{primitive:{kind:'sweep',at:[1.04,.13,.27],path:[[0,0,0],[.02,.04,0],[0,.09,0]],radius:[.044,.055,.04],section:'u',hollow:.006,radial:48,segments:24,up:[0,0,1],color:'tissue',tint:'token:ink-3'},extra:[oval([1.04,.145,.275],.028,[1,.35,.8],{color:'glass',tint:'token:cold'})]});
+  addPart('gill-inset',bi('Gill-chamber schematic','鳃腔示意'),'closeups',bi("Retains water to help the fish breathe out of water.","保留水分，帮助鱼离水呼吸。"),bi("The giant mudskipper’s modified gill chambers and gas exchange through its skin help it breathe out of water. It is a fish. [S4]\n\nThis enlarged head section opens one cheek to show the moist chamber and a sample of gill folds. It is a qualitative cutaway, not a complete gill-arch count or microscopic anatomy. [S30]","弹涂鱼特化的鳃腔和皮肤气体交换，帮助它离水呼吸。它是鱼。[S4]\n\n这个放大的头部剖面移开一侧鳃盖，显示湿润的鳃腔和部分鳃褶。这是定性示意，不供清点全部鳃弓，也不是显微解剖。[S30]"),{mesh:'gill-inset',material:{color:'tissue',tint:'#ffffff'}});
   addPart('boardwalk-edge',bi('Observation edge','观察边界'),undefined,bi("Marks a place to observe the habitat.","标示观察生境的位置。"),bi("The boardwalk edge suggests observing without collecting animals. It is part of the display setting. [S30]","步道边缘提示观察时把动物留在原处。它是展示场景的一部分。[S30]"),{primitive:box([0,.025,-.54],[1.7,.045,.095],'wood',{tint:'token:ink-3'})},{context:true});
   addPart('specimen-base',bi('Teaching specimen base','教学标本底座'),undefined,bi("Supports the habitat and enlarged close-ups.","承托生境和放大近景。"),bi("This display stand supports the habitat and the separate enlarged diagrams. [S30]","展示台承托生境和旁边独立的放大示意图。[S30]"),{primitive:box([.18,-.29,0],[2.02,.04,1.12],'plastic',{tint:'token:ink-3'}),extra:[box([1.04,.065,.08],[.29,.015,.55],'plastic',{tint:'token:neutral'})]},{context:true});
   // Bark trunks and limbs are their own glb nodes so they keep a bark finish

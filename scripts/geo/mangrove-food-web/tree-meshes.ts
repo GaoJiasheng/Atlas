@@ -1,4 +1,5 @@
 /** Original offline mesh surfaces, shared by the GLB export and CPU QA. */
+import {gillMesh} from './gill-mesh';
 import { Document, NodeIO } from '@gltf-transform/core';
 import { EXTMeshoptCompression, KHRMeshQuantization } from '@gltf-transform/extensions';
 import { quantize, reorder } from '@gltf-transform/functions';
@@ -17,6 +18,7 @@ export function treeMeshes():Map<string,BufferGeometry> {
  const api=pencilRootSystem([-.46,0,-.13]);
  return new Map([
   // Selectable crowns (foliage) and their context trunks/limbs (bark).
+  ['gill-inset',gillMesh()],
   ['api-tree',treeGeometry(treeStudies['api-tree'],'leaves')],['bakau-tree',treeGeometry(treeStudies['bakau-tree'],'leaves')],
   ['api-trunk',treeGeometry(treeStudies['api-tree'],'wood')],['bakau-trunk',treeGeometry(treeStudies['bakau-tree'],'wood')],
   ['api-lateral',bakePrimitives(api.lateral)],['api-pencil',bakePrimitives(api.pencils)],['bakau-prop',bakePrimitives(propRootSystem([.18,0,-.25]))],
@@ -29,6 +31,7 @@ export async function writeTreeMeshes(){
   const g=mergeVertices(raw,1e-7),pos=g.getAttribute('position'),normal=g.getAttribute('normal');
   const acc=(name:string,type:'VEC3'|'SCALAR',array:Float32Array<ArrayBuffer>|Uint32Array<ArrayBuffer>)=>doc.createAccessor(name).setType(type).setArray(array).setBuffer(buffer);
   const prim=doc.createPrimitive().setAttribute('POSITION',acc(id+'-position','VEC3',new Float32Array(pos.array))).setAttribute('NORMAL',acc(id+'-normal','VEC3',new Float32Array(normal.array))).setIndices(acc(id+'-indices','SCALAR',new Uint32Array(g.index!.array)));
+  if(id==='gill-inset'){const color=g.getAttribute('color');prim.setAttribute('COLOR_0',acc(id+'-color','VEC3',new Float32Array(color.array)));prim.setMaterial(doc.createMaterial('gill-colours').setBaseColorFactor([1,1,1,1]).setRoughnessFactor(.64).setExtras({atlasSurface:true}));}
   scene.addChild(doc.createNode(id).setMesh(doc.createMesh(id).addPrimitive(prim)).setExtras({closed:true}));g.dispose();raw.dispose();
  }
  // Meshopt + quantised attributes (the engine's loader decodes both): ~4× smaller

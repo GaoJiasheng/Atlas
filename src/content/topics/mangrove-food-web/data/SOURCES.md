@@ -71,3 +71,15 @@ They carry the repository's CC BY-NC-SA 4.0 content licence, also recorded in th
 GLB asset copyright. No third-party mesh or texture, and no runtime network
 resource, was added. Branch/root placement and 336 leaves per tree, 72 pencils,
 12 prop arches and six forks are DESIGN display counts, not field measurements.
+
+### Polish 2026-11-03 — climbing support and chamber inset
+
+The existing Avicennia/Bakau and crab references inform trunk contact, not a predicted migration between trees. The crab is now displayed on the Api-api trunk, which the Bakau leaf-supply control does not remove. All food-web values are unchanged.
+
+Additional morphology consultation: [Low, Lane & Ip (1988), *A Comparative Study of Terrestrial Adaptations of the Gills in Three Mudskippers*](https://doi.org/10.2307/1541736), publisher abstract, copyright Marine Biological Laboratory; [Gonzales et al. (2011), *Gross and fine anatomy of the respiratory vasculature of the mudskipper, Periophthalmodon schlosseri*](https://pubmed.ncbi.nlm.nih.gov/21344480/), abstract indexed by PubMed. Only the abstracts were accessible: short branched filaments, substantial supports and an enlarged respiratory chamber, rather than a dense aquatic-fish feather comb. No paper figure, mesh, photograph or texture is redistributed. The inset is an original qualitative partial head section; its displayed supports/branches are a sample, not an anatomical inventory or histology. Public labels and teaching counts are unchanged; its EN/ZH detail now describes the cutaway rather than an empty cavity.
+
+### Fix 2026-11-09 · head-section reference refinement
+
+The incoming group-A inset was checked at close range and replaced by an original fused, hollow head with an oblique cheek window, intact mouth/cranial roof, fused ocular lobes and curved branchial supports bearing short, stout, branched filaments. References: [Low, Lane & Ip (1988)](https://doi.org/10.2307/1541736), publisher abstract (branched filaments and stout supports); [Gonzales et al. (2011)](https://pubmed.ncbi.nlm.nih.gov/21344480/), abstract (sparse short filaments and respiratory chamber); [Alesci et al. (2022), Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9692400/), CC BY 4.0 histology, actually opened from the publisher's PNG to inspect thick rounded lamellar profiles and attachment. The full SEM figure offered by ResearchGate was inaccessible; no SEM claim or traced geometry is made. The histology informs the qualitative folds, not a species specimen measurement, microscopic scale or complete branchial inventory. No reference pixels are distributed.
+
+The shell is a signed-distance isosurface with a true cavity and cheek excision; original procedural folds and recessed eyes are baked into the same mesh with vertex colours. The displayed three supports are expressly a selected section, not a new teaching count. Existing labels/IDs and the EN/ZH qualitative-cutaway qualification remain. Build-time NumPy/scikit-image only; no new runtime code/dependency.

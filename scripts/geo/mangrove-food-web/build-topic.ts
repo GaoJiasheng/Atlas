@@ -68,7 +68,7 @@ await writeTreeMeshes();
 const file = buildParts();
 const anchors: Record<string, [number, number, number]> = {
   'n-mangrove': [-.1, .025, .1], 'n-algae': [.055, .014, .13],
-  'n-tree-crabs': [.19, .15, -.19], 'n-fiddlers': [-.10, .045, .13],
+  'n-tree-crabs': [-.445, .15, -.078], 'n-fiddlers': [-.10, .045, .13],
   'n-mudskipper': [.42, .055, .145], 'n-heron': [.79, .36, -.02],
 };
 const flows = graph.edges.map((e) => {

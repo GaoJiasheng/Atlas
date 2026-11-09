@@ -1,10 +1,11 @@
 /** Offline CPU geometry QA. Uses engine primitive tessellation and the topic's
- * uncompressed local GLB, with a per-pixel depth buffer and interpolated normals.
+ * locally decoded GLB, with a per-pixel depth buffer and interpolated normals.
  * pnpm tsx scripts/geo/coral-reef/inspect-geometry.ts polish-after [comma-separated-view-ids]
  */
 import fs from 'node:fs';
+import {readModel} from './read-model';
 import sharp from 'sharp';
-import { BufferAttribute, BufferGeometry, Matrix3, Matrix4, PerspectiveCamera, Quaternion, Vector3 } from 'three';
+import { BufferGeometry, Matrix3, Matrix4, PerspectiveCamera, Vector3 } from 'three';
 import { partsFile, type Part } from '../../../src/engines/space-scene/schema';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { partMaterialSlots } from '../../../src/engines/space-scene/lib/parts';
@@ -37,45 +38,7 @@ const outputs=solveTable(data.sim!.table!,defaults,data.sim!.outputs);
 type V3=[number,number,number];
 type Triangle={vertices:Vector3[];normals:Vector3[];face:Vector3;color:number[];opacity:number};
 type Bounds={min:V3;max:V3};
-type Gltf={accessors:{bufferView:number;byteOffset?:number;componentType:number;count:number;type:string}[];bufferViews:{byteOffset?:number;byteLength:number;byteStride?:number}[];meshes:{name?:string;primitives:{attributes:Record<string,number>;indices?:number;mode?:number}[]}[];nodes:{name?:string;mesh?:number;matrix?:number[];translation?:number[];rotation?:number[];scale?:number[];children?:number[]}[];scenes:{nodes:number[]}[];scene?:number};
-function readGlb(file:string){
-  const bytes=fs.readFileSync(file);
-  if(bytes.toString('ascii',0,4)!=='glTF'||bytes.readUInt32LE(4)!==2)throw new Error('Expected GLB v2');
-  const jsonSize=bytes.readUInt32LE(12),gltf=JSON.parse(bytes.toString('utf8',20,20+jsonSize)) as Gltf;
-  const bin=bytes.subarray(28+jsonSize),components:Record<string,number>={SCALAR:1,VEC2:2,VEC3:3,VEC4:4};
-  function attribute(n:number){
-    const a=gltf.accessors[n]!,view=gltf.bufferViews[a.bufferView]!,size=components[a.type]!;
-    const widths:Record<number,number>={5120:1,5121:1,5122:2,5123:2,5125:4,5126:4},width=widths[a.componentType]!;
-    const values=new Float32Array(a.count*size),start=(view.byteOffset??0)+(a.byteOffset??0);
-    for(let i=0;i<a.count;i++)for(let j=0;j<size;j++){
-      const at=start+i*(view.byteStride??size*width)+j*width;
-      values[i*size+j]=a.componentType===5126?bin.readFloatLE(at):a.componentType===5125?bin.readUInt32LE(at):a.componentType===5123?bin.readUInt16LE(at):a.componentType===5122?bin.readInt16LE(at):a.componentType===5121?bin.readUInt8(at):bin.readInt8(at);
-    }
-    return new BufferAttribute(values,size);
-  }
-  const result=new Map<string,{geometry:BufferGeometry;matrix:Matrix4}[]>();
-  function visit(index:number,parent:Matrix4){
-    const node=gltf.nodes[index]!,local=node.matrix?new Matrix4().fromArray(node.matrix):new Matrix4().compose(new Vector3(...(node.translation??[0,0,0]) as V3),new Quaternion(...(node.rotation??[0,0,0,1]) as [number,number,number,number]),new Vector3(...(node.scale??[1,1,1]) as V3));
-    const matrix=parent.clone().multiply(local);
-    if(node.mesh!==undefined){
-      const mesh=gltf.meshes[node.mesh]!,pieces=[];
-      for(const primitive of mesh.primitives){
-        if(primitive.mode!==undefined&&primitive.mode!==4)throw new Error('Preview supports triangle GLB primitives');
-        const geometry=new BufferGeometry();
-        geometry.setAttribute('position',attribute(primitive.attributes.POSITION!));
-        if(primitive.attributes.NORMAL!==undefined)geometry.setAttribute('normal',attribute(primitive.attributes.NORMAL));
-        if(primitive.indices!==undefined)geometry.setIndex(Array.from(attribute(primitive.indices).array));
-        if(!geometry.hasAttribute('normal'))geometry.computeVertexNormals();
-        pieces.push({geometry,matrix});
-      }
-      result.set(node.name??mesh.name??String(index),pieces);
-    }
-    for(const child of node.children??[])visit(child,matrix);
-  }
-  for(const node of gltf.scenes[gltf.scene??0]!.nodes)visit(node,new Matrix4());
-  return result;
-}
-const glb=data.model?readGlb(`public${data.model}`):new Map<string,{geometry:BufferGeometry;matrix:Matrix4}[]>();
+const glb=data.model?(await readModel(`public${data.model}`)).meshes:new Map<string,{geometry:BufferGeometry;matrix:Matrix4}[]>();
 const baked=new Map<string,Triangle[]>();
 const counts:Record<string,{triangles:number;pieces:number;source:string;bounds:Bounds}>={};
 let totalTriangles=0,totalPieces=0;

@@ -125,7 +125,10 @@ export function frog(tail = false): P[] {
     p.push(...digits(wrist, [[-.556, -.029, side * .225], [-.640, -.029, side * .291], [-.618, -.028, side * .379], [-.548, -.027, side * .439]], .0115));
   }
   p.push(joined(folds,skin,8,144),joined(drums,'#74765e',16,96));
-  if (tail) p.push(sw([[.23, .22, 0], [.39, .185, .008], [.55, .15, .035], [.66, .128, .054]], [.065, .044, .021, .001], skin, { radial: 20, segments: 36, section: { flat: .55 }, up: [0, 0, 1], caps: 'flat' }));
+  // Resorbing axial tissue, above the vent and between the thighs. Its broad
+  // root emerges from the dorsal rump; the short laterally compressed tip
+  // stays on the midline and has neither a limb bend nor terminal digits.
+  if (tail) p.push(sw([[.235, .275, 0], [.310, .294, 0], [.385, .299, .001], [.455, .307, .002], [.505, .315, .002]], [.043, .035, .021, .009, .0004], skin, { radial: 20, segments: 36, section: { flat: .42 }, up: [0, 0, 1], caps: 'round' }));
   return p;
 }
 export function tadpole(legs = false): P[] {

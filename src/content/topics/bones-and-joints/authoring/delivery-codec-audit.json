@@ -1,0 +1,382 @@
+{
+  "sourceSha256": "ae81de52d224414290e6ccfe00d1ddc94691352f1d8e1d79f09f4aab68111886",
+  "deliverySha256": "4e4110927d343f36df8b6b0158d889aa07ed7ed4844f2d987ce62b8425bc0cb7",
+  "bytes": 1390844,
+  "method": "Bidirectional vertex/centroid samples against triangle BVHs in decoded rest space; not a Hausdorff proof.",
+  "maxSampledSurfaceErrorM": 0.0028514544874059266,
+  "beforeTriangles": 398348,
+  "afterTriangles": 249180,
+  "parts": [
+    {
+      "name": "biceps-l",
+      "before": 5914,
+      "after": 2490,
+      "samples": 662,
+      "maxSampledSurfaceErrorM": 0.00040741599872105833
+    },
+    {
+      "name": "triceps-l",
+      "before": 10264,
+      "after": 4842,
+      "samples": 646,
+      "maxSampledSurfaceErrorM": 0.00039991388806739697
+    },
+    {
+      "name": "skin-outline",
+      "before": 32192,
+      "after": 14966,
+      "samples": 644,
+      "maxSampledSurfaceErrorM": 0.0028514544874059266
+    },
+    {
+      "name": "skull",
+      "before": 53792,
+      "after": 33087,
+      "samples": 644,
+      "maxSampledSurfaceErrorM": 0.0003256515522302855
+    },
+    {
+      "name": "mandible",
+      "before": 3498,
+      "after": 3424,
+      "samples": 662,
+      "maxSampledSurfaceErrorM": 0.00009393621081884749
+    },
+    {
+      "name": "cervical-spine",
+      "before": 13940,
+      "after": 11084,
+      "samples": 644,
+      "maxSampledSurfaceErrorM": 0.00018816100924055128
+    },
+    {
+      "name": "thoracic-spine",
+      "before": 23257,
+      "after": 9301,
+      "samples": 644,
+      "maxSampledSurfaceErrorM": 0.000550425365039444
+    },
+    {
+      "name": "lumbar-spine",
+      "before": 10000,
+      "after": 8952,
+      "samples": 650,
+      "maxSampledSurfaceErrorM": 0.0002742496322856751
+    },
+    {
+      "name": "sacrum",
+      "before": 3500,
+      "after": 3492,
+      "samples": 668,
+      "maxSampledSurfaceErrorM": 0.00010235558575682358
+    },
+    {
+      "name": "coccyx",
+      "before": 1166,
+      "after": 1082,
+      "samples": 696,
+      "maxSampledSurfaceErrorM": 0.000034625799402130105
+    },
+    {
+      "name": "sternum",
+      "before": 4913,
+      "after": 2896,
+      "samples": 650,
+      "maxSampledSurfaceErrorM": 0.00028765853105016396
+    },
+    {
+      "name": "ribs-l",
+      "before": 23371,
+      "after": 9347,
+      "samples": 646,
+      "maxSampledSurfaceErrorM": 0.00042331039068450123
+    },
+    {
+      "name": "ribs-r",
+      "before": 23369,
+      "after": 9345,
+      "samples": 646,
+      "maxSampledSurfaceErrorM": 0.0003877366333857497
+    },
+    {
+      "name": "clavicle-l",
+      "before": 1550,
+      "after": 950,
+      "samples": 726,
+      "maxSampledSurfaceErrorM": 0.000244835346086826
+    },
+    {
+      "name": "clavicle-r",
+      "before": 1550,
+      "after": 950,
+      "samples": 726,
+      "maxSampledSurfaceErrorM": 0.00021906019766125385
+    },
+    {
+      "name": "scapula-l",
+      "before": 4999,
+      "after": 2787,
+      "samples": 652,
+      "maxSampledSurfaceErrorM": 0.00028377080461777267
+    },
+    {
+      "name": "scapula-r",
+      "before": 4999,
+      "after": 2763,
+      "samples": 650,
+      "maxSampledSurfaceErrorM": 0.00030767125631408414
+    },
+    {
+      "name": "humerus-l",
+      "before": 2000,
+      "after": 1398,
+      "samples": 684,
+      "maxSampledSurfaceErrorM": 0.0006198387167098304
+    },
+    {
+      "name": "humerus-r",
+      "before": 2000,
+      "after": 1392,
+      "samples": 682,
+      "maxSampledSurfaceErrorM": 0.0006198387167098304
+    },
+    {
+      "name": "radius-l",
+      "before": 784,
+      "after": 456,
+      "samples": 848,
+      "maxSampledSurfaceErrorM": 0.0004869057343955073
+    },
+    {
+      "name": "radius-r",
+      "before": 784,
+      "after": 456,
+      "samples": 848,
+      "maxSampledSurfaceErrorM": 0.000482652712459499
+    },
+    {
+      "name": "ulna-l",
+      "before": 904,
+      "after": 512,
+      "samples": 704,
+      "maxSampledSurfaceErrorM": 0.0004416923237348552
+    },
+    {
+      "name": "ulna-r",
+      "before": 904,
+      "after": 514,
+      "samples": 706,
+      "maxSampledSurfaceErrorM": 0.0004416921504285582
+    },
+    {
+      "name": "hand-l",
+      "before": 14014,
+      "after": 5604,
+      "samples": 646,
+      "maxSampledSurfaceErrorM": 0.0003043969732665749
+    },
+    {
+      "name": "hand-r",
+      "before": 14014,
+      "after": 5604,
+      "samples": 646,
+      "maxSampledSurfaceErrorM": 0.0002798232863982002
+    },
+    {
+      "name": "hip-bone-l",
+      "before": 3500,
+      "after": 1672,
+      "samples": 670,
+      "maxSampledSurfaceErrorM": 0.00028965441608734636
+    },
+    {
+      "name": "hip-bone-r",
+      "before": 3500,
+      "after": 1672,
+      "samples": 670,
+      "maxSampledSurfaceErrorM": 0.00034265696329622067
+    },
+    {
+      "name": "femur-l",
+      "before": 2000,
+      "after": 1394,
+      "samples": 684,
+      "maxSampledSurfaceErrorM": 0.0008172621251829992
+    },
+    {
+      "name": "femur-r",
+      "before": 2000,
+      "after": 1404,
+      "samples": 686,
+      "maxSampledSurfaceErrorM": 0.0009356417948031358
+    },
+    {
+      "name": "patella-l",
+      "before": 276,
+      "after": 264,
+      "samples": 1080,
+      "maxSampledSurfaceErrorM": 0.000024572735857014683
+    },
+    {
+      "name": "patella-r",
+      "before": 276,
+      "after": 264,
+      "samples": 1080,
+      "maxSampledSurfaceErrorM": 0.000024573083298883023
+    },
+    {
+      "name": "tibia-l",
+      "before": 1670,
+      "after": 882,
+      "samples": 688,
+      "maxSampledSurfaceErrorM": 0.0005012800750195409
+    },
+    {
+      "name": "tibia-r",
+      "before": 1670,
+      "after": 884,
+      "samples": 688,
+      "maxSampledSurfaceErrorM": 0.000670870510864219
+    },
+    {
+      "name": "fibula-l",
+      "before": 1264,
+      "after": 504,
+      "samples": 698,
+      "maxSampledSurfaceErrorM": 0.0005166258929872801
+    },
+    {
+      "name": "fibula-r",
+      "before": 1264,
+      "after": 504,
+      "samples": 698,
+      "maxSampledSurfaceErrorM": 0.0005951962653019156
+    },
+    {
+      "name": "foot-l",
+      "before": 16586,
+      "after": 6634,
+      "samples": 648,
+      "maxSampledSurfaceErrorM": 0.00038195109481726944
+    },
+    {
+      "name": "foot-r",
+      "before": 16586,
+      "after": 6634,
+      "samples": 648,
+      "maxSampledSurfaceErrorM": 0.00038195109481726944
+    },
+    {
+      "name": "carpal-scaphoid",
+      "before": 390,
+      "after": 312,
+      "samples": 1014,
+      "maxSampledSurfaceErrorM": 0.000018557554485664298
+    },
+    {
+      "name": "carpal-lunate",
+      "before": 2088,
+      "after": 1358,
+      "samples": 662,
+      "maxSampledSurfaceErrorM": 0.00002805735330846643
+    },
+    {
+      "name": "carpal-capitate",
+      "before": 472,
+      "after": 422,
+      "samples": 894,
+      "maxSampledSurfaceErrorM": 0.000022415145873700937
+    },
+    {
+      "name": "mcp-metacarpal",
+      "before": 764,
+      "after": 578,
+      "samples": 768,
+      "maxSampledSurfaceErrorM": 0.0001088442236674316
+    },
+    {
+      "name": "mcp-phalanx",
+      "before": 414,
+      "after": 366,
+      "samples": 780,
+      "maxSampledSurfaceErrorM": 0.000031234805653122204
+    },
+    {
+      "name": "thumb-trapezium",
+      "before": 500,
+      "after": 428,
+      "samples": 762,
+      "maxSampledSurfaceErrorM": 0.000005319051371631732
+    },
+    {
+      "name": "thumb-metacarpal",
+      "before": 682,
+      "after": 542,
+      "samples": 704,
+      "maxSampledSurfaceErrorM": 0.00003970150127454854
+    },
+    {
+      "name": "polished-cortex",
+      "before": 29664,
+      "after": 29664,
+      "samples": 644,
+      "maxSampledSurfaceErrorM": 0.000025874308890252223
+    },
+    {
+      "name": "polished-repair-clot",
+      "before": 8000,
+      "after": 8000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.000017227349797537574
+    },
+    {
+      "name": "polished-repair-soft",
+      "before": 8000,
+      "after": 8000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.000016300560448447725
+    },
+    {
+      "name": "polished-repair-hard",
+      "before": 8000,
+      "after": 8000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.000016538906566053743
+    },
+    {
+      "name": "polished-repair-remodelled",
+      "before": 8000,
+      "after": 8000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.000017611879370751748
+    },
+    {
+      "name": "polished-repair-clot-skin",
+      "before": 4000,
+      "after": 4000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.000002575240085168345
+    },
+    {
+      "name": "polished-repair-soft-skin",
+      "before": 4000,
+      "after": 4000,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.0000062095765993746835
+    },
+    {
+      "name": "polished-growth-disc",
+      "before": 7360,
+      "after": 7360,
+      "samples": 640,
+      "maxSampledSurfaceErrorM": 0.0000015917708522354202
+    },
+    {
+      "name": "polished-remodel-region",
+      "before": 7744,
+      "after": 7744,
+      "samples": 648,
+      "maxSampledSurfaceErrorM": 0.000003952320292203241
+    }
+  ]
+}
