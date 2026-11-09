@@ -51,7 +51,8 @@ for(const [topic,file,id] of [['chest','horizontal-push','barbell-bench-press'],
  for(let i=0;i<=100;i++){clockMs=exercise.motion.tempo[0]*1000*i/100;tick();const frame=read();expect(frame.bar.z-frame.shoulder.z).toBeGreaterThan(-.003);expect(frame.bar.z-frame.shoulder.z).toBeLessThan(.215);projections.push({sample:i,caudal:frame.bar.z-frame.shoulder.z,bar:project(frame.bar,camera),shoulder:project(frame.shoulder,camera),sternum:project(new Vector3(0,end.bar.y-.014,end.bar.z),camera),sideBar:project(frame.bar,sideCam)});}
  now.mockRestore();
  rows.push({id,clearanceMm,camera:camSpec,leftForearmDeg:Math.acos(forearm.y)*180/Math.PI,rightForearmDeg:Math.acos(rightForearm.y)*180/Math.PI,projections,start: start.bar.toArray(),end:end.bar.toArray(),shoulder:end.shoulder.toArray(),caudal});
- fs.writeFileSync('scripts/anatomy/round3/runtime-motion.json',JSON.stringify(rows,null,2));
+ // Camera floats differ on every run: refresh the tracked report only on request.
+ if(process.env.ATLAS_WRITE_RUNTIME_MOTION)fs.writeFileSync('scripts/anatomy/round3/runtime-motion.json',JSON.stringify(rows,null,2));
 });
 
 it('draws the actual pulldown frame opaque even beside the wire body',async()=>{

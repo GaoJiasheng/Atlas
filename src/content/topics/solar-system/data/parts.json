@@ -1573,8 +1573,8 @@
         "zh": "划分观察者上方与下方的天空方向。"
       },
       "detail": {
-        "en": "This ring is the local geometric horizon. North is scene −Z, east +X, up +Y. A star plotted above the ring is geometrically above the horizon; it is not guaranteed visible to the eye. [S31,S37]",
-        "zh": "这个环表示本地几何地平线：场景负Z为北，正X为东，正Y向上。星点画在环上方，只表示几何上在地平线之上，不保证肉眼能看见。[S31,S37]"
+        "en": "This ring is the horizon around the observer, with north, east and straight up fixed in the scene. A star drawn above the ring is above the horizon, but that does not mean you can see it by eye. [S31,S37]",
+        "zh": "这个环表示观察者四周的地平线，北、东和正上方在场景里都是固定的方向。星点画在环上方，只表示它在地平线之上，不保证肉眼能看见。[S31,S37]"
       },
       "clip": false,
       "castShadow": false,

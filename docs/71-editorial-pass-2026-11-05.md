@@ -164,7 +164,7 @@ coral-reef 4、warring-states 4，circuits、digestive-system、inside-the-earth
 
 **留给 Gavin 的问题（超出本次范围，没有改）**
 
-1. saturn-v `lm-docking-port` 仍写着 “y = 92.5 m”，solar-system `horizon` 仍写着 “scene −Z, east +X, up +Y”。这两个字段自 6668a386 以来没有变，不在这次的范围内。
+1. saturn-v `lm-docking-port` 仍写着 “y = 92.5 m”，solar-system `horizon` 仍写着 “scene −Z, east +X, up +Y”。这两个字段自 6668a386 以来没有变，不在这次的范围内。（2026-11-09 集成时已改成通俗写法，生成器同步。）
 2. how-planes-fly 的 `text.ts` 比 `parts.json` 旧：除了这次改的 `cockpit-glazing`，还有 53 个字段重跑后会退回可读性修改之前的文字。重跑该主题前要先同步。
 3. “borosilicate” 只出现在 `docs/68-3d-realism/review-machines.md`，main 的读者文字里没有。
 

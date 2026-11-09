@@ -11,6 +11,8 @@ import ts from 'typescript';
 // space-scene is a ratchet (docs/02 target 300 KB): lowered as the 3D stage is split further, never raised.
 // 2026-11-09: full bilingual first frame peaks at 466.73 / 439.64 KB;
 // round up, then leave 2 KB for small changes. The 400 KB SpaceScene goal remains open.
+// Not counted: rich-text and GlossaryCard (idle-prefetched, about 9 KB per page). Counting them gives 477.77 / 449.33 KB
+// against these budgets, so doing it needs a decision on the budgets, not a quiet raise (docs/gavin-todo.md decision 6).
 export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 469, 'math-scene': 300, 'time-scene': 442, simulation: 300 };
 export interface Chunk { imports: string[]; dynamicImports: string[]; modules: string[] }
 export interface BudgetResult { topic: string; locale?: string; engine: string; gzipKB: number; budgetKB: number; files: string[] }

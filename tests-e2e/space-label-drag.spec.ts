@@ -1,4 +1,4 @@
-import { installSceneClock, pauseSceneClock, poll, sceneFrame, sceneReady, signalTimeout } from './scene-signals';
+import { browserFrames, poll, sceneReady, signalTimeout } from './scene-signals';
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
 // Software WebGL needs time to load two scenes and settle the damped camera.
@@ -83,7 +83,7 @@ for (const theme of ['paper', 'cinema'] as const) {
   });
 
   test(`SpaceScene ${theme}: a drag released on a label keeps the camera free without selecting`, async ({ page }) => {
-    await installSceneClock(page);
+    // Real clock: under Playwright's virtual clock `mouse.move` never returns.
     const label = await open(page, theme);
     const before = (await state(page)).camera;
     const to = await centre(label);
@@ -91,31 +91,42 @@ for (const theme of ['paper', 'cinema'] as const) {
     await page.mouse.move(from.x, from.y);
     await page.mouse.down();
     await page.mouse.move(to.x, to.y, { steps: 12 });
-    // Rotation can hide the original part. Find a reachable placard on an
-    // actual app frame, then move/check/release within that same virtual frame.
-    // Native mouse events and hit testing are unchanged, even under load.
-    await pauseSceneClock(page);
-    const end: { point: Point | null } = { point: null };
+    // Judged by the browser at the release itself, so a placard gliding away after the last check fails the test.
+    const released = await page.evaluateHandle(() => {
+      const seen = { onLabel: false };
+      addEventListener('pointerup', (e) => {
+        seen.onLabel = Boolean(document.elementFromPoint(e.clientX, e.clientY)?.closest('.space-co:not([data-group])'));
+      }, { capture: true, once: true });
+      return seen;
+    });
+    // Every move during a drag turns the camera and carries the placards along, so
+    // holding the pointer still lets the damped orbit stop before the last move.
+    let last = '';
     await poll(async () => {
-      await sceneFrame(page);
-      end.point = await page.evaluate((near) => {
-        return [...document.querySelectorAll<SVGRectElement>('.space-co:not([data-group]) .space-co__hit')]
-          .filter((el) => getComputedStyle(el).pointerEvents === 'all')
-          .map((el) => {
-            const b = el.getBoundingClientRect();
-            return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
-          })
-          // Only placards the pointer can reach there (one gliding under a HUD column is not interactive at that point).
-          .filter((p) => document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])'))
-          .sort((a, b) => Math.hypot(a.x - near.x, a.y - near.y) - Math.hypot(b.x - near.x, b.y - near.y))[0] ?? null;
-      }, to);
-      return end.point;
-    }, { intervals: [0] }).not.toBeNull();
-    const release = end.point!;
-    await page.mouse.move(release.x, release.y);
-    expect(await page.evaluate(p => Boolean(document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])')), release)).toBe(true);
+      await browserFrames(page, 3);
+      const now = await page.evaluate(() => [...document.querySelectorAll('.space-co__hit')]
+        .map((el) => { const b = el.getBoundingClientRect(); return `${Math.round(b.x)},${Math.round(b.y)}`; }).join(' '));
+      const still = now === last;
+      last = now;
+      return still;
+    }, { intervals: [0] }).toBe(true);
+    // Rotation can hide the original part: use the nearest reachable placard.
+    const release = await page.evaluate((near) => {
+      return [...document.querySelectorAll<SVGRectElement>('.space-co:not([data-group]) .space-co__hit')]
+        .filter((el) => getComputedStyle(el).pointerEvents === 'all')
+        .map((el) => {
+          const b = el.getBoundingClientRect();
+          return { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+        })
+        // Only placards the pointer can reach there (one gliding under a HUD column is not interactive at that point).
+        .filter((p) => document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])'))
+        .sort((a, b) => Math.hypot(a.x - near.x, a.y - near.y) - Math.hypot(b.x - near.x, b.y - near.y))[0] ?? null;
+    }, to);
+    expect(release).not.toBeNull();
+    await page.mouse.move(release!.x, release!.y);
+    expect(await page.evaluate(p => Boolean(document.elementFromPoint(p.x, p.y)?.closest('.space-co:not([data-group])')), release!)).toBe(true);
     await page.mouse.up();
-    await page.clock.resume();
+    expect(await released.evaluate((seen) => seen.onLabel)).toBe(true);
     await freed(page, before);
   });
 
