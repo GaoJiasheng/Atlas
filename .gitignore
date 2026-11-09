@@ -46,3 +46,24 @@ scripts/geo/forces/**/*.png
 scripts/geo/forces/**/*.jpg
 scripts/geo/magnets/**/*.png
 scripts/geo/magnets/**/*.jpg
+
+# Review evidence under scripts/ (renders, comparison sheets, iteration
+# snapshots, gate logs). QA records stay local; only build/test inputs are
+# tracked, re-included below.
+scripts/**/evidence/**
+scripts/**/comparisons/**
+scripts/**/comparison-sheets/**
+scripts/**/previews/**
+scripts/**/review/**
+scripts/**/b-review/**
+scripts/**/rebuild/round*/**
+scripts/**/accepted-offline*/**
+scripts/**/resume*/**
+!scripts/figures/materials/b-review/*-source.png
+!scripts/geo/aircon/evidence/before-parts.json
+!scripts/geo/how-planes-fly/evidence/before-parts.json
+!scripts/geo/forces/evidence/forces-hardware.glb
+!scripts/geo/magnets/evidence/baseline-parts.json
+!scripts/geo/water/comparisons/round2-before-metrics.json
+!scripts/geo/water/comparisons/round2-final-metrics.json
+!scripts/geo/zheng-he/evidence/**
