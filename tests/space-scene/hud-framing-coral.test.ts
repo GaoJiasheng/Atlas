@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-import { NodeIO } from '@gltf-transform/core';
+import { Box3 } from 'three';
+import { readModel } from '../../scripts/geo/coral-reef/read-model';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'yaml';
@@ -16,10 +17,16 @@ const boxes = new Map<string, FrameBox>();
 const root = resolve(import.meta.dirname, '../..');
 const distance = (c: OrbitCamera) => Math.hypot(...c.position.map((v,i) => v-c.target[i]!));
 beforeAll(async () => {
-  const doc = await new NodeIO().read(resolve(root, 'public/models/coral-reef.glb'));
+  // The distributed packet is meshopt-compressed and quantised: decode it and
+  // measure each mesh in stage coordinates (node transform applied).
+  const { meshes } = await readModel(resolve(root, 'public/models/coral-reef.glb'));
   for (const part of file.parts) {
-    const pos = doc.getRoot().listNodes().find(n => n.getName() === part.mesh)?.getMesh()?.listPrimitives()[0]?.getAttribute('POSITION');
-    const b = pos ? {min:pos.getMin([]), max:pos.getMax([])} : partBounds(part);
+    const pieces = part.mesh ? meshes.get(part.mesh) : undefined;
+    const box = pieces?.reduce((acc, { geometry, matrix }) => {
+      geometry.computeBoundingBox();
+      return acc.union(geometry.boundingBox!.clone().applyMatrix4(matrix));
+    }, new Box3());
+    const b = box && !box.isEmpty() ? {min:box.min.toArray(), max:box.max.toArray()} : partBounds(part);
     if (b) boxes.set(part.id, {
       center:b.min.map((v,i) => (v+b.max[i]!)/2) as Vec3,
       half:b.min.map((v,i) => (b.max[i]!-v)/2) as Vec3,
