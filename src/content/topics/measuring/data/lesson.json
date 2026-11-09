@@ -3929,8 +3929,7 @@
             "left": [
               {
                 "item": "beach-ball",
-                "mass": 60,
-                "size": "big"
+                "mass": 60
               }
             ],
             "right": [

@@ -16,9 +16,11 @@ state:
     - labels: [gpu-modules, gpu-baseboard, nvswitch-chips]
       caption: { en: "With the heat-sink towers cut away at their base, the eight GPU modules show: two rows of four on the baseboard.", zh: "把散热塔齐根切掉，8 个 GPU 模块就露出来了：基板上前后两排，每排 4 个。" }
     - camera: { position: [0.18, 0.4, 0.4], target: [0.0525, 0.145, 0.152], fov: 30 }
+      layers: [chassis, cooling, gpu-tray, host, power]
       labels: [gpu-dies, hbm-stacks, gpu-modules]
       caption: { en: "One GPU: two large silicon dies side by side in the middle, with eight stacks of memory above and below them.", zh: "一块 GPU：中间并排两块大硅片，上下一共 8 叠显存。" }
     - camera: { position: [0.18, 0.4, 0.4], target: [0.0525, 0.145, 0.152], fov: 30 }
+      layers: [chassis, cooling, gpu-tray, host, power]
       labels: [hbm-stacks, gpu-dies]
       caption: { en: "Each GPU here has 180 gigabytes of this stacked memory, which can deliver 8 terabytes a second.", zh: "在这台机器里，每块 GPU 有 180 吉字节这种堆叠显存，每秒能送出 8 太字节数据。" }
     - camera: { position: [0.02, 0.85, 0.42], target: [0, 0.13, 0], fov: 30 }

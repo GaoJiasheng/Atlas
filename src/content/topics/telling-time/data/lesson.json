@@ -6241,8 +6241,8 @@
           "model": {
             "kind": "timeline",
             "scale": "span",
-            "from": "14:00",
-            "to": "17:00",
+            "from": "14:30",
+            "to": "16:30",
             "minor": 5,
             "marks": [
               {
@@ -6266,8 +6266,8 @@
           "model": {
             "kind": "timeline",
             "scale": "span",
-            "from": "14:00",
-            "to": "17:00",
+            "from": "14:30",
+            "to": "16:30",
             "minor": 5,
             "marks": [
               {
@@ -6298,8 +6298,8 @@
           "model": {
             "kind": "timeline",
             "scale": "span",
-            "from": "14:00",
-            "to": "17:00",
+            "from": "14:30",
+            "to": "16:30",
             "minor": 5,
             "marks": [
               {
@@ -6334,8 +6334,8 @@
           "model": {
             "kind": "timeline",
             "scale": "span",
-            "from": "14:00",
-            "to": "17:00",
+            "from": "14:30",
+            "to": "16:30",
             "minor": 5,
             "marks": [
               {

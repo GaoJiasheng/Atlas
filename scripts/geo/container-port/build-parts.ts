@@ -43,7 +43,7 @@ const geometry:Record<string,P[]>={
  // bridge clears normal maps. Use the permitted data-only fallback: a satin
  // nonmetal surface, rather than reflective brushed aluminium masquerading
  // as sea. A dedicated ripple normal still needs an engine capability.
- 'water-context':[{kind:'plane',size:[240,90],rotation:[-90,0,0],at:[0,-.85,-45],color:'enamel',tint:'token:cold'}],
+ 'water-context':[{kind:'plane',size:[240,90],rotation:[-90,0,0],at:[0,-.85,-45],color:'powder',tint:'token:cold'}],
 };
 for(const id of ['a','b','c','d'])geometry[`rope-${id}`]=[cyl(.055,1,[0,0,0])];
 for(const [id,y] of [['yard-target',1.2955],['yard-blocker-a',3.8865],['yard-blocker-b',6.4775]] as const) geometry[id]=[isoContainer(ISO.twenty,[18,y,40],false,'powder',true),...containerDetails(ISO.twenty,[18,y,40])];
