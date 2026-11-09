@@ -26,3 +26,7 @@ Published (`status: published`) on the spec's decisions (docs/37 §0, all taken)
 - The spec's G-clamp is drawn as a steel clamping plate with two wing screws on the 15 cm block. A G-clamp could not reach round a block that tall.
 - The cotton strip and the cotton sample squares are drawn 2 mm thick, the same as the other samples.
 - The torch beam is narrowed to 20° so that its spot fits the 30 × 22 cm screen.
+
+## Rebuild 2026-11-05
+
+The earlier drawing-choice bullet describing two wing screws on a wooden cube is superseded: `bend-clamp` is now a genuine open C-frame G-clamp gripping a raised bench-edge ledge. The ledge preserves the original 15 cm clearance and 25 cm free strip reach. The wall cabinet and base-cupboard faces now use a smooth opaque laminate finish, with two attached cup hinges and a two-post door pull. See [REBUILD-3D.md](REBUILD-3D.md) for per-part counts, references, comparison iterations and the CPU-preview limits.

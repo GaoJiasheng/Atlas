@@ -247,16 +247,16 @@ export const PART_TEXT: Record<string, PartText> = {
     t('Pole', '杆子'),
     t('A 1 m pole: its shadow shows where the Sun is.', '1 米长的杆子，影子告诉你太阳在哪里。'),
     t(
-      'A straight wooden pole 5 cm thick standing upright on a heavy round base, 1 m above the ground [S1]. Its shadow always points away from the Sun: long when the Sun is low, short when it is high.\n\nThe model works out the shadow from the Sun’s height and direction, which come from NOAA’s solar calculator for Singapore [S12].',
-      '一根 5 厘米粗的木杆，竖直立在圆形重底座上，高出地面 1 米 [S1]。它的影子总是背着太阳：太阳低，影子长；太阳高，影子短。\n\n模型按太阳的高度和方向算出影子；太阳的高度和方向来自美国国家海洋和大气管理局（NOAA）的太阳计算器，地点是新加坡 [S12]。',
+      'A straight wooden pole 5 cm thick standing upright in a bolted socket on a heavy round base, its top 1 m above the paving [S1]. Its shadow always points away from the Sun: long when the Sun is low, short when it is high.\n\nThe model works out the shadow from the Sun’s height and direction, which come from NOAA’s solar calculator for Singapore [S12].',
+      '一根 5 厘米粗的直木杆，固定在圆形重底座的螺栓套座中，杆顶高出铺砖 1 米 [S1]。它的影子总是背着太阳：太阳低，影子长；太阳高，影子短。\n\n模型按太阳的高度和方向算出影子；太阳的高度和方向来自美国国家海洋和大气管理局（NOAA）的太阳计算器，地点是新加坡 [S12]。',
     ),
   ),
   'north-arrow': part(
     t('North arrow', '指北箭头'),
     t('Points north.', '指向北方。'),
     t(
-      'A dark arrow painted on the ground, pointing north [S1]. Use it to read which way the pole’s shadow points.',
-      '画在地上的箭头，指向北方 [S1]。用它来看杆子的影子指向哪个方位。',
+      'A dark arrow and north–south line inlaid in the paving, pointing north [S1]. Use them to read which way the pole’s shadow points. The low perimeter wall is part of the courtyard design study.',
+      '铺砖中嵌着深色箭头和南北线，箭头指北 [S1]。用它们来看杆子的影子指向哪个方位。外围矮墙属于庭院设计示意。',
     ),
   ),
   sun: part(
@@ -292,11 +292,11 @@ export const PART_TEXT: Record<string, PartText> = {
     ),
   ),
   courtyard: part(
-    t('Courtyard', '水泥空地'),
+    t('Courtyard', '日影庭院'),
     t('Level ground that catches the pole’s shadow.', '平整的地面，接住杆子的影子。'),
     t(
-      'A round patch of level, pale concrete 11 m across, standing for an open school courtyard in Singapore at 1.3° N, 103.8° E [S1, S13]. The model takes the ground as perfectly flat and the sky as clear.\n\nIt is drawn 10 m from the light bench so that each can be shown on its own; the two are never on the same view.',
-      '一块直径 11 米的浅色平整水泥地，代表新加坡（北纬 1.3°、东经 103.8°）一所学校里的空地 [S1, S13]。模型假设地面完全平整、天空无云。\n\n它画在光学实验台旁边 10 米外，两处各看各的，从不同框。',
+      'A round, level paved court 11 m across, edged by a low parapet with an entrance, standing for an open school courtyard in Singapore at 1.3° N, 103.8° E [S1, S13]. The model takes the ground as perfectly flat and the sky as clear.\n\nIt is drawn 10 m from the light bench so that each can be shown on its own; the two are never on the same view.',
+      '一块直径 11 米的平整铺砖庭院，外围有带入口的矮墙，代表新加坡（北纬 1.3°、东经 103.8°）一所学校里的空地 [S1, S13]。模型假设地面完全平整、天空无云。\n\n它画在光学实验台旁边 10 米外，两处各看各的，从不同框。',
     ),
   ),
   'bench-table': part(

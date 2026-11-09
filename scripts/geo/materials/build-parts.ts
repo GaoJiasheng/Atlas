@@ -59,6 +59,11 @@ const tube = (at: V3, path: V3[], radius: number, color: string, rest: Record<st
 /** An outline in the part's XY plane extruded `depth` along its Z, centred on `at`. */
 const extrude = (at: V3, shape: V2[], depth: number, color: string, rest: Record<string, unknown> = {}): Prim =>
   prim('extrude', at, { shape: shape.map(r2), depth: n5(depth), color, ...rest });
+// An extrusion's uvs are its outline coordinates in metres, so a finish map
+// on a few-centimetre casting is magnified into visible blotches on the GPU.
+// Author it ten times larger and scale it back: the same form, map at true density.
+const fineExtrude = (at: V3, shape: V2[], depth: number, color: string, bevel: number, rest: Record<string, unknown> = {}): Prim =>
+  extrude(at, shape.map(([x, y]) => [x * 10, y * 10] as V2), depth * 10, color, { bevel: n5(bevel * 10), scale: [0.1, 0.1, 0.1], ...rest });
 
 /*
  * Euler angles (degrees, three.js order XYZ: matrix Rx·Ry·Rz) for a plan
@@ -253,20 +258,60 @@ const CLAMP_H = 0.15;
 const BEND_Y = CLAMP_H + HALF_T;
 const BEND_CX = CLAMP_X + 0.1; // strip centre: 5 cm in the clamp, 25 cm out
 const TIP_X = BEND_CX + STRIP[0] / 2;
-const PLATE_Y = CLAMP_H + STRIP[1] + 0.004;
-const wingScrew = (z: number): Prim[] => [
-  lathe([CLAMP_X - 0.035, PLATE_Y + 0.004, z], [[0, 0], [0.0032, 0], [0.0032, 0.012], [0.006, 0.013], [0.006, 0.018], [0, 0.018]], 'steel', { segments: 6 }),
-  bevel([CLAMP_X - 0.035, PLATE_Y + 0.02, z], [0.026, 0.008, 0.004], 0.0015, 'steel'),
-];
+// A raised bench-edge ledge retains the 15 cm clearance used by the simulation.
+// The G-clamp reaches around its FRONT edge: the cast back is beside, never
+// through, the 25 cm free strip. Its fixed jaw bears down on the sample and
+// its screw/swivel pad bears up on the underside of the ledge.
+const JAW_X = CLAMP_X - 0.026;
+const JAW_Z = BZ;
+function cubicOutline(start: V2, commands: [V2, V2, V2][], n = 5): V2[] {
+  const points: V2[] = [start]; let a = start;
+  for (const [b, c, d] of commands) {
+    for (let k = 1; k <= n; k++) {
+      const t = k / n, u = 1 - t;
+      points.push([u*u*u*a[0] + 3*u*u*t*b[0] + 3*u*t*t*c[0] + t*t*t*d[0], u*u*u*a[1] + 3*u*u*t*b[1] + 3*u*t*t*c[1] + t*t*t*d[1]]);
+    }
+    a = d;
+  }
+  return points;
+}
+// XY outline is (scene z, scene y), extruded along X. Rounded cast shoulders,
+// an open throat and substantial jaws, not a rod bent into a letter C.
+const frameOutline = cubicOutline([-.013, .002], [
+  [[-.016,.002],[-.017,.006],[-.016,.012]],
+  [[-.014,.020],[.008,.025],[.024,.025]],
+  [[.045,.025],[.059,.013],[.060,-.010]],
+  [[.062,-.036],[.058,-.055],[.045,-.065]],
+  [[.032,-.074],[.005,-.071],[-.012,-.067]],
+  [[-.018,-.065],[-.018,-.048],[-.011,-.046]],
+  [[.000,-.044],[.024,-.047],[.032,-.042]],
+  [[.039,-.035],[.039,-.014],[.037,-.003]],
+  [[.035,.003],[.027,.007],[.019,.007]],
+  [[.008,.007],[-.003,.003],[-.013,.002]],
+]);
+const castAt: V3 = [JAW_X, CLAMP_H, JAW_Z];
+const screwBottom = CLAMP_H - .111;
+const screwTop = CLAMP_H - .031;
 add1({
-  id: 'bend-clamp',
-  group: 'bend-rig',
-  primitive: bevel([CLAMP_X - 0.04, CLAMP_H / 2, BZ], [0.08, CLAMP_H, 0.08], 0.003, 'wood', { tint: BLOCK_PINE }),
+  id: 'bend-clamp', group: 'bend-rig',
+  primitive: fineExtrude(castAt, frameOutline, .010, 'powder', .0013, { rotation: [0,-90,0] }),
   extra: [
-    // A steel clamping plate across the strip's end, held by two wing screws either side of it.
-    bevel([CLAMP_X - 0.035, PLATE_Y, BZ], [0.064, 0.008, 0.07], 0.0015, 'steel'),
-    ...wingScrew(BZ - 0.026),
-    ...wingScrew(BZ + 0.026),
+    // Cast I-section: raised rounded borders, a thinner continuous web.
+    ...[-1,1].map(side => prim('sweep', castAt, {path: frameOutline.slice(0,-1).map(([z,y])=>r3([side*.006,y,z])),radius:.0015,closed:true,radial:10,segments:160,color:'powder'})),
+    // Machined fixed jaw underside touches the strip top (y=.152).
+    bevel([JAW_X, CLAMP_H+.0035, BZ], [.020,.003,.027], .0007, 'steel'),
+    // Threaded boss, spindle, 2 mm pitch helical relief, spherical socket.
+    lathe([JAW_X,CLAMP_H-.058,BZ], [[0,-.012],[.009,-.012],[.010,-.009],[.010,.009],[.008,.012],[0,.012]], 'powder'),
+    lathe([JAW_X,screwBottom,BZ], [[0,0],[.0035,0],[.0035,screwTop-screwBottom],[0,screwTop-screwBottom]], 'steel'),
+    prim('coil', [JAW_X,(screwBottom+screwTop)/2,BZ], {radius:.0036,wire:.00055,turns:40,length:screwTop-screwBottom,segments:16,radial:6,color:'steel'}),
+    lathe([JAW_X,CLAMP_H-.031,BZ], [[0,0],[.0035,0],[.0035,.002],[.007,.0035],[.009,.005],[.009,.006],[0,.006]], 'steel'),
+    lathe([JAW_X,screwBottom-.008,BZ], [[0,0],[.005,0],[.0055,.002],[.0055,.011],[.004,.014],[0,.014]], 'steel'),
+    lathe([JAW_X,screwBottom-.003,BZ-.033], [[0,0],[.003,0],[.003,.003],[.0017,.005],[.0017,.061],[.003,.063],[.003,.066],[0,.066]], 'steel', {rotation:[90,0,0]}),
+    // A small raised test-bench ledge, two open triangular gussets and feet.
+    bevel([CLAMP_X-.070,CLAMP_H-.0125,BZ], [.140,.025,.060], .002, 'wood', {tint:'token:neutral'}),
+    ...[-1,1].map(side=>fineExtrude([CLAMP_X-.070,.0685,BZ+side*.026], [[-.062,-.0565],[.055,.0565],[-.062,.0565]], .006, 'powder', .001)),
+    bevel([CLAMP_X-.117,.006,BZ], [.046,.012,.086], .002, 'powder'),
+    ...[-1,1].map(side=>lathe([CLAMP_X-.117,.012,BZ+side*.034], [[0,0],[.004,0],[.004,.003],[0,.003]], 'steel', {segments:6})),
   ],
   explode: { dir: [0, 1, 0], dist: 0 },
 });
@@ -663,23 +708,40 @@ const P = 0.016; // cabinet board thickness
     explode: { dir: [0, 1, 0], dist: 0.05 },
     connects: ['cabinet-hinges'],
   });
-  // Two cup hinges on the inside of the right-hand side, their arms reaching the door.
-  const hinge = (y: number): Prim[] => [
-    bevel([CAB.x1 - P - 0.004, y, CAB.z1 - 0.03], [0.008, 0.03, 0.05], 0.0015, 'stainless'),
-    bevel([CAB.x1 - 0.004, y, CAB.z1 - 0.006], [0.012, 0.012, 0.03], 0.0015, 'stainless'),
-  ];
-  add1({
-    id: 'cabinet-hinges',
-    group: 'corner-metal',
-    primitive: lathe([CAB.x1 + 0.0035, CAB.y0 + 0.08, CAB.z1 + 0.012], [[0, 0], [0.0175, 0], [0.0175, 0.012], [0, 0.012]], 'stainless', { rotation: [0, 0, -90], segments: 24 }),
-    extra: [
-      lathe([CAB.x1 + 0.0035, CAB.y1 - 0.08, CAB.z1 + 0.012], [[0, 0], [0.0175, 0], [0.0175, 0.012], [0, 0.012]], 'stainless', { rotation: [0, 0, -90], segments: 24 }),
-      ...hinge(CAB.y0 + 0.08),
-      ...hinge(CAB.y1 - 0.08),
-    ],
-    explode: { dir: [0, 1, 0], dist: 0.05 },
-    connects: ['wall-cabinet'],
-  });
+  // Two concealed cup hinges. Each cup follows the OPEN DOOR's actual
+  // normal and setback; the short articulated arm meets both mounting plate
+  // and cup. The former generic discs sat at the pivot rather than in the door.
+  const normal: V3 = [Math.sin(open * DEG), 0, Math.cos(open * DEG)];
+  const onDoor = (along: number, y: number, n = -.009): V3 => r3([hingeX+dir[0]*along+normal[0]*n+.004,y,hingeZ+dir[2]*along+normal[2]*n+.004]);
+  // The exterior pull has two attached stand-offs, like a laminate slab door.
+  const cabinet = parts.find(p=>p.id==='wall-cabinet')!;
+  const handleExtra: Prim[] = [lathe(onDoor(.44,.74,.030),[[0,0],[.003,0],[.003,.12],[0,.12]],'stainless')];
+  for (const y of [.74,.86]) handleExtra.push(lathe(onDoor(.44,y,.009),[[0,0],[.004,0],[.003,.003],[.003,.021],[0,.021]],'stainless',{rotation:[0,open-90,-90]}));
+  cabinet.extra!.push(...handleExtra);
+  const hinges: Prim[] = [];
+  for (const y of [CAB.y0+.08,CAB.y1-.08]) {
+    const cup = onDoor(.035,y);
+    const plate: V3 = [CAB.x1-P-.003,y,CAB.z1-.043];
+    // Route the link on the INSIDE of the carcass. Going directly from
+    // plate to cup buries its middle in the side board and looks disconnected.
+    const root: V3 = [plate[0]-.006,y,plate[2]];
+    const elbow: V3 = [root[0],y,CAB.z1+.016];
+    hinges.push(
+      bevel(plate,[.006,.032,.052],.0015,'stainless'),
+      lathe(cup,[[0,-.001],[.014,-.001],[.0175,0],[.0175,.004],[.0145,.004],[.0145,.001],[0,.001]],'stainless',{rotation:[0,open-90,90],segments:48}),
+      // Cup mounting ears, constrained to the door's inner face.
+      ...[-1,1].map(side=>bevel(onDoor(.035,y+side*.022,-.0095),[.029,.008,.003],.0006,'stainless',{rotation:[0,open,0]})),
+      ...[-1,1].map(side=>lathe(onDoor(.035,y+side*.022,-.011),[[0,0],[.0027,0],[.0027,.0013],[0,.0013]],'steel',{rotation:[0,open-90,90],segments:24})),
+    );
+    for (const [a,b] of [[plate,root],[root,elbow],[elbow,cup]] as [V3,V3][]) {
+      const dx=b[0]-a[0],dz=b[2]-a[2],L=Math.hypot(dx,dz);
+      hinges.push(bevel(r3([(a[0]+b[0])/2,y,(a[2]+b[2])/2]),[L+.004,.010,.010],.0012,'stainless',{rotation:[0,-Math.atan2(dz,dx)/DEG,0]}));
+    }
+    // Two fixing heads on the mounting plate, on its inward face.
+    for (const dz of [-.017,.017]) hinges.push(lathe([plate[0]-.0035,y,plate[2]+dz],[[0,0],[.0028,0],[.0028,.0015],[0,.0015]],'steel',{rotation:[0,0,90],segments:24}));
+  }
+  add1({id:'cabinet-hinges',group:'corner-metal',primitive:hinges[0]!,extra:hinges.slice(1),explode:{dir:[0,1,0],dist:.05},connects:['wall-cabinet']});
+
 }
 
 // Upper shelf: saucepan and bowl. Lower shelf: tumbler and food box.
@@ -905,9 +967,9 @@ add1({
     primitive: bevel([cx, -0.015, (z0 + z1) / 2 + 0.01], [w + 0.02, 0.03, z1 - z0 + 0.02], 0.004, 'enamel', { tint: '#cfccc4' }),
     extra: [
       // Base cupboard, plinth, three doors and their handles.
-      box([cx, (FLOOR + 0.1 - 0.03) / 2, (z0 + z1) / 2 - 0.02], [w, -0.03 - FLOOR - 0.1, z1 - z0 - 0.04], 'wood', { tint: '#e3dccd' }),
+      box([cx, (FLOOR + 0.1 - 0.03) / 2, (z0 + z1) / 2 - 0.02], [w, -0.03 - FLOOR - 0.1, z1 - z0 - 0.04], 'enamel', { tint: 'token:drawing-paper' }),
       box([cx, FLOOR + 0.05, (z0 + z1) / 2 - 0.06], [w, 0.1, z1 - z0 - 0.12], 'powder', { tint: '#4a4e50' }),
-      ...[0, 1, 2].map((i) => bevel([K_X0 + doorW * (i + 0.5), (FLOOR + 0.1 - 0.035) / 2, z1 - 0.03], [doorW - 0.006, -0.035 - FLOOR - 0.1 - 0.006, 0.018], 0.003, 'wood', { tint: '#ebe5d8' })),
+      ...[0, 1, 2].map((i) => bevel([K_X0 + doorW * (i + 0.5), (FLOOR + 0.1 - 0.035) / 2, z1 - 0.03], [doorW - 0.006, -0.035 - FLOOR - 0.1 - 0.006, 0.018], 0.0008, 'enamel', { tint: 'token:drawing-paper' })),
       ...[0, 1, 2].map((i) => bevel([K_X0 + doorW * (i + 0.5), -0.07, z1 - 0.017], [0.12, 0.012, 0.012], 0.003, 'stainless')),
     ],
     context: true,

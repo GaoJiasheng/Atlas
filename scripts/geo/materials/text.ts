@@ -323,12 +323,12 @@ export const PART_TEXT: Record<string, PartText> = {
   ),
   /* --------------------------------------------------------- flexibility */
   'bend-clamp': p(
-    t('Clamp block', '夹座'),
+    t('G-clamp and test ledge', 'G 形夹与测试台边'),
     t('Holds one end; 25 cm sticks out.', '夹住一端，伸出 25 厘米。'),
     para(
       t(
-        'A wooden block 15 cm high. A steel plate, tightened by two wing screws, presses the first 5 cm of the strip onto it, and the other 25 cm sticks out [S1]. Every strip is clamped the same way, which keeps the test fair [S3].',
-        '一块 15 厘米高的木块。两颗蝶形螺丝拧紧一块钢压板，把条的前 5 厘米压在木块上，其余 25 厘米伸出去 [S1]。每根条都这样夹，测试才公平 [S3]。',
+        'A raised test-bench ledge 15 cm high leaves room for bending. A cast G-clamp holds the first 5 cm of the strip to its edge: the fixed jaw presses the strip down and the screw pad pushes up under the ledge. The other 25 cm sticks out [S1]. Every strip is clamped the same way, which keeps the test fair [S3].',
+        '测试台边抬高 15 厘米，留出弯曲空间。铸造的 G 形夹把条的前 5 厘米夹在台边：固定夹爪向下压条，螺杆垫向上顶住台边底面。其余 25 厘米伸出去 [S1]。每根条都这样夹，测试才公平 [S3]。',
       ),
       t(
         'A brittle strip breaks right at the edge of the clamp, where the bend is sharpest [S1].',

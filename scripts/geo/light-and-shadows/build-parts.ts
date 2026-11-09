@@ -14,6 +14,7 @@ import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { sunPosition, sunVector } from '../../../src/engines/space-scene/lib/sim/sun';
 import { CHAIN_NAMES, GROUP_TEXT, PART_TEXT } from './text';
+import { bakeCourtyard } from './courtyard';
 
 type V3 = [number, number, number];
 type Prim = Record<string, unknown> & { kind: string; at: V3 };
@@ -450,10 +451,14 @@ const SUN_R = 5.5;
 const pole = {
   id: 'pole',
   group: 'outdoors',
-  primitive: { kind: 'cylinder', size: [0.025, 0.025, 1.0], at: [YARD[0], YARD[1] + 0.5, YARD[2]], color: 'wood' },
+  primitive: { kind: 'lathe', profile: [[0, .03], [.025, .03], [.025, .992], [.024, 1], [0, 1]], segments: 96, at: YARD, color: 'wood' },
   extra: [
-    { kind: 'lathe', profile: [[0, 0], [0.1, 0], [0.1, 0.03], [0.07, 0.04], [0.02, 0.04], [0, 0.04]], segments: 48, at: YARD, color: 'powder', tint: '#4a4d50' },
-    { kind: 'lathe', profile: [[0, 0], [0.0265, 0], [0.0265, 0.006], [0, 0.008]], segments: 32, at: [YARD[0], YARD[1] + 0.992, YARD[2]], color: 'powder', tint: '#4a4d50' },
+    // Cast weighted foot and socket. Total top remains exactly 1.00 m above the paving.
+    { kind: 'lathe', profile: [[0,0],[.145,0],[.15,.006],[.15,.022],[.144,.03],[.065,.038],[.048,.05],[.037,.10],[.035,.12],[.026,.12],[.026,.03],[0,.03]], segments: 96, at: YARD, color: 'powder' },
+    // Socket's radial pinch screw and lobed handwheel, both seated at z=+.04.
+    { kind: 'lathe', profile: [[0,0],[.004,0],[.004,.027],[0,.027]], segments: 48, at: [10,.135,.025], rotation:[90,0,0], color:'steel' },
+    { kind:'extrude', shape:Array.from({length:96},(_,i)=>{const a=i*Math.PI/48,r=.011*(1+.12*Math.cos(6*a));return [n4(r*Math.cos(a)),n4(r*Math.sin(a))];}),depth:.010,bevel:.001,at:[10,.135,.055],color:'powder' },
+    ...[0,120,240].map(a=>({kind:'lathe',profile:[[0,0],[.007,0],[.007,.003],[0,.003]],segments:6,at:r3([10+.10*Math.sin(a*Math.PI/180),.083,.10*Math.cos(a*Math.PI/180)]),color:'steel'})),
   ],
   connects: ['courtyard', 'north-arrow'],
 };
@@ -475,9 +480,22 @@ const northArrow = {
     depth: 0.002,
     at: [YARD[0], YARD[1] + 0.001, -4.6],
     rotation: [-90, 0, 0],
-    color: 'powder', tint: '#2b2d2f',
+    color: 'powder',
   },
-  extra: [{ kind: 'lathe', profile: [[0, 0], [0.12, 0], [0.12, 0.002], [0, 0.002]], segments: 48, at: [YARD[0], YARD[1], -4.2], color: 'powder', tint: '#2b2d2f' }],
+  extra: [
+    // A north meridian inlay, not a false evenly spaced clock dial.
+    {kind:'bevelBox',size:[.016,.002,8.8],bevel:.0005,at:[10,.051,0],color:'powder'},
+    // Perimeter belongs to this assembly, separate from the flat shadow receiver.
+    // Nine curved masonry bays and capstones; 45° southern entry remains open.
+    ...Array.from({length:9},(_,i)=>{
+      const a=(40+i*35)*Math.PI/180;
+      return [
+        {kind:'curvedPanel',radius:5.72,angle:35,height:.227,thickness:.20,segments:24,at:r3([10+5.72*Math.sin(a),.1135,5.72*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:neutral'},
+        {kind:'curvedPanel',radius:5.72,angle:35,height:.177,thickness:.20,segments:32,at:r3([10+5.72*Math.sin(a),.3215,5.72*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:neutral'},
+        {kind:'curvedPanel',radius:5.75,angle:35,height:.045,thickness:.26,segments:24,at:r3([10+5.75*Math.sin(a),.4325,5.75*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:ink-3'},
+      ];
+    }).flat(),
+  ],
   connects: ['pole'],
 };
 const sun = {
@@ -499,7 +517,8 @@ function sunPath(id: string, iso: string) {
 const courtyard = {
   id: 'courtyard',
   group: 'outdoors',
-  primitive: { kind: 'lathe', profile: [[0, -0.025], [5.5, -0.025], [5.5, 0.025], [0, 0.025]], segments: 96, at: [YARD[0], 0.025, YARD[2]], color: 'plastic', tint: '#8f8b82' },
+  mesh: 'courtyard',
+  primitive: { kind: 'lathe', profile: [[0, -0.025], [5.5, -0.025], [5.5, 0.025], [0, 0.025]], segments: 96, at: [YARD[0], 0.025, YARD[2]], color: 'plastic', tint: 'token:neutral' },
   connects: ['pole'],
 };
 
@@ -752,6 +771,7 @@ const sim = {
 // edge rays visible, including the torch at its farthest 60 cm setting.
 const BENCH_CAMERA = { position: [-1.6, 1.5, 1.25], target: [-0.13, 1.03, 0.05], fov: 30 };
 const data = {
+  model: '/models/light-and-shadows.glb',
   parts: PARTS,
   groups,
   flows,
@@ -782,5 +802,6 @@ const data = {
   sim,
 };
 
+await bakeCourtyard();
 writeFileSync(OUT, `${JSON.stringify(data, null, 2)}\n`);
 console.log(`wrote ${OUT}: ${PARTS.length} parts, mirror yaw ${mirrorYaw.toFixed(2)}°`);
