@@ -103,7 +103,7 @@ test.describe('monsoon-and-weather', () => {
 
   test('deep link to the Java beat while exploring July; real samples', async ({ page }) => {
     await open(page, 'ch=northeast-monsoon&b=3&m=7');
-    expect(await page.evaluate(() => window.__atlas!.state())).toMatchObject({ beat: 2, month: 7, camera: { center: [110, -6], zoom: 4.7 } });
+    expect(await page.evaluate(() => window.__atlas!.state())).toMatchObject({ beat: 2, month: 7, camera: { center: [108, -1.5], zoom: 4.2 } });
     await expect(page.locator('.clim-exploring')).toBeVisible();
     expect(await page.evaluate(() => (window.__atlas!.engine as unknown as Engine).setClimatologyMonth(2))).toBe(true);
     await expect.poll(async () => (await climate(page)).exploring).toBe(false);

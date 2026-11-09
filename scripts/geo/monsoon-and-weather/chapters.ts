@@ -172,7 +172,7 @@ export const CHAPTERS: ChapterRow[] = [
       },
       {
         month: 2,
-        preset: 'view-java',
+        preset: 'view-equator',
         layers: 'rain',
         highlight: [JKT],
         caption: {
@@ -211,7 +211,7 @@ export const CHAPTERS: ChapterRow[] = [
       },
       {
         month: 4,
-        preset: 'view-straits',
+        preset: 'view-malaysia',
         layers: 'both',
         highlight: [SG],
         caption: {
@@ -225,13 +225,13 @@ export const CHAPTERS: ChapterRow[] = [
         layers: 'map',
         highlight: [SG],
         caption: {
-          en: 'April reference view: Singapore marks the local setting. An ordinary storm cell grows, matures and decays; this map does not track a particular cloud.',
-          zh: '4 月参考视图：新加坡标示本地位置。普通雨胞经历成长、成熟与消散；本图不追踪某一朵云。',
+          en: 'April reference view: Singapore marks where an ordinary storm cell can grow, mature and fade. This map does not draw the cell.',
+          zh: '4 月参考视图：新加坡点标示位置，普通雨胞在这里经历成长、成熟与消散。地图没有画出雨胞。',
         },
       },
       {
         month: 10,
-        preset: 'view-straits',
+        preset: 'view-malaysia',
         layers: 'both',
         highlight: [SG],
         caption: {
@@ -319,7 +319,7 @@ export const CHAPTERS: ChapterRow[] = [
       },
       {
         month: 7,
-        preset: 'view-straits',
+        preset: 'view-malaysia',
         layers: 'both',
         highlight: [SG],
         caption: {

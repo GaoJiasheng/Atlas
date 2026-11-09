@@ -17,6 +17,7 @@ state:
   sim: {"set": {"setup": "pair", "facing": "ns", "gap": 6, "bar-position": "bench"}, "try": {"vary": "facing", "keep": ["gap", {"en": "Same two magnets", "zh": "同样的两根磁铁"}], "observe": ["force"]}}
   beats:
     - labels: ["bar-magnet-n", "bar-magnet-b", "horseshoe-magnet", "ring-magnet-upper", "compass-case", "test-tray"]
+      camera: {"position": [0.56, 0.76, 1.41], "target": [0, 0.05, 0], "fov": 30}
       caption: {"en": "This science bench holds everything we will test: two bar magnets, a horseshoe magnet, a pair of ring magnets, a compass, a tray of objects and a home-made electromagnet.", "zh": "实验台上摆着这一课要用的东西：两根条形磁铁、一块马蹄形磁铁、一对环形磁铁、一个指南针、一盘待测的物品，还有一个自制的电磁铁。"}
     - camera: "two-magnets"
       labels: ["bar-magnet-n", "bar-magnet-b"]
