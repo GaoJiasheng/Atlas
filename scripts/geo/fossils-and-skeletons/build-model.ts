@@ -2,6 +2,7 @@
  * Run once from author coordinates; never normalise the generated JSON again.
  */
 import fs from 'node:fs';
+import { PART_TEXT } from './text';
 import { buildBird } from '../kits/bird';
 import { boneSweep, diplodocid, ribCage, theropodForelimb, theropodHindlimb, theropodPelvis, theropodSkull, vertebra, vertebralColumn } from '../kits/dinosaur-skeleton';
 import { buildSauropods } from './build-sauropods';
@@ -24,8 +25,12 @@ function extrude(at: V,shape: number[][],depth:number,holes:number[][][]=[],tint
 }
 const rect=(w:number,h:number)=>[[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];
 const ellipse=(x:number,y:number,rx:number,ry:number,n=16)=>Array.from({length:n},(_,i)=>[x+rx*Math.cos(i/n*Math.PI*2),y+ry*Math.sin(i/n*Math.PI*2)]);
-function add(id:string,group:string,name:[string,string],summary:[string,string],detail:[string,string],geometry:Primitive[],options={}): Part {
-  const p={id,group,name:bi(...name),summary:bi(...summary),detail:bi(...detail),primitive:geometry[0],...(geometry.length>1?{extra:geometry.slice(1)}:{}),explode:{dir:[0,1,0],dist:0},connects:[],castShadow:false,clip:true,...options} as Part;
+function add(id:string,group:string,geometry:Primitive[],options={}): Part {
+  const text=PART_TEXT[id];
+  if(!text)throw new Error('Missing fossil text: '+id);
+  // Key order matches the accepted parts.json, so a rebuild is byte-identical.
+  const {name,summary,detail,...labels}=text;
+  const p={id,group,name,summary,detail,primitive:geometry[0],...(geometry.length>1?{extra:geometry.slice(1)}:{}),explode:{dir:[0,1,0],dist:0},connects:[],castShadow:false,clip:true,...labels,...options} as Part;
   parts.push(p); return p;
 }
 function sampleBone(at:V,length=1.1,tint=bone): Primitive {
@@ -36,11 +41,11 @@ function sampleBone(at:V,length=1.1,tint=bone): Primitive {
 
 // Evidence plates. Holes run through a thin upper stratum and stop on a base:
 // the footprint and leaf are actual negative relief, never a floating foot/leaf.
-add('bone-sample','specimens',['Bone','骨化石'],['Records the shape of a body part.','记录身体部分的形体。'],['A fossil bone is body evidence. Shape alone cannot give an exact numerical age. This generic bone is an original schematic, without a species or specimen identity. [S2, S58, S90]','骨化石属于身体证据。单凭外形不能给出精确的数值年龄。这根通用示意骨不指定物种或标本身份。[S2, S58, S90]'],[sampleBone([-1.25,.55,0],.85)]);
+add('bone-sample','specimens',[sampleBone([-1.25,.55,0],.85)]);
 const track=[[-.10,-.39],[-.22,-.25],[-.20,-.08],[-.38,.12],[-.43,.34],[-.33,.40],[-.12,.13],[-.07,.11],[-.07,.51],[.04,.62],[.12,.50],[.13,.11],[.19,.10],[.37,.39],[.49,.34],[.42,.12],[.25,-.08],[.20,-.29],[.06,-.40]];
 const leaf=[[-.03,-.49],[-.16,-.30],[-.30,-.06],[-.30,.14],[-.19,.35],[0,.51],[.19,.34],[.30,.12],[.28,-.10],[.14,-.34],[.03,-.49]];
-add('track-slab','specimens',['Footprint','足迹板'],['Records contact with sediment during an activity.','记录活动时与沉积物的接触。'],['The recessed outline is a trace of activity, not a foot bone resting on a rock. Its three main toe impressions are a generic teaching design; this outline does not identify the maker to a species. [S2, S7, S48, S90]','凹入的轮廓记录活动，不是放在岩石上的脚骨。三个主要趾印只是通用教学设计，不能据此鉴定制造者的物种。[S2, S7, S48, S90]'],[extrude([0,.29,0],rect(1.06,1.40),.075,[track],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([0,.19,0],[1.06,.12,1.40],'token:ink-2')]);
-add('leaf-slab','specimens',['Leaf imprint','叶印痕板'],['Records a leaf shape as a shallow impression.','用浅印痕记录叶的形状。'],['This example retains a shallow leaf impression without organic material or a carbon film. A leaf is a body part, so preservation as an impression does not make it activity evidence. The generic shape is not a species identification. [S54, S2, S90]','这个例子保留浅叶印痕，没有有机物或碳膜。叶属于身体部分，保存成印痕并不会使它变成活动证据。通用叶形不用于鉴定物种。[S54, S2, S90]'],[extrude([1.16,.30,0],rect(.90,1.26),.045,[leaf],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([1.16,.245,0],[.9,.06,1.26],'token:neutral')]);
+add('track-slab','specimens',[extrude([0,.29,0],rect(1.06,1.40),.075,[track],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([0,.19,0],[1.06,.12,1.40],'token:ink-2')]);
+add('leaf-slab','specimens',[extrude([1.16,.30,0],rect(.90,1.26),.045,[leaf],'token:neutral',{rotation:[-90,0,0],color:'abrasive'}),box([1.16,.245,0],[.9,.06,1.26],'token:neutral')]);
 // Veins are recessed into the impression floor, below the slab rim. Thin
 // uncut bridges separate the holes so triangulation never crosses a vein.
 const veinHoles:number[][][]=[rect(.013,.81)];
@@ -49,49 +54,48 @@ for(let i=0;i<6;i++)for(const side of [-1,1]){
  veinHoles.push([[side*.022,y],[side*w,tip],[side*w,tip+.008],[side*.022,y+.008]]);
 }
 parts.find(p=>p.id==='leaf-slab')!.extra!.push(extrude([1.16,.281,0],leaf.map(([x,y])=>[x!*.96,y!*.96]),.012,veinHoles,'token:neutral',{rotation:[-90,0,0],bevel:.001,color:'abrasive'}));
-add('leaf-lid','specimens',['Upper slab','覆盖片'],['Covers the impression until the slab is moved aside.','移开后才露出下面的印痕。'],['Moving this upper piece exposes the negative relief below. These two schematic pieces are not claimed to be an actual matching fossil and counterpart. [S54, S90]','移开覆盖片，才露出下方的凹印。这两片是教学示意，不称为真实配对的化石正负片。[S54, S90]'],[box([1.16,.40,0],[.90,.13,1.26])],{shell:true,explode:{dir:[0,1,0],dist:.7}});
+add('leaf-lid','specimens',[box([1.16,.40,0],[.90,.13,1.26])],{shell:true,explode:{dir:[0,1,0],dist:.7}});
 
 // Continuous, horizontal contacts; the middle shell leaves a cavity for one bone.
-add('sediment-low','burial',['Lower sediment','下部沉积'],['Supports the younger beds above it.','承托上方较新的沉积层。'],['In this upright, undisturbed example, the lower bed was deposited first. Layer thickness is not a clock. The section is invented and has no real time scale. [S59, S90]','在这个正立、未扰动的例子里，下层较早沉积。厚度不是时钟；该剖面为虚构示意，没有真实时间尺度。[S59, S90]'],[box([0,.3,0],[2.8,.6,1.6],'token:ink-2')]);
+add('sediment-low','burial',[box([0,.3,0],[2.8,.6,1.6],'token:ink-2')]);
 const middle=[box([0,.64,0],[2.8,.08,1.6]),box([0,.98,-.72],[2.8,.60,.16]),box([-1.31,.98,0],[.18,.60,1.6]),box([1.31,.98,0],[.18,.60,1.6]),box([0,.98,.72],[2.8,.60,.16])];
-add('sediment-mid','burial',['Bone-bearing sediment','含骨沉积'],['Encloses the buried remains.','围住埋藏的遗存。'],['The middle shell stands for sediment surrounding the bone. X-ray makes its wall transparent so the single body part inside can be examined. Rapid burial may help preservation but does not guarantee a fossil. [S2, S90]','中层薄壳表示围着骨的沉积物。X光视图让外壁透明，以便观察里面的单个身体部分。快速埋藏有利于保存，但不保证形成化石。[S2, S90]'],middle,{shell:true});
-add('sediment-high','burial',['Covering sediment','覆盖沉积'],['Covers the bone-bearing layer.','覆盖含骨层。'],['Removing this covering layer represents an exposed state after covering rock has been removed by weathering and erosion. The model does not make the bone float upward. [S3, S90]','移开覆盖层表示风化与侵蚀去掉上覆岩层后的出露状态，模型不表示骨自己向上浮起。[S3, S90]'],[box([0,1.58,0],[2.8,.6,1.6],'token:neutral')],{shell:true,explode:{dir:[0,1,0],dist:1}});
-add('buried-bone','burial',['Buried bone','埋藏骨'],['Preserves a body part within the middle bed.','在中层内保存身体部分。'],['This single bone lies inside the middle bed. The pore study is an alternative magnified view of the same teaching object, not another bone. Minerals can be deposited in natural pores during burial. [S2, S4, S90]','这一根骨完整位于中层。孔隙研究是同一教学对象的替代放大视图，不是另一根骨。埋藏过程中，矿物可沉积在原有孔隙内。[S2, S4, S90]'],[sampleBone([0,.96,.22],1.75)]);
+add('sediment-mid','burial',middle,{shell:true});
+add('sediment-high','burial',[box([0,1.58,0],[2.8,.6,1.6],'token:neutral')],{shell:true,explode:{dir:[0,1,0],dist:1}});
+add('buried-bone','burial',[sampleBone([0,.96,.22],1.75)]);
 const poreHoles=[ellipse(-.71,.02,.19,.16,11),ellipse(-.27,.06,.15,.19,12),ellipse(.12,.06,.17,.15,10),ellipse(.53,.03,.17,.17,11),ellipse(-.42,-.29,.12,.10,10),ellipse(.37,-.27,.14,.10,10)];
 const poreOutline=[[-1.03,-.18],[-.93,-.44],[-.70,-.48],[-.49,-.35],[.40,-.35],[.70,-.48],[.94,-.40],[1.02,-.17],[.98,.17],[.78,.43],[.54,.36],[-.51,.37],[-.77,.43],[-.98,.26]];
-add('pore-shell','burial',['Bone pores','骨的孔隙'],['Shows original spaces within the bone wall.','显示骨壁内原有的空隙。'],['This enlarged, open schematic section shows irregular pores and the retained wall around them. It alternates with the whole bone, without a microscopic scale or an identified bone type. [S4, S90]','这个放大、开放的示意剖面显示不规则孔隙及其周围保留的骨壁。它与整骨交替显示，不标显微尺度，也不鉴定骨件类型。[S4, S90]'],[extrude([0,1,.60],poreOutline,.25,poreHoles),sweep([0,1,.40],[[-.90,-.26,0],[-.42,-.30,0],[.42,-.3,0],[.88,-.26,0]],[.14,.12,.12,.14],bone)],{clip:true});
-add('pore-minerals','burial',['Pore minerals','孔隙矿物'],['Fills part of the existing pore space.','充填部分原有孔隙。'],['The small mineral masses sit within pores; the surrounding original wall remains. Filling a pore differs from replacement of dissolved original material, though the processes can occur together. No mineral species is assigned. [S4, S90]','小块矿物位于孔隙内，周围原有骨壁仍在。填孔不同于替代已溶解的原有物质，二者也可以共同发生。本模型不指定矿物种类。[S4, S90]'],[3,0,1,2].map(i=>poreHoles[i]!).map(h=>extrude([0,1,.61],h.map(([x,y])=>[x!*.92,y!*.92]),.19,[],'token:cold')));
+add('pore-shell','burial',[extrude([0,1,.60],poreOutline,.25,poreHoles),sweep([0,1,.40],[[-.90,-.26,0],[-.42,-.30,0],[.42,-.3,0],[.88,-.26,0]],[.14,.12,.12,.14],bone)],{clip:true});
+add('pore-minerals','burial',[3,0,1,2].map(i=>poreHoles[i]!).map(h=>extrude([0,1,.61],h.map(([x,y])=>[x!*.92,y!*.92]),.19,[],'token:cold')));
 
-add('ash-low','age-section',['Lower ash','下方灰层'],['Provides the older bounding layer.','提供较古老的边界地层。'],['Suitable minerals in the lower primary ash layer provide an age constraint. All ages and set errors used by this teaching section are invented SIM values. Colour does not identify the rock. [S5, S58, S90]','下方原生灰层中的合适矿物提供年龄约束。本教学剖面的全部年龄及设定误差都是虚构SIM值；颜色不用于鉴定岩性。[S5, S58, S90]'],[box([0,.3,0],[2.8,.15,1.6],'token:ink-2')]);
-add('fossil-bed','age-section',['Fossil bed','含化石层'],['Places fossil evidence between dated ash layers.','把化石置于可测年的灰层之间。'],['The enclosed bone is between the two ash layers in an upright, undisturbed section with primary ash and no reworking of the fossil. The dates constrain an interval, not an exact birthday or an average age. [S58, S59, S90]','正立、未扰动的剖面中，骨位于两灰层之间；灰层为原生，化石未再搬运。上下年龄限定范围，不给出精确生日或平均年龄。[S58, S59, S90]'],[box([-1.34,.95,0],[.12,1.04,1.6]),box([0,1.49,0],[2.8,.06,1.6]),box([0,.95,-.74],[2.8,1.04,.12]),box([1.34,.95,0],[.12,1.04,1.6]),sampleBone([0,.91,.28],1.6)],{shell:true});
-add('ash-high','age-section',['Upper ash','上方灰层'],['Provides the younger bounding layer.','提供较年轻的边界地层。'],['In this checked upright section the upper primary ash layer is younger. Its thickness does not directly reveal elapsed time. These invented dates do not date the Singapore museum specimens. [S5, S58, S59, S90]','在这个已核对正立条件的剖面中，上方原生灰层较年轻。厚度不能直接显示经过的时间；虚构年龄不能用于新加坡馆藏标本。[S5, S58, S59, S90]'],[box([0,1.6,0],[2.8,.15,1.6],'token:ink-2')]);
-add('dated-crystal','age-section',['Dated mineral','测年矿物'],['Represents the material whose isotope clock is measured.','代表测量同位素时钟的材料。'],['The clock concerns a specified event in suitable minerals from ash, with assumptions and uncertainty. It is not a carbon-fourteen date of a Mesozoic dinosaur bone. This enlarged generic crystal has no assigned mineral species. [S5, S6, S58, S90]','时钟针对灰中合适矿物历史的特定事件，带有假设与误差；不是用碳十四给中生代恐龙骨测年。这颗放大的通用晶体不指定矿种。[S5, S6, S58, S90]'],[extrude([1.1,1.94,.5],[[-.15,-.19],[.02,-.28],[.21,-.1],[.19,.14],[.01,.3],[-.17,.10]],.27,[],'token:cold',{rotation:[0,25,0]})],{clip:false});
+add('ash-low','age-section',[box([0,.3,0],[2.8,.15,1.6],'token:ink-2')]);
+add('fossil-bed','age-section',[box([-1.34,.95,0],[.12,1.04,1.6]),box([0,1.49,0],[2.8,.06,1.6]),box([0,.95,-.74],[2.8,1.04,.12]),box([1.34,.95,0],[.12,1.04,1.6]),sampleBone([0,.91,.28],1.6)],{shell:true});
+add('ash-high','age-section',[box([0,1.6,0],[2.8,.15,1.6],'token:ink-2')]);
+add('dated-crystal','age-section',[extrude([1.1,1.94,.5],[[-.15,-.19],[.02,-.28],[.21,-.1],[.19,.14],[.01,.3],[-.17,.10]],.27,[],'token:cold',{rotation:[0,25,0]})],{clip:false});
 
 // T. rex: original teaching reconstruction, never an individual specimen inventory.
-const basis={direct:{en:'Direct record',zh:'直接记录',tint:bone},comparison:{en:'Comparison',zh:'比较依据',tint:'token:cold'},inferred:{en:'Inference',zh:'推定',tint:'token:neutral'}};
-function sk(id:string,name:[string,string],level:keyof typeof basis,material:[string,string],summary:[string,string],geometry:Primitive[],dir:V,dist:number,connects:string[]=[],note:[string,string]=['The module is not a single bone or a count of discovered material.','模块不等于一块骨，也不是出土材料数量。']) {
- const b=basis[level];
- geometry.forEach(p=>{p.color='tissue';p.tint=b.tint;});
- return add(id,'skeleton',name,summary,[`${summary[0]}\n\nInvented teaching example. Shape evidence: ${b.en}.\nDisplay material: ${material[0]}. ${note[0]} [S7, S55, S56, S90]`,`${summary[1]}\n\n虚构教学例。形状依据：${b.zh}。\n展示材料：${material[1]}。${note[1]}[S7, S55, S56, S90]`],geometry,{short:bi(`${name[0]} · ${b.en}`,`${name[1]}·${b.zh}`),chainName:bi(name[0],name[1]),explode:{dir,dist},connects});
+const basis={direct:bone,comparison:'token:cold',inferred:'token:neutral'};
+function sk(id:string,level:keyof typeof basis,geometry:Primitive[],dir:V,dist:number,connects:string[]=[]) {
+ geometry.forEach(p=>{p.color='tissue';p.tint=basis[level];});
+ return add(id,'skeleton',geometry,{explode:{dir,dist},connects});
 }
 const { skull: skullGeo, jaw: jawGeo } = theropodSkull();
-sk('sk-skull',['Skull','头骨'],'direct',['cast of the documented original','已记录原件的复制件'],['Supports the jaw and encloses the open skull framework.','与下颌对应，呈现中空的骨性框架。'],skullGeo,[-1,.4,0],.5,['sk-jaw','sk-neck'],['A cast can preserve direct shape evidence. Openings are schematic; no tooth count or specimen identity is claimed.','复制件也可以保留直接形状依据；孔洞为示意，不指定牙数或标本身份。']);
-sk('sk-jaw',['Jaw','下颌'],'direct',['original fossil in this example','本例中的原化石'],['Forms the lower outline beneath the skull.','在头骨下方构成下颌轮廓。'],jawGeo,[0,-1,0],.35);
+sk('sk-skull','direct',skullGeo,[-1,.4,0],.5,['sk-jaw','sk-neck']);
+sk('sk-jaw','direct',jawGeo,[0,-1,0],.35);
 const neckGeo=vertebralColumn([[-2.30,2.39,0],[-2.13,2.20,0],[-1.94,1.99,0],[-1.65,1.98,0]],10,.075,.105,.11);
-sk('sk-neck',['Neck','颈部'],'comparison',['cast based on another specimen','参考其他标本的复制件'],['Joins the skull to the trunk in a curved axis.','以弯曲的轴连接头骨与躯干。'],neckGeo,[-1,.5,0],.4,['sk-trunk']);
+sk('sk-neck','comparison',neckGeo,[-1,.5,0],.4,['sk-trunk']);
 const dorsalCentres:V[]=Array.from({length:12},(_,i)=>[-1.65+i*2.13/11,1.98+.17*Math.sin(i/11*Math.PI)-.02*i/11,0]);
 const trunkGeo:Primitive[]=dorsalCentres.flatMap((at,i)=>vertebra(at,.176,.105+i*.002,.21+i*.006));
 for(let i=0;i<6;i++){const at=dorsalCentres[i*2]!;trunkGeo.push(boneSweep(at,[[0,.04,-.19],[0,.06,0],[0,.04,.19]],[.022,.043,.022],.6,8));}
-sk('sk-trunk',['Trunk','躯干轴'],'direct',['original fossils in this example','本例中的原化石'],['Links the neck, ribs and pelvis along the back.','沿背部连接颈、肋部与骨盆。'],trunkGeo,[0,.6,0],.4,['sk-ribs','sk-pelvis','sk-arm-l','sk-arm-r']);
+sk('sk-trunk','direct',trunkGeo,[0,.6,0],.4,['sk-ribs','sk-pelvis','sk-arm-l','sk-arm-r']);
 const ribs:Primitive[]=ribCage(dorsalCentres,.66,.94,.028);
 for(let i=0;i<6;i++) ribs.push(boneSweep([-1.42+i*.22,1.19+i*.015,0],[[.06,.02,-.32],[0,-.04,0],[.06,.02,.32]],.012,.8,12));
-sk('sk-ribs',['Ribs','肋部'],'comparison',['sculpted restoration constrained by comparisons','有比较依据的补塑'],['Outlines the open rib cage beneath the trunk.','在躯干下方形成开放胸廓。'],ribs,[0,0,1],.5);
+sk('sk-ribs','comparison',ribs,[0,0,1],.5);
 const pelvisGeo=theropodPelvis();
-sk('sk-pelvis',['Pelvis','骨盆'],'direct',['original fossils in this example','本例中的原化石'],['Connects the trunk with the hindlimbs and tail.','连接躯干、后肢与尾。'],pelvisGeo,[0,.5,0],.3,['sk-leg-l','sk-leg-r','sk-tail-base']);
-for(const [id,z,level] of [['sk-arm-l',.43,'direct'],['sk-arm-r',-.43,'comparison']] as const){sk(id,[z>0?'Left forelimb':'Right forelimb',z>0?'左前肢':'右前肢'],level,[z>0?'original fossils in this example':'sculpted counterpart constrained by comparison',z>0?'本例中的原化石':'有对侧比较依据的补塑'],['Forms a short forelimb with two functional fingers.','构成带两个功能指的短前肢。'],theropodForelimb(z),[0,0,Math.sign(z)],.45,[],['Each T. rex hand has two functional fingers [S9]. The count does not apply to every dinosaur.','霸王龙每手有两个功能指[S9]，不能推广到所有恐龙。']);}
-for(const [id,z]of [['sk-leg-l',.48],['sk-leg-r',-.48]] as const){sk(id,[z>0?'Left hindlimb':'Right hindlimb',z>0?'左后肢':'右后肢'],'direct',['original fossils in this example','本例中的原化石'],['Supports the hindquarters through three main load-bearing toes.','通过三个主要承重趾支撑后部身体。'],theropodHindlimb(z),[0,0,Math.sign(z)],.5,[],['Three main support toes follow the theropod constraint [S48]. A small raised toe is not a fourth main support toe.','三个主要承重趾依兽脚类约束[S48]；小抬趾不是第四个主要承重趾。']);}
-sk('sk-tail-base',['Tail base','尾基'],'inferred',['sculpted restoration','示意补塑'],['Continues the backbone behind the pelvis.','在骨盆后延续身体轴。'],vertebralColumn([[.96,1.94,0],[1.55,1.89,0],[2.4,1.73,0]],16,.13,.062,.20,{chevrons:true}),[1,0,0],.45,['sk-tail-tip']);
-sk('sk-tail-tip',['Tail tip','尾端'],'inferred',['sculpted restoration','示意补塑'],['Tapers into a long tail raised clear of the platform.','逐渐收细为抬离台面的长尾。'],vertebralColumn([[2.4,1.73,0],[3.1,1.65,0],[3.7,1.62,0],[4.07,1.68,0]],24,.062,.008,.07,{chevrons:true,archLimit:8}),[1,0,0],.7);
+sk('sk-pelvis','direct',pelvisGeo,[0,.5,0],.3,['sk-leg-l','sk-leg-r','sk-tail-base']);
+for(const [id,z,level] of [['sk-arm-l',.43,'direct'],['sk-arm-r',-.43,'comparison']] as const){sk(id,level,theropodForelimb(z),[0,0,Math.sign(z)],.45,[]);}
+for(const [id,z]of [['sk-leg-l',.48],['sk-leg-r',-.48]] as const){sk(id,'direct',theropodHindlimb(z),[0,0,Math.sign(z)],.5,[]);}
+sk('sk-tail-base','inferred',vertebralColumn([[.96,1.94,0],[1.55,1.89,0],[2.4,1.73,0]],16,.13,.062,.20,{chevrons:true}),[1,0,0],.45,['sk-tail-tip']);
+sk('sk-tail-tip','inferred',vertebralColumn([[2.4,1.73,0],[3.1,1.65,0],[3.7,1.62,0],[4.07,1.68,0]],24,.062,.008,.07,{chevrons:true,archLimit:8}),[1,0,0],.7);
 
 // Local living-bird study. A separate enlarged feather is a comparison object.
 const bird = buildBird({ billLegTint: 'token:lamp' });
@@ -118,16 +122,16 @@ bird.legs = bird.legs.filter(p=>!(p.kind==='sweep'&&p.tint==='token:ink-2'&&p.at
 const belly=bird.body[0]!;
 if(belly.kind==='sweep'&&Array.isArray(belly.radius))belly.radius[2]=.275;
 const bodyGeo=bird.body;
-add('myna-body','living-museum',['Myna','八哥'],['Shows the main outline of a local living bird.','显示本地活鸟的大部位轮廓。'],['This original teaching bird represents a Javan myna found in Singapore. Birds are nested within theropod dinosaurs; combining that classification with the local occurrence makes this a local living-dinosaur example. It is not a Tyrannosaurus transforming into a myna. [S8, S23, S90]','这只原创教学鸟代表新加坡能见到的爪哇八哥。鸟类嵌套于兽脚类恐龙内；把这项分类与本地出现资料合起来，它就是本地活恐龙的例子，不是霸王龙变成八哥。[S8, S23, S90]'],bodyGeo);
+add('myna-body','living-museum',bodyGeo);
 const wingGeo=bird.wing;
-add('myna-wing','living-museum',['Wing','翼'],['Represents the bird forelimb.','代表鸟的前肢。'],['The folded wing marks a broad anatomical region, not a measured myna bone reconstruction. Similar outlines alone do not establish ancestry; classification uses wider fossil and anatomical evidence. [S8, S10, S90]','折翼标出解剖大部位，不是八哥骨骼的测量复原。相似外形本身不能确立祖先关系，分类结合更广泛的化石与解剖证据。[S8, S10, S90]'],wingGeo);
+add('myna-wing','living-museum',wingGeo);
 const birdLeg=bird.legs;
-add('myna-leg','living-museum',['Bird hindlimbs','鸟的后肢'],['Supports the living-bird outline.','支撑活鸟的外形。'],['Both hindlimbs belong to the local-bird teaching model. Their appearance does not identify the maker of the separate footprint slab. No exact body measurements or fine myna osteology are claimed. [S8, S23, S90]','两条后肢属于本地鸟教学模型，外形不能用于鉴定另一工位足迹的制造者。不宣称精确身体尺寸或细致的八哥骨学数据。[S8, S23, S90]'],birdLeg);
+add('myna-leg','living-museum',birdLeg);
 const featherGeo=bird.feather;
-add('myna-feather','living-museum',['Feather','羽毛比较件'],['Enlarges a modern feather for comparison.','放大现生鸟羽以便比较。'],['This is a modern-bird comparison model, not a fossil and not drawn to the bird body scale. Archaeopteryx fossils preserve a combination of features useful in studying early birds; this does not label it the proven direct ancestor of all birds. [S10, S90]','这是现生鸟类比较模型，不是化石，也不与鸟身体采用同一尺度。始祖鸟化石保存的特征组合有助研究早期鸟类，但不表示它已被证实是所有鸟的直接祖先。[S10, S90]'],featherGeo);
+add('myna-feather','living-museum',featherGeo);
 
 for(const [id,cx,z,title,zh]of [['prince-study',-.3,-2.6,'Prince','Prince'],['apollonia-study',0,0,'Apollonia','Apollonia'],['twinky-study',.3,2.6,'Twinky','Twinky']]as const){
- add(id,'living-museum',[`${title} study`,`${zh} 示意`],[`Introduces ${title} through a generic long-necked quadruped study.`,`以通用长颈四足示意介绍${title}。`],[`${title} is a current name used for a diplodocid sauropod fossil displayed at Lee Kong Chian Natural History Museum. The discovery site was Dana Quarry, Wyoming, in the Jurassic Morrison Formation. This original generic study does not copy the mount, individual size, species identity, sex or original-versus-restored bone inventory. Finding the specimens together is not proof of a parent–offspring relationship. [S17, S57, S90]`,`${title}是李光前自然历史博物馆展出的一具梁龙科蜥脚类化石的现行名字，发现于怀俄明州Dana采石场侏罗纪莫里森组。本原创通用示意不复制展台姿态、个体大小，不指定种、性别，也不标原骨与修复部分。一起发现不能证明亲子关系。[S17, S57, S90]`],diplodocid(cx,z),{castShadow:true});
+ add(id,'living-museum',diplodocid(cx,z),{castShadow:true});
 }
 
 // Bake the spec's one-time positive uniform affine transform for all six studies.
@@ -169,7 +173,7 @@ const cameras={
  'feather-detail':camera('bird',[.2,1.8,3],[-.52,1.14,.4]),
  'museum-pair':camera('museum',[3.42,7.27472,11.0835],[.45,.65,0]),
 };
-add('study-plinth','context',['Study platform','示意底台'],['Supports the teaching models.','承托教学模型。'],['Three low bevelled display plinths support the generic studies; they do not copy the museum mounts.','三座带倒角的低展台分别承托通用示意模型，不复制馆藏的真实展台。'],[-1,0,1].map(i=>({kind:'bevelBox',at:[i*.3*layout.museum!.scale,-.09,i*2.6*layout.museum!.scale],size:[6.5,.16,1.32],bevel:.045,color:'plastic',tint:'token:mannequin'} as Primitive)),{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
+add('study-plinth','context',[-1,0,1].map(i=>({kind:'bevelBox',at:[i*.3*layout.museum!.scale,-.09,i*2.6*layout.museum!.scale],size:[6.5,.16,1.32],bevel:.045,color:'plastic',tint:'token:mannequin'} as Primitive)),{context:true,castShadow:false,clip:false});delete parts.at(-1)!.group;
 // Small, translucent contact patches at each real manus/pes contact. These
 // remain under the feet; the opaque plinth covers the shared central blob.
 const plinth = parts.at(-1)!;
@@ -182,20 +186,20 @@ for (const [cx,z] of [[-.3,-2.6],[0,0],[.3,2.6]]) for (const x of [-.29,.46]) fo
 }
 
 const labels:Record<string,[string,string]>={'evidence-close':['Evidence','证据'],'burial-close':['Burial','埋藏'],'layers-close':['Layers','地层'],'skeleton-side':['Skeleton','骨架'],'bird-close':['Bird','鸟'],'museum-close':['Museum','馆藏']};
+
 const path='src/content/topics/fossils-and-skeletons/data/parts.json';
 const previous=fs.existsSync(path)?JSON.parse(fs.readFileSync(path,'utf8')):{};
-// Published copy is edited independently of the bootstrap text above. A form
-// rebuild must preserve that editorial work and every evidence label/fact.
+// Preserve accepted connections independently of the geometry rebuild.
 for(const part of parts){
  if(part.id==='study-plinth')continue;
  const published=previous.parts?.find((p:Part)=>p.id===part.id);
  if(!published)continue;
- for(const key of ['name','short','chainName','summary','detail','connects']as const){
+ for(const key of ['connects']as const){
   if(published[key]!==undefined)(part as any)[key]=published[key];
   else delete (part as any)[key];
  }
 }
-const result={...previous,parts,groups:[{id:'specimens',name:bi('Fossil evidence','化石证据'),color:'token:ink-2',card:false},{id:'burial',name:bi('Burial and minerals','埋藏与矿物'),color:'token:neutral',card:false},{id:'age-section',name:bi('Layers and ages','地层与年龄'),color:'token:ink-2',card:false},{id:'skeleton',name:bi('Rebuilding','骨架复原'),color:'token:bone'},{id:'living-museum',name:bi('Living birds and museum','活鸟与馆藏'),color:'token:neutral',card:false}],flows:[],animations:[],views:{shadows:'none',simVisibility:'instant',assembled:{camera:cameras['skeleton-side']},xray:{camera:cameras['burial-close']},exploded:{camera:cameras['skeleton-side']},reference:{fit:'layers'},section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:1.07}},presets:Object.entries(labels).map(([id,label])=>({id,label:bi(...label),camera:cameras[id as keyof typeof cameras]}))};
+const result={...previous,parts,groups:[{id:'specimens',name:bi('Fossil evidence','化石证据'),color:'token:ink-2',card:false},{id:'burial',name:bi('Burial and minerals','埋藏与矿物'),color:'token:neutral',card:false},{id:'age-section',name:bi('Layers and ages','地层与年龄'),color:'token:ink-2',card:false},{id:'skeleton',name:bi('Rebuilding','骨架复原'),color:'token:bone'},{id:'living-museum',name:bi('Living birds and museum','活鸟与馆藏'),color:'token:neutral',card:false}],flows:[],animations:[],views:{shadows:'none',assembled:{camera:cameras['skeleton-side']},xray:{camera:cameras['burial-close']},exploded:{camera:cameras['skeleton-side']},reference:{fit:'layers'},section:{plane:'xy'},cutaway:{normal:[0,0,-1],offset:1.07},simVisibility:'instant'},presets:Object.entries(labels).map(([id,label])=>({id,label:bi(...label),camera:cameras[id as keyof typeof cameras]}))};
 result.spec=[
  {key:bi('MODEL','模型'),value:bi('Schematic','示意'),tag:'design'},
  {key:bi('EVIDENCE','证据'),value:bi('Body and activity','身体与活动'),tag:'typical'},
@@ -205,6 +209,11 @@ result.spec=[
 result.sim=JSON.parse(fs.readFileSync('scripts/geo/fossils-and-skeletons/sim.json','utf8'));
 if(previous.groups)result.groups=previous.groups;
 if(previous.spec)result.spec=previous.spec;
+// Read-only editorial stage: no model baking or file writes.
+if (process.argv.includes('--text-only')) {
+ await new Promise<void>(done => process.stdout.write(JSON.stringify(result)+'\n', () => done()));
+ process.exit(0);
+}
 fs.writeFileSync('scripts/geo/fossils-and-skeletons/skeleton-source.json',JSON.stringify(parts.filter(p=>p.group==='skeleton'),null,2)+'\n');
 result.model=await bakeMuseum(parts);
 partsFile.parse(result);

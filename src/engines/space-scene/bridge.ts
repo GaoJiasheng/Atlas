@@ -143,7 +143,7 @@ export interface SensesReading {
 }
 export interface StageBridge {
   /** Installed only by the data-enabled inset HUD; evaluated from live anchors. */
-  insetLayout?: () => { bodies: readonly {x0:number;y0:number;x1:number;y1:number}[]; clear(place: LeaderPlace, ax: number, ay: number, dx?: number, dy?: number, titles?: boolean): boolean };
+  insetLayout?: () => { bodies: readonly {x0:number;y0:number;x1:number;y1:number}[]; frames: readonly {x0:number;y0:number;x1:number;y1:number}[]; clear(place: LeaderPlace, ax: number, ay: number, dx?: number, dy?: number): boolean };
   /** Stage content that has really been drawn (lazy chunks resolved, StageMark): `scene` (clocks, parts, probes), `overlays` (the sim overlays) and `model` (the glb's meshes). */
   stageMarks: Set<string>;
   /** The scene asks for sim overlays now, so `__atlas.ready` also waits for the `overlays` mark. */

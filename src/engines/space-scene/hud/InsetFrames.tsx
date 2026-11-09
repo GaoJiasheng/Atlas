@@ -34,9 +34,9 @@ export function InsetFrames({ file, bridge }: { file: PartsFile; bridge: StageBr
         const base = r.y - 5 < 10 ? r.y + 12 : r.y - 5, width = texts?.[k]?.getComputedTextLength() ?? 0;
         if (width > 0) titles.push({x0:r.x+2,y0:base-12,x1:r.x+10+width,y1:base+3});
       });
-      return {bodies,clear:(p,ax,ay,dx=0,dy=0,withTitles=true)=>leaderClearOfInsets(dx || dy ? {
+      return {bodies,frames:rects,clear:(p,ax,ay,dx=0,dy=0)=>leaderClearOfInsets(dx || dy ? {
         ...p,x0:p.x0+dx,x1:p.x1+dx,y0:p.y0+dy,y1:p.y1+dy,sx:p.sx+dx,ex:p.ex+dx,sy:p.sy+dy,
-      } : p,ax,ay,rects,withTitles ? titles : [])};
+      } : p,ax,ay,rects,titles)};
     };
     bridge.invalidate();
     return () => { delete bridge.insetLayout; };

@@ -1102,6 +1102,11 @@ const data = {
   sim,
 };
 
+// Editorial-only rebuild: preserve the same text without baking porous meshes.
+if (process.argv.includes('--text-only')) {
+ await new Promise<void>(done => process.stdout.write(JSON.stringify(data)+'\n', () => done()));
+ process.exit(0);
+}
 if(await rebuildMeshes(data))process.exit(0);
 
 writeFileSync(OUT, `${JSON.stringify(data, null, 1)}\n`);

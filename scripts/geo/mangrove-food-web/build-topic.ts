@@ -64,7 +64,7 @@ const tideRows = removals.flatMap((remove) => ['low', 'high'].map((tide) => ({ w
   'water-rise': tide === 'high' ? .14 : 0, 'crab-rise': tide === 'high' ? .16 : 0,
   'show-fiddlers': Number(remove !== 'n-fiddlers' && tide === 'low'),
 }, source: ['S30'] })));
-await writeTreeMeshes();
+if (!process.argv.includes('--text-only')) await writeTreeMeshes();
 const file = buildParts();
 const anchors: Record<string, [number, number, number]> = {
   'n-mangrove': [-.1, .025, .1], 'n-algae': [.055, .014, .13],
@@ -105,4 +105,8 @@ const sim = {
     note: text("Arrows show possible food paths. A missing path here does not mean an animal will die.", "箭头表示可能的食物路径。图中路径中断，不表示动物一定会死亡。"),
   },
 };
+if (process.argv.includes('--text-only')) {
+ await new Promise<void>(done => process.stdout.write(JSON.stringify({ ...file, flows, sim })+'\n', () => done()));
+ process.exit(0);
+}
 writeFileSync(resolve(target, 'parts.json'), JSON.stringify({ ...file, flows, sim }, null, 2) + '\n');

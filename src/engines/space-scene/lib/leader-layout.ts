@@ -61,6 +61,8 @@ export interface LeaderFrame {
   obstacles: readonly ScreenRect[];
   /** Optional data-driven barrier rule, supplied by the lazy inset HUD. */
   accept?: (place: LeaderPlace, item: LeaderItem) => boolean;
+  /** Framed windows (insets): a placard whose anchor sits inside one also tries just outside its left and right edges. */
+  beside?: readonly ScreenRect[];
 }
 
 export interface LeaderPlace {
@@ -288,6 +290,12 @@ function bestPlace(
             [(own ? Math.max(own.x1, item.ax) : item.ax) + reach, W_BESIDE],
             [item.ax + reach, W_NEAR],
           ];
+    // Just outside a framed window around the anchor: the stub stays outside, one leg enters the frame.
+    const clearance = Math.max(LEADER.PAD, LEADER.INSET + LEADER.ELBOW) + 1;
+    for (const r of f.beside ?? []) {
+      if (item.ax <= r.x0 || item.ax >= r.x1 || item.ay <= r.y0 || item.ay >= r.y1) continue;
+      xs.push(side === 'L' ? [r.x0 - clearance - item.w, W_BESIDE] : [r.x1 + clearance, W_BESIDE]);
+    }
     for (let k = 0; k < xs.length; k++) {
       const [x0raw, xCost] = xs[k]!;
       const x0 = Math.min(Math.max(x0raw, minX), maxX - item.w);

@@ -258,7 +258,7 @@ div.space-inspector__detail:not([hidden]) {
 .space-co__note {
   font: 400 calc(10.6 * var(--u)) / 1 var(--font-hud);
   letter-spacing: 0.04em;
-  fill: var(--ink-3);
+  fill: var(--leader-note);
 }
 .space-co__tri {
   pointer-events: none;
@@ -2246,3 +2246,32 @@ button.space-plate__sel:focus-visible {
 .space-microscope canvas { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ink); background: var(--paper); }
 .space-microscope p { margin: 6px 0; }
 .space-microscope ul { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 0; list-style: none; font-size: 10px; }
+
+/* The orbit diagram can exceed a short landscape stage. Scroll the whole
+ * card/control column inside the HUD's first grid row, above the chapter axis.
+ * The data-enabled card remains mounted when folded, so the rule still applies.
+ * The column itself stays click-through (the HUD's pointer-events: none): wheel
+ * and touch scrolling over a card still chain to it, while its empty part
+ * below the cards keeps dragging the stage. */
+.atlas-hud__right:has(.space-orbit) {
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.atlas-hud__right:has(.space-orbit) > :is(.atlas-card, .atlas-stage__overlay) {
+  flex: none;
+  max-height: none;
+  overflow: visible;
+}
+.atlas-hud__right:has(.space-orbit) .atlas-stage__overlay > * {
+  flex: none;
+}
+/* Short or narrow stages and touch only: on a roomy desktop stage taller rows
+ * would make the HUD room solver fold Tools / Key that fit on their own. */
+@media (max-width: 1280px), (max-height: 800px), (pointer: coarse) {
+  .atlas-hud__right:has(.space-orbit) :is(.atlas-ctl__row, .atlas-card__toggle) {
+    min-height: var(--hit);
+    min-width: var(--hit);
+  }
+}

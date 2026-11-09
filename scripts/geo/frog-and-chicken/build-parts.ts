@@ -184,14 +184,14 @@ for (const [prefix, id, points, names] of [
   ['compare', 'comparison-marker', [[-3, .2, 3.5], [-1, .2, 3.5], [1, .2, 3.5], [3, .2, 3.5]], ['frog', 'chicken', 'mosquito', 'plant']],
 ] as [string, string, V[], string[]][]) for (let i = 0; i < names.length; i++) poses[`${prefix}-at-${names[i]}`] = { [id]: { offset: points[i]!.map((v, j) => n(v - points[0]![j]!)) }, duration: .65 };
 poses['egg-window-open'] = { 'egg-shell-window': { offset: [.8, .25, -.41], rotation: [0, 0, 0] }, duration: .65 };
-await writeComparisonMeshes(meshRows,join(import.meta.dirname,'../../../public/models/frog-and-chicken.glb'));
+if (!process.argv.includes('--text-only')) await writeComparisonMeshes(meshRows,join(import.meta.dirname,'../../../public/models/frog-and-chicken.glb'));
 const data = {
   model: '/models/frog-and-chicken.glb',
   parts,
   groups: [
     { id: 'frog-cycle', name: bi('Frog observations', '青蛙观察'), color: 'token:ink-2' },
     { id: 'chicken-cycle', name: bi('Chicken observations', '鸡的观察'), color: 'token:neutral' },
-    { id: 'comparison', name: bi('Life-cycle comparison', '生活史比较'), color: 'token:cold' },
+    { id: 'comparison', name: bi('Life-cycle comparison', '生命周期比较'), color: 'token:cold' },
   ],
   flows: [], animations: [], poses,
   presets: editorial.presets,
@@ -199,6 +199,11 @@ const data = {
   spec: editorial.spec,
   sim: editorial.sim,
 };
+// Read-only text stage, before asset or data writes.
+if (process.argv.includes('--text-only')) {
+ await new Promise<void>(done => process.stdout.write(JSON.stringify(data)+'\n', () => done()));
+ process.exit(0);
+}
 // Parse before writing, but keep author JSON rather than transformed pose schema.
 partsFile.parse(data);
 mkdirSync(join(out, '..'), { recursive: true });

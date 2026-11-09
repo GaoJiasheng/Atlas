@@ -20,7 +20,7 @@ export const GROUP_TEXT: Record<string, T> = {
   male: t('Male', '雄蚊'),
   'water-stages': t('Life in water', '水中的阶段'),
   home: t('Water at home', '家里的积水'),
-  cycle: t('Life cycle', '生活史'),
+  cycle: t('Life cycle', '生命周期'),
   air: t('Air', '空气'),
   food: t('Food', '食物'),
 };
@@ -54,7 +54,7 @@ export const SIM_TEXT = {
     day: t('Days after hatching', '孵化后第几天'),
     every: t('Water tipped out every', '每隔几天倒一次水'),
     wipe: t('Wall scrubbed too', '倒水后也刷壁'),
-    compare: t("Show a grasshopper's life cycle", '并排看蝗虫的生活史'),
+    compare: t("Show a grasshopper's life cycle", '并排看蝗虫的生命周期'),
   },
   outputs: {
     stage: t('Stage', '阶段'),
@@ -269,10 +269,10 @@ export const PART_TEXT: Record<string, PartText> = {
   dish: {
     name: t('Glass dish', '玻璃皿'),
     summary: t('A shallow dish of still water, for display.', '一只盛着积水、用来展示的浅皿。'),
-    detail: t(
-      'A dish 40 mm across, drawn 200 × life size like the mosquitoes, with the stages of one life cycle set round it in order [S1].\n\nIn a real container there would be many eggs, larvae and pupae, all mixed together. The dish is only a way of showing them; it is not a suggestion to keep mosquitoes.',
-      '一只直径 40 毫米的皿，和蚊子一样放大 200 倍画，一个生活史的各个阶段按顺序绕着它排开 [S1]。\n\n真实的容器里，会有很多卵、孑孓和蛹混在一起。这只皿只是为了展示它们，并不是建议养蚊子。',
-    ),
+    detail: {
+      "en": "A dish 40 mm across, drawn 200 × life size like the mosquitoes, with the stages of one life cycle set round it in order [S1].\n\nIn a real container there would be many eggs, larvae and pupae, all mixed together. The dish is only a way of showing them; it is not a suggestion to keep mosquitoes.",
+      "zh": "一只直径 40 毫米的皿，和蚊子一样放大 200 倍画，一个生命周期的各个阶段按顺序绕着它排开 [S1]。\n\n真实的容器里，会有很多卵、孑孓和蛹混在一起。这只皿只是为了展示它们，并不是建议养蚊子。"
+    },
   },
   'dish-water': {
     name: t('Still water', '积水'),

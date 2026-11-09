@@ -115,7 +115,7 @@ for(const [name,angle] of [['scope-scan',0],['scope-low',-120],['scope-high',120
  poses[name]={duration:.8};
  for(const id of ['scope-turret','scope-objective-four','scope-objective-ten','scope-objective-forty'])poses[name][id]={pivot,rotation:[0,angle,0]};
 }
-export async function buildCellsParts(){
+export async function buildCellsParts({textOnly=false}={}){
  polishCellParts(parts);
  polishOnionPatch(parts);
  polishMicroscope(parts);
@@ -125,7 +125,8 @@ export async function buildCellsParts(){
   const p=parts.find(p=>p.id===id);
   for(const q of [p.primitive,...(p.extra??[])])q.at=q.at.map((v,k)=>round(v+offset[k]));
  }
- const organic=await buildOrganelles(parts);
+
+ const organic=textOnly ? {model:'/models/cells.glb'} : await buildOrganelles(parts);
  const sim=makeMicroscopeSim('S20');
  polishField(sim);
  sim.bind=[
@@ -145,7 +146,9 @@ export async function buildCellsParts(){
  spec:[{key:bi('Model','模型'),value:bi('Separate enlarged cells','细胞独立放大'),tag:'design'},{key:bi('Eyepiece','目镜'),value:'10× DESIGN',tag:'design'},{key:bi('Objectives','物镜'),value:'4 / 10 / 40× DESIGN',tag:'design'},{key:bi('Field number','视场数'),value:'18 mm DESIGN',tag:'design'}]};
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)) {
- const file=await buildCellsParts();
+ const textOnly=process.argv.includes('--text-only');
+ const file=await buildCellsParts({textOnly});
+ if(textOnly){await new Promise(done => process.stdout.write(JSON.stringify(file)+'\n', () => done()));process.exit(0);}
  writeFileSync(output,JSON.stringify(file,null,2)+'\n');
  process.stdout.write(`Generated ${parts.length} selectable cells parts.\n`);
 }

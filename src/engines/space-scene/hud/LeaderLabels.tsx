@@ -344,16 +344,10 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       // Only inset-enabled topics load the barrier geometry. Its provider uses
       // the same live anchors and stage size as the visible dashed frame.
       const inset = bridge.insetLayout?.();
-      const within = (titles: boolean) => layoutLeaders(items, {
-        ...f,obstacles:[...f.obstacles,...inset!.bodies],accept:(p,i)=>inset!.clear(p,i.ax,i.ay,0,0,titles),
-      });
-      // Prefer leaders clear of the frame titles; if that drops a label, a leg across a title beats no label.
-      let titles = true;
-      let places = inset ? within(true) : layoutLeaders(items, f);
-      if (inset && places.length < items.length) {
-        const loose = within(false);
-        if (loose.length > places.length) [places, titles] = [loose, false];
-      }
+      // Frame titles are hard barriers, even when a crowded view loses a label.
+      const places = inset ? layoutLeaders(items, {
+        ...f, obstacles: [...f.obstacles, ...inset.bodies], beside: inset.frames, accept: (p, i) => inset.clear(p, i.ax, i.ay),
+      }) : layoutLeaders(items, f);
       let moving = false;
       placed.clear();
       const k = Math.min(1, dt * 10);
@@ -379,7 +373,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           l.y += (p.y0 - l.y) * k;
         }
         // A legal endpoint does not make a glide across a moving frame legal.
-        if (inset && !inset.clear(p,a.x,a.y,l.x-p.x0,l.y-p.y0,titles)) {
+        if (inset && !inset.clear(p,a.x,a.y,l.x-p.x0,l.y-p.y0)) {
           l.x=p.x0;
           l.y=p.y0;
         }

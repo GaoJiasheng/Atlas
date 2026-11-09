@@ -392,6 +392,12 @@ const data = {
 
 polishEar(parts, data);
 polishEye(parts, data);
+// Read-only editorial stage: no model baking or file writes.
+if (process.argv.includes('--text-only')) {
+ await new Promise<void>(done => process.stdout.write(JSON.stringify(data)+'\n', () => done()));
+ process.exit(0);
+}
+
 // Preserve the nine existing sweeps verbatim, but ship them as one static mesh
 // so the leader can use a surface point instead of the centre of one bristle.
 // The explicit bundle-bend pivot still moves all nine together as before.
