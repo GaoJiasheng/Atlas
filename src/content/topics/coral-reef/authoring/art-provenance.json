@@ -23,8 +23,8 @@
         },
         {
           "file": "public/illustrations/coral-reef@2x.webp",
-          "bytes": 261592,
-          "sha256": "7f97033a77911ec1caafe3e6da855baa55706786af8ca08014c07b50a275523d",
+          "bytes": 247932,
+          "sha256": "7981869acf21307a71ca4e06f39978bc9293e38a54b85cab58b9c42cf8383d35",
           "width": 1600,
           "height": 1600,
           "alpha": true
@@ -67,5 +67,12 @@
         }
       ]
     }
-  ]
+  ],
+  "weightPass": {
+    "date": "2026-11-09",
+    "file": "public/illustrations/coral-reef@2x.webp",
+    "method": "Re-encoded existing decoded RGBA with cwebp drawing preset, exact, alpha_q 100, alpha_filter fast, q95 size search, m4, pass6, sharp_yuv. Dimensions and all decoded alpha samples unchanged.",
+    "review": "No visible loss in paper/cinema at 420 px, 840 px and 2× native detail. No redraw or content edits.",
+    "audit": "docs/69-illustration-weight-pass.json"
+  }
 }

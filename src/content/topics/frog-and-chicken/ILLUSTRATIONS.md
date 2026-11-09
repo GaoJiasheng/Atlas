@@ -2,6 +2,8 @@
 
 2026-10-27：逐张查看主 checkout 的 approved PNG，然后用 scripts/illustrate.ts process / figure 处理。没有新生成，没有修改原文件。两张新图为原有准备资产；蚊子图复制自 art/planned/mosquito/mosquito-water-stages.png，原图保持原位。图中对象分别放大，不是共同尺度或历期图。
 
+2026-11-09 weight pass：仅重新编码 1600 px 封面；尺寸、全部解码 alpha 样本及构图保持不变。420 px、840 px 和 2× 原尺寸局部在 paper / cinema 下并排复核；细排线、轮廓和中性灰无可见损失。上表已刷新字节数、SHA-256 和 chromaticPixels；完整审计见 `docs/69-illustration-weight-pass.json`。
+
 原创 Atlas 插图沿用 LICENSE-CONTENT；没有外部第三方资产或 share-alike 数据，不新增 licence carve-out。
 
 ```json
@@ -19,10 +21,10 @@
     "file": "public/illustrations/frog-and-chicken@2x.webp",
     "width": 1600,
     "height": 1600,
-    "bytes": 264934,
-    "sha256": "6c64adf367f6b09efa072da5d0ed2f3e4f8957c22fe81aca2408618ba09b0c7c",
+    "bytes": 253310,
+    "sha256": "8eebb3048d635a7a8ce05541ca41a4b0d5db996228ed07f425849074315e3cf7",
     "transparentPixels": 1740184,
-    "chromaticPixels": 10041
+    "chromaticPixels": 9942
   },
   {
     "file": "public/illustrations/figures/frog-and-chicken-eggs-and-tadpole.webp",

@@ -1,0 +1,3286 @@
+{
+  "date": "2026-11-09",
+  "budgetUnit": "decimal bytes (KB = 1000 bytes; stricter than illustrate.ts KiB budgets)",
+  "method": "Existing decoded RGBA, no resize/crop/draw/alpha quantization. cwebp 1.6.0 drawing preset, exact, alpha_q 100, alpha_filter fast, q95 (q90 retries), m4, pass6, sharp_yuv; binary size target subtracts alpha payload. Lossless WebP also tried; candidates larger than source rejected.",
+  "qa": "CPU composites follow global.css and theme tokens; paper multiply and cinema invert/contrast/screen/opacity, physical-tone exception retained for light/shadow and Moon figures. Every candidate compared at 420 px, 840 px, and a 200px source patch enlarged to 400px (2\u00d7 native); paper and cinema. Detail patch maximizes visible RGB difference. Automated SSIM screening plus visual review; accepted candidates preserve all alpha samples exactly. No browser/desktop used.",
+  "previewDirectory": "/tmp/atlas-weight-pass/final-qa",
+  "totals": {
+    "allWebpFiles": 337,
+    "beforeBytes": 42544958,
+    "afterBytes": 42293772,
+    "savedBytes": 251186,
+    "initialOwnedOverTarget": 64,
+    "reencoded": 27,
+    "ownedLeftOverTarget": 37,
+    "skippedOverTarget": 16
+  },
+  "updatedProvenance": [
+    "src/content/topics/coral-reef/authoring/art-provenance.json",
+    "src/content/topics/frog-and-chicken/ILLUSTRATIONS.md"
+  ],
+  "files": [
+    {
+      "file": "public/illustrations/coral-reef@2x.webp",
+      "beforeBytes": 261592,
+      "afterBytes": 247932,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "7f97033a77911ec1caafe3e6da855baa55706786af8ca08014c07b50a275523d",
+      "afterSha256": "7981869acf21307a71ca4e06f39978bc9293e38a54b85cab58b9c42cf8383d35",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 247932,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.5689,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.998793
+          },
+          "cinema420": {
+            "mean": 0.4525,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.998784
+          },
+          "paper840": {
+            "mean": 0.9832,
+            "p99": 6.0,
+            "max": 14,
+            "ssim": 0.996631
+          },
+          "cinema840": {
+            "mean": 0.7809,
+            "p99": 5.0,
+            "max": 11,
+            "ssim": 0.996727
+          }
+        },
+        "detailCrop": [
+          700,
+          300,
+          900,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/ancient-civilisations-roman-aqueduct.webp",
+      "beforeBytes": 120552,
+      "afterBytes": 112388,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "8c7d7dee9236287130740cb618b7d7fd429f5d95ede184d2d6a169f8b50367dd",
+      "afterSha256": "f53f6068beaa19c1d5e69ad7eb31a42f0dfb2d0e449dce2a47acc01704d26409",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112388,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.7249,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996507
+          },
+          "cinema420": {
+            "mean": 0.5751,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.996808
+          },
+          "paper840": {
+            "mean": 1.1372,
+            "p99": 8.0,
+            "max": 20,
+            "ssim": 0.991443
+          },
+          "cinema840": {
+            "mean": 0.9025,
+            "p99": 6.0,
+            "max": 16,
+            "ssim": 0.992213
+          }
+        },
+        "detailCrop": [
+          100,
+          400,
+          300,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/area-perimeter-garden-fence.webp",
+      "beforeBytes": 238102,
+      "afterBytes": 238102,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Exact-alpha candidate exceeds target; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "7fb2f6926be86c301cda7132394cba2b09546f43cdfb3e60045c5533784339eb",
+      "afterSha256": "7fb2f6926be86c301cda7132394cba2b09546f43cdfb3e60045c5533784339eb",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 293336,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.1429,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.999824
+          },
+          "cinema420": {
+            "mean": 0.1135,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.999802
+          },
+          "paper840": {
+            "mean": 0.2426,
+            "p99": 2.0,
+            "max": 6,
+            "ssim": 0.999638
+          },
+          "cinema840": {
+            "mean": 0.1927,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999614
+          }
+        },
+        "detailCrop": [
+          600,
+          400,
+          800,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/area-perimeter-hdb-floor-plan.webp",
+      "beforeBytes": 142466,
+      "afterBytes": 142466,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "a0e9d21cfa47ba31bcfa9f1fd6484458dc814a2516357982db0b863673578f90",
+      "afterSha256": "a0e9d21cfa47ba31bcfa9f1fd6484458dc814a2516357982db0b863673578f90",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 114922,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.4791,
+            "p99": 7.0,
+            "max": 17,
+            "ssim": 0.997727
+          },
+          "cinema420": {
+            "mean": 0.3806,
+            "p99": 5.0,
+            "max": 14,
+            "ssim": 0.998049
+          },
+          "paper840": {
+            "mean": 0.8988,
+            "p99": 14.0,
+            "max": 44,
+            "ssim": 0.98901
+          },
+          "cinema840": {
+            "mean": 0.7133,
+            "p99": 11.0,
+            "max": 34,
+            "ssim": 0.990204
+          }
+        },
+        "detailCrop": [
+          900,
+          600,
+          1100,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/b200-airflow.webp",
+      "beforeBytes": 134396,
+      "afterBytes": 119406,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "4209e32e0f50822a48be7e5883cf60228802e929a3e0eba2fcfc2d85ee0719e4",
+      "afterSha256": "b832aa6d95ba52eada06ed908d9f7b8b72875e8f7178fa17b8ae76822e772532",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119406,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.103,
+            "p99": 5.0,
+            "max": 11,
+            "ssim": 0.997163
+          },
+          "cinema420": {
+            "mean": 0.8765,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.997362
+          },
+          "paper840": {
+            "mean": 1.8017,
+            "p99": 9.0,
+            "max": 22,
+            "ssim": 0.991212
+          },
+          "cinema840": {
+            "mean": 1.4307,
+            "p99": 7.0,
+            "max": 18,
+            "ssim": 0.99211
+          }
+        },
+        "detailCrop": [
+          900,
+          500,
+          1100,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/b200-gpu-module.webp",
+      "beforeBytes": 121184,
+      "afterBytes": 110872,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "1d466055f00e3f3f613b92dcfa610560793f3e1b8a72d59c3ba99b116d146f4c",
+      "afterSha256": "4b63cfc724b38817a86b00556002755a9c33222265397419b4d20a1bf16d5719",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 110872,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.6375,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.997041
+          },
+          "cinema420": {
+            "mean": 0.5069,
+            "p99": 4.0,
+            "max": 7,
+            "ssim": 0.997464
+          },
+          "paper840": {
+            "mean": 1.0783,
+            "p99": 8.0,
+            "max": 18,
+            "ssim": 0.991543
+          },
+          "cinema840": {
+            "mean": 0.8563,
+            "p99": 6.0,
+            "max": 14,
+            "ssim": 0.992857
+          }
+        },
+        "detailCrop": [
+          300,
+          300,
+          500,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/circuits-tester.webp",
+      "beforeBytes": 122424,
+      "afterBytes": 114562,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "a82cf1161f745c3f4a5ac01c5ab7ee66bf7f1af223b649637c7c58ac010bdab2",
+      "afterSha256": "171e530f4e12f8efb61b73fe801128c3362a087ca38fd91027023f2a93a9ae56",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 114562,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3021,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.999401
+          },
+          "cinema420": {
+            "mean": 0.2394,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.999441
+          },
+          "paper840": {
+            "mean": 0.5065,
+            "p99": 6.0,
+            "max": 15,
+            "ssim": 0.997517
+          },
+          "cinema840": {
+            "mean": 0.402,
+            "p99": 5.0,
+            "max": 12,
+            "ssim": 0.997773
+          }
+        },
+        "detailCrop": [
+          300,
+          100,
+          500,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/decimals-coin-tray.webp",
+      "beforeBytes": 122044,
+      "afterBytes": 112784,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "2be79a97f3e2c57c1da7951a8f04ef4e9a63972228edec44eeb056d0d9d9dd3a",
+      "afterSha256": "ca8cd1520727fa7e24c3847cd852d9a5c19bbced36dea1975c3bb2656ba51c32",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112784,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.5501,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.996906
+          },
+          "cinema420": {
+            "mean": 0.4384,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.997341
+          },
+          "paper840": {
+            "mean": 0.8723,
+            "p99": 6.0,
+            "max": 14,
+            "ssim": 0.991587
+          },
+          "cinema840": {
+            "mean": 0.6935,
+            "p99": 5.0,
+            "max": 11,
+            "ssim": 0.993028
+          }
+        },
+        "detailCrop": [
+          900,
+          200,
+          1100,
+          400
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/decimals-four-cups.webp",
+      "beforeBytes": 122228,
+      "afterBytes": 113428,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "bf91e4d4466931956f1ff833aebaedaf69b5d8e6b4642e71c60f686d02ea9104",
+      "afterSha256": "70c44996e5c3f6889a5342b0ba6971faa982eeeb21515e239ab9f27e4faf93e0",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113428,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.5316,
+            "p99": 4.0,
+            "max": 10,
+            "ssim": 0.997148
+          },
+          "cinema420": {
+            "mean": 0.4222,
+            "p99": 3.0,
+            "max": 8,
+            "ssim": 0.997637
+          },
+          "paper840": {
+            "mean": 0.8659,
+            "p99": 8.0,
+            "max": 18,
+            "ssim": 0.992333
+          },
+          "cinema840": {
+            "mean": 0.6874,
+            "p99": 6.0,
+            "max": 15,
+            "ssim": 0.993737
+          }
+        },
+        "detailCrop": [
+          300,
+          100,
+          500,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/digestive-system-tooth-section.webp",
+      "beforeBytes": 131216,
+      "afterBytes": 131216,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "c62fe3ad8c4cfc3e9479bb7a540b8e61522b2023cca8e3bcc2d42b59613a063e",
+      "afterSha256": "c62fe3ad8c4cfc3e9479bb7a540b8e61522b2023cca8e3bcc2d42b59613a063e",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113506,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.0448,
+            "p99": 7.0,
+            "max": 13,
+            "ssim": 0.995166
+          },
+          "cinema420": {
+            "mean": 0.8296,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.995708
+          },
+          "paper840": {
+            "mean": 1.8887,
+            "p99": 12.0,
+            "max": 28,
+            "ssim": 0.984263
+          },
+          "cinema840": {
+            "mean": 1.5002,
+            "p99": 10.0,
+            "max": 21,
+            "ssim": 0.98587
+          }
+        },
+        "detailCrop": [
+          400,
+          600,
+          600,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/digestive-system-villus.webp",
+      "beforeBytes": 173648,
+      "afterBytes": 173648,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "d0b6002ce586900b1e7556753670070917996252935b6d43c0c415c59a30cd82",
+      "afterSha256": "d0b6002ce586900b1e7556753670070917996252935b6d43c0c415c59a30cd82",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115480,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.8741,
+            "p99": 10.0,
+            "max": 19,
+            "ssim": 0.988227
+          },
+          "cinema420": {
+            "mean": 1.4882,
+            "p99": 8.0,
+            "max": 15,
+            "ssim": 0.988874
+          },
+          "paper840": {
+            "mean": 3.5273,
+            "p99": 20.0,
+            "max": 43,
+            "ssim": 0.954724
+          },
+          "cinema840": {
+            "mean": 2.8011,
+            "p99": 16.0,
+            "max": 33,
+            "ssim": 0.95765
+          }
+        },
+        "detailCrop": [
+          700,
+          500,
+          900,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/energy-conversion-power-station.webp",
+      "beforeBytes": 136476,
+      "afterBytes": 136476,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate visibly coarsens fine turbine/pipe detail at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "88b629f12aae9f99873580f8853ffcf87f81bbd68c61f1d734c5c31e3dd7d961",
+      "afterSha256": "88b629f12aae9f99873580f8853ffcf87f81bbd68c61f1d734c5c31e3dd7d961",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115808,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.7779,
+            "p99": 6.0,
+            "max": 13,
+            "ssim": 0.997929
+          },
+          "cinema420": {
+            "mean": 0.6182,
+            "p99": 5.0,
+            "max": 11,
+            "ssim": 0.99808
+          },
+          "paper840": {
+            "mean": 1.375,
+            "p99": 12.0,
+            "max": 30,
+            "ssim": 0.991982
+          },
+          "cinema840": {
+            "mean": 1.0917,
+            "p99": 9.0,
+            "max": 24,
+            "ssim": 0.992799
+          }
+        },
+        "detailCrop": [
+          200,
+          500,
+          400,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/energy-conversion-sun-sources.webp",
+      "beforeBytes": 167042,
+      "afterBytes": 167042,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "17802d4b96f0c4bcfe07e0d2a796b184275e0c14a4731c38ebaf4dd61ee4be31",
+      "afterSha256": "17802d4b96f0c4bcfe07e0d2a796b184275e0c14a4731c38ebaf4dd61ee4be31",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119300,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.1174,
+            "p99": 11.0,
+            "max": 24,
+            "ssim": 0.991845
+          },
+          "cinema420": {
+            "mean": 0.887,
+            "p99": 9.0,
+            "max": 19,
+            "ssim": 0.992614
+          },
+          "paper840": {
+            "mean": 2.014,
+            "p99": 22.0,
+            "max": 68,
+            "ssim": 0.970345
+          },
+          "cinema840": {
+            "mean": 1.5987,
+            "p99": 17.0,
+            "max": 53,
+            "ssim": 0.973138
+          }
+        },
+        "detailCrop": [
+          500,
+          600,
+          700,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/energy-conversion-tengeh.webp",
+      "beforeBytes": 157784,
+      "afterBytes": 157784,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "2a31ea2e82621368d39045d239f5f28d861d8f8703060da1c528336ad3e96073",
+      "afterSha256": "2a31ea2e82621368d39045d239f5f28d861d8f8703060da1c528336ad3e96073",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 117752,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.398,
+            "p99": 8.0,
+            "max": 17,
+            "ssim": 0.986205
+          },
+          "cinema420": {
+            "mean": 1.1095,
+            "p99": 7.0,
+            "max": 13,
+            "ssim": 0.98847
+          },
+          "paper840": {
+            "mean": 2.6612,
+            "p99": 17.0,
+            "max": 42,
+            "ssim": 0.956441
+          },
+          "cinema840": {
+            "mean": 2.1128,
+            "p99": 13.0,
+            "max": 33,
+            "ssim": 0.963156
+          }
+        },
+        "detailCrop": [
+          400,
+          100,
+          600,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/forces-bicycle-brake.webp",
+      "beforeBytes": 121396,
+      "afterBytes": 113792,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "d69e4118e442b96b1191359b00effcaa01e779b1b3c76e1ff1e09cb02403f5f6",
+      "afterSha256": "442114df8e3795d21c0588c04654febac5da24db234eaa483b2986e2b0b3ea5b",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113792,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3869,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.999175
+          },
+          "cinema420": {
+            "mean": 0.3067,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.999207
+          },
+          "paper840": {
+            "mean": 0.6184,
+            "p99": 7.0,
+            "max": 17,
+            "ssim": 0.996654
+          },
+          "cinema840": {
+            "mean": 0.4911,
+            "p99": 5.0,
+            "max": 13,
+            "ssim": 0.996973
+          }
+        },
+        "detailCrop": [
+          400,
+          300,
+          600,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/forces-playground-slide.webp",
+      "beforeBytes": 207014,
+      "afterBytes": 207014,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Exact-alpha candidate exceeds target; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "b0e8f0873cccee9097e550e91425d5d69c3b74787a60a636baaf26265f646f81",
+      "afterSha256": "b0e8f0873cccee9097e550e91425d5d69c3b74787a60a636baaf26265f646f81",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 132524,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 2.785,
+            "p99": 20.0,
+            "max": 46,
+            "ssim": 0.943054
+          },
+          "cinema420": {
+            "mean": 2.2089,
+            "p99": 16.0,
+            "max": 36,
+            "ssim": 0.952402
+          },
+          "paper840": {
+            "mean": 4.2399,
+            "p99": 33.0,
+            "max": 83,
+            "ssim": 0.868511
+          },
+          "cinema840": {
+            "mean": 3.3652,
+            "p99": 26.0,
+            "max": 65,
+            "ssim": 0.886101
+          }
+        },
+        "detailCrop": [
+          300,
+          100,
+          500,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/how-planes-fly-turbofan-cutaway.webp",
+      "beforeBytes": 120870,
+      "afterBytes": 109446,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "ae5b083b57d236c5bb1d5a636bdbd73f0254cce02da595968f54a320ab5bbe93",
+      "afterSha256": "f562995becaa6a4e24717d13fbc1ed242e820a3cf775d5c641060b37b4740039",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 109446,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3841,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.999005
+          },
+          "cinema420": {
+            "mean": 0.3045,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999091
+          },
+          "paper840": {
+            "mean": 0.6802,
+            "p99": 6.0,
+            "max": 13,
+            "ssim": 0.995304
+          },
+          "cinema840": {
+            "mean": 0.5403,
+            "p99": 4.0,
+            "max": 10,
+            "ssim": 0.996126
+          }
+        },
+        "detailCrop": [
+          400,
+          300,
+          600,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/light-and-shadows-sun-day.webp",
+      "beforeBytes": 120766,
+      "afterBytes": 113794,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "2fda2347b18ba93f42fec0eddb17e03070d4b5fb8c2829e3e9d20b9ac80c3f49",
+      "afterSha256": "7c238ba516b912288044ace94b811b12a1d6667d18459912103e31002e5eb2ec",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113794,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3911,
+            "p99": 4.0,
+            "max": 12,
+            "ssim": 0.99705
+          },
+          "cinema420": {
+            "mean": 0.358,
+            "p99": 4.0,
+            "max": 11,
+            "ssim": 0.997188
+          },
+          "paper840": {
+            "mean": 0.6959,
+            "p99": 8.0,
+            "max": 21,
+            "ssim": 0.993399
+          },
+          "cinema840": {
+            "mean": 0.6356,
+            "p99": 7.0,
+            "max": 18,
+            "ssim": 0.993725
+          }
+        },
+        "detailCrop": [
+          100,
+          500,
+          300,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/living-things-plant-fungus.webp",
+      "beforeBytes": 225012,
+      "afterBytes": 225012,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Exact-alpha candidate exceeds target; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "083cfe0d6e5c82723479d9c41266b073aa76ce7cb59477aefd2dd8d0284042d2",
+      "afterSha256": "083cfe0d6e5c82723479d9c41266b073aa76ce7cb59477aefd2dd8d0284042d2",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 268686,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.1096,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.99983
+          },
+          "cinema420": {
+            "mean": 0.0869,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.999817
+          },
+          "paper840": {
+            "mean": 0.1704,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999631
+          },
+          "cinema840": {
+            "mean": 0.1351,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.999621
+          }
+        },
+        "detailCrop": [
+          500,
+          500,
+          700,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/magnets-electric-bell.webp",
+      "beforeBytes": 129144,
+      "afterBytes": 129144,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "ecf44cdf6308cbe053a035654da393df47700b279b953dfdd0adbfb5091cc13c",
+      "afterSha256": "ecf44cdf6308cbe053a035654da393df47700b279b953dfdd0adbfb5091cc13c",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 118956,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.735,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.995449
+          },
+          "cinema420": {
+            "mean": 0.5836,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.995947
+          },
+          "paper840": {
+            "mean": 1.2173,
+            "p99": 9.0,
+            "max": 21,
+            "ssim": 0.989963
+          },
+          "cinema840": {
+            "mean": 0.967,
+            "p99": 7.0,
+            "max": 16,
+            "ssim": 0.990925
+          }
+        },
+        "detailCrop": [
+          400,
+          500,
+          600,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/mangrove-food-web-breathing-roots.webp",
+      "beforeBytes": 185910,
+      "afterBytes": 185910,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "e44bed0e6fee6ade2af1245d868cd4fb44ed3f3fbf794a7125fc5f0c92786bcd",
+      "afterSha256": "e44bed0e6fee6ade2af1245d868cd4fb44ed3f3fbf794a7125fc5f0c92786bcd",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119596,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.8516,
+            "p99": 12.0,
+            "max": 27,
+            "ssim": 0.987109
+          },
+          "cinema420": {
+            "mean": 1.4695,
+            "p99": 9.0,
+            "max": 21,
+            "ssim": 0.988045
+          },
+          "paper840": {
+            "mean": 3.5519,
+            "p99": 24.0,
+            "max": 50,
+            "ssim": 0.950086
+          },
+          "cinema840": {
+            "mean": 2.8203,
+            "p99": 19.0,
+            "max": 39,
+            "ssim": 0.953603
+          }
+        },
+        "detailCrop": [
+          200,
+          500,
+          400,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/mangrove-food-web-predator-prey.webp",
+      "beforeBytes": 185420,
+      "afterBytes": 185420,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "bf4a2bee22a4d7073960fcbe5e611020f3e1dee1104708f99a6a06c12cde6c32",
+      "afterSha256": "bf4a2bee22a4d7073960fcbe5e611020f3e1dee1104708f99a6a06c12cde6c32",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 118812,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 2.1872,
+            "p99": 15.0,
+            "max": 29,
+            "ssim": 0.97734
+          },
+          "cinema420": {
+            "mean": 1.7361,
+            "p99": 12.0,
+            "max": 22,
+            "ssim": 0.979095
+          },
+          "paper840": {
+            "mean": 3.776,
+            "p99": 27.0,
+            "max": 60,
+            "ssim": 0.929754
+          },
+          "cinema840": {
+            "mean": 2.9972,
+            "p99": 21.0,
+            "max": 47,
+            "ssim": 0.935527
+          }
+        },
+        "detailCrop": [
+          200,
+          600,
+          400,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/materials-waterproof-test.webp",
+      "beforeBytes": 137680,
+      "afterBytes": 137680,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "eae8f6015a9ded2df2dcd7b52ce79e9dc932a82b4b4b8bff806501c520fbdc4d",
+      "afterSha256": "eae8f6015a9ded2df2dcd7b52ce79e9dc932a82b4b4b8bff806501c520fbdc4d",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113072,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.9231,
+            "p99": 7.0,
+            "max": 14,
+            "ssim": 0.98875
+          },
+          "cinema420": {
+            "mean": 0.7331,
+            "p99": 6.0,
+            "max": 11,
+            "ssim": 0.990821
+          },
+          "paper840": {
+            "mean": 1.7661,
+            "p99": 14.0,
+            "max": 31,
+            "ssim": 0.968147
+          },
+          "cinema840": {
+            "mean": 1.4017,
+            "p99": 11.0,
+            "max": 24,
+            "ssim": 0.974149
+          }
+        },
+        "detailCrop": [
+          400,
+          400,
+          600,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/measuring-ball-and-stone.webp",
+      "beforeBytes": 121040,
+      "afterBytes": 114670,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "37e5e1293848265dbec9390dc5690f6edb82e3cc86f1f3629830648b79a5284f",
+      "afterSha256": "57b7ccf69294fd7349f761259faf2eb52f2d0e356b08967e2aada87c33382ee8",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 114670,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.2702,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.998532
+          },
+          "cinema420": {
+            "mean": 0.2161,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.998744
+          },
+          "paper840": {
+            "mean": 0.436,
+            "p99": 5.0,
+            "max": 15,
+            "ssim": 0.996039
+          },
+          "cinema840": {
+            "mean": 0.3468,
+            "p99": 4.0,
+            "max": 12,
+            "ssim": 0.996731
+          }
+        },
+        "detailCrop": [
+          200,
+          300,
+          400,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/measuring-sugarcane.webp",
+      "beforeBytes": 164874,
+      "afterBytes": 164874,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "9bc2accd5833a627c3e4693119c576bbcef1b0b9dca9947993400473a0f8c542",
+      "afterSha256": "9bc2accd5833a627c3e4693119c576bbcef1b0b9dca9947993400473a0f8c542",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113408,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.4304,
+            "p99": 9.0,
+            "max": 22,
+            "ssim": 0.986525
+          },
+          "cinema420": {
+            "mean": 1.1353,
+            "p99": 7.0,
+            "max": 17,
+            "ssim": 0.988681
+          },
+          "paper840": {
+            "mean": 2.5501,
+            "p99": 17.0,
+            "max": 45,
+            "ssim": 0.946765
+          },
+          "cinema840": {
+            "mean": 2.0258,
+            "p99": 14.0,
+            "max": 35,
+            "ssim": 0.955376
+          }
+        },
+        "detailCrop": [
+          600,
+          200,
+          800,
+          400
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/monsoon-and-weather-storm-life.webp",
+      "beforeBytes": 121336,
+      "afterBytes": 114332,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "e834fd11074608e2fe050aeb8d0093383484fe535de4bc6ec6c9d75d3bb12436",
+      "afterSha256": "80a8521015e77980c644f554f4e5dc9dec58550482de68835cfd5498dd80287a",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 114332,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3993,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.998273
+          },
+          "cinema420": {
+            "mean": 0.3167,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.998397
+          },
+          "paper840": {
+            "mean": 0.6566,
+            "p99": 7.0,
+            "max": 16,
+            "ssim": 0.994403
+          },
+          "cinema840": {
+            "mean": 0.5211,
+            "p99": 5.0,
+            "max": 12,
+            "ssim": 0.995005
+          }
+        },
+        "detailCrop": [
+          500,
+          400,
+          700,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/mosquito-empty-saucer.webp",
+      "beforeBytes": 137062,
+      "afterBytes": 137062,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "aeea3c88f0da23b5a70833d10627eb96ac03993aeb84ddafe5a83e7f8625f91a",
+      "afterSha256": "aeea3c88f0da23b5a70833d10627eb96ac03993aeb84ddafe5a83e7f8625f91a",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 111736,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.0588,
+            "p99": 7.0,
+            "max": 15,
+            "ssim": 0.983375
+          },
+          "cinema420": {
+            "mean": 0.8403,
+            "p99": 6.0,
+            "max": 11,
+            "ssim": 0.986583
+          },
+          "paper840": {
+            "mean": 1.9957,
+            "p99": 14.0,
+            "max": 33,
+            "ssim": 0.956137
+          },
+          "cinema840": {
+            "mean": 1.5844,
+            "p99": 11.0,
+            "max": 26,
+            "ssim": 0.962247
+          }
+        },
+        "detailCrop": [
+          700,
+          500,
+          900,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/multiplication-division-hdb-windows.webp",
+      "beforeBytes": 130552,
+      "afterBytes": 130552,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "694255a3c5737ccc759dcc4702a1d83346371ae01a75fb1f0e414662fa34d3d4",
+      "afterSha256": "694255a3c5737ccc759dcc4702a1d83346371ae01a75fb1f0e414662fa34d3d4",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112770,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.9802,
+            "p99": 6.0,
+            "max": 11,
+            "ssim": 0.997371
+          },
+          "cinema420": {
+            "mean": 0.778,
+            "p99": 5.0,
+            "max": 9,
+            "ssim": 0.997492
+          },
+          "paper840": {
+            "mean": 1.6026,
+            "p99": 11.0,
+            "max": 25,
+            "ssim": 0.987991
+          },
+          "cinema840": {
+            "mean": 1.2713,
+            "p99": 8.0,
+            "max": 20,
+            "ssim": 0.989625
+          }
+        },
+        "detailCrop": [
+          900,
+          600,
+          1100,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/plant-bee-on-flower.webp",
+      "beforeBytes": 169926,
+      "afterBytes": 169926,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "0aef9d33badab8a0cce4c63835f3a4ba3f10d2b302573323f837db8ddd3cc6fe",
+      "afterSha256": "0aef9d33badab8a0cce4c63835f3a4ba3f10d2b302573323f837db8ddd3cc6fe",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119036,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.6339,
+            "p99": 12.0,
+            "max": 27,
+            "ssim": 0.98092
+          },
+          "cinema420": {
+            "mean": 1.2975,
+            "p99": 10.0,
+            "max": 21,
+            "ssim": 0.984451
+          },
+          "paper840": {
+            "mean": 2.7755,
+            "p99": 24.0,
+            "max": 57,
+            "ssim": 0.947374
+          },
+          "cinema840": {
+            "mean": 2.2044,
+            "p99": 19.0,
+            "max": 44,
+            "ssim": 0.955151
+          }
+        },
+        "detailCrop": [
+          400,
+          200,
+          600,
+          400
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/plant-seed-dispersal.webp",
+      "beforeBytes": 168350,
+      "afterBytes": 168350,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "8ddebfc2d3cfa6df926a2ec2a0b7e02d3dc3d90a764257dbdb5440a0086d2919",
+      "afterSha256": "8ddebfc2d3cfa6df926a2ec2a0b7e02d3dc3d90a764257dbdb5440a0086d2919",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113616,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.8595,
+            "p99": 18.0,
+            "max": 38,
+            "ssim": 0.977537
+          },
+          "cinema420": {
+            "mean": 1.4759,
+            "p99": 14.0,
+            "max": 30,
+            "ssim": 0.979168
+          },
+          "paper840": {
+            "mean": 3.1625,
+            "p99": 32.0,
+            "max": 84,
+            "ssim": 0.93945
+          },
+          "cinema840": {
+            "mean": 2.5104,
+            "p99": 25.0,
+            "max": 65,
+            "ssim": 0.943188
+          }
+        },
+        "detailCrop": [
+          700,
+          400,
+          900,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/plant-stem-dye.webp",
+      "beforeBytes": 120596,
+      "afterBytes": 112224,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "a57cf52acd3268c6bae04d062ab4ed8cea5f462bc3ab83322fdaec54f4ad7cdd",
+      "afterSha256": "9183ba7b163e8a07834e7d3d7a078dc398c9e491382a6d52203a352896346a26",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112224,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.5392,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996842
+          },
+          "cinema420": {
+            "mean": 0.4286,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.997268
+          },
+          "paper840": {
+            "mean": 0.852,
+            "p99": 8.0,
+            "max": 21,
+            "ssim": 0.991727
+          },
+          "cinema840": {
+            "mean": 0.6766,
+            "p99": 6.0,
+            "max": 16,
+            "ssim": 0.992883
+          }
+        },
+        "detailCrop": [
+          300,
+          400,
+          500,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/plates-and-hazards-fault-offset.webp",
+      "beforeBytes": 234700,
+      "afterBytes": 234700,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "4d2ea5436a6666d1cff78ea49a67cd7e642e819dc275a74e569ee7843875846b",
+      "afterSha256": "4d2ea5436a6666d1cff78ea49a67cd7e642e819dc275a74e569ee7843875846b",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112028,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.1454,
+            "p99": 7.0,
+            "max": 14,
+            "ssim": 0.991724
+          },
+          "cinema420": {
+            "mean": 0.9091,
+            "p99": 6.0,
+            "max": 11,
+            "ssim": 0.992374
+          },
+          "paper840": {
+            "mean": 2.2336,
+            "p99": 14.0,
+            "max": 29,
+            "ssim": 0.978466
+          },
+          "cinema840": {
+            "mean": 1.774,
+            "p99": 11.0,
+            "max": 23,
+            "ssim": 0.979728
+          }
+        },
+        "detailCrop": [
+          500,
+          300,
+          700,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/saturn-v-air-breathing-engine.webp",
+      "beforeBytes": 120870,
+      "afterBytes": 109446,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "ae5b083b57d236c5bb1d5a636bdbd73f0254cce02da595968f54a320ab5bbe93",
+      "afterSha256": "f562995becaa6a4e24717d13fbc1ed242e820a3cf775d5c641060b37b4740039",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 109446,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3841,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.999005
+          },
+          "cinema420": {
+            "mean": 0.3045,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999091
+          },
+          "paper840": {
+            "mean": 0.6802,
+            "p99": 6.0,
+            "max": 13,
+            "ssim": 0.995304
+          },
+          "cinema840": {
+            "mean": 0.5403,
+            "p99": 4.0,
+            "max": 10,
+            "ssim": 0.996126
+          }
+        },
+        "detailCrop": [
+          400,
+          300,
+          600,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-1819-1965-ballot-box.webp",
+      "beforeBytes": 134364,
+      "afterBytes": 134364,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "19fa5261a2aa755470b3c040ba67666a0bf9deec8d356d9309dae35ce99b60e0",
+      "afterSha256": "19fa5261a2aa755470b3c040ba67666a0bf9deec8d356d9309dae35ce99b60e0",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115734,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.1294,
+            "p99": 7.0,
+            "max": 17,
+            "ssim": 0.991244
+          },
+          "cinema420": {
+            "mean": 0.8992,
+            "p99": 5.0,
+            "max": 19,
+            "ssim": 0.992043
+          },
+          "paper840": {
+            "mean": 2.032,
+            "p99": 12.0,
+            "max": 30,
+            "ssim": 0.97838
+          },
+          "cinema840": {
+            "mean": 1.6147,
+            "p99": 10.0,
+            "max": 36,
+            "ssim": 0.980066
+          }
+        },
+        "detailCrop": [
+          100,
+          200,
+          300,
+          400
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-1819-1965-ocean-junk.webp",
+      "beforeBytes": 137104,
+      "afterBytes": 137104,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "0ffd25bbd0e22914b5594864a74e5033af62b78808df08f6faf033e648a66586",
+      "afterSha256": "0ffd25bbd0e22914b5594864a74e5033af62b78808df08f6faf033e648a66586",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 116876,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.7774,
+            "p99": 7.0,
+            "max": 15,
+            "ssim": 0.995276
+          },
+          "cinema420": {
+            "mean": 0.6177,
+            "p99": 5.0,
+            "max": 11,
+            "ssim": 0.995861
+          },
+          "paper840": {
+            "mean": 1.3563,
+            "p99": 12.0,
+            "max": 29,
+            "ssim": 0.982373
+          },
+          "cinema840": {
+            "mean": 1.0768,
+            "p99": 10.0,
+            "max": 23,
+            "ssim": 0.984768
+          }
+        },
+        "detailCrop": [
+          400,
+          600,
+          600,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-1819-1965-shophouse-cutaway.webp",
+      "beforeBytes": 131260,
+      "afterBytes": 131260,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "79ee9415497609dfb1ea9567970cdaeff1703b4f8fc7c446952aaf38d7a204ac",
+      "afterSha256": "79ee9415497609dfb1ea9567970cdaeff1703b4f8fc7c446952aaf38d7a204ac",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115784,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.0024,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996494
+          },
+          "cinema420": {
+            "mean": 0.7961,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.996835
+          },
+          "paper840": {
+            "mean": 1.6304,
+            "p99": 9.0,
+            "max": 23,
+            "ssim": 0.988309
+          },
+          "cinema840": {
+            "mean": 1.2946,
+            "p99": 7.0,
+            "max": 18,
+            "ssim": 0.990048
+          }
+        },
+        "detailCrop": [
+          200,
+          100,
+          400,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-1819-1965-temasek-finds.webp",
+      "beforeBytes": 159492,
+      "afterBytes": 159492,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "cbcbbe67af49802bab8eeb8f6638760cfca448427d60decf43d264cf541a6a45",
+      "afterSha256": "cbcbbe67af49802bab8eeb8f6638760cfca448427d60decf43d264cf541a6a45",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 116354,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.3589,
+            "p99": 10.0,
+            "max": 24,
+            "ssim": 0.988608
+          },
+          "cinema420": {
+            "mean": 1.0787,
+            "p99": 8.0,
+            "max": 18,
+            "ssim": 0.990253
+          },
+          "paper840": {
+            "mean": 2.216,
+            "p99": 18.0,
+            "max": 40,
+            "ssim": 0.964388
+          },
+          "cinema840": {
+            "mean": 1.7593,
+            "p99": 14.0,
+            "max": 31,
+            "ssim": 0.969361
+          }
+        },
+        "detailCrop": [
+          300,
+          400,
+          500,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-after-1965-factory-work.webp",
+      "beforeBytes": 125448,
+      "afterBytes": 116148,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "87fdb53e488bd440aea8cf29cf81efdb5c6a43385e26899b597cd2514227fcc6",
+      "afterSha256": "f0a754f378a7b29c80ffc27f89f306ccb5d0b8ffeadfac6b5954a275d7f5695f",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 116148,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.7415,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996734
+          },
+          "cinema420": {
+            "mean": 0.5894,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.99708
+          },
+          "paper840": {
+            "mean": 1.2284,
+            "p99": 9.0,
+            "max": 25,
+            "ssim": 0.991101
+          },
+          "cinema840": {
+            "mean": 0.9754,
+            "p99": 7.0,
+            "max": 19,
+            "ssim": 0.991998
+          }
+        },
+        "detailCrop": [
+          500,
+          300,
+          700,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-land-use-hydroponic-farm.webp",
+      "beforeBytes": 136484,
+      "afterBytes": 136484,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "17a938819e4da8661eff7d2bfd3ec3d9ff3191b2d73063f7daf910a5d4368412",
+      "afterSha256": "17a938819e4da8661eff7d2bfd3ec3d9ff3191b2d73063f7daf910a5d4368412",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119352,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.0848,
+            "p99": 7.0,
+            "max": 13,
+            "ssim": 0.992856
+          },
+          "cinema420": {
+            "mean": 0.861,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.993799
+          },
+          "paper840": {
+            "mean": 1.8962,
+            "p99": 12.0,
+            "max": 26,
+            "ssim": 0.977327
+          },
+          "cinema840": {
+            "mean": 1.5057,
+            "p99": 10.0,
+            "max": 20,
+            "ssim": 0.980334
+          }
+        },
+        "detailCrop": [
+          500,
+          500,
+          700,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/singapore-land-use-kampong-farm.webp",
+      "beforeBytes": 204308,
+      "afterBytes": 204308,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "e92fdda36fbd56590f9f643aeb80d08533702a5844a6251d4ee417db31e4ffd8",
+      "afterSha256": "e92fdda36fbd56590f9f643aeb80d08533702a5844a6251d4ee417db31e4ffd8",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119556,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 2.4351,
+            "p99": 14.0,
+            "max": 29,
+            "ssim": 0.975733
+          },
+          "cinema420": {
+            "mean": 1.9329,
+            "p99": 11.0,
+            "max": 22,
+            "ssim": 0.978246
+          },
+          "paper840": {
+            "mean": 4.5731,
+            "p99": 28.0,
+            "max": 61,
+            "ssim": 0.915281
+          },
+          "cinema840": {
+            "mean": 3.6309,
+            "p99": 22.0,
+            "max": 47,
+            "ssim": 0.923058
+          }
+        },
+        "detailCrop": [
+          400,
+          400,
+          600,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/southeast-asia-mangrove-roots.webp",
+      "beforeBytes": 121868,
+      "afterBytes": 111238,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "2d69e432ecccf80c4d6ddc1ff5890e4ea21d1c1c53176c1086c7d8873782d7ee",
+      "afterSha256": "a37f59ea117456f8f00d175fadc6789a55f41dbf42803293b978460ecf401e13",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 111238,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.2323,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.999825
+          },
+          "cinema420": {
+            "mean": 0.1842,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999829
+          },
+          "paper840": {
+            "mean": 0.4119,
+            "p99": 5.0,
+            "max": 14,
+            "ssim": 0.999141
+          },
+          "cinema840": {
+            "mean": 0.3265,
+            "p99": 4.0,
+            "max": 11,
+            "ssim": 0.999187
+          }
+        },
+        "detailCrop": [
+          500,
+          100,
+          700,
+          300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/states-of-matter-sponge.webp",
+      "beforeBytes": 131568,
+      "afterBytes": 131568,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "24a1257852afdd506ef727256a3ae938103ebddea2c81b72cf46b33d6002ee28",
+      "afterSha256": "24a1257852afdd506ef727256a3ae938103ebddea2c81b72cf46b33d6002ee28",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113846,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.0095,
+            "p99": 7.0,
+            "max": 13,
+            "ssim": 0.995674
+          },
+          "cinema420": {
+            "mean": 0.801,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996023
+          },
+          "paper840": {
+            "mean": 1.8276,
+            "p99": 13.0,
+            "max": 28,
+            "ssim": 0.984245
+          },
+          "cinema840": {
+            "mean": 1.4513,
+            "p99": 10.0,
+            "max": 22,
+            "ssim": 0.985501
+          }
+        },
+        "detailCrop": [
+          100,
+          500,
+          300,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/sun-earth-moon-four-phases@2x.webp",
+      "beforeBytes": 286868,
+      "afterBytes": 286868,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 2400,
+      "height": 1800,
+      "beforeSha256": "0be1b847e8d00cc5a8d0e1f60c90ab159d4d0c2b6cae411af60488e7e9264c7e",
+      "afterSha256": "0be1b847e8d00cc5a8d0e1f60c90ab159d4d0c2b6cae411af60488e7e9264c7e",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119512,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.5568,
+            "p99": 11.0,
+            "max": 24,
+            "ssim": 0.964858
+          },
+          "cinema420": {
+            "mean": 1.422,
+            "p99": 10.0,
+            "max": 22,
+            "ssim": 0.968218
+          },
+          "paper840": {
+            "mean": 2.3844,
+            "p99": 19.0,
+            "max": 51,
+            "ssim": 0.915673
+          },
+          "cinema840": {
+            "mean": 2.1768,
+            "p99": 17.0,
+            "max": 45,
+            "ssim": 0.923356
+          }
+        },
+        "detailCrop": [
+          1600,
+          600,
+          1800,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/sun-earth-moon-parallel-axes@2x.webp",
+      "beforeBytes": 281954,
+      "afterBytes": 281954,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 2400,
+      "height": 1800,
+      "beforeSha256": "57161a379e193de0bac82ada60fd875dbebb4d5e4172778153af9eeb33f9229e",
+      "afterSha256": "57161a379e193de0bac82ada60fd875dbebb4d5e4172778153af9eeb33f9229e",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 112324,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.1064,
+            "p99": 11.0,
+            "max": 23,
+            "ssim": 0.98275
+          },
+          "cinema420": {
+            "mean": 1.0092,
+            "p99": 10.0,
+            "max": 21,
+            "ssim": 0.983825
+          },
+          "paper840": {
+            "mean": 1.8752,
+            "p99": 19.0,
+            "max": 54,
+            "ssim": 0.942684
+          },
+          "cinema840": {
+            "mean": 1.7117,
+            "p99": 17.0,
+            "max": 47,
+            "ssim": 0.946722
+          }
+        },
+        "detailCrop": [
+          1100,
+          800,
+          1300,
+          1000
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/telling-time-bus-interchange.webp",
+      "beforeBytes": 122308,
+      "afterBytes": 115952,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "c069671de78791162ad593307df11516af17f7b2c72b7a9d9ee03b649fa61bb5",
+      "afterSha256": "665dae58835daef63714b54bbb5ebac6a29d40c92493a78243bb8d003df9f227",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115952,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.5166,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.998739
+          },
+          "cinema420": {
+            "mean": 0.4087,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.998846
+          },
+          "paper840": {
+            "mean": 0.6974,
+            "p99": 5.0,
+            "max": 13,
+            "ssim": 0.99625
+          },
+          "cinema840": {
+            "mean": 0.5525,
+            "p99": 4.0,
+            "max": 10,
+            "ssim": 0.996804
+          }
+        },
+        "detailCrop": [
+          200,
+          300,
+          400,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/telling-time-clock-gears.webp",
+      "beforeBytes": 135964,
+      "afterBytes": 135964,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "56d8e6feaa27dc659a8883b66b07210dec74f6e9f9aa6bb43662a73f40bec548",
+      "afterSha256": "56d8e6feaa27dc659a8883b66b07210dec74f6e9f9aa6bb43662a73f40bec548",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 116450,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.6883,
+            "p99": 6.0,
+            "max": 15,
+            "ssim": 0.99629
+          },
+          "cinema420": {
+            "mean": 0.5457,
+            "p99": 5.0,
+            "max": 12,
+            "ssim": 0.996891
+          },
+          "paper840": {
+            "mean": 1.1664,
+            "p99": 12.0,
+            "max": 31,
+            "ssim": 0.9861
+          },
+          "cinema840": {
+            "mean": 0.9255,
+            "p99": 9.0,
+            "max": 25,
+            "ssim": 0.988656
+          }
+        },
+        "detailCrop": [
+          500,
+          300,
+          700,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/telling-time-clock-tower.webp",
+      "beforeBytes": 172290,
+      "afterBytes": 172290,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "c0589ac4cce7fa386bb49e9222d1df84a51031686604f839452c29efc4dc37ef",
+      "afterSha256": "c0589ac4cce7fa386bb49e9222d1df84a51031686604f839452c29efc4dc37ef",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 118532,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.5824,
+            "p99": 12.0,
+            "max": 26,
+            "ssim": 0.990372
+          },
+          "cinema420": {
+            "mean": 1.2562,
+            "p99": 9.0,
+            "max": 20,
+            "ssim": 0.990953
+          },
+          "paper840": {
+            "mean": 2.9153,
+            "p99": 24.0,
+            "max": 53,
+            "ssim": 0.962791
+          },
+          "cinema840": {
+            "mean": 2.314,
+            "p99": 19.0,
+            "max": 41,
+            "ssim": 0.965605
+          }
+        },
+        "detailCrop": [
+          200,
+          600,
+          400,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/telling-time-day-arc.webp",
+      "beforeBytes": 122426,
+      "afterBytes": 113678,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "7dbbb2f54f80b4817675f98c030e3a73c2216c030a0f76b943514af36407b418",
+      "afterSha256": "fd37d48b3716f9f8636b56734349ff3632d351784fb1d9987a2df4cf33e63a8c",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 113678,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.4378,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.998773
+          },
+          "cinema420": {
+            "mean": 0.3477,
+            "p99": 4.0,
+            "max": 7,
+            "ssim": 0.998911
+          },
+          "paper840": {
+            "mean": 0.7177,
+            "p99": 8.0,
+            "max": 18,
+            "ssim": 0.996316
+          },
+          "cinema840": {
+            "mean": 0.5705,
+            "p99": 6.0,
+            "max": 14,
+            "ssim": 0.996765
+          }
+        },
+        "detailCrop": [
+          200,
+          500,
+          400,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/warring-states-dujiangyan.webp",
+      "beforeBytes": 149982,
+      "afterBytes": 149982,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "2993c562b22b8d025da333620330990b0d6dae3281c6de62ae15f154a816694d",
+      "afterSha256": "2993c562b22b8d025da333620330990b0d6dae3281c6de62ae15f154a816694d",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 117434,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.9872,
+            "p99": 11.0,
+            "max": 22,
+            "ssim": 0.98097
+          },
+          "cinema420": {
+            "mean": 1.5772,
+            "p99": 9.0,
+            "max": 17,
+            "ssim": 0.982886
+          },
+          "paper840": {
+            "mean": 3.1622,
+            "p99": 19.0,
+            "max": 38,
+            "ssim": 0.941524
+          },
+          "cinema840": {
+            "mean": 2.5107,
+            "p99": 15.0,
+            "max": 30,
+            "ssim": 0.948192
+          }
+        },
+        "detailCrop": [
+          600,
+          200,
+          800,
+          400
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/warring-states-rammed-earth-wall.webp",
+      "beforeBytes": 122674,
+      "afterBytes": 115818,
+      "targetBytes": 120000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "0aa16ed4ba26f46875ac9e432eb209078850a2a926dc4024392134c14ce93292",
+      "afterSha256": "c8aedceaf7e00fa625b6994897f11f3ccd4b0557bbbe732bc9e04f46231d65c1",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 115818,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3615,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.998737
+          },
+          "cinema420": {
+            "mean": 0.2878,
+            "p99": 2.0,
+            "max": 7,
+            "ssim": 0.998761
+          },
+          "paper840": {
+            "mean": 0.654,
+            "p99": 6.0,
+            "max": 13,
+            "ssim": 0.996581
+          },
+          "cinema840": {
+            "mean": 0.5199,
+            "p99": 4.0,
+            "max": 18,
+            "ssim": 0.996769
+          }
+        },
+        "detailCrop": [
+          800,
+          300,
+          1000,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/warring-states-zeng-bells.webp",
+      "beforeBytes": 183434,
+      "afterBytes": 183434,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "372953d3eca23013e5d47a55171803a33d5ce6f60945c5fcf4a22e5b643a92c4",
+      "afterSha256": "372953d3eca23013e5d47a55171803a33d5ce6f60945c5fcf4a22e5b643a92c4",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 119850,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 1.8915,
+            "p99": 15.0,
+            "max": 34,
+            "ssim": 0.979048
+          },
+          "cinema420": {
+            "mean": 1.5019,
+            "p99": 12.0,
+            "max": 26,
+            "ssim": 0.981613
+          },
+          "paper840": {
+            "mean": 3.0987,
+            "p99": 27.0,
+            "max": 72,
+            "ssim": 0.925131
+          },
+          "cinema840": {
+            "mean": 2.4608,
+            "p99": 21.0,
+            "max": 55,
+            "ssim": 0.933142
+          }
+        },
+        "detailCrop": [
+          800,
+          500,
+          1000,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/warring-states-zhou-war-chariot.webp",
+      "beforeBytes": 177350,
+      "afterBytes": 177350,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "e460d2d55762738d4b13ee1edbcc87dd9610f4eae7ce9da51c4593bfd6eef12a",
+      "afterSha256": "e460d2d55762738d4b13ee1edbcc87dd9610f4eae7ce9da51c4593bfd6eef12a",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 110812,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 2.5283,
+            "p99": 20.0,
+            "max": 46,
+            "ssim": 0.97622
+          },
+          "cinema420": {
+            "mean": 2.0073,
+            "p99": 16.0,
+            "max": 35,
+            "ssim": 0.977979
+          },
+          "paper840": {
+            "mean": 3.8582,
+            "p99": 33.0,
+            "max": 82,
+            "ssim": 0.918359
+          },
+          "cinema840": {
+            "mean": 3.0624,
+            "p99": 26.0,
+            "max": 64,
+            "ssim": 0.92517
+          }
+        },
+        "detailCrop": [
+          400,
+          300,
+          600,
+          500
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/water-cycle.webp",
+      "beforeBytes": 223680,
+      "afterBytes": 223680,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Exact-alpha candidate exceeds target; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "dc719c41cd539fa7d1f306650a564de5333176a2db1374c314405152af194c5a",
+      "afterSha256": "dc719c41cd539fa7d1f306650a564de5333176a2db1374c314405152af194c5a",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 277558,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.1396,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.999768
+          },
+          "cinema420": {
+            "mean": 0.113,
+            "p99": 1.0,
+            "max": 3,
+            "ssim": 0.999737
+          },
+          "paper840": {
+            "mean": 0.2315,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999479
+          },
+          "cinema840": {
+            "mean": 0.1856,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.99945
+          }
+        },
+        "detailCrop": [
+          800,
+          500,
+          1000,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/figures/water-newater-membranes.webp",
+      "beforeBytes": 137772,
+      "afterBytes": 137772,
+      "targetBytes": 120000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1200,
+      "height": 900,
+      "beforeSha256": "3a27d6b1ebb089b39b8fe228509409fa711bd9d479b28ba51870d688f9854468",
+      "afterSha256": "3a27d6b1ebb089b39b8fe228509409fa711bd9d479b28ba51870d688f9854468",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 118572,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.9448,
+            "p99": 6.0,
+            "max": 18,
+            "ssim": 0.997133
+          },
+          "cinema420": {
+            "mean": 0.7493,
+            "p99": 5.0,
+            "max": 15,
+            "ssim": 0.997497
+          },
+          "paper840": {
+            "mean": 1.5459,
+            "p99": 12.0,
+            "max": 32,
+            "ssim": 0.989689
+          },
+          "cinema840": {
+            "mean": 1.227,
+            "p99": 10.0,
+            "max": 25,
+            "ssim": 0.991072
+          }
+        },
+        "detailCrop": [
+          500,
+          400,
+          700,
+          600
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/fossils-and-skeletons@2x.webp",
+      "beforeBytes": 261956,
+      "afterBytes": 249606,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "83d19f31cf33733caea3c0f4957e379fcf7681d07606d0af9bd430988af70e77",
+      "afterSha256": "a0f366c95e5322f7b3159e1444410851f0653582bec375805674f3082d5b00bd",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 249606,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3767,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.999038
+          },
+          "cinema420": {
+            "mean": 0.2987,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.999057
+          },
+          "paper840": {
+            "mean": 0.6334,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.997324
+          },
+          "cinema840": {
+            "mean": 0.5027,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.997487
+          }
+        },
+        "detailCrop": [
+          200,
+          600,
+          400,
+          800
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/frog-and-chicken@2x.webp",
+      "beforeBytes": 264934,
+      "afterBytes": 253310,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "6c64adf367f6b09efa072da5d0ed2f3e4f8957c22fe81aca2408618ba09b0c7c",
+      "afterSha256": "8eebb3048d635a7a8ce05541ca41a4b0d5db996228ed07f425849074315e3cf7",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 253310,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.218,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999518
+          },
+          "cinema420": {
+            "mean": 0.1726,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.999522
+          },
+          "paper840": {
+            "mean": 0.3879,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.99849
+          },
+          "cinema840": {
+            "mean": 0.3078,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.998608
+          }
+        },
+        "detailCrop": [
+          200,
+          1100,
+          400,
+          1300
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/inside-the-earth@2x.webp",
+      "beforeBytes": 265500,
+      "afterBytes": 250530,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "8ae67120c643a474e225ef6988d42c32d45ce607ab53586c982c3ab63e9fa8e1",
+      "afterSha256": "bc8f461ba3794b8674007b0c43a044fbf2943b6d80197566dd1099a5d592c3e5",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 250530,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3946,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.998401
+          },
+          "cinema420": {
+            "mean": 0.3134,
+            "p99": 2.0,
+            "max": 3,
+            "ssim": 0.998471
+          },
+          "paper840": {
+            "mean": 0.6605,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.995622
+          },
+          "cinema840": {
+            "mean": 0.5245,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.996256
+          }
+        },
+        "detailCrop": [
+          100,
+          700,
+          300,
+          900
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/living-things@2x.webp",
+      "beforeBytes": 263728,
+      "afterBytes": 255696,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "2d3ade34a5130ab4f8b9c876a6f16e416a78a8f5d2d7619ab86e971aedfa7422",
+      "afterSha256": "3bb3cb74fe75e9ce2d1f09e3c817d17e766f1c52ff01c5af8e5adf53b34e3118",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 255696,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.3069,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.998715
+          },
+          "cinema420": {
+            "mean": 0.2436,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.998806
+          },
+          "paper840": {
+            "mean": 0.414,
+            "p99": 3.0,
+            "max": 8,
+            "ssim": 0.996344
+          },
+          "cinema840": {
+            "mean": 0.3285,
+            "p99": 2.0,
+            "max": 7,
+            "ssim": 0.996953
+          }
+        },
+        "detailCrop": [
+          1000,
+          1000,
+          1200,
+          1200
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/magnets@2x.webp",
+      "beforeBytes": 260530,
+      "afterBytes": 254166,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "0c000e655cbfa98f0e674bcc671265a3d9e49d7594a8c9e8596ab13b0a43a9c4",
+      "afterSha256": "ab4ce64357bdc17c76e97b631cd004fbcf9e1622ae1b106cfac2650ec4cb5c74",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 254166,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.2514,
+            "p99": 2.0,
+            "max": 4,
+            "ssim": 0.999036
+          },
+          "cinema420": {
+            "mean": 0.1974,
+            "p99": 2.0,
+            "max": 3,
+            "ssim": 0.999112
+          },
+          "paper840": {
+            "mean": 0.3543,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.997907
+          },
+          "cinema840": {
+            "mean": 0.2769,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.998299
+          }
+        },
+        "detailCrop": [
+          300,
+          900,
+          500,
+          1100
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/mangrove-food-web@2x.webp",
+      "beforeBytes": 263800,
+      "afterBytes": 263800,
+      "targetBytes": 260000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "45627ad10b53bf0257e9657a05e3d770a45dadba86d824f534adec995214d666",
+      "afterSha256": "45627ad10b53bf0257e9657a05e3d770a45dadba86d824f534adec995214d666",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 240592,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.7767,
+            "p99": 6.0,
+            "max": 12,
+            "ssim": 0.996857
+          },
+          "cinema420": {
+            "mean": 0.6164,
+            "p99": 4.0,
+            "max": 9,
+            "ssim": 0.997061
+          },
+          "paper840": {
+            "mean": 1.3029,
+            "p99": 9.0,
+            "max": 23,
+            "ssim": 0.987876
+          },
+          "cinema840": {
+            "mean": 1.0343,
+            "p99": 7.0,
+            "max": 18,
+            "ssim": 0.989116
+          }
+        },
+        "detailCrop": [
+          1200,
+          1000,
+          1400,
+          1200
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/mosquito@2x.webp",
+      "beforeBytes": 261478,
+      "afterBytes": 251542,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "3b6a476f342cf73e9a88b540315d8ef50bbc28a7c862c1504c77de3e9f6dd995",
+      "afterSha256": "d91f9b1732d6b6b90a927c57572a3330b1b334ca6d1a4d011ed01e7e9da8dddf",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 251542,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.232,
+            "p99": 3.0,
+            "max": 8,
+            "ssim": 0.999661
+          },
+          "cinema420": {
+            "mean": 0.1842,
+            "p99": 3.0,
+            "max": 7,
+            "ssim": 0.999671
+          },
+          "paper840": {
+            "mean": 0.3476,
+            "p99": 5.0,
+            "max": 15,
+            "ssim": 0.998727
+          },
+          "cinema840": {
+            "mean": 0.2759,
+            "p99": 4.0,
+            "max": 12,
+            "ssim": 0.998828
+          }
+        },
+        "detailCrop": [
+          700,
+          500,
+          900,
+          700
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/plant@2x.webp",
+      "beforeBytes": 260254,
+      "afterBytes": 255290,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "a5fd9258d760a6220c8b3721e8094bc2db339a864699c899608dc8fd1c7dfe1d",
+      "afterSha256": "d0aadd549805bbf840e883a3090108203951d5d8a39bf741426c9f9b996e16aa",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 255290,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.2575,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.999315
+          },
+          "cinema420": {
+            "mean": 0.2043,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999349
+          },
+          "paper840": {
+            "mean": 0.3337,
+            "p99": 4.0,
+            "max": 12,
+            "ssim": 0.997808
+          },
+          "cinema840": {
+            "mean": 0.2648,
+            "p99": 3.0,
+            "max": 9,
+            "ssim": 0.998128
+          }
+        },
+        "detailCrop": [
+          600,
+          1000,
+          800,
+          1200
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/singapore-1819-1965@2x.webp",
+      "beforeBytes": 266594,
+      "afterBytes": 266594,
+      "targetBytes": 260000,
+      "status": "retained-over-target",
+      "reason": "Target-size candidate softens fine graphite texture or adds block/ringing artifacts at 2\u00d7; retained original.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "03dcb5af03cbd7fb7a51348cb8dec39067226c5f3e77fc1c859ba3c2c0595fb5",
+      "afterSha256": "03dcb5af03cbd7fb7a51348cb8dec39067226c5f3e77fc1c859ba3c2c0595fb5",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 241694,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.8219,
+            "p99": 5.0,
+            "max": 10,
+            "ssim": 0.996347
+          },
+          "cinema420": {
+            "mean": 0.6518,
+            "p99": 4.0,
+            "max": 8,
+            "ssim": 0.996723
+          },
+          "paper840": {
+            "mean": 1.4179,
+            "p99": 9.0,
+            "max": 23,
+            "ssim": 0.988671
+          },
+          "cinema840": {
+            "mean": 1.1257,
+            "p99": 7.0,
+            "max": 18,
+            "ssim": 0.990115
+          }
+        },
+        "detailCrop": [
+          1200,
+          700,
+          1400,
+          900
+        ]
+      }
+    },
+    {
+      "file": "public/illustrations/ww1@2x.webp",
+      "beforeBytes": 260610,
+      "afterBytes": 251772,
+      "targetBytes": 260000,
+      "status": "reencoded",
+      "reason": "No visible loss at 420 px or 2\u00d7 detail in paper/cinema; exact alpha retained.",
+      "width": 1600,
+      "height": 1600,
+      "beforeSha256": "99c64d2d20e0da811a83839e6421af99a3b1bc28541369b6bf99528651c018c4",
+      "afterSha256": "c02aa757975ec4d9dea8f3f133ab69bb3267e5a4f878d9a247613696f72eb302",
+      "alphaExact": true,
+      "candidate": {
+        "bytes": 251772,
+        "alphaExact": true,
+        "metrics": {
+          "paper420": {
+            "mean": 0.2689,
+            "p99": 3.0,
+            "max": 6,
+            "ssim": 0.999078
+          },
+          "cinema420": {
+            "mean": 0.2134,
+            "p99": 2.0,
+            "max": 5,
+            "ssim": 0.999154
+          },
+          "paper840": {
+            "mean": 0.4171,
+            "p99": 4.0,
+            "max": 15,
+            "ssim": 0.997056
+          },
+          "cinema840": {
+            "mean": 0.3311,
+            "p99": 4.0,
+            "max": 12,
+            "ssim": 0.997461
+          }
+        },
+        "detailCrop": [
+          900,
+          800,
+          1100,
+          1000
+        ]
+      }
+    }
+  ],
+  "skippedOverTarget": [
+    {
+      "file": "public/illustrations/exercises/back-extension.webp",
+      "beforeBytes": 110646,
+      "afterBytes": 110646,
+      "targetBytes": 110000,
+      "sha256": "47ea7283a76eabea0887e05cf33d566793ba3c3a3fb82fcc9b8be238e11dbd93"
+    },
+    {
+      "file": "public/illustrations/exercises/barbell-back-squat.webp",
+      "beforeBytes": 124384,
+      "afterBytes": 124384,
+      "targetBytes": 110000,
+      "sha256": "67219300504fa833615ccc70bdb9e1a1a03c5a439bc81cbcc8143b85dd9fc965"
+    },
+    {
+      "file": "public/illustrations/exercises/cable-external-rotation.webp",
+      "beforeBytes": 112152,
+      "afterBytes": 112152,
+      "targetBytes": 110000,
+      "sha256": "491833e4d80fcd9eb6b501cb230c7d8463cc414da5d407f7e8319eae2be31b59"
+    },
+    {
+      "file": "public/illustrations/exercises/cable-hip-abduction.webp",
+      "beforeBytes": 115784,
+      "afterBytes": 115784,
+      "targetBytes": 110000,
+      "sha256": "296d07306aa1e78cbd28707b958b41e7177c3a9f10e5cb80e292dcf2676b8c02"
+    },
+    {
+      "file": "public/illustrations/exercises/cable-hip-adduction.webp",
+      "beforeBytes": 112466,
+      "afterBytes": 112466,
+      "targetBytes": 110000,
+      "sha256": "099f36e79e433c88a8cc223f0d206414a5bc6794be74a2cbd0091cc00f010c0e"
+    },
+    {
+      "file": "public/illustrations/exercises/cable-internal-rotation.webp",
+      "beforeBytes": 111702,
+      "afterBytes": 111702,
+      "targetBytes": 110000,
+      "sha256": "b51e36fb4b2737003674220892c73b46783d8311955f48088779f774539c0354"
+    },
+    {
+      "file": "public/illustrations/exercises/cable-pallof-press.webp",
+      "beforeBytes": 110600,
+      "afterBytes": 110600,
+      "targetBytes": 110000,
+      "sha256": "9182fc5b5a5129121f49021d037ebf99cc9db394b5bbd27f39285c43a128935d"
+    },
+    {
+      "file": "public/illustrations/exercises/chest-supported-dumbbell-row.webp",
+      "beforeBytes": 116982,
+      "afterBytes": 116982,
+      "targetBytes": 110000,
+      "sha256": "9ca4041448f619a1f9ce39d84e9a53558bfe282227d0ecabc4de0c198e3dc0eb"
+    },
+    {
+      "file": "public/illustrations/exercises/close-grip-bench-press.webp",
+      "beforeBytes": 114698,
+      "afterBytes": 114698,
+      "targetBytes": 110000,
+      "sha256": "c2dc45fc8b52a16e48bc698281b273822d7f0a9351a08716e039b7665475fe80"
+    },
+    {
+      "file": "public/illustrations/exercises/lat-pulldown.webp",
+      "beforeBytes": 112412,
+      "afterBytes": 112412,
+      "targetBytes": 110000,
+      "sha256": "a394d2d2fe7383709fba0233f2cb1425acd2da62fc5bdc6dc21f855158fc8e5c"
+    },
+    {
+      "file": "public/illustrations/exercises/machine-chest-press.webp",
+      "beforeBytes": 110082,
+      "afterBytes": 110082,
+      "targetBytes": 110000,
+      "sha256": "a5519ce8a86b8b94e08ad1d38b41167b31ef812efcc141d9b5d4765acf547d5b"
+    },
+    {
+      "file": "public/illustrations/exercises/seated-leg-curl.webp",
+      "beforeBytes": 135168,
+      "afterBytes": 135168,
+      "targetBytes": 110000,
+      "sha256": "f6797d66eb47273158e5d72a5e975c465fd3db1799c10017363ee40ecd8a0a8a"
+    },
+    {
+      "file": "public/illustrations/exercises/single-arm-dumbbell-row.webp",
+      "beforeBytes": 112440,
+      "afterBytes": 112440,
+      "targetBytes": 110000,
+      "sha256": "b9f0eef8f9ec40bc99f848f9de191a6b8c7546f9f9876e6b3ff99fee2435c852"
+    },
+    {
+      "file": "public/illustrations/exercises/straight-arm-cable-pulldown.webp",
+      "beforeBytes": 112330,
+      "afterBytes": 112330,
+      "targetBytes": 110000,
+      "sha256": "66291e6556ed4e1ddf72e16f71e8acbdf77f68f097bc8dda977915411993df0f"
+    },
+    {
+      "file": "public/illustrations/muscles-chest@2x.webp",
+      "beforeBytes": 265444,
+      "afterBytes": 265444,
+      "targetBytes": 260000,
+      "sha256": "68f3ba78a808d692b7549ec806b119de8aeebaeecd0fa137262bb6919d91228b"
+    },
+    {
+      "file": "public/illustrations/muscles-shoulders@2x.webp",
+      "beforeBytes": 264402,
+      "afterBytes": 264402,
+      "targetBytes": 260000,
+      "sha256": "dfc7b7d2e7a802418827bfc90e6efaff57e16b5f0263bac9e71e3325a5155767"
+    }
+  ],
+  "gates": {
+    "check": "passed: astro check (1499 files, 0 errors, 0 warnings, 24 hints) and tsc --noEmit",
+    "validate": "passed: 94 topics, 0 errors, 0 warnings",
+    "test": "NOT PASSED. A full default before-edit run reported 10 failed files / 16 timing failures, 6742 passed tests and 1 skipped. Post-edit default and reduced-worker runs also hit geometry/module-loading timeouts and the 100ms catalogue-search benchmark; stopped after observed failures. No test/config/assertion changes. Measured host: 18 logical cores, 1-minute load 688.7, 3.19 GiB free of 128 GiB. Logs: /tmp/atlas-weight-pass/test.log and test-standard-final.log.",
+    "build": "passed: 191 pages; all 64 audited dist illustration hashes match final public files (WebP assets are intentionally outside PWA precache)."
+  },
+  "testEnvironment": {
+    "logicalCores": 18,
+    "loadAverage1m": 688.71435546875,
+    "freeGiB": 3.1866455078125,
+    "totalGiB": 128,
+    "assessment": "Timing limits could not be met reliably under host load. Failures were observed before any image edits as well as after. Test gate is explicitly not claimed green."
+  }
+}
