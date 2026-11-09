@@ -116,7 +116,7 @@ test.describe('sample-light (SpaceScene light model)', () => {
 
   test('Sun time uses the shared formatter, hourly chalk marks, and a line graph with clock labels', async ({ page }) => {
     await open(page, '?ch=sun-shadows&sim=time.8');
-    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('8.00 am');
+    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('8:00 am');
     await expect.poll(async () => (await shadows(page))['1']?.trail.length).toBe(1);
     for (let i = 0; i < 3; i++) {
       await card(page).locator('[data-sim-record]').click();
@@ -124,7 +124,7 @@ test.describe('sample-light (SpaceScene light model)', () => {
     }
     await expect.poll(async () => (await shadows(page))['1']?.trail.length).toBe(3);
     const graph = card(page).locator('.space-chart[data-kind="line"] svg[role="img"]');
-    await expect(graph).toHaveAttribute('aria-label', /8\.00 am.*10\.00 am/);
+    await expect(graph).toHaveAttribute('aria-label', /8:00 am.*10:00 am/);
     await expect(graph).toContainText('8 am');
     const oct = (await shadows(page))['1']!.trail;
     await card(page).locator('[data-sim-control="date"] [data-sim-value="jun-21"]').click();
@@ -139,7 +139,7 @@ test.describe('sample-light (SpaceScene light model)', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await open(page, '?ch=sun-shadows&sim=time.8', 'zh');
     await page.getByRole('button', { name: '阅读', exact: true }).click();
-    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('上午 8.00');
+    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('上午 8:00');
     for (let i = 0; i < 2; i++) {
       await card(page).locator('[data-sim-record]').scrollIntoViewIfNeeded();
       await card(page).locator('[data-sim-record]').click();
@@ -156,6 +156,6 @@ test.describe('sample-light (SpaceScene light model)', () => {
     expect(box!.x).toBeGreaterThanOrEqual(0);
     expect(box!.x + box!.width).toBeLessThanOrEqual(390);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
-    await expect(graph).toHaveAttribute('aria-label', /上午 8\.00.*上午 9\.00/);
+    await expect(graph).toHaveAttribute('aria-label', /上午 8:00.*上午 9:00/);
   });
 });

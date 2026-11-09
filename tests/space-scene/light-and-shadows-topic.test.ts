@@ -140,7 +140,7 @@ describe('light-and-shadows topic: captions say what the model gives', () => {
     expect(chapter('screen-distance').beats[3]!.caption.en).toContain('four centimetres, for every ten centimetres');
   });
 
-  it('20 October: the Sun is highest at about 12.50 pm (ten to one)', () => {
+  it('20 October: the Sun is highest at about 12:50 pm (ten to one)', () => {
     const noon = out({ date: 'oct-20' }).noon as number;
     expect(Math.round(noon * 60)).toBe(12 * 60 + 50);
     expect(chapter('sun-shadows').beats[1]!.caption.en).toContain('ten to one');

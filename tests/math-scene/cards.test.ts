@@ -54,16 +54,16 @@ describe('PRODUCT', () => {
 
 describe('TIME', () => {
   it('reads a time: as the notation writes it, in words, on the other clock', () => {
-    expect(values(timeRows(parseClock('19:20')!, '12', 'en'))).toBe('7.20 pm | seven twenty p.m. | 19:20');
-    expect(values(timeRows(parseClock('07:20')!, 'face', 'en'))).toBe('7.20 | twenty past seven');
-    expect(values(timeRows(parseClock('19:20')!, '24', 'zh'))).toBe('19:20 | 十九时二十分 | 7.20 pm');
+    expect(values(timeRows(parseClock('19:20')!, '12', 'en'))).toBe('7:20 pm | seven twenty p.m. | 19:20');
+    expect(values(timeRows(parseClock('07:20')!, 'face', 'en'))).toBe('7:20 | twenty past seven');
+    expect(values(timeRows(parseClock('19:20')!, '24', 'zh'))).toBe('19:20 | 十九时二十分 | 7:20 pm');
   });
 
   it('on a check: the span’s known times, ? for the one asked, then what is written', () => {
     const end = task({ kind: 'input', model: { kind: 'numberline', scale: 'whole', from: 0, to: 60, step: 5 }, answer: '11:35', form: 'time12', span: { start: '10:45', length: '50m', ask: 'end' } });
-    expect(values(timeTaskRows(end, initialState(end), false, 'en', DEFAULT_NOTATION))).toBe('10.45 am | 50 min | ?');
-    expect(values(timeTaskRows(end, apply(end, [{ do: 'input', field: 'h', value: '10' }, { do: 'input', field: 'm', value: '95' }, { do: 'input', field: 'ap', value: 'am' }]), false, 'en', DEFAULT_NOTATION))).toBe('10.45 am | 50 min | ? | —');
-    expect(values(timeTaskRows(end, apply(end, solve(end)), true, 'en', DEFAULT_NOTATION))).toBe('10.45 am | 50 min | 11.35 am | eleven thirty-five a.m. | 11:35');
+    expect(values(timeTaskRows(end, initialState(end), false, 'en', DEFAULT_NOTATION))).toBe('10:45 am | 50 min | ?');
+    expect(values(timeTaskRows(end, apply(end, [{ do: 'input', field: 'h', value: '10' }, { do: 'input', field: 'm', value: '95' }, { do: 'input', field: 'ap', value: 'am' }]), false, 'en', DEFAULT_NOTATION))).toBe('10:45 am | 50 min | ? | —');
+    expect(values(timeTaskRows(end, apply(end, solve(end)), true, 'en', DEFAULT_NOTATION))).toBe('10:45 am | 50 min | 11:35 am | eleven thirty-five a.m. | 11:35');
   });
 });
 

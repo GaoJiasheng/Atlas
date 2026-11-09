@@ -212,7 +212,7 @@
 |---|---|---|---|---|---|
 | `b05-1` | 70 / world / modern-sea-all | site-singapore-modern | Main map: 70 million years ago. Today’s small map shows Mesozoic finds of different ages. Singapore helps you locate the region. | 大图：7000 万年前。今天的小图显示中生代不同年代的发现，新加坡帮助你找到这个地区。 | F031,F032,F033,DE004 |
 | `b05-2` | 70 / world / modern-sea-all | card-thailand-find | Main map: 70 million years ago. Today’s small map: Sirindhorna came from the Early Cretaceous Khok Kruat Formation in Nakhon Ratchasima Province, northeastern Thailand. | 大图：7000 万年前。今天的小图：泰国东北部的诗琳通龙，来自呵叻府早白垩世 Khok Kruat 组。 | F031 |
-| `b05-3` | 70 / world / modern-sea-all | card-laos-find | Main map: 70 million years ago. Today’s small map: Early Cretaceous Ichthyovenator from Laos was described from part of its body, rather than a complete skeleton. | 大图：7000 万年前。今天的小图：老挝早白垩世的鱼猎龙，根据部分身体材料描述，并没有完整骨架。 | F032 |
+| `b05-3` | 70 / world / modern-sea-all | card-laos-find | Main map: 70 million years ago. Today’s small map: Early Cretaceous Ichthyovenator from Laos was described from part of its body, rather than a complete skeleton. | 大图：7000 万年前。今天的小图：寮国早白垩世的鱼猎龙，根据部分身体材料描述，并没有完整骨架。 | F032 |
 | `b05-4` | 70 / world / modern-sea-all | card-pahang-find | Main map: 70 million years ago. Today’s small map: dinosaur teeth were found in Pahang, Malaysia. The protected site is confidential, so the card names only the region. | 大图：7000 万年前。今天的小图：马来西亚彭亨发现了恐龙牙齿。地点为保护而保密，卡片只说明地区。 | F033,F034 |
 | `b05-5` | 70 / world / modern-sea-all | card-museum-origin | Main map: 70 million years ago. Today’s small map: Singapore’s museum displays sauropod fossils found in the United States. The museum is not their dig site. | 大图：7000 万年前。今天的小图：新加坡博物馆展示的蜥脚类化石发现于美国。博物馆不是它们的挖掘地点。 | F026,F027 |
 

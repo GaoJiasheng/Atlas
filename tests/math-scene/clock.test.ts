@@ -133,8 +133,8 @@ describe('set-clock', () => {
     const s = reduce(t, initialState(t), { do: 'clock', t: at('10:15') });
     expect(workingLines(t, initialState(t), 'en')).toEqual([]);
     expect(workingLines(t, s, 'en')).toEqual(['{t:10:15|face}']);
-    expect(values(setClockRows(t, s, 'en', DEFAULT_NOTATION))).toBe('9.15 | 10.15 | quarter past ten');
-    expect(values(valuePlateRows(t.model, t, s, false)!)).toBe('CLOCK | 10.15 | H · M | H.MM');
+    expect(values(setClockRows(t, s, 'en', DEFAULT_NOTATION))).toBe('9:15 | 10:15 | quarter past ten');
+    expect(values(valuePlateRows(t.model, t, s, false)!)).toBe('CLOCK | 10:15 | H · M | H:MM');
     expect(cardKindOf(t.model, t, 'fraction')).toBe('time');
   });
   it('validate: one plain face, the target on the snap, not set already', () => {
@@ -155,8 +155,8 @@ describe('read-clock', () => {
     expect(inputSpecOf(t)).toBe(inputSpecOf(t));
     expect(proveTask(t)).toEqual([]);
     expect(check(t, apply(t, solve(t))).ok).toBe(true);
-    expect(values(valuePlateRows(t.model, t, initialState(t), false)!)).toBe('CLOCK | ? | H · M | H.MM');
-    expect(values(valuePlateRows(t.model, t, apply(t, solve(t)), true)!)).toBe('CLOCK | 7.20 | H · M | H.MM');
+    expect(values(valuePlateRows(t.model, t, initialState(t), false)!)).toBe('CLOCK | ? | H · M | H:MM');
+    expect(values(valuePlateRows(t.model, t, apply(t, solve(t)), true)!)).toBe('CLOCK | 7:20 | H · M | H:MM');
   });
   it('a stopwatch is read as a duration', () => {
     const sw = task({ kind: 'read-clock', model: { kind: 'clock', face: 'stopwatch', elapsed: '75s' }, answer: '1m15s', form: 'duration' });
@@ -206,7 +206,7 @@ describe('the clock model', () => {
     expect(valueModelIssues(m({ time: '03:40', minuteLabels: true, hourTrack: { from: '03:00' }, arc: { from: '03:10', to: '03:55' }, ampm: 'show' }))).toEqual([]);
   });
   it('PLATE rows of a beat: the time as the face reads it, the lit hands, the notation', () => {
-    expect(values(valuePlateRows(m({ time: '19:40', ampm: 'show', lit: 'hour' }), null, null, false)!)).toBe('CLOCK | 7.40 PM | HOUR | H.MM AM');
+    expect(values(valuePlateRows(m({ time: '19:40', ampm: 'show', lit: 'hour' }), null, null, false)!)).toBe('CLOCK | 7:40 PM | HOUR | H:MM AM');
     expect(values(valuePlateRows(m({ time: '19:40', inner24: true }), null, null, false)!)).toBe('CLOCK | 19:40 | H · M | HH:MM');
     expect(values(valuePlateRows(m({ face: 'stopwatch', elapsed: '75s' }), null, null, false)!)).toBe('CLOCK | 1 MIN 15 S | S · MIN | MIN · S');
   });

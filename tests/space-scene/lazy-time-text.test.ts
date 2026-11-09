@@ -23,7 +23,7 @@ describe('simulation time notation loading', () => {
       const token = timeToken(hours);
       const shown = plainText(token, locale);
       expect(timeText(hours, locale)).toBe(shown);
-      expect(timeText(hours, locale, true)).toBe(shown.replace(/\.00(?= |$)/, ''));
+      expect(timeText(hours, locale, true)).toBe(shown.replace(/[.:]00(?= |$)/, ''));
       expect(valueWords(control, hours, locale)).toBe(speakable(token, locale));
       expect(outputWords(output, hours, locale)).toBe(speakable(token, locale));
     }

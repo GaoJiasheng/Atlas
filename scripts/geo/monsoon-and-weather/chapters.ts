@@ -436,7 +436,7 @@ export const CHAPTERS: ChapterRow[] = [
         highlight: [SG, KL],
         caption: {
           en: 'August reference view: Singapore, Malaysia and Indonesia are part of the regional story. ASEAN’s haze agreement was signed in 2002; a monthly wind map cannot assign responsibility for individual fires.',
-          zh: '8 月参考视图：新加坡、马来西亚和印尼都是区域故事的一部分。东盟烟霾协定于 2002 年签署；月平均风图不能判定个别火灾的责任。',
+          zh: '8 月参考视图：新加坡、马来西亚和印尼都是区域故事的一部分。亚细安烟霾协定于 2002 年签署；月平均风图不能判定个别火灾的责任。',
         },
       },
     ],

@@ -78,24 +78,24 @@ describe('times of day', () => {
     expect(formatClock(parseClock('15:05:30')!)).toBe('15:05:30');
   });
 
-  it('shows a time in 12-hour, face and 24-hour notation (default 7.20 pm / 19:20)', () => {
+  it('shows a time in 12-hour, face and 24-hour notation (default 7:20 pm / 19:20)', () => {
     const t = parseClock('19:20')!;
-    expect(clockText(t, '12')).toBe('7.20 pm');
-    expect(clockText(t, 'face')).toBe('7.20');
+    expect(clockText(t, '12')).toBe('7:20 pm');
+    expect(clockText(t, 'face')).toBe('7:20');
     expect(clockText(t, '24')).toBe('19:20');
     expect(clockText(parseClock('07:05')!, '24')).toBe('07:05');
     expect(clockText(t, '12', { clock12: 'h.mm a.m.', clock24: 'HHMM' })).toBe('7.20 p.m.');
     expect(clockText(t, '12', { clock12: 'h:mm am', clock24: 'HH MM' })).toBe('7:20 pm');
     expect(clockText(t, '24', { ...DEFAULT_NOTATION, clock24: 'HHMM' })).toBe('1920');
     expect(clockText(t, '24', { ...DEFAULT_NOTATION, clock24: 'HH MM' })).toBe('19 20');
-    expect(clockText(parseClock('00:30')!, '12')).toBe('12.30 am');
-    expect(clockText(parseClock('12:00')!, '12')).toBe('12.00 pm');
+    expect(clockText(parseClock('00:30')!, '12')).toBe('12:30 am');
+    expect(clockText(parseClock('12:00')!, '12')).toBe('12:00 pm');
   });
 
   it('names the part of the day in Chinese prose, keeps am / pm in a number sentence', () => {
     const t = parseClock('19:20')!;
-    expect(clockText(t, '12', DEFAULT_NOTATION, 'zh')).toBe('晚上 7.20');
-    expect(clockText(t, '12', DEFAULT_NOTATION, 'zh', true)).toBe('7.20 pm');
+    expect(clockText(t, '12', DEFAULT_NOTATION, 'zh')).toBe('晚上 7:20');
+    expect(clockText(t, '12', DEFAULT_NOTATION, 'zh', true)).toBe('7:20 pm');
     expect(periodZh(parseClock('09:00')!)).toBe('上午');
     expect(periodZh(parseClock('12:10')!)).toBe('中午');
     expect(periodZh(parseClock('15:00')!)).toBe('下午');

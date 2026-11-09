@@ -177,7 +177,7 @@
       "url": "https://pubmed.ncbi.nlm.nih.gov/22528021/",
       "note": {
         "en": "This research summary describes Early Cretaceous Ichthyovenator from Laos, based on partly connected bones from behind the head.",
-        "zh": "这篇研究摘要介绍老挝早白垩世的鱼猎龙，依据是部分相连的头部以后的骨骼。"
+        "zh": "这篇研究摘要介绍寮国早白垩世的鱼猎龙，依据是部分相连的头部以后的骨骼。"
       }
     },
     {
@@ -292,12 +292,12 @@
       "id": "S66",
       "text": {
         "en": "PBDB contributors · API 1.2 TH/LA/MY regional snapshot, 26 October 2026",
-        "zh": "PBDB贡献者 · API 1.2泰老马区域快照，2026年10月26日"
+        "zh": "PBDB贡献者 · API 1.2泰寮马区域快照，2026年10月26日"
       },
       "url": "https://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Dinosauria%5EAves&interval=Triassic,Jurassic,Cretaceous&timerule=overlap&cc=TH,LA,MY&show=coords,loc,strat,ref&limit=5000",
       "note": {
         "en": "This saved selection adds fossil records from Thailand, Laos and Malaysia. The public map leaves out Malaysian fossil locations to protect the sites.",
-        "zh": "这份保存的资料补充泰国、老挝和马来西亚的化石记录。公开地图不显示马来西亚化石位置，以保护地点。"
+        "zh": "这份保存的资料补充泰国、寮国和马来西亚的化石记录。公开地图不显示马来西亚化石位置，以保护地点。"
       }
     },
     {

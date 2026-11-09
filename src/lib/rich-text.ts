@@ -3,7 +3,7 @@
  * UI text that are typeset (`renderRich`) and read as words (`speakable`) for
  * the presentation voice and screen readers:
  *   `{3/4}`, `{1 3/4}`, blanks `{?/12}`, `{8/?}`  a small stacked fraction ("three quarters" /「四分之三」)
- *   `{t:09:40}`  a time of day in 12-hour time, by the lesson's notation (`9.40 am`; zh prose `上午 9.40`)
+ *   `{t:09:40}`  a time of day in 12-hour time, by the lesson's notation (`9:40 am`; zh prose `上午 9:40`)
  *   `{t:7:20|face}`  as a clock face reads it, no am / pm (`7.20`)
  *   `{t:19:20|24}`  in 24-hour time (`19:20`)
  *   `{t:19:20|ampm}`  12-hour time with the letters am / pm in Chinese too (`7.20 pm`, where the letters are the point)
@@ -101,8 +101,8 @@ function tokenPart(body: string): Exclude<RichPart, { text: string }> | null {
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/;
 
 /**
- * Spaces between a token and Chinese text when the token itself shows Chinese at that end (`上午 9.40`, `1 小时 35 分钟`):
- * "是 {t:19:10}。" shows "是晚上 7.10。", not "是 晚上 7.10。". A space beside digits or Latin letters stays.
+ * Spaces between a token and Chinese text when the token itself shows Chinese at that end (`上午 9:40`, `1 小时 35 分钟`):
+ * "是 {t:19:10}。" shows "是晚上 7:10。", not "是 晚上 7:10。". A space beside digits or Latin letters stays.
  */
 function tidySpaces(parts: RichPart[], locale: 'en' | 'zh'): RichPart[] {
   if (locale !== 'zh') return parts;

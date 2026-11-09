@@ -133,7 +133,7 @@ export interface Notation {
   clock12: (typeof CLOCK12_NOTATIONS)[number];
   clock24: (typeof CLOCK24_NOTATIONS)[number];
 }
-export const DEFAULT_NOTATION: Notation = { clock12: 'h.mm am', clock24: 'HH:MM' };
+export const DEFAULT_NOTATION: Notation = { clock12: 'h:mm am', clock24: 'HH:MM' };
 
 /** The separator between hours and minutes in 12-hour time (`.` or `:`). */
 export const sep12 = (n: Notation): string => (n.clock12 === 'h:mm am' ? ':' : '.');
@@ -153,9 +153,9 @@ export function periodZh(t: number): string {
 }
 
 /**
- * A time as shown: 12-hour `7.20 pm`, face `7.20`, 24-hour `19:20`.
+ * A time as shown: 12-hour `7:20 pm`, face `7:20`, 24-hour `19:20`.
  * In Chinese prose the 12-hour time names the part of the day instead of
- * am / pm (`晚上 7.20`); a number sentence (`line`) keeps the notation in both languages.
+ * am / pm (`晚上 7:20`); a number sentence (`line`) keeps the notation in both languages.
  */
 export function clockText(t: number, mode: ClockMode, notation: Notation = DEFAULT_NOTATION, locale: 'en' | 'zh' = 'en', line = false): string {
   const p = clockParts(t);

@@ -167,3 +167,53 @@ coral-reef 4、warring-states 4，circuits、digestive-system、inside-the-earth
 1. saturn-v `lm-docking-port` 仍写着 “y = 92.5 m”，solar-system `horizon` 仍写着 “scene −Z, east +X, up +Y”。这两个字段自 6668a386 以来没有变，不在这次的范围内。
 2. how-planes-fly 的 `text.ts` 比 `parts.json` 旧：除了这次改的 `cockpit-glazing`，还有 53 个字段重跑后会退回可读性修改之前的文字。重跑该主题前要先同步。
 3. “borosilicate” 只出现在 `docs/68-3d-realism/review-machines.md`，main 的读者文字里没有。
+
+## 八、统一写法的决定（2026-11-09，分支 `claude/fix-terms`）
+
+处理 `docs/gavin-todo.md` §2 第 4、5、7、9 条。依据按新加坡官方华文材料定。
+
+**没读到的来源**：联合早报、8world、《商业时报》华文版这几个网站，本次的网页工具读不了（站点不对这类工具开放），没有绕过。下面没有一条依据来自这几家的网页。
+
+| 条目 | 决定 | 依据（都在 2026-11-09 读过） | 把握 |
+|---|---|---|---|
+| 亚细安 / 东盟 | **亚细安** | 新加坡外交部 2026-03-06 沈颖高级政务部长在 Business China 的演讲文稿，中文部分“亚细安”8 次，“东盟”0 次（https://www.mfa.gov.sg/newsroom/press-statements-transcripts-and-photos/transcript-of-senior-minister-of-state-in-the-ministry-of-foreign-affairs-and-the-ministry-of-home-affairs-sim-ann-s-speech-at-business-china--special-speakers-series---6-march-2026/）；国防部《先驱》2018-10-25 报道也写“亚细安防长会议”；《亚细安宪章》中文本（下一行） | 高 |
+| 寮国 / 老挝 | **寮国** | 《亚细安宪章》中文本序言第一段“寮国（老挝人民民主共和国）”，印刷页第 333 页（PDF 第 354 页，页面是图片，人工看图核对），https://asean.org/wp-content/uploads/2021/08/2012-The-ASEAN-Charter-in-English-and-ASEAN-Languages-May.pdf。中文维基“国名”一节说新加坡称寮国（该句没有注释，只作旁证） | 中：宪章是 2012 年版；没有读到新加坡政府近年用“寮国”的中文页面，也没有读到用“老挝”的 |
+| 武吉知卓 / 鸦片山 | **鸦片山**；战役写“鸦片山战役”，纪念馆写“鸦片山战役纪念馆” | 国家文物局下属纪念馆的中文导览（2023）通篇用“鸦片山”“鸦片山战役纪念馆”，并写“武吉参督或‘鸦片山’”（https://www.heritage.sg/reflectionsatbukitchandu/-/media/rbc/visit/visitor-guides/2023-rbc-chinese-guide-as-of-140623）；国防部《先驱》2023-02-15“铭记本土战争英雄”也用“鸦片山战役纪念馆” | 高 |
+| 伊丽莎白·蔡 / 蔡杨素梅 | **蔡杨素梅** | 国防部《先驱》2023-02-15“铭记本土战争英雄”通篇用“蔡杨素梅”（https://defencepioneer.sg/pioneer-articles/%E9%93%AD%E8%AE%B0%E6%9C%AC%E5%9C%9F%E6%88%98%E4%BA%89%E8%8B%B1%E9%9B%84） | 高 |
+| Vincent Cheng 中文名 | **不改**，正文保留英文 | 英文维基写“钟金全”，但该处没有来源；新加坡来源里没有找到 | — |
+
+**注释只写一次**：
+
+- 鸦片山：两个主题的 `events.json` 摘要写“鸦片山（武吉参督）”。括号里用官方导览的“武吉参督”，没有用“武吉知卓”，因为后者在能读到的新加坡来源里都没有出现。要换回只改这两处。
+- 蔡杨素梅：ww2 08 章和 singapore-1819-1965 07 章各写一次“蔡杨素梅（伊丽莎白·蔡）”。
+- 亚细安、寮国：southeast-asia 原有的“（也称东盟）”“也就是老挝人民民主共和国”保留。
+
+**顺手改掉的**：ww2 里的“蔡秀美”。官方写法是蔡杨素梅，“蔡秀美”没有来源，与本条同属一个人名问题。
+
+**没改的**：
+
+- 来源的原始中文标题：《商业时报》“东帝汶正式加入东盟，成为其第11个成员国”，以及记录这条用法的说明（southeast-asia、sample-geography）。其余 `sources.json` 里的“东盟”“老挝”“武吉知卓”是我们自己译的英文标题或摘要，已改。
+- `AUDIT.md`、`REVIEW.md`：当时的审核记录，不改。
+- “阿南·赛迪”、丈夫“蔡坤兴”不在这次范围。《先驱》写“阿南赛迪”，没有写丈夫的中文名；中文维基写“蔡群兴”，未核实，请留意。
+- EN 全部未动。
+
+`docs/47` 的 b05-3 字幕行也改了，`dinosaur-earth.test.ts` 用它逐字核对正文。
+
+生成器一起改了：`scripts/geo/monsoon-and-weather/chapters.ts`、`scripts/geo/dinosaur-earth/build.py`（及其产物 `public/geo/de-reference-cards.json`）。
+
+### 12 时制读数：“8.00 am”改为“8:00 am”
+
+- **改法**：`DEFAULT_NOTATION.clock12` 由 `h.mm am` 改为 `h:mm am`（`src/engines/math-scene/lib/value.ts`）；图表短刻度的去零规则同时认冒号（`src/engines/space-scene/lib/sim/text.ts`，否则 “1:00 pm” 不会缩成 “1 pm”）。24 时制默认 `HH:MM` 不变。依据同第二节：TB-2A、TB-3B。
+- **受影响的主题**，都由 `tests/space-scene/light-display.test.ts` 新增的用例逐个验证（用例同时断言清单没有多也没有少）：
+
+| 主题 | 显示的地方 |
+|---|---|
+| light-and-shadows | 时间控件、“太阳最高”等读数、PLATE、图表、07 章 `<Time>` |
+| sample-light | 同上（示例主题） |
+| sun-earth-moon | 计算日出、太阳正午、日落读数 |
+| sample-orbit | 同上（示例主题） |
+| sample-lesson-whole | `{t:}` 记号（示例主题，没有自己的 `notation`） |
+
+- **不受影响**：telling-time 有自己的 `notation`，早已是这种写法。其余课主题不显示时刻。
+- **手打文字**：light-and-shadows 07 章测验题“1.00 pm to 4.00 pm / 下午 1.00 到下午 4.00”也改成冒号，否则同一屏两种写法。
+- **没改**：历史主题正文里手打的时刻（ww1、ww2、singapore-1819-1965，如 “6.10 p.m.”）。它们是英文叙述里的 a.m. / p.m. 写法，不是引擎读数。要统一的话是另一项工作。

@@ -56,7 +56,7 @@ describe('the ruler', () => {
 
   it('PLATE rows of a beat: from, to, jumped', () => {
     const jumps = line({ from: '09:00', to: '12:00', marks: [{ at: '09:40' }, { at: '11:15', tone: 'hot' }], jumps: [['09:40', '10:00'], ['10:00', '11:00'], ['11:00', '11:15']] });
-    expect(values(valuePlateRows(jumps as Model, null, null, false)!)).toBe('TIMELINE | 9.40 AM | 11.15 AM | 1 h 35 min');
+    expect(values(valuePlateRows(jumps as Model, null, null, false)!)).toBe('TIMELINE | 9:40 AM | 11:15 AM | 1 h 35 min');
     expect(values(valuePlateRows(line({ scale: 'duration', to: '120m', jumps: [['0m', '60m'], ['60m', '95m']] }) as Model, null, null, false)!)).toBe('TIMELINE | 0 min | 1 h 35 min | 1 h 35 min');
   });
 });

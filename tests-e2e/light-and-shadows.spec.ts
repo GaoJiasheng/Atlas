@@ -116,7 +116,7 @@ test.describe('light-and-shadows', () => {
 
   test('the Sun: clock times, hourly chalk marks and a line graph that falls and rises', async ({ page }) => {
     await open(page, '?ch=sun-shadows');
-    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('8.00 am');
+    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('8:00 am');
     await expect.poll(async () => (await shadows(page))['1']?.trail.length).toBe(1);
     expect((await sim(page)).outputs['shadow-length']).toBeCloseTo(3.25, 2);
     for (let i = 0; i < 11; i++) {
@@ -132,7 +132,7 @@ test.describe('light-and-shadows', () => {
   test('Chinese: the card, the clock and the reading panel are in Chinese', async ({ page }) => {
     await open(page, '?ch=sun-shadows', 'zh');
     await expect(card(page)).toContainText('试一试');
-    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('上午 8.00');
+    await expect(card(page).locator('[data-sim-control="time"]')).toContainText('上午 8:00');
     await expect(page.locator('body')).toContainText('太阳下的影子');
     await expect(page.locator('body')).toContainText('影子背着太阳');
   });

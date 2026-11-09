@@ -64,7 +64,7 @@ describe('NOAA original calculator fixtures, Singapore (docs/35 §2.4)', () => {
     ['2026-06-21', 0.41, 'south', 184],
     // docs/35 prints 268°; the NOAA model gives 267.49°, so the spec's figure is a rounding slip.
     ['2026-03-24', 0.05, 'west', 267],
-  ] as const)('%s at 1.00 pm: shadow %s m, %s (%s°)', (date, metres, points, bearing) => {
+  ] as const)('%s at 1:00 pm: shadow %s m, %s (%s°)', (date, metres, points, bearing) => {
     const at = sunPosition(date, 13, 1.3, 103.8, 8);
     expect(Number(length(at.height).toFixed(2))).toBe(metres);
     expect(shadowDirection(at.bearing)).toBe(points);

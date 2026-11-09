@@ -20,7 +20,7 @@ export function timeToken(hours: number): string {
 export function timeText(hours: number, locale: 'en' | 'zh', short = false): string {
   if (!Number.isFinite(hours)) return '—';
   const text = readTimeText().plainText(timeToken(hours), locale);
-  return short ? text.replace(/\.00(?= |$)/, '') : text;
+  return short ? text.replace(/[.:]00(?= |$)/, '') : text;
 }
 
 /** Time values read as clock words instead of decimal hours. */
