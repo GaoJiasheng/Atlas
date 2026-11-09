@@ -1,3 +1,4 @@
+import type { LeaderPlace } from './lib/leader-layout';
 /**
  * Stage → HUD bridge. The WebGL stage runs in its own React root (and its own
  * lazily loaded chunk with three.js); the HUD (leader labels, perf readout)
@@ -141,6 +142,8 @@ export interface SensesReading {
   wave?: { phaseCycles: number; positions: number[]; rests: number[]; visualHz: number; lambda: number; A: number; playing: boolean; slowFactor: number; active: boolean; hiddenReason: string | null };
 }
 export interface StageBridge {
+  /** Installed only by the data-enabled inset HUD; evaluated from live anchors. */
+  insetLayout?: () => { bodies: readonly {x0:number;y0:number;x1:number;y1:number}[]; clear(place: LeaderPlace, ax: number, ay: number, dx?: number, dy?: number, titles?: boolean): boolean };
   /** Stage content that has really been drawn (lazy chunks resolved, StageMark): `scene` (clocks, parts, probes), `overlays` (the sim overlays) and `model` (the glb's meshes). */
   stageMarks: Set<string>;
   /** The scene asks for sim overlays now, so `__atlas.ready` also waits for the `overlays` mark. */
@@ -262,6 +265,11 @@ export function expectsModel(file: { model?: string | undefined; parts: readonly
 /** True once the lazily loaded stage content is on the stage (the canvas alone exists earlier). */
 export function stageReady(bridge: StageBridge): boolean {
   return bridge.stageMarks.has('scene') && (!bridge.overlaysExpected || bridge.stageMarks.has('overlays')) && (!bridge.modelExpected || bridge.stageMarks.has('model'));
+}
+
+/** Named-subject framing must wait for measured HUD and drawn geometry, not stand-ins. */
+export function hudFrameReady(bridge: StageBridge): boolean {
+  return stageReady(bridge) && bridge.freeStage !== undefined && !bridge.hudPending;
 }
 
 export function createBridge(): StageBridge {

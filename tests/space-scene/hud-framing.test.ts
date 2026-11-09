@@ -101,6 +101,7 @@ describe('primary radius and actual reserved HUD rectangles', () => {
     const wide = {...cam,position:[.3,6.5,16] as [number,number,number]};
     const fitted = fitCameraToHud(wide,[primary],800,600,{x0:12,y0:12,x1:788,y1:588},{panels:[]});
     checkRadius(fitted,primary,600,24);
+    expect(fitCameraToHud(wide,[primary],800,600,{x0:12,y0:12,x1:788,y1:588})).toEqual(fitted);
     checkProjection(fitted,[primary],800,600,{x0:12,y0:12,x1:788,y1:588});
   });
   it('does not assign the floor to another body when the primary is absent or intentionally excluded', () => {
@@ -229,5 +230,31 @@ describe('default framing in the free HUD area (docs/67 §9)', () => {
     const panels = [{x0:12,y0:12,x1:200,y1:700},{x0:420,y0:12,x1:540,y1:300}];
     expect(freeStageRect(550,760,panels).x0).toBe(12);
     expect(freeStageRect(550,760,panels,12,false)).toEqual({x0:212,y0:12,x1:408,y1:748});
+  });
+});
+
+describe('bounded framing recovery and hysteresis', () => {
+  it('keeps a previous safe camera across small shrinking bounds, then refits when they grow beyond it', () => {
+    const rect = freeStageRect(624,670,narrowPanels);
+    const original = fitCameraToAspect(cam,624/670);
+    const larger = bodies.map(b=>({...b,half:b.half.map(v=>v*1.02) as [number,number,number]}));
+    const previous = fitCameraToHud(original,larger,624,670,rect,{panels:narrowPanels});
+    const stable = fitCameraToHud(original,bodies,624,670,rect,{panels:narrowPanels,previous});
+    expect(stable).toBe(previous);
+    const huge = bodies.map(b=>({...b,half:b.half.map(v=>v*2) as [number,number,number]}));
+    const changed = fitCameraToHud(original,huge,624,670,rect,{panels:narrowPanels,previous});
+    expect(changed).not.toBe(previous);
+    checkProjection(changed,huge,624,670,{x0:12,y0:12,x1:612,y1:658});
+  });
+  it('bounds the fallback by the viewport fit even when the HUD leaves only a vanishing strip', () => {
+    const viewport = {x0:12,y0:12,x1:788,y1:588};
+    const expected = fitCameraToHud(cam,bodies,800,600,viewport);
+    for (const gap of [20, 0.03, 0]) {
+      const rect = {x0:400-gap/2,y0:12,x1:400+gap/2,y1:588};
+      const fitted = fitCameraToHud(cam,bodies,800,600,rect,{panels:[{x0:0,y0:0,x1:800,y1:600}]});
+      expect(fitted).toEqual(expected);
+      checkProjection(fitted,bodies,800,600,viewport);
+      expect([...fitted.position,...fitted.target].every(Number.isFinite)).toBe(true);
+    }
   });
 });

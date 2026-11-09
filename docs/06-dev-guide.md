@@ -987,6 +987,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "presets": [                             // 可选，≤ 6 个命名镜头预设（docs/12 §7.4 G7）：VIEW 按钮排在 ORBIT、REF. 之后（数字键接着排：1–9，第 10 个是 0，再往后只有按钮）
     { "id": "outdoor", "label": {en, zh}, "camera": { "position": [1.5, 0.75, 1.5], "target": [0.62, 0.3, 0], "fov": 30 },
       "view": "xray" }                     // view 可选：按预设时同时切视图（exploded 时拆开到 0.7 或当前值）；id 全主题唯一，不能叫 orbit / reference
+                                           // layers 可选：按预设时追加打开这些组并解除其成员的章节 hide / ghost / solo（不关其他图层）；show 可选：只解除这些零件（须属于 layers 的组），如 steam-engine 的 newcomen-view
   ],
   "poses": { "wings-open": { "hindwings": { "pivot": [-0.38, 0.84, 0.1], "rotation": [-15, 0, 0], "fan": 1 }, "duration": 0.8 } },  // 可选，见「生物与有机形体」
   "units": { "modelUnit": "mm", "scale": 25 }   // 可选：1 场景单位 = 25 mm（比例尺与 PLATE 块立面读数用实长）

@@ -70,6 +70,7 @@ import { ChapterIndex } from './explorer/ChapterIndex';
 import { PlateBlock } from './hud/PlateBlock';
 import { spaceSpecRows } from './hud/spec';
 import { partNumber } from './hud/common';
+import { applyNamedCameraPreset } from './lib/camera-preset';
 import { LeaderLabels } from './hud/LeaderLabels';
 import { setSim } from './hud/sim';
 import { replay } from './lib/sim/replay-ui';
@@ -536,9 +537,7 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
           }
           ui.setState({ orbit: false });
           const own = named.find((p) => p.id === id);
-          if (own?.view) set(own.view === 'exploded' ? { view: 'exploded', explode: s.explode < 0.05 ? DEFAULT_EXPLODE : s.explode } : { view: own.view });
-          const camera = own?.camera;
-          if (camera) store.getState().applyCameraPreset(camera, { instant });
+          if (own) applyNamedCameraPreset(store, own, file.parts, { instant });
         },
       },
       modes: {

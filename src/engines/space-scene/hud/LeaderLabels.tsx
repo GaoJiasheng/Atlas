@@ -341,7 +341,19 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
           prev: l.side && l.y >= 0 ? { side: l.side, x0: l.x, y0: l.y } : null,
         });
       }
-      const places = layoutLeaders(items, f);
+      // Only inset-enabled topics load the barrier geometry. Its provider uses
+      // the same live anchors and stage size as the visible dashed frame.
+      const inset = bridge.insetLayout?.();
+      const within = (titles: boolean) => layoutLeaders(items, {
+        ...f,obstacles:[...f.obstacles,...inset!.bodies],accept:(p,i)=>inset!.clear(p,i.ax,i.ay,0,0,titles),
+      });
+      // Prefer leaders clear of the frame titles; if that drops a label, a leg across a title beats no label.
+      let titles = true;
+      let places = inset ? within(true) : layoutLeaders(items, f);
+      if (inset && places.length < items.length) {
+        const loose = within(false);
+        if (loose.length > places.length) [places, titles] = [loose, false];
+      }
       let moving = false;
       placed.clear();
       const k = Math.min(1, dt * 10);
@@ -365,6 +377,11 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
         } else {
           l.x += (p.x0 - l.x) * k;
           l.y += (p.y0 - l.y) * k;
+        }
+        // A legal endpoint does not make a glide across a moving frame legal.
+        if (inset && !inset.clear(p,a.x,a.y,l.x-p.x0,l.y-p.y0,titles)) {
+          l.x=p.x0;
+          l.y=p.y0;
         }
         if (Math.abs(l.x - p.x0) > 0.3 || Math.abs(l.y - p.y0) > 0.3) moving = true;
         const want = a.onScreen && (p.id === selected || !a.occluded) ? 1 : 0;
@@ -394,6 +411,8 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
       }
       for (const [id, l] of map) {
         if (placed.has(id)) continue;
+        // An unplaceable label can no longer fade through an inset's new border.
+        if (inset) l.vis = 0;
         if (l.vis > 0) {
           l.vis = Math.max(0, l.vis - dt * FADE * 0.6);
           moving = true;
@@ -411,7 +430,7 @@ export function LeaderLabels({ file, chapters, bridge, ui }: { file: PartsFile; 
     return () => {
       bridge.listeners.delete(layout);
     };
-  }, [bridge, candidates, selected, labelsOn, presenting, listed]);
+  }, [bridge, candidates, selected, labelsOn, presenting, listed, file.views.insets]);
 
   if (!labelsOn) return null;
   return (

@@ -59,6 +59,8 @@ export interface LeaderFrame {
   bottom: number;
   /** HUD blocks over the stage. */
   obstacles: readonly ScreenRect[];
+  /** Optional data-driven barrier rule, supplied by the lazy inset HUD. */
+  accept?: (place: LeaderPlace, item: LeaderItem) => boolean;
 }
 
 export interface LeaderPlace {
@@ -125,11 +127,11 @@ function segmentsCross(x1: number, y1: number, x2: number, y2: number, x3: numbe
 }
 
 /** Does segment a–b pass through rectangle r (shrunk by 2 px)? */
-function segmentThroughRect(ax: number, ay: number, bx: number, by: number, r: ScreenRect): boolean {
-  const x0 = r.x0 + 2;
-  const x1 = r.x1 - 2;
-  const y0 = r.y0 + 2;
-  const y1 = r.y1 - 2;
+export function segmentThroughRect(ax: number, ay: number, bx: number, by: number, r: ScreenRect, shrink = 2): boolean {
+  const x0 = r.x0 + shrink;
+  const x1 = r.x1 - shrink;
+  const y0 = r.y0 + shrink;
+  const y1 = r.y1 - shrink;
   if (x1 <= x0 || y1 <= y0) return false;
   // Liang–Barsky clip (no allocation: this runs for every candidate place).
   const dx = bx - ax;
@@ -305,6 +307,7 @@ function bestPlace(
         const len = Math.hypot(item.ax - lead.ex, item.ay - lead.sy) + LEADER.ELBOW;
         if (len > maxLeader) continue;
         if (f.obstacles.some((r) => hits(box, r, LEADER.PAD))) continue;
+        if (f.accept && !f.accept({id:item.id,side,...box,...lead},item)) continue;
         if (placed.some((p) => hits(box, p, LEADER.GAP / 2))) continue;
         if (items.some((o) => o.ax > x0 - LEADER.PAD && o.ax < x1 + LEADER.PAD && o.ay > y0 - LEADER.PAD && o.ay < box.y1 + LEADER.PAD)) continue;
         let cost = xCost + W_DY * Math.abs(lead.sy - item.ay) + W_DX * Math.abs(item.ax - lead.ex);

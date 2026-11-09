@@ -5,6 +5,15 @@
  */
 export type Vec3 = [number, number, number];
 
+export const dot3 = (a: readonly number[], b: readonly number[]): number => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+
+/** Screen right/up for a unit view direction, with world +Y as up. */
+export function viewAxes(dir: Vec3): [Vec3, Vec3] {
+  const rl = Math.hypot(dir[0], dir[2]);
+  const right: Vec3 = rl > 1e-9 ? [dir[2] / rl, 0, -dir[0] / rl] : [1, 0, 0];
+  return [right, [dir[1] * right[2], dir[2] * right[0] - dir[0] * right[2], -dir[1] * right[0]]];
+}
+
 export const clamp01 = (n: number): number => Math.min(1, Math.max(0, n));
 
 export function length3(v: readonly number[]): number {

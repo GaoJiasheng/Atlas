@@ -1,4 +1,5 @@
 import type { SensesData } from '../../senses-schema';
+export { sensesExperiment } from './senses-experiment';
 export const SENSES_STATES: Readonly<Record<string, readonly string[]>> = {
   'focus-state': ['on-retina', 'before-retina', 'behind-retina'],
   'eye-state': ['dark', 'lit'], 'sound-state': ['still', 'vibrating'],
@@ -10,11 +11,4 @@ export function sensesQuantity(from: string, data?: SensesData): 'number' | 'sta
   if (data?.profile === 'sound-only' && (['focus-state','eye-state'].includes(from) || (SENSES_NUMBERS as readonly string[]).slice(0,6).includes(from))) return null;
   if ((SOUND_LAB_NULLABLE as readonly string[]).includes(from) || from === 'propagation-state') return data?.soundLab ? (from === 'propagation-state' ? 'state' : 'number') : null;
   return Object.prototype.hasOwnProperty.call(SENSES_STATES, from) ? 'state' : (SENSES_NUMBERS as readonly string[]).includes(from) ? 'number' : null;
-}
-export function sensesExperiment(from: string): 'eye-light' | 'eye-focus' | 'sound' | 'transmission' | 'echo' | null {
-  if (['aperture-area', 'relative-light'].includes(from)) return 'eye-light';
-  if (['image-distance', 'magnification', 'retinal-top-y', 'blur-diameter', 'focus-state', 'eye-state'].includes(from)) return 'eye-focus';
-  if (['speed-mps','one-way-ms','propagation-state'].includes(from)) return 'transmission';
-  if (from === 'echo-ms') return 'echo';
-  return sensesQuantity(from) ? 'sound' : null;
 }

@@ -117,7 +117,10 @@ export function StageMark({ bridge, name }: { bridge: StageBridge; name: 'scene'
     const frame = requestAnimationFrame(() => {
       cancel.current = whenGpuDone(state.gl.getContext(), () => {
         cancel.current = () => {};
-        if (phase.current === 'drawn') bridge.stageMarks.add(name);
+        if (phase.current === 'drawn') {
+          bridge.stageMarks.add(name);
+          state.invalidate();
+        }
       });
     });
     cancel.current = () => cancelAnimationFrame(frame);

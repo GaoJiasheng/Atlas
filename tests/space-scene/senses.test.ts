@@ -15,6 +15,16 @@ const ctx = {parts:new Set<string>(), flows:new Map(), animations:new Map(), pos
 const solve = (set = {}) => solveSenses(senses,{...values,...set});
 const close = (actual: unknown, expected: number) => expect(Math.abs(Number(actual)-expected)).toBeLessThan(1e-9);
 describe('senses oracle contract',()=>{
+ it('keeps every PLATE experiment group independent of optional schema metadata',()=>{
+   const groups={
+     'eye-light':['aperture-area','relative-light'],
+     'eye-focus':['image-distance','magnification','retinal-top-y','blur-diameter','focus-state','eye-state'],
+     sound:['sound-state','source-drive','visual-hz','wavelength-scene','displacement-max','amplitude-level'],
+     transmission:['speed-mps','one-way-ms','propagation-state'],echo:['echo-ms'],
+   };
+   for(const [group,quantities] of Object.entries(groups)) for(const id of quantities) expect(sensesExperiment(id)).toBe(group);
+   for(const id of ['', 'unknown', 'toString']) expect(sensesExperiment(id)).toBeNull();
+ });
  it('parses the complete draft fixture with group-gated overlays',()=>{expect(spaceSceneData.safeParse({parts:sampleParts,sources:sampleSources}).success).toBe(true);});
  it('registers only the whitelist and separate experiment semantics',()=>{
    expect(simIssues(sim,ctx)).toEqual([]); expect(SEPARATE_EXPERIMENTS.senses).toBe(true);

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { OPEN_FOLDS, measureFreeStage, solveHudRoom, usesReaderDrawer, type HudMeasurements } from '../../src/engines/core/hud-room';
+import { OPEN_FOLDS, emptyStageRects, measureFreeStage, solveHudRoom, usesReaderDrawer, type HudMeasurements } from '../../src/engines/core/hud-room';
 import { createHudStore, createHudActions, buildKeymap } from '../../src/engines/core/controls';
 import { getHudPreferences, setHudPreferences, claimFirstGuide, GUIDE_FIRST_RUN_TEST_KEY, GUIDE_SEEN_KEY, HUD_ROOM_KEY } from '../../src/lib/prefs';
 import { hudScale } from '../../src/engines/core/SceneHost';
@@ -145,6 +145,20 @@ describe('HUD room policy', () => {
     ];
     expect(measureFreeStage(1000, 800, blocks)).toEqual({ x0: 44, y0: 0, x1: 800, y1: 700 });
     expect(measureFreeStage(1000, 800, [])).toEqual({ x0: 0, y0: 0, x1: 1000, y1: 800 });
+  });
+  it('keeps leftmost ties and the zero-height fallback when every pixel is blocked', () => {
+    expect(measureFreeStage(100,80,[{x0:40,y0:0,x1:60,y1:80}])).toEqual({x0:0,y0:0,x1:40,y1:80});
+    expect(measureFreeStage(100,80,[{x0:0,y0:0,x1:100,y1:80}])).toEqual({x0:0,y0:0,x1:100,y1:0});
+  });
+  it('enumerates clipped empty regions with the camera gutter around overlapping panels', () => {
+    const panels=[{x0:40,y0:-20,x1:60,y1:50},{x0:45,y0:0,x1:55,y1:40}];
+    const regions=emptyStageRects(100,100,panels,10).filter(r=>r.x1>r.x0 && r.y1>r.y0);
+    expect(regions).toContainEqual({x0:10,x1:90,y0:60,y1:90});
+    for(const r of regions) {
+      expect(r.x0).toBeGreaterThanOrEqual(10);expect(r.x1).toBeLessThanOrEqual(90);
+      expect(r.y0).toBeGreaterThanOrEqual(10);expect(r.y1).toBeLessThanOrEqual(90);
+      for(const p of panels) expect(r.x1<=p.x0-10 || r.x0>=p.x1+10 || r.y1<=p.y0-10 || r.y0>=p.y1+10).toBe(true);
+    }
   });
 });
 

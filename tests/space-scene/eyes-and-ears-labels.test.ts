@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { leaderClearOfInsets } from '../../src/engines/space-scene/lib/insets';
+import { layoutLeaders } from '../../src/engines/space-scene/lib/leader-layout';
 import { loadLabelStudy, projectBeat } from '../../scripts/geo/eyes-and-ears/audit-labels';
 
 const study=await loadLabelStudy();
@@ -13,10 +15,25 @@ describe('eyes-and-ears: tablet callout geometry',()=>{
     ] as const) {
       const r=projectBeat(study,chapter,beat,w,h,present,phase),tag=`${chapter}.${beat}, present=${present}, phase=${phase}`;
       expect(r.anchors.every(a=>a.onScreen),tag).toBe(true);
-      expect(r.places.map(p=>p.id),tag).toEqual([r.part]);
-      expect(r.inset!.w,tag).toBeGreaterThan(190);
+      // The legacy offline audit predates inset barriers. Re-run its measured
+      // placards through the new layout contract without editing topic scripts.
+      const insets = r.inset ? [{x0:r.inset.x,y0:r.inset.y,x1:r.inset.x+r.inset.w,y1:r.inset.y+r.inset.h}] : [];
+      const items = r.places.map(p => {
+        const a = r.anchors.find(a=>a.id===p.id)!;
+        return {id:p.id,ax:a.x,ay:a.y,w:p.x1-p.x0,h:p.y1-p.y0,lead:p.sy-p.y0,bounds:a,prev:null};
+      });
       const bodies=r.allAnchors.filter(a=>['basilar-strip','hair-patch','signal-marker'].includes(a.id));
-      for(const p of r.places)for(const obstacle of [...bodies,r.insetTitle!])expect(overlaps(p,obstacle),tag).toBe(0);
+      const places = layoutLeaders(items,{...r.frame,accept:(p,i)=>leaderClearOfInsets(p,i.ax,i.ay,insets),obstacles:[...r.frame.obstacles,...bodies]});
+      expect(r.places.map(p=>p.id),tag).toEqual([r.part]);
+      // The focus label stays: inside the magnified window, or outside it with a
+      // leader that enters the window once; the dashed frame never crosses it.
+      expect(places.map(p=>p.id),tag).toEqual([r.part]);
+      for (const p of places) {
+        const a = items.find(a=>a.id===p.id)!;
+        expect(leaderClearOfInsets(p,a.ax,a.ay,insets),tag).toBe(true);
+      }
+      expect(r.inset!.w,tag).toBeGreaterThan(190);
+      for(const p of places)for(const obstacle of [...bodies,r.insetTitle!])expect(overlaps(p,obstacle),tag).toBe(0);
     }
   });
   it.each(sizes)('makes the three distinct bones readable at %i × %i', (w,h)=>{

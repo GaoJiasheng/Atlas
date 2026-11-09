@@ -121,31 +121,29 @@ export function solveHudRoom(viewport: { width: number; height: number }, sizes:
   return { viewport: { width: w, height: h }, folds, readerWidth, drawer, stage: rect(), meetsShare: fits(), steps };
 }
 
-/** Largest unobstructed rectangle within a stage.
- * Called on layout changes, not animation frames. Coordinates are stage-local. */
-export function measureFreeStage(width: number, height: number, obstacles: readonly FreeStage[]): FreeStage {
-  const blocks = obstacles.filter((r) => r.x1 > 0 && r.y1 > 0 && r.x0 < width && r.y0 < height);
-  const xs = [...new Set([0, width, ...blocks.flatMap((r) => [Math.max(0, r.x0), Math.min(width, r.x1)])])].sort((a, b) => a - b);
-  let best: FreeStage = { x0: 0, y0: 0, x1: 0, y1: 0 },
-    area = -1;
-  for (let i = 0; i < xs.length - 1; i++)
-    for (let j = i + 1; j < xs.length; j++) {
-      const x0 = xs[i]!,
-        x1 = xs[j]!;
-      const intervals = blocks.filter((r) => r.x0 < x1 && r.x1 > x0).sort((a, b) => a.y0 - b.y0);
-      let y0 = 0;
-      const consider = (y1: number) => {
-        const next = (x1 - x0) * (y1 - y0);
-        if (next > area) {
-          area = next;
-          best = { x0, y0, x1, y1 };
-        }
-      };
-      for (const r of intervals) {
-        consider(Math.max(0, r.y0));
-        y0 = Math.max(y0, Math.min(height, r.y1));
-      }
-      consider(height);
+/** Empty rectangles within a stage, with an optional gutter around HUD blocks.
+ * Shared by the host's largest-area policy and SpaceScene's camera-fit policy. */
+export function emptyStageRects(width: number, height: number, obstacles: readonly FreeStage[], gap = 0): FreeStage[] {
+  const blocks = obstacles.filter(r => r.x1 > 0 && r.y1 > 0 && r.x0 < width && r.y0 < height)
+    .map(r => ({x0:Math.max(gap,r.x0-gap),x1:Math.min(width-gap,r.x1+gap),y0:Math.max(gap,r.y0-gap),y1:Math.min(height-gap,r.y1+gap)}));
+  const xs = [...new Set([gap,width-gap,...blocks.flatMap(r=>[r.x0,r.x1])])].sort((a,b)=>a-b);
+  const out: FreeStage[] = [];
+  for (let i=0; i<xs.length-1; i++) for (let j=i+1; j<xs.length; j++) {
+    const x0=xs[i]!,x1=xs[j]!;
+    let y0=gap;
+    const consider = (y1: number) => { if (y1>=y0) out.push({x0,x1,y0,y1}); };
+    for (const r of blocks.filter(r=>r.x0<x1 && r.x1>x0).sort((a,b)=>a.y0-b.y0)) {
+      consider(r.y0);
+      y0=Math.max(y0,r.y1);
     }
-  return best;
+    consider(height-gap);
+  }
+  return out;
+}
+
+/** Largest unobstructed rectangle within a stage. Coordinates are stage-local. */
+export function measureFreeStage(width: number, height: number, obstacles: readonly FreeStage[]): FreeStage {
+  const area = (r: FreeStage) => (r.x1-r.x0)*(r.y1-r.y0);
+  return emptyStageRects(width,height,obstacles).reduce<FreeStage | null>((best,r)=>!best || area(r)>area(best)?r:best,null)
+    ?? {x0:0,y0:0,x1:0,y1:0};
 }

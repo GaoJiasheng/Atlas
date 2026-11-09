@@ -1005,6 +1005,10 @@ export const cameraPresetSchema = z
     label: bilingual,
     camera: orbitCamera,
     view: z.enum(SPACE_VIEWS).optional(),
+    /** Required groups to reveal when the reader chooses this preset (additive). */
+    layers: z.array(kebabId).min(1).optional(),
+    /** With `layers`: only these members are un-hidden (default: every member of those groups). */
+    show: z.array(kebabId).min(1).optional(),
   })
   .strict();
 export type CameraPreset = z.output<typeof cameraPresetSchema>;
@@ -1372,6 +1376,14 @@ export const partsFileBase = z
         ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['animations', i, 'keys'], message: `"${a.target}" has no folding wing for \`fan\`` });
     });
     const groups = new Set(file.groups.map((g) => g.id));
+    file.presets?.forEach((p,i) => p.layers?.forEach((id,j) => {
+      if (!groups.has(id)) ctx.addIssue({code:z.ZodIssueCode.custom,path:['presets',i,'layers',j],message:`unknown preset layer "${id}"`});
+    }));
+    file.presets?.forEach((p,i) => p.show?.forEach((id,j) => {
+      const part = file.parts.find(q=>q.id===id);
+      if (!part || !p.layers?.includes(part.group ?? ''))
+        ctx.addIssue({code:z.ZodIssueCode.custom,path:['presets',i,'show',j],message:`preset show "${id}" is not a part of its layers`});
+    }));
     const contextIds = new Set(file.parts.filter((p) => p.context).map((p) => p.id));
     for (const [twin, of] of twins) if (contextIds.has(of)) contextIds.add(twin);
     file.parts.forEach((p, i) => {

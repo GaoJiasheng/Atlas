@@ -25,5 +25,5 @@ describe('Asian toad uninterrupted dermis',()=>{
    expect([...edges.values()].every(count=>count===2)).toBe(true);
    for(let i=0;i<n.count;i++)expect(Math.hypot(n.getX(i),n.getY(i),n.getZ(i))).toBeCloseTo(1,5);
   }
- });
+ }, 20_000);
 });

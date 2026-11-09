@@ -8,7 +8,7 @@
  */
 import type { SimData, SimTry, SimValues } from '../../sim-schema';
 import { evaluateSim, type SimOutputs } from './index';
-import { sensesExperiment } from './senses-info';
+import { sensesExperiment } from './senses-experiment';
 import { isTimeline } from './timeline';
 
 type Card = Pick<SimTry, 'vary' | 'also' | 'observe' | 'replay'>;

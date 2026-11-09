@@ -4,7 +4,7 @@
 import type { OrbitCamera, SceneTransition } from '../../core/types';
 import type { SectionPlane, SpaceView, ViewPresets } from '../schema';
 import type { Box3Like } from './parts';
-import { easeInOutCubic, lerp, lerp3, type Vec3 } from './math';
+import { dot3, viewAxes, easeInOutCubic, lerp, lerp3, type Vec3 } from './math';
 
 export const DEFAULT_CAMERA: OrbitCamera = { position: [3.2, 2.2, 4.2], target: [0, 0, 0], fov: 40 };
 export const DEFAULT_FOV = 40;
@@ -359,15 +359,13 @@ export function fitExerciseCamera(
   const box: Vec3 = [(min[0]! + max[0]!) / 2, (min[1]! + max[1]!) / 2, (min[2]! + max[2]!) / 2];
   const len = Math.hypot(dir[0] ?? 0, dir[1] ?? 0, dir[2] ?? 0) || 1;
   const d0: Vec3 = [(dir[0] ?? 0) / len, (dir[1] ?? 0) / len, (dir[2] ?? 1) / len];
-  const rl = Math.hypot(d0[2], d0[0]);
-  const right: Vec3 = rl > 1e-9 ? [d0[2] / rl, 0, -d0[0] / rl] : [1, 0, 0];
-  const up: Vec3 = [d0[1] * right[2] - d0[2] * right[1], d0[2] * right[0] - d0[0] * right[2], d0[0] * right[1] - d0[1] * right[0]];
+  const [right,up] = viewAxes(d0);
+  const relative = (i: number, centre: Vec3) => centre.map((v,a)=>points[i*3+a]!-v);
   // Centre on the middle of the points' extent across the view (a hanging figure's arms do not push its legs down the frame).
   let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
   for (let i = 0; i < n; i++) {
-    const q = [points[i * 3]! - box[0], points[i * 3 + 1]! - box[1], points[i * 3 + 2]! - box[2]];
-    const x = q[0]! * right[0] + q[1]! * right[1] + q[2]! * right[2];
-    const y = q[0]! * up[0] + q[1]! * up[1] + q[2]! * up[2];
+    const q = relative(i,box);
+    const x = dot3(q,right), y = dot3(q,up);
     x0 = Math.min(x0, x);
     x1 = Math.max(x1, x);
     y0 = Math.min(y0, y);
@@ -375,18 +373,16 @@ export function fitExerciseCamera(
   }
   const mx = (x0 + x1) / 2;
   const my = (y0 + y1) / 2;
-  const c: Vec3 = [box[0] + right[0] * mx + up[0] * my, box[1] + right[1] * mx + up[1] * my, box[2] + right[2] * mx + up[2] * my];
+  const c = box.map((v,i)=>v+right[i]!*mx+up[i]!*my) as Vec3;
   const tanV = Math.tan((fov * Math.PI) / 360);
   const tanH = tanV * Math.max(aspect, 0.1);
   let d = 0;
   for (let i = 0; i < n; i++) {
-    const q = [points[i * 3]! - c[0], points[i * 3 + 1]! - c[1], points[i * 3 + 2]! - c[2]];
-    const x = q[0]! * right[0] + q[1]! * right[1] + q[2]! * right[2];
-    const y = q[0]! * up[0] + q[1]! * up[1] + q[2]! * up[2];
-    const z = q[0]! * d0[0] + q[1]! * d0[1] + q[2]! * d0[2];
+    const q = relative(i,c);
+    const x = dot3(q,right), y = dot3(q,up), z = dot3(q,d0);
     d = Math.max(d, z + Math.abs(x) / (tanH * fillW), z + Math.abs(y) / (tanV * fillH));
   }
   const shift = lift * tanV * d;
-  const target: Vec3 = [c[0] - up[0] * shift, c[1] - up[1] * shift, c[2] - up[2] * shift];
-  return { position: [target[0] + d0[0] * d, target[1] + d0[1] * d, target[2] + d0[2] * d], target, fov };
+  const target = c.map((v,i)=>v-up[i]!*shift) as Vec3;
+  return { position: target.map((v,i)=>v+d0[i]!*d) as Vec3, target, fov };
 }

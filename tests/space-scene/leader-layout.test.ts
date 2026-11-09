@@ -1,3 +1,4 @@
+import { leaderClearOfInsets } from '../../src/engines/space-scene/lib/insets';
 import { describe, expect, it } from 'vitest';
 import { columnEdges, layoutLeaders, LEADER, naturalSide, type LeaderFrame, type LeaderItem, type ScreenRect } from '../../src/engines/space-scene/lib/leader-layout';
 
@@ -125,5 +126,67 @@ describe('layoutLeaders', () => {
   it('leaves out a placard with no legal place (anchor boxed in by HUD blocks)', () => {
     const f: LeaderFrame = { ...openFrame(), obstacles: [{ x0: 0, y0: 0, x1: 1600, y1: 380 }, { x0: 0, y0: 420, x1: 1600, y1: 900 }] };
     expect(layoutLeaders([item('a', 800, 400)], f)).toEqual([]);
+  });
+});
+
+describe('magnified inset borders', () => {
+  it('moves outside labels and both leader segments away from the dashed window', () => {
+    const inset = {x0:250,y0:260,x1:450,y1:480};
+    const f = {...openFrame(),accept:(p:any,i:LeaderItem)=>leaderClearOfInsets(p,i.ax,i.ay,[inset])};
+    const anchor = item('ear',500,400);
+    const places = layoutLeaders([anchor],f);
+    expect(places).toHaveLength(1);
+    for (const p of places) {
+      expect(inside(p,inset)).toBe(false);
+      // Independently sample both segments, including their endpoints.
+      for (let t=0; t<=1; t+=0.01) {
+        for (const [x,y] of [[p.sx+(p.ex-p.sx)*t,p.sy],[p.ex+(anchor.ax-p.ex)*t,p.sy+(anchor.ay-p.sy)*t]]) {
+          expect(x! >= inset.x0 && x! <= inset.x1 && y! >= inset.y0 && y! <= inset.y1).toBe(false);
+        }
+      }
+    }
+  });
+  it('labels a part inside its window either wholly inside it or from outside, never across the frame', () => {
+    const anchor = item('hair-cell',500,400);
+    const roomy = {x0:250,y0:200,x1:800,y1:600};
+    expect(leaderClearOfInsets({id:'hair-cell',side:'L',x0:300,x1:450,y0:380,y1:420,sx:456,ex:472,sy:389},anchor.ax,anchor.ay,[roomy])).toBe(true);
+    // A window too small for the placard (the 1024 × 768 hair-cell case): the label stays, outside.
+    for (const inset of [roomy,{x0:490,y0:390,x1:510,y1:410}]) {
+      const places = layoutLeaders([anchor],{...openFrame(),accept:(p,i)=>leaderClearOfInsets(p,i.ax,i.ay,[inset])});
+      expect(places).toHaveLength(1);
+      const p = places[0]!;
+      const within = p.x0 > inset.x0 && p.x1 < inset.x1 && p.y0 > inset.y0 && p.y1 < inset.y1;
+      if (!within) {
+        expect(inside(p,{x0:inset.x0-LEADER.PAD,y0:inset.y0-LEADER.PAD-16,x1:inset.x1+LEADER.PAD,y1:inset.y1+LEADER.PAD})).toBe(false);
+        for (let t=0; t<=1; t+=0.01) {
+          const x = p.sx+(p.ex-p.sx)*t;
+          expect(x > inset.x0 && x < inset.x1 && p.sy > inset.y0 && p.sy < inset.y1).toBe(false);
+        }
+      }
+    }
+    // A placard straddling the border is never legal.
+    expect(leaderClearOfInsets({id:'hair-cell',side:'L',x0:230,x1:380,y0:380,y1:420,sx:386,ex:402,sy:389},anchor.ax,anchor.ay,[roomy])).toBe(false);
+  });
+  it('keeps placards and both leader segments off the measured frame title', () => {
+    const inset = {x0:400,y0:300,x1:700,y1:500}, title = {x0:402,y0:283,x1:640,y1:298};
+    // The diagonal leg from an upper-left placard into the window would cut the title line.
+    const p = {id:'hair-cell',side:'L' as const,x0:200,x1:350,y0:240,y1:280,sx:356,ex:372,sy:249};
+    expect(leaderClearOfInsets(p,620,340,[inset])).toBe(true);
+    expect(leaderClearOfInsets(p,620,340,[inset],[title])).toBe(false);
+    // Entering past the title's end is legal.
+    const q = {id:'hair-cell',side:'R' as const,x0:720,x1:870,y0:220,y1:260,sx:714,ex:690,sy:229};
+    expect(leaderClearOfInsets(q,680,340,[inset],[title])).toBe(true);
+  });
+  it('keeps the leader of a part outside every window out of all of them', () => {
+    const p = {id:'ear',side:'L' as const,x0:100,x1:250,y0:380,y1:420,sx:256,ex:272,sy:389};
+    expect(leaderClearOfInsets(p,700,400,[{x0:400,y0:300,x1:600,y1:500}])).toBe(false);
+    expect(leaderClearOfInsets(p,700,400,[{x0:400,y0:450,x1:600,y1:600}])).toBe(true);
+  });
+  it('rejects an intermediate glide across a moving frame even when the destination is legal', async () => {
+    const anchor = item('ear',500,400);
+    const inset = {x0:250,y0:260,x1:450,y1:480};
+    const p = layoutLeaders([anchor],{...openFrame(),accept:(p,i)=>leaderClearOfInsets(p,i.ax,i.ay,[inset])})[0]!;
+    expect(leaderClearOfInsets(p,anchor.ax,anchor.ay,[inset])).toBe(true);
+    expect(leaderClearOfInsets({...p,x0:300,x1:450,y0:380,y1:420,sy:389,sx:456,ex:472},anchor.ax,anchor.ay,[inset])).toBe(false);
   });
 });

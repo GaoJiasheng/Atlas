@@ -14788,6 +14788,9 @@
     },
     {
       "id": "newcomen-view",
+      "layers": ["teaching"],
+      "show": ["nc-cylinder", "nc-piston", "nc-beam", "nc-pump", "nc-chain", "nc-pump-chain", "nc-jet"],
+      "view": "assembled",
       "label": {
         "en": "NEWCOMEN",
         "zh": "纽科门"

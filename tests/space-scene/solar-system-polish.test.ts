@@ -10,6 +10,8 @@ import { partsFile } from '../../src/engines/space-scene/schema';
 import { partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
 import { createPartMaterial, fadePartMaterial, stylePartMaterial, type PartStyle } from '../../src/engines/space-scene/stages/model3d/materials';
 import { gltfSurface } from '../../src/engines/space-scene/stages/model3d/GltfSource';
+// Geometry/material assertions do not mount the DOM catalogue links.
+vi.mock('@react-three/drei/web/Html', () => ({ Html: () => null }));
 import { cataloguePointSize, createCataloguePointMaterial } from '../../src/engines/space-scene/stages/model3d/CatalogueSky';
 import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 

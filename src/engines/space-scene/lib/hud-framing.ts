@@ -6,8 +6,9 @@
  *  - opt-in `views.hudFrame` (`fitCameraToHud`): named subjects fitted into the free band
  */
 import type { OrbitCamera } from '../../core/types';
+import { emptyStageRects } from '../../core/hud-room';
 import { DEFAULT_FOV } from './camera';
-import type { Vec3 } from './math';
+import { dot3 as dot, viewAxes, type Vec3 } from './math';
 /** Below this stage aspect the HUD stacks over the stage (lib/camera.ts fitCameraToAspect uses the same 0.8). */
 export const STACKED_ASPECT = 0.8;
 export interface FrameRect { x0: number; y0: number; x1: number; y1: number }
@@ -45,21 +46,7 @@ export function freeStageRect(width: number, height: number, panels: readonly Fr
 
 /** Maximal empty rectangles between the actual HUD blocks, with the same 12px gutter. */
 export function freeRects(width: number, height: number, panels: readonly FrameRect[], gap = 12): FrameRect[] {
-  const xs = [...new Set([gap, width-gap, ...panels.flatMap(p => [p.x0-gap, p.x1+gap])])]
-    .filter(x => x >= gap && x <= width-gap).sort((a,b) => a-b);
-  const out: FrameRect[] = [];
-  for (let i=0; i<xs.length; i++) for (let j=i+1; j<xs.length; j++) {
-    const x0 = xs[i]!, x1 = xs[j]!;
-    let gaps = [[gap, height-gap]];
-    for (const p of panels) {
-      if (p.x1+gap <= x0 || p.x0-gap >= x1) continue;
-      gaps = gaps.flatMap(([lo,hi]) => {
-        const a = Math.max(lo!, p.y0-gap), b = Math.min(hi!, p.y1+gap);
-        return a >= b ? [[lo!,hi!]] : [[lo!,a],[b,hi!]].filter(([l,h]) => h! > l!);
-      });
-    }
-    for (const [y0,y1] of gaps) out.push({x0,x1,y0:y0!,y1:y1!});
-  }
+  const out = emptyStageRects(width,height,panels,gap).filter(r=>r.x1>r.x0 && r.y1>r.y0);
   return out.filter((r,i) => !out.some((s,j) => j !== i && s.x0 <= r.x0 && s.x1 >= r.x1 && s.y0 <= r.y0 && s.y1 >= r.y1));
 }
 
@@ -132,7 +119,7 @@ function subtract(regions: FrameRect[], f: FrameRect): FrameRect[] {
  * All listed bodies, including authored-offscreen secondaries, avoid reserved HUD.
  * If no candidate meets the floor, prefer the smallest safe pullback. */
 export function fitCameraToHud(cam: OrbitCamera, boxes: readonly FrameBox[], width: number, height: number, rect: FrameRect,
-  options?: { panels: readonly FrameRect[] }): OrbitCamera {
+  options?: { panels: readonly FrameRect[]; /** Previous fit of this same authored camera (reset on a new view). */ previous?: OrbitCamera }): OrbitCamera {
   if (width <= 24 || height <= 24) return cam;
   if (rect.x1 <= rect.x0 || rect.y1 <= rect.y0) {
     if (!options) return cam;
@@ -142,10 +129,7 @@ export function fitCameraToHud(cam: OrbitCamera, boxes: readonly FrameBox[], wid
   const distance = Math.hypot(...delta);
   if (distance < 1e-9) return cam;
   const dir = delta.map(v => v / distance) as Vec3;
-  const rl = Math.hypot(dir[0], dir[2]);
-  const right: Vec3 = rl > 1e-9 ? [dir[2] / rl, 0, -dir[0] / rl] : [1, 0, 0];
-  const up: Vec3 = [dir[1] * right[2], dir[2] * right[0] - dir[0] * right[2], -dir[1] * right[0]];
-  const dot = (a: Vec3, b: Vec3) => a.reduce((sum, v, i) => sum + v * b[i]!, 0);
+  const [right,up] = viewAxes(dir);
   const tv = Math.tan((cam.fov ?? DEFAULT_FOV) * Math.PI / 360), th = tv * width / height;
   const local = boxes.map(box => Array.from({ length: 8 }, (_, k): Vec3 => {
     const p = box.center.map((v, i) => v + (k & (1 << i) ? 1 : -1) * box.half[i]! - cam.target[i]!) as Vec3;
@@ -175,13 +159,20 @@ export function fitCameraToHud(cam: OrbitCamera, boxes: readonly FrameBox[], wid
     }
     return x0 <= x1 && y0 <= y1 ? {x0,x1,y0,y1} : null;
   };
+  const bisect = (lo: number, hi: number, feasible: (d: number) => unknown) => {
+    for (let i=0; i<48; i++) {
+      const mid = (lo+hi)/2;
+      if (feasible(mid)) hi=mid; else lo=mid;
+    }
+    return hi;
+  };
+  const nearestPan = (r: FrameRect) => ({x:Math.max(r.x0,Math.min(r.x1,0)),y:Math.max(r.y0,Math.min(r.y1,0))});
   const fit = (r: FrameRect, start = distance) => {
     let d = start, span = interval(d,r);
     if (!span) {
-      let lo = start, hi = Math.max(start,...points.map(p => p[2]))+distance;
+      let hi = Math.max(start,...points.map(p => p[2]))+distance;
       while (!interval(hi,r)) hi *= 2;
-      for (let i=0; i<48; i++) { const mid = (lo+hi)/2; if (interval(mid,r)) hi=mid; else lo=mid; }
-      d=hi; span=interval(d,r)!;
+      d=bisect(start,hi,d=>interval(d,r)); span=interval(d,r)!;
     }
     return {d,span};
   };
@@ -203,7 +194,7 @@ export function fitCameraToHud(cam: OrbitCamera, boxes: readonly FrameBox[], wid
         if (!regions.length) return null;
       }
     }
-    return regions.map(r => ({x:Math.max(r.x0,Math.min(r.x1,0)), y:Math.max(r.y0,Math.min(r.y1,0))}))
+    return regions.map(nearestPan)
       .sort((a,b) => a.x*a.x+a.y*a.y-b.x*b.x-b.y*b.y)[0]!;
   };
   const cameraAt = (d: number, pan: {x:number;y:number}): OrbitCamera => {
@@ -211,28 +202,47 @@ export function fitCameraToHud(cam: OrbitCamera, boxes: readonly FrameBox[], wid
     const target = cam.target.map((v,i) => v+right[i]!*pan.x+up[i]!*pan.y) as Vec3;
     return {...cam,target,position:target.map((v,i) => v+dir[i]!*d) as Vec3};
   };
-  const initial = fit(rect), initialPan = safePan(initial.d,initial.span);
-  if (initialPan && initial.d <= maxDistance) return cameraAt(initial.d,initialPan);
-  let best: {d:number;pan:{x:number;y:number}} | null = initialPan ? {d:initial.d,pan:initialPan} : null;
-  for (const r of freeRects(width,height,panels)) {
+  if (!options) {
+    const initial = fit(rect);
+    if (initial.d<=maxDistance) return cameraAt(initial.d,nearestPan(initial.span));
+  }
+  let best: {d:number;pan:{x:number;y:number}} | null = null;
+  // Compare every region, including the host's first choice. A first-feasible
+  // shortcut made a 0.03 bounds change switch between very different shots.
+  for (const r of [rect,...freeRects(width,height,panels)]) {
     let {d,span} = fit(r,Math.max(1e-6,Math.min(distance,maxDistance)));
     let pan = safePan(d,span);
-    // Extra depth can open enough pan slack to move an excluded secondary past a HUD edge.
-    if (!pan && Number.isFinite(maxDistance) && maxDistance > d) {
-      const end = interval(maxDistance,r);
-      const endPan = end && safePan(maxDistance,end);
-      if (endPan) {
-        let lo=d, hi=maxDistance;
-        pan=endPan;
-        for (let i=0; i<32; i++) {
-          const mid=(lo+hi)/2, middle=interval(mid,r), p=middle && safePan(mid,middle);
-          if (p) { hi=mid; pan=p; } else lo=mid;
-        }
-        d=hi;
-      }
+    // A tight fit has no pan slack. Try bounded extra depth for secondaries,
+    // even without a primary floor, before abandoning this composition.
+    const limit = Number.isFinite(maxDistance) ? Math.max(d,maxDistance) : d*1.5;
+    const start = d;
+    for (let step=1; step<=16 && !pan && limit>start; step++) {
+      const end = start+(limit-start)*step/16;
+      const endSpan = interval(end,r), endPan = endSpan && safePan(end,endSpan);
+      if (!endPan) continue;
+      pan=endPan;
+      d=bisect(start+(limit-start)*(step-1)/16,end,mid=>{
+        const middle=interval(mid,r), p=middle && safePan(mid,middle);
+        if (p) pan=p;
+        return p;
+      });
     }
-    if (!pan) continue;
-    if (!best || d < best.d || (d === best.d && pan.x*pan.x+pan.y*pan.y < best.pan.x*best.pan.x+best.pan.y*best.pan.y)) best={d,pan};
+    if (pan && (!best || d<best.d || (d===best.d && Math.hypot(pan.x,pan.y)<Math.hypot(best.pan.x,best.pan.y)))) best={d,pan};
   }
-  return best ? cameraAt(best.d,best.pan) : cam;
+  // Caller resets history whenever the authored camera changes. Keep a safe
+  // previous fit within 6% of the best depth, rechecking subjects and all HUD.
+  const previous = options?.previous;
+  if (best && previous) {
+    const d = Math.hypot(...previous.position.map((v,i)=>v-previous.target[i]!));
+    const offset = previous.target.map((v,i)=>v-cam.target[i]!) as Vec3;
+    const x=dot(offset,right), y=dot(offset,up);
+    const span = interval(d,{x0:12,y0:12,x1:width-12,y1:height-12});
+    if (d>=best.d && d<=best.d*(1+FRAMING_TIE) && d<=maxDistance && span &&
+      x>=span.x0 && x<=span.x1 && y>=span.y0 && y<=span.y1 && safePan(d,{x0:x,x1:x,y0:y,y1:y})) return previous;
+  }
+  if (best) return cameraAt(best.d,best.pan);
+  // No safe HUD region: fit the viewport, rather than pulling arbitrarily far
+  // back to squeeze the subject into a vanishing strip between panels.
+  const fallback = fit({x0:12,y0:12,x1:width-12,y1:height-12});
+  return cameraAt(fallback.d,nearestPan(fallback.span));
 }

@@ -93,3 +93,26 @@ describe('held stage draws', () => {
     expect(drawn).toEqual([other, scene]);
   });
 });
+
+describe('named-subject framing readiness', () => {
+  it('holds the camera through delayed geometry, GPU fences and HUD measurement, including failed-model fallback', async () => {
+    const { hudFrameReady } = await import('../../src/engines/space-scene/bridge');
+    const bridge = createBridge();
+    bridge.modelExpected = true;
+    bridge.stageMarks.add('scene');
+    bridge.freeStage = {x0:12,y0:12,x1:788,y1:588};
+    expect(hudFrameReady(bridge)).toBe(false);
+    // Loading has finished, but its first GPU draw has not: still no model mark.
+    expect(hudFrameReady(bridge)).toBe(false);
+    bridge.stageMarks.add('model');
+    bridge.hudPending = true;
+    expect(hudFrameReady(bridge)).toBe(false);
+    bridge.hudPending = false;
+    expect(hudFrameReady(bridge)).toBe(true);
+    bridge.stageMarks.delete('model');
+    bridge.modelExpected = false; // the GLB failed; the drawn primitives are final
+    expect(hudFrameReady(bridge)).toBe(true);
+    delete bridge.freeStage;
+    expect(hudFrameReady(bridge)).toBe(false);
+  });
+});

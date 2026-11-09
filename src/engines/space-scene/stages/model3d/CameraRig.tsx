@@ -58,7 +58,7 @@ import { isOrbitCamera, normalizeCamera } from '../../../core/camera';
 import type { SpaceSceneExt } from '../../index';
 import type { ViewPresets } from '../../schema';
 import type { SpaceUiStore } from '../../ui';
-import type { StageBridge } from '../../bridge';
+import { hudFrameReady, stageReady, type StageBridge } from '../../bridge';
 import {
   CAMERA_TWEEN_MS,
   COVER_TWEEN_MS,
@@ -108,6 +108,9 @@ const dolly = (c: OrbitCamera, k: number): OrbitCamera =>
  * (presenting, cover, phones, and `views.hudFrame` topics fit this one).
  */
 type ViewSource = () => { design: OrbitCamera; plain: OrbitCamera } | null;
+type PendingView = { id: number; instant: boolean } & (
+  { source: ViewSource } | { exercise: string; fallback: ViewSource | null; t0: number }
+);
 type Shift = [number, number];
 
 export function CameraRig({
@@ -157,7 +160,7 @@ export function CameraRig({
   const props = useRef({ chapters, views, sphere, span, exerciseView });
   props.current = { chapters, views, sphere, span, exerciseView };
   /** An exercise camera waiting for the exercise's sweep: the transition, the exercise, jump or fly, where to go if no sweep comes. */
-  const pending = useRef<{ id: number; exercise: string; instant: boolean; fallback: ViewSource | null; t0: number } | null>(null);
+  const pending = useRef<PendingView | null>(null);
   /** The exercise on show at the last transition. */
   const shownExercise = useRef<string | null>(null);
   /** The exercise the exercise camera framed last, and the stored camera then (unchanged since: keep framing it). */
@@ -171,8 +174,9 @@ export function CameraRig({
   const spin = useRef(0);
   // Always re-fit from the authored camera, never from the last adjusted pose.
   const hudCamera = useRef<OrbitCamera | null>(null);
+  const hudFit = useRef<{ input: string; camera: OrbitCamera } | undefined>(undefined);
   const fitHud = (cam: OrbitCamera): OrbitCamera => {
-    if (!views.hudFrame || !bridge.freeStage || ui.getState().cover || user.current.active) return cam;
+    if (!views.hudFrame || !stageReady(bridge) || !bridge.freeStage || ui.getState().cover || user.current.active) return cam;
     // Fit to the stage as it is now (the HUD → presentation resize), not as of the last React render.
     const { width, height } = live().size;
     cam = fitCameraToAspect(cam, width / height);
@@ -180,7 +184,12 @@ export function CameraRig({
       const h = handles.get(id);
       return h?.visible ? [{ center: [h.object.position.x + h.offset[0], h.object.position.y + h.offset[1], h.object.position.z + h.offset[2]] as [number,number,number], half: h.half, minRadiusPx: views.hudFrame?.primary?.part === id ? views.hudFrame.primary.minRadiusPx : undefined }] : [];
     });
-    return fitCameraToHud(cam, boxes, width, height, bridge.freeStage, { panels: bridge.hudPanels ?? [] });
+    const input = JSON.stringify([cam,width,height,bridge.freeStage,bridge.hudPanels,boxes]);
+    if (input !== hudFit.current?.input) hudFit.current = {
+      input,
+      camera: fitCameraToHud(cam, boxes, width, height, bridge.freeStage, { panels: bridge.hudPanels ?? [], previous: hudFit.current?.camera }),
+    };
+    return hudFit.current.camera;
   };
 
   /** The authored view on show (null: none yet, or the reader moved the camera since). */
@@ -327,6 +336,16 @@ export function CameraRig({
 
   /** Fly (or jump) to an authored view, placed for the HUD as it is now; it stays the view to re-fit until the next one or a drag. */
   const moveTo = (src: ViewSource, instant: boolean, id: number) => {
+    // Mesh stand-ins and first-frame part positions must never choose the shot.
+    // StageMark wakes the demand loop after its GPU fence; ready stays false
+    // until this queued transition has actually been framed.
+    if (views.hudFrame && !hudFrameReady(bridge)) {
+      pending.current = { source: src, instant, id };
+      bridge.hudSettled = false;
+      invalidate();
+      return;
+    }
+    hudFit.current = undefined;
     const s = src();
     if (!s) {
       settle(id);
@@ -359,11 +378,12 @@ export function CameraRig({
     if (last.current === transitionId) return;
     last.current = transitionId;
     const { reason, instant } = state.transition;
-    // A snap makes an exercise camera still waiting for its sweep jump; any other transition replaces it.
+    // A snap makes the waiting view jump; any other transition replaces it.
     if (pending.current) {
       if (reason === 'snap') {
         pending.current.instant = true;
-        settle(transitionId);
+        if ('source' in pending.current) pending.current.id = transitionId;
+        else settle(transitionId);
         return;
       }
       settle(pending.current.id);
@@ -496,7 +516,7 @@ export function CameraRig({
       else if (s.exercise?.id !== prev.exercise?.id) {
         // An exercise chip (a patch, no transition): frame the new exercise.
         shownExercise.current = s.exercise?.id ?? null;
-        if (s.exercise && !pending.current) frameExercise(s.exercise.id, s.transition.id, false, null, s.camera);
+        if (s.exercise && (!pending.current || 'source' in pending.current)) frameExercise(s.exercise.id, s.transition.id, false, null, s.camera);
       }
     });
     if (ui.getState().cover) onCover(true);
@@ -529,6 +549,11 @@ export function CameraRig({
   }, [orbit, invalidate]);
 
   useFrame((state, delta) => {
+    const waitingHud = pending.current;
+    if (waitingHud && 'source' in waitingHud && !ui.getState().cover && hudFrameReady(bridge)) {
+      pending.current = null;
+      moveTo(waitingHud.source, waitingHud.instant, waitingHud.id);
+    }
     // The HUD moved (measured by Model3DStage) or the stage resized: re-fit; the first measurement places the view at once.
     const layout = bridge.hudLayout ? `${bridge.hudLayout}:${live().size.width}x${live().size.height}` : '';
     if (layout !== seenLayout.current) {
@@ -538,15 +563,15 @@ export function CameraRig({
       refit(first);
     }
     // Settled: the measured HUD is current and the view is placed for it (`__atlas.ready` waits for this).
-    if (!bridge.hudSettled && layout !== '' && !bridge.hudPending) bridge.hudSettled = true;
+    if (!bridge.hudSettled && layout !== '' && !bridge.hudPending && !pending.current && (!views.hudFrame || stageReady(bridge))) bridge.hudSettled = true;
     // Part writers have now applied this snapshot, including the first frame of a direct link.
-    if (hudCamera.current && !ui.getState().cover && !user.current.active && !free.current && !orbit) {
+    if (hudCamera.current && !pending.current && stageReady(bridge) && !ui.getState().cover && !user.current.active && !free.current && !orbit) {
       const fitted = fitHud(hudCamera.current);
       if (tween.current && !tween.current.cover) tween.current.to = fitted;
       else if (!tween.current) apply(fitted);
     }
     const wait = pending.current;
-    if (wait) {
+    if (wait && 'exercise' in wait) {
       const cam = exerciseCamera(wait.exercise);
       if (cam || performance.now() - wait.t0 > EXERCISE_SWEEP_WAIT_MS) {
         pending.current = null;
@@ -612,6 +637,7 @@ export function CameraRig({
         };
         relax(mapped);
         if (controls.current) controls.current.maxDistance = Math.max(minDistance * 20, Math.hypot(...mapped.position) * 4);
+        hudFit.current = undefined;
         apply(hudCamera.current ? fitHud(mapped) : mapped);
         if (hudCamera.current) hudCamera.current = mapped;
         // The view to re-fit scales with the display about the same centre.
@@ -668,6 +694,10 @@ export function CameraRig({
       zoomSpeed={0.8}
       maxPolarAngle={Math.PI * 0.82}
       onStart={() => {
+        if (pending.current && 'source' in pending.current) {
+          settle(pending.current.id);
+          pending.current = null;
+        }
         if (tween.current) settle(tween.current.id);
         tween.current = null;
         coverSave.current = null;
