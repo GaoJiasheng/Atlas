@@ -63,6 +63,15 @@ with the attribution given in `src/content/topics/warring-states/data/SOURCES.md
 and `scripts/geo/warring-states/SOURCES-GEO.md`. The texts, events, entities,
 routes and glossary of that topic stay under CC BY-NC-SA 4.0 as above.
 
+Exception — Water in Singapore (topic `water`): the figure
+`public/illustrations/figures/water-marina-barrage.webp` adapts yuumin's
+photograph *Main Bldg.jpg* (Wikimedia Commons, CC BY-SA 3.0, chosen from its
+dual licence) and is therefore licensed CC BY-SA 3.0
+(https://creativecommons.org/licenses/by-sa/3.0/), with the attribution and
+changes given in `src/content/topics/water/data/SOURCES.md` and
+`THIRD-PARTY-NOTICES.md`. The texts and other files of that topic stay under
+CC BY-NC-SA 4.0 as above.
+
 Exception — Ancient Civilisations (topic `ancient-civilisations`): the river
 courses in `public/geo/ancient-rivers.json` include two reconstructed courses of
 the Yellow River taken from `public/geo/warring-states-rivers.json` (traced from

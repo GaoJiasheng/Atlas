@@ -145,6 +145,13 @@ redistributed. City coordinates © GeoNames. Inputs, hashes and methods:
 | three.js, @react-three/fiber, @react-three/drei | MIT |
 | Astro, React, zustand, topojson-client, vite-plugin-pwa and other npm dependencies | see `package.json` and each package's licence |
 
+## Illustrations adapted from photographs
+
+| Work | Use and changes | Licence |
+|---|---|---|
+| yuumin / You ming, *Main Bldg.jpg* (Marina Barrage pump house), 29 July 2009, https://commons.wikimedia.org/wiki/File:Main_Bldg.jpg | `public/illustrations/figures/water-marina-barrage.webp`: rectified schematic view, signage and people left out, graphite rendering; the figure is distributed under the same licence (see `LICENSE-CONTENT`) | CC BY-SA 3.0 (chosen from the dual licence), https://creativecommons.org/licenses/by-sa/3.0/ |
+| Pixabay on Stockvault, *Marina Barrage*, photo 210732, https://stockvault.net/photo/210732/marina-barrage | same figure: low barrage, pump-house roof, glazed end, column row | CC0 |
+
 ## Skills
 
 The skills under `.claude/skills/` are working notes for AI assistants, not licensed works; no licence is asserted over them.
