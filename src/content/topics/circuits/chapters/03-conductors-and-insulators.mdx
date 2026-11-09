@@ -10,15 +10,19 @@ state:
   sim: {"set": {"arrangement": "single", "gap": "empty"}, "try": {"vary": "gap", "keep": ["cells", {"en": "Same bulb", "zh": "同一只灯泡"}, {"en": "Same wires", "zh": "同样的导线"}], "observe": ["bright-a"], "record": {"judge": {"output": "bright-a", "gt": 0.5, "label": {"en": "Conductor?", "zh": "导体？"}}}}}
   beats:
     - labels: ["gap-clips", "bulb-a"]
+      camera: { position: [0.0664, 0.2754, 0.4922], target: [-0.0362, 0.0162, 0.1358], fov: 30 }
       caption: {"en": "Leave a gap in the loop between two crocodile clips. The bulb stays dark: air does not let current through.", "zh": "在回路里两只鳄鱼夹之间留一个缺口。灯泡不亮：空气不让电流通过。"}
     - sim: {"set": {"gap": "foil-strip"}}
       labels: ["paper-clip", "copper-wire", "foil-strip", "bulb-a"]
+      camera: { position: [0.0664, 0.2754, 0.4922], target: [-0.0362, 0.0162, 0.1358], fov: 30 }
       caption: {"en": "Bridge the gap with a steel paper clip, copper wire or aluminium foil and the bulb lights. These metals are electrical conductors.", "zh": "用钢回形针、铜线或铝箔把缺口接上，灯泡就亮了。这些金属是导体。"}
     - sim: {"set": {"gap": "rubber-band"}}
       labels: ["plastic-straw", "wooden-stick", "rubber-band", "bulb-a"]
+      camera: { position: [0.0664, 0.2754, 0.4922], target: [-0.0362, 0.0162, 0.1358], fov: 30 }
       caption: {"en": "A plastic straw, a wooden stick or a rubber band leaves the bulb dark. These are electrical insulators.", "zh": "塑料吸管、木冰棒棍或橡皮筋放进去，灯泡还是不亮。它们是绝缘体。"}
     - sim: {"set": {"gap": "pencil-lead"}}
       labels: ["pencil-lead", "filament-a"]
+      camera: { position: [0.0664, 0.2754, 0.4922], target: [-0.0362, 0.0162, 0.1358], fov: 30 }
       caption: {"en": "Pencil lead is graphite, not metal, yet the bulb glows dimly. Graphite conducts, but not as well as metal.", "zh": "铅笔芯是石墨，不是金属，灯泡却微微发亮。石墨能导电，只是不如金属好。"}
     - camera: {"position": [0.3, 0.055, 0.035], "target": [0.272, 0.004, -0.036], "fov": 30}
       sim: {"set": {"gap": "copper-wire"}}

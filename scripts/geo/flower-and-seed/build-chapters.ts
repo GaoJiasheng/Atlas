@@ -51,6 +51,9 @@ const C = {
   sill: frame(SILL, [0, 0.13, 0.01], 0.95, 18, 0),
   dark: frameAt(mid(CUP_A, CUP_D), [0.98, 0.36, 0.25], 1.55),
   coldDark: frameAt(mid(CUP_D, CUP_E), [0.98, 0.4, -0.15], 1.45),
+  beanWhole: { position: [-0.0593, 0.1765, 0.4299], target: [-0.1385, 0.02, 0.648], fov: 30 },
+  beanCut: { position: [-0.1524, 0.1653, 0.4125], target: [-0.226, 0.02, 0.615], fov: 30 },
+  beanSprout: { position: [-0.2231, 0.2312, 0.2976], target: [-0.325, 0.03, 0.578], fov: 30 },
 };
 
 const chapters: Chapter[] = [
@@ -75,8 +78,8 @@ const chapters: Chapter[] = [
     beats: [
       { labels: ['fern-fronds'] },
       { camera: C.underside, labels: ['fern-underside'] },
-      { camera: C.sorus, run: true, labels: ['sorus-close'] },
-      { camera: C.moss, labels: ['moss-cushion', 'moss-capsules'] },
+      { camera: C.sorus, run: true, layers: ['spore-close', 'spore-drift', 'seed-inside'], labels: ['sorus-close'] },
+      { camera: C.moss, layers: ['spore-close', 'spore-drift', 'seed-inside'], labels: ['moss-cushion', 'moss-capsules'] },
       { camera: 'seed-view', labels: ['bean-cut', 'bean-whole'] },
     ],
   },
@@ -84,7 +87,7 @@ const chapters: Chapter[] = [
     id: 'flowers-and-pollination',
     order: 2,
     title: t('Flowers and pollination', '花与传粉'),
-    state: { ...base, run: false, layers: ['flower-parts', 'pollen-close', 'pollination'], labels: ['flower', 'stamens', 'pistil'], camera: PRESET_CAMERAS['flower-view'], index: { parts: ['flower', 'sepals', 'stamens', 'pistil', 'flower-section', 'ovules', 'pollen-grains', 'bee'] } },
+    state: { ...base, run: false, layers: ['flower-parts', 'pollen-close', 'pollination'], hide: ['fridge'], labels: ['flower', 'stamens', 'pistil'], camera: PRESET_CAMERAS['flower-view'], index: { parts: ['flower', 'sepals', 'stamens', 'pistil', 'flower-section', 'ovules', 'pollen-grains', 'bee'] } },
     beats: [
       { labels: ['flower', 'sepals'] },
       { pose: 'flower-open', labels: ['stamens', 'pistil', 'flower-section'] },
@@ -115,7 +118,7 @@ const chapters: Chapter[] = [
       { camera: C.plantCells, labels: ['male-cell', 'female-cell'] },
       { camera: C.plantCells, pose: 'cells-fused', labels: ['female-cell'] },
       { camera: 'flower-view', pose: 'flower-open', labels: ['ovules', 'pistil'] },
-      { camera: C.chillies, labels: ['chilli-young', 'chilli-cut'] },
+      { camera: C.chillies, hide: ['coconut'], labels: ['chilli-young', 'chilli-cut'] },
       { camera: C.humanCells, pose: 'cells-fused', labels: ['sperm', 'egg'] },
       { camera: C.cells, pose: 'cells-fused', labels: ['male-cell', 'female-cell', 'sperm', 'egg'] },
     ],
@@ -199,9 +202,9 @@ const chapters: Chapter[] = [
       index: { parts: ['bean-whole', 'bean-cut', 'bean-sprout', 'towel-dish', 'day-strip', 'day-marker', 'half-flag', 'bean-seedling-close'] },
     },
     beats: [
-      { labels: ['bean-whole'] },
-      { labels: ['bean-cut'] },
-      { labels: ['bean-sprout', 'bean-seedling-close'] },
+      { camera: C.beanWhole, labels: ['bean-whole'] },
+      { camera: C.beanCut, labels: ['bean-cut'] },
+      { camera: C.beanSprout, hide: ['bean-cut'], labels: ['bean-sprout'] },
       { camera: C.strip, sim: { set: { temp: 20, 'count-day': 5 } }, labels: ['half-flag', 'day-marker', 'towel-dish'] },
       { camera: C.strip, sim: { set: { temp: 14, 'count-day': 5 } }, labels: ['half-flag', 'day-marker'] },
     ],

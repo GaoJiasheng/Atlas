@@ -8211,7 +8211,7 @@
         "en": "Height",
         "zh": "株高"
       },
-      "value": "≈ 42 CM ABOVE SOIL",
+      "value": { "en": "≈ 42 CM ABOVE SOIL", "zh": "土面以上约 42 厘米" },
       "tag": "design"
     },
     {
@@ -8219,7 +8219,7 @@
         "en": "Flower",
         "zh": "花"
       },
-      "value": "5 PETALS · 5 STAMENS · 1 PISTIL",
+      "value": { "en": "5 PETALS · 5 STAMENS · 1 PISTIL", "zh": "5 瓣 · 5 雄蕊 · 1 雌蕊" },
       "tag": "typical"
     },
     {
@@ -8238,7 +8238,7 @@
         "en": "Seed to fruit",
         "zh": "播种到收获"
       },
-      "value": "≈ 3–4 MONTHS",
+      "value": { "en": "≈ 3–4 MONTHS", "zh": "约 3–4 个月" },
       "tag": "typical"
     }
   ],

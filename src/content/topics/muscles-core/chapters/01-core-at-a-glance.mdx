@@ -40,7 +40,7 @@ state:
     en: The abdominal wall, deep back and hip flexors link the rib cage, spine, pelvis and thighs.
     zh: 腹壁、深背肌与髋屈肌，把胸廓、脊柱、骨盆和大腿联系起来。
   beats:
-  - camera: on-my-body
+  - camera: { position: [0.731, -0.027, 3.354], target: [0, -0.225, 0], fov: 30 }
     view: xray
     ghost: []
     highlight:
@@ -71,14 +71,9 @@ state:
       en: PEEL lifts the surface, middle and deep groups in order. This separates their positions for reading; bones and
         neighbours stay put.
       zh: 剥层按浅、中、深的顺序移开肌肉，便于看清各层位置；骨骼与邻区留在原处。
-  - layers:
-    - skeleton
-    - body
-    labels:
-    - thorax
-    - lumbar-spine
-    - pelvis
-    - femur
+  - layers: [skeleton, deep]
+    labels: [thorax, lumbar-spine, pelvis, femur, psoas-major]
+    ghost: [transversus-abdominis, quadratus-lumborum, multifidus-lumborum]
     caption:
       en: The ivory frame shows the lower rib cage, lumbar spine and pelvis. The iliopsoas continues across the hip to
         the femur.

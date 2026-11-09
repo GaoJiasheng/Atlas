@@ -14,7 +14,7 @@ state:
   summary: { en: "With light, water and carbon dioxide, the green parts of leaves make sugar and give out oxygen.", zh: "叶子的绿色部分利用光、水和二氧化碳制造糖，并放出氧。" }
   beats:
     - labels: ["group:leaves", leaves-upper]
-      camera: { position: [1.166, 1.583, 2.531], target: [-0.1, 0.95, 0.0], fov: 30 }
+      camera: { position: [1.356, 1.588, 2.911], target: [-0.1, 0.86, 0], fov: 30 }
       caption: { en: "Orange dots are light, here from a lamp; outdoors it comes from the Sun. The light falls on the green leaves, where the plant's food is made.", zh: "橙色的点是光，这里来自一盏灯，在室外则来自太阳。光照在绿色的叶子上，植物的食物就在这里制造。" }
     - run: false
       labels: [leaf-section, leaf-vein-section, stoma, "group:leaf-block"]
@@ -39,7 +39,7 @@ state:
     - run: false
       labels: ["group:leaves", leaves-upper]
       highlight: { custom: { leaves: "#10163a" } }
-      camera: { position: [0.95, 1.4, 2.15], target: [-0.05, 0.85, 0.0], fov: 30 }
+      camera: { position: [1.13, 1.399, 2.537], target: [-0.05, 0.75, 0], fov: 30 }
       caption: { en: "The starch test: iodine solution turns blue-black where a leaf has stored starch. The model tints the leaves that colour to show the result for a plant that has stood in the light; a teacher does the real test in a laboratory.", zh: "淀粉检验：叶子储存了淀粉的地方，碘液会把它染成蓝黑色。模型把叶子染成这种颜色，表示一株在光下放过的植物的结果；真正的检验由老师在实验室里做。" }
   index:
     parts: [leaves-lower, leaves-upper, leaf-section, leaf-vein-section, stoma, stem-food-tubes]
