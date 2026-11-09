@@ -1,0 +1,39 @@
+{
+  "tool": "built-in image_gen",
+  "note": "Final prompt specifications, normalised into short production briefs. Exact geometry and local edit scope are additionally enforced by the code guides, masks and final SVG composition.",
+  "prompts": [
+    {
+      "output": "steam-edit.png",
+      "inputs": [
+        "steam-original.webp"
+      ],
+      "useCase": "precise-object-edit",
+      "prompt": "Edit the original graphite Watt parallel-motion plate. Preserve the beam, every pivot centre, bar length and original pencil rendering. Only make the radius rod visibly pass behind the front outer link with an occlusion gap and contact shadow; make the single downward piston rod about 35 percent wider with dark edges and a narrow bright core; add close diagonal graphite hatching to the two fixed pivot pedestals. Exactly one beam, one parallelogram linkage, one rear radius rod, two fixed supports, one piston rod. Preserve all other original drawing. Transparent 4:3 ground. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO paper texture, NO noise-texture fills."
+    },
+    {
+      "output": "reclamation-edit.png",
+      "inputs": [
+        "reclamation-original.webp"
+      ],
+      "useCase": "precise-object-edit",
+      "prompt": "Replace only the small round tunnel in the lower rock with one large broad horseshoe-section cavern. Semicircular arched roof, nearly vertical lower walls, wide flat floor, entirely in rock. Thin irregular exposed rock rim, no smooth concrete pipe ring. Form-following graphite hatching models the recessed arched interior and flat floor. Preserve the original fill, six drains, clay, seawall, sea, rock outside the local cavern and cut edges. No equipment or shaft. Transparent 4:3 ground. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO paper texture, NO noise-texture fills."
+    },
+    {
+      "output": "power-edit.png",
+      "inputs": [
+        "power-original.webp",
+        "/tmp/atlas-i-b-round2/power-guide.png"
+      ],
+      "useCase": "compositing / sketch-to-render",
+      "prompt": "Recompose the original graphite electricity chain using the second input only as a geometric layout guide. Exactly five groups: top-left power station with three chimneys; top-right one lattice transmission tower; bottom-right substation with two finned transformers; bottom-centre underground cutaway with three horizontal cables; bottom-left residential blocks. No arrows in model output: code draws four arrows afterward, right, down, left, left. Preserve detailed dimensional pencil engineering artwork with layered hatching, crosshatching, varied slightly jittered contours and highlight edges. Fill at least 85 percent width and height, isolated groups, transparent 4:3 ground. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO paper texture, NO noise-texture fills."
+    },
+    {
+      "output": "clock-clean.png",
+      "inputs": [
+        "clock-underdrawing.png"
+      ],
+      "useCase": "precise-object-edit",
+      "prompt": "Keep the large blank wall clock in the graphite underdrawing. Remove the entire smaller pocket watch and bow, reconstructing the full continuous circular bezel and pale face behind it. Exactly one front-facing circular blank wall clock, centred on a square, filling 88 percent width and height with equal margins. Preserve real delicate graphite hatching and curved crosshatching modelling turned metal, dark lower-right and light upper-left. Pale face with coherent pencil strokes and rim shading. Completely blank dial: no hands, numbers, ticks, screws, crown, bow, secondary clock or objects. This is material for exact code circles, hands and real numerals. Fully transparent background. NO text, NO characters, NO inscriptions, NO floating parts, NO eye-like shapes, NO zigzag break lines, NO paper texture, NO noise-texture fills."
+    }
+  ]
+}

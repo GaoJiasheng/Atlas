@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-09",
+  "deleted": [
+    {
+      "file": "figures/b200-cpu-tray.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    },
+    {
+      "file": "figures/b200-power.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    },
+    {
+      "file": "figures/b200-gpu-tray.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes. Also incorrectly shows six rather than eight GPU heatsinks."
+    },
+    {
+      "file": "figures/plant-chilli-life-cycle.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    },
+    {
+      "file": "figures/plant-leaf-cross-section.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    },
+    {
+      "file": "figures/plant-stoma.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    },
+    {
+      "file": "figures/water-johor-river.webp",
+      "reason": "Unreferenced throughout src/; delete to remove unused shipped bytes."
+    }
+  ],
+  "note": "Seven files were still present: six unused A-grade figures and the unused, incorrect C-grade GPU tray. All seven removed after checking all src/ text.",
+  "acceptance": {
+    "date": "2026-11-09",
+    "shipped": [
+      "telling-time cover (interim, graphite style pass sent back)",
+      "magnets-filings (acceptance fix: closer pairs, field-weighted filings)",
+      "mosquito-three-life-cycles (acceptance fix: stray egg-board fragment removed)",
+      "digestive-system-five-systems",
+      "re-encodes: inside-the-earth-magma-cutaway, inside-the-earth-boundary-models, monsoon-and-weather-cloud-cutaway; fossils-and-skeletons-fossilisation, space-race-lunokhod and flower-and-seed-bee-pollination take the i-a re-encode (closer to the original), identical bytes in both branches"
+    ],
+    "sentBackAndReverted": [
+      "steam-engine-parallel-motion (cover + figure)",
+      "circuits-power-chain",
+      "singapore-land-use-reclamation-section"
+    ],
+    "reason": "Flat-fill vector rendering does not match the graphite plates; the originals only needed local fixes."
+  }
+}
