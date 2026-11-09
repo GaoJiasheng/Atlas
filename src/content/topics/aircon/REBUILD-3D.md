@@ -107,3 +107,53 @@ Exact commands, sanitized logs, source hashes, counts and production-asset check
 
 - Accepted on the GPU (paper + cinema, all 24 beats, 4K outdoor-unit close-up). The inverter board now reads as a populated PCB with heatsink, capacitors and transformer; all other parts are pixel-identical in the whole-machine chapter. Evidence PNGs are kept locally, not in git.
 - GPU perf (M5 Max, 1520×1023): 194k triangles / 57–64 calls (main: 177k / 50–57); 55–60 fps settled.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Added two control IC control packages with gull-wing leads, two smaller regulator/rectifier packages, two moulded inductors, 39 individually terminated chip resistors/MLCCs, 21 routed copper relief paths and a two-row connector. Footprints avoid the accepted cans, transformer, power module, mounting holes and thermal assembly. Compiled the populated assembly into one selectable topic-local mesh. The accepted primitive assembly remains its conservative rest/anchor proxy; the renderer draws the GLB, and the audit counts that GLB rather than the proxy. This remains a generic power/control-board design study, not a manufacturer netlist.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Dornbirn-Inverter KACO Powador 25000xi-M-circuit board-02ASD.jpg](https://commons.wikimedia.org/wiki/File:Dornbirn-Inverter_KACO_Powador_25000xi-M-circuit_board-02ASD.jpg) — Asurnipal; CC BY-SA 4.0.
+- [Dornbirn-Inverter KACO Powador 25000xi-M-circuit board-09ASD.jpg](https://commons.wikimedia.org/wiki/File:Dornbirn-Inverter_KACO_Powador_25000xi-M-circuit_board-09ASD.jpg) — Asurnipal; CC BY-SA 4.0.
+
+Review iterations:
+
+1. **Look 1 → change:** Added packages, terminations, inductors, traces and the connector in the actual available control regions. Inspected package seating and the complete board, not only a component crop.
+2. **Look 2 → change:** The populated primitive list exceeded the existing 32-extra schema contract. Compiled the actual full assembly and reduced unnecessary tiny bevel subdivisions; kept the accepted thermal proxy and verified the loaded mesh/budget. No schema or engine relaxation.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/aircon`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `inverter-board` | A, offline | 17,664 → 83,496 | 9 → 1 |
+
+Inventory: **193,704 → 259,536 triangles**; **55 → 47 draws**. Maximum authored chapter/beat: **193,704 → 259,536 triangles**, **55 → 47 draws**. GLB: **0 → 374,644 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **0 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/aircon/compile-board.mjs
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final aircon
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.

@@ -199,3 +199,53 @@ Shot on the real GPU (`pnpm shoot forces --beats --gpu`, paper and cinema) with 
 - `brake-caliper`, `brake-lever`, `brake-cable`, fork, `wheel-stand`, `drop-stand`, `release-clamps`, `retort-stand`, `shoe-soles`: A on the GPU, as self-graded.
 - `paper-crumpled`: **stays B, accepted as is.** It is a 5 cm secondary prop, about 20 px across at its chapter camera, and it lies in the sand tray. Up close it reads as a crumpled sheet, with sharp creases and unequal panels; real crumpled paper is faceted too. What keeps it short of A is a regular "origami" look in a close-up. Fixing that needs a cloth/self-collision crumple sim or a CC0 scan, which is too much for a prop this size. It is listed as a follow-up and does not block shipping.
 - The 267 comparison sheets and iteration renders (PNG/JPG under `scripts/geo/{circuits,forces,magnets}`, about 100 MB) are untracked in the acceptance commit and ignored from now on. They stay on disk. They are still in the Codex commit, so squash when merging to keep them out of main history.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Replaced the convex-hull/origami prop with one continuous thin sheet. A deterministic build-time position-based solve compacts an A4 sheet with structural and bending constraints plus vertex/triangle self-contact (200 steps, 12 sweeps per step, seed 22045). Adaptive restrained Loop refinement rounds 750 visible bends; flat panels retain their unequal pressure-fold outlines. Two sheet faces and a 0.12 mm edge are actual geometry. Neighbouring-panel occlusion is baked into the existing paper-family albedo, so it is present in the shipped mesh as well as the preview. The solved source sheet is included as `scripts/geo/forces/crumple-sheet.json` with the exact solver SHA: ordinary clean-checkout builds/tests need no Python packages. Regenerating the solve needs Python 3, NumPy and Numba. No runtime simulation, new teaching claims or changed drop/mass bindings.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Paperball.png](https://commons.wikimedia.org/wiki/File:Paperball.png) — Army1987; CC BY-SA 3.0.
+- [Paperball 2.jpeg](https://commons.wikimedia.org/wiki/File:Paperball_2.jpeg) — Nikhilesh Haval; Copyrighted free use.
+
+Review iterations:
+
+1. **Look 1 → change:** A continuous radial crease field was too soft and read as a dented ball. Rejected it and implemented the connected sheet/contact solve.
+2. **Look 2 → change:** Uniform refinement spent triangles on flat panels. Replaced it with adaptive refinement of 750 bends, retained the physical two faces/edge and added geometric pocket occlusion. The final 10k-scale sheet fits the full-scene budget.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/forces`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `paper-crumpled` | A, offline | 10,672 → 10,840 | 1 → 1 |
+
+Inventory: **345,156 → 345,324 triangles**; **71 → 71 draws**. Maximum authored chapter/beat: **341,988 → 342,156 triangles**, **69 → 69 draws**. GLB: **794,568 → 803,240 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **8 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/forces/polish-paper.mjs
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final forces
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.

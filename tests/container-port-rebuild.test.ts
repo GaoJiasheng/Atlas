@@ -1,5 +1,8 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import {NodeIO} from '@gltf-transform/core';
+import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
+import {MeshoptDecoder} from 'meshoptimizer';
 import { describe, expect, it } from 'vitest';
 import { partsFile } from '../src/engines/space-scene/schema';
 import { eachPieces, partPieces } from '../src/engines/space-scene/stages/model3d/geometry';
@@ -18,7 +21,7 @@ describe('container-port realism rebuild contracts', () => {
   it('preserves the original teaching metadata, part IDs, simulation and authored poses', () => {
     // Baseline is the published parts.json before the 2026-11-02 rebuild.
     // Geometry, repeats and cameras may change; these hashes protect the lesson.
-    const metadata = raw.parts.map(({ primitive: _primitive, extra: _extra, repeat: _repeat, ...rest }: Record<string, unknown>) => rest);
+    const metadata = raw.parts.map(({ primitive: _primitive, extra: _extra, repeat: _repeat, mesh: _mesh, material: _material, ...rest }: Record<string, unknown>) => rest);
     expect(hash(metadata), 'part names, facts, IDs, links and explode contracts').toBe('644223784b90c37ee12fed49d14e1d45afa4bdc91822751740ceef33ae4eb396');
     const unchanged = {
       groups: '0dbe6631e5357105f751916fd0b5ab9fc4120f4a2260a8129b5512d62ba75296',
@@ -61,10 +64,14 @@ describe('container-port realism rebuild contracts', () => {
     }
   });
 
-  it('bounds expanded triangles and mesh passes using the actual renderer geometry factory', () => {
+  it('bounds expanded triangles and mesh passes using decoded meshes and the renderer geometry factory', async () => {
+    await MeshoptDecoder.ready;
+    const glb=await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.decoder':MeshoptDecoder}).read('public'+model.model!);
+    const meshes=new Map(glb.getRoot().listNodes().filter(n=>n.getMesh()).map(n=>[n.getName(),n.getMesh()!]));
     let triangles = 0, pieces = 0;
     for (const p of model.parts) {
       // The live lock binding uses each:true, so it takes the instanced path.
+      if(p.mesh){for(const primitive of meshes.get(p.mesh)!.listPrimitives()){triangles+=primitive.getIndices()!.getCount()/3;pieces++;}continue;}
       for (const piece of p.id === 'twistlocks' ? eachPieces(p) : partPieces(p)) {
         if (!piece.lines) {
           pieces++;
@@ -84,7 +91,7 @@ describe('container-port realism rebuild contracts', () => {
     expect(shells.every(p=>p.kind==='extrude'&&p.depth===2.591)).toBe(true);
     const tyres=[part('yard-gantry').primitive!,...part('yard-gantry').extra!].filter(p=>p.color==='rubber');
     expect(tyres).toHaveLength(8);
-    for(const p of model.parts)for(const q of [p.primitive!,...(p.extra??[])]) {
+    for(const p of model.parts)for(const q of [p.primitive!,...(p.extra??[])].filter(Boolean)) {
       if(q.kind==='sweep')expect(q.radial).toBeGreaterThanOrEqual(48);
       if(q.kind==='lathe')expect(q.segments).toBeGreaterThanOrEqual(48);
     }

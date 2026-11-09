@@ -13,10 +13,11 @@ import { compressPosition } from './compress-position';
 import { compressUV } from './compress-uv';
 import { projectedUV } from './uv';
 import { batRoughness } from './bat-finish';
+import {occipitalChart} from './occipital-chart';
 const palette:Record<string,string>={eye:'#24251f',feathers:'#d7d0bb',tissue:'#d6c7ae',chitin:'#665e4e',wood:'#8b6946',fabric:'#93846a',scales:'#9b956d',enamel:'#e8e4da',plastic:'#b7b09d',abrasive:'#9a9484',glass:'#b1c3b9',rubber:'#282a27'};
 const tokenPalette:Record<string,string>={'token:ink-2':'#555047','token:bone':'#d8cdb1','token:food':'#81934a'};
 export function modelGeometry(model:Model):BufferGeometry {
- const positions:number[]=[],normals:number[]=[],colors:number[]=[],uvs:number[]=[],indices:number[]=[],finishUV:number[]=[];
+ const positions:number[]=[],normals:number[]=[],colors:number[]=[],uvs:number[]=[],indices:number[]=[],finishUV:number[]=[],locks:number[]=[];
  const hasCornea=[model.primitive,...model.extra].some(p=>p.color==='cornea');
  for(const prim of [model.primitive,...model.extra]){
   const pieces=prim.kind==='__mesh'?[{geometry:prim.geometry as BufferGeometry,matrices:null}]:partPieces({primitive:primitiveSchema.parse(prim)});
@@ -31,6 +32,7 @@ export function modelGeometry(model:Model):BufferGeometry {
      const off=positions.length/3;
      for(let i=0;i<p.count;i++){
       positions.push(p.getX(i),p.getY(i),p.getZ(i));
+      if(hasCornea)locks.push(g.getAttribute('_lock')?.getX(i)??0);
       uvs.push(uv.getX(i),uv.getY(i));
       if(hasCornea)finishUV.push(prim.color==='cornea'?.75:.25,.5);
       normals.push(n.getX(i)*(side?-1:1),n.getY(i)*(side?-1:1),n.getZ(i)*(side?-1:1));
@@ -44,7 +46,7 @@ export function modelGeometry(model:Model):BufferGeometry {
    if(prim.kind!=='__mesh')piece.geometry.dispose();
   }
  }
- const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(positions,3));g.setAttribute('normal',new Float32BufferAttribute(normals,3));g.setAttribute('color',new Float32BufferAttribute(colors,3));g.setAttribute('uv',new Float32BufferAttribute(uvs,2));g.setIndex(indices);if(hasCornea)g.setAttribute('uv1',new Float32BufferAttribute(finishUV,2));g.computeBoundingBox();return g;
+ const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(positions,3));g.setAttribute('normal',new Float32BufferAttribute(normals,3));g.setAttribute('color',new Float32BufferAttribute(colors,3));g.setAttribute('uv',new Float32BufferAttribute(uvs,2));g.setIndex(indices);if(hasCornea){g.setAttribute('uv1',new Float32BufferAttribute(finishUV,2));g.setAttribute('_lock',new Float32BufferAttribute(locks,1));}g.computeBoundingBox();return g;
 }
 export function modelBounds(model:Model):{min:V3;max:V3}{
  const box=new Box3();
@@ -75,6 +77,7 @@ export async function writeSculptures(path:string,specimens:BakedSpecimen[]):Pro
    const a=g.getAttribute(attribute),array=new Float32Array(a.array);primitive.setAttribute(semantic,doc.createAccessor().setType(type).setArray(array).setBuffer(buffer));
   }
   if(g.hasAttribute('uv1'))primitive.setAttribute('TEXCOORD_1',doc.createAccessor().setType('VEC2').setArray(new Float32Array(g.getAttribute('uv1').array)).setBuffer(buffer));
+  if(g.hasAttribute('_lock'))primitive.setAttribute('_LOCK',doc.createAccessor().setType('SCALAR').setArray(new Float32Array(g.getAttribute('_lock').array)).setBuffer(buffer));
   primitive.setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(g.index!.array)).setBuffer(buffer));
   const node=doc.createNode(id).setMesh(doc.createMesh(id).addPrimitive(primitive)).setTranslation(at).setExtras({closed:true});scene.addChild(node);
  }
@@ -86,13 +89,18 @@ export async function writeSculptures(path:string,specimens:BakedSpecimen[]):Pro
  Object.assign(MeshoptSimplifier,{useExperimentalFeatures:true});
  for(const m of doc.getRoot().listMeshes()){
   const p=m.listPrimitives()[0]!,hero=['python','asian-toad','fruit-bat'].includes(m.getName());
-  const simplifier=m.getName()==='python'?{
+  const simplifier=m.getName()==='fruit-bat'&&p.getAttribute('_LOCK')?{
+   ...MeshoptSimplifier,
+   simplify:(indices:Uint32Array,positions:Float32Array,stride:number,target:number,error:number,flags:('LockBorder')[])=>MeshoptSimplifier.simplifyWithAttributes(indices,positions,stride,new Float32Array(p.getAttribute('COLOR_0')!.getArray()!),3,[0,0,0],new Uint8Array(p.getAttribute('_LOCK')!.getArray()!),target,error,flags),
+  }:m.getName()==='python'?{
    ...MeshoptSimplifier,
    simplify:(indices:Uint32Array,positions:Float32Array,stride:number,target:number,error:number,flags:('LockBorder')[])=>MeshoptSimplifier.simplifyWithAttributes(indices,positions,stride,new Float32Array(p.getAttribute('COLOR_0')!.getArray()!),3,[.01,.01,.01],null,target,error,flags),
   }:MeshoptSimplifier;
   simplifyPrimitive(p,{simplifier,ratio:m.getName()==='fruit-bat'?.14:m.getName()==='python'?.55:hero?.32:.20,error:m.getName()==='fruit-bat'?.0008:m.getName()==='python'?.001:hero?.0008:.0014,lockBorder:hero});
+  p.setAttribute('_LOCK',null);
  }
  for(const m of doc.getRoot().listMeshes())restoreUV(doc,buffer,m.listPrimitives()[0]!,charts.get(m.getName())!);
+ for(const node of scene.listChildren())if(node.getName()==='fruit-bat')occipitalChart(doc,buffer,node.getMesh()!.listPrimitives()[0]!,node.getWorldMatrix());
  // Edge collapse can remove the lowest sample. Reseat the simplified surface
  // on its original cell floor so sorting never introduces a visible hover.
  for(const node of scene.listChildren()){
@@ -104,9 +112,17 @@ export async function writeSculptures(path:string,specimens:BakedSpecimen[]):Pro
  // Close-view error cap preserves silhouettes while allowing independent
  // tiny feather/skin charts to simplify. Integer chart shifts preserve repeats.
  for(const m of doc.getRoot().listMeshes()){const c=m.listPrimitives()[0]!.getAttribute('COLOR_0')!.getArray()!;for(let i=0;i<c.length;i++)c[i]=Math.round(c[i]!*63)/63;}
- await doc.transform(weld(),meshopt({encoder:MeshoptEncoder,level:'high',quantizePosition:12,quantizeNormal:8,quantizeColor:8,quantizeTexcoord:12}));
+ const positionBits=specimens.length===1&&specimens[0]!.id==='fruit-bat'?13:12;
+ await doc.transform(weld(),meshopt({encoder:MeshoptEncoder,level:'high',quantizePosition:positionBits,quantizeNormal:8,quantizeColor:8,quantizeTexcoord:12}));
  const io=new NodeIO().setVertexLayout(VertexLayout.SEPARATE).registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder,'meshopt.decoder':MeshoptDecoder});
- let binary=compressPosition(compressUV(await io.writeBinary(doc)),12);
+ const encoded=await io.writeBinary(doc);let fineMask:Uint8Array|undefined;
+ if(positionBits===13){
+  const measured=await io.readBinary(encoded);await measured.transform(dequantize());
+  const node=measured.getRoot().listNodes().find(n=>n.getName()==='fruit-bat')!,p=node.getMesh()!.listPrimitives()[0]!.getAttribute('POSITION')!,world=new Matrix4().fromArray(node.getWorldMatrix());
+  fineMask=new Uint8Array(p.getCount());
+  for(let i=0;i<p.getCount();i++){const q=new Vector3().fromArray(p.getElement(i,[0,0,0])).applyMatrix4(world);fineMask[i]=q.z<-.2867&&q.y>.0525&&Math.abs(q.x+.18)<.0085?1:0;}
+ }
+ let binary=compressPosition(compressUV(encoded,positionBits===13?9:12,fineMask),positionBits);
  // Read the final quantization, then seat each mesh exactly on its cell floor.
  // Only the node translation changes; compressed vertex streams stay identical.
  const decoded=await io.readBinary(binary);await decoded.transform(dequantize());

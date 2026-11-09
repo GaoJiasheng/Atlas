@@ -115,3 +115,53 @@ Final gate receipt (2026-11-09): **check PASS · validate PASS (94 topics, zero 
 ## GPU acceptance 2026-11-09
 
 Shot headless on Metal (`pnpm shoot b200-server --beats --gpu`, paper and cinema, all 30 beats OK, console clean), plus close-ups of bezel, GPU tray, host tray, fan wall, PSUs and figure against main and against E1–E3, G2, F1, P1, N1/N2. Counts on screen match S3/S4: 8 GPU packages (16 dies, 64 HBM stacks), 2 NVSwitches, 8 heat-sink towers, 2 CPUs, 32 DIMMs, 20 fan modules in 4 × 5, 8 U.2 carriers, 6 PSUs with 6 cords. The bezel reads as the open-cell champagne foam with rounded corners and badge at every camera distance the orbit allows; its cells only look coarse in a macro view closer than the orbit floor, so the B stays as disclosed and is accepted. The figure is a properly proportioned 1.70 m adult in front and profile. Remaining B items (midplane, PCIe switches, power distribution, rack neighbour) are hidden or context parts. Renderer: 50–54 draw calls, 0.19–0.33 M triangles on screen; bezel views 50 fps on main and on this branch under the same host load (no regression), all other views 60 fps.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Replaced the slanting tapered-looking top lines with constant 4.5 mm bore-diameter copper U heat pipes, 24 radial samples and smooth return bends. Their crests sit above the metal seat; both buried evaporator legs run down through the fin pack into the existing copper base. Retained the two authored exposed pipe paths per tower, eight towers, all fasteners, fin gaps, repeated stations, package counts and thermal/service teaching. Hidden routing is a reconstruction, not an asserted manufacturer pipe count.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Heatpipe.jpg](https://commons.wikimedia.org/wiki/File:Heatpipe.jpg) — Peter Niemayer; CC BY-SA 3.0.
+- [Nvidia DGX-B200-HGX.jpg](https://commons.wikimedia.org/wiki/File:Nvidia_DGX-B200-HGX.jpg) — Pokiiri; CC BY-SA 4.0.
+
+Review iterations:
+
+1. **Look 1 → change:** The first round U crests sat too low in the top metal seat, so the exposed ends still looked pointed. Raised their straight condenser sections above the seat.
+2. **Look 2 → change:** Extended both buried legs into the copper base and kept the full return path continuous. Reduced tessellation only along the long hidden legs; 24 radial samples retain round visible sections. Rechecked the 338k-scale maximum beat.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/b200-server`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `gpu-heatsinks` | A, offline | 34,928 → 48,240 | 4 → 4 |
+
+Inventory: **335,516 → 348,828 triangles**; **53 → 53 draws**. Maximum authored chapter/beat: **325,606 → 338,918 triangles**, **51 → 51 draws**. GLB: **1,497,668 → 1,497,668 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **20 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/b200-server/polish-pipes.ts
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final b200-server
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.

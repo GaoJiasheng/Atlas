@@ -555,9 +555,9 @@
     }
   },
   "after": {
-    "inventoryTriangles": 480958,
+    "inventoryTriangles": 492370,
     "inventoryCalls": 93,
-    "glbBytes": 896396,
+    "glbBytes": 989292,
     "maxAuthoredTriangles": 346682,
     "maxAuthoredCalls": 82,
     "states": [
@@ -774,19 +774,19 @@
       {
         "chapter": "nerves-and-growing-up",
         "beat": 4,
-        "triangles": 322418,
+        "triangles": 333830,
         "calls": 54
       },
       {
         "chapter": "nerves-and-growing-up",
         "beat": 5,
-        "triangles": 306238,
+        "triangles": 317650,
         "calls": 50
       },
       {
         "chapter": "nerves-and-growing-up",
         "beat": 6,
-        "triangles": 306238,
+        "triangles": 317650,
         "calls": 50
       }
     ],
@@ -1072,27 +1072,27 @@
         "calls": 3
       },
       "nymph-1": {
-        "triangles": 18134,
+        "triangles": 20430,
         "calls": 1
       },
       "nymph-2": {
-        "triangles": 18404,
+        "triangles": 20804,
         "calls": 1
       },
       "nymph-3": {
-        "triangles": 19846,
+        "triangles": 21580,
         "calls": 1
       },
       "nymph-4": {
-        "triangles": 20260,
+        "triangles": 22026,
         "calls": 1
       },
       "nymph-5": {
-        "triangles": 20540,
+        "triangles": 22410,
         "calls": 1
       },
       "nymph-6": {
-        "triangles": 20742,
+        "triangles": 22088,
         "calls": 1
       },
       "ruler": {

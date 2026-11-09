@@ -2,8 +2,8 @@
  * Curved forged sections, sockets, jaws and tread are real mesh relief. */
 import { BufferGeometry, Float32BufferAttribute, Color, Vector3, CylinderGeometry, TorusGeometry, TubeGeometry, CatmullRomCurve3, Shape, ExtrudeGeometry,  Quaternion } from 'three';
 import {RoundedBoxGeometry} from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import {ConvexGeometry} from 'three/examples/jsm/geometries/ConvexGeometry.js';
-import {mergeGeometries,mergeVertices} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import {crumpledPaper} from './crumpled-paper';
+import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 export type V=[number,number,number];
 export interface Hardware {id:string;geometry:BufferGeometry;family:string}
 const C={steel:'#a3a7a8',cast:'#555047',ink:'#2a2824',silver:'#c3c4c0',rubber:'#1e1f20',leather:'#8a8378',paper:'#dcd7cb',plastic:'#c9bc9f'};
@@ -87,31 +87,5 @@ function sole(b:Build,at:V,rubber:boolean,iteration:number){
  }
 }
 function soles(iteration:number){const b=new Build();sole(b,[.33,.001,.012],false,iteration);sole(b,[.6,.001,.012],true,iteration);return {id:'shoe-soles',geometry:b.finish(),family:'plastic'};}
-function paper(iteration:number){const b=new Build();
- const random=(n:number)=>{const f=Math.sin(n*127.1+31.7)*43758.5453;return f-Math.floor(f);};
- const points:Vector3[]=[];
- for(let i=0;i<220;i++){const y=1-2*random(i+119),phi=random(i+334)*Math.PI*2,r=Math.sqrt(1-y*y);points.push(new Vector3(Math.cos(phi)*r,y,Math.sin(phi)*r).multiplyScalar(.024));}
- const hull=new ConvexGeometry(points),g=mergeVertices(hull,1e-6),p=g.getAttribute('position');
- // Each crumple vertex moves inward independently, making irregular planar
- // paper panels and real recessed folds rather than smooth noise on a sphere.
- for(let i=0;i<p.count;i++){const v=new Vector3().fromBufferAttribute(p,i),seed=Math.round((v.x+v.y*3+v.z*7)*1e6),r=.021+random(seed)*.005;v.normalize().multiplyScalar(r);if(random(seed+3)>.82)v.multiplyScalar(.83);p.setXYZ(i,v.x,v.y,v.z);}
- g.computeVertexNormals();const ix=g.index!,V:number[]=[],N:number[]=[],IDX:number[]=[],normal=g.getAttribute('normal');
- for(let t=0;t<ix.count;t+=3){const ids=[ix.getX(t),ix.getX(t+1),ix.getX(t+2)],A=ids.map(i=>new Vector3().fromBufferAttribute(p,i)),average=ids.map(i=>new Vector3().fromBufferAttribute(normal,i)),face=A[1]!.clone().sub(A[0]!).cross(A[2]!.clone().sub(A[0]!)).normalize();const rows:number[][]=[];const R=4;
-  for(let i=0;i<=R;i++){const row:number[]=[];for(let j=0;j<=R-i;j++){const a=i/R,d=j/R,c=1-a-d,edge=Math.min(a,d,c),smooth=average[0]!.clone().multiplyScalar(a).addScaledVector(average[1]!,d).addScaledVector(average[2]!,c).normalize(),blend=Math.min(1,edge/.06),n=smooth.lerp(face,blend).normalize(),v=A[0]!.clone().multiplyScalar(a).addScaledVector(A[1]!,d).addScaledVector(A[2]!,c).addScaledVector(face,-.00012*Math.sin(Math.min(1,edge/.10)*Math.PI/2));row.push(V.length/3);V.push(v.x+1.07,v.y+.319,v.z+.14);N.push(...n.toArray());}rows.push(row);}
-  for(let i=0;i<R;i++)for(let j=0;j<R-i;j++){const a=rows[i]![j]!,c=rows[i]![j+1]!,d=rows[i+1]![j]!;IDX.push(a,d,c);if(j<R-i-1)IDX.push(c,d,rows[i+1]![j+1]!);}
- }
- const folded=new BufferGeometry();folded.setAttribute('position',new Float32BufferAttribute(V,3));folded.setAttribute('normal',new Float32BufferAttribute(N,3));folded.setIndex(IDX);b.add(folded,C.paper);
- // Unequal folded edge pockets enter the core at both ends. Each is a
- // folded 0.15mm sheet, with a sharp valley, rounded curl and visible layered
- // lip. Different sizes and attitudes follow the irregular Commons A4 ball.
- if(iteration>1)for(let k=0;k<7;k++){
-  const y=1-2*(k+.4)/7,phi=k*2.4+.3,n=new Vector3(Math.cos(phi)*Math.sqrt(1-y*y),y,Math.sin(phi)*Math.sqrt(1-y*y)),u=new Vector3(0,1,0).cross(n).normalize(),v=n.clone().cross(u).normalize(),width=[.019,.012,.023,.016,.018,.013,.021][k]!,length=[.026,.018,.023,.017,.021,.024,.022][k]!,R=12,COLS=10,stride=(R+1)*(COLS+1),verts:number[]=[],inds:number[]=[];
-  for(let side=0;side<2;side++)for(let row=0;row<=R;row++)for(let col=0;col<=COLS;col++){
-   const t=row/R,s=col/COLS*2-1,rad=.014+.006*Math.sin(t*Math.PI)+.006*(Math.sqrt(s*s+.002)-.045)*Math.sin(t*Math.PI),p=n.clone().multiplyScalar(rad-side*.00015).addScaledVector(u,(t-.5)*length).addScaledVector(v,s*width*.5*(.7+.3*Math.sin(t*Math.PI)));verts.push(p.x+1.07,p.y+.319,p.z+.14);
-  }
-  for(let row=0;row<R;row++)for(let col=0;col<COLS;col++){const a=row*(COLS+1)+col,c=a+1,d=a+COLS+1,e=d+1;inds.push(a,c,d,c,e,d,stride+a,stride+d,stride+c,stride+c,stride+d,stride+e);}
-  for(let row=0;row<R;row++)for(const col of [0,COLS]){const a=row*(COLS+1)+col,d=a+COLS+1;inds.push(a,d,stride+a,d,stride+d,stride+a);}
-  const sh=new BufferGeometry();sh.setAttribute('position',new Float32BufferAttribute(verts,3));sh.setIndex(inds);sh.computeVertexNormals();b.add(sh,C.paper);
- }
- return {id:'paper-crumpled',geometry:b.finish(),family:'enamel'};}
-export function hardwareModels(iteration=2):Hardware[]{return [retort(),drop(),releases(),wheelStand(iteration),brake(iteration),cable(),soles(iteration),paper(iteration)];}
+function paper(){return {id:'paper-crumpled',geometry:crumpledPaper(),family:'enamel'};}
+export function hardwareModels(iteration=2):Hardware[]{return [retort(),drop(),releases(),wheelStand(iteration),brake(iteration),cable(),soles(iteration),paper()];}

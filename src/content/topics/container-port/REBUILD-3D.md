@@ -97,3 +97,53 @@ Production build cross-check: `dist/topics/container-port/data.json` is **324,16
 - **`pnpm test`: NOT GREEN** — 275 suites / 6,527 tests pass; one untouched `tests/space-scene/living-things-toad-skin.test.ts` geometry test exceeds its existing 5,000 ms limit. Repeated with default workers, two workers, and alone: the same timeout is the only failure. The isolated test passes both assertions/tests with a diagnostic 30,000 ms command-line limit (13.08 s test time); no foreign source, assertion or stored timeout was changed. That diagnostic is not presented as a passing standard gate. The permitted four-topic implementation and regression suites pass. Fixing the unrelated test's timing contract is outside this task's ownership.
 
 Logs: `/tmp/atlas-group-b-{check-final,validate,build,test-isolated,test-workers2,toad-isolated,toad-diagnostic}.log`. All inspected CPU previews are linked from `/tmp/atlas-group-b/index.md`. No browser, desktop, e2e or GPU pass was run. No git write or package/lockfile edit was performed. An ephemeral local dependency-cache wrapper allowed the gates to run without writing through the pre-existing read-only `node_modules` symlink; the original symlink was restored afterwards.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Baked the accepted 23 paving solids into a tiny topic-local mesh and gave every face metre-based UVs. The engine still supplies the abrasive sand albedo/normal/roughness finish: one UV unit spans 1.08 m and the existing map repeats ten times, giving approximately 3 mm grains instead of normalized-box grains stretched across a 200 m quay. Preserved asphalt/concrete separation, all expansion joints, quay dimensions, vehicle clearances and 03.x beats. No engine material or shared texture was edited.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Asphalt high resolution texture.jpg](https://commons.wikimedia.org/wiki/File:Asphalt_high_resolution_texture.jpg) — John Harvey; Public domain.
+- [Asphalt concrete.JPG](https://commons.wikimedia.org/wiki/File:Asphalt_concrete.JPG) — kallerna; CC BY-SA 3.0.
+
+Review iterations:
+
+1. **Look 1 → change:** Confirmed normalized box UVs were stretching the shared abrasive map over the complete quay. Replaced them with metric UVs, preserving the engine finish and actual paving solids.
+2. **Look 2 → change:** The first metric period still looked coarse in the macro comparison. Reduced it from 1.8 to 1.08 m per UV unit, then checked trilinear mip filtering and both themes. Added a decoded UV-to-metre regression.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/container-port`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `quay-context` | A, offline | 276 → 276 | 2 → 1 |
+
+Inventory: **305,294 → 305,294 triangles**; **89 → 88 draws**. Maximum authored chapter/beat: **294,618 → 294,618 triangles**, **75 → 74 draws**. GLB: **0 → 8,564 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **0 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/container-port/polish-grit.mjs
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final container-port
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.

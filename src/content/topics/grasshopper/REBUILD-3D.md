@@ -219,3 +219,58 @@ hind feet, antenna and growth tray, against the main-branch build.
   60 fps at 3112×1904 (DPR 2) on Apple M5 Max under heavy host load; authored
   views stay under 350k (max 346,682). Accepted: the all-layer state is
   user-only and is not on any authored path.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Rebuilt all six juvenile bodies: sloping prismatic frons/vertex/genae, a skin-following clypeal shield, smooth elongated compound-eye domes, seated sockets and the three shallow ocellar lenses of the accepted adult frontal triad, a flared pronotal saddle with integrated carinae and sulci, nine unequal overlapping abdominal tergites, two thoracic/eight abdominal pairs of seated spiracular valves, a tapered terminal segment and short cerci. Retained six articulated legs, three tarsomeres/pads/claws per foot, tibial spine rows, femoral relief projected onto the actual tapered elliptical cuticle and 16/18/20/22/24/26 antennal annuli. Two pairs of thin veined wing pads develop from stage III: pendent in III/IV, dorsal after the original twist in V/VI. Stage I/II remain wingless. The authored six size/placement envelopes, schematic size disclaimer and female instar-count teaching remain unchanged.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Valanga nigricornis.jpg](https://commons.wikimedia.org/wiki/File:Valanga_nigricornis.jpg) — Hqwebsite; CC BY-SA 3.0.
+- [Javanese grasshopper (Valanga nigricornis) nymph.jpg](https://commons.wikimedia.org/wiki/File:Javanese_grasshopper_(Valanga_nigricornis)_nymph.jpg) — Charles J. Sharp; CC BY-SA 4.0.
+
+Review iterations:
+
+1. **Look 1 → change:** Smooth eyes removed the lumps, but the retained saddle still read as a barrel and late wing pads were undersized/buried. Enlarged the pads to the authored source lengths, seated them on the thorax and added the tapered terminal abdomen.
+2. **Look 2 → change:** Replaced the retained pronotum with the carinate flared saddle, integrated the sulci, corrected top-face/pad winding, and used attribute-aware normal preservation. Ray-projected both eye perimeters onto the true head surface so the sockets cannot float. A subsequent macro look showed angular thorax highlights: tightened the actual normal-aware simplifier. Dedicated head crops then revealed unsupported facial filaments and head radii inferred from height: seated the carinae on the skin, restored each authored instar radius, shaped the frons/clypeus and checked the frontal ocellar triad. Femoral chevrons now follow the real section. Rechecked the growth beat budget.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/grasshopper`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `nymph-1` | A, offline | 18,134 → 20,430 | 1 → 1 |
+| `nymph-2` | A, offline | 18,404 → 20,804 | 1 → 1 |
+| `nymph-3` | A, offline | 19,846 → 21,580 | 1 → 1 |
+| `nymph-4` | A, offline | 20,260 → 22,026 | 1 → 1 |
+| `nymph-5` | A, offline | 20,540 → 22,410 | 1 → 1 |
+| `nymph-6` | A, offline | 20,742 → 22,088 | 1 → 1 |
+
+Inventory: **480,958 → 492,370 triangles**; **93 → 93 draws**. Maximum authored chapter/beat: **346,682 → 346,682 triangles**, **82 → 82 draws**. GLB: **896,396 → 989,292 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **10 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/grasshopper/polish-nymphs.mjs
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final grasshopper
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.

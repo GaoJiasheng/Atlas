@@ -6754,7 +6754,12 @@
           ],
           "color": "steel"
         }
-      ]
+      ],
+      "mesh": "inverter-board",
+      "material": {
+        "color": "plastic",
+        "tint": "#ffffff"
+      }
     },
     {
       "id": "wall-section",
@@ -9734,5 +9739,6 @@
       },
       "view": "exploded"
     }
-  ]
+  ],
+  "model": "/models/aircon-inverter.glb"
 }

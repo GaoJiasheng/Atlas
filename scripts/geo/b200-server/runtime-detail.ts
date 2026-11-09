@@ -43,7 +43,7 @@ export function runtimeDetails(file:PartsFile,seed:PartsFile):Set<string>{
   dimms.push({kind:'extrude',shape:[[-.071,-.002],[.071,-.002],[.071,.009],[.067,.010],[.065,.004],[-.065,.004],[-.067,.010],[-.071,.009]],holes:[],depth:.004,rotation:[0,90,0],at:at(bank,.058,-.13),color:'plastic',tint:'token:neutral'});
  }
  set('dimms',dimms,{count:8,axis:[1,0,0],spacing:.0076});
- // Captive screws and slanting exposed heat-pipe crests in the inspection
+ // Captive screws and round U heat pipes with buried evaporator legs in the inspection
  // windows. These repeat with each of the four paired tower stations.
  const towers=find('gpu-heatsinks');
  // The photographed low front exchanger spans each pair of towers. It is
@@ -51,7 +51,7 @@ export function runtimeDetails(file:PartsFile,seed:PartsFile):Set<string>{
  towers.extra=towers.extra!.slice(0,14);
  for(const z of [-.152,.152]){
   for(const x of [-.034,.034])for(const dz of [-.060,.060])towers.extra!.push({kind:'cylinder',size:[.0018,.0018,.0012],at:at(x,.4285,z+dz),color:'steel'});
-  for(const x of [-.027,.027])towers.extra!.push({kind:'sweep',path:[[x,-.0005,-.061],[x*.72,.0015,-.046],[x*.3,.0015,.043],[x,.0000,.061]],radius:.0012,radial:8,segments:10,caps:'flat',section:'round',closed:false,at:at(0,.429,z),color:'copper'});
+  for(const x of [-.027,.027])towers.extra!.push({kind:'sweep',path:[[x,-.264,-.058],[x,-.006,-.058],[x,.001,-.051],[x,.001,.051],[x,-.006,.058],[x,-.264,.058]],radius:.00225,radial:24,segments:20,caps:'flat',section:'round',closed:false,at:at(0,.429,z),color:'copper'});
  }
  // Seat the thermal plates against the actual die height, not above it.
  for(const q of towers.extra!){

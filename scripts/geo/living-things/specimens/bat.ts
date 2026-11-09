@@ -53,6 +53,14 @@ export function sculptedFruitBat():Model {
   const y=.0417+.00125*Math.sin(a)*signedPower(Math.sin(b),.75);
   return [x,y,.0133+.00075*Math.cos(a)-.00042*front*Math.exp(-Math.pow(x/.00038,2))];
  },true);
+ // The alar tubes open through the pad. A solid pad behind them otherwise
+ // fills the lumens with a coarse polygon, masquerading as a faceted rim.
+ {const p=nose.getAttribute('position'),ix=nose.index!,keep:number[]=[];
+  for(let t=0;t<ix.count;t+=3){const ids=[0,1,2].map(k=>ix.getX(t+k)),q=ids.map(i=>new Vector3().fromBufferAttribute(p,i)),c=q.reduce((s,p)=>s.add(p),new Vector3()).divideScalar(3);let opening=false;
+   for(const side of [-1,1])if(c.z>.0133&&((c.x-side*.00118)/.00053)**2+((c.y-.04205)/.00044)**2<1)opening=true;
+   if(!opening)keep.push(...ids);
+  }nose.setIndex(keep);
+ }
  const reverse=(g:BufferGeometry)=>{const ix=g.index!,n=g.getAttribute('normal');for(let i=0;i<ix.count;i+=3){const b=ix.getX(i+1);ix.setX(i+1,ix.getX(i+2));ix.setX(i+2,b);}for(let i=0;i<n.count;i++)n.setXYZ(i,-n.getX(i),-n.getY(i),-n.getZ(i));return g;};
  put(reverse(nose),'#786560');
  for(const side of [-1,1]){
@@ -60,12 +68,18 @@ export function sculptedFruitBat():Model {
   const N=new Vector3(side*.36,.18,.92).normalize(),U=new Vector3(N.z,0,-N.x).normalize(),V=new Vector3().crossVectors(N,U);
   const c=new Vector3(side*.00118,.04205,.01355),cols:number[]=[];
   const profile=new CatmullRomCurve3([[.00088,-.00080],[.00086,-.00028],[.00073,.00038],[.00058,.00052],[.00043,.00030],[.00037,-.00025],[.00012,-.00105]].map(([r,z])=>new Vector3(r,z,0)));
-  const naris=surface(24,40,(u,v)=>{
+  const naris=surface(18,64,(u,v)=>{
    const q=profile.getPoint(u),a=-v*Math.PI*2;
    const col=new Color('#8b706a').lerp(new Color('#211b19'),Math.max(0,(u-.58)/.42));cols.push(col.r,col.g,col.b);
    return c.clone().addScaledVector(U,Math.cos(a)*q.x).addScaledVector(V,Math.sin(a)*q.x*.78).addScaledVector(N,q.y).toArray() as P;
   },true);
   naris.setAttribute('color',new Float32BufferAttribute(cols,3));naris.userData.anatomy='tubular-nostril';put(naris,'#8b706a');
+  // Lock base, flare, crest and inner opening around the rolled lip. Higher
+  // input tessellation alone is insufficient: the simplifier removes it.
+  naris.setAttribute('_lock',new Float32BufferAttribute(Array.from({length:19*65},(_,i)=>[3,6,9,15].includes(Math.floor(i/65))?1:0),1));
+  // Recessed dark mucosal bowl joins the descending lumen before it enters
+  // cranial tissue. It is behind the rolled rim, never a flat black decal.
+  const lumen=surface(6,64,(u,v)=>{const a=v*Math.PI*2,r=.00037*u;return c.clone().addScaledVector(U,Math.cos(a)*r).addScaledVector(V,Math.sin(a)*r*.78).addScaledVector(N,-.00025-.00028*(1-u*u)).toArray() as P;},true);lumen.setAttribute('_lock',new Float32BufferAttribute(Array.from({length:7*65},(_,i)=>Math.floor(i/65)===6?1:0),1));put(lumen,'#211b19');
  }
  // Paired upper-lip lobes continue beneath the rhinarium, with an actual
  // shallow median cleft rather than a painted line at the chin.
@@ -176,6 +190,10 @@ export function sculptedFruitBat():Model {
  // upper-limb surfaces. Roots are sampled on the skin, never on a proxy shell.
  const random=rng(211),positions:number[]=[],indices:number[]=[],colours:number[]=[],uvs:number[]=[];
  const brown=new Color(FUR),mantle=new Color('#a57238'),hairTip=new Color('#a49877');
+ // Cull only hair cards completely enclosed by the opaque cranium, at neck/
+ // orbital/jaw overlaps. Visible coat cards retain identical seeded geometry.
+ const insideCranium=(q:Vector3)=>{if(q.z<-.0045||q.z>.0125)return false;let lo=0,hi=1;for(let i=0;i<14;i++){const u=(lo+hi)/2;if(headCentres.getPoint(u).z<q.z)lo=u;else hi=u;}const u=(lo+hi)/2,c=headCentres.getPoint(u),r=headRadii.getPoint(u),x=r.x-.00015,y=r.y-.00015;return x>0&&y>0&&(q.x/x)**2+((q.y-c.y)/y)**2<1;};
+
  for(const g of coat){
   const p=g.getAttribute('position'),n=g.getAttribute('normal'),ix=g.index!,skinColors:number[]=[];
   const coatColour=(q:Vector3)=>{
@@ -197,6 +215,7 @@ export function sculptedFruitBat():Model {
     const tangent=new Vector3().crossVectors(normal,groom).normalize();if(tangent.lengthSq()<.1)tangent.set(1,0,0);
     const end=root.clone().addScaledVector(groom,length),off=positions.length/3,col=coatColour(root);
     const points=[root.clone().addScaledVector(tangent,-w),root.clone().addScaledVector(tangent,w),end];
+    if(g!==head&&points.every(insideCranium))continue;
     points.forEach((q,j)=>{positions.push(...q.toArray());const c=col.clone().lerp(hairTip,j===2?.25:0);colours.push(c.r,c.g,c.b);uvs.push(q.y/.012,q.x/.012);});indices.push(off,off+1,off+2);
    }
   }

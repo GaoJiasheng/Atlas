@@ -3,7 +3,7 @@
  * bits), retaining both repeats and smooth seam interpolation. No runtime code.
  * VertexLayout.SEPARATE makes every UV bufferView independent. */
 import { MeshoptEncoder,MeshoptDecoder } from 'meshoptimizer';
-export function compressUV(binary:Uint8Array):Uint8Array {
+export function compressUV(binary:Uint8Array,bits=12,fineMask?:Uint8Array):Uint8Array {
  const src=Buffer.from(binary),jsonLength=src.readUInt32LE(12),json=JSON.parse(src.subarray(20,20+jsonLength).toString()),bin=src.subarray(28+jsonLength);
  const uvViews=new Set<number>();
  for(const mesh of json.meshes)for(const prim of mesh.primitives){const a=json.accessors[prim.attributes.TEXCOORD_0];if(a.componentType===5126)uvViews.add(a.bufferView);}
@@ -16,7 +16,14 @@ export function compressUV(binary:Uint8Array):Uint8Array {
    if(uvViews.has(i)){
     if(ext.byteStride!==8)throw new Error('UV compression requires separate VEC2 stream');
     const decoded=new Uint8Array(ext.count*ext.byteStride);MeshoptDecoder.decodeGltfBuffer(decoded,ext.count,ext.byteStride,data,ext.mode,ext.filter);
-    const filtered=MeshoptEncoder.encodeFilterExp(new Float32Array(decoded.buffer),ext.count,8,12,'SharedComponent');
+    const filtered=MeshoptEncoder.encodeFilterExp(new Float32Array(decoded.buffer),ext.count,8,bits,'SharedComponent');
+    // Each EXPONENTIAL-filtered scalar carries its own exponent. Retain the
+    // finer cap samples in the same standard stream, without a runtime branch.
+    if(fineMask){
+     if(uvViews.size!==1||fineMask.length!==ext.count)throw Error('Fine UV mask must match the decoded single-specimen stream');
+     const precise=MeshoptEncoder.encodeFilterExp(new Float32Array(decoded.buffer),ext.count,8,10,'SharedComponent');
+     for(let vertex=0;vertex<ext.count;vertex++)if(fineMask[vertex])filtered.set(precise.subarray(vertex*8,vertex*8+8),vertex*8);
+    }
     data=MeshoptEncoder.encodeGltfBuffer(filtered,ext.count,8,'ATTRIBUTES');ext.filter='EXPONENTIAL';
    }
    ext.byteOffset=length;ext.byteLength=data.byteLength;ext.buffer=0;

@@ -123,3 +123,7 @@ Exact commands, sanitized logs, source hashes, counts and production-asset check
 - Fixed: regenerating `parts.json` from `build-parts.ts` + `text.ts` had reverted the shipped readability/editorial text of 44 parts (54 label/summary/detail fields), because `text.ts` predates those passes. The shipped text from main is restored; only the cockpit-glazing detail carries the new "six panes in frames" wording, rewritten on top of main's sentence. `text.ts` is still stale: do not regenerate part text from it without porting the shipped strings first.
 - Evidence PNGs (renders and comparison sheets with reference crops) are kept locally, not in git (`evidence/.gitignore`).
 - GPU perf (M5 Max, 1520×1023): 116k triangles / 25 calls on the airliner, 184k / 17 on the engine section; 60 fps settled.
+
+## Residual windscreen pass reverted 2026-11-09
+
+The residual pass moved the panes up and aft. On the GPU they read as thin slits at 86-95% of the local section height, further from the A330 than the accepted layout, so the nose and glazing stay as on main. Measured from the PK-GPA near-profile photograph, the A330 pane band sits 62-79% up the local section and 0.24-0.65 fuselage diameters aft of the tip. A trial at those corners left the middle side pane pale and creased the brow. The cause was not diagnosed, so the layout needs its own rebuild pass.

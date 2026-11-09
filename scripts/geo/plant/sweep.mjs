@@ -14,9 +14,21 @@ export function leafSection(){
  for(const sign of [1,-1]){const g=new ShapeGeometry(outline,64).rotateX(-Math.PI/2).translate(0,.0065+sign*.002,0);if(sign<0){const ix=g.index;for(let i=0;i<ix.count;i+=3){const v=ix.getX(i);ix.setX(i,ix.getX(i+1));ix.setX(i+1,v);}g.computeVertexNormals();}gs.push(colour(g,'seedling-pale'));}
  const node=(i,j)=>{const x=.52+i*.04+(i>0&&i<9?.002*Math.sin(i*7+j*9):0),z=-.4136+j*.0468+(j>0&&j<4?.002*Math.cos(i*6-j*4):0);return [x,.1293+.0013*Math.sin((x-.52)/.36*12+(z+.4136)/.1872*9),z];};
  for(let i=0;i<=9;i++)for(let j=0;j<=4;j++)for(const [di,dj] of [[1,0],[0,1]]){if(i+di>9||j+dj>4)continue;const a=node(i,j),b=node(i+di,j+dj),mid=a.map((v,k)=>(v+b[k])/2);mid[di?2:0]+=.0014*Math.sin(i*3+j*5);gs.push(colour(tube([a,mid,b],[.00042,.00048,.00042],5,8),'seedling'));}
- // 16 columns retained, with rounded, non-identical cross sections instead of fins.
- for(let i=0;i<16;i++){const x=.532+i*.0223,high=.025*(1+.08*Math.sin(i*5)),z=-.32;
-  gs.push(ellipsoid([x,.092,z],[.0098,high,.087],'face-2',24,20,(u,v)=>1+.055*Math.sin(v*TAU*4+i)*Math.sin(Math.PI*u)));
+ // Packed columns, not plates: a staggered grid of round capsules with parallel
+ // walls and a hemispherical end, 16 across the front row as before.
+ for(let j=0;j<8;j++)for(let i=0;i<16-j%2;i++){
+  // The two central rows are hidden by their neighbours; only their ends show.
+  if((j===3||j===4)&&i>1&&i<14-j%2)continue;
+  const x=.532+(i+(j%2)*.5)*.0223,z=-.3972+j*.0223,seed=i*7+j*13;
+  const radius=.0098*(1+.05*Math.sin(seed*1.7)),high=.0262*(1+.07*Math.sin(seed*2.3)),top=.124+.0013*Math.sin((x-.52)/.36*12+(z+.4136)/.1872*9),cy=top-high,lean=.0009*Math.sin(seed*3.1),leanZ=.0007*Math.cos(seed*1.3);
+  gs.push(colour(surface(5,12,(u,v)=>{
+   const a=v*TAU,body=high-radius;let y,r;
+   if(u<.6){const t=u/.6*Math.PI/2;y=-body-radius*Math.cos(t);r=Math.sin(t);}
+   else if(u<.8){y=-body+(u-.6)/.2*(2*body+radius);r=1;}
+   else{y=body+radius;r=1-(u-.8)/.2;} // flat end, seated against the upper skin
+   const wall=1+.025*Math.sin(a*3+seed)+.012*Math.sin(y*90+seed);
+   return [x+radius*r*Math.cos(a)*wall+lean*y/high,cy+y,z+radius*r*Math.sin(a)*wall+leanZ*y/high];
+  },{periodic:true,reverse:true}),'face-2'));
  }
  // Branched spongy cell profiles, real interconnected spaces; no punched slab.
  for(let i=0;i<34;i++){const x=.535+(i%9)*.039+.004*Math.sin(i*8),y=.030+(i%3)*.011,z=-.392+Math.floor(i/9)*.047;

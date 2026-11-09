@@ -1,5 +1,6 @@
 /** pnpm tsx scripts/geo/grasshopper/rebuild.mjs */
 import fs from 'node:fs';
+import {nymph} from './nymphs.mjs';
 import {CatmullRomCurve3} from 'three';
 import {Relief,V,arr,mix,worldPath,along,tarsus,publish,otherSide} from '../kits/insect-relief.mjs';
 const data=JSON.parse(fs.readFileSync('scripts/geo/grasshopper/source-parts.json','utf8')),meshes={};
@@ -55,14 +56,6 @@ paired('hind-femora',(m,p)=>{
   for(const s of [-1,1]){const pts=[0,.25,.5,.75,1].map(k=>surface(Math.max(.02,t-pitch*k),s*(.02+.72*k),-w*.3));m.loft(pts,[w*.8,w,w,w*.8,w*.35],prim.tint,{radial:10,steps:12});}
  }
 });
-// Growth specimens retain their body proportions and wing-bud progression.
-// Replace their stick appendages with scaled articulated versions.
-for(let stage=1;stage<=6;stage++){
- const p=part('nymph-'+stage),all=[p.primitive,...p.extra],m=new Relief();m.specimen=true;m.bake({...p,primitive:all[0],extra:all.filter((_,i)=>i!==0&&![5,6,7,8,9,10,11,12,13,14].includes(i))});
- for(const idx of [5,6,10,11]){const s=all[idx],path=worldPath(s),r=s.radius;m.segment(path[0],path[2],r*1.35,'f-elastic',.8);m.segment(path[2],path[4],r,'f-elastic',.8);tarsus(m,[path[4],path[5]],3,r,'f-elastic');}
- for(const idx of [7,12]){const s=all[idx];m.loft(worldPath(s),s.radius,'f-elastic',{flat:.5,radial:28,steps:30});}
- for(const idx of [8,13]){const s=all[idx],path=worldPath(s),r=s.radius;m.loft(path.slice(0,3),[r*1.3,r,r*.9],'f-elastic',{radial:24,steps:32});tarsus(m,path.slice(2),3,r,'f-elastic');for(let row=0;row<2;row++)for(let i=0;i<9;i++){const a=V(along(path.slice(0,3),.17+i*.087)).add(V([0,0,(row?1:-1)*r*.7])),b=a.clone().add(V([r*2.3,r*.9,(row?1:-1)*r]));m.loft([arr(a),mix(arr(a),arr(b),.6),arr(b)],[r*.3,r*.2,r*.008],'fossil',{steps:7,radial:10});}}
- for(const idx of [9,14]){const path=worldPath(all[idx]);const count=14+stage*2;for(let i=0;i<count;i++){const a=along(path,i/count),b=along(path,(i+1)/count),r=(all[idx].radius[0])*(1-i/40);m.loft([a,mix(a,b,.1),mix(a,b,.45),mix(a,b,.86),b],[r*.84,r,r*.97,r*.93,r*.82],'ink',{radial:16,steps:8});}}
- meshes[p.id]=m;
-}
+// Detailed juvenile bodies, eyes and stage-specific wing pads.
+for(let stage=1;stage<=6;stage++){const p=part('nymph-'+stage);meshes[p.id]=nymph(p,stage);}
 await publish('grasshopper',data,meshes);

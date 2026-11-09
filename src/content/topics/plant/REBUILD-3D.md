@@ -189,3 +189,57 @@ Shot on the GPU (`pnpm shoot plant --beats --gpu`, paper and cinema; 37/37 beats
 The GLB is now 1,466,288 bytes and the whole topic is 339,695 triangles, both inside the budget.
 
 The flower-and-seed reuse helper (`scripts/geo/flower-and-seed/reuse.ts`) now reads `baseline-parts.json`. That file is byte-identical to main's plant parts.json, and the flower-and-seed generator gives identical output from either source. Gates: check, validate and build green. Unit tests: 6,528 passed; the three failures (sauropod, toad skin, math-scene painter's order) were timeouts under host load and pass when rerun alone. Open but minor: the palisade cells' lower ends taper to a point where real cells are rounded.
+
+## Rebuild 2026-11-05 — residual polish (implemented 2026-11-09)
+
+Scope: only this batch's named residual parts. **Self-grade A** means credible form, attachments and relief for the existing teaching role under docs/68; it is an offline judgement, pending Claude's GPU acceptance. Earlier accepted limitations on unrelated parts are not regraded here. No browser/desktop, git writes, engine/shared-kit changes or display-text edits.
+
+Replaced the pointed ellipsoidal palisade profiles with parallel walls and rounded end caps. Retained 16 column profiles, made their upper ends meet the upper epidermis, and added small unequal lean/length variations. The spongy layer, two guard cells, pore and live stoma movement retain their accepted geometry and bindings.
+
+References actually downloaded and viewed (development only; no runtime photo textures or third-party meshes):
+
+- [Angiosperm Morphology The Mesophytic Dicotyledonous Leaf of Ligustrum (36845190976).jpg](https://commons.wikimedia.org/wiki/File:Angiosperm_Morphology_The_Mesophytic_Dicotyledonous_Leaf_of_Ligustrum_(36845190976).jpg) — Berkshire Community College  Bioscience Image Library; CC0.
+- [Mesophyte leaf (34321748034).jpg](https://commons.wikimedia.org/wiki/File:Mesophyte_leaf_(34321748034).jpg) — Berkshire Community College  Bioscience Image Library; CC0.
+
+Review iterations:
+
+1. **Look 1 → change:** The old lower ends narrowed continuously like pointed teeth. Built a cylindrical middle with finite-radius end caps.
+2. **Look 2 → change:** The first rounded ends exposed the small gap to the upper skin. Seated the upper ends, enlarged the cap radius and varied the lean slightly. Checked the lower ends in profile and close-up.
+3. **Final look:** inspected the final decoded asset in front, three-quarter, profile and detail views, plus cinema. Sheets: `/tmp/atlas-residual-polish-2026-11-05/final/plant`. These are renders beside real photographic/histological references, not silhouettes. Photo crops/orientations are development comparisons; generic specimens and available oblique photographs are not a calibrated photogrammetric solve. A histological section has no photographed three-quarter view, so the same section references support the additional oblique model views. No unavailable camera angle is invented or claimed as a measured match.
+
+| Part | Self-grade | Triangles before → after | Estimated model draws before → after |
+|---|---|---:|---:|
+| `leaf-section` | A, offline | 23,520 → 23,026 | 1 → 1 |
+
+Inventory: **339,695 → 339,201 triangles**; **62 → 62 draws**. Maximum authored chapter/beat: **235,565 → 235,565 triangles**, **32 → 32 draws**. GLB: **1,466,288 → 1,464,140 bytes**. Counts use the decoded renderer mesh, expanded bilateral parts, instance matrices and each-animation path. They exclude shadows, flows and labels; no GPU FPS is claimed. Inventory can include mutually hidden stations; the authored maxima remain below 350k.
+
+Preservation audit: all IDs/order, names, labels, EN/ZH summaries/details, teaching numbers, groups, chapter/beat references, flows, animations, rig/pose pivots, sorting and explosion inputs are unchanged. **22 unrelated decoded meshes** retain identical attribute streams, world transforms and oriented triangle topology (meshopt may cyclically rotate a triangle's three indices). No retained specimen was simplified to pay for this work.
+
+The offline preview reuses `fossils-and-skeletons/studio-cpu.ts`: engine studio directions, light colours/intensities, hemisphere, exposure, sampled Three RoomEnvironment, GGX and ACES. Rig/exposure values are checked against live `Lighting.tsx`. For the two finish-sensitive residuals, the actual engine-generated sand/pile pixels are exported by `living-things/export-finish-maps.ts`, with UV derivatives selecting trilinear mips. CPU numerical environment filtering and lack of GPU contact-shadow/anisotropic filtering are explicit limits; this is not GPU acceptance. Float64 depth avoids artificial z-fighting in thin-sheet/recess macro views.
+
+Reproduce the targeted build without regenerating stale editorial text:
+
+```sh
+pnpm tsx scripts/geo/plant/polish-residual.mjs
+pnpm tsx scripts/geo/living-things/export-finish-maps.ts
+pnpm tsx scripts/geo/plant/residual-review.mjs final plant
+pnpm tsx scripts/geo/plant/residual-audit.mjs
+```
+
+The audit's before baseline and all reference/evidence images are deliberately external at `/tmp/atlas-residual-polish-2026-11-05`. `metrics.json` records all per-part counts and authored states. Gate receipts are in `/tmp/atlas-residual-polish-2026-11-05/gates`. Gates run the unchanged package scripts in the writable `gate-work` snapshot because the worktree dependency symlink points outside the permitted roots; source and shipped assets are hash-checked against this worktree. No Vitest configuration, package/lockfile or test assertion is suppressed.
+
+Nothing is intentionally left below A in this residual scope. Exact manufacturer wiring/hidden routing, a calibrated photo solve and GPU/interactive acceptance are not claimed. The subsequent GPU review remains required by the task's no-browser handoff.
+
+
+### Final verification — 2026-11-09
+
+- `pnpm check`: **PASS**, 1,498 files, 0 errors, 0 warnings, 23 existing hints.
+- `pnpm validate`: **PASS**, 94 topics, 0 errors/warnings.
+- Full `pnpm run test`: **PASS**, **306 files / 6,745 tests**; no skipped tests or retries used. The resource-controlled invocation used `--pool=threads --maxWorkers=1 --testTimeout=120000 --hookTimeout=120000 --retry=2`. These are CLI resource controls; fixed per-case deadlines, geometry assertions and configuration files were unchanged.
+- `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
+
+The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.
+
+## GPU acceptance correction 2026-11-09
+
+The residual palisade plates still read as faceted, tapered sheets on the GPU, with hard creases and pale patches where spongy cells showed through. Rebuilt in `sweep.mjs` as a staggered grid of round capsules with parallel walls and hemispherical lower ends, 16 across the front row. The two central rows keep only their end cells, because the rest are hidden and `plant.glb` is held under the 1.5 MB ceiling (1,484,236 bytes).
