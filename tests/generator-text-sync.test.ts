@@ -22,6 +22,7 @@ const textStages: Record<string, string> = {
   'fossils-and-skeletons': 'build-model.ts',
   'frog-and-chicken': 'build-parts.ts',
   'mangrove-food-web': 'build-topic.ts',
+  'living-things': 'build-parts.ts',
 };
 const topics = readdirSync(resolve(root, 'scripts/geo')).filter(topic =>
   existsSync(resolve(root, `src/content/topics/${topic}/data/parts.json`)) &&

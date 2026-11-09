@@ -190,7 +190,8 @@ const data = {
   sim: SIM,
 };
 
-const decodedBounds=await writeSculptures(MESH_OUT,sculptures);
+// --text-only (generator-text-sync test): text does not depend on the bake.
+const decodedBounds:Awaited<ReturnType<typeof writeSculptures>>=process.argv.includes('--text-only')?{}:await writeSculptures(MESH_OUT,sculptures);
 for(const part of outParts){
  const b=decodedBounds[part.id];if(!b)continue;
  const primitive=part.primitive!,home=primitive.at;
