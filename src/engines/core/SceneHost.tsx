@@ -33,19 +33,19 @@
  *   engine view on the client (engines may touch window / WebGL freely; the
  *   server renders a stage placeholder). `__atlas.ready` waits for both.
  */
-import { geographyUrlBaseline, geographyUrlPatch } from '../time-scene/lib/geography';
-import { monthlyUrlBaseline, monthlyUrlPatch } from '../time-scene/lib/climatology-state';
 import type { TimeSceneExt } from '../time-scene';
 import type { SceneStore } from './store';
 import {
   Component,
   Suspense,
+  lazy,
   useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
+  type ComponentType,
   type CSSProperties,
   type ErrorInfo,
   type ReactNode,
@@ -61,8 +61,10 @@ import { chapterNumbers, isBackground, storyChapters } from './chapters';
 import { useSceneKeys } from './keys';
 import { installTestApi } from './test-api';
 import { BottomPanels, CardFrame, TitleBlock, TopBar } from './Hud';
-import { getEngine, getEngineView } from '../registry';
-import { t, tx, type BilingualText } from '../../i18n';
+import { readEngine, readUrlAdapter, engineView } from './loading';
+import { prepareEngineData } from './loading-data';
+import { readSceneUi, t, tx, type BilingualText } from '../../i18n';
+import { UI_LOAD_ERROR } from '../../i18n/ui-error';
 import { applyTheme, resolveTheme } from '../../theme/theme';
 import { getHudPreferences, setHudPreferences, setReaderExpanded, setPanelsExpanded, setCardExpanded, setPlateExpanded, claimFirstGuide, setThemeOverride, useThemeOverride } from '../../lib/prefs';
 import { useHudRoom } from './useHudRoom';
@@ -73,7 +75,14 @@ import { InfoPanel } from '../widgets/InfoPanel';
 import { ChapterBodies } from '../widgets/ChapterBodies';
 import { QuizCard } from '../widgets/QuizCard';
 import { SourcePopover, topicSources } from '../widgets/SourcePopover';
-import { GlossaryCard, topicGlossary } from '../widgets/GlossaryCard';
+import { topicGlossary } from './reader-data';
+import type { GlossaryCardProps } from '../widgets/GlossaryCard';
+
+// The glossary card stays out of the first frame. The host fetches it once the scene is idle, so a first
+// tap renders it directly instead of waiting on a Suspense reveal (React holds those for ~300 ms).
+let loadedGlossaryCard: ComponentType<GlossaryCardProps> | null = null;
+const loadGlossaryCard = () => import('../widgets/GlossaryCard').then(m => (loadedGlossaryCard = m.GlossaryCard));
+const LazyGlossaryCard = lazy(() => loadGlossaryCard().then(card => ({ default: card })));
 
 export interface SceneHostProps extends SceneProps {
   /**
@@ -167,9 +176,19 @@ function loadEngineData(url: string): Promise<unknown> {
 }
 
 export default function SceneHost(props: SceneHostProps) {
+  return (
+    <StageErrorBoundary fallback={<StagePlaceholder label={UI_LOAD_ERROR[props.locale]} />}>
+      <Suspense><SceneHostContent {...props} /></Suspense>
+    </StageErrorBoundary>
+  );
+}
+
+function SceneHostContent(props: SceneHostProps) {
   const { topic, chapters, dataUrl, locale, path, indexHref } = props;
-  const engine = getEngine(topic.engine);
-  const EngineView = getEngineView(topic.engine, topic.temporalMode);
+  readSceneUi(topic.engine);
+  const engine = readEngine(topic.engine);
+  const urlAdapter = readUrlAdapter(topic.temporalMode);
+  const EngineView = engineView(engine, topic.temporalMode);
 
   const defaultsFor = useCallback(
     (data: unknown): SceneSnapshot => ({
@@ -202,7 +221,10 @@ export default function SceneHost(props: SceneHostProps) {
   // Engine data: fetched on the client, then the store is rebased onto data-dependent defaults.
   useEffect(() => {
     let cancelled = false;
-    loadEngineData(dataUrl).then(
+    loadEngineData(dataUrl).then(async loaded => {
+      await prepareEngineData(topic.engine, loaded);
+      return loaded;
+    }).then(
       (loaded) => {
         if (cancelled) return;
         store.getState().rebase(defaultsFor(loaded) as SceneSnapshot);
@@ -216,7 +238,7 @@ export default function SceneHost(props: SceneHostProps) {
     return () => {
       cancelled = true;
     };
-  }, [dataUrl, store, defaultsFor]);
+  }, [dataUrl, store, defaultsFor, topic.engine]);
   const dataReady = dataState.status === 'ready';
 
   // Camera preset tracking (FREE CAMERA after user moves). Subscribes before the deep link below.
@@ -245,8 +267,7 @@ export default function SceneHost(props: SceneHostProps) {
         ...(topic.modernInset ? { inset, insetVisible, fossilMode } : {}),
       };
       const patch = { ...common, ...engine.fromUrl(engineFields, topic) };
-      if (topic.temporalMode === 'geography') store.getState().hydrate(geographyUrlPatch(store as SceneStore<TimeSceneExt>, chapters, patch, topic));
-      else if (topic.temporalMode === 'climatology') store.getState().hydrate(monthlyUrlPatch(store as SceneStore<TimeSceneExt>, chapters, patch));
+      if (urlAdapter) store.getState().hydrate(urlAdapter.patch(store as SceneStore<TimeSceneExt>, chapters, patch, topic));
       else if (Object.keys(patch).length > 0) store.getState().hydrate(patch);
     };
     hydrate();
@@ -256,15 +277,14 @@ export default function SceneHost(props: SceneHostProps) {
       // A monthly topic's baseline is known before its view loads, so the first canonical write is already right.
       baseline: (state) =>
         (hud.getState().controls.urlBaseline?.(state as SceneSnapshot) ??
-          (topic.temporalMode === 'geography' ? geographyUrlBaseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>) : topic.temporalMode === 'climatology'
-            ? monthlyUrlBaseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>)
+          (urlAdapter ? urlAdapter.baseline(store as SceneStore<TimeSceneExt>, chapters, state as SceneSnapshot<TimeSceneExt>)
             : store.getState().chapterTarget(state.chapter ?? null))) as UrlState,
       subscribe: (listener) => store.subscribe(listener),
     });
     // Canonicalize invalid monthly b/m/t even when the author state needs no change.
     if (topic.temporalMode === 'climatology' || topic.temporalMode === 'geography') store.getState().patch({});
     return () => { stopSync(); if (topic.temporalMode === 'climatology' || topic.temporalMode === 'geography') window.removeEventListener('popstate', hydrate); };
-  }, [store, hud, engine, dataReady, topic, chapters]);
+  }, [store, hud, engine, dataReady, topic, chapters, urlAdapter]);
 
   // Theme: user override > scene (URL / chapter) > topic default.
   const sceneTheme = useStore(store, (s) => s.theme);
@@ -379,6 +399,11 @@ export default function SceneHost(props: SceneHostProps) {
   const sources = useMemo(() => topicSources(data), [data]);
   const glossary = useMemo(() => topicGlossary(data), [data]);
   const glossaryOpen = useStore(hud, (s) => s.glossary);
+  const hasGlossary = glossary.length > 0;
+  // Chosen once: switching from the lazy wrapper to the loaded card later would remount an open card.
+  const glossaryCard = useRef<ComponentType<GlossaryCardProps> | null>(null);
+  if (glossaryOpen !== null && !glossaryCard.current) glossaryCard.current = loadedGlossaryCard ?? LazyGlossaryCard;
+  const GlossaryCard = glossaryCard.current;
   useEffect(() => {
     const el = sceneRef.current;
     if (!el) return;
@@ -474,6 +499,24 @@ export default function SceneHost(props: SceneHostProps) {
   useEffect(() => {
     if (dataState.status === 'error') viewMounted.resolve();
   }, [dataState.status, viewMounted]);
+  // Fetch the glossary card once the engine view has committed and the page is idle (a timeout where
+  // iOS WebKit has no requestIdleCallback), so it never competes with first-frame chunks.
+  useEffect(() => {
+    if (!hasGlossary || loadedGlossaryCard) return;
+    let cancel = () => {};
+    let live = true;
+    void viewMounted.promise.then(() => {
+      if (!live) return;
+      if (typeof window.requestIdleCallback === 'function') {
+        const id = window.requestIdleCallback(() => void loadGlossaryCard(), { timeout: 4000 });
+        cancel = () => window.cancelIdleCallback(id);
+      } else {
+        const id = window.setTimeout(() => void loadGlossaryCard(), 500);
+        cancel = () => window.clearTimeout(id);
+      }
+    });
+    return () => { live = false; cancel(); };
+  }, [hasGlossary, viewMounted]);
   const stageRef = useRef<HTMLDivElement>(null);
   useEffect(
     () =>
@@ -634,8 +677,8 @@ export default function SceneHost(props: SceneHostProps) {
             expanded={sheetOpen && readerOpen}
             onToggleExpanded={() => { const open = !(sheetOpen && readerOpen); actions.setReader(open); setSheetOpen(open); }}
           >
-            {glossaryOpen !== null && glossary.length > 0 && (
-              <GlossaryCard terms={glossary} open={glossaryOpen} locale={locale} onOpen={actions.setGlossary} />
+            {glossaryOpen !== null && hasGlossary && GlossaryCard && (
+              <Suspense><GlossaryCard terms={glossary} open={glossaryOpen} locale={locale} onOpen={actions.setGlossary} /></Suspense>
             )}
             <div ref={slotRef('inspector')} className="atlas-inspector" aria-label={t(locale, 'scene.details')} />
             {chapter?.quiz.map((item, i) => <QuizCard key={`${chapter.id}-${i}`} item={item} locale={locale} />)}

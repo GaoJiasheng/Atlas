@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import en from '../src/i18n/ui.en.json';
 import zh from '../src/i18n/ui.zh.json';
 import { localeFromPath, normalizeBase, switchLocalePath, t, tx } from '../src/i18n';
+import { uiGroup, uiWords, type UiGroup } from '../src/i18n/ui-groups';
+import { UI_LOAD_ERROR } from '../src/i18n/ui-error';
 
 describe('tx()', () => {
   it('picks the requested locale', () => {
@@ -29,6 +31,20 @@ describe('t()', () => {
 
   it('has identical keys in both dictionaries', () => {
     expect(Object.keys(zh).sort()).toEqual(Object.keys(en).sort());
+  });
+
+  it('keeps the chunk-independent failure message identical to existing UI copy', () => {
+    expect(UI_LOAD_ERROR).toEqual({ en: en['scene.error'], zh: zh['scene.error'] });
+  });
+
+  it('partitions every word exactly once, preserving both locales and all placeholders', () => {
+    const groups: UiGroup[] = ['common', 'space', 'time', 'math', 'index'];
+    for (const dictionary of [en, zh]) {
+      const chunks = groups.map(group => uiWords(dictionary, group));
+      expect(Object.assign({}, ...chunks)).toEqual(dictionary);
+      expect(chunks.reduce((n, chunk) => n + Object.keys(chunk).length, 0)).toBe(Object.keys(dictionary).length);
+      for (const [i, group] of groups.entries()) expect(Object.keys(chunks[i]!).every(key => uiGroup(key) === group)).toBe(true);
+    }
   });
 });
 

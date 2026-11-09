@@ -162,30 +162,7 @@ export interface SimPlace {
   face?: 'centre';
 }
 
-/** Spherical interpolation, including coincident and opposite directions; writes into `out`. */
-export function placeDirection(from: Vec3, to: Vec3, t: number, out: Vec3): void {
-  const dot = Math.max(-1, Math.min(1, from[0] * to[0] + from[1] * to[1] + from[2] * to[2]));
-  if (dot > 0.999999) {
-    for (let i = 0; i < 3; i++) out[i] = from[i]! + (to[i]! - from[i]!) * t;
-  } else if (dot < -0.999999) {
-    // Pick a stable perpendicular so a half-circle still stays on the sphere.
-    const x = Math.abs(from[0]) < 0.9 ? 1 : 0;
-    const y = x ? 0 : 1;
-    const d = from[0] * x + from[1] * y;
-    const px = x - d * from[0], py = y - d * from[1], pz = -d * from[2];
-    const n = Math.hypot(px, py, pz);
-    const c = Math.cos(Math.PI * t), k = Math.sin(Math.PI * t) / n;
-    out[0] = from[0] * c + px * k;
-    out[1] = from[1] * c + py * k;
-    out[2] = from[2] * c + pz * k;
-  } else {
-    const angle = Math.acos(dot), den = Math.sin(angle);
-    const a = Math.sin((1 - t) * angle) / den, b = Math.sin(t * angle) / den;
-    for (let i = 0; i < 3; i++) out[i] = from[i]! * a + to[i]! * b;
-  }
-  const length = Math.hypot(...out);
-  for (let i = 0; i < 3; i++) out[i] = out[i]! / length;
-}
+export { placeDirection } from './part-bind';
 
 export interface SimEffects {
   /** Numeric overrides by exact rig joint and movement, never mirrored. */
@@ -255,15 +232,7 @@ function add(map: Map<string, Vec3>, id: string, d: Vec3): void {
   map.set(id, o ? [o[0] + d[0], o[1] + d[1], o[2] + d[2]] : d);
 }
 
-/**
- * The tint a material slot takes: a try-it tint (`tint` binding) colours the
- * part's own material only (slot 0, like `glow`: the iron core, not the
- * leads, stand or clips drawn with it); the chapter / exercise highlight
- * colours the other slots, and slot 0 too while no try-it tint is bound.
- */
-export function slotTint<T>(slot: number, highlight: T, sim: T | null): T {
-  return slot === 0 && sim !== null ? sim : highlight;
-}
+export { slotTint } from './part-bind';
 
 export function simEffects(sim: SimData, values: SimValues, outputs: SimOutputs): SimEffects {
   const out: SimEffects = {

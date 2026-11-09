@@ -83,8 +83,7 @@ import { partPrimitives } from '../../lib/parts';
 import { apply3, eulerDeg } from '../../lib/xform';
 import type { BufferAttribute } from 'three';
 import type { StageBridge } from '../../bridge';
-import { capacity, fillShapeForPrimitive, easeFillVolume } from '../../lib/fill';
-import { createFillGeometry, updateFillGeometry } from './fillGeometry';
+import { readPartFill } from '../../lib/sim/part-fill';
 import type { SimAnimationEffect } from '../../lib/sim/bind';
 import { clockTime } from '../../lib/sim/hz';
 
@@ -379,12 +378,13 @@ function createSlotMaterialsFor(colorKey: string) {
 
 export function PartNode(props: PartNodeProps) {
   const { part, display, styles } = props;
+  const fillKit = props.fill ? readPartFill() : null;
   const clipping = clippingForPart(part, props.clipping);
   // A filled liquid (docs/36 §4.3): its cavity primitive, redrawn in place up to the bound volume.
   const filled = !!props.fill;
-  const fillShape = useMemo(() => (filled && part.primitive ? fillShapeForPrimitive(part.primitive) : null), [part, filled]);
+  const fillShape = useMemo(() => (filled && part.primitive ? fillKit!.fillShapeForPrimitive(part.primitive) : null), [part, filled, fillKit]);
   const meniscus = props.fill?.meniscus ?? 0;
-  const fillGeometry = useMemo(() => (fillShape ? createFillGeometry(fillShape, meniscus) : null), [fillShape, meniscus]);
+  const fillGeometry = useMemo(() => (fillShape ? fillKit!.createFillGeometry(fillShape, meniscus) : null), [fillShape, meniscus, fillKit]);
   const shape = useMemo(() => fillGeometry ? { ...props.shape, pieces: [{ ...props.shape.pieces[0]!, geometry: fillGeometry, matrices: null }] } : props.shape, [props.shape, fillGeometry]);
   const fillMotion = useRef({ from: 0, to: NaN, now: 0, start: 0, shown: false, level: 0, volume: 0, drawn: NaN });
   useEffect(() => {
@@ -397,20 +397,20 @@ export function PartNode(props: PartNodeProps) {
     if (!fillShape || !fillGeometry || !props.fillBridge || !props.fill) return;
     const binding = props.fill;
     const bench = () => {
-      const volume = Math.max(0, capacity(fillShape) - binding.below);
+      const volume = Math.max(0, fillKit!.capacity(fillShape) - binding.below);
       const run = () => {
         const start = performance.now();
-        for (let i = 0; i < 100; i++) updateFillGeometry(fillGeometry, fillShape, volume * i / 100, binding.below, binding.meniscus);
+        for (let i = 0; i < 100; i++) fillKit!.updateFillGeometry(fillGeometry, fillShape, volume * i / 100, binding.below, binding.meniscus);
         return performance.now() - start;
       };
       run();
       const samples = Array.from({ length: 5 }, run).sort((a, b) => a - b);
-      updateFillGeometry(fillGeometry, fillShape, fillMotion.current.now, binding.below, binding.meniscus);
+      fillKit!.updateFillGeometry(fillGeometry, fillShape, fillMotion.current.now, binding.below, binding.meniscus);
       return samples[2]!;
     };
     props.fillBridge.fillBenchmarks.set(part.id, bench);
     return () => { props.fillBridge?.fillBenchmarks.delete(part.id); };
-  }, [fillShape, fillGeometry, props.fillBridge, props.fill, part.id]);
+  }, [fillShape, fillGeometry, props.fillBridge, props.fill, part.id, fillKit]);
   const style = styles[0]!;
   const runtime = useRuntime();
   const posRef = useRef<Group>(null);
@@ -706,10 +706,10 @@ export function PartNode(props: PartNodeProps) {
       if (snap || props.fillStill || prefersReducedMotion()) {
         fm.from = fm.now = fm.to;
         fm.start = clock;
-      } else fm.now = easeFillVolume(fm.from, fm.to, clock - fm.start, fill.ease);
+      } else fm.now = fillKit!.easeFillVolume(fm.from, fm.to, clock - fm.start, fill.ease);
       if (fm.now !== fm.to) moving = true;
       if (fm.drawn !== fm.now || snap) {
-        const drawn = updateFillGeometry(fillGeometry, fillShape, fm.now, fill.below, fill.meniscus);
+        const drawn = fillKit!.updateFillGeometry(fillGeometry, fillShape, fm.now, fill.below, fill.meniscus);
         fm.drawn = fm.now;
         fm.level = drawn.level;
         fm.volume = drawn.volume;

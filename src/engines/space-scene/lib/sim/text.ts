@@ -3,7 +3,7 @@
  * `Series`, `On`) and an output's (a number with its decimals, `—` where it
  * does not apply; a state's label).
  */
-import { plainText, speakable } from '../../../../lib/rich-text';
+import { readTimeText } from './time-text';
 import { tx } from '../../../../i18n';
 import type { SimControl, SimOutput, SimValue } from '../../sim-schema';
 import { numberOf, outputDecimals, type SimOutputValue } from './index';
@@ -19,17 +19,17 @@ export function timeToken(hours: number): string {
 
 export function timeText(hours: number, locale: 'en' | 'zh', short = false): string {
   if (!Number.isFinite(hours)) return '—';
-  const text = plainText(timeToken(hours), locale);
+  const text = readTimeText().plainText(timeToken(hours), locale);
   return short ? text.replace(/\.00(?= |$)/, '') : text;
 }
 
 /** Time values read as clock words instead of decimal hours. */
 export function valueWords(c: SimControl, v: SimValue | undefined, locale: 'en' | 'zh'): string {
-  return c.kind === 'step' && c.format === 'time' && typeof v === 'number' ? speakable(timeToken(v), locale) : valueText(c, v, locale);
+  return c.kind === 'step' && c.format === 'time' && typeof v === 'number' ? readTimeText().speakable(timeToken(v), locale) : valueText(c, v, locale);
 }
 
 export function outputWords(o: SimOutput, v: SimOutputValue | undefined, locale: 'en' | 'zh'): string {
-  return o.format === 'time' && typeof v === 'number' && Number.isFinite(v) ? speakable(timeToken(v), locale) : outputText(o, v, locale);
+  return o.format === 'time' && typeof v === 'number' && Number.isFinite(v) ? readTimeText().speakable(timeToken(v), locale) : outputText(o, v, locale);
 }
 
 /** A control's value as words: `2`, `Series`, `On`. */

@@ -1,0 +1,33 @@
+/** Browser facade: the host prepares these tools only when topic data has a simulation. */
+import { readSimTools } from './sim-tools-resource';
+export { placeDirection, slotTint, outputTag, statusTag } from './part-bind';
+export const MAX_ANIMATION_HZ = 4;
+export const FLOW_FLOOR = 0.01;
+export const MAX_GLOW = 2;
+
+export const animationHz: typeof import('./bind').animationHz = (...args) => readSimTools().animationHz(...args);
+export const tintLevel: typeof import('./bind').tintLevel = (...args) => readSimTools().tintLevel(...args);
+export const shiftEntry: typeof import('./bind').shiftEntry = (...args) => readSimTools().shiftEntry(...args);
+export const shiftOrder: typeof import('./bind').shiftOrder = (...args) => readSimTools().shiftOrder(...args);
+export const holds: typeof import('./bind').holds = (...args) => readSimTools().holds(...args);
+export const simEffects: typeof import('./bind').simEffects = (...args) => readSimTools().simEffects(...args);
+export const magnetFrames: typeof import('./carrier').magnetFrames = (...args) => readSimTools().magnetFrames(...args);
+export const evaluateSimOnStage: typeof import('./carrier').evaluateSimOnStage = (...args) => readSimTools().evaluateSimOnStage(...args);
+export const changedByCard: typeof import('./replay').changedByCard = (...args) => readSimTools().changedByCard(...args);
+export const cardTimelines: typeof import('./replay').cardTimelines = (...args) => readSimTools().cardTimelines(...args);
+export const cardStates: typeof import('./replay').cardStates = (...args) => readSimTools().cardStates(...args);
+export const timeToken: typeof import('./text').timeToken = (...args) => readSimTools().timeToken(...args);
+export const timeText: typeof import('./text').timeText = (...args) => readSimTools().timeText(...args);
+export const valueWords: typeof import('./text').valueWords = (...args) => readSimTools().valueWords(...args);
+export const outputWords: typeof import('./text').outputWords = (...args) => readSimTools().outputWords(...args);
+export const valueText: typeof import('./text').valueText = (...args) => readSimTools().valueText(...args);
+export const outputText: typeof import('./text').outputText = (...args) => readSimTools().outputText(...args);
+export const isCell = (cell: Parameters<typeof import('./table').isCell>[0]): cell is { value: number; decimals: number } => readSimTools().isCell(cell);
+export const cellValue: typeof import('./table').cellValue = (...args) => readSimTools().cellValue(...args);
+export const tableExperimentOf: typeof import('./table').tableExperimentOf = (...args) => readSimTools().tableExperimentOf(...args);
+export const tableRow: typeof import('./table').tableRow = (...args) => readSimTools().tableRow(...args);
+export const tableCombinations: typeof import('./table').tableCombinations = (...args) => readSimTools().tableCombinations(...args);
+export const solveTable: typeof import('./table').solveTable = (...args) => readSimTools().solveTable(...args);
+export const tableSources: typeof import('./table').tableSources = (...args) => readSimTools().tableSources(...args);
+export const tableQuantity: typeof import('./table').tableQuantity = (...args) => readSimTools().tableQuantity(...args);
+export const tableStates: typeof import('./table').tableStates = (...args) => readSimTools().tableStates(...args);

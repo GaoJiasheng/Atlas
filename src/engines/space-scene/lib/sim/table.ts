@@ -63,15 +63,7 @@ export function tableQuantity(table: TableData, id: string): 'number' | 'state' 
   return 'number';
 }
 
-/** What an output's numbers are (docs/40 §4.2): `typical` (a sourced measurement) or `sim` (the default: "in this model"). */
-export function outputTag(o: { tag?: 'sim' | 'typical' | undefined }): 'sim' | 'typical' {
-  return o.tag ?? 'sim';
-}
-
-/** The PLATE status line's tag: TYPICAL when the card observes only typical outputs, else SIM. */
-export function statusTag(observe: readonly string[], outputs: readonly { id: string; tag?: 'sim' | 'typical' | undefined }[]): 'SIM' | 'TYPICAL' {
-  return observe.length > 0 && observe.every((id) => outputs.find((o) => o.id === id)?.tag === 'typical') ? 'TYPICAL' : 'SIM';
-}
+export { outputTag, statusTag } from './part-bind';
 
 /** The states a table output can take (its string cells), or undefined for a number. */
 export function tableStates(table: TableData, id: string): string[] | undefined {

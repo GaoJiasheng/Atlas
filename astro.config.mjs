@@ -6,6 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 import AstroPWA from '@vite-pwa/astro';
 import { rehypeFracGlue } from './src/lib/frac-glue.ts';
 import { topicJsBuild } from './scripts/lib/js-budget-build.ts';
+import { uiWordChunks } from './src/i18n/ui-build.ts';
+import { engineClientModules } from './src/engines/core/loading-build.ts';
 
 /**
  * `ATLAS_BASE` lets the same build be served from a sub-path (e.g. GitHub Pages)
@@ -134,7 +136,15 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss(), topicJsBuild()],
+    // Worktrees share node_modules; keep Vite's writable cache local to this checkout.
+    cacheDir: '.astro/vite',
+    build: {
+      // Terser is already supplied by the locked Vite toolchain. Keep all safe defaults;
+      // additional compression passes reduce the shared renderer without changing its API.
+      minify: 'terser',
+      terserOptions: { compress: { passes: 2 }, maxWorkers: 2 },
+    },
+    plugins: [tailwindcss(), topicJsBuild(), uiWordChunks(), engineClientModules()],
   },
   devToolbar: { enabled: false },
 });

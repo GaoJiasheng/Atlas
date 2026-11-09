@@ -9,9 +9,11 @@ import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 
 // space-scene is a ratchet (docs/02 target 300 KB): lowered as the 3D stage is split further, never raised.
-export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 509, 'math-scene': 300, 'time-scene': 481, simulation: 300 };
+// 2026-11-09: full bilingual first frame peaks at 466.73 / 439.64 KB;
+// round up, then leave 2 KB for small changes. The 400 KB SpaceScene goal remains open.
+export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 469, 'math-scene': 300, 'time-scene': 442, simulation: 300 };
 export interface Chunk { imports: string[]; dynamicImports: string[]; modules: string[] }
-export interface BudgetResult { topic: string; engine: string; gzipKB: number; budgetKB: number; files: string[] }
+export interface BudgetResult { topic: string; locale?: string; engine: string; gzipKB: number; budgetKB: number; files: string[] }
 
 export function staticClosure(roots: readonly string[], graph: Readonly<Record<string, Pick<Chunk, 'imports'>>>): string[] {
   const seen = new Set<string>();
@@ -28,7 +30,7 @@ export function staticClosure(roots: readonly string[], graph: Readonly<Record<s
 
 export function assertBudgets(results: readonly BudgetResult[]) {
   const over = results.filter((r) => !Number.isFinite(r.gzipKB) || r.gzipKB > r.budgetKB);
-  if (over.length) throw new Error(over.map((r) => `${r.topic}: ${r.gzipKB.toFixed(2)} KB gz > ${r.budgetKB} KB (${r.engine})`).join('\n'));
+  if (over.length) throw new Error(over.map((r) => `${r.topic}${r.locale ? `/${r.locale}` : ''}: ${r.gzipKB.toFixed(2)} KB gz > ${r.budgetKB} KB (${r.engine})`).join('\n'));
 }
 
 const decode = (s: string) => s.replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&amp;', '&');
@@ -77,11 +79,19 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
   const moduleChunk = (suffix: string) => Object.entries(graph).find(([, c]) => c.modules.some((m) => m.endsWith(`/src/engines/${suffix}`)))?.[0];
   const gz = new Map([...code].map(([id, source]) => [id, gzipSync(source).length]));
   const slugs = topics?.length ? [...topics] : readdirSync(resolve(root, 'en/topics')).sort();
-  return slugs.map((topic) => {
-    const html = readFileSync(resolve(root, `en/topics/${topic}/index.html`), 'utf8');
+  return slugs.flatMap((topic) => ['en', 'zh'].map(locale => {
+    const html = readFileSync(resolve(root, `${locale}/topics/${topic}/index.html`), 'utf8');
     const engine = html.match(/data-engine="([^"]+)"/)?.[1];
     if (!engine || !(engine in BUDGET_KB)) throw new Error(`Missing engine for ${topic}`);
     const roots = new Set<string>();
+    // Existing plates show bilingual captions: both locales are first-frame dependencies.
+    const wordGroup = engine === 'space-scene' ? 'space' : engine === 'time-scene' ? 'time' : engine === 'math-scene' ? 'math' : null;
+    for (const wordsLocale of ['en', 'zh']) {
+      for (const suffix of [`/src/i18n/ui.${wordsLocale}.json`, ...(wordGroup ? [`/src/i18n/ui.${wordsLocale}.json?${wordGroup}`] : [])]) {
+        const words = Object.entries(graph).find(([, chunk]) => chunk.modules.some(m => m.endsWith(suffix)))?.[0];
+        if (words) roots.add(words);
+      }
+    }
     for (const match of html.matchAll(/(?:component-url|renderer-url|src)="([^"]+\.js(?:\?[^"]*)?)"/g)) roots.add(asset(decode(match[1]!)));
     for (const match of html.matchAll(/<link\b[^>]*rel="modulepreload"[^>]*href="([^"]+)"[^>]*>/g)) roots.add(asset(decode(match[1]!)));
     // Inline module scripts may have static imports too (e.g. service-worker registration).
@@ -89,6 +99,8 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
       for (const imp of match[1]!.matchAll(/(?:from\s*|import\s*)["']([^"']+\.js)["']/g)) roots.add(asset(imp[1]!));
     }
     const data = JSON.parse(readFileSync(resolve(root, `topics/${topic}/data.json`), 'utf8'));
+    const descriptor = moduleChunk(`${engine}/index.ts`);
+    if (descriptor) roots.add(descriptor);
     let entry = moduleChunk(`${engine}/View.tsx`) ?? engineEntries.get(engine);
     if (engine === 'time-scene') {
       const mode = html.match(/temporalMode&quot;:\[0,&quot;([^&]+)&quot;/)?.[1];
@@ -119,12 +131,12 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
       if (id) roots.add(id); // In an older/eager build it is already in the entry closure.
     }
     const files = staticClosure([...roots], graph);
-    return { topic, engine, gzipKB: files.reduce((sum, id) => {
+    return { topic, locale, engine, gzipKB: files.reduce((sum, id) => {
       const bytes = gz.get(id);
       if (bytes === undefined) throw new Error(`Missing built JS: ${id}`);
       return sum + bytes;
     }, 0) / 1024, budgetKB: BUDGET_KB[engine]!, files };
-  });
+  }));
 }
 
 function firstScreenModules(engine: string, data: any, html = ''): string[] {
@@ -135,6 +147,9 @@ function firstScreenModules(engine: string, data: any, html = ''): string[] {
     const stage = (name: string) => add(`stages/model3d/${name}.tsx`);
     const hud = (name: string) => add(`hud/${name}.tsx`);
     if (sim) {
+      add('lib/sim/sim-tools-runtime.ts');
+      if (sim.bind.some((b: any) => 'part' in b && b.fill)) add('lib/sim/part-fill-runtime.ts');
+      if ([...sim.controls, ...sim.outputs].some((field: any) => field.format === 'time')) add('lib/sim/time-text-runtime.ts');
       const model = ({ 'life-cycle': 'lifecycle', magnet: 'magnet-solver', table: 'table-solver' } as Record<string, string>)[sim.kind] ?? sim.kind;
       add(`lib/sim/${model}.ts`);
       add('explorer/TryIt.tsx');
@@ -189,6 +204,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const check = args.includes('--check');
   const topics = args.filter((arg) => arg !== '--check');
   const results = measureBudgets(dist, topics);
-  for (const r of results) console.log(`${r.topic.padEnd(30)} ${r.engine.padEnd(12)} ${r.gzipKB.toFixed(2).padStart(7)} KB gz / ${r.budgetKB} KB${r.gzipKB > r.budgetKB ? ' OVER' : ''}`);
+  for (const r of results) console.log(`${`${r.topic}/${r.locale}`.padEnd(34)} ${r.engine.padEnd(12)} ${r.gzipKB.toFixed(2).padStart(7)} KB gz / ${r.budgetKB} KB${r.gzipKB > r.budgetKB ? ' OVER' : ''}`);
   if (check) assertBudgets(results);
 }

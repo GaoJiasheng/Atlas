@@ -16,8 +16,7 @@ import type { CameraState, SceneState, UrlEngineFields } from './types';
 import { decodeCamera, encodeCamera } from './camera';
 import { formatTimeParam, parseTimeParam, type TimePoint } from '../../lib/time';
 import { isTheme } from '../../theme/theme';
-import { decodeOrbitTime } from '../space-scene/lib/sim/orbit-clock';
-import { decodeSimParam, encodeSimParam } from '../space-scene/lib/sim/controls';
+import { decodeOrbitTime, decodeSimParam, encodeSimParam } from './engine-url-fields';
 
 export type UrlState = Partial<SceneState & UrlEngineFields>;
 
