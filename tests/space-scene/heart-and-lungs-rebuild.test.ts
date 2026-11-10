@@ -120,7 +120,9 @@ describe('heart-and-lungs museum bench',()=>{
   expect(shipped.bin.subarray(0,original.bin.length).equals(original.bin)).toBe(true);
  });
  it('preserves teaching ids, flow parameters, gill routes, flap pivot and poses while refitting the inlet',()=>{
-  expect(file.parts.map(p=>p.id)).toEqual(partsFile.parse(baseline).parts.map(p=>p.id));
+  // The air sample was redrawn later as rows of ten (topic test 'the rows of ten'); every other id is unchanged.
+  const notAir=(p:{group?:string})=>p.group!=='air-sample';
+  expect(file.parts.filter(notAir).map(p=>p.id)).toEqual(partsFile.parse(baseline).parts.filter(notAir).map(p=>p.id));
   const priorFlows=partsFile.parse(baseline).flows;
   for(const flow of file.flows){
    const prior=priorFlows.find(f=>f.id===flow.id)!;
@@ -151,7 +153,7 @@ describe('heart-and-lungs museum bench',()=>{
  });
  it('leaves every accepted non-rebuild part and its tessellation unchanged',()=>{
   const prior=partsFile.parse(baseline);
-  for(const part of file.parts)if(![...ids,'fish-tank'].includes(part.id))expect(part).toEqual(prior.parts.find(p=>p.id===part.id));
+  for(const part of file.parts)if(![...ids,'fish-tank'].includes(part.id)&&part.group!=='air-sample')expect(part).toEqual(prior.parts.find(p=>p.id===part.id));
  });
  it('contains thin reflective surfaces with smooth normals and no photograph textures',()=>{
   for(const id of ids){const node=shipped.json.nodes.find((n:any)=>n.name===id),p=shipped.json.meshes[node.mesh].primitives[0];expect(p.attributes.NORMAL).toBeDefined();expect(p.attributes.COLOR_0).toBeDefined();const m=shipped.json.materials[p.material];expect(m.extras.atlasSurface).toBe(true);expect(m.pbrMetallicRoughness.baseColorTexture).toBeUndefined();}

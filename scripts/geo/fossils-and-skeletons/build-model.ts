@@ -9,10 +9,13 @@ import { buildSauropods } from './build-sauropods';
 import { bakeMuseum } from './bake-museum';
 import { partBounds } from '../../../src/engines/space-scene/lib/parts';
 import { partsFile, type Part, type Primitive } from '../../../src/engines/space-scene/schema';
+import { flightFeather } from './feather';
 
 type V = [number, number, number];
 const bi = (en: string, zh: string) => ({ en, zh });
 const bone = 'token:bone';
+// Mineralised fossil bone: a brown a clear step darker than the ivory paper (living-bone and museum parts keep `bone`).
+const fossilBone = 'token:mat-crust';
 const parts: Part[] = [];
 function sweep(at: V, path: V[], radius: number | number[], tint = bone, options = {}): Primitive {
   return {kind:'sweep', at, path, radius, color:'tissue', tint, radial:48, segments:24, caps:'round', ...options} as Primitive;
@@ -33,7 +36,7 @@ function add(id:string,group:string,geometry:Primitive[],options={}): Part {
   const p={id,group,name,summary,detail,primitive:geometry[0],...(geometry.length>1?{extra:geometry.slice(1)}:{}),explode:{dir:[0,1,0],dist:0},connects:[],castShadow:false,clip:true,...labels,...options} as Part;
   parts.push(p); return p;
 }
-function sampleBone(at:V,length=1.1,tint=bone): Primitive {
+function sampleBone(at:V,length=1.1,tint=fossilBone): Primitive {
   // An asymmetric long-bone fragment: articular end, tapered shaft, broken
   // distal wall. Hollow ends show cortex rather than a cartoon dog bone.
   return sweep(at,[[-length*.48,0,0],[-length*.41,.025,0],[-length*.28,.01,0],[-length*.05,-.025,0],[length*.25,-.02,0],[length*.48,.015,0]],[length*.105,length*.145,length*.09,length*.065,length*.057,length*.07],tint,{section:{flat:.74},up:[0,0,1],hollow:length*.018,caps:'flat'});
@@ -64,7 +67,7 @@ add('sediment-high','burial',[box([0,1.58,0],[2.8,.6,1.6],'token:neutral')],{she
 add('buried-bone','burial',[sampleBone([0,.96,.22],1.75)]);
 const poreHoles=[ellipse(-.71,.02,.19,.16,11),ellipse(-.27,.06,.15,.19,12),ellipse(.12,.06,.17,.15,10),ellipse(.53,.03,.17,.17,11),ellipse(-.42,-.29,.12,.10,10),ellipse(.37,-.27,.14,.10,10)];
 const poreOutline=[[-1.03,-.18],[-.93,-.44],[-.70,-.48],[-.49,-.35],[.40,-.35],[.70,-.48],[.94,-.40],[1.02,-.17],[.98,.17],[.78,.43],[.54,.36],[-.51,.37],[-.77,.43],[-.98,.26]];
-add('pore-shell','burial',[extrude([0,1,.60],poreOutline,.25,poreHoles),sweep([0,1,.40],[[-.90,-.26,0],[-.42,-.30,0],[.42,-.3,0],[.88,-.26,0]],[.14,.12,.12,.14],bone)],{clip:true});
+add('pore-shell','burial',[extrude([0,1,.60],poreOutline,.25,poreHoles),sweep([0,1,.40],[[-.90,-.26,0],[-.42,-.30,0],[.42,-.3,0],[.88,-.26,0]],[.14,.12,.12,.14],bone)].map(p=>({...p,tint:fossilBone})),{clip:true});
 add('pore-minerals','burial',[3,0,1,2].map(i=>poreHoles[i]!).map(h=>extrude([0,1,.61],h.map(([x,y])=>[x!*.92,y!*.92]),.19,[],'token:cold')));
 
 add('ash-low','age-section',[box([0,.3,0],[2.8,.15,1.6],'token:ink-2')]);
@@ -127,7 +130,7 @@ const wingGeo=bird.wing;
 add('myna-wing','living-museum',wingGeo);
 const birdLeg=bird.legs;
 add('myna-leg','living-museum',birdLeg);
-const featherGeo=bird.feather;
+const featherGeo=flightFeather() as Primitive[];
 add('myna-feather','living-museum',featherGeo);
 
 for(const [id,cx,z,title,zh]of [['prince-study',-.3,-2.6,'Prince','Prince'],['apollonia-study',0,0,'Apollonia','Apollonia'],['twinky-study',.3,2.6,'Twinky','Twinky']]as const){

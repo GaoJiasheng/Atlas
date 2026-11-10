@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import { partSchema, partsFileBase } from '../../../src/engines/space-scene/schema';
 import { CatmullRomCurve3, Vector3 } from 'three';
 import { ellipticLeaf } from '../kits/tree';
+import { bacteriaInset } from './bacteria-inset';
 import { add, blade, box, ellipsoid, r3, sweep, wing, type Prim, type V3 } from '../living-things/kit';
 
 const bi = (en: string, zh: string) => ({ en, zh });
@@ -217,7 +218,7 @@ export function buildParts() {
   addPart('giant-mudskipper',bi('Giant mudskipper','弹涂鱼'),'animals',bi("Moves across mud with fleshy pectoral fins.","用肉质胸鳍在泥面移动。"),bi("Giant mudskippers are fish. Their modified gill chambers and skin help them breathe out of water. Fleshy pectoral fins help them move over mud. [S4]\n\nGeneral guides list crabs as food. Local diet samples differ, so the crab-to-fish arrows show possible feeding relationships. [S4, S13, S31]","弹涂鱼是鱼。特化的鳃腔和皮肤帮助它离水呼吸，肉质胸鳍帮助它在泥面移动。[S4]\n\n一般指南把蟹列为食物，当地食物样本却有差异。因此，蟹到鱼的箭头表示可能的取食关系。[S4, S13, S31]"),fishModel([.30,.031,.145]));
   addPart('heron',bi('Heron','鹭'),'animals',bi("Catches food with a long neck and bill.","借助长颈和长喙捕食。"),bi("Herons have long necks and bills. They eat fish and crustaceans. NParks lists herons among the giant mudskipper’s predators. [S4, S29]\n\nThe two-legged bird represents herons as a group. [S30]","鹭有长颈和长喙，吃鱼和甲壳类。NParks 把鹭列为弹涂鱼的捕食者。[S4, S29]\n\n图中这只两腿的鸟代表鹭类。[S30]"),heronModel());
   addPart('small-fish',bi('Other small fish','其他小鱼'),'animals',bi("Provides another possible food for larger animals.","为较大的动物提供另一种可能的食物。"),bi("Herons and giant mudskippers can eat small fish. Real animals may have more food choices than a short food web shows. [S4, S29]\n\nThis small fish lies outside the food-web calculation. [S30]","鹭和弹涂鱼都可能吃小鱼。真实动物的食物选择可能比简短食物网上显示的更多。[S4, S29]\n\n这条小鱼没有加入食物网计算。[S30]"),fishModel([.32,-.074,.34],true));
-  addPart('bacteria-inset',bi('Bacteria schematic','细菌示意'),'closeups',bi("Breaks down leaf material and obtains energy.","分解叶片物质并获得能量。"),bi("Bacteria help break down mangrove leaf litter. They obtain energy from the organic material as it decomposes. [S10]\n\nThis close-up uses enlarged shapes to make them visible. [S30]","细菌参与红树林落叶的分解，从分解中的有机物获得能量。[S10]\n\n近景把它们放大，方便观察。[S30]"),{primitive:oval([1.02,.21,-.06],.026,[1.8,.75,.75],{color:'tissue',tint:ink}),extra:[oval([1.07,.25,-.05],.024,[.8,1.7,.8],{color:'tissue',tint:ink}),oval([.98,.27,-.04],.022,[1.7,.8,.8],{color:'tissue',tint:ink})]});
+  addPart('bacteria-inset',bi('Bacteria, magnified','细菌（放大）'),'closeups',bi("Breaks down leaf material and obtains energy.","分解叶片物质并获得能量。"),bi("Bacteria help break down mangrove leaf litter. They obtain energy from the organic material as it decomposes. [S10]\n\nThis magnifier circle shows them on a piece of leaf, drawn far larger than life, because real bacteria are too small to see without a microscope. Their shapes and numbers are a diagram. [S30]","细菌参与红树林落叶的分解，从分解中的有机物获得能量。[S10]\n\n这个放大圆圈画的是叶片上的细菌，比实物大得多，因为真实的细菌不用显微镜是看不见的。形状和数量只是示意。[S30]"),bacteriaInset() as never);
   const fungalModels: Prim[]=[];
   const hypha=(start:V3,angle:number,length:number,depth:number)=>{
     const end:V3=[start[0]+Math.cos(angle)*length,start[1]+Math.sin(angle)*length,start[2]-.002];

@@ -107,8 +107,10 @@ export const SIM = {
   bind: [
     { control: 'phase', part: ['lung-right', 'lung-left', 'diaphragm', 'ribcage'], pose: { in: 'breathe-in', out: null } },
     { control: 'phase', animation: BREATHING, enabled: { eq: 'auto' } },
-    { output: 'n2', part: 'n2-balls', count: true },
-    { output: 'o2', part: 'o2-balls', count: true },
+    // Nitrogen is 78 in both samples and the first ten oxygen balls are always there, so those rows are static.
+    // The second oxygen row holds 10 balls at 21 % and 6 at 16 %: (21 - 8.5) / 1.25 = 10, (16 - 8.5) / 1.25 = 6.
+    { output: 'o2', part: 'o2-balls-2', count: { per: 1.25, minus: 8.5 } },
+    { output: 'o2', part: 'o2-balls-3', count: { per: 1, minus: 20 } },
     { output: 'co2', part: 'co2-balls', count: true },
     { output: 'h2o', part: 'h2o-balls', count: true },
     ...ROUND_SEGMENTS.map((flows, j) => ({ control: 'stop', flow: [...flows], visible: { in: [0, j + 1, j === 5 ? 1 : j + 2] } })),

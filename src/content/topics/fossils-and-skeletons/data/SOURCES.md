@@ -121,3 +121,8 @@ references do not turn the generic studies into measured specimen models.
 - The dedicated `fossil` token supplies warm brown-grey on paper and a modest
   warm-brown lift on cinema. Colour does not identify original versus cast
   material. All teaching claims, EN/ZH copy and specimen caveats are unchanged.
+
+## Feather and fossil bone (2026-11-10)
+
+- The comparison feather (`myna-feather`) is rebuilt as an original procedural flight feather: an asymmetric vane, narrow on the leading side, with 64 barbs at about 40 degrees to the shaft, three splits between barbs, a rounded tip, and a pale shaft that tapers to the tip and runs on as a bare quill. No reference image was traced. It stays a generic modern feather, not a named specimen [S10, S90].
+- Fossil bone parts (`bone-sample`, `buried-bone`, `pore-shell`, the bone in `fossil-bed`) use the `mat-crust` mineral brown instead of the living-bone ivory, so they hold their outline on the paper sheet. The living bird, museum mounts and skeleton keep `bone`.

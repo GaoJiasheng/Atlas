@@ -34,8 +34,8 @@ describe('eyes-and-ears: anatomical and publishing contract', () => {
     expect(yaml(readFileSync(join(DIR, 'topic.yaml'), 'utf8'))).toMatchObject({ id: 'eyes-and-ears', status: 'published', subject: 'biology', engine: 'space-scene' });
     expect(chapters).toHaveLength(8);
     expect(chapters.map(c => c.state.beats.length)).toEqual(Array(8).fill(5));
-    expect(file.parts.filter(p => !p.context)).toHaveLength(26);
-    expect(file.groups.map(g => g.id)).toEqual([...EYE, ...EAR, 'study-bench', 'nerve-signals']);
+    expect(file.parts.filter(p => !p.context)).toHaveLength(27);
+    expect(file.groups.map(g => g.id)).toEqual([...EYE, ...EAR, 'study-bench', 'myopia-diagram', 'nerve-signals']);
     expect(sensesSourceIssues(sim.senses!, new Set(sources.map(s => s.id)))).toEqual([]);
     expect(sources.find(s => s.id === 'S31')?.design).toBe(true);
   });

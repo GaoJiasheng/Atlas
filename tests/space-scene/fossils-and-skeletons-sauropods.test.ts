@@ -63,9 +63,13 @@ describe('chapter 07 sauropod osteology',()=>{
   for(const p of preserved.parts){
    if(p.id.endsWith('-study'))delete p.material;
    if(p.id==='study-plinth')for(const g of [p.primitive,...p.extra])g.at[0]=0;
+   // Later authorised changes: the comparison feather was remodelled as a flight feather, and
+   // fossil bone is drawn in a mineral brown instead of the living-bone ivory.
+   if(p.id==='myna-feather'){delete p.primitive;delete p.extra;}
+   if(['bone-sample','buried-bone','pore-shell','fossil-bed'].includes(p.id))for(const g of [p.primitive,...(p.extra??[])])if(g.tint==='token:mat-crust')g.tint='token:bone';
   }
   // Fingerprint of the accepted input with only the authorised fields masked.
-  expect(createHash('sha256').update(JSON.stringify(preserved)).digest('hex')).toBe('b225abc877661ad3a37ef87ff7dc4ffad5b05830a316583296c10ed6f92afd91');
+  expect(createHash('sha256').update(JSON.stringify(preserved)).digest('hex')).toBe('c89ad494e65375646b21dea12350c52d11602ba253a9b8020e404bf70715ab1a');
  });
  it('preserves every theropod index, position, normal, UV and world transform exactly',async()=>{
   await MeshoptDecoder.ready;

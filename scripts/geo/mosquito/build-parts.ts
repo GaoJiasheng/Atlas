@@ -913,7 +913,7 @@ parts.push(
         [DISH_IN, RIM - 0.03],
         [DISH_IN, FLOOR],
         [0, FLOOR],
-      ], GLASS, { segments: 128 }),
+      ], { ...GLASS, tint: 'token:ink-3' }, { segments: 128 }),
       // The damp band on the inside of the wall just above the water, where the eggs are laid.
       lathe(WORLD, DISH, [
         [DISH_IN - 0.003, SURFACE + 0.004],
@@ -932,8 +932,8 @@ parts.push(
       [DISH_IN - 0.012, SURFACE - 0.002],
       [DISH_IN - 0.05, SURFACE],
       [0, SURFACE],
-    ], WATER, { segments: 128 }),
-    torus(WORLD, [DISH[0], SURFACE - 0.004, DISH[2]], DISH_IN - 0.022, 0.016, [0, 1, 0], WATER),
+    ], { ...WATER, tint: 'token:cold' }, { segments: 128 }),
+    torus(WORLD, [DISH[0], SURFACE - 0.004, DISH[2]], DISH_IN - 0.022, 0.016, [0, 1, 0], { ...WATER, tint: 'token:cold' }),
   ]),
 );
 // Eggs: twelve, one by one on the wall just above the waterline, round 9 o'clock (S12 CDC; 0.63 mm long, S22).
@@ -1181,7 +1181,8 @@ parts.push(
   ], { context: true }),
 );
 // Context: the bench, the home corner's floor, wall and plinth.
-parts.push(part('bench', undefined, [box([1.75, -0.1, -0.2], [12.6, 0.2, 9.8], { color: 'wood', tint: '#d6bf96' }, 0.03)], { context: true }));
+// A mid-brown bench: the white leg bands and the pale glass dish need a ground darker than themselves in both themes.
+parts.push(part('bench', undefined, [box([1.75, -0.1, -0.2], [12.6, 0.2, 9.8], { color: 'wood', tint: 'token:mat-wood-brown' }, 0.03)], { context: true }));
 parts.push(
   part('home-floor', 'home', [
     box([HOME[0], 0.01, HOME[2]], [2.2, 0.02, 1.6], { color: 'enamel', tint: '#cfcbc2' }, 0.004),
@@ -1191,8 +1192,8 @@ parts.push(
 );
 parts.push(
   part('home-wall', 'home', [
-    box([HOME[0], 1.22, HOME[2] - 0.84], [2.2, 2.44, 0.08], { color: 'enamel' }, 0.006),
-    box([HOME[0], 2.46, HOME[2] - 0.66], [2.3, 0.06, 0.44], { color: 'enamel', tint: '#bdb6a8' }, 0.006),
+    box([HOME[0], 1.22, HOME[2] - 0.84], [2.2, 2.44, 0.08], { color: 'enamel', tint: 'token:bone' }, 0.006),
+    box([HOME[0], 2.46, HOME[2] - 0.66], [2.3, 0.06, 0.44], { color: 'enamel', tint: 'token:mat-rock' }, 0.006),
   ], { context: true, castShadow: true }),
 );
 parts.push(part('home-plinth', 'home', [box([HOME[0], -0.07, HOME[2]], [2.5, 0.14, 1.9], { color: 'wood', tint: '#d6bf96' }, 0.02)], { context: true }));

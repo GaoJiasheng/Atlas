@@ -4,9 +4,9 @@
  * at chest-to-waist height. Not to scale with each other or with the body
  * (topic.yaml `note`). Scene metres, +Y up, +Z towards the viewer.
  *
- *   - a jar of air and a rack of four rows of balls (one ball = 1 per cent):
- *     nitrogen, oxygen, carbon dioxide, water vapour, top to bottom, each row
- *     starting on the same vertical line, so the rows read as a bar chart;
+ *   - a jar of air and a rack of balls in rows of ten (one ball = 1 per cent):
+ *     nitrogen in the left column, then oxygen, carbon dioxide and water vapour
+ *     in the right column, so the balls can be counted in tens;
  *   - a fish in a glass tank, its left gill cover hinged at the front edge so a
  *     pose can lift it off four gill arches with rows of filaments;
  *   - a potted plant (the living-things chilli seedling, scaled up) with the two
@@ -28,7 +28,6 @@ export const TABLE_TOP = 0.115;
 const FLOOR = -1.018;
 const TABLE = { x0: 0.44, x1: 1.36, z0: -0.24, z1: 0.12, t: 0.03 };
 
-const WOOD_LIGHT = 'token:bone';
 
 export function sideTable(): { primitive: Prim; extra: Prim[] } {
   const cx = (TABLE.x0 + TABLE.x1) / 2;
@@ -46,41 +45,59 @@ export function sideTable(): { primitive: Prim; extra: Prim[] } {
 
 /* ------------------------------------------------------------------ air */
 
-/** One ball = 1 per cent. Rows start at the same x and run along +X. */
-export const BALL = { r: 0.0023, spacing: 0.0052, x0: 0.495 };
-export const ROWS = [
-  { id: 'n2-balls', count: 80, y: TABLE_TOP + 0.083, tint: 'token:air' },
-  { id: 'o2-balls', count: 25, y: TABLE_TOP + 0.064, tint: 'token:oxygen' },
-  { id: 'co2-balls', count: 6, y: TABLE_TOP + 0.045, tint: 'token:carbon-dioxide' },
-  { id: 'h2o-balls', count: 8, y: TABLE_TOP + 0.026, tint: 'token:cold' },
-] as const;
-const RACK_Z = -0.03;
-const BALL_Z = RACK_Z + 0.0105;
+/**
+ * One ball = 1 per cent, in rows of ten so the tens can be counted. Two columns on one board:
+ * nitrogen on the left (seven full rows and eight), oxygen, carbon dioxide and water vapour
+ * on the right. Row 0 is the top row.
+ */
+export const BALL = { r: 0.0085, spacing: 0.02 };
+// A low ball, 140 triangles: 120 of them must keep the whole scene inside its 350k-triangle budget.
+const BALL_PROFILE = Array.from({ length: 6 }, (_, i) => {
+  const a = -Math.PI / 2 + (Math.PI * i) / 5;
+  return [i === 0 || i === 5 ? 0 : Math.cos(a) * BALL.r, Math.sin(a) * BALL.r];
+});
+const RACK_X0 = 0.56;
+const RACK_MARGIN = 0.014;
+const COLUMN_GAP = 0.03;
+const COLUMN_X = [RACK_X0 + RACK_MARGIN + BALL.r, RACK_X0 + RACK_MARGIN + BALL.r + 10 * BALL.spacing + COLUMN_GAP] as const;
+const RACK_LEN = 2 * RACK_MARGIN + 2 * BALL.r + 19 * BALL.spacing + COLUMN_GAP;
+const ROW_Y = (row: number) => TABLE_TOP + 0.03 + (7 - row) * BALL.spacing;
+const RACK_TOP = ROW_Y(0) + BALL.r + 0.012;
+// Behind the fish tank (its back pane is at z = -0.07), so the board can run past the start of the tank.
+const RACK_Z = -0.15;
+const BALL_Z = RACK_Z + 0.012;
 
-/** A ball row: the first ball at BALL.x0, `repeat` centred on `at` (the engine centres a row on its `at`). */
+/** Every row of ten: `gas` is the part whose text it shares; the first row of a gas carries the gas's own id. */
+export const ROWS = [
+  ...[10, 10, 10, 10, 10, 10, 10, 8].map((count, i) => ({ id: i ? `n2-balls-${i + 1}` : 'n2-balls', gas: 'n2-balls', count, column: 0, row: i, tint: 'token:air' })),
+  ...[10, 10, 2].map((count, i) => ({ id: i ? `o2-balls-${i + 1}` : 'o2-balls', gas: 'o2-balls', count, column: 1, row: i, tint: 'token:oxygen' })),
+  { id: 'co2-balls', gas: 'co2-balls', count: 10, column: 1, row: 4, tint: 'token:carbon-dioxide' },
+  { id: 'h2o-balls', gas: 'h2o-balls', count: 10, column: 1, row: 6, tint: 'token:cold' },
+];
+
+/** A row of balls: the first ball at the column's start, `repeat` centred on `at` (the engine centres a row on its `at`). */
 export function ballRow(row: (typeof ROWS)[number]): { primitive: Prim; repeat: { count: number; axis: V3; spacing: number } } {
-  const at: V3 = [BALL.x0 + ((row.count - 1) / 2) * BALL.spacing, row.y, BALL_Z];
+  const at: V3 = [COLUMN_X[row.column]! + ((row.count - 1) / 2) * BALL.spacing, ROW_Y(row.row), BALL_Z];
   return {
-    primitive: sphere(at, BALL.r, 'plastic', { tint: row.tint }),
+    primitive: lathe(at, BALL_PROFILE, 'plastic', { segments: 14, tint: row.tint }),
     repeat: { count: row.count, axis: [1, 0, 0], spacing: BALL.spacing },
   };
 }
 
-/** The rack the rows sit on: an upright board with a ledge under each row and a blank tag at the start of each. */
+/** The rack the rows sit on: an upright board with a ten-ball ledge under each row, so an empty place still shows. */
 export function ballRack(): { primitive: Prim; extra: Prim[] } {
-  const len = 80 * BALL.spacing + 0.03;
-  const cx = BALL.x0 - 0.018 + len / 2;
-  const board = bevel([cx, TABLE_TOP + 0.05, RACK_Z], [len, 0.09, 0.006], 0.0015, 'wood');
-  const extra: Prim[] = [bevel([cx, TABLE_TOP + 0.004, RACK_Z + 0.012], [len, 0.008, 0.036], 0.002, 'wood')];
+  const cx = RACK_X0 + RACK_LEN / 2;
+  const board = bevel([cx, (TABLE_TOP + RACK_TOP) / 2, RACK_Z], [RACK_LEN, RACK_TOP - TABLE_TOP, 0.006], 0.0015, 'wood');
+  const extra: Prim[] = [bevel([cx, TABLE_TOP + 0.004, RACK_Z + 0.012], [RACK_LEN, 0.008, 0.036], 0.002, 'wood')];
   for (const row of ROWS) {
-    extra.push(box([cx, row.y - BALL.r - 0.0007, BALL_Z - 0.001], [len - 0.004, 0.0014, 0.007], 'wood'));
-    extra.push(bevel([BALL.x0 - 0.012, row.y, BALL_Z], [0.01, 0.009, 0.004], 0.001, 'wood', { tint: WOOD_LIGHT }));
+    const x = COLUMN_X[row.column]! + 4.5 * BALL.spacing;
+    extra.push(box([x, ROW_Y(row.row) - BALL.r - 0.0007, RACK_Z + 0.01], [10 * BALL.spacing, 0.0014, 0.014], 'wood'));
   }
   return { primitive: board, extra };
 }
 
-/** The jar of air: a glass jar with a lid, behind the start of the rack. */
-export const JAR_AT: V3 = [0.53, TABLE_TOP + 0.085, -0.15];
+/** The jar of air: a grey-tinted glass jar with a lid, beside the rack, so its outline holds on the paper sheet. */
+export const JAR_AT: V3 = [0.5, TABLE_TOP + 0.085, -0.13];
 export function airJar(): { primitive: Prim; extra: Prim[] } {
   // A thin-walled glass jar (a closed profile: outside up, inside down), open at the neck under the lid.
   const R = 0.045;
@@ -104,7 +121,7 @@ export function airJar(): { primitive: Prim; extra: Prim[] } {
       [0, wall],
     ],
     'glass',
-    { segments: 40 },
+    { segments: 40, tint: 'token:ink-3' },
   );
   return {
     primitive: jar,

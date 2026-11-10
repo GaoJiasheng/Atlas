@@ -40,8 +40,9 @@ test.describe('heart-and-lungs', () => {
     await open(page, 'ch=what-changes-in-the-air&sim=sample.out');
     const o = (await sim(page)).outputs;
     expect([o.n2, o.o2, o.co2, o.h2o]).toEqual([78, 16, 4, 6]);
-    await expect.poll(() => copies(page, 'o2-balls')).toBe(16);
-    expect(await copies(page, 'n2-balls')).toBe(78);
+    // Oxygen is 10 static balls, then the second row of ten: 16 % leaves 6 on it and none on the third.
+    await expect.poll(() => copies(page, 'o2-balls-2')).toBe(6);
+    expect(await copies(page, 'o2-balls-3')).toBe(0);
     expect(await copies(page, 'co2-balls')).toBe(4);
     expect(await copies(page, 'h2o-balls')).toBe(6);
     await expect(readout(page, 'co2')).toHaveText('4');
@@ -60,7 +61,8 @@ test.describe('heart-and-lungs', () => {
     await expect.poll(async () => (await sim(page)).values.sample).toBe('in');
     await expect(readout(page, 'co2')).toHaveText('0.04');
     await expect(readout(page, 'o2')).toHaveText('21');
-    await expect.poll(() => copies(page, 'o2-balls')).toBe(21);
+    await expect.poll(() => copies(page, 'o2-balls-2')).toBe(10);
+    expect(await copies(page, 'o2-balls-3')).toBe(1);
     expect(await copies(page, 'co2-balls')).toBe(0);
     await expect(page.locator('.space-try__sim[data-tag="typical"] .atlas-src')).toHaveText(['S3', 'S4']);
   });

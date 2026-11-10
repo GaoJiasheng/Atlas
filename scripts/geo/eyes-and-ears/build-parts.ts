@@ -9,6 +9,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { polishEar, writeEarModel } from './sculpt-ear';
 import { polishEye, createEyeMeshes } from './polish-eye';
+import { myopiaRays } from './myopia-rays';
 import { partsFile } from '../../../src/engines/space-scene/schema';
 import { partPieces } from '../../../src/engines/space-scene/stages/model3d/geometry';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -261,6 +262,12 @@ add('signal-marker','ear-receiver','Signal','信号',
   'Sensory structures turn light or movement into electrical signals. A nerve carries these signals, rather than incoming light or outside air. [S2, S7]\n\nThis marker sits beside the enlarged hair cells. Moving marks show the signal route, with sizes and speeds chosen so you can follow them. [S31]',
   '感受结构把光或运动转成电信号。神经传递这些信号，而非入射光或外界空气。[S2, S7]\n\n标记位于放大的毛细胞旁。移动标记显示信号路线，大小和速度以容易跟随为准。[S31]',
   sphere(win(.74,-.24),.045,[1,1,1],'tissue','token:ink-2'),{clip:false,connects:['hair-patch','auditory-nerve']});
+const myopia = myopiaRays();
+add('myopia-rays','myopia-diagram','Focus in myopia','近视的焦点',
+  'Distant light focuses in front of the retina.','远处来的光聚在视网膜前。',
+  'In myopia, light from a distant object comes to a focus in front of the retina. By the time it reaches the retina it has spread out again, so the image there is blurred. [S5]\n\nThe lines are a simplified drawing on this eye section and are not measured from a real eye. The eye is the same model as elsewhere and is not redrawn to show the shape of a myopic eye. [S31]',
+  '近视时，远处物体来的光聚在视网膜前。光到达视网膜时又散开了，所以那里的像是模糊的。[S5]\n\n这些线是画在眼部剖面上的简化示意，不是从真实眼睛测得的。眼睛仍是其他地方用的同一个模型，没有改画成近视眼的形状。[S31]',
+  myopia.primitive,{extra:myopia.extra,clip:false});
 add('wave-reference','study-bench','Particle reference','粒子参照',
   'The rest mark shows that a medium particle moves locally back and forth.','静止位置标记显示介质粒子只在附近来回运动。',
   'In a longitudinal sound wave, particles move back and forth around their rest positions while the wave travels. A particle does not travel from the source to the ear. [S9]\n\nThe fixed tick marks the highlighted particle’s rest position. The silent model uses a fixed slowdown and relative movement size. It does not measure sound level or test hearing. [S31]',
@@ -360,6 +367,7 @@ const data = {
     {id:'ear-transfer',name:bi('Eardrum and bones','鼓膜与听骨'),color:'token:ink-2'},
     {id:'ear-receiver',name:bi('Cochlea and nerve','耳蜗与神经'),color:'token:ink-2'},
     {id:'study-bench',name:bi('Model studies','示意实验'),color:'token:ink-2',card:false},
+    {id:'myopia-diagram',name:bi('Myopia diagram','近视示意'),color:'token:ink-2',card:false},
     {id:'nerve-signals',name:bi('Nerve signals','神经信号'),color:'token:en-electrical'},
   ],
   flows:[

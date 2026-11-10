@@ -57,7 +57,9 @@ const at = (ch: string, beat: number) => {
 describe('heart-and-lungs: the table', () => {
   it('is the author template, cell by cell (docs/40 §2.9)', () => {
     expect(file.sim.table).toEqual(JSON.parse(JSON.stringify(HEART_LUNGS_SIM.table)));
-    expect(file.sim.bind).toEqual(JSON.parse(JSON.stringify(HEART_LUNGS_SIM.bind)));
+    // The ball bindings differ from the template: the rack is drawn in rows of ten (checked below).
+    const notBalls = (b: { part?: unknown }) => !(typeof b.part === 'string' && /-balls/.test(b.part));
+    expect(file.sim.bind.filter(notBalls)).toEqual(JSON.parse(JSON.stringify(HEART_LUNGS_SIM.bind)).filter(notBalls));
     expect(file.sim.controls.map((c: { id: string }) => c.id)).toEqual(HEART_LUNGS_SIM.controls.map((c) => c.id));
     expect(file.sim.outputs.map((o: { id: string }) => o.id)).toEqual(HEART_LUNGS_SIM.outputs.map((o) => o.id));
   });
@@ -77,17 +79,20 @@ describe('heart-and-lungs: the table', () => {
     expect(sources.filter((s) => s.design).map((s) => s.id)).toEqual(['S37']);
   });
 
-  it('the rack has a ball for every per cent the table can ask for', () => {
-    for (const [id, out] of [['n2-balls', 'n2'], ['o2-balls', 'o2'], ['co2-balls', 'co2'], ['h2o-balls', 'h2o']] as const) {
-      const max = Math.max(...['in', 'out'].map((sample) => Math.round(Number(evaluate({ sample })[out]))));
-      expect(parts.find((p) => p.id === id)!.repeat!.count, id).toBeGreaterThanOrEqual(max);
-    }
-    const shown = (sample: string) => {
+  it('the rows of ten show the balls the table asks for, in tens', () => {
+    const copies = (id: string) => parts.find((p) => p.id === id)!.repeat!.count;
+    const rows = (gas: string) => parts.filter((p) => p.id === gas || p.id.startsWith(`${gas}-`));
+    for (const gas of ['n2-balls', 'o2-balls', 'co2-balls', 'h2o-balls']) for (const row of rows(gas)) expect(row.repeat!.count, row.id).toBeLessThanOrEqual(10);
+    // Nitrogen and the first oxygen row have no binding: every ball is always on the rack.
+    expect(rows('n2-balls').reduce((n, p) => n + p.repeat!.count, 0)).toBe(78);
+    expect(copies('o2-balls')).toBe(10);
+    const total = (sample: string) => {
       const fx = simEffects(sim, resolveSimValues(sim, { sample }), evaluate({ sample }) as never);
-      return ['n2-balls', 'o2-balls', 'co2-balls', 'h2o-balls'].map((p) => fx.count.get(p));
+      const n = (id: string) => fx.count.get(id) ?? 0;
+      return { o2: copies('o2-balls') + Math.min(n('o2-balls-2'), copies('o2-balls-2')) + Math.min(n('o2-balls-3'), copies('o2-balls-3')), co2: n('co2-balls'), h2o: n('h2o-balls') };
     };
-    expect(shown('in')).toEqual([78, 21, 0, 1]);
-    expect(shown('out')).toEqual([78, 16, 4, 6]);
+    expect(total('in')).toEqual({ o2: 21, co2: 0, h2o: 1 });
+    expect(total('out')).toEqual({ o2: 16, co2: 4, h2o: 6 });
   });
 });
 

@@ -222,8 +222,8 @@ export const PART_TEXT: Record<string, PartText> = {
     short: t('Jar of air', '空气瓶'),
     summary: t('A model: the gases of air, one ball for each per cent.', '模型：空气里的气体，每个小球代表百分之一。'),
     detail: t(
-      'A teaching model, not to scale. The rack in front of the jar shows what the air in it is made of, one ball for each per cent by volume, in four rows from the top: nitrogen, oxygen, carbon dioxide and water vapour [S37]. Switch the sample on the try-it card in chapter 2 to see the air breathed out.\n\nThe numbers are typical values from the sources, rounded to whole per cents [S3, S5, S6, S8]. Argon and the other gases, together about 1 per cent of air, are not drawn [S3].',
-      '教学模型，不按比例。瓶前的托架显示瓶里的空气由什么组成，按体积每个小球代表百分之一，从上到下四排：氮气、氧气、二氧化碳、水蒸气 [S37]。在第 2 章的试一试卡片上换样本，就能看到呼出的气体。\n\n这些数是来源给出的典型值，取到整数百分比 [S3, S5, S6, S8]。氩等其他气体合起来约占空气的百分之一，没有画 [S3]。',
+      'A teaching model, not to scale. The rack beside the jar shows what the air in it is made of, one ball for each per cent by volume, in rows of ten: nitrogen on the left; oxygen, carbon dioxide and water vapour on the right [S37]. Switch the sample on the try-it card in chapter 2 to see the air breathed out.\n\nThe numbers are typical values from the sources, rounded to whole per cents [S3, S5, S6, S8]. Argon and the other gases, together about 1 per cent of air, are not drawn [S3].',
+      '教学模型，不按比例。瓶旁的托架显示瓶里的空气由什么组成，按体积每个小球代表百分之一，十个一排：左边是氮气，右边是氧气、二氧化碳和水蒸气 [S37]。在第 2 章的试一试卡片上换样本，就能看到呼出的气体。\n\n这些数是来源给出的典型值，取到整数百分比 [S3, S5, S6, S8]。氩等其他气体合起来约占空气的百分之一，没有画 [S3]。',
     ),
   },
   'n2-balls': {
@@ -308,8 +308,8 @@ export const PART_TEXT: Record<string, PartText> = {
   },
   'ball-rack': {
     name: t('Ball rack', '小球托架'),
-    summary: t('Holds the rows of balls, one row for each gas.', '托着一排排小球，每种气体一排。'),
-    detail: t('Each row starts on the same line, so the length of a row shows the per cent [S37].', '每一排都从同一条线开始，所以一排有多长，就表示占百分之几 [S37]。'),
+    summary: t('Holds the balls in rows of ten.', '托着小球，十个一排。'),
+    detail: t('Each full row is ten balls, so you can count the per cent in tens. An empty place on a row is a ball that sample does not have [S37].', '每满一排是十个小球，所以可以十个十个地数出百分之几。排上空着的位置，表示这个样本没有那个小球 [S37]。'),
   },
   'fish-tank': {
     name: t('Fish tank', '鱼缸'),

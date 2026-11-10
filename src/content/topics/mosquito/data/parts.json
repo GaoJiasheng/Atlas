@@ -6119,7 +6119,8 @@
      -0.4
     ],
     "color": "glass",
-    "segments": 128
+    "segments": 128,
+    "tint": "token:ink-3"
    },
    "extra": [
     {
@@ -6191,7 +6192,7 @@
      -0.4
     ],
     "color": "glass",
-    "tint": "#7fa7ad",
+    "tint": "token:cold",
     "segments": 128
    },
    "extra": [
@@ -6207,7 +6208,7 @@
       -0.4
      ],
      "color": "glass",
-     "tint": "#7fa7ad",
+     "tint": "token:cold",
      "rotation": [
       -90,
       0,
@@ -19135,7 +19136,7 @@
      -0.2
     ],
     "color": "wood",
-    "tint": "#d6bf96"
+    "tint": "token:mat-wood-brown"
    },
    "context": true
   },
@@ -19307,7 +19308,8 @@
      1.22,
      -1.84
     ],
-    "color": "enamel"
+    "color": "enamel",
+    "tint": "token:bone"
    },
    "extra": [
     {
@@ -19324,7 +19326,7 @@
       -1.66
      ],
      "color": "enamel",
-     "tint": "#bdb6a8"
+     "tint": "token:mat-rock"
     }
    ],
    "context": true,

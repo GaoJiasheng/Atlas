@@ -701,8 +701,8 @@
     "zh": "模型：空气里的气体，每个小球代表百分之一。"
    },
    "detail": {
-    "en": "A teaching model, not to scale. The rack in front of the jar shows what the air in it is made of, one ball for each per cent by volume, in four rows from the top: nitrogen, oxygen, carbon dioxide and water vapour [S37]. Switch the sample on the try-it card in chapter 2 to see the air breathed out.\n\nThe numbers are typical values from the sources, rounded to whole per cents [S3, S5, S6, S8]. Argon and the other gases, together about 1 per cent of air, are not drawn [S3].",
-    "zh": "教学模型，不按比例。瓶前的托架显示瓶里的空气由什么组成，按体积每个小球代表百分之一，从上到下四排：氮气、氧气、二氧化碳、水蒸气 [S37]。在第 2 章的试一试卡片上换样本，就能看到呼出的气体。\n\n这些数是来源给出的典型值，取到整数百分比 [S3, S5, S6, S8]。氩等其他气体合起来约占空气的百分之一，没有画 [S3]。"
+    "en": "A teaching model, not to scale. The rack beside the jar shows what the air in it is made of, one ball for each per cent by volume, in rows of ten: nitrogen on the left; oxygen, carbon dioxide and water vapour on the right [S37]. Switch the sample on the try-it card in chapter 2 to see the air breathed out.\n\nThe numbers are typical values from the sources, rounded to whole per cents [S3, S5, S6, S8]. Argon and the other gases, together about 1 per cent of air, are not drawn [S3].",
+    "zh": "教学模型，不按比例。瓶旁的托架显示瓶里的空气由什么组成，按体积每个小球代表百分之一，十个一排：左边是氮气，右边是氧气、二氧化碳和水蒸气 [S37]。在第 2 章的试一试卡片上换样本，就能看到呼出的气体。\n\n这些数是来源给出的典型值，取到整数百分比 [S3, S5, S6, S8]。氩等其他气体合起来约占空气的百分之一，没有画 [S3]。"
    },
    "group": "air-sample",
    "primitive": {
@@ -759,10 +759,11 @@
     ],
     "segments": 40,
     "color": "glass",
+    "tint": "token:ink-3",
     "at": [
-     0.53,
+     0.5,
      0.115,
-     -0.15
+     -0.13
     ]
    },
    "extra": [
@@ -776,9 +777,9 @@
      "color": "plastic",
      "tint": "token:ink-3",
      "at": [
-      0.53,
+      0.5,
       0.272,
-      -0.15
+      -0.13
      ]
     }
    ],
@@ -804,51 +805,495 @@
     "profile": [
      [
       0,
-      -0.0023
+      -0.0085
      ],
      [
-      0.00115,
-      -0.00199
+      0.0049962,
+      -0.0068766
      ],
      [
-      0.00199,
-      -0.00115
+      0.008084,
+      -0.0026266
      ],
      [
-      0.0023,
-      0
+      0.008084,
+      0.0026266
      ],
      [
-      0.00199,
-      0.00115
-     ],
-     [
-      0.00115,
-      0.00199
+      0.0049962,
+      0.0068766
      ],
      [
       0,
-      0.0023
+      0.0085
      ]
     ],
-    "segments": 10,
+    "segments": 14,
     "color": "plastic",
     "tint": "token:air",
     "at": [
-     0.7004,
-     0.198,
-     -0.0195
+     0.6725,
+     0.285,
+     -0.138
     ]
    },
    "repeat": {
-    "count": 80,
+    "count": 10,
     "axis": [
      1,
      0,
      0
     ],
-    "spacing": 0.0052
+    "spacing": 0.02
    },
+   "clip": false
+  },
+  {
+   "id": "n2-balls-2",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.265,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-3",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.245,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-4",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.225,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-5",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.205,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-6",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.185,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-7",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6725,
+     0.165,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "n2-balls-8",
+   "name": {
+    "en": "Nitrogen",
+    "zh": "氮气"
+   },
+   "summary": {
+    "en": "Nitrogen: about 78 % of air, in and out.",
+    "zh": "氮气：吸入和呼出都约占 78%。"
+   },
+   "detail": {
+    "en": "About 78 per cent of air is nitrogen [S3]. The body does not use it, so textbooks give the same value, about 78 per cent, for the air breathed out [S5, S6]. Measured breath has a little less, about 75 per cent, because the extra water vapour and carbon dioxide take up some of the space; the amount of nitrogen is the same [S8].",
+    "zh": "空气里约 78% 是氮气 [S3]。身体不用氮气，所以课本里呼出的气体也写约 78% [S5, S6]。实际测量的呼出气体里氮气少一点，约 75%，因为多出来的水蒸气和二氧化碳占了一些位置；氮气的量没有变 [S8]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:air",
+    "at": [
+     0.6525,
+     0.145,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 8,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
    "clip": false
   },
   {
@@ -871,51 +1316,175 @@
     "profile": [
      [
       0,
-      -0.0023
+      -0.0085
      ],
      [
-      0.00115,
-      -0.00199
+      0.0049962,
+      -0.0068766
      ],
      [
-      0.00199,
-      -0.00115
+      0.008084,
+      -0.0026266
      ],
      [
-      0.0023,
-      0
+      0.008084,
+      0.0026266
      ],
      [
-      0.00199,
-      0.00115
-     ],
-     [
-      0.00115,
-      0.00199
+      0.0049962,
+      0.0068766
      ],
      [
       0,
-      0.0023
+      0.0085
      ]
     ],
-    "segments": 10,
+    "segments": 14,
     "color": "plastic",
     "tint": "token:oxygen",
     "at": [
-     0.5574,
-     0.179,
-     -0.0195
+     0.9025,
+     0.285,
+     -0.138
     ]
    },
    "repeat": {
-    "count": 25,
+    "count": 10,
     "axis": [
      1,
      0,
      0
     ],
-    "spacing": 0.0052
+    "spacing": 0.02
    },
+   "clip": false
+  },
+  {
+   "id": "o2-balls-2",
+   "name": {
+    "en": "Oxygen",
+    "zh": "氧气"
+   },
+   "summary": {
+    "en": "Oxygen: about 21 % of air in, about 16 % out.",
+    "zh": "氧气：吸入约 21%，呼出约 16%。"
+   },
+   "detail": {
+    "en": "About 21 per cent of air is oxygen [S3]. Breathed-out air still has about 16 per cent [S5, S6]. So only about a quarter of the oxygen goes into the blood, and about three quarters is breathed out again [S7].",
+    "zh": "空气里约 21% 是氧气 [S3]。呼出的气体里仍有约 16% [S5, S6]。所以只有大约四分之一的氧气进入血液，大约四分之三又被呼了出来 [S7]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:oxygen",
+    "at": [
+     0.9025,
+     0.265,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 10,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
+   "clip": false
+  },
+  {
+   "id": "o2-balls-3",
+   "name": {
+    "en": "Oxygen",
+    "zh": "氧气"
+   },
+   "summary": {
+    "en": "Oxygen: about 21 % of air in, about 16 % out.",
+    "zh": "氧气：吸入约 21%，呼出约 16%。"
+   },
+   "detail": {
+    "en": "About 21 per cent of air is oxygen [S3]. Breathed-out air still has about 16 per cent [S5, S6]. So only about a quarter of the oxygen goes into the blood, and about three quarters is breathed out again [S7].",
+    "zh": "空气里约 21% 是氧气 [S3]。呼出的气体里仍有约 16% [S5, S6]。所以只有大约四分之一的氧气进入血液，大约四分之三又被呼了出来 [S7]。"
+   },
+   "group": "air-sample",
+   "primitive": {
+    "kind": "lathe",
+    "profile": [
+     [
+      0,
+      -0.0085
+     ],
+     [
+      0.0049962,
+      -0.0068766
+     ],
+     [
+      0.008084,
+      -0.0026266
+     ],
+     [
+      0.008084,
+      0.0026266
+     ],
+     [
+      0.0049962,
+      0.0068766
+     ],
+     [
+      0,
+      0.0085
+     ]
+    ],
+    "segments": 14,
+    "color": "plastic",
+    "tint": "token:oxygen",
+    "at": [
+     0.8225,
+     0.245,
+     -0.138
+    ]
+   },
+   "repeat": {
+    "count": 2,
+    "axis": [
+     1,
+     0,
+     0
+    ],
+    "spacing": 0.02
+   },
+   "context": true,
    "clip": false
   },
   {
@@ -938,50 +1507,46 @@
     "profile": [
      [
       0,
-      -0.0023
+      -0.0085
      ],
      [
-      0.00115,
-      -0.00199
+      0.0049962,
+      -0.0068766
      ],
      [
-      0.00199,
-      -0.00115
+      0.008084,
+      -0.0026266
      ],
      [
-      0.0023,
-      0
+      0.008084,
+      0.0026266
      ],
      [
-      0.00199,
-      0.00115
-     ],
-     [
-      0.00115,
-      0.00199
+      0.0049962,
+      0.0068766
      ],
      [
       0,
-      0.0023
+      0.0085
      ]
     ],
-    "segments": 10,
+    "segments": 14,
     "color": "plastic",
     "tint": "token:carbon-dioxide",
     "at": [
-     0.508,
-     0.16,
-     -0.0195
+     0.9025,
+     0.205,
+     -0.138
     ]
    },
    "repeat": {
-    "count": 6,
+    "count": 10,
     "axis": [
      1,
      0,
      0
     ],
-    "spacing": 0.0052
+    "spacing": 0.02
    },
    "clip": false
   },
@@ -1005,50 +1570,46 @@
     "profile": [
      [
       0,
-      -0.0023
+      -0.0085
      ],
      [
-      0.00115,
-      -0.00199
+      0.0049962,
+      -0.0068766
      ],
      [
-      0.00199,
-      -0.00115
+      0.008084,
+      -0.0026266
      ],
      [
-      0.0023,
-      0
+      0.008084,
+      0.0026266
      ],
      [
-      0.00199,
-      0.00115
-     ],
-     [
-      0.00115,
-      0.00199
+      0.0049962,
+      0.0068766
      ],
      [
       0,
-      0.0023
+      0.0085
      ]
     ],
-    "segments": 10,
+    "segments": 14,
     "color": "plastic",
     "tint": "token:cold",
     "at": [
-     0.5132,
-     0.141,
-     -0.0195
+     0.9025,
+     0.165,
+     -0.138
     ]
    },
    "repeat": {
-    "count": 8,
+    "count": 10,
     "axis": [
      1,
      0,
      0
     ],
-    "spacing": 0.0052
+    "spacing": 0.02
    },
    "clip": false
   },
@@ -1339,163 +1900,225 @@
     "zh": "小球托架"
    },
    "summary": {
-    "en": "Holds the rows of balls, one row for each gas.",
-    "zh": "托着一排排小球，每种气体一排。"
+    "en": "Holds the balls in rows of ten.",
+    "zh": "托着小球，十个一排。"
    },
    "detail": {
-    "en": "Each row starts on the same line, so the length of a row shows the per cent [S37].",
-    "zh": "每一排都从同一条线开始，所以一排有多长，就表示占百分之几 [S37]。"
+    "en": "Each full row is ten balls, so you can count the per cent in tens. An empty place on a row is a ball that sample does not have [S37].",
+    "zh": "每满一排是十个小球，所以可以十个十个地数出百分之几。排上空着的位置，表示这个样本没有那个小球 [S37]。"
    },
    "group": "air-sample",
    "primitive": {
     "kind": "bevelBox",
     "size": [
-     0.446,
-     0.09,
+     0.455,
+     0.1905,
      0.006
     ],
     "bevel": 0.0015,
     "color": "wood",
     "at": [
-     0.7,
-     0.165,
-     -0.03
+     0.7875,
+     0.21025,
+     -0.15
     ]
    },
    "extra": [
     {
      "kind": "bevelBox",
      "size": [
-      0.446,
+      0.455,
       0.008,
       0.036
      ],
      "bevel": 0.002,
      "color": "wood",
      "at": [
-      0.7,
+      0.7875,
       0.119,
-      -0.018
+      -0.138
      ]
     },
     {
      "kind": "box",
      "size": [
-      0.442,
+      0.2,
       0.0014,
-      0.007
+      0.014
      ],
      "color": "wood",
      "at": [
-      0.7,
-      0.195,
-      -0.0205
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.01,
-      0.009,
-      0.004
-     ],
-     "bevel": 0.001,
-     "color": "wood",
-     "tint": "token:bone",
-     "at": [
-      0.483,
-      0.198,
-      -0.0195
+      0.6725,
+      0.2758,
+      -0.14
      ]
     },
     {
      "kind": "box",
      "size": [
-      0.442,
+      0.2,
       0.0014,
-      0.007
+      0.014
      ],
      "color": "wood",
      "at": [
-      0.7,
-      0.176,
-      -0.0205
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.01,
-      0.009,
-      0.004
-     ],
-     "bevel": 0.001,
-     "color": "wood",
-     "tint": "token:bone",
-     "at": [
-      0.483,
-      0.179,
-      -0.0195
+      0.6725,
+      0.2558,
+      -0.14
      ]
     },
     {
      "kind": "box",
      "size": [
-      0.442,
+      0.2,
       0.0014,
-      0.007
+      0.014
      ],
      "color": "wood",
      "at": [
-      0.7,
-      0.157,
-      -0.0205
-     ]
-    },
-    {
-     "kind": "bevelBox",
-     "size": [
-      0.01,
-      0.009,
-      0.004
-     ],
-     "bevel": 0.001,
-     "color": "wood",
-     "tint": "token:bone",
-     "at": [
-      0.483,
-      0.16,
-      -0.0195
+      0.6725,
+      0.2358,
+      -0.14
      ]
     },
     {
      "kind": "box",
      "size": [
-      0.442,
+      0.2,
       0.0014,
-      0.007
+      0.014
      ],
      "color": "wood",
      "at": [
-      0.7,
-      0.138,
-      -0.0205
+      0.6725,
+      0.2158,
+      -0.14
      ]
     },
     {
-     "kind": "bevelBox",
+     "kind": "box",
      "size": [
-      0.01,
-      0.009,
-      0.004
+      0.2,
+      0.0014,
+      0.014
      ],
-     "bevel": 0.001,
      "color": "wood",
-     "tint": "token:bone",
      "at": [
-      0.483,
-      0.141,
-      -0.0195
+      0.6725,
+      0.1958,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.6725,
+      0.1758,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.6725,
+      0.1558,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.6725,
+      0.1358,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.9025,
+      0.2758,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.9025,
+      0.2558,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.9025,
+      0.2358,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.9025,
+      0.1958,
+      -0.14
+     ]
+    },
+    {
+     "kind": "box",
+     "size": [
+      0.2,
+      0.0014,
+      0.014
+     ],
+     "color": "wood",
+     "at": [
+      0.9025,
+      0.1558,
+      -0.14
      ]
     }
    ],
@@ -21273,14 +21896,20 @@
     }
    },
    {
-    "output": "n2",
-    "part": "n2-balls",
-    "count": true
+    "output": "o2",
+    "part": "o2-balls-2",
+    "count": {
+     "per": 1.25,
+     "minus": 8.5
+    }
    },
    {
     "output": "o2",
-    "part": "o2-balls",
-    "count": true
+    "part": "o2-balls-3",
+    "count": {
+     "per": 1,
+     "minus": 20
+    }
    },
    {
     "output": "co2",

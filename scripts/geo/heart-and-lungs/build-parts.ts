@@ -117,7 +117,8 @@ const jar = airJar();
 parts.push({ id: 'air-jar', ...text('air-jar'), group: 'air-sample', primitive: jar.primitive, extra: jar.extra, clip: false });
 for (const row of ROWS) {
   const b = ballRow(row);
-  parts.push({ id: row.id, ...text(row.id), group: 'air-sample', primitive: b.primitive, repeat: b.repeat, clip: false });
+  // Only a gas's first row is its own part in the index; the rows after it are context with the same text.
+  parts.push({ id: row.id, ...text(row.gas), group: 'air-sample', primitive: b.primitive, repeat: b.repeat, ...(row.id === row.gas ? {} : { context: true }), clip: false });
 }
 const fish = fishBody();
 parts.push({ id: 'fish-body', ...text('fish-body'), group: 'compare', primitive: fish.primitive, extra: fish.extra, connects: ['gills'], clip: false });
