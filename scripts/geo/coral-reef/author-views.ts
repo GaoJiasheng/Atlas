@@ -28,8 +28,8 @@ front('02-reef-zones.mdx',d=>{
   b[0].camera=camera([-.65,.94,1.96],[-1,-.20,0]);b[0].hide=[...flatHide,'substrate-context'];
   b[1].camera=camera([.38,1.05,1.90],[-.12,-.12,0]);b[1].hide=[...crestHide,'substrate-context'];
   b[2].camera=camera([1.72,.78,2.08],[.86,-.39,0]);b[2].hide=[...slopeHide,'substrate-context'];
-  b[3].camera=camera([14.55,.76,1.52],[14.72,.41,0]);b[3].hide=lightHide;
-  b[4].camera=camera([14.57,.97,1.80],[14.82,.50,0]);b[4].hide=lightHide;
+  b[3].camera=camera([14.95,.82,3.5],[14.95,.5,0]);b[3].hide=[...lightHide,'depth-crest-band','depth-slope-mark'];
+  b[4].camera=camera([14.95,.82,3.5],[14.95,.5,0]);b[4].hide=lightHide;
 });
 front('03-structures-and-feeding.mdx',d=>{
   d.state.camera=overhead;d.state.hide=['larva-inset'];const b=d.state.beats;
@@ -39,7 +39,7 @@ front('03-structures-and-feeding.mdx',d=>{
   b[2].camera=camera([.65,2.05,2.15],[-.12,-.02,0]);
   b[3].camera=camera([-.91,-.20,1.26],[-1.12,-.29,.25]);
   b[3].hide=[...flatHide,'colony-boulder','colony-tissue','substrate-context'];
-  b[4].camera=camera([5.89,.46,.64],[5.62,.21,.04]);
+  b[4].camera=camera([5.89,.5,.88],[5.62,.21,.04]);
   b[4].hide=['polyp-tissue','polyp-mouth','polyp-tentacles','polyp-skeleton','polyp-symbionts','inset-base'];
 });
 

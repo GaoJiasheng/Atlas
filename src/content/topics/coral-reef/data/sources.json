@@ -325,6 +325,18 @@
       }
     },
     {
+      "id": "S28",
+      "text": {
+        "en": "Fiegel, Kellermann, Nietzer, Petersen, Smykala, Bickmeyer & Schupp; Frontiers in Marine Science (2023). Detailed visualization of settlement and early development in Leptastrea purpurea reveals distinct bio-optical features.",
+        "zh": "Fiegel、Kellermann、Nietzer、Petersen、Smykala、Bickmeyer 与 Schupp；Frontiers in Marine Science（2023）：《Leptastrea purpurea 定居与早期发育的详细可视化揭示独特的生物光学特征》。"
+      },
+      "url": "https://doi.org/10.3389/fmars.2023.984656",
+      "note": {
+        "en": "Planula form: elongated along the oral-aboral axis, ciliated, aboral end leading, attachment at the aboral end. Read through search-result excerpts only; the article page was not reachable from the build machine. Not a Singapore species claim.",
+        "zh": "浮浪幼体形态：沿口—反口轴伸长、具纤毛、反口端在前、以反口端附着。仅通过搜索结果摘录阅读，构建机器无法打开原文页面；不代表新加坡物种。"
+      }
+    },
+    {
       "id": "S50",
       "design": true,
       "text": {

@@ -6,9 +6,9 @@
     "proposed": 219008
   },
   "sumAllParts": {
-    "before": 433218,
-    "live": 550818,
-    "proposed": 550818
+    "before": 473250,
+    "live": 643458,
+    "proposed": 643458
   },
   "frames": [
     {
@@ -28,9 +28,9 @@
     {
       "chapter": "reading-a-model",
       "beat": 3,
-      "before": 45600,
-      "live": 167936,
-      "proposed": 167936
+      "before": 73728,
+      "live": 196064,
+      "proposed": 196064
     },
     {
       "chapter": "reading-a-model",
@@ -98,9 +98,9 @@
     {
       "chapter": "eight-worlds",
       "beat": 5,
-      "before": 45600,
-      "live": 167936,
-      "proposed": 167936
+      "before": 73728,
+      "live": 196064,
+      "proposed": 196064
     },
     {
       "chapter": "eight-worlds",
@@ -324,6 +324,30 @@
       "proposed": 16128
     },
     {
+      "id": "mercury-closeup",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "venus-closeup",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "earth-closeup",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
+      "id": "mars-closeup",
+      "before": 2976,
+      "live": 16128,
+      "proposed": 16128
+    },
+    {
       "id": "jupiter",
       "before": 2976,
       "live": 16128,
@@ -361,9 +385,21 @@
     },
     {
       "id": "scale-ruler",
-      "before": 18816,
-      "live": 18816,
-      "proposed": 18816
+      "before": 40608,
+      "live": 40608,
+      "proposed": 40608
+    },
+    {
+      "id": "earth-distance-pin",
+      "before": 3168,
+      "live": 3168,
+      "proposed": 3168
+    },
+    {
+      "id": "neptune-distance-pin",
+      "before": 3168,
+      "live": 3168,
+      "proposed": 3168
     },
     {
       "id": "moon-parent",

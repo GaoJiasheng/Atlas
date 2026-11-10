@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei/web/Html';
-import { BufferGeometry, Float32BufferAttribute, LineBasicMaterial, PointsMaterial } from 'three';
+import { BufferGeometry, Float32BufferAttribute, LineBasicMaterial, MeshBasicMaterial, PointsMaterial, Vector3 } from 'three';
 import type { SimData, SimOverlay, SimValues } from '../../sim-schema';
 import type { StageBridge } from '../../bridge';
 import type { PartHandle } from './PartNode';
@@ -19,7 +19,7 @@ type Overlay = Extract<SimOverlay, {
 export function cataloguePointSize(catalogue: StarCatalogue | null): number | undefined {
     const meta = catalogue?.meta as (StarCatalogue['meta'] & { pointSizeCssPx?: unknown }) | undefined;
     const px = meta?.pointSizeCssPx;
-    return typeof px === 'number' && Number.isFinite(px) && px >= 1 && px <= 6 ? px : undefined;
+    return typeof px === 'number' && Number.isFinite(px) && px >= 1 && px <= 10 ? px : undefined;
 }
 export function createCataloguePointMaterial(color: string, sizeCssPx?: number): PointsMaterial {
     if (sizeCssPx === undefined) return new PointsMaterial({ color, size: .12, sizeAttenuation: true, transparent: true, depthWrite: false, toneMapped: false });
@@ -31,6 +31,38 @@ export function createCataloguePointMaterial(color: string, sizeCssPx?: number):
     };
     material.customProgramCacheKey = () => 'atlas-catalogue-disc-1';
     return material;
+}
+/** A catalogue's opt-in pattern-link radius (scene units); WebGL line width is fixed at one device pixel. */
+export function catalogueLinkRadius(catalogue: StarCatalogue | null): number | undefined {
+    const r = (catalogue?.meta as (StarCatalogue['meta'] & { linkRadius?: unknown }) | undefined)?.linkRadius;
+    return typeof r === 'number' && Number.isFinite(r) && r > 0 && r <= .1 ? r : undefined;
+}
+/** One merged six-sided prism per link (`lines` = flat segment end pairs), so links share a single draw. */
+export function catalogueLinkPrisms(lines: readonly number[], radius: number): BufferGeometry {
+    const positions: number[] = [], indices: number[] = [], SIDES = 6;
+    const a = new Vector3(), b = new Vector3(), dir = new Vector3(), u = new Vector3(), v = new Vector3(), p = new Vector3();
+    for (let i = 0; i + 5 < lines.length; i += 6) {
+        a.set(lines[i]!, lines[i + 1]!, lines[i + 2]!);
+        b.set(lines[i + 3]!, lines[i + 4]!, lines[i + 5]!);
+        dir.subVectors(b, a).normalize();
+        u.set(Math.abs(dir.y) > .9 ? 1 : 0, Math.abs(dir.y) > .9 ? 0 : 1, 0).cross(dir).normalize();
+        v.crossVectors(dir, u);
+        const base = positions.length / 3;
+        for (const end of [a, b])
+            for (let k = 0; k < SIDES; k++) {
+                const t = k / SIDES * Math.PI * 2;
+                p.copy(end).addScaledVector(u, Math.cos(t) * radius).addScaledVector(v, Math.sin(t) * radius);
+                positions.push(p.x, p.y, p.z);
+            }
+        for (let k = 0; k < SIDES; k++) {
+            const n = (k + 1) % SIDES;
+            indices.push(base + k, base + n, base + SIDES + k, base + n, base + SIDES + n, base + SIDES + k);
+        }
+    }
+    const geometry = new BufferGeometry();
+    geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+    geometry.setIndex(indices);
+    return geometry;
 }
 export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }: {
     overlay: Overlay;
@@ -54,6 +86,7 @@ export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }
         invalidate();
     } }); return () => { active = false; }; }, [overlay.catalogue, c, retry, invalidate]);
     const sky = useMemo(() => catalogue ? skySnapshot(c, values, catalogue, overlay.radius) : null, [c, values, catalogue, overlay.radius]);
+    const linkRadius = catalogueLinkRadius(catalogue);
     const data = useMemo(() => { const points: number[] = [], lines: number[] = []; if (sky) {
         for (const s of sky.rows)
             if (s.shown)
@@ -67,8 +100,8 @@ export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }
                     lines.push(...A.position, ...B.position);
             }
         }
-    } const pg = new BufferGeometry(), lg = new BufferGeometry(); pg.setAttribute('position', new Float32BufferAttribute(points, 3)); lg.setAttribute('position', new Float32BufferAttribute(lines, 3)); return { pg, lg }; }, [sky, c, values]);
-    useEffect(() => () => { data.pg.dispose(); data.lg.dispose(); }, [data]);
+    } const pg = new BufferGeometry(), lg = new BufferGeometry(); pg.setAttribute('position', new Float32BufferAttribute(points, 3)); lg.setAttribute('position', new Float32BufferAttribute(lines, 3)); return { pg, lg, tube: linkRadius === undefined ? null : catalogueLinkPrisms(lines, linkRadius) }; }, [sky, c, values, linkRadius]);
+    useEffect(() => () => { data.pg.dispose(); data.lg.dispose(); data.tube?.dispose(); }, [data]);
     useEffect(() => { bridge.solarSky = { status: error ? 'error' : sky ? 'ready' : 'loading', ...(sky ? { utc: sky.utc, latitude: sky.latitude, depth: sky.depth, rows: sky.rows } : {}) }; }, [sky, error, bridge]);
     const anchors = useMemo(() => { const result = new Map<string, number[]>(); if (!sky)
         return result; for (const [target, edges] of Object.entries(c.patterns)) {
@@ -102,7 +135,9 @@ export function CatalogueSky({ overlay, sim, values, on, look, bridge, handles }
     const pointSize = cataloguePointSize(catalogue);
     const pointMaterial = useMemo(() => createCataloguePointMaterial(color, pointSize), [color, pointSize]);
     const lineMaterial = useMemo(() => new LineBasicMaterial({ color: lineColor, transparent: true, opacity: .65, toneMapped: false }), [lineColor]);
+    const tubeMaterial = useMemo(() => new MeshBasicMaterial({ color: lineColor, toneMapped: false }), [lineColor]);
+    useEffect(() => () => tubeMaterial.dispose(), [tubeMaterial]);
     useEffect(() => () => pointMaterial.dispose(), [pointMaterial]);
     useEffect(() => () => lineMaterial.dispose(), [lineMaterial]);
-    return <group visible={shown}>{sky && <><points geometry={data.pg} material={pointMaterial} frustumCulled={false}/><lineSegments geometry={data.lg} material={lineMaterial} frustumCulled={false}/></>}{shown && (error || !sky) && <Html center><div style={{ background: 'var(--panel-solid)', color: 'var(--ink)', padding: '12px', whiteSpace: 'nowrap' }}>{error ? <button style={{ minHeight: 44 }} onClick={() => setRetry(v => v + 1)}>Retry star catalogue / 重试星表</button> : 'Loading star catalogue / 正在载入星表'}</div></Html>}</group>;
+    return <group visible={shown}>{sky && <><points geometry={data.pg} material={pointMaterial} frustumCulled={false}/>{data.tube ? <mesh geometry={data.tube} material={tubeMaterial} frustumCulled={false}/> : <lineSegments geometry={data.lg} material={lineMaterial} frustumCulled={false}/>}</>}{shown && (error || !sky) && <Html center><div style={{ background: 'var(--panel-solid)', color: 'var(--ink)', padding: '12px', whiteSpace: 'nowrap' }}>{error ? <button style={{ minHeight: 44 }} onClick={() => setRetry(v => v + 1)}>Retry star catalogue / 重试星表</button> : 'Loading star catalogue / 正在载入星表'}</div></Html>}</group>;
 }

@@ -7,7 +7,7 @@ The table contract is copied unchanged from authoring/sim-plan.json.
 import json
 import math
 import subprocess
-from sculpt import Mesh, dome as sculpt_dome, corallite, tissue as sculpt_tissue, mouth as sculpt_mouth, plate, branching, tentacles as sculpt_tentacles, reef_shelf, sand_patches, encrusting, write_glb
+from sculpt import planula, Mesh, dome as sculpt_dome, corallite, tissue as sculpt_tissue, mouth as sculpt_mouth, plate, branching, tentacles as sculpt_tentacles, reef_shelf, sand_patches, encrusting, write_glb
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -245,8 +245,8 @@ part('water-haze','Suspended particles','悬浮颗粒','evidence-tools',
      haze[0],haze[1:])
 part('light-marker','Relative-light marker','相对光指数标记','evidence-tools',
      'Moves vertically to display a relative light index.','以竖直位置显示相对光指数。',
-     'This marker displays an illustrative relative light index, calculated as 100 × exp(−kz). The depth choices are 1, 3 and 7 metres; design coefficients are 0.1 and 0.5 per metre for the two water cases. [S50]\n\nThe marker’s position is an index display, not the actual depth of a coral or a light ray. It cannot establish a coral survival threshold, water temperature, bleaching risk or measured Singapore irradiance. [S10, S50]',
-     '标记显示示意的相对光指数，计算为100 × exp(−kz)。深度选项为1、3和7米；两种水体采用每米0.1和0.5的设计衰减系数。[S50]\n\n标记的位置是指数读数，不是珊瑚的实际深度，也不是光线轨迹；它不确定存活阈值、水温、白化风险或新加坡现场照度。[S10, S50]',
+     'This marker reads an illustrative relative light index on the gauge, calculated as 100 × exp(−kz). The depth choices are 1, 3 and 7 metres; design coefficients are 0.1 and 0.5 per metre for the two water cases. [S50]\n\nIts height is the index, not a depth: read depth from the pointer on the metre scale. It cannot establish a coral survival threshold, water temperature, bleaching risk or measured Singapore irradiance. [S10, S50]',
+     '标记在标尺上读取示意的相对光指数，计算为100 × exp(−kz)。深度选项为1、3和7米；两种水体采用每米0.1和0.5的设计衰减系数。[S50]\n\n标记的高度是指数，不是深度；深度请看米刻度上的指针。它不确定存活阈值、水温、白化风险或新加坡现场照度。[S10, S50]',
      primitive('extrude',[7.42,0,.15],'powder','token:signal',shape=[[-.10,-.014],[.025,-.014],[.025,-.036],[.092,0],[.025,.036],[.025,.014],[-.10,.014]],depth=.014,bevel=.003))
 frame=primitive('bevelBox',[8.03,.10,0],'powder','token:neutral',size=[.64,.035,.43],bevel=.007)
 frame_extra=[]
@@ -299,15 +299,15 @@ part('colony-tissue','Colony living-tissue layer','群体活组织层','reef-hab
      lathe(boulder_at,layer_profile,'membrane','token:muscle-1'),shell=True,connects=['colony-boulder'])
 part('larva-inset','Swimming larva inset','游动幼体插图','polyp-closeup',
      'Represents the dispersing stage before settlement.','表示附着之前可扩散的幼体阶段。',
-     'Coral larvae can disperse before settling on a suitable surface. The attached adult polyp does not walk to a new reef in the way a swimming larva disperses. [S26]\n\nThis smooth ovoid is a generic enlarged larval inset, shown beside the adult study without a shared scale or a species identification. It is not a second adult organ. [S50]',
-     '珊瑚幼体可先扩散，再附着到合适的表面。已附着的成体珊瑚虫不会像游动幼体一样游到另一片礁区。[S26]\n\n这个平滑卵形是放大的一般幼体插图，与成体并排但不共用生物比例尺，也不鉴定物种；它不是成体的第二个器官。[S50]',
+     'Coral larvae can disperse before settling on a suitable surface. The attached adult polyp does not walk to a new reef in the way a swimming larva disperses. [S26]\n\nA mature larva, or planula, is elongated from end to end and covered in cilia, the fine beating hairs it swims with. Many reported planulae travel with the aboral end first, and that end attaches at settling. The small pit at the narrow end marks the oral pore. [S28]\n\nThis enlarged model has no shared scale with the adult and identifies no species. Its cilia are drawn much thicker and fewer than real ones. [S50]',
+     '珊瑚幼体可先扩散，再附着到合适的表面。已附着的成体珊瑚虫不会像游动幼体一样游到另一片礁区。[S26]\n\n成熟的幼体（浮浪幼体）沿身体长轴伸长，全身覆盖纤毛，靠摆动纤毛游动。许多研究记录的浮浪幼体以反口端在前游动，定居时也以这一端附着。较细一端的小凹坑表示口孔。[S28]\n\n这个放大模型与成体不共用比例尺，也不鉴定物种；纤毛画得比真实的粗得多、少得多。[S50]',
      sphere([3.12,.21,.04],.075,'token:muscle-1',scale=[.72,1.65,.68],rotation=[0,0,-22]),clip=False)
 outer=[[-1.12+x,-.29+y] for x,y in circle(.165,.130)]
 inner=[[-1.12+x,-.29+y] for x,y in circle(.14,.105)]
 part('refuge-cavity','Shelter cavity','庇护岩隙','reef-habitat',
      'Provides a small sheltered space in the reef model.','在礁体模型中提供一处小型庇护空间。',
      'Reefs provide habitat and shelter for many organisms. Crevices and cavities contribute physical spaces within that habitat. [S2, S4]\n\nThe selectable inner rim marks an original small shelter opening. This is neither a mapped cave nor an observation of an animal occupying a named Singapore site. [S50]',
-     '珊瑚礁为许多生物提供生境和庇护，缝隙与洞穴构成其中的空间。[S2, S4]\n\n可选中的内缘标出原创的小型庇护开口；它不是测绘洞穴，也不表示在新加坡某地点观察到某种动物居住。[S50]',
+     '珊瑚礁为许多生物提供栖息地和庇护，缝隙与洞穴构成其中的空间。[S2, S4]\n\n可选中的内缘标出原创的小型庇护开口；它不是测绘洞穴，也不表示在新加坡某地点观察到某种动物居住。[S50]',
      primitive('extrude',[0,0,.39],'abrasive','token:bone',shape=outer,holes=[inner],depth=.08,bevel=.002))
 
 part('substrate-context','Reef support context','礁体承托示意','reef-habitat',
@@ -321,11 +321,70 @@ part('inset-base','Enlarged-study base','放大模型底缘','polyp-closeup',
      '没有标记的低底缘将放大珊瑚虫与礁体台分开，不提供生物真实比例尺或实测放大倍数。[S50]',
      primitive('bevelBox',[2.5,-.075,0],'abrasive','token:neutral',size=[.76,.05,.69],bevel=.009),context=True,clip=False)
 
+# Water-column study (S10, S11, S50): 1 m = 0.1 scene units, surface at y = 1.
+X0,X1,Z0,Z1=14.62,15.34,-.20,.20
+SURFACE=1.0
+def plane_layers(depths):
+    # Each sheet is one equal light-loss step (e^-0.5): every 1 m at k = 0.5, every 5 m at k = 0.1.
+    return [primitive('plane',[(X0+X1)/2,(SURFACE-d*.1)/2,Z1+.001*i],'glass','token:cold',size=[X1-X0,SURFACE-d*.1]) for i,d in enumerate(depths)]
+turbid=plane_layers(range(10)); clear=plane_layers([0,5])
+part('water-column-turbid','Water column: more turbid','水柱：较高浑浊度','water-study',
+     'Darkens with depth using the more turbid coefficient.','按较高浑浊度系数随深度变暗。',
+     'Water absorbs and scatters light, and suspended particles reduce it further, so less light reaches deeper reefs. Singapore reef research describes this light limitation in turbid water. [S9, S10]\n\nEach darker step stands for one equal fall in the illustrative light index, reached every metre at this design coefficient of 0.5 per metre. The steps are a drawing of the design calculation, not a measured Singapore water profile. [S50]',
+     '水会吸收和散射光，悬浮颗粒使透光进一步减少，所以较深的礁得到的光较少。新加坡的珊瑚礁研究描述了浑水中的这种光限制。[S9, S10]\n\n每加深一级颜色，代表示意光指数下降相同比例；在每米0.5的设计系数下，每1米下降一级。这些色阶画的是设计计算，不是新加坡海水的实测剖面。[S50]',
+     turbid[0],turbid[1:],clip=False)
+part('water-column-clear','Water column: less turbid','水柱：较低浑浊度','water-study',
+     'Darkens more slowly using the less turbid coefficient.','按较低浑浊度系数较慢地变暗。',
+     'With fewer suspended particles, light is reduced more slowly with depth. [S9, S10]\n\nEach darker step stands for the same fall in the illustrative light index as in the more turbid column, reached every 5 metres at this design coefficient of 0.1 per metre. It is a drawing of the design calculation, not a measurement. [S50]',
+     '悬浮颗粒较少时，光随深度减弱得较慢。[S9, S10]\n\n每加深一级颜色，代表与较高浑浊度水柱相同比例的示意光指数下降；在每米0.1的设计系数下，每5米下降一级。这里画的是设计计算，不是实测。[S50]',
+     clear[0],clear[1:],clip=False)
+def bar(a,b):
+    centre=[(a[i]+b[i])/2 for i in range(3)];size=[max(abs(a[i]-b[i]),.007) for i in range(3)]
+    return primitive('box',centre,'powder','token:ink-3',size=size)
+y0=SURFACE-1.0
+edges=[]
+for x in [X0,X1]:
+    for z in [Z0,Z1]:
+        edges.append(bar([x,y0,z],[x,SURFACE,z]))
+for y in [y0,SURFACE]:
+    for z in [Z0,Z1]:
+        edges.append(bar([X0,y,z],[X1,y,z]))
+    for x in [X0,X1]:
+        edges.append(bar([x,y,Z0],[x,y,Z1]))
+ticks=[primitive('box',[15.385 if m%5 else 15.375,SURFACE-m*.1,Z1],'powder','token:ink-2',size=[.03 if m%5 else .05,.006 if m%5 else .009,.012]) for m in range(11)]
+part('depth-scale','Depth scale, 0 to 10 m','深度尺（0–10 米）','water-study',
+     'Measures depth in metres below the surface.','以米为单位标出水面以下的深度。',
+     'The scale starts at the water surface and marks every metre to 10 m, with longer marks at 0, 5 and 10 m. Singapore sources describe reef depths in this range: crests near 2–3 m, slopes near 7 m and typical coral limits near 8 m at studied sites. [S10, S11]\n\nThe frame around the water is a drawing aid. The width of the column has no scale. [S50]',
+     '刻度从水面算起，每米一格直到10米，0、5、10米处刻线较长。新加坡的资料描述的礁区深度就在这一范围：礁脊约2–3米，礁坡约7米，研究地点的常见珊瑚深度界限约8米。[S10, S11]\n\n水柱外框只是绘图辅助，水柱宽度没有比例。[S50]',
+     primitive('box',[15.40,SURFACE-.5,Z1],'powder','token:ink-2',size=[.012,1.0,.012]),ticks+edges,clip=False)
+part('depth-pointer','Chosen depth','所选深度','water-study',
+     'Points to the chosen depth on the scale.','指向深度尺上所选的深度。',
+     'The pointer follows the illustrative depth control: 1, 3 or 7 metres. Read it against the metre marks. [S50]',
+     '指针跟随示意深度控件，可选1、3或7米，请对照米刻度读数。[S50]',
+     primitive('extrude',[15.42,SURFACE,Z1],'powder','token:cold',shape=[[.125,-.014],[.067,-.014],[.067,-.036],[0,0],[.067,.036],[.067,.014],[.125,.014]],depth=.014,bevel=.003),clip=False)
+part('depth-crest-band','Crests studied at 2–3 m','研究中的礁脊：2–3 米','water-study',
+     'Marks crest depths in a 2020 Singapore study.','标出2020年新加坡研究中的礁脊深度。',
+     'A 2020 study at Kusu Island and Pulau Hantu compared reef crests at 2–3 m with reef slopes at 7 m. [S10]\n\nThese are the depths of that study, not a rule for every reef. [S10]',
+     '2020年在龟屿与韩都岛的研究比较了2–3米深的礁脊和7米深的礁坡。[S10]\n\n这些是该研究的深度，不是所有礁区的规律。[S10]',
+     primitive('box',[15.60,SURFACE-.25,Z1],'powder','token:signal',size=[.03,.10,.012]),clip=False)
+part('depth-slope-mark','Slopes studied at 7 m','研究中的礁坡：7 米','water-study',
+     'Marks the slope depth in the same 2020 study.','标出同一项2020年研究中的礁坡深度。',
+     'The same 2020 study at Kusu Island and Pulau Hantu compared slopes at 7 m with crests at 2–3 m. [S10]\n\nThe mark is a study depth, not a survival limit. [S10]',
+     '同一项2020年研究在龟屿与韩都岛比较了7米深的礁坡和2–3米深的礁脊。[S10]\n\n这条标记是研究深度，不是存活界限。[S10]',
+     primitive('box',[15.60,SURFACE-.70,Z1],'powder','token:signal',size=[.03,.014,.012]),clip=False)
+part('light-gauge','Relative-light gauge','相对光指数标尺','water-study',
+     'Reads the light index from 0 at the foot to 100.','读取相对光指数，底部为0，顶部为100。',
+     'Read the orange marker against this gauge: the foot is 0 and the top is 100, with marks every 25. The gauge shows the illustrative index, not depth, so it does not line up with the metre scale. [S50]',
+     '请对照这把标尺读橙色标记：底部为0，顶部为100，每25一格。标尺显示的是示意指数，不是深度，因此不与米刻度对齐。[S50]',
+     primitive('box',[14.53,.5,.15],'powder','token:ink-2',size=[.012,1.0,.012]),
+     [primitive('box',[14.555,v*.01,.15],'powder','token:ink-2',size=[.04,.007,.012]) for v in (0,25,50,75,100)],clip=False)
+
 groups=[dict(id=id,name=bi(en,zh),color=color) for id,en,zh,color in [
     ('reef-habitat','Reef zones','礁区','token:neutral'),
     ('polyp-closeup','Polyp close-up','珊瑚虫放大','token:muscle-1'),
     ('web-specimens','Food-web specimens','食物网标本','token:food'),
     ('evidence-tools','Environmental evidence','环境证据','token:cold'),
+    ('water-study','Water column','水柱','token:cold'),
     ('feeding-flows','Shown food pathways','已画食物路径','token:food')]]
 
 flows=[]
@@ -367,6 +426,7 @@ meshes={
     'polyp-skeleton':corallite(),
     'polyp-tissue':sculpt_tissue(),
     'polyp-mouth':sculpt_mouth(),
+    'larva-inset':planula(),
     'colony-sheet':plate([-.1,.11,.15]),
     'polyp-tentacles':sculpt_tentacles(),
     'colony-encrusting':encrusting(),
@@ -433,6 +493,7 @@ for flow in flows:
     arrow_parts.append(arrow)
 # Existing table/control/outputs stay unchanged; only display bindings added.
 polish_sim=json.loads(SIM.read_text())
+polish_sim['bind']+=[{'output':'haze-shown','part':'water-column-turbid','visible':{'eq':1}},{'output':'haze-shown','part':'water-column-clear','visible':{'eq':0}},{'control':'depth-m','part':'depth-pointer','offset':{'axis':[0,1,0],'per':-.1,'origin':0}}]
 for flow,arrow in zip(flows,arrow_parts):
     polish_sim['bind'].append({'output':'active-'+flow['id'],'part':arrow['id'],'visible':{'eq':1}})
 generated=ROOT/'scripts/geo/coral-reef/refs/polish-build.glb'
@@ -440,6 +501,9 @@ write_glb(meshes,generated)
 subprocess.run(['pnpm','tsx',str(ROOT/'scripts/geo/coral-reef/finish-mesh.ts'),str(generated)],cwd=ROOT,check=True)
 # Publish only the finished asset: validators never see the dense intermediate.
 generated.replace(ROOT/'public/models/coral-reef.glb')
+
+# The schema caps hudFrame at 32; this mark shares the crest band's column, already framed.
+HUD_FRAME_SKIP={'depth-slope-mark'}
 
 def camera(id):
     p,t,_=cameras[id]
@@ -451,11 +515,11 @@ data=dict(model='/models/coral-reef.glb',parts=PARTS,groups=groups,flows=flows,
           views=dict(assembled=dict(camera=camera('hero')),cover=camera('hero'),section=dict(plane='xy'),
                      cutaway=dict(normal=[0,0,-1],offset=.02),
                      reference=dict(camera=dict(position=[0,.2,9],target=[0,-.1,0],fov=26)),
-                     hudFrame=dict(parts=[p['id'] for p in PARTS if not p.get('context')])),
-          spec=[dict(key=bi('Scope','范围'),value=bi('Schematic habitat','生境示意'),tag='design'),
+                     hudFrame=dict(parts=[p['id'] for p in PARTS if not p.get('context') and p['id'] not in HUD_FRAME_SKIP])),
+          spec=[dict(key=bi('Scope','范围'),value=bi('Schematic habitat','栖息地示意'),tag='design'),
                 dict(key=bi('Specimens','标本'),value=bi('Separately enlarged','分别放大'),tag='design')],
           sim=polish_sim)
-assert len(PARTS)==32 and sum(not p.get('context') for p in PARTS)==26
+assert len(PARTS)==39 and sum(not p.get('context') for p in PARTS)==33
 out=TOPIC/'data/parts.json'
 out.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 print(f'{out.relative_to(ROOT)}: {len(PARTS)} parts, {len(groups)} groups, {len(flows)} flows')

@@ -12,7 +12,7 @@ import { createPartMaterial, fadePartMaterial, stylePartMaterial, type PartStyle
 import { gltfSurface } from '../../src/engines/space-scene/stages/model3d/GltfSource';
 // Geometry/material assertions do not mount the DOM catalogue links.
 vi.mock('@react-three/drei/web/Html', () => ({ Html: () => null }));
-import { cataloguePointSize, createCataloguePointMaterial } from '../../src/engines/space-scene/stages/model3d/CatalogueSky';
+import { catalogueLinkPrisms, catalogueLinkRadius, cataloguePointSize, createCataloguePointMaterial } from '../../src/engines/space-scene/stages/model3d/CatalogueSky';
 import { resolveMaterialLook } from '../../src/engines/space-scene/lib/color';
 
 // These Node tests exercise real geometry/material functions, not Drei's DOM overlay.
@@ -54,9 +54,9 @@ describe('solar-system polish: baked geometry and unchanged teaching contract', 
       .registerDependencies({ 'meshopt.decoder': MeshoptDecoder }).read('public/models/solar-system.glb');
   });
 
-  it('retains all 49 selections and the exact physical input bodies', () => {
+  it('retains all 55 selections and the exact physical input bodies', () => {
     expect(live.parts.map(part => part.id)).toEqual(baseline.parts.map(part => part.id));
-    expect(live.parts).toHaveLength(49);
+    expect(live.parts).toHaveLength(55);
     expect(live.sim!.solarSystem!.bodies).toEqual(baseline.sim!.solarSystem!.bodies);
     expect(live.sim!.solarSystem!.bodies).toHaveLength(9);
     expect(live.groups).toEqual(baseline.groups);
@@ -110,6 +110,17 @@ describe('solar-system polish: baked geometry and unchanged teaching contract', 
     const minimumRadii=groups.map(g=>Math.min(...g.map(i=>Math.hypot(positions[i*3]!,positions[i*3+1]!,positions[i*3+2]!)))).sort((a,b)=>a-b);
     expect(minimumRadii[0]).toBeCloseTo(.18,5);
     expect(minimumRadii[1]).toBeGreaterThan(.22);
+  });
+
+  it('draws the rocky close-up from the planets\' own meshes at one shared factor', () => {
+    const earthKm = live.sim!.solarSystem!.bodies.find(b => b.id === 'earth')!.radiusKm;
+    const nodes = model.getRoot().listNodes();
+    for (const id of ['mercury', 'venus', 'earth', 'mars']) {
+      const node = nodes.find(n => n.getName() === `${id}-closeup`)!;
+      expect(node.getMesh()!.getName()).toBe(id);
+      const km = live.sim!.solarSystem!.bodies.find(b => b.id === id)!.radiusKm;
+      expect(node.getScale()[0]).toBeCloseTo(km / earthKm, 6);
+    }
   });
 
   it('leaves the Cassini division empty without triangles bridging its two edges', () => {
@@ -365,18 +376,31 @@ describe('catalogue stars use restrained CSS-pixel discs', () => {
     const original=json('public/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json');
     const readable=json('public/catalogues/solar-system/stars-hyg-v41-readable-cc-by-sa.json');
     expect(readable.stars).toEqual(original.stars);
-    const {pointSizeCssPx,...meta}=readable.meta;
+    const {pointSizeCssPx,linkRadius,...meta}=readable.meta;
     expect(meta).toEqual(original.meta);
-    expect(pointSizeCssPx).toBe(5.8);
+    expect(pointSizeCssPx).toBe(8.5);
+    expect(linkRadius).toBe(.024);
     const fixture=json('src/content/topics/sample-solar/data/parts.json');
     expect(fixture.sim.overlays.find((o:{kind:string})=>o.kind==='catalogue-sky').catalogue).toBe('stars-hyg-v41-cc-by-sa.json');
     expect(cataloguePointSize(original)).toBeUndefined();
-    expect(cataloguePointSize(readable)).toBe(5.8);
+    expect(cataloguePointSize(readable)).toBe(8.5);
+    expect(catalogueLinkRadius(original)).toBeUndefined();
+    expect(catalogueLinkRadius(readable)).toBe(.024);
     const material=createCataloguePointMaterial('#2a2824',cataloguePointSize(original));
     expect(material.size).toBe(.12);
     expect(material.sizeAttenuation).toBe(true);
     expect(material.onBeforeCompile).toBe(new MeshStandardMaterial().onBeforeCompile);
     material.dispose();
+  });
+
+  it('builds one closed-side six-sided prism per link at the opt-in radius', () => {
+    const geometry = catalogueLinkPrisms([0, 0, 0, 0, 2, 0, 1, 0, 0, 3, 0, 0], .03);
+    expect(geometry.getAttribute('position').count).toBe(24);
+    expect(geometry.index!.count / 3).toBe(24);
+    const p = geometry.getAttribute('position');
+    for (let i = 0; i < 12; i++) expect(Math.hypot(p.getX(i), p.getZ(i))).toBeCloseTo(.03, 6);
+    expect(catalogueLinkPrisms([], .03).getAttribute('position').count).toBe(0);
+    geometry.dispose();
   });
 
   it('scales to renderer DPR exactly once at 1×, 1.5×, 2× and 3×', async () => {

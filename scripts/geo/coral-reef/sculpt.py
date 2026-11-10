@@ -427,6 +427,57 @@ def branching(offset,scale=1,seed=1):
         m.grid(p)
     return m.move(offset,scale)
 
+def planula(at=(5.62,.21,.04),tilt=-22,half=.124,hairs=1000):
+    """Elongated oral-aboral body, oral pore pit, and a full coat of enlarged cilia (S28)."""
+    radius=lambda t:.058*np.sin(np.pi*np.clip(t,0,1))**.6*(1.12-.42*t)
+    def surface(t,a):
+        bumps=.0016*np.sin(a*9+1.4*np.sin(t*18))*np.sin(t*22)
+        r=radius(t)+bumps*np.minimum(1,np.sin(np.pi*t)*3)
+        return np.stack([r*np.cos(a)+.006*np.sin(np.pi*t),half*(1-2*t)*np.ones_like(a),r*np.sin(a)],axis=-1)
+    seg=64;angles=np.arange(seg)*math.tau/seg
+    ts=np.concatenate([np.linspace(.006,.982,50)])
+    rows=[surface(t,angles) for t in ts]
+    # The oral pore: the wall folds inward into a short blind pit at the tapered end.
+    lip=rows[-1];centre=np.array([.006*np.sin(np.pi*ts[-1]),lip[0,1],0.])
+    for s,dy in [(.62,.006),(.42,.018),(.30,.034)]:
+        row=centre+(lip-centre)*np.array([s,0,s]);row[:,1]=lip[0,1]+dy;rows.append(row)
+    m=Mesh().grid(np.array(rows),flip=True)
+    count=len(m.v);top=np.array([.006*np.sin(np.pi*ts[0]),half*(1-2*.0),0.]);end=np.array([centre[0],lip[0,1]+.04,0.])
+    m.add([top,end],[])
+    caps=[[count,(i+1)%seg,i] for i in range(seg)]+[[count+1,count-seg+i,count-seg+(i+1)%seg] for i in range(seg)]
+    m.f.extend(caps)
+    # Cilia: area-weighted golden-angle coat, each a three-sided tapered hair bent toward the
+    # oral end (the body travels aboral end first) with a travelling wave along the body.
+    grid=np.linspace(.01,.975,600);cdf=np.cumsum(radius(grid));cdf=(cdf-cdf[0])/(cdf[-1]-cdf[0])
+    v=[];f=[];e=1e-3
+    for k in range(hairs):
+        t=float(np.interp((k+.5)/hairs,cdf,grid));a=k*2.399963229728653
+        p=surface(t,np.array([a]))[0]
+        du=surface(t+e,np.array([a]))[0]-surface(t-e,np.array([a]))[0]
+        dv=surface(t,np.array([a+e]))[0]-surface(t,np.array([a-e]))[0]
+        n=np.cross(dv,du);n/=np.linalg.norm(n)
+        if n@(p-np.array([0,p[1],0]))<0:n=-n
+        back=du/np.linalg.norm(du)
+        side=np.cross(n,back)
+        phase=math.sin(t*34+a*2)
+        length=.0095+.003*(.5+.5*math.sin(k*1.7))
+        mid=p+n*length*.55+back*length*(.10+.16*phase)
+        tip=p+n*length*.92+back*length*(.42+.30*phase)
+        base=len(v)
+        for c,w in [(p,.0008),(mid,.0005)]:
+            for j in range(3):
+                b=j*math.tau/3;v.append((c+(side*math.cos(b)+back*math.sin(b))*w).tolist())
+        v.append(tip.tolist())
+        for j in range(3):
+            n1=(j+1)%3
+            f+=[[base+j,base+n1,base+3+j],[base+n1,base+3+n1,base+3+j],[base+3+j,base+3+n1,base+6]]
+    m.add(v,f)
+    # Turn the narrow oral end toward the viewer so the pore can be read, then lean the body.
+    q=math.radians(-28);cq,sq=math.cos(q),math.sin(q);c,s=math.cos(math.radians(tilt)),math.sin(math.radians(tilt))
+    p=np.asarray(m.v);p=np.stack([p[:,0],p[:,1]*cq-p[:,2]*sq,p[:,1]*sq+p[:,2]*cq],axis=1)
+    m.v=(np.stack([p[:,0]*c-p[:,1]*s,p[:,0]*s+p[:,1]*c,p[:,2]],axis=1)+np.asarray(at)).tolist()
+    return m
+
 def write_glb(meshes,path):
     binary=bytearray();views=[];access=[];nodes=[];out=[]
     def buf(arr,typ,component,target):

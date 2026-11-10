@@ -231,14 +231,14 @@ describe('coral-reef: finite model and independent science-content oracle', () =
     expect(bindings[0]).toMatchObject({ part: 'light-marker', offset: { axis: [0, 1, 0], per: .01, origin: 0 } });
   });
 
-  it('has BG + 7 chapters / 39 beats, and indexes all 26 selectable parts without context', () => {
+  it('has BG + 7 chapters / 39 beats, and indexes all 33 selectable parts without context', () => {
     expect(chapters).toHaveLength(8);
     expect(chapters.map((c) => c.state.beats.length)).toEqual([4, 5, 5, 5, 5, 5, 5, 5]);
-    expect(file.parts.filter((p) => !p.context)).toHaveLength(26);
+    expect(file.parts.filter((p) => !p.context)).toHaveLength(33);
     expect(file.parts.filter((p) => p.context)).toHaveLength(6);
-    expect(file.parts).toHaveLength(32);
+    expect(file.parts).toHaveLength(39);
     expect(statSync(join(import.meta.dirname,'../public',file.model!)).size).toBeLessThanOrEqual(1_500_000);
-    expect(file.views.hudFrame?.parts).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id));
+    expect(file.views.hudFrame?.parts).toEqual(file.parts.filter((p) => !p.context && p.id !== 'depth-slope-mark').map((p) => p.id));
     const indexed = new Set<string>(chapters.flatMap((c) => c.state.index.parts));
     expect([...indexed].sort()).toEqual(file.parts.filter((p) => !p.context).map((p) => p.id).sort());
     expect(file.flows.map((f) => f.id).sort()).toEqual(edges.map(([id]) => id).sort());

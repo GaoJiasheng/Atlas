@@ -18,7 +18,8 @@
     "epoch": "J2000.0 positions from HYG; not precessed to date",
     "changes": "selected columns and rows only; no Atlas NC-SA prose or new constellation artwork merged",
     "warning": "Do not treat display point size as physical star diameter. Missing or sentinel distances cannot drive depth.",
-    "pointSizeCssPx": 5.8
+    "pointSizeCssPx": 8.5,
+    "linkRadius": 0.024
   },
   "stars": [
     {

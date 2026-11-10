@@ -16,8 +16,12 @@ for (const mesh of doc.getRoot().listMeshes()) {
   // Broad limestone has no organic silhouette or fine calice detail. Its
   // conservative error cap is under 0.2% of the zone span; keep shared borders.
   const terrain = ['reef-flat','reef-crest','reef-slope'].includes(mesh.getName());
+  // Hair-scale cilia have no redundant triangles; the larva is authored at its final density.
+  if (mesh.getName() === 'larva-inset') continue;
+  // The food-web coral is a small copy of the boulder study and never fills the frame.
+  const webCopy = mesh.getName() === 'web-coral';
   for (const primitive of mesh.listPrimitives()) simplifyPrimitive(primitive, {
-    simplifier:MeshoptSimplifier,ratio:terrain ? .17 : .43,error:terrain ? .0018 : .001,lockBorder:true,
+    simplifier:MeshoptSimplifier,ratio:terrain ? .17 : webCopy ? .2 : .43,error:terrain ? .0018 : webCopy ? .0035 : .001,lockBorder:true,
   });
 }
 await doc.transform(dedup());

@@ -10,4 +10,4 @@ stage: model3d
 theme: paper
 status: published
 illustration: solar-system
-note: { en: "Teaching snapshots · overview: enlarged bodies, compressed gaps · size row: one size scale, layout gaps · distance ruler: one scale, separate position ticks · fixed J2000 sky, no forecasts", zh: "教学快照 · 总览：放大天体、压缩间距 · 大小行：大小同比例，间隔为排版 · 距离尺：统一比例，刻线另标中心位置 · 固定J2000星空，不作预报" }
+note: { en: "Teaching snapshots · overview: enlarged bodies, compressed gaps · size row: one size scale, layout gaps · rocky close-up: four planets, one shared enlargement · distance ruler: one scale, separate position ticks · fixed J2000 sky, no forecasts", zh: "教学快照 · 总览：放大天体、压缩间距 · 大小行：大小同比例，间隔为排版 · 类地行星特写：四颗按同一倍数放大 · 距离尺：统一比例，刻线另标中心位置 · 固定J2000星空，不作预报" }

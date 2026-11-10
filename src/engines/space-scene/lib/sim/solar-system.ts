@@ -5,7 +5,7 @@ import type { SimValues, SimOutput } from '../../sim-schema';
 import type { SimOutputValue } from './index';
 import { RAD, unit, type V3 } from './orbit-rotation';
 export const AU_KM = 149597870.7, YEAR_SECONDS = 31557600, C_KM_S = 299792.458, LIGHT_YEAR_KM = C_KM_S * YEAR_SECONDS;
-const overview = [.7, .14, .19, .2, .16, .6, .5, .35, .34];
+const overview = [1.05, .26, .32, .34, .29, .95, .8, .58, .56];
 const vectors = ['planet-frame', 'display-positions', 'comet-positions'];
 const numbers = ['planet-diameter-km', 'reference-au', 'period-years', 'completed-turns', 'twinkle-flux', 'comet-angle', 'light-distance-km', 'light-time-seconds'];
 export function solarQuantity(from: string): SimOutput['kind'] | null { return vectors.includes(from) ? 'vector' : SOLAR_STATES[from] ? 'state' : numbers.includes(from) || SOLAR_BODIES.some(id => from === `radius-${id}`) ? 'number' : null; }

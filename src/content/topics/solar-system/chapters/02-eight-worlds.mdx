@@ -90,7 +90,13 @@
         "neptune",
         "saturn-rings",
         "orbit-tracks",
-        "scale-ruler"
+        "scale-ruler",
+        "mercury-closeup",
+        "venus-closeup",
+        "earth-closeup",
+        "mars-closeup",
+        "earth-distance-pin",
+        "neptune-distance-pin"
       ]
     },
     "sim": {
@@ -222,13 +228,17 @@
       },
       {
         "caption": {
-          "en": "Mercury, Venus, Earth and Mars have solid surfaces. On this shared size scale they are only small dots.",
-          "zh": "水星、金星、地球与火星都有固体表面。在同一大小比例下，它们只是小点。"
+          "en": "Mercury, Venus, Earth and Mars have solid surfaces. Here all four are enlarged by the same amount, about 11 times the size row, so their widths still compare.",
+          "zh": "水星、金星、地球和火星都有固体表面。这里四颗按同一倍数放大，约为大小行的 11 倍，宽度仍可互相比较。"
         },
         "run": false,
         "part": null,
         "camera": {
-          "position": [-1.7, 3.45, 11.7],
+          "position": [
+            -5.5,
+            1.5,
+            12
+          ],
           "target": [
             -5.5,
             0,
@@ -237,7 +247,8 @@
           "fov": 36
         },
         "layers": [
-          "solar-family"
+          "solar-family",
+          "rocky-closeup"
         ],
         "hide": [
           "sun",
@@ -284,13 +295,17 @@
           "galaxy-disc",
           "galaxy-bar",
           "sun-location",
-          "disc-rays"
-        ],
-        "labels": [
+          "disc-rays",
           "mercury",
           "venus",
           "earth",
           "mars"
+        ],
+        "labels": [
+          "mercury-closeup",
+          "venus-closeup",
+          "earth-closeup",
+          "mars-closeup"
         ],
         "sim": {
           "set": {
@@ -508,18 +523,19 @@
         "camera": {
           "position": [
             150,
-            260,
-            480
+            60,
+            420
           ],
           "target": [
             150,
-            0,
+            4,
             0
           ],
           "fov": 38
         },
         "layers": [
-          "solar-family"
+          "solar-family",
+          "ruler-readings"
         ],
         "hide": [
           "saturn-rings",
@@ -563,7 +579,9 @@
           "disc-rays"
         ],
         "labels": [
-          "scale-ruler"
+          "scale-ruler",
+          "earth-distance-pin",
+          "neptune-distance-pin"
         ],
         "sim": {
           "set": {
@@ -682,7 +700,7 @@
 
 <Lang en>
 
-Read the paths outwards from the Sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune. The size view sets their diameters on a common scale. Mercury is the smallest planet; Jupiter is the largest. Compare Earth with its neighbours before switching views. The large differences in width remain, even though the gaps in this row are only a way to arrange the display. <Num s="S4,S5" />
+Read the paths outwards from the Sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune. The size view sets their diameters on a common scale. Mercury is the smallest planet; Jupiter is the largest. Compare Earth with its neighbours before switching views. The large differences in width remain, even though the gaps in this row are only a way to arrange the display. The close-up of the rocky planets enlarges those four by one factor, so compare them with each other, not with the giants. <Num s="S4,S5" />
 
 The inner <Num s="S4">four</Num> planets have solid surfaces. Jupiter and Saturn are gas giants, while Uranus and Neptune are ice giants. Those names group planets by their physical nature. An ice giant is not a frozen ball with a bare icy surface. The giant planets have no hard surface like the ground beneath our feet. Earth's internal layers have their own model in <TopicLink slug="inside-the-earth" ch="layers-of-earth">Inside the Earth</TopicLink>. <Num s="S4" />
 
@@ -706,7 +724,7 @@ In this simulation a model-year contains <Num s="S37">365.25 days</Num>. Each pl
 
 <Lang zh>
 
-沿路径从太阳往外读，依次是水星、金星、地球、火星、木星、土星、天王星和海王星。大小视图让各行星直径共用比例：水星最小，木星最大。先找地球，再与相邻行星比较；宽度的差异可以直接读，行星之间的留白却只是排版，不能用来判断真实远近。 <Num s="S4,S5" />
+沿路径从太阳往外读，依次是水星、金星、地球、火星、木星、土星、天王星和海王星。大小视图让各行星直径共用比例：水星最小，木星最大。先找地球，再与相邻行星比较；宽度的差异可以直接读，行星之间的留白却只是排版，不能用来判断真实远近。类地行星特写把这四颗按同一倍数放大，只能彼此比较，不能拿来与巨行星比较。 <Num s="S4,S5" />
 
 内侧 <Num s="S4">四颗</Num>行星都有固体表面。木星和土星是气态巨行星，天王星和海王星是冰巨行星。这些名称描述天体的物理性质；“冰巨行星”并不表示外面有裸露的冰地面。巨行星没有像脚下地面一样可站立的硬表面。地球内部的结构另见<TopicLink slug="inside-the-earth" ch="layers-of-earth">《地球内部》的分层模型</TopicLink>。 <Num s="S4" />
 

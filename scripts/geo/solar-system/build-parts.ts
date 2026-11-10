@@ -141,6 +141,19 @@ function add(id:string,g:BufferGeometry,at:number[]=[0,0,0],sheet=false){
 }
 for(const id of ['sun','mercury','venus','earth','mars','jupiter','saturn','uranus','neptune'])add(id,id==='sun'?sun(1):sphere(id,1,128,64));
 add('saturn-rings',rings(),[0,0,0],true);
+// Rocky-planet close-up: existing meshes re-instanced in one row, all four radii from
+// the physical inputs and one shared factor (Earth = 1 scene unit), so no new geometry.
+const rockyIds=['mercury','venus','earth','mars'] as const, earthKm=parsedBaseline.sim!.solarSystem!.bodies.find(b=>b.id==='earth')!.radiusKm;
+const rockyRadii=rockyIds.map(id=>parsedBaseline.sim!.solarSystem!.bodies.find(b=>b.id===id)!.radiusKm/earthKm);
+const rockyGap=.8,rockyWidth=rockyRadii.reduce((n,r)=>n+2*r,0)+rockyGap*3;
+let rockyX=-5.5-rockyWidth/2;
+rockyIds.forEach((id,i)=>{
+ const r=rockyRadii[i]!,part=file.parts.find((p:any)=>p.id===`${id}-closeup`);
+ const source=doc.getRoot().listMeshes().find(m=>m.getName()===id)!;
+ scene.addChild(doc.createNode(`${id}-closeup`).setMesh(source).setTranslation([rockyX+r,0,0]).setScale([r,r,r]).setExtras({closed:true,...(id==='earth'?{labelPoint:[.42,.74,.53]}:{})}));
+ delete part.primitive;part.mesh=`${id}-closeup`;part.material={color:'matte',tint:'#ffffff'};
+ rockyX+=2*r+rockyGap;
+});
 for(const [id,r,at] of [['moon-parent',.8,[-2,0,0]],['meteor-world',.8,[-2,0,0]],['earth-viewpoint',.5,[0,-.6,0]],['reflecting-world',.65,[3,0,0]]] as const)add(id,sphere('earth',r,96,48),[...at]);
 const moon=colours(sphere('moon',.18,96,48),()=>[1,1,1]);
 // Keep the original orbit centre/radius, with a small opening around the Moon
@@ -166,7 +179,8 @@ add('ion-tail',tail(false),[0,0,0],true);add('dust-tail',tail(true),[0,0,0],true
 // source catalogue and legacy sample-solar fixture remain byte-for-byte intact.
 const catalogue=JSON.parse(readFileSync('public/catalogues/solar-system/stars-hyg-v41-cc-by-sa.json','utf8'));
 // Slightly stronger core coverage at laptop DPR without a halo or world-space geometry.
-catalogue.meta.pointSizeCssPx=5.8;
+catalogue.meta.pointSizeCssPx=8.5;
+catalogue.meta.linkRadius=.024;
 writeFileSync('public/catalogues/solar-system/stars-hyg-v41-readable-cc-by-sa.json',JSON.stringify(catalogue,null,2)+'\n');
 file.sim.overlays.find((o:any)=>o.kind==='catalogue-sky').catalogue='stars-hyg-v41-readable-cc-by-sa.json';
 file.model='/models/solar-system.glb';

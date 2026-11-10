@@ -106,6 +106,14 @@ describe('published solar-system production content', () => {
     expect(year['mercury.turns']).toBeGreaterThan(year['earth.turns']!);
     expect(year['earth.turns']).toBeGreaterThan(year['neptune.turns']!);
   });
+  it('keeps the enlarged overview markers clear of each other at the aligned start', () => {
+    const o = out(beat('reading-a-model', 1)), p = o['display-positions'] as Record<string, number>;
+    const ids = ['sun', ...reference.map((r) => r[0])];
+    for (let i = 1; i < ids.length; i++) {
+      const gap = p[`${ids[i]}:x`]! - p[`${ids[i - 1]}:x`]!;
+      expect(gap, ids[i]).toBeGreaterThan((o[`radius-${ids[i]}`] as number) + (o[`radius-${ids[i - 1]}`] as number) * (ids[i - 1] === 'sun' ? 1.22 : 1));
+    }
+  });
   it('backs the twinkle and anti-solar tail captions with distinct numeric states', () => {
     const cases = chapter('through-the-air').state.beats.map(out);
     expect(cases.map((o) => o['twinkle-flux'])).toEqual([1, 1.1, 1.01, 1.3, .99]);

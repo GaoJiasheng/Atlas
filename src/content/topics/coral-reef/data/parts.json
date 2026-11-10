@@ -4739,8 +4739,8 @@
         "zh": "以竖直位置显示相对光指数。"
       },
       "detail": {
-        "en": "This marker displays an illustrative relative light index, calculated as 100 × exp(−kz). The depth choices are 1, 3 and 7 metres; design coefficients are 0.1 and 0.5 per metre for the two water cases. [S50]\n\nThe marker’s position is an index display, not the actual depth of a coral or a light ray. It cannot establish a coral survival threshold, water temperature, bleaching risk or measured Singapore irradiance. [S10, S50]",
-        "zh": "标记显示示意的相对光指数，计算为100 × exp(−kz)。深度选项为1、3和7米；两种水体采用每米0.1和0.5的设计衰减系数。[S50]\n\n标记的位置是指数读数，不是珊瑚的实际深度，也不是光线轨迹；它不确定存活阈值、水温、白化风险或新加坡现场照度。[S10, S50]"
+        "en": "This marker reads an illustrative relative light index on the gauge, calculated as 100 × exp(−kz). The depth choices are 1, 3 and 7 metres; design coefficients are 0.1 and 0.5 per metre for the two water cases. [S50]\n\nIts height is the index, not a depth: read depth from the pointer on the metre scale. It cannot establish a coral survival threshold, water temperature, bleaching risk or measured Singapore irradiance. [S10, S50]",
+        "zh": "标记在标尺上读取示意的相对光指数，计算为100 × exp(−kz)。深度选项为1、3和7米；两种水体采用每米0.1和0.5的设计衰减系数。[S50]\n\n标记的高度是指数，不是深度；深度请看米刻度上的指针。它不确定存活阈值、水温、白化风险或新加坡现场照度。[S10, S50]"
       },
       "primitive": {
         "kind": "extrude",
@@ -5914,34 +5914,16 @@
         "zh": "表示附着之前可扩散的幼体阶段。"
       },
       "detail": {
-        "en": "Coral larvae can disperse before settling on a suitable surface. The attached adult polyp does not walk to a new reef in the way a swimming larva disperses. [S26]\n\nThis smooth ovoid is a generic enlarged larval inset, shown beside the adult study without a shared scale or a species identification. It is not a second adult organ. [S50]",
-        "zh": "珊瑚幼体可先扩散，再附着到合适的表面。已附着的成体珊瑚虫不会像游动幼体一样游到另一片礁区。[S26]\n\n这个平滑卵形是放大的一般幼体插图，与成体并排但不共用生物比例尺，也不鉴定物种；它不是成体的第二个器官。[S50]"
-      },
-      "primitive": {
-        "kind": "sphere",
-        "at": [
-          5.62,
-          0.21,
-          0.04
-        ],
-        "color": "tissue",
-        "tint": "token:muscle-1",
-        "size": [
-          0.075
-        ],
-        "scale": [
-          0.72,
-          1.65,
-          0.68
-        ],
-        "rotation": [
-          0,
-          0,
-          -22
-        ]
+        "en": "Coral larvae can disperse before settling on a suitable surface. The attached adult polyp does not walk to a new reef in the way a swimming larva disperses. [S26]\n\nA mature larva, or planula, is elongated from end to end and covered in cilia, the fine beating hairs it swims with. Many reported planulae travel with the aboral end first, and that end attaches at settling. The small pit at the narrow end marks the oral pore. [S28]\n\nThis enlarged model has no shared scale with the adult and identifies no species. Its cilia are drawn much thicker and fewer than real ones. [S50]",
+        "zh": "珊瑚幼体可先扩散，再附着到合适的表面。已附着的成体珊瑚虫不会像游动幼体一样游到另一片礁区。[S26]\n\n成熟的幼体（浮浪幼体）沿身体长轴伸长，全身覆盖纤毛，靠摆动纤毛游动。许多研究记录的浮浪幼体以反口端在前游动，定居时也以这一端附着。较细一端的小凹坑表示口孔。[S28]\n\n这个放大模型与成体不共用比例尺，也不鉴定物种；纤毛画得比真实的粗得多、少得多。[S50]"
       },
       "clip": false,
-      "castShadow": false
+      "castShadow": false,
+      "mesh": "larva-inset",
+      "material": {
+        "color": "tissue",
+        "tint": "token:muscle-1"
+      }
     },
     {
       "id": "refuge-cavity",
@@ -6024,6 +6006,830 @@
       "context": true,
       "clip": false,
       "castShadow": false
+    },
+    {
+      "id": "water-column-turbid",
+      "name": {
+        "en": "Water column: more turbid",
+        "zh": "水柱：较高浑浊度"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Darkens with depth using the more turbid coefficient.",
+        "zh": "按较高浑浊度系数随深度变暗。"
+      },
+      "detail": {
+        "en": "Water absorbs and scatters light, and suspended particles reduce it further, so less light reaches deeper reefs. Singapore reef research describes this light limitation in turbid water. [S9, S10]\n\nEach darker step stands for one equal fall in the illustrative light index, reached every metre at this design coefficient of 0.5 per metre. The steps are a drawing of the design calculation, not a measured Singapore water profile. [S50]",
+        "zh": "水会吸收和散射光，悬浮颗粒使透光进一步减少，所以较深的礁得到的光较少。新加坡的珊瑚礁研究描述了浑水中的这种光限制。[S9, S10]\n\n每加深一级颜色，代表示意光指数下降相同比例；在每米0.5的设计系数下，每1米下降一级。这些色阶画的是设计计算，不是新加坡海水的实测剖面。[S50]"
+      },
+      "primitive": {
+        "kind": "plane",
+        "at": [
+          14.98,
+          0.5,
+          0.2
+        ],
+        "color": "glass",
+        "tint": "token:cold",
+        "size": [
+          0.7200000000000006,
+          1.0
+        ]
+      },
+      "clip": false,
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.45,
+            0.201
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.9
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.4,
+            0.202
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.8
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.35,
+            0.203
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.7
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.3,
+            0.20400000000000001
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.6
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.25,
+            0.20500000000000002
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.5
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.19999999999999996,
+            0.20600000000000002
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.3999999999999999
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.14999999999999997,
+            0.20700000000000002
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.29999999999999993
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.09999999999999998,
+            0.20800000000000002
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.19999999999999996
+          ]
+        },
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.04999999999999999,
+            0.20900000000000002
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.09999999999999998
+          ]
+        }
+      ]
+    },
+    {
+      "id": "water-column-clear",
+      "name": {
+        "en": "Water column: less turbid",
+        "zh": "水柱：较低浑浊度"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Darkens more slowly using the less turbid coefficient.",
+        "zh": "按较低浑浊度系数较慢地变暗。"
+      },
+      "detail": {
+        "en": "With fewer suspended particles, light is reduced more slowly with depth. [S9, S10]\n\nEach darker step stands for the same fall in the illustrative light index as in the more turbid column, reached every 5 metres at this design coefficient of 0.1 per metre. It is a drawing of the design calculation, not a measurement. [S50]",
+        "zh": "悬浮颗粒较少时，光随深度减弱得较慢。[S9, S10]\n\n每加深一级颜色，代表与较高浑浊度水柱相同比例的示意光指数下降；在每米0.1的设计系数下，每5米下降一级。这里画的是设计计算，不是实测。[S50]"
+      },
+      "primitive": {
+        "kind": "plane",
+        "at": [
+          14.98,
+          0.5,
+          0.2
+        ],
+        "color": "glass",
+        "tint": "token:cold",
+        "size": [
+          0.7200000000000006,
+          1.0
+        ]
+      },
+      "clip": false,
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "plane",
+          "at": [
+            14.98,
+            0.25,
+            0.201
+          ],
+          "color": "glass",
+          "tint": "token:cold",
+          "size": [
+            0.7200000000000006,
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "depth-scale",
+      "name": {
+        "en": "Depth scale, 0 to 10 m",
+        "zh": "深度尺（0–10 米）"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Measures depth in metres below the surface.",
+        "zh": "以米为单位标出水面以下的深度。"
+      },
+      "detail": {
+        "en": "The scale starts at the water surface and marks every metre to 10 m, with longer marks at 0, 5 and 10 m. Singapore sources describe reef depths in this range: crests near 2–3 m, slopes near 7 m and typical coral limits near 8 m at studied sites. [S10, S11]\n\nThe frame around the water is a drawing aid. The width of the column has no scale. [S50]",
+        "zh": "刻度从水面算起，每米一格直到10米，0、5、10米处刻线较长。新加坡的资料描述的礁区深度就在这一范围：礁脊约2–3米，礁坡约7米，研究地点的常见珊瑚深度界限约8米。[S10, S11]\n\n水柱外框只是绘图辅助，水柱宽度没有比例。[S50]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          15.4,
+          0.5,
+          0.2
+        ],
+        "color": "powder",
+        "tint": "token:ink-2",
+        "size": [
+          0.012,
+          1.0,
+          0.012
+        ]
+      },
+      "clip": false,
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            15.375,
+            1.0,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.05,
+            0.009,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.9,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.8,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.7,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.6,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.375,
+            0.5,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.05,
+            0.009,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.3999999999999999,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.29999999999999993,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.19999999999999996,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.385,
+            0.09999999999999998,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.03,
+            0.006,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.375,
+            0.0,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.05,
+            0.009,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.62,
+            0.5,
+            -0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            1.0,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.62,
+            0.5,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            1.0,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.34,
+            0.5,
+            -0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            1.0,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.34,
+            0.5,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            1.0,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.98,
+            0.0,
+            -0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.7200000000000006,
+            0.007,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.98,
+            0.0,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.7200000000000006,
+            0.007,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.62,
+            0.0,
+            0.0
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            0.007,
+            0.4
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.34,
+            0.0,
+            0.0
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            0.007,
+            0.4
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.98,
+            1.0,
+            -0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.7200000000000006,
+            0.007,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.98,
+            1.0,
+            0.2
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.7200000000000006,
+            0.007,
+            0.007
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.62,
+            1.0,
+            0.0
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            0.007,
+            0.4
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            15.34,
+            1.0,
+            0.0
+          ],
+          "color": "powder",
+          "tint": "token:ink-3",
+          "size": [
+            0.007,
+            0.007,
+            0.4
+          ]
+        }
+      ]
+    },
+    {
+      "id": "depth-pointer",
+      "name": {
+        "en": "Chosen depth",
+        "zh": "所选深度"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Points to the chosen depth on the scale.",
+        "zh": "指向深度尺上所选的深度。"
+      },
+      "detail": {
+        "en": "The pointer follows the illustrative depth control: 1, 3 or 7 metres. Read it against the metre marks. [S50]",
+        "zh": "指针跟随示意深度控件，可选1、3或7米，请对照米刻度读数。[S50]"
+      },
+      "primitive": {
+        "kind": "extrude",
+        "at": [
+          15.42,
+          1.0,
+          0.2
+        ],
+        "color": "powder",
+        "tint": "token:cold",
+        "shape": [
+          [
+            0.125,
+            -0.014
+          ],
+          [
+            0.067,
+            -0.014
+          ],
+          [
+            0.067,
+            -0.036
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0.067,
+            0.036
+          ],
+          [
+            0.067,
+            0.014
+          ],
+          [
+            0.125,
+            0.014
+          ]
+        ],
+        "depth": 0.014,
+        "bevel": 0.003
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "depth-crest-band",
+      "name": {
+        "en": "Crests studied at 2–3 m",
+        "zh": "研究中的礁脊：2–3 米"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Marks crest depths in a 2020 Singapore study.",
+        "zh": "标出2020年新加坡研究中的礁脊深度。"
+      },
+      "detail": {
+        "en": "A 2020 study at Kusu Island and Pulau Hantu compared reef crests at 2–3 m with reef slopes at 7 m. [S10]\n\nThese are the depths of that study, not a rule for every reef. [S10]",
+        "zh": "2020年在龟屿与韩都岛的研究比较了2–3米深的礁脊和7米深的礁坡。[S10]\n\n这些是该研究的深度，不是所有礁区的规律。[S10]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          15.6,
+          0.75,
+          0.2
+        ],
+        "color": "powder",
+        "tint": "token:signal",
+        "size": [
+          0.03,
+          0.1,
+          0.012
+        ]
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "depth-slope-mark",
+      "name": {
+        "en": "Slopes studied at 7 m",
+        "zh": "研究中的礁坡：7 米"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Marks the slope depth in the same 2020 study.",
+        "zh": "标出同一项2020年研究中的礁坡深度。"
+      },
+      "detail": {
+        "en": "The same 2020 study at Kusu Island and Pulau Hantu compared slopes at 7 m with crests at 2–3 m. [S10]\n\nThe mark is a study depth, not a survival limit. [S10]",
+        "zh": "同一项2020年研究在龟屿与韩都岛比较了7米深的礁坡和2–3米深的礁脊。[S10]\n\n这条标记是研究深度，不是存活界限。[S10]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          15.6,
+          0.30000000000000004,
+          0.2
+        ],
+        "color": "powder",
+        "tint": "token:signal",
+        "size": [
+          0.03,
+          0.014,
+          0.012
+        ]
+      },
+      "clip": false,
+      "castShadow": false
+    },
+    {
+      "id": "light-gauge",
+      "name": {
+        "en": "Relative-light gauge",
+        "zh": "相对光指数标尺"
+      },
+      "group": "water-study",
+      "summary": {
+        "en": "Reads the light index from 0 at the foot to 100.",
+        "zh": "读取相对光指数，底部为0，顶部为100。"
+      },
+      "detail": {
+        "en": "Read the orange marker against this gauge: the foot is 0 and the top is 100, with marks every 25. The gauge shows the illustrative index, not depth, so it does not line up with the metre scale. [S50]",
+        "zh": "请对照这把标尺读橙色标记：底部为0，顶部为100，每25一格。标尺显示的是示意指数，不是深度，因此不与米刻度对齐。[S50]"
+      },
+      "primitive": {
+        "kind": "box",
+        "at": [
+          14.53,
+          0.5,
+          0.15
+        ],
+        "color": "powder",
+        "tint": "token:ink-2",
+        "size": [
+          0.012,
+          1.0,
+          0.012
+        ]
+      },
+      "clip": false,
+      "castShadow": false,
+      "extra": [
+        {
+          "kind": "box",
+          "at": [
+            14.555,
+            0.0,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.04,
+            0.007,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.555,
+            0.25,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.04,
+            0.007,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.555,
+            0.5,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.04,
+            0.007,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.555,
+            0.75,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.04,
+            0.007,
+            0.012
+          ]
+        },
+        {
+          "kind": "box",
+          "at": [
+            14.555,
+            1.0,
+            0.15
+          ],
+          "color": "powder",
+          "tint": "token:ink-2",
+          "size": [
+            0.04,
+            0.007,
+            0.012
+          ]
+        }
+      ]
     },
     {
       "id": "food-arrow-symbionts-coral",
@@ -6350,6 +7156,14 @@
       "name": {
         "en": "Environmental evidence",
         "zh": "环境证据"
+      },
+      "color": "token:cold"
+    },
+    {
+      "id": "water-study",
+      "name": {
+        "en": "Water column",
+        "zh": "水柱"
       },
       "color": "token:cold"
     },
@@ -6730,7 +7544,13 @@
         "sediment-deposit",
         "colony-tissue",
         "larva-inset",
-        "refuge-cavity"
+        "refuge-cavity",
+        "water-column-turbid",
+        "water-column-clear",
+        "depth-scale",
+        "depth-pointer",
+        "depth-crest-band",
+        "light-gauge"
       ]
     }
   },
@@ -7948,6 +8768,33 @@
         "part": "polyp-symbionts",
         "visible": {
           "eq": 1
+        }
+      },
+      {
+        "output": "haze-shown",
+        "part": "water-column-turbid",
+        "visible": {
+          "eq": 1
+        }
+      },
+      {
+        "output": "haze-shown",
+        "part": "water-column-clear",
+        "visible": {
+          "eq": 0
+        }
+      },
+      {
+        "control": "depth-m",
+        "part": "depth-pointer",
+        "offset": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "per": -0.1,
+          "origin": 0
         }
       },
       {
