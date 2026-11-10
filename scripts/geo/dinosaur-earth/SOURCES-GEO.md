@@ -1,6 +1,6 @@
 # Dinosaur Earth: reproducible source-to-map ledger
 
-Built 2026-10-27 from the **2026-10-26 fixed snapshots**. `build.py` reads local source data, never downloads, never installs packages, and never writes into the source directory. Public payload hashes and per-frame source hashes/CRC are in [build-report.json](build-report.json). The script uses only Python's standard library. `verify.ts` independently decodes the actual public TopoJSON with the existing `topojson-client`, then applies the project's existing `ringIssues` checker.
+Built 2026-10-27 from the **2026-10-26 fixed snapshots**; coastlines retraced 2026-11-10 from the same snapshots. `build.py` reads local source data, never downloads, never installs packages, and never writes into the source directory. Public payload hashes and per-frame source hashes/CRC are in [build-report.json](build-report.json). The script uses only Python's standard library. `verify.ts` independently decodes the actual public TopoJSON with the existing `topojson-client`, then applies the project's existing `ringIssues` checker.
 
 Reproduce from the repository root:
 
@@ -21,28 +21,28 @@ Optional inspection uses the already available Pillow interpreter, without insta
 
 Scotese, C. R. and Wright, N. (2018), **PALEOMAP PaleoDEMs v2**, Zenodo record 5460860: <https://zenodo.org/records/5460860>. Source ZIP: <https://zenodo.org/records/5460860/files/PaleoDEMS_long_lat_elev_csv_v2.zip?download=1>. Runtime source **S29**; spec aliases DE-S03/DE-S07 refer to the same source family. Licence: CC BY 4.0, <https://creativecommons.org/licenses/by/4.0/>. The downloaded official record metadata and `keyframes-csv.json` establish licence, member CRC, SHA256 and numeric ages. Only the ten verified CSV members are used; no netCDF arrays or modern coastlines are substituted.
 
-Modification notice for every `de-land-*.json`: strict positive elevation classification (`z>0`); exact zero assigned to non-land, so the sea-level boundary is uncertain. Grid-node samples become nearest-sample rectangular cells (interior half-width 0.5°), unioned categorically. This is a deterministic **categorical reconstruction**, not interpolated observed shorelines. Diagonal point contacts remain separate simple polygon cycles; islands and holes are retained. Contiguous collinear vertices alone are removed: simplification tolerance **0°**, with **zero additional simplification displacement**. TopoJSON shares genuine coastline arcs between fill and line objects without changing geometry.
+Modification notice for every `de-land-*.json`: strict positive elevation classification (`z>0`); exact zero assigned to non-land, so the sea-level boundary is uncertain. The coast is traced by marching squares between each land sample and its non-land neighbour. Along each such grid edge the crossing is placed by linear interpolation of the two elevations, clamped to the middle half of the edge (25-75 %), so a steep drop to deep ocean cannot pin the coast onto a land sample and a one-sample island keeps a visible size. Saddle cells are resolved by the bilinear centre of the four source elevations. Two Chaikin corner-cutting passes round the grid-scale corners; Douglas-Peucker at **0.05°** (under one CSS pixel at the map's maximum zoom 3.6) removes redundant vertices; vertices are stored on a 0.02° lattice as delta-encoded TopoJSON. Islands and holes are retained. TopoJSON shares genuine coastline arcs between fill and line objects.
 
-The source grid is 1°; an interior cell's furthest point is √0.5 ≈ 0.707107° from its sample in planar lon/lat coordinates. That is a **cell-assignment bound**, not palaeogeographic positional accuracy or a measured shoreline residual. The source provides no ancient shoreline truth set; positional model error is unknown. Heights are model elevation/bathymetry in metres, not measurements of present relief.
+The source grid is 1°, and this method does not add detail: the smooth line is a drawing of where the coast can lie between samples, not a measurement. The build asserts that **every published sample stays on its source side** of the land/non-land line in all ten frames, so the coast moves only inside grid edges that already separate land from non-land; it asserts no contact or crossing between rings. Measured over all frames, smoothing and simplification leave every published vertex within **0.0816°** of the traced contour (50,278 traced vertices, 48,588 published). Compared with the previous nearest-sample cells, a coast can sit up to about 0.25° further along a grid edge in either direction, and diagonal contacts follow the source elevations instead of always staying separate. Features narrower than the 1° spacing remain unknown. The source provides no ancient shoreline truth set; positional model error is unknown. Heights are model elevation/bathymetry in metres, not measurements of present relief. Previous stepped version: git history before this change.
 
-No seam welding, wraparound or cross-dateline interpolation occurs. Cells stop at the source sample-coordinate domain: old five frames stop at +179°, with an explicit unavailable polygon from +179° to +180°. Both source-edge signs remain independent in newer grids. All land is clipped at ±85.051129°. A crop/cut edge closes fill rings but is excluded from the coast line object. Genuine land/non-land internal boundaries become coast; the source frame and unavailable-mask boundary never do. `renderWorldCopies:false` is an engine requirement. No continuous drift or 66 Ma synthetic frame is produced.
+No seam welding, wraparound or cross-dateline interpolation occurs. Contours stop at the source sample-coordinate domain: old five frames stop at +179°, with an explicit unavailable polygon from +179° to +180°. Both source-edge signs remain independent in newer grids. All land is clipped at ±85.051129°. A crop/cut edge closes fill rings but is excluded from the coast line object. Genuine land/non-land internal boundaries become coast; the source frame and unavailable-mask boundary never do. `renderWorldCopies:false` is an engine requirement. No continuous drift or 66 Ma synthetic frame is produced.
 
-Each frame follows exactly `CSV SHA/CRC → strict-positive nearest-sample cell union → source-domain/polar clip → simple rings and shared coast arcs → named TopoJSON`. Exact input/output hashes, rows, zero counts, seam counts, polygon/ring counts and zero-area/self-crossing checks are machine-readable in the report. Legacy member period labels never determine display ages.
+Each frame follows exactly `CSV SHA/CRC → strict-positive classification → contour between land and non-land samples, closed along the source-domain/polar cut → smoothing with cut ends pinned → sample-side and ring checks → shared coast arcs → named TopoJSON`. Exact input/output hashes, rows, zero counts, seam counts, polygon/ring counts and zero-area/self-crossing checks are machine-readable in the report. Legacy member period labels never determine display ages.
 
 | Age Ma | Input CSV | Output stem | Sample bounds W/S/E/N | Rings (land) | Bytes |
 |---:|---|---|---|---:|---:|
-| 250 | `keyframes-csv/Map49_250Ma.csv` | `de-land-250.json` | [-180.0, -89.0, 179.0, 90.0] | 83 | 22,298 |
-| 230 | `keyframes-csv/Map46_230Ma.csv` | `de-land-230.json` | [-180.0, -89.0, 179.0, 90.0] | 100 | 22,282 |
-| 200 | `keyframes-csv/Map43_200Ma.csv` | `de-land-200.json` | [-180.0, -89.0, 179.0, 90.0] | 214 | 35,678 |
-| 170 | `keyframes-csv/Map37_170Ma.csv` | `de-land-170.json` | [-180.0, -89.0, 179.0, 90.0] | 281 | 50,435 |
-| 150 | `keyframes-csv/Map33_150Ma.csv` | `de-land-150.json` | [-180.0, -89.0, 179.0, 90.0] | 299 | 54,570 |
-| 130 | `keyframes-csv/Map29_130Ma.csv` | `de-land-130.json` | [-180.0, -90.0, 180.0, 90.0] | 269 | 50,285 |
-| 100 | `keyframes-csv/Map23_100Ma.csv` | `de-land-100.json` | [-180.0, -90.0, 180.0, 90.0] | 208 | 44,978 |
-| 70 | `keyframes-csv/Map17_070Ma.csv` | `de-land-70.json` | [-180.0, -90.0, 180.0, 90.0] | 310 | 61,905 |
-| 65 | `keyframes-csv/Map16_065Ma.csv` | `de-land-65.json` | [-180.0, -90.0, 180.0, 90.0] | 267 | 56,081 |
-| 0 | `keyframes-csv/Map01_000Ma.csv` | `de-land-0.json` | [-180.0, -90.0, 180.0, 90.0] | 281 | 55,963 |
+| 250 | `keyframes-csv/Map49_250Ma.csv` | `de-land-250.json` | [-180.0, -89.0, 179.0, 90.0] | 77 | 21,452 |
+| 230 | `keyframes-csv/Map46_230Ma.csv` | `de-land-230.json` | [-180.0, -89.0, 179.0, 90.0] | 94 | 20,897 |
+| 200 | `keyframes-csv/Map43_200Ma.csv` | `de-land-200.json` | [-180.0, -89.0, 179.0, 90.0] | 189 | 36,837 |
+| 170 | `keyframes-csv/Map37_170Ma.csv` | `de-land-170.json` | [-180.0, -89.0, 179.0, 90.0] | 245 | 49,830 |
+| 150 | `keyframes-csv/Map33_150Ma.csv` | `de-land-150.json` | [-180.0, -89.0, 179.0, 90.0] | 246 | 54,637 |
+| 130 | `keyframes-csv/Map29_130Ma.csv` | `de-land-130.json` | [-180.0, -90.0, 180.0, 90.0] | 230 | 50,115 |
+| 100 | `keyframes-csv/Map23_100Ma.csv` | `de-land-100.json` | [-180.0, -90.0, 180.0, 90.0] | 180 | 46,136 |
+| 70 | `keyframes-csv/Map17_070Ma.csv` | `de-land-70.json` | [-180.0, -90.0, 180.0, 90.0] | 267 | 63,793 |
+| 65 | `keyframes-csv/Map16_065Ma.csv` | `de-land-65.json` | [-180.0, -90.0, 180.0, 90.0] | 238 | 56,996 |
+| 0 | `keyframes-csv/Map01_000Ma.csv` | `de-land-0.json` | [-180.0, -90.0, 180.0, 90.0] | 235 | 58,279 |
 
-Checks preserve K0 seam land-sign mismatch **6**, K100 **25**, and K70 source zero count **3023**. Their absence would indicate unrecorded source repair. Independent decoder checks report **2317 rings** including five unavailable masks, **0 zero-area / 0 self-crossing**, and no coast segment along source or polar frame cuts. No map-shape source is authored by hand.
+Checks preserve K0 seam land-sign mismatch **6**, K100 **25**, and K70 source zero count **3023**. Their absence would indicate unrecorded source repair. Independent decoder checks report **2,006 rings** including five unavailable masks, **0 zero-area / 0 self-crossing**, and no coast segment along source or polar frame cuts. No map-shape source is authored by hand.
 
 ## Modern inset family — public domain
 
@@ -62,6 +62,6 @@ The four separately authored evidence cards are editorial facts, not PBDB locali
 
 ## Budget and licence separation
 
-All **18** published `de-*.json` payloads together are **1,924,316 bytes** (below even a strict decimal 2 MB budget). Ten ancient frame vectors: **454,475 bytes**; modern NE geometry: **350,774 bytes**; PBDB collection metadata: **918,555 bytes**; offline PBDB bibliography: **194,623 bytes**; manifests/editorial references/cards: remainder. Original snapshots and QA raster files are not deployed.
+All **18** published `de-*.json` payloads together are **1,929,023 bytes** (below even a strict decimal 2 MB budget). Ten ancient frame vectors: **458,972 bytes**; modern NE geometry: **350,774 bytes**; PBDB collection metadata: **918,555 bytes**; offline PBDB bibliography: **194,623 bytes**; manifests/editorial references/cards: remainder. Original snapshots and QA raster files are not deployed.
 
 The families stay in separate files: PaleoDEM-derived frames Atlas CC BY-NC-SA 4.0 (upstream CC BY 4.0); NE geometry public domain; PBDB-derived points and offline bibliography CC0; editorial cards/manifests Atlas CC BY-NC-SA 4.0. No CC BY-SA, ODbL, ODC-BY or licence requiring an agreement is used. Corresponding family exceptions and attribution are recorded in LICENSE-CONTENT and THIRD-PARTY-NOTICES.md.

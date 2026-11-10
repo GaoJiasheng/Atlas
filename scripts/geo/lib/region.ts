@@ -14,6 +14,32 @@ import { unwrapRing } from '../../../src/engines/time-scene/lib/geo';
 
 export type Box = [number, number, number, number];
 
+/**
+ * Natural Earth (world-atlas) rings that cross the antimeridian twice (Fiji,
+ * Chukotka on the Eurasian ring, Wrangel Island) jump from +180 to -180 and
+ * back. A planar clip such as mapshaper's `-clip bbox` reads those jumps as
+ * edges across the whole world and leaves bands along the ring's latitude
+ * inside any box. Unwrap such rings so their longitudes run on past ±180; a
+ * box inside [-180, 180] then clips them correctly. Rings with an odd number of
+ * jumps go round a pole (Antarctica) and are left as they are.
+ */
+export function unwrapDatelineRings(land: FeatureCollection): FeatureCollection {
+  const fix = (ring: Position[]): Position[] => {
+    let jumps = 0;
+    for (let i = 1; i < ring.length; i++) if (Math.abs(ring[i]![0]! - ring[i - 1]![0]!) > 180) jumps++;
+    return jumps && jumps % 2 === 0 ? unwrapRing(ring) : ring;
+  };
+  return {
+    ...land,
+    features: land.features.map((f) => {
+      const g = f.geometry;
+      if (g.type === 'Polygon') return { ...f, geometry: { ...g, coordinates: g.coordinates.map(fix) } };
+      if (g.type === 'MultiPolygon') return { ...f, geometry: { ...g, coordinates: g.coordinates.map((poly) => poly.map(fix)) } };
+      return f;
+    }),
+  };
+}
+
 /** Perpendicular distance from p to segment ab (planar degrees). */
 function segDist(p: Position, a: Position, b: Position): number {
   const [px = 0, py = 0] = p;

@@ -5,6 +5,7 @@ type Topology = Parameters<typeof feature>[0];
 import type { FeatureCollection, MultiPolygon, Polygon, Position } from 'geojson';
 import { ringIssues } from '../lib/rings.js';
 const dir = 'public/geo/';
+const near = (a: number, b: number) => Math.abs(a - b) < 1e-6;
 const manifest = JSON.parse(readFileSync(dir + 'de-reconstruction.json', 'utf8'));
 let total = 0;
 for (const frame of manifest.frames) {
@@ -20,7 +21,8 @@ for (const frame of manifest.frames) {
       const east = frame.sampleBounds[2];
       for (const line of f.geometry.coordinates) for (let i = 1; i < line.length; i++) {
         const a = line[i - 1]!, b = line[i]!;
-        if ((a[0] === b[0] && (a[0] === -180 || a[0] === east)) || (a[1] === b[1] && Math.abs(a[1]!) === 85.051129)) throw Error('Frame cut drawn as coast');
+        // Frames are lattice-quantized TopoJSON, so decoded frame edges match to within float error.
+        if ((near(a[0]!, b[0]!) && (near(a[0]!, -180) || near(a[0]!, east))) || (near(a[1]!, b[1]!) && near(Math.abs(a[1]!), 85.051129))) throw Error('Frame cut drawn as coast');
         if (Math.abs(a[0]! - b[0]!) > 180) throw Error('Dateline bridge');
       }
     }
@@ -29,7 +31,7 @@ for (const frame of manifest.frames) {
       if (!Array.isArray(c)) return;
       if (typeof c[0] === 'number') {
         const p = c as Position;
-        if (!Number.isFinite(p[0]) || !Number.isFinite(p[1]) || Math.abs(p[0]!) > 180 || Math.abs(p[1]!) > 85.051129) throw Error('Bad coordinates');
+        if (!Number.isFinite(p[0]) || !Number.isFinite(p[1]) || Math.abs(p[0]!) > 180 + 1e-6 || Math.abs(p[1]!) > 85.051129 + 1e-6) throw Error('Bad coordinates');
       } else for (const x of c) walk(x);
     };
     if ('coordinates' in f.geometry) walk(f.geometry.coordinates);

@@ -1,15 +1,14 @@
 {
-  "algorithm": "nearest-sample categorical cells; z>0; no nonzero simplification tolerance; exact collinear reduction; source edge excluded from coast",
+  "algorithm": "z>0; contour between each land sample and its non-land neighbour, linear in elevation, crossing clamped to 0.25-0.75 of the grid edge; saddles by bilinear centre; 2 Chaikin passes; Douglas-Peucker 0.05 deg; lattice 0.02 deg; every sample asserted on its source side; source edge excluded from coast",
   "sampling": {
     "spacingDegrees": 1,
-    "interiorMaximumDistanceToSampleDegrees": 0.7071067811865476,
     "positionAccuracy": "unknown; not measured coastline error"
   },
   "frames": [
     {
       "file": "de-land-250.json",
-      "bytes": 22298,
-      "sha256": "238d90285b783711617a83869730c5671c88768e80e2129ff957ad83d629a772",
+      "bytes": 21452,
+      "sha256": "b526fdf80209bda5eed5d8f59396acd51c3fda3c8c30a7c59f1b1a7e4b165cf4",
       "ageMa": 250,
       "input": "keyframes-csv/Map49_250Ma.csv",
       "inputSha256": "3e78cf36bb44c5cadcabe1c446c84831e99c0f161d020ea61dd14976bae812a3",
@@ -23,16 +22,19 @@
       "rows": 64800,
       "zeroRows": 730,
       "seamLandSignMismatches": null,
-      "polygons": 19,
-      "rings": 83,
-      "coastLines": 142,
+      "polygons": 10,
+      "rings": 77,
+      "coastLines": 80,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 2543,
+      "publishedVertices": 2295,
+      "maxSmoothingShiftDegrees": 0.0711
     },
     {
       "file": "de-land-230.json",
-      "bytes": 22282,
-      "sha256": "4232d9adfbc5ebbb2cd52797728d8a2de4f29f60058df39aa42d1d06ae33f506",
+      "bytes": 20897,
+      "sha256": "74e6d934b256d1eb22e456b9ce8a06a62ba2f4b921997095574eae05ec205c9e",
       "ageMa": 230,
       "input": "keyframes-csv/Map46_230Ma.csv",
       "inputSha256": "76bf210a1da2afff0009e915b852d402d26a1404a1f87d5b7e5fa671202b6d97",
@@ -46,16 +48,19 @@
       "rows": 64800,
       "zeroRows": 3663,
       "seamLandSignMismatches": null,
-      "polygons": 41,
-      "rings": 100,
-      "coastLines": 138,
+      "polygons": 34,
+      "rings": 94,
+      "coastLines": 94,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 2526,
+      "publishedVertices": 2175,
+      "maxSmoothingShiftDegrees": 0.0816
     },
     {
       "file": "de-land-200.json",
-      "bytes": 35678,
-      "sha256": "98ebdaac5456a6794725970a76356bc7786e3ce012f1df3b4fd80ded3e2ed4d5",
+      "bytes": 36837,
+      "sha256": "a3c3571a5a098a64ec29af066623ced533cbcfb7549d5a56a40e342c247091f6",
       "ageMa": 200,
       "input": "keyframes-csv/Map43_200Ma.csv",
       "inputSha256": "5183708f57f0e13022a3492966ece5352ed75c2bad932da284a6c21a82db99ff",
@@ -69,16 +74,19 @@
       "rows": 64800,
       "zeroRows": 402,
       "seamLandSignMismatches": null,
-      "polygons": 61,
-      "rings": 214,
-      "coastLines": 313,
+      "polygons": 50,
+      "rings": 189,
+      "coastLines": 189,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 4106,
+      "publishedVertices": 3851,
+      "maxSmoothingShiftDegrees": 0.0809
     },
     {
       "file": "de-land-170.json",
-      "bytes": 50435,
-      "sha256": "20642497ac3c2611acbfca0ab4379a1605495c85c88ad4ebc6812009321153ad",
+      "bytes": 49830,
+      "sha256": "561976ec488ad1698ea8236a8ebe596a5d94000bd926424a4cc6b1bff08b9bc4",
       "ageMa": 170,
       "input": "keyframes-csv/Map37_170Ma.csv",
       "inputSha256": "fae6f5ad157a450450312d4df05430ae9789a9328caf00793ac06f3ebcd442c2",
@@ -92,16 +100,19 @@
       "rows": 64800,
       "zeroRows": 2061,
       "seamLandSignMismatches": null,
-      "polygons": 140,
-      "rings": 281,
-      "coastLines": 479,
+      "polygons": 97,
+      "rings": 245,
+      "coastLines": 248,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 5068,
+      "publishedVertices": 5194,
+      "maxSmoothingShiftDegrees": 0.0777
     },
     {
       "file": "de-land-150.json",
-      "bytes": 54570,
-      "sha256": "95a5624b30707ebdd7a96916a04276b1ddf234654e2db217ba8af4cda6b06f9b",
+      "bytes": 54637,
+      "sha256": "5c423f49992c490529c5ec8d57e2eb7460b6a19cc2d35c34ad82373f6d30fe9d",
       "ageMa": 150,
       "input": "keyframes-csv/Map33_150Ma.csv",
       "inputSha256": "dd61811b5786b664398a50b44a869f15f1494746b7ba0f7d5ac5cc78582318a8",
@@ -115,16 +126,19 @@
       "rows": 64800,
       "zeroRows": 2206,
       "seamLandSignMismatches": null,
-      "polygons": 163,
-      "rings": 299,
-      "coastLines": 539,
+      "polygons": 107,
+      "rings": 246,
+      "coastLines": 246,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 5802,
+      "publishedVertices": 5769,
+      "maxSmoothingShiftDegrees": 0.076
     },
     {
       "file": "de-land-130.json",
-      "bytes": 50285,
-      "sha256": "bfa25e71f9211624e84aa585802b29587b3b39297cd01424bb2e3e00ff068a67",
+      "bytes": 50115,
+      "sha256": "63e7a941778592249b98dd895a45831bb971b49a3e9b6e895547ac5d9b794604",
       "ageMa": 130,
       "input": "keyframes-csv/Map29_130Ma.csv",
       "inputSha256": "ee72c93ddd47b698031e6417b37721db84fad06a7f918825ed6fa17cb9183c67",
@@ -138,16 +152,19 @@
       "rows": 65341,
       "zeroRows": 1323,
       "seamLandSignMismatches": 5,
-      "polygons": 144,
-      "rings": 269,
-      "coastLines": 463,
+      "polygons": 107,
+      "rings": 230,
+      "coastLines": 231,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 5518,
+      "publishedVertices": 5282,
+      "maxSmoothingShiftDegrees": 0.074
     },
     {
       "file": "de-land-100.json",
-      "bytes": 44978,
-      "sha256": "7da21c176688239b95a72e8f74feac9e79a86211ed10633dd141d2f93ab4a749",
+      "bytes": 46136,
+      "sha256": "568b7b23a8cc9ccb9524dc3c703705e7b35de6ce9f73456e168c39f8084c8f69",
       "ageMa": 100,
       "input": "keyframes-csv/Map23_100Ma.csv",
       "inputSha256": "028eb52944025ab7c44422390ada8bcb4e888ed3b5e5c3d44f066b03cd86148a",
@@ -161,16 +178,19 @@
       "rows": 65341,
       "zeroRows": 1303,
       "seamLandSignMismatches": 25,
-      "polygons": 118,
-      "rings": 208,
-      "coastLines": 321,
+      "polygons": 96,
+      "rings": 180,
+      "coastLines": 183,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 5454,
+      "publishedVertices": 4937,
+      "maxSmoothingShiftDegrees": 0.0724
     },
     {
       "file": "de-land-70.json",
-      "bytes": 61905,
-      "sha256": "dbc5e282d21d64ac99c74308cec29e79bb69364d3f6acafe07a98ded431fd627",
+      "bytes": 63793,
+      "sha256": "c02f2b7d79425c4cd28a8979a502d21c3d9e59db36f6da28dc32d277d4abe60c",
       "ageMa": 70,
       "input": "keyframes-csv/Map17_070Ma.csv",
       "inputSha256": "7bb4d97dbbccfcc2f5f0e3f4f9548fcfd88e8460b0861027a491e7a6d8fa8f95",
@@ -184,16 +204,19 @@
       "rows": 65341,
       "zeroRows": 3023,
       "seamLandSignMismatches": 11,
-      "polygons": 216,
-      "rings": 310,
-      "coastLines": 496,
+      "polygons": 175,
+      "rings": 267,
+      "coastLines": 280,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 6725,
+      "publishedVertices": 6775,
+      "maxSmoothingShiftDegrees": 0.0781
     },
     {
       "file": "de-land-65.json",
-      "bytes": 56081,
-      "sha256": "76a0cab321eaca5d38d237f6cb7c769bc95041af8a22ce50bbe48a1b8d0d0344",
+      "bytes": 56996,
+      "sha256": "02fb70ca689b9aff0be6fd97b3468a167d75d6727d5d05d89cb88910e1062c73",
       "ageMa": 65,
       "input": "keyframes-csv/Map16_065Ma.csv",
       "inputSha256": "bb25dffa9792d65650428a81bcdf046b48e25ca130dd72fb8af137e65bfe49dd",
@@ -207,16 +230,19 @@
       "rows": 65341,
       "zeroRows": 2253,
       "seamLandSignMismatches": 8,
-      "polygons": 170,
-      "rings": 267,
-      "coastLines": 438,
+      "polygons": 137,
+      "rings": 238,
+      "coastLines": 244,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 6305,
+      "publishedVertices": 6045,
+      "maxSmoothingShiftDegrees": 0.0731
     },
     {
       "file": "de-land-0.json",
-      "bytes": 55963,
-      "sha256": "71e14e0a0de79caccbebb35794cd85846fdb0cdc4a6ccd4e9557576d606bd0ca",
+      "bytes": 58279,
+      "sha256": "d193f6be1a2abc558dff7faea5b3d7c199bdb14c6bf6b588c843390b74d3d14b",
       "ageMa": 0,
       "input": "keyframes-csv/Map01_000Ma.csv",
       "inputSha256": "11cf269e57ad79888c6788d357ace06fdcbc4714997e409851a21870fa3a39cf",
@@ -230,11 +256,14 @@
       "rows": 65341,
       "zeroRows": 2037,
       "seamLandSignMismatches": 6,
-      "polygons": 202,
-      "rings": 281,
-      "coastLines": 491,
+      "polygons": 157,
+      "rings": 235,
+      "coastLines": 238,
       "zeroArea": 0,
-      "selfCrossing": 0
+      "selfCrossing": 0,
+      "contourVertices": 6231,
+      "publishedVertices": 6265,
+      "maxSmoothingShiftDegrees": 0.0808
     }
   ],
   "assets": [
@@ -260,13 +289,13 @@
     },
     {
       "file": "de-reference-points.json",
-      "bytes": 880,
-      "sha256": "00d18ca096d942d4f325e64f5ce878db7bda85590a4b2378067af961c106dd21"
+      "bytes": 904,
+      "sha256": "8d2ba96409292dc03c5d4c0a5d01a7a71df032ad715ee4a4a13a3010f6e86894"
     },
     {
       "file": "de-reference-cards.json",
       "bytes": 3235,
-      "sha256": "bb30160c0f1f512a694dcca76a18037342cb75fa92bb01f3da02ea2b5795f70d"
+      "sha256": "dec81bbf5c432b7e95979b9f009765e7498df4c612ba9b0486ba0eca1d65243a"
     },
     {
       "file": "de-modern-inset.json",
@@ -275,8 +304,8 @@
     },
     {
       "file": "de-reconstruction.json",
-      "bytes": 1565,
-      "sha256": "52542488aace117195c31b50688f7ee4b68adc72c26a0d63a0a9388c0265b632"
+      "bytes": 1751,
+      "sha256": "5c87ef94a558059ac4c7d847f03f10893acf1460c588c6bf68f2cb246c188caf"
     }
   ],
   "pbdb": {
@@ -361,5 +390,5 @@
       ]
     }
   },
-  "totalPublicBytes": 1924316
+  "totalPublicBytes": 1929023
 }

@@ -190,12 +190,12 @@ Zenodo record 5460860, <https://doi.org/10.5281/zenodo.5460860>. Upstream
 licence **CC BY 4.0**, <https://creativecommons.org/licenses/by/4.0/>.
 `public/geo/de-land-{250,230,200,170,150,130,100,70,65,0}.json` are Atlas
 adaptations licensed **CC BY-NC-SA 4.0**: ten verified 1° CSV elevation grids
-were classified with strict `z>0`, converted to nearest-sample categorical
-cells, unioned, clipped to explicit source-domain/dateline and Mercator polar
-limits, and encoded as TopoJSON with shared true-coast arcs. Exact-zero samples
+were classified with strict `z>0`, contoured between land and non-land samples,
+smoothed with every sample kept on its source side, clipped to explicit
+source-domain/dateline and Mercator polar limits, and encoded as TopoJSON with
+shared true-coast arcs. Exact-zero samples
 remain non-land; old-grid 179…180° is unavailable. No modern coast substitution,
-seam welding, continuous interpolation or synthetic 66 Ma frame. Only exact
-collinear reduction is applied. Per-input/output hashes, grid limits, changes
+seam welding, interpolation between ages or synthetic 66 Ma frame. Per-input/output hashes, grid limits, changes
 and topology checks are in `scripts/geo/dinosaur-earth/SOURCES-GEO.md` and
 `build-report.json`.
 

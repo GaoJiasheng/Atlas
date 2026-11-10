@@ -33,7 +33,7 @@ import { topicSchema } from '../../../src/content/schema/topic';
 import { GEO, ROOT, log, mapshaper, readJson, warn } from './common';
 import type { RegionLand } from './manifest';
 import { ringIssues } from './rings';
-import { KM_PER_DEG, regionTopology, type Box } from './region';
+import { KM_PER_DEG, regionTopology, unwrapDatelineRings, type Box } from './region';
 
 const { values } = parseArgs({ options: { topic: { type: 'string' }, simplify: { type: 'string' }, budget: { type: 'string' } } });
 const slug = values.topic;
@@ -71,7 +71,7 @@ const file = join(ROOT, 'public/geo', `${region.land}.json`);
 
 /** The opt-in mapshaper pass: clip to the padded plate, simplify keeping shapes, repair crossings. */
 const preSimplified = async (km: number): Promise<FeatureCollection> =>
-  mapshaper(`-i land.json -clip bbox=${box.join(',')} -simplify dp interval=${Math.round(km * 1000)} keep-shapes -clean`, { land });
+  mapshaper(`-i land.json -clip bbox=${box.join(',')} -simplify dp interval=${Math.round(km * 1000)} keep-shapes -clean`, { land: unwrapDatelineRings(land) });
 
 for (let attempt = 0; ; attempt++) {
   const source = knobs.mapshaper ? await preSimplified(simplifyKm) : land;

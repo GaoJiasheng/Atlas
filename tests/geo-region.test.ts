@@ -8,7 +8,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { feature } from 'topojson-client';
 import type { FeatureCollection, MultiLineString, MultiPolygon } from 'geojson';
-import { clipRing, regionTopology, simplifyLine, splitRing, type Box } from '../scripts/geo/lib/region';
+import { clipRing, regionTopology, simplifyLine, splitRing, unwrapDatelineRings, type Box } from '../scripts/geo/lib/region';
 import { ringIssues } from '../scripts/geo/lib/rings';
 
 const box: Box = [0, 0, 10, 10];
@@ -23,6 +23,23 @@ describe('region land', () => {
     expect(runs.filter((r) => !r.coast).map((r) => r.pts)).toEqual([[[10, 2], [10, 6]]]);
     expect(runs.filter((r) => r.coast)).toHaveLength(1);
     expect(clipRing([[20, 20], [30, 20], [30, 30], [20, 20]], box)).toEqual([]);
+  });
+
+  it('unwraps rings that cross the antimeridian twice and leaves polar rings alone', () => {
+    // An island astride 180° (as Fiji in Natural Earth) and a ring round the South Pole.
+    const island = [[179, -16], [-179, -16], [-179, -17], [179, -17], [179, -16]];
+    const polar = [[-180, -70], [0, -68], [180, -70], [180, -90], [-180, -90], [-180, -70]];
+    const land: FeatureCollection = { type: 'FeatureCollection', features: [
+      { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [island] } },
+      { type: 'Feature', properties: {}, geometry: { type: 'MultiPolygon', coordinates: [[polar]] } },
+    ] };
+    const out = unwrapDatelineRings(land);
+    const ring = (out.features[0]!.geometry as { coordinates: number[][][] }).coordinates[0]!;
+    const xs = ring.map(([x = 0]) => x);
+    expect(Math.max(...xs) - Math.min(...xs)).toBe(2);
+    // Unwrapped, it lies wholly past ±179°: a box from -30° to 155° clips it away instead of keeping a band at -16°.
+    expect(clipRing(ring, [-30, -60, 155, 72])).toEqual([]);
+    expect((out.features[1]!.geometry as { coordinates: number[][][][] }).coordinates[0]![0]).toEqual(polar);
   });
 
   it('simplifies within tolerance and keeps the ends', () => {

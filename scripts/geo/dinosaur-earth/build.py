@@ -2,7 +2,7 @@
 """Rebuild local publication assets from fixed read-only snapshots; stdlib only.
 No downloads and no raw fossil coordinates copied to audit outputs.
 """
-import argparse,collections,csv,hashlib,io,json,math,pathlib,struct,zipfile,zlib
+import argparse,bisect,collections,csv,hashlib,io,json,math,pathlib,struct,zipfile,zlib
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 P=argparse.ArgumentParser();P.add_argument('--inputs',type=pathlib.Path,default=pathlib.Path('/Users/gavin/work/atlas/art/research/dinosaur-earth/data'));P.add_argument('--frames',nargs='*',type=int);args=P.parse_args();INPUT=args.inputs
 OUT=ROOT/'public/geo';WORK=ROOT/'scripts/geo/dinosaur-earth';LIMIT=85.051129
@@ -10,11 +10,6 @@ bi=lambda en,zh:dict(en=en,zh=zh)
 def emit(stem,obj):
  p=OUT/(stem+'.json');p.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n');return dict(file=p.name,bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())
 def area(r):return sum(a[0]*b[1]-b[0]*a[1] for a,b in zip(r,r[1:]))/2
-def turn(a,b,c):return (b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0])
-def compact(r,closed=True):
- if closed:r=r[:-1]
- keep=[p for i,p in enumerate(r) if i==0 and not closed or i==len(r)-1 and not closed or turn(r[i-1],p,r[(i+1)%len(r)])!=0]
- return keep+[keep[0]] if closed else keep
 
 def inside(p,r):
  x,y=p;v=False
@@ -68,11 +63,14 @@ def topology(stem,geoms):
     rr.append(refs)
    aa.append(rr)
   objects.append(dict(type=typ,arcs=aa,properties=dict(kind=kind,**props)))
- return dict(type='Topology',objects={stem:dict(type='GeometryCollection',geometries=objects)},arcs=arcs)
+ # Delta-encoded integers on the published lattice; every vertex is already a lattice point.
+ def encode(line):
+  q=[(round((x+180)/GRID_X),round((y+LIMIT)/GRID_Y)) for x,y in line]
+  return [list(q[0])]+[[b[0]-a[0],b[1]-a[1]] for a,b in zip(q,q[1:])]
+ return dict(type='Topology',transform=dict(scale=[GRID_X,GRID_Y],translate=[-180,-LIMIT]),objects={stem:dict(type='GeometryCollection',geometries=objects)},arcs=[encode(a) for a in arcs])
 
 def crossings(r):
- # Exact orthogonal raster boundaries cannot properly cross without sharing a vertex.
- # Also reject repeated non-closure vertices (pinches) rather than hiding them.
+ # Reject proper self-crossings and repeated non-closure vertices (pinches).
  assert len(set(map(tuple,r[:-1])))==len(r)-1,'repeated ring vertex'
  seg=sorted(zip(r,r[1:]),key=lambda s:min(s[0][0],s[1][0]));active=[]
  for a,b in seg:
@@ -84,66 +82,164 @@ def crossings(r):
   active.append((a,b))
  return False
 
+# Coastline tracing. PaleoDEM v2 is a 1-degree grid of elevations, so the coast is known only to lie
+# between a land sample and its non-land neighbour. Trace it there, then round the grid-scale corners.
+# check_samples proves afterwards that no sample changed side.
+T_MIN,T_MAX=.25,.75 # crossing stays in the middle half of a land/non-land grid edge
+SMOOTH_PASSES=2     # Chaikin corner cutting
+DP_TOLERANCE=.05    # degrees; under one CSS pixel at the map's zoom ceiling of 3.6 (17 px per degree)
+GRID_X=.02;GRID_Y=2*LIMIT/round(2*LIMIT/.02) # published lattice, 1/50 of the source spacing; both polar crops are lattice rows
+
+def clean(run,closed):
+ # Exact duplicates arise only where a zero-width border cell meets a corner.
+ out=[]
+ for p in run:
+  if not out or out[-1]!=p:out.append(p)
+ if closed and len(out)>1 and out[0]==out[-1]:out.pop()
+ return out
+
+def chaikin(run,closed):
+ pts=run
+ for _ in range(SMOOTH_PASSES):
+  if len(pts)<3:break
+  out=[] if closed else [pts[0]]
+  pairs=list(zip(pts,pts[1:]+pts[:1])) if closed else list(zip(pts,pts[1:]))
+  for i,(a,b) in enumerate(pairs):
+   q=(.75*a[0]+.25*b[0],.75*a[1]+.25*b[1]);r=(.25*a[0]+.75*b[0],.25*a[1]+.75*b[1])
+   # Open runs keep their end vertices, which sit on the frame cut.
+   if closed or i>0:out.append(q)
+   if closed or i<len(pairs)-1:out.append(r)
+  if not closed:out.append(pts[-1])
+  pts=out
+ return pts
+
+def douglas(run):
+ keep=[False]*len(run);keep[0]=keep[-1]=True;stack=[(0,len(run)-1)]
+ while stack:
+  i,j=stack.pop()
+  if j<=i+1:continue
+  a,b=run[i],run[j];dx=b[0]-a[0];dy=b[1]-a[1];n=math.hypot(dx,dy);best=-1;at=-1
+  for k in range(i+1,j):
+   p=run[k];d=abs((p[0]-a[0])*dy-(p[1]-a[1])*dx)/n if n else math.hypot(p[0]-a[0],p[1]-a[1])
+   if d>best:best=d;at=k
+  if best>DP_TOLERANCE:keep[at]=True;stack+=[(i,at),(at,j)]
+ return [p for p,k in zip(run,keep) if k]
+
+def simplify_closed(run):
+ # Anchor a closed ring at two far-apart vertices, keeping at least a triangle.
+ far=max(range(len(run)),key=lambda k:(run[k][0]-run[0][0])**2+(run[k][1]-run[0][1])**2)
+ if far==0:return run
+ a=douglas(run[:far+1]);b=douglas(run[far:]+run[:1])
+ out=a[:-1]+b[:-1]
+ return out if len(out)>=3 else run
+
+def distance(p,a,b):
+ dx=b[0]-a[0];dy=b[1]-a[1];n=dx*dx+dy*dy;t=max(0,min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/n)) if n else 0
+ return math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy)
+
+def coastline(grid,xs,ys):
+ x0,x1=xs[0],xs[-1];rows=[y for y in ys if abs(y)<=85]
+ # The polar crop is a row of the row nearest it; the outer rows and columns are zero-width
+ # non-land cells, so land reaching the frame closes exactly along the frame edge.
+ lat=[-LIMIT,-LIMIT]+rows+[LIMIT,LIMIT];lon=[x0]+xs+[x1];nx=len(lon);ny=len(lat)
+ src=[None,rows[0]]+rows+[rows[-1],None]
+ def z(i,j):
+  if i==0 or i==nx-1 or j==0 or j==ny-1:return None
+  return grid[lon[i],src[j]]
+ land=lambda v:v is not None and v>0
+ def cross(i,j,i2,j2):
+  a=z(i,j);b=z(i2,j2)
+  if not land(a):i,j,i2,j2,a,b=i2,j2,i,j,b,a
+  # a is land. A crossing into a frame cell lands on the frame edge at the land sample.
+  if b is None:return (lon[i],lat[j])
+  t=max(T_MIN,min(T_MAX,a/(a-min(b,-1.))))
+  return (lon[i]+(lon[i2]-lon[i])*t,lat[j]+(lat[j2]-lat[j])*t)
+ nxt={};pos={}
+ for j in range(ny-1):
+  for i in range(nx-1):
+   c=[(i,j),(i+1,j),(i+1,j+1),(i,j+1)];v=[z(*q) for q in c];l=[land(q) for q in v]
+   if not any(l) or all(l):continue
+   # Edge k joins corners k and k+1, counter-clockwise. Land stays on the left of every segment.
+   key=lambda k:tuple(sorted((c[k],c[(k+1)%4])))
+   starts=[k for k in range(4) if l[k] and not l[(k+1)%4]];ends=[k for k in range(4) if not l[k] and l[(k+1)%4]]
+   for k in starts+ends:
+    if key(k) not in pos:pos[key(k)]=cross(*c[k],*c[(k+1)%4])
+   if len(starts)==1:nxt[key(starts[0])]=key(ends[0]);continue
+   # Saddle: the bilinear centre of the source elevations decides which diagonal connects.
+   centre=sum(q for q in v)/4 if all(q is not None for q in v) else -1
+   for s in starts:
+    e=(s+1)%4 if centre>0 else (s-1)%4
+    nxt[key(s)]=key(e)
+ rings=[];todo=set(nxt);before=after=0;shift=0.
+ onframe=lambda a,b:a[0]==b[0] and a[0] in (x0,x1) or a[1]==b[1] and abs(a[1])==LIMIT
+ def finish(pts):
+  return [(p[0] if p[0] in (x0,x1) else -180+round((p[0]+180)/GRID_X)*GRID_X,p[1] if abs(p[1])==LIMIT else -LIMIT+round((p[1]+LIMIT)/GRID_Y)*GRID_Y) for p in pts]
+ while todo:
+  start=min(todo);k=start;raw=[]
+  while True:
+   todo.discard(k);raw.append(pos[k]);k=nxt[k]
+   if k==start:break
+  raw=clean(raw,True);n=len(raw);before+=n
+  flags=[onframe(raw[i],raw[(i+1)%n]) for i in range(n)]
+  if not any(flags):
+   smooth=chaikin(raw,True);out=finish(simplify_closed(smooth));shift=max(shift,max(min(distance(p,raw[i],raw[(i+1)%n]) for i in range(n)) for p in out))
+  else:
+   # Rotate to a frame edge; smooth each coast run with its end vertices pinned to the frame.
+   s=next(i for i in range(n) if flags[i]);raw=raw[s+1:]+raw[:s+1];flags=flags[s+1:]+flags[:s+1];out=[];run=[raw[0]]
+   for i in range(n):
+    if flags[i]:
+     smooth=douglas(chaikin(run,False)) if len(run)>2 else run
+     if len(run)>2:shift=max(shift,max(min(distance(p,a,b) for a,b in zip(run,run[1:])) for p in smooth))
+     out+=finish(smooth);run=[raw[(i+1)%n]]
+    else:run.append(raw[(i+1)%n])
+   out=finish(out)
+  out=clean(out,True);assert len(out)>=3,'collapsed ring';after+=len(out);out.append(out[0])
+  assert abs(area(out))>0 and not crossings(out),'bad ring';rings.append(out)
+ assert not ring_contacts(rings),'rings touch or cross'
+ return rings,dict(contourVertices=before,publishedVertices=after,maxSmoothingShiftDegrees=round(shift,4))
+
+def ring_contacts(rings):
+ # Proper crossings or shared vertices between different rings would be new topology errors.
+ cells=collections.defaultdict(list);count=0
+ for n,r in enumerate(rings):
+  for a,b in zip(r,r[1:]):
+   for gx in range(math.floor(min(a[0],b[0])),math.floor(max(a[0],b[0]))+1):
+    for gy in range(math.floor(min(a[1],b[1])),math.floor(max(a[1],b[1]))+1):cells[gx,gy].append((n,a,b))
+ o=lambda p,q,s:(q[0]-p[0])*(s[1]-p[1])-(q[1]-p[1])*(s[0]-p[0])
+ for items in cells.values():
+  for u,(n,a,b) in enumerate(items):
+   for m,c,d in items[u+1:]:
+    if m==n:continue
+    if {a,b}&{c,d} or (o(a,b,c)*o(a,b,d)<0 and o(c,d,a)*o(c,d,b)<0):count+=1
+ return count
+
+def check_samples(grid,xs,ys,rings):
+ # Every published sample keeps its source land/non-land side (even-odd rule over all rings).
+ rows=[y for y in ys if abs(y)<=85]
+ hits={y:[] for y in rows}
+ for r in rings:
+  for a,b in zip(r,r[1:]):
+   lo,hi=min(a[1],b[1]),max(a[1],b[1])
+   for y in rows[max(0,bisect.bisect_left(rows,lo)):bisect.bisect_right(rows,hi)]:
+    if (a[1]>y)!=(b[1]>y):hits[y].append(a[0]+(y-a[1])/(b[1]-a[1])*(b[0]-a[0]))
+ for y in rows:
+  h=sorted(hits[y])
+  for x in xs:
+   # Frame columns are tested a hair inside the frame.
+   px=x+1e-6 if x==xs[0] else x-1e-6 if x==xs[-1] else x
+   assert (bisect.bisect_right(h,px)%2==1)==(grid[x,y]>0),f'sample changed side at {x},{y}'
+
 def frame(item):
  raw=(INPUT/item['file']).read_bytes();assert hashlib.sha256(raw).hexdigest()==item['sha256'];assert zlib.crc32(raw)==item['crc32']
  data=[tuple(map(float,r)) for r in csv.reader(io.StringIO(raw.decode(),newline=None)) if r and not r[0].startswith('#')];grid={(x,y):z for x,y,z in data};xs=sorted({x for x,y,z in data});ys=sorted({y for x,y,z in data})
  assert len(grid)==len(data)==len(xs)*len(ys);assert all(math.isfinite(a) for row in data for a in row);assert all(b-a==1 for a,b in zip(xs,xs[1:]));assert all(b-a==1 for a,b in zip(ys,ys[1:]))
- edges=set();coast=set()
- def add(a,b,is_coast):
-  assert a!=b
-  if (b,a) in edges:edges.remove((b,a))
-  else:edges.add((a,b))
-  if is_coast:coast.add((a,b))
- for (x,y),z in grid.items():
-  if z<=0 or y+.5<=-LIMIT or y-.5>=LIMIT:continue
-  w=max(xs[0],x-.5);e=min(xs[-1],x+.5);s=max(-LIMIT,y-.5);n=min(LIMIT,y+.5)
-  if w==e or s==n:continue
-  corners=[(w,s),(e,s),(e,n),(w,n)]
-  for i,(dx,dy) in enumerate([(0,-1),(1,0),(0,1),(-1,0)]):
-   a,b=corners[i],corners[(i+1)%4];neighbor=grid.get((x+dx,y+dy));isc=neighbor is not None and neighbor<=0
-   # Source border, latitude crop and unsampled strip edges never become coast.
-   if i==0 and s==-LIMIT or i==2 and n==LIMIT:isc=False
-   add(a,b,isc)
- outgoing=collections.defaultdict(list)
- for a,b in edges:outgoing[a].append(b)
- rings=[];remaining=set(edges)
- while remaining:
-  start=min(remaining);a,b=start;ring=[a];remaining.remove(start)
-  while b!=ring[0]:
-   ring.append(b);choices=[c for c in outgoing[b] if (b,c) in remaining];assert choices,'open boundary'
-   # Keep land on the left, separating diagonal contacts rather than welding them.
-   def rank(c):return math.atan2(turn(a,b,c),(b[0]-a[0])*(c[0]-b[0])+(b[1]-a[1])*(c[1]-b[1]))
-   c=max(choices,key=rank);remaining.remove((b,c));a,b=b,c
-  ring.append(b)
-  # A pinched loop can contain simple subcycles at repeated vertices.
-  queue=[ring]
-  while queue:
-   r=queue.pop();seen={};split=False
-   for j,p in enumerate(r[:-1]):
-    if p in seen:
-     k=seen[p];queue.extend([r[k:j+1],r[:k]+r[j:]]);split=True;break
-    seen[p]=j
-   if not split:r=compact(r);assert abs(area(r))>0 and not crossings(r);rings.append(r)
+ rings,stats=coastline(grid,xs,ys)
  polys=polygons(rings)
- # Join coast edges only at ordinary degree-2 vertices; preserve branch contacts.
- adjacency=collections.defaultdict(list)
- for a,b in coast:adjacency[a].append(b);adjacency[b].append(a)
- todo={tuple(sorted((a,b))) for a,b in coast};lines=[]
- while todo:
-  edge=min(todo);a,b=edge
-  if len(adjacency[a])==2 and len(adjacency[b])!=2:a,b=b,a
-  line=[a,b];todo.remove(tuple(sorted((a,b))))
-  while len(adjacency[b])==2:
-   c=next(c for c in adjacency[b] if c!=a);edge=tuple(sorted((b,c)))
-   if edge not in todo:break
-   todo.remove(edge);line.append(c);a,b=b,c
-  lines.append(compact(line,False))
- for line in lines:
-  for a,b in zip(line,line[1:]):assert not(a[0]==b[0] and a[0] in (xs[0],xs[-1])) and not(a[1]==b[1] and abs(a[1])==LIMIT)
+ check_samples(grid,xs,ys,rings)
  ma=item['ageMa'];stem=f'de-land-{ma}';props=dict(modelId='paleomap-v2',frameMa=ma)
- geoms=[('land','MultiPolygon',polys,props),('coast','MultiLineString',lines,props)]
+ geoms=[('land','MultiPolygon',polys,props),('coast','MultiLineString',[],props)]
  if xs[-1]<180:geoms.append(('unavailable','MultiPolygon',[[[(179,-LIMIT),(180,-LIMIT),(180,LIMIT),(179,LIMIT),(179,-LIMIT)]]],props))
- result=emit(stem,topology(stem,geoms));result.update(ageMa=ma,input=item['file'],inputSha256=item['sha256'],crc32=item['crc32'],sampleBounds=[xs[0],ys[0],xs[-1],ys[-1]],rows=len(data),zeroRows=sum(z==0 for x,y,z in data),seamLandSignMismatches=sum((grid[xs[0],y]>0)!=(grid[xs[-1],y]>0) for y in ys) if xs[-1]==180 else None,polygons=len(polys),rings=len(rings),coastLines=len(lines),zeroArea=0,selfCrossing=0)
+ topo=topology(stem,geoms);lines=next(g for g in topo['objects'][stem]['geometries'] if g['properties']['kind']=='coast')['arcs'];result=emit(stem,topo);result.update(ageMa=ma,input=item['file'],inputSha256=item['sha256'],crc32=item['crc32'],sampleBounds=[xs[0],ys[0],xs[-1],ys[-1]],rows=len(data),zeroRows=sum(z==0 for x,y,z in data),seamLandSignMismatches=sum((grid[xs[0],y]>0)!=(grid[xs[-1],y]>0) for y in ys) if xs[-1]==180 else None,polygons=len(polys),rings=len(rings),coastLines=len(lines),zeroArea=0,selfCrossing=0,**stats)
  # QA image data is source categorical samples plus actual final polygons, never public.
  (WORK/'qa').mkdir(exist_ok=True);(WORK/'qa'/f'{ma}.json').write_text(json.dumps(dict(samples=[[x,y] for x,y,z in data if z>0],polygons=polys)))
  return result
@@ -228,8 +324,8 @@ def editorial():
 items=json.loads((INPUT/'keyframes-csv.json').read_text());selected=[i for i in items if args.frames is None or i['ageMa'] in args.frames];frames=[frame(i) for i in selected]
 if args.frames is not None:print(json.dumps(frames,indent=2));raise SystemExit
 assets=modern();pointAsset,referenceAsset,derivation=pbdb();assets+=[pointAsset,referenceAsset]+editorial()
-assets.append(emit('de-reconstruction',dict(version=1,modelId='paleomap-v2',modelLabel=bi('PALEOMAP PaleoDEM v2','PALEOMAP PaleoDEM v2'),coordinateSpace='reconstructed',geometryMeaning='exposed-land',method=bi('Strict-positive 1° model samples; nearest-sample cells, separate dateline cut and polar crop. Zero is not land.','1°模型样本以严格正高程分类；采用最近样本格元，日界线与极区裁切单列。零值不归陆地。'),sources=['S29'],frames=[dict(id='frame-land-'+str(i['ageMa']),t=dict(ma=i['ageMa']),file='de-land-'+str(i['ageMa']),sampleBounds=[-180,-89,179,90] if i['ageMa']>=150 else [-180,-90,180,90],sources=['S29']) for i in items])))
-report=dict(algorithm='nearest-sample categorical cells; z>0; no nonzero simplification tolerance; exact collinear reduction; source edge excluded from coast',sampling=dict(spacingDegrees=1,interiorMaximumDistanceToSampleDegrees=math.sqrt(.5),positionAccuracy='unknown; not measured coastline error'),frames=frames,assets=assets,pbdb=derivation)
+assets.append(emit('de-reconstruction',dict(version=1,modelId='paleomap-v2',modelLabel=bi('PALEOMAP PaleoDEM v2','PALEOMAP PaleoDEM v2'),coordinateSpace='reconstructed',geometryMeaning='exposed-land',method=bi('Strict-positive 1° model samples; coast traced between each land sample and its non-land neighbour and rounded, with every sample kept on its own side; separate dateline cut and polar crop. Zero is not land.','1°模型样本以严格正高程分类；海岸线在相邻的陆地样本与非陆地样本之间勾出并做圆滑，每个样本都留在原来的一侧；日界线与极区裁切单列。零值不归陆地。'),sources=['S29'],frames=[dict(id='frame-land-'+str(i['ageMa']),t=dict(ma=i['ageMa']),file='de-land-'+str(i['ageMa']),sampleBounds=[-180,-89,179,90] if i['ageMa']>=150 else [-180,-90,180,90],sources=['S29']) for i in items])))
+report=dict(algorithm=f'z>0; contour between each land sample and its non-land neighbour, linear in elevation, crossing clamped to {T_MIN}-{T_MAX} of the grid edge; saddles by bilinear centre; {SMOOTH_PASSES} Chaikin passes; Douglas-Peucker {DP_TOLERANCE} deg; lattice {GRID_X} deg; every sample asserted on its source side; source edge excluded from coast',sampling=dict(spacingDegrees=1,positionAccuracy='unknown; not measured coastline error'),frames=frames,assets=assets,pbdb=derivation)
 # The complete payload budget includes provenance-rich PBDB point JSON as well as geometry.
 report['totalPublicBytes']=sum(x['bytes'] for x in frames+assets)
 (WORK/'build-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps(dict(totalPublicBytes=report['totalPublicBytes'],frameBytes=sum(x['bytes'] for x in frames),pointBytes=pointAsset['bytes'],modernGeometryBytes=sum(x['bytes'] for x in assets[:2])),indent=2))
