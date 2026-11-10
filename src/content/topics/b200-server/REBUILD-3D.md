@@ -165,3 +165,8 @@ Nothing is intentionally left below A in this residual scope. Exact manufacturer
 - `pnpm build`: **PASS**, 191 pages. All eight exported GLBs match the final source assets byte for byte; SHA-256 receipts are in `gates/built-assets-reviewed.txt`.
 
 The earlier full run caught a real bat decoded-bounds overrun, corrected by the measured uniform fit; the unchanged production-loader assertion now passes. Earlier unrelated fixed-deadline timeouts are retained in the preceding logs, not discarded as successes. Final receipts: `/private/tmp/atlas-residual-polish-2026-11-05/gates/*-reviewed.*`. Evidence images remain external. Claude GPU acceptance remains the requested subsequent step.
+
+
+## Scale figure beside the server 2026-11-10
+
+The 1.70 m figure now stands 0.5 m to the left of the chassis (`build.ts`, was 9.4 m left and 4.7 m back), so it reads as a size reference. It is hidden at the chapter view and shown in the-machine-1, whose camera now frames the figure and the server together, clear of the title.

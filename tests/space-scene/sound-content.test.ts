@@ -7,6 +7,7 @@ import { spaceSceneData } from '../../src/engines/space-scene/schema';
 import { chapterSimIssues } from '../../src/engines/space-scene/sim-schema';
 import { evaluateSim } from '../../src/engines/space-scene/lib/sim';
 import { resolveSimValues } from '../../src/engines/space-scene/lib/sim/controls';
+import { WAVE_PARTICLE_RADIUS } from '../../src/engines/space-scene/lib/sim/senses';
 import { simEffects } from '../../src/engines/space-scene/lib/sim/bind';
 import { longitudinalPositions } from '../../src/engines/space-scene/lib/sim/senses';
 import { echoDuration, echoPosition, echoVisualDistance } from '../../src/engines/space-scene/lib/sim/sound-motion';
@@ -158,6 +159,7 @@ describe('sound: schematic geometry and visibility support the comparisons',()=>
     const wave=sim.overlays.find(o=>o.kind==='longitudinal-wave')!;
     expect(wave).toMatchObject({model:'sound',when:{control:'medium',is:'air'},count:41,spacing:.05});
     expect(wave.group).toBe('air-wave');
+    expect(WAVE_PARTICLE_RADIUS).toBeGreaterThanOrEqual(.02);expect(WAVE_PARTICLE_RADIUS*2).toBeLessThan(wave.spacing);
     for(const [i,c] of chapters.entries()) expect(c.state.layers.includes('air-wave'),c.id).toBe([0,2,3,4].includes(i));
   });
   it('uses one reflector per distance and a matching short-string preset per frequency',()=>{

@@ -127,3 +127,18 @@ Exact commands, sanitized logs, source hashes, counts and production-asset check
 ## Residual windscreen pass reverted 2026-11-09
 
 The residual pass moved the panes up and aft. On the GPU they read as thin slits at 86-95% of the local section height, further from the A330 than the accepted layout, so the nose and glazing stay as on main. Measured from the PK-GPA near-profile photograph, the A330 pane band sits 62-79% up the local section and 0.24-0.65 fuselage diameters aft of the tip. A trial at those corners left the middle side pane pale and creased the brow. The cause was not diagnosed, so the layout needs its own rebuild pass.
+
+## Windscreen and nose rebuild 2026-11-10
+
+- Nose outline re-measured from the side and top views of the A330-300 three-view (`drawing`, Julien.scavini, CC BY-SA 3.0), scaled to the 0.4 m model diameter: radius, centre drop and plan/side width ratio at 18 stations, then least-squares fitted in u = sqrt(distance from tip) so the skin is smooth to the second derivative (no reflection creases), round at the tip and flush with the barrel at x = -1.25. The section is slightly taller than wide near the nose, as in the drawing. The skin is now one closed grid with analytic normals; the glazing no longer cuts holes in it.
+- Six panes, three each side: front panes authored in the front view, sliding and aft panes in the side view, from the `drawing`, `profile` (PK-GPA) and `nose` (G-VGEM) references; straight edges with small radiused corners, projected on the skin. Band 0.24-0.63 fuselage diameters aft of the tip, 74-89 % up the local section in the drawing (the two photographs bracket it: 60-75 % from above, 84-96 % from below). Each pane is shaded as one flat sheet, tipped down so it mirrors the dark lower hemisphere; this fixes the pale side pane of the reverted pass.
+- Frames: light raised seal around each pane. Wipers: one parked along the sill of each front pane, arm from a pivot boss below the glass, as in the profile photograph.
+- Shipping GLB 1,041,704 → 1,035,964 bytes; airliner 117,850 triangles, 25 calls (was 115,968 / 25).
+- angle-and-stall-5: the right engine now hangs from its pylon under an X-ray right wing panel instead of floating.
+
+### Windscreen round 2 (2026-11-10)
+
+- Panes enlarged and the band lengthened: sill 0.046 and head line 0.088 above the cabin axis (three-view 0.038-0.078; head-on reference 0.054-0.093), from 0.24 to 0.72 fuselage diameters aft of the tip (was 0.63). Posts between panes are 5 mm at model scale, so the frames read as thin mullions.
+- Front panes keep a level top edge that follows the crown. The sliding window's front edge runs parallel to the windscreen's rear edge across a thin post; the aft window is a near-rectangle with one cut top-rear corner. Seal frames and wipers kept.
+- Nose tip: radius fit pinned to the first measured station (tip radius 24 mm, was about 3 mm); centre drop and width ratio interpolate in x, so the cap has no nub; the forward normal is applied only at the tip point.
+- GLB 1,040,440 bytes; airliner 119,066 triangles, 25 calls.

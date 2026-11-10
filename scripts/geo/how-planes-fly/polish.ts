@@ -1,6 +1,6 @@
 /** Ogive/cockpit, aerodynamic junctions and twisted turbomachinery lofts. */
 import { mkdirSync } from 'node:fs';
-import { BufferGeometry, Float32BufferAttribute, Shape, Path, ShapeGeometry, Vector3 } from 'three';
+import { BufferGeometry, Float32BufferAttribute, Vector3 } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { surface, table, tubePath, writeLofts, type V } from '../kits/aircraft-polish';
 import { CG, ENGINE } from './layout';
@@ -17,47 +17,95 @@ function capLoft(g:BufferGeometry,n:number,m:number){
   const cap=new BufferGeometry().setAttribute('position',new Float32BufferAttribute(positions,3)).setIndex(ix);cap.computeVertexNormals();caps.push(cap);
  }return joined([g,...caps]);
 }
-const stations=[[-2,0,-.035],[-1.985,.037,-.034],[-1.95,.069,-.030],[-1.9,.100,-.021],[-1.8,.145,-.009],[-1.67,.176,-.002],[-1.48,.195,0],[-1.25,.2,0],[.8,.2,0],[1.2,.19,.03],[1.5,.16,.07],[1.75,.11,.10],[1.95,.055,.12],[2.04,0,.125]];
-export function hullPoint(x:number,theta:number,inset=0):V {const noseT=Math.max(0,Math.min(1,(x+2)/.05)),radius=x< -1.95?.069*Math.sqrt(noseT)*(1-.061*noseT)/.939:table(stations,x),r=Math.max(0,radius-inset),dy=table(stations,x,2),b=x>-.78&&x<.74?Math.sin(Math.PI*(x+.78)/1.52)**1.5:0,lower=Math.max(0,-Math.cos(theta))**3;return [x,CG[1]+dy+(r+.035*b*lower)*Math.cos(theta),(r+.045*b*lower)*Math.sin(theta)];}
-// Three distinct panes each side, specified in the unwrapped curved skin.
-const panes=[
- [[-1.83,.035],[-1.67,.80],[-1.765,1.10],[-1.89,.05]],
- [[-1.65,.83],[-1.55,.92],[-1.57,1.17],[-1.75,1.10]],
- [[-1.53,.94],[-1.41,.97],[-1.43,1.17],[-1.55,1.17]],
-];
-/** Subdivide in skin coordinates before mapping, so glazing and apertures
- * follow identical curvature. Boundary subdivision is shared, avoiding cracks. */
-function mapped(shape:Shape,side:number,inset:number){
- const source=new ShapeGeometry(shape),p=source.getAttribute('position'),ix=source.index!,pos:number[]=[],indices:number[]=[];
- const add=(a:number[],b:number[],c:number[],level:number)=>{
-  if(level){const ab=a.map((x,i)=>(x+b[i]!)/2),bc=b.map((x,i)=>(x+c[i]!)/2),ca=c.map((x,i)=>(x+a[i]!)/2);add(a,ab,ca,level-1);add(ab,b,bc,level-1);add(ca,bc,c,level-1);add(ab,bc,ca,level-1);return;}
-  const offset=pos.length/3;for(const q of [a,b,c]){const v=hullPoint(q[0]!,q[1]!,inset);v[2]*=side;pos.push(...v);}indices.push(...(side===1?[offset,offset+2,offset+1]:[offset,offset+1,offset+2]));
- };
- for(let i=0;i<ix.count;i+=3)add(...[0,1,2].map(k=>[p.getX(ix.getX(i+k)),p.getY(ix.getX(i+k))]) as [number[],number[],number[]],4);
- const g=new BufferGeometry().setAttribute('position',new Float32BufferAttribute(pos,3)).setIndex(indices);g.computeVertexNormals();
- // Analytic hull normals remove triangulation seams across the shaped apertures.
- const normal:number[]=[];for(let i=0;i<pos.length;i+=3){const x=pos[i]!,y=pos[i+1]!-CG[1]-table(stations,x,2),z=pos[i+2]!,theta=Math.atan2(z,y),a=new Vector3(...hullPoint(Math.min(2.039,x+.00001),theta)),b=new Vector3(...hullPoint(Math.max(-1.99999,x-.00001),theta)),t=new Vector3(0,-Math.sin(theta),Math.cos(theta));normal.push(...(x< -1.9999?[-1,0,0]:x>2.0399?[1,0,0]:t.cross(a.sub(b)).normalize().toArray()));}g.setAttribute('normal',new Float32BufferAttribute(normal,3));return g;
+// Nose rows [x, side-view radius, centre drop, plan/side width ratio], read from the side
+// and top views of the A330-300 three-view (refs/drawing), scaled to the 0.4 m model diameter.
+const noseRows=[[-2,0,-.0345,.95],[-1.993,.0184,-.0347,.95],[-1.978,.0361,-.0357,.95],[-1.964,.0477,-.0379,.94],[-1.949,.0588,-.039,.93],[-1.935,.0668,-.0397,.91],[-1.921,.0745,-.0405,.895],[-1.906,.082,-.0405,.875],[-1.892,.0885,-.038,.855],[-1.877,.0985,-.0335,.84],[-1.848,.117,-.0264,.83],[-1.791,.1408,-.0199,.845],[-1.704,.1675,-.0148,.875],[-1.603,.1863,-.0105,.911],[-1.502,.1986,-.0054,.942],[-1.4,.1996,-.0036,.983],[-1.3,.2,-.002,1],[-1.25,.2,0,1]];
+// Least-squares fit of those rows in u = sqrt(distance from tip): smooth to second derivative, so the
+// skin carries no reflection creases, round at the tip, and flush with the cabin barrel at x = -1.25.
+// Centre drop and plan/side width ratio interpolate the same rows directly in x (monotone cubic):
+// a fit in u gives them an infinite slope at the tip, which shows as a nub on the cap.
+const noseDropRows=[[-2,-.0345],[-1.95,-.039],[-1.906,-.0405],[-1.877,-.0335],[-1.848,-.0264],[-1.791,-.0199],[-1.704,-.0148],[-1.603,-.0105],[-1.502,-.0054],[-1.4,-.0036],[-1.3,-.002],[-1.25,0]];
+const noseWidthRows=[[-2,.95],[-1.95,.93],[-1.892,.855],[-1.848,.83],[-1.791,.845],[-1.704,.875],[-1.603,.911],[-1.502,.942],[-1.4,.983],[-1.3,1],[-1.25,1]];
+const noseFit=(c:number[],x:number)=>{const u=Math.sqrt(Math.max(0,x+2)/.75);return (1-u)**3*c.reduce((s,k,i)=>s+k*u**i,0);};
+const noseRadius=[0.20000,0.40954,1.12440,-7.00872,32.22504,-55.78215,30.60436];
+const stations=[[-1.25,.2,0],[.8,.2,0],[1.2,.19,.03],[1.5,.16,.07],[1.75,.11,.10],[1.95,.055,.12],[2.04,0,.125]];
+const radiusAt=(x:number)=>x< -1.25?.2-noseFit(noseRadius,x):table(stations,x);
+const dropAt=(x:number)=>x< -1.25?table(noseDropRows,x):table(stations,x,2);
+const widthAt=(x:number)=>x< -1.25?table(noseWidthRows,x):1;
+export function hullPoint(x:number,theta:number,inset=0):V {const r=Math.max(0,radiusAt(x)-inset),b=x>-.78&&x<.74?Math.sin(Math.PI*(x+.78)/1.52)**1.5:0,lower=Math.max(0,-Math.cos(theta))**3;return [x,CG[1]+dropAt(x)+(r+.035*b*lower)*Math.cos(theta),widthAt(x)*(r+.045*b*lower)*Math.sin(theta)];}
+function hullNormal(x:number,theta:number):Vector3 {
+ if(x<=-2+1e-9)return new Vector3(-1,0,0);if(x>=2.04-1e-9)return new Vector3(1,0,0);
+ const h=1e-4,hx=Math.max(1e-8,Math.min(1e-4,(x+2)/2,(2.04-x)/2)),a=new Vector3(...hullPoint(x+hx,theta)),b=new Vector3(...hullPoint(x-hx,theta)),c=new Vector3(...hullPoint(x,theta+h)),d=new Vector3(...hullPoint(x,theta-h));
+ return c.sub(d).cross(a.sub(b)).normalize();
 }
-function nose(){const skin:BufferGeometry[]=[],glass:BufferGeometry[]=[],frames:BufferGeometry[]=[];
- for(const side of [1,-1]){
-  const shape=new Shape();shape.moveTo(-2,0);for(const [x]of stations.slice(1))shape.lineTo(x!,0);shape.lineTo(2.04,Math.PI);for(const [x]of [...stations].reverse().slice(1))shape.lineTo(x!,Math.PI);shape.closePath();
-  for(const poly of panes){const hole=new Path();hole.moveTo(...poly[0] as [number,number]);for(const q of poly.slice(1))hole.lineTo(...q as [number,number]);hole.closePath();shape.holes.push(hole);
-   const pane=new Shape();pane.moveTo(...poly[0] as [number,number]);for(const q of poly.slice(1))pane.lineTo(...q as [number,number]);pane.closePath();glass.push(mapped(pane,side,.0012));
-   // Close each recessed pocket behind its separate dark glass. This keeps
-   // the opaque fuselage a closed volume for the existing stencil cutaway.
-   skin.push(mapped(pane,side,.0024));
-   const pocket:number[]=[],pi:number[]=[],mean=poly.reduce((sum,q)=>[sum[0]!+q[0]!,sum[1]!+q[1]!],[0,0]).map(x=>x/poly.length),target=new Vector3(...hullPoint(mean[0]!,mean[1]!,.0012));target.z*=side;
-   for(let k=0;k<poly.length;k++)for(let j=0;j<16;j++){
-    const a=poly[k]!,b=poly[(k+1)%poly.length]!,point=(t:number,d:number)=>{const q=hullPoint(a[0]!*(1-t)+b[0]!*t,a[1]!*(1-t)+b[1]!*t,d);q[2]*=side;return new Vector3(...q);},points=[point(j/16,0),point((j+1)/16,0),point((j+1)/16,.0024),point(j/16,.0024)],off=pocket.length/3;
-    for(const v of points)pocket.push(...v.toArray());
-    const toward=target.clone().sub(points[0]!),normal=points[1]!.clone().sub(points[0]!).cross(points[2]!.clone().sub(points[0]!));pi.push(...(normal.dot(toward)>0?[off,off+1,off+2,off,off+2,off+3]:[off,off+2,off+1,off,off+3,off+2]));
-   }
-   const reveal=new BufferGeometry().setAttribute('position',new Float32BufferAttribute(pocket,3)).setIndex(pi);reveal.computeVertexNormals();skin.push(reveal);
-   const edge:V[]=[];for(let k=0;k<poly.length;k++)for(let j=0;j<12;j++){const a=poly[k]!,b=poly[(k+1)%poly.length]!,t=j/12,v=hullPoint(a[0]!*(1-t)+b[0]!*t,a[1]!*(1-t)+b[1]!*t,-.0004);v[2]*=side;edge.push(v);}edge.push(edge[0]!);frames.push(tubePath(edge,.0011,8));
-  }skin.push(mapped(shape,side,0));
+type P2=[number,number];
+type Pane={view:'side'|'front';corners:P2[];radius:number};
+// One side of the A330's six-pane layout, sized against the three-view: a sill at 0.046 and a head
+// line at 0.088 above the cabin axis, from 0.24 to 0.72 fuselage diameters aft of the tip. Front
+// panes are authored as seen from ahead ([z, height]); their top edge is level, so it follows the
+// crown. The sliding and aft windows are authored from the side ([x, height]) as near-rectangles:
+// the sliding window's front edge runs parallel to the windscreen's rear edge across a thin post,
+// and the aft window has one cut top-rear corner. Posts are POST wide between frames.
+const SILL=.046,HEAD=.088,POST=.005;
+const frontCorners:P2[]=[[.005,HEAD],[.057,HEAD],[.061,SILL],[.005,SILL]];
+const sideOfFront=(q:P2):P2=>[frontToHull(q[0],q[1])[0],q[1]];
+const slideTop=sideOfFront(frontCorners[1]!)[0]+POST,slideSill=sideOfFront(frontCorners[2]!)[0]+POST,slideAft=-1.777,aftEnd=-1.712;
+const paneLayout:Pane[]=[
+ {view:'front',corners:frontCorners,radius:.0025},
+ {view:'side',corners:[[slideTop,HEAD],[slideAft,HEAD],[slideAft,SILL],[slideSill,SILL]],radius:.0025},
+ {view:'side',corners:[[slideAft+POST,HEAD],[aftEnd-.017,HEAD],[aftEnd,HEAD-.017],[aftEnd,SILL],[slideAft+POST,SILL]],radius:.0025},
+];
+/** A front-view point lies on the hull where the elliptical section reaches it. */
+function frontToHull(z:number,y:number):P2 {let lo=-2,hi=-1.4;for(let i=0;i<48;i++){const x=(lo+hi)/2,r=radiusAt(x),h=y-dropAt(x),w=z/widthAt(x);if(h*h+w*w>r*r)lo=x;else hi=x;}const x=(lo+hi)/2;return [x,Math.atan2(z/widthAt(x),y-dropAt(x))];}
+const sideToHull=(x:number,y:number):P2=>[x,Math.acos(Math.max(-1,Math.min(1,(y-dropAt(x))/radiusAt(x))))];
+const toHull=(view:Pane['view'],q:P2):P2=>view==='front'?frontToHull(q[0],q[1]):sideToHull(q[0],q[1]);
+/** Straight edges with small radiused corners, sampled finely enough to follow the skin. */
+function outline({corners,radius}:Pane):P2[] {
+ const out:P2[]=[],n=corners.length,along=(a:P2,b:P2,d:number):P2=>{const l=Math.hypot(b[0]-a[0],b[1]-a[1]);return [a[0]+(b[0]-a[0])*d/l,a[1]+(b[1]-a[1])*d/l];};
+ for(let i=0;i<n;i++){
+  const p=corners[(i+n-1)%n]!,c=corners[i]!,q=corners[(i+1)%n]!,lp=Math.hypot(c[0]-p[0],c[1]-p[1]),lq=Math.hypot(q[0]-c[0],q[1]-c[1]),d=Math.min(radius,lp*.45,lq*.45),a=along(c,p,d),b=along(c,q,d);
+  for(let k=0;k<=5;k++){const t=k/5,u=1-t;out.push([u*u*a[0]+2*u*t*c[0]+t*t*b[0],u*u*a[1]+2*u*t*c[1]+t*t*b[1]]);}
+  const end=along(q,c,Math.min(radius,lq*.45,Math.hypot(corners[(i+2)%n]![0]-q[0],corners[(i+2)%n]![1]-q[1])*.45)),steps=Math.max(1,Math.ceil(Math.hypot(end[0]-b[0],end[1]-b[1])/.004));
+  for(let k=1;k<steps;k++)out.push([b[0]+(end[0]-b[0])*k/steps,b[1]+(end[1]-b[1])*k/steps]);
  }
-
- return {hull:joined([...skin,...frames]),glass:joined(glass)};
+ return out;
+}
+const onHull=(view:Pane['view'],q:P2,side:number,inset:number):V=>{const [x,t]=toHull(view,q),v=hullPoint(x,t,inset);v[2]*=side;return v;};
+/** Concentric rings over a convex pane. Shading normals lean to one direction per pane so it reads as a flat sheet, as the real panes are, tipped down so the glass mirrors the dark lower hemisphere rather than the key light. */
+function glassPane(pane:Pane,side:number):BufferGeometry {
+ const edge=outline(pane),rings=4,n=edge.length,centre=edge.reduce((s,q)=>[s[0]+q[0]/n,s[1]+q[1]/n] as P2,[0,0] as P2),points:P2[]=[centre];
+ for(let r=1;r<=rings;r++)for(const q of edge)points.push([centre[0]+(q[0]-centre[0])*r/rings,centre[1]+(q[1]-centre[1])*r/rings]);
+ const normalOf=(q:P2)=>{const [x,t]=toHull(pane.view,q),v=hullNormal(x,t);v.z*=side;return v;},mean=points.reduce((s,q)=>s.add(normalOf(q)),new Vector3()).normalize();
+ const pos=points.flatMap(q=>onHull(pane.view,q,side,-.0009)),facing=mean.clone().add(new Vector3(0,pane.view==='front'?-1:-.6,0)).normalize(),nor=points.flatMap(()=>facing.toArray()),ix:number[]=[];
+ const at=(r:number,j:number)=>1+(r-1)*n+((j%n+n)%n);
+ for(let j=0;j<n;j++){ix.push(0,at(1,j),at(1,j+1));for(let r=1;r<rings;r++)ix.push(at(r,j),at(r+1,j),at(r+1,j+1),at(r,j),at(r+1,j+1),at(r,j+1));}
+ const a=new Vector3().fromArray(pos,ix[0]!*3),b=new Vector3().fromArray(pos,ix[1]!*3),c=new Vector3().fromArray(pos,ix[2]!*3);
+ if(b.sub(a).cross(c.sub(a)).dot(mean)<0)for(let i=0;i<ix.length;i+=3)[ix[i+1],ix[i+2]]=[ix[i+2]!,ix[i+1]!];
+ return new BufferGeometry().setAttribute('position',new Float32BufferAttribute(pos,3)).setAttribute('normal',new Float32BufferAttribute(nor,3)).setIndex(ix);
+}
+/** A wiper parks along the sill of each front pane: blade, arm and a pivot boss just below the glass. */
+function wiper(side:number):BufferGeometry[] {
+ const path=(a:P2,b:P2,proud:number,n=14):V[]=>Array.from({length:n+1},(_,i)=>onHull('front',[a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n],side,-proud));
+ const pivot:P2=[.0115,SILL-.0085],blade=path([.012,SILL+.0032],[.054,SILL+.0032],.0024),arm=path(pivot,[.033,SILL+.0032],.0031);
+ const base=new Vector3(...onHull('front',pivot,side,0)),[x,t]=frontToHull(pivot[0],pivot[1]),up=hullNormal(x,t);up.z*=side;
+ const axisA=new Vector3().crossVectors(up,new Vector3(1,0,0)).normalize(),axisB=new Vector3().crossVectors(up,axisA);
+ const boss=surface(4,12,(u,v)=>{const r=.0013*Math.min(1,(1-u)*2.2),h=.0027*Math.min(1,u*2),a=v*tau;return base.clone().addScaledVector(up,h).addScaledVector(axisA,r*Math.cos(a)).addScaledVector(axisB,r*Math.sin(a)).toArray() as V;},true);
+ return [tubePath(blade,.0007,6),tubePath(arm,.0009,6),boss];
+}
+function nose(){
+ const front=96,rear=52,around=96,rowX=(i:number)=>i<=front?-2+.75*(i/front)**2:-1.25+3.29*(i-front)/rear;
+ const hull=surface(front+rear,around,(u,v)=>hullPoint(rowX(Math.round(u*(front+rear))),v*tau),true),normal:number[]=[];
+ for(let i=0;i<=front+rear;i++)for(let j=0;j<=around;j++)normal.push(...hullNormal(rowX(i),j/around*tau).toArray());
+ hull.setAttribute('normal',new Float32BufferAttribute(normal,3));
+ const frames:BufferGeometry[]=[],glass:BufferGeometry[]=[],wipers:BufferGeometry[]=[];
+ for(const side of [1,-1]){
+  for(const pane of paneLayout){
+   glass.push(glassPane(pane,side));
+   const edge=outline(pane).map(q=>onHull(pane.view,q,side,-.0005));edge.push(edge[0]!);frames.push(tubePath(edge,.0008,6));
+  }
+  wipers.push(...wiper(side));
+ }
+ return {hull:joined([hull,...frames]),glass:joined(glass),wipers};
 }
 /** Closed wing section with finite leading radius and a sharp trailing edge. */
 function aero(span0:number,span1:number,side:number,leading:(s:number)=>number,chord:(s:number)=>number,base:(s:number)=>number,ratio:(s:number)=>number,vertical=false,from=0,to=1,samples=16){
@@ -101,8 +149,9 @@ export async function polishAircraft(file:J){
  // keeps rounded cabin window relief on the selectable fuselage (no decals).
  const paint=(g:BufferGeometry,c:number)=>{g.setAttribute('color',new Float32BufferAttribute(Array.from({length:g.getAttribute('position').count},()=>[c,c,c]).flat(),3));return g;};
  const skin=paint(meshes[0]!.geometry,1);for(const g of win)paint(g,.012);
- meshes[0]!.geometry=mergeGeometries([skin,...win],false)!;
- replace('cockpit-glazing',n.glass,[-1.68,1.2,0],{color:'powder'},{roughness:.14,metalness:.08});
+ for(const g of n.wipers)paint(g,.3);
+ meshes[0]!.geometry=mergeGeometries([skin,...win,...n.wipers],false)!;
+ replace('cockpit-glazing',n.glass,[-1.83,1.16,0],{color:'powder'},{roughness:.2,metalness:.08});
  const le=(z:number)=>-.62+.53*z,te=(z:number)=>z<=.62?.24:.24+(z-.62)*.32/1.16,cy=(z:number)=>.99+(z-.12)*Math.tan(6*rad);
  for(const side of [1,-1]){
   const id=side===1?'left':'right';

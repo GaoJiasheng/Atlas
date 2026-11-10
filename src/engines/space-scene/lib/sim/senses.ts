@@ -66,7 +66,7 @@ export function longitudinalPositions(count: number, spacing: number, amplitude:
 }
 
 /** Particle radius of the longitudinal row, scene units (DESIGN: about a quarter of the rest spacing). */
-export const WAVE_PARTICLE_RADIUS = .013;
+export const WAVE_PARTICLE_RADIUS = .02;
 /** A focused point on the bench receiver is a small visible dot, not a vanishing speck (scene units). */
 export const BENCH_DOT_RADIUS = .012;
 interface Bench { origin: readonly number[]; cmToScene: number; yScale?: number }

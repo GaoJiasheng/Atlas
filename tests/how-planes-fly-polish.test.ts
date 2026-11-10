@@ -19,10 +19,10 @@ describe('shipping aircraft lofts',()=>{
   for(const p of file.parts.filter(p=>p.mesh)){const node=document.getRoot().listNodes().find(n=>n.getName()===p.mesh);expect(node?.getMesh()?.listPrimitives()).toHaveLength(1);const g=node!.getMesh()!.listPrimitives()[0]!;expect(g.getMaterial()!.getExtras().atlasSurface).toBe(true);for(const a of g.listAttributes())expect(Array.from(a.getArray()!).every(Number.isFinite)).toBe(true);}
   const before=JSON.parse(readFileSync('scripts/geo/how-planes-fly/evidence/before-parts.json','utf8'));expect(file.parts.map(p=>p.id)).toEqual(before.parts.map((p:{id:string})=>p.id));expect(file.animations).toHaveLength(before.animations.length);
  });
- it('has a blunt nose, separate inset panes and a nose-only cockpit selection anchor',()=>{
+ it('has a round nose and the A330 six-pane band forward of the door',()=>{
   const points=vertices('fuselage-shell'),tip=points.filter(p=>p.x< -1.97);
   expect(tip.length).toBeGreaterThan(10);expect(Math.max(...tip.map(p=>Math.abs(p.z)))).toBeGreaterThan(.025);
-  const panes=vertices('cockpit-glazing');expect(Math.max(...panes.map(p=>p.x))).toBeLessThan(-1.39);expect(Math.min(...panes.map(p=>p.z))).toBeLessThan(-.13);expect(Math.max(...panes.map(p=>p.z))).toBeGreaterThan(.13);
+  const panes=vertices('cockpit-glazing');expect(Math.min(...panes.map(p=>p.x))).toBeGreaterThan(-1.92);expect(Math.max(...panes.map(p=>p.x))).toBeLessThan(-1.70);expect(Math.min(...panes.map(p=>p.z))).toBeLessThan(-.09);expect(Math.max(...panes.map(p=>p.z))).toBeGreaterThan(.09);expect(Math.max(...panes.map(p=>Math.abs(p.z)))).toBeLessThan(.15);expect(Math.min(...panes.map(p=>p.y))).toBeGreaterThan(1.13);expect(Math.max(...panes.map(p=>p.y))).toBeLessThan(1.2);
  });
  it('closes the fuselage behind the recessed glazing for section fills and keeps rotor axes centred',()=>{
   const points=vertices('fuselage-shell'),node=document.getRoot().listNodes().find(n=>n.getName()==='fuselage-shell')!,ix=node.getMesh()!.listPrimitives()[0]!.getIndices()!,hit=new Vector3();

@@ -5009,8 +5009,8 @@
         "zh": "一个 1.70 米的人，作比例尺"
       },
       "detail": {
-        "en": "A neutral figure 1.70 m tall, standing a few metres behind the server so its size can be judged. It is a silhouette, not a model of anyone.",
-        "zh": "一个 1.70 米高的中性人形，站在服务器后面几米远，用来比较大小。它只是剪影，不代表任何人。"
+        "en": "A neutral figure 1.70 m tall, standing beside the server so its size can be judged. It is a silhouette, not a model of anyone.",
+        "zh": "一个 1.70 米高的中性人形，站在服务器旁边，用来比较大小。它只是剪影，不代表任何人。"
       },
       "primitive": {
         "kind": "capsule",

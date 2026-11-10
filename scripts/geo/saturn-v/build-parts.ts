@@ -1321,8 +1321,10 @@ export const CAMERAS={
  lander:{position:[14,7,16],target:[0,3.5,0],fov:30},
 };
 const labels:Record<keyof typeof CAMERAS,{en:string;zh:string}>={hero:bi('Whole stack','完整箭体'),engines:bi('First-stage engines','第一级发动机'),tank:bi('Propellant tanks','推进剂储箱'),stages:bi('Three main stages','三个主推进级'),apollo:bi('Apollo spacecraft','阿波罗飞船'),lander:bi('Lunar module','登月舱')};
+// The ideal-model experiment's made-up rocket, shown only through its own layer; not one of the 33 Apollo parts.
+const imaginaryRocket={"id": "imaginary-rocket", "name": {"en": "Imaginary rocket", "zh": "假想火箭"}, "group": "experiment-rocket", "context": true, "clip": false, "primitive": {"kind": "lathe", "profile": [[0, 0.72], [0.28, 0.72], [0.28, 0.72], [0.28, -2.0], [0.24, -2.22], [0.24, -2.22], [0, -2.22]], "segments": 48, "at": [0, 85.8, 0], "color": "enamel"}, "extra": [{"kind": "lathe", "profile": [[0, 2.55], [0.06, 2.42], [0.13, 2.2], [0.2, 1.9], [0.255, 1.6], [0.28, 1.33], [0, 1.33]], "segments": 48, "at": [0, 85.8, 0], "color": "powder"}, {"kind": "lathe", "profile": [[0, 1.33], [0.28, 1.33], [0.28, 1.33], [0.28, 0.92], [0.28, 0.92], [0, 0.92]], "segments": 48, "at": [0, 85.8, 0], "color": "enamel"}, {"kind": "lathe", "profile": [[0, 0.92], [0.28, 0.92], [0.28, 0.92], [0.28, 0.72], [0.28, 0.72], [0, 0.72]], "segments": 48, "at": [0, 85.8, 0], "color": "powder"}, {"kind": "lathe", "profile": [[0, -2.22], [0.07, -2.22], [0.09, -2.34], [0.14, -2.52], [0.2, -2.72], [0.185, -2.72], [0.125, -2.52], [0.075, -2.34], [0, -2.34]], "segments": 40, "at": [0, 85.8, 0], "color": "steel"}, {"kind": "extrude", "shape": [[0, 0], [0.48, -0.46], [0.48, -0.72], [0, -0.72]], "depth": 0.03, "bevel": 0.006, "at": [0.1923, 84.5, 0.1923], "rotation": [0, -45, 0], "color": "powder"}, {"kind": "extrude", "shape": [[0, 0], [0.48, -0.46], [0.48, -0.72], [0, -0.72]], "depth": 0.03, "bevel": 0.006, "at": [-0.1923, 84.5, 0.1923], "rotation": [0, -135, 0], "color": "powder"}, {"kind": "extrude", "shape": [[0, 0], [0.48, -0.46], [0.48, -0.72], [0, -0.72]], "depth": 0.03, "bevel": 0.006, "at": [-0.1923, 84.5, -0.1923], "rotation": [0, -225, 0], "color": "powder"}, {"kind": "extrude", "shape": [[0, 0], [0.48, -0.46], [0.48, -0.72], [0, -0.72]], "depth": 0.03, "bevel": 0.006, "at": [0.1923, 84.5, -0.1923], "rotation": [0, -315, 0], "color": "powder"}], "explode": {"dir": [0, 1, 0], "dist": 0}, "summary": {"en": "A plain made-up rocket for the ideal-speed experiment.", "zh": "用于理想速度实验的简单假想火箭。"}, "detail": {"en": "This rocket is not a real vehicle. It stands for the small imaginary rocket in the experiment, drawn about five metres tall with one engine and four fins. Its readings are separate from Saturn V's flight.", "zh": "这枚火箭不是真实的运载工具，代表实验中的小型假想火箭，画成约五米高，有一台发动机和四片尾翼。它的读数与土星五号的飞行分开。"}};
 const file={
- parts,
+ parts:[...parts,imaginaryRocket],
  groups:[
  {id:'stage-one',name:bi('First stage','第一级'),color:'token:holder-1'},
  {id:'upper-stages',name:bi('Upper stages','上面两级'),color:'token:holder-2'},
@@ -1330,6 +1332,7 @@ const file={
  {id:'return-craft',name:bi('Command and service modules','指令舱与服务舱'),color:'token:holder-4'},
  {id:'lander',name:bi('Lunar module','登月舱'),color:'token:holder-5',scale:{unit:'m',magnification:1}},
  {id:'propellant-flow',name:bi('Fuel · oxygen · exhaust','燃料·氧化剂·排气'),color:'token:hot',card:false},
+ {"id": "experiment-rocket", "name": {"en": "Imaginary rocket", "zh": "假想火箭"}, "color": "token:holder-2", "card": false},
  ],flows,animations:[],poses,units:{modelUnit:'m',scale:1},
  views:{assembled:{camera:CAMERAS.hero},xray:{camera:CAMERAS.hero},exploded:{camera:{position:[160,85,180],target:[0,55,0],fov:30}},cover:CAMERAS.hero,shadows:'none',cutaway:{normal:[0,0,1],offset:0},section:{plane:'xy'}},
  presets:Object.entries(CAMERAS).map(([id,camera])=>({id:id==='lander'?'lander-view':id,label:labels[id as keyof typeof CAMERAS],camera})),

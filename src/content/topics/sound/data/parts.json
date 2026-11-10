@@ -6047,7 +6047,8 @@
             0.875,
             0.8
           ],
-          "color": "token:water"
+          "color": "glass",
+          "tint": "token:water"
         },
         {
           "kind": "bevelBox",
@@ -8558,7 +8559,7 @@
         "radius": 0.025,
         "bendRadius": 0.045,
         "at": [
-          2.25,
+          2.8,
           1.13,
           -0.9
         ],
@@ -8582,7 +8583,7 @@
           ],
           "bevel": 0.045,
           "at": [
-            2.01,
+            2.56,
             1.02,
             -0.9
           ],
@@ -8597,7 +8598,7 @@
           ],
           "bevel": 0.045,
           "at": [
-            2.49,
+            3.04,
             1.02,
             -0.9
           ],
@@ -8623,7 +8624,7 @@
         ],
         "bevel": 0.005,
         "at": [
-          2.25,
+          2.8,
           1.025,
           -0.9
         ],
@@ -8641,7 +8642,7 @@
           ],
           "bevel": 0.006,
           "at": [
-            2.25,
+            2.8,
             1.375,
             -0.9
           ],
@@ -8656,7 +8657,7 @@
           ],
           "bevel": 0.012,
           "at": [
-            2.25,
+            2.8,
             0.675,
             -0.9
           ],
@@ -8672,6 +8673,258 @@
         "en": "This static DESIGN structure supports the visible specimen. It is not selectable and carries no measured acoustic properties. [S1]",
         "zh": "这个静态设计结构支撑可见实验物件，不可选中，也不承载实测声学参数。[S1]"
       }
+    },
+    {
+      "id": "wavelength-scale-250",
+      "name": {
+        "en": "One wavelength scale",
+        "zh": "一个波长的标尺"
+      },
+      "group": "air-wave",
+      "context": true,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          1,
+          0.009,
+          0.012
+        ],
+        "at": [
+          -0.09999999999999998,
+          1.045,
+          0.8
+        ],
+        "color": "token:en-sound"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.009,
+            0.06,
+            0.012
+          ],
+          "at": [
+            -0.6,
+            1.045,
+            0.8
+          ],
+          "color": "token:en-sound"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.009,
+            0.06,
+            0.012
+          ],
+          "at": [
+            0.4,
+            1.045,
+            0.8
+          ],
+          "color": "token:en-sound"
+        }
+      ],
+      "castShadow": false,
+      "summary": {
+        "en": "A fixed scale one wavelength long in this slowed model.",
+        "zh": "慢放模型中一个波长长度的固定标尺。"
+      },
+      "detail": {
+        "en": "This scale measures one repeat of the wave on the silent strip. It is a drawing aid in this model's length units and is not a real distance in air.",
+        "zh": "这把标尺量的是无声波带上波形重复一次的长度。它是模型长度单位下的绘图辅助，不是空气中的真实距离。"
+      },
+      "clip": false
+    },
+    {
+      "id": "wavelength-scale-500",
+      "name": {
+        "en": "One wavelength scale",
+        "zh": "一个波长的标尺"
+      },
+      "group": "air-wave",
+      "context": true,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.5,
+          0.009,
+          0.012
+        ],
+        "at": [
+          -0.35,
+          1.045,
+          0.8
+        ],
+        "color": "token:en-sound"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.009,
+            0.06,
+            0.012
+          ],
+          "at": [
+            -0.6,
+            1.045,
+            0.8
+          ],
+          "color": "token:en-sound"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.009,
+            0.06,
+            0.012
+          ],
+          "at": [
+            -0.09999999999999998,
+            1.045,
+            0.8
+          ],
+          "color": "token:en-sound"
+        }
+      ],
+      "castShadow": false,
+      "summary": {
+        "en": "A fixed scale one wavelength long in this slowed model.",
+        "zh": "慢放模型中一个波长长度的固定标尺。"
+      },
+      "detail": {
+        "en": "This scale measures one repeat of the wave on the silent strip. It is a drawing aid in this model's length units and is not a real distance in air.",
+        "zh": "这把标尺量的是无声波带上波形重复一次的长度。它是模型长度单位下的绘图辅助，不是空气中的真实距离。"
+      },
+      "clip": false
+    },
+    {
+      "id": "displacement-stops-one",
+      "name": {
+        "en": "Displacement range stops",
+        "zh": "位移范围限位"
+      },
+      "group": "air-wave",
+      "context": true,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.079,
+          0.008,
+          0.012
+        ],
+        "at": [
+          -0.85,
+          1.02,
+          0.8
+        ],
+        "color": "token:en-sound"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.116,
+            0.012
+          ],
+          "at": [
+            -0.885,
+            0.962,
+            0.8
+          ],
+          "color": "token:en-sound"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.116,
+            0.012
+          ],
+          "at": [
+            -0.815,
+            0.962,
+            0.8
+          ],
+          "color": "token:en-sound"
+        }
+      ],
+      "castShadow": false,
+      "summary": {
+        "en": "Two stops show how far the highlighted point moves each way.",
+        "zh": "两个挡位显示高亮点向两侧各移动多远。"
+      },
+      "detail": {
+        "en": "The stops sit on either side of the highlighted point's rest position. They are drawn at the model's relative displacement and are not a measured distance.",
+        "zh": "挡位位于高亮点静止位置的两侧，按模型的相对位移绘制，不是实测距离。"
+      },
+      "clip": false
+    },
+    {
+      "id": "displacement-stops-two",
+      "name": {
+        "en": "Displacement range stops",
+        "zh": "位移范围限位"
+      },
+      "group": "air-wave",
+      "context": true,
+      "primitive": {
+        "kind": "box",
+        "size": [
+          0.14900000000000002,
+          0.008,
+          0.012
+        ],
+        "at": [
+          -0.85,
+          1.02,
+          0.8
+        ],
+        "color": "token:en-sound"
+      },
+      "extra": [
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.116,
+            0.012
+          ],
+          "at": [
+            -0.9199999999999999,
+            0.962,
+            0.8
+          ],
+          "color": "token:en-sound"
+        },
+        {
+          "kind": "box",
+          "size": [
+            0.006,
+            0.116,
+            0.012
+          ],
+          "at": [
+            -0.78,
+            0.962,
+            0.8
+          ],
+          "color": "token:en-sound"
+        }
+      ],
+      "castShadow": false,
+      "summary": {
+        "en": "Two stops show how far the highlighted point moves each way.",
+        "zh": "两个挡位显示高亮点向两侧各移动多远。"
+      },
+      "detail": {
+        "en": "The stops sit on either side of the highlighted point's rest position. They are drawn at the model's relative displacement and are not a measured distance.",
+        "zh": "挡位位于高亮点静止位置的两侧，按模型的相对位移绘制，不是实测距离。"
+      },
+      "clip": false
     }
   ],
   "groups": [
@@ -9587,6 +9840,62 @@
         "part": "wave-reference",
         "visible": {
           "eq": "air"
+        }
+      },
+      {
+        "control": "medium",
+        "part": "wavelength-scale-250",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "frequency-hz",
+        "part": "wavelength-scale-250",
+        "visible": {
+          "eq": 250
+        }
+      },
+      {
+        "control": "medium",
+        "part": "wavelength-scale-500",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "frequency-hz",
+        "part": "wavelength-scale-500",
+        "visible": {
+          "eq": 500
+        }
+      },
+      {
+        "control": "medium",
+        "part": "displacement-stops-one",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "amplitude",
+        "part": "displacement-stops-one",
+        "visible": {
+          "eq": 1
+        }
+      },
+      {
+        "control": "medium",
+        "part": "displacement-stops-two",
+        "visible": {
+          "eq": "air"
+        }
+      },
+      {
+        "control": "amplitude",
+        "part": "displacement-stops-two",
+        "visible": {
+          "eq": 2
         }
       }
     ],

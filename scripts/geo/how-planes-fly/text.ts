@@ -20,8 +20,8 @@ export const PART_TEXT: Record<string, PartText> = {
     name: t('Fuselage', '机身'),
     summary: t('Joins the wings, tail and cabin into one body.', '把机翼、尾翼和客舱连成一体。'),
     detail: {
-      "en": "The fuselage joins the wings, tail and cockpit. Passengers and cargo travel inside. The four-force arrows start around this long body.\n\nThis model represents an airliner about 40 m long, with a 36 m wingspan and a height of 12 m. It is drawn ten times smaller [S58]. The aircraft, fuel and everything it carries contribute to its weight. Lift balances that weight in level flight [S1].\n\nThe simple outline and windows represent a general airliner, without a particular maker, model or airline [S58].",
-      "zh": "机身连接机翼、尾翼和驾驶舱，里面载着乘客和货物。四力箭头从这段长条形机体周围画出。\n\n模型代表一架约长 40 米、翼展 36 米、高 12 米的客机，画面缩小十倍 [S58]。飞机、燃油和所载的一切都计入重量。水平飞行时，升力与重力平衡 [S1]。\n\n简化的外形和窗户代表一般客机，没有指定厂家、型号或航空公司 [S58]。"
+      "en": "The fuselage joins the wings, tail and cockpit. Passengers and cargo travel inside. The four-force arrows start around this long body.\n\nThis model represents an airliner about 40 m long, with a 36 m wingspan and a height of 12 m. It is drawn ten times smaller [S58]. The aircraft, fuel and everything it carries contribute to its weight. Lift balances that weight in level flight [S1].\n\nApart from the nose and cockpit windows, which follow the Airbus A330, the simple outline represents a general airliner, without a particular maker, model or airline [S58].",
+      "zh": "机身连接机翼、尾翼和驾驶舱，里面载着乘客和货物。四力箭头从这段长条形机体周围画出。\n\n模型代表一架约长 40 米、翼展 36 米、高 12 米的客机，画面缩小十倍 [S58]。飞机、燃油和所载的一切都计入重量。水平飞行时，升力与重力平衡 [S1]。\n\n除了参照空客 A330 的机头和驾驶舱窗户，简化的外形代表一般客机，没有指定厂家、型号或航空公司 [S58]。"
     },
   },
   'cockpit-glazing': {
@@ -30,11 +30,11 @@ export const PART_TEXT: Record<string, PartText> = {
     detail: p(
       [
         'The flight crew sit behind these windows at the front of the fuselage. They mark the nose, which faces into the incoming air.',
-        'Six windscreen panes sit in frames set into the curved nose. The shape is generic, not one particular aircraft type [S58].',
+        'Six windscreen panes sit in frames on the curved nose, three on each side, and a wiper rests below each front pane. The nose and window layout follow the Airbus A330; the rest of this airliner is generic [S58].',
       ],
       [
         '机组坐在机身前端的窗户后面。窗户标出机头的位置，机头朝向迎面而来的空气。',
-        '六块风挡玻璃装在窗框里，嵌进弯曲的机头。外形是通用设计，不是某一种机型 [S58]。',
+        '六块风挡玻璃装在窗框里，贴着弯曲的机头，左右各三块，每块前窗下方停放一支雨刷。机头和窗户布局参照空客 A330，这架客机的其余部分是通用设计 [S58]。',
       ],
     ),
   },

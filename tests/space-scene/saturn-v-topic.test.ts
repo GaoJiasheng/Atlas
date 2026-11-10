@@ -136,7 +136,8 @@ it.each(['launch', 'first-off', 'parking', 'translunar', 'separated', 'turned', 
   const fx = effects({ phase });
   expect(phases).toContain(phase);
   expect(out({ phase })['configuration-name']).toBe(phase);
-  for (const p of file.parts) {
+  // Mission hardware only: the ideal-model chapter's imaginary rocket is a context part with no flight phase.
+  for (const p of file.parts.filter((q) => !q.context)) {
     const name = fx.poses.get(p.id);
     expect(typeof name, `${phase}/${p.id} pose`).toBe('string');
     expect(file.poses?.[name!], `${phase}/${p.id}`).toBeDefined();
@@ -153,7 +154,7 @@ it.each(['launch', 'first-off', 'parking', 'translunar', 'separated', 'turned', 
   for (const id of ['sm-shell', 'sm-tanks', 'sm-engine']) expect(fx.hidden.has(id), `${phase}/${id}`).toBe(phase === 'return');
   expect(fx.hidden.has('les-tower')).toBe(!['launch', 'first-off'].includes(phase));
   expect(fx.hidden.has('cm-probe')).toBe(['homeward', 'return'].includes(phase));
-  if (phase === 'return') expect(file.parts.filter((p) => !fx.hidden.has(p.id)).map((p) => p.id).sort()).toEqual(['cm-couches', 'cm-heatshield', 'cm-shell']);
+  if (phase === 'return') expect(file.parts.filter((p) => !p.context && !fx.hidden.has(p.id)).map((p) => p.id).sort()).toEqual(['cm-couches', 'cm-heatshield', 'cm-shell']);
 });
 
 it('the ascent cabin, engine, windows and port rise together while descent gear remains on the surface', () => {
