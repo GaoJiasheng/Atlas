@@ -96,8 +96,8 @@
   "glbBytesAfter": 1460284,
   "round1GLBSHA256": "fc9a1c983407d246e5d946c10d480f2f2c08d18066c0122ce0c7a3c19633ba46",
   "acceptedFingerprints": {
-    "cumulus": "6606fb4f6d68ec01e8a1d2be5999ceb35036360af315fddd012f90e8bd8c36a1",
-    "rain-cloud": "49d0e47c239b8f299af052d58f8383f1bf0ff35a7583b1208e6b1a24ca448d8d",
+    "cumulus": "80ffc31dde37d1328d3362f77b0044212ec516f585052f2b7a18419b05595ea9",
+    "rain-cloud": "4ac7fb3fc95a6a46ec2833af43f8a8430309e1dec41c6bcea4d817b0fac2b7a3",
     "hdb-block": "c05b1a0bdffcebf8039b9e3c7c55c2e4150e98be4d747a72c74033e9e89f4e92",
     "roof-tank": "8dac67187840d8323692eea8c1956153a7194270cbfc26ca927148eff09f29c5",
     "barrage": "b1ed72e63de9adce0f045a299b417d204b27e217da1d6407acd9e753fc94fd2e",

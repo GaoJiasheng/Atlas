@@ -3450,273 +3450,13 @@
         {
           "kind": "curvedPanel",
           "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            13.6767,
-            0.1135,
-            4.3818
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            13.6767,
-            0.3215,
-            4.3818
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            13.696,
-            0.4325,
-            4.4048
-          ],
-          "rotation": [
-            0,
-            40,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            15.5251,
-            0.1135,
-            1.4804
-          ],
-          "rotation": [
-            0,
-            75.00000000000001,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            15.5251,
-            0.3215,
-            1.4804
-          ],
-          "rotation": [
-            0,
-            75.00000000000001,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            15.5541,
-            0.4325,
-            1.4882
-          ],
-          "rotation": [
-            0,
-            75.00000000000001,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            15.375,
-            0.1135,
-            -1.9564
-          ],
-          "rotation": [
-            0,
-            110,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            15.375,
-            0.3215,
-            -1.9564
-          ],
-          "rotation": [
-            0,
-            110,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            15.4032,
-            0.4325,
-            -1.9666
-          ],
-          "rotation": [
-            0,
-            110,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            13.2809,
-            0.1135,
-            -4.6855
-          ],
-          "rotation": [
-            0,
-            145,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            13.2809,
-            0.3215,
-            -4.6855
-          ],
-          "rotation": [
-            0,
-            145,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            13.2981,
-            0.4325,
-            -4.7101
-          ],
-          "rotation": [
-            0,
-            145,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
+          "angle": 315,
+          "height": 0.412,
+          "thickness": 0.24,
+          "segments": 128,
           "at": [
             10,
-            0.1135,
-            -5.72
-          ],
-          "rotation": [
-            0,
-            180,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            10,
-            0.3215,
+            0.206,
             -5.72
           ],
           "rotation": [
@@ -3730,13 +3470,13 @@
         {
           "kind": "curvedPanel",
           "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
+          "angle": 315,
+          "height": 0.047,
+          "thickness": 0.28,
+          "segments": 128,
           "at": [
             10,
-            0.4325,
+            0.4315,
             -5.75
           ],
           "rotation": [
@@ -3748,240 +3488,84 @@
           "tint": "token:ink-3"
         },
         {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
+          "kind": "bevelBox",
+          "size": [
+            0.36,
+            0.5,
+            0.3
+          ],
+          "bevel": 0.006,
           "at": [
-            6.7191,
-            0.1135,
-            -4.6855
+            12.1507,
+            0.25,
+            5.1922
           ],
           "rotation": [
             0,
-            215,
+            22.5,
             0
           ],
           "color": "plastic",
           "tint": "token:neutral"
         },
         {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
+          "kind": "bevelBox",
+          "size": [
+            0.42,
+            0.04,
+            0.36
+          ],
+          "bevel": 0.006,
           "at": [
-            6.7191,
-            0.3215,
-            -4.6855
+            12.1507,
+            0.52,
+            5.1922
           ],
           "rotation": [
             0,
-            215,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            6.7019,
-            0.4325,
-            -4.7101
-          ],
-          "rotation": [
-            0,
-            215,
+            22.5,
             0
           ],
           "color": "plastic",
           "tint": "token:ink-3"
         },
         {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
+          "kind": "bevelBox",
+          "size": [
+            0.36,
+            0.5,
+            0.3
+          ],
+          "bevel": 0.006,
           "at": [
-            4.625,
-            0.1135,
-            -1.9564
+            7.8493,
+            0.25,
+            5.1922
           ],
           "rotation": [
             0,
-            249.99999999999997,
+            -22.5,
             0
           ],
           "color": "plastic",
           "tint": "token:neutral"
         },
         {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
+          "kind": "bevelBox",
+          "size": [
+            0.42,
+            0.04,
+            0.36
+          ],
+          "bevel": 0.006,
           "at": [
-            4.625,
-            0.3215,
-            -1.9564
+            7.8493,
+            0.52,
+            5.1922
           ],
           "rotation": [
             0,
-            249.99999999999997,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            4.5968,
-            0.4325,
-            -1.9666
-          ],
-          "rotation": [
-            0,
-            249.99999999999997,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            4.4749,
-            0.1135,
-            1.4804
-          ],
-          "rotation": [
-            0,
-            285.00000000000006,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            4.4749,
-            0.3215,
-            1.4804
-          ],
-          "rotation": [
-            0,
-            285.00000000000006,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            4.4459,
-            0.4325,
-            1.4882
-          ],
-          "rotation": [
-            0,
-            285.00000000000006,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:ink-3"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.227,
-          "thickness": 0.2,
-          "segments": 24,
-          "at": [
-            6.3233,
-            0.1135,
-            4.3818
-          ],
-          "rotation": [
-            0,
-            320,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.72,
-          "angle": 35,
-          "height": 0.177,
-          "thickness": 0.2,
-          "segments": 32,
-          "at": [
-            6.3233,
-            0.3215,
-            4.3818
-          ],
-          "rotation": [
-            0,
-            320,
-            0
-          ],
-          "color": "plastic",
-          "tint": "token:neutral"
-        },
-        {
-          "kind": "curvedPanel",
-          "radius": 5.75,
-          "angle": 35,
-          "height": 0.045,
-          "thickness": 0.26,
-          "segments": 24,
-          "at": [
-            6.304,
-            0.4325,
-            4.4048
-          ],
-          "rotation": [
-            0,
-            320,
+            -22.5,
             0
           ],
           "color": "plastic",

@@ -486,15 +486,17 @@ const northArrow = {
     // A north meridian inlay, not a false evenly spaced clock dial.
     {kind:'bevelBox',size:[.016,.002,8.8],bevel:.0005,at:[10,.051,0],color:'powder'},
     // Perimeter belongs to this assembly, separate from the flat shadow receiver.
-    // Nine curved masonry bays and capstones; 45° southern entry remains open.
-    ...Array.from({length:9},(_,i)=>{
-      const a=(40+i*35)*Math.PI/180;
+    // One continuous wall and coping (315°, centred on north) overlapping the paving edge, so no
+    // slit or stepped bay end shows; two gate piers finish the 45° southern entry.
+    {kind:'curvedPanel',radius:5.72,angle:315,height:.412,thickness:.24,segments:128,at:[10,.206,-5.72],rotation:[0,180,0],color:'plastic',tint:'token:neutral'},
+    {kind:'curvedPanel',radius:5.75,angle:315,height:.047,thickness:.28,segments:128,at:[10,.4315,-5.75],rotation:[0,180,0],color:'plastic',tint:'token:ink-3'},
+    ...[22.5,-22.5].flatMap((deg)=>{
+      const a=deg*Math.PI/180,at=(r:number,y:number):V3=>r3([10+r*Math.sin(a),y,r*Math.cos(a)]);
       return [
-        {kind:'curvedPanel',radius:5.72,angle:35,height:.227,thickness:.20,segments:24,at:r3([10+5.72*Math.sin(a),.1135,5.72*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:neutral'},
-        {kind:'curvedPanel',radius:5.72,angle:35,height:.177,thickness:.20,segments:32,at:r3([10+5.72*Math.sin(a),.3215,5.72*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:neutral'},
-        {kind:'curvedPanel',radius:5.75,angle:35,height:.045,thickness:.26,segments:24,at:r3([10+5.75*Math.sin(a),.4325,5.75*Math.cos(a)]),rotation:[0,a*180/Math.PI,0],color:'plastic',tint:'token:ink-3'},
+        {kind:'bevelBox',size:[.36,.5,.30],bevel:.006,at:at(5.62,.25),rotation:[0,deg,0],color:'plastic',tint:'token:neutral'},
+        {kind:'bevelBox',size:[.42,.04,.36],bevel:.006,at:at(5.62,.52),rotation:[0,deg,0],color:'plastic',tint:'token:ink-3'},
       ];
-    }).flat(),
+    }),
   ],
   connects: ['pole'],
 };

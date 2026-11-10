@@ -49,6 +49,9 @@ describe('heat published topic', () => {
     expect(Number(at('temperature-and-heat', 4)['heated-j'])).toBe(12000);
     expect(Number(at('heating-curves', 2)['heated-c'])).toBeCloseTo(39.285714286, 6);
     expect(chapter('heating-curves').state.beats[1]!.caption.en).toContain('39.3');
+    expect(Number(at('heating-curves', 4)['heated-c'])).toBeCloseTo(32.142857143, 6);
+    expect(chapter('heating-curves').state.beats[3]!.caption.en).toContain('32.1');
+    expect(chapter('heating-curves').state.beats[3]!.caption.zh).toContain('32.1');
     expect(Number(at('heating-curves', 3)['heated-change-k'])).toBeCloseTo(Number(at('heating-curves', 2)['heated-change-k']) / 2, 10);
     expect(Number(at('heating-curves', 5)['heated-c'])).toBe(25);
     expect(at('heat-along-spoons', 2)['tip-comparison']).toBe('first-warmer');

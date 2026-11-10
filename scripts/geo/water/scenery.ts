@@ -40,6 +40,9 @@ export class Sculpture {
 }
 function rng(seed:number){return ()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
 const smoothMin=(a:number,b:number,k:number)=>{const h=Math.max(k-Math.abs(a-b),0)/k;return Math.min(a,b)-h*h*k*.25;};
+/** Height shading baked into the cloud meshes: dark enough at the base and crown to read on paper as well as on the dark plate. */
+export const CLOUD_AT:Record<'cumulus'|'rain-cloud',V>={cumulus:[-2.12,1.055,-.25],'rain-cloud':[1.03,1.0,-.61]};
+export function cloudColour(y:number,rain:boolean){const t=Math.max(0,Math.min(1,(y-CLOUD_AT[rain?'rain-cloud':'cumulus'][1])/(rain?.33:.6)));return col('paper',(rain?.08:.15)+Math.sqrt(t)*(rain?.31:.43));}
 export function cloud(rain=false,round=1){
  const n=rain?100:88,mc=new MarchingCubes(n,new MeshBasicMaterial(),false,false,150000);mc.isolation=0;
  const rand=rng(rain?83:17),lobes:{p:V;r:V}[]=[];
@@ -56,11 +59,11 @@ export function cloud(rain=false,round=1){
   d=Math.max(d,base-py);mc.field[z*n*n+y*n+x]=-d;
  }
  mc.update();const count=mc.geometry.drawRange.count,raw=mc.geometry.getAttribute('position'),p=new Float32Array(count*3);
- const scale:V=rain?[1.23,.55,.68]:[.7,.7,.7],at:V=rain?[1.03,1.0,-.61]:[-2.12,1.055,-.25];
+ const scale:V=rain?[1.23,.55,.68]:[.7,.7,.7],at:V=CLOUD_AT[rain?'rain-cloud':'cumulus'];
  for(let i=0;i<count;i++)for(let a=0;a<3;a++)p[i*3+a]=(lo[a]!+(raw.array[i*3+a]!+1)/2*(hi[a]!-lo[a]!))*scale[a]!+at[a]!;
  let g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(p,3));g=mergeVertices(g,1e-5);g.computeVertexNormals();
  const c=new Float32Array(g.getAttribute('position').count*3),pos=g.getAttribute('position');
- for(let i=0;i<pos.count;i++){const t=Math.max(0,Math.min(1,(pos.getY(i)-at[1])/(rain?.33:.6))),shade=(rain?.14:.31)+Math.sqrt(t)*(rain?.48:.62);c.set(col('paper',shade).toArray(),i*3);}
+ for(let i=0;i<pos.count;i++)c.set(cloudColour(pos.getY(i),rain).toArray(),i*3);
  g.setAttribute('color',new Float32BufferAttribute(c,3));mc.geometry.dispose();(mc.material as MeshBasicMaterial).dispose();return g;
 }
 /** Curved double-sided lenticular leaves with raised midrib and downward tips. */

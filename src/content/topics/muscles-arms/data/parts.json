@@ -971,7 +971,7 @@
       "mesh": "skin-outline",
       "material": {
         "color": "membrane",
-        "tint": "token:bone"
+        "tint": "token:ink-2"
       },
       "summary": {
         "en": "Locates the arm muscles on the reference body.",
