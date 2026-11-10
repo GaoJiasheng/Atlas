@@ -13,6 +13,9 @@
  *   author framed between the HUD columns still fits between them.
  *   The store keeps authored units: `storedZoom()` takes the shift off a
  *   reader's pan / zoom before it is written back (URL, FREE CAMERA).
+ * - Island topics (`basemap.island`): a whole-island camera zooms out further
+ *   until the island fits across the canvas (`islandZoom`, a phone or portrait
+ *   iPad), and the detailed land's fade-in moves down by the same shift.
  * - Re-fit: a HUD block opening, closing or resizing (or the stage resizing)
  *   eases the current authored camera into the new free rect (.6 s), unless the
  *   reader has panned / zoomed since; then the view holds still and only the
@@ -114,6 +117,34 @@ export function plateCamera(goal: { center: [number, number]; zoom: number }, au
   };
 }
 
+/** The canvas authored cameras were framed on (the 1920×1080 default layout), CSS px. */
+export const REF_CANVAS = { w: 1920, h: 1080 } as const;
+
+/**
+ * An island topic (`basemap.island`, `[west, south, east, north]`): a camera
+ * that shows the whole island on REF_CANVAS at its authored zoom keeps it whole
+ * here. Centred where `mapHudPadding` puts it (the free rect's centre), it
+ * zooms out until the island fits across the `width` of the canvas (GAP from
+ * each edge), at most MAX_ZOOM_OUT further. Only across: a phone or portrait
+ * stage is never short of height for it, and on wide stages the authored
+ * framing already shows it whole. Any other camera, one centred off the island
+ * or one that already fits keeps `goal.zoom`. The island's detailed land stays on:
+ * its fade-in moves down with the shift (geo controller), and the fit is
+ * above it, the island being far narrower than REF_FREE.
+ */
+export function islandZoom(goal: { center: [number, number]; zoom: number }, authoredZoom: number, island: readonly [number, number, number, number], width: number, rect: FrameRect): number {
+  const x = unitX(goal.center[0]), y = unitY(goal.center[1]);
+  // How far the island reaches from the centre to each side (world units).
+  const w = x - unitX(island[0]), e = unitX(island[2]) - x, n = y - unitY(island[3]), s = unitY(island[1]) - y;
+  /** The largest zoom that keeps the island within these distances (px) left, right, above and below the centre. */
+  const within = (l: number, r: number, t: number, b: number) => Math.log2(Math.min(l / w, r / e, t / n, b / s) / 512);
+  // Negated so that NaN (a centre off the island) leaves the camera as it is too.
+  if (!(authoredZoom <= within(REF_CANVAS.w / 2, REF_CANVAS.w / 2, REF_CANVAS.h / 2, REF_CANVAS.h / 2))) return goal.zoom;
+  const cx = (rect.x0 + rect.x1) / 2, fit = within(cx - GAP, width - GAP - cx, Infinity, Infinity);
+  // Also false for NaN or -Infinity (a degenerate rect).
+  return fit > goal.zoom - MAX_ZOOM_OUT ? Math.min(goal.zoom, fit) : goal.zoom;
+}
+
 export interface MapHudFraming {
   /** Where an authored camera goes now (padding + shifted zoom); it becomes the camera re-fits return to.
    * `free`: a fitted preset or the reader's own link, which may show the whole sheet. */
@@ -122,8 +153,6 @@ export interface MapHudFraming {
   storedZoom(zoom: number): number;
   /** Padding for `cameraForBounds` (WHOLE AREA, the plate); convert its zoom with `storedZoom`. */
   fitPadding(margin?: number): PaddingOptions;
-  /** The free rect (container px), as last measured. */
-  rect(): FrameRect | null;
   /** Presentation hides the HUD (the host's rect then avoids only the presentation blocks): re-frame. */
   setPresentation(on: boolean): void;
   destroy(): void;
@@ -137,6 +166,9 @@ export interface MapHudFramingOptions {
   reducedMotion?: boolean;
   /** A regional plate's `bounds`: authored cameras stay on it (`plateCamera`). */
   plate?: readonly [number, number, number, number];
+  /** An island topic: its extent, so whole-island cameras keep it whole (`islandZoom`); `onShift` hears every
+   * change of the zoom shift (a layout change), which moves the island's detailed land's fade-in. */
+  island?: { bounds: readonly [number, number, number, number]; onShift(shift: number): void };
 }
 
 /** The host's stage-local free rect in container coordinates, inset by GAP and clipped to the canvas. */
@@ -172,7 +204,11 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
     const stage = container.closest('.atlas-stage')?.getBoundingClientRect() ?? box;
     rect = containerFreeRect(options.hud?.getState().freeStage, stage, box);
     padding = mapHudPadding(box.width, box.height, rect);
-    shift = frameZoomShift(box.width, box.height, rect);
+    const next = frameZoomShift(box.width, box.height, rect);
+    if (next !== shift) {
+      shift = next;
+      options.island?.onShift(next);
+    }
     const sig = validRect(box.width, box.height, rect) ? [rect.x0, rect.y0, rect.x1, rect.y1].map(Math.round).join(',') : '';
     if (container.dataset.hudFrame !== sig) container.dataset.hudFrame = sig;
     return { width: box.width, height: box.height };
@@ -182,6 +218,9 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
     const shifted = { center: [camera.center[0], camera.center[1]] as [number, number], zoom: clampZoom(camera.zoom) + shift };
     const box = container.getBoundingClientRect();
     const framed = options.plate && !freeCamera ? plateCamera(shifted, clampZoom(camera.zoom), options.plate, box.width, box.height, padding, rect ? Math.min(box.height, rect.y1 + GAP) : box.height) : shifted;
+    const island = options.island;
+    // `measure()` ran first, so `rect` is set.
+    if (island) framed.zoom = islandZoom(framed, camera.zoom, island.bounds, box.width, rect!);
     return { ...framed, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0, padding: { ...padding } };
   };
 
@@ -244,7 +283,6 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
       measure();
       return rect ? fitHudPadding(box.width, box.height, rect, margin, map.getPadding()) : { ...ZERO };
     },
-    rect: () => rect,
     setPresentation() { schedule(); },
     destroy() {
       alive = false;

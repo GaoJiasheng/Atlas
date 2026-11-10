@@ -1,0 +1,18 @@
+{
+  "keyframes": [
+    {
+      "t": "1969-07-19",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    },
+    {
+      "t": "1969-07-22",
+      "features": {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    }
+  ]
+}

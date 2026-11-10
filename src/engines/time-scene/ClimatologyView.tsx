@@ -1,5 +1,5 @@
 /** Explicit monthly branch: calendar-month fields and authored beat order, without a time model. */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { EngineViewProps, SceneSnapshot } from '../core/types';
 import { SceneSlot, useHud, useScene, useSceneContext, useSceneControls, useSceneStore } from '../core/context';
 import type { SceneControls } from '../core/controls';
@@ -19,6 +19,8 @@ import { ClimateCellDetail } from './ClimateCellDetail';
 import { HudFold } from './hud/HudFold';
 import './climatology.css';
 import './time-scene.css';
+
+const BeatFigure = lazy(() => import('./BeatFigure'));
 
 export default function ClimatologyView({ topic, data, chapters, locale }: EngineViewProps) {
   const geo = data as ClimatologyGeoData;
@@ -410,6 +412,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
       </>
     ) : undefined;
   const at = flatIndex(presentation.beats, state.chapter, state.beat);
+  const figure = own[state.beat ?? 0]?.figure;
   return (
     <div className="ts-stage clim-stage" data-temporal-mode="climatology" data-presenting={presentation.presenting ? '' : undefined}>
       <ClimatologyStage
@@ -426,6 +429,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
         onSnapshot={setSnapshot}
       />
       {presentation.element}
+      {figure && <Suspense fallback={null}><BeatFigure figure={figure} locale={locale} presenting={presentation.presenting} onLayout={() => controller?.refreshLabels()} /></Suspense>}
       {presentation.presenting && (topic.monthlyLayers ?? []).some((d) => state.layers.includes(d.id)) && (
         <aside className="clim-present-key" data-hud-panel="present-key">
           <ClimateKey topic={topic} locale={locale} layers={state.layers} snapshot={snapshot} controller={controller} compact />

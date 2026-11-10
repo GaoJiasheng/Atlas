@@ -1,0 +1,49 @@
+/* The active beat's drawing: 4:3, reserved by width, height and aspect-ratio so nothing moves on load. */
+.ts-beat-figure__img.atlas-drawing { aspect-ratio: 4 / 3; }
+.ts-beat-figure__caption { margin-top: 6px; font: 400 0.75rem / 1.4 var(--font-hud); letter-spacing: 0.02em; color: var(--ink-2); }
+
+/* Reading panel: after every order-0 block (beat line, selection detail), just above the chapter body. */
+.ts-beat-figure { order: 1; margin: 0; }
+.ts-beat-figure .ts-beat-figure__img { width: min(100%, calc(30dvh * 4 / 3)); }
+/* The bottom drawer is shorter: leave the beat line and the start of the body in view. */
+.atlas-scene[data-drawer="true"] .ts-beat-figure .ts-beat-figure__img { width: min(100%, calc(22dvh * 4 / 3)); }
+
+/* Stage plate (HUD hidden). Opaque and isolated, so the drawing's blend meets the plate and not the map. */
+.ts-beat-plate {
+  --plate-gap: calc(24 * var(--u));
+  position: absolute;
+  z-index: 4;
+  top: var(--plate-top, var(--plate-gap));
+  right: var(--plate-gap);
+  box-sizing: border-box;
+  width: clamp(220px, calc(320 * var(--u)), 34%);
+  max-height: var(--plate-room, none);
+  margin: 0;
+  overflow: hidden;
+  padding: calc(10 * var(--u)) calc(12 * var(--u));
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  isolation: isolate;
+  pointer-events: none;
+}
+.ts-beat-plate .ts-beat-figure__img { width: min(100%, calc((var(--plate-room, 100dvh) - 88px) * 4 / 3)); margin-inline: auto; }
+
+@media (max-width: 759px) {
+  .ts-beat-plate {
+    --plate-gap: 8px;
+    display: grid;
+    grid-template-columns: 136px minmax(0, 1fr);
+    column-gap: 10px;
+    align-items: center;
+    top: auto;
+    left: 24px;
+    right: 24px;
+    bottom: calc(var(--caption-top, 16px) + var(--plate-gap));
+    width: auto;
+    max-height: none;
+    padding: 8px 10px;
+  }
+  .ts-beat-plate .ts-beat-figure__img { width: 136px; }
+  .ts-beat-plate .ts-beat-figure__caption { margin-top: 0; }
+}

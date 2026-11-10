@@ -7,8 +7,7 @@ import { defineEngine } from '../core/engine';
 import type { ChapterState, TimePoint } from '../core/types';
 import type { TimeSceneGeoData } from './schema';
 import { isGeoTime } from '../../lib/time';
-import { geographyChapterFields } from './lib/geography';
-import { monthlyChapterFields } from './lib/climatology-state';
+import { geographyChapterFields, monthlyChapterFields } from './lib/chapter-fields';
 
 /** TimeScene's fields on top of SceneState. `t` is in the URL. */
 export interface TimeSceneExt {

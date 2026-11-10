@@ -574,7 +574,7 @@
       "mesh": "skin-outline",
       "material": {
         "color": "membrane",
-        "tint": "token:bone"
+        "tint": "token:ink-2"
       },
       "short": {
         "en": "Body outline",

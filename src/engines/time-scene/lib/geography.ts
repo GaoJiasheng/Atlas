@@ -1,7 +1,6 @@
 /** Date-free geography scenes and inclusive membership dates; no historical playhead. */
 import type {
   Chapter,
-  ChapterState,
   SceneSnapshot,
   TopicMeta,
 } from "../../core/types";
@@ -140,20 +139,7 @@ export function geographyLayers(
       (ctx.kind === "membership" || id !== "geo-membership"),
   );
 }
-export function geographyChapterFields(raw: ChapterState) {
-  const s = raw as GeographyChapterState;
-  const b = s.beats?.[0];
-  return {
-    t: null,
-    month: undefined,
-    beat: 0,
-    geoContext: b?.geoContext ?? s.geoContext,
-    geoSelection: b ? b.selection : s.selection,
-    highlight: b?.highlight ?? s.highlight ?? [],
-    ...(b?.camera ? { camera: b.camera } : {}),
-    ...(b?.layers ? { layers: b.layers } : {}),
-  };
-}
+export { geographyChapterFields } from "./chapter-fields";
 export function geographyBeatScene(
   store: SceneStore<TimeSceneExt>,
   chapters: readonly Chapter[],

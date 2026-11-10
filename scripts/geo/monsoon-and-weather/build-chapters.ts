@@ -29,7 +29,7 @@ function camera(id: string): Camera {
 }
 
 function beat(b: BeatRow) {
-  return { month: b.month, camera: camera(b.preset), layers: LAYERS[b.layers], highlight: b.highlight, caption: b.caption };
+  return { month: b.month, camera: camera(b.preset), layers: LAYERS[b.layers], highlight: b.highlight, caption: b.caption, ...(b.figure ? { figure: b.figure } : {}) };
 }
 
 export function frontmatter(ch: ChapterRow) {

@@ -109,6 +109,7 @@ const ModernIndex = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernInde
 const ModernEvidence = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernEvidence })));
 const ReconstructionReadout = lazy(() => deepTimeUi().then((m) => ({ default: m.ReconstructionReadout })));
 const GeologyPlate = lazy(() => deepTimeUi().then((m) => ({ default: m.GeologyPlate })));
+const BeatFigure = lazy(() => import('./BeatFigure'));
 
 export default function TimeSceneView(props: EngineViewProps) {
   const source = props.data as TimeSceneGeoData;
@@ -389,6 +390,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const catalogueIndexes = useMemo(() => datedIndexes.filter(({ id }) => topic.datedLayers?.some((def) => def.id === id && def.catalogue)), [datedIndexes, topic.datedLayers]);
   const boundary = useSyncExternalStore(playhead.subscribe, () => catalogueIndexes.map(({ index }) => datedLayerState(index, playhead.get()).signature).join('|'), () => '');
   const chapterState = chapters.find((chapter) => chapter.id === currentChapter)?.state as TimeChapterState | undefined;
+  const figure = activeBeat === null ? undefined : chapterState?.beats?.[activeBeat]?.figure;
   const indexSpec = anchor?.tick !== null && anchor?.tick !== undefined ? chapterState?.beats?.[anchor.tick]?.catalogueIndex ?? chapterState?.catalogueIndex : chapterState?.catalogueIndex;
   useEffect(() => controller?.setCatalogueIndex?.(indexSpec), [controller, indexSpec]);
   const catalogueEntries = useMemo(() => catalogueItems(catalogueLayers, layers, playhead.get(), indexSpec), [catalogueLayers, layers, playhead, indexSpec, boundary]);
@@ -905,6 +907,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         <SceneSlot name="plate"><GeologyPlate {...geologyProps} /></SceneSlot>
       </Suspense>}
       {presentation.element}
+      {figure && <Suspense fallback={null}><BeatFigure figure={figure} locale={locale} presenting={presenting} onLayout={() => controller?.refreshLabels()} /></Suspense>}
 
       <SceneSlot name="stageOverlay">
         <HudFold className="atlas-overlay-card ts-overlay" title={t('time.layersAndKey')} closeLabel={locale === 'zh' ? '关闭图层与图例' : 'Close layers and key'}>

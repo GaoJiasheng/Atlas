@@ -497,6 +497,34 @@ lib/region.ts lib/rivers.ts lib/holders.ts lib/dated.ts lib/localLand.ts   纯�
 colors.ts  time-scene.css
 ```
 
+### 节拍配图 `figure`（TimeScene，时间线与月气候）
+
+地图在几拍之间不变时，每拍可以配一幅图。`state.beats[n].figure` 可选，写在该拍上，只在这一拍激活时显示：
+
+```json
+{
+  "caption": { "en": "Warm air rises and a storm cloud grows.", "zh": "暖空气上升，雷暴云长高。" },
+  "figure": {
+    "src": "figures/monsoon-and-weather-thunder-cloud",
+    "alt": { "en": "A tall storm cloud above a school field, with arrows showing air rising.", "zh": "学校操场上空高耸的雷暴云，箭头表示空气上升。" },
+    "caption": { "en": "Rising warm air builds the cloud.", "zh": "上升的暖空气让云长高。" }
+  }
+}
+```
+
+| 字段 | 必填 | 规则 |
+|---|---|---|
+| `src` | 是 | `public/illustrations/` 下的文件名，不带扩展名，规则同 `<Figure>`；`pnpm validate` 检查 `public/illustrations/<src>.webp` 存在 |
+| `alt` | 是 | `{ en, zh }`，写图上画了什么 |
+| `caption` | 是 | `{ en, zh }`，建议 90 个英文字符以内，手机上排在缩略图旁边 |
+| `invert` | 否 | 默认 `true`（cinema 主题反相成粉笔线）；`false` 保留真实明暗，同 `<Figure invert={false}>` |
+
+图按 1200 × 900（4:3）出，版面按这个比例预留。`scripts/illustrate.ts figure` 的默认输出就是这个规格。
+
+- **放哪里**：HUD 显示时在阅读面板里，节拍行与选中详情之后、正文之前（遵守 docs/08 §2，地图上不多盖一块；手机和竖屏平板在底部抽屉里）。HUD 隐藏时（演示或 H）是舞台上的图版：右上角，手机停靠在字幕卡正上方；`data-hud-panel="present-figure"` 让地图取景和标注都避开它，月气候的图例在右上时排在图例下面。
+- **没写 `figure` 的拍**：不加载任何东西，版面不变。组件是懒加载 chunk（`BeatFigure.tsx`），只有带图的拍才请求，不计入首屏 JS。
+- **地理模式**（`temporalMode: geography`）的节拍暂不支持，写了会被 schema 拒绝。
+
 ### HUD 自由区取景（TimeScene，2026-11-02，docs/67 §2.4）
 
 所有 TimeScene 地图（历史地图、区域图版、深时重建、月气候 / 现今地理）默认按**自由舞台矩形**取景，没有主题开关。自由矩形只有一个来源：宿主的 `hud.freeStage`（`core/useHudRoom`：所有可见 `data-hud-panel` 之间的最大空矩形，`.atlas-stage` 坐标；overlay 槽量它里面的卡片（按槽裁剪），忽略 perf、隐藏内容；H / 演示时 `.hud-fade` 里的块立即不算，演示块照算）。`lib/hud-framing.ts` 订阅它、换成地图容器坐标并内缩 12 px（`containerFreeRect`），控制器经 `GeoControllerOptions.hud` 拿到宿主 store。结果写在地图容器的 `data-hud-frame="x0,y0,x1,y1"`（测试 / 截图用）。
@@ -2485,6 +2513,7 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **区域图版陆地**（docs/27，`basemap.region`）：`pnpm tsx scripts/geo/lib/region-land.ts --topic <slug> [--simplify <km>] [--budget <KB>]` 读 topic.yaml 的 `basemap.region`（`bounds`、`land`），把 Natural Earth 1:10m 陆地（`world-atlas` 的 `land-10m.json`，公有领域，node_modules 里已有）裁到图版外扩 `padDeg`（0.25°，纸边盖住，图版边上不留缝）、逐环 DP（`simplifyKm` 1）、丢 < `minIslandKm2`（4）的岛和湖，写 `public/geo/<land>.json`：TopoJSON 一个对象，`kind: land` MultiPolygon + `kind: coast` MultiLineString（只含真海岸弧，裁切直边不进 coast；与 `land-10m-sea.json` 同一做法，纯函数在 `scripts/geo/lib/region.ts`，单测 `tests/geo-region.test.ts`）。超预算（`budgetKB` 200）时 DP 每次 ×1.5 重来。旋钮在清单 `pipeline.regionLand`（可没有清单）。打印体积、多边形 / 顶点 / 海岸弧数、实际 DP 和 `rings: N, zero-area 0, self-crossing 0`。实测：中国东部 [100, 20, 125, 44] 约 35 KB；`sample-region` 10 KB。跨一个大洲的图版（ancient-civilisations 的 [-12, -12, 135, 58]）逐环 DP 会在长海岸、窄水道（恒河三角洲、不列颠）留下自交环：清单写 `regionLand.mapshaper: true`（可选，缺省关，别的图版不变）先用 mapshaper 裁到外扩框、`-simplify dp interval=<simplifyKm> keep-shapes` 再 `-clean`，然后切图版时不再二次简化；还要把 `quantization` 提高到 1,000,000（20 万格时三角洲的近邻顶点吸附后又交叉）。实测 261 KB、784 个多边形、0 / 0。
 - **按国配色**：`pnpm tsx scripts/geo/lib/colour-holders.ts --topic <slug> [--keep] [--write]`，见「按国配色」。改了关键帧就重跑。
 - **岛尺度底图**（docs/17 C1，`four-taps` 起）：`topic.yaml` 的 `basemap: { local: land-sg, maxZoom: 13 }`（schema `basemapOptions`）。`local` 是 `public/geo/<local>.json`（TopoJSON，一个对象 `<local>`，几何带 `kind: mask` 与 `kind: land`），由 `scripts/geo/lib/local-land.ts --topic <slug>` 按清单 `pipeline.localLand` 生成：`land-sg` = URA 2019 总体规划规划区边界（No Sea，data.gov.sg，SODL v1.0）并成一个面、DP 5 m、丢掉 < 0.02 km² 的小岛，再挖掉内陆水面（`water`：URA `WATERBODY` ≥ 0.02 km²——河、运河、海湾、河口蓄水池；只有淹没山谷而成的蓄水池（`keepMatch`：麦里芝、贝雅士上下段、实里达上段、勿洛、德光岛、裕廊湖）保持陆地色，因为关键帧按年份给它们上色，建成前它们是陆地；河口蓄水池建坝前本来就是河口水面），约 84 KB（预算 150 KB），原始边界顶点到成品海岸的偏差 p50 0.9 m、p95 4.8 m；`mask` = 它取代的 10m 新加坡多边形外扩 400 m、减去柔佛与廖内的 10m 陆地（水色铺上去盖住旧海岸，不盖邻国）。GeoStage 只对设了 `basemap.local` 的主题在地图 load 后 fetch 它，zoom 9.4 起绘制、9.6 完全显现（渐变区间短：两条半透明的海岸会叠成重影；章节镜头取 ≤ 9.3 或 ≥ 9.6）（mask 水色 → 陆地 `--land` → 轮廓 `--land-edge` 1.2 px，叠在 10m 层之上、控制区之下）；`maxZoom`（默认 10，可到 16）放开地图缩放上限。其他主题不加载、不受影响。
+  - **岛屿适配**（`basemap.island: [西, 南, 东, 北]`，只能和 `local` 一起；four-taps 用 `land-sg` 陆地的外框 `[103.6, 1.16, 104.09, 1.475]`）：手机、竖屏 iPad 上 HUD 框定（`lib/hud-framing.ts`）的缩小量不够，岛的两端会被画布裁掉。设了 `island` 的主题：①在 1920×1080 画布上按作者缩放能看到整岛的镜头（整岛镜头），在当前画布上继续缩小，直到整岛横向放进画布（离两边各 GAP 12 px；只管横向：手机和竖屏从不缺高度，宽屏上作者镜头本来就看得到整岛），最多再缩小 `MAX_ZOOM_OUT`；特写和柔佛海峡镜头（1920 上本来就看不到整岛）不动，宽屏上整岛已在画布里也不动（`islandZoom`，单测 `tests/time-scene/hud-framing.test.ts`，e2e `tests-e2e/four-taps.spec.ts`：390×844 下大士南在视口里）。②岛尺度陆地的渐显按作者缩放算：9.4–9.6 随框定的缩小量（`frameZoomShift`）一起下移，所以作者镜头 ≥ 9.6 在任何尺寸都显示细海岸、≤ 9.3 都显示 10m 陆地，适配后的整岛镜头也在细海岸一侧。图层从 `LOCAL_DRAW_ZOOM`（9.4 − 1.5）起绘制，渐显之前透明。不设 `island` 的主题（新加坡历史 / 土地利用主题）行为不变。
 - **岛尺度底图 · 按年代的海岸**（docs/28 §4 E1 / E2 / P1，`singapore-1819-1965` 起）：
   - **数据**：`basemap.local` 文件里的 `kind: land` 可带 `from` / `to`（`[from, to)`，与河流同一语义，`lib/dated.ts`）——每个是**一整块完整的岛岸**（一个时代一块，不是增量）；可选 `kind: coast-today`（LineString / MultiLineString）= 今天的海岸线。其余属性（`id`、`src`、`certainty`…）引擎不读。`pnpm validate` 见「校验规则」（每段都带日期、不重叠、无空档、首段可无 `from`、末段可无 `to`）。
   - **引擎**：载入后 `lib/localLand.ts` `parseLocalLand` 给每个带日期的陆地打 `era` 下标；controller 按播放头取**唯一一个**时代（`localEraAt`：落在某段里就是它；在所有段之前取最早的，之后取最后开始的），只在时代变化时对 `ts-land-local-fill` / `ts-land-local-edge` `setFilter`（`localLandFilter(era)`，不逐帧），数据到达之前就先设好滤镜，所以任何时候屏幕上只有一条海岸：时代切换是瞬时的，没有两条半透明海岸的叠影（缩放 9.4–9.6 的 10m → 岛岸渐变不变）。**没有日期的文件（four-taps 的 `land-sg`）**：集合原样 `setData`、滤镜保持 `['==', ['get', 'kind'], 'land']`、不打 `era`，样式与行为不变（`tests/time-scene/local-land.test.ts`；four-taps 截图逐像素比对过）。

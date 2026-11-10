@@ -147,7 +147,7 @@ export async function sculptGeology(parts:Part[],output:string) {
     const part=byId(id);part.mesh=id;
     // Cross-section primitives remain as exact authoring/label contracts.
     part.primitive!.color=id==='edge-melt' ? 'enamel' : 'abrasive';
-    if(id!=='edge-melt')part.primitive!.tint='token:ink-3';
+    if(id!=='edge-melt')part.primitive!.tint='token:mat-rock';
     g.dispose();
   }
   await MeshoptEncoder.ready;

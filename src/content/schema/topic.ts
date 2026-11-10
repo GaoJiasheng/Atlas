@@ -81,18 +81,24 @@ export type RegionBasemap = z.output<typeof regionBasemap>;
  * `kind: mask` and `kind: land` geometries, built by
  * `scripts/geo/lib/local-land.ts`) drawn over the Natural Earth layers from
  * zoom 9.4, or `region`, a regional plate instead of the world map (above).
- * `maxZoom` changes the map's zoom ceiling (default 10).
+ * `maxZoom` changes the map's zoom ceiling (default 10). `island` (only with
+ * `local`, `[west, south, east, north]`) makes it an island topic: on a phone
+ * or portrait iPad a camera that shows the whole island at 1920×1080 zooms out
+ * until the island fits, and the local land fades in that much lower
+ * (lib/hud-framing.ts `islandZoom`).
  */
 export const basemapOptions = z
   .object({
     local: kebabId.optional(),
+    island: lngLatBox.optional(),
     region: regionBasemap.optional(),
     maxZoom: z.number().min(6).max(16).optional(),
     reconstruction: z.object({ file: kebabId, selection: z.literal('hold-older') }).strict().optional(),
   })
   .strict()
   .refine((b) => [b.local, b.region, b.reconstruction].filter((v) => v !== undefined).length === 1 || (b.local === undefined && b.region === undefined && b.reconstruction === undefined && b.maxZoom !== undefined), 'basemap needs exactly one of `local`, `region` or `reconstruction`, or only `maxZoom` (a world map with a zoom ceiling, docs/49)')
-  .refine((b) => !b.reconstruction || b.maxZoom === undefined, 'reconstruction fixes maxZoom at 3.6');
+  .refine((b) => !b.reconstruction || b.maxZoom === undefined, 'reconstruction fixes maxZoom at 3.6')
+  .refine((b) => !b.island || b.local !== undefined, '`island` needs `local`');
 export type BasemapOptions = z.output<typeof basemapOptions>;
 
 /**

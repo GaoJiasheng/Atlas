@@ -43,6 +43,18 @@ solid=distance<=radius
 # opening must not drain the entire thorax. Disconnected limb gaps remain air.
 for section in range(shape[1]):
  solid[:,section,:]=ndimage.binary_fill_holes(solid[:,section,:])
+# The eye fissures are open in the source head skin, so a transverse section
+# through them is an open contour and stays hollow: ~1 cm of head sections
+# otherwise becomes a slab-shaped pocket that marching cubes folds in through
+# both eyes (a light band across the eyes under the translucent body). In the
+# eye band a frontal (coronal) section sees each fissure as a hole ringed by
+# lid skin and the pocket as a hole ringed by shell, so frontal filling seals
+# both as closed lids; |x| < 60 mm keeps the ears out, and the global fill
+# below closes what is left of the pocket once it no longer reaches the air.
+crown=p[:,1].max();eye=(y>crown-.15)&(y<crown-.09);mid=np.abs(lo[0]+np.arange(shape[0])*step)<.06
+for section in range(shape[2]):
+ plane=solid[:,:,section];filled=ndimage.binary_fill_holes(plane)
+ plane|=filled&eye[None,:]&mid[:,None]
 solid=ndimage.binary_fill_holes(solid)
 del distance
 print('closed and filled',int(solid.sum()),flush=True)

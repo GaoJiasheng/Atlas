@@ -58,7 +58,7 @@ import { markerFocus, type MarkerFocus } from '../../lib/markers';
 import { createTerritoryLabels, nameKey } from './territory';
 import { createRiverLabels } from './rivers';
 import { createDatedMapLayer, datedLayerStyles, type DatedLayerStats, type DatedMapLayer } from './datedLayers';
-import { EMPTY, GROUPS, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, MAX_ZOOM, DASH_SEQUENCE, DASH_STEP_MS, REFERENCE_MS, REGION, SRC, buildGeoStyle, graticule, riverFilter } from './style';
+import { EMPTY, GROUPS, HI, HI_BBOX, HI_LOAD_ZOOM, LAYER, LOCAL, LOCAL_MIN_ZOOM, MAX_ZOOM, DASH_SEQUENCE, DASH_STEP_MS, REFERENCE_MS, REGION, SRC, buildGeoStyle, graticule, riverFilter } from './style';
 
 export interface GeoControllerOptions {
   container: HTMLElement;
@@ -222,7 +222,11 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
 
   /** Camera limit of a regional plate: its `maxBounds` widened to the stage's aspect ratio (re-set on resize). */
   const plateLimit = () => aspectBounds(regionMaxBounds(region!), container.clientWidth, container.clientHeight);
-  const styleFor = (tk: ThemeTokens) => buildGeoStyle({ tokens: tk, landUrl, graticule: graticuleData, local: localLand, region });
+  /** An island topic (`basemap.island`, always with `local`): whole-island cameras keep the island whole
+   * (lib/hud-framing.ts), and the local land fades in at LOCAL_MIN_ZOOM in authored zoom, moved by the framing's zoom shift. */
+  const island = options.basemap?.island;
+  let localMin = LOCAL_MIN_ZOOM;
+  const styleFor = (tk: ThemeTokens) => buildGeoStyle({ tokens: tk, landUrl, graticule: graticuleData, local: localLand, localMin, region });
   const style = styleFor(tokens);
 
   const initial = store.getState();
@@ -251,10 +255,19 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
   map.touchZoomRotate.disableRotation();
 
   const disposers: (() => void)[] = [];
-  const hudFraming = createMapHudFraming(map, container, { reducedMotion, hud: options.hud, plate: region?.bounds });
-  disposers.push(() => hudFraming.destroy());
   let loaded = false;
   let destroyed = false;
+  const hudFraming = createMapHudFraming(map, container, {
+    reducedMotion, hud: options.hud, plate: region?.bounds,
+    island: island && {
+      bounds: island,
+      onShift: (shift) => {
+        localMin = LOCAL_MIN_ZOOM + shift;
+        if (loaded) applyTheme();
+      },
+    },
+  });
+  disposers.push(() => hudFraming.destroy());
 
   /* ---------- errors: warn, never throw into the console as errors ---------- */
   map.on('error', (e) => console.warn('[atlas] map:', e.error?.message ?? e));

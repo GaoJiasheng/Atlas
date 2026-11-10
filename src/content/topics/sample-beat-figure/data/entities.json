@@ -1,0 +1,22 @@
+[
+  {
+    "id": "programme-a",
+    "name": {
+      "en": "Programme A",
+      "zh": "项目甲"
+    },
+    "bloc": "axis",
+    "joined": "1969-07-19",
+    "left": "1969-07-22"
+  },
+  {
+    "id": "programme-b",
+    "name": {
+      "en": "Programme B",
+      "zh": "项目乙"
+    },
+    "bloc": "allied",
+    "joined": "1969-07-19",
+    "left": "1969-07-22"
+  }
+]

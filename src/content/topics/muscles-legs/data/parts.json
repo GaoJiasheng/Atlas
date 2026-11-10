@@ -1079,7 +1079,7 @@
       "mesh": "skin-outline",
       "material": {
         "color": "membrane",
-        "tint": "token:ink-3"
+        "tint": "token:ink-2"
       },
       "summary": {
         "en": "Shows the region on the reference body.",

@@ -14,8 +14,10 @@ sensitivity: open
 status: published
 illustration: four-taps
 shortTitle: { en: "Four Taps", zh: "四大水喉" }
-# Island-scale basemap (docs/06 TimeScene, docs/17 C1): high-resolution land above zoom 9, zoom to 13.
-basemap: { local: land-sg, maxZoom: 13 }
+# Island-scale basemap (docs/06 TimeScene, docs/17 C1): high-resolution land above zoom 9.4, zoom to 13.
+# `island` = the extent of land-sg's land (Tuas to Pulau Tekong, the Southern Islands to Sembawang): whole-island
+# cameras keep all of it on a phone or portrait iPad.
+basemap: { local: land-sg, maxZoom: 13, island: [103.6, 1.16, 104.09, 1.475] }
 # The engine's three slots, named for the water sources (docs/06 blocLabels).
 blocLabels:
   axis: { en: "Local catchment", zh: "本地集水" }

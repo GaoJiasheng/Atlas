@@ -792,7 +792,7 @@
       "shell": true,
       "material": {
         "color": "membrane",
-        "tint": "token:bone"
+        "tint": "token:ink-2"
       },
       "summary": {
         "en": "The skin outline locates the shoulders on the whole body.",

@@ -65,7 +65,8 @@ earth.forEach(([id, en, zh, tint, sen, szh, den, dzh], i) => add(`earth-${id}`, 
   kind: 'lathe', profile: hemisphere(radii[i]!, radii[i + 1]!), segments: 96, arc: 270, rotation: [0, -25, 0], at: [0, 0, 0], color: i < 3 ? 'plastic' : 'steel', tint,
 }, bi(sen!, szh!), bi(den!, dzh!), { shell: i < 3, explode: { dir: [1, 0, 0], dist: [0.2, 0.15, 0.1, 0][i]! }, connects: i < 3 ? [`earth-${earth[i + 1]![0]}`] : [] }));
 
-parts[1]!.extra = shellGrain(radii[2]!, radii[1]!);
+// Shell detail takes its shell's tint, as shipped (decision 17).
+parts[1]!.extra = shellGrain(radii[2]!, radii[1]!).map((q) => ({ ...q, tint: 'token:mat-mantle' }));
 
 // Geographic exterior engraved on the curved crust, never freehand land.
 // Natural Earth 1:110m (public domain), redistributed by world-atlas 2.0.2.
@@ -94,13 +95,13 @@ parts[0]!.extra = coasts.sort((a, b) => b.length - a.length).slice(0, 12).map(pa
   const step = Math.max(1, Math.ceil((path.length - 1) / 63));
   const reduced = path.filter((_, k) => k % step === 0);
   if (reduced.at(-1) !== path.at(-1)) reduced.push(path.at(-1)!);
-  return { ...sweep(reduced, 0.0022, light), radial: 8, segments: 64 };
+  return { ...sweep(reduced, 0.0022, 'token:mat-crust'), radial: 8, segments: 64 };
 });
 
 // A thin mineral line remains inside the true 30 km shell section.
 for(const angle of [-70,-160])for(const [a0,a1] of [[0.025,Math.PI/2-0.03],[Math.PI/2+0.03,Math.PI-0.025]]) {
   const line:V2[]=Array.from({length:33},(_,k)=>{const a=a0!+(a1!-a0!)*k/32,r=(1+radii[1]!)/2+0.00025*Math.sin(a*31);return [r*Math.sin(a),r*Math.cos(a)];});
-  parts[0]!.extra!.push({...section(line,line.map(([x,y]):V2=>[x*1.0007,y*1.0007]),0.001,light),rotation:[0,angle,0]});
+  parts[0]!.extra!.push({...section(line,line.map(([x,y]):V2=>[x*1.0007,y*1.0007]),0.001,'token:mat-crust'),rotation:[0,angle,0]});
 }
 
 // The local plate is independently enlarged; it carries no Earth scale bar.
@@ -464,10 +465,10 @@ const file = {
   ...(!primitivesOnly ? {model:'/models/inside-the-earth.glb'} : {}),
   parts,
   groups: [
-    { id: 'planet-shells', name: bi('Earth layers', '地球各层'), color: ink, card: false },
+    { id: 'planet-shells', name: bi('Earth layers', '地球各层'), color: 'token:ink-2', card: false },
     { id: 'boundary-blocks', name: bi('Plate boundaries', '板块边界'), color: accent, card: false },
     { id: 'volcano-system', name: bi('Volcano', '火山'), color: hot },
-    { id: 'ground-and-waves', name: bi('Slip and waves', '滑动与波'), color: ink, card: false },
+    { id: 'ground-and-waves', name: bi('Slip and waves', '滑动与波'), color: 'token:ink-2', card: false },
     { id: 'water-and-structures', name: bi('Sea and structures', '海水与结构'), color: cold, card: false },
   ],
   flows: [

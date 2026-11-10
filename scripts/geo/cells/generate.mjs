@@ -154,7 +154,8 @@ if(process.argv[1]===fileURLToPath(import.meta.url)) {
  const textOnly=process.argv.includes('--text-only');
  const file=await buildCellsParts({textOnly});
  if(textOnly){await new Promise(done => process.stdout.write(JSON.stringify(file)+'\n', () => done()));process.exit(0);}
- for(const [id,tint] of [['leaf-context','token:mat-leaf'],['body-context','token:mat-skin'],['tissue-patch','token:mat-tissue']])for(const q of [parts.find(p=>p.id===id).primitive,...(parts.find(p=>p.id===id).extra??[])])q.tint??=tint;
+ // The tissue cells come from ellipsoid(), whose default tint is token:neutral; the shipped patch is mat-tissue (decision 17).
+ for(const [id,tint] of [['leaf-context','token:mat-leaf'],['body-context','token:mat-skin'],['tissue-patch','token:mat-tissue']])for(const q of [parts.find(p=>p.id===id).primitive,...(parts.find(p=>p.id===id).extra??[])])if(q.tint===undefined||(id==='tissue-patch'&&q.tint==='token:neutral'))q.tint=tint;
  writeFileSync(output,JSON.stringify(file,null,2)+'\n');
  process.stdout.write(`Generated ${parts.length} selectable cells parts.\n`);
 }

@@ -99,6 +99,18 @@ describe('six muscle topics: rebuilt asset/renderer contract',()=>{
   expect(signedVolume,`${topic}: source-proportioned solid figure, not hollow panel skins`).toBeGreaterThan(.03);
   expect(signedVolume).toBeLessThan(.10);
   expect(Math.abs(Math.min(...bodyPoints.map(p=>p.y))-sourceRig.floorY),`${topic}: soles remain on the rig floor`).toBeLessThan(.005);
+  // The open eye fissures once left ~1 cm of head sections hollow: a horizontal
+  // pocket folded in through both eyes and read as a light band across them
+  // (scripts/anatomy/seal-eye-slit.mjs, round2-voxel.py). Count level faces
+  // inside the head at eye height, well behind the face and the back of the skull
+  // (main: 4,100–7,000; sealed: 145–171).
+  const crown=Math.max(...bodyPoints.map(p=>p.y)),eyeBand=(p:Vector3)=>crown-p.y>.095&&crown-p.y<.145&&Math.abs(p.x)<.05;
+  const bandZ=bodyPoints.filter(eyeBand).map(p=>p.z),front=Math.max(...bandZ),back=Math.min(...bandZ);let pocket=0;
+  for(let i=0;i<index.count;i+=3){
+   const a=bodyPoints[index.getX(i)]!,b=bodyPoints[index.getX(i+1)]!,c=bodyPoints[index.getX(i+2)]!,m=a.clone().add(b).add(c).multiplyScalar(1/3),n=b.clone().sub(a).cross(c.clone().sub(a)).normalize();
+   if(eyeBand(m)&&Math.abs(n.y)>.9&&m.z<front-.03&&m.z>back+.03)pocket++;
+  }
+  expect(pocket,`${topic}: no hollow slab through the head at the eyes`).toBeLessThan(400);
 
   gltf.scene.traverse(o=>{if(o instanceof SkinnedMesh)o.geometry.dispose();});
  });

@@ -604,6 +604,21 @@ export const TIME_LAYERS = BUILTIN_TIME_LAYER_IDS;
 export type TimeLayer = (typeof TIME_LAYERS)[number];
 
 /**
+ * A drawing shown while one beat is active: `src` is a file stem under
+ * `public/illustrations/`, no extension (the same rule as `<Figure>`).
+ * `invert: false` keeps real light and dark on the cinema theme.
+ */
+export const beatFigure = z
+  .object({
+    src: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/, 'figure.src: a stem under public/illustrations/, no extension, such as figures/b200-rack'),
+    alt: bilingual,
+    caption: bilingual,
+    invert: z.boolean().optional(),
+  })
+  .strict();
+export type BeatFigure = z.output<typeof beatFigure>;
+
+/**
  * One presentation beat (PRESENTATION, `P`): where the camera goes, the time,
  * layers and highlight for that step (each optional, on top of the chapter's
  * own target) and the caption shown once the flight is done. `audio` is a
@@ -623,6 +638,7 @@ export const timeBeat = z
     highlight: z.array(kebabId).optional(),
     catalogueIndex: catalogueIndex.optional(),
     caption: bilingual,
+    figure: beatFigure.optional(),
     audio: z
       .string()
       .regex(/^\/[^\s?#]+\.(mp3|m4a|aac|ogg|opus|wav)$/i, 'audio: a site path such as /audio/ww2/ch07-1.mp3')
@@ -720,6 +736,11 @@ export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeS
   }
   const events = new Set(data.events.map((event) => event.id));
   return (state.index ?? []).flatMap((id, i) => events.has(id) ? [] : [`state.index.${i}: unknown event "${id}"`]);
+}
+
+/** A beat figure's file must exist, as `<Figure>`'s must (`exists` takes the stem). */
+export function timeBeatFigureIssues(state: Pick<TimeChapterState, 'beats'>, exists: (stem: string) => boolean): string[] {
+  return (state.beats ?? []).flatMap((beat, i) => (beat.figure && !exists(beat.figure.src) ? [`state.beats.${i}.figure: public/illustrations/${beat.figure.src}.webp not found`] : []));
 }
 
 /** Layer ids are topic-dependent, so check them after parsing the chapter. */

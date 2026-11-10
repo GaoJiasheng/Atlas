@@ -12,6 +12,7 @@ export interface BeatRow {
   layers: LayerSet;
   highlight: string[];
   caption: Bi;
+  figure?: { src: string; alt: Bi; caption: Bi; invert?: boolean };
 }
 export interface ChapterRow {
   file: string;
@@ -359,6 +360,17 @@ export const CHAPTERS: ChapterRow[] = [
           en: 'April reference view: Singapore is a location marker, not a detected storm. Visible clouds contain droplets and sometimes ice; a cloud has no solid shell.',
           zh: '4 月参考视图：新加坡只是位置标记，不是探测到的风暴。可见云含水滴，也可有冰；云没有硬壳。',
         },
+        figure: {
+          "src": "figures/weather-cloud-particles",
+          "alt": {
+            "en": "Three enlarged hexagonal ice crystals above five round water droplets, amid diffuse cloud wisps.",
+            "zh": "淡淡的云絮中，上方三颗放大的六角冰晶，下方五颗圆形水滴。"
+          },
+          "caption": {
+            "en": "Inside a cloud: enlarged water droplets and ice crystals, with no solid shell.",
+            "zh": "云的内部：放大的水滴和冰晶，没有固体外壳。"
+          }
+        },
       },
       {
         month: 4,
@@ -368,6 +380,17 @@ export const CHAPTERS: ChapterRow[] = [
         caption: {
           en: 'April reference view: lightning rapidly heats air along its path; the air’s expansion produces thunder. Clouds do not need to collide.',
           zh: '4 月参考视图：闪电令路径附近空气迅速受热膨胀，产生雷声，并不需要两片云相撞。',
+        },
+        figure: {
+          "src": "figures/weather-lightning-thunder",
+          "alt": {
+            "en": "A branching lightning channel, four outward arrows and expanding wave fronts in the surrounding air.",
+            "zh": "分叉闪电通道周围，四支箭头向外，弧线表示空气中向外传播的波。"
+          },
+          "caption": {
+            "en": "Lightning heats air; sudden expansion sends out thunder.",
+            "zh": "闪电使空气受热；空气猛然膨胀，发出雷声。"
+          }
         },
       },
       {
@@ -379,6 +402,17 @@ export const CHAPTERS: ChapterRow[] = [
           en: 'April reference view: hearing thunder means move promptly into a substantial building or an enclosed, metal-topped vehicle with windows up. Tell a responsible adult.',
           zh: '4 月参考视图：听到雷声，立即告诉负责的成人，进入合适的坚固建筑，或关好车窗的封闭金属顶车辆。',
         },
+        figure: {
+          "src": "figures/weather-tell-adult-shelter",
+          "alt": {
+            "en": "A uniformed pupil tells an adult as they walk through the doorway into an enclosed masonry school building.",
+            "zh": "穿校服的小学生边告诉成人，边一起穿过门口走进有围墙和屋顶的坚固校舍。"
+          },
+          "caption": {
+            "en": "Hear thunder: tell an adult and go straight into a solid building.",
+            "zh": "听到雷声：告诉成人，立即进入坚固建筑。"
+          }
+        },
       },
       {
         month: 4,
@@ -388,6 +422,17 @@ export const CHAPTERS: ChapterRow[] = [
         caption: {
           en: 'April reference view: stay sheltered for at least 30 minutes after the last thunder. Avoid plumbing and corded electrical equipment; an isolated tree is unsafe shelter.',
           zh: '4 月参考视图：最后一次雷声后，仍留在安全处至少 30 分钟。避开管道及有线电器，不要躲在孤树下。',
+        },
+        figure: {
+          "src": "figures/weather-wait-sheltered",
+          "alt": {
+            "en": "A pupil and adult wait inside; crossed-out pipe, corded phone and isolated tree show what to avoid.",
+            "zh": "学生和成人留在室内；划掉的水管、有线电话和孤树表示应避开的物品或地点。"
+          },
+          "caption": {
+            "en": "Wait at least 30 min after last thunder; avoid pipes, corded equipment and lone trees.",
+            "zh": "最后雷声后留在安全处至少30分钟；避开水管、有线电器和孤树。"
+          }
         },
       },
     ],

@@ -64,7 +64,7 @@ import { foodWebSourceIssues } from '../src/engines/space-scene/food-web-schema'
 import { tableSourceIssues } from '../src/engines/space-scene/table-schema';
 import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
-import { timeCatalogueIndexIssues, timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
+import { timeBeatFigureIssues, timeCatalogueIndexIssues, timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
 import {
   exercisesFile,
@@ -584,6 +584,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo') {
         for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
+        for (const issue of timeBeatFigureIssues(state.data as TimeChapterState, (stem) => existsSync(join(ROOT, 'public/illustrations', `${stem}.webp`)))) error(file, issue);
         for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
           const target = join(PUBLIC_DIR, 'geo', `${name}.json`);
           return existsSync(target) ? JSON.parse(readFileSync(target, 'utf8')) : undefined;

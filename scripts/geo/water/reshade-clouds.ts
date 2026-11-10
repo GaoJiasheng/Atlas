@@ -1,4 +1,4 @@
-/** Re-bake only the COLOR_0 of the two cloud meshes in the shipped water.glb (shade from scenery.ts).
+/** Re-bake only the COLOR_0 of the two cloud meshes in the shipped water.glb (height and crown shade from scenery.ts cloudColour).
  * Every other compressed stream is copied byte for byte, so accepted meshes keep their fingerprints.
  * Run: pnpm tsx scripts/geo/water/reshade-clouds.ts */
 import { Buffer } from 'node:buffer';
@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import { NodeIO, type Node } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
-import { Vector3, Matrix4 } from 'three';
+import { Vector3, Matrix3, Matrix4 } from 'three';
 import { cloudColour } from './scenery';
 
 const FILE = 'public/models/water.glb', METRICS = 'scripts/geo/water/comparisons';
@@ -20,11 +20,12 @@ const doc = await io.readBinary(glb);
 const nodeOf = (name: string) => doc.getRoot().listNodes().find((n) => n.getName() === name)!;
 const replaced = new Map<number, Uint8Array>();
 for (const name of ['cumulus', 'rain-cloud']) {
-  const node = nodeOf(name), prim = node.getMesh()!.listPrimitives()[0]!, position = prim.getAttribute('POSITION')!, colour = prim.getAttribute('COLOR_0')!;
-  const world = new Matrix4().fromArray(node.getWorldMatrix()), p = new Vector3(), out = new Uint8Array(colour.getCount() * 4);
+  const node = nodeOf(name), prim = node.getMesh()!.listPrimitives()[0]!, position = prim.getAttribute('POSITION')!, normal = prim.getAttribute('NORMAL')!, colour = prim.getAttribute('COLOR_0')!;
+  const world = new Matrix4().fromArray(node.getWorldMatrix()), toWorld = new Matrix3().getNormalMatrix(world), p = new Vector3(), n = new Vector3(), out = new Uint8Array(colour.getCount() * 4);
   for (let i = 0; i < position.getCount(); i++) {
     p.fromArray(position.getElement(i, [0, 0, 0])).applyMatrix4(world);
-    const c = cloudColour(p.y, name === 'rain-cloud');
+    n.fromArray(normal.getElement(i, [0, 0, 0])).applyMatrix3(toWorld).normalize();
+    const c = cloudColour(p.y, name === 'rain-cloud', n.y);
     [c.r, c.g, c.b].forEach((v, a) => { out[i * 4 + a] = Math.round((Math.round(v * 127) / 127) * 255); });
   }
   const glNode = gltf.nodes.find((n: { name: string }) => n.name === name);

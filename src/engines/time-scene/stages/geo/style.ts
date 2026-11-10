@@ -17,6 +17,7 @@ import type { RegionBasemap } from '../../../../content/schema/topic';
 import type { LngLat } from '../../lib/geo';
 import { regionFrame } from '../../lib/region';
 import { localLandFilter } from '../../lib/localLand';
+import { MAX_ZOOM_OUT } from '../../lib/hud-framing';
 
 /* ------------------------------------------------------------------ */
 /* Ids and constants                                                   */
@@ -83,6 +84,9 @@ export const GROUPS: Record<string, string[]> = {
   sites: [LAYER.siteHit],
 };
 
+/** Features of one `kind` (the 1:10m, local and regional land files). */
+const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
+
 /**
  * Regional 1:10m land (Southeast Asia, `public/geo/land-10m-sea.json`, built by
  * scripts/build-geo.ts): close-ups of Singapore and Johor (zoom 9-11) need more
@@ -98,7 +102,6 @@ export const HI_LOAD_ZOOM = 6.5;
 
 export function hiResLayers(tk: ThemeTokens): LayerSpecification[] {
   const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], HI_MIN_ZOOM, 0, HI_MIN_ZOOM + 1, 1];
-  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
   return [
     { id: HI.mask, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('frame'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
     { id: HI.fill, type: 'fill', source: HI.src, minzoom: HI_MIN_ZOOM, filter: kind('land'), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-antialias': true } },
@@ -121,30 +124,32 @@ export const LOCAL = { src: 'ts-land-local', mask: 'ts-land-local-mask', fill: '
 export const LOCAL_MIN_ZOOM = 9.4;
 /** A short fade: in between, two coastlines at half strength read as a ghosted double edge. */
 export const LOCAL_FADE = 0.2;
+/** The layers are drawn from here, the lowest an island topic's fade can start (its zoom shift is at most MAX_ZOOM_OUT); below `min` the fade keeps them transparent. */
+export const LOCAL_DRAW_ZOOM = LOCAL_MIN_ZOOM - MAX_ZOOM_OUT;
 /** Default map zoom ceiling (world to one island); `basemap.maxZoom` raises it. */
 export const MAX_ZOOM = 10;
 
 /** Today's coastline over a dated island coast (`kind: coast-today`): ink at this opacity, 0.8 px, dash [2, 2]. */
 export const COAST_TODAY = { opacity: 0.35, width: 0.8, dash: [2, 2] } as const;
 
-export function localLandLayers(tk: ThemeTokens): LayerSpecification[] {
-  const fade: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, 1];
-  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
+/** `min`: where the fade starts (an island topic moves it with the HUD framing's zoom shift, lib/hud-framing.ts). */
+export function localLandLayers(tk: ThemeTokens, min = LOCAL_MIN_ZOOM): LayerSpecification[] {
+  const fade = (top = 1): ExpressionSpecification => ['interpolate', ['linear'], ['zoom'], min, 0, min + LOCAL_FADE, top];
   return [
-    { id: LOCAL.mask, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: kind('mask'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade, 'fill-antialias': false } },
-    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: localLandFilter(null), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade, 'fill-antialias': true } },
-    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_MIN_ZOOM, filter: localLandFilter(null), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade } },
+    { id: LOCAL.mask, type: 'fill', source: LOCAL.src, minzoom: LOCAL_DRAW_ZOOM, filter: kind('mask'), paint: { 'fill-color': tk.water || '#dde2df', 'fill-opacity': fade(), 'fill-antialias': false } },
+    { id: LOCAL.fill, type: 'fill', source: LOCAL.src, minzoom: LOCAL_DRAW_ZOOM, filter: localLandFilter(null), paint: { 'fill-color': tk.land || '#e1dbcc', 'fill-opacity': fade(), 'fill-antialias': true } },
+    { id: LOCAL.edge, type: 'line', source: LOCAL.src, minzoom: LOCAL_DRAW_ZOOM, filter: localLandFilter(null), paint: { 'line-color': tk['land-edge'] || 'rgba(42, 40, 36, 0.3)', 'line-width': 1.2, 'line-opacity': fade() } },
     {
       id: LOCAL.today,
       type: 'line',
       source: LOCAL.src,
-      minzoom: LOCAL_MIN_ZOOM,
+      minzoom: LOCAL_DRAW_ZOOM,
       filter: kind('coast-today'),
       layout: { 'line-join': 'round' },
       paint: {
         'line-color': tk.ink || '#2a2824',
         'line-width': COAST_TODAY.width,
-        'line-opacity': ['interpolate', ['linear'], ['zoom'], LOCAL_MIN_ZOOM, 0, LOCAL_MIN_ZOOM + LOCAL_FADE, COAST_TODAY.opacity],
+        'line-opacity': fade(COAST_TODAY.opacity),
         'line-dasharray': [...COAST_TODAY.dash],
       },
     },
@@ -348,7 +353,6 @@ export function riverLayers(tk: ThemeTokens): LayerSpecification[] {
 
 /** The sheet around the plate in the paper colour (no coastline), and the plate's neat line; over every map layer. */
 export function frameLayers(tk: ThemeTokens): LayerSpecification[] {
-  const kind = (k: string): FilterSpecification => ['==', ['get', 'kind'], k];
   return [
     { id: REGION.frameFill, type: 'fill', source: REGION.frame, filter: kind('frame'), paint: { 'fill-color': tk.paper || '#e9e4d8', 'fill-antialias': false } },
     { id: REGION.frameEdge, type: 'line', source: REGION.frame, filter: kind('edge'), paint: { 'line-color': tk.line || 'rgba(42, 40, 36, 0.6)', 'line-width': 0.8 } },
@@ -366,6 +370,8 @@ export interface GeoStyleOptions {
   graticule: FeatureCollection;
   /** `basemap.local`: island-scale land drawn above zoom 9.4. */
   local?: string | null;
+  /** Where the local land starts to fade in (default LOCAL_MIN_ZOOM). */
+  localMin?: number;
   /** `basemap.region`: a regional plate instead of the world. */
   region?: Pick<RegionBasemap, 'bounds'> | null;
 }
@@ -393,13 +399,13 @@ export function buildGeoStyle(options: GeoStyleOptions): StyleSpecification {
     style.sources[REGION.rivers] = { type: 'geojson', data: EMPTY };
     style.sources[REGION.frame] = { type: 'geojson', data: regionFrame(region) };
     for (const layer of style.layers) {
-      if (layer.id === BASE_LAYER_IDS.land) (layer as { filter?: FilterSpecification }).filter = ['==', ['get', 'kind'], 'land'];
-      if (layer.id === BASE_LAYER_IDS.landEdge) (layer as { filter?: FilterSpecification }).filter = ['==', ['get', 'kind'], 'coast'];
+      if (layer.id === BASE_LAYER_IDS.land) (layer as { filter?: FilterSpecification }).filter = kind('land');
+      if (layer.id === BASE_LAYER_IDS.landEdge) (layer as { filter?: FilterSpecification }).filter = kind('coast');
     }
     regional = riverLayers(tokens);
   } else {
     style.sources[HI.src] = { type: 'geojson', data: EMPTY };
-    regional = [...hiResLayers(tokens), ...(local ? localLandLayers(tokens) : [])];
+    regional = [...hiResLayers(tokens), ...(local ? localLandLayers(tokens, options.localMin) : [])];
     if (local) style.sources[LOCAL.src] = { type: 'geojson', data: EMPTY };
   }
   style.layers.splice(style.layers.findIndex((l) => l.id === BASE_LAYER_IDS.landEdge) + 1, 0, ...regional);

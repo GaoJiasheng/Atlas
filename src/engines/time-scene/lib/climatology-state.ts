@@ -1,5 +1,5 @@
 /** Calendar-month scenes are discrete authored beats; no date/playhead conversion. */
-import type { Chapter, ChapterState, SceneSnapshot } from '../../core/types';
+import type { Chapter, SceneSnapshot } from '../../core/types';
 import type { SceneStore } from '../../core/store';
 import type { UrlState } from '../../core/url-state';
 import type { ClimatologyBeat, ClimatologyChapterState } from '../schema';
@@ -12,19 +12,7 @@ export type ClimatologyExt = TimeSceneExt & {
 export const ownMonthlyBeats = (chapter?: Pick<Chapter, 'state'>): readonly ClimatologyBeat[] =>
   (chapter?.state as ClimatologyChapterState | undefined)?.beats ?? [];
 
-/** Chapter targets themselves are the first authored beat, including its camera. */
-export function monthlyChapterFields(raw: ChapterState): Partial<SceneSnapshot<ClimatologyExt>> {
-  const state = raw as ClimatologyChapterState;
-  const first = state.beats?.[0];
-  return {
-    t: null,
-    beat: 0,
-    month: first?.month ?? state.month,
-    ...(first?.camera ? { camera: first.camera } : {}),
-    ...(first?.layers ? { layers: first.layers } : {}),
-    highlight: first?.highlight ?? state.highlight ?? [],
-  };
-}
+export { monthlyChapterFields } from './chapter-fields';
 
 export function monthlyBeatScene(
   store: SceneStore<TimeSceneExt>,

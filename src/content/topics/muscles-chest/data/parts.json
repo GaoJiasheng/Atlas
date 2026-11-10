@@ -587,7 +587,7 @@
       "mesh": "skin-outline",
       "material": {
         "color": "membrane",
-        "tint": "token:mat-bone-pale"
+        "tint": "token:ink-2"
       },
       "summary": {
         "en": "The skin surface of the whole body, for finding the muscles on yourself.",

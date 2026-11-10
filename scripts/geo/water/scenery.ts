@@ -40,9 +40,13 @@ export class Sculpture {
 }
 function rng(seed:number){return ()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
 const smoothMin=(a:number,b:number,k:number)=>{const h=Math.max(k-Math.abs(a-b),0)/k;return Math.min(a,b)-h*h*k*.25;};
-/** Height shading baked into the cloud meshes: dark enough at the base and crown to read on paper as well as on the dark plate. */
+/** Height shading baked into the cloud meshes: dark at the base, bright through the body.
+ * Upward-facing crown surfaces take the full key light and form the cloud's top silhouette, so they are
+ * shaded down (`ny` = world normal Y) until the crown edge stays below the paper ground; on the dark plate
+ * the crown is still the lightest grey of the cloud. The shade is held to 64 steps so the colour stream stays
+ * compressible inside the 1.5 MB GLB budget; no banding shows at that step under the stage lights. */
 export const CLOUD_AT:Record<'cumulus'|'rain-cloud',V>={cumulus:[-2.12,1.055,-.25],'rain-cloud':[1.03,1.0,-.61]};
-export function cloudColour(y:number,rain:boolean){const t=Math.max(0,Math.min(1,(y-CLOUD_AT[rain?'rain-cloud':'cumulus'][1])/(rain?.33:.6)));return col('paper',(rain?.08:.15)+Math.sqrt(t)*(rain?.31:.43));}
+export function cloudColour(y:number,rain:boolean,ny=0){const t=Math.max(0,Math.min(1,(y-CLOUD_AT[rain?'rain-cloud':'cumulus'][1])/(rain?.33:.6))),up=Math.max(0,ny);return col('paper',Math.round(((rain?.08:.15)+Math.sqrt(t)*(rain?.27:.36))*(1-(rain?.32:.55)*up*Math.sqrt(t))*64)/64);}
 export function cloud(rain=false,round=1){
  const n=rain?100:88,mc=new MarchingCubes(n,new MeshBasicMaterial(),false,false,150000);mc.isolation=0;
  const rand=rng(rain?83:17),lobes:{p:V;r:V}[]=[];
@@ -63,7 +67,7 @@ export function cloud(rain=false,round=1){
  for(let i=0;i<count;i++)for(let a=0;a<3;a++)p[i*3+a]=(lo[a]!+(raw.array[i*3+a]!+1)/2*(hi[a]!-lo[a]!))*scale[a]!+at[a]!;
  let g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(p,3));g=mergeVertices(g,1e-5);g.computeVertexNormals();
  const c=new Float32Array(g.getAttribute('position').count*3),pos=g.getAttribute('position');
- for(let i=0;i<pos.count;i++)c.set(cloudColour(pos.getY(i),rain).toArray(),i*3);
+ const normal=g.getAttribute('normal');for(let i=0;i<pos.count;i++)c.set(cloudColour(pos.getY(i),rain,normal.getY(i)).toArray(),i*3);
  g.setAttribute('color',new Float32BufferAttribute(c,3));mc.geometry.dispose();(mc.material as MeshBasicMaterial).dispose();return g;
 }
 /** Curved double-sided lenticular leaves with raised midrib and downward tips. */

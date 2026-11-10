@@ -69,10 +69,20 @@ describe('GeoStage style', () => {
     expect(style.layers.find((l) => l.id === LOCAL.today)).toMatchObject({
       type: 'line',
       source: LOCAL.src,
-      minzoom: 9.4,
+      // Drawn from 9.4 − MAX_ZOOM_OUT (an island topic's fade can move that low), transparent until the fade at 9.4.
+      minzoom: 9.4 - 1.5,
       filter: ['==', ['get', 'kind'], 'coast-today'],
       paint: { 'line-color': '#2a2824', 'line-width': 0.8, 'line-dasharray': [2, 2], 'line-opacity': ['interpolate', ['linear'], ['zoom'], 9.4, 0, 9.6, 0.35] },
     });
+  });
+
+  it('an island topic moves the local land fade with the HUD framing shift (localMin)', () => {
+    const style = buildGeoStyle({ ...base, local: 'land-sg', localMin: 8.1 });
+    const fade = (top: number) => ['interpolate', ['linear'], ['zoom'], 8.1, 0, expect.closeTo(8.3, 6), top];
+    expect(style.layers.find((l) => l.id === LOCAL.mask)).toMatchObject({ minzoom: 7.9, paint: { 'fill-opacity': fade(1) } });
+    expect(style.layers.find((l) => l.id === LOCAL.fill)).toMatchObject({ paint: { 'fill-opacity': fade(1) } });
+    expect(style.layers.find((l) => l.id === LOCAL.edge)).toMatchObject({ paint: { 'line-opacity': fade(1) } });
+    expect(style.layers.find((l) => l.id === LOCAL.today)).toMatchObject({ paint: { 'line-opacity': fade(0.35) } });
   });
 
   it('regional plate: no world land, its land filled and its coast stroked, rivers, the sheet on top', () => {

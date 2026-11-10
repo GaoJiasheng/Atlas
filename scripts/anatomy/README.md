@@ -4,6 +4,20 @@ Offline native Blender pipeline for all six topics in `docs/16-muscles-content-s
 
 Round 9 acceptance, hashes, axis tables and pose links: [report.md](report.md).
 
+## Eye-slit seal (2026-11-10)
+
+The source head skin has open eye fissures, so the transverse fill in
+`round2-voxel.py` / `rebuild-skin-voxel.py` left ~1 cm of head sections hollow:
+a horizontal pocket folded in through both eyes and showed as a light band
+across the eyes in all six muscle topics. Both voxel scripts now seal the eye
+band with frontal sections before the global fill (checked on the cached
+source: 15,214 interior level faces in the raw surface before, 74 after). The
+shipped GLBs were repaired in place, without a full chain rebuild, by
+`node scripts/anatomy/seal-eye-slit.mjs` (drops the pocket faces, closes each
+eye with a relaxed lid; existing vertices, masks and rig unchanged; runs once
+per GLB, marked `extras.eyeSlit`). `tests/space-scene/muscles-rebuild.test.ts`
+guards it.
+
 ## Heart and lungs region (docs/40 §4.9)
 
 `heart-lungs` publishes `public/models/heart-and-lungs.glb` (25 nodes: airway, two

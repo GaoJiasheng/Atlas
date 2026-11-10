@@ -1,0 +1,24 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "mode": "transparent original graphite drawings; targeted edit for safety correction",
+  "outputs": [
+    {
+      "file": "weather-tell-adult-shelter.webp",
+      "source": "previews/beat-figures/weather/weather-tell-adult-shelter-source.png",
+      "prompt": "Scientific-educational4:3 graphite technical plate. Exactly one uniformed Singapore pupil with backpack tells exactly one teacher with raised conversational hand while both walk into an enclosed solid masonry school. Adult gestures inside full-height doorway; glazed windows and thick roof/walls. Fine19th-century graphite, layered hatch/crosshatch/stippling models volume; monochrome, alpha. No text, fake writing, inscriptions, signs, logos, numbers, arrows, bubbles, frame, ground shadow, paper texture, detached limbs or eye-like floating shapes. Generic fictional school."
+    },
+    {
+      "file": "weather-wait-sheltered.webp",
+      "rejectedSource": "previews/beat-figures/weather/weather-wait-sheltered-rejected.png",
+      "initialPrompt": "Scientific-educational4:3 graphite plate. Exactly one uniformed pupil and one adult seated indoors away from plumbing and windows. Adult checks wristwatch. Main room on left; isolated pipe/faucet, unmistakably corded telephone and lone tree in three separate right-side vignettes. Leave room for prohibition strokes. Fine graphite hatch/crosshatch; alpha; no lettering, numerals, logos, arrows or paper texture.30minutes after last thunder supplied in external caption only.",
+      "correctionPrompt": "Preserve graphite rendering, people anatomy/count and architecture. Remove entire sink/tap and pipe from left room, replace with plain masonry wall. Replace entire window behind pupil with plain masonry wall so seated people are safely in interior room away from plumbing/exterior openings. Add exactly one bold dark graphite prohibition slash upper right to lower left across EACH of three right-side hazard vignettes: pipe/tap, corded telephone, single tree. No circles, text, extra characters or other changes; adult visibly checks watch, pupil calmly sits indoors, genuine alpha preserved.",
+      "source": "previews/beat-figures/weather/weather-wait-sheltered-source.png"
+    },
+    {
+      "file": "weather-lightning-thunder.webp",
+      "source": "previews/beat-figures/weather/weather-lightning-thunder-refined.png",
+      "guide": "previews/beat-figures/weather/weather-lightning-thunder.svg",
+      "prompt": "Scientific-educational. Exact geometry guide: one thin branching vertical lightning channel; exactly four straight arrows, two left and two right away from channel; exactly three open wave arcs per side. Enhance ONLY graphite rendering with natural branching discharge, stronger confident pencil contours, crosshatch around heated expanding air fading outward. Keep all counts and directions. Fine19th-century engineering graphite, transparent alpha, landscape4:3. No cloud collisions, explosion balls, text, lettering, numerals, labels, logos, frame, captions, inscriptions, colour, floating parts, eyes or zigzag cut/break marks."
+    }
+  ]
+}

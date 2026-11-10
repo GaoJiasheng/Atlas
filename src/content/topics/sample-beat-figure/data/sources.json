@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Atlas synthetic fixture records. All outcomes and programme date ranges are invented test inputs. The centre coordinate is reused from the space-race Wikidata launch-centre dataset.",
+        "zh": "Atlas合成夹具记录。全部结果及项目日期范围均为虚构测试输入。中心坐标复用太空竞赛的Wikidata发射中心数据。"
+      }
+    }
+  ]
+}

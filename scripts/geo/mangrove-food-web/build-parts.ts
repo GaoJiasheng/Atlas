@@ -82,19 +82,21 @@ function crab(at: V3, male: boolean, vertical = false) {
 function heronModel() {
   const plumage={color:'feathers',tint:'token:mat-plumage'};
   const wingMaterial={color:'feathers',tint:'token:mat-wing'};
+  // Bill and legs keep the shipped neutral horn tint, not the crab shell (decision 17).
+  const keratin={color:'chitin',tint:'token:neutral'};
   const extra: Prim[]=[
     line([[.59,.32,-.02],[.612,.367,-.02],[.577,.410,-.02],[.552,.469,-.02],[.608,.516,-.02],[.661,.483,-.02]],[.023,.018,.012,.011,.015,.017],plumage),
     oval([.679,.482,-.02],.027,[1.43,.78,.82],plumage),
-    {...line([[.703,.479,-.02],[.726,.475,-.02],[.766,.467,-.02],[.817,.453,-.02]],[.011,.009,.005,.0003],hard),section:{flat:.64}},
+    {...line([[.703,.479,-.02],[.726,.475,-.02],[.766,.467,-.02],[.817,.453,-.02]],[.011,.009,.005,.0003],keratin),section:{flat:.64}},
   ];
   for(const side of [-1,1]) {
     const z=-.02+side*.043;
     extra.push({...line([[.598,.350,z],[.561,.346,z],[.513,.320,z],[.467,.293,z]],[.009,.032,.027,.001],wingMaterial),section:{flat:.30},up:[0,0,1]});
     for(let i=0;i<5;i++) extra.push({...line([[.590-i*.010,.364-i*.008,z+side*(.023+i*.002)],[.535-i*.012,.334-i*.006,z+side*(.026+i*.002)],[.470-i*.009,.289-i*.001,z+side*(.019+i*.002)]],[.005,.007,.0003],wingMaterial),section:{flat:.18},up:[0,0,1],segments:16});
     const footX=side<0?.595:.565;
-    extra.push({...line([[.563,.295,z],[.567,.243,z],[.547,.158,z],[.549,.148,z],[footX,.025,z],[footX,.006,z]],[.008,.0051,.006,.0047,.0028,.0024],hard),rings:{every:.008,depth:.08}});
-    for(const spread of [-1,0,1]) extra.push(line([[footX,.006,z],[footX+.020,.004,z+spread*.012],[footX+.047-(Math.abs(spread)*.010),.002,z+spread*.023]],[.0025,.0018,.00045],hard));
-    extra.push(line([[footX,.006,z],[footX-.019,.003,z+side*.006],[footX-.031,.002,z+side*.010]],[.0023,.0015,.0004],hard));
+    extra.push({...line([[.563,.295,z],[.567,.243,z],[.547,.158,z],[.549,.148,z],[footX,.025,z],[footX,.006,z]],[.008,.0051,.006,.0047,.0028,.0024],keratin),rings:{every:.008,depth:.08}});
+    for(const spread of [-1,0,1]) extra.push(line([[footX,.006,z],[footX+.020,.004,z+spread*.012],[footX+.047-(Math.abs(spread)*.010),.002,z+spread*.023]],[.0025,.0018,.00045],keratin));
+    extra.push(line([[footX,.006,z],[footX-.019,.003,z+side*.006],[footX-.031,.002,z+side*.010]],[.0023,.0015,.0004],keratin));
     extra.push(oval([.687,.490,-.02+side*.021],.0045,[1,1,1],{color:'eye',tint:'token:ink'}));
   }
   for(let i=-1;i<=1;i++) extra.push({...line([[.485,.31,-.02+i*.006],[.449,.298,-.02+i*.009],[.424+Math.abs(i)*.006,.284,-.02+i*.012]],[.008,.010,.0004],plumage),section:{flat:.17},up:[0,1,0],segments:12});
@@ -222,7 +224,7 @@ export function buildParts() {
   const fungalModels: Prim[]=[];
   const hypha=(start:V3,angle:number,length:number,depth:number)=>{
     const end:V3=[start[0]+Math.cos(angle)*length,start[1]+Math.sin(angle)*length,start[2]-.002];
-    fungalModels.push({...line([start,[(start[0]+end[0])*.5+.005,(start[1]+end[1])*.5,start[2]+.003],end],depth*.00042+.00055,{color:'tissue',tint:ink}),segments:10});
+    fungalModels.push({...line([start,[(start[0]+end[0])*.5+.005,(start[1]+end[1])*.5,start[2]+.003],end],depth*.00042+.00055,{color:'tissue',tint:'token:mat-rock-dark'}),segments:10});
     if(depth) for(const turn of [-.53,.62]) hypha(end,angle+turn,length*.64,depth-1);
   };
   hypha([1.04,.12,.09],Math.PI/2,.059,3);

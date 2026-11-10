@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Map as MlMap } from 'maplibre-gl';
 import { createHudStore } from '../../src/engines/core/controls';
 import { measureFreeStage } from '../../src/engines/core/hud-room';
-import { containerFreeRect, createMapHudFraming, FIT_MARGIN, fitHudPadding, frameZoomShift, GAP, mapHudPadding, MAX_ZOOM_OUT, paddedCentre, REF_FREE, REFIT_MS, type FrameRect, plateCamera } from '../../src/engines/time-scene/lib/hud-framing';
+import { containerFreeRect, createMapHudFraming, FIT_MARGIN, fitHudPadding, frameZoomShift, GAP, mapHudPadding, MAX_ZOOM_OUT, paddedCentre, REF_FREE, REFIT_MS, type FrameRect, islandZoom, plateCamera } from '../../src/engines/time-scene/lib/hud-framing';
 
 // The free rect comes from the host (core/useHudRoom → hud.freeStage); the map adds its GAP inset.
 const freeStageRect = (width: number, height: number, panels: readonly FrameRect[]) =>
@@ -251,5 +251,61 @@ describe('plateCamera', () => {
   it('leaves a camera well inside the plate alone', () => {
     const r = plateCamera({ center: [80, 10], zoom: 5 }, 5.8, plate, 1024, 768, none);
     expect(r).toEqual({ center: [expect.closeTo(80, 6), expect.closeTo(10, 6)], zoom: 5 });
+  });
+});
+
+describe('islandZoom (basemap.island)', () => {
+  // four-taps: land-sg from Tuas to Pulau Tekong; its local land is fully on from authored zoom 9.6 (style LOCAL_MIN_ZOOM + LOCAL_FADE).
+  const island = [103.6, 1.16, 104.09, 1.475] as const;
+  const detailed = 9.6;
+  const ux = (lng: number) => (lng + 180) / 360;
+  /** Where Tuas South (the western end) and Pulau Tekong (the eastern end) land on screen for this camera. */
+  const ends = (center: readonly [number, number], zoom: number, width: number, height: number, rect: FrameRect) => {
+    const [cx] = paddedCentre(width, height, mapHudPadding(width, height, rect));
+    const px = (lng: number) => cx + (ux(lng) - ux(center[0])) * 512 * 2 ** zoom;
+    return [px(103.6057), px(104.0885)] as const;
+  };
+  const frame = (center: [number, number], authored: number, width: number, height: number, rect: FrameRect) => {
+    const shift = frameZoomShift(width, height, rect);
+    return { shift, zoom: islandZoom({ center, zoom: authored + shift }, authored, island, width, rect) };
+  };
+
+  it.each([
+    // The free rects measured in four-taps (390×844 phone, 768×1024 portrait iPad with the title column open).
+    [390, 844, { x0: 12, y0: 121, x1: 334, y1: 548 }],
+    [768, 1024, { x0: 274, y0: 74, x1: 712, y1: 742 }],
+  ])('zooms a whole-island camera out until Tuas and Tekong are on a %i × %i canvas', (width, height, rect) => {
+    const { shift, zoom } = frame([103.82, 1.33], 10.8, width, height, rect);
+    expect(zoom).toBeLessThan(10.8 + shift);
+    // Still above the detailed land's fade-in, which moves down by the same shift.
+    expect(zoom).toBeGreaterThanOrEqual(detailed + shift);
+    const [west, east] = ends([103.82, 1.33], zoom, width, height, rect);
+    expect(west).toBeGreaterThanOrEqual(GAP - 0.5);
+    expect(east).toBeLessThanOrEqual(width - GAP + 0.5);
+  });
+
+  it.each([
+    [1440, 900, { x0: 274, y0: 12, x1: 742, y1: 765 }],
+    [1920, 1080, { x0: 340, y0: 12, x1: 1150, y1: 931 }],
+  ])('leaves a %i × %i layout as authored (the island is already on the canvas)', (width, height, rect) => {
+    const { shift, zoom } = frame([103.82, 1.33], 10.8, width, height, rect);
+    expect(zoom).toBe(10.8 + shift);
+  });
+
+  it('leaves close-ups and the Johor views alone', () => {
+    const rect = { x0: 12, y0: 121, x1: 334, y1: 548 };
+    // Central catchment at zoom 12: not the whole island on the 1920 × 1080 canvas.
+    const close = frame([103.82, 1.378], 12, 390, 844, rect);
+    expect(close.zoom).toBe(12 + close.shift);
+    // The Johor River at zoom 9.3: already below the floor (the 1:10m land), so it keeps its zoom.
+    const johor = frame([103.79, 1.66], 9.3, 390, 844, rect);
+    expect(johor.zoom).toBe(9.3 + johor.shift);
+  });
+
+  it('zooms out at most MAX_ZOOM_OUT further, and not at all on a degenerate rect', () => {
+    const goal = { center: [103.82, 1.33] as [number, number], zoom: 9.6 };
+    expect(islandZoom(goal, 10.8, island, 200, { x0: 12, y0: 12, x1: 188, y1: 288 })).toBeGreaterThan(goal.zoom - MAX_ZOOM_OUT);
+    expect(islandZoom(goal, 10.8, island, 60, { x0: 12, y0: 12, x1: 48, y1: 48 })).toBe(goal.zoom);
+    expect(islandZoom(goal, 10.8, island, 0, { x0: 12, y0: 12, x1: -12, y1: -12 })).toBe(goal.zoom);
   });
 });
