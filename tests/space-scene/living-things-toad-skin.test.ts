@@ -23,7 +23,9 @@ describe('Asian toad uninterrupted dermis',()=>{
     for(let j=0;j<3;j++){const a=ids[j]!,b=ids[(j+1)%3]!;if(a===b)continue;const edge=[a,b].sort().join(':');edges.set(edge,(edges.get(edge)??0)+1);}
    }
    expect([...edges.values()].every(count=>count===2)).toBe(true);
-   for(let i=0;i<n.count;i++)expect(Math.hypot(n.getX(i),n.getY(i),n.getZ(i))).toBeCloseTo(1,5);
+   let worst=0;
+   for(let i=0;i<n.count;i++)worst=Math.max(worst,Math.abs(Math.hypot(n.getX(i),n.getY(i),n.getZ(i))-1));
+   expect(worst).toBeLessThan(5e-6);
   }
  }, 20_000);
 });

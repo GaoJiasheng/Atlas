@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {Document,NodeIO} from '@gltf-transform/core';
 import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
-import {dedup,prune,weld,meshopt} from '@gltf-transform/functions';
+import {dedup,getBounds,prune,weld,meshopt} from '@gltf-transform/functions';
 import {MeshoptEncoder,MeshoptSimplifier} from 'meshoptimizer';
 import {BufferAttribute,BufferGeometry,BoxGeometry,Color,Matrix4,Shape,ExtrudeGeometry,Path,CylinderGeometry,TubeGeometry,CatmullRomCurve3,Vector3} from 'three';
 import {mergeGeometries,mergeVertices} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -221,10 +221,19 @@ const runtime=round==='final'?runtimeDetails(file,seed):new Set<string>();
 await MeshoptEncoder.ready;const doc=new Document(),buffer=doc.createBuffer(),scene=doc.createScene('b200-server');
 doc.getRoot().getAsset().copyright='Atlas original hardware and figure geometry, 2026, CC0-1.0. Relief lettering: Magenta Helvetiker, MgOpen license (scripts/geo/b200-server/LETTERING-LICENSE.txt). NVIDIA marks identify the reference subject. No photographic textures or third-party hardware meshes.';
 const metrics:Record<string,{triangles:number;calls:number}>={};
-for(const [id,source] of meshes){if(runtime.has(id))continue;const g=source;g.computeBoundingBox();const prim=doc.createPrimitive();for(const [attr,semantic] of [['position','POSITION'],['normal','NORMAL'],['color','COLOR_0']] as const){const a=g.getAttribute(attr);if(a)prim.setAttribute(semantic,doc.createAccessor().setType('VEC3').setArray(new Float32Array(a.array)).setBuffer(buffer));}prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(g.index!.array)).setBuffer(buffer));const s=surface.get(id)!;prim.setMaterial(doc.createMaterial(id).setBaseColorFactor([1,1,1,1]).setRoughnessFactor(s.rough).setMetallicFactor(s.metal).setExtras({atlasSurface:true}));const at=seed.parts.find(p=>p.id===id)!.primitive!.at;scene.addChild(doc.createNode(id).setMesh(doc.createMesh(id).addPrimitive(prim)).setExtras({closed:!['bezel','fan-modules','rear-grille','rack-neighbour'].includes(id),labelPoint:at}));metrics[id]={triangles:g.index!.count/3,calls:1};}
+// A repeated part's `at` is the centre of its row of copies; with an even count
+// that is the gap between two copies, so its leader ends on the copy just before it
+// (the -x side, which the `side` cutaway keeps).
+function onCopy(at:number[],repeat?:{count:number;axis:number[];spacing?:number}){return repeat?.spacing!==undefined&&repeat.count%2===0?at.map((v,i)=>Number((v-repeat.axis[i]!*repeat.spacing!/2).toFixed(6))):at;}
+for(const [id,source] of meshes){if(runtime.has(id))continue;const g=source;g.computeBoundingBox();const prim=doc.createPrimitive();for(const [attr,semantic] of [['position','POSITION'],['normal','NORMAL'],['color','COLOR_0']] as const){const a=g.getAttribute(attr);if(a)prim.setAttribute(semantic,doc.createAccessor().setType('VEC3').setArray(new Float32Array(a.array)).setBuffer(buffer));}prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(g.index!.array)).setBuffer(buffer));const s=surface.get(id)!;prim.setMaterial(doc.createMaterial(id).setBaseColorFactor([1,1,1,1]).setRoughnessFactor(s.rough).setMetallicFactor(s.metal).setExtras({atlasSurface:true}));const sp=seed.parts.find(p=>p.id===id)!,at=onCopy(sp.primitive!.at,sp.repeat);scene.addChild(doc.createNode(id).setMesh(doc.createMesh(id).addPrimitive(prim)).setExtras({closed:!['bezel','fan-modules','rear-grille','rack-neighbour'].includes(id),labelPoint:at}));metrics[id]={triangles:g.index!.count/3,calls:1};}
 if(round!=='round1'){const fan=addFanRotors(doc,buffer,scene);file.rig=fan.rig;fan.animations[0]!.id='fan-spin';file.animations=[...file.animations.filter(a=>a.id!=='fan-spin'),...fan.animations];const part=by.get('fan-rotors')!;delete part.primitive;delete part.extra;delete part.repeat;part.mesh='fan-rotors';part.material={color:'casing'};metrics['fan-rotors']={triangles:fan.triangles,calls:1};}
 for(const p of file.parts.filter(p=>!p.mesh)){let triangles=0,calls=0;for(const q of partPieces(p)){triangles+=(q.geometry.index?.count??q.geometry.getAttribute('position').count)/3*(q.matrices?.length??1);calls++;}metrics[p.id]={triangles,calls};}
 await doc.transform(weld(),dedup(),prune(),meshopt({encoder:MeshoptEncoder,level:'high',quantizePosition:12,quantizeNormal:8,quantizeColor:8}));
+// extras.labelPoint is node-local (glbAnchor.ts). The points above are scene
+// coordinates on identity nodes, and quantization gives every node its own
+// frame, so map each point into it. A point outside its own mesh's bounds
+// (the scale figure's stale seed position) is dropped: the bounds centre is used.
+for(const node of scene.listChildren()){const {labelPoint,...rest}=node.getExtras() as {labelPoint?:number[]};if(!labelPoint)continue;const b=getBounds(node),inside=labelPoint.every((v,i)=>v>=b.min[i]!-1e-3&&v<=b.max[i]!+1e-3);node.setExtras(inside?{...rest,labelPoint:new Vector3(...labelPoint).applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()).invert()).toArray().map(v=>Number(v.toFixed(6)))}:rest);}
 fs.mkdirSync('public/models',{recursive:true});await new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder}).write('public/models/b200-server.glb',doc);
 const total=Object.values(metrics).reduce((a,b)=>({triangles:a.triangles+b.triangles,calls:a.calls+b.calls}),{triangles:0,calls:0});
 const report={round,...total,glbBytes:fs.statSync('public/models/b200-server.glb').size,parts:metrics};

@@ -5982,7 +5982,7 @@
           -0.0037
         ],
         "color": "tissue",
-        "tint": "token:seedling-pale",
+        "tint": "token:mat-inner-core",
         "bevel": 0
       },
       "castShadow": false,
@@ -6287,7 +6287,7 @@
             -0.0037
           ],
           "color": "tissue",
-          "tint": "token:seedling-pale",
+          "tint": "token:mat-inner-core",
           "bevel": 0,
           "holes": [
             [
@@ -6817,7 +6817,7 @@
             -0.0065
           ],
           "color": "tissue",
-          "tint": "token:seedling-pale",
+          "tint": "token:mat-inner-core",
           "bevel": 0
         },
         {

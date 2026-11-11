@@ -102,7 +102,10 @@ export async function buildOrganelles(parts){
  // Roll continuously from the basal membrane to the thickened visible edge.
  add('animal-membrane',[boundary(animal,[[.963,-.008],[.986,-.0071],[1,-.005],[1,.0045],[.993,.007],[.978,.008],[.963,.007],[.957,.0045],[.957,-.005],[.963,-.008]],[.1,.1,0])],'tissue','token:neutral',
   rim(animal,[.1,.1,0],.978,.008,0));
- const gel=shrink(animal,.953),animalRegions=[relief(clipX(gel,-.004,true),.0042,[.1,.1,-.0037],'token:seedling-pale'),relief(clipX(gel,-.004,false),.0042,[.1,.1,-.0037],'token:seedling-pale',[ellipse(.0124,.0104,.015,0)]),relief(ellipse(.0124,.0104,.015,0),.0004,[.1,.1,-.0065],'token:seedling-pale')];
+ // Animal cytoplasm: a warmer, deeper yellow than the plant cell's, so the
+ // open cell reads against the paper plate as well as on the dark one.
+ const animalGel='token:mat-inner-core';
+ const gel=shrink(animal,.953),animalRegions=[relief(clipX(gel,-.004,true),.0042,[.1,.1,-.0037],animalGel),relief(clipX(gel,-.004,false),.0042,[.1,.1,-.0037],animalGel,[ellipse(.0124,.0104,.015,0)]),relief(ellipse(.0124,.0104,.015,0),.0004,[.1,.1,-.0065],animalGel)];
  const animalRelief=[];
  for(const [x,y,a,s] of [[.065,.119,.7,.9],[.135,.123,-.8,1],[.073,.076,-.5,.85],[.126,.072,.2,1.1],[.105,.133,-.2,.75]])animalRelief.push(...mitochondrion(x,y,a,s));
  // Curved cisternae near the nucleus: flattened membranes with unequal lengths.

@@ -46,7 +46,9 @@ describe('chapter 07 sauropod osteology',()=>{
   const ps=diplodocidStudy(0,0).filter(p=>p.kind==='extrude'&&(p.shape.length===19||p.shape.length===24));
   expect(ps).toHaveLength(4);
   const g=museumBoneGeometry({primitive:ps[0],extra:ps.slice(1)} as Part),normal=g.getAttribute('normal');
-  for(let i=0;i<normal.count;i++)expect(Math.hypot(normal.getX(i),normal.getY(i),normal.getZ(i))).toBeCloseTo(1,4);
+  let worst=0;
+  for(let i=0;i<normal.count;i++)worst=Math.max(worst,Math.abs(Math.hypot(normal.getX(i),normal.getY(i),normal.getZ(i))-1));
+  expect(worst).toBeLessThan(5e-5);
   const position=g.getAttribute('position'),edges=new Map<string,number>();
   const vertex=(i:number)=>[position.getX(i),position.getY(i),position.getZ(i)].map(v=>Math.round(v*1e6)).join(',');
   for(let i=0;i<position.count;i+=3)for(const [a,b] of [[i,i+1],[i+1,i+2],[i+2,i]]){
@@ -57,7 +59,7 @@ describe('chapter 07 sauropod osteology',()=>{
   expect([...edges.values()].every(n=>n%2===0)).toBe(true);
   g.computeBoundingBox();expect(g.boundingBox!.max.z-g.boundingBox!.min.z).toBeGreaterThan(.35);
   g.dispose();
- });
+ }, 20_000);
  it('preserves all accepted content, cameras and visibility except the authorised horizontal display stagger',()=>{
   const preserved=structuredClone(file);
   for(const p of preserved.parts){
