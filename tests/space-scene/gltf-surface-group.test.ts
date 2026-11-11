@@ -1,13 +1,13 @@
 /** Exercises the exact loader and material-slot helpers used by PartNode. */
 import {readFileSync} from 'node:fs';
 import {it,expect} from 'vitest';
-import {Box3,Mesh,MeshStandardMaterial,Quaternion,Plane,Vector3,DoubleSide,FrontSide} from 'three';
+import {Box3,BoxGeometry,Color,InstancedMesh,Matrix4,Mesh,MeshStandardMaterial,Object3D,Quaternion,Plane,Vector3,DoubleSide,FrontSide} from 'three';
 import {MeshoptDecoder} from 'meshoptimizer';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {gltfGroupShape} from '../../src/engines/space-scene/stages/model3d/gltfGroupShape';
 import {applyVisibilityFlags} from '../../src/engines/space-scene/stages/model3d/visibilityFlags';
 import {gltfSurface} from '../../src/engines/space-scene/stages/model3d/GltfSource';
-import {createSlotMaterials,gltfGroupShadowFlags,gltfSlotClipping,gltfSlotCount,gltfSlotSurface,type PartShape} from '../../src/engines/space-scene/stages/model3d/PartNode';
+import {adoptInstanceColors,createSlotMaterials,gltfGroupShadowFlags,gltfSlotClipping,gltfSlotCount,gltfSlotSurface,type PartShape} from '../../src/engines/space-scene/stages/model3d/PartNode';
 it('keeps all nine fish surfaces, transforms, fades and depth policies in actual renderer slots',async()=>{
  await MeshoptDecoder.ready;
  const model=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).parseAsync(Uint8Array.from(readFileSync('public/models/heart-and-lungs-bench.glb')).buffer,'');model.scene.updateMatrixWorld(true);
@@ -45,4 +45,26 @@ it('leaves every shape without the atlasSurfaceGroup flag on the legacy path',()
  gltfSlotClipping(paint!,base,0,null,false);expect(target.side).toBe(FrontSide);
  const flags=new Map([[base.pieces[0]!,{castShadow:true}]]);gltfGroupShadowFlags(base,flags);expect(flags.get(base.pieces[0]!)!.castShadow).toBe(true);
  target.dispose();
+});
+
+it('keeps an EXT_mesh_gpu_instancing child as one instanced piece in the first mesh frame, with its copy colours',()=>{
+ const surface=()=>{const m=new MeshStandardMaterial();m.userData.atlasSurface=true;return m;};
+ const root=new Object3D();root.userData.atlasSurfaceGroup=true;
+ const body=new Mesh(new BoxGeometry(1,1,1),surface());body.position.set(2,0,0);body.scale.setScalar(.5);
+ const copies=new InstancedMesh(new BoxGeometry(.1,.1,.1),surface(),3);copies.position.set(0,1,0);
+ for(let i=0;i<3;i++){copies.setMatrixAt(i,new Matrix4().makeTranslation(i,0,0));copies.setColorAt(i,new Color(i/2,1,0));}
+ root.add(body,copies);root.updateMatrixWorld(true);
+ const position=new Vector3(),quaternion=new Quaternion(),scale=new Vector3();body.matrixWorld.decompose(position,quaternion,scale);
+ const base={pieces:[{geometry:body.geometry,matrices:null}],position:position.toArray(),quaternion,scale,radius:1,closed:true,surface:gltfSurface(body),box:{min:[0,0,0],max:[0,0,0]}} as unknown as PartShape;
+ const shape=gltfGroupShape(root,body,base);
+ expect(shape.pieces).toHaveLength(2);expect(shape.pieces[0]!.matrices).toBeNull();
+ const piece=shape.pieces[1]!;expect(piece.slot).toBe(1);expect(piece.matrices).toHaveLength(3);
+ // Drawn under the body's transform, each copy lands where the glb put it.
+ for(let i=0;i<3;i++){const p=new Vector3().applyMatrix4(body.matrixWorld.clone().multiply(piece.matrices![i]!));expect(p.distanceTo(new Vector3(i,1,0))).toBeLessThan(1e-9);}
+ expect(piece.geometry.getAttribute('position').array).toEqual(copies.geometry.getAttribute('position').array);
+ expect(Array.from(piece.colors!)).toEqual([0,1,0,.5,1,0,1,1,0]);
+ expect(shape.box!.min[0]).toBeCloseTo(-.05);expect(shape.box!.max[0]).toBeCloseTo(2.25);expect(shape.box!.max[1]).toBeCloseTo(1.05);
+ const drawn=new InstancedMesh(piece.geometry,surface(),3);adoptInstanceColors(drawn,piece);
+ const attr=drawn.instanceColor!;expect(attr.array).toBe(piece.colors);adoptInstanceColors(drawn,piece);expect(drawn.instanceColor).toBe(attr);
+ adoptInstanceColors(drawn,{});expect(drawn.instanceColor).toBe(attr);
 });

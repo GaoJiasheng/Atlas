@@ -5,10 +5,12 @@ import {
   Matrix4,
   Euler,
   Color,
+  Quaternion,
+  Vector3,
 } from "three";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { Document, NodeIO } from "@gltf-transform/core";
-import { ALL_EXTENSIONS } from "@gltf-transform/extensions";
+import { Document, NodeIO, type Node } from "@gltf-transform/core";
+import { ALL_EXTENSIONS, EXTMeshGPUInstancing } from "@gltf-transform/extensions";
 import {
   weld,
   meshopt,
@@ -49,6 +51,7 @@ export const tokens = Object.fromEntries(
 export function geometryOf(prims: Prim[]): BufferGeometry {
   const all: BufferGeometry[] = [];
   for (const p of prims) {
+    if (p.kind === "__instances") continue;
     const pieces =
       p.kind === "__mesh"
         ? [{ geometry: p.geometry as BufferGeometry, matrices: null }]
@@ -165,6 +168,40 @@ const rough: Record<string, number> = {
   "chilli-cut": 0.43,
   "rubber-seeds": 0.34,
 };
+/** One GPU-instanced batch of a part (fig-cut florets): a template and its copies. */
+interface InstanceBatch {
+  name: string;
+  geometry: BufferGeometry;
+  matrices: Matrix4[];
+  /** Linear RGB per copy, multiplied into the template's vertex colours. */
+  colors: number[];
+  roughness: number;
+}
+function instancedNode(doc: Document, buffer: ReturnType<Document["createBuffer"]>, b: InstanceBatch, placement: Matrix4): Node {
+  const material = doc
+    .createMaterial(b.name)
+    .setBaseColorFactor([1, 1, 1, 1])
+    .setRoughnessFactor(b.roughness)
+    .setMetallicFactor(0)
+    .setExtras({ atlasSurface: true });
+  const primitive = doc.createPrimitive().setMaterial(material);
+  for (const [name, semantic] of [["position", "POSITION"], ["normal", "NORMAL"], ["color", "COLOR_0"]] as const)
+    primitive.setAttribute(semantic, doc.createAccessor().setType("VEC3").setArray(new Float32Array(b.geometry.getAttribute(name).array)).setBuffer(buffer));
+  primitive.setIndices(doc.createAccessor().setType("SCALAR").setArray(new Uint32Array(b.geometry.index!.array)).setBuffer(buffer));
+  const t: number[] = [], r: number[] = [], k: number[] = [];
+  const p = new Vector3(), q = new Quaternion(), s = new Vector3();
+  for (const m of b.matrices) {
+    placement.clone().multiply(m).decompose(p, q, s);
+    t.push(p.x, p.y, p.z); r.push(q.x, q.y, q.z, q.w); k.push(s.x, s.y, s.z);
+  }
+  const accessor = (type: "VEC3" | "VEC4", values: number[]) => doc.createAccessor().setType(type).setArray(new Float32Array(values)).setBuffer(buffer);
+  const batch = doc.createExtension(EXTMeshGPUInstancing).setRequired(true).createInstancedMesh()
+    .setAttribute("TRANSLATION", accessor("VEC3", t))
+    .setAttribute("ROTATION", accessor("VEC4", r))
+    .setAttribute("SCALE", accessor("VEC3", k))
+    .setAttribute("_COLOR_0", accessor("VEC3", b.colors));
+  return doc.createNode(b.name).setMesh(doc.createMesh(b.name).addPrimitive(primitive)).setExtension("EXT_mesh_gpu_instancing", batch);
+}
 export async function bake(data: any) {
   const doc = new Document(),
     buffer = doc.createBuffer(),
@@ -348,28 +385,49 @@ export async function bake(data: any) {
         .setArray(new Uint32Array(g.index!.array))
         .setBuffer(buffer),
     );
-    const center = box.getCenter(new (await import("three")).Vector3());
-    scene.addChild(
-      doc
-        .createNode(p.id)
-        .setMesh(doc.createMesh(p.id).addPrimitive(primitive))
-        .setExtras({
-          closed: ![
-            "nectar-bat",
-            "fern-fronds",
-            "fern-underside",
-            "angsana-pod",
-          ].includes(p.id),
-          labelPoint: p.id === "nectar-bat" ? p.primitive.at : center.toArray(),
-        }),
-    );
+    const center = box.getCenter(new Vector3());
+    const extras = {
+      closed: ![
+        "nectar-bat",
+        "fern-fronds",
+        "fern-underside",
+        "angsana-pod",
+      ].includes(p.id),
+      labelPoint: p.id === "nectar-bat" ? p.primitive.at : center.toArray(),
+    };
+    const body = doc.createMesh(p.id).addPrimitive(primitive);
+    const instanced = prims.filter((q: Prim) => q.kind === "__instances");
+    let batchTris = 0;
+    if (instanced.length) {
+      // A surface group: the body, then each GPU-instanced batch as its own
+      // child (one draw each). Instance transforms are written in the part's
+      // world frame, through the same placement as the merged body.
+      const group = doc.createNode(p.id).setExtras({ ...extras, atlasSurfaceGroup: true });
+      group.addChild(doc.createNode(`${p.id}-body`).setMesh(body));
+      for (const q of instanced) {
+        const r = (q.rotation ?? [0, 0, 0]) as number[];
+        const placement = new Matrix4()
+          .makeTranslation(...(q.at as [number, number, number]))
+          .multiply(new Matrix4().makeRotationFromEuler(new Euler(...(r.map((x) => (x * Math.PI) / 180) as [number, number, number]))));
+        for (const b of q.batches as InstanceBatch[]) {
+          group.addChild(instancedNode(doc, buffer, b, placement));
+          batchTris += (b.geometry.index!.count / 3) * b.matrices.length;
+          for (const m of b.matrices) {
+            b.geometry.computeBoundingBox();
+            box.union(b.geometry.boundingBox!.clone().applyMatrix4(placement.clone().multiply(m)));
+          }
+        }
+        calls += (q.batches as InstanceBatch[]).length;
+      }
+      scene.addChild(group);
+    } else scene.addChild(doc.createNode(p.id).setMesh(body).setExtras(extras));
     report[p.id] = {
-      triangles: g.index!.count / 3,
-      drawCalls: 1,
+      triangles: g.index!.count / 3 + batchTris,
+      drawCalls: 1 + instanced.reduce((n: number, q: Prim) => n + (q.batches as InstanceBatch[]).length, 0),
       bounds: { min: box.min.toArray(), max: box.max.toArray() },
       vertices: pos.count,
     };
-    tris += g.index!.count / 3;
+    tris += g.index!.count / 3 + batchTris;
     calls++;
     delete p.primitive;
     delete p.extra;
@@ -382,7 +440,10 @@ export async function bake(data: any) {
     MeshoptSimplifier.ready,
   ]);
   await doc.transform(weld());
+  // Instanced floret templates are already minimal; simplifying them would facet every copy.
+  const templates = new Set(["fig-cut-florets"]);
   for (const mesh of doc.getRoot().listMeshes()) {
+    if (templates.has(mesh.getName())) continue;
     const p = mesh.listPrimitives()[0]!,
       c = p.getAttribute("COLOR_0")!,
       n = p.getAttribute("NORMAL")!,
@@ -407,7 +468,8 @@ export async function bake(data: any) {
           stride,
           attributes,
           6,
-          [0.05, 0.05, 0.05, 0.03, 0.03, 0.03],
+          // The fig's section keeps its rind / pulp / floret-foot bands.
+          mesh.getName() === "fig-cut" ? [0.05, 0.05, 0.05, 0.4, 0.4, 0.4] : [0.05, 0.05, 0.05, 0.03, 0.03, 0.03],
           null,
           target,
           error,
@@ -416,8 +478,8 @@ export async function bake(data: any) {
     };
     simplifyPrimitive(p, {
       simplifier,
-      ratio: mesh.getName() === "durian-flowers" ? .30 : mesh.getName() === "coconut" ? .29 : mesh.getName() === "moss-cushion" ? .24 : mesh.getName() === "fern-fronds" ? .30 : mesh.getName() === "fig-cut" ? .22 : .38,
-      error: mesh.getName() === "fig-cut" ? .0035 : mesh.getName() === "coconut" ? .0009 : mesh.getName() === "nectar-bat" ? 0.0006 : 0.0012,
+      ratio: mesh.getName() === "durian-flowers" ? .30 : mesh.getName() === "coconut" ? .29 : mesh.getName() === "moss-cushion" ? .24 : mesh.getName() === "fern-fronds" ? .30 : mesh.getName() === "fig-cut" ? .45 : .38,
+      error: mesh.getName() === "fig-cut" ? .0015 : mesh.getName() === "coconut" ? .0009 : mesh.getName() === "nectar-bat" ? 0.0006 : 0.0012,
       lockBorder: true,
     });
   }
@@ -425,7 +487,7 @@ export async function bake(data: any) {
     const c = mesh.listPrimitives()[0]!.getAttribute("COLOR_0")!.getArray()!;
     // Coarse quantization crossed colour-channel thresholds on the dark membrane,
     // producing green/purple patches under the real studio rig. Preserve this part.
-    const refined = new Set(["fern-fronds","moss-cushion","red-flower","sea-almond-cut","fig-cut","durian-flowers","ripe-figs"]);
+    const refined = new Set(["fern-fronds","moss-cushion","red-flower","sea-almond-cut","fig-cut","fig-cut-florets","durian-flowers","ripe-figs"]);
     const levels = ["nectar-bat","coconut"].includes(mesh.getName()) ? 127 : refined.has(mesh.getName()) ? 63 : 31;
     for (let i = 0; i < c.length; i++)
       c[i] = Math.round(c[i]! * levels) / levels;
@@ -492,10 +554,16 @@ export async function bake(data: any) {
   const decoded = await io.readBinary(bytes);
   await decoded.transform(dequantize());
   for (const n of decoded.getRoot().listNodes()) {
-    const p = n.getMesh()?.listPrimitives()[0];
-    if (!p) continue;
     const entry = report[n.getName()] as any;
-    const count = p.getIndices()!.getCount() / 3;
+    if (!entry) continue;
+    // A surface group counts its body and every instanced copy.
+    let count = 0;
+    n.traverse((o) => {
+      const p = o.getMesh()?.listPrimitives()[0];
+      if (!p) return;
+      const copies = o.getExtension<any>("EXT_mesh_gpu_instancing")?.listAttributes()[0]?.getCount() ?? 1;
+      count += (p.getIndices()!.getCount() / 3) * copies;
+    });
     tris += count - entry.triangles;
     entry.triangles = count;
   }

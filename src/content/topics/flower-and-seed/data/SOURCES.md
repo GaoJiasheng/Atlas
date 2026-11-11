@@ -109,3 +109,14 @@ The authored `/models/flower-and-seed.glb` is an original Atlas procedural recon
 ### 3D coat finish — round 2, 2026-11-09
 
 The cave nectar bat's embedded colour and normal maps are original seeded procedural fibres in the technical-plate palette, not photographic textures. Development-only coat references, authors, licences and crop details are listed in [REBUILD-3D.md](../REBUILD-3D.md), including Naturalis (CC0), Rossiter (CC BY 4.0), Guiraudou (CC BY 4.0) and Cook-Price et al., ZooKeys figure 19B (CC BY 4.0). No third-party mesh or reference-photo pixels enter the runtime asset; teaching sources and claims are unchanged.
+
+### 3D cut fig florets and ostiole, 2026-11-11
+
+The cut fig's florets (each a pale pedicel carrying a smooth ovary, radiating from the receptacle wall into the cavity), the cream pulp between rind and florets, and the ostiole's overlapping bracts were redrawn from these development references. None of their pixels enter the runtime asset; the florets are one procedural template drawn about 850 times with GPU instancing.
+
+- [Longitudinal section through a creeping fig syconium (Ficus pumila)](https://commons.wikimedia.org/wiki/File:Longitudinal_section_through_a_creeping_fig_syconium_(Ficus_pumila_L.).jpg), Gubin Olexander, CC BY-SA 4.0: rind, thick pulp, florets lining the wall and the bract-filled ostiolar canal in section.
+- [Ficus carica, Brown Turkey fruit half showing pulp](https://commons.wikimedia.org/wiki/File:Starr-140925-1989-Ficus_carica-Brown_Turkey_fruit_half_showing_pulp-Pali_o_Waipio_Huelo-Maui_(24878920699).jpg), Forest and Kim Starr, CC BY 3.0 US: stalked florets radiating inward, pale to pink, with smooth rounded tips.
+- [Ficus carica whole fruits and fruit cut open](https://commons.wikimedia.org/wiki/File:Ficus_carica_whole_fruits_and_fruit_cut_open.jpg), Garitzko, public domain: floret density and the pink band where the florets meet the pulp.
+- [Ficus variegata SF24281](https://commons.wikimedia.org/wiki/File:Ficus-variegata-SF24281-02.jpg), CC BY-SA 4.0 (already listed in REBUILD-3D.md): the model species' rind and ostiole from outside.
+
+*Ficus pumila* and *F. carica* are structural proxies for the inside of the fig; no claim about the model species' floret colour or the fig's pollination stage is drawn from them.

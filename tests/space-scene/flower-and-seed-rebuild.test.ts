@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { beforeAll, afterAll, describe, expect, it, vi } from "vitest";
 import sharp from "sharp";
-import { Mesh, MeshStandardMaterial, Texture, Box3, Vector3, BufferGeometry } from "three";
+import { InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Texture, Box3, Vector3, BufferGeometry } from "three";
 import {
   GLTFLoader,
   type GLTF,
@@ -67,7 +67,24 @@ beforeAll(async () => {
   gltf.scene.updateMatrixWorld(true);
 });
 afterAll(() => vi.unstubAllGlobals());
-const mesh = (id: string) => gltf.scene.getObjectByName(id) as Mesh;
+/** A part's node, or for a surface group (the cut fig) its first mesh, as the engine reads it. */
+const mesh = (id: string) => {
+  const node = gltf.scene.getObjectByName(id)!;
+  let first: Mesh | null = null;
+  node.traverse((o) => { if (!first && (o as Mesh).isMesh) first = o as Mesh; });
+  return first as unknown as Mesh;
+};
+/** Every mesh drawn for a part's node: triangles (each instanced copy counted) and draws. */
+function drawn(id: string) {
+  let triangles = 0, draws = 0;
+  gltf.scene.getObjectByName(id)!.traverse((o) => {
+    if (!(o as Mesh).isMesh) return;
+    const g = (o as Mesh).geometry;
+    triangles += ((g.index?.count ?? g.getAttribute("position").count) / 3) * ((o as InstancedMesh).isInstancedMesh ? (o as InstancedMesh).count : 1);
+    draws++;
+  });
+  return { triangles, draws };
+}
 describe("flower-and-seed scientific rebuild", () => {
   it("preserves part identity, teaching controls, repetitions, flow and interaction targets", () => {
     expect(data.parts.map((p) => p.id)).toEqual(before.parts.map((p) => p.id));
@@ -101,11 +118,9 @@ describe("flower-and-seed scientific rebuild", () => {
     let triangles = 0,
       calls = 0;
     for (const p of data.parts) {
-      calls += p.mesh ? 1 : partMaterialSlots(p).length;
-      if (p.mesh) {
-        const g = mesh(p.mesh).geometry;
-        triangles += (g.index?.count ?? g.getAttribute("position").count) / 3;
-      } else
+      calls += p.mesh ? drawn(p.mesh).draws : partMaterialSlots(p).length;
+      if (p.mesh) triangles += drawn(p.mesh).triangles;
+      else
         for (const piece of partPieces(p)) {
           if (piece.lines) {
             calls++;
@@ -124,7 +139,8 @@ describe("flower-and-seed scientific rebuild", () => {
     expect(triangles).toBe(report.totalTriangles);
     expect(calls).toBe(report.totalMaterialCalls);
     expect(triangles).toBeLessThan(350_000);
-    expect(calls + data.flows.length + 2).toBeLessThanOrEqual(80);
+    // 80 until 11-11; the cut fig's instanced florets add one draw (81, plate cap < 100).
+    expect(calls + data.flows.length + 2).toBeLessThanOrEqual(81);
   });
   it.each(["fern-fronds", "fern-underside", "nectar-bat"])(
     "%s delivers regional roughness to the actual renderer material on both themes",
@@ -296,6 +312,23 @@ describe("flower-and-seed scientific rebuild", () => {
     const object=new Mesh(new BufferGeometry(),source);
     expect(gltfSurface(object)).toBeUndefined();
     source.map!.dispose();source.normalMap!.dispose();source.dispose();object.geometry.dispose();
+  });
+  it("lines the cut fig with hundreds of instanced stalked florets inside the fruit", () => {
+    const node = gltf.scene.getObjectByName("fig-cut")!;
+    expect(node.userData.atlasSurfaceGroup).toBe(true);
+    const florets = node.getObjectByName("fig-cut-florets") as InstancedMesh;
+    expect(florets.isInstancedMesh).toBe(true);
+    expect(florets.count).toBeGreaterThan(600);
+    expect(florets.instanceColor).not.toBeNull();
+    const body = new Box3().setFromObject(node.getObjectByName("fig-cut-body")!).expandByScalar(0.0005);
+    const g = florets.geometry;
+    g.computeBoundingBox();
+    const m = new Matrix4();
+    for (let i = 0; i < florets.count; i++) {
+      florets.getMatrixAt(i, m);
+      const box = g.boundingBox!.clone().applyMatrix4(m.premultiply(florets.matrixWorld));
+      expect(body.containsBox(box), `floret ${i}`).toBe(true);
+    }
   });
   it("keeps every label on its actual decoded part after node quantization", () => {
     const report = JSON.parse(

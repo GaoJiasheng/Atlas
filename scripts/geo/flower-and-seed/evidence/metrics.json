@@ -1,7 +1,7 @@
 {
-  "bytes": 1497588,
-  "totalTriangles": 264293,
-  "totalMaterialCalls": 71,
+  "bytes": 1464936,
+  "totalTriangles": 341485,
+  "totalMaterialCalls": 72,
   "parts": {
     "fern-fronds": {
       "triangles": 14412,
@@ -242,8 +242,8 @@
       "vertices": 34908
     },
     "fig-cut": {
-      "triangles": 24042,
-      "drawCalls": 1,
+      "triangles": 101234,
+      "drawCalls": 2,
       "bounds": {
         "min": [
           0.7169414162635803,
@@ -252,11 +252,11 @@
         ],
         "max": [
           0.7587874531745911,
-          0.09629957377910614,
-          0.0012139342725276947
+          0.09642162919044495,
+          0.0012093707919120789
         ]
       },
-      "vertices": 20498
+      "vertices": 9352
     },
     "male-cell": {
       "triangles": 1584,

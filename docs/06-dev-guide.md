@@ -1156,6 +1156,7 @@ space-scene.css          舞台、标注、卡片与面板绘图、滑块、详�
   "group": "superficial", "connects": ["clavicle", "humerus"] }
 // glb 节点 extras.closed: false → 剖切不填剖面（默认填）
 // glb 节点 extras.labelPoint: [x, y, z]（节点本地坐标）→ 刚性零件的引线落在这一点，而不是包围盒中心（空心壳、杯里的组织用；蒙皮零件忽略）
+// glb 节点 extras.atlasSurfaceGroup: true → 节点下每个网格（材质带 extras.atlasSurface）各自一个材质槽、一次绘制；其中用 EXT_mesh_gpu_instancing 的网格仍是一次实例化绘制，副本矩阵与 _COLOR_0 副本颜色照搬（剖开的榕果小花）
 
 // poses：零件条目之外可以写关节角与收缩
 "poses": { "bench-bottom": {

@@ -1,5 +1,6 @@
 /** Half-sectioned Ficus receptacle with an ostiole flush in its green rind. */
-import { BufferGeometry, CatmullRomCurve3, Color, Float32BufferAttribute, Vector3 } from "three";
+import { BufferGeometry, CatmullRomCurve3, Color, Float32BufferAttribute, Matrix4, Quaternion, Vector3 } from "three";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { surface, type P } from "../living-things/sculpture";
 import type { Model } from "../living-things/kit";
 import { rng } from "../living-things/kit";
@@ -60,8 +61,8 @@ export function figCutRound3(): Model {
   ].map(p => new Vector3(...p)));
   const interior = (u: number, a: number): P => {
     const q = cavity.getPoint(u), fade = Math.sin(Math.PI * u);
-    // Rounded, densely papillate tissue is one continuous lining, separate from
-    // the 26 teaching florets. Relief fades smoothly at its cut/canal joins.
+    // Rounded, densely papillate tissue is one continuous lining under the
+    // florets' feet. Relief fades smoothly at its cut/canal joins.
     const field = .5 + .5 * Math.sin(u * 100 + Math.sin(a * 13) * .4) * Math.sin(a * 28 + u * 16);
     const bump = (.00032 + .00145 * field ** 3) * fade * Math.abs(Math.sin(a)) ** .3;
     const r = Math.max(.0001, q.x - bump);
@@ -72,8 +73,9 @@ export function figCutRound3(): Model {
     const lp = tissue.getAttribute("position"), lc: number[] = [];
     for (let i = 0; i < lp.count; i++) {
       const y = lp.getY(i), x = lp.getX(i), z = lp.getZ(i);
-      const c = new Color("#8a8378").lerp(new Color("#b8602e"), .32 + .17 * Math.sin(y * 310 + x * 117 + z * 130));
-      c.multiplyScalar(.96 + .035 * Math.sin(y * 1300 + x * 500)); lc.push(c.r, c.g, c.b);
+      // The receptacle wall where the florets stand: blush tissue, shadowed between their feet.
+      const c = new Color("#b98a78").lerp(new Color("#b25f6e"), .35 + .2 * Math.sin(y * 310 + x * 117 + z * 130));
+      c.multiplyScalar(.82 + .05 * Math.sin(y * 1300 + x * 500)); lc.push(c.r, c.g, c.b);
     }
     tissue.setAttribute("color", new Float32BufferAttribute(lc, 3)); s.put(tissue, "#c9bea6");
   }
@@ -87,15 +89,22 @@ export function figCutRound3(): Model {
     return [Math.cos(a) * q.x, q.y, 0];
   };
   for (const a of [0, Math.PI]) {
-    const cut = surface(36, 4, (u, v) => {
+    const U = 96, V = 10;
+    const cut = surface(U, V, (u, v) => {
       const q = exterior(u, a);
       return mix(q, boundaryAtHeight(q[1], a), v);
     });
-    // A real rind wraps onto the section edge, including the short green stalk.
-    const colors: number[] = [];
-    for (let i = 0; i <= 36; i++) for (let j = 0; j <= 4; j++) {
-      const y = exterior(i / 36, a)[1];
-      const c = new Color(j <= 1 || y < .018 ? "#576a2f" : "#c9bea6");
+    // The section through the receptacle: a thin green rind (it wraps the
+    // short stalk), cream pulp, and a blush band streaked by the florets'
+    // feet where the wall meets the cavity.
+    const colors: number[] = [], rind = new Color("#576a2f"), pulp = new Color("#e9e4d8").lerp(new Color("#e4dba2"), .3);
+    for (let i = 0; i <= U; i++) for (let j = 0; j <= V; j++) {
+      const u = i / U, v = j / V, y = exterior(u, a)[1];
+      const c = pulp.clone().multiplyScalar(.97 + .03 * Math.sin(u * 61 + v * 7));
+      const feet = Math.min(1, Math.max(0, (v - .5) / .5)) ** 1.2;
+      const streak = .55 + .45 * Math.sin(u * 138 + Math.sin(u * 37) * 2);
+      c.lerp(new Color("#c48a76"), Math.min(1, feet * (.7 + .45 * streak)));
+      if (v < .2 || y < .018) c.copy(rind).lerp(pulp, y < .018 ? 0 : Math.max(0, (v - .1) / .1));
       colors.push(c.r, c.g, c.b);
     }
     cut.setAttribute("color", new Float32BufferAttribute(colors, 3));
@@ -107,79 +116,167 @@ export function figCutRound3(): Model {
     const a = v * Math.PI, r = .0023 + .0005 * u, y = .0953 - .0005 * u;
     return [Math.cos(a) * r, y, -Math.sin(a) * r];
   })), "#554235");
-  // Five small interlocking bract folds embedded in the retained half-rim.
-  // Their attached broad bases merge into the receptacle; pointed tips tuck
-  // slightly into the opening instead of forming spokes across a wheel.
-  for (let k = 0; k < 5; k++) {
-    const a = .20 + k * .67, width = .0012 + .00008 * Math.sin(k * 3.1);
-    s.put(surface(12, 6, (u, v) => {
-      const theta = v * TAU, r = .0047 - (.00492 + .00012 * Math.sin(k * 2.1)) * u;
-      const az = a + .08 * u, lateral = Math.cos(theta) * width * Math.sin(Math.PI * u);
-      const y = .09615 - .00105 * u + .00013 * Math.sin(Math.PI * u) + .000045 * k * u
-        + Math.sin(theta) * .00009 * Math.sin(Math.PI * u);
-      return [Math.cos(az) * r - Math.sin(az) * lateral, y, -Math.abs(Math.sin(az) * r + Math.cos(az) * lateral)];
-    }, true), k % 2 ? "#576a2f" : "#555047");
+  // The ostiole: a rosette of overlapping (imbricate) bracts closing the
+  // apical pore, three tiers from the rind inward, each scale a rounded,
+  // domed lobe whose tip tucks under the next. The section halves the
+  // rosette, so scales stop flush at z = 0. A few inner bracts hang from the
+  // canal into the cavity, as in a sectioned fig.
+  const scale = (az: number, r0: number, r1: number, y0: number, drop: number, width: number, root: Color, tip: Color, hang = 0) => {
+    const g = surface(10, 12, (u, v) => {
+      const theta = v * TAU, half = width * Math.sin(Math.PI * (.1 + .9 * u)) ** .8;
+      const lateral = Math.cos(theta) * half, r = r0 + (r1 - r0) * u;
+      const dome = .00016 * Math.sin(Math.PI * u) * (1 - Math.cos(theta) ** 2);
+      const y = y0 - drop * u - hang * u * u + dome + Math.sin(theta) * .00007 * Math.sin(Math.PI * (.1 + .9 * u));
+      const x = Math.cos(az) * r - Math.sin(az) * lateral, z = -(Math.sin(az) * r + Math.cos(az) * lateral);
+      return [x, y, Math.min(0, z)];
+    }, true);
+    const sp = g.getAttribute("position"), sc: number[] = [];
+    for (let i = 0; i <= 10; i++) for (let j = 0; j <= 12; j++) {
+      const c = root.clone().lerp(tip, (i / 10) ** 1.3);
+      sc.push(c.r, c.g, c.b);
+    }
+    if (sc.length / 3 !== sp.count) throw new Error("bract colour count");
+    g.setAttribute("color", new Float32BufferAttribute(sc, 3));
+    s.put(g, "#576a2f");
+  };
+  const tiers = [
+    { r0: .0052, y0: .09640, drop: .0008, count: 6, phase: 0 },
+    { r0: .0041, y0: .09618, drop: .0007, count: 5, phase: .5 },
+    { r0: .0030, y0: .09585, drop: .0006, count: 4, phase: .2 },
+  ];
+  for (const [t, tier] of tiers.entries()) for (let k = 0; k < tier.count; k++) {
+    const az = (k + tier.phase + .5) / tier.count * Math.PI + .06 * Math.sin(k * 2.3 + t);
+    const width = tier.r0 * Math.PI / tier.count * .62;
+    scale(az, tier.r0, .00035, tier.y0, tier.drop, width,
+      new Color("#576a2f").lerp(new Color("#8a8a3c"), .3 * t),
+      new Color("#9a7350").lerp(new Color("#6e5a44"), .4 * ((k + t) % 2)));
+  }
+  for (let k = 0; k < 4; k++) {
+    const az = (k + .5) / 4 * Math.PI;
+    scale(az, .0024, .0004, .0950, .0005, .0009, new Color("#e4dcc8"), new Color("#c48a76"), .0016);
   }
 
-  // Twenty-six established teaching florets are retained within a continuous,
-  // tightly packed population of sessile florets. Every broad ovary base is
-  // buried in the SAME cavity loft; no independent beads in empty space.
+  // Hundreds of florets line the wall (Ficus syconium: each floret a slender
+  // pale pedicel carrying a smooth ovary, radiating into the central cavity).
+  // One GPU-instanced batch: the bake writes it with EXT_mesh_gpu_instancing.
   const random = rng(51105);
-  const floret = (u: number, a: number, i: number) => {
-    const base = new Vector3(...interior(u, a));
-    const du = new Vector3(...interior(Math.min(.99,u+.001),a)).sub(new Vector3(...interior(Math.max(.01,u-.001),a))).normalize();
-    const da = new Vector3(...interior(u,a+.001)).sub(base).normalize();
-    const N = new Vector3().crossVectors(du,da).normalize();
-    if (N.dot(new Vector3(-base.x,0,-base.z)) < 0) N.negate();
-    const length = .0026 + random() * .0013, width = .00185 + random() * .00030;
-    const c = new Color(i % 4 ? "#744518" : "#b8602e").lerp(new Color("#c9bea6"),.10 + random()*.18);
-    // Closed shared-ring mesh: no duplicated seam or degenerate pole rings.
-    // Eight radial samples suffice for millimetre-scale florets; interpolated
-    // surface normals remain smooth after meshopt simplification.
-    const positions:number[]=[], colors:number[]=[], indices:number[]=[];
-    positions.push(...base.clone().addScaledVector(N,-.0007).toArray());
-    for(let ring=1;ring<=3;ring++) {
-      const t=[.04,.42,.76][ring-1]!;
-      for(let k=0;k<8;k++) {
-        const az=k/8*TAU, r=width*(ring===1?.90:ring===2?1:.72);
-        positions.push(...base.clone().addScaledVector(N,-.00045+length*t)
-          .addScaledVector(du,Math.cos(az)*r+.0005*t*t*Math.sin(i*2.1))
-          .addScaledVector(da,Math.sin(az)*r).toArray());
-      }
+  const up = new Vector3(0, 1, 0), centroid = new Vector3(0, .059, 0);
+  const copies: Matrix4[] = [], tints: number[] = [];
+  const cream = new Color("#e9e4d8"), blush = new Color("#e8cfc4");
+  const floret = (u: number, a: number) => {
+    const q = cavity.getPoint(u), base = new Vector3(Math.cos(a) * q.x, q.y, -Math.sin(a) * q.x);
+    const du = new Vector3(...interior(Math.min(.99, u + .001), a)).sub(new Vector3(...interior(Math.max(.01, u - .001), a))).normalize();
+    const da = new Vector3(...interior(u, a + .001)).sub(new Vector3(...interior(u, a))).normalize();
+    const N = new Vector3().crossVectors(du, da).normalize();
+    if (N.dot(new Vector3(-base.x, 0, -base.z)) < 0) N.negate();
+    const target = new Vector3(0, q.y, 0).lerp(centroid, .5), toward = target.clone().sub(base);
+    const reach = toward.length() * (.30 + random() * .20);
+    const dir = N.clone().lerp(toward.normalize(), .55).normalize()
+      .add(new Vector3(random() - .5, random() - .5, random() - .5).multiplyScalar(.10)).normalize();
+    // Head width w; the template is FLORET_LENGTH widths long. Its axial
+    // stretch stays near 1 so the ovary keeps its rounded shape.
+    let width = .00150 + random() * .00040;
+    const tip = base.clone().addScaledVector(dir, reach);
+    // The section plane is z = 0: every head stays wholly behind it.
+    if (tip.z > -.6 * width) {
+      tip.z = -.6 * width;
+      if (base.z > tip.z) return;
+      dir.copy(tip).sub(base).normalize();
     }
-    positions.push(...base.clone().addScaledVector(N,length-.00045).addScaledVector(du,.0005*Math.sin(i*2.1)).toArray());
-    for(let k=0;k<8;k++) {
-      const next=(k+1)%8;
-      indices.push(0,1+next,1+k);
-      for(let ring=0;ring<2;ring++) {
-        const a=1+ring*8+k,b=1+ring*8+next;
-        indices.push(a,b,a+8,b,b+8,a+8);
-      }
-      indices.push(17+k,17+next,25);
-    }
-    for(let n=0;n<26;n++) {
-      const shade=c.clone().multiplyScalar(.76+.24*Math.min(1,n/18));
-      colors.push(shade.r,shade.g,shade.b);
-    }
-    const g=new BufferGeometry();g.setAttribute("position",new Float32BufferAttribute(positions,3));
-    g.setAttribute("color",new Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();
-    s.put(g,"#b8602e");
-    // Pale style emerges directly from ovary tip; tapered, never a floating dot.
-    if(i%3===0) {
-      const tip = base.clone().addScaledVector(N,length-.0005);
-      s.line([tip.toArray() as P,tip.clone().addScaledVector(N,.0011).addScaledVector(du,.0006).toArray() as P], [.00025,.00008],"#c9bea6",1,5,3);
-    }
+    const length = tip.distanceTo(base);
+    let stretch = length / (FLORET_LENGTH * width);
+    if (stretch > 1.35) { width = Math.min(.0021, length / (FLORET_LENGTH * 1.35)); stretch = length / (FLORET_LENGTH * width); }
+    if (stretch < .8) { width = Math.max(.0009, length / (FLORET_LENGTH * .8)); stretch = length / (FLORET_LENGTH * width); }
+    if (stretch < .55) return;
+    const turn = new Quaternion().setFromUnitVectors(up, dir)
+      .multiply(new Quaternion().setFromAxisAngle(up, random() * TAU));
+    // Pedicels differ a little in thickness and section between copies.
+    copies.push(new Matrix4().compose(base, turn, new Vector3(width * (.88 + random() * .24), width * stretch, width * (.88 + random() * .24))));
+    const c = new Color(1, 1, 1).lerp(random() < .5 ? blush : cream, random() * .9).multiplyScalar(.9 + random() * .1);
+    tints.push(c.r, c.g, c.b);
   };
-  for (let i=0;i<26;i++) floret(.16+i/25*.65,.16+(i*2.39996%2.78),i);
-  // Staggered near-hexagonal packing varies with local wall circumference.
-  let index=26;
-  for(let row=0;row<24;row++) {
-    const u=cavity.getUtoTmapping(.06+row/23*.88,0), radius=cavity.getPoint(u).x;
-    const count=Math.max(5,Math.floor(Math.PI*radius/.0038));
-    for(let k=0;k<count;k++) {
-      const a=.035+(k+.25+.5*(row%2)+random()*.17)/(count+.5)*(Math.PI-.07);
-      floret(u+(random()-.5)*.013,a,index++);
+  for (let row = 0; row < 33; row++) {
+    const u = cavity.getUtoTmapping(.05 + row / 32 * .85, 0), radius = cavity.getPoint(u).x;
+    const count = Math.max(4, Math.round(Math.PI * radius / .0027));
+    for (let k = 0; k < count; k++) {
+      const a = .045 + (k + .5 * (row % 2) + (random() - .5) * .5) / count * (Math.PI - .09);
+      floret(Math.min(.97, Math.max(.02, u + (random() - .5) * .012)), Math.min(Math.PI - .045, Math.max(.045, a)));
     }
   }
-  return s.finish();
+  const model = s.finish();
+  model.extra.push({
+    kind: "__instances",
+    at: [0, 0, 0],
+    color: "plastic",
+    tint: "#ffffff",
+    batches: [{ name: "fig-cut-florets", geometry: floretTemplate(), matrices: copies, colors: tints, roughness: .5 }],
+  });
+  return model;
+}
+
+/** Floret template length in head widths: foot at the origin, ovary tip at +Y. */
+const FLORET_LENGTH = 5.4;
+/** One floret in head-width units: a buried foot, a tapering pedicel, and the ovary on top. */
+function floretTemplate(): BufferGeometry {
+  const stalk = floretStalk().scale(.21, FLORET_LENGTH - 1.1 + .45, .24).translate(0, -.45, 0);
+  const head = floretHead().translate(0, FLORET_LENGTH - 1.32, 0);
+  const g = mergeGeometries([stalk, head], false)!;
+  return g;
+}
+
+/** A pedicel along +Y from 0 to 1, unit radius at its foot, slightly bent: pink-cream to the ovary's pink. */
+function floretStalk(): BufferGeometry {
+  // Five sides, two segments: the middle ring carries a gentle bend (each
+  // copy's own twist turns it a different way). Translucent pink-cream at the
+  // foot, close to the wall's tone, to the ovary's pink at the top.
+  const radial = 5, rings = [0, .5, 1], bend = [0, 1.7, .5], positions: number[] = [], colors: number[] = [], indices: number[] = [];
+  const foot = new Color("#e4dcc8").lerp(new Color("#c48a76"), .68), top = new Color("#c48a76");
+  for (const [i, t] of rings.entries()) {
+    const r = 1 - .28 * t, c = foot.clone().lerp(top, t);
+    for (let k = 0; k < radial; k++) {
+      const az = k / radial * TAU;
+      positions.push(Math.cos(az) * r + bend[i]!, t, Math.sin(az) * r);
+      colors.push(c.r, c.g, c.b);
+    }
+  }
+  for (let i = 0; i < rings.length - 1; i++) for (let k = 0; k < radial; k++) {
+    const a = i * radial + k, b = i * radial + (k + 1) % radial;
+    indices.push(a, a + radial, b, b, a + radial, b + radial);
+  }
+  return template(positions, colors, indices);
+}
+
+/** A smooth ovoid ovary, foot at the origin, 1 wide and about 1.5 tall along +Y: blush to rose at its tip. */
+function floretHead(): BufferGeometry {
+  const radial = 9, profile: [number, number][] = [[.55, .11], [.9, .38], [1, .7], [.86, 1.02], [.5, 1.27]];
+  const foot = new Color("#c48a76"), apex = new Color("#b25f6e");
+  const positions: number[] = [0, 0, 0], colors: number[] = [], indices: number[] = [];
+  const shade = (y: number) => { const c = foot.clone().lerp(apex, Math.min(1, y / 1.45) ** 1.2); colors.push(c.r, c.g, c.b); };
+  shade(0);
+  for (const [r, y] of profile) for (let k = 0; k < radial; k++) {
+    const az = k / radial * TAU;
+    positions.push(Math.cos(az) * r * .5, y, Math.sin(az) * r * .5);
+    shade(y);
+  }
+  positions.push(0, 1.45, 0); shade(1.45);
+  const last = 1 + profile.length * radial;
+  for (let k = 0; k < radial; k++) {
+    const n = (k + 1) % radial;
+    indices.push(0, 1 + k, 1 + n);
+    for (let i = 0; i < profile.length - 1; i++) {
+      const a = 1 + i * radial + k, b = 1 + i * radial + n;
+      indices.push(a, a + radial, b, b, a + radial, b + radial);
+    }
+    indices.push(last - radial + k, last, last - radial + n);
+  }
+  return template(positions, colors, indices);
+}
+
+function template(positions: number[], colors: number[], indices: number[]): BufferGeometry {
+  const g = new BufferGeometry();
+  g.setAttribute("position", new Float32BufferAttribute(positions, 3));
+  g.setAttribute("color", new Float32BufferAttribute(colors, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
 }

@@ -46,6 +46,7 @@ import {
   DoubleSide,
   DetachedBindMode,
   Euler,
+  InstancedBufferAttribute,
   InstancedMesh,
   LineBasicMaterial,
   LineSegments,
@@ -304,6 +305,11 @@ function applyTransform(m: Matrix4, t: PartTransform, centre: readonly number[])
   aboutPivot(m, tmpM.clone(), pv);
 }
 
+/** A glb batch's per-copy colours (EXT_mesh_gpu_instancing `_COLOR_0`), attached once per piece. */
+export function adoptInstanceColors(mesh: InstancedMesh, piece: Pick<ShapePiece, 'colors'>): void {
+  if (piece.colors && mesh.instanceColor?.array !== piece.colors) mesh.instanceColor = new InstancedBufferAttribute(piece.colors, 3);
+}
+
 function Piece({
   piece,
   material,
@@ -329,6 +335,7 @@ function Piece({
       const n = Math.min(list.length, piece.matrices.length);
       for (let i = 0; i < n; i++) mesh.setMatrixAt(i, list[i]!);
       if (piece.filings) mesh.count = n;
+      adoptInstanceColors(mesh, piece);
       mesh.instanceMatrix.needsUpdate = true;
       mesh.computeBoundingSphere();
       // Copies that turn about their own centres (`each`) can leave the rest bounds a little: never culled.

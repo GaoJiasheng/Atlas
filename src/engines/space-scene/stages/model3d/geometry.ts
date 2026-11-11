@@ -83,6 +83,8 @@ export interface ShapePiece {
   pivots?: [number, number, number][];
   /** Iron filings (a `filings` primitive): instanced needles the stage lays out again for each field state. */
   filings?: boolean;
+  /** A glb instanced mesh's per-copy colours (`EXT_mesh_gpu_instancing` `_COLOR_0`, linear RGB, three per matrix), multiplied into the vertex colours. */
+  colors?: Float32Array;
 }
 
 /** A piece of one primitive before placement: geometry, instances, and a material other than the primitive's own. */
