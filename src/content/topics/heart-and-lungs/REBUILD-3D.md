@@ -1149,3 +1149,24 @@ Frozen shipping SHA-256: `0df9fe2339727c88ebc083ee0037a147971eec5e4222447f9df1e8
 ### GPU acceptance: translucent fins (c-fish-states, 2026-11-09)
 
 `transparent-fins.patch` is applied, narrowed to the `atlasSurfaceGroup` opt-in: the patch's unconditional `target.side = source.side` is removed (clipping already sets the side) and the transparent-shadow rule reads `shape.surfaces` only. Fins render cleanly translucent at chapter 6 beats 2-3 in paper and cinema, with no alpha-hash static. Draw calls at those beats: 15 to 23 and 13 to 20. Pixel diffs against main over living-things, frog-and-chicken, fossils-and-skeletons and heart-and-lungs match a main-vs-main noise floor (flow particles, heartbeat, one label leader).
+
+### Round 5: snout and jaws (claude/geo-fish-sponge, 2026-11-11)
+
+Recheck item: the snout was a pointed wedge (flat front cap, upper jaw a thin
+plate over a rectangular mouth cut through the whole head width).
+
+- `cranialField` is rebuilt from parts: the traced head sections, a blunt
+  side-view front (`frontX`) for the snout and chin, a top-view taper
+  (`headHalfWidth`) ahead of the eye, and `mouthField` — a midline passage
+  between the lips into the buccal cavity plus a lateral gape that is open at
+  the front and closes to a lip fold at the corner. Maxilla plate, lip groove
+  and lower-jaw line are soft relief (soft minimum, so no shading creases).
+- The eye region uses the same field and relief as before; the eye, nostril
+  and lateral-line pieces sit on the head field itself (`headSurfaceZ`).
+- Marching cubes 84³ → 176³; skin and buccal lining are simplified apart, so
+  the triangle budget goes to the visible skin: head 8,000 → 9,200 triangles
+  (skin 6,650, lining 2,550), keeping the all-layer total under 350k.
+- Fish packet 444,888 → 463,236 bytes (cap 600 KB); bench GLB
+  2,757,976 → 2,776,320 bytes.
+- `check-mouth.ts`: all four water paths, every baked segment, no centre-line
+  hit and no contact within the 1.5 mm spread.

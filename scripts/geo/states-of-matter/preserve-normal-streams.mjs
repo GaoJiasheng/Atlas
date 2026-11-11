@@ -1,13 +1,13 @@
 /** Octahedral normal filtering is not an exact decode/re-encode round trip.
- * Keep every accepted normal stream byte-for-byte; only the two rebuilt parts
+ * Keep every accepted normal stream byte-for-byte; only the rebuilt parts
  * receive new normal filtering. No approximate normal-comparison allowance. */
 import assert from 'node:assert/strict';
 const align=n=>Math.ceil(n/4)*4;
 function unpack(bytes){const n=bytes.readUInt32LE(12),at=20+n;return {json:JSON.parse(bytes.subarray(20,at)),bin:bytes.subarray(at+8,at+8+bytes.readUInt32LE(at))};}
-export function preserveNormalStreams(original,rewritten){
+export function preserveNormalStreams(original,rewritten,rebuilt=['sponge','ice-cube']){
  const old=unpack(Buffer.from(original)),next=unpack(Buffer.from(rewritten)),replacements=new Map();
  for(const node of old.json.nodes){
-  if(node.mesh===undefined||['sponge','ice-cube'].includes(node.name))continue;
+  if(node.mesh===undefined||rebuilt.includes(node.name))continue;
   const out=next.json.nodes.find(n=>n.name===node.name);assert.ok(out);
   for(const [i,p]of old.json.meshes[node.mesh].primitives.entries()){
    const q=next.json.meshes[out.mesh].primitives[i],a=old.json.accessors[p.attributes.NORMAL],b=next.json.accessors[q.attributes.NORMAL],v=old.json.bufferViews[a.bufferView],w=next.json.bufferViews[b.bufferView],x=v.extensions.EXT_meshopt_compression;

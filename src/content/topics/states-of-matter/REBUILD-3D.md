@@ -561,3 +561,39 @@ Sponge: smoother, varied pores; accepted.
 Ice, after a Claude fix pass:
 - **Dark saucer streak:** the blended ice writes no depth, so simplified dish triangles painted in index order and an outer-wall triangle landed over the floor. `polish-batch.mjs` now orders the dish's triangles by facing, upward floor last, with a test. The meltwater film also moved wholly inside the flat floor, with one pole vertex and exact normals.
 - **Cracks:** ragged sheets turned toward the authored cameras, white cores between thin cool flanks, explicit normals (double-sided windings had cancelled them), plus bubble strings. Readable at before-you-start 4 and sorting-matter 5, paper and cinema. No transmission material. Only `ice-cube` changed; 1,497,500 bytes.
+
+## Round 4 sponge (claude/geo-fish-sponge, 2026-11-11)
+
+Recheck item: round pores, but sparse smooth craters on a flat surface, with
+the fine pores only a blurred texture; read as Swiss cheese.
+
+`cellulose-sponge.mjs` replaces `pore-sponge.mjs` (removed) in
+`polish-batch.mjs`, which now takes `--only sponge` so the ice cube is kept
+byte for byte (its compressed streams are copied, not re-encoded).
+
+- Fine pores, 0.2–1.7 mm: a periodic slab of spherical cells cut by the face
+  (mouths cover about half of it) over sparser buried cells; a mouth leads on
+  into a deeper cell only through a wide window. The depth to the first wall
+  is the height field: 512 × 512 occlusion (JPEG, 11 KB) and 256 × 256 normal
+  map (JPEG, 34 KB), one 16 mm tile, through the existing `atlasMicrostructure`
+  opt-in (map + normal map). No engine change.
+- Large cavities, 1.4–8 mm: 380 clusters of overlapping cells (lobed mouths,
+  a deeper cell under most) subtracted from a 120 × 40 × 80 mm block with
+  planar faces and 3.5 mm cut edges. Mouths sit wholly on their face (a few
+  small ones may notch an edge) and no cell reaches within 0.8 mm of another
+  face, so the edges stay straight; the top and underside carry fewer.
+  Faces away from the rims shade with the block's own normal. Surface nets on a 0.28 mm grid (1.5 M triangles), meshoptimizer with
+  depth as a weighted attribute so the budget goes to the cavity mouths:
+  24,990 triangles, 0.22 mm error.
+- UVs: each face projects along its own axis (seams on the rounded edges);
+  inside a cavity the projection is unrolled about the cavity's first cell
+  like an equidistant map of a bowl, so the cells on the walls are neither
+  stretched nor seamed. Occlusion inside the cavities is a vertex colour that
+  only darkens below 0.3 mm.
+
+| | before | after |
+|---|---:|---:|
+| Sponge triangles / draws | 33,451 / 1 | 24,990 / 1 |
+| Sponge mesh + maps | 237,953 + 1,700 B | 180,265 + 44,714 B |
+| `states-of-matter.glb` | 1,497,500 B | 1,483,196 B (cap 1,500,000) |
+| All parts, triangles / draws | 303,941 / 84 | 295,480 / 84 |

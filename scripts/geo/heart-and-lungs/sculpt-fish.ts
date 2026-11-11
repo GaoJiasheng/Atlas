@@ -26,7 +26,7 @@ function shape(x:number){
  const at=(j:number)=>{const m0=(b[j]!-prev[j]!)/(b[0]!-prev[0]!),m1=(next[j]!-a[j]!)/(next[0]!-a[0]!);return (2*t*t*t-3*t*t+1)*a[j]!+(t*t*t-2*t*t+t)*dx*m0+(-2*t*t*t+3*t*t)*b[j]!+(t*t*t-t*t)*dx*m1;};
  const top=at(1),bottom=at(2);return {top,bottom,h:(top-bottom)/2,c:(top+bottom)/2,z:at(3)};
 }
-function skin(x:number,y:number):P{
+function skin(x:number,y:number,lining=0):P{
  const s=shape(x),t=clamp((y-s.bottom)/(s.top-s.bottom));
  // Actual palette pigments in linear light. Golden flanks, olive dorsal
  // field, pale belly and six distinct broad melanophore bars.
@@ -39,8 +39,15 @@ function skin(x:number,y:number):P{
  const cheek=smooth((-.037-x)/.045)*Math.exp(-(((y+.003)/.025)**2));
  c.lerp(BONE.clone().lerp(FIN,.04).multiplyScalar(.35),.33*cheek);
  // Fine pigment variation belongs to the dermis, never a photographed map.
- const jaw=Math.exp(-(((x+.102)/.016)**6)-(((y-(-.005-.20*(x+.114)))/.0009)**2));
- c.lerp(DARK.clone().multiplyScalar(.08),jaw*.64);
+ if(x<-.080&&y<.008){
+  // Pale lips at the gape, a shaded border round the maxilla and a fainter lower-jaw line.
+  const lip=Math.exp(-((Math.min(Math.abs(y-upperMargin(x)),Math.abs(y-lowerMargin(x)))/.0011)**2))*smooth((RICTUS[0]+.002-x)/.004);
+  c.lerp(BONE.clone().lerp(FIN,.10).multiplyScalar(.50),.45*lip);
+  const border=Math.exp(-((maxillaInside(x,y)/.00065)**2))*smooth((x-(UPPER_LIP[0]+.004))/.004);
+  c.lerp(DARK.clone().multiplyScalar(.10),.30*border);
+  c.lerp(DARK.clone().multiplyScalar(.12),.22*Math.exp(-((segment2(x,y,[-.1130,-.0118],JAW_JOINT)/.00080)**2)));
+ }
+ if(lining>0)c.lerp(OCHRE.clone().lerp(FIN,.35).lerp(DARK,.55).multiplyScalar(.10),lining);
  const orbital=Math.exp(-(((Math.hypot(x-PERCH_EYE[0]!,(y-PERCH_EYE[1]!)/.94)-.00495)/.00035)**2));
  c.lerp(OCHRE.clone().lerp(DARK,.50).multiplyScalar(.16),orbital*.85);
  c.multiplyScalar(1+.035*Math.sin(x*3100+y*1700)*Math.sin(x*1600-y*2700));return ratio(c);
@@ -60,26 +67,86 @@ function sideZ(x:number,y:number){const s=shape(x);
  if(x<-.072){const relief=.0008*Math.exp(-(((x+.090)/.012)**2)-(((y+.005)/.012)**2)),maxilla=.0008*Math.exp(-(((x+.103)/.015)**4)-(((y-(-.003-.20*(x+.115)))/.0019)**2)),socket=-.0005*Math.exp(-(((Math.hypot((x-eyeX)/.0055,(y-eyeY)/.0052)-.98)/.21)**2));return (s.z+relief+maxilla+socket)*Math.sqrt(Math.max(0,1-((y-s.c)/s.h)**2));}
  return bodyPoint(x,Math.acos(Math.max(-1,Math.min(1,(y-s.c)/s.h))))[2];}
 const smoothMax=(a:number,b:number,k:number)=>{const h=clamp(.5+.5*(a-b)/k);return a*h+b*(1-h)+k*h*(1-h);};
-/** Carved oral passage, open anteriorly and rounded at the pharynx. */
-function oralField(x:number,y:number,z:number){
- const t=smooth((x+.105)/.028),h=.0048+.015*t,w=.014+.004*t,cy=-.0010+.002*t;
- const radial=(Math.hypot((y-cy)/h,z/(z>=0?w:.0075+.0065*t))-1)*Math.min(w,h);
- return smoothMax(radial,x+.068,.005);
+const smoothMin=(a:number,b:number,k:number)=>-smoothMax(-a,-b,k);
+/** Buccal cavity behind the jaws, rounded at the pharynx. */
+function pharynxField(x:number,y:number,z:number){
+ // Narrower at the front, where the cheeks close the gape behind the lips.
+ const t=smooth((x+.105)/.028),narrow=1-.42*smooth((-.0935-x)/.012),h=.0048+.015*t+.0005*smooth((x+.077)/.005),w=(.014+.004*t+.0007*smooth((x+.077)/.005))*narrow,cy=-.0010+.002*t;
+ const radial=(Math.hypot((y-cy)/h,z/(z>=0?w:(.0075+.0065*t)*narrow))-1)*Math.min(w,h);
+ return smoothMax(radial,x+.068,.0035);
+}
+/* Snout and jaws, from Pmau img_33558 (side) and Dellex Barsch3 (front):
+ * a blunt rounded snout whose upper lip is the most anterior point, subequal
+ * jaws, the lower jaw dropped about its joint so the mouth is open for the
+ * teaching water inlet, the gape closing at a corner under the front of the
+ * eye, a maxilla plate ending under the middle of the eye, and two nostrils
+ * per side between the eye and the snout. Fish frame, metres. */
+const NOSE_TIP=-.1247,WIDTH_FROM=-.096;
+/** Mouth corner, upper-lip and lower-lip fronts (open-mouth pose), jaw joint and maxilla end. */
+const RICTUS:[number,number]=[-.0957,-.0031],UPPER_LIP:[number,number]=[-.1240,.0040],LOWER_LIP:[number,number]=[-.1233,-.0042];
+const JAW_JOINT:[number,number]=[-.0870,-.0078],MAXILLA_END:[number,number]=[-.0906,-.0041];
+const upperMargin=(x:number)=>RICTUS[1]+(x-RICTUS[0])*(UPPER_LIP[1]-RICTUS[1])/(UPPER_LIP[0]-RICTUS[0]);
+const lowerMargin=(x:number)=>RICTUS[1]+(x-RICTUS[0])*(LOWER_LIP[1]-RICTUS[1])/(LOWER_LIP[0]-RICTUS[0]);
+/** Side-view front of the snout above the mouth and of the chin below it:
+ * a blunt nose that rounds over within the last 3 mm, as in img_33558. */
+function frontX(y:number){return y>=0?-.1244+Math.min(.0045,.0024*Math.max(0,(y-.0048)/.0055)**2.6):-.1236+Math.min(.0045,.0040*Math.max(0,(-.0050-y)/.0042)**2.4);}
+/** Half-width: the traced head from the eye back; a blunt taper to the snout ahead of it. */
+function headHalfWidth(x:number){
+ const s=shape(x);if(x>=WIDTH_FROM)return s.z;
+ const w0=shape(WIDTH_FROM).z,p=w0*Math.pow(clamp((x-NOSE_TIP)/(WIDTH_FROM-NOSE_TIP)),.42),b=smooth((WIDTH_FROM-x)/.007);
+ return s.z*(1-b)+p*b;
+}
+function segment2(x:number,y:number,a:[number,number],b:[number,number]){
+ const dx=b[0]-a[0],dy=b[1]-a[1],t=clamp(((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy));return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy);
+}
+/** The maxilla plate above the gape: signed depth inside its outline (metres).
+ * Its slender front runs under the snout; its expanded end lies under the eye. */
+function maxillaInside(x:number,y:number){
+ const along=clamp((x+.1130)/(MAXILLA_END[0]+.1130)),low=upperMargin(Math.min(x,RICTUS[0]))-.0004-.0007*smooth((x-RICTUS[0])/.004),top=upperMargin(x)+.0009+.0024*along**1.8;
+ const mid=(top+low)/2,half=Math.max(.0004,(top-low)/2),end=MAXILLA_END[0]+.0002-x-.0014*((y-mid)/half)**2;
+ // Soft minimum: a hard one creases the plate's relief and its shading.
+ return smoothMin(smoothMin(top-y,y-low,.0007),smoothMin(end,x+.1140,.0012),.0007);
+}
+/** Closed lip line between the end of the open gape and the mouth corner. */
+const lipLine=(x:number)=>(upperMargin(x)+lowerMargin(x))/2;
+/** Lateral bone and skin relief, in metres outward. */
+function headRelief(x:number,y:number){
+ const relief=.0008*Math.exp(-(((x+.090)/.012)**2)-(((y+.005)/.012)**2));
+ const socket=-.0005*Math.exp(-(((Math.hypot((x-eyeX)/.0055,(y-eyeY)/.0052)-.98)/.21)**2));
+ if(x>-.080||y>.006)return relief+socket;
+ const plate=.00017*smooth(maxillaInside(x,y)/.0015);
+ const fold=.00013*Math.exp(-(((y-lipLine(x))/.00080)**2))*smooth((x+.1085)/.004)*smooth((RICTUS[0]+.0006-x)/.0016);
+ // Lip groove behind the premaxilla, and the lower border of the lower jaw.
+ const lipGroove=.00014*Math.exp(-(((y-(upperMargin(x)+.0022))/.00075)**2))*smooth((x-(UPPER_LIP[0]+.0008))/.002)*smooth((-.112-x)/.004);
+ const jawLine=.00012*Math.exp(-((segment2(x,y,[-.1130,-.0118],JAW_JOINT)/.00075)**2));
+ return relief+socket+plate-fold-lipGroove-jawLine;
+}
+/** Outer skin of the closed head volume, before the mouth is opened. */
+function headOuter(x:number,y:number,z:number){
+ const s=shape(x),zz=Math.max(headHalfWidth(x)+headRelief(x,y),1e-5);
+ return smoothMax((Math.hypot((y-s.c)/s.h,z/zz)-1)*Math.min(s.h,zz),frontX(y)-x,.0008);
+}
+/** The open mouth: a midline passage between the lips into the buccal cavity,
+ * plus the lateral gape between the lips. */
+function mouthField(x:number,y:number,z:number){
+ const front=smooth((-.1015-x)/.006),k=clamp((x-UPPER_LIP[0])/.02);
+ const hO=.0041-.0004*k,wO=.0049-.0006*k,passage=(Math.hypot((y+.0002)/hO,z/wO)-1)*Math.min(hO,wO),pharynx=pharynxField(x,y,z);
+ const lead=smoothMin(passage,pharynx,.0012)*front+pharynx*(1-front);
+ // The lips part along the front of the gape; the opening narrows to a point
+ // and the lips meet in a shallow fold back to the corner.
+ const shut=smooth((x+.1150)/.0100),close=(upperMargin(x)-lowerMargin(x))/2*shut;
+ return smoothMin(lead,Math.max(y-upperMargin(x)+close,lowerMargin(x)+close-y)+.0012*shut,.0007);
 }
 function cranialField(x:number,y:number,z:number){
- const s=shape(x),relief=.0008*Math.exp(-(((x+.090)/.012)**2)-(((y+.005)/.012)**2));
- const maxilla=.0008*Math.exp(-(((x+.103)/.015)**4)-(((y-(-.003-.20*(x+.115)))/.0019)**2));
- const socket=-.0005*Math.exp(-(((Math.hypot((x-eyeX)/.0055,(y-eyeY)/.0052)-.98)/.21)**2));
- const crease=.00075*Math.exp(-(((x+.102)/.017)**6)-(((y-(-.005-.20*(x+.114)))/.00095)**2));
- const zz=s.z+relief+maxilla+socket-crease;
- const outer=(Math.hypot((y-s.c)/s.h,z/zz)-1)*Math.min(s.h,zz);
- const cap=-.1214+.0018*((y+.002)/.019)**2+.0015*(z/.015)**2;
- const capped=smoothMax(outer,cap-x,.0015);
- return smoothMax(capped,-oralField(x,y,z),.00075);
+ // Fleshy lips: a slight roll along the cut rim of the mouth.
+ const mouth=mouthField(x,y,z),lip=.00030*Math.exp(-((mouth/.0008)**2))*smooth((-.1120-x)/.006);
+ return smoothMax(headOuter(x,y,z),-mouth,.0008)-lip;
 }
-export let CRANIAL_STATS={before:0,after:0,errorMetres:0};
+/** Near-side skin offset at (x, y), found on the head field itself. */
+function headSurfaceZ(x:number,y:number){let a=0,b=.03;for(let k=0;k<40;k++){const m=(a+b)/2;if(cranialField(x,y,m)<0)a=m;else b=m;}return (a+b)/2;}
+export let CRANIAL_STATS:{before:number;after:number;errorMetres:number;skin?:number;lining?:number}={before:0,after:0,errorMetres:0};
 function cranialMesh(){
- const n=84,lo:P=[-.123,-.033,-.027],hi:P=[-.070,.039,.027],mc=new MarchingCubes(n,new MeshBasicMaterial(),false,false,120000);mc.isolation=0;
+ const n=176,lo:P=[-.1262,-.033,-.027],hi:P=[-.0703,.039,.027],mc=new MarchingCubes(n,new MeshBasicMaterial(),false,false,700000);mc.isolation=0;
  for(let z=0;z<n;z++)for(let y=0;y<n;y++)for(let x=0;x<n;x++)mc.field[z*n*n+y*n+x]=-cranialField(lo[0]+(hi[0]-lo[0])*x/n,lo[1]+(hi[1]-lo[1])*y/n,lo[2]+(hi[2]-lo[2])*z/n);
  mc.update();const count=mc.geometry.drawRange.count,g=new BufferGeometry().setAttribute('position',new Float32BufferAttribute(mc.geometry.getAttribute('position').array.slice(0,count*3),3));
  const p=g.getAttribute('position'),normals:number[]=[];
@@ -88,12 +155,23 @@ function cranialMesh(){
   p.setXYZ(i,x,y,z);const N=new Vector3(cranialField(x+e,y,z)-cranialField(x-e,y,z),cranialField(x,y+e,z)-cranialField(x,y-e,z),cranialField(x,y,z+e)-cranialField(x,y,z-e)).normalize();normals.push(...N.toArray());
  }
  g.setAttribute('normal',new Float32BufferAttribute(normals,3));
- paint(g,p=>{const inner=oralField(...p);return Math.abs(inner)<.00045&&Math.abs(p[2])<.012&&p[0]<-.079?ratio(DARK.clone().multiplyScalar(.032)):skin(p[0],p[1]);});
+ // Mouth lining and lips: dark where the surface lies inside the closed head, pale lip rims at the gape.
+ paint(g,p=>{const depth=-headOuter(...p),lining=smooth((depth-.0002)/.0007);return skin(p[0],p[1],lining);});
  const result=mergeVertices(g,.000005),attributes:number[]=[];
  const rp=result.getAttribute('position'),rn=result.getAttribute('normal'),rc=result.getAttribute('color');
  for(let i=0;i<rp.count;i++)attributes.push(rn.getX(i),rn.getY(i),rn.getZ(i),rc.getX(i),rc.getY(i),rc.getZ(i));
- const [indices,error]=MeshoptSimplifier.simplifyWithAttributes(new Uint32Array(result.index!.array),new Float32Array(rp.array),3,new Float32Array(attributes),6,[.001,.001,.001,.001,.001,.001],null,24000,.00009,['LockBorder','ErrorAbsolute']);
- CRANIAL_STATS={before:result.index!.count/3,after:indices.length/3,errorMetres:error};result.setIndex(Array.from(indices));mc.geometry.dispose();(mc.material as MeshBasicMaterial).dispose();g.dispose();return result;
+ // Spend the triangle budget on the visible skin and lips: the buccal lining
+ // deep inside the head is simplified separately and much harder. Both parts
+ // lock their shared border, so the surface stays closed.
+ const source=result.index!.array,skinIx:number[]=[],liningIx:number[]=[];
+ for(let k=0;k<source.length;k+=3){
+  const c=[0,1,2].map(j=>[0,1,2].map(a=>rp.getComponent(source[k+a]!,j)).reduce((s,v)=>s+v,0)/3) as P;
+  (-headOuter(...c)>.0016&&c[0]>-.110?liningIx:skinIx).push(source[k]!,source[k+1]!,source[k+2]!);
+ }
+ const simplify=(ix:number[],target:number,error:number)=>MeshoptSimplifier.simplifyWithAttributes(new Uint32Array(ix),new Float32Array(rp.array),3,new Float32Array(attributes),6,[.001,.001,.001,.001,.001,.001],null,target,error,['LockBorder','ErrorAbsolute']);
+ const [inner,innerError]=simplify(liningIx,Math.round(liningIx.length*.03/3)*3,.003),[outer,outerError]=simplify(skinIx,27600-inner.length,.00004);
+ const indices=new Uint32Array([...outer,...inner]),error=Math.max(innerError,outerError);
+ CRANIAL_STATS={before:result.index!.count/3,after:indices.length/3,errorMetres:error,skin:outer.length/3,lining:inner.length/3} as typeof CRANIAL_STATS;result.setIndex(Array.from(indices));mc.geometry.dispose();(mc.material as MeshBasicMaterial).dispose();g.dispose();return result;
 }
 // Smooth opercle contour with a posterior flat spine, not a rectangular shield.
 const COVER_POINTS:P[]=[[.000,.018,0],[.007,.023,0],[.018,.025,0],[.027,.023,0],[.034,.019,0],[.036,.016,0],[.033,.013,0],[.034,.003,0],[.031,-.010,0],[.025,-.020,0],[.014,-.023,0],[.006,-.023,0],[-.001,-.018,0],[-.003,-.004,0]];
@@ -139,7 +217,9 @@ export function fishSculpt(){
   const eye=surface(12,40,(u,v)=>{const a=v*2*Math.PI,x=eyeX+eyeR*u*Math.cos(a),y=eyeY+eyeR*.94*u*Math.sin(a);return [x,y,sign*(sideZ(x,y)+.0002+.0010*(1-u*u))] as P;});
   paint(eye,(_,i)=>{const u=Math.floor(i/41)/12,j=i%41;const c=u<.62?DARK.clone().multiplyScalar(.018):u>.92?DARK.clone().multiplyScalar(.10):OCHRE.clone().lerp(OLIVE,.48+.05*Math.sin(j*2.3)).multiplyScalar(.15+.025*Math.sin(j*3.4));return ratio(c);});gs.push(sign===1?eye:flip(eye));
   const z=sideZ(eyeX-.0011,eyeY+.0013)+.00117;gs.push(paint(orb([eyeX-.0011,eyeY+.0013,sign*z],[.00024,.00018,.00009],12,8),ratio(BONE.clone().multiplyScalar(.80))));
-  for(const [x,y,r] of [[-.1095,.013,.00045],[-.106,.015,.00037]]){const p:P=[x!,y!,sign*(sideZ(x!,y!)+.00002)];gs.push(paint(orb(p,[r!,r!*.64,.00009],12,8),ratio(DARK.clone().multiplyScalar(.10))));}
+  // Anterior and posterior nostrils (Pmau img_33558): small dark openings in a pale raised rim.
+  for(const [x,y,r] of [[-.1085,.0118,.00040],[-.1022,.0143,.00050]]){const z=headSurfaceZ(x!,y!);
+   gs.push(paint(orb([x!,y!,sign*(z+.00002)],[r!*1.6,r!*1.2,.00016],18,10),p=>{const d=Math.hypot((p[0]-x!)/(r!*1.6),(p[1]-y!)/(r!*1.2));return d<.58?ratio(DARK.clone().multiplyScalar(.06)):skin(p[0],p[1]).map(c=>c*1.12) as P;}));}
  }
  // A tail-root cap joins the peduncle into the caudal fin root.
  const cap=surface(3,48,(u,v)=>{const a=v*2*Math.PI;return [.087+.001*(1-u*u),.004*u*Math.cos(a),.0032*u*Math.sin(a)] as P;});gs.push(paint(cap,p=>skin(p[0],p[1])));

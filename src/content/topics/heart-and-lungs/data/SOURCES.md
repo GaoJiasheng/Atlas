@@ -220,3 +220,35 @@ and all downstream routes are unchanged. This is a channel reconstruction,
 not a new biological number; no EN/ZH pupil-facing text required correction.
 The audit now checks every baked segment from approach to exit at the actual
 1.5 mm particle spread, rather than just the anterior inlet window.
+
+## Rebuild 2026-11-05 — round 5, snout and jaws (2026-11-11)
+
+The recheck found the snout a pointed wedge with a box-shaped mouth. The
+front of the head is re-sculpted in `scripts/geo/heart-and-lungs/sculpt-fish.ts`
+from the same European perch photographs: the side profile of
+[Pmau img_33558](https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_img_33558.jpg)
+(CC BY-SA 4.0), registered to the model through `perch-trace.ts`, and the
+near-frontal [Dellex Barsch3](https://commons.wikimedia.org/wiki/File:Barsch3.jpg)
+(CC BY-SA 4.0) for the width; [Chernilevsky 2008 G1](https://commons.wikimedia.org/wiki/File:Perca_fluviatilis_2008_G1.jpg)
+(public domain) is the second side view. No true top-view photograph was
+available; the top-view taper is a reconstruction checked against Barsch3.
+
+- Blunt snout: the upper lip is the most anterior point and the nose rounds
+  over within its last 3 mm, as in img_33558; seen from above the snout is a
+  rounded U, not a truncated cone.
+- Subequal jaws; the lower jaw keeps its depth to a rounded chin.
+- Mouth: open for the teaching water inlet (the photographs show it closed).
+  The lips part along the front of the gape and meet in a fold back to the
+  mouth corner under the front of the eye; the maxilla plate widens to its end
+  under the middle of the eye ([Museums Victoria / OzFishNet](https://fishesofaustralia.net.au/home/species/3690):
+  "large mouth reaching under the eye", rounded snout).
+- Nostrils: two per side, between the eye and the snout tip, at their
+  img_33558 positions (posterior just ahead of the eye, anterior about halfway);
+  the paired nostrils follow the Australian Museum fish anatomy note above.
+
+Fins, eye, gill cover, gills, plant, anatomy, flows, poses, labels and beat
+cameras are unchanged; all four water paths still clear the decoded mouth at
+the full 1.5 mm particle spread (`check-mouth.ts`). The rebuild also re-reads
+the current colour tokens, so the fish's vertex pigments now match the
+`--bone` token of 2026-11-10 again (geometry of fins and cover unchanged).
+No photograph enters the runtime packet; the head remains original CC0 work.

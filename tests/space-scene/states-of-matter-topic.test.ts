@@ -12,7 +12,6 @@ import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dequantize } from '@gltf-transform/functions';
 import { MeshoptDecoder } from 'meshoptimizer';
 import { Vector3, Matrix4, Matrix3, Box3, Triangle, Euler, Mesh, MeshStandardMaterial, Raycaster } from 'three';
-import { poreSponge } from '../../scripts/geo/states-of-matter/pore-sponge.mjs';
 import { parseShippingGLB } from '../../scripts/geo/states-of-matter/node-gltf';
 import { partsFile } from '../../src/engines/space-scene/schema';
 import { partPieces } from '../../src/engines/space-scene/stages/model3d/geometry';
@@ -456,7 +455,7 @@ describe('states-of-matter shipping rebuild', () => {
       const surface = gltfSurface(mesh)!; expect(surface, id).toBeDefined(); surface.style(target); surface.fade(target, 1, false);
       expect(target.color.toArray()).toEqual(source.color.toArray()); expect(target.roughness).toBe(source.roughness); expect(target.metalness).toBe(source.metalness);
       expect(target.vertexColors).toBe(true); expect(target.transparent, id).toBe(id === 'ice-cube');
-      if (id === 'sponge') { expect(target.roughness).toBeGreaterThan(.9); expect(target.color.r).toBeLessThan(.6); expect(target.map).toBe(source.map); expect(target.map).toBeTruthy(); expect(target.map!.image.width).toBe(64); expect(mesh.geometry.getAttribute('uv').itemSize).toBe(2); expect(target.map!.repeat.x).toBeGreaterThan(4); }
+      if (id === 'sponge') { expect(target.roughness).toBeGreaterThan(.9); expect(target.color.r).toBeLessThan(.6); expect(target.map).toBe(source.map); expect(target.map).toBeTruthy(); expect(target.map!.image.width).toBe(512); expect(target.normalMap).toBe(source.normalMap); expect(target.normalMap!.image.width).toBe(256); expect(mesh.geometry.getAttribute('uv').itemSize).toBe(2); expect(target.map!.repeat.x).toBeGreaterThan(4); expect(target.normalMap!.repeat.x).toBe(target.map!.repeat.x); }
       target.dispose();
     }
   });
@@ -470,26 +469,32 @@ describe('states-of-matter shipping rebuild', () => {
     expect(hash.digest('hex')).toBe('462ead66ad3150dc3b07dafa5d9bbcf36493b6568ff8bb1bf2b9ca9f9b8639a2');
   });
 
-  it('retains curved, differently sized open pores on every face and seats the sponge on its tray', async () => {
+  it('opens large cavities through every face and seats the sponge on its tray', async () => {
     const model = await parseShippingGLB(new Uint8Array(readFileSync(join(import.meta.dirname, '../../public/models/states-of-matter.glb'))));
     model.scene.updateMatrixWorld(true);
     const mesh = model.scene.getObjectByName('sponge') as Mesh;
     const bounds = new Box3().setFromObject(mesh);
-    expect(bounds.min.y).toBeCloseTo(.015, 4); expect(bounds.max.y).toBeCloseTo(.055, 4);
-    expect(bounds.getCenter(new Vector3()).z).toBeCloseTo(.14, 4);
-    const source = poreSponge(), mouths = source.userData.poreProof as {axis:number;sign:number;point:number[];radius:number;segments:number}[];
-    expect(mouths.length).toBeGreaterThan(290);
-    expect(Math.max(...mouths.map(m=>m.radius))/Math.min(...mouths.map(m=>m.radius))).toBeGreaterThan(6);
-    expect(mouths.filter(m=>m.radius>.0022).every(m=>m.segments>=32)).toBe(true);
-    const ray = new Raycaster(); let open = 0;
-    for (const mouth of mouths) {
-      const normal = new Vector3().setComponent(mouth.axis,mouth.sign), origin = new Vector3(...mouth.point as [number,number,number]).addScaledVector(normal,.005);
-      ray.set(origin,normal.clone().negate()); const hit=ray.intersectObject(mesh,false)[0];
-      if (hit && hit.distance>.00565) open++;
+    // Flat underside on the tray; the cut faces are only slightly uneven.
+    expect(bounds.min.y).toBeCloseTo(.015, 4); expect(bounds.max.y).toBeCloseTo(.055, 3);
+    expect(bounds.getCenter(new Vector3()).z).toBeCloseTo(.14, 3);
+    const centre = new Vector3(-.45, .035, .14), half = [.06, .02, .04], ray = new Raycaster();
+    for (const axis of [0, 1, 2]) for (const sign of [-1, 1]) {
+      const [u, v] = [0, 1, 2].filter(k => k !== axis) as [number, number], depths: number[] = [];
+      for (let i = 0; i < 36; i++) for (let j = 0; j < 18; j++) {
+        const origin = centre.clone(), normal = new Vector3().setComponent(axis, sign);
+        origin.setComponent(u, centre.getComponent(u) + (i / 35 * 2 - 1) * (half[u]! - .005));
+        origin.setComponent(v, centre.getComponent(v) + (j / 17 * 2 - 1) * (half[v]! - .005));
+        origin.setComponent(axis, centre.getComponent(axis) + sign * (half[axis]! + .005));
+        ray.set(origin, normal.clone().negate()); const hit = ray.intersectObject(mesh, false)[0];
+        depths.push(hit ? hit.distance - .005 : half[axis]!);
+      }
+      // Rays down the open mouths of the large cavities reach well below the face.
+      const open = depths.filter(d => d > .0012).length / depths.length;
+      expect(open, `axis ${axis} sign ${sign}`).toBeGreaterThan(axis === 1 && sign < 0 ? .015 : .04);
+      expect(open, `axis ${axis} sign ${sign}`).toBeLessThan(.45);
+      expect(Math.max(...depths), `axis ${axis} sign ${sign}`).toBeGreaterThan(.003);
     }
-    expect(open/mouths.length).toBeGreaterThan(.97);
-    source.dispose();
-  });
+  }, 60000);
 
   it('delivers clear ice shells, bubbles, crack films and a dish through one RGBA source mesh', async () => {
     const ice = part('ice-cube'), { node, primitive, vertices } = await meshVertices('ice-cube');

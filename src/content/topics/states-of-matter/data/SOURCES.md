@@ -113,3 +113,17 @@ The round 2 cloth, cavity/channel SDF and ice fracture meshes are original Atlas
 - [Éponge type 3 (2).jpg](https://commons.wikimedia.org/wiki/File:%C3%89ponge_type_3_%282%29.jpg) — Lionel Allorge, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), selected from the offered licences; the comparison crops the cellulose end face. Its red scouring layer is a different product feature and is not part of this topic's plain cellulose sponge.
 
 The round 3 ice, sponge, shared geometric micro-pit field and embedded 64 × 64 micro-cavity occlusion tile are original Atlas procedural work, CC0-1.0. The tile is an original shading asset, not a reference photograph. No third-party image or mesh is shipped. Reference photographs and comparison PNGs remain ignored development evidence. Teaching sources, EN/ZH labels and numerical claims are unchanged.
+
+### Round 4 sponge (2026-11-11)
+
+The recheck found the sponge read as Swiss cheese: sparse smooth craters, the
+fine pores only a blurred 64 × 64 texture. The sponge is rebuilt by
+`scripts/geo/states-of-matter/cellulose-sponge.mjs` against the round 3
+cellulose references above (Cleaning sponge detail; Éponge type 3, end face)
+and Sponge-viscose: dense small open pores on every face and cut edge,
+irregular larger cavities that open into further cells, on the planar faces
+and straight cut edges of a factory-cut block. Fine pores are a baked 512 × 512 occlusion map and 256 × 256
+normal map of an original procedural cell structure (spherical cells cut by
+the face, opening into deeper cells through wide windows); large cavities are
+geometry. Both maps and the mesh are original Atlas CC0 work. No reference
+photograph is shipped; teaching sources, values and labels are unchanged.
