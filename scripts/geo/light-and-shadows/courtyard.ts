@@ -1,5 +1,5 @@
 /** Original 11 m paved shadow-stick court. Actual joints and chamfers, not decals. */
-import { BufferGeometry, Float32BufferAttribute, ExtrudeGeometry, Shape, Vector2, CylinderGeometry } from 'three';
+import { BufferGeometry, Float32BufferAttribute, ExtrudeGeometry, Shape, Vector2, Vector3, Matrix4, CylinderGeometry } from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { Document, NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
@@ -30,7 +30,10 @@ export async function bakeCourtyard(){
  const p=doc.createPrimitive();for(const [attr,name] of [['position','POSITION'],['normal','NORMAL'],['color','COLOR_0']])p.setAttribute(name!,accessor(name!,'VEC3',new Float32Array(g.getAttribute(attr!).array)));
  p.setMaterial(doc.createMaterial('matte-paving').setRoughnessFactor(.88).setMetallicFactor(0).setExtras({atlasSurface:true}));
  const mesh=doc.createMesh('courtyard').addPrimitive(p);scene.addChild(doc.createNode('courtyard').setMesh(mesh).setTranslation([10,0,0]).setExtras({closed:true,labelPoint:[0,.05,0]}));
+ const node=scene.listChildren()[0]!,labelWorld=new Vector3(0,.05,0).applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()));
  await doc.transform(weld(),meshopt({encoder:MeshoptEncoder,level:'high',quantizePosition:16,quantizeNormal:12,quantizeColor:8}));
+ // extras.labelPoint is node-local (glbAnchor.ts); quantization folds a dequantize scale and offset into the node, so re-express the point in that frame.
+ node.setExtras({...node.getExtras(),labelPoint:labelWorld.applyMatrix4(new Matrix4().fromArray(node.getWorldMatrix()).invert()).toArray().map(v=>Number(v.toFixed(6)))});
  const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'meshopt.encoder':MeshoptEncoder});const bytes=await io.writeBinary(doc);fs.mkdirSync('public/models',{recursive:true});fs.writeFileSync('public/models/light-and-shadows.glb',bytes);
  const n=p.getIndices()!.getCount()/3;fs.writeFileSync('scripts/geo/light-and-shadows/mesh-stats.json',JSON.stringify({triangles:n,bytes:bytes.byteLength},null,2)+'\n');if(bytes.byteLength>1500000)throw new Error('GLB exceeds budget');console.log(`Courtyard: ${n} triangles, ${bytes.byteLength} bytes`);g.dispose();
 }
