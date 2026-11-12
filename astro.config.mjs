@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import AstroPWA from '@vite-pwa/astro';
 import { rehypeFracGlue } from './src/lib/frac-glue.ts';
 import { topicJsBuild } from './scripts/lib/js-budget-build.ts';
+import { firstFramePreload } from './scripts/lib/first-frame-preload.ts';
 import { uiWordChunks } from './src/i18n/ui-build.ts';
 import { engineClientModules } from './src/engines/core/loading-build.ts';
 
@@ -38,6 +39,8 @@ export default defineConfig({
   integrations: [
     react(),
     mdx({ rehypePlugins: [rehypeFracGlue] }),
+    // Before AstroPWA: it adds modulepreload links to the 3D topic pages the service worker then precaches.
+    firstFramePreload(),
     // Dev server: no service worker (devOptions.enabled is false by default).
     AstroPWA({
       base: pwaBase,

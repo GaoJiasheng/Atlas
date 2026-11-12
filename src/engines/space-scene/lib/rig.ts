@@ -22,12 +22,9 @@ import { OPPOSITE_MOVEMENTS, type Movement } from '../../../lib/anatomy';
 import { smoothstep01 } from './pose';
 import type { Vec3 } from './math';
 
-export const JOINT_PREFIX = 'joint:';
-
-/** `joint:shoulder.l` → `shoulder.l`; anything else → null. */
-export function jointOf(ref: string): string | null {
-  return ref.startsWith(JOINT_PREFIX) ? ref.slice(JOINT_PREFIX.length) : null;
-}
+// The parts every stage reads (contraction scale, muscle parts, joint refs) live in rig-stage.ts, which the
+// 3D stage imports on its own; the joint maths below load only with the topics that move a rig.
+export { JOINT_PREFIX, jointOf, MAX_SHORTEN, MAX_SHORTEN_CAP, DEFAULT_BULGE, STRIPE_OPACITY, contractScale, musclePartIds } from './rig-stage';
 
 export type Angles = Partial<Record<Movement, number>>;
 
@@ -136,27 +133,6 @@ export function lerpAngles(a: Angles, b: Angles, k: number): Angles {
 /* Contraction                                                         */
 /* ------------------------------------------------------------------ */
 
-/** Most a muscle shortens along its fibres at contraction 1 (docs/16 §6.4). */
-export const MAX_SHORTEN = 0.2;
-/** Most any vertex moves toward the origin, as a fraction of the fibre length (soft cap). */
-export const MAX_SHORTEN_CAP = 0.12;
-/** Default belly swell at contraction 1, as a fraction of its thickness. */
-export const DEFAULT_BULGE = 0.08;
-/** Strongest the signal stripes get over the muscle colour (docs/16 §9 M7). */
-export const STRIPE_OPACITY = 0.35;
-
-/**
- * Fallback without fibre data: scale the part about its centre, shorter
- * along its longest axis and fatter across it (`half` = half extents).
- */
-export function contractScale(half: readonly number[], c: number, bulge = DEFAULT_BULGE): Vec3 {
-  const k = Math.min(1, Math.max(0, c));
-  const long = [0, 1, 2].reduce((best, i) => ((half[i] ?? 0) > (half[best] ?? 0) ? i : best), 0);
-  const out: Vec3 = [1 + bulge * k, 1 + bulge * k, 1 + bulge * k];
-  out[long] = 1 - MAX_SHORTEN * 0.6 * k;
-  return out;
-}
-
 /** A `contract` animation's level at `phase` (0..amount..0 at `hz`), weighted by the run energy. */
 export function contractLevel(amount: number, hz: number, phase: number, energy = 1): number {
   return amount * ((1 - Math.cos(2 * Math.PI * hz * phase)) / 2) * energy;
@@ -192,28 +168,6 @@ export function exerciseLoop(keyCount: number, tempo: readonly number[] | undefi
   t -= holdEnd;
   if (t < up) return along(up, false);
   return { from: 0, to: 0, k: 1 };
-}
-
-/* ------------------------------------------------------------------ */
-/* Muscle ↔ part links                                                 */
-/* ------------------------------------------------------------------ */
-
-interface MusclePart {
-  id: string;
-  muscle?: string | undefined;
-  context?: boolean | undefined;
-}
-
-/**
- * Parts showing a shared muscle id: parts that link it, or a head of it (a
- * muscle whose parent chain reaches it); both sides of a pair.
- */
-export function musclePartIds(parts: readonly MusclePart[], muscleId: string, parentOf: ReadonlyMap<string, string | undefined>): string[] {
-  const covers = (m: string | undefined) => {
-    for (let cur = m, n = 0; cur && n < 16; cur = parentOf.get(cur), n++) if (cur === muscleId) return true;
-    return false;
-  };
-  return parts.filter((p) => !p.context && covers(p.muscle)).map((p) => p.id);
 }
 
 /* ------------------------------------------------------------------ */

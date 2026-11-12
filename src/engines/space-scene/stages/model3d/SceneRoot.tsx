@@ -19,7 +19,7 @@ import { expectsModel, type StageBridge } from '../../bridge';
 import { resolveAllPartDisplays } from '../../lib/visibility';
 import { explodeStages, targetExplodeAmount } from '../../lib/explode';
 import { bendAxisIndex } from '../../lib/bend';
-import { jointOf, musclePartIds } from '../../lib/rig';
+import { musclePartIds } from '../../lib/rig-stage';
 import { activeSites } from '../../lib/sites';
 import { sensesMotionBlocked, stepRunTime } from '../../lib/run-clock';
 import { animationsByPart } from '../../lib/animation';
@@ -58,6 +58,7 @@ import { simEffects, type SimEffects } from '../../lib/sim/bind';
 import { shiftDelays } from '../../lib/sim/shift';
 import type { Filing } from '../../lib/sim/field';
 import { kits } from './kits';
+import { needsMotion as motionStage } from '../../first-frame';
 import { filingMatrices, filingsCard } from './geometry';
 import type { Matrix4 } from 'three';
 import type { OrbitSession } from '../../lib/sim/orbit-session';
@@ -498,14 +499,7 @@ export function SceneGraph({ store, ui, bridge, data, fitness, playable, chapter
   const equipmentStyle = useMemo(() => styles.styleFor({ color: 'rubber', tint: 'token:neutral' }), [styles]);
   const rootRef = useRef<Group>(null);
   // Only topics with a rig, contraction or exercises run the MotionDriver (machines and insects never pay for it).
-  const needsMotion = useMemo(
-    () =>
-      data.rig !== undefined ||
-      fitness !== undefined ||
-      data.animations.some((a) => a.kind === 'contract' || (a.kind === 'sequence' && (jointOf(a.target) !== null || a.keys.some((k) => k.contract !== undefined)))) ||
-      Object.values(data.poses ?? {}).some((p) => Object.keys(p.contract).length > 0 || Object.keys(p.joints).length > 0),
-    [data.rig, data.animations, data.poses, fitness],
-  );
+  const needsMotion = useMemo(() => motionStage(data, fitness), [data, fitness]);
 
   /* ---------------- poses ---------------- */
   // One stable transform per (pose, part): PartNode eases whenever its target object changes.

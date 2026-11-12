@@ -65,7 +65,7 @@ import type { Box3Like } from '../../lib/parts';
 import { isLabelGestureEvent } from '../../lib/label-gesture';
 import { animationAngle, animationScale3 } from '../../lib/animation';
 import { explodeOffset, stagedAmount } from '../../lib/explode';
-import { contractScale, STRIPE_OPACITY } from '../../lib/rig';
+import { contractScale, STRIPE_OPACITY } from '../../lib/rig-stage';
 import { damp, DEG2RAD, easeInOutCubic, normalize3, type Vec3 } from '../../lib/math';
 import { isRest, lerpTransform, restTransform, sampleSequence, sequenceLength, smoothstep01, type PartTransform } from '../../lib/pose';
 import { keepAnimating, MAX_DT, prefersReducedMotion, useRuntime } from './runtime';

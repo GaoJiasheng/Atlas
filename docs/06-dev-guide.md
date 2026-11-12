@@ -2210,6 +2210,7 @@ core 演示系统（字幕卡、两级进度条、自动播放、语音、拍键
 - 示例（sample-space）：第 03 章两拍（一拍 `hide` + 三个零件标注，一拍命名预设 `sample-left` 的镜头 + 两个组标注），两个命名预设，正文一个 `<FlyTo>`；第 04 章 = 生物特性（sweep 躯干带 U 领片与空心管、双侧的眼 / 腿 / 翅、腿绕髋关节摆动、姿态 `sample-open`、命名剖切 `sample-cross`、淡显机器，三拍），`units` 25 cm / 单位。
 - 计数（sample-space，1920×1080；18 个零件（3 对双侧）+ 1 个 context 墙）：静止 25–27 draw calls、~45 k 三角形；FLOW +2 calls。
 - 包体：舞台 chunk ~225 KB gz（three + R3F 为主；圆角盒用 `RoundedBoxGeometry`；写实轮次的 `extrude` / 贯流叶片引入 `ExtrudeGeometry` / `Shape` 一族，+10 KB，`panelHole` 仍手工三角化）。GLTF 加载器单独成 chunk（21 KB gz），只有写了 `mesh` 的主题才加载。
+- 首帧按需模块（docs/02 §性能预算）：主题数据决定的懒加载件（卡片、舞台驱动、试一试求解器与 sim 工具、kit）列在 `first-frame.ts`，构建末尾 `scripts/lib/first-frame-preload.ts` 把这份清单连同共享 chunk 写成主题页的 `<link rel="modulepreload">`，`scripts/js-budget.ts` 也按它计数。新加一个按数据懒加载的件，要在 `first-frame.ts` 里登记，否则它又会在请求链末尾才被发现（`tests/js-budget.test.ts` 查每页的 chunk 都有 preload）。只有部分主题用到、舞台又要同步调用的代码做成 kit（`stages/model3d/kits.ts`：body、field、bend），Model3DStage 渲染前等齐；bend 在浏览器构建里经 `lib/bend.client.ts` 转发（`core/loading-build.ts`），Node 侧测试仍直接用 `lib/bend.ts`。舞台常驻代码只从 `lib/rig-stage.ts` 取 rig 规则，`lib/rig.ts` 其余的关节数学随 MotionDriver 走。
 
 ## MathScene（讲解优先的课，docs/15 §10）
 

@@ -83,6 +83,7 @@ import { SIM_KEYS } from '../core/controls';
 import type { OrbitSession } from './lib/sim/orbit-session';
 import { readSim } from './lib/sim/runtime';
 import { readOrbitRuntime } from './lib/sim/orbit-resource';
+import { preloadStageKits } from './stages/model3d/kits';
 import './space-scene.css';
 
 const MicroscopeCard = lazy(() => import('./hud/MicroscopeField').then(m => ({ default: m.MicroscopeCard })));
@@ -783,6 +784,8 @@ function resource<T>(load: () => Promise<T>) {
 const readTestHooks = resource(() => import('./test-hooks'));
 export default function SpaceSceneEntry(props: EngineViewProps) {
   const file = (props.data as SpaceSceneData).parts;
+  // The page preloads the topic's kits (scripts/lib/first-frame-preload.ts); evaluate them before the stage asks.
+  if (!import.meta.env.SSR) preloadStageKits(file);
   if (!import.meta.env.SSR && file.sim) readSim(file.sim.kind);
   const orbitRuntime = file.sim?.orbitRotation ? readOrbitRuntime() : null;
   // Same test/development host gate used by the airfoil sample API.

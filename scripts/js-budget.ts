@@ -7,13 +7,15 @@ import { resolve, dirname, relative } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
+import { topicGlossary } from '../src/engines/core/reader-data';
+import { firstFrameModules } from '../src/engines/space-scene/first-frame';
 
 // space-scene is a ratchet (docs/02 target 300 KB): lowered as the 3D stage is split further, never raised.
-// 2026-11-09: full bilingual first frame peaks at 466.73 / 439.64 KB;
-// round up, then leave 2 KB for small changes. The 400 KB SpaceScene goal remains open.
-// Not counted: rich-text and GlossaryCard (idle-prefetched, about 9 KB per page). Counting them gives 477.77 / 449.33 KB
-// against these budgets, so doing it needs a decision on the budgets, not a quiet raise (docs/gavin-todo.md decision 6).
-export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 469, 'math-scene': 300, 'time-scene': 442, simulation: 300 };
+// 2026-11-12: everything a plain visit loads is counted, including the glossary card and its rich-text renderer that
+// the host fetches once the view is idle (about 9 KB; uncounted before). SpaceScene then peaks at 474.43 KB
+// (sample-space; real topics ≤ 465.93) and TimeScene at 449.05 KB, with no code added to TimeScene: about 3 KB
+// is left above each peak. The 400 KB SpaceScene goal remains open.
+export const BUDGET_KB: Readonly<Record<string, number>> = { 'space-scene': 477, 'math-scene': 300, 'time-scene': 452, simulation: 300 };
 export interface Chunk { imports: string[]; dynamicImports: string[]; modules: string[] }
 export interface BudgetResult { topic: string; locale?: string; engine: string; gzipKB: number; budgetKB: number; files: string[] }
 
@@ -42,7 +44,8 @@ function asset(url: string): string {
   return url.slice(at).split(/[?#]/)[0]!;
 }
 
-export function measureBudgets(dist = 'dist', topics?: readonly string[]): BudgetResult[] {
+/** `firstVisit`: only what a plain visit to the page loads (no glossary card, no deep-link-only parts): the build preloads these. */
+export function measureBudgets(dist = 'dist', topics?: readonly string[], { firstVisit = false } = {}): BudgetResult[] {
   const root = resolve(dist);
   if (!existsSync(resolve(root, 'en/topics'))) throw new Error(`Build first: ${root}/en/topics is missing`);
   const graph: Record<string, Chunk> = {};
@@ -128,7 +131,9 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
       }
     }
     // Selected conditional feature roots are added below; never count unrelated dynamic imports.
-    for (const suffix of firstScreenModules(engine, data, html)) {
+    // The host fetches the glossary card (and its rich-text renderer) on its own once the view has mounted.
+    const loads = [...firstScreenModules(engine, data, html, !firstVisit), ...(!firstVisit && topicGlossary(data).length ? ['widgets/GlossaryCard.tsx'] : [])];
+    for (const suffix of loads) {
       const id = moduleChunk(suffix);
       if (id) roots.add(id); // In an older/eager build it is already in the entry closure.
     }
@@ -141,55 +146,22 @@ export function measureBudgets(dist = 'dist', topics?: readonly string[]): Budge
   }));
 }
 
-function firstScreenModules(engine: string, data: any, html = ''): string[] {
+function firstScreenModules(engine: string, data: any, html = '', deepLinks = true): string[] {
   const modules: string[] = [];
   const add = (path: string) => modules.push(`${engine}/${path}`);
   if (engine === 'space-scene') {
     const file = data.parts, sim = file.sim;
-    const stage = (name: string) => add(`stages/model3d/${name}.tsx`);
-    const hud = (name: string) => add(`hud/${name}.tsx`);
-    if (sim) {
-      add('lib/sim/sim-tools-runtime.ts');
-      if (sim.bind.some((b: any) => 'part' in b && b.fill)) add('lib/sim/part-fill-runtime.ts');
-      if ([...sim.controls, ...sim.outputs].some((field: any) => field.format === 'time')) add('lib/sim/time-text-runtime.ts');
-      const model = ({ 'life-cycle': 'lifecycle', magnet: 'magnet-solver', table: 'table-solver' } as Record<string, string>)[sim.kind] ?? sim.kind;
-      add(`lib/sim/${model}.ts`);
-      add('explorer/TryIt.tsx');
-      // The try-it card's own diagrams (each one fetched only for the sims that have it).
-      if (sim.circuit?.diagram) hud('CircuitCard');
-      if (sim.energy) hud('EnergyCard');
-      if (sim.lifeCycle) hud('CycleCard');
-      if (sim.sort) hud('KeyCard');
-      if (sim.microscope) hud('MicroscopeField');
-      if (sim.airfoil) { add('explorer/AirfoilPlot.tsx'); add('explorer/AirfoilPressure.tsx'); }
-      if (/&quot;curve&quot;:\[0,\{&quot;x&quot;/.test(html)) add('explorer/TryCurve.tsx');
-      if (!sim.orbitRotation) stage('TimelineClock');
-      if (sim.orbitRotation) { stage('OrbitSceneRoot'); stage('OrbitDriver'); add('lib/sim/orbit-session.ts'); }
-      if (sim.senses?.profile === 'sound-only') stage('SoundClock');
-      if (sim.airfoil) add('explorer/AirfoilDriver.tsx');
-      if (sim.bind.some((b: any) => 'part' in b && b.span)) stage('SpanDriver');
-      if (sim.bind.some((b: any) => 'flow' in b && b.airfoilFlow)) stage('AirfoilFlow');
-      if (sim.overlays.length) stage('SimOverlays');
-      const overlayModules: Record<string, string> = { 'force-arrows': 'ForceArrows', 'force-vectors': 'ForceVectors', 'energy-bars': 'EnergyBars', 'catalogue-sky': 'CatalogueSky', 'paraxial-eye': 'SensesOverlays', 'longitudinal-wave': 'SensesOverlays', 'sound-echo-pulse': 'SoundEchoPulse', 'shadow-cast': 'ShadowCast' };
-      for (const overlay of sim.overlays) if (overlayModules[overlay.kind]) stage(overlayModules[overlay.kind]!);
-      if (sim.overlays.some((o: any) => o.kind === 'energy-bars')) hud('EnergyBarLabels');
-      if (sim.kind === 'senses') { hud('SensesStageLabel'); hud('SensesNotesContent'); }
+    // Data-selected modules of a plain visit (space-scene/first-frame.ts; the page preloads them).
+    for (const path of firstFrameModules(data)) add(path);
+    if (deepLinks) {
+      // Fetched when the try-it card or a linked chapter shows them: counted as first-frame for a deep link.
+      if (sim?.airfoil) { add('explorer/AirfoilPlot.tsx'); add('explorer/AirfoilPressure.tsx'); }
+      if (sim && /&quot;curve&quot;:\[0,\{&quot;x&quot;/.test(html)) add('explorer/TryCurve.tsx');
+      if (sim && /&quot;(?:predict|record)&quot;:\[0,/.test(html)) add('explorer/TryRecord.tsx');
+      // GLTF body helpers follow the glb (a skinned body part) and the topic's exercises.
+      if (file.rig && file.parts.some((p: any) => p.context && p.mesh && !p.twinOf)) for (const name of ['Mannequin', 'WireBody', 'Hands']) add(`stages/model3d/${name}.tsx`);
+      if (file.rig && data.training) for (const name of ['Mannequin', 'WireBody', 'Hands', 'Equipment']) add(`stages/model3d/${name}.tsx`);
     }
-    hud(sim?.microscope ? 'MicroscopeField' : sim?.foodWeb ? 'FoodWebCard' : sim?.orbitRotation ? 'OrbitCard' : sim?.sort ? 'KeyCard' : sim?.lifeCycle ? 'CycleCard' : sim?.energy ? 'EnergyCard' : sim?.circuit?.diagram ? 'CircuitCard' : 'PartChainCard');
-    if (file.sites) hud('SitesOverlay');
-    if (file.groups.some((g: any) => g.scale)) hud('GroupScaleBars');
-    if (file.views.insets?.length) hud('InsetFrames');
-    if (file.animations.length) stage('AnimClocks');
-    if (file.mechanisms?.length) stage('MechanismDriver');
-    if (file.flows.length) stage('Flows');
-    if (file.parts.some((p: any) => p.mesh)) stage('GltfSource');
-    // Stage kits (stages/model3d/kits.ts) the stage waits for before it renders.
-    if (file.rig) add('stages/model3d/bodyKit.ts');
-    if (sim?.magnet || file.parts.some((p: any) => p.primitive?.kind === 'filings' || p.extra?.some((e: any) => e.kind === 'filings'))) add('lib/sim/field.ts');
-    const moving = file.rig || data.fitness || file.animations.some((a: any) => a.kind === 'contract' || (a.kind === 'sequence' && (a.target.startsWith('joint:') || a.keys.some((k: any) => k.contract)))) || Object.values(file.poses ?? {}).some((p: any) => Object.keys(p.contract ?? {}).length || Object.keys(p.joints ?? {}).length);
-    if (moving) stage('MotionDriver');
-    // GLTF body helpers are requested only when the topic contains exercise poses.
-    if (file.rig && data.training) { stage('Mannequin'); stage('WireBody'); stage('Hands'); stage('Equipment'); }
   } else if (engine === 'math-scene') {
     const model = data.lesson?.steps[0]?.beats[0]?.model;
     const kind = model?.kind ?? data.lesson?.steps[0]?.views[0] ?? 'bar';

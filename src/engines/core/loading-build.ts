@@ -47,6 +47,11 @@ export function engineClientModules(): Plugin {
         const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
         if (resolved && /\/space-scene\/lib\/sim\/(bind|carrier|replay|text|table)\.ts$/.test(resolved.id)) return resolved.id.replace(/[^/]+$/, 'sim-tools.client.ts');
       }
+      // The strip-bending maths arrive as a stage kit (stages/model3d/kits.ts, its one direct importer in the browser).
+      if (!importer?.endsWith('/stages/model3d/kits.ts') && /(?:^|\/)bend(?:\.ts)?$/.test(source)) {
+        const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
+        if (resolved?.id.endsWith('/space-scene/lib/bend.ts')) return resolved.id.replace(/\.ts$/, '.client.ts');
+      }
       if (!/(?:^|\/)time-text(?:\.ts)?$/.test(source)) return;
       const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
       if (resolved?.id.endsWith('/space-scene/lib/sim/time-text.ts')) return resolved.id.replace(/\.ts$/, '.client.ts');

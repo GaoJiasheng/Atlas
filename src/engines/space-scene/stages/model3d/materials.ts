@@ -41,7 +41,7 @@
 import { Color, DoubleSide, FrontSide, MeshStandardMaterial, Vector3, type Plane } from 'three';
 import type { MaterialLook } from '../../lib/color';
 import type { TextureKit } from './textures';
-import { DEFAULT_BULGE, MAX_SHORTEN, MAX_SHORTEN_CAP } from '../../lib/rig';
+import { DEFAULT_BULGE, MAX_SHORTEN, MAX_SHORTEN_CAP } from '../../lib/rig-stage';
 
 export interface PartUniforms {
   /** Orbit sims (OrbitDriver): 0 = the studio lights, 1 = lit only by the analytic Sun along `uOrbitSun` (world, unit) with `uOrbitFill` on the night side, 2 = self-lit (the Sun). */

@@ -24,10 +24,8 @@ import type { Vec3 } from './math';
 export const BEND_MODES = ['bridge', 'cantilever'] as const;
 export type BendMode = (typeof BEND_MODES)[number];
 
-/** The vertex attribute marking the vertices of the bent primitive (1; the part's `extra` pieces 0). */
-export const BEND_ATTRIBUTE = 'atlasBend';
-/** Slices the bent primitive is cut into along its axis (the stage builds it so). */
-export const BEND_SLICES = 64;
+export { BEND_ATTRIBUTE, BEND_SLICES, bendAxisIndex } from './bend-axis';
+
 /** Segments of the solved centre line. */
 export const BEND_SEGMENTS = 64;
 /** The largest bend drawn, as a share of the span / reach (a limp strip hanging down). */
@@ -42,15 +40,6 @@ export interface BendShape {
   /** cantilever: where the clamp lets go, along the axis from the centre; `reach` beyond it is free. */
   clamp?: number;
   reach?: number;
-}
-
-/** The index of a ±X / ±Z unit axis (0 or 2) and its sign; null for any other. */
-export function bendAxisIndex(axis: readonly number[]): { index: 0 | 2; sign: 1 | -1 } | null {
-  const [x = 0, y = 0, z = 0] = axis;
-  if (Math.abs(y) > 1e-9) return null;
-  if (Math.abs(Math.abs(x) - 1) < 1e-9 && Math.abs(z) < 1e-9) return { index: 0, sign: x > 0 ? 1 : -1 };
-  if (Math.abs(Math.abs(z) - 1) < 1e-9 && Math.abs(x) < 1e-9) return { index: 2, sign: z > 0 ? 1 : -1 };
-  return null;
 }
 
 /** The value a shape bends by: ≤ 0 straight, at most BEND_MAX of the span / reach. */
