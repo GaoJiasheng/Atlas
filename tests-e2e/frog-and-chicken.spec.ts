@@ -27,13 +27,16 @@ async function open(page: Page, query: string, locale = 'en') {
 async function stableAnchor(page: Page, id: string, away?: Anchor) {
   let previous: Anchor | null = null;
   let current: Anchor | null = null;
+  let still = 0;
   await expect.poll(async () => {
     current = await anchor(page, id);
     const left = !away || (current !== null && Math.hypot(current.x - away.x, current.y - away.y) > 1);
     const stable = left && current && previous && current.shown && current.onScreen && Math.hypot(current.x - previous.x, current.y - previous.y) < 0.1;
     previous = current;
-    return Boolean(stable);
-  }, { intervals: [150], timeout: 15_000 }).toBe(true);
+    // Several still readings in a row: a loaded machine can hold one mid-flight frame across a single poll.
+    still = stable ? still + 1 : 0;
+    return still >= 3;
+  }, { intervals: [150], timeout: 20_000 }).toBe(true);
   return current!;
 }
 
@@ -132,8 +135,13 @@ test.describe('frog-and-chicken', () => {
     await page.keyboard.press('.');
     await expect.poll(() => sim(page)).toEqual(linked);
     expect(await page.evaluate(() => window.__atlas!.state().camera)).toEqual(camera);
-    const after = await stableAnchor(page, 'chicken-marker');
-    expect(Math.hypot(after.x - spot.x, after.y - spot.y)).toBeLessThan(2);
+    // On-demand rendering under load can hold a mid-flight frame long enough to look settled, so wait for the marker to arrive.
+    await expect
+      .poll(async () => {
+        const after = await anchor(page, 'chicken-marker');
+        return after?.shown ? Math.hypot(after.x - spot.x, after.y - spot.y) : Infinity;
+      }, { intervals: [150], timeout: 20_000 })
+      .toBeLessThan(2);
     await open(page, 'ch=inside-the-egg&b=2&sim=egg-open.off');
     expect((await sim(page)).outputs['egg-view']).toBe('closed');
   });

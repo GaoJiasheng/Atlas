@@ -7,14 +7,19 @@ async function present(page: Page, path: string) {
   await page.evaluate(() => window.__atlas!.setMode('presentation', true, { instant: true }));
   await expect.poll(() => page.evaluate(() => window.__atlas!.state().modes.presentation)).toBe(true);
 }
+/** The panel sits inside the viewport and above the presentation card, once both have finished moving in. */
 const clear = async (page: Page, panel: string) => {
-  const box = await page.locator(panel).boundingBox();
-  const card = await page.locator('[data-hud-panel="present"]').boundingBox();
-  expect(box).not.toBeNull();
-  expect(card).not.toBeNull();
-  expect(box!.x).toBeGreaterThanOrEqual(0);
-  expect(box!.x + box!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
-  expect(box!.y + box!.height).toBeLessThanOrEqual(card!.y);
+  const width = page.viewportSize()!.width;
+  await expect
+    .poll(async () => {
+      const box = await page.locator(panel).boundingBox();
+      const card = await page.locator('[data-hud-panel="present"]').boundingBox();
+      if (!box || !card) return 'missing';
+      if (box.x < 0 || box.x + box.width > width) return `x ${box.x}..${box.x + box.width} of ${width}`;
+      if (box.y + box.height > card.y) return `bottom ${box.y + box.height} below card ${card.y}`;
+      return 'clear';
+    }, { timeout: 10_000 })
+    .toBe('clear');
 };
 
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
@@ -41,7 +46,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 
 test('the panel leaves with the presentation and the HUD card takes over', async ({ page }) => {
   await present(page, '/en/topics/cells/?ch=microscope-try-it&b=1');
-  await expect(page.locator('[data-location="stage"]')).toBeVisible();
+  await expect(page.locator('[data-location="stage"]')).toBeVisible({ timeout: 15_000 });
   await page.evaluate(() => window.__atlas!.setMode('presentation', false, { instant: true }));
   await expect(page.locator('[data-location="stage"]')).toHaveCount(0);
 });

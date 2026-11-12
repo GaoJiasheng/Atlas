@@ -22,16 +22,17 @@ async function open(page: Page, width: number, height: number, query = '') {
   await expect.poll(() => framing(page), { timeout: 20_000 }).not.toBeNull();
 }
 
-/** The camera has stopped moving (the stage renders on demand; software GL is slow). */
+/** The camera has stopped moving (the stage renders on demand; software GL is slow, and a loaded machine can stall a frame for one poll). */
 async function settled(page: Page) {
   let last = '';
+  let still = 0;
   await expect
     .poll(async () => {
       const now = JSON.stringify(await camera(page));
-      const still = now === last;
+      still = now === last ? still + 1 : 0;
       last = now;
-      return still;
-    }, { timeout: 20_000, intervals: [600] })
+      return still >= 3;
+    }, { timeout: 30_000, intervals: [600] })
     .toBe(true);
 }
 
@@ -68,6 +69,8 @@ test('1180 × 820: the view sits in a free rectangle between the HUD blocks and 
 });
 
 test('a camera the reader moved is left alone when the HUD changes, until the next chapter', async ({ page }) => {
+  // Three settle waits plus two re-fit waits: more than the default minute on a loaded machine.
+  test.setTimeout(120_000);
   await open(page, 1180, 820);
   await settled(page);
   const box = (await page.locator('.space-stage').boundingBox())!;
