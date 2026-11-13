@@ -2,13 +2,12 @@
 
 所有要粘贴的文字都在 `listing.md`，截图在 `screenshots/`。按顺序做，打勾即可。
 
-## 0. 提交前必须先解决
+## 0. 提交前（11-13 已备好）
 
-- [ ] **决定年龄分级。** 按诚实作答结果是 **13+**（高于 10–12 岁的读者）。原因见 `listing.md`「Age rating」：历史主题写到真实的屠杀和战争，新加坡史写到鸦片。想拿 9+ 只能改内容，不能靠填表。
-- [ ] **建隐私政策页**（Apple 强制要求）：`https://atlas.gavin.pub/privacy/`。文案在 `listing.md`「URLs」，把 `CONTACT_EMAIL` 换成你的邮箱。
-- [ ] **建支持页**：`https://atlas.gavin.pub/support/`，文案同上，页面上要有联系方式。
-- [ ] 部署后用浏览器打开这两个地址，确认看到的是正文。现在 curl 也返回 200，但那只是 Cloudflare 对未知路径的回退页，不能作数。
-- [ ] 确认 **build 5** 已上传并处理完成（Xcode Organizer 上传）。截图基于之后一个提交，但截到的 8 个画面不涉及那次改动（只改了 flower-and-seed）。
+- [x] 年龄分级：Gavin 11-13 定为如实填写，结果 **13+**（依据见 `listing.md`「Age rating」）
+- [x] 隐私政策页 `https://atlas.gavin.pub/privacy/`、支持页 `https://atlas.gavin.pub/support/` 已上线，中英双语，联系邮箱 gaojiasheng.him@gmail.com
+- [x] 截图 11-13 按 build 10 之后的 main 重拍
+- [ ] 确认 **build 10** 在 App Store Connect → TestFlight 里显示「已完成处理」（Gavin 11-13 已上传）
 
 ## 1. 新建 App
 
@@ -60,13 +59,13 @@ App Store Connect → Apps → 「+」→ New App
 
 ## 7. 选 Build 和合规
 
-- [ ] Build → 「+」→ 选 **build 5**
+- [ ] Build → 「+」→ 选 **build 10**
 - [ ] 加密问题：`Info.plist` 已声明无非豁免加密，一般不会再问；如果问，选 None of the algorithms mentioned above
 
 ## 8. App Review Information
 
 - [ ] Sign-in required：**不勾选**
-- [ ] Contact：填你的姓名、电话、邮箱
+- [ ] Contact：填你的姓名、电话、邮箱（gaojiasheng.him@gmail.com）
 - [ ] Notes 粘贴：
 
 ```

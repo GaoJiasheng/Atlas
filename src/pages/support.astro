@@ -1,0 +1,20 @@
+---
+/** App Store support URL (docs/app-store/listing.md "URLs"). */
+import InfoPage from '../components/InfoPage.astro';
+import { SUPPORT_EMAIL, INFO_UPDATED } from '../lib/support';
+---
+<InfoPage
+  title={{ en: 'Atlas support', zh: 'Atlas 支持' }}
+  email={SUPPORT_EMAIL}
+  updated={INFO_UPDATED}
+  body={[
+    {
+      en: 'For questions, corrections to the content, or problems with the app, write to the address below.',
+      zh: '有问题、发现内容错误或 App 出现故障，请写信到下面的地址。',
+    },
+    {
+      en: 'Atlas needs no account and works offline. To reset your theme and language, delete and reinstall the app.',
+      zh: 'Atlas 无需账号，可离线使用。如需重置外观和语言设置，请删除后重新安装。',
+    },
+  ]}
+/>

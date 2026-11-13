@@ -1,13 +1,9 @@
 # Atlas: App Store listing
 
-Bundle id `pub.gavin.atlas` · version 1.0 · build 5 · iPad only (`TARGETED_DEVICE_FAMILY = 2`), so no iPhone screenshots are needed.
+Bundle id `pub.gavin.atlas` · version 1.0 · build 10 · iPad only (`TARGETED_DEVICE_FAMILY = 2`), so no iPhone screenshots are needed.
 Researched 2026-11-09 against Apple's screenshot spec and age-rating definitions (links at the end). Character limits are checked by script; every block below is ready to paste.
 
-Three things need Gavin before submission:
-
-1. **The privacy policy page does not exist yet, and Apple requires one.** See "URLs".
-2. **The age rating comes out at 13+, above the 10–12 readership.** See "Age rating".
-3. **The app must stay free.** Content is CC BY-NC-SA (`LICENSE-CONTENT`); a paid app or in-app purchase would conflict with the NonCommercial term.
+Decided 2026-11-13: the support and privacy pages are live with Gavin's contact address, and the age rating is answered honestly at **13+** (see "Age rating"). The app must stay free: content is CC BY-NC-SA (`LICENSE-CONTENT`), and a paid app or in-app purchase would conflict with the NonCommercial term.
 
 Wording rule used throughout: Guideline 2.3.8 reserves "For Kids" and "For Children" for the Kids Category, so the copy says "upper-primary pupils" and the app is not placed in that category.
 
@@ -87,7 +83,7 @@ Atlas is an independent project and is not affiliated with or endorsed by the Mi
 science,history,geography,biology,PSLE,Singapore,primary,school,anatomy,solar system,fractions,WW2
 ```
 
-### What's New (build 5)
+### What's New (first update)
 
 App Store Connect hides this field on a first release. Keep it for the first update, or for TestFlight's "What to Test".
 
@@ -167,7 +163,7 @@ Atlas 是独立项目，与新加坡教育部没有隶属或背书关系。许�
 科学,历史,地理,生物,小学,新加坡,教材,人体,太阳系,分数,二战,双语,PSLE
 ```
 
-### 此版本的新内容（build 5）
+### 此版本的新内容（第一次更新）
 
 首次发布时 App Store Connect 不显示此栏，留给第一次更新或 TestFlight 的"测试内容"。
 
@@ -182,12 +178,10 @@ Atlas 是独立项目，与新加坡教育部没有隶属或背书关系。许�
 | Field | Value | Status |
 |---|---|---|
 | Marketing URL (optional) | `https://atlas.gavin.pub/en/` | Live |
-| Support URL (required) | `https://atlas.gavin.pub/support/` | **Page needs creating** |
-| Privacy Policy URL (required) | `https://atlas.gavin.pub/privacy/` | **Page needs creating** |
+| Support URL (required) | `https://atlas.gavin.pub/support/` | Live since 2026-11-13 |
+| Privacy Policy URL (required) | `https://atlas.gavin.pub/privacy/` | Live since 2026-11-13 |
 
-These two paths currently answer HTTP 200, but that is misleading. Cloudflare Pages returns the root language-redirect page for any unknown path (an invented path gives the identical 745-byte response), and `dist/` has no such pages. Apple also expects the support page to offer a way of contacting you, and the home page has none.
-
-Suggested text for the two pages. Replace `CONTACT_EMAIL` first.
+Both pages are bilingual on one URL (`src/pages/support.astro`, `privacy.astro`, shared `src/components/InfoPage.astro`), with the contact address from `src/lib/support.ts`. `tests-e2e/info-pages.spec.ts` checks that they are real pages, not Cloudflare's fallback to the root redirect. The text below is what they say (`CONTACT_EMAIL` = gaojiasheng.him@gmail.com).
 
 **Support**
 
@@ -271,7 +265,7 @@ Apple defines it as "aggressive physical conflict or harm involving humans in li
 
 Answer: **Data Not Collected.** In App Store Connect, under App Privacy, choose "No, we do not collect data from this app".
 
-Checked 2026-11-09 at commit `594109ba`:
+Checked 2026-11-09 at commit `594109ba`, and the build scan, native networking and screenshot-run request log rechecked 2026-11-13 after build 10. The only scan hits are the physics word `amplitude` in sound and wave code, not the Amplitude SDK:
 
 | Check | Result |
 |---|---|
@@ -309,6 +303,6 @@ Answer: **No non-exempt encryption.** `ios/App/App/Info.plist` already sets `ITS
 
 Apple still accepts 12.9-inch, but it is optional and scaled from the 13-inch set when absent. Skipping it is fine.
 
-Order: home, air-conditioner cutaway, ear close-up, WW2 Malaya map, Zheng He's Indian Ocean map, fractions lesson, solar system, Saturn V stages. Taken from a production build at commit `594109ba` in a touch context. Renderer telemetry and keyboard hints are hidden and the side panels folded. Regenerate with `pnpm tsx scripts/app-store-shots.ts` after serving `dist/` on port 4240.
+Order: home, air-conditioner cutaway, ear close-up, WW2 Malaya map, Zheng He's Indian Ocean map, fractions lesson, solar system, Saturn V stages. Retaken 2026-11-13 from a production build of main after build 10, in a touch context. Renderer telemetry and keyboard hints are hidden and the side panels folded. Regenerate with `pnpm tsx scripts/app-store-shots.ts` after serving `dist/` on port 4240.
 
 Sources: [Screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/) · [Age ratings values and definitions](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions/) · [Updated age ratings](https://developer.apple.com/news/?id=ks775ehf)

@@ -1,0 +1,24 @@
+---
+/** App Store privacy policy URL (docs/app-store/listing.md "URLs"). */
+import InfoPage from '../components/InfoPage.astro';
+import { SUPPORT_EMAIL, INFO_UPDATED } from '../lib/support';
+---
+<InfoPage
+  title={{ en: 'Atlas privacy policy', zh: 'Atlas 隐私政策' }}
+  email={SUPPORT_EMAIL}
+  updated={INFO_UPDATED}
+  body={[
+    {
+      en: 'Atlas does not collect, store on any server, share or sell any personal data.',
+      zh: 'Atlas 不收集、不在任何服务器上存储、不共享也不出售任何个人数据。',
+    },
+    {
+      en: 'The iPad app makes no network requests. It has no accounts, advertising, analytics or tracking. Read-aloud uses the speech voice built into your iPad. Your language, theme and display preferences are saved only on your device and are removed when you delete the app.',
+      zh: 'iPad App 不发出任何网络请求，没有账号、广告、统计或追踪。朗读功能使用 iPad 自带的语音。语言、外观和显示偏好只保存在你的设备上，删除 App 后即被移除。',
+    },
+    {
+      en: 'The website atlas.gavin.pub uses no analytics or cookies. Like any website, its host (Cloudflare) processes technical request data such as IP addresses in order to deliver the pages.',
+      zh: '网站 atlas.gavin.pub 不使用统计工具或 Cookie。与所有网站一样，托管方 Cloudflare 为传送网页会处理 IP 地址等技术性请求数据。',
+    },
+  ]}
+/>

@@ -1,0 +1,73 @@
+---
+/**
+ * Bilingual standalone page for the App Store's required support and privacy URLs (`/support/`, `/privacy/`).
+ * One URL serves both languages, so the English and Chinese text sit side by side rather than behind the locale switch.
+ */
+import '../styles/global.css';
+
+interface Section { en: string; zh: string }
+interface Props {
+  title: Section;
+  /** Paragraphs, each given in both languages. */
+  body: Section[];
+  email: string;
+  updated: Section;
+}
+const { title, body, email, updated } = Astro.props;
+const root = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en" data-theme="paper" data-theme-default="paper">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title.en} · Atlas</title>
+    <meta name="description" content={body[0]!.en} />
+    <link rel="icon" type="image/svg+xml" href={`${root}/favicon.svg`} />
+  </head>
+  <body>
+    <main id="atlas-main" class="info">
+      {(['en', 'zh'] as const).map((l) => (
+        <section class="info__lang" lang={l === 'zh' ? 'zh-Hans' : 'en'}>
+          <h1 class="info__title">{title[l]}</h1>
+          {body.map((p) => <p>{p[l]}</p>)}
+          <p>
+            {l === 'en' ? 'Contact: ' : '联系方式：'}
+            <a class="info__mail" href={`mailto:${email}`}>{email}</a>
+          </p>
+          <p class="info__updated">{updated[l]}</p>
+        </section>
+      ))}
+      <p class="info__home"><a href={`${root}/en/`}>Atlas</a> · <a href={`${root}/zh/`}>Atlas 中文</a></p>
+    </main>
+    <style>
+      .info {
+        box-sizing: border-box;
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: calc(2.5rem + var(--safe-top)) 1.25rem calc(2.5rem + var(--safe-bottom));
+      }
+      .info__lang + .info__lang {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .info__title {
+        font-family: var(--font-serif);
+        font-size: 1.75rem;
+        line-height: 1.25;
+        margin: 0 0 1rem;
+      }
+      .info p { margin: 0 0 0.9rem; }
+      .info a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
+      .info__updated { color: var(--ink-muted); font-size: 0.875rem; }
+      .info__home { margin-top: 2rem; }
+    </style>
+  </body>
+</html>
