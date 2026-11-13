@@ -1,5 +1,7 @@
 # Atlas 上架清单（App Store Connect）
 
+> **2026-11-13 已提交审核**（1.0 build 10，状态：正在等待审核）。实际填法与下文的差异：英文名用 `Atlas: A Textbook That Moves`（App 记录早已以此名建好），中文名 `Atlas：会动的课本`（`Atlas：图解课本` 已被占用）；销售范围 148 个国家或地区，去掉欧盟 27 国（未声明 DSA 交易商身份，Gavin 定）；发布方式为过审后**自动发布**（Gavin 定）；版权行 `2026 Gavin Gao`；只传了 iPad 13 英寸截图。之前 build 9 没进 Organizer，所以没传上去；build 10 是 11-13 重新导入后上传的。
+
 所有要粘贴的文字都在 `listing.md`，截图在 `screenshots/`。按顺序做，打勾即可。
 
 ## 0. 提交前（11-13 已备好）
