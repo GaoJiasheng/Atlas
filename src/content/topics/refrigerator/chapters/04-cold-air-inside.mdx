@@ -1,0 +1,93 @@
+---
+id: cold-air-inside
+order: 4
+title: { en: "One coil, two temperatures", zh: "一个蒸发器，两个温度" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: evap-fan
+  run: true
+  cutaway: centre
+  layers: [cabinet, cold-side, machine, air-water]
+  hide: [food-items, frost]
+  labels: [evap-fan, damper, air-duct, sensors]
+  camera: { position: [4.9, 0.95, -0.03], target: [0, 0.8, -0.03], fov: 28 }
+  summary: { en: "There is only one cold coil, hidden behind the freezer. A fan blows its cold air round the freezer, and a damper lets some of it down into the fridge below.", zh: "整台冰箱只有一个蒸发器，藏在冷冻室后面。风扇把冷空气吹遍冷冻室，一道风门放一部分下到冷藏室。" }
+  beats:
+    - camera: { position: [1.7, 1.5, -0.05], target: [0, 1.4, -0.1], fov: 30 }
+      labels: [evap-fan, evap-cover, evaporator]
+      caption: { en: "Behind the freezer's back panel sits the only cold coil. A small fan above it pulls air through the coil and blows it out, cold, into the freezer.", zh: "冷冻室后板里面，是整台冰箱唯一的冷盘管。上方一只小风扇把空气抽过盘管，再把变冷的空气吹进冷冻室。" }
+    - part: null
+      labels: [freezer-liner, evap-cover]
+      caption: { en: "Air in the freezer goes round and round: out at the top of the back panel, along the compartment, and back through the coil. This keeps it at about −18 °C.", zh: "冷冻室里的空气不停地循环：从后板顶部吹出，流过整个室，再回到盘管。这样它就保持在约 −18℃。" }
+    - part: damper
+      pose: damper-open
+      labels: [damper, air-duct, mullion]
+      caption: { en: "When the damper opens, part of the cold air goes down a duct on the back wall and out of vents at each level of the fridge. It returns through a slot in the front of the mullion.", zh: "风门打开时，一部分冷空气沿后壁的风道往下走，从冷藏室各层的出风口吹出，再从中梁前部的回风口回去。" }
+    - part: null
+      labels: [sensors, control-board, lamp]
+      caption: { en: "Temperature sensors report to the control board. It sets the speed of the compressor and opens or closes the damper. A switch at the door turns the lamp on.", zh: "温度传感器把读数告诉控制板。控制板决定压缩机转多快、风门开还是关。门边的开关管着灯。" }
+  index:
+    parts: [evap-fan, evap-cover, evaporator, air-duct, damper, mullion, sensors, control-board, lamp]
+---
+
+<Lang en>
+
+A fridge like this one has only one cold coil, the evaporator, and it is hidden behind the freezer's back panel. The cold has to reach both compartments, so a small fan moves the air. In this design the fan uses about <Num s="S1">4 W</Num>; fans in real fridges use <Num s="S20">3 to 7 W</Num>. Moving air carries heat from the food to the coil. <FlyTo preset="coldspot">Look behind the freezer panel</FlyTo>
+
+In the freezer the air goes round and round. The fan blows it out at the top of the back panel; it travels along the compartment, picking up heat, and is drawn back through the coil at the bottom. That keeps the freezer at about <Num s="S1">−18 °C</Num>.
+
+The fridge compartment gets only part of that cold air. A <Term id="damper">damper</Term>, a small flap at the top of a duct on the back wall, opens to let cold air down. The air comes out of vents at each level, flows forward over the shelves and returns through a slot in the front of the mullion. When the fridge is cold enough, the damper closes again, and the fridge stays near <Num s="S1">4 °C</Num>.
+
+Each compartment has a temperature <Term id="sensor">sensor</Term>, and a third sits on the coil. The control board reads them and decides how fast the compressor turns, when the damper opens and when to warm the coil to clear it (chapter 5). A switch at the door frame turns the lamp on when the door opens and off when it closes.
+
+<More title={{ en: "Cold air sinks", zh: "冷空气往下沉" }}>
+
+Cold air is denser than warm air, so it sinks. That is why the cold air enters the fridge from vents high on the back wall and spreads down over the shelves. In secondary school this kind of heat transfer, carried by a moving gas or liquid, is called convection. Here the fan does most of the work, and sinking cold air helps.
+
+</More>
+
+<More title={{ en: "What a sensor does", zh: "传感器做什么" }}>
+
+The sensors are thermistors: small parts whose electrical resistance changes with temperature. The control board measures that resistance and works out the temperature. Turning the setting up or down does not give "more cold"; it changes the temperature the board aims for, so the compressor runs faster or slower, longer or shorter.
+
+</More>
+
+<More title={{ en: "One coil, dry air", zh: "一个盘管，空气较干" }}>
+
+The air for both compartments passes the same coil at about <Num s="S2">−25 °C</Num>, and the coil takes water out of it as ice (chapter 5). This can leave the air in the fridge compartment dry, so food left uncovered dries out. Some larger fridges use a separate coil for each compartment; avoiding very low humidity in the fridge is one of the reasons given.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+像这样的冰箱，只有一个冷盘管，也就是蒸发器，藏在冷冻室后板里面。冷要送到两个室，就得靠一只小风扇推动空气。这项设计里的风扇约用 <Num s="S1">4 W</Num>；真实冰箱的风扇用 <Num s="S20">3–7 W</Num>。流动的空气把热从食物带到盘管上。<FlyTo preset="coldspot">看看冷冻室后板里面</FlyTo>
+
+冷冻室里的空气不停地循环。风扇把它从后板顶部吹出去，空气流过整个室、带走热，再从后板底部被吸回盘管。这样冷冻室就保持在约 <Num s="S1">−18℃</Num>。
+
+冷藏室只分到一部分冷空气。后壁风道顶上有一块小门片，叫<Term id="damper">风门</Term>，打开时冷空气就沿风道往下走，从各层的出风口吹出，往前流过搁架，再从中梁前部的回风口回去。冷藏室够冷了，风门就关上，冷藏室保持在约 <Num s="S1">4℃</Num>。
+
+两个室各有一个温度<Term id="sensor">传感器</Term>，盘管上还有一个。控制板读取它们的数值，决定压缩机转多快、风门什么时候开、什么时候给盘管加热清理（第 5 章）。门框边的开关在开门时让灯亮，关门时让灯灭。
+
+<More title={{ en: "Cold air sinks", zh: "冷空气往下沉" }}>
+
+冷空气比暖空气密度大，所以会往下沉。这就是冷空气从后壁高处的出风口进入冷藏室、再往下铺过搁架的原因。中学科学会把这种靠流动的气体或液体带走热的方式叫作“对流”。这里主要靠风扇推动，冷空气下沉也帮了一把。
+
+</More>
+
+<More title={{ en: "What a sensor does", zh: "传感器做什么" }}>
+
+这些传感器是热敏电阻：一种电阻随温度变化的小元件。控制板量出电阻，就算出了温度。把设定调高或调低，并不是给出“更多的冷”，而是改变控制板要达到的目标温度，于是压缩机转得快一点或慢一点、开得久一点或短一点。
+
+</More>
+
+<More title={{ en: "One coil, dry air", zh: "一个盘管，空气较干" }}>
+
+两个室的空气都要经过同一个约 <Num s="S2">−25℃</Num> 的盘管，盘管会把空气里的水分变成冰留在盘管上（第 5 章）。这可能让冷藏室的空气偏干，没盖好的食物容易变干。有些较大的冰箱两个室各用一个盘管，原因之一就是避免冷藏室的空气太干。
+
+</More>
+
+</Lang>

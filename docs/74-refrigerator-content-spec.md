@@ -790,3 +790,63 @@ idle 指"开机周期之间压缩机歇着"，平衡压力约等于 −18 °C �
 | 开机率 64 % 无法在 PLATE 上表现为一开一停 | 读数只有"运转 / 歇着"两态 | 细看写"等效满速比例"，变频机实际低速长开 |
 | sim 控件可见性 / context 绑定 / pose 优先级 | 可能影响第 02、05 章的写法 | §9 施工前夹具验证 |
 | 本地市场布局与冷凝器做法未统计 | 0.1-1、0.1-2 的默认可能与"最常见"不符 | P33 统计后再定；改布局只动坐标与风道 |
+
+---
+
+## 17. 施工记录（2026-11-15，Gavin 已按默认定稿；分支 claude/refrigerator）
+
+### 17.1 事实复核后改动的数字（来源与原文摘录见 `data/sources.json`、`data/SOURCES.md`）
+
+| 项 | spec 原值 | 施工值 | 原因 |
+|---|---|---|---|
+| 设计厨房 | 30 °C | **28 °C** | 气象局年均约 27.5 °C、5 月均 28.6 °C；30 °C 让年耗电超过 3 tick 上限 |
+| 冷冻室壁厚 | 侧 / 后 50 mm、顶 60 mm | **65 mm** | DOE 拆解：上冷冻机型冷冻室壁 5.3–7.9 cm |
+| 漏热 | 23 + 35 + 10 = 69 W | **20 + 33 + 9 = 62 W** | 随厨房温度与壁厚；热桥约 15 %（DOE 仅传导的箱口边缘约 17 %） |
+| 开机率 / 平均功率 / 平均放热 | 64 % / 38 W / 107 W | **57 % / 34 W / 96 W** | 同上 |
+| 年耗电 | 375 kWh | **317 kWh（厨房常年 28 °C 的模拟值，不是标签值）** | 375 超过本尺寸（调整容积约 425 L）的 3 tick 法定上限约 328 kWh；本地卖场 300–400 L 上冷冻标签值 270–449、中位约 318 |
+| 化霜 | 160 W、20 min、每天 2 次 → 39 kWh | **250 W、约 10 min、约每天 1 次 → 15 kWh** | DOE 拆解 390–413 W、4.8–8 min、压缩机累计运转 10.5–14 h 一次；某厂手册 250 W |
+| −25 °C 饱和压力 | 0.060 MPa | **0.058 MPa**（PLATE 0.058；停机 0.079；28 °C 断电约 0.38） | NIST；0.061 是 −24 °C 的值 |
+| 新加坡湿度 | 84 % | **约 82 %** | 气象局原文 |
+| CFC | 1928 年前后 | **约 1930 年** | 1928 无一手来源；Midgley & Henne 1930、Science History Institute |
+| 冰 | 1840 年代美国冰已到新加坡 | **删**；改用 1854 黄埔冰屋、1861 Tudor 接手 | 没有找到来源 |
+| 用电占比 | 550 户一周计量 | **删 550 户细节**，17 %（2018 新闻稿）与约 18 %（2016）并列 | NEA 页面上没有 550 户 |
+| 停电保冷 | USDA FSIS | **FDA + 弗吉尼亚卫生局** | FSIS 拒绝自动访问 |
+| 毛细管 | 内径 0.6–0.9 mm、长 2–4 m（TYPICAL） | **0.7 mm、3 m 只作 DESIGN**；与回气管换热段 1.2–1.8 m 有来源 | 内径与总长无一手来源 |
+| 侧壁表面 37 °C、排气温度、果蔬盒保湿、开门停风扇 | 待核 | **删** | 没有来源（开门停风扇只写"门开关点亮灯"） |
+| PLATE "侧壁 °C" 一行 | 30 → 37 | 改为 **Heat out / 放热 0 → 168 W** 与 **Fridge air**（跟随试一试输出，只在第 02 章） | 侧壁温度删了；放热行直接显示能量守恒 |
+| 冷凝器布局 | "东南亚常见" | **DESIGN："一种常见做法"**；第 06 章细看另讲底部风冷盘管 | DOE 称热壁冷凝器常见于冷柜与小冰箱；读到的一份亚洲厂商手册是底部风冷 |
+| 上 / 下冷冻 | 待核 | **默认成立**：Courts 双门 109 上 / 39 下（300–400 L 36 / 13）；Best Denki 16 / 12（26 未标） | Harvey Norman、Gain City 拒绝自动访问 |
+| 课纲页码 | — | P4 Heat pp. 76–77；P5 Water（Standard）pp. 49–50；能量转换是 P6 p. 80，"能量不会用完"超出课纲，正文写明 | 已核官方 PDF |
+
+### 17.2 试一试（厨房 28 °C、初温 4 °C、压缩机不工作）
+
+300 s / 600 s：满 + 关 4.2 / 4.5；满 + 薄 4.7 / 5.3；满 + 开 6.7 / 9.1；空 + 关 5.3 / 6.6；空 + 薄 7.8 / 11.0；空 + 开 16.2 / 22.2（`tests/space-scene/refrigerator-topic.test.ts` 核对）。
+
+### 17.3 引擎行为验证（§9 三条）与 E-FR2
+
+1. 不在 `try.vary` / `also` 里的控件不出现在试一试卡上（`explorer/TryIt.tsx` 只渲染 vary + also）。所以 E-FR2 走数据退路：sim 加 step 控件 `heater-w`（0 / 250 W），第 05 章拍 3、4 `sim.set` 它；bind glow 到 `defrost-heater`、visible 到 `meltwater`。**引擎零改动。**
+2. bind `visible` 可以作用于 context 零件（`food-items` 随 `contents` 显示 / 隐藏；validate 不拦，单测核对 `simEffects`）。
+3. 姿态优先级：sim bind 的姿态压在章 / 拍姿态之上，但没映射的值（`setup = closed`）不写姿态，所以章 / 拍的 `doors-open` 仍然生效；`setup = open` 时 `fresh-door-open` 胜出。单测核对。
+
+### 17.4 与 §3–§5 的差异
+
+- `side-condenser` 不用 `bilateral`：两侧蛇形管 + 顶部前沿横管是一根管（每侧 5 程），流沿真实管走，一次绘制。
+- 冷冻门门封并入 `freezer-door`（`door-gaskets` / `magnet-strips` 只在冷藏门上），这样 `fresh-door-open` 只开冷藏门时冷冻门封不跟着转；冷冻门不放门架。
+- 风门框并入 `mullion`，`damper` 只剩门片（姿态只转门片）。
+- 门开关灯不发光（`setup` 是选择控件，glow 需要数值）。
+- `air-door` 拆成 `air-door-out`（冷）与 `air-door-in`（热 → 冷）；另加第六组 `kitchen-air`（厨房空气：`air-kitchen` 与两条开门气流），让第 04 章剖面里不出现厨房一侧的暖气流。
+- 活塞沿 Z 来回（缸轴沿 Z、在 x = 0），中线剖切正好把缸剖开看见活塞。
+- 几何由 `scripts/geo/refrigerator/build-parts.mjs` 生成（文字在同目录 `part-text.json`）。
+
+### 17.5 参考图（`scripts/geo/refrigerator/refs/`，gitignore）
+
+10 张：US4489470（热壁冷凝器，立式冷柜）、US4735062 图 1–2（上冷冻剖面、门框热液回路）、US4852361 图 2（风扇、风道、风门）、US5499514（蒸发器、化霜加热器、排水）、US5205723（往复式全封闭压缩机剖面）、US4147037（毛细管—回气管换热）为美国专利附图（公有领域）；Commons 3 张（CC BY-SA，只看比例，不取品牌标识）。URL、字节数、SHA-256 见 `data/SOURCES.md` 末尾。没有找到上冷冻冰箱侧壁冷凝管的专利图，所以每侧回数是 DESIGN。
+
+### 17.6 验收数字（2026-11-15，SwiftShader，1920 × 1080）
+
+- 绘制调用：静止 48（目标 < 50）；运转最多 53（第 06 章，目标 < 60）；三角形约 0.227 M（目标 < 0.3 M）。控制板移到箱体背面靠上（原 spec 在机械仓里，在第 04 章剖面里被压缩机挡住）。
+- JS：refrigerator 页 429.23 KB gz（space-scene 上限 477 KB）。
+- `pnpm shoot refrigerator --beats`：31 拍 0 失败，beat links 31 / 31。
+- 写实轮（协调者复审后）：两扇门细把手、上 / 中 / 下铰链盖、底部前方踢脚通风格栅、调平脚、门与箱体倒圆、门封线加深；箱内搁架改有色玻璃加深色前沿、果蔬盒加深、食物统一中间调；绘制调用不变（静止 48、运转 53，0.233 M 三角形）。
+- 插图：封面 `refrigerator` 与章图 `refrigerator-gasket-section`（第 02 章）、`refrigerator-frost`（第 05 章，`invert={false}`）、`refrigerator-icebox`（第 07 章）已接入（codex/img4 96d9a621），图注用 Codex 交付的原文；`src/lib/illustrations.json` 加封面覆盖掩码；`status: published`，smoke 计数随之更新（62 个主题、science 20、徽章 124、ww2 图版号 61），`tests/figure-geometry.test.ts` 的不反相名单加 `refrigerator-frost`。
+- 门槛：check、validate、test（6,946）、build、e2e（refrigerator + smoke）全绿；shoot：paper 与 cinema（zh）31 拍 0 失败、无漏标、chapter highlights all on screen；keys 0 失败，布局 18 个尺寸 0 问题（含 390 × 844 手机与 iPad 竖横）。

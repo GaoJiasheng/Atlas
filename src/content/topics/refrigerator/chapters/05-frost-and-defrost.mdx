@@ -1,0 +1,112 @@
+---
+id: frost-and-defrost
+order: 5
+title: { en: "Frost and defrosting", zh: "结霜与化霜" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: evaporator
+  run: false
+  cutaway: none
+  pose: frost-thick
+  layers: [cabinet, cold-side, machine, air-water, kitchen-air]
+  hide: [evap-cover, outer-case]
+  labels: [evaporator, frost, defrost-heater, sensors]
+  camera: { position: [0.9, 1.75, -1.2], target: [0, 1.4, -0.25], fov: 30 }
+  summary: { en: "Each time the door opens, warm, damp kitchen air gets in. Its water vapour freezes onto the coldest surface, the coil, so a frost-free fridge melts the frost away on a timer and drains the water out.", zh: "每次开门，温暖潮湿的厨房空气就会进去。水汽在最冷的地方，也就是蒸发器上结成霜，所以无霜冰箱定时把霜化掉，再把水排出去。" }
+  beats:
+    - part: null
+      camera: inside
+      pose: frost-thin
+      labels: [fresh-door, lamp]
+      sim:
+        set: { setup: open }
+      caption: { en: "Each time the door opens, warm, damp kitchen air flows in. Singapore's air is humid all year, so it carries plenty of water vapour into the cabinet.", zh: "每次开门，温暖潮湿的厨房空气就流进去。新加坡一年到头都很潮湿，空气把大量水汽带进箱内。" }
+    - part: evaporator
+      pose: frost-thick
+      labels: [evaporator, frost]
+      caption: { en: "The water vapour meets the coil at about −25 °C and turns to ice on its fins. Over many openings the frost grows thicker, blocking the air and slowing the flow of heat.", zh: "水汽碰到约 −25℃ 的盘管，在鳍片上变成冰。门开得多了，霜越积越厚，挡住空气，也让热更难传过去。" }
+    - part: defrost-heater
+      pose: frost-thin
+      labels: [defrost-heater, sensors]
+      sim:
+        set: { heater-w: 250 }
+      caption: { en: "To defrost, the compressor and fan stop and a 250 watt heater under the coil switches on for about 10 minutes in this design. The frost melts, and a sensor on the coil switches the heater off once it has warmed up.", zh: "化霜时，压缩机和风扇停下，盘管下面的加热器通电，在这项设计里是 250 瓦、约 10 分钟。霜熔化成水；盘管回暖后，上面的传感器让加热器断电。" }
+    - part: drain-tray
+      camera: { position: [1.7, 1.0, -2.3], target: [0, 0.42, -0.25], fov: 30 }
+      labels: [drain-tube, drain-tray, compressor]
+      sim:
+        set: { heater-w: 250 }
+      caption: { en: "The meltwater runs down a drain tube into a tray on top of the warm compressor. There it evaporates back into the kitchen air, so nobody has to empty it.", zh: "化霜水顺着排水管流进压缩机顶上的蒸发盘。温热的压缩机把水蒸发回厨房的空气里，所以不用人去倒水。" }
+  index:
+    parts: [evaporator, frost, defrost-heater, sensors, drain-trough, drain-tube, drain-tray, compressor]
+---
+
+<Lang en>
+
+Each time the door opens, warm, damp kitchen air flows in. Singapore's air is humid all year: the mean relative humidity is around <Num s="S16">82 per cent</Num>. That air carries water vapour into the cabinet.
+
+The coldest surface inside is the coil, at about <Num s="S2">−25 °C</Num>. When water vapour reaches it, the water turns to ice on the fins as <Term id="frost">frost</Term>. This is one of the changes of state of water, the same family as the evaporation and condensation in <TopicLink slug="water" ch="the-water-cycle">The Sun drives the water cycle</TopicLink>. Every opening adds a little more. <FlyTo preset="coldspot">Look at the frosted coil</FlyTo>
+
+Frost is a poor conductor of heat, and it fills the gaps between the fins, so less air gets through and the coil takes in less heat. So the fridge has to <Term id="defrost">defrost</Term> the coil. The compressor and fan stop, and a heater under the coil is switched on: in this design <Num s="S1">250 W</Num> for about <Num s="S1">10 minutes</Num>, about <Num s="S1">once a day</Num>. The frost melts. A sensor on the coil switches the heater off once the coil has warmed up.
+
+The water drips into a trough under the coil, runs down a drain tube to the machine bay and collects in a tray on top of the compressor. The warm compressor evaporates it back into the kitchen air, so nobody has to empty the tray.
+
+That is what <Term id="frost-free">frost-free</Term> means. Frost still forms, but only on the hidden coil, and it is melted away automatically.
+
+<Figure src="figures/refrigerator-frost" invert={false} alt={{ en: "Parallel evaporator fins with frost on one half, eight tube ends and a U-shaped heater below.", zh: "蒸发器平行鳍片的一半结霜，可见八个管端，下方是 U 形加热管。" }} caption={{ en: "Frost on the fins of a fridge’s evaporator, with the defrost heater below.", zh: "冰箱蒸发器鳍片上的霜，下方是化霜加热管。" }} />
+
+<More title={{ en: "Ice straight from vapour", zh: "水汽直接变成冰" }}>
+
+Water vapour that meets a surface far below 0 °C can turn straight into ice without first becoming liquid. Secondary-school science calls this deposition. On a fridge coil both things happen: some vapour turns straight to ice, and some condenses into tiny droplets that then freeze. Either way the result is frost.
+
+</More>
+
+<More title={{ en: "Defrost uses electricity too", zh: "化霜也要用电" }}>
+
+In this design, defrosting uses about <Num s="S1">250 W</Num> × <Num s="S1">1/6 hour</Num> × <Num s="S1">365</Num> ≈ <Num s="S1">15 kWh</Num> a year. Tests on real top-freezer fridges found heaters of <Num s="S20">390 to 413 W</Num>, switched on for <Num s="S20">4.8 to 8 minutes</Num> after every <Num s="S20">10.5 to 14 hours</Num> of compressor running; one maker's manual lists a <Num s="S21">250 W</Num> heater. Simple controls start a defrost after a set running time, usually <Num s="S20">10 to 12 hours</Num>; adaptive controls wait longer when little frost has built up. The heat that melts the frost must itself be carried out again afterwards; this model leaves that small amount out.
+
+</More>
+
+<More title={{ en: "Why the drain is closed off", zh: "排水管为什么要“封”住" }}>
+
+The drain tube joins the cold space behind the freezer panel to the warm machine bay. Some designs add a trap to the tube so that water can run down but air cannot flow up through it. Otherwise warm, damp air from the bay would keep reaching the coil and add to the frost.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+每次开门，温暖潮湿的厨房空气就流进去。新加坡一年到头都很潮湿：年平均相对湿度约 <Num s="S16">82 %</Num>。这样的空气把水汽带进了箱内。
+
+箱内最冷的表面是盘管，约 <Num s="S2">−25℃</Num>。水汽碰到它，就在鳍片上变成冰，这就是<Term id="frost">霜</Term>。这是水的一种物态变化，和<TopicLink slug="water" ch="the-water-cycle">太阳推动水循环</TopicLink>里讲的蒸发、凝结同属一类。每开一次门，霜就多一点。<FlyTo preset="coldspot">看看结了霜的盘管</FlyTo>
+
+霜是热的不良导体，又把鳍片之间的缝隙填满，过风少了，盘管能吸的热也少了。所以冰箱要给盘管<Term id="defrost">化霜</Term>。压缩机和风扇停下，盘管下面的加热器通电：在这项设计里是 <Num s="S1">250 W</Num>，约 <Num s="S1">10 分钟</Num>，约<Num s="S1">每天一次</Num>。霜熔化了。盘管回暖后，上面的传感器就让加热器断电。
+
+化霜水滴进盘管下面的接水槽，顺着排水管流到机械仓，落进压缩机顶上的蒸发盘。温热的压缩机把水蒸发回厨房的空气里，所以不用人去倒。
+
+这就是<Term id="frost-free">无霜</Term>的意思：霜照样会结，只是结在藏起来的盘管上，并且被自动化掉。
+
+<Figure src="figures/refrigerator-frost" invert={false} alt={{ en: "Parallel evaporator fins with frost on one half, eight tube ends and a U-shaped heater below.", zh: "蒸发器平行鳍片的一半结霜，可见八个管端，下方是 U 形加热管。" }} caption={{ en: "Frost on the fins of a fridge’s evaporator, with the defrost heater below.", zh: "冰箱蒸发器鳍片上的霜，下方是化霜加热管。" }} />
+
+<More title={{ en: "Ice straight from vapour", zh: "水汽直接变成冰" }}>
+
+水汽碰到远低于 0℃ 的表面时，可以不经过液态，直接变成冰，中学科学把这叫作“凝华”。冰箱的盘管上两种情况都有：一部分水汽直接变成冰，一部分先凝结成小水珠再冻住。不管哪一种，结果都是霜。
+
+</More>
+
+<More title={{ en: "Defrost uses electricity too", zh: "化霜也要用电" }}>
+
+在这项设计里，化霜一年约用 <Num s="S1">250 W</Num> × <Num s="S1">1/6 小时</Num> × <Num s="S1">365</Num> ≈ <Num s="S1">15 kWh</Num>。对真实上冷冻冰箱的测试发现，加热器为 <Num s="S20">390–413 W</Num>，压缩机每运转 <Num s="S20">10.5–14 小时</Num>，就通电 <Num s="S20">4.8–8 分钟</Num>；一家厂商的说明书写的是 <Num s="S21">250 W</Num>。简单的控制方式在运转满一段时间后开始化霜，通常是 <Num s="S20">10–12 小时</Num>；自适应控制在霜结得少时会等得更久。融霜用的热之后还要再搬出去一次，这个模型没有算这一小份。
+
+</More>
+
+<More title={{ en: "Why the drain is closed off", zh: "排水管为什么要“封”住" }}>
+
+排水管把冷冻室后板里的冷空间和温暖的机械仓连在一起。有的设计在管上加一个存水弯，让水能流下去，空气却不能顺着管往上走。否则机械仓里温暖潮湿的空气会一直跑到盘管上，霜就结得更多。
+
+</More>
+
+</Lang>

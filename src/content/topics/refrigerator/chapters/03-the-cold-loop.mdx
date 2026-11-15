@@ -1,0 +1,130 @@
+---
+id: the-cold-loop
+order: 3
+title: { en: "Switch on: the refrigerant loop", zh: "通电：冷媒循环" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: compressor
+  run: true
+  cutaway: none
+  layers: [cold-side, machine, refrigerant]
+  hide: [outer-case, side-panel-right, bay-grille, evap-cover, food-items, frost]
+  labels: [compressor, side-condenser, capillary-tube, evaporator]
+  camera: { position: [2.53, 2.37, -4.11], target: [0, 0.7, -0.2], fov: 30 }
+  summary: { en: "Switched on, a small amount of refrigerant goes round a sealed loop: squeezed hot, cooled to a liquid in the side walls, dropped in pressure in a thin tube, and boiled behind the freezer.", zh: "通电后，少量冷媒在密封的回路里一圈圈流动：被压缩变热，在侧壁里冷却成液体，经过细管降压，在冷冻室后面沸腾。" }
+  beats:
+    - part: null
+      caption: { en: "Switched on, a small amount of refrigerant goes round a sealed loop. Orange is hot, grey is near room temperature and blue-grey is cold. Close dots are liquid, spread-out dots are gas.", zh: "通电后，少量冷媒在密封的回路里一圈圈流动。橙色是热，灰色接近室温，青灰色是冷。点密是液体，点疏是气体。" }
+    - part: compressor
+      camera: bay
+      cutaway: centre
+      labels: [compressor, compressor-piston, compressor-motor]
+      caption: { en: "In this simulation the piston squeezes the gas from about 0.058 to about 0.53 megapascals, and squeezing makes it hot. The motor turns about 3,100 times a minute; here it is slowed right down.", zh: "在这个模拟里，活塞把气体从约 0.058 兆帕压到约 0.53 兆帕，气体被压缩就变热。电机每分钟约转 3,100 圈，画面里放慢了很多。" }
+    - part: side-condenser
+      labels: [side-condenser, frame-pipe]
+      caption: { en: "The hot gas runs through pipes fixed inside the side walls and gives its heat through the steel to the kitchen. In this simulation it condenses at about 40 °C, then runs round the door frame.", zh: "热气体流过贴在侧壁里面的管，热穿过钢板传给厨房。在这个模拟里，它约在 40℃ 凝结成液体，再绕箱口门框走一圈。" }
+    - part: capillary-tube
+      camera: { position: [2.0, 1.0, -2.6], target: [0.1, 0.4, -0.25], fov: 30 }
+      labels: [filter-drier, capillary-tube, suction-line]
+      caption: { en: "The liquid passes a filter-drier, then a long, very thin capillary tube, where its pressure falls bit by bit. The tube is soldered to the return pipe, so the two swap heat.", zh: "液体先经过干燥过滤器，再进入又细又长的毛细管，压力沿着管一点点降下来。毛细管焊贴在回气管上，两根管互相交换热。" }
+    - part: evaporator
+      camera: coldspot
+      labels: [evaporator, evap-fan]
+      caption: { en: "Behind the freezer the refrigerant boils at about −25 °C, taking heat from the air. In this simulation the 55 grams of refrigerant go round the loop in about two minutes.", zh: "在冷冻室后面，冷媒约在 −25℃ 沸腾，从空气里吸热。在这个模拟里，55 克冷媒约两分钟走完一圈。" }
+  index:
+    parts: [compressor, compressor-piston, compressor-motor, discharge-line, side-condenser, frame-pipe, filter-drier, capillary-tube, evaporator, suction-line]
+---
+
+<Lang en>
+
+Switched on, this fridge runs the same loop as an air conditioner, explained step by step in <TopicLink slug="aircon" ch="switch-on">Switch on: the refrigerant loop</TopicLink>. The refrigerant boils at low pressure, taking in heat, and condenses at high pressure, giving heat out. Three things are different here: a piston compressor, a <Term id="condenser">condenser</Term> hidden in the side walls, and a thin tube in place of a valve.
+
+The compressor's piston draws in refrigerant gas at about <Num s="S2">0.058 MPa</Num> and squeezes it to about <Num s="S2">0.53 MPa</Num>. A gas can be squeezed into less space, as <TopicLink slug="states-of-matter" ch="gases">Gases spread and squash</TopicLink> shows, and squeezing it makes it hot. <FlyTo preset="bay">Start at the compressor</FlyTo>
+
+The hot gas flows into the condenser, pipes fixed to the inside of both side panels. Heat passes through the steel into the kitchen air. At <Num s="S2">0.53 MPa</Num> the refrigerant condenses at <Num s="S2">40 °C</Num>, so it turns into a warm liquid. Its last stretch runs round the front of the cabinet and keeps the door frame dry.
+
+The liquid then enters the <Term id="capillary-tube">capillary tube</Term>. In this design it is <Num s="S1">3 m</Num> long with a bore of only <Num s="S1">0.7 mm</Num>, so the pressure falls bit by bit along it. The tube is soldered to the return pipe, and the two swap heat.
+
+In the <Term id="evaporator">evaporator</Term> behind the freezer the pressure is below that of the air around us, and the refrigerant boils at about <Num s="S2">−25 °C</Num>, taking heat from the air. At this simulated operating point the <Num s="S1">55 g</Num> of refrigerant goes round about every <Num s="S1">2 minutes</Num>. It is isobutane, called R600a; chapter 7 tells why.
+
+<More title={{ en: "Below air pressure", zh: "比大气压还低" }}>
+
+The pressure of the air around us is about <Num s="S2">0.101 MPa</Num>. At that pressure isobutane boils at about <Num s="S2">−11.75 °C</Num>. To boil at <Num s="S2">−25 °C</Num> it must be at a lower pressure, about <Num s="S2">0.058 MPa</Num>, roughly six-tenths of air pressure. Makers' notes say plainly that the evaporators of household fridges using it work below normal atmospheric pressure. So if the cold side of the loop ever leaked, air and damp would be drawn in rather than refrigerant pushed out, which is one reason the loop has a filter-drier.
+
+Between running periods, the pressure evens out round the loop at about <Num s="S2">0.079 MPa</Num>, the value for <Num s="S2">−18 °C</Num>. Switched off and left to warm up in a <Num s="S1">28 °C</Num> kitchen, it rises to about <Num s="S1">0.38 MPa</Num>.
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+The PLATE readings are worked out for this design study from published property data; they are not measurements. While running, the fridge uses <Num s="S1">60 W</Num>: <Num s="S1">56 W</Num> for the compressor and <Num s="S1">4 W</Num> for the fan. For every watt of electricity it moves <Num s="S1">1.8 W</Num> of heat, so it takes in <Num s="S1">108 W</Num> from inside the cabinet.
+
+Each kilogram of refrigerant takes in about <Num s="S1">261 kJ</Num> in the evaporator. Carrying <Num s="S1">108 W</Num> therefore needs about <Num s="S1">0.41 g</Num> of refrigerant a second, about <Num s="S1">1.5 kg</Num> an hour. About <Num s="S1">30 per cent</Num> of it is already gas when it enters the evaporator.
+
+To move that much gas at <Num s="S2">0.058 MPa</Num> the compressor turns about <Num s="S1">3,100</Num> times a minute. Variable-speed compressors for household fridges run between <Num s="S4">1,000 and 4,000</Num> revolutions a minute and draw about <Num s="S4">19 to 78 W</Num> across that range.
+
+</More>
+
+<More title={{ en: "A piston, not a rotor", zh: "活塞式，不是转子式" }}>
+
+The air conditioner's compressor uses a roller turning inside a cylinder. A fridge compressor of this kind uses a piston. Inside the sealed shell an electric motor turns a crankshaft, and a connecting rod pushes a piston back and forth in a cylinder. Each stroke sucks in a little gas and pushes it out at high pressure. In this design the cylinder holds <Num s="S1">8 cm³</Num>; one household compressor's data sheet gives <Num s="S4">7.2 cm³</Num>.
+
+At this simulated operating point the piston moves about <Num s="S1">50</Num> times a second. On screen it is slowed about <Num s="S1">40</Num> times so that the motion can be followed. A variable-speed compressor runs slowly for long periods instead of switching fully on and off; <TopicLink slug="aircon" ch="efficiency-and-use">Using it well</TopicLink> explains how the speed is changed.
+
+</More>
+
+<More title={{ en: "Why the return pipe is not cold", zh: "回气管为什么不冷" }}>
+
+The capillary tube is soldered along the outside of the return pipe, usually over <Num s="S43">1.2 to 1.8 m</Num>. The cold gas coming back from the evaporator cools the warm liquid in the capillary, from <Num s="S2">40 °C</Num> to an energy content of about <Num s="S1">260 kJ</Num> per kilogram instead of <Num s="S2">296 kJ</Num>. That leaves more room for heat to be taken in at the evaporator. At the same time the gas warms up, so it reaches the compressor near room temperature: about <Num s="S1">20 °C</Num> here, inside the usual range of <Num s="S3">20 to 32 °C</Num>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+通电后，这台冰箱走的是和空调同一个循环，<TopicLink slug="aircon" ch="switch-on">通电：冷媒循环</TopicLink>一章一步步讲过。冷媒在低压下沸腾、吸热，在高压下凝结、放热。这里有三处不同：活塞式压缩机、藏在侧壁里的<Term id="condenser">冷凝器</Term>，以及代替阀门的一根细管。
+
+压缩机的活塞吸进压力约 <Num s="S2">0.058 MPa</Num> 的冷媒气体，把它压到约 <Num s="S2">0.53 MPa</Num>。气体能被压进更小的空间，<TopicLink slug="states-of-matter" ch="gases">气体会散开，也能被压缩</TopicLink>一章讲过；气体被压缩就会变热。<FlyTo preset="bay">从压缩机看起</FlyTo>
+
+热气体流进冷凝器，也就是贴在两块侧板内面的管。热穿过钢板传给厨房的空气。在 <Num s="S2">0.53 MPa</Num> 下，冷媒在 <Num s="S2">40℃</Num> 凝结，变成温热的液体。最后一段管绕着箱口前沿走一圈，让门框保持干爽。
+
+接着，液体进入<Term id="capillary-tube">毛细管</Term>。在这项设计里，它长 <Num s="S1">3 m</Num>，内径只有 <Num s="S1">0.7 mm</Num>，所以压力沿着管一点点降下来。毛细管焊贴在回气管上，两根管互相交换热。
+
+冷冻室后面的<Term id="evaporator">蒸发器</Term>里，压力比我们周围的大气压还低，冷媒约在 <Num s="S2">−25℃</Num> 沸腾，从空气里吸热。气体再回到压缩机。在这个模拟运行点，<Num s="S1">55 克</Num>冷媒约每 <Num s="S1">2 分钟</Num>走完一圈。这种冷媒是异丁烷，代号 R600a，第 7 章会讲为什么用它。
+
+<More title={{ en: "Below air pressure", zh: "比大气压还低" }}>
+
+我们周围空气的压力约 <Num s="S2">0.101 MPa</Num>。在这个压力下，异丁烷约 <Num s="S2">−11.75℃</Num> 沸腾。要让它在 <Num s="S2">−25℃</Num> 沸腾，压力就得更低，约 <Num s="S2">0.058 MPa</Num>，大约是大气压的十分之六。厂商的技术资料写得很明白：用它的家用冰箱，蒸发器在低于大气压的状态下工作。所以回路的冷端一旦有漏点，会被吸进空气和水汽，而不是把冷媒漏出去；这是回路里装干燥过滤器的原因之一。
+
+两次运转之间，整个回路的压力趋于一致，约 <Num s="S2">0.079 MPa</Num>，也就是 <Num s="S2">−18℃</Num> 对应的值。断电后放在 <Num s="S1">28℃</Num> 的厨房里回暖，压力会升到约 <Num s="S1">0.38 MPa</Num>。
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+PLATE 块里的读数是按这项设计研究、用公开的物性数据算出来的，不是实测值。运转时，冰箱用电 <Num s="S1">60 W</Num>：压缩机 <Num s="S1">56 W</Num>，风扇 <Num s="S1">4 W</Num>。每用 1 瓦电，它搬走 <Num s="S1">1.8 W</Num> 的热，所以从箱内吸走 <Num s="S1">108 W</Num>。
+
+每千克冷媒在蒸发器里约吸收 <Num s="S1">261 kJ</Num>。要搬走 <Num s="S1">108 W</Num>，每秒就需要约 <Num s="S1">0.41 克</Num>冷媒，约每小时 <Num s="S1">1.5 kg</Num>。进蒸发器时，其中约 <Num s="S1">30 %</Num> 已经是气体。
+
+要在 <Num s="S2">0.058 MPa</Num> 下送走这么多气体，压缩机每分钟约转 <Num s="S1">3,100</Num> 圈。家用冰箱的变频压缩机，转速在每分钟 <Num s="S4">1,000–4,000</Num> 转之间，这个范围内用电约 <Num s="S4">19–78 W</Num>。
+
+</More>
+
+<More title={{ en: "A piston, not a rotor", zh: "活塞式，不是转子式" }}>
+
+空调的压缩机是一个在气缸里滚动的滚子。这类冰箱压缩机用的是活塞。密封外壳里，电机带动曲轴，连杆推着活塞在气缸里来回运动。每走一个来回，就吸进一小口气体，再以高压推出去。在这项设计里，气缸容积是 <Num s="S1">8 cm³</Num>；一款家用压缩机的数据表写的是 <Num s="S4">7.2 cm³</Num>。
+
+在这个模拟运行点，活塞每秒约来回 <Num s="S1">50</Num> 次。画面上放慢了约 <Num s="S1">40</Num> 倍，好让人看清。变频压缩机长时间低速运转，而不是全开、全停地切换；它怎样改变转速，见<TopicLink slug="aircon" ch="efficiency-and-use">用得好、用得省</TopicLink>。
+
+</More>
+
+<More title={{ en: "Why the return pipe is not cold", zh: "回气管为什么不冷" }}>
+
+毛细管沿着回气管外面焊在一起，换热的一段通常长 <Num s="S43">1.2–1.8 m</Num>。从蒸发器回来的冷气体，把毛细管里温热的液体进一步冷却：每千克液体含的能量从 <Num s="S2">296 kJ</Num> 降到约 <Num s="S1">260 kJ</Num>，在蒸发器里就能多吸一些热。同时，回气被加热，到压缩机时已接近室温：这里约 <Num s="S1">20℃</Num>，在通常的 <Num s="S3">20–32℃</Num> 之内。
+
+</More>
+
+</Lang>

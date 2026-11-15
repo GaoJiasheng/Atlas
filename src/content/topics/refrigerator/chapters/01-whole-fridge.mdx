@@ -1,0 +1,104 @@
+---
+id: whole-fridge
+order: 1
+title: { en: "Two doors, two temperatures", zh: "两扇门，两个温度" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [cabinet, cold-side, machine]
+  hide: [frost]
+  labels: [freezer-door, fresh-door, side-panel-right]
+  camera: { position: [2.57, 1.65, 4.19], target: [0, 0.7, 0], fov: 30 }
+  summary: { en: "A fridge is an insulated box with a machine that moves heat out of it. This one keeps the top compartment at about −18 °C and the bottom at about 4 °C.", zh: "冰箱是一个隔热的箱子，加上一台把热搬出箱子的机器。这台冰箱上层约 −18℃，下层约 4℃。" }
+  beats:
+    - caption: { en: "A two-door fridge with the freezer on top and the fridge below. This design study is about 1.7 metres tall and holds 350 litres.", zh: "一台双门冰箱，上面是冷冻室，下面是冷藏室。这项设计研究高约 1.7 米，容积 350 升。" }
+    - pose: doors-open
+      camera: inside
+      labels: [shelves, crisper, door-bins, lamp]
+      caption: { en: "With both doors open you can see the shelves, a crisper drawer at the bottom and bins on the inside of the door. A switch at the door frame turns the lamp on when the door opens.", zh: "两扇门打开，能看到搁架、底部的果蔬盒和门内侧的门架。门框上有一个开关，门一开，灯就亮。" }
+    - pose: doors-open
+      camera: inside
+      labels: [freezer-liner, fresh-liner, mullion]
+      caption: { en: "A thick insulated divider, the mullion, separates the two compartments. The freezer above is kept at about −18 °C and the fridge below at about 4 °C.", zh: "两个室之间隔着一道厚厚的隔热中梁。上面的冷冻室保持在约 −18℃，下面的冷藏室约 4℃。" }
+    - camera: back
+      labels: [bay-grille, outer-case]
+      caption: { en: "At the bottom of the back is the machine bay. The compressor that drives the cooling sits behind this cover.", zh: "背后底部是机械仓。推动整个制冷过程的压缩机，就在这块后盖里面。" }
+  index:
+    parts: [outer-case, freezer-door, fresh-door, shelves, crisper, door-bins, lamp, freezer-liner, fresh-liner, mullion, bay-grille]
+---
+
+<Lang en>
+
+A refrigerator does not make cold. It moves heat. The heat in the food, the shelves and the air inside is carried out of the box and given to the kitchen, and the machine has to keep doing this because heat keeps leaking back in. The carrier is a <Term id="refrigerant">refrigerant</Term>, a substance sealed in a loop of pipes that boils and condenses over and over again.
+
+This fridge has two compartments. The freezer on top is kept at about <Num s="S1">−18 °C</Num>, cold enough to keep food frozen hard. The fridge below is kept at about <Num s="S1">4 °C</Num>, just above freezing. Singapore's food agency advises <Num s="S17">4 °C</Num> or below for fridges and <Num s="S17">−18 °C</Num> or below for freezers, because bacteria grow fastest between <Num s="S17">5 and 60 °C</Num>.
+
+The model is a generic design study, not a real brand or model. It is <Num s="S1">600 mm</Num> wide, <Num s="S1">680 mm</Num> deep with its doors and <Num s="S1">1,700 mm</Num> high, and it holds <Num s="S1">350 litres</Num>: <Num s="S1">95 L</Num> in the freezer and <Num s="S1">255 L</Num> in the fridge. Freezer on top is the most common two-door layout in local shop listings. <FlyTo preset="hero">See the whole fridge</FlyTo>
+
+Open the doors and you find shelves, a crisper drawer and bins on the door. The working parts are hidden: the cold coil sits behind the freezer's back panel, and the <Term id="compressor">compressor</Term> sits in a bay at the bottom of the back.
+
+A fridge runs day and night. In Singapore homes, fridges use about <Num s="S14">one-sixth</Num> of all the electricity.
+
+<More title={{ en: "Why 4 °C and −18 °C", zh: "为什么是 4℃ 和 −18℃" }}>
+
+The Singapore Food Agency's storage advice is <Num s="S17">4 °C</Num> or below in a fridge and <Num s="S17">−18 °C</Num> or below in a freezer. It calls the range from <Num s="S17">5 to 60 °C</Num>, where bacteria grow most rapidly, the temperature danger zone. A fridge at 4 °C keeps food just below that zone. Food agencies elsewhere give the same figures: the United States Food and Drug Administration advises a fridge at or below <Num s="S18">4 °C</Num> and a freezer at <Num s="S18">−18 °C</Num>.
+
+</More>
+
+<More title={{ en: "How big is it", zh: "它有多大" }}>
+
+In the listings of one large Singapore store, two-door fridges with the freezer on top and <Num s="S36">300 to 400 litres</Num> inside measure <Num s="S36">595 to 699 mm</Num> wide, <Num s="S36">600 to 757 mm</Num> deep and <Num s="S36">1,595 to 1,960 mm</Num> high. This design sits near the middle of those ranges. In the same store <Num s="S36">109</Num> two-door listings had the freezer on top and <Num s="S36">39</Num> at the bottom; a second store's product pages showed the same lead, <Num s="S37">16</Num> to <Num s="S37">12</Num>.
+
+The volume is the space inside the liners, not the outside size: the foam walls take up much of the box.
+
+</More>
+
+<More title={{ en: "What is not in this model", zh: "模型里没有的东西" }}>
+
+This model has no ice maker, no water dispenser and no display. Some larger fridges have two cold coils, one for each compartment; one reason is to stop the air in the fridge compartment from becoming too dry. This one has a single coil, behind the freezer, and fans its cold air to both compartments.
+
+A few thin pipes are drawn thicker than they really are, and the pipes in the side walls are drawn with fewer bends, so that they can be seen. Their real sizes are in each part's description.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+冰箱并不制造冷，它搬运热。食物、搁架和箱内空气里的热，被一点一点搬出箱子，放进厨房；热又会不断从外面漏进来，所以机器要一直搬下去。负责搬热的是<Term id="refrigerant">冷媒</Term>，一种封在管路里、反复沸腾又反复凝结的物质。
+
+这台冰箱分上下两个室。上面的冷冻室保持在约 <Num s="S1">−18℃</Num>，足以让食物冻得结实；下面的冷藏室约 <Num s="S1">4℃</Num>，刚好在冰点以上。新加坡食品局建议冷藏室在 <Num s="S17">4℃</Num> 或以下、冷冻室在 <Num s="S17">−18℃</Num> 或以下，因为细菌在 <Num s="S17">5–60℃</Num> 之间繁殖得最快。
+
+模型是一项通用设计研究，不对应任何品牌或型号。它宽 <Num s="S1">600 mm</Num>，连门深 <Num s="S1">680 mm</Num>，高 <Num s="S1">1,700 mm</Num>，总容积 <Num s="S1">350 升</Num>：冷冻室 <Num s="S1">95 升</Num>，冷藏室 <Num s="S1">255 升</Num>。上冷冻、下冷藏，是本地商场里最常见的双门布局。<FlyTo preset="hero">看看整台冰箱</FlyTo>
+
+打开门，能看到搁架、果蔬盒和门上的门架。真正干活的部件都藏着：冷的盘管在冷冻室后板里面，<Term id="compressor">压缩机</Term>在背后底部的机械仓里。
+
+冰箱日夜不停地运转。在新加坡的家庭里，冰箱用掉的电约占全家用电的<Num s="S14">六分之一</Num>。
+
+<More title={{ en: "Why 4 °C and −18 °C", zh: "为什么是 4℃ 和 −18℃" }}>
+
+新加坡食品局的储存建议是：冷藏 <Num s="S17">4℃</Num> 或以下，冷冻 <Num s="S17">−18℃</Num> 或以下。它把细菌繁殖最快的 <Num s="S17">5–60℃</Num> 叫作“温度危险区”。冷藏室保持在 4℃，食物就刚好在这个区间以下。别处的食品机构给出的数字也一样：美国食品药品监督管理局建议冷藏室不高于 <Num s="S18">4℃</Num>，冷冻室 <Num s="S18">−18℃</Num>。
+
+</More>
+
+<More title={{ en: "How big is it", zh: "它有多大" }}>
+
+在新加坡一家大型卖场的商品页里，容积 <Num s="S36">300–400 升</Num>、上冷冻的双门冰箱，宽 <Num s="S36">595–699 mm</Num>，深 <Num s="S36">600–757 mm</Num>，高 <Num s="S36">1,595–1,960 mm</Num>。这项设计落在这些范围的中间。同一家卖场的双门冰箱里，上冷冻的有 <Num s="S36">109</Num> 款，下冷冻的有 <Num s="S36">39</Num> 款；另一家卖场的商品页也是上冷冻居多，<Num s="S37">16</Num> 款对 <Num s="S37">12</Num> 款。
+
+容积指内胆里面的空间，不是外形尺寸：发泡墙占去了箱子的不少地方。
+
+</More>
+
+<More title={{ en: "What is not in this model", zh: "模型里没有的东西" }}>
+
+这台模型没有制冰机、饮水机，也没有显示屏。有些较大的冰箱有两个冷盘管，两个室各用一个，原因之一是不让冷藏室的空气变得太干。这台只有一个盘管，装在冷冻室后面，靠风把冷空气送到两个室。
+
+几根细管画得比真实的粗，侧壁里的管也少画了几道弯，好让人看清。它们真实的尺寸写在各个零件的说明里。
+
+</More>
+
+</Lang>

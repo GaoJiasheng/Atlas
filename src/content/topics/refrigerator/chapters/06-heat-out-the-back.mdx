@@ -1,0 +1,105 @@
+---
+id: heat-out-the-back
+order: 6
+title: { en: "Where the heat goes", zh: "热去了哪里" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: side-condenser
+  run: true
+  cutaway: none
+  layers: [cabinet, cold-side, machine, refrigerant, air-water, kitchen-air]
+  hide: [side-panel-right, bay-grille, frost]
+  labels: [side-condenser, compressor, drain-tray]
+  camera: { position: [2.53, 2.37, -4.11], target: [0, 0.7, -0.2], fov: 30 }
+  summary: { en: "All the heat taken out of the food, plus the electricity used, comes out into the kitchen through the side walls and the machine bay. That is why a fridge with its door open warms the kitchen.", zh: "从食物里搬出的热，加上用掉的电，全部从侧壁和机械仓放进厨房。所以开着门的冰箱会让厨房更热。" }
+  beats:
+    - labels: [side-condenser]
+      caption: { en: "With the right-hand panel taken away, you can see the condenser pipes that run inside the side wall. They warm the steel above room temperature, and kitchen air rises past the warm sides.", zh: "拿掉右侧板，就能看到侧壁里面的冷凝管。它们把钢板加热到比室温高，厨房的空气贴着温热的侧面往上升。" }
+    - part: compressor
+      camera: bay
+      labels: [compressor, drain-tray, filter-drier]
+      caption: { en: "The compressor gets warm as well. Its heat leaves through the bay at the bottom of the back, and it also dries the defrost water in the tray on top.", zh: "压缩机自己也会发热。它的热从背后底部的机械仓散出去，还顺便把顶上蒸发盘里的化霜水蒸干。" }
+    - part: null
+      camera: { position: [-2.6, 1.6, 4.4], target: [0, 0.72, 0], fov: 30 }
+      pose: doors-open
+      labels: [freezer-door, fresh-door]
+      sim:
+        set: { setup: open }
+      caption: { en: "With the doors open, cold air spills out at the bottom, and the compressor keeps running to cool the inside again.", zh: "门开着，冷空气从下部流出来，压缩机一直运转，给箱内重新降温。" }
+    - part: null
+      camera: { position: [-2.6, 1.6, 4.4], target: [0, 0.72, 0], fov: 30 }
+      pose: doors-open
+      layers: [cabinet, refrigerant, kitchen-air]
+      labels: [fresh-door, mullion]
+      sim:
+        set: { setup: open }
+      caption: { en: "In this simulation the running fridge takes in 108 watts of heat, uses 60 watts of electricity and gives out 168 watts into the same kitchen. So the kitchen gains heat overall.", zh: "在这个模拟里，运转中的冰箱吸走 108 瓦的热，用电 60 瓦，向同一个厨房放出 168 瓦。所以厨房总的来说反而得到了热。" }
+  index:
+    parts: [side-condenser, frame-pipe, compressor, drain-tray, bay-grille, side-panel-right, outer-case, fresh-door]
+---
+
+<Lang en>
+
+Put a hand near a running fridge and you can feel where the heat goes. In this design the condenser pipes are fixed to the inside of both side panels, so the steel sides are warmer than the room. The compressor in the bay at the bottom of the back is warm too. Kitchen air that touches these surfaces warms up and rises. <FlyTo preset="back">See the warm side</FlyTo>
+
+The heat given out is more than the heat taken from the food. At this simulated operating point, while running, the fridge takes in <Num s="S1">108 W</Num> from inside the cabinet and uses <Num s="S1">60 W</Num> of electricity, and it gives out <Num s="S1">168 W</Num>, the two added together. Averaged over a day, it gives the kitchen about <Num s="S1">96 W</Num>. The electrical energy is not lost; it ends up as heat in the kitchen too. <TopicLink slug="energy-conversion" ch="electrical-energy-at-home">Electrical energy at home</TopicLink> follows electricity into other forms, and <TopicLink slug="energy-conversion" ch="never-used-up">Energy is never used up</TopicLink> explains why the total stays the same, an idea that goes beyond the primary syllabus.
+
+So leaving the door open cannot cool a kitchen. Cold air spills out at the door, but the heat it takes from the room comes back into the same room through the side walls, and the electricity the compressor uses is added on top. The kitchen gains heat overall.
+
+An air conditioner uses the same loop but gives its heat away outdoors, as <TopicLink slug="aircon" ch="where-the-air-goes">Where the air goes</TopicLink> shows. A fridge has no outdoor unit. Its heat has to escape into the room, so leave the space round its sides and back that the maker's manual asks for.
+
+<More title={{ en: "Heat moved, not destroyed", zh: "热被搬走了，没有消失" }}>
+
+While running: heat given out = heat taken in + electricity used, <Num s="S1">108 W</Num> + <Num s="S1">60 W</Num> = <Num s="S1">168 W</Num>. On average, with the doors shut, about <Num s="S1">62 W</Num> leaks in (chapter 2), so the compressor needs to run at full speed only about <Num s="S1">57 per cent</Num> of the time, or run more slowly for longer. That averages <Num s="S1">34 W</Num> of electricity, and the kitchen receives <Num s="S1">62 W</Num> + <Num s="S1">34 W</Num> ≈ <Num s="S1">96 W</Num>.
+
+The primary science syllabus asks pupils to recognise forms of energy and how one form changes into another. The rule that the total amount of energy stays the same is not part of it; it is used here because it explains where the fridge's heat goes.
+
+</More>
+
+<More title={{ en: "Two ways to get rid of the heat", zh: "散热的两种做法" }}>
+
+This design hides its condenser inside the side panels, so the panels themselves give out the heat. That is one common arrangement. Another is a coil in the machine bay at the bottom, cooled by a small fan; it is the usual layout in large fridges in the United States and appears in fridges sold in Asia too. Both do the same job: the refrigerant gives its heat to the kitchen air and turns into a liquid.
+
+</More>
+
+<More title={{ en: "Why the door frame is warm", zh: "门框为什么是温的" }}>
+
+Around the freezer opening the front of the cabinet is close to very cold air. In damp kitchen air, a cold surface like that collects water droplets. Most fridge-freezers today run a refrigerant pipe round the front frame to warm it, and in most of them that pipe carries the warm liquid from the condenser, as in this model. The heat would have to be given out anyway, so no extra electricity is used.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+在运转的冰箱旁伸手感受一下，就知道热去了哪里。在这项设计里，冷凝管贴在两块侧板的内面，所以钢板侧面比室温高；背后底部机械仓里的压缩机也是温的。厨房的空气碰到这些表面，变暖后往上升。<FlyTo preset="back">看看温热的侧面</FlyTo>
+
+放出去的热比从食物里吸走的热多。在这个模拟运行点，冰箱运转时从箱内吸走 <Num s="S1">108 W</Num> 的热，用电 <Num s="S1">60 W</Num>，放出 <Num s="S1">168 W</Num>，正是两者之和。按一整天平均，它约向厨房放热 <Num s="S1">96 W</Num>。电能并没有丢掉，最后也变成了厨房里的热。<TopicLink slug="energy-conversion" ch="electrical-energy-at-home">家里的电能</TopicLink>一章讲电能怎样变成其他形式，<TopicLink slug="energy-conversion" ch="never-used-up">能量不会用完</TopicLink>一章讲为什么总量不变；这个道理已经超出了小学课纲。
+
+所以，开着冰箱门并不能给厨房降温。门口确实有冷空气流出来，但它从房间里吸走的热，又从侧壁放回同一个房间，再加上压缩机用掉的电。厨房总的来说反而得到了热。
+
+空调用的是同一个循环，但它把热放到室外，见<TopicLink slug="aircon" ch="where-the-air-goes">空气去哪了</TopicLink>。冰箱没有室外机，热只能散在房间里，所以它的两侧和背后要按说明书留出空间。
+
+<More title={{ en: "Heat moved, not destroyed", zh: "热被搬走了，没有消失" }}>
+
+运转时：放出的热 = 吸走的热 + 用掉的电，<Num s="S1">108 W</Num> + <Num s="S1">60 W</Num> = <Num s="S1">168 W</Num>。门关着时，平均约有 <Num s="S1">62 W</Num> 的热漏进来（第 2 章），所以压缩机只要用约 <Num s="S1">57 %</Num> 的时间全速运转，或者以较低的转速转得更久。平均用电约 <Num s="S1">34 W</Num>，厨房得到 <Num s="S1">62 W</Num> + <Num s="S1">34 W</Num> ≈ <Num s="S1">96 W</Num>。
+
+小学科学课纲要求认识能量的形式，以及一种形式怎样转换成另一种。“能量的总量保持不变”这条规律不在课纲里；这里用它，是因为它能说清冰箱的热去了哪里。
+
+</More>
+
+<More title={{ en: "Two ways to get rid of the heat", zh: "散热的两种做法" }}>
+
+这项设计把冷凝管藏在侧板里面，让侧板本身散热。这是常见的做法之一。另一种是把盘管放在底部机械仓里，用一只小风扇吹，这是美国大型冰箱的常见布局，在亚洲出售的冰箱里也有。两种做法干的是同一件事：冷媒把热交给厨房的空气，自己变成液体。
+
+</More>
+
+<More title={{ en: "Why the door frame is warm", zh: "门框为什么是温的" }}>
+
+冷冻室箱口周围的前沿紧挨着很冷的空气。在潮湿的厨房空气里，这样冷的表面会凝出水珠。如今大多数冰箱都在箱口前沿绕一根冷媒管给它加热，而且多数用的是从冷凝器出来的温热液体，这台模型也是这样。这份热反正要放出去，所以不用多花电。
+
+</More>
+
+</Lang>

@@ -1,0 +1,17 @@
+# How a Refrigerator Keeps Food Cold. Content spec first: skill atlas-space-topic, references/spec-template.md (docs/12 is the aircon example).
+id: refrigerator
+title: { en: "How a Refrigerator Keeps Food Cold", zh: "冰箱是怎样让食物保持冰冷的" }
+subtitle: { en: "A two-door frost-free fridge, generic design study", zh: "双门无霜冰箱 · 通用设计研究" }
+subject: science
+moe: ["MOE 2023 Primary Science P4 Energy Forms and Uses: Heat, pp. 76–77", "MOE 2023 Primary Science P5 Cycles in Matter and Water (Water), pp. 49–50"]
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: refrigerator
+# The title block's statement line (replaces "Educational visualization"). A generic machine:
+note: { en: "Generic design study · not a specific brand or model", zh: "通用设计研究 · 不代表任何品牌或型号" }
+# An organism:
+# note: { en: "Model study · schematic proportions · not a specific specimen", zh: "模型研究 · 示意比例 · 不对应具体标本" }

@@ -919,6 +919,26 @@
       "0000000111000000"
     ]
   },
+  "refrigerator": {
+    "mask": [
+      "0000001344100000",
+      "0009dffffffc7000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "000cffffffffc000",
+      "00089bceffb52000",
+      "0000000003000000"
+    ]
+  },
   "saturn-v": {
     "mask": [
       "0000000000000000",

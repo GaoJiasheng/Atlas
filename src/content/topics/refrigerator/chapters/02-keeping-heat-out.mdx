@@ -1,0 +1,166 @@
+---
+id: keeping-heat-out
+order: 2
+title: { en: "Keeping heat out", zh: "把热挡在外面" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: foam
+  run: false
+  cutaway: centre
+  layers: [cabinet, cold-side, machine, kitchen-air]
+  hide: [frost]
+  labels: [foam, door-gaskets, magnet-strips, outer-case]
+  camera: { position: [4.9, 0.95, -0.03], target: [0, 0.8, -0.03], fov: 28 }
+  summary: { en: "Heat always flows from the warm kitchen into the cold box. Foam walls and a magnetic door seal slow it down; they cannot stop it.", zh: "热总是从温暖的厨房流进冰冷的箱子。发泡墙和带磁条的门封让它流得慢，但挡不住。" }
+  sim:
+    set:
+      elapsed-s: 600
+      setup: closed
+      contents: full
+    try:
+      vary: setup
+      also: [contents, elapsed-s]
+      keep:
+        - { en: "Compressor off", zh: "压缩机不工作" }
+        - { en: "Kitchen at 28 °C", zh: "厨房 28℃" }
+      observe: [fridge-c]
+      record: true
+      curve:
+        x: elapsed-s
+        y: [fridge-c, baseline-c]
+      predict:
+        prompt: { en: "The compressor is off and the fridge is full. If the door is left open for 10 minutes instead of shut, how will the air inside compare?", zh: "压缩机不工作，冰箱是满的。如果门开着 10 分钟，而不是关着，箱内空气的温度会怎样？" }
+        start:
+          setup: closed
+          elapsed-s: 600
+        change:
+          setup: open
+        observe: fridge-c
+        options:
+          - { id: higher, label: { en: "Warmer", zh: "更高" }, means: more }
+          - { id: same, label: { en: "The same", zh: "一样" }, means: same }
+          - { id: lower, label: { en: "Colder", zh: "更低" }, means: less }
+  beats:
+    - labels: [foam, outer-case, fresh-liner]
+      caption: { en: "Cut down the middle, the wall shows three layers: a steel case outside, a plastic liner inside and, between them, foam about 5 centimetres thick.", zh: "从中间剖开，箱壁分三层：外面是钢板，里面是塑料内胆，中间是约 5 厘米厚的发泡层。" }
+    - labels: [foam, mullion, freezer-liner]
+      caption: { en: "Round the freezer the foam is thicker, about 6.5 centimetres, because the difference between −18 °C inside and the 28 °C kitchen is bigger. A foam divider, the mullion, separates the two compartments.", zh: "冷冻室四周的发泡层更厚，约 6.5 厘米，因为箱内 −18℃ 和 28℃ 的厨房相差更大。中间一道发泡中梁把两个室隔开。" }
+    - part: door-gaskets
+      cutaway: none
+      pose: fresh-door-open
+      camera: { position: [-2.05, 1.3, 2.4], target: [0.3, 0.66, 0.6], fov: 32 }
+      labels: [door-gaskets, magnet-strips]
+      caption: { en: "Round the edge of each door runs a soft seal. A flexible magnet strip inside it pulls the door onto the steel front of the cabinet and closes the gap.", zh: "每扇门的边上都有一圈软门封。门封里藏着一条软磁条，把门吸在箱口的钢板上，把缝封住。" }
+    - labels: [foam, fresh-liner]
+      sim:
+        set: { setup: closed, contents: full, elapsed-s: 600 }
+        reveal: true
+      caption: { en: "Now the compressor is off. In this simulation, with the door shut and the fridge full, the air inside warms only from 4 °C to about 4.5 °C in 10 minutes.", zh: "现在压缩机不工作。在这个模拟里，关着门、冰箱装满时，箱内空气 10 分钟只从 4℃ 升到约 4.5℃。" }
+    - cutaway: none
+      camera: hero
+      labels: [fresh-door, lamp]
+      sim:
+        set: { setup: open, contents: full, elapsed-s: 600 }
+        reveal: true
+      caption: { en: "With the door left open, cold air spills out at the bottom and warm kitchen air comes in at the top. In this simulation the inside reaches about 9 °C in 10 minutes.", zh: "门开着，冷空气从门口下部流出去，厨房的暖空气从上部流进来。在这个模拟里，10 分钟后箱内升到约 9℃。" }
+  index:
+    parts: [outer-case, foam, freezer-liner, fresh-liner, mullion, freezer-door, fresh-door, door-gaskets, magnet-strips]
+---
+
+<Lang en>
+
+Heat flows from a hotter place to a colder one until both reach the same temperature. The kitchen in this design study is at <Num s="S1">28 °C</Num>, far warmer than the inside of the fridge, so heat is always flowing in through the walls and doors. The walls cannot stop that flow. Their job is to make it slow.
+
+Cut through a wall and you find three layers: a steel case outside, a plastic liner inside and, between them, a thick layer of foam. The foam is the <Term id="insulation">insulation</Term>. It is full of tiny bubbles of trapped gas, and gases are poor <Term id="conductor-of-heat">conductors of heat</Term>. Here it is <Num s="S1">50 mm</Num> thick round the fridge and <Num s="S1">65 mm</Num> round the freezer, where the difference in temperature is bigger. Steel is a good conductor; it is there for strength, not to keep heat out. Wrapping slows heat in the same way in <TopicLink slug="heat" ch="slowing-heat-transfer">Slowing Heat Transfer</TopicLink>. <FlyTo preset="section">Look at the cut wall</FlyTo>
+
+The doors are insulated too. Round each door runs a soft seal with a flexible magnet strip inside. The magnet pulls the door onto the steel front of the cabinet and closes the gap, as in <TopicLink slug="magnets" ch="magnets-at-work">Magnets at work</TopicLink>. Because a magnet holds the door rather than a latch, it can be pushed open from inside.
+
+At this simulated operating point, with the doors shut, about <Num s="S1">62 W</Num> of heat leaks in: <Num s="S1">62 joules</Num> every second. To hold its temperatures, the fridge must carry that much heat back out, on average, all day long.
+
+Try it: with the compressor off, see how fast the fridge compartment warms with the door shut or open, with thinner foam, and when it is full or empty.
+
+<Figure src="figures/refrigerator-gasket-section" alt={{ en: "A refrigerator inset locates an enlarged door-edge section, with two air chambers, a dark magnet strip and a pipe behind the cabinet steel.", zh: "冰箱小图定位门边放大的剖面：两个气腔、深色磁条，以及箱口钢板后的一根圆管。" }} caption={{ en: "Section through the door edge: the magnet strip in the soft seal holds the door to the steel frame.", zh: "门边剖面：软门封里的磁条把门吸在钢制箱口上。" }} />
+
+<More title={{ en: "Three ways heat gets in", zh: "热进来的三条路" }}>
+
+Secondary-school science names three ways heat moves. Conduction: heat passes through the walls, the doors and the seals. Convection: when the door opens, cold air spills out and warm air takes its place; inside, the fan uses moving air to carry heat to the coil. Radiation: the warm walls of the kitchen give off infrared rays, which the case takes in and passes inwards by conduction. In a closed fridge, conduction through the foam is the main path.
+
+Steel and the metal of the cold coil are good conductors, used where heat should pass easily. Foam and the plastic liner are poor conductors, used where heat should be kept out. <TopicLink slug="heat" ch="heat-along-spoons">Heat Along a Spoon</TopicLink> compares the two kinds.
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+Heat through a wall = area × conductivity of the foam ÷ thickness × difference in temperature. With a foam conductivity of <Num s="S1">0.020 W/(m·K)</Num>, inside the published range of <Num s="S20">0.018 to 0.023 W/(m·K)</Num>:
+
+- freezer: <Num s="S1">1.4 m²</Num> × 0.020 ÷ <Num s="S1">0.065 m</Num> × <Num s="S1">46 K</Num> ≈ <Num s="S1">20 W</Num>
+- fridge: <Num s="S1">3.4 m²</Num> × 0.020 ÷ <Num s="S1">0.050 m</Num> × <Num s="S1">24 K</Num> ≈ <Num s="S1">33 W</Num>
+- door seals, the edges of the case and the mullion: about <Num s="S1">9 W</Num>, about <Num s="S1">15 per cent</Num> of the total. Tests on a real top-freezer found that heat conducted through these edges was about <Num s="S20">17 per cent</Num> of its load.
+
+The try-it treats everything inside the fridge compartment as one lump at one temperature. Full, it takes as much heat to warm as about <Num s="S1">12 kg</Num> of water; empty, about <Num s="S1">2 kg</Num>. Shut, <Num s="S1">1.6 W</Num> leaks in for each degree of difference; with foam only <Num s="S1">15 mm</Num> thick, <Num s="S1">4.8 W</Num>. The open-door value, <Num s="S1">20 W</Num> per degree, is a teaching value, not a measurement: a real open door depends on how long and how wide it is open. After 10 minutes the full fridge reaches about <Num s="S1">4.5 °C</Num> shut and <Num s="S1">9.1 °C</Num> open; the empty one about <Num s="S1">6.6 °C</Num> and <Num s="S1">22.2 °C</Num>. The curves are steeper at the start, when the difference in temperature is biggest, as in <TopicLink slug="heat" ch="cooling-curves">Cooling Curves</TopicLink>.
+
+</More>
+
+<More title={{ en: "Why the door opens from inside", zh: "为什么门能从里面推开" }}>
+
+Refrigerators once put children at serious risk: a child who became trapped inside while playing could suffocate. In 1956 the United States passed the Refrigerator Safety Act. The rule made under it requires that a door can be opened from inside with a push of no more than <Num s="S23">66.7 newtons</Num>, about the weight of <Num s="S23">6.8 kg</Num>. Today's safety standard for household fridges accepts magnetic door seals as the way of holding a door shut, and it requires a test that the door can be released.
+
+</More>
+
+<More title={{ en: "When the power goes off", zh: "停电的时候" }}>
+
+Food safety agencies advise keeping the doors shut during a power cut. A fridge that stays unopened keeps food cold for about <Num s="S18">4 hours</Num>. A full freezer keeps its temperature for about <Num s="S18">48 hours</Num>, and a half-full one for about <Num s="S19">24 hours</Num>. A full fridge warms more slowly than an empty one because the food itself takes in a lot of heat, as the try-it shows.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+热会从较热的地方流向较冷的地方，直到两边温度相同。这项设计研究里的厨房是 <Num s="S1">28℃</Num>，比冰箱里面暖得多，所以热总是穿过箱壁和门流进去。箱壁挡不住这股热，它的任务是让热流得慢。
+
+把箱壁剖开，能看到三层：外面是钢板，里面是塑料内胆，中间是一层厚厚的发泡。发泡就是<Term id="insulation">隔热层</Term>。它里面全是封住气体的小气泡，而气体是热的<Term id="conductor-of-heat">不良导体</Term>。这台冰箱冷藏室四周的发泡厚 <Num s="S1">50 mm</Num>，冷冻室四周厚 <Num s="S1">65 mm</Num>，因为那里内外温差更大。钢板是热的良导体，用它是为了结实，不是为了挡热。包一层东西能减慢传热，道理和<TopicLink slug="heat" ch="slowing-heat-transfer">隔热材料</TopicLink>一章一样。<FlyTo preset="section">看剖开的箱壁</FlyTo>
+
+门也是隔热的。每扇门的边上都有一圈软门封，里面嵌着一条软磁条。磁条把门吸在箱口的钢板上，把缝封住，和<TopicLink slug="magnets" ch="magnets-at-work">生活中的磁铁</TopicLink>里讲的一样。门靠磁力吸住，而不是靠门闩扣住，所以从里面一推就能打开。
+
+在这个模拟运行点，门关着时，每秒约有 <Num s="S1">62 W</Num> 的热漏进来，也就是每秒 <Num s="S1">62 焦耳</Num>。要保持箱内的温度，冰箱平均下来就得一整天不停地把这么多热搬出去。
+
+试一试：让压缩机停下，看看关门、开门、发泡变薄、箱里装满或空着时，冷藏室升温有多快。
+
+<Figure src="figures/refrigerator-gasket-section" alt={{ en: "A refrigerator inset locates an enlarged door-edge section, with two air chambers, a dark magnet strip and a pipe behind the cabinet steel.", zh: "冰箱小图定位门边放大的剖面：两个气腔、深色磁条，以及箱口钢板后的一根圆管。" }} caption={{ en: "Section through the door edge: the magnet strip in the soft seal holds the door to the steel frame.", zh: "门边剖面：软门封里的磁条把门吸在钢制箱口上。" }} />
+
+<More title={{ en: "Three ways heat gets in", zh: "热进来的三条路" }}>
+
+中学科学会讲到热传递的三种方式。传导：热穿过箱壁、门和门封。对流：开门时，冷空气流出去，暖空气补进来；箱内的风扇也是靠流动的空气把热带到盘管上。辐射：厨房温暖的墙面发出红外线，被外壳吸收，再传导进去。门关着时，穿过发泡层的传导是主要的一条路。
+
+钢板和冷盘管的金属是热的良导体，用在需要热容易通过的地方；发泡和塑料内胆是热的不良导体，用在要把热挡住的地方。<TopicLink slug="heat" ch="heat-along-spoons">勺柄上的传热</TopicLink>一章比较了这两类材料。
+
+</More>
+
+<More title={{ en: "Numbers at this simulated operating point", zh: "这个模拟运行点的数字" }}>
+
+穿过一面墙的热 = 面积 × 发泡的导热系数 ÷ 厚度 × 温差。发泡的导热系数取 <Num s="S1">0.020 W/(m·K)</Num>，在公开数据 <Num s="S20">0.018–0.023 W/(m·K)</Num> 的范围内：
+
+- 冷冻室：<Num s="S1">1.4 m²</Num> × 0.020 ÷ <Num s="S1">0.065 m</Num> × <Num s="S1">46 K</Num> ≈ <Num s="S1">20 W</Num>
+- 冷藏室：<Num s="S1">3.4 m²</Num> × 0.020 ÷ <Num s="S1">0.050 m</Num> × <Num s="S1">24 K</Num> ≈ <Num s="S1">33 W</Num>
+- 门封、箱口边缘和中梁：约 <Num s="S1">9 W</Num>，约占总数的 <Num s="S1">15 %</Num>。对一台真实上冷冻冰箱的测试发现，经这些边缘传导进去的热约占它总负荷的 <Num s="S20">17 %</Num>。
+
+试一试把冷藏室里的一切看成一个温度均匀的整体。装满时，让它升温所需的热约等于 <Num s="S1">12 kg</Num> 水；空着时约等于 <Num s="S1">2 kg</Num> 水。门关着，每差 1 度漏进 <Num s="S1">1.6 W</Num>；发泡只有 <Num s="S1">15 mm</Num> 厚时是 <Num s="S1">4.8 W</Num>。开门时的 <Num s="S1">20 W</Num> 每度是教学用的参数，不是实测值：真实开门的效果取决于开多久、开多大。10 分钟后，装满的冰箱关门约 <Num s="S1">4.5℃</Num>，开门约 <Num s="S1">9.1℃</Num>；空冰箱分别约 <Num s="S1">6.6℃</Num> 和 <Num s="S1">22.2℃</Num>。曲线开头较陡，因为那时温差最大，和<TopicLink slug="heat" ch="cooling-curves">冷却曲线</TopicLink>一章讲的一样。
+
+</More>
+
+<More title={{ en: "Why the door opens from inside", zh: "为什么门能从里面推开" }}>
+
+冰箱曾经对孩子有严重的危险：孩子玩耍时若被困在里面，可能窒息。1956 年，美国通过了《冰箱安全法》。据此制定的规定要求，从里面用不超过 <Num s="S23">66.7 牛</Num>的推力就能把门打开，约等于 <Num s="S23">6.8 kg</Num> 物体的重量。今天的家用冰箱安全标准认可用磁性门封把门关住，并要求测试门能否被推开。
+
+</More>
+
+<More title={{ en: "When the power goes off", zh: "停电的时候" }}>
+
+食品安全机构建议，停电时尽量不要开门。不开门的冷藏室约能保冷 <Num s="S18">4 小时</Num>。装满的冷冻室约能保持温度 <Num s="S18">48 小时</Num>，半满的约 <Num s="S19">24 小时</Num>。装满的冰箱比空的升温慢，因为食物本身要吸收很多热，试一试里也看得到。
+
+</More>
+
+</Lang>

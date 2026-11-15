@@ -1,0 +1,136 @@
+---
+id: energy-and-history
+order: 7
+title: { en: "Electricity, labels and refrigerants", zh: "用电、标签和冷媒" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [cabinet, cold-side, machine]
+  hide: [frost]
+  labels: [freezer-door, fresh-door, side-panel-right]
+  camera: { position: [2.57, 1.65, 4.19], target: [0, 0.7, 0], fov: 30 }
+  summary: { en: "A fridge runs day and night, so its design matters: Singapore's label shows its yearly electricity use, and its refrigerant was chosen after a long story about the ozone layer.", zh: "冰箱日夜不停地运转，设计好不好很要紧：新加坡的能效标签写着它一年用多少电；它用的冷媒，背后是一段关于臭氧层的长故事。" }
+  beats:
+    - labels: [freezer-door, fresh-door]
+      caption: { en: "Every fridge sold in Singapore carries an energy label. Fridges are rated on a scale of one to four ticks, and since April 2025 only three- and four-tick fridges may be sold.", zh: "在新加坡出售的冰箱都贴着能效标签。冰箱按一到四个勾评级；2025 年 4 月起，只有三个勾和四个勾的冰箱才能出售。" }
+    - pose: fresh-door-open
+      camera: inside
+      labels: [door-gaskets, fresh-door]
+      caption: { en: "Saving electricity also depends on use: open the door less often and close it quickly, make sure the seals close tightly, and leave space round the fridge for its heat to escape.", zh: "省电也看怎么用：少开门、快关门，确认门封贴紧，冰箱四周留出空间让热散出去。" }
+    - labels: []
+      caption: { en: "Before home fridges, Singapore used ice. From 1854 natural ice was shipped from America, and on a voyage of many months up to half of it melted on the way.", zh: "家用冰箱出现以前，新加坡用的是冰。从 1854 年起，天然冰从美国用船运来，航程长达好几个月，路上最多会化掉一半。" }
+    - view: xray
+      run: true
+      camera: back
+      layers: [cold-side, machine, refrigerant]
+      labels: [compressor, capillary-tube, evaporator]
+      caption: { en: "Around 1930 chemists made chlorofluorocarbon refrigerants, which did not burn and were not poisonous. Decades later, scientists found that these gases, drifting high above the clouds, destroy the ozone layer.", zh: "1930 年前后，化学家合成了含氯氟烃冷媒，它不燃烧，也没有毒。几十年后，科学家发现这些气体飘到云层以上的高空，会破坏臭氧层。" }
+    - view: xray
+      run: true
+      camera: back
+      layers: [cold-side, machine, refrigerant]
+      labels: [compressor, capillary-tube, evaporator]
+      caption: { en: "In 1987 countries agreed in Montreal to phase these gases out. This loop holds isobutane, which warms the climate very little; Singapore has required refrigerants like this in household fridges since 2022.", zh: "1987 年，各国在蒙特利尔约定逐步停用这些气体。这个回路里装的是异丁烷，对气候变暖的影响很小；新加坡自 2022 年起要求家用冰箱使用这类冷媒。" }
+  index:
+    parts: [freezer-door, fresh-door, door-gaskets, bay-grille, compressor, capillary-tube, evaporator, side-condenser]
+---
+
+<Lang en>
+
+A fridge runs <Num s="S10">24 hours</Num> a day, every day, so small differences in design add up. Every fridge sold in Singapore carries an <Term id="tick-rating">energy label</Term>. Fridges are rated from 1 to 4 ticks, and since 1 April 2025 every fridge sold must reach at least <Num s="S9">3</Num>. The label gives the yearly electricity use, counted for 24 hours a day, and the yearly cost at <Num s="S10">27 cents</Num> per kilowatt-hour.
+
+This model would use about <Num s="S1">317 kWh</Num> a year, about <Num s="S1">S$86</Num> at that price. That is a model estimate for a kitchen held at 28 °C all year, not a label value: the label figure comes from a standard test at <Num s="S13">16 °C and 32 °C</Num>. Use matters too: open the door less, check that the seals close tightly, leave space behind, and keep to the advised 4 °C and −18 °C. <FlyTo preset="hero">Back to the whole fridge</FlyTo>
+
+Before home fridges, Singapore used ice. From 1854 natural ice was shipped in from America, and on the long voyage up to <Num s="S25">half</Num> of it melted.
+
+Early fridges used refrigerants such as ammonia, methyl chloride and sulfur dioxide. Around 1930 chemists looking for safer ones made <Term id="cfc">chlorofluorocarbons (CFCs)</Term>, often called by the trade name Freon, which had no smell, were not poisonous and did not burn. In 1974 two chemists showed that CFCs reaching the upper atmosphere break apart and destroy ozone, the gas of the <Term id="ozone-layer">ozone layer</Term>. In 1987 countries signed the Montreal Protocol to phase them out.
+
+Since 2022, household fridges supplied in Singapore must use a refrigerant with a <Term id="gwp">global warming potential</Term> of <Num s="S8">15</Num> or less. Isobutane's is about <Num s="S6">3</Num>. It burns easily, but this fridge holds only <Num s="S1">55 g</Num>, sealed in its pipes, so repairs and disposal are jobs for trained people.
+
+<Figure src="figures/refrigerator-icebox" alt={{ en: "A wooden icebox with an open upper compartment holding an ice block over a draining tray.", zh: "木制冰盒上格门打开，冰块放在带排水口的接水托盘上。" }} caption={{ en: "A generic icebox kept food cool with a block of ice in the top compartment.", zh: "通用样式的冰盒在上层放一块冰，给食物降温。" }} />
+
+<More title={{ en: "What the label numbers mean", zh: "标签上的数字" }}>
+
+The yearly figure assumes the fridge runs <Num s="S10">24 hours</Num> a day, and the yearly cost uses <Num s="S10">27 cents</Num> per kilowatt-hour. The tick limits depend on size. Freezer space counts for more than fridge space: <Num s="S12">1.79</Num> times. For this design the adjusted volume is about <Num s="S1">425 L</Num>, so 3 ticks allows up to about <Num s="S11">328 kWh</Num> a year and 4 ticks needs <Num s="S11">240 kWh</Num> or less. Two-door fridges of <Num s="S36">300 to 400 litres</Num> in one Singapore store list <Num s="S36">270 to 449 kWh</Num> a year. Air conditioners use a different scale of 1 to 5 ticks; see <TopicLink slug="aircon" ch="efficiency-and-use">Using it well</TopicLink>.
+
+Labels became compulsory for fridges on 1 January 2008, and minimum standards began in 2011 and were raised in 2013, 2017, 2022 and 2025. In a 2017 study of household energy use, fridges took <Num s="S14">17 per cent</Num> of a home's electricity; an earlier announcement gave about <Num s="S15">18 per cent</Num>.
+
+</More>
+
+<More title={{ en: "From ice house to refrigerator", zh: "从冰屋到冰箱" }}>
+
+In 1854 the merchant Hoo Ah Kay, known as Whampoa, and his partner Gilbert Angus began to import natural ice from America for an ice house at Boat Quay. On a voyage of many months up to <Num s="S25">half</Num> of the ice melted despite thick sawdust insulation. An American ice company took over the ice house in 1861, and in the same year Singapore Ice Works became the first to make and sell ice produced locally. Homes kept food in ice chests, with ice on a top shelf to chill the food below. In the 1930s refrigerators began to replace them.
+
+</More>
+
+<More title={{ en: "The ozone story", zh: "臭氧层的故事" }}>
+
+CFCs solved a real problem: they made home fridges safer. Their harm was found only later. In 1974 Mario Molina and F. Sherwood Rowland showed that CFCs could stay in the atmosphere for <Num s="S27">40 to 150 years</Num> and that sunlight high up breaks them apart, releasing chlorine that destroys ozone. In 1985 <Num s="S28">three</Num> scientists reported that springtime ozone over Antarctica had fallen considerably.
+
+The Montreal Protocol was signed on 16 September 1987 and came into force on 1 January 1989; Singapore joined on 5 January 1989. By 2009 all <Num s="S32">196</Num> parties had ratified it, more than any treaty before it; today it has <Num s="S29">198</Num>. Richer countries had to cut their use of the main CFCs to <Num s="S31">zero</Num> from 1996; developing countries were given until 2010. Singapore has since accepted all <Num s="S30">five</Num> later amendments, the latest in 2022. In 1995 the Nobel Prize in Chemistry went to <Num s="S34">three</Num> scientists, Paul Crutzen, Mario Molina and F. Sherwood Rowland, for their work on ozone.
+
+Nearly <Num s="S33">99 per cent</Num> of the banned ozone-depleting substances have been phased out. If current policies stay in place, the ozone layer is expected to recover to its 1980 state around 2066 over Antarctica, 2045 over the Arctic and 2040 elsewhere.
+
+</More>
+
+<More title={{ en: "Is isobutane safe", zh: "异丁烷安全吗" }}>
+
+Isobutane, R600a, is in safety class A3: low toxicity, high flammability. Safety standards therefore limit each sealed circuit to <Num s="S5">150 g</Num>. Household fridges usually hold <Num s="S7">0.05 to 0.25 kg</Num> of refrigerant, and isobutane needs about <Num s="S7">40 per cent</Num> less than the gas it replaced, R-134a. That gas warms the climate far more: its global warming potential is <Num s="S6">1,430</Num>, and that of the CFC refrigerant R-12 was <Num s="S7">10,900</Num>.
+
+Fridges using hydrocarbons spread from Germany, where a former East German firm brought the first to market in 1992 and more than <Num s="S3">90 per cent</Num> of fridges were being made with isobutane by 2000. Japan's first came in 2002. Today about <Num s="S35">70 per cent</Num> of the world's fridges use natural refrigerants like this. The refrigerant stays sealed in the loop. Repairs and disposal, which mean opening the loop, should be done by trained people.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+冰箱每天运转 <Num s="S10">24 小时</Num>，设计上的小差别会越积越大。在新加坡出售的冰箱都贴着<Term id="tick-rating">能效标签</Term>。冰箱按 1 到 4 个勾评级；2025 年 4 月 1 日起，出售的冰箱至少要有 <Num s="S9">3</Num> 个勾。标签上写着按每天 24 小时算的年耗电，以及按每千瓦时 <Num s="S10">27 分</Num>算的年电费。
+
+这台模型一年约用 <Num s="S1">317 kWh</Num>，按这个电价约 <Num s="S1">86 新元</Num>。这是假定厨房全年 28℃ 的模型估算，不是标签值；标签值来自环境温度为 <Num s="S13">16℃ 和 32℃</Num> 的标准测试。用法也要紧：少开门，门封要贴紧，背后留空，温度设在建议的 4℃ 和 −18℃ 就够了。<FlyTo preset="hero">回到整台冰箱</FlyTo>
+
+家用冰箱出现以前，新加坡用的是冰。从 1854 年起，天然冰从美国用船运来，漫长的航程里最多会化掉<Num s="S25">一半</Num>。
+
+早期冰箱用氨、氯甲烷、二氧化硫等冷媒。1930 年前后，化学家为了找更安全的冷媒，合成了<Term id="cfc">含氯氟烃</Term>（CFC，常被叫作氟利昂），它没有气味、没有毒，也不燃烧。1974 年，两位化学家指出，含氯氟烃升到高层大气后会分解，破坏臭氧，也就是<Term id="ozone-layer">臭氧层</Term>里的那种气体。1987 年，各国签署《蒙特利尔议定书》，逐步停用这类物质。
+
+2022 年起，在新加坡供应的家用冰箱，冷媒的<Term id="gwp">全球变暖潜能值</Term>不得超过 <Num s="S8">15</Num>。异丁烷约为 <Num s="S6">3</Num>。它很容易燃烧，但这台冰箱里只有 <Num s="S1">55 克</Num>，封在管路里；维修和报废要交给受过训练的人。
+
+<Figure src="figures/refrigerator-icebox" alt={{ en: "A wooden icebox with an open upper compartment holding an ice block over a draining tray.", zh: "木制冰盒上格门打开，冰块放在带排水口的接水托盘上。" }} caption={{ en: "A generic icebox kept food cool with a block of ice in the top compartment.", zh: "通用样式的冰盒在上层放一块冰，给食物降温。" }} />
+
+<More title={{ en: "What the label numbers mean", zh: "标签上的数字" }}>
+
+一年的用电量假定冰箱每天运转 <Num s="S10">24 小时</Num>，一年的电费按每千瓦时 <Num s="S10">27 分</Num>计算。几个勾的门槛和容积有关。冷冻室的容积要多算：乘以 <Num s="S12">1.79</Num>。这项设计的折算容积约 <Num s="S1">425 升</Num>，所以 3 个勾的上限约为每年 <Num s="S11">328 kWh</Num>，4 个勾要在 <Num s="S11">240 kWh</Num> 或以下。新加坡一家卖场里 <Num s="S36">300–400 升</Num>的双门冰箱，标注的年耗电在 <Num s="S36">270–449 kWh</Num> 之间。空调用的是 1 到 5 个勾的另一套评级，见<TopicLink slug="aircon" ch="efficiency-and-use">用得好、用得省</TopicLink>。
+
+冰箱从 2008 年 1 月 1 日起必须贴标签；最低能效标准从 2011 年开始，此后在 2013、2017、2022 和 2025 年几次提高。在 2017 年的一项家庭用电研究里，冰箱占家庭用电的 <Num s="S14">17 %</Num>；更早的一份公告给出的数字约为 <Num s="S15">18 %</Num>。
+
+</More>
+
+<More title={{ en: "From ice house to refrigerator", zh: "从冰屋到冰箱" }}>
+
+1854 年，商人胡亚基（人称黄埔）和合伙人吉尔伯特·安格斯开始从美国进口天然冰，存放在驳船码头的冰屋里。航程长达好几个月，尽管冰块裹着厚厚的锯末，最多仍会化掉<Num s="S25">一半</Num>。1861 年，一家美国冰业公司接手了冰屋；同一年，新加坡制冰厂成为第一家在本地制冰、卖冰的公司。那时人们用冰柜保存食物：冰放在顶层，冷却下面的食物。到了 20 世纪 30 年代，冰箱开始取代冰柜。
+
+</More>
+
+<More title={{ en: "The ozone story", zh: "臭氧层的故事" }}>
+
+含氯氟烃解决过一个真实的问题：它让家用冰箱更安全。它的害处是后来才发现的。1974 年，马里奥·莫利纳和舍伍德·罗兰指出，含氯氟烃能在大气中停留 <Num s="S27">40–150 年</Num>，在高空被阳光分解后放出氯，破坏臭氧。1985 年，<Num s="S28">三</Num>位科学家报告，南极上空春季的臭氧已明显减少。
+
+《蒙特利尔议定书》于 1987 年 9 月 16 日签署，1989 年 1 月 1 日生效；新加坡于 1989 年 1 月 5 日加入。到 2009 年，全部 <Num s="S32">196</Num> 个缔约方都已批准，缔约方之多超过了此前任何条约；如今已有 <Num s="S29">198</Num> 个。发达国家从 1996 年起，主要含氯氟烃的消费量要降到<Num s="S31">零</Num>；发展中国家的期限到 2010 年。新加坡此后接受了全部 <Num s="S30">5</Num> 项修正案，最近一项在 2022 年。1995 年的诺贝尔化学奖授予了保罗·克鲁岑、马里奥·莫利纳和舍伍德·罗兰<Num s="S34">三</Num>位科学家，表彰他们在臭氧研究上的工作。
+
+被禁用的消耗臭氧层物质，已有近 <Num s="S33">99 %</Num> 被淘汰。按现行政策，预计臭氧层将恢复到 1980 年的水平：南极上空约在 2066 年，北极上空约在 2045 年，其他地区约在 2040 年。
+
+</More>
+
+<More title={{ en: "Is isobutane safe", zh: "异丁烷安全吗" }}>
+
+异丁烷（R600a）的安全分类是 A3：低毒、高可燃。所以安全标准规定，每个密封回路的充注量不超过 <Num s="S5">150 克</Num>。家用冰箱一般装有 <Num s="S7">0.05–0.25 kg</Num> 冷媒；异丁烷的用量比它取代的 R-134a 少约 <Num s="S7">40 %</Num>。R-134a 让气候变暖的作用大得多，全球变暖潜能值为 <Num s="S6">1,430</Num>；含氯氟烃冷媒 R-12 更是高达 <Num s="S7">10,900</Num>。
+
+碳氢冷媒冰箱是从德国推广开的：1992 年，一家原东德企业推出了第一款，到 2000 年，德国超过 <Num s="S3">90 %</Num> 的冰箱已用异丁烷制造。日本的第一款出现在 2002 年。如今全世界约 <Num s="S35">70 %</Num> 的冰箱使用这类天然冷媒。冷媒一直封在回路里。维修和报废都要打开回路，应该交给受过训练的人处理。
+
+</More>
+
+</Lang>

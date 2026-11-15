@@ -1,0 +1,867 @@
+{
+  "parts": {
+    "outer-case": {
+      "name": {
+        "en": "Outer case",
+        "zh": "外箱"
+      },
+      "summary": {
+        "en": "Holds the cabinet together: steel top, left side and back.",
+        "zh": "钢板外壳：箱顶、左侧和背板，撑起整个箱体。"
+      },
+      "detail": {
+        "en": "Steel sheets form the top, the left side and the back of the cabinet; the right side is a separate part in this model so that it can be taken away. Steel is a good conductor of heat. It gives the cabinet its strength and shape, and its front edge is what the magnetic door seals hold on to. Keeping heat out is the job of the foam behind it.\n\nIn this design the cabinet is 600 mm wide, 680 mm deep including the doors and 1,700 mm high [S1]. In one Singapore store, two-door top-freezer fridges of 300–400 litres measure 595–699 mm wide, 600–757 mm deep and 1,595–1,960 mm high [S36].\n\nScratches and small dents do not affect the cooling, but a deep dent in a side panel can damage the condenser pipe fixed behind it.",
+        "zh": "箱顶、左侧和背板都是钢板；右侧板在这个模型里是单独的零件，可以拿开。钢是热的良导体。它让箱体结实、有形，箱口前沿也是磁性门封吸住的地方。挡热的工作，交给它后面的发泡层。\n\n这项设计的箱体宽 600 mm、连门深 680 mm、高 1,700 mm [S1]。新加坡一家卖场里 300–400 升的上冷冻双门冰箱，宽 595–699 mm、深 600–757 mm、高 1,595–1,960 mm [S36]。\n\n划痕和小凹痕不影响制冷；但侧板上的深凹痕可能压坏贴在它后面的冷凝管。"
+      }
+    },
+    "side-panel-right": {
+      "name": {
+        "en": "Right side panel",
+        "zh": "右侧板"
+      },
+      "summary": {
+        "en": "Covers the right side; the condenser pipe lies behind it.",
+        "zh": "盖住右侧；冷凝管就贴在它的内面。"
+      },
+      "detail": {
+        "en": "This model splits the right side panel off the outer case so that it can be lifted away to show the condenser pipe fixed to its inner face. The left panel is built the same way. With the pipe fixed straight onto the inside of the panel, the panel itself is heated above room temperature and gives the heat to the kitchen [S38].\n\nThat is why the sides of a running fridge of this kind feel warm. Hot-wall condensers like this are common in freezers and compact fridges; many larger fridges use a fan-cooled coil in the bottom bay instead [S20].\n\nIf a fridge is boxed in tightly on both sides, the warm panels have little room to give off their heat, and the compressor runs for longer.",
+        "zh": "这个模型把右侧板从外箱上分出来，可以拿开，露出贴在它内面的冷凝管。左侧板也是同样的构造。管子直接贴在侧板内面，侧板本身就被加热到比室温高，把热交给厨房 [S38]。\n\n所以这类冰箱运转时，两侧摸上去是温的。这种“热壁”冷凝器在冷冻柜和小冰箱里很常见；很多较大的冰箱则在底部机械仓里装一个用风扇吹的盘管 [S20]。\n\n冰箱两侧若被柜子紧紧夹住，温热的侧板就不容易散热，压缩机要运转得更久。"
+      }
+    },
+    "foam": {
+      "name": {
+        "en": "Foam insulation",
+        "zh": "发泡层"
+      },
+      "summary": {
+        "en": "Slows heat leaking in: rigid foam full of tiny bubbles.",
+        "zh": "减慢热漏进来：充满小气泡的硬质发泡。"
+      },
+      "detail": {
+        "en": "Polyurethane foam fills the space between the steel case and the plastic liners. It is made of tiny closed cells of trapped gas, and gases such as air are poor conductors of heat [S22].\n\nPublished values for this kind of foam are 0.018–0.023 W/(m·K) [S20]; this design uses 0.020 [S1]. The walls of real fridges are 3.8–7.6 cm thick [S20]; here they are 50 mm round the fridge compartment and 65 mm round the freezer, with a 60 mm mullion [S1]. In this simulation about 53 W of the 62 W that leaks in passes through the walls and doors [S1]. In the cut view the foam is drawn pale yellow.\n\nFoam that is crushed or soaked insulates less well, so more heat leaks in and the compressor runs for longer.",
+        "zh": "聚氨酯发泡填满钢板外壳和塑料内胆之间的空间。它由无数封闭的小气泡组成，里面是气体；空气这样的气体是热的不良导体 [S22]。\n\n这类发泡的公开导热系数为 0.018–0.023 W/(m·K) [S20]，这项设计取 0.020 [S1]。真实冰箱的箱壁厚 3.8–7.6 cm [S20]；这里冷藏室四周 50 mm，冷冻室四周 65 mm，中梁 60 mm [S1]。在这个模拟里，漏进来的 62 W 中约有 53 W 穿过箱壁和门 [S1]。剖面里的发泡画成淡黄色。\n\n发泡被压坏或受潮，隔热就变差，漏进来的热变多，压缩机要运转得更久。"
+      }
+    },
+    "freezer-liner": {
+      "name": {
+        "en": "Freezer liner",
+        "zh": "冷冻室内胆"
+      },
+      "summary": {
+        "en": "Lines the freezer with smooth plastic that is easy to clean.",
+        "zh": "冷冻室的塑料内胆，表面光滑，好清洁。"
+      },
+      "detail": {
+        "en": "A moulded plastic box forms the inside walls of the freezer. Plastic is a poor conductor of heat and does not rust, and its smooth surface wipes clean. At the back, a panel hides the cold coil and the fan.\n\nThe freezer holds 95 litres in this design [S1] and is kept at about −18 °C, the Singapore Food Agency's advised freezer temperature [S17]. In this simulation about 20 W of heat comes in through its walls and door [S1].\n\nA crack in the liner lets damp air reach the foam behind it, where the water can freeze and spoil the insulation.",
+        "zh": "冷冻室的内壁是一个模压成型的塑料箱。塑料是热的不良导体，不会生锈，表面光滑，一擦就干净。后部有一块盖板，挡住冷盘管和风扇。\n\n这项设计的冷冻室容积 95 升 [S1]，保持在约 −18℃，也就是新加坡食品局建议的冷冻温度 [S17]。在这个模拟里，约有 20 W 的热穿过它的箱壁和门漏进来 [S1]。\n\n内胆开裂，潮湿的空气就会钻到后面的发泡里，水在那里结冰，隔热就变差。"
+      }
+    },
+    "fresh-liner": {
+      "name": {
+        "en": "Fridge liner",
+        "zh": "冷藏室内胆"
+      },
+      "summary": {
+        "en": "Lines the fridge compartment; stepped to clear the bay.",
+        "zh": "冷藏室的塑料内胆，后下角让出机械仓。"
+      },
+      "detail": {
+        "en": "A moulded plastic box forms the inside of the fridge compartment. Its lower back corner is stepped up to leave room for the machine bay behind it, and the air duct runs up its back wall.\n\nThe fridge compartment holds 255 litres in this design [S1] and is kept at about 4 °C, the Singapore Food Agency's advised limit [S17]. In this simulation about 33 W of heat comes in through its walls and door [S1].\n\nThe liner and the steel case are not joined directly: foam fills the space between them, so there is no metal path for heat to follow.",
+        "zh": "冷藏室的内壁也是一个模压塑料箱。它的后下角向上收了一个台阶，给后面的机械仓让出位置；风道沿着它的后壁往上走。\n\n这项设计的冷藏室容积 255 升 [S1]，保持在约 4℃，也就是新加坡食品局建议的上限 [S17]。在这个模拟里，约有 33 W 的热穿过它的箱壁和门漏进来 [S1]。\n\n内胆和钢板外壳不直接相连，中间全是发泡，热就没有一条金属通道可走。"
+      }
+    },
+    "mullion": {
+      "name": {
+        "en": "Mullion",
+        "zh": "中梁"
+      },
+      "summary": {
+        "en": "Separates freezer from fridge; has openings for the air.",
+        "zh": "隔开冷冻室和冷藏室，中间留有风口。"
+      },
+      "detail": {
+        "en": "The mullion is the insulated divider between the two compartments: 60 mm of foam in this design [S1]. A slot along its front lets air from the fridge compartment return to the coil, and an opening at the back lets cold air down to the damper and duct.\n\nOne side is at about −18 °C and the other at about 4 °C. In tests on a real top-freezer fridge, heat conducted through the mullion was about 1.7 per cent of its load [S20].\n\nIf food blocks the return slot, air from the fridge compartment cannot get back to the coil, and that compartment warms even while the freezer stays cold.",
+        "zh": "中梁是两个室之间的隔热隔板，这项设计里是 60 mm 厚的发泡 [S1]。前沿一条回风口让冷藏室的空气回到盘管，后部一个开口让冷空气下到风门和风道。\n\n它一面约 −18℃，另一面约 4℃。对一台真实上冷冻冰箱的测试发现，经中梁传导进去的热约占总负荷的 1.7 % [S20]。\n\n回风口若被食物挡住，冷藏室的空气回不到盘管，冷冻室照样冷，冷藏室却会变暖。"
+      }
+    },
+    "freezer-door": {
+      "name": {
+        "en": "Freezer door",
+        "zh": "冷冻门"
+      },
+      "summary": {
+        "en": "Closes the freezer; an insulated door with its own seal.",
+        "zh": "关住冷冻室：一扇带门封的隔热门。"
+      },
+      "detail": {
+        "en": "The door is a steel outer skin and a plastic inner panel with foam between them, so it insulates like the walls. It hinges on the right in this model. The doors of real fridges are 3.8–7.0 cm thick [S20].\n\nEach time it opens, cold air spills out and warm, damp kitchen air takes its place. The water vapour in that air ends up as frost on the coil.\n\nA door that does not close squarely leaves a gap in the seal, so more damp air gets in.",
+        "zh": "门外层是钢板，内层是塑料板，中间是发泡，所以和箱壁一样隔热。这个模型的门铰链在右边。真实冰箱的门厚 3.8–7.0 cm [S20]。\n\n每开一次门，冷空气就流出去，温暖潮湿的厨房空气补进来，空气里的水汽最后在盘管上结成霜。\n\n门关得不正，门封就会留缝，更多潮湿的空气会钻进去。"
+      }
+    },
+    "fresh-door": {
+      "name": {
+        "en": "Fridge door",
+        "zh": "冷藏门"
+      },
+      "summary": {
+        "en": "Closes the fridge compartment and carries the door bins.",
+        "zh": "关住冷藏室，门内侧挂着门架。"
+      },
+      "detail": {
+        "en": "Built like the freezer door, with foam between a steel skin and a plastic panel, but taller. Its inner face carries the door bins, which swing out with it.\n\nWhen it opens, a switch at the door frame turns on the lamp [S20]. In the try-it, an open door lets heat in about 12 times faster than a shut one, 20 W against 1.6 W for each degree of difference [S1]; the open-door value is a teaching value, not a measurement.\n\nA door left ajar keeps the compressor running and lets damp air in, so frost builds up faster on the coil.",
+        "zh": "构造和冷冻门一样，钢板和塑料板之间是发泡，只是更高。门内侧挂着门架，随门一起转出来。\n\n门一开，门框上的开关就让灯亮 [S20]。在试一试里，开着的门让热进来的速度约是关着时的 12 倍：每差 1 度，分别是 20 W 和 1.6 W [S1]；开门的数值是教学用的参数，不是实测值。\n\n门没关严，压缩机就会一直运转，潮湿的空气也会钻进去，盘管上的霜结得更快。"
+      }
+    },
+    "door-gaskets": {
+      "name": {
+        "en": "Door seals",
+        "zh": "门封"
+      },
+      "summary": {
+        "en": "Seals the gap round each door with a soft, hollow strip.",
+        "zh": "用一圈软的空心胶条封住门四周的缝。"
+      },
+      "detail": {
+        "en": "Each door has a soft, flexible seal round its inner edge. It squashes against the front of the cabinet and fills the small gaps where the two surfaces are not perfectly flat. A magnet strip runs inside it.\n\nIn this simulation the seals, the edges of the case and the mullion together let in about 9 W of the 62 W that leaks into the closed fridge [S1]. In tests on a real top-freezer fridge, heat conducted through the gaskets alone was about 2.7 per cent of its load [S20].\n\nA seal that has hardened, split or come loose lets cold air out and warm, damp air in, and the compressor runs for longer.",
+        "zh": "每扇门的内侧边缘都有一圈柔软的门封。它压在箱口前沿上，把两面不完全平整处的小缝填满。门封里面嵌着一条磁条。\n\n在这个模拟里，门关着时漏进来的 62 W 中，门封、箱口边缘和中梁加起来约占 9 W [S1]。对一台真实上冷冻冰箱的测试发现，单是经门封传导进去的热就约占总负荷的 2.7 % [S20]。\n\n门封变硬、开裂或脱落，冷空气就会漏出去，温暖潮湿的空气钻进来，压缩机要运转得更久。"
+      }
+    },
+    "magnet-strips": {
+      "name": {
+        "en": "Magnet strips",
+        "zh": "磁条"
+      },
+      "summary": {
+        "en": "Pulls each door shut against the steel front of the case.",
+        "zh": "把门吸紧在箱口的钢板上。"
+      },
+      "detail": {
+        "en": "A flexible magnet strip lies inside each door seal. It is attracted to the steel front of the cabinet, so the door is pulled shut and the seal pressed flat without any latch.\n\nThe safety standard for household fridges allows magnetic door seals as the way of holding a door shut, and requires a test that the door can be released [S24]. Since 1958, fridges sold in the United States have had to open from inside with a push of no more than 66.7 newtons [S23].\n\nIf the strip weakens or the door sags, the seal no longer presses flat all the way round, and the door may not stay closed.",
+        "zh": "每圈门封里都有一条柔软的磁条。它被箱口前沿的钢板吸引，于是不用门闩，门就被吸紧，门封也被压平。\n\n家用冰箱的安全标准认可用磁性门封把门关住，并要求测试门能否被推开 [S24]。从 1958 年起，美国出售的冰箱必须能从里面用不超过 66.7 牛的推力推开 [S23]。\n\n磁条变弱或门下垂时，门封就不能一圈都压平，门也可能关不住。"
+      }
+    },
+    "shelves": {
+      "name": {
+        "en": "Shelves",
+        "zh": "搁架"
+      },
+      "summary": {
+        "en": "Holds food at different levels while air flows round it.",
+        "zh": "把食物分层放好，让空气在周围流动。"
+      },
+      "detail": {
+        "en": "Shelves divide the fridge compartment into levels, and one more sits in the freezer. Cold air from the vents on the back wall flows forward over each level and back to the coil.\n\nThe model has three shelves in the fridge compartment and one in the freezer. They are drawn as clear panels so that the air flows and the parts behind them can be seen.\n\nFood packed right up to the back wall can block a vent, so that level gets less cold air.",
+        "zh": "搁架把冷藏室分成几层，冷冻室里还有一层。后壁出风口吹出的冷空气，往前流过每一层，再回到盘管。\n\n模型的冷藏室有三层搁架，冷冻室一层。搁架画成透明的，好让人看清气流和后面的零件。\n\n食物若一直塞到后壁，可能挡住出风口，那一层得到的冷空气就少了。"
+      }
+    },
+    "crisper": {
+      "name": {
+        "en": "Crisper drawer",
+        "zh": "果蔬盒"
+      },
+      "summary": {
+        "en": "Holds vegetables and fruit in a drawer at the bottom.",
+        "zh": "底部的抽屉，用来放蔬菜和水果。"
+      },
+      "detail": {
+        "en": "A clear drawer at the bottom of the fridge compartment, below the lowest shelf, keeps vegetables and fruit together. The back of the compartment is shallower at the bottom, where the machine bay sits behind the liner, so the drawer stops short of the back wall.\n\nThe model draws it as one plain drawer. This topic gives no figure for the humidity inside it, because no source checked gives one for this kind of fridge.",
+        "zh": "冷藏室底部、最下一层搁架下面，有一个透明抽屉，把蔬菜和水果放在一起。冷藏室底部靠后的地方较浅，因为内胆后面是机械仓，所以抽屉不到后壁就停住了。\n\n模型把它画成一个简单的抽屉。本主题没有写抽屉里的湿度，因为查过的来源里没有给出这类冰箱的数字。"
+      }
+    },
+    "door-bins": {
+      "name": {
+        "en": "Door bins",
+        "zh": "门架"
+      },
+      "summary": {
+        "en": "Holds bottles and jars on the inside of the door.",
+        "zh": "挂在门内侧，放瓶瓶罐罐。"
+      },
+      "detail": {
+        "en": "Bins on the inside of each door hold bottles and jars. They are fixed to the door and swing out with it when it opens.\n\nThe model has three on the fridge door and one on the freezer door.\n\nHeavy bottles add weight to the door. A door that sags no longer presses its seal flat all the way round.",
+        "zh": "每扇门的内侧都挂着门架，用来放瓶子和罐子。门架固定在门上，开门时随门一起转出来。\n\n模型的冷藏门上有三个门架，冷冻门上有一个。\n\n重的瓶子会给门加重；门下垂了，门封就不能一圈都压平。"
+      }
+    },
+    "lamp": {
+      "name": {
+        "en": "Lamp and door switch",
+        "zh": "灯与门开关"
+      },
+      "summary": {
+        "en": "Lights the inside when the door opens; a switch controls it.",
+        "zh": "开门时照亮箱内，由门开关控制。"
+      },
+      "detail": {
+        "en": "A lamp at the top of the fridge compartment lights the shelves. A push-button switch at the door frame is pressed in by the closed door; opening the door releases it and turns the lamp on, and closing the door turns it off [S20].\n\nIn the try-it in chapter 2, the lamp lights whenever the door is set open.\n\nIf the switch sticks, the lamp may stay on with the door shut and add a little heat inside.",
+        "zh": "冷藏室顶部有一盏灯照亮搁架。门框上有一个按钮开关，门关着时把它压下去；门一开，按钮弹出，灯就亮；门一关，灯就灭 [S20]。\n\n在第 2 章的试一试里，只要把门设为开着，灯就会亮。\n\n开关卡住时，门关着灯也可能一直亮，给箱内添一点热。"
+      }
+    },
+    "evaporator": {
+      "name": {
+        "en": "Evaporator",
+        "zh": "蒸发器"
+      },
+      "summary": {
+        "en": "Takes heat from the air as the refrigerant boils inside.",
+        "zh": "冷媒在管里沸腾，从空气里吸热。"
+      },
+      "detail": {
+        "en": "Rows of tubes carry the refrigerant through closely spaced metal fins. Air blown between the fins gives its heat to the tubes, and the refrigerant inside boils. In fridges like this the coil is on the back wall of the freezer behind a panel, and a fan sends its cold air to both compartments [S20].\n\nIn this design the refrigerant boils at −25 °C, where the pressure of isobutane is about 0.058 MPa, below air pressure [S2]; makers' notes say household evaporators using it work below atmospheric pressure [S3]. In this simulation the coil takes in 108 W while the compressor runs at full speed [S1]. The fins on tested fridges are 6.3–9.5 mm apart [S20], so a little frost does not block them at once.\n\nA coil thick with frost lets less air through and takes in less heat; that is why the fridge defrosts it.",
+        "zh": "一排排管子穿过排得很密的金属鳍片，管里是冷媒。空气从鳍片之间吹过，把热交给管子，管里的冷媒就沸腾。这类冰箱的盘管装在冷冻室后壁的盖板后面，风扇把冷空气送到两个室 [S20]。\n\n这项设计里冷媒在 −25℃ 沸腾，这时异丁烷的压力约 0.058 MPa，低于大气压 [S2]；厂商资料也说，用它的家用冰箱蒸发器在低于大气压的状态下工作 [S3]。在这个模拟里，压缩机全速运转时，盘管吸热 108 W [S1]。受测冰箱的鳍片间距为 6.3–9.5 mm [S20]，所以一点点霜不会马上把它堵死。\n\n盘管结了厚霜，过风少了，吸的热也少了，所以冰箱要给它化霜。"
+      }
+    },
+    "frost": {
+      "name": {
+        "en": "Frost",
+        "zh": "霜"
+      },
+      "summary": {
+        "en": "Builds up on the cold coil from water vapour in the air.",
+        "zh": "空气里的水汽在冷盘管上结成的冰。"
+      },
+      "detail": {
+        "en": "Water vapour that reaches the coil turns to ice on the tubes and fins. Most of it comes from kitchen air let in when the door opens; Singapore's mean relative humidity is around 82 per cent [S16].\n\nThe model shows two states, a thin layer and a thick one, in chapter 5, drawn as a white coating on the tubes and the front of the fins.\n\nFrost is a poor conductor of heat and narrows the gaps between the fins, so a thick layer makes the coil take in less heat. The defrost heater removes it.",
+        "zh": "到达盘管的水汽在管子和鳍片上变成冰。它大多来自开门时进来的厨房空气；新加坡的年平均相对湿度约 82 % [S16]。\n\n第 5 章里，模型显示薄霜和厚霜两种状态，画成管子和鳍片前面的一层白色。\n\n霜是热的不良导体，又让鳍片之间的缝隙变窄，所以厚霜会让盘管吸的热变少。化霜加热器负责把它化掉。"
+      }
+    },
+    "evap-cover": {
+      "name": {
+        "en": "Duct cover",
+        "zh": "风道盖板"
+      },
+      "summary": {
+        "en": "Hides the coil and fan and forms the freezer's air duct.",
+        "zh": "挡住盘管和风扇，围成冷冻室的风道。"
+      },
+      "detail": {
+        "en": "A plastic panel across the back of the freezer separates the coil and fan from the food. Cold air leaves through a grille at the top and returns through a slot at the bottom, so the panel and the back wall form a duct.\n\nIn fridges of this kind the evaporator is generally on the rear wall of the freezer behind such a panel [S20]. Chapters 3 and 5 take the panel away to show the coil.\n\nFood packed against the grille or the slot stops the air going round, and the freezer warms.",
+        "zh": "冷冻室后部横着一块塑料盖板，把盘管和风扇与食物隔开。冷空气从顶部的格栅吹出，从底部的缝回来，盖板和后壁之间就成了一条风道。\n\n这类冰箱的蒸发器一般就在冷冻室后壁、这样一块盖板的后面 [S20]。第 3 章和第 5 章把盖板拿开，露出盘管。\n\n食物若堵住格栅或回风缝，空气转不起来，冷冻室就会变暖。"
+      }
+    },
+    "evap-fan": {
+      "name": {
+        "en": "Fan",
+        "zh": "风扇"
+      },
+      "summary": {
+        "en": "Blows air through the coil and into both compartments.",
+        "zh": "把空气吹过盘管，送进两个室。"
+      },
+      "detail": {
+        "en": "A small fan above the coil pulls air through it and blows it into the freezer and towards the damper for the fridge compartment. Its electric motor sits behind the blades.\n\nIn this design it uses about 4 W [S1]; evaporator fans in tested fridges use 3–7 W [S20]. One maker's service manual says the fan stops during defrosting [S21]. On screen it turns far more slowly than a real fan.\n\nIf the fan stops while the compressor runs, the coil gets colder but the cold does not reach the compartments, and they warm up.",
+        "zh": "盘管上方的一只小风扇，把空气抽过盘管，吹进冷冻室，也吹向通往冷藏室的风门。它的电机在扇叶后面。\n\n这项设计的风扇约用电 4 W [S1]；受测冰箱的蒸发器风扇用电 3–7 W [S20]。一家厂商的维修手册写明化霜时风扇停转 [S21]。画面里它比真实的风扇转得慢得多。\n\n压缩机运转而风扇不转时，盘管越来越冷，冷却送不到两个室，箱内就会变暖。"
+      }
+    },
+    "air-duct": {
+      "name": {
+        "en": "Air duct",
+        "zh": "冷藏风道"
+      },
+      "summary": {
+        "en": "Carries cold air down the back wall to each level.",
+        "zh": "沿后壁把冷空气送到冷藏室各层。"
+      },
+      "detail": {
+        "en": "A plastic channel on the back wall of the fridge compartment carries cold air from the damper down to three vents, one at each level. The air then flows forward over the shelves.\n\nPatents for top-freezer fridges describe the same arrangement: a duct along the back plate from the cooling fan to the fridge compartment's cold-air outlet [S40].\n\nIf the duct or a vent is blocked, that part of the fridge compartment gets little cold air even when the freezer is cold.",
+        "zh": "冷藏室后壁上有一条塑料风道，把冷空气从风门往下送到三个出风口，每层一个。冷空气再往前流过搁架。\n\n上冷冻冰箱的专利描述的也是这种布局：风道沿后板从风扇通到冷藏室的冷风出口 [S40]。\n\n风道或出风口被堵住时，即使冷冻室很冷，冷藏室的那一部分也得不到多少冷空气。"
+      }
+    },
+    "damper": {
+      "name": {
+        "en": "Damper",
+        "zh": "风门"
+      },
+      "summary": {
+        "en": "Opens or closes to let cold air down into the fridge.",
+        "zh": "开或关，决定冷空气是否流进冷藏室。"
+      },
+      "detail": {
+        "en": "A small flap in a frame at the top of the duct. When the control board opens it, cold air from behind the freezer flows down into the fridge compartment; when that compartment is cold enough, the flap closes.\n\nTop-freezer patents show the same arrangement, with the damper at the fridge compartment's cold-air outlet and a thermistor on its back wall [S40]. Chapter 4 shows the flap opening; a real damper moves only when the reading calls for it, not in a regular rhythm.\n\nA damper stuck shut leaves the fridge compartment warm while the freezer stays cold; one stuck open makes it too cold.",
+        "zh": "风道顶部框里的一块小门片。控制板让它打开时，冷冻室后面的冷空气就流进冷藏室；冷藏室够冷了，门片就关上。\n\n上冷冻冰箱的专利里也是这样：风门装在冷藏室的冷风出口，冷藏室后壁上有一个热敏电阻 [S40]。第 4 章显示门片打开；真实的风门只在读数需要时才动，不是有节奏地开合。\n\n风门卡在关着，冷冻室照样冷，冷藏室却偏暖；卡在开着，冷藏室就会太冷。"
+      }
+    },
+    "defrost-heater": {
+      "name": {
+        "en": "Defrost heater",
+        "zh": "化霜加热器"
+      },
+      "summary": {
+        "en": "Melts the frost off the coil when it is switched on.",
+        "zh": "通电发热，把盘管上的霜化掉。"
+      },
+      "detail": {
+        "en": "A heating element runs under the coil and up its sides. During a defrost the compressor and fan stop and the heater is switched on until a sensor on the coil shows that it has warmed up [S20, S21].\n\nIn this design it is 250 W, on for about 10 minutes about once a day, about 15 kWh a year [S1]. Heaters in tested top-freezer fridges are 390–413 W and run for 4.8–8 minutes [S20]; one maker's manual lists 250 W [S21]. The glow on screen only marks that it is switched on.\n\nIf the heater fails, frost keeps building until air can hardly pass the coil, and the fridge slowly warms.",
+        "zh": "加热丝沿盘管底部横走，再沿两侧往上。化霜时，压缩机和风扇停下，加热器通电，直到盘管上的传感器显示盘管已经回暖 [S20, S21]。\n\n这项设计的加热器为 250 W，约每天一次、每次约 10 分钟，一年约用 15 kWh [S1]。受测的上冷冻冰箱，加热器为 390–413 W，每次 4.8–8 分钟 [S20]；一家厂商的说明书写的是 250 W [S21]。画面里的发光只表示它通了电。\n\n加热器坏了，霜会越积越厚，直到空气几乎过不去，冰箱就慢慢变暖。"
+      }
+    },
+    "drain-trough": {
+      "name": {
+        "en": "Drain trough",
+        "zh": "接水槽"
+      },
+      "summary": {
+        "en": "Catches the water that drips off the coil when it thaws.",
+        "zh": "接住化霜时从盘管上滴下来的水。"
+      },
+      "detail": {
+        "en": "A shallow channel under the coil collects the meltwater and slopes towards an outlet in the middle, which feeds the drain tube.\n\nPatents describe the same layout: a drip pan below the evaporator leading to a drain tube [S41].\n\nIf the outlet freezes or clogs, the water collects and refreezes under the coil, and may spill into the freezer.",
+        "zh": "盘管下面一条浅槽接住化霜水，槽底向中间的出水口倾斜，水从那里流进排水管。\n\n专利里描述的也是这种布局：蒸发器下面一个接水盘，连着一根排水管 [S41]。\n\n出水口冻住或堵住，水就积在盘管下面重新结冰，还可能溢进冷冻室。"
+      }
+    },
+    "drain-tube": {
+      "name": {
+        "en": "Drain tube",
+        "zh": "排水管"
+      },
+      "summary": {
+        "en": "Carries meltwater down to the tray in the machine bay.",
+        "zh": "把化霜水引到机械仓里的蒸发盘。"
+      },
+      "detail": {
+        "en": "A tube runs from the trough down the back of the cabinet, inside the insulation, to the tray on top of the compressor.\n\nSome designs give it a trap, so that water can run down but air cannot flow up from the warm bay to the coil [S41].\n\nA blocked tube sends the meltwater back into the cabinet, where it collects inside the fridge.",
+        "zh": "排水管从接水槽出发，在发泡层里沿箱体背面往下，通到压缩机顶上的蒸发盘。\n\n有的设计在管上加一个存水弯，让水能流下去，温暖机械仓里的空气却不能顺着管往上到盘管 [S41]。\n\n排水管堵了，化霜水就会倒回箱体，积在冰箱里面。"
+      }
+    },
+    "sensors": {
+      "name": {
+        "en": "Temperature sensors",
+        "zh": "温度传感器"
+      },
+      "summary": {
+        "en": "Measures the temperature of freezer, fridge and coil.",
+        "zh": "测量冷冻室、冷藏室和盘管的温度。"
+      },
+      "detail": {
+        "en": "Three small sensors: one in the freezer, one in the fridge compartment and one on the coil. They are thermistors, whose electrical resistance changes with temperature; the control board turns that change into a reading.\n\nThe one on the coil ends each defrost: when it senses that the coil has warmed up enough, the heater is switched off [S20]. A top-freezer patent places a thermistor on the back wall of the fridge compartment to control the damper [S40].\n\nA faulty sensor gives the board a wrong reading, so a compartment is kept too warm or too cold.",
+        "zh": "三个小传感器：冷冻室一个，冷藏室一个，盘管上一个。它们都是热敏电阻，电阻随温度变化；控制板把这个变化换算成温度读数。\n\n盘管上的那个负责结束化霜：它感到盘管已经足够暖，加热器就断电 [S20]。一份上冷冻冰箱的专利把热敏电阻装在冷藏室后壁上，用来控制风门 [S40]。\n\n传感器坏了，控制板读到的数就不对，某个室就会偏暖或偏冷。"
+      }
+    },
+    "compressor": {
+      "name": {
+        "en": "Compressor",
+        "zh": "压缩机"
+      },
+      "summary": {
+        "en": "Squeezes the refrigerant gas and drives it round the loop.",
+        "zh": "压缩冷媒气体，推动它在回路里流动。"
+      },
+      "detail": {
+        "en": "A sealed steel shell holds an electric motor and a small piston pump, with the motor below and the cylinder on top [S42]. Gas from the suction pipe enters, is squeezed and leaves by the discharge pipe. As in most household fridges, it sits at the bottom rear [S20].\n\nIn this simulation it turns about 3,100 times a minute, uses about 56 W and raises the pressure from about 0.058 to about 0.53 MPa [S1, S2]. Variable-speed household compressors of this class run at 1,000–4,000 revolutions a minute and draw about 19–78 W [S4]. Its warm shell also dries the defrost water in the tray on top.\n\nThe loop around it holds flammable isobutane, so a compressor that will not start, or will not stop, is a job for a trained technician.",
+        "zh": "一个密封的钢壳里装着电机和一台小活塞泵，电机在下，气缸在上 [S42]。气体从回气管进来，被压缩后从排气管出去。和大多数家用冰箱一样，它装在背后底部 [S20]。\n\n在这个模拟里，它每分钟约转 3,100 圈，用电约 56 W，把压力从约 0.058 MPa 提高到约 0.53 MPa [S1, S2]。这类家用变频压缩机，转速为每分钟 1,000–4,000 转，用电约 19–78 W [S4]。它温热的外壳还顺便蒸干顶上蒸发盘里的化霜水。\n\n它所在的回路里装着可燃的异丁烷，所以压缩机不启动或停不下来时，要请受过训练的技工处理。"
+      }
+    },
+    "compressor-piston": {
+      "name": {
+        "en": "Piston and cylinder",
+        "zh": "活塞与气缸"
+      },
+      "summary": {
+        "en": "Moves back and forth to draw gas in and push it out.",
+        "zh": "来回运动，吸进气体再推出去。"
+      },
+      "detail": {
+        "en": "An eccentric on the crankshaft drives a connecting rod, which pushes a piston back and forth in a cylinder [S42]. Each outward stroke draws in a little gas; each inward stroke squeezes it and pushes it out at high pressure.\n\nIn this design the cylinder holds 8 cm³ [S1]; one household compressor's data sheet gives 7.2 cm³ [S4]. In this simulation the piston moves about 50 times a second; on screen it is slowed about 40 times. An air conditioner's rotary compressor works with a rolling piston instead.\n\nLiquid cannot be squeezed, so liquid reaching the cylinder can damage the pump; warming the return gas in the suction pipe helps to prevent this.",
+        "zh": "曲轴上的偏心轮带动连杆，连杆推着活塞在气缸里来回运动 [S42]。活塞每往外走一次，就吸进一小口气体；每往里走一次，就把气体压缩，以高压推出去。\n\n这项设计的气缸容积为 8 cm³ [S1]；一款家用压缩机的数据表写的是 7.2 cm³ [S4]。在这个模拟里，活塞每秒约来回 50 次；画面上放慢了约 40 倍。空调的转子压缩机用的则是滚动活塞。\n\n液体不能被压缩，液体进了气缸会损坏泵；回气管把回气加热，有助于避免这种情况。"
+      }
+    },
+    "compressor-motor": {
+      "name": {
+        "en": "Motor",
+        "zh": "电机"
+      },
+      "summary": {
+        "en": "Turns the crankshaft that drives the piston.",
+        "zh": "转动曲轴，带动活塞。"
+      },
+      "detail": {
+        "en": "Inside the shell, an electric motor with a fixed stator and a spinning rotor turns the crankshaft [S42]. The control board changes its speed to match how much heat has to be moved.\n\nIn this simulation it turns about 3,100 times a minute [S1]; on screen it is slowed right down. Variable-speed household compressors run from 1,000 to 4,000 revolutions a minute [S4].",
+        "zh": "外壳里有一台电机，由固定的定子和转动的转子组成，带动曲轴转动 [S42]。控制板根据要搬多少热来改变它的转速。\n\n在这个模拟里，它每分钟约转 3,100 圈 [S1]；画面里放慢了很多。家用变频压缩机的转速为每分钟 1,000–4,000 转 [S4]。"
+      }
+    },
+    "discharge-line": {
+      "name": {
+        "en": "Discharge pipe",
+        "zh": "排气管"
+      },
+      "summary": {
+        "en": "Carries hot, high-pressure gas to the condenser.",
+        "zh": "把高温高压的气体送到冷凝管。"
+      },
+      "detail": {
+        "en": "A short pipe from the top of the compressor to the condenser in the right side wall. It carries the gas just after it has been squeezed.\n\nIn this simulation the pressure inside is about 0.53 MPa [S1, S2]. Squeezing heats the gas, so this pipe is hot to touch while the compressor runs; this topic gives no figure for its temperature, as no checked source gives one for a design like this.",
+        "zh": "一段短管，从压缩机顶部通到右侧壁里的冷凝管，里面是刚被压缩过的气体。\n\n在这个模拟里，管内压力约 0.53 MPa [S1, S2]。气体被压缩后变热，所以压缩机运转时这根管摸上去很烫；本主题没有给出它的温度，因为查过的来源里没有这类设计的数字。"
+      }
+    },
+    "side-condenser": {
+      "name": {
+        "en": "Side condenser",
+        "zh": "侧壁冷凝管"
+      },
+      "summary": {
+        "en": "Gives the refrigerant's heat to the kitchen; makes liquid.",
+        "zh": "冷媒在这里把热交给厨房，凝结成液体。"
+      },
+      "detail": {
+        "en": "A long pipe runs up and down the inside of each side panel, the two sides joined across the top at the back. Hot gas from the compressor gives its heat through the steel to the kitchen air and condenses into liquid. Fixing the pipe to the panel heats the panel itself above room temperature [S38]. The left side is a mirror image of the right.\n\nIn this design the refrigerant condenses at 40 °C, where the pressure of isobutane is about 0.53 MPa [S2]; in this simulation it gives out 168 W while running [S1]. The model draws the pipe with fewer runs than a real one so that it can be seen. This hot-wall layout is one common arrangement; many larger fridges use a fan-cooled coil in the bottom bay instead [S20, S21].\n\nIf the sides are boxed in tightly, the heat cannot get away easily, the pressure in the condenser rises and the compressor uses more electricity.",
+        "zh": "一根长管在每块侧板内面上下来回，两侧的管在背后顶部横向相连。压缩机来的热气体，把热穿过钢板交给厨房的空气，自己凝结成液体。管子贴在侧板上，侧板本身就被加热到比室温高 [S38]。左侧和右侧互为镜像。\n\n这项设计里冷媒在 40℃ 凝结，这时异丁烷的压力约 0.53 MPa [S2]；在这个模拟里，运转时它放热 168 W [S1]。模型里的管比真实的少画了几个来回，好让人看清。这种“热壁”布局是常见做法之一；很多较大的冰箱则在底部机械仓里装一个用风扇吹的盘管 [S20, S21]。\n\n两侧被夹得太紧，热就不容易散出去，冷凝器里的压力升高，压缩机要用更多的电。"
+      }
+    },
+    "frame-pipe": {
+      "name": {
+        "en": "Frame pipe",
+        "zh": "门框防凝管"
+      },
+      "summary": {
+        "en": "Keeps the door frame warm so water does not condense on it.",
+        "zh": "让箱口保持温热，不凝水珠。"
+      },
+      "detail": {
+        "en": "The warm liquid leaving the side condensers runs round the front of the cabinet, just behind the steel at the door openings, before it goes on to the filter-drier. Most modern fridge-freezers use refrigerant tubes like this, and in most of them the tube carries warm liquid [S20].\n\nThe front of the cabinet around the freezer opening is close to very cold air; when warm, humid kitchen air touches a cold area there, moisture condenses [S44]. A loop of warm liquid keeps that front face warm [S39]. The heat has to be given out anyway, so no extra electricity is used.\n\nIf the frame is wet or icy, warm air may be getting past the seals, or the door may not be closing fully.",
+        "zh": "从侧壁冷凝管出来的温热液体，先沿箱口前沿、紧贴门洞后面的钢板绕一圈，再去干燥过滤器。如今大多数冰箱都用这样的冷媒管，而且多数管里走的是温热的液体 [S20]。\n\n冷冻室箱口周围的前沿紧挨着很冷的空气；温暖潮湿的厨房空气碰到那里的冷表面，水汽就会凝结 [S44]。一圈温热的液体让前沿保持温热 [S39]。这份热反正要放出去，所以不用多花电。\n\n门框若是湿的或结了冰，可能是暖空气从门封漏了进去，或者门没关严。"
+      }
+    },
+    "filter-drier": {
+      "name": {
+        "en": "Filter-drier",
+        "zh": "干燥过滤器"
+      },
+      "summary": {
+        "en": "Catches water and dirt before the capillary tube.",
+        "zh": "在毛细管之前吸掉水分、挡住杂质。"
+      },
+      "detail": {
+        "en": "A short, wider tube between the frame pipe and the capillary tube. It holds a drying material that takes up water, and a fine filter.\n\nThe capillary is very narrow, 0.7 mm across in this design [S1], and the refrigerant becomes very cold after it, so even a little water could freeze and block it. The cold side of the loop is below air pressure [S3], so any leak there would draw damp air in; that is another reason the loop must stay dry and sealed.",
+        "zh": "门框防凝管和毛细管之间一段较粗的短管，里面装着吸水的干燥剂和一层细滤网。\n\n毛细管很细，这项设计里内径只有 0.7 mm [S1]，冷媒经过它之后变得很冷，哪怕一点点水也可能结冰把它堵住。回路的冷端低于大气压 [S3]，那里一旦有漏点，就会吸进潮湿的空气；这也是回路必须保持干燥、密封的原因。"
+      }
+    },
+    "capillary-tube": {
+      "name": {
+        "en": "Capillary tube",
+        "zh": "毛细管"
+      },
+      "summary": {
+        "en": "Drops the liquid's pressure bit by bit along its length.",
+        "zh": "让液体的压力沿着管一点点降下来。"
+      },
+      "detail": {
+        "en": "A very long, very thin tube with no moving parts. As the liquid refrigerant is forced through it, its pressure falls little by little along the way and part of it boils, so it reaches the evaporator cold. Tubes like this, exchanging heat with the suction pipe, are the most common way of controlling the flow in fridge-freezers [S20].\n\nIn this design it is 3 m long with a bore of 0.7 mm [S1]; these are design values. In household fridges the stretch soldered to the suction pipe is usually about 1.2–1.8 m long [S43]. The model draws it much thicker so that it can be seen. In this simulation about 30 per cent of the refrigerant is gas when it leaves the tube [S1].\n\nA kinked or blocked capillary stops the flow: the evaporator warms up while the compressor keeps running.",
+        "zh": "一根很长、很细、没有活动件的管。液态冷媒被压着挤过它，压力沿途一点点降低，一部分沸腾，到蒸发器时已经很冷。这种和回气管换热的毛细管，是冰箱里控制冷媒流量最常见的方式 [S20]。\n\n这项设计里它长 3 m、内径 0.7 mm [S1]，这两个是设计值。家用冰箱里焊贴在回气管上的那一段通常长约 1.2–1.8 m [S43]。模型把它画粗了很多，好让人看见。在这个模拟里，冷媒离开毛细管时约 30 % 已经是气体 [S1]。\n\n毛细管被压扁或堵住，冷媒就流不过去：压缩机还在运转，蒸发器却变暖了。"
+      }
+    },
+    "suction-line": {
+      "name": {
+        "en": "Suction pipe",
+        "zh": "回气管"
+      },
+      "summary": {
+        "en": "Brings the gas back from the coil to the compressor.",
+        "zh": "把气体从盘管带回压缩机。"
+      },
+      "detail": {
+        "en": "A pipe runs from the coil behind the freezer down the back of the cabinet, inside the insulation, to the compressor. The capillary tube is soldered along its outside, so the cold gas inside is warmed by the liquid in the capillary [S43].\n\nBy the time it reaches the compressor the gas is near room temperature: about 20 °C in this simulation [S1], while 20–32 °C is usual for household appliances [S3]. While the compressor runs, the pressure inside is about 0.058 MPa, below air pressure [S2].",
+        "zh": "回气管从冷冻室后面的盘管出发，在发泡层里沿箱体背面往下，通到压缩机。毛细管沿着它的外面焊在一起，所以管里的冷气体被毛细管里的液体加热 [S43]。\n\n气体到压缩机时已接近室温：在这个模拟里约 20℃ [S1]，家用电器通常在 20–32℃ [S3]。压缩机运转时，管内压力约 0.058 MPa，低于大气压 [S2]。"
+      }
+    },
+    "drain-tray": {
+      "name": {
+        "en": "Drain tray",
+        "zh": "蒸发盘"
+      },
+      "summary": {
+        "en": "Holds meltwater on the compressor until it evaporates.",
+        "zh": "把化霜水留在压缩机上，直到蒸发掉。"
+      },
+      "detail": {
+        "en": "A shallow tray sits on top of the compressor at the bottom of the back. Meltwater from the drain tube collects in it, and the warmth of the compressor evaporates it into the kitchen air [S20].\n\nIt is the same change of state as a puddle drying in the sun, only quicker, because the compressor is warm. Because the water evaporates, nobody has to empty the tray.",
+        "zh": "一个浅盘放在背后底部的压缩机顶上。排水管流下来的化霜水积在盘里，压缩机的热把它蒸发到厨房的空气里 [S20]。\n\n这和地上的水洼被太阳晒干是同一种物态变化，只是压缩机温热，蒸发得更快。水会蒸发掉，所以不用人去倒。"
+      }
+    },
+    "control-board": {
+      "name": {
+        "en": "Control board",
+        "zh": "控制板"
+      },
+      "summary": {
+        "en": "Reads the sensors; runs compressor, fan, damper and defrost.",
+        "zh": "读取传感器，控制压缩机、风扇、风门和化霜。"
+      },
+      "detail": {
+        "en": "A small electronic board in a covered box on the back of the cabinet, near the top. It reads the three temperature sensors and the door switch, sets the compressor's speed, switches the fan, opens and closes the damper and runs the defrost.\n\nDefrost may start after a set amount of compressor running time, usually 10 to 12 hours with a timer, or later when an adaptive control finds little frost [S20]. One maker's manual starts defrost when the compressor's added-up running time reaches a set point [S21]. Turning the setting dial changes the temperature the board aims for.\n\nA fault in the board can leave the compressor stopped, or running without a break.",
+        "zh": "装在箱体背面靠上一个盒子里的小电路板。它读取三个温度传感器和门开关，设定压缩机的转速，开关风扇，开关风门，并安排化霜。\n\n化霜可以在压缩机累计运转一段时间后开始，用定时器时通常是 10–12 小时；自适应控制在霜结得少时会等得更久 [S20]。一家厂商的说明书写明，压缩机累计运转时间到了设定值就开始化霜 [S21]。转动温度旋钮，改变的是控制板要达到的目标温度。\n\n控制板出了故障，压缩机可能一直不转，也可能转个不停。"
+      }
+    },
+    "bay-grille": {
+      "name": {
+        "en": "Machine bay cover",
+        "zh": "机械仓后盖"
+      },
+      "summary": {
+        "en": "Covers the machine bay and lets warm air out.",
+        "zh": "盖住机械仓，让热空气散出去。"
+      },
+      "detail": {
+        "en": "A slotted cover closes the machine bay at the bottom of the back. The slots let the warm air around the compressor out and cooler kitchen air in.\n\nIn most household fridges the compressor is at the bottom rear [S20]. Chapters 3, 5 and 6 take the cover away to show the bay.\n\nLeave the gap behind the fridge that the maker's manual asks for; a back pushed hard against the wall traps the warm air.",
+        "zh": "背后底部一块带缝的盖板，关住机械仓。缝隙让压缩机周围的热空气出去，较凉的厨房空气进来。\n\n大多数家用冰箱的压缩机都装在背后底部 [S20]。第 3、5、6 章把盖板拿开，露出机械仓。\n\n冰箱背后要按说明书留出距离；背面紧贴墙壁，热空气就散不出去。"
+      }
+    },
+    "food-items": {
+      "name": {
+        "en": "Food (context)",
+        "zh": "食物（示意）"
+      },
+      "summary": {
+        "en": "Shows where food goes: generic, unlabelled shapes.",
+        "zh": "表示食物放在哪里：没有标签的通用形状。"
+      },
+      "detail": {
+        "en": "Bottles, boxes and fruit are placed on the shelves to show how a fridge is used and how cold air flows round food. They are generic shapes with no labels or brands, and they are not counted as parts of the fridge.\n\nIn the try-it in chapter 2, the full setting shows them and the empty setting hides them. A full fridge counts as about 12 kg of water and an empty one as about 2 kg [S1]. That is a simplification: real foods take in heat in different amounts.",
+        "zh": "搁架上摆着瓶子、盒子和水果，用来表示冰箱怎样使用、冷空气怎样绕着食物流动。它们是没有标签、没有品牌的通用形状，不算冰箱的零件。\n\n在第 2 章的试一试里，选“满”时显示它们，选“空”时隐藏。装满的冰箱按约 12 kg 水计算，空冰箱按约 2 kg [S1]。这是一种简化：真实的食物吸热多少各不相同。"
+      }
+    }
+  },
+  "groups": {
+    "cabinet": {
+      "en": "Cabinet and doors",
+      "zh": "箱体与门"
+    },
+    "cold-side": {
+      "en": "Cold side",
+      "zh": "冷端"
+    },
+    "machine": {
+      "en": "Machine and warm side",
+      "zh": "机械与热端"
+    },
+    "refrigerant": {
+      "en": "Refrigerant loop",
+      "zh": "冷媒回路"
+    },
+    "air-water": {
+      "en": "Air and water",
+      "zh": "空气与水"
+    }
+  },
+  "flows": {},
+  "chainName": {
+    "outer-case": {
+      "en": "Outer case",
+      "zh": "外箱"
+    },
+    "side-panel-right": {
+      "en": "Right panel",
+      "zh": "右侧板"
+    },
+    "foam": {
+      "en": "Foam",
+      "zh": "发泡层"
+    },
+    "freezer-liner": {
+      "en": "Freezer liner",
+      "zh": "冷冻内胆"
+    },
+    "fresh-liner": {
+      "en": "Fridge liner",
+      "zh": "冷藏内胆"
+    },
+    "mullion": {
+      "en": "Mullion",
+      "zh": "中梁"
+    },
+    "freezer-door": {
+      "en": "Freezer door",
+      "zh": "冷冻门"
+    },
+    "fresh-door": {
+      "en": "Fridge door",
+      "zh": "冷藏门"
+    },
+    "door-gaskets": {
+      "en": "Door seals",
+      "zh": "门封"
+    },
+    "magnet-strips": {
+      "en": "Magnet strips",
+      "zh": "磁条"
+    },
+    "shelves": {
+      "en": "Shelves",
+      "zh": "搁架"
+    },
+    "crisper": {
+      "en": "Crisper",
+      "zh": "果蔬盒"
+    },
+    "door-bins": {
+      "en": "Door bins",
+      "zh": "门架"
+    },
+    "lamp": {
+      "en": "Lamp",
+      "zh": "灯"
+    },
+    "evaporator": {
+      "en": "Evaporator",
+      "zh": "蒸发器"
+    },
+    "frost": {
+      "en": "Frost",
+      "zh": "霜"
+    },
+    "evap-cover": {
+      "en": "Duct cover",
+      "zh": "风道盖板"
+    },
+    "evap-fan": {
+      "en": "Fan",
+      "zh": "风扇"
+    },
+    "air-duct": {
+      "en": "Air duct",
+      "zh": "冷藏风道"
+    },
+    "damper": {
+      "en": "Damper",
+      "zh": "风门"
+    },
+    "defrost-heater": {
+      "en": "Defrost heater",
+      "zh": "化霜加热器"
+    },
+    "drain-trough": {
+      "en": "Drain trough",
+      "zh": "接水槽"
+    },
+    "drain-tube": {
+      "en": "Drain tube",
+      "zh": "排水管"
+    },
+    "sensors": {
+      "en": "Sensors",
+      "zh": "传感器"
+    },
+    "compressor": {
+      "en": "Compressor",
+      "zh": "压缩机"
+    },
+    "compressor-piston": {
+      "en": "Piston",
+      "zh": "活塞"
+    },
+    "compressor-motor": {
+      "en": "Motor",
+      "zh": "电机"
+    },
+    "discharge-line": {
+      "en": "Discharge pipe",
+      "zh": "排气管"
+    },
+    "side-condenser": {
+      "en": "Side condenser",
+      "zh": "侧壁冷凝管"
+    },
+    "frame-pipe": {
+      "en": "Frame pipe",
+      "zh": "门框防凝管"
+    },
+    "filter-drier": {
+      "en": "Filter drier",
+      "zh": "干燥过滤器"
+    },
+    "capillary-tube": {
+      "en": "Capillary tube",
+      "zh": "毛细管"
+    },
+    "suction-line": {
+      "en": "Suction pipe",
+      "zh": "回气管"
+    },
+    "drain-tray": {
+      "en": "Drain tray",
+      "zh": "蒸发盘"
+    },
+    "control-board": {
+      "en": "Control board",
+      "zh": "控制板"
+    },
+    "bay-grille": {
+      "en": "Bay cover",
+      "zh": "机械仓后盖"
+    }
+  },
+  "telemetry": {
+    "compressor": {
+      "en": "Compressor",
+      "zh": "压缩机"
+    },
+    "high-side": {
+      "en": "High side",
+      "zh": "高压侧"
+    },
+    "low-side": {
+      "en": "Low side",
+      "zh": "低压侧"
+    },
+    "power": {
+      "en": "Power",
+      "zh": "功率"
+    },
+    "heat-out": {
+      "en": "Heat out",
+      "zh": "放热"
+    },
+    "fridge-air": {
+      "en": "Fridge air",
+      "zh": "冷藏室空气"
+    }
+  },
+  "spec": [
+    {
+      "key": {
+        "en": "Type",
+        "zh": "类型"
+      },
+      "value": "TOP-FREEZER · FROST-FREE",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Volume",
+        "zh": "容积"
+      },
+      "value": "350 L · 95 + 255",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Refrigerant",
+        "zh": "冷媒"
+      },
+      "value": "R600a · 55 g",
+      "tag": "design"
+    },
+    {
+      "key": {
+        "en": "Energy",
+        "zh": "年耗电"
+      },
+      "value": "317 kWh/yr",
+      "tag": "sim"
+    }
+  ],
+  "controls": {
+    "elapsed-s": {
+      "label": {
+        "en": "Time",
+        "zh": "经过时间"
+      }
+    },
+    "setup": {
+      "label": {
+        "en": "Door and walls",
+        "zh": "门与箱壁"
+      },
+      "options": {
+        "closed": {
+          "en": "Door shut",
+          "zh": "关门"
+        },
+        "open": {
+          "en": "Door open",
+          "zh": "开门"
+        },
+        "thin": {
+          "en": "Thin foam, door shut",
+          "zh": "薄发泡、关门"
+        }
+      }
+    },
+    "contents": {
+      "label": {
+        "en": "Contents",
+        "zh": "箱内物品"
+      },
+      "options": {
+        "full": {
+          "en": "Full",
+          "zh": "满"
+        },
+        "empty": {
+          "en": "Empty",
+          "zh": "空"
+        }
+      }
+    },
+    "heater-w": {
+      "label": {
+        "en": "Defrost heater",
+        "zh": "化霜加热器"
+      }
+    }
+  },
+  "outputs": {
+    "fridge-c": {
+      "label": {
+        "en": "Fridge air",
+        "zh": "冷藏室温度"
+      }
+    },
+    "baseline-c": {
+      "label": {
+        "en": "Full, door shut",
+        "zh": "满、关门"
+      }
+    },
+    "fridge-change": {
+      "label": {
+        "en": "Change",
+        "zh": "变化"
+      }
+    },
+    "fridge-rate": {
+      "label": {
+        "en": "Heat flowing in",
+        "zh": "流入的热"
+      }
+    },
+    "fridge-direction": {
+      "label": {
+        "en": "Fridge air is",
+        "zh": "冷藏室"
+      },
+      "states": {
+        "warming": {
+          "en": "Warming",
+          "zh": "在升温"
+        },
+        "steady": {
+          "en": "Steady",
+          "zh": "不变"
+        },
+        "cooling": {
+          "en": "Cooling",
+          "zh": "在降温"
+        }
+      }
+    },
+    "vs-baseline": {
+      "label": {
+        "en": "Compared with full, door shut",
+        "zh": "与满、关门相比"
+      },
+      "states": {
+        "first-warmer": {
+          "en": "Warmer",
+          "zh": "更暖"
+        },
+        "same": {
+          "en": "The same",
+          "zh": "相同"
+        },
+        "second-warmer": {
+          "en": "Colder",
+          "zh": "更冷"
+        }
+      }
+    }
+  }
+}

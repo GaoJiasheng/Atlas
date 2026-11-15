@@ -1,0 +1,231 @@
+{
+  "terms": [
+    {
+      "id": "refrigerant",
+      "term": {
+        "en": "Refrigerant",
+        "zh": "冷媒（制冷剂）"
+      },
+      "definition": {
+        "en": "The substance sealed in the fridge's loop of pipes. It boils in the cold coil, taking in heat, and condenses in the warm pipes, giving heat out, over and over again.",
+        "zh": "封在冰箱管路里的物质。它在冷盘管里沸腾、吸热，在温热的管里凝结、放热，一遍又一遍循环。"
+      },
+      "see": [
+        "compressor",
+        "gwp"
+      ]
+    },
+    {
+      "id": "compressor",
+      "term": {
+        "en": "Compressor",
+        "zh": "压缩机"
+      },
+      "definition": {
+        "en": "The pump of the refrigerant loop. It squeezes cool, low-pressure refrigerant gas into hot, high-pressure gas and keeps the refrigerant moving round the loop.",
+        "zh": "冷媒回路里的泵。它把较冷的低压冷媒气体压成很热的高压气体，推动冷媒在回路里流动。"
+      },
+      "see": [
+        "refrigerant"
+      ]
+    },
+    {
+      "id": "condenser",
+      "term": {
+        "en": "Condenser",
+        "zh": "冷凝器"
+      },
+      "definition": {
+        "en": "The pipes where hot refrigerant gas gives its heat to the kitchen air and turns into a liquid. In this fridge they are fixed to the inside of the side walls.",
+        "zh": "热的冷媒气体在这里把热交给厨房空气、凝结成液体的管。这台冰箱的冷凝管贴在侧壁内面。"
+      },
+      "see": [
+        "evaporator"
+      ]
+    },
+    {
+      "id": "evaporator",
+      "term": {
+        "en": "Evaporator",
+        "zh": "蒸发器"
+      },
+      "definition": {
+        "en": "The cold coil behind the freezer, where the refrigerant boils at low pressure and takes in heat from the air blown through it.",
+        "zh": "冷冻室后面的冷盘管。冷媒在这里低压沸腾，从吹过的空气里吸热。"
+      },
+      "see": [
+        "condenser",
+        "frost"
+      ]
+    },
+    {
+      "id": "capillary-tube",
+      "term": {
+        "en": "Capillary tube",
+        "zh": "毛细管"
+      },
+      "definition": {
+        "en": "A long, very thin tube that the liquid refrigerant is pushed through. Its pressure falls bit by bit along the tube, so that it can boil cold in the evaporator. It does the job of an air conditioner's expansion valve.",
+        "zh": "一根又细又长的管，液态冷媒从里面挤过去，压力沿着管一点点降低，到蒸发器里就能在很低的温度下沸腾。它起的作用相当于空调里的膨胀阀。"
+      },
+      "see": [
+        "evaporator"
+      ]
+    },
+    {
+      "id": "insulation",
+      "term": {
+        "en": "Insulation",
+        "zh": "隔热层"
+      },
+      "definition": {
+        "en": "A material that slows the flow of heat, like the foam in a fridge's walls and doors. No material stops heat completely.",
+        "zh": "减慢热流动的材料，例如冰箱箱壁和门里的发泡。没有哪种材料能完全挡住热。"
+      },
+      "see": [
+        "conductor-of-heat"
+      ]
+    },
+    {
+      "id": "conductor-of-heat",
+      "term": {
+        "en": "Good and poor conductors of heat",
+        "zh": "热的良导体与不良导体"
+      },
+      "definition": {
+        "en": "Good conductors of heat, such as metals, let heat pass through easily. Poor conductors, such as air, plastics, rubber and foam, let heat pass only slowly.",
+        "zh": "热的良导体（如金属）让热容易通过；热的不良导体（如空气、塑料、橡胶、发泡）让热通过得很慢。"
+      },
+      "see": [
+        "insulation"
+      ]
+    },
+    {
+      "id": "frost",
+      "term": {
+        "en": "Frost",
+        "zh": "霜"
+      },
+      "definition": {
+        "en": "Ice that forms when water vapour in the air meets a surface colder than 0 °C.",
+        "zh": "空气里的水汽碰到低于 0℃ 的表面时结成的冰。"
+      },
+      "see": [
+        "defrost"
+      ]
+    },
+    {
+      "id": "defrost",
+      "term": {
+        "en": "Defrost",
+        "zh": "化霜"
+      },
+      "definition": {
+        "en": "To melt the frost off the cold coil. In this fridge a heater under the coil switches on for about 10 minutes about once a day, and the water drains away.",
+        "zh": "把冷盘管上的霜融掉。这台冰箱约每天一次让盘管下面的加热器通电约 10 分钟，化成的水再排出去。"
+      },
+      "see": [
+        "frost-free"
+      ]
+    },
+    {
+      "id": "frost-free",
+      "term": {
+        "en": "Frost-free",
+        "zh": "无霜"
+      },
+      "definition": {
+        "en": "A fridge design in which frost forms only on the hidden coil behind the freezer and is melted away automatically, so it does not build up inside the compartments.",
+        "zh": "一种冰箱设计：霜只结在冷冻室后面藏着的盘管上，并被自动化掉，所以不会在箱内积起来。"
+      },
+      "see": [
+        "defrost",
+        "frost"
+      ]
+    },
+    {
+      "id": "damper",
+      "term": {
+        "en": "Damper",
+        "zh": "风门"
+      },
+      "definition": {
+        "en": "A small flap that opens and closes to control how much cold air flows from behind the freezer down into the fridge compartment.",
+        "zh": "一块能开能关的小门片，控制有多少冷空气从冷冻室后面流到冷藏室。"
+      },
+      "see": [
+        "sensor"
+      ]
+    },
+    {
+      "id": "sensor",
+      "term": {
+        "en": "Temperature sensor",
+        "zh": "温度传感器"
+      },
+      "definition": {
+        "en": "A part that turns temperature into an electrical signal for the control board. The ones in this fridge are thermistors, whose electrical resistance changes with temperature.",
+        "zh": "把温度变成电信号告诉控制板的元件。这台冰箱用的是热敏电阻，它的电阻随温度变化。"
+      },
+      "see": [
+        "damper"
+      ]
+    },
+    {
+      "id": "tick-rating",
+      "term": {
+        "en": "Energy label (ticks)",
+        "zh": "能效标签（勾）"
+      },
+      "definition": {
+        "en": "Singapore's compulsory energy label. Fridges are rated from 1 to 4 ticks; more ticks means less electricity for a fridge of that size. The label also shows the yearly electricity use and its cost.",
+        "zh": "新加坡强制使用的能效标签。冰箱按 1 到 4 个勾评级，同样大小的冰箱，勾越多用电越少。标签上还写着一年的用电量和电费。"
+      },
+      "see": [
+        "gwp"
+      ]
+    },
+    {
+      "id": "gwp",
+      "term": {
+        "en": "Global warming potential",
+        "zh": "全球变暖潜能值"
+      },
+      "definition": {
+        "en": "How much a gas warms the climate over 100 years, compared with the same mass of carbon dioxide. Isobutane's is about 3; that of the refrigerant it replaced, R-134a, is 1,430.",
+        "zh": "一种气体在 100 年里让气候变暖的作用，与同样质量的二氧化碳相比是多少倍。异丁烷约为 3；它取代的冷媒 R-134a 为 1,430。"
+      },
+      "see": [
+        "refrigerant"
+      ]
+    },
+    {
+      "id": "cfc",
+      "term": {
+        "en": "CFC (chlorofluorocarbon)",
+        "zh": "含氯氟烃（CFC）"
+      },
+      "definition": {
+        "en": "A family of refrigerants made from around 1930 because they were not poisonous and did not burn. They were later found to destroy the ozone layer and have been phased out under the Montreal Protocol.",
+        "zh": "约从 1930 年起使用的一类冷媒，因为没有毒、不燃烧而被选用。后来发现它们会破坏臭氧层，已按《蒙特利尔议定书》逐步淘汰。"
+      },
+      "see": [
+        "ozone-layer"
+      ]
+    },
+    {
+      "id": "ozone-layer",
+      "term": {
+        "en": "Ozone layer",
+        "zh": "臭氧层"
+      },
+      "definition": {
+        "en": "A layer high in the atmosphere where ozone gas screens out much of the Sun's ultraviolet light.",
+        "zh": "大气高处臭氧较多的一层，挡住了太阳的大部分紫外线。"
+      },
+      "see": [
+        "cfc"
+      ]
+    }
+  ]
+}
