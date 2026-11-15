@@ -1,0 +1,90 @@
+[
+ {
+  "id": "DL1",
+  "file": "dl1-merdith/Merdith_etal_2021_ESR_v1.2.4.zip",
+  "url": "https://zenodo.org/records/13635864/files/Merdith_etal_2021_ESR_v1.2.4.zip?download=1",
+  "bytes": 8496217,
+  "upstreamMd5": "181ab32d1d235a923ee343568731e64a",
+  "md5": "181ab32d1d235a923ee343568731e64a",
+  "sha256": "c08cd59f9fc26a99315a9a28c7a8da33ef7dc16e60c14eaec24e673cb6b78e6e",
+  "licence": "CC BY 4.0",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL2",
+  "file": "dl2-pygplates/pygplates-1.0.0-cp39-cp39-macosx_11_0_arm64.whl",
+  "url": "https://pypi.org/project/pygplates/1.0.0/",
+  "bytes": 59930915,
+  "upstreamMd5": null,
+  "md5": "afc6224248af7a14b4b853497c33b29b",
+  "sha256": "ba0aa4f3db2af7d8661749898a0abd79e7924ffcdbb1df118bfd767ee287ca4c",
+  "licence": "GPL-2.0 (build tool only, not distributed)",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL3",
+  "file": "dl3-pbdb/occs.csv",
+  "url": "https://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Mesosaurus,Glossopteris,Lystrosaurus,Cynognathus&show=coords,loc,strat,ref,class&limit=all",
+  "bytes": 804642,
+  "upstreamMd5": null,
+  "md5": "2144242e0bdbd5087a6dbda368b1f1be",
+  "sha256": "257667acf1a7ad9533f26938f957760a40ba8853bf3c8bac137c13c3add74ddc",
+  "licence": "CC0 (datainfo header)",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL4",
+  "file": "dl4-agegrid/age.2020.1.GTS2012.6m.grd",
+  "url": "https://www.earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/age.2020.1.GTS2012.6m.grd",
+  "bytes": 25985812,
+  "upstreamMd5": null,
+  "md5": "1dc1e3520d46f2a5f83ac1a75f46dbe1",
+  "sha256": "67c1803d08050578a8b131b13788d1583192dcc3b06d470474e9529e455f2f6c",
+  "licence": "CC BY 4.0",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL4",
+  "file": "dl4-agegrid/README.txt",
+  "url": "https://www.earthbyte.org/webdav/ftp/earthbyte/agegrid/2020/Grids/README.txt",
+  "bytes": 10611,
+  "upstreamMd5": null,
+  "md5": "7f8939eb635619fdd2890fc72118b310",
+  "sha256": "e872faa247d8f61ae5772d28145bd7ccac45ec60f600cf5fa1f7f915f631bb02",
+  "licence": "CC BY 4.0",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL5",
+  "file": "dl5-emag2/N30W060.earth_mag_02m_p.jp2",
+  "url": "https://oceania.generic-mapping-tools.org/server/earth/earth_mag/earth_mag_02m_p/N30W060.earth_mag_02m_p.jp2",
+  "bytes": 1556154,
+  "upstreamMd5": null,
+  "md5": "cb6efd10c87de2e3e756c797f50a1068",
+  "sha256": "cf4df77013a0f265fa0d7c6174656006292977cac1c74a9ad884e233fdab4a6c",
+  "licence": "EMAG2v3 (NOAA NCEI, US Government data) via GMT remote data",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL5",
+  "file": "dl5-emag2/earth_mag_server.txt",
+  "url": "https://oceania.generic-mapping-tools.org/server/earth/earth_mag/earth_mag_server.txt",
+  "bytes": 4621,
+  "upstreamMd5": null,
+  "md5": "a20d98dd537f49791291403ce8f4076c",
+  "sha256": "10dcc2b67382702a9f4ab86a597bb53964a22f1484af05bda66fbf5be85560de",
+  "licence": "GMT server index",
+  "accessed": "2026-11-15"
+ },
+ {
+  "id": "DL6",
+  "file": "dl6-jpl/table2.html",
+  "url": "https://sideshow.jpl.nasa.gov/post/tables/table2.html",
+  "bytes": 463647,
+  "upstreamMd5": null,
+  "md5": "1c023f3b05a268774a2858ce5b6ae4bc",
+  "sha256": "808b397610add7e27e95d3b39656b0f2859447795cbb4d7d2cef401fa3df59d5",
+  "licence": "NASA JPL (US Government); individual values cited",
+  "accessed": "2026-11-15"
+ }
+]

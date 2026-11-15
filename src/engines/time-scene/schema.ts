@@ -493,6 +493,8 @@ export type RiversFile = z.output<typeof riversFile>;
 export const timeSceneGeoData = z
   .object({
     deepTime: deepTimeBundleSchema.optional(),
+    /** Build-time only (validate-content): the rotation map's object ids (docs/72 E-CD3). */
+    rotation: z.object({ objects: z.array(z.string().min(1)) }).strict().optional(),
     entities: entitiesFile,
     control: controlFile,
     movements: movementsFile,
@@ -705,7 +707,8 @@ export type ClimatologyChapterState = z.output<typeof climatologyChapterState>;
 
 export function timeSceneIds(data: TimeSceneGeoData, topic?: Pick<TopicLike, 'datedLayers'>): { kind: string; id: string }[] {
   return [
-    ...(data.deepTime ? (data.glossary?.terms ?? []).map((t) => ({ kind: 'term', id: t.id })) : []),
+    ...(data.deepTime || data.rotation ? (data.glossary?.terms ?? []).map((t) => ({ kind: 'term', id: t.id })) : []),
+    ...(data.rotation?.objects ?? []).map((id) => ({ kind: 'plate object', id })),
     ...(data.deepTime?.reconstruction.frames ?? []).map((f) => ({ kind: 'reconstruction frame', id: f.id })),
     ...[...(data.deepTime?.points ?? []), ...(data.deepTime?.cards ?? [])].map((p) => ({ kind: 'modern evidence', id: p.id })),
     ...data.entities.map((e) => ({ kind: 'entity', id: e.id })),
@@ -729,7 +732,11 @@ export function timeChapterRefs(state: TimeChapterState): string[] {
 }
 
 /** The reader index lists events; a reconstruction topic's lists its modern points / cards (docs/47 E-DE2) instead. */
-export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'> & Partial<Pick<TimeSceneGeoData, 'deepTime'>>): string[] {
+export function timeChapterIndexIssues(state: TimeChapterState, data: Pick<TimeSceneGeoData, 'events'> & Partial<Pick<TimeSceneGeoData, 'deepTime' | 'rotation'>>): string[] {
+  if (data.rotation) {
+    const objects = new Set(data.rotation.objects);
+    return (state.index ?? []).flatMap((id, i) => objects.has(id) ? [] : [`state.index.${i}: unknown plate object "${id}"`]);
+  }
   if (data.deepTime) {
     const objects = new Set([...data.deepTime.points, ...data.deepTime.cards].map((object) => object.id));
     return (state.index ?? []).flatMap((id, i) => objects.has(id) ? [] : [`state.index.${i}: unknown modern point or card "${id}"`]);

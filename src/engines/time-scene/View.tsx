@@ -110,6 +110,8 @@ const ModernEvidence = lazy(() => deepTimeUi().then((m) => ({ default: m.ModernE
 const ReconstructionReadout = lazy(() => deepTimeUi().then((m) => ({ default: m.ReconstructionReadout })));
 const GeologyPlate = lazy(() => deepTimeUi().then((m) => ({ default: m.GeologyPlate })));
 const BeatFigure = lazy(() => import('./BeatFigure'));
+/* Rotation map topics only (docs/72 E-CD2): the PLATE readout, detail and index load with the map chunk. */
+const RotationPanels = lazy(() => import('./rotation-ui'));
 
 export default function TimeSceneView(props: EngineViewProps) {
   const source = props.data as TimeSceneGeoData;
@@ -138,8 +140,11 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
   const region = topic.basemap?.region ?? null;
   const deepTime = geo.deepTime;
   const reconstructed = !!topic.basemap?.reconstruction;
-  /** The reader's beat line and `,` / `.` (docs/51 E-IR2 subset): reconstruction and missions topics. */
-  const beatReader = reconstructed || !!topic.timePresentation;
+  const rotation = topic.basemap?.rotation;
+  /** A deep-time map (discrete reconstruction or continuous rotation): no historical modes, labels or reference. */
+  const deepMap = reconstructed || !!rotation;
+  /** The reader's beat line and `,` / `.` (docs/51 E-IR2 subset): deep-time and missions topics. */
+  const beatReader = deepMap || !!topic.timePresentation;
   const [narrowInset, setNarrowInset] = useState(false);
   useEffect(() => {
     // Phones (the host hides the card below 760 px): the find map moves into the reader, which opens on a picked find.
@@ -636,33 +641,36 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       { kind: 'layer', id: 'fossils-modern', label: { en: 'Selected fossil collections', zh: '所选化石采集记录' } },
       { kind: 'mode', id: 'inset-visible' },
       { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
+    ] : rotation ? [
+      ...rotation.layers.map((l) => ({ kind: 'layer' as const, id: l.id, label: l.label })),
+      { kind: 'mode', id: 'graticule', label: t('time.layer.graticule') },
     ] : timeLayerRows(available, locale, {
       borders: !region,
       territory: territoryAvailable,
       labels: { events: topic.timePresentation?.eventsLabel, participation: topic.timePresentation?.entityLabel },
       dated: (topic.datedLayers ?? []).map((layer) => ({ kind: 'layer' as const, id: layer.id, label: layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder))})),
     }),
-    [available, locale, region, territoryAvailable, topic.datedLayers, geo.entities, reconstructed, topic.timePresentation], // `t` is bound to `locale`
+    [available, locale, region, territoryAvailable, topic.datedLayers, geo.entities, reconstructed, rotation, topic.timePresentation], // `t` is bound to `locale`
   );
   const hasGlossary = (geo.glossary?.terms.length ?? 0) > 0;
   const panelTools = useMemo<ControlRow[]>(
     () => [
-      ...(!reconstructed ? [{ kind: 'mode' as const, id: 'reference', label: t('time.tool.reference') }] : []),
+      ...(!deepMap ? [{ kind: 'mode' as const, id: 'reference', label: t('time.tool.reference') }] : []),
       { kind: 'mode', id: 'presentation', label: t('present.tool') },
       ...(hasGlossary ? [{ kind: 'glossary' as const }] : []),
       { kind: 'hud' },
     ],
-    [locale, hasGlossary, reconstructed], // `t` is bound to `locale`
+    [locale, hasGlossary, deepMap], // `t` is bound to `locale`
   );
 
   /* ---------- perf ---------- */
-  const fps = useFps(!reconstructed);
+  const fps = useFps(!deepMap);
   const controllerRef = useRef<GeoController | null>(null);
   controllerRef.current = controller;
   const readStats = useCallback(() => {
     const s = controllerRef.current?.stats();
-    return s ? { ...s, ...(model.timePresentation ? frameStats(model, frameAt(model, playhead.get())) : {}), fps: reconstructed ? undefined : fps.current } : null;
-  }, [fps, reconstructed, model, playhead]);
+    return s ? { ...s, ...(model.timePresentation ? frameStats(model, frameAt(model, playhead.get())) : {}), fps: deepMap ? undefined : fps.current } : null;
+  }, [fps, deepMap, model, playhead]);
 
   /* ---------- HUD controls (docs/08 §3) ---------- */
   const movementsOn = layers.includes('movements');
@@ -674,13 +682,13 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     () => reconstructed ? [
       { id: 'samples', label: { en: 'Model samples', zh: '模型样本' }, value: pad2(model.keyframes.length), mono: true },
       { id: 'collections', label: { en: 'Selected collections', zh: '所选采集记录' }, value: String(modernCounts?.fossilsTotal ?? 0), mono: true },
-    ] : [
+    ] : rotation ? [] : [
       { id: 'entities', label: topic.timePresentation?.entityLabel ?? bi('time.spec.entities'), value: pad2(geo.entities.length), mono: true },
       ...(!model.timePresentation ? [{ id: 'keyframes', label: bi('time.spec.keyframes'), value: pad2(model.keyframes.length), mono: true }] : []),
       { id: 'events', label: topic.timePresentation?.eventsLabel ?? bi('time.spec.events'), value: pad2(model.timePresentation ? model.events.length : geo.events.length), mono: true },
       ...(!model.timePresentation ? [{ id: 'movements', label: bi('time.spec.movements'), value: pad2(geo.movements.length), mono: true }] : []),
     ],
-    [geo, model, reconstructed, modernCounts?.fossilsTotal, topic.timePresentation],
+    [geo, model, reconstructed, rotation, modernCounts?.fossilsTotal, topic.timePresentation],
   );
   const controls = useMemo<SceneControls>(() => {
     // Geographic presets only (chapters have the rail, the rule and ← →): world, the whole area, then presets.json.
@@ -708,16 +716,16 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
       },
       modes: {
         items: [
-          ...(!reconstructed && available.movements ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
-          ...(region || reconstructed ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
+          ...(!deepMap && available.movements ? [{ id: 'flow', key: 'f', label: t('time.mode.flow'), on: movementsOn, tone: 'hot' as const, status: 'FLOW' }] : []),
+          ...(region || deepMap ? [] : [{ id: 'borders', key: 'b', label: t('time.mode.borders'), on: bordersOn }]),
           { id: 'graticule', key: 'g', label: t('time.mode.graticule'), on: graticuleOn, phone: false },
-          ...(!reconstructed && territoryAvailable ? [{ id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn }] : []),
+          ...(!deepMap && territoryAvailable ? [{ id: 'territory', key: 'n', label: t('time.mode.territory'), on: territoryOn }] : []),
           ...(topic.modernInset ? [
             ...topic.modernInset.views.map((v) => ({ id: `inset-${v.id}`, label: v.label, on: inset === v.id })),
             { id: 'inset-visible', label: { en: 'Modern find map', zh: '现代发现地图' }, on: insetVisible },
             { id: 'fossil-all', label: { en: 'Across the Mesozoic (different ages)', zh: '跨中生代（不同年代）' }, on: fossilMode === 'all-mesozoic' },
           ] : []),
-          ...(!reconstructed ? [{
+          ...(!deepMap ? [{
             id: 'reference',
             key: 'r',
             label: t('time.mode.reference'),
@@ -752,7 +760,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         },
       },
       // A reconstruction map has no place-name or leader labels of its own (the inset labels its evidence), so no `L`.
-      labels: !reconstructed,
+      labels: !deepMap,
       stats: () => {
         const s = readStats();
         return s ?? {};
@@ -794,7 +802,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
             suppressedCollections: deepTime.inset?.suppression.collections ?? 0, suppressedOccurrences: deepTime.inset?.suppression.occurrences ?? 0,
             highlightedObjectIds: store.getState().highlight, selectedObjectId,
           },
-        }) } : {}),
+        }) } : rotation ? { geology: () => ({ rotation: (controllerRef.current as { rotation?: { stats(): unknown } } | null)?.rotation?.stats() ?? null }), setMa: (ma: number) => commit(-ma * 1e6) } : {}),
       },
       escape: () => {
         if (isPresenting()) {
@@ -861,7 +869,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     chapters,
     closeEvent,
     closeEntity,
-    region, reconstructed, topic.modernInset, topic.timePresentation, inset, insetVisible, fossilMode, modernPatch, deepTime, modernCounts, selectedObjectId, reconstructionStats,
+    region, reconstructed, deepMap, rotation, commit, topic.modernInset, topic.timePresentation, inset, insetVisible, fossilMode, modernPatch, deepTime, modernCounts, selectedObjectId, reconstructionStats,
     locale, // `t` is bound to `locale`
   ]);
   useSceneControls(controls);
@@ -896,6 +904,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
         {reference && <ReferenceBanner model={model} playhead={playhead} locale={locale} />}
       </div>
 
+      {rotation && <Suspense fallback={null}><RotationPanels controller={controller} locale={locale} ids={indexIds} presenting={presenting} /></Suspense>}
       {beatReader && <SceneSlot name="readerTop"><TimeBeatLine chapter={chapters.find((c) => c.id === currentChapter)} beat={activeBeat} locale={locale} onStep={(dir) => controls.beatStep?.(dir)} /></SceneSlot>}
       {deepTime && topic.modernInset && geologyProps && <Suspense fallback={null}>
         <ReconstructionReadout {...geologyProps} />

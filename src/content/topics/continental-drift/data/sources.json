@@ -1,0 +1,458 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "NASA Earth Observatory, Alfred Wegener",
+        "zh": "美国国家航空航天局地球观测站：《阿尔弗雷德·魏格纳》"
+      },
+      "url": "https://science.nasa.gov/earth/earth-observatory/alfred-wegener",
+      "note": {
+        "en": "First lectures in January 1912; book in 1915; his four kinds of evidence; why most geologists rejected the idea; his death in Greenland in 1930; acceptance from the mid-1950s. Read 2026-11-15.",
+        "zh": "1912 年 1 月的首次演讲；1915 年的书；四类证据；多数地质学家不接受的理由；1930 年在格陵兰去世；1950 年代中期起被接受。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Merdith et al. (2021), Extending full-plate tectonic models into deep time, Earth-Science Reviews 214:103477",
+        "zh": "Merdith 等（2021）：《把全板块构造模型延伸到深时》，《地球科学评论》214:103477"
+      },
+      "url": "https://www.earthbyte.org/extending-full-plate-tectonic-models-into-deep-time-linking-the-neoproterozoic-and-the-phanerozoic/",
+      "note": {
+        "en": "The plate model drawn on the map: a continuous model from 1 billion years ago to today, in a palaeomagnetic reference frame. Read 2026-11-15.",
+        "zh": "地图所用的板块模型：从 10 亿年前到今天的连续模型，采用古地磁参考系。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Merdith et al. 2021 plate model v1.2.4 (Zenodo 10.5281/zenodo.13635864) and its ReadMe, CC BY 4.0",
+        "zh": "Merdith 等 2021 年板块模型 v1.2.4（Zenodo 10.5281/zenodo.13635864）及其说明文件，CC BY 4.0"
+      },
+      "url": "https://zenodo.org/records/13635864",
+      "note": {
+        "en": "Rotation file, coastlines (mainly the past 400 million years), continental shapes and static polygons, used unchanged; the authors advise against using it for spans shorter than 5 million years. Read 2026-11-15.",
+        "zh": "旋转文件、海岸线（主要覆盖过去 4 亿年）、大陆轮廓和静态多边形，原样使用；作者说明它不适合用于短于 500 万年的时间尺度。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Torsvik et al. (2012), Phanerozoic polar wander, palaeogeography and dynamics, Earth-Science Reviews 114:325–368",
+        "zh": "Torsvik 等（2012）：《显生宙极移、古地理与动力学》，《地球科学评论》114:325–368"
+      },
+      "url": "https://gfzpublic.gfz-potsdam.de/pubman/item/item_245469_1/component/file_245468/18925.pdf",
+      "note": {
+        "en": "Gondwana mostly assembled by about 550 million years ago; Pangaea assembled from about 320 million years ago and broke up from about 200 million years ago; central Atlantic opening about 195, Gondwana splitting east from west with first sea floor about 155, South Atlantic opening about 130 from the south, India’s separations; palaeomagnetism does not fix ancient longitude. Read 2026-11-15.",
+        "zh": "冈瓦纳约 5.5 亿年前大体拼成；盘古大陆约 3.2 亿年前起拼合、约 2 亿年前起分裂；中大西洋约 1.95 亿年前张开，冈瓦纳东西分裂、最早洋底约 1.55 亿年前，南大西洋约 1.3 亿年前从南端张开，印度的几次分离；古地磁不能确定古经度。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "USGS, This Dynamic Earth (Historical perspective; Harry Hess; Magnetic stripes; Developing the theory; The Himalayas)",
+        "zh": "美国地质调查局：《动态的地球》（历史回顾、哈里·赫斯、磁条带、理论的形成、喜马拉雅山）"
+      },
+      "url": "https://pubs.usgs.gov/gip/dynamic/historical.html",
+      "note": {
+        "en": "Ortelius in 1596; du Toit as a supporter; Hess and seafloor spreading; Dietz coined the term; stripes and reversals; Pangaea breaking apart about 200 million years ago; India and Asia colliding between 50 and 40 million years ago. Read 2026-11-15.",
+        "zh": "1596 年的奥特柳斯；杜托伊特支持漂移说；赫斯与海底扩张；迪茨提出这个词；磁条带与地磁倒转；盘古大陆约 2 亿年前开始分裂；印度与亚洲在 5000 万至 4000 万年前相撞。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Geological Society of London, Pioneers of Plate Tectonics (Wegener’s evidence: fit, fossils, glacial deposits; Hess; Vine and Matthews; Tuzo Wilson)",
+        "zh": "伦敦地质学会：《板块构造先驱》（魏格纳的证据：拼合、化石、冰川沉积；赫斯；瓦因和马修斯；图佐·威尔逊）"
+      },
+      "url": "https://www.geolsoc.org.uk/Plate-Tectonics/Chap1-Pioneers-of-Plate-Tectonics",
+      "note": {
+        "en": "Fossil ages of Mesosaurus, Glossopteris, Lystrosaurus and Cynognathus; Permo-Carboniferous glacial deposits about 300 million years ago on five continents; the Caledonian belt; Morley’s independent proposal; Wilson’s transform faults in 1965. Its statement that Lystrosaurus is found only in three places is not used. Read 2026-11-15.",
+        "zh": "中龙、舌羊齿、水龙兽和犬颌兽的年代；约 3 亿年前、分布在五块大陆上的二叠–石炭纪冰川沉积；加里东山带；莫利独立提出的想法；1965 年威尔逊的转换断层。该页说水龙兽只见于三地，本题不采用。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Marie Tharp and Henry Frankel, Mappers of the Deep (Lamont-Doherty Earth Observatory, Marie Tharp site)",
+        "zh": "玛丽·撒普与亨利·弗兰克尔：《深海绘图者》（拉蒙特–多尔蒂地球观测站玛丽·撒普网站）"
+      },
+      "url": "https://marietharp.ldeo.columbia.edu/sites/default/files/content/Tharp_Mappers%20of%20the%20Deep_MidAtlantic%20ridge%20discovery.pdf",
+      "note": {
+        "en": "Tharp’s own account: six Atlantic profiles in 1952 showing a valley along the ridge; Heezen’s first doubt and the earthquake plot; the 1956 announcement by Ewing and Heezen. Read 2026-11-15.",
+        "zh": "撒普本人的回忆：1952 年的六条大西洋剖面显示洋脊上有一道谷；希曾起初的怀疑和地震震中图；1956 年由尤因和希曾宣布。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "F. J. Vine (1966), Spreading of the ocean floor: new evidence, Science 154:1405",
+        "zh": "F. J. 瓦因（1966）：《洋底扩张：新证据》，《科学》154:1405"
+      },
+      "url": "https://courses.seas.harvard.edu/climate/eli/Courses/EPS281r/Sources/Plate-tectonics/Sea-floor-spreading-and-magnetic-reversals/2_Vine_1966_Science-reversals-and-ocean-floor-spreading.pdf",
+      "note": {
+        "en": "The Reykjanes Ridge survey south-west of Iceland (flown 1963, published 1966) shows magnetic anomalies parallel to the ridge and symmetric about it. Read 2026-11-15.",
+        "zh": "冰岛西南雷恰内斯洋脊的测量（1963 年飞测、1966 年发表）显示磁异常与洋脊平行并两侧对称。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Vine and Matthews (1963), Magnetic anomalies over oceanic ridges, Nature 199:947–949",
+        "zh": "瓦因与马修斯（1963）：《洋脊上空的磁异常》，《自然》199:947–949"
+      },
+      "url": "https://doi.org/10.1038/199947a0",
+      "note": {
+        "en": "Bibliographic record. Read 2026-11-15.",
+        "zh": "书目记录。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Motonori Matuyama (1929), On the direction of magnetisation of basalt in Japan, Tyosen and Manchuria, Proceedings of the Imperial Academy 5:203–205",
+        "zh": "松山基范（1929）：《日本、朝鲜与满洲玄武岩的磁化方向》，《帝国学士院纪事》5:203–205"
+      },
+      "url": "https://www.jstage.jst.go.jp/article/pjab1912/5/5/5_5_203/_article",
+      "note": {
+        "en": "139 specimens from 36 places; one group magnetised almost exactly opposite to today’s field. Read 2026-11-15.",
+        "zh": "36 处地点的 139 件标本；其中一组的磁化方向与今天的地磁场几乎正好相反。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Suganuma et al. (2021), Formal ratification of the GSSP for the Chibanian Stage, Episodes 44(3):317–347",
+        "zh": "菅沼等（2021）：《千叶阶全球界线层型的正式批准》，Episodes 44(3):317–347"
+      },
+      "url": "https://www.episodes.org/journal/view.html?doi=10.18814/epiiugs/2020/020080",
+      "note": {
+        "en": "Most recent full reversal of Earth’s magnetic field (Matuyama–Brunhes): 772.9 thousand years ago. Read 2026-11-15.",
+        "zh": "地磁场最近一次完整倒转（松山–布容）：77.29 万年前。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Linda Hall Library, Scientist of the Day: Drummond Matthews",
+        "zh": "琳达·霍尔图书馆：《今日科学家：德拉蒙德·马修斯》"
+      },
+      "url": "https://www.lindahall.org/about/news/scientist-of-the-day/drummond-matthews/",
+      "note": {
+        "en": "Morley sent the same idea to Nature first; it was turned down for lack of data. Read 2026-11-15.",
+        "zh": "莫利先把同样的想法投给《自然》，因缺少数据被拒。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Deep Sea Drilling Project, Initial Reports vol. 3, Introduction (Leg 3, South Atlantic, 1968)",
+        "zh": "深海钻探计划《初步报告》第 3 卷引言（第 3 航段，南大西洋，1968 年）"
+      },
+      "url": "https://www.deepseadrilling.org/03/volume/dsdp03_01.pdf",
+      "note": {
+        "en": "Sites across the ridge at 30°S were chosen to test whether the oldest sediment gets older with distance from the ridge. Read 2026-11-15.",
+        "zh": "在南纬 30° 横跨洋脊选点，检验最老沉积物是否离洋脊越远越老。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Seton et al. (2020), A global data set of present-day oceanic crustal age and seafloor spreading parameters, G-cubed 21 (EarthByte data page), CC BY 4.0",
+        "zh": "Seton 等（2020）：《全球现今洋壳年龄与海底扩张参数数据集》，G-cubed 21（EarthByte 数据页），CC BY 4.0"
+      },
+      "url": "https://www.earthbyte.org/a-global-dataset-of-present-day-oceanic-crustal-age-and-seafloor-spreading-parameters/",
+      "note": {
+        "en": "The 6 arc-minute GTS2012 age grid behind the ocean-floor colours; mean ocean-crust age 64.2 million years. Read 2026-11-15.",
+        "zh": "洋底颜色所用的 6 弧分 GTS2012 年龄格网；洋壳平均年龄 6420 万年。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "NOAA Science On a Sphere, Age of the Seafloor",
+        "zh": "美国国家海洋和大气管理局“球面科学”：《洋底年龄》"
+      },
+      "url": "https://sos.noaa.gov/catalog/datasets/age-of-the-seafloor/",
+      "note": {
+        "en": "The youngest sea floor lies along spreading ridges; very little sea floor is older than 150 million years. Read 2026-11-15.",
+        "zh": "最年轻的洋底在扩张洋脊一带；比 1.5 亿年更老的洋底很少。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "NOAA NCEI, EMAG2v3 Earth Magnetic Anomaly Grid (2 arc-minute), doi:10.7289/V5H70CVX",
+        "zh": "美国国家环境信息中心：EMAG2v3 地磁异常格网（2 弧分），doi:10.7289/V5H70CVX"
+      },
+      "url": "https://www.ncei.noaa.gov/products/earth-magnetic-model-anomaly-grid-2",
+      "note": {
+        "en": "The stripes south of Iceland are drawn from its sea-level grid as distributed by GMT, split into positive and negative areas only. Read 2026-11-15.",
+        "zh": "冰岛以南的条带取自其海平面格网（GMT 分发版），只分正、负两类区域。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "GMT remote data server, earth_mag 2 arc-minute tiles (EMAG2v3 at sea level)",
+        "zh": "GMT 远程数据服务器：earth_mag 2 弧分分块（海平面 EMAG2v3）"
+      },
+      "url": "https://oceania.generic-mapping-tools.org/server/earth/earth_mag/",
+      "note": {
+        "en": "One 60° tile (N30W060) downloaded; scale 0.2 and offset 800 from the server table. Read 2026-11-15.",
+        "zh": "下载一个 60° 分块（N30W060）；比例 0.2、偏移 800 取自服务器列表。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Paleobiology Database, occurrences of Mesosaurus, Glossopteris, Lystrosaurus and Cynognathus (snapshot 2026-11-15), CC0",
+        "zh": "古生物学数据库：中龙、舌羊齿、水龙兽、犬颌兽出现记录（2026-11-15 快照），CC0"
+      },
+      "url": "https://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Mesosaurus,Glossopteris,Lystrosaurus,Cynognathus&show=coords,loc,strat,ref,class&limit=all",
+      "note": {
+        "en": "1,502 records in 439 collections; dots are records of finds, not a census. Read 2026-11-15.",
+        "zh": "1502 条记录，分属 439 组采集；点是发现记录，不是普查。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Kulik et al. (2021), Living fast in the Triassic: new data on life history in Lystrosaurus from northeastern Pangea, PLOS ONE 16:e0259369",
+        "zh": "Kulik 等（2021）：《三叠纪的快节奏：盘古大陆东北部水龙兽生活史新资料》，PLOS ONE 16:e0259369"
+      },
+      "url": "https://doi.org/10.1371/journal.pone.0259369",
+      "note": {
+        "en": "Lystrosaurus from north-western China. Read 2026-11-15.",
+        "zh": "中国西北的水龙兽。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Surkov, Kalandadze and Benton (2005), Lystrosaurus georgi, a dicynodont from the Lower Triassic of Russia, Journal of Vertebrate Paleontology 25:402",
+        "zh": "Surkov、Kalandadze 与 Benton（2005）：《俄罗斯下三叠统的二齿兽 Lystrosaurus georgi》，《古脊椎动物学杂志》25:402"
+      },
+      "url": "https://doi.org/10.1671/0272-4634(2005)025[0402:LGADFT]2.0.CO;2",
+      "note": {
+        "en": "Bibliographic record: Lystrosaurus from Russia. Read 2026-11-15.",
+        "zh": "书目记录：俄罗斯的水龙兽。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Glacial deposit studies: Visser (1990) Dwyka, Sedimentology; França and Potter (1991) Itararé, AAPG Bulletin; Sen and Sit (1998) Talchir, J. Geol. Soc. India; Henry et al. (2012) Wynyard, Palaeo3; Miller (1989) Pagoda, Sedimentology",
+        "zh": "冰川沉积研究：Visser（1990）德维卡；França 与 Potter（1991）伊塔拉雷；Sen 与 Sit（1998）塔尔切尔；Henry 等（2012）温亚德；Miller（1989）帕戈达"
+      },
+      "url": "https://doi.org/10.1111/j.1365-3091.1990.tb00957.x",
+      "note": {
+        "en": "Each unit is a glacial deposit of Carboniferous to Permian age; map dots are placed in the region each study names, not at measured sites. Read 2026-11-15.",
+        "zh": "各单元都是石炭纪至二叠纪的冰川沉积；地图上的点放在各研究所写的地区，不是实测地点。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Jurikova et al. (2025), Rapid rise in atmospheric CO2 marked the end of the Late Palaeozoic Ice Age, Nature Geoscience",
+        "zh": "Jurikova 等（2025）：《大气二氧化碳急升标志晚古生代冰期结束》，《自然·地球科学》"
+      },
+      "url": "https://doi.org/10.1038/s41561-024-01610-2",
+      "note": {
+        "en": "The ice age lasted from about 370 to about 260 million years ago; its main phase began about 330 million years ago. Read 2026-11-15.",
+        "zh": "冰期约从 3.7 亿年前持续到约 2.6 亿年前；主要阶段约 3.3 亿年前开始。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "British Geological Survey, Earthwise: Basement structure and the terrane model of Northern Ireland",
+        "zh": "英国地质调查局 Earthwise：《北爱尔兰基底构造与地体模型》"
+      },
+      "url": "https://earthwise.bgs.ac.uk/index.php/Basement_structure_and_the_terrane_model_of_Northern_Ireland",
+      "note": {
+        "en": "A continuous mountain range, the Caledonides, ran from the Appalachians through Newfoundland and Greenland to Scotland and Scandinavia. Read 2026-11-15.",
+        "zh": "一条连续的山脉——加里东山——从阿巴拉契亚经纽芬兰、格陵兰延伸到苏格兰和斯堪的纳维亚。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Gillespie et al. (2019), The igneous rocks of Singapore: new insights to Palaeozoic and Mesozoic assembly of the Sukhothai Arc, Journal of Asian Earth Sciences 183:103940 (NERC open archive)",
+        "zh": "Gillespie 等（2019）：《新加坡火成岩：苏可泰岛弧古生代与中生代拼合的新认识》，《亚洲地球科学杂志》183:103940（NERC 开放存档）"
+      },
+      "url": "https://nora.nerc.ac.uk/id/eprint/526168/",
+      "note": {
+        "en": "Five plutons emplaced one after another between 285 and 230 million years ago (the Bukit Timah Centre), at the southern end of the Sukhothai Arc. Read 2026-11-15.",
+        "zh": "五个岩体在 2.85 亿至 2.3 亿年前先后侵入（武吉知马中心），位于苏可泰岛弧南端。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Leslie et al., Ductile and brittle deformation in Singapore (NERC open archive 525127)",
+        "zh": "Leslie 等：《新加坡的韧性与脆性变形》（NERC 开放存档 525127）"
+      },
+      "url": "https://nora.nerc.ac.uk/id/eprint/525127/1/SingaporeStructuralGeology_Leslie_et_al_Rev02.pdf",
+      "note": {
+        "en": "Singapore lies 50 to 100 km east of the southward line of the Bentong–Raub suture; the collision was in the latest Triassic to earliest Jurassic and essentially complete by about 200 to 195 million years ago. Read 2026-11-15.",
+        "zh": "新加坡位于文冬–劳勿缝合带南延线以东 50 至 100 公里；碰撞发生在晚三叠世末至早侏罗世初，约 2 亿至 1.95 亿年前基本结束。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Metcalfe (2017), Tectonic evolution of Sundaland, Bulletin of the Geological Society of Malaysia 63:27–60",
+        "zh": "Metcalfe（2017）：《巽他古陆的构造演化》，《马来西亚地质学会会刊》63:27–60"
+      },
+      "url": "https://gsm.org.my/wp-content/uploads/gsm_file_2/702001-101709-PDF.pdf",
+      "note": {
+        "en": "Sibumasu (Sino or Siam, Burma, Malaya, Sumatra) left Gondwana in the late Early Permian and collided with the Sukhothai Arc in the Middle to Late Triassic; dates differ from the Singapore study (S25). Read 2026-11-15.",
+        "zh": "滇缅马苏（名称取自中国或暹罗、缅甸、马来亚、苏门答腊）在早二叠世晚期离开冈瓦纳，中至晚三叠世与苏可泰岛弧碰撞；年代与新加坡研究（S25）不同。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "NASA JPL, GNSS Time Series velocity table (table2), IGS14, epoch 2026-01-01",
+        "zh": "美国国家航空航天局喷气推进实验室：GNSS 时间序列速度表（table2），IGS14，历元 2026-01-01"
+      },
+      "url": "https://sideshow.jpl.nasa.gov/post/tables/table2.html",
+      "note": {
+        "en": "North, east and up velocities in mm a year relative to the IGS14 frame; snapshot 2026-11-15. NTUS: north −5.985, east 27.158 (about 2.8 cm a year). Read 2026-11-15.",
+        "zh": "相对 IGS14 框架的北、东、上方向速度，单位毫米每年；2026-11-15 快照。NTUS：北 −5.985，东 27.158（约每年 2.8 厘米）。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Geoscience Australia, Australia officially moves 1.8 metres northeast",
+        "zh": "澳大利亚地球科学局：《澳大利亚正式向东北移动 1.8 米》"
+      },
+      "url": "https://www.ga.gov.au/news/news-archive/australia-officially-moves-1.8-metres-northeast",
+      "note": {
+        "en": "Australia’s plate moves about 7 cm a year towards the north-east; GDA2020 moved official coordinates by 1.8 m. Read 2026-11-15.",
+        "zh": "澳大利亚板块每年向东北移动约 7 厘米；GDA2020 把官方坐标移动了 1.8 米。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Yaemsiri et al. (2010), Growth rate of human fingernails and toenails in healthy American young adults, JEADV 24:420–423",
+        "zh": "Yaemsiri 等（2010）：《美国健康青年手指甲与脚趾甲的生长速度》，JEADV 24:420–423"
+      },
+      "url": "https://doi.org/10.1111/j.1468-3083.2009.03426.x",
+      "note": {
+        "en": "Fingernails grow 3.47 mm a month on average; 12 months gives about 4.2 cm a year (Atlas calculation). Read 2026-11-15.",
+        "zh": "手指甲平均每月长 3.47 毫米；12 个月约 4.2 厘米（Atlas 计算）。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "Atlas design notes for this topic",
+        "zh": "本题设计说明"
+      },
+      "note": {
+        "en": "Design values, not observations: 400 to 0 million years, 0.1 million-year steps, camera framing, two levels of map detail, GPS arrow scale (10 mm a year = 2.5° of arc), and the illustrative sum 3 cm × 200 million years = 6,000 km. Read 2026-11-15.",
+        "zh": "设计值，不是观测：4 亿年至今、0.1 百万年步长、镜头取景、两档地图细节、GPS 箭头比例（每年 10 毫米 = 2.5° 弧长），以及示意算式 3 厘米 × 2 亿年 = 6000 公里。2026 年 11 月 15 日读取。"
+      },
+      "design": true
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Field Museum, Pleistocene Sea Level Maps (Voris 2000)",
+        "zh": "菲尔德自然史博物馆：《更新世海平面地图》（Voris 2000）"
+      },
+      "url": "https://www.fieldmuseum.org/pleistocene-sea-level-maps",
+      "note": {
+        "en": "Maps of Southeast Asia with sea level 120 m below today; the Last Glacial Maximum about 21,000 years ago at about 116 m below. Read 2026-11-15.",
+        "zh": "海平面比今天低 120 米时的东南亚地图；末次冰盛期约 2.1 万年前，海平面约低 116 米。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Davies, Green and Duarte (2018), Back to the future: testing different scenarios for the next supercontinent gathering, Global and Planetary Change 169:133–144, and the authors’ Bangor University article",
+        "zh": "Davies、Green 与 Duarte（2018）：《回到未来：检验下一个超大陆形成的不同情景》，《全球与行星变化》169:133–144，及作者在班戈大学的文章"
+      },
+      "url": "https://doi.org/10.1016/j.gloplacha.2018.07.015",
+      "note": {
+        "en": "Four scenarios for a next supercontinent in about 200 to 300 million years: Novopangea, Pangea Ultima, Aurica and Amasia. Read 2026-11-15.",
+        "zh": "下一个超大陆约在 2 亿至 3 亿年后形成的四种情景：新盘古、终极盘古、奥里卡和亚美。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Mitchell, Kilian and Evans (2012), Supercontinent cycles and the calculation of absolute palaeolongitude in deep time, Nature 482:208–211",
+        "zh": "Mitchell、Kilian 与 Evans（2012）：《超大陆旋回与深时绝对古经度的计算》，《自然》482:208–211"
+      },
+      "note": {
+        "en": "Proposes the next supercontinent, Amasia, by ‘orthoversion’. Read 2026-11-15.",
+        "zh": "提出以“正交聚合”形成的下一个超大陆亚美。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "pyGPlates documentation, FiniteRotation",
+        "zh": "pyGPlates 文档：FiniteRotation"
+      },
+      "url": "https://www.gplates.org/docs/pygplates/generated/pygplates.FiniteRotation.html",
+      "note": {
+        "en": "Rotations between two total poles are interpolated by spherical linear interpolation. The map’s results were checked against pyGPlates 1.0.0 to within 0.001°. Read 2026-11-15.",
+        "zh": "两个总重建极之间的旋转用球面线性插值。地图结果与 pyGPlates 1.0.0 核对，误差不超过 0.001°。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Geological Society of Glasgow, Arthur Holmes and mantle convection",
+        "zh": "格拉斯哥地质学会：《阿瑟·霍姆斯与地幔对流》"
+      },
+      "url": "https://geologyglasgow.org.uk/?p=1094",
+      "note": {
+        "en": "Holmes’s lecture of January 1928, published in 1931, proposed convection currents in the mantle as a way to move continents. Read 2026-11-15.",
+        "zh": "霍姆斯 1928 年 1 月的演讲、1931 年发表，提出地幔对流可能推动大陆。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Plate tectonics papers: Wilson (1965) Nature 207:343; McKenzie and Parker (1967) Nature 216:1276; Morgan (1968) JGR 73:1959; Le Pichon (1968) JGR 73:3661",
+        "zh": "板块构造论文：Wilson（1965）《自然》207:343；McKenzie 与 Parker（1967）《自然》216:1276；Morgan（1968）JGR 73:1959；Le Pichon（1968）JGR 73:3661"
+      },
+      "note": {
+        "en": "Bibliographic records for the 1965–1968 papers. Read 2026-11-15.",
+        "zh": "1965–1968 年论文的书目记录。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Peter Bird (2003), An updated digital model of plate boundaries (PB2002), DOI 10.1029/2001GC000252",
+        "zh": "Peter Bird（2003）：《更新的数字板块边界模型》（PB2002），DOI 10.1029/2001GC000252"
+      },
+      "url": "https://doi.org/10.1029/2001GC000252",
+      "note": {
+        "en": "Places Singapore on the Sunda plate; the Meteorological Service Singapore describes the wider setting as the stable continental part of the Eurasian plate (as in plates-and-hazards). Read 2026-11-15.",
+        "zh": "把新加坡放在巽他板块上；新加坡气象署把更大的范围描述为欧亚板块稳定的大陆部分（同 plates-and-hazards）。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "British Geological Survey, What causes earthquakes?",
+        "zh": "英国地质调查局：《地震由什么引起？》"
+      },
+      "url": "https://www.bgs.ac.uk/discovering-geology/earth-hazards/earthquakes/what-causes-earthquakes/",
+      "note": {
+        "en": "Plates typically move a few centimetres a year relative to each other. Read 2026-11-15.",
+        "zh": "板块彼此之间通常每年移动几厘米。2026 年 11 月 15 日读取。"
+      }
+    }
+  ]
+}

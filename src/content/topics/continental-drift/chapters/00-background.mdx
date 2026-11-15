@@ -1,0 +1,130 @@
+---
+id: background
+order: 0
+kind: background
+title:
+  en: A map that moves
+  zh: 会动的地图
+state:
+  time:
+    ma: 0
+  camera:
+    center:
+      - 105
+      - 3
+    zoom: 3.4
+  layers:
+    - base
+    - cd-land
+    - cd-names
+    - cd-shelf
+    - cd-singapore
+  highlight:
+    - site-singapore
+  note:
+    en: The map turns today’s coastlines back in time with the Merdith et al. 2021 plate model. Outlines are today’s coasts, not ancient shorelines, and east–west positions are a model convention. Dots mark where evidence is found today. Numbers link to their sources.
+    zh: 地图用 Merdith 等 2021 年的板块模型，把今天的海岸线沿时间往回转。轮廓是今天的海岸，不是古代海岸线；东西方向的位置是模型的约定。点表示证据今天的发现地。数字都可点开来源。
+  summary:
+    en: See how this map turns today’s continents back in time.
+    zh: 看这张地图怎样把今天的大陆沿时间往回转。
+  index:
+    - site-singapore
+  beats:
+    - t:
+        ma: 0
+      camera:
+        center:
+          - 20
+          - 10
+        zoom: 2
+      layers:
+        - base
+        - cd-land
+        - cd-names
+      highlight: []
+      caption:
+        en: "Today: these are the continents as they look now. In this map they are cut into plates, and each plate can be turned back in time."
+        zh: 今天：这是大陆现在的样子。地图把它们按板块切开，每一块都能沿时间往回转。
+    - t:
+        ma: 0
+      camera:
+        center:
+          - -25
+          - 15
+        zoom: 2.6
+      layers:
+        - base
+        - cd-land
+        - cd-names
+        - cd-shelf
+      highlight: []
+      caption:
+        en: "Today: the pale band around each continent is its edge under the sea. It is part of the same continent, so the model moves it with the land."
+        zh: 今天：大陆周围的浅色带是没在海里的大陆边缘。它和陆地属于同一块大陆，模型让它们一起移动。
+    - t:
+        ma: 0
+      camera:
+        center:
+          - 105
+          - 3
+        zoom: 3.4
+      layers:
+        - base
+        - cd-land
+        - cd-names
+        - cd-shelf
+        - cd-singapore
+      highlight:
+        - site-singapore
+      caption:
+        en: "Today: Singapore is marked as a reference point. Drag the timeline and watch where the model carries it."
+        zh: 今天：新加坡标成一个参照点。拖动时间轴，看模型把它带到哪里。
+---
+
+<Lang en>
+
+In January 1912 the German scientist Alfred Wegener gave his first public talk on a question: could the continents move? This topic follows the evidence in the order the rocks formed, from 400 million years ago to today. <sup><button type="button" className="atlas-src" data-source="S1" aria-label="Source S1">S1</button></sup>
+
+The map is a <Term id="term-plate-model">plate reconstruction model</Term>, not a photograph. It takes today’s coastlines and turns them back in time with the Merdith et al. 2021 model. The outlines are today’s coasts carried back: ancient shorelines, sea levels and land added later are not shown. For ancient land and sea, open <TopicLink slug="dinosaur-earth" ch="triassic-world">the Triassic world</TopicLink>. <sup><button type="button" className="atlas-src" data-source="S2" aria-label="Source S2">S2</button><button type="button" className="atlas-src" data-source="S3" aria-label="Source S3">S3</button></sup>
+
+Each plate moves as one rigid piece. Where real continents pushed together they were squeezed, so outlines can overlap; ocean floor that has since sunk back into the Earth is left as a gap. Rock magnetism fixes how far north or south a plate was, but not its east–west position, so compare plates with each other rather than with the grid. <sup><button type="button" className="atlas-src" data-source="S2" aria-label="Source S2">S2</button><button type="button" className="atlas-src" data-source="S4" aria-label="Source S4">S4</button></sup>
+
+Ages are in <Term id="term-ma">Ma</Term>, millions of years ago. Drag the timeline or step through the beats: every frame is recalculated from the model’s rotation poles, the way the GPlates software does it. <sup><button type="button" className="atlas-src" data-source="S34" aria-label="Source S34">S34</button></sup>
+
+<More title={{ en: "Where does the model come from?", zh: "模型从哪里来？" }}>
+
+This model joins four earlier plate models into one, from 1 billion years ago to today, and places them in a reference frame based on rock magnetism. Its authors advise against using it for spans shorter than 5 million years, so this topic uses GPS, not the model, for today’s movement. <sup><button type="button" className="atlas-src" data-source="S2" aria-label="Source S2">S2</button><button type="button" className="atlas-src" data-source="S3" aria-label="Source S3">S3</button></sup>
+
+</More>
+
+<More title={{ en: "Why does each plate turn about a pole?", zh: "为什么每块板块绕一个极转动？" }}>
+
+Any movement of a rigid piece over a sphere can be described as a turn about an axis through Earth’s centre. Where the axis meets the surface is the <Term id="term-euler-pole">rotation pole</Term>. Each plate has its own pole at each age, so neighbouring plates can move in different directions. <sup><button type="button" className="atlas-src" data-source="S34" aria-label="Source S34">S34</button></sup>
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+1912 年 1 月，德国科学家阿尔弗雷德·魏格纳第一次公开讲了一个问题：大陆会不会移动？本题按岩石形成的先后，从 4 亿年前一路讲到今天，跟着证据走。 <sup><button type="button" className="atlas-src" data-source="S1" aria-label="来源 S1">S1</button></sup>
+
+这张地图是<Term id="term-plate-model">板块重建模型</Term>，不是照片。它用 Merdith 等 2021 年的模型，把今天的海岸线沿时间往回转。轮廓是被带回去的今天的海岸：古代的海岸线、海平面和后来才增生的陆地都没有画出来。想看古代的陆地和海洋，请打开<TopicLink slug="dinosaur-earth" ch="triassic-world">三叠纪的世界</TopicLink>。 <sup><button type="button" className="atlas-src" data-source="S2" aria-label="来源 S2">S2</button><button type="button" className="atlas-src" data-source="S3" aria-label="来源 S3">S3</button></sup>
+
+每块板块当作一整块刚体移动。真实的大陆相撞时会被挤压，所以地图上的轮廓可能互相重叠；后来沉回地球内部的洋底，则留成空白。岩石磁性能确定板块当时偏南还是偏北，却不能确定东西位置，所以请比较板块彼此的位置，不要对照经纬网。 <sup><button type="button" className="atlas-src" data-source="S2" aria-label="来源 S2">S2</button><button type="button" className="atlas-src" data-source="S4" aria-label="来源 S4">S4</button></sup>
+
+年代用 <Term id="term-ma">Ma</Term> 表示，即百万年前。拖动时间轴或逐拍前进：每一帧都按 GPlates 软件的方法，从模型的旋转极重新计算。 <sup><button type="button" className="atlas-src" data-source="S34" aria-label="来源 S34">S34</button></sup>
+
+<More title={{ en: "Where does the model come from?", zh: "模型从哪里来？" }}>
+
+这个模型把四个较早的板块模型连成一个，从 10 亿年前一直到今天，并放在以岩石磁性为基础的参考系里。作者说明它不适合用于短于 500 万年的时间尺度，所以本题讲今天的移动时用 GPS，不用模型。 <sup><button type="button" className="atlas-src" data-source="S2" aria-label="来源 S2">S2</button><button type="button" className="atlas-src" data-source="S3" aria-label="来源 S3">S3</button></sup>
+
+</More>
+
+<More title={{ en: "Why does each plate turn about a pole?", zh: "为什么每块板块绕一个极转动？" }}>
+
+刚体在球面上的任何移动，都可以看作绕一根穿过地心的轴转动。轴与地表的交点就是<Term id="term-euler-pole">旋转极</Term>。每块板块在每个年代都有自己的极，所以相邻的板块可以朝不同方向移动。 <sup><button type="button" className="atlas-src" data-source="S34" aria-label="来源 S34">S34</button></sup>
+
+</More>
+
+</Lang>

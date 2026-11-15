@@ -94,10 +94,12 @@ export const basemapOptions = z
     region: regionBasemap.optional(),
     maxZoom: z.number().min(6).max(16).optional(),
     reconstruction: z.object({ file: kebabId, selection: z.literal('hold-older') }).strict().optional(),
+    /** Continuous plate rotation of today's geometry (docs/72 E-CD2): the manifest stem, projection and the layer rows. */
+    rotation: z.object({ file: kebabId, projection: z.enum(['globe', 'mercator']), layers: z.array(z.object({ id: kebabId, label: bilingual }).strict()).min(1) }).strict().optional(),
   })
   .strict()
-  .refine((b) => [b.local, b.region, b.reconstruction].filter((v) => v !== undefined).length === 1 || (b.local === undefined && b.region === undefined && b.reconstruction === undefined && b.maxZoom !== undefined), 'basemap needs exactly one of `local`, `region` or `reconstruction`, or only `maxZoom` (a world map with a zoom ceiling, docs/49)')
-  .refine((b) => !b.reconstruction || b.maxZoom === undefined, 'reconstruction fixes maxZoom at 3.6')
+  .refine((b) => [b.local, b.region, b.reconstruction, b.rotation].filter((v) => v !== undefined).length === 1 || (b.local === undefined && b.region === undefined && b.reconstruction === undefined && b.rotation === undefined && b.maxZoom !== undefined), 'basemap needs exactly one of `local`, `region`, `reconstruction` or `rotation`, or only `maxZoom` (a world map with a zoom ceiling, docs/49)')
+  .refine((b) => !(b.reconstruction || b.rotation) || b.maxZoom === undefined, 'reconstruction and rotation fix maxZoom at 3.6')
   .refine((b) => !b.island || b.local !== undefined, '`island` needs `local`');
 export type BasemapOptions = z.output<typeof basemapOptions>;
 
@@ -273,6 +275,8 @@ export const topicSchema = z
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['datedLayers'], message: '`datedLayers` requires time-scene with stage: geo' });
     if (topic.basemap?.reconstruction && (topic.engine !== 'time-scene' || topic.stage !== 'geo' || topic.datedLayers !== undefined))
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['basemap'], message: 'reconstruction requires time-scene/geo without datedLayers' });
+    if (topic.basemap?.rotation && (topic.engine !== 'time-scene' || topic.stage !== 'geo' || topic.datedLayers !== undefined || topic.modernInset !== undefined || topic.maDigits === undefined))
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['basemap'], message: 'rotation requires time-scene/geo with maDigits, without datedLayers or modernInset' });
     if (topic.modernInset && !topic.basemap?.reconstruction)
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['modernInset'], message: 'modernInset requires reconstruction' });
     if (topic.maDigits !== undefined && topic.engine !== 'time-scene')

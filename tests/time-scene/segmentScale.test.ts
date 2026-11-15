@@ -130,3 +130,26 @@ describe('segmentScale', () => {
     expect(none.invert(100)).toEqual({ t: 5, segment: -1 });
   });
 });
+
+describe('segmentScale · continental-drift chapters (deep time, overlapping segments)', () => {
+  // Ma as the time axis stores it (negative years). Chapters 02 and 03 end at 0 Ma; chapter 04 ends (195) after 05 starts (200).
+  const ma = (n: number) => -n * 1e6;
+  const CD: SegmentSpec[] = [
+    { id: 'before-pangaea', time: ma(330), beats: [400, 370, 340, 330].map(ma) },
+    { id: 'pangaea-and-ice', time: ma(0), beats: [310, 300, 300, 300, 0].map(ma) },
+    { id: 'shared-fossils', time: ma(0), beats: [285, 270, 250, 245, 0].map(ma) },
+    { id: 'southeast-asia-assembles', time: ma(195), beats: [250, 230, 210, 195].map(ma) },
+    { id: 'atlantic-jigsaw', time: ma(200), beats: [200, 200, 200, 200].map(ma) },
+    { id: 'breaking-apart', time: ma(80), beats: [195, 155, 130, 80].map(ma) },
+    { id: 'ocean-floor-record', time: ma(0), beats: [50, 0, 0, 0, 0].map(ma) },
+    { id: 'moving-today', time: ma(0), beats: [0, 0, 0, 0, 0].map(ma) },
+  ];
+  it('starts each segment at its first beat, in order, and keeps every beat tick inside its own segment', () => {
+    const s = createSegmentScale({ segments: CD, max: 0, width: 1400 });
+    expect(s.segments.map((g) => Math.abs(g.start) / 1e6)).toEqual([400, 310, 285, 250, 200, 195, 50, 0]);
+    for (const g of s.segments) for (const tick of g.ticks) { expect(tick.x).toBeGreaterThanOrEqual(g.x0 - 1e-9); expect(tick.x).toBeLessThanOrEqual(g.x1 + 1e-9); }
+    // The 0 Ma beat of chapter 02 belongs to chapter 02's segment when anchored there, though 0 Ma is also chapter 08's time.
+    expect(s.locate(0, 1)).toBe(1);
+    expect(Math.abs(s.segments[1]!.ticks.at(-1)!.t)).toBe(0);
+  });
+});

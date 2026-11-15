@@ -1,0 +1,169 @@
+{
+  "terms": [
+    {
+      "id": "term-continental-drift",
+      "term": {
+        "en": "continental drift",
+        "zh": "大陆漂移"
+      },
+      "definition": {
+        "en": "Alfred Wegener’s idea, first presented in 1912, that the continents move. Plate tectonics later replaced it: the plates include the ocean floor too.",
+        "zh": "魏格纳 1912 年首次提出的想法：大陆会移动。后来的板块构造取代了它：板块也包括洋底。"
+      }
+    },
+    {
+      "id": "term-plate-tectonics",
+      "term": {
+        "en": "plate tectonics",
+        "zh": "板块构造"
+      },
+      "definition": {
+        "en": "The theory that Earth’s outer shell is split into plates that move relative to each other, usually a few centimetres a year. It was worked out in papers from 1965 to 1968.",
+        "zh": "地球外壳分成多块板块、彼此相对移动的理论，通常每年几厘米。它在 1965 至 1968 年的一批论文中形成。"
+      }
+    },
+    {
+      "id": "term-supercontinent",
+      "term": {
+        "en": "supercontinent",
+        "zh": "超大陆"
+      },
+      "definition": {
+        "en": "A time when most of the continents are joined into one block of land.",
+        "zh": "大部分大陆连成一整块陆地的状态。"
+      }
+    },
+    {
+      "id": "term-pangaea",
+      "term": {
+        "en": "Pangaea",
+        "zh": "盘古大陆"
+      },
+      "definition": {
+        "en": "The supercontinent that began to assemble about 320 million years ago and began to break apart about 200 million years ago.",
+        "zh": "约 3.2 亿年前开始拼合、约 2 亿年前开始分裂的超大陆。"
+      }
+    },
+    {
+      "id": "term-gondwana",
+      "term": {
+        "en": "Gondwana",
+        "zh": "冈瓦纳"
+      },
+      "definition": {
+        "en": "The large southern continent made of today’s South America, Africa, Madagascar, India, Antarctica and Australia; mostly assembled by about 550 million years ago.",
+        "zh": "由今天的南美洲、非洲、马达加斯加、印度、南极洲和澳大利亚组成的南方大陆，约 5.5 亿年前大体拼成。"
+      }
+    },
+    {
+      "id": "term-ma",
+      "term": {
+        "en": "Ma",
+        "zh": "百万年前"
+      },
+      "definition": {
+        "en": "Past time counted in millions of years; 300 Ma means 300 million years ago.",
+        "zh": "以百万年为单位表示过去的时间；300 Ma 表示 3 亿年前。"
+      }
+    },
+    {
+      "id": "term-plate-model",
+      "term": {
+        "en": "plate reconstruction model",
+        "zh": "板块重建模型"
+      },
+      "definition": {
+        "en": "A model that works out where plates were in the past from evidence such as rock magnetism and the ocean floor. It is a calculation, not a photograph.",
+        "zh": "根据岩石磁性、洋底等证据推算板块过去位置的模型。它是计算结果，不是照片。"
+      }
+    },
+    {
+      "id": "term-euler-pole",
+      "term": {
+        "en": "rotation pole (Euler pole)",
+        "zh": "旋转极（欧拉极）"
+      },
+      "definition": {
+        "en": "Any movement of a plate over the sphere can be described as a turn about an axis through Earth’s centre; the rotation pole is where that axis meets the surface.",
+        "zh": "板块在球面上的任何移动都可以看作绕一根穿过地心的轴转动；这根轴与地表的交点就是旋转极。"
+      }
+    },
+    {
+      "id": "term-glacial-striations",
+      "term": {
+        "en": "glacial striations",
+        "zh": "冰川擦痕"
+      },
+      "definition": {
+        "en": "Parallel scratches cut into bedrock by stones carried in the base of a glacier.",
+        "zh": "冰川底部夹带的石块在基岩上刮出的平行划痕。"
+      }
+    },
+    {
+      "id": "term-mid-ocean-ridge",
+      "term": {
+        "en": "mid-ocean ridge",
+        "zh": "洋中脊"
+      },
+      "definition": {
+        "en": "A long underwater mountain range where new ocean floor forms.",
+        "zh": "绵延的海底山脉，新的洋底在这里生成。"
+      }
+    },
+    {
+      "id": "term-seafloor-spreading",
+      "term": {
+        "en": "seafloor spreading",
+        "zh": "海底扩张"
+      },
+      "definition": {
+        "en": "New ocean floor forming at a ridge and moving away on both sides. Harry Hess described it in 1962; Robert Dietz coined the term in 1961.",
+        "zh": "新洋底在洋脊生成并向两侧移开。赫斯在 1962 年描述了它；迪茨在 1961 年提出这个名称。"
+      }
+    },
+    {
+      "id": "term-magnetic-reversal",
+      "term": {
+        "en": "magnetic reversal",
+        "zh": "地磁倒转"
+      },
+      "definition": {
+        "en": "A swap of Earth’s magnetic north and south. The most recent one was about 773,000 years ago.",
+        "zh": "地球磁场南北方向互换。最近一次约在 77.3 万年前。"
+      }
+    },
+    {
+      "id": "term-magnetic-stripes",
+      "term": {
+        "en": "magnetic stripes",
+        "zh": "磁条带"
+      },
+      "definition": {
+        "en": "Bands of stronger and weaker magnetism in the ocean floor that run parallel to a ridge and mirror each other on both sides.",
+        "zh": "洋底磁性强弱相间的条带，与洋脊平行，并在两侧互为镜像。"
+      }
+    },
+    {
+      "id": "term-gnss",
+      "term": {
+        "en": "GPS / GNSS",
+        "zh": "卫星定位（GPS / GNSS）"
+      },
+      "definition": {
+        "en": "Satellite positioning. A fixed station measured for years shows how its ground moves, by millimetres to centimetres a year.",
+        "zh": "用卫星信号测定位置。长期测量的固定站能显示脚下地面每年移动几毫米到几厘米。"
+      }
+    },
+    {
+      "id": "term-sundaland",
+      "term": {
+        "en": "Sundaland",
+        "zh": "巽他古陆"
+      },
+      "definition": {
+        "en": "Land of the Sunda Shelf that was above water when sea level was lower, about 120 m lower at the coldest time of the last ice age. It is about sea level, not plate movement.",
+        "zh": "海平面较低时露出水面的巽他陆架陆地；末次冰期最冷时海平面约低 120 米。它和海平面有关，与板块移动无关。"
+      }
+    }
+  ]
+}

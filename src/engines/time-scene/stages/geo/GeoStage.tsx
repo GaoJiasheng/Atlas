@@ -73,7 +73,9 @@ export function GeoStage({ store, playhead, model, locale, reconstruction, onRec
     const territoryRoot = territoryRef.current;
     if (!container || !labelRoot || !scaleRoot || !territoryRoot) return;
     let cancelled = false;
-    const factory = reconstruction
+    const factory = basemapRef.current?.rotation
+      ? import('../../rotation-map').then(({ createRotationMap }) => ({ createGeoController: createRotationMap }))
+      : reconstruction
       ? import('../../reconstruction-map').then(({ createReconstructionMap }) => ({ createGeoController: (options: GeoControllerOptions) => createReconstructionMap(options, reconstruction!) }))
       : import('./controller');
     factory.then(({ createGeoController }) => {

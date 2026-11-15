@@ -231,6 +231,31 @@ retain their original source credit and are not claimed as exclusive facts.
 The illustrations are conceptual drawings, not specimen photographs,
 measured reconstructions or third-party map geometry.
 
+## Continental Drift (`continental-drift`)
+
+**Merdith et al. (2021) plate model v1.2.4**, Zenodo record 13635864,
+<https://doi.org/10.5281/zenodo.13635864>. Upstream licence **CC BY 4.0**,
+<https://creativecommons.org/licenses/by/4.0/>. `public/geo/cd-rotations.json`
+copies the rotation poles unchanged (subset of plates, trimmed to 0–400 Ma);
+`cd-land.json` and `cd-shelf.json` simplify the coastline and continent polygons;
+`cd-points.json` and `cd-fossils.json` carry plate IDs assigned with the static
+polygons. Atlas adaptations licensed **CC BY-NC-SA 4.0**; changes and checks in
+`scripts/geo/continental-drift/SOURCES-GEO.md`.
+
+**Seton et al. (2020) ocean-crust age grid**, EarthByte, **CC BY 4.0**:
+`cd-seafloor.json` (1° cells, 19 nested age bands) is an Atlas adaptation, CC BY-NC-SA 4.0.
+
+**EMAG2v3** (NOAA NCEI, doi:10.7289/V5H70CVX; US Government data) through the
+GMT remote-data tile N30W060: `cd-stripes.json` (smoothed, positive / negative
+areas south of Iceland) is an Atlas adaptation.
+
+**Paleobiology Database contributors**, API 1.2 snapshot 15 November 2026,
+declared **CC0**: occurrence and collection facts in `cd-fossils.json` remain CC0.
+
+**NASA JPL GNSS velocity table** (table2, IGS14): a few station velocities are cited
+in `cd-gps.json`. **pyGPlates 1.0.0** (GPL-2.0) was used only as a build tool; it is
+not deployed or distributed.
+
 ## Plates and hazards — frozen scientific reference datasets
 
 - **PB2002**, Peter Bird (2003), “An updated digital model of plate boundaries”,

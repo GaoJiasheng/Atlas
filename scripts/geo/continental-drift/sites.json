@@ -1,0 +1,329 @@
+{
+  "note": "Present-day [lon, lat] anchors. Evidence points are region-level placements of the places their sources name (see data/SOURCES.md). Labels carry a display window in Ma; supercontinent windows follow the sourced ages in docs/72 §0.3.",
+  "points": [
+    {
+      "id": "site-singapore",
+      "kind": "site",
+      "at": [
+        103.8198,
+        1.3521
+      ],
+      "basis": "Editorial anchor for Singapore (not an observation station)"
+    },
+    {
+      "id": "glacial-dwyka",
+      "kind": "glacial",
+      "at": [
+        20.5,
+        -32.5
+      ],
+      "basis": "Dwyka Group, southwestern Karoo Basin, South Africa (Visser 1990); region-level"
+    },
+    {
+      "id": "glacial-itarare",
+      "kind": "glacial",
+      "at": [
+        -49.33,
+        -24.11
+      ],
+      "basis": "Itararé Group, Paraná Basin, Brazil (França & Potter 1991); at Itararé town, the group's namesake"
+    },
+    {
+      "id": "glacial-talchir",
+      "kind": "glacial",
+      "at": [
+        85.23,
+        20.95
+      ],
+      "basis": "Talchir Formation, Talchir Basin, Odisha, India (Sen & Sit 1998); at Talcher town"
+    },
+    {
+      "id": "glacial-wynyard",
+      "kind": "glacial",
+      "at": [
+        145.72,
+        -40.99
+      ],
+      "basis": "Wynyard Formation, NW Tasmania (Henry et al. 2012); at Wynyard town"
+    },
+    {
+      "id": "glacial-pagoda",
+      "kind": "glacial",
+      "at": [
+        171.0,
+        -84.0
+      ],
+      "basis": "Pagoda Formation, Beardmore Glacier area, Transantarctic Mountains (Miller 1989); region-level"
+    },
+    {
+      "id": "belt-appalachians",
+      "kind": "belt",
+      "at": [
+        -79.5,
+        38.0
+      ],
+      "basis": "Central Appalachians (BGS Earthwise, Caledonides); region-level"
+    },
+    {
+      "id": "belt-east-greenland",
+      "kind": "belt",
+      "at": [
+        -25.0,
+        72.5
+      ],
+      "basis": "East Greenland Caledonides (BGS; Torsvik et al. 2012); region-level"
+    },
+    {
+      "id": "belt-scottish-highlands",
+      "kind": "belt",
+      "at": [
+        -4.5,
+        57.0
+      ],
+      "basis": "Scottish Highlands, Caledonides (BGS; GSL); region-level"
+    },
+    {
+      "id": "belt-scandinavian-caledonides",
+      "kind": "belt",
+      "at": [
+        14.0,
+        64.5
+      ],
+      "basis": "Scandinavian Caledonides (BGS; Torsvik et al. 2012); region-level"
+    }
+  ],
+  "labels": [
+    {
+      "id": "name-north-america",
+      "at": [
+        -100,
+        45
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "North America",
+        "zh": "北美洲"
+      }
+    },
+    {
+      "id": "name-south-america",
+      "at": [
+        -58,
+        -12
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "South America",
+        "zh": "南美洲"
+      }
+    },
+    {
+      "id": "name-africa",
+      "at": [
+        22,
+        2
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "Africa",
+        "zh": "非洲"
+      }
+    },
+    {
+      "id": "name-europe",
+      "at": [
+        25,
+        55
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "Europe",
+        "zh": "欧洲"
+      }
+    },
+    {
+      "id": "name-asia",
+      "at": [
+        100,
+        62
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "Asia",
+        "zh": "亚洲"
+      }
+    },
+    {
+      "id": "name-india",
+      "at": [
+        78,
+        18
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "India",
+        "zh": "印度"
+      }
+    },
+    {
+      "id": "name-australia",
+      "at": [
+        134,
+        -25
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "Australia",
+        "zh": "澳大利亚"
+      }
+    },
+    {
+      "id": "name-antarctica",
+      "at": [
+        40,
+        -78
+      ],
+      "window": [
+        400,
+        0
+      ],
+      "name": {
+        "en": "Antarctica",
+        "zh": "南极洲"
+      }
+    },
+    {
+      "id": "name-pangaea",
+      "at": [
+        5,
+        18
+      ],
+      "window": [
+        320,
+        195
+      ],
+      "name": {
+        "en": "Pangaea",
+        "zh": "盘古大陆"
+      }
+    },
+    {
+      "id": "name-gondwana",
+      "at": [
+        25,
+        -24
+      ],
+      "window": [
+        400,
+        155
+      ],
+      "name": {
+        "en": "Gondwana",
+        "zh": "冈瓦纳"
+      }
+    }
+  ],
+  "gps": [
+    {
+      "id": "gps-ntus",
+      "station": "NTUS",
+      "region": {
+        "en": "Singapore (Nanyang Technological University)",
+        "zh": "新加坡（南洋理工大学）"
+      }
+    },
+    {
+      "id": "gps-reyk",
+      "station": "REYK",
+      "region": {
+        "en": "Reykjavík, western Iceland",
+        "zh": "冰岛西部，雷克雅未克"
+      }
+    },
+    {
+      "id": "gps-iceland-east",
+      "station": "HOFN",
+      "region": {
+        "en": "Höfn, south-eastern Iceland",
+        "zh": "冰岛东南部，赫本"
+      }
+    },
+    {
+      "id": "gps-australia",
+      "station": "ALIC",
+      "region": {
+        "en": "Alice Springs, Australia",
+        "zh": "澳大利亚，艾丽斯斯普林斯"
+      }
+    },
+    {
+      "id": "gps-algo",
+      "station": "ALGO",
+      "region": {
+        "en": "Algonquin Park, Canada",
+        "zh": "加拿大，阿冈昆公园"
+      }
+    },
+    {
+      "id": "gps-braz",
+      "station": "BRAZ",
+      "region": {
+        "en": "Brasília, Brazil",
+        "zh": "巴西，巴西利亚"
+      }
+    },
+    {
+      "id": "gps-nklg",
+      "station": "NKLG",
+      "region": {
+        "en": "Libreville, Gabon",
+        "zh": "加蓬，利伯维尔"
+      }
+    },
+    {
+      "id": "gps-wtzr",
+      "station": "WTZR",
+      "region": {
+        "en": "Wettzell, Germany",
+        "zh": "德国，韦策尔"
+      }
+    },
+    {
+      "id": "gps-iisc",
+      "station": "IISC",
+      "region": {
+        "en": "Bengaluru, India",
+        "zh": "印度，班加罗尔"
+      }
+    },
+    {
+      "id": "gps-mkea",
+      "station": "MKEA",
+      "region": {
+        "en": "Mauna Kea, Hawaiʻi (Pacific plate)",
+        "zh": "夏威夷莫纳克亚（太平洋板块）"
+      }
+    }
+  ]
+}

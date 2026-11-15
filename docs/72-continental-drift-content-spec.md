@@ -638,3 +638,39 @@ basemap:
 
 ## 9. 施工记录（施工后填写）
 
+2026-11-15，分支 `claude/continental-drift`（Gavin 当日定稿：§0.1 全按默认、下载全批）。
+
+### 9.1 事实补取结果（取代 §0.3 的状态列）
+
+全部 43 条取原文复核：**read 40 / 部分 cut 6 / 整条 cut 0**；另补 CD24b–e（冈瓦纳、南大西洋、印度、北方大陆，Torsvik 等 2012）与“Sibumasu 名称”“奥特柳斯 1596”两条 read，“陆桥说”cut。与 §0.3 不同之处（正文按右栏写）：
+
+| fact | 原口径 | 施工采用 |
+|---|---|---|
+| CD07 | 撒普贡献“后来才被承认” | 原文只说 1956 年由尤因、希曾宣布；照此写，不写“后来承认” |
+| CD09 | 莫利投稿被拒（《自然》与 JGR） | 只保留“先投《自然》因缺数据被拒”（Linda Hall Library）；JGR 与月份 cut |
+| CD10 | 1966 年测量 | 1963 年飞测、1966 年发表（Vine 1966《科学》） |
+| CD11 | 77.3 / 78.6 万年并列 | 只有 772.9 ka 读到；78.6 万 cut；正文写“约 77.3 万年前” |
+| CD20 | 北偏东；“自 1994 年 1.5 m” | 向东北；1.5 m cut，用 GDA2020 的 1.8 m |
+| CD22 | 变形约 1.95 亿年前结束 | 碰撞约 2 亿–1.95 亿年前基本结束（Leslie）；Metcalfe 中–晚三叠世并列 |
+| CD24 | 约 3.35 亿年前起聚合 | 约 3.2 亿年前起（Torsvik）；中大西洋约 1.95 亿年前张开 |
+| CD26 | 水龙兽二叠纪末–早三叠世；犬颌兽吃肉 | 水龙兽早三叠世、可能植食；犬颌兽只写“似哺乳爬行动物”（饮食未读到，cut） |
+| CD28 | 大多年轻于约 2 亿年 | “比 1.5 亿年老的洋底很少”（NOAA） |
+| CD34 | 各情景署名 | 只保留 Mitchell 等 2012 的亚美；其余署名与“比邻盘古”cut |
+| b07-1 | 约 5000 万年前碰撞 | 5000 万–4000 万年前（USGS） |
+| D-细看 | 冰盖覆盖热带的替代解释；陆桥说 | 未取到来源，两块细看都删 |
+
+### 9.2 实际建成
+
+- 背景 + 8 章，**39 拍**。改动：b04-3 改为“2.1 亿年前地块随邻块北移”（滇缅马苏标注不建，见下）；b06-1 改为 195 Ma（Pangaea 名称窗 320–195 Ma）；b06-2 改为 155 Ma（最早洋底 M25）；b06-4 改为 80 Ma（印度 85 Ma 离开马达加斯加）；第 06 章代表年代因此为 80 Ma。
+- **滇缅马苏 / 苏可泰岛弧标注未建**：模型中 603（Sino/Burma/Malaya）与新加坡所在 64701 在 250–195 Ma 一起移动，看不到合拢的大洋；按 §2.2 规则删标注，正文仍写名称来历与碰撞年代。
+- 数据：DL1–DL6 全部下载并核对（DL1 md5 与上游一致），DL5 走 GMT 分块（1.56 MB，未下 175 MB 全球图）。哈希见 `scripts/geo/continental-drift/INVENTORY.json`。D2 起点保持 400 Ma（覆盖检查：400 Ma 时各大陆组今天海岸面积保留 75%–98%）。
+- 引擎：E-CD1 方案 A（运行时按 GPlates 规则），12,380 个 pygplates 金标位置全部 ≤ 0.001°，含 236 个固定板块切换年代；切换年代的规则是 pyGPlates 重建树的建法（锚定板块起深度优先、子序列文件倒序、先到者得），不是“取哪一段”。E-CD2–E-CD4 见 docs/06“TimeScene · 旋转主图”。投影 globe。
+- 未做：`sample-plate-rotation` 夹具主题（合成环 / 切换 / 抽取无损改由单测覆盖）；真 iPad 性能（只有桌面 Chromium 数字，见交付报告）；插图由 Codex 另做，本分支未引用任何图。
+
+### 9.3 验收数字（2026-11-15）
+
+- 门槛：`pnpm check` 0 error、`pnpm validate` 0 error / 0 warning、`pnpm test` 全绿、`pnpm build` 通过；e2e：`continental-drift`（5）、`sample-deep-time`、`time-scene-folds`、`smoke`、`plates-and-hazards`、`dinosaur-earth`。
+- `pnpm shoot continental-drift`：四种 locale × theme 的 `--keys` 0 失败、`--layout` 0 问题（20 个尺寸，含 390×844、900×1200、1024×768）；`--beats`（en / paper）39 拍链接全部与演示一致，章节高亮全部在屏上。
+- JS：TimeScene 静态闭包峰值 449.26 KB gz（改动前 449.05，+0.21 KB，≤ 452）；懒加载 `rotation-map` chunk（含 plateRotation、rotatedGeometry）7.25 KB gz（≤ 8），`rotation-ui` chunk 2.7 KB gz 另计。
+- 数据：`public/geo/cd-*` 合计 1.99 × 10⁶ B（1.90 MiB）；首屏 231 KB gz。
+- 性能（桌面 Chromium，Apple 芯片 Mac，1180×820 @2x；**不是 iPad 实测**）：拖动 400→0 Ma 3 秒，几何更新约 35 次 / 秒；快档单次主线程 p50 0.8 ms、p95 1.0 ms；细档约 1.2–1.5 ms；松手到细档到位约 335 ms（含 300 ms 等待）。真 iPad 数字待补。

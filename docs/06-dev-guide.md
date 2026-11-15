@@ -2593,6 +2593,18 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 
 现代发现小图的名字使用地图下方逐行换行的 HTML 按钮（`.ts-modern-label[data-id]`，字号至少12 CSS px、命中≥44 px），地图上分列编号与引线对应，避免 SVG 缩小时缩小长名称或互相覆盖；编号的大小按实际 SVG 屏幕宽度补偿。世界视图只写高亮/选中的名字，参照点在自己的区域视图也显示名字。`hosted` 表示在宿主右上卡里：卡片标题就是唯一标题、卡片的竖页签就是它的折叠，小图标题行只有视图按钮与隐藏 ×；阅读小图自行显示同一配置标题，演示小图用同一标题的 `HudFold`（`present-evidence`）。三个视图与年代筛选只在小图提供按钮，控制面板仅保留小图可见性、化石符号和经纬网开关；mode 注册及 store/test API 保留原路径。
 
+### TimeScene · 旋转主图（E-CD1–E-CD4，docs/72）
+
+`topic.basemap.rotation: { file, projection: globe | mercator, layers: [{ id, label }] }` 是与 `local` / `region` / `reconstruction` 互斥的第四种底图：把今天的几何按板块模型的旋转文件连续转到任意年代（不是离散样本）。要求 `maDigits`，不与 `datedLayers` / `modernInset` 并用；实体 / 事件 / 行动必须为空，`control.json` 只放两个空帧定时间范围。`GeoStage` 见到它就懒加载 `rotation-map.ts`（连同 `lib/plateRotation.ts`、`lib/rotatedGeometry.ts`、`rotation-ui.tsx`、`rotation.css`），其他 TimeScene 页面不加载这些代码。
+
+- **清单**（`rotation-schema.ts`，严格）：`{ version, modelId, modelLabel, coordinateSpace: rotated-present-day, rangeMa, rotations, layers[{ id, file, kind, motion: plate | present-only, select?, lod?{scrub, full} }], objects{ points, fossils?, gps? }, method, sources }`。`layers` 的 id 顺序必须与 topic 的 `basemap.rotation.layers` 一致（后者给控制面板的行名）。`plate` 图层要素带 `{ plateId, from, to }`，`present-only` 图层要素不得带 plateId。对象文本放 `<points>-text.json`（`{ objects: { id: { title, summary, sources } } }`），供阅读详情、本章索引和引线标签用。
+- **旋转**（`lib/plateRotation.ts`）：每条总重建极转成单位四元数；同一 (moving, fixed) 序列相邻两极之间 slerp（短弧）；每个年代按 pyGPlates 的规则建重建树：从锚定板块深度优先，子序列按文件倒序，先到者得（这一条决定固定板块切换年代的取舍，文档没写，以 pygplates 实算为准）。金标 `tests/fixtures/continental-drift/golden.json` 由 `scripts/geo/continental-drift/build.py` 用 pygplates 生成，测试不需要 pygplates。
+- **几何**（`lib/rotatedGeometry.ts`）：载入时顶点转单位向量；每次年代变化只算一次每板块 3×3 矩阵，按有效期过滤，环展开经度（相邻点不跨 180°，交给 geojson-vt 切世界副本），绕极一圈的环沿该极分四段闭合。
+- **调度**（`rotation-map.ts`）：年代按 `maDigits` 量化，相同不重算；同时只有一次几何更新在途，在途期间来的年代只记最新一个；播放头移动时用快档，停 300 ms 后换细档；`present-only` 图层只在 0.0 Ma 可见、首次需要时才加载。旋转主图允许拍间时间缓动（每一帧都是模型真实结果）；离散重建题仍不缓动。GeoJSON source `maxzoom: 4`，主图 maxZoom 3.6；换主题只改 paint。
+- **对象与 HUD**：点 / 组 / 名称随板块转；高亮对象用 `stages/geo/leaders.ts` 的引线标签（组只挂代表点），名称标签在年代窗外不显示、在球背面隐藏；地图点击取 22 px 内最近的点（命中 ≥ 44 px）。`rotation-ui.tsx` 给左列 PLATE（所选年代、模型、投影、细节档）、阅读面板章头下的详情、章末索引。`__atlas.engine.geology().rotation` 返回 `RotationStats`（`selectedMa`、`status`、`lod`、`geometryUpdates`、`verticesDrawn`、`presentOnlyVisible`、`inFlight`、`updateMs`），`__atlas.engine.setMa(ma)` 像拖动一样设年代（e2e 用）。
+- **投影**：`globe` 用 MapLibre 5 的 style `projection: { type: 'globe' }`；它沿用中心纬度的墨卡托缩放，所以构建期算镜头时扣掉 log2(1/cos φ)（上限 1.5）。瓦片仍止于 ±85.05°。
+- **校验**：`rotation-build.ts` 在 `validate-content` 里实读清单与全部文件，查未知 plateId、`from < to`、present-only 带 plateId、缺文件、对象重名，并把对象 id 登记进全局 id（章节 `highlight` / `index` 只能引用它们）。单测 `plate-rotation.test.ts`、`rotated-geometry.test.ts`，e2e `continental-drift.spec.ts`。
+
 ### SpaceScene · 试一试 · 翼型（airfoil）
 
 docs/45 §4 E-AF1–5。`kind:"airfoil"`；严格数据 `airfoil-schema.ts`，原创纯函数 `lib/sim/airfoil.ts` 与 `airfoil-field.ts`。注册 SIM_KINDS / simQuantities / quantityKind；无 timeline，`SEPARATE_EXPERIMENTS.airfoil=true`。作者完整模板 `tests/space-scene/fixtures/airfoil-bench.ts`，草稿 `sample-airfoil`。夹具页面用 NASA 平均大气，模板另导出固定密度 1.225 的数值测试例。

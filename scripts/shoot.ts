@@ -450,12 +450,18 @@ async function beatSceneOf(page: Page): Promise<BeatScene | null> {
   // A reconstruction map (docs/47 E-DE1): compare the sample actually drawn, so let the frame settle first.
   await page
     .waitForFunction(() => {
-      const g = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: { status: string } | null } }).geology?.();
-      return !g || (g.reconstruction !== null && g.reconstruction.status !== 'loading');
+      const g = (window.__atlas!.engine as unknown as { geology?(): { reconstruction?: { status: string } | null; rotation?: { status: string; inFlight: number; lod: string } | null } }).geology?.();
+      // A rotation map (docs/72) settles when its fine geometry for the age is drawn.
+      if (g && 'rotation' in g) return !!g.rotation && g.rotation.status !== 'loading' && g.rotation.inFlight === 0 && g.rotation.lod === 'full';
+      return !g || (g.reconstruction != null && g.reconstruction.status !== 'loading');
     }, null, { timeout: 30_000 })
     .catch(() => undefined);
   return page.evaluate(() => {
-    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown> | null; inset: Record<string, unknown> } }).geology?.();
+    const geology = (window.__atlas!.engine as unknown as { geology?(): { reconstruction: Record<string, unknown> | null; inset: Record<string, unknown>; rotation?: Record<string, unknown> | null } }).geology?.();
+    if (geology && 'rotation' in geology) {
+      const st = window.__atlas!.state() as unknown as Record<string, unknown>;
+      return { ...Object.fromEntries(['chapter', 't', 'highlight', 'layers', 'camera'].map((k) => [k, st[k] ?? null])), selectedMa: geology.rotation?.selectedMa ?? null, unfinished: [] };
+    }
     if (geology) {
       const st = window.__atlas!.state() as unknown as Record<string, unknown>;
       const { geometryUpdates: _updates, ...reconstruction } = geology.reconstruction ?? {};

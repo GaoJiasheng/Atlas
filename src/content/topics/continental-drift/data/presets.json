@@ -1,0 +1,60 @@
+{
+  "presets": [
+    {
+      "id": "preset-world",
+      "label": {
+        "en": "World today",
+        "zh": "今天的世界"
+      },
+      "camera": {
+        "center": [
+          20,
+          10
+        ],
+        "zoom": 2
+      }
+    },
+    {
+      "id": "preset-atlantic",
+      "label": {
+        "en": "Atlantic today",
+        "zh": "今天的大西洋"
+      },
+      "camera": {
+        "center": [
+          -25,
+          15
+        ],
+        "zoom": 2.6
+      }
+    },
+    {
+      "id": "preset-southeast-asia",
+      "label": {
+        "en": "Southeast Asia today",
+        "zh": "今天的东南亚"
+      },
+      "camera": {
+        "center": [
+          105,
+          3
+        ],
+        "zoom": 3.4
+      }
+    },
+    {
+      "id": "preset-iceland",
+      "label": {
+        "en": "Iceland today",
+        "zh": "今天的冰岛"
+      },
+      "camera": {
+        "center": [
+          -22,
+          63
+        ],
+        "zoom": 3.6
+      }
+    }
+  ]
+}

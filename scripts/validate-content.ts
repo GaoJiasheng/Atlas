@@ -66,6 +66,7 @@ import { glossaryIds, type GlossaryFile } from '../src/content/schema/glossary';
 import { engineSchemas, formatIssues } from '../src/engines/schemas';
 import { timeBeatFigureIssues, timeCatalogueIndexIssues, timeChapterLayerIssues, timeSceneTopicIssues, type TimeChapterState, type TimeSceneGeoData } from '../src/engines/time-scene/schema';
 import { loadDeepTime } from '../src/engines/time-scene/deep-time-build';
+import { checkRotation } from '../src/engines/time-scene/rotation-build';
 import {
   exercisesFile,
   musclesFile,
@@ -398,6 +399,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   const ids = new IdRegistry(topicFile);
   ids.add(topic.id, 'topic');
   if (topic.basemap?.reconstruction) for (const id of ['base', 'fossils-modern']) ids.add(id, 'reconstruction layer');
+  for (const layer of topic.basemap?.rotation?.layers ?? []) ids.add(layer.id, 'rotation layer');
   for (const layer of topic.datedLayers ?? []) ids.add(layer.id, 'dated layer');
   for (const layer of topic.monthlyLayers ?? []) ids.add(layer.id, 'monthly layer');
   const schemas = engineSchemas(topic.engine, topic.stage, topic.temporalMode);
@@ -426,6 +428,12 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
   if (topic.basemap?.reconstruction) {
     try { Object.assign(raw, loadDeepTime(topic, raw, (stem) => { const f = join(PUBLIC_DIR, 'geo', `${stem}.json`); return existsSync(f) ? readJson(f) : undefined; })); }
     catch (e) { error(topicFile, String(e)); return; }
+  }
+  if (topic.basemap?.rotation) {
+    const check = checkRotation(topic, (stem) => { const f = join(PUBLIC_DIR, 'geo', `${stem}.json`); return existsSync(f) ? readJson(f) : undefined; });
+    for (const issue of check.issues) error(topicFile, `rotation: ${issue}`);
+    raw.rotation = { objects: check.objects };
+    if (['entities', 'events', 'movements'].some((k) => !Array.isArray(raw[k]) || (raw[k] as unknown[]).length !== 0)) error(topicFile, 'rotation: entities, events and movements must be empty');
   }
   if (topic.maDigits !== undefined && (typeof (raw.control as { keyframes?: { t?: unknown }[] } | undefined)?.keyframes?.[0]?.t !== 'object')) error(topicFile, 'maDigits requires geological Ma control frames');
   const parsedData = schemas.data.safeParse(withSharedFitness(raw, shared));
@@ -583,7 +591,7 @@ async function validateTopic(dir: string, shared: SharedFitnessRaw): Promise<voi
       }
       for (const issue of schemas.chapterIssues?.(state.data, data) ?? []) error(file, issue);
       if (topic.engine === 'time-scene' && topic.stage === 'geo') {
-        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
+        for (const issue of timeChapterLayerIssues(state.data as TimeChapterState, [...(topic.basemap?.rotation?.layers ?? []), ...(topic.datedLayers ?? []), ...(topic.monthlyLayers ?? []), ...((data as {geography?: {layers:{id:string}[]}})?.geography?.layers ?? []), ...(topic.temporalMode==='geography'?[{id:'geo-countries'},{id:'geo-membership'},{id:'geo-anchors'}]:[])])) error(file, issue);
         for (const issue of timeBeatFigureIssues(state.data as TimeChapterState, (stem) => existsSync(join(ROOT, 'public/illustrations', `${stem}.webp`)))) error(file, issue);
         for (const issue of timeCatalogueIndexIssues(state.data as TimeChapterState, topic.datedLayers ?? [], (name) => {
           const target = join(PUBLIC_DIR, 'geo', `${name}.json`);

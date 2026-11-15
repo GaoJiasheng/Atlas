@@ -1,0 +1,16 @@
+/* Rotation map (docs/72): name labels over the globe, the inspector's age list. */
+.cd-names { position: absolute; inset: 0; pointer-events: none; }
+.cd-names[hidden] { display: none; }
+.cd-name {
+  position: absolute; left: 0; top: 0;
+  font: 500 calc(10.5 * var(--u, 1px)) / 1.2 var(--font-hud);
+  letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+  color: var(--ink-2);
+  text-shadow: 0 0 calc(3 * var(--u, 1px)) var(--bg), 0 0 calc(6 * var(--u, 1px)) var(--bg);
+  opacity: 0; transition: opacity 200ms var(--ease-out);
+  will-change: transform;
+}
+.cd-name[data-super="true"] { font-weight: 700; letter-spacing: 0.2em; color: var(--ink); }
+.ts-geo__map[data-projection="globe"] { background: var(--paper); }
+.cd-inspector .ts-modern__ages i { font-style: italic; }
+.cd-ramp { display: inline-block; width: 48px; height: 8px; margin-inline-end: 6px; vertical-align: middle; background: linear-gradient(90deg, var(--hot), var(--lamp), var(--cold)); opacity: 0.7; }

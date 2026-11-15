@@ -1,0 +1,31 @@
+id: continental-drift
+title: { en: "Continental Drift", zh: "大陆漂移" }
+subtitle: { en: "400 million years of moving plates, from Wegener’s evidence to GPS", zh: "四亿年的板块移动：从魏格纳的证据到 GPS" }
+subject: geography
+tags: [deep-time, beyond-syllabus, singapore, map]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: published
+maDigits: 1
+illustration: continental-drift
+note:
+  en: "Today’s coastlines turned back in time with the Merdith et al. 2021 plate model. Outlines are today’s coasts, not ancient shorelines."
+  zh: "用 Merdith 等 2021 年的板块模型，把今天的海岸线沿时间往回转。轮廓是今天的海岸，不是古代海岸线。"
+basemap:
+  rotation:
+    file: cd-manifest
+    projection: globe
+    layers:
+      - { id: cd-land, label: { en: "Land (today’s coastlines)", zh: "陆地（今天的海岸线）" } }
+      - { id: cd-shelf, label: { en: "Continental edges under the sea", zh: "海下的大陆边缘" } }
+      - { id: cd-names, label: { en: "Continent names", zh: "大陆名称" } }
+      - { id: cd-glacial, label: { en: "Glacial rocks (found today)", zh: "冰川岩层（今天的发现地）" } }
+      - { id: cd-fossils, label: { en: "Fossil records (found today)", zh: "化石记录（今天的发现地）" } }
+      - { id: cd-belts, label: { en: "Old mountain belts", zh: "古老山带" } }
+      - { id: cd-singapore, label: { en: "Singapore and its model path", zh: "新加坡及其模型路径" } }
+      - { id: cd-seafloor, label: { en: "Ocean-floor age · today", zh: "洋底年龄 · 今天" } }
+      - { id: cd-stripes, label: { en: "Magnetic stripes · today", zh: "磁条带 · 今天" } }
+      - { id: cd-gps, label: { en: "GPS speeds · today", zh: "GPS 速度 · 今天" } }

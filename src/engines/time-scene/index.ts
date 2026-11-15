@@ -39,7 +39,7 @@ export const timeSceneEngine = defineEngine<TimeSceneExt, TimeSceneGeoData>({
     if (topic.temporalMode === 'geography') return { t: null, month: undefined, beat: 0, geoContext: topic.geography!.initialContext, geoSelection: null, highlight: [], layers: ['base', 'geo-countries'] };
     if (topic.temporalMode === 'climatology') return { t: null, month: topic.climatology!.initialMonth, beat: 0, highlight: [], layers: ['base', 'sites'] };
     const first = data && 'control' in data ? data.control.keyframes[0]?.t : undefined;
-    return { pick: null, t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
+    return { pick: null, t: first ?? null, beat: null, highlight: [], layers: topic.basemap?.reconstruction ? ['base', 'fossils-modern'] : topic.basemap?.rotation ? ['base', topic.basemap.rotation.layers[0]!.id] : ['base', 'control', 'movements', 'battles'], ...(topic.modernInset ? { inset: topic.modernInset.defaultView, insetVisible: topic.modernInset.defaultVisible, fossilMode: 'age-window' as const } : {}) };
   },
   fromChapterState(state: ChapterState) {
     if (state.geoContext) return geographyChapterFields(state);

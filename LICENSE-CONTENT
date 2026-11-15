@@ -113,6 +113,14 @@ were not made from Z-Anatomy renders and retain the default CC BY-NC-SA 4.0.
 The draft rig-binding fixture `src/content/topics/sample-joint/data/parts.json`
 reuses the arm model rig and is also CC BY-SA 4.0 under the same attribution.
 
+Continental Drift (topic `continental-drift`) data-family notice: rotation,
+coastline and continent files `public/geo/cd-*.json` adapt the Merdith et al.
+(2021) plate model v1.2.4 (CC BY 4.0, https://doi.org/10.5281/zenodo.13635864)
+and the Seton et al. (2020) ocean-crust age grid (CC BY 4.0); Atlas adaptations
+are CC BY-NC-SA 4.0 with the modification notice in
+`scripts/geo/continental-drift/SOURCES-GEO.md`. PBDB facts in `cd-fossils.json`
+remain CC0.
+
 Dinosaur Earth (topic `dinosaur-earth`) data-family notice: reconstructed land
 and coastline files `public/geo/de-land-*.json` adapt PALEOMAP PaleoDEMs v2 by
 Christopher R. Scotese and Nicky Wright (2018), upstream CC BY 4.0

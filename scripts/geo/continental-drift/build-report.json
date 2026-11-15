@@ -1,0 +1,454 @@
+{
+ "model": "Merdith et al. 2021 v1.2.4",
+ "rangeMa": [
+  400.0,
+  0
+ ],
+ "coverage": {
+  "atStart": {
+   "north-america": 0.9062,
+   "south-america": 0.9268,
+   "europe": 0.7529,
+   "asia": 0.8392,
+   "africa": 0.9772,
+   "australia-antarctica": 0.9628
+  },
+  "at320": {
+   "north-america": 0.9199,
+   "south-america": 0.9268,
+   "europe": 0.8084,
+   "asia": 0.8392,
+   "africa": 0.9772,
+   "australia-antarctica": 0.9855
+  },
+  "at250": {
+   "north-america": 0.9524,
+   "south-america": 0.9417,
+   "europe": 0.9901,
+   "asia": 0.9189,
+   "africa": 0.9847,
+   "australia-antarctica": 0.9929
+  },
+  "yearsBelowHalf": [],
+  "note": "share of today's coastline area (per plate-ID group) that the model keeps at each age"
+ },
+ "lod": {
+  "land-full": {
+   "vertices": 37086,
+   "budget": 36000,
+   "ringsKeptMoreForCrossing": 13,
+   "ringsDroppedBelowKm2": 0,
+   "dropKm2": 0
+  },
+  "land-scrub": {
+   "vertices": 12000,
+   "budget": 12000,
+   "ringsKeptMoreForCrossing": 0,
+   "ringsDroppedBelowKm2": 739,
+   "dropKm2": 100
+  },
+  "shelf-full": {
+   "vertices": 22081,
+   "budget": 22000,
+   "ringsKeptMoreForCrossing": 2,
+   "ringsDroppedBelowKm2": 0,
+   "dropKm2": 0
+  },
+  "shelf-scrub": {
+   "vertices": 7906,
+   "budget": 7900,
+   "ringsKeptMoreForCrossing": 1,
+   "ringsDroppedBelowKm2": 3,
+   "dropKm2": 100
+  }
+ },
+ "pbdb": {
+  "header": [
+   "\"Data Provider\",\"The Paleobiology Database\"",
+   "\"Data Source\",\"The Paleobiology Database\"",
+   "\"Data License\",\"Creative Commons CC0\"",
+   "\"License URL\",\"https://creativecommons.org/publicdomain/zero/1.0/\"",
+   "\"Documentation URL\",\"http://paleobiodb.org/data1.2/occs/list_doc.html\"",
+   "\"Data URL\",\"http://paleobiodb.org/data1.2/occs/list.csv?datainfo&rowcount&base_name=Mesosaurus,Glossopteris,Lystrosaurus,Cynognathus&show=coords,loc,strat,ref,class&limit=all\"",
+   "\"Access Time\",\"Sun 2026-11-15 09:40:55 GMT\"",
+   "\"Title\",\"PBDB Data Service\"",
+   "\"Parameters:\"",
+   "\"\",\"base_name\",\"Mesosaurus,Glossopteris,Lystrosaurus,Cynognathus\"",
+   "\"\",\"timerule\",\"major\"",
+   "\"\",\"taxon_status\",\"all\"",
+   "\"\",\"show\",\"coords,loc,strat,ref,class\"",
+   "\"\",\"limit\",\"all\"",
+   "\"Elapsed Time\",\"0.0337\"",
+   "\"Records Found\",\"1502\""
+  ],
+  "collections": 439,
+  "assigned": 439,
+  "countriesByTaxon": {
+   "taxon-glossopteris": {
+    "IN": 741,
+    "AU": 195,
+    "BR": 96,
+    "AQ": 76,
+    "ZA": 55,
+    "AR": 41,
+    "ZW": 22,
+    "TZ": 14,
+    "MG": 12,
+    "MZ": 11,
+    "CN": 10,
+    "OM": 9,
+    "RU": 9,
+    "ZM": 8,
+    "FK": 6,
+    "BW": 5,
+    "CD": 4,
+    "PG": 3,
+    "TR": 2,
+    "UG": 2,
+    "UY": 2,
+    "MX": 1,
+    "BO": 1,
+    "PK": 1
+   },
+   "taxon-lystrosaurus": {
+    "ZA": 91,
+    "IN": 19,
+    "CN": 9,
+    "AQ": 4,
+    "RU": 1
+   },
+   "taxon-mesosaurus": {
+    "BR": 14,
+    "NA": 7,
+    "ZA": 5,
+    "UY": 4
+   },
+   "taxon-cynognathus": {
+    "ZA": 12,
+    "NA": 3,
+    "AR": 1,
+    "AQ": 1,
+    "ZM": 1,
+    "TZ": 1
+   }
+  }
+ },
+ "points": {
+  "sites": 10,
+  "labels": 10,
+  "unassigned": [],
+  "singapore": {
+   "plateId": 64701,
+   "from": 410.0,
+   "to": 0.0
+  }
+ },
+ "rotations": {
+  "plates": 501,
+  "sequences": 633,
+  "poles": 2428,
+  "maxChainDepth": 38
+ },
+ "seafloor": {
+  "ridgeAnchors": [
+   {
+    "id": "ridge-mid-atlantic",
+    "kind": "ridge",
+    "at": [
+     -42.7,
+     30
+    ]
+   },
+   {
+    "id": "site-reykjanes",
+    "kind": "ridge",
+    "at": [
+     -29.4,
+     60
+    ]
+   }
+  ],
+  "cellDeg": 1.0,
+  "bands": [
+   0,
+   10,
+   20,
+   30,
+   40,
+   50,
+   60,
+   70,
+   80,
+   90,
+   100,
+   110,
+   120,
+   130,
+   140,
+   150,
+   160,
+   170,
+   180
+  ],
+  "maxAgeMa": 338.6839904785156,
+  "note": "nested \"older than\" areas, drawn young to old"
+ },
+ "stripes": {
+  "bounds": [
+   -36,
+   56,
+   -20,
+   66
+  ],
+  "cells": 142985,
+  "positiveShare": 0.47,
+  "meanNT": -5.6,
+  "scale": "z = (u − 32768) × 0.2 + 800 (GMT server table scale 0.2, offset 800)",
+  "smoothing": "5 × 5 cell running mean (10 arc-minutes)",
+  "orientationCheck": "north-up rows: 61% of nodes younger than 0.78 Ma (Brunhes) positive vs 45% if flipped"
+ },
+ "gps": {
+  "header": [
+   "Latitude and longitude in degrees with errors in mm.",
+   "Height estimates and errors in mm.",
+   "Velocity estimates and errors in mm/yr.",
+   "The reference frame is IGS14.",
+   "The reference epoch is January 1, 2026.",
+   "The reference ellipsoid is GRS80.",
+   "N               E               V      SN      SE      SV",
+   "AB01 POS    52.209501000  -174.204759000       25484.137   1.541   1.146   4.632"
+  ],
+  "stations": [
+   {
+    "id": "gps-ntus",
+    "station": "NTUS",
+    "at": [
+     103.68,
+     1.3458
+    ],
+    "vNorthMm": -5.985,
+    "vEastMm": 27.158,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-reyk",
+    "station": "REYK",
+    "at": [
+     -21.9555,
+     64.1388
+    ],
+    "vNorthMm": 19.834,
+    "vEastMm": -9.698,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-iceland-east",
+    "station": "HOFN",
+    "at": [
+     -15.1979,
+     64.2673
+    ],
+    "vNorthMm": 14.975,
+    "vEastMm": 13.895,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-australia",
+    "station": "ALIC",
+    "at": [
+     133.8855,
+     -23.6701
+    ],
+    "vNorthMm": 59.067,
+    "vEastMm": 31.99,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-algo",
+    "station": "ALGO",
+    "at": [
+     -78.0714,
+     45.9558
+    ],
+    "vNorthMm": 2.53,
+    "vEastMm": -16.46,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-braz",
+    "station": "BRAZ",
+    "at": [
+     -47.8779,
+     -15.9475
+    ],
+    "vNorthMm": 12.65,
+    "vEastMm": -3.967,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-nklg",
+    "station": "NKLG",
+    "at": [
+     9.6721,
+     0.3539
+    ],
+    "vNorthMm": 19.189,
+    "vEastMm": 22.306,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-wtzr",
+    "station": "WTZR",
+    "at": [
+     12.8789,
+     49.1442
+    ],
+    "vNorthMm": 15.648,
+    "vEastMm": 20.341,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-iisc",
+    "station": "IISC",
+    "at": [
+     77.5704,
+     13.0212
+    ],
+    "vNorthMm": 35.229,
+    "vEastMm": 42.556,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   },
+   {
+    "id": "gps-mkea",
+    "station": "MKEA",
+    "at": [
+     -155.4564,
+     19.8014
+    ],
+    "vNorthMm": 35.198,
+    "vEastMm": -62.894,
+    "frame": "IGS14",
+    "epoch": "2026-01-01"
+   }
+  ]
+ },
+ "files": {
+  "cd-rotations": {
+   "file": "cd-rotations.json",
+   "bytes": 82713,
+   "gzipBytes": 18979,
+   "sha256": "a706588152b0d34417593eb03940f6bb8cb17a86e6ec2c325b0ccdfcd8525925"
+  },
+  "cd-land": {
+   "file": "cd-land.json",
+   "bytes": 674647,
+   "gzipBytes": 211692,
+   "sha256": "abbd08fe3fa1def43365b55322034694939f69cb3c352d9bb60b8545d8c550ca"
+  },
+  "cd-shelf": {
+   "file": "cd-shelf.json",
+   "bytes": 431867,
+   "gzipBytes": 128623,
+   "sha256": "74b511e9e9aa1ebb9facf1308051a04bbf78edc1aba4df9c0f6d001644813f3f"
+  },
+  "cd-points": {
+   "file": "cd-points.json",
+   "bytes": 2359,
+   "gzipBytes": 728,
+   "sha256": "aa1f1ae5556ee1a75376f8778cc1e6cf03fbd8d234db19f1c6f014aea333d357"
+  },
+  "cd-fossils": {
+   "file": "cd-fossils.json",
+   "bytes": 239366,
+   "gzipBytes": 30484,
+   "sha256": "af97b9b7aedfe61e34bd7ee4867c55dcd90af6487b8ff418c628d22ee54e0746"
+  },
+  "cd-seafloor": {
+   "file": "cd-seafloor.json",
+   "bytes": 327962,
+   "gzipBytes": 34640,
+   "sha256": "77ca8d07d6cb32e9282e60ebbb46f93d720f954d3b918be9c694431eae13ada5"
+  },
+  "cd-stripes": {
+   "file": "cd-stripes.json",
+   "bytes": 223564,
+   "gzipBytes": 38557,
+   "sha256": "6db075506402c107cf2da2195e48a5745819a32e24602d0f14632c30dea58cff"
+  },
+  "cd-gps": {
+   "file": "cd-gps.json",
+   "bytes": 1468,
+   "gzipBytes": 527,
+   "sha256": "3303fa51e528526f4724982a2ec58de2b19b035b398f930c9700943f048eab75"
+  },
+  "cd-manifest": {
+   "file": "cd-manifest.json",
+   "bytes": 2148,
+   "gzipBytes": 1009,
+   "sha256": "5da5d28165cb5cfff8c36aaa4c37b2d1d384a326405505e7a34a670665f97db0"
+  }
+ },
+ "totalBytes": 1986094,
+ "firstScreenGzipBytes": 231399,
+ "lossless": {
+  "maxDifferenceDeg": 0.0,
+  "cases": 12380,
+  "switchAges": 236
+ },
+ "singaporeTrail": [
+  [
+   400,
+   -12.6,
+   109.29
+  ],
+  [
+   350,
+   -27.7,
+   119.61
+  ],
+  [
+   300,
+   -49.79,
+   114.64
+  ],
+  [
+   250,
+   -42.02,
+   98.05
+  ],
+  [
+   200,
+   23.55,
+   129.76
+  ],
+  [
+   150,
+   7.8,
+   133.27
+  ],
+  [
+   100,
+   6.03,
+   120.01
+  ],
+  [
+   50,
+   7.26,
+   109.09
+  ],
+  [
+   0,
+   1.35,
+   103.82
+  ]
+ ]
+}
