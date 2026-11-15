@@ -4509,3 +4509,156 @@ path.ms-glyph--cord {
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Angles (docs/76 §3.1, model A5)                                     */
+/* ------------------------------------------------------------------ */
+
+/* Ink hairline arms; the child's arm and line signal, the given cold, the second compared hot; "Show me" ink dashes. */
+.ms-angle__arm {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.ms-angle__arm.ms-angle--cold { stroke: var(--cold); stroke-width: 2.2; }
+.ms-angle__arm.ms-angle--hot { stroke: var(--hot); stroke-width: 2.2; }
+.ms-angle__arm.ms-angle--signal { stroke: var(--signal); stroke-width: 2.6; }
+.ms-angle__arm--dashed { stroke-dasharray: 7 5; }
+.ms-angle__arm--ghost { stroke: var(--ink); stroke-width: 1.6; stroke-dasharray: 6 5; }
+.ms-angle__vertex { fill: var(--ink); }
+.ms-angle__vertex.ms-angle--signal { fill: var(--signal); }
+.ms-angle__vertex.ms-angle--cold { fill: var(--cold); }
+.ms-angle__arc {
+  fill: none;
+  stroke: var(--cold);
+  stroke-width: 2;
+}
+.ms-angle__arc.ms-angle--hot { stroke: var(--hot); }
+.ms-angle__arc.ms-angle--signal { stroke: var(--signal); stroke-width: 2.6; }
+.ms-angle__arc.ms-angle--ink { stroke: var(--ink); }
+.ms-angle__arc--dashed { stroke-dasharray: 5 4; }
+.ms-angle__square {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+.ms-angle__label {
+  fill: var(--cold);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.ms-angle__label.ms-angle--hot { fill: var(--hot); }
+.ms-angle__label.ms-angle--signal,
+.ms-angle__label--unknown { fill: var(--signal); }
+.ms-angle__label.ms-angle--ink { fill: var(--ink); }
+.ms-angle__point {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.ms-angle__name,
+.ms-angle__caption,
+.ms-angle__nts {
+  fill: var(--ink-muted);
+  font-size: 15px;
+}
+.ms-angle__name { font-style: italic; }
+.ms-angle__nts { font-style: italic; }
+.ms-angle__caption { fill: var(--ink); font-size: 14px; }
+.ms-angle__ring { fill: none; stroke: var(--ink-faint); stroke-width: 1; }
+.ms-angle__shape {
+  fill: color-mix(in srgb, var(--cold) 8%, transparent);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* The protractor: a clear half circle, hairline ticks, two rows of numbers (the one read heavier, the other faded). */
+.ms-angle__protractor-body {
+  fill: color-mix(in srgb, var(--panel-solid) 62%, transparent);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-angle__protractor-inner { fill: none; stroke: var(--ink-faint); stroke-width: 0.8; }
+.ms-angle__protractor-centre { stroke: var(--ink); stroke-width: 1; }
+.ms-angle__tick { stroke: var(--ink); stroke-width: 0.6; }
+.ms-angle__tick--long { stroke-width: 1; }
+.ms-angle__num {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+}
+.ms-angle__num--read { fill: var(--signal); font-weight: 700; }
+.ms-angle__num--dim { opacity: 0.4; }
+.ms-angle__num--lit { font-weight: 700; opacity: 1; }
+.ms-angle__num--lit.ms-angle--hot { fill: var(--hot); }
+.ms-angle__num--lit.ms-angle--signal { fill: var(--signal); }
+.ms-angle__num--lit.ms-angle--cold { fill: var(--cold); }
+.ms-angle__protractor--faint > :not(.ms-angle__strike) { opacity: 0.35; }
+.ms-angle__protractor--ghost .ms-angle__protractor-body { fill: none; stroke-dasharray: 6 5; }
+.ms-angle__protractor--ghost { opacity: 0.7; }
+.ms-angle__rim-dot { fill: var(--signal); stroke: var(--panel-solid); stroke-width: 1.5; }
+.ms-angle__strike { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+
+/* The folded right-angle tester: paper, a crease, its square corner. */
+.ms-angle__tester-paper {
+  fill: color-mix(in srgb, var(--ink) 6%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-angle__tester-crease { stroke: var(--ink-faint); stroke-width: 0.8; stroke-dasharray: 3 3; }
+.ms-angle__tester-square { fill: none; stroke: var(--ink); stroke-width: 1; }
+.ms-angle__tester-edge { stroke: var(--ink); stroke-width: 1.4; }
+
+/* Dot paper. */
+.ms-angle__dot { fill: var(--ink-muted); }
+.ms-angle__gap line { stroke: var(--ink-muted); stroke-width: 1; stroke-dasharray: 2 3; }
+.ms-angle__gap text { fill: var(--ink-muted); font-family: var(--font-mono); }
+.ms-angle__dot-hit { fill: transparent; cursor: pointer; }
+.ms-angle__dots { outline: none; }
+.ms-angle__cursor { fill: none; stroke: transparent; stroke-width: 2; pointer-events: none; }
+.ms-angle__dots:focus-visible .ms-angle__cursor { stroke: var(--signal); }
+.ms-angle__picked { fill: color-mix(in srgb, var(--signal) 24%, transparent); stroke: var(--signal); stroke-width: 2; pointer-events: none; }
+
+/* Live: the protractor and the arm are grabbed; a 44 px knob turns them. */
+.ms-angle__handle { outline: none; cursor: grab; touch-action: none; }
+.ms-angle__handle[data-laid] { cursor: default; }
+.ms-angle__handle-hit { stroke: transparent; stroke-width: 28; stroke-linecap: round; }
+.ms-angle__knob-handle { cursor: grab; touch-action: none; }
+.ms-angle__knob { fill: transparent; }
+.ms-angle__knob-dot { fill: var(--signal); stroke: var(--panel-solid); stroke-width: 2; }
+.ms-angle__handle:focus-visible .ms-angle__protractor-body { stroke: var(--signal); stroke-width: 2; }
+.ms-angle__handle:focus-visible .ms-angle__knob {
+  fill: color-mix(in srgb, var(--signal) 14%, transparent);
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.ms-angle__lens-glass { fill: var(--panel-solid); }
+.ms-angle__lens-rim { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+.ms-angle__lens-leader { stroke: var(--signal); stroke-width: 0.8; stroke-dasharray: 3 3; }
+
+/* Moves: the protractor or tester slides in (lay), the cold angle slides onto the hot one (overlay), the tester folds up. */
+.ms-beat[data-move="lay"] .ms-angle__lay { animation: ms-angle-lay 680ms var(--ease-out) both; }
+.ms-beat[data-move="overlay"] .ms-angle__arm.ms-angle--cold,
+.ms-beat[data-move="overlay"] .ms-angle__arc.ms-angle--cold,
+.ms-beat[data-move="overlay"] .ms-angle__label.ms-angle--cold { animation: ms-angle-overlay 760ms var(--ease-in-out) both; }
+.ms-angle__tester--fold { transform-box: fill-box; transform-origin: 0 100%; animation: ms-angle-fold 900ms var(--ease-in-out) both; }
+@keyframes ms-angle-lay {
+  from { opacity: 0; transform: translate(-60px, 50px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ms-angle-overlay {
+  from { opacity: 0.3; transform: translate(120px, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ms-angle-fold {
+  0% { transform: scale(2, 2); opacity: 0.4; }
+  50% { transform: scale(1, 2); }
+  100% { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-beat[data-move="lay"] .ms-angle__lay,
+  .ms-beat[data-move] .ms-angle__arm,
+  .ms-beat[data-move] .ms-angle__arc,
+  .ms-beat[data-move] .ms-angle__label,
+  .ms-angle__tester--fold { animation: none; }
+}

@@ -1,0 +1,18 @@
+# Angles: an angle as an amount of turn, right angles, perpendicular and parallel lines, naming, measuring and drawing angles, and finding unknown angles (MathScene lesson).
+# Spec: docs/76-angles-content-spec.md.
+id: angles
+title: { en: "Angles", zh: "角" }
+subtitle: { en: "How much one arm turns from the other: right angles, protractors and unknown angles", zh: "一条边相对另一条边转了多少：直角、量角器和未知角" }
+subject: math
+levels: [P3, P5]
+tags: [geometry, singapore]
+moe: ["MOE 2021 P3 Geometry 1 (Angles), 2 (Perpendicular and Parallel Lines)", "MOE 2021 P4 Geometry 1 (Angles)", "MOE 2021 P5 Geometry 1 (Angles)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: angles
+shortTitle: { en: "Angles", zh: "角" }

@@ -1,0 +1,202 @@
+{
+  "terms": [
+    {
+      "id": "angle",
+      "term": {
+        "en": "angle",
+        "zh": "角"
+      },
+      "definition": {
+        "en": "The shape made by two arms from one point. Its size is how far one arm turns from the other.",
+        "zh": "从一个点出发的两条边组成的图形。角的大小是一条边相对另一条边转了多少。"
+      },
+      "see": [
+        "vertex",
+        "arm"
+      ]
+    },
+    {
+      "id": "vertex",
+      "term": {
+        "en": "vertex",
+        "zh": "顶点"
+      },
+      "definition": {
+        "en": "The point where the two arms of an angle meet.",
+        "zh": "角的两条边相交的那个点。"
+      },
+      "see": [
+        "angle"
+      ]
+    },
+    {
+      "id": "arm",
+      "term": {
+        "en": "arm",
+        "zh": "边"
+      },
+      "definition": {
+        "en": "One of the two straight lines that make an angle. Its length does not change the angle's size.",
+        "zh": "组成角的两条直线中的一条。边的长短不改变角的大小。"
+      },
+      "see": [
+        "angle"
+      ]
+    },
+    {
+      "id": "right-angle",
+      "term": {
+        "en": "right angle",
+        "zh": "直角"
+      },
+      "definition": {
+        "en": "A square corner: a quarter of a full turn, 90°. It is marked with a small square.",
+        "zh": "方方正正的角，是一整圈的四分之一，90°。用一个小方块标出。"
+      },
+      "see": [
+        "right-angle-tester",
+        "degree"
+      ]
+    },
+    {
+      "id": "right-angle-tester",
+      "term": {
+        "en": "right-angle tester",
+        "zh": "直角板"
+      },
+      "definition": {
+        "en": "A sheet of paper folded in half and in half again. Its folded corner is a right angle, used to check other angles.",
+        "zh": "把一张纸对折再对折，折出的角是直角，用来比别的角。"
+      },
+      "see": [
+        "right-angle"
+      ]
+    },
+    {
+      "id": "perpendicular",
+      "term": {
+        "en": "perpendicular lines",
+        "zh": "垂直"
+      },
+      "definition": {
+        "en": "Two straight lines that meet at a right angle.",
+        "zh": "相交成直角的两条直线互相垂直。"
+      },
+      "see": [
+        "parallel",
+        "right-angle"
+      ]
+    },
+    {
+      "id": "parallel",
+      "term": {
+        "en": "parallel lines",
+        "zh": "平行"
+      },
+      "definition": {
+        "en": "Two straight lines that go the same way and stay the same distance apart; they never meet.",
+        "zh": "方向一样、之间的距离处处相等、永远不相交的两条直线互相平行。"
+      },
+      "see": [
+        "perpendicular"
+      ]
+    },
+    {
+      "id": "degree",
+      "term": {
+        "en": "degree (°)",
+        "zh": "度（°）"
+      },
+      "definition": {
+        "en": "The unit for the size of an angle. A full turn is 360°; a right angle is 90°.",
+        "zh": "量角的单位。一整圈是 360°，直角是 90°。"
+      },
+      "see": [
+        "protractor"
+      ]
+    },
+    {
+      "id": "protractor",
+      "term": {
+        "en": "protractor",
+        "zh": "量角器"
+      },
+      "definition": {
+        "en": "A half-circle tool for measuring and drawing angles, with two rows of numbers from 0 to 180.",
+        "zh": "量角、画角的半圆形工具，有两圈从 0 到 180 的数。"
+      },
+      "see": [
+        "inner-outer-scale",
+        "degree"
+      ]
+    },
+    {
+      "id": "inner-outer-scale",
+      "term": {
+        "en": "inner scale, outer scale",
+        "zh": "内圈刻度、外圈刻度"
+      },
+      "definition": {
+        "en": "The two rows of numbers on a protractor, counting in opposite directions. Read the one whose 0 lies on an arm.",
+        "zh": "量角器上方向相反的两圈数。读 0 对着一条边的那一圈。"
+      },
+      "see": [
+        "protractor"
+      ]
+    },
+    {
+      "id": "straight-line-angles",
+      "term": {
+        "en": "angles on a straight line",
+        "zh": "直线上的角"
+      },
+      "definition": {
+        "en": "Angles that sit on one side of a straight line and share a vertex on it. They add up to 180°.",
+        "zh": "在一条直线同一侧、顶点在直线上的几个角，加起来是 180°。"
+      },
+      "see": [
+        "angles-at-a-point"
+      ]
+    },
+    {
+      "id": "angles-at-a-point",
+      "term": {
+        "en": "angles at a point",
+        "zh": "一点周围的角"
+      },
+      "definition": {
+        "en": "Angles that go all the way round one point. They add up to 360°.",
+        "zh": "绕着一点一整圈的几个角，加起来是 360°。"
+      },
+      "see": [
+        "straight-line-angles"
+      ]
+    },
+    {
+      "id": "vertically-opposite",
+      "term": {
+        "en": "vertically opposite angles",
+        "zh": "对顶角"
+      },
+      "definition": {
+        "en": "The two angles that face each other across the point where two straight lines cross. They are equal.",
+        "zh": "两条直线相交时，隔着交点面对面的两个角。它们相等。"
+      },
+      "see": [
+        "straight-line-angles"
+      ]
+    },
+    {
+      "id": "not-to-scale",
+      "term": {
+        "en": "not drawn to scale",
+        "zh": "未按比例画"
+      },
+      "definition": {
+        "en": "The angles in the drawing are not their real sizes. Work them out from the numbers given; do not measure.",
+        "zh": "图上的角不是真实的大小。要用标出的数来算，不要量。"
+      },
+      "see": []
+    }
+  ]
+}

@@ -38,6 +38,7 @@ import { weightText } from './lib/instrument';
 import { instrumentText } from './lib/measure-working';
 import { isMeasureTask } from './lib/measure-kind';
 import { tappedLabel } from './lib/net-description';
+import { angleActionLabel } from './lib/angle-description';
 
 export interface Current {
   chapter: string | null;
@@ -136,6 +137,14 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `PLACED ${s.nplaced.length}${task.kind === 'complete-net' ? `/${task.add}` : ''}`;
     case 'ntap':
       return s.ntapped === null ? 'TAP' : `TAP ${tappedLabel(task, s.ntapped)}`;
+    case 'aput':
+    case 'aturn':
+    case 'acentre':
+    case 'aline':
+    case 'aarm':
+    case 'aprot':
+    case 'dot':
+      return angleActionLabel(task, s);
     case 'etap':
     case 'ereset':
       return `TOWERS ${s.towers?.join(' · ') ?? '—'}`;
@@ -275,6 +284,10 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'nplace', key: '' }, s);
     case 'tap-face':
       return describe(task, { do: 'ntap', node: 0 }, s);
+    case 'measure-angle':
+    case 'draw-angle':
+    case 'draw-segment':
+      return angleActionLabel(task, s);
     case 'fill-table':
     case 'even-out':
       return describe(task, { do: 'input', field: '', value: '' }, s);
@@ -293,7 +306,9 @@ export function solvedUpTo(task: Task, phase: number): TaskState {
     else segments.at(-1)!.push(a);
   }
   const actions = segments.slice(0, phase + 1).flatMap((seg, i) => (i < phase ? [...seg, { do: 'check' } as Action] : seg));
-  return apply(task, actions);
+  const out = apply(task, actions);
+  // A phase that moves on by itself once it is done (a protractor laid, docs/76 §3.2): solve the next one too.
+  return out.phase > phase && phase + 1 < segments.length ? solvedUpTo(task, out.phase) : out;
 }
 
 export interface ControllerOptions {

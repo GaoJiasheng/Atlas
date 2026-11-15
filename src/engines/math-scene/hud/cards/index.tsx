@@ -27,12 +27,14 @@ import { MeasureCard } from './MeasureCard';
 import { isMeasureTask } from '../../lib/measure-kind';
 import { SolidCard } from './SolidCard';
 import { isNetTask } from '../../lib/net-tasks';
+import { AngleCard } from './AngleCard';
+import { isAngleTask } from '../../lib/angle-tasks';
 import { AverageCard, ChartCard } from './ChartCard';
 
 import { SymmetryCard } from './SymmetryCard';
 import { isSymmetryModel, isSymmetryTask } from '../../lib/symmetry-tasks';
 
-export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid' | 'chart' | 'average' | 'symmetry';
+export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid' | 'chart' | 'average' | 'symmetry' | 'angle';
 
 /** Card by model kind (the time lesson's `clock` and `timeline` show the TIME card). */
 export const CARD_BY_MODEL: Record<string, CardKind> = {
@@ -51,6 +53,7 @@ export const CARD_BY_MODEL: Record<string, CardKind> = {
   money: 'decimal',
   instrument: 'measure',
   net: 'solid',
+  angle: 'angle',
   chart: 'chart',
 };
 
@@ -63,6 +66,7 @@ export const CARD_TITLE: Record<CardKind, UiKey> = {
   decimal: 'math.card.decimal',
   measure: 'math.card.measure',
   solid: 'math.card.solid',
+  angle: 'math.card.angle',
   chart: 'math.card.chart',
   average: 'math.card.average',
   symmetry: 'math.card.symmetry',
@@ -73,6 +77,7 @@ export function cardKindOf(model: Model | null, task: Task | null, fallback: Car
   const spec = task ? inputSpecOf(task) : null;
   if (spec && (isTimeForm(spec.form) || spec.span || spec.convert)) return 'time';
   if (task && isNetTask(task)) return 'solid';
+  if (task && isAngleTask(task)) return 'angle';
   if ((task && isSymmetryTask(task)) || (model && isSymmetryModel(model))) return 'symmetry';
   if (task && isMeasureTask(task)) return 'measure';
   if (task && isDecimalTask(task)) return 'decimal';
@@ -98,6 +103,8 @@ export interface CardProps {
   expanded: boolean;
   /** SOLID: the fold on show (the slider's), `null`: the beat's own. */
   netFold?: number | null;
+  /** ANGLE: the step writes sizes in degrees (`false`: right angles only, docs/76 §1.1). */
+  degrees?: boolean;
   locale: Locale;
 }
 
@@ -117,6 +124,8 @@ export function Card(p: CardProps) {
       return <SymmetryCard model={p.model} task={p.task} state={p.state} locale={p.locale} />;
     case 'solid':
       return <SolidCard model={p.model} task={p.task} state={p.state} done={p.done} fold={p.netFold ?? null} locale={p.locale} />;
+    case 'angle':
+      return <AngleCard model={p.model} task={p.task} state={p.state} done={p.done} degrees={p.degrees ?? true} locale={p.locale} />;
     case 'chart':
       return <ChartCard model={p.model} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
     case 'average':

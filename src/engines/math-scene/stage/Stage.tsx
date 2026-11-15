@@ -7,8 +7,8 @@
  * the background chapter shows one specimen fraction ({3/4}) in every view.
  */
 import { Suspense, useLayoutEffect } from 'react';
-import { SPECIMEN_CHART, SPECIMEN_TOWERS, SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';
-import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, ArrayModel, BlocksModel, WholeLine, DecimalTask, DecimalGrid, ClockModel, Timeline, InstrumentModel, NetModel, ChartModel } from './lazy-models';
+import { SPECIMEN_CHART, SPECIMEN_TOWERS, SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL, SPECIMEN_ANGLE } from './specimens';
+import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, ArrayModel, BlocksModel, WholeLine, DecimalTask, DecimalGrid, ClockModel, Timeline, InstrumentModel, NetModel, ChartModel, AngleModel } from './lazy-models';
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
@@ -46,6 +46,8 @@ import { sharedUnit } from './net-unit';
 import type { NetHold } from './BeatModel';
 import { netItems } from '../lib/net-view';
 import { describeNet } from '../lib/net-description';
+import { describeAngle } from '../lib/angle-description';
+import { angleItems, fitScale } from '../lib/angle';
 
 export interface DisplayModes {
   symbol: boolean;
@@ -125,6 +127,7 @@ function StageModel(p: StageContentProps) {
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'angle') return <AngleModel model={SPECIMEN_ANGLE} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.angle')} />;
   if (p.view === 'chart') return <ChartModel model={p.specimenModel?.kind === 'chart' ? p.specimenModel : SPECIMEN_CHART} box={box} locale={locale} label={t(locale, p.specimenModel === SPECIMEN_TOWERS ? 'math.specimen.towers' : 'math.specimen.chart')} />;
   if (p.view === 'net') return <NetModel model={SPECIMEN_NET} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.net')} fold={p.net?.fold ?? null} turn={p.net?.turn ?? null} maxH={p.net?.maxH} onShow={p.net?.onShow} />;
   if (p.view === 'instrument' || p.view === 'straight') return <InstrumentModel model={SPECIMEN_DIAL} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.dial')} />;
@@ -205,6 +208,9 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
   /* a net (docs/39 §3.5): complete it, tap a face, or a net or a solid to look at (a choice in words, a number to write) */
   if (!pictures && m.kind === 'net') return <TaskNet {...p} task={task} state={state} box={area} />;
 
+  /* an angle (docs/76 §3.2): lay the protractor, turn an arm, draw a line on dot paper, or a drawing to read */
+  if (!pictures && m.kind === 'angle') return <AngleModel model={m} box={area} defs={defs} locale={locale} label={label} task={task} state={state} editable={editable} act={act} ghost={ghost} />;
+
   /* an instrument (docs/32 §3.4): read it, set it, count its parts, or a picture beside the numbers compared, ordered, written */
   if (!pictures && m.kind === 'instrument') {
     return <InstrumentModel model={m} box={area} defs={defs} locale={locale} label={label} task={task} state={state} editable={editable} act={act} ghost={ghost} straight={p.view === 'straight'} />;
@@ -271,6 +277,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
                 ? describeArray(o.model, locale)
                 : o.model?.kind === 'blocks'
                   ? wholeWords(blockTotal(matOf(o.model)), locale)
+                  : o.model?.kind === 'angle'
+                    ? (o.text ? plainText(tx(o.text, locale), locale) : describeAngle(o.model, locale))
                   : o.model?.kind === 'clock'
                     ? facesOf(o.model).map((f) => describeClock(f, locale)).join(' · ')
                   : o.text
@@ -295,6 +303,20 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         },
       }));
     if (cells.length === 0) return null;
+    // Angles as pictures: one scale for all (long arms look long, a small turn looks small).
+    const anglePics = task.options.flatMap((o) => (o.model?.kind === 'angle' ? angleItems(o.model) : []));
+    if (anglePics.length > 0) {
+      let unit: number | null = null;
+      for (const c of cells) {
+        const o = task.options.find((x) => x.id === c.id)!;
+        if (o.model?.kind !== 'angle') continue;
+        const model = o.model;
+        c.draw = (b: Rect) => {
+          unit ??= fitScale(anglePics, b.w, b.h, 6);
+          return <AngleModel model={model} box={b} defs={defs} locale={locale} label="" mini unit={unit} />;
+        };
+      }
+    }
     // Nets as pictures: one scale for all (a short rectangle looks short), the stage's own net or solid beside them.
     const netPics = task.options.flatMap((o) => (o.model?.kind === 'net' ? [o.model] : []));
     if (netPics.length > 0) {
@@ -635,6 +657,7 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'instrument') return <InstrumentModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
   if (model.kind === 'net') return <NetModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
+  if (model.kind === 'angle') return <AngleModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
   if (model.kind === 'chart') return <ChartModel model={model} box={box} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
@@ -685,4 +708,4 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   return null;
 }
 
-export { SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';
+export { SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL, SPECIMEN_ANGLE } from './specimens';

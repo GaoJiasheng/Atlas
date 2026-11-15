@@ -149,6 +149,10 @@ export const MEASURE_READING_CODES = [
 export const MEASURE_READING_SHARED_CODES = ['tick-counting', 'interval-misread', 'unit-factor-wrong', 'decimal-as-subunit'] as const;
 /** Nets and solids (docs/39 §2.1; rules in lib/diagnose/nets.ts). `prism-pyramid`, `cube-cuboid` and `curved-unrolled` are diagnosed by `choose` options only. */
 export const NETS_CODES = ['prototype-only', 'overlap-unseen', 'adjacent-as-opposite', 'face-size', 'face-count', 'prism-pyramid', 'cube-cuboid', 'curved-unrolled'] as const;
+/** Angles (docs/76 §2.1; rules in lib/diagnose/angles.ts). `arm-length`, `right-angle-upright` and `vertex-not-middle` are diagnosed by `choose` options only; `looks-parallel` by options and a line drawn on dot paper. */
+export const ANGLES_CODES = ['arm-length', 'right-angle-upright', 'looks-parallel', 'vertex-not-middle', 'wrong-scale', 'angle-sum-swap', 'right-mark-missed', 'opposite-adjacent', 'measured-not-calculated'] as const;
+/** Codes registered elsewhere that angles uses too: a protractor read from a mark that is not 0, as a ruler (docs/76 D6). */
+export const ANGLES_SHARED_CODES = ['read-end-mark'] as const;
 /** Graphs and averages (docs/77 §2.1, docs/78 §2.1; rules in lib/diagnose/data.ts). `scale-ignored-compare` and `truncated-axis` are diagnosed by `choose` options only. */
 export const DATA_CODES = [
   'key-ignored',
@@ -180,12 +184,13 @@ export const MISCONCEPTION_DOMAINS = {
   decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
   'measure-reading': [...MEASURE_READING_CODES, ...MEASURE_READING_SHARED_CODES],
   nets: NETS_CODES,
+  angles: [...ANGLES_CODES, ...ANGLES_SHARED_CODES],
   data: [...DATA_CODES, ...DATA_SHARED_CODES],
   symmetry: SYMMETRY_CODES,
 } as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES, ...DATA_CODES, ...SYMMETRY_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES, ...DATA_CODES, ...SYMMETRY_CODES, ...ANGLES_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -223,6 +228,9 @@ export const TASK_KINDS = [
   'count-intervals',
   'complete-net',
   'tap-face',
+  'measure-angle',
+  'draw-angle',
+  'draw-segment',
   'fill-table',
   'even-out',
   'complete-symmetric',
@@ -239,6 +247,8 @@ export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
 export const MEASURE_KINDS = ['read-scale', 'set-scale', 'count-intervals'] as const;
 /** Task kinds on a net (docs/39 §3.5). */
 export const NET_KINDS = ['complete-net', 'tap-face'] as const;
+/** Task kinds on an angle or on dot paper (docs/76 §3.2). */
+export const ANGLE_KINDS = ['measure-angle', 'draw-angle', 'draw-segment'] as const;
 /** Task kinds on a chart (docs/77 §3.2, docs/78 §3.1). */
 export const DATA_KINDS = ['fill-table', 'even-out'] as const;
 /** Task kinds on a line of symmetry (docs/79 §3.2). */
@@ -249,7 +259,7 @@ export type TaskKind = (typeof TASK_KINDS)[number];
  * Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`);
  * `instrument` the measuring lesson's and `straight` its dial or jug drawn as the straight number line it is (docs/32 §3.7); `net` the nets lesson's (docs/39 §3.7).
  */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight', 'net', 'chart'] as const;
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight', 'net', 'chart', 'angle'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -1007,6 +1017,131 @@ const netModel = netSpec
 export type NetSpec = z.output<typeof netSpec>;
 export type NetModelSpec = z.output<typeof netModel>;
 
+/* Angles (docs/76 §3.1, model A5): rays and lines from one vertex, arcs, right-angle marks, a protractor with two scales, a folded right-angle tester, shapes, dot paper. */
+const angleTone = z.enum(['cold', 'hot', 'signal', 'ink']);
+const angleLetter = z.string().regex(/^[A-Za-z]$/, 'one letter');
+/** A direction in degrees, anticlockwise from pointing right. */
+const angleDir = z.number().min(0).lt(360);
+const angleRay = z
+  .object({
+    dir: angleDir,
+    /** The point named on this arm (a capital letter). */
+    label: angleLetter.optional(),
+    /** Length in arm units (default 1; the drawing is scaled to fit). */
+    len: z.number().min(0.3).max(3).optional(),
+    tone: angleTone.optional(),
+    dashed: z.boolean().optional(),
+  })
+  .strict();
+const angleLineSpec = z
+  .object({
+    /** A straight line through the vertex, its direction one way (the other end is dir + 180). */
+    dir: z.number().min(0).lt(180),
+    /** The points named at its two ends (dir, then dir + 180). */
+    labels: z.tuple([angleLetter, angleLetter]).optional(),
+    len: z.number().min(0.3).max(3).optional(),
+    tone: angleTone.optional(),
+    dashed: z.boolean().optional(),
+  })
+  .strict();
+const angleArc = z
+  .object({
+    /** From one direction anticlockwise to another (`to` > `from`, at most a full turn). */
+    from: z.number().min(0).max(360),
+    to: z.number().min(0).max(720),
+    /** `?` (unknown), a small letter (∠a), or nothing. */
+    label: z.string().min(1).max(3).optional(),
+    /** Write the size in degrees (the arc's own, or `value`). */
+    deg: z.boolean().optional(),
+    /** The size the angle really is (a drawing not to scale); default: as drawn. */
+    value: z.number().int().min(1).max(360).optional(),
+    tone: angleTone.optional(),
+    dashed: z.boolean().optional(),
+  })
+  .strict();
+const protractorSpec = z
+  .object({
+    /** The protractor turned to this direction: its curve spans rot … rot + 180; the inner scale reads 0 at rot, the outer 0 at rot + 180. */
+    rot: z.number().min(0).lt(360),
+    /** The scale being read (heavier, signal); the other fades. */
+    row: z.enum(['inner', 'outer']).optional(),
+    /** Numbers lit on a scale (the other scale's reading, hot). */
+    marks: z.array(z.object({ at: angleDir, row: z.enum(['inner', 'outer']), tone: angleTone.optional() }).strict()).max(3).optional(),
+    /** A dot marked on the rim (drawing an angle). */
+    dot: angleDir.optional(),
+    /** Faint (the flat edge shown as a straight line). */
+    faint: z.boolean().optional(),
+    /** Struck out: measuring does not work on a drawing not to scale. */
+    crossed: z.boolean().optional(),
+    /** Off to the side: slides in onto the vertex (`lay`). */
+    away: z.boolean().optional(),
+  })
+  .strict();
+const dotPoint = z.tuple([z.number().int().min(0).max(10), z.number().int().min(0).max(8)]);
+const dotPaper = z
+  .object({
+    /** Columns × rows of dots (y up, from 0). */
+    cols: z.number().int().min(2).max(11),
+    rows: z.number().int().min(2).max(9),
+    /** `none`: the segments only (a window grille). */
+    show: z.enum(['dots', 'none']).optional(),
+    segments: z
+      .array(z.object({ from: dotPoint, to: dotPoint, labels: z.tuple([angleLetter, angleLetter]).optional(), tone: angleTone.optional(), dashed: z.boolean().optional() }).strict())
+      .max(12)
+      .default([]),
+    /** Points named on the paper. */
+    points: z.array(z.object({ at: dotPoint, label: angleLetter, tone: angleTone.optional() }).strict()).max(6).optional(),
+    /** Right-angle marks: at a dot, between two directions given as steps. */
+    corners: z.array(z.object({ at: dotPoint, a: z.tuple([z.number().int(), z.number().int()]), b: z.tuple([z.number().int(), z.number().int()]) }).strict()).max(6).optional(),
+    /** Gaps measured between two dots (a dimension line and its label). */
+    gaps: z.array(z.object({ from: dotPoint, to: dotPoint, label: z.string().min(1).max(4) }).strict()).max(6).optional(),
+  })
+  .strict();
+const anglePolygon = z
+  .object({
+    /** Corners in order (any units; the shape is scaled to fit). */
+    points: z.array(z.tuple([z.number().min(-20).max(20), z.number().min(-20).max(20)])).min(3).max(6),
+    /** Per corner: a right-angle square, an arc for an angle smaller or greater than a right angle, a small letter, or nothing. */
+    marks: z.array(z.union([z.enum(['right', 'smaller', 'greater']), z.string().regex(/^[a-z]$/), z.null()])).optional(),
+    tone: angleTone.optional(),
+  })
+  .strict();
+const angleSpec = z.object({
+  rays: z.array(angleRay).max(6).optional(),
+  lines: z.array(angleLineSpec).max(3).optional(),
+  /** The vertex's capital letter. */
+  vertex: z.object({ label: angleLetter.optional() }).strict().optional(),
+  arcs: z.array(angleArc).max(6).optional(),
+  /** Right-angle squares between two directions (validate: 90° apart). */
+  square: z.array(z.tuple([z.number().min(0).max(360), z.number().min(0).max(450)])).max(4).optional(),
+  protractor: protractorSpec.optional(),
+  /** The folded right-angle tester, one edge along `dir`, the other at dir + 90 (`fold`: shown being folded from a sheet). */
+  tester: z.object({ dir: z.number().min(0).lt(360), fold: z.boolean().optional(), away: z.boolean().optional() }).strict().optional(),
+  /** A full turn marked every 10° (degrees). */
+  ring: z.boolean().optional(),
+  /** Names the vertex and the arms in words. */
+  names: z.boolean().optional(),
+  polygon: anglePolygon.optional(),
+  paper: dotPaper.optional(),
+  /** The drawing is not to scale (the arcs' `value` is what the angles are). */
+  notToScale: z.boolean().optional(),
+  /** A caption under the drawing (a picture in a row, an option). */
+  label: bilingual.optional(),
+});
+const angleModel = angleSpec
+  .extend({
+    kind: z.literal('angle'),
+    /** Two drawings side by side, one scale. */
+    pair: z.array(angleSpec.strict()).length(2).optional(),
+    /** 3–6 drawings in a row, one scale. */
+    set: z.array(angleSpec.strict()).min(3).max(6).optional(),
+  })
+  .strict();
+export type AngleSpec = z.output<typeof angleSpec>;
+export type AngleModelSpec = z.output<typeof angleModel>;
+export type AngleArc = z.output<typeof angleArc>;
+export type DotPaper = z.output<typeof dotPaper>;
+
 /* The clock face and the timeline (docs/20 §3.1–3.2, model A3): times in 24-hour time, the face shows their 12-hour position. */
 const clockFace = z.object({
   /** The time the hands show (default 12:00); am / pm follow from it. */
@@ -1197,7 +1332,7 @@ const chartModel = chartSpec
   .strict();
 export type ChartModelSpec = z.output<typeof chartModel>;
 
-const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel, netModel, chartModel]);
+const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel, netModel, chartModel, angleModel]);
 const isDecimalLine = (v: unknown): boolean => !!v && typeof v === 'object' && (v as { kind?: unknown }).kind === 'numberline' && (v as { scale?: unknown }).scale === 'decimal';
 /** A model: by `kind`, the number line by `scale` too (a decimal line has decimal ends and a decimal step). */
 export const model = z.unknown().transform((v, ctx): z.output<typeof baseModels> | DecimalLineSpec => {
@@ -1314,6 +1449,20 @@ export const inputSpec = z
     convert: z.object({ from: duration, to: z.enum(['h', 'min', 's']).optional() }).strict().optional(),
     /** Time: the start, end and length of a span, and which one is asked (diagnoses going the wrong way, counting the marks). */
     span: z.object({ start: clockTime.optional(), end: clockTime.optional(), length: duration.optional(), ask: z.enum(['start', 'end', 'length']) }).strict().optional(),
+    /**
+     * Angles (docs/76 §3.4): how the angle asked is found, for the diagnosis — read on the protractor drawn (`read`), counted (`count`),
+     * on a straight line, at a point, opposite or next to a known angle at a crossing; `known` the sizes it is worked from,
+     * `rights` the right-angle marks among them, `equal` how many equal unknowns share what is left.
+     */
+    angle: z
+      .object({
+        rule: z.enum(['read', 'count', 'straight', 'point', 'opposite', 'adjacent']),
+        known: z.array(z.number().int().min(1).max(359)).max(5).optional(),
+        rights: z.number().int().min(0).max(3).optional(),
+        equal: z.number().int().min(2).max(4).optional(),
+      })
+      .strict()
+      .optional(),
     /**
      * Graphs and averages (docs/77 §3.4, docs/78 §3.2): what the number is, worked out from the chart (or from `values`) —
      * checked against the answer by validate, and what the diagnosis looks for. `of`: the categories, points, slices or
@@ -1590,6 +1739,31 @@ const completeNetFields = z.object({
   /** `free` / `adjacent`: the squared paper's size, columns × rows (≤ 12 × 10). */
   box: z.tuple([z.number().int().min(2).max(12), z.number().int().min(2).max(10)]).optional(),
 });
+/* Angle tasks (docs/76 §3.2) */
+const measureAngleFields = z.object({
+  /** The angle's size in degrees (the stage's two arms, validate). */
+  answer: z.number().int().min(1).max(179),
+  /** The child lays the protractor first (drag it onto the vertex, turn it onto an arm); otherwise it is drawn in place. */
+  place: z.boolean().default(true),
+  /** Degrees either side still right. */
+  tolerance: z.number().int().min(0).max(2).default(1),
+});
+const drawAngleFields = z.object({
+  /** The size to draw, from the stage's first arm. */
+  target: z.number().int().min(1).max(179),
+  /** Which way the second arm turns from the first. */
+  open: z.enum(['ccw', 'cw']).default('ccw'),
+  /** The protractor lies on the first arm (the child can take it away). */
+  protractor: z.boolean().default(true),
+  tolerance: z.number().int().min(0).max(2).default(1),
+});
+const drawSegmentFields = z.object({
+  /** The line starts at this dot (the child picks the other end); otherwise the child picks both ends. */
+  from: dotPoint.optional(),
+  relation: z.enum(['parallel', 'perpendicular']),
+  /** The segment on the paper it is drawn against (index). */
+  to: z.number().int().min(0).max(11).default(0),
+});
 const tapFaceFields = z.object({
   /** The face opposite the one marked, or the bottom of a box with no lid. */
   ask: z.enum(['opposite', 'bottom']),
@@ -1639,6 +1813,9 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('count-intervals') }).merge(countIntervalsFields).strict(),
   base.extend({ kind: z.literal('complete-net') }).merge(completeNetFields).strict(),
   base.extend({ kind: z.literal('tap-face') }).merge(tapFaceFields).strict(),
+  base.extend({ kind: z.literal('measure-angle') }).merge(measureAngleFields).strict(),
+  base.extend({ kind: z.literal('draw-angle') }).merge(drawAngleFields).strict(),
+  base.extend({ kind: z.literal('draw-segment') }).merge(drawSegmentFields).strict(),
   base.extend({ kind: z.literal('fill-table') }).merge(fillTableFields).strict(),
   base.extend({ kind: z.literal('even-out') }).merge(evenOutFields).strict(),
   base.extend({ kind: z.literal('complete-symmetric') }).merge(completeSymmetricFields).strict(),
@@ -1671,7 +1848,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round', 'unroll', 'fill', 'tip', 'rescale', 'stack', 'join', 'level', 'pool'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round', 'unroll', 'fill', 'tip', 'rescale', 'stack', 'join', 'level', 'pool', 'turn', 'lay', 'overlay'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -1788,6 +1965,13 @@ export const stepLimits = z
     /* Nets (docs/39 §3.8) */
     /** The solids a step may show. */
     solids: z.array(z.enum(SOLID_CLASSES)).min(1).optional(),
+    /* Angles (docs/76 §3.1) */
+    /** `false`: no degrees anywhere in the step (right angles only: no °, no sizes). */
+    degrees: z.boolean().optional(),
+    /** Every angle measured, drawn or given within `[lo, hi]` degrees. */
+    range: z.tuple([z.number().int().min(1).max(359), z.number().int().min(1).max(359)]).optional(),
+    /** An angle measured or drawn is at least this far from 90° (the right-angle check means something). */
+    awayFromRight: z.number().int().min(0).max(45).optional(),
   })
   .strict();
 export type StepLimits = z.output<typeof stepLimits>;

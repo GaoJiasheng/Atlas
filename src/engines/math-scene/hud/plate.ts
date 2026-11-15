@@ -31,6 +31,9 @@ import { foldOf, netItems } from '../lib/net-view';
 import { autoIso } from '../lib/project';
 import { faceIds, solidClass } from '../lib/solid';
 import { asksName } from './cards/SolidCard';
+import { angleItems, armsOf, kindOf } from '../lib/angle';
+import { angleSpecOf, drawnSegment, drawnSize, isAngleModel, laidRow } from '../lib/angle-tasks';
+import { cardAngle } from '../lib/angle-description';
 
 const dash = '—';
 
@@ -287,5 +290,40 @@ export function measurePlateRows(m: Model, task: Task | null, state: TaskState |
     return rows;
   }
   rows.push({ key: s.head ? 'math.plate.end' : 'math.plate.arrow', value: reading ? '?' : r ? text(r.value) : dash, on: true });
+  return rows;
+}
+
+/**
+ * Rows for an angle (docs/76 §3.3): MODEL ANGLE · ARMS · TURN · SCALE (the row being read, INNER / OUTER; `—` without a
+ * protractor or degrees). A step without degrees writes the turn as SMALLER / RIGHT / GREATER; a check keeps the size `?`
+ * until it is done (drawing an angle shows the child's arm, measuring the row the protractor is laid on).
+ */
+export function anglePlateRows(m: Model, task: Task | null, state: TaskState | null, done: boolean, degrees: boolean): PlateRow[] | null {
+  if (!isAngleModel(m)) return null;
+  const spec = (task && angleSpecOf(task)) ?? angleItems(m)[0]!;
+  const rows: PlateRow[] = [{ key: 'math.plate.model', value: spec.paper ? 'DOT PAPER' : 'ANGLE' }];
+  const KIND = { smaller: 'SMALLER', right: 'RIGHT', greater: 'GREATER', straight: 'STRAIGHT', full: 'FULL TURN' } as const;
+  const size = (v: number) => (degrees ? `${Math.round(v)}°` : KIND[kindOf(v)]);
+  if (spec.paper) {
+    rows.push({ key: 'math.plate.arms', value: String(spec.paper.segments.length) });
+    if (task?.kind === 'draw-segment' && state) {
+      const seg = drawnSegment(task, state);
+      rows.push({ key: 'math.plate.line', value: seg ? `(${seg[0].join(',')})–(${seg[1].join(',')})` : dash, on: true });
+    }
+    return rows;
+  }
+  rows.push({ key: 'math.plate.arms', value: String(spec.polygon ? spec.polygon.points.length : armsOf(spec).length) });
+  let turn = dash;
+  if (task?.kind === 'draw-angle' && state) {
+    const x = drawnSize(task, state);
+    turn = x === null ? dash : `${Math.round(x)}°`;
+  } else if (task && !done) turn = '?';
+  else {
+    const lit = m.pair || m.set ? null : cardAngle(spec);
+    if (lit?.size) turn = lit.unknown && !done ? '?' : size(lit.size);
+  }
+  rows.push({ key: 'math.plate.turn', value: turn, on: true });
+  const row = task?.kind === 'measure-angle' && state ? laidRow(task, state) : task?.kind === 'draw-angle' && state?.aprot ? (task.open === 'ccw' ? 'inner' : 'outer') : spec.protractor?.row;
+  rows.push({ key: 'math.plate.scale', value: degrees && row ? row.toLocaleUpperCase('en') : dash });
   return rows;
 }

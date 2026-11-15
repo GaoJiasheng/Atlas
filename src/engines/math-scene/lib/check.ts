@@ -25,6 +25,7 @@ import { isQty, qtyBase, type DecValue, type QtyValue } from './value';
 import { decimalWorkOf, isMeasureTask } from './measure-kind';
 import { checkMeasureInput, checkMeasureModel, measureAnswered, measureInputAnswered } from './measure-tasks';
 import { checkNetInput, checkNetModel, isNetTask, netAnswered } from './net-tasks';
+import { angleAnswered, checkAngleInput, checkAngleModel, isAngleTask } from './angle-tasks';
 import { checkDataPhase, dataAnswered, isDataTask } from './data-tasks';
 import { checkSymModel, symAnswered } from './symmetry-tasks';
 
@@ -565,6 +566,13 @@ export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckRes
     const r = checkNetModel(task, state, declaredCodes(task));
     if (r) return r;
   }
+  // Angles (docs/76 §3.2–3.4): a protractor laid, an arm turned, a line drawn on dot paper, a size written; a choice is the generic one.
+  if (isAngleTask(task)) {
+    const spec = inputSpecOf(task);
+    if (phase === 'input' && spec) return checkAngleInput(task, spec, state.input, declaredCodes(task));
+    const r = checkAngleModel(task, state, declaredCodes(task));
+    if (r) return r;
+  }
   // Charts (docs/77 §3.2, docs/78 §3.1): a table filled, the average of towers, a number read or worked out from a chart; a choice the generic one.
   if (isDataTask(task)) {
     const r = checkDataPhase(task, state.input, phase === 'input' ? inputSpecOf(task) : null, declaredCodes(task));
@@ -640,6 +648,8 @@ export function answered(task: Task, state: TaskState): boolean {
   const phase = phasesOf(task)[state.phase] ?? 'model';
   const net = netAnswered(task, state);
   if (net !== null) return net;
+  const angle = phase === 'model' ? angleAnswered(task, state) : null;
+  if (angle !== null) return angle;
   const data = dataAnswered(task, state.input);
   if (data !== null) return data;
   const sym = symAnswered(task, state);

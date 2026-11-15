@@ -43,7 +43,7 @@ import { formatFrac } from './lib/fraction';
 import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
 import { StageContent } from './stage/Stage';
-import { SPECIMEN_ARRAY, SPECIMEN_CHART, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, SPECIMEN_SYMMETRY, SPECIMEN_TOWERS } from './stage/specimens';
+import { SPECIMEN_ANGLE, SPECIMEN_ARRAY, SPECIMEN_CHART, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, SPECIMEN_SYMMETRY, SPECIMEN_TOWERS } from './stage/specimens';
 import { isSymmetryModel } from './lib/symmetry-tasks';
 import { symmetryPlateRows } from './hud/cards/SymmetryCard';
 import type { NetShown } from './stage/NetModel';
@@ -55,7 +55,7 @@ import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage
 import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layout';
 import { partsAreNarrow } from './tray/parts';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
-import { decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
+import { anglePlateRows, decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
 import { dataPlateRows } from './hud/data-plate';
 import { lessonUnits } from './lib/measure-working';
 import { factsOf, figureOf } from './lib/grid';
@@ -86,6 +86,7 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   instrument: 'math.view.instrument',
   straight: 'math.view.straight',
   net: 'math.view.net',
+  angle: 'math.view.angle',
   chart: 'math.view.chart',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
@@ -169,9 +170,11 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   // A lesson on line symmetry (docs/79 §3.4): its background shows the house folded part of the way, its card SYMMETRY.
   const symmetryLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => isSymmetryModel(b.model))), [lesson]);
   // The fraction assists (S / E / N, labels) and specimen belong to a lesson on fractions; another lesson's background shows its first model.
+  // A lesson on angles (docs/76 §3.3): its background shows a 50° angle with the protractor laid on it.
+  const angleLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'angle')), [lesson]);
   const fractionLesson = useMemo(() => !decimalLesson && !chartLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
   const firstKind = lesson.steps[0]?.beats[0]?.model.kind ?? 'bar';
-  const specimenModel: Model | null = fractionLesson ? null : chartLesson ? (averageLesson ? SPECIMEN_TOWERS : SPECIMEN_CHART) : symmetryLesson ? SPECIMEN_SYMMETRY : netLesson ? SPECIMEN_NET : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
+  const specimenModel: Model | null = fractionLesson ? null : angleLesson ? SPECIMEN_ANGLE : chartLesson ? (averageLesson ? SPECIMEN_TOWERS : SPECIMEN_CHART) : symmetryLesson ? SPECIMEN_SYMMETRY : netLesson ? SPECIMEN_NET : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
   const lessonCard: CardKind = fractionLesson ? 'fraction' : chartLesson ? (averageLesson ? 'average' : 'chart') : cardKindOf(specimenModel, null, 'fraction');
   const assists = fractionLesson;
   const explain = slot.kind === 'explain' ? slot.beat : null;
@@ -395,6 +398,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   /** The model on show (a check's, a beat's, the specimen's): it picks the card and the plate rows. */
   const modelOnShow: Model | null = task ? task.model : explain ? explain.model : background ? specimenModel : null;
   const gridOnShow: GridModelSpec | null = modelOnShow?.kind === 'grid' ? modelOnShow : null;
+  /** Sizes in degrees: not in a step without them (right angles only), nor in its check. */
+  const degreesOn = step?.limits?.degrees !== false;
   // A lesson on charts keeps its own card throughout (a strip of equal parts is the averages' model drawing, not a fraction).
   const cardKind: CardKind = showSummaryOf(practice, u.summary) || chartLesson ? lessonCard : cardKindOf(modelOnShow, task, lessonCard);
 
@@ -412,7 +417,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : chartLesson ? (averageLesson ? '3 TOWERS · AVERAGE 4' : 'BAR GRAPH · 1 GRIDLINE = 1') : symmetryLesson ? `HOUSE · FOLD ${Math.round((SPECIMEN_SYMMETRY.fold?.t ?? 0) * 100)} %` : netLesson ? 'CUBE NET · FOLD 50 %' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : angleLesson ? 'ANGLE · 50°' : chartLesson ? (averageLesson ? '3 TOWERS · AVERAGE 4' : 'BAR GRAPH · 1 GRIDLINE = 1') : symmetryLesson ? `HOUSE · FOLD ${Math.round((SPECIMEN_SYMMETRY.fold?.t ?? 0) * 100)} %` : netLesson ? 'CUBE NET · FOLD 50 %' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -544,6 +549,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         { key: 'math.state.answered', value: `${Object.keys(u.practice).length}/${lesson.practice.length}` },
         { key: 'math.state.assists', value: UP(t('en', 'math.state.off')) },
       ]
+    : modelOnShow && anglePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, degreesOn)
+      ? anglePlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, degreesOn)!
     : modelOnShow && dataPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
       ? dataPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)!
     : modelOnShow && symmetryPlateRows(modelOnShow, task, run?.state ?? null)
@@ -644,6 +651,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
           time={explain ? beatTime(explain) : background && specimenModel?.kind === 'clock' ? { at: specimenModel.time, mode: 'face' } : null}
           expanded={cardExpanded}
           netFold={netShownFold}
+          degrees={degreesOn}
           locale={locale}
         />
       </SceneSlot>

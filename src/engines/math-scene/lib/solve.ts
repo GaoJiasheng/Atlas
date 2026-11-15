@@ -23,6 +23,7 @@ import { isMeasureTask } from './measure-kind';
 import { measureBoxes, measureSample, measureSampleBoxes, measureSolveModel } from './measure-tasks';
 import { formatQty, isQty, parseQuantity } from './value';
 import { netSample, netSolveModel } from './net-tasks';
+import { angleSample, angleSolveModel } from './angle-tasks';
 import { dataSample, dataSolve } from './data-tasks';
 import { symSample, symSolveModel } from './symmetry-tasks';
 
@@ -131,6 +132,8 @@ export function solve(task: Task): Action[] {
   if (measured) return withInput(task, measured as Action[]);
   const net = netSolveModel(task);
   if (net) return net as Action[];
+  const angle = angleSolveModel(task);
+  if (angle) return withInput(task, angle as Action[]);
   const data = dataSolve(task);
   if (data) return data as Action[];
   const sym = symSolveModel(task);
@@ -224,6 +227,9 @@ export function solve(task: Task): Action[] {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'measure-angle':
+    case 'draw-angle':
+    case 'draw-segment':
     case 'fill-table':
     case 'even-out':
     case 'complete-symmetric':
@@ -344,6 +350,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   if (data !== undefined) return data;
   const net = netSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (net !== undefined) return net;
+  const angle = angleSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
+  if (angle !== undefined) return angle;
   const sym = symSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (sym !== undefined) return sym;
   if (decimalModel(task) && task.kind !== 'compare') return decimalSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
@@ -439,6 +447,9 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'measure-angle':
+    case 'draw-angle':
+    case 'draw-segment':
     case 'fill-table':
     case 'even-out':
     case 'complete-symmetric':

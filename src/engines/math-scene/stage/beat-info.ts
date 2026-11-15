@@ -55,6 +55,9 @@ export function beatShape(beat: Beat): string {
     case 'net':
       // The same net keeps its drawing (it folds, unfolds, turns, its colours come in); another solid, another layout or a set remounts.
       return `net|${m.set ? 'set|' : ''}${JSON.stringify(netItems(m).map((x) => [x.solid, x.layout, x.curved, x.base, x.open]))}`;
+    case 'angle':
+      // The same arms, lines and protractor keep the drawing (arms turn, arcs grow, the protractor slides and turns); other parts remount.
+      return `angle|${(m.pair ?? m.set ?? [m]).map((x) => [x.rays?.length ?? 0, x.lines?.length ?? 0, x.polygon ? x.polygon.points.length : '', x.paper ? `${x.paper.cols}x${x.paper.rows}` : '', x.protractor ? 'p' : '', x.tester ? 't' : '', x.ring ? 'r' : ''].join(',')).join('|')}`;
     case 'clock':
     case 'timeline': {
       // The same face keeps its drawing (the hands sweep to the new time, a lens comes and goes; new jumps are drawn on); another face or ruler remounts.

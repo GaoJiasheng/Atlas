@@ -18,6 +18,7 @@ import { opResult } from './lib/diagnose/whole-ops';
 import { isDecimalTask } from './lib/decimal-tasks';
 import { isMeasureTask } from './lib/measure-kind';
 import { isNetTask } from './lib/net-tasks';
+import { isAngleTask } from './lib/angle-tasks';
 import { isDataTask } from './lib/data-kind';
 import { isSymmetryTask } from './lib/symmetry-tasks';
 import { splitArrayCut } from './lib/solve';
@@ -39,6 +40,7 @@ const modelsOf = (task: Task): Model[] => [task.model, ...(task.kind === 'choose
 /** The domain a task's misconceptions come from (docs/19 G5): nets → nets (docs/39), grid → measure, instruments and quantities → measure-reading (docs/32), decimals → decimals, times → time, whole numbers → whole-ops, else fractions. */
 export function domainOf(task: Task): MisconceptionDomain {
   if (isNetTask(task)) return 'nets';
+  if (isAngleTask(task)) return 'angles';
   if (isDataTask(task)) return 'data';
   if (isSymmetryTask(task)) return 'symmetry';
   const models = modelsOf(task);
