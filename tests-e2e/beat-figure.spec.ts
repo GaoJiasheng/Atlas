@@ -50,7 +50,7 @@ for (const viewport of SIZES) {
         const map = await box(page, '[data-hud-frame]');
         return apart(plate, { x: map.x + x0, y: map.y + y0, width: x1 - x0, height: y1 - y0 });
       }).toBe(true);
-      for (const label of await page.locator('.ts-co').all()) expect(apart(plate, (await label.boundingBox())!)).toBe(true);
+      for (const label of await page.locator('.ts-co:visible').all()) expect(apart(plate, (await label.boundingBox())!)).toBe(true);
     });
 
     test('the normal view keeps the figure in the reader, off the map', async ({ page }) => {

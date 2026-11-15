@@ -64,6 +64,8 @@ function StagePlate({ figure, locale, presenting, onLayout }: Props) {
       el.style.setProperty('--plate-room', `${Math.max(0, Math.round(bottom - box.top - top - gap))}px`);
       layout.current();
     };
+    // Placed before the first paint: the observer's first call waits for a frame, which a busy map can hold back.
+    fit();
     const observer = new ResizeObserver(fit);
     observer.observe(el);
     observer.observe(stage);
