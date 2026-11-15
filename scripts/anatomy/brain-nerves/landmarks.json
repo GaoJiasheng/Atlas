@@ -1,0 +1,20 @@
+{
+  "elbow": {
+    "pivot": [
+      -0.21617,
+      0.0919,
+      -0.15407
+    ],
+    "flexionAxis": [
+      -0.9892,
+      0.08799,
+      -0.11726
+    ],
+    "humerusUp": [
+      0.16803,
+      0.98447,
+      0.05093
+    ],
+    "method": "midpoint of the most medial and most lateral points of the distal 30 mm of Humerus.r; axis between them"
+  }
+}

@@ -1,0 +1,103 @@
+---
+id: before-you-start
+order: 0
+kind: background
+title: { en: "Before you start", zh: "开始之前" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  pose: null
+  layers: [brain-parts, spinal, nerves, protection, reflex-arm, skeleton-context, skin-context, neuron-study, synapse-study, cord-study, layers-study, try-it, study-table, signals-down]
+  labels: [group:brain-parts, spinal-cord, arm-nerves, skull]
+  camera: { position: [0.9, 0.35, 3.3], target: [-0.12, -0.12, -0.1], fov: 30 }
+  summary:
+    en: "What this model is, what the colours and moving dots mean, and how this lesson connects with the body systems you have met."
+    zh: "这个模型是什么、颜色和移动的亮点代表什么，以及这一课和你学过的人体系统有什么关系。"
+  note:
+    en: "The body on the stage is one adult man's anatomy, simplified. Only the main nerves are drawn. Moving dots are nerve signals, slowed down a great deal. Numbers marked TYPICAL come from the sources listed; numbers marked SIM are this model's, not measurements. Parts marked 'further' go beyond what this lesson needs."
+    zh: "台上的身体是一位成年男子的解剖，已经简化。只画了主要的神经。移动的亮点是神经信号，放慢了很多。标“典型值”的数来自列出的来源；标“模拟”的数是这个模型的，不是测量。标“再进一步”的部分超出这一课的需要。"
+  beats:
+    - labels: [group:brain-parts, spinal-cord, arm-nerves, leg-nerves]
+      caption:
+        en: "A see-through adult body. Inside are the brain, the spinal cord and the main nerves."
+        zh: "一个半透明的成年人身体，里面是脑、脊髓和主要的神经。"
+    - camera: bench
+      labels: [neuron-body, synapse-sending, dura-layer]
+      caption:
+        en: "On the bench are enlarged models: a nerve cell, a synapse and the layers around the brain. They are not to scale."
+        zh: "工作台上是放大的模型：一个神经细胞、一个突触、包着脑的几层。它们不按比例。"
+    - run: true
+      labels: [group:brain-parts, spinal-cord, arm-nerves]
+      caption:
+        en: "Moving dots show nerve signals, slowed down a great deal so you can follow them."
+        zh: "移动的亮点表示神经信号，画面放慢了很多，方便看清。"
+    - camera: brain
+      layers: [brain-parts, spinal, nerves, protection]
+      hide: [skull, dura-folds]
+      labels: [frontal-lobe, cerebellum, medulla]
+      caption:
+        en: "The syllabus lists five body systems. The nervous system is not one of them, so this lesson goes beyond it."
+        zh: "课纲列了五个人体系统，神经系统不在其中，所以这一课是课外的。"
+  index:
+    parts: [frontal-lobe, cerebellum, spinal-cord, arm-nerves, neuron-body, skull]
+---
+
+<Lang en>
+
+The body on the stage is the same adult reference body as in the heart and lungs topic, with see-through skin. Inside it are the brain, the spinal cord and the main nerves. On the bench beside it are models drawn much larger than life: one nerve cell, the junction where it passes on its signal and the layers round the brain; an enlarged slice of spinal cord floats beside the right shoulder. They show how the parts work, not how big they are.
+
+A <Term id="nervous-system">nervous system</Term> is a system in the same sense as the ones you met in P4: a whole made of parts that work together to perform functions. The five human systems the syllabus asks for are the digestive, respiratory, circulatory, skeletal and muscular systems, as in <TopicLink slug="digestive-system" ch="five-systems">Five systems in one body</TopicLink>. The nervous system is not one of them, so this lesson goes beyond the syllabus. It is linked to all five: it controls the muscles, takes part in breathing and the heartbeat, and gets messages from the whole body.
+
+The moving dots are nerve signals. They are slowed down a great deal; real signals take only a fraction of a second. Numbers come in three kinds: ranges from sources, readings of this model marked SIM, and design values chosen to show something clearly.
+
+<More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
+
+The skull, backbone, brainstem, nerves and right arm come from Z-Anatomy, an open atlas built from BodyParts3D (CC BY-SA 4.0). The surface of the cerebrum comes from one adult's brain scan, made by Anderson Winkler for Brainder (CC BY-SA 3.0); it was scaled down slightly to sit inside the skull. The cerebellum comes from BodyParts3D (CC BY 4.0). The spinal cord is drawn as a smooth tube, because the source of the original outline could not be confirmed. Atlas chose the parts, joined the brain's surface into lobes, simplified them and placed the bench models. The full credits are in the source list.
+
+</More>
+
+<More title={{ en: "Not in the syllabus", zh: "不在课纲里" }}>
+
+At P4 the syllabus asks pupils to identify the human systems and state their functions, naming the digestive, respiratory, circulatory, skeletal and muscular systems (p. 53). The brain and nerves are not mentioned. The PE syllabus does ask about cycling safety at P3 and about sleep at P2, P3 and P5 (pp. 95–98), which chapters 7 and 8 come back to.
+
+</More>
+
+<More title={{ en: "Model numbers and real numbers", zh: "模型的数和真实的数" }}>
+
+The try-it cards in chapters 4 and 6 use simple values worked out for this model, such as a fibre that carries a signal at <Num s="S1">100 metres per second</Num>. They fall inside the ranges from sources, but they are not measurements of you.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+台上的身体和“心与肺”主题里的是同一个成年人参考身体，皮肤半透明。里面是脑、脊髓和主要的神经。旁边的工作台上是画得比真实大很多的模型：一个神经细胞、它把信号传下去的接头，还有包着脑的几层；右肩旁边还浮着一片放大的脊髓横切。它们表示各部分怎样工作，不表示有多大。
+
+<Term id="nervous-system">神经系统</Term>是一个“系统”，和你小四学过的一样：由各部分组成、一起工作完成功能的整体。课纲要求的五个人体系统是消化、呼吸、循环、骨骼和肌肉系统，见<TopicLink slug="digestive-system" ch="five-systems">一个身体里的五个系统</TopicLink>。神经系统不在其中，所以这一课是课外的。但它和五个系统都连着：它控制肌肉，参与呼吸和心跳，也接收全身送来的消息。
+
+移动的亮点是神经信号，画面放慢了很多；真实的信号只要一瞬间。这一课的数字有三种：来源给的范围、这个模型的读数（标“模拟”），以及为了看清楚而选的设计值。
+
+<More title={{ en: "Where the model comes from", zh: "模型从哪里来" }}>
+
+颅骨、脊柱、脑干、神经和右臂来自 Z-Anatomy，一个以 BodyParts3D 为基础的开放解剖图谱 （CC BY-SA 4.0）。大脑的表面来自一名成年人的脑扫描，由 Anderson Winkler 为 Brainder 制作 （CC BY-SA 3.0）；为了放进颅骨，稍微缩小了一点。小脑来自 BodyParts3D （CC BY 4.0）。脊髓画成一条平滑的管，因为原来那个外形的来源无法确认。Atlas 挑选了零件，把脑的表面拼成几个叶、做了简化，并摆好工作台上的模型。完整的署名在来源清单里。
+
+</More>
+
+<More title={{ en: "Not in the syllabus", zh: "不在课纲里" }}>
+
+小四课纲要求学生认出人体的系统、说出它们的功能，列出的是消化、呼吸、循环、骨骼和肌肉系统 （第 53 页），没有提到脑和神经。体育课纲在小三讲骑车安全，在小二、小三和小五讲睡眠 （第 95–98 页），第 7、8 章会讲到。
+
+</More>
+
+<More title={{ en: "Model numbers and real numbers", zh: "模型的数和真实的数" }}>
+
+第 4 章和第 6 章的试一试卡片用的是为这个模型算好的简单数值，比如一条纤维每秒传 <Num s="S1">100 米</Num>。它们落在来源给的范围之内，但不是你身上测出来的。
+
+</More>
+
+</Lang>

@@ -118,10 +118,10 @@ describe('physical-tone opt-outs from docs/69 §4.1.4',()=>{
    expect(tone(mean(252,227))-tone(mean(315,227))).toBeGreaterThan(70);
   }
  });
- it('marks both language copies of exactly the eight named chapter figures',async()=>{
+ it('marks both language copies of exactly the ten named chapter figures',async()=>{
   const {globSync}=await import('node:fs');
   const counts:Record<string,number>={};
   for(const p of globSync('src/content/topics/*/chapters/*.mdx'))for(const m of readFileSync(p,'utf8').matchAll(/<Figure src="([^"]+)" invert=\{false\}/g)) counts[m[1]!]=(counts[m[1]!]??0)+1;
-  expect(counts).toEqual(Object.fromEntries(['circuits-series-parallel','sun-earth-moon-four-phases','sun-earth-moon-parallel-axes','light-and-shadows-shadow-distance','light-and-shadows-same-object-two-shadows','light-and-shadows-sun-day','plant-light-fair-test','continental-drift-granite'].map(s=>[`figures/${s}`,2])));
+  expect(counts).toEqual(Object.fromEntries(['circuits-series-parallel','sun-earth-moon-four-phases','sun-earth-moon-parallel-axes','light-and-shadows-shadow-distance','light-and-shadows-same-object-two-shadows','light-and-shadows-sun-day','plant-light-fair-test','brain-and-nerves-protection-layers','brain-and-nerves-reflex-arc','continental-drift-granite'].map(s=>[`figures/${s}`,2])));
  });
 });

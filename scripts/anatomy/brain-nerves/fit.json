@@ -1,0 +1,117 @@
+{
+ "method": "For every brain vertex: the nearest point on the skull (dense surface samples with face normals). The bone",
+ "skull": {
+  "frontal-lobe.l": {
+   "minMm": -12.73,
+   "p5Mm": 1.83,
+   "medianMm": 10.0,
+   "insideBoneOver1Mm": 36,
+   "vertices": 10147
+  },
+  "parietal-lobe.l": {
+   "minMm": -0.8,
+   "p5Mm": 2.31,
+   "medianMm": 12.47,
+   "insideBoneOver1Mm": 0,
+   "vertices": 5687
+  },
+  "temporal-lobe.l": {
+   "minMm": -10.57,
+   "p5Mm": 1.84,
+   "medianMm": 10.41,
+   "insideBoneOver1Mm": 38,
+   "vertices": 5717
+  },
+  "occipital-lobe.l": {
+   "minMm": -10.57,
+   "p5Mm": 2.24,
+   "medianMm": 13.73,
+   "insideBoneOver1Mm": 19,
+   "vertices": 4832
+  },
+  "insula.l": {
+   "minMm": 0.77,
+   "p5Mm": 3.49,
+   "medianMm": 12.69,
+   "insideBoneOver1Mm": 0,
+   "vertices": 520
+  },
+  "cerebrum-medial.l": {
+   "minMm": 7.99,
+   "p5Mm": 22.79,
+   "medianMm": 36.07,
+   "insideBoneOver1Mm": 0,
+   "vertices": 1453
+  },
+  "frontal-lobe.r": {
+   "minMm": -12.73,
+   "p5Mm": 1.9,
+   "medianMm": 10.04,
+   "insideBoneOver1Mm": 35,
+   "vertices": 10147
+  },
+  "parietal-lobe.r": {
+   "minMm": -35.35,
+   "p5Mm": 2.33,
+   "medianMm": 12.56,
+   "insideBoneOver1Mm": 13,
+   "vertices": 5687
+  },
+  "temporal-lobe.r": {
+   "minMm": -7.44,
+   "p5Mm": 1.82,
+   "medianMm": 10.41,
+   "insideBoneOver1Mm": 36,
+   "vertices": 5717
+  },
+  "occipital-lobe.r": {
+   "minMm": -12.16,
+   "p5Mm": 2.23,
+   "medianMm": 13.75,
+   "insideBoneOver1Mm": 21,
+   "vertices": 4832
+  },
+  "insula.r": {
+   "minMm": 0.99,
+   "p5Mm": 3.53,
+   "medianMm": 12.77,
+   "insideBoneOver1Mm": 0,
+   "vertices": 520
+  },
+  "cerebrum-medial.r": {
+   "minMm": -45.87,
+   "p5Mm": 22.51,
+   "medianMm": 36.09,
+   "insideBoneOver1Mm": 7,
+   "vertices": 1453
+  },
+  "cerebellum": {
+   "minMm": -9.08,
+   "p5Mm": 2.94,
+   "medianMm": 11.85,
+   "insideBoneOver1Mm": 14,
+   "vertices": 7004
+  },
+  "midbrain": {
+   "minMm": 2.8,
+   "p5Mm": 5.63,
+   "medianMm": 22.43,
+   "insideBoneOver1Mm": 0,
+   "vertices": 1006
+  },
+  "pons": {
+   "minMm": -1.07,
+   "p5Mm": -0.25,
+   "medianMm": 7.44,
+   "insideBoneOver1Mm": 1,
+   "vertices": 1002
+  },
+  "medulla": {
+   "minMm": -3.97,
+   "p5Mm": 0.83,
+   "medianMm": 8.64,
+   "insideBoneOver1Mm": 1,
+   "vertices": 1004
+  }
+ }
+}

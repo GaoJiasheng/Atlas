@@ -1,0 +1,132 @@
+---
+id: the-reflex-arc
+order: 5
+title: { en: "Pulling your hand away", zh: "缩手反射" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [brain-parts, spinal, nerves, protection, reflex-arm, cord-study, skeleton-context, skin-context, signals-reflex]
+  hide: [trunk-nerves, leg-nerves, cranial-nerves]
+  labels: [forearm-hand-r, spinal-cord, biceps-r]
+  camera: { position: [-0.95, 0.12, 2.45], target: [-0.36, -0.04, 0.0], fov: 30 }
+  summary:
+    en: "Touch something very hot and your hand pulls away before you think about it. The signal goes from the skin to the spinal cord and straight back out to the arm muscles: a reflex arc. The brain gets the message too, but the pull does not wait for it."
+    zh: "手碰到很烫的东西，你还没想就缩回来了。信号从皮肤到脊髓，再直接回到手臂的肌肉，这条路叫反射弧。脑也收到了消息，但缩手不用等它。"
+  sim:
+    set: { stop: 0 }
+    try:
+      vary: stop
+      keep: [{ en: "Same hand, same hot mug", zh: "同一只手，同一个热杯子" }]
+      observe: [where]
+      predict:
+        prompt:
+          en: "The signal has reached the spinal cord. Where does the command to pull away come from?"
+          zh: "信号已经到了脊髓。缩手的命令从哪里来？"
+        start: { stop: 2 }
+        change: { stop: 3 }
+        observe: where
+        options:
+          - { id: from-cord, label: { en: "From the spinal cord", zh: "从脊髓来" }, means: relay }
+          - { id: from-brain, label: { en: "From the brain", zh: "从脑来" }, means: brain }
+  beats:
+    - sim: { set: { stop: 0 } }
+      labels: [forearm-hand-r, arm-nerves, spinal-cord, biceps-r]
+      caption:
+        en: "Touch something very hot and your hand pulls away before you think about it. The whole path is called a reflex arc. Here it is slowed down."
+        zh: "手碰到很烫的东西，你还没想就缩回来了。整条路叫反射弧；这里放慢了。"
+    - sim: { set: { stop: 2 } }
+      labels: [forearm-hand-r, arm-nerves-forearm, arm-nerves, spinal-roots]
+      caption:
+        en: "Receptors in the skin start a signal. A sensory neuron carries it up the arm and into the spinal cord at the neck."
+        zh: "皮肤里的感受器产生信号；感觉神经元沿手臂把它送进颈部的脊髓。"
+    - sim: { set: { stop: 3 } }
+      camera: { position: [-0.62, 0.5, 0.8], target: [-0.36, 0.4, 0.06], fov: 30 }
+      labels: [relay-neuron-study, cord-grey, sensory-neuron-study, spinal-cord]
+      caption:
+        en: "Inside the spinal cord, a relay neuron passes the signal straight on. The turn happens here, not in the brain. Beside the shoulder is an enlarged slice of the cord."
+        zh: "在脊髓里，中间神经元直接把信号接过去；转弯在这里，不在脑里。肩膀旁边是放大的脊髓横切。"
+    - sim: { set: { stop: 5 } }
+      camera: { position: [-2.0, 0.12, -0.35], target: [-0.24, 0.02, -0.06], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, reflex-arm, skeleton-context, signals-reflex]
+      labels: [biceps-r, triceps-r, forearm-hand-r]
+      caption:
+        en: "A motor neuron carries the command back to the upper arm. The biceps contracts and bends the elbow, and the hand leaves the mug."
+        zh: "运动神经元把命令送回上臂；肱二头肌收缩、弯起手肘，手就离开了杯子。"
+    - sim: { set: { stop: 6 } }
+      camera: { position: [-0.7, 0.75, 1.25], target: [-0.08, 0.38, -0.1], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, reflex-arm, skeleton-context, signals-reflex]
+      labels: [parietal-lobe, spinal-cord, medulla]
+      caption:
+        en: "The signal also travels up to the brain, and only then do you feel that it was hot. The pull had already started."
+        zh: "信号也一路上到脑里，这时你才觉得“好烫”；手早已开始缩回。"
+  index:
+    parts: [forearm-hand-r, arm-nerves, spinal-roots, spinal-cord, relay-neuron-study, biceps-r, triceps-r, parietal-lobe]
+---
+
+<Lang en>
+
+Touch a very hot mug and your hand pulls away at once. This is a reflex: it happens without your deciding to do it. The path the signal takes is called a <Term id="reflex-arc">reflex arc</Term>. Step through it on the card; on the stage it is slowed down a great deal, and when the arm moves the skin is hidden, because it does not bend with the arm. The slice floating beside the shoulder is the spinal cord at the neck, enlarged.
+
+First, <Term id="receptor">receptors</Term> in the skin of the fingers start a signal. A sensory neuron carries it up the nerves of the arm and in through the back root of a spinal nerve at the neck; its cell body sits in the swelling on that root, outside the cord <Num s="S4, S27"></Num>. Inside the spinal cord a <Term id="relay-neuron">relay neuron</Term> passes the signal on to a motor neuron <Num s="S25"></Num>. That is the turn: it happens in the spinal cord, not in the brain. <FlyTo preset="reflex">Look at the arm and the neck</FlyTo>
+
+<Figure src="figures/brain-and-nerves-reflex-arc" invert={false} alt={{"en": "A finger touching a cup linked through a dorsal-root ganglion and spinal grey matter to an arm muscle.", "zh": "手指接触杯子，经背根神经节与脊髓灰质的通路连到上臂肌肉。"}} caption={{"en": "Schematic reflex arc: sensory input enters the back of the spinal cord and motor output leaves the front.", "zh": "反射弧示意：感觉输入经脊髓后侧进入，运动输出经前侧离开。"}} />
+
+The motor neuron's axon leaves through the front root and runs down the arm to the muscles <Num s="S27"></Num>. The biceps contracts, bends the elbow and lifts the hand off the mug, as in <TopicLink slug="muscles-arms" ch="how-they-move-you">How they move you</TopicLink>.
+
+The signal also goes on up the spinal cord to the brain <Num s="S25"></Num>, and it is when it arrives that you feel the heat. By then the hand is already moving: you pull it away before the message reaches the brain <Num s="S26"></Num>. Because the turn is made in the spinal cord, the hand leaves sooner than if the signal had to go up to the brain and back <Num s="S25"></Num>.
+
+<More title={{ en: "Two neurons or three", zh: "两个还是三个神经元" }}>
+
+The knee-jerk reflex, when a doctor taps just below the kneecap, is simpler still: its circuit has only one synapse, from the sensory neuron straight to the motor neuron, with no relay neuron between <Num s="S26"></Num>.
+
+</More>
+
+<More title={{ en: "In this model", zh: "在这个模型里" }}>
+
+From the fingertip to the spinal cord in the neck, the signal's route in this model is about <Num s="S1">95 centimetres</Num> long. At the model's fast fibre speed of <Num s="S1">100 metres per second</Num> that would take about <Num s="S1">10 milliseconds</Num>. The forearm turns <Num s="S1">20 degrees</Num> about the elbow, and the turn is slowed down too.
+
+</More>
+
+<More title={{ en: "Not a reflex: catching a ball", zh: "不是反射：接球" }}>
+
+Some quick movements are not reflexes. To catch a ball you must see it, decide and move, so the signal has to go through the brain. Chapter 6 measures how long that takes.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+手碰到一个很烫的杯子，会马上缩回来。这是反射：你不用决定，它就发生了。信号走的路叫<Term id="reflex-arc">反射弧</Term>。用卡片一步一步看；台上放慢了很多，手臂一动，皮肤就藏起来，因为它不会跟着手臂弯。肩膀旁边浮着的那一片，是颈部脊髓的放大横切。
+
+首先，手指皮肤里的<Term id="receptor">感受器</Term>产生信号。感觉神经元把它沿手臂的神经往上送，在颈部从一条脊神经的后根进入脊髓；它的细胞体在后根鼓起的地方，在脊髓外面 <Num s="S4, S27"></Num>。在脊髓里，<Term id="relay-neuron">中间神经元</Term>把信号接给运动神经元 <Num s="S25"></Num>。这就是“转弯”：它发生在脊髓里，不在脑里。<FlyTo preset="reflex">看手臂和颈部</FlyTo>
+
+<Figure src="figures/brain-and-nerves-reflex-arc" invert={false} alt={{"en": "A finger touching a cup linked through a dorsal-root ganglion and spinal grey matter to an arm muscle.", "zh": "手指接触杯子，经背根神经节与脊髓灰质的通路连到上臂肌肉。"}} caption={{"en": "Schematic reflex arc: sensory input enters the back of the spinal cord and motor output leaves the front.", "zh": "反射弧示意：感觉输入经脊髓后侧进入，运动输出经前侧离开。"}} />
+
+运动神经元的轴突从前根出去，沿手臂到达肌肉 <Num s="S27"></Num>。肱二头肌收缩，弯起手肘，把手从杯子上提起来，见<TopicLink slug="muscles-arms" ch="how-they-move-you">肌肉怎样让你动</TopicLink>。
+
+信号也沿脊髓继续往上传到脑 <Num s="S25"></Num>，到达时你才感觉到烫。这时手已经在动了：消息还没到脑，你就把手缩回来了 <Num s="S26"></Num>。因为转弯在脊髓里完成，比起信号先上到脑再下来，手能更早离开 <Num s="S25"></Num>。
+
+<More title={{ en: "Two neurons or three", zh: "两个还是三个神经元" }}>
+
+医生在膝盖骨下面轻轻一敲引起的膝跳反射更简单：整条线路只有一个突触，感觉神经元直接接到运动神经元，中间没有中间神经元 <Num s="S26"></Num>。
+
+</More>
+
+<More title={{ en: "In this model", zh: "在这个模型里" }}>
+
+在这个模型里，信号从指尖到颈部脊髓的路线约长 <Num s="S1">95 厘米</Num>。按模型里快纤维每秒 <Num s="S1">100 米</Num>算，约要 <Num s="S1">10 毫秒</Num>。前臂绕肘转 <Num s="S1">20 度</Num>，这个动作也放慢了。
+
+</More>
+
+<More title={{ en: "Not a reflex: catching a ball", zh: "不是反射：接球" }}>
+
+有些很快的动作并不是反射。要接住一个球，你得看见它、做决定、再动手，所以信号必须经过脑。第 6 章量一量这要多久。
+
+</More>
+
+</Lang>

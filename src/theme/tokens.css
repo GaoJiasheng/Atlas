@@ -26,6 +26,10 @@
  *                of the upper point (amber) and the lower point (teal); the markers also differ in size, so they read without colour
  *   --seedling / --seedling-pale  a seedling grown in the light (leaf green) / in the dark (pale yellow; docs/41 E-S1:
  *                the try-it tint of a cup kept from the light; apart in lightness so they read in grey too)
+ *   --brain-frontal / --brain-parietal / --brain-temporal / --brain-occipital / --brain-cerebellum / --brain-stem
+ *                the regions of the brain (docs/75 E-BN1): one each, shown only where a chapter asks for them,
+ *                always beside a leader label; apart under the three colour-vision deficiencies
+ *   --chemical-signal  the chemical signal crossing a synapse (magenta; never an electrical nerve signal)
  *   --face-1/2/3  a solid's opposite faces in pairs (docs/39 D10: MathScene nets), each with
  *                its mark ● ▲ ■ so the pairs read without colour too
  *   --holder-1 … --holder-8  one state each on a many-state map (TimeScene
@@ -211,6 +215,15 @@
   /* Optical study object points (docs/58 F1): apart from each other (ΔE*ab ≥ 40) and from --signal (≥ 15), ≥ 3:1 on the paper. */
   --ray-top: #a35f00;
   --ray-bottom: #16707f;
+  /* Brain regions (docs/75 E-BN1): pairwise ΔE*ab ≥ 10 with normal vision and under protanopia, deuteranopia and tritanopia (Machado 2009), each ≥ 15 from --en-electrical (signals run over them); saturated enough to read when mixed into the neutral tissue colour. */
+  --brain-frontal: #a34a37;
+  --brain-parietal: #b98623;
+  --brain-temporal: #8bbc85;
+  --brain-occipital: #8d84d1;
+  --brain-cerebellum: #4abec1;
+  --brain-stem: #82756a;
+  /* Chemical signal at a synapse (docs/75 E-BN1): ΔE*ab ≥ 20 from --en-electrical, ≥ 3:1 on the paper. */
+  --chemical-signal: #c23e8a;
 
   /* Legacy names mapped onto the plate palette. */
   --bg: var(--paper);
@@ -363,6 +376,13 @@
   --seedling-pale: #ebe2a6;
   --ray-top: #f0b440;
   --ray-bottom: #53b8cc;
+  --brain-frontal: #c1634f;
+  --brain-parietal: #dca43a;
+  --brain-temporal: #a6d89f;
+  --brain-occipital: #a99eed;
+  --brain-cerebellum: #6adadd;
+  --brain-stem: #9c8e83;
+  --chemical-signal: #e060a8;
 
   --bg: var(--paper);
   --surface: var(--panel-solid);

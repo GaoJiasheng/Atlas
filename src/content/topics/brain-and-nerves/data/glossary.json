@@ -1,0 +1,166 @@
+{
+  "terms": [
+    {
+      "id": "nervous-system",
+      "term": { "en": "Nervous system", "zh": "神经系统" },
+      "definition": {
+        "en": "The brain, the spinal cord and the nerves: the parts of the body that carry signals and control what the body does.",
+        "zh": "脑、脊髓和神经：身体里传递信号、控制身体动作的那些部分。"
+      },
+      "see": ["central-nervous-system", "nerve"]
+    },
+    {
+      "id": "central-nervous-system",
+      "term": { "en": "Central nervous system", "zh": "中枢神经系统" },
+      "definition": { "en": "The brain and the spinal cord.", "zh": "脑和脊髓。" },
+      "see": ["nervous-system", "spinal-cord"]
+    },
+    {
+      "id": "nerve",
+      "term": { "en": "Nerve", "zh": "神经" },
+      "definition": {
+        "en": "A bundle of long nerve fibres wrapped together, outside the brain and spinal cord, like many wires in one cable.",
+        "zh": "包在一起的一束长长的神经纤维，在脑和脊髓以外，像一根电缆里装着很多电线。"
+      },
+      "see": ["axon"]
+    },
+    {
+      "id": "spinal-cord",
+      "term": { "en": "Spinal cord", "zh": "脊髓" },
+      "definition": {
+        "en": "The column of nerve tissue that runs down a canal inside the backbone from the brain; it is not bone.",
+        "zh": "从脑往下、在脊柱的管道里走的一条神经组织；它不是骨头。"
+      },
+      "see": ["central-nervous-system"]
+    },
+    {
+      "id": "cerebrum",
+      "term": { "en": "Cerebrum", "zh": "大脑" },
+      "definition": {
+        "en": "The largest part of the brain, with a left and a right half, each divided into lobes. The brain as a whole (脑) also includes the cerebellum and the brainstem.",
+        "zh": "脑最大的部分，分左右两半，每一半分成几个叶。整个“脑”还包括小脑和脑干。"
+      },
+      "see": ["lobe", "corpus-callosum"]
+    },
+    {
+      "id": "lobe",
+      "term": { "en": "Lobe", "zh": "叶" },
+      "definition": {
+        "en": "One of the four main areas of each half of the cerebrum: frontal, parietal, temporal and occipital.",
+        "zh": "大脑每一半的四个主要区域之一：额叶、顶叶、颞叶和枕叶。"
+      },
+      "see": ["cerebrum"]
+    },
+    {
+      "id": "cerebellum",
+      "term": { "en": "Cerebellum", "zh": "小脑" },
+      "definition": {
+        "en": "The part of the brain behind the brainstem that keeps movements smooth and helps keep balance.",
+        "zh": "脑干后面的一部分脑，让动作平稳协调，帮助保持平衡。"
+      },
+      "see": ["brainstem"]
+    },
+    {
+      "id": "brainstem",
+      "term": { "en": "Brainstem", "zh": "脑干" },
+      "definition": {
+        "en": "The part of the brain that joins it to the spinal cord and keeps breathing and the heartbeat going.",
+        "zh": "把脑和脊髓连起来的一部分脑，让呼吸和心跳一直进行。"
+      },
+      "see": ["cerebellum", "spinal-cord"]
+    },
+    {
+      "id": "corpus-callosum",
+      "term": { "en": "Corpus callosum", "zh": "胼胝体" },
+      "definition": {
+        "en": "The thick band of nerve fibres that joins the left and right halves of the cerebrum.",
+        "zh": "连接大脑左右两半的一大束神经纤维。"
+      },
+      "see": ["cerebrum"]
+    },
+    {
+      "id": "neuron",
+      "term": { "en": "Neuron (nerve cell)", "zh": "神经元（神经细胞）" },
+      "definition": {
+        "en": "A cell that carries signals, with a cell body, short dendrites and one long axon.",
+        "zh": "传递信号的细胞，有细胞体、短的树突和一条长的轴突。"
+      },
+      "see": ["axon", "dendrite", "synapse"]
+    },
+    {
+      "id": "axon",
+      "term": { "en": "Axon", "zh": "轴突" },
+      "definition": { "en": "The one long fibre of a neuron that carries signals away from the cell body.", "zh": "神经元那一条长纤维，把信号从细胞体送出去。" },
+      "see": ["neuron", "myelin"]
+    },
+    {
+      "id": "dendrite",
+      "term": { "en": "Dendrite", "zh": "树突" },
+      "definition": { "en": "One of a neuron's short branches, which take in signals from other cells.", "zh": "神经元短的分支之一，接收其他细胞传来的信号。" },
+      "see": ["neuron"]
+    },
+    {
+      "id": "myelin",
+      "term": { "en": "Myelin", "zh": "髓鞘" },
+      "definition": {
+        "en": "A fatty wrapping round many axons, in segments with small gaps; it makes signals travel faster.",
+        "zh": "包在很多轴突外面的一层脂质外套，一段一段，中间有小缝；它让信号传得更快。"
+      },
+      "see": ["axon"]
+    },
+    {
+      "id": "synapse",
+      "term": { "en": "Synapse", "zh": "突触" },
+      "definition": {
+        "en": "Where a neuron passes its signal to the next cell; usually there is a narrow gap, crossed by a chemical.",
+        "zh": "神经元把信号传给下一个细胞的地方；通常有一道窄缝，靠化学物质跨过去。"
+      },
+      "see": ["neuron"]
+    },
+    {
+      "id": "receptor",
+      "term": { "en": "Receptor (in the skin)", "zh": "感受器" },
+      "definition": {
+        "en": "A part, such as a nerve ending in the skin, that detects something like heat or touch and starts a signal. (At a synapse, the parts that take up the chemical are also called receptors; in Chinese those are 受体.)",
+        "zh": "察觉冷热、触碰等刺激并产生信号的结构，比如皮肤里的神经末梢。（突触上接住化学物质的结构英文也叫 receptor，中文叫“受体”。）"
+      },
+      "see": ["reflex-arc"]
+    },
+    {
+      "id": "reflex-arc",
+      "term": { "en": "Reflex arc", "zh": "反射弧" },
+      "definition": {
+        "en": "The path a signal takes in a reflex: receptor, sensory neuron, a relay neuron in the spinal cord, motor neuron, muscle.",
+        "zh": "反射时信号走的路：感受器、感觉神经元、脊髓里的中间神经元、运动神经元、肌肉。"
+      },
+      "see": ["relay-neuron", "receptor"]
+    },
+    {
+      "id": "relay-neuron",
+      "term": { "en": "Relay neuron", "zh": "中间神经元" },
+      "definition": {
+        "en": "A neuron inside the spinal cord or brain that links a sensory neuron to a motor neuron.",
+        "zh": "脊髓或脑里把感觉神经元和运动神经元接起来的神经元。"
+      },
+      "see": ["reflex-arc"]
+    },
+    {
+      "id": "cerebrospinal-fluid",
+      "term": { "en": "Cerebrospinal fluid", "zh": "脑脊液" },
+      "definition": {
+        "en": "The clear fluid in the spaces inside the brain and round the brain and spinal cord; it cushions them.",
+        "zh": "脑里的空腔中、以及脑和脊髓周围的透明液体；它给脑和脊髓当软垫。"
+      },
+      "see": ["meninges"]
+    },
+    {
+      "id": "meninges",
+      "term": { "en": "Meninges", "zh": "脑膜" },
+      "definition": {
+        "en": "The three coverings round the brain and spinal cord: the tough dura, the cobweb-like arachnoid and the thin pia.",
+        "zh": "包着脑和脊髓的三层被膜：坚韧的硬膜、像蛛网的蛛网膜和薄薄的软膜。"
+      },
+      "see": ["cerebrospinal-fluid"]
+    }
+  ]
+}

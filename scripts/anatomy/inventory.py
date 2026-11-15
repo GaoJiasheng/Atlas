@@ -32,9 +32,13 @@ if '--report-only' in sys.argv:
     inventory = json.loads((CACHE / 'inventory.json').read_text())
 else:
     only_new = '--new-systems' in sys.argv
+    # `--system nervous` appends (or replaces) one cached system, keeping the rest of the inventory;
+    # a full scan skips sources not in this cache (NervousSystem100.fbx is only fetched for brain-nerves).
+    one = sys.argv[sys.argv.index('--system')+1] if '--system' in sys.argv else None
+    fresh = (one,) if one else ('visceral','cardiovascular') if only_new else tuple(s for s in FILES if (CACHE/FILES[s]).exists())
     entries = ([e for e in json.loads((CACHE/'inventory.json').read_text())['objects']
-                if e['system'] not in ('visceral','cardiovascular')] if only_new else [])
-    for system in (('visceral','cardiovascular') if only_new else FILES):
+                if e['system'] not in fresh] if (only_new or one) else [])
+    for system in fresh:
         clear_scene()
         objects = import_system(system)
         entries.extend(object_info(ob, system) for ob in objects)

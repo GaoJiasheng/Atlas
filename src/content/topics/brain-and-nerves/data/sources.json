@@ -1,0 +1,520 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "design": true,
+      "text": {
+        "en": "Atlas design study for this topic (docs/75). The body is one adult male reference anatomy, simplified; the bench models (a nerve cell, a synapse, a slice of spinal cord, the layers round the brain, a one-metre nerve drawn half size) are enlarged or shortened and not to scale. Design values: a thick fibre with myelin carries a signal at 100 metres per second, a thin fibre without it at 1 metre per second (both inside the published ranges, S20); over one metre that takes 1 m ÷ 100 m/s = 0.010 s = 10 ms and 1 m ÷ 1 m/s = 1 s = 1,000 ms; the screen shows both in 2 s, so the thick fibre is slowed 2 s ÷ 0.010 s = 200 times and the thin one 2 s ÷ 1 s = 2 times. Ruler drop: a ruler caught after falling d centimetres has fallen for t = √(2d ÷ 9.81 m/s²) (free fall from rest; S43); for d = 20 cm, t = √(0.40 ÷ 9.81) = 0.202 s ≈ 202 ms; the card lists every centimetre from 3 to 20 cm and every 2 cm from 22 to 30 cm, rounded to whole milliseconds. Bench magnifications: the nerve cell about 4,000 times (a cell body of about 25 micrometres drawn about 10 cm), the synapse about 40,000 times, the spinal-cord slice about 12 times; the layers round the brain are drawn thicker than they are, not to any one scale. The reflex arm turns 20 degrees at the elbow, slowed down. Measured in the model: the reflex signal's route from the fingertip to the spinal cord in the neck is 0.95 m long (scripts/anatomy/brain-nerves/routes.json), which at 100 m/s takes 0.95 ÷ 100 = 0.0095 s ≈ 10 ms.",
+        "zh": "本主题的 Atlas 设计研究（docs/75）。身体是一个成年男性参考解剖模型，已简化；工作台上的模型（一个神经细胞、一个突触、一片脊髓横切、包着脑的几层、画成一半长的一米神经）是放大或缩短的，不按比例。设计值：粗的、有髓鞘的纤维每秒传 100 米，细的、没有髓鞘的每秒 1 米（都在已发表的范围内，S20）；走一米分别要 1 米 ÷ 每秒 100 米 = 0.010 秒 = 10 毫秒，1 米 ÷ 每秒 1 米 = 1 秒 = 1,000 毫秒；画面上两者都用 2 秒走完，所以粗纤维放慢了 2 ÷ 0.010 = 200 倍，细纤维放慢了 2 ÷ 1 = 2 倍。尺子接落：尺子落了 d 厘米才被接住，下落的时间 t = √(2d ÷ 9.81 米/秒²)（从静止自由下落；S43）；d = 20 厘米时 t = √(0.40 ÷ 9.81) = 0.202 秒 ≈ 202 毫秒；卡片列出 3 到 20 厘米（每 1 厘米一档）和 22 到 30 厘米（每 2 厘米一档），取整到毫秒。工作台的放大倍数：神经细胞约 4,000 倍（约 25 微米的细胞体画成约 10 厘米），突触约 40,000 倍，脊髓横切约 12 倍；脑外的几层画得比真实厚，没有统一比例。反射时手臂在肘部转 20 度，画面放慢了。在模型上量：反射信号从指尖到颈部脊髓的路线长 0.95 米（scripts/anatomy/brain-nerves/routes.json），按每秒 100 米算要 0.95 ÷ 100 = 0.0095 秒 ≈ 10 毫秒。"
+      },
+      "note": {
+        "en": "Not a measurement. Inputs: S20 (conduction speeds), S43 (standard gravity), S6 (neuron parts), S24 (axon length).",
+        "zh": "不是测量值。依据：S20（传导速度）、S43（标准重力）、S6（神经元的结构）、S24（轴突长度）。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Science Teaching and Learning Syllabus, Primary Three to Six (from the 2023 Primary Three cohort; cover: Updated Jan 2026). Systems, printed pp. 13 and 52; P4 Human System p. 53; P5 integration of systems p. 54; skills, p. 16.",
+        "zh": "新加坡教育部课程规划与发展司《小学三至六年级科学教学大纲》（2023 年小三学生起实施；封面注 2026 年 1 月更新）。系统，印刷第 13、52 页；小四人体系统第 53 页；小五系统协同第 54 页；技能第 16 页。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf",
+      "note": {
+        "en": "Read in full (accessed 2026-11-15). The human systems listed at P4 are digestive, respiratory, circulatory, skeletal and muscular; the words nerve, nervous and brain do not appear. A system is defined as a whole consisting of parts that work together to perform function(s).",
+        "zh": "已通读（2026-11-15 访问）。小四列出的人体系统是消化、呼吸、循环、骨骼和肌肉；全文没有“神经”和“脑”。系统的定义是：由各部分组成、一起工作完成功能的整体。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Ministry of Education Singapore, Student Development Curriculum Division. Physical Education Syllabus: Primary, Secondary and Pre-University (2024). Safety, P3 (printed p. 96); sleep, P2, P3 and P5 (pp. 95, 96, 98).",
+        "zh": "新加坡教育部学生发展课程司《体育课程大纲：小学、中学与大学先修》（2024）。安全，小三（印刷第 96 页）；睡眠，小二、小三、小五（第 95、96、98 页）。"
+      },
+      "url": "https://www.moe.gov.sg/media/files/secondary/syllabuses-nt/pe/5ebed2f3-0779-481a-a7a9-fc76259c1226.pdf",
+      "note": {
+        "en": "Read pp. 95–98 (accessed 2026-11-15): P3 'Understand safety measures to stay safe as a cyclist and a pedestrian'; P2 'Know the importance of sleep and the different sleep practices'; P3 'Apply sleep practices for healthy growth'; P5 'Understand the relationship between sleep and health'.",
+        "zh": "已读第 95–98 页（2026-11-15 访问）：小三“了解骑车和步行时保持安全的方法”；小二“知道睡眠的重要和不同的睡眠习惯”；小三“运用睡眠习惯帮助健康成长”；小五“了解睡眠和健康的关系”。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "National Cancer Institute (US), SEER Training Modules. Organization of the Nervous System; Peripheral Nervous System.",
+        "zh": "美国国家癌症研究所 SEER 培训课程：《神经系统的组成》《周围神经系统》。"
+      },
+      "url": "https://training.seer.cancer.gov/anatomy/nervous/organization/pns.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). A nerve contains bundles of nerve fibres surrounded by connective tissue; ganglia are small knots of nerve cell bodies outside the central nervous system; twelve pairs of cranial nerves and thirty-one pairs of spinal nerves (8 cervical, 12 thoracic, 5 lumbar, 5 sacral, 1 coccygeal); the cell bodies of the sensory neurons are in the dorsal root ganglion.",
+        "zh": "已读网页（2026-11-15 访问）。一条神经由结缔组织包着的神经纤维束组成；神经节是中枢神经系统以外的一小团神经细胞体；脑神经 12 对，脊神经 31 对（颈 8、胸 12、腰 5、骶 5、尾 1）；感觉神经元的细胞体在背根神经节里。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "National Cancer Institute (US), SEER Training Modules. Central Nervous System.",
+        "zh": "美国国家癌症研究所 SEER 培训课程：《中枢神经系统》。"
+      },
+      "url": "https://training.seer.cancer.gov/anatomy/nervous/organization/cns.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The spinal cord extends from the base of the skull to the level of the first lumbar vertebra; below it the spinal nerves form the cauda equina, like a horse's tail. Three layers of meninges surround the brain and spinal cord: the tough dura mater outside, the arachnoid in the middle, like a cobweb, and the thin pia mater bound tightly to the surface of the brain and cord; the space under the arachnoid holds cerebrospinal fluid.",
+        "zh": "已读网页（2026-11-15 访问）。脊髓从颅底一直到第一腰椎的高度；再往下，脊神经组成马尾，像马的尾巴。脑和脊髓外面有三层脑脊膜：外层是坚韧的硬膜，中层是像蛛网一样的蛛网膜，内层是紧贴脑和脊髓表面的薄薄的软膜；蛛网膜下面的空间充满脑脊液。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "National Cancer Institute (US), SEER Training Modules. Nerve Tissue.",
+        "zh": "美国国家癌症研究所 SEER 培训课程：《神经组织》。"
+      },
+      "url": "https://training.seer.cancer.gov/anatomy/nervous/tissue.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The cell body has a nucleus; dendrites carry impulses towards the cell body; the axon carries impulses away from it; its fine end branches swell into synaptic bulbs; the gaps between the myelin segments are the nodes of Ranvier.",
+        "zh": "已读网页（2026-11-15 访问）。细胞体里有细胞核；树突把冲动传向细胞体；轴突把冲动从细胞体传出去；它末端的细小分支膨大成突触小体；髓鞘各段之间没有髓鞘的地方叫郎飞结。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Queensland Brain Institute, The University of Queensland. The central nervous system (brain and spinal cord).",
+        "zh": "昆士兰大学昆士兰脑研究所：《中枢神经系统（脑和脊髓）》。"
+      },
+      "url": "https://qbi.uq.edu.au/brain/brain-anatomy/central-nervous-system-brain-and-spinal-cord",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The central nervous system consists of the brain and the spinal cord; cerebrospinal fluid gives a buffer that limits impact between the brain and the skull.",
+        "zh": "已读网页（2026-11-15 访问）。中枢神经系统由脑和脊髓组成；脑脊液是一层缓冲，减少脑和颅骨之间的碰撞。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Queensland Brain Institute, The University of Queensland. Lobes of the brain.",
+        "zh": "昆士兰大学昆士兰脑研究所：《脑叶》。"
+      },
+      "url": "https://qbi.uq.edu.au/node/2271",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The frontal lobe: planning, reasoning and problem solving, and the primary motor cortex for voluntary movement. The parietal lobe: touch, temperature and pain. The temporal lobe: hearing, recognising language and forming memories, with the primary auditory cortex. The occipital lobe: the main visual processing centre.",
+        "zh": "已读网页（2026-11-15 访问）。额叶：计划、推理和解决问题，还有管随意运动的初级运动皮层。顶叶：触觉、温度和痛觉。颞叶：听、认出语言、形成记忆，有初级听觉皮层。枕叶：处理视觉的主要中心。"
+      }
+    },
+    {
+      "id": "S9",
+      "text": {
+        "en": "Queensland Brain Institute, The University of Queensland. The hindbrain; The midbrain.",
+        "zh": "昆士兰大学昆士兰脑研究所：《后脑》《中脑》。"
+      },
+      "url": "https://qbi.uq.edu.au/brain/brain-anatomy/hindbrain",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The cerebellum coordinates sensations with responses from the muscles, enabling most voluntary movements, and helps keep balance and posture. The brainstem connects the brain to the spinal cord and coordinates vital functions such as breathing and the heartbeat. The midbrain is the topmost part of the brainstem.",
+        "zh": "已读网页（2026-11-15 访问）。小脑把感觉和肌肉的反应协调起来，让大多数随意动作能够完成，也帮助保持平衡和姿势。脑干把脑和脊髓连起来，协调呼吸、心跳等维持生命的功能。中脑是脑干最上面的部分。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Queensland Brain Institute, The University of Queensland. Corpus callosum.",
+        "zh": "昆士兰大学昆士兰脑研究所：《胼胝体》。"
+      },
+      "url": "https://qbi.uq.edu.au/brain/brain-anatomy/corpus-callosum",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The two hemispheres are connected by a thick bundle of nerve fibres, the corpus callosum; sensory, motor and other information is constantly transferred between them.",
+        "zh": "已读网页（2026-11-15 访问）。左右两个半球由一大束神经纤维——胼胝体——连起来；感觉、运动和其他信息不停地在两边之间传递。"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 3, Chapter 3: Motor Cortex; Section 2, Chapter 5: Somatosensory Systems.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 3 部分第 3 章《运动皮层》；第 2 部分第 5 章《躯体感觉系统》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter03.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The primary motor cortex lies on the precentral gyrus, in the frontal lobe just in front of the central sulcus. The primary somatosensory cortex is the postcentral gyrus of the parietal lobe (s2/chapter05); damage to it disturbs fine touch and the sense of body position.",
+        "zh": "已读网页（2026-11-15 访问）。初级运动皮层在中央前回，即额叶里紧靠中央沟前方的地方。初级躯体感觉皮层是顶叶的中央后回（第 2 部分第 5 章）；它受损会影响精细触觉和身体位置感。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 2, Chapter 1: Overview of the Nervous System.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 2 部分第 1 章《神经系统概论》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s2/chapter01.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The peripheral nervous system includes 31 pairs of spinal nerves and 12 pairs of cranial nerves; the medulla contains nuclei that regulate breathing and the heart; cerebrospinal fluid is produced by the choroid plexus; the occipital lobe holds the visual cortex and the transverse temporal gyrus the primary auditory cortex; the nuclei of the eighth cranial nerve lie in the pons; corticospinal fibres cross the midline to the opposite side on their way to the spinal cord.",
+        "zh": "已读网页（2026-11-15 访问）。周围神经系统包括 31 对脊神经和 12 对脑神经；延髓里有调节呼吸和心脏的神经核；脑脊液由脉络丛产生；枕叶有视觉皮层，颞横回是初级听觉皮层；第八对脑神经的神经核在脑桥；皮质脊髓纤维在通往脊髓的路上越过中线到对侧。"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 3, Chapter 5: Cerebellum.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 3 部分第 5 章《小脑》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter05.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The cerebellum coordinates the timing and force of different muscle groups and makes postural adjustments to keep balance; it is about 10 % of the brain's volume.",
+        "zh": "已读网页（2026-11-15 访问）。小脑协调不同肌肉群用力的时机和大小，调整姿势、保持平衡；它约占脑体积的 10%。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 4, Chapter 8: Language and Lateralization.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 4 部分第 8 章《语言与偏侧化》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s4/chapter08.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Language is lateralised to the left hemisphere in about 96 % of people; Broca's area, in the left inferior frontal gyrus, turns language into the movements of speech.",
+        "zh": "已读网页（2026-11-15 访问）。约 96% 的人的语言偏在左半球；布罗卡区在左侧额下回，把语言变成说话的动作。"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Azevedo FAC, Carvalho LRB, Grinberg LT et al. Equal numbers of neuronal and nonneuronal cells make the human brain an isometrically scaled-up primate brain. Journal of Comparative Neurology 513 (2009): 532–541. PMID 19226510.",
+        "zh": "Azevedo FAC 等（2009）。《人脑神经元与非神经元细胞数量相当……》。《比较神经学杂志》513：532–541。PMID 19226510。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19226510/",
+      "note": {
+        "en": "Abstract and full text p. 535 read (accessed 2026-11-15). Four adult men: about 86 (± 8) billion neurons; only about 19 % of them (16 billion) in the cerebral cortex; the cerebellum, about 10 % of brain mass, holds about 69 billion, about 80 %.",
+        "zh": "已读摘要和正文第 535 页（2026-11-15 访问）。四名成年男性：约 860 亿（± 80 亿）个神经元；其中只有约 19%（160 亿）在大脑皮层；小脑约占脑质量的 10%，却有约 690 亿、约 80%。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Raichle ME, Gusnard DA. Appraising the brain's energy budget. Proceedings of the National Academy of Sciences 99 (2002): 10237–10239.",
+        "zh": "Raichle ME、Gusnard DA（2002）。《评估脑的能量收支》。《美国国家科学院院刊》99：10237–10239。"
+      },
+      "url": "https://www.pnas.org/doi/10.1073/pnas.172399499",
+      "note": {
+        "en": "Read (accessed 2026-11-15). In the average adult the brain is about 2 % of body weight but uses about 20 % of the oxygen, and so of the energy, the body consumes.",
+        "zh": "已读（2026-11-15 访问）。一般成年人的脑约占体重 2%，却用掉身体约 20% 的氧气，也就是约 20% 的能量。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Boyd R. Do people only use 10 percent of their brains? Scientific American, 7 February 2008.",
+        "zh": "Boyd R.《人真的只用了百分之十的脑吗？》《科学美国人》，2008 年 2 月 7 日。"
+      },
+      "url": "https://www.scientificamerican.com/article/do-people-only-use-10-percent-of-their-brains/",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). A neurologist answers that we use virtually every part of the brain; the article finds no single origin of the idea.",
+        "zh": "已读网页（2026-11-15 访问）。一位神经科医生回答：我们几乎用到脑的每一个部分；文章找不到这种说法的单一来源。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Dekker S, Lee NC, Howard-Jones P, Jolles J. Neuromyths in education: prevalence and predictors of misconceptions among teachers. Frontiers in Psychology 3 (2012): 429.",
+        "zh": "Dekker S 等（2012）。《教育中的神经迷思：教师误解的流行程度与预测因素》。《心理学前沿》3：429。"
+      },
+      "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2012.00429/full",
+      "note": {
+        "en": "Table 1 read (accessed 2026-11-15; CC BY). Teachers answering incorrectly: 'we only use 10 % of our brain' UK 48 %, Netherlands 46 %; 'differences in hemispheric dominance (left brain, right brain) can help explain individual differences among learners' UK 91 %, Netherlands 86 %. The survey is of teachers, not pupils.",
+        "zh": "已读表 1（2026-11-15 访问；CC BY）。答错（即相信）的教师比例：“我们只用了 10% 的脑”英国 48%、荷兰 46%；“半球优势（左脑、右脑）能解释学习者之间的差异”英国 91%、荷兰 86%。调查对象是教师，不是学生。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Nielsen JA, Zielinski BA, Ferguson MA, Lainhart JE, Anderson JS. An evaluation of the left-brain vs. right-brain hypothesis with resting state functional connectivity magnetic resonance imaging. PLoS ONE 8 (2013): e71275.",
+        "zh": "Nielsen JA 等（2013）。《用静息态功能连接磁共振检验左脑与右脑假说》。《PLoS ONE》8：e71275。"
+      },
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0071275",
+      "note": {
+        "en": "Abstract read (accessed 2026-11-15; CC BY). Scans of 1,011 people aged 7 to 29: the data do not fit people having a 'left-brained' or 'right-brained' whole brain.",
+        "zh": "已读摘要（2026-11-15 访问；CC BY）。1,011 名 7 到 29 岁的人的脑扫描：数据不支持有人整个脑“偏左”或“偏右”。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Whitmer K. Human Nerve Conduction Velocity, lab 2.8 in Labs: A Mixed Course-Based Research Approach to Human Physiology. Iowa State University Digital Press, on LibreTexts.",
+        "zh": "Whitmer K.《人体神经传导速度》，收于《人体生理学实验》（爱荷华州立大学数字出版社，LibreTexts）第 2.8 节。"
+      },
+      "url": "https://med.libretexts.org/Bookshelves/Anatomy_and_Physiology/Labs:_A_Mixed_Course_Based_Research_Approach_to_Human_Physiology_(Whitmer)/02:_Labs/2.08:_Human_Nerve_Conduction_Velocity_(NCV)",
+      "note": {
+        "en": "Read online (accessed 2026-11-15; CC BY-SA 4.0). Myelinated axons carry signals faster, up to about 150 metres per second; conduction without myelin rarely reaches 10 metres per second.",
+        "zh": "已读网页（2026-11-15 访问；CC BY-SA 4.0）。有髓鞘的轴突传得更快，最快约每秒 150 米；没有髓鞘的连续传导很少达到每秒 10 米。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Society for Neuroscience, BrainFacts.org. Myelin (2015); with Neuroscience Online, Section 1, Chapter 3: Action Potential Propagation.",
+        "zh": "美国神经科学学会 BrainFacts.org《髓鞘》（2015）；以及《Neuroscience Online》第 1 部分第 3 章《动作电位的传播》。"
+      },
+      "url": "https://www.brainfacts.org/Brain-Anatomy-and-Function/Anatomy/2015/Myelin",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Along a wrapped axon the signal appears to jump from one node to the next (saltatory conduction); a wider axon also carries the signal faster (nba.uth.tmc.edu/neuroscience/m/s1/chapter03.html).",
+        "zh": "已读网页（2026-11-15 访问）。在包着髓鞘的轴突上，信号像是从一个结“跳”到下一个结（跳跃式传导）；轴突越粗，信号也传得越快（nba.uth.tmc.edu/neuroscience/m/s1/chapter03.html）。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 1, Chapter 6: Synaptic Transmission in the Central Nervous System.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 1 部分第 6 章《中枢神经系统的突触传递》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s1/chapter06.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The chemical synapse is the most common type: the transmitter released from the ending diffuses across the synaptic cleft and binds to receptors on the next cell, with a delay of usually about 0.5 to 1 millisecond.",
+        "zh": "已读网页（2026-11-15 访问）。化学突触是最常见的一种：末梢放出的递质扩散过突触间隙，和下一个细胞上的受体结合，通常有约 0.5 到 1 毫秒的延迟。"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Queensland Brain Institute, The University of Queensland. Action potentials and synapses.",
+        "zh": "昆士兰大学昆士兰脑研究所：《动作电位与突触》。"
+      },
+      "url": "https://qbi.uq.edu.au/brain-basics/brain/brain-physiology/action-potentials-and-synapses",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The signal is a brief electrical event: channels let positive or negative ions flow into and out of the cell; dendrites receive inputs from other cells' axons; the synaptic gap is about 20 to 40 nanometres.",
+        "zh": "已读网页（2026-11-15 访问）。信号是一个短暂的电变化：通道让带正电或负电的离子进出细胞；树突接收其他细胞轴突传来的信号；突触间隙约 20 到 40 纳米。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "BioNumbers (Harvard Medical School), entry 104901: length of a neuron from the base of the spine to the big toe; from Fletcher and Theriot, Physical Biology 2004.",
+        "zh": "BioNumbers（哈佛医学院）第 104901 条：从脊柱下端到大脚趾的神经元长度；引自 Fletcher 与 Theriot，《物理生物学》2004。"
+      },
+      "url": "https://bionumbers.hms.harvard.edu/bionumber.aspx?id=104901",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Up to about 1 metre, the longest cell in the human body.",
+        "zh": "已读网页（2026-11-15 访问）。最长约 1 米，是人体里最长的细胞。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Neuroscience Online (McGovern Medical School, UTHealth Houston). Section 3, Chapter 2: Spinal Reflexes and Descending Motor Pathways.",
+        "zh": "《Neuroscience Online》（休斯敦得州大学健康科学中心麦戈文医学院）：第 3 部分第 2 章《脊髓反射与下行运动通路》。"
+      },
+      "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter02.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). In the withdrawal reflex, pain fibres reach an interneuron in the spinal cord that excites the motor neurons; the response is faster than if the pain signal had to travel up to the brain; the same signals also continue upward to the brain. The page's example is a leg.",
+        "zh": "已读网页（2026-11-15 访问）。在缩回反射里，痛觉纤维接到脊髓里的中间神经元，再由它兴奋运动神经元；这比痛的信号先上到脑再下来要快；同样的信号也继续往上传到脑。页面的例子是腿。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Chudler EH. Reflexes. Neuroscience for Kids, University of Washington.",
+        "zh": "Chudler EH.《反射》。华盛顿大学《给孩子的神经科学》。"
+      },
+      "url": "https://faculty.washington.edu/chudler/chreflex.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). A hand on a hot stove is pulled away before the message reaches the brain; the knee jerk is a monosynaptic reflex, with only one synapse in its circuit.",
+        "zh": "已读网页（2026-11-15 访问）。手碰到很烫的炉子，消息还没到脑，手就缩回来了；膝跳反射是单突触反射，整条线路只有一个突触。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Chudler EH. The spinal cord. Neuroscience for Kids, University of Washington.",
+        "zh": "Chudler EH.《脊髓》。华盛顿大学《给孩子的神经科学》。"
+      },
+      "url": "https://faculty.washington.edu/chudler/spinal.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). The spinal cord is shorter than the bony spinal column; sensory fibres enter the cord through the dorsal root and their cell bodies sit in the dorsal root ganglion; cells in the ventral horn send axons through the ventral root to the muscles. (This page says the cord reaches the last thoracic vertebra; S5 says the first lumbar; the model follows S5.)",
+        "zh": "已读网页（2026-11-15 访问）。脊髓比骨性的脊柱短；感觉纤维从背根进入脊髓，它们的细胞体在背根神经节里；腹角的细胞把轴突经腹根送到肌肉。（这一页说脊髓到最后一节胸椎，S5 说到第一腰椎，模型按 S5。）"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Chudler EH. Brain facts and figures. Neuroscience for Kids, University of Washington.",
+        "zh": "Chudler EH.《关于脑的事实与数字》。华盛顿大学《给孩子的神经科学》。"
+      },
+      "url": "https://faculty.washington.edu/chudler/facts.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Total surface area of the cerebral cortex about 2,500 square centimetres (citing Peters and Jones 1984); total cerebrospinal fluid in an adult 125–150 mL, made at about 500 mL a day (citing Kandel et al. 2000).",
+        "zh": "已读网页（2026-11-15 访问）。大脑皮层总面积约 2,500 平方厘米（引 Peters 与 Jones 1984）；成人脑脊液总量 125–150 毫升，每天约产生 500 毫升（引 Kandel 等 2000）。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Johanson CE, Duncan JA, Klinge PM et al. Multiplicity of cerebrospinal fluid functions: new challenges in health and disease. Cerebrospinal Fluid Research 5 (2008): 10.",
+        "zh": "Johanson CE 等（2008）。《脑脊液功能的多样性》。《脑脊液研究》5：10。"
+      },
+      "url": "https://fluidsbarrierscns.biomedcentral.com/articles/10.1186/1743-8454-5-10",
+      "note": {
+        "en": "Read (accessed 2026-11-15; CC BY). Adults make about 500–600 mL of cerebrospinal fluid a day; the total space is about 160 mL in young adults; the choroid plexus makes about two thirds of it.",
+        "zh": "已读（2026-11-15 访问；CC BY）。成人每天产生约 500–600 毫升脑脊液；年轻成人体内总共约 160 毫升；约三分之二由脉络丛产生。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "National Eye Institute (US). How the eyes work.",
+        "zh": "美国国家眼科研究所：《眼睛怎样工作》。"
+      },
+      "url": "https://www.nei.nih.gov/learn-about-eye-health/healthy-vision/how-eyes-work",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Electrical signals travel from the retina through the optic nerve to the brain.",
+        "zh": "已读网页（2026-11-15 访问）。电信号从视网膜经视神经传到脑。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Academy of Medicine Singapore and KK Women's and Children's Hospital. Summary: The Singapore Integrated 24-Hour Activity Guidelines for Children and Adolescents (2021).",
+        "zh": "新加坡医学专科学院与竹脚妇幼医院：《新加坡儿童与青少年 24 小时综合活动指引》摘要（2021）。"
+      },
+      "url": "https://www.kkh.com.sg/patient-care/areas-of-care/childrens-services/Documents/Summary-the-Singapore-Integrated-24-Hour-Activity-Guidelines-for-Children-and-Adolescents.pdf",
+      "note": {
+        "en": "Read (accessed 2026-11-15). Guideline 7: regular sleep of at least 9 hours for 7- to 13-year-olds (at least 8 hours at 14 to 17), associated with better attention, learning and behaviour.",
+        "zh": "已读（2026-11-15 访问）。第 7 条：7 到 13 岁规律地睡至少 9 小时（14 到 17 岁至少 8 小时），与更好的注意力、学习和行为相关。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "National Heart, Lung, and Blood Institute (US). How much sleep is enough? (updated 24 March 2022).",
+        "zh": "美国国家心肺血液研究所：《睡多少才够？》（2022 年 3 月 24 日更新）。"
+      },
+      "url": "https://www.nhlbi.nih.gov/health/sleep/how-much-sleep",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Children 6 to 12 years old should sleep 9 to 12 hours a day.",
+        "zh": "已读网页（2026-11-15 访问）。6 到 12 岁的孩子每天应睡 9 到 12 小时。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "National Heart, Lung, and Blood Institute (US). Why is sleep important? (updated 24 March 2022).",
+        "zh": "美国国家心肺血液研究所：《为什么睡眠很重要？》（2022 年 3 月 24 日更新）。"
+      },
+      "url": "https://www.nhlbi.nih.gov/health/sleep/why-sleep-important",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Sleep helps with learning and the forming of long-term memories; too little sleep can lead to problems focusing and thinking clearly.",
+        "zh": "已读网页（2026-11-15 访问）。睡眠帮助学习、形成长期记忆；睡得太少会难以专心、想不清楚。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "Land Transport Authority, Singapore. Rules and code of conduct for active mobility (last updated 26 October 2026).",
+        "zh": "新加坡陆路交通管理局：《主动出行的规则与行为准则》（2026 年 10 月 26 日更新）。"
+      },
+      "url": "https://www.lta.gov.sg/content/ltagov/en/getting_around/active_mobility/rules_and_public_education/rules_and_code_of_conduct.html",
+      "note": {
+        "en": "Read online (accessed 2026-11-15). Wear a helmet when cycling on roads. Under-16s must not ride an e-scooter on cycling paths unless supervised by an adult aged at least 21, and must not ride power-assisted bicycles on cycling paths or roads, even with an adult.",
+        "zh": "已读网页（2026-11-15 访问）。在马路上骑脚踏车要戴头盔。未满 16 岁的人不得在脚踏车道上骑电动滑板车，除非有至少 21 岁的成人监督；也不得在脚踏车道和马路上骑电动助力脚踏车，即使有成人陪同。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Olivier J, Creighton P. Bicycle injuries and helmet use: a systematic review and meta-analysis. International Journal of Epidemiology 46 (2017): 278–292. PMID 27450862.",
+        "zh": "Olivier J、Creighton P（2017）。《自行车伤害与头盔使用：系统综述与荟萃分析》。《国际流行病学杂志》46：278–292。PMID 27450862。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27450862/",
+      "note": {
+        "en": "Abstract read (accessed 2026-11-15). 40 studies, over 64,000 injured cyclists: helmet use was associated with lower odds of head injury (odds ratio 0.49), serious head injury (0.31), face injury (0.67) and fatal head injury (0.35); neck injury was rare and not associated with helmet use. These are associations from injury records, not an experiment.",
+        "zh": "已读摘要（2026-11-15 访问）。40 项研究、64,000 多名受伤的骑车人：戴头盔与较低的头部受伤几率（比值比 0.49）、重度头伤（0.31）、面部受伤（0.67）和致命头伤（0.35）相关；颈部受伤很少，与戴头盔无关。这些是受伤记录里的相关，不是实验。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "US Consumer Product Safety Commission. Which helmet for which activity? (brochure, 6 January 2026).",
+        "zh": "美国消费品安全委员会：《什么活动戴什么头盔？》（宣传册，2026 年 1 月 6 日）。"
+      },
+      "url": "https://www.cpsc.gov/s3fs-public/349-WhichHelmetBrochure_1-6-2026_WEB_508.pdf",
+      "note": {
+        "en": "Read (accessed 2026-11-15). The foam in a helmet crushes to absorb the impact energy in a fall or collision, so much of the energy is absorbed by the helmet rather than the head; no helmet design has been proven to prevent concussions.",
+        "zh": "已读（2026-11-15 访问）。摔倒或碰撞时，头盔里的泡沫被压扁、吸收撞击的能量，所以很多能量被头盔吸收，而不是落在头上；还没有哪种头盔设计被证明能防止脑震荡。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Aranha VP, Saxena S, Moitra M, Narkeesh K, Arumugam N, Samuel AJ. Reaction time norms as measured by ruler drop method in school-going South Asian children: a cross-sectional study. Journal of Neurosciences in Rural Practice 8 (2017): 79–83.",
+        "zh": "Aranha VP 等（2017）。《用尺子接落法测得的南亚在校儿童反应时间常模：横断面研究》。《农村神经科学实践杂志》8：79–83。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5225729/",
+      "note": {
+        "en": "Read (accessed 2026-11-15; CC BY-NC-SA 3.0). 204 schoolchildren aged 6 to 12 in India: mean ruler-drop reaction time 230.01 ms (standard deviation 26.5), range 162.9 to 321.6 ms. One study of one group of children, not a standard.",
+        "zh": "已读（2026-11-15 访问；CC BY-NC-SA 3.0）。印度 204 名 6 到 12 岁的学生：尺子接落法平均反应时间 230.01 毫秒（标准差 26.5），范围 162.9 到 321.6 毫秒。这是一项研究、一组学生，不是标准。"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "Faraguna U, Ferrucci M, Giorgi FS, Fornai F. Editorial: The functional anatomy of the reticular formation. Frontiers in Neuroanatomy 13 (2019): 55.",
+        "zh": "Faraguna U 等（2019）。《社论：网状结构的功能解剖》。《神经解剖学前沿》13：55。"
+      },
+      "url": "https://www.frontiersin.org/articles/10.3389/fnana.2019.00055/full",
+      "note": {
+        "en": "Read online (accessed 2026-11-15; CC BY). The brainstem reticular formation, connecting the spinal cord and the brain, extensively shapes the activity of the cortex, including in the sleep-wake cycle and arousal.",
+        "zh": "已读网页（2026-11-15 访问；CC BY）。脑干网状结构连着脊髓和脑，在睡眠—清醒的循环和觉醒中大大影响大脑皮层的活动。"
+      }
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Z-Anatomy, the open source atlas of anatomy (Kervyn G, Zielinski M; Vinent Juanico L), NervousSystem100.fbx, SkeletalSystem100.fbx, MuscularSystem100.fbx; derived from BodyParts3D, © The Database Center for Life Science. CC BY-SA 4.0 (BodyParts3D: CC BY-SA 2.1 Japan as stated by Z-Anatomy).",
+        "zh": "Z-Anatomy 开源解剖图谱（Kervyn G、Zielinski M；Vinent Juanico L），NervousSystem100.fbx、SkeletalSystem100.fbx、MuscularSystem100.fbx；源自 BodyParts3D（© 日本生命科学数据库中心）。CC BY-SA 4.0（BodyParts3D 按 Z-Anatomy 的说明为 CC BY-SA 2.1 日本）。"
+      },
+      "url": "https://github.com/LluisV/Z-Anatomy",
+      "note": {
+        "en": "Downloaded 2026-11-15. Used for the brainstem, nerves, coverings, ventricles, skull, spine and right arm. Each node's source family is checked in scripts/anatomy/brain-nerves/provenance.md; the Z-Anatomy cerebellum and spinal cord outline could not be attributed and are not used; the inner ear (CC BY-NC-SA) and the white-matter models are not used.",
+        "zh": "2026-11-15 下载。用于脑干、神经、被膜、脑室、颅骨、脊柱和右臂。每个节点的来源都在 scripts/anatomy/brain-nerves/provenance.md 核过；Z-Anatomy 的小脑和脊髓外形认不出来源，没有使用；内耳（CC BY-NC-SA）和白质模型也没有使用。"
+      }
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "BodyParts3D 4.0, © The Database Center for Life Science, CC BY 4.0: cerebellum (FMA67944).",
+        "zh": "BodyParts3D 4.0（© 日本生命科学数据库中心，CC BY 4.0）：小脑（FMA67944）。"
+      },
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
+      "note": {
+        "en": "Downloaded 2026-11-15 (partof_BP3D_4.0_obj_99.zip). Placed with the transform that lines the BodyParts3D brainstem up with the model's brainstem (mean 0.3 mm).",
+        "zh": "2026-11-15 下载（partof_BP3D_4.0_obj_99.zip）。用把 BodyParts3D 脑干对齐到模型脑干的变换摆放（平均差 0.3 毫米）。"
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Winkler AM. Brain for Blender: FreeSurfer cortical surfaces with the Destrieux parcellation (brainder.org). CC BY-SA 3.0.",
+        "zh": "Winkler AM.《Brain for Blender》：带 Destrieux 分区的 FreeSurfer 皮层表面（brainder.org）。CC BY-SA 3.0。"
+      },
+      "url": "https://brainder.org/download/brain-for-blender/",
+      "note": {
+        "en": "The cerebral cortex of the model, as adapted in Z-Anatomy; confirmed by comparison with the original files (scripts/anatomy/brain-nerves/provenance.md). One adult's brain, averaged from 12 scans; in this model scaled by 0.985 to sit inside the skull (scripts/anatomy/brain-nerves/organs.json).",
+        "zh": "模型的大脑皮层，即 Z-Anatomy 改编的版本；已与原始文件比对确认（scripts/anatomy/brain-nerves/provenance.md）。来自一名成年人 12 次扫描的平均；在这个模型里缩放到 0.985 倍，以放进颅骨（scripts/anatomy/brain-nerves/organs.json）。"
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "University of Dundee, Centre for Anatomy and Human Identification. Cranial Nerves and Foramina (3D models), CC BY 4.0, as adapted in Z-Anatomy.",
+        "zh": "邓迪大学解剖与人类识别中心：《脑神经与孔》（三维模型），CC BY 4.0，由 Z-Anatomy 改编。"
+      },
+      "url": "https://github.com/LluisV/Z-Anatomy",
+      "note": {
+        "en": "Credited for the cranial nerves, the optic pathway and the hearing nerve, as listed in the Z-Anatomy licence file.",
+        "zh": "按 Z-Anatomy 许可文件的说明，为脑神经、视路和前庭蜗神经署名。"
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Bureau International des Poids et Mesures. The International System of Units (SI Brochure): standard acceleration of free fall, 9.80665 m/s².",
+        "zh": "国际计量局《国际单位制（SI 手册）》：标准自由落体加速度 9.80665 米/秒²。"
+      },
+      "url": "https://www.bipm.org/en/publications/si-brochure",
+      "note": {
+        "en": "A ruler let go from rest falls d = ½ g t², so t = √(2d ÷ g); the card rounds g to 9.81 m/s². Air resistance is ignored for a short drop.",
+        "zh": "尺子从静止放开，下落距离 d = ½ g t²，所以 t = √(2d ÷ g)；卡片把 g 取为 9.81 米/秒²。下落很短，不计空气阻力。"
+      }
+    }
+  ]
+}

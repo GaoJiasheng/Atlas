@@ -1,0 +1,1146 @@
+{
+  "topic": "brain-nerves",
+  "output": "brain-and-nerves.glb",
+  "rig": false,
+  "license": "CC BY-SA 4.0",
+  "changes": "structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; cerebrum scaled by 0.985 about its centre to sit inside the skull; BodyParts3D cerebellum placed by the brainstem fit; simplified; renamed.",
+  "attribution": [
+    "Cerebellum: BodyParts3D 4.0 (FMA67944), (c) The Database Center for Life Science, CC BY 4.0",
+    "(https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html). Spinal cord: drawn by Atlas (not in this file).",
+    "Cerebral cortex surfaces: Anderson Winkler, Brain for Blender (https://brainder.org), CC BY-SA 3.0,",
+    "from FreeSurfer surfaces with the Destrieux parcellation, as adapted in Z-Anatomy; adapted here under CC BY-SA 4.0.",
+    "Cranial nerves: Cranial Nerves and Foramina, University of Dundee CAHID, CC BY 4.0, as adapted in Z-Anatomy."
+  ],
+  "staticNote": "Static meshes; no rig, weights or attachment sites; the right biceps carries a straight fibre direction.",
+  "coordinates": {
+    "unit": "m",
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X",
+    "centre": "umbilicus midline; same source centre and transform as digestive / heart-lungs (digestive/organs.json)"
+  },
+  "budgets": {
+    "total": {
+      "targetBytes": 4000000,
+      "maxBytes": 8000000,
+      "targetTriangles": 350000,
+      "maxTriangles": 500000
+    }
+  },
+  "parts": [
+    {
+      "id": "frontal-lobe.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 21000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Inferior frontal sulcus.l",
+        "Lat_Fis-ant-Horizont.l",
+        "Lat_Fis-ant-Vertical.l",
+        "Middle frontal gyrus.l",
+        "Olfactory sulcus.l",
+        "Opercular part of inferior frontal gyrus.l",
+        "Orbital gyri (Frontomarginal gyrus and sulcus*).l",
+        "Orbital gyri.l",
+        "Orbital part of  inferior frontal gyrus.l",
+        "Orbital sulci (H-shaped orbital sulci*).l",
+        "Orbital sulci (Lateral Orbital sulcus*).l",
+        "Paracentral gyrus and sulcus*.l",
+        "Paracentral sulcus.l",
+        "Precentral gyrus.l",
+        "Precentral sulcus (Superior part)*.l",
+        "Precentral sulcus (inferior part)*.l",
+        "Straight gyrus (Gyrus rectus).l",
+        "Superior frontal gyrus.l",
+        "Superior frontal sulcus.l",
+        "Transverse frontopolar gyrus and sulcus*.l",
+        "Triangular part of inferior frontal gyrus.l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 18564,
+      "lobe": "frontal-lobe"
+    },
+    {
+      "id": "parietal-lobe.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Angular gyrus.l",
+        "Intraparietal sulcus.l",
+        "Postcentral gyrus.l",
+        "Postcentral sulcus.l",
+        "Precuneus.l",
+        "Superior parietal lobule.l",
+        "Supramarginal gyrus.l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 8714,
+      "lobe": "parietal-lobe"
+    },
+    {
+      "id": "temporal-lobe.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Inferior temporal gyrus.l",
+        "Inferior temporal sulcus.l",
+        "Lateral occipitotemporal gyrus.l",
+        "Medial occipitotemporal gyrus (Parahippocampal*).l",
+        "Middle temporal gyrus.l",
+        "Occipitotemporal sulcus (Lateral part*).l",
+        "Superior temporal gyrus (Lateral part).l",
+        "Superior temporal sulcus.l",
+        "Temporal plane.l",
+        "Temporal pole.l",
+        "Transverse temporal gyri.l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 10026,
+      "lobe": "temporal-lobe"
+    },
+    {
+      "id": "occipital-lobe.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 10000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Calcarine sulcus.l",
+        "Cuneus.l",
+        "Inferior occipital gyrus and sulcus*.l",
+        "Lateral occipital gyrus (Middle occipital gyrus*).l",
+        "Lingual gyrus.l",
+        "Lunate sulcus.l",
+        "Occipital pole.l",
+        "Superior occipital gyri.l",
+        "Transverse occipital sulcus.l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 7916,
+      "lobe": "occipital-lobe"
+    },
+    {
+      "id": "insula.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 1200,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Insula (Subcentral gyrus and ant. and post. sulci*).l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 740,
+      "lobe": "insula"
+    },
+    {
+      "id": "cerebrum-medial.l",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 3500,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Cingulate gyrus (Posteroventral part*).l",
+        "Cingulate gyrus and sulcus (Middle anterior part).l",
+        "Cingulate gyrus and sulcus (Middle posterior part).l",
+        "Cingulate gyrus and sulcus (Posterior dorsal part).l",
+        "Cingulate sulcus (Marginal part*).l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 2588,
+      "lobe": "cerebrum-medial"
+    },
+    {
+      "id": "cortex-split.l",
+      "system": "nervous",
+      "role": "split",
+      "sides": "unsided",
+      "triangleBudget": 0,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        " Posterior transverse collateral sulcus.l",
+        "Anterior occipital sulcus*.l",
+        "Central sulcus.l",
+        "Cingulate sulcus (Marginal part*).l",
+        "Circular sulcus of insula.l",
+        "Collateral sulcus.l",
+        "Lat_Fis-post.l",
+        "Parieto-occipital sulcus.l",
+        "Subparietal sulcus.l",
+        "Sulcus interm_prim-Jensen.l"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 7509
+    },
+    {
+      "id": "frontal-lobe.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 21000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Inferior frontal sulcus.r",
+        "Lat_Fis-ant-Horizont.r",
+        "Lat_Fis-ant-Vertical.r",
+        "Middle frontal gyrus.r",
+        "Olfactory sulcus.r",
+        "Opercular part of inferior frontal gyrus.r",
+        "Orbital gyri (Frontomarginal gyrus and sulcus*).r",
+        "Orbital gyri.r",
+        "Orbital part of  inferior frontal gyrus.r",
+        "Orbital sulci (H-shaped orbital sulci*).r",
+        "Orbital sulci (Lateral Orbital sulcus*).r",
+        "Paracentral gyrus and sulcus*.r",
+        "Paracentral sulcus.r",
+        "Precentral gyrus.r",
+        "Precentral sulcus (Superior part)*.r",
+        "Precentral sulcus (inferior part)*.r",
+        "Straight gyrus (Gyrus rectus).r",
+        "Superior frontal gyrus.r",
+        "Superior frontal sulcus.r",
+        "Transverse frontopolar gyrus and sulcus*.r",
+        "Triangular part of inferior frontal gyrus.r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 18564,
+      "lobe": "frontal-lobe"
+    },
+    {
+      "id": "parietal-lobe.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Angular gyrus.r",
+        "Intraparietal sulcus.r",
+        "Postcentral gyrus.r",
+        "Postcentral sulcus.r",
+        "Precuneus.r",
+        "Superior parietal lobule.r",
+        "Supramarginal gyrus.r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 8714,
+      "lobe": "parietal-lobe"
+    },
+    {
+      "id": "temporal-lobe.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 12000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Inferior temporal gyrus.r",
+        "Inferior temporal sulcus.r",
+        "Lateral occipitotemporal gyrus.r",
+        "Medial occipitotemporal gyrus (Parahippocampal*).r",
+        "Middle temporal gyrus.r",
+        "Occipitotemporal sulcus (Lateral part*).r",
+        "Superior temporal gyrus (Lateral part).r",
+        "Superior temporal sulcus.r",
+        "Temporal plane.r",
+        "Temporal pole.r",
+        "Transverse temporal gyri.r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 10026,
+      "lobe": "temporal-lobe"
+    },
+    {
+      "id": "occipital-lobe.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 10000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Calcarine sulcus.r",
+        "Cuneus.r",
+        "Inferior occipital gyrus and sulcus*.r",
+        "Lateral occipital gyrus (Middle occipital gyrus*).r",
+        "Lingual gyrus.r",
+        "Lunate sulcus.r",
+        "Occipital pole.r",
+        "Superior occipital gyri.r",
+        "Transverse occipital sulcus.r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 7916,
+      "lobe": "occipital-lobe"
+    },
+    {
+      "id": "insula.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 1200,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Insula (Subcentral gyrus and ant. and post. sulci*).r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 740,
+      "lobe": "insula"
+    },
+    {
+      "id": "cerebrum-medial.r",
+      "system": "nervous",
+      "role": "cortex",
+      "sides": "unsided",
+      "triangleBudget": 3500,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "Cingulate gyrus (Posteroventral part*).r",
+        "Cingulate gyrus and sulcus (Middle anterior part).r",
+        "Cingulate gyrus and sulcus (Middle posterior part).r",
+        "Cingulate gyrus and sulcus (Posterior dorsal part).r",
+        "Cingulate sulcus (Marginal part*).r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 2588,
+      "lobe": "cerebrum-medial"
+    },
+    {
+      "id": "cortex-split.r",
+      "system": "nervous",
+      "role": "split",
+      "sides": "unsided",
+      "triangleBudget": 0,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        " Posterior transverse collateral sulcus.r",
+        "Anterior occipital sulcus*.r",
+        "Central sulcus.r",
+        "Cingulate sulcus (Marginal part*).r",
+        "Circular sulcus of insula.r",
+        "Collateral sulcus.r",
+        "Lat_Fis-post.r",
+        "Parieto-occipital sulcus.r",
+        "Subparietal sulcus.r",
+        "Sulcus interm_prim-Jensen.r"
+      ],
+      "families": [
+        "brainder"
+      ],
+      "sourceTriangles": 7509
+    },
+    {
+      "id": "cerebellum",
+      "system": "bp3d",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 14000,
+      "maxDeviationM": 0.0005,
+      "sourceNames": [
+        "FJ1781",
+        "FJ1830"
+      ],
+      "families": [
+        "bp3d-4.0"
+      ],
+      "fma": "FMA67944",
+      "placement": "similarity transform fitted on BodyParts3D 4.0 pons + medulla (provenance.py)"
+    },
+    {
+      "id": "midbrain",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Midbrain.l",
+        "Midbrain.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 12184
+    },
+    {
+      "id": "pons",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Pons.l",
+        "Pons.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 20342
+    },
+    {
+      "id": "medulla",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Medulla oblongata.l",
+        "Medulla oblongata.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 12160
+    },
+    {
+      "id": "ventricles",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Aqueduct of midbrain",
+        "Fourth ventricle",
+        "Lateral ventricle.l",
+        "Lateral ventricle.r",
+        "Third ventricle"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 16369
+    },
+    {
+      "id": "cauda-equina",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2500,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Cauda equina"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 13824
+    },
+    {
+      "id": "spinal-roots",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 4000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Anterior root of spinal nerve.l",
+        "Anterior root of spinal nerve.r",
+        "Posterior root of spinal nerve.l",
+        "Posterior root of spinal nerve.r",
+        "Spinal ganglion.l",
+        "Spinal ganglion.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 28704
+    },
+    {
+      "id": "arm-nerves.l",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "maxDeviationM": 0.0006,
+      "sourceNames": [
+        "Anterior division of inferior trunk of brachial plexus.l",
+        "Anterior division of middle trunk of brachial plexus.l",
+        "Anterior division of superior trunk of brachial plexus.l",
+        "Axillary nerve.l",
+        "Common palmar digital branches of median nerve.l",
+        "Deep branch of radial nerve.l",
+        "Inferior trunk of brachial plexus.l",
+        "Lateral antebrachial cutaneous nerve.l",
+        "Median nerve.l",
+        "Middle trunk of brachial plexus.l",
+        "Musculocutaneous nerve.l",
+        "Posterior cord of brachial plexus.l",
+        "Posterior division of inferior trunk of brachial plexus.l",
+        "Posterior division of middle trunk of brachial plexus.l",
+        "Posterior division of superior trunk of brachial plexus.l",
+        "Proper palmar digital branches of median nerve.l",
+        "Radial nerve.l",
+        "Roots of brachial plexus.l",
+        "Superficial branch of radial nerve.l",
+        "Superior trunk of brachial plexus.l",
+        "Ulnar nerve.l"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 42912,
+      "splitForearm": false
+    },
+    {
+      "id": "leg-nerves.l",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "maxDeviationM": 0.0006,
+      "sourceNames": [
+        "Common fibular nerve.l",
+        "Deep fibular nerve.l",
+        "Femoral nerve.l",
+        "Obturator nerve.l",
+        "Saphenous nerve.l",
+        "Sciatic nerve.l",
+        "Superficial fibular nerve.l",
+        "Tibial nerve.l"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 31104
+    },
+    {
+      "id": "trunk-nerves.l",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2500,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Intercostal nerves.l"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 51552
+    },
+    {
+      "id": "arm-nerves.r",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "maxDeviationM": 0.0006,
+      "sourceNames": [
+        "Anterior division of inferior trunk of brachial plexus.r",
+        "Anterior division of middle trunk of brachial plexus.r",
+        "Anterior division of superior trunk of brachial plexus.r",
+        "Axillary nerve.r",
+        "Common palmar digital branches of median nerve.r",
+        "Deep branch of radial nerve.r",
+        "Inferior trunk of brachial plexus.r",
+        "Lateral antebrachial cutaneous nerve.r",
+        "Median nerve.r",
+        "Middle trunk of brachial plexus.r",
+        "Musculocutaneous nerve.r",
+        "Posterior cord of brachial plexus.r",
+        "Posterior division of inferior trunk of brachial plexus.r",
+        "Posterior division of middle trunk of brachial plexus.r",
+        "Posterior division of superior trunk of brachial plexus.r",
+        "Proper palmar digital branches of median nerve.r",
+        "Radial nerve.r",
+        "Roots of brachial plexus.r",
+        "Superficial branch of radial nerve.r",
+        "Superior trunk of brachial plexus.r",
+        "Ulnar nerve.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 42912,
+      "splitForearm": true
+    },
+    {
+      "id": "leg-nerves.r",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 5000,
+      "maxDeviationM": 0.0006,
+      "sourceNames": [
+        "Common fibular nerve.r",
+        "Deep fibular nerve.r",
+        "Femoral nerve.r",
+        "Obturator nerve.r",
+        "Saphenous nerve.r",
+        "Sciatic nerve.r",
+        "Superficial fibular nerve.r",
+        "Tibial nerve.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 31104
+    },
+    {
+      "id": "trunk-nerves.r",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2500,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Intercostal nerves.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 51552
+    },
+    {
+      "id": "optic-pathway",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Optic chiasm.l",
+        "Optic chiasm.r",
+        "Optic nerve (II).l",
+        "Optic nerve (II).r",
+        "Optic tract.l",
+        "Optic tract.r"
+      ],
+      "families": [
+        "bp3d-zanatomy",
+        "dundee-cn"
+      ],
+      "sourceTriangles": 9940
+    },
+    {
+      "id": "hearing-nerve",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 800,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Vestibulocochlear nerve (VIII).l",
+        "Vestibulocochlear nerve (VIII).r"
+      ],
+      "families": [
+        "dundee-cn"
+      ],
+      "sourceTriangles": 3536
+    },
+    {
+      "id": "cranial-nerves",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Abducens nerve (VI).l",
+        "Abducens nerve (VI).r",
+        "Accessory nerve (XI).l",
+        "Accessory nerve (XI).r",
+        "Facial nerve (VII).l",
+        "Facial nerve (VII).r",
+        "Glossopharyngeal nerve (IX).l",
+        "Glossopharyngeal nerve (IX).r",
+        "Hypoglossal nerve (XII).l",
+        "Hypoglossal nerve (XII).r",
+        "Maxillary nerve.l",
+        "Maxillary nerve.r",
+        "Oculomotor nerve (III).l",
+        "Oculomotor nerve (III).r",
+        "Olfactory nerve (I).l",
+        "Olfactory nerve (I).r",
+        "Ophthalmic nerve.l",
+        "Ophthalmic nerve.r",
+        "Trigeminal nerve (V).l",
+        "Trigeminal nerve (V).r",
+        "Trochlear nerve (IV).l",
+        "Trochlear nerve (IV).r",
+        "Vagus nerve (X).l",
+        "Vagus nerve (X).r"
+      ],
+      "families": [
+        "bp3d-zanatomy",
+        "dundee-cn"
+      ],
+      "sourceTriangles": 327968
+    },
+    {
+      "id": "dura-folds",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Falx cerebri",
+        "Tentorium cerebelli.l",
+        "Tentorium cerebelli.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 23684
+    },
+    {
+      "id": "spinal-dura",
+      "system": "nervous",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2500,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Spinal dura"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 35002
+    },
+    {
+      "id": "skull",
+      "system": "skeleton",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 30000,
+      "maxDeviationM": 0.001,
+      "sourceNames": [
+        "Ethmoid bone",
+        "Frontal bone",
+        "Lacrimal bone.l",
+        "Lacrimal bone.r",
+        "Mandible",
+        "Maxilla.l",
+        "Maxilla.r",
+        "Nasal bone.l",
+        "Nasal bone.r",
+        "Occipital bone",
+        "Palatine bone.l",
+        "Palatine bone.r",
+        "Parietal bone.l",
+        "Parietal bone.r",
+        "Sphenoid bone",
+        "Temporal bone.l",
+        "Temporal bone.r",
+        "Vomer",
+        "Zygomatic bone.l",
+        "Zygomatic bone.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 111387
+    },
+    {
+      "id": "vertebral-column",
+      "system": "skeleton",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 26000,
+      "maxDeviationM": 0.001,
+      "sourceNames": [
+        "Atlas (C1)",
+        "Axis (C2)",
+        "Coccyx",
+        "Sacrum",
+        "Vertebra C3",
+        "Vertebra C4",
+        "Vertebra C5",
+        "Vertebra C6",
+        "Vertebra C7",
+        "Vertebra L1",
+        "Vertebra L2",
+        "Vertebra L3",
+        "Vertebra L4",
+        "Vertebra L5",
+        "Vertebra T1",
+        "Vertebra T10",
+        "Vertebra T11",
+        "Vertebra T12",
+        "Vertebra T2",
+        "Vertebra T3",
+        "Vertebra T4",
+        "Vertebra T5",
+        "Vertebra T6",
+        "Vertebra T7",
+        "Vertebra T8",
+        "Vertebra T9"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 72927
+    },
+    {
+      "id": "biceps-r",
+      "system": "muscles",
+      "role": "muscle",
+      "sides": "unsided",
+      "triangleBudget": 4000,
+      "maxDeviationM": 0.0008,
+      "sourceNames": [
+        "Long head of biceps brachii.r",
+        "Short head of biceps brachii.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 5914,
+      "fibre": {
+        "origin": [
+          "Long head of biceps brachii.or"
+        ],
+        "insertion": [
+          "Biceps brachii muscle.er"
+        ]
+      }
+    },
+    {
+      "id": "triceps-r",
+      "system": "muscles",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 3000,
+      "maxDeviationM": 0.001,
+      "sourceNames": [
+        "Lateral head of triceps brachii.r",
+        "Long head of triceps brachii.r",
+        "Medial head of triceps brachii.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 10264
+    },
+    {
+      "id": "upper-arm-bone-r",
+      "system": "skeleton",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 2000,
+      "maxDeviationM": 0.001,
+      "sourceNames": [
+        "Humerus.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 4280
+    },
+    {
+      "id": "forearm-hand-r",
+      "system": "skeleton",
+      "role": "organ",
+      "sides": "unsided",
+      "triangleBudget": 6000,
+      "maxDeviationM": 0.001,
+      "sourceNames": [
+        "Capitate bone.r",
+        "Distal phalanx of fifth finger of hand.r",
+        "Distal phalanx of first finger of hand.r",
+        "Distal phalanx of fourth finger of hand.r",
+        "Distal phalanx of second finger of hand.r",
+        "Distal phalanx of third finger of hand.r",
+        "Fifth metacarpal bone.r",
+        "First metacarpal bone.r",
+        "Fourth metacarpal bone.r",
+        "Hamate bone.r",
+        "Lunate bone.r",
+        "Middle phalanx of fifth finger of hand.r",
+        "Middle phalanx of fourth finger of hand.r",
+        "Middle phalanx of second finger of hand.r",
+        "Middle phalanx of third finger of hand.r",
+        "Pisiform bone.r",
+        "Proximal phalanx of fifth finger of hand.r",
+        "Proximal phalanx of first finger of hand.r",
+        "Proximal phalanx of fourth finger of hand.r",
+        "Proximal phalanx of second finger of hand.r",
+        "Proximal phalanx of third finger of hand.r",
+        "Radius.r",
+        "Scaphoid bone.r",
+        "Second metacarpal bone.r",
+        "Third metacarpal bone.r",
+        "Trapezium bone.r",
+        "Trapezoid bone.r",
+        "Triquetrum bone.r",
+        "Ulna.r"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 15702
+    },
+    {
+      "id": "skeleton-rest",
+      "system": "skeleton",
+      "role": "system",
+      "sides": "unsided",
+      "triangleBudget": 22000,
+      "maxDeviationM": 0.003,
+      "sourceNames": [
+        "Body of sternum",
+        "Calcaneus.l",
+        "Calcaneus.r",
+        "Capitate bone.l",
+        "Clavicle.l",
+        "Clavicle.r",
+        "Costal cartilage of eighth rib.l",
+        "Costal cartilage of eighth rib.r",
+        "Costal cartilage of fifth rib.l",
+        "Costal cartilage of fifth rib.r",
+        "Costal cartilage of first rib.l",
+        "Costal cartilage of first rib.r",
+        "Costal cartilage of fourth rib.l",
+        "Costal cartilage of fourth rib.r",
+        "Costal cartilage of ninth rib.l",
+        "Costal cartilage of ninth rib.r",
+        "Costal cartilage of second rib.l",
+        "Costal cartilage of second rib.r",
+        "Costal cartilage of seventh rib.l",
+        "Costal cartilage of seventh rib.r",
+        "Costal cartilage of sixth rib.l",
+        "Costal cartilage of sixth rib.r",
+        "Costal cartilage of tenth rib.l",
+        "Costal cartilage of tenth rib.r",
+        "Costal cartilage of third rib.l",
+        "Costal cartilage of third rib.r",
+        "Cuboid bone.l",
+        "Cuboid bone.r",
+        "Distal phalanx of fifth finger of foot.l",
+        "Distal phalanx of fifth finger of foot.r",
+        "Distal phalanx of fifth finger of hand.l",
+        "Distal phalanx of first finger of foot.l",
+        "Distal phalanx of first finger of foot.r",
+        "Distal phalanx of first finger of hand.l",
+        "Distal phalanx of fourth finger of foot.l",
+        "Distal phalanx of fourth finger of foot.r",
+        "Distal phalanx of fourth finger of hand.l",
+        "Distal phalanx of second finger of foot.l",
+        "Distal phalanx of second finger of foot.r",
+        "Distal phalanx of second finger of hand.l",
+        "Distal phalanx of third finger of foot.l",
+        "Distal phalanx of third finger of foot.r",
+        "Distal phalanx of third finger of hand.l",
+        "Eighth rib.l",
+        "Eighth rib.r",
+        "Eleventh rib.l",
+        "Eleventh rib.r",
+        "Femur.l",
+        "Femur.r",
+        "Fibula.l",
+        "Fibula.r",
+        "Fifth metacarpal bone.l",
+        "Fifth metatarsal bone.l",
+        "Fifth metatarsal bone.r",
+        "Fifth rib.l",
+        "Fifth rib.r",
+        "First metacarpal bone.l",
+        "First metatarsal bone.l",
+        "First metatarsal bone.r",
+        "First rib.l",
+        "First rib.r",
+        "Fourth metacarpal bone.l",
+        "Fourth metatarsal bone.l",
+        "Fourth metatarsal bone.r",
+        "Fourth rib.l",
+        "Fourth rib.r",
+        "Hamate bone.l",
+        "Hip bone.l",
+        "Hip bone.r",
+        "Humerus.l",
+        "Intermediate cuneiform bone.l",
+        "Intermediate cuneiform bone.r",
+        "Lateral cuneiform bone.l",
+        "Lateral cuneiform bone.r",
+        "Lunate bone.l",
+        "Manubrium of sternum",
+        "Medial cuneiform bone.l",
+        "Medial cuneiform bone.r",
+        "Middle phalanx of fifth finger of foot.l",
+        "Middle phalanx of fifth finger of foot.r",
+        "Middle phalanx of fifth finger of hand.l",
+        "Middle phalanx of fourth finger of foot.l",
+        "Middle phalanx of fourth finger of foot.r",
+        "Middle phalanx of fourth finger of hand.l",
+        "Middle phalanx of second finger of foot.l",
+        "Middle phalanx of second finger of foot.r",
+        "Middle phalanx of second finger of hand.l",
+        "Middle phalanx of third finger of foot.l",
+        "Middle phalanx of third finger of foot.r",
+        "Middle phalanx of third finger of hand.l",
+        "Navicular bone.l",
+        "Navicular bone.r",
+        "Ninth rib.l",
+        "Ninth rib.r",
+        "Patella.l",
+        "Patella.r",
+        "Pisiform bone.l",
+        "Proximal phalanx of fifth finger of foot.l",
+        "Proximal phalanx of fifth finger of foot.r",
+        "Proximal phalanx of fifth finger of hand.l",
+        "Proximal phalanx of first finger of foot.l",
+        "Proximal phalanx of first finger of foot.r",
+        "Proximal phalanx of first finger of hand.l",
+        "Proximal phalanx of fourth finger of foot.l",
+        "Proximal phalanx of fourth finger of foot.r",
+        "Proximal phalanx of fourth finger of hand.l",
+        "Proximal phalanx of second finger of foot.l",
+        "Proximal phalanx of second finger of foot.r",
+        "Proximal phalanx of second finger of hand.l",
+        "Proximal phalanx of third finger of foot.l",
+        "Proximal phalanx of third finger of foot.r",
+        "Proximal phalanx of third finger of hand.l",
+        "Radius.l",
+        "Scaphoid bone.l",
+        "Scapula.l",
+        "Scapula.r",
+        "Second metacarpal bone.l",
+        "Second metatarsal bone.l",
+        "Second metatarsal bone.r",
+        "Second rib.l",
+        "Second rib.r",
+        "Seventh rib.l",
+        "Seventh rib.r",
+        "Sixth rib.l",
+        "Sixth rib.r",
+        "Talus.l",
+        "Talus.r",
+        "Tenth rib.l",
+        "Tenth rib.r",
+        "Third metacarpal bone.l",
+        "Third metatarsal bone.l",
+        "Third metatarsal bone.r",
+        "Third rib.l",
+        "Third rib.r",
+        "Tibia.l",
+        "Tibia.r",
+        "Trapezium bone.l",
+        "Trapezoid bone.l",
+        "Triquetrum bone.l",
+        "Twelfth rib.l",
+        "Twelfth rib.r",
+        "Ulna.l",
+        "Xiphoid process"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ],
+      "sourceTriangles": 422601
+    },
+    {
+      "id": "skin-outline",
+      "system": "atlas-glb",
+      "role": "skin",
+      "sides": "unsided",
+      "triangleBudget": 0,
+      "maxDeviationM": 0,
+      "sourceNames": [
+        "heart-and-lungs.glb#skin-outline"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ]
+    },
+    {
+      "id": "skin-wire",
+      "system": "atlas-glb",
+      "role": "skin",
+      "sides": "unsided",
+      "triangleBudget": 0,
+      "maxDeviationM": 0,
+      "sourceNames": [
+        "heart-and-lungs.glb#skin-wire"
+      ],
+      "families": [
+        "bp3d-zanatomy"
+      ]
+    }
+  ],
+  "expectedNodes": [
+    "arm-nerves-forearm.r",
+    "arm-nerves.l",
+    "arm-nerves.r",
+    "biceps-r",
+    "cauda-equina",
+    "cerebellum",
+    "cerebrum-medial.l",
+    "cerebrum-medial.r",
+    "cranial-nerves",
+    "dura-folds",
+    "forearm-hand-r",
+    "frontal-lobe.l",
+    "frontal-lobe.r",
+    "hearing-nerve",
+    "insula.l",
+    "insula.r",
+    "leg-nerves.l",
+    "leg-nerves.r",
+    "medulla",
+    "midbrain",
+    "occipital-lobe.l",
+    "occipital-lobe.r",
+    "optic-pathway",
+    "parietal-lobe.l",
+    "parietal-lobe.r",
+    "pons",
+    "skeleton-rest",
+    "skin-outline",
+    "skin-wire",
+    "skull",
+    "spinal-dura",
+    "spinal-roots",
+    "temporal-lobe.l",
+    "temporal-lobe.r",
+    "triceps-r",
+    "trunk-nerves.l",
+    "trunk-nerves.r",
+    "upper-arm-bone-r",
+    "ventricles",
+    "vertebral-column"
+  ],
+  "notes": [
+    "Nervous FBX sources pass the provenance gate (provenance.json): families bp3d-zanatomy, brainder, dundee-cn only.",
+    "Not taken: white-matter tracts and fibres, the corpus callosum (white-matter family), the inner ear, eye structures, nuclei, the sympathetic trunk, digital and cutaneous nerve branches.",
+    "No rig or weights. The right forearm and hand turn about the elbow landmark in the engine (landmarks.json)."
+  ]
+}

@@ -15,13 +15,15 @@ const manifestSchema = z.object({
   changes: z.string().min(1),
   /** Extra source lines, e.g. a BodyParts3D 4.0 replacement mesh, each naming its licence. */
   attribution: z.array(z.string()).optional(),
+  /** Replaces the default "Static meshes; no rig, weights, fibres or attachment sites." sentence. */
+  staticNote: z.string().min(1).optional(),
   budgets: z.object({ total: z.object({
     maxBytes: z.number(), maxTriangles: z.number(), targetBytes: z.number(), targetTriangles: z.number(),
   }) }),
 });
 
 /** Z-Anatomy attribution (CC BY-SA 4.0, share-alike), the manifest's changes and the model's own licence. */
-export function staticCopyright(manifest: { output: string; changes: string; attribution?: string[] }): string {
+export function staticCopyright(manifest: { output: string; changes: string; attribution?: string[]; staticNote?: string }): string {
   return [
     'Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0',
     '(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center',
@@ -29,7 +31,7 @@ export function staticCopyright(manifest: { output: string; changes: string; att
     'CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).',
     ...(manifest.attribution ?? []),
     `Changes for Atlas: ${manifest.changes}`,
-    `Static meshes; no rig, weights, fibres or attachment sites. ${manifest.output} is licensed`,
+    `${manifest.staticNote ?? 'Static meshes; no rig, weights, fibres or attachment sites.'} ${manifest.output} is licensed`,
     'CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).',
   ].join('\n');
 }
@@ -64,8 +66,9 @@ export async function optimizeStatic(
       for (const p of mesh.listPrimitives()) {
         const pos = p.getAttribute('POSITION');
         if (!pos?.getArray()) throw new Error('Missing positions');
+        // A static muscle (role `muscle`: brain-nerves' biceps) may carry `_U` / `_FIBRE` for the engine's contraction.
         for (const s of ['JOINTS_0', 'WEIGHTS_0', '_FIBRE'])
-          if (p.getAttribute(s)) throw new Error(`Static ${n.getName()} carries ${s}`);
+          if (p.getAttribute(s) && !(s === '_FIBRE' && role === 'muscle')) throw new Error(`Static ${n.getName()} carries ${s}`);
         if (role === 'tube') {
           const u = p.getAttribute('_U');
           if (!u || u.getCount() !== pos.getCount()) throw new Error(`Missing tube _U: ${n.getName()}`);
@@ -105,6 +108,16 @@ export async function optimizeStatic(
   await document.transform(weld(), reorder({ encoder: MeshoptEncoder }), quantize({
     pattern: /^(POSITION|NORMAL)$/, quantizePosition: 16, quantizeNormal: 12,
   }), prune({ keepLeaves: true, keepAttributes: true }));
+  // Quantization moves each node's dequantizing scale / offset onto the node: an `extras.labelPoint`
+  // written in model coordinates is carried into that node-local frame (the engine reads it node-local).
+  for (const n of document.getRoot().listNodes()) {
+    const p = n.getExtras().labelPoint;
+    if (!Array.isArray(p) || p.length !== 3) continue;
+    const [sx, sy, sz] = n.getScale(), [tx, ty, tz] = n.getTranslation();
+    const local = [(p[0] - tx) / sx, (p[1] - ty) / sy, (p[2] - tz) / sz].map((v) => Math.round(v * 1e5) / 1e5);
+    n.setExtras({ ...n.getExtras(), labelPoint: local });
+    n.getMesh()?.setExtras({ ...n.getMesh()!.getExtras(), labelPoint: local });
+  }
   document.createExtension(compression).setRequired(true).setEncoderOptions({ method: compression.EncoderMethod.QUANTIZE });
   document.getRoot().getAsset().copyright = staticCopyright(manifest);
   const bytes = await io.writeBinary(document);

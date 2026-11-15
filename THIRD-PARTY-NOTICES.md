@@ -27,8 +27,10 @@ Atlas code is MIT (see `LICENSE`); Atlas content is CC BY-NC-SA 4.0 (see
 
 | Work | Use | Licence |
 |---|---|---|
-| Z-Anatomy — The open source atlas of anatomy (Gauthier Kervyn et al.; app by Lluís Vinent Juanico), https://github.com/LluisV/Z-Anatomy | muscle, bone and body-region meshes of the human muscle series (`public/models/muscles-*.glb`); organ, airway and blood-vessel meshes of the heart-and-lungs topic (`public/models/heart-and-lungs.glb`) | CC BY-SA 4.0 |
-| BodyParts3D, © The Database Center for Life Science, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html | the source Z-Anatomy derives from; FMA ids and cross-checks | CC BY 4.0 (Z-Anatomy states CC BY-SA 2.1 Japan for the version it used) |
+| Z-Anatomy — The open source atlas of anatomy (Gauthier Kervyn et al.; app by Lluís Vinent Juanico), https://github.com/LluisV/Z-Anatomy | muscle, bone and body-region meshes of the human muscle series (`public/models/muscles-*.glb`); organ, airway and blood-vessel meshes of the heart-and-lungs topic (`public/models/heart-and-lungs.glb`); brainstem, nerve, skull and spine meshes of the brain-and-nerves topic (`public/models/brain-and-nerves.glb`) | CC BY-SA 4.0 |
+| BodyParts3D, © The Database Center for Life Science, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html | the source Z-Anatomy derives from; FMA ids and cross-checks; the cerebellum of `public/models/brain-and-nerves.glb` (FMA67944, 4.0) | CC BY 4.0 (Z-Anatomy states CC BY-SA 2.1 Japan for the version it used) |
+| Anderson Winkler, Brain for Blender, https://brainder.org/download/brain-for-blender/ | the cerebral cortex of `public/models/brain-and-nerves.glb`, as adapted in Z-Anatomy | CC BY-SA 3.0 Unported (adapted work released under CC BY-SA 4.0) |
+| University of Dundee CAHID, Cranial Nerves and Foramina (as credited in Z-Anatomy's licence file) | the cranial nerves of `public/models/brain-and-nerves.glb` | CC BY 4.0 |
 
 Attribution carried in each model's `asset.copyright`, in the topic's
 `data/SOURCES.md` and on the topic's title block:
@@ -88,6 +90,38 @@ CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 The glb and the geometry derived from it (`scripts/anatomy/heart-lungs/centrelines.json`,
 `landmarks.json`, `routes.json`, and the flow paths, pivots and camera targets taken
 from them into the topic's `parts.json`) are CC BY-SA 4.0.
+
+### Brain and nerves (`public/models/brain-and-nerves.glb`)
+
+The brainstem, nerve, covering, ventricle, skull, spine, right-arm and skeleton meshes come
+from Z-Anatomy (CC BY-SA 4.0); the cerebral cortex is Anderson Winkler's Brain for Blender
+surface (brainder.org, CC BY-SA 3.0) as adapted in Z-Anatomy; the cerebellum is BodyParts3D
+4.0 (CC BY 4.0); the cranial nerves are credited to the University of Dundee CAHID's Cranial
+Nerves and Foramina (CC BY 4.0), as listed in Z-Anatomy's licence file. The body outline is
+the heart-and-lungs model's. Each source object's family was checked before use
+(`scripts/anatomy/brain-nerves/provenance.md`); the Z-Anatomy cerebellum and spinal-cord
+outline (no attributable source), the Dundee inner ear (CC BY-NC-SA 4.0) and the University
+of Washington white-matter models (licence not found) are not used. The spinal cord on the
+stage is drawn by Atlas. Attribution carried in the model's `asset.copyright`:
+
+```
+Z-Anatomy — The open source atlas of anatomy, CC BY-SA 4.0
+(https://github.com/LluisV/Z-Anatomy), derived from BodyParts3D, © The Database Center
+for Life Science (CC BY-SA 2.1 Japan as stated by Z-Anatomy; BodyParts3D is now
+CC BY 4.0, https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html).
+Cerebellum: BodyParts3D 4.0 (FMA67944), (c) The Database Center for Life Science, CC BY 4.0
+(https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html). Spinal cord: drawn by Atlas (not in this file).
+Cerebral cortex surfaces: Anderson Winkler, Brain for Blender (https://brainder.org), CC BY-SA 3.0,
+from FreeSurfer surfaces with the Destrieux parcellation, as adapted in Z-Anatomy; adapted here under CC BY-SA 4.0.
+Cranial nerves: Cranial Nerves and Foramina, University of Dundee CAHID, CC BY 4.0, as adapted in Z-Anatomy.
+Changes for Atlas: structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; cerebrum scaled by 0.985 about its centre to sit inside the skull; BodyParts3D cerebellum placed by the brainstem fit; simplified; renamed.
+Static meshes; no rig, weights or attachment sites; the right biceps carries a straight fibre direction. brain-and-nerves.glb is licensed
+CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+```
+
+The glb and the geometry derived from it (`scripts/anatomy/brain-nerves/landmarks.json`,
+`routes.json`, `cord.json`, and the flow paths, pivots and camera targets taken from them
+into the topic's `parts.json`) are CC BY-SA 4.0.
 
 ### Bones and joints (`public/models/bones-and-joints.glb`)
 

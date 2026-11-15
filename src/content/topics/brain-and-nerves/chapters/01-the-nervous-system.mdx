@@ -1,0 +1,96 @@
+---
+id: the-nervous-system
+order: 1
+title: { en: "Brain, spinal cord and nerves", zh: "脑、脊髓和神经" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [brain-parts, spinal, nerves, protection, skeleton-context, skin-context, signals-down, signals-up]
+  labels: [group:brain-parts, spinal-cord, arm-nerves, leg-nerves]
+  camera: { position: [0.62, 0.3, 3.0], target: [0.0, -0.12, -0.12], fov: 30 }
+  summary:
+    en: "The brain and the spinal cord make up the central nervous system. Nerves branch out from them to every part of the body, carrying messages in and commands out."
+    zh: "脑和脊髓组成中枢神经系统。神经从这里分出去，通到身体各处，把消息送进来，把命令送出去。"
+  beats:
+    - labels: [group:brain-parts, spinal-cord, arm-nerves, leg-nerves]
+      caption:
+        en: "The brain and spinal cord form the central nervous system. Nerves branch out from them to every part of the body."
+        zh: "脑和脊髓是中枢神经系统；神经从这里分出去，通到身体各处。"
+    - camera: spine
+      layers: [brain-parts, spinal, nerves, protection, skeleton-context]
+      labels: [spinal-cord, vertebral-column, cauda-equina]
+      caption:
+        en: "The spinal cord runs down a canal inside the backbone. It ends near the lower back, and a bundle of nerve roots carries on below it."
+        zh: "脊髓在脊柱里的管道中往下走，到腰部附近就结束，再往下是一束神经根。"
+    - labels: [arm-nerves, spinal-cord, group:brain-parts]
+      caption:
+        en: "Signals travel in both directions. Messages from the skin go in towards the spinal cord and brain; commands come out to the muscles."
+        zh: "信号两个方向都走：皮肤的消息往里送到脊髓和脑，命令往外送到肌肉。"
+    - camera: { position: [0.75, 0.22, 0.75], target: [0.22, 0.05, -0.12], fov: 30 }
+      layers: [nerves, spinal, skeleton-context, skin-context]
+      labels: [arm-nerves, trunk-nerves]
+      caption:
+        en: "A nerve is a bundle of long fibres from many nerve cells, like a cable holding many wires."
+        zh: "一条神经是一束很多神经细胞的长纤维，像一根电缆里装着很多电线。"
+    - camera: head
+      layers: [brain-parts, spinal, nerves, protection, skin-context]
+      hide: [skull]
+      labels: [medulla, pons, cerebellum]
+      caption:
+        en: "The nervous system works with the other body systems. The brainstem, for example, helps control breathing and the heartbeat."
+        zh: "神经系统和其他系统一起工作，例如脑干参与控制呼吸和心跳。"
+  index:
+    parts: [spinal-cord, cauda-equina, vertebral-column, arm-nerves, leg-nerves, trunk-nerves, cranial-nerves, medulla]
+---
+
+<Lang en>
+
+The <Term id="central-nervous-system">central nervous system</Term> is the brain and the spinal cord <Num s="S7"></Num>. Everything outside them, the nerves and small knots of nerve cells, belongs to the peripheral nervous system <Num s="S4"></Num>. On the stage the brain sits inside the skull, and the <Term id="spinal-cord">spinal cord</Term> carries on below it, down a canal inside the backbone.
+
+The spinal cord is nerve tissue, not bone. It runs from the base of the skull to about the level of the <Num s="S5">first lumbar vertebra</Num>, in the lower back, so it is shorter than the backbone <Num s="S27"></Num>. Below its end, nerve roots carry on down the canal in a bundle that looks like a horse's tail. <FlyTo preset="spine">Look along the backbone</FlyTo>
+
+From the brain and spinal cord, nerves branch out to every part of the body. A <Term id="nerve">nerve</Term> is a bundle of nerve fibres wrapped in connective tissue <Num s="S4"></Num>: like a cable with many wires inside, it carries many separate signals at once. Some fibres bring messages in from the skin and other parts; others take commands out to the muscles. There are <Num s="S4">12 pairs</Num> of cranial nerves, which leave the brain itself, and <Num s="S4">31 pairs</Num> of spinal nerves, which leave the spinal cord.
+
+The nervous system works with the other body systems. The brainstem, at the base of the brain, holds centres that help control breathing and the heart <Num s="S12"></Num>, which is how your breathing and heartbeat speed up when you run, as in <TopicLink slug="heart-and-lungs" ch="three-systems">Three systems working together</TopicLink>.
+
+<More title={{ en: "Twelve and thirty-one", zh: "12 和 31" }}>
+
+The 31 pairs of spinal nerves are named after the part of the backbone they leave by: <Num s="S4">8</Num> in the neck, <Num s="S4">12</Num> in the chest, <Num s="S4">5</Num> in the lower back, <Num s="S4">5</Num> from the sacrum and <Num s="S4">1</Num> from the tailbone. The 12 pairs of cranial nerves serve mostly the head and neck; the optic nerves for seeing and the nerves for hearing are among them.
+
+</More>
+
+<More title={{ en: "Shorter than the backbone", zh: "比脊柱短" }}>
+
+Because the cord stops in the lower back, the lower spinal nerves have to run down inside the canal before they leave the backbone; that bundle is called the cauda equina, Latin for "horse's tail" <Num s="S5"></Num>. Sources differ a little on where the cord ends: one gives the last thoracic vertebra <Num s="S27"></Num>, another the first lumbar <Num s="S5"></Num>. In this model the drawn cord ends at the first lumbar.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+<Term id="central-nervous-system">中枢神经系统</Term>就是脑和脊髓 <Num s="S7"></Num>。它们以外的一切，神经和一小团一小团的神经细胞，属于周围神经系统 <Num s="S4"></Num>。在台上，脑在颅骨里，<Term id="spinal-cord">脊髓</Term>从脑往下，在脊柱里的一条管道中走。
+
+脊髓是神经组织，不是骨头。它从颅底一直到约<Num s="S5">第一腰椎</Num>的高度，也就是腰部，所以比脊柱短 <Num s="S27"></Num>。脊髓末端以下，神经根在管道里继续往下，聚成一束，看上去像马的尾巴。<FlyTo preset="spine">沿着脊柱看</FlyTo>
+
+神经从脑和脊髓分出去，通到身体各处。一条<Term id="nerve">神经</Term>是一束用结缔组织包着的神经纤维 <Num s="S4"></Num>：像一根电缆里装着很多电线，它能同时传很多不同的信号。有的纤维把皮肤等处的消息送进来，有的把命令送到肌肉。脑神经有 <Num s="S4">12 对</Num>，直接从脑出来；脊神经有 <Num s="S4">31 对</Num>，从脊髓出来。
+
+神经系统和其他系统一起工作。脑底部的脑干里有帮助控制呼吸和心脏的中枢 <Num s="S12"></Num>；跑步时呼吸和心跳会变快，就和它有关，见<TopicLink slug="heart-and-lungs" ch="three-systems">三个系统一起工作</TopicLink>。
+
+<More title={{ en: "Twelve and thirty-one", zh: "12 和 31" }}>
+
+31 对脊神经按它们从脊柱哪一段出来命名：颈部 <Num s="S4">8</Num> 对、胸部 <Num s="S4">12</Num> 对、腰部 <Num s="S4">5</Num> 对、骶骨 <Num s="S4">5</Num> 对、尾骨 <Num s="S4">1</Num> 对。12 对脑神经主要分布在头和颈部；管看的视神经和管听的神经都在其中。
+
+</More>
+
+<More title={{ en: "Shorter than the backbone", zh: "比脊柱短" }}>
+
+因为脊髓在腰部就结束了，下面的脊神经要先在管道里往下走一段才离开脊柱；这一束叫马尾，拉丁文是“马的尾巴” <Num s="S5"></Num>。脊髓在哪里结束，来源说法有一点不同：一个说到最后一节胸椎 <Num s="S27"></Num>，另一个说到第一腰椎 <Num s="S5"></Num>。这个模型里画的脊髓到第一腰椎为止。
+
+</More>
+
+</Lang>

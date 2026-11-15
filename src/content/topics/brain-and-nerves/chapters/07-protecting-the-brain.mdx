@@ -1,0 +1,118 @@
+---
+id: protecting-the-brain
+order: 7
+title: { en: "Protecting the brain and spinal cord", zh: "保护脑和脊髓" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [brain-parts, spinal, nerves, protection, skin-context]
+  hide: [cranial-nerves]
+  labels: [skull, frontal-lobe, dura-folds]
+  camera: { position: [-0.36, 0.71, 0.43], target: [0.0, 0.6, -0.11], fov: 30 }
+  summary:
+    en: "The skull, three thin coverings and a layer of fluid protect the brain; the backbone protects the spinal cord. A helmet adds a layer outside the head."
+    zh: "颅骨、三层薄膜和一层液体保护着脑；脊柱保护着脊髓。头盔在头外再加一层。"
+  beats:
+    - labels: [skull, frontal-lobe, temporal-lobe-r]
+      caption:
+        en: "The brain sits inside the skull, a case of joined bones."
+        zh: "脑在颅骨里，颅骨是几块连在一起的骨头围成的硬壳。"
+    - camera: { position: [-0.74, 0.26, 0.2], target: [-0.85, 0.16, -0.27], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, skin-context, layers-study, study-table]
+      labels: [scalp-layer, skull-layer, dura-layer, arachnoid-layer, csf-space, pia-cortex]
+      caption:
+        en: "Between bone and brain are three thin coverings and a layer of clear fluid that cushions the brain. These layers are drawn thicker than they really are."
+        zh: "骨头和脑之间有三层薄膜，膜之间有一层透明的液体，给脑当软垫。这里各层画得比真实厚。"
+    - cutaway: midline
+      view: assembled
+      camera: { position: [1.0, 0.5, 0.05], target: [0.0, 0.38, -0.14], fov: 30 }
+      labels: [ventricles, spinal-dura, spinal-cord]
+      caption:
+        en: "The fluid is made inside spaces in the brain, about half a litre a day. Lower down, the ring-shaped bones of the backbone surround the spinal cord."
+        zh: "这种液体在脑里的空腔中产生，每天约半升。往下，脊柱一节节环形的骨头围住脊髓。"
+    - cutaway: midline
+      view: assembled
+      camera: { position: [0.52, 0.66, 0.12], target: [0.0, 0.6, -0.11], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, skin-context, helmet]
+      labels: [helmet-shell, helmet-liner, helmet-strap]
+      caption:
+        en: "A helmet adds another layer outside the head: a hard shell and a foam lining that crushes to soak up a knock. In crashes, riders wearing helmets had far fewer serious head injuries."
+        zh: "头盔在头外再加一层：硬外壳和受撞时会被压扁、吸收撞击的泡沫内衬。研究发现，发生碰撞时戴头盔的人头部重伤少得多。"
+    - view: assembled
+      camera: { position: [-0.36, 0.71, 0.43], target: [0.0, 0.6, -0.11], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, skin-context, helmet]
+      labels: [helmet-shell, helmet-strap]
+      caption:
+        en: "In Singapore, cyclists must wear a helmet on the road. Wear one, strap fastened, whenever you ride a bicycle or scooter or skate."
+        zh: "在新加坡，在马路上骑脚踏车必须戴头盔。骑脚踏车、滑板车或溜冰时，都要戴好头盔、扣好带子。"
+  index:
+    parts: [skull, dura-folds, ventricles, vertebral-column, spinal-dura, helmet-shell, helmet-liner, csf-space]
+---
+
+<Lang en>
+
+The brain is soft, and it is well wrapped. Outside it is the skull, a hard case made of bones that fit together; how they join is in <TopicLink slug="bones-and-joints" ch="connected-skeleton">The connected skeleton</TopicLink>. Between the bone and the brain are three coverings, the <Term id="meninges">meninges</Term>: the tough dura mater outside, the arachnoid, which looks like a cobweb, and the thin pia mater, tightly bound to the surface of the brain <Num s="S5"></Num>.
+
+The space under the arachnoid is filled with <Term id="cerebrospinal-fluid">cerebrospinal fluid</Term> <Num s="S5"></Num>, a clear liquid that acts as a buffer between the brain and the skull <Num s="S7"></Num>. It is made mainly in the spaces inside the brain, by the choroid plexus, at about <Num s="S28, S29">500 millilitres a day</Num>, yet there is only about <Num s="S28">125 to 150 millilitres</Num> of it at any time, so it is replaced several times a day. <FlyTo preset="bench">See the layers on the bench</FlyTo>
+
+<Figure src="figures/brain-and-nerves-protection-layers" invert={false} alt={{"en": "Head-covering layers with porous skull between compact tables, meninges and pia following cortical folds.", "zh": "头部保护层剖面：颅骨两层致密骨夹松质骨，脑膜下的软脑膜随皮层沟回起伏。"}} caption={{"en": "Schematic section through the scalp, skull, meninges and folded cerebral cortex.", "zh": "头皮、颅骨、脑膜与大脑皮层沟回的剖面示意。"}} />
+
+Lower down, the bones of the backbone stack up so that the holes through them make a canal, and the spinal cord runs inside it with its own tough covering <Num s="S5"></Num>.
+
+A helmet adds another layer outside the head. Its foam lining crushes in a fall or crash and absorbs much of the energy of the knock, so it does not all reach the head <Num s="S36"></Num>. In studies of injured cyclists, wearing a helmet went with far fewer serious head injuries <Num s="S35"></Num>. In Singapore, cyclists must wear a helmet on the road <Num s="S34"></Num>. Wear one, with the strap fastened, whenever you ride a bicycle or a scooter or skate. If you hit your head, tell an adult straight away.
+
+<More title={{ en: "What the numbers say", zh: "数字怎么说" }}>
+
+A review of <Num s="S35">40</Num> studies of more than <Num s="S35">64,000</Num> injured cyclists found that wearing a helmet went with lower odds of head injury (odds ratio <Num s="S35">0.49</Num>), serious head injury (<Num s="S35">0.31</Num>) and fatal head injury (<Num s="S35">0.35</Num>). These are links found in injury records, not an experiment. No helmet design has been shown to prevent concussion <Num s="S36"></Num>.
+
+</More>
+
+<More title={{ en: "The rules", zh: "规定" }}>
+
+On the road, cyclists must wear a helmet <Num s="S34"></Num>. Children under <Num s="S34">16</Num> must not ride an e-scooter on cycling paths unless an adult aged at least <Num s="S34">21</Num> is supervising, and must not ride a power-assisted bicycle on cycling paths or roads even with an adult <Num s="S34"></Num>.
+
+</More>
+
+<More title={{ en: "Why the fluid matters", zh: "液体的作用" }}>
+
+The brain floats in this fluid, which limits knocks against the skull <Num s="S7"></Num>. It is made fresh all the time and drains away, so the fluid round the brain is replaced several times a day <Num s="S28, S29"></Num>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+脑很软，但包得很好。最外面是颅骨，由几块拼在一起的骨头围成一个硬壳；骨头怎样连接，见<TopicLink slug="bones-and-joints" ch="connected-skeleton">连成一体的骨骼</TopicLink>。骨头和脑之间有三层被膜，叫<Term id="meninges">脑膜</Term>：外层是坚韧的硬膜，中间是像蛛网一样的蛛网膜，最里面是紧贴在脑表面的薄薄的软膜 <Num s="S5"></Num>。
+
+蛛网膜下面的空间充满<Term id="cerebrospinal-fluid">脑脊液</Term> <Num s="S5"></Num>，它是一种透明的液体，在脑和颅骨之间当缓冲 <Num s="S7"></Num>。它主要在脑里的空腔中由脉络丛产生，每天约 <Num s="S28, S29">500 毫升</Num>，但任何时候都只有约 <Num s="S28">125 到 150 毫升</Num>，所以一天要更换好几次。<FlyTo preset="bench">看工作台上的几层</FlyTo>
+
+<Figure src="figures/brain-and-nerves-protection-layers" invert={false} alt={{"en": "Head-covering layers with porous skull between compact tables, meninges and pia following cortical folds.", "zh": "头部保护层剖面：颅骨两层致密骨夹松质骨，脑膜下的软脑膜随皮层沟回起伏。"}} caption={{"en": "Schematic section through the scalp, skull, meninges and folded cerebral cortex.", "zh": "头皮、颅骨、脑膜与大脑皮层沟回的剖面示意。"}} />
+
+往下，脊柱的骨头一节节叠起来，中间的孔连成一条管道，脊髓就在里面，外面还有自己的一层坚韧的膜 <Num s="S5"></Num>。
+
+头盔在头外再加一层。摔倒或碰撞时，它的泡沫内衬被压扁，吸收掉撞击的很多能量，不让它全部落到头上 <Num s="S36"></Num>。对受伤骑车人的研究发现，戴头盔的人头部重伤少得多 <Num s="S35"></Num>。在新加坡，在马路上骑脚踏车必须戴头盔 <Num s="S34"></Num>。骑脚踏车、滑板车或溜冰时，都要戴好头盔、扣好带子。如果撞到了头，要马上告诉大人。
+
+<More title={{ en: "What the numbers say", zh: "数字怎么说" }}>
+
+一项综述汇总了 <Num s="S35">40</Num> 项研究、<Num s="S35">64,000</Num> 多名受伤的骑车人，发现戴头盔与较低的头部受伤几率（比值比 <Num s="S35">0.49</Num>）、重度头伤（<Num s="S35">0.31</Num>）和致命头伤（<Num s="S35">0.35</Num>）相关。这些是受伤记录里找到的关联，不是实验。还没有哪种头盔被证明能防止脑震荡 <Num s="S36"></Num>。
+
+</More>
+
+<More title={{ en: "The rules", zh: "规定" }}>
+
+在马路上骑脚踏车必须戴头盔 <Num s="S34"></Num>。未满 <Num s="S34">16</Num> 岁的人不得在脚踏车道上骑电动滑板车，除非有至少 <Num s="S34">21</Num> 岁的成人监督；也不得在脚踏车道和马路上骑电动助力脚踏车，即使有成人陪同 <Num s="S34"></Num>。
+
+</More>
+
+<More title={{ en: "Why the fluid matters", zh: "液体的作用" }}>
+
+脑浮在这种液体里，它减少脑撞到颅骨 <Num s="S7"></Num>。它不停地产生、又不停地流走，所以脑周围的液体一天要更换好几次 <Num s="S28, S29"></Num>。
+
+</More>
+
+</Lang>

@@ -1,0 +1,134 @@
+---
+id: neurons-and-signals
+order: 4
+title: { en: "Neurons and signals", zh: "神经元与信号" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [neuron-study, synapse-study, try-it, study-table, signals-neuron, chemical-signals]
+  labels: [neuron-body, axon, myelin]
+  camera: { position: [-0.62, 0.62, 1.08], target: [-0.88, 0.19, 0.02], fov: 30 }
+  summary:
+    en: "A neuron has a cell body, short dendrites and one long axon. Its signal is a change that travels along the cell's outer layer; myelin makes it faster. At the end, a chemical carries the signal across a narrow gap to the next cell."
+    zh: "神经元有细胞体、短的树突和一条长的轴突。它的信号是沿细胞外层传过去的变化；髓鞘让它更快。到了末端，化学物质带着信号跨过一道窄缝，传给下一个细胞。"
+  sim:
+    set: { fibre: thick-myelin }
+    try:
+      vary: fibre
+      keep: [{ en: "Same one-metre nerve", zh: "同一条一米长的神经" }]
+      observe: [speed, time-ms, slow]
+      record: { chart: { y: time-ms } }
+      predict:
+        prompt:
+          en: "Change from the thick, wrapped fibre to the thin, bare one. The time over one metre…"
+          zh: "从粗的、有髓鞘的纤维换成细的、没有髓鞘的。走一米用的时间……"
+        start: { fibre: thick-myelin }
+        change: { fibre: thin-bare }
+        observe: time-ms
+        options:
+          - { id: longer, label: { en: "Gets longer", zh: "变长" }, means: more }
+          - { id: shorter, label: { en: "Gets shorter", zh: "变短" }, means: less }
+          - { id: same, label: { en: "Stays the same", zh: "不变" }, means: same }
+  beats:
+    - camera: { position: [-0.95, 0.36, 0.85], target: [-0.95, 0.15, 0.0], fov: 30 }
+      run: false
+      labels: [neuron-body, dendrites, axon, axon-terminals]
+      caption:
+        en: "A nerve holds many long fibres. On the bench is one nerve cell, enlarged thousands of times."
+        zh: "一条神经装着很多长纤维；工作台上是放大了几千倍的一个神经细胞。"
+    - camera: { position: [-1.0, 0.26, 0.42], target: [-1.03, 0.15, 0.0], fov: 30 }
+      run: false
+      labels: [dendrites, neuron-body, axon]
+      caption:
+        en: "Short branches called dendrites pick up signals. The cell body holds the nucleus. One long axon carries the signal away. Here it is drawn short; a real one can reach about a metre."
+        zh: "短的分支叫树突，接收信号；细胞体里有细胞核；一条长的轴突把信号送出去。这里画短了，真实的可以长到约一米。"
+    - camera: { position: [-0.9, 0.26, 0.45], target: [-0.88, 0.15, 0.0], fov: 30 }
+      labels: [axon, myelin]
+      caption:
+        en: "The signal is a change that moves along the cell's thin outer layer as charged particles pass in and out. A fatty wrapping called myelin lets it jump from gap to gap, which is faster."
+        zh: "信号是带电的微粒进出细胞外层膜造成的变化，一段段往前传。叫髓鞘的脂质外套让它在缝隙之间一跳一跳地走，所以更快。"
+    - camera: { position: [-0.87, 0.36, 0.86], target: [-0.87, 0.12, 0.36], fov: 30 }
+      labels: [one-metre-nerve-thick]
+      caption:
+        en: "In this model a thick fibre with myelin carries a signal at 100 metres per second, one metre in a hundredth of a second. A thin bare fibre at 1 metre per second takes a whole second. Both are slowed down here."
+        zh: "在这个模型里，粗的、有髓鞘的纤维每秒传 100 米，一米只要百分之一秒；细的、没有髓鞘的每秒 1 米，要整整一秒。画面里两种都放慢了。"
+    - camera: { position: [-0.6, 0.2, 0.3], target: [-0.62, 0.13, 0.0], fov: 30 }
+      labels: [synapse-sending, vesicles, synapse-receiving]
+      caption:
+        en: "At the end there is a tiny gap. The signal makes small sacs release a chemical, which crosses the gap and starts a new signal in the next cell, in about a thousandth of a second."
+        zh: "末端有一道很窄的缝。信号让小泡放出化学物质，跨过缝，让下一个细胞产生新的信号，大约要千分之一秒。"
+  index:
+    parts: [neuron-body, dendrites, axon, myelin, axon-terminals, synapse-sending, vesicles, synapse-receiving, arm-nerves]
+---
+
+<Lang en>
+
+A nerve in your arm holds many long fibres, each part of one nerve cell. A nerve cell, or <Term id="neuron">neuron</Term>, is a kind of animal cell, with a cell membrane, cytoplasm and a nucleus, as in <TopicLink slug="cells" ch="animal-cell-parts">The parts of an animal cell</TopicLink>. On the bench is one neuron drawn about <Num s="S1">4,000 times</Num> life size. Its short branches, the <Term id="dendrite">dendrites</Term>, take in signals from other cells; the cell body holds the nucleus; and one long <Term id="axon">axon</Term> carries the signal away <Num s="S6, S23"></Num>. Some axons reach up to about <Num s="S24">1 metre</Num>, from the base of the spine to the big toe; the one on the bench is drawn short. <FlyTo preset="bench">Look at the bench</FlyTo>
+
+The signal is not electricity flowing down a wire. It is a brief electrical change at the cell's outer layer: tiny openings let charged particles move in and out, and the change passes along the membrane bit by bit <Num s="S23"></Num>. Many axons are wrapped in <Term id="myelin">myelin</Term>, in segments with bare gaps between them; the signal seems to jump from gap to gap, which is faster, and thicker axons are faster too <Num s="S21"></Num>.
+
+<Figure src="figures/brain-and-nerves-synapse" alt={{"en": "A synapse section with vesicles above a narrow gap and receptors on the lower membrane.", "zh": "突触剖面：小泡在上方末梢内，窄缝下方的膜上排列着受体。"}} caption={{"en": "Schematic synapse: chemical signals cross a gap between separate cell membranes.", "zh": "突触示意：化学信号跨过两层细胞膜之间的窄缝。"}} />
+
+<Figure src="figures/brain-and-nerves-neuron" alt={{"en": "A motor neuron with six branching dendrites, one myelinated axon and five terminal branches.", "zh": "运动神经元：六根分叉树突、一根有分节髓鞘的轴突，以及五个末梢分支。"}} caption={{"en": "Schematic motor neuron: dendrites meet the cell body and one axon extends to terminal branches.", "zh": "运动神经元示意：树突连着细胞体，一根轴突延伸到末梢分支。"}} />
+
+How fast? Fibres with myelin carry signals at up to about <Num s="S20">150 metres per second</Num>; without myelin they rarely reach <Num s="S20">10 metres per second</Num>. Use the card to compare two model fibres over one metre: <Num s="S1">10 milliseconds</Num> for the thick, wrapped one and <Num s="S1">1,000 milliseconds</Num> for the thin, bare one.
+
+At its end the axon meets the next cell at a <Term id="synapse">synapse</Term>. At most synapses there is a narrow gap. The signal makes the ending release a chemical, which crosses the gap and binds to the next cell, starting a new signal there; the crossing takes about <Num s="S22">0.5 to 1 millisecond</Num>.
+
+<More title={{ en: "Not like electricity in a wire", zh: "不像电线里的电" }}>
+
+A nerve is sometimes compared to a cable of wires, and that is a fair picture of its shape: a bundle of separate fibres. The signal itself is different from the electric current in a wire. In a nerve fibre the change happens at the membrane and is made again at each point as it passes <Num s="S23"></Num>, and even the fastest fibres carry it at only about <Num s="S20">150 metres per second</Num>.
+
+</More>
+
+<More title={{ en: "How fast, really", zh: "到底有多快" }}>
+
+The fastest nerve fibres, thick and wrapped in myelin, reach about <Num s="S20">150 metres per second</Num>; thin fibres without myelin are slower than about <Num s="S20">10 metres per second</Num>. The model's two fibres, <Num s="S1">100</Num> and <Num s="S1">1</Num> metre per second, sit inside these ranges. The thick fibre is slowed <Num s="S1">200 times</Num> on the screen, the thin one <Num s="S1">2 times</Num>, so both take two seconds to cross.
+
+</More>
+
+<More title={{ en: "The gap", zh: "那道窄缝" }}>
+
+The chemical synapse is the most common kind, with a gap the chemical must cross <Num s="S22"></Num>. The gap is only about <Num s="S23">20 to 40 nanometres</Num> wide, far too narrow to see; on the bench it is drawn much wider.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+手臂里的一条神经装着很多长纤维，每条都是一个神经细胞的一部分。神经细胞，也叫<Term id="neuron">神经元</Term>，是一种动物细胞，有细胞膜、细胞质和细胞核，见<TopicLink slug="cells" ch="animal-cell-parts">动物细胞的结构</TopicLink>。工作台上是一个放大约 <Num s="S1">4,000 倍</Num>的神经元。它短的分支叫<Term id="dendrite">树突</Term>，接收其他细胞的信号；细胞体里有细胞核；一条长的<Term id="axon">轴突</Term>把信号送出去 <Num s="S6, S23"></Num>。有的轴突长达约 <Num s="S24">1 米</Num>，从脊柱下端一直到大脚趾；台上这一条画短了。<FlyTo preset="bench">看工作台</FlyTo>
+
+信号不是沿电线流动的电。它是细胞外层膜上一个短暂的电变化：膜上的小开口让带电的微粒进进出出，这个变化沿着膜一段一段往前传 <Num s="S23"></Num>。很多轴突外面包着一段段的<Term id="myelin">髓鞘</Term>，段与段之间有裸露的缝隙；信号像是从一个缝隙跳到下一个，所以更快，轴突越粗也越快 <Num s="S21"></Num>。
+
+<Figure src="figures/brain-and-nerves-synapse" alt={{"en": "A synapse section with vesicles above a narrow gap and receptors on the lower membrane.", "zh": "突触剖面：小泡在上方末梢内，窄缝下方的膜上排列着受体。"}} caption={{"en": "Schematic synapse: chemical signals cross a gap between separate cell membranes.", "zh": "突触示意：化学信号跨过两层细胞膜之间的窄缝。"}} />
+
+<Figure src="figures/brain-and-nerves-neuron" alt={{"en": "A motor neuron with six branching dendrites, one myelinated axon and five terminal branches.", "zh": "运动神经元：六根分叉树突、一根有分节髓鞘的轴突，以及五个末梢分支。"}} caption={{"en": "Schematic motor neuron: dendrites meet the cell body and one axon extends to terminal branches.", "zh": "运动神经元示意：树突连着细胞体，一根轴突延伸到末梢分支。"}} />
+
+有多快？有髓鞘的纤维最快约每秒 <Num s="S20">150 米</Num>；没有髓鞘的很少达到每秒 <Num s="S20">10 米</Num>。用卡片比较模型里的两条一米长的纤维：粗的、有髓鞘的要 <Num s="S1">10 毫秒</Num>，细的、没有髓鞘的要 <Num s="S1">1,000 毫秒</Num>。
+
+轴突末端和下一个细胞在<Term id="synapse">突触</Term>相接。大多数突触有一道窄缝。信号让末梢放出一种化学物质，它跨过缝，和下一个细胞结合，在那里产生新的信号；跨过去约要 <Num s="S22">0.5 到 1 毫秒</Num>。
+
+<More title={{ en: "Not like electricity in a wire", zh: "不像电线里的电" }}>
+
+人们有时把神经比作一根装着很多电线的电缆。用来形容它的形状没有错：它是一束各自分开的纤维。但信号本身和电线里的电流不同。在神经纤维里，变化发生在膜上，每经过一处都要重新产生一次 <Num s="S23"></Num>；就连最快的纤维，也只有约每秒 <Num s="S20">150 米</Num>。
+
+</More>
+
+<More title={{ en: "How fast, really", zh: "到底有多快" }}>
+
+最快的神经纤维又粗又有髓鞘，约每秒 <Num s="S20">150 米</Num>；没有髓鞘的细纤维比每秒约 <Num s="S20">10 米</Num>还慢。模型里两条纤维每秒 <Num s="S1">100</Num> 米和 <Num s="S1">1</Num> 米，都在这个范围里。画面上粗纤维放慢了 <Num s="S1">200 倍</Num>，细纤维放慢了 <Num s="S1">2 倍</Num>，所以两条都用两秒走完。
+
+</More>
+
+<More title={{ en: "The gap", zh: "那道窄缝" }}>
+
+化学突触是最常见的一种，有一道要靠化学物质跨过去的缝 <Num s="S22"></Num>。这道缝只有约 <Num s="S23">20 到 40 纳米</Num>宽，窄得看不见；工作台上把它画宽了很多。
+
+</More>
+
+</Lang>

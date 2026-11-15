@@ -1,0 +1,123 @@
+---
+id: parts-of-the-brain
+order: 2
+title: { en: "The parts of the brain", zh: "脑的几个部分" }
+sensitive: false
+state:
+  view: assembled
+  explode: 0
+  part: null
+  run: false
+  cutaway: none
+  layers: [brain-parts, spinal, nerves]
+  hide: [cranial-nerves, insula, eye-markers, ear-marker]
+  highlight:
+    custom:
+      frontal-lobe: "token:brain-frontal"
+      frontal-lobe-r: "token:brain-frontal"
+      parietal-lobe: "token:brain-parietal"
+      parietal-lobe-r: "token:brain-parietal"
+      temporal-lobe: "token:brain-temporal"
+      temporal-lobe-r: "token:brain-temporal"
+      occipital-lobe: "token:brain-occipital"
+      occipital-lobe-r: "token:brain-occipital"
+      cerebellum: "token:brain-cerebellum"
+      midbrain: "token:brain-stem"
+      pons: "token:brain-stem"
+      medulla: "token:brain-stem"
+  labels: [frontal-lobe, parietal-lobe, temporal-lobe]
+  camera: { position: [0.52, 0.64, -0.1], target: [0.0, 0.585, -0.13], fov: 30 }
+  summary:
+    en: "The cerebrum has a left and a right half, each with four lobes. Below and behind it are the cerebellum and the brainstem. Each part has jobs it mainly takes part in, and most tasks use several parts at once."
+    zh: "大脑分左右两半，每一半有四个叶。它的后下方是小脑和脑干。每个部分都有它主要参与的事，大多数事要好几个部分一起做。"
+  beats:
+    - labels: [frontal-lobe, parietal-lobe, temporal-lobe, occipital-lobe, cerebellum]
+      caption:
+        en: "The largest part is the cerebrum. Its wrinkled surface is divided into four lobes on each side."
+        zh: "最大的部分是大脑，表面有很多褶皱，每一侧分成四个叶。"
+    - layers: [brain-parts]
+      labels: [frontal-lobe, parietal-lobe, occipital-lobe]
+      caption:
+        en: "The cerebrum has a left and a right half, joined by a thick band of nerve fibres. Each half mainly works with the opposite side of the body."
+        zh: "大脑分左右两半，中间由一大束神经纤维连起来；每一半主要和身体的另一侧打交道。"
+    - cutaway: midline
+      camera: { position: [0.42, 0.63, -0.05], target: [0.0, 0.6, -0.13], fov: 30 }
+      labels: [cerebellum, midbrain, pons, medulla, corpus-callosum]
+      caption:
+        en: "Behind and below sits the cerebellum, which keeps movements smooth. The brainstem joins the brain to the spinal cord and keeps breathing and the heartbeat going."
+        zh: "后下方是小脑，让动作平稳协调；脑干把脑和脊髓连起来，让呼吸和心跳一直进行。"
+    - view: exploded
+      explode: 1
+      labels: [frontal-lobe, parietal-lobe, temporal-lobe, occipital-lobe]
+      caption:
+        en: "The front lobe helps plan and start movements, the top lobe receives touch, the side lobe helps with hearing and memory, and the back lobe handles what the eyes send."
+        zh: "额叶参与计划和发出动作，顶叶接收触觉，颞叶参与听和记忆，枕叶处理眼睛送来的信号。"
+    - run: true
+      layers: [brain-parts, spinal, nerves, signals-reaction]
+      labels: [occipital-lobe, frontal-lobe, cerebellum]
+      caption:
+        en: "Most tasks use several areas at once. Catching a ball needs seeing, planning, moving and balance together."
+        zh: "大多数事要好几个区一起做：接一个球，要看、要计划、要动，还要保持平衡。"
+  index:
+    parts: [frontal-lobe, parietal-lobe, temporal-lobe, occipital-lobe, corpus-callosum, cerebellum, midbrain, pons, medulla]
+---
+
+<Lang en>
+
+The largest part of the brain is the <Term id="cerebrum">cerebrum</Term>. Its surface is folded into ridges and grooves; spread flat, the outer layer of both halves would cover about <Num s="S28">2,500 square centimetres</Num>, the area of a square 50 centimetres on each side. The colours on the stage mark its four <Term id="lobe">lobes</Term> on each side, and the cerebellum and brainstem below.
+
+The cerebrum has a left and a right half, joined by the <Term id="corpus-callosum">corpus callosum</Term>, a thick band of nerve fibres along which information passes all the time <Num s="S10"></Num>. Each half mainly works with the opposite side of the body: most of the fibres that carry movement commands cross to the other side on their way down to the spinal cord <Num s="S12"></Num>, so the left half moves the right hand.
+
+The frontal lobe takes part in planning, reasoning and solving problems, and its back strip starts voluntary movements <Num s="S8, S11"></Num>. The parietal lobe takes in touch, warmth and pain <Num s="S8"></Num>. The temporal lobe helps with hearing and with forming memories, and the occipital lobe at the back handles what the eyes send <Num s="S8"></Num>. No lobe does only one job, and most tasks use several areas together.
+
+Behind and below the cerebrum is the <Term id="cerebellum">cerebellum</Term>, which coordinates the muscles so movements are smooth and helps keep balance <Num s="S9, S13"></Num>. In front of it, the <Term id="brainstem">brainstem</Term> joins the brain to the spinal cord and keeps vital jobs such as breathing and the heartbeat going <Num s="S9"></Num>. <FlyTo preset="brain">Look at the whole brain</FlyTo>
+
+<More title={{ en: "Most of the neurons are in the small part", zh: "大部分神经元在小的那一块" }}>
+
+An adult brain has about <Num s="S15">86 billion</Num> neurons. Only about <Num s="S15">19 %</Num> of them are in the cerebral cortex. The cerebellum is only about a tenth of the brain's mass, but it holds about <Num s="S15">69 billion</Num>, about four in five.
+
+</More>
+
+<More title={{ en: "Hungry for energy", zh: "很耗能量" }}>
+
+In an average adult the brain is about <Num s="S16">2 %</Num> of the body's weight, yet it uses about <Num s="S16">20 %</Num> of the oxygen, and so of the energy, the body takes in.
+
+</More>
+
+<More title={{ en: "Deeper parts not shown", zh: "深处没画的部分" }}>
+
+Deep inside the brain there are many more structures, and fibres that join the lobes to each other. They are not drawn here. The corpus callosum is drawn as a simple arch.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+脑最大的部分是<Term id="cerebrum">大脑</Term>。它的表面折成一条条隆起和沟；把两半的外层展平，约有 <Num s="S28">2,500 平方厘米</Num>，相当于边长 50 厘米的正方形。台上的颜色标出它每一侧的四个<Term id="lobe">叶</Term>，以及下方的小脑和脑干。
+
+大脑分左右两半，由<Term id="corpus-callosum">胼胝体</Term>连起来；它是一大束神经纤维，信息一直沿它在两边之间传递 <Num s="S10"></Num>。每一半主要和身体的另一侧打交道：传动作命令的纤维大多在下到脊髓的路上交叉到对侧 <Num s="S12"></Num>，所以是左半边让右手动。
+
+额叶参与计划、推理和解决问题，它最后面的一条区域发起随意动作 <Num s="S8, S11"></Num>。顶叶接收触觉、冷热和痛觉 <Num s="S8"></Num>。颞叶参与听和形成记忆，最后面的枕叶处理眼睛送来的信号 <Num s="S8"></Num>。没有哪一叶只做一件事，大多数事要好几个区一起做。
+
+大脑后下方是<Term id="cerebellum">小脑</Term>，它协调肌肉，让动作平稳，也帮助保持平衡 <Num s="S9, S13"></Num>。小脑前面的<Term id="brainstem">脑干</Term>把脑和脊髓连起来，让呼吸、心跳这些维持生命的事一直进行 <Num s="S9"></Num>。<FlyTo preset="brain">看整个脑</FlyTo>
+
+<More title={{ en: "Most of the neurons are in the small part", zh: "大部分神经元在小的那一块" }}>
+
+成年人的脑约有 <Num s="S15">860 亿</Num>个神经元，只有约 <Num s="S15">19%</Num> 在大脑皮层。小脑只占脑质量的约十分之一，却有约 <Num s="S15">690 亿</Num>个，约占五分之四。
+
+</More>
+
+<More title={{ en: "Hungry for energy", zh: "很耗能量" }}>
+
+一般成年人的脑约占体重的 <Num s="S16">2%</Num>，却用掉身体吸进的约 <Num s="S16">20%</Num> 的氧气，也就是约 20% 的能量。
+
+</More>
+
+<More title={{ en: "Deeper parts not shown", zh: "深处没画的部分" }}>
+
+脑的深处还有很多结构，还有把各个叶连起来的纤维，这里都没有画。胼胝体画成一道简单的弧。
+
+</More>
+
+</Lang>

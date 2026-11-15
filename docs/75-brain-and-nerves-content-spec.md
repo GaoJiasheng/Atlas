@@ -950,3 +950,97 @@ SpaceScene / Model3DStage，paper 默认、cinema 可切。原型：`archetypes.
 | K10 | 显微工位是示意，可能被读成真实比例 | 误解大小 | `note`、组级 `scale` 的"×N"、detail 第三段、00 第 2 拍字幕 |
 | K11 | 头盔与骑车章被读成"鼓励骑电动滑板车" | 与 LTA 年龄规定冲突 | 只写脚踏车、（踢的）滑板车、溜冰；电动设备只在细看说年龄规定 |
 | K12 | 反射图是 AI 最容易画错的关系图 | 前后根接反等 | 默认代码绘制 + 几何断言 |
+
+---
+
+## 15. 施工记录（2026-11-15，Claude，分支 `claude/brain-and-nerves`）
+
+### 15.1 来源闸门（G2）与 Gavin 的决定
+
+第一轮来源核（`scripts/anatomy/brain-nerves/provenance.py`，细节 `INVENTORY.md`、`provenance.md`）：
+
+| 结构 | 结论 | 依据（相似变换配准后的采样距离） |
+|---|---|---|
+| 大脑皮层（每侧 63 个 Destrieux 分区） | **Brainder，确认** | 左侧 12 个大分区各自与 Brainder `lh.pial` 同名分区吻合（平均 0.97–1.78 mm，p95 2.7–5.3 mm），与镜像过来的 `rh` 同名分区明显更差（平均 2.2–4.8 mm，p95 7–21 mm）；右半球是左半球的镜像 |
+| 脑桥、延髓、中脑 | **BodyParts3D，确认** | 平均 0.21–0.28 mm |
+| Z-Anatomy 小脑（31 个小叶） | **认不出** | 与 BP3D 小脑平均 2.79 mm、p95 8.12 mm；与 Brainder 皮层下结构（Gavin 批准加下）的小脑放到皮层的位置后平均 5.3 mm，重新拟合也不比镜像对照好（2.22 对 2.19 mm） |
+| Z-Anatomy 脊髓外形 | **认不出** | BP3D 4.0 只有 35 mm 的颈延交界短段 |
+| 颅神经 | Dundee CN（CC BY 4.0）/ Z-Anatomy | 可并入，署名 |
+| 内耳、白质纤维束、胼胝体 | 排除 | NC-SA / 许可不明 |
+
+Gavin（2026-11-15）：先下载 Brainder 皮层下结构比对小脑（方案 4），不成就用 **BodyParts3D 4.0 小脑**（一整块、没有小叶细褶）并把**脊髓做成程序化**（方案 2）；任何情况下不用认不出来源的 Z-Anatomy 小脑和脊髓外形。照此施工：小脑 = BP3D FMA67944，用脑桥 + 延髓拟合出的 BP3D 变换摆放；脊髓 = `parts.json` 里沿硬脊膜中心线的 `sweep`（`cord.json`），末端在第一腰椎椎体中部（S5）。
+
+### 15.2 网格与预算
+
+- `public/models/brain-and-nerves.glb`：**2,613,080 B**、**293,328 三角形**、40 个节点（`optimize.ts --topic brain-nerves` 静态路径，meshopt + 量化）；页面绘制见 15.6。
+- 皮层不减面（来源每半球约 55 k 三角形，FreeSurfer 表面本已很轻；沟回保持 Brainder 原样）；按叶切开，分界沟按最近的回分面，各叶边界顶点共用、法线按整个半球算（无亮缝）。
+- G3 颅骨配准：大脑整体按其中心均匀缩放 **0.985**（只有这一个参数，记在 `organs.json`），穿进骨 1–8 mm 的顶点从 569 降到 188（56,712 个中的 0.33%），其余多为薄骨处最近点判定的伪影（`fit.json`）。没有做非均匀变形。
+- 右前臂与手、右前臂神经以肘地标（肱骨远端 30 mm 内最内、最外两点的中点）为界拆开；`withdrawn` 姿态绕该点转 20°（欧拉角近似，肘轴与 x 轴差约 8°）。肱二头肌带直线 `_U` / `_FIBRE`（起点：长头 `.or` 标记，止点：`Biceps brachii muscle.er`）；`optimize_static.ts` 为此放行 `role: muscle` 的 `_FIBRE`，并加了可选 `staticNote`（署名句不再写“无纤维”）。
+- 路线：神经段沿网格（3 mm 体素图上的最短路），脑内、脊髓内、神经与脊髓之间是示意曲线，`routes.json` 逐段标 `schematic`。臂丛没有外侧束、内侧束对象，路线在缺口处桥接（≤ 60 mm，按 3 倍代价）。
+
+### 15.3 与 spec 的差别（施工时的决定）
+
+- 尺子接落的档位：引擎的 step 控件最多 24 档，改为 3–20 cm 每 1 cm、22–30 cm 每 2 cm（23 档）；单测钉 5 → 101、20 → 202、26 → 230、30 → 247 ms。
+- 反射动作不用循环动画，改为 T5 的 `stop` 绑定姿态（≥ 5 → `withdrawn`，0.35 s 过渡），避免第 0 步时流和手臂错位。
+- 不做 E-BN2 跳跃流（可选），用普通流 + 字幕。
+- 分区颜色：引擎已有章 / 拍的 `highlight.custom`，第 02 章与第 03 章第 2 拍按零件打开，其余章中性组织色；**未改引擎**。
+- 眼标记、内耳标记为程序化小球 / 小环（眼和内耳的网格不用）；胼胝体为程序化弧。
+- 封面与 4 张章图从 Codex 提交 `96d9a621` 取来（webp、生成脚本、`illustration-manifest.jsonl`），`topic.yaml` 写 `illustration: brain-and-nerves`、`status: published`；章图在第 04、05、07 章，alt 与图注照 `brain-and-nerves-captions.json`，反射弧与保护层两张 `invert={false}`。生成脚本依赖 `scripts/figures/continental-drift-plate.ts`（从 main 取同一文件）。
+
+### 15.4 事实（读原文；OpenStax 全部不用）
+
+Gavin 指示不引用 OpenStax（其页面禁止生成式 AI 摄取）。原 P4–P9、P30 的事实全部改用其他来源或删去：
+
+| 事实 | 现在的来源 | 处理 |
+|---|---|---|
+| 中枢 / 周围、神经 = 纤维束、12 / 31 对、背根神经节 | SEER（S4）、QBI（S7） | 保留 |
+| 脊髓到第一腰椎、马尾、三层脑膜、蛛网膜下腔有脑脊液 | SEER（S5）；Chudler 说到最后一节胸椎（S27），并列 | 保留，正文写两说 |
+| “出生后一两年脊髓不再明显变长” | 没有读到可读的来源 | **删** |
+| 中央前回 = 运动、中央后回 = 躯体感觉 | Neuroscience Online（S11） | 保留 |
+| 各叶参与的事 | QBI（S8） | “做决定”改“推理和解决问题” |
+| 语言偏左（约 96%）、布罗卡区 | Neuroscience Online（S14） | 保留 |
+| 胼胝体 | QBI（S10） | 保留 |
+| 小脑协调、平衡、约 10% 体积 | QBI（S9）、Neuroscience Online（S13） | “比较指令与反馈”**删**（来源只作推测） |
+| 脑桥 / 延髓管呼吸心跳、网状结构与睡醒 | 延髓：S12；脑干整体：S9；网状结构：Faraguna 2019（S38） | “脑桥参与调节呼吸”**删**（只读到延髓） |
+| 对侧控制 | S12（皮质脊髓纤维越中线） | 保留，不写“在延髓” |
+| 皮层展平约 1 m² | Chudler：约 2,500 cm²（S28） | **改为 2,500 cm²** |
+| 神经元结构、郎飞结 | SEER（S6）、QBI（S23） | 保留 |
+| 跳跃式传导、越粗越快 | BrainFacts（S21） | 保留 |
+| 传导速度 | Whitmer LibreTexts 实验（S20，CC BY-SA 4.0，非 OpenStax）：有髓鞘最快约 150 m/s，无髓鞘很少达 10 m/s | 下限 0.5 m/s **删** |
+| 化学突触、约 0.5–1 ms 延迟、间隙 20–40 nm | Neuroscience Online（S22）、QBI（S23） | 改为“约 0.5 到 1 毫秒” |
+| 轴突约 1 m | BioNumbers（S24） | 写“从脊柱下端到大脚趾”，不写“运动神经元” |
+| 缩手反射：脊髓中间神经元、比上到脑快、信号也上到脑；“消息到脑之前手已缩回”；膝跳单突触 | Neuroscience Online（S25，例子是腿）、Chudler（S26） | 保留；肱二头肌 / 肱三头肌的例子只作模型演示，不当来源事实（“肱三头肌被抑制”**删**） |
+| 视神经、听神经入脑桥、听觉皮层在颞横回 | NEI（S30）、S12 | 保留 |
+| 脑脊液：脉络丛、每天约 500 mL、总量 125–160 mL | S12、Chudler（S28）、Johanson 2008（S29） | 保留 |
+| 头盔：泡沫压扁吸能；未证明防脑震荡 | CPSC（S36） | “硬壳分散撞击”**删** |
+| 成人脑质量 1.3–1.4 kg | 无可靠来源 | **删** |
+
+其余来源同 §13：S2、S3 课纲；S15 Azevedo；S16 Raichle；S17 Boyd；S18 Dekker（写“相信 / 答错”）；S19 Nielsen；S31 KKH；S32–S33 NHLBI；S34 LTA（新 URL）；S35 Olivier；S37 Aranha（CC BY-NC-SA 3.0）；S39–S42 模型；S43 BIPM。中文术语照 §0.1 Q10 默认（Gavin 已定）。
+
+### 15.5 下载（全部在 gitignore 的 `scripts/anatomy/cache/`）
+
+| 文件 | 字节 | sha256 |
+|---|---:|---|
+| `NervousSystem100.fbx` | 53,887,724 | `3ea1aad6…f2b1` |
+| `bp3d/partof_BP3D_4.0_obj_99.zip`（+ 三个名表） | 64,888,505 | `9fbc713f…1c97` |
+| `brainder/pial_Destrieux_obj.tar.bz2` | 8,952,441 | `b8297630…f55b` |
+| `brainder/subcortical_obj.tar.bz2` | 3,382,528 | `a489f40e…b2b2` |
+
+主仓库缓存里没有这些（本 worktree 用自己的缓存，其余 FBX 软链接到主仓库）；合并后要拷过去或重下。
+
+### 15.6 门槛与截图
+
+- `pnpm check`、`pnpm validate`、`pnpm test`（6,958 通过）、`pnpm build` 全绿；`pnpm e2e tests-e2e/brain-and-nerves.spec.ts tests-e2e/smoke.spec.ts --workers=2` 18 通过。
+- JS 预算：本主题页 459.48 KB gz（space-scene 上限 477 KB）。
+- 绘制（SwiftShader 截图里的 PLATE 读数）：第 05 章 34–39 次、全身视角 50–56 次（静止与运转都 < 80）；三角形约 0.20–0.31 M（含程序化件）。
+- `pnpm shoot brain-and-nerves --beats`（en-paper）：41 拍 0 失败；`--layout --keys`：0 个排版问题、按键全过；`--beats --locale zh --theme cinema` 另跑并看过。截图在 `shots/brain-and-nerves/`（gitignore）。
+- **仍是 `status: draft`**：发布后 `tests/home.test.ts` 要求每个已发布主题有封面图；封面在 Codex 分支 `codex/img4`，合并时接上 `illustration: brain-and-nerves` 后再改 `published`，并把 `tests-e2e/smoke.spec.ts` 的计数加一（生物 17 → 18、总数 61 → 62、徽章 122 → 124、图版 62；绘图数随封面一起变）。
+
+### 15.7 第一轮审阅修改（2026-11-15）
+
+- 全身拍：`cerebrum` + `hindbrain` 合成一个 `brain-parts` 组，标注“脑”而不是“额叶”；眼球小球调暗（`#bdb3a6`），只在感觉章打开（`sense-markers` 组）；神经改深金色（`#c08a1c`），全身流加粗加密，两套主题都一眼看到网络。
+- 脑区：新的饱和区色 token（顶叶改深琥珀 `#b98623` / cinema `#dca43a`，与中性组织区分开）（`tokens.css`、`theme.ts`、docs/08 表、`tests/theme/brain-tokens.test.ts`），脑区拍隐藏颅神经、岛叶和感觉标记（去掉紫色杂块），每区只标一次；第 02 章第 2 拍与第 03 章第 2 拍用章的侧视镜头（原俯后视会把左叶的标注点投到右叶上），整脑离开 HUD。
+- 枕叶标注：`labelPoint` 原先在量化前的坐标系，`optimize_static.ts` 量化后换成节点局部坐标，侧视引线落在枕叶上。
+- 反射弧重做：手和杯子放在一张小木桌上；放大的脊髓横切面直立浮在臂旁（`cord-inset-leader` 引线 + 环指到第 6 颈椎处真实位置）；感觉 → 中间 → 运动的流从指尖经背根进、腹根出到肱二头肌，连续一条；镜头侧前方，手、桌、臂、插图同屏；插图里的三条流归 `cord-study` 组，插图隐藏时一起隐藏。
+- 门槛：`pnpm check`、`validate`、`test`（满载下 7 个其他主题的文件超时，单独重跑 165 个全过）、`build` 全绿；e2e（本主题 + smoke，`--workers=2`）18 通过，smoke 里二战图版号改为 61；JS 459.48 KB gz；`--beats` en-paper 与 zh-cinema 各 41 拍 0 失败，`--layout --keys` 0 问题。
+

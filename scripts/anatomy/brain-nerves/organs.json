@@ -1,0 +1,35 @@
+{
+  "units": "m",
+  "coordinates": {
+    "up": "+Y",
+    "front": "+Z",
+    "left": "+X"
+  },
+  "sourceCentre": [
+    0.0,
+    -0.11464902758598328,
+    1.0179980993270874
+  ],
+  "floorY": -1.0185799598693848,
+  "statureM": 1.710166096687317,
+  "transform": "(x,y,z) -> (x-centre.x, z-centre.z, -(y-centre.y)); apply -floorY only when grounding",
+  "rig": false,
+  "cerebrumRegistration": {
+    "scale": 0.985,
+    "centre": [
+      -0.0,
+      0.62315,
+      -0.13331
+    ],
+    "before": 569,
+    "after": 188,
+    "vertices": 56712
+  },
+  "bp3dCerebellum": {
+    "fma": "FMA67944",
+    "fitScale": 0.9712776442500914,
+    "fitMeanMm": 0.3212577188200516,
+    "fitP95Mm": 0.6429177092526319,
+    "fittedOn": "BodyParts3D 4.0 pons + medulla vs source pons + medulla"
+  }
+}

@@ -95,6 +95,19 @@ and `docs/screenshots/heart-and-lungs/` are derived from Z-Anatomy
 `THIRD-PARTY-NOTICES.md`. The texts and the other data files of these topics stay
 under CC BY-NC-SA 4.0 as above.
 
+Exception — brain and nerves (topic `brain-and-nerves`): the 3D model
+`public/models/brain-and-nerves.glb`, the geometry derived from it and its
+sources (`scripts/anatomy/brain-nerves/landmarks.json`, `routes.json`,
+`cord.json`, `organs.json`, `fit.json`, `provenance.json`, `manifest.json`; and the
+flow paths, the spinal-cord path, pivots and camera targets taken from them into
+`src/content/topics/brain-and-nerves/data/parts.json`) and screenshots of the topic
+are derived from Z-Anatomy (CC BY-SA 4.0), Brainder (CC BY-SA 3.0, adapted under
+CC BY-SA 4.0), BodyParts3D 4.0 (CC BY 4.0) and the University of Dundee Cranial
+Nerves and Foramina (CC BY 4.0), and are licensed CC BY-SA 4.0
+(https://creativecommons.org/licenses/by-sa/4.0/), with the attribution given in
+`THIRD-PARTY-NOTICES.md`. The texts and the other data files of this topic stay
+under CC BY-NC-SA 4.0 as above.
+
 Exception — bones and joints (topic `bones-and-joints`): the model
 `public/models/bones-and-joints.glb`, the entire
 `src/content/topics/bones-and-joints/data/parts.json`, the geometry manifests,

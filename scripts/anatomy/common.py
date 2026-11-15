@@ -16,6 +16,7 @@ FILES = {
     'joints': 'Joints100.fbx',
     'visceral': 'VisceralSystem100.fbx',
     'cardiovascular': 'CardioVascular41.fbx',
+    'nervous': 'NervousSystem100.fbx',
 }
 
 

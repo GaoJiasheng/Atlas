@@ -1,0 +1,118 @@
+---
+id: from-senses-to-action
+order: 6
+title: { en: "From senses to action", zh: "从感官到动作" }
+sensitive: false
+state:
+  view: xray
+  explode: 0
+  part: null
+  run: true
+  cutaway: none
+  layers: [brain-parts, spinal, nerves, protection, skin-context, sense-markers, signals-senses]
+  hide: [cranial-nerves, trunk-nerves, skull, dura-folds]
+  labels: [optic-pathway, occipital-lobe, hearing-nerve]
+  camera: { position: [-0.36, 0.71, 0.43], target: [0.0, 0.6, -0.11], fov: 30 }
+  summary:
+    en: "The eyes, ears and skin turn light, vibrations and touch into nerve signals, which reach different parts of the brain. Seeing something and then moving takes longer than a reflex, because the signal goes through the brain."
+    zh: "眼睛、耳朵和皮肤把光、振动和触碰变成神经信号，送到脑的不同部分。看见东西再动手，比反射慢，因为信号要经过脑。"
+  sim:
+    set: { catch-cm: 26 }
+    try:
+      vary: catch-cm
+      keep: [{ en: "A 30 cm ruler, dropped from rest", zh: "30 厘米的尺子，从静止松手" }]
+      observe: [reaction-ms]
+      record: { chart: { y: reaction-ms } }
+  beats:
+    - camera: { position: [-0.05, 0.45, 0.32], target: [0.0, 0.59, -0.1], fov: 30 }
+      labels: [eye-markers, optic-pathway, occipital-lobe]
+      caption:
+        en: "Signals from the eyes travel along the optic nerves to the back of the brain. What travels is a nerve signal, not the picture or the light."
+        zh: "眼睛的信号沿视神经传到脑的后部；传过去的是神经信号，不是画面，也不是光。"
+    - camera: { position: [-0.42, 0.66, 0.08], target: [0.0, 0.59, -0.12], fov: 30 }
+      labels: [ear-marker, hearing-nerve, pons, temporal-lobe-r]
+      caption:
+        en: "Signals from the inner ear go into the brainstem and on to the side of the brain."
+        zh: "内耳的信号进到脑干，再到脑的侧面。"
+    - camera: body
+      layers: [brain-parts, spinal, nerves, protection, skin-context, signals-up]
+      labels: [arm-nerves, spinal-cord, parietal-lobe]
+      caption:
+        en: "Touch, warmth and pain from the skin reach a strip across the top of the brain."
+        zh: "皮肤上的触、冷热和痛，送到脑顶上横着的一条区域。"
+    - camera: { position: [-0.9, 0.62, 1.3], target: [-0.18, 0.2, -0.08], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, skin-context, signals-reaction]
+      labels: [occipital-lobe, spinal-cord, arm-nerves-r]
+      caption:
+        en: "Catching a falling ruler is not a reflex. You see it, the brain decides, and a command goes down to the fingers, so it takes longer."
+        zh: "接住下落的尺子不是反射：眼睛看见、脑做决定、命令送到手指，所以要更久。"
+    - camera: { position: [-1.0, 0.36, 0.95], target: [-1.2, 0.18, 0.3], fov: 30 }
+      layers: [brain-parts, spinal, nerves, protection, skin-context, ruler-test, study-table, signals-reaction]
+      sim: { set: { catch-cm: 20 } }
+      labels: [ruler, catch-hand]
+      caption:
+        en: "In this model, a ruler caught after falling 20 centimetres means about two tenths of a second. Try it with a partner and read where you caught it."
+        zh: "在这个模型里，尺子落了 20 厘米才接住，约是十分之二秒。可以和同伴试试，读出你接住的位置。"
+  index:
+    parts: [eye-markers, optic-pathway, occipital-lobe, hearing-nerve, temporal-lobe, parietal-lobe, frontal-lobe, spinal-cord, ruler]
+---
+
+<Lang en>
+
+The eyes, the ears and the skin turn light, vibrations and touch into nerve signals, as in <TopicLink slug="eyes-and-ears" ch="an-image-on-the-retina">An image on the retina</TopicLink> and <TopicLink slug="eyes-and-ears" ch="vibration-to-signal">From vibration to signal</TopicLink>. From the eye, electrical signals travel along the optic nerve to the brain <Num s="S30"></Num>, and are handled in the occipital lobe at the back <Num s="S12"></Num>. What reaches the brain is a nerve signal, not the light or the picture. <FlyTo preset="head">Look at the head</FlyTo>
+
+From the inner ear, the hearing nerve carries signals into the pons of the brainstem, and from there they reach the hearing area of the temporal lobe <Num s="S12"></Num>. Touch, warmth and pain from the skin travel in along the nerves to the spinal cord and up to the parietal lobe, whose front strip handles touch and the sense of body position <Num s="S8, S11"></Num>.
+
+Seeing something and then moving is not a reflex. To catch a falling ruler, the eyes must see it move, the brain must decide, and a command must go down the spinal cord to the fingers. That is why it takes longer than pulling your hand off a hot mug.
+
+You can measure it with a 30 cm ruler. One person holds the ruler at the top, with its zero mark between the other person's open finger and thumb, and lets go without warning. The catcher reads the mark where they caught it. The further the ruler fell, the longer the catcher took: a fall of <Num s="S1, S43">20 centimetres</Num> takes about <Num s="S1">202 milliseconds</Num>. Sit down, let the ruler hang straight, and close only the finger and thumb. Use the card to turn your reading into a time, and record a few tries.
+
+<More title={{ en: "How the ruler turns into a stopwatch", zh: "尺子怎样变成秒表" }}>
+
+A ruler let go from rest falls a distance d = ½ g t², where g is about <Num s="S43">9.81 metres per second squared</Num>. So the time is t = √(2d ÷ g). For 20 centimetres, t = √(0.40 ÷ 9.81) ≈ <Num s="S1">0.202 seconds</Num>. A catch at less than about 3 centimetres usually means the ruler was caught early, by guessing; that try does not count.
+
+</More>
+
+<More title={{ en: "One study of children", zh: "一项关于孩子的研究" }}>
+
+One study measured <Num s="S37">204</Num> schoolchildren aged 6 to 12 in India with the ruler drop. Their average was about <Num s="S37">230 milliseconds</Num>, and their times ranged from about <Num s="S37">163</Num> to <Num s="S37">322 milliseconds</Num>. It is one study of one group of children, not a standard to beat.
+
+</More>
+
+<More title={{ en: "Sound itself", zh: "声音本身" }}>
+
+How sound travels to the ear is in the topic <TopicLink slug="sound" ch="01-vibrating-sources">Sound</TopicLink>.
+
+</More>
+
+</Lang>
+
+<Lang zh>
+
+眼睛、耳朵和皮肤把光、振动和触碰变成神经信号，见<TopicLink slug="eyes-and-ears" ch="an-image-on-the-retina">视网膜上的像</TopicLink>和<TopicLink slug="eyes-and-ears" ch="vibration-to-signal">从振动到信号</TopicLink>。电信号从眼睛沿视神经传到脑 <Num s="S30"></Num>，在后面的枕叶里处理 <Num s="S12"></Num>。传到脑的是神经信号，不是光，也不是画面。<FlyTo preset="head">看头部</FlyTo>
+
+前庭蜗神经把内耳的信号送进脑干的脑桥，再从那里送到颞叶的听觉区 <Num s="S12"></Num>。皮肤上的触、冷热和痛沿神经进入脊髓，再上到顶叶；顶叶最前面的一条区域负责触觉和身体位置感 <Num s="S8, S11"></Num>。
+
+看见东西再动手，不是反射。要接住下落的尺子，眼睛得看见它动，脑得做决定，命令还得沿脊髓下到手指。所以这比从热杯子上缩手要慢。
+
+你可以用一把 30 厘米的尺子量一量。一个人捏住尺子上端，让零刻度在另一个人张开的拇指和食指之间，不打招呼就松手。接的人读出接住处的刻度。尺子落得越多，接的人用的时间越长：落 <Num s="S1, S43">20 厘米</Num>约要 <Num s="S1">202 毫秒</Num>。坐着做，让尺子竖直垂下，只用拇指和食指去捏。用卡片把读数换成时间，多试几次记下来。
+
+<More title={{ en: "How the ruler turns into a stopwatch", zh: "尺子怎样变成秒表" }}>
+
+尺子从静止松手，下落的距离 d = ½ g t²，g 约为每秒平方 <Num s="S43">9.81 米</Num>。所以时间 t = √(2d ÷ g)。落 20 厘米时，t = √(0.40 ÷ 9.81) ≈ <Num s="S1">0.202 秒</Num>。如果不到约 3 厘米就接住了，多半是还没松手就猜着动了；这一次不算。
+
+</More>
+
+<More title={{ en: "One study of children", zh: "一项关于孩子的研究" }}>
+
+一项研究用尺子接落法测了印度 <Num s="S37">204</Num> 名 6 到 12 岁的学生。他们的平均值约 <Num s="S37">230 毫秒</Num>，最快约 <Num s="S37">163</Num> 毫秒，最慢约 <Num s="S37">322 毫秒</Num>。这只是一项研究、一组学生，不是要打败的标准。
+
+</More>
+
+<More title={{ en: "Sound itself", zh: "声音本身" }}>
+
+声音怎样传到耳朵，在<TopicLink slug="sound" ch="01-vibrating-sources">声音</TopicLink>主题里。
+
+</More>
+
+</Lang>

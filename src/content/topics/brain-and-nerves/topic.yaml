@@ -1,0 +1,18 @@
+id: brain-and-nerves
+title: { en: "Brain and Nerves", zh: "脑与神经" }
+subtitle: { en: "How signals travel from the senses to the brain and out to the muscles", zh: "信号怎样从感官传到脑、再传到肌肉" }
+shortTitle: { en: "Brain & nerves", zh: "脑与神经" }
+subject: biology
+tags: [beyond-syllabus, biology, space]
+levels: [P5, P6]
+moe:
+  - "Enrichment beyond MOE 2023 Science: the nervous system is not in the primary syllabus; links to 'systems' (P3–P6) and P5 integration of systems"
+  - "MOE PE 2024: P3 cycling safety; P2, P3, P5 sleep"
+mode: space
+engine: space-scene
+stage: model3d
+theme: paper
+sensitivity: open
+status: published
+illustration: brain-and-nerves
+note: { en: "Male reference anatomy · meshes Z-Anatomy / BodyParts3D / Brainder, CC BY-SA · brain and nerves simplified · spinal cord drawn · bench models enlarged, not to scale", zh: "男性参考解剖 · 网格 Z-Anatomy / BodyParts3D / Brainder，CC BY-SA · 脑与神经已简化 · 脊髓为绘制 · 工作台上的模型已放大，不按比例" }

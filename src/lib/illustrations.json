@@ -99,6 +99,26 @@
       "0000000000000000"
     ]
   },
+  "brain-and-nerves": {
+    "mask": [
+      "0000000000000000",
+      "0000015898400000",
+      "00018ffffffc2000",
+      "003dffffffffe200",
+      "02effffffffffd10",
+      "08ffffffffffff70",
+      "0dffffffffffffd0",
+      "0effffffffffffe0",
+      "0affffffffffffd0",
+      "004efffffffffe50",
+      "0004ab6ffffffa00",
+      "00000008ffffe300",
+      "00000000da961000",
+      "00000001c6000000",
+      "0000000163000000",
+      "0000000000000000"
+    ]
+  },
   "cells": {
     "mask": [
       "0000000000000000",
