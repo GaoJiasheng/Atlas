@@ -7,6 +7,7 @@
  * thing. Reads the scene store (chapter, `beat`, `model`) and writes the
  * child's work and the drawn tasks into the engine's UI store only.
  */
+import { fillBlanks } from './lib/data-tasks';
 import type { BilingualText } from '../../i18n';
 import { t } from '../../i18n';
 import type { SceneStore } from '../core/store';
@@ -135,6 +136,11 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `PLACED ${s.nplaced.length}${task.kind === 'complete-net' ? `/${task.add}` : ''}`;
     case 'ntap':
       return s.ntapped === null ? 'TAP' : `TAP ${tappedLabel(task, s.ntapped)}`;
+    case 'etap':
+    case 'ereset':
+      return `TOWERS ${s.towers?.join(' · ') ?? '—'}`;
+    case 'guide':
+      return `READ ${s.guides.length}`;
     case 'stile':
       return `SQUARES ${s.sym.length}`;
     case 'spoint':
@@ -142,6 +148,7 @@ function describe(task: Task, action: Action, s: TaskState): string {
     case 'sfold':
       return s.sfold ? 'FOLDED' : 'UNFOLDED';
     case 'input': {
+      if (task.kind === 'fill-table') return `WRITE ${fillBlanks(task).map((x) => s.input[x.key] || '?').join(' · ')}`;
       const spec = inputSpecOf(task);
       if (spec && isMeasureTask(task)) {
         const line = workingLines(task, s, 'en', false).at(-1);
@@ -268,6 +275,9 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'nplace', key: '' }, s);
     case 'tap-face':
       return describe(task, { do: 'ntap', node: 0 }, s);
+    case 'fill-table':
+    case 'even-out':
+      return describe(task, { do: 'input', field: '', value: '' }, s);
     case 'complete-symmetric':
       return describe(task, task.mode === 'cells' ? { do: 'stile', key: '' } : { do: 'spoint', key: '' }, s);
   }

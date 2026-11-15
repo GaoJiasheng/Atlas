@@ -1,0 +1,6497 @@
+{
+  "syllabus": [
+    {
+      "id": "p6-average",
+      "level": "P6",
+      "ref": "P6 Statistics 1.1",
+      "page": 44,
+      "source": "S1",
+      "text": {
+        "en": "average as ‘total value ÷ number of data’",
+        "zh": "平均数是“总数 ÷ 数据的个数”"
+      }
+    },
+    {
+      "id": "p6-average-relationship",
+      "level": "P6",
+      "ref": "P6 Statistics 1.2",
+      "page": 44,
+      "source": "S1",
+      "text": {
+        "en": "relationship between average, total value and number of data",
+        "zh": "平均数、总数和数据个数之间的关系"
+      }
+    },
+    {
+      "id": "p4-decimal-quotient",
+      "level": "P4",
+      "ref": "P4 Decimals 3.2",
+      "page": 38,
+      "source": "S1",
+      "text": {
+        "en": "dividing a whole number by a whole number with quotient as a decimal",
+        "zh": "整数除以整数，商是小数"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "evening-out",
+      "lo": [
+        "p6-average"
+      ],
+      "limits": {
+        "maxBlocks": 10,
+        "items": [
+          2,
+          5
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Stickers each friend has",
+              "zh": "每人有的贴纸"
+            },
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 2
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 4
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 6
+              }
+            ]
+          },
+          "equation": "2 · 4 · 6",
+          "caption": {
+            "en": "Wei Jie, Siti and Arjun have 2, 4 and 6 stickers. Their towers are not the same height.",
+            "zh": "Wei Jie、Siti、Arjun 分别有 2、4、6 张贴纸。三座塔高低不一样。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Stickers each friend has",
+              "zh": "每人有的贴纸"
+            },
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 4
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 4
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 4
+              }
+            ],
+            "was": [
+              2,
+              4,
+              6
+            ]
+          },
+          "equation": "6 − 2 = 4 · 2 + 2 = 4",
+          "move": "level",
+          "caption": {
+            "en": "Move stickers from the tallest tower to the shortest until every tower is the same height.",
+            "zh": "把最高那座的贴纸移给最矮的，直到每座一样高。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Stickers each friend has",
+              "zh": "每人有的贴纸"
+            },
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 4
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 4
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 4
+              }
+            ],
+            "mean": 4
+          },
+          "equation": "2 + 4 + 6 = 12 = 4 + 4 + 4",
+          "move": "shade",
+          "caption": {
+            "en": "Now each has 4. Nothing was added or taken away, so the total is still 12. 4 is the average.",
+            "zh": "现在每人 4 张。没有多也没有少，总数还是 12。4 就是平均数。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Another three friends",
+              "zh": "另外三个朋友"
+            },
+            "cats": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "value": 4
+              },
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 4
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 4
+              }
+            ],
+            "was": [
+              1,
+              2,
+              9
+            ],
+            "mean": 4
+          },
+          "equation": "1 + 2 + 9 = 12 → 4, 4, 4",
+          "move": "morph",
+          "caption": {
+            "en": "The average is not always the middle number. 1, 2 and 9 even out to 4 each, not 2.",
+            "zh": "平均数不一定是中间那个数。1、2、9 移一移，每座 4，不是 2。"
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Even out the amounts; the level they reach is the average.",
+          "zh": "移多补少，一样多时的数就是平均数。"
+        },
+        {
+          "en": "Evening out does not change the total.",
+          "zh": "移来移去，总数不变。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "even-3-5-7",
+          "kind": "even-out",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 3
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 5
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 7
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Even out the towers, then write the average.",
+            "zh": "把塔移平，再写平均数。"
+          },
+          "answer": {
+            "answer": 5,
+            "form": "whole"
+          },
+          "guide": {
+            "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+            "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "Move 2 blocks from the tallest tower to the shortest.",
+              "zh": "把最高那座的 2 块移给最矮的。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 3, 5 and 7 even out to 5 each.",
+              "zh": "对。3、5、7 移平后每座 5。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+              "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+            },
+            "reveal": {
+              "en": "Yes. 3, 5 and 7 even out to 5 each.",
+              "zh": "对。3、5、7 移平后每座 5。"
+            }
+          }
+        },
+        {
+          "id": "even-1-2-9",
+          "kind": "even-out",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "value": 1
+              },
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 2
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 9
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Even out the towers, then write the average.",
+            "zh": "把塔移平，再写平均数。"
+          },
+          "answer": {
+            "answer": 4,
+            "form": "whole"
+          },
+          "guide": {
+            "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+            "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "The total is 12.",
+              "zh": "总数是 12。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 1, 2 and 9 even out to 4 each.",
+              "zh": "对。1、2、9 移平后每座 4。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-middle",
+                "say": {
+                  "en": "Even them out: 1, 2, 9 become 4 each. The average is 4, not the middle number.",
+                  "zh": "移一移：1、2、9 变成每座 4。平均数是 4，不是中间那个数。"
+                },
+                "sample": "=2"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+              "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+            },
+            "reveal": {
+              "en": "Yes. 1, 2 and 9 even out to 4 each.",
+              "zh": "对。1、2、9 移平后每座 4。"
+            }
+          }
+        },
+        {
+          "id": "even-four-towers",
+          "kind": "even-out",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 2
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 6
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 3
+              },
+              {
+                "id": "hui-min",
+                "label": {
+                  "en": "Hui Min",
+                  "zh": "Hui Min"
+                },
+                "value": 5
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Even out the four towers, then write the average.",
+            "zh": "把四座塔移平，再写平均数。"
+          },
+          "answer": {
+            "answer": 4,
+            "form": "whole"
+          },
+          "guide": {
+            "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+            "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "The total is 16; 4 towers share it.",
+              "zh": "总数是 16，4 座塔分。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 2, 6, 3 and 5 even out to 4 each.",
+              "zh": "对。2、6、3、5 移平后每座 4。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "16 is the total. Share it among the 4: 16 ÷ 4 = 4.",
+                  "zh": "16 是总数。再平均分给 4 个：16 ÷ 4 = 4。"
+                },
+                "sample": "=16"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+              "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+            },
+            "reveal": {
+              "en": "Yes. 2, 6, 3 and 5 even out to 4 each.",
+              "zh": "对。2、6、3、5 移平后每座 4。"
+            }
+          }
+        },
+        {
+          "id": "even-five-towers",
+          "kind": "even-out",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 7
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 3
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 6
+              },
+              {
+                "id": "hui-min",
+                "label": {
+                  "en": "Hui Min",
+                  "zh": "Hui Min"
+                },
+                "value": 2
+              },
+              {
+                "id": "daniel",
+                "label": {
+                  "en": "Daniel",
+                  "zh": "Daniel"
+                },
+                "value": 7
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Even out the five towers, then write the average.",
+            "zh": "把五座塔移平，再写平均数。"
+          },
+          "answer": {
+            "answer": 5,
+            "form": "whole"
+          },
+          "guide": {
+            "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+            "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "The total is 25.",
+              "zh": "总数是 25。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. They even out to 5 each.",
+              "zh": "对。移平后每座 5。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-middle",
+                "say": {
+                  "en": "Even them out: 7, 3, 6, 2, 7 become 5 each. The average is 5, not the middle number.",
+                  "zh": "移一移：7、3、6、2、7 变成每座 5。平均数是 5，不是中间那个数。"
+                },
+                "sample": "=6"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+              "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+            },
+            "reveal": {
+              "en": "Yes. They even out to 5 each.",
+              "zh": "对。移平后每座 5。"
+            }
+          }
+        },
+        {
+          "id": "even-two-towers",
+          "kind": "even-out",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 8
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 2
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Even out the two towers, then write the average.",
+            "zh": "把两座塔移平，再写平均数。"
+          },
+          "answer": {
+            "answer": 5,
+            "form": "whole"
+          },
+          "guide": {
+            "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+            "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "Move 3 blocks across.",
+              "zh": "移 3 块过去。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 8 and 2 even out to 5 each.",
+              "zh": "对。8 和 2 移平后每座 5。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "10 is the total. Share it among the 2: 10 ÷ 2 = 5.",
+                  "zh": "10 是总数。再平均分给 2 个：10 ÷ 2 = 5。"
+                },
+                "sample": "=10"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+              "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+            },
+            "reveal": {
+              "en": "Yes. 8 and 2 even out to 5 each.",
+              "zh": "对。8 和 2 移平后每座 5。"
+            }
+          }
+        },
+        {
+          "id": "towers-read-level",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 6
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 6
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 6
+              }
+            ],
+            "was": [
+              4,
+              9,
+              5
+            ]
+          },
+          "prompt": {
+            "en": "These towers were evened out. What is the average?",
+            "zh": "这几座塔已经移平了。平均数是多少？"
+          },
+          "answer": 6,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Once the towers are the same height, that height is the average.",
+            "zh": "塔一样高以后，那个高度就是平均数。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Every tower is 6 high: the average is 6.",
+              "zh": "对。每座都是 6：平均数是 6。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "18 is the total. Share it among the 3: 18 ÷ 3 = 6.",
+                  "zh": "18 是总数。再平均分给 3 个：18 ÷ 3 = 6。"
+                },
+                "sample": "18"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. Every tower is 6 high: the average is 6.",
+              "zh": "对。每座都是 6：平均数是 6。"
+            }
+          }
+        },
+        {
+          "id": "towers-average-uneven",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "value": 1
+              },
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 5
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 2
+              },
+              {
+                "id": "daniel",
+                "label": {
+                  "en": "Daniel",
+                  "zh": "Daniel"
+                },
+                "value": 4
+              }
+            ]
+          },
+          "prompt": {
+            "en": "What is the average number of stickers?",
+            "zh": "平均每人有几张贴纸？"
+          },
+          "answer": 3,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Move blocks in your head from the tall towers to the short ones, or add them all and share.",
+            "zh": "在脑子里把高塔的方块移给矮塔，或者全部加起来再平均分。"
+          },
+          "hints": [
+            {
+              "en": "Move from the tall towers to the short ones until they are all the same.",
+              "zh": "把多的移给少的，直到一样多。"
+            },
+            {
+              "en": "The total is 12, shared by 4.",
+              "zh": "总数 12，4 个人分。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 1, 5, 2 and 4 even out to 3 each.",
+              "zh": "对。1、5、2、4 移平后每座 3。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-middle",
+                "say": {
+                  "en": "Even them out: 1, 5, 2 and 4 become 3 each. The average is 3, not a middle number.",
+                  "zh": "移一移：1、5、2、4 变成每座 3。平均数是 3，不是中间的数。"
+                },
+                "sample": "4"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 1, 5, 2 and 4 even out to 3 each.",
+              "zh": "对。1、5、2、4 移平后每座 3。"
+            }
+          }
+        },
+        {
+          "id": "choose-average-five",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 5
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 5
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 5
+              }
+            ]
+          },
+          "prompt": {
+            "en": "Which group of numbers has an average of 5?",
+            "zh": "哪一组数的平均数是 5？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "2, 6, 7",
+                "zh": "2、6、7"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "1, 5, 6",
+                "zh": "1、5、6"
+              },
+              "correct": false,
+              "misconception": "average-as-middle"
+            }
+          ],
+          "guide": {
+            "en": "Even out each group: which one levels at 5?",
+            "zh": "把每一组移一移：哪一组移平后是 5？"
+          },
+          "hints": [
+            {
+              "en": "Add each group and share by 3.",
+              "zh": "每组加起来，再除以 3。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 2 + 6 + 7 = 15, and 15 ÷ 3 = 5.",
+              "zh": "对。2 + 6 + 7 = 15，15 ÷ 3 = 5。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-middle",
+                "say": {
+                  "en": "1, 5, 6 has 5 in the middle, but it evens out to 12 ÷ 3 = 4, not 5.",
+                  "zh": "1、5、6 中间是 5，可移平后是 12 ÷ 3 = 4，不是 5。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 2 + 6 + 7 = 15, and 15 ÷ 3 = 5.",
+              "zh": "对。2 + 6 + 7 = 15，15 ÷ 3 = 5。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "total-divided",
+      "lo": [
+        "p6-average",
+        "p4-decimal-quotient"
+      ],
+      "limits": {
+        "maxValue": 100,
+        "items": [
+          2,
+          6
+        ]
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Stickers each friend has",
+              "zh": "每人有的贴纸"
+            },
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 2
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 4
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 6
+              }
+            ],
+            "pooled": true
+          },
+          "equation": "2 + 4 + 6 = 12",
+          "caption": {
+            "en": "Another way: put all the stickers together into one tower. The total is 2 + 4 + 6 = 12.",
+            "zh": "换一种做法：把贴纸全部叠成一座塔。总数是 2 + 4 + 6 = 12。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Stickers each friend has",
+              "zh": "每人有的贴纸"
+            },
+            "cats": [
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 4
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 4
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 4
+              }
+            ],
+            "mean": 4
+          },
+          "equation": "12 ÷ 3 = 4",
+          "move": "level",
+          "caption": {
+            "en": "Now share the total equally among the 3 friends: 12 ÷ 3 = 4. It is the same 4 as evening out.",
+            "zh": "再把总数平均分给 3 个人：12 ÷ 3 = 4。和移多补少得到的 4 一样。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Money Siti saved each week",
+              "zh": "Siti 每周存的钱"
+            },
+            "cats": [
+              {
+                "id": "w1",
+                "label": {
+                  "en": "Week 1",
+                  "zh": "第1周"
+                },
+                "value": 3
+              },
+              {
+                "id": "w2",
+                "label": {
+                  "en": "Week 2",
+                  "zh": "第2周"
+                },
+                "value": 5
+              },
+              {
+                "id": "w3",
+                "label": {
+                  "en": "Week 3",
+                  "zh": "第3周"
+                },
+                "value": 4
+              },
+              {
+                "id": "w4",
+                "label": {
+                  "en": "Week 4",
+                  "zh": "第4周"
+                },
+                "value": 8
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            },
+            "mean": 5
+          },
+          "equation": "(3 + 5 + 4 + 8) ÷ 4 = 20 ÷ 4 = 5",
+          "move": "morph",
+          "caption": {
+            "en": "With bigger numbers, you do not need the blocks. Siti saved $3, $5, $4 and $8 in four weeks. On average she saved 20 ÷ 4 = $5 a week.",
+            "zh": "数大了，就不用画方块。Siti 四周存了 3、5、4、8 元。平均每周存 20 ÷ 4 = 5 元。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Money Siti saved each week",
+              "zh": "Siti 每周存的钱"
+            },
+            "cats": [
+              {
+                "id": "w1",
+                "label": {
+                  "en": "Week 1",
+                  "zh": "第1周"
+                },
+                "value": 3
+              },
+              {
+                "id": "w2",
+                "label": {
+                  "en": "Week 2",
+                  "zh": "第2周"
+                },
+                "value": 5
+              },
+              {
+                "id": "w3",
+                "label": {
+                  "en": "Week 3",
+                  "zh": "第3周"
+                },
+                "value": 4
+              },
+              {
+                "id": "w4",
+                "label": {
+                  "en": "Week 4",
+                  "zh": "第4周"
+                },
+                "value": 8
+              },
+              {
+                "id": "w5",
+                "label": {
+                  "en": "Week 5",
+                  "zh": "第5周"
+                },
+                "value": 0
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            },
+            "mean": 4,
+            "highlight": {
+              "w5": "hot"
+            }
+          },
+          "equation": "(20 + 0) ÷ 5 = 4",
+          "move": "morph",
+          "caption": {
+            "en": "In week 5 she saved nothing: $0. It is still a week, so divide by 5: (20 + 0) ÷ 5 = $4.",
+            "zh": "第 5 周一分钱也没存：0 元。可那也是一周，要除以 5：(20 + 0) ÷ 5 = 4 元。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Two bags of rice (kg)",
+              "zh": "两袋米（kg）"
+            },
+            "cats": [
+              {
+                "id": "bag-a",
+                "label": {
+                  "en": "Bag A",
+                  "zh": "Bag A"
+                },
+                "value": 7.5
+              },
+              {
+                "id": "bag-b",
+                "label": {
+                  "en": "Bag B",
+                  "zh": "Bag B"
+                },
+                "value": 7.5
+              }
+            ],
+            "was": [
+              7,
+              8
+            ],
+            "mean": 7.5
+          },
+          "equation": "(7 + 8) ÷ 2 = 7.5",
+          "move": "morph",
+          "caption": {
+            "en": "The average does not have to be a whole number, or one of the values. Two bags of 7 kg and 8 kg have an average of 15 ÷ 2 = 7.5 kg.",
+            "zh": "平均数不一定是整数，也不一定是其中一个数。7 kg 和 8 kg 两袋米，平均 15 ÷ 2 = 7.5 kg。"
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Average = total ÷ number of items.",
+          "zh": "平均数 = 总数 ÷ 个数。"
+        },
+        {
+          "en": "A value of 0 is still an item.",
+          "zh": "0 也算一项。"
+        },
+        {
+          "en": "An average can be a decimal.",
+          "zh": "平均数可以是小数。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "avg-books-four",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Books Ravi read each week",
+              "zh": "Ravi 每周读的书"
+            },
+            "cats": [
+              {
+                "id": "mon",
+                "label": {
+                  "en": "Mon",
+                  "zh": "星期一"
+                },
+                "value": 6
+              },
+              {
+                "id": "tue",
+                "label": {
+                  "en": "Tue",
+                  "zh": "星期二"
+                },
+                "value": 9
+              },
+              {
+                "id": "wed",
+                "label": {
+                  "en": "Wed",
+                  "zh": "星期三"
+                },
+                "value": 4
+              },
+              {
+                "id": "thu",
+                "label": {
+                  "en": "Thu",
+                  "zh": "星期四"
+                },
+                "value": 5
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Number of books",
+                "zh": "本数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of books Ravi read a week?",
+            "zh": "Ravi 平均每周读几本书？"
+          },
+          "answer": 6,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "6 + 9 + 4 + 5 = 24",
+              "zh": "6 + 9 + 4 + 5 = 24"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 24 ÷ 4 = 6 books a week.",
+              "zh": "对。24 ÷ 4 = 6 本。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "24 is the total. Share it among the 4: 24 ÷ 4 = 6.",
+                  "zh": "24 是总数。再平均分给 4 个：24 ÷ 4 = 6。"
+                },
+                "sample": "24"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 24 ÷ 4 = 6 books a week.",
+              "zh": "对。24 ÷ 4 = 6 本。"
+            }
+          }
+        },
+        {
+          "id": "avg-with-zero",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Pupils at a club each day",
+              "zh": "每天来社团的人数"
+            },
+            "cats": [
+              {
+                "id": "mon",
+                "label": {
+                  "en": "Mon",
+                  "zh": "星期一"
+                },
+                "value": 5
+              },
+              {
+                "id": "tue",
+                "label": {
+                  "en": "Tue",
+                  "zh": "星期二"
+                },
+                "value": 7
+              },
+              {
+                "id": "wed",
+                "label": {
+                  "en": "Wed",
+                  "zh": "星期三"
+                },
+                "value": 0
+              },
+              {
+                "id": "thu",
+                "label": {
+                  "en": "Thu",
+                  "zh": "星期四"
+                },
+                "value": 12
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 14,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Number of pupils",
+                "zh": "人数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of pupils a day?",
+            "zh": "平均每天来几人？"
+          },
+          "answer": 6,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "Wednesday counts as a day even with 0.",
+              "zh": "星期三是 0，也算一天。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 24 ÷ 4 = 6 pupils a day.",
+              "zh": "对。24 ÷ 4 = 6 人。"
+            },
+            "wrong": [
+              {
+                "when": "zero-ignored",
+                "say": {
+                  "en": "Wednesday counts as a day even though no one came. Divide by 4: 24 ÷ 4 = 6.",
+                  "zh": "星期三虽然没人来，也算一天。要除以 4：24 ÷ 4 = 6。"
+                },
+                "sample": "8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 24 ÷ 4 = 6 pupils a day.",
+              "zh": "对。24 ÷ 4 = 6 人。"
+            }
+          }
+        },
+        {
+          "id": "avg-half",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Two bags of flour (kg)",
+              "zh": "两袋面粉（kg）"
+            },
+            "cats": [
+              {
+                "id": "bag-a",
+                "label": {
+                  "en": "Bag A",
+                  "zh": "Bag A"
+                },
+                "value": 9
+              },
+              {
+                "id": "bag-b",
+                "label": {
+                  "en": "Bag B",
+                  "zh": "Bag B"
+                },
+                "value": 6
+              }
+            ]
+          },
+          "prompt": {
+            "en": "What is the average mass of the two bags, in kg?",
+            "zh": "两袋面粉平均重几 kg？"
+          },
+          "answer": "7.5",
+          "form": "decimal",
+          "unit": "kg",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "15 ÷ 2 is not a whole number.",
+              "zh": "15 ÷ 2 不是整数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 15 ÷ 2 = 7.5 kg.",
+              "zh": "对。15 ÷ 2 = 7.5 kg。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-dropped",
+                "say": {
+                  "en": "15 ÷ 2 is not a whole number. Share the last kilogram too: 7.5 kg.",
+                  "zh": "15 ÷ 2 不是整数。最后那 1 kg 也要分：7.5 kg。"
+                },
+                "sample": "7"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 15 ÷ 2 = 7.5 kg.",
+              "zh": "对。15 ÷ 2 = 7.5 kg。"
+            }
+          }
+        },
+        {
+          "id": "avg-skips",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Skips without stopping",
+              "zh": "一口气跳绳的下数"
+            },
+            "cats": [
+              {
+                "id": "hui-min",
+                "label": {
+                  "en": "Hui Min",
+                  "zh": "Hui Min"
+                },
+                "value": 40
+              },
+              {
+                "id": "arjun",
+                "label": {
+                  "en": "Arjun",
+                  "zh": "Arjun"
+                },
+                "value": 55
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 35
+              },
+              {
+                "id": "wei-jie",
+                "label": {
+                  "en": "Wei Jie",
+                  "zh": "Wei Jie"
+                },
+                "value": 50
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 60,
+              "step": 5,
+              "labels": 2,
+              "name": {
+                "en": "Number of skips",
+                "zh": "下数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of skips?",
+            "zh": "平均每人跳几下？"
+          },
+          "answer": 45,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "40 + 55 + 35 + 50 = 180",
+              "zh": "40 + 55 + 35 + 50 = 180"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 180 ÷ 4 = 45 skips.",
+              "zh": "对。180 ÷ 4 = 45 下。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "180 is the total. Share it among the 4: 180 ÷ 4 = 45.",
+                  "zh": "180 是总数。再平均分给 4 个：180 ÷ 4 = 45。"
+                },
+                "sample": "180"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 180 ÷ 4 = 45 skips.",
+              "zh": "对。180 ÷ 4 = 45 下。"
+            }
+          }
+        },
+        {
+          "id": "avg-money-half",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Money Daniel spent on snacks each week",
+              "zh": "Daniel 每周买零食的钱"
+            },
+            "cats": [
+              {
+                "id": "w1",
+                "label": {
+                  "en": "Week 1",
+                  "zh": "第1周"
+                },
+                "value": 4
+              },
+              {
+                "id": "w2",
+                "label": {
+                  "en": "Week 2",
+                  "zh": "第2周"
+                },
+                "value": 6
+              },
+              {
+                "id": "w3",
+                "label": {
+                  "en": "Week 3",
+                  "zh": "第3周"
+                },
+                "value": 3
+              },
+              {
+                "id": "w4",
+                "label": {
+                  "en": "Week 4",
+                  "zh": "第4周"
+                },
+                "value": 5
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            }
+          },
+          "prompt": {
+            "en": "On average, how much did Daniel spend a week?",
+            "zh": "Daniel 平均每周花多少钱？"
+          },
+          "answer": "4.50",
+          "form": "decimal",
+          "unit": "dollar",
+          "places": 2,
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "18 ÷ 4",
+              "zh": "18 ÷ 4"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 18 ÷ 4 = $4.50 a week.",
+              "zh": "对。18 ÷ 4 = 4.50 元。"
+            },
+            "wrong": [
+              {
+                "when": "remainder-dropped",
+                "say": {
+                  "en": "18 ÷ 4 is not a whole number of dollars. Share the $2 left too: $4.50.",
+                  "zh": "18 ÷ 4 不是整数元。剩下的 2 元也要分：4.50 元。"
+                },
+                "sample": "4"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 18 ÷ 4 = $4.50 a week.",
+              "zh": "对。18 ÷ 4 = 4.50 元。"
+            }
+          }
+        },
+        {
+          "id": "avg-six-days",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Cups of soya bean milk sold at a stall",
+              "zh": "摊位每天卖出的豆奶杯数"
+            },
+            "cats": [
+              {
+                "id": "mon",
+                "label": {
+                  "en": "Mon",
+                  "zh": "星期一"
+                },
+                "value": 8
+              },
+              {
+                "id": "tue",
+                "label": {
+                  "en": "Tue",
+                  "zh": "星期二"
+                },
+                "value": 10
+              },
+              {
+                "id": "wed",
+                "label": {
+                  "en": "Wed",
+                  "zh": "星期三"
+                },
+                "value": 6
+              },
+              {
+                "id": "thu",
+                "label": {
+                  "en": "Thu",
+                  "zh": "星期四"
+                },
+                "value": 12
+              },
+              {
+                "id": "fri",
+                "label": {
+                  "en": "Fri",
+                  "zh": "星期五"
+                },
+                "value": 9
+              },
+              {
+                "id": "sat",
+                "label": {
+                  "en": "Sat",
+                  "zh": "星期六"
+                },
+                "value": 15
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 16,
+              "step": 2,
+              "labels": 1,
+              "name": {
+                "en": "Number of cups",
+                "zh": "杯数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of cups sold a day?",
+            "zh": "平均每天卖出几杯？"
+          },
+          "answer": 10,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "The total is 60, over 6 days.",
+              "zh": "总数 60，6 天。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 60 ÷ 6 = 10 cups a day.",
+              "zh": "对。60 ÷ 6 = 10 杯。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "60 is the total. Share it among the 6: 60 ÷ 6 = 10.",
+                  "zh": "60 是总数。再平均分给 6 个：60 ÷ 6 = 10。"
+                },
+                "sample": "60"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 60 ÷ 6 = 10 cups a day.",
+              "zh": "对。60 ÷ 6 = 10 杯。"
+            }
+          }
+        },
+        {
+          "id": "avg-zero-two",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Goals scored in five games",
+              "zh": "五场比赛的进球"
+            },
+            "cats": [
+              {
+                "id": "mon",
+                "label": {
+                  "en": "Mon",
+                  "zh": "星期一"
+                },
+                "value": 9
+              },
+              {
+                "id": "tue",
+                "label": {
+                  "en": "Tue",
+                  "zh": "星期二"
+                },
+                "value": 0
+              },
+              {
+                "id": "wed",
+                "label": {
+                  "en": "Wed",
+                  "zh": "星期三"
+                },
+                "value": 12
+              },
+              {
+                "id": "thu",
+                "label": {
+                  "en": "Thu",
+                  "zh": "星期四"
+                },
+                "value": 0
+              },
+              {
+                "id": "fri",
+                "label": {
+                  "en": "Fri",
+                  "zh": "星期五"
+                },
+                "value": 9
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 14,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Goals",
+                "zh": "进球数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of goals a game?",
+            "zh": "平均每场进几球？"
+          },
+          "answer": 6,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "Games with 0 goals are still games.",
+              "zh": "进 0 球的也是一场比赛。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 30 ÷ 5 = 6 goals a game.",
+              "zh": "对。30 ÷ 5 = 6 球。"
+            },
+            "wrong": [
+              {
+                "when": "zero-ignored",
+                "say": {
+                  "en": "A game with 0 goals is still a game. Divide by 5: 30 ÷ 5 = 6.",
+                  "zh": "进 0 球的也算一场。要除以 5：30 ÷ 5 = 6。"
+                },
+                "sample": "10"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 30 ÷ 5 = 6 goals a game.",
+              "zh": "对。30 ÷ 5 = 6 球。"
+            }
+          }
+        },
+        {
+          "id": "choose-which-sentence",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Money Siti saved each week",
+              "zh": "Siti 每周存的钱"
+            },
+            "cats": [
+              {
+                "id": "w1",
+                "label": {
+                  "en": "Week 1",
+                  "zh": "第1周"
+                },
+                "value": 3
+              },
+              {
+                "id": "w2",
+                "label": {
+                  "en": "Week 2",
+                  "zh": "第2周"
+                },
+                "value": 5
+              },
+              {
+                "id": "w3",
+                "label": {
+                  "en": "Week 3",
+                  "zh": "第3周"
+                },
+                "value": 4
+              },
+              {
+                "id": "w4",
+                "label": {
+                  "en": "Week 4",
+                  "zh": "第4周"
+                },
+                "value": 8
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            }
+          },
+          "prompt": {
+            "en": "Which number sentence finds Siti's average saving a week?",
+            "zh": "哪一个算式求的是 Siti 平均每周存的钱？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "(3 + 5 + 4 + 8) ÷ 4",
+                "zh": "(3 + 5 + 4 + 8) ÷ 4"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "3 + 5 + 4 + 8",
+                "zh": "3 + 5 + 4 + 8"
+              },
+              "correct": false,
+              "misconception": "average-as-total"
+            }
+          ],
+          "guide": {
+            "en": "An average shares the total among the items.",
+            "zh": "平均数是把总数分给每一项。"
+          },
+          "hints": [
+            {
+              "en": "Find the total first, then share it equally: total ÷ number of items.",
+              "zh": "先求总数，再平均分：总数 ÷ 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. Total ÷ number of weeks.",
+              "zh": "对。总数 ÷ 周数。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "3 + 5 + 4 + 8 is the total. The average shares it among the 4 weeks: ÷ 4.",
+                  "zh": "3 + 5 + 4 + 8 是总数。平均数要把它分给 4 周：÷ 4。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. Total ÷ number of weeks.",
+              "zh": "对。总数 ÷ 周数。"
+            }
+          }
+        },
+        {
+          "id": "choose-which-zero",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Money Siti saved each week",
+              "zh": "Siti 每周存的钱"
+            },
+            "cats": [
+              {
+                "id": "w1",
+                "label": {
+                  "en": "Week 1",
+                  "zh": "第1周"
+                },
+                "value": 3
+              },
+              {
+                "id": "w2",
+                "label": {
+                  "en": "Week 2",
+                  "zh": "第2周"
+                },
+                "value": 5
+              },
+              {
+                "id": "w3",
+                "label": {
+                  "en": "Week 3",
+                  "zh": "第3周"
+                },
+                "value": 4
+              },
+              {
+                "id": "w4",
+                "label": {
+                  "en": "Week 4",
+                  "zh": "第4周"
+                },
+                "value": 8
+              },
+              {
+                "id": "w5",
+                "label": {
+                  "en": "Week 5",
+                  "zh": "第5周"
+                },
+                "value": 0
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            }
+          },
+          "prompt": {
+            "en": "Which number sentence finds the average over all 5 weeks?",
+            "zh": "哪一个算式求的是 5 周的平均数？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "20 ÷ 5",
+                "zh": "20 ÷ 5"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "20 ÷ 4",
+                "zh": "20 ÷ 4"
+              },
+              "correct": false,
+              "misconception": "zero-ignored"
+            }
+          ],
+          "guide": {
+            "en": "Count every week, the $0 week too.",
+            "zh": "每一周都要算，0 元那一周也算。"
+          },
+          "hints": [
+            {
+              "en": "How many weeks are there?",
+              "zh": "一共有几周？"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 5 weeks: 20 ÷ 5 = $4.",
+              "zh": "对。5 周：20 ÷ 5 = 4 元。"
+            },
+            "wrong": [
+              {
+                "when": "zero-ignored",
+                "say": {
+                  "en": "Week 5 counts as a week even though nothing was saved. Divide by 5.",
+                  "zh": "第 5 周虽然没存钱，也算一周。要除以 5。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 5 weeks: 20 ÷ 5 = $4.",
+              "zh": "对。5 周：20 ÷ 5 = 4 元。"
+            }
+          }
+        },
+        {
+          "id": "avg-from-table",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Pupils in three reading groups",
+              "zh": "三个阅读小组的人数"
+            },
+            "cats": [
+              {
+                "id": "p5a",
+                "label": {
+                  "en": "Class A",
+                  "zh": "A 班"
+                },
+                "value": 12
+              },
+              {
+                "id": "p5b",
+                "label": {
+                  "en": "Class B",
+                  "zh": "B 班"
+                },
+                "value": 15
+              },
+              {
+                "id": "p5c",
+                "label": {
+                  "en": "Class C",
+                  "zh": "C 班"
+                },
+                "value": 9
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 16,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Number of pupils",
+                "zh": "人数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "What is the average number of pupils in a group?",
+            "zh": "平均每组有几人？"
+          },
+          "answer": 12,
+          "form": "whole",
+          "data": {
+            "ask": "average"
+          },
+          "guide": {
+            "en": "Find the total first, then share it equally: total ÷ number of items.",
+            "zh": "先求总数，再平均分：总数 ÷ 个数。"
+          },
+          "hints": [
+            {
+              "en": "12 + 15 + 9 = 36",
+              "zh": "12 + 15 + 9 = 36"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 36 ÷ 3 = 12 pupils.",
+              "zh": "对。36 ÷ 3 = 12 人。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "36 is the total. Share it among the 3: 36 ÷ 3 = 12.",
+                  "zh": "36 是总数。再平均分给 3 个：36 ÷ 3 = 12。"
+                },
+                "sample": "36"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 36 ÷ 3 = 12 pupils.",
+              "zh": "对。36 ÷ 3 = 12 人。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "average-total-number",
+      "lo": [
+        "p6-average-relationship"
+      ],
+      "limits": {
+        "maxValue": 600
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "4 bags of rice, 6 kg each on average",
+              "zh": "4 袋米，平均每袋 6 kg"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 6
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 6
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 6
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 6
+              }
+            ],
+            "unit": "kg",
+            "unknown": [
+              "total"
+            ]
+          },
+          "equation": "4 × 6 = 24",
+          "caption": {
+            "en": "4 bags of rice have an average mass of 6 kg. It is as if every bag were 6 kg, so the total is 4 × 6 = 24 kg.",
+            "zh": "4 袋米平均每袋 6 kg。就好像每袋都是 6 kg，所以一共 4 × 6 = 24 kg。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "4 bags of rice, 6 kg each on average",
+              "zh": "4 袋米，平均每袋 6 kg"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 6
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 6
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 6
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 6
+              }
+            ],
+            "unit": "kg",
+            "unknown": [
+              "each"
+            ]
+          },
+          "words": {
+            "en": "total = average × number · average = total ÷ number · number = total ÷ average",
+            "zh": "总数 = 平均数 × 个数 · 平均数 = 总数 ÷ 个数 · 个数 = 总数 ÷ 平均数"
+          },
+          "move": "shade",
+          "caption": {
+            "en": "Average, total and number of items go together. Know any two, and you can find the third.",
+            "zh": "平均数、总数、个数连在一起。知道其中两个，就能求第三个。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "Hui Min spent $45, $9 a day on average",
+              "zh": "Hui Min 花了 45 元，平均每天 9 元"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 9
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 9
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 9
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 9
+              },
+              {
+                "id": "p5",
+                "label": {
+                  "en": "5",
+                  "zh": "5"
+                },
+                "value": 9
+              }
+            ],
+            "unit": "dollar",
+            "unknown": [
+              "count"
+            ]
+          },
+          "equation": "45 ÷ 9 = 5",
+          "move": "split",
+          "caption": {
+            "en": "Hui Min spent $45 in all, $9 a day on average. For how many days? 45 ÷ 9 = 5 days.",
+            "zh": "Hui Min 一共花了 45 元，平均每天 9 元。花了几天？45 ÷ 9 = 5 天。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "4 bags of rice, 6 kg each on average",
+              "zh": "4 袋米，平均每袋 6 kg"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 6
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 6
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 6
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 6
+              }
+            ],
+            "unit": "kg",
+            "wrongTotal": true
+          },
+          "words": {
+            "en": "6 kg ≠ the total · 4 × 6 = 24 kg",
+            "zh": "6 kg ≠ 总数 · 4 × 6 = 24 kg"
+          },
+          "move": "cross",
+          "caption": {
+            "en": "An average of 6 kg is what one bag would be, not all of them together. The 4 bags are 24 kg altogether.",
+            "zh": "平均 6 kg 说的是一袋，不是全部加起来。4 袋一共是 24 kg。"
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Total = average × number of items.",
+          "zh": "总数 = 平均数 × 个数。"
+        },
+        {
+          "en": "Number of items = total ÷ average.",
+          "zh": "个数 = 总数 ÷ 平均数。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "total-bags",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "5 bags, 8 kg each on average",
+              "zh": "5 袋，平均每袋 8 kg"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 8
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 8
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 8
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 8
+              },
+              {
+                "id": "p5",
+                "label": {
+                  "en": "5",
+                  "zh": "5"
+                },
+                "value": 8
+              }
+            ],
+            "unit": "kg",
+            "unknown": [
+              "total"
+            ]
+          },
+          "prompt": {
+            "en": "5 bags have an average mass of 8 kg. What is their total mass, in kg?",
+            "zh": "5 袋平均重 8 kg，一共多重（kg）？"
+          },
+          "answer": 40,
+          "form": "whole",
+          "unit": "kg",
+          "data": {
+            "ask": "total",
+            "average": 8,
+            "count": 5
+          },
+          "guide": {
+            "en": "It is as if every bag were 8 kg: 5 × 8.",
+            "zh": "就好像每袋都是 8 kg：5 × 8。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 5 × 8 = 40 kg.",
+              "zh": "对。5 × 8 = 40 kg。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "8 kg is what one bag would be if they were all the same. Altogether the 5 bags are 5 × 8 = 40 kg.",
+                  "zh": "8 kg 是每袋一样重时一袋的重量。5 袋一共 5 × 8 = 40 kg。"
+                },
+                "sample": "8"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 5 × 8 = 40 kg.",
+              "zh": "对。5 × 8 = 40 kg。"
+            }
+          }
+        },
+        {
+          "id": "total-books",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "6 pupils, 7 books each on average",
+              "zh": "6 人，平均每人 7 本"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 7
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 7
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 7
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 7
+              },
+              {
+                "id": "p5",
+                "label": {
+                  "en": "5",
+                  "zh": "5"
+                },
+                "value": 7
+              },
+              {
+                "id": "p6",
+                "label": {
+                  "en": "6",
+                  "zh": "6"
+                },
+                "value": 7
+              }
+            ],
+            "unknown": [
+              "total"
+            ]
+          },
+          "prompt": {
+            "en": "6 pupils read 7 books each on average. How many books did they read altogether?",
+            "zh": "6 人平均每人读 7 本，一共读了几本？"
+          },
+          "answer": 42,
+          "form": "whole",
+          "data": {
+            "ask": "total",
+            "average": 7,
+            "count": 6
+          },
+          "guide": {
+            "en": "Total = average × number of pupils.",
+            "zh": "总数 = 平均数 × 人数。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 6 × 7 = 42 books.",
+              "zh": "对。6 × 7 = 42 本。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "7 is the average, what each would have if they were all the same. The total is 6 × 7 = 42.",
+                  "zh": "7 是平均数，是每人一样多时的本数。总数是 6 × 7 = 42。"
+                },
+                "sample": "7"
+              },
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 6 pupils, so the total is 6 × 7, not 5 × 7.",
+                  "zh": "平均数说的是 6 个人，总数是 6 × 7，不是 5 × 7。"
+                },
+                "sample": "35"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 6 × 7 = 42 books.",
+              "zh": "对。6 × 7 = 42 本。"
+            }
+          }
+        },
+        {
+          "id": "total-money",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "$12 a day on average, for 4 days",
+              "zh": "平均每天 12 元，共 4 天"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 12
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 12
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 12
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 12
+              }
+            ],
+            "unit": "dollar",
+            "unknown": [
+              "total"
+            ]
+          },
+          "prompt": {
+            "en": "Ravi spent $12 a day on average for 4 days. How much did he spend in all?",
+            "zh": "Ravi 4 天平均每天花 12 元，一共花了多少钱？"
+          },
+          "answer": 48,
+          "form": "whole",
+          "sentence": "$?",
+          "data": {
+            "ask": "total",
+            "average": 12,
+            "count": 4
+          },
+          "guide": {
+            "en": "Total = average × number of days.",
+            "zh": "总数 = 平均数 × 天数。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 4 × $12 = $48.",
+              "zh": "对。4 × 12 = 48 元。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 4 days, so the total is 4 × 12, not 3 × 12 or 5 × 12.",
+                  "zh": "平均数说的是 4 天，总数是 4 × 12，不是 3 × 12 或 5 × 12。"
+                },
+                "sample": "36"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 4 × $12 = $48.",
+              "zh": "对。4 × 12 = 48 元。"
+            }
+          }
+        },
+        {
+          "id": "count-days",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "$45 in all, $9 a day on average",
+              "zh": "一共 45 元，平均每天 9 元"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 9
+              }
+            ],
+            "unit": "dollar",
+            "total": 45,
+            "unknown": [
+              "count"
+            ]
+          },
+          "prompt": {
+            "en": "Hui Min spent $45, $9 a day on average. For how many days?",
+            "zh": "Hui Min 一共花了 45 元，平均每天 9 元。花了几天？"
+          },
+          "answer": 5,
+          "form": "whole",
+          "data": {
+            "ask": "count",
+            "average": 9,
+            "total": 45
+          },
+          "guide": {
+            "en": "How many 9s make 45? Number of items = total ÷ average.",
+            "zh": "45 里有几个 9？个数 = 总数 ÷ 平均数。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            },
+            {
+              "en": "45 ÷ 9",
+              "zh": "45 ÷ 9"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 45 ÷ 9 = 5 days.",
+              "zh": "对。45 ÷ 9 = 5 天。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 45 ÷ 9 = 5 days.",
+              "zh": "对。45 ÷ 9 = 5 天。"
+            }
+          }
+        },
+        {
+          "id": "count-ribbons",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "72 cm of ribbon, 6 cm each on average",
+              "zh": "丝带一共 72 cm，平均每段 6 cm"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 6
+              }
+            ],
+            "unit": "cm",
+            "total": 72,
+            "unknown": [
+              "count"
+            ]
+          },
+          "prompt": {
+            "en": "Some pieces of ribbon are 72 cm long altogether, 6 cm each on average. How many pieces?",
+            "zh": "几段丝带一共长 72 cm，平均每段 6 cm。一共几段？"
+          },
+          "answer": 12,
+          "form": "whole",
+          "data": {
+            "ask": "count",
+            "average": 6,
+            "total": 72
+          },
+          "guide": {
+            "en": "Number of pieces = total ÷ average.",
+            "zh": "段数 = 总数 ÷ 平均数。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 72 ÷ 6 = 12 pieces.",
+              "zh": "对。72 ÷ 6 = 12 段。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 72 ÷ 6 = 12 pieces.",
+              "zh": "对。72 ÷ 6 = 12 段。"
+            }
+          }
+        },
+        {
+          "id": "choose-total",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "3 games, 15 points each on average",
+              "zh": "3 场，平均每场 15 分"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 15
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 15
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 15
+              }
+            ],
+            "unknown": [
+              "total"
+            ]
+          },
+          "prompt": {
+            "en": "A team scored 15 points a game on average in 3 games. Which is the total?",
+            "zh": "一个队 3 场比赛平均每场得 15 分。哪一个是总分？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "45 points",
+                "zh": "45 分"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "15 points",
+                "zh": "15 分"
+              },
+              "correct": false,
+              "misconception": "average-as-total"
+            }
+          ],
+          "guide": {
+            "en": "Total = average × number of games.",
+            "zh": "总数 = 平均数 × 场数。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 3 × 15 = 45 points.",
+              "zh": "对。3 × 15 = 45 分。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "15 points is the average, one game's share. The total is 3 × 15 = 45.",
+                  "zh": "15 分是平均数，是每场分到的。总分是 3 × 15 = 45。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 3 × 15 = 45 points.",
+              "zh": "对。3 × 15 = 45 分。"
+            }
+          }
+        },
+        {
+          "id": "choose-total-kg",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "strip",
+            "title": {
+              "en": "4 bags of rice, 6 kg each on average",
+              "zh": "4 袋米，平均每袋 6 kg"
+            },
+            "cats": [
+              {
+                "id": "p1",
+                "label": {
+                  "en": "1",
+                  "zh": "1"
+                },
+                "value": 6
+              },
+              {
+                "id": "p2",
+                "label": {
+                  "en": "2",
+                  "zh": "2"
+                },
+                "value": 6
+              },
+              {
+                "id": "p3",
+                "label": {
+                  "en": "3",
+                  "zh": "3"
+                },
+                "value": 6
+              },
+              {
+                "id": "p4",
+                "label": {
+                  "en": "4",
+                  "zh": "4"
+                },
+                "value": 6
+              }
+            ],
+            "unit": "kg",
+            "unknown": [
+              "total"
+            ]
+          },
+          "prompt": {
+            "en": "Which is the total mass of the 4 bags?",
+            "zh": "哪一个是 4 袋米的总重？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "24 kg",
+                "zh": "24 kg"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "6 kg",
+                "zh": "6 kg"
+              },
+              "correct": false,
+              "misconception": "average-as-total"
+            },
+            {
+              "id": "c",
+              "text": {
+                "en": "18 kg",
+                "zh": "18 kg"
+              },
+              "correct": false,
+              "misconception": "wrong-count"
+            }
+          ],
+          "guide": {
+            "en": "It is as if every bag were 6 kg.",
+            "zh": "就好像每袋都是 6 kg。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 4 × 6 = 24 kg.",
+              "zh": "对。4 × 6 = 24 kg。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-total",
+                "say": {
+                  "en": "An average of 6 kg is what one bag would be, not all of them together.",
+                  "zh": "平均 6 kg 说的是一袋，不是全部加起来。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "There are 4 bags, so the total is 4 × 6, not 3 × 6.",
+                  "zh": "有 4 袋，总数是 4 × 6，不是 3 × 6。"
+                },
+                "sample": "c"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 4 × 6 = 24 kg.",
+              "zh": "对。4 × 6 = 24 kg。"
+            }
+          }
+        },
+        {
+          "id": "two-groups",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Two groups: 3 pupils average 10, 2 pupils average 15",
+              "zh": "两组：3 人平均 10，2 人平均 15"
+            },
+            "cats": [
+              {
+                "id": "a1",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 10
+              },
+              {
+                "id": "a2",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 10
+              },
+              {
+                "id": "a3",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 10
+              },
+              {
+                "id": "b1",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 15
+              },
+              {
+                "id": "b2",
+                "label": {
+                  "en": "E",
+                  "zh": "E"
+                },
+                "value": 15
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 16,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            }
+          },
+          "prompt": {
+            "en": "3 pupils have 10 stickers each on average, and 2 have 15. How many stickers altogether?",
+            "zh": "3 人平均每人 10 张，2 人平均每人 15 张。一共几张？"
+          },
+          "answer": 60,
+          "form": "whole",
+          "data": {
+            "ask": "sum"
+          },
+          "guide": {
+            "en": "Find each group's total, then add: 3 × 10 + 2 × 15.",
+            "zh": "先求每组的总数，再加起来：3 × 10 + 2 × 15。"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 30 + 30 = 60 stickers.",
+              "zh": "对。30 + 30 = 60 张。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 30 + 30 = 60 stickers.",
+              "zh": "对。30 + 30 = 60 张。"
+            }
+          }
+        },
+        {
+          "id": "two-groups-kg",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 boxes average 5 kg, 2 boxes average 8 kg",
+              "zh": "4 箱平均 5 kg，2 箱平均 8 kg"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 5
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 5
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 5
+              },
+              {
+                "id": "e",
+                "label": {
+                  "en": "E",
+                  "zh": "E"
+                },
+                "value": 8
+              },
+              {
+                "id": "f",
+                "label": {
+                  "en": "F",
+                  "zh": "F"
+                },
+                "value": 8
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Mass (kg)",
+                "zh": "质量（kg）"
+              }
+            }
+          },
+          "prompt": {
+            "en": "4 boxes are 5 kg each on average and 2 boxes are 8 kg. What is the total mass, in kg?",
+            "zh": "4 箱平均每箱 5 kg，2 箱平均每箱 8 kg。一共多重（kg）？"
+          },
+          "answer": 36,
+          "form": "whole",
+          "unit": "kg",
+          "data": {
+            "ask": "sum"
+          },
+          "guide": {
+            "en": "4 × 5 + 2 × 8",
+            "zh": "4 × 5 + 2 × 8"
+          },
+          "hints": [
+            {
+              "en": "Average = total ÷ number of items. Total = average × number of items.",
+              "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 20 + 16 = 36 kg.",
+              "zh": "对。20 + 16 = 36 kg。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 20 + 16 = 36 kg.",
+              "zh": "对。20 + 16 = 36 kg。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "missing-value",
+      "lo": [
+        "p6-average-relationship"
+      ],
+      "limits": {
+        "maxValue": 200
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 4
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                }
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            }
+          },
+          "words": {
+            "en": "average 6 · the fourth = ?",
+            "zh": "平均 6 · 第四个 = ?"
+          },
+          "caption": {
+            "en": "The average of four numbers is 6. Three of them are 5, 7 and 4. What is the fourth?",
+            "zh": "四个数的平均数是 6，其中三个是 5、7、4。第四个是多少？"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 4
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                }
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            },
+            "highlight": {
+              "a": "cold",
+              "b": "cold",
+              "c": "cold"
+            }
+          },
+          "equation": "4 × 6 = 24 · 24 − 16 = 8",
+          "move": "shade",
+          "caption": {
+            "en": "The total must be 4 × 6 = 24. The three you know make 16, so the fourth is 24 − 16 = 8.",
+            "zh": "总数一定是 4 × 6 = 24。知道的三个合起来 16，所以第四个是 24 − 16 = 8。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 6
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 6
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 6
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                },
+                "value": 6
+              }
+            ],
+            "was": [
+              5,
+              7,
+              4,
+              8
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            }
+          },
+          "equation": "6 + 1 + 2 − 1 = 8",
+          "move": "level",
+          "caption": {
+            "en": "You can also see it by evening out. The 5 needs 1 more and the 4 needs 2 more; the 7 has 1 extra. The fourth must bring 6 + 1 + 2 − 1 = 8.",
+            "zh": "也可以用移多补少看：5 少 1，4 少 2，7 多 1。第四个要带来 6 + 1 + 2 − 1 = 8。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 4
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                },
+                "value": 6
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            }
+          },
+          "equation": "5 + 7 + 4 + 6 = 22 ≠ 24",
+          "move": "morph",
+          "caption": {
+            "en": "The missing number is not the average itself. If it were 6, the total would be 22, not 24.",
+            "zh": "缺的那个数不是平均数本身。如果是 6，总数是 22，不是 24。"
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "Find the total first: average × number of items.",
+          "zh": "先求总数：平均数 × 个数。"
+        },
+        {
+          "en": "Missing value = total − the values you know.",
+          "zh": "缺的数 = 总数 − 知道的数。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "miss-four",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Four numbers with an average of 7",
+              "zh": "平均数是 7 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 9
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 6
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 12,
+              "step": 1,
+              "labels": 1
+            },
+            "ghost": [
+              "d"
+            ]
+          },
+          "prompt": {
+            "en": "The average of four numbers is 7. Three are 5, 9 and 6. What is the fourth?",
+            "zh": "四个数的平均数是 7，三个是 5、9、6。第四个是多少？"
+          },
+          "answer": 8,
+          "form": "whole",
+          "data": {
+            "ask": "missing",
+            "average": 7,
+            "count": 4
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "4 × 7 = 28",
+              "zh": "4 × 7 = 28"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 28 − 20 = 8.",
+              "zh": "对。28 − 20 = 8。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 7, the total would be 5 + 9 + 6 + 7 = 27, not 28.",
+                  "zh": "如果缺的那个是 7，总数是 5 + 9 + 6 + 7 = 27，不是 28。"
+                },
+                "sample": "7"
+              },
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 4 numbers, so the total is 4 × 7, not 3 × 7.",
+                  "zh": "平均数说的是 4 个数，总数是 4 × 7，不是 3 × 7。"
+                },
+                "sample": "1"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 28 − 20 = 8.",
+              "zh": "对。28 − 20 = 8。"
+            }
+          }
+        },
+        {
+          "id": "miss-three",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Three numbers with an average of 14",
+              "zh": "平均数是 14 的三个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 12
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 15
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 20,
+              "step": 2,
+              "labels": 1
+            },
+            "ghost": [
+              "c"
+            ]
+          },
+          "prompt": {
+            "en": "The average of three numbers is 14. Two are 12 and 15. What is the third?",
+            "zh": "三个数的平均数是 14，两个是 12、15。第三个是多少？"
+          },
+          "answer": 15,
+          "form": "whole",
+          "data": {
+            "ask": "missing",
+            "average": 14,
+            "count": 3
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "3 × 14 = 42",
+              "zh": "3 × 14 = 42"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 42 − 27 = 15.",
+              "zh": "对。42 − 27 = 15。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 14, the total would be 12 + 15 + 14 = 41, not 42.",
+                  "zh": "如果缺的那个是 14，总数是 12 + 15 + 14 = 41，不是 42。"
+                },
+                "sample": "14"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 42 − 27 = 15.",
+              "zh": "对。42 − 27 = 15。"
+            }
+          }
+        },
+        {
+          "id": "miss-five",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Five numbers with an average of 6",
+              "zh": "平均数是 6 的五个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 6
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 8
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 3
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                },
+                "value": 7
+              },
+              {
+                "id": "e",
+                "label": {
+                  "en": "5th",
+                  "zh": "第5个"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 12,
+              "step": 1,
+              "labels": 1
+            },
+            "ghost": [
+              "e"
+            ]
+          },
+          "prompt": {
+            "en": "The average of five numbers is 6. Four are 6, 8, 3 and 7. What is the fifth?",
+            "zh": "五个数的平均数是 6，四个是 6、8、3、7。第五个是多少？"
+          },
+          "answer": 6,
+          "form": "whole",
+          "data": {
+            "ask": "missing",
+            "average": 6,
+            "count": 5
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "5 × 6 = 30",
+              "zh": "5 × 6 = 30"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 30 − 24 = 6. This time the missing one happens to equal the average.",
+              "zh": "对。30 − 24 = 6。这一次缺的数正好等于平均数。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 5 numbers, so the total is 5 × 6, not 4 × 6.",
+                  "zh": "平均数说的是 5 个数，总数是 5 × 6，不是 4 × 6。"
+                },
+                "sample": "0"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 30 − 24 = 6. This time the missing one happens to equal the average.",
+              "zh": "对。30 − 24 = 6。这一次缺的数正好等于平均数。"
+            }
+          }
+        },
+        {
+          "id": "miss-scores",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Skips in three tries: 16 on average",
+              "zh": "跳绳三次：平均 16 下"
+            },
+            "cats": [
+              {
+                "id": "t1",
+                "label": {
+                  "en": "Try 1",
+                  "zh": "第1次"
+                },
+                "value": 18
+              },
+              {
+                "id": "t2",
+                "label": {
+                  "en": "Try 2",
+                  "zh": "第2次"
+                },
+                "value": 14
+              },
+              {
+                "id": "t3",
+                "label": {
+                  "en": "Try 3",
+                  "zh": "第3次"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 20,
+              "step": 2,
+              "labels": 1,
+              "name": {
+                "en": "Skips",
+                "zh": "下数"
+              }
+            },
+            "ghost": [
+              "t3"
+            ]
+          },
+          "prompt": {
+            "en": "Ravi skipped 16 times on average in three tries. Two tries were 18 and 14. What was the third?",
+            "zh": "Ravi 跳绳三次平均 16 下，两次是 18、14。第三次是几下？"
+          },
+          "answer": 16,
+          "form": "whole",
+          "data": {
+            "ask": "missing",
+            "average": 16,
+            "count": 3
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "3 × 16 = 48",
+              "zh": "3 × 16 = 48"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 48 − 32 = 16.",
+              "zh": "对。48 − 32 = 16。"
+            },
+            "wrong": [
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 3 numbers, so the total is 3 × 16, not 2 × 16.",
+                  "zh": "平均数说的是 3 个数，总数是 3 × 16，不是 2 × 16。"
+                },
+                "sample": "0"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 48 − 32 = 16.",
+              "zh": "对。48 − 32 = 16。"
+            }
+          }
+        },
+        {
+          "id": "miss-money",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Spent over three days: $12 a day on average",
+              "zh": "三天平均每天花 12 元"
+            },
+            "cats": [
+              {
+                "id": "d1",
+                "label": {
+                  "en": "Day 1",
+                  "zh": "第1天"
+                },
+                "value": 10
+              },
+              {
+                "id": "d2",
+                "label": {
+                  "en": "Day 2",
+                  "zh": "第2天"
+                },
+                "value": 15
+              },
+              {
+                "id": "d3",
+                "label": {
+                  "en": "Day 3",
+                  "zh": "第3天"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 20,
+              "step": 1,
+              "labels": 5,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            },
+            "ghost": [
+              "d3"
+            ]
+          },
+          "prompt": {
+            "en": "Siti spent $12 a day on average for 3 days: $10, $15, then how much?",
+            "zh": "Siti 3 天平均每天花 12 元：10 元、15 元，第三天花了多少？"
+          },
+          "answer": 11,
+          "form": "whole",
+          "sentence": "$?",
+          "data": {
+            "ask": "missing",
+            "average": 12,
+            "count": 3
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "3 × 12 = 36",
+              "zh": "3 × 12 = 36"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 36 − 25 = $11.",
+              "zh": "对。36 − 25 = 11 元。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 12, the total would be 10 + 15 + 12 = 37, not 36.",
+                  "zh": "如果缺的那个是 12，总数是 10 + 15 + 12 = 37，不是 36。"
+                },
+                "sample": "12"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 36 − 25 = $11.",
+              "zh": "对。36 − 25 = 11 元。"
+            }
+          }
+        },
+        {
+          "id": "miss-heights",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Four bean plants, 31 cm tall on average",
+              "zh": "四株豆苗平均高 31 cm"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 30
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 34
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 28
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 40,
+              "step": 2,
+              "labels": 5,
+              "name": {
+                "en": "Height (cm)",
+                "zh": "高度（cm）"
+              }
+            },
+            "ghost": [
+              "d"
+            ]
+          },
+          "prompt": {
+            "en": "Four bean plants are 31 cm tall on average. Three are 30, 34 and 28 cm. How tall is the fourth?",
+            "zh": "四株豆苗平均高 31 cm，三株是 30、34、28 cm。第四株多高？"
+          },
+          "answer": 32,
+          "form": "whole",
+          "unit": "cm",
+          "data": {
+            "ask": "missing",
+            "average": 31,
+            "count": 4
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "4 × 31 = 124",
+              "zh": "4 × 31 = 124"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 124 − 92 = 32 cm.",
+              "zh": "对。124 − 92 = 32 cm。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 31, the total would be 30 + 34 + 28 + 31 = 123, not 124.",
+                  "zh": "如果缺的那个是 31，总数是 30 + 34 + 28 + 31 = 123，不是 124。"
+                },
+                "sample": "31"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 124 − 92 = 32 cm.",
+              "zh": "对。124 − 92 = 32 cm。"
+            }
+          }
+        },
+        {
+          "id": "choose-missing",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 4
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                }
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            }
+          },
+          "prompt": {
+            "en": "The average is 6. What is the fourth number?",
+            "zh": "平均数是 6。第四个数是多少？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "8",
+                "zh": "8"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "6",
+                "zh": "6"
+              },
+              "correct": false,
+              "misconception": "missing-equals-average"
+            },
+            {
+              "id": "c",
+              "text": {
+                "en": "2",
+                "zh": "2"
+              },
+              "correct": false,
+              "misconception": "wrong-count"
+            }
+          ],
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "4 × 6 = 24",
+              "zh": "4 × 6 = 24"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 24 − 16 = 8.",
+              "zh": "对。24 − 16 = 8。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 6, the total would be 5 + 7 + 4 + 6 = 22, not 24.",
+                  "zh": "如果缺的那个是 6，总数是 5 + 7 + 4 + 6 = 22，不是 24。"
+                },
+                "sample": "b"
+              },
+              {
+                "when": "wrong-count",
+                "say": {
+                  "en": "The average is for all 4 numbers, so the total is 4 × 6, not 3 × 6.",
+                  "zh": "平均数说的是 4 个数，总数是 4 × 6，不是 3 × 6。"
+                },
+                "sample": "c"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 24 − 16 = 8.",
+              "zh": "对。24 − 16 = 8。"
+            }
+          }
+        },
+        {
+          "id": "choose-missing-even",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Four numbers with an average of 6",
+              "zh": "平均数是 6 的四个数"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "3rd",
+                  "zh": "第3个"
+                },
+                "value": 4
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "4th",
+                  "zh": "第4个"
+                }
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "mean": 6,
+            "axis": {
+              "from": 0,
+              "to": 8,
+              "step": 1,
+              "labels": 1
+            }
+          },
+          "prompt": {
+            "en": "Evening out: how many blocks must the fourth tower bring?",
+            "zh": "移多补少：第四座塔要带来几块？"
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": {
+                "en": "8: it fills the gaps and makes 6 itself",
+                "zh": "8：补上缺的，自己还要 6"
+              },
+              "correct": true
+            },
+            {
+              "id": "b",
+              "text": {
+                "en": "6: the average",
+                "zh": "6：平均数"
+              },
+              "correct": false,
+              "misconception": "missing-equals-average"
+            }
+          ],
+          "guide": {
+            "en": "The 5 needs 1 more, the 4 needs 2; the 7 has 1 extra.",
+            "zh": "5 少 1，4 少 2，7 多 1。"
+          },
+          "hints": [
+            {
+              "en": "6 + 1 + 2 − 1",
+              "zh": "6 + 1 + 2 − 1"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 6 + 1 + 2 − 1 = 8.",
+              "zh": "对。6 + 1 + 2 − 1 = 8。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If it brought only 6, the 5 and the 4 would still be short. It must bring 6 + 1 + 2 − 1 = 8.",
+                  "zh": "如果只带 6 块，5 和 4 还是不够。它要带来 6 + 1 + 2 − 1 = 8。"
+                },
+                "sample": "b"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 6 + 1 + 2 − 1 = 8.",
+              "zh": "对。6 + 1 + 2 − 1 = 8。"
+            }
+          }
+        },
+        {
+          "id": "miss-two-known",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "Two numbers with an average of 7",
+              "zh": "平均数是 7 的两个数"
+            },
+            "cats": [
+              {
+                "id": "x",
+                "label": {
+                  "en": "1st",
+                  "zh": "第1个"
+                },
+                "value": 9
+              },
+              {
+                "id": "y",
+                "label": {
+                  "en": "2nd",
+                  "zh": "第2个"
+                }
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 12,
+              "step": 1,
+              "labels": 1
+            },
+            "ghost": [
+              "y"
+            ]
+          },
+          "prompt": {
+            "en": "The average of two numbers is 7. One is 9. What is the other?",
+            "zh": "两个数的平均数是 7，一个是 9。另一个是多少？"
+          },
+          "answer": 5,
+          "form": "whole",
+          "data": {
+            "ask": "missing",
+            "average": 7,
+            "count": 2
+          },
+          "guide": {
+            "en": "Find the total first: average × number of items. Then take away the ones you know.",
+            "zh": "先求总数：平均数 × 个数。再减去知道的。"
+          },
+          "hints": [
+            {
+              "en": "2 × 7 = 14",
+              "zh": "2 × 7 = 14"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 14 − 9 = 5.",
+              "zh": "对。14 − 9 = 5。"
+            },
+            "wrong": [
+              {
+                "when": "missing-equals-average",
+                "say": {
+                  "en": "If the missing one were 7, the total would be 9 + 7 = 16, not 14.",
+                  "zh": "如果缺的那个是 7，总数是 9 + 7 = 16，不是 14。"
+                },
+                "sample": "7"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 14 − 9 = 5.",
+              "zh": "对。14 − 9 = 5。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "changing-the-average",
+      "lo": [
+        "p6-average-relationship"
+      ],
+      "limits": {
+        "maxValue": 100
+      },
+      "beats": [
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Books read last month",
+              "zh": "上个月读的书"
+            },
+            "cats": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "value": 2
+              },
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 6
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 5
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 7
+              },
+              {
+                "id": "daniel",
+                "label": {
+                  "en": "Daniel",
+                  "zh": "Daniel"
+                },
+                "value": 10
+              }
+            ],
+            "highlight": {
+              "daniel": "hot"
+            },
+            "mean": 6
+          },
+          "equation": "4 × 5 + 10 = 30 · 30 ÷ 5 = 6",
+          "caption": {
+            "en": "Four friends read 5 books each on average: 20 books. Daniel joins with 10 books. The new total is 30, shared by 5: the new average is 6.",
+            "zh": "四个朋友平均每人读 5 本，一共 20 本。Daniel 带着 10 本加入。新总数 30，5 个人分：新平均数是 6。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Books read last month",
+              "zh": "上个月读的书"
+            },
+            "cats": [
+              {
+                "id": "ravi",
+                "label": {
+                  "en": "Ravi",
+                  "zh": "Ravi"
+                },
+                "value": 2
+              },
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 6
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 5
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 7
+              },
+              {
+                "id": "daniel",
+                "label": {
+                  "en": "Daniel",
+                  "zh": "Daniel"
+                },
+                "value": 10
+              }
+            ],
+            "highlight": {
+              "daniel": "hot",
+              "ravi": "cold",
+              "mei-ling": "cold",
+              "aisha": "cold",
+              "siti": "cold"
+            },
+            "mean": 6
+          },
+          "words": {
+            "en": "(5 + 10) ÷ 2 ≠ the new average",
+            "zh": "(5 + 10) ÷ 2 ≠ 新平均数"
+          },
+          "move": "shade",
+          "caption": {
+            "en": "(5 + 10) ÷ 2 = 7.5 does not work: the old average stands for 4 people and the new number for only 1. Use the totals.",
+            "zh": "(5 + 10) ÷ 2 = 7.5 不对：旧平均数代表 4 个人，新的数只代表 1 个人。要用总数算。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "stack": true,
+            "title": {
+              "en": "Books read last month",
+              "zh": "上个月读的书"
+            },
+            "cats": [
+              {
+                "id": "mei-ling",
+                "label": {
+                  "en": "Mei Ling",
+                  "zh": "Mei Ling"
+                },
+                "value": 6
+              },
+              {
+                "id": "aisha",
+                "label": {
+                  "en": "Aisha",
+                  "zh": "Aisha"
+                },
+                "value": 5
+              },
+              {
+                "id": "siti",
+                "label": {
+                  "en": "Siti",
+                  "zh": "Siti"
+                },
+                "value": 7
+              }
+            ],
+            "mean": 6
+          },
+          "equation": "(20 − 2) ÷ 3 = 6",
+          "move": "morph",
+          "caption": {
+            "en": "If someone below the average leaves, the average goes up: Ravi, with 2 books, leaves the four, and (20 − 2) ÷ 3 = 6.",
+            "zh": "比平均少的人离开，平均数就升高：读 2 本的 Ravi 离开那四个人，(20 − 2) ÷ 3 = 6。"
+          }
+        },
+        {
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "3 pupils average 8; with a 4th, the average is 9",
+              "zh": "3 人平均 8；加上第 4 人，平均 9"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 7
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 8
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 9
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                }
+              }
+            ],
+            "ghost": [
+              "d"
+            ],
+            "axis": {
+              "from": 0,
+              "to": 14,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            },
+            "mean": 9
+          },
+          "equation": "4 × 9 − 3 × 8 = 36 − 24 = 12",
+          "move": "morph",
+          "caption": {
+            "en": "Going backwards: 3 pupils average 8, and with a fourth the average is 9. The fourth brought 4 × 9 − 3 × 8 = 12.",
+            "zh": "倒过来求：3 人平均 8，加上第 4 人后平均 9。第 4 人带来 4 × 9 − 3 × 8 = 12。"
+          }
+        }
+      ],
+      "keyFacts": [
+        {
+          "en": "New average = new total ÷ new number of items.",
+          "zh": "新平均数 = 新总数 ÷ 新个数。"
+        },
+        {
+          "en": "A value above the average pulls it up; below pulls it down.",
+          "zh": "比平均大的数让平均升，比平均小的让它降。"
+        }
+      ],
+      "pool": [
+        {
+          "id": "join-ten",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 friends average 5; one more joins with 10",
+              "zh": "4 人平均 5；又来一人带 10 本"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 4
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 6
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 5
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 5
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 12,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Books",
+                "zh": "本数"
+              }
+            }
+          },
+          "prompt": {
+            "en": "4 friends read 5 books each on average. A fifth read 10. What is the new average?",
+            "zh": "4 人平均每人读 5 本，第 5 人读了 10 本。新平均数是多少？"
+          },
+          "answer": 6,
+          "form": "decimal",
+          "data": {
+            "ask": "join",
+            "average": 5,
+            "count": 4,
+            "value": 10
+          },
+          "guide": {
+            "en": "Old total 4 × 5 = 20; new total 30; 5 people.",
+            "zh": "旧总数 4 × 5 = 20；新总数 30；5 个人。"
+          },
+          "hints": [
+            {
+              "en": "New average = new total ÷ new number of items.",
+              "zh": "新平均数 = 新总数 ÷ 新个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 30 ÷ 5 = 6.",
+              "zh": "对。30 ÷ 5 = 6。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "The old average stands for 4 people, the new number for only 1. Find the new total: 4 × 5 + 10 = 30, then ÷ 5 = 6.",
+                  "zh": "旧平均数代表 4 个人，新的数只有 1 个人。先求新总数：4 × 5 + 10 = 30，再 ÷ 5 = 6。"
+                },
+                "sample": "7.5"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 30 ÷ 5 = 6.",
+              "zh": "对。30 ÷ 5 = 6。"
+            }
+          }
+        },
+        {
+          "id": "join-low",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "3 pupils average 8; one more joins with 4",
+              "zh": "3 人平均 8；又来一人带 4"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 9
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 8
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            }
+          },
+          "prompt": {
+            "en": "3 pupils have 8 stickers each on average. A fourth has 4. What is the new average?",
+            "zh": "3 人平均每人 8 张，第 4 人有 4 张。新平均数是多少？"
+          },
+          "answer": 7,
+          "form": "whole",
+          "data": {
+            "ask": "join",
+            "average": 8,
+            "count": 3,
+            "value": 4
+          },
+          "guide": {
+            "en": "New average = new total ÷ new number of items.",
+            "zh": "新平均数 = 新总数 ÷ 新个数。"
+          },
+          "hints": [
+            {
+              "en": "3 × 8 + 4 = 28",
+              "zh": "3 × 8 + 4 = 28"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 28 ÷ 4 = 7.",
+              "zh": "对。28 ÷ 4 = 7。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "The old average stands for 3 people, the new number for only 1. Find the new total: 3 × 8 + 4 = 28, then ÷ 4 = 7.",
+                  "zh": "旧平均数代表 3 个人，新的数只有 1 个人。先求新总数：3 × 8 + 4 = 28，再 ÷ 4 = 7。"
+                },
+                "sample": "6"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 28 ÷ 4 = 7.",
+              "zh": "对。28 ÷ 4 = 7。"
+            }
+          }
+        },
+        {
+          "id": "leave-low",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 pupils average 6; the one with 3 leaves",
+              "zh": "4 人平均 6；有 3 张的那人离开"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 3
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 6
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 8
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            }
+          },
+          "prompt": {
+            "en": "4 pupils have 6 stickers each on average. The one with 3 leaves. What is the new average?",
+            "zh": "4 人平均每人 6 张。有 3 张的那人离开了。新平均数是多少？"
+          },
+          "answer": 7,
+          "form": "decimal",
+          "data": {
+            "ask": "leave",
+            "average": 6,
+            "count": 4,
+            "value": 3
+          },
+          "guide": {
+            "en": "Old total 24; take away 3; 3 pupils left.",
+            "zh": "旧总数 24；减去 3；剩 3 人。"
+          },
+          "hints": [
+            {
+              "en": "New average = new total ÷ new number of items.",
+              "zh": "新平均数 = 新总数 ÷ 新个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. (24 − 3) ÷ 3 = 7.",
+              "zh": "对。(24 − 3) ÷ 3 = 7。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "Do not average the averages. New total: 24 − 3 = 21, shared by 3: 7.",
+                  "zh": "不能把平均数再平均。新总数：24 − 3 = 21，3 个人分：7。"
+                },
+                "sample": "4.5"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. (24 − 3) ÷ 3 = 7.",
+              "zh": "对。(24 − 3) ÷ 3 = 7。"
+            }
+          }
+        },
+        {
+          "id": "joined-back",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "3 pupils average 8; with a 4th the average is 9",
+              "zh": "3 人平均 8；加上第 4 人平均 9"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 7
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 8
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 9
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 14,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            }
+          },
+          "prompt": {
+            "en": "3 pupils average 8 stickers. With a fourth, the average is 9. How many does the fourth have?",
+            "zh": "3 人平均 8 张。加上第 4 人，平均 9 张。第 4 人有几张？"
+          },
+          "answer": 12,
+          "form": "whole",
+          "data": {
+            "ask": "joined",
+            "average": 8,
+            "count": 3,
+            "after": 9
+          },
+          "guide": {
+            "en": "New total 4 × 9; old total 3 × 8; the difference is the fourth.",
+            "zh": "新总数 4 × 9；旧总数 3 × 8；差就是第 4 人的。"
+          },
+          "hints": [
+            {
+              "en": "36 − 24",
+              "zh": "36 − 24"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 36 − 24 = 12.",
+              "zh": "对。36 − 24 = 12。"
+            },
+            "wrong": [],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 36 − 24 = 12.",
+              "zh": "对。36 − 24 = 12。"
+            }
+          }
+        },
+        {
+          "id": "join-money",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "$4 a day on average for 3 days; day 4: $8",
+              "zh": "3 天平均每天 4 元；第 4 天 8 元"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 3
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 4
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Amount ($)",
+                "zh": "钱数（元）"
+              }
+            }
+          },
+          "prompt": {
+            "en": "Mei Ling saved $4 a day on average for 3 days, then $8 on day 4. What is the new average?",
+            "zh": "Mei Ling 3 天平均每天存 4 元，第 4 天存 8 元。新平均数是几？"
+          },
+          "answer": 5,
+          "form": "whole",
+          "sentence": "$?",
+          "data": {
+            "ask": "join",
+            "average": 4,
+            "count": 3,
+            "value": 8
+          },
+          "guide": {
+            "en": "New average = new total ÷ new number of items.",
+            "zh": "新平均数 = 新总数 ÷ 新个数。"
+          },
+          "hints": [
+            {
+              "en": "3 × 4 + 8 = 20",
+              "zh": "3 × 4 + 8 = 20"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 20 ÷ 4 = $5.",
+              "zh": "对。20 ÷ 4 = 5 元。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "The old average stands for 3 people, the new number for only 1. Find the new total: 3 × 4 + 8 = 20, then ÷ 4 = 5.",
+                  "zh": "旧平均数代表 3 个人，新的数只有 1 个人。先求新总数：3 × 4 + 8 = 20，再 ÷ 4 = 5。"
+                },
+                "sample": "6"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 20 ÷ 4 = $5.",
+              "zh": "对。20 ÷ 4 = 5 元。"
+            }
+          }
+        },
+        {
+          "id": "rise-or-fall",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 numbers average 5; a 9 joins",
+              "zh": "4 个数平均 5；加入一个 9"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 5
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 5
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 5
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 5
+              },
+              {
+                "id": "e",
+                "label": {
+                  "en": "E",
+                  "zh": "E"
+                },
+                "value": 9
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            },
+            "highlight": {
+              "e": "hot"
+            }
+          },
+          "prompt": {
+            "en": "A 9 joins four numbers whose average is 5. What happens to the average?",
+            "zh": "4 个数的平均数是 5，加入一个 9。平均数会怎样？"
+          },
+          "options": [
+            {
+              "id": "up",
+              "text": {
+                "en": "It goes up",
+                "zh": "升高"
+              },
+              "correct": true
+            },
+            {
+              "id": "same",
+              "text": {
+                "en": "It stays the same",
+                "zh": "不变"
+              },
+              "correct": false,
+              "misconception": "average-as-middle"
+            }
+          ],
+          "guide": {
+            "en": "A number above the average pulls it up.",
+            "zh": "比平均大的数让平均升高。"
+          },
+          "hints": [
+            {
+              "en": "New total 29, 5 numbers.",
+              "zh": "新总数 29，5 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 29 ÷ 5 = 5.8: it goes up.",
+              "zh": "对。29 ÷ 5 = 5.8：升高了。"
+            },
+            "wrong": [
+              {
+                "when": "average-as-middle",
+                "say": {
+                  "en": "The middle number is still 5, but the average shares the total: 29 ÷ 5 is more than 5.",
+                  "zh": "中间的数还是 5，可平均数是总数平均分：29 ÷ 5 比 5 大。"
+                },
+                "sample": "same"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 29 ÷ 5 = 5.8: it goes up.",
+              "zh": "对。29 ÷ 5 = 5.8：升高了。"
+            }
+          }
+        },
+        {
+          "id": "stays-same",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 numbers average 5; a 5 joins",
+              "zh": "4 个数平均 5；加入一个 5"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 4
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 7
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 6
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 3
+              },
+              {
+                "id": "e",
+                "label": {
+                  "en": "E",
+                  "zh": "E"
+                },
+                "value": 5
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            },
+            "highlight": {
+              "e": "hot"
+            }
+          },
+          "prompt": {
+            "en": "A 5 joins four numbers whose average is 5. What happens to the average?",
+            "zh": "4 个数的平均数是 5，加入一个 5。平均数会怎样？"
+          },
+          "options": [
+            {
+              "id": "same",
+              "text": {
+                "en": "It stays the same",
+                "zh": "不变"
+              },
+              "correct": true
+            },
+            {
+              "id": "up",
+              "text": {
+                "en": "It goes up",
+                "zh": "升高"
+              },
+              "correct": false,
+              "misconception": "averages-averaged"
+            }
+          ],
+          "guide": {
+            "en": "A number equal to the average leaves it where it is.",
+            "zh": "和平均数一样大的数不会让它变。"
+          },
+          "hints": [
+            {
+              "en": "New total 25, 5 numbers.",
+              "zh": "新总数 25，5 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 25 ÷ 5 = 5: no change.",
+              "zh": "对。25 ÷ 5 = 5：不变。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "Adding a number does not always raise the average. 20 + 5 = 25, and 25 ÷ 5 = 5: the same.",
+                  "zh": "加进一个数，平均数不一定升高。20 + 5 = 25，25 ÷ 5 = 5：一样。"
+                },
+                "sample": "up"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 25 ÷ 5 = 5: no change.",
+              "zh": "对。25 ÷ 5 = 5：不变。"
+            }
+          }
+        },
+        {
+          "id": "leave-high",
+          "kind": "choose",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "4 numbers average 6; the 9 leaves",
+              "zh": "4 个数平均 6；9 离开"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 9
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 4
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 5
+              },
+              {
+                "id": "d",
+                "label": {
+                  "en": "D",
+                  "zh": "D"
+                },
+                "value": 6
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 10,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            },
+            "highlight": {
+              "a": "hot"
+            }
+          },
+          "prompt": {
+            "en": "The 9 leaves four numbers whose average is 6. What happens to the average?",
+            "zh": "4 个数的平均数是 6，9 离开了。平均数会怎样？"
+          },
+          "options": [
+            {
+              "id": "down",
+              "text": {
+                "en": "It goes down",
+                "zh": "降低"
+              },
+              "correct": true
+            },
+            {
+              "id": "up",
+              "text": {
+                "en": "It goes up",
+                "zh": "升高"
+              },
+              "correct": false,
+              "misconception": "averages-averaged"
+            }
+          ],
+          "guide": {
+            "en": "A number above the average was pulling it up.",
+            "zh": "比平均大的数本来在把它往上拉。"
+          },
+          "hints": [
+            {
+              "en": "New total 15, 3 numbers.",
+              "zh": "新总数 15，3 个数。"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 15 ÷ 3 = 5: it goes down.",
+              "zh": "对。15 ÷ 3 = 5：降低了。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "Work it out with the totals: 24 − 9 = 15, and 15 ÷ 3 = 5, less than 6.",
+                  "zh": "用总数算：24 − 9 = 15，15 ÷ 3 = 5，比 6 小。"
+                },
+                "sample": "up"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Look at the chart again, one part at a time.",
+              "zh": "还没对。再看一遍图，一部分一部分地看。"
+            },
+            "reveal": {
+              "en": "Yes. 15 ÷ 3 = 5: it goes down.",
+              "zh": "对。15 ÷ 3 = 5：降低了。"
+            }
+          }
+        },
+        {
+          "id": "join-two-wrong-count",
+          "kind": "input",
+          "model": {
+            "kind": "chart",
+            "type": "bar",
+            "title": {
+              "en": "3 friends average 7; one more joins with 11",
+              "zh": "3 人平均 7；又来一人带 11"
+            },
+            "cats": [
+              {
+                "id": "a",
+                "label": {
+                  "en": "A",
+                  "zh": "A"
+                },
+                "value": 6
+              },
+              {
+                "id": "b",
+                "label": {
+                  "en": "B",
+                  "zh": "B"
+                },
+                "value": 8
+              },
+              {
+                "id": "c",
+                "label": {
+                  "en": "C",
+                  "zh": "C"
+                },
+                "value": 7
+              }
+            ],
+            "axis": {
+              "from": 0,
+              "to": 12,
+              "step": 1,
+              "labels": 2,
+              "name": {
+                "en": "Stickers",
+                "zh": "贴纸"
+              }
+            }
+          },
+          "prompt": {
+            "en": "3 friends read 7 books each on average. A fourth read 11. What is the new average?",
+            "zh": "3 人平均每人读 7 本，第 4 人读了 11 本。新平均数是多少？"
+          },
+          "answer": 8,
+          "form": "whole",
+          "data": {
+            "ask": "join",
+            "average": 7,
+            "count": 3,
+            "value": 11
+          },
+          "guide": {
+            "en": "New average = new total ÷ new number of items.",
+            "zh": "新平均数 = 新总数 ÷ 新个数。"
+          },
+          "hints": [
+            {
+              "en": "3 × 7 + 11 = 32",
+              "zh": "3 × 7 + 11 = 32"
+            }
+          ],
+          "feedback": {
+            "correct": {
+              "en": "Yes. 32 ÷ 4 = 8.",
+              "zh": "对。32 ÷ 4 = 8。"
+            },
+            "wrong": [
+              {
+                "when": "averages-averaged",
+                "say": {
+                  "en": "The old average stands for 3 people, the new number for only 1. Find the new total: 3 × 7 + 11 = 32, then ÷ 4 = 8.",
+                  "zh": "旧平均数代表 3 个人，新的数只有 1 个人。先求新总数：3 × 7 + 11 = 32，再 ÷ 4 = 8。"
+                },
+                "sample": "9"
+              }
+            ],
+            "fallback": {
+              "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+              "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+            },
+            "reveal": {
+              "en": "Yes. 32 ÷ 4 = 8.",
+              "zh": "对。32 ÷ 4 = 8。"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "id": "q1-even-out",
+      "revisit": [
+        "evening-out"
+      ],
+      "task": {
+        "id": "q1-even-out",
+        "kind": "even-out",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "stack": true,
+          "cats": [
+            {
+              "id": "wei-jie",
+              "label": {
+                "en": "Wei Jie",
+                "zh": "Wei Jie"
+              },
+              "value": 3
+            },
+            {
+              "id": "siti",
+              "label": {
+                "en": "Siti",
+                "zh": "Siti"
+              },
+              "value": 5
+            },
+            {
+              "id": "arjun",
+              "label": {
+                "en": "Arjun",
+                "zh": "Arjun"
+              },
+              "value": 7
+            },
+            {
+              "id": "hui-min",
+              "label": {
+                "en": "Hui Min",
+                "zh": "Hui Min"
+              },
+              "value": 9
+            }
+          ]
+        },
+        "prompt": {
+          "en": "Even out the towers, then write the average.",
+          "zh": "把塔移平，再写平均数。"
+        },
+        "answer": {
+          "answer": 6,
+          "form": "whole"
+        },
+        "guide": {
+          "en": "Tap a tower to lift its top block, then tap a shorter tower to put it there. When the towers are level, the height is the average.",
+          "zh": "点一座塔拿起顶上的一块，再点一座矮塔放下。塔一样高时，那个高度就是平均数。"
+        },
+        "hints": [
+          {
+            "en": "Move from the tall towers to the short ones until they are all the same.",
+            "zh": "把多的移给少的，直到一样多。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 3, 5, 7 and 9 even out to 6 each.",
+            "zh": "对。3、5、7、9 移平后每座 6。"
+          },
+          "wrong": [
+            {
+              "when": "average-as-middle",
+              "say": {
+                "en": "Even them out: 3, 5, 7 and 9 become 6 each. The average is 6, not one of the middle numbers.",
+                "zh": "移一移：3、5、7、9 变成每座 6。平均数是 6，不是中间的数。"
+              },
+              "sample": "=5"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Move blocks from the tall towers to the short ones until all are the same height.",
+            "zh": "还没对。把高塔的方块移给矮塔，直到每座一样高。"
+          },
+          "reveal": {
+            "en": "Yes. 3, 5, 7 and 9 even out to 6 each.",
+            "zh": "对。3、5、7、9 移平后每座 6。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q2-with-zero",
+      "revisit": [
+        "total-divided"
+      ],
+      "task": {
+        "id": "q2-with-zero",
+        "kind": "input",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "title": {
+            "en": "Four numbers",
+            "zh": "四个数"
+          },
+          "cats": [
+            {
+              "id": "a",
+              "label": {
+                "en": "A",
+                "zh": "A"
+              },
+              "value": 12
+            },
+            {
+              "id": "b",
+              "label": {
+                "en": "B",
+                "zh": "B"
+              },
+              "value": 15
+            },
+            {
+              "id": "c",
+              "label": {
+                "en": "C",
+                "zh": "C"
+              },
+              "value": 0
+            },
+            {
+              "id": "d",
+              "label": {
+                "en": "D",
+                "zh": "D"
+              },
+              "value": 9
+            }
+          ],
+          "axis": {
+            "from": 0,
+            "to": 16,
+            "step": 1,
+            "labels": 2
+          }
+        },
+        "prompt": {
+          "en": "Find the average of 12, 15, 0 and 9.",
+          "zh": "求 12、15、0、9 的平均数。"
+        },
+        "answer": 9,
+        "form": "whole",
+        "data": {
+          "ask": "average"
+        },
+        "guide": {
+          "en": "Find the total first, then share it equally: total ÷ number of items.",
+          "zh": "先求总数，再平均分：总数 ÷ 个数。"
+        },
+        "hints": [
+          {
+            "en": "0 is still an item.",
+            "zh": "0 也算一项。"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 36 ÷ 4 = 9.",
+            "zh": "对。36 ÷ 4 = 9。"
+          },
+          "wrong": [
+            {
+              "when": "zero-ignored",
+              "say": {
+                "en": "0 is still one of the numbers. Divide by 4: 36 ÷ 4 = 9.",
+                "zh": "0 也是其中一个数。要除以 4：36 ÷ 4 = 9。"
+              },
+              "sample": "12"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+            "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+          },
+          "reveal": {
+            "en": "Yes. 36 ÷ 4 = 9.",
+            "zh": "对。36 ÷ 4 = 9。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q3-ribbons",
+      "revisit": [
+        "total-divided"
+      ],
+      "task": {
+        "id": "q3-ribbons",
+        "kind": "input",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "title": {
+            "en": "Two ribbons",
+            "zh": "两条丝带"
+          },
+          "cats": [
+            {
+              "id": "r1",
+              "label": {
+                "en": "Ribbon 1",
+                "zh": "丝带1"
+              },
+              "value": 13
+            },
+            {
+              "id": "r2",
+              "label": {
+                "en": "Ribbon 2",
+                "zh": "丝带2"
+              },
+              "value": 16
+            }
+          ],
+          "axis": {
+            "from": 0,
+            "to": 20,
+            "step": 2,
+            "labels": 1,
+            "name": {
+              "en": "Length (cm)",
+              "zh": "长度（cm）"
+            }
+          }
+        },
+        "prompt": {
+          "en": "Two ribbons are 13 cm and 16 cm long. What is their average length, in cm?",
+          "zh": "两条丝带长 13 cm 和 16 cm，平均长多少 cm？"
+        },
+        "answer": "14.5",
+        "form": "decimal",
+        "unit": "cm",
+        "data": {
+          "ask": "average"
+        },
+        "guide": {
+          "en": "Find the total first, then share it equally: total ÷ number of items.",
+          "zh": "先求总数，再平均分：总数 ÷ 个数。"
+        },
+        "hints": [
+          {
+            "en": "29 ÷ 2",
+            "zh": "29 ÷ 2"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 29 ÷ 2 = 14.5 cm.",
+            "zh": "对。29 ÷ 2 = 14.5 cm。"
+          },
+          "wrong": [
+            {
+              "when": "remainder-dropped",
+              "say": {
+                "en": "29 ÷ 2 is not a whole number. Share the last centimetre too: 14.5 cm.",
+                "zh": "29 ÷ 2 不是整数。最后那 1 cm 也要分：14.5 cm。"
+              },
+              "sample": "14"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+            "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+          },
+          "reveal": {
+            "en": "Yes. 29 ÷ 2 = 14.5 cm.",
+            "zh": "对。29 ÷ 2 = 14.5 cm。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q4-total-mass",
+      "revisit": [
+        "average-total-number"
+      ],
+      "task": {
+        "id": "q4-total-mass",
+        "kind": "input",
+        "model": {
+          "kind": "chart",
+          "type": "strip",
+          "title": {
+            "en": "5 bags, 8 kg each on average",
+            "zh": "5 袋，平均每袋 8 kg"
+          },
+          "cats": [
+            {
+              "id": "p1",
+              "label": {
+                "en": "1",
+                "zh": "1"
+              },
+              "value": 8
+            },
+            {
+              "id": "p2",
+              "label": {
+                "en": "2",
+                "zh": "2"
+              },
+              "value": 8
+            },
+            {
+              "id": "p3",
+              "label": {
+                "en": "3",
+                "zh": "3"
+              },
+              "value": 8
+            },
+            {
+              "id": "p4",
+              "label": {
+                "en": "4",
+                "zh": "4"
+              },
+              "value": 8
+            },
+            {
+              "id": "p5",
+              "label": {
+                "en": "5",
+                "zh": "5"
+              },
+              "value": 8
+            }
+          ],
+          "unit": "kg",
+          "unknown": [
+            "total"
+          ]
+        },
+        "prompt": {
+          "en": "5 bags have an average mass of 8 kg. What is their total mass, in kg?",
+          "zh": "5 袋平均重 8 kg，一共多重（kg）？"
+        },
+        "answer": 40,
+        "form": "whole",
+        "unit": "kg",
+        "data": {
+          "ask": "total",
+          "average": 8,
+          "count": 5
+        },
+        "guide": {
+          "en": "Average = total ÷ number of items. Total = average × number of items.",
+          "zh": "平均数 = 总数 ÷ 个数；总数 = 平均数 × 个数。"
+        },
+        "hints": [
+          {
+            "en": "5 × 8",
+            "zh": "5 × 8"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 5 × 8 = 40 kg.",
+            "zh": "对。5 × 8 = 40 kg。"
+          },
+          "wrong": [
+            {
+              "when": "average-as-total",
+              "say": {
+                "en": "8 kg is what one bag would be. Altogether the 5 bags are 5 × 8 = 40 kg.",
+                "zh": "8 kg 是一袋的重量。5 袋一共 5 × 8 = 40 kg。"
+              },
+              "sample": "8"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+            "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+          },
+          "reveal": {
+            "en": "Yes. 5 × 8 = 40 kg.",
+            "zh": "对。5 × 8 = 40 kg。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q5-test-scores",
+      "revisit": [
+        "missing-value"
+      ],
+      "task": {
+        "id": "q5-test-scores",
+        "kind": "input",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "title": {
+            "en": "Four quiz scores, 15 on average",
+            "zh": "四次小测，平均 15 分"
+          },
+          "cats": [
+            {
+              "id": "t1",
+              "label": {
+                "en": "Test 1",
+                "zh": "小测1"
+              },
+              "value": 12
+            },
+            {
+              "id": "t2",
+              "label": {
+                "en": "Test 2",
+                "zh": "小测2"
+              },
+              "value": 18
+            },
+            {
+              "id": "t3",
+              "label": {
+                "en": "Test 3",
+                "zh": "小测3"
+              },
+              "value": 14
+            },
+            {
+              "id": "t4",
+              "label": {
+                "en": "Test 4",
+                "zh": "小测4"
+              }
+            }
+          ],
+          "axis": {
+            "from": 0,
+            "to": 20,
+            "step": 2,
+            "labels": 1,
+            "name": {
+              "en": "Score",
+              "zh": "分数"
+            }
+          },
+          "ghost": [
+            "t4"
+          ]
+        },
+        "prompt": {
+          "en": "The average of four quiz scores is 15. Three are 12, 18 and 14. What is the fourth?",
+          "zh": "四次小测的平均分是 15，其中三次是 12、18、14。第四次是多少？"
+        },
+        "answer": 16,
+        "form": "whole",
+        "data": {
+          "ask": "missing",
+          "average": 15,
+          "count": 4
+        },
+        "guide": {
+          "en": "Find the total first: average × number of items. Then take away the ones you know.",
+          "zh": "先求总数：平均数 × 个数。再减去知道的。"
+        },
+        "hints": [
+          {
+            "en": "4 × 15 = 60",
+            "zh": "4 × 15 = 60"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 60 − 44 = 16.",
+            "zh": "对。60 − 44 = 16。"
+          },
+          "wrong": [
+            {
+              "when": "missing-equals-average",
+              "say": {
+                "en": "If the missing one were 15, the total would be 12 + 18 + 14 + 15 = 59, not 60.",
+                "zh": "如果缺的那个是 15，总数是 12 + 18 + 14 + 15 = 59，不是 60。"
+              },
+              "sample": "15"
+            },
+            {
+              "when": "wrong-count",
+              "say": {
+                "en": "The average is for all 4 numbers, so the total is 4 × 15, not 3 × 15.",
+                "zh": "平均数说的是 4 个数，总数是 4 × 15，不是 3 × 15。"
+              },
+              "sample": "1"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+            "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+          },
+          "reveal": {
+            "en": "Yes. 60 − 44 = 16.",
+            "zh": "对。60 − 44 = 16。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q6-new-average",
+      "revisit": [
+        "changing-the-average"
+      ],
+      "task": {
+        "id": "q6-new-average",
+        "kind": "input",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "title": {
+            "en": "4 pupils average 6; a fifth read 11",
+            "zh": "4 人平均 6；第 5 人读了 11 本"
+          },
+          "cats": [
+            {
+              "id": "a",
+              "label": {
+                "en": "A",
+                "zh": "A"
+              },
+              "value": 5
+            },
+            {
+              "id": "b",
+              "label": {
+                "en": "B",
+                "zh": "B"
+              },
+              "value": 6
+            },
+            {
+              "id": "c",
+              "label": {
+                "en": "C",
+                "zh": "C"
+              },
+              "value": 7
+            },
+            {
+              "id": "d",
+              "label": {
+                "en": "D",
+                "zh": "D"
+              },
+              "value": 6
+            }
+          ],
+          "axis": {
+            "from": 0,
+            "to": 12,
+            "step": 1,
+            "labels": 2,
+            "name": {
+              "en": "Books",
+              "zh": "本数"
+            }
+          }
+        },
+        "prompt": {
+          "en": "Four pupils read 6 books each on average. A fifth read 11. What is the new average?",
+          "zh": "四人平均每人读 6 本，第五人读了 11 本。新平均数是多少？"
+        },
+        "answer": 7,
+        "form": "decimal",
+        "data": {
+          "ask": "join",
+          "average": 6,
+          "count": 4,
+          "value": 11
+        },
+        "guide": {
+          "en": "New average = new total ÷ new number of items.",
+          "zh": "新平均数 = 新总数 ÷ 新个数。"
+        },
+        "hints": [
+          {
+            "en": "4 × 6 + 11 = 35",
+            "zh": "4 × 6 + 11 = 35"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 35 ÷ 5 = 7.",
+            "zh": "对。35 ÷ 5 = 7。"
+          },
+          "wrong": [
+            {
+              "when": "averages-averaged",
+              "say": {
+                "en": "The old average stands for 4 people, the new number for only 1. Find the new total: 4 × 6 + 11 = 35, then ÷ 5 = 7.",
+                "zh": "旧平均数代表 4 个人，新的数只有 1 个人。先求新总数：4 × 6 + 11 = 35，再 ÷ 5 = 7。"
+              },
+              "sample": "8.5"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Read the scale first: how much is one gridline? Then look again.",
+            "zh": "还没对。先看刻度：每一格表示多少？再看一遍。"
+          },
+          "reveal": {
+            "en": "Yes. 35 ÷ 5 = 7.",
+            "zh": "对。35 ÷ 5 = 7。"
+          }
+        }
+      }
+    },
+    {
+      "id": "q7-which-average",
+      "revisit": [
+        "evening-out",
+        "total-divided"
+      ],
+      "task": {
+        "id": "q7-which-average",
+        "kind": "choose",
+        "model": {
+          "kind": "chart",
+          "type": "bar",
+          "stack": true,
+          "cats": [
+            {
+              "id": "wei-jie",
+              "label": {
+                "en": "Wei Jie",
+                "zh": "Wei Jie"
+              },
+              "value": 2
+            },
+            {
+              "id": "siti",
+              "label": {
+                "en": "Siti",
+                "zh": "Siti"
+              },
+              "value": 3
+            },
+            {
+              "id": "arjun",
+              "label": {
+                "en": "Arjun",
+                "zh": "Arjun"
+              },
+              "value": 10
+            }
+          ]
+        },
+        "prompt": {
+          "en": "Which is the average of 2, 3 and 10?",
+          "zh": "2、3、10 的平均数是哪一个？"
+        },
+        "options": [
+          {
+            "id": "five",
+            "text": {
+              "en": "5",
+              "zh": "5"
+            },
+            "correct": true
+          },
+          {
+            "id": "three",
+            "text": {
+              "en": "3",
+              "zh": "3"
+            },
+            "correct": false,
+            "misconception": "average-as-middle"
+          },
+          {
+            "id": "fifteen",
+            "text": {
+              "en": "15",
+              "zh": "15"
+            },
+            "correct": false,
+            "misconception": "average-as-total"
+          }
+        ],
+        "guide": {
+          "en": "Find the total first, then share it equally: total ÷ number of items.",
+          "zh": "先求总数，再平均分：总数 ÷ 个数。"
+        },
+        "hints": [
+          {
+            "en": "2 + 3 + 10 = 15",
+            "zh": "2 + 3 + 10 = 15"
+          }
+        ],
+        "feedback": {
+          "correct": {
+            "en": "Yes. 15 ÷ 3 = 5.",
+            "zh": "对。15 ÷ 3 = 5。"
+          },
+          "wrong": [
+            {
+              "when": "average-as-middle",
+              "say": {
+                "en": "Even them out: 2, 3, 10 become 5 each. The average is 5, not the middle number.",
+                "zh": "移一移：2、3、10 变成每座 5。平均数是 5，不是中间那个数。"
+              },
+              "sample": "three"
+            },
+            {
+              "when": "average-as-total",
+              "say": {
+                "en": "15 is the total. Share it among the 3: 15 ÷ 3 = 5.",
+                "zh": "15 是总数。再平均分给 3 个：15 ÷ 3 = 5。"
+              },
+              "sample": "fifteen"
+            }
+          ],
+          "fallback": {
+            "en": "Not yet. Look at the chart again, one part at a time.",
+            "zh": "还没对。再看一遍图，一部分一部分地看。"
+          },
+          "reveal": {
+            "en": "Yes. 15 ÷ 3 = 5.",
+            "zh": "对。15 ÷ 3 = 5。"
+          }
+        }
+      }
+    }
+  ]
+}

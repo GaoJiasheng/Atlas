@@ -24,6 +24,9 @@ import { isDecimalModel } from './lib/decimal-tasks';
 import { bareQuantities, instrumentModelIssues, measureTaskIssues } from './validate-measure';
 import { netModelIssues, netTaskIssues } from './validate-nets';
 import { isNetTask, netWay } from './lib/net-tasks';
+import { chartModelIssues, dataTaskIssues } from './validate-charts';
+import { dataWay } from './lib/data-tasks';
+import { isDataTask } from './lib/data-kind';
 import { symModelIssues, symTaskIssues } from './validate-symmetry';
 import { isSymmetryModel, isSymmetryTask, symWay } from './lib/symmetry-tasks';
 
@@ -143,7 +146,10 @@ function beatIssues(beat: Beat, limits?: StepLimits): string[] {
     if (count(beat.crossed).some((i) => !given.includes(i))) out.push('crossed parts must be given parts');
     if (m.kind === 'bar' && m.rows && beat.crossed) out.push('crossed is for a single bar');
   } else if (beat.crossed) out.push('crossed is for a bar or a circle');
-  if (m.kind === 'net') {
+  if (m.kind === 'chart') {
+    out.push(...chartModelIssues(m, limits));
+    if (beat.under) out.push('a chart beat has no model under it (side by side: pair)');
+  } else if (m.kind === 'net') {
     out.push(...netModelIssues(m, limits));
     if (beat.under) out.push('a net beat has no model under it (side by side: set)');
   } else if (m.kind === 'instrument') {
@@ -327,7 +333,8 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
     const r = netTaskIssues(task, opts.limits);
     for (const m of r.errors) error(m);
     for (const m of r.warns) warn(m);
-  } else if (domain === 'symmetry') for (const m of symTaskIssues(task, opts.limits)) error(m);
+  } else if (domain === 'data') for (const m of dataTaskIssues(task, opts.limits)) error(m);
+  else if (domain === 'symmetry') for (const m of symTaskIssues(task, opts.limits)) error(m);
   else if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'measure-reading') for (const m of measureTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'decimals') for (const m of decimalTaskIssues(task, opts.limits)) error(m);
@@ -436,8 +443,9 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
   if (lesson.practice.length > 0) {
     if (lesson.practice.length < 6 || lesson.practice.length > 10) error(`practice has ${lesson.practice.length} questions (6–10)`);
     // A nets question counts by the way it asks (docs/39 §2.3): complete-net and tap-face each ask two or three ways.
+    // A chart question counts by the way it asks too (docs/77 §2.3, docs/78 §2.3): a number read, a difference, an average … are different questions.
     // A symmetry question likewise (docs/79 §2.3): a completion with squares or corners, a choice about a line, a count, pictures.
-    const kinds = new Set(lesson.practice.map((q) => (isNetTask(q.task) ? netWay(q.task) : isSymmetryTask(q.task) ? symWay(q.task) : q.task.kind)));
+    const kinds = new Set(lesson.practice.map((q) => (isNetTask(q.task) ? netWay(q.task) : isDataTask(q.task) ? dataWay(q.task) : isSymmetryTask(q.task) ? symWay(q.task) : q.task.kind)));
     if (kinds.size < 5) error(`practice uses ${kinds.size} kinds of task (at least 5)`);
     for (const q of lesson.practice) {
       if (q.task.id !== q.id) error(`practice "${q.id}": task.id must equal the question id`);

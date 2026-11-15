@@ -10,7 +10,7 @@
  * marks keeps it and the parts' fills ease.
  */
 import { beatValue } from './beat-info';
-import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, ArrayModel, BlocksModel, WholeLine, DecimalGrid, PlaceValueChart, DecimalLine, MoneyModel, ClockModel, Timeline, InstrumentModel, NetModel } from './lazy-models';
+import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, ArrayModel, BlocksModel, WholeLine, DecimalGrid, PlaceValueChart, DecimalLine, MoneyModel, ClockModel, Timeline, InstrumentModel, NetModel, ChartModel } from './lazy-models';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import type { Beat, DecimalLineSpec } from '../schema';
@@ -58,6 +58,7 @@ export function BeatModel({ beat, box, defs, modes, locale, net }: { beat: Beat;
     return <SvgFrac cx={area.x + area.w + 60} cy={y} n={v.n} d={v.d} w={v.w} size={34} className="ms-symbol" />;
   };
 
+  if (m.kind === 'chart') return <ChartModel model={m} box={box} locale={locale} label={label} move={beat.move ?? null} />;
   if (m.kind === 'grid') return <GridModel defs={defs} box={box} model={m} locale={locale} label={label} />;
   if (m.kind === 'net') return <NetModel model={m} box={box} defs={defs} locale={locale} label={label} move={beat.move ?? null} fold={net?.fold ?? null} turn={net?.turn ?? null} maxH={net?.maxH} onShow={net?.onShow} />;
   if (m.kind === 'instrument') return <InstrumentModel model={m} box={box} defs={defs} locale={locale} label={label} move={beat.move ?? null} />;

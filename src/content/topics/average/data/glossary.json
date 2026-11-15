@@ -1,0 +1,118 @@
+{
+  "terms": [
+    {
+      "id": "average",
+      "term": {
+        "en": "average",
+        "zh": "平均数"
+      },
+      "definition": {
+        "en": "The number each item would have if the total were shared equally among all the items.",
+        "zh": "把总数平均分给每一项时，每一项得到的数。"
+      },
+      "see": [
+        "total",
+        "number-of-items"
+      ]
+    },
+    {
+      "id": "total",
+      "term": {
+        "en": "total (total value)",
+        "zh": "总数"
+      },
+      "definition": {
+        "en": "All the values added together. The syllabus calls it the \"total value\".",
+        "zh": "所有数据加起来。课纲写作 “total value”。"
+      },
+      "see": [
+        "average"
+      ]
+    },
+    {
+      "id": "number-of-items",
+      "term": {
+        "en": "number of items (number of data)",
+        "zh": "个数"
+      },
+      "definition": {
+        "en": "How many values there are. The syllabus says \"number of data\". A value of 0 is still an item.",
+        "zh": "一共有几项数据；课纲写作 “number of data”。0 也算一项。"
+      },
+      "see": [
+        "item",
+        "average"
+      ]
+    },
+    {
+      "id": "evening-out",
+      "term": {
+        "en": "evening out",
+        "zh": "移多补少"
+      },
+      "definition": {
+        "en": "Moving from the bigger amounts to the smaller ones until all are the same.",
+        "zh": "把多的移给少的，直到一样多。"
+      },
+      "see": [
+        "average"
+      ]
+    },
+    {
+      "id": "data",
+      "term": {
+        "en": "data",
+        "zh": "数据"
+      },
+      "definition": {
+        "en": "Numbers that were counted or measured.",
+        "zh": "数出来、量出来的一组数。"
+      },
+      "see": [
+        "item"
+      ]
+    },
+    {
+      "id": "share-equally",
+      "term": {
+        "en": "share equally",
+        "zh": "平均分"
+      },
+      "definition": {
+        "en": "Share so that every part gets the same amount.",
+        "zh": "分得每一份一样多。"
+      },
+      "see": [
+        "average"
+      ]
+    },
+    {
+      "id": "mean-line",
+      "term": {
+        "en": "average line",
+        "zh": "平均线"
+      },
+      "definition": {
+        "en": "A dashed line drawn across a chart at the height of the average.",
+        "zh": "图上画在平均数高度的一条虚线。"
+      },
+      "see": [
+        "average"
+      ]
+    },
+    {
+      "id": "item",
+      "term": {
+        "en": "item",
+        "zh": "一项"
+      },
+      "definition": {
+        "en": "One of the values in a set of data.",
+        "zh": "一组数据里的一个。"
+      },
+      "see": [
+        "number-of-items"
+      ]
+    }
+  ]
+}

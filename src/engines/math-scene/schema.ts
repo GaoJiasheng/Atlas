@@ -149,6 +149,26 @@ export const MEASURE_READING_CODES = [
 export const MEASURE_READING_SHARED_CODES = ['tick-counting', 'interval-misread', 'unit-factor-wrong', 'decimal-as-subunit'] as const;
 /** Nets and solids (docs/39 §2.1; rules in lib/diagnose/nets.ts). `prism-pyramid`, `cube-cuboid` and `curved-unrolled` are diagnosed by `choose` options only. */
 export const NETS_CODES = ['prototype-only', 'overlap-unseen', 'adjacent-as-opposite', 'face-size', 'face-count', 'prism-pyramid', 'cube-cuboid', 'curved-unrolled'] as const;
+/** Graphs and averages (docs/77 §2.1, docs/78 §2.1; rules in lib/diagnose/data.ts). `scale-ignored-compare` and `truncated-axis` are diagnosed by `choose` options only. */
+export const DATA_CODES = [
+  'key-ignored',
+  'between-gridlines',
+  'value-for-difference',
+  'scale-ignored-compare',
+  'truncated-axis',
+  'tally-misread',
+  'total-misused',
+  'height-for-change',
+  'fraction-as-count',
+  'average-as-total',
+  'zero-ignored',
+  'average-as-middle',
+  'missing-equals-average',
+  'wrong-count',
+  'averages-averaged',
+] as const;
+/** Codes registered elsewhere that graphs and averages use too, each with a rule of its own in lib/diagnose/data.ts (`unequal-parts` by `choose` only). */
+export const DATA_SHARED_CODES = ['interval-misread', 'unequal-parts', 'remainder-dropped'] as const;
 /** Line symmetry (docs/79 §2.1; rules in lib/diagnose/symmetry.ts). The first four are diagnosed by `choose` options only; the last three are worked out from a completed figure. */
 export const SYMMETRY_CODES = ['equal-halves', 'upright-line-only', 'outline-only', 'line-count', 'slid-not-flipped', 'distance-not-kept', 'half-not-flipped'] as const;
 /** The domains, each with the codes its tasks may use (a task's codes come from one domain, validate). */
@@ -160,11 +180,12 @@ export const MISCONCEPTION_DOMAINS = {
   decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
   'measure-reading': [...MEASURE_READING_CODES, ...MEASURE_READING_SHARED_CODES],
   nets: NETS_CODES,
+  data: [...DATA_CODES, ...DATA_SHARED_CODES],
   symmetry: SYMMETRY_CODES,
 } as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES, ...SYMMETRY_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES, ...DATA_CODES, ...SYMMETRY_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -202,6 +223,8 @@ export const TASK_KINDS = [
   'count-intervals',
   'complete-net',
   'tap-face',
+  'fill-table',
+  'even-out',
   'complete-symmetric',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
@@ -216,6 +239,8 @@ export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
 export const MEASURE_KINDS = ['read-scale', 'set-scale', 'count-intervals'] as const;
 /** Task kinds on a net (docs/39 §3.5). */
 export const NET_KINDS = ['complete-net', 'tap-face'] as const;
+/** Task kinds on a chart (docs/77 §3.2, docs/78 §3.1). */
+export const DATA_KINDS = ['fill-table', 'even-out'] as const;
 /** Task kinds on a line of symmetry (docs/79 §3.2). */
 export const SYMMETRY_KINDS = ['complete-symmetric'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
@@ -224,7 +249,7 @@ export type TaskKind = (typeof TASK_KINDS)[number];
  * Model views a step may switch between (the VIEW group). `clock` and `timeline` are the time lesson's (docs/20 §3, model A3); `decimal-grid`, `place-value` and `money` the decimals' (docs/29 A6; their number line is `numberline`);
  * `instrument` the measuring lesson's and `straight` its dial or jug drawn as the straight number line it is (docs/32 §3.7); `net` the nets lesson's (docs/39 §3.7).
  */
-export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight', 'net'] as const;
+export const MODEL_VIEWS = ['bar', 'circle', 'numberline', 'wall', 'barmodel', 'grid', 'array', 'blocks', 'clock', 'timeline', 'decimal-grid', 'place-value', 'money', 'instrument', 'straight', 'net', 'chart'] as const;
 export const modelView = z.enum(MODEL_VIEWS);
 export type ModelView = (typeof MODEL_VIEWS)[number];
 
@@ -1051,7 +1076,128 @@ const timelineModel = z
   .strict();
 export type TimelineSpec = z.output<typeof timelineModel>;
 
-const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel, netModel]);
+/* Charts: picture graph, bar graph, line graph, pie chart, table, and the towers of blocks of an average (docs/77 §3.1, docs/78 §3, model A7) */
+export const CHART_TYPES = ['picture', 'bar', 'line', 'pie', 'table', 'strip'] as const;
+export type ChartType = (typeof CHART_TYPES)[number];
+/** Single-colour line glyphs for picture graphs (docs/08: no flags, no brands). */
+export const CHART_ICONS = ['mango', 'durian', 'rambutan', 'banana', 'book', 'cup', 'pupil', 'sticker'] as const;
+export type ChartIcon = (typeof CHART_ICONS)[number];
+/** What a strip's numbers stand for (docs/78 step 03): printed after the number, `dollar` before it. */
+export const CHART_UNITS = ['kg', 'cm', 'dollar'] as const;
+const chartTone = z.enum(['cold', 'hot', 'signal', 'ink']);
+const chartCat = z
+  .object({
+    id: kebabId,
+    label: bilingual,
+    /** The amount (a whole number; a tower of blocks may end in half a block: `7.5`). A ghost's value is its trial height (or none: an empty frame). */
+    value: z.number().min(0).max(1000).optional(),
+  })
+  .strict();
+const chartAxis = z
+  .object({
+    from: z.number().int().min(0).default(0),
+    to: z.number().int().min(1).max(1000),
+    /** What one gridline is worth. */
+    step: z.number().int().min(1).max(100),
+    /** Every how many gridlines a number is written (1: every one). */
+    labels: z.number().int().min(1).max(5).default(1),
+    name: bilingual.optional(),
+  })
+  .strict();
+const pieSlice = z
+  .object({
+    id: kebabId,
+    label: bilingual,
+    /** The part of the whole (sum 1); or `deg`, only for a pie cut into parts that are not equal (a ⚑ beat, a choose). */
+    frac: frac.optional(),
+    deg: z.number().positive().max(360).optional(),
+    /** A letter on the part (a choose names it). */
+    letter: z.string().regex(/^[A-F]$/).optional(),
+  })
+  .strict();
+const tableCell = z.union([z.number().int().min(0).max(9999), z.literal('?')]);
+const chartTable = z
+  .object({
+    /** Heading of the first column (the row names). */
+    head: bilingual.optional(),
+    cols: z.array(z.object({ id: kebabId, label: bilingual, total: z.boolean().optional() }).strict()).min(1).max(4),
+    rows: z
+      .array(
+        z
+          .object({
+            id: kebabId,
+            label: bilingual,
+            /** Tally marks drawn in a column of their own (bundles of five). */
+            tally: z.number().int().min(0).max(40).optional(),
+            cells: z.array(tableCell).min(1).max(4),
+            /** The total row (the other rows added). */
+            total: z.boolean().optional(),
+          })
+          .strict(),
+      )
+      .min(1)
+      .max(6),
+  })
+  .strict();
+const chartSpec = z.object({
+  type: z.enum(CHART_TYPES),
+  title: bilingual.optional(),
+  /** Picture, bar, line (the points, in order along the bottom), towers, strip. */
+  cats: z.array(chartCat).min(1).max(8).optional(),
+  axis: chartAxis.optional(),
+  /** The name under the categories (the line graph's "Week"). */
+  across: bilingual.optional(),
+  orient: z.enum(['vertical', 'horizontal']).default('vertical'),
+  /** Picture graph: what one picture stands for. */
+  key: z.object({ per: z.number().int().min(1).max(100), icon: z.enum(CHART_ICONS), unit: bilingual }).strict().optional(),
+  /** Reading hairlines: from a bar's top or a point to the scale; `{ y }` across from the scale. */
+  guide: z.array(z.union([kebabId, z.object({ y: z.number().min(0).max(1000) }).strict()])).min(1).max(3).optional(),
+  /** The gap between two tops (signal, with its size). */
+  brace: z.tuple([kebabId, kebabId]).optional(),
+  /** Line graph: points only (not joined yet). */
+  points: z.boolean().optional(),
+  /** Line graph: the rise or fall written beside each part of the line. */
+  changes: z.boolean().optional(),
+  /** Tones by category, slice, row or column id (a table's cell: `row.col` is not an id, so cells light by row or column). */
+  highlight: z.record(kebabId, chartTone).optional(),
+  /** Line graph: a part of the line lit, by the id of the point it ends at. */
+  segs: z.record(kebabId, chartTone).optional(),
+  pie: z.array(pieSlice).min(2).max(8).optional(),
+  /** The whole a pie stands for (pupils). */
+  total: z.number().int().min(1).max(200).optional(),
+  /** Pie: a right-angle square at the centre on this slice. */
+  square: kebabId.optional(),
+  /** Pie: the fraction written in each slice. */
+  fracs: z.boolean().optional(),
+  table: chartTable.optional(),
+  /** Towers of unit blocks (docs/78): a bar drawn as blocks, ≤ 10 to a tower. */
+  stack: z.boolean().optional(),
+  /** The average line (dashed ink) at this height. */
+  mean: z.number().min(0).max(1000).optional(),
+  /** Categories drawn as dashed frames with "?" (their value, if any, is a trial height). */
+  ghost: z.array(kebabId).min(1).max(2).optional(),
+  /** Towers: the heights before blocks were moved; blocks moved in are signal, blocks moved out dashed. */
+  was: z.array(z.number().min(0).max(100)).min(1).max(8).optional(),
+  /** Towers: every block put together in one tower (the total). */
+  pooled: z.boolean().optional(),
+  /** Strip: what is unknown (written ?): the whole, each part, how many parts. */
+  unknown: z.array(z.enum(['total', 'each', 'count'])).min(1).max(2).optional(),
+  /** Strip: crossed out (hot dashed, then struck): the total written as one part. */
+  wrongTotal: z.boolean().optional(),
+  unit: z.enum(CHART_UNITS).optional(),
+  note: bilingual.optional(),
+});
+export type ChartSpec = z.output<typeof chartSpec>;
+const chartModel = chartSpec
+  .extend({
+    kind: z.literal('chart'),
+    /** Two charts side by side, the same size (other scales; an axis from 0 and one that is not). */
+    pair: z.array(chartSpec.strict()).length(2).optional(),
+  })
+  .strict();
+export type ChartModelSpec = z.output<typeof chartModel>;
+
+const baseModels = z.discriminatedUnion('kind', [barModel, circleModel, numberLineModel, wallModel, barModelDiagram, gridModel, arrayModel, blocksModel, clockModel, timelineModel, decimalGridModel, placeValueModel, moneyModel, instrumentModel, netModel, chartModel]);
 const isDecimalLine = (v: unknown): boolean => !!v && typeof v === 'object' && (v as { kind?: unknown }).kind === 'numberline' && (v as { scale?: unknown }).scale === 'decimal';
 /** A model: by `kind`, the number line by `scale` too (a decimal line has decimal ends and a decimal step). */
 export const model = z.unknown().transform((v, ctx): z.output<typeof baseModels> | DecimalLineSpec => {
@@ -1168,6 +1314,26 @@ export const inputSpec = z
     convert: z.object({ from: duration, to: z.enum(['h', 'min', 's']).optional() }).strict().optional(),
     /** Time: the start, end and length of a span, and which one is asked (diagnoses going the wrong way, counting the marks). */
     span: z.object({ start: clockTime.optional(), end: clockTime.optional(), length: duration.optional(), ask: z.enum(['start', 'end', 'length']) }).strict().optional(),
+    /**
+     * Graphs and averages (docs/77 §3.4, docs/78 §3.2): what the number is, worked out from the chart (or from `values`) —
+     * checked against the answer by validate, and what the diagnosis looks for. `of`: the categories, points, slices or
+     * table rows asked about; `values`: the data when no chart holds them (the known ones, for `missing`).
+     */
+    data: z
+      .object({
+        ask: z.enum(['read', 'difference', 'sum', 'missing-row', 'part', 'whole', 'biggest-increase', 'average', 'total', 'count', 'missing', 'join', 'leave', 'joined']),
+        of: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\.[a-z0-9]+(?:-[a-z0-9]+)*)?$/)).min(1).max(6).optional(),
+        values: z.array(z.number().min(0).max(1000)).min(1).max(8).optional(),
+        average: z.number().min(0).max(1000).optional(),
+        /** How many items the average is of (before one joins or leaves). */
+        count: z.number().int().min(1).max(20).optional(),
+        total: z.number().min(0).max(10000).optional(),
+        /** The one that joins or leaves; `joined`: the average after it joined. */
+        value: z.number().min(0).max(1000).optional(),
+        after: z.number().min(0).max(1000).optional(),
+      })
+      .strict()
+      .optional(),
     /** `duration`: the two boxes · `measure`: the unit chips (default step limits.units, otherwise the answer's family). */
     units: z.union([z.enum(['h-min', 'min-s']), z.array(z.enum(UNITS)).min(1).max(UNITS.length)]).optional(),
   })
@@ -1429,6 +1595,16 @@ const tapFaceFields = z.object({
   ask: z.enum(['opposite', 'bottom']),
 });
 
+/* Chart tasks (docs/77 §3.2, docs/78 §3.1) */
+const fillTableFields = z.object({
+  /** The number for each "?" of the table, by `row.col` (`barley.cups`). */
+  cells: z.record(z.string().regex(/^[a-z0-9-]+\.[a-z0-9-]+$/), z.number().int().min(0).max(9999)),
+});
+const evenOutFields = z.object({
+  /** The average, written once the towers are level (or straight away: moving blocks is a help, not checked). */
+  answer: inputSpec,
+});
+
 export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('shade') }).merge(shadeFields).strict(),
   base.extend({ kind: z.literal('cut') }).merge(cutFields).strict(),
@@ -1463,6 +1639,8 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('count-intervals') }).merge(countIntervalsFields).strict(),
   base.extend({ kind: z.literal('complete-net') }).merge(completeNetFields).strict(),
   base.extend({ kind: z.literal('tap-face') }).merge(tapFaceFields).strict(),
+  base.extend({ kind: z.literal('fill-table') }).merge(fillTableFields).strict(),
+  base.extend({ kind: z.literal('even-out') }).merge(evenOutFields).strict(),
   base.extend({ kind: z.literal('complete-symmetric') }).merge(completeSymmetricFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
@@ -1472,7 +1650,7 @@ export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;
 /* Lesson                                                              */
 /* ------------------------------------------------------------------ */
 
-export const LESSON_LEVELS = ['P1', 'P2', 'P3', 'P4', 'P5'] as const;
+export const LESSON_LEVELS = ['P1', 'P2', 'P3', 'P4', 'P5', 'P6'] as const;
 
 const syllabusLine = z
   .object({
@@ -1493,7 +1671,7 @@ const syllabusLine = z
 /* ------------------------------------------------------------------ */
 
 /** How the stage gets from the previous beat to this one (a short eased transition; `morph` = another model kind). */
-export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round', 'unroll', 'fill', 'tip'] as const;
+export const BEAT_MOVES = ['cut', 'shade', 'fold', 'split', 'merge', 'convert', 'place', 'cross', 'morph', 'tile', 'walk', 'arrange', 'group', 'deal', 'rotate', 'cover', 'jump', 'combine', 'trade', 'sweep', 'zoom', 'slide', 'align', 'round', 'unroll', 'fill', 'tip', 'rescale', 'stack', 'join', 'level', 'pool'] as const;
 export type BeatMove = (typeof BEAT_MOVES)[number];
 
 const beatOverlay = z
@@ -1598,6 +1776,15 @@ export const stepLimits = z
     zoomDepth: z.number().int().min(0).max(2).optional(),
     /** Every span stays within one day (no crossing midnight). */
     sameDay: z.boolean().optional(),
+    /* Charts (docs/77 §3.1, docs/78 D8) */
+    /** What one gridline may be worth. */
+    chartSteps: z.array(z.number().int().min(1).max(100)).min(1).optional(),
+    /** The fractions a pie may be cut in (`"1/2"`, `"1/4"` …). */
+    pieFractions: z.array(frac).min(1).optional(),
+    /** How many items (bars, points, towers, rows) a chart or a set of data may have, `[fewest, most]`. */
+    items: z.tuple([z.number().int().min(1), z.number().int().min(1)]).optional(),
+    /** Blocks in a tower at most. */
+    maxBlocks: z.number().int().min(1).max(10).optional(),
     /* Nets (docs/39 §3.8) */
     /** The solids a step may show. */
     solids: z.array(z.enum(SOLID_CLASSES)).min(1).optional(),

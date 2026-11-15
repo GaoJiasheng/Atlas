@@ -38,6 +38,7 @@ import { DecimalModelControls, hasDecimalControls } from './DecimalControls';
 import { hasMeasureControls, MeasureModelControls } from './MeasureControls';
 import { isMeasureTask } from '../lib/measure-kind';
 import { NetModelControls } from './NetControls';
+import { EvenOutControls, TableInput } from './DataControls';
 import { optionText } from '../lib/net-description';
 import { SymmetryControls } from './SymmetryControls';
 import { isSymmetryTask } from '../lib/symmetry-tasks';
@@ -181,7 +182,9 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
   // Line symmetry (docs/79 §3.2): "Fold it" on a completion or a choice, Clear and the count on a completion; a choice's options follow.
   if (phase === 'model' && isSymmetryTask(task)) parts.push(<SymmetryControls key="sym" task={task} run={run} ctl={ctl} locale={locale} practice={p.practice} />);
-  if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose' && task.kind !== 'complete-symmetric') {
+  if (task.kind === 'fill-table') {
+    parts.push(<TableInput key="table" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
+  } else if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose' && task.kind !== 'complete-symmetric') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && task.kind === 'complete-net') {
     parts.push(<NetModelControls key="net" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
@@ -194,6 +197,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   } else if (phase === 'model' && task.kind === 'set-clock') {
     parts.push(<SetClockControls key="clock" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'input') {
+    if (task.kind === 'even-out') parts.push(<EvenOutControls key="towers" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (task.kind === 'duration') parts.push(<HopChips key="hops" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     if (hasMeasureControls(task, phase)) parts.push(<MeasureModelControls key="tools" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
     parts.push(<AnswerInput key="input" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);

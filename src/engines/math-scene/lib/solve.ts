@@ -23,6 +23,7 @@ import { isMeasureTask } from './measure-kind';
 import { measureBoxes, measureSample, measureSampleBoxes, measureSolveModel } from './measure-tasks';
 import { formatQty, isQty, parseQuantity } from './value';
 import { netSample, netSolveModel } from './net-tasks';
+import { dataSample, dataSolve } from './data-tasks';
 import { symSample, symSolveModel } from './symmetry-tasks';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
@@ -130,6 +131,8 @@ export function solve(task: Task): Action[] {
   if (measured) return withInput(task, measured as Action[]);
   const net = netSolveModel(task);
   if (net) return net as Action[];
+  const data = dataSolve(task);
+  if (data) return data as Action[];
   const sym = symSolveModel(task);
   if (sym) return sym as Action[];
   switch (task.kind) {
@@ -221,6 +224,8 @@ export function solve(task: Task): Action[] {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'fill-table':
+    case 'even-out':
     case 'complete-symmetric':
       return [];
     case 'build-sum': {
@@ -335,6 +340,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     return writeInput(apply(task, actions.slice(0, cut + 1)), sample.slice(1));
   }
   const start = initialState(task);
+  const data = dataSample(task, start, sample);
+  if (data !== undefined) return data;
   const net = netSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (net !== undefined) return net;
   const sym = symSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
@@ -432,6 +439,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'fill-table':
+    case 'even-out':
     case 'complete-symmetric':
       return null;
     case 'set-clock': {

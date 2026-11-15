@@ -365,4 +365,15 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
 
 ## 10. 施工记录 / 已知差距
 
-施工时追加。
+**2026-11-16 施工**（分支 `claude/graphs-average`，在 docs/77 的 A7 `chart` 之后；§0.1 全部按默认值：Q1 正文用"移多补少"、字幕第一次说"把多的移给少的"，Q2 小数平均数第 02 步第 5 拍 + 题库 2 道，Q3 测验分数只在练习第 5 题，Q4 不用水杯图，Q5 封面用摊平后的 4、4、4）。
+
+- **课纲核对**：S1 第 44 页 1.1 "average as 'total value ÷ number of data'"——除号对照第 44 页原图核过（`pdftotext` 丢了字形）；第 33、38 页引文无误。
+- **建成**：5 步 21 拍、题库 45 道（8 / 10 / 9 / 9 / 9）、练习 7 道（按问法 6 种）、名词表 8 条；`status: published`。题库由 Claude 起草，每份 `check-pool` 0 错。
+- **引擎**（E-AV1–4，docs/06「图表（A7）」的平均数一段）：`chart` 的 `stack`、`mean`、`ghost`、`was`、`pooled`、`type: strip`；过渡 `level`、`pool`（`lib/chart.ts blockKeys`：每块方块保留自己的 key，从一座塔滑到另一座）；`even-out` 小测；`data` 域加 7 条规则；AVERAGE 卡与 PLATE 行。单测 `tests/math-scene/{chart,diagnose-data,average-lesson}.test.ts`，e2e `tests-e2e/average.spec.ts`。
+- **与 spec 不同的地方**：
+  - 第 03 步的模型图不用分数模型 `barmodel`（它的长度是分数），改用 `chart` 的 `type: "strip"`：一条分成 n 段一样长的条，上面总数括号、下面"n × 每段"，`unknown` 写 ?，`wrongTotal` 把一段的数写在总数上并划掉；整课都用 AVERAGE 卡。
+  - 半块方块（7.5）直接画成塔顶的半块（signal），不是"切成两半分给两边"的动画。
+  - `even-out` 的平均数框一开始就在（spec 允许"没整平也可以直接写"）；搬块计数写"移了几块"，不显示目标高度。
+  - `average-as-middle` 对偶数个数据也认中间两个数（练习第 1 题 3、5、7、9 写 5 或 7）。
+  - S3–S9（平均数研究文献、人教版课本）页码 / 册次未核，按规则不进 sources.json；"移多补少"作为说法保留（§0.1 Q1 默认），不注出处。
+- **插图**：Codex `codex/img5`（c024fb85）的封面（4、4、4）与第 01 章配图（2、4、6），图注照 `art/img5/average-captions.json`；封面 mask 进 `src/lib/illustrations.json`。

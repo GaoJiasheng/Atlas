@@ -27,10 +27,12 @@ import { MeasureCard } from './MeasureCard';
 import { isMeasureTask } from '../../lib/measure-kind';
 import { SolidCard } from './SolidCard';
 import { isNetTask } from '../../lib/net-tasks';
+import { AverageCard, ChartCard } from './ChartCard';
+
 import { SymmetryCard } from './SymmetryCard';
 import { isSymmetryModel, isSymmetryTask } from '../../lib/symmetry-tasks';
 
-export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid' | 'symmetry';
+export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid' | 'chart' | 'average' | 'symmetry';
 
 /** Card by model kind (the time lesson's `clock` and `timeline` show the TIME card). */
 export const CARD_BY_MODEL: Record<string, CardKind> = {
@@ -49,6 +51,7 @@ export const CARD_BY_MODEL: Record<string, CardKind> = {
   money: 'decimal',
   instrument: 'measure',
   net: 'solid',
+  chart: 'chart',
 };
 
 export const CARD_TITLE: Record<CardKind, UiKey> = {
@@ -60,6 +63,8 @@ export const CARD_TITLE: Record<CardKind, UiKey> = {
   decimal: 'math.card.decimal',
   measure: 'math.card.measure',
   solid: 'math.card.solid',
+  chart: 'math.card.chart',
+  average: 'math.card.average',
   symmetry: 'math.card.symmetry',
 };
 
@@ -112,6 +117,10 @@ export function Card(p: CardProps) {
       return <SymmetryCard model={p.model} task={p.task} state={p.state} locale={p.locale} />;
     case 'solid':
       return <SolidCard model={p.model} task={p.task} state={p.state} done={p.done} fold={p.netFold ?? null} locale={p.locale} />;
+    case 'chart':
+      return <ChartCard model={p.model} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
+    case 'average':
+      return <AverageCard model={p.model} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
     case 'decimal':
       return <DecimalCard model={p.model} beat={p.beat} task={p.task} state={p.state} done={p.done} expanded={p.expanded} locale={p.locale} />;
     default:

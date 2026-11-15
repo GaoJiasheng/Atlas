@@ -19,3 +19,4 @@ export const ClockModel = lazy(() => import('./ClockModel').then((m) => ({ defau
 export const Timeline = lazy(() => import('./Timeline').then((m) => ({ default: m.Timeline })));
 export const MoneyModel = lazy(() => import('./MoneyModel').then((m) => ({ default: m.MoneyModel })));
 export const NetModel = lazy(() => import('./NetModel').then((m) => ({ default: m.NetModel })));
+export const ChartModel = lazy(() => import('./ChartModel').then((m) => ({ default: m.ChartModel })));

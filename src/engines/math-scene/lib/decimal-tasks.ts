@@ -13,6 +13,7 @@
  * 1000), `share` and `regroup` on the place-value chart, and `input` in the
  * `decimal` form.
  */
+import { isDataTask } from './data-kind';
 import type { DecimalGridModelSpec, DecimalLineSpec, DecimalWork, DPlace, DTrade, InputSpec, MisconceptionCode, Model, MoneySpec, PlaceValueSpec, Task, TaskOf } from '../schema';
 import { DPLACES } from '../constants';
 import { cmp, divWhole, eq, formatDecimal, parseDecimal, same, withPlaces, type Decimal } from './decimal';
@@ -42,6 +43,8 @@ export const decimalLine = (m: Model): DecimalLineSpec | null => (m.kind === 'nu
 export function isDecimalTask(task: Task): boolean {
   // A measure in decimals (docs/32 step 13) is read on an instrument: the measure-reading domain's.
   if (isMeasureTask(task)) return false;
+  // An average written as a decimal (docs/78 §2.2 step 02) is the data domain's.
+  if (isDataTask(task)) return false;
   if (task.kind === 'shade-decimal' || task.kind === 'round-on-line' || task.kind === 'align-add' || task.kind === 'shift-digits') return true;
   const models = [task.model, ...(task.kind === 'choose' ? task.options.flatMap((o) => (o.model ? [o.model] : [])) : [])];
   if (models.some(isDecimalModel)) return true;

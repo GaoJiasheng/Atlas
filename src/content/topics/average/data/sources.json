@@ -1,0 +1,40 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Average of a Set of Data: p. 44; Decimals, Multiplication and Division: p. 38.",
+        "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（2021 年版，2025 年 10 月更新）。一组数据的平均数：第 44 页；小数的乘除：第 38 页。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "note": {
+        "en": "The only source for what each step covers; the syllabus lines are quoted from it (pages as printed on the PDF, read 2026-11-15). The division sign in \"total value ÷ number of data\" was checked on the page image of p. 44.",
+        "zh": "每一步学什么，只以这份课纲为准；课纲条目照原文引用（页码是 PDF 上印的页码，2026-11-15 读取）。“total value ÷ number of data”里的除号已对照第 44 页的原图核过。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore: primary syllabuses page.",
+        "zh": "新加坡教育部：小学课程纲要页面。"
+      },
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "note": {
+        "en": "Version check of S1.",
+        "zh": "用于核对 S1 的版本。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Ministry of Education Singapore: approved textbook list (for the usual order of topics only, not copied).",
+        "zh": "新加坡教育部：批准教材目录（只参考通常的教学顺序，不照抄）。"
+      },
+      "url": "https://www.moe.gov.sg/education-in-sg/approved-textbook-list",
+      "note": {
+        "en": "Questions, pictures and wording in this lesson are our own; every number is made up.",
+        "zh": "本课的题目、插图和措辞都是自己写的；所有数字都是虚构的。"
+      }
+    }
+  ]
+}

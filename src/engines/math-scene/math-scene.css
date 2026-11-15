@@ -4061,6 +4061,345 @@ path.ms-glyph--cord {
 }
 
 /* ------------------------------------------------------------------ */
+/* Charts (docs/77 §3.1, docs/78 §3, model A7)                         */
+/* ------------------------------------------------------------------ */
+
+/* Axes 1.5 px ink, gridlines hairline (ink 14 %), numbers serif; bars a hairline ink outline with a faint ink fill,
+   lit cold / hot / signal; blocks the same; the reading line signal, dashed; the average line dashed ink. */
+.ms-chart text {
+  fill: var(--ink);
+  font-family: var(--font-serif);
+}
+.ms-chart__title {
+  font-weight: 600;
+}
+.ms-chart__note,
+.ms-chart__axisname {
+  fill: var(--ink-2) !important;
+  font-family: var(--font-hud) !important;
+  letter-spacing: 0.02em;
+}
+.ms-chart__axis {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-chart__grid {
+  transition: transform 700ms var(--ease-in-out);
+  animation: ms-fade-in 420ms var(--ease-out) both;
+}
+.ms-chart__grid line {
+  stroke: color-mix(in srgb, var(--ink) 14%, transparent);
+  stroke-width: 1;
+}
+.ms-chart__grid text {
+  fill: var(--ink-2);
+}
+.ms-chart__cat[data-tone='cold'] { fill: var(--cold); font-weight: 600; }
+.ms-chart__cat[data-tone='hot'] { fill: var(--hot); font-weight: 600; }
+.ms-chart__cat[data-tone='signal'] { fill: var(--signal); font-weight: 600; }
+.ms-chart__bar rect:not(.ms-chart__hit),
+.ms-chart__part rect,
+.ms-chart__slice path,
+.ms-chart__block {
+  fill: color-mix(in srgb, var(--ink) 8%, var(--panel-solid));
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-chart__bar rect:not(.ms-chart__hit) {
+  transition: y 700ms var(--ease-in-out), height 700ms var(--ease-in-out), width 700ms var(--ease-in-out);
+}
+[data-tone='cold'] > rect:not(.ms-chart__hit),
+[data-tone='cold'] > path,
+.ms-chart__block[data-tone='cold'] {
+  fill: color-mix(in srgb, var(--cold) 24%, var(--panel-solid));
+  stroke: var(--cold);
+}
+[data-tone='hot'] > rect:not(.ms-chart__hit),
+[data-tone='hot'] > path,
+.ms-chart__block[data-tone='hot'] {
+  fill: color-mix(in srgb, var(--hot) 24%, var(--panel-solid));
+  stroke: var(--hot);
+}
+[data-tone='signal'] > rect:not(.ms-chart__hit),
+[data-tone='signal'] > path,
+.ms-chart__block[data-tone='signal'] {
+  fill: color-mix(in srgb, var(--signal) 34%, var(--panel-solid));
+  stroke: var(--signal);
+}
+.ms-chart__bar[data-ghost] rect:not(.ms-chart__hit),
+.ms-chart__part[data-ghost] rect,
+.ms-chart__block[data-ghost],
+.ms-chart__block[data-gone] {
+  fill: none;
+  stroke-dasharray: 5 3;
+}
+.ms-chart__block[data-gone] {
+  stroke: var(--ink-2);
+  opacity: 0.7;
+}
+.ms-chart__block {
+  transition: transform 640ms var(--ease-in-out), fill 300ms;
+}
+.ms-chart__hit {
+  fill: transparent;
+  stroke: none;
+}
+.ms-chart [role='button'] {
+  cursor: pointer;
+  outline: none;
+}
+.ms-chart [role='button']:focus-visible .ms-chart__hit,
+.ms-chart [role='button'][aria-pressed='true'] .ms-chart__hit {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+.ms-chart__tower[data-held] .ms-chart__hit {
+  fill: color-mix(in srgb, var(--signal) 8%, transparent);
+}
+.ms-chart__glyph {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ms-chart__pics[data-tone='cold'] .ms-chart__glyph { stroke: var(--cold); }
+.ms-chart__pics[data-tone='hot'] .ms-chart__glyph { stroke: var(--hot); }
+.ms-chart__glyph[data-half] { stroke: var(--signal); }
+.ms-chart__key rect {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ms-chart__key text {
+  font-family: var(--font-hud) !important;
+}
+/* Line graph: the line draws itself when the points are joined. */
+.ms-chart__seg {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+.ms-chart__seg[data-tone='signal'] { stroke: var(--signal); stroke-width: 3; }
+.ms-chart__seg[data-tone='cold'] { stroke: var(--cold); stroke-width: 2.4; }
+.ms-chart__seg[data-tone='hot'] { stroke: var(--hot); stroke-width: 2.4; }
+.ms-chart__seg[data-join] {
+  stroke-dasharray: 1;
+  animation: ms-chart-draw 820ms var(--ease-in-out) both;
+}
+@keyframes ms-chart-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.ms-chart__point {
+  transition: transform 700ms var(--ease-in-out);
+}
+.ms-chart__point circle {
+  fill: var(--panel-solid);
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+.ms-chart__point[data-tone='cold'] circle { fill: var(--cold); stroke: var(--cold); }
+.ms-chart__point[data-tone='hot'] circle { fill: var(--hot); stroke: var(--hot); }
+.ms-chart__point[data-tone='signal'] circle { fill: var(--signal); stroke: var(--signal); }
+.ms-chart__change { font-family: var(--font-mono) !important; fill: var(--ink-2) !important; }
+.ms-chart__change[data-tone='signal'] { fill: var(--signal) !important; font-weight: 600; }
+.ms-chart__change[data-tone='cold'] { fill: var(--cold) !important; }
+.ms-chart__change[data-tone='hot'] { fill: var(--hot) !important; }
+/* Reading lines, the gap between two tops, the average line. */
+.ms-chart__guide {
+  stroke: var(--signal);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 3;
+  animation: ms-fade-in 300ms var(--ease-out) both;
+}
+.ms-chart__guide-end {
+  fill: var(--signal);
+}
+.ms-chart__mid {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+.ms-chart__brace path,
+.ms-chart__brace-level {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 1.4;
+}
+.ms-chart__brace-level {
+  stroke-dasharray: 4 3;
+}
+.ms-chart__brace text {
+  fill: var(--signal) !important;
+  font-weight: 600;
+}
+.ms-chart__mean {
+  transition: transform 700ms var(--ease-in-out);
+}
+.ms-chart__mean line {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-dasharray: 8 5;
+}
+.ms-chart__mean text {
+  font-family: var(--font-hud) !important;
+  font-weight: 600;
+}
+.ms-chart__ghost rect {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 3;
+}
+.ms-chart__ghost text,
+.ms-chart__bar[data-ghost] text {
+  fill: var(--signal) !important;
+  font-weight: 600;
+}
+/* Pie: parts with a hairline gap, names inside or on a leader outside; a right angle at the centre; a fold. */
+.ms-chart__slice path {
+  stroke: var(--panel-solid);
+  stroke-width: 2;
+}
+.ms-chart__rim {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.ms-chart__rim[data-tone='cold'] { stroke: var(--cold); stroke-width: 2.4; }
+.ms-chart__leader {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+.ms-chart__frac { font-weight: 600; }
+.ms-chart__square {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+.ms-chart__slice[data-fold] {
+  animation: ms-chart-fold 900ms var(--ease-in-out) both;
+}
+@keyframes ms-chart-fold {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(-1); }
+  100% { transform: scaleX(1); }
+}
+/* Table: a spec-table, hairline rules, small-caps heads, the total row under a double rule; blanks dashed signal. */
+.ms-chart__frame {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-chart__rule {
+  stroke: color-mix(in srgb, var(--ink) 30%, transparent);
+  stroke-width: 1;
+}
+.ms-chart__rule--total {
+  stroke: var(--ink);
+  stroke-width: 2.4;
+}
+.ms-chart__thead text {
+  fill: var(--ink-2) !important;
+  font-family: var(--font-hud) !important;
+  letter-spacing: 0.06em;
+}
+.ms-chart__thead text[data-tone] {
+  fill: var(--cold) !important;
+}
+.ms-chart__rowname[data-total],
+.ms-chart__cell[data-total] {
+  font-weight: 600;
+}
+.ms-chart__lit {
+  fill: color-mix(in srgb, var(--cold) 12%, transparent);
+  stroke: none;
+}
+.ms-chart__lit[data-tone='hot'] { fill: color-mix(in srgb, var(--hot) 12%, transparent); }
+.ms-chart__lit[data-tone='signal'] { fill: color-mix(in srgb, var(--signal) 14%, transparent); }
+.ms-chart__tally line {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.ms-chart__blank rect {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+.ms-chart__blank text {
+  fill: var(--signal) !important;
+  font-weight: 600;
+}
+.ms-chart__blank[data-ghost] rect { stroke: var(--ink); }
+.ms-chart__blank[data-ghost] text { fill: var(--ink) !important; }
+/* Strip: equal parts of one whole, the whole above, how many below. */
+.ms-chart__part {
+  animation: ms-fade-in 380ms var(--ease-out) both;
+}
+.ms-chart__whole path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ms-chart__whole[data-wrong] text { fill: var(--hot) !important; }
+.ms-chart__strike {
+  stroke: var(--ink);
+  stroke-width: 1.8;
+}
+.ms-chart__count {
+  fill: var(--ink-2) !important;
+  font-family: var(--font-hud) !important;
+}
+/* Beat moves: the same chart keeps its drawing (rescale, join, level, pool, shade, place); another chart comes in. */
+.ms-beat[data-model='chart'][data-move='rescale'],
+.ms-beat[data-model='chart'][data-move='join'],
+.ms-beat[data-model='chart'][data-move='level'],
+.ms-beat[data-model='chart'][data-move='pool'] {
+  animation: none;
+}
+.ms-beat[data-model='chart'][data-move='stack'] {
+  animation: ms-chart-stack 820ms var(--ease-out) both;
+}
+@keyframes ms-chart-stack {
+  from { opacity: 0.2; transform: translateY(-18px); }
+  to { opacity: 1; transform: none; }
+}
+/* The tray of a table to fill: one labelled box per blank. */
+.ms-input__rows--table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px 14px;
+}
+.ms-input__cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ms-evenout .ms-tray__help {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--ink-2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-chart__grid,
+  .ms-chart__bar rect,
+  .ms-chart__block,
+  .ms-chart__point,
+  .ms-chart__mean,
+  .ms-chart__seg[data-join],
+  .ms-chart__slice[data-fold],
+  .ms-chart__part,
+  .ms-chart__guide {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Line symmetry on the grid (docs/79 §2.0, §3.1): lines of symmetry as  */
 /* centre lines, lines to test dashed, the fold's flap, the mismatch    */
 /* hatched, partners in signal                                         */

@@ -18,6 +18,7 @@ import { onDial, snapTo } from './clock';
 import { MEASURE_ACTIONS, measureClear, measureInitial, measureReduce, type MeasureAction, type MeasureState } from './measure-tasks';
 import { canHop } from './timeline';
 import { NET_ACTIONS, netClear, netInitial, netReduce, type NetAction, type NetState } from './net-tasks';
+import { DATA_ACTIONS, dataInitial, dataReduce, type DataAction, type DataState } from './data-tasks';
 import { SYM_ACTIONS, symClear, symInitial, symReduce, type SymAction, type SymState } from './symmetry-tasks';
 
 export type Sym = '<' | '=' | '>';
@@ -90,10 +91,12 @@ export type Action =
   | MeasureAction
   /** Nets (docs/39 §3.5): a face placed on a net, a face tapped. */
   | NetAction
+  /** Charts (docs/77 §3.2, docs/78 §3.1): a tower's top block lifted or put down, the towers back as they were, a reading hairline. */
+  | DataAction
   /** Line symmetry (docs/79 §3.2): a square or a corner put down on the other side, "Fold it". */
   | SymAction;
 
-export interface TaskState extends DecimalState, MeasureState, NetState, SymState {
+export interface TaskState extends DecimalState, MeasureState, NetState, DataState, SymState {
   /** Equal parts per whole (bar / circle), intervals per whole (number line); 0 = not cut yet. */
   parts: number;
   wholes: number;
@@ -156,6 +159,8 @@ export function phasesOf(task: Task): Phase[] {
     case 'read-clock':
     case 'duration':
     case 'read-scale':
+    case 'fill-table':
+    case 'even-out':
       return ['input'];
     case 'build-sum':
       return [...(task.convert ? (['convert'] as const) : []), 'mark', 'input'];
@@ -187,7 +192,7 @@ const timeSpecs = new WeakMap<Task, InputSpec>();
 /** The input spec of a task's input phase (`null` = none). */
 export function inputSpecOf(task: Task): InputSpec | null {
   if (task.kind === 'input') return task;
-  if (task.kind === 'build-sum' || task.kind === 'read-scale') return task.answer;
+  if (task.kind === 'build-sum' || task.kind === 'read-scale' || task.kind === 'even-out') return task.answer;
   if (task.kind === 'read-clock' || task.kind === 'duration') {
     let spec = timeSpecs.get(task);
     if (!spec) {
@@ -222,6 +227,7 @@ export function initialState(task: Task): TaskState {
     ...decimalInitial(task),
     ...measureInitial(),
     ...netInitial(),
+    ...dataInitial(task),
     ...symInitial(),
     parts: baseParts(task),
     wholes: m.kind === 'bar' ? (m.wholes ?? 1) : m.kind === 'numberline' && m.scale !== 'decimal' ? m.to - m.from : 1,
@@ -332,6 +338,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
   if (DECIMAL_ACTIONS.has(action.do)) return decimalReduce(task, state, action as DecimalAction);
   if (MEASURE_ACTIONS.has(action.do)) return measureReduce(task, state, action as MeasureAction);
   if (NET_ACTIONS.has(action.do)) return netReduce(task, state, action as NetAction);
+  if (DATA_ACTIONS.has(action.do) || (task.kind === 'fill-table' && action.do === 'input')) return dataReduce(task, state, action as DataAction);
   if (SYM_ACTIONS.has(action.do)) return symReduce(task, state, action as SymAction);
   switch (action.do) {
     case 'shade': {

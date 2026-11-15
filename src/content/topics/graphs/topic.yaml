@@ -1,0 +1,18 @@
+# Graphs: picture graphs, bar graphs, tables, line graphs and pie charts (MathScene lesson).
+# Spec: docs/77-graphs-content-spec.md.
+id: graphs
+title: { en: "Graphs and charts", zh: "统计图表" }
+subtitle: { en: "Read the key and the scale, then the numbers a chart holds", zh: "先看图例和刻度，再读出图表里的数" }
+subject: math
+levels: [P1, P2, P3, P4]
+tags: [statistics, singapore]
+moe: ["MOE 2021 P1–P2 Statistics 1 (Picture Graphs)", "MOE 2021 P3 Statistics 1 (Bar Graphs)", "MOE 2021 P4 Statistics 1 (Tables, Line Graphs and Pie Charts)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: graphs
+shortTitle: { en: "Graphs", zh: "统计图表" }

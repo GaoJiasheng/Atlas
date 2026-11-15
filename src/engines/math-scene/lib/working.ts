@@ -4,6 +4,8 @@
  * to, written with `{a/b}` tokens, e.g. `{1/8} + {1/8} + {1/8} = {3/8}`,
  * `{2/3} = {8/12} (× 4)`, `{1/2} + {1/4} = {2/4} + {1/4} = {3/4}`. Pure.
  */
+import { isDataTask } from './data-kind';
+import { dataLines } from './data-working';
 import type { Locale } from '../../core/types';
 import { t } from '../../../i18n';
 import type { InputSpec, Task } from '../schema';
@@ -243,6 +245,7 @@ function valueLines(task: Task, state: TaskState, locale: Locale, done: boolean,
 }
 
 export function workingLines(task: Task, state: TaskState, locale: Locale, done = false, notation: Notation = DEFAULT_NOTATION): string[] {
+  if (isDataTask(task)) return dataLines(task, state, locale, done);
   if (task.kind === 'complete-net' || task.kind === 'tap-face') return netLines(task, state, locale, done);
   if (isMeasureTask(task)) return measureLines(task, state, locale, done).filter(Boolean);
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
@@ -349,7 +352,7 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
  */
 export function cardValue(task: Task, state: TaskState, done = false): Frac | null {
   const m = task.model;
-  if (m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || m.kind === 'instrument' || (m.kind === 'numberline' && m.scale === 'whole') || isDecimalTask(task) || isMeasureTask(task)) return null;
+  if (m.kind === 'chart' || isDataTask(task) || m.kind === 'grid' || m.kind === 'array' || m.kind === 'blocks' || m.kind === 'clock' || m.kind === 'timeline' || m.kind === 'instrument' || (m.kind === 'numberline' && m.scale === 'whole') || isDecimalTask(task) || isMeasureTask(task)) return null;
   const spec = inputSpecOf(task);
   if (spec && usesValueBoxes(task, spec)) return null;
   const phase = phasesOf(task)[state.phase];

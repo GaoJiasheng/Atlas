@@ -49,6 +49,9 @@ export function beatShape(beat: Beat): string {
       return `instrument|${partsOf(m)
         .map((x) => [x.type, x.unit, x.from && formatDecimal(x.from), x.to && formatDecimal(x.to), x.major && formatDecimal(x.major), x.minor && formatDecimal(x.minor), x.look, x.orient, x.shape, x.scale, x.broken, x.inset && formatDecimal(x.inset), x.sub?.unit, x.dual, x.skip && formatDecimal(x.skip.from)].join(','))
         .join('|')}`;
+    case 'chart':
+      // The same chart keeps its drawing (a new scale eases the bars, points are joined, blocks slide between towers); another kind of chart, other categories or a pair remounts.
+      return `chart|${m.type}|${m.orient}|${m.stack || m.pooled ? 'blocks' : ''}|${m.pair ? `pair|${m.pair.map((x) => x.type).join(',')}` : ''}|${(m.cats ?? []).map((x) => x.id).join(',')}|${(m.pie ?? []).map((x) => x.id).join(',')}|${m.table ? JSON.stringify(m.table.rows.map((r) => r.id)) : ''}`;
     case 'net':
       // The same net keeps its drawing (it folds, unfolds, turns, its colours come in); another solid, another layout or a set remounts.
       return `net|${m.set ? 'set|' : ''}${JSON.stringify(netItems(m).map((x) => [x.solid, x.layout, x.curved, x.base, x.open]))}`;

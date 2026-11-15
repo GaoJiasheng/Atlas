@@ -1,5 +1,5 @@
 /** Read-only background specimens; kept separate from the optional SVG models. */
-import type { ArrayModelSpec, ClockModelSpec, DecimalGridModelSpec, GridModelSpec, InstrumentModelSpec, NetModelSpec } from '../schema';
+import type { ChartModelSpec, ArrayModelSpec, ClockModelSpec, DecimalGridModelSpec, GridModelSpec, InstrumentModelSpec, NetModelSpec } from '../schema';
 
 export const SPECIMEN_GRID: GridModelSpec = {
   kind: 'grid',
@@ -47,3 +47,35 @@ export const SPECIMEN_DIAL: InstrumentModelSpec = {
 export const SPECIMEN_NET: NetModelSpec = { kind: 'net', solid: { type: 'cuboid', size: [1, 1, 1] }, layout: { cubeNet: '141-e' }, fold: 0.5, stagger: true, view: 'iso', turn: 0 };
 
 export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
+
+/** The graphs lesson's specimen (docs/77 §3.3): the fruit bar graph, one gridline worth 1, a reading line from the mango bar. */
+export const SPECIMEN_CHART: ChartModelSpec = {
+  kind: 'chart',
+  type: 'bar',
+  orient: 'vertical',
+  title: { en: 'Favourite fruit of a class', zh: '一个班最喜欢的水果' },
+  cats: [
+    { id: 'mango', label: { en: 'Mango', zh: '芒果' }, value: 8 },
+    { id: 'durian', label: { en: 'Durian', zh: '榴梿' }, value: 6 },
+    { id: 'rambutan', label: { en: 'Rambutan', zh: '红毛丹' }, value: 9 },
+    { id: 'banana', label: { en: 'Banana', zh: '香蕉' }, value: 4 },
+  ],
+  axis: { from: 0, to: 10, step: 1, labels: 2, name: { en: 'Number of pupils', zh: '人数' } },
+  guide: ['mango'],
+  highlight: { mango: 'cold' },
+};
+
+/** The averages lesson's specimen (docs/78 §3.3): towers of 2, 4 and 6 blocks and the average line at 4. */
+export const SPECIMEN_TOWERS: ChartModelSpec = {
+  kind: 'chart',
+  type: 'bar',
+  orient: 'vertical',
+  stack: true,
+  cats: [
+    { id: 'wei-jie', label: { en: 'Wei Jie', zh: 'Wei Jie' }, value: 2 },
+    { id: 'siti', label: { en: 'Siti', zh: 'Siti' }, value: 4 },
+    { id: 'arjun', label: { en: 'Arjun', zh: 'Arjun' }, value: 6 },
+  ],
+  axis: { from: 0, to: 8, step: 1, labels: 1 },
+  mean: 4,
+};

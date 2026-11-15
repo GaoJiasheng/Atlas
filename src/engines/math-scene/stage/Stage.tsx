@@ -7,12 +7,12 @@
  * the background chapter shows one specimen fraction ({3/4}) in every view.
  */
 import { Suspense, useLayoutEffect } from 'react';
-import { SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';
-import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, ArrayModel, BlocksModel, WholeLine, DecimalTask, DecimalGrid, ClockModel, Timeline, InstrumentModel, NetModel } from './lazy-models';
+import { SPECIMEN_CHART, SPECIMEN_TOWERS, SPECIMEN_GRID, SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DIAL, SPECIMEN_NET, SPECIMEN_DECIMAL } from './specimens';
+import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, ArrayModel, BlocksModel, WholeLine, DecimalTask, DecimalGrid, ClockModel, Timeline, InstrumentModel, NetModel, ChartModel } from './lazy-models';
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
-import type { Beat, GridModelSpec, ModelView, Task } from '../schema';
+import type { Beat, GridModelSpec, Model, ModelView, Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
 import { canShow } from '../lib/lesson';
@@ -76,6 +76,8 @@ export interface StageContentProps {
   beat?: Beat | null;
   /** Practice: the right answer drawn after a wrong one. */
   ctl?: Controller;
+  /** The background chapter's specimen model when it is not one of the fixed ones (the towers of the averages lesson). */
+  specimenModel?: Model | null;
   /** A net: the FOLD slider and the turns, the check's fold up, what it reports back (docs/39 §3.5). */
   net?: NetHold;
 }
@@ -123,6 +125,7 @@ function StageModel(p: StageContentProps) {
 
 function Specimen(p: StageContentProps & { view: ModelView }) {
   const { box, locale, defs } = p;
+  if (p.view === 'chart') return <ChartModel model={p.specimenModel?.kind === 'chart' ? p.specimenModel : SPECIMEN_CHART} box={box} locale={locale} label={t(locale, p.specimenModel === SPECIMEN_TOWERS ? 'math.specimen.towers' : 'math.specimen.chart')} />;
   if (p.view === 'net') return <NetModel model={SPECIMEN_NET} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.net')} fold={p.net?.fold ?? null} turn={p.net?.turn ?? null} maxH={p.net?.maxH} onShow={p.net?.onShow} />;
   if (p.view === 'instrument' || p.view === 'straight') return <InstrumentModel model={SPECIMEN_DIAL} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.dial')} />;
   if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
@@ -192,6 +195,12 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
 
   /* the array, the blocks, the whole-number line: group, arrange, split, regroup, share, skip-count, or a picture to read */
   const pictures = task.kind === 'choose' && task.options.some((o) => o.model || o.value);
+
+  /* a chart (docs/77 §3.2, docs/78 §3.1): a question to read off it (bars and points draw reading lines), a table to fill, towers to even out */
+  if (!pictures && m.kind === 'chart') {
+    const ghostState = ghost && (task.kind === 'fill-table' || task.kind === 'even-out') ? solvedState(task) : null;
+    return <ChartModel model={m} box={area} locale={locale} label={label} task={task} state={state} editable={editable} act={act} ghost={ghostState} />;
+  }
 
   /* a net (docs/39 §3.5): complete it, tap a face, or a net or a solid to look at (a choice in words, a number to write) */
   if (!pictures && m.kind === 'net') return <TaskNet {...p} task={task} state={state} box={area} />;
@@ -626,6 +635,7 @@ export function MiniModel({ defs, model, box, locale }: { defs: string; model: T
   if (model.kind === 'grid') return <GridModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'instrument') return <InstrumentModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
   if (model.kind === 'net') return <NetModel model={model} box={box} defs={defs} locale={locale} label={label} mini />;
+  if (model.kind === 'chart') return <ChartModel model={model} box={box} locale={locale} label={label} mini />;
   if (model.kind === 'array') return <ArrayModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'blocks') return <BlocksModel box={box} model={model} locale={locale} label={label} mini />;
   if (model.kind === 'clock') return <ClockModel defs={defs} box={box} model={model} locale={locale} label={label} mini />;

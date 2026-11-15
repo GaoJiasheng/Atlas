@@ -443,4 +443,17 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
 
 ## 10. 施工记录 / 已知差距
 
-施工时追加。
+**2026-11-16 施工**（分支 `claude/graphs-average`；§0.1 全部按默认值）。
+
+- **课纲核对**：S1（PDF 806 004 字节，sha256 `e8f77fe1…ae70e1`，2026-11-15 下载，不进仓库）第 32、34、36、37、40 页逐字核对，§1.1 引文无误；第 44 页"total value ÷ number of data"的除号看过原页图（docs/78）。
+- **建成**：7 步 30 拍、题库 67 道（9 / 10 / 10 / 9 / 10 / 9 / 10）、练习 8 道（按问法 6 种）、名词表 13 条；`status: published`。题库由 Claude 起草（不经 Codex），每份 `check-pool` 0 错。
+- **引擎**（E-GR1–5，docs/06「图表（A7）」）：`schema.ts chartModel`、`lib/{chart,data-kind,data-tasks,data-working}.ts`、`lib/diagnose/data.ts`、`stage/ChartModel.tsx`（懒加载）、`tray/DataControls.tsx`、`hud/{data-facts,data-plate}.ts`、`hud/cards/ChartCard.tsx`、`validate-charts.ts`；共用文件只做登记式的小改动。单测 `tests/math-scene/{chart,diagnose-data,graphs-lesson}.test.ts`，e2e `tests-e2e/graphs.spec.ts`。
+- **与 spec 不同的地方**：
+  - `fill-table` 的数字框在托盘里（每个"?"一个带行列名的框，Tab / Enter 到下一格），写的数同时显示在舞台表格的格子里；SVG 里放输入框在手机和读屏上都不可靠。
+  - 读数发丝线只从条 / 点出发（点刻度横着画的那种只在讲解拍 `guide: [{ y }]`）。
+  - 象形图一张图只用一种图标（多为"学生"小人），不按水果换图标；图例写"= 2 pupils"。
+  - 截断轴的 choose 用 44 / 48 和"3 倍"（spec 写 24 / 28 和"两倍"留给讲解拍）。
+  - 折线图的温度题轴从 0 开始（validate 只许截断轴出现在 pair 和那道 choose）。
+  - S3–S10（读图研究文献）页码未核，按规则不进 sources.json；误解目录本身是本课的诊断设计。
+  - 表格题里的"P3 / P4"是数据（两个班），不是课的年级标注。
+- **插图**：Codex `codex/img5`（c024fb85）的封面与 3 张配图，图注、替代文字照 `art/img5/graphs-captions.json`；封面 mask 进 `src/lib/illustrations.json`。

@@ -43,7 +43,7 @@ import { formatFrac } from './lib/fraction';
 import { clockText } from './lib/value';
 import { Defs } from './stage/svg';
 import { StageContent } from './stage/Stage';
-import { SPECIMEN_ARRAY, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, SPECIMEN_SYMMETRY } from './stage/specimens';
+import { SPECIMEN_ARRAY, SPECIMEN_CHART, SPECIMEN_CLOCK, SPECIMEN_DECIMAL, SPECIMEN_DIAL, SPECIMEN_GRID, SPECIMEN_NET, SPECIMEN_SYMMETRY, SPECIMEN_TOWERS } from './stage/specimens';
 import { isSymmetryModel } from './lib/symmetry-tasks';
 import { symmetryPlateRows } from './hud/cards/SymmetryCard';
 import type { NetShown } from './stage/NetModel';
@@ -56,6 +56,7 @@ import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layo
 import { partsAreNarrow } from './tray/parts';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
 import { decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
+import { dataPlateRows } from './hud/data-plate';
 import { lessonUnits } from './lib/measure-working';
 import { factsOf, figureOf } from './lib/grid';
 import type { GridModelSpec, Model } from './schema';
@@ -85,6 +86,7 @@ const VIEW_KEY: Record<ModelView, Parameters<typeof t>[1]> = {
   instrument: 'math.view.instrument',
   straight: 'math.view.straight',
   net: 'math.view.net',
+  chart: 'math.view.chart',
 };
 const SPECIMEN_VIEWS: ModelView[] = ['bar', 'circle', 'numberline', 'wall'];
 
@@ -161,13 +163,16 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const measureLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'instrument')), [lesson]);
   // A lesson on nets and solids (docs/39 §3.7): its background shows a cube net folded half way, its spec table the solids.
   const netLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'net')), [lesson]);
+  // A lesson on charts (docs/77) or averages (docs/78, towers of blocks): its own card, plate rows and specimen.
+  const chartLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'chart')), [lesson]);
+  const averageLesson = useMemo(() => chartLesson && lesson.steps.some((x) => x.beats.some((b) => b.model.kind === 'chart' && (b.model.stack || b.model.pooled))), [lesson, chartLesson]);
   // A lesson on line symmetry (docs/79 §3.4): its background shows the house folded part of the way, its card SYMMETRY.
   const symmetryLesson = useMemo(() => lesson.steps.some((x) => x.beats.some((b) => isSymmetryModel(b.model))), [lesson]);
   // The fraction assists (S / E / N, labels) and specimen belong to a lesson on fractions; another lesson's background shows its first model.
-  const fractionLesson = useMemo(() => !decimalLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
+  const fractionLesson = useMemo(() => !decimalLesson && !chartLesson && lesson.steps.some((x) => x.beats.some((b) => isFractionModel(b.model))), [lesson, decimalLesson]);
   const firstKind = lesson.steps[0]?.beats[0]?.model.kind ?? 'bar';
-  const specimenModel: Model | null = fractionLesson ? null : symmetryLesson ? SPECIMEN_SYMMETRY : netLesson ? SPECIMEN_NET : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
-  const lessonCard: CardKind = fractionLesson ? 'fraction' : cardKindOf(specimenModel, null, 'fraction');
+  const specimenModel: Model | null = fractionLesson ? null : chartLesson ? (averageLesson ? SPECIMEN_TOWERS : SPECIMEN_CHART) : symmetryLesson ? SPECIMEN_SYMMETRY : netLesson ? SPECIMEN_NET : measureLesson ? SPECIMEN_DIAL : decimalLesson ? SPECIMEN_DECIMAL : firstKind === 'grid' ? SPECIMEN_GRID : firstKind === 'array' || firstKind === 'blocks' || firstKind === 'numberline' ? SPECIMEN_ARRAY : firstKind === 'clock' || firstKind === 'timeline' ? SPECIMEN_CLOCK : null;
+  const lessonCard: CardKind = fractionLesson ? 'fraction' : chartLesson ? (averageLesson ? 'average' : 'chart') : cardKindOf(specimenModel, null, 'fraction');
   const assists = fractionLesson;
   const explain = slot.kind === 'explain' ? slot.beat : null;
   const number = (id: string | null) => {
@@ -390,7 +395,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   /** The model on show (a check's, a beat's, the specimen's): it picks the card and the plate rows. */
   const modelOnShow: Model | null = task ? task.model : explain ? explain.model : background ? specimenModel : null;
   const gridOnShow: GridModelSpec | null = modelOnShow?.kind === 'grid' ? modelOnShow : null;
-  const cardKind: CardKind = showSummaryOf(practice, u.summary) ? lessonCard : cardKindOf(modelOnShow, task, lessonCard);
+  // A lesson on charts keeps its own card throughout (a strip of equal parts is the averages' model drawing, not a fraction).
+  const cardKind: CardKind = showSummaryOf(practice, u.summary) || chartLesson ? lessonCard : cardKindOf(modelOnShow, task, lessonCard);
 
   /* ---------- HUD registration ---------- */
   const canCheck = !!task && !!run && !run.done && answered(task, run.state);
@@ -406,7 +412,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       ? [UP(t('en', 'math.check.title')), ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : []), ...(run.done ? [UP(t('en', 'math.status.done'))] : [])]
       : explain
         ? [`${UP(t('en', 'math.beat.label'))} ${cur.beat + 1}/${count - 1}`, ...(value ? [`${UP(t('en', 'math.status.value'))} ${formatFrac(value)}`] : [])]
-        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : symmetryLesson ? `HOUSE · FOLD ${Math.round((SPECIMEN_SYMMETRY.fold?.t ?? 0) * 100)} %` : netLesson ? 'CUBE NET · FOLD 50 %' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
+        : [`${UP(t('en', 'math.status.specimen'))} ${fractionLesson ? '3/4' : chartLesson ? (averageLesson ? '3 TOWERS · AVERAGE 4' : 'BAR GRAPH · 1 GRIDLINE = 1') : symmetryLesson ? `HOUSE · FOLD ${Math.round((SPECIMEN_SYMMETRY.fold?.t ?? 0) * 100)} %` : netLesson ? 'CUBE NET · FOLD 50 %' : measureLesson ? '0 G' : decimalLesson ? '0.35' : gridLesson && firstKind === 'grid' ? '4 × 3' : specimenModel?.kind === 'clock' ? clockText(specimenModel.time, 'face', lesson.notation) : '3 × 4'}`];
   const [cardExpanded, setCardExpanded] = useState(false);
   const specRows = useMemo<SpecRow[]>(
     () => [
@@ -430,7 +436,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
             ? [{ id: 'numbers', label: both('math.spec.numbers'), value: `≤ ${maxNumber(lesson)}`, mono: true, source: 'ref' as const }]
             : []),
     ],
-    [lesson, gridLesson, fractionLesson, decimalLesson, measureLesson, netLesson, symmetryLesson, firstKind],
+    [lesson, gridLesson, fractionLesson, decimalLesson, measureLesson, netLesson, symmetryLesson, firstKind, chartLesson],
   );
 
   const controls = useMemo<SceneControls>(() => {
@@ -538,6 +544,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         { key: 'math.state.answered', value: `${Object.keys(u.practice).length}/${lesson.practice.length}` },
         { key: 'math.state.assists', value: UP(t('en', 'math.state.off')) },
       ]
+    : modelOnShow && dataPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)
+      ? dataPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done)!
     : modelOnShow && symmetryPlateRows(modelOnShow, task, run?.state ?? null)
       ? symmetryPlateRows(modelOnShow, task, run?.state ?? null)!
     : modelOnShow && netPlateRows(modelOnShow, task, run?.state ?? null, !!run?.done, netShownFold, netTurn)
@@ -569,7 +577,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
         <Defs id={defs} />
         {!showSummary &&
           (background ? (
-            <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} specimenGrid={symmetryLesson ? SPECIMEN_SYMMETRY : undefined} net={netHold} />
+            <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} specimen={fractionLesson || specimenModel ? view : undefined} specimenModel={specimenModel} specimenGrid={symmetryLesson ? SPECIMEN_SYMMETRY : undefined} net={netHold} />
           ) : explain ? (
             <g ref={drawingRef} key={`${s.chapter}|${beatShape(explain)}${reduced ? `|${cur.beat}` : ''}`} className="ms-beat" data-move={explain.move ?? 'none'} data-model={explain.model.kind}>
               <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} beat={explain} net={netHold} />

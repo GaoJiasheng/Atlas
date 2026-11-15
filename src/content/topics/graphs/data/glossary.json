@@ -1,0 +1,192 @@
+{
+  "terms": [
+    {
+      "id": "data",
+      "term": {
+        "en": "data",
+        "zh": "数据"
+      },
+      "definition": {
+        "en": "Numbers that were counted or measured, such as how many pupils chose each fruit.",
+        "zh": "数出来、量出来的一组数，比如选每种水果的有几人。"
+      },
+      "see": [
+        "table",
+        "total"
+      ]
+    },
+    {
+      "id": "picture-graph",
+      "term": {
+        "en": "picture graph",
+        "zh": "象形图"
+      },
+      "definition": {
+        "en": "A graph that shows numbers with pictures; its key says how many one picture stands for. (Mainland China textbooks: 象形统计图.)",
+        "zh": "用图表示数的统计图；图例说一个图表示多少。（中国大陆课本叫“象形统计图”。）"
+      },
+      "see": [
+        "key",
+        "bar-graph"
+      ]
+    },
+    {
+      "id": "key",
+      "term": {
+        "en": "key",
+        "zh": "图例"
+      },
+      "definition": {
+        "en": "The small box on a picture graph that says how many one picture stands for.",
+        "zh": "象形图上的小框，说明一个图表示多少。"
+      },
+      "see": [
+        "picture-graph"
+      ]
+    },
+    {
+      "id": "bar-graph",
+      "term": {
+        "en": "bar graph",
+        "zh": "条形图"
+      },
+      "definition": {
+        "en": "A graph that shows numbers by the length of bars, read against a scale. (Mainland China textbooks: 条形统计图.)",
+        "zh": "用条的长短表示数的统计图，对着刻度读。（中国大陆课本叫“条形统计图”。）"
+      },
+      "see": [
+        "axis",
+        "scale"
+      ]
+    },
+    {
+      "id": "axis",
+      "term": {
+        "en": "axis",
+        "zh": "轴"
+      },
+      "definition": {
+        "en": "A straight line along the side or bottom of a bar graph or line graph, with a scale on it.",
+        "zh": "条形图、折线图边上或底下的直线，上面有刻度。"
+      },
+      "see": [
+        "scale",
+        "gridline"
+      ]
+    },
+    {
+      "id": "scale",
+      "term": {
+        "en": "scale",
+        "zh": "刻度"
+      },
+      "definition": {
+        "en": "The numbers along an axis; how much one gridline stands for.",
+        "zh": "轴上的数；每一格表示多少。"
+      },
+      "see": [
+        "gridline",
+        "axis"
+      ]
+    },
+    {
+      "id": "gridline",
+      "term": {
+        "en": "gridline",
+        "zh": "格线"
+      },
+      "definition": {
+        "en": "A thin line across a graph from a mark on the scale; it helps you read where a bar ends.",
+        "zh": "从刻度上的一点横过整张图的细线，帮你读出条顶在哪里。"
+      },
+      "see": [
+        "scale"
+      ]
+    },
+    {
+      "id": "table",
+      "term": {
+        "en": "table",
+        "zh": "表格"
+      },
+      "definition": {
+        "en": "Numbers set out in rows and columns, each with a name.",
+        "zh": "把数排成行和列，每一行、每一列都有名字。"
+      },
+      "see": [
+        "tally",
+        "total"
+      ]
+    },
+    {
+      "id": "tally",
+      "term": {
+        "en": "tally marks",
+        "zh": "划记"
+      },
+      "definition": {
+        "en": "Short strokes made while counting; four strokes and one across make a bundle of 5.",
+        "zh": "边数边画的短线；四竖加一斜是一捆，表示 5。"
+      },
+      "see": [
+        "table"
+      ]
+    },
+    {
+      "id": "total",
+      "term": {
+        "en": "total",
+        "zh": "总数"
+      },
+      "definition": {
+        "en": "All the numbers added together.",
+        "zh": "全部加起来的数。"
+      },
+      "see": [
+        "table"
+      ]
+    },
+    {
+      "id": "line-graph",
+      "term": {
+        "en": "line graph",
+        "zh": "折线图"
+      },
+      "definition": {
+        "en": "A graph of readings taken one after another, joined in order by straight lines to show how something changes. (Mainland China textbooks: 折线统计图.)",
+        "zh": "把先后测得的读数按顺序用直线连起来，表示一样东西怎么变化。（中国大陆课本叫“折线统计图”。）"
+      },
+      "see": [
+        "increase-decrease"
+      ]
+    },
+    {
+      "id": "pie-chart",
+      "term": {
+        "en": "pie chart",
+        "zh": "饼图"
+      },
+      "definition": {
+        "en": "A circle cut into parts to show how a whole is shared; the whole circle is everything. (Mainland China textbooks: 扇形统计图.)",
+        "zh": "把圆分成几份，表示一个整体怎么分；整个圆是全部。（中国大陆课本叫“扇形统计图”。）"
+      },
+      "see": [
+        "total"
+      ]
+    },
+    {
+      "id": "increase-decrease",
+      "term": {
+        "en": "increase, decrease",
+        "zh": "增加、减少"
+      },
+      "definition": {
+        "en": "How much a reading went up or down: the difference between two readings.",
+        "zh": "读数升了多少或降了多少：两个读数的差。"
+      },
+      "see": [
+        "line-graph"
+      ]
+    }
+  ]
+}

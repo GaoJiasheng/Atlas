@@ -1,0 +1,17 @@
+# Average of a set of data (MathScene lesson). Spec: docs/78-average-content-spec.md.
+id: average
+title: { en: "Average", zh: "平均数" }
+subtitle: { en: "Even out the towers: the level they reach is the average", zh: "把塔移平：一样高时的高度就是平均数" }
+subject: math
+levels: [P6]
+tags: [statistics, singapore]
+moe: ["MOE 2021 P6 Statistics 1 (Average of a Set of Data)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: average
+shortTitle: { en: "Average", zh: "平均数" }
