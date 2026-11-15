@@ -1,0 +1,18 @@
+# Line symmetry: fold to test, lines of symmetry, symmetric figures, completing a figure on square grid (MathScene lesson).
+# Spec: docs/79-symmetry-content-spec.md.
+id: symmetry
+title: { en: "Line symmetry", zh: "线对称" }
+subtitle: { en: "Fold a figure along a line: do the two halves match?", zh: "沿一条线对折，看两半是否重合" }
+subject: math
+levels: [P4]
+tags: [geometry, singapore]
+moe: ["MOE 2021 P4 Geometry 3 (Line Symmetry)"]
+mode: lesson
+engine: math-scene
+stage: svg
+theme: paper
+sensitivity: open
+note: { en: "Interactive lesson · aligned to the MOE 2021 syllabus", zh: "交互课 · 对照 MOE 2021 课纲" }
+status: published
+illustration: symmetry
+shortTitle: { en: "Line symmetry", zh: "线对称" }

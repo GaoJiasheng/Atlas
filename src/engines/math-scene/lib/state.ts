@@ -18,6 +18,7 @@ import { onDial, snapTo } from './clock';
 import { MEASURE_ACTIONS, measureClear, measureInitial, measureReduce, type MeasureAction, type MeasureState } from './measure-tasks';
 import { canHop } from './timeline';
 import { NET_ACTIONS, netClear, netInitial, netReduce, type NetAction, type NetState } from './net-tasks';
+import { SYM_ACTIONS, symClear, symInitial, symReduce, type SymAction, type SymState } from './symmetry-tasks';
 
 export type Sym = '<' | '=' | '>';
 export type Phase = 'model' | 'convert' | 'mark' | 'input';
@@ -88,9 +89,11 @@ export type Action =
   /** Measuring (docs/32 §3.4): a value set on an instrument, weights on a balance, parts tapped, the tray's tools. */
   | MeasureAction
   /** Nets (docs/39 §3.5): a face placed on a net, a face tapped. */
-  | NetAction;
+  | NetAction
+  /** Line symmetry (docs/79 §3.2): a square or a corner put down on the other side, "Fold it". */
+  | SymAction;
 
-export interface TaskState extends DecimalState, MeasureState, NetState {
+export interface TaskState extends DecimalState, MeasureState, NetState, SymState {
   /** Equal parts per whole (bar / circle), intervals per whole (number line); 0 = not cut yet. */
   parts: number;
   wholes: number;
@@ -219,6 +222,7 @@ export function initialState(task: Task): TaskState {
     ...decimalInitial(task),
     ...measureInitial(),
     ...netInitial(),
+    ...symInitial(),
     parts: baseParts(task),
     wholes: m.kind === 'bar' ? (m.wholes ?? 1) : m.kind === 'numberline' && m.scale !== 'decimal' ? m.to - m.from : 1,
     shaded: bar ? indices(m.shaded) : [],
@@ -328,6 +332,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
   if (DECIMAL_ACTIONS.has(action.do)) return decimalReduce(task, state, action as DecimalAction);
   if (MEASURE_ACTIONS.has(action.do)) return measureReduce(task, state, action as MeasureAction);
   if (NET_ACTIONS.has(action.do)) return netReduce(task, state, action as NetAction);
+  if (SYM_ACTIONS.has(action.do)) return symReduce(task, state, action as SymAction);
   switch (action.do) {
     case 'shade': {
       const total = state.parts * state.wholes;
@@ -412,6 +417,7 @@ export function reduce(task: Task, state: TaskState, action: Action): TaskState 
       if (onChart(task) || task.kind === 'shade-decimal') return decimalClear(task, state);
       if (task.kind === 'set-scale' || task.kind === 'count-intervals' || task.kind === 'read-scale') return measureClear(state);
       if (task.kind === 'complete-net' || task.kind === 'tap-face') return state.nplaced.length || state.ntapped !== null ? netClear(state) : state;
+      if (task.kind === 'complete-symmetric') return symClear(state);
       if (task.kind === 'duration') return state.hops.length ? { ...state, hops: [] } : state;
       if (task.kind === 'group' || task.kind === 'skip-count' || task.kind === 'regroup' || task.kind === 'share') {
         const start = initialState(task);

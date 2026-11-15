@@ -39,6 +39,8 @@ import { hasMeasureControls, MeasureModelControls } from './MeasureControls';
 import { isMeasureTask } from '../lib/measure-kind';
 import { NetModelControls } from './NetControls';
 import { optionText } from '../lib/net-description';
+import { SymmetryControls } from './SymmetryControls';
+import { isSymmetryTask } from '../lib/symmetry-tasks';
 
 export interface TrayProps {
   ctl: Controller;
@@ -177,7 +179,9 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   const unitName = (d: number) => (locale === 'zh' ? `${numberZh(d)}分之几` : denominatorEn(d, true));
 
   const wholeKind = task.kind === 'group' || task.kind === 'arrange' || task.kind === 'skip-count' || task.kind === 'split-array' || task.kind === 'regroup' || task.kind === 'share';
-  if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose') {
+  // Line symmetry (docs/79 §3.2): "Fold it" on a completion or a choice, Clear and the count on a completion; a choice's options follow.
+  if (phase === 'model' && isSymmetryTask(task)) parts.push(<SymmetryControls key="sym" task={task} run={run} ctl={ctl} locale={locale} practice={p.practice} />);
+  if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose' && task.kind !== 'complete-symmetric') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (phase === 'model' && task.kind === 'complete-net') {
     parts.push(<NetModelControls key="net" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);

@@ -4059,3 +4059,114 @@ path.ms-glyph--cord {
 .ms-net-tools[data-compact] .ms-net-tools__name {
   display: none;
 }
+
+/* ------------------------------------------------------------------ */
+/* Line symmetry on the grid (docs/79 §2.0, §3.1): lines of symmetry as  */
+/* centre lines, lines to test dashed, the fold's flap, the mismatch    */
+/* hatched, partners in signal                                         */
+/* ------------------------------------------------------------------ */
+
+.ms-grid__figure[data-tone="signal"] .ms-grid__fill {
+  fill: color-mix(in srgb, var(--signal) 40%, var(--panel-solid));
+}
+.ms-grid__figure[data-tone="signal"] .ms-grid__outline {
+  stroke: var(--signal);
+}
+/* A shaded pattern inside a figure: a dense cold fill, its own outline thin. */
+.ms-grid__figure[data-shade] .ms-grid__fill {
+  fill: color-mix(in srgb, var(--cold) 62%, var(--panel-solid));
+  fill-opacity: 1;
+}
+.ms-grid__figure[data-shade] .ms-grid__outline {
+  stroke-width: 1;
+}
+.ms-sym__mirror,
+.ms-sym__cand {
+  stroke: var(--ink);
+  fill: none;
+  stroke-linecap: round;
+}
+/* The technical plate's centre line: long dash, dot. */
+.ms-sym__mirror {
+  stroke-width: 1.6;
+  stroke-dasharray: 14 4 2 4;
+}
+.ms-sym__cand {
+  stroke-width: 1.4;
+  stroke-dasharray: 6 5;
+}
+/* The side a fold lifts: the paper dimmed where it was. */
+.ms-sym__lifted {
+  stroke: none;
+  fill: var(--panel-solid);
+  fill-opacity: 0.62;
+}
+/* The flap: a pale back, a hot outline, see-through enough to show what lies under it. */
+.ms-sym__flap {
+  stroke: none;
+  fill: color-mix(in srgb, var(--hot) 10%, var(--panel-solid));
+  fill-opacity: 0.55;
+}
+.ms-sym__flap--shade {
+  fill: color-mix(in srgb, var(--hot) 45%, var(--panel-solid));
+  fill-opacity: 0.8;
+}
+.ms-sym__flap-edge {
+  fill: none;
+  stroke: var(--hot);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.ms-sym__miss path {
+  stroke: none;
+}
+.ms-sym__fold[data-folded] .ms-sym__miss {
+  animation: ms-sym-miss 320ms var(--ease-out) 760ms both;
+}
+@keyframes ms-sym-miss {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ms-sym__partner {
+  fill: color-mix(in srgb, var(--signal) 56%, var(--panel-solid));
+  stroke: color-mix(in srgb, var(--signal) 80%, var(--ink));
+  stroke-width: 0.6;
+}
+.ms-sym__join {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.ms-sym__count {
+  fill: var(--ink);
+  font: 600 12px / 1 var(--font-mono);
+}
+.ms-sym__point {
+  fill: var(--cold);
+  stroke: var(--panel-solid);
+  stroke-width: 1.5;
+}
+.ms-sym__point[data-tone="signal"] {
+  fill: var(--signal);
+}
+.ms-sym__guess {
+  fill: none;
+  stroke: var(--hot);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 3;
+}
+.ms-sym__mine-line {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2.2;
+  stroke-linejoin: round;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-sym__fold[data-folded] .ms-sym__miss {
+    animation: none;
+  }
+}

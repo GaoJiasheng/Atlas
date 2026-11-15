@@ -135,6 +135,12 @@ function describe(task: Task, action: Action, s: TaskState): string {
       return `PLACED ${s.nplaced.length}${task.kind === 'complete-net' ? `/${task.add}` : ''}`;
     case 'ntap':
       return s.ntapped === null ? 'TAP' : `TAP ${tappedLabel(task, s.ntapped)}`;
+    case 'stile':
+      return `SQUARES ${s.sym.length}`;
+    case 'spoint':
+      return `CORNERS ${s.sym.length}`;
+    case 'sfold':
+      return s.sfold ? 'FOLDED' : 'UNFOLDED';
     case 'input': {
       const spec = inputSpecOf(task);
       if (spec && isMeasureTask(task)) {
@@ -262,6 +268,8 @@ export function answerLabel(task: Task, s: TaskState): string {
       return describe(task, { do: 'nplace', key: '' }, s);
     case 'tap-face':
       return describe(task, { do: 'ntap', node: 0 }, s);
+    case 'complete-symmetric':
+      return describe(task, task.mode === 'cells' ? { do: 'stile', key: '' } : { do: 'spoint', key: '' }, s);
   }
 }
 

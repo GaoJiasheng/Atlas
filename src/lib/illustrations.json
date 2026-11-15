@@ -1199,6 +1199,26 @@
       "0000000000000000"
     ]
   },
+  "symmetry": {
+    "mask": [
+      "0000000000000000",
+      "0000353003530000",
+      "003dfffaafffd300",
+      "02effffffffffe20",
+      "06ffffffffffff60",
+      "03ffffffffffff30",
+      "005effffffffe500",
+      "00018effffe81000",
+      "001affffffffa100",
+      "007ffffffffff700",
+      "00affffffffffa00",
+      "008ffffffffff800",
+      "002ffff99ffff200",
+      "0004bc7007cb4000",
+      "0000000000000000",
+      "0000000000000000"
+    ]
+  },
   "telling-time": {
     "mask": [
       "0000000000000000",

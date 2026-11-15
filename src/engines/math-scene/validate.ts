@@ -24,6 +24,8 @@ import { isDecimalModel } from './lib/decimal-tasks';
 import { bareQuantities, instrumentModelIssues, measureTaskIssues } from './validate-measure';
 import { netModelIssues, netTaskIssues } from './validate-nets';
 import { isNetTask, netWay } from './lib/net-tasks';
+import { symModelIssues, symTaskIssues } from './validate-symmetry';
+import { isSymmetryModel, isSymmetryTask, symWay } from './lib/symmetry-tasks';
 
 export interface LessonIssue {
   level: 'error' | 'warn';
@@ -163,6 +165,7 @@ function beatIssues(beat: Beat, limits?: StepLimits): string[] {
   }
   if (m.kind === 'grid') {
     out.push(...gridModelIssues(m));
+    if (isSymmetryModel(m)) out.push(...symModelIssues(m, 'beat'));
     if (m.figures.length === 0) out.push('a grid beat needs a figure');
     if (beat.highlight || beat.overlay) out.push('highlight and overlay are for fraction models');
   }
@@ -194,9 +197,10 @@ export function gridModelIssues(m: GridModelSpec): string[] {
   const known = new Set(ids);
   for (const f of m.figures) {
     if (f.poly) for (const p of polyIssues(f.poly)) out.push(`figure "${f.id}": ${p}`);
-    if (f.halves && f.halves.length % 2 !== 0) out.push(`figure "${f.id}": half cells come in pairs (an area of whole squares)`);
+    // Line symmetry draws single half squares (a slant turned over or not) and figures drawn with lines.
+    if (f.halves && f.halves.length % 2 !== 0 && !isSymmetryModel(m)) out.push(`figure "${f.id}": half cells come in pairs (an area of whole squares)`);
     const facts = factsOf(f);
-    if (facts.whole === 0 && facts.halfCount === 0) out.push(`figure "${f.id}" covers no cells`);
+    if (facts.whole === 0 && facts.halfCount === 0 && !f.shape && !f.path) out.push(`figure "${f.id}" covers no cells`);
     for (const h of facts.halves) if (facts.cells.has(`${h.x},${h.y}`)) out.push(`figure "${f.id}": half cell ${h.x},${h.y} is also a whole cell`);
   }
   const ext = extentOf(m);
@@ -323,7 +327,8 @@ export function taskIssues(task: Task, where: string, opts: { bridge: boolean; p
     const r = netTaskIssues(task, opts.limits);
     for (const m of r.errors) error(m);
     for (const m of r.warns) warn(m);
-  } else if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
+  } else if (domain === 'symmetry') for (const m of symTaskIssues(task, opts.limits)) error(m);
+  else if (grid) for (const m of gridTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'measure-reading') for (const m of measureTaskIssues(task, opts.limits)) error(m);
   else if (domain === 'decimals') for (const m of decimalTaskIssues(task, opts.limits)) error(m);
   else if (!fractions) for (const m of valueTaskIssues(task, opts.limits)) error(m);
@@ -431,7 +436,8 @@ export function lessonIssues(data: MathSceneData, chapters: readonly ChapterInfo
   if (lesson.practice.length > 0) {
     if (lesson.practice.length < 6 || lesson.practice.length > 10) error(`practice has ${lesson.practice.length} questions (6–10)`);
     // A nets question counts by the way it asks (docs/39 §2.3): complete-net and tap-face each ask two or three ways.
-    const kinds = new Set(lesson.practice.map((q) => (isNetTask(q.task) ? netWay(q.task) : q.task.kind)));
+    // A symmetry question likewise (docs/79 §2.3): a completion with squares or corners, a choice about a line, a count, pictures.
+    const kinds = new Set(lesson.practice.map((q) => (isNetTask(q.task) ? netWay(q.task) : isSymmetryTask(q.task) ? symWay(q.task) : q.task.kind)));
     if (kinds.size < 5) error(`practice uses ${kinds.size} kinds of task (at least 5)`);
     for (const q of lesson.practice) {
       if (q.task.id !== q.id) error(`practice "${q.id}": task.id must equal the question id`);

@@ -12,7 +12,7 @@ import { BarModel, CircleModel, NumberLine, Rows, BarModelDiagram, CutBar, Array
 import type { ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
-import type { Beat, ModelView, Task } from '../schema';
+import type { Beat, GridModelSpec, ModelView, Task } from '../schema';
 import type { Controller } from '../controller';
 import type { TaskRun } from '../ui';
 import { canShow } from '../lib/lesson';
@@ -63,6 +63,8 @@ export interface StageContentProps {
   modes: DisplayModes;
   /** The background chapter: the specimen in this view. */
   specimen?: ModelView;
+  /** The background chapter's grid specimen when the lesson has its own (line symmetry: the house folded). */
+  specimenGrid?: GridModelSpec;
   task?: Task | null;
   /** The state drawn (the run). */
   state?: TaskState | null;
@@ -124,7 +126,7 @@ function Specimen(p: StageContentProps & { view: ModelView }) {
   if (p.view === 'net') return <NetModel model={SPECIMEN_NET} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.net')} fold={p.net?.fold ?? null} turn={p.net?.turn ?? null} maxH={p.net?.maxH} onShow={p.net?.onShow} />;
   if (p.view === 'instrument' || p.view === 'straight') return <InstrumentModel model={SPECIMEN_DIAL} box={box} defs={defs} locale={locale} label={t(locale, 'math.specimen.dial')} />;
   if (p.view === 'clock' || p.view === 'timeline') return <ClockModel defs={defs} box={box} model={SPECIMEN_CLOCK} locale={locale} label={t(locale, 'math.specimen.clock')} />;
-  if (p.view === 'grid') return <GridModel defs={defs} box={box} model={SPECIMEN_GRID} locale={locale} label={t(locale, 'math.specimen.grid')} />;
+  if (p.view === 'grid') return <GridModel defs={defs} box={box} model={p.specimenGrid ?? SPECIMEN_GRID} locale={locale} label={t(locale, p.specimenGrid ? 'math.sym.specimen' : 'math.specimen.grid')} />;
   if (p.view === 'decimal-grid') return <DecimalGrid defs={defs} box={box} model={SPECIMEN_DECIMAL} locale={locale} label={t(locale, 'math.specimen.decimal')} />;
   if (p.view === 'array') return <ArrayModel defs={defs} box={box} model={SPECIMEN_ARRAY} locale={locale} label={t(locale, 'math.specimen.array')} />;
   const label = t(locale, 'math.specimen', { name: fractionWords({ n: 3, d: 4 }, locale) });
@@ -183,6 +185,7 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
         editable={editable}
         act={act}
         ghost={ghost && task.kind !== 'choose' && task.kind !== 'input' ? solvedState(task) : null}
+        folded={task.kind === 'choose' && state.sfold}
       />
     );
   }

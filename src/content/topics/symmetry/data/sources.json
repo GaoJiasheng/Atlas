@@ -1,0 +1,84 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Ministry of Education Singapore, Curriculum Planning and Development Division. Mathematics Syllabus Primary One to Six (implementation starting with the 2021 Primary One cohort; updated October 2025). Line Symmetry: p. 39; 2D Shapes: pp. 32 and 34.",
+        "zh": "新加坡教育部课程规划与发展司：《小学一至六年级数学课程纲要》（2021 年版，2025 年 10 月更新）。线对称：第 39 页；平面图形：第 32、34 页。"
+      },
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "note": {
+        "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it (P4 Geometry 3.1–3.3 and 2.1, P1 Geometry 1.4). Pages as printed on the PDF.",
+        "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用（P4 几何 3.1–3.3 和 2.1，P1 几何 1.4）。页码是 PDF 上印的页码。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Ministry of Education Singapore: primary syllabuses page.",
+        "zh": "新加坡教育部：小学课程纲要页面。"
+      },
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "note": {
+        "en": "Version check of S1.",
+        "zh": "用于核对 S1 的版本。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Leikin, R., Berman, A. & Zaslavsky, O. (2000). Learning through teaching: The case of symmetry. Mathematics Education Research Journal 12(1), 18–36.",
+        "zh": "Leikin, R.、Berman, A. 与 Zaslavsky, O.（2000）：在教中学——以对称为例。《数学教育研究杂志》（澳大利亚）第 12 卷第 1 期，18–36 页。"
+      },
+      "note": {
+        "en": "Diagonals taken for lines of symmetry; counting the lines (steps 02 and 03). Reference as given in docs/79; not yet checked against the article.",
+        "zh": "把对角线当对称轴；数对称轴（第 02、03 步）。文献信息按 docs/79；尚未对照原文核对。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Hoyles, C. & Healy, L. (1997). Unfolding meanings for reflective symmetry. International Journal of Computers for Mathematical Learning 2(1), 27–59.",
+        "zh": "Hoyles, C. 与 Healy, L.（1997）：展开反射对称的意义。《国际计算机数学学习杂志》第 2 卷第 1 期，27–59 页。"
+      },
+      "note": {
+        "en": "Slanted lines of symmetry; \"two equal halves\" taken for symmetry (steps 01–03). Reference as given in docs/79; not yet checked against the article.",
+        "zh": "斜的对称轴；把“一样大的两半”当成对称（第 01–03 步）。文献信息按 docs/79；尚未对照原文核对。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Küchemann, D. (1981). Reflections and rotations. In K. M. Hart (Ed.), Children's Understanding of Mathematics: 11–16. London: John Murray.",
+        "zh": "Küchemann, D.（1981）：反射与旋转。载于 Hart, K. M. 编《儿童对数学的理解：11–16 岁》。伦敦：John Murray。"
+      },
+      "note": {
+        "en": "A copy slid across instead of flipped; partners at the wrong distance; slanted lines harder (steps 04 and 05). Page range not yet checked, so left out.",
+        "zh": "挪过去代替翻过去；对应点离轴远近不对；斜的轴更难（第 04、05 步）。页码尚未核对，故不列。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Ng, O.-L. & Sinclair, N. (2015). Young children reasoning about symmetry in a dynamic geometry environment. ZDM 47(3), 421–434.",
+        "zh": "Ng, O.-L. 与 Sinclair, N.（2015）：幼儿在动态几何环境中对对称的推理。《ZDM》第 47 卷第 3 期，421–434 页。"
+      },
+      "note": {
+        "en": "How primary children complete symmetric figures (steps 04 and 05). Reference as given in docs/79; not yet checked against the article.",
+        "zh": "小学生怎样补全对称图形（第 04、05 步）。文献信息按 docs/79；尚未对照原文核对。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "MOE approved textbook list (for the usual order of topics only, not copied).",
+        "zh": "教育部批准教材目录（只参考通常的教学顺序，不照抄）。"
+      },
+      "url": "https://www.moe.gov.sg/education-in-sg/approved-textbook-list",
+      "note": {
+        "en": "Figures, questions and wording in this lesson are our own; no letters of the alphabet are used (docs/79 Q5).",
+        "zh": "本课的图形、题目和措辞都是自己写的；不用字母（docs/79 Q5）。"
+      }
+    }
+  ]
+}

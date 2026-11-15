@@ -27,8 +27,10 @@ import { MeasureCard } from './MeasureCard';
 import { isMeasureTask } from '../../lib/measure-kind';
 import { SolidCard } from './SolidCard';
 import { isNetTask } from '../../lib/net-tasks';
+import { SymmetryCard } from './SymmetryCard';
+import { isSymmetryModel, isSymmetryTask } from '../../lib/symmetry-tasks';
 
-export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid';
+export type CardKind = 'fraction' | 'area' | 'product' | 'placeValue' | 'time' | 'decimal' | 'measure' | 'solid' | 'symmetry';
 
 /** Card by model kind (the time lesson's `clock` and `timeline` show the TIME card). */
 export const CARD_BY_MODEL: Record<string, CardKind> = {
@@ -58,6 +60,7 @@ export const CARD_TITLE: Record<CardKind, UiKey> = {
   decimal: 'math.card.decimal',
   measure: 'math.card.measure',
   solid: 'math.card.solid',
+  symmetry: 'math.card.symmetry',
 };
 
 /** The card for a model (and the check on show: a time or a duration written is the TIME card's). */
@@ -65,6 +68,7 @@ export function cardKindOf(model: Model | null, task: Task | null, fallback: Car
   const spec = task ? inputSpecOf(task) : null;
   if (spec && (isTimeForm(spec.form) || spec.span || spec.convert)) return 'time';
   if (task && isNetTask(task)) return 'solid';
+  if ((task && isSymmetryTask(task)) || (model && isSymmetryModel(model))) return 'symmetry';
   if (task && isMeasureTask(task)) return 'measure';
   if (task && isDecimalTask(task)) return 'decimal';
   if (!model) return fallback;
@@ -104,6 +108,8 @@ export function Card(p: CardProps) {
       return <TimeCard task={p.task} state={p.state} done={p.done} time={p.time} locale={p.locale} />;
     case 'measure':
       return <MeasureCard model={p.model} task={p.task} state={p.state} done={p.done} locale={p.locale} />;
+    case 'symmetry':
+      return <SymmetryCard model={p.model} task={p.task} state={p.state} locale={p.locale} />;
     case 'solid':
       return <SolidCard model={p.model} task={p.task} state={p.state} done={p.done} fold={p.netFold ?? null} locale={p.locale} />;
     case 'decimal':

@@ -49,6 +49,8 @@ import {
 } from '../lib/grid';
 import { squared, unitText } from '../lib/value';
 import type { Rect } from './layout';
+import { drawsSymmetry } from '../lib/symmetry-tasks';
+import { SymmetryDrawing, SymTaskLayer } from './SymmetryLayer';
 
 export interface GridModelProps {
   defs: string;
@@ -64,6 +66,8 @@ export interface GridModelProps {
   ghost?: TaskState | null;
   /** A picture option: small, no note or corner texts. */
   mini?: boolean;
+  /** Line symmetry: a choice's stage line folded by the child (docs/79 §3.2, after the second hint). */
+  folded?: boolean;
 }
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -331,13 +335,30 @@ export function GridModel(p: GridModelProps) {
     );
   }
 
-  /* figures (lettered A, B … when there are several to compare) */
-  const named = m.figures.filter((f) => f.tone !== 'ghost');
+  /* figures (lettered A, B … when there are several to compare; a symmetry grid letters three or more, never a shaded pattern) */
+  const sym = drawsSymmetry(m);
+  const named = m.figures.filter((f) => f.tone !== 'ghost' && !f.shade);
+  const lettered = sym ? named.length >= 3 && named.every((f) => f.tone === 'cold') : named.length > 1;
   for (const f of m.figures) {
     const facts = factsOf(f);
+    if (f.shape || f.path) {
+      const pts = (f.shape ?? f.path ?? []).map(([x, y]) => `${F.X(x)},${F.Y(y)}`).join(' ');
+      out.push(
+        <g key={`f-${f.id}`} className="ms-grid__figure" data-tone={f.tone} aria-hidden="true">
+          {f.shape ? <polygon className="ms-grid__fill ms-grid__free" points={pts} /> : <polyline className="ms-grid__outline" points={pts} />}
+          {f.shape && <polygon className="ms-grid__outline" points={pts} />}
+          {lettered && (
+            <text className="ms-grid__name" x={F.X(facts.box.x)} y={F.Y(facts.box.y + facts.box.h) - 7}>
+              {'ABCDEF'[named.indexOf(f)]}
+            </text>
+          )}
+        </g>,
+      );
+      continue;
+    }
     const groups = pieceGroups(facts.cells);
     out.push(
-      <g key={`f-${f.id}`} className="ms-grid__figure" data-tone={f.tone} aria-hidden="true">
+      <g key={`f-${f.id}`} className="ms-grid__figure" data-tone={f.tone} data-shade={f.shade || undefined} aria-hidden="true">
         {groups.map(([cells, d], gi) => (
           <g key={gi} transform={d.dx || d.dy ? `translate(${d.dx} ${d.dy})` : undefined}>
             {f.tone !== 'ghost' && (
@@ -365,9 +386,9 @@ export function GridModel(p: GridModelProps) {
           );
         })}
         {!shownCut && seamsOf(f).length > 0 && <path className="ms-grid__seam" d={edgesPath(F, seamsOf(f))} />}
-        {named.length > 1 && f.tone !== 'ghost' && (
+        {lettered && named.includes(f) && (
           <text className="ms-grid__name" x={F.X(facts.box.x)} y={F.Y(facts.box.y + facts.box.h) - 7}>
-            {'ABCD'[named.indexOf(f)]}
+            {'ABCDEF'[named.indexOf(f)]}
           </text>
         )}
       </g>,
@@ -397,8 +418,8 @@ export function GridModel(p: GridModelProps) {
       </g>,
     );
   });
-  // Every half cell says it is one half (two of them make one square).
-  if (F.sx >= 26) {
+  // Every half cell says it is one half (two of them make one square); line symmetry does not count area.
+  if (F.sx >= 26 && !sym) {
     const halves = m.figures.flatMap((f) => factsOf(f).halves);
     if (halves.length)
       out.push(
@@ -544,6 +565,9 @@ export function GridModel(p: GridModelProps) {
     if (g) out.push(<Dim key={`dim${i}`} g={g} defs={defs} />);
   }
 
+  /* line symmetry: a fold, the lines, partners (docs/79 §3.1) */
+  if (sym) out.push(<SymmetryDrawing key="sym" F={F} m={m} defs={defs} folded={!!p.folded} />);
+
   /* the child's layer */
   if (task && state) out.push(<TaskLayer key="task" {...p} F={F} editable={editable} modelPhase={modelPhase} rowHeads={rowHeads} />);
 
@@ -605,6 +629,8 @@ function TaskLayer(p: LayerProps) {
       return <DrawLayer {...p} />;
     case 'split-figure':
       return <CutLayer {...p} />;
+    case 'complete-symmetric':
+      return <SymTaskLayer F={p.F} task={task} state={state} defs={p.defs} modelPhase={p.modelPhase} act={p.act} ghost={p.ghost} locale={p.locale} />;
     default:
       return null;
   }

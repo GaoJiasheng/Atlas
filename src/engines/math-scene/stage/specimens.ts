@@ -14,6 +14,18 @@ export const SPECIMEN_GRID: GridModelSpec = {
   ],
 };
 
+/** Line symmetry (docs/79 §3.4): the "house" folded along its middle, part of the way over. */
+export const SPECIMEN_SYMMETRY: GridModelSpec = {
+  kind: 'grid',
+  unit: 'unit',
+  show: 'cells',
+  cols: 4,
+  rows: 4,
+  figures: [{ id: 'house', cells: [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [1, 1], [2, 1], [3, 1], [0, 2], [1, 2], [2, 2], [3, 2], [1, 3], [2, 3]], halves: [[0, 3, 'se'], [3, 3, 'sw']], tone: 'cold' }],
+  candidates: [{ x: 2 }],
+  fold: { line: { x: 2 }, t: 0.7 },
+};
+
 export const SPECIMEN_ARRAY: ArrayModelSpec = { kind: 'array', object: 'dot', layout: 'rows', rows: 3, cols: 4, braces: true, container: 'ring' };
 
 export const SPECIMEN_CLOCK: ClockModelSpec = { kind: 'clock', time: 7 * 3600 + 20 * 60, face: 'clock', numerals: true, ticks: 'minutes', minuteLabels: true };

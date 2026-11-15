@@ -327,10 +327,21 @@ export interface Facts {
   parts: Rect4[];
 }
 
+/** The box round a line-symmetry figure's corners (a free shape, an open path), in whole cells. */
+function pointsBox(pts: readonly (readonly [number, number])[], box: Box): Box {
+  if (pts.length === 0) return box;
+  const empty = box.w === 0 && box.h === 0;
+  const x0 = Math.min(...pts.map((p) => Math.floor(p[0])), ...(empty ? [] : [box.x]));
+  const y0 = Math.min(...pts.map((p) => Math.floor(p[1])), ...(empty ? [] : [box.y]));
+  const x1 = Math.max(...pts.map((p) => Math.ceil(p[0])), ...(empty ? [] : [box.x + box.w]));
+  const y1 = Math.max(...pts.map((p) => Math.ceil(p[1])), ...(empty ? [] : [box.y + box.h]));
+  return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+}
+
 export function factsOf(f: GridFigure): Facts {
   const cells = figureCells(f);
   const halves = figureHalves(f);
-  const box = bboxOf(cells, halves);
+  const box = pointsBox([...(f.shape ?? []), ...(f.path ?? [])], bboxOf(cells, halves));
   const rect = halves.length === 0 && !!rectOf(cells);
   const walk = walkOrder(cells);
   return {

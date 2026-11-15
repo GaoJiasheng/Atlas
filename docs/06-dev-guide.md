@@ -2389,6 +2389,21 @@ scripts/math/check-pool.ts   题库草稿自证：pnpm tsx scripts/math/check-po
 - **无障碍与指针映射**：`lib/instrument-description.ts` 描述可见范围、相邻标数与指示位置（“从二百克往后数 4 小格”），不替孩子算出读数；物体末端不在刻度上时描述相邻刻度，不替孩子四舍五入。格子按钮只报“某标数之后第几小格”，不报未标数刻度的量；天平的砝码按钮保持可被读屏访问。压短的 `skip` 卷尺拖动采用压短后的反映射；圆盘缺口吸附到较近的端点。量杯在器具上印单位，给复合括号留位置而不把杯身挤成缩略图。手机读数题的量已在作答框里，舞台不再重复这行量，把高度留给器具。砝码盘最多 12 个，validate 拒绝最少解超过 12 个的题。
 - **浏览器验收**：`tests-e2e/sample-lesson-measure.spec.ts` 覆盖轴上换拍与 `unroll`、读数工具、单位误解 → 看答案 → 再来一道 / 跳过、四种滑块的纯键盘路径、拖线、按钮倒水、加减砝码、格子的 roving keys 与第二阶段输入、复合两框、拉直视图、全部 32 题的浏览器解法，以及中文 cinema 手机（390 × 844、器具大小与 44 px 控件）。正式课的练习总结仍由各课自己的 e2e 覆盖。
 
+### 方格 · 对称（docs/79 §3，E-SY1–E-SY4；线对称）
+
+`grid` 加的字段只在线对称课里用（`lib/symmetry-tasks.ts isSymmetryModel`：有 `mirror` / `candidates` / `fold` / `pairs`，或有下面的新图形写法），面积周长等已有课不受影响。
+
+- **线**（`symLine`）：`{ "x": 6 }`（竖，可落在半格 `5.5`）、`{ "y": 4 }`（横）、`{ "from": [x, y], "to": [x, y] }`（任意线段，斜的或只画在一个图形旁边；端点可以是小数）。竖 / 横线管整幅图，线段只管它穿过的图形（及图形里的 `shade` 格）。
+- **模型**：`mirror`（对称轴，墨色点划线 = 技术图版中心线，≤ 10 条；validate 证明每条都真是它所管图形的对称轴，`pairs` 的对应格一起算）、`candidates`（待判断的线，墨色虚线，不证明）、`fold: { line, t, match }`（线左边——沿 `from → to` 走的左手边；竖线是左边，横线是上边——翻到右边，`t` = 1 平放；拍里折平时必须写 `match`，validate 与几何比对；不重合处由几何算出画墨色斜线，翻转动画 0.76 s，`prefers-reduced-motion` 直接到位）、`pairs: { cells, points, guess }`（格 / 格点与它关于第一条 `mirror` 的对应点，连线，≤ 2 对时两边标格数；`guess` = hot 虚线圈的错误对应点）。
+- **图形**：`shape`（任意边的凸多边形，顶点可为小数，不算面积周长）、`path`（经过格点的开折线，补全题给的一半）、只有 `halves` 的图形、`shade: true`（图形里的涂色格，单独比对、不编字母）、`tone: "signal"`（找到的对应部分）；`figures` 上限 6。三个以上 cold 图形编 A–F。
+- **几何**（`lib/symmetry.ts`，纯函数）：图形 → 凸块（单位方格、半格三角形、`shape`）；`foldPieces`（半平面裁剪 + 反射，不重合面积 = 两组凸块面积和 − 2 × 两两凸交集）；`isSymmetric`；`linesOfSymmetry`（对称轴必过重心：试竖、横、两条 45°，以及重心到每个顶点、每条边中点的线）；`partnerKey` / `partnerPoint`（竖轴 `ne ↔ nw`、`se ↔ sw`，横轴 `ne ↔ se`、`nw ↔ sw`）。
+- **小测 `complete-symmetric`**（`mode: "cells" | "outline"`，`figure` 缺省第一个非 ghost 图形）：模型只有一条 `mirror`，竖或横（D8）。`cells`：孩子在轴另一边点格（点格的一角铺半格；方向键移动、Enter 铺 / 撤、H 换半格方向）；正解 = 给定的反射去掉自己就是自己对应的格（跨在轴上的格不动）。`outline`：给的一半是 `path`，两端在轴上；孩子按顺序点格点（指针或"顶点光标"：方向键 + Enter），自动接到给定一半的端点；正、反两个顺序都对。托盘：**折一折**（第一次检查或第二级提示后可用，练习里没有；把给定一半翻过来看，不判分）、清空、已放几个（不说要几个）。`sample`：`"cells:(7,2),(8,2),(7,3,ne)"`、`"pts:(7,1),(9,1),(9,3)"`。`choose` 的舞台有 `candidates` 时同样有"折一折"。
+- **误解域 `symmetry`**（`lib/diagnose/symmetry.ts`）：由结果算出的 `half-not-flipped`（整格全对、半格斜向没翻）、`distance-not-kept`（翻对了但整体沿垂直于轴的方向挪了 ≥ 1 格 = 关于另一条平行轴的反射）、`slid-not-flipped`（给定一半直接平移过去，且不是"翻了再挪"）；按这个顺序试。`equal-halves`、`upright-line-only`、`outline-only`、`line-count` 只由 `choose` 选项给出。
+- **选项的论断**：`option.symmetric`（这幅图——或无图时舞台的线——是对称的）与 `option.lines`（舞台图形有几条对称轴），validate 按几何核对 `correct`。练习的"至少 5 种题型"按 `symWay` 数（补全格 / 补全顶点 / 判断一条线 / 数条数 / 多选 / 单选图）。
+- **校验**（`validate-symmetry.ts`）：`shape` 凸、`path` 不重复；补全题一条竖 / 横轴、给定一半在轴一边、对应部分都在纸上、2–8 格（半格 ≤ 4）或 3–7 个顶点、离轴 ≤ 5 格、纸 ≤ `limits.gridMax`（缺省 12 × 10）。
+- **HUD**：右上卡 **SYMMETRY**（`hud/cards/SymmetryCard.tsx`）：LINE（UPRIGHT / ACROSS / SLANTED）· MATCH（拍折平后 ✓ / ○；小测只在孩子按了"折一折"之后）· LINES（拍上画了几条对称轴）。PLATE：MODEL GRID · LINE · SQUARES · PARTNERS（孩子已放的数，不写目标数）。控制面板 KEY 只列对称舞台画的东西（给定 · 对应部分 · 折过来的一半 · 对称轴 · 待判断的线 · 不重合斜线 · 答案虚线，`hud/Overlay.tsx` 的 `symmetry`）；对称网格不标半格的 ½；算式行写成文字判断（"folded: parts stick out (hatched)"），不留单独的 ✓ / ○。背景章：小屋图形折到 70 %（`stage/specimens.ts SPECIMEN_SYMMETRY`），状态行 `SPECIMEN HOUSE · FOLD 70 %`，规格表多一行 LINES OF SYMMETRY。
+- **单测**：`tests/math-scene/symmetry.test.ts`（反射、半格方向表、对称判断、不重合面积、轴的搜索）、`diagnose-symmetry.test.ts`（三条算出的诊断各 ≥ 2 正例 1 反例、任务自证、validate）、`symmetry-lesson.test.ts`；e2e `tests-e2e/symmetry.spec.ts`。
+
 ### 展开图与立体（docs/39 §3，N1–N10 与模型 A8）
 
 - **立体**（N1，`lib/solid.ts`，纯函数）：`{ "type": "cuboid", "size": [3, 2, 1] }`（长 × 宽 × 高，格；三个相等 = 正方体）· `{ "type": "prism", "sides": 3–6, "edge": 2, "length": 3 }`（正多边形的底）· `{ "type": "pyramid", "sides": 3–6, "edge": 2, "height": 1.6 }`（`"regular": true` 只配 3 边 = 正四面体）· `cylinder` / `cone`（`radius`、`height`）· `sphere`（`radius`）。多面体给出顶点、面（id + 外法向逆时针的多边形）、共棱与面间角；面 id：长方体 `bottom top front back left right`，棱柱 `end-a end-b side-1…n`，棱锥 `base side-1…n`；曲面体面 id 是圆柱 `bottom top side`、圆锥 `base side`、球 `surface`。`solidClass`（cube … sphere）、`faceCounts`（底的形状在前：`2 triangles · 3 rectangles`）、`sameSolid`（转、翻后全等）。

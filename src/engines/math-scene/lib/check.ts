@@ -25,6 +25,7 @@ import { isQty, qtyBase, type DecValue, type QtyValue } from './value';
 import { decimalWorkOf, isMeasureTask } from './measure-kind';
 import { checkMeasureInput, checkMeasureModel, measureAnswered, measureInputAnswered } from './measure-tasks';
 import { checkNetInput, checkNetModel, isNetTask, netAnswered } from './net-tasks';
+import { checkSymModel, symAnswered } from './symmetry-tasks';
 
 /** A fraction, or a decimal (or a quantity, in its family's smallest unit) as the fraction it is (the fraction checks read decimals this way). */
 export const asFrac = (v: Frac | DecValue | QtyValue): Frac => (isQty(v) ? toFraction(qtyBase(v)) : isDec(v) ? toFraction(v) : v);
@@ -553,6 +554,9 @@ function checkSetClock(task: TaskOf<'set-clock'>, state: TaskState): CheckResult
 
 /** Check one phase of a task. */
 export function checkPhase(task: Task, state: TaskState, phase: Phase): CheckResult {
+  // Line symmetry (docs/79 §3.2–3.3): a completed figure is compared with its partners; a choice is the generic one.
+  const sym = checkSymModel(task, state, declaredCodes(task));
+  if (sym) return sym;
   // Nets (docs/39 §3.5–3.6): a net completed is folded, a face tapped found where it lands, a number about a net read against it; a choice is the generic one.
   if (isNetTask(task)) {
     const spec = inputSpecOf(task);
@@ -630,6 +634,8 @@ export function answered(task: Task, state: TaskState): boolean {
   const phase = phasesOf(task)[state.phase] ?? 'model';
   const net = netAnswered(task, state);
   if (net !== null) return net;
+  const sym = symAnswered(task, state);
+  if (sym !== null) return sym;
   if (isMeasureTask(task)) {
     const spec = inputSpecOf(task);
     if (phase === 'input') return !!spec && measureInputAnswered(task, spec, state.input);

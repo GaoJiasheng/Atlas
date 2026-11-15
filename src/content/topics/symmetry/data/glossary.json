@@ -1,0 +1,128 @@
+{
+  "terms": [
+    {
+      "id": "symmetric-figure",
+      "term": {
+        "en": "symmetric figure",
+        "zh": "对称图形"
+      },
+      "definition": {
+        "en": "A figure that can be folded along a line so that the two halves match exactly. (Mainland Chinese textbooks say 轴对称图形.)",
+        "zh": "能沿一条线对折、两半完全重合的图形。（中国大陆课本叫“轴对称图形”。）"
+      },
+      "see": [
+        "line-of-symmetry"
+      ]
+    },
+    {
+      "id": "line-of-symmetry",
+      "term": {
+        "en": "line of symmetry",
+        "zh": "对称轴"
+      },
+      "definition": {
+        "en": "The line along which a figure folds so that its two halves match exactly.",
+        "zh": "让图形对折后两半完全重合的那条线。"
+      },
+      "see": [
+        "symmetric-figure",
+        "fold"
+      ]
+    },
+    {
+      "id": "fold",
+      "term": {
+        "en": "fold",
+        "zh": "对折"
+      },
+      "definition": {
+        "en": "To bend paper along a line so that one side lies on the other. The same word as in the fractions lesson.",
+        "zh": "沿一条线把纸折过来，让两边贴在一起。和分数主题里的“对折”是同一个词。"
+      },
+      "see": [
+        "match-exactly"
+      ]
+    },
+    {
+      "id": "match-exactly",
+      "term": {
+        "en": "match exactly",
+        "zh": "完全重合"
+      },
+      "definition": {
+        "en": "After folding, the two halves cover each other with nothing left over and nothing missing.",
+        "zh": "折过来以后，两半互相盖住，一点也不多、一点也不少。"
+      },
+      "see": [
+        "fold"
+      ]
+    },
+    {
+      "id": "partner-point",
+      "term": {
+        "en": "partner (of a point)",
+        "zh": "对应点"
+      },
+      "definition": {
+        "en": "The point on the other side of the line of symmetry, the same distance from it. Books also say corresponding point.",
+        "zh": "对称轴另一边、离轴一样远的那个点。英文书上也说 corresponding point。"
+      },
+      "see": [
+        "line-of-symmetry"
+      ]
+    },
+    {
+      "id": "half-square",
+      "term": {
+        "en": "half square",
+        "zh": "半格"
+      },
+      "definition": {
+        "en": "One of the two triangles a grid square makes when it is cut from corner to corner.",
+        "zh": "一个方格沿对角线切开得到的两个三角形之一。"
+      },
+      "see": [
+        "square-grid"
+      ]
+    },
+    {
+      "id": "square-grid",
+      "term": {
+        "en": "square grid",
+        "zh": "方格"
+      },
+      "definition": {
+        "en": "Paper or a picture covered with equal squares.",
+        "zh": "画满一样大正方形的纸或图。"
+      },
+      "see": [
+        "half-square"
+      ]
+    },
+    {
+      "id": "diagonal",
+      "term": {
+        "en": "diagonal",
+        "zh": "对角线"
+      },
+      "definition": {
+        "en": "A straight line joining two corners of a shape that are not next to each other. This lesson only folds along it.",
+        "zh": "连接图形两个不相邻顶点的线段。本课只说“沿对角线折”。"
+      }
+    },
+    {
+      "id": "kite",
+      "term": {
+        "en": "kite (shape)",
+        "zh": "风筝形"
+      },
+      "definition": {
+        "en": "A four-sided shape with two pairs of equal sides next to each other, like a kite. It has one line of symmetry.",
+        "zh": "有两组相邻的边分别相等的四边形，样子像风筝。它有一条对称轴。"
+      },
+      "see": [
+        "line-of-symmetry"
+      ]
+    }
+  ]
+}

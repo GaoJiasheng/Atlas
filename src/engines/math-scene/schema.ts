@@ -149,6 +149,8 @@ export const MEASURE_READING_CODES = [
 export const MEASURE_READING_SHARED_CODES = ['tick-counting', 'interval-misread', 'unit-factor-wrong', 'decimal-as-subunit'] as const;
 /** Nets and solids (docs/39 §2.1; rules in lib/diagnose/nets.ts). `prism-pyramid`, `cube-cuboid` and `curved-unrolled` are diagnosed by `choose` options only. */
 export const NETS_CODES = ['prototype-only', 'overlap-unseen', 'adjacent-as-opposite', 'face-size', 'face-count', 'prism-pyramid', 'cube-cuboid', 'curved-unrolled'] as const;
+/** Line symmetry (docs/79 §2.1; rules in lib/diagnose/symmetry.ts). The first four are diagnosed by `choose` options only; the last three are worked out from a completed figure. */
+export const SYMMETRY_CODES = ['equal-halves', 'upright-line-only', 'outline-only', 'line-count', 'slid-not-flipped', 'distance-not-kept', 'half-not-flipped'] as const;
 /** The domains, each with the codes its tasks may use (a task's codes come from one domain, validate). */
 export const MISCONCEPTION_DOMAINS = {
   fractions: FRACTION_CODES,
@@ -158,10 +160,11 @@ export const MISCONCEPTION_DOMAINS = {
   decimals: [...DECIMAL_CODES, ...DECIMAL_SHARED_CODES],
   'measure-reading': [...MEASURE_READING_CODES, ...MEASURE_READING_SHARED_CODES],
   nets: NETS_CODES,
+  symmetry: SYMMETRY_CODES,
 } as const;
 export type MisconceptionDomain = keyof typeof MISCONCEPTION_DOMAINS;
 /** Misconceptions the feedback is designed around, each registered once in its home domain (docs/19 §3.0 G5); one flat list, every code unique. */
-export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES] as const;
+export const MISCONCEPTIONS = [...FRACTION_CODES, ...MEASURE_CODES, ...WHOLE_OPS_CODES, ...TIME_CODES, ...DECIMAL_CODES, ...MEASURE_READING_CODES, ...NETS_CODES, ...SYMMETRY_CODES] as const;
 export const misconception = z.enum(MISCONCEPTIONS);
 export type MisconceptionCode = (typeof MISCONCEPTIONS)[number];
 
@@ -199,6 +202,7 @@ export const TASK_KINDS = [
   'count-intervals',
   'complete-net',
   'tap-face',
+  'complete-symmetric',
 ] as const;
 /** Task kinds on the square grid (docs/21 §3.2). */
 export const GRID_KINDS = ['count-squares', 'trace-perimeter', 'draw-rectangle', 'split-figure'] as const;
@@ -212,6 +216,8 @@ export const TIME_KINDS = ['read-clock', 'set-clock', 'duration'] as const;
 export const MEASURE_KINDS = ['read-scale', 'set-scale', 'count-intervals'] as const;
 /** Task kinds on a net (docs/39 §3.5). */
 export const NET_KINDS = ['complete-net', 'tap-face'] as const;
+/** Task kinds on a line of symmetry (docs/79 §3.2). */
+export const SYMMETRY_KINDS = ['complete-symmetric'] as const;
 export type TaskKind = (typeof TASK_KINDS)[number];
 
 /**
@@ -544,6 +550,12 @@ export type PlaceCounts = z.output<typeof placeCounts>;
 const coord = z.number().int().min(0).max(99);
 const point = z.tuple([coord, coord]);
 const rect4 = z.tuple([coord, coord, z.number().int().min(1).max(99), z.number().int().min(1).max(99)]);
+/** A point anywhere on the paper (a free shape's corner, the end of a slanted line): grid units, y up. */
+const freePoint = z.tuple([z.number().min(-1).max(99), z.number().min(-1).max(99)]);
+const halfStep = z.number().min(0).max(99).refine((v) => Number.isInteger(v * 2), { message: 'a line up or across sits on a grid line or half way between two' });
+/** A line on the grid (docs/79 §3.1): up at `x`, across at `y`, or the segment from one point to another (slanted, or a short one beside one figure of several). */
+export const symLine = z.union([z.object({ x: halfStep }).strict(), z.object({ y: halfStep }).strict(), z.object({ from: freePoint, to: freePoint }).strict()]);
+export type SymLineSpec = z.output<typeof symLine>;
 const gridFigure = z
   .object({
     id: kebabId,
@@ -556,11 +568,23 @@ const gridFigure = z
     poly: z.array(point).min(4).max(16).optional(),
     /** Half cells: `[x, y, corner]`, the triangle with its square corner at that corner of cell (x, y). */
     halves: z.array(z.tuple([coord, coord, z.enum(['ne', 'nw', 'se', 'sw'])])).optional(),
-    /** `cold` = given (default), `hot` = a second figure to compare, `ghost` = a dashed outline (the box round it, a size tried). */
-    tone: z.enum(['cold', 'hot', 'ghost']).default('cold'),
+    /** Line symmetry (docs/79 §3.1): a shape with sides any way (a kite, a triangle, a parallelogram), corners in order; no area or perimeter. */
+    shape: z.array(freePoint).min(3).max(12).optional(),
+    /** Line symmetry: an open line through grid points, in order (the given half of a figure drawn with lines). */
+    path: z.array(point).min(2).max(10).optional(),
+    /** Line symmetry: the squares are shaded inside another figure (a pattern): filled, not lettered, matched on their own. */
+    shade: z.boolean().optional(),
+    /** `cold` = given (default), `hot` = a second figure to compare, `ghost` = a dashed outline (the box round it, a size tried), `signal` = a partner found (line symmetry). */
+    tone: z.enum(['cold', 'hot', 'ghost', 'signal']).default('cold'),
   })
   .strict()
-  .refine((f) => [f.rect, f.rects, f.cells, f.poly].filter(Boolean).length === 1, { message: 'a figure needs exactly one of rect, rects, cells or poly' });
+  .refine(
+    (f) => {
+      const n = [f.rect, f.rects, f.cells, f.poly, f.shape, f.path].filter(Boolean).length;
+      return n === 1 || (n === 0 && !!f.halves?.length);
+    },
+    { message: 'a figure needs exactly one of rect, rects, cells, poly, shape or path (or only halves)' },
+  );
 const gridDim = z
   .object({
     /** A whole side of a figure's box … */
@@ -591,7 +615,7 @@ const gridModel = z
     unit: z.enum(['unit', 'cm', 'm']).default('unit'),
     /** `cells`: grid lines · `dots`: grid points · `none`: no grid (only the lengths given; not drawn to scale). */
     show: z.enum(['cells', 'dots', 'none']).default('cells'),
-    figures: z.array(gridFigure).max(4).default([]),
+    figures: z.array(gridFigure).max(6).default([]),
     /** Unit squares laid on a figure: a count (reading order), `all`, the top rows, or `count` big squares of `size`. */
     tiles: z.record(kebabId, tileSpec).optional(),
     /** Sides walked round a figure from its top-left corner (a count or `all`), with the running count. */
@@ -613,6 +637,18 @@ const gridModel = z
     legend: z.boolean().optional(),
     /** "Not drawn to scale" in the corner (required with `show: none`). */
     notToScale: z.boolean().optional(),
+    /** Line symmetry (docs/79 §3.1): lines of symmetry, drawn as centre lines (dash-dot ink). */
+    mirror: z.array(symLine).min(1).max(10).optional(),
+    /** Line symmetry: lines being tested, drawn dashed. */
+    candidates: z.array(symLine).min(1).max(4).optional(),
+    /**
+     * Line symmetry: the paper folded along a line (the part on its left, walking from `from` to `to`; up: the left side;
+     * across: the top) turned over by `t` (1 = flat on the other side); where the halves do not match is hatched.
+     * `match`: what the beat says (checked against the figure).
+     */
+    fold: z.object({ line: symLine, t: z.number().min(0).max(1).default(1), match: z.boolean().optional() }).strict().optional(),
+    /** Line symmetry: squares (`cells`) or grid points (`points`) and their partners across the first mirror line, joined, the squares to the line counted; `guess`: a wrong partner (hot, dashed). */
+    pairs: z.object({ cells: z.array(point).max(6).optional(), points: z.array(point).max(8).optional(), guess: point.optional() }).strict().optional(),
   })
   .strict();
 
@@ -1208,6 +1244,10 @@ const option = z
     solid: z.enum(SOLID_CLASSES).optional(),
     /** Nets: the option says the stage's net folds up into the solid (`true`) or does not (`false`), checked by folding it. */
     folds: z.boolean().optional(),
+    /** Line symmetry (docs/79 §3.2): the option says its picture (or the stage's line) is symmetric (`true`) or not, checked by folding along the line; a count is `lines`. */
+    symmetric: z.boolean().optional(),
+    /** Line symmetry: the option says the stage's figure has this many lines of symmetry (checked by searching up, across and both diagonals). */
+    lines: z.number().int().min(0).max(8).optional(),
   })
   .strict();
 const chooseFields = z.object({ multi: z.boolean().optional(), options: z.array(option).min(2).max(6) });
@@ -1367,6 +1407,14 @@ const countIntervalsFields = z.object({
   then: inputSpec,
 });
 
+/* Line symmetry (docs/79 §3.2) */
+const completeSymmetricFields = z.object({
+  /** `cells`: squares and half squares on the other side · `outline`: the partner of each corner, joined in order. */
+  mode: z.enum(['cells', 'outline']),
+  /** The given half (default: the first figure that is not a ghost). */
+  figure: kebabId.optional(),
+});
+
 /* Net tasks (docs/39 §3.5) */
 const completeNetFields = z.object({
   /** How many faces the child adds (1–5). */
@@ -1415,6 +1463,7 @@ export const taskSchema = z.discriminatedUnion('kind', [
   base.extend({ kind: z.literal('count-intervals') }).merge(countIntervalsFields).strict(),
   base.extend({ kind: z.literal('complete-net') }).merge(completeNetFields).strict(),
   base.extend({ kind: z.literal('tap-face') }).merge(tapFaceFields).strict(),
+  base.extend({ kind: z.literal('complete-symmetric') }).merge(completeSymmetricFields).strict(),
 ]);
 export type Task = z.output<typeof taskSchema>;
 export type TaskOf<K extends TaskKind> = Extract<Task, { kind: K }>;

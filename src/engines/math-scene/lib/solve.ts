@@ -23,6 +23,7 @@ import { isMeasureTask } from './measure-kind';
 import { measureBoxes, measureSample, measureSampleBoxes, measureSolveModel } from './measure-tasks';
 import { formatQty, isQty, parseQuantity } from './value';
 import { netSample, netSolveModel } from './net-tasks';
+import { symSample, symSolveModel } from './symmetry-tasks';
 
 const range = (from: number, count: number) => Array.from({ length: count }, (_, i) => from + i);
 
@@ -129,6 +130,8 @@ export function solve(task: Task): Action[] {
   if (measured) return withInput(task, measured as Action[]);
   const net = netSolveModel(task);
   if (net) return net as Action[];
+  const sym = symSolveModel(task);
+  if (sym) return sym as Action[];
   switch (task.kind) {
     case 'shade': {
       const free = range(0, start.parts * start.wholes).filter((i) => !start.given.includes(i));
@@ -218,6 +221,7 @@ export function solve(task: Task): Action[] {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'complete-symmetric':
       return [];
     case 'build-sum': {
       const out: Action[] = [];
@@ -333,6 +337,8 @@ export function sampleState(task: Task, sample: string): TaskState | null {
   const start = initialState(task);
   const net = netSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (net !== undefined) return net;
+  const sym = symSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
+  if (sym !== undefined) return sym;
   if (decimalModel(task) && task.kind !== 'compare') return decimalSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
   if (isMeasureTask(task)) {
     const m = measureSample(task, start, sample, (from, moves) => apply(task, moves as Action[], from));
@@ -426,6 +432,7 @@ export function sampleState(task: Task, sample: string): TaskState | null {
     case 'count-intervals':
     case 'complete-net':
     case 'tap-face':
+    case 'complete-symmetric':
       return null;
     case 'set-clock': {
       // `"3:50"` (the 12-hour position the hands are set to), `"3:50 pm"` with the am / pm plate.

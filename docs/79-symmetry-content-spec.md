@@ -1,6 +1,6 @@
-# 79 · 线对称 · 内容 spec（`symmetry`，MathScene 课；v1 草案，待 Gavin 定稿）
+# 79 · 线对称 · 内容 spec（`symmetry`，MathScene 课；Gavin 2026-11-15 定稿，已施工）
 
-Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、docs/77 `graphs`、docs/78 `average`）。docs/17 §2.4 的 `symmetry` 一行（"沿线对折（与分数的'折'同一个动作）"）与 §7 **A4 方格**（docs/21 已做）。2026-11-15 起草，**只出 spec，不施工、不建目录、不提交**。照 skill `.claude/skills/atlas-lesson-topic/` 写；本课小（S–M），布局照 docs/21，引擎**扩展 A4 `grid`**，不另起模型。
+Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、docs/77 `graphs`、docs/78 `average`）。docs/17 §2.4 的 `symmetry` 一行（"沿线对折（与分数的'折'同一个动作）"）与 §7 **A4 方格**（docs/21 已做）。2026-11-15 起草；2026-11-16 按 §0.1 默认施工，见 §10。照 skill `.claude/skills/atlas-lesson-topic/` 写；本课小（S–M），布局照 docs/21，引擎**扩展 A4 `grid`**，不另起模型。
 
 记号同 docs/21：EN 口吻草稿、ZH Claude 草稿。S1 = MOE *Mathematics Syllabus Primary One to Six*（2021 P1 cohort，Updated Oct 2025），起草时用 `pdftotext -layout` 逐页抄录，页码是页脚 "Page | N"。
 
@@ -364,4 +364,16 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
 
 ## 10. 施工记录 / 已知差距
 
-施工时追加。
+**2026-11-16 施工（branch `claude/symmetry`）**。Gavin 定稿：§0.1 全部按默认（Q1 只竖 / 横轴补全；Q2 条数讲一拍不出"有几条"的找全题，只出数选项；Q3 圆放 `<More>`；Q4 对称图形；Q5 不用字母）。
+
+- **引擎**（E-SY1–E-SY4，docs/06「方格 · 对称」）：`lib/symmetry.ts`（凸块、半平面裁剪、反射、不重合面积、轴的搜索）、`lib/symmetry-tasks.ts`（`complete-symmetric` 的状态 / 动作 / 检查 / 解法 / 样例、`symWay`）、`lib/diagnose/symmetry.ts`、`validate-symmetry.ts`、`stage/SymmetryLayer.tsx`、`hud/cards/SymmetryCard.tsx`、`tray/SymmetryControls.tsx`；共享文件只做加法（schema 新字段与码、state / check / solve / validate / View / Stage / GridModel / Tray / 卡片注册各几行）。面积周长主题的 e2e 与 `shoot --beats --tasks` 回归见交付报告。
+- **与 spec 不同处**：
+  - `mirror` 是数组（≤ 10 条）而不是单条；斜轴写 `from / to` 线段（端点可为小数），不用 `diag`。
+  - 第 03 步第 2 拍风筝形转 45°（不是 30°）：顶点留在格点上，对称由几何证明；过渡用 `rotate`（整幅重画淡入），没有做绕中心的转动动画。
+  - **`draw-segment` 没有做**：docs/76 E-AN5 与 angles 并行施工，为免两边重复实现、合并冲突，本课第 02 步的 2 道"画对称轴"和练习 Q4 改成 `choose`（三条虚线选一条，含 `upright-line-only` / `equal-halves` 错项）。E-AN5 合入后可换回。
+  - "这一行照着翻"的行首按钮没有做（补全题格子在手机上 ≥ 29 px；有键盘路径）。
+  - `pairs` 的格数只在 ≤ 2 对时标；第 04 步第 4 拍的"错点"是静态 hot 虚线圈，没有"挪到 3 格"的动画。
+  - 第 05 步第 2 拍用左右两组（翻了 / 没翻）代替"旁边一个 hot 半格"；第 04 步第 3 拍同理，右边一组的线是虚线（它不是那组图的对称轴）。
+- **题库**：Claude 起草（未经 Codex），46 道 + 练习 7 道，全部 `proveTask` 自证、validate 0 错。
+- **来源**：S3–S6 的文献信息照本 spec 列出，未对照原文核对；S5 页码待核故不列。新加坡华文"对称图形"、"对应点"按默认。
+- **插图**：codex/img5 `c024fb85` 的封面与两张配图（第 01、02 章），图注按 `art/img5/symmetry-captions.json`。

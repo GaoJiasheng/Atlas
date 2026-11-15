@@ -14,7 +14,7 @@ import { t } from '../../../i18n';
 const both = (key: Parameters<typeof t>[1]) => ({ en: t('en', key), zh: t('zh', key) });
 
 /** `compact` (phones): the panel is folded behind one 44 px button, so the model keeps the stage. */
-export function MathOverlay({ glossary, compact = false }: { glossary: boolean; compact?: boolean }) {
+export function MathOverlay({ glossary, compact = false, symmetry = false }: { glossary: boolean; compact?: boolean; symmetry?: boolean }) {
   const { locale, actions } = useSceneContext();
   const open = useHud((h) => h.legendsOpen);
   const bodyId = useId();
@@ -27,7 +27,17 @@ export function MathOverlay({ glossary, compact = false }: { glossary: boolean; 
     ...(glossary ? [{ kind: 'glossary' } as ControlRow] : []),
     { kind: 'hud' },
   ];
-  const legend: LegendItem[] = [
+  // Line symmetry (docs/79 §2.0): only what its stage draws.
+  const symmetryLegend: LegendItem[] = [
+    { id: 'given', label: both('math.key.symGiven'), color: 'var(--cold)', kind: 'fill' },
+    { id: 'partner', label: both('math.key.symPartner'), color: 'var(--signal)', kind: 'fill' },
+    { id: 'flap', label: both('math.key.symFlap'), color: 'var(--hot)', kind: 'line' },
+    { id: 'mirror', label: both('math.key.symMirror'), color: 'var(--ink)', kind: 'line' },
+    { id: 'candidate', label: both('math.key.symCandidate'), color: 'var(--ink)', kind: 'line-dashed' },
+    { id: 'miss', label: both('math.key.symMiss'), color: 'var(--ink)', kind: 'hatch' },
+    { id: 'answer', label: both('math.key.answer'), color: 'var(--ink)', kind: 'dashed' },
+  ];
+  const legend: LegendItem[] = symmetry ? symmetryLegend : [
     { id: 'mine', label: both('math.key.mine'), color: 'var(--signal)', kind: 'fill' },
     { id: 'given', label: both('math.key.given'), color: 'var(--cold)', kind: 'fill' },
     { id: 'second', label: both('math.key.second'), color: 'var(--hot)', kind: 'fill' },

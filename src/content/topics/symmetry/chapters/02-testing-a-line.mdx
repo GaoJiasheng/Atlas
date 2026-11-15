@@ -1,0 +1,47 @@
+---
+id: testing-a-line
+order: 2
+title: { en: "Is this a line of symmetry?", zh: "这条线是对称轴吗" }
+state:
+  summary: { en: "To test a line, fold along it: two equal halves are not enough, they must match. A rectangle has 2 lines of symmetry, a square 4, a parallelogram none.", zh: "判断一条线，就沿它折：一样大的两半还不够，要重合。长方形有 2 条对称轴，正方形 4 条，平行四边形一条也没有。" }
+---
+
+<Lang en>
+
+In step 01 you saw that some folds make two halves match and some do not. Now you are given a line and asked one question: is it a line of symmetry of the figure? The test is always the same. Fold along the line and look.
+
+<Figure src="figures/symmetry-paper-folds" alt={{ en: "A rectangular sheet of paper has one central vertical crease and one central horizontal crease.", zh: "一张横放的长方形纸，中间各有一道竖折痕和横折痕。" }} caption={{ en: "A rectangle folds onto itself along these two lines only, not along its diagonals.", zh: "长方形只能沿这两条线折得重合，沿对角线不行。" }} />
+
+Start with <Beat n={1}>a rectangle and an upright line</Beat> through its middle. Fold along it: the left half lands exactly on the right half. So this line is a line of symmetry of the rectangle.
+
+Next, try <Beat n={2}>the rectangle's diagonal</Beat>. A <Term id="diagonal">diagonal</Term> runs from one corner to the opposite corner, and it cuts the rectangle into two triangles of the same size. It is tempting to say yes. But fold along it: the triangle that turns over does not land on the other one. Two corners stick out, and the stage hatches them. Equal halves are not enough; they must match.
+
+Then fold along <Beat n={3}>the line across the middle</Beat>. The top half lands exactly on the bottom half, so this line works as well. A rectangle has 2 lines of symmetry: the upright one and the one across.
+
+Last, compare <Beat n={4}>a square and a parallelogram</Beat>. A square folds onto itself in 4 ways: upright, across, and along both diagonals, because all its sides are the same length. The parallelogram looks neat and balanced, and lines through its middle cut it into equal halves. But no fold makes its halves match, so it has no line of symmetry at all.
+
+The common mistake is to call any line that makes two equal halves a line of symmetry. The diagonal of a rectangle and the middle line of a parallelogram both do that, and both fail the fold test.
+
+When you are ready, <Task id="testing-a-line">test a line</Task> and decide whether it is a line of symmetry.
+
+</Lang>
+
+<Lang zh>
+
+第 01 步里，你看到有的折法能让两半重合，有的不能。现在给你一条线，只问一个问题：它是不是这个图形的对称轴？检验的办法总是一样：沿这条线折，看一看。
+
+<Figure src="figures/symmetry-paper-folds" alt={{ en: "A rectangular sheet of paper has one central vertical crease and one central horizontal crease.", zh: "一张横放的长方形纸，中间各有一道竖折痕和横折痕。" }} caption={{ en: "A rectangle folds onto itself along these two lines only, not along its diagonals.", zh: "长方形只能沿这两条线折得重合，沿对角线不行。" }} />
+
+先看<Beat n={1}>一个长方形和一条竖线</Beat>，竖线穿过长方形正中间。沿它折，左半边正好落在右半边上。所以这条线是长方形的对称轴。
+
+再试<Beat n={2}>长方形的对角线</Beat>。<Term id="diagonal">对角线</Term>从一个角连到相对的另一个角，把长方形分成两个一样大的三角形。很容易就说“是”。可是沿它折一折：翻过去的三角形落不到另一个三角形上，有两个角露在外面，舞台用斜线标了出来。分成一样大的两半还不够，要折起来能重合。
+
+接着沿<Beat n={3}>横着的中线</Beat>折。上半边正好落在下半边上，所以这条线也是对称轴。长方形有 2 条对称轴：竖的一条，横的一条。
+
+最后比一比<Beat n={4}>正方形和平行四边形</Beat>。正方形四条边一样长，有 4 种折法都能重合：竖着折、横着折，还有沿两条对角线折。平行四边形看上去整齐匀称，穿过它中间的线也能把它分成一样大的两半；可是怎么折都不重合，它一条对称轴也没有。
+
+这一步常犯的错，是把能分出一样大两半的线都当成对称轴。长方形的对角线、平行四边形的中线都能分出一样大的两半，可是都过不了“折一折”这一关。
+
+准备好了，就<Task id="testing-a-line">检验一条线</Task>，判断它是不是对称轴。
+
+</Lang>
