@@ -1340,7 +1340,8 @@ const file={
  telemetry:[{key:bi('Engines in selected stage · TYPICAL','所选级发动机·典型'),unit:'',follow:'engine-count',decimals:0},{key:bi('Initial mass · SIM','初始质量·模拟'),unit:'kg',follow:'initial-mass',decimals:0},{key:bi('Final mass · SIM','最终质量·模拟'),unit:'kg',follow:'final-mass',decimals:0},{key:bi('Ideal speed change · SIM','理想速度变化·模拟'),unit:'m/s',follow:'ideal-dv',decimals:2}],
  sim:{...sim,controls:runtimeControls,outputs:[...sim.outputs,{id:'configuration-name',label:bi('Current configuration','当前构型'),kind:'state',states:Object.fromEntries(phaseOptions.map(o=>[o.id,o.label]))}],table:{experiments:{...sim.table.experiments,'phase-state':{keys:['phase'],rows:runtimePhaseRows}}},bind:bindings},
 };
-await rebuildMuseum(file);
+// --text-only (generator-text-sync test): the museum bake moves geometry only, never text.
+if(!process.argv.includes('--text-only'))await rebuildMuseum(file);
 // The checked-in content is the editorial source of truth. The literals above
 // match it; if an editorial pass changes parts.json first, the bake keeps that
 // copy instead of restoring older literals.

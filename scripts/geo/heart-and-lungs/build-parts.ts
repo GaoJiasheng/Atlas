@@ -305,5 +305,6 @@ for (const f of flows) {
   console.log(`  ${f.id.padEnd(15)} ${String(ps.length).padStart(2)} paths ${len.toFixed(3)} m  count ${f.count}  flux ${((f.count / len) * f.speed).toFixed(1)}`);
 }
 
-// Sculpted bench geometry replaces only its four retained part ids.
-await buildFish();
+// Sculpted bench geometry replaces only its four retained part ids. It re-serialises
+// parts.json unchanged, so --text-only (generator-text-sync test) skips it.
+if (!process.argv.includes('--text-only')) await buildFish();
