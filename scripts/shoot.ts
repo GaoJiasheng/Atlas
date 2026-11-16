@@ -45,7 +45,7 @@ import { animationHz, shiftEntry, tintLevel } from '../src/engines/space-scene/l
 import type { PartsFile } from '../src/engines/space-scene/schema';
 import type { MechanismReading } from '../src/engines/space-scene/bridge';
 import { LINK_ROLES, PORT_ROLES, ROLE_ENDPOINTS } from '../src/engines/space-scene/lib/mechanism';
-import { dragVerdict, type DragSample, type DragVerdict } from './lib/drag-settle';
+import { dragVerdict, readDragSample, type DragSample, type DragVerdict } from './lib/drag-settle';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
@@ -1466,17 +1466,20 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       await press(k.key);
       await page.waitForTimeout(900);
       const hidden = !(await s.state()).hud;
-      // The chip fades in (0.35 s); on a heavy stage under software GL the cover-camera flight can hold the main thread past 1 s.
-      let restoreShown = false;
-      for (let i = 0; i < 20 && !restoreShown; i++) {
-        restoreShown = await page.evaluate(() => {
-          const el = document.querySelector('.atlas-hud-restore');
-          if (!el) return false;
-          const cs = getComputedStyle(el);
-          return cs.visibility !== 'hidden' && Number.parseFloat(cs.opacity) > 0.5;
-        });
-        if (!restoreShown) await page.waitForTimeout(250);
-      }
+      // The chip fades in (0.35 s). A CSS transition advances with the page's frames, and on a heavy stage under software GL on a loaded
+      // machine (the cover-camera flight, other jobs) frames can stall for seconds: judge once its fade has ended, not after a fixed count.
+      const restoreShown = await until(
+        () =>
+          page.evaluate(async () => {
+            const el = document.querySelector('.atlas-hud-restore');
+            if (!el) return false;
+            const fades = Promise.all(el.getAnimations().map((a) => a.finished.catch(() => undefined)));
+            await Promise.race([fades, new Promise((resolve) => setTimeout(resolve, 2000))]);
+            const cs = getComputedStyle(el);
+            return cs.visibility !== 'hidden' && Number.parseFloat(cs.opacity) > 0.5;
+          }),
+        30_000,
+      );
       ok = hidden && restoreShown;
       if (!ok) note = `hud hidden=${hidden} restore-chip=${restoreShown}`;
       await press(k.key);
@@ -1565,14 +1568,8 @@ async function runKeys(s: Session, o: Options, report: RunReport): Promise<void>
       await page.keyboard.press(k.key);
       await page.waitForTimeout(2400);
       // The camera is written back (FREE CAMERA) once the damped orbit stops: wait while the live camera still moves (scripts/lib/drag-settle.ts).
-      const sample = async (t0: number): Promise<DragSample> => ({
-        at: Date.now() - t0,
-        free: (await s.state()).preset === null,
-        camera: await page.evaluate(() => {
-          const cam = (window.__atlas!.stats() as { camera?: unknown }).camera;
-          return cam === undefined ? null : JSON.stringify(cam);
-        }),
-      });
+      // One read, after the page's overdue timers (readDragSample): a stalled page would otherwise answer before its write-back runs.
+      const sample = async (t0: number): Promise<DragSample> => ({ ...(await page.evaluate(readDragSample)), at: Date.now() - t0 });
       const t0 = Date.now();
       const samples = [await sample(t0)];
       await page.mouse.move(w * 0.5, h * 0.5);

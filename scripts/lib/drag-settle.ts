@@ -10,7 +10,22 @@
  * about 20 s. So the check waits while the live camera is still moving, and
  * judges once it has come to rest. An engine without a live camera in its
  * stats (TimeScene) gets a fixed wait.
+ *
+ * The write-back is a 400 ms debounce timer (CameraRig). A DevTools
+ * `evaluate` is dispatched ahead of the page's own tasks, so on a stalled
+ * page (a multi-second main-thread task on a loaded machine) a plain read
+ * answers before the overdue timer has run: the camera unchanged and not
+ * free across the stall, which once judged as "came to rest" and failed the
+ * check at random. `readDragSample` first lets the due timers run.
  */
+
+/** The page-side read for a `DragSample` (passed to `page.evaluate`, so self-contained): after the page's due timers. */
+export async function readDragSample(): Promise<Omit<DragSample, 'at'>> {
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  const atlas = window.__atlas!;
+  const camera = (atlas.stats() as { camera?: unknown }).camera;
+  return { free: atlas.state().preset === null, camera: camera === undefined ? null : JSON.stringify(camera) };
+}
 
 export interface DragSample {
   /** ms since the drag started (the first sample is taken just before it). */

@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { dragVerdict, type DragSample } from '../scripts/lib/drag-settle';
+import { afterEach, describe, expect, it } from 'vitest';
+import { dragVerdict, readDragSample, type DragSample } from '../scripts/lib/drag-settle';
 
 /** One sample every 250 ms: `cams[i]` the live camera (null: none reported), free from sample `freeAt` on. */
 const run = (cams: (string | null)[], freeAt = Infinity): DragSample[] => cams.map((camera, i) => ({ at: i * 250, free: i >= freeAt, camera }));
@@ -29,5 +29,28 @@ describe('shoot --keys: when the drag-frees-the-camera check may judge', () => {
     expect(dragVerdict(run(Array(64).fill(null)))).toBe('wait');
     expect(dragVerdict(run(Array(65).fill(null)))).toBe('timeout');
     expect(dragVerdict(run(Array(20).fill(null), 19))).toBe('free');
+  });
+});
+
+describe('shoot --keys: reading a drag sample on a stalled page', () => {
+  const g = globalThis as unknown as { window?: unknown };
+  afterEach(() => {
+    delete g.window;
+  });
+
+  it('lets an overdue write-back run before it reads (a plain read would see the camera at rest and not free)', async () => {
+    let preset: string | null = 'orbit';
+    g.window = { __atlas: { state: () => ({ preset }), stats: () => ({ camera: { position: [1, 2, 3] } }) } };
+    // CameraRig's debounced write-back, already due when the read arrives after a long main-thread task.
+    setTimeout(() => {
+      preset = null;
+    }, 0);
+    expect(preset).toBe('orbit');
+    expect(await readDragSample()).toEqual({ free: true, camera: '{"position":[1,2,3]}' });
+  });
+
+  it('reports no camera for an engine without a live one', async () => {
+    g.window = { __atlas: { state: () => ({ preset: 'world' }), stats: () => ({}) } };
+    expect(await readDragSample()).toEqual({ free: false, camera: null });
   });
 });
