@@ -35,6 +35,8 @@ describe('GeoStage style', () => {
       expect(width.value.evaluate({ zoom }, feature)).toBe(zoom <= 10 ? 1 : zoom >= 13 ? 2.5 : 1.75);
       expect(opacity.value.evaluate({ zoom }, feature)).toBe(0.9);
     }
+    // A schematic route (movement `certainty: approximate`, docs/73 E-SR2) keeps only the stepped dash: no solid trail.
+    for (const op of [1, 0.4]) expect(opacity.value.evaluate({ zoom: 4 }, { type: 2 as const, properties: { width: 1, persist: false, approx: true, op } })).toBe(0);
   });
 
   it('world map: land-50m, the Southeast Asia overlay, data layers; no plate sources', () => {

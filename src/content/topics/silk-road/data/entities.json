@@ -1,0 +1,345 @@
+[
+ {
+  "id": "han",
+  "name": {
+   "en": "Han",
+   "zh": "汉"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "left": "0240",
+  "color": "token:holder-8"
+ },
+ {
+  "id": "xiongnu",
+  "name": {
+   "en": "Xiongnu",
+   "zh": "匈奴"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "left": "0240",
+  "color": "token:holder-2"
+ },
+ {
+  "id": "parthia",
+  "name": {
+   "en": "Parthian Empire",
+   "zh": "帕提亚（安息）"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "left": "0240",
+  "color": "token:holder-6"
+ },
+ {
+  "id": "rome",
+  "name": {
+   "en": "Rome",
+   "zh": "罗马"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "left": "0629",
+  "color": "token:holder-3"
+ },
+ {
+  "id": "kushan",
+  "name": {
+   "en": "Kushan Empire",
+   "zh": "贵霜"
+  },
+  "bloc": "neutral",
+  "joined": "0050",
+  "left": "0400",
+  "color": "token:holder-1"
+ },
+ {
+  "id": "sasanian",
+  "name": {
+   "en": "Sasanian Empire",
+   "zh": "萨珊"
+  },
+  "bloc": "neutral",
+  "joined": "0240",
+  "left": "0751",
+  "color": "token:holder-7"
+ },
+ {
+  "id": "gupta",
+  "name": {
+   "en": "Gupta Empire",
+   "zh": "笈多"
+  },
+  "bloc": "neutral",
+  "joined": "0400",
+  "left": "0629",
+  "color": "token:holder-5"
+ },
+ {
+  "id": "eastern-rome",
+  "name": {
+   "en": "Eastern Roman Empire",
+   "zh": "东罗马帝国"
+  },
+  "bloc": "neutral",
+  "joined": "0629",
+  "color": "token:holder-1"
+ },
+ {
+  "id": "tang",
+  "name": {
+   "en": "Tang",
+   "zh": "唐"
+  },
+  "bloc": "neutral",
+  "joined": "0629",
+  "left": "0971",
+  "color": "token:holder-6"
+ },
+ {
+  "id": "western-turks",
+  "name": {
+   "en": "Western Turkic Khaganate",
+   "zh": "西突厥"
+  },
+  "bloc": "neutral",
+  "joined": "0629",
+  "left": "0751",
+  "color": "token:holder-8"
+ },
+ {
+  "id": "tibet",
+  "name": {
+   "en": "Tibetan Empire",
+   "zh": "吐蕃"
+  },
+  "bloc": "neutral",
+  "joined": "0629",
+  "left": "0971",
+  "color": "token:holder-2"
+ },
+ {
+  "id": "uyghur",
+  "name": {
+   "en": "Uyghur Khaganate",
+   "zh": "回鹘"
+  },
+  "bloc": "neutral",
+  "joined": "0751",
+  "left": "0971",
+  "color": "token:holder-8"
+ },
+ {
+  "id": "abbasid",
+  "name": {
+   "en": "Abbasid Caliphate",
+   "zh": "阿拔斯王朝"
+  },
+  "bloc": "neutral",
+  "joined": "0751",
+  "left": "0971",
+  "color": "token:holder-3"
+ },
+ {
+  "id": "song",
+  "name": {
+   "en": "Song",
+   "zh": "宋"
+  },
+  "bloc": "neutral",
+  "joined": "0971",
+  "left": "1335",
+  "color": "token:holder-4"
+ },
+ {
+  "id": "liao",
+  "name": {
+   "en": "Liao",
+   "zh": "辽"
+  },
+  "bloc": "neutral",
+  "joined": "0971",
+  "left": "1206",
+  "color": "token:holder-6"
+ },
+ {
+  "id": "fatimid",
+  "name": {
+   "en": "Fatimid Caliphate",
+   "zh": "法蒂玛王朝"
+  },
+  "bloc": "neutral",
+  "joined": "0971",
+  "left": "1206",
+  "color": "token:holder-2"
+ },
+ {
+  "id": "chola",
+  "name": {
+   "en": "Chola Empire",
+   "zh": "朱罗"
+  },
+  "bloc": "neutral",
+  "joined": "0971",
+  "left": "1206",
+  "color": "token:holder-5"
+ },
+ {
+  "id": "khwarazm",
+  "name": {
+   "en": "Khwarazmian Empire",
+   "zh": "花剌子模"
+  },
+  "bloc": "neutral",
+  "joined": "1206",
+  "left": "1254",
+  "color": "token:holder-1"
+ },
+ {
+  "id": "jin",
+  "name": {
+   "en": "Jin",
+   "zh": "金"
+  },
+  "bloc": "neutral",
+  "joined": "1206",
+  "left": "1254",
+  "color": "token:holder-5"
+ },
+ {
+  "id": "mongols",
+  "name": {
+   "en": "Mongol Empire",
+   "zh": "蒙古帝国"
+  },
+  "bloc": "neutral",
+  "joined": "1206",
+  "left": "1335",
+  "color": "token:holder-3"
+ },
+ {
+  "id": "yuan",
+  "name": {
+   "en": "Yuan",
+   "zh": "元"
+  },
+  "bloc": "neutral",
+  "joined": "1335",
+  "left": "1368",
+  "color": "token:holder-8"
+ },
+ {
+  "id": "ilkhanate",
+  "name": {
+   "en": "Ilkhanate",
+   "zh": "伊利汗国"
+  },
+  "bloc": "neutral",
+  "joined": "1335",
+  "left": "1368",
+  "color": "token:holder-6"
+ },
+ {
+  "id": "golden-horde",
+  "name": {
+   "en": "Golden Horde (Ulus of Jochi)",
+   "zh": "金帐汗国（术赤兀鲁思）"
+  },
+  "bloc": "neutral",
+  "joined": "1335",
+  "color": "token:holder-4"
+ },
+ {
+  "id": "chagatai",
+  "name": {
+   "en": "Chagatai Khanate",
+   "zh": "察合台汗国"
+  },
+  "bloc": "neutral",
+  "joined": "1335",
+  "color": "token:holder-3"
+ },
+ {
+  "id": "mamluk",
+  "name": {
+   "en": "Mamluk Sultanate",
+   "zh": "马穆鲁克苏丹国"
+  },
+  "bloc": "neutral",
+  "joined": "1254",
+  "color": "token:holder-2"
+ },
+ {
+  "id": "delhi",
+  "name": {
+   "en": "Delhi Sultanate",
+   "zh": "德里苏丹国"
+  },
+  "bloc": "neutral",
+  "joined": "1335",
+  "color": "token:holder-5"
+ },
+ {
+  "id": "ming",
+  "name": {
+   "en": "Ming",
+   "zh": "明"
+  },
+  "bloc": "neutral",
+  "joined": "1368",
+  "color": "token:holder-7"
+ },
+ {
+  "id": "srivijaya",
+  "name": {
+   "en": "Srivijaya",
+   "zh": "室利佛逝"
+  },
+  "bloc": "neutral",
+  "joined": "0971",
+  "left": "1294",
+  "color": "token:holder-3"
+ },
+ {
+  "id": "majapahit",
+  "name": {
+   "en": "Majapahit",
+   "zh": "满者伯夷"
+  },
+  "bloc": "neutral",
+  "joined": "1294",
+  "color": "token:holder-7"
+ },
+ {
+  "id": "dayuan",
+  "name": {
+   "en": "Dayuan (Ferghana)",
+   "zh": "大宛（费尔干纳）"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "left": "-0060",
+  "color": "token:ink-3"
+ },
+ {
+  "id": "travellers",
+  "name": {
+   "en": "Travellers",
+   "zh": "旅行者"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "color": "token:ink-2"
+ },
+ {
+  "id": "routes",
+  "name": {
+   "en": "Recorded routes",
+   "zh": "有记载的路线"
+  },
+  "bloc": "neutral",
+  "joined": "-0138",
+  "color": "token:ink-2"
+ }
+]

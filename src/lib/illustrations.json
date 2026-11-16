@@ -1019,6 +1019,26 @@
       "0000000000000000"
     ]
   },
+  "silk-road": {
+    "mask": [
+      "0000000000000000",
+      "0000000aa4000000",
+      "003e6bafa1000000",
+      "00bfffdeb0000000",
+      "0affffffb0240000",
+      "0effffff56efeb20",
+      "0cf54ed27fffff70",
+      "0bb01ab8efffff40",
+      "0a7538dfffffff70",
+      "068abebdffffffd0",
+      "04ffffffffffff70",
+      "03ffffffffffffe0",
+      "00cfffffffffff80",
+      "003effffdffffd30",
+      "00029bb71a941000",
+      "0000000000000000"
+    ]
+  },
   "singapore-1819-1965": {
     "mask": [
       "0000000000000000",

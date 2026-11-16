@@ -284,7 +284,7 @@ export function dataLayers(tk: ThemeTokens): LayerSpecification[] {
       type: 'line',
       source: SRC.movements,
       layout: { 'line-cap': 'round', 'line-join': 'round' },
-      paint: { 'line-color': ['get', 'color'], 'line-width': movementWidth, 'line-opacity': ['*', ['case', ['boolean', ['get', 'persist'], false], 1, 0.3], ['get', 'op']] },
+      paint: { 'line-color': ['get', 'color'], 'line-width': movementWidth, 'line-opacity': ['*', ['case', ['boolean', ['get', 'approx'], false], 0, ['boolean', ['get', 'persist'], false], 1, 0.3], ['get', 'op']] },
     },
     {
       id: LAYER.moveLine,

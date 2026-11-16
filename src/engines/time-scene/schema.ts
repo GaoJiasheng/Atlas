@@ -270,6 +270,8 @@ export const movementSchema = z
     persist: z.boolean().optional(),
     label: bilingual,
     kind: z.enum(MOVEMENT_KINDS),
+    /** A schematic route (recorded stops joined by rule): only the stepped dash is drawn, no solid trail. */
+    certainty: z.literal('approximate').optional(),
   })
   .strict()
   .superRefine((m, ctx) => {

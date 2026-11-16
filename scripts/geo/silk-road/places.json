@@ -1,0 +1,1246 @@
+{
+  "source": "Wikidata (CC0), property P625",
+  "retrieved": "2026-11-15",
+  "places": {
+    "chang-an": {
+      "qid": "Q6501000",
+      "at": [
+        108.85833,
+        34.30833
+      ],
+      "en": "Chang'an",
+      "zh": "长安",
+      "note": "the old city of Chang’an, in today’s Xi’an"
+    },
+    "luoyang": {
+      "qid": "Q187136",
+      "at": [
+        112.42447,
+        34.65867
+      ],
+      "en": "Luoyang",
+      "zh": "洛阳市"
+    },
+    "longxi": {
+      "qid": "Q632997",
+      "at": [
+        103.86126,
+        35.37731
+      ],
+      "en": "Lintao County",
+      "zh": "临洮县",
+      "note": "Lintao county, a reference point for the Han commandery of Longxi"
+    },
+    "wuwei": {
+      "qid": "Q769781",
+      "at": [
+        102.63977,
+        37.92859
+      ],
+      "en": "Liangzhou District",
+      "zh": "凉州区",
+      "note": "Liangzhou district of Wuwei (Han Wuwei commandery, Tang Liangzhou)"
+    },
+    "zhangye": {
+      "qid": "Q197402",
+      "at": [
+        100.45529,
+        38.93545
+      ],
+      "en": "Zhangye",
+      "zh": "张掖市",
+      "note": "today’s city (Han Zhangye commandery, Polo’s Campichu, Pegolotti’s Camexu)"
+    },
+    "jiuquan": {
+      "qid": "Q533432",
+      "at": [
+        98.50489,
+        39.73695
+      ],
+      "en": "Jiuquan",
+      "zh": "酒泉市"
+    },
+    "dunhuang": {
+      "qid": "Q319114",
+      "at": [
+        94.66389,
+        40.14111
+      ],
+      "en": "Dunhuang",
+      "zh": "敦煌市"
+    },
+    "mogao": {
+      "qid": "Q43286",
+      "at": [
+        94.80417,
+        40.03722
+      ],
+      "en": "Mogao Caves",
+      "zh": "莫高窟"
+    },
+    "yumen": {
+      "qid": "Q1324562",
+      "at": [
+        93.86383,
+        40.35217
+      ],
+      "en": "Yumen Pass",
+      "zh": "玉门关",
+      "note": "the Yumen Pass (Jade Gate)"
+    },
+    "guazhou": {
+      "qid": "Q1201947",
+      "at": [
+        95.78058,
+        40.51481
+      ],
+      "en": "Guazhou",
+      "zh": "瓜州县",
+      "note": "Guazhou county"
+    },
+    "hami": {
+      "qid": "Q989892",
+      "at": [
+        93.51548,
+        42.83224
+      ],
+      "en": "Hami",
+      "zh": "哈密市",
+      "note": "Hami (Yiwu), today’s city"
+    },
+    "gaochang": {
+      "qid": "Q877381",
+      "at": [
+        89.52917,
+        42.85278
+      ],
+      "en": "Gaochang",
+      "zh": "高昌",
+      "note": "the ruined city of Gaochang in the Turfan oasis"
+    },
+    "jiaohe": {
+      "qid": "Q1330939",
+      "at": [
+        89.06393,
+        42.95052
+      ],
+      "en": "Yarkhoto",
+      "zh": "交河故城",
+      "note": "the ruined city of Jiaohe (Yarkhoto), seat of Nearer Jushi"
+    },
+    "yanqi": {
+      "qid": "Q1023082",
+      "at": [
+        86.56704,
+        42.06117
+      ],
+      "en": "Yanqi Hui Autonomous County",
+      "zh": "焉耆回族自治县",
+      "note": "Yanqi county (Karashahr)"
+    },
+    "luntai": {
+      "qid": "Q1023121",
+      "at": [
+        84.25014,
+        41.77743
+      ],
+      "en": "Luntai County",
+      "zh": "轮台县",
+      "note": "Luntai county, where Wulei lay (which ruin is debated)"
+    },
+    "kucha": {
+      "qid": "Q1023116",
+      "at": [
+        82.96043,
+        41.71525
+      ],
+      "en": "Kuqa",
+      "zh": "库车市",
+      "note": "Kuqa, today’s city (Qiuci, Tang Anxi)"
+    },
+    "aksu": {
+      "qid": "Q421648",
+      "at": [
+        80.25,
+        41.16639
+      ],
+      "en": "Aksu",
+      "zh": "阿克苏市",
+      "note": "Aksu, today’s city (Han Gumo; Tang Bohuan area)"
+    },
+    "uqturpan": {
+      "qid": "Q1207622",
+      "at": [
+        79.22849,
+        41.21708
+      ],
+      "en": "Uqturpan County",
+      "zh": "乌什县",
+      "note": "Uqturpan county (Han Wensu, Hill 2003)"
+    },
+    "kashgar": {
+      "qid": "Q170521",
+      "at": [
+        75.98333,
+        39.45
+      ],
+      "en": "Kashgar",
+      "zh": "喀什市"
+    },
+    "yarkand": {
+      "qid": "Q12832321",
+      "at": [
+        77.25,
+        38.41667
+      ],
+      "en": "Yarkand",
+      "zh": "莎车镇",
+      "note": "the county seat of Yarkant (Han Suoche)"
+    },
+    "pishan": {
+      "qid": "Q1028101",
+      "at": [
+        78.28038,
+        37.6145
+      ],
+      "en": "Guma County",
+      "zh": "皮山县",
+      "note": "Pishan (Guma) county"
+    },
+    "khotan": {
+      "qid": "Q235389",
+      "at": [
+        79.9327,
+        37.1012
+      ],
+      "en": "Hotan",
+      "zh": "和田市"
+    },
+    "keriya": {
+      "qid": "Q1209102",
+      "at": [
+        81.66654,
+        36.85547
+      ],
+      "en": "Yutian County",
+      "zh": "于田县",
+      "note": "Yutian county (Keriya; Han Jumi)"
+    },
+    "niya": {
+      "qid": "Q1329268",
+      "at": [
+        82.7719,
+        37.82269
+      ],
+      "en": "Niya",
+      "zh": "尼雅遗址",
+      "note": "the Niya site (Han Jingjue)"
+    },
+    "qiemo": {
+      "qid": "Q643714",
+      "at": [
+        85.52874,
+        38.13797
+      ],
+      "en": "Qiemo County",
+      "zh": "且末县",
+      "note": "Qiemo county (Cherchen)"
+    },
+    "ruoqiang": {
+      "qid": "Q1023120",
+      "at": [
+        88.16899,
+        39.02049
+      ],
+      "en": "Ruoqiang County",
+      "zh": "若羌县",
+      "note": "Ruoqiang county (Charklik), a reference point for Shanshan and Polo’s Lop"
+    },
+    "khanbaliq": {
+      "qid": "Q101186473",
+      "at": [
+        116.4,
+        39.93333
+      ],
+      "en": "Khanbaliq",
+      "zh": "元大都",
+      "note": "Khanbaliq (Dadu), within today’s Beijing; also Tang Youzhou"
+    },
+    "shangdu": {
+      "qid": "Q471765",
+      "at": [
+        116.18516,
+        42.35802
+      ],
+      "en": "Xanadu",
+      "zh": "元上都",
+      "note": "Shangdu (Kaiping), Khubilai’s summer capital"
+    },
+    "hangzhou": {
+      "qid": "Q4970",
+      "at": [
+        120.1675,
+        30.25
+      ],
+      "en": "Hangzhou",
+      "zh": "杭州市"
+    },
+    "quanzhou": {
+      "qid": "Q68695",
+      "at": [
+        118.58583,
+        24.91389
+      ],
+      "en": "Quanzhou",
+      "zh": "泉州市"
+    },
+    "guangzhou": {
+      "qid": "Q16572",
+      "at": [
+        113.26,
+        23.13
+      ],
+      "en": "Guangzhou",
+      "zh": "广州市"
+    },
+    "xuwen": {
+      "qid": "Q1374567",
+      "at": [
+        110.17138,
+        20.32919
+      ],
+      "en": "Xuwen County",
+      "zh": "徐闻县",
+      "note": "Xuwen county"
+    },
+    "hepu": {
+      "qid": "Q1268277",
+      "at": [
+        109.2,
+        21.66667
+      ],
+      "en": "Hepu County",
+      "zh": "合浦县",
+      "note": "Hepu county"
+    },
+    "laoshan": {
+      "qid": "Q1698782",
+      "at": [
+        120.59167,
+        36.19167
+      ],
+      "en": "Mount Lao",
+      "zh": "崂山",
+      "note": "Mount Lao (Laoshan), Shandong"
+    },
+    "qingzhou": {
+      "qid": "Q1360781",
+      "at": [
+        118.47972,
+        36.69667
+      ],
+      "en": "Qingzhou",
+      "zh": "青州市"
+    },
+    "tuen-mun": {
+      "qid": "Q1758751",
+      "at": [
+        113.971,
+        22.3916
+      ],
+      "en": "Tuen Mun",
+      "zh": "屯门"
+    },
+    "onon": {
+      "qid": "Q206694",
+      "at": [
+        108.7883,
+        48.8422
+      ],
+      "en": "Onon River",
+      "zh": "鄂嫩河",
+      "note": "the Wikidata point of the Onon River, in the Khentii mountains near its source"
+    },
+    "karakorum": {
+      "qid": "Q62677",
+      "at": [
+        102.82379,
+        47.19753
+      ],
+      "en": "Karakorum",
+      "zh": "哈拉和林"
+    },
+    "ferghana": {
+      "qid": "Q486324",
+      "at": [
+        71.75778,
+        40.90083
+      ],
+      "en": "Ferghana Valley",
+      "zh": "费尔干纳盆地",
+      "note": "a reference point for the Ferghana Valley (Dayuan), not a site"
+    },
+    "bactria": {
+      "qid": "Q132646",
+      "at": [
+        66.89889,
+        36.75806
+      ],
+      "en": "Bactria",
+      "zh": "巴克特里亚",
+      "note": "a reference point for the region of Bactria (Daxia), not a site"
+    },
+    "samarkand": {
+      "qid": "Q5753",
+      "at": [
+        66.97583,
+        39.65472
+      ],
+      "en": "Samarkand",
+      "zh": "撒马尔罕"
+    },
+    "tashkent": {
+      "qid": "Q269",
+      "at": [
+        69.27972,
+        41.31111
+      ],
+      "en": "Tashkent",
+      "zh": "塔什干"
+    },
+    "suyab": {
+      "qid": "Q15636265",
+      "at": [
+        75.24992,
+        42.81525
+      ],
+      "en": "Ak-Beshim",
+      "zh": "阿克别希姆",
+      "note": "Ak-Beshim, the ruins of Suyab"
+    },
+    "bedel": {
+      "qid": "Q2330389",
+      "at": [
+        78.40833,
+        41.40833
+      ],
+      "en": "Bedel Pass",
+      "zh": "别迭里山口",
+      "note": "the Bedel pass"
+    },
+    "kulan": {
+      "qid": "Q4246014",
+      "at": [
+        72.715,
+        42.91
+      ],
+      "en": "Kulan",
+      "zh": "库兰"
+    },
+    "taraz": {
+      "qid": "Q486545",
+      "at": [
+        71.36667,
+        42.88333
+      ],
+      "en": "Taraz",
+      "zh": "塔拉兹"
+    },
+    "otrar": {
+      "qid": "Q956911",
+      "at": [
+        68.30297,
+        42.85148
+      ],
+      "en": "Otrar",
+      "zh": "讹答剌"
+    },
+    "almaliq": {
+      "qid": "Q2627464",
+      "at": [
+        80.53306,
+        44.24
+      ],
+      "en": "Almaliq",
+      "zh": "阿力麻里"
+    },
+    "urgench": {
+      "qid": "Q48472",
+      "at": [
+        59.15307,
+        42.32613
+      ],
+      "en": "Köneürgenç",
+      "zh": "库尼亚乌尔根奇",
+      "note": "Köneürgenç (Old Urgench)"
+    },
+    "saraichik": {
+      "qid": "Q2996387",
+      "at": [
+        51.73333,
+        47.5
+      ],
+      "en": "Saray-Jük",
+      "zh": "薩萊楚克",
+      "note": "Saray-Jük (Saraichik)"
+    },
+    "astrakhan": {
+      "qid": "Q3927",
+      "at": [
+        48.035,
+        46.35
+      ],
+      "en": "Astrakhan",
+      "zh": "阿斯特拉罕"
+    },
+    "tana": {
+      "qid": "Q102762",
+      "at": [
+        39.41667,
+        47.1
+      ],
+      "en": "Azov",
+      "zh": "亚速",
+      "note": "today’s Azov, near the site of Tana"
+    },
+    "burana": {
+      "qid": "Q852032",
+      "at": [
+        75.25038,
+        42.74648
+      ],
+      "en": "Burana Tower",
+      "zh": "詩歌塔",
+      "note": "the Burana tower, beside one of the two cemeteries of the 2022 study"
+    },
+    "merv": {
+      "qid": "Q193325",
+      "at": [
+        62.1925,
+        37.66278
+      ],
+      "en": "Merv",
+      "zh": "梅尔夫",
+      "note": "the ruins of Merv"
+    },
+    "nishapur": {
+      "qid": "Q131350",
+      "at": [
+        58.79583,
+        36.21333
+      ],
+      "en": "Nishapur",
+      "zh": "內沙布爾"
+    },
+    "balkh": {
+      "qid": "Q182159",
+      "at": [
+        66.89889,
+        36.75806
+      ],
+      "en": "Balkh",
+      "zh": "巴尔赫"
+    },
+    "bamyan": {
+      "qid": "Q214495",
+      "at": [
+        67.81667,
+        34.81667
+      ],
+      "en": "Bamyan",
+      "zh": "巴米扬"
+    },
+    "badakhshan": {
+      "qid": "Q165376",
+      "at": [
+        71,
+        38
+      ],
+      "en": "Badakhshan Province",
+      "zh": "巴达赫尚省",
+      "note": "a reference point for Badakhshan province, not a site"
+    },
+    "rabatak": {
+      "qid": "Q2382049",
+      "at": [
+        68.4036,
+        36.1494
+      ],
+      "en": "Rabatak inscription",
+      "zh": "羅巴塔克銘文",
+      "note": "the find-spot of the Rabatak inscription"
+    },
+    "herat": {
+      "qid": "Q45313",
+      "at": [
+        62.20306,
+        34.34194
+      ],
+      "en": "Herat",
+      "zh": "赫拉特"
+    },
+    "farah": {
+      "qid": "Q2399439",
+      "at": [
+        62.25992,
+        32.21768
+      ],
+      "en": "Farah City District",
+      "zh": "法拉",
+      "note": "Farah city district"
+    },
+    "kandahar": {
+      "qid": "Q45604",
+      "at": [
+        65.71588,
+        31.62068
+      ],
+      "en": "Kandahar",
+      "zh": "坎大哈"
+    },
+    "peshawar": {
+      "qid": "Q1113311",
+      "at": [
+        71.5675,
+        34.01444
+      ],
+      "en": "Peshawar",
+      "zh": "白沙瓦"
+    },
+    "mathura": {
+      "qid": "Q200311",
+      "at": [
+        77.67367,
+        27.49241
+      ],
+      "en": "Mathura",
+      "zh": "马图拉"
+    },
+    "patna": {
+      "qid": "Q80484",
+      "at": [
+        85.14139,
+        25.61
+      ],
+      "en": "Patna",
+      "zh": "巴特那",
+      "note": "Patna (Pataliputra)"
+    },
+    "nalanda": {
+      "qid": "Q216243",
+      "at": [
+        85.44383,
+        25.1368
+      ],
+      "en": "Nalanda Mahavihara",
+      "zh": "那烂陀寺",
+      "note": "the ruins of Nalanda Mahavihara"
+    },
+    "tamluk": {
+      "qid": "Q118278",
+      "at": [
+        87.91667,
+        22.3
+      ],
+      "en": "Tamluk",
+      "zh": "塔姆卢克",
+      "note": "Tamluk (Tamralipti), a river port that the plate does not reach by water",
+      "snapKm": 60
+    },
+    "sri-lanka": {
+      "qid": "Q4526612",
+      "at": [
+        80.75,
+        7.5
+      ],
+      "en": "Sri Lanka",
+      "zh": "斯里兰卡岛",
+      "note": "the main island of Sri Lanka (a reference point)",
+      "offshore": true
+    },
+    "kollam": {
+      "qid": "Q321475",
+      "at": [
+        76.58639,
+        8.88528
+      ],
+      "en": "Kollam",
+      "zh": "奎隆"
+    },
+    "muziris": {
+      "qid": "Q2974112",
+      "at": [
+        76.2,
+        10.15
+      ],
+      "en": "Muziris",
+      "zh": "穆济里斯"
+    },
+    "mangalore": {
+      "qid": "Q127041",
+      "at": [
+        74.8425,
+        12.87167
+      ],
+      "en": "Mangaluru",
+      "zh": "门格洛尔"
+    },
+    "bharuch": {
+      "qid": "Q760153",
+      "at": [
+        72.96667,
+        21.7
+      ],
+      "en": "Bharuch",
+      "zh": "珀鲁杰",
+      "note": "Bharuch (Barygaza, Broach)"
+    },
+    "banbhore": {
+      "qid": "Q491993",
+      "at": [
+        67.52198,
+        24.75223
+      ],
+      "en": "Banbhore",
+      "zh": "巴哈伯尔",
+      "note": "Banbhore, identified with Debal (Hsieh 2010); it lies up a creek of the Indus delta that the plate does not draw",
+      "snapKm": 40
+    },
+    "samudera-pasai": {
+      "qid": "Q3284315",
+      "at": [
+        97.20056,
+        5.13406
+      ],
+      "en": "Samudra Pasai",
+      "zh": "苏木都剌国",
+      "note": "the Wikidata point of the kingdom of Samudra-Pasai"
+    },
+    "palembang": {
+      "qid": "Q8131",
+      "at": [
+        104.76444,
+        -2.98333
+      ],
+      "en": "Palembang",
+      "zh": "巨港"
+    },
+    "belitung": {
+      "qid": "Q3589078",
+      "at": [
+        107.59518,
+        -2.76083
+      ],
+      "en": "Belitung shipwreck",
+      "zh": "黑石号沉船",
+      "note": "the Belitung wreck site"
+    },
+    "fort-canning": {
+      "qid": "Q1438470",
+      "at": [
+        103.847,
+        1.29444
+      ],
+      "en": "Fort Canning Hill",
+      "zh": "福康寧",
+      "note": "Fort Canning Hill, Singapore"
+    },
+    "cu-lao-cham": {
+      "qid": "Q386184",
+      "at": [
+        108.68194,
+        15.95056
+      ],
+      "en": "Chàm Islands",
+      "zh": "劬劳占",
+      "note": "the Chàm Islands"
+    },
+    "phan-rang": {
+      "qid": "Q19013",
+      "at": [
+        108.98858,
+        11.56432
+      ],
+      "en": "Phan Rang – Tháp Chàm",
+      "zh": "潘郎-塔占市"
+    },
+    "con-son": {
+      "qid": "Q1866965",
+      "at": [
+        106.5897,
+        8.691
+      ],
+      "en": "Côn Sơn Island",
+      "zh": "昆仑岛"
+    },
+    "harran": {
+      "qid": "Q199547",
+      "at": [
+        39.025,
+        36.87083
+      ],
+      "en": "Harran",
+      "zh": "哈兰",
+      "note": "Harran (Carrhae)"
+    },
+    "zeugma": {
+      "qid": "Q196987",
+      "at": [
+        37.86583,
+        37.05861
+      ],
+      "en": "Zeugma",
+      "zh": "泽乌格马"
+    },
+    "raqqa": {
+      "qid": "Q283368",
+      "at": [
+        39.01,
+        35.95
+      ],
+      "en": "Raqqa",
+      "zh": "拉卡",
+      "note": "Raqqa (Nicephorium)"
+    },
+    "dura-europos": {
+      "qid": "Q464266",
+      "at": [
+        40.73,
+        34.747
+      ],
+      "en": "Dura-Europos",
+      "zh": "杜拉欧罗普斯"
+    },
+    "seleucia": {
+      "qid": "Q1136681",
+      "at": [
+        44.52,
+        33.1
+      ],
+      "en": "Seleucia",
+      "zh": "塞琉西亚",
+      "note": "Seleucia on the Tigris"
+    },
+    "ctesiphon": {
+      "qid": "Q192541",
+      "at": [
+        44.58083,
+        33.09361
+      ],
+      "en": "Ctesiphon",
+      "zh": "泰西封"
+    },
+    "behistun": {
+      "qid": "Q180012",
+      "at": [
+        47.43589,
+        34.39036
+      ],
+      "en": "Behistun inscription",
+      "zh": "贝希斯敦铭文",
+      "note": "the Behistun inscription (Bagistana)"
+    },
+    "kangavar": {
+      "qid": "Q720604",
+      "at": [
+        47.96528,
+        34.50417
+      ],
+      "en": "Kangavar",
+      "zh": "坎加瓦尔"
+    },
+    "hamadan": {
+      "qid": "Q28587",
+      "at": [
+        48.51667,
+        34.8
+      ],
+      "en": "Hamadan",
+      "zh": "哈马丹",
+      "note": "Hamadan (Ecbatana)"
+    },
+    "rey": {
+      "qid": "Q636188",
+      "at": [
+        51.43444,
+        35.5975
+      ],
+      "en": "Ray",
+      "zh": "拉格斯",
+      "note": "Ray (Rhaga)"
+    },
+    "baghdad": {
+      "qid": "Q1530",
+      "at": [
+        44.36611,
+        33.31528
+      ],
+      "en": "Baghdad",
+      "zh": "巴格达"
+    },
+    "basra": {
+      "qid": "Q48195",
+      "at": [
+        47.81,
+        30.515
+      ],
+      "en": "Basra",
+      "zh": "巴士拉"
+    },
+    "ubulla": {
+      "qid": "Q619594",
+      "at": [
+        47.5,
+        30.31
+      ],
+      "en": "Al-Ubulla",
+      "zh": "",
+      "note": "al-Ubulla, a river port up the Shatt al-Arab, which the plate does not draw as water",
+      "snapKm": 130
+    },
+    "kufa": {
+      "qid": "Q186234",
+      "at": [
+        44.4,
+        32.03
+      ],
+      "en": "Kufa",
+      "zh": "库费"
+    },
+    "damascus": {
+      "qid": "Q3766",
+      "at": [
+        36.29194,
+        33.51306
+      ],
+      "en": "Damascus",
+      "zh": "大马士革"
+    },
+    "jabiyah": {
+      "qid": "Q3607443",
+      "at": [
+        35.99667,
+        32.91889
+      ],
+      "en": "Jabiyah",
+      "zh": "查比叶"
+    },
+    "antioch": {
+      "qid": "Q200441",
+      "at": [
+        36.18167,
+        36.20472
+      ],
+      "en": "Antioch",
+      "zh": "安条克",
+      "note": "ancient Antioch, in today’s Antakya"
+    },
+    "ain-jalut": {
+      "qid": "Q603425",
+      "at": [
+        35.35583,
+        32.54861
+      ],
+      "en": "Well of Harod",
+      "zh": "哈羅得泉",
+      "note": "the spring of Harod (Ain Jalut)"
+    },
+    "pelusium": {
+      "qid": "Q1145715",
+      "at": [
+        32.6,
+        31.05
+      ],
+      "en": "Pelusium",
+      "zh": "帕路修斯",
+      "note": "Pelusium (al-Farama)"
+    },
+    "clysma": {
+      "qid": "Q3775676",
+      "at": [
+        32.57397,
+        29.95461
+      ],
+      "en": "Clysma",
+      "zh": "克里斯馬",
+      "note": "Clysma (al-Qulzum), by today’s Suez"
+    },
+    "jeddah": {
+      "qid": "Q374365",
+      "at": [
+        39.16111,
+        21.52917
+      ],
+      "en": "Jeddah",
+      "zh": "吉达"
+    },
+    "berenike": {
+      "qid": "Q819050",
+      "at": [
+        35.48944,
+        23.94306
+      ],
+      "en": "Berenice Troglodytica",
+      "zh": ""
+    },
+    "aden": {
+      "qid": "Q131694",
+      "at": [
+        45.03333,
+        12.8
+      ],
+      "en": "Aden",
+      "zh": "亚丁"
+    },
+    "alexandria": {
+      "qid": "Q87",
+      "at": [
+        29.8925,
+        31.1975
+      ],
+      "en": "Alexandria",
+      "zh": "亚历山大"
+    },
+    "cairo": {
+      "qid": "Q85",
+      "at": [
+        31.23583,
+        30.04444
+      ],
+      "en": "Cairo",
+      "zh": "开罗"
+    },
+    "hormuz": {
+      "qid": "Q695265",
+      "at": [
+        56.46,
+        27.0675
+      ],
+      "en": "Hormuz Island",
+      "zh": "霍爾木茲島",
+      "note": "Hormuz island, a reference point for the Hormuz of Polo’s time"
+    },
+    "tabriz": {
+      "qid": "Q80053",
+      "at": [
+        46.29611,
+        38.07389
+      ],
+      "en": "Tabriz",
+      "zh": "大不里士"
+    },
+    "trabzon": {
+      "qid": "Q45301",
+      "at": [
+        39.7225,
+        41.005
+      ],
+      "en": "Trabzon",
+      "zh": "特拉布宗",
+      "note": "Trabzon (Trebizond)"
+    },
+    "acre": {
+      "qid": "Q126084",
+      "at": [
+        35.08389,
+        32.92611
+      ],
+      "en": "Acre",
+      "zh": "阿科"
+    },
+    "ayas": {
+      "qid": "Q939243",
+      "at": [
+        35.79222,
+        36.76778
+      ],
+      "en": "Yumurtalık",
+      "zh": "尤穆尔塔勒克",
+      "note": "Yumurtalık (Ayas, Polo’s Layas)"
+    },
+    "constantinople": {
+      "qid": "Q16869",
+      "at": [
+        28.97602,
+        41.01224
+      ],
+      "en": "Constantinople",
+      "zh": "君士坦丁堡"
+    },
+    "bosporus": {
+      "qid": "Q35958",
+      "at": [
+        29.08,
+        41.12
+      ],
+      "en": "Bosporus Strait",
+      "zh": "伊斯坦布尔海峡",
+      "note": "the Bosporus strait: a waypoint where a sea route enters the Black Sea, because the plate’s 2 km coast closes the strait itself"
+    },
+    "sudak": {
+      "qid": "Q7830",
+      "at": [
+        34.9725,
+        44.85139
+      ],
+      "en": "Sudak",
+      "zh": "苏达克",
+      "note": "Sudak (Soldaia)"
+    },
+    "derbent": {
+      "qid": "Q131416",
+      "at": [
+        48.28889,
+        42.05778
+      ],
+      "en": "Derbent",
+      "zh": "杰尔宾特"
+    },
+    "nakhchivan": {
+      "qid": "Q230104",
+      "at": [
+        45.41222,
+        39.20889
+      ],
+      "en": "Nakhchivan",
+      "zh": "纳希切万"
+    },
+    "sivas": {
+      "qid": "Q107401",
+      "at": [
+        37.01667,
+        39.75
+      ],
+      "en": "Sivas",
+      "zh": "锡瓦斯"
+    },
+    "kayseri": {
+      "qid": "Q48338",
+      "at": [
+        35.4875,
+        38.7225
+      ],
+      "en": "Kayseri",
+      "zh": "开塞利"
+    },
+    "konya": {
+      "qid": "Q79857",
+      "at": [
+        32.49214,
+        37.87277
+      ],
+      "en": "Konya",
+      "zh": "科尼亚"
+    },
+    "tripoli": {
+      "qid": "Q168954",
+      "at": [
+        35.83444,
+        34.43667
+      ],
+      "en": "Tripoli",
+      "zh": "的黎波里",
+      "note": "Tripoli, Lebanon"
+    },
+    "caffa": {
+      "qid": "Q158491",
+      "at": [
+        35.37917,
+        45.04889
+      ],
+      "en": "Feodosiia",
+      "zh": "费奥多西亚",
+      "note": "Feodosia (Caffa)"
+    },
+    "messina": {
+      "qid": "Q13666",
+      "at": [
+        15.55417,
+        38.19361
+      ],
+      "en": "Messina",
+      "zh": "墨西拿"
+    },
+    "strasbourg": {
+      "qid": "Q6602",
+      "at": [
+        7.75222,
+        48.57333
+      ],
+      "en": "Strasbourg",
+      "zh": "斯特拉斯堡"
+    },
+    "venice": {
+      "qid": "Q641",
+      "at": [
+        12.33194,
+        45.43972
+      ],
+      "en": "Venice",
+      "zh": "威尼斯"
+    },
+    "naples": {
+      "qid": "Q2634",
+      "at": [
+        14.24861,
+        40.83583
+      ],
+      "en": "Naples",
+      "zh": "那不勒斯"
+    },
+    "rome": {
+      "qid": "Q220",
+      "at": [
+        12.48278,
+        41.89306
+      ],
+      "en": "Rome",
+      "zh": "罗马"
+    },
+    "genoa": {
+      "qid": "Q1449",
+      "at": [
+        8.93389,
+        44.40722
+      ],
+      "en": "Genoa",
+      "zh": "热那亚"
+    },
+    "paris": {
+      "qid": "Q90",
+      "at": [
+        2.35222,
+        48.85667
+      ],
+      "en": "Paris",
+      "zh": "巴黎"
+    },
+    "bordeaux": {
+      "qid": "Q1479",
+      "at": [
+        -0.57944,
+        44.83778
+      ],
+      "en": "Bordeaux",
+      "zh": "波尔多"
+    },
+    "tangier": {
+      "qid": "Q126148",
+      "at": [
+        -5.80447,
+        35.76949
+      ],
+      "en": "Tangier",
+      "zh": "丹吉尔"
+    },
+    "kairouan": {
+      "qid": "Q179570",
+      "at": [
+        10.1,
+        35.68333
+      ],
+      "en": "Kairouan",
+      "zh": "凯鲁万"
+    }
+  }
+}

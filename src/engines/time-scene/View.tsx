@@ -72,7 +72,7 @@ import { CatalogueInspector } from './CatalogueInspector';
 import { CatalogueIndex } from './CatalogueIndex';
 import { catalogueItems, catalogueVisible, resolveCataloguePick, visibleCatalogue, type CatalogueLayer } from './lib/catalogue';
 import { eventImpacts } from './lib/impacts';
-import { datedLayerState } from './lib/datedLayers';
+import { datedLayerLegendKind, datedLayerState } from './lib/datedLayers';
 import { DatedLayerPlate } from './hud/DatedLayerPlate';
 import { HudFold } from './hud/HudFold';
 import type { DatedLayerIndex } from './lib/datedLayers';
@@ -610,7 +610,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
     if (coastToday && territoryOn) items.push({ id: 'coast-today', label: bi('time.legend.coastToday'), color: 'var(--ink)', kind: 'line-dashed' });
     for (const layer of topic.datedLayers ?? []) {
       if (!layers.includes(layer.id)) continue;
-      items.push({ id: `dated-layer-${layer.id}`, label: layer.temporal?.mode === 'reference' ? { en: `${layer.label.en} · REF. ${layer.temporal.release}`, zh: `${layer.label.zh} · REF. ${layer.temporal.release}` } : layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: layer.kind === 'area' ? 'fill' : layer.kind === 'line' ? 'line' : 'point' });
+      items.push({ id: `dated-layer-${layer.id}`, label: layer.temporal?.mode === 'reference' ? { en: `${layer.label.en} · REF. ${layer.temporal.release}`, zh: `${layer.label.zh} · REF. ${layer.temporal.release}` } : layer.label, color: layer.color ?? entityCssColor(geo.entities.find((e) => e.id === layer.holder)), kind: datedLayerLegendKind(layer) });
     }
     if (topic.datedLayers?.some((layer) => layer.kind === 'point' && layer.recent !== false && layer.temporal?.mode !== 'reference' && layers.includes(layer.id)))
       items.push({ id: 'dated-recent', label: bi('time.legend.datedRecent'), color: 'var(--signal)', kind: 'ring' });

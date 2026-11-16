@@ -18,6 +18,10 @@ export interface DatedLayerStats {
 
 const approximate: ExpressionSpecification = ['==', ['get', 'certainty'], 'approximate'];
 const certain: ExpressionSpecification = ['!=', ['get', 'certainty'], 'approximate'];
+/** Schematic line layers: the dash of approximate control borders, at least 1.4 px up to zoom 10. */
+export const APPROX_LINE_DASH = [3, 2];
+const APPROX_LINE_WIDTH: ExpressionSpecification = ['interpolate', ['linear'], ['zoom'], 10, 1.4, 13, 2.5];
+
 
 /** One source per definition; a small fixed number of draw layers regardless of the feature count. */
 export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color: string, t: number): LayerSpecification[] {
@@ -32,8 +36,11 @@ export function datedLayerStyles(def: DatedLayerDef, tokens: ThemeTokens, color:
       ...(def.temporal?.mode !== 'reference' && def.recent !== false ? [{ id: id('recent'), source, type: 'circle', filter: datedLayerFilter(t, true), paint: { 'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 3, 9, 2.2, 14, 4], 'circle-color': color, 'circle-stroke-color': tokens.signal, 'circle-stroke-width': 0.8 } } as LayerSpecification] : []),
     ];
   }
+  // A layer of schematic lines (`certainty: approximate`, docs/73 E-SR1) draws them dashed like approximate borders, never thinner than 1.4 px so a whole-plate view still reads them.
   if (def.kind === 'line') return [
-    { id: id('line'), source, type: 'line', filter, layout: { 'line-join': 'round' }, paint: { 'line-color': color, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 13, 2.5], 'line-opacity': 0.9 } },
+    def.certainty === 'approximate'
+      ? { id: id('line'), source, type: 'line', filter, layout: { 'line-join': 'round' }, paint: { 'line-color': color, 'line-width': APPROX_LINE_WIDTH, 'line-opacity': 0.9, 'line-dasharray': APPROX_LINE_DASH } }
+      : { id: id('line'), source, type: 'line', filter, layout: { 'line-join': 'round' }, paint: { 'line-color': color, 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 13, 2.5], 'line-opacity': 0.9 } },
   ];
   return [
     { id: id('fill'), source, type: 'fill', filter, paint: { 'fill-color': color, 'fill-opacity': ['case', approximate, 0.35 * 0.7, 0.35] } },

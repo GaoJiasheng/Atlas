@@ -809,3 +809,45 @@ ENTITIES / KEYFRAMES 14 / EVENTS / MOVEMENTS 8 / ROUTE LAYERS 6；不加计数�
 6. "东亚是否经历黑死病"学界无共识，本轮未读专门研究。
 7. UNESCO 官网对本机 403；F66 需换来源。
 8. 背景章 00-b 字幕写 1877 年而地图时间停在 -0138：引擎允许，但需 Gavin 看观感（V7）。
+
+---
+
+## 12. 施工记录（2026-11-15，分支 `claude/silk-road`）
+
+Gavin 2026-11-15 定稿：§0.1 全部按默认，下载都批。下面记实际做成的样子和与上文的偏离；上文 §0–§11 保留为定稿时的原样。
+
+### 12.1 做成了什么
+
+- 背景 + 10 章，54 拍（4 + 10 × 5），章节顺序与 §1.1 相同；首拍不递减。2026-11-16 按 Gavin “搞完就全部上线” 改为 `status: published`，REVIEW.md 由他事后读。
+- 引擎：**E-SR1**（`datedLayers` 线图层 `certainty: approximate` → 虚线 `[3, 2]`、zoom ≤ 10 宽 1.4 px、KEY 虚线样条；不写的线层样式逐字不变）和 **E-SR2**（movement `certainty: approximate` → 只画步进虚线、不画 .3 实底）都做了；单测 + docs/06 各一句。View.tsx 只改了一处（KEY 用 `datedLayerLegendKind`）。
+- 控制区 14 帧（Cliopatria v0.2.1），669 KB，rings 944 / 0 / 0；并排图 `docs/screenshots/silk-road/geo-K1…K14.png`。
+- 路线层 6 个（`sr-routes-han`、`sr-sea-periplus`、`sr-routes-tang`、`sr-sea-tang`、`sr-routes-abbasid`、`sr-routes-mongol`，共 1–6 KB），旅程 8 条（全部 `certainty: approximate`）；站点 = Wikidata 130 个点；陆上直线、海上自动最短水路（`routes.ts`）。
+- 事件 41 + 地点 29；来源 S1–S97（无 S9）；名词 13 个；预设 10 个（§1.2 的 19 个在 iPad 顶栏占三行，只留区域级的 10 个）。
+- 图像：Codex 的 `codex/img4` 分支还没有本主题的图，封面和章图都没有接（主会话合并时接）。
+
+### 12.2 与 spec 的偏离
+
+| spec | 实际 | 原因 |
+|---|---|---|
+| `routes-abbasid` 用 al-Thurayya 路段 | 改为伊本·胡尔达兹贝赫所记犹太商人路线的站点连线（Jacobs 1919 译文） | DATA-LICENSE.md 排除“source-derived material”，README 说路段是从 Cornu 1983 图集配准来的（§0.1-5 的备选） |
+| `sea-han`（徐闻 / 合浦 → 黄支） | 改名 `sea-periplus`，只画《航行记》贝勒尼基 → 穆济里斯、→ 婆卢羯车 | 《汉书》航程的站点都没有公认今地（沈丹森 2017），不画线；徐闻、合浦作地点 |
+| `routes-tang` 含长安—河西—西州 | 只画贾耽“安西入西域道”可定位段（龟兹—阿克苏—别迭里—碎叶—俱兰—怛罗斯），年份 785–1000 | 河西段不在贾耽这条路里 |
+| `routes-mongol` 1271 起 | 1335 起（裴哥罗梯约 1340） | 层的年份 = 文献反映的年代；09-a 不开此层 |
+| K12（1271）四汗国 | 一块“蒙古帝国” | Cliopatria 1294 年以前没有分开的四个汗国（INVENTORY.md） |
+| K11/K12 东罗马 | 用 Cliopatria “Nicaean Empire” 记录，标“尼西亚帝国（东罗马）” | Byzantine Empire 记录 1227–1278 有缺口 |
+| `evt-kara-djigach-1338` | `evt-chuy-graves-1338`，点在布拉纳塔 | 论文不给坐标，维基数据没有 Kara-Djigach 墓地 |
+| `evt-andun-166` 日南区域点 | 只在时间轴（`timeline-only`） | 维基数据日南郡没有坐标 |
+| `evt-gan-ying` | 挂在喀什（疏勒），detail 说明 | 条支今地不定（§2.4 允许的退路） |
+| `evt-kanishka` 白沙瓦 | 罗巴塔克碑出土地 | 都城未读到来源，碑文可定位 |
+| `evt-plague-constantinople-1347` | 删 | 君士坦丁堡的日期未读到 |
+| `evt-han-takes-nanyue` 番禺 | `evt-han-envoys-sea` 在徐闻 | 南越都城今地未读到来源；徐闻是《汉书》写到的出海港 |
+| 地点：月氏王庭、贝格拉姆、萨莱 | 不画 | 今地有争议 / 无来源 / 维基数据无坐标 |
+| 旅程：张骞回程、玄奘回程、鲁布鲁克的拔都营地 | 不画 | 只有方向描述，或无坐标 |
+| 名词 15 | 13（去掉 `term-caravanserai`、`term-yam`） | 正文没有用到 / 定义未读到来源 |
+| 03-e、04-b 高亮 | 03-e 无高亮；04-b 高亮萨珊实体 | 安敦来客无地图点；摩尼传教地点未读到 |
+
+### 12.3 删掉或改写的事实（F 步）
+
+- **删**：F11（妇好墓和田玉，未读到考古来源）；F14 中“史家认为夸大 / Rossabi”（未读到）；F29 女孩名“优婆遮”、卖主名；F34 的 781 年说；F48 伊本·阿西尔的 70 万；F50 “约 9 万”的现代估计和“杀末代哈里发”；F51 “奴隶少年”；F60 君士坦丁堡的日期；F64 “多数是女性”；F66、F67（UNESCO 页面 403，未读到）；乱后对粟特人的敌意；贝格拉姆宝藏；巴格达书市；“蒙古和平”一语；《汉书》航程站点的今地。
+- **改**：F21 萨珊止于 650/651（Iranica 650）；F31 葛逻禄是唐的盟军、战中倒戈；F33 只写登记人数，不写“登记崩溃”的解释（未读到）；F36 伊本·胡尔达兹贝赫初稿约 846 年，写“9 世纪”；F45 1225 年依据赵汝适自序；F48 内沙布尔 1,747,000 是赛菲的数字；F50 80 万是穆斯塔菲的；F53 回程约 1292 年（玉尔），出发港是玉尔的推断；F54 拉班·扫马“来自大都”（不是“生于附近”）；F69 伊西多尔没有赫卡通皮洛斯、木鹿，线只到可定位的驿站；F70 乌剌 / 末罗按谢明良 2010（乌布拉 / 巴士拉），Hirth–Rockhill 的不同比定写进 SOURCES-GEO；F27 普罗科匹厄斯没有年份，写“550 年代初”。
+- 敏感段落与施工记录：`src/content/topics/silk-road/REVIEW.md`（Gavin 事后读）。

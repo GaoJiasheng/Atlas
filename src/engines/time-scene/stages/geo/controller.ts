@@ -556,7 +556,7 @@ export function createGeoController(options: GeoControllerOptions): GeoControlle
         return {
           type: 'Feature',
           geometry: { type: 'LineString', coordinates: mv.coords },
-          properties: { id, color: sideColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity, persist: mv.persisting },
+          properties: { id, color: sideColor(mv.m.movement.holder, mv.m.start), width: hl.has(id) ? base + 0.8 : base, op: mv.opacity, persist: mv.persisting, approx: mv.m.movement.certainty === 'approximate' },
         };
       });
     setIfChanged(

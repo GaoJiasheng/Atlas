@@ -1,0 +1,1152 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "text": {
+        "en": "Daniel C. Waugh, “Richthofen's ‘Silk Roads’: Toward the Archaeology of a Concept”, The Silk Road 5/1 (2007)",
+        "zh": "Daniel C. Waugh《李希霍芬的“丝绸之路”：一个概念的考古》，《The Silk Road》第 5 卷第 1 期（2007）"
+      },
+      "url": "https://faculty.washington.edu/dwaugh/publications/waughrichthofen2010.pdf",
+      "note": {
+        "en": "Richthofen used the term in 1877 (China, vol. 1), also in the plural; Waugh argues that his role in ‘inventing’ the concept is overstated.",
+        "zh": "李希霍芬 1877 年在《中国》第 1 卷使用这个词，也用复数；Waugh 认为把这个概念的“发明”归于他是夸大了。"
+      }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Matthias Mertens, “Did Richthofen Really Coin ‘the Silk Road’?”, The Silk Road 17 (2019)",
+        "zh": "Matthias Mertens《李希霍芬真的创造了“丝绸之路”这个词吗？》，《The Silk Road》第 17 期（2019）"
+      },
+      "url": "https://edspace.american.edu/silkroadjournal/wp-content/uploads/sites/984/2020/02/2-Mertens-Did-Richthofen-Really-Coin-the-Silk-Road.pdf",
+      "note": {
+        "en": "German “Seidenstraße” was in use decades before Richthofen; he made the name known rather than coining it.",
+        "zh": "德语 Seidenstraße 在李希霍芬之前几十年已有人用；他让这个名字出名，而不是创造了它。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Cliopatria v0.2.1, Seshat Global History Databank (CC BY 4.0); data paper doi:10.1038/s41597-025-04516-9",
+        "zh": "Cliopatria v0.2.1，Seshat 全球历史数据库（CC BY 4.0）；数据论文 doi:10.1038/s41597-025-04516-9"
+      },
+      "url": "https://github.com/Seshat-Global-History-Databank/cliopatria/releases/tag/v0.2.1",
+      "note": {
+        "en": "The control areas of all 14 keyframes; the README calls its maps “only one version” of past territory. Clipped to the Natural Earth coast and simplified (scripts/geo/silk-road/SOURCES-GEO.md).",
+        "zh": "全部 14 个关键帧的控制区；其说明文件称这些地图“只是一种版本”。已裁到 Natural Earth 海岸并简化（scripts/geo/silk-road/SOURCES-GEO.md）。"
+      }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Sima Qian, Shiji (Records of the Grand Historian), chapter 123, “Account of Dayuan” (Wikisource text)",
+        "zh": "司马迁《史记》卷一百二十三《大宛列传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷123",
+      "note": {
+        "en": "Zhang Qian left from Longxi to find the Yuezhi; the Xiongnu held him “more than ten years” (留骞十余岁), he married and had a son; he escaped to Dayuan, Kangju, the Da Yuezhi and Daxia; captured again on the way back, he escaped when the chanyu died; of “more than a hundred” who set out, after 13 years “only two came back” (去时百余人，去十三岁，唯二人得还). Sima Qian: 张骞凿空. Dayuan campaigns: first army 6,000 cavalry of the dependent states and “tens of thousands” of young men; on return to Dunhuang “not more than one or two in ten”; second army 60,000 men left Dunhuang; “several dozen” fine horses and over 3,000 others taken; “more than 10,000” men and over 1,000 horses came back through the Yumen Pass; “four years” in all.",
+        "zh": "张骞从陇西出发寻找月氏；被匈奴“留骞十余岁，与妻，有子”；逃到大宛、康居、大月氏、大夏；回程又被匈奴所得，单于死后逃归；“初，骞行时百余人，去十三岁，唯二人得还”。司马迁：“张骞凿空”。伐大宛：第一次“发属国六千骑，及郡国恶少年数万人”，“还至敦煌，士不过什一二”；第二次“出敦煌者六万人”；“取其善马数十匹，中马以下牡牝三千余匹”；“军入玉门者万余人，军马千余匹”；“凡四岁而得罢”。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Ban Gu, Hanshu (History of the Former Han), chapter 61, biography of Zhang Qian (Wikisource text)",
+        "zh": "班固《汉书》卷六十一《张骞李广利传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/漢書/卷061",
+      "note": {
+        "en": "Same account of Zhang Qian's journey as the Shiji, with 予妻 for 与妻.",
+        "zh": "张骞出使的记载与《史记》相同，“与妻”作“予妻”。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Juping Yang, “Hellenistic Information in China”, CHS Research Bulletin (Harvard Center for Hellenic Studies), 2014",
+        "zh": "杨巨平《中国史料中的希腊化信息》，哈佛希腊研究中心《CHS Research Bulletin》，2014"
+      },
+      "url": "https://research-bulletin.chs.harvard.edu/2014/10/03/hellenistic-information-in-china/",
+      "note": {
+        "en": "Dates Zhang Qian's journey from 139 to 126 BCE. The Shiji itself gives no year of departure; 139 or 138 BCE is worked back from its “13 years”.",
+        "zh": "把张骞出使定在公元前 139 年至前 126 年。《史记》本身没有写出发的年份，前 139 或前 138 年是从“十三岁”倒推的。"
+      }
+    },
+    {
+      "id": "S7",
+      "text": {
+        "en": "Ban Gu, Hanshu, chapter 6, Annals of Emperor Wu (Wikisource text)",
+        "zh": "班固《汉书》卷六《武帝纪》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/漢書/卷006",
+      "note": {
+        "en": "元狩二年 (121 BCE): 以其地为武威、酒泉郡; 元鼎六年 (111 BCE): Nanyue defeated (闻南越破), its land made into commanderies including Hepu and Rinan; Zhangye and Dunhuang split off from Wuwei and Jiuquan.",
+        "zh": "元狩二年（前 121 年）“以其地为武威、酒泉郡”；元鼎六年（前 111 年）“闻南越破”，以其地置南海、合浦、日南等郡，“分武威、酒泉地置张掖、敦煌郡”。"
+      }
+    },
+    {
+      "id": "S8",
+      "text": {
+        "en": "Xu Tianlin (Song), Xi Han huiyao, chapter 64, quoting the Hanshu treatise on geography (Siku quanshu text, Wikisource)",
+        "zh": "徐天麟《西汉会要》卷六十四，引《汉书·地理志》（四库全书本，维基文库）"
+      },
+      "note": {
+        "en": "The geography treatise gives other years for the Hexi commanderies (Zhangye and Jiuquan 104 BCE, Wuwei 101 BCE, Dunhuang 88 BCE); the compiler notes under each that they differ from the annals (与纪不同).",
+        "zh": "《地理志》给出的河西诸郡设置年份与《武帝纪》不同（张掖、酒泉太初元年，武威太初四年，敦煌后元元年）；编者在每条下注“与纪不同”。"
+      }
+    },
+    {
+      "id": "S10",
+      "text": {
+        "en": "Ban Gu, Hanshu, chapter 96A, Account of the Western Regions (Wikisource text)",
+        "zh": "班固《汉书》卷九十六上《西域传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/漢書/卷096上",
+      "note": {
+        "en": "Two roads from the Yumen and Yang passes: the southern from Shanshan along the southern mountains to Suoche (Yarkand), the northern from the court of Nearer Jushi along the northern mountains to Shule (Kashgar). Each state's entry gives the distance to its neighbour, which fixes the order of stops. 神爵二年 (60 BCE): Zheng Ji protects both roads, “hence the title Protector-General”; seat at Wulei.",
+        "zh": "“自玉门、阳关出西域有两道：从鄯善傍南山北，波河西行至莎车，为南道……自车师前王廷随北山，波河西行至疏勒，为北道。”各国条目写明到邻国的里数，定出站点顺序。“是岁，神爵二年也。乃因使吉并护北道，故号曰都护……都护治乌垒城。”"
+      }
+    },
+    {
+      "id": "S11",
+      "text": {
+        "en": "Ban Gu, Hanshu, chapter 70, biography of Zheng Ji (Wikisource text)",
+        "zh": "班固《汉书》卷七十《郑吉传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/漢書/卷070",
+      "note": {
+        "en": "Zheng Ji “set up his headquarters at Wulei”. The chapter's closing comment ties the title to the Dijie era (69–66 BCE); the Western Regions account gives 60 BCE, which is used here.",
+        "zh": "郑吉“中西域而立莫府，治乌垒城”。本卷赞语说“至于地节，郑吉建都护之号”，与《西域传》的神爵二年不一致；本主题用前 60 年。"
+      }
+    },
+    {
+      "id": "S12",
+      "text": {
+        "en": "Ban Gu, Hanshu, chapter 28B, Treatise on Geography, the Yue region (Wikisource text)",
+        "zh": "班固《汉书》卷二十八下《地理志》粤地（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/漢書/卷028",
+      "note": {
+        "en": "From Rinan, Xuwen and Hepu ships sail for months to Duyuan, Yilumo, Chenli, Fuganduli and Huangzhi; interpreters went with recruits to buy pearls, glass and rare stones with gold and silk; “foreign merchants' ships passed them on” (蛮夷贾船，转送致之).",
+        "zh": "“自日南障塞、徐闻、合浦船行可五月，有都元国……有黄支国……与应募者俱入海市明珠、璧流离、奇石异物，赍黄金杂缯而往。所至国皆禀食为耦，蛮夷贾船，转送致之。”"
+      }
+    },
+    {
+      "id": "S13",
+      "text": {
+        "en": "Tansen Sen, “Early China and the Indian Ocean networks”, in P. de Souza and P. Arnaud (eds), The Sea in History: The Ancient World (Boydell, 2017)",
+        "zh": "沈丹森《早期中国与印度洋网络》，载 de Souza、Arnaud 编《The Sea in History: The Ancient World》（Boydell，2017）"
+      },
+      "url": "https://angkordatabase.asia/libs/docs/publications/early-china-and-the-indian-ocean-networks/Early_China_and_the_Indian_Ocean_Network.pdf",
+      "note": {
+        "en": "Identifications of Huangzhi range from Borneo to Kanchipuram; the Hanshu passage “must be used with caution”. No stop of this voyage is placed on the map.",
+        "zh": "黄支的比定从婆罗洲到建志补罗都有；这段《汉书》记载“须谨慎使用”。这条航路的站点地图上一个都不定点。"
+      }
+    },
+    {
+      "id": "S14",
+      "text": {
+        "en": "Fan Ye, Hou Hanshu (History of the Later Han), chapter 88, Account of the Western Regions (Wikisource text)",
+        "zh": "范晔《后汉书》卷八十八《西域传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/後漢書/卷88",
+      "note": {
+        "en": "永元九年 (97 CE): Ban Chao sends Gan Ying to Da Qin; he reaches Tiaozhi and the great sea; Parthian sailors say the crossing takes three months to two years, and he turns back. 延熹九年 (166 CE): envoys of “Andun, king of Da Qin” come from beyond Rinan with ivory, rhinoceros horn and tortoiseshell; the text itself suspects the account (疑传者过焉).",
+        "zh": "“和帝永元九年，都护班超遣甘英使大秦，抵条支。临大海欲度……英闻之乃止。”“至桓帝延熹九年，大秦王安敦遣使自日南徼外献象牙、犀角、玳瑁，始乃一通焉。其所表贡，并无珍异，疑传者过焉。”"
+      }
+    },
+    {
+      "id": "S15",
+      "text": {
+        "en": "Joshua R. Hall, “Marcus Aurelius' mysterious embassy to China”, Ancient World Magazine, citing A. Birley, Marcus Aurelius (2000), 144–5",
+        "zh": "Joshua R. Hall《马可·奥勒留神秘的中国使团》，《Ancient World Magazine》，引 A. Birley《Marcus Aurelius》（2000）第 144–145 页"
+      },
+      "url": "https://www.ancientworldmagazine.com/articles/marcus-aurelius-mysterious-embassy-china/",
+      "note": {
+        "en": "The 166 ‘envoys’ were probably freelance traders rather than official envoys (Birley; also Ball 2000, Young 2001).",
+        "zh": "166 年的“使者”多半是自行前来的商人，不是正式使节（Birley；另见 Ball 2000、Young 2001）。"
+      }
+    },
+    {
+      "id": "S16",
+      "text": {
+        "en": "Jiu Tangshu chapter 200A and Xin Tangshu chapter 225A, biographies of An Lushan (Wikisource texts)",
+        "zh": "《旧唐书》卷二百上、《新唐书》卷二百二十五上《安禄山传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/舊唐書/卷200上",
+      "note": {
+        "en": "安禄山，营州柳城杂种胡人也……母阿史德氏，亦突厥巫师; Xin Tangshu: 本姓康.",
+        "zh": "“安禄山，营州柳城杂种胡人也……母阿史德氏，亦突厥巫师”；《新唐书》“本姓康”。"
+      }
+    },
+    {
+      "id": "S17",
+      "text": {
+        "en": "Rong Xinjiang, “The ethnic and religious background of An Lushan's rebellion” (安禄山叛乱的种族与宗教背景), reprinted on aisixiang.com",
+        "zh": "荣新江《安禄山叛乱的种族与宗教背景》，爱思想网转载"
+      },
+      "url": "https://www.aisixiang.com/data/118779.html",
+      "note": {
+        "en": "An Lushan's father was a Sogdian of the Kang family and his mother Turkic: he was of mixed Sogdian and Turkic descent.",
+        "zh": "“安禄山的生父是一位康姓的粟特人”；“安禄山是粟特和突厥的混血儿”。"
+      }
+    },
+    {
+      "id": "S18",
+      "text": {
+        "en": "Du You, Tongdian, chapter 7 (Wikisource text)",
+        "zh": "杜佑《通典》卷七（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/通典/卷007",
+      "note": {
+        "en": "Registered population in 755 (天宝十四载): 52,919,309.",
+        "zh": "天宝十四载（755）“管口总五千二百九十一万九千三百九”。"
+      }
+    },
+    {
+      "id": "S19",
+      "text": {
+        "en": "Sima Guang, Zizhi tongjian, chapter 223, year 764 (Wikisource text)",
+        "zh": "司马光《资治通鉴》卷二百二十三，广德二年（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/資治通鑑/卷223",
+      "note": {
+        "en": "Registered population in 764: “more than 16.9 million” (口一千六百九十余万). These are people on the government's registers, not a count of the living or the dead.",
+        "zh": "广德二年（764）户部奏“口一千六百九十余万”。这是登记在册的人口，不是活着或死去的人数。"
+      }
+    },
+    {
+      "id": "S20",
+      "text": {
+        "en": "Takata Tokio, “Tibetan Dominion over Dunhuang and the Formation of a Tibeto-Chinese Community”, BuddhistRoad Paper 6.1 (2019): 85–106",
+        "zh": "高田时雄《吐蕃对敦煌的统治与藏汉社群的形成》，BuddhistRoad Paper 6.1（2019）：85–106"
+      },
+      "url": "https://omp.ub.rub.de/index.php/BuddhistRoad/catalog/download/118/103/612",
+      "note": {
+        "en": "Dunhuang fell to the Tibetans in 786 after a long siege; Tibetan rule lasted until 848.",
+        "zh": "敦煌经长期围困，786 年落入吐蕃之手，吐蕃统治到 848 年。"
+      }
+    },
+    {
+      "id": "S21",
+      "text": {
+        "en": "Sanping Chen, “The Tang as a Tuoba Dynasty”, Sino-Platonic Papers 356 (2024), p. 3",
+        "zh": "陈三平《作为拓跋王朝的唐朝》，《Sino-Platonic Papers》第 356 期（2024），第 3 页"
+      },
+      "note": {
+        "en": "The date of Dunhuang's fall is “a long-running debate”; more authors now give 786. Others give 787 (G. Taenzer 2012).",
+        "zh": "敦煌陷落的年份是“长期的争论”，现在多数学者取 786 年；也有人取 787 年（Taenzer 2012）。"
+      }
+    },
+    {
+      "id": "S22",
+      "text": {
+        "en": "Songshi (History of Song), chapter 186, Treatise on Finance, maritime trade (Wikisource text)",
+        "zh": "《宋史》卷一百八十六《食货志》互市舶法（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/宋史/卷186",
+      "note": {
+        "en": "（开宝）四年，置市舶司于广州 (971); a year before 1088 an office was added at Quanzhou (1087). Ships first paid one part in ten (十先征其一); the state then bought part of the cargo.",
+        "zh": "“（开宝）四年，置市舶司于广州”；元祐三年条“而前一年，亦增置市舶司于泉州”。“大抵海船至，十先征其一。”"
+      }
+    },
+    {
+      "id": "S23",
+      "text": {
+        "en": "Ye Rong, article on the Quanzhou Bay Song ship, The Paper (澎湃新闻), drawing on the Quanzhou Maritime Museum",
+        "zh": "叶榕《泉州湾宋代海船》，澎湃新闻，据泉州海外交通史博物馆资料"
+      },
+      "url": "https://www.thepaper.cn/newsDetail_forward_20829059",
+      "note": {
+        "en": "Excavated at Houzhu, Quanzhou Bay, from 9 June 1974 into August; the surviving hull is 24.2 m long and 9.15 m wide, with 13 watertight compartments; dated to the late Southern Song.",
+        "zh": "1974 年 6 月 9 日起在泉州湾后渚港发掘，持续到 8 月；残长 24.2 米、残宽 9.15 米，有 13 个水密隔舱；推断是南宋末年的远洋商船。"
+      }
+    },
+    {
+      "id": "S24",
+      "text": {
+        "en": "Zhao Rugua, preface to Zhufan zhi (Records of foreign peoples), dated 1225 (Wikisource text)",
+        "zh": "赵汝适《诸蕃志》自序，宝庆元年（1225）（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/諸蕃志/趙汝适序",
+      "note": {
+        "en": "As Superintendent of Maritime Trade in Fujian he questioned foreign merchants about their countries, customs, routes and products; preface dated the ninth month of 1225.",
+        "zh": "提举福建路市舶时“询诸贾胡，俾列其国名，道其风土，与夫道里之联属，山泽之蓄产”；序署宝庆元年九月。"
+      }
+    },
+    {
+      "id": "S25",
+      "text": {
+        "en": "Yuanshi (History of Yuan), chapter 7 (Annals of Khubilai, 1271) and chapter 58 (geography, Dadu) (Wikisource texts)",
+        "zh": "《元史》卷七《世祖本纪》、卷五十八《地理志》大都路（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/元史/卷007",
+      "note": {
+        "en": "至元八年 (1271) 建国号曰大元. Dadu: Tang Youzhou Fanyang commandery, the Liao and Jin capital; new city begun 1267, named Dadu 1272.",
+        "zh": "至元八年“建国号曰大元”。大都路“唐幽州范阳郡。辽改燕京。金迁都，为大兴府”；至元四年筑新城，九年改称大都。"
+      }
+    },
+    {
+      "id": "S26",
+      "text": {
+        "en": "Mingshi chapter 2 and Yuanshi chapter 47 (Wikisource texts)",
+        "zh": "《明史》卷二、《元史》卷四十七《顺帝纪》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/明史/卷2",
+      "note": {
+        "en": "洪武元年春正月 (January 1368) Zhu Yuanzhang takes the throne and names the dynasty Ming; the Yuan emperor leaves Dadu by night for Shangdu; in the eighth month (September 1368) Xu Da enters the Yuan capital.",
+        "zh": "洪武元年正月即皇帝位，“定有天下之号曰明”；元帝“开健德门北奔”；八月徐达入元都。"
+      }
+    },
+    {
+      "id": "S27",
+      "text": {
+        "en": "Xin Tangshu (New History of Tang), chapter 43B, Treatise on Geography: Jia Dan's routes (Wikisource text)",
+        "zh": "《新唐书》卷四十三下《地理志》贾耽所记入四夷之路（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/新唐書/卷043下",
+      "note": {
+        "en": "Jia Dan (chief minister in the Zhenyuan era, 785–805) recorded seven routes; the fifth runs from Anxi (Kucha) into the Western Regions, the seventh from Guangzhou by sea to Baghdad (缚达). The stops in this topic's lines follow the text's order.",
+        "zh": "贞元宰相贾耽“考方域道里之数最详”，记入四夷之路七条，“五曰安西入西域道……七曰广州通海夷道”。本主题路线的站点按原文顺序。"
+      }
+    },
+    {
+      "id": "S28",
+      "text": {
+        "en": "Hsieh Ming-liang, “The Navigational Route of the Belitung Wreck”, in Shipwrecked: Tang Treasures and Monsoon Winds (Smithsonian / Asian Civilisations Museum, 2010), 136–7",
+        "zh": "谢明良《黑石号沉船的航线》，载《Shipwrecked: Tang Treasures and Monsoon Winds》（史密森学会 / 亚洲文明博物馆，2010），第 136–137 页"
+      },
+      "url": "https://asia-archive.si.edu/wp-content/uploads/2017/10/09Hsieh.pdf",
+      "note": {
+        "en": "Identifies the stops of Jia Dan's sea route: Cù Lao Chàm, Phan Rang, Côn Sơn, the Strait of Malacca, Sri Lanka, Kollam (Quilon), Debal on the Indus mouth, al-Ubulla, Basra and Baghdad. Hirth and Rockhill (1911) placed 乌剌 and 末罗 at Sohar and Old Hormuz instead.",
+        "zh": "比定贾耽海路诸站：占不劳山（占婆岛）、奔陀浪（藩朗）、军突弄山（昆仑岛）、马六甲海峡、师子国、没来国（奎隆）、提䫻国（印度河口的提飓）、乌剌（巴士拉旁的乌布拉）、末罗（巴士拉）、缚达（巴格达）。Hirth、Rockhill（1911）则把乌剌、末罗定在苏哈尔和旧霍尔木兹。"
+      }
+    },
+    {
+      "id": "S29",
+      "text": {
+        "en": "Édouard Chavannes, Documents sur les Tou-kiue (Turcs) occidentaux (1903), pp. 8–10",
+        "zh": "沙畹《西突厥史料》（1903），第 8–10 页"
+      },
+      "url": "https://archive.org/details/ChavanessDocumentsTouKiueTurcs",
+      "note": {
+        "en": "Identifies the stops of Jia Dan's Anxi route: Kucha, the Aksu area, the Bedel pass, Issyk-Kul, Suyab near Tokmak, Kulan and Talas (Taraz).",
+        "zh": "比定贾耽“安西入西域道”诸站：龟兹、阿克苏一带、拔达岭（别迭里山口）、热海（伊塞克湖）、碎叶（托克马克附近）、俱兰、怛罗斯（塔拉兹）。"
+      }
+    },
+    {
+      "id": "S30",
+      "text": {
+        "en": "John E. Hill (tr.), The Western Regions according to the Hou Hanshu, 2nd ed. (2003), Silk Road Seattle, University of Washington",
+        "zh": "John E. Hill 译注《后汉书·西域传》第 2 版（2003），华盛顿大学 Silk Road Seattle"
+      },
+      "url": "https://depts.washington.edu/silkroad/texts/hhshu/hou_han_shu.html",
+      "note": {
+        "en": "Modern identifications of the oasis states: Shanshan (Lop Nor region, near Ruoqiang), Qiemo (Cherchen), Jingjue (Niya), Jumi (Keriya), Yutian (Khotan), Pishan, Suoche (Yarkand), Shule (Kashgar), Nearer Jushi (Turfan), Yanqi (Karashahr), Qiuci (Kucha), Gumo (Aksu), Wensu (Uch Turfan); Dayuan is Ferghana, Daxia is Bactria.",
+        "zh": "绿洲诸国的今地比定：鄯善（罗布泊一带，若羌附近）、且末、精绝（尼雅）、扜弥（于田）、于阗（和田）、皮山、莎车、疏勒（喀什）、车师前国（吐鲁番）、焉耆、龟兹（库车）、姑墨（阿克苏）、温宿（乌什）；大宛是费尔干纳，大夏是巴克特里亚。"
+      }
+    },
+    {
+      "id": "S31",
+      "text": {
+        "en": "Huili and Yancong, Da Tang Da Ci'en si sanzang fashi zhuan (Biography of Xuanzang), chapters 1–6 (Wikisource text)",
+        "zh": "慧立、彦悰《大唐大慈恩寺三藏法师传》卷一至卷六（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/大唐大慈恩寺三藏法師傳/卷01",
+      "note": {
+        "en": "His request to travel was refused (有诏不许); he set out in autumn of 贞观三年 (629); an order went out to arrest him; he returned to Chang'an in the first month of 645 with “520 cases, 657 texts” (凡五百二十夹，六百五十七部). The order of places on his journey follows this text.",
+        "zh": "“结侣陈表。有诏不许”；“贞观三年秋八月，将欲首涂”；“有僧字玄奘，欲入西蕃，所在州县宜严候捉”；贞观十九年正月回到长安，经像“凡五百二十夹，六百五十七部”。旅程站点顺序按此书。"
+      }
+    },
+    {
+      "id": "S32",
+      "text": {
+        "en": "Wang Hao, on the debate between Chen Yuan and Liang Qichao over Xuanzang's dates, Journal of Macao Polytechnic University 2022 no. 4",
+        "zh": "王皓《试释陈垣与梁启超论辩玄奘年代及相关之问题》，《澳门理工学报》2022 年第 4 期"
+      },
+      "url": "https://journal.ipm.edu.mo/images/journal_c/2022_4//5ee13-202204086-.pdf",
+      "note": {
+        "en": "Liang Qichao argued for 627; Chen Yuan defended 629, which most scholars accept.",
+        "zh": "梁启超主张贞观元年（627），陈垣坚持贞观三年（629），多数学者从陈说。"
+      }
+    },
+    {
+      "id": "S33",
+      "text": {
+        "en": "Samuel Beal (tr.), Si-yu-ki: Buddhist Records of the Western World (1884), vols 1–2",
+        "zh": "比尔（Samuel Beal）英译《大唐西域记》（1884）第 1–2 卷"
+      },
+      "url": "https://archive.org/details/siyukibuddhistre01hsuoft",
+      "note": {
+        "en": "Modern identifications of Xuanzang's stops: Hami, Turfan, Karashahr, Kucha, Aksu, Tashkent, Samarkand, the Iron Gate, Balkh, Bamiyan, Kapisa, Peshawar, Nalanda, Khotan.",
+        "zh": "玄奘所经地点的今地：伊吾（哈密）、高昌（吐鲁番）、阿耆尼（焉耆）、屈支（库车）、跋禄迦（阿克苏）、赭时（塔什干）、飒秣建（撒马尔罕）、铁门、缚喝（巴尔赫）、梵衍那（巴米扬）、迦毕试、布路沙布逻（白沙瓦）、那烂陀、瞿萨旦那（和田）。"
+      }
+    },
+    {
+      "id": "S34",
+      "text": {
+        "en": "The Periplus of the Erythraean Sea, tr. W. H. Schoff (1912), Fordham Internet Ancient History Sourcebook",
+        "zh": "《厄立特里亚海航行记》，Schoff 英译（1912），福特汉姆大学古代史资料集"
+      },
+      "url": "https://sourcebooks.fordham.edu/ancient/periplus.asp",
+      "note": {
+        "en": "A Greek merchant's guide of the 1st century CE. §56–57: ships leave Egypt in July for Muziris; the south-west wind is called Hippalus. §64: silk from Thinae is brought on foot through Bactria to Barygaza and down the Ganges. Enslaved people are listed among goods at Opone (§13), Ommana (§36) and Barygaza (§49).",
+        "zh": "公元 1 世纪希腊商人的航海指南。§56–57：船 7 月从埃及出发前往穆济里斯，西南风叫作希帕罗斯风。§64：丝从“提奈”经巴克特里亚步行运到婆卢羯车，也顺恒河运出。奥波内（§13）、奥马纳（§36）、婆卢羯车（§49）都列有被买卖的人。"
+      }
+    },
+    {
+      "id": "S35",
+      "text": {
+        "en": "Faxian, A Record of Buddhistic Kingdoms, tr. James Legge (1886), Project Gutenberg",
+        "zh": "法显《佛国记》，理雅各英译（1886），古腾堡计划"
+      },
+      "url": "https://www.gutenberg.org/ebooks/2124",
+      "note": {
+        "en": "Left Chang'an (Legge: most probably 399); stops in order: Dunhuang, Shanshan, Khotan, the Pamirs, Purushapura (Peshawar), Mathura, Pataliputra, Tamralipti, Sri Lanka (two years), an island the text calls Yepoti (Java-dvipa; place uncertain), then Mount Lao in Qingzhou.",
+        "zh": "离开长安（理雅各：最可能是 399 年）；依次经敦煌、鄯善、于阗、葱岭、弗楼沙（白沙瓦）、摩头罗、巴连弗邑、多摩梨帝、师子国（住两年）、耶婆提（今地不定），最后到青州牢山。"
+      }
+    },
+    {
+      "id": "S36",
+      "text": {
+        "en": "Wang Bangwei, “Faxian and the Construction of the Buddha's Shadow Platform at Mount Lu”, Hualin International Journal of Buddhist Studies 2.1 (2019)",
+        "zh": "王邦维《法显与庐山佛影台》，《华林国际佛学学刊》第 2 卷第 1 期（2019）"
+      },
+      "url": "https://glorisunglobalnetwork.org/wp-content/uploads/2020/04/hualin2.1_wang.pdf",
+      "note": {
+        "en": "Faxian's ship reached Mount Lao on the 14th day of the 7th month of 412.",
+        "zh": "法显的船于 412 年七月十四日到达崂山。"
+      }
+    },
+    {
+      "id": "S37",
+      "text": {
+        "en": "Abu Zayd al-Sirafi, Accounts of China and India, tr. E. Renaudot, Ancient Accounts of India and China (1733), pp. 41–42",
+        "zh": "阿布·扎伊德·西拉菲《中国印度见闻录》，雷诺多英译本（1733），第 41–42 页"
+      },
+      "url": "https://archive.org/details/ancientaccountso00sira",
+      "note": {
+        "en": "The rebel “Baichu” (Huang Chao) took Khanfu (Guangzhou) in AH 264 (877/878); “one hundred and twenty thousand” Muslims, Jews, Christians and Zoroastrians died. The modern translation gives the same account; Chinese sources date the capture to 879.",
+        "zh": "叛军“Baichu”（黄巢）在回历 264 年（877/878）攻下 Khanfu（广州），“十二万”穆斯林、犹太人、基督徒和琐罗亚斯德教徒死去。中国史书把攻占广州记在 879 年。"
+      }
+    },
+    {
+      "id": "S38",
+      "text": {
+        "en": "al-Mas'udi, Meadows of Gold, tr. A. Sprenger (1841), pp. 324–325",
+        "zh": "马苏第《黄金草原》，Sprenger 英译（1841），第 324–325 页"
+      },
+      "url": "https://archive.org/details/historicalencycl00masrich",
+      "note": {
+        "en": "Gives 200,000 Muslims, Christians and Jews killed or drowned at Khanfu.",
+        "zh": "说在 Khanfu 被杀或溺死的穆斯林、基督徒、犹太人有二十万。"
+      }
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Xin Tangshu chapter 225C, biography of Huang Chao (Wikisource text)",
+        "zh": "《新唐书》卷二百二十五下《黄巢传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/新唐書/卷225下",
+      "note": {
+        "en": "Records that Huang Chao attacked Guangzhou and seized its governor Li Tiao, and that disease killed four in ten of his men; it does not mention a killing of foreign merchants. No modern study of the Arabic figures was read for this topic.",
+        "zh": "记黄巢“急攻广州，执李迢”，“贼中大疫，众死什四”；没有提到外国商人被杀。本主题没有读到专门评估阿拉伯数字的现代研究。"
+      }
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "Plutarch, Life of Crassus 31.7, tr. B. Perrin (Loeb, 1916), LacusCurtius",
+        "zh": "普鲁塔克《克拉苏传》31.7，Perrin 英译（洛布丛书，1916），LacusCurtius"
+      },
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Crassus*.html",
+      "note": {
+        "en": "“In the whole campaign, twenty thousand are said to have been killed, and ten thousand to have been taken alive.” The figures are for the whole campaign, written about 150 years later.",
+        "zh": "“整场战役据说有两万人被杀，一万人被活捉。”这是整场战役的数字，写于约一百五十年后。"
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Florus, Epitome 1.46.8, tr. E. S. Forster (Loeb), LacusCurtius",
+        "zh": "弗洛鲁斯《罗马史纲要》1.46.8，Forster 英译（洛布丛书），LacusCurtius"
+      },
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Florus/Epitome/1M*.html",
+      "note": {
+        "en": "Describes the Parthian standards at Carrhae “fluttering with gold and silken pennons”: a later writer, and the banners are Parthian, not Roman.",
+        "zh": "说卡莱战场上帕提亚的军旗“飘着金色和丝绸的旗幡”：作者晚出，说的是帕提亚的旗，不是罗马的。"
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "Pliny the Elder, Natural History 12.84, tr. Bostock and Riley (Perseus)",
+        "zh": "老普林尼《博物志》12.84，Bostock、Riley 英译（Perseus）"
+      },
+      "url": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.02.0137:book=12:chapter=41",
+      "note": {
+        "en": "“At the very lowest computation, India, the Seres, and the Arabian Peninsula, withdraw from our empire one hundred millions of sesterces every year.”",
+        "zh": "“按最低的估算，印度、赛里斯和阿拉伯半岛每年从我们的帝国拿走一亿塞斯特斯。”"
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Harry Falk, “Kushan Dynasty iii. Chronology”, Encyclopaedia Iranica (2014; Internet Archive copy)",
+        "zh": "Harry Falk《贵霜王朝之三：年代》，《伊朗百科全书》（2014；互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/kushan-03-chronology",
+      "note": {
+        "en": "127 CE is proposed as the start of the Kushan era, year 1 of Kanishka; some scholars prefer other dates.",
+        "zh": "提出公元 127 年为贵霜纪元元年，即迦腻色伽元年；也有学者主张别的年份。"
+      }
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "Nicholas Sims-Williams, lecture on the Bactrian documents and the Rabatak inscription (University of Tokyo)",
+        "zh": "Nicholas Sims-Williams 关于巴克特里亚文书和罗巴塔克碑的讲稿（东京大学）"
+      },
+      "url": "https://gengo.l.u-tokyo.ac.jp/hkum/bactrian.html",
+      "note": {
+        "en": "Lines 4–7 of the Rabatak inscription list north Indian cities controlled by Kanishka, as far as Pataliputra.",
+        "zh": "罗巴塔克碑第 4–7 行列出迦腻色伽控制的北印度城市，远到巴连弗邑。"
+      }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "B. A. Litvinsky, “Gandhāran Art”, Encyclopaedia Iranica (2005; Internet Archive copy)",
+        "zh": "B. A. Litvinsky《犍陀罗艺术》，《伊朗百科全书》（2005；互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/gandharan-art",
+      "note": {
+        "en": "Gandharan art is a synthesis of eastern Hellenistic and Bactrian styles with Indian art.",
+        "zh": "犍陀罗艺术融合了东方希腊化风格、巴克特里亚风格和印度艺术。"
+      }
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "A. Sh. Shahbazi, “Sasanian Dynasty”, Encyclopaedia Iranica (2005; Internet Archive copy)",
+        "zh": "A. Sh. Shahbazi《萨珊王朝》，《伊朗百科全书》（2005；互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/sasanian-dynasty",
+      "note": {
+        "en": "Ruled from 224 to 650 CE; the last king, Yazdgerd III, died in 651.",
+        "zh": "统治时期为公元 224 至 650 年；末代国王伊嗣俟三世死于 651 年。"
+      }
+    },
+    {
+      "id": "S47",
+      "text": {
+        "en": "E. G. Pulleyblank, “An Shih-kao”, Encyclopaedia Iranica (1989; Internet Archive copy)",
+        "zh": "蒲立本《安世高》，《伊朗百科全书》（1989；互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/an-shih-kao",
+      "note": {
+        "en": "“Said to have arrived in China … in the year 148” and to have translated at Luoyang; “reputedly came from Parthia”; the earliest known translator of Buddhist texts into Chinese.",
+        "zh": "“据说在 148 年来到中国”，在洛阳译经；“据说来自帕提亚（安息）”；是已知最早把佛经译成中文的人。"
+      }
+    },
+    {
+      "id": "S48",
+      "text": {
+        "en": "Mogao Caves, UNESCO World Heritage List no. 440 (Internet Archive copy, 2023), and the 698 stele quoted in The Paper, 27 April 2020",
+        "zh": "莫高窟，联合国教科文组织世界遗产第 440 号（互联网档案馆 2023 年存档），以及澎湃新闻 2020 年 4 月 27 日引用的 698 年碑文"
+      },
+      "url": "https://www.thepaper.cn/newsDetail_forward_7073887",
+      "note": {
+        "en": "UNESCO: “first constructed in 366AD”. The 698 stele (李君修莫高窟佛龛碑): the first cave was cut by the monk Yuezun in the second year of Jianyuan of (Former) Qin, 366.",
+        "zh": "联合国教科文组织：“始建于公元 366 年”。698 年《李君修莫高窟佛龛碑》：“莫高窟者，厥初秦建元二年，有沙门乐僔……造窟一龛”，即 366 年。"
+      }
+    },
+    {
+      "id": "S49",
+      "text": {
+        "en": "“Kumarajiva”, Encyclopaedia Britannica (Internet Archive copy, 2026), and Ching Chao-jung, “Kucha”, Encyclopaedia Iranica (2021)",
+        "zh": "《鸠摩罗什》条，《不列颠百科全书》（互联网档案馆 2026 年存档）；庆昭蓉《龟兹》，《伊朗百科全书》（2021）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.britannica.com/biography/Kumarajiva",
+      "note": {
+        "en": "Kumarajiva of Kucha, captured when Kucha fell in 384, “finally arrived at Chang'an … in 401”.",
+        "zh": "龟兹人鸠摩罗什，384 年龟兹陷落时被俘，“最终在 401 年到达长安”。"
+      }
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "Werner Sundermann, “Mani” and “Manicheism i. General Survey”, Encyclopaedia Iranica (2009; Internet Archive copies)",
+        "zh": "Werner Sundermann《摩尼》《摩尼教之一：概论》，《伊朗百科全书》（2009；互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/manicheism-1-general-survey",
+      "note": {
+        "en": "Mani lived 216–274/277; his ministry ran from about 240; about 762 the Uyghur ruler Bögü Khan adopted Manichaeism, which remained a state religion until the 11th century.",
+        "zh": "摩尼生于 216 年，卒于 274 或 277 年；约 240 年开始传教；约 762 年回鹘牟羽可汗奉摩尼教，此后到 11 世纪一直是国教。"
+      }
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "Procopius, History of the Wars 8.17.1–7, tr. H. B. Dewing (Loeb), LacusCurtius",
+        "zh": "普罗科匹厄斯《战争史》8.17.1–7，Dewing 英译（洛布丛书），LacusCurtius"
+      },
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Procopius/Wars/8C*.html",
+      "note": {
+        "en": "Monks coming from “Serinda” brought silkworm eggs to Byzantium in Justinian's reign. Procopius gives no year; the chapter sits among events of the early 550s.",
+        "zh": "从“赛林达”来的僧人在查士丁尼时把蚕卵带到拜占庭。普罗科匹厄斯没有写年份；这一章前后讲的是 550 年代初的事。"
+      }
+    },
+    {
+      "id": "S52",
+      "text": {
+        "en": "Valerie Hansen, “The Impact of the Silk Road Trade on a Local Community: The Turfan Oasis, 500–800”, in Les Sogdiens en Chine (2005)",
+        "zh": "韩森《丝路贸易对一个地方社会的影响：500–800 年的吐鲁番绿洲》，载《Les Sogdiens en Chine》（2005）"
+      },
+      "url": "https://history.yale.edu/sites/default/files/files/hansen-silk-road-trade.pdf",
+      "note": {
+        "en": "A Sogdian contract of 639 records the sale of a girl from Samarkand to a Chinese Buddhist monk named Zhang for 120 silver coins; the buyer may “beat his slave, maltreat her, tie her up, sell her, hold her hostage, give her as a gift”. Translation: Yoshida, T'oung Pao 89 (2003).",
+        "zh": "639 年的粟特文契约记下一个撒马尔罕女孩被卖给一位姓张的汉人僧人，价 120 枚银币；买主可以“打她、虐待她、捆绑她、转卖她、拿她作抵押、把她送人”。译文见吉田丰《通报》第 89 卷（2003）。"
+      }
+    },
+    {
+      "id": "S53",
+      "text": {
+        "en": "“China, Syriac Christianity in” and “Xi'an”, Gorgias Encyclopedic Dictionary of the Syriac Heritage, electronic edition",
+        "zh": "《叙利亚基督教在中国》《西安》条，《戈尔吉亚斯叙利亚遗产百科辞典》电子版"
+      },
+      "url": "https://gedsh.bethmardutho.org/China-Syriac-Christianity-in",
+      "note": {
+        "en": "The Xi'an Stele, erected in 781 in Syriac and Chinese, begins with the missionary Aluoben's arrival at Chang'an in 635.",
+        "zh": "781 年立的西安碑用叙利亚文和中文刻成，从 635 年传教士阿罗本到达长安讲起。"
+      }
+    },
+    {
+      "id": "S54",
+      "text": {
+        "en": "H. A. R. Gibb, The Arab Conquests in Central Asia (1923), pp. 95–96",
+        "zh": "吉布《阿拉伯人在中亚的征服》（1923），第 95–96 页"
+      },
+      "url": "https://archive.org/details/arabconquestsinc00gibbuoft",
+      "note": {
+        "en": "July 751, near Taraz: the Chinese army with Ferghana troops and the Karluks met the Arab force sent by Abu Muslim under Ziyad b. Salih; the Karluks deserted during the battle and Gao Xianzhi was defeated.",
+        "zh": "751 年 7 月在塔拉兹附近：唐军与拔汗那军、葛逻禄同阿布·穆斯林派出、由齐亚德·本·萨利赫率领的阿拉伯军交战；葛逻禄在战斗中倒戈，高仙芝大败。"
+      }
+    },
+    {
+      "id": "S55",
+      "text": {
+        "en": "Jonathan M. Bloom, “Revolution by the Ream: A History of Paper”, Aramco World 50/3 (1999)",
+        "zh": "Jonathan M. Bloom《成令的革命：纸的历史》，《Aramco World》第 50 卷第 3 期（1999）"
+      },
+      "url": "https://archive.aramcoworld.com/issue/199903/revolution.by.the.ream-a.history.of.paper.htm",
+      "note": {
+        "en": "The story that Chinese prisoners taken at Talas brought papermaking to Samarkand comes from al-Tha'alibi (11th century); paper documents from Mount Mug near Panjikent date to 722–723, decades before the battle.",
+        "zh": "“怛罗斯的中国俘虏把造纸术带到撒马尔罕”之说出自 11 世纪的塔阿利比；片治肯特附近穆格山出土的纸文书写于 722–723 年，比这场战斗早几十年。"
+      }
+    },
+    {
+      "id": "S56",
+      "text": {
+        "en": "Hugh Kennedy, “Baghdad i. Under the Abbasids”, Encyclopaedia Iranica (Internet Archive copy)",
+        "zh": "Hugh Kennedy《巴格达之一：阿拔斯时期》，《伊朗百科全书》（互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2025/https://www.iranicaonline.org/articles/baghdad-i",
+      "note": {
+        "en": "Founded in 145/762 by the second Abbasid caliph, al-Mansur.",
+        "zh": "由阿拔斯王朝第二任哈里发曼苏尔于回历 145 年 / 公元 762 年建立。"
+      }
+    },
+    {
+      "id": "S57",
+      "text": {
+        "en": "Ibn Khurradadhbih, Book of Roads and Kingdoms: “The Routes of the Jewish Merchants”, tr. J. Jacobs (1919), Fordham Internet Medieval Sourcebook",
+        "zh": "伊本·胡尔达兹贝赫《道里邦国志》：“犹太商人的路线”，Jacobs 英译（1919），福特汉姆大学中世纪资料集"
+      },
+      "url": "https://sourcebooks.web.fordham.edu/source/847radanite.asp",
+      "note": {
+        "en": "Jewish merchants travel “from west to east, from east to west”, carrying eunuchs, enslaved women and men, silk, furs and swords east, and musk, aloes, camphor and cinnamon west. Routes: from the land of the Franks by sea to al-Farama, overland to al-Qulzum, by sea to al-Jar and Jeddah and on to Sind, India and China; or by Antioch, al-Jabiya, the Euphrates to Baghdad and the Tigris to al-Ubulla; or overland by Tangier and Kairouan, Egypt, Damascus, Kufa, Baghdad and Basra.",
+        "zh": "犹太商人“从西到东、从东到西”往来，向东运宦官、男女奴隶、丝绸、皮毛和刀剑，向西运麝香、沉香、樟脑和肉桂。路线：从法兰克人的地方坐船到法拉玛，陆路到古勒祖姆，坐船到贾尔和吉达，再到信德、印度和中国；或经安条克、贾比亚，沿幼发拉底河到巴格达，再沿底格里斯河到乌布拉；或陆路经丹吉尔、凯鲁万、埃及、大马士革、库法、巴格达、巴士拉。"
+      }
+    },
+    {
+      "id": "S58",
+      "text": {
+        "en": "C. E. Bosworth, “Ebn Ḵordādbeh”, Encyclopaedia Iranica (Internet Archive copy)",
+        "zh": "C. E. Bosworth《伊本·胡尔达兹贝赫》，《伊朗百科全书》（互联网档案馆存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.iranicaonline.org/articles/ebn-kordadbeh",
+      "note": {
+        "en": "The first version of the book was written about 232/846, a second in 272/885 or after.",
+        "zh": "此书初稿约写于回历 232 年 / 公元 846 年，第二稿在回历 272 年 / 公元 885 年或之后。"
+      }
+    },
+    {
+      "id": "S59",
+      "text": {
+        "en": "“Zanj rebellion”, Encyclopaedia Britannica (Internet Archive copy, 2026)",
+        "zh": "《僧祇人起义》条，《不列颠百科全书》（互联网档案馆 2026 年存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.britannica.com/event/Zanj-rebellion",
+      "note": {
+        "en": "AD 869–883, a revolt of enslaved Black Africans against the Abbasid caliphate; Basran landowners had brought several thousand East Africans (Zanj) to drain the salt marshes east of Basra.",
+        "zh": "公元 869–883 年，被奴役的黑人非洲人反抗阿拔斯王朝的起义；巴士拉的地主把几千名东非人（僧祇）运来排干巴士拉以东的盐沼。"
+      }
+    },
+    {
+      "id": "S60",
+      "text": {
+        "en": "“Printed copy of the Diamond Sutra”, Or.8210/P.2, British Library (Internet Archive copies, 2015 and 2020)",
+        "zh": "《金刚经》印本，Or.8210/P.2，大英图书馆（互联网档案馆 2015、2020 年存档）"
+      },
+      "url": "https://web.archive.org/web/2020/https://www.bl.uk/collection-items/the-diamond-sutra",
+      "note": {
+        "en": "Printed on 11 May 868, “the world's earliest dated, printed book” (the earliest complete survival of one); in 1900 the monk Wang Yuanlu found the sealed cave, closed around the beginning of the 11th century; Aurel Stein brought the sutra to England in 1907.",
+        "zh": "868 年 5 月 11 日印成，“世界上有确切日期的最早印本书”（现存最早的完整一部）；1900 年道士王圆箓发现约 11 世纪初封闭的洞窟；斯坦因 1907 年把它带到英国。"
+      }
+    },
+    {
+      "id": "S61",
+      "text": {
+        "en": "Sam van Schaik, “The Whereabouts of the Tibetan Manuscripts from Dunhuang”, earlytibet.com",
+        "zh": "Sam van Schaik《敦煌藏文写本的去向》，earlytibet.com"
+      },
+      "url": "https://earlytibet.com/about/whereabouts/",
+      "note": {
+        "en": "Paul Pelliot saw the cave in 1908; after his 1909 exhibition in Beijing the remaining Chinese manuscripts were sent to Beijing; other collections are in Paris, London and St Petersburg.",
+        "zh": "伯希和 1908 年到藏经洞；他 1909 年在北京展示后，剩下的中文写本被运往北京；其他收藏在巴黎、伦敦和圣彼得堡。"
+      }
+    },
+    {
+      "id": "S62",
+      "text": {
+        "en": "“Byzantine Empire”, Encyclopaedia Britannica (Internet Archive copy, 2026)",
+        "zh": "《拜占庭帝国》条，《不列颠百科全书》（互联网档案馆 2026 年存档）"
+      },
+      "url": "https://web.archive.org/web/2026/https://www.britannica.com/place/Byzantine-Empire",
+      "note": {
+        "en": "Its people called themselves Romaioi, Romans; “Byzantine Empire” is a term of modern historians.",
+        "zh": "这个国家的人自称 Romaioi，即罗马人；“拜占庭帝国”是近代史学家用的名称。"
+      }
+    },
+    {
+      "id": "S63",
+      "text": {
+        "en": "“Outstanding sites added to UNESCO World Heritage List”, UN News, 26 July 2021",
+        "zh": "《一批杰出遗址列入联合国教科文组织世界遗产名录》，联合国新闻，2021 年 7 月 26 日"
+      },
+      "url": "https://news.un.org/en/story/2021/07/1096462",
+      "note": {
+        "en": "Quanzhou, a great port of the Song and Yuan, “known as Zayton” in Arabic and Western texts, inscribed in July 2021.",
+        "zh": "宋元大港泉州，阿拉伯和西方文献称之为“刺桐”，2021 年 7 月列入名录。"
+      }
+    },
+    {
+      "id": "S64",
+      "text": {
+        "en": "D. Bramoullé, review of Goitein and Friedman, India Traders of the Middle Ages (Brill, 2007), BCAI 24 (2008); Princeton Geniza Project, T-S 6J4.14 + T-S 18J2.7",
+        "zh": "D. Bramoullé 评 Goitein、Friedman《中世纪的印度商人》（Brill，2007），《BCAI》第 24 期（2008）；普林斯顿吉尼扎项目 T-S 6J4.14 + T-S 18J2.7"
+      },
+      "url": "https://geniza.princeton.edu/en/documents/5438/",
+      "note": {
+        "en": "Abraham Ben Yiju of al-Mahdiyya in Tunisia went to Egypt and Aden and lived for years in India (Mangalore); about 80 documents dated 1133–1156, among them letters from his Aden partner Madmun b. Hasan (Aden, about the 1130s).",
+        "zh": "突尼斯马赫迪亚的亚伯拉罕·本·伊居先到埃及、亚丁，后来在印度（门格洛尔）住了多年；约 80 件文书，年代 1133–1156，其中有他在亚丁的合伙人马德蒙写给他的信（亚丁，约 1130 年代）。"
+      }
+    },
+    {
+      "id": "S65",
+      "text": {
+        "en": "The Secret History of the Mongols, tr. I. de Rachewiltz, shorter version ed. J. C. Street (Western CEDAR, 2015), §202",
+        "zh": "《蒙古秘史》，罗依果英译，J. C. Street 编简本（Western CEDAR，2015），第 202 节"
+      },
+      "url": "https://cedar.wwu.edu/cedarbooks/4",
+      "note": {
+        "en": "“In the Year of the Tiger (1206) they all gathered at the source of the Onan River” and gave Chinggis the title of khan.",
+        "zh": "“虎年（1206）他们聚集在斡难河源头”，尊成吉思为汗。"
+      }
+    },
+    {
+      "id": "S66",
+      "text": {
+        "en": "Juvaini, The History of the World-Conqueror, tr. J. A. Boyle (1958), vol. 1",
+        "zh": "志费尼《世界征服者史》，波义耳英译（1958），第 1 卷"
+      },
+      "url": "https://archive.org/details/historyoftheworl011691mbp",
+      "note": {
+        "en": "pp. 78–80: about 450 Muslim merchants sent by Chinggis Khan were seized at Otrar by its governor Inalchuq and killed. pp. 163–164: after Merv fell (February 1221) a count over 13 days gave “more than one million three hundred thousand” dead. pp. 176–177: Nishapur stormed in April 1221; 400 craftsmen spared and carried off.",
+        "zh": "第 78–80 页：成吉思汗派出的约 450 名穆斯林商人在讹答剌被守将亦纳勒术扣押杀害。第 163–164 页：梅尔夫陷落后（1221 年 2 月）十三天清点出“一百三十多万”死者。第 176–177 页：1221 年 4 月攻破内沙布尔，只留下 400 名工匠带走。"
+      }
+    },
+    {
+      "id": "S67",
+      "text": {
+        "en": "V. V. Barthold, Turkestan Down to the Mongol Invasion, 2nd ed. (1928), pp. 397–404",
+        "zh": "巴托尔德《蒙古入侵时期的突厥斯坦》第 2 版（1928），第 397–404 页"
+      },
+      "url": "https://archive.org/details/turkestan-down-to-the-mongol-invasion",
+      "note": {
+        "en": "Dates the Otrar killings to 1218 and the siege of Otrar to about September 1219; the sources disagree on whether the sultan ordered the killing.",
+        "zh": "把讹答剌事件定在 1218 年，围攻讹答剌约在 1219 年 9 月；史料对是否由苏丹下令说法不一。"
+      }
+    },
+    {
+      "id": "S68",
+      "text": {
+        "en": "D. O. Morgan, “Mongols”, Encyclopaedia of Islam, 2nd ed., vol. VII (Brill, 1993), pp. 231–232",
+        "zh": "D. O. Morgan《蒙古人》，《伊斯兰百科全书》第 2 版第 7 卷（Brill，1993），第 231–232 页"
+      },
+      "url": "https://archive.org/details/mongols-ei",
+      "note": {
+        "en": "“Staggeringly high figures are quoted” (Nishapur 1,747,000 according to Sayfi) and “should not be interpreted literally”. Baghdad 1258: Hamd Allah Mustawfi's 800,000 “seems improbably high”; Hülegü himself, in a letter to Louis IX, claimed more than 200,000.",
+        "zh": "史料“给出高得惊人的数字”（赛菲记内沙布尔 1,747,000 人），“不应照字面理解”。巴格达 1258 年：穆斯塔菲的 80 万“高得不可信”；旭烈兀本人在给路易九世的信中说超过 20 万。"
+      }
+    },
+    {
+      "id": "S69",
+      "text": {
+        "en": "William of Rubruck, The Journey to the Eastern Parts of the World, 1253–55, tr. W. W. Rockhill (Hakluyt Society, 1900)",
+        "zh": "鲁布鲁克《东行纪》（1253–1255），柔克义英译（哈克卢特学会，1900）"
+      },
+      "url": "https://archive.org/details/journeyofwilliam00ruys",
+      "note": {
+        "en": "pp. xlv–xlvi: itinerary (Constantinople, Soldaia, the Don, Batu's camp on the Volga, Möngke's camp, Karakorum April–July 1254; back by Sarai, Derbent, Nakhchivan, Sivas, Kayseri, Konya, Antioch, Tripoli 1255). p. 221: Karakorum has a Muslim quarter, a quarter of Chinese craftsmen, twelve temples and one church. pp. 177, 222–223: William Buchier, a goldsmith of Paris, captured at Belgrade in Hungary.",
+        "zh": "第 xlv–xlvi 页：行程（君士坦丁堡、苏达克、顿河、伏尔加河上拔都的营地、蒙哥的营地，1254 年 4–7 月在哈剌和林；经萨莱、杰尔宾特、纳希切万、锡瓦斯、开塞利、科尼亚、安条克，1255 年到的黎波里）。第 221 页：哈剌和林有穆斯林区、汉人工匠区、十二座庙和一座教堂。第 177、222–223 页：巴黎金匠威廉·布歇，在匈牙利的贝尔格莱德被俘。"
+      }
+    },
+    {
+      "id": "S70",
+      "text": {
+        "en": "C. J. Halperin, “The Kipchak connection: the Ilkhans, the Mamluks and Ayn Jalut”, Bulletin of SOAS 63.2 (2000): 229–245",
+        "zh": "C. J. Halperin《钦察的联系：伊利汗、马穆鲁克与艾因扎鲁特》，《亚非学院学报》第 63 卷第 2 期（2000）：229–245"
+      },
+      "url": "https://www.cambridge.org/core/journals/bulletin-of-the-school-of-oriental-and-african-studies/article/abs/kipchak-connection-the-ilkhans-the-mamluks-and-ayn-jalut1/95CA669377F7D15E8E37321478960B96",
+      "note": {
+        "en": "In 1260 an Egyptian Mamluk army under Sultan Qutuz defeated a Mongol army of the Ilkhanate at Ayn Jalut; many Mamluks were Kipchaks bought from the steppe.",
+        "zh": "1260 年，苏丹忽都斯率领的埃及马穆鲁克军在艾因扎鲁特击败伊利汗国的蒙古军；许多马穆鲁克是从草原买来的钦察人。"
+      }
+    },
+    {
+      "id": "S71",
+      "text": {
+        "en": "J. Fontaine, review of Hannah Barker, That Most Precious Merchandise: The Mediterranean Trade in Black Sea Slaves, 1260–1500 (UPenn Press, 2019), Reviews in History no. 2394 (2020)",
+        "zh": "J. Fontaine 评 Hannah Barker《最珍贵的货物：1260–1500 年地中海的黑海奴隶贸易》（宾夕法尼亚大学出版社，2019），《Reviews in History》第 2394 号（2020）"
+      },
+      "url": "https://reviews.history.ac.uk/review/2394/print",
+      "note": {
+        "en": "From about 1260 to 1500 Genoese merchants at Caffa and Venetians at Tana bought captives from the Black Sea region; many were sold to the Mamluk Sultanate as slave soldiers or servants, others to Italy; Mamluk sultans and amirs owned tens of thousands.",
+        "zh": "约 1260 至 1500 年，卡法的热那亚商人和塔纳的威尼斯商人从黑海地区买入俘虏；许多人被卖到马穆鲁克苏丹国当奴隶兵或仆役，也有的卖到意大利；马穆鲁克苏丹和埃米尔拥有的奴隶以万计。"
+      }
+    },
+    {
+      "id": "S72",
+      "text": {
+        "en": "Marco Polo, The Book of Ser Marco Polo, tr. H. Yule, rev. H. Cordier, 3rd ed. (1903), vols 1–2",
+        "zh": "《马可·波罗行纪》，玉尔英译、考狄修订，第 3 版（1903），第 1–2 卷"
+      },
+      "url": "https://www.gutenberg.org/ebooks/10636",
+      "note": {
+        "en": "The Polos left Acre about November 1271 and reached Khubilai at his summer capital (Yule reckons 1275). The outward stops named include Layas, Badakhshan, Kashgar, Yarkand, Khotan, Lop, Sachiu (Dunhuang), Campichu (Ganzhou) and Kemenfu (Shangdu). Going home, Marco “was detained five months by the weather” at Samara on Sumatra; Yule thinks they sailed from Zayton (Quanzhou) early in 1292; back in Venice in 1295. Yule warns that the book's dates are often corrupt.",
+        "zh": "波罗一家约 1271 年 11 月离开阿卡，在上都见到忽必烈（玉尔推为 1275 年）。去程书中写到的地方有刺牙思、巴达哈伤、可失合儿、鸭儿看、忽炭、罗卜、沙州、甘州、开平府（上都）。回程马可“因天气被留了五个月”，在苏门答腊的萨马拉；玉尔认为他们约在 1292 年初从刺桐（泉州）出海；1295 年回到威尼斯。玉尔提醒书中日期常有讹误。"
+      }
+    },
+    {
+      "id": "S73",
+      "text": {
+        "en": "D. O. Morgan, “Marco Polo in China: or not”, Journal of the Royal Asiatic Society 6.2 (1996): 221–225, reviewing Frances Wood, Did Marco Polo Go to China? (1995)",
+        "zh": "D. O. Morgan《马可·波罗到过中国吗》，《皇家亚洲学会会刊》第 6 卷第 2 期（1996）：221–225，评吴芳思《马可·波罗到过中国吗？》（1995）"
+      },
+      "note": {
+        "en": "Wood's 1995 book questioned whether Marco Polo reached China.",
+        "zh": "吴芳思 1995 年的书怀疑马可·波罗是否到过中国。"
+      }
+    },
+    {
+      "id": "S74",
+      "text": {
+        "en": "University of Tübingen press release, 16 April 2012, on Hans Ulrich Vogel, Marco Polo Was in China (Brill, 2013)",
+        "zh": "图宾根大学新闻稿（2012 年 4 月 16 日），介绍傅汉思《马可·波罗到过中国》（Brill，2013）"
+      },
+      "url": "https://uni-tuebingen.de/uploads/media/12-04-16MarcoPoloengl.pdf",
+      "note": {
+        "en": "Vogel's study of Polo's accounts of paper money, salt production and revenues argues that he was in China.",
+        "zh": "傅汉思研究马可·波罗关于纸币、盐业和税收的记载，认为他确实到过中国。"
+      }
+    },
+    {
+      "id": "S75",
+      "text": {
+        "en": "E. A. Wallis Budge, The Monks of Kûblâi Khân, Emperor of China (1928)",
+        "zh": "E. A. Wallis Budge《忽必烈汗的僧侣》（1928）"
+      },
+      "url": "https://archive.org/details/monksofkublaikha0000eawa",
+      "note": {
+        "en": "Rabban Sauma's parents lived in Khanbaliq (Beijing). Sent by the Ilkhan Arghun in 1287–88, he went to Constantinople, Naples, Rome, Genoa, Paris (Philip IV) and Gascony, where he met Edward I of England; he wintered in Genoa and was received by Pope Nicholas IV in Rome at Easter 1288. The Gascon city is thought to be Bordeaux (Chabot). His return route is not known.",
+        "zh": "拉班·扫马的父母住在汗八里（北京）。1287–1288 年受伊利汗阿鲁浑派遣西行，到君士坦丁堡、那不勒斯、罗马、热那亚、巴黎（腓力四世）和加斯科涅，在那里见到英王爱德华一世；在热那亚过冬，1288 年复活节在罗马受教宗尼古拉四世接见。加斯科涅的那座城一般认为是波尔多（Chabot）。回程路线不详。"
+      }
+    },
+    {
+      "id": "S76",
+      "text": {
+        "en": "Francesco Pegolotti, La pratica della mercatura (about 1340), in H. Yule, Cathay and the Way Thither, ed. H. Cordier, vol. 3 (1914), pp. 146–153",
+        "zh": "裴哥罗梯《通商指南》（约 1340），载玉尔《东域纪程录丛》考狄编第 3 卷（1914），第 146–153 页"
+      },
+      "url": "https://archive.org/details/cathaywaythither03yule",
+      "note": {
+        "en": "“The road you travel from Tana to Cathay is perfectly safe, whether by day or by night, according to what the merchants say who have used it.” Stops: Tana, Gintarchan (Astrakhan), Sara (Sarai), Saracanco (Saraichik), Organci (Urgench), Oltrarre (Otrar), Armalec (Almaliq), Camexu (Ganzhou), Cassai (Hangzhou), Gamalec (Khanbaliq).",
+        "zh": "“从塔纳到契丹的路，据走过的商人说，日夜都十分安全。”站点：塔纳、阿斯特拉罕、萨莱、萨莱奇克、乌尔根奇、讹答剌、阿力麻里、甘州、行在（杭州）、汗八里。"
+      }
+    },
+    {
+      "id": "S77",
+      "text": {
+        "en": "Ibn Battuta, travels in China, in H. Yule, Cathay and the Way Thither, ed. H. Cordier, vol. 4 (1916)",
+        "zh": "伊本·白图泰的中国游记，载玉尔《东域纪程录丛》考狄编第 4 卷（1916）"
+      },
+      "url": "https://archive.org/details/cathaywaythither04yule",
+      "note": {
+        "en": "He sailed from the kingdom of Sumatra (Samudra-Pasai); “the first Chinese city that I reached after crossing the sea was Zaitun” (Quanzhou). Yule notes his dates are out by at least a year: about 1345–46.",
+        "zh": "他从苏门答剌（须文答剌—巴赛）启航，“渡海后我到的第一座中国城市是刺桐”（泉州）。玉尔说他的年代至少错了一年：约 1345–1346 年。"
+      }
+    },
+    {
+      "id": "S78",
+      "text": {
+        "en": "W. W. Rockhill, “Notes on the Relations and Trade of China with the Eastern Archipelago”, T'oung Pao 16 (1915), part II, pp. 129–132",
+        "zh": "柔克义《中国与东方群岛的关系和贸易札记》，《通报》第 16 卷（1915）第二部分，第 129–132 页"
+      },
+      "url": "https://archive.org/details/notes-on-the-relations-and-trade-of-china-with-the-eastern-archipelago_II",
+      "note": {
+        "en": "Wang Dayuan describes Longyamen (the Singapore Strait) and Danmaxi (Temasek); the people there lived by plundering Quanzhou junks on their way home.",
+        "zh": "汪大渊记龙牙门（新加坡海峡）和单马锡；那里的人靠劫掠回航的泉州船为生。"
+      }
+    },
+    {
+      "id": "S79",
+      "text": {
+        "en": "M. A. Spyrou et al., “The source of the Black Death in fourteenth-century central Eurasia”, Nature 606 (2022): 718–724 (open access, PMC9217749)",
+        "zh": "M. A. Spyrou 等《十四世纪中亚：黑死病的源头》，《自然》第 606 卷（2022）：718–724（开放获取，PMC9217749）"
+      },
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9217749/",
+      "note": {
+        "en": "Gravestones of 1338–1339 at the Kara-Djigach and Burana cemeteries in the Chüy Valley near Lake Issyk-Kul give “pestilence” as the cause of death; ancient DNA of three people from Kara-Djigach held Yersinia pestis. How plague then reached the west is unknown.",
+        "zh": "伊塞克湖附近楚河谷的卡拉-吉加奇和布拉纳墓地，1338–1339 年的墓碑写着死于“瘟疫”；卡拉-吉加奇三人的古 DNA 里有鼠疫杆菌。此后瘟疫怎样传到西方，仍不清楚。"
+      }
+    },
+    {
+      "id": "S80",
+      "text": {
+        "en": "Mark Wheelis, “Biological warfare at the 1346 siege of Caffa”, Emerging Infectious Diseases 8(9) (2002): 971–975",
+        "zh": "Mark Wheelis《1346 年卡法围城中的生物战》，《新发传染病》第 8 卷第 9 期（2002）：971–975"
+      },
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2732530/",
+      "note": {
+        "en": "Gabriele de' Mussi wrote that the besiegers threw corpses into the city; Wheelis thinks this probably spread the disease in Caffa, but that it had “no more than anecdotal importance” for the spread of plague, which travelled on many ships and caravans.",
+        "zh": "德穆西写围城者把尸体抛进城里；Wheelis 认为这大概把病带进了卡法城，但对瘟疫的传播“只有轶事般的意义”，瘟疫是随许多船和商队传开的。"
+      }
+    },
+    {
+      "id": "S81",
+      "text": {
+        "en": "R. Jedwab, N. D. Johnson and M. Koyama, “The Economic Impact of the Black Death”, GWU IIEP working paper 2020-14 (published in Journal of Economic Literature 60, 2022)",
+        "zh": "R. Jedwab、N. D. Johnson、M. Koyama《黑死病的经济影响》，乔治华盛顿大学 IIEP 工作论文 2020-14（刊于《经济文献杂志》第 60 卷，2022）"
+      },
+      "url": "http://www2.gwu.edu/~iiep/assets/docs/papers/2020WP/JedwabIIEP2020-14.pdf",
+      "note": {
+        "en": "In October 1347 ships from Caffa reached Messina. Mortality: “between 40-60%” (citing Benedictow 2005); a population-weighted average over 274 localities gives 38.9%; Benedictow's high estimates are 55–62.5% for several countries.",
+        "zh": "1347 年 10 月，从卡法来的船到了墨西拿。死亡率“在 40% 到 60% 之间”（引 Benedictow 2005）；274 个地方按人口加权平均为 38.9%；Benedictow 对几个国家的高估计在 55% 到 62.5%。"
+      }
+    },
+    {
+      "id": "S82",
+      "text": {
+        "en": "Stuart Borsch, “Plague Depopulation and Irrigation Decay in Medieval Egypt”, The Medieval Globe 1 (2014): 125–156",
+        "zh": "Stuart Borsch《中世纪埃及的瘟疫减员与灌溉衰败》，《The Medieval Globe》第 1 卷（2014）：125–156"
+      },
+      "url": "https://voices.uchicago.edu/lexiconproject/files/2021/10/borsch_depopulation.pdf",
+      "note": {
+        "en": "In 1347 the plague in Egypt began with a ship full of corpses drifting into Alexandria (al-Maqrizi); at its peak around December 1348 about 7,000 people a day were reported dying in Cairo; Dols estimated Egypt lost about a third of its people, Borsch argues more.",
+        "zh": "1347 年埃及的瘟疫从一艘满载尸体的船漂进亚历山大港开始（马克里齐）；1348 年 12 月前后高峰时，据报开罗每天约有 7,000 人死去；Dols 估计埃及失去约三分之一人口，Borsch 认为更多。"
+      }
+    },
+    {
+      "id": "S83",
+      "text": {
+        "en": "“The Black Death and the Jews 1348–1349”, Fordham Internet Medieval Sourcebook (from J. R. Marcus, The Jew in the Medieval World, 1938), including Jacob von Königshofen's chronicle",
+        "zh": "《黑死病与犹太人，1348–1349》，福特汉姆大学中世纪资料集（取自 J. R. Marcus《中世纪世界中的犹太人》，1938），含雅各布·冯·柯尼希斯霍芬的编年史"
+      },
+      "url": "https://sourcebooks.fordham.edu/jewish/1348-jewsblackdeath.asp",
+      "note": {
+        "en": "On Saturday, St Valentine's Day (14 February 1349), the Jews of Strasbourg were burned in their cemetery: “about two thousand people”, according to the chronicle; the chronicler adds that their money was the reason they were killed.",
+        "zh": "1349 年 2 月 14 日（圣瓦伦丁节，星期六），斯特拉斯堡的犹太人在他们的墓地被烧死，编年史说“约两千人”；作者还写道，他们被杀是因为他们的钱。"
+      }
+    },
+    {
+      "id": "S84",
+      "text": {
+        "en": "Ann G. Carmichael, “Universal and particular: the language of plague, 1348–1500”, Medical History Supplement 27 (2008): 17–52",
+        "zh": "Ann G. Carmichael《普遍与个别：1348–1500 年的瘟疫用语》，《医学史增刊》第 27 期（2008）：17–52"
+      },
+      "note": {
+        "en": "Survivors spoke of a “universal plague”, “universal pestilence” or “general mortality”; “Black Death” is a later name.",
+        "zh": "当时的人说“普遍的瘟疫”“普遍的疫病”“大死亡”；“黑死病”是后来的名字。"
+      }
+    },
+    {
+      "id": "S85",
+      "text": {
+        "en": "Monica H. Green, “Taking ‘Pandemic’ Seriously: Making the Black Death Global”, The Medieval Globe 1 (2014): 27–61, p. 46",
+        "zh": "Monica H. Green《认真对待“大流行”：让黑死病成为全球史》，《The Medieval Globe》第 1 卷（2014）：27–61，第 46 页"
+      },
+      "url": "https://scholarworks.wmich.edu/tmg/vol1/iss1/4",
+      "note": {
+        "en": "Some historians argue plague cannot be documented in medieval China; Robert Hymes argues that it can. The question is open.",
+        "zh": "有的史家认为中世纪中国的鼠疫无法证实，韩明士（Robert Hymes）认为可以。问题尚无定论。"
+      }
+    },
+    {
+      "id": "S86",
+      "text": {
+        "en": "Li Bozhong, “The Silk Road in economic history” (经济史上的丝绸之路), aisixiang.com",
+        "zh": "李伯重《经济史上的丝绸之路》，爱思想网"
+      },
+      "url": "https://www.aisixiang.com/data/147586.html",
+      "note": {
+        "en": "“Silk Road” was coined for the overland route; the name “Maritime Silk Road” came later and is a stretch.",
+        "zh": "“丝绸之路”原指陆路；“海上丝绸之路”是后来的说法，“比较牵强”。"
+      }
+    },
+    {
+      "id": "S87",
+      "text": {
+        "en": "Chen Ling, Wasima Talati and Chen Ting, “Archaeology of the Protectorate of the Western Regions: exploration and reflection”, aisixiang.com",
+        "zh": "陈凌、娃斯玛·塔拉提、陈婷《西域都护府考古探索与反思——基于方法论的观察》，爱思想网"
+      },
+      "url": "https://www.aisixiang.com/data/149893.html",
+      "note": {
+        "en": "Wulei, the Protector-General's seat, lay in today's Luntai county; which ruined city it was is still debated after a century of study. The marker stands at the Luntai county point.",
+        "zh": "西域都护府治所乌垒在今轮台县境内；具体是哪座古城，百年来聚讼纷纭。标记放在轮台县的点上。"
+      }
+    },
+    {
+      "id": "S88",
+      "text": {
+        "en": "P.-Y. Manguin, “The Maldives connection: pre-modern Malay World shipping across the Indian Ocean” (Karthala, 2011), opening pages and pp. 271–272",
+        "zh": "P.-Y. Manguin《马尔代夫的联系：前近代马来世界横越印度洋的航运》（Karthala，2011），开篇及第 271–272 页"
+      },
+      "url": "https://maritimeasiaheritage.cseas.kyoto-u.ac.jp/wp-content/uploads/2022/03/Manguin-Pierre-Yves.-2011.-Pre-modern-Malay-World-shipping-across-the-Indian-Ocean.-Civilisations-des-Mondes-Insularies.pdf",
+      "note": {
+        "en": "The large ships of island Southeast Asia plied routes from China to the Middle East; Chinese sources describe them in Chinese harbours from the 3rd century CE; crossing the ocean followed the seasonal winds. (Also used in ancient-civilisations.)",
+        "zh": "海岛东南亚的大船往来于中国到中东的商路；中国文献记载，公元 3 世纪起中国港口已见到这类船；横渡大洋要看季节风。（古文明主题也用此来源。）"
+      }
+    },
+    {
+      "id": "S89",
+      "text": {
+        "en": "Kan Shuyi (Asian Civilisations Museum), “Sunken Treasure: a ninth-century shipwreck”, Roots.gov.sg, National Heritage Board, Singapore",
+        "zh": "Kan Shuyi（亚洲文明博物馆）《沉船宝藏：一艘 9 世纪的沉船》，Roots.gov.sg，新加坡国家文物局"
+      },
+      "url": "https://www.roots.gov.sg/stories-landing/stories/sunken-treasure-a-ninth-century-shipwreck/story",
+      "note": {
+        "en": "Found in 1998 off Belitung; close to 60,000 pieces of Chinese ceramics; sailed in the second quarter of the 9th century (a bowl is dated 826); probably from Yangzhou or Guangzhou; “the earliest Arab vessel” found in Southeast Asian waters; on permanent display at the Asian Civilisations Museum since 2018.",
+        "zh": "1998 年在勿里洞外发现；载近 6 万件中国瓷器；9 世纪第二个 25 年航行（一只碗写有 826 年）；很可能从扬州或广州出发；是在东南亚海域发现的“最早的阿拉伯船”；2018 年起在亚洲文明博物馆常设展出。"
+      }
+    },
+    {
+      "id": "S90",
+      "text": {
+        "en": "“Srivijaya empire”, Encyclopaedia Britannica (Internet Archive copy, 2024)",
+        "zh": "《室利佛逝帝国》条，《不列颠百科全书》（互联网档案馆 2024 年存档）"
+      },
+      "url": "https://web.archive.org/web/2024/https://www.britannica.com/place/Srivijaya-empire",
+      "note": {
+        "en": "In 1025 the Chola kingdom “seized Palembang, captured the king and carried off his treasures”. (Also used in ancient-civilisations.)",
+        "zh": "1025 年朱罗“夺取巨港，俘虏国王，掠走财宝”。（古文明主题也用此来源。）"
+      }
+    },
+    {
+      "id": "S91",
+      "text": {
+        "en": "“Dragon's Tooth Strait”, BiblioAsia 10(3) (2014), National Library Board, Singapore",
+        "zh": "《龙牙门》，《BiblioAsia》第 10 卷第 3 期（2014），新加坡国家图书馆管理局"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/vol-10/issue-3/oct-dec-2014/dragons-tooth-strait/",
+      "note": {
+        "en": "Wang Dayuan's account appeared in 1349 as an appendix and in 1350 on its own as Daoyi zhilüe; it names Danmaxi (Temasek) and Longyamen; digs on Fort Canning Hill found gold ornaments, coins and porcelain of the period. (Also used in ancient-civilisations.)",
+        "zh": "汪大渊的记载 1349 年先作为附录出版，1350 年单独刊为《岛夷志略》；书中有“单马锡”和“龙牙门”；福康宁山的发掘出土了那个时代的金饰、钱币和瓷器。（古文明主题也用此来源。）"
+      }
+    },
+    {
+      "id": "S92",
+      "text": {
+        "en": "Sang Nila Utama: Separating Myth from Reality, BiblioAsia 16(2) (2020), National Library Board, Singapore",
+        "zh": "《山尼拉乌他玛：分辨神话与史实》，《BiblioAsia》第 16 卷第 2 期（2020），新加坡国家图书馆管理局"
+      },
+      "url": "https://biblioasia.nlb.gov.sg/all-sections/vol-16-issue-2-jul-sep-2020-sang-nila/",
+      "note": {
+        "en": "The story of Sang Nila Utama founding Singapura is told in the Malay Annals (Sejarah Melayu), a court chronicle; the article separates legend from evidence. (Also used in ancient-civilisations.)",
+        "zh": "山尼拉乌他玛建立新加坡拉的故事出自宫廷编年史《马来纪年》；文章区分了传说与证据。（古文明主题也用此来源。）"
+      }
+    },
+    {
+      "id": "S93",
+      "text": {
+        "en": "Wikidata, coordinate location (P625) of every place on the map, read with scripts/geo/silk-road/points.ts (CC0)",
+        "zh": "维基数据：地图上每个地点的坐标（P625），由 scripts/geo/silk-road/points.ts 读取（CC0）"
+      },
+      "url": "https://www.wikidata.org/",
+      "note": {
+        "en": "One point per place: a city's point stands for the city of today; a region's point is a reference point, not a site (scripts/geo/silk-road/places.json lists each).",
+        "zh": "每个地点一个点：城市点代表今天的城市；地区点只是参照点，不是遗址（scripts/geo/silk-road/places.json 逐条列出）。"
+      }
+    },
+    {
+      "id": "S94",
+      "text": {
+        "en": "“The Sogdian Ancient Letters”, translated with an introduction, Silk Road Seattle, University of Washington",
+        "zh": "《粟特古信札》译文与导言，华盛顿大学 Silk Road Seattle"
+      },
+      "url": "https://depts.washington.edu/silkroad/texts/sogdlet.html",
+      "note": {
+        "en": "Found in 1907 by Aurel Stein in a Chinese watchtower just west of the Jade Gate; most likely written in 313 (–314), though the date is debated. Letter 2: the emperor fled Luoyang because of famine, and “Luoyang (is) no more”. Letters 1 and 3 come from a woman, Miwnay, abandoned in Dunhuang: “I live wretchedly, without clothing, without money”. The letters were probably confiscated by a Chinese garrison.",
+        "zh": "1907 年斯坦因在玉门关以西的一座中国烽燧里发现；最可能写于 313（至 314）年，年代仍有争论。第 2 号信：皇帝因饥荒逃离洛阳，“洛阳已经没有了”。第 1、3 号信出自被留在敦煌的妇女米薇：“没有衣服，没有钱，过得很惨”。这些信大概被中国守军扣下了。"
+      }
+    },
+    {
+      "id": "S95",
+      "text": {
+        "en": "Xin Tangshu (New History of Tang), chapters 5–6, imperial annals (Wikisource text)",
+        "zh": "《新唐书》卷五至卷六《本纪》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/新唐書/卷005",
+      "note": {
+        "en": "天宝十载 (751): 高仙芝及大食战于恒逻斯城，败绩. 天宝十四载十一月 (755): 安禄山反，陷河北诸郡. 广德元年正月 (763): 史朝义自杀, his generals surrender: the end of the rebellion.",
+        "zh": "天宝十载七月“高仙芝及大食战于恒逻斯城，败绩”；天宝十四载十一月“安禄山反，陷河北诸郡”；广德元年正月“史朝义自杀，其将李怀仙以幽州降”，叛乱结束。"
+      }
+    },
+    {
+      "id": "S96",
+      "text": {
+        "en": "Sima Qian, Shiji, chapter 110, “Account of the Xiongnu” (Wikisource text)",
+        "zh": "司马迁《史记》卷一百一十《匈奴列传》（维基文库）"
+      },
+      "url": "https://zh.wikisource.org/wiki/史記/卷110",
+      "note": {
+        "en": "Under the first Han emperor a princess was sent as the chanyu's wife, with fixed yearly gifts of silk floss, silk cloth, wine and grain (岁奉匈奴絮缯酒米食物各有数), to make peace by kinship (和亲); later emperors renewed it.",
+        "zh": "高帝“使刘敬奉宗室女公主为单于阏氏，岁奉匈奴絮缯酒米食物各有数，约为昆弟以和亲”；此后几位皇帝“复与匈奴和亲”。"
+      }
+    },
+    {
+      "id": "S97",
+      "text": {
+        "en": "Isidore of Charax, Parthian Stations, tr. W. H. Schoff (1914), transcription at parthia.com",
+        "zh": "伊西多尔《帕提亚驿程》，Schoff 英译（1914），parthia.com 转录"
+      },
+      "url": "https://www.parthia.com/doc/parthian_stations.htm",
+      "note": {
+        "en": "Stations with distances in schoeni from Zeugma on the Euphrates (Schoff: Birijik) by Nicephorium, Dura Europos, Anatho and Seleucia on the Tigris, Artemita, Bagistana (Behistun), Concobar (Kangavar), Ecbatana (Hamadan) and Rhaga, to Alexandria of the Arii (Herat), Phra (Farah) and Alexandropolis of Arachosia (Kandahar). Schoff dates the work near the turn of the era, after 26 BCE. Stations whose modern place is uncertain are not on the map line.",
+        "zh": "从幼发拉底河边的宙格玛（Schoff：比雷吉克）起，经尼刻福里翁、杜拉欧罗普斯、阿纳托、底格里斯河边的塞琉西亚、阿尔特米塔、巴吉斯塔纳（贝希斯敦）、康科巴（康加瓦尔）、埃克巴坦那（哈马丹）、拉盖，到阿里亚的亚历山大城（赫拉特）、弗拉（法拉）和阿拉霍西亚的亚历山大城（坎大哈），各站之间以“斯科伊诺斯”记距离。Schoff 认为此书写于公元前后、公元前 26 年之后。今地不确定的驿站不连进地图上的线。"
+      }
+    }
+  ]
+}

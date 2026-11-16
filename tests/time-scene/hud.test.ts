@@ -50,6 +50,7 @@ describe('TimeScene topic-wide HUD availability', () => {
     ['warring-states', true, true, true, true],
     ['industrial-revolution', false, false, false, false],
     ['zheng-he', true, false, false, true],
+    ['silk-road', true, true, true, true],
   ] as const)('%s keeps its populated layers and only applicable battle/movement counts', (slug, battles, movements, control, participation) => {
     expect(timeHudAvailability(models.get(slug)!)).toEqual({ battles, movements, control, participants: participation, participation: participation && control, events: true, sites: true });
     for (const locale of ['en', 'zh'] as const) {

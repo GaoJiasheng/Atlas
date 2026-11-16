@@ -100,3 +100,10 @@ export async function prepareDatedLayer(topo: Parameters<typeof decodeLocalLand>
   for (const values of [index.starts, index.ends, index.recentEnds]) values.sort((a, b) => a - b);
   return { collection, index };
 }
+
+/** The KEY swatch of a dated layer: a fill, a point, a solid line or (schematic lines) a dashed one. */
+export function datedLayerLegendKind(def: DatedLayerDef): 'fill' | 'point' | 'line' | 'line-dashed' {
+  if (def.kind === 'area') return 'fill';
+  if (def.kind === 'point') return 'point';
+  return def.certainty === 'approximate' ? 'line-dashed' : 'line';
+}

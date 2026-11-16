@@ -5,7 +5,7 @@ import type { Map as MlMap } from 'maplibre-gl';
 import type { DatedLayerDef } from '../../src/content/schema/topic';
 import type { ThemeTokens } from '../../src/theme/theme';
 import { datedAt, numericDatedWindow } from '../../src/engines/time-scene/lib/dated';
-import { datedLayerFilter, datedLayerState, decodeDatedLayer, indexDatedLayer } from '../../src/engines/time-scene/lib/datedLayers';
+import { datedLayerFilter, datedLayerLegendKind, datedLayerState, decodeDatedLayer, indexDatedLayer } from '../../src/engines/time-scene/lib/datedLayers';
 import { createDatedMapLayer, datedLayerStyles } from '../../src/engines/time-scene/stages/geo/datedLayers';
 import { LAYER } from '../../src/engines/time-scene/stages/geo/style';
 
@@ -134,5 +134,18 @@ describe('dated GPU layers', () => {
     const layers = datedLayerStyles({ ...def, kind: 'line' }, tokens, 'rail-colour', 1980);
     expect(layers).toHaveLength(1);
     expect(layers[0]).toMatchObject({ type: 'line', filter: datedLayerFilter(1980), paint: { 'line-color': 'rail-colour', 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 13, 2.5], 'line-opacity': 0.9 } });
+  });
+
+  it('schematic line layers (certainty: approximate) are dashed and stay readable at plate zoom; the KEY swatch follows', () => {
+    const schematic: DatedLayerDef = { ...def, kind: 'line', certainty: 'approximate' };
+    const layers = datedLayerStyles(schematic, tokens, 'route-colour', 100);
+    expect(layers).toHaveLength(1);
+    expect(layers[0]).toMatchObject({ type: 'line', id: 'ts-dated-blocks-line', filter: datedLayerFilter(100), paint: { 'line-color': 'route-colour', 'line-dasharray': [3, 2], 'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1.4, 13, 2.5], 'line-opacity': 0.9 } });
+    expect(datedLayerLegendKind(schematic)).toBe('line-dashed');
+    expect(datedLayerLegendKind({ ...def, kind: 'line' })).toBe('line');
+    expect(datedLayerLegendKind({ ...def, kind: 'area' })).toBe('fill');
+    expect(datedLayerLegendKind(def)).toBe('point');
+    const errors = validateStyleMin({ version: 8, sources: { 'ts-dated-blocks': { type: 'geojson', data: { type: 'FeatureCollection', features: [] } } }, layers: datedLayerStyles(schematic, tokens, '#336699', 100) } as never);
+    expect(errors).toEqual([]);
   });
 });

@@ -1,0 +1,144 @@
+{
+ "presets": [
+  {
+   "id": "view-steppe-china",
+   "label": {
+    "en": "Steppe and China",
+    "zh": "草原与中国"
+   },
+   "camera": {
+    "center": [
+     100,
+     40
+    ],
+    "zoom": 3.6
+   }
+  },
+  {
+   "id": "view-tarim",
+   "label": {
+    "en": "Tarim Basin",
+    "zh": "塔里木盆地"
+   },
+   "camera": {
+    "center": [
+     83,
+     40
+    ],
+    "zoom": 5.0
+   }
+  },
+  {
+   "id": "view-sogdiana",
+   "label": {
+    "en": "Sogdiana",
+    "zh": "粟特"
+   },
+   "camera": {
+    "center": [
+     68,
+     40
+    ],
+    "zoom": 5.4
+   }
+  },
+  {
+   "id": "view-iran",
+   "label": {
+    "en": "Iran",
+    "zh": "伊朗"
+   },
+   "camera": {
+    "center": [
+     50,
+     34
+    ],
+    "zoom": 4.4
+   }
+  },
+  {
+   "id": "view-mediterranean",
+   "label": {
+    "en": "Mediterranean",
+    "zh": "地中海"
+   },
+   "camera": {
+    "center": [
+     26,
+     37
+    ],
+    "zoom": 4.6
+   }
+  },
+  {
+   "id": "view-black-sea",
+   "label": {
+    "en": "Black Sea",
+    "zh": "黑海"
+   },
+   "camera": {
+    "center": [
+     36,
+     45
+    ],
+    "zoom": 5.0
+   }
+  },
+  {
+   "id": "view-mongolia",
+   "label": {
+    "en": "Mongolia",
+    "zh": "蒙古高原"
+   },
+   "camera": {
+    "center": [
+     104,
+     46.5
+    ],
+    "zoom": 4.6
+   }
+  },
+  {
+   "id": "view-india",
+   "label": {
+    "en": "India",
+    "zh": "印度"
+   },
+   "camera": {
+    "center": [
+     78,
+     18
+    ],
+    "zoom": 4.0
+   }
+  },
+  {
+   "id": "view-straits",
+   "label": {
+    "en": "Straits",
+    "zh": "马六甲海峡"
+   },
+   "camera": {
+    "center": [
+     102.8,
+     1.9
+    ],
+    "zoom": 5.6
+   }
+  },
+  {
+   "id": "view-south-china-sea",
+   "label": {
+    "en": "South China Sea",
+    "zh": "南海"
+   },
+   "camera": {
+    "center": [
+     112,
+     15
+    ],
+    "zoom": 4.4
+   }
+  }
+ ]
+}

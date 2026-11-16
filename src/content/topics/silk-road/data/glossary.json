@@ -1,0 +1,159 @@
+{
+ "terms": [
+  {
+   "id": "term-silk-roads",
+   "term": {
+    "en": "Silk Roads",
+    "zh": "丝绸之路"
+   },
+   "definition": {
+    "en": "A name made popular in the 19th century for the many land and sea routes that linked Asia, Europe and Africa. Far more than silk travelled on them.",
+    "zh": "19 世纪以后流行起来的名字，指连接亚洲、欧洲和非洲的许多条陆路和海路。路上运的远不止丝绸。"
+   },
+   "see": [
+    "term-maritime-silk-road"
+   ]
+  },
+  {
+   "id": "term-maritime-silk-road",
+   "term": {
+    "en": "Maritime Silk Road",
+    "zh": "海上丝绸之路"
+   },
+   "definition": {
+    "en": "The sea trade routes that linked East Asia, Southeast Asia, South Asia, Arabia and East Africa. Ships carried much more than silk, and the name was given in modern times.",
+    "zh": "把东亚、东南亚、南亚、阿拉伯和东非连在一起的海上贸易路线。船上运的远不止丝绸；这个名字是近代才起的。"
+   },
+   "see": [
+    "term-monsoon"
+   ]
+  },
+  {
+   "id": "term-monsoon",
+   "term": {
+    "en": "Monsoon",
+    "zh": "季风"
+   },
+   "definition": {
+    "en": "A large wind system that changes direction with the seasons. Sailing ships timed their voyages out and back by it.",
+    "zh": "随季节改变方向的大范围的风。帆船按季风安排出航和返航的时间。"
+   }
+  },
+  {
+   "id": "term-oasis",
+   "term": {
+    "en": "Oasis",
+    "zh": "绿洲"
+   },
+   "definition": {
+    "en": "A place in a desert with enough water for people to farm and live.",
+    "zh": "沙漠中有足够的水、人可以耕种和居住的地方。"
+   },
+   "see": [
+    "term-caravan"
+   ]
+  },
+  {
+   "id": "term-caravan",
+   "term": {
+    "en": "Caravan",
+    "zh": "商队"
+   },
+   "definition": {
+    "en": "A group of traders travelling together with camels, horses or donkeys to carry goods over long distances.",
+    "zh": "结伴用骆驼、马或驴长途驮运货物的一群商人。"
+   }
+  },
+  {
+   "id": "term-western-regions",
+   "term": {
+    "en": "Western Regions",
+    "zh": "西域"
+   },
+   "definition": {
+    "en": "The name Chinese histories from the Han onwards used for the lands west of the Yumen and Yang passes. Many separate states lay there, each with its own ruler.",
+    "zh": "汉代以后中国史书对玉门关、阳关以西地区的称呼。那里有许多各自独立、各有君主的国家。"
+   },
+   "see": [
+    "term-protector-general"
+   ]
+  },
+  {
+   "id": "term-protector-general",
+   "term": {
+    "en": "Protector-General",
+    "zh": "都护"
+   },
+   "definition": {
+    "en": "The highest Han official in the Western Regions, first appointed in 60 BCE.",
+    "zh": "汉朝在西域设置的最高长官，公元前 60 年首次设置。"
+   }
+  },
+  {
+   "id": "term-sogdians",
+   "term": {
+    "en": "Sogdians",
+    "zh": "粟特人"
+   },
+   "definition": {
+    "en": "A people of Central Asia from the region around Samarkand. Sogdian merchants travelled and lived as far east as China.",
+    "zh": "中亚的一个民族，来自撒马尔罕一带。粟特商人一直走到中国，也在那里居住。"
+   }
+  },
+  {
+   "id": "term-church-of-the-east",
+   "term": {
+    "en": "Church of the East",
+    "zh": "东方教会"
+   },
+   "definition": {
+    "en": "A Christian church whose missionaries reached China in the 7th century. The Tang called it Jingjiao.",
+    "zh": "一个基督教会，7 世纪它的传教士到达中国。唐代称之为“景教”。"
+   }
+  },
+  {
+   "id": "term-manichaeism",
+   "term": {
+    "en": "Manichaeism",
+    "zh": "摩尼教"
+   },
+   "definition": {
+    "en": "A religion founded by Mani in Sasanian Iran in the 3rd century. It spread east; the Uyghur rulers adopted it in the 8th century.",
+    "zh": "3 世纪摩尼在萨珊伊朗创立的宗教，后来向东传播，8 世纪回鹘统治者皈依了它。"
+   }
+  },
+  {
+   "id": "term-caliphate",
+   "term": {
+    "en": "Caliphate",
+    "zh": "哈里发国"
+   },
+   "definition": {
+    "en": "A state ruled by a caliph, a successor of the Prophet Muhammad as leader of the Muslim community.",
+    "zh": "由哈里发统治的国家。哈里发是先知穆罕默德的继承者、穆斯林社群的领袖。"
+   }
+  },
+  {
+   "id": "term-khanate",
+   "term": {
+    "en": "Khanate",
+    "zh": "汗国"
+   },
+   "definition": {
+    "en": "A state ruled by a khan. In the 13th and 14th centuries Mongol rulers held several khanates, among them the Golden Horde, the Chagatai khanate and the Ilkhanate.",
+    "zh": "由可汗统治的国家。13、14 世纪，蒙古统治者分据几个汗国，其中有金帐汗国、察合台汗国和伊利汗国。"
+   }
+  },
+  {
+   "id": "term-plague",
+   "term": {
+    "en": "Plague",
+    "zh": "鼠疫"
+   },
+   "definition": {
+    "en": "A disease caused by the bacterium Yersinia pestis. The great pandemic of the 1340s was later called the Black Death.",
+    "zh": "由鼠疫杆菌引起的疾病。14 世纪 40 年代的大流行，后来被称为“黑死病”。"
+   }
+  }
+ ]
+}

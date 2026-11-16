@@ -86,6 +86,19 @@ describe('persist (a built line: pipelines, docs/24 C2-lite)', () => {
     expect(parse({ persist: true }).success).toBe(true);
     expect(parse({ persist: true, linger: '2000-04-01' }).success).toBe(false);
   });
+
+  it('accepts only `approximate` as a movement certainty (a schematic route)', () => {
+    const parse = (extra: Record<string, unknown>) =>
+      timeSceneGeoData.safeParse({
+        entities,
+        control,
+        events: [],
+        sources,
+        movements: [{ id: 'm', from: '2000-02-01', to: '2000-03-01', holder: 'north-sample', label: { en: 'M', zh: 'M' }, kind: 'land', path: { type: 'LineString', coordinates: [[0, 0], [1, 1]] }, ...extra }],
+      });
+    expect(parse({ certainty: 'approximate' }).success).toBe(true);
+    expect(parse({ certainty: 'certain' }).success).toBe(false);
+  });
 });
 
 function modelWith(movement: Record<string, unknown>) {

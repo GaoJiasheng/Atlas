@@ -1,0 +1,777 @@
+{
+  "_comment": "Machine version of docs/73 §2.3 after the G0 inventory (INVENTORY.md). Each holder takes the Cliopatria v0.2.1 records named here whose FromYear <= year <= ToYear (README: inclusive); `memberOf` takes every record with that MemberOf value. Order = paint order in compose.ts (later wins where two overlap). A year no record covers borrows the nearest record within 50 years (inventory.ts says which).",
+  "release": "v0.2.1",
+  "frames": [
+    {
+      "id": "K1",
+      "t": "-0138",
+      "holders": [
+        {
+          "holder": "han",
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          },
+          "names": [
+            "Han Dynasty"
+          ]
+        },
+        {
+          "holder": "xiongnu",
+          "label": {
+            "en": "Xiongnu",
+            "zh": "匈奴"
+          },
+          "names": [
+            "Xiongnu"
+          ]
+        },
+        {
+          "holder": "parthia",
+          "label": {
+            "en": "Parthian Empire",
+            "zh": "帕提亚（安息）"
+          },
+          "names": [
+            "Parthian Empire"
+          ]
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          },
+          "names": [
+            "Roman Republic",
+            "Roman Empire",
+            "Western Roman Empire",
+            "Eastern Roman Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K2",
+      "t": "-0060",
+      "holders": [
+        {
+          "holder": "han",
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          },
+          "names": [
+            "Han Dynasty"
+          ]
+        },
+        {
+          "holder": "xiongnu",
+          "label": {
+            "en": "Xiongnu",
+            "zh": "匈奴"
+          },
+          "names": [
+            "Xiongnu"
+          ]
+        },
+        {
+          "holder": "parthia",
+          "label": {
+            "en": "Parthian Empire",
+            "zh": "帕提亚（安息）"
+          },
+          "names": [
+            "Parthian Empire"
+          ]
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Republic",
+            "zh": "罗马共和国"
+          },
+          "names": [
+            "Roman Republic",
+            "Roman Empire",
+            "Western Roman Empire",
+            "Eastern Roman Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K3",
+      "t": "0050",
+      "holders": [
+        {
+          "holder": "han",
+          "label": {
+            "en": "Han",
+            "zh": "汉"
+          },
+          "names": [
+            "Han Dynasty"
+          ]
+        },
+        {
+          "holder": "xiongnu",
+          "label": {
+            "en": "Xiongnu",
+            "zh": "匈奴"
+          },
+          "names": [
+            "Xiongnu"
+          ]
+        },
+        {
+          "holder": "kushan",
+          "label": {
+            "en": "Kushan Empire",
+            "zh": "贵霜"
+          },
+          "names": [
+            "Kushan Empire",
+            "Eastern Kushans",
+            "Western Kushans"
+          ]
+        },
+        {
+          "holder": "parthia",
+          "label": {
+            "en": "Parthian Empire",
+            "zh": "帕提亚（安息）"
+          },
+          "names": [
+            "Parthian Empire"
+          ]
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          },
+          "names": [
+            "Roman Republic",
+            "Roman Empire",
+            "Western Roman Empire",
+            "Eastern Roman Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K4",
+      "t": "0240",
+      "holders": [
+        {
+          "holder": "sasanian",
+          "label": {
+            "en": "Sasanian Empire",
+            "zh": "萨珊"
+          },
+          "names": [
+            "Sasanian Empire"
+          ]
+        },
+        {
+          "holder": "kushan",
+          "label": {
+            "en": "Kushan Empire",
+            "zh": "贵霜"
+          },
+          "names": [
+            "Kushan Empire",
+            "Eastern Kushans",
+            "Western Kushans"
+          ]
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire",
+            "zh": "罗马帝国"
+          },
+          "names": [
+            "Roman Republic",
+            "Roman Empire",
+            "Western Roman Empire",
+            "Eastern Roman Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K5",
+      "t": "0400",
+      "holders": [
+        {
+          "holder": "sasanian",
+          "label": {
+            "en": "Sasanian Empire",
+            "zh": "萨珊"
+          },
+          "names": [
+            "Sasanian Empire"
+          ]
+        },
+        {
+          "holder": "gupta",
+          "label": {
+            "en": "Gupta Empire",
+            "zh": "笈多"
+          },
+          "names": [
+            "Gupta Empire"
+          ]
+        },
+        {
+          "holder": "rome",
+          "label": {
+            "en": "Roman Empire (east and west)",
+            "zh": "罗马帝国（东、西）"
+          },
+          "names": [
+            "Roman Republic",
+            "Roman Empire",
+            "Western Roman Empire",
+            "Eastern Roman Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K6",
+      "t": "0629",
+      "holders": [
+        {
+          "holder": "tang",
+          "label": {
+            "en": "Tang",
+            "zh": "唐"
+          },
+          "names": [
+            "Tang Dynasty"
+          ]
+        },
+        {
+          "holder": "sasanian",
+          "label": {
+            "en": "Sasanian Empire",
+            "zh": "萨珊"
+          },
+          "names": [
+            "Sasanian Empire"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "western-turks",
+          "label": {
+            "en": "Western Turkic Khaganate",
+            "zh": "西突厥"
+          },
+          "names": [
+            "Western Göktürks"
+          ]
+        },
+        {
+          "holder": "tibet",
+          "label": {
+            "en": "Tibetan Empire",
+            "zh": "吐蕃"
+          },
+          "names": [
+            "Tibetan Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K7",
+      "t": "0751",
+      "holders": [
+        {
+          "holder": "tang",
+          "label": {
+            "en": "Tang",
+            "zh": "唐"
+          },
+          "names": [
+            "Tang Dynasty"
+          ]
+        },
+        {
+          "holder": "abbasid",
+          "label": {
+            "en": "Abbasid Caliphate",
+            "zh": "阿拔斯王朝"
+          },
+          "names": [
+            "Abbasid Caliphate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "tibet",
+          "label": {
+            "en": "Tibetan Empire",
+            "zh": "吐蕃"
+          },
+          "names": [
+            "Tibetan Empire"
+          ]
+        },
+        {
+          "holder": "uyghur",
+          "label": {
+            "en": "Uyghur Khaganate",
+            "zh": "回鹘"
+          },
+          "names": [
+            "Uyghur Khaganate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K8",
+      "t": "0786",
+      "holders": [
+        {
+          "holder": "tang",
+          "label": {
+            "en": "Tang",
+            "zh": "唐"
+          },
+          "names": [
+            "Tang Dynasty"
+          ]
+        },
+        {
+          "holder": "abbasid",
+          "label": {
+            "en": "Abbasid Caliphate",
+            "zh": "阿拔斯王朝"
+          },
+          "names": [
+            "Abbasid Caliphate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "tibet",
+          "label": {
+            "en": "Tibetan Empire",
+            "zh": "吐蕃"
+          },
+          "names": [
+            "Tibetan Empire"
+          ]
+        },
+        {
+          "holder": "uyghur",
+          "label": {
+            "en": "Uyghur Khaganate",
+            "zh": "回鹘"
+          },
+          "names": [
+            "Uyghur Khaganate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K9",
+      "t": "0971",
+      "holders": [
+        {
+          "holder": "song",
+          "label": {
+            "en": "Song",
+            "zh": "宋"
+          },
+          "names": [
+            "Northern Song",
+            "Southern Song"
+          ]
+        },
+        {
+          "holder": "liao",
+          "label": {
+            "en": "Liao",
+            "zh": "辽"
+          },
+          "names": [
+            "Liao Dynasty"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "fatimid",
+          "label": {
+            "en": "Fatimid Caliphate",
+            "zh": "法蒂玛王朝"
+          },
+          "names": [
+            "Fatimid Caliphate"
+          ]
+        },
+        {
+          "holder": "chola",
+          "label": {
+            "en": "Chola Empire",
+            "zh": "朱罗"
+          },
+          "names": [
+            "Chola Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K10",
+      "t": "1206",
+      "holders": [
+        {
+          "holder": "jin",
+          "label": {
+            "en": "Jin",
+            "zh": "金"
+          },
+          "names": [
+            "Great Jin"
+          ]
+        },
+        {
+          "holder": "song",
+          "label": {
+            "en": "Song",
+            "zh": "宋"
+          },
+          "names": [
+            "Northern Song",
+            "Southern Song"
+          ]
+        },
+        {
+          "holder": "khwarazm",
+          "label": {
+            "en": "Khwarazmian Empire",
+            "zh": "花剌子模"
+          },
+          "names": [
+            "Khwarezmid Empire"
+          ]
+        },
+        {
+          "holder": "mongols",
+          "label": {
+            "en": "Mongol Empire",
+            "zh": "蒙古帝国"
+          },
+          "names": [
+            "Mongol Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K11",
+      "t": "1254",
+      "holders": [
+        {
+          "holder": "mongols",
+          "label": {
+            "en": "Mongol Empire",
+            "zh": "蒙古帝国"
+          },
+          "names": [
+            "Mongol Empire"
+          ]
+        },
+        {
+          "holder": "song",
+          "label": {
+            "en": "Song",
+            "zh": "宋"
+          },
+          "names": [
+            "Northern Song",
+            "Southern Song"
+          ]
+        },
+        {
+          "holder": "mamluk",
+          "label": {
+            "en": "Mamluk Sultanate",
+            "zh": "马穆鲁克苏丹国"
+          },
+          "names": [
+            "Mamluk Sultanate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Empire of Nicaea (Eastern Roman)",
+            "zh": "尼西亚帝国（东罗马）"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K12",
+      "t": "1271",
+      "holders": [
+        {
+          "holder": "mongols",
+          "label": {
+            "en": "Mongol Empire",
+            "zh": "蒙古帝国"
+          },
+          "names": [
+            "Mongol Empire"
+          ]
+        },
+        {
+          "holder": "song",
+          "label": {
+            "en": "Song",
+            "zh": "宋"
+          },
+          "names": [
+            "Northern Song",
+            "Southern Song"
+          ]
+        },
+        {
+          "holder": "mamluk",
+          "label": {
+            "en": "Mamluk Sultanate",
+            "zh": "马穆鲁克苏丹国"
+          },
+          "names": [
+            "Mamluk Sultanate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Empire of Nicaea (Eastern Roman)",
+            "zh": "尼西亚帝国（东罗马）"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K13",
+      "t": "1335",
+      "holders": [
+        {
+          "holder": "yuan",
+          "label": {
+            "en": "Yuan",
+            "zh": "元"
+          },
+          "names": [
+            "Yuan Dynasty"
+          ]
+        },
+        {
+          "holder": "ilkhanate",
+          "label": {
+            "en": "Ilkhanate",
+            "zh": "伊利汗国"
+          },
+          "names": [
+            "Ilkhanate"
+          ]
+        },
+        {
+          "holder": "golden-horde",
+          "label": {
+            "en": "Golden Horde (Ulus of Jochi)",
+            "zh": "金帐汗国（术赤兀鲁思）"
+          },
+          "names": [
+            "Golden Horde"
+          ]
+        },
+        {
+          "holder": "chagatai",
+          "label": {
+            "en": "Chagatai Khanate",
+            "zh": "察合台汗国"
+          },
+          "names": [
+            "Chagatai Khanate"
+          ]
+        },
+        {
+          "holder": "mamluk",
+          "label": {
+            "en": "Mamluk Sultanate",
+            "zh": "马穆鲁克苏丹国"
+          },
+          "names": [
+            "Mamluk Sultanate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "delhi",
+          "label": {
+            "en": "Delhi Sultanate",
+            "zh": "德里苏丹国"
+          },
+          "memberOf": [
+            "(Delhi Sultanate)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "K14",
+      "t": "1368",
+      "holders": [
+        {
+          "holder": "ming",
+          "label": {
+            "en": "Ming",
+            "zh": "明"
+          },
+          "names": [
+            "Ming Dynasty"
+          ]
+        },
+        {
+          "holder": "golden-horde",
+          "label": {
+            "en": "Golden Horde (Ulus of Jochi)",
+            "zh": "金帐汗国（术赤兀鲁思）"
+          },
+          "names": [
+            "Golden Horde"
+          ]
+        },
+        {
+          "holder": "chagatai",
+          "label": {
+            "en": "Chagatai Khanate",
+            "zh": "察合台汗国"
+          },
+          "names": [
+            "Chagatai Khanate"
+          ]
+        },
+        {
+          "holder": "mamluk",
+          "label": {
+            "en": "Mamluk Sultanate",
+            "zh": "马穆鲁克苏丹国"
+          },
+          "names": [
+            "Mamluk Sultanate"
+          ]
+        },
+        {
+          "holder": "eastern-rome",
+          "label": {
+            "en": "Eastern Roman Empire",
+            "zh": "东罗马帝国"
+          },
+          "names": [
+            "Eastern Roman Empire",
+            "Byzantine Empire",
+            "Nicaean Empire"
+          ]
+        },
+        {
+          "holder": "delhi",
+          "label": {
+            "en": "Delhi Sultanate",
+            "zh": "德里苏丹国"
+          },
+          "memberOf": [
+            "(Delhi Sultanate)"
+          ]
+        }
+      ]
+    }
+  ],
+  "spheres": [],
+  "listOnly": [],
+  "overlapDecisions": {
+    "K7 tang tibet": "Cliopatria's Tang 751-754 outline takes in the whole Tibetan Empire 751-756 outline; the Tibetan record is painted later and wins, so the plateau shows as Tibet (Tang did not rule it).",
+    "K7 abbasid eastern-rome": "Cliopatria's Abbasid 751-754 outline runs over Anatolia; the Byzantine 751-767 record is painted later and wins (Anatolia stayed Eastern Roman).",
+    "K8 abbasid eastern-rome": "As K7: the Byzantine 783-787 record is painted after the Abbasid 783-799 record and wins in Anatolia.",
+    "K12 mongols eastern-rome": "Cliopatria's Mongol Empire 1260-1271 outline covers part of the Nicaean Empire 1260-1271 in western Anatolia; the Nicaean record is painted later and wins."
+  }
+}

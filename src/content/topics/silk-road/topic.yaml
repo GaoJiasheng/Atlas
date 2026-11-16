@@ -1,0 +1,43 @@
+# Authoring contract: docs/73-silk-road-content-spec.md (implementation record in §12). Passages for Gavin: REVIEW.md.
+# Map provenance: scripts/geo/silk-road/SOURCES-GEO.md (Cliopatria inventory: INVENTORY.md there).
+id: silk-road
+title: { en: "The Silk Roads", zh: "丝绸之路" }
+subtitle: { en: "Routes by land and sea across Afro-Eurasia, 2nd century BCE – 14th century CE", zh: "亚欧非大陆的陆路与海路（公元前2世纪—公元14世纪）" }
+shortTitle: { en: "Silk Roads", zh: "丝绸之路" }
+subject: history
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: published
+tags: [beyond-syllabus]
+illustration: silk-road
+basemap:
+  region:
+    # The Old World plate of ancient-civilisations (Natural Earth 1:10m), framed to Iberia–Korea, Paris–Java.
+    bounds: [-12, -12, 135, 58]
+    land: ancient-world-plate
+    rivers: silk-road-rivers
+  maxZoom: 9
+colorBy: entity
+datePrecision: year
+blocLabels:
+  neutral: { en: "Powers drawn on this map", zh: "地图上画出的政权" }
+  out: { en: "No longer drawn", zh: "已不在图上" }
+strings:
+  joined: { en: "On the map from", zh: "地图上始见" }
+  left: { en: "On the map until", zh: "地图上止于" }
+  notYet: { en: "Not yet on the map", zh: "尚未见于地图" }
+note:
+  en: "Approximate extents from Cliopatria · dashed routes: recorded stops, schematic lines · today's land and rivers"
+  zh: "范围取自 Cliopatria，为示意 · 虚线路线：站点有记录，连线为示意 · 陆地与河流按今天"
+datedLayers:
+  - { id: routes-han, file: sr-routes-han, kind: line, certainty: approximate, holder: routes, label: { en: "Han and Parthian roads (recorded stops, schematic lines)", zh: "汉代与帕提亚的道路（站点有记录，连线为示意）" } }
+  - { id: sea-periplus, file: sr-sea-periplus, kind: line, certainty: approximate, color: token:cold, label: { en: "Sea routes of the Periplus (recorded ports, computed lines)", zh: "《航行记》的海路（港口有记录，连线为计算）" } }
+  - { id: routes-tang, file: sr-routes-tang, kind: line, certainty: approximate, holder: routes, label: { en: "Jia Dan's road from Anxi (recorded stops, schematic lines)", zh: "贾耽所记安西入西域道（站点有记录，连线为示意）" } }
+  - { id: sea-tang, file: sr-sea-tang, kind: line, certainty: approximate, color: token:cold, label: { en: "Jia Dan's sea route from Guangzhou (recorded ports, computed lines)", zh: "贾耽所记广州通海夷道（港口有记录，连线为计算）" } }
+  - { id: routes-abbasid, file: sr-routes-abbasid, kind: line, certainty: approximate, holder: routes, label: { en: "Routes of the Jewish merchants, 9th century (recorded stops, schematic lines)", zh: "9 世纪犹太商人的路线（站点有记录，连线为示意）" } }
+  - { id: routes-mongol, file: sr-routes-mongol, kind: line, certainty: approximate, holder: routes, label: { en: "Pegolotti's road from Tana to Cathay (recorded stops, schematic lines)", zh: "裴哥罗梯所记塔纳至契丹之路（站点有记录，连线为示意）" } }
+  - { id: srivijaya-sphere, file: ac-srivijaya, kind: area, holder: srivijaya, label: { en: "Srivijaya (sphere, approximate)", zh: "室利佛逝（势力范围，示意）" } }
+  - { id: majapahit-sphere, file: ac-majapahit, kind: area, holder: majapahit, label: { en: "Majapahit (sphere, approximate)", zh: "满者伯夷（势力范围，示意）" } }

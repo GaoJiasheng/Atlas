@@ -1,0 +1,701 @@
+{
+  "_comment": "docs/73 §2.5–2.6 / G5–G6. Every line joins places from places.json (Wikidata P625) in the order of the written source named in `source`. A leg is a straight great-circle line (`land`; also used for a sea crossing the plate's 2 km coast closes, such as the Bosporus) or a computed shortest water path (`sea`); a line's `leg` default is land for route layers and the journey's `kind` for movements. Places whose modern location is disputed are left out (SOURCES-GEO.md lists them). `f` / `u` on a line override the layer's dates (decimal years, [f, u)).",
+  "layers": {
+    "sr-routes-han": {
+      "f": -60,
+      "u": 240,
+      "note": "Han roads as described in Hanshu 96A (60 BCE onwards) and Isidore's Parthian Stations (after 26 BCE)",
+      "lines": [
+        {
+          "id": "han-hexi",
+          "source": "Hanshu 6 and 96A: the Hexi commanderies Wuwei, Zhangye, Jiuquan, Dunhuang, in their order along the corridor, and the Yumen Pass",
+          "stops": [
+            {
+              "place": "chang-an"
+            },
+            {
+              "place": "wuwei"
+            },
+            {
+              "place": "zhangye"
+            },
+            {
+              "place": "jiuquan"
+            },
+            {
+              "place": "dunhuang"
+            },
+            {
+              "place": "yumen"
+            }
+          ]
+        },
+        {
+          "id": "han-southern-road",
+          "source": "Hanshu 96A: the southern road from Shanshan along the southern mountains to Suoche; order from the distances between neighbouring states; identifications Hill 2003",
+          "stops": [
+            {
+              "place": "yumen"
+            },
+            {
+              "place": "ruoqiang"
+            },
+            {
+              "place": "qiemo"
+            },
+            {
+              "place": "niya"
+            },
+            {
+              "place": "keriya"
+            },
+            {
+              "place": "khotan"
+            },
+            {
+              "place": "pishan"
+            },
+            {
+              "place": "yarkand"
+            },
+            {
+              "place": "kashgar"
+            }
+          ]
+        },
+        {
+          "id": "han-northern-road",
+          "source": "Hanshu 96A: the northern road from the court of Nearer Jushi along the northern mountains to Shule; order from the distances between neighbouring states; identifications Hill 2003",
+          "stops": [
+            {
+              "place": "yumen"
+            },
+            {
+              "place": "jiaohe"
+            },
+            {
+              "place": "yanqi"
+            },
+            {
+              "place": "luntai"
+            },
+            {
+              "place": "kucha"
+            },
+            {
+              "place": "aksu"
+            },
+            {
+              "place": "uqturpan"
+            },
+            {
+              "place": "kashgar"
+            }
+          ]
+        },
+        {
+          "id": "isidore-parthian-stations",
+          "f": -26,
+          "source": "Isidore of Charax, Parthian Stations §§1–19 (Schoff 1914): stations with accepted modern places; Anatho (Anah) and stations without an accepted modern place are left out",
+          "stops": [
+            {
+              "place": "zeugma"
+            },
+            {
+              "place": "raqqa"
+            },
+            {
+              "place": "dura-europos"
+            },
+            {
+              "place": "seleucia"
+            },
+            {
+              "place": "behistun"
+            },
+            {
+              "place": "kangavar"
+            },
+            {
+              "place": "hamadan"
+            },
+            {
+              "place": "rey"
+            },
+            {
+              "place": "herat"
+            },
+            {
+              "place": "farah"
+            },
+            {
+              "place": "kandahar"
+            }
+          ]
+        }
+      ]
+    },
+    "sr-sea-periplus": {
+      "f": 1,
+      "u": 300,
+      "note": "Periplus of the Erythraean Sea, 1st century CE (Schoff 1912)",
+      "lines": [
+        {
+          "id": "periplus-muziris",
+          "source": "Periplus §§1, 54–57: ships leave Egypt (Berenice) in July and cross to Muziris on the south-west wind",
+          "stops": [
+            {
+              "place": "berenike"
+            },
+            {
+              "place": "muziris",
+              "leg": "sea"
+            }
+          ]
+        },
+        {
+          "id": "periplus-barygaza",
+          "source": "Periplus §§1, 49, 64: Berenice to Barygaza, where silk from Thinae arrives through Bactria",
+          "stops": [
+            {
+              "place": "berenike"
+            },
+            {
+              "place": "bharuch",
+              "leg": "sea"
+            }
+          ]
+        }
+      ]
+    },
+    "sr-routes-tang": {
+      "f": 785,
+      "u": 1000,
+      "note": "Jia Dan's route from Anxi into the Western Regions (Xin Tangshu 43B), recorded in the Zhenyuan era (785–805)",
+      "lines": [
+        {
+          "id": "jia-dan-anxi",
+          "source": "Xin Tangshu 43B, fifth route: Anxi (Kucha), Bohuan (Aksu area), the Bedel pass, Suyab, Kulan, Talas; identifications Chavannes 1903",
+          "stops": [
+            {
+              "place": "kucha"
+            },
+            {
+              "place": "aksu"
+            },
+            {
+              "place": "bedel"
+            },
+            {
+              "place": "suyab"
+            },
+            {
+              "place": "kulan"
+            },
+            {
+              "place": "taraz"
+            }
+          ]
+        }
+      ]
+    },
+    "sr-sea-tang": {
+      "f": 785,
+      "u": 1000,
+      "note": "Jia Dan's sea route from Guangzhou (Xin Tangshu 43B), recorded in the Zhenyuan era (785–805)",
+      "lines": [
+        {
+          "id": "jia-dan-guangzhou",
+          "source": "Xin Tangshu 43B, seventh route: Guangzhou, Tuen Mun, Cù Lao Chàm, Phan Rang, Côn Sơn, the strait, Sri Lanka, Kollam, Broach, Debal, al-Ubulla, Basra, Baghdad; identifications Hsieh 2010. Guangzhou lies up the Pearl River, which is not drawn: its leg to Tuen Mun is straight",
+          "stops": [
+            {
+              "place": "guangzhou"
+            },
+            {
+              "place": "tuen-mun",
+              "leg": "land"
+            },
+            {
+              "place": "cu-lao-cham",
+              "leg": "sea"
+            },
+            {
+              "place": "phan-rang",
+              "leg": "sea"
+            },
+            {
+              "place": "con-son",
+              "leg": "sea"
+            },
+            {
+              "place": "sri-lanka",
+              "leg": "sea"
+            },
+            {
+              "place": "kollam",
+              "leg": "sea"
+            },
+            {
+              "place": "bharuch",
+              "leg": "sea"
+            },
+            {
+              "place": "banbhore",
+              "leg": "sea"
+            },
+            {
+              "place": "ubulla",
+              "leg": "sea"
+            },
+            {
+              "place": "basra"
+            },
+            {
+              "place": "baghdad"
+            }
+          ]
+        }
+      ]
+    },
+    "sr-routes-abbasid": {
+      "f": 846,
+      "u": 1000,
+      "note": "Routes of the Jewish merchants in Ibn Khurradadhbih's Book of Roads and Kingdoms (first version c. 846)",
+      "lines": [
+        {
+          "id": "radhanite-red-sea",
+          "source": "Ibn Khurradadhbih (Jacobs 1919): al-Farama, overland to al-Qulzum, by sea to al-Jar and Jeddah",
+          "stops": [
+            {
+              "place": "pelusium"
+            },
+            {
+              "place": "clysma"
+            },
+            {
+              "place": "jeddah",
+              "leg": "sea"
+            }
+          ]
+        },
+        {
+          "id": "radhanite-euphrates",
+          "source": "Ibn Khurradadhbih (Jacobs 1919): Antioch, al-Jabiya, down the Euphrates to Baghdad, down the Tigris to al-Ubulla",
+          "stops": [
+            {
+              "place": "antioch"
+            },
+            {
+              "place": "jabiyah"
+            },
+            {
+              "place": "baghdad"
+            },
+            {
+              "place": "ubulla"
+            }
+          ]
+        },
+        {
+          "id": "radhanite-overland-west",
+          "source": "Ibn Khurradadhbih (Jacobs 1919): Tangier to Kairouan; Egypt is named without a city and is not joined",
+          "stops": [
+            {
+              "place": "tangier"
+            },
+            {
+              "place": "kairouan"
+            }
+          ]
+        },
+        {
+          "id": "radhanite-overland-east",
+          "source": "Ibn Khurradadhbih (Jacobs 1919): Damascus, Kufa, Baghdad, Basra",
+          "stops": [
+            {
+              "place": "damascus"
+            },
+            {
+              "place": "kufa"
+            },
+            {
+              "place": "baghdad"
+            },
+            {
+              "place": "basra"
+            }
+          ]
+        }
+      ]
+    },
+    "sr-routes-mongol": {
+      "f": 1335,
+      "u": 1369,
+      "note": "Pegolotti, La pratica della mercatura (about 1340), in Yule, Cathay vol. 3 (1914)",
+      "lines": [
+        {
+          "id": "pegolotti-tana-cathay",
+          "source": "Pegolotti: Tana, Gintarchan (Astrakhan), Sara, Saracanco, Organci, Oltrarre, Armalec, Camexu, Cassai, Gamalec; the river between Ganzhou and Hangzhou is not named, so that leg is straight; Sara (Sarai) has no Wikidata point and is left out between Astrakhan and Saraichik",
+          "stops": [
+            {
+              "place": "tana"
+            },
+            {
+              "place": "astrakhan"
+            },
+            {
+              "place": "saraichik"
+            },
+            {
+              "place": "urgench"
+            },
+            {
+              "place": "otrar"
+            },
+            {
+              "place": "almaliq"
+            },
+            {
+              "place": "zhangye"
+            },
+            {
+              "place": "hangzhou"
+            },
+            {
+              "place": "khanbaliq"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "movements": {
+    "mv-zhang-qian": {
+      "from": "-0138",
+      "to": "-0128",
+      "linger": "-0111",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "Zhang Qian goes west (main stops)",
+        "zh": "张骞西行（主要站点）"
+      },
+      "source": "Shiji 123: from Longxi through Xiongnu lands to Dayuan, Kangju, the Yuezhi and Daxia; Kangju and the Xiongnu stay are regions without a point; the way back is not drawn",
+      "stops": [
+        {
+          "place": "chang-an"
+        },
+        {
+          "place": "longxi"
+        },
+        {
+          "place": "ferghana"
+        },
+        {
+          "place": "bactria"
+        }
+      ]
+    },
+    "mv-faxian": {
+      "from": "0399",
+      "to": "0412-07",
+      "linger": "0552",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "Faxian's journey to India and back (main stops)",
+        "zh": "法显往返印度（主要站点）"
+      },
+      "source": "Faxian, Record of Buddhistic Kingdoms (Legge 1886); Yepoti is left out (place uncertain)",
+      "stops": [
+        {
+          "place": "chang-an"
+        },
+        {
+          "place": "dunhuang"
+        },
+        {
+          "place": "ruoqiang"
+        },
+        {
+          "place": "khotan"
+        },
+        {
+          "place": "peshawar"
+        },
+        {
+          "place": "mathura"
+        },
+        {
+          "place": "patna"
+        },
+        {
+          "place": "tamluk"
+        },
+        {
+          "place": "sri-lanka",
+          "leg": "sea"
+        },
+        {
+          "place": "laoshan",
+          "leg": "sea"
+        },
+        {
+          "place": "qingzhou"
+        }
+      ]
+    },
+    "mv-xuanzang": {
+      "from": "0629",
+      "to": "0645",
+      "linger": "0755",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "Xuanzang's journey to India (outward, main stops)",
+        "zh": "玄奘西行（去程主要站点）"
+      },
+      "source": "Ci'en zhuan 1–6 and Beal 1884: the outward stops; his way home by Khotan and Dunhuang is told in the text, not drawn",
+      "stops": [
+        {
+          "place": "chang-an"
+        },
+        {
+          "place": "wuwei"
+        },
+        {
+          "place": "guazhou"
+        },
+        {
+          "place": "hami"
+        },
+        {
+          "place": "gaochang"
+        },
+        {
+          "place": "yanqi"
+        },
+        {
+          "place": "kucha"
+        },
+        {
+          "place": "aksu"
+        },
+        {
+          "place": "suyab"
+        },
+        {
+          "place": "tashkent"
+        },
+        {
+          "place": "samarkand"
+        },
+        {
+          "place": "balkh"
+        },
+        {
+          "place": "bamyan"
+        },
+        {
+          "place": "peshawar"
+        },
+        {
+          "place": "nalanda"
+        }
+      ]
+    },
+    "mv-rubruck": {
+      "from": "1253-05",
+      "to": "1255-08",
+      "linger": "1258",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "William of Rubruck's journey (main stops)",
+        "zh": "鲁布鲁克的行程（主要站点）"
+      },
+      "source": "Rockhill 1900, pp. xlv–xlvi: Constantinople, Soldaia, Karakorum; back by Derbent, Nakhchivan, Sivas, Kayseri, Konya, Antioch, Tripoli. Batu's camp on the Volga and Sarai have no Wikidata point and are left out. Through the Bosporus (closed at the plate's 2 km scale) the line is straight; across the Black Sea it is computed",
+      "stops": [
+        {
+          "place": "constantinople"
+        },
+        {
+          "place": "bosporus"
+        },
+        {
+          "place": "sudak",
+          "leg": "sea"
+        },
+        {
+          "place": "karakorum"
+        },
+        {
+          "place": "derbent"
+        },
+        {
+          "place": "nakhchivan"
+        },
+        {
+          "place": "sivas"
+        },
+        {
+          "place": "kayseri"
+        },
+        {
+          "place": "konya"
+        },
+        {
+          "place": "antioch"
+        },
+        {
+          "place": "tripoli"
+        }
+      ]
+    },
+    "mv-polo-land": {
+      "from": "1271-11",
+      "to": "1275",
+      "linger": "1287",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "Marco Polo's way out, by his book (main stops)",
+        "zh": "马可·波罗去程，据其书（主要站点）"
+      },
+      "source": "Yule–Cordier 1903: Acre, Layas, Badakhshan, Kashgar, Yarkand, Khotan, Lop, Sachiu (Dunhuang), Campichu (Ganzhou), Kemenfu (Shangdu); places Yule only guessed at are left out",
+      "stops": [
+        {
+          "place": "acre"
+        },
+        {
+          "place": "ayas"
+        },
+        {
+          "place": "badakhshan"
+        },
+        {
+          "place": "kashgar"
+        },
+        {
+          "place": "yarkand"
+        },
+        {
+          "place": "khotan"
+        },
+        {
+          "place": "ruoqiang"
+        },
+        {
+          "place": "dunhuang"
+        },
+        {
+          "place": "zhangye"
+        },
+        {
+          "place": "shangdu"
+        }
+      ]
+    },
+    "mv-polo-sea": {
+      "from": "1292",
+      "to": "1295",
+      "linger": "1300",
+      "holder": "travellers",
+      "kind": "sea",
+      "label": {
+        "en": "Marco Polo's way home, by his book (main stops)",
+        "zh": "马可·波罗回程，据其书（主要站点）"
+      },
+      "source": "Yule–Cordier 1903: Zayton (Yule's inference), Samara on Sumatra (five months), Hormuz, Tabriz, Trebizond, Constantinople, Venice. The Black Sea leg runs to the Bosporus, then straight through the strait, which the plate's 2 km coast closes",
+      "stops": [
+        {
+          "place": "quanzhou"
+        },
+        {
+          "place": "samudera-pasai"
+        },
+        {
+          "place": "hormuz"
+        },
+        {
+          "place": "tabriz",
+          "leg": "land"
+        },
+        {
+          "place": "trabzon",
+          "leg": "land"
+        },
+        {
+          "place": "bosporus",
+          "leg": "sea"
+        },
+        {
+          "place": "constantinople",
+          "leg": "land"
+        },
+        {
+          "place": "venice"
+        }
+      ]
+    },
+    "mv-rabban-sauma": {
+      "from": "1287-03",
+      "to": "1288-04",
+      "linger": "1300",
+      "holder": "travellers",
+      "kind": "land",
+      "label": {
+        "en": "Rabban Sauma's embassy to the West (main stops)",
+        "zh": "拉班·扫马出使西方（主要站点）"
+      },
+      "source": "Budge 1928: Constantinople, Naples, Rome, Genoa, Paris, Gascony (Bordeaux, Chabot), Genoa, Rome; the way out to Constantinople and the way home are not drawn",
+      "stops": [
+        {
+          "place": "constantinople"
+        },
+        {
+          "place": "naples",
+          "leg": "sea"
+        },
+        {
+          "place": "rome"
+        },
+        {
+          "place": "genoa"
+        },
+        {
+          "place": "paris"
+        },
+        {
+          "place": "bordeaux"
+        },
+        {
+          "place": "genoa"
+        },
+        {
+          "place": "rome"
+        }
+      ]
+    },
+    "mv-ibn-battuta": {
+      "from": "1345",
+      "to": "1346",
+      "linger": "1349",
+      "holder": "travellers",
+      "kind": "sea",
+      "label": {
+        "en": "Ibn Battuta sails to China (main stops)",
+        "zh": "伊本·白图泰航往中国（主要站点）"
+      },
+      "source": "Yule, Cathay vol. 4 (1916): from the kingdom of Sumatra to Zaitun; the stops between are unidentified and left out",
+      "stops": [
+        {
+          "place": "samudera-pasai"
+        },
+        {
+          "place": "quanzhou"
+        }
+      ]
+    }
+  }
+}

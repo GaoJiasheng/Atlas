@@ -1,0 +1,1773 @@
+[
+ {
+  "id": "evt-zhang-qian-sets-out",
+  "t": "-0138",
+  "at": [
+   103.86126,
+   35.37731
+  ],
+  "kind": "milestone",
+  "importance": 3,
+  "title": {
+   "en": "Zhang Qian sets out",
+   "zh": "张骞出使"
+  },
+  "summary": {
+   "en": "About 138 BCE Zhang Qian leaves Longxi with more than 100 men to find the Yuezhi. The point is today's Lintao county, a reference point for Longxi.",
+   "zh": "约公元前 138 年，张骞带着一百多人从陇西出发寻找月氏。标记在今临洮县，只是陇西的参照点。"
+  },
+  "detail": {
+   "en": "The Shiji gives no year of departure; 139 or 138 BCE is worked back from its “13 years”. The Xiongnu held him more than ten years.",
+   "zh": "《史记》没有写出发的年份，前 139 或前 138 年是从“十三岁”倒推的。他被匈奴扣留了十多年。"
+  },
+  "sources": [
+   "S4",
+   "S6"
+  ]
+ },
+ {
+  "id": "evt-zhang-qian-returns",
+  "t": "-0126",
+  "at": [
+   108.85833,
+   34.30833
+  ],
+  "kind": "milestone",
+  "importance": 3,
+  "title": {
+   "en": "Zhang Qian returns to Chang'an",
+   "zh": "张骞回到长安"
+  },
+  "summary": {
+   "en": "About 126 BCE Zhang Qian reaches Chang'an. Of more than 100 who set out 13 years before, two came back.",
+   "zh": "约公元前 126 年，张骞回到长安。十三年前出发的一百多人，只有两人回来。"
+  },
+  "detail": {
+   "en": "He brought back news of Dayuan, Kangju, the Yuezhi and Daxia. Sima Qian says he “bored through” the way to the west.",
+   "zh": "他带回了大宛、康居、月氏、大夏的消息。司马迁说他“凿空”。"
+  },
+  "sources": [
+   "S4",
+   "S5",
+   "S6"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-dayuan-war",
+  "t": "-0104",
+  "at": [
+   71.75778,
+   40.90083
+  ],
+  "kind": "battle",
+  "importance": 2,
+  "title": {
+   "en": "Han campaigns against Dayuan",
+   "zh": "汉伐大宛"
+  },
+  "summary": {
+   "en": "104 to 101 BCE: two Han armies march to Dayuan for its horses; the second takes several dozen fine horses and over 3,000 others.",
+   "zh": "公元前 104 至前 101 年：汉朝两次出兵大宛求马，第二次夺得善马数十匹、其他马三千多匹。"
+  },
+  "detail": {
+   "en": "Sima Qian: 60,000 men left Dunhuang on the second march; just over 10,000 men and 1,000 horses came back through the Jade Gate. He blames the losses on officers who mistreated their soldiers. Dayuan's losses are not recorded. The marker is a reference point for the Ferghana Valley; where Dayuan's capital stood is uncertain.",
+   "zh": "司马迁：第二次出征六万人从敦煌出发，回到玉门关的只有一万多人、军马一千多匹；他把损失归咎于将吏虐待士兵。大宛的损失没有记载。标记只是费尔干纳盆地的参照点，大宛都城在哪里还不确定。"
+  },
+  "sources": [
+   "S4"
+  ],
+  "until": "-0101",
+  "sides": {
+   "attacker": "han",
+   "defender": "dayuan"
+  },
+  "result": "attacker",
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-western-regions-protectorate",
+  "t": "-0060",
+  "at": [
+   84.25014,
+   41.77743
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "A Protector-General for the Western Regions",
+   "zh": "设西域都护"
+  },
+  "summary": {
+   "en": "60 BCE: Zheng Ji is made Protector-General of both the southern and northern roads, with his seat at Wulei.",
+   "zh": "公元前 60 年：郑吉并护南北两道，号为都护，治乌垒城。"
+  },
+  "detail": {
+   "en": "Wulei lay in today's Luntai county; which ruined city it was is still debated. Another chapter of the Han History links the title to the years 69–66 BCE.",
+   "zh": "乌垒在今轮台县境内，究竟是哪一座古城仍有争论。《汉书》另一卷把都护之号系于地节年间（前 69 至前 66 年）。"
+  },
+  "sources": [
+   "S10",
+   "S11",
+   "S87"
+  ]
+ },
+ {
+  "id": "evt-han-envoys-sea",
+  "t": "-0111",
+  "at": [
+   110.17138,
+   20.32919
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "Han conquers Nanyue; envoys sail from Xuwen",
+   "zh": "汉灭南越，使者从徐闻出海"
+  },
+  "summary": {
+   "en": "111 BCE: Han armies conquer Nanyue. The Han History then describes envoys sailing for months from Xuwen and Hepu, carried on by foreign merchants' ships.",
+   "zh": "公元前 111 年：汉军灭南越。《汉书》随后记下汉使从徐闻、合浦出海，航行数月，由外国商船转送。"
+  },
+  "detail": {
+   "en": "The countries they reached, such as Huangzhi, have been placed anywhere from Borneo to south India; none is marked on this map.",
+   "zh": "他们到过的国家，例如黄支，有人说在婆罗洲，有人说在南印度；地图上一个都不标。"
+  },
+  "sources": [
+   "S7",
+   "S12",
+   "S13"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-carrhae",
+  "t": "-0053",
+  "at": [
+   39.025,
+   36.87083
+  ],
+  "kind": "battle",
+  "importance": 3,
+  "title": {
+   "en": "Battle of Carrhae",
+   "zh": "卡莱之战"
+  },
+  "summary": {
+   "en": "53 BCE: a Parthian army defeats the Roman army of Crassus near Carrhae (Harran).",
+   "zh": "公元前 53 年：帕提亚军在卡莱（哈兰）附近击败克拉苏的罗马军。"
+  },
+  "detail": {
+   "en": "Plutarch says that in the whole campaign 20,000 Romans “are said to have been killed” and 10,000 captured. Parthian losses are not given.",
+   "zh": "普鲁塔克说，整场战役中罗马人“据说”被杀两万、被俘一万。帕提亚一方的损失没有记载。"
+  },
+  "sources": [
+   "S40"
+  ],
+  "sides": {
+   "attacker": "rome",
+   "defender": "parthia"
+  },
+  "result": "defender",
+  "casualties": {
+   "rome": 20000
+  }
+ },
+ {
+  "id": "evt-gan-ying",
+  "t": "0097",
+  "at": [
+   75.98333,
+   39.45
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Gan Ying turns back at the sea",
+   "zh": "甘英临海而还"
+  },
+  "summary": {
+   "en": "97 CE: Ban Chao sends Gan Ying towards Da Qin (Rome). He reaches the sea at Tiaozhi; Parthian sailors warn him the crossing can take two years, and he turns back.",
+   "zh": "公元 97 年：班超派甘英出使大秦（罗马）。他到了条支的海边，安息船人说渡海可能要两年，他便折回。"
+  },
+  "detail": {
+   "en": "Where Tiaozhi was is uncertain, so the marker stands at Kashgar (Shule), where the Han History's two roads met at the edge of the Pamirs.",
+   "zh": "条支在哪里不确定，所以标记放在疏勒（喀什），也就是《汉书》两条路在葱岭脚下会合的地方。"
+  },
+  "sources": [
+   "S14",
+   "S10"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-kanishka",
+  "t": "0127",
+  "at": [
+   68.4036,
+   36.1494
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "Kanishka becomes Kushan king",
+   "zh": "迦腻色伽成为贵霜王"
+  },
+  "summary": {
+   "en": "About 127 CE Kanishka's reign begins. His inscription at Rabatak lists cities of northern India under his rule.",
+   "zh": "约公元 127 年迦腻色伽即位。他在罗巴塔克的碑文列出他统治下的北印度城市。"
+  },
+  "detail": {
+   "en": "127 CE follows Harry Falk's dating of the Kushan era; other dates have been proposed. The marker is the find-spot of the inscription.",
+   "zh": "127 年是按 Harry Falk 对贵霜纪年的推算，也有别的说法。标记是碑文的发现地。"
+  },
+  "sources": [
+   "S43",
+   "S44"
+  ]
+ },
+ {
+  "id": "evt-andun-166",
+  "t": "0166",
+  "mapVisibility": "timeline-only",
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Visitors from “Da Qin”",
+   "zh": "“大秦”来客"
+  },
+  "summary": {
+   "en": "166 CE: men claiming to be envoys of Andun, king of Da Qin, arrive by sea from beyond the Rinan frontier with ivory, rhinoceros horn and tortoiseshell.",
+   "zh": "公元 166 年：自称大秦王安敦使者的人，从日南边境以外的海上来，献象牙、犀角、玳瑁。"
+  },
+  "detail": {
+   "en": "The Chinese record itself says their gifts were nothing rare; historians think they were probably traders. Rinan, the southernmost Han commandery, is not given a point on this map, so this event is on the timeline only.",
+   "zh": "中国史书自己就说他们献的东西并不稀罕；史家认为他们多半是商人。汉代最南端的日南郡在这张地图上没有定位点，所以这件事只在时间轴上显示。"
+  },
+  "sources": [
+   "S14",
+   "S15"
+  ]
+ },
+ {
+  "id": "evt-an-shigao",
+  "t": "0148",
+  "at": [
+   112.42447,
+   34.65867
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "An Shigao reaches Luoyang",
+   "zh": "安世高到洛阳"
+  },
+  "summary": {
+   "en": "148 CE, according to early records: An Shigao from Parthia reaches Luoyang and translates Buddhist texts, the earliest known translator into Chinese.",
+   "zh": "据早期记载，公元 148 年：安息人安世高到洛阳译经，是已知最早的佛经汉译者。"
+  },
+  "sources": [
+   "S47"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-sogdian-letters",
+  "t": "0313",
+  "at": [
+   93.86383,
+   40.35217
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "The Sogdian Ancient Letters",
+   "zh": "粟特古信札"
+  },
+  "summary": {
+   "en": "About 313 CE: letters of Sogdian merchants and of Miwnay, a woman left in Dunhuang, are lost in a watchtower west of the Jade Gate.",
+   "zh": "约公元 313 年：粟特商人和被留在敦煌的妇女米薇写的信，丢在玉门关以西的一座烽燧里。"
+  },
+  "detail": {
+   "en": "Aurel Stein found them in 1907. One reports that the emperor fled Luoyang and that “Luoyang is no more”. The marker is the Jade Gate (Yumen Pass).",
+   "zh": "1907 年斯坦因发现了这些信。其中一封说皇帝逃离洛阳，“洛阳已经没有了”。标记在玉门关。"
+  },
+  "sources": [
+   "S94"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-kumarajiva",
+  "t": "0401",
+  "at": [
+   108.85833,
+   34.30833
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Kumarajiva reaches Chang'an",
+   "zh": "鸠摩罗什到长安"
+  },
+  "summary": {
+   "en": "401 CE: Kumarajiva of Kucha, captured when Kucha fell in 384, reaches Chang'an to translate Buddhist texts.",
+   "zh": "公元 401 年：384 年龟兹陷落时被俘的龟兹人鸠摩罗什到达长安译经。"
+  },
+  "sources": [
+   "S49"
+  ],
+  "displayOffset": [
+   46.3,
+   -55.2
+  ]
+ },
+ {
+  "id": "evt-silkworms",
+  "t": "0552",
+  "at": [
+   28.97602,
+   41.01224
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Silkworms reach Constantinople",
+   "zh": "蚕卵到君士坦丁堡"
+  },
+  "summary": {
+   "en": "Early 550s: according to Procopius, monks bring silkworm eggs to Constantinople for the emperor Justinian.",
+   "zh": "6 世纪 50 年代初：据普罗科匹厄斯记载，僧人为皇帝查士丁尼把蚕卵带到君士坦丁堡。"
+  },
+  "detail": {
+   "en": "Procopius gives no year; 552 marks the early 550s. The monks said they had learned silk-making in a land called Serinda, whose location is unknown.",
+   "zh": "普罗科匹厄斯没有写年份，552 年只表示 550 年代初。僧人说他们在一个叫赛林达的地方学会养蚕，那里在哪儿不清楚。"
+  },
+  "sources": [
+   "S51"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-aluoben-635",
+  "t": "0635",
+  "at": [
+   108.85833,
+   34.30833
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Aluoben reaches Chang'an",
+   "zh": "阿罗本到长安"
+  },
+  "summary": {
+   "en": "635 CE: Aluoben, a missionary of the Church of the East, reaches Chang'an; a stele of 781 in Chinese and Syriac tells the story.",
+   "zh": "公元 635 年：东方教会传教士阿罗本到达长安；781 年的中文、叙利亚文石碑记下了这件事。"
+  },
+  "sources": [
+   "S53"
+  ],
+  "displayOffset": [
+   70.9,
+   -12.5
+  ]
+ },
+ {
+  "id": "evt-turfan-contract-639",
+  "t": "0639",
+  "at": [
+   89.52917,
+   42.85278
+  ],
+  "kind": "atrocity",
+  "importance": 2,
+  "title": {
+   "en": "A girl sold at Turfan",
+   "zh": "吐鲁番的一份卖身契"
+  },
+  "summary": {
+   "en": "639 CE: a Sogdian contract records the sale of a girl from Samarkand to a Buddhist monk named Zhang for 120 silver coins.",
+   "zh": "公元 639 年：一份粟特文契约记下，一个撒马尔罕女孩以 120 枚银币被卖给一位姓张的僧人。"
+  },
+  "detail": {
+   "en": "The contract lets the buyer beat her, tie her up, sell her, pledge her or give her away. Her own name is not given in the sources read. The marker is the ruined city of Gaochang in the Turfan oasis.",
+   "zh": "契约写明买主可以打她、捆她、转卖、抵押或送人。本主题读到的资料没有写她自己的名字。标记在吐鲁番绿洲的高昌故城。"
+  },
+  "sources": [
+   "S52"
+  ]
+ },
+ {
+  "id": "evt-an-lushan",
+  "t": "0755",
+  "at": [
+   116.4,
+   39.93333
+  ],
+  "kind": "political",
+  "importance": 3,
+  "title": {
+   "en": "An Lushan rebels",
+   "zh": "安禄山起兵"
+  },
+  "summary": {
+   "en": "755 CE: An Lushan, a Tang general of Sogdian and Turkic descent, rebels and takes the provinces north of the Yellow River. The war ends in 763.",
+   "zh": "公元 755 年：粟特与突厥血统的唐将安禄山起兵，攻陷河北诸郡。战乱到 763 年结束。"
+  },
+  "detail": {
+   "en": "Registered population fell from about 52.9 million (755) to about 16.9 million (764); these are counts of people on the registers, not a death toll. The marker is Beijing, the Tang city of Youzhou.",
+   "zh": "登记人口从约 5290 万（755）降到约 1690 万（764）；这是户籍上的人数，不是死亡人数。标记在北京，即唐代的幽州。"
+  },
+  "sources": [
+   "S16",
+   "S17",
+   "S95",
+   "S18",
+   "S19",
+   "S25"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-tibet-dunhuang",
+  "t": "0786",
+  "at": [
+   94.66389,
+   40.14111
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "Tibetan forces take Dunhuang",
+   "zh": "吐蕃占领敦煌"
+  },
+  "summary": {
+   "en": "786 CE: after a long siege, the Tibetan Empire takes Dunhuang; it rules there until 848.",
+   "zh": "公元 786 年：吐蕃经过长期围困攻下敦煌，统治到 848 年。"
+  },
+  "detail": {
+   "en": "Most historians now give 786; some give 787.",
+   "zh": "现在多数学者取 786 年，也有人取 787 年。"
+  },
+  "sources": [
+   "S20",
+   "S21"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-talas",
+  "t": "0751",
+  "at": [
+   71.36667,
+   42.88333
+  ],
+  "kind": "battle",
+  "importance": 3,
+  "title": {
+   "en": "Battle of Talas",
+   "zh": "怛罗斯之战"
+  },
+  "summary": {
+   "en": "751 CE: near Taraz, an Abbasid army defeats the Tang army of Gao Xianzhi after the Karluks, fighting for the Tang, change sides.",
+   "zh": "公元 751 年：在塔拉兹附近，为唐作战的葛逻禄倒戈，阿拔斯军击败高仙芝率领的唐军。"
+  },
+  "detail": {
+   "en": "Both Chinese and Arabic sources record the defeat. The battlefield's exact place is not known; the marker is Taraz. Casualty figures are not given here.",
+   "zh": "中国和阿拉伯史料都记下了这次战败。战场的确切位置不清楚，标记在塔拉兹。这里不给伤亡数字。"
+  },
+  "sources": [
+   "S54",
+   "S95"
+  ],
+  "sides": {
+   "attacker": "tang",
+   "defender": "abbasid"
+  },
+  "result": "defender"
+ },
+ {
+  "id": "evt-baghdad-founded",
+  "t": "0762",
+  "at": [
+   44.36611,
+   33.31528
+  ],
+  "kind": "political",
+  "importance": 3,
+  "title": {
+   "en": "Baghdad founded",
+   "zh": "建立巴格达"
+  },
+  "summary": {
+   "en": "762 CE: the caliph al-Mansur founds Baghdad on the Tigris.",
+   "zh": "公元 762 年：哈里发曼苏尔在底格里斯河畔建立巴格达。"
+  },
+  "sources": [
+   "S56"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-diamond-sutra-868",
+  "t": "0868",
+  "at": [
+   94.80417,
+   40.03722
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "The Diamond Sutra is printed",
+   "zh": "《金刚经》印成"
+  },
+  "summary": {
+   "en": "11 May 868: a copy of the Diamond Sutra is printed, the earliest complete printed book with a date that survives.",
+   "zh": "868 年 5 月 11 日：一部《金刚经》印成，是现存有确切日期的最早完整印本书。"
+  },
+  "detail": {
+   "en": "It was found in the sealed Library Cave at Dunhuang, opened in 1900; Aurel Stein took it to London in 1907, and it is now in the British Library (Or.8210/P.2).",
+   "zh": "它出自敦煌封存的藏经洞，1900 年洞被打开；1907 年斯坦因把它带到伦敦，今藏大英图书馆（Or.8210/P.2）。"
+  },
+  "sources": [
+   "S60"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-zanj-revolt",
+  "t": "0869",
+  "at": [
+   47.81,
+   30.515
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "The Zanj revolt",
+   "zh": "僧祇人起义"
+  },
+  "summary": {
+   "en": "869 to 883 CE: enslaved East Africans brought to drain the salt marshes east of Basra rise against the Abbasid caliphate.",
+   "zh": "公元 869 至 883 年：被运来排干巴士拉以东盐沼的东非奴隶起来反抗阿拔斯王朝。"
+  },
+  "detail": {
+   "en": "No reliable total of the dead on either side is given in the sources read here.",
+   "zh": "本主题读到的资料里，没有双方死亡人数的可靠总数。"
+  },
+  "sources": [
+   "S59"
+  ],
+  "until": "0883"
+ },
+ {
+  "id": "evt-belitung-wreck",
+  "t": "0830",
+  "at": [
+   107.59518,
+   -2.76083
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "The Belitung wreck",
+   "zh": "勿里洞沉船"
+  },
+  "summary": {
+   "en": "About 830 CE: a ship, most likely Arab, sinks off Belitung with close to 60,000 pieces of Chinese ceramics.",
+   "zh": "约公元 830 年：一艘很可能是阿拉伯的船，载着近六万件中国瓷器在勿里洞附近沉没。"
+  },
+  "detail": {
+   "en": "Found in 1998; the cargo is on permanent display at the Asian Civilisations Museum in Singapore. A bowl on board is thought to carry a date equal to 826.",
+   "zh": "1998 年被发现；船货在新加坡亚洲文明博物馆常设展出。船上一只碗据信写有相当于 826 年的日期。"
+  },
+  "sources": [
+   "S89"
+  ]
+ },
+ {
+  "id": "evt-guangzhou-879",
+  "t": "0879",
+  "at": [
+   113.26,
+   23.13
+  ],
+  "kind": "atrocity",
+  "importance": 2,
+  "title": {
+   "en": "Killing of foreign merchants at Guangzhou (Arabic reports)",
+   "zh": "广州的外国商人遭杀害（阿拉伯记载）"
+  },
+  "summary": {
+   "en": "879 CE: Huang Chao's army takes Guangzhou. Abu Zayd of Siraf reports 120,000 Muslims, Jews, Christians and Zoroastrians killed; al-Mas'udi gives 200,000.",
+   "zh": "公元 879 年：黄巢军攻占广州。尸罗夫人阿布·扎伊德记载十二万穆斯林、犹太人、基督徒和琐罗亚斯德教徒被杀，马苏第说是二十万。"
+  },
+  "detail": {
+   "en": "The Chinese history records the capture and an epidemic among the rebels, but not a killing of foreigners. Abu Zayd dates it to the Islamic year 264 (877–878). No modern assessment of the figures was read for this topic, so no number is drawn on the map.",
+   "zh": "中国史书记下了攻城和军中的疫病，却没有记外国人被杀。阿布·扎伊德把它记在回历 264 年（877—878）。本主题没有读到对这些数字的现代评估，地图上不画任何数字。"
+  },
+  "sources": [
+   "S37",
+   "S38",
+   "S39"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-shibosi-971",
+  "t": "0971",
+  "at": [
+   113.26,
+   23.13
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "A Maritime Trade Office at Guangzhou",
+   "zh": "广州设市舶司"
+  },
+  "summary": {
+   "en": "971: the Song set up a Maritime Trade Office at Guangzhou to manage and tax sea trade; Quanzhou gets one in 1087.",
+   "zh": "971 年：宋朝在广州设市舶司管理海上贸易并征税；泉州在 1087 年也设了市舶司。"
+  },
+  "detail": {
+   "en": "A ship arriving paid one part in ten of its cargo first; the government then bought part of the rest.",
+   "zh": "海船到港先抽十分之一，官府再收买其余货物的一部分。"
+  },
+  "sources": [
+   "S22"
+  ],
+  "displayOffset": [
+   46.3,
+   -55.2
+  ]
+ },
+ {
+  "id": "evt-chola-raid-1025",
+  "t": "1025",
+  "at": [
+   104.76444,
+   -2.98333
+  ],
+  "kind": "political",
+  "importance": 2,
+  "title": {
+   "en": "Chola forces seize Palembang",
+   "zh": "朱罗军夺取巨港"
+  },
+  "summary": {
+   "en": "1025: the Chola kingdom of south India seizes Palembang, Srivijaya's chief city, and carries off its king and treasure.",
+   "zh": "1025 年：南印度的朱罗王朝夺取室利佛逝的主要城市巨港，掳走国王、掠走财宝。"
+  },
+  "sources": [
+   "S90"
+  ]
+ },
+ {
+  "id": "evt-ben-yiju-letters",
+  "t": "1133",
+  "at": [
+   45.03333,
+   12.8
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Ben Yiju's letters",
+   "zh": "本·伊居的信"
+  },
+  "summary": {
+   "en": "1130s: letters to and from Abraham Ben Yiju, a Jewish merchant from Tunisia, link Aden with the south-west coast of India.",
+   "zh": "12 世纪 30 年代：突尼斯犹太商人亚伯拉罕·本·伊居往来的信件，把亚丁和印度西南海岸连在一起。"
+  },
+  "detail": {
+   "en": "About 80 documents, dated 1133 to 1156, survive in the Cairo Geniza; some are from his partner in Aden, Madmun ibn Hasan.",
+   "zh": "约 80 件文书保存在开罗的吉尼扎，年代在 1133 到 1156 年之间，有些是他在亚丁的伙伴马德蒙写的。"
+  },
+  "sources": [
+   "S64"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-chinggis-1206",
+  "t": "1206",
+  "at": [
+   108.7883,
+   48.8422
+  ],
+  "kind": "political",
+  "importance": 3,
+  "title": {
+   "en": "Temüjin becomes Chinggis Khan",
+   "zh": "铁木真成为成吉思汗"
+  },
+  "summary": {
+   "en": "1206: the steppe chiefs gather at the source of the Onon River and give Temüjin the title Chinggis Khan.",
+   "zh": "1206 年：草原各部首领聚集在斡难河源头，尊铁木真为成吉思汗。"
+  },
+  "detail": {
+   "en": "The marker is the Wikidata point of the Onon River, in the Khentii mountains near its source.",
+   "zh": "标记是维基数据里斡难河的点，在肯特山中，靠近河源。"
+  },
+  "sources": [
+   "S65"
+  ]
+ },
+ {
+  "id": "evt-otrar-1218",
+  "t": "1218",
+  "at": [
+   68.30297,
+   42.85148
+  ],
+  "kind": "atrocity",
+  "importance": 3,
+  "title": {
+   "en": "Merchants killed at Otrar",
+   "zh": "讹答剌商队被杀"
+  },
+  "summary": {
+   "en": "1218: Inalchuq, the Khwarazmian governor of Otrar, seizes about 450 Muslim merchants sent by Chinggis Khan and has them killed; one escapes.",
+   "zh": "1218 年：花剌子模的讹答剌守将亦纳勒术扣下成吉思汗派来的约 450 名穆斯林商人，把他们杀死，只有一人逃脱。"
+  },
+  "detail": {
+   "en": "The sources disagree on whether the shah ordered it. In 1219 the Mongols invaded Khwarazm and besieged Otrar.",
+   "zh": "史料对是否由苏丹下令说法不一。1219 年蒙古进攻花剌子模，围攻讹答剌。"
+  },
+  "sources": [
+   "S66",
+   "S67"
+  ]
+ },
+ {
+  "id": "evt-merv-1221",
+  "t": "1221-02",
+  "at": [
+   62.1925,
+   37.66278
+  ],
+  "kind": "atrocity",
+  "importance": 3,
+  "title": {
+   "en": "Merv destroyed",
+   "zh": "梅尔夫被毁"
+  },
+  "summary": {
+   "en": "February 1221: Mongol forces take Merv. Juvaini says a count over 13 days gave more than 1.3 million dead.",
+   "zh": "1221 年 2 月：蒙古军攻下梅尔夫。志费尼说，十三天里清点出一百三十多万死者。"
+  },
+  "detail": {
+   "en": "Historians say such figures should not be read literally, but the massacre was real.",
+   "zh": "史家认为这样的数字不应照字面理解，但屠杀确实发生。"
+  },
+  "sources": [
+   "S66",
+   "S68"
+  ]
+ },
+ {
+  "id": "evt-nishapur-1221",
+  "t": "1221-04",
+  "at": [
+   58.79583,
+   36.21333
+  ],
+  "kind": "atrocity",
+  "importance": 3,
+  "title": {
+   "en": "Nishapur destroyed",
+   "zh": "内沙布尔被毁"
+  },
+  "summary": {
+   "en": "April 1221: Mongol forces storm Nishapur; 400 craftsmen are spared and carried off. A Herat historian gives 1,747,000 dead.",
+   "zh": "1221 年 4 月：蒙古军攻破内沙布尔，只留下 400 名工匠带走。一位赫拉特史家记下 1,747,000 名死者。"
+  },
+  "detail": {
+   "en": "David Morgan calls such figures “staggeringly high” and not to be read literally.",
+   "zh": "David Morgan 说这些数字“高得惊人”，不应照字面理解。"
+  },
+  "sources": [
+   "S66",
+   "S68"
+  ]
+ },
+ {
+  "id": "evt-rubruck-karakorum",
+  "t": "1254",
+  "at": [
+   102.82379,
+   47.19753
+  ],
+  "kind": "milestone",
+  "importance": 2,
+  "title": {
+   "en": "Rubruck at Karakorum",
+   "zh": "鲁布鲁克到哈剌和林"
+  },
+  "summary": {
+   "en": "1254: the Franciscan William of Rubruck reaches Karakorum, where Christians, Muslims and Buddhists debate before Möngke.",
+   "zh": "1254 年：方济各会修士鲁布鲁克到达哈剌和林，在那里看到基督徒、穆斯林和佛教徒在蒙哥面前辩论。"
+  },
+  "detail": {
+   "en": "He met William Boucher, a Paris goldsmith captured at Belgrade in Hungary, and describes a Muslim quarter, a quarter of Chinese craftsmen, temples and a church.",
+   "zh": "他见到在匈牙利的贝尔格莱德被俘的巴黎金匠威廉·布歇，并记下城里的穆斯林区、汉人工匠区、庙宇和教堂。"
+  },
+  "sources": [
+   "S69",
+   "S68"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-baghdad-1258",
+  "t": "1258",
+  "at": [
+   44.36611,
+   33.31528
+  ],
+  "kind": "atrocity",
+  "importance": 3,
+  "title": {
+   "en": "Baghdad taken by the Mongols",
+   "zh": "蒙古攻陷巴格达"
+  },
+  "summary": {
+   "en": "1258: Mongol forces under Hülegü take Baghdad. Hülegü himself claimed more than 200,000 dead.",
+   "zh": "1258 年：旭烈兀率蒙古军攻下巴格达。旭烈兀自己说杀了二十多万人。"
+  },
+  "detail": {
+   "en": "Hamd Allah Mustawfi gave 800,000, which the historian David Morgan finds improbably high. The real number is not known.",
+   "zh": "穆斯塔菲说是八十万，史学家 David Morgan 认为高得不可信。真实人数不清楚。"
+  },
+  "sources": [
+   "S68"
+  ],
+  "displayOffset": [
+   46.3,
+   -55.2
+  ]
+ },
+ {
+  "id": "evt-ain-jalut-1260",
+  "t": "1260",
+  "at": [
+   35.35583,
+   32.54861
+  ],
+  "kind": "battle",
+  "importance": 3,
+  "title": {
+   "en": "Battle of Ain Jalut",
+   "zh": "艾因扎鲁特之战"
+  },
+  "summary": {
+   "en": "1260: an Egyptian Mamluk army under Sultan Qutuz defeats a Mongol army of the Ilkhanate.",
+   "zh": "1260 年：苏丹忽都斯率领的埃及马穆鲁克军击败伊利汗国的一支蒙古军。"
+  },
+  "sources": [
+   "S70"
+  ],
+  "sides": {
+   "attacker": "mamluk",
+   "defender": "mongols"
+  },
+  "result": "attacker"
+ },
+ {
+  "id": "evt-yuan-1271",
+  "t": "1271",
+  "at": [
+   116.4,
+   39.93333
+  ],
+  "kind": "political",
+  "importance": 3,
+  "title": {
+   "en": "The Yuan dynasty",
+   "zh": "定国号大元"
+  },
+  "summary": {
+   "en": "1271: Khubilai names his dynasty Yuan; his new capital, Khanbaliq (Dadu), stands where Beijing is today.",
+   "zh": "1271 年：忽必烈定国号为“大元”；新都城大都（汗八里）在今天的北京。"
+  },
+  "detail": {
+   "en": "Khubilai had won the war over the succession in 1264. Dadu was begun in 1267 and given its name in 1272.",
+   "zh": "忽必烈在 1264 年赢得继承战争。大都 1267 年开始修建，1272 年定名。"
+  },
+  "sources": [
+   "S25",
+   "S68"
+  ],
+  "displayOffset": [
+   46.3,
+   -55.2
+  ]
+ },
+ {
+  "id": "evt-chuy-graves-1338",
+  "t": "1338",
+  "at": [
+   75.25038,
+   42.74648
+  ],
+  "kind": "disaster",
+  "importance": 3,
+  "title": {
+   "en": "Plague graves in the Chüy Valley",
+   "zh": "楚河谷的瘟疫墓"
+  },
+  "summary": {
+   "en": "1338 to 1339: gravestones at Kara-Djigach and Burana near Lake Issyk-Kul give “pestilence” as the cause of death; DNA from three people shows plague.",
+   "zh": "1338 至 1339 年：伊塞克湖附近卡拉-吉加奇和布拉纳的墓碑写着死于“瘟疫”；三个人的 DNA 显示是鼠疫。"
+  },
+  "detail": {
+   "en": "The paper gives no coordinates for the Kara-Djigach cemetery; the marker is the Burana tower, beside the second cemetery. That the pandemic began here is the scientists' interpretation.",
+   "zh": "论文没有给出卡拉-吉加奇墓地的坐标，标记放在布拉纳塔，另一处墓地就在旁边。说大流行从这里开始，是科学家的解释。"
+  },
+  "sources": [
+   "S79"
+  ],
+  "until": "1339"
+ },
+ {
+  "id": "evt-caffa-1346",
+  "t": "1346",
+  "at": [
+   35.37917,
+   45.04889
+  ],
+  "kind": "disaster",
+  "importance": 3,
+  "title": {
+   "en": "Plague at Caffa",
+   "zh": "卡法的瘟疫"
+  },
+  "summary": {
+   "en": "1346: plague breaks out in the Golden Horde army besieging the Genoese port of Caffa.",
+   "zh": "1346 年：围攻热那亚港口卡法的金帐汗国军中暴发瘟疫。"
+  },
+  "detail": {
+   "en": "Gabriele de' Mussi says corpses were thrown into the town; Mark Wheelis thinks this mattered little for the spread to Europe.",
+   "zh": "德穆西说尸体被抛进城里；Mark Wheelis 认为这对瘟疫传到欧洲作用不大。"
+  },
+  "sources": [
+   "S80"
+  ],
+  "displayOffset": [
+   0.0,
+   -72.0
+  ]
+ },
+ {
+  "id": "evt-plague-messina-1347",
+  "t": "1347-10",
+  "at": [
+   15.55417,
+   38.19361
+  ],
+  "kind": "disaster",
+  "importance": 2,
+  "title": {
+   "en": "Plague reaches Messina",
+   "zh": "瘟疫到墨西拿"
+  },
+  "summary": {
+   "en": "October 1347: ships from Caffa carrying Genoese merchants bring plague to Messina in Sicily.",
+   "zh": "1347 年 10 月：载着热那亚商人、从卡法来的船把瘟疫带到西西里的墨西拿。"
+  },
+  "sources": [
+   "S81"
+  ]
+ },
+ {
+  "id": "evt-plague-alexandria-1347",
+  "t": "1347",
+  "at": [
+   29.8925,
+   31.1975
+  ],
+  "kind": "disaster",
+  "importance": 2,
+  "title": {
+   "en": "Plague reaches Alexandria",
+   "zh": "瘟疫到亚历山大港"
+  },
+  "summary": {
+   "en": "1347: according to al-Maqrizi, plague in Egypt begins with a ship full of corpses drifting into Alexandria.",
+   "zh": "1347 年：据马克里齐记载，埃及的瘟疫从一艘满载尸体的船漂进亚历山大港开始。"
+  },
+  "sources": [
+   "S82"
+  ]
+ },
+ {
+  "id": "evt-plague-cairo-1348",
+  "t": "1348-12",
+  "at": [
+   31.23583,
+   30.04444
+  ],
+  "kind": "disaster",
+  "importance": 2,
+  "title": {
+   "en": "Plague in Cairo",
+   "zh": "开罗的瘟疫"
+  },
+  "summary": {
+   "en": "December 1348: at the peak, about 7,000 people a day are reported dying in Cairo.",
+   "zh": "1348 年 12 月：据记载，疫情最严重时，开罗每天约有 7000 人死去。"
+  },
+  "detail": {
+   "en": "Michael Dols estimated that Egypt lost about a third of its people; Stuart Borsch argues for more.",
+   "zh": "Michael Dols 估计埃及失去约三分之一的人口，Stuart Borsch 认为更多。"
+  },
+  "sources": [
+   "S82"
+  ]
+ },
+ {
+  "id": "evt-strasbourg-1349",
+  "t": "1349-02-14",
+  "at": [
+   7.75222,
+   48.57333
+  ],
+  "kind": "atrocity",
+  "importance": 3,
+  "title": {
+   "en": "The Jews of Strasbourg murdered",
+   "zh": "斯特拉斯堡犹太人遭屠杀"
+  },
+  "summary": {
+   "en": "14 February 1349: the Jews of Strasbourg, falsely blamed for the plague, are burned in their cemetery; the chronicler counts about 2,000 people.",
+   "zh": "1349 年 2 月 14 日：被诬陷带来瘟疫的斯特拉斯堡犹太人在他们的墓地被烧死，编年史记为约两千人。"
+  },
+  "detail": {
+   "en": "Jacob von Königshofen writes that their money was the reason they were killed. Similar massacres took place in many towns in 1348 and 1349.",
+   "zh": "雅各布·冯·柯尼希斯霍芬写道，他们被杀是因为他们的钱。1348 年和 1349 年，许多城镇发生了同样的屠杀。"
+  },
+  "sources": [
+   "S83"
+  ]
+ },
+ {
+  "id": "evt-ming-1368",
+  "t": "1368",
+  "at": [
+   116.4,
+   39.93333
+  ],
+  "kind": "political",
+  "importance": 3,
+  "title": {
+   "en": "The Ming take Khanbaliq",
+   "zh": "明军进入大都"
+  },
+  "summary": {
+   "en": "1368: Zhu Yuanzhang founds the Ming in January; in September Xu Da's army enters Khanbaliq after the Yuan emperor has fled north.",
+   "zh": "1368 年：正月朱元璋建立明朝；八月元帝北逃后，徐达率军进入大都。"
+  },
+  "sources": [
+   "S26"
+  ],
+  "displayOffset": [
+   70.9,
+   -12.5
+  ]
+ },
+ {
+  "id": "site-chang-an",
+  "t": "-0138",
+  "at": [
+   108.85833,
+   34.30833
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Chang'an",
+   "zh": "长安"
+  },
+  "summary": {
+   "en": "City where Zhang Qian came back and from which Xuanzang set out; the point is the Wikidata point for the old city, in today's Xi'an.",
+   "zh": "张骞回到、玄奘出发的城市；点是维基数据中古城的位置，在今天的西安。"
+  },
+  "sources": [
+   "S93",
+   "S4"
+  ]
+ },
+ {
+  "id": "site-luoyang",
+  "t": "-0138",
+  "at": [
+   112.42447,
+   34.65867
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Luoyang",
+   "zh": "洛阳"
+  },
+  "summary": {
+   "en": "City where An Shigao translated Buddhist texts; the point is today's city.",
+   "zh": "安世高译经的城市；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S47"
+  ]
+ },
+ {
+  "id": "site-dunhuang",
+  "t": "-0138",
+  "at": [
+   94.66389,
+   40.14111
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Dunhuang",
+   "zh": "敦煌"
+  },
+  "summary": {
+   "en": "Oasis town at the western end of the Hexi Corridor; the point is today's city.",
+   "zh": "河西走廊西端的绿洲城镇；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S7"
+  ]
+ },
+ {
+  "id": "site-mogao",
+  "t": "-0138",
+  "at": [
+   94.80417,
+   40.03722
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Mogao Caves",
+   "zh": "莫高窟"
+  },
+  "summary": {
+   "en": "Buddhist cave temples near Dunhuang, begun in 366 according to a stele of 698; the Library Cave was opened in 1900.",
+   "zh": "敦煌附近的佛教石窟，据 698 年的碑始凿于 366 年；藏经洞 1900 年被打开。"
+  },
+  "sources": [
+   "S93",
+   "S48",
+   "S60"
+  ]
+ },
+ {
+  "id": "site-yumen-pass",
+  "t": "-0138",
+  "at": [
+   93.86383,
+   40.35217
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Yumen Pass (Jade Gate)",
+   "zh": "玉门关"
+  },
+  "summary": {
+   "en": "One of the two Han passes from which the roads into the Western Regions started.",
+   "zh": "汉代通往西域的两条路出发的两个关口之一。"
+  },
+  "sources": [
+   "S93",
+   "S10"
+  ]
+ },
+ {
+  "id": "site-kashgar",
+  "t": "-0138",
+  "at": [
+   75.98333,
+   39.45
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Kashgar (Shule)",
+   "zh": "喀什（疏勒）"
+  },
+  "summary": {
+   "en": "Oasis where the Han History's southern and northern roads met before the Pamirs; the point is today's city.",
+   "zh": "《汉书》南北两道在葱岭前会合的绿洲；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S10",
+   "S30"
+  ]
+ },
+ {
+  "id": "site-khotan",
+  "t": "-0138",
+  "at": [
+   79.9327,
+   37.1012
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Khotan (Yutian)",
+   "zh": "和田（于阗）"
+  },
+  "summary": {
+   "en": "Oasis state on the southern road; the point is today's city.",
+   "zh": "南道上的绿洲国家；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S30"
+  ]
+ },
+ {
+  "id": "site-kucha",
+  "t": "-0138",
+  "at": [
+   82.96043,
+   41.71525
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Kucha (Qiuci)",
+   "zh": "库车（龟兹）"
+  },
+  "summary": {
+   "en": "Oasis state on the northern road, home of Kumarajiva and later the Tang Anxi Protectorate; the point is today's city.",
+   "zh": "北道上的绿洲国家，鸠摩罗什的故乡，后来是唐安西都护府的所在；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S30",
+   "S49",
+   "S29"
+  ]
+ },
+ {
+  "id": "site-ferghana",
+  "t": "-0138",
+  "at": [
+   71.75778,
+   40.90083
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Ferghana Valley (Dayuan)",
+   "zh": "费尔干纳盆地（大宛）"
+  },
+  "summary": {
+   "en": "Dayuan of the Han records; the point is a reference point for the valley, not a site.",
+   "zh": "汉代记载中的大宛；点只是盆地的参照点，不是遗址。"
+  },
+  "sources": [
+   "S93",
+   "S30"
+  ]
+ },
+ {
+  "id": "site-bactria",
+  "t": "-0138",
+  "at": [
+   66.89889,
+   36.75806
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Bactria (Daxia)",
+   "zh": "巴克特里亚（大夏）"
+  },
+  "summary": {
+   "en": "Daxia of the Han records, beside which the Yuezhi lived; the point is a reference point for the region, not a site.",
+   "zh": "汉代记载中的大夏，月氏就在它旁边；点只是这个地区的参照点，不是遗址。"
+  },
+  "sources": [
+   "S93",
+   "S30",
+   "S4"
+  ]
+ },
+ {
+  "id": "site-samarkand",
+  "t": "-0138",
+  "at": [
+   66.97583,
+   39.65472
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Samarkand",
+   "zh": "撒马尔罕"
+  },
+  "summary": {
+   "en": "Sogdian city; the girl sold at Turfan in 639 came from here. The point is today's city.",
+   "zh": "粟特城市，639 年在吐鲁番被卖的女孩来自这里。点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S52"
+  ]
+ },
+ {
+  "id": "site-ctesiphon",
+  "t": "-0138",
+  "at": [
+   44.58083,
+   33.09361
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Ctesiphon",
+   "zh": "泰西封"
+  },
+  "summary": {
+   "en": "Ruins on the Tigris south-east of Baghdad; the point is the Wikidata point of the site.",
+   "zh": "底格里斯河边、巴格达东南的遗址；点是维基数据中遗址的位置。"
+  },
+  "sources": [
+   "S93"
+  ]
+ },
+ {
+  "id": "site-antioch",
+  "t": "-0138",
+  "at": [
+   36.18167,
+   36.20472
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Antioch",
+   "zh": "安条克"
+  },
+  "summary": {
+   "en": "Ancient city in today's Antakya; on one of the Jewish merchants' routes of the 9th century.",
+   "zh": "古城，在今天的安塔基亚；9 世纪犹太商人路线上的一站。"
+  },
+  "sources": [
+   "S93",
+   "S57"
+  ]
+ },
+ {
+  "id": "site-rome",
+  "t": "-0138",
+  "at": [
+   12.48278,
+   41.89306
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Rome",
+   "zh": "罗马"
+  },
+  "summary": {
+   "en": "Where Pliny wrote and where Rabban Sauma met the pope; the point is today's city.",
+   "zh": "普林尼写作的地方，也是拉班·扫马见到教宗的地方；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S42",
+   "S75"
+  ]
+ },
+ {
+  "id": "site-constantinople",
+  "t": "-0138",
+  "at": [
+   28.97602,
+   41.01224
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Constantinople",
+   "zh": "君士坦丁堡"
+  },
+  "summary": {
+   "en": "Capital of the Eastern Roman Empire; today's Istanbul.",
+   "zh": "东罗马帝国的都城，今天的伊斯坦布尔。"
+  },
+  "sources": [
+   "S93",
+   "S62"
+  ]
+ },
+ {
+  "id": "site-berenike",
+  "t": "-0138",
+  "at": [
+   35.48944,
+   23.94306
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Berenice",
+   "zh": "贝勒尼基"
+  },
+  "summary": {
+   "en": "Red Sea port named in the Periplus; the point is the Wikidata point of the ancient port.",
+   "zh": "《航行记》写到的红海港口；点是维基数据中古港的位置。"
+  },
+  "sources": [
+   "S93",
+   "S34"
+  ]
+ },
+ {
+  "id": "site-muziris",
+  "t": "-0138",
+  "at": [
+   76.2,
+   10.15
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Muziris",
+   "zh": "穆济里斯"
+  },
+  "summary": {
+   "en": "South Indian port that ships from Egypt sailed to on the monsoon, according to the Periplus; the point is the Wikidata point.",
+   "zh": "据《航行记》，从埃及来的船借季风驶往的南印度港口；点是维基数据中的位置。"
+  },
+  "sources": [
+   "S93",
+   "S34"
+  ]
+ },
+ {
+  "id": "site-xuwen",
+  "t": "-0138",
+  "at": [
+   110.17138,
+   20.32919
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Xuwen",
+   "zh": "徐闻"
+  },
+  "summary": {
+   "en": "One of the ports the Han History names for voyages south; the point is today's county.",
+   "zh": "《汉书》写到的向南航行的出发港之一；点是今天的县。"
+  },
+  "sources": [
+   "S93",
+   "S12"
+  ]
+ },
+ {
+  "id": "site-hepu",
+  "t": "-0138",
+  "at": [
+   109.2,
+   21.66667
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Hepu",
+   "zh": "合浦"
+  },
+  "summary": {
+   "en": "Han commandery and port named in the Han History's sea route; the point is today's county.",
+   "zh": "汉代的郡和港口，见于《汉书》的海路记载；点是今天的县。"
+  },
+  "sources": [
+   "S93",
+   "S12",
+   "S7"
+  ]
+ },
+ {
+  "id": "site-aden",
+  "t": "-0138",
+  "at": [
+   45.03333,
+   12.8
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Aden",
+   "zh": "亚丁"
+  },
+  "summary": {
+   "en": "Port where Ben Yiju's partner Madmun lived; the point is today's city.",
+   "zh": "本·伊居的伙伴马德蒙居住的港口；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S64"
+  ]
+ },
+ {
+  "id": "site-mangalore",
+  "t": "-0138",
+  "at": [
+   74.8425,
+   12.87167
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Mangalore",
+   "zh": "门格洛尔"
+  },
+  "summary": {
+   "en": "Port on the south-west coast of India where Ben Yiju lived for years; the point is today's city.",
+   "zh": "印度西南海岸的港口，本·伊居在那里住了多年；点是今天的城市。"
+  },
+  "sources": [
+   "S93",
+   "S64"
+  ]
+ },
+ {
+  "id": "site-samudera-pasai",
+  "t": "-0138",
+  "at": [
+   97.20056,
+   5.13406
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Samudra-Pasai",
+   "zh": "须文答剌—巴赛"
+  },
+  "summary": {
+   "en": "Kingdom on the north coast of Sumatra where Marco Polo waited for the wind and from which Ibn Battuta sailed to China; the point is the Wikidata point.",
+   "zh": "苏门答腊北岸的王国，马可·波罗在那里等风，伊本·白图泰从那里启航去中国；点是维基数据中的位置。"
+  },
+  "sources": [
+   "S93",
+   "S72",
+   "S77"
+  ]
+ },
+ {
+  "id": "site-temasek",
+  "t": "-0138",
+  "at": [
+   103.847,
+   1.29444
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Temasek (Danmaxi)",
+   "zh": "淡马锡（单马锡）"
+  },
+  "summary": {
+   "en": "Settlement at today's Singapore described by Wang Dayuan in 1349; the point is Fort Canning Hill, where objects of his time were dug up.",
+   "zh": "汪大渊 1349 年记下的聚落，在今天的新加坡；点在福康宁山，那里出土了他那个时代的器物。"
+  },
+  "sources": [
+   "S93",
+   "S91",
+   "S78"
+  ]
+ },
+ {
+  "id": "site-quanzhou",
+  "t": "-0138",
+  "at": [
+   118.58583,
+   24.91389
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Quanzhou (Zayton)",
+   "zh": "泉州（刺桐）"
+  },
+  "summary": {
+   "en": "Great port of the Song and Yuan, a World Heritage Site since 2021; a Song ship with 13 watertight compartments was excavated here in 1974.",
+   "zh": "宋元大港，2021 年列入世界遗产；1974 年在这里发掘出一艘有 13 个水密隔舱的宋代海船。"
+  },
+  "sources": [
+   "S93",
+   "S63",
+   "S23"
+  ]
+ },
+ {
+  "id": "site-karakorum",
+  "t": "-0138",
+  "at": [
+   102.82379,
+   47.19753
+  ],
+  "kind": "site",
+  "importance": 1,
+  "title": {
+   "en": "Karakorum",
+   "zh": "哈剌和林"
+  },
+  "summary": {
+   "en": "Mongol capital where William of Rubruck stayed in 1254; the point is the Wikidata point of the ruins.",
+   "zh": "鲁布鲁克 1254 年住过的蒙古都城；点是维基数据中遗址的位置。"
+  },
+  "sources": [
+   "S93",
+   "S69"
+  ]
+ },
+ {
+  "id": "site-caffa",
+  "t": "-0138",
+  "at": [
+   35.37917,
+   45.04889
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Caffa",
+   "zh": "卡法"
+  },
+  "summary": {
+   "en": "Genoese port in Crimea, today's Feodosia; a centre of the Black Sea slave trade and of the 1346 plague siege.",
+   "zh": "热那亚人在克里米亚的港口，今天的费奥多西亚；黑海奴隶贸易的中心之一，1346 年在此围城时暴发瘟疫。"
+  },
+  "sources": [
+   "S93",
+   "S71",
+   "S80"
+  ]
+ },
+ {
+  "id": "site-tana",
+  "t": "-0138",
+  "at": [
+   39.41667,
+   47.1
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Tana",
+   "zh": "塔纳"
+  },
+  "summary": {
+   "en": "Mongol port near the mouth of the Don where Venetians lived; the start of Pegolotti's road to Cathay. The point is today's Azov.",
+   "zh": "顿河口附近、威尼斯人居住的蒙古港口，裴哥罗梯“去契丹之路”的起点。点是今天的亚速。"
+  },
+  "sources": [
+   "S93",
+   "S71",
+   "S76"
+  ]
+ },
+ {
+  "id": "site-khanbaliq",
+  "t": "-0138",
+  "at": [
+   116.4,
+   39.93333
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Khanbaliq (Dadu)",
+   "zh": "汗八里（大都）"
+  },
+  "summary": {
+   "en": "Yuan capital where Beijing is today; the end of Pegolotti's road.",
+   "zh": "元朝都城，在今天的北京；裴哥罗梯所列道路的终点。"
+  },
+  "sources": [
+   "S93",
+   "S25",
+   "S76"
+  ]
+ },
+ {
+  "id": "site-baghdad",
+  "t": "-0138",
+  "at": [
+   44.36611,
+   33.31528
+  ],
+  "kind": "site",
+  "importance": 2,
+  "title": {
+   "en": "Baghdad",
+   "zh": "巴格达"
+  },
+  "summary": {
+   "en": "Founded in 762; the end of the Tang geographer Jia Dan's sea route from Guangzhou.",
+   "zh": "762 年建立；唐代地理学者贾耽所记从广州出发的海路的终点。"
+  },
+  "sources": [
+   "S93",
+   "S56",
+   "S27"
+  ]
+ }
+]

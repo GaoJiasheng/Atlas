@@ -147,12 +147,15 @@ export const datedLayerDef = z
     recent: z.boolean().optional(),
     catalogue: z.object({ file: kebabId }).strict().optional(),
     encoding: z.object({ radius: z.object({ property: z.literal('mag'), min: z.literal(6), max: z.literal(9.5), px: z.tuple([z.literal(2), z.literal(8)]) }).strict() }).strict().optional(),
+    /** Every line is schematic (recorded stops joined by rule): drawn dashed, with a dashed KEY swatch. */
+    certainty: z.literal('approximate').optional(),
   })
   .strict()
   .refine((layer) => layer.holder !== undefined || layer.color !== undefined, { path: ['color'], message: 'a dated layer needs `holder` or `color`' })
   .refine((layer) => !layer.encoding || layer.kind === 'point', { path: ['encoding'], message: 'radius encoding requires point geometry' })
   .refine((layer) => layer.temporal?.mode !== 'reference' || layer.recent !== true, { path: ['recent'], message: 'reference layers cannot have recent points' })
-  .refine((layer) => layer.countLabel === undefined || layer.count === true, { path: ['countLabel'], message: '`countLabel` needs `count: true`' });
+  .refine((layer) => layer.countLabel === undefined || layer.count === true, { path: ['countLabel'], message: '`countLabel` needs `count: true`' })
+  .refine((layer) => layer.certainty === undefined || layer.kind === 'line', { path: ['certainty'], message: '`certainty` is for line layers (areas read it per feature)' });
 export type DatedLayerDef = z.output<typeof datedLayerDef>;
 
 export const datedLayers = z.array(datedLayerDef).superRefine((layers, ctx) => {

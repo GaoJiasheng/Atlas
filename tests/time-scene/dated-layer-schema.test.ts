@@ -14,6 +14,12 @@ const point = (properties: Record<string, unknown> = { f: 1960, h: 12 }) => ({ t
 const topology = (geometries: unknown[] = [point()]) => ({ type: 'Topology', arcs: [], objects: { [layer.file]: { type: 'GeometryCollection', geometries } } });
 
 describe('dated layer definitions', () => {
+  it('takes `certainty: approximate` on line layers only', () => {
+    expect(datedLayerDef.safeParse({ ...layer, kind: 'line', count: undefined, certainty: 'approximate' }).success).toBe(true);
+    expect(datedLayerDef.safeParse({ ...layer, kind: 'area', count: undefined, certainty: 'approximate' }).success).toBe(false);
+    expect(datedLayerDef.safeParse({ ...layer, kind: 'line', count: undefined, certainty: 'certain' }).success).toBe(false);
+  });
+
   it('requires a holder or a known theme color token', () => {
     expect(datedLayerDef.safeParse({ ...layer, holder: undefined }).success).toBe(false);
     expect(datedLayerDef.safeParse({ ...layer, holder: undefined, color: 'token:cold' }).success).toBe(true);
