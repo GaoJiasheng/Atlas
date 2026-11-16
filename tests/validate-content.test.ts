@@ -3,7 +3,7 @@
  * copies of sample-time and sample-space, each broken in one way.
  */
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
@@ -184,7 +184,14 @@ beforeAll(() => {
     },
     SAMPLE_SPACE,
   );
-  topic('lesson-clean', () => {}, FRACTIONS);
+  // The copy sits alone in a temp tree, so its links to sibling lessons (symmetry, graphs)
+  // have no topic to resolve against; keep the link text and drop the tags.
+  topic('lesson-clean', (root) => {
+    for (const name of readdirSync(join(root, 'chapters'))) {
+      const file = join(root, 'chapters', name);
+      writeFileSync(file, readFileSync(file, 'utf8').replace(/<TopicLink [^>]*>([^<]*)<\/TopicLink>/g, '$1'));
+    }
+  }, FRACTIONS);
   topic(
     'lesson-bad',
     (root) => {
