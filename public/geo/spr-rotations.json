@@ -1,0 +1,1 @@
+{"version":1,"modelId":"test-three-plates","anchorPlateId":0,"sequences":[{"moving":1,"fixed":0,"poles":[[0,90,0,0],[100,0,0,20],[200,0,0,40]]},{"moving":2,"fixed":0,"poles":[[0,90,0,0],[200,90,0,-60]]},{"moving":3,"fixed":1,"poles":[[0,90,0,0],[100,90,0,10]]},{"moving":3,"fixed":2,"poles":[[100,90,0,10],[200,90,0,10]]}]}

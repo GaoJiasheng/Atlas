@@ -169,6 +169,8 @@ export interface MapHudFramingOptions {
   /** An island topic: its extent, so whole-island cameras keep it whole (`islandZoom`); `onShift` hears every
    * change of the zoom shift (a layout change), which moves the island's detailed land's fade-in. */
   island?: { bounds: readonly [number, number, number, number]; onShift(shift: number): void };
+  /** Last say on a framed map zoom, given the container-local free rect and the canvas size (a globe that should sit whole in the rect). */
+  fitZoom?(zoom: number, center: [number, number], rect: FrameRect, box: { width: number; height: number }): number;
 }
 
 /** The host's stage-local free rect in container coordinates, inset by GAP and clipped to the canvas. */
@@ -221,6 +223,7 @@ export function createMapHudFraming(map: MlMap, container: HTMLElement, options:
     const island = options.island;
     // `measure()` ran first, so `rect` is set.
     if (island) framed.zoom = islandZoom(framed, camera.zoom, island.bounds, box.width, rect!);
+    if (options.fitZoom && rect) framed.zoom = options.fitZoom(framed.zoom, framed.center, rect, box);
     return { ...framed, pitch: camera.pitch ?? 0, bearing: camera.bearing ?? 0, padding: { ...padding } };
   };
 

@@ -15,6 +15,7 @@ import type { Feature, FeatureCollection, LineString, Point } from 'geojson';
 import type { GeoCamera, Locale } from '../core/types';
 import { isGeoCamera } from '../core/camera';
 import { createMapHudFraming } from './lib/hud-framing';
+import { globeFitZoom } from './lib/globeFit';
 import { readThemeTokens, type ThemeTokens } from '../../theme/theme';
 import { withBase } from '../../i18n';
 import type { GeoController, GeoControllerOptions } from './stages/geo/controller';
@@ -65,6 +66,8 @@ export interface RotationApi {
   /** The object the reader picked (map or index); its detail shows in the reader until the highlight changes. */
   selected(): string | null;
   select(id: string, fly: boolean): void;
+  /** QA: the map centre and container-local screen points of [lon, lat] (null on the far side of the globe). */
+  probe(points: [number, number][]): { center: [number, number]; zoom: number; screen: ([number, number] | null)[] };
 }
 
 const quantize = (ma: number, digits: number) => { const k = 10 ** digits; return Math.round(Math.max(0, ma) * k) / k; };
@@ -156,7 +159,11 @@ export function createRotationMap(options: GeoControllerOptions): GeoController 
   });
   map.touchZoomRotate.disableRotation();
   options.container.dataset.projection = config.projection;
-  const hudFraming = createMapHudFraming(map, options.container, { reducedMotion, hud: options.hud, clampZoom: (z) => Math.min(ROTATION_MAX_ZOOM, z) });
+  const hudFraming = createMapHudFraming(map, options.container, {
+    reducedMotion, hud: options.hud, clampZoom: (z) => Math.min(ROTATION_MAX_ZOOM, z),
+    // A globe that would only just overflow the free rect sits whole inside it, its rim clear of the HUD.
+    ...(config.projection === 'globe' ? { fitZoom: (zoom: number, center: [number, number], rect: { x0: number; y0: number; x1: number; y1: number }, box: { height: number }) => globeFitZoom(zoom, center[1], box.height, rect.x1 - rect.x0, rect.y1 - rect.y0) } : {}),
+  });
   map.on('error', (e) => console.warn('[atlas] map:', e.error?.message ?? e));
   const canvas = map.getCanvas();
   let pointerAt = 0;
@@ -343,13 +350,17 @@ export function createRotationMap(options: GeoControllerOptions): GeoController 
   options.labelRoot.appendChild(namesRoot);
   const nameEls = new Map<string, HTMLElement>();
   const namePositions = new Map<string, [number, number]>();
+  /** Rendered width of each name, measured when its text is set (never per frame). */
+  const nameWidth = new Map<string, number>();
   const names = () => {
     if (!objects || !model) return;
     const ma = stats.selectedMa;
     for (const l of objects.points.labels) {
       let el = nameEls.get(l.id);
       if (!el) { el = document.createElement('span'); el.className = 'cd-name'; el.dataset.id = l.id; el.dataset.super = String(l.window[1] > 0); namesRoot.appendChild(el); nameEls.set(l.id, el); }
-      el.textContent = locale === 'zh' ? l.name.zh : l.name.en;
+      // Only on a change: a text write is a childList mutation, which makes the HUD room re-measure.
+      const text = locale === 'zh' ? l.name.zh : l.name.en;
+      if (el.textContent !== text) { el.textContent = text; nameWidth.set(l.id, el.offsetWidth); }
       const inWindow = ma <= l.window[0] && ma >= l.window[1];
       const at = inWindow && validAt(l, ma) ? model.rotatePoint(l.plateId, ma, l.at) : null;
       if (at) namePositions.set(l.id, at); else namePositions.delete(l.id);
@@ -357,21 +368,25 @@ export function createRotationMap(options: GeoControllerOptions): GeoController 
     placeNames();
   };
   /** Hidden on the far side of the globe. */
-  const facing = (at: [number, number]) => {
+  const facing = (at: [number, number], min = 0.15) => {
     if (config.projection !== 'globe') return true;
     const c = map.getCenter();
     const r = Math.PI / 180;
     const cos = Math.sin(at[1] * r) * Math.sin(c.lat * r) + Math.cos(at[1] * r) * Math.cos(c.lat * r) * Math.cos((at[0] - c.lng) * r);
-    return cos > 0.15;
+    return cos > min;
   };
   const placeNames = () => {
     // A name gives way to the placards of highlighted objects (they carry the reading for this beat).
     const boxes = leaders.boxes();
+    const obstacles = leaders.band()?.obstacles ?? [];
     for (const [id, el] of nameEls) {
       const at = namePositions.get(id);
       if (!at || !facing(at)) { el.style.opacity = '0'; continue; }
       const p = map.project(at);
-      const hidden = store.getState().highlight.includes(id) || boxes.some((r) => p.x > r.x - 60 && p.x < r.x + r.w + 60 && p.y > r.y - 14 && p.y < r.y + r.h + 14);
+      // Names under a HUD block (from the leaders' last measure, container-local) give way too.
+      const half = (nameWidth.get(id) || 120) / 2;
+      const hidden = store.getState().highlight.includes(id) || boxes.some((r) => p.x > r.x - 60 && p.x < r.x + r.w + 60 && p.y > r.y - 14 && p.y < r.y + r.h + 14)
+        || obstacles.some((r) => p.x + half > r.x && p.x - half < r.x + r.width && p.y + 9 > r.y && p.y - 9 < r.y + r.height);
       el.style.opacity = hidden ? '0' : '1';
       el.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y)}px) translate(-50%, -50%)`;
     }
@@ -393,9 +408,18 @@ export function createRotationMap(options: GeoControllerOptions): GeoController 
       const summary = objects.text[id]?.summary;
       items.push({ key: `cd:${id}`, id, kind: 'event', en: t.en, zh: t.zh, note: summary ? (locale === 'zh' ? summary.zh : summary.en) : '', at, pinned: true, clickable: !presenting });
     }
+    // setItems re-measures only when a placard's text changes; a new age only moves the anchors.
     leaders.setItems(items);
-    leaders.relayout();
-    // Feature-state emphasis for highlighted map points (groups emphasise every member).
+    emphasise();
+  };
+  /** Feature-state emphasis for highlighted map points (groups emphasise every member). Feature state
+   * outlives setData, so it is rewritten only when the highlight changes, not for every age. */
+  let emphasised = '';
+  const emphasise = () => {
+    if (!objects) return;
+    const key = store.getState().highlight.join(',');
+    if (key === emphasised) return;
+    emphasised = key;
     for (const src of [SRC.objects, SRC.fossils, SRC.gps]) map.removeFeatureState({ source: src });
     for (const id of store.getState().highlight) {
       const group = objects.fossils?.groups.find((g) => g.id === id);
@@ -526,6 +550,10 @@ export function createRotationMap(options: GeoControllerOptions): GeoController 
     focus: (id) => focus(id),
     selected: () => selected,
     select: (id, fly) => selectObject(id, fly),
+    probe: (points) => {
+      const c = map.getCenter();
+      return { center: [c.lng, c.lat], zoom: map.getZoom(), screen: points.map((p) => { if (!facing(p, 0)) return null; const s = map.project(p); return [s.x, s.y]; }) };
+    },
   };
   return {
     rotation: api,

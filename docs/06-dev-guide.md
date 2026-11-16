@@ -2639,6 +2639,9 @@ pnpm tsx scripts/geo/lib/check.ts --topic ww2         # MapLibre（Playwright）
 - **调度**（`rotation-map.ts`）：年代按 `maDigits` 量化，相同不重算；同时只有一次几何更新在途，在途期间来的年代只记最新一个；播放头移动时用快档，停 300 ms 后换细档；`present-only` 图层只在 0.0 Ma 可见、首次需要时才加载。旋转主图允许拍间时间缓动（每一帧都是模型真实结果）；离散重建题仍不缓动。GeoJSON source `maxzoom: 4`，主图 maxZoom 3.6；换主题只改 paint。
 - **对象与 HUD**：点 / 组 / 名称随板块转；高亮对象用 `stages/geo/leaders.ts` 的引线标签（组只挂代表点），名称标签在年代窗外不显示、在球背面隐藏；地图点击取 22 px 内最近的点（命中 ≥ 44 px）。`rotation-ui.tsx` 给左列 PLATE（所选年代、模型、投影、细节档）、阅读面板章头下的详情、章末索引。`__atlas.engine.geology().rotation` 返回 `RotationStats`（`selectedMa`、`status`、`lod`、`geometryUpdates`、`verticesDrawn`、`presentOnlyVisible`、`inFlight`、`updateMs`），`__atlas.engine.setMa(ma)` 像拖动一样设年代（e2e 用）。
 - **投影**：`globe` 用 MapLibre 5 的 style `projection: { type: 'globe' }`；它沿用中心纬度的墨卡托缩放，所以构建期算镜头时扣掉 log2(1/cos φ)（上限 1.5）。瓦片仍止于 ±85.05°。
+- **整球取景**（2026-11-16）：`lib/globeFit.ts` 按 MapLibre 的球半径（worldSize / 2π / cos φ）与透视相机（距离 = 1.5 × 画布高）算屏上球盘直径；`hud-framing` 的可选 `fitZoom` 在每次取景 / 重排后调用它：球盘比自由舞台矩形短边大、但不超过 1.7 倍时缩小到整球落进矩形（球缘不被 HUD 遮），更大的近景不动，从不放大。清单可选 `plateLabel`（PLATE 的模型名，缺省用 modelId 大写）。地名只在文字变化时写 DOM（每帧写文字会触发 HUD 房间重测），并避开 HUD 块。
+- **夹具**：`sample-plate-rotation`（草稿）用 `scripts/geo/sample-plate-rotation/build.ts` 生成 `public/geo/spr-*.json`：3 块合成板块、100 Ma 一次固定板块切换、绕南极的环、跨日界线的环、2 个点、1 个两成员的组、1 个只在 200–120 Ma 显示的标注；e2e `sample-plate-rotation.spec.ts` 用 `__atlas.engine.rotationAt(id)` 对照 Node 端同一旋转代码。`rotationProbe(points)` 给 QA 脚本返回地图中心与屏幕坐标。
+- **粗档**：`scripts/geo/continental-drift/rescrub.ts` 用与 build.py 相同的规则（局部方位投影上的 Visvalingam、全局阈值、自交环保留更多点）从细档重算粗档：陆地 6,000、大陆边缘 4,000 顶点，拖动时省略今天面积小于 300 km² 的环；build.py 的预算同步改成一样。
 - **校验**：`rotation-build.ts` 在 `validate-content` 里实读清单与全部文件，查未知 plateId、`from < to`、present-only 带 plateId、缺文件、对象重名，并把对象 id 登记进全局 id（章节 `highlight` / `index` 只能引用它们）。单测 `plate-rotation.test.ts`、`rotated-geometry.test.ts`，e2e `continental-drift.spec.ts`。
 
 ### SpaceScene · 试一试 · 翼型（airfoil）

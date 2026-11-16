@@ -1,0 +1,23 @@
+id: sample-plate-rotation
+title: { en: "Sample: Plate Rotation", zh: "示例：板块旋转" }
+subtitle: { en: "TEST/DESIGN engine fixture · no scientific claims", zh: "测试／设计引擎夹具 · 不作科学主张" }
+subject: geography
+tags: [beyond-syllabus]
+mode: time
+engine: time-scene
+stage: geo
+theme: paper
+sensitivity: open
+status: draft
+maDigits: 1
+note: { en: "Synthetic TEST/DESIGN plates, poles and records", zh: "合成测试／设计板块、旋转极与记录" }
+basemap:
+  rotation:
+    file: spr-manifest
+    projection: globe
+    layers:
+      - { id: cd-land, label: { en: "TEST plates", zh: "测试板块" } }
+      - { id: cd-names, label: { en: "TEST names", zh: "测试名称" } }
+      - { id: cd-glacial, label: { en: "TEST polar point", zh: "测试极区点" } }
+      - { id: cd-fossils, label: { en: "TEST records", zh: "测试记录" } }
+      - { id: cd-singapore, label: { en: "TEST site and its path", zh: "测试站点及其路径" } }

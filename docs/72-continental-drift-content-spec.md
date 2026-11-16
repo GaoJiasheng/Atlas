@@ -674,3 +674,10 @@ basemap:
 - JS：TimeScene 静态闭包峰值 449.26 KB gz（改动前 449.05，+0.21 KB，≤ 452）；懒加载 `rotation-map` chunk（含 plateRotation、rotatedGeometry）7.25 KB gz（≤ 8），`rotation-ui` chunk 2.7 KB gz 另计。
 - 数据：`public/geo/cd-*` 合计 1.99 × 10⁶ B（1.90 MiB）；首屏 231 KB gz。
 - 性能（桌面 Chromium，Apple 芯片 Mac，1180×820 @2x；**不是 iPad 实测**）：拖动 400→0 Ma 3 秒，几何更新约 35 次 / 秒；快档单次主线程 p50 0.8 ms、p95 1.0 ms；细档约 1.2–1.5 ms；松手到细档到位约 335 ms（含 300 ms 等待）。真 iPad 数字待补。
+
+### 9.4 打磨（2026-11-16，分支 `claude/polish-drift`）
+
+- **夹具主题** `sample-plate-rotation`（§4.6 原计划、§9.2 未做）：3 块合成板块、100 Ma 固定板块切换、绕南极环、跨日界线环、2 点、1 组、1 个有年代窗的标注；e2e `tests-e2e/sample-plate-rotation.spec.ts`。见 docs/06。
+- **极区取景**：19 个高纬拍 × 桌面 1440×900、iPad 1180×820 / 820×1180、手机 390×844 实测（`rotationProbe`）：主体都在自由舞台矩形内；问题是球盘略大于自由矩形时球缘被左列 / 图层面板 / 章节轴切掉，地名压在 HUD 块下。改：`globeFit` 把不超过 1.7 倍短边的球缩到整球落进矩形；地名避开 HUD 块。手机与竖屏 iPad 上高亮引线标签因版面不足被隐藏，是全引擎规则（leader-layout），未改。南极 85° 以南仍是瓦片空洞（PLATE 已注“细节至 85°”）。
+- **拖动性能**：CPU 降速 4× / 6×（iPad 代理，非实测）下剖析，主线程瓶颈：（1）地名每次更新重写文字 → MutationObserver → HUD 房间每帧强制重排；（2）引线 `update()` 每帧读容器尺寸；（3）MapLibre 把 GeoJSON 序列化给 worker。改：地名只在文字变化时写；引线尺寸在 relayout 时缓存；粗档陆地 12,000 → 6,000、大陆边缘 7,900 → 4,000 顶点（`rescrub.ts`，拖动时略去 < 300 km² 的环）；特征态只在高亮变化时重写。
+- **事实补取**：见 `data/SOURCES.md`“Re-tried 2026-11-16”。恢复：莫利两次被拒（S40）、撒普多年少被承认及 1998 / 2001 表彰（S39）、四种未来超大陆的署名（S41，S33 补 DOI）、陆桥说与均衡作用（S42、S1）、冰流方向（S43）。仍 cut：78.6 万年、犬颌兽食性、“自 1994 年 1.5 m”。

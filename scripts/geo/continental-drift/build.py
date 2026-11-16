@@ -358,9 +358,9 @@ for t in range(int(START), -1, -1):
 REPORT['coverage'] = {'atStart': coverage[int(START)], 'at320': coverage.get(320), 'at250': coverage.get(250), 'yearsBelowHalf': weak[:20], 'note': 'share of today\'s coastline area (per plate-ID group) that the model keeps at each age'}
 
 land_full, s1 = lod_layer(COAST, 36000, 0)
-land_scrub, s2 = lod_layer(COAST, 12000, 100)
+land_scrub, s2 = lod_layer(COAST, 6000, 300)  # 2026-11-16 scrub pass (rescrub.ts derives the same budget from the fine level)
 shelf_full, s3 = lod_layer(SHELF, 22000, 0)
-shelf_scrub, s4 = lod_layer(SHELF, 7900, 100)
+shelf_scrub, s4 = lod_layer(SHELF, 4000, 300)
 REPORT['lod'] = {'land-full': s1, 'land-scrub': s2, 'shelf-full': s3, 'shelf-scrub': s4}
 
 
@@ -592,6 +592,7 @@ files['cd-gps'] = emit('cd-gps', {'version': 1, 'stations': gps, 'present': pres
 files['cd-manifest'] = emit('cd-manifest', {
     'version': 1, 'modelId': 'merdith2021',
     'modelLabel': {'en': 'Merdith et al. 2021 plate model · v1.2.4', 'zh': 'Merdith 等 2021 年板块模型 · v1.2.4'},
+    'plateLabel': 'MERDITH 2021',
     'coordinateSpace': 'rotated-present-day', 'rangeMa': [START, 0], 'rotations': 'cd-rotations',
     'layers': [
         {'id': 'cd-land', 'file': 'cd-land', 'kind': 'fill', 'motion': 'plate', 'lod': {'scrub': 'scrub', 'full': 'full'}},

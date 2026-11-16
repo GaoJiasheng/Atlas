@@ -136,6 +136,8 @@ export function createLeaders(options: {
   let svg: SVGSVGElement | null = null;
   let group: SVGGElement | null = null;
   let band: Band | null = null;
+  /** Container size from the last measure: read in `relayout()` (resize-observed), never per frame. */
+  let size = { w: 0, h: 0 };
   /** Viewport rects of the HUD panels over the stage, from the last measure. */
   let panelRects: DOMRect[] = [];
   const observed = new Set<Element>();
@@ -303,6 +305,7 @@ export function createLeaders(options: {
   function relayout() {
     if (destroyed) return;
     band = measureBand();
+    size = { w: container.clientWidth, h: container.clientHeight };
     options.onBand?.(band);
     // Placards never get wider than their column (two columns when there is room, else one).
     const room = band.right - band.left;
@@ -328,8 +331,8 @@ export function createLeaders(options: {
   function update() {
     if (destroyed || !band || entries.size === 0) return;
     const b = band;
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    // A layout read here would force a reflow on every map frame (the placards were just moved).
+    const { w: width, h: height } = size;
     const scale = displayOffsetScale(map.getZoom());
     for (const e of entries.values()) {
       // The world copy the camera is looking at (a path across the antimeridian sits in the neighbouring copy).

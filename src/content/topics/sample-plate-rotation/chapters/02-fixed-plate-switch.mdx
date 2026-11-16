@@ -1,0 +1,18 @@
+---
+id: fixed-plate-switch
+order: 2
+title: {"en": "TEST: a fixed-plate switch", "zh": "测试：固定板块切换"}
+state: {"time": {"ma": 0}, "camera": {"center": [100, 10], "zoom": 1.8}, "layers": ["base", "cd-land", "cd-names", "cd-singapore"], "highlight": [], "index": ["spr-site"], "summary": {"en": "TEST/DESIGN: plate 3 changes the plate it follows at 100 Ma.", "zh": "测试／设计：板块 3 在 100 Ma 改随另一块板块。"}, "beats": [{"t": {"ma": 100.1}, "camera": {"center": [90, 10], "zoom": 1.8}, "layers": ["base", "cd-land", "cd-names", "cd-singapore"], "highlight": ["spr-site"], "caption": {"en": "TEST/DESIGN: 100.1 Ma. Plate 3 follows plate 2.", "zh": "测试／设计：100.1 Ma。板块 3 随板块 2。"}}, {"t": {"ma": 99.9}, "camera": {"center": [100, 15], "zoom": 1.8}, "layers": ["base", "cd-land", "cd-names", "cd-singapore"], "highlight": ["spr-site"], "caption": {"en": "TEST/DESIGN: 99.9 Ma. Plate 3 follows plate 1.", "zh": "测试／设计：99.9 Ma。板块 3 随板块 1。"}}, {"t": {"ma": 0}, "camera": {"center": [100, 10], "zoom": 1.8}, "layers": ["base", "cd-land", "cd-names", "cd-singapore"], "highlight": [], "caption": {"en": "TEST/DESIGN: 0 Ma. The path runs from the selected age to today.", "zh": "测试／设计：0 Ma。路径从所选年代通到今天。"}}]}
+---
+
+<Lang en>
+
+This is synthetic **TEST/DESIGN** material. Plate 3 follows plate 1 up to 100 Ma and plate 2 from 100 Ma, so the test site jumps between 99.9 and 100.1 Ma. The engine settles the shared age the way the reconstruction tree does: the first sequence to reach a plate wins.
+
+</Lang>
+
+<Lang zh>
+
+这是合成**测试／设计**材料。板块 3 在 100 Ma 以前随板块 1，从 100 Ma 起随板块 2，所以测试站点在 99.9 与 100.1 Ma 之间跳动。引擎按重建树的规则处理共用的年代：最先到达某板块的序列优先。
+
+</Lang>

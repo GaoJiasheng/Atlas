@@ -24,3 +24,11 @@ Merdith et al. 2021, plate model v1.2.4, CC BY 4.0. Adapted: the rotation file i
 - India–Asia collision: 50–40 Ma (S5).
 - Singapore collision: essentially complete by c. 200–195 Ma (S25); Metcalfe gives Middle–Late Triassic for Sibumasu (S26); both are stated.
 - Cynognathus: "mammal-like reptile" (S6); its diet was not read, so not stated.
+
+## Re-tried 2026-11-16 (polish round)
+- Morley: rejected by both Nature and the Journal of Geophysical Research (S40, NASA Goddard); restored. Submission months differ between secondary accounts, not stated.
+- Tharp: "only in recent years" recognised; Library of Congress honour 1998, Lamont-Doherty Heritage Award 2001 (S39); restored as "for many years her part was little recognised".
+- Future supercontinents: attributions read in Davies, Green and Duarte 2020 (S41): Pangaea Ultima (after Scotese), Novopangaea (Nield), Aurica (Duarte et al.), Amasia (after Mitchell et al., S33, doi:10.1038/nature10800); restored. "Pangaea Proxima" renaming not read, not stated.
+- Land bridges: the usual explanation of shared fossils (S42); Wegener's isostasy argument against sunken bridges (S1); restored as a "Sunken land bridges?" detail in chapter 03.
+- Ice flow: striations showing ice moving onto land from the sea, and an outward radial pattern once the southern continents are refitted (S43); restored as a detail in chapter 02. A named "fixed continents" alternative (moving the pole) was only partly read, not stated.
+- Still cut: ~786 ka (Singer et al. 2019 put the final reversal at ~773 ka; 786 ka is a lava-flow age, not a reversal age); Cynognathus diet (no museum or scholarly page readable); "1.5 m since 1994" is a mid-2010s NSW Spatial Services wording of the same GDA94 → GDA2020 shift, so the 1.8 m (S28) stays alone.

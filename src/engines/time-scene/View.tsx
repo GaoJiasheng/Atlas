@@ -802,7 +802,7 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
             suppressedCollections: deepTime.inset?.suppression.collections ?? 0, suppressedOccurrences: deepTime.inset?.suppression.occurrences ?? 0,
             highlightedObjectIds: store.getState().highlight, selectedObjectId,
           },
-        }) } : rotation ? { geology: () => ({ rotation: (controllerRef.current as { rotation?: { stats(): unknown } } | null)?.rotation?.stats() ?? null }), setMa: (ma: number) => commit(-ma * 1e6) } : {}),
+        }) } : rotation ? { geology: () => ({ rotation: (controllerRef.current as { rotation?: { stats(): unknown } } | null)?.rotation?.stats() ?? null }), setMa: (ma: number) => commit(-ma * 1e6), rotationAt: (id: string, ma?: number) => (controllerRef.current as { rotation?: { positionAt(id: string, ma?: number): [number, number] | null } } | null)?.rotation?.positionAt(id, ma) ?? null, rotationProbe: (points: [number, number][]) => (controllerRef.current as { rotation?: { probe(p: [number, number][]): unknown } } | null)?.rotation?.probe(points) ?? null } : {}),
       },
       escape: () => {
         if (isPresenting()) {

@@ -393,7 +393,8 @@
       "note": {
         "en": "Proposes the next supercontinent, Amasia, by ‘orthoversion’. Read 2026-11-15.",
         "zh": "提出以“正交聚合”形成的下一个超大陆亚美。2026 年 11 月 15 日读取。"
-      }
+      },
+      "url": "https://doi.org/10.1038/nature10800"
     },
     {
       "id": "S34",
@@ -452,6 +453,66 @@
       "note": {
         "en": "Plates typically move a few centimetres a year relative to each other. Read 2026-11-15.",
         "zh": "板块彼此之间通常每年移动几厘米。2026 年 11 月 15 日读取。"
+      }
+    },
+    {
+      "id": "S39",
+      "text": {
+        "en": "Columbia Climate School, Remembered: Marie Tharp, pioneering mapmaker of the ocean floor (24 August 2006)",
+        "zh": "哥伦比亚大学气候学院：《纪念玛丽·撒普——海底地图的开拓者》（2006 年 8 月 24 日）"
+      },
+      "url": "https://news.climate.columbia.edu/2006/08/24/remembered-marie-tharp-pioneering-mapmaker-of-the-ocean-floor",
+      "note": {
+        "en": "Recognition of her contributions came only in later years; honoured in 1998 at the 100th anniversary of the Library of Congress Geography and Map Division; Lamont-Doherty Heritage Award in 2001. Read 2026-11-16.",
+        "zh": "她的贡献到晚年才开始得到承认；1998 年在美国国会图书馆地理与地图部成立 100 周年时受表彰；2001 年获拉蒙特–多尔蒂传承奖。2026 年 11 月 16 日读取。"
+      }
+    },
+    {
+      "id": "S40",
+      "text": {
+        "en": "David P. Stern (NASA Goddard), A Millennium of Geomagnetism, §6 (Reviews of Geophysics 40(3), 2002)",
+        "zh": "戴维·斯特恩（NASA 戈达德中心）：《地磁学一千年》第 6 节（《地球物理评论》40 卷 3 期，2002）"
+      },
+      "url": "https://pwg.gsfc.nasa.gov/earthmag/mill_6.htm",
+      "note": {
+        "en": "Morley’s stripe manuscript was rejected by the referees of Nature and of the Journal of Geophysical Research; for a long time his contribution was not acknowledged. Read 2026-11-16.",
+        "zh": "莫利关于磁条带的稿件先后被《自然》和《地球物理研究杂志》的审稿人退回；他的贡献很长时间没有得到承认。2026 年 11 月 16 日读取。"
+      }
+    },
+    {
+      "id": "S41",
+      "text": {
+        "en": "Davies, Green and Duarte (2020), Back to the future II: tidal evolution of four supercontinent scenarios, Earth System Dynamics 11:291–299",
+        "zh": "Davies、Green 与 Duarte（2020）：《回到未来 II：四种超大陆情景的潮汐演化》，《地球系统动力学》11:291–299"
+      },
+      "url": "https://doi.org/10.5194/esd-11-291-2020",
+      "note": {
+        "en": "Introduction: Pangaea Ultima (based on Scotese 2003), Novopangaea (Nield 2007), Aurica (Duarte et al. 2018), Amasia (based on Mitchell et al. 2012). Read 2026-11-16.",
+        "zh": "引言：终极盘古（依据 Scotese 2003）、新盘古（Nield 2007）、奥里卡（Duarte 等 2018）、亚美（依据 Mitchell 等 2012）。2026 年 11 月 16 日读取。"
+      }
+    },
+    {
+      "id": "S42",
+      "text": {
+        "en": "University of California Museum of Paleontology, Alfred Wegener (1880–1930)",
+        "zh": "加州大学古生物博物馆：《阿尔弗雷德·魏格纳（1880–1930）》"
+      },
+      "url": "https://www.ucmp.berkeley.edu/history/wegener.html",
+      "note": {
+        "en": "The accepted explanation for matching fossils was land bridges, now sunken, that had once connected far-flung continents. Read 2026-11-16.",
+        "zh": "对跨洋相同化石的主流解释是：遥远的大陆曾由后来沉没的陆桥相连。2026 年 11 月 16 日读取。"
+      }
+    },
+    {
+      "id": "S43",
+      "text": {
+        "en": "Freie Universität Berlin, GeoLearning: Gondwana – evidence from climate",
+        "zh": "柏林自由大学 GeoLearning：《冈瓦纳——气候证据》"
+      },
+      "url": "https://www.geo.fu-berlin.de/en/v/geolearning/gondwana/evidences/climate/index.html",
+      "note": {
+        "en": "Carboniferous striated pavements often show ice moving onto continents from centres in the sea, which makes no sense with today’s landmasses; reassembled, the deposits show an outward radial flow like modern polar ice. Read 2026-11-16.",
+        "zh": "石炭纪擦痕岩面常显示冰从海上的中心流向大陆，按今天的陆地分布说不通；拼回去后，沉积显示冰呈放射状向外流，像今天的极地冰盖。2026 年 11 月 16 日读取。"
       }
     }
   ]

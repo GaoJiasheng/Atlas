@@ -24,6 +24,8 @@ export const rotationManifestSchema = z.object({
   version: z.literal(1),
   modelId: kebabId,
   modelLabel: deepTimeBi,
+  /** Short model name for the PLATE readout (e.g. "MERDITH 2021"); defaults to the model id. */
+  plateLabel: z.string().min(1).max(24).optional(),
   coordinateSpace: z.literal('rotated-present-day'),
   rangeMa: z.tuple([maNumber, maNumber]).refine(([a, b]) => a > b, 'rangeMa is [oldest, youngest]'),
   rotations: kebabId,
