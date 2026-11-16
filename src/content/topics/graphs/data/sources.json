@@ -35,6 +35,42 @@
         "en": "Questions, pictures and wording in this lesson are our own; every number is made up about one class, one stall or one week, and claims no real survey.",
         "zh": "本课的题目、插图和措辞都是自己写的；所有数字都是虚构的，说的是一个班、一个摊位或一周，不代表任何真实调查。"
       }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Bell, A. & Janvier, C. (1981). The interpretation of graphs representing situations. For the Learning of Mathematics 2(1), 34–41, p. 37.",
+        "zh": "Bell, A. 与 Janvier, C.（1981）：对表示情境的图像的解读。《数学学习》（For the Learning of Mathematics）第 2 卷第 1 期，34–41 页，第 37 页。"
+      },
+      "url": "https://flm-journal.org/Articles/342368A19260FACE7BC364ED38AD7.pdf",
+      "note": {
+        "en": "Asked when a line graph rose most, pupils often answered where its value was highest; the authors call this the \"increase vs value\" distraction (the code height-for-change, line graphs). Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "问折线图哪一段升得最多，学生常常答数值最高的地方；作者称之为\"增加量与数值\"的混淆（误解码 height-for-change，折线图）。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Common Core Standards Writing Team (2011). Progressions for the Common Core State Standards in Mathematics (draft, 20 June 2011): K–3, Categorical Data; Grades 2–5, Measurement Data, pp. 4 and 6.",
+        "zh": "Common Core 标准写作组（2011）：《Common Core 数学标准进程（草稿，2011 年 6 月 20 日）：K–3 分类数据；2–5 年级测量数据》，第 4、6 页。"
+      },
+      "url": "https://commoncoretools.wordpress.com/wp-content/uploads/2011/06/ccss_progression_md_k5_2011_06_20.pdf",
+      "note": {
+        "en": "\"How many more\" questions read from scaled bar graphs, and the bar graph's axis as a count scale (bar graphs, the codes value-for-difference and between-gridlines). For the order of teaching only. Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "从有刻度的条形图上回答\"多多少\"，条形图的轴是计数刻度（条形图，误解码 value-for-difference、between-gridlines）。只参考教学顺序。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
+    },
+    {
+      "id": "S6",
+      "text": {
+        "en": "Correll, M., Bertini, E. & Franconeri, S. (2020). Truncating the y-axis: Threat or menace? Proceedings of CHI 2020 (arXiv:1907.02035).",
+        "zh": "Correll, M.、Bertini, E. 与 Franconeri, S.（2020）：截断纵轴：威胁还是祸害？CHI 2020 会议论文（arXiv:1907.02035）。"
+      },
+      "url": "https://arxiv.org/abs/1907.02035",
+      "note": {
+        "en": "Bar charts whose axis does not start at 0 make differences look bigger than they are (the code truncated-axis). A study with adults, not children. Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "纵轴不从 0 开始的条形图会让差别看起来比实际大（误解码 truncated-axis）。研究对象是成人，不是儿童。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
     }
   ]
 }

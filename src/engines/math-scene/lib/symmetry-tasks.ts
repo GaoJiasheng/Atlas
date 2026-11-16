@@ -9,11 +9,16 @@
  *
  * Samples: `"cells:(7,2),(8,2),(7,3,ne)"` (squares and half squares put down),
  * `"pts:(7,1),(9,1),(9,3)"` (corners, in the order put down).
+ *
+ * A line of symmetry drawn on the grid (`draw-segment`, relation `symmetry`,
+ * docs/79 §2.2) picks two grid corners the same way a line on dot paper does
+ * (the dots are kept in the angle state, `dpts`); it is checked here: right
+ * when the line through them folds the figures onto themselves.
  */
 import type { GridFigure, GridModelSpec, MisconceptionCode, Model, SymLineSpec, Task, TaskOf } from '../schema';
 import { cellKey, extentOf, figureCells, figureHalves, figureOf, halfKey, parseCell, parseHalf, readingOrder } from './grid';
-import { axisOf, partnerKey, partnerPoint } from './symmetry';
-import { diagnoseCompletion, isRight, type Completion } from './diagnose/symmetry';
+import { axisOf, figurePieces, isSymmetric, linesOfSymmetry, partnerKey, partnerPoint, type Line, type Piece } from './symmetry';
+import { diagnoseCompletion, diagnoseDrawnLine, isRight, type Completion } from './diagnose/symmetry';
 
 /* ------------------------------------------------------------------ */
 /* Which tasks                                                          */
@@ -30,6 +35,7 @@ export const drawsSymmetry = (m: Model): boolean => isSymmetryModel(m);
 /** Is the task in the `symmetry` domain? */
 export function isSymmetryTask(task: Task): boolean {
   if (task.kind === 'complete-symmetric') return true;
+  if (task.kind === 'draw-segment') return task.model.kind === 'grid';
   if (isSymmetryModel(task.model)) return true;
   return task.kind === 'choose' && task.options.some((o) => (!!o.model && isSymmetryModel(o.model)) || o.symmetric !== undefined || o.lines !== undefined);
 }
@@ -160,7 +166,7 @@ const SPARE = 3;
 
 /** Apply a symmetry move (meaningless moves leave the state as it is). */
 export function symReduce<S extends SymState>(task: Task, state: S, action: SymAction): S {
-  if (action.do === 'sfold') return isSymmetryTask(task) && taskLine(task) ? { ...state, sfold: !state.sfold } : state;
+  if (action.do === 'sfold') return isSymmetryTask(task) && (taskLine(task) || task.kind === 'draw-segment') ? { ...state, sfold: !state.sfold } : state;
   if (task.kind !== 'complete-symmetric') return state;
   const plan = planOf(task);
   if (!plan) return state;
@@ -197,8 +203,52 @@ export interface SymCheck {
   code: MisconceptionCode | null;
 }
 
-/** The model phase of a completion (`null`: not one). */
-export function checkSymModel(task: Task, s: SymState, codes: readonly MisconceptionCode[]): SymCheck | null {
+/* A line of symmetry drawn on the grid */
+
+/** The figures a line drawn on the grid is about (ghosts left out). */
+export function segmentPieces(task: TaskOf<'draw-segment'>): Piece[] {
+  return task.model.kind === 'grid' ? task.model.figures.filter((f) => f.tone !== 'ghost').flatMap(figurePieces) : [];
+}
+
+/** The two corners picked (the given start first), else `null`. */
+function pickedLine(task: TaskOf<'draw-segment'>, dpts: readonly (readonly [number, number])[]): Line | null {
+  const pts = task.from ? [task.from, ...dpts] : dpts;
+  return pts.length >= 2 ? { a: pts[0]!, b: pts[1]! } : null;
+}
+
+/** The child's line on a symmetry grid, as a segment (`null`: not a line drawn there, or not both corners yet). */
+export function drawnLine(task: Task, s: { dpts: readonly (readonly [number, number])[] }): SymLineSpec | null {
+  if (task.kind !== 'draw-segment' || task.model.kind !== 'grid') return null;
+  const l = pickedLine(task, s.dpts);
+  return l ? { from: [l.a[0], l.a[1]], to: [l.b[0], l.b[1]] } : null;
+}
+
+/** A line drawn is a line of symmetry: at least 2 squares long, and folding along it matches. */
+export function symSegmentRight(task: TaskOf<'draw-segment'>, l: Line): boolean {
+  if (Math.max(Math.abs(l.b[0] - l.a[0]), Math.abs(l.b[1] - l.a[1])) < 2) return false;
+  return isSymmetric(segmentPieces(task), l);
+}
+
+/** A line of symmetry up or across through grid corners, drawn across the whole paper (`null`: none). */
+export function symSegmentSolution(task: TaskOf<'draw-segment'>): [[number, number], [number, number]] | null {
+  if (task.model.kind !== 'grid') return null;
+  const e = extentOf(task.model);
+  const whole = (v: number) => Math.abs(v - Math.round(v)) < 1e-9;
+  for (const l of linesOfSymmetry(segmentPieces(task))) {
+    if (Math.abs(l.a[0] - l.b[0]) < 1e-9 && whole(l.a[0])) return [[Math.round(l.a[0]), 0], [Math.round(l.a[0]), e.h]];
+    if (Math.abs(l.a[1] - l.b[1]) < 1e-9 && whole(l.a[1])) return [[0, Math.round(l.a[1])], [e.w, Math.round(l.a[1])]];
+  }
+  return null;
+}
+
+/** The model phase of a completion or of a line of symmetry drawn (`null`: neither). */
+export function checkSymModel(task: Task, s: SymState & { dpts?: readonly (readonly [number, number])[] }, codes: readonly MisconceptionCode[]): SymCheck | null {
+  if (task.kind === 'draw-segment' && task.model.kind === 'grid') {
+    const l = pickedLine(task, s.dpts ?? []);
+    if (!l) return { ok: false, code: null };
+    if (symSegmentRight(task, l)) return { ok: true, code: null };
+    return { ok: false, code: diagnoseDrawnLine(codes, segmentPieces(task), l) };
+  }
   if (task.kind !== 'complete-symmetric') return null;
   const c = completionOf(task, s.sym);
   if (!c || s.sym.length === 0) return { ok: false, code: null };

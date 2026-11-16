@@ -35,6 +35,30 @@
         "en": "Questions, pictures and wording in this lesson are our own; every number is made up.",
         "zh": "本课的题目、插图和措辞都是自己写的；所有数字都是虚构的。"
       }
+    },
+    {
+      "id": "S4",
+      "text": {
+        "en": "Mokros, J. & Russell, S. J. (1995). Children's concepts of average and representativeness. Journal for Research in Mathematics Education 26(1), 20–39 (ERIC EJ496903).",
+        "zh": "Mokros, J. 与 Russell, S. J.（1995）：儿童对平均数与代表性的理解。《数学教育研究杂志》（JRME）第 26 卷第 1 期，20–39 页（ERIC EJ496903）。"
+      },
+      "url": "https://eric.ed.gov/?id=EJ496903",
+      "note": {
+        "en": "Interviews with 21 pupils in grades 4, 6 and 8 found average taken as the most common value, as a procedure, as what is reasonable, as the midpoint, or as a point of balance (the code average-as-middle; the levelling picture of evening out). Read from the ERIC abstract. Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "访谈 21 名四、六、八年级学生，发现他们把平均数理解为出现最多的数、一套算法、合理的数、中间的数或平衡点（误解码 average-as-middle；移多补少的画面）。读的是 ERIC 摘要。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
+    },
+    {
+      "id": "S5",
+      "text": {
+        "en": "Pollatsek, A., Lima, S. & Well, A. D. (1981). Concept or computation: Students' understanding of the mean. Educational Studies in Mathematics 12(2), 191–204.",
+        "zh": "Pollatsek, A.、Lima, S. 与 Well, A. D.（1981）：概念还是计算——学生对平均数的理解。《数学教育研究》第 12 卷第 2 期，191–204 页。"
+      },
+      "url": "https://doi.org/10.1007/BF00305621",
+      "note": {
+        "en": "Asked to combine the means of two groups of different sizes, most simply averaged the two means (the code averages-averaged). The students were at college, not primary school. Read from the publisher's abstract. Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "要把两组人数不同的平均数合起来时，多数人直接把两个平均数再平均（误解码 averages-averaged）。研究对象是大学生，不是小学生。读的是出版社摘要。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
     }
   ]
 }

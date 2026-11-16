@@ -13,7 +13,7 @@
  * caption card (`compact`: the task's sentence under the caption, no place
  * label, no Next); Skip there lets the auto-play go on.
  */
-import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import type { Locale } from '../../core/types';
 import { t, tx } from '../../../i18n';
 import { renderRich } from '../../../lib/rich-text';
@@ -64,6 +64,8 @@ export interface TrayProps {
   /** Parts narrower than a finger: show the −/+ stepper. */
   narrow?: boolean;
   locale: Locale;
+  /** Called after every commit of the tray (the docked tray's band is measured then: the tray can commit without its host). */
+  onLayout?: () => void;
 }
 
 const tr = (locale: Locale) => (key: Parameters<typeof t>[1], vars?: Record<string, string | number>) => t(locale, key, vars);
@@ -72,6 +74,8 @@ export function Tray(p: TrayProps) {
   const { ctl, task, run, locale } = p;
   const T = tr(locale);
   const rootRef = useRef<HTMLDivElement>(null);
+  const { onLayout } = p;
+  useLayoutEffect(() => onLayout?.());
   // Enter in an answer box checks; Escape leaves the box (the next Escape reaches the host).
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     if (!(e.target instanceof HTMLInputElement) || e.altKey || e.ctrlKey || e.metaKey) return;
@@ -185,7 +189,7 @@ function Controls(p: TrayProps & { phase: string; locked: boolean }) {
   if (phase === 'model' && isSymmetryTask(task)) parts.push(<SymmetryControls key="sym" task={task} run={run} ctl={ctl} locale={locale} practice={p.practice} />);
   if (task.kind === 'fill-table') {
     parts.push(<TableInput key="table" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
-  } else if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose' && task.kind !== 'complete-symmetric') {
+  } else if (phase === 'model' && task.model.kind === 'grid' && task.kind !== 'choose' && task.kind !== 'complete-symmetric' && task.kind !== 'draw-segment') {
     parts.push(<GridModelControls key="grid" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);
   } else if (hasAngleControls(task, phase)) {
     parts.push(<AngleModelControls key="angle" task={task} state={s} ctl={ctl} locale={locale} locked={locked} />);

@@ -11,6 +11,30 @@
         "en": "The only source for what each step covers; the syllabus lines in the lesson are quoted from it. Pages as printed on the PDF; wording checked against the PDF on 2026-11-16. Primary Three names right angles and angles greater or smaller than a right angle, but no degrees and no names for those angles; degrees start in Primary Four. Primary Five finds unknown angles from angles on a straight line, at a point and vertically opposite; the angle sum of a triangle is another line and is not in this lesson.",
         "zh": "每一步学什么，只以这份课纲为准；课里的课纲条目照原文引用。页码是 PDF 上印的页码；措辞于 2026-11-16 对照 PDF 核对。小三只讲直角、比直角大或比直角小的角，不讲度数，也不给这些角起名字；度数从小四开始。小五用直线上的角、一点周围的角和对顶角求未知角；三角形内角和是另一条课纲，不在本课。"
       }
+    },
+    {
+      "id": "S2",
+      "text": {
+        "en": "Keiser, J. M. (2004). Struggles with developing the concept of angle: Comparing sixth-grade students' discourse to the history of the angle concept. Mathematical Thinking and Learning 6(3), 285–306, p. 292.",
+        "zh": "Keiser, J. M.（2004）：发展角的概念之难——六年级学生的讨论与角概念的历史比较。《数学思维与学习》第 6 卷第 3 期，285–306 页，第 292 页。"
+      },
+      "url": "https://doi.org/10.1207/s15327833mtl0603_2",
+      "note": {
+        "en": "Some students judged an angle bigger when its arms were longer, or when there was more space between the arms (the code arm-length, steps 01 and 03). Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "有的学生认为边越长、两条边之间的空间越大，角就越大（误解码 arm-length，第 01、03 步）。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
+    },
+    {
+      "id": "S3",
+      "text": {
+        "en": "Common Core Standards Writing Team (2012). Progressions for the Common Core State Standards in Mathematics (draft, 23 June 2012): K–5, Geometric Measurement, p. 23. Tucson: Institute for Mathematics and Education, University of Arizona.",
+        "zh": "Common Core 标准写作组（2012）：《Common Core 数学标准进程（草稿，2012 年 6 月 23 日）：K–5 几何度量》，第 23 页。图森：亚利桑那大学数学与教育研究所。"
+      },
+      "url": "https://commoncoretools.wordpress.com/wp-content/uploads/2012/07/ccss_progression_gm_k5_2012_07_21.pdf",
+      "note": {
+        "en": "Names the ideas that a right angle is one that points to the right and that right angles turned differently are not equal (right-angle-upright, steps 02–04); judging angles by the lengths of the arms or the distance between their ends (arm-length, steps 01 and 03); and reading a protractor as if one arm were always along its base (steps 06 and 07). Read 2026-11-16. The lesson's misconceptions and feedback are its own design; this source only shows the idea has been seen in children's work. No figures, wording or frequencies are taken from it.",
+        "zh": "书中列出：以为直角就是\"朝右\"的角、方向不同的直角大小不一样（right-angle-upright，第 02–04 步）；按边的长短或两条边端点的距离判断角的大小（arm-length，第 01、03 步）；把量角器当成总有一条边沿着底边来读（第 06、07 步）。2026-11-16 读过。本课的误解目录和反馈是自己设计的；这份来源只说明孩子确实会这样想，不取它的数字、措辞或出现频率。"
+      }
     }
   ]
 }

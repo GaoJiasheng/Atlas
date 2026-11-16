@@ -182,8 +182,11 @@ export function arcPath(c: P2, r: number, from: number, to: number): string {
 }
 const tone = (x?: string) => (x ? ` ms-angle--${x}` : '');
 
-/** A protractor at a centre (px), turned `rot`, radius R px. */
-function Protractor({ c, R, rot, row, marks, dot, faint, crossed, dense, ghost, className, keep, step }: { c: P2; R: number; rot: number; row?: Row | null; keep?: readonly number[]; step?: number; marks?: { at: number; row: Row; tone?: string }[]; dot?: number; faint?: boolean; crossed?: boolean; dense: boolean; ghost?: boolean; className?: string }) {
+/**
+ * A protractor at a centre (px), turned `rot`, radius R px. `only` / `numR` / `numScale` are for the magnifier: one row of
+ * numbers, set just inside the ticks (a fraction of R) and drawn smaller, so the 4× lens holds the ticks and their number.
+ */
+function Protractor({ c, R, rot, row, marks, dot, faint, crossed, dense, ghost, className, keep, step, only, numR, numScale = 1 }: { c: P2; R: number; rot: number; row?: Row | null; keep?: readonly number[]; step?: number; marks?: { at: number; row: Row; tone?: string }[]; dot?: number; faint?: boolean; crossed?: boolean; dense: boolean; ghost?: boolean; className?: string; only?: Row; numR?: number; numScale?: number }) {
   const p = (dir: number, r: number): P2 => {
     const q = at(dir, r);
     return [c[0] + q[0], c[1] - q[1]];
@@ -206,21 +209,33 @@ function Protractor({ c, R, rot, row, marks, dot, faint, crossed, dense, ghost, 
   }
   const size = Math.max(12, R * 0.058);
   const nums: ReactNode[] = [];
-  // A small protractor numbers every 20° (a 10° label needs about 22 px of curve), and always where an arm lies.
-  const every = step ?? (R >= 190 ? 10 : 20);
+  // A small protractor numbers every 20° (a 10° label needs about 22 px of curve), a tiny one (the stage above a phone's
+  // keypad) every 30°, and always where an arm lies.
+  const every = step ?? (R >= 190 ? 10 : R >= 90 ? 20 : 30);
+  const held = [...(keep ?? []), ...(marks ?? []).map((m) => m.at)];
+  const kept = (dir: number) => held.some((d) => Math.abs(shortest(d, dir)) < 0.5);
+  // Numbered every 20°, a number kept at an arm off the 20s would crowd the ones 10° either side of it: those give way.
+  const crowded = (dir: number) => every > 10 && !only && held.some((d) => Math.abs(shortest(d, dir)) >= 0.5 && Math.abs(shortest(d, dir)) < every - 0.5);
   for (let v = 0; v <= 180; v += 10) {
     for (const r of ['outer', 'inner'] as const) {
+      if (only && r !== only) continue;
       const dir = r === 'inner' ? rot + v : rot + 180 - v;
-      if (v % every !== 0 && !(keep ?? []).some((d) => Math.abs(shortest(d, dir)) < 0.5) && !marks?.some((m) => Math.abs(shortest(m.at, dir)) < 0.5)) continue;
-      const q = p(dir, R * (r === 'outer' ? 0.8 : 0.67));
+      if (!kept(dir) && (v % every !== 0 || crowded(dir))) continue;
+      const rr = R * (numR ?? (r === 'outer' ? 0.8 : 0.67));
+      // On a small protractor (and in the lens) a number under an arm is struck through by it: it sits just beside the arm, in
+      // the 10° the crowding rule cleared, as the printed numbers sit beside their ticks. The flat edge's 0 and 180 stay put.
+      const edge = Math.abs(shortest(dir, rot)) < 0.5 || Math.abs(shortest(dir, rot + 180)) < 0.5;
+      const struck = (every > 10 || !!only) && !edge && kept(dir);
+      const side = norm(dir - rot) > 170 ? -1 : 1;
+      const q = p(struck ? dir + side * ((size * numScale * 1.05) / rr) * (180 / Math.PI) : dir, rr);
       const lit = marks?.find((m) => m.row === r && Math.abs(norm(m.at) - norm(dir)) < 0.5);
       nums.push(
         <text
           key={`${r}${v}`}
           className={`ms-angle__num ms-angle__num--${r}${row === r ? ' ms-angle__num--read' : row ? ' ms-angle__num--dim' : ''}${lit ? ` ms-angle__num--lit${tone(lit.tone ?? 'hot')}` : ''}`}
           x={fmt(q[0])}
-          y={fmt(q[1] + size * 0.35)}
-          fontSize={fmt(r === 'outer' ? size : size * 0.92)}
+          y={fmt(q[1] + size * numScale * 0.35)}
+          fontSize={fmt((r === 'outer' ? size : size * 0.92) * numScale)}
           textAnchor="middle"
           transform={`rotate(${fmt(-(dir - 90))} ${fmt(q[0])} ${fmt(q[1])})`}
         >
@@ -764,13 +779,22 @@ function Live(p: LiveProps) {
   return <g className="ms-angle__live">{out}</g>;
 }
 
-/** A magnifier on the scale being read where the other arm crosses it (2.5 times: the tick under the arm and its number), behind the flat edge. */
+/**
+ * A magnifier, behind the flat edge, on the ticks where the other arm crosses the rim (docs/76 §3.2: 4 times, so the 1° ticks
+ * are far enough apart to count). Only the row being read is numbered in it, set just inside the ticks and drawn small
+ * (about 15 px once magnified), so the lens holds the ticks and the nearest ten together.
+ */
 function Lens({ f, rot, row, dir, T }: { f: Px; rot: number; row: Row | null; dir: number; T: LiveProps['T'] }) {
   const R = PROTRACTOR_R * f.k;
-  const zoom = 2.5;
-  const lr = Math.max(46, Math.min(90, f.k * 0.36));
-  const centre = toPx(f, at(rot - 90, 0.62));
-  const rim = toPx(f, at(dir, PROTRACTOR_R * (row === 'outer' ? 0.86 : 0.76)));
+  const zoom = 4;
+  // Wide enough at 4× to hold a 10° stretch of rim: the tens either side of an arm between them (on a tiny protractor, above a
+  // phone's keypad, the lens holds more of the rim than its numbers fit: those go every 20°).
+  const lr = Math.max(46, Math.min(120, f.k * 0.5));
+  // The numbers in the lens read about 15 px whatever the protractor's size (they are drawn at the protractor's size × zoom).
+  const numScale = Math.min(0.5, 15 / (Math.max(12, R * 0.058) * zoom));
+  // Below the flat edge, its top clear of it.
+  const centre = toPx(f, at(rot - 90, lr / f.k + 0.08));
+  const rim = toPx(f, at(dir, PROTRACTOR_R * 0.9));
   const id = `ms-angle-lens-${Math.round(dir)}-${Math.round(rot)}`;
   const arm = toPx(f, at(dir, 1.18));
   const V = toPx(f, [0, 0]);
@@ -785,7 +809,7 @@ function Lens({ f, rot, row, dir, T }: { f: Px; rot: number; row: Row | null; di
       <circle className="ms-angle__lens-glass" cx={fmt(centre[0])} cy={fmt(centre[1])} r={fmt(lr)} />
       <g clipPath={`url(#${id})`}>
         <g transform={`translate(${fmt(centre[0])} ${fmt(centre[1])}) scale(${zoom}) translate(${fmt(-rim[0])} ${fmt(-rim[1])})`}>
-          <Protractor c={V} R={R} rot={rot} row={row} dense keep={[dir]} step={10} />
+          <Protractor c={V} R={R} rot={rot} row={row} dense keep={[dir]} step={R >= 90 ? 10 : 20} only={row ?? 'inner'} numR={0.85} numScale={numScale} />
           <line className="ms-angle__arm ms-angle--cold" x1={fmt(V[0])} y1={fmt(V[1])} x2={fmt(arm[0])} y2={fmt(arm[1])} />
         </g>
       </g>

@@ -2926,12 +2926,13 @@
           "multi": true
         },
         {
-          "id": "tl-side-trapezium",
-          "kind": "choose",
+          "id": "tl-draw-roof",
+          "kind": "draw-segment",
+          "relation": "symmetry",
           "model": {
             "kind": "grid",
             "cols": 6,
-            "rows": 7,
+            "rows": 6,
             "show": "cells",
             "figures": [
               {
@@ -2942,208 +2943,64 @@
                     1
                   ],
                   [
-                    4,
-                    2
+                    5,
+                    1
                   ],
                   [
-                    4,
+                    3,
                     5
-                  ],
-                  [
-                    1,
-                    6
                   ]
                 ]
-              }
-            ],
-            "candidates": [
-              {
-                "x": 2.5
               }
             ]
           },
           "prompt": {
-            "en": "This trapezium lies on its side. Which dashed line is its line of symmetry?",
-            "zh": "这个梯形侧放着。哪条虚线是它的对称轴？"
+            "en": "Draw the line of symmetry of this triangle: tap two grid corners on the line.",
+            "zh": "画出这个三角形的对称轴：在对称轴上点两个格点。"
           },
           "guide": {
-            "en": "Only one of the dashed lines folds the shape onto itself. Test each by folding.",
-            "zh": "只有一条虚线能让图形折得重合。每条都折一折来检验。"
+            "en": "A line of symmetry folds the figure onto itself. Find the line where the two halves would match, then tap two corners on it.",
+            "zh": "沿对称轴折，图形两半重合。先找出能让两半重合的线，再在这条线上点两个格点。"
           },
           "hints": [
             {
-              "en": "Look at which way the shape points: its line of symmetry runs the same way.",
-              "zh": "看看图形朝哪边：对称轴顺着同一个方向。"
+              "en": "The two slanting sides are the same length. The line of symmetry goes through the top corner.",
+              "zh": "两条斜边一样长。对称轴穿过最上面的角。"
             },
             {
-              "en": "A line that cuts it into equal parts may still leave corners sticking out.",
-              "zh": "把它分成一样大的线，折起来也可能有角露出来。"
-            }
-          ],
-          "options": [
-            {
-              "id": "a",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 7,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        4,
-                        2
-                      ],
-                      [
-                        4,
-                        5
-                      ],
-                      [
-                        1,
-                        6
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "x": 2.5
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": false,
-              "misconception": "upright-line-only"
-            },
-            {
-              "id": "b",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 7,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        4,
-                        2
-                      ],
-                      [
-                        4,
-                        5
-                      ],
-                      [
-                        1,
-                        6
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "y": 3.5
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": true
-            },
-            {
-              "id": "c",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 7,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        4,
-                        2
-                      ],
-                      [
-                        4,
-                        5
-                      ],
-                      [
-                        1,
-                        6
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "from": [
-                      0.6,
-                      0.6
-                    ],
-                    "to": [
-                      4.4,
-                      6.4
-                    ]
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": false,
-              "misconception": "equal-halves"
+              "en": "The top corner is right above the middle of the bottom side. Draw the line straight up through it.",
+              "zh": "最上面的角正对着底边的中点。穿过它画一条竖线。"
             }
           ],
           "feedback": {
             "correct": {
-              "en": "Yes. Folded along that line, the two halves match exactly.",
-              "zh": "对。沿这条线折，两半完全重合。"
+              "en": "Yes. Folded along your line, the left half lands exactly on the right half.",
+              "zh": "对。沿你画的线折，左半边正好盖住右半边。"
             },
             "fallback": {
-              "en": "Not yet. Fold along each line in your head and check the corners.",
-              "zh": "还没对。在脑子里沿每条线折一折，看看各个角。"
+              "en": "Not yet. Fold along your line in your head: do the two halves match?",
+              "zh": "还没对。在脑子里沿你画的线折一折：两半重合吗？"
             },
             "reveal": {
-              "en": "The line of symmetry is the one along which the halves match exactly.",
-              "zh": "对称轴是沿着它折两半能完全重合的那条线。"
+              "en": "The line of symmetry stands straight up through the top corner and the middle of the bottom side.",
+              "zh": "对称轴是一条竖线，穿过最上面的角和底边的中点。"
             },
             "wrong": [
               {
-                "when": "upright-line-only",
-                "say": {
-                  "en": "Turn the page in your head: the figure still folds onto itself along a slanted line. A line of symmetry does not have to stand straight up.",
-                  "zh": "在脑子里把纸转一转：沿斜着的线，图形还是能折得重合。对称轴不一定是竖的。"
-                },
-                "sample": "a"
-              },
-              {
                 "when": "equal-halves",
                 "say": {
-                  "en": "The line cuts the shape into two halves of the same size, but fold it: corners stick out. Equal halves are not enough; they must match.",
-                  "zh": "这条线把图形分成一样大的两半，可是折一折，有角露出来。一样大还不够，要重合。"
+                  "en": "Your line cuts the figure into two parts of the same size, but fold along it: corners stick out. Equal halves are not enough; they must match.",
+                  "zh": "你的线把图形分成一样大的两部分，可是沿它折一折，有角露出来。一样大还不够，要重合。"
                 },
-                "sample": "c"
+                "sample": "(1,1)-(4,3)"
               }
             ]
           }
         },
         {
-          "id": "tl-triangle-right",
-          "kind": "choose",
+          "id": "tl-draw-triangle",
+          "kind": "draw-segment",
+          "relation": "symmetry",
           "model": {
             "kind": "grid",
             "cols": 6,
@@ -3167,176 +3024,55 @@
                   ]
                 ]
               }
-            ],
-            "candidates": [
-              {
-                "x": 3
-              }
             ]
           },
           "prompt": {
-            "en": "This triangle points to the right. Which dashed line is its line of symmetry?",
-            "zh": "这个三角形尖朝右。哪条虚线是它的对称轴？"
+            "en": "This triangle points to the right. Draw its line of symmetry: tap two grid corners on the line.",
+            "zh": "这个三角形尖朝右。画出它的对称轴：在对称轴上点两个格点。"
           },
           "guide": {
-            "en": "Only one of the dashed lines folds the shape onto itself. Test each by folding.",
-            "zh": "只有一条虚线能让图形折得重合。每条都折一折来检验。"
+            "en": "A line of symmetry folds the figure onto itself. Find the line where the two halves would match, then tap two corners on it.",
+            "zh": "沿对称轴折，图形两半重合。先找出能让两半重合的线，再在这条线上点两个格点。"
           },
           "hints": [
             {
-              "en": "Look at which way the shape points: its line of symmetry runs the same way.",
-              "zh": "看看图形朝哪边：对称轴顺着同一个方向。"
+              "en": "Look at which way the triangle points: its line of symmetry runs the same way, through the tip.",
+              "zh": "看看三角形尖朝哪边：对称轴也朝那个方向，穿过尖。"
             },
             {
-              "en": "A line that cuts it into equal parts may still leave corners sticking out.",
-              "zh": "把它分成一样大的线，折起来也可能有角露出来。"
-            }
-          ],
-          "options": [
-            {
-              "id": "a",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 6,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        5,
-                        3
-                      ],
-                      [
-                        1,
-                        5
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "x": 3
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": false,
-              "misconception": "upright-line-only"
-            },
-            {
-              "id": "b",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 6,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        5,
-                        3
-                      ],
-                      [
-                        1,
-                        5
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "y": 3
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": true
-            },
-            {
-              "id": "c",
-              "model": {
-                "kind": "grid",
-                "cols": 6,
-                "rows": 6,
-                "show": "cells",
-                "figures": [
-                  {
-                    "id": "f",
-                    "shape": [
-                      [
-                        1,
-                        1
-                      ],
-                      [
-                        5,
-                        3
-                      ],
-                      [
-                        1,
-                        5
-                      ]
-                    ]
-                  }
-                ],
-                "candidates": [
-                  {
-                    "from": [
-                      1,
-                      1
-                    ],
-                    "to": [
-                      3,
-                      4
-                    ]
-                  }
-                ]
-              },
-              "symmetric": true,
-              "correct": false,
-              "misconception": "equal-halves"
+              "en": "The tip is 2 squares above the bottom corner and 2 squares below the top corner. Draw the line across through the tip.",
+              "zh": "尖离下面的角 2 格，离上面的角也是 2 格。穿过尖画一条横线。"
             }
           ],
           "feedback": {
             "correct": {
-              "en": "Yes. Folded along that line, the two halves match exactly.",
-              "zh": "对。沿这条线折，两半完全重合。"
+              "en": "Yes. Folded along your line, the top half lands exactly on the bottom half.",
+              "zh": "对。沿你画的线折，上半边正好盖住下半边。"
             },
             "fallback": {
-              "en": "Not yet. Fold along each line in your head and check the corners.",
-              "zh": "还没对。在脑子里沿每条线折一折，看看各个角。"
+              "en": "Not yet. Fold along your line in your head: do the two halves match?",
+              "zh": "还没对。在脑子里沿你画的线折一折：两半重合吗？"
             },
             "reveal": {
-              "en": "The line of symmetry is the one along which the halves match exactly.",
-              "zh": "对称轴是沿着它折两半能完全重合的那条线。"
+              "en": "The line of symmetry runs across through the tip, 2 squares from the top corner and from the bottom corner.",
+              "zh": "对称轴是穿过尖的横线，离上面的角和下面的角都是 2 格。"
             },
             "wrong": [
               {
                 "when": "upright-line-only",
                 "say": {
-                  "en": "Turn the page in your head: the figure still folds onto itself along a slanted line. A line of symmetry does not have to stand straight up.",
-                  "zh": "在脑子里把纸转一转：沿斜着的线，图形还是能折得重合。对称轴不一定是竖的。"
+                  "en": "Your line stands straight up, but folding along it leaves corners sticking out. This figure lies on its side, so its line of symmetry runs across. A line of symmetry does not have to stand up.",
+                  "zh": "你的线是竖的，可是沿它折，有角露出来。这个图形是横着放的，所以它的对称轴是横的。对称轴不一定是竖的。"
                 },
-                "sample": "a"
+                "sample": "(3,0)-(3,6)"
               },
               {
                 "when": "equal-halves",
                 "say": {
-                  "en": "The line cuts the shape into two halves of the same size, but fold it: corners stick out. Equal halves are not enough; they must match.",
-                  "zh": "这条线把图形分成一样大的两半，可是折一折，有角露出来。一样大还不够，要重合。"
+                  "en": "Your line cuts the figure into two parts of the same size, but fold along it: corners stick out. Equal halves are not enough; they must match.",
+                  "zh": "你的线把图形分成一样大的两部分，可是沿它折一折，有角露出来。一样大还不够，要重合。"
                 },
-                "sample": "c"
+                "sample": "(1,1)-(3,4)"
               }
             ]
           }
@@ -9834,11 +9570,12 @@
       ],
       "task": {
         "id": "q4-side-trapezium",
-        "kind": "choose",
+        "kind": "draw-segment",
+        "relation": "symmetry",
         "model": {
           "kind": "grid",
-          "cols": 5,
-          "rows": 7,
+          "cols": 6,
+          "rows": 6,
           "show": "cells",
           "figures": [
             {
@@ -9849,197 +9586,56 @@
                   2
                 ],
                 [
-                  3,
+                  4,
                   1
                 ],
                 [
-                  3,
-                  6
+                  4,
+                  5
                 ],
                 [
                   1,
-                  5
+                  4
                 ]
               ]
-            }
-          ],
-          "candidates": [
-            {
-              "x": 2
             }
           ]
         },
         "prompt": {
-          "en": "This trapezium lies on its side. Which dashed line is its line of symmetry?",
-          "zh": "这个梯形侧放着。哪条虚线是它的对称轴？"
+          "en": "This trapezium lies on its side. Draw its line of symmetry: tap two grid corners on the line.",
+          "zh": "这个梯形侧放着。画出它的对称轴：在对称轴上点两个格点。"
         },
         "guide": {
-          "en": "Only one of the dashed lines folds the shape onto itself. Test each by folding.",
-          "zh": "只有一条虚线能让图形折得重合。每条都折一折来检验。"
+          "en": "A line of symmetry folds the figure onto itself. Find the line where the two halves would match, then tap two corners on it.",
+          "zh": "沿对称轴折，图形两半重合。先找出能让两半重合的线，再在这条线上点两个格点。"
         },
         "hints": [
           {
-            "en": "Look at which way the shape points: its line of symmetry runs the same way.",
-            "zh": "看看图形朝哪边：对称轴顺着同一个方向。"
-          }
-        ],
-        "options": [
-          {
-            "id": "a",
-            "model": {
-              "kind": "grid",
-              "cols": 5,
-              "rows": 7,
-              "show": "cells",
-              "figures": [
-                {
-                  "id": "f",
-                  "shape": [
-                    [
-                      1,
-                      2
-                    ],
-                    [
-                      3,
-                      1
-                    ],
-                    [
-                      3,
-                      6
-                    ],
-                    [
-                      1,
-                      5
-                    ]
-                  ]
-                }
-              ],
-              "candidates": [
-                {
-                  "x": 2
-                }
-              ]
-            },
-            "symmetric": true,
-            "correct": false,
-            "misconception": "upright-line-only"
-          },
-          {
-            "id": "b",
-            "model": {
-              "kind": "grid",
-              "cols": 5,
-              "rows": 7,
-              "show": "cells",
-              "figures": [
-                {
-                  "id": "f",
-                  "shape": [
-                    [
-                      1,
-                      2
-                    ],
-                    [
-                      3,
-                      1
-                    ],
-                    [
-                      3,
-                      6
-                    ],
-                    [
-                      1,
-                      5
-                    ]
-                  ]
-                }
-              ],
-              "candidates": [
-                {
-                  "y": 3.5
-                }
-              ]
-            },
-            "symmetric": true,
-            "correct": true
-          },
-          {
-            "id": "c",
-            "model": {
-              "kind": "grid",
-              "cols": 5,
-              "rows": 7,
-              "show": "cells",
-              "figures": [
-                {
-                  "id": "f",
-                  "shape": [
-                    [
-                      1,
-                      2
-                    ],
-                    [
-                      3,
-                      1
-                    ],
-                    [
-                      3,
-                      6
-                    ],
-                    [
-                      1,
-                      5
-                    ]
-                  ]
-                }
-              ],
-              "candidates": [
-                {
-                  "from": [
-                    0.6,
-                    1.4
-                  ],
-                  "to": [
-                    3.4,
-                    5.6
-                  ]
-                }
-              ]
-            },
-            "symmetric": true,
-            "correct": false,
-            "misconception": "equal-halves"
+            "en": "The two parallel sides stand up. The line of symmetry crosses both of them at their middles.",
+            "zh": "两条平行的边是竖着的。对称轴从它们的中点穿过。"
           }
         ],
         "feedback": {
           "correct": {
-            "en": "Yes. Folded along that line, the two halves match exactly.",
-            "zh": "对。沿这条线折，两半完全重合。"
+            "en": "Yes. Folded along your line, the top half lands exactly on the bottom half.",
+            "zh": "对。沿你画的线折，上半边正好盖住下半边。"
           },
           "fallback": {
-            "en": "Not yet. Fold along each line in your head and check the corners.",
-            "zh": "还没对。在脑子里沿每条线折一折，看看各个角。"
+            "en": "Not yet. Fold along your line in your head: do the two halves match?",
+            "zh": "还没对。在脑子里沿你画的线折一折：两半重合吗？"
           },
           "reveal": {
-            "en": "The line of symmetry is the one along which the halves match exactly.",
-            "zh": "对称轴是沿着它折两半能完全重合的那条线。"
+            "en": "The line of symmetry runs across, through the middles of the two parallel sides.",
+            "zh": "对称轴是一条横线，穿过两条平行边的中点。"
           },
           "wrong": [
             {
               "when": "upright-line-only",
               "say": {
-                "en": "Turn the page in your head: the figure still folds onto itself along a slanted line. A line of symmetry does not have to stand straight up.",
-                "zh": "在脑子里把纸转一转：沿斜着的线，图形还是能折得重合。对称轴不一定是竖的。"
+                "en": "Your line stands straight up, but folding along it leaves corners sticking out. This figure lies on its side, so its line of symmetry runs across. A line of symmetry does not have to stand up.",
+                "zh": "你的线是竖的，可是沿它折，有角露出来。这个图形是横着放的，所以它的对称轴是横的。对称轴不一定是竖的。"
               },
-              "sample": "a"
-            },
-            {
-              "when": "equal-halves",
-              "say": {
-                "en": "The line cuts the shape into two halves of the same size, but fold it: corners stick out. Equal halves are not enough; they must match.",
-                "zh": "这条线把图形分成一样大的两半，可是折一折，有角露出来。一样大还不够，要重合。"
-              },
-              "sample": "c"
+              "sample": "(2,0)-(2,6)"
             }
           ]
         }

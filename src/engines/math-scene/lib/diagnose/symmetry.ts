@@ -10,11 +10,15 @@
  * A slide that is also a turn-over moved along (a given half that is itself
  * symmetric that way) counts as the distance. The choose-only codes
  * (`equal-halves`, `upright-line-only`, `outline-only`, `line-count`) come
- * from options and are checked by validate against the geometry. Pure.
+ * from options and are checked by validate against the geometry — except
+ * that a line drawn on the grid (`draw-segment`, relation `symmetry`) that is
+ * not a line of symmetry shows `upright-line-only` when it stands up and the
+ * figure's lines of symmetry do not, else `equal-halves` when it still cuts
+ * the figure into two halves of the same area. Pure.
  */
 import type { MisconceptionCode } from '../../schema';
 import { parseHalf } from '../grid';
-import { shiftKey, unflippedKey } from '../symmetry';
+import { area, clipHalf, isSymmetric, linesOfSymmetry, shiftKey, unflippedKey, type Line, type Piece } from '../symmetry';
 
 export interface Completion {
   /** Up (`x`) or across (`y`) and where. */
@@ -70,4 +74,28 @@ export function completionShows(code: MisconceptionCode, c: Completion): boolean
 /** The code a wrong completion shows, among the declared ones, by priority. */
 export function diagnoseCompletion(codes: readonly MisconceptionCode[], c: Completion): MisconceptionCode | null {
   return SYMMETRY_PRIORITY.find((code) => codes.includes(code) && completionShows(code, c)) ?? null;
+}
+
+/** The order a line drawn is diagnosed in. */
+export const SYMMETRY_LINE_PRIORITY: readonly MisconceptionCode[] = ['upright-line-only', 'equal-halves'];
+
+/** Does a line drawn (not a line of symmetry of `pieces`) show `code`? */
+export function drawnLineShows(code: MisconceptionCode, pieces: readonly Piece[], l: Line): boolean {
+  if (pieces.length === 0 || isSymmetric(pieces, l)) return false;
+  if (code === 'upright-line-only') {
+    const upright = Math.abs(l.a[0] - l.b[0]) < 1e-9;
+    const lines = linesOfSymmetry(pieces);
+    return upright && lines.length > 0 && lines.every((m) => Math.abs(m.a[0] - m.b[0]) > 1e-9);
+  }
+  if (code === 'equal-halves') {
+    const left = pieces.reduce((s, p) => s + area(clipHalf(p.poly, l, 1)), 0);
+    const right = pieces.reduce((s, p) => s + area(clipHalf(p.poly, l, -1)), 0);
+    return left > 1e-6 && right > 1e-6 && Math.abs(left - right) < 1e-6;
+  }
+  return false;
+}
+
+/** The code a wrong line of symmetry drawn shows, among the declared ones, by priority. */
+export function diagnoseDrawnLine(codes: readonly MisconceptionCode[], pieces: readonly Piece[], l: Line): MisconceptionCode | null {
+  return SYMMETRY_LINE_PRIORITY.find((code) => codes.includes(code) && drawnLineShows(code, pieces, l)) ?? null;
 }

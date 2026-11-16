@@ -250,6 +250,8 @@ export function workingLines(task: Task, state: TaskState, locale: Locale, done 
   if (isDataTask(task)) return dataLines(task, state, locale, done);
   if (task.kind === 'complete-net' || task.kind === 'tap-face') return netLines(task, state, locale, done);
   if (isAngleTask(task)) return angleLines(task, state, locale, done);
+  // A line of symmetry drawn on the grid: the line is the answer, there is no number sentence.
+  if (task.kind === 'draw-segment') return [];
   if (isMeasureTask(task)) return measureLines(task, state, locale, done).filter(Boolean);
   if (task.model.kind === 'grid') return gridLines(task, state, locale, done).filter(Boolean);
   if (isDecimalTask(task)) return decimalLines(task, state, locale, done).filter(Boolean);

@@ -116,3 +116,60 @@ describe('a whole task', () => {
     expect(symTaskIssues(task({ ...step, cols: 8 }, 'cells') as Task, undefined).join()).toMatch(/off the paper/);
   });
 });
+
+/* A line of symmetry drawn on the grid (draw-segment, relation symmetry, docs/79 §2.2) */
+const drawTask = (shape: number[][], wrong: { when: string; sample: string }[] = []) =>
+  taskSchema.parse({ id: 'd', kind: 'draw-segment', relation: 'symmetry', model: { kind: 'grid', cols: 6, rows: 6, show: 'cells', figures: [{ id: 'f', shape }] }, prompt: text, guide: text, hints: [text], feedback: feedback(wrong) }) as TaskOf<'draw-segment'>;
+const pointsRight = [[1, 1], [5, 3], [1, 5]];
+const pointsUp = [[1, 1], [5, 1], [3, 5]];
+const drawn = (t: TaskOf<'draw-segment'>, a: [number, number], b: [number, number]) => {
+  let s = initialState(t);
+  s = reduce(t, s, { do: 'dot', x: a[0], y: a[1] });
+  s = reduce(t, s, { do: 'dot', x: b[0], y: b[1] });
+  return s;
+};
+
+describe('a line of symmetry drawn', () => {
+  const codes = [
+    { when: 'upright-line-only', sample: '(3,0)-(3,6)' },
+    { when: 'equal-halves', sample: '(1,1)-(3,4)' },
+  ];
+  it('is right along the line of symmetry, wherever on it the corners are', () => {
+    const t = drawTask(pointsRight, codes);
+    expect(check(t, drawn(t, [0, 3], [6, 3])).ok).toBe(true);
+    expect(check(t, drawn(t, [2, 3], [4, 3])).ok).toBe(true);
+    // Too short to be a line drawn.
+    expect(check(t, drawn(t, [2, 3], [3, 3])).ok).toBe(false);
+  });
+  it('picks corners on the grid only (0…w × 0…h), and a second tap lifts one', () => {
+    const t = drawTask(pointsRight);
+    let s = reduce(t, initialState(t), { do: 'dot', x: 7, y: 0 });
+    expect(s.dpts).toEqual([]);
+    s = reduce(t, s, { do: 'dot', x: 6, y: 6 });
+    expect(s.dpts).toEqual([[6, 6]]);
+    s = reduce(t, s, { do: 'dot', x: 6, y: 6 });
+    expect(s.dpts).toEqual([]);
+  });
+  it('shows upright-line-only: upright, and the figure has no upright line of symmetry', () => {
+    const t = drawTask(pointsRight, codes);
+    expect(check(t, drawn(t, [3, 0], [3, 6])).code).toBe('upright-line-only');
+    expect(check(t, drawn(t, [2, 0], [2, 6])).code).toBe('upright-line-only');
+    // Upright on a figure whose line of symmetry is upright: not this misconception.
+    const u = drawTask(pointsUp, codes);
+    expect(check(u, drawn(u, [2, 0], [2, 6])).code).toBe(null);
+  });
+  it('shows equal-halves: two parts of the same area that do not match', () => {
+    const t = drawTask(pointsRight, codes);
+    expect(check(t, drawn(t, [1, 1], [3, 4])).code).toBe('equal-halves');
+    const u = drawTask(pointsUp, codes);
+    expect(check(u, drawn(u, [1, 1], [4, 3])).code).toBe('equal-halves');
+    // Unequal parts, not upright: nothing.
+    expect(check(t, drawn(t, [1, 1], [4, 4])).code).toBe(null);
+  });
+  it('proves as a task and passes the content rules', () => {
+    const t = drawTask(pointsRight, codes);
+    expect(proveTask(t)).toEqual([]);
+    expect(symTaskIssues(t, undefined)).toEqual([]);
+    expect(symTaskIssues(drawTask([[1, 2], [4, 1], [4, 6], [1, 5]]), undefined)).toContain('the figures have no line of symmetry up or across through grid corners to draw');
+  });
+});

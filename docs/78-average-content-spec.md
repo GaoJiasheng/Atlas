@@ -377,3 +377,9 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
   - `average-as-middle` 对偶数个数据也认中间两个数（练习第 1 题 3、5、7、9 写 5 或 7）。
   - S3–S9（平均数研究文献、人教版课本）页码 / 册次未核，按规则不进 sources.json；"移多补少"作为说法保留（§0.1 Q1 默认），不注出处。
 - **插图**：Codex `codex/img5`（c024fb85）的封面（4、4、4）与第 01 章配图（2、4、6），图注照 `art/img5/average-captions.json`；封面 mask 进 `src/lib/illustrations.json`。
+
+**2026-11-16 打磨（分支 `claude/polish-math`）**
+
+- **来源重试**：恢复两条。S4 = Mokros & Russell (1995) JRME 26(1) 20–39，ERIC 摘要（21 名四、六、八年级学生：众数、算法、合理的数、中间数、平衡点）→ `average-as-middle` 与"移多补少"的画面；S5 = Pollatsek, Lima & Well (1981) ESM 12(2) 191–204，出版社摘要（合并两组时直接平均两个平均数；对象是大学生，注里写明）→ `averages-averaged`。仍删：Strauss & Bichler 1988（摘要不列 7 条性质）、Cai 1998（摘要没说是倒推缺值的题）、Watson & Moritz 2000（只读到泛泛的摘要）、人教版课本册次。
+- **竖放平板上"task × plate"重叠（与 docs/77 共用）**：根因是时序。竖放平板（< 1024 px）上检查托盘停在舞台上，HUD 网格给它留一条高 `--task-h` 的带子，View 每次渲染后量托盘的高度写进去。可托盘是懒加载的（`lazy-ui.tsx`），选项里的图表也是懒加载的：换到练习章、尤其是刚重开页面时，View 这一次提交里托盘还挂起，量到 0；托盘内容随后在它自己的 Suspense 边界里提交，View 不重新渲染，带子就停在 0，PLATE 一直伸到托盘下面，直到别的东西让 View 再渲染。调试日志证实了这一点：重叠时 `--task-h = 0px`，托盘高 144 px，最后一次写入是 View 在托盘挂起时写的 0。先试过的 ResizeObserver 不可靠（回调要等下一帧，页面忙时检查先到），已撤回。修法：`Tray` 加 `onLayout`，每次自己提交后（包括挂起之后才显示的那一次）回调 View 的 `syncTaskBand` 重量一次，带子和托盘在同一次提交里对上。验证：graphs、average 各 5 轮 `shoot --layout`（en / zh × paper / cinema，1180×820、820×1180、1194×834、834×1194），40 组 0 问题；改前同样跑法 16 组里有 9 次重叠，全在 cinema、练习章。
+

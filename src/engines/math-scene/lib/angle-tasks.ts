@@ -18,6 +18,8 @@ import { answerValues } from './forms';
 import { isFracValue } from './value';
 import { angleItems, arcSpan, arcValue, at, between, CENTRE_SNAP, cross, dotProduct, gapChange, layings, nearestLaying, norm, onLine, onPaper, reading, TURN_SNAP, twoArmSize, vec, type P2 } from './angle';
 import { diagnoseAngle, segmentShows, type AngleContext } from './diagnose/angles';
+import { extentOf } from './grid';
+import { symSegmentSolution } from './symmetry-tasks';
 
 /* ------------------------------------------------------------------ */
 /* Which tasks                                                          */
@@ -25,9 +27,9 @@ import { diagnoseAngle, segmentShows, type AngleContext } from './diagnose/angle
 
 export const isAngleModel = (m: Task['model']): m is AngleModelSpec => m.kind === 'angle';
 
-/** Is the task in the `angles` domain (an angle drawing on the stage or in an option, or an angle task)? */
+/** Is the task in the `angles` domain (an angle drawing on the stage or in an option, or an angle task)? A line drawn on a symmetry grid is not. */
 export function isAngleTask(task: Task): boolean {
-  if (task.kind === 'measure-angle' || task.kind === 'draw-angle' || task.kind === 'draw-segment') return true;
+  if (task.kind === 'measure-angle' || task.kind === 'draw-angle' || (task.kind === 'draw-segment' && task.model.kind !== 'grid')) return true;
   if (isAngleModel(task.model)) return true;
   return task.kind === 'choose' && task.options.some((o) => !!o.model && isAngleModel(o.model));
 }
@@ -110,6 +112,16 @@ export function drawProtractor(task: TaskOf<'draw-angle'>): { rot: number; row: 
   return task.open === 'ccw' ? { rot: b, row: 'inner' } : { rot: norm(b - 180), row: 'outer' };
 }
 
+/** The dots a draw-segment picks from: dot paper's, or a grid's corners (0…w × 0…h). */
+export function segmentDots(task: TaskOf<'draw-segment'>): { cols: number; rows: number } | null {
+  if (task.model.kind === 'grid') {
+    const e = extentOf(task.model);
+    return { cols: e.w + 1, rows: e.h + 1 };
+  }
+  const paper = angleSpecOf(task)?.paper;
+  return paper ? { cols: paper.cols, rows: paper.rows } : null;
+}
+
 /** The dots a draw-segment's line runs between (`null`: not both picked). */
 export function drawnSegment(task: TaskOf<'draw-segment'>, s: AngleState): [P2, P2] | null {
   const pts = task.from ? [task.from as P2, ...s.dpts] : s.dpts;
@@ -145,7 +157,7 @@ export function angleReduce<S extends AngleState & { phase: number }>(task: Task
     return state;
   }
   if (task.kind === 'draw-segment' && action.do === 'dot') {
-    const paper = angleSpecOf(task)?.paper;
+    const paper = segmentDots(task);
     const p: P2 = [action.x, action.y];
     if (!paper || !onPaper(p, paper)) return state;
     const same = (q: P2) => q[0] === p[0] && q[1] === p[1];
@@ -248,12 +260,13 @@ export function checkAngleModel(task: Task, s: AngleState, codes: readonly Misco
     const seg = drawnSegment(task, s);
     const paper = angleSpecOf(task)?.paper;
     const given = paper?.segments[task.to];
-    if (!seg || !given) return NOT_YET;
+    const relation = task.relation;
+    if (!seg || !given || relation === 'symmetry') return NOT_YET;
     const v = vec(seg[0], seg[1]);
     const w = vec(given.from as P2, given.to as P2);
-    if (segmentRight(task.relation, seg, given.from as P2, given.to as P2)) return OK;
+    if (segmentRight(relation, seg, given.from as P2, given.to as P2)) return OK;
     const g = gapChange(v, w);
-    return { ok: false, code: codes.find((c) => segmentShows(c, task.relation, g)) ?? null };
+    return { ok: false, code: codes.find((c) => segmentShows(c, relation, g)) ?? null };
   }
   return null;
 }
@@ -288,7 +301,7 @@ const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
 export function segmentSolution(task: TaskOf<'draw-segment'>): [P2, P2] | null {
   const paper = angleSpecOf(task)?.paper;
   const given = paper?.segments[task.to];
-  if (!paper || !given) return null;
+  if (!paper || !given || task.relation === 'symmetry') return null;
   const w = vec(given.from as P2, given.to as P2);
   const g = gcd(Math.abs(w[0]), Math.abs(w[1])) || 1;
   const dir: P2 = task.relation === 'parallel' ? [w[0] / g, w[1] / g] : [-w[1] / g, w[0] / g];
@@ -307,7 +320,7 @@ export function angleSolveModel(task: Task): AngleAction[] | null {
   if (task.kind === 'measure-angle') return task.place ? [{ do: 'acentre' }, { do: 'aline' }] : [];
   if (task.kind === 'draw-angle') return [{ do: 'aarm', dir: armFor(task, task.target) }];
   if (task.kind === 'draw-segment') {
-    const seg = segmentSolution(task);
+    const seg = task.model.kind === 'grid' ? symSegmentSolution(task) : segmentSolution(task);
     if (!seg) return [];
     return (task.from ? [seg[1]] : seg).map((p) => ({ do: 'dot', x: p[0], y: p[1] }));
   }

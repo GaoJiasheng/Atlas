@@ -2,7 +2,7 @@
  * The top-right card and the PLATE rows of a line-symmetry grid (docs/79
  * §3.4). Card SYMMETRY: LINE (UPRIGHT / ACROSS / SLANTED) · MATCH (a beat
  * folded flat: ✓ or ○; a check: only once the child has folded it with
- * "Fold it") · LINES (a beat's lines of symmetry drawn). Plate: MODEL GRID ·
+ * "Fold it"; a line drawn: its way, and MATCH once folded along it) · LINES (a beat's lines of symmetry drawn). Plate: MODEL GRID ·
  * LINE · SQUARES (the given half's) · PARTNERS (what the child has put down,
  * never the number to find). The card never says the answer first.
  */
@@ -11,8 +11,8 @@ import { t } from '../../../../i18n';
 import type { GridModelSpec, Model, Task } from '../../schema';
 import type { TaskState } from '../../lib/state';
 import { figureCells, figureHalves, figureOf } from '../../lib/grid';
-import { lineDirection, lineMatches } from '../../lib/symmetry';
-import { completionOf, givenOf, isSymmetryModel, taskLine } from '../../lib/symmetry-tasks';
+import { isSymmetric, lineDirection, lineMatches, lineOf } from '../../lib/symmetry';
+import { completionOf, drawnLine, givenOf, isSymmetryModel, segmentPieces, taskLine } from '../../lib/symmetry-tasks';
 import { isRight } from '../../lib/diagnose/symmetry';
 import type { PlateRow } from '../PlateBlock';
 
@@ -28,9 +28,10 @@ interface Shown {
 function shownOf(model: GridModelSpec | null, task: Task | null, state: TaskState | null): Shown {
   const dash = '—';
   if (task && state) {
-    const line = taskLine(task);
+    const line = drawnLine(task, state) ?? taskLine(task);
     let match = dash;
-    if (state.sfold && line) {
+    if (state.sfold && line && task.kind === 'draw-segment') match = isSymmetric(segmentPieces(task), lineOf(line)) ? '✓' : '○';
+    else if (state.sfold && line) {
       if (task.kind === 'complete-symmetric') {
         const c = completionOf(task, state.sym);
         match = c && state.sym.length ? (isRight(c) ? '✓' : '○') : dash;
@@ -74,7 +75,7 @@ export function SymmetryCard({ model, task, state, locale }: { model: Model | nu
 /** PLATE rows for a symmetry grid (`null`: not one). */
 export function symmetryPlateRows(m: Model, task: Task | null, state: TaskState | null): PlateRow[] | null {
   if (!isSymmetryModel(m)) return null;
-  const line = task ? taskLine(task) : (m.fold?.line ?? m.candidates?.[0] ?? m.mirror?.[0] ?? null);
+  const line = task ? (state && drawnLine(task, state)) || taskLine(task) : (m.fold?.line ?? m.candidates?.[0] ?? m.mirror?.[0] ?? null);
   const given = task?.kind === 'complete-symmetric' ? givenOf(task) : figureOf(m);
   const squares = given ? figureCells(given).size + figureHalves(given).length : 0;
   return [

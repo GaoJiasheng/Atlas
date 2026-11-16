@@ -300,12 +300,16 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
 
   // The docked tray's band in the HUD grid (math-scene.css): the left and right columns end above it.
   const docked = sheet && !presenting && !(practice && u.summary) && !!task && !!run;
-  useLayoutEffect(() => {
+  // Measured after every render of the view, and again when the tray itself commits (`onLayout`): the tray is lazy and so
+  // are the pictures in its options, so its content can arrive in a later commit of its own Suspense boundary, after the
+  // view measured an empty dock. A band left at 0 then lets the PLATE run under the tray until something re-renders the view.
+  const syncTaskBand = useCallback(() => {
     const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
     if (!scene) return;
     const h = docked && trayRef.current ? `${Math.ceil(trayRef.current.offsetHeight)}px` : '0px';
     if (scene.style.getPropertyValue('--task-h') !== h) scene.style.setProperty('--task-h', h);
-  });
+  }, [docked]);
+  useLayoutEffect(syncTaskBand);
   useEffect(() => {
     const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
     return () => {
@@ -632,7 +636,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       )}
       {docked && task && run && (
         <div ref={trayRef} className="ms-tray-dock" style={{ bottom: L.dock }}>
-          <Tray ctl={ctl} task={task} run={run} where={where} practice={practice} pool={step?.pool.length} last={practice && cur.beat === count - 1} revisit={revisit} narrow={narrow} locale={locale} />
+          <Tray ctl={ctl} task={task} run={run} where={where} practice={practice} pool={step?.pool.length} last={practice && cur.beat === count - 1} revisit={revisit} narrow={narrow} locale={locale} onLayout={syncTaskBand} />
         </div>
       )}
       {showSummary && <PracticeSummary lesson={lesson} results={u.practice} numbers={numbers} ctl={ctl} locale={locale} style={{ left: L.free.x, top: L.free.y, width: L.free.w, maxHeight: L.free.h }} />}

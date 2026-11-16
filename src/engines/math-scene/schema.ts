@@ -1760,8 +1760,9 @@ const drawAngleFields = z.object({
 const drawSegmentFields = z.object({
   /** The line starts at this dot (the child picks the other end); otherwise the child picks both ends. */
   from: dotPoint.optional(),
-  relation: z.enum(['parallel', 'perpendicular']),
-  /** The segment on the paper it is drawn against (index). */
+  /** `parallel` / `perpendicular` to a segment on dot paper (an angle model); `symmetry`: a line of symmetry of the figures on a grid (docs/79 §2.2). */
+  relation: z.enum(['parallel', 'perpendicular', 'symmetry']),
+  /** The segment on the paper it is drawn against (index; not used by `symmetry`). */
   to: z.number().int().min(0).max(11).default(0),
 });
 const tapFaceFields = z.object({

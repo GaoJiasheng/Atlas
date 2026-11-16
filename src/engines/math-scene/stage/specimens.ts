@@ -47,7 +47,7 @@ export const SPECIMEN_DIAL: InstrumentModelSpec = {
 export const SPECIMEN_NET: NetModelSpec = { kind: 'net', solid: { type: 'cuboid', size: [1, 1, 1] }, layout: { cubeNet: '141-e' }, fold: 0.5, stagger: true, view: 'iso', turn: 0 };
 
 /** The angles lesson's background (docs/76 §3.3): a 50° angle with the protractor laid on it, read on the inner scale. */
-export const SPECIMEN_ANGLE: AngleModelSpec = { kind: 'angle', rays: [{ dir: 0 }, { dir: 50, tone: 'signal' }], arcs: [{ from: 0, to: 50, deg: true, tone: 'signal' }], protractor: { rot: 0, row: 'inner' } };
+export const SPECIMEN_ANGLE: AngleModelSpec = { kind: 'angle', rays: [{ dir: 0, len: 1 }, { dir: 50, len: 1, tone: 'signal' }], arcs: [{ from: 0, to: 50, deg: true, tone: 'signal' }], protractor: { rot: 0, row: 'inner' } };
 
 export const SPECIMEN_DECIMAL: DecimalGridModelSpec = { kind: 'decimal-grid', level: 100, given: { units: 350_000, dp: 2 } };
 

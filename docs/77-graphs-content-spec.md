@@ -457,3 +457,8 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
   - S3–S10（读图研究文献）页码未核，按规则不进 sources.json；误解目录本身是本课的诊断设计。
   - 表格题里的"P3 / P4"是数据（两个班），不是课的年级标注。
 - **插图**：Codex `codex/img5`（c024fb85）的封面与 3 张配图，图注、替代文字照 `art/img5/graphs-captions.json`；封面 mask 进 `src/lib/illustrations.json`。
+
+**2026-11-16 打磨（分支 `claude/polish-math`）**
+
+- **来源重试**：恢复三条（只作误解的出处，不取数字）。S4 = Bell & Janvier (1981) FLM 2(1) 34–41，第 37 页 "increase vs value"（主会话看过第 37 页原图）→ `height-for-change`；S5 = Common Core 数据进程草稿（2011-06-20）第 4、6 页（有刻度的条形图上的"多多少"、条形图的计数刻度），只作教学顺序参考；S6 = Correll, Bertini & Franconeri (2020) arXiv:1907.02035 摘要（纵轴不从 0 开始会夸大差别；研究对象是成人）→ `truncated-axis`，代替读不到的 Pandey et al. 2015。仍删：Friel et al. 2001、Curcio 1987、Leinhardt et al. 1990（摘要不谈"高度当斜率"）、Hart 1981、Spence & Lewandowsky 1991（结论是饼图不比条形图差，不支持"饼图读份"的误解）、课本。
+- **布局竞态**（竖放平板上练习章的 task × plate 重叠）：见 docs/78 §10 的打磨记录（两课共用）。

@@ -209,7 +209,7 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
 | Q1 | `choose` | Is the dashed line a line of symmetry? / 虚线是对称轴吗？（长方形对角线） | 不是 | 是 → `equal-halves` | 02 |
 | Q2 | `choose`（多选） | Which figures are symmetric? / 哪些是对称图形？（斜放的风筝、平行四边形、等腰三角形、外形对称内部不对称的图） | 风筝、等腰三角形 | 漏选风筝 → `upright-line-only`；多选最后一个 → `outline-only` | 01、03 |
 | Q3 | `choose`（多选） | Which of these lines are lines of symmetry of the square? / 哪几条是正方形的对称轴？ | 4 条全选 | 漏选对角线 → `line-count` | 02 |
-| Q4 | `draw-segment` | Draw the line of symmetry. / 画出对称轴。（侧放的等腰梯形：两条平行边竖着，所以对称轴是水平的） | 水平中线 | 画成竖线 → 一般 fallback | 02 |
+| Q4 | `draw-segment` | Draw the line of symmetry. / 画出对称轴。（侧放的等腰梯形：两条平行边竖着，所以对称轴是水平的） | 水平中线 | 画成竖线 → `upright-line-only`（2026-11-16 打磨：由几何算出，见 §10） | 02 |
 | Q5 | `complete-symmetric` | Complete the figure. The dashed line is a line of symmetry. / 补全图形，虚线是对称轴。（`cells`，竖轴，5 格） | 镜像 5 格 | 平移 → `slid-not-flipped` | 04 |
 | Q6 | `complete-symmetric` | Complete the figure.（`cells`，横轴，含 2 个半格）/ 补全图形。 | 镜像 | 半格没翻 → `half-not-flipped` | 05 |
 | Q7 | `complete-symmetric` | Complete the figure.（`outline`，竖轴，6 个顶点，最远离轴 4 格）/ 补全图形。 | 镜像 | 离轴 2 格 → `distance-not-kept` | 05 |
@@ -370,10 +370,10 @@ Gavin 2026-11-15 选定的四节新课之一（另三节：docs/76 `angles`、do
 - **与 spec 不同处**：
   - `mirror` 是数组（≤ 10 条）而不是单条；斜轴写 `from / to` 线段（端点可为小数），不用 `diag`。
   - 第 03 步第 2 拍风筝形转 45°（不是 30°）：顶点留在格点上，对称由几何证明；过渡用 `rotate`（整幅重画淡入），没有做绕中心的转动动画。
-  - **`draw-segment` 没有做**：docs/76 E-AN5 与 angles 并行施工，为免两边重复实现、合并冲突，本课第 02 步的 2 道"画对称轴"和练习 Q4 改成 `choose`（三条虚线选一条，含 `upright-line-only` / `equal-halves` 错项）。E-AN5 合入后可换回。
+  - ~~`draw-segment` 没有做~~ → **2026-11-16 打磨补上**（branch `claude/polish-math`）：施工时 docs/76 E-AN5 与 angles 并行，第 02 步的 2 道"画对称轴"和练习 Q4 临时用了 `choose`。现在换回画线题，用 angles 的 `draw-segment` 加 `relation: "symmetry"`，但画在 A4 方格上（不用 A5 点阵）：图形、"折一折"、SYMMETRY 卡都与本课其余题一致，格点就是方格的交点（0…w × 0…h）。孩子点两个格点连线（方向键 + Enter 同样能做），线的延长线是对称轴就对（长度 ≥ 2 格；画在轴上的哪一段都行）；"折一折"（第二级提示或第一次检查后）沿孩子自己的线折。诊断由几何算出（`lib/diagnose/symmetry.ts drawnLineShows`）：线是竖的、而图形的对称轴都不是竖的 → `upright-line-only`；把图形分成面积相等、折起来不重合的两半 → `equal-halves`；其余 fallback。为了让对称轴落在格点上，图形改了：第 02 步 `tl-draw-triangle`（尖朝右的三角形，横轴 y = 3；错例竖线 → `upright-line-only`，顶点到对边中点的中线 → `equal-halves`）、`tl-draw-roof`（尖朝上的等腰三角形，竖轴；中线 → `equal-halves`），练习 Q4 侧放的等腰梯形（两条平行边竖着，横轴 y = 3；竖线 → `upright-line-only`，比 spec 的"一般 fallback"多一个诊断）。三道题 `check-pool` / `proveTask` 0 错；单测在 `diagnose-symmetry.test.ts`。validate：画线题只许这两个码、必须有一条过格点的竖 / 横对称轴（`validate-symmetry.ts`）；点阵上的 `draw-segment` 不许 `symmetry`（`validate-angles.ts`）。
   - "这一行照着翻"的行首按钮没有做（补全题格子在手机上 ≥ 29 px；有键盘路径）。
   - `pairs` 的格数只在 ≤ 2 对时标；第 04 步第 4 拍的"错点"是静态 hot 虚线圈，没有"挪到 3 格"的动画。
   - 第 05 步第 2 拍用左右两组（翻了 / 没翻）代替"旁边一个 hot 半格"；第 04 步第 3 拍同理，右边一组的线是虚线（它不是那组图的对称轴）。
 - **题库**：Claude 起草（未经 Codex），46 道 + 练习 7 道，全部 `proveTask` 自证、validate 0 错。
-- **来源**：S3–S6 的文献信息照本 spec 列出，未对照原文核对；S5 页码待核故不列。新加坡华文"对称图形"、"对应点"按默认。
+- **来源**：~~S3–S6 的文献信息照本 spec 列出，未对照原文核对；S5 页码待核故不列。~~ 2026-11-16 打磨重试：Leikin et al. 2000 与 Hoyles & Healy 1997 的摘要不谈对角线、斜轴或"一样大的两半"，Küchemann 1981 的章节页码查不到，Ng & Sinclair 2015 的摘要只说动态几何里的推理，四条都从 `sources.json` 删掉；新 S3 = Hart et al. (1980) CSMS 报告（ERIC ED237363）第 111 页表 6.11：反射题最难的一级是在斜的镜线里作反射（11–16 岁）→ `upright-line-only`；课本目录改为 S4。新加坡华文"对称图形"、"对应点"按默认。
 - **插图**：codex/img5 `c024fb85` 的封面与两张配图（第 01、02 章），图注按 `art/img5/symmetry-captions.json`。

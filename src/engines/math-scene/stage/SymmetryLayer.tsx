@@ -9,8 +9,10 @@
  * the squares to the line on each side); and on a completion the child's
  * layer — squares and half squares (tap a corner of a square for a half;
  * ←→↑↓, Enter, H turns the half), or corners joined in order (tap a grid
- * point; ←→↑↓ and Enter on the point cursor). Reduced motion: no turning, the
- * flap lies flat at once.
+ * point; ←→↑↓ and Enter on the point cursor); on a line of symmetry to draw
+ * (`draw-segment`), two grid corners picked the same way and joined, folded
+ * along with "Fold it". Reduced motion: no turning, the flap lies flat at
+ * once.
  */
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from 'react';
 import type { Locale } from '../../core/types';
@@ -19,7 +21,7 @@ import type { GridModelSpec, SymLineSpec, Task } from '../schema';
 import type { Action, TaskState } from '../lib/state';
 import { cellKey, extentOf, parseCell, parseHalf } from '../lib/grid';
 import { axisOf, cellDistance, clipHalf, figurePieces, figuresOnLine, foldPieces, halfPoly, keyPieces, lineOf, orientToward, partnerKey, partnerPoint, type Line, type Piece, type Poly, type Pt } from '../lib/symmetry';
-import { cellOpen, givenOf, planOf, pointOpen, type Plan } from '../lib/symmetry-tasks';
+import { cellOpen, givenOf, planOf, pointOpen, segmentPieces, symSegmentSolution, type Plan } from '../lib/symmetry-tasks';
 
 export interface SymFrame {
   X(x: number): number;
@@ -235,6 +237,7 @@ export interface SymTaskProps {
 
 export function SymTaskLayer(p: SymTaskProps) {
   const { task } = p;
+  if (task.kind === 'draw-segment' && task.model.kind === 'grid') return <SegmentLayer {...p} m={task.model} />;
   if (task.kind !== 'complete-symmetric') return null;
   const plan = planOf(task);
   if (!plan || task.model.kind !== 'grid') return null;
@@ -424,6 +427,59 @@ function PointsLayer(p: SymTaskProps & { plan: Plan; m: GridModelSpec }) {
         <>
           <rect className="ms-grid__cuthit" x={F.X(x0)} y={F.Y(y1)} width={(x1 - x0) * F.sx} height={(y1 - y0) * F.sy} onPointerDown={tap} aria-hidden="true" />
           <g className="ms-grid__cursor" role="button" tabIndex={0} data-keys="arrows" aria-pressed={placed} aria-label={t(locale, 'math.sym.pointCursor')} aria-description={t(locale, 'math.sym.pointAt', { n: dist, placed: state.sym.length })} onKeyDown={key}>
+            <circle className="ms-grid__pen" cx={F.X(cur[0])} cy={F.Y(cur[1])} r={8} />
+          </g>
+        </>
+      )}
+    </g>
+  );
+}
+
+/** A line of symmetry to draw: two grid corners picked (tap, or ←→↑↓ and Enter), joined; "Fold it" folds the figure along it. */
+function SegmentLayer(p: SymTaskProps & { m: GridModelSpec }) {
+  const { F, task, state, m, act, modelPhase, ghost, locale, defs } = p;
+  const ext = extentOf(m);
+  const [cur, setCur] = useState<Pt>([Math.round(ext.w / 2), Math.round(ext.h / 2)]);
+  if (task.kind !== 'draw-segment') return null;
+  const picked: Pt[] = [...(task.from ? [task.from as Pt] : []), ...state.dpts];
+  const open = (x: number, y: number) => x >= 0 && y >= 0 && x <= ext.w && y <= ext.h;
+  const tap = (e: PointerEvent<SVGRectElement>) => {
+    if (e.button !== 0) return;
+    const box = (e.currentTarget as SVGGraphicsElement).ownerSVGElement?.getBoundingClientRect();
+    if (!box) return;
+    e.preventDefault();
+    const x = Math.round((e.clientX - box.left - F.X(0)) / F.sx);
+    const y = Math.round((F.Y(0) - (e.clientY - box.top)) / F.sy);
+    if (!open(x, y)) return;
+    setCur([x, y]);
+    act?.({ do: 'dot', x, y });
+  };
+  const key = (e: KeyboardEvent<SVGGElement>) => {
+    const d = e.key === 'ArrowRight' ? [1, 0] : e.key === 'ArrowLeft' ? [-1, 0] : e.key === 'ArrowUp' ? [0, 1] : e.key === 'ArrowDown' ? [0, -1] : null;
+    if (d) {
+      e.preventDefault();
+      const n: Pt = [cur[0] + d[0]!, cur[1] + d[1]!];
+      if (open(n[0], n[1])) setCur(n);
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      act?.({ do: 'dot', x: cur[0], y: cur[1] });
+    }
+  };
+  const seg = picked.length >= 2 ? ([picked[0]!, picked[1]!] as const) : null;
+  const sol = ghost ? symSegmentSolution(task) : null;
+  const on = picked.some((q) => q[0] === cur[0] && q[1] === cur[1]);
+  return (
+    <g className="ms-sym__task">
+      {seg && state.sfold && <FoldFlap key={`${seg[0].join(',')}|${seg[1].join(',')}`} F={F} l={{ a: seg[0], b: seg[1] }} t={1} pieces={segmentPieces(task)} defs={defs} bounds={paperOf(m)} />}
+      {seg && <line className="ms-sym__mine-line" x1={F.X(seg[0][0])} y1={F.Y(seg[0][1])} x2={F.X(seg[1][0])} y2={F.Y(seg[1][1])} aria-hidden="true" />}
+      {picked.map((q) => (
+        <circle key={q.join(',')} className="ms-sym__point" data-tone="signal" cx={F.X(q[0])} cy={F.Y(q[1])} r={5} aria-hidden="true" />
+      ))}
+      {sol && <line className="ms-grid__ghost-line" x1={F.X(sol[0][0])} y1={F.Y(sol[0][1])} x2={F.X(sol[1][0])} y2={F.Y(sol[1][1])} aria-hidden="true" />}
+      {modelPhase && (
+        <>
+          <rect className="ms-grid__cuthit" x={F.X(-0.5)} y={F.Y(ext.h + 0.5)} width={(ext.w + 1) * F.sx} height={(ext.h + 1) * F.sy} onPointerDown={tap} aria-hidden="true" />
+          <g className="ms-grid__cursor" role="button" tabIndex={0} data-keys="arrows" aria-pressed={on} aria-label={t(locale, 'math.angle.dotPaper')} aria-description={`${t(locale, 'math.angle.dot', { x: cur[0] + 1, y: cur[1] + 1 })}${on ? ` · ${t(locale, 'math.angle.dotPicked')}` : ''}`} onKeyDown={key}>
             <circle className="ms-grid__pen" cx={F.X(cur[0])} cy={F.Y(cur[1])} r={8} />
           </g>
         </>

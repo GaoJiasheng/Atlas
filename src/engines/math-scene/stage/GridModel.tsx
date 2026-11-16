@@ -630,6 +630,7 @@ function TaskLayer(p: LayerProps) {
     case 'split-figure':
       return <CutLayer {...p} />;
     case 'complete-symmetric':
+    case 'draw-segment':
       return <SymTaskLayer F={p.F} task={task} state={state} defs={p.defs} modelPhase={p.modelPhase} act={p.act} ghost={p.ghost} locale={p.locale} />;
     default:
       return null;

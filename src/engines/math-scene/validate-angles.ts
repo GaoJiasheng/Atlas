@@ -139,7 +139,8 @@ export function angleTaskIssues(task: Task, limits?: StepLimits): string[] {
   if (task.kind === 'draw-segment') {
     const paper = spec?.paper;
     const given = paper?.segments[task.to];
-    if (!paper || !given) out.push('draw-segment needs dot paper with the segment it names');
+    if (task.relation === 'symmetry') out.push('a line of symmetry is drawn on a grid (docs/79), not on dot paper');
+    else if (!paper || !given) out.push('draw-segment needs dot paper with the segment it names');
     else {
       if (task.from && !onPaper(task.from as P2, paper)) out.push('the starting dot is off the paper');
       if (task.from && task.relation === 'parallel' && onLine(task.from as P2, given.from as P2, given.to as P2)) out.push('the starting dot lies on the given line');

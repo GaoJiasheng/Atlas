@@ -5,13 +5,14 @@
  * says whether the halves match and the geometry agrees, partners on the
  * paper); a completion has one line, up or across (D8), a given half wholly
  * on one side, partners on the paper within the step's limits; a choice's
- * claims (`symmetric`, `lines`) agree with folding; every code is a symmetry
- * code. Build time only; shared with `scripts/math/check-pool.ts`.
+ * claims (`symmetric`, `lines`) agree with folding; a line of symmetry to
+ * draw has one up or across through grid corners and diagnoses only the two
+ * codes a line can show; every code is a symmetry code. Build time only; shared with `scripts/math/check-pool.ts`.
  */
 import { SYMMETRY_CODES, type GridModelSpec, type StepLimits, type Task } from './schema';
 import { extentOf, parseCell, parseHalf } from './lib/grid';
 import { axisOf, figurePieces, figuresOnLine, isConvex, isSymmetric, keyPieces, lineMatches, lineOf, linesOfSymmetry, partnerKey, sideOf, type Pt } from './lib/symmetry';
-import { cellOpen, givenOf, planOf, pointOpen, taskLine } from './lib/symmetry-tasks';
+import { cellOpen, givenOf, planOf, pointOpen, segmentPieces, symSegmentSolution, taskLine } from './lib/symmetry-tasks';
 import { gridModelIssues } from './validate';
 
 /** Furthest a square or corner may be from the line (docs/79 §1.3: ≤ 5 squares). */
@@ -85,6 +86,21 @@ export function symTaskIssues(task: Task, limits: StepLimits | undefined): strin
       const holds = (o.symmetric === undefined || o.symmetric === truth.symmetric) && (o.lines === undefined || o.lines === truth.lines);
       if (holds !== o.correct) out.push(`option "${o.id}" is marked ${o.correct ? 'right' : 'wrong'}, but the figure ${o.lines !== undefined ? `has ${truth.lines} line(s) of symmetry` : truth.symmetric ? 'is symmetric about the line' : 'is not symmetric about the line'}`);
     }
+  }
+  if (task.kind === 'draw-segment') {
+    if (task.model.kind !== 'grid') return out;
+    if (task.relation !== 'symmetry') out.push('a line drawn on a symmetry grid is a line of symmetry (relation "symmetry")');
+    if (task.model.show === 'none') out.push('a line of symmetry is drawn between grid corners: the grid is shown');
+    const sol = symSegmentSolution(task);
+    if (!sol) out.push('the figures have no line of symmetry up or across through grid corners to draw');
+    const pieces = segmentPieces(task);
+    if (task.from) {
+      const ext = extentOf(task.model);
+      if (task.from[0] > ext.w || task.from[1] > ext.h) out.push('the starting corner is off the paper');
+      if (!linesOfSymmetry(pieces).some((l) => Math.abs(sideOf(l, task.from as Pt)) < 1e-9)) out.push('the starting corner is on no line of symmetry');
+    }
+    for (const w of task.feedback.wrong) if (!(['upright-line-only', 'equal-halves'] as string[]).includes(w.when)) out.push(`a line drawn diagnoses upright-line-only or equal-halves, not "${w.when}"`);
+    return out;
   }
   if (!completion) return out;
   const m = task.model;
