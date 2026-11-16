@@ -13,27 +13,27 @@
 | 人体肌肉系列（胸 / 背 / 肩 / 臂 / 腿 / 腰腹） | biology | space | SpaceScene/Model3D | 人体系统与课外健身知识；详见 docs/16 §16 | 2026 | published ×6（2026-10-12） |
 | 骨骼与关节（连接骨架、活骨、六种滑膜关节、跨关节拉力、理想杠杆、生长与修复） | biology | space + sim | SpaceScene/Model3D + 既有table及数字关节绑定 | 人体系统深化，非骨名考试；详见 docs/57 | 2026 | published（2026-10-27）：背景 + 7章、40拍；浏览器与具名解剖审查见REVIEW |
 | 红树林食物网（生境剖面、适应与条件性取食关系） | science | space + sim | SpaceScene/Model3D + table + directed foodWeb card | Sci P6 环境中的相互作用；详见 docs/53 | 2026 提前 | published（2026-10-27）：背景 + 7 章、36 拍；浏览器验收待主 session |
-| 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 |
+| 新加坡 1819–1965 | history | time | TimeScene/Geo | SS P4 新加坡故事 | 2027 | published（2026-10-30，敏感段落待 Gavin 读；docs/28） |
 | 一株植物（盆栽辣椒：根茎叶花果种子，P3–P6 五个课题） | biology | space | SpaceScene/Model3D | Sci P3 生命周期；P4 植物部位与功能；P5 运输系统与繁殖；P6 光合作用与传播；详见 docs/26 | 2026 提前 | published（2026-10-14）：7 章 37 拍 |
 | 青蛙与鸡的生活史（卵、幼体、成体与下一代） | biology | space + sim | SpaceScene/Model3D + 既有 `table`、pose、visible | Sci P3 Cycles in Plants and Animals (Life Cycles)；详见 docs/56 | 2026（提前） | published（2026-10-27）：背景 + 5 章、30 拍；浏览器验收交主会话 |
 | 珊瑚礁（珊瑚动物、礁区、食物路径、白化与保护） | biology | space + sim | SpaceScene/Model3D + 既有 table / sim.foodWeb | P6 Interactions within the Environment 应用，详见 docs/66；复用红树林食物网卡、不重复其生境 | 2026（提前） | published（2026-10-29）：背景 + 7章、39拍；浏览器门槛交主会话 |
 | 细胞（植物与动物细胞、结构与作用、安全显微观察） | biology | space + sim | SpaceScene/Model3D + microscope + simulated field | MOE 2023 P5：生命基本单位；细胞细部与显微镜为用户指定深化；详见 docs/63 | 2026（提前） | published（2026-10-29）：背景 + 7 章、40 拍；浏览器验收交主会话 |
 | 生物的分类（标本台：生物与非生物、四大类、开花与不开花植物、动物六类、分错了的动物、自己做流程图） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind sort） | Sci P3 Diversity of Living and Non-Living Things；详见 docs/38 | 2026（提前） | published（2026-10-22）：背景 + 6 章 39 拍 |
-| 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | spec 草案 |
-| 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 |
+| 磁铁 | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind magnet） | Sci P3 磁；详见 docs/22 | 2028 | published（docs/22） |
+| 消化系统 | biology | space | Layer2D | Sci P4 人体系统 | 2028 | published（docs/25） |
 | 新加坡的水（水循环 + 四大水喉的处理链；一块示意的新加坡切片） | science | space | SpaceScene/Model3D | Sci P5 Cycles in Matter and Water（Water）；SS P3 资源；详见 docs/24 | 2026（提前） | published（2026-10-14），7 章 33 拍 |
 | 新加坡的四大水喉（1867 年至今，蓄水池、厂址、柔佛河输水管） | geography | time | TimeScene/Geo（岛尺度底图，docs/17 C1） | SS P3 资源；详见 docs/24 §15 | 2026（提前） | published（2026-10-14），背景 + 5 章 23 拍 |
 | 光与影（光学实验台 + 暗箱 + 户外杆影；看见、直线传播、影子的形状与大小、太阳下的影子） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind light） | Sci P4 Energy Forms and Uses（Light）；详见 docs/35 | 2026（提前） | published（2026-10-20）：背景 + 7 章 41 拍 |
 | 眼睛与耳朵（分设解剖工位：光、成像、调焦、听骨、耳蜗与保护） | biology | space + sim | SpaceScene/Model3D + senses 试一试 | P4 Light 与感官观察接口；解剖机制为课外拓展，详见 docs/58 | 2026（提前） | published（2026-10-27）：8 章 40 拍、3 张试一试；浏览器门槛留主会话 |
 | 声音（振动、介质、音高与振幅、回声、乐器与护耳） | science | space + sim | SpaceScene/Model3D + 复用 senses 纵波与 sound-only 扩展 | P6 Sound energy 与公平比较接口；声学为课外拓展，详见 docs/64 | 2026（提前） | published（2026-10-29）：8 章 32 拍、4 张试一试、24 个可选零件；浏览器门槛留主会话端口 5452 |
 | 热与温度（测温、勺柄传热、隔热、加热/冷却曲线、热胀冷缩） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind heat） | Sci P4 Energy Forms and Uses（Heat）；详见 docs/55 | 2026（提前） | published（2026-10-27）：背景 + 7章、37拍、34件；浏览器验收由主会话补跑 |
-| 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 |
+| 大陆漂移与板块 | geography | time | TimeScene/Geo+morph | 课外拓展（地理） | 2028–2029 | published（2026-11-15，docs/72：Merdith 2021 旋转模型，地球仪连续转动） |
 | 地球内部与火山剖面 | geography | space + sim | SpaceScene/Model3D + 既有table试一试 | 地理拓展（非新增PSLE必考单元）；详见 docs/48 | 2026（提前） | published（2026-10-27）：背景 + 7章、36拍、91件 |
 | 电路是怎么工作的（手电筒 + 电路板） | science | space + sim | SpaceScene/Model3D + 试一试（`sim`，kind circuit） | Sci P5 Electrical System；详见 docs/23 | 2026 提前（与植物并行） | published（2026-10-14）：6 章 31 拍，「试一试」扩展（`sim`）随本主题上线 |
-| 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P5 呼吸与循环（人体与植物） | 2030 |
-| 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 |
-| 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 |
-| 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 |
+| 呼吸与循环系统 | biology | space | Layer2D/Model3D | Sci P5 呼吸与循环（人体与植物） | 2030 | published 为「心与肺」（docs/40） |
+| 力（摩擦、重力、弹力） | science | sim | Simulation | Sci P6 | 2030 | published（docs/30） |
+| 气候带与季风 | geography | time | TimeScene/Geo | 课外拓展 | 随时 | published 为「季风与天气」（docs/50） |
+| 丝绸之路 / 郑和下西洋 | history | time | TimeScene/Geo | 课外拓展（历史） | 随时 | published：郑和（docs/59）、丝绸之路（2026-11-16，docs/73，敏感段落待读） |
 | 分数（P2–P4：平均分、等值分数、同分母与相关分母加减、带分数；比例留待后续） | math | lesson | MathScene/SVG | MOE 2021 数学课纲 Fractions（P2、P3，P4 桥）；详见 docs/15 | 2026 P2 起用，P3 接着做 | 已完成 12 步 + 练习（待审） |
 | 拆开一台 AI 服务器（NVIDIA DGX B200） | computer | space | SpaceScene/Model3D | 课外（MOE 小学无计算机课纲）；能量转换与热的传递接 Sci P4 热；详见 docs/18 | 2026（computer 类第一个） | published（2026-10-13） |
 | 太阳系与恒星（比例、八行星、较小天体、闪烁与新加坡星空、光年与银河系） | science | space + sim | SpaceScene/Model3D + solar-system 快照 | P4 光、P6太阳与能量接口；天文为拓展，详见 docs/65 | 2026（提前） | published（2026-10-29）：背景 + 7章、40拍；浏览器门槛交主会话 |
@@ -43,6 +43,23 @@
 数学类走 MathScene（分步课 + 练习，第三个引擎，分数已做，docs/15），比例、面积、速度随年级补；科学类的参数模拟不再单开 Simulation 引擎，走 SpaceScene 的「试一试」扩展（`sim`，docs/03 §C、docs/06）：电路已做、磁铁复用；computer 类的第一个主题是 AI 服务器（`b200-server`，SpaceScene，docs/18），之后的计算机主题按同一拆解模板做。
 
 肌肉系列若增第七个主题：先定范围与事实 spec，补该区 manifest / glb / rig、共享肌肉与动作卡及六章节拍，再过许可、附着点人审、网格 audits、previews 与 shoot；流程见 `atlas-space-topic/references/anatomy-mesh-runbook.md`。
+
+## 2026-11 新增（上表之外）
+
+| 主题 | 引擎 | spec | 状态 |
+|---|---|---|---|
+| 冰箱 | SpaceScene | docs/74 | published 2026-11-15 |
+| 脑与神经 | SpaceScene（Z-Anatomy 网格） | docs/75 | published 2026-11-15 |
+| 角（P3–P5） | MathScene | docs/76 | published 2026-11-16 |
+| 图表（P3–P4） | MathScene | docs/77 | published 2026-11-16 |
+| 平均数（P6） | MathScene | docs/78 | published 2026-11-16 |
+| 对称（P4） | MathScene | docs/79 | published 2026-11-16 |
+| 百分比（P5） | MathScene | docs/80 | spec 草案，待 Gavin 定稿 |
+| 体积（P5） | MathScene | docs/81 | spec 草案，待 Gavin 定稿 |
+| 组屋电梯 | SpaceScene | docs/82 | spec 草案，待 Gavin 定稿 |
+| 新加坡填海 | TimeScene | docs/83 | spec 草案，待 Gavin 定稿（数据下载待批） |
+
+已上线主题的完整清单以 `src/content/topics/*/topic.yaml` 的 `status: published` 为准（2026-11-16 共 69 个，不含 sample-*）；本表早期各行的状态栏可能落后，以代码为准。
 
 ## 二战主题大纲（一期 10 章）
 
