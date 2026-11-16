@@ -343,8 +343,8 @@
         "zh": "盖住右侧；冷凝管就贴在它的内面。"
       },
       "detail": {
-        "en": "This model splits the right side panel off the outer case so that it can be lifted away to show the condenser pipe fixed to its inner face. The left panel is built the same way. With the pipe fixed straight onto the inside of the panel, the panel itself is heated above room temperature and gives the heat to the kitchen [S38].\n\nThat is why the sides of a running fridge of this kind feel warm. Hot-wall condensers like this are common in freezers and compact fridges; many larger fridges use a fan-cooled coil in the bottom bay instead [S20].\n\nIf a fridge is boxed in tightly on both sides, the warm panels have little room to give off their heat, and the compressor runs for longer.",
-        "zh": "这个模型把右侧板从外箱上分出来，可以拿开，露出贴在它内面的冷凝管。左侧板也是同样的构造。管子直接贴在侧板内面，侧板本身就被加热到比室温高，把热交给厨房 [S38]。\n\n所以这类冰箱运转时，两侧摸上去是温的。这种“热壁”冷凝器在冷冻柜和小冰箱里很常见；很多较大的冰箱则在底部机械仓里装一个用风扇吹的盘管 [S20]。\n\n冰箱两侧若被柜子紧紧夹住，温热的侧板就不容易散热，压缩机要运转得更久。"
+        "en": "This model splits the right side panel off the outer case so that it can be lifted away to show the condenser pipe fixed to its inner face. The left panel is built the same way. With the pipe fixed straight onto the inside of the panel, the panel itself is heated above room temperature and gives the heat to the kitchen [S38].\n\nThat is why the sides of a running fridge of this kind feel warm, sometimes quite hot, and cool down again when the compressor stops [S46]. Makers of two-door fridges sold in this region describe them this way and ask for a few centimetres of space at the sides and back [S45, S47]. Hot-wall condensers are also common in freezers and compact fridges; many larger fridges use a fan-cooled coil in the bottom bay instead [S20].\n\nIf a fridge is boxed in tightly on both sides, the warm panels have little room to give off their heat, and the compressor runs for longer.",
+        "zh": "这个模型把右侧板从外箱上分出来，可以拿开，露出贴在它内面的冷凝管。左侧板也是同样的构造。管子直接贴在侧板内面，侧板本身就被加热到比室温高，把热交给厨房 [S38]。\n\n所以这类冰箱运转时，两侧摸上去是温的，有时还挺烫，压缩机停下后又会凉下来 [S46]。在本地区出售的双门冰箱，厂商就是这样介绍的，并要求在两侧和背后留出几厘米空隙 [S45, S47]。“热壁”冷凝器在冷冻柜和小冰箱里也很常见；很多较大的冰箱则在底部机械仓里装一个用风扇吹的盘管 [S20]。\n\n冰箱两侧若被柜子紧紧夹住，温热的侧板就不容易散热，压缩机要运转得更久。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -920,6 +920,22 @@
           ],
           "color": "plastic",
           "tint": "#ecebe6"
+        },
+        {
+          "kind": "bevelBox",
+          "size": [
+            0.5,
+            0.085,
+            0.004
+          ],
+          "bevel": 0.001,
+          "at": [
+            0,
+            1.1675,
+            0.282
+          ],
+          "color": "plastic",
+          "tint": "#2f3133"
         }
       ],
       "connects": [
@@ -1071,7 +1087,7 @@
             0.282
           ],
           "color": "rubber",
-          "tint": "#7e807c"
+          "tint": "#5e615d"
         }
       ],
       "explode": {
@@ -1265,7 +1281,7 @@
           0.282
         ],
         "color": "rubber",
-        "tint": "#7e807c"
+        "tint": "#5e615d"
       },
       "explode": {
         "dir": [
@@ -1746,8 +1762,8 @@
         "zh": "开门时照亮箱内，由门开关控制。"
       },
       "detail": {
-        "en": "A lamp at the top of the fridge compartment lights the shelves. A push-button switch at the door frame is pressed in by the closed door; opening the door releases it and turns the lamp on, and closing the door turns it off [S20].\n\nIn the try-it in chapter 2, the lamp lights whenever the door is set open.\n\nIf the switch sticks, the lamp may stay on with the door shut and add a little heat inside.",
-        "zh": "冷藏室顶部有一盏灯照亮搁架。门框上有一个按钮开关，门关着时把它压下去；门一开，按钮弹出，灯就亮；门一关，灯就灭 [S20]。\n\n在第 2 章的试一试里，只要把门设为开着，灯就会亮。\n\n开关卡住时，门关着灯也可能一直亮，给箱内添一点热。"
+        "en": "A lamp at the top of the fridge compartment lights the shelves. A push-button switch at the door frame is pressed in by the closed door; opening the door releases it and turns the lamp on, and closing the door turns it off [S20]. In many frost-free fridges the same switch also stops the fan while the door is open [S51].\n\nIn the try-it in chapter 2, the lamp lights whenever the door is set open.\n\nIf the switch sticks, the lamp may stay on with the door shut and add a little heat inside.",
+        "zh": "冷藏室顶部有一盏灯照亮搁架。门框上有一个按钮开关，门关着时把它压下去；门一开，按钮弹出，灯就亮；门一关，灯就灭 [S20]。很多无霜冰箱里，同一个开关在门开着时也让风扇停转 [S51]。\n\n在第 2 章的试一试里，只要把门设为开着，灯就会亮。\n\n开关卡住时，门关着灯也可能一直亮，给箱内添一点热。"
       },
       "primitive": {
         "kind": "bevelBox",
@@ -1990,8 +2006,8 @@
         "zh": "把空气吹过盘管，送进两个室。"
       },
       "detail": {
-        "en": "A small fan above the coil pulls air through it and blows it into the freezer and towards the damper for the fridge compartment. Its electric motor sits behind the blades.\n\nIn this design it uses about 4 W [S1]; evaporator fans in tested fridges use 3–7 W [S20]. One maker's service manual says the fan stops during defrosting [S21]. On screen it turns far more slowly than a real fan.\n\nIf the fan stops while the compressor runs, the coil gets colder but the cold does not reach the compartments, and they warm up.",
-        "zh": "盘管上方的一只小风扇，把空气抽过盘管，吹进冷冻室，也吹向通往冷藏室的风门。它的电机在扇叶后面。\n\n这项设计的风扇约用电 4 W [S1]；受测冰箱的蒸发器风扇用电 3–7 W [S20]。一家厂商的维修手册写明化霜时风扇停转 [S21]。画面里它比真实的风扇转得慢得多。\n\n压缩机运转而风扇不转时，盘管越来越冷，冷却送不到两个室，箱内就会变暖。"
+        "en": "A small fan above the coil pulls air through it and blows it into the freezer and towards the damper for the fridge compartment. Its electric motor sits behind the blades.\n\nIn this design it uses about 4 W [S1]; evaporator fans in tested fridges use 3–7 W [S20]. One maker's service manual says the fan stops during defrosting [S21]. In many fridges the door switch that turns on the lamp also stops the fan while a door is open, so less cold air is blown out [S51]; the fan starts again a little after the door is shut [S46]. On screen it turns far more slowly than a real fan.\n\nIf the fan stops while the compressor runs, the coil gets colder but the cold does not reach the compartments, and they warm up.",
+        "zh": "盘管上方的一只小风扇，把空气抽过盘管，吹进冷冻室，也吹向通往冷藏室的风门。它的电机在扇叶后面。\n\n这项设计的风扇约用电 4 W [S1]；受测冰箱的蒸发器风扇用电 3–7 W [S20]。一家厂商的维修手册写明化霜时风扇停转 [S21]。很多冰箱里，点亮灯的那个门开关，在门开着时也让风扇停转，少把冷空气吹出去 [S51]；关门后过一会儿风扇再启动 [S46]。画面里它比真实的风扇转得慢得多。\n\n压缩机运转而风扇不转时，盘管越来越冷，冷却送不到两个室，箱内就会变暖。"
       },
       "primitive": {
         "kind": "blades",
@@ -2218,8 +2234,8 @@
         "zh": "通电发热，把盘管上的霜化掉。"
       },
       "detail": {
-        "en": "A heating element runs under the coil and up its sides. During a defrost the compressor and fan stop and the heater is switched on until a sensor on the coil shows that it has warmed up [S20, S21].\n\nIn this design it is 250 W, on for about 10 minutes about once a day, about 15 kWh a year [S1]. Heaters in tested top-freezer fridges are 390–413 W and run for 4.8–8 minutes [S20]; one maker's manual lists 250 W [S21]. The glow on screen only marks that it is switched on.\n\nIf the heater fails, frost keeps building until air can hardly pass the coil, and the fridge slowly warms.",
-        "zh": "加热丝沿盘管底部横走，再沿两侧往上。化霜时，压缩机和风扇停下，加热器通电，直到盘管上的传感器显示盘管已经回暖 [S20, S21]。\n\n这项设计的加热器为 250 W，约每天一次、每次约 10 分钟，一年约用 15 kWh [S1]。受测的上冷冻冰箱，加热器为 390–413 W，每次 4.8–8 分钟 [S20]；一家厂商的说明书写的是 250 W [S21]。画面里的发光只表示它通了电。\n\n加热器坏了，霜会越积越厚，直到空气几乎过不去，冰箱就慢慢变暖。"
+        "en": "A heating element runs under the coil and up its sides. During a defrost the compressor and fan stop and the heater is switched on until a sensor on the coil shows that it has warmed up [S20, S21].\n\nIn this design it is 250 W, on for about 10 minutes about once a day, about 15 kWh a year [S1]. Heaters in tested top-freezer fridges are 390–413 W and run for 4.8–8 minutes [S20]; one maker's manual lists 250 W [S21]. A timer counts the hours the compressor has run and usually starts a defrost every 8 to 15 of them; a whole defrost, with no fan or compressor running, takes about 25 to 45 minutes, usually once or twice a day [S50]. The glow on screen only marks that it is switched on.\n\nIf the heater fails, frost keeps building until air can hardly pass the coil, and the fridge slowly warms.",
+        "zh": "加热丝沿盘管底部横走，再沿两侧往上。化霜时，压缩机和风扇停下，加热器通电，直到盘管上的传感器显示盘管已经回暖 [S20, S21]。\n\n这项设计的加热器为 250 W，约每天一次、每次约 10 分钟，一年约用 15 kWh [S1]。受测的上冷冻冰箱，加热器为 390–413 W，每次 4.8–8 分钟 [S20]；一家厂商的说明书写的是 250 W [S21]。定时器累计压缩机的运转时间，通常每运转 8 到 15 小时化霜一次；整个化霜过程风扇和压缩机都不转，约 25 到 45 分钟，通常每天一到两次 [S50]。画面里的发光只表示它通了电。\n\n加热器坏了，霜会越积越厚，直到空气几乎过不去，冰箱就慢慢变暖。"
       },
       "primitive": {
         "kind": "tube",
@@ -2984,8 +3000,8 @@
         "zh": "冷媒在这里把热交给厨房，凝结成液体。"
       },
       "detail": {
-        "en": "A long pipe runs up and down the inside of each side panel, the two sides joined across the top at the back. Hot gas from the compressor gives its heat through the steel to the kitchen air and condenses into liquid. Fixing the pipe to the panel heats the panel itself above room temperature [S38]. The left side is a mirror image of the right.\n\nIn this design the refrigerant condenses at 40 °C, where the pressure of isobutane is about 0.53 MPa [S2]; in this simulation it gives out 168 W while running [S1]. The model draws the pipe with fewer runs than a real one so that it can be seen. This hot-wall layout is one common arrangement; many larger fridges use a fan-cooled coil in the bottom bay instead [S20, S21].\n\nIf the sides are boxed in tightly, the heat cannot get away easily, the pressure in the condenser rises and the compressor uses more electricity.",
-        "zh": "一根长管在每块侧板内面上下来回，两侧的管在背后顶部横向相连。压缩机来的热气体，把热穿过钢板交给厨房的空气，自己凝结成液体。管子贴在侧板上，侧板本身就被加热到比室温高 [S38]。左侧和右侧互为镜像。\n\n这项设计里冷媒在 40℃ 凝结，这时异丁烷的压力约 0.53 MPa [S2]；在这个模拟里，运转时它放热 168 W [S1]。模型里的管比真实的少画了几个来回，好让人看清。这种“热壁”布局是常见做法之一；很多较大的冰箱则在底部机械仓里装一个用风扇吹的盘管 [S20, S21]。\n\n两侧被夹得太紧，热就不容易散出去，冷凝器里的压力升高，压缩机要用更多的电。"
+        "en": "A long pipe runs up and down the inside of each side panel, the two sides joined across the top at the back. Hot gas from the compressor gives its heat through the steel to the kitchen air and condenses into liquid. Fixing the pipe to the panel heats the panel itself above room temperature [S38]. The left side is a mirror image of the right.\n\nIn this design the refrigerant condenses at 40 °C, where the pressure of isobutane is about 0.53 MPa [S2]; in this simulation it gives out 168 W while running [S1]. The model draws the pipe with fewer runs than a real one so that it can be seen. Many two-door fridges sold in Singapore and nearby countries are built this way: their makers describe heat-radiating pipes in both side walls, in some fridges in the back panel too [S45, S46, S47]. Other fridges, especially larger ones, use a fan-cooled coil in the bottom bay instead [S20, S21].\n\nIf the sides are boxed in tightly, the heat cannot get away easily, the pressure in the condenser rises and the compressor uses more electricity.",
+        "zh": "一根长管在每块侧板内面上下来回，两侧的管在背后顶部横向相连。压缩机来的热气体，把热穿过钢板交给厨房的空气，自己凝结成液体。管子贴在侧板上，侧板本身就被加热到比室温高 [S38]。左侧和右侧互为镜像。\n\n这项设计里冷媒在 40℃ 凝结，这时异丁烷的压力约 0.53 MPa [S2]；在这个模拟里，运转时它放热 168 W [S1]。模型里的管比真实的少画了几个来回，好让人看清。在新加坡及周边国家出售的双门冰箱，很多都是这样做的：厂商说明两侧箱壁里装有散热管，有的背板里也有 [S45, S46, S47]。另一些冰箱，尤其是较大的，则在底部机械仓里装一个用风扇吹的盘管 [S20, S21]。\n\n两侧被夹得太紧，热就不容易散出去，冷凝器里的压力升高，压缩机要用更多的电。"
       },
       "primitive": {
         "kind": "tube",
@@ -3133,8 +3149,8 @@
         "zh": "让箱口保持温热，不凝水珠。"
       },
       "detail": {
-        "en": "The warm liquid leaving the side condensers runs round the front of the cabinet, just behind the steel at the door openings, before it goes on to the filter-drier. Most modern fridge-freezers use refrigerant tubes like this, and in most of them the tube carries warm liquid [S20].\n\nThe front of the cabinet around the freezer opening is close to very cold air; when warm, humid kitchen air touches a cold area there, moisture condenses [S44]. A loop of warm liquid keeps that front face warm [S39]. The heat has to be given out anyway, so no extra electricity is used.\n\nIf the frame is wet or icy, warm air may be getting past the seals, or the door may not be closing fully.",
-        "zh": "从侧壁冷凝管出来的温热液体，先沿箱口前沿、紧贴门洞后面的钢板绕一圈，再去干燥过滤器。如今大多数冰箱都用这样的冷媒管，而且多数管里走的是温热的液体 [S20]。\n\n冷冻室箱口周围的前沿紧挨着很冷的空气；温暖潮湿的厨房空气碰到那里的冷表面，水汽就会凝结 [S44]。一圈温热的液体让前沿保持温热 [S39]。这份热反正要放出去，所以不用多花电。\n\n门框若是湿的或结了冰，可能是暖空气从门封漏了进去，或者门没关严。"
+        "en": "The warm liquid leaving the side condensers runs round the front of the cabinet, just behind the steel at the door openings, before it goes on to the filter-drier. Most modern fridge-freezers use refrigerant tubes like this, and in most of them the tube carries warm liquid [S20]; makers in this region describe the hot pipe running along the sides and round the front [S46].\n\nThe front of the cabinet around the freezer opening is close to very cold air; when warm, humid kitchen air touches a cold area there, moisture condenses [S44]. A loop of warm liquid keeps that front face warm [S39]. The heat has to be given out anyway, so no extra electricity is used.\n\nIf the frame is wet or icy, warm air may be getting past the seals, or the door may not be closing fully.",
+        "zh": "从侧壁冷凝管出来的温热液体，先沿箱口前沿、紧贴门洞后面的钢板绕一圈，再去干燥过滤器。如今大多数冰箱都用这样的冷媒管，而且多数管里走的是温热的液体 [S20]；本地区的厂商也说明热管沿侧面走、再绕到前沿 [S46]。\n\n冷冻室箱口周围的前沿紧挨着很冷的空气；温暖潮湿的厨房空气碰到那里的冷表面，水汽就会凝结 [S44]。一圈温热的液体让前沿保持温热 [S39]。这份热反正要放出去，所以不用多花电。\n\n门框若是湿的或结了冰，可能是暖空气从门封漏了进去，或者门没关严。"
       },
       "primitive": {
         "kind": "tube",

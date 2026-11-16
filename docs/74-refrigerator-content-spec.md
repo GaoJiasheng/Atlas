@@ -850,3 +850,11 @@ idle 指"开机周期之间压缩机歇着"，平衡压力约等于 −18 °C �
 - 写实轮（协调者复审后）：两扇门细把手、上 / 中 / 下铰链盖、底部前方踢脚通风格栅、调平脚、门与箱体倒圆、门封线加深；箱内搁架改有色玻璃加深色前沿、果蔬盒加深、食物统一中间调；绘制调用不变（静止 48、运转 53，0.233 M 三角形）。
 - 插图：封面 `refrigerator` 与章图 `refrigerator-gasket-section`（第 02 章）、`refrigerator-frost`（第 05 章，`invert={false}`）、`refrigerator-icebox`（第 07 章）已接入（codex/img4 96d9a621），图注用 Codex 交付的原文；`src/lib/illustrations.json` 加封面覆盖掩码；`status: published`，smoke 计数随之更新（62 个主题、science 20、徽章 124、ww2 图版号 61），`tests/figure-geometry.test.ts` 的不反相名单加 `refrigerator-frost`。
 - 门槛：check、validate、test（6,946）、build、e2e（refrigerator + smoke）全绿；shoot：paper 与 cinema（zh）31 拍 0 失败、无漏标、chapter highlights all on screen；keys 0 失败，布局 18 个尺寸 0 问题（含 390 × 844 手机与 iPad 竖横）。
+
+### 17.7 打磨轮（2026-11-16，分支 claude/polish-fridge）
+
+- **hero 发虚的原因**：不是贴图、粗糙度或阴影，而是动态分辨率调速器（`probes.tsx` `ResolutionGovernor`）。SwiftShader 下切章编译着色器的一串慢帧把像素比降到 0.5；静止画面按需渲染，永远凑不够 240 个连续快帧，所以一直停在半分辨率（旧整套截图从第 05 章起 `buf=760x511`，hero-clean `960x540`）。静止时 HUD / 探针约每秒重画一次，这些间隔（< 1.5 s）被当成慢帧计数。修法：两帧间隔超过 250 ms 算按需渲染的空档、不算帧时（与 StatsProbe 一致）；另外帧停下 700 ms 后恢复满分辨率并重画一帧（`governorFrame` / `governorIdle`，`tests/space-scene/resolution-governor.test.ts`）；连续动画时行为不变。真机上同理：一次卡顿后静止画面不再一直糊。
+- 两扇门之间的缝原来露出白色塑料中梁正面，读成一条发亮的白线；外箱加一块深色中梁前脸（与铰链盖同材质，合并绘制）。
+- **冷凝器**：找到本地区证据支持“热壁”：两家亚洲厂商的新加坡 / 马来西亚 / 菲律宾支持页写明两侧箱壁有散热管、侧面会热（S45、S46），一份在新加坡出售的双门上冷冻机说明书写明有防凝露管与散热管、背板和侧板会热，要求两侧留 5 cm（S47）。没找到这一类机型用背部线管或底部风冷的证据。措辞由“一种常见做法”改为“在新加坡及周边出售的双门冰箱很多是这样做的”；模型不改。
+- **恢复的事实**：开门时风扇停（S51 专利 + S46）；化霜计时“累计压缩机运转约 8–15 小时一次、整个化霜约 25–45 分钟、每天一到两次”（S50）；NEA 注册库 300–400 L 冷藏冷冻箱标签年耗电约 200–344 kWh、中位 312（S49，取代卖场的 270–449）。
+- **仍未用**：充注量典型范围（55 g 仍为设计值）、侧壁表面温度数值、排气温度、果蔬盒湿度、毛细管典型内径 / 长度；发泡 k 值与壁厚保持 S20。

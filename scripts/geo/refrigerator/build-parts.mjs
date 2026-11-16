@@ -29,7 +29,7 @@ const join2 = (...segs) => segs.reduce((a, s) => (a.length && s.length && a[a.le
 const ENAMEL = '#8e9290'; // light silver-grey enamel (0.1-11), not a brand colour
 const LINER = '#ecebe6';
 const FOAM = '#d8c58e';
-const GASKET = '#7e807c';
+const GASKET = '#5e615d'; // mid-dark grey: the seal reads against the pale liner and enamel
 const DARK = '#55585a';
 const TRIM = '#2f3133'; // dark plastic: handles, hinge covers, kick plate, shelf trims, feet
 const GLASS = '#a3b3b2'; // tinted shelf glass so it reads against the white liner
@@ -130,6 +130,8 @@ part('mullion', 'cabinet', {
   extra: [
     // damper frame sitting in the rear supply opening
     bevel(box(-0.04, -0.034, 1.15, 1.21, -0.27, -0.23), 0.001, 'plastic', LINER), bevel(box(0.034, 0.04, 1.15, 1.21, -0.27, -0.23), 0.001, 'plastic', LINER),
+    // dark front face between the doors (it reads as the door gap instead of a bright white line)
+    bevel(box(-0.25, 0.25, 1.125, 1.21, 0.28, 0.284), 0.001, 'plastic', TRIM),
   ],
   connects: ['damper', 'freezer-liner', 'fresh-liner'], castShadow: false,
 });

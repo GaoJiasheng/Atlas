@@ -15,7 +15,7 @@
  *    nearest vertex's skin weights; rigid: the part's transform)
  *  - StatsProbe: renderer counters and a rolling FPS (`__atlas.stats()`, perf readout)
  *  - ShadowUpdater: one shadow-map update when something that casts moved
- *  - ResolutionGovernor: drops the pixel ratio while frames are slow (perf-lessons §3)
+ *  - ResolutionGovernor: drops the pixel ratio while frames are slow and restores it when the stage comes to rest (perf-lessons §3)
  */
 import { useEffect, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -466,41 +466,102 @@ const SLOW_MS = 45;
 const SLOW_RUN = 6;
 const FAST_MS = 20;
 const FAST_RUN = 240;
-const STEPS = [1, 0.75, 0.5] as const;
+export const RESOLUTION_STEPS = [1, 0.75, 0.5] as const;
+/**
+ * A longer interval between two frames is a gap of the demand frameloop, not a frame time. On a
+ * still stage the HUD and probes invalidate now and then (about once a second); counting those
+ * intervals as slow frames stepped a resting scene down to half resolution.
+ */
+export const FRAME_GAP_MS = 250;
+/** No frame for this long: the demand frameloop has come to rest, so the still picture is drawn again at full resolution. */
+export const IDLE_RESTORE_MS = 700;
+
+export interface GovernorState {
+  last: number;
+  slow: number;
+  fast: number;
+  step: number;
+}
+
+export function governorState(): GovernorState {
+  return { last: 0, slow: 0, fast: 0, step: 0 };
+}
+
+/**
+ * One frame of the governor (pure apart from mutating `st`): returns the new
+ * step index, or null when it does not change. Idle gaps of the demand
+ * frameloop (dt > FRAME_GAP_MS) are not frames, so only runs of back-to-back frames count.
+ */
+export function governorFrame(st: GovernorState, now: number): number | null {
+  const dt = now - st.last;
+  st.last = now;
+  if (dt <= 0 || dt > FRAME_GAP_MS) {
+    st.slow = 0;
+    return null;
+  }
+  if (dt > SLOW_MS) {
+    st.slow++;
+    st.fast = 0;
+  } else {
+    st.slow = 0;
+    if (dt < FAST_MS) st.fast++;
+  }
+  let step = st.step;
+  if (st.slow >= SLOW_RUN && step < RESOLUTION_STEPS.length - 1) step++;
+  else if (st.fast >= FAST_RUN && step > 0) step--;
+  if (step === st.step) return null;
+  st.step = step;
+  st.slow = 0;
+  st.fast = 0;
+  return step;
+}
+
+/** The frames have stopped (the stage is at rest): back to full resolution. Returns true when that changed the step. */
+export function governorIdle(st: GovernorState): boolean {
+  if (st.step === 0) return false;
+  st.step = 0;
+  st.slow = 0;
+  st.fast = 0;
+  return true;
+}
 
 /**
  * Dynamic resolution (perf-lessons §3): a run of slow consecutive frames
  * steps the pixel ratio down (1 → 0.75 → 0.5 of the clamped ratio); a long
- * run of fast frames steps it back up. Idle gaps of the demand frameloop are
- * not frames, so only runs of back-to-back frames count.
+ * run of fast frames steps it back up. A still stage renders on demand and
+ * never makes that long run, so once frames stop for IDLE_RESTORE_MS the
+ * ratio returns to full and one sharp frame is drawn: a slow burst (shader
+ * compiles on a chapter change, a loaded device) no longer leaves the resting
+ * picture at half resolution.
  */
 export function ResolutionGovernor({ bridge, base }: { bridge: StageBridge; base: () => number }) {
   const setDpr = useThree((s) => s.setDpr);
-  const st = useMemo(() => ({ last: 0, slow: 0, fast: 0, step: 0 }), []);
+  const invalidate = useThree((s) => s.invalidate);
+  const st = useMemo(() => ({ ...governorState(), timer: 0 as ReturnType<typeof setTimeout> | 0 }), []);
+  useEffect(() => () => {
+    if (st.timer) clearTimeout(st.timer);
+  }, [st]);
   useFrame(() => {
-    const now = performance.now();
-    const dt = now - st.last;
-    st.last = now;
-    if (dt <= 0 || dt > 1500) {
-      st.slow = 0;
-      return;
-    }
-    if (dt > SLOW_MS) {
-      st.slow++;
-      st.fast = 0;
-    } else {
-      st.slow = 0;
-      if (dt < FAST_MS) st.fast++;
-    }
-    let step = st.step;
-    if (st.slow >= SLOW_RUN && step < STEPS.length - 1) step++;
-    else if (st.fast >= FAST_RUN && step > 0) step--;
-    if (step !== st.step) {
-      st.step = step;
-      st.slow = 0;
-      st.fast = 0;
-      bridge.resolution = STEPS[step]!;
+    const step = governorFrame(st, performance.now());
+    if (step !== null) {
+      bridge.resolution = RESOLUTION_STEPS[step]!;
       setDpr(base() * bridge.resolution);
+    }
+    if (st.timer) clearTimeout(st.timer);
+    st.timer = 0;
+    if (st.step > 0) {
+      st.timer = setTimeout(() => {
+        st.timer = 0;
+        // A single frame slower than IDLE_RESTORE_MS also lets the timer fire: wait one animation
+        // frame, and if the loop drew again (its callback runs before this one), it is not at rest.
+        const mark = st.last;
+        requestAnimationFrame(() => {
+          if (st.last !== mark || !governorIdle(st)) return;
+          bridge.resolution = RESOLUTION_STEPS[0];
+          setDpr(base());
+          invalidate();
+        });
+      }, IDLE_RESTORE_MS);
     }
   });
   return null;

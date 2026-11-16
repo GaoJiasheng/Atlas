@@ -527,6 +527,78 @@
         "en": "Explains why a frame pipe is needed: 'the front face of the refrigerator housing or casing around the freezer access opening is cold. When warm, humid household air contacts this cold area moisture condenses'. Housing has side walls 14, 16 and top wall 18 bent from one sheet.",
         "zh": "说明为何需要门框防凝管：冷冻室开口周围的箱体前面是冷的，温暖潮湿的室内空气碰到就会凝水。外壳侧板与顶板由一张钢板折成。"
       }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "Samsung Electronics Philippines. Why are the side walls of a Samsung refrigerator heating up? (support page). Samsung, last updated 16 June 2022. Accessed 16 Nov 2026.",
+        "zh": "三星电子菲律宾《Why are the side walls of a Samsung refrigerator heating up?》（支持页），2022 年 6 月 16 日更新（2026年11月16日访问）。"
+      },
+      "url": "https://www.samsung.com/ph/support/home-appliances/why-are-the-side-walls-of-a-samsung-refrigerator-heating-up/",
+      "note": {
+        "en": "Manufacturer support page, cited as typical of the class (no brand in content). 'heat dissipation pipes are installed on both outer walls of the refrigerator, so when the product is operated, heat is generated on the side walls'. Asks for 'a minimum distance of 5cm of space free around the sides and at the back'. Does not say which fridge types.",
+        "zh": "厂商支持页，只作同类的典型（正文不点名）。说明冰箱两侧外壁装有散热管，运转时侧壁发热；要求两侧和背后至少留 5 cm。没有说明适用哪些机型。"
+      }
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "Arçelik Hitachi Home Appliances Sales. Product FAQs: Refrigerators (Singapore) and Technical FAQs: Refrigerators (Malaysia). Hitachi Home Appliances. Accessed 16 Nov 2026.",
+        "zh": "Arçelik Hitachi 家电销售公司《Product FAQs: Refrigerators》（新加坡）与《Technical FAQs: Refrigerators》（马来西亚）（2026年11月16日访问）。"
+      },
+      "url": "https://www.hitachi-homeappliances.com/sg/support/products_faqs/refrigerators.html",
+      "note": {
+        "en": "Manufacturer FAQs, cited as typical of the class (no brand in content). Singapore: 'Refrigerant (gas) pipes are running underneath at the side body'; 'The temperature can rise quite high, but it does not pose any safety or performance problems'; 'There will be a sound when the fan starts after freezer door is closed for a short while.' Malaysia (https://www.hitachi-homeappliances.com/my-en/support/technical_faqs/refrigerators.html): 'The construction of the hot pipe is running across the side body cabinet and front side'; the heat 'will reduce when the compressor stops'.",
+        "zh": "厂商常见问题，只作同类的典型（正文不点名）。新加坡页：冷媒管从侧面箱体下面走过；温度可能相当高，但不影响安全和性能；冷冻室门关上一会儿后风扇启动会有声音。马来西亚页：热管沿侧面箱体和前沿走；压缩机停下后热量减少。"
+      }
+    },
+    {
+      "id": "S47",
+      "text": {
+        "en": "Hitachi. Instruction manual, refrigerators HRTN5230M, HRTN5255M, HRTN5275MF (Singapore, Malaysia and Cambodia variants). Hitachi Home Appliances. Accessed 16 Nov 2026.",
+        "zh": "日立《Instruction manual》，冰箱 HRTN5230M、HRTN5255M、HRTN5275MF（新加坡、马来西亚、柬埔寨版本）（2026年11月16日访问）。"
+      },
+      "url": "https://www.hitachi-homeappliances.com/my-en/manual/HRTN5275,%20HRTN5255,%20HRTN5230.pdf",
+      "note": {
+        "en": "Manufacturer manual for two-door top-freezer models sold in Singapore (a retailer lists the largest as a 260 L top-mount, R600a, 3 ticks), cited as typical of the class (no brand in content). Troubleshooting: 'The refrigerator is equipped with the dew prevention and heat radiation tubes. The back and side plates may be heated especially when starting up or if the door is frequently opened and closed.' Installation: 'at least 30 cm over the top, 10 cm at rear and 5 cm at both sides'. Smaller than the 350 L design; one maker only.",
+        "zh": "在新加坡出售的双门上冷冻机型说明书（零售商标示最大一款为 260 L 上冷冻、R600a、3 tick），只作同类的典型（正文不点名）。故障排除页：冰箱装有防凝露管和散热管，刚开机或频繁开关门时背板和侧板可能发热。安装：顶部至少 30 cm、背后 10 cm、两侧 5 cm。比本设计的 350 L 小；只是一家厂商。"
+      }
+    },
+    {
+      "id": "S49",
+      "text": {
+        "en": "National Environment Agency (NEA). Energy Labelling Scheme product search (Database of Registered Goods): Refrigerator, type Refrigerator freezer. NEA. Queried 16 Nov 2026.",
+        "zh": "新加坡国家环境局（NEA）能效标签产品查询（注册产品数据库）：冰箱，类型“冷藏冷冻箱”（2026年11月16日查询）。"
+      },
+      "url": "https://wrms2.nea.gov.sg/els/process/WRMS/GHG_ProductSearch",
+      "note": {
+        "en": "Counts made by Atlas from the public search, not published by NEA; no products named. 355 registered fridge-freezer models; 62 with volume 300–400 L: annual energy consumption 200–344 kWh/yr, median 312, middle 80 % about 252–332; 57 rated 3 ticks and 5 rated 4 ticks. The database does not separate top- from bottom-freezer models. The retailer label values in S36 (up to 449 kWh/yr) are above every model now registered in this size.",
+        "zh": "Atlas 根据公开查询自行计数，不是 NEA 发布的统计；不点名产品。已注册冷藏冷冻箱 355 款；容积 300–400 L 的 62 款：年耗电 200–344 kWh，中位 312，中间 80 % 约 252–332；3 tick 57 款、4 tick 5 款。数据库不区分上冷冻和下冷冻。S36 卖场标示的上限 449 kWh 高于目前该尺寸所有已注册型号。"
+      }
+    },
+    {
+      "id": "S50",
+      "text": {
+        "en": "GE Appliances. Refrigerator and Freezer – Types of Defrost Systems (support article 19471). GE Appliances. Accessed 16 Nov 2026.",
+        "zh": "GE Appliances《Refrigerator and Freezer – Types of Defrost Systems》（支持文章 19471）（2026年11月16日访问）。"
+      },
+      "url": "https://products.geappliances.com/appliance/gea-support-search-content?contentId=19471",
+      "note": {
+        "en": "Manufacturer support article, cited for how defrost is timed (no brand in content). A defrost timer 'Measures a pre-determined amount of accumulated compressor running time' and 'usually defrosts every 8 to15 hours'. 'Most models will defrost for approximately 25 to 45 minutes, usually once or twice a day.' 'During defrost there will be no running sounds, no fan noise and no compressor noise.' No heater wattage.",
+        "zh": "厂商支持文章，用来说明化霜的计时（正文不点名）。定时器累计压缩机运转时间，通常每 8 到 15 小时化霜一次；多数机型每次化霜约 25 到 45 分钟，通常每天一到两次；化霜时没有运转声、风扇声和压缩机声。没有加热器功率。"
+      }
+    },
+    {
+      "id": "S51",
+      "text": {
+        "en": "Kim, Y.-C. Refrigerator door push button switch system. US Patent 5,847,343, 8 December 1998. Accessed 16 Nov 2026.",
+        "zh": "Kim《Refrigerator door push button switch system》，美国专利 5,847,343，1998 年 12 月 8 日（2026年11月16日访问）。"
+      },
+      "url": "https://patents.google.com/patent/US5847343A/en",
+      "note": {
+        "en": "Cited for how the door switch works, not for how common it is. 'the fan motor is stopped when any one of the freezer compartment door 13 and the fresh food compartment door 14 is opened'; 'Thus, the fan motor 33 is stopped, and simultaneously, the cabinet lamp 34 is turned on.'",
+        "zh": "只用来说明门开关怎样工作，不说明有多普遍。冷冻室门或冷藏室门任一打开，风扇电机就停转，同时箱内灯点亮。"
+      }
     }
   ]
 }

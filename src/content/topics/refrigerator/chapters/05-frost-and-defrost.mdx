@@ -26,10 +26,12 @@ state:
     - part: evaporator
       pose: frost-thick
       labels: [evaporator, frost]
+      hide: [evap-cover, outer-case, side-panel-right, foam, freezer-liner]
       caption: { en: "The water vapour meets the coil at about −25 °C and turns to ice on its fins. Over many openings the frost grows thicker, blocking the air and slowing the flow of heat.", zh: "水汽碰到约 −25℃ 的盘管，在鳍片上变成冰。门开得多了，霜越积越厚，挡住空气，也让热更难传过去。" }
     - part: defrost-heater
       pose: frost-thin
       labels: [defrost-heater, sensors]
+      hide: [evap-cover, outer-case, side-panel-right, foam, freezer-liner]
       sim:
         set: { heater-w: 250 }
       caption: { en: "To defrost, the compressor and fan stop and a 250 watt heater under the coil switches on for about 10 minutes in this design. The frost melts, and a sensor on the coil switches the heater off once it has warmed up.", zh: "化霜时，压缩机和风扇停下，盘管下面的加热器通电，在这项设计里是 250 瓦、约 10 分钟。霜熔化成水；盘管回暖后，上面的传感器让加热器断电。" }
