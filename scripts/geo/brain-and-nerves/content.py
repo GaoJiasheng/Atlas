@@ -127,6 +127,11 @@ PARTS = [
          T('Where the two halves of the cerebrum face each other, a band of cortex curves round above the bundle that joins them [S41]. You see it when the model is cut down the middle.',
            '大脑两半相对的地方，有一条皮层围着连接两半的那束纤维弯过去 [S41]。把模型从正中剖开就能看见。'),
          bilateral=True, material=BRAIN, short=T('Inner wall', '内侧面')),
+    mesh('cerebrum-core', 'brain-parts', T('Inside of the cerebrum (plain fill)', '大脑内部（素色填充）'),
+         T('A plain fill so the inside does not look empty.', '素色填充，让大脑里面不显得是空的。'),
+         T('The source model has only the folded outer layer of the cerebrum, so Atlas fills each half with this plain, smooth shape, so that a cut or a spread-out view does not look empty. It does not show the real parts inside [S1].',
+           '原始模型只有大脑折起的外层，所以 Atlas 用这个素色、光滑的形状把每一半填满，剖开或摊开时就不会显得是空的。它不表示里面真实的结构 [S1]。'),
+         bilateral=True, material={'color': 'tissue', 'tint': '#e9e1d6'}, short=T('Inside', '内部')),
     dict(id='corpus-callosum', name=T('Corpus callosum', '胼胝体'), group='brain-parts',
          summary=T('A thick band of nerve fibres joining the two halves.', '连接左右两半的一大束神经纤维。'),
          detail=T('The two halves of the cerebrum are joined by a thick bundle of nerve fibres, the corpus callosum; information passes across it all the time [S10].\n\nIn this model it is drawn as a simple arch: the source model\'s fibre bundles are not used [S39].',
@@ -137,8 +142,8 @@ PARTS = [
          short=T('Callosum', '胼胝体')),
     mesh('cerebellum', 'brain-parts', T('Cerebellum', '小脑'),
          T('Keeps movements smooth and helps keep balance.', '让动作平稳协调，帮助保持平衡。'),
-         T('The cerebellum sits behind the brainstem, below the back of the cerebrum. It coordinates the timing and force of the muscles so movements are smooth, and helps keep balance and posture [S9, S13]. It is only about a tenth of the brain\'s mass, but it holds about four in five of the brain\'s neurons [S15].\n\nThis cerebellum is a different model from the rest of the brain (BodyParts3D), lined up with the brainstem; its fine folds are simplified [S40].',
-           '小脑在脑干后面、大脑后部的下方。它协调肌肉用力的时机和大小，让动作平稳，也帮助保持平衡和姿势 [S9, S13]。它只占脑质量的约十分之一，却有脑里约五分之四的神经元 [S15]。\n\n这个小脑和脑的其余部分来自不同的模型（BodyParts3D），按脑干对齐；它表面细密的褶已简化 [S40]。'),
+         T('The cerebellum sits behind the brainstem, below the back of the cerebrum. It coordinates the timing and force of the muscles so movements are smooth, and helps keep balance and posture [S9, S13], comparing the movement you meant to make with the one actually being made and correcting it [S47]. It is only about a tenth of the brain\'s mass, but it holds about four in five of the brain\'s neurons [S15].\n\nThis cerebellum is a different model from the rest of the brain (BodyParts3D), lined up with the brainstem. Its folds are drawn by Atlas as a regular pattern of grooves running across it, fewer and wider than the real ones; they are not traced from a real cerebellum [S1, S40].',
+           '小脑在脑干后面、大脑后部的下方。它协调肌肉用力的时机和大小，让动作平稳，也帮助保持平衡和姿势 [S9, S13]；它把想做的动作和实际正在做的动作作比较，并加以纠正 [S47]。它只占脑质量的约十分之一，却有脑里约五分之四的神经元 [S15]。\n\n这个小脑和脑的其余部分来自不同的模型（BodyParts3D），按脑干对齐。它表面的褶由 Atlas 画成一道道横过小脑的规则沟纹，比真实的少、也宽；不是照真实小脑描的 [S1, S40]。'),
          material=BRAIN, chain=T('Cerebel.', '小脑'), explode=dict(dir=[0, -0.5, -1], dist=0.03)),
     mesh('midbrain', 'brain-parts', T('Midbrain', '中脑'),
          T('The top part of the brainstem.', '脑干最上面的一段。'),
@@ -235,8 +240,8 @@ PARTS = [
          node='biceps-r', material={'color': 'muscle', 'tint': 'token:muscle-1'}, short=T('Biceps', '肱二头肌')),
     mesh('triceps-r', 'reflex-arm', T('Triceps (right)', '肱三头肌（右）'),
          T('The muscle on the back of the upper arm; it straightens the elbow.', '上臂后面的肌肉；它伸直手肘。'),
-         T('The muscle on the back of the upper arm straightens the elbow, the opposite of the biceps. In this model it stays relaxed while the biceps contracts.',
-           '上臂后面的肌肉，伸直手肘，和肱二头肌作用相反。在这个模型里，肱二头肌收缩时它保持放松。'),
+         T('The muscle on the back of the upper arm straightens the elbow, the opposite of the biceps. In a withdrawal reflex, relay neurons in the spinal cord hold back the muscles that would pull the other way [S25]; in this model it stays relaxed while the biceps contracts.',
+           '上臂后面的肌肉，伸直手肘，和肱二头肌作用相反。缩手这类反射里，脊髓里的中间神经元会抑制往相反方向拉的肌肉 [S25]；在这个模型里，肱二头肌收缩时它保持放松。'),
          node='triceps-r', material={'color': 'muscle', 'tint': 'token:muscle-2'}, short=T('Triceps', '肱三头肌')),
     mesh('upper-arm-bone-r', 'reflex-arm', T('Upper arm bone', '上臂骨'),
          T('The bone of the upper arm.', '上臂的骨。'),
@@ -679,9 +684,26 @@ FLOWS = [
 
 # ---------------------------------------------------------------- poses, animations
 PIV = r4(ELBOW['pivot'])
+FLEX_DEG = 20
+
+
+def hinge_euler(axis, deg):
+    """XYZ Euler angles (degrees; the engine's order, R = Rx·Ry·Rz) of a turn by `deg` about the unit `axis`."""
+    n = math.sqrt(sum(a * a for a in axis))
+    x, y, z = (a / n for a in axis)
+    t = math.radians(deg)
+    c, s, C = math.cos(t), math.sin(t), 1 - math.cos(t)
+    m02, m12, m22 = x * z * C + y * s, y * z * C - x * s, c + z * z * C
+    m01, m00 = x * y * C - z * s, c + x * x * C
+    ry = math.asin(max(-1.0, min(1.0, m02)))
+    return [round(math.degrees(math.atan2(-m12, m22)), 3), round(math.degrees(ry), 3), round(math.degrees(math.atan2(-m01, m00)), 3)]
+
+
+# The measured elbow hinge (landmarks.json: the line between the epicondyles, oriented so + flexes the hand forward).
+FLEX = hinge_euler(ELBOW['flexionAxis'], FLEX_DEG)
 POSES = {
-    'withdrawn': {'forearm-hand-r': {'pivot': PIV, 'rotation': [-20, 0, 0]},
-                  'arm-nerves-forearm': {'pivot': PIV, 'rotation': [-20, 0, 0]},
+    'withdrawn': {'forearm-hand-r': {'pivot': PIV, 'rotation': FLEX},
+                  'arm-nerves-forearm': {'pivot': PIV, 'rotation': FLEX},
                   'contract': {'biceps-r': 0.6}, 'duration': 0.35},
     'hemisphere-off': {'duration': 0.6},
 }

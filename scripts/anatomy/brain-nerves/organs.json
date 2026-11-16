@@ -15,14 +15,20 @@
   "transform": "(x,y,z) -> (x-centre.x, z-centre.z, -(y-centre.y)); apply -floorY only when grounding",
   "rig": false,
   "cerebrumRegistration": {
-    "scale": 0.985,
+    "method": "Z-Anatomy placement kept (scale 1); local Gaussian displacement field out of the skull (clearance 0.5 mm, sigma 4 mm), signed distance from penetration.ts",
+    "scale": 1.0,
     "centre": [
       -0.0,
-      0.62315,
-      -0.13331
+      0.62317,
+      -0.1333
     ],
-    "before": 569,
-    "after": 188,
+    "insideBefore": 1269,
+    "insideOver1MmBefore": 451,
+    "deepestBeforeMm": -3.77,
+    "insideAfter": 0,
+    "clearanceMinMm": 0.5,
+    "movedOver0_1Mm": 8295,
+    "maxMoveMm": 6.5,
     "vertices": 56712
   },
   "bp3dCerebellum": {

@@ -117,7 +117,7 @@ Cerebellum: BodyParts3D 4.0 (FMA67944), (c) The Database Center for Life Science
 Cerebral cortex surfaces: Anderson Winkler, Brain for Blender (https://brainder.org), CC BY-SA 3.0,
 from FreeSurfer surfaces with the Destrieux parcellation, as adapted in Z-Anatomy; adapted here under CC BY-SA 4.0.
 Cranial nerves: Cranial Nerves and Foramina, University of Dundee CAHID, CC BY 4.0, as adapted in Z-Anatomy.
-Changes for Atlas: structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; cerebrum scaled by 0.985 about its centre to sit inside the skull; BodyParts3D cerebellum placed by the brainstem fit; simplified; renamed.
+Changes for Atlas: structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; underside of the cerebrum pressed locally clear of the skull (smooth displacement, at most 7 mm); BodyParts3D cerebellum placed by the brainstem fit, with a schematic pattern of folds cut in by Atlas; a plain closed core drawn by Atlas inside each half of the cerebrum; simplified; renamed.
 Static meshes; no rig, weights or attachment sites; the right biceps carries a straight fibre direction. brain-and-nerves.glb is licensed
 CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 ```

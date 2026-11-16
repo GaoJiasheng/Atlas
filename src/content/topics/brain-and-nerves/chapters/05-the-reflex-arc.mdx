@@ -50,14 +50,14 @@ state:
         en: "Inside the spinal cord, a relay neuron passes the signal straight on. The turn happens here, not in the brain. Beside the shoulder is an enlarged slice of the cord."
         zh: "在脊髓里，中间神经元直接把信号接过去；转弯在这里，不在脑里。肩膀旁边是放大的脊髓横切。"
     - sim: { set: { stop: 5 } }
-      camera: { position: [-2.0, 0.12, -0.35], target: [-0.24, 0.02, -0.06], fov: 30 }
+      camera: { position: [-2.4, -0.02, -0.42], target: [-0.24, -0.145, -0.06], fov: 30 }
       layers: [brain-parts, spinal, nerves, protection, reflex-arm, skeleton-context, signals-reflex]
       labels: [biceps-r, triceps-r, forearm-hand-r]
       caption:
         en: "A motor neuron carries the command back to the upper arm. The biceps contracts and bends the elbow, and the hand leaves the mug."
         zh: "运动神经元把命令送回上臂；肱二头肌收缩、弯起手肘，手就离开了杯子。"
     - sim: { set: { stop: 6 } }
-      camera: { position: [-0.7, 0.75, 1.25], target: [-0.08, 0.38, -0.1], fov: 30 }
+      camera: { position: [-0.78, 0.18, 2.62], target: [-0.14, 0.01, -0.05], fov: 30 }
       layers: [brain-parts, spinal, nerves, protection, reflex-arm, skeleton-context, signals-reflex]
       labels: [parietal-lobe, spinal-cord, medulla]
       caption:
@@ -75,7 +75,7 @@ First, <Term id="receptor">receptors</Term> in the skin of the fingers start a s
 
 <Figure src="figures/brain-and-nerves-reflex-arc" invert={false} alt={{"en": "A finger touching a cup linked through a dorsal-root ganglion and spinal grey matter to an arm muscle.", "zh": "手指接触杯子，经背根神经节与脊髓灰质的通路连到上臂肌肉。"}} caption={{"en": "Schematic reflex arc: sensory input enters the back of the spinal cord and motor output leaves the front.", "zh": "反射弧示意：感觉输入经脊髓后侧进入，运动输出经前侧离开。"}} />
 
-The motor neuron's axon leaves through the front root and runs down the arm to the muscles <Num s="S27"></Num>. The biceps contracts, bends the elbow and lifts the hand off the mug, as in <TopicLink slug="muscles-arms" ch="how-they-move-you">How they move you</TopicLink>.
+The motor neuron's axon leaves through the front root and runs down the arm to the muscles <Num s="S27"></Num>. The biceps contracts, bends the elbow and lifts the hand off the mug, as in <TopicLink slug="muscles-arms" ch="how-they-move-you">How they move you</TopicLink>. At the same time, relay neurons in the cord hold back the muscles that would pull the other way, so the two do not fight each other; the source describes this for a leg <Num s="S25"></Num>. In this model the triceps, which straightens the elbow, stays relaxed.
 
 The signal also goes on up the spinal cord to the brain <Num s="S25"></Num>, and it is when it arrives that you feel the heat. By then the hand is already moving: you pull it away before the message reaches the brain <Num s="S26"></Num>. Because the turn is made in the spinal cord, the hand leaves sooner than if the signal had to go up to the brain and back <Num s="S25"></Num>.
 
@@ -107,7 +107,7 @@ Some quick movements are not reflexes. To catch a ball you must see it, decide a
 
 <Figure src="figures/brain-and-nerves-reflex-arc" invert={false} alt={{"en": "A finger touching a cup linked through a dorsal-root ganglion and spinal grey matter to an arm muscle.", "zh": "手指接触杯子，经背根神经节与脊髓灰质的通路连到上臂肌肉。"}} caption={{"en": "Schematic reflex arc: sensory input enters the back of the spinal cord and motor output leaves the front.", "zh": "反射弧示意：感觉输入经脊髓后侧进入，运动输出经前侧离开。"}} />
 
-运动神经元的轴突从前根出去，沿手臂到达肌肉 <Num s="S27"></Num>。肱二头肌收缩，弯起手肘，把手从杯子上提起来，见<TopicLink slug="muscles-arms" ch="how-they-move-you">肌肉怎样让你动</TopicLink>。
+运动神经元的轴突从前根出去，沿手臂到达肌肉 <Num s="S27"></Num>。肱二头肌收缩，弯起手肘，把手从杯子上提起来，见<TopicLink slug="muscles-arms" ch="how-they-move-you">肌肉怎样让你动</TopicLink>。同时，脊髓里的中间神经元抑制往相反方向拉的肌肉，让两边不互相对抗；来源讲的是腿的例子 <Num s="S25"></Num>。在这个模型里，伸直手肘的肱三头肌保持放松。
 
 信号也沿脊髓继续往上传到脑 <Num s="S25"></Num>，到达时你才感觉到烫。这时手已经在动了：消息还没到脑，你就把手缩回来了 <Num s="S26"></Num>。因为转弯在脊髓里完成，比起信号先上到脑再下来，手能更早离开 <Num s="S25"></Num>。
 

@@ -2,95 +2,95 @@
  "method": "For every brain vertex: the nearest point on the skull (dense surface samples with face normals). The bone",
  "skull": {
   "frontal-lobe.l": {
-   "minMm": -12.73,
-   "p5Mm": 1.83,
-   "medianMm": 10.0,
-   "insideBoneOver1Mm": 36,
+   "minMm": -12.08,
+   "p5Mm": 1.57,
+   "medianMm": 9.15,
+   "insideBoneOver1Mm": 8,
    "vertices": 10147
   },
   "parietal-lobe.l": {
-   "minMm": -0.8,
-   "p5Mm": 2.31,
-   "medianMm": 12.47,
+   "minMm": 0.54,
+   "p5Mm": 1.68,
+   "medianMm": 11.62,
    "insideBoneOver1Mm": 0,
    "vertices": 5687
   },
   "temporal-lobe.l": {
-   "minMm": -10.57,
-   "p5Mm": 1.84,
-   "medianMm": 10.41,
-   "insideBoneOver1Mm": 38,
+   "minMm": -8.88,
+   "p5Mm": 1.74,
+   "medianMm": 9.59,
+   "insideBoneOver1Mm": 2,
    "vertices": 5717
   },
   "occipital-lobe.l": {
-   "minMm": -10.57,
-   "p5Mm": 2.24,
-   "medianMm": 13.73,
-   "insideBoneOver1Mm": 19,
+   "minMm": -8.88,
+   "p5Mm": 1.93,
+   "medianMm": 12.77,
+   "insideBoneOver1Mm": 1,
    "vertices": 4832
   },
   "insula.l": {
-   "minMm": 0.77,
-   "p5Mm": 3.49,
-   "medianMm": 12.69,
+   "minMm": 0.59,
+   "p5Mm": 2.67,
+   "medianMm": 11.87,
    "insideBoneOver1Mm": 0,
    "vertices": 520
   },
   "cerebrum-medial.l": {
-   "minMm": 7.99,
-   "p5Mm": 22.79,
-   "medianMm": 36.07,
+   "minMm": 7.22,
+   "p5Mm": 22.18,
+   "medianMm": 35.68,
    "insideBoneOver1Mm": 0,
    "vertices": 1453
   },
   "frontal-lobe.r": {
-   "minMm": -12.73,
-   "p5Mm": 1.9,
-   "medianMm": 10.04,
-   "insideBoneOver1Mm": 35,
+   "minMm": -12.07,
+   "p5Mm": 1.58,
+   "medianMm": 9.2,
+   "insideBoneOver1Mm": 7,
    "vertices": 10147
   },
   "parietal-lobe.r": {
-   "minMm": -35.35,
-   "p5Mm": 2.33,
-   "medianMm": 12.56,
-   "insideBoneOver1Mm": 13,
+   "minMm": -34.94,
+   "p5Mm": 1.63,
+   "medianMm": 11.74,
+   "insideBoneOver1Mm": 12,
    "vertices": 5687
   },
   "temporal-lobe.r": {
-   "minMm": -7.44,
-   "p5Mm": 1.82,
-   "medianMm": 10.41,
-   "insideBoneOver1Mm": 36,
+   "minMm": -15.99,
+   "p5Mm": 1.7,
+   "medianMm": 9.56,
+   "insideBoneOver1Mm": 7,
    "vertices": 5717
   },
   "occipital-lobe.r": {
-   "minMm": -12.16,
-   "p5Mm": 2.23,
-   "medianMm": 13.75,
-   "insideBoneOver1Mm": 21,
+   "minMm": -11.3,
+   "p5Mm": 1.92,
+   "medianMm": 12.82,
+   "insideBoneOver1Mm": 2,
    "vertices": 4832
   },
   "insula.r": {
-   "minMm": 0.99,
-   "p5Mm": 3.53,
-   "medianMm": 12.77,
+   "minMm": 0.68,
+   "p5Mm": 2.55,
+   "medianMm": 11.95,
    "insideBoneOver1Mm": 0,
    "vertices": 520
   },
   "cerebrum-medial.r": {
-   "minMm": -45.87,
-   "p5Mm": 22.51,
-   "medianMm": 36.09,
+   "minMm": -45.62,
+   "p5Mm": 21.92,
+   "medianMm": 35.71,
    "insideBoneOver1Mm": 7,
    "vertices": 1453
   },
   "cerebellum": {
-   "minMm": -9.08,
-   "p5Mm": 2.94,
-   "medianMm": 11.85,
-   "insideBoneOver1Mm": 14,
-   "vertices": 7004
+   "minMm": -8.98,
+   "p5Mm": 2.68,
+   "medianMm": 12.16,
+   "insideBoneOver1Mm": 9,
+   "vertices": 13970
   },
   "midbrain": {
    "minMm": 2.8,

@@ -108,6 +108,165 @@ def bp3d_cerebellum(M, T):
     return P.merged(out)
 
 
+# Cerebellar folia (docs/75 §15.8). The BodyParts3D cerebellum is one smooth block. Atlas draws its folds as an
+# original, schematic pattern: grooves that run across the cerebellum (the folia are transverse) and, seen in a
+# midline cut, cut in towards its white core like the fissures of the arbor vitae, i.e. evenly spaced in angle round
+# a point in front of its centre (about where the fourth ventricle is); on the side they fan out from the brainstem.
+# The pattern is generated here, not traced from any image or mesh; its spacing and depth are design values,
+# coarser than real folia so they read at screen size.
+FOLIA = dict(spacingM=.0032, atRadiusM=.035, depthM=.0009, fissureDepthM=.0017, fissureEvery=4, widthFrac=.16,
+             ahead=.012, bowRad=.12, coreM=(.010, .017))
+
+
+def subdivide(v, f):
+    """Midpoint subdivision (one level), shared edges split once."""
+    e = np.sort(np.vstack([f[:, [0, 1]], f[:, [1, 2]], f[:, [2, 0]]]), 1)
+    uniq, inv = np.unique(e, axis=0, return_inverse=True)
+    inv = inv.ravel()
+    mid = len(v) + inv
+    v2 = np.vstack([v, (v[uniq[:, 0]] + v[uniq[:, 1]]) / 2])
+    n = len(f)
+    ab, bc, ca = mid[:n], mid[n:2 * n], mid[2 * n:]
+    f2 = np.vstack([np.stack([f[:, 0], ab, ca], 1), np.stack([ab, f[:, 1], bc], 1), np.stack([ca, bc, f[:, 2]], 1),
+                    np.stack([ab, bc, ca], 1)])
+    return v2, f2
+
+
+def folia(v, f):
+    """Cut the schematic folia into the cerebellum (source frame in, source frame out); also returns the dense
+    displaced surface (topic frame) whose normals shade the simplified mesh."""
+    t = topic(v)
+    for _ in range(2):
+        t, f = subdivide(t, f)
+    n = normals(t, f)
+    c = t.mean(0)
+    c0 = np.array([0.0, c[1], c[2] + FOLIA['ahead']])
+    r = np.hypot(t[:, 1] - c0[1], t[:, 2] - c0[2])
+    angle = np.arctan2(t[:, 1] - c0[1], -(t[:, 2] - c0[2])) + FOLIA['bowRad'] * (t[:, 0] / np.abs(t[:, 0]).max()) ** 2
+    # A whole number of grooves round the circle, so there is no seam where the angle wraps (in front, at the brainstem).
+    k = angle / (2 * np.pi) * round(2 * np.pi * FOLIA['atRadiusM'] / FOLIA['spacingM'])
+    frac = k - np.floor(k)
+    groove = np.exp(-((frac - .5) / FOLIA['widthFrac']) ** 2)
+    depth = np.where(np.floor(k).astype(int) % FOLIA['fissureEvery'] == 0, FOLIA['fissureDepthM'], FOLIA['depthM'])
+    lo, hi = FOLIA['coreM']
+    mask = np.clip((r - lo) / (hi - lo), 0, 1)
+    mask = mask * mask * (3 - 2 * mask)
+    # No folds on the face that meets the brainstem (the peduncles), near the midline.
+    near_mid = 1 - np.clip((np.abs(t[:, 0]) - .018) / .012, 0, 1)
+    facing = np.clip((n[:, 2] - .2) / .4, 0, 1)
+    mask *= 1 - near_mid * facing
+    t = t - n * (depth * groove * mask)[:, None]
+    src = np.stack([t[:, 0] + CX, -t[:, 2] + CY, t[:, 1] + CZ], 1)
+    return src, f, (t, normals(t, f))
+
+
+# Cerebrum core (docs/75 §15.9). The cortex is an open shell (white matter, deep nuclei and the hippocampus are not
+# taken), so a cut, a spread-out view or the hidden insula would show an empty inside. Atlas closes it with a plain,
+# smooth, neutral stand-in per hemisphere: an icosphere about the hemisphere's centre whose radius in each direction
+# is a low percentile of the cortex's distance there (about the depth of the grooves), smoothed and set CORE_INSET_M
+# further in. It claims no anatomy (no nuclei, no ventricles); it only makes the inside read as solid.
+CORE_INSET_M = .0015
+
+
+def icosphere(level):
+    t = (1 + 5 ** .5) / 2
+    v = [[-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0], [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+         [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]]
+    f = [[0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+         [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]]
+    v, f = np.array(v, float), np.array(f)
+    for _ in range(level):
+        v, f = subdivide(v, f)
+    return v / np.linalg.norm(v, axis=1, keepdims=True), f
+
+
+def cerebrum_core(cortex):
+    """A closed, smooth stand-in inside one hemisphere's cortex (topic frame in and out)."""
+    c = cortex.mean(0)
+    u, f = icosphere(4)
+    d = cortex - c
+    dist = np.linalg.norm(d, axis=1)
+    dirs = d / dist[:, None]
+    tree = cKDTree(dirs)
+    r = np.full(len(u), np.nan)
+    for i, js in enumerate(tree.query_ball_point(u, 2 * np.sin(np.radians(5) / 2))):
+        if len(js) >= 3:
+            r[i] = np.percentile(dist[js], 15)
+    e = np.unique(np.sort(np.vstack([f[:, [0, 1]], f[:, [1, 2]], f[:, [2, 0]]]), 1), axis=0)
+    nb = [[] for _ in range(len(u))]
+    for a, b in e:
+        nb[a].append(b)
+        nb[b].append(a)
+    # Directions with no cortex (the opening round the brainstem) take their neighbours' radius; then smooth.
+    for _ in range(200):
+        miss = np.isnan(r)
+        if not miss.any():
+            break
+        r[miss] = [np.nanmean(r[nb[i]]) if not np.all(np.isnan(r[nb[i]])) else np.nan for i in np.where(miss)[0]]
+    for _ in range(12):
+        r = .5 * r + .5 * np.array([r[n].mean() for n in nb])
+    return c + u * (r - CORE_INSET_M)[:, None], f
+
+
+CLEAR_M = .0005      # wanted clearance between cortex and bone
+SIGMA_M = .004       # falloff of the local displacement (Gaussian), so the pressed patch stays smooth
+REACH_M = .012       # vertices farther than this from every pressed vertex do not move
+
+
+def signed_to_skull(points, skull_v, skull_f):
+    """Exact signed distance to the skull (penetration.ts; +1 m = no bone within 10 mm) and the closest bone points."""
+    inp, outp = CACHE / 'brain-nerves-penetration-in.json', CACHE / 'brain-nerves-penetration-out.json'
+    inp.write_text(json.dumps(dict(points=np.asarray(points).ravel().tolist(), skullPositions=skull_v.ravel().tolist(),
+                                   skullIndices=np.asarray(skull_f).ravel().tolist())))
+    subprocess.run(['pnpm', 'exec', 'node', '--import', 'tsx', str(HERE / 'penetration.ts'), str(inp), str(outp)],
+                   cwd=str(ROOT.parents[1]), check=True)
+    res = json.loads(outp.read_text())
+    return np.array(res['signed']), np.array(res['closest']).reshape(-1, 3)
+
+
+def conform_cerebrum(v, skull_v, skull_f, rounds=80):
+    """Local adjustment: where a vertex is inside the bone (or nearer than CLEAR_M), move it out along the bone
+    normal; spread each push to the neighbourhood with a Gaussian weight (a field of position, so the lobes'
+    shared seam vertices move together) and repeat until nothing is left inside."""
+    start = v.copy()
+    centre = v.mean(0)
+    before, q = signed_to_skull(v, skull_v, skull_f)
+    s = before
+    for round_ in range(rounds):
+        need = s < CLEAR_M
+        if not need.any():
+            break
+        p = v[need]
+        # Out of the bone: towards the closest bone point when inside, away from it when merely too near.
+        out_dir = (q[need] - p) * np.where(s[need] < 0, 1, -1)[:, None]
+        if round_ >= 20:
+            # Still inside after 20 rounds: a crease where two bones meet; move towards the middle of the cerebrum.
+            inward = centre - p
+            out_dir = np.where((s[need] < 0)[:, None], inward, out_dir)
+        out_dir /= np.maximum(np.linalg.norm(out_dir, axis=1, keepdims=True), 1e-9)
+        push = 1.3 * (CLEAR_M - s[need])[:, None] * out_dir
+        # Later rounds narrow the falloff, so a vertex caught in a bony crease is not held back by its neighbours.
+        sigma = SIGMA_M if round_ < 20 else max(.001, SIGMA_M * .85 ** (round_ - 20))
+        tree = cKDTree(p)
+        field = np.zeros_like(v)
+        # Weighted average of the pushes around each vertex, faded by the strongest weight.
+        rows = tree.query_ball_point(v, REACH_M)
+        for k, js in enumerate(rows):
+            if not js:
+                continue
+            w = np.exp(-(np.linalg.norm(p[js] - v[k], axis=1) / sigma) ** 2)
+            field[k] = (w[:, None] * push[js]).sum(0) / w.sum() * w.max()
+        v = v + field
+        s, q = signed_to_skull(v, skull_v, skull_f)
+    d = np.linalg.norm(v - start, axis=1)
+    return v, dict(method='Z-Anatomy placement kept (scale 1); local Gaussian displacement field out of the skull '
+                          f'(clearance {CLEAR_M * 1000:.1f} mm, sigma {SIGMA_M * 1000:.0f} mm), signed distance from penetration.ts',
+                   scale=1.0, centre=v.mean(0).round(5).tolist(), insideBefore=int((before < 0).sum()),
+                   insideOver1MmBefore=int((before < -.001).sum()), deepestBeforeMm=round(float(before.min()) * 1000, 2),
+                   insideAfter=int((s < 0).sum()), clearanceMinMm=round(float(s.min()) * 1000, 2),
+                   movedOver0_1Mm=int((d > 1e-4).sum()), maxMoveMm=round(float(d.max()) * 1000, 2), vertices=int(len(v)))
+
+
 REG = {}
 
 
@@ -144,7 +303,8 @@ def main():
     M, T, fit = bp3d_frame()
     cv, cf = bp3d_cerebellum(M, T)
     cv, cf = weld(cv, cf)
-    nodes['cerebellum'] = dict(v=cv, f=outward(cv, cf), part=parts['cerebellum'])
+    cv, cf, dense = folia(cv, outward(cv, cf))
+    nodes['cerebellum'] = dict(v=cv, f=cf, part=parts['cerebellum'], dense=dense)
 
     # Right elbow landmark: humerus long axis by PCA; the distal 3 cm; epicondyles = x extremes.
     hv, hf = skel('Humerus.r')
@@ -156,7 +316,7 @@ def main():
     med, lat = distal[distal[:, 0].argmax()], distal[distal[:, 0].argmin()]  # right arm: medial = towards +X
     pivot = (med + lat) / 2
     for id, p in parts.items():
-        if id in nodes or p['role'] == 'split' or p['system'] in ('bp3d', 'atlas-glb') or p['role'] == 'cortex':
+        if id in nodes or p['role'] == 'split' or p['system'] in ('bp3d', 'atlas-glb', 'atlas') or p['role'] == 'cortex':
             continue
         v, f = weld(*source(p))
         if p['role'] not in ('system',) and id not in ('skull', 'vertebral-column'):
@@ -210,29 +370,37 @@ def main():
         dev = max(cKDTree(b).query(a)[0].max(), cKDTree(a).query(b)[0].max())
         keep[name] = (sv, sf)
         rec = dict(name=name, v=sv, f=sf, u=su, part=n['part'], hemi=n.get('hemi'))
+        if 'dense' in n:
+            # Shade the simplified cerebellum with the dense folded surface's normals (nearest dense vertex).
+            dv, dn = n['dense']
+            rec['n'] = dn[cKDTree(dv).query(sv)[1]]
         if n.get('hemi'):
             hemis[n['hemi']].append(rec)
         out.append(rec)
         stats.append(dict(node=name, before=int(len(before_f)), after=int(len(sf)), sampledDeviationMm=round(float(dev) * 1000, 3)))
         print(f'SIMPLIFY {name}: {len(before_f):,} -> {len(sf):,} ({dev * 1000:.2f} mm)', flush=True)
     # G3 registration: the cerebrum (Brainder, another person's scan as placed by Z-Anatomy) against the
-    # BodyParts3D skull. One uniform scale about the cerebrum centroid, the largest of 1.000 … 0.970 that
-    # leaves fewer than 0.5 % of its vertices 1–8 mm inside the bone (fit.py's signed nearest-normal test).
-    from fit import penetration
+    # BodyParts3D skull. Z-Anatomy's placement is kept (no rescaling): the vault fits, only parts of the
+    # underside overlap the cranial floor and two midline ridges. Those are pressed in by a smooth local
+    # displacement field (conform_cerebrum) until every vertex clears the bone by CLEAR_M; measured with the
+    # exact signed distance of penetration.ts (also the unit test on the published GLB).
     cereb = [r for r in out if r['part']['role'] == 'cortex']
     allv = np.vstack([r['v'] for r in cereb])
-    centre = allv.mean(0)
-    scale = 1.0
-    for s_ in np.arange(1.0, .9699, -.005):
-        if penetration((allv - centre) * s_ + centre, *keep['skull']) < .005 * len(allv):
-            scale = float(round(s_, 3))
-            break
+    moved, REG_ = conform_cerebrum(allv, *keep['skull'])
+    off = 0
     for r in cereb:
-        r['v'] = (r['v'] - centre) * scale + centre
+        r['v'] = moved[off:off + len(r['v'])]
+        off += len(r['v'])
         keep[r['name']] = (r['v'], r['f'])
-    REG.update(scale=scale, centre=centre.round(5).tolist(), before=int(penetration(allv, *keep['skull'])),
-               after=int(penetration((allv - centre) * scale + centre, *keep['skull'])), vertices=int(len(allv)))
-    print('G3 cerebrum scale', REG, flush=True)
+    REG.update(REG_)
+    print('G3 cerebrum', REG, flush=True)
+    for side in 'lr':
+        cv_, cf_ = cerebrum_core(np.vstack([r['v'] for r in cereb if r['hemi'] == side]))
+        name = f'cerebrum-core.{side}'
+        rec = dict(name=name, v=cv_, f=cf_, u=None, part=parts['cerebrum-core'], hemi=None)
+        out.append(rec)
+        keep[name] = (cv_, cf_)
+        stats.append(dict(node=name, before=int(len(cf_)), after=int(len(cf_)), sampledDeviationMm=0))
     # Cortex normals from the whole hemisphere, so the lobe seams shade as one surface.
     for side, recs in hemis.items():
         allv = np.vstack([r['v'] for r in recs])

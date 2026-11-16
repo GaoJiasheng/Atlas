@@ -16,8 +16,9 @@ ALLOWED = {'bp3d-zanatomy', 'brainder', 'dundee-cn'}
 
 CHANGES = ('structures selected for the nervous system with skull, spine and right-arm context; cortex parcels '
            'joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; '
-           'biceps fibre direction baked; cerebrum scaled by 0.985 about its centre to sit inside the skull; BodyParts3D cerebellum '
-           'placed by the brainstem fit; simplified; renamed.')
+           'biceps fibre direction baked; underside of the cerebrum pressed locally clear of the skull (smooth displacement, '
+           'at most 7 mm); BodyParts3D cerebellum placed by the brainstem fit, with a schematic pattern of folds cut in by Atlas; a plain closed core drawn by Atlas inside each half of the cerebrum; '
+           'simplified; renamed.')
 ATTRIBUTION = [
     'Cerebellum: BodyParts3D 4.0 (FMA67944), (c) The Database Center for Life Science, CC BY 4.0',
     '(https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html). Spinal cord: drawn by Atlas (not in this file).',
@@ -126,7 +127,7 @@ def generate(inventory=None, provenance=None, write=True):
     cer = sorted(r[2].strip() for r in elements if r[0] == 'FMA67944')
     if not cer:
         raise RuntimeError('BodyParts3D FMA67944 cerebellum elements missing from the cached parts list')
-    parts.append(dict(id='cerebellum', system='bp3d', role='organ', sides='unsided', triangleBudget=14000, maxDeviationM=.0005,
+    parts.append(dict(id='cerebellum', system='bp3d', role='organ', sides='unsided', triangleBudget=28000, maxDeviationM=.0001,
                       sourceNames=cer, families=['bp3d-4.0'], fma='FMA67944',
                       placement='similarity transform fitted on BodyParts3D 4.0 pons + medulla (provenance.py)'))
     part('midbrain', 'nervous', ['Midbrain'], budget=2000)
@@ -158,12 +159,16 @@ def generate(inventory=None, provenance=None, write=True):
                 role='system')
     # The right arm's bones are their own parts.
     rest['sourceNames'] = [n for n in rest['sourceNames'] if not (n.endswith('.r') and (base(n) in ('Humerus', 'Radius', 'Ulna') or re.fullmatch(HAND, base(n))))]
+    # Cerebrum core: drawn by Atlas in build.py (cerebrum_core), a plain closed stand-in inside each hemisphere's shell.
+    parts.append(dict(id='cerebrum-core', system='atlas', role='organ', sides='bilateral', triangleBudget=10240, maxDeviationM=0,
+                      sourceNames=['atlas:cerebrum_core (build.py)'], families=['atlas']))
     # Body outline: the two skin nodes of public/models/heart-and-lungs.glb, same body and frame, unchanged.
     for id in ('skin-outline', 'skin-wire'):
         parts.append(dict(id=id, system='atlas-glb', role='skin', sides='unsided', triangleBudget=0, maxDeviationM=0,
                           sourceNames=[f'heart-and-lungs.glb#{id}'], families=['bp3d-zanatomy']))
 
     nodes = [p['id'] for p in parts if p['role'] != 'split']
+    nodes = [n for n in nodes if n != 'cerebrum-core'] + ['cerebrum-core.l', 'cerebrum-core.r']
     if 'arm-nerves.r' in nodes:
         nodes.append('arm-nerves-forearm.r')
     manifest = dict(topic='brain-nerves', output='brain-and-nerves.glb', rig=False, license='CC BY-SA 4.0', changes=CHANGES,

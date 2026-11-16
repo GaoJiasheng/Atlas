@@ -3,7 +3,7 @@
   "output": "brain-and-nerves.glb",
   "rig": false,
   "license": "CC BY-SA 4.0",
-  "changes": "structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; cerebrum scaled by 0.985 about its centre to sit inside the skull; BodyParts3D cerebellum placed by the brainstem fit; simplified; renamed.",
+  "changes": "structures selected for the nervous system with skull, spine and right-arm context; cortex parcels joined into lobes (sulci split along the nearest gyrus); right forearm and hand split at the elbow; biceps fibre direction baked; underside of the cerebrum pressed locally clear of the skull (smooth displacement, at most 7 mm); BodyParts3D cerebellum placed by the brainstem fit, with a schematic pattern of folds cut in by Atlas; a plain closed core drawn by Atlas inside each half of the cerebrum; simplified; renamed.",
   "attribution": [
     "Cerebellum: BodyParts3D 4.0 (FMA67944), (c) The Database Center for Life Science, CC BY 4.0",
     "(https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html). Spinal cord: drawn by Atlas (not in this file).",
@@ -369,8 +369,8 @@
       "system": "bp3d",
       "role": "organ",
       "sides": "unsided",
-      "triangleBudget": 14000,
-      "maxDeviationM": 0.0005,
+      "triangleBudget": 28000,
+      "maxDeviationM": 0.0001,
       "sourceNames": [
         "FJ1781",
         "FJ1830"
@@ -1068,6 +1068,20 @@
       "sourceTriangles": 422601
     },
     {
+      "id": "cerebrum-core",
+      "system": "atlas",
+      "role": "organ",
+      "sides": "bilateral",
+      "triangleBudget": 10240,
+      "maxDeviationM": 0,
+      "sourceNames": [
+        "atlas:cerebrum_core (build.py)"
+      ],
+      "families": [
+        "atlas"
+      ]
+    },
+    {
       "id": "skin-outline",
       "system": "atlas-glb",
       "role": "skin",
@@ -1103,6 +1117,8 @@
     "biceps-r",
     "cauda-equina",
     "cerebellum",
+    "cerebrum-core.l",
+    "cerebrum-core.r",
     "cerebrum-medial.l",
     "cerebrum-medial.r",
     "cranial-nerves",

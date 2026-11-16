@@ -4,8 +4,8 @@
       "id": "S1",
       "design": true,
       "text": {
-        "en": "Atlas design study for this topic (docs/75). The body is one adult male reference anatomy, simplified; the bench models (a nerve cell, a synapse, a slice of spinal cord, the layers round the brain, a one-metre nerve drawn half size) are enlarged or shortened and not to scale. Design values: a thick fibre with myelin carries a signal at 100 metres per second, a thin fibre without it at 1 metre per second (both inside the published ranges, S20); over one metre that takes 1 m ÷ 100 m/s = 0.010 s = 10 ms and 1 m ÷ 1 m/s = 1 s = 1,000 ms; the screen shows both in 2 s, so the thick fibre is slowed 2 s ÷ 0.010 s = 200 times and the thin one 2 s ÷ 1 s = 2 times. Ruler drop: a ruler caught after falling d centimetres has fallen for t = √(2d ÷ 9.81 m/s²) (free fall from rest; S43); for d = 20 cm, t = √(0.40 ÷ 9.81) = 0.202 s ≈ 202 ms; the card lists every centimetre from 3 to 20 cm and every 2 cm from 22 to 30 cm, rounded to whole milliseconds. Bench magnifications: the nerve cell about 4,000 times (a cell body of about 25 micrometres drawn about 10 cm), the synapse about 40,000 times, the spinal-cord slice about 12 times; the layers round the brain are drawn thicker than they are, not to any one scale. The reflex arm turns 20 degrees at the elbow, slowed down. Measured in the model: the reflex signal's route from the fingertip to the spinal cord in the neck is 0.95 m long (scripts/anatomy/brain-nerves/routes.json), which at 100 m/s takes 0.95 ÷ 100 = 0.0095 s ≈ 10 ms.",
-        "zh": "本主题的 Atlas 设计研究（docs/75）。身体是一个成年男性参考解剖模型，已简化；工作台上的模型（一个神经细胞、一个突触、一片脊髓横切、包着脑的几层、画成一半长的一米神经）是放大或缩短的，不按比例。设计值：粗的、有髓鞘的纤维每秒传 100 米，细的、没有髓鞘的每秒 1 米（都在已发表的范围内，S20）；走一米分别要 1 米 ÷ 每秒 100 米 = 0.010 秒 = 10 毫秒，1 米 ÷ 每秒 1 米 = 1 秒 = 1,000 毫秒；画面上两者都用 2 秒走完，所以粗纤维放慢了 2 ÷ 0.010 = 200 倍，细纤维放慢了 2 ÷ 1 = 2 倍。尺子接落：尺子落了 d 厘米才被接住，下落的时间 t = √(2d ÷ 9.81 米/秒²)（从静止自由下落；S43）；d = 20 厘米时 t = √(0.40 ÷ 9.81) = 0.202 秒 ≈ 202 毫秒；卡片列出 3 到 20 厘米（每 1 厘米一档）和 22 到 30 厘米（每 2 厘米一档），取整到毫秒。工作台的放大倍数：神经细胞约 4,000 倍（约 25 微米的细胞体画成约 10 厘米），突触约 40,000 倍，脊髓横切约 12 倍；脑外的几层画得比真实厚，没有统一比例。反射时手臂在肘部转 20 度，画面放慢了。在模型上量：反射信号从指尖到颈部脊髓的路线长 0.95 米（scripts/anatomy/brain-nerves/routes.json），按每秒 100 米算要 0.95 ÷ 100 = 0.0095 秒 ≈ 10 毫秒。"
+        "en": "Atlas design study for this topic (docs/75). The body is one adult male reference anatomy, simplified; the bench models (a nerve cell, a synapse, a slice of spinal cord, the layers round the brain, a one-metre nerve drawn half size) are enlarged or shortened and not to scale. Design values: a thick fibre with myelin carries a signal at 100 metres per second, a thin fibre without it at 1 metre per second (both inside the published ranges, S20); over one metre that takes 1 m ÷ 100 m/s = 0.010 s = 10 ms and 1 m ÷ 1 m/s = 1 s = 1,000 ms; the screen shows both in 2 s, so the thick fibre is slowed 2 s ÷ 0.010 s = 200 times and the thin one 2 s ÷ 1 s = 2 times. Ruler drop: a ruler caught after falling d centimetres has fallen for t = √(2d ÷ 9.81 m/s²) (free fall from rest; S43); for d = 20 cm, t = √(0.40 ÷ 9.81) = 0.202 s ≈ 202 ms; the card lists every centimetre from 3 to 20 cm and every 2 cm from 22 to 30 cm, rounded to whole milliseconds. Bench magnifications: the nerve cell about 4,000 times (a cell body of about 25 micrometres drawn about 10 cm), the synapse about 40,000 times, the spinal-cord slice about 12 times; the layers round the brain are drawn thicker than they are, not to any one scale. The reflex arm turns 20 degrees at the elbow, slowed down. The inside of each half of the cerebrum is a plain smooth fill drawn by Atlas (the source has only the outer layer); it shows no real inner parts. Measured in the model: the reflex signal's route from the fingertip to the spinal cord in the neck is 0.95 m long (scripts/anatomy/brain-nerves/routes.json), which at 100 m/s takes 0.95 ÷ 100 = 0.0095 s ≈ 10 ms.",
+        "zh": "本主题的 Atlas 设计研究（docs/75）。身体是一个成年男性参考解剖模型，已简化；工作台上的模型（一个神经细胞、一个突触、一片脊髓横切、包着脑的几层、画成一半长的一米神经）是放大或缩短的，不按比例。设计值：粗的、有髓鞘的纤维每秒传 100 米，细的、没有髓鞘的每秒 1 米（都在已发表的范围内，S20）；走一米分别要 1 米 ÷ 每秒 100 米 = 0.010 秒 = 10 毫秒，1 米 ÷ 每秒 1 米 = 1 秒 = 1,000 毫秒；画面上两者都用 2 秒走完，所以粗纤维放慢了 2 ÷ 0.010 = 200 倍，细纤维放慢了 2 ÷ 1 = 2 倍。尺子接落：尺子落了 d 厘米才被接住，下落的时间 t = √(2d ÷ 9.81 米/秒²)（从静止自由下落；S43）；d = 20 厘米时 t = √(0.40 ÷ 9.81) = 0.202 秒 ≈ 202 毫秒；卡片列出 3 到 20 厘米（每 1 厘米一档）和 22 到 30 厘米（每 2 厘米一档），取整到毫秒。工作台的放大倍数：神经细胞约 4,000 倍（约 25 微米的细胞体画成约 10 厘米），突触约 40,000 倍，脊髓横切约 12 倍；脑外的几层画得比真实厚，没有统一比例。反射时手臂在肘部转 20 度，画面放慢了。大脑每一半的内部是 Atlas 画的素色光滑填充（原始模型只有外层），不表示里面真实的结构。在模型上量：反射信号从指尖到颈部脊髓的路线长 0.95 米（scripts/anatomy/brain-nerves/routes.json），按每秒 100 米算要 0.95 ÷ 100 = 0.0095 秒 ≈ 10 毫秒。"
       },
       "note": {
         "en": "Not a measurement. Inputs: S20 (conduction speeds), S43 (standard gravity), S6 (neuron parts), S24 (axon length).",
@@ -296,8 +296,8 @@
       },
       "url": "https://nba.uth.tmc.edu/neuroscience/m/s3/chapter02.html",
       "note": {
-        "en": "Read online (accessed 2026-11-15). In the withdrawal reflex, pain fibres reach an interneuron in the spinal cord that excites the motor neurons; the response is faster than if the pain signal had to travel up to the brain; the same signals also continue upward to the brain. The page's example is a leg.",
-        "zh": "已读网页（2026-11-15 访问）。在缩回反射里，痛觉纤维接到脊髓里的中间神经元，再由它兴奋运动神经元；这比痛的信号先上到脑再下来要快；同样的信号也继续往上传到脑。页面的例子是腿。"
+        "en": "Read online (accessed 2026-11-15). In the withdrawal reflex, pain fibres reach an interneuron in the spinal cord that excites the motor neurons; the response is faster than if the pain signal had to travel up to the brain; the same signals also continue upward to the brain. The page's example is a leg. In the same flexor (withdrawal) reflex, the antagonist muscles that would straighten the limb are inhibited, through inhibitory interneurons in the spinal cord, so the two groups do not work against each other (read 2026-11-16).",
+        "zh": "已读网页（2026-11-15 访问）。在缩回反射里，痛觉纤维接到脊髓里的中间神经元，再由它兴奋运动神经元；这比痛的信号先上到脑再下来要快；同样的信号也继续往上传到脑。页面的例子是腿。在同一个屈肌（缩回）反射里，脊髓里的抑制性中间神经元让会把肢体伸直的拮抗肌受到抑制，两组肌肉不会互相对抗（2026-11-16 读）。"
       }
     },
     {
@@ -476,8 +476,8 @@
       },
       "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html",
       "note": {
-        "en": "Downloaded 2026-11-15 (partof_BP3D_4.0_obj_99.zip). Placed with the transform that lines the BodyParts3D brainstem up with the model's brainstem (mean 0.3 mm).",
-        "zh": "2026-11-15 下载（partof_BP3D_4.0_obj_99.zip）。用把 BodyParts3D 脑干对齐到模型脑干的变换摆放（平均差 0.3 毫米）。"
+        "en": "Downloaded 2026-11-15 (partof_BP3D_4.0_obj_99.zip). Placed with the transform that lines the BodyParts3D brainstem up with the model's brainstem (mean 0.3 mm). Changed by Atlas: the source block has no folds; a regular pattern of grooves across it was cut in by a script (scripts/anatomy/brain-nerves/build.py, folia), as a drawing, not traced from a real cerebellum.",
+        "zh": "2026-11-15 下载（partof_BP3D_4.0_obj_99.zip）。用把 BodyParts3D 脑干对齐到模型脑干的变换摆放（平均差 0.3 毫米）。Atlas 的改动：原模型是没有褶的一整块；用脚本（scripts/anatomy/brain-nerves/build.py 的 folia）刻上一道道横过它的规则沟纹，这是画的示意，不是照真实小脑描的。"
       }
     },
     {
@@ -488,8 +488,8 @@
       },
       "url": "https://brainder.org/download/brain-for-blender/",
       "note": {
-        "en": "The cerebral cortex of the model, as adapted in Z-Anatomy; confirmed by comparison with the original files (scripts/anatomy/brain-nerves/provenance.md). One adult's brain, averaged from 12 scans; in this model scaled by 0.985 to sit inside the skull (scripts/anatomy/brain-nerves/organs.json).",
-        "zh": "模型的大脑皮层，即 Z-Anatomy 改编的版本；已与原始文件比对确认（scripts/anatomy/brain-nerves/provenance.md）。来自一名成年人 12 次扫描的平均；在这个模型里缩放到 0.985 倍，以放进颅骨（scripts/anatomy/brain-nerves/organs.json）。"
+        "en": "The cerebral cortex of the model, as adapted in Z-Anatomy; confirmed by comparison with the original files (scripts/anatomy/brain-nerves/provenance.md). One adult's brain, averaged from 12 scans; in this model kept at its size and place; where its underside overlapped the floor of the skull, that patch was pressed smoothly inward, by at most about 7 mm (scripts/anatomy/brain-nerves/organs.json).",
+        "zh": "模型的大脑皮层，即 Z-Anatomy 改编的版本；已与原始文件比对确认（scripts/anatomy/brain-nerves/provenance.md）。来自一名成年人 12 次扫描的平均；在这个模型里保持原来的大小和位置；底面和颅底重叠的地方，向里平滑地压进去，最多约 7 毫米（scripts/anatomy/brain-nerves/organs.json）。"
       }
     },
     {
@@ -514,6 +514,66 @@
       "note": {
         "en": "A ruler let go from rest falls d = ½ g t², so t = √(2d ÷ g); the card rounds g to 9.81 m/s². Air resistance is ignored for a short drop.",
         "zh": "尺子从静止放开，下落距离 d = ½ g t²，所以 t = √(2d ÷ g)；卡片把 g 取为 9.81 米/秒²。下落很短，不计空气阻力。"
+      }
+    },
+    {
+      "id": "S44",
+      "text": {
+        "en": "Wilson DA, Prince JR. MR imaging determination of the location of the normal conus medullaris throughout childhood. American Journal of Roentgenology 152 (1989): 1029–1032. PMID 2650477.",
+        "zh": "Wilson DA、Prince JR（1989）。《用磁共振确定儿童期正常脊髓圆锥的位置》。《美国放射学杂志》152：1029–1032。PMID 2650477。"
+      },
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2650477/",
+      "note": {
+        "en": "Abstract read (accessed 2026-11-16). MRI of 184 children from newborn to 20 years: the end of the spinal cord (the conus medullaris) does not rise through childhood but reaches the adult level sometime during the first few months of life.",
+        "zh": "已读摘要（2026-11-16 访问）。对 184 名从新生儿到 20 岁的孩子做磁共振：脊髓的末端（脊髓圆锥）不是在整个童年里慢慢上移，而是在出生后头几个月里的某个时候就到了成人的位置。"
+      }
+    },
+    {
+      "id": "S45",
+      "text": {
+        "en": "Pittella JEH. The uniqueness of the human brain: a review. Dementia & Neuropsychologia 18 (2024): e20230078. CC BY.",
+        "zh": "Pittella JEH（2024）。《人脑的独特之处：综述》。《痴呆与神经心理学》18：e20230078。CC BY。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11019715/",
+      "note": {
+        "en": "Full text read (accessed 2026-11-16). On average an adult human brain weighs 1,400 g, ranging between 1,200 and 1,600 g.",
+        "zh": "已读全文（2026-11-16 访问）。成人的脑平均重 1,400 克，在 1,200 到 1,600 克之间。"
+      }
+    },
+    {
+      "id": "S46",
+      "text": {
+        "en": "Feist F, et al. A cellulosic fibre foam as a bicycle helmet impact liner for brain injury mitigation in oblique impacts. Heliyon 11 (2025): e40790 (online 30 November 2024). CC BY-NC-ND 4.0.",
+        "zh": "Feist F 等（2024）。《用纤维素纤维泡沫做自行车头盔内衬，减轻斜向撞击中的脑损伤》。Heliyon 11：e40790。CC BY-NC-ND 4.0。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11714417/",
+      "note": {
+        "en": "Full text read (accessed 2026-11-16). In a bicycle helmet the hard outer shell spreads the load of a local knock: it distributes the forces over a wider area of the foam, and so of the head.",
+        "zh": "已读全文（2026-11-16 访问）。自行车头盔坚硬的外壳把局部撞击的力分散开：把力分布到更大面积的泡沫上，也就分布到更大面积的头上。"
+      }
+    },
+    {
+      "id": "S47",
+      "text": {
+        "en": "Tamanini JVG, et al. A journey through the anatomy of the cerebellum. Arquivos de Neuro-Psiquiatria 83 (2025). CC BY 4.0.",
+        "zh": "Tamanini JVG 等（2025）。《小脑解剖之旅》。《神经精神病学档案》83。CC BY 4.0。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12721976/",
+      "note": {
+        "en": "Full text read (accessed 2026-11-16). The cerebellum receives the motor plan and the body's position sense; this lets it compare the intended movement with what is actually being done and make corrections through its connections to the motor cortex.",
+        "zh": "已读全文（2026-11-16 访问）。小脑收到运动的计划和身体位置的感觉，因此能把想做的动作和实际正在做的动作作比较，并通过它和运动皮层的连接作出纠正。"
+      }
+    },
+    {
+      "id": "S48",
+      "text": {
+        "en": "Wooten M, et al. Three functionally distinct classes of C-fiber nociceptors in primate. Nature Communications 5 (2014): 4122.",
+        "zh": "Wooten M 等（2014）。《灵长类的三类功能不同的 C 纤维痛觉感受器》。《自然·通讯》5：4122。"
+      },
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4072246/",
+      "note": {
+        "en": "Full text read (accessed 2026-11-16). A study in monkeys: the thin pain fibres without myelin (C fibres) conducted at about 0.5 to 2 metres per second; one class averaged 0.58 m/s.",
+        "zh": "已读全文（2026-11-16 访问）。一项猴子的研究：没有髓鞘的细痛觉纤维（C 纤维）每秒传约 0.5 到 2 米；其中一类平均每秒 0.58 米。"
       }
     }
   ]
