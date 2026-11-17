@@ -2,7 +2,7 @@
 
 > 不是功能缺陷，是新 App 首次提交的例行索要材料（观象 2026-08 首提时收到过同一封，补材料后原 build 通过）。
 > 状态（11-17 查 App Store Connect）：1.0 `REJECTED`，提交 `UNRESOLVED_ISSUES`，绑的是 **build 10**，审核备注里没有附件。
-> **重新提交不换 build**，仍是 build 10。
+> **重新提交换成 build 13**（11-17 定：13 含 8 个新主题和打磨，省一轮审核）；Gavin 先上传 13，录屏也用 13。
 
 苹果要六项，五项是文字，一项是录屏：
 
@@ -19,7 +19,7 @@
 
 ## 录屏怎么录（约 2–3 分钟，一镜到底，每步停两秒）
 
-准备：iPad 升到最新 iPadOS（设置 → 通用 → 软件更新）；TestFlight 里装 Atlas **1.0 (10)**；语言用英文。
+准备：iPad 升到最新 iPadOS（设置 → 通用 → 软件更新）；TestFlight 里装 Atlas **1.0 (13)**；语言用英文。
 
 1. 从控制中心开始录屏，回到主屏幕，**点 Atlas 图标启动**（苹果要求从启动开始）。
 2. 首页停两秒，往下滑到主题卡片；点一下 Science，再点回 All。
@@ -38,6 +38,6 @@ App 没有注册、登录、注销账号，没有用户发的内容，没有付�
 
 1. 压到 10 MB 左右，经 App Store Connect API 传成「App 审核信息」的附件。
 2. 把 `review-notes-2026-11.txt` 写进备注栏。
-3. 重新提交（仍绑 build 10），再查一次状态确认是 `WAITING_FOR_REVIEW`。
+3. 版本页 Build 换成 13，重新提交，再查一次状态确认是 `WAITING_FOR_REVIEW`。
 
 解决中心里的那条消息 API 回不了；需要回复的话，贴一句 `All requested information has been added to the App Review Information notes, and the screen recording is attached there.` 即可。
