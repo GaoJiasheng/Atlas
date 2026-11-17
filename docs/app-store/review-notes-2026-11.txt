@@ -1,7 +1,7 @@
 RESPONSE TO GUIDELINE 2.1 - INFORMATION NEEDED
 
 1. SCREEN RECORDING
-Attached to App Review Information. Captured on a physical iPad running the latest iPadOS, with build 1.0 (13) from TestFlight. It starts at app launch, then shows: home page; a 3D topic (rotate, Cutaway, Exploded, tap a part); a history topic (map and chapter bar); a maths lesson (Next/Back, the check question); the language switch, the theme switch and Present mode.
+Attached to App Review Information. Recorded in the iOS Simulator (iPad Pro 13-inch, iOS 26.4) running build 1.0 (13); a device recording can follow on request. It starts at app launch, then shows: home page; a 3D topic (Cutaway, Exploded, tap a part, chapter bar); a history topic (map and chapter bar); a maths lesson (Next/Back, the check question); the language switch, the theme switch and Present mode.
 The app has no account registration, login or account deletion, no user-generated content and no paid content or features, so none of these flows exist to be recorded.
 
 2. PURPOSE AND AUDIENCE
