@@ -112,6 +112,10 @@ const BEAT_SETTLE_MS = 650;
 const NARROW_STAGE = 860;
 /** Height of the number-sentence line under the model. */
 const EQUATION_H = 58;
+/** A phone's free stage above the docked tray shorter than this keeps no number sentence under the model (its 44 px fold is the model's). */
+const SHORT_STAGE = 180;
+/** Space kept between the card's edge tab and the docked tray under it. */
+const TAB_GAP = 8;
 /** Height of a net's FOLD slider and turn buttons at the stage's bottom right (docs/39 §3.5). */
 const NET_TOOLS_H = 56;
 /** The sentence's side padding (math-scene.css), and how far its type may shrink before it wraps. */
@@ -308,12 +312,21 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     if (!scene) return;
     const h = docked && trayRef.current ? `${Math.ceil(trayRef.current.offsetHeight)}px` : '0px';
     if (scene.style.getPropertyValue('--task-h') !== h) scene.style.setProperty('--task-h', h);
+    // The card's edge tab (a phone) hangs from the HUD, not from the right column: on a short screen it ends above the tray
+    // (math-scene.css), never shorter than a finger.
+    const tab = scene.querySelector<HTMLElement>('.atlas-card__tab');
+    const room = docked && trayRef.current && tab ? `${Math.max(44, Math.floor(trayRef.current.getBoundingClientRect().top - tab.getBoundingClientRect().top - TAB_GAP))}px` : '';
+    if (scene.style.getPropertyValue('--tab-room') !== room) {
+      if (room) scene.style.setProperty('--tab-room', room);
+      else scene.style.removeProperty('--tab-room');
+    }
   }, [docked]);
   useLayoutEffect(syncTaskBand);
   useEffect(() => {
     const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
     return () => {
       scene?.style.removeProperty('--task-h');
+      scene?.style.removeProperty('--tab-room');
     };
   }, []);
 
@@ -328,7 +341,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   // On a phone the read-scale boxes already show the child's quantity. Keep
   // the height for the instrument instead of repeating that quantity below it.
   const phoneReading = sheet && L.w < 760 && task?.kind === 'read-scale';
-  const equation = phoneReading ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
+  // A short phone with the check tray docked (its keypad up): the stage left above the tray is the model's alone.
+  const phoneShort = docked && L.w < 760 && L.free.h > 0 && L.free.h < SHORT_STAGE;
+  const equation = phoneReading || phoneShort ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
 
   /* ---------- a net's FOLD slider and turns (docs/39 §3.5): this beat's or this check's, gone on the next ---------- */
   const netAt = `${s.chapter}|${cur.beat}|${task?.id ?? ''}`;

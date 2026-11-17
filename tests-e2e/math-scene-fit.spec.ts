@@ -60,6 +60,41 @@ test.describe('MathScene fit', () => {
     await keysInsideCard(page, page.locator('.ms-tray-dock .ms-tray'));
   });
 
+  // With the keypad up the model still has a readable stage above the tray (before the phone tray was compacted: a free
+  // rectangle of 252 px, a 184 px drawing; the bus ride's timeline ran 53 px under the tray).
+  for (const [topic, chapter, i, id, free, drawn] of [
+    ['decimals', 'hundredths', 2, 'hu-write-4-hundredths', 0.32, 0.24],
+    ['telling-time', 'timetables', 1, 'tt-bus-ride', 0.16, 0.1],
+  ] as const)
+    test(`phone, keypad up: the model keeps its stage above the docked tray (${id})`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await open(page, `/en/topics/${topic}/?ch=${chapter}`);
+      await force(page, chapter, i);
+      await expect.poll(() => taskId(page)).toBe(id);
+      await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
+      const freeH = () => page.evaluate(() => Number(document.querySelector<HTMLElement>('.ms-root')?.dataset.stageFree?.split(' ')[1] ?? 0));
+      await expect.poll(freeH).toBeGreaterThanOrEqual(free * 844);
+      const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
+      await expect.poll(async () => (await rect(page.locator('.ms-svg .ms-beat'))).height).toBeGreaterThanOrEqual(drawn * 844);
+      const model = await rect(page.locator('.ms-svg .ms-beat'));
+      expect(model.y + model.height).toBeLessThanOrEqual(tray.y - 8);
+    });
+
+  test('small phone: the check buttons keep one row and the card tab ends above the docked tray', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await open(page, '/en/topics/decimals/?ch=hundredths');
+    await force(page, 'hundredths', 2);
+    await expect.poll(() => taskId(page)).toBe('hu-write-4-hundredths');
+    await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
+    const tops = await page.locator('.ms-tray-dock .ms-tray__actions > .ms-btn').evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().top)));
+    expect(tops.length).toBeGreaterThanOrEqual(4);
+    expect(new Set(tops).size).toBe(1);
+    const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
+    const tab = await rect(page.locator('[data-hud-panel="card-tab"]'));
+    expect(Math.min(tab.width + 16, tab.height)).toBeGreaterThanOrEqual(44);
+    expect(tab.y + tab.height).toBeLessThanOrEqual(tray.y);
+  });
+
   for (const [topic, chapter] of [['measuring', 'practice'], ['telling-time', 'practice']] as const)
     test(`phone: the keypad and boxes stay inside the presentation card (${topic})`, async ({ page }) => {
       await page.setViewportSize({ width: 390, height: 844 });

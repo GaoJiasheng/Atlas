@@ -32,6 +32,14 @@
   min-height: 0;
   overflow: clip;
 }
+/* The card's edge tab ends above the docked tray (its room written by the view as --tab-room): the name is clipped, the tab stays ≥ 44 px. */
+.atlas-scene[data-engine="math-scene"] .atlas-card__tab {
+  max-height: var(--tab-room, none);
+}
+.atlas-scene[data-engine="math-scene"] .atlas-card__tab span {
+  min-height: 0;
+  overflow: hidden;
+}
 
 .ms-root {
   position: absolute;
@@ -3323,6 +3331,62 @@
   .ms-keypad {
     width: min(100%, calc(6 * var(--hit) + 5 * 4px));
     grid-template-columns: repeat(auto-fill, var(--hit));
+  }
+}
+/* The docked tray on a phone gives the stage above it every row it can: tighter rows and type (every target stays ≥ 44 px). */
+@media (max-width: 759px) {
+  .ms-tray-dock {
+    left: 8px;
+    right: 8px;
+  }
+  .ms-tray-dock .ms-tray {
+    gap: 6px;
+    padding: 6px 8px;
+  }
+  .ms-tray-dock .ms-tray__prompt {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .ms-tray-dock .ms-tray__feedback {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  /* Hint, Check, Another one and Skip stay on one row down to a 375 px phone. */
+  .ms-tray-dock .ms-tray__actions {
+    gap: 4px;
+  }
+  .ms-tray-dock :is(.ms-tray__controls, .ms-input) {
+    gap: 6px 10px;
+  }
+  /* The answer boxes and the keypad join the controls' row flow, the keypad last: a short tool button shares the boxes' row. */
+  .ms-tray-dock .ms-tray__controls > .ms-input:not(.ms-input--table) {
+    display: contents;
+  }
+  .ms-tray-dock .ms-tray__controls > .ms-input > .ms-keypad {
+    order: 1;
+  }
+  /* The jumps, "take back" and the note in one flow: the note sits beside "take back" rather than on a row of its own. */
+  .ms-tray-dock .ms-hops {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+  }
+  .ms-tray-dock .ms-hops > .ms-chips {
+    display: contents;
+  }
+  .ms-tray-dock .ms-hops > .ms-tray__note {
+    flex: 1 1 120px;
+  }
+  .ms-tray-dock :is(.ms-tray__note, .ms-tray__help) {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+  .ms-tray-dock .ms-input__rows--table {
+    gap: 6px 10px;
+  }
+  .ms-tray-dock .ms-input--table .ms-input__eq {
+    font: 500 13px / 1.2 var(--font-hud);
   }
 }
 .ms-key--point {
