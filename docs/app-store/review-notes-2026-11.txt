@@ -1,0 +1,33 @@
+RESPONSE TO GUIDELINE 2.1 - INFORMATION NEEDED
+
+1. SCREEN RECORDING
+Attached to App Review Information. Captured on a physical iPad running the latest iPadOS, with build 1.0 (10) from TestFlight. It starts by launching the app and shows the typical flow: home page; a 3D topic (rotate, Cutaway, Exploded, tap a part); a history topic (map and chapter bar); a maths lesson (Next/Back, the check question); the language switch, the theme switch and Present mode.
+The app has no account registration, login or account deletion, no user-generated content and no paid content or features, so none of these flows exist to be recorded.
+
+2. PURPOSE AND AUDIENCE
+Atlas is a bilingual (English / Simplified Chinese) interactive visual textbook for iPad, written for upper-primary pupils in Singapore (about 10 to 12 years old), and for general readers who want to see how things work.
+Problem: diagrams and maps in a printed textbook cannot move, so a pupil cannot watch a front line shift, follow refrigerant round an air conditioner, or see why 1/2 equals 2/4.
+Value: every topic is a scene the reader controls. History unfolds on a map with a timeline. Machines and anatomy are 3D models that can be turned, cut open and pulled apart. Maths ideas are explained step by step and then done by hand, with a short check per chapter. Facts and figures carry their sources. This build has 61 topics in science, biology, history, geography, maths and computing. Free, no ads.
+
+3. HOW TO ACCESS THE MAIN FEATURES
+No setup, sign-in, credentials or sample files are needed. Everything works offline.
+- Launch the app. The home page lists all topics. Tap any topic card.
+- In a topic, the bar at the bottom is the chapter bar: tap a chapter or a dot to jump. Back and Next move one step.
+- 3D topics (e.g. "How an Air Conditioner Works"): drag to rotate, pinch to zoom, choose Orbit, Cutaway or Exploded in the VIEW bar, tap a part.
+- History topics (e.g. "Second World War"): the map changes as you move through the chapters.
+- Maths topics (e.g. "Fractions"): follow the beats with Next; answer the check at the end of a chapter.
+- Top right: EN switches English/Chinese, LOOK switches the theme, HELP opens the guide. PRESENT plays a chapter and can read the captions aloud.
+
+4. EXTERNAL SERVICES
+None. All text, map data, 3D models and fonts ship inside the app bundle, and the app makes no network requests at run time: no backend, analytics, advertising SDK, authentication service, payment processor or AI service. Read-aloud uses the system speech synthesiser on the device. Preferences (language, theme) are stored on the device only. The app is a WKWebView shell built with Capacitor; no other third-party SDK.
+
+5. REGIONAL DIFFERENCES
+Features and content are the same in every region. The reader chooses English or Chinese inside the app; nothing depends on location or storefront.
+
+6. REGULATED INDUSTRY AND THIRD-PARTY MATERIAL
+Not a regulated industry: general education and reference. Anatomy topics are school biology, not medical advice. Atlas is independent and not affiliated with or endorsed by the Ministry of Education, Singapore (stated in the description).
+All lesson text, illustrations and interface are the developer's own work. Third-party material is limited to public-domain or openly licensed data, used under its licence with attribution in the app:
+- Maps: Natural Earth (public domain), CShapes 2.0 (CC BY-NC-SA 4.0), OpenHistoricalMap (CC0), Cliopatria / Seshat (CC BY 4.0), Wikimedia Commons maps (public domain or CC BY-SA), US Government maps (public domain).
+- 3D anatomy: Z-Anatomy (CC BY-SA 4.0), derived from BodyParts3D (CC BY 4.0).
+- Fonts and code: IBM Plex (SIL OFL 1.1), MapLibre GL JS (BSD-3-Clause), three.js and React (MIT).
+These licences allow redistribution. Some are NonCommercial, so the app is free with no ads or purchases. Full per-file list: https://github.com/GaoJiasheng/Atlas/blob/main/THIRD-PARTY-NOTICES.md
