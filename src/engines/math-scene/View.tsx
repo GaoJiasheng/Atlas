@@ -312,6 +312,8 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     if (!scene) return;
     const h = docked && trayRef.current ? `${Math.ceil(trayRef.current.offsetHeight)}px` : '0px';
     if (scene.style.getPropertyValue('--task-h') !== h) scene.style.setProperty('--task-h', h);
+    // A short phone folds the title block's chapter squares while the tray is docked (math-scene.css, docs/08 §2).
+    scene.toggleAttribute('data-task-docked', docked);
     // The card's edge tab (a phone) hangs from the HUD, not from the right column: on a short screen it ends above the tray
     // (math-scene.css), never shorter than a finger.
     const tab = scene.querySelector<HTMLElement>('.atlas-card__tab');
@@ -327,6 +329,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     return () => {
       scene?.style.removeProperty('--task-h');
       scene?.style.removeProperty('--tab-room');
+      scene?.removeAttribute('data-task-docked');
     };
   }, []);
 

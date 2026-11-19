@@ -95,6 +95,66 @@ test.describe('MathScene fit', () => {
     expect(tab.y + tab.height).toBeLessThanOrEqual(tray.y);
   });
 
+  // A short phone (≤ 760 px high) folds the title block's chapter squares while the tray is docked; the title stays. Before the
+  // fold, at 375×667 (EN): hundredths 303×121 with the grid running 1 px under the tray; the bus ride 0×97 (no width beside the
+  // squares); evening out 205×31.
+  // (ZH, a one-line title: the bus ride 233×2, evening out 233×47.)
+  for (const [locale, topic, chapter, i, id, w, h] of [
+    ['en', 'decimals', 'hundredths', 2, 'hu-write-4-hundredths', 300, 160],
+    ['en', 'telling-time', 'timetables', 1, 'tt-bus-ride', 200, 36],
+    ['zh', 'telling-time', 'timetables', 1, 'tt-bus-ride', 230, 50],
+    ['en', 'average', 'evening-out', 0, 'even-3-5-7', 200, 78],
+  ] as const)
+    test(`small phone, keypad up: the chapter squares fold and the stage takes their room (${id}, ${locale})`, async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await open(page, `/${locale}/topics/${topic}/?ch=${chapter}`);
+      await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+      await force(page, chapter, i);
+      await expect.poll(() => taskId(page)).toBe(id);
+      await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+      await expect(page.locator('.atlas-rail')).toBeHidden();
+      await expect(page.locator('[data-hud-panel="title"]')).toBeVisible();
+      const free = () => page.evaluate(() => (document.querySelector<HTMLElement>('.ms-root')?.dataset.stageFree ?? '0 0').split(' ').map(Number));
+      await expect.poll(async () => (await free())[0]!).toBeGreaterThanOrEqual(w);
+      await expect.poll(async () => (await free())[1]!).toBeGreaterThanOrEqual(h);
+      const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
+      if (id === 'hu-write-4-hundredths') {
+        const model = await rect(page.locator('.ms-svg .ms-beat'));
+        expect(model.y + model.height).toBeLessThanOrEqual(tray.y - 8);
+      }
+      // Whatever the stage draws ends above the tray: a model with too little room is not drawn at all, never half under it.
+      const bottoms = await page.locator('.ms-svg .ms-beat').evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).filter((r) => r.height > 0).map((r) => r.bottom));
+      for (const b of bottoms) expect(b).toBeLessThanOrEqual(tray.y);
+    });
+
+  test('small phone: the chapter squares come back when the tray leaves, and fold again on the next check', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await open(page, '/en/topics/decimals/?ch=hundredths');
+    await force(page, 'hundredths', 2);
+    await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+    await expect(page.locator('.atlas-rail')).toBeHidden();
+    // The chapter bar still reaches every chapter: back to the tenths, on its first beat (no check).
+    await page.locator('.atlas-axis__btn[data-chapter="tenths"]').click();
+    await expect.poll(() => page.evaluate(() => window.__atlas!.state().chapter)).toBe('tenths');
+    await expect(page.locator('.ms-tray-dock .ms-tray')).toBeHidden();
+    await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+    expect((await rect(page.locator('.atlas-rail__item').first())).height).toBeGreaterThanOrEqual(44);
+    // The stage is measured again: the model starts under the squares.
+    const squares = await rect(page.locator('.atlas-rail'));
+    await expect.poll(async () => (await rect(page.locator('.ms-svg .ms-beat'))).y).toBeGreaterThanOrEqual(squares.y + squares.height);
+    await force(page, 'tenths', 0);
+    await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+    await expect(page.locator('.atlas-rail')).toBeHidden();
+  });
+
+  test('tall phone: the chapter squares stay with the tray docked', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page, '/en/topics/decimals/?ch=hundredths');
+    await force(page, 'hundredths', 2);
+    await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+    await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+  });
+
   for (const [topic, chapter] of [['measuring', 'practice'], ['telling-time', 'practice']] as const)
     test(`phone: the keypad and boxes stay inside the presentation card (${topic})`, async ({ page }) => {
       await page.setViewportSize({ width: 390, height: 844 });

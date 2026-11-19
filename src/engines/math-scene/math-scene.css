@@ -23,6 +23,13 @@
       "dock dock";
   }
 }
+/* A short phone with the check tray docked: the title stays, its chapter squares fold away (the chapter bar still takes the
+   reader to any chapter) and the stage above the tray takes their room; they come back when the tray leaves (docs/08 §2). */
+@media (max-width: 759px) and (max-height: 760px) {
+  .atlas-scene[data-engine="math-scene"][data-task-docked] .atlas-hud__left .atlas-rail {
+    display: none;
+  }
+}
 /* The left column (title block, chapter rail, plate) gives way to the band rather than run under it. */
 .atlas-scene[data-engine="math-scene"] .atlas-hud__left {
   overflow: clip;

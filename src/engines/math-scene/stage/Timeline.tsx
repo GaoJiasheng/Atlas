@@ -105,6 +105,9 @@ export function Timeline(p: TimelineProps) {
   const drop = clockAbove ? clockAbove + CLOCK_GAP + bandRoom : 0;
   // The whole drawing (labels above, hour labels and arcs back below) centred in what is left, the line where that puts it.
   const y = Math.round(box.y + drop + Math.max(topOff, (box.h - drop - topOff - below) / 2 + topOff));
+  // Whole or not at all, as every model under its minimum (Stage.tsx): a line with no room for its labels is not drawn half
+  // under the docked tray.
+  if (box.h < Math.max(drop + topOff + below, clockSide)) return null;
   const markTime = y - markOff;
   const topmost = y - topOff;
 
