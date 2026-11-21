@@ -171,6 +171,86 @@ test.describe('MathScene fit', () => {
     }).toBe(true);
   });
 
+  // Models that outgrew a short phone's stage even shrunk to 0.75 and so were not drawn at all (EN, free stage → painted height):
+  // the rows of a × stacked one under another (40 × 6, 90 × 7, 18 × 4 with its working under them), a share's plates in one row
+  // 640 px wide, the thousand grid over its three steppers in rows. Now the rows of a × wrap into groups side by side under one-line
+  // heads (the working beside them), the plates stack their places and wrap, the chart takes the columns that stand least tall,
+  // and the tray puts the steppers and the share buttons side by side.
+  for (const [locale, topic, chapter, i, id, mw, mh] of [
+    ['en', 'multiplication-division', 'multiplying-in-columns', 2, 'mc-18-times-4', 240, 110],
+    ['zh', 'multiplication-division', 'multiplying-in-columns', 2, 'mc-18-times-4', 240, 110],
+    ['en', 'multiplication-division', 'multiplying-tens', 8, 'mt-90-by-7-rows', 200, 120],
+    ['en', 'decimals', 'thousandths', 8, 'th-shade-0104', 200, 150],
+    ['zh', 'decimals', 'thousandths', 8, 'th-shade-0104', 200, 150],
+    ['en', 'decimals', 'dividing-decimals', 1, 'dv-share-735-by-5', 250, 140],
+  ] as const)
+    test(`small phone: a model too big for the stage keeps a compact layout above the tray (${id}, ${locale})`, async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await open(page, `/${locale}/topics/${topic}/?ch=${chapter}`);
+      await force(page, chapter, i);
+      await expect.poll(() => taskId(page)).toBe(id);
+      await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+      await drawnAbove(page);
+      const { boxes } = await drawn(page);
+      expect(Math.max(...boxes.map((b) => b.width))).toBeGreaterThanOrEqual(mw);
+      expect(Math.max(...boxes.map((b) => b.bottom)) - Math.min(...boxes.map((b) => b.top))).toBeGreaterThanOrEqual(mh);
+      // Shrunk no further than the floor: its smallest printed label stays readable.
+      const smallest = await page.locator('.ms-svg .ms-beat :is(.ms-mat__head, .ms-mat__count, .ms-pvc__head, .ms-dgrid__times)').evaluateAll((els) => Math.min(...els.map((e) => e.getBoundingClientRect().height)));
+      expect(smallest).toBeGreaterThanOrEqual(7.5);
+      for (const b of await page.locator('.ms-tray-dock :is(button, input):visible').all()) {
+        const r = await rect(b);
+        expect(Math.min(r.width, r.height)).toBeGreaterThanOrEqual(43.5);
+      }
+    });
+
+  // The chart above a share's plates on a short phone: its discs (ring and printing) never run into each other. Before, at 375×667
+  // the 0.1 and 0.01 printings of rings 12 px across ran together ("0.10.10.1"); a ring too small for its printing stays blank, the
+  // column's head says what it is worth.
+  for (const locale of ['en', 'zh'] as const)
+    test(`small phone: the share's place chart keeps every disc apart (dv-share-735-by-5, ${locale})`, async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 667 });
+      await open(page, `/${locale}/topics/decimals/?ch=dividing-decimals`);
+      await force(page, 'dividing-decimals', 1);
+      await expect.poll(() => taskId(page)).toBe('dv-share-735-by-5');
+      await drawnAbove(page);
+      const discs = page.locator('.ms-svg .ms-pvc .ms-disc:not(.ms-disc--dealt)');
+      await expect(discs).toHaveCount(15);
+      const crossings = await discs.evaluateAll((els) => {
+        const boxes = els.map((e) => e.getBoundingClientRect());
+        let n = 0;
+        for (let i = 0; i < boxes.length; i++)
+          for (let j = i + 1; j < boxes.length; j++) {
+            const a = boxes[i]!;
+            const b = boxes[j]!;
+            if (a.left < b.right - 0.5 && b.left < a.right - 0.5 && a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5) n++;
+          }
+        return n;
+      });
+      expect(crossings).toBe(0);
+      // A printing stays inside its own ring.
+      const spill = await discs.evaluateAll((els) =>
+        els.filter((e) => {
+          const ring = e.querySelector('circle')!.getBoundingClientRect();
+          const text = e.querySelector('text')?.getBoundingClientRect();
+          return !!text && (text.left < ring.left - 0.5 || text.right > ring.right + 0.5);
+        }).length,
+      );
+      expect(spill).toBe(0);
+    });
+
+  test('a choice in words draws its model: four elevenths of a strip', async ({ page }) => {
+    for (const locale of ['en', 'zh']) {
+      await open(page, `/${locale}/topics/fractions/?ch=non-unit-fractions`);
+      await force(page, 'non-unit-fractions', 10);
+      await expect.poll(() => taskId(page)).toBe('nu-four-elevenths-meaning');
+      const bar = page.locator('.ms-svg .ms-beat .ms-bar');
+      await expect(bar).toBeVisible();
+      expect((await rect(bar)).width).toBeGreaterThanOrEqual(400);
+      // The tray holds the three sentences; the stage only the picture they describe.
+      await expect(page.locator('.ms-tray .ms-choice')).toHaveCount(3);
+    }
+  });
+
   test('small phone: the chapter squares come back when the tray leaves, and fold again on the next check', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await open(page, '/en/topics/decimals/?ch=hundredths');

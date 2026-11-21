@@ -49,6 +49,11 @@ const HEAD = 46;
 const DISC_PAD = 14;
 const MIN_PRINTED_DISC = 20;
 
+/** A disc's printing (1 · 0.1 · 0.01 · $1 · 10¢): its size for a disc `d` across, no smaller than `least`. */
+const faceSize = (face: string, d: number, least: number) => clamp(d * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][face.length] ?? 0.25), least, 15);
+/** The printing fits inside its ring (monospace, about 0.6 em a figure): else the ring stays blank and the column's head says what it is worth, so two printings never run together. */
+const printable = (face: string, d: number, least: number) => face.length * 0.6 * faceSize(face, d, least) <= d;
+
 interface Cellish {
   d: number;
   faint?: boolean;
@@ -183,38 +188,67 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
   // Too tall, or the plates left with discs much smaller than the chart's: the chart and the column method give way together.
   const cramped = (l: typeof layout) => l.total > box.h - 20 - titleH || (plates > 0 && l.pl.pd < (chartDiscs ? l.disc * 0.8 : p.mini ? 8 : 20));
   const minCw = p.mini ? 14 : 40;
+  // Still cramped at the least size (a phone above its docked tray): the size tried that stands least tall (wider columns hold
+  // more discs to a row, so they can stand shorter than narrow ones).
+  let least = { cw, shrink, layout };
   while (cramped(layout) && (cw > minCw || shrink > 0.45)) {
     cw = Math.max(minCw, cw - 4);
     shrink = Math.max(0.45, shrink - 0.04);
     layout = sizes(cw, shrink);
+    if (layout.total < least.layout.total - 0.5) least = { cw, shrink, layout };
   }
+  if (cramped(layout) && !p.mini) ({ cw, shrink, layout } = least);
   /**
    * The plates' discs, the plates in one to three rows, each place's discs `q` to a row in a plate: the largest discs (up to the
-   * chart's largest) that fit `room` wide and `tall` high.
+   * chart's largest) that fit `room` wide and `tall` high. A stage too small for that at the least disc (a phone above its docked
+   * tray) stacks each plate's places one under another (a narrow plate) when that draws larger, else takes the arrangement that
+   * overflows least (`whole`: the height the chart and the plates share).
    */
-  function platesOf(room: number, tall: number, chartDisc: number) {
+  function platesOf(room: number, tall: number, chartDisc: number, whole: number) {
     // As large as the chart's discs when the chart still holds some (the same coins), else up to the chart's largest.
     const disc = chartDiscs ? chartDisc : p.mini ? 20 : 40;
-    if (!plates) return { pd: 0, q: 5, rows: 0, pw: 0, ph: 0, h: 0, w: 0 };
-    let best = { pd: 0, q: 5, rows: 1 };
-    for (const rows of [1, 2, 3]) {
-      if (rows > plates) break;
-      for (const q of [5, 4, 3, 2]) {
-        const across = Math.ceil(plates / rows);
-        const units = held.reduce((sum, n) => sum + Math.min(n, q), 0) * 1.15;
-        const fixed = 16 + held.length * 6;
-        const deep = Math.max(1, ...held.map((n) => Math.ceil(n / q)));
-        const byWidth = units > 0 ? (room / across - 10 - fixed) / units : disc;
-        const byHeight = ((tall + 10) / rows - 10 - 24) / (deep * 1.15);
-        const pd = Math.min(disc, byWidth, byHeight);
-        // A plate row more, or narrower blocks, only for discs clearly larger.
-        if (pd > best.pd + 2) best = { pd, q, rows };
+    if (!plates) return { pd: 0, q: 5, rows: 0, stack: false, pw: 0, ph: 0, h: 0, w: 0 };
+    /** A plate's size for discs `pd`, `q` to a row: places side by side, or stacked. */
+    const plateSize = (pd: number, q: number, stack: boolean) => {
+      const lines = held.map((n) => Math.ceil(n / q));
+      return stack
+        ? { pw: Math.max(pd * 2.2, 16 + Math.min(q, Math.max(1, ...held)) * pd * 1.15), ph: Math.max(pd * 2.2, lines.reduce((a, b) => a + b, 0) * pd * 1.15 + 24) }
+        : { pw: Math.max(70, 16 + held.reduce((sum, n) => sum + Math.min(n, q) * pd * 1.15 + 6, 0)), ph: Math.max(pd * 2.2, Math.max(1, ...lines) * pd * 1.15 + 24) };
+    };
+    const tries: { pd: number; q: number; rows: number; stack: boolean }[] = [];
+    let best = { pd: 0, q: 5, rows: 1, stack: false };
+    for (const stack of [false, true])
+      for (const rows of [1, 2, 3]) {
+        if (rows > plates) break;
+        for (const q of [5, 4, 3, 2]) {
+          const across = Math.ceil(plates / rows);
+          const lines = held.map((n) => Math.ceil(n / q));
+          const units = (stack ? Math.min(q, Math.max(1, ...held)) : held.reduce((sum, n) => sum + Math.min(n, q), 0)) * 1.15;
+          const fixed = 16 + (stack ? 0 : held.length * 6);
+          const deep = stack ? Math.max(1, lines.reduce((a, b) => a + b, 0)) : Math.max(1, ...lines);
+          const byWidth = units > 0 ? (room / across - 10 - fixed) / units : disc;
+          const byHeight = ((tall + 10) / rows - 10 - 24) / (deep * 1.15);
+          const pd = Math.min(disc, byWidth, byHeight);
+          tries.push({ pd, q, rows, stack });
+          // A plate row more, or narrower blocks, only for discs clearly larger.
+          if (!stack && pd > best.pd + 2) best = { pd, q, rows, stack };
+        }
+      }
+    if (best.pd < 12 && !p.mini) {
+      const roomy = tries.filter((c) => c.pd >= 10);
+      if (roomy.length > 0) best = roomy.reduce((a, c) => (c.pd > a.pd + 2 || (a.stack && !c.stack && c.pd >= a.pd) ? c : a));
+      else {
+        // Nothing fits at the least disc: the arrangement that needs the least shrinking.
+        const need = (c: (typeof tries)[number]) => {
+          const sz = plateSize(10, c.q, c.stack);
+          const across = Math.ceil(plates / c.rows);
+          return Math.max((across * (sz.pw + 10)) / room, (whole - tall + c.rows * (sz.ph + 10) - 10) / whole);
+        };
+        best = tries.reduce((a, c) => (need(c) < need(a) - 0.01 ? c : a));
       }
     }
     const pd = Math.max(10, best.pd);
-    const pw = Math.max(70, 16 + held.reduce((sum, n) => sum + Math.min(n, best.q) * pd * 1.15 + 6, 0));
-    const deep = Math.max(1, ...held.map((n) => Math.ceil(n / best.q)));
-    const ph = Math.max(pd * 2.2, deep * pd * 1.15 + 24);
+    const { pw, ph } = plateSize(pd, best.q, best.stack);
     const across = Math.ceil(plates / best.rows);
     return { ...best, pd, pw, ph, h: best.rows * (ph + 10) - 10, w: across * (pw + 10) };
   }
@@ -245,7 +279,7 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
     const colCell = cc ? clamp(wide ? Math.min(34, (box.h - 20 - titleH) / (cc.rows * 1.5)) : Math.min(32, (box.w - 40) / cc.cols) * k, 14, 34) : 0;
     const colH = cc ? cc.rows * colCell * 1.5 : 0;
     const colW = cc ? cc.cols * colCell : 0;
-    const pl = platesOf(box.w - 20 - (cc && wide ? colW + 50 : 0), box.h - 20 - titleH - chartH - 18 - (cc && !wide ? colH + 24 : 0), disc);
+    const pl = platesOf(box.w - 20 - (cc && wide ? colW + 50 : 0), box.h - 20 - titleH - chartH - 18 - (cc && !wide ? colH + 24 : 0), disc, box.h - 20 - titleH);
     const leftH = chartH + (plates ? pl.h + 18 : 0);
     const total = wide ? Math.max(leftH, colH) : leftH + (cc ? colH + 24 : 0);
     return { disc, perRow, tight, digitH, rowHs, chartH, colCell, colH, colW, pl, leftH, total };
@@ -309,8 +343,8 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
     }
     if (l.discs) {
       const dy = ry + (l.digits && showDigits ? digitH : 0) + (tight ? 4 : 8);
-      // Rings too small for their printing count alone: the column's head says what each is worth.
-      const printed = !tight || disc >= MIN_PRINTED_DISC;
+      // Rings too small for their printing stay blank (the column's head says what each is worth): two printings never run together.
+      const printed = (pl: DPlace) => (!tight || disc >= MIN_PRINTED_DISC) && printable(discFace(pl, money), disc, 7);
       for (const pl of columns) {
         const n = l.discs[pl];
         for (let i = 0; i < n; i++) {
@@ -320,8 +354,8 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
           out.push(
             <g key={`c${li}${pl}${i}`} className="ms-disc" data-lit={lit || undefined} style={{ animationDelay: m.fill ? `${Math.max(0, m.fill.indexOf(pl)) * 160 + i * 25}ms` : undefined }}>
               <circle cx={cx} cy={cy} r={disc / 2} />
-              {printed && (
-                <text x={cx} y={cy + disc * 0.13} textAnchor="middle" fontSize={clamp(disc * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 7, 15)}>
+              {printed(pl) && (
+                <text x={cx} y={cy + disc * 0.13} textAnchor="middle" fontSize={faceSize(discFace(pl, money), disc, 7)}>
                   {discFace(pl, money)}
                 </text>
               )}
@@ -343,7 +377,7 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
 
   /* plates (÷), each as wide as its discs (at the end of a share) need, in one to three rows */
   if (plates) {
-    const { pd, q, pw, ph } = plate;
+    const { pd, q, pw, ph, stack } = plate;
     const across = Math.ceil(plates / plate.rows);
     for (let j = 0; j < plates; j++) {
       const row = Math.floor(j / across);
@@ -352,21 +386,25 @@ export function PlaceValueChart(p: PlaceValueChartProps) {
       const py = y0 + chartH + 18 + row * (ph + 10);
       out.push(<rect key={`pl${j}`} className="ms-plate-dish" x={px} y={py} width={pw} height={ph} rx={10} />);
       let bx = px + 8;
+      let by = py + 12;
       for (const pl of columns) {
         for (let i = 0; i < dealt[pl]; i++) {
           const cx = bx + ((i % q) + 0.5) * pd * 1.15;
-          const cy = py + 12 + (Math.floor(i / q) + 0.5) * pd * 1.15;
+          const cy = by + (Math.floor(i / q) + 0.5) * pd * 1.15;
           out.push(
             <g key={`pd${j}${pl}${i}`} className="ms-disc ms-disc--dealt">
               <circle cx={cx} cy={cy} r={pd / 2} />
-              <text x={cx} y={cy + pd * 0.13} textAnchor="middle" fontSize={clamp(pd * ([0, 0.42, 0.42, 0.38, 0.3, 0.25][discFace(pl, money).length] ?? 0.25), 6, 15)}>
-                {discFace(pl, money)}
-              </text>
+              {printable(discFace(pl, money), pd, 6) && (
+                <text x={cx} y={cy + pd * 0.13} textAnchor="middle" fontSize={faceSize(discFace(pl, money), pd, 6)}>
+                  {discFace(pl, money)}
+                </text>
+              )}
             </g>,
           );
         }
         const n = Math.max(dealt[pl], final[pl]);
-        if (n) bx += Math.min(n, q) * pd * 1.15 + 6;
+        if (n && stack) by += Math.ceil(n / q) * pd * 1.15;
+        else if (n) bx += Math.min(n, q) * pd * 1.15 + 6;
       }
     }
   }

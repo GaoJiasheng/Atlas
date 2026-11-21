@@ -102,6 +102,12 @@ interface MatLayout {
   plateH: number;
   /** The row of plates' width (0: no plates): as wide as the mat, or wider when a plate's last blocks need it. */
   platesW: number;
+  /** Everything fits the box at this unit (else it is the least unit tried, and overflows). */
+  fits: boolean;
+  /** Compact (a short phone): the equal rows of a × wrapped into this many groups side by side, one-line heads (H 百), a shorter count row. */
+  bands: number;
+  headH: number;
+  countH: number;
 }
 
 const HEAD_H = 34;
@@ -146,11 +152,55 @@ function matLayout(rows: Counts[], plates: { k: number; each: Counts } | null, b
       cols[p] = { x, w: w[i]! };
       x += w[i]!;
     });
-    best = { u, cols, w: total, h: height, plateH, platesW };
+    best = { u, cols, w: total, h: height, plateH, platesW, fits: false, bands: 1, headH: HEAD_H, countH: COUNT_H };
     const tall = HEAD_H + height + COUNT_H + (plates ? plateH + 14 : 0);
-    if (Math.max(total, platesW) <= box.w && tall <= box.h * share) return best;
+    if (Math.max(total, platesW) <= box.w && tall <= box.h * share) return { ...best, fits: true };
   }
   return best!;
+}
+
+const HEAD_H_COMPACT = 20;
+/** A compact column's least width: its head (H 百) and its count (0 × 7). */
+const COMPACT_COL = 50;
+/** Room for the rows' numbers (×1, ×2 …) to the mat's left. */
+const ROW_LAB = 36;
+const COUNT_H_COMPACT = 20;
+/** The gap between two groups of a × wrapped side by side in a column. */
+const bandGap = (u: number) => Math.max(10, Math.round(u * 2.5));
+/** A place's blocks of one row of a × (one group). */
+const groupW = (p: PlaceKey, n: number, u: number) => columnSize(p, Math.max(n, 1), u).w;
+
+/**
+ * The equal rows of a × on a stage too short for them one under another (a phone above its docked tray): the rows wrap into groups
+ * side by side in each column (×1 ×2 / ×3 ×4 …), the heads on one line (H 百), a place no row has only as wide as its head. The
+ * largest whole-pixel cube that fits the box whole (`aside`: room kept beside the mat), the fewest groups across for it; null when
+ * not even the least cube fits.
+ */
+function compactLayout(rows: Counts[], box: { w: number; h: number }, aside: number): MatLayout | null {
+  const row = rows[0]!;
+  let best: MatLayout | null = null;
+  for (let bands = 1; bands <= rows.length; bands++) {
+    const lines = Math.ceil(rows.length / bands);
+    if (bands > 1 && Math.ceil(rows.length / (bands - 1)) === lines) continue;
+    for (let u = MAX_U; u >= 3; u -= 1) {
+      if (best && u <= best.u) break;
+      const pad = Math.max(4, Math.round(u * 0.6));
+      const w = PLACES.map((p) => (row[p] === 0 ? COMPACT_COL : Math.max(COMPACT_COL, Math.round(bands * groupW(p, row[p], u) + (bands - 1) * bandGap(u) + 2 * pad))));
+      const total = w.reduce((a, b) => a + b, 0);
+      const height = lines * (rowHeight(row, u, true) + rowGap(u));
+      // One group across keeps the rows' numbers (×1, ×2 …) to the mat's left.
+      if (total + (bands === 1 ? ROW_LAB : 0) + aside > box.w || HEAD_H_COMPACT + height + COUNT_H_COMPACT > box.h) continue;
+      let x = 0;
+      const cols = {} as MatLayout['cols'];
+      PLACES.forEach((p, i) => {
+        cols[p] = { x, w: w[i]! };
+        x += w[i]!;
+      });
+      best = { u, cols, w: total, h: height, plateH: 0, platesW: 0, fits: true, bands, headH: HEAD_H_COMPACT, countH: COUNT_H_COMPACT };
+      break;
+    }
+  }
+  return best;
 }
 
 export function BlocksModel(p: BlocksModelProps) {
@@ -175,10 +225,10 @@ export function BlocksModel(p: BlocksModelProps) {
   // Hundreds on the mat now, or in the number worked with (a check's blocks can be traded up into a hundred).
   const hundreds = rowsOf.some((r) => r.H > 0) || value * (m.copies ?? 1) >= 100 || (task?.kind === 'regroup' && typeof task.value === 'number' && task.value >= 100);
   // The rows of a × are numbered ×1, ×2 … to the mat's left: room for the numbers.
-  const lab = m.mat && rowsOf.length > 1 ? 36 : 0;
+  const lab0 = m.mat && rowsOf.length > 1 ? ROW_LAB : 0;
   const matRows = m.mat ? rowsOf : [ZERO_ROW];
   const platesFor = k > 0 && m.mat ? { k, each } : null;
-  const matBoxW = Math.max(120, box.w - reserveW - 20 - lab);
+  const matBoxW = Math.max(120, box.w - reserveW - 20 - lab0);
   let fit: MatLayout;
   let cellW = 0;
   if (cc && !wide && m.mat && !p.mini) {
@@ -199,19 +249,49 @@ export function BlocksModel(p: BlocksModelProps) {
     fit = matLayout(matRows, platesFor, { w: matBoxW, h: box.h }, p.mini ? 10 : MAX_U, p.mini ? 1 : MAT_SHARE, hundreds);
     if (cc) cellW = Math.round(clamp(Math.min(cellMax, wide ? (reserveW - 48) / cc.cols : box.w / cc.cols), 14, 56));
   }
+  // The equal rows of a × that overflow a short stage: wrapped into groups side by side, the working beside them when it fits.
+  let beside = wide;
+  // (Only when they overflow the box itself: rows that merely leave the sentence less room keep their numbers and full heads.)
+  const overflows = cc ? !fit.fits : HEAD_H + fit.h + COUNT_H > box.h || fit.w + lab0 > box.w;
+  if (m.mat && rowsOf.length > 1 && !p.mini && !wide && overflows) {
+    const room = { w: box.w - 16, h: box.h - 8 };
+    let best: { score: number; fit: MatLayout; cell: number; beside: boolean } | null = null;
+    const consider = (f: MatLayout | null, cell: number, side: boolean) => {
+      if (!f) return;
+      const score = cc ? Math.min(f.u * 6, cell) : f.u;
+      if (!best || score > best.score) best = { score, fit: f, cell, beside: side };
+    };
+    if (!cc) consider(compactLayout(rowsOf, room, 0), 0, false);
+    else
+      for (let c = 28; c >= 14; c -= 2) {
+        const cw = cc.cols * c;
+        const ch = cc.rows * c * 1.5;
+        if (ch <= room.h) consider(compactLayout(rowsOf, room, cw + 20), c, true);
+        if (cw <= room.w) consider(compactLayout(rowsOf, { w: room.w, h: room.h - ch - 12 }, 0), c, false);
+      }
+    const chosen = best as { fit: MatLayout; cell: number; beside: boolean } | null;
+    if (chosen) {
+      fit = chosen.fit;
+      beside = chosen.beside;
+      if (cc) cellW = chosen.cell;
+    }
+  }
   const u = fit.u;
+  const lab = fit.bands > 1 ? 0 : lab0;
   const plateU = Math.max(2, Math.floor(u * 0.7));
-  const headH = HEAD_H;
+  const headH = fit.headH;
+  const compact = headH !== HEAD_H;
   const matW = m.mat ? fit.w : 0;
-  const matH = m.mat ? fit.h + HEAD_H + COUNT_H : 0;
+  const matH = m.mat ? fit.h + headH + fit.countH : 0;
   const plates = k > 0 && m.mat ? fit.plateH + 14 : 0;
   // The mat and the plates under it share a width (the plates' row may be the wider); each is centred in it.
   const figW = m.mat ? Math.max(fit.w, fit.platesW) + lab : 0;
   const mx = lab + Math.round((figW - lab - matW) / 2);
   const colW = cc ? cc.cols * cellW : 0;
   const colH = cc ? cc.rows * cellW * 1.5 : 0;
-  const contentW = wide ? figW + (cc ? colW + (m.mat ? 40 : 0) : 0) : Math.max(figW, colW);
-  const contentH = wide ? Math.max(matH + plates, colH) : matH + plates + (cc ? colH + (m.mat ? 20 : 0) : 0);
+  const sideGap = wide ? 40 : 20;
+  const contentW = beside ? figW + (cc ? colW + (m.mat ? sideGap : 0) : 0) : Math.max(figW, colW);
+  const contentH = beside ? Math.max(matH + plates, colH) : matH + plates + (cc ? colH + (m.mat ? (compact ? 12 : 20) : 0) : 0);
   const x0 = Math.round(box.x + (box.w - contentW) / 2);
   const y0 = Math.round(box.y + Math.max(0, (box.h - contentH) / 2));
   const focus: PlaceKey | null = m.focus ?? (column ? columnFocus(column) : null) ?? (m.trade ? tradeOf(m.trade).from : null);
@@ -242,12 +322,23 @@ export function BlocksModel(p: BlocksModelProps) {
       out.push(
         <g key={`col${place}`} className="ms-mat__col" data-lit={focus === place || undefined}>
           <rect className="ms-mat__band" x={cx} y={y0} width={c.w} height={matH} />
-          <text className="ms-mat__head" x={cx + c.w / 2} y={y0 + 15} textAnchor="middle">
-            {t('en', `math.blocks.${place}`).toLocaleUpperCase('en')}
-          </text>
-          <text className="ms-mat__head ms-mat__head--zh" x={cx + c.w / 2} y={y0 + 29} textAnchor="middle" lang="zh-Hans">
-            {t('zh', `math.blocks.${place}`)}
-          </text>
+          {compact ? (
+            <text className="ms-mat__head" x={cx + c.w / 2} y={y0 + 14} textAnchor="middle">
+              {t('en', `math.blocks.${place}`).charAt(0).toLocaleUpperCase('en')}
+              <tspan className="ms-mat__head--zh" dx={3} lang="zh-Hans">
+                {t('zh', `math.blocks.${place}`)}
+              </tspan>
+            </text>
+          ) : (
+            <>
+              <text className="ms-mat__head" x={cx + c.w / 2} y={y0 + 15} textAnchor="middle">
+                {t('en', `math.blocks.${place}`).toLocaleUpperCase('en')}
+              </text>
+              <text className="ms-mat__head ms-mat__head--zh" x={cx + c.w / 2} y={y0 + 29} textAnchor="middle" lang="zh-Hans">
+                {t('zh', `math.blocks.${place}`)}
+              </text>
+            </>
+          )}
           {live && (
             <rect
               className="ms-mat__hit"
@@ -270,11 +361,14 @@ export function BlocksModel(p: BlocksModelProps) {
         </g>,
       );
     });
-    // Blocks, row by row (one row per copy of a ×).
-    let ry = y0 + headH + 6;
+    // Blocks, row by row (one row per copy of a ×; on a short stage the rows wrap into groups side by side).
+    const perLine = Math.ceil(rowsOf.length / fit.bands);
+    const lineH = rowHeight(rowsOf[0]!, u, rowsOf.length > 1) + rowGap(u);
     rowsOf.forEach((row, ri) => {
       const rowH = rowHeight(row, u, rowsOf.length > 1);
-      if (rowsOf.length > 1)
+      const band = Math.floor(ri / perLine);
+      const ry = rowsOf.length > 1 ? y0 + headH + 6 + (ri % perLine) * lineH : y0 + headH + 6;
+      if (rowsOf.length > 1 && fit.bands === 1)
         out.push(
           <text key={`x${ri}`} className="ms-mat__rowno" x={x0 + mx - 8} y={ry + Math.min(rowH, 10 * u) / 2 + 4} textAnchor="end">
             ×{ri + 1}
@@ -282,7 +376,8 @@ export function BlocksModel(p: BlocksModelProps) {
         );
       PLACES.forEach((place) => {
         const c = fit.cols[place];
-        const pad = Math.round((c.w - columnSize(place, Math.max(row[place], 1), u).w) / 2);
+        const gw = groupW(place, row[place], u);
+        const pad = Math.round((c.w - fit.bands * gw - (fit.bands - 1) * bandGap(u)) / 2) + band * (gw + bandGap(u));
         for (let i = 0; i < row[place]; i++) {
           // Rows of a × share one numbering per place, so pushing them together moves each block.
           const index = rowsOf.slice(0, ri).reduce((s, r) => s + r[place], 0) + i;
@@ -314,14 +409,13 @@ export function BlocksModel(p: BlocksModelProps) {
           }
         }
       });
-      ry += rowH + rowGap(u);
     });
     // The count under each column.
     PLACES.forEach((place) => {
       const c = fit.cols[place];
       const n = rowsOf.reduce((s, r) => s + r[place], 0);
       out.push(
-        <text key={`n${place}`} className="ms-mat__count" x={x0 + mx + c.x + c.w / 2} y={y0 + matH - 8} textAnchor="middle" aria-hidden="true">
+        <text key={`n${place}`} className="ms-mat__count" x={x0 + mx + c.x + c.w / 2} y={y0 + matH - (compact ? 5 : 8)} textAnchor="middle" aria-hidden="true">
           {rowsOf.length > 1 ? `${rowsOf[0]![place]} × ${rowsOf.length}` : n}
         </text>,
       );
@@ -350,8 +444,8 @@ export function BlocksModel(p: BlocksModelProps) {
     }
   }
   if (column && cc) {
-    const cx = wide ? x0 + figW + (m.mat ? 40 : 0) : x0 + (contentW - colW) / 2;
-    const cy = wide ? y0 + Math.max(0, (Math.max(matH + plates, colH) - colH) / 2) : y0 + matH + plates + (m.mat ? 20 : 0);
+    const cx = beside ? x0 + figW + (m.mat ? sideGap : 0) : x0 + (contentW - colW) / 2;
+    const cy = beside ? y0 + Math.max(0, (Math.max(matH + plates, colH) - colH) / 2) : y0 + matH + plates + (m.mat ? (compact ? 12 : 20) : 0);
     out.push(<ColumnWorking key="col" spec={column} x={cx} y={cy} cell={cellW} focus={focus} />);
   }
   if (p.ghost && task?.kind === 'regroup') {

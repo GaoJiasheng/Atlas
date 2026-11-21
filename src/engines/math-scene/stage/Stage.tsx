@@ -252,8 +252,8 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
     return <Timeline defs={defs} box={area} model={m} locale={locale} label={label} task={live} state={live ? state : null} ghost={ghost && live ? solvedState(live) : null} />;
   }
 
-  /* choose: picture or number cards on the stage, sentences in the tray */
-  if (task.kind === 'choose') {
+  /* choose: picture or number cards on the stage, sentences in the tray (a choice in words draws its model below, as a picture) */
+  if (task.kind === 'choose' && pictures) {
     const letters = 'ABCDEFG';
     const cells: OptionCell[] = task.options
       .map((o, i) => ({ o, letter: letters[i]! }))
@@ -302,7 +302,6 @@ function TaskModel(p: StageContentProps & { task: Task; state: TaskState; view: 
           return <SvgFrac cx={b.x + b.w / 2} cy={b.y + b.h / 2 - 8} n={v.n} d={v.d} w={v.w} size={clamp(b.h / 4, 18, 40)} className="ms-option__frac" />;
         },
       }));
-    if (cells.length === 0) return null;
     // Angles as pictures: one scale for all (long arms look long, a small turn looks small).
     const anglePics = task.options.flatMap((o) => (o.model?.kind === 'angle' ? angleItems(o.model) : []));
     if (anglePics.length > 0) {

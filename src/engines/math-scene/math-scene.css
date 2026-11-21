@@ -3449,6 +3449,27 @@
     line-height: 1.15;
     white-space: normal;
   }
+  /* Six or more of them (share and trade each of three places): three to a row. */
+  .ms-tray-dock .ms-tray__row--wrap:has(> :is([data-dshare], [data-dtrade], [data-share], [data-trade])):has(> .ms-btn:nth-of-type(6)) > .ms-btn {
+    flex-basis: 30%;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+  /* Two or three steppers (shade a decimal: 0.1 · 0.01 · 0.001) side by side, each place's value over its − and +. */
+  .ms-tray-dock .ms-tray__row--wrap:has(> .ms-gstep + .ms-gstep) > .ms-gstep {
+    display: grid;
+    flex: 0 0 auto;
+    grid-template-columns: repeat(2, minmax(var(--hit), 1fr));
+    gap: 2px 4px;
+  }
+  .ms-tray-dock .ms-tray__row--wrap:has(> .ms-gstep + .ms-gstep) > .ms-gstep > .ms-tray__count {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
   /* Answered, the keypad has nothing left to do: its row goes back to the stage. */
   .ms-tray-dock .ms-keypad:not(:has(.ms-key:enabled)) {
     display: none;
