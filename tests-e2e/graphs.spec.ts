@@ -111,7 +111,12 @@ test.describe('graphs (MathScene charts)', () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
     await force(page, 'line-graphs', 1);
     await expect(page.locator('.ms-tray-dock [data-hud-panel="task"]')).toBeVisible();
-    for (const b of await page.locator('.ms-svg .ms-chart__point[role="button"] .ms-chart__hit').all()) {
+    // The points are buttons (and have a hit box) only once the forced check is the task on show;
+    // `.all()` snapshots the count at once, so wait for all six first instead of racing the swap.
+    await expect.poll(async () => (await info(page)).id).not.toBeNull();
+    const hits = page.locator('.ms-svg .ms-chart__point[role="button"] .ms-chart__hit');
+    await expect(hits).toHaveCount(6);
+    for (const b of await hits.all()) {
       const r = (await b.boundingBox())!;
       expect(Math.min(r.width, r.height)).toBeGreaterThanOrEqual(43.5);
     }

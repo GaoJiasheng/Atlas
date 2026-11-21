@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
-import { Mesh, Vector3 } from 'three';
+import { Mesh } from 'three';
 
 async function asset(name: string) {
   const bytes=fs.readFileSync(`public/models/${name}.glb`);
@@ -11,16 +11,23 @@ async function asset(name: string) {
 }
 describe('muscles round two runtime equipment assets',()=>{
   it('decodes every actual runtime mesh with complete finite vertex buffers and valid indices',async()=>{
+    // Plain loops over the typed arrays with one assertion per mesh: an expect() per vertex made this test
+    // the slowest in the suite (and past the default 5 s under load). The decode itself is the real work.
     for(const file of ['muscles-core-gym','muscles-back-pulldown','muscles-core-linea']){
       const gltf=await asset(file);let count=0;
       gltf.scene.traverse(o=>{if(!(o instanceof Mesh))return;count++;
         const g=o.geometry,p=g.getAttribute('position'),n=g.getAttribute('normal');
-        expect(n.count).toBe(p.count);expect(Array.from(p.array).every(Number.isFinite)).toBe(true);expect(Array.from(n.array).every(Number.isFinite)).toBe(true);
-        expect(g.index).not.toBeNull();expect(Array.from(g.index!.array as ArrayLike<number>).every(i=>i>=0&&i<p.count)).toBe(true);
-        for(let i=0;i<n.count;i++)expect(new Vector3().fromBufferAttribute(n,i).length()).toBeGreaterThan(.9);
+        expect(n.count,`${file}/${o.name} normal count`).toBe(p.count);
+        let badFinite=0,badIndex=0,badNormal=0;
+        for(const v of p.array)if(!Number.isFinite(v))badFinite++;
+        for(const v of n.array)if(!Number.isFinite(v))badFinite++;
+        expect(g.index,`${file}/${o.name} index`).not.toBeNull();
+        {const ix=g.index!.array;for(let k=0;k<ix.length;k++)if(!(ix[k]>=0&&ix[k]<p.count))badIndex++;}
+        for(let i=0;i<n.count;i++){const x=n.getX(i),y=n.getY(i),z=n.getZ(i);if(!(Math.hypot(x,y,z)>.9))badNormal++;}
+        expect({badFinite,badIndex,badNormal},`${file}/${o.name}`).toEqual({badFinite:0,badIndex:0,badNormal:0});
       });expect(count).toBeGreaterThan(0);
     }
-  });
+  },30_000);
   it('keeps rack height fitting in its saved vertex weights, with the liner exactly 14mm below the bar',async()=>{
     const gltf=await asset('muscles-core-gym');gltf.scene.updateMatrixWorld(true);
     const mesh=gltf.scene.getObjectByName('rack') as Mesh,g=mesh.geometry.clone().applyMatrix4(mesh.matrixWorld),p=g.getAttribute('position'),fit=g.getAttribute('_fit');
