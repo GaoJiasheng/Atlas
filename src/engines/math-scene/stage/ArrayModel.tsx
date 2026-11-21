@@ -238,15 +238,23 @@ function GroupLayer({ model: m, box, task, state, editable, act, ghost, locale, 
   const slots = groups.length + (pack && live && groups.length < MAX_GROUPS ? 1 : 0);
   const cap = Math.max(task.k, target.each, ...groups, 1);
   const pk = packOf(Math.min(cap, 12));
-  const size = clamp(Math.min(box.w / (Math.max(slots, 3) * (pk.cols + 1.4) * 1.25 + 2), box.h / ((pk.rows + 1.6) * 1.25 + Math.sqrt(task.total) * 1.2 + 4)), 22, 56);
-  const gap = size * 1.25;
-  const cw = pk.cols * gap;
-  const ch = pk.rows * gap;
   const perRow = slots > 6 ? Math.ceil(slots / 2) : Math.max(1, slots);
-  const pitch = cw + size * 1.6;
-  const trayW = Math.min(box.w - 20, Math.max(perRow * pitch, Math.max(6, Math.sqrt(task.total) * 1.9) * gap));
-  const trayH = Math.min(box.h * 0.38, Math.max(gap * 2.2, (Math.ceil(task.total / Math.max(1, Math.floor(trayW / gap))) + 0.6) * gap));
-  const totalH = trayH + 30 + Math.ceil(slots / perRow) * (ch + size * 2);
+  const lay = (size: number) => {
+    const gap = size * 1.25;
+    const cw = pk.cols * gap;
+    const ch = pk.rows * gap;
+    const pitch = cw + size * 1.6;
+    const trayW = Math.min(box.w - 20, Math.max(perRow * pitch, Math.max(6, Math.sqrt(task.total) * 1.9) * gap));
+    const trayH = Math.min(box.h * 0.38, Math.max(gap * 2.2, (Math.ceil(task.total / Math.max(1, Math.floor(trayW / gap))) + 0.6) * gap));
+    const totalH = trayH + 30 + Math.ceil(slots / perRow) * (ch + size * 2);
+    // What is drawn: the tray's rim 6 px above it down to the last row's counts, 27 px under its containers.
+    return { size, gap, cw, ch, pitch, trayW, trayH, totalH, drawnH: totalH - size * 2 + 33 };
+  };
+  // Sized from the box, then smaller again while what is drawn still outgrows it (a phone's short stage above the docked tray), down
+  // to 14 px a thing.
+  let shown = lay(clamp(Math.min(box.w / (Math.max(slots, 3) * (pk.cols + 1.4) * 1.25 + 2), box.h / ((pk.rows + 1.6) * 1.25 + Math.sqrt(task.total) * 1.2 + 4)), 22, 56));
+  for (let i = 0; i < 3 && shown.drawnH > box.h && shown.size > 14; i++) shown = lay(Math.max(14, (shown.size * box.h) / shown.drawnH));
+  const { size, gap, cw, ch, pitch, trayW, trayH, totalH } = shown;
   const x0 = box.x + (box.w - Math.max(trayW, perRow * pitch)) / 2;
   const y0 = box.y + Math.max(0, (box.h - totalH) / 2);
   const looseCols = Math.max(1, Math.floor((trayW - 8) / gap));
@@ -350,7 +358,10 @@ function ArrangeLayer({ model: m, box, task, state, editable, act, ghost, locale
   const live = !!editable;
   const R = Math.min(12, Math.max(task.rows, task.cols) + 3);
   const C = R;
-  const size = clamp(Math.min((box.w - 120) / (C * 1.25), (box.h - 80) / (R * 1.25), (box.h * ARRAY_SHARE * 1.3) / (R * 1.25)), 18, 64);
+  // At least 18 px a dot, or less (down to 12) where the dot paper would not fit the height at that: a phone's short stage above
+  // the docked tray still holds all of it.
+  const least = clamp((box.h - 30) / (R * 1.25), 12, 18);
+  const size = clamp(Math.min((box.w - 120) / (C * 1.25), (box.h - 80) / (R * 1.25), (box.h * ARRAY_SHARE * 1.3) / (R * 1.25)), least, 64);
   const gap = size * 1.25;
   const x0 = box.x + (box.w - C * gap) / 2 + 30;
   const y0 = box.y + (box.h - R * gap) / 2 + 12;

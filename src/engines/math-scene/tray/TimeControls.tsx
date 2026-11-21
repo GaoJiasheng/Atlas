@@ -84,8 +84,10 @@ export function HopChips({ task, state, ctl, locale, locked }: { task: Task; sta
             </button>
           );
         })}
-        <button type="button" className="ms-btn ms-btn--ghost" data-unhop="" disabled={state.hops.length === 0} onClick={() => ctl.act({ do: 'unhop' })}>
-          {T('math.tray.unhop')}
+        {/* The short name on a short phone's docked tray (math-scene.css), where it shares the answer boxes' row. */}
+        <button type="button" className="ms-btn ms-btn--ghost" data-unhop="" aria-label={T('math.tray.unhop')} disabled={state.hops.length === 0} onClick={() => ctl.act({ do: 'unhop' })}>
+          <span className="ms-unhop__long">{T('math.tray.unhop')}</span>
+          <span className="ms-unhop__short">{T('math.tray.unhopShort')}</span>
         </button>
       </div>
       <span className="ms-tray__note">{T('math.tray.hopsNote')}</span>

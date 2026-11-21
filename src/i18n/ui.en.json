@@ -849,6 +849,7 @@
   "math.tray.hopOn": "Jump on {d}",
   "math.tray.hopBack": "Jump back {d}",
   "math.tray.unhop": "Take back the last jump",
+  "math.tray.unhopShort": "Take back",
   "math.tray.hops": "Jumps on the timeline",
   "math.tray.hopsNote": "Jump if it helps; only the answer is checked.",
   "math.card.set": "On the clock",

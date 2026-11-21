@@ -32,6 +32,9 @@ export interface StageLayout {
 export type LayoutMode = 'hud' | 'bare' | 'present';
 
 const PAD = 14;
+/** Below this stage width (a phone), the gap kept between the model and the docked tray, and the HUD panels above it. */
+const PHONE = 760;
+const PHONE_GAP = 8;
 
 const visible = (el: Element) => {
   const r = el.getBoundingClientRect();
@@ -59,8 +62,11 @@ function measure(root: HTMLElement, mode: LayoutMode, tray: HTMLElement | null):
       dockGap = Math.max(0, S.bottom - dock.getBoundingClientRect().top + rowGap);
     }
   }
-  // The docked tray (below 1024 px) is the floor.
-  if (tray && mode !== 'present' && visible(tray)) floor = Math.min(floor, tray.getBoundingClientRect().top - S.top - PAD);
+  // The docked tray (below 1024 px) is the floor. On a phone the model keeps a closer gap to the tray and to the HUD above it: the
+  // stage left there is short.
+  const docked = !!tray && mode !== 'present' && visible(tray);
+  const gap = docked && W < PHONE ? PHONE_GAP : PAD;
+  if (docked) floor = Math.min(floor, tray.getBoundingClientRect().top - S.top - gap);
 
   // Obstacles: the HUD columns (title, rail, card, control panel), or the presentation's title and caption card.
   const obstacles: { r: DOMRect; side: 'left' | 'right'; tab?: boolean }[] = [];
@@ -81,7 +87,7 @@ function measure(root: HTMLElement, mode: LayoutMode, tray: HTMLElement | null):
   }
   // In stage coordinates from here on.
   const panels: Panel[] = obstacles.map(({ r, side, tab }) => ({ x: r.left - S.left, y: r.top - S.top, w: r.width, h: r.height, side, ...(tab ? { tab } : {}) }));
-  return { w: W, h: H, free: freeRect(W, floor, panels, mode), dock: dockGap, obstacles: panels.map((o) => ({ x: o.x - PAD, y: o.y - PAD, w: o.w + 2 * PAD, h: o.h + 2 * PAD })), floor };
+  return { w: W, h: H, free: freeRect(W, floor, panels, mode, gap), dock: dockGap, obstacles: panels.map((o) => ({ x: o.x - PAD, y: o.y - PAD, w: o.w + 2 * PAD, h: o.h + 2 * PAD })), floor };
 }
 
 /** A HUD panel on the stage (stage coordinates) and the column it belongs to. */
@@ -94,15 +100,15 @@ export interface Panel extends Rect {
 /**
  * The model's rectangle on a stage `W` wide above `floor`, clear of the panels by PAD: the largest of between the two columns,
  * under both, and (with the HUD) under the column that ends higher beside the other one, judged by area with the width capped at
- * 2.2 × the height (a model wants width more than height).
+ * 2.2 × the height (a model wants width more than height). `under` is the gap kept below a panel.
  */
-export function freeRect(W: number, floor: number, panels: readonly Panel[], mode: LayoutMode): Rect {
+export function freeRect(W: number, floor: number, panels: readonly Panel[], mode: LayoutMode, under = PAD): Rect {
   const top = PAD;
   const lefts = panels.filter((o) => o.side === 'left');
   const rights = panels.filter((o) => o.side === 'right');
   const leftEdge = Math.max(PAD, ...lefts.map((o) => o.x + o.w + PAD));
   const rightEdge = Math.min(W - PAD, ...rights.map((o) => o.x - PAD));
-  const bottomOf = (os: readonly Panel[]) => Math.max(top, ...os.map((o) => o.y + o.h + PAD));
+  const bottomOf = (os: readonly Panel[]) => Math.max(top, ...os.map((o) => o.y + o.h + under));
   // Presenting, only the title block stands in the way: keep the model centred on the screen.
   const right = mode === 'present' ? Math.min(rightEdge, W - leftEdge) : rightEdge;
   const rect = (x: number, y: number, x2: number): Rect => ({ x, y, w: Math.max(0, x2 - x), h: Math.max(0, floor - y) });

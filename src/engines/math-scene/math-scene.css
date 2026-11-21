@@ -23,11 +23,18 @@
       "dock dock";
   }
 }
-/* A short phone with the check tray docked: the title stays, its chapter squares fold away (the chapter bar still takes the
-   reader to any chapter) and the stage above the tray takes their room; they come back when the tray leaves (docs/08 §2). */
+/* A short phone with a check to answer in the docked tray: its chapter squares and the top bar's status line fold away (the chapter
+   bar still takes the reader to any chapter; the tray says it is a check) and the stage above the tray takes their room; they come
+   back once the check is answered or the tray leaves. While the tray is docked the title keeps to one line, its plate line cut
+   short (docs/08 §2). */
 @media (max-width: 759px) and (max-height: 760px) {
-  .atlas-scene[data-engine="math-scene"][data-task-docked] .atlas-hud__left .atlas-rail {
+  .atlas-scene[data-engine="math-scene"][data-check-open] :is(.atlas-hud__left .atlas-rail, .atlas-topbar__sub) {
     display: none;
+  }
+  .atlas-scene[data-engine="math-scene"][data-task-docked] .atlas-hud__left .atlas-title__kick {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 /* The left column (title block, chapter rail, plate) gives way to the band rather than run under it. */
@@ -2790,6 +2797,9 @@
 .ms-hops .ms-chips {
   flex-wrap: wrap;
 }
+.ms-unhop__short {
+  display: none;
+}
 .ms-chip--hop {
   font: 600 15px / 1 var(--font-mono);
   white-space: nowrap;
@@ -3394,6 +3404,72 @@
   }
   .ms-tray-dock .ms-input--table .ms-input__eq {
     font: 500 13px / 1.2 var(--font-hud);
+  }
+}
+/* A short phone (≤ 760 px high): the docked tray gives the stage above it whole rows (docs/08 §2). Rows a little closer; the answer
+   boxes share a row with the tool before them ("take back", the towers' count and "Start again"); every target stays ≥ 44 px. */
+@media (max-width: 759px) and (max-height: 760px) {
+  .ms-tray-dock .ms-tray {
+    gap: 4px;
+    padding: 5px 8px;
+  }
+  .ms-tray-dock :is(.ms-tray__controls, .ms-input) {
+    gap: 4px 8px;
+  }
+  .ms-tray-dock .ms-tray__controls > .ms-evenout {
+    display: contents;
+  }
+  .ms-tray-dock .ms-evenout > .ms-tray__help {
+    flex: 1 0 100%;
+  }
+  .ms-tray-dock .ms-tray__prompt {
+    line-height: 1.22;
+  }
+  .ms-tray-dock .ms-hops {
+    display: contents;
+  }
+  .ms-tray-dock .ms-hops [data-unhop] {
+    padding: 0 12px;
+  }
+  .ms-tray-dock .ms-unhop__long {
+    display: none;
+  }
+  .ms-tray-dock .ms-unhop__short {
+    display: inline;
+  }
+  .ms-tray-dock .ms-unit {
+    min-width: var(--hit);
+    padding: 0 10px;
+  }
+  /* The buttons that share and trade each place (four or more of them): two to a row, a long name on two lines. */
+  .ms-tray-dock .ms-tray__row--wrap:has(> :is([data-dshare], [data-dtrade], [data-share], [data-trade])):has(> .ms-btn:nth-of-type(4)) > .ms-btn {
+    flex: 1 1 40%;
+    min-width: 0;
+    padding: 0 10px;
+    line-height: 1.15;
+    white-space: normal;
+  }
+  /* Answered, the keypad has nothing left to do: its row goes back to the stage. */
+  .ms-tray-dock .ms-keypad:not(:has(.ms-key:enabled)) {
+    display: none;
+  }
+}
+/* …and wide enough for seven keys to a row: the jumps' note fills the end of the keypad's second row (eleven keys, the keypad last). */
+@media (min-width: 366px) and (max-width: 759px) and (max-height: 760px) {
+  .ms-tray-dock .ms-keypad {
+    width: calc(7 * var(--hit) + 6 * 4px);
+  }
+  .ms-tray-dock .ms-tray__controls:has(> .ms-hops):has(.ms-keypad:not([data-point])) {
+    position: relative;
+  }
+  .ms-tray-dock .ms-tray__controls:has(.ms-keypad:not([data-point])) > .ms-hops > .ms-tray__note {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 4 * var(--hit) - 3 * 4px - 10px);
+    height: var(--hit);
   }
 }
 .ms-key--point {

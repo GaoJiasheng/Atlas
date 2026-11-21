@@ -849,6 +849,7 @@
   "math.tray.hopOn": "往后跳 {d}",
   "math.tray.hopBack": "往回跳 {d}",
   "math.tray.unhop": "收回最后一跳",
+  "math.tray.unhopShort": "收回",
   "math.tray.hops": "在时间线上跳",
   "math.tray.hopsNote": "需要的话就跳一跳；只检查写下的答案。",
   "math.card.set": "钟面上",

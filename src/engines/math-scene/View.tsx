@@ -53,6 +53,7 @@ import { solidName } from './lib/net-description';
 import { isDecimalModel } from './lib/decimal-tasks';
 import { beatCounts, beatFraction, beatPair, beatShape, beatTime } from './stage/beat-info';
 import { spanAt, useStageLayout, type LayoutMode, type Rect } from './stage/layout';
+import { fitTransform, paintedBox } from './stage/fit';
 import { partsAreNarrow } from './tray/parts';
 import { Card, CARD_TITLE, cardKindOf, type CardKind } from './hud/cards';
 import { anglePlateRows, decimalPlateRows, measurePlateRows, netPlateRows, valuePlateRows } from './hud/plate';
@@ -114,6 +115,12 @@ const NARROW_STAGE = 860;
 const EQUATION_H = 58;
 /** A phone's free stage above the docked tray shorter than this keeps no number sentence under the model (its 44 px fold is the model's). */
 const SHORT_STAGE = 180;
+/**
+ * Checks whose drawing may be shrunk to fit a phone's stage (stage/fit.ts): nothing on it is placed by the pointer's position
+ * (only read, or tapped as a whole part), so a scaled drawing answers taps as it did.
+ */
+const SCALED_KINDS: ReadonlySet<string> = new Set(['input', 'choose', 'order']);
+const SCALED_MODELS: ReadonlySet<string> = new Set(['blocks', 'money', 'place-value', 'decimal-grid', 'chart']);
 /** Space kept between the card's edge tab and the docked tray under it. */
 const TAB_GAP = 8;
 /** Height of a net's FOLD slider and turn buttons at the stage's bottom right (docs/39 §3.5). */
@@ -304,6 +311,7 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
 
   // The docked tray's band in the HUD grid (math-scene.css): the left and right columns end above it.
   const docked = sheet && !presenting && !(practice && u.summary) && !!task && !!run;
+  const checkOpen = docked && !!run && !run.done && !run.revealed;
   // Measured after every render of the view, and again when the tray itself commits (`onLayout`): the tray is lazy and so
   // are the pictures in its options, so its content can arrive in a later commit of its own Suspense boundary, after the
   // view measured an empty dock. A band left at 0 then lets the PLATE run under the tray until something re-renders the view.
@@ -312,7 +320,10 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
     if (!scene) return;
     const h = docked && trayRef.current ? `${Math.ceil(trayRef.current.offsetHeight)}px` : '0px';
     if (scene.style.getPropertyValue('--task-h') !== h) scene.style.setProperty('--task-h', h);
-    // A short phone folds the title block's chapter squares while the tray is docked (math-scene.css, docs/08 §2).
+    // A short phone folds the title block's chapter squares while the docked tray holds a check still to answer; they come back
+    // once it is answered (right, or shown) or the tray leaves; the title keeps to one line while the tray is docked (math-scene.css,
+    // docs/08 §2).
+    scene.toggleAttribute('data-check-open', checkOpen);
     scene.toggleAttribute('data-task-docked', docked);
     // The card's edge tab (a phone) hangs from the HUD, not from the right column: on a short screen it ends above the tray
     // (math-scene.css), never shorter than a finger.
@@ -322,13 +333,14 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
       if (room) scene.style.setProperty('--tab-room', room);
       else scene.style.removeProperty('--tab-room');
     }
-  }, [docked]);
+  }, [docked, checkOpen]);
   useLayoutEffect(syncTaskBand);
   useEffect(() => {
     const scene = rootRef.current?.closest<HTMLElement>('.atlas-scene');
     return () => {
       scene?.style.removeProperty('--task-h');
       scene?.style.removeProperty('--tab-room');
+      scene?.removeAttribute('data-check-open');
       scene?.removeAttribute('data-task-docked');
     };
   }, []);
@@ -346,7 +358,13 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const phoneReading = sheet && L.w < 760 && task?.kind === 'read-scale';
   // A short phone with the check tray docked (its keypad up): the stage left above the tray is the model's alone.
   const phoneShort = docked && L.w < 760 && L.free.h > 0 && L.free.h < SHORT_STAGE;
-  const equation = phoneReading || phoneShort ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
+  // A phone's check whose drawing outgrows the stage above the docked tray (a model at its least size) is shrunk to fit, or not
+  // drawn when that would leave it too small to read; the number sentence under it gives way first (`crowded`, for this check on
+  // this stage). Only drawings the child does not point into: a model dragged or tapped by position keeps its own layout.
+  const fitting = docked && L.w < 760 && !!task && (SCALED_KINDS.has(task.kind) || SCALED_MODELS.has(task.model.kind));
+  const crowdKey = fitting ? `${task.id}|${Math.round(L.free.w)}|${Math.round(L.free.h)}` : '';
+  const [crowded, setCrowded] = useState('');
+  const equation = phoneReading || phoneShort || (fitting && crowded === crowdKey) ? null : explain ? (explain.equation ?? (explain.words ? tx(explain.words, locale) : null)) : task && run && !practice ? (workingLines(task, run.state, locale, run.done, lesson.notation).at(-1) ?? null) : null;
 
   /* ---------- a net's FOLD slider and turns (docs/39 §3.5): this beat's or this check's, gone on the next ---------- */
   const netAt = `${s.chapter}|${cur.beat}|${task?.id ?? ''}`;
@@ -377,6 +395,35 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const toolsH = netTools ? 44 + (legendsOpen ? NET_TOOLS_H : 0) : 0;
   const equationH = equation ? (presenting ? 0 : 44) + (presenting || legendsOpen ? EQUATION_H : 0) : 0;
   const modelBox: Rect = { ...L.free, h: Math.max(0, L.free.h - equationH - toolsH) };
+  const fitRef = useRef<SVGGElement>(null);
+  useLayoutEffect(() => {
+    const g = fitRef.current;
+    if (!g) return;
+    const refit = () => {
+      g.removeAttribute('transform');
+      g.style.removeProperty('display');
+      const painted = fitting ? paintedBox(g) : null;
+      if (!painted) return;
+      if (equation && painted.y + painted.h > modelBox.y + modelBox.h + 1) {
+        setCrowded(crowdKey);
+        return;
+      }
+      const fit = fitTransform(painted, modelBox);
+      if (fit === null) g.style.display = 'none';
+      else if (fit) g.setAttribute('transform', fit);
+    };
+    // A drawing still moving in (its bars rising, its parts sliding) is measured where it comes to rest.
+    const moving = fitting ? (g.parentElement?.getAnimations({ subtree: true }) ?? []).filter((a) => a.playState === 'running' && a.effect?.getTiming().iterations !== Infinity) : [];
+    if (moving.length === 0) {
+      refit();
+      return;
+    }
+    let live = true;
+    void Promise.allSettled(moving.map((a) => a.finished)).then(() => live && refit());
+    return () => {
+      live = false;
+    };
+  });
   // The sentence sits right under the drawing (its bounding box), not at the foot of the free rectangle.
   const drawingRef = useRef<SVGGElement>(null);
   const [, setStageVersion] = useState(0);
@@ -613,7 +660,9 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
             </g>
           ) : (
             <g ref={drawingRef} key={task?.id ?? 'none'} className="ms-beat" data-move="morph">
-              <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} net={netHold} />
+              <g ref={fitRef}>
+                <StageContent onReady={stageReady} defs={defs} box={modelBox} locale={locale} modes={modes} task={task} state={run?.state ?? null} run={run} view={view} editable={!practiceLocked && !!run && !run.done} ctl={ctl} net={netHold} />
+              </g>
             </g>
           ))}
         {u.pulse > 0 && !showSummary && !explain && <rect key={u.pulse} className="ms-pulse" x={L.free.x - 6} y={L.free.y - 6} width={L.free.w + 12} height={L.free.h + 12} />}

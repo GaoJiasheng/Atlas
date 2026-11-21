@@ -23,6 +23,7 @@ import { t, tx } from '../../../i18n';
 import { NotationContext } from '../../../lib/rich-text';
 import type { BeatMove, Task, TimelineSpec } from '../schema';
 import type { TaskState } from '../lib/state';
+import { solvedState } from '../lib/solve';
 import { hopArcs, hopEnd, hopStart, hourMarks, jumpLabel, labelEvery, minorMarks, minorOf, markRows, placeJumpLabels, rangeOf, type LabelBox } from '../lib/timeline';
 import { ampmText, clockParts, clockText, DAY, durationText, HOUR, naturalUnits } from '../lib/value';
 import { ClockModel } from './ClockModel';
@@ -46,6 +47,10 @@ const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v
 /** The clock above the line: the gap under it, and the smallest it is still worth drawing. */
 const CLOCK_GAP = 14;
 const CLOCK_MIN = 84;
+/** The highest a jump's arc rises on a short stage. */
+const TIGHT_ARC = 18;
+/** The most a tight drawing raises its marks' times when it has height to spare. */
+const TIGHT_LIFT = 16;
 /** About how wide a text is: `perChar` for Latin and digits, a full square for a Chinese character. */
 const textWidth = (s: string, perChar: number) => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 0x2e7f ? 13.5 : perChar), 0);
 
@@ -56,58 +61,75 @@ export function Timeline(p: TimelineProps) {
   const r = rangeOf(m);
   // The clock beside the line when there is room for both; otherwise above it (below).
   const clockSide = m.clock && box.w >= 560 ? Math.floor(clamp(Math.min(box.h * 0.62, box.w * 0.3), 90, 340)) : 0;
-  const left = box.x + (clockSide ? clockSide + 48 : 50);
-  const right = box.x + box.w - 40;
-  const width = clockSide ? right - left : Math.min(right - left, 1300);
-  const x0 = clockSide ? left : box.x + (box.w - width) / 2;
-  const X = (t: number) => x0 + ((t - r.from) / Math.max(1, r.to - r.from)) * width;
   const both = m.labels === 'both' && !r.duration;
   const out: ReactNode[] = [];
   const under: ReactNode[] = [];
   const live = p.task?.kind === 'duration' && p.state ? p.task : null;
-  const arcMax = clamp(box.h * (m.clock && !clockSide ? 0.12 : 0.22), 24, 64);
-  const arcH = (a: number, b: number) => clamp(Math.abs(X(b) - X(a)) * 0.45, 14, arcMax);
   const hours = hourMarks(r);
-  const every = labelEvery(r, width, m.labels === '12h' ? 40 : 58);
-  const labelledHours = hours.filter((t) => ((t - (hours[0] ?? 0)) / HOUR) % every === 0);
-
-  /* The jumps' labels, clear of the hour labels and of each other. */
   const hourHalf = r.duration ? 14 : m.labels === '24h' || both ? 22 : 12;
   const twoLine = !r.duration && m.labels !== '24h';
-  const hourBoxes: LabelBox[] = labelledHours.flatMap((t) => [
-    { x0: X(t) - hourHalf, x1: X(t) + hourHalf, y0: 18, y1: twoLine ? 48 : 34 },
-    ...(both ? [{ x0: X(t) - 22, x1: X(t) + 22, y0: -32, y1: -18 }] : []),
-  ]);
   const drawnArcs = [...(m.jumps ?? []), ...(live && p.state ? hopArcs(live, p.state.hops) : [])];
-  const labelY = placeJumpLabels(
-    drawnArcs.map(([a, b]) => ({ x0: X(a), x1: X(b), rise: arcH(a, b), back: b < a, width: jumpLabel(a, b).length * 7.8 })),
-    hourBoxes,
-  );
+  // A duration check keeps room for the jumps that solve it from the start, so the drawing neither moves nor goes when the child
+  // jumps (nor when "Show me" draws them).
+  const solvedArcs = live ? [...(m.jumps ?? []), ...hopArcs(live, solvedState(live).hops)] : [];
 
   // Above the line, bottom up: the 24-hour labels (both), the arcs, then the marks' labels, then the bands' names.
   const above24 = both ? 30 : 0;
-  const forward = [...drawnArcs, ...(live && p.ghost ? hopArcs(live, p.ghost.hops) : [])].filter(([a, b]) => b > a);
-  const highestLabel = Math.max(0, ...labelY.map((v, i) => (drawnArcs[i]![1] > drawnArcs[i]![0] ? -v : 0)));
-  const maxUp = forward.length ? Math.max(Math.max(...forward.map(([a, b]) => arcH(a, b))) + 22, highestLabel + 12) : 0;
   const hasMarks = (m.marks?.length ?? 0) > 0;
-  const marksLabelled = (m.marks ?? []).some((k) => k.label);
   const markTimeText = (at: number) => (r.duration ? durationText(at, naturalUnits(at), locale, true) : clockText(at, m.labels === '24h' ? '24' : '12', notation, locale, true));
-  const rowOfMark = markRows((m.marks ?? []).map((k) => ({ x: X(k.at), width: Math.max(textWidth(markTimeText(k.at), 9.6), k.label ? textWidth(tx(k.label, locale), 7) : 0) })));
-  const markRowH = marksLabelled ? 42 : 22;
-  const markOff = above24 + Math.max(maxUp, 26) + 12;
-  const topOff = hasMarks ? markOff + Math.max(0, ...rowOfMark) * markRowH + (marksLabelled ? 22 : 0) + 18 : above24 + maxUp + 12;
-  // Below the line: the hour labels, or further when an arc going back has pushed its label past them.
-  const below = Math.max(56, ...labelY.map((v, i) => (drawnArcs[i]![1] < drawnArcs[i]![0] ? v + 8 : 0)));
-  // On a narrow stage the clock goes above the line, as large as the height left allows; with too little left, the line alone.
   const bandRoom = m.bands === 'ampm' ? 24 : 0;
-  const spare = m.clock && !clockSide ? Math.floor(Math.min(box.h - topOff - below - bandRoom - CLOCK_GAP, box.w * 0.62, 240)) : 0;
-  const clockAbove = spare >= CLOCK_MIN ? spare : 0;
-  const drop = clockAbove ? clockAbove + CLOCK_GAP + bandRoom : 0;
-  // The whole drawing (labels above, hour labels and arcs back below) centred in what is left, the line where that puts it.
-  const y = Math.round(box.y + drop + Math.max(topOff, (box.h - drop - topOff - below) / 2 + topOff));
+  // Noon or midnight on the line: its name under the morning and afternoon bands (y + 64), below the hour labels.
+  const edgeBelow = m.bands === 'ampm' && !r.duration && [0, 12 * HOUR, DAY].some((at) => at >= r.from && at <= r.to) ? 68 : 0;
+  /**
+   * The drawing laid out in this box. `tight` (a short stage, as above a phone's docked tray, where the full drawing does not fit):
+   * a longer line (the jumps' labels stack less), lower arcs, the marks' times without their words (the prompt says what they
+   * are), less margin above them and under one-line hour labels.
+   */
+  const plan = (tight: boolean) => {
+    const left = box.x + (clockSide ? clockSide + 48 : tight ? 26 : 50);
+    const right = box.x + box.w - (tight ? 26 : 40);
+    const width = clockSide ? right - left : Math.min(right - left, 1300);
+    const x0 = clockSide ? left : box.x + (box.w - width) / 2;
+    const X = (t: number) => x0 + ((t - r.from) / Math.max(1, r.to - r.from)) * width;
+    const every = labelEvery(r, width, m.labels === '12h' ? 40 : 58);
+    const labelledHours = hours.filter((t) => ((t - (hours[0] ?? 0)) / HOUR) % every === 0);
+    /* The jumps' labels, clear of the hour labels and of each other. */
+    const hourBoxes: LabelBox[] = labelledHours.flatMap((t) => [
+      { x0: X(t) - hourHalf, x1: X(t) + hourHalf, y0: 18, y1: twoLine ? 48 : 34 },
+      ...(both ? [{ x0: X(t) - 22, x1: X(t) + 22, y0: -32, y1: -18 }] : []),
+    ]);
+    const arcMax = tight ? TIGHT_ARC : clamp(box.h * (m.clock && !clockSide ? 0.12 : 0.22), 24, 64);
+    const arcH = (a: number, b: number) => clamp(Math.abs(X(b) - X(a)) * 0.45, tight ? 10 : 14, arcMax);
+    const shape = ([a, b]: [number, number]) => ({ x0: X(a), x1: X(b), rise: arcH(a, b), back: b < a, width: jumpLabel(a, b).length * 7.8 });
+    const labelY = placeJumpLabels(drawnArcs.map(shape), hourBoxes);
+    const solvedY = placeJumpLabels(solvedArcs.map(shape), hourBoxes);
+    const up = (arcs: [number, number][], ys: number[]) => Math.max(0, ...ys.map((v, i) => (arcs[i]![1] > arcs[i]![0] ? -v : 0)));
+    const down = (arcs: [number, number][], ys: number[]) => Math.max(0, ...ys.map((v, i) => (arcs[i]![1] < arcs[i]![0] ? v + 8 : 0)));
+    const forward = [...drawnArcs, ...solvedArcs].filter(([a, b]) => b > a);
+    const highestLabel = Math.max(up(drawnArcs, labelY), up(solvedArcs, solvedY));
+    const maxUp = forward.length ? Math.max(Math.max(...forward.map(([a, b]) => arcH(a, b))) + (tight ? 14 : 22), highestLabel + (tight ? 4 : 12)) : 0;
+    const worded = !tight && (m.marks ?? []).some((k) => k.label);
+    const rowOfMark = markRows((m.marks ?? []).map((k) => ({ x: X(k.at), width: Math.max(textWidth(markTimeText(k.at), 9.6), worded && k.label ? textWidth(tx(k.label, locale), 7) : 0) })));
+    const markRowH = worded ? 42 : 22;
+    const markOff = above24 + Math.max(maxUp, tight ? 20 : 26) + (tight ? 8 : 12);
+    const topOff = hasMarks ? markOff + Math.max(0, ...rowOfMark) * markRowH + (worded ? 22 : 0) + (tight ? 12 : 18) : above24 + maxUp + 12;
+    // Below the line: the hour labels, or further when an arc going back has pushed its label past them.
+    const below = Math.max(tight ? (twoLine ? 50 : 40) : 56, edgeBelow, down(drawnArcs, labelY), down(solvedArcs, solvedY));
+    // On a narrow stage the clock goes above the line, as large as the height left allows; with too little left, the line alone.
+    const spare = m.clock && !clockSide ? Math.floor(Math.min(box.h - topOff - below - bandRoom - CLOCK_GAP, box.w * 0.62, 240)) : 0;
+    const clockAbove = spare >= CLOCK_MIN ? spare : 0;
+    const drop = clockAbove ? clockAbove + CLOCK_GAP + bandRoom : 0;
+    // Tight with a little height to spare (and no clock to take it): the marks' times stand further above the jumps' labels.
+    const lift = tight && hasMarks && !drop ? clamp(box.h - topOff - below, 0, TIGHT_LIFT) : 0;
+    return { X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff: markOff + lift, topOff: topOff + lift, below, clockAbove, drop, need: Math.max(drop + topOff + below, clockSide) };
+  };
+  const full = plan(false);
+  const { X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff, topOff, below, clockAbove, drop, need } = box.h >= full.need ? full : plan(true);
   // Whole or not at all, as every model under its minimum (Stage.tsx): a line with no room for its labels is not drawn half
   // under the docked tray.
-  if (box.h < Math.max(drop + topOff + below, clockSide)) return null;
+  if (box.h < need) return null;
+  // The whole drawing (labels above, hour labels and arcs back below) centred in what is left, the line where that puts it.
+  const y = Math.round(box.y + drop + Math.max(topOff, (box.h - drop - topOff - below) / 2 + topOff));
   const markTime = y - markOff;
   const topmost = y - topOff;
 
@@ -229,7 +251,7 @@ export function Timeline(p: TimelineProps) {
         <text className="ms-tl__mark-time" x={x} y={textY} textAnchor="middle">
           {time}
         </text>
-        {mk.label && (
+        {mk.label && worded && (
           <text className="ms-tl__mark-label" x={x} y={textY - 20} textAnchor="middle">
             {tx(mk.label, locale)}
           </text>

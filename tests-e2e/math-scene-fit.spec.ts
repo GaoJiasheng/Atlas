@@ -95,37 +95,81 @@ test.describe('MathScene fit', () => {
     expect(tab.y + tab.height).toBeLessThanOrEqual(tray.y);
   });
 
-  // A short phone (≤ 760 px high) folds the title block's chapter squares while the tray is docked; the title stays. Before the
-  // fold, at 375×667 (EN): hundredths 303×121 with the grid running 1 px under the tray; the bus ride 0×97 (no width beside the
-  // squares); evening out 205×31.
-  // (ZH, a one-line title: the bus ride 233×2, evening out 233×47.)
-  for (const [locale, topic, chapter, i, id, w, h] of [
-    ['en', 'decimals', 'hundredths', 2, 'hu-write-4-hundredths', 300, 160],
-    ['en', 'telling-time', 'timetables', 1, 'tt-bus-ride', 200, 36],
-    ['zh', 'telling-time', 'timetables', 1, 'tt-bus-ride', 230, 50],
-    ['en', 'average', 'evening-out', 0, 'even-3-5-7', 200, 78],
+  // A short phone (≤ 760 px high) with a check to answer in the docked tray folds the title block's chapter squares and the top
+  // bar's status line, keeps the title on one line and packs the tray (the boxes beside "Take back" or the towers' count, seven keys
+  // to a row, the jumps' note at the end of the keys); a timeline short of room draws tight. Before, at 375×667 (EN): the bus
+  // ride's free stage 205×38 and evening out 205×81, neither drawing its model (ZH: 233×52 and 172×70).
+  const drawn = async (page: Page) => {
+    const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
+    const boxes = await page.locator('.ms-svg .ms-beat').evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).filter((r) => r.height > 0).map((r) => ({ top: r.top, bottom: r.bottom, width: r.width })));
+    return { tray, boxes };
+  };
+  /** A model is drawn and, once settled, ends at least 8 px above the tray. */
+  const drawnAbove = (page: Page) =>
+    expect.poll(async () => {
+      const { tray, boxes } = await drawn(page);
+      return boxes.length > 0 && boxes.every((b) => b.bottom <= tray.y - 8);
+    }).toBe(true);
+  for (const [locale, topic, chapter, i, id, w, h, mw, mh] of [
+    ['en', 'decimals', 'hundredths', 2, 'hu-write-4-hundredths', 300, 160, 100, 100],
+    ['en', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90],
+    ['zh', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90],
+    ['en', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90],
+    ['zh', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90],
   ] as const)
-    test(`small phone, keypad up: the chapter squares fold and the stage takes their room (${id}, ${locale})`, async ({ page }) => {
+    test(`small phone, keypad up: the stage above the tray draws the whole model (${id}, ${locale})`, async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
       await open(page, `/${locale}/topics/${topic}/?ch=${chapter}`);
       await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
       await force(page, chapter, i);
       await expect.poll(() => taskId(page)).toBe(id);
-      await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+      await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
       await expect(page.locator('.atlas-rail')).toBeHidden();
       await expect(page.locator('[data-hud-panel="title"]')).toBeVisible();
       const free = () => page.evaluate(() => (document.querySelector<HTMLElement>('.ms-root')?.dataset.stageFree ?? '0 0').split(' ').map(Number));
       await expect.poll(async () => (await free())[0]!).toBeGreaterThanOrEqual(w);
       await expect.poll(async () => (await free())[1]!).toBeGreaterThanOrEqual(h);
-      const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
-      if (id === 'hu-write-4-hundredths') {
-        const model = await rect(page.locator('.ms-svg .ms-beat'));
-        expect(model.y + model.height).toBeLessThanOrEqual(tray.y - 8);
+      // A model is drawn, whole, above the tray.
+      await drawnAbove(page);
+      const { boxes } = await drawn(page);
+      expect(Math.max(...boxes.map((b) => b.width))).toBeGreaterThanOrEqual(mw);
+      expect(Math.max(...boxes.map((b) => b.bottom)) - Math.min(...boxes.map((b) => b.top))).toBeGreaterThanOrEqual(mh);
+      // Every target in the tray stays a finger wide and high.
+      for (const b of await page.locator('.ms-tray-dock :is(button, input):visible').all()) {
+        const r = await rect(b);
+        expect(Math.min(r.width, r.height)).toBeGreaterThanOrEqual(43.5);
       }
-      // Whatever the stage draws ends above the tray: a model with too little room is not drawn at all, never half under it.
-      const bottoms = await page.locator('.ms-svg .ms-beat').evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).filter((r) => r.height > 0).map((r) => r.bottom));
-      for (const b of bottoms) expect(b).toBeLessThanOrEqual(tray.y);
     });
+
+  test('small phone: the bus ride keeps its timeline while the child jumps, and the chapter squares come back once it is answered', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await open(page, '/en/topics/telling-time/?ch=timetables');
+    await force(page, 'timetables', 1);
+    await expect.poll(() => taskId(page)).toBe('tt-bus-ride');
+    await expect(page.locator('.atlas-rail')).toBeHidden();
+    // The jumps that solve it: 13 50 → 14 00 → 15 00 → 15 05. The drawing stays, whole, above the tray.
+    for (const by of [600, 3600, 300]) {
+      await page.locator(`.ms-tray [data-hop="${by}"]`).click();
+      await drawnAbove(page);
+    }
+    // 1 h 15 min on the keypad, then Check.
+    const [hours, minutes] = await page.locator('.ms-tray .ms-box').all();
+    await hours!.click();
+    await page.locator('.ms-tray .ms-key', { hasText: /^1$/ }).click();
+    await minutes!.click();
+    for (const k of ['1', '5']) await page.locator('.ms-tray .ms-key', { hasText: new RegExp(`^${k}$`) }).click();
+    await page.locator('.ms-tray [data-command="check"]').click();
+    await expect(page.locator('.ms-tray__feedback[data-tone="correct"]')).toBeVisible();
+    // The tray stays docked with its feedback; the chapter squares are back, finger-sized, and the stage measured again.
+    await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
+    await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+    expect((await rect(page.locator('.atlas-rail__item').first())).height).toBeGreaterThanOrEqual(44);
+    const squares = await rect(page.locator('.atlas-rail'));
+    await expect.poll(async () => {
+      const { tray, boxes } = await drawn(page);
+      return boxes.every((b) => b.top >= squares.y + squares.height && b.bottom <= tray.y);
+    }).toBe(true);
+  });
 
   test('small phone: the chapter squares come back when the tray leaves, and fold again on the next check', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
@@ -153,6 +197,21 @@ test.describe('MathScene fit', () => {
     await force(page, 'hundredths', 2);
     await expect(page.locator('.ms-tray-dock .ms-tray')).toBeVisible();
     await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+  });
+
+  // Before, the bus ride's timeline went the moment the child jumped a whole hour (the jumps' labels outgrew the stage); now it
+  // keeps the room for the solving jumps from the start.
+  test('tall phone: the chapter squares stay and the bus ride keeps its timeline through the jumps', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page, '/en/topics/telling-time/?ch=timetables');
+    await force(page, 'timetables', 1);
+    await expect.poll(() => taskId(page)).toBe('tt-bus-ride');
+    await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
+    await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
+    for (const by of [600, 3600, 300]) {
+      await page.locator(`.ms-tray [data-hop="${by}"]`).click();
+      await drawnAbove(page);
+    }
   });
 
   for (const [topic, chapter] of [['measuring', 'practice'], ['telling-time', 'practice']] as const)
