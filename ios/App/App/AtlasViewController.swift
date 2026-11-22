@@ -19,9 +19,10 @@ struct AtlasDirectoryRouter: Router {
 }
 
 /// Static bundle responses carry a native-only CSP, including blob workers for MapLibre.
+/// The one network origin is the website, for recorded narration (fetched, kept, played as blob: URLs).
 final class AtlasBundleHandler: NSObject, WKURLSchemeHandler {
     private let router = AtlasDirectoryRouter(basePath: Bundle.main.resourceURL!.appendingPathComponent("public").path)
-    private let policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'self'"
+    private let policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://atlas.gavin.pub; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'self'"
 
     func webView(_ webView: WKWebView, start task: WKURLSchemeTask) {
         guard let url = task.request.url, url.host == "localhost",

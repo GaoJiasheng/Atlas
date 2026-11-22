@@ -7,8 +7,10 @@
  * background chapter keeps the core's default beat (its summary). The same
  * list, without the summary, is the chapter axis's ticks. Pure.
  */
-import type { BilingualText } from '../../../i18n';
-import type { Lesson } from '../schema';
+import { t, tx, type BilingualText, type Locale, type UiKey } from '../../../i18n';
+import { speakable } from '../../../lib/rich-text';
+import type { Chapter } from '../../core/types';
+import type { Lesson, MathChapterState } from '../schema';
 
 export interface LessonBeat {
   caption: BilingualText;
@@ -30,3 +32,15 @@ export function lessonBeats(lesson: Lesson, chapter: string, practice: boolean, 
   if (!step) return undefined;
   return [...step.beats.map((b, index): LessonBeat => ({ caption: b.caption, kind: 'explain', index })), { caption: captions.check, kind: 'check', index: step.beats.length }];
 }
+
+const both = (key: UiKey): BilingualText => ({ en: t('en', key), zh: t('zh', key) });
+
+/** The presentation adapter's `beatsOf` for this lesson: the practice chapter is the one whose state says `practice`. */
+export function lessonBeatsOf(lesson: Lesson, chapters: readonly Pick<Chapter, 'id' | 'state'>[]): (chapter: Pick<Chapter, 'id'>) => LessonBeat[] | undefined {
+  const practice = chapters.find((c) => (c.state as MathChapterState).practice)?.id ?? null;
+  const captions = { check: both('math.check.beat'), summary: both('math.summary.beat') };
+  return (chapter) => lessonBeats(lesson, chapter.id, chapter.id === practice, captions);
+}
+
+/** The presentation adapter's `captionOf`: the caption's notation (`{t:09:40}`, `{3/4}` …) read as words. */
+export const lessonCaptionOf = (beat: { caption: BilingualText }, locale: Locale): string => speakable(tx(beat.caption, locale), locale);

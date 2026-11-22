@@ -1,5 +1,8 @@
 node_modules/
 dist/
+# Recorded narration (hundreds of MB) and the website upload staging that carries it (scripts/audio/README.md).
+/audio/
+/dist-pages/
 .astro/
 .DS_Store
 *.log

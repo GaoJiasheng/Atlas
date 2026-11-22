@@ -18,6 +18,7 @@ import { useSceneContext } from '../context';
 import type { SceneControls } from '../controls';
 import { withBase } from '../../../i18n';
 import { onVoicesChanged, primeSpeech, voiceFor, voiceLog } from '../../../lib/speech';
+import { loadNarrator, narratorNow } from '../../../lib/narration-load';
 import { AUTOPLAY_KEY, readSwitch, VOICE_KEY, writeSwitch } from './autoplay';
 import { beatInfos, buildBeats, current, presentationStatus, startIndex, stepIndex, type Beat, type BeatBase } from './beats';
 import type { PresentationAdapter } from './adapter';
@@ -134,23 +135,49 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
     writeSwitch(AUTOPLAY_KEY, on);
     setAutoplayState(on);
   }, []);
-  /* VOICE: the caption is narrated with the browser's speech synthesis. Off by default, remembered for the session. */
+  /*
+   * VOICE: the caption is narrated with recorded clips where the topic has them, else the
+   * browser's speech synthesis (lib/narration.ts). Off by default, remembered for the session.
+   * Available when the device has a voice or the topic has clips in this language; the clip
+   * index is fetched only while presenting with Voice wanted (or to learn whether a device
+   * without a voice can narrate at all).
+   */
   const [voiceWanted, setVoiceWanted] = useState(false);
   useEffect(() => setVoiceWanted(readSwitch(VOICE_KEY)), []);
-  const [voiceAvailable, setVoiceAvailable] = useState(false);
-  const voiceAvailableRef = useRef(false);
-  voiceAvailableRef.current = voiceAvailable;
+  const [systemVoice, setSystemVoice] = useState(false);
   useEffect(() => {
-    const update = () => setVoiceAvailable(voiceFor(locale) !== null);
+    const update = () => setSystemVoice(voiceFor(locale) !== null);
     update();
     return onVoicesChanged(update); // Chrome loads voices asynchronously
   }, [locale]);
+  const [clips, setClips] = useState(false);
+  useEffect(() => {
+    if (presenting) void loadNarrator();
+  }, [presenting]);
+  useEffect(() => {
+    if (!presenting || (!voiceWanted && systemVoice)) return;
+    let live = true;
+    void loadNarrator().then(async (n) => {
+      await n.loadIndex(topic.id);
+      if (live) setClips(n.hasAny(topic.id, locale === 'zh' ? 'zh' : 'en'));
+    });
+    return () => {
+      live = false;
+    };
+  }, [presenting, voiceWanted, systemVoice, topic.id, locale]);
+  const voiceAvailable = systemVoice || clips;
+  const voiceAvailableRef = useRef(false);
+  voiceAvailableRef.current = voiceAvailable;
   const voiceRef = useRef(false);
   voiceRef.current = voiceWanted;
   const setVoice = useCallback((on: boolean) => {
     if (on && !voiceAvailableRef.current) return false;
     writeSwitch(VOICE_KEY, on);
-    if (on) primeSpeech(); // inside the click: iOS / Safari only speak after a gesture
+    if (on) {
+      // Inside the click: iOS / Safari only speak and play sound after a gesture.
+      primeSpeech();
+      narratorNow()?.prime();
+    }
     setVoiceWanted(on);
     return true;
   }, []);
@@ -201,6 +228,7 @@ export function usePresentation<B extends BeatBase, S>(adapter: PresentationAdap
   const element = beat ? (
     <Presentation
       title={topic.title}
+      topicId={topic.id}
       beats={beats}
       index={beat.index}
       serial={beat.serial}

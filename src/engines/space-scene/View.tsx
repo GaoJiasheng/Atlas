@@ -51,7 +51,7 @@ import { ChapterAxis, type AxisChapter } from '../core/axis/ChapterAxis';
 import { axisCounter, flatIndex, stepBeat } from '../core/axis/axis';
 import type { SceneControls, SceneMode, ScenePreset, SceneStats } from '../core/controls';
 import { isOrbitCamera, normalizeCamera } from '../core/camera';
-import { usePresentation, type Beat, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
+import { chapterBeats, plainCaption, usePresentation, type Beat, type SpaceBeatSpec, type SpacePresentationAdapter, type SpaceSavedState } from '../core/presentation';
 import { t as tl, tx, type BilingualText, type UiKey } from '../../i18n';
 import { DEFAULT_CAMERA, REFERENCE_TWEEN_MS, referenceCamera, roundCamera } from './lib/camera';
 import { modelBounds } from './lib/parts';
@@ -284,8 +284,8 @@ function SpaceSceneView({ data, chapters, locale, orbitRuntime, testHooks }: Eng
     return Promise.all([cameraSettled(bridge, id, SETTLE_TIMEOUT_MS), wait(motion)]).then(() => undefined);
   };
   const presentationAdapter: SpacePresentationAdapter = {
-    beatsOf: (c) => (c.state as SpaceChapterState).beats,
-    captionOf: (b, l) => tx(b.caption, l),
+    beatsOf: (c) => chapterBeats<SpaceBeatSpec>(c),
+    captionOf: plainCaption,
     applyBeat: (b, { instant }) => applyBeatState(b, instant),
     onEnter: () => {
       enteredMechanisms.current = bridge.saveMechanisms();

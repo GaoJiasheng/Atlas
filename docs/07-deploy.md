@@ -39,6 +39,14 @@ pnpm dlx wrangler pages deploy dist --project-name atlas
 
 或直接 `pnpm run deploy`（注意要带 `run`：`pnpm deploy` 是 pnpm 自带的另一个命令；脚本 = `pnpm build && pnpm dlx wrangler pages deploy dist --project-name atlas`）。首次会提示创建 `atlas` 项目；production 分支用 `--branch main`。
 
+**带讲解音频部署**（docs/02 唯一的运行时下载例外，`scripts/audio/README.md`）：音频在不进 git 的 `audio/`，部署时拼进 `dist-pages/` 再上传，`dist/` 本身永远没有音频（所以 `pnpm ios:sync` 不会把音频打进 App）：
+
+```bash
+pnpm build && pnpm tsx scripts/audio/stage.ts && pnpm dlx wrangler@4.148.0 pages deploy dist-pages --project-name atlas --branch main
+```
+
+`stage.ts` 给每个主题写 `narration/<slug>.json`（没有音频时是空列表），超出 Pages 上限（每次部署 20,000 个文件、单文件 25 MiB）就失败退出。GitHub 集成（A）的构建不带音频，只适合没有讲解音频的站点。上线后检查：`curl -I https://atlas.gavin.pub/narration/ww2.json` 有 `access-control-allow-origin: *` 和 `max-age=0`，任一 `narration/en/<hash>.mp3` 有 `immutable`。
+
 ## C. 自定义域名
 
 Pages 项目 → Custom domains → Set up a domain。域名在 Cloudflare DNS 下会自动加 CNAME；不在的话按提示加 CNAME 指向 `<project>.pages.dev`。HTTPS 证书自动签发。service worker 要求 HTTPS（`pages.dev` 和自定义域名都满足）。换域名后旧域名下已安装的 PWA 不会迁移。

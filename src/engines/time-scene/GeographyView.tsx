@@ -13,7 +13,7 @@ import type { SceneControls } from "../core/controls";
 import { ChapterAxis } from "../core/axis/ChapterAxis";
 import { flatIndex, stepBeat } from "../core/axis/axis";
 import { chapterNumbers, isBackground } from "../core/chapters";
-import { usePresentation } from "../core/presentation";
+import { chapterBeats, plainCaption, usePresentation } from "../core/presentation";
 import { tx } from "../../i18n";
 import { ControlPanel, type ControlRow } from "../widgets/ControlPanel";
 import { SourceRefs } from "../widgets/SourcePopover";
@@ -164,8 +164,8 @@ export default function GeographyView({
     GeographyBeat,
     SceneSnapshot<GeographyExt>
   >({
-    beatsOf: (c) => (c.state as GeographyChapterState).beats,
-    captionOf: (b, l) => tx(b.caption, l),
+    beatsOf: (c) => chapterBeats<GeographyBeat>(c),
+    captionOf: plainCaption,
     applyBeat: (b, o) => {
       applyBeat(b.chapter, b.index, o.instant);
     },

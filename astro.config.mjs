@@ -73,8 +73,10 @@ export default defineConfig({
         // App shell: pages, JS, CSS, icons. The big GeoJSON basemaps (/geo), models (/models),
         // per-topic engine data (/topics/<slug>/data.json, fetched by SceneHost) and the webp
         // illustrations are deliberately NOT precached; they are cached on first use below.
+        // Recorded narration (/narration, added at deploy time) is never precached nor cached by the
+        // worker: the HTTP cache keeps clips (immutable names), the index always revalidates.
         globPatterns: ['**/*.{html,js,css,svg,png,webmanifest}'],
-        globIgnores: ['geo/**', 'models/**', 'topics/**/data.json'],
+        globIgnores: ['geo/**', 'models/**', 'topics/**/data.json', 'narration/**'],
         // Deep links carry scene state in the query string (?ch=...&t=...).
         ignoreURLParametersMatching: [/.*/],
         navigateFallback: null,

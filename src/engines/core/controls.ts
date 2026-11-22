@@ -114,6 +114,8 @@ export interface VoiceLogEntry {
   ended: number | null;
   /** How it stopped: `end`, `cancelled`, `spurious-end`, `error:<code>`; `null` while speaking. */
   reason: string | null;
+  /** `clip`: a recorded narration clip played (`voice` is its neural voice); `speech`: the device's speech synthesis. */
+  source: 'clip' | 'speech';
 }
 
 /**

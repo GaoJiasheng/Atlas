@@ -23,9 +23,11 @@ import { useT } from '../context';
 import { chapterNumbers, isBackground, storyChapters } from '../chapters';
 import type { Chapter, Locale } from '../types';
 import { tx, type BilingualText } from '../../../i18n';
-import { chapterNumberText, speakSequence, speakableText, SPEECH_LANG, stopSpeech, voiceFor, type Narration, type SpeechPart } from '../../../lib/speech';
-import { AFTER_SPEECH_MS, afterSettle, autoplayDwell, CAPTION_IN_MS, lostEndFallback } from './autoplay';
+import { PART_GAP_MS, speakableText, SPEECH_LANG, stopSpeech, voiceFor, type Narration } from '../../../lib/speech';
+import { loadNarrator } from '../../../lib/narration-load';
+import { AFTER_SPEECH_MS, afterSettle, autoplayDwell, CAPTION_IN_MS, CLIP_SLACK_MS, lostEndFallback } from './autoplay';
 import { chapterSpans, type Beat } from './beats';
+import { chapterAnnouncement, narrationParts } from './narration';
 import { pageStep } from '../scroll-cue';
 import { useScrollCue } from '../useScrollCue';
 
@@ -35,6 +37,8 @@ const ADVANCE_SLOP = 6;
 
 export interface PresentationProps {
   title: BilingualText;
+  /** The topic's slug: its recorded narration index is `/narration/<slug>.json`. */
+  topicId: string;
   beats: readonly Beat[];
   index: number;
   /** Bumped on every beat shown, also when the same beat is shown again. */
@@ -62,7 +66,7 @@ export interface PresentationProps {
   audio: HTMLAudioElement | null;
   autoplay: boolean;
   onAutoplay(on: boolean): void;
-  /** Narrate the caption (switched on and a voice exists). */
+  /** Narrate the caption (switched on, and a recorded clip or a device voice exists). */
   voice: boolean;
   voiceAvailable: boolean;
   onVoice(on: boolean): void;
@@ -70,6 +74,7 @@ export interface PresentationProps {
 
 export function Presentation({
   title,
+  topicId,
   beats,
   index,
   serial,
@@ -172,69 +177,87 @@ export function Presentation({
   const last = index >= beats.length - 1;
 
   /*
-   * VOICE: once the beat has settled, speak the caption (a beat's `audio` clip takes priority).
-   * A chapter's first beat (or any beat of a chapter other than the one spoken last, after a
-   * jump) first announces the chapter: its number, its title, the caption, three utterances
+   * VOICE: once the beat has settled, narrate the caption (a beat's `audio` clip takes priority):
+   * recorded clips when the topic has them for every part, else the device's speech
+   * (`lib/narration.ts`). A chapter's first beat (or any beat of a chapter other than the one
+   * spoken last, after a jump) first announces the chapter: its number, its title, the caption,
    * ~350 ms apart as one narration. A new beat, turning Voice off and leaving the presentation
-   * cancel all of them. `speech` tells the auto-play below whether an utterance is on its way,
-   * so it can wait for the end of the last one.
+   * cancel all of them. `speech` tells the auto-play below whether narration is on its way, so it
+   * can wait for the end of the last part; a clip's known length re-arms its lost-end fallback.
    */
-  const speech = useRef<{ state: 'idle' | 'pending' | 'speaking' | 'ended'; listeners: Set<() => void>; chars: number; parts: number; chapter: number }>({
-    state: 'idle',
-    listeners: new Set(),
-    chars: 0,
-    parts: 1,
-    chapter: -1,
-  });
+  const speech = useRef<{
+    state: 'idle' | 'pending' | 'speaking' | 'ended';
+    listeners: Set<() => void>;
+    chars: number;
+    parts: number;
+    chapter: number;
+    /** `performance.now()` by which a lost clip `ended` counts as the end (0 = speech, no clip yet). */
+    clipUntil: number;
+    /** Set by the auto-play while it waits: re-arm its fallback at `clipUntil`. */
+    rearm: (() => void) | null;
+  }>({ state: 'idle', listeners: new Set(), chars: 0, parts: 1, chapter: -1, clipUntil: 0, rearm: null });
   const spoken = speakableText(captionText);
   const voiceOn = voice && !audio && spoken !== '';
-  const chapterTitle = chapter ? speakableText(tx(chapter.title, locale)) : '';
   const chapterIndex = b.chapterIndex;
-  /** The announcement's first part: the chapter number in words, or "Background". */
-  const chapterOpening = isBackground(chapter) ? tr('chapter.background') : chapterNumberText(numberOf(chapterIndex), locale === 'zh' ? 'zh' : 'en');
+  const announcement = useMemo(() => chapterAnnouncement(chapters, chapterIndex, locale), [chapters, chapterIndex, locale]);
   const firstOfChapter = b.index === 0;
+  const nextBeat = beats[index + 1];
+  const nextCaption = nextBeat ? captionAt(index + 1) : '';
+  const nextParts = useMemo(
+    () => (nextBeat ? narrationParts(chapterAnnouncement(chapters, nextBeat.chapterIndex, locale), nextCaption, nextBeat.index === 0) : []),
+    [chapters, nextBeat, nextCaption, locale],
+  );
   useEffect(() => {
     const sp = speech.current;
-    const voiceChoice = voiceOn ? voiceFor(locale) : null;
-    if (!voiceChoice) {
+    if (!voiceOn) {
       sp.state = 'idle';
       sp.chapter = -1;
       return;
     }
     sp.state = 'pending';
     let narration: Narration | null = null;
+    let cancelled = false;
     const lang = locale === 'zh' ? 'zh' : 'en';
     const cancelWait = afterSettle(instant, settled, () => {
       sp.state = 'speaking';
-      const parts: { part: SpeechPart; text: string }[] = [];
-      if (firstOfChapter || sp.chapter !== chapterIndex) {
-        parts.push({ part: 'chapter', text: chapterOpening });
-        if (chapterTitle) parts.push({ part: 'title', text: chapterTitle });
-      }
-      parts.push({ part: 'caption', text: spoken });
+      const parts = narrationParts(announcement, captionText, firstOfChapter || sp.chapter !== chapterIndex);
       sp.chars = parts.reduce((n, p) => n + [...p.text].length, 0);
       sp.parts = parts.length;
-      narration = speakSequence(
-        parts,
-        SPEECH_LANG[lang],
-        voiceChoice,
-        () => {
-          sp.state = 'ended';
-          for (const l of [...sp.listeners]) l();
-        },
-        (part) => {
-          // The chapter counts as announced once its caption starts (a jump during the announcement repeats it).
-          if (part === 'caption') sp.chapter = chapterIndex;
-        },
-      );
+      sp.clipUntil = 0;
+      // Loaded when the presentation started (usePresentation), so this resolves at once.
+      void loadNarrator().then((n) => {
+        if (cancelled) return;
+        narration = n.narrate(parts, {
+          topic: topicId,
+          locale: lang,
+          lang: SPEECH_LANG[lang],
+          voice: voiceFor(locale),
+          silentMs: autoplayDwell([...captionText].length),
+          onEnd: () => {
+            sp.state = 'ended';
+            for (const l of [...sp.listeners]) l();
+          },
+          onPart: (part, durationMs) => {
+            // The chapter counts as announced once its caption starts (a jump during the announcement repeats it).
+            if (part === 'caption') sp.chapter = chapterIndex;
+            if (durationMs !== null) sp.clipUntil = performance.now() + durationMs + PART_GAP_MS + CLIP_SLACK_MS;
+            else if (sp.clipUntil > 0) sp.clipUntil = performance.now() + lostEndFallback(sp.chars, sp.parts);
+            else return;
+            sp.rearm?.();
+          },
+        });
+        // Only the next beat's clips are fetched ahead, never the whole topic.
+        n.preload(topicId, lang, nextParts);
+      });
     });
     return () => {
+      cancelled = true;
       cancelWait();
       narration?.cancel();
       stopSpeech();
       sp.state = 'idle';
     };
-  }, [voiceOn, index, instant, settled, locale, spoken, chapterIndex, chapterTitle, chapterOpening, firstOfChapter]);
+  }, [voiceOn, index, instant, settled, locale, captionText, chapterIndex, announcement, firstOfChapter, topicId, nextParts]);
 
   useEffect(() => {
     if (!autoplay || held || last) return;
@@ -258,9 +281,17 @@ export function Presentation({
         };
         if (sp.state === 'ended') afterEnd();
         else {
+          const arm = (ms: number) => {
+            window.clearTimeout(dwell);
+            dwell = window.setTimeout(advance, Math.max(0, ms));
+          };
           sp.listeners.add(afterEnd);
-          stopWaiting = () => sp.listeners.delete(afterEnd);
-          dwell = window.setTimeout(advance, lostEndFallback(sp.chars, sp.parts));
+          sp.rearm = () => arm(sp.clipUntil - performance.now());
+          stopWaiting = () => {
+            sp.listeners.delete(afterEnd);
+            sp.rearm = null;
+          };
+          arm(sp.clipUntil > 0 ? sp.clipUntil - performance.now() : lostEndFallback(sp.chars, sp.parts));
         }
       } else dwell = window.setTimeout(advance, autoplayDwell([...captionText].length));
     }

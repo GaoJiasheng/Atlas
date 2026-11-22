@@ -6,7 +6,7 @@ import type { SceneControls } from '../core/controls';
 import { ChapterAxis } from '../core/axis/ChapterAxis';
 import { flatIndex, stepBeat } from '../core/axis/axis';
 import { chapterNumbers, isBackground } from '../core/chapters';
-import { usePresentation } from '../core/presentation';
+import { plainCaption, usePresentation } from '../core/presentation';
 import { t as tl, tx } from '../../i18n';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import { ClimatologyReaderTop, ClimatologyIndex } from './ClimatologyReader';
@@ -114,7 +114,7 @@ export default function ClimatologyView({ topic, data, chapters, locale }: Engin
   );
   const presentation = usePresentation<ClimatologyBeat, SceneSnapshot<ClimatologyExt>>({
     beatsOf: (c) => ownMonthlyBeats(c),
-    captionOf: (b, lang) => tx(b.caption, lang),
+    captionOf: plainCaption,
     applyBeat: (b, options) => {
       applyBeat(b.chapter, b.index, options.instant);
     },

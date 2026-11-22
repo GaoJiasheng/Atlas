@@ -7,9 +7,9 @@
  * each knowing its chapter position and its place inside the chapter. Pure:
  * no React, no DOM.
  */
-import type { BilingualText } from '../../../i18n';
+import { tx, type BilingualText } from '../../../i18n';
 import type { BeatInfo } from '../controls';
-import type { Chapter } from '../types';
+import type { Chapter, Locale } from '../types';
 
 /** What every engine's beat carries; the engine adds its own optional fields (camera, time, parts …). */
 export interface BeatBase {
@@ -44,6 +44,12 @@ export function defaultCaption(chapter: Pick<Chapter, 'title' | 'state'>): Bilin
   if (isBilingual(state.question)) return state.question;
   return chapter.title;
 }
+
+/** `PresentationAdapter.beatsOf` of the engines whose beats are the chapter state's `beats` (TimeScene, SpaceScene). */
+export const chapterBeats = <B extends BeatBase>(chapter: Pick<Chapter, 'state'>): readonly B[] | undefined => (chapter.state as { beats?: B[] } | undefined)?.beats;
+
+/** `PresentationAdapter.captionOf` of the engines whose caption is the beat's text as written (TimeScene, SpaceScene). */
+export const plainCaption = (beat: Pick<Beat, 'caption'>, locale: Locale): string => tx(beat.caption, locale);
 
 /** Every beat of every chapter, in order. `beatsOf` returns the chapter's own beats (none or empty = one default beat). */
 export function buildBeats<C extends Pick<Chapter, 'id' | 'title' | 'state'>, B extends BeatBase>(

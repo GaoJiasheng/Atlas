@@ -39,7 +39,7 @@ import type { EngineViewProps, GeoCamera, SceneSnapshot } from '../core/types';
 import { SceneSlot, useScene, useSceneContext, useSceneControls, useSceneStore, useT } from '../core/context';
 import { storyChapters } from '../core/chapters';
 import type { SceneControls, SpecRow } from '../core/controls';
-import { usePresentation, type Beat, type PresentationAdapter } from '../core/presentation';
+import { chapterBeats, plainCaption, usePresentation, type Beat, type PresentationAdapter } from '../core/presentation';
 import { ControlPanel, type ControlRow } from '../widgets/ControlPanel';
 import type { LegendItem } from '../widgets/Legend';
 import { t as translate, tx, type BilingualText, type UiKey } from '../../i18n';
@@ -473,8 +473,8 @@ function TimeSceneReady({ topic, data, chapters, locale }: EngineViewProps) {
 
   /* ---------- PRESENTATION (P): the core presentation over this map ---------- */
   const presentationAdapter: PresentationAdapter<TimeBeat, SceneSnapshot<TimeSceneExt>> = {
-    beatsOf: (c) => (c.state as TimeChapterState).beats,
-    captionOf: (b, l) => tx(b.caption, l),
+    beatsOf: (c) => chapterBeats<TimeBeat>(c),
+    captionOf: plainCaption,
     applyBeat: (b, { instant }) => applyBeatState(b, instant),
     saveState: () => store.getState().snapshot(),
     restoreState: (saved) => store.getState().applyState(saved, { instant: false }),

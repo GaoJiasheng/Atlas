@@ -25,6 +25,14 @@ export const AFTER_SPEECH_MS = 600;
  */
 export const lostEndFallback = (chars: number, parts: number): number => Math.max(6_000, 3 * (chars / 12) * 1000) + (parts - 1) * 3_000;
 
+/**
+ * A recorded clip's length is known once it plays: auto-play's lost-end
+ * fallback is then that length plus the part gap plus this much (ms), re-armed
+ * as each part starts, instead of the character estimate (which runs short
+ * for long Chinese captions read by a neural voice).
+ */
+export const CLIP_SLACK_MS = 3_000;
+
 export const AUTOPLAY_KEY = 'atlas:autoplay';
 export const VOICE_KEY = 'atlas:voice';
 

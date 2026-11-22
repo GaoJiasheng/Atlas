@@ -34,7 +34,7 @@ import type { MathSceneExt } from './index';
 import type { MathChapterState, MathSceneData, MisconceptionCode, ModelView } from './schema';
 import { createMathUi } from './ui';
 import { createController } from './controller';
-import { lessonBeats, type LessonBeat } from './lib/beats';
+import { lessonBeatsOf, lessonCaptionOf, type LessonBeat } from './lib/beats';
 import { beatCount, viewsFor } from './lib/lesson';
 import { answered } from './lib/check';
 import type { Action } from './lib/state';
@@ -228,10 +228,10 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const flat = useMemo(() => chapters.flatMap((c) => Array.from({ length: ctl.beatCount(c.id) }, (_, index) => ({ chapter: c.id, index }))), [chapters, ctl]);
 
   /* ---------- PRESENTATION: beats from the data (explanation beats, then the check) ---------- */
-  const captions = useMemo(() => ({ check: both('math.check.beat'), summary: both('math.summary.beat') }), []);
+  const beatsOf = useMemo(() => lessonBeatsOf(lesson, chapters), [lesson, chapters]);
   const adapter: PresentationAdapter<LessonBeat, Saved> = {
-    beatsOf: (c) => lessonBeats(lesson, c.id, c.id === practiceChapter, captions),
-    captionOf: (b, l) => speakable(tx(b.caption, l), l),
+    beatsOf,
+    captionOf: lessonCaptionOf,
     renderCaption: (b, l) => renderRich(tx(b.caption, l), l),
     applyBeat: (b, { instant }) => {
       const spec = b.spec;
@@ -589,17 +589,17 @@ export default function MathSceneView({ data, chapters, locale }: EngineViewProp
   const axisChapters = useMemo<AxisChapter[]>(
     () =>
       chapters.map((c) => {
-        const beats = lessonBeats(lesson, c.id, c.id === practiceChapter, captions)?.filter((b) => b.kind !== 'summary');
+        const beats = beatsOf(c)?.filter((b) => b.kind !== 'summary');
         return {
           id: c.id,
           number: number(c.id),
           title: tx(c.title, locale),
-          beats: beats ? beats.map((b) => speakable(tx(b.caption, locale), locale)) : [speakable(tx((c.state as MathChapterState).summary ?? c.title, locale), locale)],
+          beats: beats ? beats.map((b) => lessonCaptionOf(b, locale)) : [speakable(tx((c.state as MathChapterState).summary ?? c.title, locale), locale)],
         };
       }),
     // `number` reads `chapters`, `numbers` and `locale`.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [chapters, lesson, practiceChapter, captions, numbers, locale],
+    [chapters, beatsOf, numbers, locale],
   );
 
   // The check and the practice questions are squares on the axis (the core axis draws circles; the shape is ours).

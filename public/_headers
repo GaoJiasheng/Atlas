@@ -16,6 +16,19 @@
 /models/*
   Cache-Control: public, max-age=604800
 
+# Recorded narration (scripts/audio/README.md): clips are named by a hash of their text, so they never change;
+# the per-topic index of which clips exist is rewritten on every deploy. The iPad app fetches both from
+# capacitor://localhost, hence CORS (no credentials, plain GETs). `:index` is one path segment, so the
+# two Cache-Control rules never both match (Pages joins repeated headers with a comma).
+/narration/*
+  Access-Control-Allow-Origin: *
+/narration/:index
+  Cache-Control: public, max-age=0, must-revalidate
+/narration/en/*
+  Cache-Control: public, max-age=31536000, immutable
+/narration/zh/*
+  Cache-Control: public, max-age=31536000, immutable
+
 # Topic data is content, not hashed: always revalidate (the service worker serves stale-while-revalidate).
 /topics/*
   Cache-Control: public, max-age=0, must-revalidate

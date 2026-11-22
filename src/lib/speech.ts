@@ -1,8 +1,8 @@
 /**
- * Caption narration with the browser's Web Speech API (`speechSynthesis`): no
- * audio files, no network. Pure helpers (voice choice, text clean-up) plus the
- * thin `speak` / `speakSequence` wrappers the presentation
- * (`engines/core/presentation`) uses for every engine.
+ * Caption narration with the browser's Web Speech API (`speechSynthesis`): the
+ * fallback when no recorded clip exists for the text (`lib/narration.ts` plays
+ * those). Pure helpers (voice choice, text clean-up) plus the thin `speak` /
+ * `speakSequence` wrappers, and the shared `voiceLog`.
  */
 
 import type { VoiceLogEntry } from '../engines/core/controls';
@@ -101,8 +101,14 @@ const KEEPALIVE_MS = 10_000;
 
 const LOG_SIZE = 10;
 const log: VoiceLogEntry[] = [];
-/** The last utterances (`__atlas.voiceLog()`), oldest first. */
+/** The last utterances and clips (`__atlas.voiceLog()`), oldest first. */
 export const voiceLog = (): VoiceLogEntry[] => log.map((e) => ({ ...e }));
+
+/** Add `entry` to the log (kept live: its `started` / `ended` / `reason` are filled in as it plays). */
+export function recordVoice(entry: VoiceLogEntry): void {
+  log.push(entry);
+  if (log.length > LOG_SIZE) log.shift();
+}
 
 let active: Narration | null = null;
 
@@ -127,9 +133,8 @@ export function speak(text: string, lang: string, voice: SpeechSynthesisVoice, o
   utterance.lang = lang;
   utterance.rate = 0.95;
   utterance.pitch = 1;
-  const entry: VoiceLogEntry = { text, lang, voice: voice.name, part, started: null, ended: null, reason: null };
-  log.push(entry);
-  if (log.length > LOG_SIZE) log.shift();
+  const entry: VoiceLogEntry = { text, lang, voice: voice.name, part, started: null, ended: null, reason: null, source: 'speech' };
+  recordVoice(entry);
 
   let done = false;
   let launched = 0;
