@@ -82,6 +82,9 @@ with the device voice until the new clip exists. The generator never computes ha
   text that exist. Written for every topic with a presentation (empty lists without audio), so the page never probes
   for missing files.
 
+It lists every published part (topic/locale/kind/chapter/beat) whose current text has no clip, i.e. a caption edited
+since the last generation that the device voice now reads; that is a reminder, not a failure.
+
 It fails when the upload would break a Cloudflare Pages limit (20,000 files per deployment, 25 MiB per file). The
 published topics come to about 1,054 site files + 6,540 clips + ~104 indexes ≈ 7,700 files. If a future catalogue
 outgrows 20,000, move the clips (not the indexes) to an R2 bucket on a custom subdomain (e.g. `audio.gavin.pub`,

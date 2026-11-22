@@ -204,7 +204,7 @@ export function Presentation({
   const nextBeat = beats[index + 1];
   const nextCaption = nextBeat ? captionAt(index + 1) : '';
   const nextParts = useMemo(
-    () => (nextBeat ? narrationParts(chapterAnnouncement(chapters, nextBeat.chapterIndex, locale), nextCaption, nextBeat.index === 0) : []),
+    () => (nextBeat ? narrationParts(chapterAnnouncement(chapters, nextBeat.chapterIndex, locale), nextCaption, nextBeat.index === 0, locale) : []),
     [chapters, nextBeat, nextCaption, locale],
   );
   useEffect(() => {
@@ -220,7 +220,7 @@ export function Presentation({
     const lang = locale === 'zh' ? 'zh' : 'en';
     const cancelWait = afterSettle(instant, settled, () => {
       sp.state = 'speaking';
-      const parts = narrationParts(announcement, captionText, firstOfChapter || sp.chapter !== chapterIndex);
+      const parts = narrationParts(announcement, captionText, firstOfChapter || sp.chapter !== chapterIndex, locale);
       sp.chars = parts.reduce((n, p) => n + [...p.text].length, 0);
       sp.parts = parts.length;
       sp.clipUntil = 0;

@@ -291,3 +291,31 @@ export function primeSpeech(): void {
   u.volume = 0;
   window.speechSynthesis.speak(u);
 }
+
+/**
+ * Notation a neural voice skips or misreads, said in words (checked against edge-tts Sonia / Xiaoxiao, 2026-11-22: the
+ * angle sign and a comparison sign between words are silent, "c. 1500" is read "see 1500", and "15 … 40" loses its "up to").
+ * Degrees, °C, km/h, cm², kg, × ÷ and year ranges are read correctly and left as they are.
+ */
+const SPOKEN_NOTATION: Record<'en' | 'zh', readonly [RegExp, string | ((match: string, ...groups: string[]) => string)][]> = {
+  en: [
+    // A one-letter name in capitals ("angle A"), or Sonia reads "∠a" as "angle uh".
+    [/∠\s*(?:([a-z])\b)?/g, (_m, letter?: string) => (letter ? `angle ${letter.toUpperCase()}` : 'angle ')],
+    [/\s+<\s+/g, ' is less than '],
+    [/\s+>\s+/g, ' is greater than '],
+    [/\bc\.\s?(?=\d)/g, 'about '],
+    [/\s*…\s*(?=up to\b)/g, ', and so on, '],
+    [/\s*…\s*(?=\d)/g, ', and so on, up to '],
+  ],
+  zh: [
+    [/∠\s*/g, '角 '],
+    [/\s*<\s*/g, ' 小于 '],
+    [/\s*>\s*/g, ' 大于 '],
+    [/\s*…+\s*(?=\d)/g, '，一直到 '],
+  ],
+};
+
+/** `text` with the notation in `SPOKEN_NOTATION` said in words: what both the recorded clips and the device voice read. */
+export function spokenNotation(text: string, locale: 'en' | 'zh'): string {
+  return SPOKEN_NOTATION[locale].reduce((s, [pattern, words]) => (typeof words === 'string' ? s.replace(pattern, words) : s.replace(pattern, words)), text);
+}

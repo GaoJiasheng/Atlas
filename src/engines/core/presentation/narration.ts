@@ -8,7 +8,7 @@
  * the page says.
  */
 import { t, tx } from '../../../i18n';
-import { chapterNumberText, speakableText, type SpeechPart } from '../../../lib/speech';
+import { chapterNumberText, speakableText, spokenNotation, type SpeechPart } from '../../../lib/speech';
 import { chapterNumbers, isBackground } from '../chapters';
 import type { Chapter, Locale } from '../types';
 
@@ -27,17 +27,17 @@ export function chapterAnnouncement(
   const number = chapterNumbers(chapters).get(chapter?.id ?? '') ?? chapterIndex + 1;
   return {
     opening: isBackground(chapter) ? t(locale, 'chapter.background') : chapterNumberText(number, locale === 'zh' ? 'zh' : 'en'),
-    title: chapter ? speakableText(tx(chapter.title, locale)) : '',
+    title: chapter ? spokenNotation(speakableText(tx(chapter.title, locale)), locale === 'zh' ? 'zh' : 'en') : '',
   };
 }
 
 /**
  * The parts spoken for one beat, in order: the announcement when `announce`
  * (a chapter's first beat, or a jump into another chapter), then the caption.
- * `caption` is the adapter's `captionOf` text; nothing is spoken for an empty one.
+ * `caption` is the adapter's `captionOf` text in `locale`; nothing is spoken for an empty one.
  */
-export function narrationParts(announcement: { opening: string; title: string }, caption: string, announce: boolean): NarrationPart[] {
-  const spoken = speakableText(caption);
+export function narrationParts(announcement: { opening: string; title: string }, caption: string, announce: boolean, locale: Locale): NarrationPart[] {
+  const spoken = spokenNotation(speakableText(caption), locale === 'zh' ? 'zh' : 'en');
   if (!spoken) return [];
   const parts: NarrationPart[] = [];
   if (announce) {

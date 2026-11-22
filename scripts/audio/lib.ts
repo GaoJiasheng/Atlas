@@ -139,7 +139,7 @@ export function topicEntries(topic: LoadedTopic): (Omit<ManifestEntry, 'hash' | 
       let announced = false;
       for (const b of own) {
         // Announced on entering the chapter at any beat; the announcement is the same whichever beat it is.
-        const parts = narrationParts(announcement, source.captionOf(b, locale), true);
+        const parts = narrationParts(announcement, source.captionOf(b, locale), true, locale);
         for (const p of parts) {
           if (p.part !== 'caption' && announced) continue;
           out.push({ topic: topic.slug, locale, kind: p.part, chapter: chapter.id, beat: p.part === 'caption' ? b.index : null, text: p.text });

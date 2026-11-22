@@ -60,7 +60,7 @@ Each idea is explained first and then done by hand: shade a strip, fold it, cut 
 BUILT TO BE READ
 • Switch between English and Chinese on any page
 • Chapters are split into short beats that you move through at your own pace
-• A presentation mode can read the captions aloud
+• A presentation mode reads the captions aloud in recorded English and Chinese voices
 • Key terms open a glossary, and facts and figures carry their sources
 • Paper and dark themes
 
@@ -68,7 +68,7 @@ HISTORY, TOLD PLAINLY
 The history topics are written from a global view and do not take sides. They describe war, massacres and bombing factually, with numbers and sources and without graphic images. Parents and teachers may wish to read these chapters with younger readers.
 
 PRIVATE AND OFFLINE
-• Everything is on your iPad: works with no internet connection
+• Every topic is on your iPad and works with no internet connection; the recorded narration downloads when you first turn on Voice, and without a connection the iPad's own voice reads instead
 • No ads
 • No accounts or sign-in
 • No tracking and no data collection
@@ -140,7 +140,7 @@ Atlas 是一本可以转动、拖动、拆开来看的图解课本。全书中�
 专为阅读而设计
 • 任何页面都能切换中英文
 • 每章分成短小的节拍，按自己的节奏往下走
-• 演示模式可以朗读字幕
+• 演示模式用录制好的中英文语音朗读字幕
 • 重点名词可打开词汇表，事实与数字都标注来源
 • 纸张与深色两种外观
 
@@ -148,7 +148,7 @@ Atlas 是一本可以转动、拖动、拆开来看的图解课本。全书中�
 历史主题采用全球视角，不偏向任何一方。战争、屠杀和轰炸都据实叙述，附数字和来源，不使用血腥图像。家长和老师可以陪年纪较小的读者一起阅读这些章节。
 
 隐私与离线
-• 所有内容都在 iPad 上，没有网络也能用
+• 所有主题都在 iPad 上，没有网络也能用；讲解录音在第一次打开“语音”时下载，没有网络时改用 iPad 自带的语音朗读
 • 无广告
 • 无账号，无需登录
 • 不追踪，不收集任何数据
@@ -188,23 +188,23 @@ Both pages are bilingual on one URL (`src/pages/support.astro`, `privacy.astro`,
 ```
 Atlas support
 Questions, corrections or problems: CONTACT_EMAIL
-Atlas needs no account and works offline. To reset your theme and language, delete and reinstall the app.
+Atlas needs no account and works offline (the recorded narration downloads the first time you turn on Voice). To reset your theme and language, delete and reinstall the app.
 
 Atlas 支持
 问题、内容勘误或故障反馈：CONTACT_EMAIL
-Atlas 无需账号，可离线使用。如需重置外观和语言设置，请删除后重新安装。
+Atlas 无需账号，可离线使用（讲解录音在第一次打开“语音”时下载）。如需重置外观和语言设置，请删除后重新安装。
 ```
 
 **Privacy policy**
 
 ```
 Atlas privacy policy
-Atlas does not collect, store on any server, share or sell any personal data. The iPad app makes no network requests. It has no accounts, advertising, analytics or tracking. Your language, theme and display preferences are saved only on your device and are removed when you delete the app.
+Atlas does not collect, store on any server, share or sell any personal data. The iPad app has no accounts, advertising, analytics or tracking. When you turn on Voice in Present mode, it downloads that topic's recorded narration (plain audio files, with no account, cookie or identifier attached) from atlas.gavin.pub and keeps it on your iPad; like the website, the host (Cloudflare) processes technical request data such as IP addresses in order to deliver them. Everything else works offline, and without a connection read-aloud uses the speech voice built into your iPad. Your language, theme and display preferences are saved only on your device and are removed when you delete the app.
 The website atlas.gavin.pub uses no analytics or cookies; like any website, its host (Cloudflare) processes technical request data such as IP addresses in order to deliver the pages.
 Contact: CONTACT_EMAIL
 
 Atlas 隐私政策
-Atlas 不收集、不在任何服务器上存储、不共享也不出售任何个人数据。iPad App 不发出任何网络请求，没有账号、广告、统计或追踪。语言、外观和显示偏好只保存在你的设备上，删除 App 后即被移除。
+Atlas 不收集、不在任何服务器上存储、不共享也不出售任何个人数据。iPad App 没有账号、广告、统计或追踪。在演示模式打开“语音”时，App 会从 atlas.gavin.pub 下载这个主题的讲解录音（只是普通的音频文件，不附带账号、Cookie 或任何标识），保存在 iPad 上；与网站一样，托管方 Cloudflare 为传送这些文件会处理 IP 地址等技术性请求数据。其余内容都可离线使用，没有网络时用 iPad 自带的语音朗读。语言、外观和显示偏好只保存在你的设备上，删除 App 后即被移除。
 网站 atlas.gavin.pub 不使用统计工具或 Cookie；与所有网站一样，托管方 Cloudflare 为传送网页会处理 IP 地址等技术性请求数据。
 联系方式：CONTACT_EMAIL
 ```
@@ -265,6 +265,8 @@ Apple defines it as "aggressive physical conflict or harm involving humans in li
 
 Answer: **Data Not Collected.** In App Store Connect, under App Privacy, choose "No, we do not collect data from this app".
 
+Rechecked 2026-11-22 for 1.1 (recorded narration): still **Data Not Collected**. The app now downloads narration audio from https://atlas.gavin.pub when Voice is on, but sends nothing about the reader with it (no account, cookie, identifier, query string or referrer), uploads nothing, and the host's request logs serve only to deliver the files, which Apple does not count as collection.
+
 Checked 2026-11-09 at commit `594109ba`, and the build scan, native networking and screenshot-run request log rechecked 2026-11-13 after build 10. The only scan hits are the physics word `amplitude` in sound and wave code, not the Amplitude SDK:
 
 | Check | Result |
@@ -272,15 +274,15 @@ Checked 2026-11-09 at commit `594109ba`, and the build scan, native networking a
 | Analytics or crash SDK names in `src`, `ios/App/App`, `package.json`, `astro.config.mjs` (Google Analytics, gtag, Plausible, PostHog, Mixpanel, Segment, Sentry, Amplitude, Firebase, Umami, Fathom, Hotjar, Clarity) | No matches |
 | The same names plus `sendBeacon` and `WebSocket(` in the built `dist/_astro` and `dist/en/index.html` | No matches |
 | `XMLHttpRequest`, `sendBeacon`, `new WebSocket`, `EventSource(` in `src` | No matches |
-| `fetch(` in `src` | 12 call sites, all loading the app's own bundled data (`/geo/*`, `catalogues/*`, engine JSON) |
+| `fetch(` in `src` | The app's own bundled data (`/geo/*`, `catalogues/*`, engine JSON), plus the narration downloads in `src/lib/narration.ts` (see Read-aloud) |
 | Absolute URLs in `src` | Citations only (Wikimedia, DOI, NLB, NASA and so on), shown as source references and not fetched |
 | Native networking in `ios/App/App/*.swift` | No `URLSession`. `AtlasBundleHandler` serves files from the app bundle only |
-| Native Content-Security-Policy | `connect-src 'self'`, `frame-src 'none'`, `form-action 'none'`: the web view cannot reach another host |
+| Native Content-Security-Policy | `connect-src 'self' https://atlas.gavin.pub`, `frame-src 'none'`, `form-action 'none'`: the only other host the web view can reach is the narration on the Atlas website |
 | Outbound navigation | `AtlasOfflineNavigation` cancels anything outside `capacitor://localhost` |
 | Permissions in `Info.plist` | No `*UsageDescription` keys: no camera, microphone, location or photos |
 | Capacitor's own `PrivacyInfo.xcprivacy` | `NSPrivacyTracking` false, collected data types empty |
 | Runtime | Headless run of the 8 EN screenshot pages logged no request to any other host |
-| Read-aloud | `src/lib/speech.ts` uses the system `speechSynthesis`; no audio is sent by the app |
+| Read-aloud | Recorded clips: `src/lib/narration.ts` GETs `/narration/<topic>.json` and `/narration/<locale>/<hash>.mp3` from https://atlas.gavin.pub only when Voice is on in Present mode, with `credentials: 'omit'`, no referrer, no query string and no identifier, and caches them in IndexedDB on the device. Fallback: the system `speechSynthesis`. Nothing is uploaded |
 
 Stored on the device only, which Apple does not count as collection: `localStorage` for language, theme, autoplay, voice and whether the guide has been seen; `sessionStorage` for panel layout. No answers or progress leave the device, and answers are not put in the URL.
 
@@ -288,7 +290,7 @@ Stored on the device only, which Apple does not count as collection: `localStora
 
 ## Export compliance
 
-Answer: **No non-exempt encryption.** `ios/App/App/Info.plist` already sets `ITSAppUsesNonExemptEncryption` to `false`, so App Store Connect should not ask per build. If it does ask, choose "None of the algorithms mentioned above". The app makes no network connections, and `crypto.subtle`, CryptoKit and CommonCrypto do not appear in `src` or the app's Swift.
+Answer: **No non-exempt encryption.** `ios/App/App/Info.plist` already sets `ITSAppUsesNonExemptEncryption` to `false`, so App Store Connect should not ask per build. If it does ask, choose "None of the algorithms mentioned above". Its only network use is HTTPS downloads of narration audio through the system web view (exempt standard encryption provided by iOS), and `crypto.subtle`, CryptoKit and CommonCrypto do not appear in `src` or the app's Swift.
 
 ---
 

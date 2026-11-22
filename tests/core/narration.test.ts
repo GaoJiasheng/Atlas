@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { clipHash, clipPath, fnv1a64, indexPath, NARRATION_VOICES, parseIndex, type NarrationIndex } from '../../src/lib/narration-clips';
 import { CLIP_WAIT_MS, createNarrator, type AudioLike, type ClipStore, type NarratorDeps } from '../../src/lib/narration';
-import { PART_GAP_MS, type Narration, type SpeechPart } from '../../src/lib/speech';
+import { PART_GAP_MS, spokenNotation, type Narration, type SpeechPart } from '../../src/lib/speech';
 import type { VoiceLogEntry } from '../../src/engines/core/controls';
 import { chapterAnnouncement, narrationParts } from '../../src/engines/core/presentation/narration';
 import { buildManifest, loadTopic, SHARED_DIR, TOPICS_DIR, type LoadedTopic } from '../../scripts/audio/lib';
@@ -37,7 +37,7 @@ describe('narrationParts', () => {
     { id: 'one', title: { en: 'One <b>whole</b>', zh: '一个整体' } },
   ];
   it('announces a chapter by number (or Background), then its title, then the caption', () => {
-    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), 'Hello <sup>2</sup>world', true)).toEqual([
+    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), 'Hello <sup>2</sup>world', true, 'en')).toEqual([
       { part: 'chapter', text: 'Chapter one' },
       { part: 'title', text: 'One whole' },
       { part: 'caption', text: 'Hello world' },
@@ -46,8 +46,8 @@ describe('narrationParts', () => {
     expect(chapterAnnouncement(chapters, 1, 'zh').opening).toBe('第一章');
   });
   it('later beats say the caption only; an empty caption says nothing', () => {
-    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), 'Next.', false)).toEqual([{ part: 'caption', text: 'Next.' }]);
-    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), ' <b></b> ', true)).toEqual([]);
+    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), 'Next.', false, 'en')).toEqual([{ part: 'caption', text: 'Next.' }]);
+    expect(narrationParts(chapterAnnouncement(chapters, 1, 'en'), ' <b></b> ', true, 'en')).toEqual([]);
   });
 });
 
@@ -398,5 +398,26 @@ describe('narrate: clip or speech', () => {
     expect(offline.spoken).toEqual([]);
     expect(offline.log.map((e) => [e.source, e.reason])).toEqual([['clip', 'end'], ['clip', 'end'], ['clip', 'end']]);
     expect(offline.fetched).toEqual(['/narration/fractions.json']);
+  });
+});
+
+describe('spokenNotation', () => {
+  it('says the notation a neural voice skips or misreads', () => {
+    expect(spokenNotation('draw ∠XYZ = 125°.', 'en')).toBe('draw angle XYZ = 125°.');
+    expect(spokenNotation('转动一条线，∠a 和 ∠c 一起变。', 'zh')).toBe('转动一条线，角 a 和 角 c 一起变。');
+    expect(spokenNotation('Find ∠a. ∠b and ∠PQR, like ∠ab.', 'en')).toBe('Find angle A. angle B and angle PQR, like angle ab.');
+    expect(spokenNotation('so two thirds < three quarters, and 5 > 3.', 'en')).toBe('so two thirds is less than three quarters, and 5 is greater than 3.');
+    expect(spokenNotation('五分之一 > 三分之一', 'zh')).toBe('五分之一 大于 三分之一');
+    expect(spokenNotation('c. 1500 BCE', 'en')).toBe('about 1500 BCE');
+    expect(spokenNotation('5, 10, 15 … 40. 0, 100, 200 … up to 500.', 'en')).toBe('5, 10, 15, and so on, up to 40. 0, 100, 200, and so on, up to 500.');
+    expect(spokenNotation('5、10、15……40。', 'zh')).toBe('5、10、15，一直到 40。');
+  });
+  it('leaves what the voices already read well', () => {
+    for (const s of ['45° bench at 2 pm, in °C', '12 cm², 8 kg, 900 km/h', '1964–1965', '2 hundreds × 3 = 6', 'etc. and Mr. Lee', '一直下去…，6 一直写下去'])
+      expect(spokenNotation(s, 'en')).toBe(s);
+  });
+  it('is applied to the caption and the chapter title', () => {
+    const ch = [{ id: 'a', title: { en: 'Naming ∠ABC', zh: '∠ABC 的名字' } }];
+    expect(narrationParts(chapterAnnouncement(ch, 0, 'zh'), '∠ABC 是钝角。', true, 'zh').map((p) => p.text)).toEqual(['第一章', '角 ABC 的名字', '角 ABC 是钝角。']);
   });
 });

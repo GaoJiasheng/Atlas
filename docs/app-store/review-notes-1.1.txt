@@ -1,0 +1,9 @@
+WHAT'S NEW (version 1.1)
+EN: Present mode now reads every chapter in recorded English and Chinese voices. The narration downloads the first time you turn on Voice in a topic and stays on your iPad; without a connection your iPad's own voice reads instead. Also small fixes in the maths lessons.
+ZH: 演示模式现在用录制好的中英文语音朗读每一章。讲解录音在第一次打开某个主题的“语音”时下载，之后保存在 iPad 上；没有网络时改用 iPad 自带的语音朗读。另外修正了数学课里的一些小问题。
+
+NOTES FOR APP REVIEW (App Review Information > Notes)
+No sign-in, account or setup is needed.
+What changed since 1.0 (13): Present mode can now play recorded narration. To try it: open any topic, tap PRESENT at the top right, turn on Voice. The first time Voice is turned on in a topic, the app downloads that topic's narration (MP3 files and a small JSON list) over HTTPS from https://atlas.gavin.pub, the developer's own website, and caches it on the device. These are plain GET requests for static files: no account, cookie, identifier or query string is sent, and nothing is uploaded. Without a connection, or for any clip not yet available, the app uses the system speech synthesiser as in 1.0. Every other feature works offline exactly as before; no other network request is made.
+The voices are synthetic (neural text-to-speech), generated in advance by the developer from the captions shown on screen.
+Privacy answers are unchanged (Data Not Collected); the privacy policy at https://atlas.gavin.pub/privacy/ describes the download.

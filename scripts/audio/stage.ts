@@ -15,7 +15,7 @@
  */
 import { copyFileSync, existsSync, linkSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
-import { indexPath, NARRATION_DIR } from '../../src/lib/narration-clips';
+import { clipPath, indexPath, NARRATION_DIR } from '../../src/lib/narration-clips';
 import { AUDIO_DIR, buildManifest, loadTopics, SHARED_DIR, TOPICS_DIR } from './lib';
 import { indexes } from './coverage';
 
@@ -61,7 +61,9 @@ const site = walk(DIST);
 for (const file of site) place(file, join(OUT, relative(DIST, file)));
 
 // Every topic, drafts included (they are built and reachable): their indexes are simply empty until clips exist.
-const manifest = buildManifest(loadTopics(TOPICS_DIR, SHARED_DIR));
+const topics = loadTopics(TOPICS_DIR, SHARED_DIR);
+const manifest = buildManifest(topics);
+const published = new Set(topics.filter((t) => t.meta.status === 'published').map((t) => t.slug));
 const present = new Set(manifest.clips.filter((c) => existsSync(join(AUDIO_DIR, c.file))).map((c) => c.file));
 const tooBig: string[] = [];
 let bytes = 0;
@@ -87,6 +89,15 @@ const total = site.length + present.size + index.size;
 console.log(`stage: ${OUT}`);
 console.log(`  site ${site.length} file(s) + narration ${present.size} clip(s) (${(bytes / 1024 / 1024).toFixed(1)} MiB) + ${index.size} index(es) = ${total} / ${PAGES_MAX_FILES.toLocaleString('en')} files`);
 if (!existsSync(AUDIO_DIR)) console.log(`  no audio folder at ${AUDIO_DIR}: indexes are empty, every beat is spoken by the device`);
+// Published beats whose current text has no clip (a caption edited since the last generation): the device voice reads
+// them. Never a failure, but listed so the clips get made.
+const unrecorded = existsSync(AUDIO_DIR) ? manifest.entries.filter((e) => published.has(e.topic) && !present.has(clipPath(e.locale, e.hash))) : [];
+if (unrecorded.length) {
+  console.log(`  ${unrecorded.length} published part(s) have no clip and are read by the device voice:`);
+  for (const e of unrecorded.slice(0, 20)) console.log(`    ${e.key}`);
+  if (unrecorded.length > 20) console.log(`    … and ${unrecorded.length - 20} more (pnpm tsx scripts/audio/check.ts)`);
+  console.log('  to record them: pnpm tsx scripts/audio/extract.ts, then scripts/audio/generate_voice.py (scripts/audio/README.md), then deploy again');
+}
 if (tooBig.length) console.error(`  over the 25 MiB per-file limit, left out: ${tooBig.join(', ')}`);
 if (total > PAGES_MAX_FILES) {
   console.error(
