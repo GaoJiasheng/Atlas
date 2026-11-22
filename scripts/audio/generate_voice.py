@@ -130,6 +130,10 @@ async def generate(clips: list[dict], audio_dir: Path, dry_run: bool) -> int:
                         os.fsync(output.fileno())
                     if temporary.stat().st_size == 0:
                         raise NoAudioReceived("service returned empty audio")
+                    if looks_truncated(clip, temporary.stat().st_size) and attempt < MAX_TRIES:
+                        # The service now and then ends a stream mid-sentence. A clip that reads faster than any
+                        # whole clip did (2026-11-22 run: 9 of 6,540 cut short) is synthesised again.
+                        raise NoAudioReceived(f"{clip['chars']} characters in {seconds(temporary.stat().st_size):.1f}s")
                     if is_complete(destination):
                         return "skipped"
                     os.replace(temporary, destination)
@@ -170,6 +174,20 @@ async def generate(clips: list[dict], audio_dir: Path, dry_run: bool) -> int:
     for filename, reason in failures:
         print(f"  {filename}: {reason}", file=sys.stderr)
     return 1 if failures else 0
+
+
+# 48 kbps constant-bitrate MP3 (the manifest's format): bytes → seconds.
+def seconds(size: int) -> float:
+    return size * 8 / 48_000
+
+
+# Characters per second above which a clip is suspected cut short and synthesised again (the last try is kept as it is).
+# Whole clips reach 16.6 (EN) and, with many digits, 6.6 (ZH); some cut-short ones read no faster, so this is a net, not a proof.
+TRUNCATION_RATE = {"en": 17.0, "zh": 6.0}
+
+
+def looks_truncated(clip: dict, size: int) -> bool:
+    return clip["chars"] >= 12 and clip["chars"] / max(seconds(size), 0.1) > TRUNCATION_RATE[clip["locale"]]
 
 
 def main() -> int:
