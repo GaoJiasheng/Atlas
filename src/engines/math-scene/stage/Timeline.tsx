@@ -80,6 +80,7 @@ export function Timeline(p: TimelineProps) {
   const bandRoom = m.bands === 'ampm' ? 24 : 0;
   // Noon or midnight on the line: its name under the morning and afternoon bands (y + 64), below the hour labels.
   const edgeBelow = m.bands === 'ampm' && !r.duration && [0, 12 * HOUR, DAY].some((at) => at >= r.from && at <= r.to) ? 68 : 0;
+  const edgeName = (at: number) => (at === 12 * HOUR ? t(locale, 'math.timeline.noon') : at === 0 || at === DAY ? t(locale, 'math.timeline.midnight') : null);
   /**
    * The drawing laid out in this box. `tight` (a short stage, as above a phone's docked tray, where the full drawing does not fit):
    * a longer line (the jumps' labels stack less), lower arcs, the marks' times without their words (the prompt says what they
@@ -92,10 +93,15 @@ export function Timeline(p: TimelineProps) {
     const x0 = clockSide ? left : box.x + (box.w - width) / 2;
     const X = (t: number) => x0 + ((t - r.from) / Math.max(1, r.to - r.from)) * width;
     const every = labelEvery(r, width, m.labels === '12h' ? 40 : 58);
-    const labelledHours = hours.filter((t) => ((t - (hours[0] ?? 0)) / HOUR) % every === 0);
+    const everyOther = hours.filter((t) => ((t - (hours[0] ?? 0)) / HOUR) % every === 0);
+    // Tight, noon and midnight are named in their own hour labels (not under the bands): always labelled, a neighbour too close
+    // to them unlabelled.
+    const edges = tight && twoLine && edgeBelow ? hours.filter((t) => t % (12 * HOUR) === 0) : [];
+    const half = (t: number) => (edges.includes(t) ? Math.max(hourHalf, textWidth(edgeName(t) ?? '', 6.6) / 2 + 2) : hourHalf);
+    const labelledHours = edges.length ? [...new Set([...everyOther.filter((t) => edges.every((e) => t === e || Math.abs(X(t) - X(e)) > hourHalf + half(e) + 8)), ...edges])].sort((a, b) => a - b) : everyOther;
     /* The jumps' labels, clear of the hour labels and of each other. */
     const hourBoxes: LabelBox[] = labelledHours.flatMap((t) => [
-      { x0: X(t) - hourHalf, x1: X(t) + hourHalf, y0: 18, y1: twoLine ? 48 : 34 },
+      { x0: X(t) - half(t), x1: X(t) + half(t), y0: 18, y1: twoLine ? 48 : 34 },
       ...(both ? [{ x0: X(t) - 22, x1: X(t) + 22, y0: -32, y1: -18 }] : []),
     ]);
     const arcMax = tight ? TIGHT_ARC : clamp(box.h * (m.clock && !clockSide ? 0.12 : 0.22), 24, 64);
@@ -112,19 +118,22 @@ export function Timeline(p: TimelineProps) {
     const rowOfMark = markRows((m.marks ?? []).map((k) => ({ x: X(k.at), width: Math.max(textWidth(markTimeText(k.at), 9.6), worded && k.label ? textWidth(tx(k.label, locale), 7) : 0) })));
     const markRowH = worded ? 42 : 22;
     const markOff = above24 + Math.max(maxUp, tight ? 20 : 26) + (tight ? 8 : 12);
-    const topOff = hasMarks ? markOff + Math.max(0, ...rowOfMark) * markRowH + (worded ? 22 : 0) + (tight ? 12 : 18) : above24 + maxUp + 12;
+    // Tight, the morning and afternoon bands keep their shading but not their names (the hour labels say am, noon and pm): only
+    // the band's top edge stands above the drawing.
+    const bandEdge = tight && m.bands === 'ampm' && !r.duration ? 6 : 0;
+    const topOff = (hasMarks ? markOff + Math.max(0, ...rowOfMark) * markRowH + (worded ? 22 : 0) + (tight ? 12 : 18) : above24 + maxUp + 12) + bandEdge;
     // Below the line: the hour labels, or further when an arc going back has pushed its label past them.
-    const below = Math.max(tight ? (twoLine ? 50 : 40) : 56, edgeBelow, down(drawnArcs, labelY), down(solvedArcs, solvedY));
+    const below = Math.max(tight ? (twoLine ? 50 : 40) : 56, edges.length ? 0 : edgeBelow, down(drawnArcs, labelY), down(solvedArcs, solvedY));
     // On a narrow stage the clock goes above the line, as large as the height left allows; with too little left, the line alone.
     const spare = m.clock && !clockSide ? Math.floor(Math.min(box.h - topOff - below - bandRoom - CLOCK_GAP, box.w * 0.62, 240)) : 0;
     const clockAbove = spare >= CLOCK_MIN ? spare : 0;
     const drop = clockAbove ? clockAbove + CLOCK_GAP + bandRoom : 0;
     // Tight with a little height to spare (and no clock to take it): the marks' times stand further above the jumps' labels.
     const lift = tight && hasMarks && !drop ? clamp(box.h - topOff - below, 0, TIGHT_LIFT) : 0;
-    return { X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff: markOff + lift, topOff: topOff + lift, below, clockAbove, drop, need: Math.max(drop + topOff + below, clockSide) };
+    return { edgeInLabel: edges.length > 0, bandNames: !bandEdge, X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff: markOff + lift, topOff: topOff + lift, below, clockAbove, drop, need: Math.max(drop + topOff + below, clockSide) };
   };
   const full = plan(false);
-  const { X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff, topOff, below, clockAbove, drop, need } = box.h >= full.need ? full : plan(true);
+  const { edgeInLabel, bandNames, X, x0, width, labelledHours, arcH, labelY, worded, rowOfMark, markRowH, markOff, topOff, below, clockAbove, drop, need } = box.h >= full.need ? full : plan(true);
   // Whole or not at all, as every model under its minimum (Stage.tsx): a line with no room for its labels is not drawn half
   // under the docked tray.
   if (box.h < need) return null;
@@ -147,22 +156,27 @@ export function Timeline(p: TimelineProps) {
       under.push(
         <g key={`band-${key}`} className="ms-tl__band" data-band={key}>
           <rect x={X(a)} y={bandTop} width={X(b) - X(a)} height={bandH} />
-          <text className="ms-tl__band-name" x={(X(a) + X(b)) / 2} y={bandTop - 8} textAnchor="middle">
-            {`${ampmText(key === 'pm', notation).toLocaleUpperCase('en')} · ${t(locale, name)}`}
-          </text>
+          {bandNames && (
+            <text className="ms-tl__band-name" x={(X(a) + X(b)) / 2} y={bandTop - 8} textAnchor="middle">
+              {`${ampmText(key === 'pm', notation).toLocaleUpperCase('en')} · ${t(locale, name)}`}
+            </text>
+          )}
         </g>,
       );
     }
+    // Tight, noon or midnight is named in its hour label instead of under the bands.
     for (const at of [0, 12 * HOUR, DAY])
       if (at >= r.from && at <= r.to)
         under.push(
           <g key={`edge${at}`} className="ms-tl__edge">
             {/* Above the labels on the line only (they stay readable), and under the hour labels to the band's foot. */}
             <line x1={X(at)} x2={X(at)} y1={bandTop - 2} y2={y - 12 - above24} />
-            <line x1={X(at)} x2={X(at)} y1={y + 48} y2={bandTop + bandH} />
-            <text x={X(at)} y={bandTop + bandH + 14} textAnchor="middle">
-              {t(locale, at === 12 * HOUR ? 'math.timeline.noon' : 'math.timeline.midnight')}
-            </text>
+            {!edgeInLabel && <line x1={X(at)} x2={X(at)} y1={y + 48} y2={bandTop + bandH} />}
+            {!edgeInLabel && (
+              <text x={X(at)} y={bandTop + bandH + 14} textAnchor="middle">
+                {edgeName(at)}
+              </text>
+            )}
           </g>,
         );
   }
@@ -174,11 +188,12 @@ export function Timeline(p: TimelineProps) {
     if (r.duration) return `${t / HOUR === 0 ? '0' : `${t / HOUR} h`}`;
     if (mode === '24') return t === DAY ? clockText(0, '24', notation).replace(/^00/, '24') : clockText(t, '24', notation);
     const parts = clockParts(t === DAY ? 0 : t);
+    const edgeWord = edgeInLabel ? edgeName(t) : null;
     return (
       <>
         <tspan>{parts.h12}</tspan>
         <tspan className="ms-tl__ampm" x={X(t)} dy="1.15em">
-          {ampmText(t !== DAY && parts.pm, notation)}
+          {edgeWord ?? ampmText(t !== DAY && parts.pm, notation)}
         </tspan>
       </>
     );

@@ -8,6 +8,7 @@
  * raised balance pan clear of the title.
  */
 import { expect, test, type Locator, type Page } from '@playwright/test';
+import { measurePainted } from './math-painted';
 
 type Engine = { goToTask(step: string, i: number, o?: { instant?: boolean }): void; task(): { id: string | null } };
 interface Box {
@@ -74,10 +75,16 @@ test.describe('MathScene fit', () => {
       await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
       const freeH = () => page.evaluate(() => Number(document.querySelector<HTMLElement>('.ms-root')?.dataset.stageFree?.split(' ')[1] ?? 0));
       await expect.poll(freeH).toBeGreaterThanOrEqual(free * 844);
-      const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
       await expect.poll(async () => (await rect(page.locator('.ms-svg .ms-beat'))).height).toBeGreaterThanOrEqual(drawn * 844);
-      const model = await rect(page.locator('.ms-svg .ms-beat'));
-      expect(model.y + model.height).toBeLessThanOrEqual(tray.y - 8);
+      // Measured once the stage has laid out again for the tray (a single read could catch the drawing mid-move, still sized for
+      // the stage before the tray docked).
+      await expect
+        .poll(async () => {
+          const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
+          const model = await rect(page.locator('.ms-svg .ms-beat'));
+          return model.y + model.height <= tray.y - 8;
+        })
+        .toBe(true);
     });
 
   test('small phone: the check buttons keep one row and the card tab ends above the docked tray', async ({ page }) => {
@@ -99,23 +106,38 @@ test.describe('MathScene fit', () => {
   // bar's status line, keeps the title on one line and packs the tray (the boxes beside "Take back" or the towers' count, seven keys
   // to a row, the jumps' note at the end of the keys); a timeline short of room draws tight. Before, at 375×667 (EN): the bus
   // ride's free stage 205×38 and evening out 205×81, neither drawing its model (ZH: 233×52 and 172×70).
+  // What the drawing paints (not its group's bounding box, which counts what a clip path cuts away: a pail's liquid runs far below
+  // the pail).
   const drawn = async (page: Page) => {
     const tray = await rect(page.locator('.ms-tray-dock .ms-tray'));
-    const boxes = await page.locator('.ms-svg .ms-beat').evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).filter((r) => r.height > 0).map((r) => ({ top: r.top, bottom: r.bottom, width: r.width })));
+    const { box } = await measurePainted(page);
+    const boxes = box ? [{ top: box.top, bottom: box.bottom, width: box.right - box.left }] : [];
     return { tray, boxes };
   };
-  /** A model is drawn and, once settled, ends at least 8 px above the tray. */
+  /** A model is drawn and, once settled, ends at least 8 px above the tray (the stage's whole pixels against the tray's fractional top: half a pixel either way). */
   const drawnAbove = (page: Page) =>
     expect.poll(async () => {
       const { tray, boxes } = await drawn(page);
-      return boxes.length > 0 && boxes.every((b) => b.bottom <= tray.y - 8);
+      return boxes.length > 0 && boxes.every((b) => b.bottom <= tray.y - 7.5);
     }).toBe(true);
-  for (const [locale, topic, chapter, i, id, w, h, mw, mh] of [
-    ['en', 'decimals', 'hundredths', 2, 'hu-write-4-hundredths', 300, 160, 100, 100],
-    ['en', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90],
-    ['zh', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90],
-    ['en', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90],
-    ['zh', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90],
+  // Then (before the next fixes): two picture graphs stacked, each picture 3 px; a timeline across noon with no room for the
+  // noon's name under its bands (ct-ends, EN: not drawn) or its bands' names run up into the title (ft-film-crosses-noon,
+  // ft-family-visit). Now a pair of picture graphs short of height stands side by side, and a tight timeline names noon in its hour
+  // label and keeps its bands' shading without their names (the hour labels say am and pm).
+  for (const [locale, topic, chapter, i, id, w, h, mw, mh, keys] of [
+    ['en', 'decimals', 'hundredths', 2, 'hu-write-4-hundredths', 300, 160, 100, 100, true],
+    ['en', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90, true],
+    ['zh', 'telling-time', 'timetables', 1, 'tt-bus-ride', 300, 130, 280, 90, true],
+    ['en', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90, true],
+    ['zh', 'average', 'evening-out', 0, 'even-3-5-7', 300, 150, 200, 90, true],
+    ...(['en', 'zh'] as const).flatMap((l) => [
+      [l, 'graphs', 'picture-graphs', 9, 'pic-two-keys', 300, 280, 220, 250, false],
+      [l, 'sample-lesson-whole', 'clock-and-timeline', 7, 'ct-ends', 300, 125, 260, 120, true],
+      [l, 'telling-time', 'finishing-time', 5, 'ft-film-crosses-noon', 300, 135, 260, 120, true],
+      [l, 'telling-time', 'finishing-time', 6, 'ft-family-visit', 300, 135, 260, 120, true],
+      // The pail's handle stood up into the title: in a short box the pail and its handle stand inside the stage together.
+      [l, 'measuring', 'volume-and-litres', 1, 'vl-pail-6', 300, 140, 120, 140, true],
+    ] as const),
   ] as const)
     test(`small phone, keypad up: the stage above the tray draws the whole model (${id}, ${locale})`, async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
@@ -123,7 +145,8 @@ test.describe('MathScene fit', () => {
       await expect(page.locator('.atlas-rail__item').first()).toBeVisible();
       await force(page, chapter, i);
       await expect.poll(() => taskId(page)).toBe(id);
-      await expect(page.locator('.ms-tray-dock .ms-keypad')).toBeVisible();
+      // A choice has no keypad: its tray holds the options.
+      await expect(page.locator(keys ? '.ms-tray-dock .ms-keypad' : '.ms-tray-dock .ms-choice').first()).toBeVisible();
       await expect(page.locator('.atlas-rail')).toBeHidden();
       await expect(page.locator('[data-hud-panel="title"]')).toBeVisible();
       const free = () => page.evaluate(() => (document.querySelector<HTMLElement>('.ms-root')?.dataset.stageFree ?? '0 0').split(' ').map(Number));
@@ -134,6 +157,12 @@ test.describe('MathScene fit', () => {
       const { boxes } = await drawn(page);
       expect(Math.max(...boxes.map((b) => b.width))).toBeGreaterThanOrEqual(mw);
       expect(Math.max(...boxes.map((b) => b.bottom)) - Math.min(...boxes.map((b) => b.top))).toBeGreaterThanOrEqual(mh);
+      // Nothing of it runs up into the title block.
+      const title = await rect(page.locator('[data-hud-panel="title"]'));
+      expect(Math.min(...boxes.map((b) => b.top))).toBeGreaterThanOrEqual(title.y + title.height - 0.5);
+      // A picture graph's pictures stay large enough to count.
+      const pics = await page.locator('.ms-svg .ms-beat .ms-chart__pics > *').evaluateAll((els) => els.map((e) => e.getBoundingClientRect().height));
+      if (pics.length) expect(Math.min(...pics)).toBeGreaterThanOrEqual(14);
       // Every target in the tray stays a finger wide and high.
       for (const b of await page.locator('.ms-tray-dock :is(button, input):visible').all()) {
         const r = await rect(b);

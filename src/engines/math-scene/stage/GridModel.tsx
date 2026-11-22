@@ -590,12 +590,15 @@ export function GridModel(p: GridModelProps) {
       );
     if (m.legend) {
       const side = clamp(Math.min(F.sx, F.sy), 10, 22);
-      const x = m.notToScale ? F.px.x : right - side - 52;
+      const words = `1 ${unitText(squared(m.unit), locale, 1)}`;
+      // Its words end inside the stage (on a phone, not under the card's tab beside it).
+      const wordsW = [...words].reduce((w, c) => w + (c.charCodeAt(0) > 0x2e7f ? 13 : 7.2), 0);
+      const x = m.notToScale ? F.px.x : Math.min(right - side - 52, p.box.x + p.box.w - side - 6 - wordsW);
       out.push(
         <g key="legend" className="ms-grid__legend" aria-hidden="true">
           <rect x={x} y={cornerY - side + 3} width={side} height={side} />
           <text x={x + side + 6} y={cornerY}>
-            1 {unitText(squared(m.unit), locale, 1)}
+            {words}
           </text>
         </g>,
       );
