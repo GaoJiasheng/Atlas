@@ -772,7 +772,7 @@ function Live(p: LiveProps) {
       >
         {dots}
         <circle className="ms-angle__cursor" cx={fmt(co[0])} cy={fmt(co[1])} r={11} aria-hidden="true" />
-        <text className="atlas-sr-only" aria-live="polite">{`${T('math.angle.dot', { x: cur[0] + 1, y: cur[1] + 1 })}${on ? ` · ${T('math.angle.dotPicked')}` : ''}`}</text>
+        <text className="ms-angle__said" aria-live="polite">{`${T('math.angle.dot', { x: cur[0] + 1, y: cur[1] + 1 })}${on ? ` · ${T('math.angle.dotPicked')}` : ''}`}</text>
       </g>,
     );
   }

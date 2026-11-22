@@ -4784,6 +4784,8 @@ path.ms-glyph--cord {
 .ms-angle__dot-hit { fill: transparent; cursor: pointer; }
 .ms-angle__dots { outline: none; }
 .ms-angle__cursor { fill: none; stroke: transparent; stroke-width: 2; pointer-events: none; }
+/* The dot under the keyboard cursor, said aloud (aria-live): read, never painted. */
+.ms-angle__said { fill: transparent; stroke: none; font-size: 1px; pointer-events: none; }
 .ms-angle__dots:focus-visible .ms-angle__cursor { stroke: var(--signal); }
 .ms-angle__picked { fill: color-mix(in srgb, var(--signal) 24%, transparent); stroke: var(--signal); stroke-width: 2; pointer-events: none; }
 

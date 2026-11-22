@@ -278,10 +278,13 @@ export function jugFrame(s: InstrumentSpec, sc: Scale | null, box: Rect): JugFra
   // width and the scale's room shrinks, rather than the vessel vanishing.
   const margin = Math.min(40, box.w * 0.12);
   const scaleRoom = Math.min(s.scale && sc ? s.eye ? 160 : s.brackets?.length ? 150 : 80 : 20, box.w * 0.6 - margin);
-  const h = Math.max(0, Math.min(maxH, (box.w - scaleRoom - margin) / aspect));
+  // A pail's handle arcs up a quarter of its height above the rim: in a short box (a phone's stage above the docked tray) the
+  // pail and its handle stand in the box together, not the handle up into the title.
+  const handle = shape === 'pail' && box.h < 300 ? 0.23 : 0;
+  const h = Math.max(0, Math.min(maxH / (1 + handle), (box.w - scaleRoom - margin) / aspect));
   const w = h * aspect;
   const x = box.x + (box.w - w - scaleRoom) / 2;
-  const y = box.y + (box.h - h) / 2 + (shape === 'bowl' ? box.h * 0.12 : 0);
+  const y = box.y + (box.h - h * (1 + handle)) / 2 + h * handle + (shape === 'bowl' ? box.h * 0.12 : 0);
   const floor = y + h - Math.max(6, h * 0.03);
   const scaleTop = y + h * 0.12;
   const run = floor - scaleTop;

@@ -54,7 +54,11 @@ export function ChartModel(p: ChartModelProps) {
   const items = chartItems(p.model);
   if (items.length === 2) {
     const gap = 28;
-    const wide = p.box.w > p.box.h * 1.1;
+    // Side by side on a wide stage. Two picture graphs stacked on a short one (a phone's stage above the docked tray) would draw
+    // pictures too small to count: they stand side by side there too, each as tall as the stage.
+    const stacked = { ...p.box, h: (p.box.h - gap) / 2 };
+    const pictures = items.every((c) => c.type === 'picture' && c.key);
+    const wide = p.box.w > p.box.h * 1.1 || (pictures && Math.min(...items.map((c) => pictureSize(c, stacked))) < PIC_MIN);
     const a: Rect = wide ? { ...p.box, w: (p.box.w - gap) / 2 } : { ...p.box, h: (p.box.h - gap) / 2 };
     const b: Rect = wide ? { ...a, x: p.box.x + a.w + gap } : { ...a, y: p.box.y + a.h + gap };
     return (
@@ -69,6 +73,20 @@ export function ChartModel(p: ChartModelProps) {
       <OneChart {...p} c={items[0]!} box={p.box} pairIndex={null} />
     </g>
   );
+}
+
+/** The smallest picture of a picture graph that can still be told apart and counted. */
+const PIC_MIN = 14;
+/** About how large a picture graph (one category's column of pictures per slot) draws its pictures in `box` (as Cartesian does). */
+function pictureSize(c: ChartSpec, box: Rect): number {
+  const font = clamp(Math.min(box.w, box.h) / 34, 12, 15);
+  const titleH = c.title ? clamp(box.h * 0.06, 20, 30) : 0;
+  const w = box.w - 2 * clamp(box.w * 0.04, 12, 48);
+  const plotH = box.h - titleH - (font * 2.2 + 8) - (font * 2 + 6) - 10;
+  const cats = c.cats ?? [];
+  const count = Math.max(1, ...cats.map((x) => Math.ceil((x.value ?? 0) / c.key!.per)));
+  const slot = Math.min((w - 18) / Math.max(1, cats.length), 170);
+  return Math.min(slot * 0.62, (plotH - 4) / count - 4, 56);
 }
 
 interface OneProps extends ChartModelProps {
