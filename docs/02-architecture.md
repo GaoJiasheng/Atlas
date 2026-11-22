@@ -186,6 +186,7 @@ Scene store 的可序列化部分双向绑定到 query string，用 `history.rep
 2. `base` 可配置，资源路径相对
 3. 所有交互用 Pointer Events，可点目标 ≥ 44px，关键操作不依赖 hover
 4. 底图、模型、字体全部本地资源，无运行时外部请求（Wikipedia 图片等外链一期不接）
+   - **唯一例外：讲解音频**（Gavin 2026-11-22 定）。预生成的讲解音频，网站和 App 都从同一个地址按需下载：网站与页面同域（Cloudflare Pages，不算外部请求）；App 从网上取，取到后缓存，取不到就退回系统朗读（Web Speech）。App 其余一切保持离线可用；不收集数据、不带身份或追踪参数，只读静态文件。音频地址用自有域名，不用 r2.dev 这类服务商默认域名。上线前同步更新 App Review 备注（现写"运行时不发网络请求"）。方案细节等语音试点（选声音、实测体积）后写进 docs/06。
 5. PWA：manifest + service worker 预缓存，离线能打开已访问主题
 6. 性能预算：单主题首屏 JS ≤ 300 KB gz；地图类主题（MapLibre 本身约 275 KB gz）放宽到 ≤ 480 KB gz（Gavin 2026-10-29 定；原 400 KB，MapLibre 加宿主外壳已约 415 KB）；GeoJSON ≤ 2 MB，glb ≤ 10 MB。SpaceScene 目前按棘轮守在 ≤ 477 KB gz（`scripts/js-budget.ts`，`tests/js-budget.test.ts`；2026-11-02 拆分后 442–530 KB；同日合入 HUD room 宿主（自动收起求解器、操作说明、取景测量）后 sample-space 538.6 KB、地图类 480.2 KB，经主会话同意各上调一次到 539 / 481 KB；2026-11-03 第二轮拆分后 445.6–507.6 KB，上限降到 509；2026-11-12 起按实际加载计数，见下），目标仍是 300 KB，每次拆分后下调上限、不再上调
    - 首屏 JS 检查：先 `pnpm build`，再 `pnpm tsx scripts/js-budget.ts --check`；从 dist 按页面入口、所选引擎/舞台及主题数据需要的懒加载模块，递归统计静态 import，去重后逐文件 gzip，1 KB = 1024 B。计入完整首帧所需代码，不以 HUD/加载占位先出现来规避预算。2026-11-02 拆包前 → 后（KB gz）：aircon 552.11 → 442.36、solar-system 552.11 → 490.64、cells 552.11 → 481.13、how-planes-fly 552.11 → 490.33、sound 552.11 → 489.67、fractions 315.02 → 236.49；SpaceScene 仍超额，预算单测会报错，预算未放宽。后续需继续拆通用 geometry/PartNode/SceneRoot，并协调 core 宿主、CameraRig 和受保护 HUD 的依赖边界。

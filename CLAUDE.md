@@ -12,7 +12,7 @@
 - **课主题（MathScene：讲解节拍 + 章末一道小测 + 练习，像分数那样）**：用项目级 skill `.claude/skills/atlas-lesson-topic/`（样板 `docs/15-fractions-content-spec.md` §10），题库草稿自证 `pnpm tsx scripts/math/check-pool.ts <draft.json>`
 
 ## 硬规则
-- 纯静态：无 SSR、无 API、无运行时外部请求（无 CDN、无 Google Fonts、无瓦片服务）
+- 纯静态：无 SSR、无 API、无运行时外部请求（无 CDN、无 Google Fonts、无瓦片服务）；唯一例外是讲解音频按需下载，App 取不到就退回系统朗读（Gavin 2026-11-22，见 docs/02）
 - 所有展示文本 `{ en, zh }`；id kebab-case；颜色只用 token
 - 两套主题都要能跑：paper 是技术图版标准实现，cinema 是 dark plate 变体
 - 可点目标 ≥ 44px，关键操作不依赖 hover；快捷键与按钮共用 store
